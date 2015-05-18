@@ -1,1 +1,0 @@
-# oktasdk-python
