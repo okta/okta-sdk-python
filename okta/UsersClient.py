@@ -3,6 +3,7 @@ from okta.framework.Utils import Utils
 from okta.framework.PagedResults import PagedResults
 from okta.models.user.User import User
 from okta.models.user.TempPassword import TempPassword
+from okta.models.user.ResetPasswordToken import ResetPasswordToken
 
 
 class UsersClient(ApiClient):
@@ -146,6 +147,24 @@ class UsersClient(ApiClient):
         """
         response = ApiClient.post_path(self, '/{0}/lifecycle/unlock'.format(uid))
         return Utils.deserialize(response.text, User)
+
+    def reset_password(self, uid, send_email=True):
+        """Reset user's password by target user id
+
+        :param uid: the target user id
+        :type uid: str
+        :param send_email: whether a password reset email should be sent
+        :type send_email: bool
+        :return: None or ResetPasswordToken
+        """
+        if not send_email:
+            ApiClient.post_path(self, '/{0}/lifecycle/reset_password'.format(uid))
+        else:
+            params = {
+                'sendEmail': send_email
+            }
+            response = ApiClient.post_path(self, '/{0}/lifecycle/reset_password'.format(uid), params=params)
+            return Utils.deserialize(response.text, ResetPasswordToken)
 
     def expire_password(self, uid, temp_password=False):
         """Expire user's password by target user id
