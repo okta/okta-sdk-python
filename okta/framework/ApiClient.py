@@ -70,7 +70,7 @@ class ApiClient(object):
     def put_path(self, url_path, data, params=None):
         return self.put(self.base_url + url_path, data, params)
 
-    def post_path(self, url_path, data, params=None):
+    def post_path(self, url_path, data=None, params=None):
         return self.post(self.base_url + url_path, data, params)
 
     def delete_path(self, url_path, params=None):
