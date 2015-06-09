@@ -125,7 +125,7 @@ class UsersClient(ApiClient):
         :type uid: str
         :return: User
         """
-        response = ApiClient.post_path(self, '/{0}/lifecycle/activate'.format(uid))
+        response = ApiClient.post_path(self, '/{0}/lifecycle/activate'.format(uid), None)
         return Utils.deserialize(response.text, User)
 
     def deactivate_user(self, uid):
@@ -135,7 +135,7 @@ class UsersClient(ApiClient):
         :type uid: str
         :return: User
         """
-        response = ApiClient.post_path(self, '/{0}/lifecycle/deactivate'.format(uid))
+        response = ApiClient.post_path(self, '/{0}/lifecycle/deactivate'.format(uid), None)
         return Utils.deserialize(response.text, User)
 
     def unlock_user(self, uid):
@@ -145,7 +145,7 @@ class UsersClient(ApiClient):
         :type uid: str
         :return: User
         """
-        response = ApiClient.post_path(self, '/{0}/lifecycle/unlock'.format(uid))
+        response = ApiClient.post_path(self, '/{0}/lifecycle/unlock'.format(uid), None)
         return Utils.deserialize(response.text, User)
 
     def reset_password(self, uid, send_email=True):
@@ -157,14 +157,11 @@ class UsersClient(ApiClient):
         :type send_email: bool
         :return: None or ResetPasswordToken
         """
-        if not send_email:
-            ApiClient.post_path(self, '/{0}/lifecycle/reset_password'.format(uid))
-        else:
-            params = {
-                'sendEmail': send_email
-            }
-            response = ApiClient.post_path(self, '/{0}/lifecycle/reset_password'.format(uid), params=params)
-            return Utils.deserialize(response.text, ResetPasswordToken)
+        params = {
+            'sendEmail': send_email
+        }
+        response = ApiClient.post_path(self, '/{0}/lifecycle/reset_password'.format(uid), None, params=params)
+        return Utils.deserialize(response.text, ResetPasswordToken)
 
     def expire_password(self, uid, temp_password=False):
         """Expire user's password by target user id
@@ -181,5 +178,5 @@ class UsersClient(ApiClient):
             params = {
                 'tempPassword': temp_password
             }
-            response = ApiClient.post_path(self, '/{0}/lifecycle/expire_password'.format(uid), params=params)
+            response = ApiClient.post_path(self, '/{0}/lifecycle/expire_password'.format(uid), None, params=params)
             return Utils.deserialize(response.text, TempPassword)
