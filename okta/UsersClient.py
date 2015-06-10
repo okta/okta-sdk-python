@@ -4,6 +4,7 @@ from okta.framework.PagedResults import PagedResults
 from okta.models.user.User import User
 from okta.models.user.TempPassword import TempPassword
 from okta.models.user.ResetPasswordToken import ResetPasswordToken
+from okta.models.user.LoginCredentials import LoginCredentials
 
 
 class UsersClient(ApiClient):
@@ -162,6 +163,28 @@ class UsersClient(ApiClient):
         }
         response = ApiClient.post_path(self, '/{0}/lifecycle/reset_password'.format(uid), params=params)
         return Utils.deserialize(response.text, ResetPasswordToken)
+
+    def change_password(self, uid, old_password, new_password):
+        """Change user's password by target user id
+
+        :param uid: the target user id
+        :type uid: str
+        :param old_password: the user's old password
+        :type old_password: str
+        :param new_password: the desired new password
+        :type new_password: str
+        :return: None or LoginCredentials
+        """
+        data = {
+            'oldPassword': {
+                'value': old_password
+            },
+            'newPassword': {
+                'value': new_password
+            }
+        }
+        response = ApiClient.post_path(self, '/{0}/credentials/change_password'.format(uid), data)
+        return Utils.deserialize(response.text, LoginCredentials)
 
     def expire_password(self, uid, temp_password=False):
         """Expire user's password by target user id
