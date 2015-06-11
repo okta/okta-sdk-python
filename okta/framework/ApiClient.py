@@ -35,7 +35,7 @@ class ApiClient(object):
         else:
             return self.get(url, params, attempts)
 
-    def put(self, url, data, params=None, attempts=0):
+    def put(self, url, data=None, params=None, attempts=0):
         d = json.dumps(data, cls=Serializer)
         params_str = self.__dict_to_query_params(params)
         resp = requests.put(url + params_str, data=d, headers=self.headers)
@@ -45,7 +45,7 @@ class ApiClient(object):
         else:
             return self.put(url, data, params, attempts)
 
-    def post(self, url, data, params=None, attempts=0):
+    def post(self, url, data=None, params=None, attempts=0):
         d = json.dumps(data, cls=Serializer)
         params_str = self.__dict_to_query_params(params)
         resp = requests.post(url + params_str, data=d, headers=self.headers)
@@ -67,7 +67,7 @@ class ApiClient(object):
     def get_path(self, url_path, params=None):
         return self.get(self.base_url + url_path, params)
 
-    def put_path(self, url_path, data, params=None):
+    def put_path(self, url_path, data=None, params=None):
         return self.put(self.base_url + url_path, data, params)
 
     def post_path(self, url_path, data=None, params=None):

@@ -99,3 +99,25 @@ class UserGroupsClient(ApiClient):
         """
         response = ApiClient.delete_path(self, '/{0}'.format(gid))
         return Utils.deserialize(response.text, UserGroup)
+
+    def add_user_to_group(self, group, user):
+        """Add a user to a group
+
+        :param group: the target group
+        :type group: UserGroup
+        :param user: the target user
+        :type user: User
+        :return: None
+        """
+        return self.add_user_to_group_by_id(group.id, user.id)
+
+    def add_user_to_group_by_id(self, gid, uid):
+        """Add a user to a group
+
+        :param gid: the target group id
+        :type gid: str
+        :param uid: the target user id
+        :type uid: str
+        :return: None
+        """
+        response = ApiClient.put_path(self, '/{0}/users/{1}'.format(gid, uid))

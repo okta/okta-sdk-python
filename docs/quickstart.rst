@@ -6,7 +6,7 @@ Create a client
 ===============
 ::
 
-    from okta.UsersClient import UsersClient
+    from okta import UsersClient
     
     usersClient = UsersClient("https://example.okta.com", "EXAMPLE_KEY")
 
@@ -14,10 +14,13 @@ Create a user
 =============
 ::
 
+    from okta.models.user import User # Include with other imports above
+
     user = User(login='example@example.com',
     		email='example@example.com',
     		firstName='Saml',
     		lastName='Jackson')
+
     user = usersClient.create_user(user, activate=False)
 
 Activate a user
