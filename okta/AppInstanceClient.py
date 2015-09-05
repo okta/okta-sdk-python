@@ -2,6 +2,7 @@ from okta.framework.ApiClient import ApiClient
 from okta.framework.Utils import Utils
 from okta.framework.PagedResults import PagedResults
 from okta.models.app.AppInstance import AppInstance
+from okta.models.app.AppUser import AppUser
 
 
 class AppInstanceClient(ApiClient):
@@ -25,6 +26,30 @@ class AppInstanceClient(ApiClient):
         }
         response = ApiClient.get_path(self, '/', params=params)
         return Utils.deserialize(response.text, AppInstance)
+
+    def get_app_paged_users(self, gid=None, limit=None, after=None, url=None):
+        """Get a paged list of AppUsers of an app
+
+        :param gid: the app id
+        :type gid: str
+        :param limit: maximum number of AppUser to return
+        :type limit: int or None
+        :param after: app id that filtering will resume after
+        :type after: str
+        :param url: url that returns a list of AppUser
+        :type url: str
+        :rtype: AppUser
+        """
+        if url:
+            response = ApiClient.get(self, url)
+        else:
+            params = {
+                'limit': limit,
+                'after': after
+            }
+            response = ApiClient.get_path(self, '/{0}/users'.format(gid), params=params)
+
+        return PagedResults(response, AppUser)
 
     def get_paged_app_instances(self, limit=None, filter_string=None, after=None, url=None):
         """Get a paged list of AppInstances
