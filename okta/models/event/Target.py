@@ -3,7 +3,8 @@ class Target:
     types = {
         'id': str,
         'displayName': str,
-        'objectType': str
+        'objectType': str,
+        'login': str
     }
 
     def __init__(self):
@@ -16,3 +17,6 @@ class Target:
 
         # User, Client, or AppInstance
         self.objectType = None  # str
+
+        # Login
+        self.login = None  # str

@@ -3,7 +3,9 @@ class Actor:
     types = {
         'id': str,
         'displayName': str,
-        'objectType': str
+        'objectType': str,
+        'login': str,
+        'ipAddress': str
     }
 
     def __init__(self):
@@ -16,3 +18,9 @@ class Actor:
 
         # User or Client
         self.objectType = None  # str
+
+        # Login
+        self.login = None  # str
+
+        # IP Address
+        self.ipAddress = None  # str
