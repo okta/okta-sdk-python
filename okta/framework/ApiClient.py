@@ -17,14 +17,16 @@ class ApiClient(object):
         if not self.base_url:
             raise ValueError('Invalid base_url')
 
-        if not self.api_token:
+        if not self.api_token and '/authn' not in base_url:
             raise ValueError('Invalid api_token')
 
         self.headers = {
             'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': 'SSWS ' + api_token
+            'Content-Type': 'application/json'
         }
+
+        if api_token:
+            self.headers['Authorization'] = 'SSWS {}'.format(api_token)
 
     def get(self, url, params=None, attempts=0):
         params_str = self.__dict_to_query_params(params)
