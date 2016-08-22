@@ -1,4 +1,4 @@
-Brach of oktasdk-python by DiabolusBR
+Branch of oktasdk-python by DiabolusBR
 =======================
 Added some features to the existing API:
 
