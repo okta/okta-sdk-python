@@ -1,2 +1,2 @@
-from UserGroup import UserGroup
-from UserGroupProfile import UserGroupProfile
+from .UserGroup import UserGroup
+from .UserGroupProfile import UserGroupProfile
