@@ -16,10 +16,7 @@ class Utils(object):
 
             setattr(o, a, v)
 
-        json_dump = {}
-        if from_data is None or len(from_data) == 0:
-            json_dump = {}
-        elif isinstance(from_data, six.text_type) or isinstance(from_data, six.string_types):
+        if isinstance(from_data, six.text_type) or isinstance(from_data, six.string_types):
             json_dump = json.loads(from_data)
         else:
             json_dump = from_data

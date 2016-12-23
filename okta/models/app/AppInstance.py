@@ -1,5 +1,7 @@
 from datetime import datetime
+from okta.models.app.AppLink import AppLink
 from okta.models.app.Accessibility import Accessibility
+from okta.models.app.Links import Links
 from okta.models.app.Visibility import Visibility
 from okta.models.app.AppCredentials import AppCredentials
 from okta.models.app.Settings import Settings
@@ -21,7 +23,14 @@ class AppInstance:
         'accessibility': Accessibility,
         'visibility': Visibility,
         'credentials': AppCredentials,
-        'settings': Settings
+        'settings': Settings,
+        '_links': Links
+    }
+
+    dict_types = {
+    }
+    alt_names = {
+        '_links': 'links'
     }
 
     def __init__(self):
