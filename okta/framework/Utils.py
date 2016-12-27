@@ -38,7 +38,7 @@ class Utils(object):
                     if attr in json_dump:
                         val = json_dump[attr]
 
-                        if not val:
+                        if val is None:
                             continue
 
                         if attr_type == datetime:
