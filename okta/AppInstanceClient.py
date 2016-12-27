@@ -121,3 +121,8 @@ class AppInstanceClient(ApiClient):
         :return: None
         """
         ApiClient.post_path(self, '/{0}/lifecycle/deactivate'.format(id), None)
+
+    def list_app_instance_users(self, appid):
+        response = ApiClient.get_path(self, '/{0}/users'.format(appid))
+        return Utils.deserialize(response.text, AppInstance)
+
