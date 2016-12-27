@@ -122,7 +122,7 @@ class UserGroupsClient(ApiClient):
         :return: None
         """
         response = ApiClient.put_path(self, '/{0}/users/{1}'.format(gid, uid))
-        return json.loads(response.text, indent=4)
+        return json.loads(response.text)
 
     def delete_user_from_group(self, group, user):
         """delete a user to a group
@@ -145,4 +145,4 @@ class UserGroupsClient(ApiClient):
         :return: None
         """
         response = ApiClient.delete_path(self, '/{0}/users/{1}'.format(gid, uid))
-        return json.loads(response.text, indent=4)
+        return json.loads(response.text)
