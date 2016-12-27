@@ -3,6 +3,7 @@ from okta.framework.Utils import Utils
 from okta.models.usergroup.UserGroup import UserGroup
 from okta.framework.PagedResults import PagedResults
 
+import json
 
 class UserGroupsClient(ApiClient):
     def __init__(self, base_url, api_token):
@@ -121,3 +122,27 @@ class UserGroupsClient(ApiClient):
         :return: None
         """
         response = ApiClient.put_path(self, '/{0}/users/{1}'.format(gid, uid))
+        return json.loads(response.text, indent=4)
+
+    def delete_user_from_group(self, group, user):
+        """delete a user to a group
+
+        :param gid: the target group id
+        :type gid: str
+        :param uid: the target user id
+        :type uid: str
+        :return: None
+        """
+        return self.delete_user_from_group_by_id(group.id, user.id)
+
+    def delete_user_from_group_by_id(self, gid, uid):
+        """delete a user to a group
+
+        :param gid: the target group id
+        :type gid: str
+        :param uid: the target user id
+        :type uid: str
+        :return: None
+        """
+        response = ApiClient.delete_path(self, '/{0}/users/{1}'.format(gid, uid))
+        return json.loads(response.text, indent=4)
