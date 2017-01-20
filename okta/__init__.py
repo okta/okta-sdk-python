@@ -9,11 +9,11 @@
 
 __version__ = '0.0.3'
 
-from AppInstanceClient import AppInstanceClient
-from AuthClient import AuthClient
-from EventsClient import EventsClient
-from FactorsAdminClient import FactorsAdminClient
-from FactorsClient import FactorsClient
-from SessionsClient import SessionsClient
-from UserGroupsClient import UserGroupsClient
-from UsersClient import UsersClient
+from .AppInstanceClient import AppInstanceClient
+from .AuthClient import AuthClient
+from .EventsClient import EventsClient
+from .FactorsAdminClient import FactorsAdminClient
+from .FactorsClient import FactorsClient
+from .SessionsClient import SessionsClient
+from .UserGroupsClient import UserGroupsClient
+from .UsersClient import UsersClient
