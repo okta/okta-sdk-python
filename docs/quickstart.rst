@@ -29,6 +29,7 @@ Create a user
 Activate a user
 ===============
 ::
+
     from okta import UsersClient
     from okta.models.user import User
     # http://developer.okta.com/docs/api/getting_started/getting_a_token.html
