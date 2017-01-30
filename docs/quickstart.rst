@@ -7,42 +7,56 @@ Create a client
 ::
 
     from okta import UsersClient
-    
-    usersClient = UsersClient("https://example.okta.com", "EXAMPLE_KEY")
+    # http://developer.okta.com/docs/api/getting_started/getting_a_token.html
+    usersClient = UsersClient('https://example.oktapreview.com/',
+                              '01a2B3Cd4E5fGHiJ6K7l89mNOPQRsT0uVwXYZA1BCd')
 
 Create a user
 =============
 ::
 
-    from okta.models.user import User # Include with other imports above
+    from okta import UsersClient
+    # http://developer.okta.com/docs/api/getting_started/getting_a_token.html
+    usersClient = UsersClient('https://example.oktapreview.com/',
+                              '01a2B3Cd4E5fGHiJ6K7l89mNOPQRsT0uVwXYZA1BCd')
 
-    user = User(login='example@example.com',
-    		email='example@example.com',
-    		firstName='Saml',
-    		lastName='Jackson')
-
-    user = usersClient.create_user(user, activate=False)
+    new_user = User(login='example@example.com',
+                    email='example@example.com',
+                    firstName='Saml',
+                    lastName='Jackson')
+    user = usersClient.create_user(new_user, activate=False)
 
 Activate a user
 ===============
 ::
+    from okta import UsersClient
+    from okta.models.user import User
+    # http://developer.okta.com/docs/api/getting_started/getting_a_token.html
+    usersClient = UsersClient('https://example.oktapreview.com/',
+                              '01a2B3Cd4E5fGHiJ6K7l89mNOPQRsT0uVwXYZA1BCd')
 
-    usersClient.activate_user(user)
+    user = usersClient.get_user('example@example.com')
+    usersClient.activate_user(user.id)
 
 Loop through a list
 ===================
 ::
 
-    users = self.client.get_paged_users(limit=1)
+
+    from okta import UsersClient
+    # http://developer.okta.com/docs/api/getting_started/getting_a_token.html
+    usersClient = UsersClient('https://example.oktapreview.com/',
+                              '01a2B3Cd4E5fGHiJ6K7l89mNOPQRsT0uVwXYZA1BCd')
     
-    first_page_hit = subsequent_page_hit = False
-    
-    for user in users.result:
-        first_page_hit = True
-        # Do something
-    
-    while not users.is_last_page():
-        users = self.client.get_paged_users(url=users.next_url)
+    users = usersClient.get_paged_users()
+    while True:
         for user in users.result:
-            subsequent_page_hit = True
-            # Do something
+            print u"First Name: {}".format(user.profile.firstName)
+            print u"Last Name:  {}".format(user.profile.lastName)
+            print u"Login:      {}".format(user.profile.login)
+            print u"User ID:    {}\n".format(user.id)
+        if not users.is_last_page():
+            # Keep on fetching pages of users until the last page
+            users = usersClient.get_paged_users(url=users.next_url)
+        else:
+            break
