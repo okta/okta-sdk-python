@@ -18,10 +18,10 @@
     "stop:mock-okta": "forever stop ./tools/mock-okta/index.js",
     "check:mock-okta": "node ./tools/mock-okta/check.js",
     "test:mock-okta": "mocha tools/mock-okta/test/suites/**/*.js",
-    "reset-test-env": "node ./tools/mock-okta/test/prep.js && rimraf ./tools/mock-okta/tapes",
+    "reset-test-env": "node ./tools/mock-okta/test/prep.js && rimraf ./tools/mock-okta/tapes/*.js",
     "prerecord-new-tapes": "npm run reset-test-env && npm run start:mock-okta -- --record",
     "record-new-tapes": "npm run test:mock-okta || exit 0;",
-    "postrecord-new-tapes": "npm run stop:mock-okta",
+    "postrecord-new-tapes": "npm run stop:mock-okta && node ./tools/mock-okta/test/clean.js",
     "pretest": "npm run start:mock-okta",
     "test": "python -m unittest discover ./tests '*.py'",
     "posttest": "npm run check:mock-okta"

@@ -1,5 +1,8 @@
 {
-  "REAL_URL": "http://rain.okta1.com:1802",
-  "TEST_URL": "http://localhost:3000",
-  "API_KEY": "00ZecD9pl8qikDoFhKQNIuiFrU8r8UQCQZzCag_rlb"
+  "mockOkta": {
+    "port": 3000,
+    "proxy": "http://127.0.0.1",
+    "proxied": "http://rain.okta1.com:1802",
+    "apiKey": "00OgOWZBLBIID9O8SKRGgrJDqebJL54x2cPfzQ3U-l"
+  }
 }
