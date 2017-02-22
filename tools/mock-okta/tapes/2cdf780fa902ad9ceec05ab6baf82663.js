@@ -1,14 +1,15 @@
 var path = require("path");
 
 /**
- * GET /api/v1/users/frutis.mcjanky@example.com
+ * POST /api/v1/users/00usafLcS3hw0LJ220g3/lifecycle/expire_password
  *
- * x-test-description: /api/v1/users/:id/lifecycle - reset a user password
+ * x-test-description: /api/v1/users/:id/credentials - expires a user password
  * user-agent: mock-okta-client
  * accept: application/json
  * content-type: application/json
  * authorization: SSWS 00OgOWZBLBIID9O8SKRGgrJDqebJL54x2cPfzQ3U-l
  * host: rain.okta1.com:1802
+ * content-length: 0
  * connection: keep-alive
  */
 
@@ -16,11 +17,11 @@ module.exports = function (req, res) {
   res.statusCode = 200;
 
   res.setHeader("server", "Apache-Coyote/1.1");
-  res.setHeader("x-okta-request-id", "reqopWynUpsQQuWtMd8k1NNmA");
+  res.setHeader("x-okta-request-id", "reqqZgm7M3AQtKd0s0cviOSCg");
   res.setHeader("p3p", "CP=\"HONK\"");
-  res.setHeader("set-cookie", ["sid=\"\"; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/","JSESSIONID=7412D878D7A8953C33A8CE4D06011788; Path=/"]);
+  res.setHeader("set-cookie", ["sid=\"\"; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/","JSESSIONID=6AE4CC8B255EE59140FD1292E0F03353; Path=/"]);
   res.setHeader("x-rate-limit-limit", "1200");
-  res.setHeader("x-rate-limit-remaining", "1164");
+  res.setHeader("x-rate-limit-remaining", "1169");
   res.setHeader("x-rate-limit-reset", "1487657432");
   res.setHeader("cache-control", "no-cache, no-store");
   res.setHeader("pragma", "no-cache");

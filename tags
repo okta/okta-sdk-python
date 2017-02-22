@@ -181,11 +181,13 @@ User	okta/UsersClient.py	/^from okta.models.user.User import User$/;"	kind:names
 User	okta/models/Embedded.py	/^from okta.models.user.User import User$/;"	kind:namespace	line:1
 User	okta/models/user/User.py	/^class User:$/;"	kind:class	line:8
 User	okta/models/user/__init__.py	/^from .User import User$/;"	kind:namespace	line:10
-User	tests/UsersClientTest.py	/^from okta.models.user import User$/;"	kind:namespace	line:2
+User	tests/UserGroupsTest.py	/^from okta.models.user import User$/;"	kind:namespace	line:8
+User	tests/UsersClientTest.py	/^from okta.models.user import User$/;"	kind:namespace	line:6
 User.py	okta/models/user/User.py	1;"	kind:file	line:1
 UserGroup	okta/UserGroupsClient.py	/^from okta.models.usergroup.UserGroup import UserGroup$/;"	kind:namespace	line:4
 UserGroup	okta/models/usergroup/UserGroup.py	/^class UserGroup:$/;"	kind:class	line:5
 UserGroup	okta/models/usergroup/__init__.py	/^from .UserGroup import UserGroup$/;"	kind:namespace	line:1
+UserGroup	tests/UserGroupsTest.py	/^from okta.models.usergroup import UserGroup$/;"	kind:namespace	line:7
 UserGroup.py	okta/models/usergroup/UserGroup.py	1;"	kind:file	line:1
 UserGroupProfile	okta/models/usergroup/UserGroup.py	/^from okta.models.usergroup.UserGroupProfile import UserGroupProfile$/;"	kind:namespace	line:1
 UserGroupProfile	okta/models/usergroup/UserGroupProfile.py	/^class UserGroupProfile:$/;"	kind:class	line:1
@@ -193,7 +195,10 @@ UserGroupProfile	okta/models/usergroup/__init__.py	/^from .UserGroupProfile impo
 UserGroupProfile.py	okta/models/usergroup/UserGroupProfile.py	1;"	kind:file	line:1
 UserGroupsClient	okta/UserGroupsClient.py	/^class UserGroupsClient(ApiClient):$/;"	kind:class	line:8
 UserGroupsClient	okta/__init__.py	/^from .UserGroupsClient import UserGroupsClient$/;"	kind:namespace	line:18
+UserGroupsClient	tests/UserGroupsTest.py	/^from okta import UserGroupsClient$/;"	kind:namespace	line:5
 UserGroupsClient.py	okta/UserGroupsClient.py	1;"	kind:file	line:1
+UserGroupsTest	tests/UserGroupsTest.py	/^class UserGroupsTest(unittest.TestCase):$/;"	kind:class	line:42
+UserGroupsTest.py	tests/UserGroupsTest.py	1;"	kind:file	line:1
 UserNameTemplate	okta/models/app/AppCredentials.py	/^from okta.models.app.UserNameTemplate import UserNameTemplate$/;"	kind:namespace	line:1
 UserNameTemplate	okta/models/app/UserNameTemplate.py	/^class UserNameTemplate:$/;"	kind:class	line:1
 UserNameTemplate.py	okta/models/app/UserNameTemplate.py	1;"	kind:file	line:1
@@ -203,9 +208,10 @@ UserProfile	okta/models/user/__init__.py	/^from .UserProfile import UserProfile$
 UserProfile.py	okta/models/user/UserProfile.py	1;"	kind:file	line:1
 UsersClient	okta/UsersClient.py	/^class UsersClient(ApiClient):$/;"	kind:class	line:10
 UsersClient	okta/__init__.py	/^from .UsersClient import UsersClient$/;"	kind:namespace	line:19
-UsersClient	tests/UsersClientTest.py	/^from okta import UsersClient$/;"	kind:namespace	line:1
+UsersClient	tests/UserGroupsTest.py	/^from okta import UsersClient$/;"	kind:namespace	line:6
+UsersClient	tests/UsersClientTest.py	/^from okta import UsersClient$/;"	kind:namespace	line:5
 UsersClient.py	okta/UsersClient.py	1;"	kind:file	line:1
-UsersClientTest	tests/UsersClientTest.py	/^class UsersClientTest(unittest.TestCase):$/;"	kind:class	line:20
+UsersClientTest	tests/UsersClientTest.py	/^class UsersClientTest(unittest.TestCase):$/;"	kind:class	line:28
 UsersClientTest.py	tests/UsersClientTest.py	1;"	kind:file	line:1
 Utils	okta/AppInstanceClient.py	/^from okta.framework.Utils import Utils$/;"	kind:namespace	line:2
 Utils	okta/AuthClient.py	/^from okta.framework.Utils import Utils$/;"	kind:namespace	line:2
@@ -234,15 +240,15 @@ __author__	okta/models/auth/__init__.py	/^__author__ = 'lboyette'$/;"	kind:varia
 __author__	okta/models/event/__init__.py	/^__author__ = 'lboyette'$/;"	kind:variable	line:1
 __author__	okta/models/factor/__init__.py	/^__author__ = 'lboyette'$/;"	kind:variable	line:1
 __author__	okta/models/session/__init__.py	/^__author__ = 'lboyette'$/;"	kind:variable	line:1
-__check_response	okta/framework/ApiClient.py	/^    def __check_response(self, resp, attempts=1):$/;"	kind:member	line:82
-__dict_to_query_params	okta/framework/ApiClient.py	/^    def __dict_to_query_params(d):$/;"	kind:member	line:99
+__check_response	okta/framework/ApiClient.py	/^    def __check_response(self, resp, attempts=1):$/;"	kind:member	line:84
+__dict_to_query_params	okta/framework/ApiClient.py	/^    def __dict_to_query_params(d):$/;"	kind:member	line:101
 __init__	okta/AppInstanceClient.py	/^    def __init__(self, base_url, api_token):$/;"	kind:member	line:8
 __init__	okta/AuthClient.py	/^    def __init__(self, base_url, api_token):$/;"	kind:member	line:7
 __init__	okta/EventsClient.py	/^    def __init__(self, base_url, api_token):$/;"	kind:member	line:8
 __init__	okta/FactorsAdminClient.py	/^    def __init__(self, base_url, api_token):$/;"	kind:member	line:7
 __init__	okta/FactorsClient.py	/^    def __init__(self, base_url, api_token):$/;"	kind:member	line:12
 __init__	okta/SessionsClient.py	/^    def __init__(self, base_url, api_token):$/;"	kind:member	line:8
-__init__	okta/UserGroupsClient.py	/^    def __init__(self, base_url, api_token):$/;"	kind:member	line:9
+__init__	okta/UserGroupsClient.py	/^    def __init__(self, *args, **kwargs):$/;"	kind:member	line:9
 __init__	okta/UsersClient.py	/^    def __init__(self, *args, **kwargs):$/;"	kind:member	line:11
 __init__	okta/framework/ApiClient.py	/^    def __init__(self, *args, **kwargs):$/;"	kind:member	line:11
 __init__	okta/framework/OktaError.py	/^    def __init__(self, error):$/;"	kind:member	line:3
@@ -312,9 +318,9 @@ activate_factor	okta/AuthClient.py	/^    def activate_factor(self, state_token, 
 activate_factor	okta/FactorsClient.py	/^    def activate_factor(self, user_id, user_factor_id, passcode, next_passcode=None):$/;"	kind:member	line:103
 activate_factor_device	okta/FactorsClient.py	/^    def activate_factor_device(self, user_id, user_factor_id, device_id, passcode):$/;"	kind:member	line:203
 activate_org_factor	okta/FactorsAdminClient.py	/^    def activate_org_factor(self, org_factor_id, org_auth_factor=None):$/;"	kind:member	line:23
-activate_user	okta/UsersClient.py	/^    def activate_user(self, uid):$/;"	kind:member	line:124
-add_user_to_group	okta/UserGroupsClient.py	/^    def add_user_to_group(self, group, user):$/;"	kind:member	line:114
-add_user_to_group_by_id	okta/UserGroupsClient.py	/^    def add_user_to_group_by_id(self, gid, uid):$/;"	kind:member	line:125
+activate_user	okta/UsersClient.py	/^    def activate_user(self, uid):$/;"	kind:member	line:127
+add_user_to_group	okta/UserGroupsClient.py	/^    def add_user_to_group(self, group, user):$/;"	kind:member	line:119
+add_user_to_group_by_id	okta/UserGroupsClient.py	/^    def add_user_to_group_by_id(self, gid, uid):$/;"	kind:member	line:130
 alt_names	okta/models/auth/AuthResult.py	/^    alt_names = {$/;"	kind:variable	line:19
 alt_names	okta/models/user/User.py	/^    alt_names = {$/;"	kind:variable	line:28
 alt_names	okta/models/usergroup/UserGroup.py	/^    alt_names = {$/;"	kind:variable	line:17
@@ -325,23 +331,26 @@ author	docs/conf.py	/^author = u'Okta'$/;"	kind:variable	line:53
 author	setup.py	/^    author='Okta',$/;"	kind:variable	line:26
 author_email	setup.py	/^    author_email='developers@okta.com',$/;"	kind:variable	line:27
 build_bookmark	okta/models/app/AppInstance.py	/^    def build_bookmark(url, label=None, request_integration=False):$/;"	kind:member	line:65
-build_client	tests/UsersClientTest.py	/^def build_client(test_description):$/;"	kind:function	line:11
+build_client	tests/UserGroupsTest.py	/^def build_client(test_description):$/;"	kind:function	line:17
+build_client	tests/UsersClientTest.py	/^def build_client(test_description):$/;"	kind:function	line:15
+build_users_client	tests/UserGroupsTest.py	/^def build_users_client(test_description):$/;"	kind:function	line:29
 change_password	okta/AuthClient.py	/^    def change_password(self, state_token, old_password, new_password, relay_state=None):$/;"	kind:member	line:144
-change_password	okta/UsersClient.py	/^    def change_password(self, uid, old_password, new_password):$/;"	kind:member	line:169
+change_password	okta/UsersClient.py	/^    def change_password(self, uid, old_password, new_password):$/;"	kind:member	line:172
 classifiers	setup.py	/^    classifiers=[$/;"	kind:variable	line:29
 clear_session	okta/SessionsClient.py	/^    def clear_session(self, id):$/;"	kind:member	line:85
 conf.py	conf.py	1;"	kind:file	line:1
 conf.py	docs/conf.py	1;"	kind:file	line:1
-config_path	tests/UsersClientTest.py	/^config_path = os.path.normpath(os.path.join(os.path.dirname(__file__), "..\/.sdk.config.json"))$/;"	kind:variable	line:7
+config_path	tests/UserGroupsTest.py	/^config_path = os.path.normpath(os.path.join(os.path.dirname(__file__),$/;"	kind:variable	line:10
+config_path	tests/UsersClientTest.py	/^config_path = os.path.normpath(os.path.join(os.path.dirname(__file__),$/;"	kind:variable	line:8
 copyright	conf.py	/^copyright = u'2015, Okta'$/;"	kind:variable	line:49
 copyright	docs/conf.py	/^copyright = u'2015, Okta'$/;"	kind:variable	line:52
 create_app_instance	okta/AppInstanceClient.py	/^    def create_app_instance(self, app_instance):$/;"	kind:member	line:55
-create_group	okta/UserGroupsClient.py	/^    def create_group(self, group):$/;"	kind:member	line:94
+create_group	okta/UserGroupsClient.py	/^    def create_group(self, group):$/;"	kind:member	line:99
 create_session	okta/SessionsClient.py	/^    def create_session(self, username, password, additional_fields=None):$/;"	kind:member	line:13
 create_session_by_session_token	okta/SessionsClient.py	/^    def create_session_by_session_token(self, session_token, additional_fields=None):$/;"	kind:member	line:53
 create_session_with_cookie_token	okta/SessionsClient.py	/^    def create_session_with_cookie_token(self, username, password):$/;"	kind:member	line:31
 create_session_with_cookie_token_url	okta/SessionsClient.py	/^    def create_session_with_cookie_token_url(self, username, password):$/;"	kind:member	line:42
-create_user	okta/UsersClient.py	/^    def create_user(self, user, activate=None):$/;"	kind:member	line:68
+create_user	okta/UsersClient.py	/^    def create_user(self, user, activate=None):$/;"	kind:member	line:71
 custom_setattr	okta/framework/Utils.py	/^        def custom_setattr(o, a, v):$/;"	kind:function	line:13
 datetime	okta/framework/Serializer.py	/^from datetime import datetime$/;"	kind:namespace	line:2
 datetime	okta/framework/Utils.py	/^from datetime import datetime$/;"	kind:namespace	line:3
@@ -354,13 +363,13 @@ datetime	okta/models/user/User.py	/^from datetime import datetime$/;"	kind:names
 dateutil	okta/framework/Utils.py	/^import dateutil.parser$/;"	kind:namespace	line:2
 deactivate_app_instance	okta/AppInstanceClient.py	/^    def deactivate_app_instance(self, id):$/;"	kind:member	line:116
 deactivate_org_factor	okta/FactorsAdminClient.py	/^    def deactivate_org_factor(self, org_factor_id):$/;"	kind:member	line:35
-deactivate_user	okta/UsersClient.py	/^    def deactivate_user(self, uid):$/;"	kind:member	line:134
+deactivate_user	okta/UsersClient.py	/^    def deactivate_user(self, uid):$/;"	kind:member	line:137
 default	okta/framework/Serializer.py	/^    def default(self, obj):$/;"	kind:member	line:7
-delete	okta/framework/ApiClient.py	/^    def delete(self, url, params=None, attempts=0):$/;"	kind:member	line:61
+delete	okta/framework/ApiClient.py	/^    def delete(self, url, params=None, attempts=0):$/;"	kind:member	line:63
 delete_app_instance	okta/AppInstanceClient.py	/^    def delete_app_instance(self, id):$/;"	kind:member	line:96
-delete_group	okta/UserGroupsClient.py	/^    def delete_group(self, gid):$/;"	kind:member	line:104
-delete_path	okta/framework/ApiClient.py	/^    def delete_path(self, url_path, params=None):$/;"	kind:member	line:79
-delete_user	okta/UsersClient.py	/^    def delete_user(self, uid):$/;"	kind:member	line:86
+delete_group	okta/UserGroupsClient.py	/^    def delete_group(self, gid):$/;"	kind:member	line:109
+delete_path	okta/framework/ApiClient.py	/^    def delete_path(self, url_path, params=None):$/;"	kind:member	line:81
+delete_user	okta/UsersClient.py	/^    def delete_user(self, uid):$/;"	kind:member	line:89
 description	setup.py	/^    description='Okta client APIs',$/;"	kind:variable	line:23
 deserialize	okta/framework/Utils.py	/^    def deserialize(from_data, to_class):$/;"	kind:member	line:11
 dict_types	okta/models/user/User.py	/^    dict_types = {$/;"	kind:variable	line:24
@@ -371,7 +380,7 @@ enroll_factor	okta/FactorsClient.py	/^    def enroll_factor(self, user_id, facto
 enroll_factor_device	okta/FactorsClient.py	/^    def enroll_factor_device(self, user_id, factor_enroll_request):$/;"	kind:member	line:163
 exclude_patterns	conf.py	/^exclude_patterns = ['_build']$/;"	kind:variable	line:72
 exclude_patterns	docs/conf.py	/^exclude_patterns = ['_build']$/;"	kind:variable	line:79
-expire_password	okta/UsersClient.py	/^    def expire_password(self, uid, temp_password=False):$/;"	kind:member	line:191
+expire_password	okta/UsersClient.py	/^    def expire_password(self, uid, temp_password=False):$/;"	kind:member	line:194
 extend_session	okta/SessionsClient.py	/^    def extend_session(self, id):$/;"	kind:member	line:76
 extensions	conf.py	/^extensions = [$/;"	kind:variable	line:31
 extensions	docs/conf.py	/^extensions = [$/;"	kind:variable	line:32
@@ -386,19 +395,19 @@ get_events	okta/EventsClient.py	/^    def get_events(self, limit=None, start_dat
 get_factor	okta/FactorsClient.py	/^    def get_factor(self, user_id, user_factor_id):$/;"	kind:member	line:64
 get_factor_device	okta/FactorsClient.py	/^    def get_factor_device(self, user_id, user_factor_id, device_id):$/;"	kind:member	line:175
 get_factors_catalog	okta/FactorsClient.py	/^    def get_factors_catalog(self, user_id):$/;"	kind:member	line:15
-get_group	okta/UserGroupsClient.py	/^    def get_group(self, gid):$/;"	kind:member	line:53
-get_group_users	okta/UserGroupsClient.py	/^    def get_group_users(self, gid):$/;"	kind:member	line:63
-get_groups	okta/UserGroupsClient.py	/^    def get_groups(self, limit=None, query=None):$/;"	kind:member	line:14
+get_group	okta/UserGroupsClient.py	/^    def get_group(self, gid):$/;"	kind:member	line:58
+get_group_users	okta/UserGroupsClient.py	/^    def get_group_users(self, gid):$/;"	kind:member	line:68
+get_groups	okta/UserGroupsClient.py	/^    def get_groups(self, limit=None, query=None):$/;"	kind:member	line:19
 get_lifecycle_factors	okta/FactorsClient.py	/^    def get_lifecycle_factors(self, user_id):$/;"	kind:member	line:25
 get_org_factors	okta/FactorsAdminClient.py	/^    def get_org_factors(self, filter_string=None):$/;"	kind:member	line:10
 get_paged_app_instances	okta/AppInstanceClient.py	/^    def get_paged_app_instances(self, limit=None, filter_string=None, after=None, url=None):$/;"	kind:member	line:29
 get_paged_events	okta/EventsClient.py	/^    def get_paged_events(self, limit=None, start_date=None, after=None, filter_string=None, url=None):$/;"	kind:member	line:29
-get_paged_groups	okta/UserGroupsClient.py	/^    def get_paged_groups(self, limit=None, after=None, url=None):$/;"	kind:member	line:30
-get_paged_users	okta/UsersClient.py	/^    def get_paged_users(self, limit=None, filter_string=None, after=None, url=None):$/;"	kind:member	line:96
-get_path	okta/framework/ApiClient.py	/^    def get_path(self, url_path, params=None):$/;"	kind:member	line:70
+get_paged_groups	okta/UserGroupsClient.py	/^    def get_paged_groups(self, limit=None, after=None, url=None):$/;"	kind:member	line:35
+get_paged_users	okta/UsersClient.py	/^    def get_paged_users(self, limit=None, filter_string=None, after=None, url=None):$/;"	kind:member	line:99
+get_path	okta/framework/ApiClient.py	/^    def get_path(self, url_path, params=None):$/;"	kind:member	line:72
 get_status	okta/AuthClient.py	/^    def get_status(self, state_token, relay_state=None):$/;"	kind:member	line:302
-get_user	okta/UsersClient.py	/^    def get_user(self, uid):$/;"	kind:member	line:37
-get_users	okta/UsersClient.py	/^    def get_users(self, limit=None, query=None, filter_string=None):$/;"	kind:member	line:18
+get_user	okta/UsersClient.py	/^    def get_user(self, uid):$/;"	kind:member	line:40
+get_users	okta/UsersClient.py	/^    def get_users(self, limit=None, query=None, filter_string=None):$/;"	kind:member	line:21
 here	setup.py	/^here = path.abspath(path.dirname(__file__))$/;"	kind:variable	line:10
 html_static_path	conf.py	/^html_static_path = ['_static']$/;"	kind:variable	line:132
 html_static_path	docs/conf.py	/^html_static_path = ['_static']$/;"	kind:variable	line:142
@@ -413,7 +422,8 @@ is_last_page	okta/framework/PagedResults.py	/^    def is_last_page(self):$/;"	ki
 is_only_page	okta/framework/PagedResults.py	/^    def is_only_page(self):$/;"	kind:member	line:16
 json	okta/framework/ApiClient.py	/^import json$/;"	kind:namespace	line:2
 json	okta/framework/Utils.py	/^import json$/;"	kind:namespace	line:1
-json	tests/UsersClientTest.py	/^import json$/;"	kind:namespace	line:5
+json	tests/UserGroupsTest.py	/^import json$/;"	kind:namespace	line:3
+json	tests/UsersClientTest.py	/^import json$/;"	kind:namespace	line:3
 language	docs/conf.py	/^language = None$/;"	kind:variable	line:69
 latex_documents	conf.py	/^latex_documents = [$/;"	kind:variable	line:200
 latex_documents	docs/conf.py	/^latex_documents = [$/;"	kind:variable	line:226
@@ -431,17 +441,18 @@ next_url	okta/framework/PagedResults.py	/^    def next_url(self):$/;"	kind:membe
 open	setup.py	/^from codecs import open$/;"	kind:namespace	line:2
 os	conf.py	/^import os$/;"	kind:namespace	line:16
 os	docs/conf.py	/^import os$/;"	kind:namespace	line:16
-os	tests/UsersClientTest.py	/^import os$/;"	kind:namespace	line:4
+os	tests/UserGroupsTest.py	/^import os$/;"	kind:namespace	line:2
+os	tests/UsersClientTest.py	/^import os$/;"	kind:namespace	line:2
 packages	setup.py	/^    packages=find_packages(),$/;"	kind:variable	line:39
 parser	okta/framework/Utils.py	/^import dateutil.parser$/;"	kind:namespace	line:2
 path	setup.py	/^from os import path$/;"	kind:namespace	line:3
-post	okta/framework/ApiClient.py	/^    def post(self, url, data=None, params=None, attempts=0):$/;"	kind:member	line:51
-post_path	okta/framework/ApiClient.py	/^    def post_path(self, url_path, data=None, params=None):$/;"	kind:member	line:76
+post	okta/framework/ApiClient.py	/^    def post(self, url, data=None, params=None, attempts=0):$/;"	kind:member	line:52
+post_path	okta/framework/ApiClient.py	/^    def post_path(self, url_path, data=None, params=None):$/;"	kind:member	line:78
 previous_state	okta/AuthClient.py	/^    def previous_state(self, state_token, relay_state=None):$/;"	kind:member	line:285
 project	conf.py	/^project = u'okta'$/;"	kind:variable	line:48
 project	docs/conf.py	/^project = u'Okta Python SDK'$/;"	kind:variable	line:51
 put	okta/framework/ApiClient.py	/^    def put(self, url, data=None, params=None, attempts=0):$/;"	kind:member	line:41
-put_path	okta/framework/ApiClient.py	/^    def put_path(self, url_path, data=None, params=None):$/;"	kind:member	line:73
+put_path	okta/framework/ApiClient.py	/^    def put_path(self, url_path, data=None, params=None):$/;"	kind:member	line:75
 pygments_style	conf.py	/^pygments_style = 'sphinx'$/;"	kind:variable	line:90
 pygments_style	docs/conf.py	/^pygments_style = 'sphinx'$/;"	kind:variable	line:97
 re	setup.py	/^import re$/;"	kind:namespace	line:5
@@ -453,9 +464,10 @@ resend_code	okta/AuthClient.py	/^    def resend_code(self, state_token, factor_i
 resend_code	okta/FactorsClient.py	/^    def resend_code(self, user_id, user_factor_id):$/;"	kind:member	line:123
 reset_factor	okta/FactorsClient.py	/^    def reset_factor(self, user_id, user_factor_id):$/;"	kind:member	line:90
 reset_password	okta/AuthClient.py	/^    def reset_password(self, state_token, new_password, relay_state=None):$/;"	kind:member	line:167
-reset_password	okta/UsersClient.py	/^    def reset_password(self, uid, send_email=True):$/;"	kind:member	line:154
+reset_password	okta/UsersClient.py	/^    def reset_password(self, uid, send_email=True):$/;"	kind:member	line:157
 result	okta/framework/PagedResults.py	/^    def result(self):$/;"	kind:member	line:24
-sdk_config	tests/UsersClientTest.py	/^    sdk_config = json.load(sdk_config_data)$/;"	kind:variable	line:9
+sdk_config	tests/UserGroupsTest.py	/^    sdk_config = json.load(sdk_config_data)$/;"	kind:variable	line:14
+sdk_config	tests/UsersClientTest.py	/^    sdk_config = json.load(sdk_config_data)$/;"	kind:variable	line:12
 setup	setup.py	/^from setuptools import setup, find_packages$/;"	kind:namespace	line:1
 setup.py	setup.py	1;"	kind:file	line:1
 shlex	docs/conf.py	/^import shlex$/;"	kind:namespace	line:17
@@ -467,9 +479,23 @@ sys	conf.py	/^import sys$/;"	kind:namespace	line:15
 sys	docs/conf.py	/^import sys$/;"	kind:namespace	line:15
 templates_path	conf.py	/^templates_path = ['_templates']$/;"	kind:variable	line:36
 templates_path	docs/conf.py	/^templates_path = ['_templates']$/;"	kind:variable	line:37
-test_creates_a_user_without_credentials	tests/UsersClientTest.py	/^    def test_creates_a_user_without_credentials(self):$/;"	kind:member	line:31
-test_requests_a_user	tests/UsersClientTest.py	/^    def test_requests_a_user(self):$/;"	kind:member	line:26
-test_requests_users	tests/UsersClientTest.py	/^    def test_requests_users(self):$/;"	kind:member	line:22
+test_activate_user	tests/UsersClientTest.py	/^    def test_activate_user(self):$/;"	kind:member	line:58
+test_add_user_to_group	tests/UserGroupsTest.py	/^    def test_add_user_to_group(self):$/;"	kind:member	line:86
+test_change_password	tests/UsersClientTest.py	/^    def test_change_password(self):$/;"	kind:member	line:68
+test_create_a_group	tests/UserGroupsTest.py	/^    def test_create_a_group(self):$/;"	kind:member	line:53
+test_creates_a_user_without_credentials	tests/UsersClientTest.py	/^    def test_creates_a_user_without_credentials(self):$/;"	kind:member	line:39
+test_deactivate_user	tests/UsersClientTest.py	/^    def test_deactivate_user(self):$/;"	kind:member	line:63
+test_delete_a_user	tests/UsersClientTest.py	/^    def test_delete_a_user(self):$/;"	kind:member	line:53
+test_delete_group	tests/UserGroupsTest.py	/^    def test_delete_group(self):$/;"	kind:member	line:75
+test_expire_password	tests/UsersClientTest.py	/^    def test_expire_password(self):$/;"	kind:member	line:78
+test_request_group_users	tests/UserGroupsTest.py	/^    def test_request_group_users(self):$/;"	kind:member	line:81
+test_requests_a_group	tests/UserGroupsTest.py	/^    def test_requests_a_group(self):$/;"	kind:member	line:48
+test_requests_a_user	tests/UsersClientTest.py	/^    def test_requests_a_user(self):$/;"	kind:member	line:34
+test_requests_groups	tests/UserGroupsTest.py	/^    def test_requests_groups(self):$/;"	kind:member	line:44
+test_requests_users	tests/UsersClientTest.py	/^    def test_requests_users(self):$/;"	kind:member	line:30
+test_reset_password	tests/UsersClientTest.py	/^    def test_reset_password(self):$/;"	kind:member	line:73
+test_update_a_user	tests/UsersClientTest.py	/^    def test_update_a_user(self):$/;"	kind:member	line:47
+test_updates_a_group	tests/UserGroupsTest.py	/^    def test_updates_a_group(self):$/;"	kind:member	line:63
 texinfo_documents	conf.py	/^texinfo_documents = [$/;"	kind:variable	line:244
 texinfo_documents	docs/conf.py	/^texinfo_documents = [$/;"	kind:variable	line:270
 time	okta/framework/ApiClient.py	/^import time$/;"	kind:namespace	line:3
@@ -523,18 +549,19 @@ types	okta/models/user/User.py	/^    types = {$/;"	kind:variable	line:10
 types	okta/models/user/UserProfile.py	/^    types = {$/;"	kind:variable	line:3
 types	okta/models/usergroup/UserGroup.py	/^    types = {$/;"	kind:variable	line:7
 types	okta/models/usergroup/UserGroupProfile.py	/^    types = {$/;"	kind:variable	line:3
-unittest	tests/UsersClientTest.py	/^import unittest$/;"	kind:namespace	line:3
+unittest	tests/UserGroupsTest.py	/^import unittest$/;"	kind:namespace	line:1
+unittest	tests/UsersClientTest.py	/^import unittest$/;"	kind:namespace	line:1
 unlock_account	okta/AuthClient.py	/^    def unlock_account(self, username, relay_state=None):$/;"	kind:member	line:246
 unlock_account_answer	okta/AuthClient.py	/^    def unlock_account_answer(self, state_token, security_answer, relay_state=None):$/;"	kind:member	line:263
-unlock_user	okta/UsersClient.py	/^    def unlock_user(self, uid):$/;"	kind:member	line:144
+unlock_user	okta/UsersClient.py	/^    def unlock_user(self, uid):$/;"	kind:member	line:147
 update_app_instance	okta/AppInstanceClient.py	/^    def update_app_instance(self, app_instance):$/;"	kind:member	line:75
 update_app_instance_by_id	okta/AppInstanceClient.py	/^    def update_app_instance_by_id(self, id, app_instance):$/;"	kind:member	line:84
 update_factor	okta/FactorsClient.py	/^    def update_factor(self, user_id, user_factor_id, factor_enroll_request):$/;"	kind:member	line:76
 update_factor_device	okta/FactorsClient.py	/^    def update_factor_device(self, user_id, factor_device_request):$/;"	kind:member	line:189
-update_group	okta/UserGroupsClient.py	/^    def update_group(self, group):$/;"	kind:member	line:73
-update_group_by_id	okta/UserGroupsClient.py	/^    def update_group_by_id(self, gid, group):$/;"	kind:member	line:82
-update_user	okta/UsersClient.py	/^    def update_user(self, user):$/;"	kind:member	line:47
-update_user_by_id	okta/UsersClient.py	/^    def update_user_by_id(self, uid, user):$/;"	kind:member	line:56
+update_group	okta/UserGroupsClient.py	/^    def update_group(self, group):$/;"	kind:member	line:78
+update_group_by_id	okta/UserGroupsClient.py	/^    def update_group_by_id(self, gid, group):$/;"	kind:member	line:87
+update_user	okta/UsersClient.py	/^    def update_user(self, user):$/;"	kind:member	line:50
+update_user_by_id	okta/UsersClient.py	/^    def update_user_by_id(self, uid, user):$/;"	kind:member	line:59
 url	setup.py	/^    url='https:\/\/github.com\/okta\/oktasdk-python',$/;"	kind:variable	line:28
 validate_recovery_token	okta/AuthClient.py	/^    def validate_recovery_token(self, recovery_token, relay_state=None):$/;"	kind:member	line:229
 validate_session	okta/SessionsClient.py	/^    def validate_session(self, id):$/;"	kind:member	line:67

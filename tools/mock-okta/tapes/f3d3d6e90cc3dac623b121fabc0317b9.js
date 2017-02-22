@@ -16,22 +16,22 @@ module.exports = function (req, res) {
   res.statusCode = 200;
 
   res.setHeader("server", "Apache-Coyote/1.1");
-  res.setHeader("x-okta-request-id", "reqyH9btlrDS5Sk6F6qX0QcuA");
+  res.setHeader("x-okta-request-id", "reqfcttZf3KQWmwqarEyFD3dQ");
   res.setHeader("p3p", "CP=\"HONK\"");
-  res.setHeader("set-cookie", ["sid=\"\"; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/","JSESSIONID=0975D75AFAC66106F542C7AC7077584B; Path=/"]);
+  res.setHeader("set-cookie", ["sid=\"\"; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/","JSESSIONID=A8BAA116ADFEC7D40960406CC1322976; Path=/"]);
   res.setHeader("x-rate-limit-limit", "1200");
-  res.setHeader("x-rate-limit-remaining", "1151");
-  res.setHeader("x-rate-limit-reset", "1487364818");
+  res.setHeader("x-rate-limit-remaining", "1174");
+  res.setHeader("x-rate-limit-reset", "1487657432");
   res.setHeader("cache-control", "no-cache, no-store");
   res.setHeader("pragma", "no-cache");
   res.setHeader("expires", "0");
   res.setHeader("content-type", "application/json;charset=UTF-8");
   res.setHeader("transfer-encoding", "chunked");
-  res.setHeader("date", "Fri, 17 Feb 2017 20:53:23 GMT");
+  res.setHeader("date", "Tue, 21 Feb 2017 06:09:37 GMT");
 
   res.setHeader("x-yakbak-tape", path.basename(__filename, ".js"));
 
-  res.write(new Buffer("eyJpZCI6IjAwdW9rNlJpcUtJUHJ0eE81MGczIiwic3RhdHVzIjoiUFJPVklTSU9ORUQiLCJjcmVhdGVkIjoiMjAxNy0wMi0xN1QyMDo1MzoxOS4wMDBaIiwiYWN0aXZhdGVkIjoiMjAxNy0wMi0xN1QyMDo1MzoxOS4wMDBaIiwic3RhdHVzQ2hhbmdlZCI6IjIwMTctMDItMTdUMjA6NTM6MTkuMDAwWiIsImxhc3RMb2dpbiI6bnVsbCwibGFzdFVwZGF0ZWQiOiIyMDE3LTAyLTE3VDIwOjUzOjE5LjAwMFoiLCJwYXNzd29yZENoYW5nZWQiOm51bGwsInByb2ZpbGUiOnsiZW1haWwiOiJkZWxldGVtZS5tY2phbmt5QGV4YW1wbGUuY29tIiwiZmlyc3ROYW1lIjoiRGVsZXR1cyIsImxhc3ROYW1lIjoiTWNKYW5reSIsImxvZ2luIjoiZGVsZXRlbWUubWNqYW5reUBleGFtcGxlLmNvbSIsIm1vYmlsZVBob25lIjpudWxsLCJzZWNvbmRFbWFpbCI6bnVsbH0sImNyZWRlbnRpYWxzIjp7InByb3ZpZGVyIjp7InR5cGUiOiJPS1RBIiwibmFtZSI6Ik9LVEEifX0sIl9saW5rcyI6eyJzdXNwZW5kIjp7ImhyZWYiOiJodHRwOi8vcmFpbi5va3RhMS5jb206MTgwMi9hcGkvdjEvdXNlcnMvMDB1b2s2UmlxS0lQcnR4TzUwZzMvbGlmZWN5Y2xlL3N1c3BlbmQiLCJtZXRob2QiOiJQT1NUIn0sInJlc2V0UGFzc3dvcmQiOnsiaHJlZiI6Imh0dHA6Ly9yYWluLm9rdGExLmNvbToxODAyL2FwaS92MS91c2Vycy8wMHVvazZSaXFLSVBydHhPNTBnMy9saWZlY3ljbGUvcmVzZXRfcGFzc3dvcmQiLCJtZXRob2QiOiJQT1NUIn0sInNlbGYiOnsiaHJlZiI6Imh0dHA6Ly9yYWluLm9rdGExLmNvbToxODAyL2FwaS92MS91c2Vycy8wMHVvazZSaXFLSVBydHhPNTBnMyJ9LCJkZWFjdGl2YXRlIjp7ImhyZWYiOiJodHRwOi8vcmFpbi5va3RhMS5jb206MTgwMi9hcGkvdjEvdXNlcnMvMDB1b2s2UmlxS0lQcnR4TzUwZzMvbGlmZWN5Y2xlL2RlYWN0aXZhdGUiLCJtZXRob2QiOiJQT1NUIn19fQ==", "base64"));
+  res.write(new Buffer("eyJpZCI6IjAwdXM5OTZ2VjRnTGJtNnpVMGczIiwic3RhdHVzIjoiREVQUk9WSVNJT05FRCIsImNyZWF0ZWQiOiIyMDE3LTAyLTIxVDA2OjA3OjEyLjAwMFoiLCJhY3RpdmF0ZWQiOiIyMDE3LTAyLTIxVDA2OjA3OjEyLjAwMFoiLCJzdGF0dXNDaGFuZ2VkIjoiMjAxNy0wMi0yMVQwNjowNzoxNy4wMDBaIiwibGFzdExvZ2luIjpudWxsLCJsYXN0VXBkYXRlZCI6IjIwMTctMDItMjFUMDY6MDc6MTcuMDAwWiIsInBhc3N3b3JkQ2hhbmdlZCI6bnVsbCwicHJvZmlsZSI6eyJlbWFpbCI6ImRlbGV0ZW1lLm1jamFua3lAZXhhbXBsZS5jb20iLCJmaXJzdE5hbWUiOiJEZWxldHVzIiwibGFzdE5hbWUiOiJNY0phbmt5IiwibG9naW4iOiJkZWxldGVtZS5tY2phbmt5QGV4YW1wbGUuY29tIiwibW9iaWxlUGhvbmUiOm51bGwsInNlY29uZEVtYWlsIjpudWxsfSwiY3JlZGVudGlhbHMiOnsicHJvdmlkZXIiOnsidHlwZSI6Ik9LVEEiLCJuYW1lIjoiT0tUQSJ9fSwiX2xpbmtzIjp7ImFjdGl2YXRlIjp7ImhyZWYiOiJodHRwOi8vcmFpbi5va3RhMS5jb206MTgwMi9hcGkvdjEvdXNlcnMvMDB1czk5NnZWNGdMYm02elUwZzMvbGlmZWN5Y2xlL2FjdGl2YXRlIiwibWV0aG9kIjoiUE9TVCJ9LCJkZWxldGUiOnsiaHJlZiI6Imh0dHA6Ly9yYWluLm9rdGExLmNvbToxODAyL2FwaS92MS91c2Vycy8wMHVzOTk2dlY0Z0xibTZ6VTBnMyIsIm1ldGhvZCI6IkRFTEVURSJ9LCJzZWxmIjp7ImhyZWYiOiJodHRwOi8vcmFpbi5va3RhMS5jb206MTgwMi9hcGkvdjEvdXNlcnMvMDB1czk5NnZWNGdMYm02elUwZzMifX19", "base64"));
   res.end();
 
   return __filename;

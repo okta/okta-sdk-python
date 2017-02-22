@@ -18,49 +18,25 @@ const req = util.buildRealReq();
  * This stages data in the target environment
  */
 
-// Remove the existing user if there is one
-req.get({
-  path: '/api/v1/users?filter=profile.email eq "brutis.mcjanky@example.com"',
-})
-.then((users) => {
-  const user = users[0];
-  if (user) {
-    return req.post({
-      path: `/api/v1/users/${user.id}/lifecycle/deactivate`,
-    })
-    .then(() => req.del({
-      path: `/api/v1/users/${user.id}`,
-    }));
-  }
-  return Promise.resolve();
-});
-
 // Create user for updating if one doesn't exist
 req.get({
-    path: '/api/v1/users?filter=profile.email eq "frutis.mcjanky@example.com"',
+  path: '/api/v1/users?filter=profile.email eq "frutis.mcjanky@example.com"',
 })
 .then((users) => {
-  user_profile = {
-    firstName: 'Frutus',
+  const userProfile = {
+    firstName: 'Frutis',
     lastName: 'McJanky',
     email: 'frutis.mcjanky@example.com',
     login: 'frutis.mcjanky@example.com',
-  }
+  };
   const user = users[0];
-  if (user) {
-    return req.put({
-      path: `/api/v1/users/${user.id}`,
-      body: {
-        profile: user_profile,
-      },
-    });
-  } else {
+  if (!user) {
     return req.post({
-      path: `/api/v1/users/`,
+      path: '/api/v1/users/',
       body: {
-        profile: user_profile,
+        profile: userProfile,
         credentials: {
-          password : { value: "Asdf1234" }
+          password: { value: 'Asdf1234' },
         },
       },
     });
@@ -76,9 +52,9 @@ req.get({
   const user = users[0];
   if (!user) {
     return req.post({
-      path: `/api/v1/users/`,
+      path: '/api/v1/users/',
       body: {
-        profile:  {
+        profile: {
           firstName: 'Deletus',
           lastName: 'McJanky',
           email: 'deleteme.mcjanky@example.com',
@@ -92,22 +68,16 @@ req.get({
 
 // Deactivate user if user is active
 req.get({
-    path: '/api/v1/users?filter=profile.email eq "deactive.mcjanky@example.com"',
+  path: '/api/v1/users?filter=profile.email eq "deactive.mcjanky@example.com"',
 })
 .then((users) => {
   const user = users[0];
-  if (user) {
-    if (user.status === 'ACTIVE' || user.status === 'PROVISIONED' ) {
-      return req.post({
-        path: `/api/v1/users/${user.id}/lifecycle/deactivate`,
-      })
-    }
-  } else {
+  if (!user) {
     // Create user
-    req.post({
-      path: `/api/v1/users/`,
+    return req.post({
+      path: '/api/v1/users/',
       body: {
-        profile:  {
+        profile: {
           firstName: 'Nonactive',
           lastName: 'McJanky',
           email: 'deactive.mcjanky@example.com',
@@ -116,28 +86,24 @@ req.get({
       },
     })
     .then(res => req.post({
-      path: `/api/v1/users/${user.id}/lifecycle/deactivate`,
-    }))
+      path: `/api/v1/users/${res.id}/lifecycle/deactivate`,
+    }));
   }
   return Promise.resolve();
-});// Deactivate user if user is active
+});
+
+// Deactivate user if user is active
 req.get({
-    path: '/api/v1/users?filter=profile.email eq "deactive.mcjanky@example.com"',
+  path: '/api/v1/users?filter=profile.email eq "deactive.mcjanky@example.com"',
 })
 .then((users) => {
   const user = users[0];
-  if (user) {
-    if (user.status === 'ACTIVE' || user.status === 'PROVISIONED' ) {
-      return req.post({
-        path: `/api/v1/users/${user.id}/lifecycle/deactivate`,
-      })
-    }    
-  } else {
+  if (!user) {
     // Create user
-    req.post({
-      path: `/api/v1/users/`,
+    return req.post({
+      path: '/api/v1/users/',
       body: {
-        profile:  {
+        profile: {
           firstName: 'Nonactive',
           lastName: 'McJanky',
           email: 'deactive.mcjanky@example.com',
@@ -147,7 +113,18 @@ req.get({
     })
     .then(res => req.post({
       path: `/api/v1/users/${user.id}/lifecycle/deactivate`,
-    }))
+    }));
   }
   return Promise.resolve();
+});
+
+// Creates group to be deleted
+req.post({
+  path: '/api/v1/groups',
+  body: {
+    profile: {
+      name: 'DeleteGroup',
+      description: 'Test group that will be removed',
+    },
+  },
 });

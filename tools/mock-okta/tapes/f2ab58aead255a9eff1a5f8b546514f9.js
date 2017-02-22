@@ -3,7 +3,7 @@ var path = require("path");
 /**
  * GET /api/v1/users/frutis.mcjanky@example.com
  *
- * x-test-description: /api/v1/users/:id - updates a user
+ * x-test-description: /api/v1/groups/:id - add user to group
  * user-agent: mock-okta-client
  * accept: application/json
  * content-type: application/json
@@ -16,11 +16,11 @@ module.exports = function (req, res) {
   res.statusCode = 200;
 
   res.setHeader("server", "Apache-Coyote/1.1");
-  res.setHeader("x-okta-request-id", "reqEsny-a3eRBaxE7PdMI0kww");
+  res.setHeader("x-okta-request-id", "reqzc0mwRRJTmiqaUb_Xc2dfg");
   res.setHeader("p3p", "CP=\"HONK\"");
-  res.setHeader("set-cookie", ["sid=\"\"; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/","JSESSIONID=F7064C1E91202D6E0AE665EE537A30F5; Path=/"]);
+  res.setHeader("set-cookie", ["sid=\"\"; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/","JSESSIONID=9AC421A64BF38851F774715364280731; Path=/"]);
   res.setHeader("x-rate-limit-limit", "1200");
-  res.setHeader("x-rate-limit-remaining", "1176");
+  res.setHeader("x-rate-limit-remaining", "1180");
   res.setHeader("x-rate-limit-reset", "1487657432");
   res.setHeader("cache-control", "no-cache, no-store");
   res.setHeader("pragma", "no-cache");

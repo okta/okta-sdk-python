@@ -1,0 +1,39 @@
+var path = require("path");
+
+/**
+ * GET /api/v1/groups/00gltfXJdQeXCQckG0g3/users
+ *
+ * x-test-description: /api/v1/groups/:id - request group members
+ * user-agent: mock-okta-client
+ * accept: application/json
+ * content-type: application/json
+ * authorization: SSWS 00OgOWZBLBIID9O8SKRGgrJDqebJL54x2cPfzQ3U-l
+ * host: rain.okta1.com:1802
+ * connection: keep-alive
+ */
+
+module.exports = function (req, res) {
+  res.statusCode = 200;
+
+  res.setHeader("server", "Apache-Coyote/1.1");
+  res.setHeader("x-okta-request-id", "reqOo73wjlnRJaOFb2vMztpDQ");
+  res.setHeader("p3p", "CP=\"HONK\"");
+  res.setHeader("set-cookie", ["sid=\"\"; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/","JSESSIONID=64082A42051683A44CBA88D3C61A88A0; Path=/"]);
+  res.setHeader("x-rate-limit-limit", "1200");
+  res.setHeader("x-rate-limit-remaining", "1184");
+  res.setHeader("x-rate-limit-reset", "1487657432");
+  res.setHeader("cache-control", "no-cache, no-store");
+  res.setHeader("pragma", "no-cache");
+  res.setHeader("expires", "0");
+  res.setHeader("link", "<http://rain.okta1.com:1802/api/v1/groups/00gltfXJdQeXCQckG0g3/users?limit=1000>; rel=\"self\", <http://rain.okta1.com:1802/api/v1/groups/00gltfXJdQeXCQckG0g3/users?after=00usafLcS3hw0LJ220g3&limit=1000>; rel=\"next\"");
+  res.setHeader("content-type", "application/json;charset=UTF-8");
+  res.setHeader("transfer-encoding", "chunked");
+  res.setHeader("date", "Tue, 21 Feb 2017 06:09:37 GMT");
+
+  res.setHeader("x-yakbak-tape", path.basename(__filename, ".js"));
+
+  res.write(new Buffer("W3siaWQiOiIwMHVsdTFpb2NlWHZsc2QwejBnMyIsInN0YXR1cyI6IkFDVElWRSIsImNyZWF0ZWQiOiIyMDE3LTAyLTEzVDIxOjE3OjQ2LjAwMFoiLCJhY3RpdmF0ZWQiOm51bGwsInN0YXR1c0NoYW5nZWQiOm51bGwsImxhc3RMb2dpbiI6IjIwMTctMDItMjFUMDI6MDg6MjMuMDAwWiIsImxhc3RVcGRhdGVkIjoiMjAxNy0wMi0xM1QyMToyMDoxNS4wMDBaIiwicGFzc3dvcmRDaGFuZ2VkIjoiMjAxNy0wMi0xM1QyMToyMDoxNS4wMDBaIiwicHJvZmlsZSI6eyJlbWFpbCI6IndlYm1hc3RlckBjbG91ZGl0dWRlLm5ldCIsImZpcnN0TmFtZSI6IkFkZC1NaW4iLCJsYXN0TmFtZSI6Ik8nQ2xvdWR5IFR1ZCIsImxvZ2luIjoiYWRtaW5pc3RyYXRvcjFAY2xvdWRpdHVkZS5uZXQiLCJtb2JpbGVQaG9uZSI6bnVsbCwic2Vjb25kRW1haWwiOm51bGx9LCJjcmVkZW50aWFscyI6eyJwYXNzd29yZCI6e30sInJlY292ZXJ5X3F1ZXN0aW9uIjp7InF1ZXN0aW9uIjoiTGFzdCA0IGRpZ2l0cyBvZiB5b3VyIHNvY2lhbCBzZWN1cml0eSBudW1iZXI/In0sInByb3ZpZGVyIjp7InR5cGUiOiJPS1RBIiwibmFtZSI6Ik9LVEEifX0sIl9saW5rcyI6eyJzZWxmIjp7ImhyZWYiOiJodHRwOi8vcmFpbi5va3RhMS5jb206MTgwMi9hcGkvdjEvdXNlcnMvMDB1bHUxaW9jZVh2bHNkMHowZzMifX19LHsiaWQiOiIwMHVydHRRZHl4cUhSWW9idjBnMyIsInN0YXR1cyI6IkRFUFJPVklTSU9ORUQiLCJjcmVhdGVkIjoiMjAxNy0wMi0yMVQwNTozMDo0Mi4wMDBaIiwiYWN0aXZhdGVkIjoiMjAxNy0wMi0yMVQwNjowNzoxOC4wMDBaIiwic3RhdHVzQ2hhbmdlZCI6IjIwMTctMDItMjFUMDY6MDc6MTguMDAwWiIsImxhc3RMb2dpbiI6bnVsbCwibGFzdFVwZGF0ZWQiOiIyMDE3LTAyLTIxVDA2OjA3OjE4LjAwMFoiLCJwYXNzd29yZENoYW5nZWQiOm51bGwsInByb2ZpbGUiOnsiZW1haWwiOiJkZWFjdGl2ZS5tY2phbmt5QGV4YW1wbGUuY29tIiwiZmlyc3ROYW1lIjoiTm9uYWN0aXZlIiwibGFzdE5hbWUiOiJNY0phbmt5IiwibG9naW4iOiJkZWFjdGl2ZS5tY2phbmt5QGV4YW1wbGUuY29tIiwibW9iaWxlUGhvbmUiOm51bGwsInNlY29uZEVtYWlsIjpudWxsfSwiY3JlZGVudGlhbHMiOnsicHJvdmlkZXIiOnsidHlwZSI6Ik9LVEEiLCJuYW1lIjoiT0tUQSJ9fSwiX2xpbmtzIjp7InNlbGYiOnsiaHJlZiI6Imh0dHA6Ly9yYWluLm9rdGExLmNvbToxODAyL2FwaS92MS91c2Vycy8wMHVydHRRZHl4cUhSWW9idjBnMyJ9fX0seyJpZCI6IjAwdXM5OTZ2VjRnTGJtNnpVMGczIiwic3RhdHVzIjoiREVQUk9WSVNJT05FRCIsImNyZWF0ZWQiOiIyMDE3LTAyLTIxVDA2OjA3OjEyLjAwMFoiLCJhY3RpdmF0ZWQiOiIyMDE3LTAyLTIxVDA2OjA3OjEyLjAwMFoiLCJzdGF0dXNDaGFuZ2VkIjoiMjAxNy0wMi0yMVQwNjowNzoxNy4wMDBaIiwibGFzdExvZ2luIjpudWxsLCJsYXN0VXBkYXRlZCI6IjIwMTctMDItMjFUMDY6MDc6MTcuMDAwWiIsInBhc3N3b3JkQ2hhbmdlZCI6bnVsbCwicHJvZmlsZSI6eyJlbWFpbCI6ImRlbGV0ZW1lLm1jamFua3lAZXhhbXBsZS5jb20iLCJmaXJzdE5hbWUiOiJEZWxldHVzIiwibGFzdE5hbWUiOiJNY0phbmt5IiwibG9naW4iOiJkZWxldGVtZS5tY2phbmt5QGV4YW1wbGUuY29tIiwibW9iaWxlUGhvbmUiOm51bGwsInNlY29uZEVtYWlsIjpudWxsfSwiY3JlZGVudGlhbHMiOnsicHJvdmlkZXIiOnsidHlwZSI6Ik9LVEEiLCJuYW1lIjoiT0tUQSJ9fSwiX2xpbmtzIjp7InNlbGYiOnsiaHJlZiI6Imh0dHA6Ly9yYWluLm9rdGExLmNvbToxODAyL2FwaS92MS91c2Vycy8wMHVzOTk2dlY0Z0xibTZ6VTBnMyJ9fX0seyJpZCI6IjAwdXNhZkxjUzNodzBMSjIyMGczIiwic3RhdHVzIjoiQUNUSVZFIiwiY3JlYXRlZCI6IjIwMTctMDItMjFUMDY6MDk6MzMuMDAwWiIsImFjdGl2YXRlZCI6IjIwMTctMDItMjFUMDY6MDk6MzMuMDAwWiIsInN0YXR1c0NoYW5nZWQiOiIyMDE3LTAyLTIxVDA2OjA5OjMzLjAwMFoiLCJsYXN0TG9naW4iOm51bGwsImxhc3RVcGRhdGVkIjoiMjAxNy0wMi0yMVQwNjowOTozMy4wMDBaIiwicGFzc3dvcmRDaGFuZ2VkIjoiMjAxNy0wMi0yMVQwNjowOTozMy4wMDBaIiwicHJvZmlsZSI6eyJlbWFpbCI6ImZydXRpcy5tY2phbmt5QGV4YW1wbGUuY29tIiwiZmlyc3ROYW1lIjoiRnJ1dGlzIiwibGFzdE5hbWUiOiJNY0phbmt5IiwibG9naW4iOiJmcnV0aXMubWNqYW5reUBleGFtcGxlLmNvbSIsIm1vYmlsZVBob25lIjpudWxsLCJzZWNvbmRFbWFpbCI6bnVsbH0sImNyZWRlbnRpYWxzIjp7InBhc3N3b3JkIjp7fSwicHJvdmlkZXIiOnsidHlwZSI6Ik9LVEEiLCJuYW1lIjoiT0tUQSJ9fSwiX2xpbmtzIjp7InNlbGYiOnsiaHJlZiI6Imh0dHA6Ly9yYWluLm9rdGExLmNvbToxODAyL2FwaS92MS91c2Vycy8wMHVzYWZMY1MzaHcwTEoyMjBnMyJ9fX1d", "base64"));
+  res.end();
+
+  return __filename;
+};

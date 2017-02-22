@@ -1,7 +1,7 @@
 var path = require("path");
 
 /**
- * POST /api/v1/users/00uofnWbW7J667ATL0g3/lifecycle/activate
+ * POST /api/v1/users/00urttQdyxqHRYobv0g3/lifecycle/activate
  *
  * x-test-description: /api/v1/users/:id/lifecycle - activates a user
  * user-agent: mock-okta-client
@@ -17,18 +17,18 @@ module.exports = function (req, res) {
   res.statusCode = 200;
 
   res.setHeader("server", "Apache-Coyote/1.1");
-  res.setHeader("x-okta-request-id", "reqdV4SwtQOQLex6vZx1W05GQ");
+  res.setHeader("x-okta-request-id", "reqaMvkLqtOS3Ci0y5r5u6Miw");
   res.setHeader("p3p", "CP=\"HONK\"");
-  res.setHeader("set-cookie", ["sid=\"\"; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/","JSESSIONID=9E5FBA465525DAE6C9A035F0BAF9708C; Path=/"]);
+  res.setHeader("set-cookie", ["sid=\"\"; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/","JSESSIONID=80950D3CB6449999CA5487F2480B7201; Path=/"]);
   res.setHeader("x-rate-limit-limit", "1200");
-  res.setHeader("x-rate-limit-remaining", "1144");
-  res.setHeader("x-rate-limit-reset", "1487364818");
+  res.setHeader("x-rate-limit-remaining", "1167");
+  res.setHeader("x-rate-limit-reset", "1487657432");
   res.setHeader("cache-control", "no-cache, no-store");
   res.setHeader("pragma", "no-cache");
   res.setHeader("expires", "0");
   res.setHeader("content-type", "application/json;charset=UTF-8");
   res.setHeader("transfer-encoding", "chunked");
-  res.setHeader("date", "Fri, 17 Feb 2017 20:53:24 GMT");
+  res.setHeader("date", "Tue, 21 Feb 2017 06:09:38 GMT");
 
   res.setHeader("x-yakbak-tape", path.basename(__filename, ".js"));
 

@@ -57,8 +57,9 @@ util.describe('/api/v1/users/:id/credentials', (suite) => {
           body: {
             oldPassword: { value: 'Asdf1234' },
             newPassword: { value: 'Asdf1234!' },
-          }
-      }))
+          },
+        })
+      )
     ));
   suite.it('expires a user password', req => (
     req.get({ path: '/api/v1/users/frutis.mcjanky@example.com' })
@@ -70,12 +71,13 @@ util.describe('/api/v1/users/:id/credentials', (suite) => {
 });
 
 util.describe('/api/v1/users/:id/lifecycle', (suite) => {
- suite.it('activates a user', req => (
+  suite.it('activates a user', req => (
     req.get({ path: '/api/v1/users/deactive.mcjanky@example.com' })
     .then(user =>
       req.post({
         path: `/api/v1/users/${user.id}/lifecycle/activate`,
-    }))
+      })
+    )
   ));
 
   suite.it('deactivates a user', req => (
@@ -83,7 +85,8 @@ util.describe('/api/v1/users/:id/lifecycle', (suite) => {
     .then(user =>
       req.post({
         path: `/api/v1/users/${user.id}/lifecycle/deactivate`,
-    }))
+      })
+    )
   ));
 
   suite.it('reset a user password', req => (
@@ -91,6 +94,7 @@ util.describe('/api/v1/users/:id/lifecycle', (suite) => {
     .then(user =>
       req.post({
         path: `/api/v1/users/${user.id}/lifecycle/reset_password?sendEmail=false`,
-    }))
+      })
+    )
   ));
 });

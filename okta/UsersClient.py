@@ -9,8 +9,11 @@ from okta.models.user.LoginCredentials import LoginCredentials
 
 class UsersClient(ApiClient):
     def __init__(self, *args, **kwargs):
-        kwargs['base_url'] = (kwargs['base_url'] or args[0]) + '/api/v1/users'
-        kwargs['api_token'] = kwargs['api_token'] or args[1]
+        if 'base_url' in kwargs and 'api_token' in kwargs:
+            kwargs['base_url'] += '/api/v1/users'
+        else:
+            kwargs['base_url'] = args[0] + '/api/v1/users'
+            kwargs['api_token'] = args[1]
         ApiClient.__init__(self, **kwargs)
 
     # CRUD

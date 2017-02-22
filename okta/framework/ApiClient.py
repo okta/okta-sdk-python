@@ -26,7 +26,7 @@ class ApiClient(object):
             'Authorization': 'SSWS ' + self.api_token
         }
 
-        if kwargs['headers']:
+        if 'headers' in kwargs:
             self.headers.update(kwargs['headers'])
 
     def get(self, url, params=None, attempts=0):
