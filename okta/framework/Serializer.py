@@ -9,7 +9,7 @@ class Serializer(JSONEncoder):
             return obj.strftime('dt(%Y-%m-%dT%H:%M:%SZ)')
         elif isinstance(obj, object):
         	no_nulls = Utils.remove_nulls(obj.__dict__)
-        	formatted = Utils.reformat_obj(obj, no_nulls)
+        	formatted = Utils.replace_alt_names(obj, no_nulls)
         	return formatted
         else:
             return JSONEncoder.default(self, obj)

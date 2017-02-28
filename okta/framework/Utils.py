@@ -95,7 +95,7 @@ class Utils(object):
         return built
 
     @staticmethod
-    def reformat_obj(obj, d):
+    def replace_alt_names(obj, d):
         built = d.copy()
         if hasattr(obj, 'alt_names'):
             for key, value in six.iteritems(obj.alt_names):
