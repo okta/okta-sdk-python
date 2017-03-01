@@ -8,8 +8,13 @@ from okta.models.user.LoginCredentials import LoginCredentials
 
 
 class UsersClient(ApiClient):
-    def __init__(self, base_url, api_token):
-        ApiClient.__init__(self, base_url + '/api/v1/users', api_token)
+    def __init__(self, *args, **kwargs):
+        if 'base_url' in kwargs and 'api_token' in kwargs:
+            kwargs['base_url'] += '/api/v1/users'
+        else:
+            kwargs['base_url'] = args[0] + '/api/v1/users'
+            kwargs['api_token'] = args[1]
+        ApiClient.__init__(self, **kwargs)
 
     # CRUD
 
@@ -63,7 +68,7 @@ class UsersClient(ApiClient):
         response = ApiClient.put_path(self, '/{0}'.format(uid), user)
         return Utils.deserialize(response.text, User)
 
-    def create_user(self, user, activate=False):
+    def create_user(self, user, activate=None):
         """Create a user
 
         :param user: the data to create a user

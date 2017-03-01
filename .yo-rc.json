@@ -1,0 +1,9 @@
+{
+  "@okta/generator-samples": {
+    "type": "crud-sdk",
+    "environment": "Python",
+    "name": "oktasdk-python",
+    "version": "1.9.0",
+    "parentType": "sdk"
+  }
+}
