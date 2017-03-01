@@ -93,3 +93,13 @@ class Utils(object):
                 built[k] = v
 
         return built
+
+    @staticmethod
+    def replace_alt_names(obj, d):
+        built = d.copy()
+        if hasattr(obj, 'alt_names'):
+            for key, value in six.iteritems(obj.alt_names):
+                built[key] = d[value]
+                del built[value]
+                
+        return built
