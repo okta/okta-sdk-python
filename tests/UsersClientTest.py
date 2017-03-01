@@ -1,41 +1,37 @@
 from okta import UsersClient
 from okta.models.user import User
-import random
 import unittest
 import os
+import json
 
+config_path = os.path.normpath(os.path.join(os.path.dirname(__file__), "../.sdk.config.json"))
+with open(config_path) as sdk_config_data:
+    sdk_config = json.load(sdk_config_data)
+
+def build_client(test_description):
+    return UsersClient(
+        base_url=sdk_config["TEST_URL"],
+        api_token=sdk_config["API_KEY"],
+        headers={
+            "x-test-description": test_description
+        }
+    )
 
 class UsersClientTest(unittest.TestCase):
 
-    def setUp(self):
-        self.client = UsersClient(os.environ.get('OKTA_TEST_URL'), os.environ.get('OKTA_TEST_KEY'))
+    def test_requests_users(self):
+        client = build_client("/api/v1/users - requests users")
+        users = client.get_users()
+    
+    def test_requests_a_user(self):
+        client = build_client("/api/v1/users/:id - requests a user")
+        users = client.get_users()
+        user = client.get_user(users[0].id)
 
-    def test_paging(self):
-        users = self.client.get_paged_users(limit=1)
-
-        first_page_hit = subsequent_page_hit = False
-
-        for user in users.result:
-            first_page_hit = True
-
-        while not users.is_last_page():
-            users = self.client.get_paged_users(url=users.next_url)
-            for user in users.result:
-                subsequent_page_hit = True
-
-        self.assertTrue(first_page_hit and subsequent_page_hit, "The first and subsequent pages weren't hit")
-
-    def test_single_user(self):
-        user = User(login='fake' + str(random.random()) + '@asdf.com',
-                    email='fake@asdf.com',
-                    firstName='Joe',
-                    lastName='Schmoe')
-        user = self.client.create_user(user, activate=False)
-        self.assertEqual(user.status, "STAGED", "User should be staged")
-
-        user = User(login='fake' + str(random.random()) + '@asdf.com',
-                    email='fake@asdf.com',
-                    firstName='Joe',
-                    lastName='Schmoe')
-        user = self.client.create_user(user, activate=True)
-        self.assertEqual(user.status, "PROVISIONED", "User should be provisioned")
+    def test_creates_a_user_without_credentials(self):
+        client = build_client("/api/v1/users/:id - creates a user without credentials")
+        user = User(login='brutis.mcjanky@example.com',
+                    email='brutis.mcjanky@example.com',
+                    firstName='First',
+                    lastName='McJanky')
+        client.create_user(user)
