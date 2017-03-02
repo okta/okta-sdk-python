@@ -101,3 +101,12 @@ atlassian-ide-plugin.xml
 com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
+
+# Test suite
+build2
+node_modules
+dist
+npm-debug.log
+travis_phantomjs
+.DS_Store
+.vscode
