@@ -99,7 +99,7 @@ class Utils(object):
         built = d.copy()
         if hasattr(obj, 'alt_names'):
             for key, value in six.iteritems(obj.alt_names):
-                built[key] = d[value]
-                del built[value]
-                
+                if value in built:
+                    built[key] = built[value]
+                    del built[value]
         return built

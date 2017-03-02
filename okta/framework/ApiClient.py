@@ -8,9 +8,9 @@ import six
 
 class ApiClient(object):
 
-    def __init__(self, base_url, api_token):
-        self.base_url = base_url
-        self.api_token = api_token
+    def __init__(self, *args, **kwargs):
+        self.base_url = kwargs['base_url'] or args[0]
+        self.api_token = kwargs['api_token'] or args[1]
         self.api_version = 1
         self.max_attempts = 4
 
@@ -23,8 +23,11 @@ class ApiClient(object):
         self.headers = {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': 'SSWS ' + api_token
+            'Authorization': 'SSWS ' + self.api_token
         }
+
+        if 'headers' in kwargs:
+            self.headers.update(kwargs['headers'])
 
     def get(self, url, params=None, attempts=0):
         params_str = self.__dict_to_query_params(params)
@@ -36,9 +39,10 @@ class ApiClient(object):
             return self.get(url, params, attempts)
 
     def put(self, url, data=None, params=None, attempts=0):
-        d = json.dumps(data, cls=Serializer)
+        if data:
+            data = json.dumps(data, cls=Serializer)
         params_str = self.__dict_to_query_params(params)
-        resp = requests.put(url + params_str, data=d, headers=self.headers)
+        resp = requests.put(url + params_str, data=data, headers=self.headers)
         attempts += 1
         if self.__check_response(resp, attempts):
             return resp
@@ -46,9 +50,10 @@ class ApiClient(object):
             return self.put(url, data, params, attempts)
 
     def post(self, url, data=None, params=None, attempts=0):
-        d = json.dumps(data, cls=Serializer)
+        if data:
+            data = json.dumps(data, cls=Serializer, separators=(',', ':'))
         params_str = self.__dict_to_query_params(params)
-        resp = requests.post(url + params_str, data=d, headers=self.headers)
+        resp = requests.post(url + params_str, data=data, headers=self.headers)
         attempts += 1
         if self.__check_response(resp, attempts):
             return resp
