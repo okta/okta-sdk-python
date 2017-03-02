@@ -1,0 +1,8 @@
+{
+  "mockOkta": {
+    "port": 3000,
+    "proxy": "http://127.0.0.1",
+    "proxied": "http://rain.okta1.com:1802",
+    "apiKey": "00OgOWZBLBIID9O8SKRGgrJDqebJL54x2cPfzQ3U-l"
+  }
+}
