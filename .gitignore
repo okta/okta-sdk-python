@@ -101,3 +101,11 @@ atlassian-ide-plugin.xml
 com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
+
+# Generator Test Suite
+build2
+node_modules
+npm-debug.log
+travis_phantomjs
+.DS_Store
+.vscode

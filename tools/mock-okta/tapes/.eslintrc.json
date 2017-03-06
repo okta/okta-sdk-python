@@ -1,0 +1,11 @@
+{
+  "rules": {
+    "quotes": "off",
+    "comma-spacing": "off",
+    "no-var": "off",
+    "no-trailing-spaces": "off",
+    "func-names": "off",
+    "max-len": "off",
+    "no-param-reassign": "off"
+  }
+}
