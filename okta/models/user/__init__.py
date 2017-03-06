@@ -1,4 +1,5 @@
 from .ActivationResponse import ActivationResponse
+from .AppLinks import AppLinks
 from .ChangePasswordRequest import ChangePasswordRequest
 from .ChangeRecoveryQuestionRequest import ChangeRecoveryQuestionRequest
 from .LoginCredentials import LoginCredentials
