@@ -51,7 +51,6 @@ class UsersClient(ApiClient):
         :rtype: AppLinks
         """
         response = ApiClient.get_path(self, '/{0}/appLinks'.format(uid))
-        print response.text
         return Utils.deserialize(response.text, AppLinks)
 
     def update_user(self, user):

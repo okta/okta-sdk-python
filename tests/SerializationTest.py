@@ -225,4 +225,4 @@ class SerializationTest(unittest.TestCase):
 
         self.assertEqual(len(result), 2, "Cannot deserialize nested lists of objects")
         serialized = json.dumps(result, cls=Serializer)
-        self.assertTrue("1od6bbdxlpb1BgDTi1h7" in serialized, "Id attribute isn't deserialized properly")
+        self.assertTrue("1od6bbdxlpb1BgDTi1h7" in serialized, "Nested lists aren't serialized properly")

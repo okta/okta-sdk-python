@@ -17,7 +17,7 @@ class AppLinks:
 
         self.appAssignmentId = None  # str
 
-        self.appAInstanceId = None  # str
+        self.appInstanceId = None  # str
 
         self.appName = None  # str
 
