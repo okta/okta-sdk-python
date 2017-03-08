@@ -1,6 +1,7 @@
 from okta.framework.ApiClient import ApiClient
 from okta.framework.Utils import Utils
 from okta.framework.PagedResults import PagedResults
+from okta.models.user import AppLinks
 from okta.models.user.User import User
 from okta.models.user.TempPassword import TempPassword
 from okta.models.user.ResetPasswordToken import ResetPasswordToken
@@ -42,6 +43,16 @@ class UsersClient(ApiClient):
         """
         response = ApiClient.get_path(self, '/{0}'.format(uid))
         return Utils.deserialize(response.text, User)
+
+    def get_user_applinks(self, uid):
+        """Get applinks of a single user
+
+        :param uid: the user id or login
+        :type uid: str
+        :rtype: AppLinks
+        """
+        response = ApiClient.get_path(self, '/{0}/appLinks'.format(uid))
+        return Utils.deserialize(response.text, AppLinks)
 
     def update_user(self, user):
         """Update a user
