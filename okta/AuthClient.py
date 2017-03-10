@@ -4,8 +4,13 @@ from okta.models.auth.AuthResult import AuthResult
 
 
 class AuthClient(ApiClient):
-    def __init__(self, base_url, api_token):
-        ApiClient.__init__(self, base_url + '/api/v1/authn', api_token)
+    def __init__(self, *args, **kwargs):
+        if 'base_url' in kwargs and 'api_token' in kwargs:
+            kwargs['base_url'] += '/api/v1/authn'
+        else:
+            kwargs['base_url'] = args[0] + '/api/v1/authn'
+            kwargs['api_token'] = args[1]
+        ApiClient.__init__(self, **kwargs)
 
     def authenticate(self, username, password,
                      relay_state=None, response_type=None, force_mfa=None, context=None):
