@@ -5,8 +5,14 @@ from okta.framework.PagedResults import PagedResults
 
 
 class EventsClient(ApiClient):
-    def __init__(self, base_url, api_token):
-        ApiClient.__init__(self, base_url + '/api/v1/events', api_token)
+
+    def __init__(self, *args, **kwargs):
+        if 'base_url' in kwargs and 'api_token' in kwargs:
+            kwargs['base_url'] += '/api/v1/events'
+        else:
+            kwargs['base_url'] = args[0] + '/api/v1/events'
+            kwargs['api_token'] = args[1]
+        ApiClient.__init__(self, **kwargs)
 
     def get_events(self, limit=None, start_date=None, filter_string=None):
         """Get a list of Events

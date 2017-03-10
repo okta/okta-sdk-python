@@ -31,6 +31,7 @@ class ApiClient(object):
 
     def get(self, url, params=None, attempts=0):
         params_str = self.__dict_to_query_params(params)
+        print url + params_str
         resp = requests.get(url + params_str, headers=self.headers)
         attempts += 1
         if self.__check_response(resp, attempts):
