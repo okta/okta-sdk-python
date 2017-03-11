@@ -26,6 +26,9 @@ def build_client(test_description):
 
 class UsersClientTest(unittest.TestCase):
 
+    def tests_client_initializer(self):
+        client = build_client('/api/v1/users - initialize users client')
+
     def test_requests_a_user(self):
         client = build_client('/api/v1/users/:id - requests a user')
         users = client.get_users()
