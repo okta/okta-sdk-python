@@ -6,11 +6,7 @@ from okta.models.session.Session import Session
 
 class SessionsClient(ApiClient):
     def __init__(self, *args, **kwargs):
-        if 'base_url' in kwargs and 'api_token' in kwargs:
-            kwargs['base_url'] += '/api/v1/sessions'
-        else:
-            kwargs['base_url'] = args[0] + '/api/v1/sessions'
-            kwargs['api_token'] = args[1]
+        kwargs['pathname'] = '/api/v1/sessions'
         ApiClient.__init__(self, **kwargs)
 
     # CRUD

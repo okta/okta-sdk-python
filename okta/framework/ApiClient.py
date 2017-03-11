@@ -9,8 +9,16 @@ import six
 class ApiClient(object):
 
     def __init__(self, *args, **kwargs):
-        self.base_url = kwargs['base_url'] or args[0]
-        self.api_token = kwargs['api_token'] or args[1]
+        if 'pathname' not in kwargs:
+            raise ValueError('Invalid url')
+
+        if 'base_url' in kwargs and 'api_token' in kwargs:
+            self.base_url = kwargs['base_url'] + kwargs['pathname']
+            self.api_token = kwargs['api_token']
+        else:
+            self.base_url = args[0] + kwargs['pathname']
+            self.api_token = args[1]
+        
         self.api_version = 1
         self.max_attempts = 4
 
@@ -31,7 +39,6 @@ class ApiClient(object):
 
     def get(self, url, params=None, attempts=0):
         params_str = self.__dict_to_query_params(params)
-        print url + params_str
         resp = requests.get(url + params_str, headers=self.headers)
         attempts += 1
         if self.__check_response(resp, attempts):
