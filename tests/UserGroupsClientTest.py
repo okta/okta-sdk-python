@@ -40,6 +40,9 @@ def build_users_client(test_description):
 
 class UserGroupsClientTest(unittest.TestCase):
 
+    def tests_client_initializer(self):
+        client = build_client('/api/v1/groups - initialize groups client')
+
     def test_requests_a_group(self):
         client = build_client('/api/v1/groups/:id - requests a group')
         groups = client.get_groups()
