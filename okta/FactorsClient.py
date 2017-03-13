@@ -11,7 +11,7 @@ class FactorsClient(ApiClient):
 
     def __init__(self, *args, **kwargs):
         kwargs['pathname'] = '/api/v1/users'
-        ApiClient.__init__(self, **kwargs)
+        ApiClient.__init__(self, *args, **kwargs)
 
     def get_factors_catalog(self, user_id):
         """Get available factors for a user

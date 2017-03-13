@@ -6,7 +6,7 @@ from okta.models.auth.AuthResult import AuthResult
 class AuthClient(ApiClient):
     def __init__(self, *args, **kwargs):
         kwargs['pathname'] = '/api/v1/authn'
-        ApiClient.__init__(self, **kwargs)
+        ApiClient.__init__(self, *args, **kwargs)
 
     def authenticate(self, username, password,
                      relay_state=None, response_type=None, force_mfa=None, context=None):

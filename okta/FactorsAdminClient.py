@@ -6,7 +6,7 @@ from okta.models.factor.OrgAuthFactor import OrgAuthFactor
 class FactorsAdminClient(ApiClient):
     def __init__(self, *args, **kwargs):
         kwargs['pathname'] = '/api/v1/org'
-        ApiClient.__init__(self, **kwargs)
+        ApiClient.__init__(self, *args, **kwargs)
 
     def get_org_factors(self, filter_string=None):
         """Get a list of OrgAuthFactors

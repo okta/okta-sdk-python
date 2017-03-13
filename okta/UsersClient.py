@@ -10,7 +10,7 @@ from okta.models.user.LoginCredentials import LoginCredentials
 class UsersClient(ApiClient):
     def __init__(self, *args, **kwargs):
         kwargs['pathname'] = '/api/v1/users'
-        ApiClient.__init__(self, **kwargs)
+        ApiClient.__init__(self, *args, **kwargs)
 
     # CRUD
 

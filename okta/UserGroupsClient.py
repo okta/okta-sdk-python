@@ -8,7 +8,7 @@ from okta.framework.PagedResults import PagedResults
 class UserGroupsClient(ApiClient):
     def __init__(self, *args, **kwargs):
         kwargs['pathname'] = '/api/v1/groups'
-        ApiClient.__init__(self, **kwargs)
+        ApiClient.__init__(self, *args, **kwargs)
 
     # CRUD
 

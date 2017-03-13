@@ -11,19 +11,10 @@ with open(config_path) as sdk_config_data:
     sdk_config = json.load(sdk_config_data)
 
 
-def build_client(test_description):
-    url = '{}:{}'.format(sdk_config['mockOkta']['proxy'],
-                         sdk_config['mockOkta']['port'])
-    return FactorsAdminClient(
-        base_url=url,
-        api_token=sdk_config['mockOkta']['apiKey'],
-        headers={
-            'x-test-description': test_description
-        }
-    )
-
-
 class FactorsAdminClientTest(unittest.TestCase):
 
-    def tests_client_initializer(self):
-        client = build_client('/api/v1/org - initialize admin factors client')
+    def tests_client_initializer_args(self):
+        client = FactorsAdminClient('https://example.okta.com', 'api_key')
+
+    def tests_client_initializer_kwargs(self):
+        client = FactorsAdminClient(base_url='https://example.okta.com', api_token='api_key')

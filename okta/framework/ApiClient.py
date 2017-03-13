@@ -10,11 +10,14 @@ class ApiClient(object):
 
     def __init__(self, *args, **kwargs):
         if 'pathname' not in kwargs:
-            raise ValueError('Invalid url')
+            raise ValueError('A pathname must be provided to create an ApiClient')
 
-        if 'base_url' in kwargs and 'api_token' in kwargs:
+        if 'base_url' in kwargs:
             self.base_url = kwargs['base_url'] + kwargs['pathname']
+
+        if 'api_token' in kwargs:
             self.api_token = kwargs['api_token']
+
         else:
             self.base_url = args[0] + kwargs['pathname']
             self.api_token = args[1]
