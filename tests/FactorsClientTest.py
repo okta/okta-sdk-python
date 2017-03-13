@@ -4,13 +4,6 @@ import json
 
 from okta import FactorsClient
 
-config_path = os.path.normpath(os.path.join(os.path.dirname(__file__),
-                                            '../.sdk.config.json'))
-
-with open(config_path) as sdk_config_data:
-    sdk_config = json.load(sdk_config_data)
-
-
 class FactorsClientTest(unittest.TestCase):
 
     def tests_client_initializer_args(self):
