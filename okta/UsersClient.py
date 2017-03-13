@@ -9,12 +9,8 @@ from okta.models.user.LoginCredentials import LoginCredentials
 
 class UsersClient(ApiClient):
     def __init__(self, *args, **kwargs):
-        if 'base_url' in kwargs and 'api_token' in kwargs:
-            kwargs['base_url'] += '/api/v1/users'
-        else:
-            kwargs['base_url'] = args[0] + '/api/v1/users'
-            kwargs['api_token'] = args[1]
-        ApiClient.__init__(self, **kwargs)
+        kwargs['pathname'] = '/api/v1/users'
+        ApiClient.__init__(self, *args, **kwargs)
 
     # CRUD
 
@@ -31,7 +27,7 @@ class UsersClient(ApiClient):
         """
         params = {
             'limit': limit,
-            'query': query,
+            'q': query,
             'filter': filter_string
         }
         response = ApiClient.get_path(self, '/', params=params)

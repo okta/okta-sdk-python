@@ -26,6 +26,12 @@ def build_client(test_description):
 
 class UsersClientTest(unittest.TestCase):
 
+    def tests_client_initializer_args(self):
+        client = UsersClient('https://example.okta.com', 'api_key')
+
+    def tests_client_initializer_kwargs(self):
+        client = UsersClient(base_url='https://example.okta.com', api_token='api_key')
+
     def test_requests_a_user(self):
         client = build_client('/api/v1/users/:id - requests a user')
         users = client.get_users()

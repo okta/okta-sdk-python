@@ -40,6 +40,12 @@ def build_users_client(test_description):
 
 class UserGroupsClientTest(unittest.TestCase):
 
+    def tests_client_initializer_args(self):
+        client = UserGroupsClient('https://example.okta.com', 'api_key')
+
+    def tests_client_initializer_kwargs(self):
+        client = UserGroupsClient(base_url='https://example.okta.com', api_token='api_key')
+
     def test_requests_a_group(self):
         client = build_client('/api/v1/groups/:id - requests a group')
         groups = client.get_groups()

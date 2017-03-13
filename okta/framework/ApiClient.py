@@ -9,16 +9,25 @@ import six
 class ApiClient(object):
 
     def __init__(self, *args, **kwargs):
-        self.base_url = kwargs['base_url'] or args[0]
-        self.api_token = kwargs['api_token'] or args[1]
+        if 'pathname' not in kwargs:
+            raise ValueError('A pathname must be provided to create an ApiClient')
+
+        if 'base_url' in kwargs and kwargs['base_url']:
+            self.base_url = kwargs['base_url'] + kwargs['pathname']
+        elif len(args) > 0 and args[0]:
+            self.base_url = args[0] + kwargs['pathname']
+        else:
+            raise ValueError('A base_url must be provided to create an ApiClient')
+
+        if 'api_token' in kwargs and kwargs['api_token']:
+            self.api_token = kwargs['api_token']
+        elif len(args) > 1 and args[1]:
+            self.api_token = args[1]
+        else:
+            raise ValueError('An api_token must be provied to create an ApiClient')
+
         self.api_version = 1
         self.max_attempts = 4
-
-        if not self.base_url:
-            raise ValueError('Invalid base_url')
-
-        if not self.api_token:
-            raise ValueError('Invalid api_token')
 
         self.headers = {
             'Accept': 'application/json',

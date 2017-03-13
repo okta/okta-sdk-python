@@ -7,12 +7,8 @@ from okta.framework.PagedResults import PagedResults
 
 class UserGroupsClient(ApiClient):
     def __init__(self, *args, **kwargs):
-        if 'base_url' in kwargs and 'api_token' in kwargs:
-            kwargs['base_url'] += '/api/v1/groups'
-        else:
-            kwargs['base_url'] = args[0] + '/api/v1/groups'
-            kwargs['api_token'] = args[1]
-        ApiClient.__init__(self, **kwargs)
+        kwargs['pathname'] = '/api/v1/groups'
+        ApiClient.__init__(self, *args, **kwargs)
 
     # CRUD
 
