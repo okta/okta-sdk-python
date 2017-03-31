@@ -116,8 +116,10 @@ class FactorsClient(ApiClient):
         """
         request = {
             'passCode': passcode,
-            'next_passcode': next_passcode
         }
+        if next_passcode is not None:
+            request['next_passcode'] = next_passcode
+            
         response = ApiClient.post_path(self, '/{0}/factors/{1}/lifecycle/activate'.format(user_id, user_factor_id), request)
         return Utils.deserialize(response.text, Factor)
 
