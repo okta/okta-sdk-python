@@ -9,8 +9,9 @@ from okta.models.factor.FactorDevice import FactorDevice
 
 class FactorsClient(ApiClient):
 
-    def __init__(self, base_url, api_token):
-        ApiClient.__init__(self, base_url + '/api/v1/users', api_token)
+    def __init__(self, *args, **kwargs):
+        kwargs['pathname'] = '/api/v1/users'
+        ApiClient.__init__(self, *args, **kwargs)
 
     def get_factors_catalog(self, user_id):
         """Get available factors for a user

@@ -5,8 +5,9 @@ from okta.models.app.AppInstance import AppInstance
 
 
 class AppInstanceClient(ApiClient):
-    def __init__(self, base_url, api_token):
-        ApiClient.__init__(self, base_url + '/api/v1/apps', api_token)
+    def __init__(self, *args, **kwargs):
+        kwargs['pathname'] = '/api/v1/apps'
+        ApiClient.__init__(self, *args, **kwargs)
 
     # CRUD
 

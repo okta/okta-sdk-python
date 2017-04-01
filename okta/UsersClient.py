@@ -1,6 +1,7 @@
 from okta.framework.ApiClient import ApiClient
 from okta.framework.Utils import Utils
 from okta.framework.PagedResults import PagedResults
+from okta.models.user import AppLinks
 from okta.models.user.User import User
 from okta.models.user.TempPassword import TempPassword
 from okta.models.user.ResetPasswordToken import ResetPasswordToken
@@ -8,8 +9,9 @@ from okta.models.user.LoginCredentials import LoginCredentials
 
 
 class UsersClient(ApiClient):
-    def __init__(self, base_url, api_token):
-        ApiClient.__init__(self, base_url + '/api/v1/users', api_token)
+    def __init__(self, *args, **kwargs):
+        kwargs['pathname'] = '/api/v1/users'
+        ApiClient.__init__(self, *args, **kwargs)
 
     # CRUD
 
@@ -26,7 +28,7 @@ class UsersClient(ApiClient):
         """
         params = {
             'limit': limit,
-            'query': query,
+            'q': query,
             'filter': filter_string
         }
         response = ApiClient.get_path(self, '/', params=params)
@@ -41,6 +43,16 @@ class UsersClient(ApiClient):
         """
         response = ApiClient.get_path(self, '/{0}'.format(uid))
         return Utils.deserialize(response.text, User)
+
+    def get_user_applinks(self, uid):
+        """Get applinks of a single user
+
+        :param uid: the user id or login
+        :type uid: str
+        :rtype: AppLinks
+        """
+        response = ApiClient.get_path(self, '/{0}/appLinks'.format(uid))
+        return Utils.deserialize(response.text, AppLinks)
 
     def update_user(self, user):
         """Update a user
@@ -63,7 +75,7 @@ class UsersClient(ApiClient):
         response = ApiClient.put_path(self, '/{0}'.format(uid), user)
         return Utils.deserialize(response.text, User)
 
-    def create_user(self, user, activate=False):
+    def create_user(self, user, activate=None):
         """Create a user
 
         :param user: the data to create a user
@@ -106,7 +118,6 @@ class UsersClient(ApiClient):
         """
         if url:
             response = ApiClient.get(self, url)
-
         else:
             params = {
                 'limit': limit,
@@ -114,7 +125,6 @@ class UsersClient(ApiClient):
                 'filter': filter_string
             }
             response = ApiClient.get_path(self, '/', params=params)
-
         return PagedResults(response, User)
 
     # LIFECYCLE
@@ -137,6 +147,26 @@ class UsersClient(ApiClient):
         :return: User
         """
         response = ApiClient.post_path(self, '/{0}/lifecycle/deactivate'.format(uid))
+        return Utils.deserialize(response.text, User)
+
+    def suspend_user(self, uid):
+        """Suspend user by target id
+
+        :param uid: the target user id
+        :type uid: str
+        :return: User
+        """
+        response = ApiClient.post_path(self, '/{0}/lifecycle/suspend'.format(uid))
+        return Utils.deserialize(response.text, User)
+
+    def unsuspend_user(self, uid):
+        """Unsuspend user by target id
+
+        :param uid: the target user id
+        :type uid: str
+        :return: User
+        """
+        response = ApiClient.post_path(self, '/{0}/lifecycle/unsuspend'.format(uid))
         return Utils.deserialize(response.text, User)
 
     def unlock_user(self, uid):
@@ -196,10 +226,20 @@ class UsersClient(ApiClient):
         :return: None or TempPassword
         """
         if not temp_password:
-            ApiClient.post_path(self, '/{0}/lifecycle/expire_password'.format(uid))
+            response = ApiClient.post_path(self, '/{0}/lifecycle/expire_password'.format(uid))
         else:
             params = {
                 'tempPassword': temp_password
             }
             response = ApiClient.post_path(self, '/{0}/lifecycle/expire_password'.format(uid), params=params)
-            return Utils.deserialize(response.text, TempPassword)
+        return Utils.deserialize(response.text, TempPassword)
+
+    def reset_factors(self, uid):
+        """Reset all user factors by target id
+
+        :param uid: the target user id
+        :type uid: str
+        :return: None
+        """
+        response = ApiClient.post_path(self, '/{0}/lifecycle/reset_factors'.format(uid))
+        return Utils.deserialize(response.text, User)

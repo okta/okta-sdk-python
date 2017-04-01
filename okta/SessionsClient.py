@@ -5,8 +5,9 @@ from okta.models.session.Session import Session
 
 
 class SessionsClient(ApiClient):
-    def __init__(self, base_url, api_token):
-        ApiClient.__init__(self, base_url + '/api/v1/sessions', api_token)
+    def __init__(self, *args, **kwargs):
+        kwargs['pathname'] = '/api/v1/sessions'
+        ApiClient.__init__(self, *args, **kwargs)
 
     # CRUD
 

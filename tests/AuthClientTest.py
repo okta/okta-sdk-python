@@ -1,15 +1,13 @@
-from okta.AuthClient import AuthClient
 import unittest
 import os
+import json
 
+from okta import AuthClient
 
-class SessionsClientTest(unittest.TestCase):
+class AuthClientTest(unittest.TestCase):
 
-    def setUp(self):
-        self.client = AuthClient(os.environ.get('OKTA_TEST_URL'), os.environ.get('OKTA_TEST_KEY'))
-        self.username = os.environ.get('OKTA_TEST_ADMIN_NAME')
-        self.password = os.environ.get('OKTA_TEST_ADMIN_PASSWORD')
+    def tests_client_initializer_args(self):
+        client = AuthClient('https://example.okta.com', 'api_key')
 
-    def test_simple_auth(self):
-        response = self.client.authenticate(self.username, self.password)
-        self.assertTrue(response.sessionToken or response.status == 'MFA_REQUIRED', "The simple auth failed")
+    def tests_client_initializer_kwargs(self):
+        client = AuthClient(base_url='https://example.okta.com', api_token='api_key')

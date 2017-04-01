@@ -1,6 +1,7 @@
 from okta.framework.Utils import Utils
 from okta.framework.Serializer import Serializer
 from okta.models.event.Event import Event
+from okta.models.user import AppLinks
 from okta.models.user.User import User
 from okta.models.auth.AuthResult import AuthResult
 import unittest
@@ -191,3 +192,38 @@ class SerializationTest(unittest.TestCase):
         self.assertTrue(isinstance(result.embedded.user, User), "Embedded User attribute isn't deserialized properly")
 
         self.assertEqual(len(result.embedded.factors), 2, "Embedded factors attribute isn't deserialized properly")
+
+    def test_user_applinks_deserialization(self):
+        json_str = '''
+        [{
+            "id": "auc9pp3udhKTBhNyS0h7",
+            "label": "Application",
+            "linkUrl": "https://example.okta.com/0oa9pp3udcBnjYs3E0h7/1234",
+            "logoUrl": "https://example.okta.com/assets/img/logos/logo.png",
+            "appName": "application",
+            "appInstanceId": "0oa9pp3udcBnjYs3E0h7",
+            "appAssignmentId": "0ua9pp3udgbxdDted0h7",
+            "credentialsSetup": false,
+            "hidden": false,
+            "sortOrder": 0
+          },
+          {
+            "id": "1od6bbdxlpb1BgDTi1h7",
+            "label": "Another application",
+            "linkUrl": "https://example.okta.com/0oa9pp3udcBnjYs3E0h7/5678",
+            "logoUrl": "https://example.okta.com/assets/img/logos/logo.png",
+            "appName": "another_application",
+            "appInstanceId": "1od7bbdxnpb2BgDTi1h7",
+            "appAssignmentId": "1od7bbdxnpb2BgDTi1h7",
+            "credentialsSetup": true,
+            "hidden": true,
+            "sortOrder": 1
+          }]
+        '''
+
+        result = Utils.deserialize(json_str, AppLinks)
+
+        self.assertEqual(len(result), 2, "Cannot deserialize nested lists of objects")
+        serialized = json.dumps(result, cls=Serializer)
+        self.assertTrue("1od6bbdxlpb1BgDTi1h7" in serialized, "Nested lists aren't serialized properly")
+

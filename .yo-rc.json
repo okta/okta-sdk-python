@@ -1,0 +1,8 @@
+{
+  "@okta/generator-samples": {
+    "parentType": "sdk",
+    "version": "1.10.0",
+    "environment": "Python",
+    "name": "oktasdk-python"
+  }
+}

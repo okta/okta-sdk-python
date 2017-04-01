@@ -1,25 +1,14 @@
-from okta.AppInstanceClient import AppInstanceClient
-from okta.framework.OktaError import OktaError
 import unittest
 import os
-from okta.models.app.AppInstance import AppInstance
+import json
 
+from okta import AppInstanceClient
 
-class SessionsClientTest(unittest.TestCase):
+class AppInstanceClientTest(unittest.TestCase):
 
-    def setUp(self):
-        self.client = AppInstanceClient(os.environ.get('OKTA_TEST_URL'), os.environ.get('OKTA_TEST_KEY'))
-        self.username = os.environ.get('OKTA_TEST_ADMIN_NAME')
-        self.password = os.environ.get('OKTA_TEST_ADMIN_PASSWORD')
+    def tests_client_initializer_args(self):
+        client = AppInstanceClient('https://example.okta.com', 'api_key')
 
-    def test_create_app(self):
-        app = AppInstance.build_bookmark("https://www.google.com")
-        app = self.client.create_app_instance(app)
-        self.assertIsNotNone(app.id)
+    def tests_client_initializer_kwargs(self):
+        client = AppInstanceClient(base_url='https://example.okta.com', api_token='api_key')
 
-    def test_delete_app(self):
-        app = AppInstance.build_bookmark("https://www.google.com")
-        app = self.client.create_app_instance(app)
-        self.client.deactivate_app_instance(app.id)
-        self.client.delete_app_instance(app.id)
-        self.assertRaises(OktaError, self.client.get_app_instance, app.id)

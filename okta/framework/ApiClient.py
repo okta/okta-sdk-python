@@ -8,23 +8,35 @@ import six
 
 class ApiClient(object):
 
-    def __init__(self, base_url, api_token):
-        self.base_url = base_url
-        self.api_token = api_token
+    def __init__(self, *args, **kwargs):
+        if 'pathname' not in kwargs:
+            raise ValueError('A pathname must be provided to create an ApiClient')
+
+        if 'base_url' in kwargs and kwargs['base_url']:
+            self.base_url = kwargs['base_url'] + kwargs['pathname']
+        elif len(args) > 0 and args[0]:
+            self.base_url = args[0] + kwargs['pathname']
+        else:
+            raise ValueError('A base_url must be provided to create an ApiClient')
+
+        if 'api_token' in kwargs and kwargs['api_token']:
+            self.api_token = kwargs['api_token']
+        elif len(args) > 1 and args[1]:
+            self.api_token = args[1]
+        else:
+            raise ValueError('An api_token must be provied to create an ApiClient')
+
         self.api_version = 1
         self.max_attempts = 4
-
-        if not self.base_url:
-            raise ValueError('Invalid base_url')
-
-        if not self.api_token:
-            raise ValueError('Invalid api_token')
 
         self.headers = {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'Authorization': 'SSWS ' + api_token
+            'Authorization': 'SSWS ' + self.api_token
         }
+
+        if 'headers' in kwargs:
+            self.headers.update(kwargs['headers'])
 
     def get(self, url, params=None, attempts=0):
         params_str = self.__dict_to_query_params(params)
@@ -36,9 +48,10 @@ class ApiClient(object):
             return self.get(url, params, attempts)
 
     def put(self, url, data=None, params=None, attempts=0):
-        d = json.dumps(data, cls=Serializer)
+        if data:
+            data = json.dumps(data, cls=Serializer)
         params_str = self.__dict_to_query_params(params)
-        resp = requests.put(url + params_str, data=d, headers=self.headers)
+        resp = requests.put(url + params_str, data=data, headers=self.headers)
         attempts += 1
         if self.__check_response(resp, attempts):
             return resp
@@ -46,9 +59,10 @@ class ApiClient(object):
             return self.put(url, data, params, attempts)
 
     def post(self, url, data=None, params=None, attempts=0):
-        d = json.dumps(data, cls=Serializer)
+        if data:
+            data = json.dumps(data, cls=Serializer, separators=(',', ':'))
         params_str = self.__dict_to_query_params(params)
-        resp = requests.post(url + params_str, data=d, headers=self.headers)
+        resp = requests.post(url + params_str, data=data, headers=self.headers)
         attempts += 1
         if self.__check_response(resp, attempts):
             return resp
