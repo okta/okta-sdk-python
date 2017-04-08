@@ -21,5 +21,16 @@ util.describe('/api/v1/users/:id/roles', (suite) => {
               path: `/api/v1/users/${user.id}/roles`
           }))
     );
+});
 
+util.describe('/api/v1/users/:id/roles/:rid', (suite) => {
+  suite.it('unassign role from user', req =>
+    req.get({path: '/api/v1/users/mocktestexample-frutis@mocktestexample.com'})
+      .then(user => {
+        req.get({path: `/api/v1/users/${user.id}/roles`})
+          .then(roles => {
+            req.del({path: `/api/v1/users/${user.id}/roles/${roles[0].id}`})
+          })
+      })
+    );
 });
