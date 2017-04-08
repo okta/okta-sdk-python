@@ -1,6 +1,7 @@
 from okta.framework.ApiClient import ApiClient
 from okta.framework.Utils import Utils
 from okta.models.role.Role import Role
+from okta.models.usergroup import UserGroup
 
 
 class AdminRolesClient(ApiClient):
@@ -36,10 +37,39 @@ class AdminRolesClient(ApiClient):
 
         :param uid: User id: str
         :param rid: Role id: str
-        :return: Role
+        :return: None
         """
-        response = ApiClient.delete_path(
+        ApiClient.delete_path(
             self,
             '/{uid}/roles/{rid}'.format(uid=uid, rid=rid)
         )
-        return Utils.deserialize(response.text, Role)
+
+    def get_group_targets_for_user_role_assignment(self, uid, rid):
+        """Lists all group targets for a USER_ADMIN role assignment.
+
+        :param uid: User id: str
+        :param rid: Role id: str
+        :return: list of Groups
+        """
+        response = ApiClient.get_path(
+            self,
+            '/{uid}/roles/{rid}/targets/groups'.format(uid=uid, rid=rid)
+        )
+        return Utils.deserialize(response.text, UserGroup)
+
+    def add_target_for_user_admin_role(self, uid, rid, gid):
+        """Adds a group target for a USER_ADMIN role assignment.
+
+        :param uid: User id: str
+        :param rid: Role id: str
+        :param gid: Group id: str
+        :return: None
+        """
+        ApiClient.put_path(
+            self,
+            '/{uid}/roles/{rid}/targets/groups/{gid}'.format(
+                uid=uid,
+                rid=rid,
+                gid=gid
+            )
+        )
