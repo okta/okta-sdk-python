@@ -14,6 +14,19 @@
   },
   {
     "profile": {
+      "firstName": "ApplicationRolus",
+      "lastName": "McJanky",
+      "email": "mocktestexample-applicationrolus@mocktestexample.com",
+      "login": "mocktestexample-applicationrolus@mocktestexample.com"
+    },
+    "credentials": {
+      "password": {
+        "value": "Asdf1234"
+      }
+    }
+  },
+  {
+    "profile": {
       "firstName": "Deletus",
       "lastName": "McJanky",
       "email": "mocktestexample-deleteme@mocktestexample.com",

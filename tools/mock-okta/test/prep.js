@@ -84,9 +84,34 @@ function createUpdateGroup() {
   }).then(group => console.log(`Test Prep: Created group ${group.profile.name}`));
 }
 
+// Creates an Application
+function createApplication() {
+  return req.post({
+    path: '/api/v1/apps',
+    body: {
+      label: 'Example Custom SWA App',
+      visibility: {
+        autoSubmitToolbar: false,
+        hide: {
+          iOS: false,
+          web: false
+        }
+      },
+      features: [],
+      signOnMode: 'AUTO_LOGIN',
+      settings: {
+        signOn: {
+          redirectUrl: 'http://swasecondaryredirecturl.okta.com',
+          loginUrl: 'http://swaprimaryloginurl.okta.com'
+        }
+      }
+    }
+  }).then(app => console.log(`Test Prep: Created application ${app.label}`));
+}
+
 Promise.all([
   createUsers(),
+  createApplication(),
   createDeleteGroup(),
   createUpdateGroup(),
-])
-.catch((err) => { throw new Error('Error:', err.message); });
+]).catch((err) => { throw new Error('Error:', err.message); });

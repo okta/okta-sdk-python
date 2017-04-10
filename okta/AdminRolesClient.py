@@ -1,5 +1,6 @@
 from okta.framework.ApiClient import ApiClient
 from okta.framework.Utils import Utils
+from okta.models.app.AppInstance import AppInstance
 from okta.models.role.Role import Role
 from okta.models.usergroup import UserGroup
 
@@ -57,7 +58,7 @@ class AdminRolesClient(ApiClient):
         )
         return Utils.deserialize(response.text, UserGroup)
 
-    def add_target_for_user_admin_role(self, uid, rid, gid):
+    def add_group_target_for_user_admin_role(self, uid, rid, gid):
         """Adds a group target for a USER_ADMIN role assignment.
 
         :param uid: User id: str
@@ -71,5 +72,69 @@ class AdminRolesClient(ApiClient):
                 uid=uid,
                 rid=rid,
                 gid=gid
+            )
+        )
+
+    def remove_group_target_from_user_admin_role(self, uid, rid, gid):
+        """Removes a group target from a USER_ADMIN role assignment.
+
+        :param uid: User id: str
+        :param rid: Role id: str
+        :param gid: Group id: str
+        :return: None
+        """
+        ApiClient.delete_path(
+            self,
+            '/{uid}/roles/{rid}/targets/groups/{gid}'.format(
+                uid=uid,
+                rid=rid,
+                gid=gid
+            )
+        )
+
+    def get_app_targets_for_app_role(self, uid, rid):
+        """Lists all app targets for an APP_ADMIN role assignment.
+
+                :param uid: User id: str
+                :param rid: Role id: str
+                :return: list of Catalog Apps
+                """
+        response = ApiClient.get_path(
+            self,
+            '/{uid}/roles/{rid}/targets/catalog/apps'.format(uid=uid, rid=rid)
+        )
+        return Utils.deserialize(response.text, AppInstance)
+
+    def add_app_target_to_app_admin_role(self, uid, rid, app_name):
+        """Adds a app target to an APP_ADMIN role assignment.
+
+        :param uid: User id: str
+        :param rid: Role id: str
+        :param app_name: App name: str
+        :return: None
+        """
+        ApiClient.put_path(
+            self,
+            '/{uid}/roles/{rid}/targets/catalog/apps/{app_name}'.format(
+                uid=uid,
+                rid=rid,
+                app_name=app_name
+            )
+        )
+
+    def remove_app_target_to_app_admin_role(self, uid, rid, app_name):
+        """Removes a app target to an APP_ADMIN role assignment.
+
+        :param uid: User id: str
+        :param rid: Role id: str
+        :param app_name: App name: str
+        :return: None
+        """
+        ApiClient.delete_path(
+            self,
+            '/{uid}/roles/{rid}/targets/catalog/apps/{app_name}'.format(
+                uid=uid,
+                rid=rid,
+                app_name=app_name
             )
         )
