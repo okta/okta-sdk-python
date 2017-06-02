@@ -1,0 +1,67 @@
+"""
+  THIS FILE IS AUTO GENERATED - SEE CONTRIBUTOR DOCUMENTATION
+"""
+{{#each properties}}
+{{# if (and model (or isObject isHash))}}
+from .{{snakeCase model}} import {{model}}
+{{/if}}
+{{/each}}
+
+
+class {{modelName}}(object):
+
+    def __init__(self, dictionary={}, client=None):
+        self._client = client
+
+        if isinstance(dictionary, dict):
+            self._map = dictionary
+        else:
+            self._map = dictionary._map
+
+    def get(self, key):
+        return self._map[key]
+
+    def set(self, key, value):
+        self._map[key] = value
+
+    {{#each properties}}
+    @property
+    def {{snakeCase propertyName}}(self):
+        {{#if isObject}}
+        if '{{propertyName}}' not in self._map:
+            self._map['{{propertyName}}'] = {}
+        return {{model}}(self._map['{{propertyName}}'], self._client)
+        {{/if}}
+        {{#if isHash}}
+        if '{{propertyName}}' not in self._map:
+            self._map['{{propertyName}}'] = {}
+        {{#if model}}
+
+        _dict = {}
+        for k, v in self._map['{{propertyName}}'].items():
+            _dict[k] = {{model}}(v, self._client)
+        return _dict
+        {{else}}
+        return self._map.get('{{propertyName}}')
+        {{/if}}
+        {{/if}}
+        {{#if isArray}}
+        if '{{propertyName}}' not in self._map:
+            self._map['{{propertyName}}'] = []
+        return self._map.get('{{propertyName}}')
+        {{/if}}
+        {{#unless (or (or isObject isHash) isArray)}}
+        return self._map.get('{{propertyName}}')
+        {{/unless}}
+    {{#unless readOnly}}
+
+    @{{snakeCase propertyName}}.setter
+    def {{snakeCase propertyName}}(self, val):
+        self._map['{{propertyName}}'] = val
+
+    @{{snakeCase propertyName}}.deleter
+    def {{snakeCase propertyName}}(self):
+        del self._map['{{propertyName}}']
+    {{/unless}}
+
+    {{/each}}

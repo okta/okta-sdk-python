@@ -1,0 +1,15 @@
+okta:
+  client:
+    cacheManager:
+      enabled: true
+      defaultTtl: 300 # seconds
+      defaultTti: 300
+      caches: { }
+    connectionTimeout: 30 # seconds
+    orgUrl: "https://dev-123456.oktapreview.com"
+    proxy:
+      port: null
+      host: null
+      username: null
+      password: null
+    token: "<your-api-token>"

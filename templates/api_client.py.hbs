@@ -1,0 +1,123 @@
+"""
+ THIS FILE IS AUTO GENERATED - SEE CONTRIBUTOR DOCUMENTATION
+"""
+import requests
+import os
+from .utils import Utils
+from .collection import Collection
+from .http import Http
+from .models import *
+from sys import version_info
+
+from okta import __version__ as OKTA_VERSION
+from platform import platform, mac_ver, win32_ver, linux_distribution, system
+
+
+class Client:
+
+    os_info = platform()
+    os_versions = {
+        'Linux': '{} ({})'.format(linux_distribution()[0], os_info),
+        'Windows': '{} ({})'.format(win32_ver()[0], os_info),
+        'Darwin': '{} ({})'.format(mac_ver()[0], os_info)
+    }
+
+    PYTHON_VERSION = '{}.{}.{}'.format(
+        version_info.major,
+        version_info.minor,
+        version_info.micro
+    )
+
+    USER_AGENT = 'okta-sdk-python/{} python/{} {}/{}'.format(
+        OKTA_VERSION,
+        PYTHON_VERSION,
+        system(),
+        os_versions.get(system(), ''),
+    )
+
+    def __init__(self, orgUrl=None, token=None, headers=None):
+
+        # Check primary configuration file locations and init
+        config = Utils.check_for_config()
+        if config.get('okta') and config.get('okta').get('client'):
+            # Found .yaml config file
+            for key in config['okta']['client']:
+                if key == 'orgUrl' or key == 'token':
+                    setattr(self, key, config['okta']['client'][key])
+        else:
+            # Check for environment variables - override args if found
+            if os.environ.get('OKTA_CLIENT'):
+                orgUrl = os.environ.get('OKTA_CLIENT')
+            if os.environ.get('OKTA_TOKEN'):
+                token = os.environ.get('OKTA_TOKEN')
+
+            # Check for client constructor configuration
+            params = {'orgUrl': orgUrl, 'token': token, 'headers': headers}
+            for key, value in params.items():
+                try:
+                    # See if attribute exists
+                    getattr(self, key)
+                except AttributeError:
+                    # If attribute doesn't exist, create it
+                    setattr(self, key, value)
+
+        # Set Authorization and User-Agent Header
+        try:
+            getattr(self, "headers")
+            # Set default header, unless overriden
+            self.headers['Authorization'] = self.headers.get(
+                'Authorization',
+                'SSWS {}'.format(self.token)
+            )
+            self.headers['User-Agent'] = self.headers.get(
+                'User-Agent',
+                self.USER_AGENT
+            )
+        except AttributeError:
+            self.headers = {
+                'Authorization': 'SSWS {}'.format(self.token),
+                'User-Agent': self.USER_AGENT
+            }
+        self.http = Http(self.headers)
+
+    {{#each operations}}
+    def {{snakeCase operationId}}({{{operationArgumentBuilder this}}}):
+        {{# if description}}
+        """ {{description}}
+        """
+        {{/if}}
+        url = self.orgUrl + "{{replacePathParams path}}"{{retrievePathParams path}}
+        {{#if queryParams.length}}
+        url += Utils.build_query_params(**kwargs)
+        {{/if}}
+        {{# if isArray}}
+        return Collection(self, url, {{responseModel}})
+        {{else}}
+        {{#if (eq method 'delete')}}
+        r = self.http.delete(url)
+        {{/if}}
+        {{#if (eq method 'get')}}
+        r = self.http.get(url)
+        {{/if}}
+        {{#if (eq method 'post')}}
+        {{#if bodyModel}}
+        r = self.http.post(url, data=Utils.to_json({{snakeCase bodyModel}}))
+        {{else}}
+        r = self.http.post(url)
+        {{/if}}
+        {{/if}}
+        {{#if (eq method 'put')}}
+        {{#if bodyModel}}
+        r = self.http.put(url, data=Utils.to_json({{snakeCase bodyModel}}))
+        {{else}}
+        r = self.http.put(url)
+        {{/if}}
+        {{/if}}
+        {{#if responseModel}}
+        return {{responseModel}}(Utils.validate_response(r), self)
+        {{else}}
+        return r
+        {{/if}}
+        {{/if}}
+
+        {{/each}}

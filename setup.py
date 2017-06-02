@@ -20,7 +20,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 setup(
     name='okta',
     version=version,
-    description='Okta client APIs',
+    description='Okta Management API Client',
     long_description=long_description,
     license='Apache License 2.0',
     author='Okta',
