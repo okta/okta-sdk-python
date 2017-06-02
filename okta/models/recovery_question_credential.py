@@ -19,6 +19,9 @@ class RecoveryQuestionCredential(object):
     def set(self, key, value):
         self._map[key] = value
 
+    def remove(self, key):
+        del self._map[key]
+
     @property
     def question(self):
         return self._map.get('question')
@@ -31,3 +34,5 @@ class RecoveryQuestionCredential(object):
     def question(self):
         del self._map['question']
 
+    def json(self):
+        return Utils.to_json(self)

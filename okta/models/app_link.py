@@ -19,6 +19,9 @@ class AppLink(object):
     def set(self, key, value):
         self._map[key] = value
 
+    def remove(self, key):
+        del self._map[key]
+
     @property
     def app_assignment_id(self):
         return self._map.get('appAssignmentId')
@@ -139,3 +142,5 @@ class AppLink(object):
     def sort_order(self):
         del self._map['sortOrder']
 
+    def json(self):
+        return Utils.to_json(self)

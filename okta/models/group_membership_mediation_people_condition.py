@@ -21,6 +21,9 @@ class GroupMembershipMediationPeopleCondition(object):
     def set(self, key, value):
         self._map[key] = value
 
+    def remove(self, key):
+        del self._map[key]
+
     @property
     def groups(self):
         if 'groups' not in self._map:
@@ -49,3 +52,5 @@ class GroupMembershipMediationPeopleCondition(object):
     def users(self):
         del self._map['users']
 
+    def json(self):
+        return Utils.to_json(self)

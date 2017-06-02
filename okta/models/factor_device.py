@@ -19,6 +19,9 @@ class FactorDevice(object):
     def set(self, key, value):
         self._map[key] = value
 
+    def remove(self, key):
+        del self._map[key]
+
     @property
     def id(self):
         return self._map.get('id')
@@ -57,3 +60,5 @@ class FactorDevice(object):
     def status(self):
         del self._map['status']
 
+    def json(self):
+        return Utils.to_json(self)

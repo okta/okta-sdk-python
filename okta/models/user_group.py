@@ -22,6 +22,9 @@ class UserGroup(object):
     def set(self, key, value):
         self._map[key] = value
 
+    def remove(self, key):
+        del self._map[key]
+
     @property
     def embedded(self):
         if '_embedded' not in self._map:
@@ -44,7 +47,9 @@ class UserGroup(object):
 
     @property
     def created(self):
-        return self._map.get('created')
+        if self._map.get('created'):
+            return Utils.parse_date(self._map.get('created'))
+        return None
 
     @property
     def id(self):
@@ -52,11 +57,15 @@ class UserGroup(object):
 
     @property
     def last_membership_updated(self):
-        return self._map.get('lastMembershipUpdated')
+        if self._map.get('lastMembershipUpdated'):
+            return Utils.parse_date(self._map.get('lastMembershipUpdated'))
+        return None
 
     @property
     def last_updated(self):
-        return self._map.get('lastUpdated')
+        if self._map.get('lastUpdated'):
+            return Utils.parse_date(self._map.get('lastUpdated'))
+        return None
 
     @property
     def object_class(self):
@@ -82,3 +91,5 @@ class UserGroup(object):
     def type(self):
         return self._map.get('type')
 
+    def json(self):
+        return Utils.to_json(self)

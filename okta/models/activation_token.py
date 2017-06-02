@@ -19,6 +19,9 @@ class ActivationToken(object):
     def set(self, key, value):
         self._map[key] = value
 
+    def remove(self, key):
+        del self._map[key]
+
     @property
     def activation_token(self):
         return self._map.get('activationToken')
@@ -43,3 +46,5 @@ class ActivationToken(object):
     def activation_url(self):
         del self._map['activationUrl']
 
+    def json(self):
+        return Utils.to_json(self)

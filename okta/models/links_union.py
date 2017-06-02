@@ -19,3 +19,8 @@ class LinksUnion(object):
     def set(self, key, value):
         self._map[key] = value
 
+    def remove(self, key):
+        del self._map[key]
+
+    def json(self):
+        return Utils.to_json(self)

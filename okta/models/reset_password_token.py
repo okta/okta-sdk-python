@@ -19,6 +19,9 @@ class ResetPasswordToken(object):
     def set(self, key, value):
         self._map[key] = value
 
+    def remove(self, key):
+        del self._map[key]
+
     @property
     def reset_password_url(self):
         return self._map.get('resetPasswordUrl')
@@ -31,3 +34,5 @@ class ResetPasswordToken(object):
     def reset_password_url(self):
         del self._map['resetPasswordUrl']
 
+    def json(self):
+        return Utils.to_json(self)

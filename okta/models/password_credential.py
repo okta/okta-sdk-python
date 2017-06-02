@@ -20,6 +20,9 @@ class PasswordCredential(object):
     def set(self, key, value):
         self._map[key] = value
 
+    def remove(self, key):
+        del self._map[key]
+
     @property
     def hash(self):
         if 'hash' not in self._map:
@@ -34,3 +37,5 @@ class PasswordCredential(object):
     def hash(self):
         del self._map['hash']
 
+    def json(self):
+        return Utils.to_json(self)

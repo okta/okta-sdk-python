@@ -3,63 +3,36 @@
 """
 import requests
 import os
-from .utils import Utils
-from .collection import Collection
-from .http import Http
+from .shared.okta_utils import Utils
+from .shared.collection import Collection
+from .shared.http import Http
 from .models import *
-from sys import version_info
-
-from okta import __version__ as OKTA_VERSION
-from platform import platform, mac_ver, win32_ver, linux_distribution, system
 
 
 class Client:
 
-    os_info = platform()
-    os_versions = {
-        'Linux': '{} ({})'.format(linux_distribution()[0], os_info),
-        'Windows': '{} ({})'.format(win32_ver()[0], os_info),
-        'Darwin': '{} ({})'.format(mac_ver()[0], os_info)
-    }
+    USER_AGENT = Utils.get_okta_user_agent()
 
-    PYTHON_VERSION = '{}.{}.{}'.format(
-        version_info.major,
-        version_info.minor,
-        version_info.micro
-    )
-
-    USER_AGENT = 'okta-sdk-python/{} python/{} {}/{}'.format(
-        OKTA_VERSION,
-        PYTHON_VERSION,
-        system(),
-        os_versions.get(system(), ''),
-    )
-
-    def __init__(self, orgUrl=None, token=None, headers=None):
-
-        # Check primary configuration file locations and init
-        config = Utils.check_for_config()
-        if config.get('okta') and config.get('okta').get('client'):
-            # Found .yaml config file
-            for key in config['okta']['client']:
-                if key == 'orgUrl' or key == 'token':
-                    setattr(self, key, config['okta']['client'][key])
+    def __init__(self, **kwargs):
+        
+        # Set configuration values from kwargs
+        if kwargs:
+            self.__dict__.update(kwargs)
         else:
-            # Check for environment variables - override args if found
-            if os.environ.get('OKTA_CLIENT'):
-                orgUrl = os.environ.get('OKTA_CLIENT')
-            if os.environ.get('OKTA_TOKEN'):
-                token = os.environ.get('OKTA_TOKEN')
-
-            # Check for client constructor configuration
-            params = {'orgUrl': orgUrl, 'token': token, 'headers': headers}
-            for key, value in params.items():
-                try:
-                    # See if attribute exists
-                    getattr(self, key)
-                except AttributeError:
-                    # If attribute doesn't exist, create it
-                    setattr(self, key, value)
+            # Default
+            self.__dict__.update(
+                {
+                    'orgUrl': None,
+                    'token': None,
+                    'headers': None
+                }
+            )
+        
+        for key, value in self.__dict__.items():
+            # Verify each attr is set
+            if value is None:
+                # Get environment or yaml config
+                setattr(self, key, Utils.get_config(key))
 
         # Set Authorization and User-Agent Header
         try:
@@ -74,6 +47,7 @@ class Client:
                 self.USER_AGENT
             )
         except AttributeError:
+            # Set default headers
             self.headers = {
                 'Authorization': 'SSWS {}'.format(self.token),
                 'User-Agent': self.USER_AGENT
@@ -81,28 +55,32 @@ class Client:
         self.http = Http(self.headers)
 
     def list_groups(self, **kwargs):
-        """ Enumerates groups in your organization with pagination. A subset of groups can be returned that match a supported filter expression or query.
+        """
+        Enumerates groups in your organization with pagination. A subset of groups can be returned that match a supported filter expression or query.
         """
         url = self.orgUrl + "/api/v1/groups"
         url += Utils.build_query_params(**kwargs)
         return Collection(self, url, UserGroup)
 
     def create_group(self, user_group):
-        """ Adds a new group with &#x60;OKTA_GROUP&#x60; type to your organization.
+        """
+        Adds a new group with `OKTA_GROUP` type to your organization.
         """
         url = self.orgUrl + "/api/v1/groups"
         r = self.http.post(url, data=Utils.to_json(user_group))
         return UserGroup(Utils.validate_response(r), self)
 
     def list_rules(self, **kwargs):
-        """ Lists all group rules for your organization.
+        """
+        Lists all group rules for your organization.
         """
         url = self.orgUrl + "/api/v1/groups/rules"
         url += Utils.build_query_params(**kwargs)
         return Collection(self, url, GroupMembershipMediationRule)
 
     def create_rule(self, group_membership_mediation_rule):
-        """ Creates a group rule to dynamically add users to the specified group if they match the condition
+        """
+        Creates a group rule to dynamically add users to the specified group if they match the condition
         """
         url = self.orgUrl + "/api/v1/groups/rules"
         r = self.http.post(url, data=Utils.to_json(group_membership_mediation_rule))
@@ -171,14 +149,16 @@ class Client:
         return r
 
     def list_users(self, **kwargs):
-        """ Lists users in your organization with pagination in most cases.  A subset of users can be returned that match a supported filter expression or search criteria.
+        """
+        Lists users in your organization with pagination in most cases.  A subset of users can be returned that match a supported filter expression or search criteria.
         """
         url = self.orgUrl + "/api/v1/users"
         url += Utils.build_query_params(**kwargs)
         return Collection(self, url, User)
 
     def create_user(self, user, **kwargs):
-        """ Creates a new user in your Okta organization with or without credentials.
+        """
+        Creates a new user in your Okta organization with or without credentials.
         """
         url = self.orgUrl + "/api/v1/users"
         url += Utils.build_query_params(**kwargs)

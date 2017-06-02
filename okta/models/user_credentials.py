@@ -22,6 +22,9 @@ class UserCredentials(object):
     def set(self, key, value):
         self._map[key] = value
 
+    def remove(self, key):
+        del self._map[key]
+
     @property
     def password(self):
         if 'password' not in self._map:
@@ -56,3 +59,5 @@ class UserCredentials(object):
     def recovery_question(self):
         del self._map['recovery_question']
 
+    def json(self):
+        return Utils.to_json(self)

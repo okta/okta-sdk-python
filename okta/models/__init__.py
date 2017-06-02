@@ -26,4 +26,3 @@ from .user_group import UserGroup
 from .user_group_profile import UserGroupProfile
 from .user_group_stats import UserGroupStats
 from .user_profile import UserProfile
-

@@ -19,6 +19,9 @@ class GroupMembershipMediationExpressionCondition(object):
     def set(self, key, value):
         self._map[key] = value
 
+    def remove(self, key):
+        del self._map[key]
+
     @property
     def type(self):
         return self._map.get('type')
@@ -43,3 +46,5 @@ class GroupMembershipMediationExpressionCondition(object):
     def value(self):
         del self._map['value']
 
+    def json(self):
+        return Utils.to_json(self)

@@ -24,6 +24,9 @@ class {{modelName}}(object):
     def set(self, key, value):
         self._map[key] = value
 
+    def remove(self, key):
+        del self._map[key]
+
     {{#each properties}}
     @property
     def {{snakeCase propertyName}}(self):
@@ -51,7 +54,13 @@ class {{modelName}}(object):
         return self._map.get('{{propertyName}}')
         {{/if}}
         {{#unless (or (or isObject isHash) isArray)}}
+        {{#if (eq commonType 'dateTime')}}
+        if self._map.get('{{propertyName}}'):
+            return Utils.parse_date(self._map.get('{{propertyName}}'))
+        return None
+        {{else}}
         return self._map.get('{{propertyName}}')
+        {{/if}}
         {{/unless}}
     {{#unless readOnly}}
 
@@ -65,3 +74,5 @@ class {{modelName}}(object):
     {{/unless}}
 
     {{/each}}
+    def json(self):
+        return Utils.to_json(self)

@@ -21,6 +21,9 @@ class ChangePasswordCredentials(object):
     def set(self, key, value):
         self._map[key] = value
 
+    def remove(self, key):
+        del self._map[key]
+
     @property
     def new_password(self):
         if 'newPassword' not in self._map:
@@ -49,3 +52,5 @@ class ChangePasswordCredentials(object):
     def old_password(self):
         del self._map['oldPassword']
 
+    def json(self):
+        return Utils.to_json(self)

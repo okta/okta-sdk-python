@@ -19,6 +19,9 @@ class UserProfile(object):
     def set(self, key, value):
         self._map[key] = value
 
+    def remove(self, key):
+        del self._map[key]
+
     @property
     def email(self):
         return self._map.get('email')
@@ -91,3 +94,5 @@ class UserProfile(object):
     def second_email(self):
         del self._map['secondEmail']
 
+    def json(self):
+        return Utils.to_json(self)

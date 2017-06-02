@@ -21,6 +21,9 @@ class GroupMembershipMediationRule(object):
     def set(self, key, value):
         self._map[key] = value
 
+    def remove(self, key):
+        del self._map[key]
+
     @property
     def actions(self):
         if 'actions' not in self._map:
@@ -121,3 +124,5 @@ class GroupMembershipMediationRule(object):
     def type(self):
         del self._map['type']
 
+    def json(self):
+        return Utils.to_json(self)

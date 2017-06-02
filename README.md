@@ -91,8 +91,13 @@ activated_user = client.get_user('activated_user@example.com')
 client.deactivate_or_delete_user(activated_user.id)
 
 # Delete a user (only if user is DEACTIVATED)
-dectivated_user = client.get_user('deactivated_user@example.com')
+deactivated_user = client.get_user('deactivated_user@example.com')
 client.deactivate_or_delete_user(deactivated_user.id)
+
+# Add a user to a group
+group_user = client.get_user('group_user@example.com')
+group = client.list_groups(q='group_name')
+client.add_user_to_group(group.next().id, group_user.id)
 ```
 
 ### Contributing

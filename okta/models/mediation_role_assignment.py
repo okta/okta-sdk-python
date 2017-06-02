@@ -20,6 +20,9 @@ class MediationRoleAssignment(object):
     def set(self, key, value):
         self._map[key] = value
 
+    def remove(self, key):
+        del self._map[key]
+
     @property
     def embedded(self):
         if '_embedded' not in self._map:
@@ -32,7 +35,9 @@ class MediationRoleAssignment(object):
 
     @property
     def created(self):
-        return self._map.get('created')
+        if self._map.get('created'):
+            return Utils.parse_date(self._map.get('created'))
+        return None
 
     @property
     def description(self):
@@ -56,7 +61,9 @@ class MediationRoleAssignment(object):
 
     @property
     def last_updated(self):
-        return self._map.get('lastUpdated')
+        if self._map.get('lastUpdated'):
+            return Utils.parse_date(self._map.get('lastUpdated'))
+        return None
 
     @property
     def status(self):
@@ -66,3 +73,5 @@ class MediationRoleAssignment(object):
     def type(self):
         return self._map.get('type')
 
+    def json(self):
+        return Utils.to_json(self)

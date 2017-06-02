@@ -19,6 +19,9 @@ class AssignUserToGroupsMediationAction(object):
     def set(self, key, value):
         self._map[key] = value
 
+    def remove(self, key):
+        del self._map[key]
+
     @property
     def group_ids(self):
         if 'groupIds' not in self._map:
@@ -33,3 +36,5 @@ class AssignUserToGroupsMediationAction(object):
     def group_ids(self):
         del self._map['groupIds']
 
+    def json(self):
+        return Utils.to_json(self)

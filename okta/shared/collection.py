@@ -1,4 +1,4 @@
-from .utils import Utils
+from .okta_utils import Utils
 
 
 def Collection(client, url, model):

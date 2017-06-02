@@ -33,13 +33,10 @@ setup(
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.6',
         'License :: OSI Approved :: Apache Software License'],
     packages=find_packages(),
     install_requires=[
-        'requests>=2.5.3',
-        'python-dateutil>=2.4.2',
-        'six>=1.9.0'
+        'requests>=2.5.3'
     ]
 )

@@ -3,63 +3,36 @@
 """
 import requests
 import os
-from .utils import Utils
-from .collection import Collection
-from .http import Http
+from .shared.okta_utils import Utils
+from .shared.collection import Collection
+from .shared.http import Http
 from .models import *
-from sys import version_info
-
-from okta import __version__ as OKTA_VERSION
-from platform import platform, mac_ver, win32_ver, linux_distribution, system
 
 
 class Client:
 
-    os_info = platform()
-    os_versions = {
-        'Linux': '{} ({})'.format(linux_distribution()[0], os_info),
-        'Windows': '{} ({})'.format(win32_ver()[0], os_info),
-        'Darwin': '{} ({})'.format(mac_ver()[0], os_info)
-    }
+    USER_AGENT = Utils.get_okta_user_agent()
 
-    PYTHON_VERSION = '{}.{}.{}'.format(
-        version_info.major,
-        version_info.minor,
-        version_info.micro
-    )
-
-    USER_AGENT = 'okta-sdk-python/{} python/{} {}/{}'.format(
-        OKTA_VERSION,
-        PYTHON_VERSION,
-        system(),
-        os_versions.get(system(), ''),
-    )
-
-    def __init__(self, orgUrl=None, token=None, headers=None):
-
-        # Check primary configuration file locations and init
-        config = Utils.check_for_config()
-        if config.get('okta') and config.get('okta').get('client'):
-            # Found .yaml config file
-            for key in config['okta']['client']:
-                if key == 'orgUrl' or key == 'token':
-                    setattr(self, key, config['okta']['client'][key])
+    def __init__(self, **kwargs):
+        
+        # Set configuration values from kwargs
+        if kwargs:
+            self.__dict__.update(kwargs)
         else:
-            # Check for environment variables - override args if found
-            if os.environ.get('OKTA_CLIENT'):
-                orgUrl = os.environ.get('OKTA_CLIENT')
-            if os.environ.get('OKTA_TOKEN'):
-                token = os.environ.get('OKTA_TOKEN')
-
-            # Check for client constructor configuration
-            params = {'orgUrl': orgUrl, 'token': token, 'headers': headers}
-            for key, value in params.items():
-                try:
-                    # See if attribute exists
-                    getattr(self, key)
-                except AttributeError:
-                    # If attribute doesn't exist, create it
-                    setattr(self, key, value)
+            # Default
+            self.__dict__.update(
+                {
+                    'orgUrl': None,
+                    'token': None,
+                    'headers': None
+                }
+            )
+        
+        for key, value in self.__dict__.items():
+            # Verify each attr is set
+            if value is None:
+                # Get environment or yaml config
+                setattr(self, key, Utils.get_config(key))
 
         # Set Authorization and User-Agent Header
         try:
@@ -74,6 +47,7 @@ class Client:
                 self.USER_AGENT
             )
         except AttributeError:
+            # Set default headers
             self.headers = {
                 'Authorization': 'SSWS {}'.format(self.token),
                 'User-Agent': self.USER_AGENT
@@ -83,7 +57,8 @@ class Client:
     {{#each operations}}
     def {{snakeCase operationId}}({{{operationArgumentBuilder this}}}):
         {{# if description}}
-        """ {{description}}
+        """
+        {{{description}}}
         """
         {{/if}}
         url = self.orgUrl + "{{replacePathParams path}}"{{retrievePathParams path}}

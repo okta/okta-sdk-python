@@ -20,6 +20,9 @@ class UserGroupStats(object):
     def set(self, key, value):
         self._map[key] = value
 
+    def remove(self, key):
+        del self._map[key]
+
     @property
     def links(self):
         if '_links' not in self._map:
@@ -66,3 +69,5 @@ class UserGroupStats(object):
     def users_count(self):
         del self._map['usersCount']
 
+    def json(self):
+        return Utils.to_json(self)

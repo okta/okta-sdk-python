@@ -19,6 +19,9 @@ class AuthProvider(object):
     def set(self, key, value):
         self._map[key] = value
 
+    def remove(self, key):
+        del self._map[key]
+
     @property
     def name(self):
         return self._map.get('name')
@@ -27,3 +30,5 @@ class AuthProvider(object):
     def type(self):
         return self._map.get('type')
 
+    def json(self):
+        return Utils.to_json(self)

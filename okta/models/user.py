@@ -23,6 +23,9 @@ class User(object):
     def set(self, key, value):
         self._map[key] = value
 
+    def remove(self, key):
+        del self._map[key]
+
     @property
     def embedded(self):
         if '_embedded' not in self._map:
@@ -45,11 +48,15 @@ class User(object):
 
     @property
     def activated(self):
-        return self._map.get('activated')
+        if self._map.get('activated'):
+            return Utils.parse_date(self._map.get('activated'))
+        return None
 
     @property
     def created(self):
-        return self._map.get('created')
+        if self._map.get('created'):
+            return Utils.parse_date(self._map.get('created'))
+        return None
 
     @property
     def credentials(self):
@@ -71,15 +78,21 @@ class User(object):
 
     @property
     def last_login(self):
-        return self._map.get('lastLogin')
+        if self._map.get('lastLogin'):
+            return Utils.parse_date(self._map.get('lastLogin'))
+        return None
 
     @property
     def last_updated(self):
-        return self._map.get('lastUpdated')
+        if self._map.get('lastUpdated'):
+            return Utils.parse_date(self._map.get('lastUpdated'))
+        return None
 
     @property
     def password_changed(self):
-        return self._map.get('passwordChanged')
+        if self._map.get('passwordChanged'):
+            return Utils.parse_date(self._map.get('passwordChanged'))
+        return None
 
     @property
     def profile(self):
@@ -101,9 +114,13 @@ class User(object):
 
     @property
     def status_changed(self):
-        return self._map.get('statusChanged')
+        if self._map.get('statusChanged'):
+            return Utils.parse_date(self._map.get('statusChanged'))
+        return None
 
     @property
     def transitioning_to_status(self):
         return self._map.get('transitioningToStatus')
 
+    def json(self):
+        return Utils.to_json(self)

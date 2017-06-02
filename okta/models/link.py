@@ -19,6 +19,9 @@ class Link(object):
     def set(self, key, value):
         self._map[key] = value
 
+    def remove(self, key):
+        del self._map[key]
+
     @property
     def hints(self):
         if 'hints' not in self._map:
@@ -117,3 +120,5 @@ class Link(object):
     def type(self):
         del self._map['type']
 
+    def json(self):
+        return Utils.to_json(self)
