@@ -42,7 +42,7 @@ okta:
 #### Client Creation
 Once your configuration is specified, you can create your client:
 ```python
-from .okta.api_client import Client
+from okta.api_client import Client
 
 # Create client from .yaml config or environment variables
 client = Client()

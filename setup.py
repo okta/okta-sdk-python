@@ -1,25 +1,18 @@
 from setuptools import setup, find_packages
 from codecs import open
 from os import path
-import ast
-import re
 
-# Find the version in the package's __init__.py
-_version_re = re.compile(r'__version__\s+=\s+(.*)')
-
-here = path.abspath(path.dirname(__file__))
-
-with open(path.join(here, 'okta', '__init__.py'), 'rb') as f:
-    version = str(ast.literal_eval(_version_re.search(
-        f.read().decode('utf-8')).group(1)))
+from okta import __version__ as OKTA_VERSION
 
 # Get the long description
-with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
+abs_path = path.abspath(path.dirname(__file__))
+readme_path = path.join(abs_path, 'README.md')
+with open(readme_path, encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
     name='okta',
-    version=version,
+    version=OKTA_VERSION,
     description='Okta Management API Client',
     long_description=long_description,
     license='Apache License 2.0',
@@ -37,6 +30,9 @@ setup(
         'License :: OSI Approved :: Apache Software License'],
     packages=find_packages(),
     install_requires=[
-        'requests>=2.5.3'
+        'requests>=2.5.3',
+        'PyYAML>=3.12',
+        'python-dateutil>=2.4.2',
+        'future>=0.16.0',
     ]
 )
