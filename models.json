@@ -1,0 +1,2022 @@
+[
+  {
+    "modelName": "AppLink",
+    "properties": [
+      {
+        "propertyName": "appAssignmentId",
+        "commonType": "string"
+      },
+      {
+        "propertyName": "appInstanceId",
+        "commonType": "string"
+      },
+      {
+        "propertyName": "appName",
+        "commonType": "string"
+      },
+      {
+        "propertyName": "credentialsSetup",
+        "commonType": "boolean"
+      },
+      {
+        "propertyName": "hidden",
+        "commonType": "boolean"
+      },
+      {
+        "propertyName": "id",
+        "commonType": "string"
+      },
+      {
+        "propertyName": "label",
+        "commonType": "string"
+      },
+      {
+        "propertyName": "linkUrl",
+        "commonType": "string"
+      },
+      {
+        "propertyName": "logoUrl",
+        "commonType": "string"
+      },
+      {
+        "propertyName": "sortOrder",
+        "commonType": "integer"
+      }
+    ],
+    "methods": [],
+    "crud": [],
+    "tags": [
+      "User"
+    ]
+  },
+  {
+    "modelName": "AuthenticationProvider",
+    "properties": [
+      {
+        "propertyName": "name",
+        "commonType": "string"
+      },
+      {
+        "$ref": "#/definitions/AuthenticationProviderType",
+        "propertyName": "type",
+        "commonType": "object",
+        "isObject": true,
+        "model": "AuthenticationProviderType"
+      }
+    ],
+    "methods": [],
+    "crud": [],
+    "tags": [
+      "User"
+    ]
+  },
+  {
+    "modelName": "AuthenticationProviderType",
+    "enum": [
+      "ACTIVE_DIRECTORY",
+      "FEDERATION",
+      "LDAP",
+      "OKTA",
+      "SOCIAL",
+      "IMPORT"
+    ],
+    "tags": [
+      "User"
+    ]
+  },
+  {
+    "modelName": "ChangePasswordRequest",
+    "properties": [
+      {
+        "$ref": "#/definitions/PasswordCredential",
+        "propertyName": "newPassword",
+        "commonType": "object",
+        "isObject": true,
+        "model": "PasswordCredential"
+      },
+      {
+        "$ref": "#/definitions/PasswordCredential",
+        "propertyName": "oldPassword",
+        "commonType": "object",
+        "isObject": true,
+        "model": "PasswordCredential"
+      }
+    ],
+    "methods": [],
+    "crud": [],
+    "tags": [
+      "User"
+    ]
+  },
+  {
+    "modelName": "ForgotPasswordResponse",
+    "properties": [
+      {
+        "propertyName": "resetPasswordUrl",
+        "commonType": "string"
+      }
+    ],
+    "methods": [],
+    "crud": [],
+    "tags": [
+      "User"
+    ]
+  },
+  {
+    "modelName": "Group",
+    "properties": [
+      {
+        "readOnly": true,
+        "propertyName": "_embedded",
+        "commonType": "hash",
+        "isHash": true,
+        "model": "object"
+      },
+      {
+        "readOnly": true,
+        "propertyName": "_links",
+        "commonType": "hash",
+        "isHash": true,
+        "model": "object"
+      },
+      {
+        "readOnly": true,
+        "propertyName": "created",
+        "commonType": "dateTime"
+      },
+      {
+        "readOnly": true,
+        "propertyName": "id",
+        "commonType": "string"
+      },
+      {
+        "readOnly": true,
+        "propertyName": "lastMembershipUpdated",
+        "commonType": "dateTime"
+      },
+      {
+        "readOnly": true,
+        "propertyName": "lastUpdated",
+        "commonType": "dateTime"
+      },
+      {
+        "readOnly": true,
+        "propertyName": "objectClass",
+        "commonType": "array",
+        "isArray": true,
+        "model": "string"
+      },
+      {
+        "$ref": "#/definitions/GroupProfile",
+        "propertyName": "profile",
+        "commonType": "object",
+        "isObject": true,
+        "model": "GroupProfile"
+      },
+      {
+        "readOnly": true,
+        "propertyName": "type",
+        "commonType": "string"
+      }
+    ],
+    "methods": [
+      {
+        "alias": "getStats",
+        "arguments": [
+          {
+            "dest": "groupId",
+            "src": "id"
+          }
+        ],
+        "operation": {
+          "path": "/api/v1/groups/{groupId}/stats",
+          "method": "get",
+          "queryParams": [],
+          "pathParams": [
+            {
+              "in": "path",
+              "name": "groupId",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "operationId": "getGroupStats",
+          "tags": [
+            "Group"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responseModel": "GroupStats"
+        }
+      },
+      {
+        "alias": "removeUser",
+        "arguments": [
+          {
+            "dest": "groupId",
+            "src": "id"
+          }
+        ],
+        "operation": {
+          "path": "/api/v1/groups/{groupId}/users/{userId}",
+          "method": "delete",
+          "queryParams": [],
+          "pathParams": [
+            {
+              "in": "path",
+              "name": "groupId",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "path",
+              "name": "userId",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "operationId": "removeGroupUser",
+          "tags": [
+            "Group"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ]
+        }
+      },
+      {
+        "alias": "listUsers",
+        "arguments": [
+          {
+            "dest": "groupId",
+            "src": "id"
+          }
+        ],
+        "operation": {
+          "path": "/api/v1/groups/{groupId}/users",
+          "method": "get",
+          "queryParams": [
+            {
+              "in": "query",
+              "name": "after",
+              "type": "string"
+            },
+            {
+              "default": -1,
+              "format": "int32",
+              "in": "query",
+              "name": "limit",
+              "type": "integer"
+            }
+          ],
+          "pathParams": [
+            {
+              "in": "path",
+              "name": "groupId",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "operationId": "listGroupUsers",
+          "tags": [
+            "Group"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responseModel": "User",
+          "isArray": true
+        }
+      }
+    ],
+    "crud": [
+      {
+        "alias": "update",
+        "arguments": [
+          {
+            "dest": "groupId",
+            "src": "id"
+          },
+          {
+            "dest": "body",
+            "self": true
+          }
+        ],
+        "operation": {
+          "path": "/api/v1/groups/{groupId}",
+          "method": "put",
+          "queryParams": [],
+          "pathParams": [
+            {
+              "in": "path",
+              "name": "groupId",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "operationId": "updateGroup",
+          "tags": [
+            "Group"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "bodyModel": "Group",
+          "responseModel": "Group"
+        }
+      },
+      {
+        "alias": "delete",
+        "arguments": [
+          {
+            "dest": "groupId",
+            "src": "id"
+          }
+        ],
+        "operation": {
+          "path": "/api/v1/groups/{groupId}",
+          "method": "delete",
+          "queryParams": [],
+          "pathParams": [
+            {
+              "in": "path",
+              "name": "groupId",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "operationId": "deleteGroup",
+          "tags": [
+            "Group"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ]
+        }
+      }
+    ],
+    "tags": [
+      "Group"
+    ]
+  },
+  {
+    "modelName": "GroupProfile",
+    "properties": [
+      {
+        "propertyName": "description",
+        "commonType": "string"
+      },
+      {
+        "propertyName": "name",
+        "commonType": "string"
+      }
+    ],
+    "methods": [],
+    "crud": [],
+    "tags": [
+      "Group"
+    ]
+  },
+  {
+    "modelName": "GroupRule",
+    "properties": [
+      {
+        "$ref": "#/definitions/GroupRuleAction",
+        "propertyName": "actions",
+        "commonType": "object",
+        "isObject": true,
+        "model": "GroupRuleAction"
+      },
+      {
+        "$ref": "#/definitions/GroupRuleConditions",
+        "propertyName": "conditions",
+        "commonType": "object",
+        "isObject": true,
+        "model": "GroupRuleConditions"
+      },
+      {
+        "propertyName": "created",
+        "commonType": "string"
+      },
+      {
+        "propertyName": "id",
+        "commonType": "string"
+      },
+      {
+        "propertyName": "lastUpdated",
+        "commonType": "string"
+      },
+      {
+        "propertyName": "name",
+        "commonType": "string"
+      },
+      {
+        "$ref": "#/definitions/GroupRuleStatus",
+        "readOnly": true,
+        "propertyName": "status",
+        "commonType": "object",
+        "isObject": true,
+        "model": "GroupRuleStatus"
+      },
+      {
+        "propertyName": "type",
+        "commonType": "string"
+      }
+    ],
+    "methods": [
+      {
+        "alias": "activate",
+        "arguments": [
+          {
+            "dest": "ruleId",
+            "src": "id"
+          }
+        ],
+        "operation": {
+          "path": "/api/v1/groups/rules/{ruleId}/lifecycle/activate",
+          "method": "post",
+          "queryParams": [],
+          "pathParams": [
+            {
+              "in": "path",
+              "name": "ruleId",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "operationId": "activateRule",
+          "tags": [
+            "Group"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ]
+        }
+      },
+      {
+        "alias": "deactivate",
+        "arguments": [
+          {
+            "dest": "ruleId",
+            "src": "id"
+          }
+        ],
+        "operation": {
+          "path": "/api/v1/groups/rules/{ruleId}/lifecycle/deactivate",
+          "method": "post",
+          "queryParams": [],
+          "pathParams": [
+            {
+              "in": "path",
+              "name": "ruleId",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "operationId": "deactivateRule",
+          "tags": [
+            "Group"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ]
+        }
+      }
+    ],
+    "crud": [
+      {
+        "alias": "update",
+        "arguments": [
+          {
+            "dest": "ruleId",
+            "src": "id"
+          },
+          {
+            "dest": "body",
+            "self": true
+          }
+        ],
+        "operation": {
+          "path": "/api/v1/groups/rules/{ruleId}",
+          "method": "put",
+          "queryParams": [],
+          "pathParams": [
+            {
+              "in": "path",
+              "name": "ruleId",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "operationId": "updateRule",
+          "tags": [
+            "Group"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "bodyModel": "GroupRule",
+          "responseModel": "GroupRule"
+        }
+      },
+      {
+        "alias": "delete",
+        "arguments": [
+          {
+            "dest": "ruleId",
+            "src": "id"
+          }
+        ],
+        "operation": {
+          "path": "/api/v1/groups/rules/{ruleId}",
+          "method": "delete",
+          "queryParams": [
+            {
+              "in": "query",
+              "name": "removeUsers",
+              "type": "boolean"
+            }
+          ],
+          "pathParams": [
+            {
+              "in": "path",
+              "name": "ruleId",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "operationId": "deleteRule",
+          "tags": [
+            "Group"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ]
+        }
+      }
+    ],
+    "tags": [
+      "GroupRule"
+    ]
+  },
+  {
+    "modelName": "GroupRuleAction",
+    "properties": [
+      {
+        "$ref": "#/definitions/GroupRuleGroupAssignment",
+        "propertyName": "assignUserToGroups",
+        "commonType": "object",
+        "isObject": true,
+        "model": "GroupRuleGroupAssignment"
+      }
+    ],
+    "methods": [],
+    "crud": [],
+    "tags": [
+      "GroupRule"
+    ]
+  },
+  {
+    "modelName": "GroupRuleConditions",
+    "properties": [
+      {
+        "$ref": "#/definitions/GroupRuleExpression",
+        "propertyName": "expression",
+        "commonType": "object",
+        "isObject": true,
+        "model": "GroupRuleExpression"
+      },
+      {
+        "$ref": "#/definitions/GroupRuleGroupCondition",
+        "propertyName": "groups",
+        "commonType": "object",
+        "isObject": true,
+        "model": "GroupRuleGroupCondition"
+      },
+      {
+        "$ref": "#/definitions/GroupRulePeopleCondition",
+        "propertyName": "people",
+        "commonType": "object",
+        "isObject": true,
+        "model": "GroupRulePeopleCondition"
+      },
+      {
+        "$ref": "#/definitions/GroupRuleUserCondition",
+        "propertyName": "users",
+        "commonType": "object",
+        "isObject": true,
+        "model": "GroupRuleUserCondition"
+      }
+    ],
+    "methods": [],
+    "crud": [],
+    "tags": [
+      "GroupRule"
+    ]
+  },
+  {
+    "modelName": "GroupRuleExpression",
+    "properties": [
+      {
+        "propertyName": "type",
+        "commonType": "string"
+      },
+      {
+        "propertyName": "value",
+        "commonType": "string"
+      }
+    ],
+    "methods": [],
+    "crud": [],
+    "tags": [
+      "GroupRule"
+    ]
+  },
+  {
+    "modelName": "GroupRuleGroupAssignment",
+    "properties": [
+      {
+        "propertyName": "groupIds",
+        "commonType": "array",
+        "isArray": true,
+        "model": "string"
+      }
+    ],
+    "methods": [],
+    "crud": [],
+    "tags": [
+      "GroupRule"
+    ]
+  },
+  {
+    "modelName": "GroupRuleGroupCondition",
+    "properties": [
+      {
+        "propertyName": "exclude",
+        "commonType": "array",
+        "isArray": true,
+        "model": "string"
+      },
+      {
+        "propertyName": "include",
+        "commonType": "array",
+        "isArray": true,
+        "model": "string"
+      }
+    ],
+    "methods": [],
+    "crud": [],
+    "tags": [
+      "GroupRule"
+    ]
+  },
+  {
+    "modelName": "GroupRulePeopleCondition",
+    "properties": [
+      {
+        "$ref": "#/definitions/GroupRuleGroupCondition",
+        "propertyName": "groups",
+        "commonType": "object",
+        "isObject": true,
+        "model": "GroupRuleGroupCondition"
+      },
+      {
+        "$ref": "#/definitions/GroupRuleUserCondition",
+        "propertyName": "users",
+        "commonType": "object",
+        "isObject": true,
+        "model": "GroupRuleUserCondition"
+      }
+    ],
+    "methods": [],
+    "crud": [],
+    "tags": [
+      "GroupRule"
+    ]
+  },
+  {
+    "modelName": "GroupRuleStatus",
+    "enum": [
+      "ACTIVE",
+      "INACTIVE",
+      "INVALID"
+    ],
+    "tags": [
+      "GroupRule"
+    ]
+  },
+  {
+    "modelName": "GroupRuleUserCondition",
+    "properties": [
+      {
+        "propertyName": "exclude",
+        "commonType": "array",
+        "isArray": true,
+        "model": "string"
+      },
+      {
+        "propertyName": "include",
+        "commonType": "array",
+        "isArray": true,
+        "model": "string"
+      }
+    ],
+    "methods": [],
+    "crud": [],
+    "tags": [
+      "GroupRule"
+    ]
+  },
+  {
+    "modelName": "GroupStats",
+    "properties": [
+      {
+        "readOnly": true,
+        "propertyName": "_links",
+        "commonType": "hash",
+        "isHash": true,
+        "model": "object"
+      },
+      {
+        "propertyName": "appsCount",
+        "commonType": "integer"
+      },
+      {
+        "propertyName": "groupPushMappingsCount",
+        "commonType": "integer"
+      },
+      {
+        "propertyName": "usersCount",
+        "commonType": "integer"
+      }
+    ],
+    "methods": [],
+    "crud": [],
+    "tags": [
+      "Group"
+    ]
+  },
+  {
+    "modelName": "PasswordCredential",
+    "properties": [
+      {
+        "propertyName": "value",
+        "commonType": "string"
+      }
+    ],
+    "methods": [],
+    "crud": [],
+    "tags": [
+      "User"
+    ]
+  },
+  {
+    "modelName": "RecoveryQuestionCredential",
+    "properties": [
+      {
+        "propertyName": "answer",
+        "commonType": "string"
+      },
+      {
+        "propertyName": "question",
+        "commonType": "string"
+      }
+    ],
+    "methods": [],
+    "crud": [],
+    "tags": [
+      "User"
+    ]
+  },
+  {
+    "modelName": "ResetPasswordToken",
+    "properties": [
+      {
+        "propertyName": "resetPasswordUrl",
+        "commonType": "string"
+      }
+    ],
+    "methods": [],
+    "crud": [],
+    "tags": [
+      "User"
+    ]
+  },
+  {
+    "modelName": "Role",
+    "properties": [
+      {
+        "readOnly": true,
+        "propertyName": "_embedded",
+        "commonType": "hash",
+        "isHash": true,
+        "model": "object"
+      },
+      {
+        "readOnly": true,
+        "propertyName": "created",
+        "commonType": "dateTime"
+      },
+      {
+        "propertyName": "description",
+        "commonType": "string"
+      },
+      {
+        "readOnly": true,
+        "propertyName": "id",
+        "commonType": "string"
+      },
+      {
+        "readOnly": true,
+        "propertyName": "label",
+        "commonType": "string"
+      },
+      {
+        "readOnly": true,
+        "propertyName": "lastUpdated",
+        "commonType": "dateTime"
+      },
+      {
+        "$ref": "#/definitions/RoleStatus",
+        "readOnly": true,
+        "propertyName": "status",
+        "commonType": "object",
+        "isObject": true,
+        "model": "RoleStatus"
+      },
+      {
+        "readOnly": true,
+        "propertyName": "type",
+        "commonType": "string"
+      }
+    ],
+    "methods": [],
+    "crud": [],
+    "tags": [
+      "User"
+    ]
+  },
+  {
+    "modelName": "RoleStatus",
+    "enum": [
+      "ACTIVE",
+      "INACTIVE"
+    ],
+    "tags": [
+      "User"
+    ]
+  },
+  {
+    "modelName": "TempPassword",
+    "properties": [
+      {
+        "propertyName": "tempPassword",
+        "commonType": "string"
+      }
+    ],
+    "methods": [],
+    "crud": [],
+    "tags": [
+      "User"
+    ]
+  },
+  {
+    "modelName": "User",
+    "properties": [
+      {
+        "readOnly": true,
+        "propertyName": "_embedded",
+        "commonType": "hash",
+        "isHash": true,
+        "model": "object"
+      },
+      {
+        "readOnly": true,
+        "propertyName": "_links",
+        "commonType": "hash",
+        "isHash": true,
+        "model": "object"
+      },
+      {
+        "readOnly": true,
+        "propertyName": "activated",
+        "commonType": "dateTime"
+      },
+      {
+        "readOnly": true,
+        "propertyName": "created",
+        "commonType": "dateTime"
+      },
+      {
+        "$ref": "#/definitions/UserCredentials",
+        "propertyName": "credentials",
+        "commonType": "object",
+        "isObject": true,
+        "model": "UserCredentials"
+      },
+      {
+        "readOnly": true,
+        "propertyName": "id",
+        "commonType": "string"
+      },
+      {
+        "readOnly": true,
+        "propertyName": "lastLogin",
+        "commonType": "dateTime"
+      },
+      {
+        "readOnly": true,
+        "propertyName": "lastUpdated",
+        "commonType": "dateTime"
+      },
+      {
+        "readOnly": true,
+        "propertyName": "passwordChanged",
+        "commonType": "dateTime"
+      },
+      {
+        "$ref": "#/definitions/UserProfile",
+        "propertyName": "profile",
+        "commonType": "object",
+        "isObject": true,
+        "model": "UserProfile"
+      },
+      {
+        "$ref": "#/definitions/UserStatus",
+        "readOnly": true,
+        "propertyName": "status",
+        "commonType": "object",
+        "isObject": true,
+        "model": "UserStatus"
+      },
+      {
+        "readOnly": true,
+        "propertyName": "statusChanged",
+        "commonType": "dateTime"
+      },
+      {
+        "$ref": "#/definitions/UserStatus",
+        "readOnly": true,
+        "propertyName": "transitioningToStatus",
+        "commonType": "object",
+        "isObject": true,
+        "model": "UserStatus"
+      }
+    ],
+    "methods": [
+      {
+        "alias": "listAppLinks",
+        "arguments": [
+          {
+            "dest": "userId",
+            "src": "id"
+          }
+        ],
+        "operation": {
+          "path": "/api/v1/users/{userId}/appLinks",
+          "method": "get",
+          "queryParams": [
+            {
+              "default": false,
+              "in": "query",
+              "name": "showAll",
+              "type": "boolean"
+            }
+          ],
+          "pathParams": [
+            {
+              "in": "path",
+              "name": "userId",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "operationId": "listAppLinks",
+          "tags": [
+            "User"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responseModel": "AppLink",
+          "isArray": true
+        }
+      },
+      {
+        "alias": "changePassword",
+        "arguments": [
+          {
+            "dest": "userId",
+            "src": "id"
+          }
+        ],
+        "operation": {
+          "path": "/api/v1/users/{userId}/credentials/change_password",
+          "method": "post",
+          "queryParams": [],
+          "pathParams": [
+            {
+              "in": "path",
+              "name": "userId",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "operationId": "changePassword",
+          "tags": [
+            "User"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "bodyModel": "ChangePasswordRequest",
+          "responseModel": "UserCredentials"
+        }
+      },
+      {
+        "alias": "changeRecoveryQuestion",
+        "arguments": [
+          {
+            "dest": "userId",
+            "src": "id"
+          }
+        ],
+        "operation": {
+          "path": "/api/v1/users/{userId}/credentials/change_recovery_question",
+          "method": "post",
+          "queryParams": [],
+          "pathParams": [
+            {
+              "in": "path",
+              "name": "userId",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "operationId": "changeRecoveryQuestion",
+          "tags": [
+            "User"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "bodyModel": "UserCredentials",
+          "responseModel": "UserCredentials"
+        }
+      },
+      {
+        "alias": "forgotPassword",
+        "arguments": [
+          {
+            "dest": "userId",
+            "src": "id"
+          }
+        ],
+        "operation": {
+          "path": "/api/v1/users/{userId}/credentials/forgot_password",
+          "method": "post",
+          "queryParams": [
+            {
+              "default": true,
+              "in": "query",
+              "name": "sendEmail",
+              "required": true,
+              "type": "boolean"
+            }
+          ],
+          "pathParams": [
+            {
+              "in": "path",
+              "name": "userId",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "operationId": "forgotPassword",
+          "tags": [
+            "User"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "bodyModel": "UserCredentials",
+          "responseModel": "ForgotPasswordResponse"
+        }
+      },
+      {
+        "alias": "listRoles",
+        "arguments": [
+          {
+            "dest": "userId",
+            "src": "id"
+          }
+        ],
+        "operation": {
+          "path": "/api/v1/users/{userId}/roles",
+          "method": "get",
+          "queryParams": [
+            {
+              "in": "query",
+              "name": "expand",
+              "type": "string"
+            }
+          ],
+          "pathParams": [
+            {
+              "in": "path",
+              "name": "userId",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "operationId": "listAssignedRoles",
+          "tags": [
+            "User"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responseModel": "Role",
+          "isArray": true
+        }
+      },
+      {
+        "alias": "addRole",
+        "arguments": [
+          {
+            "dest": "userId",
+            "src": "id"
+          }
+        ],
+        "operation": {
+          "path": "/api/v1/users/{userId}/roles",
+          "method": "post",
+          "queryParams": [],
+          "pathParams": [
+            {
+              "in": "path",
+              "name": "userId",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "operationId": "addRoleToUser",
+          "tags": [
+            "User"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "bodyModel": "Role",
+          "responseModel": "Role"
+        }
+      },
+      {
+        "alias": "removeRole",
+        "arguments": [
+          {
+            "dest": "userId",
+            "src": "id"
+          }
+        ],
+        "operation": {
+          "path": "/api/v1/users/{userId}/roles/{roleId}",
+          "method": "delete",
+          "queryParams": [],
+          "pathParams": [
+            {
+              "in": "path",
+              "name": "userId",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "path",
+              "name": "roleId",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "operationId": "removeRoleFromUser",
+          "tags": [
+            "User"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ]
+        }
+      },
+      {
+        "alias": "listGroupTargetsForRole",
+        "arguments": [
+          {
+            "dest": "userId",
+            "src": "id"
+          }
+        ],
+        "operation": {
+          "path": "/api/v1/users/{userId}/roles/{roleId}/targets/groups",
+          "method": "get",
+          "queryParams": [
+            {
+              "in": "query",
+              "name": "after",
+              "type": "string"
+            },
+            {
+              "default": -1,
+              "format": "int32",
+              "in": "query",
+              "name": "limit",
+              "type": "integer"
+            }
+          ],
+          "pathParams": [
+            {
+              "in": "path",
+              "name": "userId",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "path",
+              "name": "roleId",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "operationId": "listGroupTargetsForRole",
+          "tags": [
+            "User"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responseModel": "Group",
+          "isArray": true
+        }
+      },
+      {
+        "alias": "removeGroupTargetFromRole",
+        "arguments": [
+          {
+            "dest": "userId",
+            "src": "id"
+          }
+        ],
+        "operation": {
+          "path": "/api/v1/users/{userId}/roles/{roleId}/targets/groups/{groupId}",
+          "method": "delete",
+          "queryParams": [],
+          "pathParams": [
+            {
+              "in": "path",
+              "name": "userId",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "path",
+              "name": "roleId",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "path",
+              "name": "groupId",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "operationId": "removeGroupTargetFromRole",
+          "tags": [
+            "User"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ]
+        }
+      },
+      {
+        "alias": "addGroupTargetToRole",
+        "arguments": [
+          {
+            "dest": "userId",
+            "src": "id"
+          }
+        ],
+        "operation": {
+          "path": "/api/v1/users/{userId}/roles/{roleId}/targets/groups/{groupId}",
+          "method": "put",
+          "queryParams": [],
+          "pathParams": [
+            {
+              "in": "path",
+              "name": "userId",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "path",
+              "name": "roleId",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "path",
+              "name": "groupId",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "operationId": "addGroupTargetToRole",
+          "tags": [
+            "User"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ]
+        }
+      },
+      {
+        "alias": "listGroups",
+        "arguments": [
+          {
+            "dest": "userId",
+            "src": "id"
+          }
+        ],
+        "operation": {
+          "path": "/api/v1/users/{userId}/groups",
+          "method": "get",
+          "queryParams": [
+            {
+              "in": "query",
+              "name": "after",
+              "type": "string"
+            },
+            {
+              "default": -1,
+              "format": "int32",
+              "in": "query",
+              "name": "limit",
+              "type": "integer"
+            }
+          ],
+          "pathParams": [
+            {
+              "in": "path",
+              "name": "userId",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "operationId": "listUserGroups",
+          "tags": [
+            "User"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responseModel": "Group",
+          "isArray": true
+        }
+      },
+      {
+        "alias": "activate",
+        "arguments": [
+          {
+            "dest": "userId",
+            "src": "id"
+          }
+        ],
+        "operation": {
+          "path": "/api/v1/users/{userId}/lifecycle/activate",
+          "method": "post",
+          "queryParams": [
+            {
+              "default": true,
+              "in": "query",
+              "name": "sendEmail",
+              "required": true,
+              "type": "boolean"
+            }
+          ],
+          "pathParams": [
+            {
+              "in": "path",
+              "name": "userId",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "operationId": "activateUser",
+          "tags": [
+            "User"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responseModel": "UserActivationToken"
+        }
+      },
+      {
+        "alias": "deactivate",
+        "arguments": [
+          {
+            "dest": "userId",
+            "src": "id"
+          }
+        ],
+        "operation": {
+          "path": "/api/v1/users/{userId}/lifecycle/deactivate",
+          "method": "post",
+          "queryParams": [],
+          "pathParams": [
+            {
+              "in": "path",
+              "name": "userId",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "operationId": "deactivateUser",
+          "tags": [
+            "User"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ]
+        }
+      },
+      {
+        "alias": "suspend",
+        "arguments": [
+          {
+            "dest": "userId",
+            "src": "id"
+          }
+        ],
+        "operation": {
+          "path": "/api/v1/users/{userId}/lifecycle/suspend",
+          "method": "post",
+          "queryParams": [],
+          "pathParams": [
+            {
+              "in": "path",
+              "name": "userId",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "operationId": "suspendUser",
+          "tags": [
+            "User"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ]
+        }
+      },
+      {
+        "alias": "unsuspend",
+        "arguments": [
+          {
+            "dest": "userId",
+            "src": "id"
+          }
+        ],
+        "operation": {
+          "path": "/api/v1/users/{userId}/lifecycle/unsuspend",
+          "method": "post",
+          "queryParams": [],
+          "pathParams": [
+            {
+              "in": "path",
+              "name": "userId",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "operationId": "unsuspendUser",
+          "tags": [
+            "User"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ]
+        }
+      },
+      {
+        "alias": "resetPassword",
+        "arguments": [
+          {
+            "dest": "userId",
+            "src": "id"
+          }
+        ],
+        "operation": {
+          "path": "/api/v1/users/{userId}/lifecycle/reset_password",
+          "method": "post",
+          "queryParams": [
+            {
+              "in": "query",
+              "name": "provider",
+              "type": "string",
+              "model": "AuthenticationProviderType"
+            },
+            {
+              "in": "query",
+              "name": "sendEmail",
+              "type": "boolean"
+            }
+          ],
+          "pathParams": [
+            {
+              "in": "path",
+              "name": "userId",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "operationId": "resetPassword",
+          "tags": [
+            "User"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responseModel": "ResetPasswordToken"
+        }
+      },
+      {
+        "alias": "expirePassword",
+        "arguments": [
+          {
+            "dest": "userId",
+            "src": "id"
+          }
+        ],
+        "operation": {
+          "path": "/api/v1/users/{userId}/lifecycle/expire_password",
+          "method": "post",
+          "queryParams": [
+            {
+              "default": false,
+              "in": "query",
+              "name": "tempPassword",
+              "type": "boolean"
+            }
+          ],
+          "pathParams": [
+            {
+              "in": "path",
+              "name": "userId",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "operationId": "expirePassword",
+          "tags": [
+            "User"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responseModel": "TempPassword"
+        }
+      },
+      {
+        "alias": "unlock",
+        "arguments": [
+          {
+            "dest": "userId",
+            "src": "id"
+          }
+        ],
+        "operation": {
+          "path": "/api/v1/users/{userId}/lifecycle/unlock",
+          "method": "post",
+          "queryParams": [],
+          "pathParams": [
+            {
+              "in": "path",
+              "name": "userId",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "operationId": "unlockUser",
+          "tags": [
+            "User"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ]
+        }
+      },
+      {
+        "alias": "resetFactors",
+        "arguments": [
+          {
+            "dest": "userId",
+            "src": "id"
+          }
+        ],
+        "operation": {
+          "path": "/api/v1/users/{userId}/lifecycle/reset_factors",
+          "method": "post",
+          "queryParams": [],
+          "pathParams": [
+            {
+              "in": "path",
+              "name": "userId",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "operationId": "resetAllFactors",
+          "tags": [
+            "User"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ]
+        }
+      },
+      {
+        "alias": "addToGroup",
+        "arguments": [
+          {
+            "dest": "userId",
+            "src": "id"
+          }
+        ],
+        "operation": {
+          "path": "/api/v1/groups/{groupId}/users/{userId}",
+          "method": "put",
+          "queryParams": [],
+          "pathParams": [
+            {
+              "in": "path",
+              "name": "groupId",
+              "required": true,
+              "type": "string"
+            },
+            {
+              "in": "path",
+              "name": "userId",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "operationId": "addUserToGroup",
+          "tags": [
+            "Group"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ]
+        }
+      }
+    ],
+    "crud": [
+      {
+        "alias": "create",
+        "arguments": [
+          {
+            "dest": "body",
+            "self": true
+          }
+        ],
+        "operation": {
+          "path": "/api/v1/users",
+          "method": "post",
+          "queryParams": [
+            {
+              "default": true,
+              "description": "Executes activation lifecycle operation when creating the user",
+              "in": "query",
+              "name": "activate",
+              "type": "boolean"
+            },
+            {
+              "default": false,
+              "description": "Indicates whether to create a user with a specified authentication provider",
+              "in": "query",
+              "name": "provider",
+              "type": "boolean"
+            }
+          ],
+          "pathParams": [],
+          "operationId": "createUser",
+          "description": "Creates a new user in your Okta organization with or without credentials.",
+          "summary": "Create User",
+          "tags": [
+            "User"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "bodyModel": "User",
+          "responseModel": "User"
+        }
+      },
+      {
+        "alias": "read",
+        "arguments": [],
+        "operation": {
+          "path": "/api/v1/users/{userId}",
+          "method": "get",
+          "queryParams": [],
+          "pathParams": [
+            {
+              "in": "path",
+              "name": "userId",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "operationId": "getUser",
+          "tags": [
+            "User"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responseModel": "User"
+        }
+      },
+      {
+        "alias": "update",
+        "arguments": [
+          {
+            "dest": "userId",
+            "src": "id"
+          },
+          {
+            "dest": "body",
+            "self": true
+          }
+        ],
+        "operation": {
+          "path": "/api/v1/users/{userId}",
+          "method": "put",
+          "queryParams": [],
+          "pathParams": [
+            {
+              "in": "path",
+              "name": "userId",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "operationId": "updateUser",
+          "tags": [
+            "User"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "bodyModel": "User",
+          "responseModel": "User"
+        }
+      },
+      {
+        "alias": "delete",
+        "arguments": [
+          {
+            "dest": "userId",
+            "src": "id"
+          },
+          {
+            "dest": "body",
+            "self": true
+          }
+        ],
+        "operation": {
+          "path": "/api/v1/users/{userId}",
+          "method": "delete",
+          "queryParams": [],
+          "pathParams": [
+            {
+              "in": "path",
+              "name": "userId",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "operationId": "deactivateOrDeleteUser",
+          "tags": [
+            "User"
+          ],
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ]
+        }
+      }
+    ],
+    "tags": [
+      "User"
+    ]
+  },
+  {
+    "modelName": "UserActivationToken",
+    "properties": [
+      {
+        "propertyName": "activationToken",
+        "commonType": "string"
+      },
+      {
+        "propertyName": "activationUrl",
+        "commonType": "string"
+      }
+    ],
+    "methods": [],
+    "crud": [],
+    "tags": [
+      "User"
+    ]
+  },
+  {
+    "modelName": "UserCredentials",
+    "properties": [
+      {
+        "$ref": "#/definitions/PasswordCredential",
+        "propertyName": "password",
+        "commonType": "object",
+        "isObject": true,
+        "model": "PasswordCredential"
+      },
+      {
+        "$ref": "#/definitions/AuthenticationProvider",
+        "propertyName": "provider",
+        "commonType": "object",
+        "isObject": true,
+        "model": "AuthenticationProvider"
+      },
+      {
+        "$ref": "#/definitions/RecoveryQuestionCredential",
+        "propertyName": "recovery_question",
+        "commonType": "object",
+        "isObject": true,
+        "model": "RecoveryQuestionCredential"
+      }
+    ],
+    "methods": [],
+    "crud": [],
+    "tags": [
+      "User"
+    ]
+  },
+  {
+    "modelName": "UserProfile",
+    "properties": [
+      {
+        "propertyName": "email",
+        "commonType": "string"
+      },
+      {
+        "propertyName": "firstName",
+        "commonType": "string"
+      },
+      {
+        "propertyName": "lastName",
+        "commonType": "string"
+      },
+      {
+        "propertyName": "login",
+        "commonType": "string"
+      },
+      {
+        "propertyName": "mobilePhone",
+        "commonType": "string"
+      },
+      {
+        "propertyName": "secondEmail",
+        "commonType": "string"
+      }
+    ],
+    "methods": [],
+    "crud": [],
+    "tags": [
+      "User"
+    ]
+  },
+  {
+    "modelName": "UserStatus",
+    "enum": [
+      "STAGED",
+      "PROVISIONED",
+      "ACTIVE",
+      "RECOVERY",
+      "PASSWORD_EXPIRED",
+      "LOCKED_OUT",
+      "DEPROVISIONED",
+      "SUSPENDED"
+    ],
+    "tags": [
+      "User"
+    ]
+  }
+]

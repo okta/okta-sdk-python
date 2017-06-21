@@ -3,7 +3,7 @@
 """
 
 
-class PasswordCredential(object):
+class GroupRuleGroupAssignment(object):
 
     def __init__(self, dictionary={}, client=None):
         self._client = client
@@ -23,16 +23,18 @@ class PasswordCredential(object):
         del self._map[key]
 
     @property
-    def value(self):
-        return self._map.get('value')
+    def group_ids(self):
+        if 'groupIds' not in self._map:
+            self._map['groupIds'] = []
+        return self._map.get('groupIds')
 
-    @value.setter
-    def value(self, val):
-        self._map['value'] = val
+    @group_ids.setter
+    def group_ids(self, val):
+        self._map['groupIds'] = val
 
-    @value.deleter
-    def value(self):
-        del self._map['value']
+    @group_ids.deleter
+    def group_ids(self):
+        del self._map['groupIds']
 
     def json(self):
         return Utils.to_json(self)

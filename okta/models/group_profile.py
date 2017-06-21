@@ -3,7 +3,7 @@
 """
 
 
-class PasswordCredential(object):
+class GroupProfile(object):
 
     def __init__(self, dictionary={}, client=None):
         self._client = client
@@ -23,16 +23,28 @@ class PasswordCredential(object):
         del self._map[key]
 
     @property
-    def value(self):
-        return self._map.get('value')
+    def description(self):
+        return self._map.get('description')
 
-    @value.setter
-    def value(self, val):
-        self._map['value'] = val
+    @description.setter
+    def description(self, val):
+        self._map['description'] = val
 
-    @value.deleter
-    def value(self):
-        del self._map['value']
+    @description.deleter
+    def description(self):
+        del self._map['description']
+
+    @property
+    def name(self):
+        return self._map.get('name')
+
+    @name.setter
+    def name(self, val):
+        self._map['name'] = val
+
+    @name.deleter
+    def name(self):
+        del self._map['name']
 
     def json(self):
         return Utils.to_json(self)

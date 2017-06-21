@@ -112,5 +112,4 @@ class Utils(object):
     @staticmethod
     def parse_date(date):
         return dateutil.parser.parse(date)
-
         

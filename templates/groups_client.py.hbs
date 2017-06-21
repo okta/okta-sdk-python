@@ -1,0 +1,57 @@
+"""
+ THIS FILE IS AUTO GENERATED - SEE CONTRIBUTOR DOCUMENTATION
+"""
+from .shared.okta_utils import Utils
+from .shared.collection import Collection
+from .shared.http import Http
+from .models import *
+
+
+class {{clientName}}sClient(Collection):
+
+    def __init__(self, client=None):
+        self.path_url = '/api/v1/{{snakeCase clientName}}s'
+        Collection.__init__(self, {{clientName}}, client, self.path_url)
+
+    {{#each operations}}
+    def {{snakeCase operationId}}({{{operationArgumentBuilder this}}}):
+        {{# if description}}
+        """
+        {{{description}}}
+        """
+        {{/if}}
+        url = self.orgUrl + "{{replacePathParams path}}"{{retrievePathParams path}}
+        {{#if queryParams.length}}
+        url += Utils.build_query_params(**kwargs)
+        {{/if}}
+        {{# if isArray}}
+        return Collection(self, url, {{responseModel}})
+        {{else}}
+        {{#if (eq method 'delete')}}
+        r = self.http.delete(url)
+        {{/if}}
+        {{#if (eq method 'get')}}
+        r = self.http.get(url)
+        {{/if}}
+        {{#if (eq method 'post')}}
+        {{#if bodyModel}}
+        r = self.http.post(url, data=Utils.to_json({{snakeCase bodyModel}}))
+        {{else}}
+        r = self.http.post(url)
+        {{/if}}
+        {{/if}}
+        {{#if (eq method 'put')}}
+        {{#if bodyModel}}
+        r = self.http.put(url, data=Utils.to_json({{snakeCase bodyModel}}))
+        {{else}}
+        r = self.http.put(url)
+        {{/if}}
+        {{/if}}
+        {{#if responseModel}}
+        return {{responseModel}}(Utils.validate_response(r), self)
+        {{else}}
+        return r
+        {{/if}}
+        {{/if}}
+
+        {{/each}}

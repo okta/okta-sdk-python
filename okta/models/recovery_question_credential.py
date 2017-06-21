@@ -23,6 +23,18 @@ class RecoveryQuestionCredential(object):
         del self._map[key]
 
     @property
+    def answer(self):
+        return self._map.get('answer')
+
+    @answer.setter
+    def answer(self, val):
+        self._map['answer'] = val
+
+    @answer.deleter
+    def answer(self):
+        del self._map['answer']
+
+    @property
     def question(self):
         return self._map.get('question')
 

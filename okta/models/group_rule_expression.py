@@ -3,7 +3,7 @@
 """
 
 
-class PasswordCredential(object):
+class GroupRuleExpression(object):
 
     def __init__(self, dictionary={}, client=None):
         self._client = client
@@ -21,6 +21,18 @@ class PasswordCredential(object):
 
     def remove(self, key):
         del self._map[key]
+
+    @property
+    def type(self):
+        return self._map.get('type')
+
+    @type.setter
+    def type(self, val):
+        self._map['type'] = val
+
+    @type.deleter
+    def type(self):
+        del self._map['type']
 
     @property
     def value(self):

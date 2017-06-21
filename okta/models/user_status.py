@@ -3,7 +3,7 @@
 """
 
 
-class PasswordCredential(object):
+class UserStatus(object):
 
     def __init__(self, dictionary={}, client=None):
         self._client = client
@@ -21,18 +21,6 @@ class PasswordCredential(object):
 
     def remove(self, key):
         del self._map[key]
-
-    @property
-    def value(self):
-        return self._map.get('value')
-
-    @value.setter
-    def value(self, val):
-        self._map['value'] = val
-
-    @value.deleter
-    def value(self):
-        del self._map['value']
 
     def json(self):
         return Utils.to_json(self)

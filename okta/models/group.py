@@ -3,13 +3,10 @@
 """
 from .okta_object import OktaObject
 from .okta_object import OktaObject
-from .user_credentials import UserCredentials
-from .user_profile import UserProfile
-from .user_status import UserStatus
-from .user_status import UserStatus
+from .group_profile import GroupProfile
 
 
-class User(object):
+class Group(object):
 
     def __init__(self, dictionary={}, client=None):
         self._client = client
@@ -49,39 +46,19 @@ class User(object):
         return _dict
 
     @property
-    def activated(self):
-        if self._map.get('activated'):
-            return Utils.parse_date(self._map.get('activated'))
-        return None
-
-    @property
     def created(self):
         if self._map.get('created'):
             return Utils.parse_date(self._map.get('created'))
         return None
 
     @property
-    def credentials(self):
-        if 'credentials' not in self._map:
-            self._map['credentials'] = {}
-        return UserCredentials(self._map['credentials'], self._client)
-
-    @credentials.setter
-    def credentials(self, val):
-        self._map['credentials'] = val
-
-    @credentials.deleter
-    def credentials(self):
-        del self._map['credentials']
-
-    @property
     def id(self):
         return self._map.get('id')
 
     @property
-    def last_login(self):
-        if self._map.get('lastLogin'):
-            return Utils.parse_date(self._map.get('lastLogin'))
+    def last_membership_updated(self):
+        if self._map.get('lastMembershipUpdated'):
+            return Utils.parse_date(self._map.get('lastMembershipUpdated'))
         return None
 
     @property
@@ -91,16 +68,16 @@ class User(object):
         return None
 
     @property
-    def password_changed(self):
-        if self._map.get('passwordChanged'):
-            return Utils.parse_date(self._map.get('passwordChanged'))
-        return None
+    def object_class(self):
+        if 'objectClass' not in self._map:
+            self._map['objectClass'] = []
+        return self._map.get('objectClass')
 
     @property
     def profile(self):
         if 'profile' not in self._map:
             self._map['profile'] = {}
-        return UserProfile(self._map['profile'], self._client)
+        return GroupProfile(self._map['profile'], self._client)
 
     @profile.setter
     def profile(self, val):
@@ -111,22 +88,8 @@ class User(object):
         del self._map['profile']
 
     @property
-    def status(self):
-        if 'status' not in self._map:
-            self._map['status'] = {}
-        return UserStatus(self._map['status'], self._client)
-
-    @property
-    def status_changed(self):
-        if self._map.get('statusChanged'):
-            return Utils.parse_date(self._map.get('statusChanged'))
-        return None
-
-    @property
-    def transitioning_to_status(self):
-        if 'transitioningToStatus' not in self._map:
-            self._map['transitioningToStatus'] = {}
-        return UserStatus(self._map['transitioningToStatus'], self._client)
+    def type(self):
+        return self._map.get('type')
 
     def json(self):
         return Utils.to_json(self)

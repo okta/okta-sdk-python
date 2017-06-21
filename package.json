@@ -15,7 +15,7 @@
     "test": "python -m unittest discover tests/ '*.py'"
   },
   "devDependencies": {
-    "@okta/openapi": "0.1.0-beta.7"
+    "@okta/openapi": "0.1.0-beta.18"
   },
   "description": "Okta API wrapper for Python",
   "main": "index.js"

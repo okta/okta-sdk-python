@@ -2,7 +2,7 @@
   THIS FILE IS AUTO GENERATED - SEE CONTRIBUTOR DOCUMENTATION
 """
 from .password_credential import PasswordCredential
-from .auth_provider import AuthProvider
+from .authentication_provider import AuthenticationProvider
 from .recovery_question_credential import RecoveryQuestionCredential
 
 
@@ -43,7 +43,15 @@ class UserCredentials(object):
     def provider(self):
         if 'provider' not in self._map:
             self._map['provider'] = {}
-        return AuthProvider(self._map['provider'], self._client)
+        return AuthenticationProvider(self._map['provider'], self._client)
+
+    @provider.setter
+    def provider(self, val):
+        self._map['provider'] = val
+
+    @provider.deleter
+    def provider(self):
+        del self._map['provider']
 
     @property
     def recovery_question(self):
