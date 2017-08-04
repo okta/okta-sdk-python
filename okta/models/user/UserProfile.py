@@ -6,6 +6,7 @@ class UserProfile:
         'secondEmail': str,
         'firstName': str,
         'lastName': str,
+        'displayName': str,
         'mobilePhone': str
     }
 
@@ -22,3 +23,5 @@ class UserProfile:
         self.lastName = None  # str
 
         self.mobilePhone = None  # str
+        
+        self.displayName = None # str
