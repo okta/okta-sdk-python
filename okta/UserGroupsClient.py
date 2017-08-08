@@ -49,7 +49,7 @@ class UserGroupsClient(ApiClient):
             }
             response = ApiClient.get_path(self, '/', params=params)
 
-        return PagedResults(response, User)
+        return PagedResults(response, UserGroup)
 
     def get_group(self, gid):
         """Get a single group
