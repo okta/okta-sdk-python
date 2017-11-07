@@ -30,11 +30,17 @@ class ApiClient(object):
         self.api_version = 1
         self.max_attempts = 4
 
-        self.headers = {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': 'SSWS ' + self.api_token
-        }
+        if kwargs['pathname'] == '/api/v1/authn':
+            self.headers = {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        else:
+            self.headers = {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': 'SSWS ' + self.api_token
+            }
 
         if 'headers' in kwargs:
             self.headers.update(kwargs['headers'])
