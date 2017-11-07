@@ -24,7 +24,8 @@ class ApiClient(object):
         elif len(args) > 1 and args[1]:
             self.api_token = args[1]
         else:
-            raise ValueError('An api_token must be provied to create an ApiClient')
+            # raise ValueError('An api_token must be provied to create an ApiClient')
+            pass
 
         self.api_version = 1
         self.max_attempts = 4
