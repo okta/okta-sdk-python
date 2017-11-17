@@ -3,6 +3,7 @@ from okta.framework.Utils import Utils
 from okta.framework.PagedResults import PagedResults
 from okta.models.user import AppLinks
 from okta.models.user.User import User
+from okta.models.usergroup import UserGroup
 from okta.models.user.TempPassword import TempPassword
 from okta.models.user.ResetPasswordToken import ResetPasswordToken
 from okta.models.user.LoginCredentials import LoginCredentials
@@ -53,6 +54,18 @@ class UsersClient(ApiClient):
         """
         response = ApiClient.get_path(self, '/{0}/appLinks'.format(uid))
         return Utils.deserialize(response.text, AppLinks)
+
+
+    def get_user_groups(self, uid):
+        """
+        Get groups of a single user
+
+        :param uid: the user id or login
+        :type uid: str
+        :rtype: UserGroups
+        """
+        response = ApiClient.get_path(self, '/{0}/groups'.format(uid))
+        return Utils.deserialize(response.text, UserGroup)
 
     def update_user(self, user):
         """Update a user
