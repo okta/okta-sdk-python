@@ -11,3 +11,10 @@ class AuthClientTest(unittest.TestCase):
 
     def tests_client_initializer_kwargs(self):
         client = AuthClient(base_url='https://example.okta.com', api_token='api_key')
+
+
+    def tests_client_initializer_args_2(self):
+        client = AuthClient('https://example.okta.com')
+
+    def tests_client_initializer_kwargs_2(self):
+        client = AuthClient(base_url='https://example.okta.com')
