@@ -15,6 +15,14 @@ class UsersClient(ApiClient):
 
     # CRUD
 
+    def get_current_user(self):
+        """Fetches the current user linked to API token or session cookie
+
+        :rtype: User
+        """
+        response = ApiClient.get_path(self, '/me')
+        return Utils.deserialize(response.text, User)
+
     def get_users(self, limit=None, query=None, filter_string=None):
         """Get a list of Users
 
