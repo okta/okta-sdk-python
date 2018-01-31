@@ -20,7 +20,7 @@ class Utils(object):
         if from_data is None or len(from_data) == 0:
             json_dump = {}
         elif isinstance(from_data, six.text_type) or isinstance(from_data, six.string_types):
-            json_dump = json.loads(from_data)
+                json_dump = json.loads(from_data)
         else:
             json_dump = from_data
 
@@ -47,7 +47,7 @@ class Utils(object):
                         if attr_type == datetime:
                             val = dateutil.parser.parse(val)
 
-                        elif attr_type == str or attr_type == int or attr_type == dict or attr_type == bool:
+                        elif attr_type == str or attr_type == int or attr_type == dict or attr_type == bool or attr_type == list:
                             pass
 
                         else:
