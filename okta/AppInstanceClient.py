@@ -122,3 +122,14 @@ class AppInstanceClient(ApiClient):
         :return: None
         """
         ApiClient.post_path(self, '/{0}/lifecycle/deactivate'.format(id), None)
+
+    def assign_group_to_app_instance(self, app_id, group_id):
+        """Assign a group to an app by id
+
+        :param app_id: the target app id
+        :type id: str
+        :param group_id: the group id
+        :type id: str
+        :return: None
+        """
+        ApiClient.put_path(self, '/{0}/groups/{1}'.format(app_id, group_id))
