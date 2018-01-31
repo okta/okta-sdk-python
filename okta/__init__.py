@@ -17,3 +17,4 @@ from .FactorsClient import FactorsClient
 from .SessionsClient import SessionsClient
 from .UserGroupsClient import UserGroupsClient
 from .UsersClient import UsersClient
+from .IdentityProviderClient import IdentityProviderClient
