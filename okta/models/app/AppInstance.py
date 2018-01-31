@@ -4,6 +4,9 @@ from okta.models.app.Visibility import Visibility
 from okta.models.app.AppCredentials import AppCredentials
 from okta.models.app.Settings import Settings
 from okta.models.app.AppSettings import AppSettings
+from okta.models.app.OAuthClientCredentials import OAuthClientCredentials
+from okta.models.app.OAuthClientSettings import OAuthClientSettings
+from okta.models.Link import Link
 
 
 class AppInstance:
@@ -16,12 +19,21 @@ class AppInstance:
         'lastUpdated': datetime,
         'status': str,
         'activated': datetime,
-        'features': str,
+        'features': list,
         'signOnMode': str,
         'accessibility': Accessibility,
         'visibility': Visibility,
         'credentials': AppCredentials,
-        'settings': Settings
+        'settings': Settings,
+        '_links': dict
+    }
+
+    dict_types = {
+        '_links': Link
+    }
+
+    alt_names = {
+        '_links': 'links'
     }
 
     def __init__(self):

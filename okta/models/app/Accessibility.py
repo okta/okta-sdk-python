@@ -2,7 +2,8 @@ class Accessibility:
 
     types = {
         'selfService': bool,
-        'errorRedirectUrl': str
+        'errorRedirectUrl': str,
+        'loginRedirectUrl': str
     }
 
     def __init__(self):
@@ -12,3 +13,5 @@ class Accessibility:
 
         # Custom error page for this application
         self.errorRedirectUrl = None  # str
+
+        self.loginRedirectUrl = None

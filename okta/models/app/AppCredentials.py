@@ -1,4 +1,5 @@
 from okta.models.app.UserNameTemplate import UserNameTemplate
+from okta.models.app.OAuthClientCredentials import OAuthClientCredentials
 from okta.models.user.Password import Password
 
 
@@ -8,7 +9,9 @@ class AppCredentials:
         'scheme': str,
         'userNameTemplate': UserNameTemplate,
         'userName': str,
-        'password': Password
+        'password': Password,
+        'oauthClient': OAuthClientCredentials,
+        'signing': dict
     }
 
     def __init__(self):
@@ -24,3 +27,7 @@ class AppCredentials:
 
         # Shared password for app
         self.password = None  # Password
+
+        self.oauthClient = None # OAuthClientCredentials
+
+        self.signing = None
