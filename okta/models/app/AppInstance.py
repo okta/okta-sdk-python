@@ -24,8 +24,7 @@ class AppInstance:
         'accessibility': Accessibility,
         'visibility': Visibility,
         'credentials': AppCredentials,
-        'settings': Settings,
-        '_links': dict
+        'settings': Settings
     }
 
     dict_types = {
