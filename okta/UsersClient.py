@@ -243,3 +243,31 @@ class UsersClient(ApiClient):
         """
         response = ApiClient.post_path(self, '/{0}/lifecycle/reset_factors'.format(uid))
         return Utils.deserialize(response.text, User)
+
+    def list_roles_assigned_to_user(self, uid):
+        """Get a user group
+        :param uid: the user id or login
+        :type uid: str
+        :rtype: User
+        """
+        response = ApiClient.get_path(self, '/{0}/roles'.format(uid))
+        return Utils.deserialize(response.text, User)
+
+    def get_user_member_in_groups(self, uid):
+        """Get a user group
+        :param uid: the user id or login
+        :type uid: str
+        :rtype: User
+        """
+        response = ApiClient.get_path(self, '/{0}/groups'.format(uid))
+        return Utils.deserialize(response.text, User)
+
+    def get_user_id(self, user_name):
+        """Get a user group
+        :param uid: the user id or login
+        :type uid: str
+        :rtype: User
+        """
+        response = ApiClient.get_path(self, '/{0}/'.format(user_name))
+        return Utils.deserialize(response.text, User)
+

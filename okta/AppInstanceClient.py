@@ -122,3 +122,22 @@ class AppInstanceClient(ApiClient):
         :return: None
         """
         ApiClient.post_path(self, '/{0}/lifecycle/deactivate'.format(id), None)
+
+    def list_applications_assigned_to_user(self, uid):
+        """Get a user group
+        :param uid: the user id or login
+        :type uid: str
+        :rtype: User
+        """
+        response = ApiClient.get_path(self, '?filter=user.id+eq+"{0}"&limit=40&expand=user/{0}'.format(uid))
+        return Utils.deserialize(response.text, AppInstance)
+
+
+    def get_assigned_user_for_application(self, uid, app_instance):
+        """Get a user group
+        :param uid: the user id or login
+        :type uid: str
+        :rtype: User
+        """
+        response = ApiClient.get_path(self, '/{0}/users/{1}'.format(app_instance.id, uid))
+        return Utils.deserialize(response.text, AppInstance)

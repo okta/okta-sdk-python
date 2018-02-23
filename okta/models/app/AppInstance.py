@@ -21,7 +21,9 @@ class AppInstance:
         'accessibility': Accessibility,
         'visibility': Visibility,
         'credentials': AppCredentials,
-        'settings': Settings
+        'settings': Settings,
+        'profile': str
+
     }
 
     def __init__(self):
@@ -60,6 +62,9 @@ class AppInstance:
         self.credentials = None  # AppCredentials
 
         self.settings = None  # Settings
+
+        self.profile = None  # profile Info
+
 
     @staticmethod
     def build_bookmark(url, label=None, request_integration=False):
