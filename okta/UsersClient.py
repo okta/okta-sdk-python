@@ -75,7 +75,7 @@ class UsersClient(ApiClient):
         response = ApiClient.put_path(self, '/{0}'.format(uid), user)
         return Utils.deserialize(response.text, User)
 
-    def create_user(self, user, activate=None):
+    def create_user(self, user, activate=None, provider=None):
         """Create a user
 
         :param user: the data to create a user
@@ -84,12 +84,15 @@ class UsersClient(ApiClient):
         :type activate: bool
         :rtype: User
         """
-        if activate is None:
+        if activate is None and provider is None:
             response = ApiClient.post_path(self, '/', user)
         else:
-            params = {
-                'activate': activate
-            }
+            params = {}
+            if activate is not None:
+                params['activate'] = activate
+            if provider is not None:
+                params['provider'] = provider
+
             response = ApiClient.post_path(self, '/', user, params=params)
         return Utils.deserialize(response.text, User)
 
