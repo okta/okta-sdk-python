@@ -29,6 +29,9 @@ class User:
         '_links': 'links'
     }
 
+    def __str__(self):
+        return f'<User provider={self.credentials.provider.type}>'
+
     def __init__(self, **kwargs):
 
         # unique key for user

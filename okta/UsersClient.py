@@ -82,6 +82,8 @@ class UsersClient(ApiClient):
         :type user: User
         :param activate: whether to activate the user
         :type activate: bool
+        :param provider: whether to create a passwordless user
+        :type provider: bool
         :rtype: User
         """
         if activate is None and provider is None:
@@ -94,6 +96,7 @@ class UsersClient(ApiClient):
                 params['provider'] = provider
 
             response = ApiClient.post_path(self, '/', user, params=params)
+        
         return Utils.deserialize(response.text, User)
 
     def delete_user(self, uid):
