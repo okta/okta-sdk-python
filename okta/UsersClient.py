@@ -75,6 +75,27 @@ class UsersClient(ApiClient):
         response = ApiClient.put_path(self, '/{0}'.format(uid), user)
         return Utils.deserialize(response.text, User)
 
+    def partial_update_user(self, user):
+        """Partially update a user
+
+        :param user: the user to update
+        :type user: User
+        :rtype: User
+        """
+        return self.partial_update_user_by_id(user.id, user)
+
+    def partial_update_user_by_id(self, uid, user):
+        """Partially update a user, defined by an id
+
+        :param uid: the target user id
+        :type uid: str
+        :param user: the data to update the target user
+        :type user: User
+        :rtype: User
+        """
+        response = ApiClient.post_path(self, '/{0}'.format(uid), user)
+        return Utils.deserialize(response.text, User)
+
     def create_user(self, user, activate=None):
         """Create a user
 
