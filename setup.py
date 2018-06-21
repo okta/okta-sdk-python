@@ -14,7 +14,7 @@ with open(path.join(here, 'okta', '__init__.py'), 'rb') as f:
         f.read().decode('utf-8')).group(1)))
 
 # Get the long description
-with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
+with open(path.join(here, 'README.md'), encoding='utf-8') as f:
     long_description = f.read()
 
 setup(
