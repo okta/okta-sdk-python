@@ -1,6 +1,7 @@
 from okta.framework.ApiClient import ApiClient
 from okta.framework.Utils import Utils
 from okta.framework.PagedResults import PagedResults
+from okta.models.app.AppGroup import AppGroup
 from okta.models.app.AppInstance import AppInstance
 
 
@@ -122,3 +123,15 @@ class AppInstanceClient(ApiClient):
         :return: None
         """
         ApiClient.post_path(self, '/{0}/lifecycle/deactivate'.format(id), None)
+
+    def assign_group_to_app_instance(self, id, group_id):
+        """Assigns a group to an application
+
+        :param id: the target app id
+        :type id: str
+        :param group_id: the target group id
+        :type id: str
+        :rtype: AppGroup
+        """
+        response = ApiClient.put_path(self, '/{0}/groups/{1}'.format(id, group_id))
+        return Utils.deserialize(response.text, AppGroup)
