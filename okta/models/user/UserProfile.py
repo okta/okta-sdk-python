@@ -6,7 +6,8 @@ class UserProfile:
         'secondEmail': str,
         'firstName': str,
         'lastName': str,
-        'mobilePhone': str
+        'mobilePhone': str,
+        'employeeNumber': str
     }
 
     def __init__(self):
@@ -22,3 +23,5 @@ class UserProfile:
         self.lastName = None  # str
 
         self.mobilePhone = None  # str
+
+        self.employeeNumber = None # str
