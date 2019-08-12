@@ -2,6 +2,7 @@ from okta.framework.ApiClient import ApiClient
 from okta.framework.Utils import Utils
 from okta.framework.PagedResults import PagedResults
 from okta.models.app.AppInstance import AppInstance
+from okta.models.app.AppUser import AppUser
 
 
 class AppInstanceClient(ApiClient):
@@ -122,3 +123,23 @@ class AppInstanceClient(ApiClient):
         :return: None
         """
         ApiClient.post_path(self, '/{0}/lifecycle/deactivate'.format(id), None)
+
+    def assign_app_user(self, app_id, user_id, email):
+        """Assign Okta User to Okta App
+
+        :param app_id: target_app_id
+        :param user_id: user id
+        :param email: email login
+        :return: response
+        """
+
+        body = {
+            'id': user_id,
+            'scope': 'USER',
+            'credentials': {
+                'userName': email
+            }
+        }
+
+        response = ApiClient.post_path(self, f'/{app_id}/users', data=body)
+        return Utils.deserialize(response.text, AppUser)
