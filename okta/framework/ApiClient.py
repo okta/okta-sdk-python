@@ -27,7 +27,7 @@ class ApiClient(object):
             raise ValueError('An api_token must be provied to create an ApiClient')
 
         self.api_version = 1
-        self.max_attempts = 4
+        self.max_attempts = kwargs.get('max_attempts', 1)
 
         self.headers = {
             'Accept': 'application/json',
