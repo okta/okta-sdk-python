@@ -7,7 +7,7 @@
     :license: Apache 2, see LICENSE.txt for more details.
 """
 
-__version__ = 'v1.0.0'
+__version__ = 'v1.0.1'
 
 from .AppInstanceClient import AppInstanceClient
 from .AuthClient import AuthClient

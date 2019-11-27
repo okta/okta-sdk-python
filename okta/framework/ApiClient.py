@@ -27,7 +27,9 @@ class ApiClient(object):
             raise ValueError('An api_token must be provied to create an ApiClient')
 
         self.api_version = 1
-        self.max_attempts = 4
+
+        # pass max_attempts arg with value > 1 to allow that many automatic attempts per request to Okta
+        self.max_attempts = kwargs.get('max_attempts', 1)
 
         self.headers = {
             'Accept': 'application/json',
