@@ -6,6 +6,7 @@ from okta.models.user.User import User
 from okta.models.user.TempPassword import TempPassword
 from okta.models.user.ResetPasswordToken import ResetPasswordToken
 from okta.models.user.LoginCredentials import LoginCredentials
+from okta.models.user.DeleteSessionsRequest import DeleteSessionsRequest
 
 
 class UsersClient(ApiClient):
@@ -128,7 +129,6 @@ class UsersClient(ApiClient):
         return PagedResults(response, User)
 
     # LIFECYCLE
-    
     def activate_user(self, uid):
         """Activate user by target id
 
@@ -243,3 +243,27 @@ class UsersClient(ApiClient):
         """
         response = ApiClient.post_path(self, '/{0}/lifecycle/reset_factors'.format(uid))
         return Utils.deserialize(response.text, User)
+
+    def delete_user_sessions(self, uid, delete_tokens=False):
+        """Removes all active identity provider sessions.
+        This forces the user to authenticate on the next operation.
+        Optionally revokes OpenID Connect and OAuth refresh and access tokens issued to the user.
+        Note: This operation doesn't clear the sessions created for web sign in or native applications.
+
+        :param uid: the target user id
+        :type uid: str
+
+        :param delete_tokens: whether to revoke OIDC and OAuth refresh and access tokens. Default: false
+        :type delete_tokens: bool
+        :return: None
+        """
+
+        if not delete_tokens:
+            response = ApiClient.delete_path(self, '/{0}/sessions'.format(uid))
+
+        else:
+            params = {
+                'oauthTokens': delete_tokens
+            }
+            response = ApiClient.delete_path(self, '/{0}/sessions'.format(uid), params=params)
+        return Utils.deserialize(response.text, DeleteSessionsRequest)
