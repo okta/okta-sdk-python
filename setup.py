@@ -10,8 +10,15 @@ _version_re = re.compile(r'__version__\s+=\s+(.*)')
 here = path.abspath(path.dirname(__file__))
 
 with open(path.join(here, 'okta', '__init__.py'), 'rb') as f:
+    # `version` has "vX.Y.Z" format
     version = str(ast.literal_eval(_version_re.search(
         f.read().decode('utf-8')).group(1)))
+
+if sys.argv[-1] == 'push-and-tag':
+    os.system("git push")
+    os.system("git tag -a %s -m 'version %s'" % (version, version))
+    os.system("git push --tags")
+    sys.exit()
 
 # Get the long description
 with open(path.join(here, 'README.md'), encoding='utf-8') as f:
@@ -35,6 +42,7 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.7',
         'License :: OSI Approved :: Apache Software License'],
     packages=find_packages(),
     install_requires=[
