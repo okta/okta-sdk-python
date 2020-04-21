@@ -1,5 +1,6 @@
 install:
 	npm install
+	pip install tox
 
 test:
 	tox
