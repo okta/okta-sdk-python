@@ -1,4 +1,4 @@
-from Verification import Verification
+from .Verification import Verification
 
 
 class FactorDeviceEnrollRequest:
