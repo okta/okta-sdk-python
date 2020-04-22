@@ -3,6 +3,7 @@ from codecs import open
 from os import path
 import ast
 import re
+import sys
 
 # Find the version in the package's __init__.py
 _version_re = re.compile(r'__version__\s+=\s+(.*)')
