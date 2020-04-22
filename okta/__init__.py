@@ -6,6 +6,7 @@
     :copyright: (c) 2015 by Okta.
     :license: Apache 2, see LICENSE.txt for more details.
 """
+from __future__ import unicode_literals
 
 __version__ = 'v1.0.2'
 

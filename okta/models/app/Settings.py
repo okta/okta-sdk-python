@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from okta.models.app.AppSettings import AppSettings
 
 

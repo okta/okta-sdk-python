@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from json import dumps, JSONEncoder
 from datetime import datetime
 from okta.framework.Utils import Utils

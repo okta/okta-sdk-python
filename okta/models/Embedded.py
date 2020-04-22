@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from okta.models.user.User import User
 from okta.models.factor.Factor import Factor
 
