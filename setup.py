@@ -2,6 +2,7 @@ from setuptools import setup, find_packages
 from codecs import open
 from os import path
 import ast
+import os
 import re
 import sys
 
