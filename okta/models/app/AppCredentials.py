@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from okta.models.app.UserNameTemplate import UserNameTemplate
 from okta.models.user.Password import Password
 

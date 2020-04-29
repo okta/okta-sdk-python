@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 import requests
 import json
 import time

@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from okta.framework.Utils import Utils
 from okta.framework.Serializer import Serializer
 from okta.models.event.Event import Event

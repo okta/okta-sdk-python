@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from datetime import datetime
 from okta.models.event.Action import Action
 from okta.models.event.Actor import Actor
@@ -21,7 +23,7 @@ class Event:
         # unique key for event
         self.id = None  # str
 
-        # timestamp when event was published  
+        # timestamp when event was published
         self.published = None  # datetime
 
         # identifies the request

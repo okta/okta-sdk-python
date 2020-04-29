@@ -1,4 +1,6 @@
-from Verification import Verification
+from __future__ import unicode_literals
+
+from .Verification import Verification
 
 
 class FactorDeviceEnrollRequest:

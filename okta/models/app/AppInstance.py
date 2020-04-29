@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from datetime import datetime
 from okta.models.app.Accessibility import Accessibility
 from okta.models.app.Visibility import Visibility

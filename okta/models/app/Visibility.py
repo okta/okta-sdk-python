@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from okta.models.app.Hide import Hide
 from okta.models.app.AppLinks import AppLinks
 

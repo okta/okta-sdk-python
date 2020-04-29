@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from okta.models.user.Provider import Provider
 from okta.models.user.Password import Password
 from okta.models.user.RecoveryQuestion import RecoveryQuestion

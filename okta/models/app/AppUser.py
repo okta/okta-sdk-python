@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from datetime import datetime
 from okta.models.app.AppUserCredentials import AppUserCredentials
 from okta.models.app.AppUserProfile import AppUserProfile

@@ -1,3 +1,6 @@
+from __future__ import unicode_literals
+
+
 class OktaError(Exception):
 
     def __init__(self, error):

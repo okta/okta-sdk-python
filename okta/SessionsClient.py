@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from okta.framework.ApiClient import ApiClient
 from okta.framework.Utils import Utils
 from okta.models.session.Credentials import Credentials
