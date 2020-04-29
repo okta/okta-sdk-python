@@ -8,7 +8,7 @@
 """
 from __future__ import unicode_literals
 
-__version__ = 'v1.0.2'
+__version__ = 'v1.1.0'
 
 from .AppInstanceClient import AppInstanceClient
 from .AuthClient import AuthClient
