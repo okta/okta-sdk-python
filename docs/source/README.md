@@ -1,1 +1,2 @@
+# docs/source
 This directory will be used to contain the code of the docs of this SDK.

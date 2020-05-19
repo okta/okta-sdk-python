@@ -1,1 +1,2 @@
+# Docs
 This directory will be used to generate docs of this SDK based on the Python code.
