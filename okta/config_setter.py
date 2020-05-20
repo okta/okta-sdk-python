@@ -18,6 +18,9 @@ class ConfigSetter():
             "clientId": '',
             "scopes": '',
             "privateKey": ''
+        },
+        "testing": {
+            "testingDisableHttpsCheck": ''
         }
     }
     _GLOBAL_YAML_PATH = os.path.join(os.path.expanduser('~'), ".okta",
@@ -65,8 +68,20 @@ class ConfigSetter():
     def apply_default_values(self):
         """Apply default values to default client configuration
         """
-        # Set default authorization mode to SSWS
-        self._config["authorizationMode"] = "SSWS"
+        # Set defaults
+        self._config["client"]["authorizationMode"] = "SSWS"
+        self._config["client"]["connectionTimeout"] = 30
+        self._config["client"]["cache"] = {
+            "enabled": True,
+            "defaultTtl": 300,
+            "defaultTti": 300
+        }
+        self._config["client"]["userAgentExtra"] = ""
+        self._config["testing"]["testingDisableHttpsCheck"] = False
+        self._config["client"]["requestTimeout"] = 0
+        self._config["client"]["rateLimit"] = {
+            "maxRetries": 2
+        }
 
     def apply_config(self, new_config: dict):
         """This method applies a config dictionary to the current config,
@@ -119,4 +134,4 @@ class ConfigSetter():
                 # If value is found, add to config
                 updated_config[env_key] = env_value
         # apply to current configuration
-        self._config = updated_config.as_dict()
+        self.apply_config(updated_config.as_dict())
