@@ -17,7 +17,16 @@ class ConfigSetter():
             "token": '',
             "clientId": '',
             "scopes": '',
-            "privateKey": ''
+            "privateKey": '',
+            "userAgent": '',
+            "cache": {
+                "enabled": '',
+                "defaultTti": '',
+                "defaultTtl": ''
+            },
+            "rateLimit": {
+                "maxRetries": ''
+            }
         },
         "testing": {
             "testingDisableHttpsCheck": ''
@@ -35,9 +44,11 @@ class ConfigSetter():
         # Create configuration using default config
         self._config = ConfigSetter._DEFAULT_CONFIG
         # Update configuration
-        self.update_config()
+        self._update_config()
+        # Prune configuration to remove unnecessary values
+        self._prune_config()
 
-    def getConfig(self):
+    def get_config(self):
         """
         Return Okta client configuration
 
@@ -46,7 +57,21 @@ class ConfigSetter():
         """
         return self._config
 
-    def update_config(self):
+    def _prune_config(self):
+        """
+        This method cleans up the configuration object by removing fields
+        with no value
+        """
+        # Flatten dictionary to account for nested dictionary
+        flat_current_config = FlatDict(self._config, delimiter='_')
+        # Iterate through keys and remove if value is still empty string
+        for key in flat_current_config.keys():
+            if flat_current_config.get(key) == "":
+                del flat_current_config[key]
+
+        self._config = flat_current_config.as_dict()
+
+    def _update_config(self):
         """
         Updates the configuration of the Okta Client by:
         1. Applying default values
@@ -55,17 +80,17 @@ class ConfigSetter():
         4. Checking for corresponding ENV variables
         """
         # apply default config values to config
-        self.apply_default_values()
+        self._apply_default_values()
         # check if GLOBAL yaml exists, apply if true
         if (os.path.exists(ConfigSetter._GLOBAL_YAML_PATH)):
-            self.apply_yaml_config(ConfigSetter._GLOBAL_YAML_PATH)
+            self._apply_yaml_config(ConfigSetter._GLOBAL_YAML_PATH)
         # check if LOCAL yaml exists, apply if true
         if (os.path.exists(ConfigSetter._LOCAL_YAML_PATH)):
-            self.apply_yaml_config(ConfigSetter._LOCAL_YAML_PATH)
+            self._apply_yaml_config(ConfigSetter._LOCAL_YAML_PATH)
         # apply existing environment variables
-        self.apply_env_config()
+        self._apply_env_config()
 
-    def apply_default_values(self):
+    def _apply_default_values(self):
         """Apply default values to default client configuration
         """
         # Set defaults
@@ -76,14 +101,14 @@ class ConfigSetter():
             "defaultTtl": 300,
             "defaultTti": 300
         }
-        self._config["client"]["userAgentExtra"] = ""
-        self._config["testing"]["testingDisableHttpsCheck"] = False
+        self._config["client"]["userAgent"] = ""
         self._config["client"]["requestTimeout"] = 0
         self._config["client"]["rateLimit"] = {
             "maxRetries": 2
         }
+        self._config["testing"]["testingDisableHttpsCheck"] = False
 
-    def apply_config(self, new_config: dict):
+    def _apply_config(self, new_config: dict):
         """This method applies a config dictionary to the current config,
            overwriting values and adding new entries (if present).
 
@@ -91,9 +116,14 @@ class ConfigSetter():
             config {dict} -- A dictionary of client configuration details
         """
         # Update current configuration with new configuration
-        self._config.update(new_config)
+        # Flatten both dictionaries to account for nested dictionary values
+        flat_current_config = FlatDict(self._config, delimiter='_')
+        flat_new_config = FlatDict(new_config, delimiter='_')
+        # Update values in current config and unflatten
+        flat_current_config.update(flat_new_config)
+        self._config = flat_current_config.as_dict()
 
-    def apply_yaml_config(self, path: str):
+    def _apply_yaml_config(self, path: str):
         """This method applies a YAML configuration to the Okta Client Config
 
         Arguments:
@@ -110,9 +140,9 @@ class ConfigSetter():
                 # TODO check error handling on YAML
                 print(err)
         # Apply acquired config to configuration
-        self.apply_config(config.get("okta", {}))
+        self._apply_config(config.get("okta", {}))
 
-    def apply_env_config(self):
+    def _apply_env_config(self):
         """
         This method checks the environment variables for any OKTA
         configuration parameters and applies them if available.
@@ -134,4 +164,4 @@ class ConfigSetter():
                 # If value is found, add to config
                 updated_config[env_key] = env_value
         # apply to current configuration
-        self.apply_config(updated_config.as_dict())
+        self._apply_config(updated_config.as_dict())

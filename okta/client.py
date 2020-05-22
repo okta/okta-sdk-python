@@ -1,7 +1,10 @@
-from config_setter import ConfigSetter
-from request_executor import RequestExecutor
-from oauth import OAuth
-from http_client import HTTPClient
+from okta.config_setter import ConfigSetter
+from okta.request_executor import RequestExecutor
+from okta.oauth import OAuth
+from okta.http_client import HTTPClient
+# from request_executor import RequestExecutor
+# from oauth import OAuth
+# from http_client import HTTPClient
 
 
 class Client:
