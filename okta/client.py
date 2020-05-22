@@ -2,9 +2,6 @@ from okta.config_setter import ConfigSetter
 from okta.request_executor import RequestExecutor
 from okta.oauth import OAuth
 from okta.http_client import HTTPClient
-# from request_executor import RequestExecutor
-# from oauth import OAuth
-# from http_client import HTTPClient
 
 
 class Client:
@@ -101,15 +98,15 @@ class Client:
                 'client').get(field) for field in client_fields]
             errors += self._validate_client_fields(*client_fields_values)
         else:  # Not a valid authorization mode
-            errors += f"The AuthorizaitonMode configuration option must \
-            be one of: [SSWS, PrivateKey].\nYou provided the SDK with \
-            {client.get('authorizationMode')}"
+            errors += ["The AuthorizaitonMode configuration option must "
+                       "be one of: [SSWS, PrivateKey]. You provided the SDK "
+                       f"with {client.get('authorizationMode', None)}"]
 
         if errors:  # raise exception and stop program if errors
             newline = '\n'
-            raise ValueError(f"Errors:\
-                    {newline + newline.join(newline.join(errors) + newline)}\
-                    See {Client.REPO_URL} for usage")
+            raise ValueError(f"{newline}Errors:"
+                             f"{newline + newline.join(errors) + 2*newline}"
+                             f"See {Client.REPO_URL} for usage")
 
     def _validate_client_fields(self, client_id, client_scopes,
                                 client_private_key):
@@ -119,24 +116,24 @@ class Client:
         client_id = client_id.strip().lower()
         # null or empty string
         if not client_id:
-            client_fields_errors.append(
-                f"Your client ID is missing. You can copy it from the \
-                Okta Developer Console in the details for the Application \
-                you created. Follow these instructions to find it: \
-                {Client.FINDING_OKTA_APP_CRED}")
+            client_fields_errors.append((
+                "Your client ID is missing. You can copy it from the "
+                "Okta Developer Console in the details for the Application "
+                "you created. Follow these instructions to find it: "
+                f"{Client.FINDING_OKTA_APP_CRED}"))
         # contains {clientId}
         if "{clientId}" in client_id:
-            client_fields_errors.append(
-                f"Replace {{clientId}} with the client ID of your Application. \
-                You can copy it from the Okta Developer Console in the \
-                details for the Application you created. Follow these \
-                instructions to find it: {Client.FINDING_OKTA_APP_CRED}")
+            client_fields_errors.append((
+                "Replace {{clientId}} with the client ID of your Application. "
+                "You can copy it from the Okta Developer Console in the "
+                "details for the Application you created. Follow these "
+                f"instructions to find it: {Client.FINDING_OKTA_APP_CRED}"))
 
         # check that at least 1 scope is provided
         if not (client_scopes and client_private_key):
-            client_fields_errors.append(
+            client_fields_errors.append((
                 "When using authorization mode 'PrivateKey', you must supply "
-                "'okta.client.scopes' and 'okta.client.privateKey'")
+                "'okta.client.scopes' and 'okta.client.privateKey'"))
 
         return client_fields_errors
 
@@ -148,16 +145,16 @@ class Client:
 
         # token is null or empty
         if not token:
-            token_errors.append(
-                f"Your Okta API token is missing. \
-                You can generate one in the Okta Developer Console. \
-                Follow these instructions: {Client.GET_OKTA_API_TOKEN}")
+            token_errors.append((
+                "Your Okta API token is missing. "
+                "You can generate one in the Okta Developer Console. "
+                f"Follow these instructions: {Client.GET_OKTA_API_TOKEN}"))
         # token contains {apiToken}
         if "{apiToken}" in token:
-            token_errors.append(
-                f"Replace {{apiToken}} with your Okta API token. \
-                You can generate one in the Okta Developer Console. \
-                Follow these instructions: {Client.GET_OKTA_API_TOKEN}")
+            token_errors.append((
+                "Replace {{apiToken}} with your Okta API token. "
+                "You can generate one in the Okta Developer Console. "
+                f"Follow these instructions: {Client.GET_OKTA_API_TOKEN}"))
 
         return token_errors
 
@@ -170,61 +167,47 @@ class Client:
         # if empty or null string
         if not url:
             url_errors.append(
-                f"Your Okta URL is missing. You can copy your domain from \
-                the Okta Developer Console. Follow these instructions to find \
-                it: {Client.FINDING_OKTA_DOMAIN}")
+                ("Your Okta URL is missing. You can copy your domain from the"
+                 " Okta Developer Console. Follow these instructions to find"
+                 f" it: {Client.FINDING_OKTA_DOMAIN}"))
         # if url is not https (in non-testing env)
         if not (self._config["testing"]["testingDisableHttpsCheck"]
                 or url.startswith('https')):
             url_errors.append(
-                f"Your Okta URL must start with https. Current value: {url}. \
-                You can copy your domain from the Okta Developer Console. \
-                Follow these instructions to find it: \
-                {Client.FINDING_OKTA_DOMAIN}")
+                ("Your Okta URL must start with 'https'. Current value: "
+                 f"{url or None}. "
+                 "You can copy your domain from the Okta Developer Console. "
+                 "Follow these instructions to find it: "
+                 f"{Client.FINDING_OKTA_DOMAIN}"))
         # url still contains default {yourOktaDomain}
         if "{yourOktaDomain}" in url:
-            url_errors.append(
-                f"Replace {{yourOktaDomain}} with your Okta domain. \
-                You can copy your domain from the Okta Developer Console. \
-                Follow these instructions to find it: \
-                {Client.FINDING_OKTA_DOMAIN}")
+            url_errors.append((
+                "Replace {{yourOktaDomain}} with your Okta domain. "
+                "You can copy your domain from the Okta Developer Console. "
+                "Follow these instructions to find it: "
+                f"{Client.FINDING_OKTA_DOMAIN}"))
         # url contains -admin string
         admin_strings = ["-admin.okta.com",
                          "-admin.oktapreview.com", "-admin.okta-emea.com"]
         if any(string in url for string in admin_strings):
             url_errors.append(
-                f"Your Okta domain should not contain -admin. \
-                Current value: {{existingValue}}. You can copy your domain \
-                from the Okta Developer Console. Follow these instructions \
-                to find it: {Client.FINDING_OKTA_DOMAIN}")
+                ("Your Okta domain should not contain -admin. "
+                 "Current value: {{existingValue}}. You can copy your domain "
+                 "from the Okta Developer Console. Follow these instructions "
+                 f"to find it: {Client.FINDING_OKTA_DOMAIN}"))
         # url ends with .com.com
         if url.endswith(".com.com"):
-            url_errors.append(
-                f"It looks like there's a typo in your Okta domain. Current \
-                value: {{existingValue}}. You can copy your domain from \
-                the Okta Developer Console. Follow these instructions to find \
-                it: {Client.FINDING_OKTA_DOMAIN}")
+            url_errors.append((
+                "It looks like there's a typo in your Okta domain. Current "
+                "value: {{existingValue}}. You can copy your domain from "
+                "the Okta Developer Console. Follow these instructions to find"
+                f" it: {Client.FINDING_OKTA_DOMAIN}"))
         # url contains multiple '://' segments
         if url.count("://") > 1:
-            url_errors.append(
-                f"It looks like there's a typo in your Okta domain. Current \
-                value: {{existingValue}}. You can copy your domain from \
-                the Okta Developer Console. Follow these instructions to find \
-                it: {Client.FINDING_OKTA_DOMAIN}")
+            url_errors.append((
+                "It looks like there's a typo in your Okta domain. Current "
+                "value: {{existingValue}}. You can copy your domain from "
+                "the Okta Developer Console. Follow these instructions to find"
+                f" it: {Client.FINDING_OKTA_DOMAIN}"))
 
         return url_errors
-
-
-config = {
-    "orgUrl": 'https://dev-195921.okta.com/',
-    "token": '00UZXQa0IgHvIfKY6H1vkDtCPdotTQLIevu36LkMx5'
-}
-oauth_config = {
-    "orgUrl": 'https://dev-195921.okta.com/',
-    "authorizationMode": "PrivateKey",
-    "clientId": '00UZXQa0IgHvIfKY6H1vkDtCPdotTQLIevu36LkMx5',
-    "scopes": ['okta.users.manage'],
-    "privateKey": "BLAHBLAHBLAH"
-}
-a = Client(input_config=oauth_config)
-print(a.get_config())
