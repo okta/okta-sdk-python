@@ -45,8 +45,6 @@ class ConfigSetter():
         self._config = ConfigSetter._DEFAULT_CONFIG
         # Update configuration
         self._update_config()
-        # Prune configuration to remove unnecessary values
-        self._prune_config()
 
     def get_config(self):
         """
@@ -57,19 +55,19 @@ class ConfigSetter():
         """
         return self._config
 
-    def _prune_config(self):
+    def _prune_config(self, config):
         """
         This method cleans up the configuration object by removing fields
         with no value
         """
         # Flatten dictionary to account for nested dictionary
-        flat_current_config = FlatDict(self._config, delimiter='_')
+        flat_current_config = FlatDict(config, delimiter='_')
         # Iterate through keys and remove if value is still empty string
         for key in flat_current_config.keys():
             if flat_current_config.get(key) == "":
                 del flat_current_config[key]
 
-        self._config = flat_current_config.as_dict()
+        return flat_current_config.as_dict()
 
     def _update_config(self):
         """
@@ -117,11 +115,17 @@ class ConfigSetter():
         """
         # Update current configuration with new configuration
         # Flatten both dictionaries to account for nested dictionary values
-        flat_current_config = FlatDict(self._config, delimiter='_')
-        flat_new_config = FlatDict(new_config, delimiter='_')
+        flat_current_client = FlatDict(self._config['client'], delimiter='_')
+        flat_current_testing = FlatDict(self._config['testing'], delimiter='_')
+
+        flat_new_client = FlatDict(new_config.get('client', {}), delimiter='_')
+        flat_new_testing = FlatDict(
+            new_config.get('testing', {}), delimiter='_')
+        flat_current_client.update(flat_new_client)
+        flat_current_testing.update(flat_new_testing)
         # Update values in current config and unflatten
-        flat_current_config.update(flat_new_config)
-        self._config = flat_current_config.as_dict()
+        self._config = {'client': flat_current_client.as_dict(),
+                        'testing': flat_current_testing.as_dict()}
 
     def _apply_yaml_config(self, path: str):
         """This method applies a YAML configuration to the Okta Client Config
@@ -159,9 +163,11 @@ class ConfigSetter():
         # using the format described in the README
         for key in flattened_keys:
             env_key = ConfigSetter._OKTA + "_" + key.upper()
-            env_value = os.getenv(env_key)
+            env_value = os.environ.get(env_key, None)
+
             if env_value is not None:
                 # If value is found, add to config
-                updated_config[env_key] = env_value
+                updated_config[key] = env_value if "scopes" not in key \
+                    else env_value.split(',')
         # apply to current configuration
         self._apply_config(updated_config.as_dict())
