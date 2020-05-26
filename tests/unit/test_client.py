@@ -79,7 +79,7 @@ Testing Okta Client Instantiation in different scenarios
 def test_constructor_user_config_empty():
     config = {}
     with pytest.raises(ValueError) as exception_info:
-        OktaClient(input_config=config)
+        OktaClient(user_config=config)
     assert ERROR_MESSAGE_ORG_URL_MISSING in str(exception_info.value)
     assert ERROR_MESSAGE_API_TOKEN_MISSING in str(exception_info.value)
 
@@ -87,14 +87,14 @@ def test_constructor_user_config_empty():
 def test_constructor_user_config_url_empty():
     config = {'orgUrl': '', 'token': 'TOKEN'}
     with pytest.raises(ValueError) as exception_info:
-        OktaClient(input_config=config)
+        OktaClient(user_config=config)
     assert ERROR_MESSAGE_ORG_URL_MISSING in str(exception_info.value)
 
 
 def test_constructor_user_config_url_not_https():
     config = {'orgUrl': 'http://test.okta.com', 'token': 'TOKEN'}
     with pytest.raises(ValueError) as exception_info:
-        OktaClient(input_config=config)
+        OktaClient(user_config=config)
     assert ERROR_MESSAGE_ORG_URL_NOT_HTTPS in str(exception_info.value)
     assert const.FINDING_OKTA_DOMAIN in str(exception_info.value)
 
@@ -104,7 +104,7 @@ def test_constructor_user_config_url_has_yourOktaDomain():
         'orgUrl': 'https://{yourOktaDomain}.okta.com', 'token': 'TOKEN'
     }
     with pytest.raises(ValueError) as exception_info:
-        OktaClient(input_config=config)
+        OktaClient(user_config=config)
     assert ERROR_MESSAGE_ORG_URL_YOUROKTADOMAIN in str(exception_info.value)
 
 
@@ -117,7 +117,7 @@ def test_constructor_user_config_url_has_admin(url):
         'orgUrl': url, 'token': 'TOKEN'
     }
     with pytest.raises(ValueError) as exception_info:
-        OktaClient(input_config=config)
+        OktaClient(user_config=config)
     assert all(string in str(exception_info.value) for string in [
                ERROR_MESSAGE_ORG_URL_ADMIN, f"Current value: {url}"])
 
@@ -128,7 +128,7 @@ def test_constructor_user_config_url_dot_com_twice():
         'orgUrl': url, 'token': 'TOKEN'
     }
     with pytest.raises(ValueError) as exception_info:
-        OktaClient(input_config=config)
+        OktaClient(user_config=config)
     assert all(string in str(exception_info.value) for string in [
                ERROR_MESSAGE_ORG_URL_TYPO, f"Current value: {url}"])
 
@@ -140,7 +140,7 @@ def test_constructor_user_config_url_punctuation():
         'orgUrl': url, 'token': 'TOKEN'
     }
     with pytest.raises(ValueError) as exception_info:
-        OktaClient(input_config=config)
+        OktaClient(user_config=config)
     assert all(string in str(exception_info.value) for string in [
                ERROR_MESSAGE_ORG_URL_TYPO, f"Current value: {url}"])
 
@@ -148,7 +148,7 @@ def test_constructor_user_config_url_punctuation():
 def test_constructor_user_config_token_empty():
     config = {'orgUrl': 'https://test.okta.com', 'token': ''}
     with pytest.raises(ValueError) as exception_info:
-        OktaClient(input_config=config)
+        OktaClient(user_config=config)
     assert ERROR_MESSAGE_API_TOKEN_MISSING in str(exception_info.value)
 
 
@@ -157,7 +157,7 @@ def test_constructor_user_config_url_has_apiToken():
         'orgUrl': 'https://test.okta.com', 'token': '{apiToken}'
     }
     with pytest.raises(ValueError) as exception_info:
-        OktaClient(input_config=config)
+        OktaClient(user_config=config)
     assert ERROR_MESSAGE_API_TOKEN_DEFAULT in str(exception_info.value)
 
 
@@ -167,7 +167,7 @@ def test_constructor_user_config_auth_mode_invalid():
               'token': "TOKEN",
               'authorizationMode': authorizationMode}
     with pytest.raises(ValueError) as exception_info:
-        OktaClient(input_config=config)
+        OktaClient(user_config=config)
     assert all(string in str(exception_info.value) for string in [
                ERROR_MESSAGE_AUTH_MODE_INVALID, f"with {authorizationMode}"])
 
@@ -176,7 +176,7 @@ def test_constructor_user_config_SSWS():
     org_url = "https://test.okta.com"
     token = "TOKEN"
     config = {'orgUrl': org_url, 'token': token}
-    client = OktaClient(input_config=config)
+    client = OktaClient(user_config=config)
     loaded_config = client.get_config()
     assert org_url == loaded_config['client']['orgUrl']
     assert token == loaded_config['client']['token']
@@ -196,7 +196,7 @@ def test_constructor_user_config_PK():
         'scopes': scopes,
         'privateKey': private_key_hash
     }
-    client = OktaClient(input_config=config)
+    client = OktaClient(user_config=config)
     loaded_config = client.get_config()
     assert org_url == loaded_config['client']['orgUrl']
     assert authorizationMode == loaded_config['client']['authorizationMode']
@@ -214,7 +214,7 @@ def test_constructor_user_config_PK_empty():
         'authorizationMode': authorizationMode,
     }
     with pytest.raises(ValueError) as exception_info:
-        OktaClient(input_config=config)
+        OktaClient(user_config=config)
     assert all(string in str(exception_info.value) for string in [
                ERROR_MESSAGE_CLIENT_ID_MISSING, ERROR_MESSAGE_SCOPES_PK_MISSING
                ])
@@ -234,7 +234,7 @@ def test_constructor_user_config_PK_client_id_empty():
         'privateKey': private_key_hash
     }
     with pytest.raises(ValueError) as exception_info:
-        OktaClient(input_config=config)
+        OktaClient(user_config=config)
     assert all(string in str(exception_info.value) for string in [
                ERROR_MESSAGE_CLIENT_ID_MISSING
                ])
@@ -258,7 +258,7 @@ def test_constructor_user_config_PK_scopes_and_or_private_key_empty(
         'privateKey': private_key
     }
     with pytest.raises(ValueError) as exception_info:
-        OktaClient(input_config=config)
+        OktaClient(user_config=config)
     assert all(string in str(exception_info.value) for string in [
                ERROR_MESSAGE_SCOPES_PK_MISSING
                ])
