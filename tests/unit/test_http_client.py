@@ -54,7 +54,6 @@ async def mock_invalid_HTTP_response(*args, **kwargs):
 
 @ pytest.mark.asyncio
 async def test_client_successful_call(monkeypatch):
-
     http_client = HTTPClient({
         'oauth': None,
         'requestTimeout': REQUEST_TIMEOUT,
@@ -193,29 +192,3 @@ async def test_client_timeout(monkeypatch):
 
     assert all(values in [None] for values in [req, res_details, res_json])
     assert type(error) == asyncio.exceptions.TimeoutError
-
-
-# async def test():
-#     http_client = HTTPClient({
-#         'oauth': None,
-#         'requestTimeout': 1,
-#         'headers': {
-#             "User-Agent": UserAgent().get_user_agent_string(),
-#             'Authorization': f"SSWS {API_TOKEN}"
-#         }
-#     })
-
-#     a, b, c, err = await http_client.send_request({
-#         'method': 'GET',
-#         'url': "https://postman-echo.com/delay/2",
-#         'headers': {},
-#         'data': {}
-#     })
-
-#     print(a)
-#     print(b)
-#     print(c)
-#     print(type(err), err.value, err is None)
-
-
-# asyncio.run(test())

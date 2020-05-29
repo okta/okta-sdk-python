@@ -11,3 +11,6 @@ __pycache__/
 
 # Tox
 .tox
+
+# Code coveraeg
+.coverage

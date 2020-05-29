@@ -42,6 +42,7 @@ class RequestExecutor:
             .get_user_agent_string()
         }
 
+        # SSWS header
         if config["client"]["authorizationMode"] == "SSWS":
             self._default_headers['Authorization'] = (
                 "SSWS "
@@ -69,6 +70,7 @@ class RequestExecutor:
                 access_token = self._cache.get("OKTA_ACCESS_TOKEN")
                 headers.update({"Authorization": access_token})
             else:
+                # o/w create token
                 pass
 
         return request
