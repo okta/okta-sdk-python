@@ -19,7 +19,6 @@ class OktaCache(Cache):
         super()  # Inherit from parent class
         self._store = {}  # key -> {value, TTI, TTL}
         # allow 0.01 for methods to work for more consistent results
-        # https://stackoverflow.com/a/39582288
         self._time_to_live = ttl - 0.01
         self._time_to_idle = tti - 0.01
 
@@ -63,7 +62,7 @@ class OktaCache(Cache):
         """
         return self.create_key(key) in self._store
 
-    def add(self, key, value):
+    def add(self, key: str, value: str):
         """
         Adds a key-value pair to the cache.
 
@@ -71,23 +70,24 @@ class OktaCache(Cache):
             key {str} -- Key in pair
             value {str} -- Value in pair
         """
-        # Generate unique identifier
-        entry_key = self.create_key(key)
+        if type(key) == str and type(value) == str:
+            # Generate unique identifier
+            entry_key = self.create_key(key)
 
-        # Create timers for TTI and TTL
-        idle_timer = self._create_delete_timer(entry_key, idle=True)
-        life_timer = self._create_delete_timer(entry_key, idle=False)
+            # Create timers for TTI and TTL
+            idle_timer = self._create_delete_timer(entry_key, idle=True)
+            life_timer = self._create_delete_timer(entry_key, idle=False)
 
-        # Add new entry to cache with timers
-        self._store[entry_key] = {
-            'value': value,
-            'tti': idle_timer,
-            'ttl': life_timer
-        }
+            # Add new entry to cache with timers
+            self._store[entry_key] = {
+                'value': value,
+                'tti': idle_timer,
+                'ttl': life_timer
+            }
 
-        # Start timers!
-        idle_timer.start()
-        life_timer.start()
+            # Start timers!
+            idle_timer.start()
+            life_timer.start()
 
     def delete(self, key):
         """

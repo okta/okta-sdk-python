@@ -1,3 +1,6 @@
+from urllib.parse import urlparse
+
+
 class Cache():
     """
     This is the ABSTRACT class that defines a Cache object for the Okta Client
@@ -79,5 +82,6 @@ class Cache():
         Returns:
             str -- Unique key based on the input
         """
-        # return request.scheme + "://" + request.host + request.uri
-        return request
+        # Validate URL and return URL string
+        url_object = urlparse(request)
+        return url_object.geturl()
