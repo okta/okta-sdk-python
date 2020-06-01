@@ -44,6 +44,16 @@ async def mock_return(*args, **kwargs):
     return response.response()
 
 
+async def mock_return_error(*args, **kwargs):
+    return (None, None, None, json.dumps({
+        'errorCode': '',
+        'errorSummary': '',
+        'errorLink': '',
+        'errorId': '',
+        'errorCauses': []
+    }))
+
+
 async def mock_timeout_response(*args, **kwargs):
     return (None, None, None, asyncio.exceptions.TimeoutError())
 
@@ -53,7 +63,7 @@ async def mock_invalid_HTTP_response(*args, **kwargs):
 
 
 @ pytest.mark.asyncio
-async def test_client_successful_call(monkeypatch):
+async def test_client_successful_call_SSWS(monkeypatch):
 
     http_client = HTTPClient({
         'oauth': None,
@@ -79,6 +89,33 @@ async def test_client_successful_call(monkeypatch):
     assert req.headers["Authorization"].startswith("SSWS")
     assert res_details['Content-Type'] == "application/json"
     assert type(res_json) == list
+
+
+@ pytest.mark.asyncio
+async def test_client_error_call_SSWS(monkeypatch):
+
+    http_client = HTTPClient({
+        'oauth': None,
+        'requestTimeout': REQUEST_TIMEOUT,
+        'headers': {
+            "User-Agent": UserAgent().get_user_agent_string(),
+            "Authorization": "SSWS wrong_token"
+        }
+    })
+
+    monkeypatch.setattr(HTTPClient, 'send_request', mock_return_error)
+
+    req, res_details, res_json, error = await http_client.send_request({
+        'method': 'GET',
+        'url': ORG_URL + GET_USERS_CALL,  # Get all users in org
+        'headers': {},
+        'data': {}
+    })
+
+    assert error is not None
+    assert req is None
+    assert res_details is None
+    assert res_json is None
 
 
 @ pytest.mark.asyncio
@@ -193,29 +230,3 @@ async def test_client_timeout(monkeypatch):
 
     assert all(values in [None] for values in [req, res_details, res_json])
     assert type(error) == asyncio.exceptions.TimeoutError
-
-
-# async def test():
-#     http_client = HTTPClient({
-#         'oauth': None,
-#         'requestTimeout': 1,
-#         'headers': {
-#             "User-Agent": UserAgent().get_user_agent_string(),
-#             'Authorization': f"SSWS {API_TOKEN}"
-#         }
-#     })
-
-#     a, b, c, err = await http_client.send_request({
-#         'method': 'GET',
-#         'url': "https://postman-echo.com/delay/2",
-#         'headers': {},
-#         'data': {}
-#     })
-
-#     print(a)
-#     print(b)
-#     print(c)
-#     print(type(err), err.value, err is None)
-
-
-# asyncio.run(test())
