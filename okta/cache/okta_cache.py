@@ -35,13 +35,11 @@ class OktaCache(Cache):
         """
         # Check if key is in cache
         if self.contains(key):
-            # Create unique key and search for entry
-            entry_key = self.create_key(key)
-            entry = self._store[entry_key]
+            entry = self._store[key]
 
             # Cancel and restart TTI timer
             entry['tti'].cancel()
-            new_idle_timer = self._create_delete_timer(entry_key, idle=True)
+            new_idle_timer = self._create_delete_timer(key, idle=True)
             entry['tti'] = new_idle_timer
             new_idle_timer.start()
 
@@ -60,7 +58,7 @@ class OktaCache(Cache):
         Returns:
             bool -- Existence of key in cache
         """
-        return self.create_key(key) in self._store
+        return key in self._store
 
     def add(self, key: str, value: str):
         """
@@ -70,16 +68,13 @@ class OktaCache(Cache):
             key {str} -- Key in pair
             value {str} -- Value in pair
         """
-        if type(key) == str and type(value) == str:
-            # Generate unique identifier
-            entry_key = self.create_key(key)
-
+        if type(key) == str and type(value) != list:
             # Create timers for TTI and TTL
-            idle_timer = self._create_delete_timer(entry_key, idle=True)
-            life_timer = self._create_delete_timer(entry_key, idle=False)
+            idle_timer = self._create_delete_timer(key, idle=True)
+            life_timer = self._create_delete_timer(key, idle=False)
 
             # Add new entry to cache with timers
-            self._store[entry_key] = {
+            self._store[key] = {
                 'value': value,
                 'tti': idle_timer,
                 'ttl': life_timer
@@ -98,13 +93,11 @@ class OktaCache(Cache):
         """
         # Make sure key is in cache
         if self.contains(key):
-            # Get unique key for key given and cancel timers in entry
-            entry_key = self.create_key(key)
-            self._store[entry_key]['tti'].cancel()
-            self._store[entry_key]['ttl'].cancel()
+            self._store[key]['tti'].cancel()
+            self._store[key]['ttl'].cancel()
 
             # Delete entry
-            del self._store[entry_key]
+            del self._store[key]
 
     def clear(self):
         """
