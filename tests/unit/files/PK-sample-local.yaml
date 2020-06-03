@@ -1,0 +1,9 @@
+okta:
+  client:
+    orgUrl: "https://test.local.okta.com"
+    authorizationMode: "PrivateKey"
+    clientId: "clientID-local"
+    scopes:
+      - scope.1
+      - scope.2
+    privateKey: Private Key Local

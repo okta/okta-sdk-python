@@ -1,0 +1,4 @@
+okta:
+  client:
+    orgUrl: "https://test.local.okta.com"
+    token: apiToken-local

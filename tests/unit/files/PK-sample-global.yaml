@@ -1,0 +1,9 @@
+okta:
+  client:
+    orgUrl: "https://test.global.okta.com"
+    authorizationMode: "PrivateKey"
+    clientId: "clientID-global"
+    scopes:
+      - scope.1
+      - scope.2
+    privateKey: Private Key Global
