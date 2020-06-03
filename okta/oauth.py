@@ -9,15 +9,15 @@ class OAuth:
     """
     OAUTH_ENDPOINT = "/oauth2/v1/token"
 
-    def __init__(self, okta_client):
-        self._client = okta_client
+    def __init__(self, request_executor, config):
+        self._request_executor = request_executor
+        self._config = config
         self._access_token = None
 
     def getJwt(self):
-        config = self._client.get_config()
-        org_url = config["client"]["orgUrl"]
-        client_id = config["client"]["clientId"]
-        private_key = config["client"]["privateKey"]
+        org_url = self._config["client"]["orgUrl"]
+        client_id = self._config["client"]["clientId"]
+        private_key = self._config["client"]["privateKey"]
 
         return JWT.create_token(org_url, client_id, private_key)
 
@@ -28,11 +28,12 @@ class OAuth:
         jwt = self.getJwt()
         parameters = {
             'grant_type': 'client_credentials',
-            'scope': ' '.join(self._client.get_scopes()),
+            'scope': ' '.join(self._config["client"]["scopes"]),
             'client_assertion_type':
                 'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
             'client_assertion': jwt
         }
+
         encoded_parameters = urlencode(parameters, quote_via=quote)
         url = f"{self._client.get_base_url()}{OAuth.OAUTH_ENDPOINT}?" + \
             encoded_parameters
@@ -46,16 +47,18 @@ class OAuth:
         }
         # Work on handling response
         # Make max 1 retry
-        req, res_details, res_json, error = self._client._request_executor\
-            .fire_request(request)
+        req, res_details, res_json, err = self._request_executor.fire_request(
+            request)
 
-        if error:
-            return None, error
+        if err:
+            return None, err
 
         parsed_response = self._parse_response(res_details, res_json)
         self._access_token = parsed_response["access_token"]
+        return self._access_token
 
-        # print(token_response)
+    def clear_access_token(self):
+        self._access_token = None
 
     def _parse_response(self, res_details, json_resp):
         dict_resp = json.dumps(json_resp)

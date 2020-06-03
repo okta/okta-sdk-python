@@ -1,70 +1,15 @@
 from okta.client import Client as OktaClient
 import pytest
-import constants as const
+from okta.constants import FINDING_OKTA_DOMAIN
 import yaml
 import os
+from okta.error_messages import ERROR_MESSAGE_API_TOKEN_DEFAULT, \
+    ERROR_MESSAGE_API_TOKEN_MISSING, ERROR_MESSAGE_AUTH_MODE_INVALID, \
+    ERROR_MESSAGE_CLIENT_ID_DEFAULT, ERROR_MESSAGE_CLIENT_ID_MISSING,\
+    ERROR_MESSAGE_ORG_URL_ADMIN, ERROR_MESSAGE_ORG_URL_MISSING, \
+    ERROR_MESSAGE_ORG_URL_NOT_HTTPS, ERROR_MESSAGE_ORG_URL_TYPO, \
+    ERROR_MESSAGE_ORG_URL_YOUROKTADOMAIN, ERROR_MESSAGE_SCOPES_PK_MISSING
 
-ERROR_MESSAGE_ORG_URL_MISSING = (
-    "Your Okta URL is missing. You can copy "
-    "your domain from the Okta Developer "
-    "Console. Follow these instructions to"
-    f" find it: {const.FINDING_OKTA_DOMAIN}"
-)
-ERROR_MESSAGE_ORG_URL_NOT_HTTPS = (
-    "Your Okta URL must start with 'https'."
-)
-ERROR_MESSAGE_AUTH_MODE_INVALID = (
-    "The AuthorizationMode configuration "
-    "option must be one of: "
-    "[SSWS, PrivateKey]. "
-    "You provided the SDK with "
-)
-ERROR_MESSAGE_ORG_URL_YOUROKTADOMAIN = (
-    "Replace {{yourOktaDomain}} with your Okta domain. "
-    "You can copy your domain from the Okta Developer Console. "
-    "Follow these instructions to find it: "
-    f"{const.FINDING_OKTA_DOMAIN}"
-)
-
-ERROR_MESSAGE_ORG_URL_ADMIN = (
-    "Your Okta domain should not contain -admin. "
-)
-
-ERROR_MESSAGE_ORG_URL_TYPO = (
-    "It looks like there's a typo in your Okta domain."
-)
-
-ERROR_MESSAGE_API_TOKEN_MISSING = (
-    "Your Okta API token is missing. "
-    "You can generate one in the Okta Developer"
-    " Console. Follow these instructions:"
-    f" {const.GET_OKTA_API_TOKEN}"
-)
-
-ERROR_MESSAGE_API_TOKEN_DEFAULT = (
-    "Replace {{apiToken}} with your Okta API token. "
-    "You can generate one in the Okta Developer Console. "
-    f"Follow these instructions: {const.GET_OKTA_API_TOKEN}"
-)
-
-ERROR_MESSAGE_CLIENT_ID_MISSING = (
-    "Your client ID is missing. You can copy it from the "
-    "Okta Developer Console in the details for the Application "
-    "you created. Follow these instructions to find it: "
-    f"{const.FINDING_OKTA_APP_CRED}"
-)
-
-ERROR_MESSAGE_CLIENT_ID_DEFAULT = (
-    "Replace {{clientId}} with the client ID of your Application. "
-    "You can copy it from the Okta Developer Console in the "
-    "details for the Application you created. Follow these "
-    f"instructions to find it: {const.FINDING_OKTA_APP_CRED}"
-)
-
-ERROR_MESSAGE_SCOPES_PK_MISSING = (
-    "When using authorization mode 'PrivateKey', you must supply "
-    "'okta.client.scopes' and 'okta.client.privateKey'"
-)
 
 _GLOBAL_YAML_PATH = os.path.join(os.path.expanduser('~'), ".okta",
                                  "okta.yaml")
@@ -96,7 +41,7 @@ def test_constructor_user_config_url_not_https():
     with pytest.raises(ValueError) as exception_info:
         OktaClient(user_config=config)
     assert ERROR_MESSAGE_ORG_URL_NOT_HTTPS in str(exception_info.value)
-    assert const.FINDING_OKTA_DOMAIN in str(exception_info.value)
+    assert FINDING_OKTA_DOMAIN in str(exception_info.value)
 
 
 def test_constructor_user_config_url_has_yourOktaDomain():
@@ -237,6 +182,26 @@ def test_constructor_user_config_PK_client_id_empty():
         OktaClient(user_config=config)
     assert all(string in str(exception_info.value) for string in [
                ERROR_MESSAGE_CLIENT_ID_MISSING
+               ])
+
+
+def test_constructor_user_config_PK_client_id_default():
+    org_url = "https://test.okta.com"
+    authorizationMode = "PrivateKey"
+    scopes = ["scope1"]
+    private_key_hash = "private key hash"
+
+    config = {
+        'orgUrl': org_url,
+        'authorizationMode': authorizationMode,
+        'clientId': "{clientId}",
+        'scopes': scopes,
+        'privateKey': private_key_hash
+    }
+    with pytest.raises(ValueError) as exception_info:
+        OktaClient(user_config=config)
+    assert all(string in str(exception_info.value) for string in [
+               ERROR_MESSAGE_CLIENT_ID_DEFAULT
                ])
 
 

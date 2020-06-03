@@ -1,6 +1,6 @@
 from okta.http_client import HTTPClient
-from okta.jwt import JWT
 from okta.user_agent import UserAgent
+from okta.oauth import OAuth
 # import time
 # import json
 
@@ -41,14 +41,19 @@ class RequestExecutor:
         self._cache = cache
         self._default_headers = {
             'User-Agent': UserAgent(config["client"].get("userAgent", None))
-            .get_user_agent_string()
+            .get_user_agent_string(),
+            'Accept': "application/json"
         }
 
+        # SSWS header
         if config["client"]["authorizationMode"] == "SSWS":
             self._default_headers['Authorization'] = (
                 "SSWS "
                 f"{self._config['client']['token']}"
             )
+        else:
+            # OAuth
+            self._oauth = OAuth(self, self._config)
 
         self._http_client = HTTPClient({
             'requestTimeout': self._request_timeout,
@@ -71,17 +76,18 @@ class RequestExecutor:
             # finally, add to header
             if self._cache.contains("OKTA_ACCESS_TOKEN"):
                 access_token = self._cache.get("OKTA_ACCESS_TOKEN")
-                headers.update({"Authorization": f"Bearer {access_token}"})
             else:
                 # Generate using private key provided
-                private_key = self._config["client"]["privateKey"]
-                client_id = self._config["client"]["clientId"]
-                org_url = self._base_url
+                access_token = self._oauth.get_access_token()
+            headers.update({"Authorization": f"Bearer {access_token}"})
+            self._cache.add("OKTA_ACCESS_TOKEN", access_token)
 
-                my_jwk, my_pem = JWT.get_PEM_JWK(private_key)
+        if body is not None:
+            headers.update({"Content-Type": "application/json"})
 
-                jwt = JWT.create_token(org_url, client_id, my_jwk, my_pem)
-                type(jwt)
+        request["headers"] = headers
+        request["url"] = url
+        request["body"] = body
 
         return request
 

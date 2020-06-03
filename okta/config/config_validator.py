@@ -1,8 +1,16 @@
+from okta.constants import FINDING_OKTA_DOMAIN, REPO_URL
+from okta.error_messages import ERROR_MESSAGE_ORG_URL_MISSING, \
+    ERROR_MESSAGE_API_TOKEN_DEFAULT, ERROR_MESSAGE_API_TOKEN_MISSING, \
+    ERROR_MESSAGE_AUTH_MODE_INVALID, ERROR_MESSAGE_CLIENT_ID_MISSING, \
+    ERROR_MESSAGE_CLIENT_ID_DEFAULT, ERROR_MESSAGE_SCOPES_PK_MISSING, \
+    ERROR_MESSAGE_ORG_URL_NOT_HTTPS, ERROR_MESSAGE_ORG_URL_YOUROKTADOMAIN, \
+    ERROR_MESSAGE_ORG_URL_TYPO, ERROR_MESSAGE_ORG_URL_ADMIN
+
+
 class ConfigValidator():
-    FINDING_OKTA_DOMAIN = "https://bit.ly/finding-okta-domain"
-    GET_OKTA_API_TOKEN = "https://bit.ly/get-okta-api-token"
-    FINDING_OKTA_APP_CRED = "https://bit.ly/finding-okta-app-credentials"
-    REPO_URL = "https://github.com/okta/okta-sdk-python"
+    """
+    This class performs validation checks on the Okta Client configuration.
+    """
 
     def __init__(self, config):
         self._config = config
@@ -37,15 +45,15 @@ class ConfigValidator():
                 'client').get(field, "") for field in client_fields]
             errors += self._validate_client_fields(*client_fields_values)
         else:  # Not a valid authorization mode
-            errors += [("The AuthorizationMode configuration option must "
-                        "be one of: [SSWS, PrivateKey]. You provided the SDK "
-                        f"with {client.get('authorizationMode', None)}")]
+            errors += [
+                (f"{ERROR_MESSAGE_AUTH_MODE_INVALID}"
+                 f"{client.get('authorizationMode', None)}")]
 
         if errors:  # raise exception and stop program if errors
             newline = '\n'
             raise ValueError(f"{newline}Errors:"
                              f"{newline + newline.join(errors) + 2*newline}"
-                             f"See {ConfigValidator.REPO_URL} for usage")
+                             f"See {REPO_URL} for usage")
 
     def _validate_client_fields(self, client_id, client_scopes,
                                 client_private_key):
@@ -55,25 +63,14 @@ class ConfigValidator():
         client_id = client_id.strip().lower()
         # null or empty string
         if not client_id:
-            client_fields_errors.append((
-                "Your client ID is missing. You can copy it from the "
-                "Okta Developer Console in the details for the Application "
-                "you created. Follow these instructions to find it: "
-                f"{ConfigValidator.FINDING_OKTA_APP_CRED}"))
+            client_fields_errors.append(ERROR_MESSAGE_CLIENT_ID_MISSING)
         # contains {clientId}
-        if "{clientId}" in client_id:
-            client_fields_errors.append((
-                "Replace {{clientId}} with the client ID of your Application. "
-                "You can copy it from the Okta Developer Console in the "
-                "details for the Application you created. Follow these "
-                "instructions to find it: "
-                f"{ConfigValidator.FINDING_OKTA_APP_CRED}"))
+        if "{clientId}".lower() in client_id:
+            client_fields_errors.append(ERROR_MESSAGE_CLIENT_ID_DEFAULT)
 
         # check that at least 1 scope is provided and private key is provided
         if not (client_scopes and client_private_key):
-            client_fields_errors.append((
-                "When using authorization mode 'PrivateKey', you must supply "
-                "'okta.client.scopes' and 'okta.client.privateKey'"))
+            client_fields_errors.append(ERROR_MESSAGE_SCOPES_PK_MISSING)
 
         return client_fields_errors
 
@@ -85,18 +82,10 @@ class ConfigValidator():
 
         # token is null or empty
         if not token:
-            token_errors.append((
-                "Your Okta API token is missing. "
-                "You can generate one in the Okta Developer Console. "
-                "Follow these instructions: "
-                f"{ConfigValidator.GET_OKTA_API_TOKEN}"))
+            token_errors.append(ERROR_MESSAGE_API_TOKEN_MISSING)
         # token contains {apiToken}
         if "{apiToken}".lower() in token:
-            token_errors.append((
-                "Replace {{apiToken}} with your Okta API token. "
-                "You can generate one in the Okta Developer Console. "
-                "Follow these instructions: "
-                f"{ConfigValidator.GET_OKTA_API_TOKEN}"))
+            token_errors.append(ERROR_MESSAGE_API_TOKEN_DEFAULT)
 
         return token_errors
 
@@ -108,49 +97,42 @@ class ConfigValidator():
 
         # if empty or null string
         if not url:
-            url_errors.append(
-                ("Your Okta URL is missing. You can copy your domain from the"
-                 " Okta Developer Console. Follow these instructions to find"
-                 f" it: {ConfigValidator.FINDING_OKTA_DOMAIN}"))
+            url_errors.append(ERROR_MESSAGE_ORG_URL_MISSING)
         # if url is not https (in non-testing env)
         if url and not (self._config["testing"]["testingDisableHttpsCheck"]
                         or url.startswith('https')):
             url_errors.append(
-                ("Your Okta URL must start with 'https'. Current value: "
+                (f"{ERROR_MESSAGE_ORG_URL_NOT_HTTPS} Current value: "
                  f"{url or None}. "
                  "You can copy your domain from the Okta Developer Console. "
                  "Follow these instructions to find it: "
-                 f"{ConfigValidator.FINDING_OKTA_DOMAIN}"))
+                 f"{FINDING_OKTA_DOMAIN}"))
         # url still contains default {yourOktaDomain}
         if "{yourOktaDomain}".lower() in url\
                 or "{{yourOktaDomain}}".lower() in url:
-            url_errors.append((
-                "Replace {{yourOktaDomain}} with your Okta domain. "
-                "You can copy your domain from the Okta Developer Console. "
-                "Follow these instructions to find it: "
-                f"{ConfigValidator.FINDING_OKTA_DOMAIN}"))
+            url_errors.append(ERROR_MESSAGE_ORG_URL_YOUROKTADOMAIN)
         # url contains -admin string
         admin_strings = ["-admin.okta.com",
                          "-admin.oktapreview.com", "-admin.okta-emea.com"]
         if any(string in url for string in admin_strings) or "-admin" in url:
             url_errors.append(
-                ("Your Okta domain should not contain -admin. "
+                (f"{ERROR_MESSAGE_ORG_URL_ADMIN} "
                  f"Current value: {url}. You can copy your domain "
                  "from the Okta Developer Console. Follow these instructions "
-                 f"to find it: {ConfigValidator.FINDING_OKTA_DOMAIN}"))
+                 f"to find it: {FINDING_OKTA_DOMAIN}"))
         # url ends with .com.com
         if url.endswith(".com.com"):
             url_errors.append((
-                "It looks like there's a typo in your Okta domain. Current "
+                f"{ERROR_MESSAGE_ORG_URL_TYPO} Current "
                 f"value: {url}. You can copy your domain from "
                 "the Okta Developer Console. Follow these instructions to find"
-                f" it: {ConfigValidator.FINDING_OKTA_DOMAIN}"))
+                f" it: {FINDING_OKTA_DOMAIN}"))
         # url contains multiple '://' segments
         if url.count("://") > 1:
             url_errors.append((
-                "It looks like there's a typo in your Okta domain. Current "
+                f"{ERROR_MESSAGE_ORG_URL_TYPO} Current "
                 f"value: {url}. You can copy your domain from "
                 "the Okta Developer Console. Follow these instructions to find"
-                f" it: {ConfigValidator.FINDING_OKTA_DOMAIN}"))
+                f" it: {FINDING_OKTA_DOMAIN}"))
 
         return url_errors

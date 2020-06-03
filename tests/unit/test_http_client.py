@@ -64,7 +64,6 @@ async def mock_invalid_HTTP_response(*args, **kwargs):
 
 @ pytest.mark.asyncio
 async def test_client_successful_call_SSWS(monkeypatch):
-
     http_client = HTTPClient({
         'oauth': None,
         'requestTimeout': REQUEST_TIMEOUT,
