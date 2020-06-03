@@ -1,4 +1,5 @@
 from okta.http_client import HTTPClient
+from okta.jwt import JWT
 from okta.user_agent import UserAgent
 # import time
 # import json
@@ -35,6 +36,7 @@ class RequestExecutor:
                  "greater than zero"))
         # Setup other fields
         self._authorization_mode = config["client"]["authorizationMode"]
+        self._base_url = config["client"]["orgUrl"]
         self._config = config
         self._cache = cache
         self._default_headers = {
@@ -65,11 +67,21 @@ class RequestExecutor:
 
         if self._authorization_mode == "PrivateKey":
             # check if access token exists
+            # if not, make one
+            # finally, add to header
             if self._cache.contains("OKTA_ACCESS_TOKEN"):
                 access_token = self._cache.get("OKTA_ACCESS_TOKEN")
-                headers.update({"Authorization": access_token})
+                headers.update({"Authorization": f"Bearer {access_token}"})
             else:
-                pass
+                # Generate using private key provided
+                private_key = self._config["client"]["privateKey"]
+                client_id = self._config["client"]["clientId"]
+                org_url = self._base_url
+
+                my_jwk, my_pem = JWT.get_PEM_JWK(private_key)
+
+                jwt = JWT.create_token(org_url, client_id, my_jwk, my_pem)
+                type(jwt)
 
         return request
 
@@ -80,7 +92,7 @@ class RequestExecutor:
         url = request["url"]
         method = request["method"]
 
-        if method.lower() == "GET".lower():
+        if method.upper() == "GET":
             self._cache.delete(url)
 
         # check if in cache

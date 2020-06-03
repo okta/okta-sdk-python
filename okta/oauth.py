@@ -1,22 +1,30 @@
 from urllib.parse import urlencode, quote
+from okta.jwt import JWT
+import json
 
 
 class OAuth:
     """
     This class contains the OAuth actions for the Okta Client.
     """
+    OAUTH_ENDPOINT = "/oauth2/v1/token"
 
     def __init__(self, okta_client):
         self._client = okta_client
-        self._jwt = None
+        self._access_token = None
 
     def getJwt(self):
-        return self._jwt or self.create_jwt(self._client)
+        config = self._client.get_config()
+        org_url = config["client"]["orgUrl"]
+        client_id = config["client"]["clientId"]
+        private_key = config["client"]["privateKey"]
 
-    def create_jwt(self, okta_client):
-        pass
+        return JWT.create_token(org_url, client_id, private_key)
 
     def get_access_token(self):
+        if self._access_token:
+            return self._access_token
+
         jwt = self.getJwt()
         parameters = {
             'grant_type': 'client_credentials',
@@ -26,13 +34,36 @@ class OAuth:
             'client_assertion': jwt
         }
         encoded_parameters = urlencode(parameters, quote_via=quote)
-        http_options = {
-            'url': f"{self._client.get_base_url()}/oauth2/v1/token",
+        url = f"{self._client.get_base_url()}{OAuth.OAUTH_ENDPOINT}?" + \
+            encoded_parameters
+        request = {
+            'url': url,
             'method': "POST",
-            'body': encoded_parameters,
             'headers': {
                 'Accept': "application/json",
                 'Content-Type': 'application/x-www-form-urlencoded'
             }
         }
-        return self._client.request_executor.send_request(http_options)
+        # Work on handling response
+        # Make max 1 retry
+        req, res_details, res_json, error = self._client._request_executor\
+            .fire_request(request)
+
+        if error:
+            return None, error
+
+        parsed_response = self._parse_response(res_details, res_json)
+        self._access_token = parsed_response["access_token"]
+
+        # print(token_response)
+
+    def _parse_response(self, res_details, json_resp):
+        dict_resp = json.dumps(json_resp)
+        status_code = res_details.status
+
+        # error check
+        if 200 <= status_code <= 300:
+            return dict_resp
+        else:
+            # create errors
+            pass

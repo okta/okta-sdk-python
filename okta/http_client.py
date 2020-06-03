@@ -42,7 +42,7 @@ class HTTPClient:
                 method=request["method"],
                 url=request["url"],
                 headers=self._default_headers,
-                data=request["data"] or {},
+                data={} if "data" not in request else request["data"],
                 timeout=self._timeout
             ) as response:
                 return (response.request_info,
