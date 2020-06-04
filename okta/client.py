@@ -1,7 +1,6 @@
 from okta.config.config_setter import ConfigSetter
 from okta.config.config_validator import ConfigValidator
 from okta.request_executor import RequestExecutor
-from okta.oauth import OAuth
 from okta.cache.no_op_cache import NoOpCache
 from okta.cache.okta_cache import OktaCache
 
@@ -54,7 +53,6 @@ class Client:
             self._client_id = self._config["client"]["clientId"]
             self._scopes = self._config["client"]["scopes"]
             self._private_key = self._config["client"]["privateKey"]
-            self._oauth = OAuth(self)
     """
     Getters
     """

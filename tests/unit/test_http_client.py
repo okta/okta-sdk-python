@@ -170,6 +170,7 @@ async def test_client_invalid_HTTP_method(monkeypatch):
 async def test_client_user_agent(monkeypatch):
     req_exec = RequestExecutor({
         "client": {
+            "orgUrl": "https://test.okta.com",
             "authorizationMode": 'SSWS',
             "token": 'token',
             "userAgent": ''
@@ -199,6 +200,7 @@ async def test_client_user_agent(monkeypatch):
     extra = "testing"
     req_exec = RequestExecutor({
         "client": {
+            "orgUrl": "https://test.okta.com",
             "authorizationMode": 'SSWS',
             "token": 'token',
             "userAgent": extra

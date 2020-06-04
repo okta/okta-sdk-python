@@ -1,5 +1,8 @@
 import aiohttp
 import asyncio
+import json
+from okta.errors.http_error import HTTPError
+from okta.errors.okta_api_error import OktaAPIError
 
 
 class HTTPClient:
@@ -51,3 +54,19 @@ class HTTPClient:
         except (aiohttp.ClientError, asyncio.exceptions.TimeoutError) as error:
             # Return error if arises
             return (None, None, None, error)
+
+    @staticmethod
+    def check_response_for_error(url, response_details, response_body):
+        dict_resp = json.loads(json.dumps(response_body))
+        status_code = response_details.status
+
+        # error check
+        if 200 <= status_code <= 300:
+            return dict_resp, None
+        else:
+            # create errors
+            try:
+                error = OktaAPIError(url, response_details, dict_resp)
+            except Exception:
+                error = HTTPError(url, response_details, dict_resp)
+            return None, error

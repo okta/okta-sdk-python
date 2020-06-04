@@ -1,6 +1,6 @@
 from urllib.parse import urlencode, quote
 from okta.jwt import JWT
-import json
+from okta.http_client import HTTPClient
 
 
 class OAuth:
@@ -21,7 +21,7 @@ class OAuth:
 
         return JWT.create_token(org_url, client_id, private_key)
 
-    def get_access_token(self):
+    async def get_access_token(self):
         if self._access_token:
             return self._access_token
 
@@ -35,7 +35,8 @@ class OAuth:
         }
 
         encoded_parameters = urlencode(parameters, quote_via=quote)
-        url = f"{self._client.get_base_url()}{OAuth.OAUTH_ENDPOINT}?" + \
+        org_url = self._config["client"]["orgUrl"]
+        url = f"{org_url}{OAuth.OAUTH_ENDPOINT}?" + \
             encoded_parameters
         request = {
             'url': url,
@@ -47,26 +48,17 @@ class OAuth:
         }
         # Work on handling response
         # Make max 1 retry
-        req, res_details, res_json, err = self._request_executor.fire_request(
-            request)
+        _, res_details, res_json, err = \
+            await self._request_executor.fire_request(request)
 
         if err:
             return None, err
 
-        parsed_response = self._parse_response(res_details, res_json)
+        parsed_response, err = HTTPClient.check_response_for_error(
+            url, res_details, res_json)
+
         self._access_token = parsed_response["access_token"]
-        return self._access_token
+        return self._access_token, None
 
     def clear_access_token(self):
         self._access_token = None
-
-    def _parse_response(self, res_details, json_resp):
-        dict_resp = json.dumps(json_resp)
-        status_code = res_details.status
-
-        # error check
-        if 200 <= status_code <= 300:
-            return dict_resp
-        else:
-            # create errors
-            pass

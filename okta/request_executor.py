@@ -1,7 +1,8 @@
 from okta.http_client import HTTPClient
 from okta.user_agent import UserAgent
 from okta.oauth import OAuth
-# import time
+import time
+from http import HTTPStatus
 # import json
 
 
@@ -60,8 +61,8 @@ class RequestExecutor:
             'headers': self._default_headers
         })
 
-    def create_request(self, method: str, url: str, body: dict = None,
-                       headers: dict = None):
+    async def create_request(self, method: str, url: str, body: dict = None,
+                             headers: dict = None):
         request = {
             "method": method
         }
@@ -78,7 +79,10 @@ class RequestExecutor:
                 access_token = self._cache.get("OKTA_ACCESS_TOKEN")
             else:
                 # Generate using private key provided
-                access_token = self._oauth.get_access_token()
+                access_token, error = await self._oauth.get_access_token()
+                if error:
+                    return None, error
+
             headers.update({"Authorization": f"Bearer {access_token}"})
             self._cache.add("OKTA_ACCESS_TOKEN", access_token)
 
@@ -89,27 +93,71 @@ class RequestExecutor:
         request["url"] = url
         request["body"] = body
 
-        return request
+        return request, None
 
-    def fire_request(self, request):
-        # Get start request time
-        # request_start_time = time.time()
-
+    async def fire_request(self, request):
         url = request["url"]
+        url_cache_key = self._cache.create_key(url)
         method = request["method"]
 
         if method.upper() == "GET":
-            self._cache.delete(url)
+            self._cache.delete(url_cache_key)
 
         # check if in cache
-        if not self._cache.contains(url):
+        if not self._cache.contains(url_cache_key):
             # shoot request
-            req, res_details, res_json, error = self._http_client.send_request(
-                request)
-        pass
+            return\
+                await self._http_client.send_request(request)
+            # return (req, res_details, res_json, error)
 
-    def retry_request(self, request):
-        pass
+        return (request, None, self._cache.get(url_cache_key), None)
+
+    async def fire_request_helper(self, request, attempts, request_start_time):
+        # Get start request time
+        current_req_start_time = int(time.time())
+        max_retries = self._max_retries
+        req_timeout = self._request_timeout
+
+        if req_timeout > 0 and \
+                (current_req_start_time-request_start_time) > req_timeout:
+            # Timeout is hit for request
+            return None, Exception("Request Timeout exceeded.")
+
+        # Do request
+        req, res_details, res_json, error = \
+            await self._http_client.send_request(request)
+
+        check_429 = self.is_too_many_requests(res_details.status, res_json)
+        headers = res_details.headers
+
+        if attempts < max_retries and (error or check_429):
+            date_time = headers.get("Date", "")
+            retry_limit_reset = headers.get("X-Rate-Limit-Reset", "")
+            if not date_time or not retry_limit_reset:
+                return None, \
+                    Exception(("429 response must have the "
+                               "'X-Rate-Limit-Reset' and 'Date' headers"))
+
+            if check_429:
+                # backoff
+                pass
+
+            attempts += 1
+
+            request['headers'].update({
+                RequestExecutor.RETRY_FOR_HEADER: headers.get(
+                    "X-Okta-Request-Id", ""),
+                RequestExecutor.RETRY_COUNT_HEADER: attempts
+            })
+
+            req, res_details, res_json, error = \
+                await self._http_client.send_request(request)
+
+        return req, res_details, res_json, error
+
+    def is_too_many_requests(self, status, response):
+        return response is not None\
+            and status == HTTPStatus.TOO_MANY_REQUESTS
 
     def parse_response(self, request, response):
         pass
