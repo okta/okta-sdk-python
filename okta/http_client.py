@@ -14,9 +14,6 @@ class HTTPClient:
     def __init__(self, http_config={}):
         # Get headers from Request Executor
         self._default_headers = http_config["headers"]
-        # Setup oauth if available
-        self._oauth = None if "oauth" not in http_config \
-            else http_config["oauth"]
         # Create timeout for all HTTP requests
         self._timeout = aiohttp.ClientTimeout(
             total=http_config["requestTimeout"]

@@ -2,6 +2,8 @@ from okta.http_client import HTTPClient
 from okta.request_executor import RequestExecutor
 from okta.cache.no_op_cache import NoOpCache
 from okta.user_agent import UserAgent
+from okta.client import Client
+from okta.oauth import OAuth
 import pytest
 import aiohttp
 import asyncio
@@ -10,6 +12,10 @@ import json
 REQUEST_TIMEOUT = 5  # seconds
 ORG_URL = "https://your.okta.com"
 API_TOKEN = "yourApiToken"
+CLIENT_ID = "yourClientId"
+SCOPES = ["okta.scope.1"]
+PRIVATE_KEY = "yourPrivateKey"
+
 GET_USERS_CALL = "/api/v1/users?limit=200"
 
 
@@ -44,7 +50,7 @@ async def mock_return(*args, **kwargs):
     return response.response()
 
 
-async def mock_return_error(*args, **kwargs):
+async def mock_return_api_error(*args, **kwargs):
     return (None, None, None, json.dumps({
         'errorCode': '',
         'errorSummary': '',
@@ -62,25 +68,28 @@ async def mock_invalid_HTTP_response(*args, **kwargs):
     return (None, None, None, aiohttp.ContentTypeError(None, None))
 
 
+async def mock_access_token(*args, **kwargs):
+    return ("This is an OAuth access token", None)
+
+
 @ pytest.mark.asyncio
 async def test_client_successful_call_SSWS(monkeypatch):
-    http_client = HTTPClient({
-        'oauth': None,
-        'requestTimeout': REQUEST_TIMEOUT,
-        'headers': {
-            "User-Agent": UserAgent().get_user_agent_string(),
-            "Authorization": f"SSWS {API_TOKEN}"
-        }
+    ssws_client = Client({
+        "orgUrl": ORG_URL,
+        "token": API_TOKEN
     })
 
-    monkeypatch.setattr(HTTPClient, 'send_request', mock_return)
+    req = await ssws_client.get_request_executor()\
+        .create_request("GET",
+                        GET_USERS_CALL,
+                        {},
+                        {})
 
-    req, res_details, res_json, error = await http_client.send_request({
-        'method': 'GET',
-        'url': ORG_URL + GET_USERS_CALL,  # Get all users in org
-        'headers': {},
-        'data': {}
-    })
+    monkeypatch.setattr(RequestExecutor, 'fire_request',
+                        mock_return)
+
+    req, res_details, res_json, error = await ssws_client\
+        .get_request_executor().fire_request(req)
 
     assert error is None
     assert "User-Agent" in req.headers
@@ -92,35 +101,87 @@ async def test_client_successful_call_SSWS(monkeypatch):
 
 @ pytest.mark.asyncio
 async def test_client_error_call_SSWS(monkeypatch):
-
-    http_client = HTTPClient({
-        'oauth': None,
-        'requestTimeout': REQUEST_TIMEOUT,
-        'headers': {
-            "User-Agent": UserAgent().get_user_agent_string(),
-            "Authorization": "SSWS wrong_token"
-        }
+    ssws_client = Client({
+        "orgUrl": ORG_URL,
+        "token": API_TOKEN + "wrong token"
     })
 
-    monkeypatch.setattr(HTTPClient, 'send_request', mock_return_error)
+    req = await ssws_client.get_request_executor()\
+        .create_request("GET",
+                        GET_USERS_CALL,
+                        {},
+                        {})
 
-    req, res_details, res_json, error = await http_client.send_request({
-        'method': 'GET',
-        'url': ORG_URL + GET_USERS_CALL,  # Get all users in org
-        'headers': {},
-        'data': {}
-    })
+    monkeypatch.setattr(RequestExecutor, 'fire_request',
+                        mock_return_api_error)
+
+    req, res_details, res_json, error = await ssws_client\
+        .get_request_executor().fire_request(req)
 
     assert error is not None
-    assert req is None
-    assert res_details is None
-    assert res_json is None
+    assert all(values in [None] for values in [req, res_details, res_json])
+
+
+@ pytest.mark.asyncio
+async def test_client_successful_call_oauth(monkeypatch):
+    oauth_client = Client({
+        "orgUrl": ORG_URL,
+        "authorizationMode": "PrivateKey",
+        "clientId": CLIENT_ID,
+        "scopes": SCOPES,
+        "privateKey": PRIVATE_KEY
+    })
+    monkeypatch.setattr(RequestExecutor, 'fire_request',
+                        mock_return)
+    monkeypatch.setattr(OAuth, 'get_access_token', mock_access_token)
+
+    req, err = await oauth_client.get_request_executor()\
+        .create_request("GET",
+                        GET_USERS_CALL,
+                        {},
+                        {})
+
+    req, res_details, res_json, error = await oauth_client\
+        .get_request_executor().fire_request(req)
+
+    assert error is None
+    assert "User-Agent" in req.headers
+    assert "Authorization" in req.headers
+    assert req.headers["Authorization"].startswith("SSWS")
+    assert res_details['Content-Type'] == "application/json"
+    assert type(res_json) == list
+
+
+@ pytest.mark.asyncio
+async def test_client_error_call_oauth(monkeypatch):
+    oauth_client = Client({
+        "orgUrl": ORG_URL,
+        "authorizationMode": "PrivateKey",
+        "clientId": CLIENT_ID,
+        "scopes": SCOPES,
+        "privateKey": PRIVATE_KEY + "Wrong one"
+    })
+
+    monkeypatch.setattr(RequestExecutor, 'fire_request',
+                        mock_return_api_error)
+    monkeypatch.setattr(OAuth, 'get_access_token', mock_access_token)
+
+    req = await oauth_client.get_request_executor()\
+        .create_request("GET",
+                        GET_USERS_CALL,
+                        {},
+                        {})
+
+    req, res_details, res_json, error = await oauth_client\
+        .get_request_executor().fire_request(req)
+
+    assert error is not None
+    assert all(values in [None] for values in [req, res_details, res_json])
 
 
 @ pytest.mark.asyncio
 async def test_client_invalid_url():
     http_client = HTTPClient({
-        'oauth': None,
         'requestTimeout': REQUEST_TIMEOUT,
         'headers': {}
     })
@@ -138,7 +199,6 @@ async def test_client_invalid_url():
 @ pytest.mark.asyncio
 async def test_client_invalid_HTTP_method(monkeypatch):
     http_client = HTTPClient({
-        'oauth': None,
         'requestTimeout': REQUEST_TIMEOUT,
         'headers': {}
     })
@@ -214,7 +274,6 @@ async def test_client_user_agent(monkeypatch):
 @ pytest.mark.asyncio
 async def test_client_timeout(monkeypatch):
     http_client = HTTPClient({
-        'oauth': None,
         'requestTimeout': REQUEST_TIMEOUT,
         'headers': {}
     })

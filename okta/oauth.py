@@ -14,7 +14,7 @@ class OAuth:
         self._config = config
         self._access_token = None
 
-    def getJwt(self):
+    def get_JWT(self):
         org_url = self._config["client"]["orgUrl"]
         client_id = self._config["client"]["clientId"]
         private_key = self._config["client"]["privateKey"]
@@ -25,7 +25,7 @@ class OAuth:
         if self._access_token:
             return self._access_token
 
-        jwt = self.getJwt()
+        jwt = self.get_JWT()
         parameters = {
             'grant_type': 'client_credentials',
             'scope': ' '.join(self._config["client"]["scopes"]),

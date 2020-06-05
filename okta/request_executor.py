@@ -91,7 +91,7 @@ class RequestExecutor:
 
         request["headers"] = headers
         request["url"] = url
-        request["body"] = body
+        request["data"] = body
 
         return request, None
 

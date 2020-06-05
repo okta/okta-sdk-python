@@ -65,3 +65,6 @@ class Client:
 
     def get_base_url(self):
         return self._base_url
+
+    def get_request_executor(self):
+        return self._request_executor
