@@ -1,4 +1,5 @@
 from Crypto.PublicKey import RSA
+from ast import literal_eval
 import jose.jwk as jwk
 import jose.jwt as jwt
 import time
@@ -39,7 +40,11 @@ class JWT():
         my_pem = None
 
         # check if JWK
-        if (type(private_key) == dict):
+        if ((type(private_key) == str and private_key.startswith("{")) or
+                type(private_key) == dict):
+            if (type(private_key) == str):
+                private_key = literal_eval(private_key)
+
             my_jwk = jwk.construct(private_key, JWT.HASH_ALGORITHM)
         else:  # it's a string
             # check for filepath or explicit private key
@@ -52,8 +57,8 @@ class JWT():
                 my_pem = RSA.import_key(private_key_bytes)
 
             if not my_pem:
-                return None, ValueError(
-                    "RSA Private Key given is of the wrong type")
+                return (None, ValueError(
+                    "RSA Private Key given is of the wrong type"))
 
         if my_jwk:  # was JWK
             # get PEM using JWK

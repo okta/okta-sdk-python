@@ -47,7 +47,8 @@ class HTTPClient:
             ) as response:
                 return (response.request_info,
                         response,
-                        await response.json(), None)
+                        await response.json(),
+                        None)
         except (aiohttp.ClientError, asyncio.exceptions.TimeoutError) as error:
             # Return error if arises
             return (None, None, None, error)
@@ -59,11 +60,11 @@ class HTTPClient:
 
         # error check
         if 200 <= status_code <= 300:
-            return dict_resp, None
+            return (dict_resp, None)
         else:
             # create errors
             try:
                 error = OktaAPIError(url, response_details, dict_resp)
             except Exception:
                 error = HTTPError(url, response_details, dict_resp)
-            return None, error
+            return (None, error)

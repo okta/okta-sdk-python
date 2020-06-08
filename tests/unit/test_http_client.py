@@ -15,7 +15,6 @@ API_TOKEN = "yourApiToken"
 CLIENT_ID = "yourClientId"
 SCOPES = ["okta.scope.1"]
 PRIVATE_KEY = "yourPrivateKey"
-
 GET_USERS_CALL = "/api/v1/users?limit=200"
 
 
@@ -131,16 +130,18 @@ async def test_client_successful_call_oauth(monkeypatch):
         "scopes": SCOPES,
         "privateKey": PRIVATE_KEY
     })
+
+    request_executor = oauth_client.get_request_executor()
+
+    monkeypatch.setattr(OAuth, 'get_access_token', mock_access_token)
+    req, err = await request_executor.create_request(
+        "GET",
+        GET_USERS_CALL,
+        {},
+        {})
+
     monkeypatch.setattr(RequestExecutor, 'fire_request',
                         mock_return)
-    monkeypatch.setattr(OAuth, 'get_access_token', mock_access_token)
-
-    req, err = await oauth_client.get_request_executor()\
-        .create_request("GET",
-                        GET_USERS_CALL,
-                        {},
-                        {})
-
     req, res_details, res_json, error = await oauth_client\
         .get_request_executor().fire_request(req)
 

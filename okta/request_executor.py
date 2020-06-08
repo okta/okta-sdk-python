@@ -81,7 +81,7 @@ class RequestExecutor:
                 # Generate using private key provided
                 access_token, error = await self._oauth.get_access_token()
                 if error:
-                    return None, error
+                    return (None, error)
 
             headers.update({"Authorization": f"Bearer {access_token}"})
             self._cache.add("OKTA_ACCESS_TOKEN", access_token)
@@ -93,7 +93,7 @@ class RequestExecutor:
         request["url"] = url
         request["data"] = body
 
-        return request, None
+        return (request, None)
 
     async def fire_request(self, request):
         url = request["url"]
@@ -106,9 +106,8 @@ class RequestExecutor:
         # check if in cache
         if not self._cache.contains(url_cache_key):
             # shoot request
-            return\
-                await self._http_client.send_request(request)
-            # return (req, res_details, res_json, error)
+            return await self._http_client\
+                .send_request(request)
 
         return (request, None, self._cache.get(url_cache_key), None)
 
@@ -153,7 +152,7 @@ class RequestExecutor:
             req, res_details, res_json, error = \
                 await self._http_client.send_request(request)
 
-        return req, res_details, res_json, error
+        return (req, res_details, res_json, error)
 
     def is_too_many_requests(self, status, response):
         return response is not None\

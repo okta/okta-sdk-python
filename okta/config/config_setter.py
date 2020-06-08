@@ -95,7 +95,7 @@ class ConfigSetter():
         self._config["client"]["authorizationMode"] = "SSWS"
         self._config["client"]["connectionTimeout"] = 30
         self._config["client"]["cache"] = {
-            "enabled": True,
+            "enabled": False,
             "defaultTtl": 300,
             "defaultTti": 300
         }
@@ -136,13 +136,8 @@ class ConfigSetter():
         # Start with empty config
         config = {}
         with open(path, 'r') as file:
-            try:
-                # Open file stream and attempt to load YAML
-                config = yaml.load(file, Loader=yaml.SafeLoader)
-            except yaml.YAMLError as err:
-                # Error handling if YAML doesn't load properly
-                # TODO check error handling on YAML
-                print(err)
+            # Open file stream and attempt to load YAML
+            config = yaml.load(file, Loader=yaml.SafeLoader)
         # Apply acquired config to configuration
         self._apply_config(config.get("okta", {}))
 
@@ -167,7 +162,9 @@ class ConfigSetter():
 
             if env_value is not None:
                 # If value is found, add to config
-                updated_config[key] = env_value if "scopes" not in key \
-                    else env_value.split(',')
-        # apply to current configuration
+                if "scopes" in key.lower():
+                    updated_config[key] = env_value.split(',')
+                else:
+                    updated_config[key] = env_value
+            # apply to current configuration
         self._apply_config(updated_config.as_dict())

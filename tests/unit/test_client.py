@@ -420,7 +420,7 @@ def test_constructor_precedence_highest_rank_env_vars(fs):
     assert env_token == loaded_config['client']['token']
 
 
-def test_constructor_precedence_highest_rank_user_config(fs):
+def test_constructor_precedence_highest_rank_user_config():
     # Setup env. vars
     env_org_url = "https://test.env.okta.com"
     env_token = "envTOKEN"

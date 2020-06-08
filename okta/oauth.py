@@ -52,13 +52,16 @@ class OAuth:
             await self._request_executor.fire_request(request)
 
         if err:
-            return None, err
+            return (None, err)
 
         parsed_response, err = HTTPClient.check_response_for_error(
             url, res_details, res_json)
 
+        if err:
+            return (None, err)
+
         self._access_token = parsed_response["access_token"]
-        return self._access_token, None
+        return (self._access_token, None)
 
     def clear_access_token(self):
         self._access_token = None
