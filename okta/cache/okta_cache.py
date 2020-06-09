@@ -1,5 +1,5 @@
 from okta.cache.cache import Cache
-from threading import Timer
+import time
 
 
 class OktaCache(Cache):
@@ -18,9 +18,8 @@ class OktaCache(Cache):
         """
         super()  # Inherit from parent class
         self._store = {}  # key -> {value, TTI, TTL}
-        # allow 0.01 for methods to work for more consistent results
-        self._time_to_live = ttl - 0.01
-        self._time_to_idle = tti - 0.01
+        self._time_to_live = ttl
+        self._time_to_idle = tti
 
     def get(self, key):
         """
@@ -33,16 +32,13 @@ class OktaCache(Cache):
             str -- Corresponding value to given key
             None -- Unable to find value for this key
         """
+        self._clean_cache()
+        now = self.get_current_time()
         # Check if key is in cache
         if self.contains(key):
             entry = self._store[key]
-
-            # Cancel and restart TTI timer
-            entry['tti'].cancel()
-            new_idle_timer = self._create_delete_timer(key, idle=True)
-            entry['tti'] = new_idle_timer
-            new_idle_timer.start()
-
+            print("GET", entry)
+            entry["tti"] = now + self._time_to_idle
             # Return desired value
             return entry["value"]
         # Return None if key isn't in cache
@@ -58,7 +54,7 @@ class OktaCache(Cache):
         Returns:
             bool -- Existence of key in cache
         """
-        return key in self._store
+        return key in self._store and self._is_valid_entry(self._store[key])
 
     def add(self, key: str, value: str):
         """
@@ -70,19 +66,16 @@ class OktaCache(Cache):
         """
         if type(key) == str and type(value) != list:
             # Create timers for TTI and TTL
-            idle_timer = self._create_delete_timer(key, idle=True)
-            life_timer = self._create_delete_timer(key, idle=False)
+            now = self.get_current_time()
 
             # Add new entry to cache with timers
             self._store[key] = {
                 'value': value,
-                'tti': idle_timer,
-                'ttl': life_timer
+                'tti': now + self._time_to_idle,
+                'ttl': now + self._time_to_live
             }
-
-            # Start timers!
-            idle_timer.start()
-            life_timer.start()
+            print("ADD", self._store[key])
+        self._clean_cache()
 
     def delete(self, key):
         """
@@ -93,9 +86,6 @@ class OktaCache(Cache):
         """
         # Make sure key is in cache
         if self.contains(key):
-            self._store[key]['tti'].cancel()
-            self._store[key]['ttl'].cancel()
-
             # Delete entry
             del self._store[key]
 
@@ -105,22 +95,15 @@ class OktaCache(Cache):
         """
         self._store.clear()
 
-    def _create_delete_timer(self, key, idle=False):
-        """
-        Helper function to create Timers for key-value pairs
+    def _clean_cache(self):
+        for key in self._store.keys():
+            if not self._is_valid_entry(self._store[key]):
+                self.delete(key)
 
-        Arguments:
-            key {str} -- Key identifying entry
+    def _is_valid_entry(self, entry):
+        now = self.get_current_time()
+        timers = [entry["tti"], entry["ttl"]]
+        return not any(timer <= now for timer in timers)
 
-        Keyword Arguments:
-            idle {bool} -- If timer is for TTI (default) or TTL
-            (default: {False})
-
-        Returns:
-            threading.Timer -- Timer object with contains the callback to
-            delete the key-value pair if finished
-        """
-        if idle is True:
-            return Timer(self._time_to_idle, self.delete, [key], {})
-        else:
-            return Timer(self._time_to_live, self.delete, [key], {})
+    def get_current_time(self):
+        return time.time()
