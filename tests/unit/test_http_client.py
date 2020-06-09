@@ -4,6 +4,7 @@ from okta.cache.no_op_cache import NoOpCache
 from okta.user_agent import UserAgent
 from okta.client import Client
 from okta.oauth import OAuth
+from okta.errors.okta_api_error import OktaAPIError
 import pytest
 import aiohttp
 import asyncio
@@ -72,13 +73,13 @@ async def mock_access_token(*args, **kwargs):
 
 
 @ pytest.mark.asyncio
-async def test_client_successful_call_SSWS(monkeypatch):
+async def test_client_success_call_SSWS(monkeypatch):
     ssws_client = Client({
         "orgUrl": ORG_URL,
         "token": API_TOKEN
     })
 
-    req = await ssws_client.get_request_executor()\
+    req, error = await ssws_client.get_request_executor()\
         .create_request("GET",
                         GET_USERS_CALL,
                         {},
@@ -98,27 +99,28 @@ async def test_client_successful_call_SSWS(monkeypatch):
     assert type(res_json) == list
 
 
+@ pytest.mark.vcr()
 @ pytest.mark.asyncio
-async def test_client_error_call_SSWS(monkeypatch):
+async def test_client_error_call_SSWS():
     ssws_client = Client({
         "orgUrl": ORG_URL,
         "token": API_TOKEN + "wrong token"
     })
 
-    req = await ssws_client.get_request_executor()\
+    req, error = await ssws_client.get_request_executor()\
         .create_request("GET",
                         GET_USERS_CALL,
                         {},
                         {})
 
-    monkeypatch.setattr(RequestExecutor, 'fire_request',
-                        mock_return_api_error)
-
     req, res_details, res_json, error = await ssws_client\
         .get_request_executor().fire_request(req)
 
-    assert error is not None
-    assert all(values in [None] for values in [req, res_details, res_json])
+    parsed, error = HTTPClient.check_response_for_error(
+        req.url, res_details, res_json)
+
+    assert isinstance(error, OktaAPIError)
+    assert error.message.startswith("Okta HTTP")
 
 
 @ pytest.mark.asyncio
@@ -153,6 +155,7 @@ async def test_client_successful_call_oauth(monkeypatch):
     assert type(res_json) == list
 
 
+@pytest.mark.vcr()
 @ pytest.mark.asyncio
 async def test_client_error_call_oauth(monkeypatch):
     oauth_client = Client({
@@ -163,11 +166,9 @@ async def test_client_error_call_oauth(monkeypatch):
         "privateKey": PRIVATE_KEY + "Wrong one"
     })
 
-    monkeypatch.setattr(RequestExecutor, 'fire_request',
-                        mock_return_api_error)
     monkeypatch.setattr(OAuth, 'get_access_token', mock_access_token)
 
-    req = await oauth_client.get_request_executor()\
+    req, err = await oauth_client.get_request_executor()\
         .create_request("GET",
                         GET_USERS_CALL,
                         {},
@@ -176,8 +177,11 @@ async def test_client_error_call_oauth(monkeypatch):
     req, res_details, res_json, error = await oauth_client\
         .get_request_executor().fire_request(req)
 
-    assert error is not None
-    assert all(values in [None] for values in [req, res_details, res_json])
+    parsed, error = HTTPClient.check_response_for_error(
+        req.url, res_details, res_json)
+
+    assert isinstance(error, OktaAPIError)
+    assert error.message.startswith("Okta HTTP")
 
 
 @ pytest.mark.asyncio

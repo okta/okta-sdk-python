@@ -14,5 +14,5 @@ class OktaAPIError():
         self.headers = response_details.headers
         self.stack = ""
 
-        self.message = f"Okta HTTP {self.status} {self.error_code} "
-        f"{self.error_summary} {error_causes_string}"
+        self.message = (f"Okta HTTP {self.status} {self.error_code} "
+                        f"{self.error_summary}. {error_causes_string}")
