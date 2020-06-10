@@ -55,10 +55,23 @@ class HTTPClient:
 
     @staticmethod
     def check_response_for_error(url, response_details, response_body):
+        """
+        Checks HTTP response for errors in the response body
+
+        Args:
+            url (str): URL of response
+            response_details (aiohttp.ClientResponse): Response object with
+            details response_body (json): Response body in JSON format
+
+        Returns:
+            dict, (OktaAPIError or HTTPError): Tuple of: dict repr of the
+            response (if no error), any error found
+        """
+        # Retrieve dictionary repr and response status code
         dict_resp = json.loads(json.dumps(response_body))
         status_code = response_details.status
 
-        # error check
+        # check if call was succesful
         if 200 <= status_code <= 300:
             return (dict_resp, None)
         else:

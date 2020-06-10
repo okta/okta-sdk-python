@@ -127,19 +127,21 @@ def test_constructor_user_config_SSWS():
     assert token == loaded_config['client']['token']
 
 
-def test_constructor_user_config_PK():
+@ pytest.mark.parametrize("private_key", ["private key hash",
+                                          "pem_file.pem",
+                                          "{'Jwks'}"])
+def test_constructor_user_config_PK(private_key):
     org_url = "https://test.okta.com"
     authorizationMode = "PrivateKey"
     client_id = "clientID"
     scopes = ["scope1"]
-    private_key_hash = "private key hash"
 
     config = {
         'orgUrl': org_url,
         'authorizationMode': authorizationMode,
         'clientId': client_id,
         'scopes': scopes,
-        'privateKey': private_key_hash
+        'privateKey': private_key
     }
     client = OktaClient(user_config=config)
     loaded_config = client.get_config()
@@ -147,7 +149,7 @@ def test_constructor_user_config_PK():
     assert authorizationMode == loaded_config['client']['authorizationMode']
     assert client_id == loaded_config['client']['clientId']
     assert scopes == loaded_config['client']['scopes']
-    assert private_key_hash == loaded_config['client']['privateKey']
+    assert private_key == loaded_config['client']['privateKey']
 
 
 def test_constructor_user_config_PK_empty():

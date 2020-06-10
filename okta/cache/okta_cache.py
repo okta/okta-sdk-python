@@ -32,16 +32,19 @@ class OktaCache(Cache):
             str -- Corresponding value to given key
             None -- Unable to find value for this key
         """
-        self._clean_cache()
-        now = self.get_current_time()
-        # Check if key is in cache
+        # Get current time
+        now = self._get_current_time()
+        # Check if key is in cache and valid
         if self.contains(key):
             entry = self._store[key]
-            print("GET", entry)
+            # Reset TTI
             entry["tti"] = now + self._time_to_idle
-            # Return desired value
+            # Return desired value and update cache
+            self._clean_cache()
             return entry["value"]
-        # Return None if key isn't in cache
+
+        # Return None if key isn't in cache and update cache
+        self._clean_cache()
         return None
 
     def contains(self, key):
@@ -65,8 +68,8 @@ class OktaCache(Cache):
             value {str} -- Value in pair
         """
         if type(key) == str and type(value) != list:
-            # Create timers for TTI and TTL
-            now = self.get_current_time()
+            # Get current time
+            now = self._get_current_time()
 
             # Add new entry to cache with timers
             self._store[key] = {
@@ -74,7 +77,7 @@ class OktaCache(Cache):
                 'tti': now + self._time_to_idle,
                 'ttl': now + self._time_to_live
             }
-            print("ADD", self._store[key])
+        # Update cache
         self._clean_cache()
 
     def delete(self, key):
@@ -85,7 +88,7 @@ class OktaCache(Cache):
             key {str} -- Desired key
         """
         # Make sure key is in cache
-        if self.contains(key):
+        if key in self._store:
             # Delete entry
             del self._store[key]
 
@@ -96,14 +99,41 @@ class OktaCache(Cache):
         self._store.clear()
 
     def _clean_cache(self):
+        """
+        Updates cache by removing expired entries at time of call
+        """
+        expired = []
+        # Check every entry
         for key in self._store.keys():
+            # If not valid, delete
             if not self._is_valid_entry(self._store[key]):
-                self.delete(key)
+                expired.append(key)
+        # Delete keys
+        for expired_key in expired:
+            self.delete(expired_key)
 
     def _is_valid_entry(self, entry):
-        now = self.get_current_time()
+        """
+        Determines if a given cache entry is not expired.
+
+        Args:
+            entry (dict): An entry from the cache composed of value,
+            TTI, and TTL
+
+        Returns:
+            bool: Boolean value representing if entry is expired
+        """
+        # Get Current time
+        now = self._get_current_time()
+        # Check timers and compare against current time
         timers = [entry["tti"], entry["ttl"]]
         return not any(timer <= now for timer in timers)
 
-    def get_current_time(self):
+    def _get_current_time(self):
+        """
+        Helper function to get current time
+
+        Returns:
+            float: value representing the number of seconds since the epoch
+        """
         return time.time()
