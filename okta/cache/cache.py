@@ -75,7 +75,7 @@ class Cache():
     def create_key(self, request):
         """
         A method used to create a unique key for an entry in the cache.
-        Used with URL's that requests fire at.
+        Used with URLs that requests fire at.
 
         Arguments:
             request {str} -- The key to use to produce a unique key
