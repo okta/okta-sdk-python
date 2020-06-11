@@ -72,7 +72,7 @@ class HTTPClient:
         status_code = response_details.status
 
         # check if call was succesful
-        if 200 <= status_code <= 300:
+        if 200 <= status_code <= 299:
             return (dict_resp, None)
         else:
             # create errors
