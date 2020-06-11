@@ -27,6 +27,9 @@ def test_cache_add_entry():
     cache.add(KEY, VALUE)
     assert cache._store[KEY]["value"] == VALUE
 
+    cache.add("test string", VALUE)
+    assert cache._store["test string"]["value"] == VALUE
+
 
 def test_cache_has_key():
     cache = OktaCache(TTL, TTI)

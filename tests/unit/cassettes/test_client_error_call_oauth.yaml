@@ -1,0 +1,37 @@
+interactions:
+- request:
+    body: {}
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - Bearer This is an OAuth access token
+      Content-Type:
+      - application/json
+      User-Agent:
+      - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
+    method: GET
+    uri: https://your.okta.com/api/v1/users?limit=200
+  response:
+    body:
+      string: '{"errorCode":"E0000005","errorSummary":"Invalid session","errorLink":"E0000005","errorId":"oaeh0Zd0jXXSuudCHwblOZX2w","errorCauses":[]}'
+    headers:
+      Connection: keep-alive
+      Content-Encoding: gzip
+      Content-Type: application/json
+      Date: Mon, 08 Jun 2020 20:17:17 GMT
+      P3P: CP="HONK"
+      Public-Key-Pins-Report-Only: pin-sha256="r5EfzZxQVvQpKo3AgYRaT7X2bDO/kj3ACwmxfdT2zt8=";
+        pin-sha256="MaqlcUgk2mvY/RFSGeSwBRkI+rZ6/dxe/DuQfBT/vnQ="; pin-sha256="72G5IEvDEWn+EThf3qjR7/bQSWaS2ZSLqolhnO6iyJI=";
+        pin-sha256="rrV6CLCCvqnk89gWibYT0JO6fNQ8cCit7GGoiVTjCOg="; max-age=60; report-uri="https://okta.report-uri.com/r/default/hpkp/reportOnly"
+      Server: nginx
+      Set-Cookie: sid=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
+      Transfer-Encoding: chunked
+      Vary: Accept-Encoding
+      X-Content-Type-Options: nosniff
+      X-Okta-Request-Id: Xt6czGDEMhETm3Ns0@A04gAABLk
+    status:
+      code: 403
+      message: Forbidden
+    url: https://your.okta.com/api/v1/users?limit=200
+version: 1

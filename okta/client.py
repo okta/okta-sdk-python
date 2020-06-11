@@ -1,7 +1,6 @@
 from okta.config.config_setter import ConfigSetter
 from okta.config.config_validator import ConfigValidator
 from okta.request_executor import RequestExecutor
-from okta.oauth import OAuth
 from okta.cache.no_op_cache import NoOpCache
 from okta.cache.okta_cache import OktaCache
 
@@ -23,14 +22,9 @@ class Client:
         self._authorization_mode = self._config["client"]["authorizationMode"]
         self._base_url = self._config["client"]["orgUrl"]
         self._api_token = self._config["client"].get("token", None)
-        self._oauth = None
-
-        # set private key variables
-        if self._authorization_mode == 'PrivateKey':
-            self._client_id = self._config["client"]["clientId"]
-            self._scopes = self._config["client"]["scopes"]
-            self._private_key = self._config["client"]["privateKey"]
-            self._oauth = OAuth(self)
+        self._client_id = None
+        self._scopes = None
+        self._private_key = None
 
         # Determine which cache to use
         cache = NoOpCache()
@@ -54,6 +48,11 @@ class Client:
                                 user_config.get("httpClient", None),
                             ))
 
+        # set private key variables
+        if self._authorization_mode == 'PrivateKey':
+            self._client_id = self._config["client"]["clientId"]
+            self._scopes = self._config["client"]["scopes"]
+            self._private_key = self._config["client"]["privateKey"]
     """
     Getters
     """
@@ -62,7 +61,10 @@ class Client:
         return self._config
 
     def get_scopes(self):
-        return None if self._scopes is None else self._scopes
+        return self._scopes
 
     def get_base_url(self):
         return self._base_url
+
+    def get_request_executor(self):
+        return self._request_executor
