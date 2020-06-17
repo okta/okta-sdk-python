@@ -1,6 +1,7 @@
 import aiohttp
 import asyncio
 import json
+import xmltodict
 from okta.errors.http_error import HTTPError
 from okta.errors.okta_api_error import OktaAPIError
 
@@ -47,7 +48,7 @@ class HTTPClient:
             ) as response:
                 return (response.request_info,
                         response,
-                        await response.json(),
+                        await response.text(),
                         None)
         except (aiohttp.ClientError, asyncio.exceptions.TimeoutError) as error:
             # Return error if arises
@@ -68,7 +69,11 @@ class HTTPClient:
             response (if no error), any error found
         """
         # Retrieve dictionary repr and response status code
-        dict_resp = json.loads(json.dumps(response_body))
+        if response_details.content_type == "application/xml":
+            dict_resp = xmltodict.parse(response_body)
+        else:
+            dict_resp = json.loads(response_body)
+
         status_code = response_details.status
 
         # check if call was succesful
