@@ -1,6 +1,7 @@
 from okta.http_client import HTTPClient
 from okta.user_agent import UserAgent
 from okta.oauth import OAuth
+from okta.api_response import OktaAPIResponse
 import time
 from http import HTTPStatus
 # import json
@@ -114,6 +115,24 @@ class RequestExecutor:
 
         return (request, None)
 
+    async def execute(self, request):
+        """
+        This function is the high level request execution method. Performs the
+        API call and returns a formatted response object
+
+        Args:
+            request (dict): dictionary object containing request details
+
+        Returns:
+            (OktaAPIResponse, Exception): Response obj for the Okta API, Error
+        """
+        _, response, response_body, error = self.fire_request(request)
+
+        return (
+            OktaAPIResponse(self, request, response, response_body),
+            None
+        )
+
     async def fire_request(self, request):
         """
         Send Request using HTTP Client
@@ -137,11 +156,16 @@ class RequestExecutor:
         # check if in cache
         if not self._cache.contains(url_cache_key):
             # shoot request and return
-            return await self._http_client\
+            req, res_details, resp_body, error = await self._http_client\
                 .send_request(request)
+            if error:
+                return (None, None, None, error)
+            self._cache.add(url_cache_key, (res_details, resp_body))
+            return (request, res_details, resp_body, error)
 
         # otherwise return cache response
-        return (request, None, self._cache.get(url_cache_key), None)
+        res_details, resp_body = self._cache.get(url_cache_key)
+        return (request, res_details, resp_body, None)
 
     async def fire_request_helper(self, request, attempts, request_start_time):
         """
