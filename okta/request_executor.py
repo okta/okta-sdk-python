@@ -126,7 +126,7 @@ class RequestExecutor:
         Returns:
             (OktaAPIResponse, Exception): Response obj for the Okta API, Error
         """
-        _, response, response_body, error = self.fire_request(request)
+        _, response, response_body, error = await self.fire_request(request)
 
         return (
             OktaAPIResponse(self, request, response, response_body),

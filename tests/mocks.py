@@ -2,6 +2,7 @@ from okta.user_agent import UserAgent
 import aiohttp
 import asyncio
 import json
+from yarl import URL
 
 REQUEST_TIMEOUT = 5  # seconds
 ORG_URL = "https://your.okta.com"
@@ -9,7 +10,7 @@ API_TOKEN = "yourApiToken"
 CLIENT_ID = "yourClientId"
 SCOPES = ["okta.scope.1", "okta.scope.2"]
 PRIVATE_KEY = "yourPrivateKey"
-GET_USERS_CALL = "/api/v1/users?limit=200"
+GET_USERS_CALL = "/api/v1/users"
 
 
 async def mock_GET_HTTP_request(*args, **kwargs):
@@ -36,12 +37,24 @@ class MockHTTPResponseDetails():
         self.url = ORG_URL + GET_USERS_CALL
         self.method = "GET"
         self.links = {}
+        self.content_type = "application/json"
 
 
 async def mock_GET_HTTP_Client_response_valid(*args, **kwargs):
     request = await mock_GET_HTTP_request()
     response_details = MockHTTPResponseDetails()
-    response_body = {}
+    response_body = '[{"ID": "user.id.1"}]'
+    error = None
+    return (request, response_details, response_body, error)
+
+
+async def mock_GET_HTTP_Client_response_valid_with_next(*args, **kwargs):
+    request = await mock_GET_HTTP_request()
+    response_details = MockHTTPResponseDetails()
+    response_details.links = {
+        "next": {"url": URL("https://www.next.okta.com")}
+    }
+    response_body = '[{"ID": "user.id.1"}, {"ID": "user.id.2"}]'
     error = None
     return (request, response_details, response_body, error)
 

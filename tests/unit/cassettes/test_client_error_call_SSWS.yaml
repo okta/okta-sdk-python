@@ -11,7 +11,7 @@ interactions:
       User-Agent:
       - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
     method: GET
-    uri: https://your.okta.com/api/v1/users?limit=200
+    uri: https://your.okta.com/api/v1/users
   response:
     body:
       string: '{"errorCode":"E0000011","errorSummary":"Invalid token provided","errorLink":"E0000011","errorId":"oaeU24QIiyQS4iI_kfI1BJsvA","errorCauses":[]}'
@@ -32,5 +32,5 @@ interactions:
     status:
       code: 401
       message: Unauthorized
-    url: https://your.okta.com/api/v1/users?limit=200
+    url: https://your.okta.com/api/v1/users
 version: 1
