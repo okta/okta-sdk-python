@@ -21,9 +21,9 @@ class OktaAPIResponse():
         self._request_executor = request_executor
 
         # Build response body based on content type
-        if "application/xml" == res_details.content_type:
+        if "application/xml" in res_details.content_type:
             self.build_xml_response(response_body)
-        elif "application/json" == res_details.content_type or \
+        elif "application/json" in res_details.content_type or \
                 "" == res_details.content_type:
             self.build_json_response(response_body)
         else:
