@@ -59,15 +59,15 @@ class OktaCache(Cache):
         """
         return key in self._store and self._is_valid_entry(self._store[key])
 
-    def add(self, key: str, value: str):
+    def add(self, key: str, value: tuple):
         """
         Adds a key-value pair to the cache.
 
         Arguments:
             key {str} -- Key in pair
-            value {str} -- Value in pair
+            value {tuple} -- Tuple of response and response body
         """
-        if type(key) == str and type(value) != list:
+        if type(key) == str and type(value[1]) != list:
             # Get current time
             now = self._get_current_time()
 

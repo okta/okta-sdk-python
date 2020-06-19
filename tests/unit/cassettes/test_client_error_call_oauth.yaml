@@ -11,7 +11,7 @@ interactions:
       User-Agent:
       - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
     method: GET
-    uri: https://your.okta.com/api/v1/users?limit=200
+    uri: https://your.okta.com/api/v1/users
   response:
     body:
       string: '{"errorCode":"E0000005","errorSummary":"Invalid session","errorLink":"E0000005","errorId":"oaeh0Zd0jXXSuudCHwblOZX2w","errorCauses":[]}'
@@ -33,5 +33,5 @@ interactions:
     status:
       code: 403
       message: Forbidden
-    url: https://your.okta.com/api/v1/users?limit=200
+    url: https://your.okta.com/api/v1/users
 version: 1
