@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "@okta/openapi": "https://github.com/okta/openapi.git#master",
+    "lodash": "^4.17.15"
+  }
+}
