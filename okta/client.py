@@ -3,12 +3,14 @@ from okta.config.config_validator import ConfigValidator
 from okta.request_executor import RequestExecutor
 from okta.cache.no_op_cache import NoOpCache
 from okta.cache.okta_cache import OktaCache
+from okta.generated_client import GeneratedAPIClient
 
 
-class Client:
+class Client(GeneratedAPIClient):
     """An Okta client object"""
 
     def __init__(self, user_config: dict = {}):
+        super()
         # Load configuration
         client_config_setter = ConfigSetter()
         client_config_setter._apply_config({'client': user_config})

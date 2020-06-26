@@ -15,8 +15,8 @@ py.process = ({ spec, operations, models, handlebars }) => {
   });
 
   templates.push({
-    src: "generated-client.py.hbs",
-    dest: "okta/generated-client.py",
+    src: "generated_client.py.hbs",
+    dest: "okta/generated_client.py",
     context: { operations, spec },
   });
 
@@ -61,7 +61,7 @@ function isPostOrPut(method) {
 
 // Handlebars helpers
 function operationArgumentBuilder(operation) {
-  let args = [];
+  let args = ["self"];
   operation.pathParams.map((param) => args.push(param.name));
 
   // check body model if required with request
@@ -73,13 +73,13 @@ function operationArgumentBuilder(operation) {
   if (operation.queryParams.length) {
     args.push("query_params");
   }
-  return (args.length ? " ".repeat(12) : "") + args.join(", ");
+  return args.join(", ");
 }
 
 function pyDocstringBuilder(method) {
   const docs = [];
 
-  const ONE_TAB = " ".repeat(12);
+  const ONE_TAB = " ".repeat(8);
   const TWO_TABS = ONE_TAB + " ".repeat(4);
 
   let descString = method.description || `Method for\n${method.path}`;

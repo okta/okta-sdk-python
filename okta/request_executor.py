@@ -85,7 +85,8 @@ class RequestExecutor:
         # Build request
         # Get predetermined headers and build URL
         headers.update(self._default_headers)
-        url = self._config["client"]["orgUrl"] + url
+        if self._config["client"]["orgUrl"] not in url:
+            url = self._config["client"]["orgUrl"] + url
 
         # OAuth
         if self._authorization_mode == "PrivateKey":
