@@ -48,7 +48,7 @@ class GeneratedAPIClient():
                 list: Collection of Application instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps
                 """)
@@ -91,7 +91,7 @@ class GeneratedAPIClient():
                 Application
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps
                 """)
@@ -130,7 +130,7 @@ class GeneratedAPIClient():
                 app_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps/{appId}
                 """)
@@ -165,7 +165,7 @@ class GeneratedAPIClient():
                 Application
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps/{appId}
                 """)
@@ -207,7 +207,7 @@ class GeneratedAPIClient():
                 Application
             """
             http_method = "put".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps/{appId}
                 """)
@@ -247,7 +247,7 @@ class GeneratedAPIClient():
                 list: Collection of Csr instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps/{appId}/credentials/csrs
                 """)
@@ -288,7 +288,7 @@ class GeneratedAPIClient():
                 Csr
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps/{appId}/credentials/csrs
                 """)
@@ -327,7 +327,7 @@ class GeneratedAPIClient():
                 csr_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps/{appId}/credentials/csrs/{csrId}
                 """)
@@ -361,7 +361,7 @@ class GeneratedAPIClient():
                 Csr
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps/{appId}/credentials/csrs/{csrId}
                 """)
@@ -404,7 +404,7 @@ class GeneratedAPIClient():
                 JsonWebKey
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps/{appId}/credentials/csrs/{csrId}
                 lifecycle/publish
@@ -448,7 +448,7 @@ class GeneratedAPIClient():
                 JsonWebKey
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps/{appId}/credentials/csrs/{csrId}
                 lifecycle/publish
@@ -492,7 +492,7 @@ class GeneratedAPIClient():
                 JsonWebKey
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps/{appId}/credentials/csrs/{csrId}
                 lifecycle/publish
@@ -536,7 +536,7 @@ class GeneratedAPIClient():
                 JsonWebKey
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps/{appId}/credentials/csrs/{csrId}
                 lifecycle/publish
@@ -580,7 +580,7 @@ class GeneratedAPIClient():
                 JsonWebKey
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps/{appId}/credentials/csrs/{csrId}
                 lifecycle/publish
@@ -620,7 +620,7 @@ class GeneratedAPIClient():
                 list: Collection of JsonWebKey instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps/{appId}/credentials/keys
                 """)
@@ -662,7 +662,7 @@ class GeneratedAPIClient():
                 JsonWebKey
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps/{appId}/credentials/keys/generate
                 """)
@@ -704,7 +704,7 @@ class GeneratedAPIClient():
                 JsonWebKey
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps/{appId}/credentials/keys/{keyId}
                 """)
@@ -747,7 +747,7 @@ class GeneratedAPIClient():
                 JsonWebKey
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps/{appId}/credentials/keys/{keyId}/clone
                 """)
@@ -790,7 +790,7 @@ class GeneratedAPIClient():
                 list: Collection of OAuth2ScopeConsentGrant instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps/{appId}/grants
                 """)
@@ -833,7 +833,7 @@ class GeneratedAPIClient():
                 OAuth2ScopeConsentGrant
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps/{appId}/grants
                 """)
@@ -872,7 +872,7 @@ class GeneratedAPIClient():
                 grant_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps/{appId}/grants/{grantId}
                 """)
@@ -908,7 +908,7 @@ class GeneratedAPIClient():
                 OAuth2ScopeConsentGrant
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps/{appId}/grants/{grantId}
                 """)
@@ -954,7 +954,7 @@ class GeneratedAPIClient():
                 list: Collection of ApplicationGroupAssignment instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps/{appId}/groups
                 """)
@@ -994,7 +994,7 @@ class GeneratedAPIClient():
                 group_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps/{appId}/groups/{groupId}
                 """)
@@ -1029,7 +1029,7 @@ class GeneratedAPIClient():
                 ApplicationGroupAssignment
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps/{appId}/groups/{groupId}
                 """)
@@ -1072,7 +1072,7 @@ class GeneratedAPIClient():
                 ApplicationGroupAssignment
             """
             http_method = "put".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps/{appId}/groups/{groupId}
                 """)
@@ -1109,7 +1109,7 @@ class GeneratedAPIClient():
                 app_id {str}
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps/{appId}/lifecycle/activate
                 """)
@@ -1139,7 +1139,7 @@ class GeneratedAPIClient():
                 app_id {str}
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps/{appId}/lifecycle/deactivate
                 """)
@@ -1169,7 +1169,7 @@ class GeneratedAPIClient():
                 app_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps/{appId}/tokens
                 """)
@@ -1205,7 +1205,7 @@ class GeneratedAPIClient():
                 list: Collection of OAuth2Token instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps/{appId}/tokens
                 """)
@@ -1246,7 +1246,7 @@ class GeneratedAPIClient():
                 token_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps/{appId}/tokens/{tokenId}
                 """)
@@ -1281,7 +1281,7 @@ class GeneratedAPIClient():
                 OAuth2Token
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps/{appId}/tokens/{tokenId}
                 """)
@@ -1330,7 +1330,7 @@ class GeneratedAPIClient():
                 list: Collection of AppUser instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps/{appId}/users
                 """)
@@ -1377,7 +1377,7 @@ class GeneratedAPIClient():
                 AppUser
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps/{appId}/users
                 """)
@@ -1417,7 +1417,7 @@ class GeneratedAPIClient():
                 [query_params.sendEmail] {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps/{appId}/users/{userId}
                 """)
@@ -1455,7 +1455,7 @@ class GeneratedAPIClient():
                 AppUser
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps/{appId}/users/{userId}
                 """)
@@ -1498,7 +1498,7 @@ class GeneratedAPIClient():
                 AppUser
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/apps/{appId}/users/{userId}
                 """)
@@ -1540,7 +1540,7 @@ class GeneratedAPIClient():
                 list: Collection of AuthorizationServer instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/authorizationServers
                 """)
@@ -1581,7 +1581,7 @@ class GeneratedAPIClient():
                 AuthorizationServer
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/authorizationServers
                 """)
@@ -1618,7 +1618,7 @@ class GeneratedAPIClient():
                 auth_server_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/authorizationServers/{authServerId}
                 """)
@@ -1650,7 +1650,7 @@ class GeneratedAPIClient():
                 AuthorizationServer
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/authorizationServers/{authServerId}
                 """)
@@ -1690,7 +1690,7 @@ class GeneratedAPIClient():
                 AuthorizationServer
             """
             http_method = "put".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/authorizationServers/{authServerId}
                 """)
@@ -1729,7 +1729,7 @@ class GeneratedAPIClient():
                 list: Collection of OAuth2Claim instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/authorizationServers/{authServerId}/claims
                 """)
@@ -1769,7 +1769,7 @@ class GeneratedAPIClient():
                 OAuth2Claim
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/authorizationServers/{authServerId}/claims
                 """)
@@ -1807,7 +1807,7 @@ class GeneratedAPIClient():
                 claim_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/authorizationServers/{authServerId}/claims
                 {claimId}
@@ -1841,7 +1841,7 @@ class GeneratedAPIClient():
                 OAuth2Claim
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/authorizationServers/{authServerId}/claims
                 {claimId}
@@ -1883,7 +1883,7 @@ class GeneratedAPIClient():
                 OAuth2Claim
             """
             http_method = "put".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/authorizationServers/{authServerId}/claims
                 {claimId}
@@ -1923,7 +1923,7 @@ class GeneratedAPIClient():
                 list: Collection of OAuth2Client instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/authorizationServers/{authServerId}/clients
                 """)
@@ -1961,7 +1961,7 @@ class GeneratedAPIClient():
                 client_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/authorizationServers/{authServerId}/clients
                 {clientId}/tokens
@@ -1999,7 +1999,7 @@ class GeneratedAPIClient():
                 list: Collection of OAuth2RefreshToken instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/authorizationServers/{authServerId}/clients
                 {clientId}/tokens
@@ -2041,7 +2041,7 @@ class GeneratedAPIClient():
                 token_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/authorizationServers/{authServerId}/clients
                 {clientId}/tokens/{tokenId}
@@ -2078,7 +2078,7 @@ class GeneratedAPIClient():
                 OAuth2RefreshToken
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/authorizationServers/{authServerId}/clients
                 {clientId}/tokens/{tokenId}
@@ -2120,7 +2120,7 @@ class GeneratedAPIClient():
                 list: Collection of JsonWebKey instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/authorizationServers/{authServerId}
                 credentials/keys
@@ -2160,7 +2160,7 @@ class GeneratedAPIClient():
                 list: Collection of JsonWebKey instances.
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/authorizationServers/{authServerId}
                 credentials/lifecycle/keyRotate
@@ -2198,7 +2198,7 @@ class GeneratedAPIClient():
                 auth_server_id {str}
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/authorizationServers/{authServerId}
                 lifecycle/activate
@@ -2229,7 +2229,7 @@ class GeneratedAPIClient():
                 auth_server_id {str}
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/authorizationServers/{authServerId}
                 lifecycle/deactivate
@@ -2262,7 +2262,7 @@ class GeneratedAPIClient():
                 list: Collection of Policy instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/authorizationServers/{authServerId}
                 policies
@@ -2303,7 +2303,7 @@ class GeneratedAPIClient():
                 Policy
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/authorizationServers/{authServerId}
                 policies
@@ -2342,7 +2342,7 @@ class GeneratedAPIClient():
                 policy_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/authorizationServers/{authServerId}
                 policies/{policyId}
@@ -2376,7 +2376,7 @@ class GeneratedAPIClient():
                 Policy
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/authorizationServers/{authServerId}
                 policies/{policyId}
@@ -2418,7 +2418,7 @@ class GeneratedAPIClient():
                 Policy
             """
             http_method = "put".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/authorizationServers/{authServerId}
                 policies/{policyId}
@@ -2463,7 +2463,7 @@ class GeneratedAPIClient():
                 list: Collection of OAuth2Scope instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/authorizationServers/{authServerId}/scopes
                 """)
@@ -2505,7 +2505,7 @@ class GeneratedAPIClient():
                 OAuth2Scope
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/authorizationServers/{authServerId}/scopes
                 """)
@@ -2543,7 +2543,7 @@ class GeneratedAPIClient():
                 scope_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/authorizationServers/{authServerId}/scopes
                 {scopeId}
@@ -2577,7 +2577,7 @@ class GeneratedAPIClient():
                 OAuth2Scope
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/authorizationServers/{authServerId}/scopes
                 {scopeId}
@@ -2619,7 +2619,7 @@ class GeneratedAPIClient():
                 OAuth2Scope
             """
             http_method = "put".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/authorizationServers/{authServerId}/scopes
                 {scopeId}
@@ -2658,7 +2658,7 @@ class GeneratedAPIClient():
                 list: Collection of EventHook instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/eventHooks
                 """)
@@ -2697,7 +2697,7 @@ class GeneratedAPIClient():
                 EventHook
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/eventHooks
                 """)
@@ -2734,7 +2734,7 @@ class GeneratedAPIClient():
                 event_hook_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/eventHooks/{eventHookId}
                 """)
@@ -2766,7 +2766,7 @@ class GeneratedAPIClient():
                 EventHook
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/eventHooks/{eventHookId}
                 """)
@@ -2806,7 +2806,7 @@ class GeneratedAPIClient():
                 EventHook
             """
             http_method = "put".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/eventHooks/{eventHookId}
                 """)
@@ -2845,7 +2845,7 @@ class GeneratedAPIClient():
                 EventHook
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/eventHooks/{eventHookId}/lifecycle/activate
                 """)
@@ -2884,7 +2884,7 @@ class GeneratedAPIClient():
                 EventHook
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/eventHooks/{eventHookId}/lifecycle
                 deactivate
@@ -2924,7 +2924,7 @@ class GeneratedAPIClient():
                 EventHook
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/eventHooks/{eventHookId}/lifecycle/verify
                 """)
@@ -2962,7 +2962,7 @@ class GeneratedAPIClient():
                 list: Collection of Feature instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/features
                 """)
@@ -3001,7 +3001,7 @@ class GeneratedAPIClient():
                 Feature
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/features/{featureId}
                 """)
@@ -3040,7 +3040,7 @@ class GeneratedAPIClient():
                 list: Collection of Feature instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/features/{featureId}/dependencies
                 """)
@@ -3079,7 +3079,7 @@ class GeneratedAPIClient():
                 list: Collection of Feature instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/features/{featureId}/dependents
                 """)
@@ -3121,7 +3121,7 @@ class GeneratedAPIClient():
                 Feature
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/features/{featureId}/{lifecycle}
                 """)
@@ -3168,7 +3168,7 @@ class GeneratedAPIClient():
                 list: Collection of Group instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/groups
                 """)
@@ -3210,7 +3210,7 @@ class GeneratedAPIClient():
                 Group
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/groups
                 """)
@@ -3253,7 +3253,7 @@ class GeneratedAPIClient():
                 list: Collection of GroupRule instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/groups/rules
                 """)
@@ -3295,7 +3295,7 @@ class GeneratedAPIClient():
                 GroupRule
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/groups/rules
                 """)
@@ -3333,7 +3333,7 @@ class GeneratedAPIClient():
                 rule_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/groups/rules/{ruleId}
                 """)
@@ -3368,7 +3368,7 @@ class GeneratedAPIClient():
                 GroupRule
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/groups/rules/{ruleId}
                 """)
@@ -3411,7 +3411,7 @@ class GeneratedAPIClient():
                 GroupRule
             """
             http_method = "put".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/groups/rules/{ruleId}
                 """)
@@ -3449,7 +3449,7 @@ class GeneratedAPIClient():
                 rule_id {str}
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/groups/rules/{ruleId}/lifecycle/activate
                 """)
@@ -3480,7 +3480,7 @@ class GeneratedAPIClient():
                 rule_id {str}
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/groups/rules/{ruleId}/lifecycle/deactivate
                 """)
@@ -3511,7 +3511,7 @@ class GeneratedAPIClient():
                 group_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/groups/{groupId}
                 """)
@@ -3543,7 +3543,7 @@ class GeneratedAPIClient():
                 Group
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/groups/{groupId}
                 """)
@@ -3584,7 +3584,7 @@ class GeneratedAPIClient():
                 Group
             """
             http_method = "put".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/groups/{groupId}
                 """)
@@ -3627,7 +3627,7 @@ class GeneratedAPIClient():
                 list: Collection of Application instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/groups/{groupId}/apps
                 """)
@@ -3670,7 +3670,7 @@ class GeneratedAPIClient():
                 list: Collection of Role instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/groups/{groupId}/roles
                 """)
@@ -3714,7 +3714,7 @@ class GeneratedAPIClient():
                 Role
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/groups/{groupId}/roles
                 """)
@@ -3754,7 +3754,7 @@ class GeneratedAPIClient():
                 role_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/groups/{groupId}/roles/{roleId}
                 """)
@@ -3787,7 +3787,7 @@ class GeneratedAPIClient():
                 Role
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/groups/{groupId}/roles/{roleId}
                 """)
@@ -3834,7 +3834,7 @@ class GeneratedAPIClient():
                 list: Collection of CatalogApplication instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/groups/{groupId}/roles/{roleId}/targets
                 catalog/apps
@@ -3876,7 +3876,7 @@ class GeneratedAPIClient():
                 app_name {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/groups/{groupId}/roles/{roleId}/targets
                 catalog/apps/{appName}
@@ -3909,7 +3909,7 @@ class GeneratedAPIClient():
                 app_name {str}
             """
             http_method = "put".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/groups/{groupId}/roles/{roleId}/targets
                 catalog/apps/{appName}
@@ -3944,7 +3944,7 @@ class GeneratedAPIClient():
                 application_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/groups/{groupId}/roles/{roleId}/targets
                 catalog/apps/{appName}/{applicationId}
@@ -3979,7 +3979,7 @@ class GeneratedAPIClient():
                 application_id {str}
             """
             http_method = "put".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/groups/{groupId}/roles/{roleId}/targets
                 catalog/apps/{appName}/{applicationId}
@@ -4016,7 +4016,7 @@ class GeneratedAPIClient():
                 list: Collection of Group instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/groups/{groupId}/roles/{roleId}/targets
                 groups
@@ -4060,7 +4060,7 @@ class GeneratedAPIClient():
                 target_group_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/groups/{groupId}/roles/{roleId}/targets
                 groups/{targetGroupId}
@@ -4095,7 +4095,7 @@ class GeneratedAPIClient():
                 target_group_id {str}
             """
             http_method = "put".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/groups/{groupId}/roles/{roleId}/targets
                 groups/{targetGroupId}
@@ -4131,7 +4131,7 @@ class GeneratedAPIClient():
                 list: Collection of User instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/groups/{groupId}/users
                 """)
@@ -4171,7 +4171,7 @@ class GeneratedAPIClient():
                 user_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/groups/{groupId}/users/{userId}
                 """)
@@ -4202,7 +4202,7 @@ class GeneratedAPIClient():
                 user_id {str}
             """
             http_method = "put".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/groups/{groupId}/users/{userId}
                 """)
@@ -4240,7 +4240,7 @@ class GeneratedAPIClient():
                 list: Collection of IdentityProvider instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/idps
                 """)
@@ -4281,7 +4281,7 @@ class GeneratedAPIClient():
                 IdentityProvider
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/idps
                 """)
@@ -4322,7 +4322,7 @@ class GeneratedAPIClient():
                 list: Collection of JsonWebKey instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/idps/credentials/keys
                 """)
@@ -4364,7 +4364,7 @@ class GeneratedAPIClient():
                 JsonWebKey
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/idps/credentials/keys
                 """)
@@ -4402,7 +4402,7 @@ class GeneratedAPIClient():
                 key_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/idps/credentials/keys/{keyId}
                 """)
@@ -4434,7 +4434,7 @@ class GeneratedAPIClient():
                 JsonWebKey
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/idps/credentials/keys/{keyId}
                 """)
@@ -4471,7 +4471,7 @@ class GeneratedAPIClient():
                 idp_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/idps/{idpId}
                 """)
@@ -4503,7 +4503,7 @@ class GeneratedAPIClient():
                 IdentityProvider
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/idps/{idpId}
                 """)
@@ -4543,7 +4543,7 @@ class GeneratedAPIClient():
                 IdentityProvider
             """
             http_method = "put".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/idps/{idpId}
                 """)
@@ -4582,7 +4582,7 @@ class GeneratedAPIClient():
                 list: Collection of Csr instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/idps/{idpId}/credentials/csrs
                 """)
@@ -4623,7 +4623,7 @@ class GeneratedAPIClient():
                 Csr
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/idps/{idpId}/credentials/csrs
                 """)
@@ -4662,7 +4662,7 @@ class GeneratedAPIClient():
                 csr_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/idps/{idpId}/credentials/csrs/{csrId}
                 """)
@@ -4695,7 +4695,7 @@ class GeneratedAPIClient():
                 Csr
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/idps/{idpId}/credentials/csrs/{csrId}
                 """)
@@ -4738,7 +4738,7 @@ class GeneratedAPIClient():
                 JsonWebKey
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/idps/{idpId}/credentials/csrs/{csrId}
                 lifecycle/publish
@@ -4782,7 +4782,7 @@ class GeneratedAPIClient():
                 JsonWebKey
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/idps/{idpId}/credentials/csrs/{csrId}
                 lifecycle/publish
@@ -4826,7 +4826,7 @@ class GeneratedAPIClient():
                 JsonWebKey
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/idps/{idpId}/credentials/csrs/{csrId}
                 lifecycle/publish
@@ -4870,7 +4870,7 @@ class GeneratedAPIClient():
                 JsonWebKey
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/idps/{idpId}/credentials/csrs/{csrId}
                 lifecycle/publish
@@ -4914,7 +4914,7 @@ class GeneratedAPIClient():
                 JsonWebKey
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/idps/{idpId}/credentials/csrs/{csrId}
                 lifecycle/publish
@@ -4954,7 +4954,7 @@ class GeneratedAPIClient():
                 list: Collection of JsonWebKey instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/idps/{idpId}/credentials/keys
                 """)
@@ -4997,7 +4997,7 @@ class GeneratedAPIClient():
                 JsonWebKey
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/idps/{idpId}/credentials/keys/generate
                 """)
@@ -5039,7 +5039,7 @@ class GeneratedAPIClient():
                 JsonWebKey
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/idps/{idpId}/credentials/keys/{keyId}
                 """)
@@ -5082,7 +5082,7 @@ class GeneratedAPIClient():
                 JsonWebKey
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/idps/{idpId}/credentials/keys/{keyId}/clone
                 """)
@@ -5123,7 +5123,7 @@ class GeneratedAPIClient():
                 IdentityProvider
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/idps/{idpId}/lifecycle/activate
                 """)
@@ -5162,7 +5162,7 @@ class GeneratedAPIClient():
                 IdentityProvider
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/idps/{idpId}/lifecycle/deactivate
                 """)
@@ -5201,7 +5201,7 @@ class GeneratedAPIClient():
                 list: Collection of IdentityProviderApplicationUser instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/idps/{idpId}/users
                 """)
@@ -5240,7 +5240,7 @@ class GeneratedAPIClient():
                 user_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/idps/{idpId}/users/{userId}
                 """)
@@ -5273,7 +5273,7 @@ class GeneratedAPIClient():
                 IdentityProviderApplicationUser
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/idps/{idpId}/users/{userId}
                 """)
@@ -5316,7 +5316,7 @@ class GeneratedAPIClient():
                 IdentityProviderApplicationUser
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/idps/{idpId}/users/{userId}
                 """)
@@ -5358,7 +5358,7 @@ class GeneratedAPIClient():
                 list: Collection of SocialAuthToken instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/idps/{idpId}/users/{userId}/credentials
                 tokens
@@ -5399,7 +5399,7 @@ class GeneratedAPIClient():
                 list: Collection of InlineHook instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/inlineHooks
                 """)
@@ -5440,7 +5440,7 @@ class GeneratedAPIClient():
                 InlineHook
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/inlineHooks
                 """)
@@ -5480,7 +5480,7 @@ class GeneratedAPIClient():
                 inline_hook_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/inlineHooks/{inlineHookId}
                 """)
@@ -5512,7 +5512,7 @@ class GeneratedAPIClient():
                 InlineHook
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/inlineHooks/{inlineHookId}
                 """)
@@ -5552,7 +5552,7 @@ class GeneratedAPIClient():
                 InlineHook
             """
             http_method = "put".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/inlineHooks/{inlineHookId}
                 """)
@@ -5597,7 +5597,7 @@ class GeneratedAPIClient():
                 InlineHookResponse
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/inlineHooks/{inlineHookId}/execute
                 """)
@@ -5636,7 +5636,7 @@ class GeneratedAPIClient():
                 InlineHook
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/inlineHooks/{inlineHookId}/lifecycle
                 activate
@@ -5676,7 +5676,7 @@ class GeneratedAPIClient():
                 InlineHook
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/inlineHooks/{inlineHookId}/lifecycle
                 deactivate
@@ -5725,7 +5725,7 @@ class GeneratedAPIClient():
                 list: Collection of LogEvent instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/logs
                 """)
@@ -5765,7 +5765,7 @@ class GeneratedAPIClient():
                 list: Collection of LinkedObject instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/meta/schemas/user/linkedObjects
                 """)
@@ -5804,7 +5804,7 @@ class GeneratedAPIClient():
                 LinkedObject
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/meta/schemas/user/linkedObjects
                 """)
@@ -5841,7 +5841,7 @@ class GeneratedAPIClient():
                 linked_object_name {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/meta/schemas/user/linkedObjects
                 {linkedObjectName}
@@ -5874,7 +5874,7 @@ class GeneratedAPIClient():
                 LinkedObject
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/meta/schemas/user/linkedObjects
                 {linkedObjectName}
@@ -5913,7 +5913,7 @@ class GeneratedAPIClient():
                 list: Collection of UserType instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/meta/types/user
                 """)
@@ -5954,7 +5954,7 @@ class GeneratedAPIClient():
                 UserType
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/meta/types/user
                 """)
@@ -5993,7 +5993,7 @@ class GeneratedAPIClient():
                 type_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/meta/types/user/{typeId}
                 """)
@@ -6026,7 +6026,7 @@ class GeneratedAPIClient():
                 UserType
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/meta/types/user/{typeId}
                 """)
@@ -6066,7 +6066,7 @@ class GeneratedAPIClient():
                 UserType
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/meta/types/user/{typeId}
                 """)
@@ -6106,7 +6106,7 @@ class GeneratedAPIClient():
                 UserType
             """
             http_method = "put".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/meta/types/user/{typeId}
                 """)
@@ -6148,7 +6148,7 @@ class GeneratedAPIClient():
                 list: Collection of Policy instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/policies
                 """)
@@ -6191,7 +6191,7 @@ class GeneratedAPIClient():
                 Policy
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/policies
                 """)
@@ -6230,7 +6230,7 @@ class GeneratedAPIClient():
                 policy_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/policies/{policyId}
                 """)
@@ -6264,7 +6264,7 @@ class GeneratedAPIClient():
                 Policy
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/policies/{policyId}
                 """)
@@ -6306,7 +6306,7 @@ class GeneratedAPIClient():
                 Policy
             """
             http_method = "put".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/policies/{policyId}
                 """)
@@ -6343,7 +6343,7 @@ class GeneratedAPIClient():
                 policy_id {str}
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/policies/{policyId}/lifecycle/activate
                 """)
@@ -6373,7 +6373,7 @@ class GeneratedAPIClient():
                 policy_id {str}
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/policies/{policyId}/lifecycle/deactivate
                 """)
@@ -6405,7 +6405,7 @@ class GeneratedAPIClient():
                 list: Collection of PolicyRule instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/policies/{policyId}/rules
                 """)
@@ -6445,7 +6445,7 @@ class GeneratedAPIClient():
                 PolicyRule
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/policies/{policyId}/rules
                 """)
@@ -6483,7 +6483,7 @@ class GeneratedAPIClient():
                 rule_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/policies/{policyId}/rules/{ruleId}
                 """)
@@ -6516,7 +6516,7 @@ class GeneratedAPIClient():
                 PolicyRule
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/policies/{policyId}/rules/{ruleId}
                 """)
@@ -6557,7 +6557,7 @@ class GeneratedAPIClient():
                 PolicyRule
             """
             http_method = "put".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/policies/{policyId}/rules/{ruleId}
                 """)
@@ -6595,7 +6595,7 @@ class GeneratedAPIClient():
                 rule_id {str}
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/policies/{policyId}/rules/{ruleId}
                 lifecycle/activate
@@ -6627,7 +6627,7 @@ class GeneratedAPIClient():
                 rule_id {str}
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/policies/{policyId}/rules/{ruleId}
                 lifecycle/deactivate
@@ -6665,7 +6665,7 @@ class GeneratedAPIClient():
                 Session
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/sessions
                 """)
@@ -6703,7 +6703,7 @@ class GeneratedAPIClient():
                 session_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/sessions/{sessionId}
                 """)
@@ -6735,7 +6735,7 @@ class GeneratedAPIClient():
                 Session
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/sessions/{sessionId}
                 """)
@@ -6775,7 +6775,7 @@ class GeneratedAPIClient():
                 Session
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/sessions/{sessionId}/lifecycle/refresh
                 """)
@@ -6817,7 +6817,7 @@ class GeneratedAPIClient():
                 list: Collection of SmsTemplate instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/templates/sms
                 """)
@@ -6858,7 +6858,7 @@ class GeneratedAPIClient():
                 SmsTemplate
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/templates/sms
                 """)
@@ -6895,7 +6895,7 @@ class GeneratedAPIClient():
                 template_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/templates/sms/{templateId}
                 """)
@@ -6927,7 +6927,7 @@ class GeneratedAPIClient():
                 SmsTemplate
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/templates/sms/{templateId}
                 """)
@@ -6967,7 +6967,7 @@ class GeneratedAPIClient():
                 SmsTemplate
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/templates/sms/{templateId}
                 """)
@@ -7007,7 +7007,7 @@ class GeneratedAPIClient():
                 SmsTemplate
             """
             http_method = "put".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/templates/sms/{templateId}
                 """)
@@ -7050,7 +7050,7 @@ class GeneratedAPIClient():
                 list: Collection of TrustedOrigin instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/trustedOrigins
                 """)
@@ -7091,7 +7091,7 @@ class GeneratedAPIClient():
                 TrustedOrigin
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/trustedOrigins
                 """)
@@ -7128,7 +7128,7 @@ class GeneratedAPIClient():
                 trusted_origin_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/trustedOrigins/{trustedOriginId}
                 """)
@@ -7160,7 +7160,7 @@ class GeneratedAPIClient():
                 TrustedOrigin
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/trustedOrigins/{trustedOriginId}
                 """)
@@ -7200,7 +7200,7 @@ class GeneratedAPIClient():
                 TrustedOrigin
             """
             http_method = "put".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/trustedOrigins/{trustedOriginId}
                 """)
@@ -7239,7 +7239,7 @@ class GeneratedAPIClient():
                 TrustedOrigin
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/trustedOrigins/{trustedOriginId}/lifecycle
                 activate
@@ -7279,7 +7279,7 @@ class GeneratedAPIClient():
                 TrustedOrigin
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/trustedOrigins/{trustedOriginId}/lifecycle
                 deactivate
@@ -7328,7 +7328,7 @@ class GeneratedAPIClient():
                 list: Collection of User instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users
                 """)
@@ -7374,7 +7374,7 @@ class GeneratedAPIClient():
                 User
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users
                 """)
@@ -7417,7 +7417,7 @@ class GeneratedAPIClient():
                 primary_user_id {str}
             """
             http_method = "put".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{associatedUserId}/linkedObjects
                 {primaryRelationshipName}/{primaryUserId}
@@ -7452,7 +7452,7 @@ class GeneratedAPIClient():
                 [query_params.sendEmail] {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}
                 """)
@@ -7486,7 +7486,7 @@ class GeneratedAPIClient():
                 User
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}
                 """)
@@ -7529,7 +7529,7 @@ class GeneratedAPIClient():
                 User
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}
                 """)
@@ -7574,7 +7574,7 @@ class GeneratedAPIClient():
                 User
             """
             http_method = "put".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}
                 """)
@@ -7616,7 +7616,7 @@ class GeneratedAPIClient():
                 list: Collection of AppLink instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/appLinks
                 """)
@@ -7656,7 +7656,7 @@ class GeneratedAPIClient():
                 list: Collection of OAuth2Client instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/clients
                 """)
@@ -7694,7 +7694,7 @@ class GeneratedAPIClient():
                 client_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/clients/{clientId}/grants
                 """)
@@ -7731,7 +7731,7 @@ class GeneratedAPIClient():
                 list: Collection of OAuth2ScopeConsentGrant instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/clients/{clientId}/grants
                 """)
@@ -7772,7 +7772,7 @@ class GeneratedAPIClient():
                 client_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/clients/{clientId}/tokens
                 """)
@@ -7810,7 +7810,7 @@ class GeneratedAPIClient():
                 list: Collection of OAuth2RefreshToken instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/clients/{clientId}/tokens
                 """)
@@ -7851,7 +7851,7 @@ class GeneratedAPIClient():
                 token_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/clients/{clientId}/tokens
                 {tokenId}
@@ -7891,7 +7891,7 @@ class GeneratedAPIClient():
                 OAuth2RefreshToken
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/clients/{clientId}/tokens
                 {tokenId}
@@ -7939,7 +7939,7 @@ class GeneratedAPIClient():
                 UserCredentials
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/credentials/change_password
                 """)
@@ -7985,7 +7985,7 @@ class GeneratedAPIClient():
                 UserCredentials
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/credentials
                 change_recovery_question
@@ -8028,7 +8028,7 @@ class GeneratedAPIClient():
                 ForgotPasswordResponse
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/credentials/forgot_password
                 """)
@@ -8073,7 +8073,7 @@ class GeneratedAPIClient():
                 ForgotPasswordResponse
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/credentials/forgot_password
                 """)
@@ -8115,7 +8115,7 @@ class GeneratedAPIClient():
                 list: Collection of UserFactor instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/factors
                 """)
@@ -8160,7 +8160,7 @@ class GeneratedAPIClient():
                 UserFactor
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/factors
                 """)
@@ -8202,7 +8202,7 @@ class GeneratedAPIClient():
                 list: Collection of UserFactor instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/factors/catalog
                 """)
@@ -8242,7 +8242,7 @@ class GeneratedAPIClient():
                 list: Collection of SecurityQuestion instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/factors/questions
                 """)
@@ -8281,7 +8281,7 @@ class GeneratedAPIClient():
                 factor_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/factors/{factorId}
                 """)
@@ -8314,7 +8314,7 @@ class GeneratedAPIClient():
                 UserFactor
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/factors/{factorId}
                 """)
@@ -8356,7 +8356,7 @@ class GeneratedAPIClient():
                 UserFactor
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/factors/{factorId}/lifecycle
                 activate
@@ -8398,7 +8398,7 @@ class GeneratedAPIClient():
                 VerifyUserFactorResponse
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/factors/{factorId}
                 transactions/{transactionId}
@@ -8444,7 +8444,7 @@ class GeneratedAPIClient():
                 VerifyUserFactorResponse
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/factors/{factorId}/verify
                 """)
@@ -8483,7 +8483,7 @@ class GeneratedAPIClient():
                 user_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/grants
                 """)
@@ -8520,7 +8520,7 @@ class GeneratedAPIClient():
                 list: Collection of OAuth2ScopeConsentGrant instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/grants
                 """)
@@ -8560,7 +8560,7 @@ class GeneratedAPIClient():
                 grant_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/grants/{grantId}
                 """)
@@ -8595,7 +8595,7 @@ class GeneratedAPIClient():
                 OAuth2ScopeConsentGrant
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/grants/{grantId}
                 """)
@@ -8636,7 +8636,7 @@ class GeneratedAPIClient():
                 list: Collection of Group instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/groups
                 """)
@@ -8675,7 +8675,7 @@ class GeneratedAPIClient():
                 list: Collection of IdentityProvider instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/idps
                 """)
@@ -8723,7 +8723,7 @@ class GeneratedAPIClient():
                 UserActivationToken
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/lifecycle/activate
                 """)
@@ -8771,7 +8771,7 @@ class GeneratedAPIClient():
                 [query_params.sendEmail] {str}
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/lifecycle/deactivate
                 """)
@@ -8807,7 +8807,7 @@ class GeneratedAPIClient():
                 User
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/lifecycle
                 expire_password?tempPassword=false
@@ -8849,7 +8849,7 @@ class GeneratedAPIClient():
                 TempPassword
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/lifecycle
                 expire_password?tempPassword=true
@@ -8895,7 +8895,7 @@ class GeneratedAPIClient():
                 UserActivationToken
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/lifecycle/reactivate
                 """)
@@ -8938,7 +8938,7 @@ class GeneratedAPIClient():
                 user_id {str}
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/lifecycle/reset_factors
                 """)
@@ -8975,7 +8975,7 @@ class GeneratedAPIClient():
                 ResetPasswordToken
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/lifecycle/reset_password
                 """)
@@ -9016,7 +9016,7 @@ class GeneratedAPIClient():
                 user_id {str}
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/lifecycle/suspend
                 """)
@@ -9048,7 +9048,7 @@ class GeneratedAPIClient():
                 user_id {str}
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/lifecycle/unlock
                 """)
@@ -9080,7 +9080,7 @@ class GeneratedAPIClient():
                 user_id {str}
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/lifecycle/unsuspend
                 """)
@@ -9112,7 +9112,7 @@ class GeneratedAPIClient():
                 relationship_name {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/linkedObjects
                 {relationshipName}
@@ -9150,7 +9150,7 @@ class GeneratedAPIClient():
                 list: Collection of ResponseLinks instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/linkedObjects
                 {relationshipName}
@@ -9194,7 +9194,7 @@ class GeneratedAPIClient():
                 list: Collection of Role instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/roles
                 """)
@@ -9238,7 +9238,7 @@ class GeneratedAPIClient():
                 Role
             """
             http_method = "post".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/roles
                 """)
@@ -9278,7 +9278,7 @@ class GeneratedAPIClient():
                 role_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/roles/{roleId}
                 """)
@@ -9318,7 +9318,7 @@ class GeneratedAPIClient():
                 list: Collection of CatalogApplication instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/roles/{roleId}/targets
                 catalog/apps
@@ -9359,7 +9359,7 @@ class GeneratedAPIClient():
                 role_id {str}
             """
             http_method = "put".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/roles/{roleId}/targets
                 catalog/apps
@@ -9392,7 +9392,7 @@ class GeneratedAPIClient():
                 app_name {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/roles/{roleId}/targets
                 catalog/apps/{appName}
@@ -9425,7 +9425,7 @@ class GeneratedAPIClient():
                 app_name {str}
             """
             http_method = "put".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/roles/{roleId}/targets
                 catalog/apps/{appName}
@@ -9460,7 +9460,7 @@ class GeneratedAPIClient():
                 application_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/roles/{roleId}/targets
                 catalog/apps/{appName}/{applicationId}
@@ -9495,7 +9495,7 @@ class GeneratedAPIClient():
                 application_id {str}
             """
             http_method = "put".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/roles/{roleId}/targets
                 catalog/apps/{appName}/{applicationId}
@@ -9532,7 +9532,7 @@ class GeneratedAPIClient():
                 list: Collection of Group instances.
             """
             http_method = "get".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/roles/{roleId}/targets
                 groups
@@ -9574,7 +9574,7 @@ class GeneratedAPIClient():
                 group_id {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/roles/{roleId}/targets
                 groups/{groupId}
@@ -9607,7 +9607,7 @@ class GeneratedAPIClient():
                 group_id {str}
             """
             http_method = "put".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/roles/{roleId}/targets
                 groups/{groupId}
@@ -9643,7 +9643,7 @@ class GeneratedAPIClient():
                 [query_params.oauthTokens] {str}
             """
             http_method = "delete".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 /api/v1/users/{userId}/sessions
                 """)
@@ -9666,6 +9666,10 @@ class GeneratedAPIClient():
                 return None, error
             return response, None
 
+    def format_url(base_string):
+        return ''.join(
+            [line.strip() for line in base_string.splitlines()]
+        )
 
 """
 End of File Generation

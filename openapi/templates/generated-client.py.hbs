@@ -20,7 +20,7 @@ class GeneratedAPIClient():
 {{{pyDocstringBuilder this}}}
             """
             http_method = "{{method}}".upper()
-            api_url = (f"""
+            api_url = self.format_url(f"""
                 {self._base_url}
                 {{{updatePath this}}}
                 """)
@@ -61,6 +61,10 @@ class GeneratedAPIClient():
             {{/if}}
 
     {{/each}}
+    def format_url(base_string):
+        return ''.join(
+            [line.strip() for line in base_string.splitlines()]
+        )
 
 """
 End of File Generation
