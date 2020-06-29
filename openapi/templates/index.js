@@ -1,10 +1,84 @@
 const py = module.exports;
 const fs = require("fs");
 const _ = require("lodash");
+const { exit } = require("process");
 
 py.process = ({ spec, operations, models, handlebars }) => {
   py.spec = spec;
   const templates = [];
+  const modelsByName = [];
+
+  // Model Name -> Model Object mapping
+  for (let model of models) {
+    modelsByName[model.modelName] = model;
+  }
+
+  for (let model of models) {
+    if (model.extends !== undefined) {
+      // Get Resolution from parent
+      model.parent = modelsByName[model.extends];
+      if (
+        model.parent.resolutionStrategy !== undefined &&
+        model.parent.parent == undefined
+      ) {
+        for (let value in model.parent.resolutionStrategy.valueToModelMapping) {
+          if (model.modelName)
+            if (
+              model.parent.resolutionStrategy.valueToModelMapping[value] ===
+              model.modelName
+            ) {
+              model.resolution = {
+                fieldName: model.parent.resolutionStrategy.propertyName,
+                fieldValue: value,
+              };
+            }
+        }
+      }
+      if (
+        model.parent.parent !== undefined &&
+        model.parent.parent.resolutionStrategy !== undefined
+      ) {
+        model.resolution = model.parent.resolution;
+      }
+    }
+
+    // operation name -> operation details (obj)
+    let modelOperations = {};
+    // Get CRUD ops
+    if (model.crud != undefined) {
+      for (let modelCrud of model.crud) {
+        modelOperations[modelCrud.operation.operationId] = modelCrud.operation;
+      }
+    }
+    // get other operations for model
+    for (let operation of operations) {
+      let tag = operation.tags[0];
+      if (tag === "AuthServer") tag = "AuthorizationServer";
+      if (tag === "Template") tag = "SmsTemplate";
+      if (tag === "Idp") tag = "IdpTrust";
+      if (tag === "UserFactor") tag = "UserFactor";
+      if (tag === "Log") tag = "LogEvent";
+      if (tag == model.modelName) {
+        modelOperations[operation.operationId] = operation;
+      }
+    }
+
+    // if (Object.keys(modelOperations).length > 0) {
+    //   console.log(modelOperations);
+    //   console.log(model.modelName);
+    //   console.log(model);
+    //   exit();
+    // }
+
+    templates.push({
+      src: "model.py.hbs",
+      dest: `okta/models/${_.snakeCase(model.modelName)}.py`,
+      context: {
+        operations: modelOperations,
+        model: model,
+      },
+    });
+  }
 
   // Check for response resolution
   operations.forEach((op) => {
@@ -31,6 +105,10 @@ py.process = ({ spec, operations, models, handlebars }) => {
   handlebars.registerPartial(
     "partials.copyrightHeader",
     fs.readFileSync("openapi/templates/partials/copyrightHeader.hbs", "utf8")
+  );
+  handlebars.registerPartial(
+    "partials.defaultMethod",
+    fs.readFileSync("openapi/templates/partials/models/defaultMethod.py.hbs", "utf8")
   );
 
   // fs.writeFile(

@@ -1,0 +1,16 @@
+{{> partials.copyrightHeader }}
+
+
+from urllib.parse import urlencode
+
+
+class {{pascalCase model.modelName}}:
+    def __init__(self):
+        pass
+
+    {{#each operations as |operation|}}
+{{> partials.defaultMethod  operation=operation}}
+
+    {{/each}}
+
+# End of File Generation

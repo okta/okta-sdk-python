@@ -1,0 +1,62 @@
+    {{#if (and (ne operation.description undefined) (ne operation.description "Success") )}}# {{operation.description}}{{/if}}
+    async def {{displayMethodName (snakeCase operation.operationId)}}(
+            {{operationArgumentBuilder operation}}
+    ):
+        """
+    {{{pyDocstringBuilder operation}}}
+        """
+        http_method = "{{operation.method}}".upper()
+        api_url = self.format_url(f"""
+            {self._base_url}
+            {{{updatePath operation}}}
+            """)
+        {{#if operation.queryParams.length}}
+        encoded_query_params = urlencode(query_params)
+        api_url += f"/?{encoded_query_params}"
+        {{/if}}
+
+        {{#if operation.bodyModel}}
+        {{#if (eq operation.bodyFormat "binary")}}
+        // TODO for when body format is binary
+        {{else}}
+        body = {{snakeCase operation.bodyModel}}
+        headers = {
+            "Accept": "{{operation.produces.[0]}}",
+            "Content-Type": "{{operation.consumes.[0]}}"
+        }
+        {{/if}}
+        {{else}}
+        body = None
+        headers = None
+        {{/if}}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (None, error)
+        {{#if operation.responseModel}}
+        try:
+        {{#if operation.isArray}}
+        result = []
+        for item in response.get_body():
+            result.append({{pascalCase operation.responseModel}}(item))
+        {{else}}
+            result = {{pascalCase operation.responseModel}}(
+                response.get_body()
+            )
+        {{/if}}
+        except Exception as error:
+            return (None, error)
+
+        return (result, None)
+        {{else}}
+        return (response, None)
+        {{/if}}
