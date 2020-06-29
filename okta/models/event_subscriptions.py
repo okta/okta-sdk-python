@@ -22,8 +22,13 @@ from urllib.parse import urlencode
 
 
 class EventSubscriptions:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.items = config["items"]
+            self.type = config["type"]
+        else:
+            self.items = None
+            self.type = None
 
 
 # End of File Generation

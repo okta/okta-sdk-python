@@ -22,8 +22,13 @@ from urllib.parse import urlencode
 
 
 class IdentityProviderCredentialsClient:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.client_id = config["client_id"]
+            self.client_secret = config["client_secret"]
+        else:
+            self.client_id = None
+            self.client_secret = None
 
 
 # End of File Generation

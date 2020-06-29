@@ -22,8 +22,15 @@ from urllib.parse import urlencode
 
 
 class ApplicationSettingsNotificationsVpn:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.help_url = config["helpUrl"]
+            self.message = config["message"]
+            self.network = config["network"]
+        else:
+            self.help_url = None
+            self.message = None
+            self.network = None
 
 
 # End of File Generation

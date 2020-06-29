@@ -22,8 +22,41 @@ from urllib.parse import urlencode
 
 
 class Application:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.embedded = config["_embedded"]
+            self.links = config["_links"]
+            self.accessibility = config["accessibility"]
+            self.created = config["created"]
+            self.credentials = config["credentials"]
+            self.features = config["features"]
+            self.id = config["id"]
+            self.label = config["label"]
+            self.last_updated = config["lastUpdated"]
+            self.licensing = config["licensing"]
+            self.name = config["name"]
+            self.profile = config["profile"]
+            self.settings = config["settings"]
+            self.sign_on_mode = config["signOnMode"]
+            self.status = config["status"]
+            self.visibility = config["visibility"]
+        else:
+            self.embedded = None
+            self.links = None
+            self.accessibility = None
+            self.created = None
+            self.credentials = None
+            self.features = None
+            self.id = None
+            self.label = None
+            self.last_updated = None
+            self.licensing = None
+            self.name = None
+            self.profile = None
+            self.settings = None
+            self.sign_on_mode = None
+            self.status = None
+            self.visibility = None
 
     # Fetches an application from your Okta organization by &#x60;id&#x60;.
     async def get_application(

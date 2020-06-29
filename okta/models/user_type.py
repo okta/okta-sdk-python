@@ -22,8 +22,29 @@ from urllib.parse import urlencode
 
 
 class UserType:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.links = config["_links"]
+            self.created = config["created"]
+            self.created_by = config["createdBy"]
+            self.default = config["default"]
+            self.description = config["description"]
+            self.display_name = config["displayName"]
+            self.id = config["id"]
+            self.last_updated = config["lastUpdated"]
+            self.last_updated_by = config["lastUpdatedBy"]
+            self.name = config["name"]
+        else:
+            self.links = None
+            self.created = None
+            self.created_by = None
+            self.default = None
+            self.description = None
+            self.display_name = None
+            self.id = None
+            self.last_updated = None
+            self.last_updated_by = None
+            self.name = None
 
     # Creates a new User Type. A default User Type is automatically created along with your org, and you may add another 9 User Types for a maximum of 10.
     async def create_user_type(

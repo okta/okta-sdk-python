@@ -22,8 +22,25 @@ from urllib.parse import urlencode
 
 
 class PasswordPolicyPasswordSettingsComplexity:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.dictionary = config["dictionary"]
+            self.exclude_attributes = config["excludeAttributes"]
+            self.exclude_username = config["excludeUsername"]
+            self.min_length = config["minLength"]
+            self.min_lower_case = config["minLowerCase"]
+            self.min_number = config["minNumber"]
+            self.min_symbol = config["minSymbol"]
+            self.min_upper_case = config["minUpperCase"]
+        else:
+            self.dictionary = None
+            self.exclude_attributes = "1"
+            self.exclude_username = "true"
+            self.min_length = "8"
+            self.min_lower_case = "1"
+            self.min_number = "1"
+            self.min_symbol = "1"
+            self.min_upper_case = "1"
 
 
 # End of File Generation

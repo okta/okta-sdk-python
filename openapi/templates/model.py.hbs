@@ -5,8 +5,19 @@ from urllib.parse import urlencode
 
 
 class {{pascalCase model.modelName}}:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            {{#each model.properties as |prop|}}
+            self.{{snakeCase prop.propertyName}} = config["{{prop.propertyName}}"]
+            {{/each}}
+        else:
+            {{#each model.properties as |prop|}}
+            {{#if (ne prop.default undefined) }}
+            self.{{snakeCase prop.propertyName}} = "{{prop.default}}"
+            {{else}}
+            self.{{snakeCase prop.propertyName}} = None
+            {{/if}}
+            {{/each}}
 
     {{#each operations as |operation|}}
 {{> partials.defaultMethod  operation=operation}}

@@ -22,8 +22,29 @@ from urllib.parse import urlencode
 
 
 class TrustedOrigin:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.links = config["_links"]
+            self.created = config["created"]
+            self.created_by = config["createdBy"]
+            self.id = config["id"]
+            self.last_updated = config["lastUpdated"]
+            self.last_updated_by = config["lastUpdatedBy"]
+            self.name = config["name"]
+            self.origin = config["origin"]
+            self.scopes = config["scopes"]
+            self.status = config["status"]
+        else:
+            self.links = None
+            self.created = None
+            self.created_by = None
+            self.id = None
+            self.last_updated = None
+            self.last_updated_by = None
+            self.name = None
+            self.origin = None
+            self.scopes = None
+            self.status = None
 
     
     async def create_origin(

@@ -22,8 +22,21 @@ from urllib.parse import urlencode
 
 
 class CsrMetadataSubject:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.common_name = config["commonName"]
+            self.country_name = config["countryName"]
+            self.locality_name = config["localityName"]
+            self.organization_name = config["organizationName"]
+            self.organizational_unit_name = config["organizationalUnitName"]
+            self.state_or_province_name = config["stateOrProvinceName"]
+        else:
+            self.common_name = None
+            self.country_name = None
+            self.locality_name = None
+            self.organization_name = None
+            self.organizational_unit_name = None
+            self.state_or_province_name = None
 
 
 # End of File Generation

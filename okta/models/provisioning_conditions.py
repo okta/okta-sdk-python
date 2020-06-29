@@ -22,8 +22,13 @@ from urllib.parse import urlencode
 
 
 class ProvisioningConditions:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.deprovisioned = config["deprovisioned"]
+            self.suspended = config["suspended"]
+        else:
+            self.deprovisioned = None
+            self.suspended = None
 
 
 # End of File Generation

@@ -22,8 +22,11 @@ from urllib.parse import urlencode
 
 
 class OAuthApplicationCredentials:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.oauth_client = config["oauthClient"]
+        else:
+            self.oauth_client = None
 
 
 # End of File Generation

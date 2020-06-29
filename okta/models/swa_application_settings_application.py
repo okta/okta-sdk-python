@@ -22,8 +22,19 @@ from urllib.parse import urlencode
 
 
 class SwaApplicationSettingsApplication:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.button_field = config["buttonField"]
+            self.login_url_regex = config["loginUrlRegex"]
+            self.password_field = config["passwordField"]
+            self.url = config["url"]
+            self.username_field = config["usernameField"]
+        else:
+            self.button_field = None
+            self.login_url_regex = None
+            self.password_field = None
+            self.url = None
+            self.username_field = None
 
 
 # End of File Generation

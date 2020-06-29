@@ -22,8 +22,15 @@ from urllib.parse import urlencode
 
 
 class UserCredentials:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.password = config["password"]
+            self.provider = config["provider"]
+            self.recovery_question = config["recovery_question"]
+        else:
+            self.password = None
+            self.provider = None
+            self.recovery_question = None
 
 
 # End of File Generation

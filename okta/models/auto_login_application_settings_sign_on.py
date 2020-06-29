@@ -22,8 +22,13 @@ from urllib.parse import urlencode
 
 
 class AutoLoginApplicationSettingsSignOn:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.login_url = config["loginUrl"]
+            self.redirect_url = config["redirectUrl"]
+        else:
+            self.login_url = None
+            self.redirect_url = None
 
 
 # End of File Generation

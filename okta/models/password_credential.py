@@ -22,8 +22,15 @@ from urllib.parse import urlencode
 
 
 class PasswordCredential:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.hash = config["hash"]
+            self.hook = config["hook"]
+            self.value = config["value"]
+        else:
+            self.hash = None
+            self.hook = None
+            self.value = None
 
 
 # End of File Generation

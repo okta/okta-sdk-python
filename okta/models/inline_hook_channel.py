@@ -22,8 +22,15 @@ from urllib.parse import urlencode
 
 
 class InlineHookChannel:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.config = config["config"]
+            self.type = config["type"]
+            self.version = config["version"]
+        else:
+            self.config = None
+            self.type = None
+            self.version = None
 
 
 # End of File Generation

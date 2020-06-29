@@ -22,8 +22,13 @@ from urllib.parse import urlencode
 
 
 class LogGeolocation:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.lat = config["lat"]
+            self.lon = config["lon"]
+        else:
+            self.lat = None
+            self.lon = None
 
 
 # End of File Generation

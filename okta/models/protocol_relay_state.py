@@ -22,8 +22,11 @@ from urllib.parse import urlencode
 
 
 class ProtocolRelayState:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.format = config["format"]
+        else:
+            self.format = None
 
 
 # End of File Generation

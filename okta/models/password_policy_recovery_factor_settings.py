@@ -22,8 +22,11 @@ from urllib.parse import urlencode
 
 
 class PasswordPolicyRecoveryFactorSettings:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.status = config["status"]
+        else:
+            self.status = "INACTIVE"
 
 
 # End of File Generation

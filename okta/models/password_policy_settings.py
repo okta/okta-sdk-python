@@ -22,8 +22,15 @@ from urllib.parse import urlencode
 
 
 class PasswordPolicySettings:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.delegation = config["delegation"]
+            self.password = config["password"]
+            self.recovery = config["recovery"]
+        else:
+            self.delegation = None
+            self.password = None
+            self.recovery = None
 
 
 # End of File Generation

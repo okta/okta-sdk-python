@@ -22,8 +22,37 @@ from urllib.parse import urlencode
 
 
 class AppUser:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.embedded = config["_embedded"]
+            self.links = config["_links"]
+            self.created = config["created"]
+            self.credentials = config["credentials"]
+            self.external_id = config["externalId"]
+            self.id = config["id"]
+            self.last_sync = config["lastSync"]
+            self.last_updated = config["lastUpdated"]
+            self.password_changed = config["passwordChanged"]
+            self.profile = config["profile"]
+            self.scope = config["scope"]
+            self.status = config["status"]
+            self.status_changed = config["statusChanged"]
+            self.sync_state = config["syncState"]
+        else:
+            self.embedded = None
+            self.links = None
+            self.created = None
+            self.credentials = None
+            self.external_id = None
+            self.id = None
+            self.last_sync = None
+            self.last_updated = None
+            self.password_changed = None
+            self.profile = None
+            self.scope = None
+            self.status = None
+            self.status_changed = None
+            self.sync_state = None
 
     # Updates a user&#x27;s profile for an application
     async def update_application_user(

@@ -22,8 +22,31 @@ from urllib.parse import urlencode
 
 
 class Session:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.links = config["_links"]
+            self.amr = config["amr"]
+            self.created_at = config["createdAt"]
+            self.expires_at = config["expiresAt"]
+            self.id = config["id"]
+            self.idp = config["idp"]
+            self.last_factor_verification = config["lastFactorVerification"]
+            self.last_password_verification = config["lastPasswordVerification"]
+            self.login = config["login"]
+            self.status = config["status"]
+            self.user_id = config["userId"]
+        else:
+            self.links = None
+            self.amr = None
+            self.created_at = None
+            self.expires_at = None
+            self.id = None
+            self.idp = None
+            self.last_factor_verification = None
+            self.last_password_verification = None
+            self.login = None
+            self.status = None
+            self.user_id = None
 
     # Get details about a session.
     async def get_session(

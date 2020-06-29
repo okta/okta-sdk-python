@@ -22,8 +22,15 @@ from urllib.parse import urlencode
 
 
 class PlatformConditionEvaluatorPlatformOperatingSystem:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.expression = config["expression"]
+            self.type = config["type"]
+            self.version = config["version"]
+        else:
+            self.expression = None
+            self.type = None
+            self.version = None
 
 
 # End of File Generation

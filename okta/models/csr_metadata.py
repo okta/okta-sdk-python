@@ -22,8 +22,13 @@ from urllib.parse import urlencode
 
 
 class CsrMetadata:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.subject = config["subject"]
+            self.subject_alt_names = config["subjectAltNames"]
+        else:
+            self.subject = None
+            self.subject_alt_names = None
 
 
 # End of File Generation

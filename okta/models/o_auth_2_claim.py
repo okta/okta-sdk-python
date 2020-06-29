@@ -22,8 +22,31 @@ from urllib.parse import urlencode
 
 
 class OAuth2Claim:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.links = config["_links"]
+            self.always_include_in_token = config["alwaysIncludeInToken"]
+            self.claim_type = config["claimType"]
+            self.conditions = config["conditions"]
+            self.group_filter_type = config["group_filter_type"]
+            self.id = config["id"]
+            self.name = config["name"]
+            self.status = config["status"]
+            self.system = config["system"]
+            self.value = config["value"]
+            self.value_type = config["valueType"]
+        else:
+            self.links = None
+            self.always_include_in_token = None
+            self.claim_type = None
+            self.conditions = None
+            self.group_filter_type = None
+            self.id = None
+            self.name = None
+            self.status = None
+            self.system = None
+            self.value = None
+            self.value_type = None
 
 
 # End of File Generation

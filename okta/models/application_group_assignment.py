@@ -22,8 +22,21 @@ from urllib.parse import urlencode
 
 
 class ApplicationGroupAssignment:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.embedded = config["_embedded"]
+            self.links = config["_links"]
+            self.id = config["id"]
+            self.last_updated = config["lastUpdated"]
+            self.priority = config["priority"]
+            self.profile = config["profile"]
+        else:
+            self.embedded = None
+            self.links = None
+            self.id = None
+            self.last_updated = None
+            self.priority = None
+            self.profile = None
 
     # Removes a group assignment from an application.
     async def delete_application_group_assignment(

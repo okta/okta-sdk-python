@@ -22,8 +22,19 @@ from urllib.parse import urlencode
 
 
 class LogGeographicalContext:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.city = config["city"]
+            self.country = config["country"]
+            self.geolocation = config["geolocation"]
+            self.postal_code = config["postalCode"]
+            self.state = config["state"]
+        else:
+            self.city = None
+            self.country = None
+            self.geolocation = None
+            self.postal_code = None
+            self.state = None
 
 
 # End of File Generation

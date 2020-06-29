@@ -22,8 +22,11 @@ from urllib.parse import urlencode
 
 
 class ProtocolAlgorithmType:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.signature = config["signature"]
+        else:
+            self.signature = None
 
 
 # End of File Generation

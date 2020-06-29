@@ -22,8 +22,15 @@ from urllib.parse import urlencode
 
 
 class PolicyNetworkCondition:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.connection = config["connection"]
+            self.exclude = config["exclude"]
+            self.include = config["include"]
+        else:
+            self.connection = None
+            self.exclude = None
+            self.include = None
 
 
 # End of File Generation

@@ -22,8 +22,13 @@ from urllib.parse import urlencode
 
 
 class LogOutcome:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.reason = config["reason"]
+            self.result = config["result"]
+        else:
+            self.reason = None
+            self.result = None
 
 
 # End of File Generation

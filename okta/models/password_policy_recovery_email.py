@@ -22,8 +22,13 @@ from urllib.parse import urlencode
 
 
 class PasswordPolicyRecoveryEmail:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.properties = config["properties"]
+            self.status = config["status"]
+        else:
+            self.properties = None
+            self.status = None
 
 
 # End of File Generation

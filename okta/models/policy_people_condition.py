@@ -22,8 +22,13 @@ from urllib.parse import urlencode
 
 
 class PolicyPeopleCondition:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.groups = config["groups"]
+            self.users = config["users"]
+        else:
+            self.groups = None
+            self.users = None
 
 
 # End of File Generation

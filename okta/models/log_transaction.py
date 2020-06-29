@@ -22,8 +22,15 @@ from urllib.parse import urlencode
 
 
 class LogTransaction:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.detail = config["detail"]
+            self.id = config["id"]
+            self.type = config["type"]
+        else:
+            self.detail = None
+            self.id = None
+            self.type = None
 
 
 # End of File Generation

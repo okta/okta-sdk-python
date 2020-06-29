@@ -22,8 +22,13 @@ from urllib.parse import urlencode
 
 
 class MdmEnrollmentPolicyRuleCondition:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.block_non_safe_android = config["blockNonSafeAndroid"]
+            self.enrollment = config["enrollment"]
+        else:
+            self.block_non_safe_android = None
+            self.enrollment = None
 
 
 # End of File Generation

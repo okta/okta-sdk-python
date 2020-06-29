@@ -22,8 +22,15 @@ from urllib.parse import urlencode
 
 
 class LinkedObject:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.links = config["_links"]
+            self.associated = config["associated"]
+            self.primary = config["primary"]
+        else:
+            self.links = None
+            self.associated = None
+            self.primary = None
 
     
     async def add_linked_object_definition(

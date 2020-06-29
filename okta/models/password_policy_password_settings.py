@@ -22,8 +22,15 @@ from urllib.parse import urlencode
 
 
 class PasswordPolicyPasswordSettings:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.age = config["age"]
+            self.complexity = config["complexity"]
+            self.lockout = config["lockout"]
+        else:
+            self.age = None
+            self.complexity = None
+            self.lockout = None
 
 
 # End of File Generation

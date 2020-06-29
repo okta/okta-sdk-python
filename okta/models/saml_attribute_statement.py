@@ -22,8 +22,17 @@ from urllib.parse import urlencode
 
 
 class SamlAttributeStatement:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.name = config["name"]
+            self.namespace = config["namespace"]
+            self.type = config["type"]
+            self.values = config["values"]
+        else:
+            self.name = None
+            self.namespace = None
+            self.type = None
+            self.values = None
 
 
 # End of File Generation

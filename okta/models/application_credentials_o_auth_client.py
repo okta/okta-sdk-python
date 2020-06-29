@@ -22,8 +22,17 @@ from urllib.parse import urlencode
 
 
 class ApplicationCredentialsOAuthClient:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.auto_key_rotation = config["autoKeyRotation"]
+            self.client_id = config["client_id"]
+            self.client_secret = config["client_secret"]
+            self.token_endpoint_auth_method = config["token_endpoint_auth_method"]
+        else:
+            self.auto_key_rotation = None
+            self.client_id = None
+            self.client_secret = None
+            self.token_endpoint_auth_method = None
 
 
 # End of File Generation

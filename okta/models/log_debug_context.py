@@ -22,8 +22,11 @@ from urllib.parse import urlencode
 
 
 class LogDebugContext:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.debug_data = config["debugData"]
+        else:
+            self.debug_data = None
 
 
 # End of File Generation

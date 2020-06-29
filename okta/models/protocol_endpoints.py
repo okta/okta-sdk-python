@@ -22,8 +22,25 @@ from urllib.parse import urlencode
 
 
 class ProtocolEndpoints:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.acs = config["acs"]
+            self.authorization = config["authorization"]
+            self.jwks = config["jwks"]
+            self.metadata = config["metadata"]
+            self.slo = config["slo"]
+            self.sso = config["sso"]
+            self.token = config["token"]
+            self.user_info = config["userInfo"]
+        else:
+            self.acs = None
+            self.authorization = None
+            self.jwks = None
+            self.metadata = None
+            self.slo = None
+            self.sso = None
+            self.token = None
+            self.user_info = None
 
 
 # End of File Generation

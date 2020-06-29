@@ -22,8 +22,13 @@ from urllib.parse import urlencode
 
 
 class ApplicationCredentials:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.signing = config["signing"]
+            self.user_name_template = config["userNameTemplate"]
+        else:
+            self.signing = None
+            self.user_name_template = None
 
 
 # End of File Generation

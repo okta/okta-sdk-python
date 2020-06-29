@@ -22,8 +22,21 @@ from urllib.parse import urlencode
 
 
 class LogClient:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.device = config["device"]
+            self.geographical_context = config["geographicalContext"]
+            self.id = config["id"]
+            self.ip_address = config["ipAddress"]
+            self.user_agent = config["userAgent"]
+            self.zone = config["zone"]
+        else:
+            self.device = None
+            self.geographical_context = None
+            self.id = None
+            self.ip_address = None
+            self.user_agent = None
+            self.zone = None
 
 
 # End of File Generation

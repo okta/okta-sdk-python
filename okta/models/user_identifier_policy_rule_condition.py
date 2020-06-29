@@ -22,8 +22,15 @@ from urllib.parse import urlencode
 
 
 class UserIdentifierPolicyRuleCondition:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.attribute = config["attribute"]
+            self.patterns = config["patterns"]
+            self.type = config["type"]
+        else:
+            self.attribute = None
+            self.patterns = None
+            self.type = None
 
 
 # End of File Generation

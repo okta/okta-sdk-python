@@ -22,8 +22,19 @@ from urllib.parse import urlencode
 
 
 class ActivateFactorRequest:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.attestation = config["attestation"]
+            self.client_data = config["clientData"]
+            self.pass_code = config["passCode"]
+            self.registration_data = config["registrationData"]
+            self.state_token = config["stateToken"]
+        else:
+            self.attestation = None
+            self.client_data = None
+            self.pass_code = None
+            self.registration_data = None
+            self.state_token = None
 
 
 # End of File Generation

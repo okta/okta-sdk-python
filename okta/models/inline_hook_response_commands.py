@@ -22,8 +22,13 @@ from urllib.parse import urlencode
 
 
 class InlineHookResponseCommands:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.type = config["type"]
+            self.value = config["value"]
+        else:
+            self.type = None
+            self.value = None
 
 
 # End of File Generation

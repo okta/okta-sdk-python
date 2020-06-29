@@ -22,8 +22,17 @@ from urllib.parse import urlencode
 
 
 class Provisioning:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.action = config["action"]
+            self.conditions = config["conditions"]
+            self.groups = config["groups"]
+            self.profile_master = config["profileMaster"]
+        else:
+            self.action = None
+            self.conditions = None
+            self.groups = None
+            self.profile_master = None
 
 
 # End of File Generation

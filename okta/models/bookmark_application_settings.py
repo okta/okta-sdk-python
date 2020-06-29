@@ -22,8 +22,11 @@ from urllib.parse import urlencode
 
 
 class BookmarkApplicationSettings:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.app = config["app"]
+        else:
+            self.app = None
 
 
 # End of File Generation

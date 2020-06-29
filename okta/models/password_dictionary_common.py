@@ -22,8 +22,11 @@ from urllib.parse import urlencode
 
 
 class PasswordDictionaryCommon:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.exclude = config["exclude"]
+        else:
+            self.exclude = "false"
 
 
 # End of File Generation

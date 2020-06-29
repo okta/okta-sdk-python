@@ -22,8 +22,15 @@ from urllib.parse import urlencode
 
 
 class OktaSignOnPolicyRuleSignonSessionActions:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.max_session_idle_minutes = config["maxSessionIdleMinutes"]
+            self.max_session_lifetime_minutes = config["maxSessionLifetimeMinutes"]
+            self.use_persistent_cookie = config["usePersistentCookie"]
+        else:
+            self.max_session_idle_minutes = "120"
+            self.max_session_lifetime_minutes = "0"
+            self.use_persistent_cookie = "false"
 
 
 # End of File Generation

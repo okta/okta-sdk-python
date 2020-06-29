@@ -22,8 +22,11 @@ from urllib.parse import urlencode
 
 
 class OAuth2ClaimConditions:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.scopes = config["scopes"]
+        else:
+            self.scopes = None
 
 
 # End of File Generation

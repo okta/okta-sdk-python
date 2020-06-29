@@ -22,8 +22,17 @@ from urllib.parse import urlencode
 
 
 class IdentityProviderPolicy:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.account_link = config["accountLink"]
+            self.max_clock_skew = config["maxClockSkew"]
+            self.provisioning = config["provisioning"]
+            self.subject = config["subject"]
+        else:
+            self.account_link = None
+            self.max_clock_skew = None
+            self.provisioning = None
+            self.subject = None
 
 
 # End of File Generation

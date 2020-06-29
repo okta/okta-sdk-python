@@ -22,8 +22,13 @@ from urllib.parse import urlencode
 
 
 class GroupProfile:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.description = config["description"]
+            self.name = config["name"]
+        else:
+            self.description = None
+            self.name = None
 
 
 # End of File Generation

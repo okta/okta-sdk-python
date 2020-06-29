@@ -22,8 +22,11 @@ from urllib.parse import urlencode
 
 
 class ResetPasswordToken:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.reset_password_url = config["resetPasswordUrl"]
+        else:
+            self.reset_password_url = None
 
 
 # End of File Generation

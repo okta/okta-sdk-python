@@ -22,8 +22,27 @@ from urllib.parse import urlencode
 
 
 class Group:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.embedded = config["_embedded"]
+            self.links = config["_links"]
+            self.created = config["created"]
+            self.id = config["id"]
+            self.last_membership_updated = config["lastMembershipUpdated"]
+            self.last_updated = config["lastUpdated"]
+            self.object_class = config["objectClass"]
+            self.profile = config["profile"]
+            self.type = config["type"]
+        else:
+            self.embedded = None
+            self.links = None
+            self.created = None
+            self.id = None
+            self.last_membership_updated = None
+            self.last_updated = None
+            self.object_class = None
+            self.profile = None
+            self.type = None
 
     # Updates the profile for a group with &#x60;OKTA_GROUP&#x60; type from your organization.
     async def update_group(

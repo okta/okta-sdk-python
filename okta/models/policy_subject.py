@@ -22,8 +22,19 @@ from urllib.parse import urlencode
 
 
 class PolicySubject:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.filter = config["filter"]
+            self.format = config["format"]
+            self.match_attribute = config["matchAttribute"]
+            self.match_type = config["matchType"]
+            self.user_name_template = config["userNameTemplate"]
+        else:
+            self.filter = None
+            self.format = None
+            self.match_attribute = None
+            self.match_type = None
+            self.user_name_template = None
 
 
 # End of File Generation

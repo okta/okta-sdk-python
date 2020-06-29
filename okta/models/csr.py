@@ -22,8 +22,17 @@ from urllib.parse import urlencode
 
 
 class Csr:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.created = config["created"]
+            self.csr = config["csr"]
+            self.id = config["id"]
+            self.kty = config["kty"]
+        else:
+            self.created = None
+            self.csr = None
+            self.id = None
+            self.kty = None
 
 
 # End of File Generation

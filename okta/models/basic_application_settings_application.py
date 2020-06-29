@@ -22,8 +22,13 @@ from urllib.parse import urlencode
 
 
 class BasicApplicationSettingsApplication:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.auth_url = config["authURL"]
+            self.url = config["url"]
+        else:
+            self.auth_url = None
+            self.url = None
 
 
 # End of File Generation

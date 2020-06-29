@@ -22,8 +22,11 @@ from urllib.parse import urlencode
 
 
 class BrowserPluginApplication:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.credentials = config["credentials"]
+        else:
+            self.credentials = None
 
 
 # End of File Generation

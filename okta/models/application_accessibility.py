@@ -22,8 +22,15 @@ from urllib.parse import urlencode
 
 
 class ApplicationAccessibility:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.error_redirect_url = config["errorRedirectUrl"]
+            self.login_redirect_url = config["loginRedirectUrl"]
+            self.self_service = config["selfService"]
+        else:
+            self.error_redirect_url = None
+            self.login_redirect_url = None
+            self.self_service = None
 
 
 # End of File Generation

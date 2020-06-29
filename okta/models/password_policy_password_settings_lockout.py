@@ -22,8 +22,17 @@ from urllib.parse import urlencode
 
 
 class PasswordPolicyPasswordSettingsLockout:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.auto_unlock_minutes = config["autoUnlockMinutes"]
+            self.max_attempts = config["maxAttempts"]
+            self.show_lockout_failures = config["showLockoutFailures"]
+            self.user_lockout_notification_channels = config["userLockoutNotificationChannels"]
+        else:
+            self.auto_unlock_minutes = None
+            self.max_attempts = None
+            self.show_lockout_failures = None
+            self.user_lockout_notification_channels = None
 
 
 # End of File Generation

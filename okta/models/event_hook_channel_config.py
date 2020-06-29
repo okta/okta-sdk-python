@@ -22,8 +22,15 @@ from urllib.parse import urlencode
 
 
 class EventHookChannelConfig:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.auth_scheme = config["authScheme"]
+            self.headers = config["headers"]
+            self.uri = config["uri"]
+        else:
+            self.auth_scheme = None
+            self.headers = None
+            self.uri = None
 
 
 # End of File Generation

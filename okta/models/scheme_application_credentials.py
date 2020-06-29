@@ -22,8 +22,19 @@ from urllib.parse import urlencode
 
 
 class SchemeApplicationCredentials:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.password = config["password"]
+            self.reveal_password = config["revealPassword"]
+            self.scheme = config["scheme"]
+            self.signing = config["signing"]
+            self.user_name = config["userName"]
+        else:
+            self.password = None
+            self.reveal_password = None
+            self.scheme = None
+            self.signing = None
+            self.user_name = None
 
 
 # End of File Generation

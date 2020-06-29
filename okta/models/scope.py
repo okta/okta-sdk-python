@@ -22,8 +22,13 @@ from urllib.parse import urlencode
 
 
 class Scope:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.string_value = config["stringValue"]
+            self.type = config["type"]
+        else:
+            self.string_value = None
+            self.type = None
 
 
 # End of File Generation

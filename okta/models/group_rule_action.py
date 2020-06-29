@@ -22,8 +22,11 @@ from urllib.parse import urlencode
 
 
 class GroupRuleAction:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.assign_user_to_groups = config["assignUserToGroups"]
+        else:
+            self.assign_user_to_groups = None
 
 
 # End of File Generation

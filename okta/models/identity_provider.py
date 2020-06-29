@@ -22,8 +22,29 @@ from urllib.parse import urlencode
 
 
 class IdentityProvider:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.links = config["_links"]
+            self.created = config["created"]
+            self.id = config["id"]
+            self.issuer_mode = config["issuerMode"]
+            self.last_updated = config["lastUpdated"]
+            self.name = config["name"]
+            self.policy = config["policy"]
+            self.protocol = config["protocol"]
+            self.status = config["status"]
+            self.type = config["type"]
+        else:
+            self.links = None
+            self.created = None
+            self.id = None
+            self.issuer_mode = None
+            self.last_updated = None
+            self.name = None
+            self.policy = None
+            self.protocol = None
+            self.status = None
+            self.type = None
 
     # Adds a new IdP to your organization.
     async def create_identity_provider(

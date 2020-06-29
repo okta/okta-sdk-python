@@ -22,8 +22,13 @@ from urllib.parse import urlencode
 
 
 class WebAuthnUserFactorProfile:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.authenticator_name = config["authenticatorName"]
+            self.credential_id = config["credentialId"]
+        else:
+            self.authenticator_name = None
+            self.credential_id = None
 
 
 # End of File Generation

@@ -22,8 +22,27 @@ from urllib.parse import urlencode
 
 
 class UserFactor:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.embedded = config["_embedded"]
+            self.links = config["_links"]
+            self.created = config["created"]
+            self.factor_type = config["factorType"]
+            self.id = config["id"]
+            self.last_updated = config["lastUpdated"]
+            self.provider = config["provider"]
+            self.status = config["status"]
+            self.verify = config["verify"]
+        else:
+            self.embedded = None
+            self.links = None
+            self.created = None
+            self.factor_type = None
+            self.id = None
+            self.last_updated = None
+            self.provider = None
+            self.status = None
+            self.verify = None
 
     # Unenrolls an existing factor for the specified user, allowing the user to enroll a new factor.
     async def delete_factor(

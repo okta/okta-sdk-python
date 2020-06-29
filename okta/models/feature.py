@@ -22,8 +22,23 @@ from urllib.parse import urlencode
 
 
 class Feature:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.links = config["_links"]
+            self.description = config["description"]
+            self.id = config["id"]
+            self.name = config["name"]
+            self.stage = config["stage"]
+            self.status = config["status"]
+            self.type = config["type"]
+        else:
+            self.links = None
+            self.description = None
+            self.id = None
+            self.name = None
+            self.stage = None
+            self.status = None
+            self.type = None
 
     
     async def get_feature(

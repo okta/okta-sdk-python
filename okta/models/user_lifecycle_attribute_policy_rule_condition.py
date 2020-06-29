@@ -22,8 +22,13 @@ from urllib.parse import urlencode
 
 
 class UserLifecycleAttributePolicyRuleCondition:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.attribute_name = config["attributeName"]
+            self.matching_value = config["matchingValue"]
+        else:
+            self.attribute_name = None
+            self.matching_value = None
 
 
 # End of File Generation

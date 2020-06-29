@@ -22,8 +22,13 @@ from urllib.parse import urlencode
 
 
 class FeatureStage:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.state = config["state"]
+            self.value = config["value"]
+        else:
+            self.state = None
+            self.value = None
 
 
 # End of File Generation

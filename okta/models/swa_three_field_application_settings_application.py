@@ -22,8 +22,23 @@ from urllib.parse import urlencode
 
 
 class SwaThreeFieldApplicationSettingsApplication:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.button_selector = config["buttonSelector"]
+            self.extra_field_selector = config["extraFieldSelector"]
+            self.extra_field_value = config["extraFieldValue"]
+            self.login_url_regex = config["loginUrlRegex"]
+            self.password_selector = config["passwordSelector"]
+            self.target_url = config["targetURL"]
+            self.user_name_selector = config["userNameSelector"]
+        else:
+            self.button_selector = None
+            self.extra_field_selector = None
+            self.extra_field_value = None
+            self.login_url_regex = None
+            self.password_selector = None
+            self.target_url = None
+            self.user_name_selector = None
 
 
 # End of File Generation

@@ -22,8 +22,13 @@ from urllib.parse import urlencode
 
 
 class PolicyAccountLink:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.action = config["action"]
+            self.filter = config["filter"]
+        else:
+            self.action = None
+            self.filter = None
 
 
 # End of File Generation

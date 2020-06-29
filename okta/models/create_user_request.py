@@ -22,8 +22,17 @@ from urllib.parse import urlencode
 
 
 class CreateUserRequest:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.credentials = config["credentials"]
+            self.group_ids = config["groupIds"]
+            self.profile = config["profile"]
+            self.type = config["type"]
+        else:
+            self.credentials = None
+            self.group_ids = None
+            self.profile = None
+            self.type = None
 
 
 # End of File Generation

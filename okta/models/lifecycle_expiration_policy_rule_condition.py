@@ -22,8 +22,15 @@ from urllib.parse import urlencode
 
 
 class LifecycleExpirationPolicyRuleCondition:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.lifecycle_status = config["lifecycleStatus"]
+            self.number = config["number"]
+            self.unit = config["unit"]
+        else:
+            self.lifecycle_status = None
+            self.number = None
+            self.unit = None
 
 
 # End of File Generation

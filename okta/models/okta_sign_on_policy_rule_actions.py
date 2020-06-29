@@ -22,8 +22,11 @@ from urllib.parse import urlencode
 
 
 class OktaSignOnPolicyRuleActions:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.signon = config["signon"]
+        else:
+            self.signon = None
 
 
 # End of File Generation

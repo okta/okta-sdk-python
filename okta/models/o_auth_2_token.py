@@ -22,8 +22,31 @@ from urllib.parse import urlencode
 
 
 class OAuth2Token:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.embedded = config["_embedded"]
+            self.links = config["_links"]
+            self.client_id = config["clientId"]
+            self.created = config["created"]
+            self.expires_at = config["expiresAt"]
+            self.id = config["id"]
+            self.issuer = config["issuer"]
+            self.last_updated = config["lastUpdated"]
+            self.scopes = config["scopes"]
+            self.status = config["status"]
+            self.user_id = config["userId"]
+        else:
+            self.embedded = None
+            self.links = None
+            self.client_id = None
+            self.created = None
+            self.expires_at = None
+            self.id = None
+            self.issuer = None
+            self.last_updated = None
+            self.scopes = None
+            self.status = None
+            self.user_id = None
 
 
 # End of File Generation

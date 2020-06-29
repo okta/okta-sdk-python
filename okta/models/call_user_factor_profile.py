@@ -22,8 +22,13 @@ from urllib.parse import urlencode
 
 
 class CallUserFactorProfile:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.phone_extension = config["phoneExtension"]
+            self.phone_number = config["phoneNumber"]
+        else:
+            self.phone_extension = None
+            self.phone_number = None
 
 
 # End of File Generation

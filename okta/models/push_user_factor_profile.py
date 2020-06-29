@@ -22,8 +22,21 @@ from urllib.parse import urlencode
 
 
 class PushUserFactorProfile:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.credential_id = config["credentialId"]
+            self.device_token = config["deviceToken"]
+            self.device_type = config["deviceType"]
+            self.name = config["name"]
+            self.platform = config["platform"]
+            self.version = config["version"]
+        else:
+            self.credential_id = None
+            self.device_token = None
+            self.device_type = None
+            self.name = None
+            self.platform = None
+            self.version = None
 
 
 # End of File Generation

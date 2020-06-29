@@ -22,8 +22,13 @@ from urllib.parse import urlencode
 
 
 class DevicePolicyRuleConditionPlatform:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.supported_mdm_frameworks = config["supportedMDMFrameworks"]
+            self.types = config["types"]
+        else:
+            self.supported_mdm_frameworks = None
+            self.types = None
 
 
 # End of File Generation

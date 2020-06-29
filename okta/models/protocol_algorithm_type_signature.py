@@ -22,8 +22,13 @@ from urllib.parse import urlencode
 
 
 class ProtocolAlgorithmTypeSignature:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.algorithm = config["algorithm"]
+            self.scope = config["scope"]
+        else:
+            self.algorithm = None
+            self.scope = None
 
 
 # End of File Generation

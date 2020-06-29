@@ -22,8 +22,15 @@ from urllib.parse import urlencode
 
 
 class LogUserAgent:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.browser = config["browser"]
+            self.os = config["os"]
+            self.raw_user_agent = config["rawUserAgent"]
+        else:
+            self.browser = None
+            self.os = None
+            self.raw_user_agent = None
 
 
 # End of File Generation

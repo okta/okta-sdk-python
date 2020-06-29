@@ -22,8 +22,13 @@ from urllib.parse import urlencode
 
 
 class PasswordPolicyConditions:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.auth_provider = config["authProvider"]
+            self.people = config["people"]
+        else:
+            self.auth_provider = None
+            self.people = None
 
 
 # End of File Generation

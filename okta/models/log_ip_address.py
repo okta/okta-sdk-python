@@ -22,8 +22,17 @@ from urllib.parse import urlencode
 
 
 class LogIpAddress:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.geographical_context = config["geographicalContext"]
+            self.ip = config["ip"]
+            self.source = config["source"]
+            self.version = config["version"]
+        else:
+            self.geographical_context = None
+            self.ip = None
+            self.source = None
+            self.version = None
 
 
 # End of File Generation

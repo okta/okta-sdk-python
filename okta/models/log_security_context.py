@@ -22,8 +22,19 @@ from urllib.parse import urlencode
 
 
 class LogSecurityContext:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.as_number = config["asNumber"]
+            self.as_org = config["asOrg"]
+            self.domain = config["domain"]
+            self.is_proxy = config["isProxy"]
+            self.isp = config["isp"]
+        else:
+            self.as_number = None
+            self.as_org = None
+            self.domain = None
+            self.is_proxy = None
+            self.isp = None
 
 
 # End of File Generation

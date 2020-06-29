@@ -22,8 +22,15 @@ from urllib.parse import urlencode
 
 
 class SecurityQuestionUserFactorProfile:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.answer = config["answer"]
+            self.question = config["question"]
+            self.question_text = config["questionText"]
+        else:
+            self.answer = None
+            self.question = None
+            self.question_text = None
 
 
 # End of File Generation

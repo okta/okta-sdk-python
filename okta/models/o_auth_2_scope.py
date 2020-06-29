@@ -22,8 +22,25 @@ from urllib.parse import urlencode
 
 
 class OAuth2Scope:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.consent = config["consent"]
+            self.default = config["default"]
+            self.description = config["description"]
+            self.display_name = config["displayName"]
+            self.id = config["id"]
+            self.metadata_publish = config["metadataPublish"]
+            self.name = config["name"]
+            self.system = config["system"]
+        else:
+            self.consent = None
+            self.default = None
+            self.description = None
+            self.display_name = None
+            self.id = None
+            self.metadata_publish = None
+            self.name = None
+            self.system = None
 
 
 # End of File Generation

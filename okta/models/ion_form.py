@@ -22,8 +22,27 @@ from urllib.parse import urlencode
 
 
 class IonForm:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.accepts = config["accepts"]
+            self.href = config["href"]
+            self.method = config["method"]
+            self.name = config["name"]
+            self.produces = config["produces"]
+            self.refresh = config["refresh"]
+            self.rel = config["rel"]
+            self.relates_to = config["relatesTo"]
+            self.value = config["value"]
+        else:
+            self.accepts = None
+            self.href = None
+            self.method = None
+            self.name = None
+            self.produces = None
+            self.refresh = None
+            self.rel = None
+            self.relates_to = None
+            self.value = None
 
 
 # End of File Generation

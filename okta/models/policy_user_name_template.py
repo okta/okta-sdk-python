@@ -22,8 +22,11 @@ from urllib.parse import urlencode
 
 
 class PolicyUserNameTemplate:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.template = config["template"]
+        else:
+            self.template = None
 
 
 # End of File Generation

@@ -22,8 +22,33 @@ from urllib.parse import urlencode
 
 
 class WsFederationApplicationSettingsApplication:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.attribute_statements = config["attributeStatements"]
+            self.audience_restriction = config["audienceRestriction"]
+            self.authn_context_class_ref = config["authnContextClassRef"]
+            self.group_filter = config["groupFilter"]
+            self.group_name = config["groupName"]
+            self.group_value_format = config["groupValueFormat"]
+            self.name_id_format = config["nameIDFormat"]
+            self.realm = config["realm"]
+            self.site_url = config["siteURL"]
+            self.username_attribute = config["usernameAttribute"]
+            self.w_reply_override = config["wReplyOverride"]
+            self.w_reply_url = config["wReplyURL"]
+        else:
+            self.attribute_statements = None
+            self.audience_restriction = None
+            self.authn_context_class_ref = None
+            self.group_filter = None
+            self.group_name = None
+            self.group_value_format = None
+            self.name_id_format = None
+            self.realm = None
+            self.site_url = None
+            self.username_attribute = None
+            self.w_reply_override = None
+            self.w_reply_url = None
 
 
 # End of File Generation

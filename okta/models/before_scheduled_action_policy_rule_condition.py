@@ -22,8 +22,13 @@ from urllib.parse import urlencode
 
 
 class BeforeScheduledActionPolicyRuleCondition:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.duration = config["duration"]
+            self.lifecycle_action = config["lifecycleAction"]
+        else:
+            self.duration = None
+            self.lifecycle_action = None
 
 
 # End of File Generation

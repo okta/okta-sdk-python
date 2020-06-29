@@ -22,8 +22,25 @@ from urllib.parse import urlencode
 
 
 class Protocol:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.algorithms = config["algorithms"]
+            self.credentials = config["credentials"]
+            self.endpoints = config["endpoints"]
+            self.issuer = config["issuer"]
+            self.relay_state = config["relayState"]
+            self.scopes = config["scopes"]
+            self.settings = config["settings"]
+            self.type = config["type"]
+        else:
+            self.algorithms = None
+            self.credentials = None
+            self.endpoints = None
+            self.issuer = None
+            self.relay_state = None
+            self.scopes = None
+            self.settings = None
+            self.type = None
 
 
 # End of File Generation

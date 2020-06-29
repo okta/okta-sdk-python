@@ -22,8 +22,33 @@ from urllib.parse import urlencode
 
 
 class CatalogApplication:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.links = config["_links"]
+            self.category = config["category"]
+            self.description = config["description"]
+            self.display_name = config["displayName"]
+            self.features = config["features"]
+            self.id = config["id"]
+            self.last_updated = config["lastUpdated"]
+            self.name = config["name"]
+            self.sign_on_modes = config["signOnModes"]
+            self.status = config["status"]
+            self.verification_status = config["verificationStatus"]
+            self.website = config["website"]
+        else:
+            self.links = None
+            self.category = None
+            self.description = None
+            self.display_name = None
+            self.features = None
+            self.id = None
+            self.last_updated = None
+            self.name = None
+            self.sign_on_modes = None
+            self.status = None
+            self.verification_status = None
+            self.website = None
 
 
 # End of File Generation

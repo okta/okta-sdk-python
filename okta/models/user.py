@@ -22,8 +22,37 @@ from urllib.parse import urlencode
 
 
 class User:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.embedded = config["_embedded"]
+            self.links = config["_links"]
+            self.activated = config["activated"]
+            self.created = config["created"]
+            self.credentials = config["credentials"]
+            self.id = config["id"]
+            self.last_login = config["lastLogin"]
+            self.last_updated = config["lastUpdated"]
+            self.password_changed = config["passwordChanged"]
+            self.profile = config["profile"]
+            self.status = config["status"]
+            self.status_changed = config["statusChanged"]
+            self.transitioning_to_status = config["transitioningToStatus"]
+            self.type = config["type"]
+        else:
+            self.embedded = None
+            self.links = None
+            self.activated = None
+            self.created = None
+            self.credentials = None
+            self.id = None
+            self.last_login = None
+            self.last_updated = None
+            self.password_changed = None
+            self.profile = None
+            self.status = None
+            self.status_changed = None
+            self.transitioning_to_status = None
+            self.type = None
 
     # Creates a new user in your Okta organization with or without credentials.
     async def create_user(

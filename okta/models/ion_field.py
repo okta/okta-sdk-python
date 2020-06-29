@@ -22,8 +22,27 @@ from urllib.parse import urlencode
 
 
 class IonField:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.form = config["form"]
+            self.label = config["label"]
+            self.mutable = config["mutable"]
+            self.name = config["name"]
+            self.required = config["required"]
+            self.secret = config["secret"]
+            self.type = config["type"]
+            self.value = config["value"]
+            self.visible = config["visible"]
+        else:
+            self.form = None
+            self.label = None
+            self.mutable = None
+            self.name = None
+            self.required = None
+            self.secret = None
+            self.type = None
+            self.value = None
+            self.visible = None
 
 
 # End of File Generation

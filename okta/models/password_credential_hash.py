@@ -22,8 +22,19 @@ from urllib.parse import urlencode
 
 
 class PasswordCredentialHash:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.algorithm = config["algorithm"]
+            self.salt = config["salt"]
+            self.salt_order = config["saltOrder"]
+            self.value = config["value"]
+            self.worker_factor = config["workerFactor"]
+        else:
+            self.algorithm = None
+            self.salt = None
+            self.salt_order = None
+            self.value = None
+            self.worker_factor = None
 
 
 # End of File Generation

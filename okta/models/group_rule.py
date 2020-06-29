@@ -22,8 +22,25 @@ from urllib.parse import urlencode
 
 
 class GroupRule:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.actions = config["actions"]
+            self.conditions = config["conditions"]
+            self.created = config["created"]
+            self.id = config["id"]
+            self.last_updated = config["lastUpdated"]
+            self.name = config["name"]
+            self.status = config["status"]
+            self.type = config["type"]
+        else:
+            self.actions = None
+            self.conditions = None
+            self.created = None
+            self.id = None
+            self.last_updated = None
+            self.name = None
+            self.status = None
+            self.type = None
 
     # Updates a group rule. Only &#x60;INACTIVE&#x60; rules can be updated.
     async def update_group_rule(

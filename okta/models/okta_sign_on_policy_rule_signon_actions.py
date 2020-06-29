@@ -22,8 +22,21 @@ from urllib.parse import urlencode
 
 
 class OktaSignOnPolicyRuleSignonActions:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.access = config["access"]
+            self.factor_lifetime = config["factorLifetime"]
+            self.factor_prompt_mode = config["factorPromptMode"]
+            self.remember_device_by_default = config["rememberDeviceByDefault"]
+            self.require_factor = config["requireFactor"]
+            self.session = config["session"]
+        else:
+            self.access = None
+            self.factor_lifetime = None
+            self.factor_prompt_mode = None
+            self.remember_device_by_default = "false"
+            self.require_factor = "false"
+            self.session = None
 
 
 # End of File Generation

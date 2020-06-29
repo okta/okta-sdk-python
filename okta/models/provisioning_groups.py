@@ -22,8 +22,17 @@ from urllib.parse import urlencode
 
 
 class ProvisioningGroups:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.action = config["action"]
+            self.assignments = config["assignments"]
+            self.filter = config["filter"]
+            self.source_attribute_name = config["sourceAttributeName"]
+        else:
+            self.action = None
+            self.assignments = None
+            self.filter = None
+            self.source_attribute_name = None
 
 
 # End of File Generation

@@ -22,8 +22,17 @@ from urllib.parse import urlencode
 
 
 class ApplicationSettings:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.app = config["app"]
+            self.implicit_assignment = config["implicitAssignment"]
+            self.inline_hook_id = config["inlineHookId"]
+            self.notifications = config["notifications"]
+        else:
+            self.app = None
+            self.implicit_assignment = None
+            self.inline_hook_id = None
+            self.notifications = None
 
 
 # End of File Generation

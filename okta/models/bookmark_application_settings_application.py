@@ -22,8 +22,13 @@ from urllib.parse import urlencode
 
 
 class BookmarkApplicationSettingsApplication:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.request_integration = config["requestIntegration"]
+            self.url = config["url"]
+        else:
+            self.request_integration = None
+            self.url = None
 
 
 # End of File Generation

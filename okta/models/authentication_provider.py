@@ -22,8 +22,13 @@ from urllib.parse import urlencode
 
 
 class AuthenticationProvider:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.name = config["name"]
+            self.type = config["type"]
+        else:
+            self.name = None
+            self.type = None
 
 
 # End of File Generation

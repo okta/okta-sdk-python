@@ -22,8 +22,11 @@ from urllib.parse import urlencode
 
 
 class TokenUserFactorProfile:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.credential_id = config["credentialId"]
+        else:
+            self.credential_id = None
 
 
 # End of File Generation

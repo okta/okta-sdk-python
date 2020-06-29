@@ -22,8 +22,23 @@ from urllib.parse import urlencode
 
 
 class SmsTemplate:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.created = config["created"]
+            self.id = config["id"]
+            self.last_updated = config["lastUpdated"]
+            self.name = config["name"]
+            self.template = config["template"]
+            self.translations = config["translations"]
+            self.type = config["type"]
+        else:
+            self.created = None
+            self.id = None
+            self.last_updated = None
+            self.name = None
+            self.template = None
+            self.translations = None
+            self.type = None
 
     # Adds a new custom SMS template to your organization.
     async def create_sms_template(

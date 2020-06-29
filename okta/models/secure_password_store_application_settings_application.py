@@ -22,8 +22,27 @@ from urllib.parse import urlencode
 
 
 class SecurePasswordStoreApplicationSettingsApplication:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.optional_field_1 = config["optionalField1"]
+            self.optional_field_1_value = config["optionalField1Value"]
+            self.optional_field_2 = config["optionalField2"]
+            self.optional_field_2_value = config["optionalField2Value"]
+            self.optional_field_3 = config["optionalField3"]
+            self.optional_field_3_value = config["optionalField3Value"]
+            self.password_field = config["passwordField"]
+            self.url = config["url"]
+            self.username_field = config["usernameField"]
+        else:
+            self.optional_field_1 = None
+            self.optional_field_1_value = None
+            self.optional_field_2 = None
+            self.optional_field_2_value = None
+            self.optional_field_3 = None
+            self.optional_field_3_value = None
+            self.password_field = None
+            self.url = None
+            self.username_field = None
 
 
 # End of File Generation

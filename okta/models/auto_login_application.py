@@ -22,8 +22,13 @@ from urllib.parse import urlencode
 
 
 class AutoLoginApplication:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.credentials = config["credentials"]
+            self.settings = config["settings"]
+        else:
+            self.credentials = None
+            self.settings = None
 
 
 # End of File Generation

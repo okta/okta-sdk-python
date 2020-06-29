@@ -22,8 +22,27 @@ from urllib.parse import urlencode
 
 
 class InlineHook:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.links = config["_links"]
+            self.channel = config["channel"]
+            self.created = config["created"]
+            self.id = config["id"]
+            self.last_updated = config["lastUpdated"]
+            self.name = config["name"]
+            self.status = config["status"]
+            self.type = config["type"]
+            self.version = config["version"]
+        else:
+            self.links = None
+            self.channel = None
+            self.created = None
+            self.id = None
+            self.last_updated = None
+            self.name = None
+            self.status = None
+            self.type = None
+            self.version = None
 
     
     async def create_inline_hook(

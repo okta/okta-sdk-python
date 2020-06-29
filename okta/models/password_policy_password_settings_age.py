@@ -22,8 +22,17 @@ from urllib.parse import urlencode
 
 
 class PasswordPolicyPasswordSettingsAge:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.expire_warn_days = config["expireWarnDays"]
+            self.history_count = config["historyCount"]
+            self.max_age_days = config["maxAgeDays"]
+            self.min_age_minutes = config["minAgeMinutes"]
+        else:
+            self.expire_warn_days = "0"
+            self.history_count = "0"
+            self.max_age_days = "0"
+            self.min_age_minutes = "0"
 
 
 # End of File Generation

@@ -22,8 +22,21 @@ from urllib.parse import urlencode
 
 
 class UserPolicyRuleCondition:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.exclude = config["exclude"]
+            self.inactivity = config["inactivity"]
+            self.include = config["include"]
+            self.lifecycle_expiration = config["lifecycleExpiration"]
+            self.password_expiration = config["passwordExpiration"]
+            self.user_lifecycle_attribute = config["userLifecycleAttribute"]
+        else:
+            self.exclude = None
+            self.inactivity = None
+            self.include = None
+            self.lifecycle_expiration = None
+            self.password_expiration = None
+            self.user_lifecycle_attribute = None
 
 
 # End of File Generation

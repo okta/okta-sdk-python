@@ -22,8 +22,19 @@ from urllib.parse import urlencode
 
 
 class IdentityProviderCredentialsTrust:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.audience = config["audience"]
+            self.issuer = config["issuer"]
+            self.kid = config["kid"]
+            self.revocation = config["revocation"]
+            self.revocation_cache_lifetime = config["revocationCacheLifetime"]
+        else:
+            self.audience = None
+            self.issuer = None
+            self.kid = None
+            self.revocation = None
+            self.revocation_cache_lifetime = None
 
 
 # End of File Generation

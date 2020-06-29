@@ -22,8 +22,23 @@ from urllib.parse import urlencode
 
 
 class PolicyRule:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.created = config["created"]
+            self.id = config["id"]
+            self.last_updated = config["lastUpdated"]
+            self.priority = config["priority"]
+            self.status = config["status"]
+            self.system = config["system"]
+            self.type = config["type"]
+        else:
+            self.created = None
+            self.id = None
+            self.last_updated = None
+            self.priority = None
+            self.status = "ACTIVE"
+            self.system = "false"
+            self.type = None
 
     # Updates a policy rule.
     async def update_policy_rule(

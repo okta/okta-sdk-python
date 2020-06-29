@@ -22,8 +22,29 @@ from urllib.parse import urlencode
 
 
 class AppLink:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.app_assignment_id = config["appAssignmentId"]
+            self.app_instance_id = config["appInstanceId"]
+            self.app_name = config["appName"]
+            self.credentials_setup = config["credentialsSetup"]
+            self.hidden = config["hidden"]
+            self.id = config["id"]
+            self.label = config["label"]
+            self.link_url = config["linkUrl"]
+            self.logo_url = config["logoUrl"]
+            self.sort_order = config["sortOrder"]
+        else:
+            self.app_assignment_id = None
+            self.app_instance_id = None
+            self.app_name = None
+            self.credentials_setup = None
+            self.hidden = None
+            self.id = None
+            self.label = None
+            self.link_url = None
+            self.logo_url = None
+            self.sort_order = None
 
 
 # End of File Generation

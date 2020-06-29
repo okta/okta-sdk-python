@@ -22,8 +22,13 @@ from urllib.parse import urlencode
 
 
 class ProtocolAlgorithms:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.request = config["request"]
+            self.response = config["response"]
+        else:
+            self.request = None
+            self.response = None
 
 
 # End of File Generation

@@ -22,8 +22,15 @@ from urllib.parse import urlencode
 
 
 class AppAndInstanceConditionEvaluatorAppOrInstance:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.id = config["id"]
+            self.name = config["name"]
+            self.type = config["type"]
+        else:
+            self.id = None
+            self.name = None
+            self.type = None
 
 
 # End of File Generation

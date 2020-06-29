@@ -22,8 +22,15 @@ from urllib.parse import urlencode
 
 
 class BasicAuthApplication:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.credentials = config["credentials"]
+            self.name = config["name"]
+            self.settings = config["settings"]
+        else:
+            self.credentials = None
+            self.name = "template_basic_auth"
+            self.settings = None
 
 
 # End of File Generation

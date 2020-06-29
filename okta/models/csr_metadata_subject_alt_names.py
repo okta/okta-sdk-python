@@ -22,8 +22,11 @@ from urllib.parse import urlencode
 
 
 class CsrMetadataSubjectAltNames:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.dns_names = config["dnsNames"]
+        else:
+            self.dns_names = None
 
 
 # End of File Generation

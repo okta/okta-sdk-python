@@ -22,8 +22,23 @@ from urllib.parse import urlencode
 
 
 class LogAuthenticationContext:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.authentication_provider = config["authenticationProvider"]
+            self.authentication_step = config["authenticationStep"]
+            self.credential_provider = config["credentialProvider"]
+            self.credential_type = config["credentialType"]
+            self.external_session_id = config["externalSessionId"]
+            self.interface = config["interface"]
+            self.issuer = config["issuer"]
+        else:
+            self.authentication_provider = None
+            self.authentication_step = None
+            self.credential_provider = None
+            self.credential_type = None
+            self.external_session_id = None
+            self.interface = None
+            self.issuer = None
 
 
 # End of File Generation

@@ -22,8 +22,17 @@ from urllib.parse import urlencode
 
 
 class DevicePolicyRuleCondition:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.migrated = config["migrated"]
+            self.platform = config["platform"]
+            self.rooted = config["rooted"]
+            self.trust_level = config["trustLevel"]
+        else:
+            self.migrated = None
+            self.platform = None
+            self.rooted = None
+            self.trust_level = None
 
 
 # End of File Generation

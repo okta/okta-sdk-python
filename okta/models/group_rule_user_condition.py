@@ -22,8 +22,13 @@ from urllib.parse import urlencode
 
 
 class GroupRuleUserCondition:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.exclude = config["exclude"]
+            self.include = config["include"]
+        else:
+            self.exclude = None
+            self.include = None
 
 
 # End of File Generation

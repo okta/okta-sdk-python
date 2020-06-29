@@ -22,8 +22,11 @@ from urllib.parse import urlencode
 
 
 class ApplicationLicensing:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.seat_count = config["seatCount"]
+        else:
+            self.seat_count = None
 
 
 # End of File Generation

@@ -22,8 +22,11 @@ from urllib.parse import urlencode
 
 
 class IdentityProviderCredentialsSigning:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.kid = config["kid"]
+        else:
+            self.kid = None
 
 
 # End of File Generation

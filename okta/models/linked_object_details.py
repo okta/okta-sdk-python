@@ -22,8 +22,17 @@ from urllib.parse import urlencode
 
 
 class LinkedObjectDetails:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.description = config["description"]
+            self.name = config["name"]
+            self.title = config["title"]
+            self.type = config["type"]
+        else:
+            self.description = None
+            self.name = None
+            self.title = None
+            self.type = None
 
 
 # End of File Generation

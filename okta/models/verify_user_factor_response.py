@@ -22,8 +22,19 @@ from urllib.parse import urlencode
 
 
 class VerifyUserFactorResponse:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.embedded = config["_embedded"]
+            self.links = config["_links"]
+            self.expires_at = config["expiresAt"]
+            self.factor_result = config["factorResult"]
+            self.factor_result_message = config["factorResultMessage"]
+        else:
+            self.embedded = None
+            self.links = None
+            self.expires_at = None
+            self.factor_result = None
+            self.factor_result_message = None
 
 
 # End of File Generation

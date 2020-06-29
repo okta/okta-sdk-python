@@ -22,8 +22,13 @@ from urllib.parse import urlencode
 
 
 class IdentityProviderPolicyRuleCondition:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.idp_ids = config["idpIds"]
+            self.provider = config["provider"]
+        else:
+            self.idp_ids = None
+            self.provider = None
 
 
 # End of File Generation

@@ -22,8 +22,11 @@ from urllib.parse import urlencode
 
 
 class EmailUserFactorProfile:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.email = config["email"]
+        else:
+            self.email = None
 
 
 # End of File Generation

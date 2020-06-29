@@ -22,8 +22,9 @@ from urllib.parse import urlencode
 
 
 class OpenIdConnectApplicationType:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+        else:
 
 
 # End of File Generation

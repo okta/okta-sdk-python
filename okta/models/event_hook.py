@@ -22,8 +22,29 @@ from urllib.parse import urlencode
 
 
 class EventHook:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.links = config["_links"]
+            self.channel = config["channel"]
+            self.created = config["created"]
+            self.created_by = config["createdBy"]
+            self.events = config["events"]
+            self.id = config["id"]
+            self.last_updated = config["lastUpdated"]
+            self.name = config["name"]
+            self.status = config["status"]
+            self.verification_status = config["verificationStatus"]
+        else:
+            self.links = None
+            self.channel = None
+            self.created = None
+            self.created_by = None
+            self.events = None
+            self.id = None
+            self.last_updated = None
+            self.name = None
+            self.status = None
+            self.verification_status = None
 
     
     async def create_event_hook(

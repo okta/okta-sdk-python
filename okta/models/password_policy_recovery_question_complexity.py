@@ -22,8 +22,11 @@ from urllib.parse import urlencode
 
 
 class PasswordPolicyRecoveryQuestionComplexity:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.min_length = config["minLength"]
+        else:
+            self.min_length = None
 
 
 # End of File Generation

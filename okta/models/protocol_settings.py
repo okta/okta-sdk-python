@@ -22,8 +22,11 @@ from urllib.parse import urlencode
 
 
 class ProtocolSettings:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.name_format = config["nameFormat"]
+        else:
+            self.name_format = None
 
 
 # End of File Generation

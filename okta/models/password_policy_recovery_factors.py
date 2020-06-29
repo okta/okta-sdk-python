@@ -22,8 +22,17 @@ from urllib.parse import urlencode
 
 
 class PasswordPolicyRecoveryFactors:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.okta_call = config["okta_call"]
+            self.okta_email = config["okta_email"]
+            self.okta_sms = config["okta_sms"]
+            self.recovery_question = config["recovery_question"]
+        else:
+            self.okta_call = None
+            self.okta_email = None
+            self.okta_sms = None
+            self.recovery_question = None
 
 
 # End of File Generation

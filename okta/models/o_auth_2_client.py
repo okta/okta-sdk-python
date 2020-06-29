@@ -22,8 +22,19 @@ from urllib.parse import urlencode
 
 
 class OAuth2Client:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.links = config["_links"]
+            self.client_id = config["client_id"]
+            self.client_name = config["client_name"]
+            self.client_uri = config["client_uri"]
+            self.logo_uri = config["logo_uri"]
+        else:
+            self.links = None
+            self.client_id = None
+            self.client_name = None
+            self.client_uri = None
+            self.logo_uri = None
 
 
 # End of File Generation

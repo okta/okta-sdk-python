@@ -22,8 +22,13 @@ from urllib.parse import urlencode
 
 
 class SessionIdentityProvider:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.id = config["id"]
+            self.type = config["type"]
+        else:
+            self.id = None
+            self.type = None
 
 
 # End of File Generation

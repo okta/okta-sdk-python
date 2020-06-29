@@ -22,8 +22,15 @@ from urllib.parse import urlencode
 
 
 class PushUserFactor:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.expires_at = config["expiresAt"]
+            self.factor_result = config["factorResult"]
+            self.profile = config["profile"]
+        else:
+            self.expires_at = None
+            self.factor_result = None
+            self.profile = None
 
 
 # End of File Generation

@@ -22,8 +22,13 @@ from urllib.parse import urlencode
 
 
 class ChangePasswordRequest:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.new_password = config["newPassword"]
+            self.old_password = config["oldPassword"]
+        else:
+            self.new_password = None
+            self.old_password = None
 
 
 # End of File Generation

@@ -22,8 +22,29 @@ from urllib.parse import urlencode
 
 
 class Role:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.embedded = config["_embedded"]
+            self.links = config["_links"]
+            self.assignment_type = config["assignmentType"]
+            self.created = config["created"]
+            self.description = config["description"]
+            self.id = config["id"]
+            self.label = config["label"]
+            self.last_updated = config["lastUpdated"]
+            self.status = config["status"]
+            self.type = config["type"]
+        else:
+            self.embedded = None
+            self.links = None
+            self.assignment_type = None
+            self.created = None
+            self.description = None
+            self.id = None
+            self.label = None
+            self.last_updated = None
+            self.status = None
+            self.type = None
 
 
 # End of File Generation

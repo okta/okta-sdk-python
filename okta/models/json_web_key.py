@@ -22,8 +22,41 @@ from urllib.parse import urlencode
 
 
 class JsonWebKey:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.links = config["_links"]
+            self.alg = config["alg"]
+            self.created = config["created"]
+            self.e = config["e"]
+            self.expires_at = config["expiresAt"]
+            self.key_ops = config["key_ops"]
+            self.kid = config["kid"]
+            self.kty = config["kty"]
+            self.last_updated = config["lastUpdated"]
+            self.n = config["n"]
+            self.status = config["status"]
+            self.use = config["use"]
+            self.x_5_c = config["x5c"]
+            self.x_5_t = config["x5t"]
+            self.x_5_t_s_256 = config["x5t#S256"]
+            self.x_5_u = config["x5u"]
+        else:
+            self.links = None
+            self.alg = None
+            self.created = None
+            self.e = None
+            self.expires_at = None
+            self.key_ops = None
+            self.kid = None
+            self.kty = None
+            self.last_updated = None
+            self.n = None
+            self.status = None
+            self.use = None
+            self.x_5_c = None
+            self.x_5_t = None
+            self.x_5_t_s_256 = None
+            self.x_5_u = None
 
 
 # End of File Generation

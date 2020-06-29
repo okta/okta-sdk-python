@@ -22,8 +22,21 @@ from urllib.parse import urlencode
 
 
 class SocialAuthToken:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.expires_at = config["expiresAt"]
+            self.id = config["id"]
+            self.scopes = config["scopes"]
+            self.token = config["token"]
+            self.token_auth_scheme = config["tokenAuthScheme"]
+            self.token_type = config["tokenType"]
+        else:
+            self.expires_at = None
+            self.id = None
+            self.scopes = None
+            self.token = None
+            self.token_auth_scheme = None
+            self.token_type = None
 
 
 # End of File Generation

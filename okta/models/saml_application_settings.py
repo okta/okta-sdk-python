@@ -22,8 +22,11 @@ from urllib.parse import urlencode
 
 
 class SamlApplicationSettings:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.sign_on = config["signOn"]
+        else:
+            self.sign_on = None
 
 
 # End of File Generation

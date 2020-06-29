@@ -22,8 +22,13 @@ from urllib.parse import urlencode
 
 
 class ApplicationVisibilityHide:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.i_os = config["iOS"]
+            self.web = config["web"]
+        else:
+            self.i_os = None
+            self.web = None
 
 
 # End of File Generation

@@ -22,8 +22,41 @@ from urllib.parse import urlencode
 
 
 class LogEvent:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.actor = config["actor"]
+            self.authentication_context = config["authenticationContext"]
+            self.client = config["client"]
+            self.debug_context = config["debugContext"]
+            self.display_message = config["displayMessage"]
+            self.event_type = config["eventType"]
+            self.legacy_event_type = config["legacyEventType"]
+            self.outcome = config["outcome"]
+            self.published = config["published"]
+            self.request = config["request"]
+            self.security_context = config["securityContext"]
+            self.severity = config["severity"]
+            self.target = config["target"]
+            self.transaction = config["transaction"]
+            self.uuid = config["uuid"]
+            self.version = config["version"]
+        else:
+            self.actor = None
+            self.authentication_context = None
+            self.client = None
+            self.debug_context = None
+            self.display_message = None
+            self.event_type = None
+            self.legacy_event_type = None
+            self.outcome = None
+            self.published = None
+            self.request = None
+            self.security_context = None
+            self.severity = None
+            self.target = None
+            self.transaction = None
+            self.uuid = None
+            self.version = None
 
     # The Okta System Log API provides read access to your organization’s system log. This API provides more functionality than the Events API
     async def get_logs(

@@ -22,8 +22,13 @@ from urllib.parse import urlencode
 
 
 class UserActivationToken:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.activation_token = config["activationToken"]
+            self.activation_url = config["activationUrl"]
+        else:
+            self.activation_token = None
+            self.activation_url = None
 
 
 # End of File Generation

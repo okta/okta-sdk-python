@@ -22,8 +22,19 @@ from urllib.parse import urlencode
 
 
 class ApplicationCredentialsSigning:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.kid = config["kid"]
+            self.last_rotated = config["lastRotated"]
+            self.next_rotation = config["nextRotation"]
+            self.rotation_mode = config["rotationMode"]
+            self.use = config["use"]
+        else:
+            self.kid = None
+            self.last_rotated = None
+            self.next_rotation = None
+            self.rotation_mode = None
+            self.use = None
 
 
 # End of File Generation

@@ -22,8 +22,11 @@ from urllib.parse import urlencode
 
 
 class RiskScorePolicyRuleCondition:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.level = config["level"]
+        else:
+            self.level = None
 
 
 # End of File Generation

@@ -22,8 +22,11 @@ from urllib.parse import urlencode
 
 
 class SmsUserFactorProfile:
-    def __init__(self):
-        pass
+    def __init__(self, config=None):
+        if config:
+            self.phone_number = config["phoneNumber"]
+        else:
+            self.phone_number = None
 
 
 # End of File Generation
