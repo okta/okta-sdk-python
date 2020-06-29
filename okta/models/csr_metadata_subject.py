@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class CsrMetadataSubject:
     def __init__(self, config=None):
         if config:
@@ -37,6 +34,5 @@ class CsrMetadataSubject:
             self.organization_name = None
             self.organizational_unit_name = None
             self.state_or_province_name = None
-
 
 # End of File Generation

@@ -18,15 +18,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class ForgotPasswordResponse:
     def __init__(self, config=None):
         if config:
             self.reset_password_url = config["resetPasswordUrl"]
         else:
             self.reset_password_url = None
-
 
 # End of File Generation

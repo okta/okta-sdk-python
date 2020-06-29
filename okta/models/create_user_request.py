@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class CreateUserRequest:
     def __init__(self, config=None):
         if config:
@@ -33,6 +30,5 @@ class CreateUserRequest:
             self.group_ids = None
             self.profile = None
             self.type = None
-
 
 # End of File Generation

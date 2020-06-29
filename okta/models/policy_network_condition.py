@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class PolicyNetworkCondition:
     def __init__(self, config=None):
         if config:
@@ -31,6 +28,5 @@ class PolicyNetworkCondition:
             self.connection = None
             self.exclude = None
             self.include = None
-
 
 # End of File Generation

@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class DevicePolicyRuleCondition:
     def __init__(self, config=None):
         if config:
@@ -33,6 +30,5 @@ class DevicePolicyRuleCondition:
             self.platform = None
             self.rooted = None
             self.trust_level = None
-
 
 # End of File Generation

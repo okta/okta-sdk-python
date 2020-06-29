@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class ApplicationCredentials:
     def __init__(self, config=None):
         if config:
@@ -29,6 +26,5 @@ class ApplicationCredentials:
         else:
             self.signing = None
             self.user_name_template = None
-
 
 # End of File Generation

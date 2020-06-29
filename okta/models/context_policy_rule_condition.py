@@ -18,15 +18,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class ContextPolicyRuleCondition:
     def __init__(self, config=None):
         if config:
             self.expression = config["expression"]
         else:
             self.expression = None
-
 
 # End of File Generation

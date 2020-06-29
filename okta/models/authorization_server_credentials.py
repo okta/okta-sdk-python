@@ -18,15 +18,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class AuthorizationServerCredentials:
     def __init__(self, config=None):
         if config:
             self.signing = config["signing"]
         else:
             self.signing = None
-
 
 # End of File Generation

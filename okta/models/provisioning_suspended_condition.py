@@ -18,15 +18,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class ProvisioningSuspendedCondition:
     def __init__(self, config=None):
         if config:
             self.action = config["action"]
         else:
             self.action = None
-
 
 # End of File Generation

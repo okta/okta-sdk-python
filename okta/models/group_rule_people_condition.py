@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class GroupRulePeopleCondition:
     def __init__(self, config=None):
         if config:
@@ -29,6 +26,5 @@ class GroupRulePeopleCondition:
         else:
             self.groups = None
             self.users = None
-
 
 # End of File Generation

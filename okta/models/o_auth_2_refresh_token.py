@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class OAuth2RefreshToken:
     def __init__(self, config=None):
         if config:
@@ -49,6 +46,5 @@ class OAuth2RefreshToken:
             self.scopes = None
             self.status = None
             self.user_id = None
-
 
 # End of File Generation

@@ -18,15 +18,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class LogRequest:
     def __init__(self, config=None):
         if config:
             self.ip_chain = config["ipChain"]
         else:
             self.ip_chain = None
-
 
 # End of File Generation

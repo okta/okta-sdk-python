@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class CallUserFactorProfile:
     def __init__(self, config=None):
         if config:
@@ -29,6 +26,5 @@ class CallUserFactorProfile:
         else:
             self.phone_extension = None
             self.phone_number = None
-
 
 # End of File Generation

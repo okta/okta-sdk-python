@@ -18,15 +18,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class ApplicationSettingsNotifications:
     def __init__(self, config=None):
         if config:
             self.vpn = config["vpn"]
         else:
             self.vpn = None
-
 
 # End of File Generation

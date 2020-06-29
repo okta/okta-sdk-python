@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class EventHookChannelConfig:
     def __init__(self, config=None):
         if config:
@@ -31,6 +28,5 @@ class EventHookChannelConfig:
             self.auth_scheme = None
             self.headers = None
             self.uri = None
-
 
 # End of File Generation

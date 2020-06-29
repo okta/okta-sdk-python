@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class UserPolicyRuleCondition:
     def __init__(self, config=None):
         if config:
@@ -37,6 +34,5 @@ class UserPolicyRuleCondition:
             self.lifecycle_expiration = None
             self.password_expiration = None
             self.user_lifecycle_attribute = None
-
 
 # End of File Generation

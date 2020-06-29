@@ -18,15 +18,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class PasswordPolicyRecoveryQuestionProperties:
     def __init__(self, config=None):
         if config:
             self.complexity = config["complexity"]
         else:
             self.complexity = None
-
 
 # End of File Generation

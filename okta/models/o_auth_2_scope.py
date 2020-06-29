@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class OAuth2Scope:
     def __init__(self, config=None):
         if config:
@@ -41,6 +38,5 @@ class OAuth2Scope:
             self.metadata_publish = None
             self.name = None
             self.system = None
-
 
 # End of File Generation

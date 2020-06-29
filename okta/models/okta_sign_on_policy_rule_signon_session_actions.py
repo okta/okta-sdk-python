@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class OktaSignOnPolicyRuleSignonSessionActions:
     def __init__(self, config=None):
         if config:
@@ -31,6 +28,5 @@ class OktaSignOnPolicyRuleSignonSessionActions:
             self.max_session_idle_minutes = "120"
             self.max_session_lifetime_minutes = "0"
             self.use_persistent_cookie = "false"
-
 
 # End of File Generation

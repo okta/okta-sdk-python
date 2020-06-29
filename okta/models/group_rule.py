@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class GroupRule:
     def __init__(self, config=None):
         if config:
@@ -41,85 +38,5 @@ class GroupRule:
             self.name = None
             self.status = None
             self.type = None
-
-    # Updates a group rule. Only &#x60;INACTIVE&#x60; rules can be updated.
-    async def update_group_rule(
-            self, ruleId, group_rule
-    ):
-        """
-            Updates a group rule. Only `INACTIVE` rules can be upda
-        ted.
-        Args:
-            rule_id {str}
-            {group_rule}
-        Returns:
-            GroupRule
-        """
-        http_method = "put".upper()
-        api_url = self.format_url(f"""
-            {self._base_url}
-            /api/v1/groups/rules/{ruleId}
-            """)
-
-        body = group_rule
-        headers = {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        }
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, error)
-        try:
-            result = GroupRule(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-
-        return (result, None)
-
-    # Removes a specific group rule by id from your organization
-    async def delete_group_rule(
-            self, ruleId
-    ):
-        """
-            Removes a specific group rule by id from your organizat
-        ion
-        Args:
-            rule_id {str}
-        """
-        http_method = "delete".upper()
-        api_url = self.format_url(f"""
-            {self._base_url}
-            /api/v1/groups/rules/{ruleId}
-            """)
-
-        body = None
-        headers = None
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, error)
-        return (response, None)
-
 
 # End of File Generation

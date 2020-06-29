@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class PolicySubject:
     def __init__(self, config=None):
         if config:
@@ -35,6 +32,5 @@ class PolicySubject:
             self.match_attribute = None
             self.match_type = None
             self.user_name_template = None
-
 
 # End of File Generation

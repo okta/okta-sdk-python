@@ -18,15 +18,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class TokenUserFactor:
     def __init__(self, config=None):
         if config:
             self.profile = config["profile"]
         else:
             self.profile = None
-
 
 # End of File Generation

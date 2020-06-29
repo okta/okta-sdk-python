@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class IdentityProviderPolicy:
     def __init__(self, config=None):
         if config:
@@ -33,6 +30,5 @@ class IdentityProviderPolicy:
             self.max_clock_skew = None
             self.provisioning = None
             self.subject = None
-
 
 # End of File Generation

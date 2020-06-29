@@ -18,15 +18,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class PolicyAccountLinkFilter:
     def __init__(self, config=None):
         if config:
             self.groups = config["groups"]
         else:
             self.groups = None
-
 
 # End of File Generation

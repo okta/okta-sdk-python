@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class LogEvent:
     def __init__(self, config=None):
         if config:
@@ -57,58 +54,5 @@ class LogEvent:
             self.transaction = None
             self.uuid = None
             self.version = None
-
-    # The Okta System Log API provides read access to your organization’s system log. This API provides more functionality than the Events API
-    async def get_logs(
-            self, query_params
-    ):
-        """
-            The Okta System Log API provides read access to your or
-        ganization’s system log. This API provides more functio
-        nality than the Events API
-        Args:
-            query_params {dict}: Map of query parameters for request
-            [query_params.until] {str}
-            [query_params.since] {str}
-            [query_params.filter] {str}
-            [query_params.q] {str}
-            [query_params.limit] {str}
-            [query_params.sortOrder] {str}
-            [query_params.after] {str}
-        Returns:
-            list: Collection of LogEvent instances.
-        """
-        http_method = "get".upper()
-        api_url = self.format_url(f"""
-            {self._base_url}
-            /api/v1/logs
-            """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
-
-        body = None
-        headers = None
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, error)
-        try:
-        result = []
-        for item in response.get_body():
-            result.append(LogEvent(item))
-        except Exception as error:
-            return (None, error)
-
-        return (result, None)
-
 
 # End of File Generation

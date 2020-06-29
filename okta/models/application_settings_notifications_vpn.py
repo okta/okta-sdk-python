@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class ApplicationSettingsNotificationsVpn:
     def __init__(self, config=None):
         if config:
@@ -31,6 +28,5 @@ class ApplicationSettingsNotificationsVpn:
             self.help_url = None
             self.message = None
             self.network = None
-
 
 # End of File Generation

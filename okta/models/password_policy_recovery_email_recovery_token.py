@@ -18,15 +18,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class PasswordPolicyRecoveryEmailRecoveryToken:
     def __init__(self, config=None):
         if config:
             self.token_lifetime_minutes = config["tokenLifetimeMinutes"]
         else:
             self.token_lifetime_minutes = "10080"
-
 
 # End of File Generation

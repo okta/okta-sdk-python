@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class ProtocolEndpoints:
     def __init__(self, config=None):
         if config:
@@ -41,6 +38,5 @@ class ProtocolEndpoints:
             self.sso = None
             self.token = None
             self.user_info = None
-
 
 # End of File Generation

@@ -18,15 +18,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class TempPassword:
     def __init__(self, config=None):
         if config:
             self.temp_password = config["tempPassword"]
         else:
             self.temp_password = None
-
 
 # End of File Generation

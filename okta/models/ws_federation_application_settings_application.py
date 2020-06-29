@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class WsFederationApplicationSettingsApplication:
     def __init__(self, config=None):
         if config:
@@ -49,6 +46,5 @@ class WsFederationApplicationSettingsApplication:
             self.username_attribute = None
             self.w_reply_override = None
             self.w_reply_url = None
-
 
 # End of File Generation

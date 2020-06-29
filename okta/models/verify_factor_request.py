@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class VerifyFactorRequest:
     def __init__(self, config=None):
         if config:
@@ -41,6 +38,5 @@ class VerifyFactorRequest:
             self.pass_code = None
             self.registration_data = None
             self.state_token = None
-
 
 # End of File Generation

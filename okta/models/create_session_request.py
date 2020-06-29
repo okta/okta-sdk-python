@@ -18,15 +18,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class CreateSessionRequest:
     def __init__(self, config=None):
         if config:
             self.session_token = config["sessionToken"]
         else:
             self.session_token = None
-
 
 # End of File Generation

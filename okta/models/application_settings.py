@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class ApplicationSettings:
     def __init__(self, config=None):
         if config:
@@ -33,6 +30,5 @@ class ApplicationSettings:
             self.implicit_assignment = None
             self.inline_hook_id = None
             self.notifications = None
-
 
 # End of File Generation

@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class AppLink:
     def __init__(self, config=None):
         if config:
@@ -45,6 +42,5 @@ class AppLink:
             self.link_url = None
             self.logo_url = None
             self.sort_order = None
-
 
 # End of File Generation

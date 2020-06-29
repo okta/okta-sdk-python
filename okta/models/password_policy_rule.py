@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class PasswordPolicyRule:
     def __init__(self, config=None):
         if config:
@@ -31,6 +28,5 @@ class PasswordPolicyRule:
             self.actions = None
             self.conditions = None
             self.name = None
-
 
 # End of File Generation

@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class DevicePolicyRuleConditionPlatform:
     def __init__(self, config=None):
         if config:
@@ -29,6 +26,5 @@ class DevicePolicyRuleConditionPlatform:
         else:
             self.supported_mdm_frameworks = None
             self.types = None
-
 
 # End of File Generation

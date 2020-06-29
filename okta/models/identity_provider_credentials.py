@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class IdentityProviderCredentials:
     def __init__(self, config=None):
         if config:
@@ -31,6 +28,5 @@ class IdentityProviderCredentials:
             self.client = None
             self.signing = None
             self.trust = None
-
 
 # End of File Generation

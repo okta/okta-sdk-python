@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class LogUserAgent:
     def __init__(self, config=None):
         if config:
@@ -31,6 +28,5 @@ class LogUserAgent:
             self.browser = None
             self.os = None
             self.raw_user_agent = None
-
 
 # End of File Generation

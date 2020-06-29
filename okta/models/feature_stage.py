@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class FeatureStage:
     def __init__(self, config=None):
         if config:
@@ -29,6 +26,5 @@ class FeatureStage:
         else:
             self.state = None
             self.value = None
-
 
 # End of File Generation

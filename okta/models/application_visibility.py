@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class ApplicationVisibility:
     def __init__(self, config=None):
         if config:
@@ -31,6 +28,5 @@ class ApplicationVisibility:
             self.app_links = None
             self.auto_submit_toolbar = None
             self.hide = None
-
 
 # End of File Generation

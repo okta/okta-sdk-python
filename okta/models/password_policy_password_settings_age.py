@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class PasswordPolicyPasswordSettingsAge:
     def __init__(self, config=None):
         if config:
@@ -33,6 +30,5 @@ class PasswordPolicyPasswordSettingsAge:
             self.history_count = "0"
             self.max_age_days = "0"
             self.min_age_minutes = "0"
-
 
 # End of File Generation

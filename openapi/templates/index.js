@@ -1,7 +1,6 @@
 const py = module.exports;
 const fs = require("fs");
 const _ = require("lodash");
-const { exit } = require("process");
 
 py.process = ({ spec, operations, models, handlebars }) => {
   py.spec = spec;
@@ -42,43 +41,50 @@ py.process = ({ spec, operations, models, handlebars }) => {
       }
     }
 
-    // operation name -> operation details (obj)
-    let modelOperations = {};
-    // Get CRUD ops
-    if (model.crud != undefined) {
-      for (let modelCrud of model.crud) {
-        modelOperations[modelCrud.operation.operationId] = modelCrud.operation;
-      }
-    }
-    // get other operations for model
-    for (let operation of operations) {
-      let tag = operation.tags[0];
-      if (tag === "AuthServer") tag = "AuthorizationServer";
-      if (tag === "Template") tag = "SmsTemplate";
-      if (tag === "Idp") tag = "IdpTrust";
-      if (tag === "UserFactor") tag = "UserFactor";
-      if (tag === "Log") tag = "LogEvent";
-      if (tag == model.modelName) {
-        modelOperations[operation.operationId] = operation;
-      }
-    }
-
-    // if (Object.keys(modelOperations).length > 0) {
-    //   console.log(modelOperations);
-    //   console.log(model.modelName);
-    //   console.log(model);
-    //   exit();
-    // }
-
     templates.push({
       src: "model.py.hbs",
       dest: `okta/models/${_.snakeCase(model.modelName)}.py`,
       context: {
-        operations: modelOperations,
         model: model,
       },
     });
   }
+
+  // get operations
+  let clientOps = {};
+  for (let operation of operations) {
+    let tag = operation.tags[0];
+    if (tag === "AuthServer") tag = "AuthorizationServer";
+    if (tag === "Template") tag = "SmsTemplate";
+    if (tag === "Idp") tag = "IdpTrust";
+    if (tag === "UserFactor") tag = "UserFactor";
+    if (tag === "Log") tag = "LogEvent";
+
+    if (_.has(clientOps, tag)) {
+      clientOps[tag].push(operation);
+    } else {
+      clientOps[tag] = [operation];
+    }
+  }
+
+  for (const [tag, ops] of Object.entries(clientOps)) {
+    templates.push({
+      src: "resource_client.py.hbs",
+      dest: `okta/generated_clients/${_.snakeCase(tag)}_client.py`,
+      context: {
+        operations: ops,
+        resource: tag,
+      },
+    });
+  }
+
+  templates.push({
+    src: "client.py.hbs",
+    dest: `okta/client.py`,
+    context: {
+      resources: Object.keys(clientOps),
+    },
+  });
 
   // Check for response resolution
   operations.forEach((op) => {
@@ -100,6 +106,7 @@ py.process = ({ spec, operations, models, handlebars }) => {
     updatePath,
     displayMethodName,
     multilineURL,
+    importURLEncode,
   });
 
   handlebars.registerPartial(
@@ -108,7 +115,10 @@ py.process = ({ spec, operations, models, handlebars }) => {
   );
   handlebars.registerPartial(
     "partials.defaultMethod",
-    fs.readFileSync("openapi/templates/partials/models/defaultMethod.py.hbs", "utf8")
+    fs.readFileSync(
+      "openapi/templates/partials/models/defaultMethod.py.hbs",
+      "utf8"
+    )
   );
 
   // fs.writeFile(
@@ -235,10 +245,6 @@ function multilineURL(path) {
   return result.join(`\n${" ".repeat(16)}`);
 }
 
-function hasPathParams(operation) {
-  return operation.pathParams.length ? "f" : "";
-}
-
 function displayMethodName(name) {
   const LONG_WORDS = {
     application: "app",
@@ -251,4 +257,12 @@ function displayMethodName(name) {
   }
 
   return name;
+}
+
+function importURLEncode(operations) {
+  return (
+    operations.filter((operation) => {
+      return operation.queryParams.length > 0;
+    }).length > 0
+  );
 }

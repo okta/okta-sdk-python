@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class InactivityPolicyRuleCondition:
     def __init__(self, config=None):
         if config:
@@ -29,6 +26,5 @@ class InactivityPolicyRuleCondition:
         else:
             self.number = None
             self.unit = None
-
 
 # End of File Generation

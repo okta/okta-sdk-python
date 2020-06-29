@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class Provisioning:
     def __init__(self, config=None):
         if config:
@@ -33,6 +30,5 @@ class Provisioning:
             self.conditions = None
             self.groups = None
             self.profile_master = None
-
 
 # End of File Generation

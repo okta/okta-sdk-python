@@ -18,15 +18,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class SecurePasswordStoreApplicationSettings:
     def __init__(self, config=None):
         if config:
             self.app = config["app"]
         else:
             self.app = None
-
 
 # End of File Generation

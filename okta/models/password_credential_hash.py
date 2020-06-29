@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class PasswordCredentialHash:
     def __init__(self, config=None):
         if config:
@@ -35,6 +32,5 @@ class PasswordCredentialHash:
             self.salt_order = None
             self.value = None
             self.worker_factor = None
-
 
 # End of File Generation

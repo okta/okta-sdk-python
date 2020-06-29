@@ -18,15 +18,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class PolicyUserNameTemplate:
     def __init__(self, config=None):
         if config:
             self.template = config["template"]
         else:
             self.template = None
-
 
 # End of File Generation

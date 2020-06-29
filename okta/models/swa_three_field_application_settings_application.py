@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class SwaThreeFieldApplicationSettingsApplication:
     def __init__(self, config=None):
         if config:
@@ -39,6 +36,5 @@ class SwaThreeFieldApplicationSettingsApplication:
             self.password_selector = None
             self.target_url = None
             self.user_name_selector = None
-
 
 # End of File Generation

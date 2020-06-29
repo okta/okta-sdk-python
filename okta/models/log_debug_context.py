@@ -18,15 +18,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class LogDebugContext:
     def __init__(self, config=None):
         if config:
             self.debug_data = config["debugData"]
         else:
             self.debug_data = None
-
 
 # End of File Generation

@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class BasicApplicationSettingsApplication:
     def __init__(self, config=None):
         if config:
@@ -29,6 +26,5 @@ class BasicApplicationSettingsApplication:
         else:
             self.auth_url = None
             self.url = None
-
 
 # End of File Generation

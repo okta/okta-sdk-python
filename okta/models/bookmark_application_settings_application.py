@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class BookmarkApplicationSettingsApplication:
     def __init__(self, config=None):
         if config:
@@ -29,6 +26,5 @@ class BookmarkApplicationSettingsApplication:
         else:
             self.request_integration = None
             self.url = None
-
 
 # End of File Generation

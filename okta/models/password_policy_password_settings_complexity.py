@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class PasswordPolicyPasswordSettingsComplexity:
     def __init__(self, config=None):
         if config:
@@ -41,6 +38,5 @@ class PasswordPolicyPasswordSettingsComplexity:
             self.min_number = "1"
             self.min_symbol = "1"
             self.min_upper_case = "1"
-
 
 # End of File Generation

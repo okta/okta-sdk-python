@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class InlineHookChannel:
     def __init__(self, config=None):
         if config:
@@ -31,6 +28,5 @@ class InlineHookChannel:
             self.config = None
             self.type = None
             self.version = None
-
 
 # End of File Generation

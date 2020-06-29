@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class CatalogApplication:
     def __init__(self, config=None):
         if config:
@@ -49,6 +46,5 @@ class CatalogApplication:
             self.status = None
             self.verification_status = None
             self.website = None
-
 
 # End of File Generation

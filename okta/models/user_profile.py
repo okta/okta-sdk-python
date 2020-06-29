@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class UserProfile:
     def __init__(self, config=None):
         if config:
@@ -87,6 +84,5 @@ class UserProfile:
             self.title = None
             self.user_type = None
             self.zip_code = None
-
 
 # End of File Generation

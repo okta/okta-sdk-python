@@ -18,15 +18,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class ScheduledUserLifecycleAction:
     def __init__(self, config=None):
         if config:
             self.status = config["status"]
         else:
             self.status = None
-
 
 # End of File Generation

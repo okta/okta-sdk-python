@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class PushUserFactorProfile:
     def __init__(self, config=None):
         if config:
@@ -37,6 +34,5 @@ class PushUserFactorProfile:
             self.name = None
             self.platform = None
             self.version = None
-
 
 # End of File Generation

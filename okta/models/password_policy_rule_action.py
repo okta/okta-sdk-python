@@ -18,15 +18,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class PasswordPolicyRuleAction:
     def __init__(self, config=None):
         if config:
             self.access = config["access"]
         else:
             self.access = None
-
 
 # End of File Generation

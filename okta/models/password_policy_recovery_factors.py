@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class PasswordPolicyRecoveryFactors:
     def __init__(self, config=None):
         if config:
@@ -33,6 +30,5 @@ class PasswordPolicyRecoveryFactors:
             self.okta_email = None
             self.okta_sms = None
             self.recovery_question = None
-
 
 # End of File Generation

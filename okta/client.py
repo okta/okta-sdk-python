@@ -3,10 +3,58 @@ from okta.config.config_validator import ConfigValidator
 from okta.request_executor import RequestExecutor
 from okta.cache.no_op_cache import NoOpCache
 from okta.cache.okta_cache import OktaCache
-from okta.generated_client import GeneratedAPIClient
+from okta.generated_clients.application_client\
+    import ApplicationClient
+from okta.generated_clients.authorization_server_client\
+    import AuthorizationServerClient
+from okta.generated_clients.event_hook_client\
+    import EventHookClient
+from okta.generated_clients.feature_client\
+    import FeatureClient
+from okta.generated_clients.group_client\
+    import GroupClient
+from okta.generated_clients.identity_provider_client\
+    import IdentityProviderClient
+from okta.generated_clients.inline_hook_client\
+    import InlineHookClient
+from okta.generated_clients.log_event_client\
+    import LogEventClient
+from okta.generated_clients.linked_object_client\
+    import LinkedObjectClient
+from okta.generated_clients.user_type_client\
+    import UserTypeClient
+from okta.generated_clients.policy_client\
+    import PolicyClient
+from okta.generated_clients.session_client\
+    import SessionClient
+from okta.generated_clients.sms_template_client\
+    import SmsTemplateClient
+from okta.generated_clients.trusted_origin_client\
+    import TrustedOriginClient
+from okta.generated_clients.user_client\
+    import UserClient
+from okta.generated_clients.user_factor_client\
+    import UserFactorClient
 
 
-class Client(GeneratedAPIClient):
+class Client(
+    ApplicationClient,
+    AuthorizationServerClient,
+    EventHookClient,
+    FeatureClient,
+    GroupClient,
+    IdentityProviderClient,
+    InlineHookClient,
+    LogEventClient,
+    LinkedObjectClient,
+    UserTypeClient,
+    PolicyClient,
+    SessionClient,
+    SmsTemplateClient,
+    TrustedOriginClient,
+    UserClient,
+    UserFactorClient
+):
     """An Okta client object"""
 
     def __init__(self, user_config: dict = {}):

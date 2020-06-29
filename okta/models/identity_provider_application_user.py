@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class IdentityProviderApplicationUser:
     def __init__(self, config=None):
         if config:
@@ -39,6 +36,5 @@ class IdentityProviderApplicationUser:
             self.id = None
             self.last_updated = None
             self.profile = None
-
 
 # End of File Generation

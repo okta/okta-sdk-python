@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class PasswordPolicyConditions:
     def __init__(self, config=None):
         if config:
@@ -29,6 +26,5 @@ class PasswordPolicyConditions:
         else:
             self.auth_provider = None
             self.people = None
-
 
 # End of File Generation

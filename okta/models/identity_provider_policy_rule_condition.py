@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class IdentityProviderPolicyRuleCondition:
     def __init__(self, config=None):
         if config:
@@ -29,6 +26,5 @@ class IdentityProviderPolicyRuleCondition:
         else:
             self.idp_ids = None
             self.provider = None
-
 
 # End of File Generation

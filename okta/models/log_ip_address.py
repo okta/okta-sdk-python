@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class LogIpAddress:
     def __init__(self, config=None):
         if config:
@@ -33,6 +30,5 @@ class LogIpAddress:
             self.ip = None
             self.source = None
             self.version = None
-
 
 # End of File Generation

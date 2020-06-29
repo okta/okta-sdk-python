@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class SamlAttributeStatement:
     def __init__(self, config=None):
         if config:
@@ -33,6 +30,5 @@ class SamlAttributeStatement:
             self.namespace = None
             self.type = None
             self.values = None
-
 
 # End of File Generation

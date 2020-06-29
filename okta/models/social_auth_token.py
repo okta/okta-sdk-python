@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class SocialAuthToken:
     def __init__(self, config=None):
         if config:
@@ -37,6 +34,5 @@ class SocialAuthToken:
             self.token = None
             self.token_auth_scheme = None
             self.token_type = None
-
 
 # End of File Generation

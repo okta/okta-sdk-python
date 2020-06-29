@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class OktaSignOnPolicyRuleConditions:
     def __init__(self, config=None):
         if config:
@@ -31,6 +28,5 @@ class OktaSignOnPolicyRuleConditions:
             self.auth_context = None
             self.network = None
             self.people = None
-
 
 # End of File Generation

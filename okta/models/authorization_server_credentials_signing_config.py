@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class AuthorizationServerCredentialsSigningConfig:
     def __init__(self, config=None):
         if config:
@@ -35,6 +32,5 @@ class AuthorizationServerCredentialsSigningConfig:
             self.next_rotation = None
             self.rotation_mode = None
             self.use = None
-
 
 # End of File Generation

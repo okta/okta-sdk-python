@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class OktaSignOnPolicyRuleSignonActions:
     def __init__(self, config=None):
         if config:
@@ -37,6 +34,5 @@ class OktaSignOnPolicyRuleSignonActions:
             self.remember_device_by_default = "false"
             self.require_factor = "false"
             self.session = None
-
 
 # End of File Generation

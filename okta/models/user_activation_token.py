@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class UserActivationToken:
     def __init__(self, config=None):
         if config:
@@ -29,6 +26,5 @@ class UserActivationToken:
         else:
             self.activation_token = None
             self.activation_url = None
-
 
 # End of File Generation

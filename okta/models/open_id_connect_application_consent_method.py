@@ -18,13 +18,9 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class OpenIdConnectApplicationConsentMethod:
     def __init__(self, config=None):
         if config:
         else:
-
 
 # End of File Generation

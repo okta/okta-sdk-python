@@ -18,15 +18,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class PasswordPolicyRecoveryEmailProperties:
     def __init__(self, config=None):
         if config:
             self.recovery_token = config["recoveryToken"]
         else:
             self.recovery_token = None
-
 
 # End of File Generation

@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class LogAuthenticationContext:
     def __init__(self, config=None):
         if config:
@@ -39,6 +36,5 @@ class LogAuthenticationContext:
             self.external_session_id = None
             self.interface = None
             self.issuer = None
-
 
 # End of File Generation

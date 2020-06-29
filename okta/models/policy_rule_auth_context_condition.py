@@ -18,15 +18,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class PolicyRuleAuthContextCondition:
     def __init__(self, config=None):
         if config:
             self.auth_type = config["authType"]
         else:
             self.auth_type = None
-
 
 # End of File Generation

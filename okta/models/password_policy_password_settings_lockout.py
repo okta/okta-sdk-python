@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class PasswordPolicyPasswordSettingsLockout:
     def __init__(self, config=None):
         if config:
@@ -33,6 +30,5 @@ class PasswordPolicyPasswordSettingsLockout:
             self.max_attempts = None
             self.show_lockout_failures = None
             self.user_lockout_notification_channels = None
-
 
 # End of File Generation

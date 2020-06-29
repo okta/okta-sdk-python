@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class SecurePasswordStoreApplicationSettingsApplication:
     def __init__(self, config=None):
         if config:
@@ -43,6 +40,5 @@ class SecurePasswordStoreApplicationSettingsApplication:
             self.password_field = None
             self.url = None
             self.username_field = None
-
 
 # End of File Generation

@@ -18,15 +18,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class RiskScorePolicyRuleCondition:
     def __init__(self, config=None):
         if config:
             self.level = config["level"]
         else:
             self.level = None
-
 
 # End of File Generation

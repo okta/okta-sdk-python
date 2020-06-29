@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class ApplicationGroupAssignment:
     def __init__(self, config=None):
         if config:
@@ -37,39 +34,5 @@ class ApplicationGroupAssignment:
             self.last_updated = None
             self.priority = None
             self.profile = None
-
-    # Removes a group assignment from an application.
-    async def delete_application_group_assignment(
-            self, appId, groupId
-    ):
-        """
-            Removes a group assignment from an application.
-        Args:
-            app_id {str}
-            group_id {str}
-        """
-        http_method = "delete".upper()
-        api_url = self.format_url(f"""
-            {self._base_url}
-            /api/v1/apps/{appId}/groups/{groupId}
-            """)
-
-        body = None
-        headers = None
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, error)
-        return (response, None)
-
 
 # End of File Generation

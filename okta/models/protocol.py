@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class Protocol:
     def __init__(self, config=None):
         if config:
@@ -41,6 +38,5 @@ class Protocol:
             self.scopes = None
             self.settings = None
             self.type = None
-
 
 # End of File Generation

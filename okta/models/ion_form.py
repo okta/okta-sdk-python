@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class IonForm:
     def __init__(self, config=None):
         if config:
@@ -43,6 +40,5 @@ class IonForm:
             self.rel = None
             self.relates_to = None
             self.value = None
-
 
 # End of File Generation

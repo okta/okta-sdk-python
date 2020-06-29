@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class ApplicationAccessibility:
     def __init__(self, config=None):
         if config:
@@ -31,6 +28,5 @@ class ApplicationAccessibility:
             self.error_redirect_url = None
             self.login_redirect_url = None
             self.self_service = None
-
 
 # End of File Generation

@@ -1,4 +1,4 @@
-    {{#if (and (ne operation.description undefined) (ne operation.description "Success") )}}# {{operation.description}}{{/if}}
+    {{!-- {{#if (and (ne operation.description undefined) (ne operation.description "Success") )}}# {{operation.description}}{{/if}} --}}
     async def {{displayMethodName (snakeCase operation.operationId)}}(
             {{operationArgumentBuilder operation}}
     ):
@@ -6,7 +6,7 @@
     {{{pyDocstringBuilder operation}}}
         """
         http_method = "{{operation.method}}".upper()
-        api_url = self.format_url(f"""
+        api_url = format_url(f"""
             {self._base_url}
             {{{updatePath operation}}}
             """)
@@ -17,7 +17,7 @@
 
         {{#if operation.bodyModel}}
         {{#if (eq operation.bodyFormat "binary")}}
-        // TODO for when body format is binary
+        # TODO for when body format is binary
         {{else}}
         body = {{snakeCase operation.bodyModel}}
         headers = {
@@ -45,9 +45,9 @@
         {{#if operation.responseModel}}
         try:
         {{#if operation.isArray}}
-        result = []
-        for item in response.get_body():
-            result.append({{pascalCase operation.responseModel}}(item))
+            result = []
+            for item in response.get_body():
+                result.append({{pascalCase operation.responseModel}}(item))
         {{else}}
             result = {{pascalCase operation.responseModel}}(
                 response.get_body()

@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class BasicAuthApplication:
     def __init__(self, config=None):
         if config:
@@ -31,6 +28,5 @@ class BasicAuthApplication:
             self.credentials = None
             self.name = "template_basic_auth"
             self.settings = None
-
 
 # End of File Generation

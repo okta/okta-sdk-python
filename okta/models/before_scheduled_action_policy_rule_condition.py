@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class BeforeScheduledActionPolicyRuleCondition:
     def __init__(self, config=None):
         if config:
@@ -29,6 +26,5 @@ class BeforeScheduledActionPolicyRuleCondition:
         else:
             self.duration = None
             self.lifecycle_action = None
-
 
 # End of File Generation

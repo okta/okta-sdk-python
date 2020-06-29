@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class OpenIdConnectApplicationSettingsClient:
     def __init__(self, config=None):
         if config:
@@ -49,6 +46,5 @@ class OpenIdConnectApplicationSettingsClient:
             self.redirect_uris = None
             self.response_types = None
             self.tos_uri = None
-
 
 # End of File Generation

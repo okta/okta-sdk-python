@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class JsonWebKey:
     def __init__(self, config=None):
         if config:
@@ -57,6 +54,5 @@ class JsonWebKey:
             self.x_5_t = None
             self.x_5_t_s_256 = None
             self.x_5_u = None
-
 
 # End of File Generation

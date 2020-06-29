@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class SchemeApplicationCredentials:
     def __init__(self, config=None):
         if config:
@@ -35,6 +32,5 @@ class SchemeApplicationCredentials:
             self.scheme = None
             self.signing = None
             self.user_name = None
-
 
 # End of File Generation

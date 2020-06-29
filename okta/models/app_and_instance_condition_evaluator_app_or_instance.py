@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class AppAndInstanceConditionEvaluatorAppOrInstance:
     def __init__(self, config=None):
         if config:
@@ -31,6 +28,5 @@ class AppAndInstanceConditionEvaluatorAppOrInstance:
             self.id = None
             self.name = None
             self.type = None
-
 
 # End of File Generation

@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class LogGeographicalContext:
     def __init__(self, config=None):
         if config:
@@ -35,6 +32,5 @@ class LogGeographicalContext:
             self.geolocation = None
             self.postal_code = None
             self.state = None
-
 
 # End of File Generation

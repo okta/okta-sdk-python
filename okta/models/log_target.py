@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class LogTarget:
     def __init__(self, config=None):
         if config:
@@ -35,6 +32,5 @@ class LogTarget:
             self.display_name = None
             self.id = None
             self.type = None
-
 
 # End of File Generation

@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class SwaApplication:
     def __init__(self, config=None):
         if config:
@@ -29,6 +26,5 @@ class SwaApplication:
         else:
             self.name = "template_swa"
             self.settings = None
-
 
 # End of File Generation

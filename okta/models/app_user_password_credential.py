@@ -18,15 +18,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class AppUserPasswordCredential:
     def __init__(self, config=None):
         if config:
             self.value = config["value"]
         else:
             self.value = None
-
 
 # End of File Generation

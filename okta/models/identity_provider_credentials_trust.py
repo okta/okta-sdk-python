@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class IdentityProviderCredentialsTrust:
     def __init__(self, config=None):
         if config:
@@ -35,6 +32,5 @@ class IdentityProviderCredentialsTrust:
             self.kid = None
             self.revocation = None
             self.revocation_cache_lifetime = None
-
 
 # End of File Generation

@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class SwaThreeFieldApplication:
     def __init__(self, config=None):
         if config:
@@ -29,6 +26,5 @@ class SwaThreeFieldApplication:
         else:
             self.name = "template_swa3field"
             self.settings = None
-
 
 # End of File Generation

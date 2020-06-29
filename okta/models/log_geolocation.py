@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class LogGeolocation:
     def __init__(self, config=None):
         if config:
@@ -29,6 +26,5 @@ class LogGeolocation:
         else:
             self.lat = None
             self.lon = None
-
 
 # End of File Generation

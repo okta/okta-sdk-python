@@ -18,15 +18,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class UserIdentityProviderLinkRequest:
     def __init__(self, config=None):
         if config:
             self.external_id = config["externalId"]
         else:
             self.external_id = None
-
 
 # End of File Generation

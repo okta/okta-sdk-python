@@ -18,15 +18,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class GroupRuleGroupAssignment:
     def __init__(self, config=None):
         if config:
             self.group_ids = config["groupIds"]
         else:
             self.group_ids = None
-
 
 # End of File Generation

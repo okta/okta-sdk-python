@@ -18,15 +18,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class U2FUserFactorProfile:
     def __init__(self, config=None):
         if config:
             self.credential_id = config["credentialId"]
         else:
             self.credential_id = None
-
 
 # End of File Generation

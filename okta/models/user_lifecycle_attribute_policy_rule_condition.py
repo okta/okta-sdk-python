@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class UserLifecycleAttributePolicyRuleCondition:
     def __init__(self, config=None):
         if config:
@@ -29,6 +26,5 @@ class UserLifecycleAttributePolicyRuleCondition:
         else:
             self.attribute_name = None
             self.matching_value = None
-
 
 # End of File Generation

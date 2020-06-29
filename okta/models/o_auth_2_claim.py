@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class OAuth2Claim:
     def __init__(self, config=None):
         if config:
@@ -47,6 +44,5 @@ class OAuth2Claim:
             self.system = None
             self.value = None
             self.value_type = None
-
 
 # End of File Generation

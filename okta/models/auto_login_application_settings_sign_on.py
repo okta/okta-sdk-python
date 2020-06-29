@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class AutoLoginApplicationSettingsSignOn:
     def __init__(self, config=None):
         if config:
@@ -29,6 +26,5 @@ class AutoLoginApplicationSettingsSignOn:
         else:
             self.login_url = None
             self.redirect_url = None
-
 
 # End of File Generation

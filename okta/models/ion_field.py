@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class IonField:
     def __init__(self, config=None):
         if config:
@@ -43,6 +40,5 @@ class IonField:
             self.type = None
             self.value = None
             self.visible = None
-
 
 # End of File Generation

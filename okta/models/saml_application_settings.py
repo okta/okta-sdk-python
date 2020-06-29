@@ -18,15 +18,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class SamlApplicationSettings:
     def __init__(self, config=None):
         if config:
             self.sign_on = config["signOn"]
         else:
             self.sign_on = None
-
 
 # End of File Generation

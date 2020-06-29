@@ -18,9 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class WebAuthnUserFactorProfile:
     def __init__(self, config=None):
         if config:
@@ -29,6 +26,5 @@ class WebAuthnUserFactorProfile:
         else:
             self.authenticator_name = None
             self.credential_id = None
-
 
 # End of File Generation

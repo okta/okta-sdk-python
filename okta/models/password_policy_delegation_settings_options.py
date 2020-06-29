@@ -18,15 +18,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 
-from urllib.parse import urlencode
-
-
 class PasswordPolicyDelegationSettingsOptions:
     def __init__(self, config=None):
         if config:
             self.skip_unlock = config["skipUnlock"]
         else:
             self.skip_unlock = None
-
 
 # End of File Generation
