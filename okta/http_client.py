@@ -86,3 +86,9 @@ class HTTPClient:
             except Exception:
                 error = HTTPError(url, response_details, dict_resp)
             return (None, error)
+
+    @staticmethod
+    def format_binary_data(data):
+        with aiohttp.MultipartWriter("mixed") as mpwriter:
+            mpwriter.append(data)
+        return mpwriter

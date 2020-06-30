@@ -16,16 +16,14 @@
 
         {{#if operation.bodyModel}}
         {{#if (eq operation.bodyFormat "binary")}}
-        # TODO for when body format is binary
-        body = None
-        headers = None
+        body = HTTPClient.format_binary_data(string)
         {{else}}
         body = {{snakeCase operation.bodyModel}}
+        {{/if}}
         headers = {
             "Accept": "{{operation.produces.[0]}}",
             "Content-Type": "{{operation.consumes.[0]}}"
         }
-        {{/if}}
         {{else}}
         body = None
         headers = None

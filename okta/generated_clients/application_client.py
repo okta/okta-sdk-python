@@ -18,6 +18,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from urllib.parse import urlencode
+from okta.http_client import HTTPClient
 from okta.utils import format_url
 from okta.models.application\
     import Application
@@ -489,9 +490,11 @@ class ApplicationClient():
                 lifecycle/publish
             """)
 
-        # TODO for when body format is binary
-        body = None
-        headers = None
+        body = HTTPClient.format_binary_data(string)
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/x-x509-ca-cert"
+        }
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -583,9 +586,11 @@ class ApplicationClient():
                 lifecycle/publish
             """)
 
-        # TODO for when body format is binary
-        body = None
-        headers = None
+        body = HTTPClient.format_binary_data(string)
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/pkix-cert"
+        }
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -629,9 +634,11 @@ class ApplicationClient():
                 lifecycle/publish
             """)
 
-        # TODO for when body format is binary
-        body = None
-        headers = None
+        body = HTTPClient.format_binary_data(string)
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/x-pem-file"
+        }
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers

@@ -3,6 +3,9 @@
 {{#if (importURLEncode operations)}}
 from urllib.parse import urlencode
 {{/if}}
+{{#if (hasBinaryOps operations)}}
+from okta.http_client import HTTPClient
+{{/if}}
 from okta.utils import format_url
 {{#each (getResourceImports operations) as |import|}}
 from okta.models.{{snakeCase import}}\

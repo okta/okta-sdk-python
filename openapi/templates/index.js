@@ -108,6 +108,7 @@ py.process = ({ spec, operations, models, handlebars }) => {
     multilineURL,
     importURLEncode,
     getResourceImports,
+    hasBinaryOps,
   });
 
   handlebars.registerPartial(
@@ -278,4 +279,12 @@ function getResourceImports(operations) {
     }
   }
   return [...result];
+}
+
+function hasBinaryOps(operations) {
+  return (
+    operations.filter((operation) => {
+      return operation.bodyFormat === "binary";
+    }).length > 0
+  );
 }
