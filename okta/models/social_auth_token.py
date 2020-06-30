@@ -21,12 +21,18 @@ limitations under the License.
 class SocialAuthToken:
     def __init__(self, config=None):
         if config:
-            self.expires_at = config["expiresAt"]
-            self.id = config["id"]
-            self.scopes = config["scopes"]
-            self.token = config["token"]
-            self.token_auth_scheme = config["tokenAuthScheme"]
-            self.token_type = config["tokenType"]
+            self.expires_at = config["expiresAt"]\
+                if "expiresAt" in config else None
+            self.id = config["id"]\
+                if "id" in config else None
+            self.scopes = config["scopes"]\
+                if "scopes" in config else None
+            self.token = config["token"]\
+                if "token" in config else None
+            self.token_auth_scheme = config["tokenAuthScheme"]\
+                if "tokenAuthScheme" in config else None
+            self.token_type = config["tokenType"]\
+                if "tokenType" in config else None
         else:
             self.expires_at = None
             self.id = None

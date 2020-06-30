@@ -21,22 +21,38 @@ limitations under the License.
 class JsonWebKey:
     def __init__(self, config=None):
         if config:
-            self.links = config["_links"]
-            self.alg = config["alg"]
-            self.created = config["created"]
-            self.e = config["e"]
-            self.expires_at = config["expiresAt"]
-            self.key_ops = config["key_ops"]
-            self.kid = config["kid"]
-            self.kty = config["kty"]
-            self.last_updated = config["lastUpdated"]
-            self.n = config["n"]
-            self.status = config["status"]
-            self.use = config["use"]
-            self.x_5_c = config["x5c"]
-            self.x_5_t = config["x5t"]
-            self.x_5_t_s_256 = config["x5t#S256"]
-            self.x_5_u = config["x5u"]
+            self.links = config["_links"]\
+                if "_links" in config else None
+            self.alg = config["alg"]\
+                if "alg" in config else None
+            self.created = config["created"]\
+                if "created" in config else None
+            self.e = config["e"]\
+                if "e" in config else None
+            self.expires_at = config["expiresAt"]\
+                if "expiresAt" in config else None
+            self.key_ops = config["key_ops"]\
+                if "key_ops" in config else None
+            self.kid = config["kid"]\
+                if "kid" in config else None
+            self.kty = config["kty"]\
+                if "kty" in config else None
+            self.last_updated = config["lastUpdated"]\
+                if "lastUpdated" in config else None
+            self.n = config["n"]\
+                if "n" in config else None
+            self.status = config["status"]\
+                if "status" in config else None
+            self.use = config["use"]\
+                if "use" in config else None
+            self.x_5_c = config["x5c"]\
+                if "x5c" in config else None
+            self.x_5_t = config["x5t"]\
+                if "x5t" in config else None
+            self.x_5_t_s_256 = config["x5t#S256"]\
+                if "x5t#S256" in config else None
+            self.x_5_u = config["x5u"]\
+                if "x5u" in config else None
         else:
             self.links = None
             self.alg = None

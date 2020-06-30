@@ -21,9 +21,12 @@ limitations under the License.
 class ApplicationAccessibility:
     def __init__(self, config=None):
         if config:
-            self.error_redirect_url = config["errorRedirectUrl"]
-            self.login_redirect_url = config["loginRedirectUrl"]
-            self.self_service = config["selfService"]
+            self.error_redirect_url = config["errorRedirectUrl"]\
+                if "errorRedirectUrl" in config else None
+            self.login_redirect_url = config["loginRedirectUrl"]\
+                if "loginRedirectUrl" in config else None
+            self.self_service = config["selfService"]\
+                if "selfService" in config else None
         else:
             self.error_redirect_url = None
             self.login_redirect_url = None

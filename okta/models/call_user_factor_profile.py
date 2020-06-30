@@ -21,8 +21,10 @@ limitations under the License.
 class CallUserFactorProfile:
     def __init__(self, config=None):
         if config:
-            self.phone_extension = config["phoneExtension"]
-            self.phone_number = config["phoneNumber"]
+            self.phone_extension = config["phoneExtension"]\
+                if "phoneExtension" in config else None
+            self.phone_number = config["phoneNumber"]\
+                if "phoneNumber" in config else None
         else:
             self.phone_extension = None
             self.phone_number = None

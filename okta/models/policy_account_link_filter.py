@@ -21,7 +21,8 @@ limitations under the License.
 class PolicyAccountLinkFilter:
     def __init__(self, config=None):
         if config:
-            self.groups = config["groups"]
+            self.groups = config["groups"]\
+                if "groups" in config else None
         else:
             self.groups = None
 

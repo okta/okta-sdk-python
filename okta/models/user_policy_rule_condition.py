@@ -21,12 +21,18 @@ limitations under the License.
 class UserPolicyRuleCondition:
     def __init__(self, config=None):
         if config:
-            self.exclude = config["exclude"]
-            self.inactivity = config["inactivity"]
-            self.include = config["include"]
-            self.lifecycle_expiration = config["lifecycleExpiration"]
-            self.password_expiration = config["passwordExpiration"]
-            self.user_lifecycle_attribute = config["userLifecycleAttribute"]
+            self.exclude = config["exclude"]\
+                if "exclude" in config else None
+            self.inactivity = config["inactivity"]\
+                if "inactivity" in config else None
+            self.include = config["include"]\
+                if "include" in config else None
+            self.lifecycle_expiration = config["lifecycleExpiration"]\
+                if "lifecycleExpiration" in config else None
+            self.password_expiration = config["passwordExpiration"]\
+                if "passwordExpiration" in config else None
+            self.user_lifecycle_attribute = config["userLifecycleAttribute"]\
+                if "userLifecycleAttribute" in config else None
         else:
             self.exclude = None
             self.inactivity = None

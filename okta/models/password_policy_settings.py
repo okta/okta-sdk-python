@@ -21,9 +21,12 @@ limitations under the License.
 class PasswordPolicySettings:
     def __init__(self, config=None):
         if config:
-            self.delegation = config["delegation"]
-            self.password = config["password"]
-            self.recovery = config["recovery"]
+            self.delegation = config["delegation"]\
+                if "delegation" in config else None
+            self.password = config["password"]\
+                if "password" in config else None
+            self.recovery = config["recovery"]\
+                if "recovery" in config else None
         else:
             self.delegation = None
             self.password = None

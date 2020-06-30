@@ -21,13 +21,20 @@ limitations under the License.
 class LogAuthenticationContext:
     def __init__(self, config=None):
         if config:
-            self.authentication_provider = config["authenticationProvider"]
-            self.authentication_step = config["authenticationStep"]
-            self.credential_provider = config["credentialProvider"]
-            self.credential_type = config["credentialType"]
-            self.external_session_id = config["externalSessionId"]
-            self.interface = config["interface"]
-            self.issuer = config["issuer"]
+            self.authentication_provider = config["authenticationProvider"]\
+                if "authenticationProvider" in config else None
+            self.authentication_step = config["authenticationStep"]\
+                if "authenticationStep" in config else None
+            self.credential_provider = config["credentialProvider"]\
+                if "credentialProvider" in config else None
+            self.credential_type = config["credentialType"]\
+                if "credentialType" in config else None
+            self.external_session_id = config["externalSessionId"]\
+                if "externalSessionId" in config else None
+            self.interface = config["interface"]\
+                if "interface" in config else None
+            self.issuer = config["issuer"]\
+                if "issuer" in config else None
         else:
             self.authentication_provider = None
             self.authentication_step = None

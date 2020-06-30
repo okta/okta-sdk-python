@@ -21,7 +21,8 @@ limitations under the License.
 class UserIdentityProviderLinkRequest:
     def __init__(self, config=None):
         if config:
-            self.external_id = config["externalId"]
+            self.external_id = config["externalId"]\
+                if "externalId" in config else None
         else:
             self.external_id = None
 

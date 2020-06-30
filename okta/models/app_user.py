@@ -21,20 +21,34 @@ limitations under the License.
 class AppUser:
     def __init__(self, config=None):
         if config:
-            self.embedded = config["_embedded"]
-            self.links = config["_links"]
-            self.created = config["created"]
-            self.credentials = config["credentials"]
-            self.external_id = config["externalId"]
-            self.id = config["id"]
-            self.last_sync = config["lastSync"]
-            self.last_updated = config["lastUpdated"]
-            self.password_changed = config["passwordChanged"]
-            self.profile = config["profile"]
-            self.scope = config["scope"]
-            self.status = config["status"]
-            self.status_changed = config["statusChanged"]
-            self.sync_state = config["syncState"]
+            self.embedded = config["_embedded"]\
+                if "_embedded" in config else None
+            self.links = config["_links"]\
+                if "_links" in config else None
+            self.created = config["created"]\
+                if "created" in config else None
+            self.credentials = config["credentials"]\
+                if "credentials" in config else None
+            self.external_id = config["externalId"]\
+                if "externalId" in config else None
+            self.id = config["id"]\
+                if "id" in config else None
+            self.last_sync = config["lastSync"]\
+                if "lastSync" in config else None
+            self.last_updated = config["lastUpdated"]\
+                if "lastUpdated" in config else None
+            self.password_changed = config["passwordChanged"]\
+                if "passwordChanged" in config else None
+            self.profile = config["profile"]\
+                if "profile" in config else None
+            self.scope = config["scope"]\
+                if "scope" in config else None
+            self.status = config["status"]\
+                if "status" in config else None
+            self.status_changed = config["statusChanged"]\
+                if "statusChanged" in config else None
+            self.sync_state = config["syncState"]\
+                if "syncState" in config else None
         else:
             self.embedded = None
             self.links = None

@@ -21,8 +21,10 @@ limitations under the License.
 class GroupRuleExpression:
     def __init__(self, config=None):
         if config:
-            self.type = config["type"]
-            self.value = config["value"]
+            self.type = config["type"]\
+                if "type" in config else None
+            self.value = config["value"]\
+                if "value" in config else None
         else:
             self.type = None
             self.value = None

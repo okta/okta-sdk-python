@@ -21,8 +21,10 @@ limitations under the License.
 class OAuth2Actor:
     def __init__(self, config=None):
         if config:
-            self.id = config["id"]
-            self.type = config["type"]
+            self.id = config["id"]\
+                if "id" in config else None
+            self.type = config["type"]\
+                if "type" in config else None
         else:
             self.id = None
             self.type = None

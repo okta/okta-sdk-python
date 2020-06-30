@@ -21,8 +21,10 @@ limitations under the License.
 class UserLifecycleAttributePolicyRuleCondition:
     def __init__(self, config=None):
         if config:
-            self.attribute_name = config["attributeName"]
-            self.matching_value = config["matchingValue"]
+            self.attribute_name = config["attributeName"]\
+                if "attributeName" in config else None
+            self.matching_value = config["matchingValue"]\
+                if "matchingValue" in config else None
         else:
             self.attribute_name = None
             self.matching_value = None

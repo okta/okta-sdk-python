@@ -21,12 +21,18 @@ limitations under the License.
 class LogClient:
     def __init__(self, config=None):
         if config:
-            self.device = config["device"]
-            self.geographical_context = config["geographicalContext"]
-            self.id = config["id"]
-            self.ip_address = config["ipAddress"]
-            self.user_agent = config["userAgent"]
-            self.zone = config["zone"]
+            self.device = config["device"]\
+                if "device" in config else None
+            self.geographical_context = config["geographicalContext"]\
+                if "geographicalContext" in config else None
+            self.id = config["id"]\
+                if "id" in config else None
+            self.ip_address = config["ipAddress"]\
+                if "ipAddress" in config else None
+            self.user_agent = config["userAgent"]\
+                if "userAgent" in config else None
+            self.zone = config["zone"]\
+                if "zone" in config else None
         else:
             self.device = None
             self.geographical_context = None

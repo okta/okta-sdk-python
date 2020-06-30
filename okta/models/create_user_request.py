@@ -21,10 +21,14 @@ limitations under the License.
 class CreateUserRequest:
     def __init__(self, config=None):
         if config:
-            self.credentials = config["credentials"]
-            self.group_ids = config["groupIds"]
-            self.profile = config["profile"]
-            self.type = config["type"]
+            self.credentials = config["credentials"]\
+                if "credentials" in config else None
+            self.group_ids = config["groupIds"]\
+                if "groupIds" in config else None
+            self.profile = config["profile"]\
+                if "profile" in config else None
+            self.type = config["type"]\
+                if "type" in config else None
         else:
             self.credentials = None
             self.group_ids = None

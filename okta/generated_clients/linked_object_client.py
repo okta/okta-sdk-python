@@ -18,6 +18,8 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.utils import format_url
+from okta.models.linked_object\
+    import LinkedObject
 
 
 class LinkedObjectClient():
@@ -31,8 +33,7 @@ class LinkedObjectClient():
             self
     ):
         """
-            Success
-        Args:
+            Args:
         Returns:
             list: Collection of LinkedObject instances.
         """
@@ -70,8 +71,7 @@ class LinkedObjectClient():
             self, linked_object
     ):
         """
-            Success
-        Args:
+            Args:
             {linked_object}
         Returns:
             LinkedObject
@@ -113,8 +113,7 @@ class LinkedObjectClient():
             self, linkedObjectName
     ):
         """
-            Success
-        Args:
+            Args:
             linked_object_name {str}
         """
         http_method = "delete".upper()
@@ -145,8 +144,7 @@ class LinkedObjectClient():
             self, linkedObjectName
     ):
         """
-            Success
-        Args:
+            Args:
             linked_object_name {str}
         Returns:
             LinkedObject

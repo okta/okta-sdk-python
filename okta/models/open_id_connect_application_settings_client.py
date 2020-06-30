@@ -21,18 +21,30 @@ limitations under the License.
 class OpenIdConnectApplicationSettingsClient:
     def __init__(self, config=None):
         if config:
-            self.application_type = config["application_type"]
-            self.client_uri = config["client_uri"]
-            self.consent_method = config["consent_method"]
-            self.grant_types = config["grant_types"]
-            self.initiate_login_uri = config["initiate_login_uri"]
-            self.issuer_mode = config["issuer_mode"]
-            self.logo_uri = config["logo_uri"]
-            self.policy_uri = config["policy_uri"]
-            self.post_logout_redirect_uris = config["post_logout_redirect_uris"]
-            self.redirect_uris = config["redirect_uris"]
-            self.response_types = config["response_types"]
-            self.tos_uri = config["tos_uri"]
+            self.application_type = config["application_type"]\
+                if "application_type" in config else None
+            self.client_uri = config["client_uri"]\
+                if "client_uri" in config else None
+            self.consent_method = config["consent_method"]\
+                if "consent_method" in config else None
+            self.grant_types = config["grant_types"]\
+                if "grant_types" in config else None
+            self.initiate_login_uri = config["initiate_login_uri"]\
+                if "initiate_login_uri" in config else None
+            self.issuer_mode = config["issuer_mode"]\
+                if "issuer_mode" in config else None
+            self.logo_uri = config["logo_uri"]\
+                if "logo_uri" in config else None
+            self.policy_uri = config["policy_uri"]\
+                if "policy_uri" in config else None
+            self.post_logout_redirect_uris = config["post_logout_redirect_uris"]\
+                if "post_logout_redirect_uris" in config else None
+            self.redirect_uris = config["redirect_uris"]\
+                if "redirect_uris" in config else None
+            self.response_types = config["response_types"]\
+                if "response_types" in config else None
+            self.tos_uri = config["tos_uri"]\
+                if "tos_uri" in config else None
         else:
             self.application_type = None
             self.client_uri = None

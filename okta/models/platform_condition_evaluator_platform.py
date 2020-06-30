@@ -21,8 +21,10 @@ limitations under the License.
 class PlatformConditionEvaluatorPlatform:
     def __init__(self, config=None):
         if config:
-            self.os = config["os"]
-            self.type = config["type"]
+            self.os = config["os"]\
+                if "os" in config else None
+            self.type = config["type"]\
+                if "type" in config else None
         else:
             self.os = None
             self.type = None

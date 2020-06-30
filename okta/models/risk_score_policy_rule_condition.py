@@ -21,7 +21,8 @@ limitations under the License.
 class RiskScorePolicyRuleCondition:
     def __init__(self, config=None):
         if config:
-            self.level = config["level"]
+            self.level = config["level"]\
+                if "level" in config else None
         else:
             self.level = None
 

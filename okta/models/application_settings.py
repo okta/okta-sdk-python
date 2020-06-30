@@ -21,10 +21,14 @@ limitations under the License.
 class ApplicationSettings:
     def __init__(self, config=None):
         if config:
-            self.app = config["app"]
-            self.implicit_assignment = config["implicitAssignment"]
-            self.inline_hook_id = config["inlineHookId"]
-            self.notifications = config["notifications"]
+            self.app = config["app"]\
+                if "app" in config else None
+            self.implicit_assignment = config["implicitAssignment"]\
+                if "implicitAssignment" in config else None
+            self.inline_hook_id = config["inlineHookId"]\
+                if "inlineHookId" in config else None
+            self.notifications = config["notifications"]\
+                if "notifications" in config else None
         else:
             self.app = None
             self.implicit_assignment = None

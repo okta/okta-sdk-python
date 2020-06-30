@@ -21,11 +21,16 @@ limitations under the License.
 class LogSecurityContext:
     def __init__(self, config=None):
         if config:
-            self.as_number = config["asNumber"]
-            self.as_org = config["asOrg"]
-            self.domain = config["domain"]
-            self.is_proxy = config["isProxy"]
-            self.isp = config["isp"]
+            self.as_number = config["asNumber"]\
+                if "asNumber" in config else None
+            self.as_org = config["asOrg"]\
+                if "asOrg" in config else None
+            self.domain = config["domain"]\
+                if "domain" in config else None
+            self.is_proxy = config["isProxy"]\
+                if "isProxy" in config else None
+            self.isp = config["isp"]\
+                if "isp" in config else None
         else:
             self.as_number = None
             self.as_org = None

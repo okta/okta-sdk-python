@@ -21,7 +21,8 @@ limitations under the License.
 class CallUserFactor:
     def __init__(self, config=None):
         if config:
-            self.profile = config["profile"]
+            self.profile = config["profile"]\
+                if "profile" in config else None
         else:
             self.profile = None
 

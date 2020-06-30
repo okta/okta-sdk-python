@@ -21,7 +21,8 @@ limitations under the License.
 class LogRequest:
     def __init__(self, config=None):
         if config:
-            self.ip_chain = config["ipChain"]
+            self.ip_chain = config["ipChain"]\
+                if "ipChain" in config else None
         else:
             self.ip_chain = None
 

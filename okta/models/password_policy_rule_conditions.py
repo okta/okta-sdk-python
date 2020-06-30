@@ -21,8 +21,10 @@ limitations under the License.
 class PasswordPolicyRuleConditions:
     def __init__(self, config=None):
         if config:
-            self.network = config["network"]
-            self.people = config["people"]
+            self.network = config["network"]\
+                if "network" in config else None
+            self.people = config["people"]\
+                if "people" in config else None
         else:
             self.network = None
             self.people = None

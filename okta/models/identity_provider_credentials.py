@@ -21,9 +21,12 @@ limitations under the License.
 class IdentityProviderCredentials:
     def __init__(self, config=None):
         if config:
-            self.client = config["client"]
-            self.signing = config["signing"]
-            self.trust = config["trust"]
+            self.client = config["client"]\
+                if "client" in config else None
+            self.signing = config["signing"]\
+                if "signing" in config else None
+            self.trust = config["trust"]\
+                if "trust" in config else None
         else:
             self.client = None
             self.signing = None

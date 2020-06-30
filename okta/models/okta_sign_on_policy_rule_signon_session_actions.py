@@ -21,9 +21,12 @@ limitations under the License.
 class OktaSignOnPolicyRuleSignonSessionActions:
     def __init__(self, config=None):
         if config:
-            self.max_session_idle_minutes = config["maxSessionIdleMinutes"]
-            self.max_session_lifetime_minutes = config["maxSessionLifetimeMinutes"]
-            self.use_persistent_cookie = config["usePersistentCookie"]
+            self.max_session_idle_minutes = config["maxSessionIdleMinutes"]\
+                if "maxSessionIdleMinutes" in config else None
+            self.max_session_lifetime_minutes = config["maxSessionLifetimeMinutes"]\
+                if "maxSessionLifetimeMinutes" in config else None
+            self.use_persistent_cookie = config["usePersistentCookie"]\
+                if "usePersistentCookie" in config else None
         else:
             self.max_session_idle_minutes = "120"
             self.max_session_lifetime_minutes = "0"

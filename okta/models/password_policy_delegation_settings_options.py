@@ -21,7 +21,8 @@ limitations under the License.
 class PasswordPolicyDelegationSettingsOptions:
     def __init__(self, config=None):
         if config:
-            self.skip_unlock = config["skipUnlock"]
+            self.skip_unlock = config["skipUnlock"]\
+                if "skipUnlock" in config else None
         else:
             self.skip_unlock = None
 

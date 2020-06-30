@@ -21,9 +21,12 @@ limitations under the License.
 class PasswordPolicyRuleActions:
     def __init__(self, config=None):
         if config:
-            self.password_change = config["passwordChange"]
-            self.self_service_password_reset = config["selfServicePasswordReset"]
-            self.self_service_unlock = config["selfServiceUnlock"]
+            self.password_change = config["passwordChange"]\
+                if "passwordChange" in config else None
+            self.self_service_password_reset = config["selfServicePasswordReset"]\
+                if "selfServicePasswordReset" in config else None
+            self.self_service_unlock = config["selfServiceUnlock"]\
+                if "selfServiceUnlock" in config else None
         else:
             self.password_change = None
             self.self_service_password_reset = None

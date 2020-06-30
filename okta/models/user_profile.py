@@ -21,37 +21,68 @@ limitations under the License.
 class UserProfile:
     def __init__(self, config=None):
         if config:
-            self.city = config["city"]
-            self.cost_center = config["costCenter"]
-            self.country_code = config["countryCode"]
-            self.department = config["department"]
-            self.display_name = config["displayName"]
-            self.division = config["division"]
-            self.email = config["email"]
-            self.employee_number = config["employeeNumber"]
-            self.first_name = config["firstName"]
-            self.honorific_prefix = config["honorificPrefix"]
-            self.honorific_suffix = config["honorificSuffix"]
-            self.last_name = config["lastName"]
-            self.locale = config["locale"]
-            self.login = config["login"]
-            self.manager = config["manager"]
-            self.manager_id = config["managerId"]
-            self.middle_name = config["middleName"]
-            self.mobile_phone = config["mobilePhone"]
-            self.nick_name = config["nickName"]
-            self.organization = config["organization"]
-            self.postal_address = config["postalAddress"]
-            self.preferred_language = config["preferredLanguage"]
-            self.primary_phone = config["primaryPhone"]
-            self.profile_url = config["profileUrl"]
-            self.second_email = config["secondEmail"]
-            self.state = config["state"]
-            self.street_address = config["streetAddress"]
-            self.timezone = config["timezone"]
-            self.title = config["title"]
-            self.user_type = config["userType"]
-            self.zip_code = config["zipCode"]
+            self.city = config["city"]\
+                if "city" in config else None
+            self.cost_center = config["costCenter"]\
+                if "costCenter" in config else None
+            self.country_code = config["countryCode"]\
+                if "countryCode" in config else None
+            self.department = config["department"]\
+                if "department" in config else None
+            self.display_name = config["displayName"]\
+                if "displayName" in config else None
+            self.division = config["division"]\
+                if "division" in config else None
+            self.email = config["email"]\
+                if "email" in config else None
+            self.employee_number = config["employeeNumber"]\
+                if "employeeNumber" in config else None
+            self.first_name = config["firstName"]\
+                if "firstName" in config else None
+            self.honorific_prefix = config["honorificPrefix"]\
+                if "honorificPrefix" in config else None
+            self.honorific_suffix = config["honorificSuffix"]\
+                if "honorificSuffix" in config else None
+            self.last_name = config["lastName"]\
+                if "lastName" in config else None
+            self.locale = config["locale"]\
+                if "locale" in config else None
+            self.login = config["login"]\
+                if "login" in config else None
+            self.manager = config["manager"]\
+                if "manager" in config else None
+            self.manager_id = config["managerId"]\
+                if "managerId" in config else None
+            self.middle_name = config["middleName"]\
+                if "middleName" in config else None
+            self.mobile_phone = config["mobilePhone"]\
+                if "mobilePhone" in config else None
+            self.nick_name = config["nickName"]\
+                if "nickName" in config else None
+            self.organization = config["organization"]\
+                if "organization" in config else None
+            self.postal_address = config["postalAddress"]\
+                if "postalAddress" in config else None
+            self.preferred_language = config["preferredLanguage"]\
+                if "preferredLanguage" in config else None
+            self.primary_phone = config["primaryPhone"]\
+                if "primaryPhone" in config else None
+            self.profile_url = config["profileUrl"]\
+                if "profileUrl" in config else None
+            self.second_email = config["secondEmail"]\
+                if "secondEmail" in config else None
+            self.state = config["state"]\
+                if "state" in config else None
+            self.street_address = config["streetAddress"]\
+                if "streetAddress" in config else None
+            self.timezone = config["timezone"]\
+                if "timezone" in config else None
+            self.title = config["title"]\
+                if "title" in config else None
+            self.user_type = config["userType"]\
+                if "userType" in config else None
+            self.zip_code = config["zipCode"]\
+                if "zipCode" in config else None
         else:
             self.city = None
             self.cost_center = None

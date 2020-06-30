@@ -21,9 +21,12 @@ limitations under the License.
 class PasswordPolicyPasswordSettings:
     def __init__(self, config=None):
         if config:
-            self.age = config["age"]
-            self.complexity = config["complexity"]
-            self.lockout = config["lockout"]
+            self.age = config["age"]\
+                if "age" in config else None
+            self.complexity = config["complexity"]\
+                if "complexity" in config else None
+            self.lockout = config["lockout"]\
+                if "lockout" in config else None
         else:
             self.age = None
             self.complexity = None

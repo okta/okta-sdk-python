@@ -21,14 +21,22 @@ limitations under the License.
 class OAuth2Scope:
     def __init__(self, config=None):
         if config:
-            self.consent = config["consent"]
-            self.default = config["default"]
-            self.description = config["description"]
-            self.display_name = config["displayName"]
-            self.id = config["id"]
-            self.metadata_publish = config["metadataPublish"]
-            self.name = config["name"]
-            self.system = config["system"]
+            self.consent = config["consent"]\
+                if "consent" in config else None
+            self.default = config["default"]\
+                if "default" in config else None
+            self.description = config["description"]\
+                if "description" in config else None
+            self.display_name = config["displayName"]\
+                if "displayName" in config else None
+            self.id = config["id"]\
+                if "id" in config else None
+            self.metadata_publish = config["metadataPublish"]\
+                if "metadataPublish" in config else None
+            self.name = config["name"]\
+                if "name" in config else None
+            self.system = config["system"]\
+                if "system" in config else None
         else:
             self.consent = None
             self.default = None

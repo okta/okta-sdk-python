@@ -21,8 +21,10 @@ limitations under the License.
 class ProvisioningConditions:
     def __init__(self, config=None):
         if config:
-            self.deprovisioned = config["deprovisioned"]
-            self.suspended = config["suspended"]
+            self.deprovisioned = config["deprovisioned"]\
+                if "deprovisioned" in config else None
+            self.suspended = config["suspended"]\
+                if "suspended" in config else None
         else:
             self.deprovisioned = None
             self.suspended = None

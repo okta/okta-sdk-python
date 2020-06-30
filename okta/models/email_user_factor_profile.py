@@ -21,7 +21,8 @@ limitations under the License.
 class EmailUserFactorProfile:
     def __init__(self, config=None):
         if config:
-            self.email = config["email"]
+            self.email = config["email"]\
+                if "email" in config else None
         else:
             self.email = None
 

@@ -21,10 +21,14 @@ limitations under the License.
 class PasswordPolicyPasswordSettingsLockout:
     def __init__(self, config=None):
         if config:
-            self.auto_unlock_minutes = config["autoUnlockMinutes"]
-            self.max_attempts = config["maxAttempts"]
-            self.show_lockout_failures = config["showLockoutFailures"]
-            self.user_lockout_notification_channels = config["userLockoutNotificationChannels"]
+            self.auto_unlock_minutes = config["autoUnlockMinutes"]\
+                if "autoUnlockMinutes" in config else None
+            self.max_attempts = config["maxAttempts"]\
+                if "maxAttempts" in config else None
+            self.show_lockout_failures = config["showLockoutFailures"]\
+                if "showLockoutFailures" in config else None
+            self.user_lockout_notification_channels = config["userLockoutNotificationChannels"]\
+                if "userLockoutNotificationChannels" in config else None
         else:
             self.auto_unlock_minutes = None
             self.max_attempts = None

@@ -21,7 +21,8 @@ limitations under the License.
 class OktaSignOnPolicy:
     def __init__(self, config=None):
         if config:
-            self.conditions = config["conditions"]
+            self.conditions = config["conditions"]\
+                if "conditions" in config else None
         else:
             self.conditions = None
 

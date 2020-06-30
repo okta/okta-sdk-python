@@ -21,7 +21,8 @@ limitations under the License.
 class ProtocolAlgorithmType:
     def __init__(self, config=None):
         if config:
-            self.signature = config["signature"]
+            self.signature = config["signature"]\
+                if "signature" in config else None
         else:
             self.signature = None
 

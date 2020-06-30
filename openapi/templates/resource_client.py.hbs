@@ -4,6 +4,10 @@
 from urllib.parse import urlencode
 {{/if}}
 from okta.utils import format_url
+{{#each (getResourceImports operations) as |import|}}
+from okta.models.{{snakeCase import}}\
+    import {{pascalCase import}}
+{{/each}}
 
 
 class {{pascalCase resource}}Client():

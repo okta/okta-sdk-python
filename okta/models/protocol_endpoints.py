@@ -21,14 +21,22 @@ limitations under the License.
 class ProtocolEndpoints:
     def __init__(self, config=None):
         if config:
-            self.acs = config["acs"]
-            self.authorization = config["authorization"]
-            self.jwks = config["jwks"]
-            self.metadata = config["metadata"]
-            self.slo = config["slo"]
-            self.sso = config["sso"]
-            self.token = config["token"]
-            self.user_info = config["userInfo"]
+            self.acs = config["acs"]\
+                if "acs" in config else None
+            self.authorization = config["authorization"]\
+                if "authorization" in config else None
+            self.jwks = config["jwks"]\
+                if "jwks" in config else None
+            self.metadata = config["metadata"]\
+                if "metadata" in config else None
+            self.slo = config["slo"]\
+                if "slo" in config else None
+            self.sso = config["sso"]\
+                if "sso" in config else None
+            self.token = config["token"]\
+                if "token" in config else None
+            self.user_info = config["userInfo"]\
+                if "userInfo" in config else None
         else:
             self.acs = None
             self.authorization = None

@@ -21,7 +21,8 @@ limitations under the License.
 class SecurePasswordStoreApplicationSettings:
     def __init__(self, config=None):
         if config:
-            self.app = config["app"]
+            self.app = config["app"]\
+                if "app" in config else None
         else:
             self.app = None
 

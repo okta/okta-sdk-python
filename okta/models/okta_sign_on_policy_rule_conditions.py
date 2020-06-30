@@ -21,9 +21,12 @@ limitations under the License.
 class OktaSignOnPolicyRuleConditions:
     def __init__(self, config=None):
         if config:
-            self.auth_context = config["authContext"]
-            self.network = config["network"]
-            self.people = config["people"]
+            self.auth_context = config["authContext"]\
+                if "authContext" in config else None
+            self.network = config["network"]\
+                if "network" in config else None
+            self.people = config["people"]\
+                if "people" in config else None
         else:
             self.auth_context = None
             self.network = None

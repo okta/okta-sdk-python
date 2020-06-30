@@ -21,9 +21,12 @@ limitations under the License.
 class ApplicationCredentialsUsernameTemplate:
     def __init__(self, config=None):
         if config:
-            self.suffix = config["suffix"]
-            self.template = config["template"]
-            self.type = config["type"]
+            self.suffix = config["suffix"]\
+                if "suffix" in config else None
+            self.template = config["template"]\
+                if "template" in config else None
+            self.type = config["type"]\
+                if "type" in config else None
         else:
             self.suffix = None
             self.template = None

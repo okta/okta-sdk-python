@@ -21,8 +21,10 @@ limitations under the License.
 class EventSubscriptions:
     def __init__(self, config=None):
         if config:
-            self.items = config["items"]
-            self.type = config["type"]
+            self.items = config["items"]\
+                if "items" in config else None
+            self.type = config["type"]\
+                if "type" in config else None
         else:
             self.items = None
             self.type = None

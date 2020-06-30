@@ -21,8 +21,10 @@ limitations under the License.
 class ApplicationVisibilityHide:
     def __init__(self, config=None):
         if config:
-            self.i_os = config["iOS"]
-            self.web = config["web"]
+            self.i_os = config["iOS"]\
+                if "iOS" in config else None
+            self.web = config["web"]\
+                if "web" in config else None
         else:
             self.i_os = None
             self.web = None

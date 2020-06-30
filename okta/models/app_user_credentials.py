@@ -21,8 +21,10 @@ limitations under the License.
 class AppUserCredentials:
     def __init__(self, config=None):
         if config:
-            self.password = config["password"]
-            self.user_name = config["userName"]
+            self.password = config["password"]\
+                if "password" in config else None
+            self.user_name = config["userName"]\
+                if "userName" in config else None
         else:
             self.password = None
             self.user_name = None

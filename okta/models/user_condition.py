@@ -21,8 +21,10 @@ limitations under the License.
 class UserCondition:
     def __init__(self, config=None):
         if config:
-            self.exclude = config["exclude"]
-            self.include = config["include"]
+            self.exclude = config["exclude"]\
+                if "exclude" in config else None
+            self.include = config["include"]\
+                if "include" in config else None
         else:
             self.exclude = None
             self.include = None

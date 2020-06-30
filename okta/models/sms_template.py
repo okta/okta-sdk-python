@@ -21,13 +21,20 @@ limitations under the License.
 class SmsTemplate:
     def __init__(self, config=None):
         if config:
-            self.created = config["created"]
-            self.id = config["id"]
-            self.last_updated = config["lastUpdated"]
-            self.name = config["name"]
-            self.template = config["template"]
-            self.translations = config["translations"]
-            self.type = config["type"]
+            self.created = config["created"]\
+                if "created" in config else None
+            self.id = config["id"]\
+                if "id" in config else None
+            self.last_updated = config["lastUpdated"]\
+                if "lastUpdated" in config else None
+            self.name = config["name"]\
+                if "name" in config else None
+            self.template = config["template"]\
+                if "template" in config else None
+            self.translations = config["translations"]\
+                if "translations" in config else None
+            self.type = config["type"]\
+                if "type" in config else None
         else:
             self.created = None
             self.id = None

@@ -21,10 +21,14 @@ limitations under the License.
 class DevicePolicyRuleCondition:
     def __init__(self, config=None):
         if config:
-            self.migrated = config["migrated"]
-            self.platform = config["platform"]
-            self.rooted = config["rooted"]
-            self.trust_level = config["trustLevel"]
+            self.migrated = config["migrated"]\
+                if "migrated" in config else None
+            self.platform = config["platform"]\
+                if "platform" in config else None
+            self.rooted = config["rooted"]\
+                if "rooted" in config else None
+            self.trust_level = config["trustLevel"]\
+                if "trustLevel" in config else None
         else:
             self.migrated = None
             self.platform = None

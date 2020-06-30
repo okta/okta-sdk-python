@@ -21,13 +21,20 @@ limitations under the License.
 class SwaThreeFieldApplicationSettingsApplication:
     def __init__(self, config=None):
         if config:
-            self.button_selector = config["buttonSelector"]
-            self.extra_field_selector = config["extraFieldSelector"]
-            self.extra_field_value = config["extraFieldValue"]
-            self.login_url_regex = config["loginUrlRegex"]
-            self.password_selector = config["passwordSelector"]
-            self.target_url = config["targetURL"]
-            self.user_name_selector = config["userNameSelector"]
+            self.button_selector = config["buttonSelector"]\
+                if "buttonSelector" in config else None
+            self.extra_field_selector = config["extraFieldSelector"]\
+                if "extraFieldSelector" in config else None
+            self.extra_field_value = config["extraFieldValue"]\
+                if "extraFieldValue" in config else None
+            self.login_url_regex = config["loginUrlRegex"]\
+                if "loginUrlRegex" in config else None
+            self.password_selector = config["passwordSelector"]\
+                if "passwordSelector" in config else None
+            self.target_url = config["targetURL"]\
+                if "targetURL" in config else None
+            self.user_name_selector = config["userNameSelector"]\
+                if "userNameSelector" in config else None
         else:
             self.button_selector = None
             self.extra_field_selector = None

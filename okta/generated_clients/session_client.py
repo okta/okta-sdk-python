@@ -18,6 +18,8 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.utils import format_url
+from okta.models.session\
+    import Session
 
 
 class SessionClient():

@@ -21,7 +21,8 @@ limitations under the License.
 class CsrMetadataSubjectAltNames:
     def __init__(self, config=None):
         if config:
-            self.dns_names = config["dnsNames"]
+            self.dns_names = config["dnsNames"]\
+                if "dnsNames" in config else None
         else:
             self.dns_names = None
 

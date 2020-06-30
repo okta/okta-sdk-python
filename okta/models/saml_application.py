@@ -21,7 +21,8 @@ limitations under the License.
 class SamlApplication:
     def __init__(self, config=None):
         if config:
-            self.settings = config["settings"]
+            self.settings = config["settings"]\
+                if "settings" in config else None
         else:
             self.settings = None
 

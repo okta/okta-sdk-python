@@ -21,7 +21,8 @@ limitations under the License.
 class PasswordPolicyRecoveryEmailProperties:
     def __init__(self, config=None):
         if config:
-            self.recovery_token = config["recoveryToken"]
+            self.recovery_token = config["recoveryToken"]\
+                if "recoveryToken" in config else None
         else:
             self.recovery_token = None
 

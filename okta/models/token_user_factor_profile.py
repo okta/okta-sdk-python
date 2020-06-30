@@ -21,7 +21,8 @@ limitations under the License.
 class TokenUserFactorProfile:
     def __init__(self, config=None):
         if config:
-            self.credential_id = config["credentialId"]
+            self.credential_id = config["credentialId"]\
+                if "credentialId" in config else None
         else:
             self.credential_id = None
 

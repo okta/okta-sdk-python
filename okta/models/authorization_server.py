@@ -21,17 +21,28 @@ limitations under the License.
 class AuthorizationServer:
     def __init__(self, config=None):
         if config:
-            self.links = config["_links"]
-            self.audiences = config["audiences"]
-            self.created = config["created"]
-            self.credentials = config["credentials"]
-            self.description = config["description"]
-            self.id = config["id"]
-            self.issuer = config["issuer"]
-            self.issuer_mode = config["issuerMode"]
-            self.last_updated = config["lastUpdated"]
-            self.name = config["name"]
-            self.status = config["status"]
+            self.links = config["_links"]\
+                if "_links" in config else None
+            self.audiences = config["audiences"]\
+                if "audiences" in config else None
+            self.created = config["created"]\
+                if "created" in config else None
+            self.credentials = config["credentials"]\
+                if "credentials" in config else None
+            self.description = config["description"]\
+                if "description" in config else None
+            self.id = config["id"]\
+                if "id" in config else None
+            self.issuer = config["issuer"]\
+                if "issuer" in config else None
+            self.issuer_mode = config["issuerMode"]\
+                if "issuerMode" in config else None
+            self.last_updated = config["lastUpdated"]\
+                if "lastUpdated" in config else None
+            self.name = config["name"]\
+                if "name" in config else None
+            self.status = config["status"]\
+                if "status" in config else None
         else:
             self.links = None
             self.audiences = None

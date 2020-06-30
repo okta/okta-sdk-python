@@ -21,12 +21,18 @@ limitations under the License.
 class CsrMetadataSubject:
     def __init__(self, config=None):
         if config:
-            self.common_name = config["commonName"]
-            self.country_name = config["countryName"]
-            self.locality_name = config["localityName"]
-            self.organization_name = config["organizationName"]
-            self.organizational_unit_name = config["organizationalUnitName"]
-            self.state_or_province_name = config["stateOrProvinceName"]
+            self.common_name = config["commonName"]\
+                if "commonName" in config else None
+            self.country_name = config["countryName"]\
+                if "countryName" in config else None
+            self.locality_name = config["localityName"]\
+                if "localityName" in config else None
+            self.organization_name = config["organizationName"]\
+                if "organizationName" in config else None
+            self.organizational_unit_name = config["organizationalUnitName"]\
+                if "organizationalUnitName" in config else None
+            self.state_or_province_name = config["stateOrProvinceName"]\
+                if "stateOrProvinceName" in config else None
         else:
             self.common_name = None
             self.country_name = None

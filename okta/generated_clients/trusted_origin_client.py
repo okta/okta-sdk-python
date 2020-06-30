@@ -19,6 +19,8 @@ limitations under the License.
 
 from urllib.parse import urlencode
 from okta.utils import format_url
+from okta.models.trusted_origin\
+    import TrustedOrigin
 
 
 class TrustedOriginClient():
@@ -32,8 +34,7 @@ class TrustedOriginClient():
             self, query_params
     ):
         """
-            Success
-        Args:
+            Args:
             query_params {dict}: Map of query parameters for request
             [query_params.q] {str}
             [query_params.filter] {str}
@@ -78,8 +79,7 @@ class TrustedOriginClient():
             self, trusted_origin
     ):
         """
-            Success
-        Args:
+            Args:
             {trusted_origin}
         Returns:
             TrustedOrigin
@@ -121,8 +121,7 @@ class TrustedOriginClient():
             self, trustedOriginId
     ):
         """
-            Success
-        Args:
+            Args:
             trusted_origin_id {str}
         """
         http_method = "delete".upper()
@@ -152,8 +151,7 @@ class TrustedOriginClient():
             self, trustedOriginId
     ):
         """
-            Success
-        Args:
+            Args:
             trusted_origin_id {str}
         Returns:
             TrustedOrigin
@@ -192,8 +190,7 @@ class TrustedOriginClient():
             self, trustedOriginId, trusted_origin
     ):
         """
-            Success
-        Args:
+            Args:
             trusted_origin_id {str}
             {trusted_origin}
         Returns:
@@ -236,8 +233,7 @@ class TrustedOriginClient():
             self, trustedOriginId
     ):
         """
-            Success
-        Args:
+            Args:
             trusted_origin_id {str}
         Returns:
             TrustedOrigin
@@ -277,8 +273,7 @@ class TrustedOriginClient():
             self, trustedOriginId
     ):
         """
-            Success
-        Args:
+            Args:
             trusted_origin_id {str}
         Returns:
             TrustedOrigin

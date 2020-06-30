@@ -21,8 +21,10 @@ limitations under the License.
 class PasswordPolicyConditions:
     def __init__(self, config=None):
         if config:
-            self.auth_provider = config["authProvider"]
-            self.people = config["people"]
+            self.auth_provider = config["authProvider"]\
+                if "authProvider" in config else None
+            self.people = config["people"]\
+                if "people" in config else None
         else:
             self.auth_provider = None
             self.people = None

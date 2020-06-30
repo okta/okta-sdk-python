@@ -21,8 +21,10 @@ limitations under the License.
 class MdmEnrollmentPolicyRuleCondition:
     def __init__(self, config=None):
         if config:
-            self.block_non_safe_android = config["blockNonSafeAndroid"]
-            self.enrollment = config["enrollment"]
+            self.block_non_safe_android = config["blockNonSafeAndroid"]\
+                if "blockNonSafeAndroid" in config else None
+            self.enrollment = config["enrollment"]\
+                if "enrollment" in config else None
         else:
             self.block_non_safe_android = None
             self.enrollment = None

@@ -21,8 +21,10 @@ limitations under the License.
 class BookmarkApplicationSettingsApplication:
     def __init__(self, config=None):
         if config:
-            self.request_integration = config["requestIntegration"]
-            self.url = config["url"]
+            self.request_integration = config["requestIntegration"]\
+                if "requestIntegration" in config else None
+            self.url = config["url"]\
+                if "url" in config else None
         else:
             self.request_integration = None
             self.url = None

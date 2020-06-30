@@ -21,7 +21,8 @@ limitations under the License.
 class OpenIdConnectApplicationSettings:
     def __init__(self, config=None):
         if config:
-            self.oauth_client = config["oauthClient"]
+            self.oauth_client = config["oauthClient"]\
+                if "oauthClient" in config else None
         else:
             self.oauth_client = None
 

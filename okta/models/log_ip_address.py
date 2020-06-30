@@ -21,10 +21,14 @@ limitations under the License.
 class LogIpAddress:
     def __init__(self, config=None):
         if config:
-            self.geographical_context = config["geographicalContext"]
-            self.ip = config["ip"]
-            self.source = config["source"]
-            self.version = config["version"]
+            self.geographical_context = config["geographicalContext"]\
+                if "geographicalContext" in config else None
+            self.ip = config["ip"]\
+                if "ip" in config else None
+            self.source = config["source"]\
+                if "source" in config else None
+            self.version = config["version"]\
+                if "version" in config else None
         else:
             self.geographical_context = None
             self.ip = None

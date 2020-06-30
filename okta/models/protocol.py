@@ -21,14 +21,22 @@ limitations under the License.
 class Protocol:
     def __init__(self, config=None):
         if config:
-            self.algorithms = config["algorithms"]
-            self.credentials = config["credentials"]
-            self.endpoints = config["endpoints"]
-            self.issuer = config["issuer"]
-            self.relay_state = config["relayState"]
-            self.scopes = config["scopes"]
-            self.settings = config["settings"]
-            self.type = config["type"]
+            self.algorithms = config["algorithms"]\
+                if "algorithms" in config else None
+            self.credentials = config["credentials"]\
+                if "credentials" in config else None
+            self.endpoints = config["endpoints"]\
+                if "endpoints" in config else None
+            self.issuer = config["issuer"]\
+                if "issuer" in config else None
+            self.relay_state = config["relayState"]\
+                if "relayState" in config else None
+            self.scopes = config["scopes"]\
+                if "scopes" in config else None
+            self.settings = config["settings"]\
+                if "settings" in config else None
+            self.type = config["type"]\
+                if "type" in config else None
         else:
             self.algorithms = None
             self.credentials = None

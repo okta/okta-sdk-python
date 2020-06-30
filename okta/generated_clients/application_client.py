@@ -19,6 +19,20 @@ limitations under the License.
 
 from urllib.parse import urlencode
 from okta.utils import format_url
+from okta.models.application\
+    import Application
+from okta.models.csr\
+    import Csr
+from okta.models.json_web_key\
+    import JsonWebKey
+from okta.models.o_auth_2_scope_consent_grant\
+    import OAuth2ScopeConsentGrant
+from okta.models.application_group_assignment\
+    import ApplicationGroupAssignment
+from okta.models.o_auth_2_token\
+    import OAuth2Token
+from okta.models.app_user\
+    import AppUser
 
 
 class ApplicationClient():
@@ -476,6 +490,8 @@ class ApplicationClient():
             """)
 
         # TODO for when body format is binary
+        body = None
+        headers = None
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -568,6 +584,8 @@ class ApplicationClient():
             """)
 
         # TODO for when body format is binary
+        body = None
+        headers = None
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -612,6 +630,8 @@ class ApplicationClient():
             """)
 
         # TODO for when body format is binary
+        body = None
+        headers = None
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers

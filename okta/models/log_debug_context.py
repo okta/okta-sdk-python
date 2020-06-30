@@ -21,7 +21,8 @@ limitations under the License.
 class LogDebugContext:
     def __init__(self, config=None):
         if config:
-            self.debug_data = config["debugData"]
+            self.debug_data = config["debugData"]\
+                if "debugData" in config else None
         else:
             self.debug_data = None
 

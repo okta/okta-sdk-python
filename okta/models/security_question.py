@@ -21,9 +21,12 @@ limitations under the License.
 class SecurityQuestion:
     def __init__(self, config=None):
         if config:
-            self.answer = config["answer"]
-            self.question = config["question"]
-            self.question_text = config["questionText"]
+            self.answer = config["answer"]\
+                if "answer" in config else None
+            self.question = config["question"]\
+                if "question" in config else None
+            self.question_text = config["questionText"]\
+                if "questionText" in config else None
         else:
             self.answer = None
             self.question = None

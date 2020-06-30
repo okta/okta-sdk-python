@@ -5,7 +5,8 @@ class {{pascalCase model.modelName}}:
     def __init__(self, config=None):
         if config:
             {{#each model.properties as |prop|}}
-            self.{{snakeCase prop.propertyName}} = config["{{prop.propertyName}}"]
+            self.{{snakeCase prop.propertyName}} = config["{{prop.propertyName}}"]\
+                if "{{prop.propertyName}}" in config else None
             {{/each}}
         else:
             {{#each model.properties as |prop|}}

@@ -21,7 +21,8 @@ limitations under the License.
 class ScheduledUserLifecycleAction:
     def __init__(self, config=None):
         if config:
-            self.status = config["status"]
+            self.status = config["status"]\
+                if "status" in config else None
         else:
             self.status = None
 

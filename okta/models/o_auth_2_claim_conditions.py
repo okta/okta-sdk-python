@@ -21,7 +21,8 @@ limitations under the License.
 class OAuth2ClaimConditions:
     def __init__(self, config=None):
         if config:
-            self.scopes = config["scopes"]
+            self.scopes = config["scopes"]\
+                if "scopes" in config else None
         else:
             self.scopes = None
 

@@ -21,9 +21,12 @@ limitations under the License.
 class AppAndInstanceConditionEvaluatorAppOrInstance:
     def __init__(self, config=None):
         if config:
-            self.id = config["id"]
-            self.name = config["name"]
-            self.type = config["type"]
+            self.id = config["id"]\
+                if "id" in config else None
+            self.name = config["name"]\
+                if "name" in config else None
+            self.type = config["type"]\
+                if "type" in config else None
         else:
             self.id = None
             self.name = None

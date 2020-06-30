@@ -21,27 +21,48 @@ limitations under the License.
 class SamlApplicationSettingsSignOn:
     def __init__(self, config=None):
         if config:
-            self.assertion_signed = config["assertionSigned"]
-            self.attribute_statements = config["attributeStatements"]
-            self.audience = config["audience"]
-            self.audience_override = config["audienceOverride"]
-            self.authn_context_class_ref = config["authnContextClassRef"]
-            self.default_relay_state = config["defaultRelayState"]
-            self.destination = config["destination"]
-            self.destination_override = config["destinationOverride"]
-            self.digest_algorithm = config["digestAlgorithm"]
-            self.honor_force_authn = config["honorForceAuthn"]
-            self.idp_issuer = config["idpIssuer"]
-            self.recipient = config["recipient"]
-            self.recipient_override = config["recipientOverride"]
-            self.request_compressed = config["requestCompressed"]
-            self.response_signed = config["responseSigned"]
-            self.signature_algorithm = config["signatureAlgorithm"]
-            self.sp_issuer = config["spIssuer"]
-            self.sso_acs_url = config["ssoAcsUrl"]
-            self.sso_acs_url_override = config["ssoAcsUrlOverride"]
-            self.subject_name_id_format = config["subjectNameIdFormat"]
-            self.subject_name_id_template = config["subjectNameIdTemplate"]
+            self.assertion_signed = config["assertionSigned"]\
+                if "assertionSigned" in config else None
+            self.attribute_statements = config["attributeStatements"]\
+                if "attributeStatements" in config else None
+            self.audience = config["audience"]\
+                if "audience" in config else None
+            self.audience_override = config["audienceOverride"]\
+                if "audienceOverride" in config else None
+            self.authn_context_class_ref = config["authnContextClassRef"]\
+                if "authnContextClassRef" in config else None
+            self.default_relay_state = config["defaultRelayState"]\
+                if "defaultRelayState" in config else None
+            self.destination = config["destination"]\
+                if "destination" in config else None
+            self.destination_override = config["destinationOverride"]\
+                if "destinationOverride" in config else None
+            self.digest_algorithm = config["digestAlgorithm"]\
+                if "digestAlgorithm" in config else None
+            self.honor_force_authn = config["honorForceAuthn"]\
+                if "honorForceAuthn" in config else None
+            self.idp_issuer = config["idpIssuer"]\
+                if "idpIssuer" in config else None
+            self.recipient = config["recipient"]\
+                if "recipient" in config else None
+            self.recipient_override = config["recipientOverride"]\
+                if "recipientOverride" in config else None
+            self.request_compressed = config["requestCompressed"]\
+                if "requestCompressed" in config else None
+            self.response_signed = config["responseSigned"]\
+                if "responseSigned" in config else None
+            self.signature_algorithm = config["signatureAlgorithm"]\
+                if "signatureAlgorithm" in config else None
+            self.sp_issuer = config["spIssuer"]\
+                if "spIssuer" in config else None
+            self.sso_acs_url = config["ssoAcsUrl"]\
+                if "ssoAcsUrl" in config else None
+            self.sso_acs_url_override = config["ssoAcsUrlOverride"]\
+                if "ssoAcsUrlOverride" in config else None
+            self.subject_name_id_format = config["subjectNameIdFormat"]\
+                if "subjectNameIdFormat" in config else None
+            self.subject_name_id_template = config["subjectNameIdTemplate"]\
+                if "subjectNameIdTemplate" in config else None
         else:
             self.assertion_signed = None
             self.attribute_statements = None

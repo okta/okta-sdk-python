@@ -21,14 +21,22 @@ limitations under the License.
 class GroupRule:
     def __init__(self, config=None):
         if config:
-            self.actions = config["actions"]
-            self.conditions = config["conditions"]
-            self.created = config["created"]
-            self.id = config["id"]
-            self.last_updated = config["lastUpdated"]
-            self.name = config["name"]
-            self.status = config["status"]
-            self.type = config["type"]
+            self.actions = config["actions"]\
+                if "actions" in config else None
+            self.conditions = config["conditions"]\
+                if "conditions" in config else None
+            self.created = config["created"]\
+                if "created" in config else None
+            self.id = config["id"]\
+                if "id" in config else None
+            self.last_updated = config["lastUpdated"]\
+                if "lastUpdated" in config else None
+            self.name = config["name"]\
+                if "name" in config else None
+            self.status = config["status"]\
+                if "status" in config else None
+            self.type = config["type"]\
+                if "type" in config else None
         else:
             self.actions = None
             self.conditions = None

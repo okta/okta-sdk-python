@@ -21,7 +21,8 @@ limitations under the License.
 class PasswordPolicyRecoveryEmailRecoveryToken:
     def __init__(self, config=None):
         if config:
-            self.token_lifetime_minutes = config["tokenLifetimeMinutes"]
+            self.token_lifetime_minutes = config["tokenLifetimeMinutes"]\
+                if "tokenLifetimeMinutes" in config else None
         else:
             self.token_lifetime_minutes = "10080"
 

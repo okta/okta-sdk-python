@@ -21,8 +21,10 @@ limitations under the License.
 class FeatureStage:
     def __init__(self, config=None):
         if config:
-            self.state = config["state"]
-            self.value = config["value"]
+            self.state = config["state"]\
+                if "state" in config else None
+            self.value = config["value"]\
+                if "value" in config else None
         else:
             self.state = None
             self.value = None

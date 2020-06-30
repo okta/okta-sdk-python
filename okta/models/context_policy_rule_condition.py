@@ -21,7 +21,8 @@ limitations under the License.
 class ContextPolicyRuleCondition:
     def __init__(self, config=None):
         if config:
-            self.expression = config["expression"]
+            self.expression = config["expression"]\
+                if "expression" in config else None
         else:
             self.expression = None
 

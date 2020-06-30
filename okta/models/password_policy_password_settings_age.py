@@ -21,10 +21,14 @@ limitations under the License.
 class PasswordPolicyPasswordSettingsAge:
     def __init__(self, config=None):
         if config:
-            self.expire_warn_days = config["expireWarnDays"]
-            self.history_count = config["historyCount"]
-            self.max_age_days = config["maxAgeDays"]
-            self.min_age_minutes = config["minAgeMinutes"]
+            self.expire_warn_days = config["expireWarnDays"]\
+                if "expireWarnDays" in config else None
+            self.history_count = config["historyCount"]\
+                if "historyCount" in config else None
+            self.max_age_days = config["maxAgeDays"]\
+                if "maxAgeDays" in config else None
+            self.min_age_minutes = config["minAgeMinutes"]\
+                if "minAgeMinutes" in config else None
         else:
             self.expire_warn_days = "0"
             self.history_count = "0"

@@ -21,8 +21,10 @@ limitations under the License.
 class LogOutcome:
     def __init__(self, config=None):
         if config:
-            self.reason = config["reason"]
-            self.result = config["result"]
+            self.reason = config["reason"]\
+                if "reason" in config else None
+            self.result = config["result"]\
+                if "result" in config else None
         else:
             self.reason = None
             self.result = None

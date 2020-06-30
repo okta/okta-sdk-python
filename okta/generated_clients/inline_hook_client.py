@@ -19,6 +19,10 @@ limitations under the License.
 
 from urllib.parse import urlencode
 from okta.utils import format_url
+from okta.models.inline_hook\
+    import InlineHook
+from okta.models.inline_hook_response\
+    import InlineHookResponse
 
 
 class InlineHookClient():
@@ -32,8 +36,7 @@ class InlineHookClient():
             self, query_params
     ):
         """
-            Success
-        Args:
+            Args:
             query_params {dict}: Map of query parameters for request
             [query_params.type] {str}
         Returns:
@@ -75,8 +78,7 @@ class InlineHookClient():
             self, inline_hook
     ):
         """
-            Success
-        Args:
+            Args:
             {inline_hook}
         Returns:
             InlineHook

@@ -21,9 +21,12 @@ limitations under the License.
 class LogUserAgent:
     def __init__(self, config=None):
         if config:
-            self.browser = config["browser"]
-            self.os = config["os"]
-            self.raw_user_agent = config["rawUserAgent"]
+            self.browser = config["browser"]\
+                if "browser" in config else None
+            self.os = config["os"]\
+                if "os" in config else None
+            self.raw_user_agent = config["rawUserAgent"]\
+                if "rawUserAgent" in config else None
         else:
             self.browser = None
             self.os = None

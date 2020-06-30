@@ -21,7 +21,8 @@ limitations under the License.
 class ApplicationLicensing:
     def __init__(self, config=None):
         if config:
-            self.seat_count = config["seatCount"]
+            self.seat_count = config["seatCount"]\
+                if "seatCount" in config else None
         else:
             self.seat_count = None
 

@@ -21,8 +21,10 @@ limitations under the License.
 class CsrMetadata:
     def __init__(self, config=None):
         if config:
-            self.subject = config["subject"]
-            self.subject_alt_names = config["subjectAltNames"]
+            self.subject = config["subject"]\
+                if "subject" in config else None
+            self.subject_alt_names = config["subjectAltNames"]\
+                if "subjectAltNames" in config else None
         else:
             self.subject = None
             self.subject_alt_names = None

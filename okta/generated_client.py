@@ -1530,7 +1530,6 @@ class GeneratedAPIClient():
         self, query_params
     ):
         """
-        Success
         Args:
             query_params {dict}: Map of query parameters for request
             [query_params.q] {str}
@@ -1574,7 +1573,6 @@ class GeneratedAPIClient():
         self, authorization_server
     ):
         """
-        Success
         Args:
             {authorization_server}
         Returns:
@@ -1613,7 +1611,6 @@ class GeneratedAPIClient():
         self, authServerId
     ):
         """
-        Success
         Args:
             auth_server_id {str}
         """
@@ -1643,7 +1640,6 @@ class GeneratedAPIClient():
         self, authServerId
     ):
         """
-        Success
         Args:
             auth_server_id {str}
         Returns:
@@ -1682,7 +1678,6 @@ class GeneratedAPIClient():
         self, authServerId, authorization_server
     ):
         """
-        Success
         Args:
             auth_server_id {str}
             {authorization_server}
@@ -1722,7 +1717,6 @@ class GeneratedAPIClient():
         self, authServerId
     ):
         """
-        Success
         Args:
             auth_server_id {str}
         Returns:
@@ -1761,7 +1755,6 @@ class GeneratedAPIClient():
         self, authServerId, o_auth_2_claim
     ):
         """
-        Success
         Args:
             auth_server_id {str}
             {o_auth_2_claim}
@@ -1801,7 +1794,6 @@ class GeneratedAPIClient():
         self, authServerId, claimId
     ):
         """
-        Success
         Args:
             auth_server_id {str}
             claim_id {str}
@@ -1833,7 +1825,6 @@ class GeneratedAPIClient():
         self, authServerId, claimId
     ):
         """
-        Success
         Args:
             auth_server_id {str}
             claim_id {str}
@@ -1874,7 +1865,6 @@ class GeneratedAPIClient():
         self, authServerId, claimId, o_auth_2_claim
     ):
         """
-        Success
         Args:
             auth_server_id {str}
             claim_id {str}
@@ -1916,7 +1906,6 @@ class GeneratedAPIClient():
         self, authServerId
     ):
         """
-        Success
         Args:
             auth_server_id {str}
         Returns:
@@ -1955,7 +1944,6 @@ class GeneratedAPIClient():
         self, authServerId, clientId
     ):
         """
-        Success
         Args:
             auth_server_id {str}
             client_id {str}
@@ -1987,7 +1975,6 @@ class GeneratedAPIClient():
         self, authServerId, clientId, query_params
     ):
         """
-        Success
         Args:
             auth_server_id {str}
             client_id {str}
@@ -2034,7 +2021,6 @@ class GeneratedAPIClient():
         self, authServerId, clientId, tokenId
     ):
         """
-        Success
         Args:
             auth_server_id {str}
             client_id {str}
@@ -2067,7 +2053,6 @@ class GeneratedAPIClient():
         self, authServerId, clientId, tokenId, query_params
     ):
         """
-        Success
         Args:
             auth_server_id {str}
             client_id {str}
@@ -2113,7 +2098,6 @@ class GeneratedAPIClient():
         self, authServerId
     ):
         """
-        Success
         Args:
             auth_server_id {str}
         Returns:
@@ -2153,7 +2137,6 @@ class GeneratedAPIClient():
         self, authServerId, jwk_use
     ):
         """
-        Success
         Args:
             auth_server_id {str}
         Returns:
@@ -2193,7 +2176,6 @@ class GeneratedAPIClient():
         self, authServerId
     ):
         """
-        Success
         Args:
             auth_server_id {str}
         """
@@ -2224,7 +2206,6 @@ class GeneratedAPIClient():
         self, authServerId
     ):
         """
-        Success
         Args:
             auth_server_id {str}
         """
@@ -2255,7 +2236,6 @@ class GeneratedAPIClient():
         self, authServerId
     ):
         """
-        Success
         Args:
             auth_server_id {str}
         Returns:
@@ -2295,7 +2275,6 @@ class GeneratedAPIClient():
         self, authServerId, policy
     ):
         """
-        Success
         Args:
             auth_server_id {str}
             {policy}
@@ -2336,7 +2315,6 @@ class GeneratedAPIClient():
         self, authServerId, policyId
     ):
         """
-        Success
         Args:
             auth_server_id {str}
             policy_id {str}
@@ -2368,7 +2346,6 @@ class GeneratedAPIClient():
         self, authServerId, policyId
     ):
         """
-        Success
         Args:
             auth_server_id {str}
             policy_id {str}
@@ -2409,7 +2386,6 @@ class GeneratedAPIClient():
         self, authServerId, policyId, policy
     ):
         """
-        Success
         Args:
             auth_server_id {str}
             policy_id {str}
@@ -2451,7 +2427,6 @@ class GeneratedAPIClient():
         self, authServerId, query_params
     ):
         """
-        Success
         Args:
             auth_server_id {str}
             query_params {dict}: Map of query parameters for request
@@ -2497,7 +2472,6 @@ class GeneratedAPIClient():
         self, authServerId, o_auth_2_scope
     ):
         """
-        Success
         Args:
             auth_server_id {str}
             {o_auth_2_scope}
@@ -2537,7 +2511,6 @@ class GeneratedAPIClient():
         self, authServerId, scopeId
     ):
         """
-        Success
         Args:
             auth_server_id {str}
             scope_id {str}
@@ -2569,7 +2542,6 @@ class GeneratedAPIClient():
         self, authServerId, scopeId
     ):
         """
-        Success
         Args:
             auth_server_id {str}
             scope_id {str}
@@ -2610,7 +2582,6 @@ class GeneratedAPIClient():
         self, authServerId, scopeId, o_auth_2_scope
     ):
         """
-        Success
         Args:
             auth_server_id {str}
             scope_id {str}
@@ -2652,7 +2623,6 @@ class GeneratedAPIClient():
         self
     ):
         """
-        Success
         Args:
         Returns:
             list: Collection of EventHook instances.
@@ -2690,7 +2660,6 @@ class GeneratedAPIClient():
         self, event_hook
     ):
         """
-        Success
         Args:
             {event_hook}
         Returns:
@@ -2729,7 +2698,6 @@ class GeneratedAPIClient():
         self, eventHookId
     ):
         """
-        Success
         Args:
             event_hook_id {str}
         """
@@ -2759,7 +2727,6 @@ class GeneratedAPIClient():
         self, eventHookId
     ):
         """
-        Success
         Args:
             event_hook_id {str}
         Returns:
@@ -2798,7 +2765,6 @@ class GeneratedAPIClient():
         self, eventHookId, event_hook
     ):
         """
-        Success
         Args:
             event_hook_id {str}
             {event_hook}
@@ -2838,7 +2804,6 @@ class GeneratedAPIClient():
         self, eventHookId
     ):
         """
-        Success
         Args:
             event_hook_id {str}
         Returns:
@@ -2877,7 +2842,6 @@ class GeneratedAPIClient():
         self, eventHookId
     ):
         """
-        Success
         Args:
             event_hook_id {str}
         Returns:
@@ -2917,7 +2881,6 @@ class GeneratedAPIClient():
         self, eventHookId
     ):
         """
-        Success
         Args:
             event_hook_id {str}
         Returns:
@@ -2956,7 +2919,6 @@ class GeneratedAPIClient():
         self
     ):
         """
-        Success
         Args:
         Returns:
             list: Collection of Feature instances.
@@ -2994,7 +2956,6 @@ class GeneratedAPIClient():
         self, featureId
     ):
         """
-        Success
         Args:
             feature_id {str}
         Returns:
@@ -3033,7 +2994,6 @@ class GeneratedAPIClient():
         self, featureId
     ):
         """
-        Success
         Args:
             feature_id {str}
         Returns:
@@ -3072,7 +3032,6 @@ class GeneratedAPIClient():
         self, featureId
     ):
         """
-        Success
         Args:
             feature_id {str}
         Returns:
@@ -3111,7 +3070,6 @@ class GeneratedAPIClient():
         self, featureId, lifecycle, query_params
     ):
         """
-        Success
         Args:
             feature_id {str}
             lifecycle {str}
@@ -3661,7 +3619,6 @@ class GeneratedAPIClient():
         self, groupId, query_params
     ):
         """
-        Success
         Args:
             group_id {str}
             query_params {dict}: Map of query parameters for request
@@ -3779,7 +3736,6 @@ class GeneratedAPIClient():
         self, groupId, roleId
     ):
         """
-        Success
         Args:
             group_id {str}
             role_id {str}
@@ -3869,7 +3825,6 @@ class GeneratedAPIClient():
         self, groupId, roleId, appName
     ):
         """
-        Success
         Args:
             group_id {str}
             role_id {str}
@@ -3902,7 +3857,6 @@ class GeneratedAPIClient():
         self, groupId, roleId, appName
     ):
         """
-        Success
         Args:
             group_id {str}
             role_id {str}
@@ -4005,7 +3959,6 @@ class GeneratedAPIClient():
         self, groupId, roleId, query_params
     ):
         """
-        Success
         Args:
             group_id {str}
             role_id {str}
@@ -5391,7 +5344,6 @@ class GeneratedAPIClient():
         self, query_params
     ):
         """
-        Success
         Args:
             query_params {dict}: Map of query parameters for request
             [query_params.type] {str}
@@ -5433,7 +5385,6 @@ class GeneratedAPIClient():
         self, inline_hook
     ):
         """
-        Success
         Args:
             {inline_hook}
         Returns:
@@ -5759,7 +5710,6 @@ class GeneratedAPIClient():
         self
     ):
         """
-        Success
         Args:
         Returns:
             list: Collection of LinkedObject instances.
@@ -5797,7 +5747,6 @@ class GeneratedAPIClient():
         self, linked_object
     ):
         """
-        Success
         Args:
             {linked_object}
         Returns:
@@ -5836,7 +5785,6 @@ class GeneratedAPIClient():
         self, linkedObjectName
     ):
         """
-        Success
         Args:
             linked_object_name {str}
         """
@@ -5867,7 +5815,6 @@ class GeneratedAPIClient():
         self, linkedObjectName
     ):
         """
-        Success
         Args:
             linked_object_name {str}
         Returns:
@@ -7039,7 +6986,6 @@ class GeneratedAPIClient():
         self, query_params
     ):
         """
-        Success
         Args:
             query_params {dict}: Map of query parameters for request
             [query_params.q] {str}
@@ -7084,7 +7030,6 @@ class GeneratedAPIClient():
         self, trusted_origin
     ):
         """
-        Success
         Args:
             {trusted_origin}
         Returns:
@@ -7123,7 +7068,6 @@ class GeneratedAPIClient():
         self, trustedOriginId
     ):
         """
-        Success
         Args:
             trusted_origin_id {str}
         """
@@ -7153,7 +7097,6 @@ class GeneratedAPIClient():
         self, trustedOriginId
     ):
         """
-        Success
         Args:
             trusted_origin_id {str}
         Returns:
@@ -7192,7 +7135,6 @@ class GeneratedAPIClient():
         self, trustedOriginId, trusted_origin
     ):
         """
-        Success
         Args:
             trusted_origin_id {str}
             {trusted_origin}
@@ -7232,7 +7174,6 @@ class GeneratedAPIClient():
         self, trustedOriginId
     ):
         """
-        Success
         Args:
             trusted_origin_id {str}
         Returns:
@@ -7272,7 +7213,6 @@ class GeneratedAPIClient():
         self, trustedOriginId
     ):
         """
-        Success
         Args:
             trusted_origin_id {str}
         Returns:
@@ -9353,7 +9293,6 @@ class GeneratedAPIClient():
         self, userId, roleId
     ):
         """
-        Success
         Args:
             user_id {str}
             role_id {str}
@@ -9385,7 +9324,6 @@ class GeneratedAPIClient():
         self, userId, roleId, appName
     ):
         """
-        Success
         Args:
             user_id {str}
             role_id {str}
@@ -9418,7 +9356,6 @@ class GeneratedAPIClient():
         self, userId, roleId, appName
     ):
         """
-        Success
         Args:
             user_id {str}
             role_id {str}
@@ -9521,7 +9458,6 @@ class GeneratedAPIClient():
         self, userId, roleId, query_params
     ):
         """
-        Success
         Args:
             user_id {str}
             role_id {str}
@@ -9567,7 +9503,6 @@ class GeneratedAPIClient():
         self, userId, roleId, groupId
     ):
         """
-        Success
         Args:
             user_id {str}
             role_id {str}
@@ -9600,7 +9535,6 @@ class GeneratedAPIClient():
         self, userId, roleId, groupId
     ):
         """
-        Success
         Args:
             user_id {str}
             role_id {str}

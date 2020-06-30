@@ -21,18 +21,30 @@ limitations under the License.
 class WsFederationApplicationSettingsApplication:
     def __init__(self, config=None):
         if config:
-            self.attribute_statements = config["attributeStatements"]
-            self.audience_restriction = config["audienceRestriction"]
-            self.authn_context_class_ref = config["authnContextClassRef"]
-            self.group_filter = config["groupFilter"]
-            self.group_name = config["groupName"]
-            self.group_value_format = config["groupValueFormat"]
-            self.name_id_format = config["nameIDFormat"]
-            self.realm = config["realm"]
-            self.site_url = config["siteURL"]
-            self.username_attribute = config["usernameAttribute"]
-            self.w_reply_override = config["wReplyOverride"]
-            self.w_reply_url = config["wReplyURL"]
+            self.attribute_statements = config["attributeStatements"]\
+                if "attributeStatements" in config else None
+            self.audience_restriction = config["audienceRestriction"]\
+                if "audienceRestriction" in config else None
+            self.authn_context_class_ref = config["authnContextClassRef"]\
+                if "authnContextClassRef" in config else None
+            self.group_filter = config["groupFilter"]\
+                if "groupFilter" in config else None
+            self.group_name = config["groupName"]\
+                if "groupName" in config else None
+            self.group_value_format = config["groupValueFormat"]\
+                if "groupValueFormat" in config else None
+            self.name_id_format = config["nameIDFormat"]\
+                if "nameIDFormat" in config else None
+            self.realm = config["realm"]\
+                if "realm" in config else None
+            self.site_url = config["siteURL"]\
+                if "siteURL" in config else None
+            self.username_attribute = config["usernameAttribute"]\
+                if "usernameAttribute" in config else None
+            self.w_reply_override = config["wReplyOverride"]\
+                if "wReplyOverride" in config else None
+            self.w_reply_url = config["wReplyURL"]\
+                if "wReplyURL" in config else None
         else:
             self.attribute_statements = None
             self.audience_restriction = None

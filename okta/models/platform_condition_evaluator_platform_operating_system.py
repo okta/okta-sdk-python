@@ -21,9 +21,12 @@ limitations under the License.
 class PlatformConditionEvaluatorPlatformOperatingSystem:
     def __init__(self, config=None):
         if config:
-            self.expression = config["expression"]
-            self.type = config["type"]
-            self.version = config["version"]
+            self.expression = config["expression"]\
+                if "expression" in config else None
+            self.type = config["type"]\
+                if "type" in config else None
+            self.version = config["version"]\
+                if "version" in config else None
         else:
             self.expression = None
             self.type = None

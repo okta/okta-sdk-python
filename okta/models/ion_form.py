@@ -21,15 +21,24 @@ limitations under the License.
 class IonForm:
     def __init__(self, config=None):
         if config:
-            self.accepts = config["accepts"]
-            self.href = config["href"]
-            self.method = config["method"]
-            self.name = config["name"]
-            self.produces = config["produces"]
-            self.refresh = config["refresh"]
-            self.rel = config["rel"]
-            self.relates_to = config["relatesTo"]
-            self.value = config["value"]
+            self.accepts = config["accepts"]\
+                if "accepts" in config else None
+            self.href = config["href"]\
+                if "href" in config else None
+            self.method = config["method"]\
+                if "method" in config else None
+            self.name = config["name"]\
+                if "name" in config else None
+            self.produces = config["produces"]\
+                if "produces" in config else None
+            self.refresh = config["refresh"]\
+                if "refresh" in config else None
+            self.rel = config["rel"]\
+                if "rel" in config else None
+            self.relates_to = config["relatesTo"]\
+                if "relatesTo" in config else None
+            self.value = config["value"]\
+                if "value" in config else None
         else:
             self.accepts = None
             self.href = None

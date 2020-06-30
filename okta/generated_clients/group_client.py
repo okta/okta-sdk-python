@@ -19,6 +19,18 @@ limitations under the License.
 
 from urllib.parse import urlencode
 from okta.utils import format_url
+from okta.models.group\
+    import Group
+from okta.models.group_rule\
+    import GroupRule
+from okta.models.application\
+    import Application
+from okta.models.role\
+    import Role
+from okta.models.catalog_application\
+    import CatalogApplication
+from okta.models.user\
+    import User
 
 
 class GroupClient():
@@ -563,8 +575,7 @@ class GroupClient():
             self, groupId, query_params
     ):
         """
-            Success
-        Args:
+            Args:
             group_id {str}
             query_params {dict}: Map of query parameters for request
             [query_params.expand] {str}
@@ -687,8 +698,7 @@ class GroupClient():
             self, groupId, roleId
     ):
         """
-            Success
-        Args:
+            Args:
             group_id {str}
             role_id {str}
         Returns:
@@ -779,8 +789,7 @@ class GroupClient():
             self, groupId, roleId, appName
     ):
         """
-            Success
-        Args:
+            Args:
             group_id {str}
             role_id {str}
             app_name {str}
@@ -813,8 +822,7 @@ class GroupClient():
             self, groupId, roleId, appName
     ):
         """
-            Success
-        Args:
+            Args:
             group_id {str}
             role_id {str}
             app_name {str}
@@ -919,8 +927,7 @@ class GroupClient():
             self, groupId, roleId, query_params
     ):
         """
-            Success
-        Args:
+            Args:
             group_id {str}
             role_id {str}
             query_params {dict}: Map of query parameters for request

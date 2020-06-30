@@ -21,16 +21,26 @@ limitations under the License.
 class IdentityProvider:
     def __init__(self, config=None):
         if config:
-            self.links = config["_links"]
-            self.created = config["created"]
-            self.id = config["id"]
-            self.issuer_mode = config["issuerMode"]
-            self.last_updated = config["lastUpdated"]
-            self.name = config["name"]
-            self.policy = config["policy"]
-            self.protocol = config["protocol"]
-            self.status = config["status"]
-            self.type = config["type"]
+            self.links = config["_links"]\
+                if "_links" in config else None
+            self.created = config["created"]\
+                if "created" in config else None
+            self.id = config["id"]\
+                if "id" in config else None
+            self.issuer_mode = config["issuerMode"]\
+                if "issuerMode" in config else None
+            self.last_updated = config["lastUpdated"]\
+                if "lastUpdated" in config else None
+            self.name = config["name"]\
+                if "name" in config else None
+            self.policy = config["policy"]\
+                if "policy" in config else None
+            self.protocol = config["protocol"]\
+                if "protocol" in config else None
+            self.status = config["status"]\
+                if "status" in config else None
+            self.type = config["type"]\
+                if "type" in config else None
         else:
             self.links = None
             self.created = None

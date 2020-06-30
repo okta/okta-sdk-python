@@ -21,9 +21,12 @@ limitations under the License.
 class InlineHookResponseCommandValue:
     def __init__(self, config=None):
         if config:
-            self.op = config["op"]
-            self.path = config["path"]
-            self.value = config["value"]
+            self.op = config["op"]\
+                if "op" in config else None
+            self.path = config["path"]\
+                if "path" in config else None
+            self.value = config["value"]\
+                if "value" in config else None
         else:
             self.op = None
             self.path = None

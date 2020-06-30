@@ -21,8 +21,10 @@ limitations under the License.
 class AuthenticationProvider:
     def __init__(self, config=None):
         if config:
-            self.name = config["name"]
-            self.type = config["type"]
+            self.name = config["name"]\
+                if "name" in config else None
+            self.type = config["type"]\
+                if "type" in config else None
         else:
             self.name = None
             self.type = None

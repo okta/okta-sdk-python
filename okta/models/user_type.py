@@ -21,16 +21,26 @@ limitations under the License.
 class UserType:
     def __init__(self, config=None):
         if config:
-            self.links = config["_links"]
-            self.created = config["created"]
-            self.created_by = config["createdBy"]
-            self.default = config["default"]
-            self.description = config["description"]
-            self.display_name = config["displayName"]
-            self.id = config["id"]
-            self.last_updated = config["lastUpdated"]
-            self.last_updated_by = config["lastUpdatedBy"]
-            self.name = config["name"]
+            self.links = config["_links"]\
+                if "_links" in config else None
+            self.created = config["created"]\
+                if "created" in config else None
+            self.created_by = config["createdBy"]\
+                if "createdBy" in config else None
+            self.default = config["default"]\
+                if "default" in config else None
+            self.description = config["description"]\
+                if "description" in config else None
+            self.display_name = config["displayName"]\
+                if "displayName" in config else None
+            self.id = config["id"]\
+                if "id" in config else None
+            self.last_updated = config["lastUpdated"]\
+                if "lastUpdated" in config else None
+            self.last_updated_by = config["lastUpdatedBy"]\
+                if "lastUpdatedBy" in config else None
+            self.name = config["name"]\
+                if "name" in config else None
         else:
             self.links = None
             self.created = None

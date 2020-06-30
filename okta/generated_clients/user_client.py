@@ -19,6 +19,36 @@ limitations under the License.
 
 from urllib.parse import urlencode
 from okta.utils import format_url
+from okta.models.user\
+    import User
+from okta.models.app_link\
+    import AppLink
+from okta.models.o_auth_2_client\
+    import OAuth2Client
+from okta.models.o_auth_2_scope_consent_grant\
+    import OAuth2ScopeConsentGrant
+from okta.models.o_auth_2_refresh_token\
+    import OAuth2RefreshToken
+from okta.models.user_credentials\
+    import UserCredentials
+from okta.models.forgot_password_response\
+    import ForgotPasswordResponse
+from okta.models.group\
+    import Group
+from okta.models.identity_provider\
+    import IdentityProvider
+from okta.models.user_activation_token\
+    import UserActivationToken
+from okta.models.temp_password\
+    import TempPassword
+from okta.models.reset_password_token\
+    import ResetPasswordToken
+from okta.models.response_links\
+    import ResponseLinks
+from okta.models.role\
+    import Role
+from okta.models.catalog_application\
+    import CatalogApplication
 
 
 class UserClient():
@@ -1764,8 +1794,7 @@ class UserClient():
             self, userId, roleId
     ):
         """
-            Success
-        Args:
+            Args:
             user_id {str}
             role_id {str}
         """
@@ -1797,8 +1826,7 @@ class UserClient():
             self, userId, roleId, appName
     ):
         """
-            Success
-        Args:
+            Args:
             user_id {str}
             role_id {str}
             app_name {str}
@@ -1831,8 +1859,7 @@ class UserClient():
             self, userId, roleId, appName
     ):
         """
-            Success
-        Args:
+            Args:
             user_id {str}
             role_id {str}
             app_name {str}
@@ -1937,8 +1964,7 @@ class UserClient():
             self, userId, roleId, query_params
     ):
         """
-            Success
-        Args:
+            Args:
             user_id {str}
             role_id {str}
             query_params {dict}: Map of query parameters for request
@@ -1984,8 +2010,7 @@ class UserClient():
             self, userId, roleId, groupId
     ):
         """
-            Success
-        Args:
+            Args:
             user_id {str}
             role_id {str}
             group_id {str}
@@ -2018,8 +2043,7 @@ class UserClient():
             self, userId, roleId, groupId
     ):
         """
-            Success
-        Args:
+            Args:
             user_id {str}
             role_id {str}
             group_id {str}

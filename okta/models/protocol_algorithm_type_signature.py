@@ -21,8 +21,10 @@ limitations under the License.
 class ProtocolAlgorithmTypeSignature:
     def __init__(self, config=None):
         if config:
-            self.algorithm = config["algorithm"]
-            self.scope = config["scope"]
+            self.algorithm = config["algorithm"]\
+                if "algorithm" in config else None
+            self.scope = config["scope"]\
+                if "scope" in config else None
         else:
             self.algorithm = None
             self.scope = None

@@ -21,11 +21,16 @@ limitations under the License.
 class PasswordCredentialHash:
     def __init__(self, config=None):
         if config:
-            self.algorithm = config["algorithm"]
-            self.salt = config["salt"]
-            self.salt_order = config["saltOrder"]
-            self.value = config["value"]
-            self.worker_factor = config["workerFactor"]
+            self.algorithm = config["algorithm"]\
+                if "algorithm" in config else None
+            self.salt = config["salt"]\
+                if "salt" in config else None
+            self.salt_order = config["saltOrder"]\
+                if "saltOrder" in config else None
+            self.value = config["value"]\
+                if "value" in config else None
+            self.worker_factor = config["workerFactor"]\
+                if "workerFactor" in config else None
         else:
             self.algorithm = None
             self.salt = None

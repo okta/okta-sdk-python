@@ -21,11 +21,16 @@ limitations under the License.
 class SwaApplicationSettingsApplication:
     def __init__(self, config=None):
         if config:
-            self.button_field = config["buttonField"]
-            self.login_url_regex = config["loginUrlRegex"]
-            self.password_field = config["passwordField"]
-            self.url = config["url"]
-            self.username_field = config["usernameField"]
+            self.button_field = config["buttonField"]\
+                if "buttonField" in config else None
+            self.login_url_regex = config["loginUrlRegex"]\
+                if "loginUrlRegex" in config else None
+            self.password_field = config["passwordField"]\
+                if "passwordField" in config else None
+            self.url = config["url"]\
+                if "url" in config else None
+            self.username_field = config["usernameField"]\
+                if "usernameField" in config else None
         else:
             self.button_field = None
             self.login_url_regex = None

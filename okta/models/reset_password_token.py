@@ -21,7 +21,8 @@ limitations under the License.
 class ResetPasswordToken:
     def __init__(self, config=None):
         if config:
-            self.reset_password_url = config["resetPasswordUrl"]
+            self.reset_password_url = config["resetPasswordUrl"]\
+                if "resetPasswordUrl" in config else None
         else:
             self.reset_password_url = None
 

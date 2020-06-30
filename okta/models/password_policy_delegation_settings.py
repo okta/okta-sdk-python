@@ -21,7 +21,8 @@ limitations under the License.
 class PasswordPolicyDelegationSettings:
     def __init__(self, config=None):
         if config:
-            self.options = config["options"]
+            self.options = config["options"]\
+                if "options" in config else None
         else:
             self.options = None
 

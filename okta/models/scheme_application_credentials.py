@@ -21,11 +21,16 @@ limitations under the License.
 class SchemeApplicationCredentials:
     def __init__(self, config=None):
         if config:
-            self.password = config["password"]
-            self.reveal_password = config["revealPassword"]
-            self.scheme = config["scheme"]
-            self.signing = config["signing"]
-            self.user_name = config["userName"]
+            self.password = config["password"]\
+                if "password" in config else None
+            self.reveal_password = config["revealPassword"]\
+                if "revealPassword" in config else None
+            self.scheme = config["scheme"]\
+                if "scheme" in config else None
+            self.signing = config["signing"]\
+                if "signing" in config else None
+            self.user_name = config["userName"]\
+                if "userName" in config else None
         else:
             self.password = None
             self.reveal_password = None

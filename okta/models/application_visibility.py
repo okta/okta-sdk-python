@@ -21,9 +21,12 @@ limitations under the License.
 class ApplicationVisibility:
     def __init__(self, config=None):
         if config:
-            self.app_links = config["appLinks"]
-            self.auto_submit_toolbar = config["autoSubmitToolbar"]
-            self.hide = config["hide"]
+            self.app_links = config["appLinks"]\
+                if "appLinks" in config else None
+            self.auto_submit_toolbar = config["autoSubmitToolbar"]\
+                if "autoSubmitToolbar" in config else None
+            self.hide = config["hide"]\
+                if "hide" in config else None
         else:
             self.app_links = None
             self.auto_submit_toolbar = None

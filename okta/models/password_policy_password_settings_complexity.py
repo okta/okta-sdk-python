@@ -21,14 +21,22 @@ limitations under the License.
 class PasswordPolicyPasswordSettingsComplexity:
     def __init__(self, config=None):
         if config:
-            self.dictionary = config["dictionary"]
-            self.exclude_attributes = config["excludeAttributes"]
-            self.exclude_username = config["excludeUsername"]
-            self.min_length = config["minLength"]
-            self.min_lower_case = config["minLowerCase"]
-            self.min_number = config["minNumber"]
-            self.min_symbol = config["minSymbol"]
-            self.min_upper_case = config["minUpperCase"]
+            self.dictionary = config["dictionary"]\
+                if "dictionary" in config else None
+            self.exclude_attributes = config["excludeAttributes"]\
+                if "excludeAttributes" in config else None
+            self.exclude_username = config["excludeUsername"]\
+                if "excludeUsername" in config else None
+            self.min_length = config["minLength"]\
+                if "minLength" in config else None
+            self.min_lower_case = config["minLowerCase"]\
+                if "minLowerCase" in config else None
+            self.min_number = config["minNumber"]\
+                if "minNumber" in config else None
+            self.min_symbol = config["minSymbol"]\
+                if "minSymbol" in config else None
+            self.min_upper_case = config["minUpperCase"]\
+                if "minUpperCase" in config else None
         else:
             self.dictionary = None
             self.exclude_attributes = "1"

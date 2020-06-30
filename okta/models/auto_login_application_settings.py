@@ -21,7 +21,8 @@ limitations under the License.
 class AutoLoginApplicationSettings:
     def __init__(self, config=None):
         if config:
-            self.sign_on = config["signOn"]
+            self.sign_on = config["signOn"]\
+                if "signOn" in config else None
         else:
             self.sign_on = None
 

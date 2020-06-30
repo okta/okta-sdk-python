@@ -21,10 +21,14 @@ limitations under the License.
 class LinkedObjectDetails:
     def __init__(self, config=None):
         if config:
-            self.description = config["description"]
-            self.name = config["name"]
-            self.title = config["title"]
-            self.type = config["type"]
+            self.description = config["description"]\
+                if "description" in config else None
+            self.name = config["name"]\
+                if "name" in config else None
+            self.title = config["title"]\
+                if "title" in config else None
+            self.type = config["type"]\
+                if "type" in config else None
         else:
             self.description = None
             self.name = None

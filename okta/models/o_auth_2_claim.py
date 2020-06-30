@@ -21,17 +21,28 @@ limitations under the License.
 class OAuth2Claim:
     def __init__(self, config=None):
         if config:
-            self.links = config["_links"]
-            self.always_include_in_token = config["alwaysIncludeInToken"]
-            self.claim_type = config["claimType"]
-            self.conditions = config["conditions"]
-            self.group_filter_type = config["group_filter_type"]
-            self.id = config["id"]
-            self.name = config["name"]
-            self.status = config["status"]
-            self.system = config["system"]
-            self.value = config["value"]
-            self.value_type = config["valueType"]
+            self.links = config["_links"]\
+                if "_links" in config else None
+            self.always_include_in_token = config["alwaysIncludeInToken"]\
+                if "alwaysIncludeInToken" in config else None
+            self.claim_type = config["claimType"]\
+                if "claimType" in config else None
+            self.conditions = config["conditions"]\
+                if "conditions" in config else None
+            self.group_filter_type = config["group_filter_type"]\
+                if "group_filter_type" in config else None
+            self.id = config["id"]\
+                if "id" in config else None
+            self.name = config["name"]\
+                if "name" in config else None
+            self.status = config["status"]\
+                if "status" in config else None
+            self.system = config["system"]\
+                if "system" in config else None
+            self.value = config["value"]\
+                if "value" in config else None
+            self.value_type = config["valueType"]\
+                if "valueType" in config else None
         else:
             self.links = None
             self.always_include_in_token = None

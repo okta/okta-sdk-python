@@ -21,11 +21,16 @@ limitations under the License.
 class OAuth2Client:
     def __init__(self, config=None):
         if config:
-            self.links = config["_links"]
-            self.client_id = config["client_id"]
-            self.client_name = config["client_name"]
-            self.client_uri = config["client_uri"]
-            self.logo_uri = config["logo_uri"]
+            self.links = config["_links"]\
+                if "_links" in config else None
+            self.client_id = config["client_id"]\
+                if "client_id" in config else None
+            self.client_name = config["client_name"]\
+                if "client_name" in config else None
+            self.client_uri = config["client_uri"]\
+                if "client_uri" in config else None
+            self.logo_uri = config["logo_uri"]\
+                if "logo_uri" in config else None
         else:
             self.links = None
             self.client_id = None

@@ -21,8 +21,10 @@ limitations under the License.
 class PasswordPolicyRecoveryQuestion:
     def __init__(self, config=None):
         if config:
-            self.properties = config["properties"]
-            self.status = config["status"]
+            self.properties = config["properties"]\
+                if "properties" in config else None
+            self.status = config["status"]\
+                if "status" in config else None
         else:
             self.properties = None
             self.status = None

@@ -21,11 +21,16 @@ limitations under the License.
 class VerifyUserFactorResponse:
     def __init__(self, config=None):
         if config:
-            self.embedded = config["_embedded"]
-            self.links = config["_links"]
-            self.expires_at = config["expiresAt"]
-            self.factor_result = config["factorResult"]
-            self.factor_result_message = config["factorResultMessage"]
+            self.embedded = config["_embedded"]\
+                if "_embedded" in config else None
+            self.links = config["_links"]\
+                if "_links" in config else None
+            self.expires_at = config["expiresAt"]\
+                if "expiresAt" in config else None
+            self.factor_result = config["factorResult"]\
+                if "factorResult" in config else None
+            self.factor_result_message = config["factorResultMessage"]\
+                if "factorResultMessage" in config else None
         else:
             self.embedded = None
             self.links = None

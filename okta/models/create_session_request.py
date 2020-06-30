@@ -21,7 +21,8 @@ limitations under the License.
 class CreateSessionRequest:
     def __init__(self, config=None):
         if config:
-            self.session_token = config["sessionToken"]
+            self.session_token = config["sessionToken"]\
+                if "sessionToken" in config else None
         else:
             self.session_token = None
 

@@ -21,27 +21,48 @@ limitations under the License.
 class PolicyRuleConditions:
     def __init__(self, config=None):
         if config:
-            self.app = config["app"]
-            self.apps = config["apps"]
-            self.auth_context = config["authContext"]
-            self.auth_provider = config["authProvider"]
-            self.before_scheduled_action = config["beforeScheduledAction"]
-            self.clients = config["clients"]
-            self.context = config["context"]
-            self.device = config["device"]
-            self.grant_types = config["grantTypes"]
-            self.groups = config["groups"]
-            self.identity_provider = config["identityProvider"]
-            self.mdm_enrollment = config["mdmEnrollment"]
-            self.network = config["network"]
-            self.people = config["people"]
-            self.platform = config["platform"]
-            self.risk = config["risk"]
-            self.risk_score = config["riskScore"]
-            self.scopes = config["scopes"]
-            self.user_identifier = config["userIdentifier"]
-            self.user_status = config["userStatus"]
-            self.users = config["users"]
+            self.app = config["app"]\
+                if "app" in config else None
+            self.apps = config["apps"]\
+                if "apps" in config else None
+            self.auth_context = config["authContext"]\
+                if "authContext" in config else None
+            self.auth_provider = config["authProvider"]\
+                if "authProvider" in config else None
+            self.before_scheduled_action = config["beforeScheduledAction"]\
+                if "beforeScheduledAction" in config else None
+            self.clients = config["clients"]\
+                if "clients" in config else None
+            self.context = config["context"]\
+                if "context" in config else None
+            self.device = config["device"]\
+                if "device" in config else None
+            self.grant_types = config["grantTypes"]\
+                if "grantTypes" in config else None
+            self.groups = config["groups"]\
+                if "groups" in config else None
+            self.identity_provider = config["identityProvider"]\
+                if "identityProvider" in config else None
+            self.mdm_enrollment = config["mdmEnrollment"]\
+                if "mdmEnrollment" in config else None
+            self.network = config["network"]\
+                if "network" in config else None
+            self.people = config["people"]\
+                if "people" in config else None
+            self.platform = config["platform"]\
+                if "platform" in config else None
+            self.risk = config["risk"]\
+                if "risk" in config else None
+            self.risk_score = config["riskScore"]\
+                if "riskScore" in config else None
+            self.scopes = config["scopes"]\
+                if "scopes" in config else None
+            self.user_identifier = config["userIdentifier"]\
+                if "userIdentifier" in config else None
+            self.user_status = config["userStatus"]\
+                if "userStatus" in config else None
+            self.users = config["users"]\
+                if "users" in config else None
         else:
             self.app = None
             self.apps = None

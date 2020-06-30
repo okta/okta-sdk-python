@@ -21,7 +21,8 @@ limitations under the License.
 class InlineHookResponse:
     def __init__(self, config=None):
         if config:
-            self.commands = config["commands"]
+            self.commands = config["commands"]\
+                if "commands" in config else None
         else:
             self.commands = None
 

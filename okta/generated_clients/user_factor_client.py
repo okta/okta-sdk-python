@@ -19,6 +19,12 @@ limitations under the License.
 
 from urllib.parse import urlencode
 from okta.utils import format_url
+from okta.models.user_factor\
+    import UserFactor
+from okta.models.security_question\
+    import SecurityQuestion
+from okta.models.verify_user_factor_response\
+    import VerifyUserFactorResponse
 
 
 class UserFactorClient():

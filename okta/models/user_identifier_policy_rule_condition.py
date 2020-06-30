@@ -21,9 +21,12 @@ limitations under the License.
 class UserIdentifierPolicyRuleCondition:
     def __init__(self, config=None):
         if config:
-            self.attribute = config["attribute"]
-            self.patterns = config["patterns"]
-            self.type = config["type"]
+            self.attribute = config["attribute"]\
+                if "attribute" in config else None
+            self.patterns = config["patterns"]\
+                if "patterns" in config else None
+            self.type = config["type"]\
+                if "type" in config else None
         else:
             self.attribute = None
             self.patterns = None

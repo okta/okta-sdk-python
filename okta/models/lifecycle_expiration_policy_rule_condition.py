@@ -21,9 +21,12 @@ limitations under the License.
 class LifecycleExpirationPolicyRuleCondition:
     def __init__(self, config=None):
         if config:
-            self.lifecycle_status = config["lifecycleStatus"]
-            self.number = config["number"]
-            self.unit = config["unit"]
+            self.lifecycle_status = config["lifecycleStatus"]\
+                if "lifecycleStatus" in config else None
+            self.number = config["number"]\
+                if "number" in config else None
+            self.unit = config["unit"]\
+                if "unit" in config else None
         else:
             self.lifecycle_status = None
             self.number = None

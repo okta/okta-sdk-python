@@ -19,6 +19,8 @@ limitations under the License.
 
 from urllib.parse import urlencode
 from okta.utils import format_url
+from okta.models.feature\
+    import Feature
 
 
 class FeatureClient():
@@ -32,8 +34,7 @@ class FeatureClient():
             self
     ):
         """
-            Success
-        Args:
+            Args:
         Returns:
             list: Collection of Feature instances.
         """
@@ -71,8 +72,7 @@ class FeatureClient():
             self, featureId
     ):
         """
-            Success
-        Args:
+            Args:
             feature_id {str}
         Returns:
             Feature
@@ -111,8 +111,7 @@ class FeatureClient():
             self, featureId
     ):
         """
-            Success
-        Args:
+            Args:
             feature_id {str}
         Returns:
             list: Collection of Feature instances.
@@ -151,8 +150,7 @@ class FeatureClient():
             self, featureId
     ):
         """
-            Success
-        Args:
+            Args:
             feature_id {str}
         Returns:
             list: Collection of Feature instances.
@@ -191,8 +189,7 @@ class FeatureClient():
             self, featureId, lifecycle, query_params
     ):
         """
-            Success
-        Args:
+            Args:
             feature_id {str}
             lifecycle {str}
             query_params {dict}: Map of query parameters for request

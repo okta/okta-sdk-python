@@ -21,10 +21,14 @@ limitations under the License.
 class PasswordPolicyRecoveryFactors:
     def __init__(self, config=None):
         if config:
-            self.okta_call = config["okta_call"]
-            self.okta_email = config["okta_email"]
-            self.okta_sms = config["okta_sms"]
-            self.recovery_question = config["recovery_question"]
+            self.okta_call = config["okta_call"]\
+                if "okta_call" in config else None
+            self.okta_email = config["okta_email"]\
+                if "okta_email" in config else None
+            self.okta_sms = config["okta_sms"]\
+                if "okta_sms" in config else None
+            self.recovery_question = config["recovery_question"]\
+                if "recovery_question" in config else None
         else:
             self.okta_call = None
             self.okta_email = None

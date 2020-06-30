@@ -21,9 +21,12 @@ limitations under the License.
 class InlineHookChannelConfig:
     def __init__(self, config=None):
         if config:
-            self.auth_scheme = config["authScheme"]
-            self.headers = config["headers"]
-            self.uri = config["uri"]
+            self.auth_scheme = config["authScheme"]\
+                if "authScheme" in config else None
+            self.headers = config["headers"]\
+                if "headers" in config else None
+            self.uri = config["uri"]\
+                if "uri" in config else None
         else:
             self.auth_scheme = None
             self.headers = None

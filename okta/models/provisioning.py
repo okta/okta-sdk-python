@@ -21,10 +21,14 @@ limitations under the License.
 class Provisioning:
     def __init__(self, config=None):
         if config:
-            self.action = config["action"]
-            self.conditions = config["conditions"]
-            self.groups = config["groups"]
-            self.profile_master = config["profileMaster"]
+            self.action = config["action"]\
+                if "action" in config else None
+            self.conditions = config["conditions"]\
+                if "conditions" in config else None
+            self.groups = config["groups"]\
+                if "groups" in config else None
+            self.profile_master = config["profileMaster"]\
+                if "profileMaster" in config else None
         else:
             self.action = None
             self.conditions = None

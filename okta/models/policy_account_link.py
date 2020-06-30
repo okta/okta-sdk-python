@@ -21,8 +21,10 @@ limitations under the License.
 class PolicyAccountLink:
     def __init__(self, config=None):
         if config:
-            self.action = config["action"]
-            self.filter = config["filter"]
+            self.action = config["action"]\
+                if "action" in config else None
+            self.filter = config["filter"]\
+                if "filter" in config else None
         else:
             self.action = None
             self.filter = None

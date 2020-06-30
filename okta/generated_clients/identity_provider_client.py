@@ -19,6 +19,16 @@ limitations under the License.
 
 from urllib.parse import urlencode
 from okta.utils import format_url
+from okta.models.identity_provider\
+    import IdentityProvider
+from okta.models.json_web_key\
+    import JsonWebKey
+from okta.models.csr\
+    import Csr
+from okta.models.identity_provider_application_user\
+    import IdentityProviderApplicationUser
+from okta.models.social_auth_token\
+    import SocialAuthToken
 
 
 class IdentityProviderClient():
@@ -623,6 +633,8 @@ class IdentityProviderClient():
             """)
 
         # TODO for when body format is binary
+        body = None
+        headers = None
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -715,6 +727,8 @@ class IdentityProviderClient():
             """)
 
         # TODO for when body format is binary
+        body = None
+        headers = None
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -759,6 +773,8 @@ class IdentityProviderClient():
             """)
 
         # TODO for when body format is binary
+        body = None
+        headers = None
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers

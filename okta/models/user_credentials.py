@@ -21,9 +21,12 @@ limitations under the License.
 class UserCredentials:
     def __init__(self, config=None):
         if config:
-            self.password = config["password"]
-            self.provider = config["provider"]
-            self.recovery_question = config["recovery_question"]
+            self.password = config["password"]\
+                if "password" in config else None
+            self.provider = config["provider"]\
+                if "provider" in config else None
+            self.recovery_question = config["recovery_question"]\
+                if "recovery_question" in config else None
         else:
             self.password = None
             self.provider = None

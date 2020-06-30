@@ -21,9 +21,12 @@ limitations under the License.
 class LogTransaction:
     def __init__(self, config=None):
         if config:
-            self.detail = config["detail"]
-            self.id = config["id"]
-            self.type = config["type"]
+            self.detail = config["detail"]\
+                if "detail" in config else None
+            self.id = config["id"]\
+                if "id" in config else None
+            self.type = config["type"]\
+                if "type" in config else None
         else:
             self.detail = None
             self.id = None

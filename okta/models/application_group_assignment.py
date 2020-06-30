@@ -21,12 +21,18 @@ limitations under the License.
 class ApplicationGroupAssignment:
     def __init__(self, config=None):
         if config:
-            self.embedded = config["_embedded"]
-            self.links = config["_links"]
-            self.id = config["id"]
-            self.last_updated = config["lastUpdated"]
-            self.priority = config["priority"]
-            self.profile = config["profile"]
+            self.embedded = config["_embedded"]\
+                if "_embedded" in config else None
+            self.links = config["_links"]\
+                if "_links" in config else None
+            self.id = config["id"]\
+                if "id" in config else None
+            self.last_updated = config["lastUpdated"]\
+                if "lastUpdated" in config else None
+            self.priority = config["priority"]\
+                if "priority" in config else None
+            self.profile = config["profile"]\
+                if "profile" in config else None
         else:
             self.embedded = None
             self.links = None

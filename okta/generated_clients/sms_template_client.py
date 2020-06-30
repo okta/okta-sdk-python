@@ -19,6 +19,8 @@ limitations under the License.
 
 from urllib.parse import urlencode
 from okta.utils import format_url
+from okta.models.sms_template\
+    import SmsTemplate
 
 
 class SmsTemplateClient():

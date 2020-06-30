@@ -21,8 +21,10 @@ limitations under the License.
 class PasswordPolicyAuthenticationProviderCondition:
     def __init__(self, config=None):
         if config:
-            self.include = config["include"]
-            self.provider = config["provider"]
+            self.include = config["include"]\
+                if "include" in config else None
+            self.provider = config["provider"]\
+                if "provider" in config else None
         else:
             self.include = None
             self.provider = None

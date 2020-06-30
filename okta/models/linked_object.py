@@ -21,9 +21,12 @@ limitations under the License.
 class LinkedObject:
     def __init__(self, config=None):
         if config:
-            self.links = config["_links"]
-            self.associated = config["associated"]
-            self.primary = config["primary"]
+            self.links = config["_links"]\
+                if "_links" in config else None
+            self.associated = config["associated"]\
+                if "associated" in config else None
+            self.primary = config["primary"]\
+                if "primary" in config else None
         else:
             self.links = None
             self.associated = None

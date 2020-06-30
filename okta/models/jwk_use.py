@@ -21,7 +21,8 @@ limitations under the License.
 class JwkUse:
     def __init__(self, config=None):
         if config:
-            self.use = config["use"]
+            self.use = config["use"]\
+                if "use" in config else None
         else:
             self.use = None
 

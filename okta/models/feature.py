@@ -21,13 +21,20 @@ limitations under the License.
 class Feature:
     def __init__(self, config=None):
         if config:
-            self.links = config["_links"]
-            self.description = config["description"]
-            self.id = config["id"]
-            self.name = config["name"]
-            self.stage = config["stage"]
-            self.status = config["status"]
-            self.type = config["type"]
+            self.links = config["_links"]\
+                if "_links" in config else None
+            self.description = config["description"]\
+                if "description" in config else None
+            self.id = config["id"]\
+                if "id" in config else None
+            self.name = config["name"]\
+                if "name" in config else None
+            self.stage = config["stage"]\
+                if "stage" in config else None
+            self.status = config["status"]\
+                if "status" in config else None
+            self.type = config["type"]\
+                if "type" in config else None
         else:
             self.links = None
             self.description = None

@@ -18,6 +18,8 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.utils import format_url
+from okta.models.event_hook\
+    import EventHook
 
 
 class EventHookClient():
@@ -31,8 +33,7 @@ class EventHookClient():
             self
     ):
         """
-            Success
-        Args:
+            Args:
         Returns:
             list: Collection of EventHook instances.
         """
@@ -70,8 +71,7 @@ class EventHookClient():
             self, event_hook
     ):
         """
-            Success
-        Args:
+            Args:
             {event_hook}
         Returns:
             EventHook
@@ -113,8 +113,7 @@ class EventHookClient():
             self, eventHookId
     ):
         """
-            Success
-        Args:
+            Args:
             event_hook_id {str}
         """
         http_method = "delete".upper()
@@ -144,8 +143,7 @@ class EventHookClient():
             self, eventHookId
     ):
         """
-            Success
-        Args:
+            Args:
             event_hook_id {str}
         Returns:
             EventHook
@@ -184,8 +182,7 @@ class EventHookClient():
             self, eventHookId, event_hook
     ):
         """
-            Success
-        Args:
+            Args:
             event_hook_id {str}
             {event_hook}
         Returns:
@@ -228,8 +225,7 @@ class EventHookClient():
             self, eventHookId
     ):
         """
-            Success
-        Args:
+            Args:
             event_hook_id {str}
         Returns:
             EventHook
@@ -268,8 +264,7 @@ class EventHookClient():
             self, eventHookId
     ):
         """
-            Success
-        Args:
+            Args:
             event_hook_id {str}
         Returns:
             EventHook
@@ -309,8 +304,7 @@ class EventHookClient():
             self, eventHookId
     ):
         """
-            Success
-        Args:
+            Args:
             event_hook_id {str}
         Returns:
             EventHook

@@ -21,7 +21,8 @@ limitations under the License.
 class PasswordCredentialHook:
     def __init__(self, config=None):
         if config:
-            self.type = config["type"]
+            self.type = config["type"]\
+                if "type" in config else None
         else:
             self.type = None
 

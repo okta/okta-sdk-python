@@ -21,18 +21,30 @@ limitations under the License.
 class CatalogApplication:
     def __init__(self, config=None):
         if config:
-            self.links = config["_links"]
-            self.category = config["category"]
-            self.description = config["description"]
-            self.display_name = config["displayName"]
-            self.features = config["features"]
-            self.id = config["id"]
-            self.last_updated = config["lastUpdated"]
-            self.name = config["name"]
-            self.sign_on_modes = config["signOnModes"]
-            self.status = config["status"]
-            self.verification_status = config["verificationStatus"]
-            self.website = config["website"]
+            self.links = config["_links"]\
+                if "_links" in config else None
+            self.category = config["category"]\
+                if "category" in config else None
+            self.description = config["description"]\
+                if "description" in config else None
+            self.display_name = config["displayName"]\
+                if "displayName" in config else None
+            self.features = config["features"]\
+                if "features" in config else None
+            self.id = config["id"]\
+                if "id" in config else None
+            self.last_updated = config["lastUpdated"]\
+                if "lastUpdated" in config else None
+            self.name = config["name"]\
+                if "name" in config else None
+            self.sign_on_modes = config["signOnModes"]\
+                if "signOnModes" in config else None
+            self.status = config["status"]\
+                if "status" in config else None
+            self.verification_status = config["verificationStatus"]\
+                if "verificationStatus" in config else None
+            self.website = config["website"]\
+                if "website" in config else None
         else:
             self.links = None
             self.category = None

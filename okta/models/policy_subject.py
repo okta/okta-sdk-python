@@ -21,11 +21,16 @@ limitations under the License.
 class PolicySubject:
     def __init__(self, config=None):
         if config:
-            self.filter = config["filter"]
-            self.format = config["format"]
-            self.match_attribute = config["matchAttribute"]
-            self.match_type = config["matchType"]
-            self.user_name_template = config["userNameTemplate"]
+            self.filter = config["filter"]\
+                if "filter" in config else None
+            self.format = config["format"]\
+                if "format" in config else None
+            self.match_attribute = config["matchAttribute"]\
+                if "matchAttribute" in config else None
+            self.match_type = config["matchType"]\
+                if "matchType" in config else None
+            self.user_name_template = config["userNameTemplate"]\
+                if "userNameTemplate" in config else None
         else:
             self.filter = None
             self.format = None

@@ -21,7 +21,8 @@ limitations under the License.
 class ProtocolSettings:
     def __init__(self, config=None):
         if config:
-            self.name_format = config["nameFormat"]
+            self.name_format = config["nameFormat"]\
+                if "nameFormat" in config else None
         else:
             self.name_format = None
 

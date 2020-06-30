@@ -21,10 +21,14 @@ limitations under the License.
 class Csr:
     def __init__(self, config=None):
         if config:
-            self.created = config["created"]
-            self.csr = config["csr"]
-            self.id = config["id"]
-            self.kty = config["kty"]
+            self.created = config["created"]\
+                if "created" in config else None
+            self.csr = config["csr"]\
+                if "csr" in config else None
+            self.id = config["id"]\
+                if "id" in config else None
+            self.kty = config["kty"]\
+                if "kty" in config else None
         else:
             self.created = None
             self.csr = None

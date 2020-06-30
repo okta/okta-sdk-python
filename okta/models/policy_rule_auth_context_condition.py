@@ -21,7 +21,8 @@ limitations under the License.
 class PolicyRuleAuthContextCondition:
     def __init__(self, config=None):
         if config:
-            self.auth_type = config["authType"]
+            self.auth_type = config["authType"]\
+                if "authType" in config else None
         else:
             self.auth_type = None
 

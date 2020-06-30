@@ -107,6 +107,7 @@ py.process = ({ spec, operations, models, handlebars }) => {
     displayMethodName,
     multilineURL,
     importURLEncode,
+    getResourceImports,
   });
 
   handlebars.registerPartial(
@@ -172,7 +173,9 @@ function pyDocstringBuilder(method) {
 
   let descString = method.description || `Method for\n${method.path}`;
   descString.match(/.{1,55}/g).forEach((line) => {
-    docs.push(`${ONE_TAB}${line.trim()}`);
+    if (!line.toLowerCase().includes("success")) {
+      docs.push(`${ONE_TAB}${line.trim()}`);
+    }
   });
 
   docs.push(`${ONE_TAB}Args:`);
@@ -265,4 +268,14 @@ function importURLEncode(operations) {
       return operation.queryParams.length > 0;
     }).length > 0
   );
+}
+
+function getResourceImports(operations) {
+  let result = new Set();
+  for (let op of operations) {
+    if (op.responseModel) {
+      result.add(op.responseModel);
+    }
+  }
+  return [...result];
 }

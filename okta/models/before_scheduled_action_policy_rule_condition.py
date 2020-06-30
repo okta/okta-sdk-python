@@ -21,8 +21,10 @@ limitations under the License.
 class BeforeScheduledActionPolicyRuleCondition:
     def __init__(self, config=None):
         if config:
-            self.duration = config["duration"]
-            self.lifecycle_action = config["lifecycleAction"]
+            self.duration = config["duration"]\
+                if "duration" in config else None
+            self.lifecycle_action = config["lifecycleAction"]\
+                if "lifecycleAction" in config else None
         else:
             self.duration = None
             self.lifecycle_action = None

@@ -21,16 +21,26 @@ limitations under the License.
 class Role:
     def __init__(self, config=None):
         if config:
-            self.embedded = config["_embedded"]
-            self.links = config["_links"]
-            self.assignment_type = config["assignmentType"]
-            self.created = config["created"]
-            self.description = config["description"]
-            self.id = config["id"]
-            self.label = config["label"]
-            self.last_updated = config["lastUpdated"]
-            self.status = config["status"]
-            self.type = config["type"]
+            self.embedded = config["_embedded"]\
+                if "_embedded" in config else None
+            self.links = config["_links"]\
+                if "_links" in config else None
+            self.assignment_type = config["assignmentType"]\
+                if "assignmentType" in config else None
+            self.created = config["created"]\
+                if "created" in config else None
+            self.description = config["description"]\
+                if "description" in config else None
+            self.id = config["id"]\
+                if "id" in config else None
+            self.label = config["label"]\
+                if "label" in config else None
+            self.last_updated = config["lastUpdated"]\
+                if "lastUpdated" in config else None
+            self.status = config["status"]\
+                if "status" in config else None
+            self.type = config["type"]\
+                if "type" in config else None
         else:
             self.embedded = None
             self.links = None

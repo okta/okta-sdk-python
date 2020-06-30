@@ -21,15 +21,24 @@ limitations under the License.
 class SecurePasswordStoreApplicationSettingsApplication:
     def __init__(self, config=None):
         if config:
-            self.optional_field_1 = config["optionalField1"]
-            self.optional_field_1_value = config["optionalField1Value"]
-            self.optional_field_2 = config["optionalField2"]
-            self.optional_field_2_value = config["optionalField2Value"]
-            self.optional_field_3 = config["optionalField3"]
-            self.optional_field_3_value = config["optionalField3Value"]
-            self.password_field = config["passwordField"]
-            self.url = config["url"]
-            self.username_field = config["usernameField"]
+            self.optional_field_1 = config["optionalField1"]\
+                if "optionalField1" in config else None
+            self.optional_field_1_value = config["optionalField1Value"]\
+                if "optionalField1Value" in config else None
+            self.optional_field_2 = config["optionalField2"]\
+                if "optionalField2" in config else None
+            self.optional_field_2_value = config["optionalField2Value"]\
+                if "optionalField2Value" in config else None
+            self.optional_field_3 = config["optionalField3"]\
+                if "optionalField3" in config else None
+            self.optional_field_3_value = config["optionalField3Value"]\
+                if "optionalField3Value" in config else None
+            self.password_field = config["passwordField"]\
+                if "passwordField" in config else None
+            self.url = config["url"]\
+                if "url" in config else None
+            self.username_field = config["usernameField"]\
+                if "usernameField" in config else None
         else:
             self.optional_field_1 = None
             self.optional_field_1_value = None

@@ -21,10 +21,14 @@ limitations under the License.
 class ApplicationCredentialsOAuthClient:
     def __init__(self, config=None):
         if config:
-            self.auto_key_rotation = config["autoKeyRotation"]
-            self.client_id = config["client_id"]
-            self.client_secret = config["client_secret"]
-            self.token_endpoint_auth_method = config["token_endpoint_auth_method"]
+            self.auto_key_rotation = config["autoKeyRotation"]\
+                if "autoKeyRotation" in config else None
+            self.client_id = config["client_id"]\
+                if "client_id" in config else None
+            self.client_secret = config["client_secret"]\
+                if "client_secret" in config else None
+            self.token_endpoint_auth_method = config["token_endpoint_auth_method"]\
+                if "token_endpoint_auth_method" in config else None
         else:
             self.auto_key_rotation = None
             self.client_id = None

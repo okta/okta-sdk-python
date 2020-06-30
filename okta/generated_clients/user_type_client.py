@@ -18,6 +18,8 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.utils import format_url
+from okta.models.user_type\
+    import UserType
 
 
 class UserTypeClient():

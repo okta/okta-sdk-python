@@ -21,22 +21,38 @@ limitations under the License.
 class LogEvent:
     def __init__(self, config=None):
         if config:
-            self.actor = config["actor"]
-            self.authentication_context = config["authenticationContext"]
-            self.client = config["client"]
-            self.debug_context = config["debugContext"]
-            self.display_message = config["displayMessage"]
-            self.event_type = config["eventType"]
-            self.legacy_event_type = config["legacyEventType"]
-            self.outcome = config["outcome"]
-            self.published = config["published"]
-            self.request = config["request"]
-            self.security_context = config["securityContext"]
-            self.severity = config["severity"]
-            self.target = config["target"]
-            self.transaction = config["transaction"]
-            self.uuid = config["uuid"]
-            self.version = config["version"]
+            self.actor = config["actor"]\
+                if "actor" in config else None
+            self.authentication_context = config["authenticationContext"]\
+                if "authenticationContext" in config else None
+            self.client = config["client"]\
+                if "client" in config else None
+            self.debug_context = config["debugContext"]\
+                if "debugContext" in config else None
+            self.display_message = config["displayMessage"]\
+                if "displayMessage" in config else None
+            self.event_type = config["eventType"]\
+                if "eventType" in config else None
+            self.legacy_event_type = config["legacyEventType"]\
+                if "legacyEventType" in config else None
+            self.outcome = config["outcome"]\
+                if "outcome" in config else None
+            self.published = config["published"]\
+                if "published" in config else None
+            self.request = config["request"]\
+                if "request" in config else None
+            self.security_context = config["securityContext"]\
+                if "securityContext" in config else None
+            self.severity = config["severity"]\
+                if "severity" in config else None
+            self.target = config["target"]\
+                if "target" in config else None
+            self.transaction = config["transaction"]\
+                if "transaction" in config else None
+            self.uuid = config["uuid"]\
+                if "uuid" in config else None
+            self.version = config["version"]\
+                if "version" in config else None
         else:
             self.actor = None
             self.authentication_context = None

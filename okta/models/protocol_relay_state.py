@@ -21,7 +21,8 @@ limitations under the License.
 class ProtocolRelayState:
     def __init__(self, config=None):
         if config:
-            self.format = config["format"]
+            self.format = config["format"]\
+                if "format" in config else None
         else:
             self.format = None
 

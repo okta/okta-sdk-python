@@ -21,8 +21,10 @@ limitations under the License.
 class ChangePasswordRequest:
     def __init__(self, config=None):
         if config:
-            self.new_password = config["newPassword"]
-            self.old_password = config["oldPassword"]
+            self.new_password = config["newPassword"]\
+                if "newPassword" in config else None
+            self.old_password = config["oldPassword"]\
+                if "oldPassword" in config else None
         else:
             self.new_password = None
             self.old_password = None

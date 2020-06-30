@@ -21,10 +21,14 @@ limitations under the License.
 class ProvisioningGroups:
     def __init__(self, config=None):
         if config:
-            self.action = config["action"]
-            self.assignments = config["assignments"]
-            self.filter = config["filter"]
-            self.source_attribute_name = config["sourceAttributeName"]
+            self.action = config["action"]\
+                if "action" in config else None
+            self.assignments = config["assignments"]\
+                if "assignments" in config else None
+            self.filter = config["filter"]\
+                if "filter" in config else None
+            self.source_attribute_name = config["sourceAttributeName"]\
+                if "sourceAttributeName" in config else None
         else:
             self.action = None
             self.assignments = None

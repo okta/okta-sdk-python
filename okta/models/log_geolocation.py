@@ -21,8 +21,10 @@ limitations under the License.
 class LogGeolocation:
     def __init__(self, config=None):
         if config:
-            self.lat = config["lat"]
-            self.lon = config["lon"]
+            self.lat = config["lat"]\
+                if "lat" in config else None
+            self.lon = config["lon"]\
+                if "lon" in config else None
         else:
             self.lat = None
             self.lon = None

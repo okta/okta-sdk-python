@@ -21,22 +21,38 @@ limitations under the License.
 class Application:
     def __init__(self, config=None):
         if config:
-            self.embedded = config["_embedded"]
-            self.links = config["_links"]
-            self.accessibility = config["accessibility"]
-            self.created = config["created"]
-            self.credentials = config["credentials"]
-            self.features = config["features"]
-            self.id = config["id"]
-            self.label = config["label"]
-            self.last_updated = config["lastUpdated"]
-            self.licensing = config["licensing"]
-            self.name = config["name"]
-            self.profile = config["profile"]
-            self.settings = config["settings"]
-            self.sign_on_mode = config["signOnMode"]
-            self.status = config["status"]
-            self.visibility = config["visibility"]
+            self.embedded = config["_embedded"]\
+                if "_embedded" in config else None
+            self.links = config["_links"]\
+                if "_links" in config else None
+            self.accessibility = config["accessibility"]\
+                if "accessibility" in config else None
+            self.created = config["created"]\
+                if "created" in config else None
+            self.credentials = config["credentials"]\
+                if "credentials" in config else None
+            self.features = config["features"]\
+                if "features" in config else None
+            self.id = config["id"]\
+                if "id" in config else None
+            self.label = config["label"]\
+                if "label" in config else None
+            self.last_updated = config["lastUpdated"]\
+                if "lastUpdated" in config else None
+            self.licensing = config["licensing"]\
+                if "licensing" in config else None
+            self.name = config["name"]\
+                if "name" in config else None
+            self.profile = config["profile"]\
+                if "profile" in config else None
+            self.settings = config["settings"]\
+                if "settings" in config else None
+            self.sign_on_mode = config["signOnMode"]\
+                if "signOnMode" in config else None
+            self.status = config["status"]\
+                if "status" in config else None
+            self.visibility = config["visibility"]\
+                if "visibility" in config else None
         else:
             self.embedded = None
             self.links = None

@@ -21,18 +21,30 @@ limitations under the License.
 class Policy:
     def __init__(self, config=None):
         if config:
-            self.embedded = config["_embedded"]
-            self.links = config["_links"]
-            self.conditions = config["conditions"]
-            self.created = config["created"]
-            self.description = config["description"]
-            self.id = config["id"]
-            self.last_updated = config["lastUpdated"]
-            self.name = config["name"]
-            self.priority = config["priority"]
-            self.status = config["status"]
-            self.system = config["system"]
-            self.type = config["type"]
+            self.embedded = config["_embedded"]\
+                if "_embedded" in config else None
+            self.links = config["_links"]\
+                if "_links" in config else None
+            self.conditions = config["conditions"]\
+                if "conditions" in config else None
+            self.created = config["created"]\
+                if "created" in config else None
+            self.description = config["description"]\
+                if "description" in config else None
+            self.id = config["id"]\
+                if "id" in config else None
+            self.last_updated = config["lastUpdated"]\
+                if "lastUpdated" in config else None
+            self.name = config["name"]\
+                if "name" in config else None
+            self.priority = config["priority"]\
+                if "priority" in config else None
+            self.status = config["status"]\
+                if "status" in config else None
+            self.system = config["system"]\
+                if "system" in config else None
+            self.type = config["type"]\
+                if "type" in config else None
         else:
             self.embedded = None
             self.links = None

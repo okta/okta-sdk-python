@@ -21,11 +21,16 @@ limitations under the License.
 class LogGeographicalContext:
     def __init__(self, config=None):
         if config:
-            self.city = config["city"]
-            self.country = config["country"]
-            self.geolocation = config["geolocation"]
-            self.postal_code = config["postalCode"]
-            self.state = config["state"]
+            self.city = config["city"]\
+                if "city" in config else None
+            self.country = config["country"]\
+                if "country" in config else None
+            self.geolocation = config["geolocation"]\
+                if "geolocation" in config else None
+            self.postal_code = config["postalCode"]\
+                if "postalCode" in config else None
+            self.state = config["state"]\
+                if "state" in config else None
         else:
             self.city = None
             self.country = None

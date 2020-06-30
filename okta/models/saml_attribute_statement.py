@@ -21,10 +21,14 @@ limitations under the License.
 class SamlAttributeStatement:
     def __init__(self, config=None):
         if config:
-            self.name = config["name"]
-            self.namespace = config["namespace"]
-            self.type = config["type"]
-            self.values = config["values"]
+            self.name = config["name"]\
+                if "name" in config else None
+            self.namespace = config["namespace"]\
+                if "namespace" in config else None
+            self.type = config["type"]\
+                if "type" in config else None
+            self.values = config["values"]\
+                if "values" in config else None
         else:
             self.name = None
             self.namespace = None

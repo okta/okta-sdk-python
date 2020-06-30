@@ -21,8 +21,10 @@ limitations under the License.
 class AutoLoginApplication:
     def __init__(self, config=None):
         if config:
-            self.credentials = config["credentials"]
-            self.settings = config["settings"]
+            self.credentials = config["credentials"]\
+                if "credentials" in config else None
+            self.settings = config["settings"]\
+                if "settings" in config else None
         else:
             self.credentials = None
             self.settings = None

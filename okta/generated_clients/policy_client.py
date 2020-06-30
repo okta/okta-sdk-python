@@ -19,6 +19,10 @@ limitations under the License.
 
 from urllib.parse import urlencode
 from okta.utils import format_url
+from okta.models.policy\
+    import Policy
+from okta.models.policy_rule\
+    import PolicyRule
 
 
 class PolicyClient():

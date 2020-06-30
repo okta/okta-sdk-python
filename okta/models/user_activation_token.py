@@ -21,8 +21,10 @@ limitations under the License.
 class UserActivationToken:
     def __init__(self, config=None):
         if config:
-            self.activation_token = config["activationToken"]
-            self.activation_url = config["activationUrl"]
+            self.activation_token = config["activationToken"]\
+                if "activationToken" in config else None
+            self.activation_url = config["activationUrl"]\
+                if "activationUrl" in config else None
         else:
             self.activation_token = None
             self.activation_url = None

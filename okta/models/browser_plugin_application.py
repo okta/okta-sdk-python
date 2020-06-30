@@ -21,7 +21,8 @@ limitations under the License.
 class BrowserPluginApplication:
     def __init__(self, config=None):
         if config:
-            self.credentials = config["credentials"]
+            self.credentials = config["credentials"]\
+                if "credentials" in config else None
         else:
             self.credentials = None
 

@@ -21,8 +21,10 @@ limitations under the License.
 class ApplicationCredentials:
     def __init__(self, config=None):
         if config:
-            self.signing = config["signing"]
-            self.user_name_template = config["userNameTemplate"]
+            self.signing = config["signing"]\
+                if "signing" in config else None
+            self.user_name_template = config["userNameTemplate"]\
+                if "userNameTemplate" in config else None
         else:
             self.signing = None
             self.user_name_template = None

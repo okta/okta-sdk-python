@@ -21,8 +21,10 @@ limitations under the License.
 class UserIdentifierConditionEvaluatorPattern:
     def __init__(self, config=None):
         if config:
-            self.match_type = config["matchType"]
-            self.value = config["value"]
+            self.match_type = config["matchType"]\
+                if "matchType" in config else None
+            self.value = config["value"]\
+                if "value" in config else None
         else:
             self.match_type = None
             self.value = None

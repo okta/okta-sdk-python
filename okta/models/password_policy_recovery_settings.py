@@ -21,7 +21,8 @@ limitations under the License.
 class PasswordPolicyRecoverySettings:
     def __init__(self, config=None):
         if config:
-            self.factors = config["factors"]
+            self.factors = config["factors"]\
+                if "factors" in config else None
         else:
             self.factors = None
 

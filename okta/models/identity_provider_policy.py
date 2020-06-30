@@ -21,10 +21,14 @@ limitations under the License.
 class IdentityProviderPolicy:
     def __init__(self, config=None):
         if config:
-            self.account_link = config["accountLink"]
-            self.max_clock_skew = config["maxClockSkew"]
-            self.provisioning = config["provisioning"]
-            self.subject = config["subject"]
+            self.account_link = config["accountLink"]\
+                if "accountLink" in config else None
+            self.max_clock_skew = config["maxClockSkew"]\
+                if "maxClockSkew" in config else None
+            self.provisioning = config["provisioning"]\
+                if "provisioning" in config else None
+            self.subject = config["subject"]\
+                if "subject" in config else None
         else:
             self.account_link = None
             self.max_clock_skew = None

@@ -21,11 +21,16 @@ limitations under the License.
 class ActivateFactorRequest:
     def __init__(self, config=None):
         if config:
-            self.attestation = config["attestation"]
-            self.client_data = config["clientData"]
-            self.pass_code = config["passCode"]
-            self.registration_data = config["registrationData"]
-            self.state_token = config["stateToken"]
+            self.attestation = config["attestation"]\
+                if "attestation" in config else None
+            self.client_data = config["clientData"]\
+                if "clientData" in config else None
+            self.pass_code = config["passCode"]\
+                if "passCode" in config else None
+            self.registration_data = config["registrationData"]\
+                if "registrationData" in config else None
+            self.state_token = config["stateToken"]\
+                if "stateToken" in config else None
         else:
             self.attestation = None
             self.client_data = None

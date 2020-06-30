@@ -21,8 +21,10 @@ limitations under the License.
 class BasicApplicationSettingsApplication:
     def __init__(self, config=None):
         if config:
-            self.auth_url = config["authURL"]
-            self.url = config["url"]
+            self.auth_url = config["authURL"]\
+                if "authURL" in config else None
+            self.url = config["url"]\
+                if "url" in config else None
         else:
             self.auth_url = None
             self.url = None

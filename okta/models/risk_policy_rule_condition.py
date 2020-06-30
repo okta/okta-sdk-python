@@ -21,7 +21,8 @@ limitations under the License.
 class RiskPolicyRuleCondition:
     def __init__(self, config=None):
         if config:
-            self.behaviors = config["behaviors"]
+            self.behaviors = config["behaviors"]\
+                if "behaviors" in config else None
         else:
             self.behaviors = None
 

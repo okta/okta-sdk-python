@@ -21,8 +21,10 @@ limitations under the License.
 class InactivityPolicyRuleCondition:
     def __init__(self, config=None):
         if config:
-            self.number = config["number"]
-            self.unit = config["unit"]
+            self.number = config["number"]\
+                if "number" in config else None
+            self.unit = config["unit"]\
+                if "unit" in config else None
         else:
             self.number = None
             self.unit = None

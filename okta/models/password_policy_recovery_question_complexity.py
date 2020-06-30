@@ -21,7 +21,8 @@ limitations under the License.
 class PasswordPolicyRecoveryQuestionComplexity:
     def __init__(self, config=None):
         if config:
-            self.min_length = config["minLength"]
+            self.min_length = config["minLength"]\
+                if "minLength" in config else None
         else:
             self.min_length = None
 

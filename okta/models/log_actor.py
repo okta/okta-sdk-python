@@ -21,11 +21,16 @@ limitations under the License.
 class LogActor:
     def __init__(self, config=None):
         if config:
-            self.alternate_id = config["alternateId"]
-            self.detail = config["detail"]
-            self.display_name = config["displayName"]
-            self.id = config["id"]
-            self.type = config["type"]
+            self.alternate_id = config["alternateId"]\
+                if "alternateId" in config else None
+            self.detail = config["detail"]\
+                if "detail" in config else None
+            self.display_name = config["displayName"]\
+                if "displayName" in config else None
+            self.id = config["id"]\
+                if "id" in config else None
+            self.type = config["type"]\
+                if "type" in config else None
         else:
             self.alternate_id = None
             self.detail = None

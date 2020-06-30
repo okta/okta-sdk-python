@@ -21,8 +21,10 @@ limitations under the License.
 class WebAuthnUserFactorProfile:
     def __init__(self, config=None):
         if config:
-            self.authenticator_name = config["authenticatorName"]
-            self.credential_id = config["credentialId"]
+            self.authenticator_name = config["authenticatorName"]\
+                if "authenticatorName" in config else None
+            self.credential_id = config["credentialId"]\
+                if "credentialId" in config else None
         else:
             self.authenticator_name = None
             self.credential_id = None

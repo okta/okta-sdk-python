@@ -21,12 +21,18 @@ limitations under the License.
 class PushUserFactorProfile:
     def __init__(self, config=None):
         if config:
-            self.credential_id = config["credentialId"]
-            self.device_token = config["deviceToken"]
-            self.device_type = config["deviceType"]
-            self.name = config["name"]
-            self.platform = config["platform"]
-            self.version = config["version"]
+            self.credential_id = config["credentialId"]\
+                if "credentialId" in config else None
+            self.device_token = config["deviceToken"]\
+                if "deviceToken" in config else None
+            self.device_type = config["deviceType"]\
+                if "deviceType" in config else None
+            self.name = config["name"]\
+                if "name" in config else None
+            self.platform = config["platform"]\
+                if "platform" in config else None
+            self.version = config["version"]\
+                if "version" in config else None
         else:
             self.credential_id = None
             self.device_token = None

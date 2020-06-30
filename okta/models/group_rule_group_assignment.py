@@ -21,7 +21,8 @@ limitations under the License.
 class GroupRuleGroupAssignment:
     def __init__(self, config=None):
         if config:
-            self.group_ids = config["groupIds"]
+            self.group_ids = config["groupIds"]\
+                if "groupIds" in config else None
         else:
             self.group_ids = None
 

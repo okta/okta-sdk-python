@@ -21,9 +21,12 @@ limitations under the License.
 class ApplicationSettingsNotificationsVpn:
     def __init__(self, config=None):
         if config:
-            self.help_url = config["helpUrl"]
-            self.message = config["message"]
-            self.network = config["network"]
+            self.help_url = config["helpUrl"]\
+                if "helpUrl" in config else None
+            self.message = config["message"]\
+                if "message" in config else None
+            self.network = config["network"]\
+                if "network" in config else None
         else:
             self.help_url = None
             self.message = None

@@ -1,4 +1,3 @@
-    {{!-- {{#if (and (ne operation.description undefined) (ne operation.description "Success") )}}# {{operation.description}}{{/if}} --}}
     async def {{displayMethodName (snakeCase operation.operationId)}}(
             {{operationArgumentBuilder operation}}
     ):
@@ -18,6 +17,8 @@
         {{#if operation.bodyModel}}
         {{#if (eq operation.bodyFormat "binary")}}
         # TODO for when body format is binary
+        body = None
+        headers = None
         {{else}}
         body = {{snakeCase operation.bodyModel}}
         headers = {

@@ -21,7 +21,8 @@ limitations under the License.
 class ProvisioningDeprovisionedCondition:
     def __init__(self, config=None):
         if config:
-            self.action = config["action"]
+            self.action = config["action"]\
+                if "action" in config else None
         else:
             self.action = None
 

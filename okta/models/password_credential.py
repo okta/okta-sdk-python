@@ -21,9 +21,12 @@ limitations under the License.
 class PasswordCredential:
     def __init__(self, config=None):
         if config:
-            self.hash = config["hash"]
-            self.hook = config["hook"]
-            self.value = config["value"]
+            self.hash = config["hash"]\
+                if "hash" in config else None
+            self.hook = config["hook"]\
+                if "hook" in config else None
+            self.value = config["value"]\
+                if "value" in config else None
         else:
             self.hash = None
             self.hook = None

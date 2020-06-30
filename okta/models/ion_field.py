@@ -21,15 +21,24 @@ limitations under the License.
 class IonField:
     def __init__(self, config=None):
         if config:
-            self.form = config["form"]
-            self.label = config["label"]
-            self.mutable = config["mutable"]
-            self.name = config["name"]
-            self.required = config["required"]
-            self.secret = config["secret"]
-            self.type = config["type"]
-            self.value = config["value"]
-            self.visible = config["visible"]
+            self.form = config["form"]\
+                if "form" in config else None
+            self.label = config["label"]\
+                if "label" in config else None
+            self.mutable = config["mutable"]\
+                if "mutable" in config else None
+            self.name = config["name"]\
+                if "name" in config else None
+            self.required = config["required"]\
+                if "required" in config else None
+            self.secret = config["secret"]\
+                if "secret" in config else None
+            self.type = config["type"]\
+                if "type" in config else None
+            self.value = config["value"]\
+                if "value" in config else None
+            self.visible = config["visible"]\
+                if "visible" in config else None
         else:
             self.form = None
             self.label = None

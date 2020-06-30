@@ -21,7 +21,8 @@ limitations under the License.
 class TempPassword:
     def __init__(self, config=None):
         if config:
-            self.temp_password = config["tempPassword"]
+            self.temp_password = config["tempPassword"]\
+                if "tempPassword" in config else None
         else:
             self.temp_password = None
 

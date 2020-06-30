@@ -21,8 +21,10 @@ limitations under the License.
 class Scope:
     def __init__(self, config=None):
         if config:
-            self.string_value = config["stringValue"]
-            self.type = config["type"]
+            self.string_value = config["stringValue"]\
+                if "stringValue" in config else None
+            self.type = config["type"]\
+                if "type" in config else None
         else:
             self.string_value = None
             self.type = None

@@ -21,7 +21,8 @@ limitations under the License.
 class PasswordDictionary:
     def __init__(self, config=None):
         if config:
-            self.common = config["common"]
+            self.common = config["common"]\
+                if "common" in config else None
         else:
             self.common = None
 

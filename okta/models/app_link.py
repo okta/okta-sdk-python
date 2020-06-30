@@ -21,16 +21,26 @@ limitations under the License.
 class AppLink:
     def __init__(self, config=None):
         if config:
-            self.app_assignment_id = config["appAssignmentId"]
-            self.app_instance_id = config["appInstanceId"]
-            self.app_name = config["appName"]
-            self.credentials_setup = config["credentialsSetup"]
-            self.hidden = config["hidden"]
-            self.id = config["id"]
-            self.label = config["label"]
-            self.link_url = config["linkUrl"]
-            self.logo_url = config["logoUrl"]
-            self.sort_order = config["sortOrder"]
+            self.app_assignment_id = config["appAssignmentId"]\
+                if "appAssignmentId" in config else None
+            self.app_instance_id = config["appInstanceId"]\
+                if "appInstanceId" in config else None
+            self.app_name = config["appName"]\
+                if "appName" in config else None
+            self.credentials_setup = config["credentialsSetup"]\
+                if "credentialsSetup" in config else None
+            self.hidden = config["hidden"]\
+                if "hidden" in config else None
+            self.id = config["id"]\
+                if "id" in config else None
+            self.label = config["label"]\
+                if "label" in config else None
+            self.link_url = config["linkUrl"]\
+                if "linkUrl" in config else None
+            self.logo_url = config["logoUrl"]\
+                if "logoUrl" in config else None
+            self.sort_order = config["sortOrder"]\
+                if "sortOrder" in config else None
         else:
             self.app_assignment_id = None
             self.app_instance_id = None

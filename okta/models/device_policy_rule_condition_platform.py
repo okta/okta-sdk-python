@@ -21,8 +21,10 @@ limitations under the License.
 class DevicePolicyRuleConditionPlatform:
     def __init__(self, config=None):
         if config:
-            self.supported_mdm_frameworks = config["supportedMDMFrameworks"]
-            self.types = config["types"]
+            self.supported_mdm_frameworks = config["supportedMDMFrameworks"]\
+                if "supportedMDMFrameworks" in config else None
+            self.types = config["types"]\
+                if "types" in config else None
         else:
             self.supported_mdm_frameworks = None
             self.types = None

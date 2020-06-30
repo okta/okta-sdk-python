@@ -21,17 +21,28 @@ limitations under the License.
 class Session:
     def __init__(self, config=None):
         if config:
-            self.links = config["_links"]
-            self.amr = config["amr"]
-            self.created_at = config["createdAt"]
-            self.expires_at = config["expiresAt"]
-            self.id = config["id"]
-            self.idp = config["idp"]
-            self.last_factor_verification = config["lastFactorVerification"]
-            self.last_password_verification = config["lastPasswordVerification"]
-            self.login = config["login"]
-            self.status = config["status"]
-            self.user_id = config["userId"]
+            self.links = config["_links"]\
+                if "_links" in config else None
+            self.amr = config["amr"]\
+                if "amr" in config else None
+            self.created_at = config["createdAt"]\
+                if "createdAt" in config else None
+            self.expires_at = config["expiresAt"]\
+                if "expiresAt" in config else None
+            self.id = config["id"]\
+                if "id" in config else None
+            self.idp = config["idp"]\
+                if "idp" in config else None
+            self.last_factor_verification = config["lastFactorVerification"]\
+                if "lastFactorVerification" in config else None
+            self.last_password_verification = config["lastPasswordVerification"]\
+                if "lastPasswordVerification" in config else None
+            self.login = config["login"]\
+                if "login" in config else None
+            self.status = config["status"]\
+                if "status" in config else None
+            self.user_id = config["userId"]\
+                if "userId" in config else None
         else:
             self.links = None
             self.amr = None

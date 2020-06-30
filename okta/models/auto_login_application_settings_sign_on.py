@@ -21,8 +21,10 @@ limitations under the License.
 class AutoLoginApplicationSettingsSignOn:
     def __init__(self, config=None):
         if config:
-            self.login_url = config["loginUrl"]
-            self.redirect_url = config["redirectUrl"]
+            self.login_url = config["loginUrl"]\
+                if "loginUrl" in config else None
+            self.redirect_url = config["redirectUrl"]\
+                if "redirectUrl" in config else None
         else:
             self.login_url = None
             self.redirect_url = None

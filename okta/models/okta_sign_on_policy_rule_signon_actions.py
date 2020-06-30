@@ -21,12 +21,18 @@ limitations under the License.
 class OktaSignOnPolicyRuleSignonActions:
     def __init__(self, config=None):
         if config:
-            self.access = config["access"]
-            self.factor_lifetime = config["factorLifetime"]
-            self.factor_prompt_mode = config["factorPromptMode"]
-            self.remember_device_by_default = config["rememberDeviceByDefault"]
-            self.require_factor = config["requireFactor"]
-            self.session = config["session"]
+            self.access = config["access"]\
+                if "access" in config else None
+            self.factor_lifetime = config["factorLifetime"]\
+                if "factorLifetime" in config else None
+            self.factor_prompt_mode = config["factorPromptMode"]\
+                if "factorPromptMode" in config else None
+            self.remember_device_by_default = config["rememberDeviceByDefault"]\
+                if "rememberDeviceByDefault" in config else None
+            self.require_factor = config["requireFactor"]\
+                if "requireFactor" in config else None
+            self.session = config["session"]\
+                if "session" in config else None
         else:
             self.access = None
             self.factor_lifetime = None

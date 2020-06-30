@@ -21,9 +21,12 @@ limitations under the License.
 class SecurePasswordStoreApplication:
     def __init__(self, config=None):
         if config:
-            self.credentials = config["credentials"]
-            self.name = config["name"]
-            self.settings = config["settings"]
+            self.credentials = config["credentials"]\
+                if "credentials" in config else None
+            self.name = config["name"]\
+                if "name" in config else None
+            self.settings = config["settings"]\
+                if "settings" in config else None
         else:
             self.credentials = None
             self.name = "template_sps"

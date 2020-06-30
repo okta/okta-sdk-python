@@ -21,8 +21,10 @@ limitations under the License.
 class ProtocolAlgorithms:
     def __init__(self, config=None):
         if config:
-            self.request = config["request"]
-            self.response = config["response"]
+            self.request = config["request"]\
+                if "request" in config else None
+            self.response = config["response"]\
+                if "response" in config else None
         else:
             self.request = None
             self.response = None

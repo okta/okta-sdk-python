@@ -21,10 +21,14 @@ limitations under the License.
 class ProtocolEndpoint:
     def __init__(self, config=None):
         if config:
-            self.binding = config["binding"]
-            self.destination = config["destination"]
-            self.type = config["type"]
-            self.url = config["url"]
+            self.binding = config["binding"]\
+                if "binding" in config else None
+            self.destination = config["destination"]\
+                if "destination" in config else None
+            self.type = config["type"]\
+                if "type" in config else None
+            self.url = config["url"]\
+                if "url" in config else None
         else:
             self.binding = None
             self.destination = None

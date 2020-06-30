@@ -21,11 +21,16 @@ limitations under the License.
 class IdentityProviderCredentialsTrust:
     def __init__(self, config=None):
         if config:
-            self.audience = config["audience"]
-            self.issuer = config["issuer"]
-            self.kid = config["kid"]
-            self.revocation = config["revocation"]
-            self.revocation_cache_lifetime = config["revocationCacheLifetime"]
+            self.audience = config["audience"]\
+                if "audience" in config else None
+            self.issuer = config["issuer"]\
+                if "issuer" in config else None
+            self.kid = config["kid"]\
+                if "kid" in config else None
+            self.revocation = config["revocation"]\
+                if "revocation" in config else None
+            self.revocation_cache_lifetime = config["revocationCacheLifetime"]\
+                if "revocationCacheLifetime" in config else None
         else:
             self.audience = None
             self.issuer = None

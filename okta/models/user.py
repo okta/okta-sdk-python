@@ -21,20 +21,34 @@ limitations under the License.
 class User:
     def __init__(self, config=None):
         if config:
-            self.embedded = config["_embedded"]
-            self.links = config["_links"]
-            self.activated = config["activated"]
-            self.created = config["created"]
-            self.credentials = config["credentials"]
-            self.id = config["id"]
-            self.last_login = config["lastLogin"]
-            self.last_updated = config["lastUpdated"]
-            self.password_changed = config["passwordChanged"]
-            self.profile = config["profile"]
-            self.status = config["status"]
-            self.status_changed = config["statusChanged"]
-            self.transitioning_to_status = config["transitioningToStatus"]
-            self.type = config["type"]
+            self.embedded = config["_embedded"]\
+                if "_embedded" in config else None
+            self.links = config["_links"]\
+                if "_links" in config else None
+            self.activated = config["activated"]\
+                if "activated" in config else None
+            self.created = config["created"]\
+                if "created" in config else None
+            self.credentials = config["credentials"]\
+                if "credentials" in config else None
+            self.id = config["id"]\
+                if "id" in config else None
+            self.last_login = config["lastLogin"]\
+                if "lastLogin" in config else None
+            self.last_updated = config["lastUpdated"]\
+                if "lastUpdated" in config else None
+            self.password_changed = config["passwordChanged"]\
+                if "passwordChanged" in config else None
+            self.profile = config["profile"]\
+                if "profile" in config else None
+            self.status = config["status"]\
+                if "status" in config else None
+            self.status_changed = config["statusChanged"]\
+                if "statusChanged" in config else None
+            self.transitioning_to_status = config["transitioningToStatus"]\
+                if "transitioningToStatus" in config else None
+            self.type = config["type"]\
+                if "type" in config else None
         else:
             self.embedded = None
             self.links = None

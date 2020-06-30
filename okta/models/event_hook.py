@@ -21,16 +21,26 @@ limitations under the License.
 class EventHook:
     def __init__(self, config=None):
         if config:
-            self.links = config["_links"]
-            self.channel = config["channel"]
-            self.created = config["created"]
-            self.created_by = config["createdBy"]
-            self.events = config["events"]
-            self.id = config["id"]
-            self.last_updated = config["lastUpdated"]
-            self.name = config["name"]
-            self.status = config["status"]
-            self.verification_status = config["verificationStatus"]
+            self.links = config["_links"]\
+                if "_links" in config else None
+            self.channel = config["channel"]\
+                if "channel" in config else None
+            self.created = config["created"]\
+                if "created" in config else None
+            self.created_by = config["createdBy"]\
+                if "createdBy" in config else None
+            self.events = config["events"]\
+                if "events" in config else None
+            self.id = config["id"]\
+                if "id" in config else None
+            self.last_updated = config["lastUpdated"]\
+                if "lastUpdated" in config else None
+            self.name = config["name"]\
+                if "name" in config else None
+            self.status = config["status"]\
+                if "status" in config else None
+            self.verification_status = config["verificationStatus"]\
+                if "verificationStatus" in config else None
         else:
             self.links = None
             self.channel = None

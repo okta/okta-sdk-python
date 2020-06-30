@@ -21,7 +21,8 @@ limitations under the License.
 class GroupRuleAction:
     def __init__(self, config=None):
         if config:
-            self.assign_user_to_groups = config["assignUserToGroups"]
+            self.assign_user_to_groups = config["assignUserToGroups"]\
+                if "assignUserToGroups" in config else None
         else:
             self.assign_user_to_groups = None
 

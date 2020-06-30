@@ -21,8 +21,10 @@ limitations under the License.
 class IdentityProviderPolicyRuleCondition:
     def __init__(self, config=None):
         if config:
-            self.idp_ids = config["idpIds"]
-            self.provider = config["provider"]
+            self.idp_ids = config["idpIds"]\
+                if "idpIds" in config else None
+            self.provider = config["provider"]\
+                if "provider" in config else None
         else:
             self.idp_ids = None
             self.provider = None

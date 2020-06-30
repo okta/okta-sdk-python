@@ -21,11 +21,16 @@ limitations under the License.
 class ApplicationCredentialsSigning:
     def __init__(self, config=None):
         if config:
-            self.kid = config["kid"]
-            self.last_rotated = config["lastRotated"]
-            self.next_rotation = config["nextRotation"]
-            self.rotation_mode = config["rotationMode"]
-            self.use = config["use"]
+            self.kid = config["kid"]\
+                if "kid" in config else None
+            self.last_rotated = config["lastRotated"]\
+                if "lastRotated" in config else None
+            self.next_rotation = config["nextRotation"]\
+                if "nextRotation" in config else None
+            self.rotation_mode = config["rotationMode"]\
+                if "rotationMode" in config else None
+            self.use = config["use"]\
+                if "use" in config else None
         else:
             self.kid = None
             self.last_rotated = None

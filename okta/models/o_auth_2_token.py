@@ -21,17 +21,28 @@ limitations under the License.
 class OAuth2Token:
     def __init__(self, config=None):
         if config:
-            self.embedded = config["_embedded"]
-            self.links = config["_links"]
-            self.client_id = config["clientId"]
-            self.created = config["created"]
-            self.expires_at = config["expiresAt"]
-            self.id = config["id"]
-            self.issuer = config["issuer"]
-            self.last_updated = config["lastUpdated"]
-            self.scopes = config["scopes"]
-            self.status = config["status"]
-            self.user_id = config["userId"]
+            self.embedded = config["_embedded"]\
+                if "_embedded" in config else None
+            self.links = config["_links"]\
+                if "_links" in config else None
+            self.client_id = config["clientId"]\
+                if "clientId" in config else None
+            self.created = config["created"]\
+                if "created" in config else None
+            self.expires_at = config["expiresAt"]\
+                if "expiresAt" in config else None
+            self.id = config["id"]\
+                if "id" in config else None
+            self.issuer = config["issuer"]\
+                if "issuer" in config else None
+            self.last_updated = config["lastUpdated"]\
+                if "lastUpdated" in config else None
+            self.scopes = config["scopes"]\
+                if "scopes" in config else None
+            self.status = config["status"]\
+                if "status" in config else None
+            self.user_id = config["userId"]\
+                if "userId" in config else None
         else:
             self.embedded = None
             self.links = None

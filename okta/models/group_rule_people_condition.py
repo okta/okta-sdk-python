@@ -21,8 +21,10 @@ limitations under the License.
 class GroupRulePeopleCondition:
     def __init__(self, config=None):
         if config:
-            self.groups = config["groups"]
-            self.users = config["users"]
+            self.groups = config["groups"]\
+                if "groups" in config else None
+            self.users = config["users"]\
+                if "users" in config else None
         else:
             self.groups = None
             self.users = None

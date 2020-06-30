@@ -21,14 +21,22 @@ limitations under the License.
 class VerifyFactorRequest:
     def __init__(self, config=None):
         if config:
-            self.activation_token = config["activationToken"]
-            self.answer = config["answer"]
-            self.attestation = config["attestation"]
-            self.client_data = config["clientData"]
-            self.next_pass_code = config["nextPassCode"]
-            self.pass_code = config["passCode"]
-            self.registration_data = config["registrationData"]
-            self.state_token = config["stateToken"]
+            self.activation_token = config["activationToken"]\
+                if "activationToken" in config else None
+            self.answer = config["answer"]\
+                if "answer" in config else None
+            self.attestation = config["attestation"]\
+                if "attestation" in config else None
+            self.client_data = config["clientData"]\
+                if "clientData" in config else None
+            self.next_pass_code = config["nextPassCode"]\
+                if "nextPassCode" in config else None
+            self.pass_code = config["passCode"]\
+                if "passCode" in config else None
+            self.registration_data = config["registrationData"]\
+                if "registrationData" in config else None
+            self.state_token = config["stateToken"]\
+                if "stateToken" in config else None
         else:
             self.activation_token = None
             self.answer = None

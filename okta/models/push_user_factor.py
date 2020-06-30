@@ -21,9 +21,12 @@ limitations under the License.
 class PushUserFactor:
     def __init__(self, config=None):
         if config:
-            self.expires_at = config["expiresAt"]
-            self.factor_result = config["factorResult"]
-            self.profile = config["profile"]
+            self.expires_at = config["expiresAt"]\
+                if "expiresAt" in config else None
+            self.factor_result = config["factorResult"]\
+                if "factorResult" in config else None
+            self.profile = config["profile"]\
+                if "profile" in config else None
         else:
             self.expires_at = None
             self.factor_result = None
