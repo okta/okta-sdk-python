@@ -44,7 +44,7 @@ class GroupClient():
             self, query_params
     ):
         """
-            Enumerates groups in your organization with pagination.
+        Enumerates groups in your organization with pagination.
         A subset of groups can be returned that match a suppor
         ted filter expression or query.
         Args:
@@ -92,7 +92,7 @@ class GroupClient():
             self, group
     ):
         """
-            Adds a new group with `OKTA_GROUP` type to your organiz
+        Adds a new group with `OKTA_GROUP` type to your organiz
         ation.
         Args:
             {group}
@@ -105,7 +105,7 @@ class GroupClient():
             /api/v1/groups
             """)
 
-        body = group
+        body = group.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -136,7 +136,7 @@ class GroupClient():
             self, query_params
     ):
         """
-            Lists all group rules for your organization.
+        Lists all group rules for your organization.
         Args:
             query_params {dict}: Map of query parameters for request
             [query_params.limit] {str}
@@ -182,7 +182,7 @@ class GroupClient():
             self, group_rule
     ):
         """
-            Creates a group rule to dynamically add users to the sp
+        Creates a group rule to dynamically add users to the sp
         ecified group if they match the condition
         Args:
             {group_rule}
@@ -195,7 +195,7 @@ class GroupClient():
             /api/v1/groups/rules
             """)
 
-        body = group_rule
+        body = group_rule.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -226,7 +226,7 @@ class GroupClient():
             self, ruleId
     ):
         """
-            Removes a specific group rule by id from your organizat
+        Removes a specific group rule by id from your organizat
         ion
         Args:
             rule_id {str}
@@ -258,7 +258,7 @@ class GroupClient():
             self, ruleId, query_params
     ):
         """
-            Fetches a specific group rule by id from your organizat
+        Fetches a specific group rule by id from your organizat
         ion
         Args:
             rule_id {str}
@@ -303,7 +303,7 @@ class GroupClient():
             self, ruleId, group_rule
     ):
         """
-            Updates a group rule. Only `INACTIVE` rules can be upda
+        Updates a group rule. Only `INACTIVE` rules can be upda
         ted.
         Args:
             rule_id {str}
@@ -317,7 +317,7 @@ class GroupClient():
             /api/v1/groups/rules/{ruleId}
             """)
 
-        body = group_rule
+        body = group_rule.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -348,7 +348,7 @@ class GroupClient():
             self, ruleId
     ):
         """
-            Activates a specific group rule by id from your organiz
+        Activates a specific group rule by id from your organiz
         ation
         Args:
             rule_id {str}
@@ -380,7 +380,7 @@ class GroupClient():
             self, ruleId
     ):
         """
-            Deactivates a specific group rule by id from your organ
+        Deactivates a specific group rule by id from your organ
         ization
         Args:
             rule_id {str}
@@ -412,7 +412,7 @@ class GroupClient():
             self, groupId
     ):
         """
-            Removes a group with `OKTA_GROUP` type from your organi
+        Removes a group with `OKTA_GROUP` type from your organi
         zation.
         Args:
             group_id {str}
@@ -444,7 +444,7 @@ class GroupClient():
             self, groupId
     ):
         """
-            Lists all group rules for your organization.
+        Lists all group rules for your organization.
         Args:
             group_id {str}
         Returns:
@@ -484,7 +484,7 @@ class GroupClient():
             self, groupId, group
     ):
         """
-            Updates the profile for a group with `OKTA_GROUP` type
+        Updates the profile for a group with `OKTA_GROUP` type
         from your organization.
         Args:
             group_id {str}
@@ -498,7 +498,7 @@ class GroupClient():
             /api/v1/groups/{groupId}
             """)
 
-        body = group
+        body = group.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -529,7 +529,7 @@ class GroupClient():
             self, groupId, query_params
     ):
         """
-            Enumerates all applications that are assigned to a grou
+        Enumerates all applications that are assigned to a grou
         p.
         Args:
             group_id {str}
@@ -575,7 +575,7 @@ class GroupClient():
             self, groupId, query_params
     ):
         """
-            Args:
+        Args:
             group_id {str}
             query_params {dict}: Map of query parameters for request
             [query_params.expand] {str}
@@ -618,7 +618,7 @@ class GroupClient():
             self, groupId, assign_role_request, query_params
     ):
         """
-            Assigns a Role to a Group
+        Assigns a Role to a Group
         Args:
             group_id {str}
             {assign_role_request}
@@ -635,7 +635,7 @@ class GroupClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = assign_role_request
+        body = assign_role_request.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -666,7 +666,7 @@ class GroupClient():
             self, groupId, roleId
     ):
         """
-            Unassigns a Role from a Group
+        Unassigns a Role from a Group
         Args:
             group_id {str}
             role_id {str}
@@ -698,7 +698,7 @@ class GroupClient():
             self, groupId, roleId
     ):
         """
-            Args:
+        Args:
             group_id {str}
             role_id {str}
         Returns:
@@ -738,7 +738,7 @@ class GroupClient():
             self, groupId, roleId, query_params
     ):
         """
-            Lists all App targets for an `APP_ADMIN` Role assigned
+        Lists all App targets for an `APP_ADMIN` Role assigned
         to a Group. This methods return list may include full A
         pplications or Instances. The response for an instance
         will have an `ID` value, while Application will not hav
@@ -789,7 +789,7 @@ class GroupClient():
             self, groupId, roleId, appName
     ):
         """
-            Args:
+        Args:
             group_id {str}
             role_id {str}
             app_name {str}
@@ -822,7 +822,7 @@ class GroupClient():
             self, groupId, roleId, appName
     ):
         """
-            Args:
+        Args:
             group_id {str}
             role_id {str}
             app_name {str}
@@ -855,7 +855,7 @@ class GroupClient():
             self, groupId, roleId, appName, applicationId
     ):
         """
-            Remove App Instance Target to App Administrator Role gi
+        Remove App Instance Target to App Administrator Role gi
         ven to a Group
         Args:
             group_id {str}
@@ -891,7 +891,7 @@ class GroupClient():
             self, groupId, roleId, appName, applicationId
     ):
         """
-            Add App Instance Target to App Administrator Role given
+        Add App Instance Target to App Administrator Role given
         to a Group
         Args:
             group_id {str}
@@ -927,7 +927,7 @@ class GroupClient():
             self, groupId, roleId, query_params
     ):
         """
-            Args:
+        Args:
             group_id {str}
             role_id {str}
             query_params {dict}: Map of query parameters for request
@@ -973,7 +973,7 @@ class GroupClient():
             self, groupId, roleId, targetGroupId
     ):
         """
-            Method for
+        Method for
         /api/v1/groups/{groupId}/roles/{roleId}/targets/groups/
         {targetGroupId}
         Args:
@@ -1009,7 +1009,7 @@ class GroupClient():
             self, groupId, roleId, targetGroupId
     ):
         """
-            Method for
+        Method for
         /api/v1/groups/{groupId}/roles/{roleId}/targets/groups/
         {targetGroupId}
         Args:
@@ -1045,7 +1045,7 @@ class GroupClient():
             self, groupId, query_params
     ):
         """
-            Enumerates all users that are a member of a group.
+        Enumerates all users that are a member of a group.
         Args:
             group_id {str}
             query_params {dict}: Map of query parameters for request
@@ -1090,7 +1090,7 @@ class GroupClient():
             self, groupId, userId
     ):
         """
-            Removes a user from a group with 'OKTA_GROUP' type.
+        Removes a user from a group with 'OKTA_GROUP' type.
         Args:
             group_id {str}
             user_id {str}
@@ -1122,7 +1122,7 @@ class GroupClient():
             self, groupId, userId
     ):
         """
-            Adds a user to a group with 'OKTA_GROUP' type.
+        Adds a user to a group with 'OKTA_GROUP' type.
         Args:
             group_id {str}
             user_id {str}

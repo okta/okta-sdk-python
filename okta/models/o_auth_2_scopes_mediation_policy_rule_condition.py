@@ -17,8 +17,12 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
+from okta.okta_object import OktaObject
 
-class OAuth2ScopesMediationPolicyRuleCondition:
+
+class OAuth2ScopesMediationPolicyRuleCondition(
+    OktaObject
+):
     def __init__(self, config=None):
         if config:
             self.include = config["include"]\

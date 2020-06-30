@@ -34,7 +34,7 @@ class TrustedOriginClient():
             self, query_params
     ):
         """
-            Args:
+        Args:
             query_params {dict}: Map of query parameters for request
             [query_params.q] {str}
             [query_params.filter] {str}
@@ -79,7 +79,7 @@ class TrustedOriginClient():
             self, trusted_origin
     ):
         """
-            Args:
+        Args:
             {trusted_origin}
         Returns:
             TrustedOrigin
@@ -90,7 +90,7 @@ class TrustedOriginClient():
             /api/v1/trustedOrigins
             """)
 
-        body = trusted_origin
+        body = trusted_origin.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -121,7 +121,7 @@ class TrustedOriginClient():
             self, trustedOriginId
     ):
         """
-            Args:
+        Args:
             trusted_origin_id {str}
         """
         http_method = "delete".upper()
@@ -151,7 +151,7 @@ class TrustedOriginClient():
             self, trustedOriginId
     ):
         """
-            Args:
+        Args:
             trusted_origin_id {str}
         Returns:
             TrustedOrigin
@@ -190,7 +190,7 @@ class TrustedOriginClient():
             self, trustedOriginId, trusted_origin
     ):
         """
-            Args:
+        Args:
             trusted_origin_id {str}
             {trusted_origin}
         Returns:
@@ -202,7 +202,7 @@ class TrustedOriginClient():
             /api/v1/trustedOrigins/{trustedOriginId}
             """)
 
-        body = trusted_origin
+        body = trusted_origin.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -233,7 +233,7 @@ class TrustedOriginClient():
             self, trustedOriginId
     ):
         """
-            Args:
+        Args:
             trusted_origin_id {str}
         Returns:
             TrustedOrigin
@@ -273,7 +273,7 @@ class TrustedOriginClient():
             self, trustedOriginId
     ):
         """
-            Args:
+        Args:
             trusted_origin_id {str}
         Returns:
             TrustedOrigin

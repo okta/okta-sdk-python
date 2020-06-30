@@ -17,8 +17,12 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
+from okta.okta_object import OktaObject
 
-class OktaSignOnPolicyRuleConditions:
+
+class OktaSignOnPolicyRuleConditions(
+    OktaObject
+):
     def __init__(self, config=None):
         if config:
             self.auth_context = config["authContext"]\

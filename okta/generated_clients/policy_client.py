@@ -36,7 +36,7 @@ class PolicyClient():
             self, query_params
     ):
         """
-            Gets all policies with the specified type.
+        Gets all policies with the specified type.
         Args:
             query_params {dict}: Map of query parameters for request
             [query_params.type] {str}
@@ -81,7 +81,7 @@ class PolicyClient():
             self, policy, query_params
     ):
         """
-            Creates a policy.
+        Creates a policy.
         Args:
             {policy}
             query_params {dict}: Map of query parameters for request
@@ -97,7 +97,7 @@ class PolicyClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = policy
+        body = policy.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -128,7 +128,7 @@ class PolicyClient():
             self, policyId
     ):
         """
-            Removes a policy.
+        Removes a policy.
         Args:
             policy_id {str}
         """
@@ -159,7 +159,7 @@ class PolicyClient():
             self, policyId, query_params
     ):
         """
-            Gets a policy.
+        Gets a policy.
         Args:
             policy_id {str}
             query_params {dict}: Map of query parameters for request
@@ -203,7 +203,7 @@ class PolicyClient():
             self, policyId, policy
     ):
         """
-            Updates a policy.
+        Updates a policy.
         Args:
             policy_id {str}
             {policy}
@@ -216,7 +216,7 @@ class PolicyClient():
             /api/v1/policies/{policyId}
             """)
 
-        body = policy
+        body = policy.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -247,7 +247,7 @@ class PolicyClient():
             self, policyId
     ):
         """
-            Activates a policy.
+        Activates a policy.
         Args:
             policy_id {str}
         """
@@ -278,7 +278,7 @@ class PolicyClient():
             self, policyId
     ):
         """
-            Deactivates a policy.
+        Deactivates a policy.
         Args:
             policy_id {str}
         """
@@ -309,7 +309,7 @@ class PolicyClient():
             self, policyId
     ):
         """
-            Enumerates all policy rules.
+        Enumerates all policy rules.
         Args:
             policy_id {str}
         Returns:
@@ -349,7 +349,7 @@ class PolicyClient():
             self, policyId, policy_rule
     ):
         """
-            Creates a policy rule.
+        Creates a policy rule.
         Args:
             policy_id {str}
             {policy_rule}
@@ -362,7 +362,7 @@ class PolicyClient():
             /api/v1/policies/{policyId}/rules
             """)
 
-        body = policy_rule
+        body = policy_rule.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -393,7 +393,7 @@ class PolicyClient():
             self, policyId, ruleId
     ):
         """
-            Removes a policy rule.
+        Removes a policy rule.
         Args:
             policy_id {str}
             rule_id {str}
@@ -425,7 +425,7 @@ class PolicyClient():
             self, policyId, ruleId
     ):
         """
-            Gets a policy rule.
+        Gets a policy rule.
         Args:
             policy_id {str}
             rule_id {str}
@@ -466,7 +466,7 @@ class PolicyClient():
             self, policyId, ruleId, policy_rule
     ):
         """
-            Updates a policy rule.
+        Updates a policy rule.
         Args:
             policy_id {str}
             rule_id {str}
@@ -480,7 +480,7 @@ class PolicyClient():
             /api/v1/policies/{policyId}/rules/{ruleId}
             """)
 
-        body = policy_rule
+        body = policy_rule.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -511,7 +511,7 @@ class PolicyClient():
             self, policyId, ruleId
     ):
         """
-            Activates a policy rule.
+        Activates a policy rule.
         Args:
             policy_id {str}
             rule_id {str}
@@ -544,7 +544,7 @@ class PolicyClient():
             self, policyId, ruleId
     ):
         """
-            Deactivates a policy rule.
+        Deactivates a policy rule.
         Args:
             policy_id {str}
             rule_id {str}

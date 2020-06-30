@@ -2,7 +2,7 @@
             {{operationArgumentBuilder operation}}
     ):
         """
-    {{{pyDocstringBuilder operation}}}
+{{{pyDocstringBuilder operation}}}
         """
         http_method = "{{operation.method}}".upper()
         api_url = format_url(f"""
@@ -18,7 +18,7 @@
         {{#if (eq operation.bodyFormat "binary")}}
         body = HTTPClient.format_binary_data(string)
         {{else}}
-        body = {{snakeCase operation.bodyModel}}
+        body = {{snakeCase operation.bodyModel}}.as_dict()
         {{/if}}
         headers = {
             "Accept": "{{operation.produces.[0]}}",

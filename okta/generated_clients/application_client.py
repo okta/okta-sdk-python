@@ -47,7 +47,7 @@ class ApplicationClient():
             self, query_params
     ):
         """
-            Enumerates apps added to your organization with paginat
+        Enumerates apps added to your organization with paginat
         ion. A subset of apps can be returned that match a supp
         orted filter expression or query.
         Args:
@@ -97,7 +97,7 @@ class ApplicationClient():
             self, application, query_params
     ):
         """
-            Adds a new application to your Okta organization.
+        Adds a new application to your Okta organization.
         Args:
             {application}
             query_params {dict}: Map of query parameters for request
@@ -113,7 +113,7 @@ class ApplicationClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = application
+        body = application.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -144,7 +144,7 @@ class ApplicationClient():
             self, appId
     ):
         """
-            Removes an inactive application.
+        Removes an inactive application.
         Args:
             app_id {str}
         """
@@ -175,7 +175,7 @@ class ApplicationClient():
             self, appId, query_params
     ):
         """
-            Fetches an application from your Okta organization by `
+        Fetches an application from your Okta organization by `
         id`.
         Args:
             app_id {str}
@@ -220,7 +220,7 @@ class ApplicationClient():
             self, appId, application
     ):
         """
-            Updates an application in your organization.
+        Updates an application in your organization.
         Args:
             app_id {str}
             {application}
@@ -233,7 +233,7 @@ class ApplicationClient():
             /api/v1/apps/{appId}
             """)
 
-        body = application
+        body = application.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -264,7 +264,7 @@ class ApplicationClient():
             self, appId
     ):
         """
-            Enumerates Certificate Signing Requests for an applicat
+        Enumerates Certificate Signing Requests for an applicat
         ion
         Args:
             app_id {str}
@@ -305,7 +305,7 @@ class ApplicationClient():
             self, appId, csr_metadata
     ):
         """
-            Generates a new key pair and returns the Certificate Si
+        Generates a new key pair and returns the Certificate Si
         gning Request for it.
         Args:
             app_id {str}
@@ -319,7 +319,7 @@ class ApplicationClient():
             /api/v1/apps/{appId}/credentials/csrs
             """)
 
-        body = csr_metadata
+        body = csr_metadata.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -350,7 +350,7 @@ class ApplicationClient():
             self, appId, csrId
     ):
         """
-            Method for
+        Method for
         /api/v1/apps/{appId}/credentials/csrs/{csrId}
         Args:
             app_id {str}
@@ -383,7 +383,7 @@ class ApplicationClient():
             self, appId, csrId
     ):
         """
-            Method for
+        Method for
         /api/v1/apps/{appId}/credentials/csrs/{csrId}
         Args:
             app_id {str}
@@ -425,7 +425,7 @@ class ApplicationClient():
             self, appId, csrId, string
     ):
         """
-            Method for
+        Method for
         /api/v1/apps/{appId}/credentials/csrs/{csrId}/lifecycle
         /publish
         Args:
@@ -442,7 +442,7 @@ class ApplicationClient():
                 lifecycle/publish
             """)
 
-        body = string
+        body = string.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/x-x509-ca-cert"
@@ -473,7 +473,7 @@ class ApplicationClient():
             self, appId, csrId, string
     ):
         """
-            Method for
+        Method for
         /api/v1/apps/{appId}/credentials/csrs/{csrId}/lifecycle
         /publish
         Args:
@@ -521,7 +521,7 @@ class ApplicationClient():
             self, appId, csrId, string
     ):
         """
-            Method for
+        Method for
         /api/v1/apps/{appId}/credentials/csrs/{csrId}/lifecycle
         /publish
         Args:
@@ -538,7 +538,7 @@ class ApplicationClient():
                 lifecycle/publish
             """)
 
-        body = string
+        body = string.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/pkix-cert"
@@ -569,7 +569,7 @@ class ApplicationClient():
             self, appId, csrId, string
     ):
         """
-            Method for
+        Method for
         /api/v1/apps/{appId}/credentials/csrs/{csrId}/lifecycle
         /publish
         Args:
@@ -617,7 +617,7 @@ class ApplicationClient():
             self, appId, csrId, string
     ):
         """
-            Method for
+        Method for
         /api/v1/apps/{appId}/credentials/csrs/{csrId}/lifecycle
         /publish
         Args:
@@ -665,7 +665,7 @@ class ApplicationClient():
             self, appId
     ):
         """
-            Enumerates key credentials for an application
+        Enumerates key credentials for an application
         Args:
             app_id {str}
         Returns:
@@ -705,7 +705,7 @@ class ApplicationClient():
             self, appId, query_params
     ):
         """
-            Generates a new X.509 certificate for an application ke
+        Generates a new X.509 certificate for an application ke
         y credential
         Args:
             app_id {str}
@@ -750,7 +750,7 @@ class ApplicationClient():
             self, appId, keyId
     ):
         """
-            Gets a specific application key credential by kid
+        Gets a specific application key credential by kid
         Args:
             app_id {str}
             key_id {str}
@@ -791,7 +791,7 @@ class ApplicationClient():
             self, appId, keyId, query_params
     ):
         """
-            Clones a X.509 certificate for an application key crede
+        Clones a X.509 certificate for an application key crede
         ntial from a source application to target application.
         Args:
             app_id {str}
@@ -837,7 +837,7 @@ class ApplicationClient():
             self, appId, query_params
     ):
         """
-            Lists all scope consent grants for the application
+        Lists all scope consent grants for the application
         Args:
             app_id {str}
             query_params {dict}: Map of query parameters for request
@@ -881,7 +881,7 @@ class ApplicationClient():
             self, appId, o_auth_2_scope_consent_grant
     ):
         """
-            Grants consent for the application to request an OAuth
+        Grants consent for the application to request an OAuth
         2.0 Okta scope
         Args:
             app_id {str}
@@ -895,7 +895,7 @@ class ApplicationClient():
             /api/v1/apps/{appId}/grants
             """)
 
-        body = o_auth_2_scope_consent_grant
+        body = o_auth_2_scope_consent_grant.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -926,7 +926,7 @@ class ApplicationClient():
             self, appId, grantId
     ):
         """
-            Revokes permission for the application to request the g
+        Revokes permission for the application to request the g
         iven scope
         Args:
             app_id {str}
@@ -959,7 +959,7 @@ class ApplicationClient():
             self, appId, grantId, query_params
     ):
         """
-            Fetches a single scope consent grant for the applicatio
+        Fetches a single scope consent grant for the applicatio
         n
         Args:
             app_id {str}
@@ -1005,7 +1005,7 @@ class ApplicationClient():
             self, appId, query_params
     ):
         """
-            Enumerates group assignments for an application.
+        Enumerates group assignments for an application.
         Args:
             app_id {str}
             query_params {dict}: Map of query parameters for request
@@ -1052,7 +1052,7 @@ class ApplicationClient():
             self, appId, groupId
     ):
         """
-            Removes a group assignment from an application.
+        Removes a group assignment from an application.
         Args:
             app_id {str}
             group_id {str}
@@ -1084,7 +1084,7 @@ class ApplicationClient():
             self, appId, groupId, query_params
     ):
         """
-            Fetches an application group assignment
+        Fetches an application group assignment
         Args:
             app_id {str}
             group_id {str}
@@ -1129,7 +1129,7 @@ class ApplicationClient():
             self, appId, groupId, application_group_assignment
     ):
         """
-            Assigns a group to an application
+        Assigns a group to an application
         Args:
             app_id {str}
             group_id {str}
@@ -1143,7 +1143,7 @@ class ApplicationClient():
             /api/v1/apps/{appId}/groups/{groupId}
             """)
 
-        body = application_group_assignment
+        body = application_group_assignment.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1174,7 +1174,7 @@ class ApplicationClient():
             self, appId
     ):
         """
-            Activates an inactive application.
+        Activates an inactive application.
         Args:
             app_id {str}
         """
@@ -1205,7 +1205,7 @@ class ApplicationClient():
             self, appId
     ):
         """
-            Deactivates an active application.
+        Deactivates an active application.
         Args:
             app_id {str}
         """
@@ -1236,7 +1236,7 @@ class ApplicationClient():
             self, appId
     ):
         """
-            Revokes all tokens for the specified application
+        Revokes all tokens for the specified application
         Args:
             app_id {str}
         """
@@ -1267,7 +1267,7 @@ class ApplicationClient():
             self, appId, query_params
     ):
         """
-            Lists all tokens for the application
+        Lists all tokens for the application
         Args:
             app_id {str}
             query_params {dict}: Map of query parameters for request
@@ -1313,7 +1313,7 @@ class ApplicationClient():
             self, appId, tokenId
     ):
         """
-            Revokes the specified token for the specified applicati
+        Revokes the specified token for the specified applicati
         on
         Args:
             app_id {str}
@@ -1346,7 +1346,7 @@ class ApplicationClient():
             self, appId, tokenId, query_params
     ):
         """
-            Gets a token for the specified application
+        Gets a token for the specified application
         Args:
             app_id {str}
             token_id {str}
@@ -1391,7 +1391,7 @@ class ApplicationClient():
             self, appId, query_params
     ):
         """
-            Enumerates all assigned [application users](#applicatio
+        Enumerates all assigned [application users](#applicatio
         n-user-model) for an application.
         Args:
             app_id {str}
@@ -1441,7 +1441,7 @@ class ApplicationClient():
             self, appId, app_user
     ):
         """
-            Assigns an user to an application with [credentials](#a
+        Assigns an user to an application with [credentials](#a
         pplication-user-credentials-object) and an app-specific
         [profile](#application-user-profile-object). Profile m
         appings defined for the application are first applied b
@@ -1459,7 +1459,7 @@ class ApplicationClient():
             /api/v1/apps/{appId}/users
             """)
 
-        body = app_user
+        body = app_user.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1490,7 +1490,7 @@ class ApplicationClient():
             self, appId, userId, query_params
     ):
         """
-            Removes an assignment for a user from an application.
+        Removes an assignment for a user from an application.
         Args:
             app_id {str}
             user_id {str}
@@ -1526,7 +1526,7 @@ class ApplicationClient():
             self, appId, userId, query_params
     ):
         """
-            Fetches a specific user assignment for application by `
+        Fetches a specific user assignment for application by `
         id`.
         Args:
             app_id {str}
@@ -1572,7 +1572,7 @@ class ApplicationClient():
             self, appId, userId, app_user
     ):
         """
-            Updates a user's profile for an application
+        Updates a user's profile for an application
         Args:
             app_id {str}
             user_id {str}
@@ -1586,7 +1586,7 @@ class ApplicationClient():
             /api/v1/apps/{appId}/users/{userId}
             """)
 
-        body = app_user
+        body = app_user.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"

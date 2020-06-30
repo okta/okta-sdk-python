@@ -38,7 +38,7 @@ class UserFactorClient():
             self, userId
     ):
         """
-            Enumerates all the enrolled factors for the specified u
+        Enumerates all the enrolled factors for the specified u
         ser
         Args:
             user_id {str}
@@ -79,7 +79,7 @@ class UserFactorClient():
             self, userId, user_factor, query_params
     ):
         """
-            Enrolls a user with a supported factor.
+        Enrolls a user with a supported factor.
         Args:
             user_id {str}
             {user_factor}
@@ -99,7 +99,7 @@ class UserFactorClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = user_factor
+        body = user_factor.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -130,7 +130,7 @@ class UserFactorClient():
             self, userId
     ):
         """
-            Enumerates all the supported factors that can be enroll
+        Enumerates all the supported factors that can be enroll
         ed for the specified user
         Args:
             user_id {str}
@@ -171,7 +171,7 @@ class UserFactorClient():
             self, userId
     ):
         """
-            Enumerates all available security questions for a user'
+        Enumerates all available security questions for a user'
         s `question` factor
         Args:
             user_id {str}
@@ -212,7 +212,7 @@ class UserFactorClient():
             self, userId, factorId
     ):
         """
-            Unenrolls an existing factor for the specified user, al
+        Unenrolls an existing factor for the specified user, al
         lowing the user to enroll a new factor.
         Args:
             user_id {str}
@@ -245,7 +245,7 @@ class UserFactorClient():
             self, userId, factorId
     ):
         """
-            Fetches a factor for the specified user
+        Fetches a factor for the specified user
         Args:
             user_id {str}
             factor_id {str}
@@ -286,7 +286,7 @@ class UserFactorClient():
             self, userId, factorId, activate_factor_request
     ):
         """
-            The `sms` and `token:software:totp` factor types requir
+        The `sms` and `token:software:totp` factor types requir
         e activation to complete the enrollment process.
         Args:
             user_id {str}
@@ -302,7 +302,7 @@ class UserFactorClient():
                 activate
             """)
 
-        body = activate_factor_request
+        body = activate_factor_request.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -333,7 +333,7 @@ class UserFactorClient():
             self, userId, factorId, transactionId
     ):
         """
-            Polls factors verification transaction for status.
+        Polls factors verification transaction for status.
         Args:
             user_id {str}
             factor_id {str}
@@ -376,7 +376,7 @@ class UserFactorClient():
             self, userId, factorId, verify_factor_request, query_params
     ):
         """
-            Verifies an OTP for a `token` or `token:hardware` facto
+        Verifies an OTP for a `token` or `token:hardware` facto
         r
         Args:
             user_id {str}
@@ -396,7 +396,7 @@ class UserFactorClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = verify_factor_request
+        body = verify_factor_request.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"

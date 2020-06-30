@@ -36,7 +36,7 @@ class InlineHookClient():
             self, query_params
     ):
         """
-            Args:
+        Args:
             query_params {dict}: Map of query parameters for request
             [query_params.type] {str}
         Returns:
@@ -78,7 +78,7 @@ class InlineHookClient():
             self, inline_hook
     ):
         """
-            Args:
+        Args:
             {inline_hook}
         Returns:
             InlineHook
@@ -89,7 +89,7 @@ class InlineHookClient():
             /api/v1/inlineHooks
             """)
 
-        body = inline_hook
+        body = inline_hook.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -120,7 +120,7 @@ class InlineHookClient():
             self, inlineHookId
     ):
         """
-            Deletes the Inline Hook matching the provided id. Once
+        Deletes the Inline Hook matching the provided id. Once
         deleted, the Inline Hook is unrecoverable. As a safety
         precaution, only Inline Hooks with a status of INACTIVE
         are eligible for deletion.
@@ -154,7 +154,7 @@ class InlineHookClient():
             self, inlineHookId
     ):
         """
-            Gets an inline hook by ID
+        Gets an inline hook by ID
         Args:
             inline_hook_id {str}
         Returns:
@@ -194,7 +194,7 @@ class InlineHookClient():
             self, inlineHookId, inline_hook
     ):
         """
-            Updates an inline hook by ID
+        Updates an inline hook by ID
         Args:
             inline_hook_id {str}
             {inline_hook}
@@ -207,7 +207,7 @@ class InlineHookClient():
             /api/v1/inlineHooks/{inlineHookId}
             """)
 
-        body = inline_hook
+        body = inline_hook.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -238,7 +238,7 @@ class InlineHookClient():
             self, inlineHookId, inline_hook_payload
     ):
         """
-            Executes the Inline Hook matching the provided inlineHo
+        Executes the Inline Hook matching the provided inlineHo
         okId using the request body as the input. This will sen
         d the provided data through the Channel and return a re
         sponse if it matches the correct data contract. This ex
@@ -256,7 +256,7 @@ class InlineHookClient():
             /api/v1/inlineHooks/{inlineHookId}/execute
             """)
 
-        body = inline_hook_payload
+        body = inline_hook_payload.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -287,7 +287,7 @@ class InlineHookClient():
             self, inlineHookId
     ):
         """
-            Activates the Inline Hook matching the provided id
+        Activates the Inline Hook matching the provided id
         Args:
             inline_hook_id {str}
         Returns:
@@ -328,7 +328,7 @@ class InlineHookClient():
             self, inlineHookId
     ):
         """
-            Deactivates the Inline Hook matching the provided id
+        Deactivates the Inline Hook matching the provided id
         Args:
             inline_hook_id {str}
         Returns:

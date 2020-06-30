@@ -34,7 +34,7 @@ class LogEventClient():
             self, query_params
     ):
         """
-            The Okta System Log API provides read access to your or
+        The Okta System Log API provides read access to your or
         ganization’s system log. This API provides more functio
         nality than the Events API
         Args:

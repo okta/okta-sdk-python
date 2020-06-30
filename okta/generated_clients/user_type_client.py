@@ -33,7 +33,7 @@ class UserTypeClient():
             self
     ):
         """
-            Fetches all User Types in your org
+        Fetches all User Types in your org
         Args:
         Returns:
             list: Collection of UserType instances.
@@ -72,7 +72,7 @@ class UserTypeClient():
             self, user_type
     ):
         """
-            Creates a new User Type. A default User Type is automat
+        Creates a new User Type. A default User Type is automat
         ically created along with your org, and you may add ano
         ther 9 User Types for a maximum of 10.
         Args:
@@ -86,7 +86,7 @@ class UserTypeClient():
             /api/v1/meta/types/user
             """)
 
-        body = user_type
+        body = user_type.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -117,7 +117,7 @@ class UserTypeClient():
             self, typeId
     ):
         """
-            Deletes a User Type permanently. This operation is not
+        Deletes a User Type permanently. This operation is not
         permitted for the default type, nor for any User Type t
         hat has existing users
         Args:
@@ -150,7 +150,7 @@ class UserTypeClient():
             self, typeId
     ):
         """
-            Fetches a User Type by ID. The special identifier `defa
+        Fetches a User Type by ID. The special identifier `defa
         ult` may be used to fetch the default User Type.
         Args:
             type_id {str}
@@ -191,7 +191,7 @@ class UserTypeClient():
             self, typeId, user_type
     ):
         """
-            Updates an existing User Type
+        Updates an existing User Type
         Args:
             type_id {str}
             {user_type}
@@ -204,7 +204,7 @@ class UserTypeClient():
             /api/v1/meta/types/user/{typeId}
             """)
 
-        body = user_type
+        body = user_type.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -235,7 +235,7 @@ class UserTypeClient():
             self, typeId, user_type
     ):
         """
-            Replace an existing User Type
+        Replace an existing User Type
         Args:
             type_id {str}
             {user_type}
@@ -248,7 +248,7 @@ class UserTypeClient():
             /api/v1/meta/types/user/{typeId}
             """)
 
-        body = user_type
+        body = user_type.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"

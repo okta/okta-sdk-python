@@ -17,8 +17,12 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
+from okta.okta_object import OktaObject
 
-class LogDebugContext:
+
+class LogDebugContext(
+    OktaObject
+):
     def __init__(self, config=None):
         if config:
             self.debug_data = config["debugData"]\

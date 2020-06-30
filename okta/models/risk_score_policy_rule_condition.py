@@ -17,8 +17,12 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
+from okta.okta_object import OktaObject
 
-class RiskScorePolicyRuleCondition:
+
+class RiskScorePolicyRuleCondition(
+    OktaObject
+):
     def __init__(self, config=None):
         if config:
             self.level = config["level"]\

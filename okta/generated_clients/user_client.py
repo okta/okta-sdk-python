@@ -62,7 +62,7 @@ class UserClient():
             self, query_params
     ):
         """
-            Lists users in your organization with pagination in mos
+        Lists users in your organization with pagination in mos
         t cases.  A subset of users can be returned that match
         a supported filter expression or search criteria.
         Args:
@@ -113,7 +113,7 @@ class UserClient():
             self, create_user_request, query_params
     ):
         """
-            Creates a new user in your Okta organization with or wi
+        Creates a new user in your Okta organization with or wi
         thout credentials.
         Args:
             {create_user_request}
@@ -132,7 +132,7 @@ class UserClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = create_user_request
+        body = create_user_request.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -163,7 +163,7 @@ class UserClient():
             self, associatedUserId, primaryRelationshipName, primaryUserId
     ):
         """
-            Method for
+        Method for
         /api/v1/users/{associatedUserId}/linkedObjects/{primary
         RelationshipName}/{primaryUserId}
         Args:
@@ -199,7 +199,7 @@ class UserClient():
             self, userId, query_params
     ):
         """
-            Deletes a user permanently.  This operation can only be
+        Deletes a user permanently.  This operation can only be
         performed on users that have a `DEPROVISIONED` status.
         **This action cannot be recovered!**
         Args:
@@ -236,7 +236,7 @@ class UserClient():
             self, userId
     ):
         """
-            Fetches a user from your Okta organization.
+        Fetches a user from your Okta organization.
         Args:
             user_id {str}
         Returns:
@@ -276,7 +276,7 @@ class UserClient():
             self, userId, user, query_params
     ):
         """
-            Fetch a user by `id`, `login`, or `login shortname` if
+        Fetch a user by `id`, `login`, or `login shortname` if
         the short name is unambiguous.
         Args:
             user_id {str}
@@ -294,7 +294,7 @@ class UserClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = user
+        body = user.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -325,7 +325,7 @@ class UserClient():
             self, userId, user, query_params
     ):
         """
-            Update a user's profile and/or credentials using strict
+        Update a user's profile and/or credentials using strict
         -update semantics.
         Args:
             user_id {str}
@@ -343,7 +343,7 @@ class UserClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = user
+        body = user.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -374,7 +374,7 @@ class UserClient():
             self, userId
     ):
         """
-            Fetches appLinks for all direct or indirect (via group
+        Fetches appLinks for all direct or indirect (via group
         membership) assigned applications.
         Args:
             user_id {str}
@@ -415,7 +415,7 @@ class UserClient():
             self, userId
     ):
         """
-            Lists all client resources for which the specified user
+        Lists all client resources for which the specified user
         has grants or tokens.
         Args:
             user_id {str}
@@ -456,7 +456,7 @@ class UserClient():
             self, userId, clientId
     ):
         """
-            Revokes all grants for the specified user and client
+        Revokes all grants for the specified user and client
         Args:
             user_id {str}
             client_id {str}
@@ -488,7 +488,7 @@ class UserClient():
             self, userId, clientId, query_params
     ):
         """
-            Lists all grants for a specified user and client
+        Lists all grants for a specified user and client
         Args:
             user_id {str}
             client_id {str}
@@ -535,7 +535,7 @@ class UserClient():
             self, userId, clientId
     ):
         """
-            Revokes all refresh tokens issued for the specified Use
+        Revokes all refresh tokens issued for the specified Use
         r and Client.
         Args:
             user_id {str}
@@ -568,7 +568,7 @@ class UserClient():
             self, userId, clientId, query_params
     ):
         """
-            Lists all refresh tokens issued for the specified User
+        Lists all refresh tokens issued for the specified User
         and Client.
         Args:
             user_id {str}
@@ -616,7 +616,7 @@ class UserClient():
             self, userId, clientId, tokenId
     ):
         """
-            Revokes the specified refresh token.
+        Revokes the specified refresh token.
         Args:
             user_id {str}
             client_id {str}
@@ -650,7 +650,7 @@ class UserClient():
             self, userId, clientId, tokenId, query_params
     ):
         """
-            Gets a refresh token issued for the specified User and
+        Gets a refresh token issued for the specified User and
         Client.
         Args:
             user_id {str}
@@ -700,7 +700,7 @@ class UserClient():
             self, userId, change_password_request, query_params
     ):
         """
-            Changes a user's password by validating the user's curr
+        Changes a user's password by validating the user's curr
         ent password. This operation can only be performed on u
         sers in `STAGED`, `ACTIVE`, `PASSWORD_EXPIRED`, or `REC
         OVERY` status that have a valid password credential
@@ -720,7 +720,7 @@ class UserClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = change_password_request
+        body = change_password_request.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -751,7 +751,7 @@ class UserClient():
             self, userId, user_credentials
     ):
         """
-            Changes a user's recovery question & answer credential
+        Changes a user's recovery question & answer credential
         by validating the user's current password.  This operat
         ion can only be performed on users in **STAGED**, **ACT
         IVE** or **RECOVERY** `status` that have a valid passwo
@@ -769,7 +769,7 @@ class UserClient():
                 change_recovery_question
             """)
 
-        body = user_credentials
+        body = user_credentials.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -800,7 +800,7 @@ class UserClient():
             self, userId, query_params
     ):
         """
-            Generates a one-time token (OTT) that can be used to re
+        Generates a one-time token (OTT) that can be used to re
         set a user's password
         Args:
             user_id {str}
@@ -845,7 +845,7 @@ class UserClient():
             self, userId, user_credentials, query_params
     ):
         """
-            Sets a new password for a user by validating the user's
+        Sets a new password for a user by validating the user's
         answer to their current recovery question
         Args:
             user_id {str}
@@ -863,7 +863,7 @@ class UserClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = user_credentials
+        body = user_credentials.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -894,7 +894,7 @@ class UserClient():
             self, userId
     ):
         """
-            Revokes all grants for a specified user
+        Revokes all grants for a specified user
         Args:
             user_id {str}
         """
@@ -925,7 +925,7 @@ class UserClient():
             self, userId, query_params
     ):
         """
-            Lists all grants for the specified user
+        Lists all grants for the specified user
         Args:
             user_id {str}
             query_params {dict}: Map of query parameters for request
@@ -972,7 +972,7 @@ class UserClient():
             self, userId, grantId
     ):
         """
-            Revokes one grant for a specified user
+        Revokes one grant for a specified user
         Args:
             user_id {str}
             grant_id {str}
@@ -1004,7 +1004,7 @@ class UserClient():
             self, userId, grantId, query_params
     ):
         """
-            Gets a grant for the specified user
+        Gets a grant for the specified user
         Args:
             user_id {str}
             grant_id {str}
@@ -1049,7 +1049,7 @@ class UserClient():
             self, userId
     ):
         """
-            Fetches the groups of which the user is a member.
+        Fetches the groups of which the user is a member.
         Args:
             user_id {str}
         Returns:
@@ -1089,7 +1089,7 @@ class UserClient():
             self, userId
     ):
         """
-            Lists the IdPs associated with the user.
+        Lists the IdPs associated with the user.
         Args:
             user_id {str}
         Returns:
@@ -1129,7 +1129,7 @@ class UserClient():
             self, userId, query_params
     ):
         """
-            Activates a user.  This operation can only be performed
+        Activates a user.  This operation can only be performed
         on users with a `STAGED` status.  Activation of a user
         is an asynchronous operation. The user will have the `
         transitioningToStatus` property with a value of `ACTIVE
@@ -1180,7 +1180,7 @@ class UserClient():
             self, userId, query_params
     ):
         """
-            Deactivates a user.  This operation can only be perform
+        Deactivates a user.  This operation can only be perform
         ed on users that do not have a `DEPROVISIONED` status.
         Deactivation of a user is an asynchronous operation.
         The user will have the `transitioningToStatus` property
@@ -1222,7 +1222,7 @@ class UserClient():
             self, userId
     ):
         """
-            This operation transitions the user to the status of `P
+        This operation transitions the user to the status of `P
         ASSWORD_EXPIRED` so that the user is required to change
         their password at their next login.
         Args:
@@ -1265,7 +1265,7 @@ class UserClient():
             self, userId
     ):
         """
-            This operation transitions the user to the status of `P
+        This operation transitions the user to the status of `P
         ASSWORD_EXPIRED` and the user's password is reset to a
         temporary password that is returned.
         Args:
@@ -1308,7 +1308,7 @@ class UserClient():
             self, userId, query_params
     ):
         """
-            Reactivates a user.  This operation can only be perform
+        Reactivates a user.  This operation can only be perform
         ed on users with a `PROVISIONED` status.  This operatio
         n restarts the activation workflow if for some reason t
         he user activation was not completed when using the act
@@ -1356,7 +1356,7 @@ class UserClient():
             self, userId
     ):
         """
-            This operation resets all factors for the specified use
+        This operation resets all factors for the specified use
         r. All MFA factor enrollments returned to the unenrolle
         d state. The user's status remains ACTIVE. This link is
         present only if the user is currently enrolled in one
@@ -1391,7 +1391,7 @@ class UserClient():
             self, userId, query_params
     ):
         """
-            Generates a one-time token (OTT) that can be used to re
+        Generates a one-time token (OTT) that can be used to re
         set a user's password.  The OTT link can be automatical
         ly emailed to the user or returned to the API caller an
         d distributed using a custom flow.
@@ -1438,7 +1438,7 @@ class UserClient():
             self, userId
     ):
         """
-            Suspends a user.  This operation can only be performed
+        Suspends a user.  This operation can only be performed
         on users with an `ACTIVE` status.  The user will have a
         status of `SUSPENDED` when the process is complete.
         Args:
@@ -1471,7 +1471,7 @@ class UserClient():
             self, userId
     ):
         """
-            Unlocks a user with a `LOCKED_OUT` status and returns t
+        Unlocks a user with a `LOCKED_OUT` status and returns t
         hem to `ACTIVE` status.  Users will be able to login wi
         th their current password.
         Args:
@@ -1504,7 +1504,7 @@ class UserClient():
             self, userId
     ):
         """
-            Unsuspends a user and returns them to the `ACTIVE` stat
+        Unsuspends a user and returns them to the `ACTIVE` stat
         e.  This operation can only be performed on users that
         have a `SUSPENDED` status.
         Args:
@@ -1537,7 +1537,7 @@ class UserClient():
             self, userId, relationshipName
     ):
         """
-            Delete linked objects for a user, relationshipName can
+        Delete linked objects for a user, relationshipName can
         be ONLY a primary relationship name
         Args:
             user_id {str}
@@ -1571,7 +1571,7 @@ class UserClient():
             self, userId, relationshipName, query_params
     ):
         """
-            Get linked objects for a user, relationshipName can be
+        Get linked objects for a user, relationshipName can be
         a primary or associated relationship name
         Args:
             user_id {str}
@@ -1619,7 +1619,7 @@ class UserClient():
             self, userId, query_params
     ):
         """
-            Lists all roles assigned to a user.
+        Lists all roles assigned to a user.
         Args:
             user_id {str}
             query_params {dict}: Map of query parameters for request
@@ -1663,7 +1663,7 @@ class UserClient():
             self, userId, assign_role_request, query_params
     ):
         """
-            Assigns a role to a user.
+        Assigns a role to a user.
         Args:
             user_id {str}
             {assign_role_request}
@@ -1680,7 +1680,7 @@ class UserClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = assign_role_request
+        body = assign_role_request.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1711,7 +1711,7 @@ class UserClient():
             self, userId, roleId
     ):
         """
-            Unassigns a role from a user.
+        Unassigns a role from a user.
         Args:
             user_id {str}
             role_id {str}
@@ -1743,7 +1743,7 @@ class UserClient():
             self, userId, roleId, query_params
     ):
         """
-            Lists all App targets for an `APP_ADMIN` Role assigned
+        Lists all App targets for an `APP_ADMIN` Role assigned
         to a User. This methods return list may include full Ap
         plications or Instances. The response for an instance w
         ill have an `ID` value, while Application will not have
@@ -1794,7 +1794,7 @@ class UserClient():
             self, userId, roleId
     ):
         """
-            Args:
+        Args:
             user_id {str}
             role_id {str}
         """
@@ -1826,7 +1826,7 @@ class UserClient():
             self, userId, roleId, appName
     ):
         """
-            Args:
+        Args:
             user_id {str}
             role_id {str}
             app_name {str}
@@ -1859,7 +1859,7 @@ class UserClient():
             self, userId, roleId, appName
     ):
         """
-            Args:
+        Args:
             user_id {str}
             role_id {str}
             app_name {str}
@@ -1892,7 +1892,7 @@ class UserClient():
             self, userId, roleId, appName, applicationId
     ):
         """
-            Remove App Instance Target to App Administrator Role gi
+        Remove App Instance Target to App Administrator Role gi
         ven to a User
         Args:
             user_id {str}
@@ -1928,7 +1928,7 @@ class UserClient():
             self, userId, roleId, appName, applicationId
     ):
         """
-            Add App Instance Target to App Administrator Role given
+        Add App Instance Target to App Administrator Role given
         to a User
         Args:
             user_id {str}
@@ -1964,7 +1964,7 @@ class UserClient():
             self, userId, roleId, query_params
     ):
         """
-            Args:
+        Args:
             user_id {str}
             role_id {str}
             query_params {dict}: Map of query parameters for request
@@ -2010,7 +2010,7 @@ class UserClient():
             self, userId, roleId, groupId
     ):
         """
-            Args:
+        Args:
             user_id {str}
             role_id {str}
             group_id {str}
@@ -2043,7 +2043,7 @@ class UserClient():
             self, userId, roleId, groupId
     ):
         """
-            Args:
+        Args:
             user_id {str}
             role_id {str}
             group_id {str}
@@ -2076,7 +2076,7 @@ class UserClient():
             self, userId, query_params
     ):
         """
-            Removes all active identity provider sessions. This for
+        Removes all active identity provider sessions. This for
         ces the user to authenticate on the next operation. Opt
         ionally revokes OpenID Connect and OAuth refresh and ac
         cess tokens issued to the user.

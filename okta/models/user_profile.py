@@ -17,8 +17,12 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
+from okta.okta_object import OktaObject
 
-class UserProfile:
+
+class UserProfile(
+    OktaObject
+):
     def __init__(self, config=None):
         if config:
             self.city = config["city"]\

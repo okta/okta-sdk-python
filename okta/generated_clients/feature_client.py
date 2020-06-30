@@ -34,7 +34,7 @@ class FeatureClient():
             self
     ):
         """
-            Args:
+        Args:
         Returns:
             list: Collection of Feature instances.
         """
@@ -72,7 +72,7 @@ class FeatureClient():
             self, featureId
     ):
         """
-            Args:
+        Args:
             feature_id {str}
         Returns:
             Feature
@@ -111,7 +111,7 @@ class FeatureClient():
             self, featureId
     ):
         """
-            Args:
+        Args:
             feature_id {str}
         Returns:
             list: Collection of Feature instances.
@@ -150,7 +150,7 @@ class FeatureClient():
             self, featureId
     ):
         """
-            Args:
+        Args:
             feature_id {str}
         Returns:
             list: Collection of Feature instances.
@@ -189,7 +189,7 @@ class FeatureClient():
             self, featureId, lifecycle, query_params
     ):
         """
-            Args:
+        Args:
             feature_id {str}
             lifecycle {str}
             query_params {dict}: Map of query parameters for request

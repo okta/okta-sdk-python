@@ -33,7 +33,7 @@ class SessionClient():
             self, create_session_request
     ):
         """
-            Creates a new session for a user with a valid session t
+        Creates a new session for a user with a valid session t
         oken. Use this API if, for example, you want to set the
         session cookie yourself instead of allowing Okta to se
         t it, or want to hold the session ID in order to delete
@@ -50,7 +50,7 @@ class SessionClient():
             /api/v1/sessions
             """)
 
-        body = create_session_request
+        body = create_session_request.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -81,7 +81,7 @@ class SessionClient():
             self, sessionId
     ):
         """
-            Method for
+        Method for
         /api/v1/sessions/{sessionId}
         Args:
             session_id {str}
@@ -113,7 +113,7 @@ class SessionClient():
             self, sessionId
     ):
         """
-            Get details about a session.
+        Get details about a session.
         Args:
             session_id {str}
         Returns:
@@ -153,7 +153,7 @@ class SessionClient():
             self, sessionId
     ):
         """
-            Method for
+        Method for
         /api/v1/sessions/{sessionId}/lifecycle/refresh
         Args:
             session_id {str}

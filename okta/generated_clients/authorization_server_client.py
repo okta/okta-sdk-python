@@ -46,7 +46,7 @@ class AuthorizationServerClient():
             self, query_params
     ):
         """
-            Args:
+        Args:
             query_params {dict}: Map of query parameters for request
             [query_params.q] {str}
             [query_params.limit] {str}
@@ -90,7 +90,7 @@ class AuthorizationServerClient():
             self, authorization_server
     ):
         """
-            Args:
+        Args:
             {authorization_server}
         Returns:
             AuthorizationServer
@@ -101,7 +101,7 @@ class AuthorizationServerClient():
             /api/v1/authorizationServers
             """)
 
-        body = authorization_server
+        body = authorization_server.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -132,7 +132,7 @@ class AuthorizationServerClient():
             self, authServerId
     ):
         """
-            Args:
+        Args:
             auth_server_id {str}
         """
         http_method = "delete".upper()
@@ -162,7 +162,7 @@ class AuthorizationServerClient():
             self, authServerId
     ):
         """
-            Args:
+        Args:
             auth_server_id {str}
         Returns:
             AuthorizationServer
@@ -201,7 +201,7 @@ class AuthorizationServerClient():
             self, authServerId, authorization_server
     ):
         """
-            Args:
+        Args:
             auth_server_id {str}
             {authorization_server}
         Returns:
@@ -213,7 +213,7 @@ class AuthorizationServerClient():
             /api/v1/authorizationServers/{authServerId}
             """)
 
-        body = authorization_server
+        body = authorization_server.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -244,7 +244,7 @@ class AuthorizationServerClient():
             self, authServerId
     ):
         """
-            Args:
+        Args:
             auth_server_id {str}
         Returns:
             list: Collection of OAuth2Claim instances.
@@ -283,7 +283,7 @@ class AuthorizationServerClient():
             self, authServerId, o_auth_2_claim
     ):
         """
-            Args:
+        Args:
             auth_server_id {str}
             {o_auth_2_claim}
         Returns:
@@ -295,7 +295,7 @@ class AuthorizationServerClient():
             /api/v1/authorizationServers/{authServerId}/claims
             """)
 
-        body = o_auth_2_claim
+        body = o_auth_2_claim.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -326,7 +326,7 @@ class AuthorizationServerClient():
             self, authServerId, claimId
     ):
         """
-            Args:
+        Args:
             auth_server_id {str}
             claim_id {str}
         """
@@ -358,7 +358,7 @@ class AuthorizationServerClient():
             self, authServerId, claimId
     ):
         """
-            Args:
+        Args:
             auth_server_id {str}
             claim_id {str}
         Returns:
@@ -399,7 +399,7 @@ class AuthorizationServerClient():
             self, authServerId, claimId, o_auth_2_claim
     ):
         """
-            Args:
+        Args:
             auth_server_id {str}
             claim_id {str}
             {o_auth_2_claim}
@@ -413,7 +413,7 @@ class AuthorizationServerClient():
                 {claimId}
             """)
 
-        body = o_auth_2_claim
+        body = o_auth_2_claim.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -444,7 +444,7 @@ class AuthorizationServerClient():
             self, authServerId
     ):
         """
-            Args:
+        Args:
             auth_server_id {str}
         Returns:
             list: Collection of OAuth2Client instances.
@@ -483,7 +483,7 @@ class AuthorizationServerClient():
             self, authServerId, clientId
     ):
         """
-            Args:
+        Args:
             auth_server_id {str}
             client_id {str}
         """
@@ -515,7 +515,7 @@ class AuthorizationServerClient():
             self, authServerId, clientId, query_params
     ):
         """
-            Args:
+        Args:
             auth_server_id {str}
             client_id {str}
             query_params {dict}: Map of query parameters for request
@@ -562,7 +562,7 @@ class AuthorizationServerClient():
             self, authServerId, clientId, tokenId
     ):
         """
-            Args:
+        Args:
             auth_server_id {str}
             client_id {str}
             token_id {str}
@@ -595,7 +595,7 @@ class AuthorizationServerClient():
             self, authServerId, clientId, tokenId, query_params
     ):
         """
-            Args:
+        Args:
             auth_server_id {str}
             client_id {str}
             token_id {str}
@@ -641,7 +641,7 @@ class AuthorizationServerClient():
             self, authServerId
     ):
         """
-            Args:
+        Args:
             auth_server_id {str}
         Returns:
             list: Collection of JsonWebKey instances.
@@ -681,7 +681,7 @@ class AuthorizationServerClient():
             self, authServerId, jwk_use
     ):
         """
-            Args:
+        Args:
             auth_server_id {str}
         Returns:
             list: Collection of JsonWebKey instances.
@@ -693,7 +693,7 @@ class AuthorizationServerClient():
                 credentials/lifecycle/keyRotate
             """)
 
-        body = jwk_use
+        body = jwk_use.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -724,7 +724,7 @@ class AuthorizationServerClient():
             self, authServerId
     ):
         """
-            Args:
+        Args:
             auth_server_id {str}
         """
         http_method = "post".upper()
@@ -755,7 +755,7 @@ class AuthorizationServerClient():
             self, authServerId
     ):
         """
-            Args:
+        Args:
             auth_server_id {str}
         """
         http_method = "post".upper()
@@ -786,7 +786,7 @@ class AuthorizationServerClient():
             self, authServerId
     ):
         """
-            Args:
+        Args:
             auth_server_id {str}
         Returns:
             list: Collection of Policy instances.
@@ -826,7 +826,7 @@ class AuthorizationServerClient():
             self, authServerId, policy
     ):
         """
-            Args:
+        Args:
             auth_server_id {str}
             {policy}
         Returns:
@@ -839,7 +839,7 @@ class AuthorizationServerClient():
                 policies
             """)
 
-        body = policy
+        body = policy.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -870,7 +870,7 @@ class AuthorizationServerClient():
             self, authServerId, policyId
     ):
         """
-            Args:
+        Args:
             auth_server_id {str}
             policy_id {str}
         """
@@ -902,7 +902,7 @@ class AuthorizationServerClient():
             self, authServerId, policyId
     ):
         """
-            Args:
+        Args:
             auth_server_id {str}
             policy_id {str}
         Returns:
@@ -943,7 +943,7 @@ class AuthorizationServerClient():
             self, authServerId, policyId, policy
     ):
         """
-            Args:
+        Args:
             auth_server_id {str}
             policy_id {str}
             {policy}
@@ -957,7 +957,7 @@ class AuthorizationServerClient():
                 policies/{policyId}
             """)
 
-        body = policy
+        body = policy.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -988,7 +988,7 @@ class AuthorizationServerClient():
             self, authServerId, query_params
     ):
         """
-            Args:
+        Args:
             auth_server_id {str}
             query_params {dict}: Map of query parameters for request
             [query_params.q] {str}
@@ -1034,7 +1034,7 @@ class AuthorizationServerClient():
             self, authServerId, o_auth_2_scope
     ):
         """
-            Args:
+        Args:
             auth_server_id {str}
             {o_auth_2_scope}
         Returns:
@@ -1046,7 +1046,7 @@ class AuthorizationServerClient():
             /api/v1/authorizationServers/{authServerId}/scopes
             """)
 
-        body = o_auth_2_scope
+        body = o_auth_2_scope.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1077,7 +1077,7 @@ class AuthorizationServerClient():
             self, authServerId, scopeId
     ):
         """
-            Args:
+        Args:
             auth_server_id {str}
             scope_id {str}
         """
@@ -1109,7 +1109,7 @@ class AuthorizationServerClient():
             self, authServerId, scopeId
     ):
         """
-            Args:
+        Args:
             auth_server_id {str}
             scope_id {str}
         Returns:
@@ -1150,7 +1150,7 @@ class AuthorizationServerClient():
             self, authServerId, scopeId, o_auth_2_scope
     ):
         """
-            Args:
+        Args:
             auth_server_id {str}
             scope_id {str}
             {o_auth_2_scope}
@@ -1164,7 +1164,7 @@ class AuthorizationServerClient():
                 {scopeId}
             """)
 
-        body = o_auth_2_scope
+        body = o_auth_2_scope.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"

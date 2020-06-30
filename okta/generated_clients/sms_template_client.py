@@ -34,7 +34,7 @@ class SmsTemplateClient():
             self, query_params
     ):
         """
-            Enumerates custom SMS templates in your organization. A
+        Enumerates custom SMS templates in your organization. A
         subset of templates can be returned that match a templ
         ate type.
         Args:
@@ -79,7 +79,7 @@ class SmsTemplateClient():
             self, sms_template
     ):
         """
-            Adds a new custom SMS template to your organization.
+        Adds a new custom SMS template to your organization.
         Args:
             {sms_template}
         Returns:
@@ -91,7 +91,7 @@ class SmsTemplateClient():
             /api/v1/templates/sms
             """)
 
-        body = sms_template
+        body = sms_template.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -122,7 +122,7 @@ class SmsTemplateClient():
             self, templateId
     ):
         """
-            Removes an SMS template.
+        Removes an SMS template.
         Args:
             template_id {str}
         """
@@ -153,7 +153,7 @@ class SmsTemplateClient():
             self, templateId
     ):
         """
-            Fetches a specific template by `id`
+        Fetches a specific template by `id`
         Args:
             template_id {str}
         Returns:
@@ -193,7 +193,7 @@ class SmsTemplateClient():
             self, templateId, sms_template
     ):
         """
-            Updates only some of the SMS template properties:
+        Updates only some of the SMS template properties:
         Args:
             template_id {str}
             {sms_template}
@@ -206,7 +206,7 @@ class SmsTemplateClient():
             /api/v1/templates/sms/{templateId}
             """)
 
-        body = sms_template
+        body = sms_template.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -237,7 +237,7 @@ class SmsTemplateClient():
             self, templateId, sms_template
     ):
         """
-            Updates the SMS template.
+        Updates the SMS template.
         Args:
             template_id {str}
             {sms_template}
@@ -250,7 +250,7 @@ class SmsTemplateClient():
             /api/v1/templates/sms/{templateId}
             """)
 
-        body = sms_template
+        body = sms_template.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"

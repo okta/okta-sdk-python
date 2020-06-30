@@ -1,7 +1,11 @@
 {{> partials.copyrightHeader }}
 
+from okta.okta_object import OktaObject
 
-class {{pascalCase model.modelName}}:
+
+class {{pascalCase model.modelName}}(
+    OktaObject
+):
     def __init__(self, config=None):
         if config:
             {{#each model.properties as |prop|}}

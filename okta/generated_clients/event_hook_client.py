@@ -33,7 +33,7 @@ class EventHookClient():
             self
     ):
         """
-            Args:
+        Args:
         Returns:
             list: Collection of EventHook instances.
         """
@@ -71,7 +71,7 @@ class EventHookClient():
             self, event_hook
     ):
         """
-            Args:
+        Args:
             {event_hook}
         Returns:
             EventHook
@@ -82,7 +82,7 @@ class EventHookClient():
             /api/v1/eventHooks
             """)
 
-        body = event_hook
+        body = event_hook.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -113,7 +113,7 @@ class EventHookClient():
             self, eventHookId
     ):
         """
-            Args:
+        Args:
             event_hook_id {str}
         """
         http_method = "delete".upper()
@@ -143,7 +143,7 @@ class EventHookClient():
             self, eventHookId
     ):
         """
-            Args:
+        Args:
             event_hook_id {str}
         Returns:
             EventHook
@@ -182,7 +182,7 @@ class EventHookClient():
             self, eventHookId, event_hook
     ):
         """
-            Args:
+        Args:
             event_hook_id {str}
             {event_hook}
         Returns:
@@ -194,7 +194,7 @@ class EventHookClient():
             /api/v1/eventHooks/{eventHookId}
             """)
 
-        body = event_hook
+        body = event_hook.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -225,7 +225,7 @@ class EventHookClient():
             self, eventHookId
     ):
         """
-            Args:
+        Args:
             event_hook_id {str}
         Returns:
             EventHook
@@ -264,7 +264,7 @@ class EventHookClient():
             self, eventHookId
     ):
         """
-            Args:
+        Args:
             event_hook_id {str}
         Returns:
             EventHook
@@ -304,7 +304,7 @@ class EventHookClient():
             self, eventHookId
     ):
         """
-            Args:
+        Args:
             event_hook_id {str}
         Returns:
             EventHook

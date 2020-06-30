@@ -43,7 +43,7 @@ class IdentityProviderClient():
             self, query_params
     ):
         """
-            Enumerates IdPs in your organization with pagination. A
+        Enumerates IdPs in your organization with pagination. A
         subset of IdPs can be returned that match a supported
         filter expression or query.
         Args:
@@ -91,7 +91,7 @@ class IdentityProviderClient():
             self, identity_provider
     ):
         """
-            Adds a new IdP to your organization.
+        Adds a new IdP to your organization.
         Args:
             {identity_provider}
         Returns:
@@ -103,7 +103,7 @@ class IdentityProviderClient():
             /api/v1/idps
             """)
 
-        body = identity_provider
+        body = identity_provider.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -134,7 +134,7 @@ class IdentityProviderClient():
             self, query_params
     ):
         """
-            Enumerates IdP key credentials.
+        Enumerates IdP key credentials.
         Args:
             query_params {dict}: Map of query parameters for request
             [query_params.after] {str}
@@ -178,7 +178,7 @@ class IdentityProviderClient():
             self, json_web_key
     ):
         """
-            Adds a new X.509 certificate credential to the IdP key
+        Adds a new X.509 certificate credential to the IdP key
         store.
         Args:
             {json_web_key}
@@ -191,7 +191,7 @@ class IdentityProviderClient():
             /api/v1/idps/credentials/keys
             """)
 
-        body = json_web_key
+        body = json_web_key.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -222,7 +222,7 @@ class IdentityProviderClient():
             self, keyId
     ):
         """
-            Deletes a specific IdP Key Credential by `kid` if it is
+        Deletes a specific IdP Key Credential by `kid` if it is
         not currently being used by an Active or Inactive IdP.
         Args:
             key_id {str}
@@ -254,7 +254,7 @@ class IdentityProviderClient():
             self, keyId
     ):
         """
-            Gets a specific IdP Key Credential by `kid`
+        Gets a specific IdP Key Credential by `kid`
         Args:
             key_id {str}
         Returns:
@@ -294,7 +294,7 @@ class IdentityProviderClient():
             self, idpId
     ):
         """
-            Removes an IdP from your organization.
+        Removes an IdP from your organization.
         Args:
             idp_id {str}
         """
@@ -325,7 +325,7 @@ class IdentityProviderClient():
             self, idpId
     ):
         """
-            Fetches an IdP by `id`.
+        Fetches an IdP by `id`.
         Args:
             idp_id {str}
         Returns:
@@ -365,7 +365,7 @@ class IdentityProviderClient():
             self, idpId, identity_provider
     ):
         """
-            Updates the configuration for an IdP.
+        Updates the configuration for an IdP.
         Args:
             idp_id {str}
             {identity_provider}
@@ -378,7 +378,7 @@ class IdentityProviderClient():
             /api/v1/idps/{idpId}
             """)
 
-        body = identity_provider
+        body = identity_provider.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -409,7 +409,7 @@ class IdentityProviderClient():
             self, idpId
     ):
         """
-            Enumerates Certificate Signing Requests for an IdP
+        Enumerates Certificate Signing Requests for an IdP
         Args:
             idp_id {str}
         Returns:
@@ -449,7 +449,7 @@ class IdentityProviderClient():
             self, idpId, csr_metadata
     ):
         """
-            Generates a new key pair and returns a Certificate Sign
+        Generates a new key pair and returns a Certificate Sign
         ing Request for it.
         Args:
             idp_id {str}
@@ -463,7 +463,7 @@ class IdentityProviderClient():
             /api/v1/idps/{idpId}/credentials/csrs
             """)
 
-        body = csr_metadata
+        body = csr_metadata.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -494,7 +494,7 @@ class IdentityProviderClient():
             self, idpId, csrId
     ):
         """
-            Revoke a Certificate Signing Request and delete the key
+        Revoke a Certificate Signing Request and delete the key
         pair from the IdP
         Args:
             idp_id {str}
@@ -527,7 +527,7 @@ class IdentityProviderClient():
             self, idpId, csrId
     ):
         """
-            Gets a specific Certificate Signing Request model by id
+        Gets a specific Certificate Signing Request model by id
         Args:
             idp_id {str}
             csr_id {str}
@@ -568,7 +568,7 @@ class IdentityProviderClient():
             self, idpId, csrId, string
     ):
         """
-            Update the Certificate Signing Request with a signed X.
+        Update the Certificate Signing Request with a signed X.
         509 certificate and add it into the signing key credent
         ials for the IdP.
         Args:
@@ -585,7 +585,7 @@ class IdentityProviderClient():
                 lifecycle/publish
             """)
 
-        body = string
+        body = string.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/x-x509-ca-cert"
@@ -616,7 +616,7 @@ class IdentityProviderClient():
             self, idpId, csrId, string
     ):
         """
-            Update the Certificate Signing Request with a signed X.
+        Update the Certificate Signing Request with a signed X.
         509 certificate and add it into the signing key credent
         ials for the IdP.
         Args:
@@ -664,7 +664,7 @@ class IdentityProviderClient():
             self, idpId, csrId, string
     ):
         """
-            Update the Certificate Signing Request with a signed X.
+        Update the Certificate Signing Request with a signed X.
         509 certificate and add it into the signing key credent
         ials for the IdP.
         Args:
@@ -681,7 +681,7 @@ class IdentityProviderClient():
                 lifecycle/publish
             """)
 
-        body = string
+        body = string.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/pkix-cert"
@@ -712,7 +712,7 @@ class IdentityProviderClient():
             self, idpId, csrId, string
     ):
         """
-            Update the Certificate Signing Request with a signed X.
+        Update the Certificate Signing Request with a signed X.
         509 certificate and add it into the signing key credent
         ials for the IdP.
         Args:
@@ -760,7 +760,7 @@ class IdentityProviderClient():
             self, idpId, csrId, string
     ):
         """
-            Update the Certificate Signing Request with a signed X.
+        Update the Certificate Signing Request with a signed X.
         509 certificate and add it into the signing key credent
         ials for the IdP.
         Args:
@@ -808,7 +808,7 @@ class IdentityProviderClient():
             self, idpId
     ):
         """
-            Enumerates signing key credentials for an IdP
+        Enumerates signing key credentials for an IdP
         Args:
             idp_id {str}
         Returns:
@@ -848,7 +848,7 @@ class IdentityProviderClient():
             self, idpId, query_params
     ):
         """
-            Generates a new X.509 certificate for an IdP signing ke
+        Generates a new X.509 certificate for an IdP signing ke
         y credential to be used for signing assertions sent to
         the IdP
         Args:
@@ -894,7 +894,7 @@ class IdentityProviderClient():
             self, idpId, keyId
     ):
         """
-            Gets a specific IdP Key Credential by `kid`
+        Gets a specific IdP Key Credential by `kid`
         Args:
             idp_id {str}
             key_id {str}
@@ -935,7 +935,7 @@ class IdentityProviderClient():
             self, idpId, keyId, query_params
     ):
         """
-            Clones a X.509 certificate for an IdP signing key crede
+        Clones a X.509 certificate for an IdP signing key crede
         ntial from a source IdP to target IdP
         Args:
             idp_id {str}
@@ -981,7 +981,7 @@ class IdentityProviderClient():
             self, idpId
     ):
         """
-            Activates an inactive IdP.
+        Activates an inactive IdP.
         Args:
             idp_id {str}
         Returns:
@@ -1021,7 +1021,7 @@ class IdentityProviderClient():
             self, idpId
     ):
         """
-            Deactivates an active IdP.
+        Deactivates an active IdP.
         Args:
             idp_id {str}
         Returns:
@@ -1061,7 +1061,7 @@ class IdentityProviderClient():
             self, idpId
     ):
         """
-            Find all the users linked to an identity provider
+        Find all the users linked to an identity provider
         Args:
             idp_id {str}
         Returns:
@@ -1101,7 +1101,7 @@ class IdentityProviderClient():
             self, idpId, userId
     ):
         """
-            Removes the link between the Okta user and the IdP user
+        Removes the link between the Okta user and the IdP user
         .
         Args:
             idp_id {str}
@@ -1134,7 +1134,7 @@ class IdentityProviderClient():
             self, idpId, userId
     ):
         """
-            Fetches a linked IdP user by ID
+        Fetches a linked IdP user by ID
         Args:
             idp_id {str}
             user_id {str}
@@ -1175,7 +1175,7 @@ class IdentityProviderClient():
             self, idpId, userId, user_identity_provider_link_request
     ):
         """
-            Links an Okta user to an existing Social Identity Provi
+        Links an Okta user to an existing Social Identity Provi
         der. This does not support the SAML2 Identity Provider
         Type
         Args:
@@ -1191,7 +1191,7 @@ class IdentityProviderClient():
             /api/v1/idps/{idpId}/users/{userId}
             """)
 
-        body = user_identity_provider_link_request
+        body = user_identity_provider_link_request.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1222,7 +1222,7 @@ class IdentityProviderClient():
             self, idpId, userId
     ):
         """
-            Fetches the tokens minted by the Social Authentication
+        Fetches the tokens minted by the Social Authentication
         Provider when the user authenticates with Okta via Soci
         al Auth.
         Args:

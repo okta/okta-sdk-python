@@ -33,7 +33,7 @@ class LinkedObjectClient():
             self
     ):
         """
-            Args:
+        Args:
         Returns:
             list: Collection of LinkedObject instances.
         """
@@ -71,7 +71,7 @@ class LinkedObjectClient():
             self, linked_object
     ):
         """
-            Args:
+        Args:
             {linked_object}
         Returns:
             LinkedObject
@@ -82,7 +82,7 @@ class LinkedObjectClient():
             /api/v1/meta/schemas/user/linkedObjects
             """)
 
-        body = linked_object
+        body = linked_object.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -113,7 +113,7 @@ class LinkedObjectClient():
             self, linkedObjectName
     ):
         """
-            Args:
+        Args:
             linked_object_name {str}
         """
         http_method = "delete".upper()
@@ -144,7 +144,7 @@ class LinkedObjectClient():
             self, linkedObjectName
     ):
         """
-            Args:
+        Args:
             linked_object_name {str}
         Returns:
             LinkedObject
