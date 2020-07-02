@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class OAuth2ScopeConsentGrantSource(
+    str,
     Enum
 ):
     END_USER = "END_USER"

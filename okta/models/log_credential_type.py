@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class LogCredentialType(
+    str,
     Enum
 ):
     OTP = "OTP"

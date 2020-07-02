@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class AuthorizationServerCredentialsRotationMode(
+    str,
     Enum
 ):
     AUTO = "AUTO"

@@ -18,10 +18,13 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.user_factor\
+    import UserFactor
 
 
 class EmailUserFactor(
-    OktaObject
+    OktaObject,
+    UserFactor
 ):
     def __init__(self, config=None):
         if config:

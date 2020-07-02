@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class FactorProvider(
+    str,
     Enum
 ):
     OKTA = "OKTA"

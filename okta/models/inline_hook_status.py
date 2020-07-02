@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class InlineHookStatus(
+    str,
     Enum
 ):
     ACTIVE = "ACTIVE"

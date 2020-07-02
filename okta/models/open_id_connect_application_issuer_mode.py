@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class OpenIdConnectApplicationIssuerMode(
+    str,
     Enum
 ):
     CUSTOM_URL = "CUSTOM_URL"

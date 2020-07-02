@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class FactorStatus(
+    str,
     Enum
 ):
     PENDING_ACTIVATION = "PENDING_ACTIVATION"

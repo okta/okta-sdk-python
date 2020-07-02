@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class ApplicationSignOnMode(
+    str,
     Enum
 ):
     BOOKMARK = "BOOKMARK"

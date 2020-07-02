@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class FeatureStageValue(
+    str,
     Enum
 ):
     EA = "EA"

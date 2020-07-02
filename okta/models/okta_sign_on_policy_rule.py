@@ -18,10 +18,13 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.policy_rule\
+    import PolicyRule
 
 
 class OktaSignOnPolicyRule(
-    OktaObject
+    OktaObject,
+    PolicyRule
 ):
     def __init__(self, config=None):
         if config:

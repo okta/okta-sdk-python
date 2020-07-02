@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class RoleType(
+    str,
     Enum
 ):
     SUPER_ADMIN = "SUPER_ADMIN"

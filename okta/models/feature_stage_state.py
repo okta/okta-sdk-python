@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class FeatureStageState(
+    str,
     Enum
 ):
     OPEN = "OPEN"

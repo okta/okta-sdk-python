@@ -18,10 +18,13 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.application\
+    import Application
 
 
 class SecurePasswordStoreApplication(
-    OktaObject
+    OktaObject,
+    Application
 ):
     def __init__(self, config=None):
         if config:

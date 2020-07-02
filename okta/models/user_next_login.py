@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class UserNextLogin(
+    str,
     Enum
 ):
     changePassword = "changePassword"

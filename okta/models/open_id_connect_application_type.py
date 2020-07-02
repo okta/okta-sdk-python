@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class OpenIdConnectApplicationType(
+    str,
     Enum
 ):
     web = "web"

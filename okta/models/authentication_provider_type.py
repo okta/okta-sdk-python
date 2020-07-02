@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class AuthenticationProviderType(
+    str,
     Enum
 ):
     ACTIVE_DIRECTORY = "ACTIVE_DIRECTORY"

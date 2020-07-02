@@ -18,13 +18,15 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.policy\
+    import Policy
 
 
 class OAuthAuthorizationPolicy(
-    OktaObject
+    OktaObject,
+    Policy
 ):
     def __init__(self, config=None):
-        if config:
-        else:
+        pass
 
 # End of File Generation

@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class FactorType(
+    str,
     Enum
 ):
     call = "call"

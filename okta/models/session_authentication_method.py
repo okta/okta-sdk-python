@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class SessionAuthenticationMethod(
+    str,
     Enum
 ):
     pwd = "pwd"

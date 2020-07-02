@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class EventHookChannelConfigAuthSchemeType(
+    str,
     Enum
 ):
     HEADER = "HEADER"

@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class GroupRuleStatus(
+    str,
     Enum
 ):
     ACTIVE = "ACTIVE"

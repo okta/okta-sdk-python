@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class AuthorizationServerCredentialsUse(
+    str,
     Enum
 ):
     sig = "sig"

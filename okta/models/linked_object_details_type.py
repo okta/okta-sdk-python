@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class LinkedObjectDetailsType(
+    str,
     Enum
 ):
     USER = "USER"

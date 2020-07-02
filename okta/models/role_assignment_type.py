@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class RoleAssignmentType(
+    str,
     Enum
 ):
     GROUP = "GROUP"

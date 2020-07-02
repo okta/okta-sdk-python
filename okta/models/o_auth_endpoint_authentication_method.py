@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class OAuthEndpointAuthenticationMethod(
+    str,
     Enum
 ):
     none = "none"

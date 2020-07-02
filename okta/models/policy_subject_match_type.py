@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class PolicySubjectMatchType(
+    str,
     Enum
 ):
     USERNAME = "USERNAME"

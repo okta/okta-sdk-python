@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class OAuthResponseType(
+    str,
     Enum
 ):
     code = "code"

@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class PolicyType(
+    str,
     Enum
 ):
     OAUTH_AUTHORIZATION_POLICY = "OAUTH_AUTHORIZATION_POLICY"

@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class FactorResultType(
+    str,
     Enum
 ):
     SUCCESS = "SUCCESS"

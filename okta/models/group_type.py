@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class GroupType(
+    str,
     Enum
 ):
     OKTA_GROUP = "OKTA_GROUP"

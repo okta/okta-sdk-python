@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class LogCredentialProvider(
+    str,
     Enum
 ):
     OKTA_AUTHENTICATION_PROVIDER = "OKTA_AUTHENTICATION_PROVIDER"

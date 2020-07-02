@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class OAuthGrantType(
+    str,
     Enum
 ):
     authorization_code = "authorization_code"

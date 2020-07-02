@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class ProtocolRelayStateFormat(
+    str,
     Enum
 ):
     OPAQUE = "OPAQUE"

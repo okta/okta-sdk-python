@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class PasswordCredentialHashAlgorithm(
+    str,
     Enum
 ):
     BCRYPT = "BCRYPT"

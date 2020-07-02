@@ -5,6 +5,7 @@ from enum import Enum
 
 
 class {{pascalCase model.modelName}}(
+    str,
     Enum
 ):
     {{#each model.enum as |enum|}}
@@ -14,12 +15,18 @@ class {{pascalCase model.modelName}}(
 {{else}}
 
 from okta.okta_object import OktaObject
+{{#if (ne model.extends undefined)}}
+from okta.models.{{snakeCase model.extends}}\
+    import {{model.extends}}
+{{/if}}
 
 
 class {{pascalCase model.modelName}}(
-    OktaObject
+    OktaObject{{#if (ne model.extends undefined)}},
+    {{model.extends}}{{/if}}
 ):
     def __init__(self, config=None):
+        {{#if (gt model.properties.length 0)}}
         if config:
             {{#each model.properties as |prop|}}
             self.{{snakeCase prop.propertyName}} = config["{{prop.propertyName}}"]\
@@ -33,6 +40,9 @@ class {{pascalCase model.modelName}}(
             self.{{snakeCase prop.propertyName}} = None
             {{/if}}
             {{/each}}
+        {{else}}
+        pass
+        {{/if}}
 
 {{/if}}
 # End of File Generation

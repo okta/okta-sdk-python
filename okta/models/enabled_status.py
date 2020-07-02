@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class EnabledStatus(
+    str,
     Enum
 ):
     ENABLED = "ENABLED"

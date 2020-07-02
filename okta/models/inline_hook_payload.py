@@ -24,7 +24,6 @@ class InlineHookPayload(
     OktaObject
 ):
     def __init__(self, config=None):
-        if config:
-        else:
+        pass
 
 # End of File Generation

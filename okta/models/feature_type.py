@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class FeatureType(
+    str,
     Enum
 ):
     self-service = "self-service"

@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class OAuth2ScopeConsentGrantStatus(
+    str,
     Enum
 ):
     ACTIVE = "ACTIVE"

@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class OpenIdConnectApplicationConsentMethod(
+    str,
     Enum
 ):
     REQUIRED = "REQUIRED"

@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class InlineHookType(
+    str,
     Enum
 ):
     com.okta.oauth2.tokens.transform = "com.okta.oauth2.tokens.transform"

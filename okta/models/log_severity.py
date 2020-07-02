@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class LogSeverity(
+    str,
     Enum
 ):
     DEBUG = "DEBUG"

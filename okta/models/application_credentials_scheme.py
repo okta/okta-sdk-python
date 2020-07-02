@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class ApplicationCredentialsScheme(
+    str,
     Enum
 ):
     SHARED_USERNAME_AND_PASSWORD = "SHARED_USERNAME_AND_PASSWORD"

@@ -21,6 +21,7 @@ from enum import Enum
 
 
 class SmsTemplateType(
+    str,
     Enum
 ):
     SMS_VERIFY_CODE = "SMS_VERIFY_CODE"
