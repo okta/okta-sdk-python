@@ -17,14 +17,19 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
+from enum import Enum
 
 
 class UserStatus(
-    OktaObject
+    Enum
 ):
-    def __init__(self, config=None):
-        if config:
-        else:
+    ACTIVE = "ACTIVE"
+    DEPROVISIONED = "DEPROVISIONED"
+    LOCKED_OUT = "LOCKED_OUT"
+    PASSWORD_EXPIRED = "PASSWORD_EXPIRED"
+    PROVISIONED = "PROVISIONED"
+    RECOVERY = "RECOVERY"
+    STAGED = "STAGED"
+    SUSPENDED = "SUSPENDED"
 
 # End of File Generation

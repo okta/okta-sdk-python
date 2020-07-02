@@ -17,14 +17,21 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
+from enum import Enum
 
 
 class FactorResultType(
-    OktaObject
+    Enum
 ):
-    def __init__(self, config=None):
-        if config:
-        else:
+    SUCCESS = "SUCCESS"
+    CHALLENGE = "CHALLENGE"
+    WAITING = "WAITING"
+    FAILED = "FAILED"
+    REJECTED = "REJECTED"
+    TIMEOUT = "TIMEOUT"
+    TIME_WINDOW_EXCEEDED = "TIME_WINDOW_EXCEEDED"
+    PASSCODE_REPLAYED = "PASSCODE_REPLAYED"
+    ERROR = "ERROR"
+    CANCELLED = "CANCELLED"
 
 # End of File Generation

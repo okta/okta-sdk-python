@@ -17,14 +17,18 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
+from enum import Enum
 
 
 class FactorStatus(
-    OktaObject
+    Enum
 ):
-    def __init__(self, config=None):
-        if config:
-        else:
+    PENDING_ACTIVATION = "PENDING_ACTIVATION"
+    ACTIVE = "ACTIVE"
+    INACTIVE = "INACTIVE"
+    NOT_SETUP = "NOT_SETUP"
+    ENROLLED = "ENROLLED"
+    DISABLED = "DISABLED"
+    EXPIRED = "EXPIRED"
 
 # End of File Generation

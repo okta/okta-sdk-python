@@ -17,14 +17,13 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
+from enum import Enum
 
 
 class OAuth2ScopeConsentGrantSource(
-    OktaObject
+    Enum
 ):
-    def __init__(self, config=None):
-        if config:
-        else:
+    END_USER = "END_USER"
+    ADMIN = "ADMIN"
 
 # End of File Generation

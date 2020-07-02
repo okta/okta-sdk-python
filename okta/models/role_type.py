@@ -17,14 +17,20 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
+from enum import Enum
 
 
 class RoleType(
-    OktaObject
+    Enum
 ):
-    def __init__(self, config=None):
-        if config:
-        else:
+    SUPER_ADMIN = "SUPER_ADMIN"
+    ORG_ADMIN = "ORG_ADMIN"
+    APP_ADMIN = "APP_ADMIN"
+    USER_ADMIN = "USER_ADMIN"
+    HELP_DESK_ADMIN = "HELP_DESK_ADMIN"
+    READ_ONLY_ADMIN = "READ_ONLY_ADMIN"
+    MOBILE_ADMIN = "MOBILE_ADMIN"
+    API_ACCESS_MANAGEMENT_ADMIN = "API_ACCESS_MANAGEMENT_ADMIN"
+    REPORT_ADMIN = "REPORT_ADMIN"
 
 # End of File Generation

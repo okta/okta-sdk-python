@@ -17,14 +17,14 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
+from enum import Enum
 
 
 class SessionStatus(
-    OktaObject
+    Enum
 ):
-    def __init__(self, config=None):
-        if config:
-        else:
+    ACTIVE = "ACTIVE"
+    MFA_ENROLL = "MFA_ENROLL"
+    MFA_REQUIRED = "MFA_REQUIRED"
 
 # End of File Generation

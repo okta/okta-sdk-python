@@ -17,14 +17,14 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
+from enum import Enum
 
 
 class GroupType(
-    OktaObject
+    Enum
 ):
-    def __init__(self, config=None):
-        if config:
-        else:
+    OKTA_GROUP = "OKTA_GROUP"
+    APP_GROUP = "APP_GROUP"
+    BUILT_IN = "BUILT_IN"
 
 # End of File Generation

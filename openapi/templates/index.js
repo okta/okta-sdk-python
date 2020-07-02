@@ -86,20 +86,6 @@ py.process = ({ spec, operations, models, handlebars }) => {
     },
   });
 
-  // Check for response resolution
-  operations.forEach((op) => {
-    const responseModel = getModelByName(op.responseModel, models);
-    if (responseModel && responseModel.requiresResolution) {
-      op.responseModelRequiresResolution = true;
-    }
-  });
-
-  templates.push({
-    src: "generated_client.py.hbs",
-    dest: "okta/generated_client.py",
-    context: { operations, spec },
-  });
-
   handlebars.registerHelper({
     operationArgumentBuilder,
     pyDocstringBuilder,
@@ -123,27 +109,10 @@ py.process = ({ spec, operations, models, handlebars }) => {
     )
   );
 
-  // fs.writeFile(
-  //   "openapi/createdFiles.json",
-  //   JSON.stringify(templates),
-  //   function (error) {
-  //     console.log(error);
-  //   }
-  // );
-
   return templates;
 };
 
 // Helper functions
-function getModelByName(name, models) {
-  if (name == undefined) {
-    return null;
-  }
-  const found = models.filter((model) => {
-    return model.modelName === name;
-  });
-  return found[0] || null;
-}
 
 function isPostOrPut(method) {
   return method === "post" || method === "put";

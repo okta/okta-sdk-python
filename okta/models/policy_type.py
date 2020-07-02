@@ -17,14 +17,15 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
+from enum import Enum
 
 
 class PolicyType(
-    OktaObject
+    Enum
 ):
-    def __init__(self, config=None):
-        if config:
-        else:
+    OAUTH_AUTHORIZATION_POLICY = "OAUTH_AUTHORIZATION_POLICY"
+    OKTA_SIGN_ON = "OKTA_SIGN_ON"
+    PASSWORD = "PASSWORD"
+    IDP_DISCOVERY = "IDP_DISCOVERY"
 
 # End of File Generation

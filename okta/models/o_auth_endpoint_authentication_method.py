@@ -17,14 +17,15 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
+from enum import Enum
 
 
 class OAuthEndpointAuthenticationMethod(
-    OktaObject
+    Enum
 ):
-    def __init__(self, config=None):
-        if config:
-        else:
+    none = "none"
+    client_secret_post = "client_secret_post"
+    client_secret_basic = "client_secret_basic"
+    client_secret_jwt = "client_secret_jwt"
 
 # End of File Generation

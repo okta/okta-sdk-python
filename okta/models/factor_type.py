@@ -17,14 +17,23 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
+from enum import Enum
 
 
 class FactorType(
-    OktaObject
+    Enum
 ):
-    def __init__(self, config=None):
-        if config:
-        else:
+    call = "call"
+    email = "email"
+    push = "push"
+    question = "question"
+    sms = "sms"
+    token:hardware = "token:hardware"
+    token:hotp = "token:hotp"
+    token:software:totp = "token:software:totp"
+    token = "token"
+    u2f = "u2f"
+    web = "web"
+    webauthn = "webauthn"
 
 # End of File Generation

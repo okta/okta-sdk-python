@@ -17,14 +17,16 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
+from enum import Enum
 
 
 class ApplicationCredentialsScheme(
-    OktaObject
+    Enum
 ):
-    def __init__(self, config=None):
-        if config:
-        else:
+    SHARED_USERNAME_AND_PASSWORD = "SHARED_USERNAME_AND_PASSWORD"
+    EXTERNAL_PASSWORD_SYNC = "EXTERNAL_PASSWORD_SYNC"
+    EDIT_USERNAME_AND_PASSWORD = "EDIT_USERNAME_AND_PASSWORD"
+    EDIT_PASSWORD_ONLY = "EDIT_PASSWORD_ONLY"
+    ADMIN_SETS_CREDENTIALS = "ADMIN_SETS_CREDENTIALS"
 
 # End of File Generation

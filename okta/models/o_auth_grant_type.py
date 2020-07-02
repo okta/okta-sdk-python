@@ -17,14 +17,16 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
+from enum import Enum
 
 
 class OAuthGrantType(
-    OktaObject
+    Enum
 ):
-    def __init__(self, config=None):
-        if config:
-        else:
+    authorization_code = "authorization_code"
+    implicit = "implicit"
+    password = "password"
+    refresh_token = "refresh_token"
+    client_credentials = "client_credentials"
 
 # End of File Generation

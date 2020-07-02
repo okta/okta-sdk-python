@@ -17,14 +17,16 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
+from enum import Enum
 
 
 class InlineHookType(
-    OktaObject
+    Enum
 ):
-    def __init__(self, config=None):
-        if config:
-        else:
+    com.okta.oauth2.tokens.transform = "com.okta.oauth2.tokens.transform"
+    com.okta.import.transform = "com.okta.import.transform"
+    com.okta.saml.tokens.transform = "com.okta.saml.tokens.transform"
+    com.okta.user.pre-registration = "com.okta.user.pre-registration"
+    com.okta.user.credential.password.import = "com.okta.user.credential.password.import"
 
 # End of File Generation

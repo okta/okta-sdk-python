@@ -17,14 +17,15 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
+from enum import Enum
 
 
 class PolicySubjectMatchType(
-    OktaObject
+    Enum
 ):
-    def __init__(self, config=None):
-        if config:
-        else:
+    USERNAME = "USERNAME"
+    EMAIL = "EMAIL"
+    USERNAME_OR_EMAIL = "USERNAME_OR_EMAIL"
+    CUSTOM_ATTRIBUTE = "CUSTOM_ATTRIBUTE"
 
 # End of File Generation

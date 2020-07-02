@@ -17,14 +17,17 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
+from enum import Enum
 
 
 class AuthenticationProviderType(
-    OktaObject
+    Enum
 ):
-    def __init__(self, config=None):
-        if config:
-        else:
+    ACTIVE_DIRECTORY = "ACTIVE_DIRECTORY"
+    FEDERATION = "FEDERATION"
+    LDAP = "LDAP"
+    OKTA = "OKTA"
+    SOCIAL = "SOCIAL"
+    IMPORT = "IMPORT"
 
 # End of File Generation

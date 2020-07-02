@@ -17,14 +17,19 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
+from enum import Enum
 
 
 class LogCredentialType(
-    OktaObject
+    Enum
 ):
-    def __init__(self, config=None):
-        if config:
-        else:
+    OTP = "OTP"
+    SMS = "SMS"
+    PASSWORD = "PASSWORD"
+    ASSERTION = "ASSERTION"
+    IWA = "IWA"
+    EMAIL = "EMAIL"
+    OAUTH2 = "OAUTH2"
+    JWT = "JWT"
 
 # End of File Generation

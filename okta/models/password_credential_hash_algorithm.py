@@ -17,14 +17,16 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
+from enum import Enum
 
 
 class PasswordCredentialHashAlgorithm(
-    OktaObject
+    Enum
 ):
-    def __init__(self, config=None):
-        if config:
-        else:
+    BCRYPT = "BCRYPT"
+    SHA-512 = "SHA-512"
+    SHA-256 = "SHA-256"
+    SHA-1 = "SHA-1"
+    MD5 = "MD5"
 
 # End of File Generation

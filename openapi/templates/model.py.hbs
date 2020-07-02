@@ -1,4 +1,17 @@
 {{> partials.copyrightHeader }}
+{{#if (ne model.enum undefined)}}
+
+from enum import Enum
+
+
+class {{pascalCase model.modelName}}(
+    Enum
+):
+    {{#each model.enum as |enum|}}
+    {{enum}} = "{{enum}}"
+    {{/each}}
+
+{{else}}
 
 from okta.okta_object import OktaObject
 
@@ -21,4 +34,5 @@ class {{pascalCase model.modelName}}(
             {{/if}}
             {{/each}}
 
+{{/if}}
 # End of File Generation
