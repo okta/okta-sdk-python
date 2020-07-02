@@ -41,6 +41,12 @@ py.process = ({ spec, operations, models, handlebars }) => {
       }
     }
 
+    if (model.enum) {
+      if (model.type === "integer") model.type = "int";
+      if (model.type === "string") model.type = "str";
+      if (!model.type) model.type = "str";
+    }
+
     templates.push({
       src: "model.py.hbs",
       dest: `okta/models/${_.snakeCase(model.modelName)}.py`,
