@@ -182,12 +182,12 @@ class RequestExecutor:
             of request, response object, response json, and error if raised
         """
         # Get start request time
-        current_req_start_time = int(time.time())
+        current_req_start_time = time.time()
         max_retries = self._max_retries
         req_timeout = self._request_timeout
 
         if req_timeout > 0 and \
-                (current_req_start_time-request_start_time) > req_timeout:
+                (current_req_start_time - request_start_time) > req_timeout:
             # Timeout is hit for request
             return None, Exception("Request Timeout exceeded.")
 
@@ -200,7 +200,9 @@ class RequestExecutor:
 
         if attempts < max_retries and (error or check_429):
             date_time = headers.get("Date", "")
-            retry_limit_reset = headers.get("X-Rate-Limit-Reset", "")
+            retry_limit_reset_headers = headers.getall(
+                "X-Rate-Limit-Reset", "")
+            retry_limit_reset = min(retry_limit_reset_headers.values())
             if not date_time or not retry_limit_reset:
                 return None, \
                     Exception(("429 response must have the "
@@ -208,7 +210,15 @@ class RequestExecutor:
 
             if check_429:
                 # backoff
-                pass
+                backoff_seconds = retry_limit_reset - date_time + 1
+                self.pause_for_backoff(attempts, backoff_seconds)
+                if (current_req_start_time + backoff_seconds)\
+                        - request_start_time > req_timeout:
+                    # Scrap the ting
+                    return (None, res_json)
+                else:
+                    # Retry the ting
+                    pass
 
             attempts += 1
 
@@ -219,7 +229,9 @@ class RequestExecutor:
             })
 
             req, res_details, res_json, error = \
-                await self._http_client.send_request(request)
+                await self.fire_request_helper(
+                    request, attempts, request_start_time
+                )
 
         return (req, res_details, res_json, error)
 
