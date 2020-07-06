@@ -50,5 +50,3 @@ class Protocol(
             self.scopes = None
             self.settings = None
             self.type = None
-
-# End of File Generation

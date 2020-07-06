@@ -29,5 +29,3 @@ class UserIdentityProviderLinkRequest(
                 if "externalId" in config else None
         else:
             self.external_id = None
-
-# End of File Generation

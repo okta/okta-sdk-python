@@ -38,5 +38,3 @@ class PasswordPolicyRecoveryFactors(
             self.okta_email = None
             self.okta_sms = None
             self.recovery_question = None
-
-# End of File Generation

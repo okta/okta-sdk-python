@@ -41,5 +41,3 @@ class VerifyUserFactorResponse(
             self.expires_at = None
             self.factor_result = None
             self.factor_result_message = None
-
-# End of File Generation

@@ -62,5 +62,3 @@ class CatalogApplication(
             self.status = None
             self.verification_status = None
             self.website = None
-
-# End of File Generation

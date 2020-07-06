@@ -35,5 +35,3 @@ class WsFederationApplication(
         else:
             self.name = "template_wsfed"
             self.settings = None
-
-# End of File Generation

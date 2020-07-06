@@ -38,5 +38,3 @@ class ProvisioningGroups(
             self.assignments = None
             self.filter = None
             self.source_attribute_name = None
-
-# End of File Generation

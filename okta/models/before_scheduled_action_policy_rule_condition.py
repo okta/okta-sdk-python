@@ -32,5 +32,3 @@ class BeforeScheduledActionPolicyRuleCondition(
         else:
             self.duration = None
             self.lifecycle_action = None
-
-# End of File Generation

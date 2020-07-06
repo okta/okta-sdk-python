@@ -35,5 +35,3 @@ class AutoLoginApplication(
         else:
             self.credentials = None
             self.settings = None
-
-# End of File Generation

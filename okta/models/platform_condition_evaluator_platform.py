@@ -32,5 +32,3 @@ class PlatformConditionEvaluatorPlatform(
         else:
             self.os = None
             self.type = None
-
-# End of File Generation

@@ -30,5 +30,3 @@ class LogAuthenticationProvider(
     FEDERATION = "FEDERATION"
     SOCIAL = "SOCIAL"
     FACTOR_PROVIDER = "FACTOR_PROVIDER"
-
-# End of File Generation

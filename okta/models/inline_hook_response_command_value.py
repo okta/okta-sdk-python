@@ -35,5 +35,3 @@ class InlineHookResponseCommandValue(
             self.op = None
             self.path = None
             self.value = None
-
-# End of File Generation

@@ -35,5 +35,3 @@ class UserIdentifierPolicyRuleCondition(
             self.attribute = None
             self.patterns = None
             self.type = None
-
-# End of File Generation

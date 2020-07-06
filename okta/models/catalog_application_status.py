@@ -26,5 +26,3 @@ class CatalogApplicationStatus(
 ):
     ACTIVE = "ACTIVE"
     INACTIVE = "INACTIVE"
-
-# End of File Generation

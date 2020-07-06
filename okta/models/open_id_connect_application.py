@@ -38,5 +38,3 @@ class OpenIdConnectApplication(
             self.credentials = None
             self.name = "oidc_client"
             self.settings = None
-
-# End of File Generation

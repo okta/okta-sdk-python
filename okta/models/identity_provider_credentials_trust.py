@@ -41,5 +41,3 @@ class IdentityProviderCredentialsTrust(
             self.kid = None
             self.revocation = None
             self.revocation_cache_lifetime = None
-
-# End of File Generation

@@ -62,5 +62,3 @@ class Policy(
             self.status = None
             self.system = None
             self.type = None
-
-# End of File Generation

@@ -53,5 +53,3 @@ class UserFactor(
             self.provider = None
             self.status = None
             self.verify = None
-
-# End of File Generation

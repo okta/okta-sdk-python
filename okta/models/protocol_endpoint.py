@@ -38,5 +38,3 @@ class ProtocolEndpoint(
             self.destination = None
             self.type = None
             self.url = None
-
-# End of File Generation

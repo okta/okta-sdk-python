@@ -32,5 +32,3 @@ class Scope(
         else:
             self.string_value = None
             self.type = None
-
-# End of File Generation

@@ -29,5 +29,3 @@ class CreateSessionRequest(
                 if "sessionToken" in config else None
         else:
             self.session_token = None
-
-# End of File Generation

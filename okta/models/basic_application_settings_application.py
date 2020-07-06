@@ -35,5 +35,3 @@ class BasicApplicationSettingsApplication(
         else:
             self.auth_url = None
             self.url = None
-
-# End of File Generation

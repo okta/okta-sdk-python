@@ -35,5 +35,3 @@ class ApplicationCredentialsUsernameTemplate(
             self.suffix = None
             self.template = None
             self.type = None
-
-# End of File Generation

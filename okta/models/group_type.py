@@ -27,5 +27,3 @@ class GroupType(
     OKTA_GROUP = "OKTA_GROUP"
     APP_GROUP = "APP_GROUP"
     BUILT_IN = "BUILT_IN"
-
-# End of File Generation

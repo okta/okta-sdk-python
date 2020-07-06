@@ -89,5 +89,3 @@ class PolicyRuleConditions(
             self.user_identifier = None
             self.user_status = None
             self.users = None
-
-# End of File Generation

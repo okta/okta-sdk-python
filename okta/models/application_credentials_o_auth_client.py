@@ -38,5 +38,3 @@ class ApplicationCredentialsOAuthClient(
             self.client_id = None
             self.client_secret = None
             self.token_endpoint_auth_method = None
-
-# End of File Generation

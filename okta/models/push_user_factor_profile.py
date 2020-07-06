@@ -44,5 +44,3 @@ class PushUserFactorProfile(
             self.name = None
             self.platform = None
             self.version = None
-
-# End of File Generation

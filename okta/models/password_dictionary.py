@@ -29,5 +29,3 @@ class PasswordDictionary(
                 if "common" in config else None
         else:
             self.common = None
-
-# End of File Generation

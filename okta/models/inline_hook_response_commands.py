@@ -32,5 +32,3 @@ class InlineHookResponseCommands(
         else:
             self.type = None
             self.value = None
-
-# End of File Generation

@@ -119,5 +119,3 @@ class UserProfile(
             self.title = None
             self.user_type = None
             self.zip_code = None
-
-# End of File Generation

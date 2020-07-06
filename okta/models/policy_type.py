@@ -28,5 +28,3 @@ class PolicyType(
     OKTA_SIGN_ON = "OKTA_SIGN_ON"
     PASSWORD = "PASSWORD"
     IDP_DISCOVERY = "IDP_DISCOVERY"
-
-# End of File Generation

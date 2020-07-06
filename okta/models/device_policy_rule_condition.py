@@ -38,5 +38,3 @@ class DevicePolicyRuleCondition(
             self.platform = None
             self.rooted = None
             self.trust_level = None
-
-# End of File Generation

@@ -56,5 +56,3 @@ class Role(
             self.last_updated = None
             self.status = None
             self.type = None
-
-# End of File Generation

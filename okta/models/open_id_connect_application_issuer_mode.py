@@ -26,5 +26,3 @@ class OpenIdConnectApplicationIssuerMode(
 ):
     CUSTOM_URL = "CUSTOM_URL"
     ORG_URL = "ORG_URL"
-
-# End of File Generation

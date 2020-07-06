@@ -32,5 +32,3 @@ class IdentityProviderCredentialsClient(
         else:
             self.client_id = None
             self.client_secret = None
-
-# End of File Generation

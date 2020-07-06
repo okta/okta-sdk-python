@@ -29,5 +29,3 @@ class OktaSignOnPolicyRuleActions(
                 if "signon" in config else None
         else:
             self.signon = None
-
-# End of File Generation

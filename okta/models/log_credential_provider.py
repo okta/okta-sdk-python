@@ -30,5 +30,3 @@ class LogCredentialProvider(
     GOOGLE = "GOOGLE"
     DUO = "DUO"
     YUBIKEY = "YUBIKEY"
-
-# End of File Generation

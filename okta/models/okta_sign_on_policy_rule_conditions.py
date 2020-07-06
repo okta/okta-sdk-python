@@ -35,5 +35,3 @@ class OktaSignOnPolicyRuleConditions(
             self.auth_context = None
             self.network = None
             self.people = None
-
-# End of File Generation

@@ -59,5 +59,3 @@ class AuthorizationServer(
             self.last_updated = None
             self.name = None
             self.status = None
-
-# End of File Generation

@@ -35,5 +35,3 @@ class PasswordPolicyPasswordSettings(
             self.age = None
             self.complexity = None
             self.lockout = None
-
-# End of File Generation

@@ -38,5 +38,3 @@ class ApplicationSettings(
             self.implicit_assignment = None
             self.inline_hook_id = None
             self.notifications = None
-
-# End of File Generation

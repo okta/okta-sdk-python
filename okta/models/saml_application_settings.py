@@ -32,5 +32,3 @@ class SamlApplicationSettings(
                 if "signOn" in config else None
         else:
             self.sign_on = None
-
-# End of File Generation

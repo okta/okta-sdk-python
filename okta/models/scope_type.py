@@ -26,5 +26,3 @@ class ScopeType(
 ):
     CORS = "CORS"
     REDIRECT = "REDIRECT"
-
-# End of File Generation

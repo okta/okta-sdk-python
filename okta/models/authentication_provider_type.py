@@ -30,5 +30,3 @@ class AuthenticationProviderType(
     OKTA = "OKTA"
     SOCIAL = "SOCIAL"
     IMPORT = "IMPORT"
-
-# End of File Generation

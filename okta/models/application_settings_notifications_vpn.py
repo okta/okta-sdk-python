@@ -35,5 +35,3 @@ class ApplicationSettingsNotificationsVpn(
             self.help_url = None
             self.message = None
             self.network = None
-
-# End of File Generation

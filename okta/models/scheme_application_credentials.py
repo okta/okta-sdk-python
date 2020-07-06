@@ -44,5 +44,3 @@ class SchemeApplicationCredentials(
             self.scheme = None
             self.signing = None
             self.user_name = None
-
-# End of File Generation

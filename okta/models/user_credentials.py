@@ -35,5 +35,3 @@ class UserCredentials(
             self.password = None
             self.provider = None
             self.recovery_question = None
-
-# End of File Generation

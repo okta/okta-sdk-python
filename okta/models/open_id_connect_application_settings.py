@@ -32,5 +32,3 @@ class OpenIdConnectApplicationSettings(
                 if "oauthClient" in config else None
         else:
             self.oauth_client = None
-
-# End of File Generation

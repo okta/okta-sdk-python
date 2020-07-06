@@ -38,5 +38,3 @@ class SecurePasswordStoreApplication(
             self.credentials = None
             self.name = "template_sps"
             self.settings = None
-
-# End of File Generation

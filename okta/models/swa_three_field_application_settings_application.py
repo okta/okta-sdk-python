@@ -50,5 +50,3 @@ class SwaThreeFieldApplicationSettingsApplication(
             self.password_selector = None
             self.target_url = None
             self.user_name_selector = None
-
-# End of File Generation

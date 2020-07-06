@@ -38,5 +38,3 @@ class BasicAuthApplication(
             self.credentials = None
             self.name = "template_basic_auth"
             self.settings = None
-
-# End of File Generation

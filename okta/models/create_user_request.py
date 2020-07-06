@@ -38,5 +38,3 @@ class CreateUserRequest(
             self.group_ids = None
             self.profile = None
             self.type = None
-
-# End of File Generation

@@ -32,5 +32,3 @@ class MdmEnrollmentPolicyRuleCondition(
         else:
             self.block_non_safe_android = None
             self.enrollment = None
-
-# End of File Generation

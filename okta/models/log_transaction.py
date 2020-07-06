@@ -35,5 +35,3 @@ class LogTransaction(
             self.detail = None
             self.id = None
             self.type = None
-
-# End of File Generation

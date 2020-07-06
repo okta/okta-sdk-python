@@ -44,5 +44,3 @@ class SocialAuthToken(
             self.token = None
             self.token_auth_scheme = None
             self.token_type = None
-
-# End of File Generation

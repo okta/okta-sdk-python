@@ -32,5 +32,3 @@ class InactivityPolicyRuleCondition(
         else:
             self.number = None
             self.unit = None
-
-# End of File Generation

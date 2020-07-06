@@ -29,5 +29,3 @@ class RiskScorePolicyRuleCondition(
                 if "level" in config else None
         else:
             self.level = None
-
-# End of File Generation

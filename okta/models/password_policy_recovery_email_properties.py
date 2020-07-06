@@ -29,5 +29,3 @@ class PasswordPolicyRecoveryEmailProperties(
                 if "recoveryToken" in config else None
         else:
             self.recovery_token = None
-
-# End of File Generation

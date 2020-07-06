@@ -62,5 +62,3 @@ class OpenIdConnectApplicationSettingsClient(
             self.redirect_uris = None
             self.response_types = None
             self.tos_uri = None
-
-# End of File Generation

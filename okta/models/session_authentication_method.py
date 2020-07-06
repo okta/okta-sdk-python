@@ -34,5 +34,3 @@ class SessionAuthenticationMethod(
     fpt = "fpt"
     kba = "kba"
     mfa = "mfa"
-
-# End of File Generation

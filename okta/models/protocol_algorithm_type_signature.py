@@ -32,5 +32,3 @@ class ProtocolAlgorithmTypeSignature(
         else:
             self.algorithm = None
             self.scope = None
-
-# End of File Generation

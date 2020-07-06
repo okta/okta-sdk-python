@@ -26,5 +26,3 @@ class FeatureStageState(
 ):
     OPEN = "OPEN"
     CLOSED = "CLOSED"
-
-# End of File Generation

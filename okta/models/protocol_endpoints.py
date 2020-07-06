@@ -50,5 +50,3 @@ class ProtocolEndpoints(
             self.sso = None
             self.token = None
             self.user_info = None
-
-# End of File Generation

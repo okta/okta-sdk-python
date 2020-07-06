@@ -32,5 +32,3 @@ class AutoLoginApplicationSettingsSignOn(
         else:
             self.login_url = None
             self.redirect_url = None
-
-# End of File Generation

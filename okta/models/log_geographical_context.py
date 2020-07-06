@@ -41,5 +41,3 @@ class LogGeographicalContext(
             self.geolocation = None
             self.postal_code = None
             self.state = None
-
-# End of File Generation

@@ -53,5 +53,3 @@ class Group(
             self.object_class = None
             self.profile = None
             self.type = None
-
-# End of File Generation

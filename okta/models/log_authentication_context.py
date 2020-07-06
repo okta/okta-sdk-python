@@ -47,5 +47,3 @@ class LogAuthenticationContext(
             self.external_session_id = None
             self.interface = None
             self.issuer = None
-
-# End of File Generation

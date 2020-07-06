@@ -28,5 +28,3 @@ class LogSeverity(
     INFO = "INFO"
     WARN = "WARN"
     ERROR = "ERROR"
-
-# End of File Generation

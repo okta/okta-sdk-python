@@ -35,5 +35,3 @@ class PasswordCredential(
             self.hash = None
             self.hook = None
             self.value = None
-
-# End of File Generation

@@ -32,5 +32,3 @@ class OAuth2Actor(
         else:
             self.id = None
             self.type = None
-
-# End of File Generation

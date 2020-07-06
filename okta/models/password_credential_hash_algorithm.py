@@ -29,5 +29,3 @@ class PasswordCredentialHashAlgorithm(
     SHA-256 = "SHA-256"
     SHA-1 = "SHA-1"
     MD5 = "MD5"
-
-# End of File Generation

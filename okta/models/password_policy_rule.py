@@ -38,5 +38,3 @@ class PasswordPolicyRule(
             self.actions = None
             self.conditions = None
             self.name = None
-
-# End of File Generation

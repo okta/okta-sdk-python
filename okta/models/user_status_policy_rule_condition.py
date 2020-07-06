@@ -29,5 +29,3 @@ class UserStatusPolicyRuleCondition(
                 if "value" in config else None
         else:
             self.value = None
-
-# End of File Generation

@@ -29,5 +29,3 @@ class SessionIdentityProviderType(
     OKTA = "OKTA"
     FEDERATION = "FEDERATION"
     SOCIAL = "SOCIAL"
-
-# End of File Generation

@@ -32,5 +32,3 @@ class UserIdentifierConditionEvaluatorPattern(
         else:
             self.match_type = None
             self.value = None
-
-# End of File Generation

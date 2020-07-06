@@ -31,5 +31,3 @@ class FactorStatus(
     ENROLLED = "ENROLLED"
     DISABLED = "DISABLED"
     EXPIRED = "EXPIRED"
-
-# End of File Generation

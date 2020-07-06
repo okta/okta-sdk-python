@@ -29,5 +29,3 @@ class PasswordPolicyRuleAction(
                 if "access" in config else None
         else:
             self.access = None
-
-# End of File Generation

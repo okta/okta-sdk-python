@@ -29,5 +29,3 @@ class ProtocolAlgorithmType(
                 if "signature" in config else None
         else:
             self.signature = None
-
-# End of File Generation

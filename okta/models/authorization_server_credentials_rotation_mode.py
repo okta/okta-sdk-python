@@ -26,5 +26,3 @@ class AuthorizationServerCredentialsRotationMode(
 ):
     AUTO = "AUTO"
     MANUAL = "MANUAL"
-
-# End of File Generation

@@ -25,5 +25,3 @@ class EventHookChannelConfigAuthSchemeType(
     Enum
 ):
     HEADER = "HEADER"
-
-# End of File Generation

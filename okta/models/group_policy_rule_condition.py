@@ -32,5 +32,3 @@ class GroupPolicyRuleCondition(
         else:
             self.exclude = None
             self.include = None
-
-# End of File Generation

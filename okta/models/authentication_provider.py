@@ -32,5 +32,3 @@ class AuthenticationProvider(
         else:
             self.name = None
             self.type = None
-
-# End of File Generation

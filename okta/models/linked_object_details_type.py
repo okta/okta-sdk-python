@@ -25,5 +25,3 @@ class LinkedObjectDetailsType(
     Enum
 ):
     USER = "USER"
-
-# End of File Generation

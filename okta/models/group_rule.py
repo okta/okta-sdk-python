@@ -50,5 +50,3 @@ class GroupRule(
             self.name = None
             self.status = None
             self.type = None
-
-# End of File Generation

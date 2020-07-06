@@ -26,5 +26,3 @@ class InlineHookStatus(
 ):
     ACTIVE = "ACTIVE"
     INACTIVE = "INACTIVE"
-
-# End of File Generation

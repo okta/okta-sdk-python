@@ -32,5 +32,3 @@ class LogCredentialType(
     EMAIL = "EMAIL"
     OAUTH2 = "OAUTH2"
     JWT = "JWT"
-
-# End of File Generation

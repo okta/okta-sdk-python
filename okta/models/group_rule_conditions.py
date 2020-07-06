@@ -32,5 +32,3 @@ class GroupRuleConditions(
         else:
             self.expression = None
             self.people = None
-
-# End of File Generation

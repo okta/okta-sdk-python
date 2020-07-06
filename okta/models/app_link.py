@@ -56,5 +56,3 @@ class AppLink(
             self.link_url = None
             self.logo_url = None
             self.sort_order = None
-
-# End of File Generation

@@ -38,5 +38,3 @@ class SamlAttributeStatement(
             self.namespace = None
             self.type = None
             self.values = None
-
-# End of File Generation

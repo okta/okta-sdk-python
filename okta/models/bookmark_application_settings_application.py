@@ -35,5 +35,3 @@ class BookmarkApplicationSettingsApplication(
         else:
             self.request_integration = None
             self.url = None
-
-# End of File Generation

@@ -28,5 +28,3 @@ class PolicySubjectMatchType(
     EMAIL = "EMAIL"
     USERNAME_OR_EMAIL = "USERNAME_OR_EMAIL"
     CUSTOM_ATTRIBUTE = "CUSTOM_ATTRIBUTE"
-
-# End of File Generation

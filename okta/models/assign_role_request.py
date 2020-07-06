@@ -29,5 +29,3 @@ class AssignRoleRequest(
                 if "type" in config else None
         else:
             self.type = None
-
-# End of File Generation

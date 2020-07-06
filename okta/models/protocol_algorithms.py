@@ -32,5 +32,3 @@ class ProtocolAlgorithms(
         else:
             self.request = None
             self.response = None
-
-# End of File Generation

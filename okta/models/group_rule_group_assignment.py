@@ -29,5 +29,3 @@ class GroupRuleGroupAssignment(
                 if "groupIds" in config else None
         else:
             self.group_ids = None
-
-# End of File Generation

@@ -29,5 +29,3 @@ class PolicyRuleAuthContextCondition(
                 if "authType" in config else None
         else:
             self.auth_type = None
-
-# End of File Generation

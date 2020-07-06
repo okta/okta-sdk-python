@@ -29,5 +29,3 @@ class AuthorizationServerCredentials(
                 if "signing" in config else None
         else:
             self.signing = None
-
-# End of File Generation

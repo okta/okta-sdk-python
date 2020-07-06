@@ -35,5 +35,3 @@ class InlineHookChannel(
             self.config = None
             self.type = None
             self.version = None
-
-# End of File Generation

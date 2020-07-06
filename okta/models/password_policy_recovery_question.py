@@ -32,5 +32,3 @@ class PasswordPolicyRecoveryQuestion(
         else:
             self.properties = None
             self.status = None
-
-# End of File Generation

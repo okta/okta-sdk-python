@@ -32,5 +32,3 @@ class GroupProfile(
         else:
             self.description = None
             self.name = None
-
-# End of File Generation

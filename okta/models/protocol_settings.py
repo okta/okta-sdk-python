@@ -29,5 +29,3 @@ class ProtocolSettings(
                 if "nameFormat" in config else None
         else:
             self.name_format = None
-
-# End of File Generation

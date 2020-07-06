@@ -35,5 +35,3 @@ class PlatformConditionEvaluatorPlatformOperatingSystem(
             self.expression = None
             self.type = None
             self.version = None
-
-# End of File Generation

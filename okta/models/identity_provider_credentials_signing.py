@@ -29,5 +29,3 @@ class IdentityProviderCredentialsSigning(
                 if "kid" in config else None
         else:
             self.kid = None
-
-# End of File Generation

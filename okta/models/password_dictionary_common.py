@@ -29,5 +29,3 @@ class PasswordDictionaryCommon(
                 if "exclude" in config else None
         else:
             self.exclude = "false"
-
-# End of File Generation

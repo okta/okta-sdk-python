@@ -32,5 +32,3 @@ class BasicApplicationSettings(
                 if "app" in config else None
         else:
             self.app = None
-
-# End of File Generation

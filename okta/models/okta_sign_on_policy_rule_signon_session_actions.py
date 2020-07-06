@@ -35,5 +35,3 @@ class OktaSignOnPolicyRuleSignonSessionActions(
             self.max_session_idle_minutes = "120"
             self.max_session_lifetime_minutes = "0"
             self.use_persistent_cookie = "false"
-
-# End of File Generation

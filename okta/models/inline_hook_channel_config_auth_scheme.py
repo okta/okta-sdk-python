@@ -35,5 +35,3 @@ class InlineHookChannelConfigAuthScheme(
             self.key = None
             self.type = None
             self.value = None
-
-# End of File Generation

@@ -29,5 +29,3 @@ class ApplicationSettingsNotifications(
                 if "vpn" in config else None
         else:
             self.vpn = None
-
-# End of File Generation

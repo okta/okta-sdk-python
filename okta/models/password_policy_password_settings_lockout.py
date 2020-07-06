@@ -38,5 +38,3 @@ class PasswordPolicyPasswordSettingsLockout(
             self.max_attempts = None
             self.show_lockout_failures = None
             self.user_lockout_notification_channels = None
-
-# End of File Generation

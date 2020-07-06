@@ -32,5 +32,3 @@ class AppUserCredentials(
         else:
             self.password = None
             self.user_name = None
-
-# End of File Generation

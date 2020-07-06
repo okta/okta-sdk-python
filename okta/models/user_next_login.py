@@ -25,5 +25,3 @@ class UserNextLogin(
     Enum
 ):
     changePassword = "changePassword"
-
-# End of File Generation

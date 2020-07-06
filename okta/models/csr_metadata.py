@@ -32,5 +32,3 @@ class CsrMetadata(
         else:
             self.subject = None
             self.subject_alt_names = None
-
-# End of File Generation

@@ -53,5 +53,3 @@ class IonField(
             self.type = None
             self.value = None
             self.visible = None
-
-# End of File Generation

@@ -32,5 +32,3 @@ class UserActivationToken(
         else:
             self.activation_token = None
             self.activation_url = None
-
-# End of File Generation

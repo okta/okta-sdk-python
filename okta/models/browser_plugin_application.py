@@ -32,5 +32,3 @@ class BrowserPluginApplication(
                 if "credentials" in config else None
         else:
             self.credentials = None
-
-# End of File Generation

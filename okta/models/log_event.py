@@ -74,5 +74,3 @@ class LogEvent(
             self.transaction = None
             self.uuid = None
             self.version = None
-
-# End of File Generation

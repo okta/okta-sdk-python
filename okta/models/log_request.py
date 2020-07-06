@@ -29,5 +29,3 @@ class LogRequest(
                 if "ipChain" in config else None
         else:
             self.ip_chain = None
-
-# End of File Generation

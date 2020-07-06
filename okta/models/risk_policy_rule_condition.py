@@ -29,5 +29,3 @@ class RiskPolicyRuleCondition(
                 if "behaviors" in config else None
         else:
             self.behaviors = None
-
-# End of File Generation

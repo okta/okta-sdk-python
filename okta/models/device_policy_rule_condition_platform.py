@@ -32,5 +32,3 @@ class DevicePolicyRuleConditionPlatform(
         else:
             self.supported_mdm_frameworks = None
             self.types = None
-
-# End of File Generation
