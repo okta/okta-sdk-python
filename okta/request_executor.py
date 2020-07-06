@@ -4,7 +4,7 @@ from okta.oauth import OAuth
 from okta.api_response import OktaAPIResponse
 import time
 from http import HTTPStatus
-# import json
+import json
 
 
 class RequestExecutor:
@@ -157,11 +157,22 @@ class RequestExecutor:
         # check if in cache
         if not self._cache.contains(url_cache_key):
             # shoot request and return
-            req, res_details, resp_body, error = await self._http_client\
-                .send_request(request)
+            response, error = await\
+                self.fire_request_helper(request, 0, time.time())
             if error:
                 return (None, None, None, error)
-            self._cache.add(url_cache_key, (res_details, resp_body))
+            _, res_details, resp_body, error = response
+
+            # add to cache if not a list and valid response
+            if method.upper() == "GET" and 200 <= res_details.status <= 299:
+                try:
+                    json_object = json.loads(resp_body)
+                    if not isinstance(json_object, list):
+                        self._cache.add(
+                            url_cache_key, (res_details, resp_body))
+                except Exception:
+                    pass
+
             return (request, res_details, resp_body, error)
 
         # otherwise return cache response
@@ -170,7 +181,7 @@ class RequestExecutor:
 
     async def fire_request_helper(self, request, attempts, request_start_time):
         """
-        TODO: helper method to perform HTTP retries
+        Helper method to perform HTTP call with retries if needed
 
         Args:
             request (dict): HTTP request representation
@@ -189,13 +200,13 @@ class RequestExecutor:
         if req_timeout > 0 and \
                 (current_req_start_time - request_start_time) > req_timeout:
             # Timeout is hit for request
-            return None, Exception("Request Timeout exceeded.")
+            return (None, Exception("Request Timeout exceeded."))
 
-        # Do request
-        req, res_details, res_json, error = \
+        # Execute request
+        _, res_details, resp_body, error = \
             await self._http_client.send_request(request)
 
-        check_429 = self.is_too_many_requests(res_details.status, res_json)
+        check_429 = self.is_too_many_requests(res_details.status, resp_body)
         headers = res_details.headers
 
         if attempts < max_retries and (error or check_429):
@@ -204,36 +215,36 @@ class RequestExecutor:
                 "X-Rate-Limit-Reset", "")
             retry_limit_reset = min(retry_limit_reset_headers.values())
             if not date_time or not retry_limit_reset:
-                return None, \
-                    Exception(("429 response must have the "
-                               "'X-Rate-Limit-Reset' and 'Date' headers"))
+                return (None,
+                        Exception(("429 response must have the "
+                                   "'X-Rate-Limit-Reset' and 'Date' headers")))
 
             if check_429:
                 # backoff
                 backoff_seconds = retry_limit_reset - date_time + 1
-                self.pause_for_backoff(attempts, backoff_seconds)
+                self.pause_for_backoff(backoff_seconds)
                 if (current_req_start_time + backoff_seconds)\
                         - request_start_time > req_timeout:
-                    # Scrap the ting
-                    return (None, res_json)
-                else:
-                    # Retry the ting
-                    pass
+                    return (None, resp_body)
 
+            # Setup retry request
             attempts += 1
+            request['headers'].update(
+                {
+                    RequestExecutor.RETRY_FOR_HEADER: headers.get(
+                        "X-Okta-Request-Id", ""),
+                    RequestExecutor.RETRY_COUNT_HEADER: attempts
+                }
+            )
 
-            request['headers'].update({
-                RequestExecutor.RETRY_FOR_HEADER: headers.get(
-                    "X-Okta-Request-Id", ""),
-                RequestExecutor.RETRY_COUNT_HEADER: attempts
-            })
-
-            req, res_details, res_json, error = \
+            _, res_details, resp_body, error = \
                 await self.fire_request_helper(
                     request, attempts, request_start_time
                 )
+            if error:
+                return (None, error)
 
-        return (req, res_details, res_json, error)
+        return ((request, res_details, resp_body, error), None)
 
     def is_too_many_requests(self, status, response):
         """
@@ -251,3 +262,6 @@ class RequestExecutor:
 
     def parse_response(self, request, response):
         pass
+
+    def pause_for_backoff(self, backoff_time):
+        time.sleep(backoff_time)
