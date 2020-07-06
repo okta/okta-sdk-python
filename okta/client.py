@@ -1,14 +1,83 @@
+"""
+Copyright 2020 - Present Okta, Inc.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+"""
+
+# AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
+# SEE CONTRIBUTOR DOCUMENTATION
+
 from okta.config.config_setter import ConfigSetter
 from okta.config.config_validator import ConfigValidator
 from okta.request_executor import RequestExecutor
 from okta.cache.no_op_cache import NoOpCache
 from okta.cache.okta_cache import OktaCache
+from okta.generated_clients.application_client\
+    import ApplicationClient
+from okta.generated_clients.authorization_server_client\
+    import AuthorizationServerClient
+from okta.generated_clients.event_hook_client\
+    import EventHookClient
+from okta.generated_clients.feature_client\
+    import FeatureClient
+from okta.generated_clients.group_client\
+    import GroupClient
+from okta.generated_clients.identity_provider_client\
+    import IdentityProviderClient
+from okta.generated_clients.inline_hook_client\
+    import InlineHookClient
+from okta.generated_clients.log_event_client\
+    import LogEventClient
+from okta.generated_clients.linked_object_client\
+    import LinkedObjectClient
+from okta.generated_clients.user_type_client\
+    import UserTypeClient
+from okta.generated_clients.policy_client\
+    import PolicyClient
+from okta.generated_clients.session_client\
+    import SessionClient
+from okta.generated_clients.sms_template_client\
+    import SmsTemplateClient
+from okta.generated_clients.trusted_origin_client\
+    import TrustedOriginClient
+from okta.generated_clients.user_client\
+    import UserClient
+from okta.generated_clients.user_factor_client\
+    import UserFactorClient
 
 
-class Client:
+class Client(
+    ApplicationClient,
+    AuthorizationServerClient,
+    EventHookClient,
+    FeatureClient,
+    GroupClient,
+    IdentityProviderClient,
+    InlineHookClient,
+    LogEventClient,
+    LinkedObjectClient,
+    UserTypeClient,
+    PolicyClient,
+    SessionClient,
+    SmsTemplateClient,
+    TrustedOriginClient,
+    UserClient,
+    UserFactorClient
+):
     """An Okta client object"""
 
     def __init__(self, user_config: dict = {}):
+        super()
         # Load configuration
         client_config_setter = ConfigSetter()
         client_config_setter._apply_config({'client': user_config})

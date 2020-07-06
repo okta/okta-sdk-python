@@ -14,3 +14,7 @@ __pycache__/
 
 # Code coveraeg
 .coverage
+
+# JS files
+*/node_modules/
+*package-lock.json

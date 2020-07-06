@@ -1,0 +1,45 @@
+{{> partials.copyrightHeader }}
+{{#if (ne model.enum undefined)}}
+
+from enum import Enum
+
+
+class {{pascalCase model.modelName}}(
+    {{model.type}},
+    Enum
+):
+    {{#each model.enum as |enum|}}
+    {{enum}} = "{{enum}}"
+    {{/each}}
+{{else}}
+
+from okta.okta_object import OktaObject
+{{#if (ne model.extends undefined)}}
+from okta.models.{{snakeCase model.extends}}\
+    import {{model.extends}}
+{{/if}}
+
+
+class {{pascalCase model.modelName}}(
+    OktaObject{{#if (ne model.extends undefined)}},
+    {{model.extends}}{{/if}}
+):
+    def __init__(self, config=None):
+        {{#if (gt model.properties.length 0)}}
+        if config:
+            {{#each model.properties as |prop|}}
+            self.{{snakeCase prop.propertyName}} = config["{{prop.propertyName}}"]\
+                if "{{prop.propertyName}}" in config else None
+            {{/each}}
+        else:
+            {{#each model.properties as |prop|}}
+            {{#if (ne prop.default undefined) }}
+            self.{{snakeCase prop.propertyName}} = "{{prop.default}}"
+            {{else}}
+            self.{{snakeCase prop.propertyName}} = None
+            {{/if}}
+            {{/each}}
+        {{else}}
+        pass
+        {{/if}}
+{{/if}}
