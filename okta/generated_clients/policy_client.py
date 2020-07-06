@@ -572,6 +572,3 @@ class PolicyClient():
         if error:
             return (None, error)
         return (response, None)
-
-
-# End of File Generation

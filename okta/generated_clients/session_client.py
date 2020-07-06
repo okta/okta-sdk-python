@@ -189,6 +189,3 @@ class SessionClient():
             return (None, error)
 
         return (result, None)
-
-
-# End of File Generation

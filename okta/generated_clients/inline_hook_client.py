@@ -364,6 +364,3 @@ class InlineHookClient():
             return (None, error)
 
         return (result, None)
-
-
-# End of File Generation

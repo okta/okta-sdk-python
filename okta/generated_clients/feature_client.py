@@ -228,6 +228,3 @@ class FeatureClient():
             return (None, error)
 
         return (result, None)
-
-
-# End of File Generation
