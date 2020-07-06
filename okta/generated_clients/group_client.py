@@ -64,8 +64,8 @@ class GroupClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -154,8 +154,8 @@ class GroupClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -237,8 +237,8 @@ class GroupClient():
             /api/v1/groups/rules/{ruleId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -275,8 +275,8 @@ class GroupClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -359,8 +359,8 @@ class GroupClient():
             /api/v1/groups/rules/{ruleId}/lifecycle/activate
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -391,8 +391,8 @@ class GroupClient():
             /api/v1/groups/rules/{ruleId}/lifecycle/deactivate
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -423,8 +423,8 @@ class GroupClient():
             /api/v1/groups/{groupId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -456,8 +456,8 @@ class GroupClient():
             /api/v1/groups/{groupId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -547,8 +547,8 @@ class GroupClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -590,8 +590,8 @@ class GroupClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -677,8 +677,8 @@ class GroupClient():
             /api/v1/groups/{groupId}/roles/{roleId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -710,8 +710,8 @@ class GroupClient():
             /api/v1/groups/{groupId}/roles/{roleId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -761,8 +761,8 @@ class GroupClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -801,8 +801,8 @@ class GroupClient():
                 catalog/apps/{appName}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -834,8 +834,8 @@ class GroupClient():
                 catalog/apps/{appName}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -870,8 +870,8 @@ class GroupClient():
                 catalog/apps/{appName}/{applicationId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -906,8 +906,8 @@ class GroupClient():
                 catalog/apps/{appName}/{applicationId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -945,8 +945,8 @@ class GroupClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -988,8 +988,8 @@ class GroupClient():
                 groups/{targetGroupId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1024,8 +1024,8 @@ class GroupClient():
                 groups/{targetGroupId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1062,8 +1062,8 @@ class GroupClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1101,8 +1101,8 @@ class GroupClient():
             /api/v1/groups/{groupId}/users/{userId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1133,8 +1133,8 @@ class GroupClient():
             /api/v1/groups/{groupId}/users/{userId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers

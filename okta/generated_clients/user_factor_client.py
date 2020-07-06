@@ -51,8 +51,8 @@ class UserFactorClient():
             /api/v1/users/{userId}/factors
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -143,8 +143,8 @@ class UserFactorClient():
             /api/v1/users/{userId}/factors/catalog
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -184,8 +184,8 @@ class UserFactorClient():
             /api/v1/users/{userId}/factors/questions
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -224,8 +224,8 @@ class UserFactorClient():
             /api/v1/users/{userId}/factors/{factorId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -258,8 +258,8 @@ class UserFactorClient():
             /api/v1/users/{userId}/factors/{factorId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -348,8 +348,8 @@ class UserFactorClient():
                 transactions/{transactionId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers

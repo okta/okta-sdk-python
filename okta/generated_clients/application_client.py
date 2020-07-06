@@ -69,8 +69,8 @@ class ApplicationClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -154,8 +154,8 @@ class ApplicationClient():
             /api/v1/apps/{appId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -192,8 +192,8 @@ class ApplicationClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -277,8 +277,8 @@ class ApplicationClient():
             /api/v1/apps/{appId}/credentials/csrs
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -362,8 +362,8 @@ class ApplicationClient():
             /api/v1/apps/{appId}/credentials/csrs/{csrId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -397,8 +397,8 @@ class ApplicationClient():
             /api/v1/apps/{appId}/credentials/csrs/{csrId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -677,8 +677,8 @@ class ApplicationClient():
             /api/v1/apps/{appId}/credentials/keys
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -722,8 +722,8 @@ class ApplicationClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -763,8 +763,8 @@ class ApplicationClient():
             /api/v1/apps/{appId}/credentials/keys/{keyId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -809,8 +809,8 @@ class ApplicationClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -853,8 +853,8 @@ class ApplicationClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -938,8 +938,8 @@ class ApplicationClient():
             /api/v1/apps/{appId}/grants/{grantId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -977,8 +977,8 @@ class ApplicationClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1024,8 +1024,8 @@ class ApplicationClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1063,8 +1063,8 @@ class ApplicationClient():
             /api/v1/apps/{appId}/groups/{groupId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1101,8 +1101,8 @@ class ApplicationClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1184,8 +1184,8 @@ class ApplicationClient():
             /api/v1/apps/{appId}/lifecycle/activate
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1215,8 +1215,8 @@ class ApplicationClient():
             /api/v1/apps/{appId}/lifecycle/deactivate
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1246,8 +1246,8 @@ class ApplicationClient():
             /api/v1/apps/{appId}/tokens
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1285,8 +1285,8 @@ class ApplicationClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1325,8 +1325,8 @@ class ApplicationClient():
             /api/v1/apps/{appId}/tokens/{tokenId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1363,8 +1363,8 @@ class ApplicationClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1413,8 +1413,8 @@ class ApplicationClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1505,8 +1505,8 @@ class ApplicationClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1544,8 +1544,8 @@ class ApplicationClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers

@@ -53,8 +53,8 @@ class PolicyClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -138,8 +138,8 @@ class PolicyClient():
             /api/v1/policies/{policyId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -175,8 +175,8 @@ class PolicyClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -257,8 +257,8 @@ class PolicyClient():
             /api/v1/policies/{policyId}/lifecycle/activate
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -288,8 +288,8 @@ class PolicyClient():
             /api/v1/policies/{policyId}/lifecycle/deactivate
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -321,8 +321,8 @@ class PolicyClient():
             /api/v1/policies/{policyId}/rules
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -404,8 +404,8 @@ class PolicyClient():
             /api/v1/policies/{policyId}/rules/{ruleId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -438,8 +438,8 @@ class PolicyClient():
             /api/v1/policies/{policyId}/rules/{ruleId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -523,8 +523,8 @@ class PolicyClient():
                 lifecycle/activate
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -556,8 +556,8 @@ class PolicyClient():
                 lifecycle/deactivate
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers

@@ -25,8 +25,8 @@
             "Content-Type": "{{operation.consumes.[0]}}"
         }
         {{else}}
-        body = None
-        headers = None
+        body = {}
+        headers = {}
         {{/if}}
 
         request, error = await self._request_executor.create_request(

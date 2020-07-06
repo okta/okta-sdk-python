@@ -44,8 +44,8 @@ class FeatureClient():
             /api/v1/features
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -83,8 +83,8 @@ class FeatureClient():
             /api/v1/features/{featureId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -122,8 +122,8 @@ class FeatureClient():
             /api/v1/features/{featureId}/dependencies
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -161,8 +161,8 @@ class FeatureClient():
             /api/v1/features/{featureId}/dependents
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -205,8 +205,8 @@ class FeatureClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers

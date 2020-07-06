@@ -44,8 +44,8 @@ class UserTypeClient():
             /api/v1/meta/types/user
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -129,8 +129,8 @@ class UserTypeClient():
             /api/v1/meta/types/user/{typeId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -163,8 +163,8 @@ class UserTypeClient():
             /api/v1/meta/types/user/{typeId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers

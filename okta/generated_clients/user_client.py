@@ -85,8 +85,8 @@ class UserClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -178,8 +178,8 @@ class UserClient():
                 {primaryRelationshipName}/{primaryUserId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -215,8 +215,8 @@ class UserClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -248,8 +248,8 @@ class UserClient():
             /api/v1/users/{userId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -387,8 +387,8 @@ class UserClient():
             /api/v1/users/{userId}/appLinks
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -428,8 +428,8 @@ class UserClient():
             /api/v1/users/{userId}/clients
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -467,8 +467,8 @@ class UserClient():
             /api/v1/users/{userId}/clients/{clientId}/grants
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -507,8 +507,8 @@ class UserClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -547,8 +547,8 @@ class UserClient():
             /api/v1/users/{userId}/clients/{clientId}/tokens
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -588,8 +588,8 @@ class UserClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -629,8 +629,8 @@ class UserClient():
                 {tokenId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -672,8 +672,8 @@ class UserClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -817,8 +817,8 @@ class UserClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -904,8 +904,8 @@ class UserClient():
             /api/v1/users/{userId}/grants
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -944,8 +944,8 @@ class UserClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -983,8 +983,8 @@ class UserClient():
             /api/v1/users/{userId}/grants/{grantId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1021,8 +1021,8 @@ class UserClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1061,8 +1061,8 @@ class UserClient():
             /api/v1/users/{userId}/groups
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1101,8 +1101,8 @@ class UserClient():
             /api/v1/users/{userId}/idps
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1152,8 +1152,8 @@ class UserClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1201,8 +1201,8 @@ class UserClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1237,8 +1237,8 @@ class UserClient():
                 expire_password?tempPassword=false
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1280,8 +1280,8 @@ class UserClient():
                 expire_password?tempPassword=true
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1328,8 +1328,8 @@ class UserClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1370,8 +1370,8 @@ class UserClient():
             /api/v1/users/{userId}/lifecycle/reset_factors
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1410,8 +1410,8 @@ class UserClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1450,8 +1450,8 @@ class UserClient():
             /api/v1/users/{userId}/lifecycle/suspend
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1483,8 +1483,8 @@ class UserClient():
             /api/v1/users/{userId}/lifecycle/unlock
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1516,8 +1516,8 @@ class UserClient():
             /api/v1/users/{userId}/lifecycle/unsuspend
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1550,8 +1550,8 @@ class UserClient():
                 {relationshipName}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1591,8 +1591,8 @@ class UserClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1635,8 +1635,8 @@ class UserClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1722,8 +1722,8 @@ class UserClient():
             /api/v1/users/{userId}/roles/{roleId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1766,8 +1766,8 @@ class UserClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1805,8 +1805,8 @@ class UserClient():
                 catalog/apps
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1838,8 +1838,8 @@ class UserClient():
                 catalog/apps/{appName}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1871,8 +1871,8 @@ class UserClient():
                 catalog/apps/{appName}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1907,8 +1907,8 @@ class UserClient():
                 catalog/apps/{appName}/{applicationId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1943,8 +1943,8 @@ class UserClient():
                 catalog/apps/{appName}/{applicationId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1982,8 +1982,8 @@ class UserClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -2022,8 +2022,8 @@ class UserClient():
                 groups/{groupId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -2055,8 +2055,8 @@ class UserClient():
                 groups/{groupId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -2093,8 +2093,8 @@ class UserClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers

@@ -92,8 +92,8 @@ class SessionClient():
             /api/v1/sessions/{sessionId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -125,8 +125,8 @@ class SessionClient():
             /api/v1/sessions/{sessionId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -166,8 +166,8 @@ class SessionClient():
             /api/v1/sessions/{sessionId}/lifecycle/refresh
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers

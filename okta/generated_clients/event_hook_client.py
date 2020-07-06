@@ -43,8 +43,8 @@ class EventHookClient():
             /api/v1/eventHooks
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -122,8 +122,8 @@ class EventHookClient():
             /api/v1/eventHooks/{eventHookId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -154,8 +154,8 @@ class EventHookClient():
             /api/v1/eventHooks/{eventHookId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -236,8 +236,8 @@ class EventHookClient():
             /api/v1/eventHooks/{eventHookId}/lifecycle/activate
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -276,8 +276,8 @@ class EventHookClient():
                 deactivate
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -315,8 +315,8 @@ class EventHookClient():
             /api/v1/eventHooks/{eventHookId}/lifecycle/verify
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers

@@ -63,8 +63,8 @@ class IdentityProviderClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -150,8 +150,8 @@ class IdentityProviderClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -233,8 +233,8 @@ class IdentityProviderClient():
             /api/v1/idps/credentials/keys/{keyId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -266,8 +266,8 @@ class IdentityProviderClient():
             /api/v1/idps/credentials/keys/{keyId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -304,8 +304,8 @@ class IdentityProviderClient():
             /api/v1/idps/{idpId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -337,8 +337,8 @@ class IdentityProviderClient():
             /api/v1/idps/{idpId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -421,8 +421,8 @@ class IdentityProviderClient():
             /api/v1/idps/{idpId}/credentials/csrs
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -506,8 +506,8 @@ class IdentityProviderClient():
             /api/v1/idps/{idpId}/credentials/csrs/{csrId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -540,8 +540,8 @@ class IdentityProviderClient():
             /api/v1/idps/{idpId}/credentials/csrs/{csrId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -820,8 +820,8 @@ class IdentityProviderClient():
             /api/v1/idps/{idpId}/credentials/keys
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -866,8 +866,8 @@ class IdentityProviderClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -907,8 +907,8 @@ class IdentityProviderClient():
             /api/v1/idps/{idpId}/credentials/keys/{keyId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -953,8 +953,8 @@ class IdentityProviderClient():
         encoded_query_params = urlencode(query_params)
         api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -993,8 +993,8 @@ class IdentityProviderClient():
             /api/v1/idps/{idpId}/lifecycle/activate
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1033,8 +1033,8 @@ class IdentityProviderClient():
             /api/v1/idps/{idpId}/lifecycle/deactivate
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1073,8 +1073,8 @@ class IdentityProviderClient():
             /api/v1/idps/{idpId}/users
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1113,8 +1113,8 @@ class IdentityProviderClient():
             /api/v1/idps/{idpId}/users/{userId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1147,8 +1147,8 @@ class IdentityProviderClient():
             /api/v1/idps/{idpId}/users/{userId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1238,8 +1238,8 @@ class IdentityProviderClient():
                 tokens
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers

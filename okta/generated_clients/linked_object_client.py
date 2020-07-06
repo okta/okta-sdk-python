@@ -43,8 +43,8 @@ class LinkedObjectClient():
             /api/v1/meta/schemas/user/linkedObjects
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -123,8 +123,8 @@ class LinkedObjectClient():
                 {linkedObjectName}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -156,8 +156,8 @@ class LinkedObjectClient():
                 {linkedObjectName}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
