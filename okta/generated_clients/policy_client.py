@@ -33,7 +33,7 @@ class PolicyClient():
         self._base_url = ""
 
     async def list_policies(
-            self, query_params
+            self, query_params={}
     ):
         """
         Gets all policies with the specified type.
@@ -50,8 +50,9 @@ class PolicyClient():
             {self._base_url}
             /api/v1/policies
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
         body = {}
         headers = {}
@@ -61,24 +62,24 @@ class PolicyClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = []
             for item in response.get_body():
                 result.append(Policy(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def create_policy(
-            self, policy, query_params
+            self, policy, query_params={}
     ):
         """
         Creates a policy.
@@ -94,8 +95,9 @@ class PolicyClient():
             {self._base_url}
             /api/v1/policies
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
         body = policy.as_dict()
         headers = {
@@ -108,21 +110,21 @@ class PolicyClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = Policy(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def delete_policy(
             self, policyId
@@ -153,10 +155,11 @@ class PolicyClient():
 
         if error:
             return (None, error)
+        
         return (response, None)
 
     async def get_policy(
-            self, policyId, query_params
+            self, policyId, query_params={}
     ):
         """
         Gets a policy.
@@ -172,8 +175,9 @@ class PolicyClient():
             {self._base_url}
             /api/v1/policies/{policyId}
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
         body = {}
         headers = {}
@@ -183,21 +187,21 @@ class PolicyClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = Policy(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def update_policy(
             self, policyId, policy
@@ -227,21 +231,21 @@ class PolicyClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = Policy(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def activate_policy(
             self, policyId
@@ -272,6 +276,7 @@ class PolicyClient():
 
         if error:
             return (None, error)
+        
         return (response, None)
 
     async def deactivate_policy(
@@ -303,6 +308,7 @@ class PolicyClient():
 
         if error:
             return (None, error)
+        
         return (response, None)
 
     async def list_policy_rules(
@@ -329,21 +335,21 @@ class PolicyClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = []
             for item in response.get_body():
                 result.append(PolicyRule(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def create_policy_rule(
             self, policyId, policy_rule
@@ -373,21 +379,21 @@ class PolicyClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = PolicyRule(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def delete_policy_rule(
             self, policyId, ruleId
@@ -419,6 +425,7 @@ class PolicyClient():
 
         if error:
             return (None, error)
+        
         return (response, None)
 
     async def get_policy_rule(
@@ -446,21 +453,21 @@ class PolicyClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = PolicyRule(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def update_policy_rule(
             self, policyId, ruleId, policy_rule
@@ -491,21 +498,21 @@ class PolicyClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = PolicyRule(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def activate_policy_rule(
             self, policyId, ruleId
@@ -538,6 +545,7 @@ class PolicyClient():
 
         if error:
             return (None, error)
+        
         return (response, None)
 
     async def deactivate_policy_rule(
@@ -571,6 +579,7 @@ class PolicyClient():
 
         if error:
             return (None, error)
+        
         return (response, None)
 
 

@@ -52,21 +52,21 @@ class UserTypeClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = []
             for item in response.get_body():
                 result.append(UserType(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def create_user_type(
             self, user_type
@@ -97,21 +97,21 @@ class UserTypeClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = UserType(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def delete_user_type(
             self, typeId
@@ -144,6 +144,7 @@ class UserTypeClient():
 
         if error:
             return (None, error)
+        
         return (response, None)
 
     async def get_user_type(
@@ -171,21 +172,21 @@ class UserTypeClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = UserType(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def update_user_type(
             self, typeId, user_type
@@ -215,21 +216,21 @@ class UserTypeClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = UserType(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def replace_user_type(
             self, typeId, user_type
@@ -259,21 +260,21 @@ class UserTypeClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = UserType(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
 
 # End of File Generation

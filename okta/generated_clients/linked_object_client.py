@@ -51,21 +51,21 @@ class LinkedObjectClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = []
             for item in response.get_body():
                 result.append(LinkedObject(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def add_linked_object_definition(
             self, linked_object
@@ -93,21 +93,21 @@ class LinkedObjectClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = LinkedObject(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def delete_linked_object_definition(
             self, linkedObjectName
@@ -138,6 +138,7 @@ class LinkedObjectClient():
 
         if error:
             return (None, error)
+        
         return (response, None)
 
     async def get_linked_object_definition(
@@ -164,21 +165,21 @@ class LinkedObjectClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = LinkedObject(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
 
 # End of File Generation

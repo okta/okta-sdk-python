@@ -62,3 +62,7 @@ ERROR_MESSAGE_SCOPES_PK_MISSING = (
     "When using authorization mode 'PrivateKey', you must supply "
     "'okta.client.scopes' and 'okta.client.privateKey'"
 )
+
+ERROR_MESSAGE_429_MISSING_DATE_X_RESET = (
+    "429 response must have the 'X-Rate-Limit-Reset' and 'Date' headers"
+)

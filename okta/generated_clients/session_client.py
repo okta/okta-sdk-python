@@ -61,21 +61,21 @@ class SessionClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = Session(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def end_session(
             self, sessionId
@@ -107,6 +107,7 @@ class SessionClient():
 
         if error:
             return (None, error)
+        
         return (response, None)
 
     async def get_session(
@@ -133,21 +134,21 @@ class SessionClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = Session(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def refresh_session(
             self, sessionId
@@ -174,21 +175,21 @@ class SessionClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = Session(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
 
 # End of File Generation

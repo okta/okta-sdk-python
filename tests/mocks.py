@@ -1,8 +1,11 @@
 from okta.user_agent import UserAgent
+from okta.constants import DATETIME_STRING_FORMAT
 import aiohttp
 import asyncio
 import json
 from yarl import URL
+import datetime as dt
+import multidict
 
 REQUEST_TIMEOUT = 5  # seconds
 ORG_URL = "https://your.okta.com"
@@ -40,6 +43,90 @@ class MockHTTPResponseDetails():
         self.content_type = "application/json"
 
 
+class MockHTTP429ResponseDetails():
+    def __init__(self):
+        now = dt.datetime.now(dt.timezone.utc)
+        now = now.replace(microsecond=0)
+
+        one_sec_after = now + dt.timedelta(seconds=1)
+        self.status = 429
+        self.headers = multidict.CIMultiDict({
+            "Date": now.strftime(DATETIME_STRING_FORMAT),
+            "Content-Type": "application/json",
+            "X-Okta-Now": "",
+            "X-Rate-Limit-Reset": one_sec_after.timestamp(),
+            "X-Okta-Request-id": "okta-request-id",
+        })
+        self.url = ORG_URL + GET_USERS_CALL
+        self.method = "GET"
+        self.links = {}
+        self.content_type = "application/json"
+
+
+class MockHTTP429NoXResetResponseDetails():
+    def __init__(self):
+        now = dt.datetime.now(dt.timezone.utc)
+        now = now.replace(microsecond=0)
+
+        self.status = 429
+        self.headers = multidict.CIMultiDict({
+            "Date": now.strftime(DATETIME_STRING_FORMAT),
+            "Content-Type": "application/json",
+            "X-Okta-Now": "",
+            "X-Okta-Request-id": "okta-request-id",
+        })
+        self.url = ORG_URL + GET_USERS_CALL
+        self.method = "GET"
+        self.links = {}
+        self.content_type = "application/json"
+
+
+class MockHTTP429NoDateResponseDetails():
+    def __init__(self):
+        now = dt.datetime.now(dt.timezone.utc)
+        now = now.replace(microsecond=0)
+
+        one_sec_after = now + dt.timedelta(seconds=1)
+        self.status = 429
+        self.headers = multidict.CIMultiDict({
+            "Content-Type": "application/json",
+            "X-Okta-Now": "",
+            "X-Rate-Limit-Reset": one_sec_after.timestamp(),
+            "X-Okta-Request-id": "okta-request-id",
+        })
+        self.url = ORG_URL + GET_USERS_CALL
+        self.method = "GET"
+        self.links = {}
+        self.content_type = "application/json"
+
+
+class MockHTTP429MultiXResetResponseDetails():
+    def __init__(self):
+        now = dt.datetime.now(dt.timezone.utc)
+        now = now.replace(microsecond=0)
+
+        one_sec_after = now + dt.timedelta(seconds=1)
+        two_sec_after = one_sec_after + dt.timedelta(seconds=1)
+
+        base_headers = {
+            "Date": now.strftime(DATETIME_STRING_FORMAT),
+            "Content-Type": "application/json",
+            "X-Okta-Now": "",
+            "X-Rate-Limit-Reset": one_sec_after.timestamp(),
+            "X-Okta-Request-id": "okta-request-id",
+        }
+
+        base_headers = list(zip(base_headers.keys(), base_headers.values()))
+        base_headers.append(("X-Rate-Limit-Reset", two_sec_after.timestamp()))
+
+        self.status = 429
+        self.headers = multidict.CIMultiDict(base_headers)
+        self.url = ORG_URL + GET_USERS_CALL
+        self.method = "GET"
+        self.links = {}
+        self.content_type = "application/json"
+
+
 async def mock_GET_HTTP_Client_response_valid(*args, **kwargs):
     request = await mock_GET_HTTP_request()
     response_details = MockHTTPResponseDetails()
@@ -55,6 +142,38 @@ async def mock_GET_HTTP_Client_response_valid_with_next(*args, **kwargs):
         "next": {"url": URL("https://www.next.okta.com")}
     }
     response_body = '[{"ID": "user.id.1"}, {"ID": "user.id.2"}]'
+    error = None
+    return (request, response_details, response_body, error)
+
+
+async def mock_GET_HTTP_Client_response_429(*args, **kwargs):
+    request = await mock_GET_HTTP_request()
+    response_details = MockHTTP429ResponseDetails()
+    response_body = '{}'
+    error = None
+    return (request, response_details, response_body, error)
+
+
+async def mock_GET_HTTP_Client_response_429_no_x_reset(*args, **kwargs):
+    request = await mock_GET_HTTP_request()
+    response_details = MockHTTP429NoXResetResponseDetails()
+    response_body = '{}'
+    error = None
+    return (request, response_details, response_body, error)
+
+
+async def mock_GET_HTTP_Client_response_429_no_date(*args, **kwargs):
+    request = await mock_GET_HTTP_request()
+    response_details = MockHTTP429NoDateResponseDetails()
+    response_body = '{}'
+    error = None
+    return (request, response_details, response_body, error)
+
+
+async def mock_GET_HTTP_Client_response_429_multi_x_reset(*args, **kwargs):
+    request = await mock_GET_HTTP_request()
+    response_details = MockHTTP429MultiXResetResponseDetails()
+    response_body = '{}'
     error = None
     return (request, response_details, response_body, error)
 
@@ -79,6 +198,11 @@ async def mock_invalid_HTTP_response(*args, **kwargs):
 
 async def mock_access_token(*args, **kwargs):
     return ("This is an OAuth access token", None)
+
+
+def mock_pause_function(*args, **kwargs):
+    pass
+
 
 SAMPLE_RSA = '''-----BEGIN RSA PRIVATE KEY-----
                 MIIEogIBAAKCAQEAvlhONz/qR7dBung7VW

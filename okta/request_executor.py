@@ -2,6 +2,8 @@ from okta.http_client import HTTPClient
 from okta.user_agent import UserAgent
 from okta.oauth import OAuth
 from okta.api_response import OktaAPIResponse
+from okta.error_messages import ERROR_MESSAGE_429_MISSING_DATE_X_RESET
+from okta.utils import convert_date_time_to_seconds
 import time
 from http import HTTPStatus
 import json
@@ -24,13 +26,13 @@ class RequestExecutor:
                              of the Request Executor
         """
         # Raise Value Error if numerical inputs are invalid (< 0)
-        self._request_timeout = config.get('requestTimeout', 0)
+        self._request_timeout = config["client"].get('requestTimeout', 0)
         if self._request_timeout < 0:
             raise ValueError(
-                ("okta.client.rateLimit.requestTimeout provided as "
+                ("okta.client.requestTimeout provided as "
                  f"{self._request_timeout} but must be 0 (disabled) or "
                  "greater than zero"))
-        self._max_retries = config.get('maxRetries', 2)
+        self._max_retries = config["client"]["rateLimit"].get('maxRetries', 2)
         if self._max_retries < 0:
             raise ValueError(
                 ("okta.client.rateLimit.maxRetries provided as "
@@ -129,6 +131,15 @@ class RequestExecutor:
         """
         _, response, response_body, error = await self.fire_request(request)
 
+        if error is not None:
+            return (None, error)
+
+        _, error = self._http_client.check_response_for_error(
+            request["url"], response, response_body)
+
+        if error is not None:
+            return (None, error)
+
         return (
             OktaAPIResponse(self, request, response, response_body),
             None
@@ -157,11 +168,10 @@ class RequestExecutor:
         # check if in cache
         if not self._cache.contains(url_cache_key):
             # shoot request and return
-            response, error = await\
+            _, res_details, resp_body, error = await\
                 self.fire_request_helper(request, 0, time.time())
-            if error:
+            if error is not None:
                 return (None, None, None, error)
-            _, res_details, resp_body, error = response
 
             # add to cache if not a list and valid response
             if method.upper() == "GET" and 200 <= res_details.status <= 299:
@@ -200,7 +210,7 @@ class RequestExecutor:
         if req_timeout > 0 and \
                 (current_req_start_time - request_start_time) > req_timeout:
             # Timeout is hit for request
-            return (None, Exception("Request Timeout exceeded."))
+            return (None, None, None, Exception("Request Timeout exceeded."))
 
         # Execute request
         _, res_details, resp_body, error = \
@@ -211,21 +221,26 @@ class RequestExecutor:
 
         if attempts < max_retries and (error or check_429):
             date_time = headers.get("Date", "")
-            retry_limit_reset_headers = headers.getall(
-                "X-Rate-Limit-Reset", "")
-            retry_limit_reset = min(retry_limit_reset_headers.values())
+            if date_time:
+                date_time = convert_date_time_to_seconds(date_time)
+            retry_limit_reset_headers = list(map(float, headers.getall(
+                "X-Rate-Limit-Reset", [])))
+            retry_limit_reset = min(retry_limit_reset_headers) if len(
+                retry_limit_reset_headers) > 0 else None
             if not date_time or not retry_limit_reset:
-                return (None,
-                        Exception(("429 response must have the "
-                                   "'X-Rate-Limit-Reset' and 'Date' headers")))
+                return (None, None, None,
+                        Exception(
+                            ERROR_MESSAGE_429_MISSING_DATE_X_RESET
+                        ))
 
             if check_429:
                 # backoff
-                backoff_seconds = retry_limit_reset - date_time + 1
+                backoff_seconds = self.calculate_backoff(
+                    retry_limit_reset, date_time)
                 self.pause_for_backoff(backoff_seconds)
                 if (current_req_start_time + backoff_seconds)\
-                        - request_start_time > req_timeout:
-                    return (None, resp_body)
+                        - request_start_time > req_timeout and req_timeout > 0:
+                    return (None, None, None, resp_body)
 
             # Setup retry request
             attempts += 1
@@ -237,14 +252,13 @@ class RequestExecutor:
                 }
             )
 
-            _, res_details, resp_body, error = \
-                await self.fire_request_helper(
-                    request, attempts, request_start_time
-                )
+            _, res_details, resp_body, error = await self.fire_request_helper(
+                request, attempts, request_start_time
+            )
             if error:
-                return (None, error)
+                return (None, None, None, error)
 
-        return ((request, res_details, resp_body, error), None)
+        return (request, res_details, resp_body, error)
 
     def is_too_many_requests(self, status, response):
         """
@@ -262,6 +276,9 @@ class RequestExecutor:
 
     def parse_response(self, request, response):
         pass
+
+    def calculate_backoff(self, retry_limit_reset, date_time):
+        return retry_limit_reset - date_time + 1
 
     def pause_for_backoff(self, backoff_time):
         time.sleep(backoff_time)

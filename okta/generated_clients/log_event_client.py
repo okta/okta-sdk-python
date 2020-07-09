@@ -31,7 +31,7 @@ class LogEventClient():
         self._base_url = ""
 
     async def get_logs(
-            self, query_params
+            self, query_params={}
     ):
         """
         The Okta System Log API provides read access to your or
@@ -54,8 +54,9 @@ class LogEventClient():
             {self._base_url}
             /api/v1/logs
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
         body = {}
         headers = {}
@@ -65,21 +66,21 @@ class LogEventClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = []
             for item in response.get_body():
                 result.append(LogEvent(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
 
 # End of File Generation

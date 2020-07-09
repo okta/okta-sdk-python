@@ -44,7 +44,7 @@ class ApplicationClient():
         self._base_url = ""
 
     async def list_applications(
-            self, query_params
+            self, query_params={}
     ):
         """
         Enumerates apps added to your organization with paginat
@@ -66,8 +66,9 @@ class ApplicationClient():
             {self._base_url}
             /api/v1/apps
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
         body = {}
         headers = {}
@@ -77,24 +78,24 @@ class ApplicationClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = []
             for item in response.get_body():
                 result.append(Application(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def create_application(
-            self, application, query_params
+            self, application, query_params={}
     ):
         """
         Adds a new application to your Okta organization.
@@ -110,8 +111,9 @@ class ApplicationClient():
             {self._base_url}
             /api/v1/apps
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
         body = application.as_dict()
         headers = {
@@ -124,21 +126,21 @@ class ApplicationClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = Application(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def delete_application(
             self, appId
@@ -169,10 +171,11 @@ class ApplicationClient():
 
         if error:
             return (None, error)
+        
         return (response, None)
 
     async def get_application(
-            self, appId, query_params
+            self, appId, query_params={}
     ):
         """
         Fetches an application from your Okta organization by `
@@ -189,8 +192,9 @@ class ApplicationClient():
             {self._base_url}
             /api/v1/apps/{appId}
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
         body = {}
         headers = {}
@@ -200,21 +204,21 @@ class ApplicationClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = Application(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def update_application(
             self, appId, application
@@ -244,21 +248,21 @@ class ApplicationClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = Application(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def list_csrs_for_application(
             self, appId
@@ -285,21 +289,21 @@ class ApplicationClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = []
             for item in response.get_body():
                 result.append(Csr(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def generate_csr_for_application(
             self, appId, csr_metadata
@@ -330,21 +334,21 @@ class ApplicationClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = Csr(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def revoke_csr_from_application(
             self, appId, csrId
@@ -377,6 +381,7 @@ class ApplicationClient():
 
         if error:
             return (None, error)
+        
         return (response, None)
 
     async def get_csr_for_application(
@@ -405,21 +410,21 @@ class ApplicationClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = Csr(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def publish_cer_cert(
             self, appId, csrId, string
@@ -453,21 +458,21 @@ class ApplicationClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = JsonWebKey(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def publish_binary_cer_cert(
             self, appId, csrId, string
@@ -501,21 +506,21 @@ class ApplicationClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = JsonWebKey(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def publish_der_cert(
             self, appId, csrId, string
@@ -549,21 +554,21 @@ class ApplicationClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = JsonWebKey(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def publish_binary_der_cert(
             self, appId, csrId, string
@@ -597,21 +602,21 @@ class ApplicationClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = JsonWebKey(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def publish_binary_pem_cert(
             self, appId, csrId, string
@@ -645,21 +650,21 @@ class ApplicationClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = JsonWebKey(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def list_application_keys(
             self, appId
@@ -685,24 +690,24 @@ class ApplicationClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = []
             for item in response.get_body():
                 result.append(JsonWebKey(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def generate_application_key(
-            self, appId, query_params
+            self, appId, query_params={}
     ):
         """
         Generates a new X.509 certificate for an application ke
@@ -719,8 +724,9 @@ class ApplicationClient():
             {self._base_url}
             /api/v1/apps/{appId}/credentials/keys/generate
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
         body = {}
         headers = {}
@@ -730,21 +736,21 @@ class ApplicationClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = JsonWebKey(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def get_application_key(
             self, appId, keyId
@@ -771,24 +777,24 @@ class ApplicationClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = JsonWebKey(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def clone_application_key(
-            self, appId, keyId, query_params
+            self, appId, keyId, query_params={}
     ):
         """
         Clones a X.509 certificate for an application key crede
@@ -806,8 +812,9 @@ class ApplicationClient():
             {self._base_url}
             /api/v1/apps/{appId}/credentials/keys/{keyId}/clone
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
         body = {}
         headers = {}
@@ -817,24 +824,24 @@ class ApplicationClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = JsonWebKey(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def list_scope_consent_grants(
-            self, appId, query_params
+            self, appId, query_params={}
     ):
         """
         Lists all scope consent grants for the application
@@ -850,8 +857,9 @@ class ApplicationClient():
             {self._base_url}
             /api/v1/apps/{appId}/grants
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
         body = {}
         headers = {}
@@ -861,21 +869,21 @@ class ApplicationClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = []
             for item in response.get_body():
                 result.append(OAuth2ScopeConsentGrant(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def grant_consent_to_scope(
             self, appId, o_auth_2_scope_consent_grant
@@ -906,21 +914,21 @@ class ApplicationClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = OAuth2ScopeConsentGrant(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def revoke_scope_consent_grant(
             self, appId, grantId
@@ -953,10 +961,11 @@ class ApplicationClient():
 
         if error:
             return (None, error)
+        
         return (response, None)
 
     async def get_scope_consent_grant(
-            self, appId, grantId, query_params
+            self, appId, grantId, query_params={}
     ):
         """
         Fetches a single scope consent grant for the applicatio
@@ -974,8 +983,9 @@ class ApplicationClient():
             {self._base_url}
             /api/v1/apps/{appId}/grants/{grantId}
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
         body = {}
         headers = {}
@@ -985,24 +995,24 @@ class ApplicationClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = OAuth2ScopeConsentGrant(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def list_application_group_assignments(
-            self, appId, query_params
+            self, appId, query_params={}
     ):
         """
         Enumerates group assignments for an application.
@@ -1021,8 +1031,9 @@ class ApplicationClient():
             {self._base_url}
             /api/v1/apps/{appId}/groups
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
         body = {}
         headers = {}
@@ -1032,21 +1043,21 @@ class ApplicationClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = []
             for item in response.get_body():
                 result.append(ApplicationGroupAssignment(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def delete_application_group_assignment(
             self, appId, groupId
@@ -1078,10 +1089,11 @@ class ApplicationClient():
 
         if error:
             return (None, error)
+        
         return (response, None)
 
     async def get_application_group_assignment(
-            self, appId, groupId, query_params
+            self, appId, groupId, query_params={}
     ):
         """
         Fetches an application group assignment
@@ -1098,8 +1110,9 @@ class ApplicationClient():
             {self._base_url}
             /api/v1/apps/{appId}/groups/{groupId}
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
         body = {}
         headers = {}
@@ -1109,21 +1122,21 @@ class ApplicationClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = ApplicationGroupAssignment(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def create_application_group_assignment(
             self, appId, groupId, application_group_assignment
@@ -1154,21 +1167,21 @@ class ApplicationClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = ApplicationGroupAssignment(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def activate_application(
             self, appId
@@ -1199,6 +1212,7 @@ class ApplicationClient():
 
         if error:
             return (None, error)
+        
         return (response, None)
 
     async def deactivate_application(
@@ -1230,6 +1244,7 @@ class ApplicationClient():
 
         if error:
             return (None, error)
+        
         return (response, None)
 
     async def revoke_o_auth_2_tokens_for_application(
@@ -1261,10 +1276,11 @@ class ApplicationClient():
 
         if error:
             return (None, error)
+        
         return (response, None)
 
     async def list_o_auth_2_tokens_for_application(
-            self, appId, query_params
+            self, appId, query_params={}
     ):
         """
         Lists all tokens for the application
@@ -1282,8 +1298,9 @@ class ApplicationClient():
             {self._base_url}
             /api/v1/apps/{appId}/tokens
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
         body = {}
         headers = {}
@@ -1293,21 +1310,21 @@ class ApplicationClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = []
             for item in response.get_body():
                 result.append(OAuth2Token(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def revoke_o_auth_2_token_for_application(
             self, appId, tokenId
@@ -1340,10 +1357,11 @@ class ApplicationClient():
 
         if error:
             return (None, error)
+        
         return (response, None)
 
     async def get_o_auth_2_token_for_application(
-            self, appId, tokenId, query_params
+            self, appId, tokenId, query_params={}
     ):
         """
         Gets a token for the specified application
@@ -1360,8 +1378,9 @@ class ApplicationClient():
             {self._base_url}
             /api/v1/apps/{appId}/tokens/{tokenId}
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
         body = {}
         headers = {}
@@ -1371,24 +1390,24 @@ class ApplicationClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = OAuth2Token(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def list_application_users(
-            self, appId, query_params
+            self, appId, query_params={}
     ):
         """
         Enumerates all assigned [application users](#applicatio
@@ -1410,8 +1429,9 @@ class ApplicationClient():
             {self._base_url}
             /api/v1/apps/{appId}/users
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
         body = {}
         headers = {}
@@ -1421,21 +1441,21 @@ class ApplicationClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = []
             for item in response.get_body():
                 result.append(AppUser(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def assign_user_to_application(
             self, appId, app_user
@@ -1470,24 +1490,24 @@ class ApplicationClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = AppUser(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def delete_application_user(
-            self, appId, userId, query_params
+            self, appId, userId, query_params={}
     ):
         """
         Removes an assignment for a user from an application.
@@ -1502,8 +1522,9 @@ class ApplicationClient():
             {self._base_url}
             /api/v1/apps/{appId}/users/{userId}
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
         body = {}
         headers = {}
@@ -1520,10 +1541,11 @@ class ApplicationClient():
 
         if error:
             return (None, error)
+        
         return (response, None)
 
     async def get_application_user(
-            self, appId, userId, query_params
+            self, appId, userId, query_params={}
     ):
         """
         Fetches a specific user assignment for application by `
@@ -1541,8 +1563,9 @@ class ApplicationClient():
             {self._base_url}
             /api/v1/apps/{appId}/users/{userId}
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
         body = {}
         headers = {}
@@ -1552,21 +1575,21 @@ class ApplicationClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = AppUser(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def update_application_user(
             self, appId, userId, app_user
@@ -1597,21 +1620,21 @@ class ApplicationClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+        
         try:
             result = AppUser(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
 
 # End of File Generation
