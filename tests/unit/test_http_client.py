@@ -189,7 +189,10 @@ async def test_client_user_agent(monkeypatch):
             "orgUrl": "https://test.okta.com",
             "authorizationMode": 'SSWS',
             "token": 'token',
-            "userAgent": ''
+            "userAgent": '',
+            "rateLimit": {
+                "maxRetries": 2
+            }
         }
     }, NoOpCache(), None)
 
@@ -220,7 +223,10 @@ async def test_client_user_agent(monkeypatch):
             "orgUrl": "https://test.okta.com",
             "authorizationMode": 'SSWS',
             "token": 'token',
-            "userAgent": extra
+            "userAgent": extra,
+            "rateLimit": {
+                "maxRetries": 2
+            }
         }
     }, NoOpCache(), None)
     assert 'User-Agent' in req_exec._http_client._default_headers
