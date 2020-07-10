@@ -35,5 +35,3 @@ class LinkedObject(
             self.links = None
             self.associated = None
             self.primary = None
-
-# End of File Generation

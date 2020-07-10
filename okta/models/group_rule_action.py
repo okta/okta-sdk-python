@@ -29,5 +29,3 @@ class GroupRuleAction(
                 if "assignUserToGroups" in config else None
         else:
             self.assign_user_to_groups = None
-
-# End of File Generation

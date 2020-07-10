@@ -35,5 +35,3 @@ class PasswordPolicyRuleActions(
             self.password_change = None
             self.self_service_password_reset = None
             self.self_service_unlock = None
-
-# End of File Generation

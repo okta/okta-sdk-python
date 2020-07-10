@@ -41,5 +41,3 @@ class LogSecurityContext(
             self.domain = None
             self.is_proxy = None
             self.isp = None
-
-# End of File Generation

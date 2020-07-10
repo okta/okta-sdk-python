@@ -44,5 +44,3 @@ class UserPolicyRuleCondition(
             self.lifecycle_expiration = None
             self.password_expiration = None
             self.user_lifecycle_attribute = None
-
-# End of File Generation

@@ -101,7 +101,7 @@ class UserClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -152,7 +152,7 @@ class UserClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = User(
                 response.get_body()
@@ -195,7 +195,7 @@ class UserClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def deactivate_or_delete_user(
@@ -234,7 +234,7 @@ class UserClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def get_user(
@@ -268,7 +268,7 @@ class UserClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = User(
                 response.get_body()
@@ -318,7 +318,7 @@ class UserClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = User(
                 response.get_body()
@@ -368,7 +368,7 @@ class UserClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = User(
                 response.get_body()
@@ -409,7 +409,7 @@ class UserClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -450,7 +450,7 @@ class UserClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -489,7 +489,7 @@ class UserClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def list_grants_for_user_and_client(
@@ -531,7 +531,7 @@ class UserClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -571,7 +571,7 @@ class UserClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def list_refresh_tokens_for_user_and_client(
@@ -614,7 +614,7 @@ class UserClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -655,7 +655,7 @@ class UserClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def get_refresh_token_for_user_and_client(
@@ -700,7 +700,7 @@ class UserClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = OAuth2RefreshToken(
                 response.get_body()
@@ -752,7 +752,7 @@ class UserClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = UserCredentials(
                 response.get_body()
@@ -801,7 +801,7 @@ class UserClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = UserCredentials(
                 response.get_body()
@@ -847,7 +847,7 @@ class UserClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = ForgotPasswordResponse(
                 response.get_body()
@@ -897,7 +897,7 @@ class UserClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = ForgotPasswordResponse(
                 response.get_body()
@@ -935,7 +935,7 @@ class UserClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def list_user_grants(
@@ -977,7 +977,7 @@ class UserClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -1016,7 +1016,7 @@ class UserClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def get_user_grant(
@@ -1056,7 +1056,7 @@ class UserClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = OAuth2ScopeConsentGrant(
                 response.get_body()
@@ -1096,7 +1096,7 @@ class UserClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -1136,7 +1136,7 @@ class UserClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -1188,7 +1188,7 @@ class UserClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = UserActivationToken(
                 response.get_body()
@@ -1238,7 +1238,7 @@ class UserClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def expire_password(
@@ -1275,7 +1275,7 @@ class UserClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = User(
                 response.get_body()
@@ -1318,7 +1318,7 @@ class UserClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = TempPassword(
                 response.get_body()
@@ -1367,7 +1367,7 @@ class UserClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = UserActivationToken(
                 response.get_body()
@@ -1409,7 +1409,7 @@ class UserClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def reset_password(
@@ -1451,7 +1451,7 @@ class UserClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = ResetPasswordToken(
                 response.get_body()
@@ -1491,7 +1491,7 @@ class UserClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def unlock_user(
@@ -1525,7 +1525,7 @@ class UserClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def unsuspend_user(
@@ -1559,7 +1559,7 @@ class UserClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def remove_linked_object_for_user(
@@ -1594,7 +1594,7 @@ class UserClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def get_linked_objects_for_user(
@@ -1637,7 +1637,7 @@ class UserClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -1682,7 +1682,7 @@ class UserClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -1731,7 +1731,7 @@ class UserClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = Role(
                 response.get_body()
@@ -1770,7 +1770,7 @@ class UserClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def list_app_targets_for_application_admin_role_for_user(
@@ -1816,7 +1816,7 @@ class UserClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -1855,7 +1855,7 @@ class UserClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def remove_app_target_from_application_admin_role_for_user(
@@ -1889,7 +1889,7 @@ class UserClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def add_application_target_to_admin_role_for_user(
@@ -1923,7 +1923,7 @@ class UserClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def remove_application_target_from_administrator_role_for_user(
@@ -1960,7 +1960,7 @@ class UserClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def add_application_target_to_app_admin_role_for_user(
@@ -1997,7 +1997,7 @@ class UserClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def list_group_targets_for_role(
@@ -2038,7 +2038,7 @@ class UserClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -2078,7 +2078,7 @@ class UserClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def add_group_target_to_role(
@@ -2112,7 +2112,7 @@ class UserClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def clear_user_sessions(
@@ -2152,8 +2152,5 @@ class UserClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
-
-
-# End of File Generation

@@ -32,5 +32,3 @@ class WebAuthnUserFactor(
                 if "profile" in config else None
         else:
             self.profile = None
-
-# End of File Generation

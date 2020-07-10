@@ -56,5 +56,3 @@ class EventHook(
             self.name = None
             self.status = None
             self.verification_status = None
-
-# End of File Generation

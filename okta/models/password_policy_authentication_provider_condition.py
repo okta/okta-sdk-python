@@ -32,5 +32,3 @@ class PasswordPolicyAuthenticationProviderCondition(
         else:
             self.include = None
             self.provider = None
-
-# End of File Generation

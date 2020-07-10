@@ -62,5 +62,3 @@ class OAuth2ScopeConsentGrant(
             self.source = None
             self.status = None
             self.user_id = None
-
-# End of File Generation

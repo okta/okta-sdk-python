@@ -35,5 +35,3 @@ class PasswordPolicySettings(
             self.delegation = None
             self.password = None
             self.recovery = None
-
-# End of File Generation

@@ -59,5 +59,3 @@ class Session(
             self.login = None
             self.status = None
             self.user_id = None
-
-# End of File Generation

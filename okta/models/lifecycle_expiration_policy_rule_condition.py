@@ -35,5 +35,3 @@ class LifecycleExpirationPolicyRuleCondition(
             self.lifecycle_status = None
             self.number = None
             self.unit = None
-
-# End of File Generation

@@ -29,5 +29,3 @@ class ApplicationLicensing(
                 if "seatCount" in config else None
         else:
             self.seat_count = None
-
-# End of File Generation

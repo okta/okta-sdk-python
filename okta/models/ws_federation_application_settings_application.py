@@ -65,5 +65,3 @@ class WsFederationApplicationSettingsApplication(
             self.username_attribute = None
             self.w_reply_override = None
             self.w_reply_url = None
-
-# End of File Generation

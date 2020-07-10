@@ -29,5 +29,3 @@ class PasswordPolicyRecoveryQuestionProperties(
                 if "complexity" in config else None
         else:
             self.complexity = None
-
-# End of File Generation

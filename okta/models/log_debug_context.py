@@ -29,5 +29,3 @@ class LogDebugContext(
                 if "debugData" in config else None
         else:
             self.debug_data = None
-
-# End of File Generation

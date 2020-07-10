@@ -32,5 +32,3 @@ class ApplicationVisibilityHide(
         else:
             self.i_os = None
             self.web = None
-
-# End of File Generation

@@ -38,5 +38,3 @@ class Csr(
             self.csr = None
             self.id = None
             self.kty = None
-
-# End of File Generation

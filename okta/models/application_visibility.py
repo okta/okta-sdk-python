@@ -35,5 +35,3 @@ class ApplicationVisibility(
             self.app_links = None
             self.auto_submit_toolbar = None
             self.hide = None
-
-# End of File Generation

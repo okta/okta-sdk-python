@@ -32,5 +32,3 @@ class Duration(
         else:
             self.number = None
             self.unit = None
-
-# End of File Generation

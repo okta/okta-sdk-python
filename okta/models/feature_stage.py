@@ -32,5 +32,3 @@ class FeatureStage(
         else:
             self.state = None
             self.value = None
-
-# End of File Generation

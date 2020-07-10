@@ -41,5 +41,3 @@ class IdentityProviderPolicy(
             self.max_clock_skew = None
             self.provisioning = None
             self.subject = None
-
-# End of File Generation

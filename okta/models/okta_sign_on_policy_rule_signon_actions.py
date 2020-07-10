@@ -44,5 +44,3 @@ class OktaSignOnPolicyRuleSignonActions(
             self.remember_device_by_default = "false"
             self.require_factor = "false"
             self.session = None
-
-# End of File Generation

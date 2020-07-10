@@ -29,5 +29,3 @@ class PasswordPolicyDelegationSettingsOptions(
                 if "skipUnlock" in config else None
         else:
             self.skip_unlock = None
-
-# End of File Generation

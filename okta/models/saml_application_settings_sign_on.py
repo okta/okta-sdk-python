@@ -89,5 +89,3 @@ class SamlApplicationSettingsSignOn(
             self.sso_acs_url_override = None
             self.subject_name_id_format = None
             self.subject_name_id_template = None
-
-# End of File Generation

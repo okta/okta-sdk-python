@@ -27,5 +27,3 @@ class GroupRuleStatus(
     ACTIVE = "ACTIVE"
     INACTIVE = "INACTIVE"
     INVALID = "INVALID"
-
-# End of File Generation

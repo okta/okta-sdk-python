@@ -29,5 +29,3 @@ class PasswordPolicyRecoveryQuestionComplexity(
                 if "minLength" in config else None
         else:
             self.min_length = None
-
-# End of File Generation

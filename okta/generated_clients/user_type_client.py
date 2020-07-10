@@ -59,7 +59,7 @@ class UserTypeClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -104,7 +104,7 @@ class UserTypeClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = UserType(
                 response.get_body()
@@ -144,7 +144,7 @@ class UserTypeClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def get_user_type(
@@ -179,7 +179,7 @@ class UserTypeClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = UserType(
                 response.get_body()
@@ -223,7 +223,7 @@ class UserTypeClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = UserType(
                 response.get_body()
@@ -267,7 +267,7 @@ class UserTypeClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = UserType(
                 response.get_body()
@@ -275,6 +275,3 @@ class UserTypeClient():
         except Exception as error:
             return (None, error)
         return (result, response, None)
-
-
-# End of File Generation

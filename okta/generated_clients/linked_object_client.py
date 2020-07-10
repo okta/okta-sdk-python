@@ -58,7 +58,7 @@ class LinkedObjectClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -100,7 +100,7 @@ class LinkedObjectClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = LinkedObject(
                 response.get_body()
@@ -138,7 +138,7 @@ class LinkedObjectClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def get_linked_object_definition(
@@ -172,7 +172,7 @@ class LinkedObjectClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = LinkedObject(
                 response.get_body()
@@ -180,6 +180,3 @@ class LinkedObjectClient():
         except Exception as error:
             return (None, error)
         return (result, response, None)
-
-
-# End of File Generation

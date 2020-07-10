@@ -32,5 +32,3 @@ class UserStatus(
     RECOVERY = "RECOVERY"
     STAGED = "STAGED"
     SUSPENDED = "SUSPENDED"
-
-# End of File Generation

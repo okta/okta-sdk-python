@@ -68,7 +68,7 @@ class SessionClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = Session(
                 response.get_body()
@@ -107,7 +107,7 @@ class SessionClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def get_session(
@@ -141,7 +141,7 @@ class SessionClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = Session(
                 response.get_body()
@@ -182,7 +182,7 @@ class SessionClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = Session(
                 response.get_body()
@@ -190,6 +190,3 @@ class SessionClient():
         except Exception as error:
             return (None, error)
         return (result, response, None)
-
-
-# End of File Generation

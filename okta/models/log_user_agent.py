@@ -35,5 +35,3 @@ class LogUserAgent(
             self.browser = None
             self.os = None
             self.raw_user_agent = None
-
-# End of File Generation

@@ -32,5 +32,3 @@ class ApplicationCredentials(
         else:
             self.signing = None
             self.user_name_template = None
-
-# End of File Generation

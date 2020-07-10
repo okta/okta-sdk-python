@@ -79,7 +79,7 @@ class IdentityProviderClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -122,7 +122,7 @@ class IdentityProviderClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = IdentityProvider(
                 response.get_body()
@@ -167,7 +167,7 @@ class IdentityProviderClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -211,7 +211,7 @@ class IdentityProviderClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = JsonWebKey(
                 response.get_body()
@@ -250,7 +250,7 @@ class IdentityProviderClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def get_identity_provider_key(
@@ -284,7 +284,7 @@ class IdentityProviderClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = JsonWebKey(
                 response.get_body()
@@ -322,7 +322,7 @@ class IdentityProviderClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def get_identity_provider(
@@ -356,7 +356,7 @@ class IdentityProviderClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = IdentityProvider(
                 response.get_body()
@@ -400,7 +400,7 @@ class IdentityProviderClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = IdentityProvider(
                 response.get_body()
@@ -440,7 +440,7 @@ class IdentityProviderClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -485,7 +485,7 @@ class IdentityProviderClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = Csr(
                 response.get_body()
@@ -525,7 +525,7 @@ class IdentityProviderClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def get_csr_for_identity_provider(
@@ -560,7 +560,7 @@ class IdentityProviderClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = Csr(
                 response.get_body()
@@ -608,7 +608,7 @@ class IdentityProviderClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = JsonWebKey(
                 response.get_body()
@@ -656,7 +656,7 @@ class IdentityProviderClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = JsonWebKey(
                 response.get_body()
@@ -704,7 +704,7 @@ class IdentityProviderClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = JsonWebKey(
                 response.get_body()
@@ -752,7 +752,7 @@ class IdentityProviderClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = JsonWebKey(
                 response.get_body()
@@ -800,7 +800,7 @@ class IdentityProviderClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = JsonWebKey(
                 response.get_body()
@@ -840,7 +840,7 @@ class IdentityProviderClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -887,7 +887,7 @@ class IdentityProviderClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = JsonWebKey(
                 response.get_body()
@@ -928,7 +928,7 @@ class IdentityProviderClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = JsonWebKey(
                 response.get_body()
@@ -975,7 +975,7 @@ class IdentityProviderClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = JsonWebKey(
                 response.get_body()
@@ -1015,7 +1015,7 @@ class IdentityProviderClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = IdentityProvider(
                 response.get_body()
@@ -1055,7 +1055,7 @@ class IdentityProviderClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = IdentityProvider(
                 response.get_body()
@@ -1095,7 +1095,7 @@ class IdentityProviderClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -1135,7 +1135,7 @@ class IdentityProviderClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def get_identity_provider_application_user(
@@ -1170,7 +1170,7 @@ class IdentityProviderClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = IdentityProviderApplicationUser(
                 response.get_body()
@@ -1217,7 +1217,7 @@ class IdentityProviderClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = IdentityProviderApplicationUser(
                 response.get_body()
@@ -1261,7 +1261,7 @@ class IdentityProviderClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -1269,6 +1269,3 @@ class IdentityProviderClient():
         except Exception as error:
             return (None, error)
         return (result, response, None)
-
-
-# End of File Generation

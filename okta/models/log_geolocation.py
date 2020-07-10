@@ -32,5 +32,3 @@ class LogGeolocation(
         else:
             self.lat = None
             self.lon = None
-
-# End of File Generation

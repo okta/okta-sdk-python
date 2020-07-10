@@ -38,5 +38,3 @@ class PushUserFactor(
             self.expires_at = None
             self.factor_result = None
             self.profile = None
-
-# End of File Generation

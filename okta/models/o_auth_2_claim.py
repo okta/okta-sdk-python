@@ -59,5 +59,3 @@ class OAuth2Claim(
             self.system = None
             self.value = None
             self.value_type = None
-
-# End of File Generation

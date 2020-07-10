@@ -41,5 +41,3 @@ class LogTarget(
             self.display_name = None
             self.id = None
             self.type = None
-
-# End of File Generation

@@ -44,5 +44,3 @@ class ApplicationGroupAssignment(
             self.last_updated = None
             self.priority = None
             self.profile = None
-
-# End of File Generation

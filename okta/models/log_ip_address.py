@@ -38,5 +38,3 @@ class LogIpAddress(
             self.ip = None
             self.source = None
             self.version = None
-
-# End of File Generation

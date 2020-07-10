@@ -11,7 +11,6 @@ class {{pascalCase model.modelName}}(
     {{#each model.enum as |enum|}}
     {{enum}} = "{{enum}}"
     {{/each}}
-
 {{else}}
 
 from okta.okta_object import OktaObject
@@ -43,6 +42,4 @@ class {{pascalCase model.modelName}}(
         {{else}}
         pass
         {{/if}}
-
 {{/if}}
-# End of File Generation

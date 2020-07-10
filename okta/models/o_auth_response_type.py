@@ -27,5 +27,3 @@ class OAuthResponseType(
     code = "code"
     token = "token"
     id_token = "id_token"
-
-# End of File Generation

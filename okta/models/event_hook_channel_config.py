@@ -35,5 +35,3 @@ class EventHookChannelConfig(
             self.auth_scheme = None
             self.headers = None
             self.uri = None
-
-# End of File Generation

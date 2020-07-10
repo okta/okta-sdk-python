@@ -25,5 +25,3 @@ class SmsTemplateType(
     Enum
 ):
     SMS_VERIFY_CODE = "SMS_VERIFY_CODE"
-
-# End of File Generation

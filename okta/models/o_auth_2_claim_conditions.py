@@ -29,5 +29,3 @@ class OAuth2ClaimConditions(
                 if "scopes" in config else None
         else:
             self.scopes = None
-
-# End of File Generation

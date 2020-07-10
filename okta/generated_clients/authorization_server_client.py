@@ -78,7 +78,7 @@ class AuthorizationServerClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -120,7 +120,7 @@ class AuthorizationServerClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = AuthorizationServer(
                 response.get_body()
@@ -157,7 +157,7 @@ class AuthorizationServerClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def get_authorization_server(
@@ -190,7 +190,7 @@ class AuthorizationServerClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = AuthorizationServer(
                 response.get_body()
@@ -233,7 +233,7 @@ class AuthorizationServerClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = AuthorizationServer(
                 response.get_body()
@@ -272,7 +272,7 @@ class AuthorizationServerClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -315,7 +315,7 @@ class AuthorizationServerClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = OAuth2Claim(
                 response.get_body()
@@ -354,7 +354,7 @@ class AuthorizationServerClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def get_o_auth_2_claim(
@@ -389,7 +389,7 @@ class AuthorizationServerClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = OAuth2Claim(
                 response.get_body()
@@ -434,7 +434,7 @@ class AuthorizationServerClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = OAuth2Claim(
                 response.get_body()
@@ -473,7 +473,7 @@ class AuthorizationServerClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -512,7 +512,7 @@ class AuthorizationServerClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def list_refresh_tokens_for_authorization_server_and_client(
@@ -554,7 +554,7 @@ class AuthorizationServerClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -594,7 +594,7 @@ class AuthorizationServerClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def get_refresh_token_for_authorization_server_and_client(
@@ -635,7 +635,7 @@ class AuthorizationServerClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = OAuth2RefreshToken(
                 response.get_body()
@@ -675,7 +675,7 @@ class AuthorizationServerClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -718,7 +718,7 @@ class AuthorizationServerClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -756,7 +756,7 @@ class AuthorizationServerClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def deactivate_authorization_server(
@@ -788,7 +788,7 @@ class AuthorizationServerClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def list_authorization_server_policies(
@@ -822,7 +822,7 @@ class AuthorizationServerClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -866,7 +866,7 @@ class AuthorizationServerClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = Policy(
                 response.get_body()
@@ -905,7 +905,7 @@ class AuthorizationServerClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def get_authorization_server_policy(
@@ -940,7 +940,7 @@ class AuthorizationServerClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = Policy(
                 response.get_body()
@@ -985,7 +985,7 @@ class AuthorizationServerClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = Policy(
                 response.get_body()
@@ -1032,7 +1032,7 @@ class AuthorizationServerClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -1075,7 +1075,7 @@ class AuthorizationServerClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = OAuth2Scope(
                 response.get_body()
@@ -1114,7 +1114,7 @@ class AuthorizationServerClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def get_o_auth_2_scope(
@@ -1149,7 +1149,7 @@ class AuthorizationServerClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = OAuth2Scope(
                 response.get_body()
@@ -1194,7 +1194,7 @@ class AuthorizationServerClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = OAuth2Scope(
                 response.get_body()
@@ -1202,6 +1202,3 @@ class AuthorizationServerClient():
         except Exception as error:
             return (None, error)
         return (result, response, None)
-
-
-# End of File Generation

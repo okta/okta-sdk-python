@@ -29,5 +29,3 @@ class CsrMetadataSubjectAltNames(
                 if "dnsNames" in config else None
         else:
             self.dns_names = None
-
-# End of File Generation

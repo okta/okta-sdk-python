@@ -29,5 +29,3 @@ class TempPassword(
                 if "tempPassword" in config else None
         else:
             self.temp_password = None
-
-# End of File Generation

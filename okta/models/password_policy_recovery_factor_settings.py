@@ -29,5 +29,3 @@ class PasswordPolicyRecoveryFactorSettings(
                 if "status" in config else None
         else:
             self.status = "INACTIVE"
-
-# End of File Generation

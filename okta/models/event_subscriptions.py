@@ -32,5 +32,3 @@ class EventSubscriptions(
         else:
             self.items = None
             self.type = None
-
-# End of File Generation

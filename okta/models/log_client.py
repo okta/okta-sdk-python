@@ -44,5 +44,3 @@ class LogClient(
             self.ip_address = None
             self.user_agent = None
             self.zone = None
-
-# End of File Generation

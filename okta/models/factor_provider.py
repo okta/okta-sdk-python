@@ -30,5 +30,3 @@ class FactorProvider(
     SYMANTEC = "SYMANTEC"
     DUO = "DUO"
     YUBICO = "YUBICO"
-
-# End of File Generation

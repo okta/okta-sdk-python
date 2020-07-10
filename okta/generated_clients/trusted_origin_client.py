@@ -67,7 +67,7 @@ class TrustedOriginClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -109,7 +109,7 @@ class TrustedOriginClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = TrustedOrigin(
                 response.get_body()
@@ -146,7 +146,7 @@ class TrustedOriginClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def get_origin(
@@ -179,7 +179,7 @@ class TrustedOriginClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = TrustedOrigin(
                 response.get_body()
@@ -222,7 +222,7 @@ class TrustedOriginClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = TrustedOrigin(
                 response.get_body()
@@ -262,7 +262,7 @@ class TrustedOriginClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = TrustedOrigin(
                 response.get_body()
@@ -302,7 +302,7 @@ class TrustedOriginClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = TrustedOrigin(
                 response.get_body()
@@ -310,6 +310,3 @@ class TrustedOriginClient():
         except Exception as error:
             return (None, error)
         return (result, response, None)
-
-
-# End of File Generation

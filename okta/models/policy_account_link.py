@@ -32,5 +32,3 @@ class PolicyAccountLink(
         else:
             self.action = None
             self.filter = None
-
-# End of File Generation

@@ -29,5 +29,3 @@ class PasswordPolicyDelegationSettings(
                 if "options" in config else None
         else:
             self.options = None
-
-# End of File Generation

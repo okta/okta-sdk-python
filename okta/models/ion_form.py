@@ -53,5 +53,3 @@ class IonForm(
             self.rel = None
             self.relates_to = None
             self.value = None
-
-# End of File Generation

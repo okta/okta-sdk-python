@@ -36,5 +36,3 @@ class FactorType(
     u2f = "u2f"
     web = "web"
     webauthn = "webauthn"
-
-# End of File Generation

@@ -47,5 +47,3 @@ class PolicyRule(
             self.status = "ACTIVE"
             self.system = "false"
             self.type = None
-
-# End of File Generation

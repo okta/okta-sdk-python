@@ -41,5 +41,3 @@ class OAuth2Client(
             self.client_name = None
             self.client_uri = None
             self.logo_uri = None
-
-# End of File Generation

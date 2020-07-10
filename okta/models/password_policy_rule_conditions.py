@@ -32,5 +32,3 @@ class PasswordPolicyRuleConditions(
         else:
             self.network = None
             self.people = None
-
-# End of File Generation

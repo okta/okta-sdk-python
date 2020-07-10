@@ -44,5 +44,3 @@ class SwaApplicationSettingsApplication(
             self.password_field = None
             self.url = None
             self.username_field = None
-
-# End of File Generation

@@ -50,5 +50,3 @@ class OAuth2Scope(
             self.metadata_publish = None
             self.name = None
             self.system = None
-
-# End of File Generation

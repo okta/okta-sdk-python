@@ -56,5 +56,3 @@ class TrustedOrigin(
             self.origin = None
             self.scopes = None
             self.status = None
-
-# End of File Generation

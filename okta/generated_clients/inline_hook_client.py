@@ -66,7 +66,7 @@ class InlineHookClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -108,7 +108,7 @@ class InlineHookClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = InlineHook(
                 response.get_body()
@@ -149,7 +149,7 @@ class InlineHookClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def get_inline_hook(
@@ -183,7 +183,7 @@ class InlineHookClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = InlineHook(
                 response.get_body()
@@ -227,7 +227,7 @@ class InlineHookClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = InlineHook(
                 response.get_body()
@@ -276,7 +276,7 @@ class InlineHookClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = InlineHookResponse(
                 response.get_body()
@@ -317,7 +317,7 @@ class InlineHookClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = InlineHook(
                 response.get_body()
@@ -358,7 +358,7 @@ class InlineHookClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = InlineHook(
                 response.get_body()
@@ -366,6 +366,3 @@ class InlineHookClient():
         except Exception as error:
             return (None, error)
         return (result, response, None)
-
-
-# End of File Generation

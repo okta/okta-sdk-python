@@ -32,5 +32,3 @@ class SessionIdentityProvider(
         else:
             self.id = None
             self.type = None
-
-# End of File Generation

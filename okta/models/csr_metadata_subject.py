@@ -44,5 +44,3 @@ class CsrMetadataSubject(
             self.organization_name = None
             self.organizational_unit_name = None
             self.state_or_province_name = None
-
-# End of File Generation

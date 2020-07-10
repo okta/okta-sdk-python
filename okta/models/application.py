@@ -74,5 +74,3 @@ class Application(
             self.sign_on_mode = None
             self.status = None
             self.visibility = None
-
-# End of File Generation

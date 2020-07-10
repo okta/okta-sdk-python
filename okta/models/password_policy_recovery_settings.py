@@ -29,5 +29,3 @@ class PasswordPolicyRecoverySettings(
                 if "factors" in config else None
         else:
             self.factors = None
-
-# End of File Generation

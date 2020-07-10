@@ -66,7 +66,7 @@ class UserFactorClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -118,7 +118,7 @@ class UserFactorClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = UserFactor(
                 response.get_body()
@@ -159,7 +159,7 @@ class UserFactorClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -200,7 +200,7 @@ class UserFactorClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -240,7 +240,7 @@ class UserFactorClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def get_factor(
@@ -275,7 +275,7 @@ class UserFactorClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = UserFactor(
                 response.get_body()
@@ -322,7 +322,7 @@ class UserFactorClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = UserFactor(
                 response.get_body()
@@ -365,7 +365,7 @@ class UserFactorClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = VerifyUserFactorResponse(
                 response.get_body()
@@ -417,7 +417,7 @@ class UserFactorClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = VerifyUserFactorResponse(
                 response.get_body()
@@ -425,6 +425,3 @@ class UserFactorClient():
         except Exception as error:
             return (None, error)
         return (result, response, None)
-
-
-# End of File Generation

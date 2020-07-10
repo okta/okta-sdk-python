@@ -50,5 +50,3 @@ class PasswordPolicyPasswordSettingsComplexity(
             self.min_number = "1"
             self.min_symbol = "1"
             self.min_upper_case = "1"
-
-# End of File Generation

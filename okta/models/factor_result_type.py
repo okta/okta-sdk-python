@@ -34,5 +34,3 @@ class FactorResultType(
     PASSCODE_REPLAYED = "PASSCODE_REPLAYED"
     ERROR = "ERROR"
     CANCELLED = "CANCELLED"
-
-# End of File Generation

@@ -32,5 +32,3 @@ class OktaSignOnPolicy(
                 if "conditions" in config else None
         else:
             self.conditions = None
-
-# End of File Generation

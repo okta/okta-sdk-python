@@ -29,5 +29,3 @@ class ContextPolicyRuleCondition(
                 if "expression" in config else None
         else:
             self.expression = None
-
-# End of File Generation

@@ -26,5 +26,3 @@ class ProtocolRelayStateFormat(
 ):
     OPAQUE = "OPAQUE"
     FROM_URL = "FROM_URL"
-
-# End of File Generation

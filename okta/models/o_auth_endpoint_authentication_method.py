@@ -28,5 +28,3 @@ class OAuthEndpointAuthenticationMethod(
     client_secret_post = "client_secret_post"
     client_secret_basic = "client_secret_basic"
     client_secret_jwt = "client_secret_jwt"
-
-# End of File Generation

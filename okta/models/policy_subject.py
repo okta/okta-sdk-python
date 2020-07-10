@@ -41,5 +41,3 @@ class PolicySubject(
             self.match_attribute = None
             self.match_type = None
             self.user_name_template = None
-
-# End of File Generation

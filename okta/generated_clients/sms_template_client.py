@@ -67,7 +67,7 @@ class SmsTemplateClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -110,7 +110,7 @@ class SmsTemplateClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = SmsTemplate(
                 response.get_body()
@@ -148,7 +148,7 @@ class SmsTemplateClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def get_sms_template(
@@ -182,7 +182,7 @@ class SmsTemplateClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = SmsTemplate(
                 response.get_body()
@@ -226,7 +226,7 @@ class SmsTemplateClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = SmsTemplate(
                 response.get_body()
@@ -270,7 +270,7 @@ class SmsTemplateClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = SmsTemplate(
                 response.get_body()
@@ -278,6 +278,3 @@ class SmsTemplateClient():
         except Exception as error:
             return (None, error)
         return (result, response, None)
-
-
-# End of File Generation

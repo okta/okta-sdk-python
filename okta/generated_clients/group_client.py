@@ -80,7 +80,7 @@ class GroupClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -124,7 +124,7 @@ class GroupClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = Group(
                 response.get_body()
@@ -171,7 +171,7 @@ class GroupClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -215,7 +215,7 @@ class GroupClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = GroupRule(
                 response.get_body()
@@ -254,7 +254,7 @@ class GroupClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def get_group_rule(
@@ -294,7 +294,7 @@ class GroupClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = GroupRule(
                 response.get_body()
@@ -339,7 +339,7 @@ class GroupClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = GroupRule(
                 response.get_body()
@@ -378,7 +378,7 @@ class GroupClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def deactivate_group_rule(
@@ -411,7 +411,7 @@ class GroupClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def delete_group(
@@ -444,7 +444,7 @@ class GroupClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def get_group(
@@ -478,7 +478,7 @@ class GroupClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = Group(
                 response.get_body()
@@ -523,7 +523,7 @@ class GroupClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = Group(
                 response.get_body()
@@ -570,7 +570,7 @@ class GroupClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -614,7 +614,7 @@ class GroupClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -663,7 +663,7 @@ class GroupClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = Role(
                 response.get_body()
@@ -702,7 +702,7 @@ class GroupClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def get_role(
@@ -736,7 +736,7 @@ class GroupClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = Role(
                 response.get_body()
@@ -788,7 +788,7 @@ class GroupClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -828,7 +828,7 @@ class GroupClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def add_application_target_to_admin_role_given_to_group(
@@ -862,7 +862,7 @@ class GroupClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def remove_app_target_from_admin_role_given_to_group(
@@ -899,7 +899,7 @@ class GroupClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def add_app_instance_target_to_app_admin_role_given_to_group(
@@ -936,7 +936,7 @@ class GroupClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def list_group_targets_for_group_role(
@@ -977,7 +977,7 @@ class GroupClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -1020,7 +1020,7 @@ class GroupClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def add_group_target_to_group_administrator_role_for_group(
@@ -1057,7 +1057,7 @@ class GroupClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def list_group_users(
@@ -1097,7 +1097,7 @@ class GroupClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -1136,7 +1136,7 @@ class GroupClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def add_user_to_group(
@@ -1169,8 +1169,5 @@ class GroupClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
-
-
-# End of File Generation

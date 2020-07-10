@@ -29,5 +29,3 @@ class EmailUserFactorProfile(
                 if "email" in config else None
         else:
             self.email = None
-
-# End of File Generation

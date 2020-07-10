@@ -73,7 +73,7 @@ class LogEventClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -81,6 +81,3 @@ class LogEventClient():
         except Exception as error:
             return (None, error)
         return (result, response, None)
-
-
-# End of File Generation

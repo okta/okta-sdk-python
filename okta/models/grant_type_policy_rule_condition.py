@@ -29,5 +29,3 @@ class GrantTypePolicyRuleCondition(
                 if "include" in config else None
         else:
             self.include = None
-
-# End of File Generation

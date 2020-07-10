@@ -74,5 +74,3 @@ class JsonWebKey(
             self.x_5_t = None
             self.x_5_t_s_256 = None
             self.x_5_u = None
-
-# End of File Generation

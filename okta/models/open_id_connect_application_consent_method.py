@@ -26,5 +26,3 @@ class OpenIdConnectApplicationConsentMethod(
 ):
     REQUIRED = "REQUIRED"
     TRUSTED = "TRUSTED"
-
-# End of File Generation

@@ -29,5 +29,3 @@ class OktaSignOnPolicyConditions(
                 if "people" in config else None
         else:
             self.people = None
-
-# End of File Generation

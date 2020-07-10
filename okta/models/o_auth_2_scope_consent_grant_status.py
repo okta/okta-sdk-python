@@ -26,5 +26,3 @@ class OAuth2ScopeConsentGrantStatus(
 ):
     ACTIVE = "ACTIVE"
     REVOKED = "REVOKED"
-
-# End of File Generation

@@ -32,5 +32,3 @@ class ChangePasswordRequest(
         else:
             self.new_password = None
             self.old_password = None
-
-# End of File Generation

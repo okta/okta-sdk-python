@@ -26,5 +26,3 @@ class FeatureStageValue(
 ):
     EA = "EA"
     BETA = "BETA"
-
-# End of File Generation

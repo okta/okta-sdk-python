@@ -32,5 +32,3 @@ class WebAuthnUserFactorProfile(
         else:
             self.authenticator_name = None
             self.credential_id = None
-
-# End of File Generation

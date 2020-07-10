@@ -32,5 +32,3 @@ class PasswordPolicyConditions(
         else:
             self.auth_provider = None
             self.people = None
-
-# End of File Generation

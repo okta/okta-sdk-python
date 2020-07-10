@@ -29,5 +29,3 @@ class ProtocolRelayState(
                 if "format" in config else None
         else:
             self.format = None
-
-# End of File Generation

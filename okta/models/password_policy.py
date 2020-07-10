@@ -35,5 +35,3 @@ class PasswordPolicy(
         else:
             self.conditions = None
             self.settings = None
-
-# End of File Generation

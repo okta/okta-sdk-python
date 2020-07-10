@@ -59,7 +59,7 @@ class FeatureClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -98,7 +98,7 @@ class FeatureClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = Feature(
                 response.get_body()
@@ -137,7 +137,7 @@ class FeatureClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -176,7 +176,7 @@ class FeatureClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -221,7 +221,7 @@ class FeatureClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = Feature(
                 response.get_body()
@@ -229,6 +229,3 @@ class FeatureClient():
         except Exception as error:
             return (None, error)
         return (result, response, None)
-
-
-# End of File Generation

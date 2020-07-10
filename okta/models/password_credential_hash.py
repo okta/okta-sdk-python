@@ -41,5 +41,3 @@ class PasswordCredentialHash(
             self.salt_order = None
             self.value = None
             self.worker_factor = None
-
-# End of File Generation

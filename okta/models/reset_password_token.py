@@ -29,5 +29,3 @@ class ResetPasswordToken(
                 if "resetPasswordUrl" in config else None
         else:
             self.reset_password_url = None
-
-# End of File Generation

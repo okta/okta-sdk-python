@@ -35,5 +35,3 @@ class SwaThreeFieldApplication(
         else:
             self.name = "template_swa3field"
             self.settings = None
-
-# End of File Generation

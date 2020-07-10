@@ -20,9 +20,7 @@ class {{pascalCase resource}}Client():
     def __init__(self):
         self._base_url = ""
 
-    {{#each operations as |operation|}}
-{{> partials.defaultMethod  operation=operation}}
-
-    {{/each}}
-
-# End of File Generation
+{{#each operations as |operation|}}
+{{> partials.defaultMethod  operation=operation}}{{#unless @last}}
+{{/unless}}
+{{/each}}

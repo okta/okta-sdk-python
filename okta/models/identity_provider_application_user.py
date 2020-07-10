@@ -47,5 +47,3 @@ class IdentityProviderApplicationUser(
             self.id = None
             self.last_updated = None
             self.profile = None
-
-# End of File Generation

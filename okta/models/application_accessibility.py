@@ -35,5 +35,3 @@ class ApplicationAccessibility(
             self.error_redirect_url = None
             self.login_redirect_url = None
             self.self_service = None
-
-# End of File Generation

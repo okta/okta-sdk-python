@@ -32,5 +32,3 @@ class LogOutcome(
         else:
             self.reason = None
             self.result = None
-
-# End of File Generation

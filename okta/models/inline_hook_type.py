@@ -29,5 +29,3 @@ class InlineHookType(
     com.okta.saml.tokens.transform = "com.okta.saml.tokens.transform"
     com.okta.user.pre-registration = "com.okta.user.pre-registration"
     com.okta.user.credential.password.import = "com.okta.user.credential.password.import"
-
-# End of File Generation

@@ -32,5 +32,3 @@ class PolicyPeopleCondition(
         else:
             self.groups = None
             self.users = None
-
-# End of File Generation

@@ -27,5 +27,3 @@ class SessionStatus(
     ACTIVE = "ACTIVE"
     MFA_ENROLL = "MFA_ENROLL"
     MFA_REQUIRED = "MFA_REQUIRED"
-
-# End of File Generation

@@ -38,5 +38,3 @@ class LinkedObjectDetails(
             self.name = None
             self.title = None
             self.type = None
-
-# End of File Generation

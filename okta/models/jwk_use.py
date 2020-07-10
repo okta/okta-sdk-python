@@ -29,5 +29,3 @@ class JwkUse(
                 if "use" in config else None
         else:
             self.use = None
-
-# End of File Generation

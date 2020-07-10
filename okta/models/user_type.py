@@ -56,5 +56,3 @@ class UserType(
             self.last_updated = None
             self.last_updated_by = None
             self.name = None
-
-# End of File Generation

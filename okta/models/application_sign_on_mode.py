@@ -33,5 +33,3 @@ class ApplicationSignOnMode(
     SAML_2_0 = "SAML_2_0"
     OPENID_CONNECT = "OPENID_CONNECT"
     SAML_1_1 = "SAML_1_1"
-
-# End of File Generation

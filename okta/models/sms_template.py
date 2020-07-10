@@ -47,5 +47,3 @@ class SmsTemplate(
             self.template = None
             self.translations = None
             self.type = None
-
-# End of File Generation

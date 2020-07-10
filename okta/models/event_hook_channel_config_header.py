@@ -32,5 +32,3 @@ class EventHookChannelConfigHeader(
         else:
             self.key = None
             self.value = None
-
-# End of File Generation

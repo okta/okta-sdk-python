@@ -69,7 +69,7 @@ class PolicyClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -117,7 +117,7 @@ class PolicyClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = Policy(
                 response.get_body()
@@ -155,7 +155,7 @@ class PolicyClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def get_policy(
@@ -194,7 +194,7 @@ class PolicyClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = Policy(
                 response.get_body()
@@ -238,7 +238,7 @@ class PolicyClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = Policy(
                 response.get_body()
@@ -276,7 +276,7 @@ class PolicyClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def deactivate_policy(
@@ -308,7 +308,7 @@ class PolicyClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def list_policy_rules(
@@ -342,7 +342,7 @@ class PolicyClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -386,7 +386,7 @@ class PolicyClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = PolicyRule(
                 response.get_body()
@@ -425,7 +425,7 @@ class PolicyClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def get_policy_rule(
@@ -460,7 +460,7 @@ class PolicyClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = PolicyRule(
                 response.get_body()
@@ -505,7 +505,7 @@ class PolicyClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = PolicyRule(
                 response.get_body()
@@ -545,7 +545,7 @@ class PolicyClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def deactivate_policy_rule(
@@ -579,8 +579,5 @@ class PolicyClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
-
-
-# End of File Generation

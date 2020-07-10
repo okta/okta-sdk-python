@@ -68,5 +68,3 @@ class AppUser(
             self.status = None
             self.status_changed = None
             self.sync_state = None
-
-# End of File Generation

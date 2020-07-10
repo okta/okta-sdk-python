@@ -35,5 +35,3 @@ class IdentityProviderCredentials(
             self.client = None
             self.signing = None
             self.trust = None
-
-# End of File Generation

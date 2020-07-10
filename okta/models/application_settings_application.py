@@ -25,5 +25,3 @@ class ApplicationSettingsApplication(
 ):
     def __init__(self, config=None):
         pass
-
-# End of File Generation

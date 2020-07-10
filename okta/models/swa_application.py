@@ -35,5 +35,3 @@ class SwaApplication(
         else:
             self.name = "template_swa"
             self.settings = None
-
-# End of File Generation

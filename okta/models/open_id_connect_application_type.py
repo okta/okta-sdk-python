@@ -28,5 +28,3 @@ class OpenIdConnectApplicationType(
     native = "native"
     browser = "browser"
     service = "service"
-
-# End of File Generation

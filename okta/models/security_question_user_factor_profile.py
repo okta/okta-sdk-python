@@ -35,5 +35,3 @@ class SecurityQuestionUserFactorProfile(
             self.answer = None
             self.question = None
             self.question_text = None
-
-# End of File Generation

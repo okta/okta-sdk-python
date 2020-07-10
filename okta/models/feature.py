@@ -47,5 +47,3 @@ class Feature(
             self.stage = None
             self.status = None
             self.type = None
-
-# End of File Generation

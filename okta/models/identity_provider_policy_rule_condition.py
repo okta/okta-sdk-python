@@ -32,5 +32,3 @@ class IdentityProviderPolicyRuleCondition(
         else:
             self.idp_ids = None
             self.provider = None
-
-# End of File Generation

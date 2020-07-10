@@ -29,5 +29,3 @@ class InlineHookResponse(
                 if "commands" in config else None
         else:
             self.commands = None
-
-# End of File Generation

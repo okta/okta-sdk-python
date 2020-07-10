@@ -32,5 +32,3 @@ class RecoveryQuestionCredential(
         else:
             self.answer = None
             self.question = None
-
-# End of File Generation

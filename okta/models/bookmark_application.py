@@ -35,5 +35,3 @@ class BookmarkApplication(
         else:
             self.name = "bookmark"
             self.settings = None
-
-# End of File Generation

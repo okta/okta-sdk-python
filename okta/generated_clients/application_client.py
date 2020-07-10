@@ -85,7 +85,7 @@ class ApplicationClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -133,7 +133,7 @@ class ApplicationClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = Application(
                 response.get_body()
@@ -171,7 +171,7 @@ class ApplicationClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def get_application(
@@ -211,7 +211,7 @@ class ApplicationClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = Application(
                 response.get_body()
@@ -255,7 +255,7 @@ class ApplicationClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = Application(
                 response.get_body()
@@ -296,7 +296,7 @@ class ApplicationClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -341,7 +341,7 @@ class ApplicationClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = Csr(
                 response.get_body()
@@ -381,7 +381,7 @@ class ApplicationClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def get_csr_for_application(
@@ -417,7 +417,7 @@ class ApplicationClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = Csr(
                 response.get_body()
@@ -465,7 +465,7 @@ class ApplicationClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = JsonWebKey(
                 response.get_body()
@@ -513,7 +513,7 @@ class ApplicationClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = JsonWebKey(
                 response.get_body()
@@ -561,7 +561,7 @@ class ApplicationClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = JsonWebKey(
                 response.get_body()
@@ -609,7 +609,7 @@ class ApplicationClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = JsonWebKey(
                 response.get_body()
@@ -657,7 +657,7 @@ class ApplicationClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = JsonWebKey(
                 response.get_body()
@@ -697,7 +697,7 @@ class ApplicationClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -743,7 +743,7 @@ class ApplicationClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = JsonWebKey(
                 response.get_body()
@@ -784,7 +784,7 @@ class ApplicationClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = JsonWebKey(
                 response.get_body()
@@ -831,7 +831,7 @@ class ApplicationClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = JsonWebKey(
                 response.get_body()
@@ -876,7 +876,7 @@ class ApplicationClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -921,7 +921,7 @@ class ApplicationClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = OAuth2ScopeConsentGrant(
                 response.get_body()
@@ -961,7 +961,7 @@ class ApplicationClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def get_scope_consent_grant(
@@ -1002,7 +1002,7 @@ class ApplicationClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = OAuth2ScopeConsentGrant(
                 response.get_body()
@@ -1050,7 +1050,7 @@ class ApplicationClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -1089,7 +1089,7 @@ class ApplicationClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def get_application_group_assignment(
@@ -1129,7 +1129,7 @@ class ApplicationClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = ApplicationGroupAssignment(
                 response.get_body()
@@ -1174,7 +1174,7 @@ class ApplicationClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = ApplicationGroupAssignment(
                 response.get_body()
@@ -1212,7 +1212,7 @@ class ApplicationClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def deactivate_application(
@@ -1244,7 +1244,7 @@ class ApplicationClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def revoke_o_auth_2_tokens_for_application(
@@ -1276,7 +1276,7 @@ class ApplicationClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def list_o_auth_2_tokens_for_application(
@@ -1317,7 +1317,7 @@ class ApplicationClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -1357,7 +1357,7 @@ class ApplicationClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def get_o_auth_2_token_for_application(
@@ -1397,7 +1397,7 @@ class ApplicationClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = OAuth2Token(
                 response.get_body()
@@ -1448,7 +1448,7 @@ class ApplicationClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -1497,7 +1497,7 @@ class ApplicationClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = AppUser(
                 response.get_body()
@@ -1541,7 +1541,7 @@ class ApplicationClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def get_application_user(
@@ -1582,7 +1582,7 @@ class ApplicationClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = AppUser(
                 response.get_body()
@@ -1627,7 +1627,7 @@ class ApplicationClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = AppUser(
                 response.get_body()
@@ -1635,6 +1635,3 @@ class ApplicationClient():
         except Exception as error:
             return (None, error)
         return (result, response, None)
-
-
-# End of File Generation

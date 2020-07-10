@@ -56,5 +56,3 @@ class IdentityProvider(
             self.protocol = None
             self.status = None
             self.type = None
-
-# End of File Generation

@@ -118,13 +118,16 @@ py.process = ({ spec, operations, models, handlebars }) => {
   return templates;
 };
 
-// Helper functions
+/* Helper functions */
 
+// Returns if method is POST or PUT for operation
 function isPostOrPut(method) {
   return method === "post" || method === "put";
 }
 
-// Handlebars helpers
+/* Handlebars helpers */
+
+// Write out parameters for operation
 function operationArgumentBuilder(operation) {
   let args = ["self"];
   operation.pathParams.map((param) => args.push(param.name));
@@ -141,6 +144,7 @@ function operationArgumentBuilder(operation) {
   return args.join(", ");
 }
 
+// Write out docstring for operation
 function pyDocstringBuilder(method) {
   const docs = [];
 
@@ -192,6 +196,7 @@ function pyDocstringBuilder(method) {
   return docs.join("\n");
 }
 
+// Write out path for operation
 function updatePath(operation) {
   let result = operation.path;
   if (operation.pathParams.length) {
@@ -203,6 +208,7 @@ function updatePath(operation) {
   return result;
 }
 
+// Helper function to split URL into multiple lines
 function multilineURL(path) {
   let pieces = path.split("/").filter((segment) => {
     return segment.length > 0;
@@ -224,6 +230,7 @@ function multilineURL(path) {
   return result.join(`\n${" ".repeat(16)}`);
 }
 
+// Shorten operation names which were too long
 function displayMethodName(name) {
   const LONG_WORDS = {
     application: "app",
@@ -238,6 +245,8 @@ function displayMethodName(name) {
   return name;
 }
 
+// check if resource client has an operation with query parameters
+// indicates if URLEncoder should be imported
 function importURLEncode(operations) {
   return (
     operations.filter((operation) => {
@@ -246,6 +255,7 @@ function importURLEncode(operations) {
   );
 }
 
+// Import all datatypes used in resource client
 function getResourceImports(operations) {
   let result = new Set();
   for (let op of operations) {
@@ -256,6 +266,7 @@ function getResourceImports(operations) {
   return [...result];
 }
 
+// If resource client has any binary operations
 function hasBinaryOps(operations) {
   return (
     operations.filter((operation) => {

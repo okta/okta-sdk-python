@@ -50,5 +50,3 @@ class VerifyFactorRequest(
             self.pass_code = None
             self.registration_data = None
             self.state_token = None
-
-# End of File Generation

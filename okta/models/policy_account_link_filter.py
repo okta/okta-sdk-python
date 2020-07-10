@@ -29,5 +29,3 @@ class PolicyAccountLinkFilter(
                 if "groups" in config else None
         else:
             self.groups = None
-
-# End of File Generation

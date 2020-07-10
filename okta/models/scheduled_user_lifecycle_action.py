@@ -29,5 +29,3 @@ class ScheduledUserLifecycleAction(
                 if "status" in config else None
         else:
             self.status = None
-
-# End of File Generation

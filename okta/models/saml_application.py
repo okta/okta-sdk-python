@@ -32,5 +32,3 @@ class SamlApplication(
                 if "settings" in config else None
         else:
             self.settings = None
-
-# End of File Generation

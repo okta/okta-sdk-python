@@ -25,5 +25,3 @@ class FeatureType(
     Enum
 ):
     self-service = "self-service"
-
-# End of File Generation

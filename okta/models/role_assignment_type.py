@@ -26,5 +26,3 @@ class RoleAssignmentType(
 ):
     GROUP = "GROUP"
     USER = "USER"
-
-# End of File Generation

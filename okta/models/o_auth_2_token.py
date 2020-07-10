@@ -59,5 +59,3 @@ class OAuth2Token(
             self.scopes = None
             self.status = None
             self.user_id = None
-
-# End of File Generation

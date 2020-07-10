@@ -29,5 +29,3 @@ class PolicyUserNameTemplate(
                 if "template" in config else None
         else:
             self.template = None
-
-# End of File Generation

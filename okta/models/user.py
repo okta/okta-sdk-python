@@ -68,5 +68,3 @@ class User(
             self.status_changed = None
             self.transitioning_to_status = None
             self.type = None
-
-# End of File Generation

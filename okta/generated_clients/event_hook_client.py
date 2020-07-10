@@ -58,7 +58,7 @@ class EventHookClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = []
             for item in response.get_body():
@@ -100,7 +100,7 @@ class EventHookClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = EventHook(
                 response.get_body()
@@ -137,7 +137,7 @@ class EventHookClient():
 
         if error:
             return (None, error)
-        
+
         return (response, None)
 
     async def get_event_hook(
@@ -170,7 +170,7 @@ class EventHookClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = EventHook(
                 response.get_body()
@@ -213,7 +213,7 @@ class EventHookClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = EventHook(
                 response.get_body()
@@ -252,7 +252,7 @@ class EventHookClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = EventHook(
                 response.get_body()
@@ -292,7 +292,7 @@ class EventHookClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = EventHook(
                 response.get_body()
@@ -331,7 +331,7 @@ class EventHookClient():
 
         if error:
             return (None, None, error)
-        
+
         try:
             result = EventHook(
                 response.get_body()
@@ -339,6 +339,3 @@ class EventHookClient():
         except Exception as error:
             return (None, error)
         return (result, response, None)
-
-
-# End of File Generation

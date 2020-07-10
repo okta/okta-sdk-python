@@ -29,5 +29,3 @@ class U2FUserFactorProfile(
                 if "credentialId" in config else None
         else:
             self.credential_id = None
-
-# End of File Generation
