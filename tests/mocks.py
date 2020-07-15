@@ -1,5 +1,6 @@
 from okta.user_agent import UserAgent
 from okta.constants import DATETIME_STRING_FORMAT
+from okta.client import Client
 import aiohttp
 import asyncio
 import json
@@ -14,6 +15,22 @@ CLIENT_ID = "yourClientId"
 SCOPES = ["okta.scope.1", "okta.scope.2"]
 PRIVATE_KEY = "yourPrivateKey"
 GET_USERS_CALL = "/api/v1/users"
+CLIENT_CONFIG = {'orgUrl': ORG_URL, 'token': API_TOKEN}
+
+# Cache Test Details
+TTI = 5.0
+TTL = 5.0
+CACHE_KEY = ("https://example.com/sample/cache-key/test+test@test."
+             "com?with=a&query=string")
+CACHE_VALUE = "54321"
+ALT_CACHE_KEY = ("https://sample.com/example/cache-key/test+2@test."
+                 "com?with=a&query=string")
+ALT_CACHE_VALUE = "dbca"
+
+
+class MockOktaClient(Client):
+    def __init__(self):
+        super().__init__(CLIENT_CONFIG)
 
 
 async def mock_GET_HTTP_request(*args, **kwargs):
@@ -202,6 +219,14 @@ async def mock_access_token(*args, **kwargs):
 
 def mock_pause_function(*args, **kwargs):
     pass
+
+
+def mock_cache_return_none(*args, **kwargs):
+    return None
+
+
+def mock_cache_return_value(*args, **kwargs):
+    return CACHE_VALUE
 
 
 SAMPLE_RSA = '''-----BEGIN RSA PRIVATE KEY-----
