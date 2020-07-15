@@ -51,32 +51,32 @@ class UserFactorClient():
             /api/v1/users/{userId}/factors
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = []
             for item in response.get_body():
                 result.append(UserFactor(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def enroll_factor(
-            self, userId, user_factor, query_params
+            self, userId, user_factor, query_params={}
     ):
         """
         Enrolls a user with a supported factor.
@@ -96,8 +96,9 @@ class UserFactorClient():
             {self._base_url}
             /api/v1/users/{userId}/factors
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
         body = user_factor.as_dict()
         headers = {
@@ -110,21 +111,21 @@ class UserFactorClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = UserFactor(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def list_supported_factors(
             self, userId
@@ -143,29 +144,29 @@ class UserFactorClient():
             /api/v1/users/{userId}/factors/catalog
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = []
             for item in response.get_body():
                 result.append(UserFactor(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def list_supported_security_questions(
             self, userId
@@ -184,29 +185,29 @@ class UserFactorClient():
             /api/v1/users/{userId}/factors/questions
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = []
             for item in response.get_body():
                 result.append(SecurityQuestion(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def delete_factor(
             self, userId, factorId
@@ -224,8 +225,8 @@ class UserFactorClient():
             /api/v1/users/{userId}/factors/{factorId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -239,6 +240,7 @@ class UserFactorClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def get_factor(
@@ -258,29 +260,29 @@ class UserFactorClient():
             /api/v1/users/{userId}/factors/{factorId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = UserFactor(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def activate_factor(
             self, userId, factorId, activate_factor_request
@@ -313,21 +315,21 @@ class UserFactorClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = UserFactor(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def get_factor_transaction_status(
             self, userId, factorId, transactionId
@@ -348,32 +350,32 @@ class UserFactorClient():
                 transactions/{transactionId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = VerifyUserFactorResponse(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def verify_factor(
-            self, userId, factorId, verify_factor_request, query_params
+            self, userId, factorId, verify_factor_request, query_params={}
     ):
         """
         Verifies an OTP for a `token` or `token:hardware` facto
@@ -393,8 +395,9 @@ class UserFactorClient():
             {self._base_url}
             /api/v1/users/{userId}/factors/{factorId}/verify
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
         body = verify_factor_request.as_dict()
         headers = {
@@ -407,18 +410,18 @@ class UserFactorClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = VerifyUserFactorResponse(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)

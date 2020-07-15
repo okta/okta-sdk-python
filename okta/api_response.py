@@ -8,7 +8,7 @@ class OktaAPIResponse():
     Allows for paginated results to be retrieved easily.
     """
 
-    def __init__(self, request_executor, req, res_details, response_body={}):
+    def __init__(self, request_executor, req, res_details, response_body=""):
         self._url = res_details.url
         self._headers = req["headers"]
         self._self = None  # Link to first page of results

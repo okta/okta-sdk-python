@@ -33,7 +33,7 @@ class InlineHookClient():
         self._base_url = ""
 
     async def list_inline_hooks(
-            self, query_params
+            self, query_params={}
     ):
         """
         Args:
@@ -47,32 +47,33 @@ class InlineHookClient():
             {self._base_url}
             /api/v1/inlineHooks
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = []
             for item in response.get_body():
                 result.append(InlineHook(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def create_inline_hook(
             self, inline_hook
@@ -100,21 +101,21 @@ class InlineHookClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = InlineHook(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def delete_inline_hook(
             self, inlineHookId
@@ -133,8 +134,8 @@ class InlineHookClient():
             /api/v1/inlineHooks/{inlineHookId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -148,6 +149,7 @@ class InlineHookClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def get_inline_hook(
@@ -166,29 +168,29 @@ class InlineHookClient():
             /api/v1/inlineHooks/{inlineHookId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = InlineHook(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def update_inline_hook(
             self, inlineHookId, inline_hook
@@ -218,21 +220,21 @@ class InlineHookClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = InlineHook(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def execute_inline_hook(
             self, inlineHookId, inline_hook_payload
@@ -267,21 +269,21 @@ class InlineHookClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = InlineHookResponse(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def activate_inline_hook(
             self, inlineHookId
@@ -300,29 +302,29 @@ class InlineHookClient():
                 activate
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = InlineHook(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def deactivate_inline_hook(
             self, inlineHookId
@@ -341,26 +343,26 @@ class InlineHookClient():
                 deactivate
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = InlineHook(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)

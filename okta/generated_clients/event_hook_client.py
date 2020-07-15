@@ -43,29 +43,29 @@ class EventHookClient():
             /api/v1/eventHooks
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = []
             for item in response.get_body():
                 result.append(EventHook(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def create_event_hook(
             self, event_hook
@@ -93,21 +93,21 @@ class EventHookClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = EventHook(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def delete_event_hook(
             self, eventHookId
@@ -122,8 +122,8 @@ class EventHookClient():
             /api/v1/eventHooks/{eventHookId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -137,6 +137,7 @@ class EventHookClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def get_event_hook(
@@ -154,29 +155,29 @@ class EventHookClient():
             /api/v1/eventHooks/{eventHookId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = EventHook(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def update_event_hook(
             self, eventHookId, event_hook
@@ -205,21 +206,21 @@ class EventHookClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = EventHook(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def activate_event_hook(
             self, eventHookId
@@ -236,29 +237,29 @@ class EventHookClient():
             /api/v1/eventHooks/{eventHookId}/lifecycle/activate
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = EventHook(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def deactivate_event_hook(
             self, eventHookId
@@ -276,29 +277,29 @@ class EventHookClient():
                 deactivate
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = EventHook(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def verify_event_hook(
             self, eventHookId
@@ -315,26 +316,26 @@ class EventHookClient():
             /api/v1/eventHooks/{eventHookId}/lifecycle/verify
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = EventHook(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)

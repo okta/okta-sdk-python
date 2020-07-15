@@ -139,7 +139,7 @@ function operationArgumentBuilder(operation) {
   }
 
   if (operation.queryParams.length) {
-    args.push("query_params");
+    args.push("query_params={}");
   }
   return args.join(", ");
 }

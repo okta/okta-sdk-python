@@ -59,7 +59,7 @@ class UserClient():
         self._base_url = ""
 
     async def list_users(
-            self, query_params
+            self, query_params={}
     ):
         """
         Lists users in your organization with pagination in mos
@@ -82,35 +82,36 @@ class UserClient():
             {self._base_url}
             /api/v1/users
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = []
             for item in response.get_body():
                 result.append(User(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def create_user(
-            self, create_user_request, query_params
+            self, create_user_request, query_params={}
     ):
         """
         Creates a new user in your Okta organization with or wi
@@ -129,8 +130,9 @@ class UserClient():
             {self._base_url}
             /api/v1/users
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
         body = create_user_request.as_dict()
         headers = {
@@ -143,21 +145,21 @@ class UserClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = User(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def set_linked_object_for_user(
             self, associatedUserId, primaryRelationshipName, primaryUserId
@@ -178,8 +180,8 @@ class UserClient():
                 {primaryRelationshipName}/{primaryUserId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -193,10 +195,11 @@ class UserClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def deactivate_or_delete_user(
-            self, userId, query_params
+            self, userId, query_params={}
     ):
         """
         Deletes a user permanently.  This operation can only be
@@ -212,11 +215,12 @@ class UserClient():
             {self._base_url}
             /api/v1/users/{userId}
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -230,6 +234,7 @@ class UserClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def get_user(
@@ -248,32 +253,32 @@ class UserClient():
             /api/v1/users/{userId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = User(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def partial_update_user(
-            self, userId, user, query_params
+            self, userId, user, query_params={}
     ):
         """
         Fetch a user by `id`, `login`, or `login shortname` if
@@ -291,8 +296,9 @@ class UserClient():
             {self._base_url}
             /api/v1/users/{userId}
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
         body = user.as_dict()
         headers = {
@@ -305,24 +311,24 @@ class UserClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = User(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def update_user(
-            self, userId, user, query_params
+            self, userId, user, query_params={}
     ):
         """
         Update a user's profile and/or credentials using strict
@@ -340,8 +346,9 @@ class UserClient():
             {self._base_url}
             /api/v1/users/{userId}
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
         body = user.as_dict()
         headers = {
@@ -354,21 +361,21 @@ class UserClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = User(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def list_app_links(
             self, userId
@@ -387,29 +394,29 @@ class UserClient():
             /api/v1/users/{userId}/appLinks
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = []
             for item in response.get_body():
                 result.append(AppLink(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def list_user_clients(
             self, userId
@@ -428,29 +435,29 @@ class UserClient():
             /api/v1/users/{userId}/clients
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = []
             for item in response.get_body():
                 result.append(OAuth2Client(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def revoke_grants_for_user_and_client(
             self, userId, clientId
@@ -467,8 +474,8 @@ class UserClient():
             /api/v1/users/{userId}/clients/{clientId}/grants
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -482,10 +489,11 @@ class UserClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def list_grants_for_user_and_client(
-            self, userId, clientId, query_params
+            self, userId, clientId, query_params={}
     ):
         """
         Lists all grants for a specified user and client
@@ -504,32 +512,33 @@ class UserClient():
             {self._base_url}
             /api/v1/users/{userId}/clients/{clientId}/grants
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = []
             for item in response.get_body():
                 result.append(OAuth2ScopeConsentGrant(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def revoke_tokens_for_user_and_client(
             self, userId, clientId
@@ -547,8 +556,8 @@ class UserClient():
             /api/v1/users/{userId}/clients/{clientId}/tokens
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -562,10 +571,11 @@ class UserClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def list_refresh_tokens_for_user_and_client(
-            self, userId, clientId, query_params
+            self, userId, clientId, query_params={}
     ):
         """
         Lists all refresh tokens issued for the specified User
@@ -585,32 +595,33 @@ class UserClient():
             {self._base_url}
             /api/v1/users/{userId}/clients/{clientId}/tokens
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = []
             for item in response.get_body():
                 result.append(OAuth2RefreshToken(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def revoke_token_for_user_and_client(
             self, userId, clientId, tokenId
@@ -629,8 +640,8 @@ class UserClient():
                 {tokenId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -644,10 +655,11 @@ class UserClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def get_refresh_token_for_user_and_client(
-            self, userId, clientId, tokenId, query_params
+            self, userId, clientId, tokenId, query_params={}
     ):
         """
         Gets a refresh token issued for the specified User and
@@ -669,35 +681,36 @@ class UserClient():
             /api/v1/users/{userId}/clients/{clientId}/tokens
                 {tokenId}
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = OAuth2RefreshToken(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def change_password(
-            self, userId, change_password_request, query_params
+            self, userId, change_password_request, query_params={}
     ):
         """
         Changes a user's password by validating the user's curr
@@ -717,8 +730,9 @@ class UserClient():
             {self._base_url}
             /api/v1/users/{userId}/credentials/change_password
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
         body = change_password_request.as_dict()
         headers = {
@@ -731,21 +745,21 @@ class UserClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = UserCredentials(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def change_recovery_question(
             self, userId, user_credentials
@@ -780,24 +794,24 @@ class UserClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = UserCredentials(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def forgot_password_generate_one_time_token(
-            self, userId, query_params
+            self, userId, query_params={}
     ):
         """
         Generates a one-time token (OTT) that can be used to re
@@ -814,35 +828,36 @@ class UserClient():
             {self._base_url}
             /api/v1/users/{userId}/credentials/forgot_password
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = ForgotPasswordResponse(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def forgot_password_set_new_password(
-            self, userId, user_credentials, query_params
+            self, userId, user_credentials, query_params={}
     ):
         """
         Sets a new password for a user by validating the user's
@@ -860,8 +875,9 @@ class UserClient():
             {self._base_url}
             /api/v1/users/{userId}/credentials/forgot_password
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
         body = user_credentials.as_dict()
         headers = {
@@ -874,21 +890,21 @@ class UserClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = ForgotPasswordResponse(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def revoke_user_grants(
             self, userId
@@ -904,8 +920,8 @@ class UserClient():
             /api/v1/users/{userId}/grants
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -919,10 +935,11 @@ class UserClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def list_user_grants(
-            self, userId, query_params
+            self, userId, query_params={}
     ):
         """
         Lists all grants for the specified user
@@ -941,32 +958,33 @@ class UserClient():
             {self._base_url}
             /api/v1/users/{userId}/grants
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = []
             for item in response.get_body():
                 result.append(OAuth2ScopeConsentGrant(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def revoke_user_grant(
             self, userId, grantId
@@ -983,8 +1001,8 @@ class UserClient():
             /api/v1/users/{userId}/grants/{grantId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -998,10 +1016,11 @@ class UserClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def get_user_grant(
-            self, userId, grantId, query_params
+            self, userId, grantId, query_params={}
     ):
         """
         Gets a grant for the specified user
@@ -1018,32 +1037,33 @@ class UserClient():
             {self._base_url}
             /api/v1/users/{userId}/grants/{grantId}
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = OAuth2ScopeConsentGrant(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def list_user_groups(
             self, userId
@@ -1061,29 +1081,29 @@ class UserClient():
             /api/v1/users/{userId}/groups
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = []
             for item in response.get_body():
                 result.append(Group(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def list_user_identity_providers(
             self, userId
@@ -1101,32 +1121,32 @@ class UserClient():
             /api/v1/users/{userId}/idps
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = []
             for item in response.get_body():
                 result.append(IdentityProvider(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def activate_user(
-            self, userId, query_params
+            self, userId, query_params={}
     ):
         """
         Activates a user.  This operation can only be performed
@@ -1149,35 +1169,36 @@ class UserClient():
             {self._base_url}
             /api/v1/users/{userId}/lifecycle/activate
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = UserActivationToken(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def deactivate_user(
-            self, userId, query_params
+            self, userId, query_params={}
     ):
         """
         Deactivates a user.  This operation can only be perform
@@ -1198,11 +1219,12 @@ class UserClient():
             {self._base_url}
             /api/v1/users/{userId}/lifecycle/deactivate
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1216,6 +1238,7 @@ class UserClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def expire_password(
@@ -1237,29 +1260,29 @@ class UserClient():
                 expire_password?tempPassword=false
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = User(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def expire_password_and_get_temporary_password(
             self, userId
@@ -1280,32 +1303,32 @@ class UserClient():
                 expire_password?tempPassword=true
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = TempPassword(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def reactivate_user(
-            self, userId, query_params
+            self, userId, query_params={}
     ):
         """
         Reactivates a user.  This operation can only be perform
@@ -1325,32 +1348,33 @@ class UserClient():
             {self._base_url}
             /api/v1/users/{userId}/lifecycle/reactivate
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = UserActivationToken(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def reset_factors(
             self, userId
@@ -1370,8 +1394,8 @@ class UserClient():
             /api/v1/users/{userId}/lifecycle/reset_factors
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1385,10 +1409,11 @@ class UserClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def reset_password(
-            self, userId, query_params
+            self, userId, query_params={}
     ):
         """
         Generates a one-time token (OTT) that can be used to re
@@ -1407,32 +1432,33 @@ class UserClient():
             {self._base_url}
             /api/v1/users/{userId}/lifecycle/reset_password
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = ResetPasswordToken(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def suspend_user(
             self, userId
@@ -1450,8 +1476,8 @@ class UserClient():
             /api/v1/users/{userId}/lifecycle/suspend
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1465,6 +1491,7 @@ class UserClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def unlock_user(
@@ -1483,8 +1510,8 @@ class UserClient():
             /api/v1/users/{userId}/lifecycle/unlock
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1498,6 +1525,7 @@ class UserClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def unsuspend_user(
@@ -1516,8 +1544,8 @@ class UserClient():
             /api/v1/users/{userId}/lifecycle/unsuspend
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1531,6 +1559,7 @@ class UserClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def remove_linked_object_for_user(
@@ -1550,8 +1579,8 @@ class UserClient():
                 {relationshipName}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1565,10 +1594,11 @@ class UserClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def get_linked_objects_for_user(
-            self, userId, relationshipName, query_params
+            self, userId, relationshipName, query_params={}
     ):
         """
         Get linked objects for a user, relationshipName can be
@@ -1588,35 +1618,36 @@ class UserClient():
             /api/v1/users/{userId}/linkedObjects
                 {relationshipName}
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = []
             for item in response.get_body():
                 result.append(ResponseLinks(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def list_assigned_roles_for_user(
-            self, userId, query_params
+            self, userId, query_params={}
     ):
         """
         Lists all roles assigned to a user.
@@ -1632,35 +1663,36 @@ class UserClient():
             {self._base_url}
             /api/v1/users/{userId}/roles
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = []
             for item in response.get_body():
                 result.append(Role(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def assign_role_to_user(
-            self, userId, assign_role_request, query_params
+            self, userId, assign_role_request, query_params={}
     ):
         """
         Assigns a role to a user.
@@ -1677,8 +1709,9 @@ class UserClient():
             {self._base_url}
             /api/v1/users/{userId}/roles
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
         body = assign_role_request.as_dict()
         headers = {
@@ -1691,21 +1724,21 @@ class UserClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = Role(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def remove_role_from_user(
             self, userId, roleId
@@ -1722,8 +1755,8 @@ class UserClient():
             /api/v1/users/{userId}/roles/{roleId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1737,10 +1770,11 @@ class UserClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def list_app_targets_for_application_admin_role_for_user(
-            self, userId, roleId, query_params
+            self, userId, roleId, query_params={}
     ):
         """
         Lists all App targets for an `APP_ADMIN` Role assigned
@@ -1763,32 +1797,33 @@ class UserClient():
             /api/v1/users/{userId}/roles/{roleId}/targets
                 catalog/apps
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = []
             for item in response.get_body():
                 result.append(CatalogApplication(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def add_all_apps_as_target_to_role(
             self, userId, roleId
@@ -1805,8 +1840,8 @@ class UserClient():
                 catalog/apps
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1820,6 +1855,7 @@ class UserClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def remove_app_target_from_application_admin_role_for_user(
@@ -1838,8 +1874,8 @@ class UserClient():
                 catalog/apps/{appName}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1853,6 +1889,7 @@ class UserClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def add_application_target_to_admin_role_for_user(
@@ -1871,8 +1908,8 @@ class UserClient():
                 catalog/apps/{appName}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1886,6 +1923,7 @@ class UserClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def remove_application_target_from_administrator_role_for_user(
@@ -1907,8 +1945,8 @@ class UserClient():
                 catalog/apps/{appName}/{applicationId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1922,6 +1960,7 @@ class UserClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def add_application_target_to_app_admin_role_for_user(
@@ -1943,8 +1982,8 @@ class UserClient():
                 catalog/apps/{appName}/{applicationId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1958,10 +1997,11 @@ class UserClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def list_group_targets_for_role(
-            self, userId, roleId, query_params
+            self, userId, roleId, query_params={}
     ):
         """
         Args:
@@ -1979,32 +2019,33 @@ class UserClient():
             /api/v1/users/{userId}/roles/{roleId}/targets
                 groups
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = []
             for item in response.get_body():
                 result.append(Group(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def remove_group_target_from_role(
             self, userId, roleId, groupId
@@ -2022,8 +2063,8 @@ class UserClient():
                 groups/{groupId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -2037,6 +2078,7 @@ class UserClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def add_group_target_to_role(
@@ -2055,8 +2097,8 @@ class UserClient():
                 groups/{groupId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -2070,10 +2112,11 @@ class UserClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def clear_user_sessions(
-            self, userId, query_params
+            self, userId, query_params={}
     ):
         """
         Removes all active identity provider sessions. This for
@@ -2090,11 +2133,12 @@ class UserClient():
             {self._base_url}
             /api/v1/users/{userId}/sessions
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -2108,4 +2152,5 @@ class UserClient():
 
         if error:
             return (None, error)
+
         return (response, None)

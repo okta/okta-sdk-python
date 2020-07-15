@@ -40,7 +40,7 @@ class IdentityProviderClient():
         self._base_url = ""
 
     async def list_identity_providers(
-            self, query_params
+            self, query_params={}
     ):
         """
         Enumerates IdPs in your organization with pagination. A
@@ -60,32 +60,33 @@ class IdentityProviderClient():
             {self._base_url}
             /api/v1/idps
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = []
             for item in response.get_body():
                 result.append(IdentityProvider(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def create_identity_provider(
             self, identity_provider
@@ -114,24 +115,24 @@ class IdentityProviderClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = IdentityProvider(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def list_identity_provider_keys(
-            self, query_params
+            self, query_params={}
     ):
         """
         Enumerates IdP key credentials.
@@ -147,32 +148,33 @@ class IdentityProviderClient():
             {self._base_url}
             /api/v1/idps/credentials/keys
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = []
             for item in response.get_body():
                 result.append(JsonWebKey(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def create_identity_provider_key(
             self, json_web_key
@@ -202,21 +204,21 @@ class IdentityProviderClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = JsonWebKey(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def delete_identity_provider_key(
             self, keyId
@@ -233,8 +235,8 @@ class IdentityProviderClient():
             /api/v1/idps/credentials/keys/{keyId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -248,6 +250,7 @@ class IdentityProviderClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def get_identity_provider_key(
@@ -266,29 +269,29 @@ class IdentityProviderClient():
             /api/v1/idps/credentials/keys/{keyId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = JsonWebKey(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def delete_identity_provider(
             self, idpId
@@ -304,8 +307,8 @@ class IdentityProviderClient():
             /api/v1/idps/{idpId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -319,6 +322,7 @@ class IdentityProviderClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def get_identity_provider(
@@ -337,29 +341,29 @@ class IdentityProviderClient():
             /api/v1/idps/{idpId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = IdentityProvider(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def update_identity_provider(
             self, idpId, identity_provider
@@ -389,21 +393,21 @@ class IdentityProviderClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = IdentityProvider(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def list_csrs_for_identity_provider(
             self, idpId
@@ -421,29 +425,29 @@ class IdentityProviderClient():
             /api/v1/idps/{idpId}/credentials/csrs
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = []
             for item in response.get_body():
                 result.append(Csr(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def generate_csr_for_identity_provider(
             self, idpId, csr_metadata
@@ -474,21 +478,21 @@ class IdentityProviderClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = Csr(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def revoke_csr_for_identity_provider(
             self, idpId, csrId
@@ -506,8 +510,8 @@ class IdentityProviderClient():
             /api/v1/idps/{idpId}/credentials/csrs/{csrId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -521,6 +525,7 @@ class IdentityProviderClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def get_csr_for_identity_provider(
@@ -540,29 +545,29 @@ class IdentityProviderClient():
             /api/v1/idps/{idpId}/credentials/csrs/{csrId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = Csr(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def publish_cer_cert_for_identity_provider(
             self, idpId, csrId, string
@@ -596,21 +601,21 @@ class IdentityProviderClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = JsonWebKey(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def publish_binary_cer_cert_for_identity_provider(
             self, idpId, csrId, string
@@ -644,21 +649,21 @@ class IdentityProviderClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = JsonWebKey(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def publish_der_cert_for_identity_provider(
             self, idpId, csrId, string
@@ -692,21 +697,21 @@ class IdentityProviderClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = JsonWebKey(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def publish_binary_der_cert_for_identity_provider(
             self, idpId, csrId, string
@@ -740,21 +745,21 @@ class IdentityProviderClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = JsonWebKey(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def publish_binary_pem_cert_for_identity_provider(
             self, idpId, csrId, string
@@ -788,21 +793,21 @@ class IdentityProviderClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = JsonWebKey(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def list_identity_provider_signing_keys(
             self, idpId
@@ -820,32 +825,32 @@ class IdentityProviderClient():
             /api/v1/idps/{idpId}/credentials/keys
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = []
             for item in response.get_body():
                 result.append(JsonWebKey(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def generate_identity_provider_signing_key(
-            self, idpId, query_params
+            self, idpId, query_params={}
     ):
         """
         Generates a new X.509 certificate for an IdP signing ke
@@ -863,32 +868,33 @@ class IdentityProviderClient():
             {self._base_url}
             /api/v1/idps/{idpId}/credentials/keys/generate
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = JsonWebKey(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def get_identity_provider_signing_key(
             self, idpId, keyId
@@ -907,32 +913,32 @@ class IdentityProviderClient():
             /api/v1/idps/{idpId}/credentials/keys/{keyId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = JsonWebKey(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def clone_identity_provider_key(
-            self, idpId, keyId, query_params
+            self, idpId, keyId, query_params={}
     ):
         """
         Clones a X.509 certificate for an IdP signing key crede
@@ -950,32 +956,33 @@ class IdentityProviderClient():
             {self._base_url}
             /api/v1/idps/{idpId}/credentials/keys/{keyId}/clone
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = JsonWebKey(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def activate_identity_provider(
             self, idpId
@@ -993,29 +1000,29 @@ class IdentityProviderClient():
             /api/v1/idps/{idpId}/lifecycle/activate
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = IdentityProvider(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def deactivate_identity_provider(
             self, idpId
@@ -1033,29 +1040,29 @@ class IdentityProviderClient():
             /api/v1/idps/{idpId}/lifecycle/deactivate
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = IdentityProvider(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def list_identity_provider_application_users(
             self, idpId
@@ -1073,29 +1080,29 @@ class IdentityProviderClient():
             /api/v1/idps/{idpId}/users
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = []
             for item in response.get_body():
                 result.append(IdentityProviderApplicationUser(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def unlink_user_from_identity_provider(
             self, idpId, userId
@@ -1113,8 +1120,8 @@ class IdentityProviderClient():
             /api/v1/idps/{idpId}/users/{userId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1128,6 +1135,7 @@ class IdentityProviderClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def get_identity_provider_application_user(
@@ -1147,29 +1155,29 @@ class IdentityProviderClient():
             /api/v1/idps/{idpId}/users/{userId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = IdentityProviderApplicationUser(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def link_user_to_identity_provider(
             self, idpId, userId, user_identity_provider_link_request
@@ -1202,21 +1210,21 @@ class IdentityProviderClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = IdentityProviderApplicationUser(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def list_social_auth_tokens(
             self, idpId, userId
@@ -1238,26 +1246,26 @@ class IdentityProviderClient():
                 tokens
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = []
             for item in response.get_body():
                 result.append(SocialAuthToken(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)

@@ -41,7 +41,7 @@ class GroupClient():
         self._base_url = ""
 
     async def list_groups(
-            self, query_params
+            self, query_params={}
     ):
         """
         Enumerates groups in your organization with pagination.
@@ -61,32 +61,33 @@ class GroupClient():
             {self._base_url}
             /api/v1/groups
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = []
             for item in response.get_body():
                 result.append(Group(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def create_group(
             self, group
@@ -116,24 +117,24 @@ class GroupClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = Group(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def list_group_rules(
-            self, query_params
+            self, query_params={}
     ):
         """
         Lists all group rules for your organization.
@@ -151,32 +152,33 @@ class GroupClient():
             {self._base_url}
             /api/v1/groups/rules
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = []
             for item in response.get_body():
                 result.append(GroupRule(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def create_group_rule(
             self, group_rule
@@ -206,21 +208,21 @@ class GroupClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = GroupRule(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def delete_group_rule(
             self, ruleId
@@ -237,8 +239,8 @@ class GroupClient():
             /api/v1/groups/rules/{ruleId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -252,10 +254,11 @@ class GroupClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def get_group_rule(
-            self, ruleId, query_params
+            self, ruleId, query_params={}
     ):
         """
         Fetches a specific group rule by id from your organizat
@@ -272,32 +275,33 @@ class GroupClient():
             {self._base_url}
             /api/v1/groups/rules/{ruleId}
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = GroupRule(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def update_group_rule(
             self, ruleId, group_rule
@@ -328,21 +332,21 @@ class GroupClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = GroupRule(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def activate_group_rule(
             self, ruleId
@@ -359,8 +363,8 @@ class GroupClient():
             /api/v1/groups/rules/{ruleId}/lifecycle/activate
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -374,6 +378,7 @@ class GroupClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def deactivate_group_rule(
@@ -391,8 +396,8 @@ class GroupClient():
             /api/v1/groups/rules/{ruleId}/lifecycle/deactivate
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -406,6 +411,7 @@ class GroupClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def delete_group(
@@ -423,8 +429,8 @@ class GroupClient():
             /api/v1/groups/{groupId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -438,6 +444,7 @@ class GroupClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def get_group(
@@ -456,29 +463,29 @@ class GroupClient():
             /api/v1/groups/{groupId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = Group(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def update_group(
             self, groupId, group
@@ -509,24 +516,24 @@ class GroupClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = Group(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def list_assigned_applications_for_group(
-            self, groupId, query_params
+            self, groupId, query_params={}
     ):
         """
         Enumerates all applications that are assigned to a grou
@@ -544,35 +551,36 @@ class GroupClient():
             {self._base_url}
             /api/v1/groups/{groupId}/apps
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = []
             for item in response.get_body():
                 result.append(Application(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def list_group_assigned_roles(
-            self, groupId, query_params
+            self, groupId, query_params={}
     ):
         """
         Args:
@@ -587,35 +595,36 @@ class GroupClient():
             {self._base_url}
             /api/v1/groups/{groupId}/roles
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = []
             for item in response.get_body():
                 result.append(Role(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def assign_role_to_group(
-            self, groupId, assign_role_request, query_params
+            self, groupId, assign_role_request, query_params={}
     ):
         """
         Assigns a Role to a Group
@@ -632,8 +641,9 @@ class GroupClient():
             {self._base_url}
             /api/v1/groups/{groupId}/roles
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
         body = assign_role_request.as_dict()
         headers = {
@@ -646,21 +656,21 @@ class GroupClient():
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = Role(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def remove_role_from_group(
             self, groupId, roleId
@@ -677,8 +687,8 @@ class GroupClient():
             /api/v1/groups/{groupId}/roles/{roleId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -692,6 +702,7 @@ class GroupClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def get_role(
@@ -710,32 +721,32 @@ class GroupClient():
             /api/v1/groups/{groupId}/roles/{roleId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = Role(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def list_app_targets_for_application_admin_role_for_group(
-            self, groupId, roleId, query_params
+            self, groupId, roleId, query_params={}
     ):
         """
         Lists all App targets for an `APP_ADMIN` Role assigned
@@ -758,32 +769,33 @@ class GroupClient():
             /api/v1/groups/{groupId}/roles/{roleId}/targets
                 catalog/apps
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = []
             for item in response.get_body():
                 result.append(CatalogApplication(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def remove_app_target_from_application_admin_role_given_to_group(
             self, groupId, roleId, appName
@@ -801,8 +813,8 @@ class GroupClient():
                 catalog/apps/{appName}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -816,6 +828,7 @@ class GroupClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def add_application_target_to_admin_role_given_to_group(
@@ -834,8 +847,8 @@ class GroupClient():
                 catalog/apps/{appName}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -849,6 +862,7 @@ class GroupClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def remove_app_target_from_admin_role_given_to_group(
@@ -870,8 +884,8 @@ class GroupClient():
                 catalog/apps/{appName}/{applicationId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -885,6 +899,7 @@ class GroupClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def add_app_instance_target_to_app_admin_role_given_to_group(
@@ -906,8 +921,8 @@ class GroupClient():
                 catalog/apps/{appName}/{applicationId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -921,10 +936,11 @@ class GroupClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def list_group_targets_for_group_role(
-            self, groupId, roleId, query_params
+            self, groupId, roleId, query_params={}
     ):
         """
         Args:
@@ -942,32 +958,33 @@ class GroupClient():
             /api/v1/groups/{groupId}/roles/{roleId}/targets
                 groups
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = []
             for item in response.get_body():
                 result.append(Group(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def remove_group_target_from_group_admin_role_given_to_group(
             self, groupId, roleId, targetGroupId
@@ -988,8 +1005,8 @@ class GroupClient():
                 groups/{targetGroupId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1003,6 +1020,7 @@ class GroupClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def add_group_target_to_group_administrator_role_for_group(
@@ -1024,8 +1042,8 @@ class GroupClient():
                 groups/{targetGroupId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1039,10 +1057,11 @@ class GroupClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def list_group_users(
-            self, groupId, query_params
+            self, groupId, query_params={}
     ):
         """
         Enumerates all users that are a member of a group.
@@ -1059,32 +1078,33 @@ class GroupClient():
             {self._base_url}
             /api/v1/groups/{groupId}/users
             """)
-        encoded_query_params = urlencode(query_params)
-        api_url += f"/?{encoded_query_params}"
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
             .execute(request)
 
         if error:
-            return (None, error)
+            return (None, None, error)
+
         try:
             result = []
             for item in response.get_body():
                 result.append(User(item))
         except Exception as error:
             return (None, error)
-
-        return (result, None)
+        return (result, response, None)
 
     async def remove_user_from_group(
             self, groupId, userId
@@ -1101,8 +1121,8 @@ class GroupClient():
             /api/v1/groups/{groupId}/users/{userId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1116,6 +1136,7 @@ class GroupClient():
 
         if error:
             return (None, error)
+
         return (response, None)
 
     async def add_user_to_group(
@@ -1133,8 +1154,8 @@ class GroupClient():
             /api/v1/groups/{groupId}/users/{userId}
             """)
 
-        body = None
-        headers = None
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1148,4 +1169,5 @@ class GroupClient():
 
         if error:
             return (None, error)
+
         return (response, None)
