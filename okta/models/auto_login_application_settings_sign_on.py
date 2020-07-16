@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class AutoLoginApplicationSettingsSignOn(
     OktaObject
 ):
+    """
+    A class for AutoLoginApplicationSettingsSignOn objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.login_url = config["loginUrl"]\

@@ -18,19 +18,53 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.identity_provider_credentials_client\
+    import IdentityProviderCredentialsClient
+from okta.models.identity_provider_credentials_signing\
+    import IdentityProviderCredentialsSigning
+from okta.models.identity_provider_credentials_trust\
+    import IdentityProviderCredentialsTrust
 
 
 class IdentityProviderCredentials(
     OktaObject
 ):
+    """
+    A class for IdentityProviderCredentials objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.client = config["client"]\
-                if "client" in config else None
-            self.signing = config["signing"]\
-                if "signing" in config else None
-            self.trust = config["trust"]\
-                if "trust" in config else None
+            if "client" in config:
+                if isinstance(config["client"],
+                              IdentityProviderCredentialsClient):
+                    self.client = config["client"]
+                else:
+                    self.client = IdentityProviderCredentialsClient(
+                        config["client"]
+                    )
+            else:
+                self.client = None
+            if "signing" in config:
+                if isinstance(config["signing"],
+                              IdentityProviderCredentialsSigning):
+                    self.signing = config["signing"]
+                else:
+                    self.signing = IdentityProviderCredentialsSigning(
+                        config["signing"]
+                    )
+            else:
+                self.signing = None
+            if "trust" in config:
+                if isinstance(config["trust"],
+                              IdentityProviderCredentialsTrust):
+                    self.trust = config["trust"]
+                else:
+                    self.trust = IdentityProviderCredentialsTrust(
+                        config["trust"]
+                    )
+            else:
+                self.trust = None
         else:
             self.client = None
             self.signing = None

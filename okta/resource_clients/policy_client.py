@@ -76,7 +76,7 @@ class PolicyClient():
             for item in response.get_body():
                 result.append(Policy(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def create_policy(
@@ -124,7 +124,7 @@ class PolicyClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def delete_policy(
@@ -201,7 +201,7 @@ class PolicyClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def update_policy(
@@ -245,7 +245,7 @@ class PolicyClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def activate_policy(
@@ -349,7 +349,7 @@ class PolicyClient():
             for item in response.get_body():
                 result.append(PolicyRule(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def create_policy_rule(
@@ -393,7 +393,7 @@ class PolicyClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def delete_policy_rule(
@@ -467,7 +467,7 @@ class PolicyClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def update_policy_rule(
@@ -512,7 +512,7 @@ class PolicyClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def activate_policy_rule(

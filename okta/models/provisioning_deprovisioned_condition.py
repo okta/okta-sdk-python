@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class ProvisioningDeprovisionedCondition(
     OktaObject
 ):
+    """
+    A class for ProvisioningDeprovisionedCondition objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.action = config["action"]\

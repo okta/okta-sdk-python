@@ -18,11 +18,17 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.application_credentials_signing_use\
+    import ApplicationCredentialsSigningUse
 
 
 class ApplicationCredentialsSigning(
     OktaObject
 ):
+    """
+    A class for ApplicationCredentialsSigning objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.kid = config["kid"]\
@@ -33,8 +39,16 @@ class ApplicationCredentialsSigning(
                 if "nextRotation" in config else None
             self.rotation_mode = config["rotationMode"]\
                 if "rotationMode" in config else None
-            self.use = config["use"]\
-                if "use" in config else None
+            if "use" in config:
+                if isinstance(config["use"],
+                              ApplicationCredentialsSigningUse):
+                    self.use = config["use"]
+                else:
+                    self.use = ApplicationCredentialsSigningUse(
+                        config["use"]
+                    )
+            else:
+                self.use = None
         else:
             self.kid = None
             self.last_rotated = None

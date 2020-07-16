@@ -24,6 +24,10 @@ from okta.models.application_settings_application\
 class BookmarkApplicationSettingsApplication(
     ApplicationSettingsApplication
 ):
+    """
+    A class for BookmarkApplicationSettingsApplication objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.request_integration = config["requestIntegration"]\

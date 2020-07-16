@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class ActivateFactorRequest(
     OktaObject
 ):
+    """
+    A class for ActivateFactorRequest objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.attestation = config["attestation"]\

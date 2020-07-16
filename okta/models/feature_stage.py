@@ -18,17 +18,41 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.feature_stage_state\
+    import FeatureStageState
+from okta.models.feature_stage_value\
+    import FeatureStageValue
 
 
 class FeatureStage(
     OktaObject
 ):
+    """
+    A class for FeatureStage objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.state = config["state"]\
-                if "state" in config else None
-            self.value = config["value"]\
-                if "value" in config else None
+            if "state" in config:
+                if isinstance(config["state"],
+                              FeatureStageState):
+                    self.state = config["state"]
+                else:
+                    self.state = FeatureStageState(
+                        config["state"]
+                    )
+            else:
+                self.state = None
+            if "value" in config:
+                if isinstance(config["value"],
+                              FeatureStageValue):
+                    self.value = config["value"]
+                else:
+                    self.value = FeatureStageValue(
+                        config["value"]
+                    )
+            else:
+                self.value = None
         else:
             self.state = None
             self.value = None

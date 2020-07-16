@@ -19,17 +19,31 @@ limitations under the License.
 
 from okta.models.browser_plugin_application\
     import BrowserPluginApplication
+from okta.models.swa_three_field_application_settings\
+    import SwaThreeFieldApplicationSettings
 
 
 class SwaThreeFieldApplication(
     BrowserPluginApplication
 ):
+    """
+    A class for SwaThreeFieldApplication objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.name = config["name"]\
                 if "name" in config else None
-            self.settings = config["settings"]\
-                if "settings" in config else None
+            if "settings" in config:
+                if isinstance(config["settings"],
+                              SwaThreeFieldApplicationSettings):
+                    self.settings = config["settings"]
+                else:
+                    self.settings = SwaThreeFieldApplicationSettings(
+                        config["settings"]
+                    )
+            else:
+                self.settings = None
         else:
             self.name = "template_swa3field"
             self.settings = None

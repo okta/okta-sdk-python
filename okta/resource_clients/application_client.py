@@ -92,7 +92,7 @@ class ApplicationClient():
             for item in response.get_body():
                 result.append(Application(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def create_application(
@@ -140,7 +140,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def delete_application(
@@ -218,7 +218,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def update_application(
@@ -262,7 +262,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_csrs_for_application(
@@ -303,7 +303,7 @@ class ApplicationClient():
             for item in response.get_body():
                 result.append(Csr(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def generate_csr_for_application(
@@ -348,7 +348,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def revoke_csr_from_application(
@@ -424,7 +424,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def publish_cer_cert(
@@ -472,7 +472,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def publish_binary_cer_cert(
@@ -520,7 +520,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def publish_der_cert(
@@ -568,7 +568,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def publish_binary_der_cert(
@@ -616,7 +616,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def publish_binary_pem_cert(
@@ -664,7 +664,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_application_keys(
@@ -704,7 +704,7 @@ class ApplicationClient():
             for item in response.get_body():
                 result.append(JsonWebKey(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def generate_application_key(
@@ -750,7 +750,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def get_application_key(
@@ -791,7 +791,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def clone_application_key(
@@ -838,7 +838,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_scope_consent_grants(
@@ -883,7 +883,7 @@ class ApplicationClient():
             for item in response.get_body():
                 result.append(OAuth2ScopeConsentGrant(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def grant_consent_to_scope(
@@ -928,7 +928,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def revoke_scope_consent_grant(
@@ -1009,7 +1009,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_application_group_assignments(
@@ -1057,7 +1057,7 @@ class ApplicationClient():
             for item in response.get_body():
                 result.append(ApplicationGroupAssignment(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def delete_application_group_assignment(
@@ -1136,7 +1136,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def create_application_group_assignment(
@@ -1181,7 +1181,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def activate_application(
@@ -1324,7 +1324,7 @@ class ApplicationClient():
             for item in response.get_body():
                 result.append(OAuth2Token(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def revoke_o_auth_2_token_for_application(
@@ -1404,7 +1404,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_application_users(
@@ -1455,7 +1455,7 @@ class ApplicationClient():
             for item in response.get_body():
                 result.append(AppUser(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def assign_user_to_application(
@@ -1504,7 +1504,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def delete_application_user(
@@ -1589,7 +1589,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def update_application_user(
@@ -1634,5 +1634,5 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)

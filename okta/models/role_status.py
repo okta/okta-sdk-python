@@ -24,5 +24,9 @@ class RoleStatus(
     str,
     Enum
 ):
+    """
+    An enumeration class for RoleStatus.
+    """
+
     ACTIVE = "ACTIVE"
     INACTIVE = "INACTIVE"

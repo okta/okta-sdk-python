@@ -19,19 +19,43 @@ limitations under the License.
 
 from okta.models.application\
     import Application
+from okta.models.scheme_application_credentials\
+    import SchemeApplicationCredentials
+from okta.models.basic_application_settings\
+    import BasicApplicationSettings
 
 
 class BasicAuthApplication(
     Application
 ):
+    """
+    A class for BasicAuthApplication objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.credentials = config["credentials"]\
-                if "credentials" in config else None
+            if "credentials" in config:
+                if isinstance(config["credentials"],
+                              SchemeApplicationCredentials):
+                    self.credentials = config["credentials"]
+                else:
+                    self.credentials = SchemeApplicationCredentials(
+                        config["credentials"]
+                    )
+            else:
+                self.credentials = None
             self.name = config["name"]\
                 if "name" in config else None
-            self.settings = config["settings"]\
-                if "settings" in config else None
+            if "settings" in config:
+                if isinstance(config["settings"],
+                              BasicApplicationSettings):
+                    self.settings = config["settings"]
+                else:
+                    self.settings = BasicApplicationSettings(
+                        config["settings"]
+                    )
+            else:
+                self.settings = None
         else:
             self.credentials = None
             self.name = "template_basic_auth"

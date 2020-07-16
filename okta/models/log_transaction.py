@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class LogTransaction(
     OktaObject
 ):
+    """
+    A class for LogTransaction objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.detail = config["detail"]\

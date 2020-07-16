@@ -18,15 +18,29 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.inline_hook_channel_config_auth_scheme\
+    import InlineHookChannelConfigAuthScheme
 
 
 class InlineHookChannelConfig(
     OktaObject
 ):
+    """
+    A class for InlineHookChannelConfig objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.auth_scheme = config["authScheme"]\
-                if "authScheme" in config else None
+            if "authScheme" in config:
+                if isinstance(config["authScheme"],
+                              InlineHookChannelConfigAuthScheme):
+                    self.auth_scheme = config["authScheme"]
+                else:
+                    self.auth_scheme = InlineHookChannelConfigAuthScheme(
+                        config["authScheme"]
+                    )
+            else:
+                self.auth_scheme = None
             self.headers = config["headers"]\
                 if "headers" in config else None
             self.uri = config["uri"]\

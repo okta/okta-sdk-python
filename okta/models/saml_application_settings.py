@@ -19,14 +19,28 @@ limitations under the License.
 
 from okta.models.application_settings\
     import ApplicationSettings
+from okta.models.saml_application_settings_sign_on\
+    import SamlApplicationSettingsSignOn
 
 
 class SamlApplicationSettings(
     ApplicationSettings
 ):
+    """
+    A class for SamlApplicationSettings objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.sign_on = config["signOn"]\
-                if "signOn" in config else None
+            if "signOn" in config:
+                if isinstance(config["signOn"],
+                              SamlApplicationSettingsSignOn):
+                    self.sign_on = config["signOn"]
+                else:
+                    self.sign_on = SamlApplicationSettingsSignOn(
+                        config["signOn"]
+                    )
+            else:
+                self.sign_on = None
         else:
             self.sign_on = None

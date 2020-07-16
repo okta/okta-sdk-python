@@ -24,6 +24,10 @@ class PolicyType(
     str,
     Enum
 ):
+    """
+    An enumeration class for PolicyType.
+    """
+
     OAUTH_AUTHORIZATION_POLICY = "OAUTH_AUTHORIZATION_POLICY"
     OKTA_SIGN_ON = "OKTA_SIGN_ON"
     PASSWORD = "PASSWORD"

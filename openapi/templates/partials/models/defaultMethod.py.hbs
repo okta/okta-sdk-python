@@ -63,7 +63,11 @@
             )
         {{/if}}
         except Exception as error:
+            {{#if operation.responseModel}}
+            return (None, None, error)
+            {{else}}
             return (None, error)
+            {{/if}}
         return (result, response, None)
         {{else}}
         return (response, None)

@@ -24,6 +24,10 @@ class LogCredentialProvider(
     str,
     Enum
 ):
+    """
+    An enumeration class for LogCredentialProvider.
+    """
+
     OKTA_AUTHENTICATION_PROVIDER = "OKTA_AUTHENTICATION_PROVIDER"
     RSA = "RSA"
     SYMANTEC = "SYMANTEC"

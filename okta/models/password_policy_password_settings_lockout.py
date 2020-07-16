@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class PasswordPolicyPasswordSettingsLockout(
     OktaObject
 ):
+    """
+    A class for PasswordPolicyPasswordSettingsLockout objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.auto_unlock_minutes = config["autoUnlockMinutes"]\

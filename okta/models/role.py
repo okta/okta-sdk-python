@@ -18,19 +18,37 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.role_assignment_type\
+    import RoleAssignmentType
+from okta.models.role_status\
+    import RoleStatus
+from okta.models.role_type\
+    import RoleType
 
 
 class Role(
     OktaObject
 ):
+    """
+    A class for Role objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.embedded = config["_embedded"]\
                 if "_embedded" in config else None
             self.links = config["_links"]\
                 if "_links" in config else None
-            self.assignment_type = config["assignmentType"]\
-                if "assignmentType" in config else None
+            if "assignmentType" in config:
+                if isinstance(config["assignmentType"],
+                              RoleAssignmentType):
+                    self.assignment_type = config["assignmentType"]
+                else:
+                    self.assignment_type = RoleAssignmentType(
+                        config["assignmentType"]
+                    )
+            else:
+                self.assignment_type = None
             self.created = config["created"]\
                 if "created" in config else None
             self.description = config["description"]\
@@ -41,10 +59,26 @@ class Role(
                 if "label" in config else None
             self.last_updated = config["lastUpdated"]\
                 if "lastUpdated" in config else None
-            self.status = config["status"]\
-                if "status" in config else None
-            self.type = config["type"]\
-                if "type" in config else None
+            if "status" in config:
+                if isinstance(config["status"],
+                              RoleStatus):
+                    self.status = config["status"]
+                else:
+                    self.status = RoleStatus(
+                        config["status"]
+                    )
+            else:
+                self.status = None
+            if "type" in config:
+                if isinstance(config["type"],
+                              RoleType):
+                    self.type = config["type"]
+                else:
+                    self.type = RoleType(
+                        config["type"]
+                    )
+            else:
+                self.type = None
         else:
             self.embedded = None
             self.links = None

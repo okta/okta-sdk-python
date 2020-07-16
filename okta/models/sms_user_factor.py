@@ -19,14 +19,28 @@ limitations under the License.
 
 from okta.models.user_factor\
     import UserFactor
+from okta.models.sms_user_factor_profile\
+    import SmsUserFactorProfile
 
 
 class SmsUserFactor(
     UserFactor
 ):
+    """
+    A class for SmsUserFactor objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.profile = config["profile"]\
-                if "profile" in config else None
+            if "profile" in config:
+                if isinstance(config["profile"],
+                              SmsUserFactorProfile):
+                    self.profile = config["profile"]
+                else:
+                    self.profile = SmsUserFactorProfile(
+                        config["profile"]
+                    )
+            else:
+                self.profile = None
         else:
             self.profile = None

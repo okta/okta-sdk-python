@@ -19,19 +19,43 @@ limitations under the License.
 
 from okta.models.application\
     import Application
+from okta.models.o_auth_application_credentials\
+    import OAuthApplicationCredentials
+from okta.models.open_id_connect_application_settings\
+    import OpenIdConnectApplicationSettings
 
 
 class OpenIdConnectApplication(
     Application
 ):
+    """
+    A class for OpenIdConnectApplication objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.credentials = config["credentials"]\
-                if "credentials" in config else None
+            if "credentials" in config:
+                if isinstance(config["credentials"],
+                              OAuthApplicationCredentials):
+                    self.credentials = config["credentials"]
+                else:
+                    self.credentials = OAuthApplicationCredentials(
+                        config["credentials"]
+                    )
+            else:
+                self.credentials = None
             self.name = config["name"]\
                 if "name" in config else None
-            self.settings = config["settings"]\
-                if "settings" in config else None
+            if "settings" in config:
+                if isinstance(config["settings"],
+                              OpenIdConnectApplicationSettings):
+                    self.settings = config["settings"]
+                else:
+                    self.settings = OpenIdConnectApplicationSettings(
+                        config["settings"]
+                    )
+            else:
+                self.settings = None
         else:
             self.credentials = None
             self.name = "oidc_client"

@@ -24,4 +24,8 @@ class UserNextLogin(
     str,
     Enum
 ):
+    """
+    An enumeration class for UserNextLogin.
+    """
+
     CHANGE_PASSWORD = "changePassword"

@@ -19,14 +19,28 @@ limitations under the License.
 
 from okta.models.application\
     import Application
+from okta.models.scheme_application_credentials\
+    import SchemeApplicationCredentials
 
 
 class BrowserPluginApplication(
     Application
 ):
+    """
+    A class for BrowserPluginApplication objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.credentials = config["credentials"]\
-                if "credentials" in config else None
+            if "credentials" in config:
+                if isinstance(config["credentials"],
+                              SchemeApplicationCredentials):
+                    self.credentials = config["credentials"]
+                else:
+                    self.credentials = SchemeApplicationCredentials(
+                        config["credentials"]
+                    )
+            else:
+                self.credentials = None
         else:
             self.credentials = None

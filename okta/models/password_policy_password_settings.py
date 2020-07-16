@@ -18,19 +18,53 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.password_policy_password_settings_age\
+    import PasswordPolicyPasswordSettingsAge
+from okta.models.password_policy_password_settings_complexity\
+    import PasswordPolicyPasswordSettingsComplexity
+from okta.models.password_policy_password_settings_lockout\
+    import PasswordPolicyPasswordSettingsLockout
 
 
 class PasswordPolicyPasswordSettings(
     OktaObject
 ):
+    """
+    A class for PasswordPolicyPasswordSettings objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.age = config["age"]\
-                if "age" in config else None
-            self.complexity = config["complexity"]\
-                if "complexity" in config else None
-            self.lockout = config["lockout"]\
-                if "lockout" in config else None
+            if "age" in config:
+                if isinstance(config["age"],
+                              PasswordPolicyPasswordSettingsAge):
+                    self.age = config["age"]
+                else:
+                    self.age = PasswordPolicyPasswordSettingsAge(
+                        config["age"]
+                    )
+            else:
+                self.age = None
+            if "complexity" in config:
+                if isinstance(config["complexity"],
+                              PasswordPolicyPasswordSettingsComplexity):
+                    self.complexity = config["complexity"]
+                else:
+                    self.complexity = PasswordPolicyPasswordSettingsComplexity(
+                        config["complexity"]
+                    )
+            else:
+                self.complexity = None
+            if "lockout" in config:
+                if isinstance(config["lockout"],
+                              PasswordPolicyPasswordSettingsLockout):
+                    self.lockout = config["lockout"]
+                else:
+                    self.lockout = PasswordPolicyPasswordSettingsLockout(
+                        config["lockout"]
+                    )
+            else:
+                self.lockout = None
         else:
             self.age = None
             self.complexity = None

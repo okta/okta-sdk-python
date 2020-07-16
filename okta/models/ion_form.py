@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class IonForm(
     OktaObject
 ):
+    """
+    A class for IonForm objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.accepts = config["accepts"]\

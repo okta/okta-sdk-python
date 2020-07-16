@@ -24,5 +24,9 @@ class CatalogApplicationStatus(
     str,
     Enum
 ):
+    """
+    An enumeration class for CatalogApplicationStatus.
+    """
+
     ACTIVE = "ACTIVE"
     INACTIVE = "INACTIVE"

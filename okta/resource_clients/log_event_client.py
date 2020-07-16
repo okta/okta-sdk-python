@@ -80,5 +80,5 @@ class LogEventClient():
             for item in response.get_body():
                 result.append(LogEvent(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)

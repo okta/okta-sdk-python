@@ -18,19 +18,43 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.provisioning_conditions\
+    import ProvisioningConditions
+from okta.models.provisioning_groups\
+    import ProvisioningGroups
 
 
 class Provisioning(
     OktaObject
 ):
+    """
+    A class for Provisioning objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.action = config["action"]\
                 if "action" in config else None
-            self.conditions = config["conditions"]\
-                if "conditions" in config else None
-            self.groups = config["groups"]\
-                if "groups" in config else None
+            if "conditions" in config:
+                if isinstance(config["conditions"],
+                              ProvisioningConditions):
+                    self.conditions = config["conditions"]
+                else:
+                    self.conditions = ProvisioningConditions(
+                        config["conditions"]
+                    )
+            else:
+                self.conditions = None
+            if "groups" in config:
+                if isinstance(config["groups"],
+                              ProvisioningGroups):
+                    self.groups = config["groups"]
+                else:
+                    self.groups = ProvisioningGroups(
+                        config["groups"]
+                    )
+            else:
+                self.groups = None
             self.profile_master = config["profileMaster"]\
                 if "profileMaster" in config else None
         else:

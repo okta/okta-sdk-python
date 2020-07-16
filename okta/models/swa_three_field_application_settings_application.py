@@ -24,6 +24,10 @@ from okta.models.application_settings_application\
 class SwaThreeFieldApplicationSettingsApplication(
     ApplicationSettingsApplication
 ):
+    """
+    A class for SwaThreeFieldApplicationSettingsApplication objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.button_selector = config["buttonSelector"]\

@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class ApplicationLicensing(
     OktaObject
 ):
+    """
+    A class for ApplicationLicensing objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.seat_count = config["seatCount"]\

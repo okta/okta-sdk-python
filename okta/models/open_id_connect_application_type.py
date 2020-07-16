@@ -24,6 +24,10 @@ class OpenIdConnectApplicationType(
     str,
     Enum
 ):
+    """
+    An enumeration class for OpenIdConnectApplicationType.
+    """
+
     WEB = "web"
     NATIVE = "native"
     BROWSER = "browser"

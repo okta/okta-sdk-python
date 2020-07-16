@@ -19,14 +19,28 @@ limitations under the License.
 
 from okta.models.user_factor\
     import UserFactor
+from okta.models.hardware_user_factor_profile\
+    import HardwareUserFactorProfile
 
 
 class HardwareUserFactor(
     UserFactor
 ):
+    """
+    A class for HardwareUserFactor objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.profile = config["profile"]\
-                if "profile" in config else None
+            if "profile" in config:
+                if isinstance(config["profile"],
+                              HardwareUserFactorProfile):
+                    self.profile = config["profile"]
+                else:
+                    self.profile = HardwareUserFactorProfile(
+                        config["profile"]
+                    )
+            else:
+                self.profile = None
         else:
             self.profile = None

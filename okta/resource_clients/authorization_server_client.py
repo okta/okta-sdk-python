@@ -85,7 +85,7 @@ class AuthorizationServerClient():
             for item in response.get_body():
                 result.append(AuthorizationServer(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def create_authorization_server(
@@ -127,7 +127,7 @@ class AuthorizationServerClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def delete_authorization_server(
@@ -197,7 +197,7 @@ class AuthorizationServerClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def update_authorization_server(
@@ -240,7 +240,7 @@ class AuthorizationServerClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_o_auth_2_claims(
@@ -279,7 +279,7 @@ class AuthorizationServerClient():
             for item in response.get_body():
                 result.append(OAuth2Claim(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def create_o_auth_2_claim(
@@ -322,7 +322,7 @@ class AuthorizationServerClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def delete_o_auth_2_claim(
@@ -396,7 +396,7 @@ class AuthorizationServerClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def update_o_auth_2_claim(
@@ -441,7 +441,7 @@ class AuthorizationServerClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_o_auth_2_clients_for_authorization_server(
@@ -480,7 +480,7 @@ class AuthorizationServerClient():
             for item in response.get_body():
                 result.append(OAuth2Client(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def revoke_refresh_tokens_for_authorization_server_and_client(
@@ -561,7 +561,7 @@ class AuthorizationServerClient():
             for item in response.get_body():
                 result.append(OAuth2RefreshToken(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def revoke_refresh_token_for_authorization_server_and_client(
@@ -642,7 +642,7 @@ class AuthorizationServerClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_authorization_server_keys(
@@ -682,7 +682,7 @@ class AuthorizationServerClient():
             for item in response.get_body():
                 result.append(JsonWebKey(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def rotate_authorization_server_keys(
@@ -725,7 +725,7 @@ class AuthorizationServerClient():
             for item in response.get_body():
                 result.append(JsonWebKey(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def activate_authorization_server(
@@ -829,7 +829,7 @@ class AuthorizationServerClient():
             for item in response.get_body():
                 result.append(Policy(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def create_authorization_server_policy(
@@ -873,7 +873,7 @@ class AuthorizationServerClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def delete_authorization_server_policy(
@@ -947,7 +947,7 @@ class AuthorizationServerClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def update_authorization_server_policy(
@@ -992,7 +992,7 @@ class AuthorizationServerClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_o_auth_2_scopes(
@@ -1039,7 +1039,7 @@ class AuthorizationServerClient():
             for item in response.get_body():
                 result.append(OAuth2Scope(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def create_o_auth_2_scope(
@@ -1082,7 +1082,7 @@ class AuthorizationServerClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def delete_o_auth_2_scope(
@@ -1156,7 +1156,7 @@ class AuthorizationServerClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def update_o_auth_2_scope(
@@ -1201,5 +1201,5 @@ class AuthorizationServerClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)

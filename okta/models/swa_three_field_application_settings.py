@@ -19,14 +19,28 @@ limitations under the License.
 
 from okta.models.application_settings\
     import ApplicationSettings
+from okta.models.swa_three_field_application_settings_application\
+    import SwaThreeFieldApplicationSettingsApplication
 
 
 class SwaThreeFieldApplicationSettings(
     ApplicationSettings
 ):
+    """
+    A class for SwaThreeFieldApplicationSettings objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.app = config["app"]\
-                if "app" in config else None
+            if "app" in config:
+                if isinstance(config["app"],
+                              SwaThreeFieldApplicationSettingsApplication):
+                    self.app = config["app"]
+                else:
+                    self.app = SwaThreeFieldApplicationSettingsApplication(
+                        config["app"]
+                    )
+            else:
+                self.app = None
         else:
             self.app = None

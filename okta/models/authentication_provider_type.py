@@ -24,6 +24,10 @@ class AuthenticationProviderType(
     str,
     Enum
 ):
+    """
+    An enumeration class for AuthenticationProviderType.
+    """
+
     ACTIVE_DIRECTORY = "ACTIVE_DIRECTORY"
     FEDERATION = "FEDERATION"
     LDAP = "LDAP"

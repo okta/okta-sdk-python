@@ -24,6 +24,10 @@ from okta.models.application_settings_application\
 class WsFederationApplicationSettingsApplication(
     ApplicationSettingsApplication
 ):
+    """
+    A class for WsFederationApplicationSettingsApplication objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.attribute_statements = config["attributeStatements"]\

@@ -23,5 +23,9 @@ from okta.okta_object import OktaObject
 class InlineHookPayload(
     OktaObject
 ):
+    """
+    A class for InlineHookPayload objects.
+    """
+
     def __init__(self, config=None):
         pass

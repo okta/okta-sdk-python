@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class ForgotPasswordResponse(
     OktaObject
 ):
+    """
+    A class for ForgotPasswordResponse objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.reset_password_url = config["resetPasswordUrl"]\

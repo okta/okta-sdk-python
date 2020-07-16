@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class ApplicationVisibilityHide(
     OktaObject
 ):
+    """
+    A class for ApplicationVisibilityHide objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.i_os = config["iOS"]\

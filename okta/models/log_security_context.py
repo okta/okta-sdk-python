@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class LogSecurityContext(
     OktaObject
 ):
+    """
+    A class for LogSecurityContext objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.as_number = config["asNumber"]\

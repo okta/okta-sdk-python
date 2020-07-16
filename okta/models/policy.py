@@ -18,19 +18,35 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.policy_rule_conditions\
+    import PolicyRuleConditions
+from okta.models.policy_type\
+    import PolicyType
 
 
 class Policy(
     OktaObject
 ):
+    """
+    A class for Policy objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.embedded = config["_embedded"]\
                 if "_embedded" in config else None
             self.links = config["_links"]\
                 if "_links" in config else None
-            self.conditions = config["conditions"]\
-                if "conditions" in config else None
+            if "conditions" in config:
+                if isinstance(config["conditions"],
+                              PolicyRuleConditions):
+                    self.conditions = config["conditions"]
+                else:
+                    self.conditions = PolicyRuleConditions(
+                        config["conditions"]
+                    )
+            else:
+                self.conditions = None
             self.created = config["created"]\
                 if "created" in config else None
             self.description = config["description"]\
@@ -47,8 +63,16 @@ class Policy(
                 if "status" in config else None
             self.system = config["system"]\
                 if "system" in config else None
-            self.type = config["type"]\
-                if "type" in config else None
+            if "type" in config:
+                if isinstance(config["type"],
+                              PolicyType):
+                    self.type = config["type"]
+                else:
+                    self.type = PolicyType(
+                        config["type"]
+                    )
+            else:
+                self.type = None
         else:
             self.embedded = None
             self.links = None

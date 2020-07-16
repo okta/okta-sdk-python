@@ -18,14 +18,28 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.password_policy_recovery_question_complexity\
+    import PasswordPolicyRecoveryQuestionComplexity
 
 
 class PasswordPolicyRecoveryQuestionProperties(
     OktaObject
 ):
+    """
+    A class for PasswordPolicyRecoveryQuestionProperties objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.complexity = config["complexity"]\
-                if "complexity" in config else None
+            if "complexity" in config:
+                if isinstance(config["complexity"],
+                              PasswordPolicyRecoveryQuestionComplexity):
+                    self.complexity = config["complexity"]
+                else:
+                    self.complexity = PasswordPolicyRecoveryQuestionComplexity(
+                        config["complexity"]
+                    )
+            else:
+                self.complexity = None
         else:
             self.complexity = None

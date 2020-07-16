@@ -19,14 +19,28 @@ limitations under the License.
 
 from okta.models.application\
     import Application
+from okta.models.saml_application_settings\
+    import SamlApplicationSettings
 
 
 class SamlApplication(
     Application
 ):
+    """
+    A class for SamlApplication objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.settings = config["settings"]\
-                if "settings" in config else None
+            if "settings" in config:
+                if isinstance(config["settings"],
+                              SamlApplicationSettings):
+                    self.settings = config["settings"]
+                else:
+                    self.settings = SamlApplicationSettings(
+                        config["settings"]
+                    )
+            else:
+                self.settings = None
         else:
             self.settings = None

@@ -18,17 +18,31 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.authentication_provider_type\
+    import AuthenticationProviderType
 
 
 class AuthenticationProvider(
     OktaObject
 ):
+    """
+    A class for AuthenticationProvider objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.name = config["name"]\
                 if "name" in config else None
-            self.type = config["type"]\
-                if "type" in config else None
+            if "type" in config:
+                if isinstance(config["type"],
+                              AuthenticationProviderType):
+                    self.type = config["type"]
+                else:
+                    self.type = AuthenticationProviderType(
+                        config["type"]
+                    )
+            else:
+                self.type = None
         else:
             self.name = None
             self.type = None

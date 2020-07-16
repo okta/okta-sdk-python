@@ -86,7 +86,7 @@ class IdentityProviderClient():
             for item in response.get_body():
                 result.append(IdentityProvider(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def create_identity_provider(
@@ -129,7 +129,7 @@ class IdentityProviderClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_identity_provider_keys(
@@ -174,7 +174,7 @@ class IdentityProviderClient():
             for item in response.get_body():
                 result.append(JsonWebKey(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def create_identity_provider_key(
@@ -218,7 +218,7 @@ class IdentityProviderClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def delete_identity_provider_key(
@@ -291,7 +291,7 @@ class IdentityProviderClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def delete_identity_provider(
@@ -363,7 +363,7 @@ class IdentityProviderClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def update_identity_provider(
@@ -407,7 +407,7 @@ class IdentityProviderClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_csrs_for_identity_provider(
@@ -447,7 +447,7 @@ class IdentityProviderClient():
             for item in response.get_body():
                 result.append(Csr(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def generate_csr_for_identity_provider(
@@ -492,7 +492,7 @@ class IdentityProviderClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def revoke_csr_for_identity_provider(
@@ -567,7 +567,7 @@ class IdentityProviderClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def publish_cer_cert_for_identity_provider(
@@ -615,7 +615,7 @@ class IdentityProviderClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def publish_binary_cer_cert_for_identity_provider(
@@ -663,7 +663,7 @@ class IdentityProviderClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def publish_der_cert_for_identity_provider(
@@ -711,7 +711,7 @@ class IdentityProviderClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def publish_binary_der_cert_for_identity_provider(
@@ -759,7 +759,7 @@ class IdentityProviderClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def publish_binary_pem_cert_for_identity_provider(
@@ -807,7 +807,7 @@ class IdentityProviderClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_identity_provider_signing_keys(
@@ -847,7 +847,7 @@ class IdentityProviderClient():
             for item in response.get_body():
                 result.append(JsonWebKey(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def generate_identity_provider_signing_key(
@@ -894,7 +894,7 @@ class IdentityProviderClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def get_identity_provider_signing_key(
@@ -935,7 +935,7 @@ class IdentityProviderClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def clone_identity_provider_key(
@@ -982,7 +982,7 @@ class IdentityProviderClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def activate_identity_provider(
@@ -1022,7 +1022,7 @@ class IdentityProviderClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def deactivate_identity_provider(
@@ -1062,7 +1062,7 @@ class IdentityProviderClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_identity_provider_application_users(
@@ -1102,7 +1102,7 @@ class IdentityProviderClient():
             for item in response.get_body():
                 result.append(IdentityProviderApplicationUser(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def unlink_user_from_identity_provider(
@@ -1177,7 +1177,7 @@ class IdentityProviderClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def link_user_to_identity_provider(
@@ -1224,7 +1224,7 @@ class IdentityProviderClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_social_auth_tokens(
@@ -1268,5 +1268,5 @@ class IdentityProviderClient():
             for item in response.get_body():
                 result.append(SocialAuthToken(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)

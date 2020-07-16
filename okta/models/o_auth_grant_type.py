@@ -24,6 +24,10 @@ class OAuthGrantType(
     str,
     Enum
 ):
+    """
+    An enumeration class for OAuthGrantType.
+    """
+
     AUTHORIZATION_CODE = "authorization_code"
     IMPLICIT = "implicit"
     PASSWORD = "password"

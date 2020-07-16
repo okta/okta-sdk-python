@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class InlineHookChannelConfigAuthScheme(
     OktaObject
 ):
+    """
+    A class for InlineHookChannelConfigAuthScheme objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.key = config["key"]\

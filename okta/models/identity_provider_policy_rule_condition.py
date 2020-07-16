@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class IdentityProviderPolicyRuleCondition(
     OktaObject
 ):
+    """
+    A class for IdentityProviderPolicyRuleCondition objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.idp_ids = config["idpIds"]\

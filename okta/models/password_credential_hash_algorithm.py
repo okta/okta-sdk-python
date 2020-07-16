@@ -24,6 +24,10 @@ class PasswordCredentialHashAlgorithm(
     str,
     Enum
 ):
+    """
+    An enumeration class for PasswordCredentialHashAlgorithm.
+    """
+
     BCRYPT = "BCRYPT"
     SHA_512 = "SHA-512"
     SHA_256 = "SHA-256"

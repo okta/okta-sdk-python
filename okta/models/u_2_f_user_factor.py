@@ -19,14 +19,28 @@ limitations under the License.
 
 from okta.models.user_factor\
     import UserFactor
+from okta.models.u_2_f_user_factor_profile\
+    import U2FUserFactorProfile
 
 
 class U2FUserFactor(
     UserFactor
 ):
+    """
+    A class for U2FUserFactor objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.profile = config["profile"]\
-                if "profile" in config else None
+            if "profile" in config:
+                if isinstance(config["profile"],
+                              U2FUserFactorProfile):
+                    self.profile = config["profile"]
+                else:
+                    self.profile = U2FUserFactorProfile(
+                        config["profile"]
+                    )
+            else:
+                self.profile = None
         else:
             self.profile = None

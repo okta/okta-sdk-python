@@ -24,5 +24,9 @@ class ProtocolRelayStateFormat(
     str,
     Enum
 ):
+    """
+    An enumeration class for ProtocolRelayStateFormat.
+    """
+
     OPAQUE = "OPAQUE"
     FROM_URL = "FROM_URL"

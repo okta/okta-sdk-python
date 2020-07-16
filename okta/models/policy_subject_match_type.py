@@ -24,6 +24,10 @@ class PolicySubjectMatchType(
     str,
     Enum
 ):
+    """
+    An enumeration class for PolicySubjectMatchType.
+    """
+
     USERNAME = "USERNAME"
     EMAIL = "EMAIL"
     USERNAME_OR_EMAIL = "USERNAME_OR_EMAIL"

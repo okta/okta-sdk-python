@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class Csr(
     OktaObject
 ):
+    """
+    A class for Csr objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.created = config["created"]\

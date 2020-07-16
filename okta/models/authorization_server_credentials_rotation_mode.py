@@ -24,5 +24,9 @@ class AuthorizationServerCredentialsRotationMode(
     str,
     Enum
 ):
+    """
+    An enumeration class for AuthorizationServerCredentialsRotationMode.
+    """
+
     AUTO = "AUTO"
     MANUAL = "MANUAL"

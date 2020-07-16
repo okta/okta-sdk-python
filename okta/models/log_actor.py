@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class LogActor(
     OktaObject
 ):
+    """
+    A class for LogActor objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.alternate_id = config["alternateId"]\

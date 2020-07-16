@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class SmsUserFactorProfile(
     OktaObject
 ):
+    """
+    A class for SmsUserFactorProfile objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.phone_number = config["phoneNumber"]\

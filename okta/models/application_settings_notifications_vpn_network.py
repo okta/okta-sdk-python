@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class ApplicationSettingsNotificationsVpnNetwork(
     OktaObject
 ):
+    """
+    A class for ApplicationSettingsNotificationsVpnNetwork objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.connection = config["connection"]\

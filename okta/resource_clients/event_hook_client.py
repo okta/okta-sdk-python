@@ -65,7 +65,7 @@ class EventHookClient():
             for item in response.get_body():
                 result.append(EventHook(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def create_event_hook(
@@ -107,7 +107,7 @@ class EventHookClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def delete_event_hook(
@@ -177,7 +177,7 @@ class EventHookClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def update_event_hook(
@@ -220,7 +220,7 @@ class EventHookClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def activate_event_hook(
@@ -259,7 +259,7 @@ class EventHookClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def deactivate_event_hook(
@@ -299,7 +299,7 @@ class EventHookClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def verify_event_hook(
@@ -338,5 +338,5 @@ class EventHookClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)

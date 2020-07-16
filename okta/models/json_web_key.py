@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class JsonWebKey(
     OktaObject
 ):
+    """
+    A class for JsonWebKey objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.links = config["_links"]\

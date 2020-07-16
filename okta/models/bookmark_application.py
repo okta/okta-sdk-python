@@ -19,17 +19,31 @@ limitations under the License.
 
 from okta.models.application\
     import Application
+from okta.models.bookmark_application_settings\
+    import BookmarkApplicationSettings
 
 
 class BookmarkApplication(
     Application
 ):
+    """
+    A class for BookmarkApplication objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.name = config["name"]\
                 if "name" in config else None
-            self.settings = config["settings"]\
-                if "settings" in config else None
+            if "settings" in config:
+                if isinstance(config["settings"],
+                              BookmarkApplicationSettings):
+                    self.settings = config["settings"]
+                else:
+                    self.settings = BookmarkApplicationSettings(
+                        config["settings"]
+                    )
+            else:
+                self.settings = None
         else:
             self.name = "bookmark"
             self.settings = None

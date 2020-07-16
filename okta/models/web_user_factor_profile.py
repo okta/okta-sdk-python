@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class WebUserFactorProfile(
     OktaObject
 ):
+    """
+    A class for WebUserFactorProfile objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.credential_id = config["credentialId"]\

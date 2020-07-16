@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class LogGeolocation(
     OktaObject
 ):
+    """
+    A class for LogGeolocation objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.lat = config["lat"]\

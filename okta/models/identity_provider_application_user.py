@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class IdentityProviderApplicationUser(
     OktaObject
 ):
+    """
+    A class for IdentityProviderApplicationUser objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.embedded = config["_embedded"]\

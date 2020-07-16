@@ -18,11 +18,23 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.user_credentials\
+    import UserCredentials
+from okta.models.user_profile\
+    import UserProfile
+from okta.models.user_status\
+    import UserStatus
+from okta.models.user_type\
+    import UserType
 
 
 class User(
     OktaObject
 ):
+    """
+    A class for User objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.embedded = config["_embedded"]\
@@ -33,8 +45,16 @@ class User(
                 if "activated" in config else None
             self.created = config["created"]\
                 if "created" in config else None
-            self.credentials = config["credentials"]\
-                if "credentials" in config else None
+            if "credentials" in config:
+                if isinstance(config["credentials"],
+                              UserCredentials):
+                    self.credentials = config["credentials"]
+                else:
+                    self.credentials = UserCredentials(
+                        config["credentials"]
+                    )
+            else:
+                self.credentials = None
             self.id = config["id"]\
                 if "id" in config else None
             self.last_login = config["lastLogin"]\
@@ -43,16 +63,48 @@ class User(
                 if "lastUpdated" in config else None
             self.password_changed = config["passwordChanged"]\
                 if "passwordChanged" in config else None
-            self.profile = config["profile"]\
-                if "profile" in config else None
-            self.status = config["status"]\
-                if "status" in config else None
+            if "profile" in config:
+                if isinstance(config["profile"],
+                              UserProfile):
+                    self.profile = config["profile"]
+                else:
+                    self.profile = UserProfile(
+                        config["profile"]
+                    )
+            else:
+                self.profile = None
+            if "status" in config:
+                if isinstance(config["status"],
+                              UserStatus):
+                    self.status = config["status"]
+                else:
+                    self.status = UserStatus(
+                        config["status"]
+                    )
+            else:
+                self.status = None
             self.status_changed = config["statusChanged"]\
                 if "statusChanged" in config else None
-            self.transitioning_to_status = config["transitioningToStatus"]\
-                if "transitioningToStatus" in config else None
-            self.type = config["type"]\
-                if "type" in config else None
+            if "transitioningToStatus" in config:
+                if isinstance(config["transitioningToStatus"],
+                              UserStatus):
+                    self.transitioning_to_status = config["transitioningToStatus"]
+                else:
+                    self.transitioning_to_status = UserStatus(
+                        config["transitioningToStatus"]
+                    )
+            else:
+                self.transitioning_to_status = None
+            if "type" in config:
+                if isinstance(config["type"],
+                              UserType):
+                    self.type = config["type"]
+                else:
+                    self.type = UserType(
+                        config["type"]
+                    )
+            else:
+                self.type = None
         else:
             self.embedded = None
             self.links = None

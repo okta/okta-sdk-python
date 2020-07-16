@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class OAuth2ScopesMediationPolicyRuleCondition(
     OktaObject
 ):
+    """
+    A class for OAuth2ScopesMediationPolicyRuleCondition objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.include = config["include"]\

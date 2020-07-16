@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class EventSubscriptions(
     OktaObject
 ):
+    """
+    A class for EventSubscriptions objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.items = config["items"]\

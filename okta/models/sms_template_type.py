@@ -24,4 +24,8 @@ class SmsTemplateType(
     str,
     Enum
 ):
+    """
+    An enumeration class for SmsTemplateType.
+    """
+
     SMS_VERIFY_CODE = "SMS_VERIFY_CODE"

@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class OAuth2Token(
     OktaObject
 ):
+    """
+    A class for OAuth2Token objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.embedded = config["_embedded"]\

@@ -24,6 +24,10 @@ class LogCredentialType(
     str,
     Enum
 ):
+    """
+    An enumeration class for LogCredentialType.
+    """
+
     OTP = "OTP"
     SMS = "SMS"
     PASSWORD = "PASSWORD"

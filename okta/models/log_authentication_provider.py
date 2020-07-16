@@ -24,6 +24,10 @@ class LogAuthenticationProvider(
     str,
     Enum
 ):
+    """
+    An enumeration class for LogAuthenticationProvider.
+    """
+
     OKTA_AUTHENTICATION_PROVIDER = "OKTA_AUTHENTICATION_PROVIDER"
     ACTIVE_DIRECTORY = "ACTIVE_DIRECTORY"
     LDAP = "LDAP"

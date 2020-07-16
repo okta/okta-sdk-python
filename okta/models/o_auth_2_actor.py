@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class OAuth2Actor(
     OktaObject
 ):
+    """
+    A class for OAuth2Actor objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.id = config["id"]\

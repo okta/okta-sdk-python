@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class PolicyAccountLinkFilterGroups(
     OktaObject
 ):
+    """
+    A class for PolicyAccountLinkFilterGroups objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.include = config["include"]\

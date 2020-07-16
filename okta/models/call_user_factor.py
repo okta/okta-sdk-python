@@ -19,14 +19,28 @@ limitations under the License.
 
 from okta.models.user_factor\
     import UserFactor
+from okta.models.call_user_factor_profile\
+    import CallUserFactorProfile
 
 
 class CallUserFactor(
     UserFactor
 ):
+    """
+    A class for CallUserFactor objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.profile = config["profile"]\
-                if "profile" in config else None
+            if "profile" in config:
+                if isinstance(config["profile"],
+                              CallUserFactorProfile):
+                    self.profile = config["profile"]
+                else:
+                    self.profile = CallUserFactorProfile(
+                        config["profile"]
+                    )
+            else:
+                self.profile = None
         else:
             self.profile = None

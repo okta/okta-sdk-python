@@ -24,6 +24,10 @@ from okta.models.application_settings_application\
 class BasicApplicationSettingsApplication(
     ApplicationSettingsApplication
 ):
+    """
+    A class for BasicApplicationSettingsApplication objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.auth_url = config["authURL"]\

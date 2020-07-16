@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class SecurityQuestionUserFactorProfile(
     OktaObject
 ):
+    """
+    A class for SecurityQuestionUserFactorProfile objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.answer = config["answer"]\

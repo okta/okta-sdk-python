@@ -18,17 +18,41 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.provisioning_deprovisioned_condition\
+    import ProvisioningDeprovisionedCondition
+from okta.models.provisioning_suspended_condition\
+    import ProvisioningSuspendedCondition
 
 
 class ProvisioningConditions(
     OktaObject
 ):
+    """
+    A class for ProvisioningConditions objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.deprovisioned = config["deprovisioned"]\
-                if "deprovisioned" in config else None
-            self.suspended = config["suspended"]\
-                if "suspended" in config else None
+            if "deprovisioned" in config:
+                if isinstance(config["deprovisioned"],
+                              ProvisioningDeprovisionedCondition):
+                    self.deprovisioned = config["deprovisioned"]
+                else:
+                    self.deprovisioned = ProvisioningDeprovisionedCondition(
+                        config["deprovisioned"]
+                    )
+            else:
+                self.deprovisioned = None
+            if "suspended" in config:
+                if isinstance(config["suspended"],
+                              ProvisioningSuspendedCondition):
+                    self.suspended = config["suspended"]
+                else:
+                    self.suspended = ProvisioningSuspendedCondition(
+                        config["suspended"]
+                    )
+            else:
+                self.suspended = None
         else:
             self.deprovisioned = None
             self.suspended = None

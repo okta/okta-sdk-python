@@ -24,6 +24,10 @@ class FactorStatus(
     str,
     Enum
 ):
+    """
+    An enumeration class for FactorStatus.
+    """
+
     PENDING_ACTIVATION = "PENDING_ACTIVATION"
     ACTIVE = "ACTIVE"
     INACTIVE = "INACTIVE"

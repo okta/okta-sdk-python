@@ -18,14 +18,28 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.password_dictionary_common\
+    import PasswordDictionaryCommon
 
 
 class PasswordDictionary(
     OktaObject
 ):
+    """
+    A class for PasswordDictionary objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.common = config["common"]\
-                if "common" in config else None
+            if "common" in config:
+                if isinstance(config["common"],
+                              PasswordDictionaryCommon):
+                    self.common = config["common"]
+                else:
+                    self.common = PasswordDictionaryCommon(
+                        config["common"]
+                    )
+            else:
+                self.common = None
         else:
             self.common = None

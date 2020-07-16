@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class ProtocolEndpoint(
     OktaObject
 ):
+    """
+    A class for ProtocolEndpoint objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.binding = config["binding"]\

@@ -24,5 +24,9 @@ class EnabledStatus(
     str,
     Enum
 ):
+    """
+    An enumeration class for EnabledStatus.
+    """
+
     ENABLED = "ENABLED"
     DISABLED = "DISABLED"

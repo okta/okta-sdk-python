@@ -18,21 +18,55 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.user_credentials\
+    import UserCredentials
+from okta.models.user_profile\
+    import UserProfile
+from okta.models.user_type\
+    import UserType
 
 
 class CreateUserRequest(
     OktaObject
 ):
+    """
+    A class for CreateUserRequest objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.credentials = config["credentials"]\
-                if "credentials" in config else None
+            if "credentials" in config:
+                if isinstance(config["credentials"],
+                              UserCredentials):
+                    self.credentials = config["credentials"]
+                else:
+                    self.credentials = UserCredentials(
+                        config["credentials"]
+                    )
+            else:
+                self.credentials = None
             self.group_ids = config["groupIds"]\
                 if "groupIds" in config else None
-            self.profile = config["profile"]\
-                if "profile" in config else None
-            self.type = config["type"]\
-                if "type" in config else None
+            if "profile" in config:
+                if isinstance(config["profile"],
+                              UserProfile):
+                    self.profile = config["profile"]
+                else:
+                    self.profile = UserProfile(
+                        config["profile"]
+                    )
+            else:
+                self.profile = None
+            if "type" in config:
+                if isinstance(config["type"],
+                              UserType):
+                    self.type = config["type"]
+                else:
+                    self.type = UserType(
+                        config["type"]
+                    )
+            else:
+                self.type = None
         else:
             self.credentials = None
             self.group_ids = None

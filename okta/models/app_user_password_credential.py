@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class AppUserPasswordCredential(
     OktaObject
 ):
+    """
+    A class for AppUserPasswordCredential objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.value = config["value"]\

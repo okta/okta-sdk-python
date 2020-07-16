@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class SamlAttributeStatement(
     OktaObject
 ):
+    """
+    A class for SamlAttributeStatement objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.name = config["name"]\

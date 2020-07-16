@@ -18,19 +18,49 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.password_policy_rule_action\
+    import PasswordPolicyRuleAction
 
 
 class PasswordPolicyRuleActions(
     OktaObject
 ):
+    """
+    A class for PasswordPolicyRuleActions objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.password_change = config["passwordChange"]\
-                if "passwordChange" in config else None
-            self.self_service_password_reset = config["selfServicePasswordReset"]\
-                if "selfServicePasswordReset" in config else None
-            self.self_service_unlock = config["selfServiceUnlock"]\
-                if "selfServiceUnlock" in config else None
+            if "passwordChange" in config:
+                if isinstance(config["passwordChange"],
+                              PasswordPolicyRuleAction):
+                    self.password_change = config["passwordChange"]
+                else:
+                    self.password_change = PasswordPolicyRuleAction(
+                        config["passwordChange"]
+                    )
+            else:
+                self.password_change = None
+            if "selfServicePasswordReset" in config:
+                if isinstance(config["selfServicePasswordReset"],
+                              PasswordPolicyRuleAction):
+                    self.self_service_password_reset = config["selfServicePasswordReset"]
+                else:
+                    self.self_service_password_reset = PasswordPolicyRuleAction(
+                        config["selfServicePasswordReset"]
+                    )
+            else:
+                self.self_service_password_reset = None
+            if "selfServiceUnlock" in config:
+                if isinstance(config["selfServiceUnlock"],
+                              PasswordPolicyRuleAction):
+                    self.self_service_unlock = config["selfServiceUnlock"]
+                else:
+                    self.self_service_unlock = PasswordPolicyRuleAction(
+                        config["selfServiceUnlock"]
+                    )
+            else:
+                self.self_service_unlock = None
         else:
             self.password_change = None
             self.self_service_password_reset = None

@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class ScheduledUserLifecycleAction(
     OktaObject
 ):
+    """
+    A class for ScheduledUserLifecycleAction objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.status = config["status"]\

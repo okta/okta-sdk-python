@@ -18,23 +18,47 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.event_hook_channel\
+    import EventHookChannel
+from okta.models.event_subscriptions\
+    import EventSubscriptions
 
 
 class EventHook(
     OktaObject
 ):
+    """
+    A class for EventHook objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.links = config["_links"]\
                 if "_links" in config else None
-            self.channel = config["channel"]\
-                if "channel" in config else None
+            if "channel" in config:
+                if isinstance(config["channel"],
+                              EventHookChannel):
+                    self.channel = config["channel"]
+                else:
+                    self.channel = EventHookChannel(
+                        config["channel"]
+                    )
+            else:
+                self.channel = None
             self.created = config["created"]\
                 if "created" in config else None
             self.created_by = config["createdBy"]\
                 if "createdBy" in config else None
-            self.events = config["events"]\
-                if "events" in config else None
+            if "events" in config:
+                if isinstance(config["events"],
+                              EventSubscriptions):
+                    self.events = config["events"]
+                else:
+                    self.events = EventSubscriptions(
+                        config["events"]
+                    )
+            else:
+                self.events = None
             self.id = config["id"]\
                 if "id" in config else None
             self.last_updated = config["lastUpdated"]\

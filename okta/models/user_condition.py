@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class UserCondition(
     OktaObject
 ):
+    """
+    A class for UserCondition objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.exclude = config["exclude"]\

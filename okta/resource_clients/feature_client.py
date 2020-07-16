@@ -66,7 +66,7 @@ class FeatureClient():
             for item in response.get_body():
                 result.append(Feature(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def get_feature(
@@ -105,7 +105,7 @@ class FeatureClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_feature_dependencies(
@@ -144,7 +144,7 @@ class FeatureClient():
             for item in response.get_body():
                 result.append(Feature(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_feature_dependents(
@@ -183,7 +183,7 @@ class FeatureClient():
             for item in response.get_body():
                 result.append(Feature(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def update_feature_lifecycle(
@@ -228,5 +228,5 @@ class FeatureClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)

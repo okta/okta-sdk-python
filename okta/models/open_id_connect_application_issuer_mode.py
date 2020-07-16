@@ -24,5 +24,9 @@ class OpenIdConnectApplicationIssuerMode(
     str,
     Enum
 ):
+    """
+    An enumeration class for OpenIdConnectApplicationIssuerMode.
+    """
+
     CUSTOM_URL = "CUSTOM_URL"
     ORG_URL = "ORG_URL"

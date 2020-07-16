@@ -65,7 +65,7 @@ class LinkedObjectClient():
             for item in response.get_body():
                 result.append(LinkedObject(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def add_linked_object_definition(
@@ -107,7 +107,7 @@ class LinkedObjectClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def delete_linked_object_definition(
@@ -179,5 +179,5 @@ class LinkedObjectClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)

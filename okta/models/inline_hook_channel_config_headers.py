@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class InlineHookChannelConfigHeaders(
     OktaObject
 ):
+    """
+    A class for InlineHookChannelConfigHeaders objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.key = config["key"]\

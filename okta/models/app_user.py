@@ -18,11 +18,17 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.app_user_credentials\
+    import AppUserCredentials
 
 
 class AppUser(
     OktaObject
 ):
+    """
+    A class for AppUser objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.embedded = config["_embedded"]\
@@ -31,8 +37,16 @@ class AppUser(
                 if "_links" in config else None
             self.created = config["created"]\
                 if "created" in config else None
-            self.credentials = config["credentials"]\
-                if "credentials" in config else None
+            if "credentials" in config:
+                if isinstance(config["credentials"],
+                              AppUserCredentials):
+                    self.credentials = config["credentials"]
+                else:
+                    self.credentials = AppUserCredentials(
+                        config["credentials"]
+                    )
+            else:
+                self.credentials = None
             self.external_id = config["externalId"]\
                 if "externalId" in config else None
             self.id = config["id"]\

@@ -18,15 +18,29 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.password_policy_recovery_email_properties\
+    import PasswordPolicyRecoveryEmailProperties
 
 
 class PasswordPolicyRecoveryEmail(
     OktaObject
 ):
+    """
+    A class for PasswordPolicyRecoveryEmail objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.properties = config["properties"]\
-                if "properties" in config else None
+            if "properties" in config:
+                if isinstance(config["properties"],
+                              PasswordPolicyRecoveryEmailProperties):
+                    self.properties = config["properties"]
+                else:
+                    self.properties = PasswordPolicyRecoveryEmailProperties(
+                        config["properties"]
+                    )
+            else:
+                self.properties = None
             self.status = config["status"]\
                 if "status" in config else None
         else:

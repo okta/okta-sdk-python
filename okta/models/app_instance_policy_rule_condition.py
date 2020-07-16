@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class AppInstancePolicyRuleCondition(
     OktaObject
 ):
+    """
+    A class for AppInstancePolicyRuleCondition objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.exclude = config["exclude"]\

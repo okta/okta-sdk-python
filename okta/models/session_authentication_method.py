@@ -24,6 +24,10 @@ class SessionAuthenticationMethod(
     str,
     Enum
 ):
+    """
+    An enumeration class for SessionAuthenticationMethod.
+    """
+
     PWD = "pwd"
     SWK = "swk"
     HWK = "hwk"

@@ -18,14 +18,28 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.protocol_algorithm_type_signature\
+    import ProtocolAlgorithmTypeSignature
 
 
 class ProtocolAlgorithmType(
     OktaObject
 ):
+    """
+    A class for ProtocolAlgorithmType objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.signature = config["signature"]\
-                if "signature" in config else None
+            if "signature" in config:
+                if isinstance(config["signature"],
+                              ProtocolAlgorithmTypeSignature):
+                    self.signature = config["signature"]
+                else:
+                    self.signature = ProtocolAlgorithmTypeSignature(
+                        config["signature"]
+                    )
+            else:
+                self.signature = None
         else:
             self.signature = None

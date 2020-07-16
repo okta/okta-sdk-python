@@ -23,5 +23,9 @@ from okta.okta_object import OktaObject
 class SmsTemplateTranslations(
     OktaObject
 ):
+    """
+    A class for SmsTemplateTranslations objects.
+    """
+
     def __init__(self, config=None):
         pass

@@ -18,11 +18,17 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.o_auth_2_claim_conditions\
+    import OAuth2ClaimConditions
 
 
 class OAuth2Claim(
     OktaObject
 ):
+    """
+    A class for OAuth2Claim objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.links = config["_links"]\
@@ -31,8 +37,16 @@ class OAuth2Claim(
                 if "alwaysIncludeInToken" in config else None
             self.claim_type = config["claimType"]\
                 if "claimType" in config else None
-            self.conditions = config["conditions"]\
-                if "conditions" in config else None
+            if "conditions" in config:
+                if isinstance(config["conditions"],
+                              OAuth2ClaimConditions):
+                    self.conditions = config["conditions"]
+                else:
+                    self.conditions = OAuth2ClaimConditions(
+                        config["conditions"]
+                    )
+            else:
+                self.conditions = None
             self.group_filter_type = config["group_filter_type"]\
                 if "group_filter_type" in config else None
             self.id = config["id"]\

@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class InlineHookResponseCommands(
     OktaObject
 ):
+    """
+    A class for InlineHookResponseCommands objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.type = config["type"]\

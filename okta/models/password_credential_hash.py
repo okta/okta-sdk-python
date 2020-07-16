@@ -18,15 +18,29 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.password_credential_hash_algorithm\
+    import PasswordCredentialHashAlgorithm
 
 
 class PasswordCredentialHash(
     OktaObject
 ):
+    """
+    A class for PasswordCredentialHash objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.algorithm = config["algorithm"]\
-                if "algorithm" in config else None
+            if "algorithm" in config:
+                if isinstance(config["algorithm"],
+                              PasswordCredentialHashAlgorithm):
+                    self.algorithm = config["algorithm"]
+                else:
+                    self.algorithm = PasswordCredentialHashAlgorithm(
+                        config["algorithm"]
+                    )
+            else:
+                self.algorithm = None
             self.salt = config["salt"]\
                 if "salt" in config else None
             self.salt_order = config["saltOrder"]\

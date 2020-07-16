@@ -19,17 +19,31 @@ limitations under the License.
 
 from okta.models.application\
     import Application
+from okta.models.ws_federation_application_settings\
+    import WsFederationApplicationSettings
 
 
 class WsFederationApplication(
     Application
 ):
+    """
+    A class for WsFederationApplication objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.name = config["name"]\
                 if "name" in config else None
-            self.settings = config["settings"]\
-                if "settings" in config else None
+            if "settings" in config:
+                if isinstance(config["settings"],
+                              WsFederationApplicationSettings):
+                    self.settings = config["settings"]
+                else:
+                    self.settings = WsFederationApplicationSettings(
+                        config["settings"]
+                    )
+            else:
+                self.settings = None
         else:
             self.name = "template_wsfed"
             self.settings = None

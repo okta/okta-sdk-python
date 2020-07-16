@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class InactivityPolicyRuleCondition(
     OktaObject
 ):
+    """
+    A class for InactivityPolicyRuleCondition objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.number = config["number"]\

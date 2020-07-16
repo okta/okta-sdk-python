@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class UserStatusPolicyRuleCondition(
     OktaObject
 ):
+    """
+    A class for UserStatusPolicyRuleCondition objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.value = config["value"]\

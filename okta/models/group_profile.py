@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class GroupProfile(
     OktaObject
 ):
+    """
+    A class for GroupProfile objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.description = config["description"]\

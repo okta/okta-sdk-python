@@ -18,14 +18,28 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.policy_account_link_filter_groups\
+    import PolicyAccountLinkFilterGroups
 
 
 class PolicyAccountLinkFilter(
     OktaObject
 ):
+    """
+    A class for PolicyAccountLinkFilter objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.groups = config["groups"]\
-                if "groups" in config else None
+            if "groups" in config:
+                if isinstance(config["groups"],
+                              PolicyAccountLinkFilterGroups):
+                    self.groups = config["groups"]
+                else:
+                    self.groups = PolicyAccountLinkFilterGroups(
+                        config["groups"]
+                    )
+            else:
+                self.groups = None
         else:
             self.groups = None

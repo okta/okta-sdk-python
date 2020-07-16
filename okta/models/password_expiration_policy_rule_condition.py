@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class PasswordExpirationPolicyRuleCondition(
     OktaObject
 ):
+    """
+    A class for PasswordExpirationPolicyRuleCondition objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.number = config["number"]\

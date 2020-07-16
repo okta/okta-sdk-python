@@ -18,11 +18,17 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.o_auth_endpoint_authentication_method\
+    import OAuthEndpointAuthenticationMethod
 
 
 class ApplicationCredentialsOAuthClient(
     OktaObject
 ):
+    """
+    A class for ApplicationCredentialsOAuthClient objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.auto_key_rotation = config["autoKeyRotation"]\
@@ -31,8 +37,16 @@ class ApplicationCredentialsOAuthClient(
                 if "client_id" in config else None
             self.client_secret = config["client_secret"]\
                 if "client_secret" in config else None
-            self.token_endpoint_auth_method = config["token_endpoint_auth_method"]\
-                if "token_endpoint_auth_method" in config else None
+            if "token_endpoint_auth_method" in config:
+                if isinstance(config["token_endpoint_auth_method"],
+                              OAuthEndpointAuthenticationMethod):
+                    self.token_endpoint_auth_method = config["token_endpoint_auth_method"]
+                else:
+                    self.token_endpoint_auth_method = OAuthEndpointAuthenticationMethod(
+                        config["token_endpoint_auth_method"]
+                    )
+            else:
+                self.token_endpoint_auth_method = None
         else:
             self.auto_key_rotation = None
             self.client_id = None

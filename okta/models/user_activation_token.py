@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class UserActivationToken(
     OktaObject
 ):
+    """
+    A class for UserActivationToken objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.activation_token = config["activationToken"]\

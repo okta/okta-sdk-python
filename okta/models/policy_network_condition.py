@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class PolicyNetworkCondition(
     OktaObject
 ):
+    """
+    A class for PolicyNetworkCondition objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.connection = config["connection"]\

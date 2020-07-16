@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class VerifyUserFactorResponse(
     OktaObject
 ):
+    """
+    A class for VerifyUserFactorResponse objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.embedded = config["_embedded"]\

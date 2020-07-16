@@ -1,6 +1,7 @@
 const py = module.exports;
 const fs = require("fs");
 const _ = require("lodash");
+const { isLength } = require("lodash");
 
 py.process = ({ spec, operations, models, handlebars }) => {
   py.spec = spec;
@@ -52,6 +53,7 @@ py.process = ({ spec, operations, models, handlebars }) => {
       dest: `okta/models/${_.snakeCase(model.modelName)}.py`,
       context: {
         model: model,
+        subTypes: getSubtypes(model),
       },
     });
   }
@@ -287,4 +289,19 @@ function hasBinaryOps(operations) {
 // Replace colons in enums with underscores
 function replaceColons(modelName) {
   return modelName.replace(/:/g, "_");
+}
+
+// Import subtypes in models
+function getSubtypes(model) {
+  let modelSubTypes = new Set();
+
+  if (model.properties) {
+    model.properties.forEach((prop) => {
+      if ("$ref" in prop) {
+        modelSubTypes.add(prop.model);
+      }
+    });
+  }
+
+  return [...modelSubTypes];
 }

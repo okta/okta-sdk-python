@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class LogRequest(
     OktaObject
 ):
+    """
+    A class for LogRequest objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.ip_chain = config["ipChain"]\

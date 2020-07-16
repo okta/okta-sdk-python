@@ -18,17 +18,41 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.group_condition\
+    import GroupCondition
+from okta.models.user_condition\
+    import UserCondition
 
 
 class PolicyPeopleCondition(
     OktaObject
 ):
+    """
+    A class for PolicyPeopleCondition objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.groups = config["groups"]\
-                if "groups" in config else None
-            self.users = config["users"]\
-                if "users" in config else None
+            if "groups" in config:
+                if isinstance(config["groups"],
+                              GroupCondition):
+                    self.groups = config["groups"]
+                else:
+                    self.groups = GroupCondition(
+                        config["groups"]
+                    )
+            else:
+                self.groups = None
+            if "users" in config:
+                if isinstance(config["users"],
+                              UserCondition):
+                    self.users = config["users"]
+                else:
+                    self.users = UserCondition(
+                        config["users"]
+                    )
+            else:
+                self.users = None
         else:
             self.groups = None
             self.users = None

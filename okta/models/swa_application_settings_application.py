@@ -24,6 +24,10 @@ from okta.models.application_settings_application\
 class SwaApplicationSettingsApplication(
     ApplicationSettingsApplication
 ):
+    """
+    A class for SwaApplicationSettingsApplication objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.button_field = config["buttonField"]\

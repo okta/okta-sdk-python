@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class SamlApplicationSettingsSignOn(
     OktaObject
 ):
+    """
+    A class for SamlApplicationSettingsSignOn objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.assertion_signed = config["assertionSigned"]\

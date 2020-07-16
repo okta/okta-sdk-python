@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class CreateSessionRequest(
     OktaObject
 ):
+    """
+    A class for CreateSessionRequest objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.session_token = config["sessionToken"]\

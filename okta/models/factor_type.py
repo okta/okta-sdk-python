@@ -24,6 +24,10 @@ class FactorType(
     str,
     Enum
 ):
+    """
+    An enumeration class for FactorType.
+    """
+
     CALL = "call"
     EMAIL = "email"
     PUSH = "push"

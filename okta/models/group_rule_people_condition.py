@@ -18,17 +18,41 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.group_rule_group_condition\
+    import GroupRuleGroupCondition
+from okta.models.group_rule_user_condition\
+    import GroupRuleUserCondition
 
 
 class GroupRulePeopleCondition(
     OktaObject
 ):
+    """
+    A class for GroupRulePeopleCondition objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.groups = config["groups"]\
-                if "groups" in config else None
-            self.users = config["users"]\
-                if "users" in config else None
+            if "groups" in config:
+                if isinstance(config["groups"],
+                              GroupRuleGroupCondition):
+                    self.groups = config["groups"]
+                else:
+                    self.groups = GroupRuleGroupCondition(
+                        config["groups"]
+                    )
+            else:
+                self.groups = None
+            if "users" in config:
+                if isinstance(config["users"],
+                              GroupRuleUserCondition):
+                    self.users = config["users"]
+                else:
+                    self.users = GroupRuleUserCondition(
+                        config["users"]
+                    )
+            else:
+                self.users = None
         else:
             self.groups = None
             self.users = None

@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class U2FUserFactorProfile(
     OktaObject
 ):
+    """
+    A class for U2FUserFactorProfile objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.credential_id = config["credentialId"]\

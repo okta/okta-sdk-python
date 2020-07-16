@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class VerifyFactorRequest(
     OktaObject
 ):
+    """
+    A class for VerifyFactorRequest objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.activation_token = config["activationToken"]\

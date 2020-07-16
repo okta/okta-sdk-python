@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class ApplicationCredentialsUsernameTemplate(
     OktaObject
 ):
+    """
+    A class for ApplicationCredentialsUsernameTemplate objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.suffix = config["suffix"]\

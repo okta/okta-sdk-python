@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class IdentityProviderCredentialsSigning(
     OktaObject
 ):
+    """
+    A class for IdentityProviderCredentialsSigning objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.kid = config["kid"]\

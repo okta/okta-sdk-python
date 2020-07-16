@@ -24,4 +24,8 @@ class FeatureType(
     str,
     Enum
 ):
+    """
+    An enumeration class for FeatureType.
+    """
+
     SELF_SERVICE = "self-service"

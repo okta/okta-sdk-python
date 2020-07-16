@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class OAuth2Scope(
     OktaObject
 ):
+    """
+    A class for OAuth2Scope objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.consent = config["consent"]\

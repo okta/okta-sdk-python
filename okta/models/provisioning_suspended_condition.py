@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class ProvisioningSuspendedCondition(
     OktaObject
 ):
+    """
+    A class for ProvisioningSuspendedCondition objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.action = config["action"]\

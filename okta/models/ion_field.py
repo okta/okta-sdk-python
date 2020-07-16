@@ -18,15 +18,29 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.ion_form\
+    import IonForm
 
 
 class IonField(
     OktaObject
 ):
+    """
+    A class for IonField objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.form = config["form"]\
-                if "form" in config else None
+            if "form" in config:
+                if isinstance(config["form"],
+                              IonForm):
+                    self.form = config["form"]
+                else:
+                    self.form = IonForm(
+                        config["form"]
+                    )
+            else:
+                self.form = None
             self.label = config["label"]\
                 if "label" in config else None
             self.mutable = config["mutable"]\

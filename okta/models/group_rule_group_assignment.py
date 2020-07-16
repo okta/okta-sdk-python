@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class GroupRuleGroupAssignment(
     OktaObject
 ):
+    """
+    A class for GroupRuleGroupAssignment objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.group_ids = config["groupIds"]\

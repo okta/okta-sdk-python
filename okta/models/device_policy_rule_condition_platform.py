@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class DevicePolicyRuleConditionPlatform(
     OktaObject
 ):
+    """
+    A class for DevicePolicyRuleConditionPlatform objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.supported_mdm_frameworks = config["supportedMDMFrameworks"]\

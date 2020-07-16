@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class PolicyRule(
     OktaObject
 ):
+    """
+    A class for PolicyRule objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.created = config["created"]\

@@ -24,6 +24,10 @@ from okta.models.application_settings_application\
 class SecurePasswordStoreApplicationSettingsApplication(
     ApplicationSettingsApplication
 ):
+    """
+    A class for SecurePasswordStoreApplicationSettingsApplication objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.optional_field_1 = config["optionalField1"]\

@@ -8,6 +8,10 @@ class {{pascalCase model.modelName}}(
     {{model.type}},
     Enum
 ):
+    """
+    An enumeration class for {{pascalCase model.modelName}}.
+    """
+
     {{#each model.enum as |enum|}}
     {{{replaceColons (upperCase (snakeCase enum))}}} = "{{enum}}"
     {{/each}}
@@ -19,6 +23,10 @@ from okta.models.{{snakeCase model.extends}}\
 {{else}}
 from okta.okta_object import OktaObject
 {{/if}}
+{{#each subTypes as |type|}}
+from okta.models.{{snakeCase type}}\
+    import {{pascalCase type}}
+{{/each}}
 
 
 class {{pascalCase model.modelName}}(
@@ -28,12 +36,29 @@ class {{pascalCase model.modelName}}(
     OktaObject
     {{/if}}
 ):
+    """
+    A class for {{pascalCase model.modelName}} objects.
+    """
+
     def __init__(self, config=None):
         {{#if (gt model.properties.length 0)}}
         if config:
             {{#each model.properties as |prop|}}
+            {{#if (exists prop "$ref")}}
+            if "{{prop.propertyName}}" in config:
+                if isinstance(config["{{prop.propertyName}}"],
+                              {{pascalCase prop.model}}):
+                    self.{{snakeCase prop.propertyName}} = config["{{prop.propertyName}}"]
+                else:
+                    self.{{snakeCase prop.propertyName}} = {{pascalCase prop.model}}(
+                        config["{{prop.propertyName}}"]
+                    )
+            else:
+                self.{{snakeCase prop.propertyName}} = None
+            {{else}}
             self.{{snakeCase prop.propertyName}} = config["{{prop.propertyName}}"]\
                 if "{{prop.propertyName}}" in config else None
+            {{/if}}
             {{/each}}
         else:
             {{#each model.properties as |prop|}}

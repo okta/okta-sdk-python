@@ -19,14 +19,28 @@ limitations under the License.
 
 from okta.models.user_factor\
     import UserFactor
+from okta.models.web_authn_user_factor_profile\
+    import WebAuthnUserFactorProfile
 
 
 class WebAuthnUserFactor(
     UserFactor
 ):
+    """
+    A class for WebAuthnUserFactor objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.profile = config["profile"]\
-                if "profile" in config else None
+            if "profile" in config:
+                if isinstance(config["profile"],
+                              WebAuthnUserFactorProfile):
+                    self.profile = config["profile"]
+                else:
+                    self.profile = WebAuthnUserFactorProfile(
+                        config["profile"]
+                    )
+            else:
+                self.profile = None
         else:
             self.profile = None

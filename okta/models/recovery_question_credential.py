@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class RecoveryQuestionCredential(
     OktaObject
 ):
+    """
+    A class for RecoveryQuestionCredential objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.answer = config["answer"]\

@@ -73,7 +73,7 @@ class UserFactorClient():
             for item in response.get_body():
                 result.append(UserFactor(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def enroll_factor(
@@ -125,7 +125,7 @@ class UserFactorClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_supported_factors(
@@ -166,7 +166,7 @@ class UserFactorClient():
             for item in response.get_body():
                 result.append(UserFactor(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_supported_security_questions(
@@ -207,7 +207,7 @@ class UserFactorClient():
             for item in response.get_body():
                 result.append(SecurityQuestion(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def delete_factor(
@@ -282,7 +282,7 @@ class UserFactorClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def activate_factor(
@@ -329,7 +329,7 @@ class UserFactorClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def get_factor_transaction_status(
@@ -372,7 +372,7 @@ class UserFactorClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def verify_factor(
@@ -424,5 +424,5 @@ class UserFactorClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)

@@ -19,14 +19,28 @@ limitations under the License.
 
 from okta.models.user_factor\
     import UserFactor
+from okta.models.totp_user_factor_profile\
+    import TotpUserFactorProfile
 
 
 class TotpUserFactor(
     UserFactor
 ):
+    """
+    A class for TotpUserFactor objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.profile = config["profile"]\
-                if "profile" in config else None
+            if "profile" in config:
+                if isinstance(config["profile"],
+                              TotpUserFactorProfile):
+                    self.profile = config["profile"]
+                else:
+                    self.profile = TotpUserFactorProfile(
+                        config["profile"]
+                    )
+            else:
+                self.profile = None
         else:
             self.profile = None

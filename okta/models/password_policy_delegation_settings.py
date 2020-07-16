@@ -18,14 +18,28 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.password_policy_delegation_settings_options\
+    import PasswordPolicyDelegationSettingsOptions
 
 
 class PasswordPolicyDelegationSettings(
     OktaObject
 ):
+    """
+    A class for PasswordPolicyDelegationSettings objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.options = config["options"]\
-                if "options" in config else None
+            if "options" in config:
+                if isinstance(config["options"],
+                              PasswordPolicyDelegationSettingsOptions):
+                    self.options = config["options"]
+                else:
+                    self.options = PasswordPolicyDelegationSettingsOptions(
+                        config["options"]
+                    )
+            else:
+                self.options = None
         else:
             self.options = None

@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class IdentityProviderCredentialsClient(
     OktaObject
 ):
+    """
+    A class for IdentityProviderCredentialsClient objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.client_id = config["client_id"]\

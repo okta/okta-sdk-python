@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class WebAuthnUserFactorProfile(
     OktaObject
 ):
+    """
+    A class for WebAuthnUserFactorProfile objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.authenticator_name = config["authenticatorName"]\

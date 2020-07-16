@@ -74,7 +74,7 @@ class TrustedOriginClient():
             for item in response.get_body():
                 result.append(TrustedOrigin(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def create_origin(
@@ -116,7 +116,7 @@ class TrustedOriginClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def delete_origin(
@@ -186,7 +186,7 @@ class TrustedOriginClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def update_origin(
@@ -229,7 +229,7 @@ class TrustedOriginClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def activate_origin(
@@ -269,7 +269,7 @@ class TrustedOriginClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def deactivate_origin(
@@ -309,5 +309,5 @@ class TrustedOriginClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)

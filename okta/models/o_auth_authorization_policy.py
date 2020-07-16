@@ -24,5 +24,9 @@ from okta.models.policy\
 class OAuthAuthorizationPolicy(
     Policy
 ):
+    """
+    A class for OAuthAuthorizationPolicy objects.
+    """
+
     def __init__(self, config=None):
         pass

@@ -18,21 +18,45 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.application_settings_application\
+    import ApplicationSettingsApplication
+from okta.models.application_settings_notifications\
+    import ApplicationSettingsNotifications
 
 
 class ApplicationSettings(
     OktaObject
 ):
+    """
+    A class for ApplicationSettings objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.app = config["app"]\
-                if "app" in config else None
+            if "app" in config:
+                if isinstance(config["app"],
+                              ApplicationSettingsApplication):
+                    self.app = config["app"]
+                else:
+                    self.app = ApplicationSettingsApplication(
+                        config["app"]
+                    )
+            else:
+                self.app = None
             self.implicit_assignment = config["implicitAssignment"]\
                 if "implicitAssignment" in config else None
             self.inline_hook_id = config["inlineHookId"]\
                 if "inlineHookId" in config else None
-            self.notifications = config["notifications"]\
-                if "notifications" in config else None
+            if "notifications" in config:
+                if isinstance(config["notifications"],
+                              ApplicationSettingsNotifications):
+                    self.notifications = config["notifications"]
+                else:
+                    self.notifications = ApplicationSettingsNotifications(
+                        config["notifications"]
+                    )
+            else:
+                self.notifications = None
         else:
             self.app = None
             self.implicit_assignment = None

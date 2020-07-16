@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class CsrMetadataSubject(
     OktaObject
 ):
+    """
+    A class for CsrMetadataSubject objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.common_name = config["commonName"]\

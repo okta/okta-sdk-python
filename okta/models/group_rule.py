@@ -18,17 +18,43 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.group_rule_action\
+    import GroupRuleAction
+from okta.models.group_rule_conditions\
+    import GroupRuleConditions
+from okta.models.group_rule_status\
+    import GroupRuleStatus
 
 
 class GroupRule(
     OktaObject
 ):
+    """
+    A class for GroupRule objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.actions = config["actions"]\
-                if "actions" in config else None
-            self.conditions = config["conditions"]\
-                if "conditions" in config else None
+            if "actions" in config:
+                if isinstance(config["actions"],
+                              GroupRuleAction):
+                    self.actions = config["actions"]
+                else:
+                    self.actions = GroupRuleAction(
+                        config["actions"]
+                    )
+            else:
+                self.actions = None
+            if "conditions" in config:
+                if isinstance(config["conditions"],
+                              GroupRuleConditions):
+                    self.conditions = config["conditions"]
+                else:
+                    self.conditions = GroupRuleConditions(
+                        config["conditions"]
+                    )
+            else:
+                self.conditions = None
             self.created = config["created"]\
                 if "created" in config else None
             self.id = config["id"]\
@@ -37,8 +63,16 @@ class GroupRule(
                 if "lastUpdated" in config else None
             self.name = config["name"]\
                 if "name" in config else None
-            self.status = config["status"]\
-                if "status" in config else None
+            if "status" in config:
+                if isinstance(config["status"],
+                              GroupRuleStatus):
+                    self.status = config["status"]
+                else:
+                    self.status = GroupRuleStatus(
+                        config["status"]
+                    )
+            else:
+                self.status = None
             self.type = config["type"]\
                 if "type" in config else None
         else:

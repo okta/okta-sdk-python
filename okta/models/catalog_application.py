@@ -18,11 +18,17 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.catalog_application_status\
+    import CatalogApplicationStatus
 
 
 class CatalogApplication(
     OktaObject
 ):
+    """
+    A class for CatalogApplication objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.links = config["_links"]\
@@ -43,8 +49,16 @@ class CatalogApplication(
                 if "name" in config else None
             self.sign_on_modes = config["signOnModes"]\
                 if "signOnModes" in config else None
-            self.status = config["status"]\
-                if "status" in config else None
+            if "status" in config:
+                if isinstance(config["status"],
+                              CatalogApplicationStatus):
+                    self.status = config["status"]
+                else:
+                    self.status = CatalogApplicationStatus(
+                        config["status"]
+                    )
+            else:
+                self.status = None
             self.verification_status = config["verificationStatus"]\
                 if "verificationStatus" in config else None
             self.website = config["website"]\

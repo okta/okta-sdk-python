@@ -18,27 +18,91 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.protocol_algorithms\
+    import ProtocolAlgorithms
+from okta.models.identity_provider_credentials\
+    import IdentityProviderCredentials
+from okta.models.protocol_endpoints\
+    import ProtocolEndpoints
+from okta.models.protocol_endpoint\
+    import ProtocolEndpoint
+from okta.models.protocol_relay_state\
+    import ProtocolRelayState
+from okta.models.protocol_settings\
+    import ProtocolSettings
 
 
 class Protocol(
     OktaObject
 ):
+    """
+    A class for Protocol objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.algorithms = config["algorithms"]\
-                if "algorithms" in config else None
-            self.credentials = config["credentials"]\
-                if "credentials" in config else None
-            self.endpoints = config["endpoints"]\
-                if "endpoints" in config else None
-            self.issuer = config["issuer"]\
-                if "issuer" in config else None
-            self.relay_state = config["relayState"]\
-                if "relayState" in config else None
+            if "algorithms" in config:
+                if isinstance(config["algorithms"],
+                              ProtocolAlgorithms):
+                    self.algorithms = config["algorithms"]
+                else:
+                    self.algorithms = ProtocolAlgorithms(
+                        config["algorithms"]
+                    )
+            else:
+                self.algorithms = None
+            if "credentials" in config:
+                if isinstance(config["credentials"],
+                              IdentityProviderCredentials):
+                    self.credentials = config["credentials"]
+                else:
+                    self.credentials = IdentityProviderCredentials(
+                        config["credentials"]
+                    )
+            else:
+                self.credentials = None
+            if "endpoints" in config:
+                if isinstance(config["endpoints"],
+                              ProtocolEndpoints):
+                    self.endpoints = config["endpoints"]
+                else:
+                    self.endpoints = ProtocolEndpoints(
+                        config["endpoints"]
+                    )
+            else:
+                self.endpoints = None
+            if "issuer" in config:
+                if isinstance(config["issuer"],
+                              ProtocolEndpoint):
+                    self.issuer = config["issuer"]
+                else:
+                    self.issuer = ProtocolEndpoint(
+                        config["issuer"]
+                    )
+            else:
+                self.issuer = None
+            if "relayState" in config:
+                if isinstance(config["relayState"],
+                              ProtocolRelayState):
+                    self.relay_state = config["relayState"]
+                else:
+                    self.relay_state = ProtocolRelayState(
+                        config["relayState"]
+                    )
+            else:
+                self.relay_state = None
             self.scopes = config["scopes"]\
                 if "scopes" in config else None
-            self.settings = config["settings"]\
-                if "settings" in config else None
+            if "settings" in config:
+                if isinstance(config["settings"],
+                              ProtocolSettings):
+                    self.settings = config["settings"]
+                else:
+                    self.settings = ProtocolSettings(
+                        config["settings"]
+                    )
+            else:
+                self.settings = None
             self.type = config["type"]\
                 if "type" in config else None
         else:

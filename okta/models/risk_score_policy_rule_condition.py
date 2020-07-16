@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class RiskScorePolicyRuleCondition(
     OktaObject
 ):
+    """
+    A class for RiskScorePolicyRuleCondition objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.level = config["level"]\

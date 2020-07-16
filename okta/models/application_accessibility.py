@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class ApplicationAccessibility(
     OktaObject
 ):
+    """
+    A class for ApplicationAccessibility objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.error_redirect_url = config["errorRedirectUrl"]\

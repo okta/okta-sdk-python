@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class HardwareUserFactorProfile(
     OktaObject
 ):
+    """
+    A class for HardwareUserFactorProfile objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.credential_id = config["credentialId"]\

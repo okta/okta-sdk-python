@@ -18,11 +18,17 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.linked_object_details_type\
+    import LinkedObjectDetailsType
 
 
 class LinkedObjectDetails(
     OktaObject
 ):
+    """
+    A class for LinkedObjectDetails objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.description = config["description"]\
@@ -31,8 +37,16 @@ class LinkedObjectDetails(
                 if "name" in config else None
             self.title = config["title"]\
                 if "title" in config else None
-            self.type = config["type"]\
-                if "type" in config else None
+            if "type" in config:
+                if isinstance(config["type"],
+                              LinkedObjectDetailsType):
+                    self.type = config["type"]
+                else:
+                    self.type = LinkedObjectDetailsType(
+                        config["type"]
+                    )
+            else:
+                self.type = None
         else:
             self.description = None
             self.name = None

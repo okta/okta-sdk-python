@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class SocialAuthToken(
     OktaObject
 ):
+    """
+    A class for SocialAuthToken objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.expires_at = config["expiresAt"]\

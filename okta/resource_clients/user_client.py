@@ -108,7 +108,7 @@ class UserClient():
             for item in response.get_body():
                 result.append(User(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def create_user(
@@ -159,7 +159,7 @@ class UserClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def set_linked_object_for_user(
@@ -275,7 +275,7 @@ class UserClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def partial_update_user(
@@ -325,7 +325,7 @@ class UserClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def update_user(
@@ -375,7 +375,7 @@ class UserClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_app_links(
@@ -416,7 +416,7 @@ class UserClient():
             for item in response.get_body():
                 result.append(AppLink(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_user_clients(
@@ -457,7 +457,7 @@ class UserClient():
             for item in response.get_body():
                 result.append(OAuth2Client(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def revoke_grants_for_user_and_client(
@@ -538,7 +538,7 @@ class UserClient():
             for item in response.get_body():
                 result.append(OAuth2ScopeConsentGrant(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def revoke_tokens_for_user_and_client(
@@ -621,7 +621,7 @@ class UserClient():
             for item in response.get_body():
                 result.append(OAuth2RefreshToken(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def revoke_token_for_user_and_client(
@@ -707,7 +707,7 @@ class UserClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def change_password(
@@ -759,7 +759,7 @@ class UserClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def change_recovery_question(
@@ -808,7 +808,7 @@ class UserClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def forgot_password_generate_one_time_token(
@@ -854,7 +854,7 @@ class UserClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def forgot_password_set_new_password(
@@ -904,7 +904,7 @@ class UserClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def revoke_user_grants(
@@ -984,7 +984,7 @@ class UserClient():
             for item in response.get_body():
                 result.append(OAuth2ScopeConsentGrant(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def revoke_user_grant(
@@ -1063,7 +1063,7 @@ class UserClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_user_groups(
@@ -1103,7 +1103,7 @@ class UserClient():
             for item in response.get_body():
                 result.append(Group(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_user_identity_providers(
@@ -1143,7 +1143,7 @@ class UserClient():
             for item in response.get_body():
                 result.append(IdentityProvider(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def activate_user(
@@ -1195,7 +1195,7 @@ class UserClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def deactivate_user(
@@ -1282,7 +1282,7 @@ class UserClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def expire_password_and_get_temporary_password(
@@ -1325,7 +1325,7 @@ class UserClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def reactivate_user(
@@ -1374,7 +1374,7 @@ class UserClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def reset_factors(
@@ -1458,7 +1458,7 @@ class UserClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def suspend_user(
@@ -1644,7 +1644,7 @@ class UserClient():
             for item in response.get_body():
                 result.append(ResponseLinks(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_assigned_roles_for_user(
@@ -1689,7 +1689,7 @@ class UserClient():
             for item in response.get_body():
                 result.append(Role(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def assign_role_to_user(
@@ -1738,7 +1738,7 @@ class UserClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def remove_role_from_user(
@@ -1823,7 +1823,7 @@ class UserClient():
             for item in response.get_body():
                 result.append(CatalogApplication(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def add_all_apps_as_target_to_role(
@@ -2045,7 +2045,7 @@ class UserClient():
             for item in response.get_body():
                 result.append(Group(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def remove_group_target_from_role(

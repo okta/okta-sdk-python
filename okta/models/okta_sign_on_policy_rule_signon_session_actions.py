@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class OktaSignOnPolicyRuleSignonSessionActions(
     OktaObject
 ):
+    """
+    A class for OktaSignOnPolicyRuleSignonSessionActions objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.max_session_idle_minutes = config["maxSessionIdleMinutes"]\

@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class AppLink(
     OktaObject
 ):
+    """
+    A class for AppLink objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.app_assignment_id = config["appAssignmentId"]\

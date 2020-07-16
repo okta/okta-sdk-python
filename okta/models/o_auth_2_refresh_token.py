@@ -18,11 +18,17 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.o_auth_2_actor\
+    import OAuth2Actor
 
 
 class OAuth2RefreshToken(
     OktaObject
 ):
+    """
+    A class for OAuth2RefreshToken objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.embedded = config["_embedded"]\
@@ -33,8 +39,16 @@ class OAuth2RefreshToken(
                 if "clientId" in config else None
             self.created = config["created"]\
                 if "created" in config else None
-            self.created_by = config["createdBy"]\
-                if "createdBy" in config else None
+            if "createdBy" in config:
+                if isinstance(config["createdBy"],
+                              OAuth2Actor):
+                    self.created_by = config["createdBy"]
+                else:
+                    self.created_by = OAuth2Actor(
+                        config["createdBy"]
+                    )
+            else:
+                self.created_by = None
             self.expires_at = config["expiresAt"]\
                 if "expiresAt" in config else None
             self.id = config["id"]\

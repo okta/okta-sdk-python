@@ -87,7 +87,7 @@ class GroupClient():
             for item in response.get_body():
                 result.append(Group(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def create_group(
@@ -131,7 +131,7 @@ class GroupClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_group_rules(
@@ -178,7 +178,7 @@ class GroupClient():
             for item in response.get_body():
                 result.append(GroupRule(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def create_group_rule(
@@ -222,7 +222,7 @@ class GroupClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def delete_group_rule(
@@ -301,7 +301,7 @@ class GroupClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def update_group_rule(
@@ -346,7 +346,7 @@ class GroupClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def activate_group_rule(
@@ -485,7 +485,7 @@ class GroupClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def update_group(
@@ -530,7 +530,7 @@ class GroupClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_assigned_applications_for_group(
@@ -577,7 +577,7 @@ class GroupClient():
             for item in response.get_body():
                 result.append(Application(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_group_assigned_roles(
@@ -621,7 +621,7 @@ class GroupClient():
             for item in response.get_body():
                 result.append(Role(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def assign_role_to_group(
@@ -670,7 +670,7 @@ class GroupClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def remove_role_from_group(
@@ -743,7 +743,7 @@ class GroupClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_app_targets_for_application_admin_role_for_group(
@@ -795,7 +795,7 @@ class GroupClient():
             for item in response.get_body():
                 result.append(CatalogApplication(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def remove_app_target_from_application_admin_role_given_to_group(
@@ -984,7 +984,7 @@ class GroupClient():
             for item in response.get_body():
                 result.append(Group(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def remove_group_target_from_group_admin_role_given_to_group(
@@ -1104,7 +1104,7 @@ class GroupClient():
             for item in response.get_body():
                 result.append(User(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def remove_user_from_group(

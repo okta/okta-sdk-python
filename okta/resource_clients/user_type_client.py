@@ -66,7 +66,7 @@ class UserTypeClient():
             for item in response.get_body():
                 result.append(UserType(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def create_user_type(
@@ -111,7 +111,7 @@ class UserTypeClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def delete_user_type(
@@ -186,7 +186,7 @@ class UserTypeClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def update_user_type(
@@ -230,7 +230,7 @@ class UserTypeClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def replace_user_type(
@@ -274,5 +274,5 @@ class UserTypeClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)

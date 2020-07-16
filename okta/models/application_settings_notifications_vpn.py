@@ -18,19 +18,33 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.application_settings_notifications_vpn_network\
+    import ApplicationSettingsNotificationsVpnNetwork
 
 
 class ApplicationSettingsNotificationsVpn(
     OktaObject
 ):
+    """
+    A class for ApplicationSettingsNotificationsVpn objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.help_url = config["helpUrl"]\
                 if "helpUrl" in config else None
             self.message = config["message"]\
                 if "message" in config else None
-            self.network = config["network"]\
-                if "network" in config else None
+            if "network" in config:
+                if isinstance(config["network"],
+                              ApplicationSettingsNotificationsVpnNetwork):
+                    self.network = config["network"]
+                else:
+                    self.network = ApplicationSettingsNotificationsVpnNetwork(
+                        config["network"]
+                    )
+            else:
+                self.network = None
         else:
             self.help_url = None
             self.message = None

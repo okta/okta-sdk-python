@@ -24,6 +24,10 @@ class SessionStatus(
     str,
     Enum
 ):
+    """
+    An enumeration class for SessionStatus.
+    """
+
     ACTIVE = "ACTIVE"
     MFA_ENROLL = "MFA_ENROLL"
     MFA_REQUIRED = "MFA_REQUIRED"

@@ -18,11 +18,19 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.authorization_server_credentials_rotation_mode\
+    import AuthorizationServerCredentialsRotationMode
+from okta.models.authorization_server_credentials_use\
+    import AuthorizationServerCredentialsUse
 
 
 class AuthorizationServerCredentialsSigningConfig(
     OktaObject
 ):
+    """
+    A class for AuthorizationServerCredentialsSigningConfig objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.kid = config["kid"]\
@@ -31,10 +39,26 @@ class AuthorizationServerCredentialsSigningConfig(
                 if "lastRotated" in config else None
             self.next_rotation = config["nextRotation"]\
                 if "nextRotation" in config else None
-            self.rotation_mode = config["rotationMode"]\
-                if "rotationMode" in config else None
-            self.use = config["use"]\
-                if "use" in config else None
+            if "rotationMode" in config:
+                if isinstance(config["rotationMode"],
+                              AuthorizationServerCredentialsRotationMode):
+                    self.rotation_mode = config["rotationMode"]
+                else:
+                    self.rotation_mode = AuthorizationServerCredentialsRotationMode(
+                        config["rotationMode"]
+                    )
+            else:
+                self.rotation_mode = None
+            if "use" in config:
+                if isinstance(config["use"],
+                              AuthorizationServerCredentialsUse):
+                    self.use = config["use"]
+                else:
+                    self.use = AuthorizationServerCredentialsUse(
+                        config["use"]
+                    )
+            else:
+                self.use = None
         else:
             self.kid = None
             self.last_rotated = None

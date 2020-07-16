@@ -18,19 +18,33 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.platform_condition_evaluator_platform_operating_system_version\
+    import PlatformConditionEvaluatorPlatformOperatingSystemVersion
 
 
 class PlatformConditionEvaluatorPlatformOperatingSystem(
     OktaObject
 ):
+    """
+    A class for PlatformConditionEvaluatorPlatformOperatingSystem objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.expression = config["expression"]\
                 if "expression" in config else None
             self.type = config["type"]\
                 if "type" in config else None
-            self.version = config["version"]\
-                if "version" in config else None
+            if "version" in config:
+                if isinstance(config["version"],
+                              PlatformConditionEvaluatorPlatformOperatingSystemVersion):
+                    self.version = config["version"]
+                else:
+                    self.version = PlatformConditionEvaluatorPlatformOperatingSystemVersion(
+                        config["version"]
+                    )
+            else:
+                self.version = None
         else:
             self.expression = None
             self.type = None

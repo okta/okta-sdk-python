@@ -18,11 +18,21 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.o_auth_2_actor\
+    import OAuth2Actor
+from okta.models.o_auth_2_scope_consent_grant_source\
+    import OAuth2ScopeConsentGrantSource
+from okta.models.o_auth_2_scope_consent_grant_status\
+    import OAuth2ScopeConsentGrantStatus
 
 
 class OAuth2ScopeConsentGrant(
     OktaObject
 ):
+    """
+    A class for OAuth2ScopeConsentGrant objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.embedded = config["_embedded"]\
@@ -33,8 +43,16 @@ class OAuth2ScopeConsentGrant(
                 if "clientId" in config else None
             self.created = config["created"]\
                 if "created" in config else None
-            self.created_by = config["createdBy"]\
-                if "createdBy" in config else None
+            if "createdBy" in config:
+                if isinstance(config["createdBy"],
+                              OAuth2Actor):
+                    self.created_by = config["createdBy"]
+                else:
+                    self.created_by = OAuth2Actor(
+                        config["createdBy"]
+                    )
+            else:
+                self.created_by = None
             self.id = config["id"]\
                 if "id" in config else None
             self.issuer = config["issuer"]\
@@ -43,10 +61,26 @@ class OAuth2ScopeConsentGrant(
                 if "lastUpdated" in config else None
             self.scope_id = config["scopeId"]\
                 if "scopeId" in config else None
-            self.source = config["source"]\
-                if "source" in config else None
-            self.status = config["status"]\
-                if "status" in config else None
+            if "source" in config:
+                if isinstance(config["source"],
+                              OAuth2ScopeConsentGrantSource):
+                    self.source = config["source"]
+                else:
+                    self.source = OAuth2ScopeConsentGrantSource(
+                        config["source"]
+                    )
+            else:
+                self.source = None
+            if "status" in config:
+                if isinstance(config["status"],
+                              OAuth2ScopeConsentGrantStatus):
+                    self.status = config["status"]
+                else:
+                    self.status = OAuth2ScopeConsentGrantStatus(
+                        config["status"]
+                    )
+            else:
+                self.status = None
             self.user_id = config["userId"]\
                 if "userId" in config else None
         else:

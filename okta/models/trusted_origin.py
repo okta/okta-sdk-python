@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class TrustedOrigin(
     OktaObject
 ):
+    """
+    A class for TrustedOrigin objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.links = config["_links"]\

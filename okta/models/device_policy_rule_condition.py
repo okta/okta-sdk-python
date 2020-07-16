@@ -18,17 +18,31 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.device_policy_rule_condition_platform\
+    import DevicePolicyRuleConditionPlatform
 
 
 class DevicePolicyRuleCondition(
     OktaObject
 ):
+    """
+    A class for DevicePolicyRuleCondition objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.migrated = config["migrated"]\
                 if "migrated" in config else None
-            self.platform = config["platform"]\
-                if "platform" in config else None
+            if "platform" in config:
+                if isinstance(config["platform"],
+                              DevicePolicyRuleConditionPlatform):
+                    self.platform = config["platform"]
+                else:
+                    self.platform = DevicePolicyRuleConditionPlatform(
+                        config["platform"]
+                    )
+            else:
+                self.platform = None
             self.rooted = config["rooted"]\
                 if "rooted" in config else None
             self.trust_level = config["trustLevel"]\

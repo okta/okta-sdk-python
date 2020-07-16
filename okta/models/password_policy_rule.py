@@ -19,17 +19,41 @@ limitations under the License.
 
 from okta.models.policy_rule\
     import PolicyRule
+from okta.models.password_policy_rule_actions\
+    import PasswordPolicyRuleActions
+from okta.models.password_policy_rule_conditions\
+    import PasswordPolicyRuleConditions
 
 
 class PasswordPolicyRule(
     PolicyRule
 ):
+    """
+    A class for PasswordPolicyRule objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.actions = config["actions"]\
-                if "actions" in config else None
-            self.conditions = config["conditions"]\
-                if "conditions" in config else None
+            if "actions" in config:
+                if isinstance(config["actions"],
+                              PasswordPolicyRuleActions):
+                    self.actions = config["actions"]
+                else:
+                    self.actions = PasswordPolicyRuleActions(
+                        config["actions"]
+                    )
+            else:
+                self.actions = None
+            if "conditions" in config:
+                if isinstance(config["conditions"],
+                              PasswordPolicyRuleConditions):
+                    self.conditions = config["conditions"]
+                else:
+                    self.conditions = PasswordPolicyRuleConditions(
+                        config["conditions"]
+                    )
+            else:
+                self.conditions = None
             self.name = config["name"]\
                 if "name" in config else None
         else:

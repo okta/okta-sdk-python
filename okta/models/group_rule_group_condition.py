@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class GroupRuleGroupCondition(
     OktaObject
 ):
+    """
+    A class for GroupRuleGroupCondition objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.exclude = config["exclude"]\

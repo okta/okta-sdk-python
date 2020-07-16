@@ -18,14 +18,28 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.role_type\
+    import RoleType
 
 
 class AssignRoleRequest(
     OktaObject
 ):
+    """
+    A class for AssignRoleRequest objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.type = config["type"]\
-                if "type" in config else None
+            if "type" in config:
+                if isinstance(config["type"],
+                              RoleType):
+                    self.type = config["type"]
+                else:
+                    self.type = RoleType(
+                        config["type"]
+                    )
+            else:
+                self.type = None
         else:
             self.type = None

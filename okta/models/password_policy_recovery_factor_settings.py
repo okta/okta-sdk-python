@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class PasswordPolicyRecoveryFactorSettings(
     OktaObject
 ):
+    """
+    A class for PasswordPolicyRecoveryFactorSettings objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.status = config["status"]\

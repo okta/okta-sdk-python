@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class PolicyUserNameTemplate(
     OktaObject
 ):
+    """
+    A class for PolicyUserNameTemplate objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.template = config["template"]\

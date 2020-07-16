@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class ProvisioningGroups(
     OktaObject
 ):
+    """
+    A class for ProvisioningGroups objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.action = config["action"]\

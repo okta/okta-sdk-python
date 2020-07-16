@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class OAuth2ClaimConditions(
     OktaObject
 ):
+    """
+    A class for OAuth2ClaimConditions objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.scopes = config["scopes"]\

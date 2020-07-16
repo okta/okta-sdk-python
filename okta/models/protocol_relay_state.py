@@ -18,14 +18,28 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.protocol_relay_state_format\
+    import ProtocolRelayStateFormat
 
 
 class ProtocolRelayState(
     OktaObject
 ):
+    """
+    A class for ProtocolRelayState objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.format = config["format"]\
-                if "format" in config else None
+            if "format" in config:
+                if isinstance(config["format"],
+                              ProtocolRelayStateFormat):
+                    self.format = config["format"]
+                else:
+                    self.format = ProtocolRelayStateFormat(
+                        config["format"]
+                    )
+            else:
+                self.format = None
         else:
             self.format = None

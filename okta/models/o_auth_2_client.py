@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class OAuth2Client(
     OktaObject
 ):
+    """
+    A class for OAuth2Client objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.links = config["_links"]\

@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class LogUserAgent(
     OktaObject
 ):
+    """
+    A class for LogUserAgent objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.browser = config["browser"]\

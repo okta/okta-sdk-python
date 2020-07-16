@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class CsrMetadataSubjectAltNames(
     OktaObject
 ):
+    """
+    A class for CsrMetadataSubjectAltNames objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.dns_names = config["dnsNames"]\
