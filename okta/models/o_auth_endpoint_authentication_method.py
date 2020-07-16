@@ -24,7 +24,7 @@ class OAuthEndpointAuthenticationMethod(
     str,
     Enum
 ):
-    none = "none"
-    client_secret_post = "client_secret_post"
-    client_secret_basic = "client_secret_basic"
-    client_secret_jwt = "client_secret_jwt"
+    NONE = "none"
+    CLIENT_SECRET_POST = "client_secret_post"
+    CLIENT_SECRET_BASIC = "client_secret_basic"
+    CLIENT_SECRET_JWT = "client_secret_jwt"

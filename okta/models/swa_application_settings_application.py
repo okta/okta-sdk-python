@@ -17,13 +17,11 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
 from okta.models.application_settings_application\
     import ApplicationSettingsApplication
 
 
 class SwaApplicationSettingsApplication(
-    OktaObject,
     ApplicationSettingsApplication
 ):
     def __init__(self, config=None):

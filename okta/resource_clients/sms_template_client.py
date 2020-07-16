@@ -17,32 +17,41 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
+from urllib.parse import urlencode
 from okta.utils import format_url
-from okta.models.user_type\
-    import UserType
+from okta.models.sms_template\
+    import SmsTemplate
 
 
-class UserTypeClient():
+class SmsTemplateClient():
     """
-    A Client object for the UserType resource.
+    A Client object for the SmsTemplate resource.
     """
+
     def __init__(self):
         self._base_url = ""
 
-    async def list_user_types(
-            self
+    async def list_sms_templates(
+            self, query_params={}
     ):
         """
-        Fetches all User Types in your org
+        Enumerates custom SMS templates in your organization. A
+        subset of templates can be returned that match a templ
+        ate type.
         Args:
+            query_params {dict}: Map of query parameters for request
+            [query_params.templateType] {str}
         Returns:
-            list: Collection of UserType instances.
+            list: Collection of SmsTemplate instances.
         """
         http_method = "get".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/meta/types/user
+            /api/v1/templates/sms
             """)
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
         body = {}
         headers = {}
@@ -63,30 +72,28 @@ class UserTypeClient():
         try:
             result = []
             for item in response.get_body():
-                result.append(UserType(item))
+                result.append(SmsTemplate(item))
         except Exception as error:
             return (None, error)
         return (result, response, None)
 
-    async def create_user_type(
-            self, user_type
+    async def create_sms_template(
+            self, sms_template
     ):
         """
-        Creates a new User Type. A default User Type is automat
-        ically created along with your org, and you may add ano
-        ther 9 User Types for a maximum of 10.
+        Adds a new custom SMS template to your organization.
         Args:
-            {user_type}
+            {sms_template}
         Returns:
-            UserType
+            SmsTemplate
         """
         http_method = "post".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/meta/types/user
+            /api/v1/templates/sms
             """)
 
-        body = user_type.as_dict()
+        body = sms_template.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -106,27 +113,25 @@ class UserTypeClient():
             return (None, None, error)
 
         try:
-            result = UserType(
+            result = SmsTemplate(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
         return (result, response, None)
 
-    async def delete_user_type(
-            self, typeId
+    async def delete_sms_template(
+            self, templateId
     ):
         """
-        Deletes a User Type permanently. This operation is not
-        permitted for the default type, nor for any User Type t
-        hat has existing users
+        Removes an SMS template.
         Args:
-            type_id {str}
+            template_id {str}
         """
         http_method = "delete".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/meta/types/user/{typeId}
+            /api/v1/templates/sms/{templateId}
             """)
 
         body = {}
@@ -147,21 +152,20 @@ class UserTypeClient():
 
         return (response, None)
 
-    async def get_user_type(
-            self, typeId
+    async def get_sms_template(
+            self, templateId
     ):
         """
-        Fetches a User Type by ID. The special identifier `defa
-        ult` may be used to fetch the default User Type.
+        Fetches a specific template by `id`
         Args:
-            type_id {str}
+            template_id {str}
         Returns:
-            UserType
+            SmsTemplate
         """
         http_method = "get".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/meta/types/user/{typeId}
+            /api/v1/templates/sms/{templateId}
             """)
 
         body = {}
@@ -181,31 +185,31 @@ class UserTypeClient():
             return (None, None, error)
 
         try:
-            result = UserType(
+            result = SmsTemplate(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
         return (result, response, None)
 
-    async def update_user_type(
-            self, typeId, user_type
+    async def partial_update_sms_template(
+            self, templateId, sms_template
     ):
         """
-        Updates an existing User Type
+        Updates only some of the SMS template properties:
         Args:
-            type_id {str}
-            {user_type}
+            template_id {str}
+            {sms_template}
         Returns:
-            UserType
+            SmsTemplate
         """
         http_method = "post".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/meta/types/user/{typeId}
+            /api/v1/templates/sms/{templateId}
             """)
 
-        body = user_type.as_dict()
+        body = sms_template.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -225,31 +229,31 @@ class UserTypeClient():
             return (None, None, error)
 
         try:
-            result = UserType(
+            result = SmsTemplate(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
         return (result, response, None)
 
-    async def replace_user_type(
-            self, typeId, user_type
+    async def update_sms_template(
+            self, templateId, sms_template
     ):
         """
-        Replace an existing User Type
+        Updates the SMS template.
         Args:
-            type_id {str}
-            {user_type}
+            template_id {str}
+            {sms_template}
         Returns:
-            UserType
+            SmsTemplate
         """
         http_method = "put".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/meta/types/user/{typeId}
+            /api/v1/templates/sms/{templateId}
             """)
 
-        body = user_type.as_dict()
+        body = sms_template.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -269,7 +273,7 @@ class UserTypeClient():
             return (None, None, error)
 
         try:
-            result = UserType(
+            result = SmsTemplate(
                 response.get_body()
             )
         except Exception as error:

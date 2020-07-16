@@ -27,6 +27,7 @@ class LogEventClient():
     """
     A Client object for the LogEvent resource.
     """
+
     def __init__(self):
         self._base_url = ""
 

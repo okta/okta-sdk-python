@@ -37,6 +37,7 @@ class GroupClient():
     """
     A Client object for the Group resource.
     """
+
     def __init__(self):
         self._base_url = ""
 

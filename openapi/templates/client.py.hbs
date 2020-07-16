@@ -6,7 +6,7 @@ from okta.request_executor import RequestExecutor
 from okta.cache.no_op_cache import NoOpCache
 from okta.cache.okta_cache import OktaCache
 {{#each resources as |resource|}}
-from okta.generated_clients.{{snakeCase resource}}_client\
+from okta.resource_clients.{{snakeCase resource}}_client\
     import {{pascalCase resource}}Client
 {{/each}}
 

@@ -40,6 +40,7 @@ class ApplicationClient():
     """
     A Client object for the Application resource.
     """
+
     def __init__(self):
         self._base_url = ""
 

@@ -25,7 +25,7 @@ class PasswordCredentialHashAlgorithm(
     Enum
 ):
     BCRYPT = "BCRYPT"
-    SHA-512 = "SHA-512"
-    SHA-256 = "SHA-256"
-    SHA-1 = "SHA-1"
-    MD5 = "MD5"
+    SHA_512 = "SHA-512"
+    SHA_256 = "SHA-256"
+    SHA_1 = "SHA-1"
+    MD_5 = "MD5"

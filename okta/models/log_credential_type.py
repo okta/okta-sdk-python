@@ -30,5 +30,5 @@ class LogCredentialType(
     ASSERTION = "ASSERTION"
     IWA = "IWA"
     EMAIL = "EMAIL"
-    OAUTH2 = "OAUTH2"
+    OAUTH_2 = "OAUTH2"
     JWT = "JWT"

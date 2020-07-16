@@ -9,20 +9,24 @@ class {{pascalCase model.modelName}}(
     Enum
 ):
     {{#each model.enum as |enum|}}
-    {{enum}} = "{{enum}}"
+    {{{replaceColons (upperCase (snakeCase enum))}}} = "{{enum}}"
     {{/each}}
 {{else}}
 
-from okta.okta_object import OktaObject
 {{#if (ne model.extends undefined)}}
 from okta.models.{{snakeCase model.extends}}\
     import {{model.extends}}
+{{else}}
+from okta.okta_object import OktaObject
 {{/if}}
 
 
 class {{pascalCase model.modelName}}(
-    OktaObject{{#if (ne model.extends undefined)}},
-    {{model.extends}}{{/if}}
+    {{#if (ne model.extends undefined)}}
+    {{model.extends}}
+    {{else}}
+    OktaObject
+    {{/if}}
 ):
     def __init__(self, config=None):
         {{#if (gt model.properties.length 0)}}

@@ -31,6 +31,7 @@ class UserFactorClient():
     """
     A Client object for the UserFactor resource.
     """
+
     def __init__(self):
         self._base_url = ""
 

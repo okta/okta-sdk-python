@@ -17,13 +17,11 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
 from okta.models.browser_plugin_application\
     import BrowserPluginApplication
 
 
 class SwaThreeFieldApplication(
-    OktaObject,
     BrowserPluginApplication
 ):
     def __init__(self, config=None):

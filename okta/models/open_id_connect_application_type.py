@@ -24,7 +24,7 @@ class OpenIdConnectApplicationType(
     str,
     Enum
 ):
-    web = "web"
-    native = "native"
-    browser = "browser"
-    service = "service"
+    WEB = "web"
+    NATIVE = "native"
+    BROWSER = "browser"
+    SERVICE = "service"

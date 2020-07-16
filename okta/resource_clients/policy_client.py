@@ -29,6 +29,7 @@ class PolicyClient():
     """
     A Client object for the Policy resource.
     """
+
     def __init__(self):
         self._base_url = ""
 

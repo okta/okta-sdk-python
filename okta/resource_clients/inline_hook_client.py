@@ -19,34 +19,34 @@ limitations under the License.
 
 from urllib.parse import urlencode
 from okta.utils import format_url
-from okta.models.trusted_origin\
-    import TrustedOrigin
+from okta.models.inline_hook\
+    import InlineHook
+from okta.models.inline_hook_response\
+    import InlineHookResponse
 
 
-class TrustedOriginClient():
+class InlineHookClient():
     """
-    A Client object for the TrustedOrigin resource.
+    A Client object for the InlineHook resource.
     """
+
     def __init__(self):
         self._base_url = ""
 
-    async def list_origins(
+    async def list_inline_hooks(
             self, query_params={}
     ):
         """
         Args:
             query_params {dict}: Map of query parameters for request
-            [query_params.q] {str}
-            [query_params.filter] {str}
-            [query_params.after] {str}
-            [query_params.limit] {str}
+            [query_params.type] {str}
         Returns:
-            list: Collection of TrustedOrigin instances.
+            list: Collection of InlineHook instances.
         """
         http_method = "get".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/trustedOrigins
+            /api/v1/inlineHooks
             """)
         if query_params:
             encoded_query_params = urlencode(query_params)
@@ -71,27 +71,27 @@ class TrustedOriginClient():
         try:
             result = []
             for item in response.get_body():
-                result.append(TrustedOrigin(item))
+                result.append(InlineHook(item))
         except Exception as error:
             return (None, error)
         return (result, response, None)
 
-    async def create_origin(
-            self, trusted_origin
+    async def create_inline_hook(
+            self, inline_hook
     ):
         """
         Args:
-            {trusted_origin}
+            {inline_hook}
         Returns:
-            TrustedOrigin
+            InlineHook
         """
         http_method = "post".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/trustedOrigins
+            /api/v1/inlineHooks
             """)
 
-        body = trusted_origin.as_dict()
+        body = inline_hook.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -111,24 +111,28 @@ class TrustedOriginClient():
             return (None, None, error)
 
         try:
-            result = TrustedOrigin(
+            result = InlineHook(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
         return (result, response, None)
 
-    async def delete_origin(
-            self, trustedOriginId
+    async def delete_inline_hook(
+            self, inlineHookId
     ):
         """
+        Deletes the Inline Hook matching the provided id. Once
+        deleted, the Inline Hook is unrecoverable. As a safety
+        precaution, only Inline Hooks with a status of INACTIVE
+        are eligible for deletion.
         Args:
-            trusted_origin_id {str}
+            inline_hook_id {str}
         """
         http_method = "delete".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/trustedOrigins/{trustedOriginId}
+            /api/v1/inlineHooks/{inlineHookId}
             """)
 
         body = {}
@@ -149,19 +153,20 @@ class TrustedOriginClient():
 
         return (response, None)
 
-    async def get_origin(
-            self, trustedOriginId
+    async def get_inline_hook(
+            self, inlineHookId
     ):
         """
+        Gets an inline hook by ID
         Args:
-            trusted_origin_id {str}
+            inline_hook_id {str}
         Returns:
-            TrustedOrigin
+            InlineHook
         """
         http_method = "get".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/trustedOrigins/{trustedOriginId}
+            /api/v1/inlineHooks/{inlineHookId}
             """)
 
         body = {}
@@ -181,30 +186,31 @@ class TrustedOriginClient():
             return (None, None, error)
 
         try:
-            result = TrustedOrigin(
+            result = InlineHook(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
         return (result, response, None)
 
-    async def update_origin(
-            self, trustedOriginId, trusted_origin
+    async def update_inline_hook(
+            self, inlineHookId, inline_hook
     ):
         """
+        Updates an inline hook by ID
         Args:
-            trusted_origin_id {str}
-            {trusted_origin}
+            inline_hook_id {str}
+            {inline_hook}
         Returns:
-            TrustedOrigin
+            InlineHook
         """
         http_method = "put".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/trustedOrigins/{trustedOriginId}
+            /api/v1/inlineHooks/{inlineHookId}
             """)
 
-        body = trusted_origin.as_dict()
+        body = inline_hook.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -224,26 +230,76 @@ class TrustedOriginClient():
             return (None, None, error)
 
         try:
-            result = TrustedOrigin(
+            result = InlineHook(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
         return (result, response, None)
 
-    async def activate_origin(
-            self, trustedOriginId
+    async def execute_inline_hook(
+            self, inlineHookId, inline_hook_payload
     ):
         """
+        Executes the Inline Hook matching the provided inlineHo
+        okId using the request body as the input. This will sen
+        d the provided data through the Channel and return a re
+        sponse if it matches the correct data contract. This ex
+        ecution endpoint should only be used for testing purpos
+        es.
         Args:
-            trusted_origin_id {str}
+            inline_hook_id {str}
+            {inline_hook_payload}
         Returns:
-            TrustedOrigin
+            InlineHookResponse
         """
         http_method = "post".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/trustedOrigins/{trustedOriginId}/lifecycle
+            /api/v1/inlineHooks/{inlineHookId}/execute
+            """)
+
+        body = inline_hook_payload.as_dict()
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = InlineHookResponse(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, error)
+        return (result, response, None)
+
+    async def activate_inline_hook(
+            self, inlineHookId
+    ):
+        """
+        Activates the Inline Hook matching the provided id
+        Args:
+            inline_hook_id {str}
+        Returns:
+            InlineHook
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/inlineHooks/{inlineHookId}/lifecycle
                 activate
             """)
 
@@ -264,26 +320,27 @@ class TrustedOriginClient():
             return (None, None, error)
 
         try:
-            result = TrustedOrigin(
+            result = InlineHook(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
         return (result, response, None)
 
-    async def deactivate_origin(
-            self, trustedOriginId
+    async def deactivate_inline_hook(
+            self, inlineHookId
     ):
         """
+        Deactivates the Inline Hook matching the provided id
         Args:
-            trusted_origin_id {str}
+            inline_hook_id {str}
         Returns:
-            TrustedOrigin
+            InlineHook
         """
         http_method = "post".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/trustedOrigins/{trustedOriginId}/lifecycle
+            /api/v1/inlineHooks/{inlineHookId}/lifecycle
                 deactivate
             """)
 
@@ -304,7 +361,7 @@ class TrustedOriginClient():
             return (None, None, error)
 
         try:
-            result = TrustedOrigin(
+            result = InlineHook(
                 response.get_body()
             )
         except Exception as error:

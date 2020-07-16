@@ -36,6 +36,7 @@ class IdentityProviderClient():
     """
     A Client object for the IdentityProvider resource.
     """
+
     def __init__(self):
         self._base_url = ""
 

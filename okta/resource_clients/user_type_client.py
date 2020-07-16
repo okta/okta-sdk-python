@@ -18,29 +18,31 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.utils import format_url
-from okta.models.event_hook\
-    import EventHook
+from okta.models.user_type\
+    import UserType
 
 
-class EventHookClient():
+class UserTypeClient():
     """
-    A Client object for the EventHook resource.
+    A Client object for the UserType resource.
     """
+
     def __init__(self):
         self._base_url = ""
 
-    async def list_event_hooks(
+    async def list_user_types(
             self
     ):
         """
+        Fetches all User Types in your org
         Args:
         Returns:
-            list: Collection of EventHook instances.
+            list: Collection of UserType instances.
         """
         http_method = "get".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/eventHooks
+            /api/v1/meta/types/user
             """)
 
         body = {}
@@ -62,27 +64,30 @@ class EventHookClient():
         try:
             result = []
             for item in response.get_body():
-                result.append(EventHook(item))
+                result.append(UserType(item))
         except Exception as error:
             return (None, error)
         return (result, response, None)
 
-    async def create_event_hook(
-            self, event_hook
+    async def create_user_type(
+            self, user_type
     ):
         """
+        Creates a new User Type. A default User Type is automat
+        ically created along with your org, and you may add ano
+        ther 9 User Types for a maximum of 10.
         Args:
-            {event_hook}
+            {user_type}
         Returns:
-            EventHook
+            UserType
         """
         http_method = "post".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/eventHooks
+            /api/v1/meta/types/user
             """)
 
-        body = event_hook.as_dict()
+        body = user_type.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -102,24 +107,27 @@ class EventHookClient():
             return (None, None, error)
 
         try:
-            result = EventHook(
+            result = UserType(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
         return (result, response, None)
 
-    async def delete_event_hook(
-            self, eventHookId
+    async def delete_user_type(
+            self, typeId
     ):
         """
+        Deletes a User Type permanently. This operation is not
+        permitted for the default type, nor for any User Type t
+        hat has existing users
         Args:
-            event_hook_id {str}
+            type_id {str}
         """
         http_method = "delete".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/eventHooks/{eventHookId}
+            /api/v1/meta/types/user/{typeId}
             """)
 
         body = {}
@@ -140,19 +148,21 @@ class EventHookClient():
 
         return (response, None)
 
-    async def get_event_hook(
-            self, eventHookId
+    async def get_user_type(
+            self, typeId
     ):
         """
+        Fetches a User Type by ID. The special identifier `defa
+        ult` may be used to fetch the default User Type.
         Args:
-            event_hook_id {str}
+            type_id {str}
         Returns:
-            EventHook
+            UserType
         """
         http_method = "get".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/eventHooks/{eventHookId}
+            /api/v1/meta/types/user/{typeId}
             """)
 
         body = {}
@@ -172,30 +182,31 @@ class EventHookClient():
             return (None, None, error)
 
         try:
-            result = EventHook(
+            result = UserType(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
         return (result, response, None)
 
-    async def update_event_hook(
-            self, eventHookId, event_hook
+    async def update_user_type(
+            self, typeId, user_type
     ):
         """
+        Updates an existing User Type
         Args:
-            event_hook_id {str}
-            {event_hook}
+            type_id {str}
+            {user_type}
         Returns:
-            EventHook
+            UserType
         """
-        http_method = "put".upper()
+        http_method = "post".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/eventHooks/{eventHookId}
+            /api/v1/meta/types/user/{typeId}
             """)
 
-        body = event_hook.as_dict()
+        body = user_type.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -215,30 +226,35 @@ class EventHookClient():
             return (None, None, error)
 
         try:
-            result = EventHook(
+            result = UserType(
                 response.get_body()
             )
         except Exception as error:
             return (None, error)
         return (result, response, None)
 
-    async def activate_event_hook(
-            self, eventHookId
+    async def replace_user_type(
+            self, typeId, user_type
     ):
         """
+        Replace an existing User Type
         Args:
-            event_hook_id {str}
+            type_id {str}
+            {user_type}
         Returns:
-            EventHook
+            UserType
         """
-        http_method = "post".upper()
+        http_method = "put".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/eventHooks/{eventHookId}/lifecycle/activate
+            /api/v1/meta/types/user/{typeId}
             """)
 
-        body = {}
-        headers = {}
+        body = user_type.as_dict()
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -254,86 +270,7 @@ class EventHookClient():
             return (None, None, error)
 
         try:
-            result = EventHook(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def deactivate_event_hook(
-            self, eventHookId
-    ):
-        """
-        Args:
-            event_hook_id {str}
-        Returns:
-            EventHook
-        """
-        http_method = "post".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/eventHooks/{eventHookId}/lifecycle
-                deactivate
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = EventHook(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def verify_event_hook(
-            self, eventHookId
-    ):
-        """
-        Args:
-            event_hook_id {str}
-        Returns:
-            EventHook
-        """
-        http_method = "post".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/eventHooks/{eventHookId}/lifecycle/verify
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = EventHook(
+            result = UserType(
                 response.get_body()
             )
         except Exception as error:

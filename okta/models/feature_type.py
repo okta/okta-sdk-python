@@ -24,4 +24,4 @@ class FeatureType(
     str,
     Enum
 ):
-    self-service = "self-service"
+    SELF_SERVICE = "self-service"

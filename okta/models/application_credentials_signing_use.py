@@ -24,4 +24,4 @@ class ApplicationCredentialsSigningUse(
     str,
     Enum
 ):
-    sig = "sig"
+    SIG = "sig"

@@ -24,4 +24,4 @@ class UserNextLogin(
     str,
     Enum
 ):
-    changePassword = "changePassword"
+    CHANGE_PASSWORD = "changePassword"
