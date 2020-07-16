@@ -17,7 +17,8 @@ class HTTPClient:
         self._default_headers = http_config["headers"]
         # Create timeout for all HTTP requests
         self._timeout = aiohttp.ClientTimeout(
-            total=http_config["requestTimeout"]
+            total=http_config["requestTimeout"] if "requestTimeout" in
+            http_config and http_config["requestTimeout"] > 0 else None
         )
 
     async def send_request(self, request):
@@ -43,7 +44,7 @@ class HTTPClient:
                 method=request["method"],
                 url=request["url"],
                 headers=self._default_headers,
-                data={} if "data" not in request else request["data"],
+                json=request["data"] if "data" in request else {},
                 timeout=self._timeout
             ) as response:
                 return (response.request_info,

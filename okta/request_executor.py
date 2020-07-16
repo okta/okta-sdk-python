@@ -4,6 +4,7 @@ from okta.oauth import OAuth
 from okta.api_response import OktaAPIResponse
 from okta.error_messages import ERROR_MESSAGE_429_MISSING_DATE_X_RESET
 from okta.utils import convert_date_time_to_seconds
+import humps
 import time
 from http import HTTPStatus
 import json
@@ -114,7 +115,7 @@ class RequestExecutor:
         # finish building request and return
         request["headers"] = headers
         request["url"] = url
-        request["data"] = body
+        request["data"] = humps.camelize(body)
 
         return (request, None)
 

@@ -27,8 +27,8 @@ class OktaAPIResponse():
                 "" == res_details.content_type:
             self.build_json_response(response_body)
         else:
-            raise ValueError(("Can't build response for"
-                              f" {res_details.content_type}"))
+            # Save response as text
+            self._body = response_body
 
         # Get links for next if more results exist
         if self._body is not None:

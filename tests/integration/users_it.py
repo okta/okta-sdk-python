@@ -1,6 +1,7 @@
 import pytest
 import okta.models as models
 from tests.mocks import MockOktaClient as Client
+from okta.errors.okta_api_error import OktaAPIError
 from okta.client import Client as OktaClient
 
 
@@ -12,7 +13,7 @@ class TestUsersResource:
         test_client = OktaClient()
 
         password = models.PasswordCredential({
-            "value": "Password"
+            "value": "Password150kta"
         })
 
         user_creds = models.UserCredentials({
@@ -35,11 +36,6 @@ class TestUsersResource:
         user, resp, err = await test_client.create_user(
             create_user_req, query_params)
 
-        print(user, resp, err)
-        if err:
-            print(err.message)
-            return
-
         got_user, resp, err = await test_client.get_user(user.id)
         assert got_user.id == user.id
 
@@ -57,8 +53,12 @@ class TestUsersResource:
         _, err = await test_client.deactivate_or_delete_user(user_id)
         assert err is None
 
-        _, _, err = await test_client.get_user(user_id)
-        assert err is not None
+        _, err = await test_client.deactivate_or_delete_user(user_id)
+        assert err is None
+
+        user, _, err = await test_client.get_user(user_id)
+        assert user is None
+        assert isinstance(err, OktaAPIError)
 
     def test_activate_user(self):
         test_client = Client()

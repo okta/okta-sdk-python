@@ -16,7 +16,9 @@ class OktaObject:
         """
         result = {}
         for key, val in vars(self).items():
-            if self._is_primitive(val) or val is None:
+            if val is None:
+                continue
+            if self._is_primitive(val):
                 result[key] = val
             else:
                 result[key] = val.as_dict()
