@@ -4,7 +4,7 @@ from okta.cache.no_op_cache import NoOpCache
 from okta.user_agent import UserAgent
 from okta.client import Client
 from okta.oauth import OAuth
-from okta.errors.okta_api_error import OktaAPIError
+from okta.errors.http_error import HTTPError
 import tests.mocks as mocks
 import pytest
 import aiohttp
@@ -19,8 +19,9 @@ PRIVATE_KEY = mocks.PRIVATE_KEY
 GET_USERS_CALL = mocks.GET_USERS_CALL
 
 
+@pytest.mark.vcr()
 @ pytest.mark.asyncio
-async def test_client_success_call_SSWS(monkeypatch):
+async def test_client_success_call_SSWS(fs):
     ssws_client = Client({
         "orgUrl": ORG_URL,
         "token": API_TOKEN
@@ -32,9 +33,6 @@ async def test_client_success_call_SSWS(monkeypatch):
                         {},
                         {})
 
-    monkeypatch.setattr(RequestExecutor, 'fire_request',
-                        mocks.mock_GET_HTTP_Client_response_valid)
-
     req, res_details, resp_body, error = await ssws_client\
         .get_request_executor().fire_request(req)
 
@@ -43,13 +41,13 @@ async def test_client_success_call_SSWS(monkeypatch):
     assert "Authorization" in req["headers"]
     assert req["headers"]["Authorization"].startswith("SSWS")
     assert res_details.status == 200
-    assert res_details.headers["Content-Type"] == "application/json"
+    assert "application/json" in res_details.headers["Content-Type"]
     assert resp_body is not None
 
 
 @ pytest.mark.vcr()
 @ pytest.mark.asyncio
-async def test_client_error_call_SSWS():
+async def test_client_error_call_SSWS(fs):
     ssws_client = Client({
         "orgUrl": ORG_URL,
         "token": API_TOKEN + "wrong token"
@@ -68,12 +66,14 @@ async def test_client_error_call_SSWS():
         req["url"], res_details, resp_body)
 
     assert parsed is None
-    assert isinstance(error, OktaAPIError)
-    assert error.message.startswith("Okta HTTP")
+    assert res_details.status == 404
+    assert isinstance(error, HTTPError)
+    assert error.message.startswith("HTTP 404")
 
 
-@ pytest.mark.asyncio
-async def test_client_success_call_oauth(monkeypatch):
+@pytest.mark.vcr()
+@pytest.mark.asyncio
+async def test_client_success_call_oauth(fs, monkeypatch):
     oauth_client = Client({
         "orgUrl": ORG_URL,
         "authorizationMode": "PrivateKey",
@@ -91,23 +91,21 @@ async def test_client_success_call_oauth(monkeypatch):
         {},
         {})
 
-    monkeypatch.setattr(RequestExecutor, 'fire_request',
-                        mocks.mock_GET_HTTP_Client_response_valid)
     req, res_details, resp_body, error = await oauth_client\
         .get_request_executor().fire_request(req)
 
     assert error is None
     assert "User-Agent" in req["headers"]
     assert "Authorization" in req["headers"]
-    assert req["headers"]["Authorization"].startswith("SSWS")
+    assert req["headers"]["Authorization"].startswith("Bearer")
     assert res_details.status == 200
-    assert res_details.headers["Content-Type"] == "application/json"
+    assert "application/json" in res_details.headers["Content-Type"]
     assert resp_body is not None
 
 
 @pytest.mark.vcr()
 @ pytest.mark.asyncio
-async def test_client_error_call_oauth(monkeypatch):
+async def test_client_error_call_oauth(fs, monkeypatch):
     oauth_client = Client({
         "orgUrl": ORG_URL,
         "authorizationMode": "PrivateKey",
@@ -130,8 +128,10 @@ async def test_client_error_call_oauth(monkeypatch):
     parsed, error = HTTPClient.check_response_for_error(
         req["url"], res_details, resp_body)
 
-    assert isinstance(error, OktaAPIError)
-    assert error.message.startswith("Okta HTTP")
+    assert parsed is None
+    assert res_details.status == 404
+    assert isinstance(error, HTTPError)
+    assert error.message.startswith("HTTP 404")
 
 
 @ pytest.mark.asyncio

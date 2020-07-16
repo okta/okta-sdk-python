@@ -21,7 +21,7 @@ Testing Okta Client Instantiation in different scenarios
 """
 
 
-def test_constructor_user_config_empty():
+def test_constructor_user_config_empty(fs):
     config = {}
     with pytest.raises(ValueError) as exception_info:
         OktaClient(user_config=config)
@@ -90,14 +90,14 @@ def test_constructor_user_config_url_punctuation():
                ERROR_MESSAGE_ORG_URL_TYPO, f"Current value: {url}"])
 
 
-def test_constructor_user_config_token_empty():
+def test_constructor_user_config_token_empty(fs):
     config = {'orgUrl': 'https://test.okta.com', 'token': ''}
     with pytest.raises(ValueError) as exception_info:
         OktaClient(user_config=config)
     assert ERROR_MESSAGE_API_TOKEN_MISSING in str(exception_info.value)
 
 
-def test_constructor_user_config_url_has_apiToken():
+def test_constructor_user_config_url_has_apiToken(fs):
     config = {
         'orgUrl': 'https://test.okta.com', 'token': '{apiToken}'
     }
@@ -152,7 +152,7 @@ def test_constructor_user_config_PK(private_key):
     assert private_key == loaded_config['client']['privateKey']
 
 
-def test_constructor_user_config_PK_empty():
+def test_constructor_user_config_PK_empty(fs):
     org_url = "https://test.okta.com"
     authorizationMode = "PrivateKey"
 
