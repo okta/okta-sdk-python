@@ -65,7 +65,7 @@ class RequestExecutor:
         })
 
     async def create_request(self, method: str, url: str, body: dict = None,
-                             headers: dict = {}):
+                             headers: dict = {}, oauth=False):
         """
         Creates request for request executor's HTTP client.
 
@@ -91,7 +91,7 @@ class RequestExecutor:
             url = self._config["client"]["orgUrl"] + url
 
         # OAuth
-        if self._authorization_mode == "PrivateKey":
+        if self._authorization_mode == "PrivateKey" and not oauth:
             # check if access token exists
             if self._cache.contains("OKTA_ACCESS_TOKEN"):
                 access_token = self._cache.get("OKTA_ACCESS_TOKEN")

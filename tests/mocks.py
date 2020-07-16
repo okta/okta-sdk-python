@@ -9,8 +9,8 @@ import datetime as dt
 import multidict
 
 REQUEST_TIMEOUT = 5  # seconds
-ORG_URL = "https://your.okta.com"
-API_TOKEN = "yourApiToken"
+ORG_URL = "https://test.okta.com"
+API_TOKEN = "myApiToken"
 CLIENT_ID = "yourClientId"
 SCOPES = ["okta.scope.1", "okta.scope.2"]
 PRIVATE_KEY = "yourPrivateKey"
@@ -214,7 +214,7 @@ async def mock_invalid_HTTP_response(*args, **kwargs):
 
 
 async def mock_access_token(*args, **kwargs):
-    return ("This is an OAuth access token", None)
+    return ("myOAuthToken", None)
 
 
 def mock_pause_function(*args, **kwargs):

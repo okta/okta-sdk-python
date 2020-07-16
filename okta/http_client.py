@@ -70,21 +70,23 @@ class HTTPClient:
         """
         # Retrieve dictionary repr and response status code
         if response_details.content_type == "application/xml":
-            dict_resp = xmltodict.parse(response_body)
+            formatted_response = xmltodict.parse(response_body)
+        elif response_details.content_type == "application/json":
+            formatted_response = json.loads(response_body)
         else:
-            dict_resp = json.loads(response_body)
+            formatted_response = response_body
 
         status_code = response_details.status
 
         # check if call was succesful
         if 200 <= status_code <= 299:
-            return (dict_resp, None)
+            return (formatted_response, None)
         else:
             # create errors
             try:
-                error = OktaAPIError(url, response_details, dict_resp)
+                error = OktaAPIError(url, response_details, formatted_response)
             except Exception:
-                error = HTTPError(url, response_details, dict_resp)
+                error = HTTPError(url, response_details, formatted_response)
             return (None, error)
 
     @staticmethod
