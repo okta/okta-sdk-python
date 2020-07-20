@@ -42,3 +42,11 @@ class Csr(
             self.csr = None
             self.id = None
             self.kty = None
+
+    def request_format(self):
+        return {
+            "created": self.created,
+            "csr": self.csr,
+            "id": self.id,
+            "kty": self.kty
+        }

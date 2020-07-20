@@ -39,3 +39,10 @@ class SecurityQuestionUserFactorProfile(
             self.answer = None
             self.question = None
             self.question_text = None
+
+    def request_format(self):
+        return {
+            "answer": self.answer,
+            "question": self.question,
+            "questionText": self.question_text
+        }

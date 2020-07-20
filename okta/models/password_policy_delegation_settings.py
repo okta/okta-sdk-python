@@ -43,3 +43,8 @@ class PasswordPolicyDelegationSettings(
                 self.options = None
         else:
             self.options = None
+
+    def request_format(self):
+        return {
+            "options": self.options
+        }

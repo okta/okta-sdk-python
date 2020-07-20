@@ -36,3 +36,9 @@ class PasswordExpirationPolicyRuleCondition(
         else:
             self.number = None
             self.unit = None
+
+    def request_format(self):
+        return {
+            "number": self.number,
+            "unit": self.unit
+        }

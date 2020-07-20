@@ -33,3 +33,8 @@ class SmsUserFactorProfile(
                 if "phoneNumber" in config else None
         else:
             self.phone_number = None
+
+    def request_format(self):
+        return {
+            "phoneNumber": self.phone_number
+        }

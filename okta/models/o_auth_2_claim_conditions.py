@@ -33,3 +33,8 @@ class OAuth2ClaimConditions(
                 if "scopes" in config else None
         else:
             self.scopes = None
+
+    def request_format(self):
+        return {
+            "scopes": self.scopes
+        }

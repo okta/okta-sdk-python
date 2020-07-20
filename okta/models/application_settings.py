@@ -62,3 +62,11 @@ class ApplicationSettings(
             self.implicit_assignment = None
             self.inline_hook_id = None
             self.notifications = None
+
+    def request_format(self):
+        return {
+            "app": self.app,
+            "implicitAssignment": self.implicit_assignment,
+            "inlineHookId": self.inline_hook_id,
+            "notifications": self.notifications
+        }

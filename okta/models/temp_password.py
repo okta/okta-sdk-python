@@ -33,3 +33,8 @@ class TempPassword(
                 if "tempPassword" in config else None
         else:
             self.temp_password = None
+
+    def request_format(self):
+        return {
+            "tempPassword": self.temp_password
+        }

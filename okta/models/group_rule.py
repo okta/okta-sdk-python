@@ -84,3 +84,15 @@ class GroupRule(
             self.name = None
             self.status = None
             self.type = None
+
+    def request_format(self):
+        return {
+            "actions": self.actions,
+            "conditions": self.conditions,
+            "created": self.created,
+            "id": self.id,
+            "lastUpdated": self.last_updated,
+            "name": self.name,
+            "status": self.status,
+            "type": self.type
+        }

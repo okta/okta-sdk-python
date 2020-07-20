@@ -44,3 +44,8 @@ class BrowserPluginApplication(
                 self.credentials = None
         else:
             self.credentials = None
+
+    def request_format(self):
+        return {
+            "credentials": self.credentials
+        }

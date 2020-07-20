@@ -60,3 +60,10 @@ class PushUserFactor(
             self.expires_at = None
             self.factor_result = None
             self.profile = None
+
+    def request_format(self):
+        return {
+            "expiresAt": self.expires_at,
+            "factorResult": self.factor_result,
+            "profile": self.profile
+        }

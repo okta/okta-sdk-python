@@ -36,3 +36,9 @@ class InlineHookChannelConfigHeaders(
         else:
             self.key = None
             self.value = None
+
+    def request_format(self):
+        return {
+            "key": self.key,
+            "value": self.value
+        }

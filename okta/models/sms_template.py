@@ -71,3 +71,14 @@ class SmsTemplate(
             self.template = None
             self.translations = None
             self.type = None
+
+    def request_format(self):
+        return {
+            "created": self.created,
+            "id": self.id,
+            "lastUpdated": self.last_updated,
+            "name": self.name,
+            "template": self.template,
+            "translations": self.translations,
+            "type": self.type
+        }

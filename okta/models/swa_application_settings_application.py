@@ -46,3 +46,12 @@ class SwaApplicationSettingsApplication(
             self.password_field = None
             self.url = None
             self.username_field = None
+
+    def request_format(self):
+        return {
+            "buttonField": self.button_field,
+            "loginUrlRegex": self.login_url_regex,
+            "passwordField": self.password_field,
+            "url": self.url,
+            "usernameField": self.username_field
+        }

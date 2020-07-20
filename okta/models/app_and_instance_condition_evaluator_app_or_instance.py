@@ -39,3 +39,10 @@ class AppAndInstanceConditionEvaluatorAppOrInstance(
             self.id = None
             self.name = None
             self.type = None
+
+    def request_format(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "type": self.type
+        }

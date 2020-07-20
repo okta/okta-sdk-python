@@ -33,3 +33,8 @@ class PasswordPolicyRuleAction(
                 if "access" in config else None
         else:
             self.access = None
+
+    def request_format(self):
+        return {
+            "access": self.access
+        }

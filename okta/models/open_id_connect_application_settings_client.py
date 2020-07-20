@@ -35,54 +35,54 @@ class OpenIdConnectApplicationSettingsClient(
 
     def __init__(self, config=None):
         if config:
-            if "application_type" in config:
-                if isinstance(config["application_type"],
+            if "applicationType" in config:
+                if isinstance(config["applicationType"],
                               OpenIdConnectApplicationType):
-                    self.application_type = config["application_type"]
+                    self.application_type = config["applicationType"]
                 else:
                     self.application_type = OpenIdConnectApplicationType(
-                        config["application_type"]
+                        config["applicationType"]
                     )
             else:
                 self.application_type = None
-            self.client_uri = config["client_uri"]\
-                if "client_uri" in config else None
-            if "consent_method" in config:
-                if isinstance(config["consent_method"],
+            self.client_uri = config["clientUri"]\
+                if "clientUri" in config else None
+            if "consentMethod" in config:
+                if isinstance(config["consentMethod"],
                               OpenIdConnectApplicationConsentMethod):
-                    self.consent_method = config["consent_method"]
+                    self.consent_method = config["consentMethod"]
                 else:
                     self.consent_method = OpenIdConnectApplicationConsentMethod(
-                        config["consent_method"]
+                        config["consentMethod"]
                     )
             else:
                 self.consent_method = None
-            self.grant_types = config["grant_types"]\
-                if "grant_types" in config else None
-            self.initiate_login_uri = config["initiate_login_uri"]\
-                if "initiate_login_uri" in config else None
-            if "issuer_mode" in config:
-                if isinstance(config["issuer_mode"],
+            self.grant_types = config["grantTypes"]\
+                if "grantTypes" in config else None
+            self.initiate_login_uri = config["initiateLoginUri"]\
+                if "initiateLoginUri" in config else None
+            if "issuerMode" in config:
+                if isinstance(config["issuerMode"],
                               OpenIdConnectApplicationIssuerMode):
-                    self.issuer_mode = config["issuer_mode"]
+                    self.issuer_mode = config["issuerMode"]
                 else:
                     self.issuer_mode = OpenIdConnectApplicationIssuerMode(
-                        config["issuer_mode"]
+                        config["issuerMode"]
                     )
             else:
                 self.issuer_mode = None
-            self.logo_uri = config["logo_uri"]\
-                if "logo_uri" in config else None
-            self.policy_uri = config["policy_uri"]\
-                if "policy_uri" in config else None
-            self.post_logout_redirect_uris = config["post_logout_redirect_uris"]\
-                if "post_logout_redirect_uris" in config else None
-            self.redirect_uris = config["redirect_uris"]\
-                if "redirect_uris" in config else None
-            self.response_types = config["response_types"]\
-                if "response_types" in config else None
-            self.tos_uri = config["tos_uri"]\
-                if "tos_uri" in config else None
+            self.logo_uri = config["logoUri"]\
+                if "logoUri" in config else None
+            self.policy_uri = config["policyUri"]\
+                if "policyUri" in config else None
+            self.post_logout_redirect_uris = config["postLogoutRedirectUris"]\
+                if "postLogoutRedirectUris" in config else None
+            self.redirect_uris = config["redirectUris"]\
+                if "redirectUris" in config else None
+            self.response_types = config["responseTypes"]\
+                if "responseTypes" in config else None
+            self.tos_uri = config["tosUri"]\
+                if "tosUri" in config else None
         else:
             self.application_type = None
             self.client_uri = None
@@ -96,3 +96,19 @@ class OpenIdConnectApplicationSettingsClient(
             self.redirect_uris = None
             self.response_types = None
             self.tos_uri = None
+
+    def request_format(self):
+        return {
+            "application_type": self.application_type,
+            "client_uri": self.client_uri,
+            "consent_method": self.consent_method,
+            "grant_types": self.grant_types,
+            "initiate_login_uri": self.initiate_login_uri,
+            "issuer_mode": self.issuer_mode,
+            "logo_uri": self.logo_uri,
+            "policy_uri": self.policy_uri,
+            "post_logout_redirect_uris": self.post_logout_redirect_uris,
+            "redirect_uris": self.redirect_uris,
+            "response_types": self.response_types,
+            "tos_uri": self.tos_uri
+        }

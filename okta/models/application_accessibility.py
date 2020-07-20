@@ -39,3 +39,10 @@ class ApplicationAccessibility(
             self.error_redirect_url = None
             self.login_redirect_url = None
             self.self_service = None
+
+    def request_format(self):
+        return {
+            "errorRedirectUrl": self.error_redirect_url,
+            "loginRedirectUrl": self.login_redirect_url,
+            "selfService": self.self_service
+        }

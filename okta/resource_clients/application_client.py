@@ -445,7 +445,7 @@ class ApplicationClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/apps/{appId}/credentials/csrs/{csrId}
-                lifecycle/publish
+                /lifecycle/publish
             """)
 
         body = string.as_dict()
@@ -493,7 +493,7 @@ class ApplicationClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/apps/{appId}/credentials/csrs/{csrId}
-                lifecycle/publish
+                /lifecycle/publish
             """)
 
         body = HTTPClient.format_binary_data(string)
@@ -541,7 +541,7 @@ class ApplicationClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/apps/{appId}/credentials/csrs/{csrId}
-                lifecycle/publish
+                /lifecycle/publish
             """)
 
         body = string.as_dict()
@@ -589,7 +589,7 @@ class ApplicationClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/apps/{appId}/credentials/csrs/{csrId}
-                lifecycle/publish
+                /lifecycle/publish
             """)
 
         body = HTTPClient.format_binary_data(string)
@@ -637,7 +637,7 @@ class ApplicationClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/apps/{appId}/credentials/csrs/{csrId}
-                lifecycle/publish
+                /lifecycle/publish
             """)
 
         body = HTTPClient.format_binary_data(string)

@@ -33,8 +33,8 @@ class EventHook(
 
     def __init__(self, config=None):
         if config:
-            self.links = config["_links"]\
-                if "_links" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
             if "channel" in config:
                 if isinstance(config["channel"],
                               EventHookChannel):
@@ -80,3 +80,17 @@ class EventHook(
             self.name = None
             self.status = None
             self.verification_status = None
+
+    def request_format(self):
+        return {
+            "_links": self.links,
+            "channel": self.channel,
+            "created": self.created,
+            "createdBy": self.created_by,
+            "events": self.events,
+            "id": self.id,
+            "lastUpdated": self.last_updated,
+            "name": self.name,
+            "status": self.status,
+            "verificationStatus": self.verification_status
+        }

@@ -72,3 +72,11 @@ class CreateUserRequest(
             self.group_ids = None
             self.profile = None
             self.type = None
+
+    def request_format(self):
+        return {
+            "credentials": self.credentials,
+            "groupIds": self.group_ids,
+            "profile": self.profile,
+            "type": self.type
+        }

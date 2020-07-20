@@ -39,3 +39,10 @@ class LifecycleExpirationPolicyRuleCondition(
             self.lifecycle_status = None
             self.number = None
             self.unit = None
+
+    def request_format(self):
+        return {
+            "lifecycleStatus": self.lifecycle_status,
+            "number": self.number,
+            "unit": self.unit
+        }

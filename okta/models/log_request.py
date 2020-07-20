@@ -33,3 +33,8 @@ class LogRequest(
                 if "ipChain" in config else None
         else:
             self.ip_chain = None
+
+    def request_format(self):
+        return {
+            "ipChain": self.ip_chain
+        }

@@ -54,3 +54,15 @@ class OAuth2Scope(
             self.metadata_publish = None
             self.name = None
             self.system = None
+
+    def request_format(self):
+        return {
+            "consent": self.consent,
+            "default": self.default,
+            "description": self.description,
+            "displayName": self.display_name,
+            "id": self.id,
+            "metadataPublish": self.metadata_publish,
+            "name": self.name,
+            "system": self.system
+        }

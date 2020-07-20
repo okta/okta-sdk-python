@@ -46,3 +46,9 @@ class PasswordPolicyRecoveryEmail(
         else:
             self.properties = None
             self.status = None
+
+    def request_format(self):
+        return {
+            "properties": self.properties,
+            "status": self.status
+        }

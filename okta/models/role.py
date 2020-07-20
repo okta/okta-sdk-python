@@ -35,10 +35,10 @@ class Role(
 
     def __init__(self, config=None):
         if config:
-            self.embedded = config["_embedded"]\
-                if "_embedded" in config else None
-            self.links = config["_links"]\
-                if "_links" in config else None
+            self.embedded = config["embedded"]\
+                if "embedded" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
             if "assignmentType" in config:
                 if isinstance(config["assignmentType"],
                               RoleAssignmentType):
@@ -90,3 +90,17 @@ class Role(
             self.last_updated = None
             self.status = None
             self.type = None
+
+    def request_format(self):
+        return {
+            "_embedded": self.embedded,
+            "_links": self.links,
+            "assignmentType": self.assignment_type,
+            "created": self.created,
+            "description": self.description,
+            "id": self.id,
+            "label": self.label,
+            "lastUpdated": self.last_updated,
+            "status": self.status,
+            "type": self.type
+        }

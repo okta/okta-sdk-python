@@ -65,3 +65,10 @@ class PasswordPolicyRuleActions(
             self.password_change = None
             self.self_service_password_reset = None
             self.self_service_unlock = None
+
+    def request_format(self):
+        return {
+            "passwordChange": self.password_change,
+            "selfServicePasswordReset": self.self_service_password_reset,
+            "selfServiceUnlock": self.self_service_unlock
+        }

@@ -49,3 +49,10 @@ class ApplicationVisibility(
             self.app_links = None
             self.auto_submit_toolbar = None
             self.hide = None
+
+    def request_format(self):
+        return {
+            "appLinks": self.app_links,
+            "autoSubmitToolbar": self.auto_submit_toolbar,
+            "hide": self.hide
+        }

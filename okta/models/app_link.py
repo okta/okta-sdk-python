@@ -60,3 +60,17 @@ class AppLink(
             self.link_url = None
             self.logo_url = None
             self.sort_order = None
+
+    def request_format(self):
+        return {
+            "appAssignmentId": self.app_assignment_id,
+            "appInstanceId": self.app_instance_id,
+            "appName": self.app_name,
+            "credentialsSetup": self.credentials_setup,
+            "hidden": self.hidden,
+            "id": self.id,
+            "label": self.label,
+            "linkUrl": self.link_url,
+            "logoUrl": self.logo_url,
+            "sortOrder": self.sort_order
+        }

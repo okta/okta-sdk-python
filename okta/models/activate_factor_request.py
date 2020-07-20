@@ -45,3 +45,12 @@ class ActivateFactorRequest(
             self.pass_code = None
             self.registration_data = None
             self.state_token = None
+
+    def request_format(self):
+        return {
+            "attestation": self.attestation,
+            "clientData": self.client_data,
+            "passCode": self.pass_code,
+            "registrationData": self.registration_data,
+            "stateToken": self.state_token
+        }

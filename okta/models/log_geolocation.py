@@ -36,3 +36,9 @@ class LogGeolocation(
         else:
             self.lat = None
             self.lon = None
+
+    def request_format(self):
+        return {
+            "lat": self.lat,
+            "lon": self.lon
+        }

@@ -69,3 +69,10 @@ class IdentityProviderCredentials(
             self.client = None
             self.signing = None
             self.trust = None
+
+    def request_format(self):
+        return {
+            "client": self.client,
+            "signing": self.signing,
+            "trust": self.trust
+        }

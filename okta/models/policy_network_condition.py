@@ -39,3 +39,10 @@ class PolicyNetworkCondition(
             self.connection = None
             self.exclude = None
             self.include = None
+
+    def request_format(self):
+        return {
+            "connection": self.connection,
+            "exclude": self.exclude,
+            "include": self.include
+        }

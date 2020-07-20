@@ -33,3 +33,8 @@ class ScheduledUserLifecycleAction(
                 if "status" in config else None
         else:
             self.status = None
+
+    def request_format(self):
+        return {
+            "status": self.status
+        }

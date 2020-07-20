@@ -65,3 +65,12 @@ class AuthorizationServerCredentialsSigningConfig(
             self.next_rotation = None
             self.rotation_mode = None
             self.use = None
+
+    def request_format(self):
+        return {
+            "kid": self.kid,
+            "lastRotated": self.last_rotated,
+            "nextRotation": self.next_rotation,
+            "rotationMode": self.rotation_mode,
+            "use": self.use
+        }

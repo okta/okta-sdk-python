@@ -47,3 +47,9 @@ class SwaApplication(
         else:
             self.name = "template_swa"
             self.settings = None
+
+    def request_format(self):
+        return {
+            "name": self.name,
+            "settings": self.settings
+        }

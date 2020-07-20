@@ -36,3 +36,9 @@ class UserIdentifierConditionEvaluatorPattern(
         else:
             self.match_type = None
             self.value = None
+
+    def request_format(self):
+        return {
+            "matchType": self.match_type,
+            "value": self.value
+        }

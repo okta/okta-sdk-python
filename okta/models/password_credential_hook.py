@@ -33,3 +33,8 @@ class PasswordCredentialHook(
                 if "type" in config else None
         else:
             self.type = None
+
+    def request_format(self):
+        return {
+            "type": self.type
+        }

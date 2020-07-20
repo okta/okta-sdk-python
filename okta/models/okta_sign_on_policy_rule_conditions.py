@@ -69,3 +69,10 @@ class OktaSignOnPolicyRuleConditions(
             self.auth_context = None
             self.network = None
             self.people = None
+
+    def request_format(self):
+        return {
+            "authContext": self.auth_context,
+            "network": self.network,
+            "people": self.people
+        }

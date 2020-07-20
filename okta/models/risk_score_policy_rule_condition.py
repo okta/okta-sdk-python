@@ -33,3 +33,8 @@ class RiskScorePolicyRuleCondition(
                 if "level" in config else None
         else:
             self.level = None
+
+    def request_format(self):
+        return {
+            "level": self.level
+        }

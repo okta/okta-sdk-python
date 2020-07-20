@@ -33,3 +33,8 @@ class IdentityProviderCredentialsSigning(
                 if "kid" in config else None
         else:
             self.kid = None
+
+    def request_format(self):
+        return {
+            "kid": self.kid
+        }

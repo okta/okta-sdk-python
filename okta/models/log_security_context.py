@@ -45,3 +45,12 @@ class LogSecurityContext(
             self.domain = None
             self.is_proxy = None
             self.isp = None
+
+    def request_format(self):
+        return {
+            "asNumber": self.as_number,
+            "asOrg": self.as_org,
+            "domain": self.domain,
+            "isProxy": self.is_proxy,
+            "isp": self.isp
+        }

@@ -33,3 +33,8 @@ class PasswordPolicyDelegationSettingsOptions(
                 if "skipUnlock" in config else None
         else:
             self.skip_unlock = None
+
+    def request_format(self):
+        return {
+            "skipUnlock": self.skip_unlock
+        }

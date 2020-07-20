@@ -33,3 +33,8 @@ class CsrMetadataSubjectAltNames(
                 if "dnsNames" in config else None
         else:
             self.dns_names = None
+
+    def request_format(self):
+        return {
+            "dnsNames": self.dns_names
+        }

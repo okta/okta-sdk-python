@@ -33,10 +33,10 @@ class Group(
 
     def __init__(self, config=None):
         if config:
-            self.embedded = config["_embedded"]\
-                if "_embedded" in config else None
-            self.links = config["_links"]\
-                if "_links" in config else None
+            self.embedded = config["embedded"]\
+                if "embedded" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
             self.created = config["created"]\
                 if "created" in config else None
             self.id = config["id"]\
@@ -77,3 +77,16 @@ class Group(
             self.object_class = None
             self.profile = None
             self.type = None
+
+    def request_format(self):
+        return {
+            "_embedded": self.embedded,
+            "_links": self.links,
+            "created": self.created,
+            "id": self.id,
+            "lastMembershipUpdated": self.last_membership_updated,
+            "lastUpdated": self.last_updated,
+            "objectClass": self.object_class,
+            "profile": self.profile,
+            "type": self.type
+        }

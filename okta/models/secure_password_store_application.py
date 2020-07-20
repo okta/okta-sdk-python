@@ -60,3 +60,10 @@ class SecurePasswordStoreApplication(
             self.credentials = None
             self.name = "template_sps"
             self.settings = None
+
+    def request_format(self):
+        return {
+            "credentials": self.credentials,
+            "name": self.name,
+            "settings": self.settings
+        }

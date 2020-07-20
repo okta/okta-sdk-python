@@ -39,3 +39,10 @@ class UserIdentifierPolicyRuleCondition(
             self.attribute = None
             self.patterns = None
             self.type = None
+
+    def request_format(self):
+        return {
+            "attribute": self.attribute,
+            "patterns": self.patterns,
+            "type": self.type
+        }

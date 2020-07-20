@@ -56,3 +56,9 @@ class FeatureStage(
         else:
             self.state = None
             self.value = None
+
+    def request_format(self):
+        return {
+            "state": self.state,
+            "value": self.value
+        }

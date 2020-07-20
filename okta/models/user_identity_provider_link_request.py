@@ -33,3 +33,8 @@ class UserIdentityProviderLinkRequest(
                 if "externalId" in config else None
         else:
             self.external_id = None
+
+    def request_format(self):
+        return {
+            "externalId": self.external_id
+        }

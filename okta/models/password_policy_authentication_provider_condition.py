@@ -36,3 +36,9 @@ class PasswordPolicyAuthenticationProviderCondition(
         else:
             self.include = None
             self.provider = None
+
+    def request_format(self):
+        return {
+            "include": self.include,
+            "provider": self.provider
+        }

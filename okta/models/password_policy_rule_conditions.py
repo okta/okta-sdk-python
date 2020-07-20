@@ -56,3 +56,9 @@ class PasswordPolicyRuleConditions(
         else:
             self.network = None
             self.people = None
+
+    def request_format(self):
+        return {
+            "network": self.network,
+            "people": self.people
+        }

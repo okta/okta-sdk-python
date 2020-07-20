@@ -44,3 +44,8 @@ class SamlApplication(
                 self.settings = None
         else:
             self.settings = None
+
+    def request_format(self):
+        return {
+            "settings": self.settings
+        }

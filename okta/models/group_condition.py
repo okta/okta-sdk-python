@@ -36,3 +36,9 @@ class GroupCondition(
         else:
             self.exclude = None
             self.include = None
+
+    def request_format(self):
+        return {
+            "exclude": self.exclude,
+            "include": self.include
+        }

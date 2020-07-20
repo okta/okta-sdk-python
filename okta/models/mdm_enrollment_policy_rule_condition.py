@@ -36,3 +36,9 @@ class MdmEnrollmentPolicyRuleCondition(
         else:
             self.block_non_safe_android = None
             self.enrollment = None
+
+    def request_format(self):
+        return {
+            "blockNonSafeAndroid": self.block_non_safe_android,
+            "enrollment": self.enrollment
+        }

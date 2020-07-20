@@ -33,3 +33,8 @@ class AppUserPasswordCredential(
                 if "value" in config else None
         else:
             self.value = None
+
+    def request_format(self):
+        return {
+            "value": self.value
+        }

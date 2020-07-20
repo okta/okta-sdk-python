@@ -233,7 +233,7 @@ function multilineURL(path) {
       current = current.concat(`/${piece}`);
     } else {
       result.push(current);
-      current = piece;
+      current = `/${piece}`;
     }
   });
 

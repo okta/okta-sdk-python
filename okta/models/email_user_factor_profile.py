@@ -33,3 +33,8 @@ class EmailUserFactorProfile(
                 if "email" in config else None
         else:
             self.email = None
+
+    def request_format(self):
+        return {
+            "email": self.email
+        }

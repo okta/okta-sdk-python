@@ -56,3 +56,9 @@ class PolicyPeopleCondition(
         else:
             self.groups = None
             self.users = None
+
+    def request_format(self):
+        return {
+            "groups": self.groups,
+            "users": self.users
+        }

@@ -43,3 +43,8 @@ class PasswordPolicyRecoveryEmailProperties(
                 self.recovery_token = None
         else:
             self.recovery_token = None
+
+    def request_format(self):
+        return {
+            "recoveryToken": self.recovery_token
+        }

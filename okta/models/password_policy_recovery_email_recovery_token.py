@@ -33,3 +33,8 @@ class PasswordPolicyRecoveryEmailRecoveryToken(
                 if "tokenLifetimeMinutes" in config else None
         else:
             self.token_lifetime_minutes = "10080"
+
+    def request_format(self):
+        return {
+            "tokenLifetimeMinutes": self.token_lifetime_minutes
+        }

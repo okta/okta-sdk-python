@@ -15,7 +15,7 @@ class OktaObject:
         {{pascalCase model.modelName}} object.
         """
         result = {}
-        for key, val in vars(self).items():
+        for key, val in self.request_format().items():
             if val is None:
                 continue
             if self._is_primitive(val):

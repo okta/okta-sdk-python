@@ -69,3 +69,10 @@ class PasswordPolicySettings(
             self.delegation = None
             self.password = None
             self.recovery = None
+
+    def request_format(self):
+        return {
+            "delegation": self.delegation,
+            "password": self.password,
+            "recovery": self.recovery
+        }

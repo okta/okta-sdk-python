@@ -42,3 +42,11 @@ class PasswordPolicyPasswordSettingsLockout(
             self.max_attempts = None
             self.show_lockout_failures = None
             self.user_lockout_notification_channels = None
+
+    def request_format(self):
+        return {
+            "autoUnlockMinutes": self.auto_unlock_minutes,
+            "maxAttempts": self.max_attempts,
+            "showLockoutFailures": self.show_lockout_failures,
+            "userLockoutNotificationChannels": self.user_lockout_notification_channels
+        }

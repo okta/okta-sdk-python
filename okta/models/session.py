@@ -33,8 +33,8 @@ class Session(
 
     def __init__(self, config=None):
         if config:
-            self.links = config["_links"]\
-                if "_links" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
             self.amr = config["amr"]\
                 if "amr" in config else None
             self.created_at = config["createdAt"]\
@@ -83,3 +83,18 @@ class Session(
             self.login = None
             self.status = None
             self.user_id = None
+
+    def request_format(self):
+        return {
+            "_links": self.links,
+            "amr": self.amr,
+            "createdAt": self.created_at,
+            "expiresAt": self.expires_at,
+            "id": self.id,
+            "idp": self.idp,
+            "lastFactorVerification": self.last_factor_verification,
+            "lastPasswordVerification": self.last_password_verification,
+            "login": self.login,
+            "status": self.status,
+            "userId": self.user_id
+        }

@@ -54,3 +54,9 @@ class ProtocolAlgorithms(
         else:
             self.request = None
             self.response = None
+
+    def request_format(self):
+        return {
+            "request": self.request,
+            "response": self.response
+        }

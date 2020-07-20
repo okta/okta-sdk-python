@@ -48,3 +48,13 @@ class SocialAuthToken(
             self.token = None
             self.token_auth_scheme = None
             self.token_type = None
+
+    def request_format(self):
+        return {
+            "expiresAt": self.expires_at,
+            "id": self.id,
+            "scopes": self.scopes,
+            "token": self.token,
+            "tokenAuthScheme": self.token_auth_scheme,
+            "tokenType": self.token_type
+        }

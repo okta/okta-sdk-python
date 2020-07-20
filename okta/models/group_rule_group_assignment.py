@@ -33,3 +33,8 @@ class GroupRuleGroupAssignment(
                 if "groupIds" in config else None
         else:
             self.group_ids = None
+
+    def request_format(self):
+        return {
+            "groupIds": self.group_ids
+        }

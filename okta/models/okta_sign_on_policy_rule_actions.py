@@ -43,3 +43,8 @@ class OktaSignOnPolicyRuleActions(
                 self.signon = None
         else:
             self.signon = None
+
+    def request_format(self):
+        return {
+            "signon": self.signon
+        }

@@ -65,3 +65,12 @@ class PolicySubject(
             self.match_attribute = None
             self.match_type = None
             self.user_name_template = None
+
+    def request_format(self):
+        return {
+            "filter": self.filter,
+            "format": self.format,
+            "matchAttribute": self.match_attribute,
+            "matchType": self.match_type,
+            "userNameTemplate": self.user_name_template
+        }

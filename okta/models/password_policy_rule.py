@@ -60,3 +60,10 @@ class PasswordPolicyRule(
             self.actions = None
             self.conditions = None
             self.name = None
+
+    def request_format(self):
+        return {
+            "actions": self.actions,
+            "conditions": self.conditions,
+            "name": self.name
+        }

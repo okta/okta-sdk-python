@@ -59,3 +59,10 @@ class PasswordCredential(
             self.hash = None
             self.hook = None
             self.value = None
+
+    def request_format(self):
+        return {
+            "hash": self.hash,
+            "hook": self.hook,
+            "value": self.value
+        }

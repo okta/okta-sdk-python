@@ -114,3 +114,15 @@ class Protocol(
             self.scopes = None
             self.settings = None
             self.type = None
+
+    def request_format(self):
+        return {
+            "algorithms": self.algorithms,
+            "credentials": self.credentials,
+            "endpoints": self.endpoints,
+            "issuer": self.issuer,
+            "relayState": self.relay_state,
+            "scopes": self.scopes,
+            "settings": self.settings,
+            "type": self.type
+        }

@@ -302,7 +302,7 @@ class UserFactorClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/factors/{factorId}/lifecycle
-                activate
+                /activate
             """)
 
         body = activate_factor_request.as_dict()
@@ -348,7 +348,7 @@ class UserFactorClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/factors/{factorId}
-                transactions/{transactionId}
+                /transactions/{transactionId}
             """)
 
         body = {}

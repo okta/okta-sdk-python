@@ -56,3 +56,9 @@ class BeforeScheduledActionPolicyRuleCondition(
         else:
             self.duration = None
             self.lifecycle_action = None
+
+    def request_format(self):
+        return {
+            "duration": self.duration,
+            "lifecycleAction": self.lifecycle_action
+        }

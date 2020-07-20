@@ -33,3 +33,8 @@ class JwkUse(
                 if "use" in config else None
         else:
             self.use = None
+
+    def request_format(self):
+        return {
+            "use": self.use
+        }

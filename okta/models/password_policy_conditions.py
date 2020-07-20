@@ -56,3 +56,9 @@ class PasswordPolicyConditions(
         else:
             self.auth_provider = None
             self.people = None
+
+    def request_format(self):
+        return {
+            "authProvider": self.auth_provider,
+            "people": self.people
+        }

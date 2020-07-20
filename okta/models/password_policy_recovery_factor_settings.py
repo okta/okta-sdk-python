@@ -33,3 +33,8 @@ class PasswordPolicyRecoveryFactorSettings(
                 if "status" in config else None
         else:
             self.status = "INACTIVE"
+
+    def request_format(self):
+        return {
+            "status": self.status
+        }

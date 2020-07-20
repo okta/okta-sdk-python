@@ -33,3 +33,8 @@ class PolicyUserNameTemplate(
                 if "template" in config else None
         else:
             self.template = None
+
+    def request_format(self):
+        return {
+            "template": self.template
+        }

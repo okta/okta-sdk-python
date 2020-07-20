@@ -29,10 +29,16 @@ class DevicePolicyRuleConditionPlatform(
 
     def __init__(self, config=None):
         if config:
-            self.supported_mdm_frameworks = config["supportedMDMFrameworks"]\
-                if "supportedMDMFrameworks" in config else None
+            self.supported_mdm_frameworks = config["supportedMdmFrameworks"]\
+                if "supportedMdmFrameworks" in config else None
             self.types = config["types"]\
                 if "types" in config else None
         else:
             self.supported_mdm_frameworks = None
             self.types = None
+
+    def request_format(self):
+        return {
+            "supportedMDMFrameworks": self.supported_mdm_frameworks,
+            "types": self.types
+        }

@@ -44,3 +44,8 @@ class OAuthApplicationCredentials(
                 self.oauth_client = None
         else:
             self.oauth_client = None
+
+    def request_format(self):
+        return {
+            "oauthClient": self.oauth_client
+        }

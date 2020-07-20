@@ -36,3 +36,9 @@ class UserLifecycleAttributePolicyRuleCondition(
         else:
             self.attribute_name = None
             self.matching_value = None
+
+    def request_format(self):
+        return {
+            "attributeName": self.attribute_name,
+            "matchingValue": self.matching_value
+        }

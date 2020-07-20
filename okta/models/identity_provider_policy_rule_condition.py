@@ -36,3 +36,9 @@ class IdentityProviderPolicyRuleCondition(
         else:
             self.idp_ids = None
             self.provider = None
+
+    def request_format(self):
+        return {
+            "idpIds": self.idp_ids,
+            "provider": self.provider
+        }

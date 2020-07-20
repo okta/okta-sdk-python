@@ -52,3 +52,11 @@ class LogIpAddress(
             self.ip = None
             self.source = None
             self.version = None
+
+    def request_format(self):
+        return {
+            "geographicalContext": self.geographical_context,
+            "ip": self.ip,
+            "source": self.source,
+            "version": self.version
+        }

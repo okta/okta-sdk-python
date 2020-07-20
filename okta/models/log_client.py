@@ -68,3 +68,13 @@ class LogClient(
             self.ip_address = None
             self.user_agent = None
             self.zone = None
+
+    def request_format(self):
+        return {
+            "device": self.device,
+            "geographicalContext": self.geographical_context,
+            "id": self.id,
+            "ipAddress": self.ip_address,
+            "userAgent": self.user_agent,
+            "zone": self.zone
+        }

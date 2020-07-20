@@ -42,3 +42,11 @@ class ProvisioningGroups(
             self.assignments = None
             self.filter = None
             self.source_attribute_name = None
+
+    def request_format(self):
+        return {
+            "action": self.action,
+            "assignments": self.assignments,
+            "filter": self.filter,
+            "sourceAttributeName": self.source_attribute_name
+        }

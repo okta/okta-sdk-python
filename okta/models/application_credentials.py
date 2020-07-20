@@ -56,3 +56,9 @@ class ApplicationCredentials(
         else:
             self.signing = None
             self.user_name_template = None
+
+    def request_format(self):
+        return {
+            "signing": self.signing,
+            "userNameTemplate": self.user_name_template
+        }

@@ -33,3 +33,8 @@ class ResetPasswordToken(
                 if "resetPasswordUrl" in config else None
         else:
             self.reset_password_url = None
+
+    def request_format(self):
+        return {
+            "resetPasswordUrl": self.reset_password_url
+        }

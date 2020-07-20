@@ -46,3 +46,9 @@ class AuthenticationProvider(
         else:
             self.name = None
             self.type = None
+
+    def request_format(self):
+        return {
+            "name": self.name,
+            "type": self.type
+        }

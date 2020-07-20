@@ -33,3 +33,8 @@ class InlineHookResponse(
                 if "commands" in config else None
         else:
             self.commands = None
+
+    def request_format(self):
+        return {
+            "commands": self.commands
+        }

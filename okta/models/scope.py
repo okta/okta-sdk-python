@@ -46,3 +46,9 @@ class Scope(
         else:
             self.string_value = None
             self.type = None
+
+    def request_format(self):
+        return {
+            "stringValue": self.string_value,
+            "type": self.type
+        }

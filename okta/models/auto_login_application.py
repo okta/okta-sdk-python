@@ -57,3 +57,9 @@ class AutoLoginApplication(
         else:
             self.credentials = None
             self.settings = None
+
+    def request_format(self):
+        return {
+            "credentials": self.credentials,
+            "settings": self.settings
+        }

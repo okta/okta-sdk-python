@@ -39,3 +39,10 @@ class InlineHookResponseCommandValue(
             self.op = None
             self.path = None
             self.value = None
+
+    def request_format(self):
+        return {
+            "op": self.op,
+            "path": self.path,
+            "value": self.value
+        }

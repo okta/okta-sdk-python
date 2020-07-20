@@ -303,3 +303,28 @@ class PolicyRuleConditions(
             self.user_identifier = None
             self.user_status = None
             self.users = None
+
+    def request_format(self):
+        return {
+            "app": self.app,
+            "apps": self.apps,
+            "authContext": self.auth_context,
+            "authProvider": self.auth_provider,
+            "beforeScheduledAction": self.before_scheduled_action,
+            "clients": self.clients,
+            "context": self.context,
+            "device": self.device,
+            "grantTypes": self.grant_types,
+            "groups": self.groups,
+            "identityProvider": self.identity_provider,
+            "mdmEnrollment": self.mdm_enrollment,
+            "network": self.network,
+            "people": self.people,
+            "platform": self.platform,
+            "risk": self.risk,
+            "riskScore": self.risk_score,
+            "scopes": self.scopes,
+            "userIdentifier": self.user_identifier,
+            "userStatus": self.user_status,
+            "users": self.users
+        }

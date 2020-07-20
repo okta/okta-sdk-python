@@ -29,3 +29,7 @@ class ApplicationSettingsApplication(
 
     def __init__(self, config=None):
         pass
+
+    def request_format(self):
+        return {
+        }

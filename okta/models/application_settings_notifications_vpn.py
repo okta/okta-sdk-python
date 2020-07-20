@@ -49,3 +49,10 @@ class ApplicationSettingsNotificationsVpn(
             self.help_url = None
             self.message = None
             self.network = None
+
+    def request_format(self):
+        return {
+            "helpUrl": self.help_url,
+            "message": self.message,
+            "network": self.network
+        }

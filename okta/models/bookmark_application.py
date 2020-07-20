@@ -47,3 +47,9 @@ class BookmarkApplication(
         else:
             self.name = "bookmark"
             self.settings = None
+
+    def request_format(self):
+        return {
+            "name": self.name,
+            "settings": self.settings
+        }

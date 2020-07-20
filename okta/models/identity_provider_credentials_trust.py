@@ -45,3 +45,12 @@ class IdentityProviderCredentialsTrust(
             self.kid = None
             self.revocation = None
             self.revocation_cache_lifetime = None
+
+    def request_format(self):
+        return {
+            "audience": self.audience,
+            "issuer": self.issuer,
+            "kid": self.kid,
+            "revocation": self.revocation,
+            "revocationCacheLifetime": self.revocation_cache_lifetime
+        }

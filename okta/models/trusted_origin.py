@@ -29,8 +29,8 @@ class TrustedOrigin(
 
     def __init__(self, config=None):
         if config:
-            self.links = config["_links"]\
-                if "_links" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
             self.created = config["created"]\
                 if "created" in config else None
             self.created_by = config["createdBy"]\
@@ -60,3 +60,17 @@ class TrustedOrigin(
             self.origin = None
             self.scopes = None
             self.status = None
+
+    def request_format(self):
+        return {
+            "_links": self.links,
+            "created": self.created,
+            "createdBy": self.created_by,
+            "id": self.id,
+            "lastUpdated": self.last_updated,
+            "lastUpdatedBy": self.last_updated_by,
+            "name": self.name,
+            "origin": self.origin,
+            "scopes": self.scopes,
+            "status": self.status
+        }

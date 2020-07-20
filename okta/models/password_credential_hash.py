@@ -55,3 +55,12 @@ class PasswordCredentialHash(
             self.salt_order = None
             self.value = None
             self.worker_factor = None
+
+    def request_format(self):
+        return {
+            "algorithm": self.algorithm,
+            "salt": self.salt,
+            "saltOrder": self.salt_order,
+            "value": self.value,
+            "workerFactor": self.worker_factor
+        }

@@ -67,3 +67,16 @@ class IonField(
             self.type = None
             self.value = None
             self.visible = None
+
+    def request_format(self):
+        return {
+            "form": self.form,
+            "label": self.label,
+            "mutable": self.mutable,
+            "name": self.name,
+            "required": self.required,
+            "secret": self.secret,
+            "type": self.type,
+            "value": self.value,
+            "visible": self.visible
+        }

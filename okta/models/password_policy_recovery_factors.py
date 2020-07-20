@@ -35,43 +35,43 @@ class PasswordPolicyRecoveryFactors(
 
     def __init__(self, config=None):
         if config:
-            if "okta_call" in config:
-                if isinstance(config["okta_call"],
+            if "oktaCall" in config:
+                if isinstance(config["oktaCall"],
                               PasswordPolicyRecoveryFactorSettings):
-                    self.okta_call = config["okta_call"]
+                    self.okta_call = config["oktaCall"]
                 else:
                     self.okta_call = PasswordPolicyRecoveryFactorSettings(
-                        config["okta_call"]
+                        config["oktaCall"]
                     )
             else:
                 self.okta_call = None
-            if "okta_email" in config:
-                if isinstance(config["okta_email"],
+            if "oktaEmail" in config:
+                if isinstance(config["oktaEmail"],
                               PasswordPolicyRecoveryEmail):
-                    self.okta_email = config["okta_email"]
+                    self.okta_email = config["oktaEmail"]
                 else:
                     self.okta_email = PasswordPolicyRecoveryEmail(
-                        config["okta_email"]
+                        config["oktaEmail"]
                     )
             else:
                 self.okta_email = None
-            if "okta_sms" in config:
-                if isinstance(config["okta_sms"],
+            if "oktaSms" in config:
+                if isinstance(config["oktaSms"],
                               PasswordPolicyRecoveryFactorSettings):
-                    self.okta_sms = config["okta_sms"]
+                    self.okta_sms = config["oktaSms"]
                 else:
                     self.okta_sms = PasswordPolicyRecoveryFactorSettings(
-                        config["okta_sms"]
+                        config["oktaSms"]
                     )
             else:
                 self.okta_sms = None
-            if "recovery_question" in config:
-                if isinstance(config["recovery_question"],
+            if "recoveryQuestion" in config:
+                if isinstance(config["recoveryQuestion"],
                               PasswordPolicyRecoveryQuestion):
-                    self.recovery_question = config["recovery_question"]
+                    self.recovery_question = config["recoveryQuestion"]
                 else:
                     self.recovery_question = PasswordPolicyRecoveryQuestion(
-                        config["recovery_question"]
+                        config["recoveryQuestion"]
                     )
             else:
                 self.recovery_question = None
@@ -80,3 +80,11 @@ class PasswordPolicyRecoveryFactors(
             self.okta_email = None
             self.okta_sms = None
             self.recovery_question = None
+
+    def request_format(self):
+        return {
+            "okta_call": self.okta_call,
+            "okta_email": self.okta_email,
+            "okta_sms": self.okta_sms,
+            "recovery_question": self.recovery_question
+        }

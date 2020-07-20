@@ -31,8 +31,8 @@ class AuthorizationServer(
 
     def __init__(self, config=None):
         if config:
-            self.links = config["_links"]\
-                if "_links" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
             self.audiences = config["audiences"]\
                 if "audiences" in config else None
             self.created = config["created"]\
@@ -73,3 +73,18 @@ class AuthorizationServer(
             self.last_updated = None
             self.name = None
             self.status = None
+
+    def request_format(self):
+        return {
+            "_links": self.links,
+            "audiences": self.audiences,
+            "created": self.created,
+            "credentials": self.credentials,
+            "description": self.description,
+            "id": self.id,
+            "issuer": self.issuer,
+            "issuerMode": self.issuer_mode,
+            "lastUpdated": self.last_updated,
+            "name": self.name,
+            "status": self.status
+        }

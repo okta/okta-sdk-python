@@ -54,3 +54,9 @@ class ChangePasswordRequest(
         else:
             self.new_password = None
             self.old_password = None
+
+    def request_format(self):
+        return {
+            "newPassword": self.new_password,
+            "oldPassword": self.old_password
+        }

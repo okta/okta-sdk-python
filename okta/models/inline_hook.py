@@ -35,8 +35,8 @@ class InlineHook(
 
     def __init__(self, config=None):
         if config:
-            self.links = config["_links"]\
-                if "_links" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
             if "channel" in config:
                 if isinstance(config["channel"],
                               InlineHookChannel):
@@ -87,3 +87,16 @@ class InlineHook(
             self.status = None
             self.type = None
             self.version = None
+
+    def request_format(self):
+        return {
+            "_links": self.links,
+            "channel": self.channel,
+            "created": self.created,
+            "id": self.id,
+            "lastUpdated": self.last_updated,
+            "name": self.name,
+            "status": self.status,
+            "type": self.type,
+            "version": self.version
+        }

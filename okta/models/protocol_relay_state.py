@@ -43,3 +43,8 @@ class ProtocolRelayState(
                 self.format = None
         else:
             self.format = None
+
+    def request_format(self):
+        return {
+            "format": self.format
+        }

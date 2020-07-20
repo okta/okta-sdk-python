@@ -60,3 +60,10 @@ class BasicAuthApplication(
             self.credentials = None
             self.name = "template_basic_auth"
             self.settings = None
+
+    def request_format(self):
+        return {
+            "credentials": self.credentials,
+            "name": self.name,
+            "settings": self.settings
+        }

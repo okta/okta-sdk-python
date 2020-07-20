@@ -39,3 +39,10 @@ class LogTransaction(
             self.detail = None
             self.id = None
             self.type = None
+
+    def request_format(self):
+        return {
+            "detail": self.detail,
+            "id": self.id,
+            "type": self.type
+        }

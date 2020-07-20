@@ -33,3 +33,8 @@ class ApplicationLicensing(
                 if "seatCount" in config else None
         else:
             self.seat_count = None
+
+    def request_format(self):
+        return {
+            "seatCount": self.seat_count
+        }

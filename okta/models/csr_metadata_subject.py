@@ -48,3 +48,13 @@ class CsrMetadataSubject(
             self.organization_name = None
             self.organizational_unit_name = None
             self.state_or_province_name = None
+
+    def request_format(self):
+        return {
+            "commonName": self.common_name,
+            "countryName": self.country_name,
+            "localityName": self.locality_name,
+            "organizationName": self.organization_name,
+            "organizationalUnitName": self.organizational_unit_name,
+            "stateOrProvinceName": self.state_or_province_name
+        }

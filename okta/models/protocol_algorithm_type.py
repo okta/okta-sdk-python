@@ -43,3 +43,8 @@ class ProtocolAlgorithmType(
                 self.signature = None
         else:
             self.signature = None
+
+    def request_format(self):
+        return {
+            "signature": self.signature
+        }

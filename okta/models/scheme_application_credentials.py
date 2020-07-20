@@ -76,3 +76,12 @@ class SchemeApplicationCredentials(
             self.scheme = None
             self.signing = None
             self.user_name = None
+
+    def request_format(self):
+        return {
+            "password": self.password,
+            "revealPassword": self.reveal_password,
+            "scheme": self.scheme,
+            "signing": self.signing,
+            "userName": self.user_name
+        }

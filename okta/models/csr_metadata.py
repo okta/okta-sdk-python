@@ -56,3 +56,9 @@ class CsrMetadata(
         else:
             self.subject = None
             self.subject_alt_names = None
+
+    def request_format(self):
+        return {
+            "subject": self.subject,
+            "subjectAltNames": self.subject_alt_names
+        }

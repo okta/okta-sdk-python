@@ -42,3 +42,11 @@ class SamlAttributeStatement(
             self.namespace = None
             self.type = None
             self.values = None
+
+    def request_format(self):
+        return {
+            "name": self.name,
+            "namespace": self.namespace,
+            "type": self.type,
+            "values": self.values
+        }

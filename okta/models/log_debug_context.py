@@ -33,3 +33,8 @@ class LogDebugContext(
                 if "debugData" in config else None
         else:
             self.debug_data = None
+
+    def request_format(self):
+        return {
+            "debugData": self.debug_data
+        }

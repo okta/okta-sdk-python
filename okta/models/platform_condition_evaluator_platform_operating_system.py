@@ -49,3 +49,10 @@ class PlatformConditionEvaluatorPlatformOperatingSystem(
             self.expression = None
             self.type = None
             self.version = None
+
+    def request_format(self):
+        return {
+            "expression": self.expression,
+            "type": self.type,
+            "version": self.version
+        }

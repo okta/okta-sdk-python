@@ -44,3 +44,8 @@ class EmailUserFactor(
                 self.profile = None
         else:
             self.profile = None
+
+    def request_format(self):
+        return {
+            "profile": self.profile
+        }

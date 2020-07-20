@@ -43,3 +43,8 @@ class ApplicationSettingsNotifications(
                 self.vpn = None
         else:
             self.vpn = None
+
+    def request_format(self):
+        return {
+            "vpn": self.vpn
+        }

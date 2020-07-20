@@ -43,3 +43,8 @@ class PasswordPolicyRecoverySettings(
                 self.factors = None
         else:
             self.factors = None
+
+    def request_format(self):
+        return {
+            "factors": self.factors
+        }

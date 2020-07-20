@@ -93,3 +93,28 @@ class SamlApplicationSettingsSignOn(
             self.sso_acs_url_override = None
             self.subject_name_id_format = None
             self.subject_name_id_template = None
+
+    def request_format(self):
+        return {
+            "assertionSigned": self.assertion_signed,
+            "attributeStatements": self.attribute_statements,
+            "audience": self.audience,
+            "audienceOverride": self.audience_override,
+            "authnContextClassRef": self.authn_context_class_ref,
+            "defaultRelayState": self.default_relay_state,
+            "destination": self.destination,
+            "destinationOverride": self.destination_override,
+            "digestAlgorithm": self.digest_algorithm,
+            "honorForceAuthn": self.honor_force_authn,
+            "idpIssuer": self.idp_issuer,
+            "recipient": self.recipient,
+            "recipientOverride": self.recipient_override,
+            "requestCompressed": self.request_compressed,
+            "responseSigned": self.response_signed,
+            "signatureAlgorithm": self.signature_algorithm,
+            "spIssuer": self.sp_issuer,
+            "ssoAcsUrl": self.sso_acs_url,
+            "ssoAcsUrlOverride": self.sso_acs_url_override,
+            "subjectNameIdFormat": self.subject_name_id_format,
+            "subjectNameIdTemplate": self.subject_name_id_template
+        }

@@ -37,10 +37,10 @@ class UserFactor(
 
     def __init__(self, config=None):
         if config:
-            self.embedded = config["_embedded"]\
-                if "_embedded" in config else None
-            self.links = config["_links"]\
-                if "_links" in config else None
+            self.embedded = config["embedded"]\
+                if "embedded" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
             self.created = config["created"]\
                 if "created" in config else None
             if "factorType" in config:
@@ -97,3 +97,16 @@ class UserFactor(
             self.provider = None
             self.status = None
             self.verify = None
+
+    def request_format(self):
+        return {
+            "_embedded": self.embedded,
+            "_links": self.links,
+            "created": self.created,
+            "factorType": self.factor_type,
+            "id": self.id,
+            "lastUpdated": self.last_updated,
+            "provider": self.provider,
+            "status": self.status,
+            "verify": self.verify
+        }

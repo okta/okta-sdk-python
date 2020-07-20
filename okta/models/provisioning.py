@@ -62,3 +62,11 @@ class Provisioning(
             self.conditions = None
             self.groups = None
             self.profile_master = None
+
+    def request_format(self):
+        return {
+            "action": self.action,
+            "conditions": self.conditions,
+            "groups": self.groups,
+            "profileMaster": self.profile_master
+        }

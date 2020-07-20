@@ -33,3 +33,8 @@ class ContextPolicyRuleCondition(
                 if "expression" in config else None
         else:
             self.expression = None
+
+    def request_format(self):
+        return {
+            "expression": self.expression
+        }

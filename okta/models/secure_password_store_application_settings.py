@@ -44,3 +44,8 @@ class SecurePasswordStoreApplicationSettings(
                 self.app = None
         else:
             self.app = None
+
+    def request_format(self):
+        return {
+            "app": self.app
+        }

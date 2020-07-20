@@ -44,3 +44,8 @@ class OktaSignOnPolicy(
                 self.conditions = None
         else:
             self.conditions = None
+
+    def request_format(self):
+        return {
+            "conditions": self.conditions
+        }

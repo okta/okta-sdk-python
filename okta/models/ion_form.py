@@ -57,3 +57,16 @@ class IonForm(
             self.rel = None
             self.relates_to = None
             self.value = None
+
+    def request_format(self):
+        return {
+            "accepts": self.accepts,
+            "href": self.href,
+            "method": self.method,
+            "name": self.name,
+            "produces": self.produces,
+            "refresh": self.refresh,
+            "rel": self.rel,
+            "relatesTo": self.relates_to,
+            "value": self.value
+        }

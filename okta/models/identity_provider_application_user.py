@@ -29,10 +29,10 @@ class IdentityProviderApplicationUser(
 
     def __init__(self, config=None):
         if config:
-            self.embedded = config["_embedded"]\
-                if "_embedded" in config else None
-            self.links = config["_links"]\
-                if "_links" in config else None
+            self.embedded = config["embedded"]\
+                if "embedded" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
             self.created = config["created"]\
                 if "created" in config else None
             self.external_id = config["externalId"]\
@@ -51,3 +51,14 @@ class IdentityProviderApplicationUser(
             self.id = None
             self.last_updated = None
             self.profile = None
+
+    def request_format(self):
+        return {
+            "_embedded": self.embedded,
+            "_links": self.links,
+            "created": self.created,
+            "externalId": self.external_id,
+            "id": self.id,
+            "lastUpdated": self.last_updated,
+            "profile": self.profile
+        }

@@ -33,3 +33,8 @@ class OAuth2ScopesMediationPolicyRuleCondition(
                 if "include" in config else None
         else:
             self.include = None
+
+    def request_format(self):
+        return {
+            "include": self.include
+        }

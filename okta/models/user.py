@@ -37,10 +37,10 @@ class User(
 
     def __init__(self, config=None):
         if config:
-            self.embedded = config["_embedded"]\
-                if "_embedded" in config else None
-            self.links = config["_links"]\
-                if "_links" in config else None
+            self.embedded = config["embedded"]\
+                if "embedded" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
             self.activated = config["activated"]\
                 if "activated" in config else None
             self.created = config["created"]\
@@ -120,3 +120,21 @@ class User(
             self.status_changed = None
             self.transitioning_to_status = None
             self.type = None
+
+    def request_format(self):
+        return {
+            "_embedded": self.embedded,
+            "_links": self.links,
+            "activated": self.activated,
+            "created": self.created,
+            "credentials": self.credentials,
+            "id": self.id,
+            "lastLogin": self.last_login,
+            "lastUpdated": self.last_updated,
+            "passwordChanged": self.password_changed,
+            "profile": self.profile,
+            "status": self.status,
+            "statusChanged": self.status_changed,
+            "transitioningToStatus": self.transitioning_to_status,
+            "type": self.type
+        }

@@ -43,3 +43,8 @@ class PolicyAccountLinkFilter(
                 self.groups = None
         else:
             self.groups = None
+
+    def request_format(self):
+        return {
+            "groups": self.groups
+        }

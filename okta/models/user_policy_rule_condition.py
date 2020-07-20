@@ -88,3 +88,13 @@ class UserPolicyRuleCondition(
             self.lifecycle_expiration = None
             self.password_expiration = None
             self.user_lifecycle_attribute = None
+
+    def request_format(self):
+        return {
+            "exclude": self.exclude,
+            "inactivity": self.inactivity,
+            "include": self.include,
+            "lifecycleExpiration": self.lifecycle_expiration,
+            "passwordExpiration": self.password_expiration,
+            "userLifecycleAttribute": self.user_lifecycle_attribute
+        }

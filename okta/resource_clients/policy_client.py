@@ -528,7 +528,7 @@ class PolicyClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/policies/{policyId}/rules/{ruleId}
-                lifecycle/activate
+                /lifecycle/activate
             """)
 
         body = {}
@@ -562,7 +562,7 @@ class PolicyClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/policies/{policyId}/rules/{ruleId}
-                lifecycle/deactivate
+                /lifecycle/deactivate
             """)
 
         body = {}

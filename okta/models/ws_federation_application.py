@@ -47,3 +47,9 @@ class WsFederationApplication(
         else:
             self.name = "template_wsfed"
             self.settings = None
+
+    def request_format(self):
+        return {
+            "name": self.name,
+            "settings": self.settings
+        }

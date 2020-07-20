@@ -31,8 +31,8 @@ class OAuth2Claim(
 
     def __init__(self, config=None):
         if config:
-            self.links = config["_links"]\
-                if "_links" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
             self.always_include_in_token = config["alwaysIncludeInToken"]\
                 if "alwaysIncludeInToken" in config else None
             self.claim_type = config["claimType"]\
@@ -47,8 +47,8 @@ class OAuth2Claim(
                     )
             else:
                 self.conditions = None
-            self.group_filter_type = config["group_filter_type"]\
-                if "group_filter_type" in config else None
+            self.group_filter_type = config["groupFilterType"]\
+                if "groupFilterType" in config else None
             self.id = config["id"]\
                 if "id" in config else None
             self.name = config["name"]\
@@ -73,3 +73,18 @@ class OAuth2Claim(
             self.system = None
             self.value = None
             self.value_type = None
+
+    def request_format(self):
+        return {
+            "_links": self.links,
+            "alwaysIncludeInToken": self.always_include_in_token,
+            "claimType": self.claim_type,
+            "conditions": self.conditions,
+            "group_filter_type": self.group_filter_type,
+            "id": self.id,
+            "name": self.name,
+            "status": self.status,
+            "system": self.system,
+            "value": self.value,
+            "valueType": self.value_type
+        }

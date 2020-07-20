@@ -43,3 +43,8 @@ class GroupRuleAction(
                 self.assign_user_to_groups = None
         else:
             self.assign_user_to_groups = None
+
+    def request_format(self):
+        return {
+            "assignUserToGroups": self.assign_user_to_groups
+        }

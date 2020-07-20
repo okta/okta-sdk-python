@@ -121,7 +121,7 @@ class LinkedObjectClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/meta/schemas/user/linkedObjects
-                {linkedObjectName}
+                /{linkedObjectName}
             """)
 
         body = {}
@@ -155,7 +155,7 @@ class LinkedObjectClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/meta/schemas/user/linkedObjects
-                {linkedObjectName}
+                /{linkedObjectName}
             """)
 
         body = {}

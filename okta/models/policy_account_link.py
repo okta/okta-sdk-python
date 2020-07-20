@@ -46,3 +46,9 @@ class PolicyAccountLink(
         else:
             self.action = None
             self.filter = None
+
+    def request_format(self):
+        return {
+            "action": self.action,
+            "filter": self.filter
+        }

@@ -43,3 +43,8 @@ class PasswordDictionary(
                 self.common = None
         else:
             self.common = None
+
+    def request_format(self):
+        return {
+            "common": self.common
+        }

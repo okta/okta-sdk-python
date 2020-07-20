@@ -33,3 +33,8 @@ class RiskPolicyRuleCondition(
                 if "behaviors" in config else None
         else:
             self.behaviors = None
+
+    def request_format(self):
+        return {
+            "behaviors": self.behaviors
+        }

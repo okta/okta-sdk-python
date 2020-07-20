@@ -49,3 +49,10 @@ class InlineHookChannelConfig(
             self.auth_scheme = None
             self.headers = None
             self.uri = None
+
+    def request_format(self):
+        return {
+            "authScheme": self.auth_scheme,
+            "headers": self.headers,
+            "uri": self.uri
+        }

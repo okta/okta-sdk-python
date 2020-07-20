@@ -56,3 +56,9 @@ class GroupRuleConditions(
         else:
             self.expression = None
             self.people = None
+
+    def request_format(self):
+        return {
+            "expression": self.expression,
+            "people": self.people
+        }

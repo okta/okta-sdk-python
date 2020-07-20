@@ -33,8 +33,8 @@ class IdentityProvider(
 
     def __init__(self, config=None):
         if config:
-            self.links = config["_links"]\
-                if "_links" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
             self.created = config["created"]\
                 if "created" in config else None
             self.id = config["id"]\
@@ -80,3 +80,17 @@ class IdentityProvider(
             self.protocol = None
             self.status = None
             self.type = None
+
+    def request_format(self):
+        return {
+            "_links": self.links,
+            "created": self.created,
+            "id": self.id,
+            "issuerMode": self.issuer_mode,
+            "lastUpdated": self.last_updated,
+            "name": self.name,
+            "policy": self.policy,
+            "protocol": self.protocol,
+            "status": self.status,
+            "type": self.type
+        }

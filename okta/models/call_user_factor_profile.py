@@ -36,3 +36,9 @@ class CallUserFactorProfile(
         else:
             self.phone_extension = None
             self.phone_number = None
+
+    def request_format(self):
+        return {
+            "phoneExtension": self.phone_extension,
+            "phoneNumber": self.phone_number
+        }

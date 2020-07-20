@@ -36,3 +36,9 @@ class LogOutcome(
         else:
             self.reason = None
             self.result = None
+
+    def request_format(self):
+        return {
+            "reason": self.reason,
+            "result": self.result
+        }

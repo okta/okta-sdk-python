@@ -36,3 +36,9 @@ class LogIssuer(
         else:
             self.id = None
             self.type = None
+
+    def request_format(self):
+        return {
+            "id": self.id,
+            "type": self.type
+        }

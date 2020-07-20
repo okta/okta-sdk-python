@@ -43,3 +43,8 @@ class PasswordPolicyRecoveryQuestionProperties(
                 self.complexity = None
         else:
             self.complexity = None
+
+    def request_format(self):
+        return {
+            "complexity": self.complexity
+        }

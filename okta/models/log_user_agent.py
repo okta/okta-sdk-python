@@ -39,3 +39,10 @@ class LogUserAgent(
             self.browser = None
             self.os = None
             self.raw_user_agent = None
+
+    def request_format(self):
+        return {
+            "browser": self.browser,
+            "os": self.os,
+            "rawUserAgent": self.raw_user_agent
+        }

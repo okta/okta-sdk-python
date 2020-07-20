@@ -768,7 +768,7 @@ class GroupClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/groups/{groupId}/roles/{roleId}/targets
-                catalog/apps
+                /catalog/apps
             """)
         if query_params:
             encoded_query_params = urlencode(query_params)
@@ -811,7 +811,7 @@ class GroupClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/groups/{groupId}/roles/{roleId}/targets
-                catalog/apps/{appName}
+                /catalog/apps/{appName}
             """)
 
         body = {}
@@ -845,7 +845,7 @@ class GroupClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/groups/{groupId}/roles/{roleId}/targets
-                catalog/apps/{appName}
+                /catalog/apps/{appName}
             """)
 
         body = {}
@@ -882,7 +882,7 @@ class GroupClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/groups/{groupId}/roles/{roleId}/targets
-                catalog/apps/{appName}/{applicationId}
+                /catalog/apps/{appName}/{applicationId}
             """)
 
         body = {}
@@ -919,7 +919,7 @@ class GroupClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/groups/{groupId}/roles/{roleId}/targets
-                catalog/apps/{appName}/{applicationId}
+                /catalog/apps/{appName}/{applicationId}
             """)
 
         body = {}
@@ -957,7 +957,7 @@ class GroupClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/groups/{groupId}/roles/{roleId}/targets
-                groups
+                /groups
             """)
         if query_params:
             encoded_query_params = urlencode(query_params)
@@ -1003,7 +1003,7 @@ class GroupClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/groups/{groupId}/roles/{roleId}/targets
-                groups/{targetGroupId}
+                /groups/{targetGroupId}
             """)
 
         body = {}
@@ -1040,7 +1040,7 @@ class GroupClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/groups/{groupId}/roles/{roleId}/targets
-                groups/{targetGroupId}
+                /groups/{targetGroupId}
             """)
 
         body = {}

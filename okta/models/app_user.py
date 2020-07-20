@@ -31,10 +31,10 @@ class AppUser(
 
     def __init__(self, config=None):
         if config:
-            self.embedded = config["_embedded"]\
-                if "_embedded" in config else None
-            self.links = config["_links"]\
-                if "_links" in config else None
+            self.embedded = config["embedded"]\
+                if "embedded" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
             self.created = config["created"]\
                 if "created" in config else None
             if "credentials" in config:
@@ -82,3 +82,21 @@ class AppUser(
             self.status = None
             self.status_changed = None
             self.sync_state = None
+
+    def request_format(self):
+        return {
+            "_embedded": self.embedded,
+            "_links": self.links,
+            "created": self.created,
+            "credentials": self.credentials,
+            "externalId": self.external_id,
+            "id": self.id,
+            "lastSync": self.last_sync,
+            "lastUpdated": self.last_updated,
+            "passwordChanged": self.password_changed,
+            "profile": self.profile,
+            "scope": self.scope,
+            "status": self.status,
+            "statusChanged": self.status_changed,
+            "syncState": self.sync_state
+        }

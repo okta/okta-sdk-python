@@ -33,3 +33,8 @@ class TotpUserFactorProfile(
                 if "credentialId" in config else None
         else:
             self.credential_id = None
+
+    def request_format(self):
+        return {
+            "credentialId": self.credential_id
+        }

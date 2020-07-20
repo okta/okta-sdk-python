@@ -73,3 +73,11 @@ class IdentityProviderPolicy(
             self.max_clock_skew = None
             self.provisioning = None
             self.subject = None
+
+    def request_format(self):
+        return {
+            "accountLink": self.account_link,
+            "maxClockSkew": self.max_clock_skew,
+            "provisioning": self.provisioning,
+            "subject": self.subject
+        }

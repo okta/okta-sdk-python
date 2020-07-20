@@ -46,3 +46,9 @@ class PlatformConditionEvaluatorPlatform(
         else:
             self.os = None
             self.type = None
+
+    def request_format(self):
+        return {
+            "os": self.os,
+            "type": self.type
+        }

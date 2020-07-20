@@ -55,13 +55,13 @@ class UserCredentials(
                     )
             else:
                 self.provider = None
-            if "recovery_question" in config:
-                if isinstance(config["recovery_question"],
+            if "recoveryQuestion" in config:
+                if isinstance(config["recoveryQuestion"],
                               RecoveryQuestionCredential):
-                    self.recovery_question = config["recovery_question"]
+                    self.recovery_question = config["recoveryQuestion"]
                 else:
                     self.recovery_question = RecoveryQuestionCredential(
-                        config["recovery_question"]
+                        config["recoveryQuestion"]
                     )
             else:
                 self.recovery_question = None
@@ -69,3 +69,10 @@ class UserCredentials(
             self.password = None
             self.provider = None
             self.recovery_question = None
+
+    def request_format(self):
+        return {
+            "password": self.password,
+            "provider": self.provider,
+            "recovery_question": self.recovery_question
+        }

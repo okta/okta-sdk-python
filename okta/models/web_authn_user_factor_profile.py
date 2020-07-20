@@ -36,3 +36,9 @@ class WebAuthnUserFactorProfile(
         else:
             self.authenticator_name = None
             self.credential_id = None
+
+    def request_format(self):
+        return {
+            "authenticatorName": self.authenticator_name,
+            "credentialId": self.credential_id
+        }

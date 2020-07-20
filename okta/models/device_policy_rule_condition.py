@@ -52,3 +52,11 @@ class DevicePolicyRuleCondition(
             self.platform = None
             self.rooted = None
             self.trust_level = None
+
+    def request_format(self):
+        return {
+            "migrated": self.migrated,
+            "platform": self.platform,
+            "rooted": self.rooted,
+            "trustLevel": self.trust_level
+        }

@@ -58,3 +58,16 @@ class SecurePasswordStoreApplicationSettingsApplication(
             self.password_field = None
             self.url = None
             self.username_field = None
+
+    def request_format(self):
+        return {
+            "optionalField1": self.optional_field_1,
+            "optionalField1Value": self.optional_field_1_value,
+            "optionalField2": self.optional_field_2,
+            "optionalField2Value": self.optional_field_2_value,
+            "optionalField3": self.optional_field_3,
+            "optionalField3Value": self.optional_field_3_value,
+            "passwordField": self.password_field,
+            "url": self.url,
+            "usernameField": self.username_field
+        }

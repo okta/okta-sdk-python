@@ -36,3 +36,9 @@ class EventSubscriptions(
         else:
             self.items = None
             self.type = None
+
+    def request_format(self):
+        return {
+            "items": self.items,
+            "type": self.type
+        }

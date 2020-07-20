@@ -39,3 +39,10 @@ class InlineHookChannelConfigAuthScheme(
             self.key = None
             self.type = None
             self.value = None
+
+    def request_format(self):
+        return {
+            "key": self.key,
+            "type": self.type,
+            "value": self.value
+        }

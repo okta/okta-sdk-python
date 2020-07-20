@@ -39,3 +39,10 @@ class OktaSignOnPolicyRuleSignonSessionActions(
             self.max_session_idle_minutes = "120"
             self.max_session_lifetime_minutes = "0"
             self.use_persistent_cookie = "false"
+
+    def request_format(self):
+        return {
+            "maxSessionIdleMinutes": self.max_session_idle_minutes,
+            "maxSessionLifetimeMinutes": self.max_session_lifetime_minutes,
+            "usePersistentCookie": self.use_persistent_cookie
+        }

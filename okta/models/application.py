@@ -41,10 +41,10 @@ class Application(
 
     def __init__(self, config=None):
         if config:
-            self.embedded = config["_embedded"]\
-                if "_embedded" in config else None
-            self.links = config["_links"]\
-                if "_links" in config else None
+            self.embedded = config["embedded"]\
+                if "embedded" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
             if "accessibility" in config:
                 if isinstance(config["accessibility"],
                               ApplicationAccessibility):
@@ -138,3 +138,23 @@ class Application(
             self.sign_on_mode = None
             self.status = None
             self.visibility = None
+
+    def request_format(self):
+        return {
+            "_embedded": self.embedded,
+            "_links": self.links,
+            "accessibility": self.accessibility,
+            "created": self.created,
+            "credentials": self.credentials,
+            "features": self.features,
+            "id": self.id,
+            "label": self.label,
+            "lastUpdated": self.last_updated,
+            "licensing": self.licensing,
+            "name": self.name,
+            "profile": self.profile,
+            "settings": self.settings,
+            "signOnMode": self.sign_on_mode,
+            "status": self.status,
+            "visibility": self.visibility
+        }

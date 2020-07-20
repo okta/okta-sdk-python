@@ -33,3 +33,8 @@ class ProtocolSettings(
                 if "nameFormat" in config else None
         else:
             self.name_format = None
+
+    def request_format(self):
+        return {
+            "nameFormat": self.name_format
+        }

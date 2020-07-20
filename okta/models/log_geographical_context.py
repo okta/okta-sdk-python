@@ -55,3 +55,12 @@ class LogGeographicalContext(
             self.geolocation = None
             self.postal_code = None
             self.state = None
+
+    def request_format(self):
+        return {
+            "city": self.city,
+            "country": self.country,
+            "geolocation": self.geolocation,
+            "postalCode": self.postal_code,
+            "state": self.state
+        }

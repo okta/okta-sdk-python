@@ -91,3 +91,14 @@ class LogAuthenticationContext(
             self.external_session_id = None
             self.interface = None
             self.issuer = None
+
+    def request_format(self):
+        return {
+            "authenticationProvider": self.authentication_provider,
+            "authenticationStep": self.authentication_step,
+            "credentialProvider": self.credential_provider,
+            "credentialType": self.credential_type,
+            "externalSessionId": self.external_session_id,
+            "interface": self.interface,
+            "issuer": self.issuer
+        }

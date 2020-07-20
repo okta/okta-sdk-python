@@ -120,3 +120,15 @@ class ProtocolEndpoints(
             self.sso = None
             self.token = None
             self.user_info = None
+
+    def request_format(self):
+        return {
+            "acs": self.acs,
+            "authorization": self.authorization,
+            "jwks": self.jwks,
+            "metadata": self.metadata,
+            "slo": self.slo,
+            "sso": self.sso,
+            "token": self.token,
+            "userInfo": self.user_info
+        }

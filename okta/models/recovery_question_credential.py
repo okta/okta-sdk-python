@@ -36,3 +36,9 @@ class RecoveryQuestionCredential(
         else:
             self.answer = None
             self.question = None
+
+    def request_format(self):
+        return {
+            "answer": self.answer,
+            "question": self.question
+        }

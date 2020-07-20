@@ -56,3 +56,9 @@ class ProvisioningConditions(
         else:
             self.deprovisioned = None
             self.suspended = None
+
+    def request_format(self):
+        return {
+            "deprovisioned": self.deprovisioned,
+            "suspended": self.suspended
+        }

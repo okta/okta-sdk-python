@@ -33,3 +33,8 @@ class PasswordDictionaryCommon(
                 if "exclude" in config else None
         else:
             self.exclude = "false"
+
+    def request_format(self):
+        return {
+            "exclude": self.exclude
+        }

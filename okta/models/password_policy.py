@@ -57,3 +57,9 @@ class PasswordPolicy(
         else:
             self.conditions = None
             self.settings = None
+
+    def request_format(self):
+        return {
+            "conditions": self.conditions,
+            "settings": self.settings
+        }

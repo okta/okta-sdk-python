@@ -64,3 +64,15 @@ class PasswordPolicyPasswordSettingsComplexity(
             self.min_number = "1"
             self.min_symbol = "1"
             self.min_upper_case = "1"
+
+    def request_format(self):
+        return {
+            "dictionary": self.dictionary,
+            "excludeAttributes": self.exclude_attributes,
+            "excludeUsername": self.exclude_username,
+            "minLength": self.min_length,
+            "minLowerCase": self.min_lower_case,
+            "minNumber": self.min_number,
+            "minSymbol": self.min_symbol,
+            "minUpperCase": self.min_upper_case
+        }

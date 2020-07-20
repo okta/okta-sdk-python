@@ -36,3 +36,9 @@ class AutoLoginApplicationSettingsSignOn(
         else:
             self.login_url = None
             self.redirect_url = None
+
+    def request_format(self):
+        return {
+            "loginUrl": self.login_url,
+            "redirectUrl": self.redirect_url
+        }

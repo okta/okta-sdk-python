@@ -33,3 +33,8 @@ class PasswordPolicyRecoveryQuestionComplexity(
                 if "minLength" in config else None
         else:
             self.min_length = None
+
+    def request_format(self):
+        return {
+            "minLength": self.min_length
+        }

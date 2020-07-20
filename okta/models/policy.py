@@ -33,10 +33,10 @@ class Policy(
 
     def __init__(self, config=None):
         if config:
-            self.embedded = config["_embedded"]\
-                if "_embedded" in config else None
-            self.links = config["_links"]\
-                if "_links" in config else None
+            self.embedded = config["embedded"]\
+                if "embedded" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
             if "conditions" in config:
                 if isinstance(config["conditions"],
                               PolicyRuleConditions):
@@ -86,3 +86,19 @@ class Policy(
             self.status = None
             self.system = None
             self.type = None
+
+    def request_format(self):
+        return {
+            "_embedded": self.embedded,
+            "_links": self.links,
+            "conditions": self.conditions,
+            "created": self.created,
+            "description": self.description,
+            "id": self.id,
+            "lastUpdated": self.last_updated,
+            "name": self.name,
+            "priority": self.priority,
+            "status": self.status,
+            "system": self.system,
+            "type": self.type
+        }

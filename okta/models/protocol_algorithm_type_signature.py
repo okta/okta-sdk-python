@@ -36,3 +36,9 @@ class ProtocolAlgorithmTypeSignature(
         else:
             self.algorithm = None
             self.scope = None
+
+    def request_format(self):
+        return {
+            "algorithm": self.algorithm,
+            "scope": self.scope
+        }

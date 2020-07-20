@@ -168,3 +168,23 @@ class LogEvent(
             self.transaction = None
             self.uuid = None
             self.version = None
+
+    def request_format(self):
+        return {
+            "actor": self.actor,
+            "authenticationContext": self.authentication_context,
+            "client": self.client,
+            "debugContext": self.debug_context,
+            "displayMessage": self.display_message,
+            "eventType": self.event_type,
+            "legacyEventType": self.legacy_event_type,
+            "outcome": self.outcome,
+            "published": self.published,
+            "request": self.request,
+            "securityContext": self.security_context,
+            "severity": self.severity,
+            "target": self.target,
+            "transaction": self.transaction,
+            "uuid": self.uuid,
+            "version": self.version
+        }

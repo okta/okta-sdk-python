@@ -40,8 +40,8 @@ class SwaThreeFieldApplicationSettingsApplication(
                 if "loginUrlRegex" in config else None
             self.password_selector = config["passwordSelector"]\
                 if "passwordSelector" in config else None
-            self.target_url = config["targetURL"]\
-                if "targetURL" in config else None
+            self.target_url = config["targetUrl"]\
+                if "targetUrl" in config else None
             self.user_name_selector = config["userNameSelector"]\
                 if "userNameSelector" in config else None
         else:
@@ -52,3 +52,14 @@ class SwaThreeFieldApplicationSettingsApplication(
             self.password_selector = None
             self.target_url = None
             self.user_name_selector = None
+
+    def request_format(self):
+        return {
+            "buttonSelector": self.button_selector,
+            "extraFieldSelector": self.extra_field_selector,
+            "extraFieldValue": self.extra_field_value,
+            "loginUrlRegex": self.login_url_regex,
+            "passwordSelector": self.password_selector,
+            "targetURL": self.target_url,
+            "userNameSelector": self.user_name_selector
+        }

@@ -39,3 +39,10 @@ class ApplicationCredentialsUsernameTemplate(
             self.suffix = None
             self.template = None
             self.type = None
+
+    def request_format(self):
+        return {
+            "suffix": self.suffix,
+            "template": self.template,
+            "type": self.type
+        }

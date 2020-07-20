@@ -178,7 +178,7 @@ class UserClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{associatedUserId}/linkedObjects
-                {primaryRelationshipName}/{primaryUserId}
+                /{primaryRelationshipName}/{primaryUserId}
             """)
 
         body = {}
@@ -638,7 +638,7 @@ class UserClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/clients/{clientId}/tokens
-                {tokenId}
+                /{tokenId}
             """)
 
         body = {}
@@ -680,7 +680,7 @@ class UserClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/clients/{clientId}/tokens
-                {tokenId}
+                /{tokenId}
             """)
         if query_params:
             encoded_query_params = urlencode(query_params)
@@ -781,7 +781,7 @@ class UserClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/credentials
-                change_recovery_question
+                /change_recovery_question
             """)
 
         body = user_credentials.as_dict()
@@ -1258,7 +1258,7 @@ class UserClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/lifecycle
-                expire_password?tempPassword=false
+                /expire_password?tempPassword=false
             """)
 
         body = {}
@@ -1301,7 +1301,7 @@ class UserClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/lifecycle
-                expire_password?tempPassword=true
+                /expire_password?tempPassword=true
             """)
 
         body = {}
@@ -1577,7 +1577,7 @@ class UserClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/linkedObjects
-                {relationshipName}
+                /{relationshipName}
             """)
 
         body = {}
@@ -1617,7 +1617,7 @@ class UserClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/linkedObjects
-                {relationshipName}
+                /{relationshipName}
             """)
         if query_params:
             encoded_query_params = urlencode(query_params)
@@ -1796,7 +1796,7 @@ class UserClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/roles/{roleId}/targets
-                catalog/apps
+                /catalog/apps
             """)
         if query_params:
             encoded_query_params = urlencode(query_params)
@@ -1838,7 +1838,7 @@ class UserClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/roles/{roleId}/targets
-                catalog/apps
+                /catalog/apps
             """)
 
         body = {}
@@ -1872,7 +1872,7 @@ class UserClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/roles/{roleId}/targets
-                catalog/apps/{appName}
+                /catalog/apps/{appName}
             """)
 
         body = {}
@@ -1906,7 +1906,7 @@ class UserClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/roles/{roleId}/targets
-                catalog/apps/{appName}
+                /catalog/apps/{appName}
             """)
 
         body = {}
@@ -1943,7 +1943,7 @@ class UserClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/roles/{roleId}/targets
-                catalog/apps/{appName}/{applicationId}
+                /catalog/apps/{appName}/{applicationId}
             """)
 
         body = {}
@@ -1980,7 +1980,7 @@ class UserClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/roles/{roleId}/targets
-                catalog/apps/{appName}/{applicationId}
+                /catalog/apps/{appName}/{applicationId}
             """)
 
         body = {}
@@ -2018,7 +2018,7 @@ class UserClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/roles/{roleId}/targets
-                groups
+                /groups
             """)
         if query_params:
             encoded_query_params = urlencode(query_params)
@@ -2061,7 +2061,7 @@ class UserClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/roles/{roleId}/targets
-                groups/{groupId}
+                /groups/{groupId}
             """)
 
         body = {}
@@ -2095,7 +2095,7 @@ class UserClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/roles/{roleId}/targets
-                groups/{groupId}
+                /groups/{groupId}
             """)
 
         body = {}

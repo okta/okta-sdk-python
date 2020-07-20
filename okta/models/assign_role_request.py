@@ -43,3 +43,8 @@ class AssignRoleRequest(
                 self.type = None
         else:
             self.type = None
+
+    def request_format(self):
+        return {
+            "type": self.type
+        }

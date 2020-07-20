@@ -300,7 +300,7 @@ class InlineHookClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/inlineHooks/{inlineHookId}/lifecycle
-                activate
+                /activate
             """)
 
         body = {}
@@ -341,7 +341,7 @@ class InlineHookClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/inlineHooks/{inlineHookId}/lifecycle
-                deactivate
+                /deactivate
             """)
 
         body = {}

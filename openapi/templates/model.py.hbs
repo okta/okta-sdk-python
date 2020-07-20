@@ -45,19 +45,19 @@ class {{pascalCase model.modelName}}(
         if config:
             {{#each model.properties as |prop|}}
             {{#if (exists prop "$ref")}}
-            if "{{prop.propertyName}}" in config:
-                if isinstance(config["{{prop.propertyName}}"],
+            if "{{camelCase prop.propertyName}}" in config:
+                if isinstance(config["{{camelCase prop.propertyName}}"],
                               {{pascalCase prop.model}}):
-                    self.{{snakeCase prop.propertyName}} = config["{{prop.propertyName}}"]
+                    self.{{snakeCase prop.propertyName}} = config["{{camelCase prop.propertyName}}"]
                 else:
                     self.{{snakeCase prop.propertyName}} = {{pascalCase prop.model}}(
-                        config["{{prop.propertyName}}"]
+                        config["{{camelCase prop.propertyName}}"]
                     )
             else:
                 self.{{snakeCase prop.propertyName}} = None
             {{else}}
-            self.{{snakeCase prop.propertyName}} = config["{{prop.propertyName}}"]\
-                if "{{prop.propertyName}}" in config else None
+            self.{{snakeCase prop.propertyName}} = config["{{camelCase prop.propertyName}}"]\
+                if "{{camelCase prop.propertyName}}" in config else None
             {{/if}}
             {{/each}}
         else:
@@ -71,4 +71,11 @@ class {{pascalCase model.modelName}}(
         {{else}}
         pass
         {{/if}}
+
+    def request_format(self):
+        return {
+            {{#each model.properties as |prop|}}
+            "{{prop.propertyName}}": self.{{snakeCase prop.propertyName}}{{#unless @last}},{{/unless}}
+            {{/each}}
+        }
 {{/if}}

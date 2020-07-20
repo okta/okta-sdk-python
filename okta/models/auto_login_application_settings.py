@@ -44,3 +44,8 @@ class AutoLoginApplicationSettings(
                 self.sign_on = None
         else:
             self.sign_on = None
+
+    def request_format(self):
+        return {
+            "signOn": self.sign_on
+        }

@@ -49,3 +49,10 @@ class InlineHookChannel(
             self.config = None
             self.type = None
             self.version = None
+
+    def request_format(self):
+        return {
+            "config": self.config,
+            "type": self.type,
+            "version": self.version
+        }

@@ -33,17 +33,17 @@ class ApplicationCredentialsOAuthClient(
         if config:
             self.auto_key_rotation = config["autoKeyRotation"]\
                 if "autoKeyRotation" in config else None
-            self.client_id = config["client_id"]\
-                if "client_id" in config else None
-            self.client_secret = config["client_secret"]\
-                if "client_secret" in config else None
-            if "token_endpoint_auth_method" in config:
-                if isinstance(config["token_endpoint_auth_method"],
+            self.client_id = config["clientId"]\
+                if "clientId" in config else None
+            self.client_secret = config["clientSecret"]\
+                if "clientSecret" in config else None
+            if "tokenEndpointAuthMethod" in config:
+                if isinstance(config["tokenEndpointAuthMethod"],
                               OAuthEndpointAuthenticationMethod):
-                    self.token_endpoint_auth_method = config["token_endpoint_auth_method"]
+                    self.token_endpoint_auth_method = config["tokenEndpointAuthMethod"]
                 else:
                     self.token_endpoint_auth_method = OAuthEndpointAuthenticationMethod(
-                        config["token_endpoint_auth_method"]
+                        config["tokenEndpointAuthMethod"]
                     )
             else:
                 self.token_endpoint_auth_method = None
@@ -52,3 +52,11 @@ class ApplicationCredentialsOAuthClient(
             self.client_id = None
             self.client_secret = None
             self.token_endpoint_auth_method = None
+
+    def request_format(self):
+        return {
+            "autoKeyRotation": self.auto_key_rotation,
+            "client_id": self.client_id,
+            "client_secret": self.client_secret,
+            "token_endpoint_auth_method": self.token_endpoint_auth_method
+        }

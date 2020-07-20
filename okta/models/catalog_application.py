@@ -31,8 +31,8 @@ class CatalogApplication(
 
     def __init__(self, config=None):
         if config:
-            self.links = config["_links"]\
-                if "_links" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
             self.category = config["category"]\
                 if "category" in config else None
             self.description = config["description"]\
@@ -76,3 +76,19 @@ class CatalogApplication(
             self.status = None
             self.verification_status = None
             self.website = None
+
+    def request_format(self):
+        return {
+            "_links": self.links,
+            "category": self.category,
+            "description": self.description,
+            "displayName": self.display_name,
+            "features": self.features,
+            "id": self.id,
+            "lastUpdated": self.last_updated,
+            "name": self.name,
+            "signOnModes": self.sign_on_modes,
+            "status": self.status,
+            "verificationStatus": self.verification_status,
+            "website": self.website
+        }

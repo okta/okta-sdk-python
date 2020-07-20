@@ -29,10 +29,10 @@ class VerifyUserFactorResponse(
 
     def __init__(self, config=None):
         if config:
-            self.embedded = config["_embedded"]\
-                if "_embedded" in config else None
-            self.links = config["_links"]\
-                if "_links" in config else None
+            self.embedded = config["embedded"]\
+                if "embedded" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
             self.expires_at = config["expiresAt"]\
                 if "expiresAt" in config else None
             self.factor_result = config["factorResult"]\
@@ -45,3 +45,12 @@ class VerifyUserFactorResponse(
             self.expires_at = None
             self.factor_result = None
             self.factor_result_message = None
+
+    def request_format(self):
+        return {
+            "_embedded": self.embedded,
+            "_links": self.links,
+            "expiresAt": self.expires_at,
+            "factorResult": self.factor_result,
+            "factorResultMessage": self.factor_result_message
+        }

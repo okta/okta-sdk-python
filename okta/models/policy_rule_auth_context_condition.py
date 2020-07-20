@@ -33,3 +33,8 @@ class PolicyRuleAuthContextCondition(
                 if "authType" in config else None
         else:
             self.auth_type = None
+
+    def request_format(self):
+        return {
+            "authType": self.auth_type
+        }

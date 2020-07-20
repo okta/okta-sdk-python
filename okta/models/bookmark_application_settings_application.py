@@ -37,3 +37,9 @@ class BookmarkApplicationSettingsApplication(
         else:
             self.request_integration = None
             self.url = None
+
+    def request_format(self):
+        return {
+            "requestIntegration": self.request_integration,
+            "url": self.url
+        }

@@ -275,7 +275,7 @@ class EventHookClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/eventHooks/{eventHookId}/lifecycle
-                deactivate
+                /deactivate
             """)
 
         body = {}

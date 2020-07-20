@@ -33,3 +33,8 @@ class CreateSessionRequest(
                 if "sessionToken" in config else None
         else:
             self.session_token = None
+
+    def request_format(self):
+        return {
+            "sessionToken": self.session_token
+        }

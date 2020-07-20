@@ -52,3 +52,11 @@ class LinkedObjectDetails(
             self.name = None
             self.title = None
             self.type = None
+
+    def request_format(self):
+        return {
+            "description": self.description,
+            "name": self.name,
+            "title": self.title,
+            "type": self.type
+        }

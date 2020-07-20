@@ -29,8 +29,8 @@ class JsonWebKey(
 
     def __init__(self, config=None):
         if config:
-            self.links = config["_links"]\
-                if "_links" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
             self.alg = config["alg"]\
                 if "alg" in config else None
             self.created = config["created"]\
@@ -39,8 +39,8 @@ class JsonWebKey(
                 if "e" in config else None
             self.expires_at = config["expiresAt"]\
                 if "expiresAt" in config else None
-            self.key_ops = config["key_ops"]\
-                if "key_ops" in config else None
+            self.key_ops = config["keyOps"]\
+                if "keyOps" in config else None
             self.kid = config["kid"]\
                 if "kid" in config else None
             self.kty = config["kty"]\
@@ -53,14 +53,14 @@ class JsonWebKey(
                 if "status" in config else None
             self.use = config["use"]\
                 if "use" in config else None
-            self.x_5_c = config["x5c"]\
-                if "x5c" in config else None
-            self.x_5_t = config["x5t"]\
-                if "x5t" in config else None
-            self.x_5_t_s_256 = config["x5t#S256"]\
-                if "x5t#S256" in config else None
-            self.x_5_u = config["x5u"]\
-                if "x5u" in config else None
+            self.x_5_c = config["x5C"]\
+                if "x5C" in config else None
+            self.x_5_t = config["x5T"]\
+                if "x5T" in config else None
+            self.x_5_t_s_256 = config["x5TS256"]\
+                if "x5TS256" in config else None
+            self.x_5_u = config["x5U"]\
+                if "x5U" in config else None
         else:
             self.links = None
             self.alg = None
@@ -78,3 +78,23 @@ class JsonWebKey(
             self.x_5_t = None
             self.x_5_t_s_256 = None
             self.x_5_u = None
+
+    def request_format(self):
+        return {
+            "_links": self.links,
+            "alg": self.alg,
+            "created": self.created,
+            "e": self.e,
+            "expiresAt": self.expires_at,
+            "key_ops": self.key_ops,
+            "kid": self.kid,
+            "kty": self.kty,
+            "lastUpdated": self.last_updated,
+            "n": self.n,
+            "status": self.status,
+            "use": self.use,
+            "x5c": self.x_5_c,
+            "x5t": self.x_5_t,
+            "x5t#S256": self.x_5_t_s_256,
+            "x5u": self.x_5_u
+        }

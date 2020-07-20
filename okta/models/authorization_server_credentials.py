@@ -43,3 +43,8 @@ class AuthorizationServerCredentials(
                 self.signing = None
         else:
             self.signing = None
+
+    def request_format(self):
+        return {
+            "signing": self.signing
+        }

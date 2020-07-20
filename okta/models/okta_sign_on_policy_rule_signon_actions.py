@@ -58,3 +58,13 @@ class OktaSignOnPolicyRuleSignonActions(
             self.remember_device_by_default = "false"
             self.require_factor = "false"
             self.session = None
+
+    def request_format(self):
+        return {
+            "access": self.access,
+            "factorLifetime": self.factor_lifetime,
+            "factorPromptMode": self.factor_prompt_mode,
+            "rememberDeviceByDefault": self.remember_device_by_default,
+            "requireFactor": self.require_factor,
+            "session": self.session
+        }

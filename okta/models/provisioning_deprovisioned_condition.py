@@ -33,3 +33,8 @@ class ProvisioningDeprovisionedCondition(
                 if "action" in config else None
         else:
             self.action = None
+
+    def request_format(self):
+        return {
+            "action": self.action
+        }

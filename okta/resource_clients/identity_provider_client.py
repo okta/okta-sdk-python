@@ -588,7 +588,7 @@ class IdentityProviderClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/idps/{idpId}/credentials/csrs/{csrId}
-                lifecycle/publish
+                /lifecycle/publish
             """)
 
         body = string.as_dict()
@@ -636,7 +636,7 @@ class IdentityProviderClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/idps/{idpId}/credentials/csrs/{csrId}
-                lifecycle/publish
+                /lifecycle/publish
             """)
 
         body = HTTPClient.format_binary_data(string)
@@ -684,7 +684,7 @@ class IdentityProviderClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/idps/{idpId}/credentials/csrs/{csrId}
-                lifecycle/publish
+                /lifecycle/publish
             """)
 
         body = string.as_dict()
@@ -732,7 +732,7 @@ class IdentityProviderClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/idps/{idpId}/credentials/csrs/{csrId}
-                lifecycle/publish
+                /lifecycle/publish
             """)
 
         body = HTTPClient.format_binary_data(string)
@@ -780,7 +780,7 @@ class IdentityProviderClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/idps/{idpId}/credentials/csrs/{csrId}
-                lifecycle/publish
+                /lifecycle/publish
             """)
 
         body = HTTPClient.format_binary_data(string)
@@ -1244,7 +1244,7 @@ class IdentityProviderClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/idps/{idpId}/users/{userId}/credentials
-                tokens
+                /tokens
             """)
 
         body = {}

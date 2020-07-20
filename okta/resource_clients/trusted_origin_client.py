@@ -245,7 +245,7 @@ class TrustedOriginClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/trustedOrigins/{trustedOriginId}/lifecycle
-                activate
+                /activate
             """)
 
         body = {}
@@ -285,7 +285,7 @@ class TrustedOriginClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/trustedOrigins/{trustedOriginId}/lifecycle
-                deactivate
+                /deactivate
             """)
 
         body = {}

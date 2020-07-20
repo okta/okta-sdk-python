@@ -337,7 +337,7 @@ class AuthorizationServerClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/authorizationServers/{authServerId}/claims
-                {claimId}
+                /{claimId}
             """)
 
         body = {}
@@ -372,7 +372,7 @@ class AuthorizationServerClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/authorizationServers/{authServerId}/claims
-                {claimId}
+                /{claimId}
             """)
 
         body = {}
@@ -414,7 +414,7 @@ class AuthorizationServerClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/authorizationServers/{authServerId}/claims
-                {claimId}
+                /{claimId}
             """)
 
         body = o_auth_2_claim.as_dict()
@@ -495,7 +495,7 @@ class AuthorizationServerClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/authorizationServers/{authServerId}/clients
-                {clientId}/tokens
+                /{clientId}/tokens
             """)
 
         body = {}
@@ -534,7 +534,7 @@ class AuthorizationServerClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/authorizationServers/{authServerId}/clients
-                {clientId}/tokens
+                /{clientId}/tokens
             """)
         if query_params:
             encoded_query_params = urlencode(query_params)
@@ -577,7 +577,7 @@ class AuthorizationServerClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/authorizationServers/{authServerId}/clients
-                {clientId}/tokens/{tokenId}
+                /{clientId}/tokens/{tokenId}
             """)
 
         body = {}
@@ -615,7 +615,7 @@ class AuthorizationServerClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/authorizationServers/{authServerId}/clients
-                {clientId}/tokens/{tokenId}
+                /{clientId}/tokens/{tokenId}
             """)
         if query_params:
             encoded_query_params = urlencode(query_params)
@@ -658,7 +658,7 @@ class AuthorizationServerClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/authorizationServers/{authServerId}
-                credentials/keys
+                /credentials/keys
             """)
 
         body = {}
@@ -698,7 +698,7 @@ class AuthorizationServerClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/authorizationServers/{authServerId}
-                credentials/lifecycle/keyRotate
+                /credentials/lifecycle/keyRotate
             """)
 
         body = jwk_use.as_dict()
@@ -739,7 +739,7 @@ class AuthorizationServerClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/authorizationServers/{authServerId}
-                lifecycle/activate
+                /lifecycle/activate
             """)
 
         body = {}
@@ -771,7 +771,7 @@ class AuthorizationServerClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/authorizationServers/{authServerId}
-                lifecycle/deactivate
+                /lifecycle/deactivate
             """)
 
         body = {}
@@ -805,7 +805,7 @@ class AuthorizationServerClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/authorizationServers/{authServerId}
-                policies
+                /policies
             """)
 
         body = {}
@@ -846,7 +846,7 @@ class AuthorizationServerClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/authorizationServers/{authServerId}
-                policies
+                /policies
             """)
 
         body = policy.as_dict()
@@ -888,7 +888,7 @@ class AuthorizationServerClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/authorizationServers/{authServerId}
-                policies/{policyId}
+                /policies/{policyId}
             """)
 
         body = {}
@@ -923,7 +923,7 @@ class AuthorizationServerClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/authorizationServers/{authServerId}
-                policies/{policyId}
+                /policies/{policyId}
             """)
 
         body = {}
@@ -965,7 +965,7 @@ class AuthorizationServerClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/authorizationServers/{authServerId}
-                policies/{policyId}
+                /policies/{policyId}
             """)
 
         body = policy.as_dict()
@@ -1097,7 +1097,7 @@ class AuthorizationServerClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/authorizationServers/{authServerId}/scopes
-                {scopeId}
+                /{scopeId}
             """)
 
         body = {}
@@ -1132,7 +1132,7 @@ class AuthorizationServerClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/authorizationServers/{authServerId}/scopes
-                {scopeId}
+                /{scopeId}
             """)
 
         body = {}
@@ -1174,7 +1174,7 @@ class AuthorizationServerClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/authorizationServers/{authServerId}/scopes
-                {scopeId}
+                /{scopeId}
             """)
 
         body = o_auth_2_scope.as_dict()

@@ -36,3 +36,9 @@ class GroupProfile(
         else:
             self.description = None
             self.name = None
+
+    def request_format(self):
+        return {
+            "description": self.description,
+            "name": self.name
+        }

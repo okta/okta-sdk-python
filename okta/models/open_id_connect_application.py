@@ -60,3 +60,10 @@ class OpenIdConnectApplication(
             self.credentials = None
             self.name = "oidc_client"
             self.settings = None
+
+    def request_format(self):
+        return {
+            "credentials": self.credentials,
+            "name": self.name,
+            "settings": self.settings
+        }

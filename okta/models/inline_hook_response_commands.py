@@ -36,3 +36,9 @@ class InlineHookResponseCommands(
         else:
             self.type = None
             self.value = None
+
+    def request_format(self):
+        return {
+            "type": self.type,
+            "value": self.value
+        }

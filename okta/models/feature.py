@@ -35,8 +35,8 @@ class Feature(
 
     def __init__(self, config=None):
         if config:
-            self.links = config["_links"]\
-                if "_links" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
             self.description = config["description"]\
                 if "description" in config else None
             self.id = config["id"]\
@@ -81,3 +81,14 @@ class Feature(
             self.stage = None
             self.status = None
             self.type = None
+
+    def request_format(self):
+        return {
+            "_links": self.links,
+            "description": self.description,
+            "id": self.id,
+            "name": self.name,
+            "stage": self.stage,
+            "status": self.status,
+            "type": self.type
+        }

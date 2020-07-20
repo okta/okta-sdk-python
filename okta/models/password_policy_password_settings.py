@@ -69,3 +69,10 @@ class PasswordPolicyPasswordSettings(
             self.age = None
             self.complexity = None
             self.lockout = None
+
+    def request_format(self):
+        return {
+            "age": self.age,
+            "complexity": self.complexity,
+            "lockout": self.lockout
+        }

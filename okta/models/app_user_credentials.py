@@ -46,3 +46,9 @@ class AppUserCredentials(
         else:
             self.password = None
             self.user_name = None
+
+    def request_format(self):
+        return {
+            "password": self.password,
+            "userName": self.user_name
+        }
