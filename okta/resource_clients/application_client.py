@@ -19,7 +19,6 @@ limitations under the License.
 
 from urllib.parse import urlencode
 from okta.http_client import HTTPClient
-from okta.utils import format_url
 from okta.models.application\
     import Application
 from okta.models.csr\
@@ -34,6 +33,7 @@ from okta.models.o_auth_2_token\
     import OAuth2Token
 from okta.models.app_user\
     import AppUser
+from okta.utils import format_url
 
 
 class ApplicationClient():
@@ -82,7 +82,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Application)
 
         if error:
             return (None, None, error)
@@ -130,7 +130,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Application)
 
         if error:
             return (None, None, error)
@@ -208,7 +208,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Application)
 
         if error:
             return (None, None, error)
@@ -252,7 +252,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Application)
 
         if error:
             return (None, None, error)
@@ -293,7 +293,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Csr)
 
         if error:
             return (None, None, error)
@@ -338,7 +338,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Csr)
 
         if error:
             return (None, None, error)
@@ -414,7 +414,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Csr)
 
         if error:
             return (None, None, error)
@@ -462,7 +462,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
@@ -510,7 +510,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
@@ -558,7 +558,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
@@ -606,7 +606,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
@@ -654,7 +654,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
@@ -694,7 +694,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
@@ -740,7 +740,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
@@ -781,7 +781,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
@@ -828,7 +828,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
@@ -873,7 +873,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2ScopeConsentGrant)
 
         if error:
             return (None, None, error)
@@ -918,7 +918,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2ScopeConsentGrant)
 
         if error:
             return (None, None, error)
@@ -999,7 +999,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2ScopeConsentGrant)
 
         if error:
             return (None, None, error)
@@ -1047,7 +1047,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, ApplicationGroupAssignment)
 
         if error:
             return (None, None, error)
@@ -1126,7 +1126,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, ApplicationGroupAssignment)
 
         if error:
             return (None, None, error)
@@ -1171,7 +1171,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, ApplicationGroupAssignment)
 
         if error:
             return (None, None, error)
@@ -1314,7 +1314,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2Token)
 
         if error:
             return (None, None, error)
@@ -1394,7 +1394,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2Token)
 
         if error:
             return (None, None, error)
@@ -1445,7 +1445,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, AppUser)
 
         if error:
             return (None, None, error)
@@ -1494,7 +1494,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, AppUser)
 
         if error:
             return (None, None, error)
@@ -1579,7 +1579,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, AppUser)
 
         if error:
             return (None, None, error)
@@ -1624,7 +1624,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, AppUser)
 
         if error:
             return (None, None, error)

@@ -18,13 +18,13 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from urllib.parse import urlencode
-from okta.utils import format_url
 from okta.models.user_factor\
     import UserFactor
 from okta.models.security_question\
     import SecurityQuestion
 from okta.models.verify_user_factor_response\
     import VerifyUserFactorResponse
+from okta.utils import format_url
 
 
 class UserFactorClient():
@@ -63,7 +63,7 @@ class UserFactorClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, UserFactor)
 
         if error:
             return (None, None, error)
@@ -115,7 +115,7 @@ class UserFactorClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, UserFactor)
 
         if error:
             return (None, None, error)
@@ -156,7 +156,7 @@ class UserFactorClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, UserFactor)
 
         if error:
             return (None, None, error)
@@ -197,7 +197,7 @@ class UserFactorClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, SecurityQuestion)
 
         if error:
             return (None, None, error)
@@ -272,7 +272,7 @@ class UserFactorClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, UserFactor)
 
         if error:
             return (None, None, error)
@@ -319,7 +319,7 @@ class UserFactorClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, UserFactor)
 
         if error:
             return (None, None, error)
@@ -362,7 +362,7 @@ class UserFactorClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, VerifyUserFactorResponse)
 
         if error:
             return (None, None, error)
@@ -414,7 +414,7 @@ class UserFactorClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, VerifyUserFactorResponse)
 
         if error:
             return (None, None, error)

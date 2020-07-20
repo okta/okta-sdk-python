@@ -19,7 +19,6 @@ limitations under the License.
 
 from urllib.parse import urlencode
 from okta.http_client import HTTPClient
-from okta.utils import format_url
 from okta.models.identity_provider\
     import IdentityProvider
 from okta.models.json_web_key\
@@ -30,6 +29,7 @@ from okta.models.identity_provider_application_user\
     import IdentityProviderApplicationUser
 from okta.models.social_auth_token\
     import SocialAuthToken
+from okta.utils import format_url
 
 
 class IdentityProviderClient():
@@ -76,7 +76,7 @@ class IdentityProviderClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, IdentityProvider)
 
         if error:
             return (None, None, error)
@@ -119,7 +119,7 @@ class IdentityProviderClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, IdentityProvider)
 
         if error:
             return (None, None, error)
@@ -164,7 +164,7 @@ class IdentityProviderClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
@@ -208,7 +208,7 @@ class IdentityProviderClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
@@ -281,7 +281,7 @@ class IdentityProviderClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
@@ -353,7 +353,7 @@ class IdentityProviderClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, IdentityProvider)
 
         if error:
             return (None, None, error)
@@ -397,7 +397,7 @@ class IdentityProviderClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, IdentityProvider)
 
         if error:
             return (None, None, error)
@@ -437,7 +437,7 @@ class IdentityProviderClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Csr)
 
         if error:
             return (None, None, error)
@@ -482,7 +482,7 @@ class IdentityProviderClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Csr)
 
         if error:
             return (None, None, error)
@@ -557,7 +557,7 @@ class IdentityProviderClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Csr)
 
         if error:
             return (None, None, error)
@@ -605,7 +605,7 @@ class IdentityProviderClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
@@ -653,7 +653,7 @@ class IdentityProviderClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
@@ -701,7 +701,7 @@ class IdentityProviderClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
@@ -749,7 +749,7 @@ class IdentityProviderClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
@@ -797,7 +797,7 @@ class IdentityProviderClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
@@ -837,7 +837,7 @@ class IdentityProviderClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
@@ -884,7 +884,7 @@ class IdentityProviderClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
@@ -925,7 +925,7 @@ class IdentityProviderClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
@@ -972,7 +972,7 @@ class IdentityProviderClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
@@ -1012,7 +1012,7 @@ class IdentityProviderClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, IdentityProvider)
 
         if error:
             return (None, None, error)
@@ -1052,7 +1052,7 @@ class IdentityProviderClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, IdentityProvider)
 
         if error:
             return (None, None, error)
@@ -1092,7 +1092,7 @@ class IdentityProviderClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, IdentityProviderApplicationUser)
 
         if error:
             return (None, None, error)
@@ -1167,7 +1167,7 @@ class IdentityProviderClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, IdentityProviderApplicationUser)
 
         if error:
             return (None, None, error)
@@ -1214,7 +1214,7 @@ class IdentityProviderClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, IdentityProviderApplicationUser)
 
         if error:
             return (None, None, error)
@@ -1258,7 +1258,7 @@ class IdentityProviderClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, SocialAuthToken)
 
         if error:
             return (None, None, error)

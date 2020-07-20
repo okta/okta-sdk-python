@@ -6,11 +6,11 @@ from urllib.parse import urlencode
 {{#if (hasBinaryOps operations)}}
 from okta.http_client import HTTPClient
 {{/if}}
-from okta.utils import format_url
 {{#each (getResourceImports operations) as |import|}}
 from okta.models.{{snakeCase import}}\
     import {{pascalCase import}}
 {{/each}}
+from okta.utils import format_url
 
 
 class {{pascalCase resource}}Client():

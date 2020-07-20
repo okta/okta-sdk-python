@@ -18,11 +18,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from urllib.parse import urlencode
-from okta.utils import format_url
 from okta.models.inline_hook\
     import InlineHook
 from okta.models.inline_hook_response\
     import InlineHookResponse
+from okta.utils import format_url
 
 
 class InlineHookClient():
@@ -63,7 +63,7 @@ class InlineHookClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, InlineHook)
 
         if error:
             return (None, None, error)
@@ -105,7 +105,7 @@ class InlineHookClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, InlineHook)
 
         if error:
             return (None, None, error)
@@ -180,7 +180,7 @@ class InlineHookClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, InlineHook)
 
         if error:
             return (None, None, error)
@@ -224,7 +224,7 @@ class InlineHookClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, InlineHook)
 
         if error:
             return (None, None, error)
@@ -273,7 +273,7 @@ class InlineHookClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, InlineHookResponse)
 
         if error:
             return (None, None, error)
@@ -314,7 +314,7 @@ class InlineHookClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, InlineHook)
 
         if error:
             return (None, None, error)
@@ -355,7 +355,7 @@ class InlineHookClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, InlineHook)
 
         if error:
             return (None, None, error)

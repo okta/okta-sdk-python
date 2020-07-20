@@ -18,9 +18,9 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from urllib.parse import urlencode
-from okta.utils import format_url
 from okta.models.feature\
     import Feature
+from okta.utils import format_url
 
 
 class FeatureClient():
@@ -56,7 +56,7 @@ class FeatureClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Feature)
 
         if error:
             return (None, None, error)
@@ -95,7 +95,7 @@ class FeatureClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Feature)
 
         if error:
             return (None, None, error)
@@ -134,7 +134,7 @@ class FeatureClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Feature)
 
         if error:
             return (None, None, error)
@@ -173,7 +173,7 @@ class FeatureClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Feature)
 
         if error:
             return (None, None, error)
@@ -218,7 +218,7 @@ class FeatureClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Feature)
 
         if error:
             return (None, None, error)

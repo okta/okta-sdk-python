@@ -17,9 +17,9 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.utils import format_url
 from okta.models.user_type\
     import UserType
+from okta.utils import format_url
 
 
 class UserTypeClient():
@@ -56,7 +56,7 @@ class UserTypeClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, UserType)
 
         if error:
             return (None, None, error)
@@ -101,7 +101,7 @@ class UserTypeClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, UserType)
 
         if error:
             return (None, None, error)
@@ -176,7 +176,7 @@ class UserTypeClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, UserType)
 
         if error:
             return (None, None, error)
@@ -220,7 +220,7 @@ class UserTypeClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, UserType)
 
         if error:
             return (None, None, error)
@@ -264,7 +264,7 @@ class UserTypeClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, UserType)
 
         if error:
             return (None, None, error)

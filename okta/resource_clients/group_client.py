@@ -18,7 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from urllib.parse import urlencode
-from okta.utils import format_url
 from okta.models.group\
     import Group
 from okta.models.group_rule\
@@ -31,6 +30,7 @@ from okta.models.catalog_application\
     import CatalogApplication
 from okta.models.user\
     import User
+from okta.utils import format_url
 
 
 class GroupClient():
@@ -77,7 +77,7 @@ class GroupClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Group)
 
         if error:
             return (None, None, error)
@@ -121,7 +121,7 @@ class GroupClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Group)
 
         if error:
             return (None, None, error)
@@ -168,7 +168,7 @@ class GroupClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, GroupRule)
 
         if error:
             return (None, None, error)
@@ -212,7 +212,7 @@ class GroupClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, GroupRule)
 
         if error:
             return (None, None, error)
@@ -291,7 +291,7 @@ class GroupClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, GroupRule)
 
         if error:
             return (None, None, error)
@@ -336,7 +336,7 @@ class GroupClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, GroupRule)
 
         if error:
             return (None, None, error)
@@ -475,7 +475,7 @@ class GroupClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Group)
 
         if error:
             return (None, None, error)
@@ -520,7 +520,7 @@ class GroupClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Group)
 
         if error:
             return (None, None, error)
@@ -567,7 +567,7 @@ class GroupClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Application)
 
         if error:
             return (None, None, error)
@@ -611,7 +611,7 @@ class GroupClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Role)
 
         if error:
             return (None, None, error)
@@ -660,7 +660,7 @@ class GroupClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Role)
 
         if error:
             return (None, None, error)
@@ -733,7 +733,7 @@ class GroupClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Role)
 
         if error:
             return (None, None, error)
@@ -785,7 +785,7 @@ class GroupClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, CatalogApplication)
 
         if error:
             return (None, None, error)
@@ -974,7 +974,7 @@ class GroupClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Group)
 
         if error:
             return (None, None, error)
@@ -1094,7 +1094,7 @@ class GroupClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, User)
 
         if error:
             return (None, None, error)

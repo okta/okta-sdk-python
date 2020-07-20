@@ -18,7 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from urllib.parse import urlencode
-from okta.utils import format_url
 from okta.models.authorization_server\
     import AuthorizationServer
 from okta.models.o_auth_2_claim\
@@ -33,6 +32,7 @@ from okta.models.policy\
     import Policy
 from okta.models.o_auth_2_scope\
     import OAuth2Scope
+from okta.utils import format_url
 
 
 class AuthorizationServerClient():
@@ -75,7 +75,7 @@ class AuthorizationServerClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, AuthorizationServer)
 
         if error:
             return (None, None, error)
@@ -117,7 +117,7 @@ class AuthorizationServerClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, AuthorizationServer)
 
         if error:
             return (None, None, error)
@@ -187,7 +187,7 @@ class AuthorizationServerClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, AuthorizationServer)
 
         if error:
             return (None, None, error)
@@ -230,7 +230,7 @@ class AuthorizationServerClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, AuthorizationServer)
 
         if error:
             return (None, None, error)
@@ -269,7 +269,7 @@ class AuthorizationServerClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2Claim)
 
         if error:
             return (None, None, error)
@@ -312,7 +312,7 @@ class AuthorizationServerClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2Claim)
 
         if error:
             return (None, None, error)
@@ -386,7 +386,7 @@ class AuthorizationServerClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2Claim)
 
         if error:
             return (None, None, error)
@@ -431,7 +431,7 @@ class AuthorizationServerClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2Claim)
 
         if error:
             return (None, None, error)
@@ -470,7 +470,7 @@ class AuthorizationServerClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2Client)
 
         if error:
             return (None, None, error)
@@ -551,7 +551,7 @@ class AuthorizationServerClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2RefreshToken)
 
         if error:
             return (None, None, error)
@@ -632,7 +632,7 @@ class AuthorizationServerClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2RefreshToken)
 
         if error:
             return (None, None, error)
@@ -672,7 +672,7 @@ class AuthorizationServerClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
@@ -715,7 +715,7 @@ class AuthorizationServerClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
@@ -819,7 +819,7 @@ class AuthorizationServerClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Policy)
 
         if error:
             return (None, None, error)
@@ -863,7 +863,7 @@ class AuthorizationServerClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Policy)
 
         if error:
             return (None, None, error)
@@ -937,7 +937,7 @@ class AuthorizationServerClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Policy)
 
         if error:
             return (None, None, error)
@@ -982,7 +982,7 @@ class AuthorizationServerClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Policy)
 
         if error:
             return (None, None, error)
@@ -1029,7 +1029,7 @@ class AuthorizationServerClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2Scope)
 
         if error:
             return (None, None, error)
@@ -1072,7 +1072,7 @@ class AuthorizationServerClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2Scope)
 
         if error:
             return (None, None, error)
@@ -1146,7 +1146,7 @@ class AuthorizationServerClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2Scope)
 
         if error:
             return (None, None, error)
@@ -1191,7 +1191,7 @@ class AuthorizationServerClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2Scope)
 
         if error:
             return (None, None, error)

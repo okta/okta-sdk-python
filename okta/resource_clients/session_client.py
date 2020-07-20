@@ -17,9 +17,9 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.utils import format_url
 from okta.models.session\
     import Session
+from okta.utils import format_url
 
 
 class SessionClient():
@@ -65,7 +65,7 @@ class SessionClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Session)
 
         if error:
             return (None, None, error)
@@ -138,7 +138,7 @@ class SessionClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Session)
 
         if error:
             return (None, None, error)
@@ -179,7 +179,7 @@ class SessionClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Session)
 
         if error:
             return (None, None, error)

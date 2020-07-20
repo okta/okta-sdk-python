@@ -17,9 +17,9 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.utils import format_url
 from okta.models.linked_object\
     import LinkedObject
+from okta.utils import format_url
 
 
 class LinkedObjectClient():
@@ -55,7 +55,7 @@ class LinkedObjectClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, LinkedObject)
 
         if error:
             return (None, None, error)
@@ -97,7 +97,7 @@ class LinkedObjectClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, LinkedObject)
 
         if error:
             return (None, None, error)
@@ -169,7 +169,7 @@ class LinkedObjectClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, LinkedObject)
 
         if error:
             return (None, None, error)

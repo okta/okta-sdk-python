@@ -18,7 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from urllib.parse import urlencode
-from okta.utils import format_url
 from okta.models.user\
     import User
 from okta.models.app_link\
@@ -49,6 +48,7 @@ from okta.models.role\
     import Role
 from okta.models.catalog_application\
     import CatalogApplication
+from okta.utils import format_url
 
 
 class UserClient():
@@ -98,7 +98,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, User)
 
         if error:
             return (None, None, error)
@@ -149,7 +149,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, User)
 
         if error:
             return (None, None, error)
@@ -265,7 +265,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, User)
 
         if error:
             return (None, None, error)
@@ -315,7 +315,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, User)
 
         if error:
             return (None, None, error)
@@ -365,7 +365,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, User)
 
         if error:
             return (None, None, error)
@@ -406,7 +406,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, AppLink)
 
         if error:
             return (None, None, error)
@@ -447,7 +447,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2Client)
 
         if error:
             return (None, None, error)
@@ -528,7 +528,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2ScopeConsentGrant)
 
         if error:
             return (None, None, error)
@@ -611,7 +611,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2RefreshToken)
 
         if error:
             return (None, None, error)
@@ -697,7 +697,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2RefreshToken)
 
         if error:
             return (None, None, error)
@@ -749,7 +749,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, UserCredentials)
 
         if error:
             return (None, None, error)
@@ -798,7 +798,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, UserCredentials)
 
         if error:
             return (None, None, error)
@@ -844,7 +844,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, ForgotPasswordResponse)
 
         if error:
             return (None, None, error)
@@ -894,7 +894,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, ForgotPasswordResponse)
 
         if error:
             return (None, None, error)
@@ -974,7 +974,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2ScopeConsentGrant)
 
         if error:
             return (None, None, error)
@@ -1053,7 +1053,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2ScopeConsentGrant)
 
         if error:
             return (None, None, error)
@@ -1093,7 +1093,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Group)
 
         if error:
             return (None, None, error)
@@ -1133,7 +1133,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, IdentityProvider)
 
         if error:
             return (None, None, error)
@@ -1185,7 +1185,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, UserActivationToken)
 
         if error:
             return (None, None, error)
@@ -1272,7 +1272,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, User)
 
         if error:
             return (None, None, error)
@@ -1315,7 +1315,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, TempPassword)
 
         if error:
             return (None, None, error)
@@ -1364,7 +1364,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, UserActivationToken)
 
         if error:
             return (None, None, error)
@@ -1448,7 +1448,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, ResetPasswordToken)
 
         if error:
             return (None, None, error)
@@ -1634,7 +1634,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, ResponseLinks)
 
         if error:
             return (None, None, error)
@@ -1679,7 +1679,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Role)
 
         if error:
             return (None, None, error)
@@ -1728,7 +1728,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Role)
 
         if error:
             return (None, None, error)
@@ -1813,7 +1813,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, CatalogApplication)
 
         if error:
             return (None, None, error)
@@ -2035,7 +2035,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Group)
 
         if error:
             return (None, None, error)

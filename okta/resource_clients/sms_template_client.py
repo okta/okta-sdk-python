@@ -18,9 +18,9 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from urllib.parse import urlencode
-from okta.utils import format_url
 from okta.models.sms_template\
     import SmsTemplate
+from okta.utils import format_url
 
 
 class SmsTemplateClient():
@@ -64,7 +64,7 @@ class SmsTemplateClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, SmsTemplate)
 
         if error:
             return (None, None, error)
@@ -107,7 +107,7 @@ class SmsTemplateClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, SmsTemplate)
 
         if error:
             return (None, None, error)
@@ -179,7 +179,7 @@ class SmsTemplateClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, SmsTemplate)
 
         if error:
             return (None, None, error)
@@ -223,7 +223,7 @@ class SmsTemplateClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, SmsTemplate)
 
         if error:
             return (None, None, error)
@@ -267,7 +267,7 @@ class SmsTemplateClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, SmsTemplate)
 
         if error:
             return (None, None, error)

@@ -118,7 +118,7 @@ class RequestExecutor:
 
         return (request, None)
 
-    async def execute(self, request):
+    async def execute(self, request, response_type=None):
         """
         This function is the high level request execution method. Performs the
         API call and returns a formatted response object
@@ -141,7 +141,8 @@ class RequestExecutor:
             return (None, error)
 
         return (
-            OktaAPIResponse(self, request, response, response_body),
+            OktaAPIResponse(self, request, response,
+                            response_body, response_type),
             None
         )
 

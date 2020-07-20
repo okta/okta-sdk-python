@@ -18,11 +18,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from urllib.parse import urlencode
-from okta.utils import format_url
 from okta.models.policy\
     import Policy
 from okta.models.policy_rule\
     import PolicyRule
+from okta.utils import format_url
 
 
 class PolicyClient():
@@ -66,7 +66,7 @@ class PolicyClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Policy)
 
         if error:
             return (None, None, error)
@@ -114,7 +114,7 @@ class PolicyClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Policy)
 
         if error:
             return (None, None, error)
@@ -191,7 +191,7 @@ class PolicyClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Policy)
 
         if error:
             return (None, None, error)
@@ -235,7 +235,7 @@ class PolicyClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Policy)
 
         if error:
             return (None, None, error)
@@ -339,7 +339,7 @@ class PolicyClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, PolicyRule)
 
         if error:
             return (None, None, error)
@@ -383,7 +383,7 @@ class PolicyClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, PolicyRule)
 
         if error:
             return (None, None, error)
@@ -457,7 +457,7 @@ class PolicyClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, PolicyRule)
 
         if error:
             return (None, None, error)
@@ -502,7 +502,7 @@ class PolicyClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, PolicyRule)
 
         if error:
             return (None, None, error)

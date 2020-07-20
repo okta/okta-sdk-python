@@ -17,9 +17,9 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.utils import format_url
 from okta.models.event_hook\
     import EventHook
+from okta.utils import format_url
 
 
 class EventHookClient():
@@ -55,7 +55,7 @@ class EventHookClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, EventHook)
 
         if error:
             return (None, None, error)
@@ -97,7 +97,7 @@ class EventHookClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, EventHook)
 
         if error:
             return (None, None, error)
@@ -167,7 +167,7 @@ class EventHookClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, EventHook)
 
         if error:
             return (None, None, error)
@@ -210,7 +210,7 @@ class EventHookClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, EventHook)
 
         if error:
             return (None, None, error)
@@ -249,7 +249,7 @@ class EventHookClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, EventHook)
 
         if error:
             return (None, None, error)
@@ -289,7 +289,7 @@ class EventHookClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, EventHook)
 
         if error:
             return (None, None, error)
@@ -328,7 +328,7 @@ class EventHookClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, EventHook)
 
         if error:
             return (None, None, error)

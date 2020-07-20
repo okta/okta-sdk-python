@@ -18,9 +18,9 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from urllib.parse import urlencode
-from okta.utils import format_url
 from okta.models.trusted_origin\
     import TrustedOrigin
+from okta.utils import format_url
 
 
 class TrustedOriginClient():
@@ -64,7 +64,7 @@ class TrustedOriginClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, TrustedOrigin)
 
         if error:
             return (None, None, error)
@@ -106,7 +106,7 @@ class TrustedOriginClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, TrustedOrigin)
 
         if error:
             return (None, None, error)
@@ -176,7 +176,7 @@ class TrustedOriginClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, TrustedOrigin)
 
         if error:
             return (None, None, error)
@@ -219,7 +219,7 @@ class TrustedOriginClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, TrustedOrigin)
 
         if error:
             return (None, None, error)
@@ -259,7 +259,7 @@ class TrustedOriginClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, TrustedOrigin)
 
         if error:
             return (None, None, error)
@@ -299,7 +299,7 @@ class TrustedOriginClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, TrustedOrigin)
 
         if error:
             return (None, None, error)
