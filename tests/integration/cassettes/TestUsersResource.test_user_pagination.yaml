@@ -14,12 +14,12 @@ interactions:
     uri: https://test.okta.com/api/v1/users/?activate=False
   response:
     body:
-      string: '{"id":"00ul0i9b8XmRepEMT4x6","status":"STAGED","created":"2020-07-17T15:34:40.000Z","activated":null,"statusChanged":null,"lastLogin":null,"lastUpdated":"2020-07-17T15:34:40.000Z","passwordChanged":"2020-07-17T15:34:41.000Z","type":{"id":"otyc04qb2rUDcq2YA4x6"},"profile":{"firstName":"John","lastName":"Doe-Get","mobilePhone":null,"secondEmail":null,"login":"John.Doe-Get@example.com","email":"John.Doe-Get@example.com"},"credentials":{"password":{},"emails":[{"value":"John.Doe-Get@example.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"schema":{"href":"https://test.okta.com/api/v1/meta/schemas/user/oscc04qb2rUDcq2YA4x6"},"activate":{"href":"https://test.okta.com/api/v1/users/00ul0i9b8XmRepEMT4x6/lifecycle/activate","method":"POST"},"self":{"href":"https://test.okta.com/api/v1/users/00ul0i9b8XmRepEMT4x6"},"type":{"href":"https://test.okta.com/api/v1/meta/types/user/otyc04qb2rUDcq2YA4x6"}}}'
+      string: '{"id":"00ulwhixeWAiB01MD4x6","status":"STAGED","created":"2020-07-20T19:21:16.000Z","activated":null,"statusChanged":null,"lastLogin":null,"lastUpdated":"2020-07-20T19:21:16.000Z","passwordChanged":"2020-07-20T19:21:16.000Z","type":{"id":"otyc04qb2rUDcq2YA4x6"},"profile":{"firstName":"John","lastName":"Doe-Paginate-1","mobilePhone":null,"secondEmail":null,"login":"John.Doe-Paginate-1@example.com","email":"John.Doe-Paginate-1@example.com"},"credentials":{"password":{},"emails":[{"value":"John.Doe-Paginate-1@example.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"schema":{"href":"https://test.okta.com/api/v1/meta/schemas/user/oscc04qb2rUDcq2YA4x6"},"activate":{"href":"https://test.okta.com/api/v1/users/00ulwhixeWAiB01MD4x6/lifecycle/activate","method":"POST"},"self":{"href":"https://test.okta.com/api/v1/users/00ulwhixeWAiB01MD4x6"},"type":{"href":"https://test.okta.com/api/v1/meta/types/user/otyc04qb2rUDcq2YA4x6"}}}'
     headers:
       Connection: keep-alive
       Content-Encoding: gzip
       Content-Type: application/json;charset=UTF-8
-      Date: Fri, 17 Jul 2020 15:34:41 GMT
+      Date: Mon, 20 Jul 2020 19:21:16 GMT
       Public-Key-Pins-Report-Only: pin-sha256="r5EfzZxQVvQpKo3AgYRaT7X2bDO/kj3ACwmxfdT2zt8=";
         pin-sha256="MaqlcUgk2mvY/RFSGeSwBRkI+rZ6/dxe/DuQfBT/vnQ="; pin-sha256="72G5IEvDEWn+EThf3qjR7/bQSWaS2ZSLqolhnO6iyJI=";
         pin-sha256="rrV6CLCCvqnk89gWibYT0JO6fNQ8cCit7GGoiVTjCOg="; max-age=60; report-uri="https://okta.report-uri.com/r/default/hpkp/reportOnly"
@@ -43,12 +43,67 @@ interactions:
       p3p: CP="HONK"
       pragma: no-cache
       report-to: '{"group":"csp-report","max_age":31536000,"endpoints":[{"url":"https://okta.report-uri.com/r/d/csp/reportOnly"}],"include_subdomains":true}'
-      set-cookie: JSESSIONID=255C8F5F7CE19B8DC3FA317537C13623; Path=/; Secure; HttpOnly
+      set-cookie: JSESSIONID=7B0F9171EF7EB57CB16394581804A0BC; Path=/; Secure; HttpOnly
       x-content-type-options: nosniff
-      x-okta-request-id: XxHFELXECrLf1wJQc3iylQAABqs
+      x-okta-request-id: XxXurJY48AurXsARgTu4AAAAB-E
       x-rate-limit-limit: '600'
-      x-rate-limit-remaining: '594'
-      x-rate-limit-reset: '1595000104'
+      x-rate-limit-remaining: '599'
+      x-rate-limit-reset: '1595272936'
+      x-xss-protection: 1; mode=block; report=https://okta.report-uri.com/r/d/xss/enforce
+    status:
+      code: 200
+      message: OK
+    url: https://test.okta.com/api/v1/users/?activate=False
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      Content-Type:
+      - application/json
+      User-Agent:
+      - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
+    method: POST
+    uri: https://test.okta.com/api/v1/users/?activate=False
+  response:
+    body:
+      string: '{"id":"00ulwhiy9kFLqSPCI4x6","status":"STAGED","created":"2020-07-20T19:21:16.000Z","activated":null,"statusChanged":null,"lastLogin":null,"lastUpdated":"2020-07-20T19:21:16.000Z","passwordChanged":"2020-07-20T19:21:16.000Z","type":{"id":"otyc04qb2rUDcq2YA4x6"},"profile":{"firstName":"John","lastName":"Doe-Paginate-2","mobilePhone":null,"secondEmail":null,"login":"John.Doe-Paginate-2@example.com","email":"John.Doe-Paginate-2@example.com"},"credentials":{"password":{},"emails":[{"value":"John.Doe-Paginate-2@example.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"schema":{"href":"https://test.okta.com/api/v1/meta/schemas/user/oscc04qb2rUDcq2YA4x6"},"activate":{"href":"https://test.okta.com/api/v1/users/00ulwhiy9kFLqSPCI4x6/lifecycle/activate","method":"POST"},"self":{"href":"https://test.okta.com/api/v1/users/00ulwhiy9kFLqSPCI4x6"},"type":{"href":"https://test.okta.com/api/v1/meta/types/user/otyc04qb2rUDcq2YA4x6"}}}'
+    headers:
+      Connection: keep-alive
+      Content-Encoding: gzip
+      Content-Type: application/json;charset=UTF-8
+      Date: Mon, 20 Jul 2020 19:21:16 GMT
+      Public-Key-Pins-Report-Only: pin-sha256="r5EfzZxQVvQpKo3AgYRaT7X2bDO/kj3ACwmxfdT2zt8=";
+        pin-sha256="MaqlcUgk2mvY/RFSGeSwBRkI+rZ6/dxe/DuQfBT/vnQ="; pin-sha256="72G5IEvDEWn+EThf3qjR7/bQSWaS2ZSLqolhnO6iyJI=";
+        pin-sha256="rrV6CLCCvqnk89gWibYT0JO6fNQ8cCit7GGoiVTjCOg="; max-age=60; report-uri="https://okta.report-uri.com/r/default/hpkp/reportOnly"
+      Server: nginx
+      Strict-Transport-Security: max-age=315360000
+      Transfer-Encoding: chunked
+      Vary: Accept-Encoding
+      cache-control: no-cache, no-store
+      content-security-policy-report-only: 'default-src ''self'' *.oktacdn.com test.okta.com;
+        connect-src ''self'' *.oktacdn.com *.mixpanel.com *.mapbox.com app.pendo.io
+        data.pendo.io pendo-static-5634101834153984.storage.googleapis.com test.okta.com
+        test-admin.okta.com https://oinmanager.okta.com data:; script-src ''unsafe-inline''
+        ''unsafe-eval'' ''self'' *.oktacdn.com; style-src ''unsafe-inline'' ''self''
+        *.oktacdn.com app.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com;
+        frame-src ''self'' login.okta.com test.okta.com test-admin.okta.com; img-src
+        ''self'' *.oktacdn.com test.okta.com *.tiles.mapbox.com *.mapbox.com app.pendo.io
+        data.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        data: blob:; font-src data: ''self'' *.oktacdn.com fonts.gstatic.com; report-uri
+        https://okta.report-uri.com/r/d/csp/reportOnly; report-to csp-report'
+      expires: '0'
+      p3p: CP="HONK"
+      pragma: no-cache
+      report-to: '{"group":"csp-report","max_age":31536000,"endpoints":[{"url":"https://okta.report-uri.com/r/d/csp/reportOnly"}],"include_subdomains":true}'
+      set-cookie: JSESSIONID=4451BB319C292D01E8BC036BC1B3125A; Path=/; Secure; HttpOnly
+      x-content-type-options: nosniff
+      x-okta-request-id: XxXurNIFwyYrh@61aSWshAAACKI
+      x-rate-limit-limit: '600'
+      x-rate-limit-remaining: '598'
+      x-rate-limit-reset: '1595272936'
       x-xss-protection: 1; mode=block; report=https://okta.report-uri.com/r/d/xss/enforce
     status:
       code: 200
@@ -66,15 +121,15 @@ interactions:
       User-Agent:
       - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
     method: GET
-    uri: https://test.okta.com/api/v1/users/00ul0i9b8XmRepEMT4x6
+    uri: https://test.okta.com/api/v1/users/?limit=1
   response:
     body:
-      string: '{"id":"00ul0i9b8XmRepEMT4x6","status":"STAGED","created":"2020-07-17T15:34:40.000Z","activated":null,"statusChanged":null,"lastLogin":null,"lastUpdated":"2020-07-17T15:34:41.000Z","passwordChanged":"2020-07-17T15:34:41.000Z","type":{"id":"otyc04qb2rUDcq2YA4x6"},"profile":{"firstName":"John","lastName":"Doe-Get","mobilePhone":null,"secondEmail":null,"login":"John.Doe-Get@example.com","email":"John.Doe-Get@example.com"},"credentials":{"password":{},"emails":[{"value":"John.Doe-Get@example.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"schema":{"href":"https://test.okta.com/api/v1/meta/schemas/user/oscc04qb2rUDcq2YA4x6"},"activate":{"href":"https://test.okta.com/api/v1/users/00ul0i9b8XmRepEMT4x6/lifecycle/activate","method":"POST"},"self":{"href":"https://test.okta.com/api/v1/users/00ul0i9b8XmRepEMT4x6"},"type":{"href":"https://test.okta.com/api/v1/meta/types/user/otyc04qb2rUDcq2YA4x6"}}}'
+      string: '[{"id":"00ulwhixeWAiB01MD4x6","status":"STAGED","created":"2020-07-20T19:21:16.000Z","activated":null,"statusChanged":null,"lastLogin":null,"lastUpdated":"2020-07-20T19:21:16.000Z","passwordChanged":"2020-07-20T19:21:16.000Z","type":{"id":"otyc04qb2rUDcq2YA4x6"},"profile":{"firstName":"John","lastName":"Doe-Paginate-1","mobilePhone":null,"secondEmail":null,"login":"John.Doe-Paginate-1@example.com","email":"John.Doe-Paginate-1@example.com"},"credentials":{"password":{},"emails":[{"value":"John.Doe-Paginate-1@example.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"self":{"href":"https://test.okta.com/api/v1/users/00ulwhixeWAiB01MD4x6"}}}]'
     headers:
       Connection: close
       Content-Encoding: gzip
       Content-Type: application/json;charset=UTF-8
-      Date: Fri, 17 Jul 2020 15:34:41 GMT
+      Date: Mon, 20 Jul 2020 19:21:17 GMT
       Public-Key-Pins-Report-Only: pin-sha256="r5EfzZxQVvQpKo3AgYRaT7X2bDO/kj3ACwmxfdT2zt8=";
         pin-sha256="MaqlcUgk2mvY/RFSGeSwBRkI+rZ6/dxe/DuQfBT/vnQ="; pin-sha256="72G5IEvDEWn+EThf3qjR7/bQSWaS2ZSLqolhnO6iyJI=";
         pin-sha256="rrV6CLCCvqnk89gWibYT0JO6fNQ8cCit7GGoiVTjCOg="; max-age=60; report-uri="https://okta.report-uri.com/r/default/hpkp/reportOnly"
@@ -95,127 +150,78 @@ interactions:
         data: blob:; font-src data: ''self'' *.oktacdn.com fonts.gstatic.com; report-uri
         https://okta.report-uri.com/r/d/csp/reportOnly; report-to csp-report'
       expires: '0'
+      link: <https://test.okta.com/api/v1/users?after=000ulwhixeWAiB01MD4x6&limit=1>;
+        rel="next"
       p3p: CP="HONK"
       pragma: no-cache
       report-to: '{"group":"csp-report","max_age":31536000,"endpoints":[{"url":"https://okta.report-uri.com/r/d/csp/reportOnly"}],"include_subdomains":true}'
-      set-cookie: JSESSIONID=D452470C82C5DB84A52B4CC283F6FC71; Path=/; Secure; HttpOnly
+      set-cookie: JSESSIONID=8630FB1EC498719964FA499ED81E7B5B; Path=/; Secure; HttpOnly
       x-content-type-options: nosniff
-      x-okta-request-id: XxHFEfy61LIWLaXA-qRnZgAACM0
-      x-rate-limit-limit: '2000'
-      x-rate-limit-remaining: '1999'
-      x-rate-limit-reset: '1595000141'
-      x-xss-protection: 1; mode=block; report=https://okta.report-uri.com/r/d/xss/enforce
-    status:
-      code: 200
-      message: OK
-    url: https://test.okta.com/api/v1/users/00ul0i9b8XmRepEMT4x6
-- request:
-    body: null
-    headers:
-      Accept:
-      - application/json
-      Authorization:
-      - SSWS myAPIToken
-      Content-Type:
-      - application/json
-      User-Agent:
-      - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
-    method: GET
-    uri: https://test.okta.com/api/v1/users/John.Doe-Get@example.com
-  response:
-    body:
-      string: '{"id":"00ul0i9b8XmRepEMT4x6","status":"STAGED","created":"2020-07-17T15:34:40.000Z","activated":null,"statusChanged":null,"lastLogin":null,"lastUpdated":"2020-07-17T15:34:41.000Z","passwordChanged":"2020-07-17T15:34:41.000Z","type":{"id":"otyc04qb2rUDcq2YA4x6"},"profile":{"firstName":"John","lastName":"Doe-Get","mobilePhone":null,"secondEmail":null,"login":"John.Doe-Get@example.com","email":"John.Doe-Get@example.com"},"credentials":{"password":{},"emails":[{"value":"John.Doe-Get@example.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"schema":{"href":"https://test.okta.com/api/v1/meta/schemas/user/oscc04qb2rUDcq2YA4x6"},"activate":{"href":"https://test.okta.com/api/v1/users/00ul0i9b8XmRepEMT4x6/lifecycle/activate","method":"POST"},"self":{"href":"https://test.okta.com/api/v1/users/00ul0i9b8XmRepEMT4x6"},"type":{"href":"https://test.okta.com/api/v1/meta/types/user/otyc04qb2rUDcq2YA4x6"}}}'
-    headers:
-      Connection: close
-      Content-Encoding: gzip
-      Content-Type: application/json;charset=UTF-8
-      Date: Fri, 17 Jul 2020 15:34:41 GMT
-      Public-Key-Pins-Report-Only: pin-sha256="r5EfzZxQVvQpKo3AgYRaT7X2bDO/kj3ACwmxfdT2zt8=";
-        pin-sha256="MaqlcUgk2mvY/RFSGeSwBRkI+rZ6/dxe/DuQfBT/vnQ="; pin-sha256="72G5IEvDEWn+EThf3qjR7/bQSWaS2ZSLqolhnO6iyJI=";
-        pin-sha256="rrV6CLCCvqnk89gWibYT0JO6fNQ8cCit7GGoiVTjCOg="; max-age=60; report-uri="https://okta.report-uri.com/r/default/hpkp/reportOnly"
-      Server: nginx
-      Strict-Transport-Security: max-age=315360000
-      Transfer-Encoding: chunked
-      Vary: Accept-Encoding
-      cache-control: no-cache, no-store
-      content-disposition: inline;filename=f.txt
-      content-security-policy-report-only: 'default-src ''self'' *.oktacdn.com test.okta.com;
-        connect-src ''self'' *.oktacdn.com *.mixpanel.com *.mapbox.com app.pendo.io
-        data.pendo.io pendo-static-5634101834153984.storage.googleapis.com test.okta.com
-        test-admin.okta.com https://oinmanager.okta.com data:; script-src ''unsafe-inline''
-        ''unsafe-eval'' ''self'' *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        *.oktacdn.com app.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com;
-        frame-src ''self'' login.okta.com test.okta.com test-admin.okta.com; img-src
-        ''self'' *.oktacdn.com test.okta.com *.tiles.mapbox.com *.mapbox.com app.pendo.io
-        data.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
-        data: blob:; font-src data: ''self'' *.oktacdn.com fonts.gstatic.com; report-uri
-        https://okta.report-uri.com/r/d/csp/reportOnly; report-to csp-report'
-      expires: '0'
-      p3p: CP="HONK"
-      pragma: no-cache
-      report-to: '{"group":"csp-report","max_age":31536000,"endpoints":[{"url":"https://okta.report-uri.com/r/d/csp/reportOnly"}],"include_subdomains":true}'
-      set-cookie: JSESSIONID=B4ED1922D88AE0272DD32CB98CD43B3C; Path=/; Secure; HttpOnly
-      x-content-type-options: nosniff
-      x-okta-request-id: XxHFEZZPUQQNajBKf4MVJwAABzs
-      x-rate-limit-limit: '2000'
-      x-rate-limit-remaining: '1998'
-      x-rate-limit-reset: '1595000141'
-      x-xss-protection: 1; mode=block; report=https://okta.report-uri.com/r/d/xss/enforce
-    status:
-      code: 200
-      message: OK
-    url: https://test.okta.com/api/v1/users/John.Doe-Get@example.com
-- request:
-    body: null
-    headers:
-      Accept:
-      - application/json
-      Authorization:
-      - SSWS myAPIToken
-      Content-Type:
-      - application/json
-      User-Agent:
-      - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
-    method: DELETE
-    uri: https://test.okta.com/api/v1/users/00ul0i9b8XmRepEMT4x6
-  response:
-    body:
-      string: ''
-    headers:
-      Connection: keep-alive
-      Date: Fri, 17 Jul 2020 15:34:42 GMT
-      Public-Key-Pins-Report-Only: pin-sha256="r5EfzZxQVvQpKo3AgYRaT7X2bDO/kj3ACwmxfdT2zt8=";
-        pin-sha256="MaqlcUgk2mvY/RFSGeSwBRkI+rZ6/dxe/DuQfBT/vnQ="; pin-sha256="72G5IEvDEWn+EThf3qjR7/bQSWaS2ZSLqolhnO6iyJI=";
-        pin-sha256="rrV6CLCCvqnk89gWibYT0JO6fNQ8cCit7GGoiVTjCOg="; max-age=60; report-uri="https://okta.report-uri.com/r/default/hpkp/reportOnly"
-      Server: nginx
-      Strict-Transport-Security: max-age=315360000
-      cache-control: no-cache, no-store
-      content-security-policy-report-only: 'default-src ''self'' *.oktacdn.com test.okta.com;
-        connect-src ''self'' *.oktacdn.com *.mixpanel.com *.mapbox.com app.pendo.io
-        data.pendo.io pendo-static-5634101834153984.storage.googleapis.com test.okta.com
-        test-admin.okta.com https://oinmanager.okta.com data:; script-src ''unsafe-inline''
-        ''unsafe-eval'' ''self'' *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        *.oktacdn.com app.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com;
-        frame-src ''self'' login.okta.com test.okta.com test-admin.okta.com; img-src
-        ''self'' *.oktacdn.com test.okta.com *.tiles.mapbox.com *.mapbox.com app.pendo.io
-        data.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
-        data: blob:; font-src data: ''self'' *.oktacdn.com fonts.gstatic.com; report-uri
-        https://okta.report-uri.com/r/d/csp/reportOnly; report-to csp-report'
-      expires: '0'
-      p3p: CP="HONK"
-      pragma: no-cache
-      report-to: '{"group":"csp-report","max_age":31536000,"endpoints":[{"url":"https://okta.report-uri.com/r/d/csp/reportOnly"}],"include_subdomains":true}'
-      set-cookie: JSESSIONID=53DF0A2B1637911C2DFE15ACBD519CB5; Path=/; Secure; HttpOnly
-      x-frame-options: SAMEORIGIN
-      x-okta-request-id: XxHFEVN6sknV9HvYIbIJbgAACNQ
+      x-okta-request-id: XxXurbXECrLf1wJQc3hB0wAABq0
       x-rate-limit-limit: '600'
       x-rate-limit-remaining: '597'
-      x-rate-limit-reset: '1595000106'
+      x-rate-limit-reset: '1595272936'
       x-xss-protection: 1; mode=block; report=https://okta.report-uri.com/r/d/xss/enforce
     status:
-      code: 204
-      message: No Content
-    url: https://test.okta.com/api/v1/users/00ul0i9b8XmRepEMT4x6
+      code: 200
+      message: OK
+    url: https://test.okta.com/api/v1/users/?limit=1
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      Content-Type:
+      - application/json
+      User-Agent:
+      - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
+    method: GET
+    uri: https://test.okta.com/api/v1/users?after=000ulwhixeWAiB01MD4x6&limit=1
+  response:
+    body:
+      string: '[{"id":"00ulwhiy9kFLqSPCI4x6","status":"STAGED","created":"2020-07-20T19:21:16.000Z","activated":null,"statusChanged":null,"lastLogin":null,"lastUpdated":"2020-07-20T19:21:16.000Z","passwordChanged":"2020-07-20T19:21:16.000Z","type":{"id":"otyc04qb2rUDcq2YA4x6"},"profile":{"firstName":"John","lastName":"Doe-Paginate-2","mobilePhone":null,"secondEmail":null,"login":"John.Doe-Paginate-2@example.com","email":"John.Doe-Paginate-2@example.com"},"credentials":{"password":{},"emails":[{"value":"John.Doe-Paginate-2@example.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"self":{"href":"https://test.okta.com/api/v1/users/00ulwhiy9kFLqSPCI4x6"}}}]'
+    headers:
+      Connection: close
+      Content-Encoding: gzip
+      Content-Type: application/json;charset=UTF-8
+      Date: Mon, 20 Jul 2020 19:21:17 GMT
+      Public-Key-Pins-Report-Only: pin-sha256="r5EfzZxQVvQpKo3AgYRaT7X2bDO/kj3ACwmxfdT2zt8=";
+        pin-sha256="MaqlcUgk2mvY/RFSGeSwBRkI+rZ6/dxe/DuQfBT/vnQ="; pin-sha256="72G5IEvDEWn+EThf3qjR7/bQSWaS2ZSLqolhnO6iyJI=";
+        pin-sha256="rrV6CLCCvqnk89gWibYT0JO6fNQ8cCit7GGoiVTjCOg="; max-age=60; report-uri="https://okta.report-uri.com/r/default/hpkp/reportOnly"
+      Server: nginx
+      Strict-Transport-Security: max-age=315360000
+      Transfer-Encoding: chunked
+      Vary: Accept-Encoding
+      cache-control: no-cache, no-store
+      content-security-policy-report-only: 'default-src ''self'' *.oktacdn.com test.okta.com;
+        connect-src ''self'' *.oktacdn.com *.mixpanel.com *.mapbox.com app.pendo.io
+        data.pendo.io pendo-static-5634101834153984.storage.googleapis.com test.okta.com
+        test-admin.okta.com https://oinmanager.okta.com data:; script-src ''unsafe-inline''
+        ''unsafe-eval'' ''self'' *.oktacdn.com; style-src ''unsafe-inline'' ''self''
+        *.oktacdn.com app.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com;
+        frame-src ''self'' login.okta.com test.okta.com test-admin.okta.com; img-src
+        ''self'' *.oktacdn.com test.okta.com *.tiles.mapbox.com *.mapbox.com app.pendo.io
+        data.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        data: blob:; font-src data: ''self'' *.oktacdn.com fonts.gstatic.com; report-uri
+        https://okta.report-uri.com/r/d/csp/reportOnly; report-to csp-report'
+      expires: '0'
+      link: <https://test.okta.com/api/v1/users?after=2&limit=1>; rel="next"
+      p3p: CP="HONK"
+      pragma: no-cache
+      report-to: '{"group":"csp-report","max_age":31536000,"endpoints":[{"url":"https://okta.report-uri.com/r/d/csp/reportOnly"}],"include_subdomains":true}'
+      set-cookie: JSESSIONID=48F812D361E59EAACD306C050339831A; Path=/; Secure; HttpOnly
+      x-content-type-options: nosniff
+      x-okta-request-id: XxXureC8kQTt4UQ0KVKKGwAABBo
+      x-rate-limit-limit: '600'
+      x-rate-limit-remaining: '596'
+      x-rate-limit-reset: '1595272936'
+      x-xss-protection: 1; mode=block; report=https://okta.report-uri.com/r/d/xss/enforce
+    status:
+      code: 200
+      message: OK
+    url: https://test.okta.com/api/v1/users?after=000ulwhixeWAiB01MD4x6&limit=1
 - request:
     body: null
     headers:
@@ -228,13 +234,13 @@ interactions:
       User-Agent:
       - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
     method: DELETE
-    uri: https://test.okta.com/api/v1/users/00ul0i9b8XmRepEMT4x6
+    uri: https://test.okta.com/api/v1/users/00ulwhixeWAiB01MD4x6
   response:
     body:
       string: ''
     headers:
       Connection: keep-alive
-      Date: Fri, 17 Jul 2020 15:34:42 GMT
+      Date: Mon, 20 Jul 2020 19:21:17 GMT
       Public-Key-Pins-Report-Only: pin-sha256="r5EfzZxQVvQpKo3AgYRaT7X2bDO/kj3ACwmxfdT2zt8=";
         pin-sha256="MaqlcUgk2mvY/RFSGeSwBRkI+rZ6/dxe/DuQfBT/vnQ="; pin-sha256="72G5IEvDEWn+EThf3qjR7/bQSWaS2ZSLqolhnO6iyJI=";
         pin-sha256="rrV6CLCCvqnk89gWibYT0JO6fNQ8cCit7GGoiVTjCOg="; max-age=60; report-uri="https://okta.report-uri.com/r/default/hpkp/reportOnly"
@@ -256,17 +262,170 @@ interactions:
       p3p: CP="HONK"
       pragma: no-cache
       report-to: '{"group":"csp-report","max_age":31536000,"endpoints":[{"url":"https://okta.report-uri.com/r/d/csp/reportOnly"}],"include_subdomains":true}'
-      set-cookie: JSESSIONID=19F0333CF7AF440F5EB76A5FDA1B3E3D; Path=/; Secure; HttpOnly
+      set-cookie: JSESSIONID=14B92A63AE8FBA24B0132EE38572161D; Path=/; Secure; HttpOnly
       x-frame-options: SAMEORIGIN
-      x-okta-request-id: XxHFEhaqnV-yzw550Vai5QAAByk
+      x-okta-request-id: XxXurbZD9OSTRQFRMU@VqgAAB00
       x-rate-limit-limit: '600'
-      x-rate-limit-remaining: '596'
-      x-rate-limit-reset: '1595000106'
+      x-rate-limit-remaining: '599'
+      x-rate-limit-reset: '1595272937'
       x-xss-protection: 1; mode=block; report=https://okta.report-uri.com/r/d/xss/enforce
     status:
       code: 204
       message: No Content
-    url: https://test.okta.com/api/v1/users/00ul0i9b8XmRepEMT4x6
+    url: https://test.okta.com/api/v1/users/00ulwhixeWAiB01MD4x6
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      Content-Type:
+      - application/json
+      User-Agent:
+      - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
+    method: DELETE
+    uri: https://test.okta.com/api/v1/users/00ulwhixeWAiB01MD4x6
+  response:
+    body:
+      string: ''
+    headers:
+      Connection: keep-alive
+      Date: Mon, 20 Jul 2020 19:21:18 GMT
+      Public-Key-Pins-Report-Only: pin-sha256="r5EfzZxQVvQpKo3AgYRaT7X2bDO/kj3ACwmxfdT2zt8=";
+        pin-sha256="MaqlcUgk2mvY/RFSGeSwBRkI+rZ6/dxe/DuQfBT/vnQ="; pin-sha256="72G5IEvDEWn+EThf3qjR7/bQSWaS2ZSLqolhnO6iyJI=";
+        pin-sha256="rrV6CLCCvqnk89gWibYT0JO6fNQ8cCit7GGoiVTjCOg="; max-age=60; report-uri="https://okta.report-uri.com/r/default/hpkp/reportOnly"
+      Server: nginx
+      Strict-Transport-Security: max-age=315360000
+      cache-control: no-cache, no-store
+      content-security-policy-report-only: 'default-src ''self'' *.oktacdn.com test.okta.com;
+        connect-src ''self'' *.oktacdn.com *.mixpanel.com *.mapbox.com app.pendo.io
+        data.pendo.io pendo-static-5634101834153984.storage.googleapis.com test.okta.com
+        test-admin.okta.com https://oinmanager.okta.com data:; script-src ''unsafe-inline''
+        ''unsafe-eval'' ''self'' *.oktacdn.com; style-src ''unsafe-inline'' ''self''
+        *.oktacdn.com app.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com;
+        frame-src ''self'' login.okta.com test.okta.com test-admin.okta.com; img-src
+        ''self'' *.oktacdn.com test.okta.com *.tiles.mapbox.com *.mapbox.com app.pendo.io
+        data.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        data: blob:; font-src data: ''self'' *.oktacdn.com fonts.gstatic.com; report-uri
+        https://okta.report-uri.com/r/d/csp/reportOnly; report-to csp-report'
+      expires: '0'
+      p3p: CP="HONK"
+      pragma: no-cache
+      report-to: '{"group":"csp-report","max_age":31536000,"endpoints":[{"url":"https://okta.report-uri.com/r/d/csp/reportOnly"}],"include_subdomains":true}'
+      set-cookie: JSESSIONID=7B894851329EA88806967CDF292FAB24; Path=/; Secure; HttpOnly
+      x-frame-options: SAMEORIGIN
+      x-okta-request-id: XxXurQ87-YoqHNGxDstiXAAABNM
+      x-rate-limit-limit: '600'
+      x-rate-limit-remaining: '598'
+      x-rate-limit-reset: '1595272937'
+      x-xss-protection: 1; mode=block; report=https://okta.report-uri.com/r/d/xss/enforce
+    status:
+      code: 204
+      message: No Content
+    url: https://test.okta.com/api/v1/users/00ulwhixeWAiB01MD4x6
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      Content-Type:
+      - application/json
+      User-Agent:
+      - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
+    method: DELETE
+    uri: https://test.okta.com/api/v1/users/00ulwhiy9kFLqSPCI4x6
+  response:
+    body:
+      string: ''
+    headers:
+      Connection: keep-alive
+      Date: Mon, 20 Jul 2020 19:21:18 GMT
+      Public-Key-Pins-Report-Only: pin-sha256="r5EfzZxQVvQpKo3AgYRaT7X2bDO/kj3ACwmxfdT2zt8=";
+        pin-sha256="MaqlcUgk2mvY/RFSGeSwBRkI+rZ6/dxe/DuQfBT/vnQ="; pin-sha256="72G5IEvDEWn+EThf3qjR7/bQSWaS2ZSLqolhnO6iyJI=";
+        pin-sha256="rrV6CLCCvqnk89gWibYT0JO6fNQ8cCit7GGoiVTjCOg="; max-age=60; report-uri="https://okta.report-uri.com/r/default/hpkp/reportOnly"
+      Server: nginx
+      Strict-Transport-Security: max-age=315360000
+      cache-control: no-cache, no-store
+      content-security-policy-report-only: 'default-src ''self'' *.oktacdn.com test.okta.com;
+        connect-src ''self'' *.oktacdn.com *.mixpanel.com *.mapbox.com app.pendo.io
+        data.pendo.io pendo-static-5634101834153984.storage.googleapis.com test.okta.com
+        test-admin.okta.com https://oinmanager.okta.com data:; script-src ''unsafe-inline''
+        ''unsafe-eval'' ''self'' *.oktacdn.com; style-src ''unsafe-inline'' ''self''
+        *.oktacdn.com app.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com;
+        frame-src ''self'' login.okta.com test.okta.com test-admin.okta.com; img-src
+        ''self'' *.oktacdn.com test.okta.com *.tiles.mapbox.com *.mapbox.com app.pendo.io
+        data.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        data: blob:; font-src data: ''self'' *.oktacdn.com fonts.gstatic.com; report-uri
+        https://okta.report-uri.com/r/d/csp/reportOnly; report-to csp-report'
+      expires: '0'
+      p3p: CP="HONK"
+      pragma: no-cache
+      report-to: '{"group":"csp-report","max_age":31536000,"endpoints":[{"url":"https://okta.report-uri.com/r/d/csp/reportOnly"}],"include_subdomains":true}'
+      set-cookie: JSESSIONID=3EB136B21C8752D15E0A4FFE4E8C5088; Path=/; Secure; HttpOnly
+      x-frame-options: SAMEORIGIN
+      x-okta-request-id: XxXurn3by3cU8ozcZbpRXgAABZI
+      x-rate-limit-limit: '600'
+      x-rate-limit-remaining: '597'
+      x-rate-limit-reset: '1595272937'
+      x-xss-protection: 1; mode=block; report=https://okta.report-uri.com/r/d/xss/enforce
+    status:
+      code: 204
+      message: No Content
+    url: https://test.okta.com/api/v1/users/00ulwhiy9kFLqSPCI4x6
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      Content-Type:
+      - application/json
+      User-Agent:
+      - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
+    method: DELETE
+    uri: https://test.okta.com/api/v1/users/00ulwhiy9kFLqSPCI4x6
+  response:
+    body:
+      string: ''
+    headers:
+      Connection: keep-alive
+      Date: Mon, 20 Jul 2020 19:21:18 GMT
+      Public-Key-Pins-Report-Only: pin-sha256="r5EfzZxQVvQpKo3AgYRaT7X2bDO/kj3ACwmxfdT2zt8=";
+        pin-sha256="MaqlcUgk2mvY/RFSGeSwBRkI+rZ6/dxe/DuQfBT/vnQ="; pin-sha256="72G5IEvDEWn+EThf3qjR7/bQSWaS2ZSLqolhnO6iyJI=";
+        pin-sha256="rrV6CLCCvqnk89gWibYT0JO6fNQ8cCit7GGoiVTjCOg="; max-age=60; report-uri="https://okta.report-uri.com/r/default/hpkp/reportOnly"
+      Server: nginx
+      Strict-Transport-Security: max-age=315360000
+      cache-control: no-cache, no-store
+      content-security-policy-report-only: 'default-src ''self'' *.oktacdn.com test.okta.com;
+        connect-src ''self'' *.oktacdn.com *.mixpanel.com *.mapbox.com app.pendo.io
+        data.pendo.io pendo-static-5634101834153984.storage.googleapis.com test.okta.com
+        test-admin.okta.com https://oinmanager.okta.com data:; script-src ''unsafe-inline''
+        ''unsafe-eval'' ''self'' *.oktacdn.com; style-src ''unsafe-inline'' ''self''
+        *.oktacdn.com app.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com;
+        frame-src ''self'' login.okta.com test.okta.com test-admin.okta.com; img-src
+        ''self'' *.oktacdn.com test.okta.com *.tiles.mapbox.com *.mapbox.com app.pendo.io
+        data.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        data: blob:; font-src data: ''self'' *.oktacdn.com fonts.gstatic.com; report-uri
+        https://okta.report-uri.com/r/d/csp/reportOnly; report-to csp-report'
+      expires: '0'
+      p3p: CP="HONK"
+      pragma: no-cache
+      report-to: '{"group":"csp-report","max_age":31536000,"endpoints":[{"url":"https://okta.report-uri.com/r/d/csp/reportOnly"}],"include_subdomains":true}'
+      set-cookie: JSESSIONID=A3E65BCA1D290126888FE4F16EFB5082; Path=/; Secure; HttpOnly
+      x-frame-options: SAMEORIGIN
+      x-okta-request-id: XxXuruHpqhSGUOcWfPeZPAAAAec
+      x-rate-limit-limit: '600'
+      x-rate-limit-remaining: '596'
+      x-rate-limit-reset: '1595272937'
+      x-xss-protection: 1; mode=block; report=https://okta.report-uri.com/r/d/xss/enforce
+    status:
+      code: 204
+      message: No Content
+    url: https://test.okta.com/api/v1/users/00ulwhiy9kFLqSPCI4x6
 - request:
     body: null
     headers:
@@ -279,16 +438,16 @@ interactions:
       User-Agent:
       - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
     method: GET
-    uri: https://test.okta.com/api/v1/users/00ul0i9b8XmRepEMT4x6
+    uri: https://test.okta.com/api/v1/users/00ulwhixeWAiB01MD4x6
   response:
     body:
       string: '{"errorCode":"E0000007","errorSummary":"Not found: Resource not found:
-        00ul0i9b8XmRepEMT4x6 (User)","errorLink":"E0000007","errorId":"oaeghvC5LEkQU-0SbNT1khJ9w","errorCauses":[]}'
+        00ulwhixeWAiB01MD4x6 (User)","errorLink":"E0000007","errorId":"oaexNHm9WtYROGc4b2ujJMw1g","errorCauses":[]}'
     headers:
       Connection: close
       Content-Encoding: gzip
       Content-Type: application/json;charset=UTF-8
-      Date: Fri, 17 Jul 2020 15:34:42 GMT
+      Date: Mon, 20 Jul 2020 19:21:18 GMT
       Public-Key-Pins-Report-Only: pin-sha256="r5EfzZxQVvQpKo3AgYRaT7X2bDO/kj3ACwmxfdT2zt8=";
         pin-sha256="MaqlcUgk2mvY/RFSGeSwBRkI+rZ6/dxe/DuQfBT/vnQ="; pin-sha256="72G5IEvDEWn+EThf3qjR7/bQSWaS2ZSLqolhnO6iyJI=";
         pin-sha256="rrV6CLCCvqnk89gWibYT0JO6fNQ8cCit7GGoiVTjCOg="; max-age=60; report-uri="https://okta.report-uri.com/r/default/hpkp/reportOnly"
@@ -311,15 +470,15 @@ interactions:
       p3p: CP="HONK"
       pragma: no-cache
       report-to: '{"group":"csp-report","max_age":31536000,"endpoints":[{"url":"https://okta.report-uri.com/r/d/csp/reportOnly"}],"include_subdomains":true}'
-      set-cookie: JSESSIONID=94AF495E68676B0A07A3F485B9E2FD9F; Path=/; Secure; HttpOnly
+      set-cookie: JSESSIONID=F60586F5FD07B17A545911924565C033; Path=/; Secure; HttpOnly
       x-content-type-options: nosniff
-      x-okta-request-id: XxHFEiTLWhyjQsqYJCEYvQAAAqk
+      x-okta-request-id: XxXursA@3E@3pZRjFdH3NAAAAfc
       x-rate-limit-limit: '2000'
-      x-rate-limit-remaining: '1997'
-      x-rate-limit-reset: '1595000141'
+      x-rate-limit-remaining: '1999'
+      x-rate-limit-reset: '1595272938'
       x-xss-protection: 1; mode=block; report=https://okta.report-uri.com/r/d/xss/enforce
     status:
       code: 404
       message: Not Found
-    url: https://test.okta.com/api/v1/users/00ul0i9b8XmRepEMT4x6
+    url: https://test.okta.com/api/v1/users/00ulwhixeWAiB01MD4x6
 version: 1
