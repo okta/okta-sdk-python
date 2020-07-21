@@ -4,7 +4,7 @@
 
 ## :rotating_light: ANNOUNCEMENT :rotating_light:
 
-The Python SDK for the Okta Management API is currently in development. Please **star** :star: and **watch** :eyes: this repository for updates!
+Version __**1.0.0**__ of the Python SDK for the Okta Management API is currently in development. Please **star** :star: and **watch** :eyes: this repository for updates!
 
 The SDK will support Python versions 3.6+!
 
