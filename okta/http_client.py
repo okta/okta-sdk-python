@@ -51,7 +51,7 @@ class HTTPClient:
                         response,
                         await response.text(),
                         None)
-        except (aiohttp.ClientError, asyncio.exceptions.TimeoutError) as error:
+        except (aiohttp.ClientError, asyncio.TimeoutError) as error:
             # Return error if arises
             return (None, None, None, error)
 

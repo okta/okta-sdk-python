@@ -253,4 +253,4 @@ async def test_client_timeout(monkeypatch):
     })
 
     assert all(values in [None] for values in [req, res_details, resp_body])
-    assert type(error) == asyncio.exceptions.TimeoutError
+    assert type(error) == asyncio.TimeoutError

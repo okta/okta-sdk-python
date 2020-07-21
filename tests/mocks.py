@@ -206,7 +206,7 @@ async def mock_GET_HTTP_Client_response_error(*args, **kwargs):
 
 
 async def mock_timeout_response(*args, **kwargs):
-    return (None, None, None, asyncio.exceptions.TimeoutError())
+    return (None, None, None, asyncio.TimeoutError())
 
 
 async def mock_invalid_HTTP_response(*args, **kwargs):
