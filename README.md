@@ -1,7 +1,14 @@
-oktasdk-python
-=======================
+[<img src="https://aws1.discourse-cdn.com/standard14/uploads/oktadev/original/1X/0c6402653dfb70edc661d4976a43a46f33e5e919.png" align="right" width="256px"/>](https://devforum.okta.com/)
 
-This SDK allows managing an Okta instance via Python.
+# Okta Python Management SDK
+
+## :rotating_light: ANNOUNCEMENT :rotating_light:
+
+Version __**1.0.0**__ of the Python SDK for the Okta Management API is currently in development. Please **star** :star: and **watch** :eyes: this repository for updates!
+
+The SDK will support Python versions 3.6+!
+
+You can learn more about the Okta Management API [here](https://developer.okta.com/docs/reference/)
 
 ## :warning: :construction: Alpha Preview :construction: :warning:
 
