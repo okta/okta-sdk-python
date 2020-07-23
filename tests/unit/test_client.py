@@ -8,12 +8,10 @@ from okta.error_messages import ERROR_MESSAGE_API_TOKEN_DEFAULT, \
     ERROR_MESSAGE_CLIENT_ID_DEFAULT, ERROR_MESSAGE_CLIENT_ID_MISSING,\
     ERROR_MESSAGE_ORG_URL_ADMIN, ERROR_MESSAGE_ORG_URL_MISSING, \
     ERROR_MESSAGE_ORG_URL_NOT_HTTPS, ERROR_MESSAGE_ORG_URL_TYPO, \
-    ERROR_MESSAGE_ORG_URL_YOUROKTADOMAIN, ERROR_MESSAGE_SCOPES_PK_MISSING
-
-
-_GLOBAL_YAML_PATH = os.path.join(os.path.expanduser('~'), ".okta",
-                                 "okta.yaml")
-_LOCAL_YAML_PATH = os.path.join(os.getcwd(), "okta.yaml")
+    ERROR_MESSAGE_ORG_URL_YOUROKTADOMAIN, ERROR_MESSAGE_SCOPES_PK_MISSING, \
+    ERROR_MESSAGE_PROXY_MISSING_HOST, ERROR_MESSAGE_PROXY_MISSING_AUTH, \
+    ERROR_MESSAGE_PROXY_INVALID_PORT
+from okta.constants import _GLOBAL_YAML_PATH, _LOCAL_YAML_PATH
 
 
 """
@@ -446,3 +444,145 @@ def test_constructor_precedence_highest_rank_user_config():
     assert user_token != env_token
     assert env_org_url != loaded_config['client']['orgUrl']
     assert env_token != loaded_config['client']['token']
+
+
+def test_constructor_valid_proxy():
+    org_url = "https://test.okta.com"
+    token = "TOKEN"
+
+    port = 8080
+    host = "test.okta.com"
+    username = "username"
+    password = "password"
+
+    config = {
+        'orgUrl': org_url,
+        'token': token,
+        'proxy': {
+            'port': port,
+            'host': host,
+            'username': username,
+            'password': password
+        }
+    }
+    # Ensure no error is raised and correct proxy is determined
+    client = OktaClient(user_config=config)
+    assert client.get_request_executor(
+    )._http_client._proxy == f"http://{username}:{password}@{host}:{port}/"
+
+
+def test_constructor_valid_no_proxy():
+    org_url = "https://test.okta.com"
+    token = "TOKEN"
+
+    config = {
+        'orgUrl': org_url,
+        'token': token
+    }
+
+    # Ensure no error is raised and proxy is None
+    client = OktaClient(user_config=config)
+    assert client.get_request_executor(
+    )._http_client._proxy is None
+
+
+def test_constructor_valid_env_vars():
+    org_url = "https://test.okta.com"
+    token = "TOKEN"
+
+    config = {
+        'orgUrl': org_url,
+        'token': token
+    }
+
+    # Setting up env vars
+    os.environ["HTTP_PROXY"] = "http://user:pass@test.okta.com:8080"
+    os.environ["HTTPS_PROXY"] = "https://user:pass@test.okta.com:8080"
+
+    expected = os.environ["HTTPS_PROXY"]
+    client = OktaClient(user_config=config)
+
+    # Deleting env vars
+    del os.environ['HTTP_PROXY']
+    del os.environ['HTTPS_PROXY']
+
+    # Ensure no error is raised and proxy is None
+    assert client.get_request_executor(
+    )._http_client._proxy == expected
+
+
+def test_constructor_invalid_missing_host():
+    org_url = "https://test.okta.com"
+    token = "TOKEN"
+
+    port = 8080
+    username = "username"
+    password = "password"
+
+    config = {
+        'orgUrl': org_url,
+        'token': token,
+        'proxy': {
+            'port': port,
+
+            'username': username,
+            'password': password
+        }
+    }
+
+    # Expect error with config
+    with pytest.raises(ValueError) as exception_info:
+        OktaClient(user_config=config)
+        assert ERROR_MESSAGE_PROXY_MISSING_HOST in exception_info.value
+
+
+@pytest.mark.parametrize("username,password", [("", "password"),
+                                               ("username", "")])
+def test_constructor_invalid_missing_username_or_password(username, password):
+    org_url = "https://test.okta.com"
+    token = "TOKEN"
+
+    port = 8080
+    host = "test.okta.com"
+
+    config = {
+        'orgUrl': org_url,
+        'token': token,
+        'proxy': {
+            'port': port,
+            'host': host,
+            'username': username,
+            'password': password
+        }
+    }
+
+    # Expect error with config
+    with pytest.raises(ValueError) as exception_info:
+        OktaClient(user_config=config)
+        assert ERROR_MESSAGE_PROXY_MISSING_AUTH in exception_info.value
+
+
+@pytest.mark.parametrize("port", [-1, 0, 65536, "port"])
+def test_constructor_invalid_port_number(port):
+    org_url = "https://test.okta.com"
+    token = "TOKEN"
+
+    host = "test.okta.com"
+    username = "username"
+    password = "password"
+
+    config = {
+        'orgUrl': org_url,
+        'token': token,
+        'proxy': {
+            'port': port,
+            'host': host,
+            'username': username,
+            'password': password
+        }
+    }
+
+    # Expect error with config
+    with pytest.raises(ValueError) as exception_info:
+        OktaClient(user_config=config)
+        assert ERROR_MESSAGE_PROXY_INVALID_PORT in exception_info.value

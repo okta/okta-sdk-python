@@ -1,5 +1,6 @@
 import os
 import yaml
+from okta.constants import _GLOBAL_YAML_PATH, _LOCAL_YAML_PATH
 from flatdict import FlatDict
 
 
@@ -24,6 +25,12 @@ class ConfigSetter():
                 "defaultTti": '',
                 "defaultTtl": ''
             },
+            "proxy": {
+                "port": "",
+                "host": "",
+                "username": "",
+                "password": ""
+            },
             "rateLimit": {
                 "maxRetries": ''
             }
@@ -32,9 +39,6 @@ class ConfigSetter():
             "testingDisableHttpsCheck": ''
         }
     }
-    _GLOBAL_YAML_PATH = os.path.join(os.path.expanduser('~'), ".okta",
-                                     "okta.yaml")
-    _LOCAL_YAML_PATH = os.path.join(os.getcwd(), "okta.yaml")
 
     def __init__(self):
         """
@@ -80,11 +84,11 @@ class ConfigSetter():
         # apply default config values to config
         self._apply_default_values()
         # check if GLOBAL yaml exists, apply if true
-        if (os.path.exists(ConfigSetter._GLOBAL_YAML_PATH)):
-            self._apply_yaml_config(ConfigSetter._GLOBAL_YAML_PATH)
+        if (os.path.exists(_GLOBAL_YAML_PATH)):
+            self._apply_yaml_config(_GLOBAL_YAML_PATH)
         # check if LOCAL yaml exists, apply if true
-        if (os.path.exists(ConfigSetter._LOCAL_YAML_PATH)):
-            self._apply_yaml_config(ConfigSetter._LOCAL_YAML_PATH)
+        if (os.path.exists(_LOCAL_YAML_PATH)):
+            self._apply_yaml_config(_LOCAL_YAML_PATH)
         # apply existing environment variables
         self._apply_env_config()
 
@@ -104,6 +108,7 @@ class ConfigSetter():
         self._config["client"]["rateLimit"] = {
             "maxRetries": 2
         }
+
         self._config["testing"]["testingDisableHttpsCheck"] = False
 
     def _apply_config(self, new_config: dict):

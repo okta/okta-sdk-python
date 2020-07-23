@@ -61,7 +61,9 @@ class RequestExecutor:
 
         self._http_client = HTTPClient({
             'requestTimeout': self._request_timeout,
-            'headers': self._default_headers
+            'headers': self._default_headers,
+            'proxy': self._config["client"]["proxy"] if "proxy"
+            in self._config["client"] else None
         })
 
     async def create_request(self, method: str, url: str, body: dict = None,
