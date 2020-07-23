@@ -18,15 +18,29 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.log_geographical_context\
+    import LogGeographicalContext
 
 
 class LogIpAddress(
     OktaObject
 ):
+    """
+    A class for LogIpAddress objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.geographical_context = config["geographicalContext"]\
-                if "geographicalContext" in config else None
+            if "geographicalContext" in config:
+                if isinstance(config["geographicalContext"],
+                              LogGeographicalContext):
+                    self.geographical_context = config["geographicalContext"]
+                else:
+                    self.geographical_context = LogGeographicalContext(
+                        config["geographicalContext"]
+                    )
+            else:
+                self.geographical_context = None
             self.ip = config["ip"]\
                 if "ip" in config else None
             self.source = config["source"]\
@@ -38,3 +52,11 @@ class LogIpAddress(
             self.ip = None
             self.source = None
             self.version = None
+
+    def request_format(self):
+        return {
+            "geographicalContext": self.geographical_context,
+            "ip": self.ip,
+            "source": self.source,
+            "version": self.version
+        }

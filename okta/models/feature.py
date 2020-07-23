@@ -18,27 +18,61 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.feature_stage\
+    import FeatureStage
+from okta.models.enabled_status\
+    import EnabledStatus
+from okta.models.feature_type\
+    import FeatureType
 
 
 class Feature(
     OktaObject
 ):
+    """
+    A class for Feature objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.links = config["_links"]\
-                if "_links" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
             self.description = config["description"]\
                 if "description" in config else None
             self.id = config["id"]\
                 if "id" in config else None
             self.name = config["name"]\
                 if "name" in config else None
-            self.stage = config["stage"]\
-                if "stage" in config else None
-            self.status = config["status"]\
-                if "status" in config else None
-            self.type = config["type"]\
-                if "type" in config else None
+            if "stage" in config:
+                if isinstance(config["stage"],
+                              FeatureStage):
+                    self.stage = config["stage"]
+                else:
+                    self.stage = FeatureStage(
+                        config["stage"]
+                    )
+            else:
+                self.stage = None
+            if "status" in config:
+                if isinstance(config["status"],
+                              EnabledStatus):
+                    self.status = config["status"]
+                else:
+                    self.status = EnabledStatus(
+                        config["status"]
+                    )
+            else:
+                self.status = None
+            if "type" in config:
+                if isinstance(config["type"],
+                              FeatureType):
+                    self.type = config["type"]
+                else:
+                    self.type = FeatureType(
+                        config["type"]
+                    )
+            else:
+                self.type = None
         else:
             self.links = None
             self.description = None
@@ -47,3 +81,14 @@ class Feature(
             self.stage = None
             self.status = None
             self.type = None
+
+    def request_format(self):
+        return {
+            "_links": self.links,
+            "description": self.description,
+            "id": self.id,
+            "name": self.name,
+            "stage": self.stage,
+            "status": self.status,
+            "type": self.type
+        }

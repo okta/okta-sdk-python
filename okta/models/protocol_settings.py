@@ -23,9 +23,18 @@ from okta.okta_object import OktaObject
 class ProtocolSettings(
     OktaObject
 ):
+    """
+    A class for ProtocolSettings objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.name_format = config["nameFormat"]\
                 if "nameFormat" in config else None
         else:
             self.name_format = None
+
+    def request_format(self):
+        return {
+            "nameFormat": self.name_format
+        }

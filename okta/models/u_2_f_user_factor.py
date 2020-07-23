@@ -17,18 +17,35 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
 from okta.models.user_factor\
     import UserFactor
+from okta.models.u_2_f_user_factor_profile\
+    import U2FUserFactorProfile
 
 
 class U2FUserFactor(
-    OktaObject,
     UserFactor
 ):
+    """
+    A class for U2FUserFactor objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.profile = config["profile"]\
-                if "profile" in config else None
+            if "profile" in config:
+                if isinstance(config["profile"],
+                              U2FUserFactorProfile):
+                    self.profile = config["profile"]
+                else:
+                    self.profile = U2FUserFactorProfile(
+                        config["profile"]
+                    )
+            else:
+                self.profile = None
         else:
             self.profile = None
+
+    def request_format(self):
+        return {
+            "profile": self.profile
+        }

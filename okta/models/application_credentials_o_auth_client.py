@@ -18,23 +18,45 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.o_auth_endpoint_authentication_method\
+    import OAuthEndpointAuthenticationMethod
 
 
 class ApplicationCredentialsOAuthClient(
     OktaObject
 ):
+    """
+    A class for ApplicationCredentialsOAuthClient objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.auto_key_rotation = config["autoKeyRotation"]\
                 if "autoKeyRotation" in config else None
-            self.client_id = config["client_id"]\
-                if "client_id" in config else None
-            self.client_secret = config["client_secret"]\
-                if "client_secret" in config else None
-            self.token_endpoint_auth_method = config["token_endpoint_auth_method"]\
-                if "token_endpoint_auth_method" in config else None
+            self.client_id = config["clientId"]\
+                if "clientId" in config else None
+            self.client_secret = config["clientSecret"]\
+                if "clientSecret" in config else None
+            if "tokenEndpointAuthMethod" in config:
+                if isinstance(config["tokenEndpointAuthMethod"],
+                              OAuthEndpointAuthenticationMethod):
+                    self.token_endpoint_auth_method = config["tokenEndpointAuthMethod"]
+                else:
+                    self.token_endpoint_auth_method = OAuthEndpointAuthenticationMethod(
+                        config["tokenEndpointAuthMethod"]
+                    )
+            else:
+                self.token_endpoint_auth_method = None
         else:
             self.auto_key_rotation = None
             self.client_id = None
             self.client_secret = None
             self.token_endpoint_auth_method = None
+
+    def request_format(self):
+        return {
+            "autoKeyRotation": self.auto_key_rotation,
+            "client_id": self.client_id,
+            "client_secret": self.client_secret,
+            "token_endpoint_auth_method": self.token_endpoint_auth_method
+        }

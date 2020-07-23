@@ -18,17 +18,45 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.protocol_algorithm_type\
+    import ProtocolAlgorithmType
 
 
 class ProtocolAlgorithms(
     OktaObject
 ):
+    """
+    A class for ProtocolAlgorithms objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.request = config["request"]\
-                if "request" in config else None
-            self.response = config["response"]\
-                if "response" in config else None
+            if "request" in config:
+                if isinstance(config["request"],
+                              ProtocolAlgorithmType):
+                    self.request = config["request"]
+                else:
+                    self.request = ProtocolAlgorithmType(
+                        config["request"]
+                    )
+            else:
+                self.request = None
+            if "response" in config:
+                if isinstance(config["response"],
+                              ProtocolAlgorithmType):
+                    self.response = config["response"]
+                else:
+                    self.response = ProtocolAlgorithmType(
+                        config["response"]
+                    )
+            else:
+                self.response = None
         else:
             self.request = None
             self.response = None
+
+    def request_format(self):
+        return {
+            "request": self.request,
+            "response": self.response
+        }

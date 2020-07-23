@@ -24,6 +24,10 @@ class GroupRuleStatus(
     str,
     Enum
 ):
+    """
+    An enumeration class for GroupRuleStatus.
+    """
+
     ACTIVE = "ACTIVE"
     INACTIVE = "INACTIVE"
     INVALID = "INVALID"

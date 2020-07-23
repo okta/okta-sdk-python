@@ -24,6 +24,10 @@ class LogSeverity(
     str,
     Enum
 ):
+    """
+    An enumeration class for LogSeverity.
+    """
+
     DEBUG = "DEBUG"
     INFO = "INFO"
     WARN = "WARN"

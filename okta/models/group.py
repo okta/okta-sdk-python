@@ -18,17 +18,25 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.group_profile\
+    import GroupProfile
+from okta.models.group_type\
+    import GroupType
 
 
 class Group(
     OktaObject
 ):
+    """
+    A class for Group objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.embedded = config["_embedded"]\
-                if "_embedded" in config else None
-            self.links = config["_links"]\
-                if "_links" in config else None
+            self.embedded = config["embedded"]\
+                if "embedded" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
             self.created = config["created"]\
                 if "created" in config else None
             self.id = config["id"]\
@@ -39,10 +47,26 @@ class Group(
                 if "lastUpdated" in config else None
             self.object_class = config["objectClass"]\
                 if "objectClass" in config else None
-            self.profile = config["profile"]\
-                if "profile" in config else None
-            self.type = config["type"]\
-                if "type" in config else None
+            if "profile" in config:
+                if isinstance(config["profile"],
+                              GroupProfile):
+                    self.profile = config["profile"]
+                else:
+                    self.profile = GroupProfile(
+                        config["profile"]
+                    )
+            else:
+                self.profile = None
+            if "type" in config:
+                if isinstance(config["type"],
+                              GroupType):
+                    self.type = config["type"]
+                else:
+                    self.type = GroupType(
+                        config["type"]
+                    )
+            else:
+                self.type = None
         else:
             self.embedded = None
             self.links = None
@@ -53,3 +77,16 @@ class Group(
             self.object_class = None
             self.profile = None
             self.type = None
+
+    def request_format(self):
+        return {
+            "_embedded": self.embedded,
+            "_links": self.links,
+            "created": self.created,
+            "id": self.id,
+            "lastMembershipUpdated": self.last_membership_updated,
+            "lastUpdated": self.last_updated,
+            "objectClass": self.object_class,
+            "profile": self.profile,
+            "type": self.type
+        }

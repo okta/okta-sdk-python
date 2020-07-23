@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class PolicyRule(
     OktaObject
 ):
+    """
+    A class for PolicyRule objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.created = config["created"]\
@@ -47,3 +51,14 @@ class PolicyRule(
             self.status = "ACTIVE"
             self.system = "false"
             self.type = None
+
+    def request_format(self):
+        return {
+            "created": self.created,
+            "id": self.id,
+            "lastUpdated": self.last_updated,
+            "priority": self.priority,
+            "status": self.status,
+            "system": self.system,
+            "type": self.type
+        }

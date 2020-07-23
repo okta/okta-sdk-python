@@ -1,3 +1,5 @@
+import os
+
 DEV_OKTA = "https://developer.okta.com"
 
 FINDING_OKTA_DOMAIN = (f"{DEV_OKTA}"
@@ -13,3 +15,7 @@ EPOCH_MONTH = 1
 EPOCH_DAY = 1
 
 DATETIME_STRING_FORMAT = "%a, %d %b %Y %H:%M:%S %Z"
+
+_GLOBAL_YAML_PATH = os.path.join(os.path.expanduser('~'), ".okta",
+                                 "okta.yaml")
+_LOCAL_YAML_PATH = os.path.join(os.getcwd(), "okta.yaml")

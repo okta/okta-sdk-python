@@ -18,15 +18,21 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.catalog_application_status\
+    import CatalogApplicationStatus
 
 
 class CatalogApplication(
     OktaObject
 ):
+    """
+    A class for CatalogApplication objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.links = config["_links"]\
-                if "_links" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
             self.category = config["category"]\
                 if "category" in config else None
             self.description = config["description"]\
@@ -43,8 +49,16 @@ class CatalogApplication(
                 if "name" in config else None
             self.sign_on_modes = config["signOnModes"]\
                 if "signOnModes" in config else None
-            self.status = config["status"]\
-                if "status" in config else None
+            if "status" in config:
+                if isinstance(config["status"],
+                              CatalogApplicationStatus):
+                    self.status = config["status"]
+                else:
+                    self.status = CatalogApplicationStatus(
+                        config["status"]
+                    )
+            else:
+                self.status = None
             self.verification_status = config["verificationStatus"]\
                 if "verificationStatus" in config else None
             self.website = config["website"]\
@@ -62,3 +76,19 @@ class CatalogApplication(
             self.status = None
             self.verification_status = None
             self.website = None
+
+    def request_format(self):
+        return {
+            "_links": self.links,
+            "category": self.category,
+            "description": self.description,
+            "displayName": self.display_name,
+            "features": self.features,
+            "id": self.id,
+            "lastUpdated": self.last_updated,
+            "name": self.name,
+            "signOnModes": self.sign_on_modes,
+            "status": self.status,
+            "verificationStatus": self.verification_status,
+            "website": self.website
+        }

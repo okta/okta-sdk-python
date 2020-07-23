@@ -18,21 +18,35 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.app_user_credentials\
+    import AppUserCredentials
 
 
 class AppUser(
     OktaObject
 ):
+    """
+    A class for AppUser objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.embedded = config["_embedded"]\
-                if "_embedded" in config else None
-            self.links = config["_links"]\
-                if "_links" in config else None
+            self.embedded = config["embedded"]\
+                if "embedded" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
             self.created = config["created"]\
                 if "created" in config else None
-            self.credentials = config["credentials"]\
-                if "credentials" in config else None
+            if "credentials" in config:
+                if isinstance(config["credentials"],
+                              AppUserCredentials):
+                    self.credentials = config["credentials"]
+                else:
+                    self.credentials = AppUserCredentials(
+                        config["credentials"]
+                    )
+            else:
+                self.credentials = None
             self.external_id = config["externalId"]\
                 if "externalId" in config else None
             self.id = config["id"]\
@@ -68,3 +82,21 @@ class AppUser(
             self.status = None
             self.status_changed = None
             self.sync_state = None
+
+    def request_format(self):
+        return {
+            "_embedded": self.embedded,
+            "_links": self.links,
+            "created": self.created,
+            "credentials": self.credentials,
+            "externalId": self.external_id,
+            "id": self.id,
+            "lastSync": self.last_sync,
+            "lastUpdated": self.last_updated,
+            "passwordChanged": self.password_changed,
+            "profile": self.profile,
+            "scope": self.scope,
+            "status": self.status,
+            "statusChanged": self.status_changed,
+            "syncState": self.sync_state
+        }

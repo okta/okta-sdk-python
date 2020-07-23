@@ -18,14 +18,33 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.group_rule_group_assignment\
+    import GroupRuleGroupAssignment
 
 
 class GroupRuleAction(
     OktaObject
 ):
+    """
+    A class for GroupRuleAction objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.assign_user_to_groups = config["assignUserToGroups"]\
-                if "assignUserToGroups" in config else None
+            if "assignUserToGroups" in config:
+                if isinstance(config["assignUserToGroups"],
+                              GroupRuleGroupAssignment):
+                    self.assign_user_to_groups = config["assignUserToGroups"]
+                else:
+                    self.assign_user_to_groups = GroupRuleGroupAssignment(
+                        config["assignUserToGroups"]
+                    )
+            else:
+                self.assign_user_to_groups = None
         else:
             self.assign_user_to_groups = None
+
+    def request_format(self):
+        return {
+            "assignUserToGroups": self.assign_user_to_groups
+        }

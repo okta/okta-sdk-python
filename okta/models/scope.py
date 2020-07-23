@@ -18,17 +18,37 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.scope_type\
+    import ScopeType
 
 
 class Scope(
     OktaObject
 ):
+    """
+    A class for Scope objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.string_value = config["stringValue"]\
                 if "stringValue" in config else None
-            self.type = config["type"]\
-                if "type" in config else None
+            if "type" in config:
+                if isinstance(config["type"],
+                              ScopeType):
+                    self.type = config["type"]
+                else:
+                    self.type = ScopeType(
+                        config["type"]
+                    )
+            else:
+                self.type = None
         else:
             self.string_value = None
             self.type = None
+
+    def request_format(self):
+        return {
+            "stringValue": self.string_value,
+            "type": self.type
+        }

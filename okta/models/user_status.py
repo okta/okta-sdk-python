@@ -24,6 +24,10 @@ class UserStatus(
     str,
     Enum
 ):
+    """
+    An enumeration class for UserStatus.
+    """
+
     ACTIVE = "ACTIVE"
     DEPROVISIONED = "DEPROVISIONED"
     LOCKED_OUT = "LOCKED_OUT"

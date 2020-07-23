@@ -18,17 +18,18 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from urllib.parse import urlencode
-from okta.utils import format_url
 from okta.models.policy\
     import Policy
 from okta.models.policy_rule\
     import PolicyRule
+from okta.utils import format_url
 
 
 class PolicyClient():
     """
     A Client object for the Policy resource.
     """
+
     def __init__(self):
         self._base_url = ""
 
@@ -65,7 +66,7 @@ class PolicyClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Policy)
 
         if error:
             return (None, None, error)
@@ -75,7 +76,7 @@ class PolicyClient():
             for item in response.get_body():
                 result.append(Policy(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def create_policy(
@@ -113,7 +114,7 @@ class PolicyClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Policy)
 
         if error:
             return (None, None, error)
@@ -123,7 +124,7 @@ class PolicyClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def delete_policy(
@@ -190,7 +191,7 @@ class PolicyClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Policy)
 
         if error:
             return (None, None, error)
@@ -200,7 +201,7 @@ class PolicyClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def update_policy(
@@ -234,7 +235,7 @@ class PolicyClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Policy)
 
         if error:
             return (None, None, error)
@@ -244,7 +245,7 @@ class PolicyClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def activate_policy(
@@ -338,7 +339,7 @@ class PolicyClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, PolicyRule)
 
         if error:
             return (None, None, error)
@@ -348,7 +349,7 @@ class PolicyClient():
             for item in response.get_body():
                 result.append(PolicyRule(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def create_policy_rule(
@@ -382,7 +383,7 @@ class PolicyClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, PolicyRule)
 
         if error:
             return (None, None, error)
@@ -392,7 +393,7 @@ class PolicyClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def delete_policy_rule(
@@ -456,7 +457,7 @@ class PolicyClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, PolicyRule)
 
         if error:
             return (None, None, error)
@@ -466,7 +467,7 @@ class PolicyClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def update_policy_rule(
@@ -501,7 +502,7 @@ class PolicyClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, PolicyRule)
 
         if error:
             return (None, None, error)
@@ -511,7 +512,7 @@ class PolicyClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def activate_policy_rule(
@@ -527,7 +528,7 @@ class PolicyClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/policies/{policyId}/rules/{ruleId}
-                lifecycle/activate
+                /lifecycle/activate
             """)
 
         body = {}
@@ -561,7 +562,7 @@ class PolicyClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/policies/{policyId}/rules/{ruleId}
-                lifecycle/deactivate
+                /lifecycle/deactivate
             """)
 
         body = {}

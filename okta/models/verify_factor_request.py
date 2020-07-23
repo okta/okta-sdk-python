@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class VerifyFactorRequest(
     OktaObject
 ):
+    """
+    A class for VerifyFactorRequest objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.activation_token = config["activationToken"]\
@@ -50,3 +54,15 @@ class VerifyFactorRequest(
             self.pass_code = None
             self.registration_data = None
             self.state_token = None
+
+    def request_format(self):
+        return {
+            "activationToken": self.activation_token,
+            "answer": self.answer,
+            "attestation": self.attestation,
+            "clientData": self.client_data,
+            "nextPassCode": self.next_pass_code,
+            "passCode": self.pass_code,
+            "registrationData": self.registration_data,
+            "stateToken": self.state_token
+        }

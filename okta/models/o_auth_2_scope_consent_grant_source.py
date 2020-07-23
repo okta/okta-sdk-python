@@ -24,5 +24,9 @@ class OAuth2ScopeConsentGrantSource(
     str,
     Enum
 ):
+    """
+    An enumeration class for OAuth2ScopeConsentGrantSource.
+    """
+
     END_USER = "END_USER"
     ADMIN = "ADMIN"

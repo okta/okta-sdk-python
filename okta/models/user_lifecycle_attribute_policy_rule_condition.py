@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class UserLifecycleAttributePolicyRuleCondition(
     OktaObject
 ):
+    """
+    A class for UserLifecycleAttributePolicyRuleCondition objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.attribute_name = config["attributeName"]\
@@ -32,3 +36,9 @@ class UserLifecycleAttributePolicyRuleCondition(
         else:
             self.attribute_name = None
             self.matching_value = None
+
+    def request_format(self):
+        return {
+            "attributeName": self.attribute_name,
+            "matchingValue": self.matching_value
+        }

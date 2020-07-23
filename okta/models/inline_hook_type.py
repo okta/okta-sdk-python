@@ -24,8 +24,12 @@ class InlineHookType(
     str,
     Enum
 ):
-    com.okta.oauth2.tokens.transform = "com.okta.oauth2.tokens.transform"
-    com.okta.import.transform = "com.okta.import.transform"
-    com.okta.saml.tokens.transform = "com.okta.saml.tokens.transform"
-    com.okta.user.pre-registration = "com.okta.user.pre-registration"
-    com.okta.user.credential.password.import = "com.okta.user.credential.password.import"
+    """
+    An enumeration class for InlineHookType.
+    """
+
+    COM_OKTA_OAUTH_2_TOKENS_TRANSFORM = "com.okta.oauth2.tokens.transform"
+    COM_OKTA_IMPORT_TRANSFORM = "com.okta.import.transform"
+    COM_OKTA_SAML_TOKENS_TRANSFORM = "com.okta.saml.tokens.transform"
+    COM_OKTA_USER_PRE_REGISTRATION = "com.okta.user.pre-registration"
+    COM_OKTA_USER_CREDENTIAL_PASSWORD_IMPORT = "com.okta.user.credential.password.import"

@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class ProtocolAlgorithmTypeSignature(
     OktaObject
 ):
+    """
+    A class for ProtocolAlgorithmTypeSignature objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.algorithm = config["algorithm"]\
@@ -32,3 +36,9 @@ class ProtocolAlgorithmTypeSignature(
         else:
             self.algorithm = None
             self.scope = None
+
+    def request_format(self):
+        return {
+            "algorithm": self.algorithm,
+            "scope": self.scope
+        }

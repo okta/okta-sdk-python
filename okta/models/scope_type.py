@@ -24,5 +24,9 @@ class ScopeType(
     str,
     Enum
 ):
+    """
+    An enumeration class for ScopeType.
+    """
+
     CORS = "CORS"
     REDIRECT = "REDIRECT"

@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class EventHookChannelConfigHeader(
     OktaObject
 ):
+    """
+    A class for EventHookChannelConfigHeader objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.key = config["key"]\
@@ -32,3 +36,9 @@ class EventHookChannelConfigHeader(
         else:
             self.key = None
             self.value = None
+
+    def request_format(self):
+        return {
+            "key": self.key,
+            "value": self.value
+        }

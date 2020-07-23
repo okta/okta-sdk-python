@@ -23,9 +23,18 @@ from okta.okta_object import OktaObject
 class LogDebugContext(
     OktaObject
 ):
+    """
+    A class for LogDebugContext objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.debug_data = config["debugData"]\
                 if "debugData" in config else None
         else:
             self.debug_data = None
+
+    def request_format(self):
+        return {
+            "debugData": self.debug_data
+        }

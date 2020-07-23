@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class LogOutcome(
     OktaObject
 ):
+    """
+    A class for LogOutcome objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.reason = config["reason"]\
@@ -32,3 +36,9 @@ class LogOutcome(
         else:
             self.reason = None
             self.result = None
+
+    def request_format(self):
+        return {
+            "reason": self.reason,
+            "result": self.result
+        }

@@ -24,4 +24,8 @@ class AuthorizationServerCredentialsUse(
     str,
     Enum
 ):
-    sig = "sig"
+    """
+    An enumeration class for AuthorizationServerCredentialsUse.
+    """
+
+    SIG = "sig"

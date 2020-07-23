@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class LogTransaction(
     OktaObject
 ):
+    """
+    A class for LogTransaction objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.detail = config["detail"]\
@@ -35,3 +39,10 @@ class LogTransaction(
             self.detail = None
             self.id = None
             self.type = None
+
+    def request_format(self):
+        return {
+            "detail": self.detail,
+            "id": self.id,
+            "type": self.type
+        }

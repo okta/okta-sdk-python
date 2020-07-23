@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class LogTarget(
     OktaObject
 ):
+    """
+    A class for LogTarget objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.alternate_id = config["alternateId"]\
@@ -41,3 +45,12 @@ class LogTarget(
             self.display_name = None
             self.id = None
             self.type = None
+
+    def request_format(self):
+        return {
+            "alternateId": self.alternate_id,
+            "detailEntry": self.detail_entry,
+            "displayName": self.display_name,
+            "id": self.id,
+            "type": self.type
+        }

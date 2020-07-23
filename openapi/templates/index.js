@@ -1,6 +1,7 @@
 const py = module.exports;
 const fs = require("fs");
 const _ = require("lodash");
+const { isLength } = require("lodash");
 
 py.process = ({ spec, operations, models, handlebars }) => {
   py.spec = spec;
@@ -52,6 +53,7 @@ py.process = ({ spec, operations, models, handlebars }) => {
       dest: `okta/models/${_.snakeCase(model.modelName)}.py`,
       context: {
         model: model,
+        subTypes: getSubtypes(model),
       },
     });
   }
@@ -76,7 +78,7 @@ py.process = ({ spec, operations, models, handlebars }) => {
   for (const [tag, ops] of Object.entries(clientOps)) {
     templates.push({
       src: "resource_client.py.hbs",
-      dest: `okta/generated_clients/${_.snakeCase(tag)}_client.py`,
+      dest: `okta/resource_clients/${_.snakeCase(tag)}_client.py`,
       context: {
         operations: ops,
         resource: tag,
@@ -92,6 +94,14 @@ py.process = ({ spec, operations, models, handlebars }) => {
     },
   });
 
+  templates.push({
+    src: "models-init.py.hbs",
+    dest: `okta/models/__init__.py`,
+    context: {
+      models: models,
+    },
+  });
+
   handlebars.registerHelper({
     operationArgumentBuilder,
     pyDocstringBuilder,
@@ -101,6 +111,7 @@ py.process = ({ spec, operations, models, handlebars }) => {
     importURLEncode,
     getResourceImports,
     hasBinaryOps,
+    replaceColons,
   });
 
   handlebars.registerPartial(
@@ -222,7 +233,7 @@ function multilineURL(path) {
       current = current.concat(`/${piece}`);
     } else {
       result.push(current);
-      current = piece;
+      current = `/${piece}`;
     }
   });
 
@@ -273,4 +284,24 @@ function hasBinaryOps(operations) {
       return operation.bodyFormat === "binary";
     }).length > 0
   );
+}
+
+// Replace colons in enums with underscores
+function replaceColons(modelName) {
+  return modelName.replace(/:/g, "_");
+}
+
+// Import subtypes in models
+function getSubtypes(model) {
+  let modelSubTypes = new Set();
+
+  if (model.properties) {
+    model.properties.forEach((prop) => {
+      if ("$ref" in prop) {
+        modelSubTypes.add(prop.model);
+      }
+    });
+  }
+
+  return [...modelSubTypes];
 }

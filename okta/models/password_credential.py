@@ -18,20 +18,51 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.password_credential_hash\
+    import PasswordCredentialHash
+from okta.models.password_credential_hook\
+    import PasswordCredentialHook
 
 
 class PasswordCredential(
     OktaObject
 ):
+    """
+    A class for PasswordCredential objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.hash = config["hash"]\
-                if "hash" in config else None
-            self.hook = config["hook"]\
-                if "hook" in config else None
+            if "hash" in config:
+                if isinstance(config["hash"],
+                              PasswordCredentialHash):
+                    self.hash = config["hash"]
+                else:
+                    self.hash = PasswordCredentialHash(
+                        config["hash"]
+                    )
+            else:
+                self.hash = None
+            if "hook" in config:
+                if isinstance(config["hook"],
+                              PasswordCredentialHook):
+                    self.hook = config["hook"]
+                else:
+                    self.hook = PasswordCredentialHook(
+                        config["hook"]
+                    )
+            else:
+                self.hook = None
             self.value = config["value"]\
                 if "value" in config else None
         else:
             self.hash = None
             self.hook = None
             self.value = None
+
+    def request_format(self):
+        return {
+            "hash": self.hash,
+            "hook": self.hook,
+            "value": self.value
+        }

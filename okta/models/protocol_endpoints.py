@@ -18,29 +18,99 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.protocol_endpoint\
+    import ProtocolEndpoint
 
 
 class ProtocolEndpoints(
     OktaObject
 ):
+    """
+    A class for ProtocolEndpoints objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.acs = config["acs"]\
-                if "acs" in config else None
-            self.authorization = config["authorization"]\
-                if "authorization" in config else None
-            self.jwks = config["jwks"]\
-                if "jwks" in config else None
-            self.metadata = config["metadata"]\
-                if "metadata" in config else None
-            self.slo = config["slo"]\
-                if "slo" in config else None
-            self.sso = config["sso"]\
-                if "sso" in config else None
-            self.token = config["token"]\
-                if "token" in config else None
-            self.user_info = config["userInfo"]\
-                if "userInfo" in config else None
+            if "acs" in config:
+                if isinstance(config["acs"],
+                              ProtocolEndpoint):
+                    self.acs = config["acs"]
+                else:
+                    self.acs = ProtocolEndpoint(
+                        config["acs"]
+                    )
+            else:
+                self.acs = None
+            if "authorization" in config:
+                if isinstance(config["authorization"],
+                              ProtocolEndpoint):
+                    self.authorization = config["authorization"]
+                else:
+                    self.authorization = ProtocolEndpoint(
+                        config["authorization"]
+                    )
+            else:
+                self.authorization = None
+            if "jwks" in config:
+                if isinstance(config["jwks"],
+                              ProtocolEndpoint):
+                    self.jwks = config["jwks"]
+                else:
+                    self.jwks = ProtocolEndpoint(
+                        config["jwks"]
+                    )
+            else:
+                self.jwks = None
+            if "metadata" in config:
+                if isinstance(config["metadata"],
+                              ProtocolEndpoint):
+                    self.metadata = config["metadata"]
+                else:
+                    self.metadata = ProtocolEndpoint(
+                        config["metadata"]
+                    )
+            else:
+                self.metadata = None
+            if "slo" in config:
+                if isinstance(config["slo"],
+                              ProtocolEndpoint):
+                    self.slo = config["slo"]
+                else:
+                    self.slo = ProtocolEndpoint(
+                        config["slo"]
+                    )
+            else:
+                self.slo = None
+            if "sso" in config:
+                if isinstance(config["sso"],
+                              ProtocolEndpoint):
+                    self.sso = config["sso"]
+                else:
+                    self.sso = ProtocolEndpoint(
+                        config["sso"]
+                    )
+            else:
+                self.sso = None
+            if "token" in config:
+                if isinstance(config["token"],
+                              ProtocolEndpoint):
+                    self.token = config["token"]
+                else:
+                    self.token = ProtocolEndpoint(
+                        config["token"]
+                    )
+            else:
+                self.token = None
+            if "userInfo" in config:
+                if isinstance(config["userInfo"],
+                              ProtocolEndpoint):
+                    self.user_info = config["userInfo"]
+                else:
+                    self.user_info = ProtocolEndpoint(
+                        config["userInfo"]
+                    )
+            else:
+                self.user_info = None
         else:
             self.acs = None
             self.authorization = None
@@ -50,3 +120,15 @@ class ProtocolEndpoints(
             self.sso = None
             self.token = None
             self.user_info = None
+
+    def request_format(self):
+        return {
+            "acs": self.acs,
+            "authorization": self.authorization,
+            "jwks": self.jwks,
+            "metadata": self.metadata,
+            "slo": self.slo,
+            "sso": self.sso,
+            "token": self.token,
+            "userInfo": self.user_info
+        }

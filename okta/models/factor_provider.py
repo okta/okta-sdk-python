@@ -24,6 +24,10 @@ class FactorProvider(
     str,
     Enum
 ):
+    """
+    An enumeration class for FactorProvider.
+    """
+
     OKTA = "OKTA"
     RSA = "RSA"
     GOOGLE = "GOOGLE"

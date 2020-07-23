@@ -23,9 +23,18 @@ from okta.okta_object import OktaObject
 class InlineHookResponse(
     OktaObject
 ):
+    """
+    A class for InlineHookResponse objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.commands = config["commands"]\
                 if "commands" in config else None
         else:
             self.commands = None
+
+    def request_format(self):
+        return {
+            "commands": self.commands
+        }

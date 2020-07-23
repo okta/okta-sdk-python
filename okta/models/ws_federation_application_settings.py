@@ -17,18 +17,35 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
 from okta.models.application_settings\
     import ApplicationSettings
+from okta.models.ws_federation_application_settings_application\
+    import WsFederationApplicationSettingsApplication
 
 
 class WsFederationApplicationSettings(
-    OktaObject,
     ApplicationSettings
 ):
+    """
+    A class for WsFederationApplicationSettings objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.app = config["app"]\
-                if "app" in config else None
+            if "app" in config:
+                if isinstance(config["app"],
+                              WsFederationApplicationSettingsApplication):
+                    self.app = config["app"]
+                else:
+                    self.app = WsFederationApplicationSettingsApplication(
+                        config["app"]
+                    )
+            else:
+                self.app = None
         else:
             self.app = None
+
+    def request_format(self):
+        return {
+            "app": self.app
+        }

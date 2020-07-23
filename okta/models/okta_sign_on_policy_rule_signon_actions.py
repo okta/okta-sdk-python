@@ -18,11 +18,17 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.okta_sign_on_policy_rule_signon_session_actions\
+    import OktaSignOnPolicyRuleSignonSessionActions
 
 
 class OktaSignOnPolicyRuleSignonActions(
     OktaObject
 ):
+    """
+    A class for OktaSignOnPolicyRuleSignonActions objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.access = config["access"]\
@@ -35,8 +41,16 @@ class OktaSignOnPolicyRuleSignonActions(
                 if "rememberDeviceByDefault" in config else None
             self.require_factor = config["requireFactor"]\
                 if "requireFactor" in config else None
-            self.session = config["session"]\
-                if "session" in config else None
+            if "session" in config:
+                if isinstance(config["session"],
+                              OktaSignOnPolicyRuleSignonSessionActions):
+                    self.session = config["session"]
+                else:
+                    self.session = OktaSignOnPolicyRuleSignonSessionActions(
+                        config["session"]
+                    )
+            else:
+                self.session = None
         else:
             self.access = None
             self.factor_lifetime = None
@@ -44,3 +58,13 @@ class OktaSignOnPolicyRuleSignonActions(
             self.remember_device_by_default = "false"
             self.require_factor = "false"
             self.session = None
+
+    def request_format(self):
+        return {
+            "access": self.access,
+            "factorLifetime": self.factor_lifetime,
+            "factorPromptMode": self.factor_prompt_mode,
+            "rememberDeviceByDefault": self.remember_device_by_default,
+            "requireFactor": self.require_factor,
+            "session": self.session
+        }

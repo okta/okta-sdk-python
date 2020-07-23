@@ -23,5 +23,13 @@ from okta.okta_object import OktaObject
 class ApplicationSettingsApplication(
     OktaObject
 ):
+    """
+    A class for ApplicationSettingsApplication objects.
+    """
+
     def __init__(self, config=None):
         pass
+
+    def request_format(self):
+        return {
+        }

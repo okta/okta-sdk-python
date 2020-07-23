@@ -23,12 +23,16 @@ from okta.okta_object import OktaObject
 class OAuth2Token(
     OktaObject
 ):
+    """
+    A class for OAuth2Token objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.embedded = config["_embedded"]\
-                if "_embedded" in config else None
-            self.links = config["_links"]\
-                if "_links" in config else None
+            self.embedded = config["embedded"]\
+                if "embedded" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
             self.client_id = config["clientId"]\
                 if "clientId" in config else None
             self.created = config["created"]\
@@ -59,3 +63,18 @@ class OAuth2Token(
             self.scopes = None
             self.status = None
             self.user_id = None
+
+    def request_format(self):
+        return {
+            "_embedded": self.embedded,
+            "_links": self.links,
+            "clientId": self.client_id,
+            "created": self.created,
+            "expiresAt": self.expires_at,
+            "id": self.id,
+            "issuer": self.issuer,
+            "lastUpdated": self.last_updated,
+            "scopes": self.scopes,
+            "status": self.status,
+            "userId": self.user_id
+        }

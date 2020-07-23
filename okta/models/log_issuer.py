@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class LogIssuer(
     OktaObject
 ):
+    """
+    A class for LogIssuer objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.id = config["id"]\
@@ -32,3 +36,9 @@ class LogIssuer(
         else:
             self.id = None
             self.type = None
+
+    def request_format(self):
+        return {
+            "id": self.id,
+            "type": self.type
+        }

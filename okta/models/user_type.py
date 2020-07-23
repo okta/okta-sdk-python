@@ -23,10 +23,14 @@ from okta.okta_object import OktaObject
 class UserType(
     OktaObject
 ):
+    """
+    A class for UserType objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.links = config["_links"]\
-                if "_links" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
             self.created = config["created"]\
                 if "created" in config else None
             self.created_by = config["createdBy"]\
@@ -56,3 +60,17 @@ class UserType(
             self.last_updated = None
             self.last_updated_by = None
             self.name = None
+
+    def request_format(self):
+        return {
+            "_links": self.links,
+            "created": self.created,
+            "createdBy": self.created_by,
+            "default": self.default,
+            "description": self.description,
+            "displayName": self.display_name,
+            "id": self.id,
+            "lastUpdated": self.last_updated,
+            "lastUpdatedBy": self.last_updated_by,
+            "name": self.name
+        }

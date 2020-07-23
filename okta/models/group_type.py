@@ -24,6 +24,10 @@ class GroupType(
     str,
     Enum
 ):
+    """
+    An enumeration class for GroupType.
+    """
+
     OKTA_GROUP = "OKTA_GROUP"
     APP_GROUP = "APP_GROUP"
     BUILT_IN = "BUILT_IN"

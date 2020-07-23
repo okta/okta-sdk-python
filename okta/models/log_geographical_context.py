@@ -18,19 +18,33 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.log_geolocation\
+    import LogGeolocation
 
 
 class LogGeographicalContext(
     OktaObject
 ):
+    """
+    A class for LogGeographicalContext objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.city = config["city"]\
                 if "city" in config else None
             self.country = config["country"]\
                 if "country" in config else None
-            self.geolocation = config["geolocation"]\
-                if "geolocation" in config else None
+            if "geolocation" in config:
+                if isinstance(config["geolocation"],
+                              LogGeolocation):
+                    self.geolocation = config["geolocation"]
+                else:
+                    self.geolocation = LogGeolocation(
+                        config["geolocation"]
+                    )
+            else:
+                self.geolocation = None
             self.postal_code = config["postalCode"]\
                 if "postalCode" in config else None
             self.state = config["state"]\
@@ -41,3 +55,12 @@ class LogGeographicalContext(
             self.geolocation = None
             self.postal_code = None
             self.state = None
+
+    def request_format(self):
+        return {
+            "city": self.city,
+            "country": self.country,
+            "geolocation": self.geolocation,
+            "postalCode": self.postal_code,
+            "state": self.state
+        }

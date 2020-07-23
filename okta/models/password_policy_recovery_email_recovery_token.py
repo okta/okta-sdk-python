@@ -23,9 +23,18 @@ from okta.okta_object import OktaObject
 class PasswordPolicyRecoveryEmailRecoveryToken(
     OktaObject
 ):
+    """
+    A class for PasswordPolicyRecoveryEmailRecoveryToken objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.token_lifetime_minutes = config["tokenLifetimeMinutes"]\
                 if "tokenLifetimeMinutes" in config else None
         else:
             self.token_lifetime_minutes = "10080"
+
+    def request_format(self):
+        return {
+            "tokenLifetimeMinutes": self.token_lifetime_minutes
+        }

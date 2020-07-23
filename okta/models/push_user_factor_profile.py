@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class PushUserFactorProfile(
     OktaObject
 ):
+    """
+    A class for PushUserFactorProfile objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.credential_id = config["credentialId"]\
@@ -44,3 +48,13 @@ class PushUserFactorProfile(
             self.name = None
             self.platform = None
             self.version = None
+
+    def request_format(self):
+        return {
+            "credentialId": self.credential_id,
+            "deviceToken": self.device_token,
+            "deviceType": self.device_type,
+            "name": self.name,
+            "platform": self.platform,
+            "version": self.version
+        }

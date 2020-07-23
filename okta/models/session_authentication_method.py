@@ -24,13 +24,17 @@ class SessionAuthenticationMethod(
     str,
     Enum
 ):
-    pwd = "pwd"
-    swk = "swk"
-    hwk = "hwk"
-    otp = "otp"
-    sms = "sms"
-    tel = "tel"
-    geo = "geo"
-    fpt = "fpt"
-    kba = "kba"
-    mfa = "mfa"
+    """
+    An enumeration class for SessionAuthenticationMethod.
+    """
+
+    PWD = "pwd"
+    SWK = "swk"
+    HWK = "hwk"
+    OTP = "otp"
+    SMS = "sms"
+    TEL = "tel"
+    GEO = "geo"
+    FPT = "fpt"
+    KBA = "kba"
+    MFA = "mfa"

@@ -17,18 +17,35 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
 from okta.models.policy\
     import Policy
+from okta.models.okta_sign_on_policy_conditions\
+    import OktaSignOnPolicyConditions
 
 
 class OktaSignOnPolicy(
-    OktaObject,
     Policy
 ):
+    """
+    A class for OktaSignOnPolicy objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.conditions = config["conditions"]\
-                if "conditions" in config else None
+            if "conditions" in config:
+                if isinstance(config["conditions"],
+                              OktaSignOnPolicyConditions):
+                    self.conditions = config["conditions"]
+                else:
+                    self.conditions = OktaSignOnPolicyConditions(
+                        config["conditions"]
+                    )
+            else:
+                self.conditions = None
         else:
             self.conditions = None
+
+    def request_format(self):
+        return {
+            "conditions": self.conditions
+        }

@@ -24,6 +24,10 @@ class ApplicationSignOnMode(
     str,
     Enum
 ):
+    """
+    An enumeration class for ApplicationSignOnMode.
+    """
+
     BOOKMARK = "BOOKMARK"
     BASIC_AUTH = "BASIC_AUTH"
     BROWSER_PLUGIN = "BROWSER_PLUGIN"

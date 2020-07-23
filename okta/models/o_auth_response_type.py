@@ -24,6 +24,10 @@ class OAuthResponseType(
     str,
     Enum
 ):
-    code = "code"
-    token = "token"
-    id_token = "id_token"
+    """
+    An enumeration class for OAuthResponseType.
+    """
+
+    CODE = "code"
+    TOKEN = "token"
+    ID_TOKEN = "id_token"

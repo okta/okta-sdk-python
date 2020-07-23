@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class Csr(
     OktaObject
 ):
+    """
+    A class for Csr objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.created = config["created"]\
@@ -38,3 +42,11 @@ class Csr(
             self.csr = None
             self.id = None
             self.kty = None
+
+    def request_format(self):
+        return {
+            "created": self.created,
+            "csr": self.csr,
+            "id": self.id,
+            "kty": self.kty
+        }

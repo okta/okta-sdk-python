@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class SamlAttributeStatement(
     OktaObject
 ):
+    """
+    A class for SamlAttributeStatement objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.name = config["name"]\
@@ -38,3 +42,11 @@ class SamlAttributeStatement(
             self.namespace = None
             self.type = None
             self.values = None
+
+    def request_format(self):
+        return {
+            "name": self.name,
+            "namespace": self.namespace,
+            "type": self.type,
+            "values": self.values
+        }

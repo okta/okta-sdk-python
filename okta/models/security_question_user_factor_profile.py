@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class SecurityQuestionUserFactorProfile(
     OktaObject
 ):
+    """
+    A class for SecurityQuestionUserFactorProfile objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.answer = config["answer"]\
@@ -35,3 +39,10 @@ class SecurityQuestionUserFactorProfile(
             self.answer = None
             self.question = None
             self.question_text = None
+
+    def request_format(self):
+        return {
+            "answer": self.answer,
+            "question": self.question,
+            "questionText": self.question_text
+        }

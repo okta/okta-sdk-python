@@ -24,5 +24,9 @@ class OpenIdConnectApplicationConsentMethod(
     str,
     Enum
 ):
+    """
+    An enumeration class for OpenIdConnectApplicationConsentMethod.
+    """
+
     REQUIRED = "REQUIRED"
     TRUSTED = "TRUSTED"

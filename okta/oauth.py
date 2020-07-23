@@ -56,15 +56,18 @@ class OAuth:
             encoded_parameters
 
         # Craft request
-        request = self._request_executor.create_request("POST", url, None, {
-            'Accept': "application/json",
-            'Content-Type': 'application/x-www-form-urlencoded'
-        })
+        oauth_req, err = await self._request_executor.create_request(
+            "POST", url, None, {
+                'Accept': "application/json",
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }, oauth=True)
 
         # TODO Make max 1 retry
         # Shoot request
+        if err:
+            return (None, err)
         _, res_details, res_json, err = \
-            await self._request_executor.fire_request(request)
+            await self._request_executor.fire_request(oauth_req)
         # Return HTTP Client error if raised
         if err:
             return (None, err)

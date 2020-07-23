@@ -23,9 +23,18 @@ from okta.okta_object import OktaObject
 class PasswordCredentialHook(
     OktaObject
 ):
+    """
+    A class for PasswordCredentialHook objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.type = config["type"]\
                 if "type" in config else None
         else:
             self.type = None
+
+    def request_format(self):
+        return {
+            "type": self.type
+        }

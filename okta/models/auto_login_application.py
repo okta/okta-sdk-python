@@ -17,21 +17,49 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
 from okta.models.application\
     import Application
+from okta.models.scheme_application_credentials\
+    import SchemeApplicationCredentials
+from okta.models.auto_login_application_settings\
+    import AutoLoginApplicationSettings
 
 
 class AutoLoginApplication(
-    OktaObject,
     Application
 ):
+    """
+    A class for AutoLoginApplication objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.credentials = config["credentials"]\
-                if "credentials" in config else None
-            self.settings = config["settings"]\
-                if "settings" in config else None
+            if "credentials" in config:
+                if isinstance(config["credentials"],
+                              SchemeApplicationCredentials):
+                    self.credentials = config["credentials"]
+                else:
+                    self.credentials = SchemeApplicationCredentials(
+                        config["credentials"]
+                    )
+            else:
+                self.credentials = None
+            if "settings" in config:
+                if isinstance(config["settings"],
+                              AutoLoginApplicationSettings):
+                    self.settings = config["settings"]
+                else:
+                    self.settings = AutoLoginApplicationSettings(
+                        config["settings"]
+                    )
+            else:
+                self.settings = None
         else:
             self.credentials = None
             self.settings = None
+
+    def request_format(self):
+        return {
+            "credentials": self.credentials,
+            "settings": self.settings
+        }

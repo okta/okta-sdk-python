@@ -23,21 +23,34 @@ from okta.okta_object import OktaObject
 class OAuth2Client(
     OktaObject
 ):
+    """
+    A class for OAuth2Client objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.links = config["_links"]\
-                if "_links" in config else None
-            self.client_id = config["client_id"]\
-                if "client_id" in config else None
-            self.client_name = config["client_name"]\
-                if "client_name" in config else None
-            self.client_uri = config["client_uri"]\
-                if "client_uri" in config else None
-            self.logo_uri = config["logo_uri"]\
-                if "logo_uri" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
+            self.client_id = config["clientId"]\
+                if "clientId" in config else None
+            self.client_name = config["clientName"]\
+                if "clientName" in config else None
+            self.client_uri = config["clientUri"]\
+                if "clientUri" in config else None
+            self.logo_uri = config["logoUri"]\
+                if "logoUri" in config else None
         else:
             self.links = None
             self.client_id = None
             self.client_name = None
             self.client_uri = None
             self.logo_uri = None
+
+    def request_format(self):
+        return {
+            "_links": self.links,
+            "client_id": self.client_id,
+            "client_name": self.client_name,
+            "client_uri": self.client_uri,
+            "logo_uri": self.logo_uri
+        }

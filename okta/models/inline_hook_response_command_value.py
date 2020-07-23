@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class InlineHookResponseCommandValue(
     OktaObject
 ):
+    """
+    A class for InlineHookResponseCommandValue objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.op = config["op"]\
@@ -35,3 +39,10 @@ class InlineHookResponseCommandValue(
             self.op = None
             self.path = None
             self.value = None
+
+    def request_format(self):
+        return {
+            "op": self.op,
+            "path": self.path,
+            "value": self.value
+        }

@@ -18,17 +18,47 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.policy_network_condition\
+    import PolicyNetworkCondition
+from okta.models.policy_people_condition\
+    import PolicyPeopleCondition
 
 
 class PasswordPolicyRuleConditions(
     OktaObject
 ):
+    """
+    A class for PasswordPolicyRuleConditions objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.network = config["network"]\
-                if "network" in config else None
-            self.people = config["people"]\
-                if "people" in config else None
+            if "network" in config:
+                if isinstance(config["network"],
+                              PolicyNetworkCondition):
+                    self.network = config["network"]
+                else:
+                    self.network = PolicyNetworkCondition(
+                        config["network"]
+                    )
+            else:
+                self.network = None
+            if "people" in config:
+                if isinstance(config["people"],
+                              PolicyPeopleCondition):
+                    self.people = config["people"]
+                else:
+                    self.people = PolicyPeopleCondition(
+                        config["people"]
+                    )
+            else:
+                self.people = None
         else:
             self.network = None
             self.people = None
+
+    def request_format(self):
+        return {
+            "network": self.network,
+            "people": self.people
+        }

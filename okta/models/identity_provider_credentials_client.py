@@ -23,12 +23,22 @@ from okta.okta_object import OktaObject
 class IdentityProviderCredentialsClient(
     OktaObject
 ):
+    """
+    A class for IdentityProviderCredentialsClient objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.client_id = config["client_id"]\
-                if "client_id" in config else None
-            self.client_secret = config["client_secret"]\
-                if "client_secret" in config else None
+            self.client_id = config["clientId"]\
+                if "clientId" in config else None
+            self.client_secret = config["clientSecret"]\
+                if "clientSecret" in config else None
         else:
             self.client_id = None
             self.client_secret = None
+
+    def request_format(self):
+        return {
+            "client_id": self.client_id,
+            "client_secret": self.client_secret
+        }

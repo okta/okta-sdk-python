@@ -23,9 +23,18 @@ from okta.okta_object import OktaObject
 class ResetPasswordToken(
     OktaObject
 ):
+    """
+    A class for ResetPasswordToken objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.reset_password_url = config["resetPasswordUrl"]\
                 if "resetPasswordUrl" in config else None
         else:
             self.reset_password_url = None
+
+    def request_format(self):
+        return {
+            "resetPasswordUrl": self.reset_password_url
+        }

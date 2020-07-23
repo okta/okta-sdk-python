@@ -17,40 +17,73 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
+from okta.models.linked_object\
+    import LinkedObject
 from okta.utils import format_url
-from okta.models.session\
-    import Session
 
 
-class SessionClient():
+class LinkedObjectClient():
     """
-    A Client object for the Session resource.
+    A Client object for the LinkedObject resource.
     """
+
     def __init__(self):
         self._base_url = ""
 
-    async def create_session(
-            self, create_session_request
+    async def list_linked_object_definitions(
+            self
     ):
         """
-        Creates a new session for a user with a valid session t
-        oken. Use this API if, for example, you want to set the
-        session cookie yourself instead of allowing Okta to se
-        t it, or want to hold the session ID in order to delete
-        a session via the API instead of visiting the logout U
-        RL.
         Args:
-            {create_session_request}
         Returns:
-            Session
+            list: Collection of LinkedObject instances.
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/meta/schemas/user/linkedObjects
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, LinkedObject)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = []
+            for item in response.get_body():
+                result.append(LinkedObject(item))
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def add_linked_object_definition(
+            self, linked_object
+    ):
+        """
+        Args:
+            {linked_object}
+        Returns:
+            LinkedObject
         """
         http_method = "post".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/sessions
+            /api/v1/meta/schemas/user/linkedObjects
             """)
 
-        body = create_session_request.as_dict()
+        body = linked_object.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -64,32 +97,31 @@ class SessionClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, LinkedObject)
 
         if error:
             return (None, None, error)
 
         try:
-            result = Session(
+            result = LinkedObject(
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def end_session(
-            self, sessionId
+    async def delete_linked_object_definition(
+            self, linkedObjectName
     ):
         """
-        Method for
-        /api/v1/sessions/{sessionId}
         Args:
-            session_id {str}
+            linked_object_name {str}
         """
         http_method = "delete".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/sessions/{sessionId}
+            /api/v1/meta/schemas/user/linkedObjects
+                /{linkedObjectName}
             """)
 
         body = {}
@@ -110,20 +142,20 @@ class SessionClient():
 
         return (response, None)
 
-    async def get_session(
-            self, sessionId
+    async def get_linked_object_definition(
+            self, linkedObjectName
     ):
         """
-        Get details about a session.
         Args:
-            session_id {str}
+            linked_object_name {str}
         Returns:
-            Session
+            LinkedObject
         """
         http_method = "get".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/sessions/{sessionId}
+            /api/v1/meta/schemas/user/linkedObjects
+                /{linkedObjectName}
             """)
 
         body = {}
@@ -137,56 +169,15 @@ class SessionClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, LinkedObject)
 
         if error:
             return (None, None, error)
 
         try:
-            result = Session(
+            result = LinkedObject(
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def refresh_session(
-            self, sessionId
-    ):
-        """
-        Method for
-        /api/v1/sessions/{sessionId}/lifecycle/refresh
-        Args:
-            session_id {str}
-        Returns:
-            Session
-        """
-        http_method = "post".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/sessions/{sessionId}/lifecycle/refresh
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
             return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = Session(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
         return (result, response, None)

@@ -18,23 +18,73 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.password_policy_recovery_factor_settings\
+    import PasswordPolicyRecoveryFactorSettings
+from okta.models.password_policy_recovery_email\
+    import PasswordPolicyRecoveryEmail
+from okta.models.password_policy_recovery_question\
+    import PasswordPolicyRecoveryQuestion
 
 
 class PasswordPolicyRecoveryFactors(
     OktaObject
 ):
+    """
+    A class for PasswordPolicyRecoveryFactors objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.okta_call = config["okta_call"]\
-                if "okta_call" in config else None
-            self.okta_email = config["okta_email"]\
-                if "okta_email" in config else None
-            self.okta_sms = config["okta_sms"]\
-                if "okta_sms" in config else None
-            self.recovery_question = config["recovery_question"]\
-                if "recovery_question" in config else None
+            if "oktaCall" in config:
+                if isinstance(config["oktaCall"],
+                              PasswordPolicyRecoveryFactorSettings):
+                    self.okta_call = config["oktaCall"]
+                else:
+                    self.okta_call = PasswordPolicyRecoveryFactorSettings(
+                        config["oktaCall"]
+                    )
+            else:
+                self.okta_call = None
+            if "oktaEmail" in config:
+                if isinstance(config["oktaEmail"],
+                              PasswordPolicyRecoveryEmail):
+                    self.okta_email = config["oktaEmail"]
+                else:
+                    self.okta_email = PasswordPolicyRecoveryEmail(
+                        config["oktaEmail"]
+                    )
+            else:
+                self.okta_email = None
+            if "oktaSms" in config:
+                if isinstance(config["oktaSms"],
+                              PasswordPolicyRecoveryFactorSettings):
+                    self.okta_sms = config["oktaSms"]
+                else:
+                    self.okta_sms = PasswordPolicyRecoveryFactorSettings(
+                        config["oktaSms"]
+                    )
+            else:
+                self.okta_sms = None
+            if "recoveryQuestion" in config:
+                if isinstance(config["recoveryQuestion"],
+                              PasswordPolicyRecoveryQuestion):
+                    self.recovery_question = config["recoveryQuestion"]
+                else:
+                    self.recovery_question = PasswordPolicyRecoveryQuestion(
+                        config["recoveryQuestion"]
+                    )
+            else:
+                self.recovery_question = None
         else:
             self.okta_call = None
             self.okta_email = None
             self.okta_sms = None
             self.recovery_question = None
+
+    def request_format(self):
+        return {
+            "okta_call": self.okta_call,
+            "okta_email": self.okta_email,
+            "okta_sms": self.okta_sms,
+            "recovery_question": self.recovery_question
+        }

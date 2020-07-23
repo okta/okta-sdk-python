@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class IonForm(
     OktaObject
 ):
+    """
+    A class for IonForm objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.accepts = config["accepts"]\
@@ -53,3 +57,16 @@ class IonForm(
             self.rel = None
             self.relates_to = None
             self.value = None
+
+    def request_format(self):
+        return {
+            "accepts": self.accepts,
+            "href": self.href,
+            "method": self.method,
+            "name": self.name,
+            "produces": self.produces,
+            "refresh": self.refresh,
+            "rel": self.rel,
+            "relatesTo": self.relates_to,
+            "value": self.value
+        }

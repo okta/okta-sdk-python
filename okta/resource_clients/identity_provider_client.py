@@ -18,46 +18,48 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from urllib.parse import urlencode
-from okta.utils import format_url
-from okta.models.authorization_server\
-    import AuthorizationServer
-from okta.models.o_auth_2_claim\
-    import OAuth2Claim
-from okta.models.o_auth_2_client\
-    import OAuth2Client
-from okta.models.o_auth_2_refresh_token\
-    import OAuth2RefreshToken
+from okta.http_client import HTTPClient
+from okta.models.identity_provider\
+    import IdentityProvider
 from okta.models.json_web_key\
     import JsonWebKey
-from okta.models.policy\
-    import Policy
-from okta.models.o_auth_2_scope\
-    import OAuth2Scope
+from okta.models.csr\
+    import Csr
+from okta.models.identity_provider_application_user\
+    import IdentityProviderApplicationUser
+from okta.models.social_auth_token\
+    import SocialAuthToken
+from okta.utils import format_url
 
 
-class AuthorizationServerClient():
+class IdentityProviderClient():
     """
-    A Client object for the AuthorizationServer resource.
+    A Client object for the IdentityProvider resource.
     """
+
     def __init__(self):
         self._base_url = ""
 
-    async def list_authorization_servers(
+    async def list_identity_providers(
             self, query_params={}
     ):
         """
+        Enumerates IdPs in your organization with pagination. A
+        subset of IdPs can be returned that match a supported
+        filter expression or query.
         Args:
             query_params {dict}: Map of query parameters for request
             [query_params.q] {str}
-            [query_params.limit] {str}
             [query_params.after] {str}
+            [query_params.limit] {str}
+            [query_params.type] {str}
         Returns:
-            list: Collection of AuthorizationServer instances.
+            list: Collection of IdentityProvider instances.
         """
         http_method = "get".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/authorizationServers
+            /api/v1/idps
             """)
         if query_params:
             encoded_query_params = urlencode(query_params)
@@ -74,7 +76,7 @@ class AuthorizationServerClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, IdentityProvider)
 
         if error:
             return (None, None, error)
@@ -82,27 +84,28 @@ class AuthorizationServerClient():
         try:
             result = []
             for item in response.get_body():
-                result.append(AuthorizationServer(item))
+                result.append(IdentityProvider(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def create_authorization_server(
-            self, authorization_server
+    async def create_identity_provider(
+            self, identity_provider
     ):
         """
+        Adds a new IdP to your organization.
         Args:
-            {authorization_server}
+            {identity_provider}
         Returns:
-            AuthorizationServer
+            IdentityProvider
         """
         http_method = "post".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/authorizationServers
+            /api/v1/idps
             """)
 
-        body = authorization_server.as_dict()
+        body = identity_provider.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -116,549 +119,39 @@ class AuthorizationServerClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, IdentityProvider)
 
         if error:
             return (None, None, error)
 
         try:
-            result = AuthorizationServer(
+            result = IdentityProvider(
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def delete_authorization_server(
-            self, authServerId
+    async def list_identity_provider_keys(
+            self, query_params={}
     ):
         """
+        Enumerates IdP key credentials.
         Args:
-            auth_server_id {str}
-        """
-        http_method = "delete".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/authorizationServers/{authServerId}
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, error)
-
-        return (response, None)
-
-    async def get_authorization_server(
-            self, authServerId
-    ):
-        """
-        Args:
-            auth_server_id {str}
-        Returns:
-            AuthorizationServer
-        """
-        http_method = "get".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/authorizationServers/{authServerId}
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = AuthorizationServer(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def update_authorization_server(
-            self, authServerId, authorization_server
-    ):
-        """
-        Args:
-            auth_server_id {str}
-            {authorization_server}
-        Returns:
-            AuthorizationServer
-        """
-        http_method = "put".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/authorizationServers/{authServerId}
-            """)
-
-        body = authorization_server.as_dict()
-        headers = {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        }
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = AuthorizationServer(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def list_o_auth_2_claims(
-            self, authServerId
-    ):
-        """
-        Args:
-            auth_server_id {str}
-        Returns:
-            list: Collection of OAuth2Claim instances.
-        """
-        http_method = "get".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/authorizationServers/{authServerId}/claims
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = []
-            for item in response.get_body():
-                result.append(OAuth2Claim(item))
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def create_o_auth_2_claim(
-            self, authServerId, o_auth_2_claim
-    ):
-        """
-        Args:
-            auth_server_id {str}
-            {o_auth_2_claim}
-        Returns:
-            OAuth2Claim
-        """
-        http_method = "post".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/authorizationServers/{authServerId}/claims
-            """)
-
-        body = o_auth_2_claim.as_dict()
-        headers = {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        }
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = OAuth2Claim(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def delete_o_auth_2_claim(
-            self, authServerId, claimId
-    ):
-        """
-        Args:
-            auth_server_id {str}
-            claim_id {str}
-        """
-        http_method = "delete".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/authorizationServers/{authServerId}/claims
-                {claimId}
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, error)
-
-        return (response, None)
-
-    async def get_o_auth_2_claim(
-            self, authServerId, claimId
-    ):
-        """
-        Args:
-            auth_server_id {str}
-            claim_id {str}
-        Returns:
-            OAuth2Claim
-        """
-        http_method = "get".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/authorizationServers/{authServerId}/claims
-                {claimId}
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = OAuth2Claim(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def update_o_auth_2_claim(
-            self, authServerId, claimId, o_auth_2_claim
-    ):
-        """
-        Args:
-            auth_server_id {str}
-            claim_id {str}
-            {o_auth_2_claim}
-        Returns:
-            OAuth2Claim
-        """
-        http_method = "put".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/authorizationServers/{authServerId}/claims
-                {claimId}
-            """)
-
-        body = o_auth_2_claim.as_dict()
-        headers = {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        }
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = OAuth2Claim(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def list_o_auth_2_clients_for_authorization_server(
-            self, authServerId
-    ):
-        """
-        Args:
-            auth_server_id {str}
-        Returns:
-            list: Collection of OAuth2Client instances.
-        """
-        http_method = "get".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/authorizationServers/{authServerId}/clients
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = []
-            for item in response.get_body():
-                result.append(OAuth2Client(item))
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def revoke_refresh_tokens_for_authorization_server_and_client(
-            self, authServerId, clientId
-    ):
-        """
-        Args:
-            auth_server_id {str}
-            client_id {str}
-        """
-        http_method = "delete".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/authorizationServers/{authServerId}/clients
-                {clientId}/tokens
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, error)
-
-        return (response, None)
-
-    async def list_refresh_tokens_for_authorization_server_and_client(
-            self, authServerId, clientId, query_params={}
-    ):
-        """
-        Args:
-            auth_server_id {str}
-            client_id {str}
             query_params {dict}: Map of query parameters for request
-            [query_params.expand] {str}
             [query_params.after] {str}
             [query_params.limit] {str}
-        Returns:
-            list: Collection of OAuth2RefreshToken instances.
-        """
-        http_method = "get".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/authorizationServers/{authServerId}/clients
-                {clientId}/tokens
-            """)
-        if query_params:
-            encoded_query_params = urlencode(query_params)
-            api_url += f"/?{encoded_query_params}"
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = []
-            for item in response.get_body():
-                result.append(OAuth2RefreshToken(item))
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def revoke_refresh_token_for_authorization_server_and_client(
-            self, authServerId, clientId, tokenId
-    ):
-        """
-        Args:
-            auth_server_id {str}
-            client_id {str}
-            token_id {str}
-        """
-        http_method = "delete".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/authorizationServers/{authServerId}/clients
-                {clientId}/tokens/{tokenId}
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, error)
-
-        return (response, None)
-
-    async def get_refresh_token_for_authorization_server_and_client(
-            self, authServerId, clientId, tokenId, query_params={}
-    ):
-        """
-        Args:
-            auth_server_id {str}
-            client_id {str}
-            token_id {str}
-            query_params {dict}: Map of query parameters for request
-            [query_params.expand] {str}
-        Returns:
-            OAuth2RefreshToken
-        """
-        http_method = "get".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/authorizationServers/{authServerId}/clients
-                {clientId}/tokens/{tokenId}
-            """)
-        if query_params:
-            encoded_query_params = urlencode(query_params)
-            api_url += f"/?{encoded_query_params}"
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = OAuth2RefreshToken(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def list_authorization_server_keys(
-            self, authServerId
-    ):
-        """
-        Args:
-            auth_server_id {str}
         Returns:
             list: Collection of JsonWebKey instances.
         """
         http_method = "get".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/authorizationServers/{authServerId}
-                credentials/keys
+            /api/v1/idps/credentials/keys
             """)
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
         body = {}
         headers = {}
@@ -671,7 +164,7 @@ class AuthorizationServerClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
@@ -681,26 +174,27 @@ class AuthorizationServerClient():
             for item in response.get_body():
                 result.append(JsonWebKey(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def rotate_authorization_server_keys(
-            self, authServerId, jwk_use
+    async def create_identity_provider_key(
+            self, json_web_key
     ):
         """
+        Adds a new X.509 certificate credential to the IdP key
+        store.
         Args:
-            auth_server_id {str}
+            {json_web_key}
         Returns:
-            list: Collection of JsonWebKey instances.
+            JsonWebKey
         """
         http_method = "post".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/authorizationServers/{authServerId}
-                credentials/lifecycle/keyRotate
+            /api/v1/idps/credentials/keys
             """)
 
-        body = jwk_use.as_dict()
+        body = json_web_key.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -714,7 +208,636 @@ class AuthorizationServerClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
+            .execute(request, JsonWebKey)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = JsonWebKey(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def delete_identity_provider_key(
+            self, keyId
+    ):
+        """
+        Deletes a specific IdP Key Credential by `kid` if it is
+        not currently being used by an Active or Inactive IdP.
+        Args:
+            key_id {str}
+        """
+        http_method = "delete".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/idps/credentials/keys/{keyId}
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
             .execute(request)
+
+        if error:
+            return (None, error)
+
+        return (response, None)
+
+    async def get_identity_provider_key(
+            self, keyId
+    ):
+        """
+        Gets a specific IdP Key Credential by `kid`
+        Args:
+            key_id {str}
+        Returns:
+            JsonWebKey
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/idps/credentials/keys/{keyId}
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, JsonWebKey)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = JsonWebKey(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def delete_identity_provider(
+            self, idpId
+    ):
+        """
+        Removes an IdP from your organization.
+        Args:
+            idp_id {str}
+        """
+        http_method = "delete".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/idps/{idpId}
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (None, error)
+
+        return (response, None)
+
+    async def get_identity_provider(
+            self, idpId
+    ):
+        """
+        Fetches an IdP by `id`.
+        Args:
+            idp_id {str}
+        Returns:
+            IdentityProvider
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/idps/{idpId}
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, IdentityProvider)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = IdentityProvider(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def update_identity_provider(
+            self, idpId, identity_provider
+    ):
+        """
+        Updates the configuration for an IdP.
+        Args:
+            idp_id {str}
+            {identity_provider}
+        Returns:
+            IdentityProvider
+        """
+        http_method = "put".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/idps/{idpId}
+            """)
+
+        body = identity_provider.as_dict()
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, IdentityProvider)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = IdentityProvider(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def list_csrs_for_identity_provider(
+            self, idpId
+    ):
+        """
+        Enumerates Certificate Signing Requests for an IdP
+        Args:
+            idp_id {str}
+        Returns:
+            list: Collection of Csr instances.
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/idps/{idpId}/credentials/csrs
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Csr)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = []
+            for item in response.get_body():
+                result.append(Csr(item))
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def generate_csr_for_identity_provider(
+            self, idpId, csr_metadata
+    ):
+        """
+        Generates a new key pair and returns a Certificate Sign
+        ing Request for it.
+        Args:
+            idp_id {str}
+            {csr_metadata}
+        Returns:
+            Csr
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/idps/{idpId}/credentials/csrs
+            """)
+
+        body = csr_metadata.as_dict()
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Csr)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = Csr(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def revoke_csr_for_identity_provider(
+            self, idpId, csrId
+    ):
+        """
+        Revoke a Certificate Signing Request and delete the key
+        pair from the IdP
+        Args:
+            idp_id {str}
+            csr_id {str}
+        """
+        http_method = "delete".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/idps/{idpId}/credentials/csrs/{csrId}
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (None, error)
+
+        return (response, None)
+
+    async def get_csr_for_identity_provider(
+            self, idpId, csrId
+    ):
+        """
+        Gets a specific Certificate Signing Request model by id
+        Args:
+            idp_id {str}
+            csr_id {str}
+        Returns:
+            Csr
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/idps/{idpId}/credentials/csrs/{csrId}
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Csr)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = Csr(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def publish_cer_cert_for_identity_provider(
+            self, idpId, csrId, string
+    ):
+        """
+        Update the Certificate Signing Request with a signed X.
+        509 certificate and add it into the signing key credent
+        ials for the IdP.
+        Args:
+            idp_id {str}
+            csr_id {str}
+            {string}
+        Returns:
+            JsonWebKey
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/idps/{idpId}/credentials/csrs/{csrId}
+                /lifecycle/publish
+            """)
+
+        body = string.as_dict()
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/x-x509-ca-cert"
+        }
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, JsonWebKey)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = JsonWebKey(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def publish_binary_cer_cert_for_identity_provider(
+            self, idpId, csrId, string
+    ):
+        """
+        Update the Certificate Signing Request with a signed X.
+        509 certificate and add it into the signing key credent
+        ials for the IdP.
+        Args:
+            idp_id {str}
+            csr_id {str}
+            {string}
+        Returns:
+            JsonWebKey
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/idps/{idpId}/credentials/csrs/{csrId}
+                /lifecycle/publish
+            """)
+
+        body = HTTPClient.format_binary_data(string)
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/x-x509-ca-cert"
+        }
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, JsonWebKey)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = JsonWebKey(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def publish_der_cert_for_identity_provider(
+            self, idpId, csrId, string
+    ):
+        """
+        Update the Certificate Signing Request with a signed X.
+        509 certificate and add it into the signing key credent
+        ials for the IdP.
+        Args:
+            idp_id {str}
+            csr_id {str}
+            {string}
+        Returns:
+            JsonWebKey
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/idps/{idpId}/credentials/csrs/{csrId}
+                /lifecycle/publish
+            """)
+
+        body = string.as_dict()
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/pkix-cert"
+        }
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, JsonWebKey)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = JsonWebKey(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def publish_binary_der_cert_for_identity_provider(
+            self, idpId, csrId, string
+    ):
+        """
+        Update the Certificate Signing Request with a signed X.
+        509 certificate and add it into the signing key credent
+        ials for the IdP.
+        Args:
+            idp_id {str}
+            csr_id {str}
+            {string}
+        Returns:
+            JsonWebKey
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/idps/{idpId}/credentials/csrs/{csrId}
+                /lifecycle/publish
+            """)
+
+        body = HTTPClient.format_binary_data(string)
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/pkix-cert"
+        }
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, JsonWebKey)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = JsonWebKey(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def publish_binary_pem_cert_for_identity_provider(
+            self, idpId, csrId, string
+    ):
+        """
+        Update the Certificate Signing Request with a signed X.
+        509 certificate and add it into the signing key credent
+        ials for the IdP.
+        Args:
+            idp_id {str}
+            csr_id {str}
+            {string}
+        Returns:
+            JsonWebKey
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/idps/{idpId}/credentials/csrs/{csrId}
+                /lifecycle/publish
+            """)
+
+        body = HTTPClient.format_binary_data(string)
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/x-pem-file"
+        }
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, JsonWebKey)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = JsonWebKey(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def list_identity_provider_signing_keys(
+            self, idpId
+    ):
+        """
+        Enumerates signing key credentials for an IdP
+        Args:
+            idp_id {str}
+        Returns:
+            list: Collection of JsonWebKey instances.
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/idps/{idpId}/credentials/keys
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
@@ -724,294 +847,27 @@ class AuthorizationServerClient():
             for item in response.get_body():
                 result.append(JsonWebKey(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def activate_authorization_server(
-            self, authServerId
+    async def generate_identity_provider_signing_key(
+            self, idpId, query_params={}
     ):
         """
+        Generates a new X.509 certificate for an IdP signing ke
+        y credential to be used for signing assertions sent to
+        the IdP
         Args:
-            auth_server_id {str}
-        """
-        http_method = "post".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/authorizationServers/{authServerId}
-                lifecycle/activate
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, error)
-
-        return (response, None)
-
-    async def deactivate_authorization_server(
-            self, authServerId
-    ):
-        """
-        Args:
-            auth_server_id {str}
-        """
-        http_method = "post".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/authorizationServers/{authServerId}
-                lifecycle/deactivate
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, error)
-
-        return (response, None)
-
-    async def list_authorization_server_policies(
-            self, authServerId
-    ):
-        """
-        Args:
-            auth_server_id {str}
-        Returns:
-            list: Collection of Policy instances.
-        """
-        http_method = "get".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/authorizationServers/{authServerId}
-                policies
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = []
-            for item in response.get_body():
-                result.append(Policy(item))
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def create_authorization_server_policy(
-            self, authServerId, policy
-    ):
-        """
-        Args:
-            auth_server_id {str}
-            {policy}
-        Returns:
-            Policy
-        """
-        http_method = "post".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/authorizationServers/{authServerId}
-                policies
-            """)
-
-        body = policy.as_dict()
-        headers = {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        }
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = Policy(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def delete_authorization_server_policy(
-            self, authServerId, policyId
-    ):
-        """
-        Args:
-            auth_server_id {str}
-            policy_id {str}
-        """
-        http_method = "delete".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/authorizationServers/{authServerId}
-                policies/{policyId}
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, error)
-
-        return (response, None)
-
-    async def get_authorization_server_policy(
-            self, authServerId, policyId
-    ):
-        """
-        Args:
-            auth_server_id {str}
-            policy_id {str}
-        Returns:
-            Policy
-        """
-        http_method = "get".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/authorizationServers/{authServerId}
-                policies/{policyId}
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = Policy(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def update_authorization_server_policy(
-            self, authServerId, policyId, policy
-    ):
-        """
-        Args:
-            auth_server_id {str}
-            policy_id {str}
-            {policy}
-        Returns:
-            Policy
-        """
-        http_method = "put".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/authorizationServers/{authServerId}
-                policies/{policyId}
-            """)
-
-        body = policy.as_dict()
-        headers = {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        }
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = Policy(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def list_o_auth_2_scopes(
-            self, authServerId, query_params={}
-    ):
-        """
-        Args:
-            auth_server_id {str}
+            idp_id {str}
             query_params {dict}: Map of query parameters for request
-            [query_params.q] {str}
-            [query_params.filter] {str}
-            [query_params.cursor] {str}
-            [query_params.limit] {str}
+            [query_params.validityYears] {str}
         Returns:
-            list: Collection of OAuth2Scope instances.
+            JsonWebKey
         """
-        http_method = "get".upper()
+        http_method = "post".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/authorizationServers/{authServerId}/scopes
+            /api/v1/idps/{idpId}/credentials/keys/generate
             """)
         if query_params:
             encoded_query_params = urlencode(query_params)
@@ -1028,40 +884,38 @@ class AuthorizationServerClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
 
         try:
-            result = []
-            for item in response.get_body():
-                result.append(OAuth2Scope(item))
+            result = JsonWebKey(
+                response.get_body()
+            )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def create_o_auth_2_scope(
-            self, authServerId, o_auth_2_scope
+    async def get_identity_provider_signing_key(
+            self, idpId, keyId
     ):
         """
+        Gets a specific IdP Key Credential by `kid`
         Args:
-            auth_server_id {str}
-            {o_auth_2_scope}
+            idp_id {str}
+            key_id {str}
         Returns:
-            OAuth2Scope
+            JsonWebKey
         """
-        http_method = "post".upper()
+        http_method = "get".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/authorizationServers/{authServerId}/scopes
+            /api/v1/idps/{idpId}/credentials/keys/{keyId}
             """)
 
-        body = o_auth_2_scope.as_dict()
-        headers = {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        }
+        body = {}
+        headers = {}
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
@@ -1071,32 +925,200 @@ class AuthorizationServerClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
 
         try:
-            result = OAuth2Scope(
+            result = JsonWebKey(
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def delete_o_auth_2_scope(
-            self, authServerId, scopeId
+    async def clone_identity_provider_key(
+            self, idpId, keyId, query_params={}
     ):
         """
+        Clones a X.509 certificate for an IdP signing key crede
+        ntial from a source IdP to target IdP
         Args:
-            auth_server_id {str}
-            scope_id {str}
+            idp_id {str}
+            key_id {str}
+            query_params {dict}: Map of query parameters for request
+            [query_params.targetIdpId] {str}
+        Returns:
+            JsonWebKey
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/idps/{idpId}/credentials/keys/{keyId}/clone
+            """)
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, JsonWebKey)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = JsonWebKey(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def activate_identity_provider(
+            self, idpId
+    ):
+        """
+        Activates an inactive IdP.
+        Args:
+            idp_id {str}
+        Returns:
+            IdentityProvider
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/idps/{idpId}/lifecycle/activate
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, IdentityProvider)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = IdentityProvider(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def deactivate_identity_provider(
+            self, idpId
+    ):
+        """
+        Deactivates an active IdP.
+        Args:
+            idp_id {str}
+        Returns:
+            IdentityProvider
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/idps/{idpId}/lifecycle/deactivate
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, IdentityProvider)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = IdentityProvider(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def list_identity_provider_application_users(
+            self, idpId
+    ):
+        """
+        Find all the users linked to an identity provider
+        Args:
+            idp_id {str}
+        Returns:
+            list: Collection of IdentityProviderApplicationUser instances.
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/idps/{idpId}/users
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, IdentityProviderApplicationUser)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = []
+            for item in response.get_body():
+                result.append(IdentityProviderApplicationUser(item))
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def unlink_user_from_identity_provider(
+            self, idpId, userId
+    ):
+        """
+        Removes the link between the Okta user and the IdP user
+        .
+        Args:
+            idp_id {str}
+            user_id {str}
         """
         http_method = "delete".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/authorizationServers/{authServerId}/scopes
-                {scopeId}
+            /api/v1/idps/{idpId}/users/{userId}
             """)
 
         body = {}
@@ -1117,21 +1139,21 @@ class AuthorizationServerClient():
 
         return (response, None)
 
-    async def get_o_auth_2_scope(
-            self, authServerId, scopeId
+    async def get_identity_provider_application_user(
+            self, idpId, userId
     ):
         """
+        Fetches a linked IdP user by ID
         Args:
-            auth_server_id {str}
-            scope_id {str}
+            idp_id {str}
+            user_id {str}
         Returns:
-            OAuth2Scope
+            IdentityProviderApplicationUser
         """
         http_method = "get".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/authorizationServers/{authServerId}/scopes
-                {scopeId}
+            /api/v1/idps/{idpId}/users/{userId}
             """)
 
         body = {}
@@ -1145,38 +1167,40 @@ class AuthorizationServerClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, IdentityProviderApplicationUser)
 
         if error:
             return (None, None, error)
 
         try:
-            result = OAuth2Scope(
+            result = IdentityProviderApplicationUser(
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def update_o_auth_2_scope(
-            self, authServerId, scopeId, o_auth_2_scope
+    async def link_user_to_identity_provider(
+            self, idpId, userId, user_identity_provider_link_request
     ):
         """
+        Links an Okta user to an existing Social Identity Provi
+        der. This does not support the SAML2 Identity Provider
+        Type
         Args:
-            auth_server_id {str}
-            scope_id {str}
-            {o_auth_2_scope}
+            idp_id {str}
+            user_id {str}
+            {user_identity_provider_link_request}
         Returns:
-            OAuth2Scope
+            IdentityProviderApplicationUser
         """
-        http_method = "put".upper()
+        http_method = "post".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/authorizationServers/{authServerId}/scopes
-                {scopeId}
+            /api/v1/idps/{idpId}/users/{userId}
             """)
 
-        body = o_auth_2_scope.as_dict()
+        body = user_identity_provider_link_request.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1190,15 +1214,59 @@ class AuthorizationServerClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, IdentityProviderApplicationUser)
 
         if error:
             return (None, None, error)
 
         try:
-            result = OAuth2Scope(
+            result = IdentityProviderApplicationUser(
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
+        return (result, response, None)
+
+    async def list_social_auth_tokens(
+            self, idpId, userId
+    ):
+        """
+        Fetches the tokens minted by the Social Authentication
+        Provider when the user authenticates with Okta via Soci
+        al Auth.
+        Args:
+            idp_id {str}
+            user_id {str}
+        Returns:
+            list: Collection of SocialAuthToken instances.
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/idps/{idpId}/users/{userId}/credentials
+                /tokens
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, SocialAuthToken)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = []
+            for item in response.get_body():
+                result.append(SocialAuthToken(item))
+        except Exception as error:
+            return (None, None, error)
         return (result, response, None)

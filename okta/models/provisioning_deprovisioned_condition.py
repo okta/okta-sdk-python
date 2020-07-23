@@ -23,9 +23,18 @@ from okta.okta_object import OktaObject
 class ProvisioningDeprovisionedCondition(
     OktaObject
 ):
+    """
+    A class for ProvisioningDeprovisionedCondition objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.action = config["action"]\
                 if "action" in config else None
         else:
             self.action = None
+
+    def request_format(self):
+        return {
+            "action": self.action
+        }

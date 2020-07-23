@@ -18,14 +18,33 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.password_policy_recovery_factors\
+    import PasswordPolicyRecoveryFactors
 
 
 class PasswordPolicyRecoverySettings(
     OktaObject
 ):
+    """
+    A class for PasswordPolicyRecoverySettings objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.factors = config["factors"]\
-                if "factors" in config else None
+            if "factors" in config:
+                if isinstance(config["factors"],
+                              PasswordPolicyRecoveryFactors):
+                    self.factors = config["factors"]
+                else:
+                    self.factors = PasswordPolicyRecoveryFactors(
+                        config["factors"]
+                    )
+            else:
+                self.factors = None
         else:
             self.factors = None
+
+    def request_format(self):
+        return {
+            "factors": self.factors
+        }

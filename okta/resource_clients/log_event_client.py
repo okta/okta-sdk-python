@@ -18,15 +18,16 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from urllib.parse import urlencode
-from okta.utils import format_url
 from okta.models.log_event\
     import LogEvent
+from okta.utils import format_url
 
 
 class LogEventClient():
     """
     A Client object for the LogEvent resource.
     """
+
     def __init__(self):
         self._base_url = ""
 
@@ -69,7 +70,7 @@ class LogEventClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, LogEvent)
 
         if error:
             return (None, None, error)
@@ -79,5 +80,5 @@ class LogEventClient():
             for item in response.get_body():
                 result.append(LogEvent(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)

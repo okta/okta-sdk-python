@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class GroupRuleExpression(
     OktaObject
 ):
+    """
+    A class for GroupRuleExpression objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.type = config["type"]\
@@ -32,3 +36,9 @@ class GroupRuleExpression(
         else:
             self.type = None
             self.value = None
+
+    def request_format(self):
+        return {
+            "type": self.type,
+            "value": self.value
+        }

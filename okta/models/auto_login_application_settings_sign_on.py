@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class AutoLoginApplicationSettingsSignOn(
     OktaObject
 ):
+    """
+    A class for AutoLoginApplicationSettingsSignOn objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.login_url = config["loginUrl"]\
@@ -32,3 +36,9 @@ class AutoLoginApplicationSettingsSignOn(
         else:
             self.login_url = None
             self.redirect_url = None
+
+    def request_format(self):
+        return {
+            "loginUrl": self.login_url,
+            "redirectUrl": self.redirect_url
+        }

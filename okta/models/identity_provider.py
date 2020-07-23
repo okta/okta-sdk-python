@@ -18,15 +18,23 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.identity_provider_policy\
+    import IdentityProviderPolicy
+from okta.models.protocol\
+    import Protocol
 
 
 class IdentityProvider(
     OktaObject
 ):
+    """
+    A class for IdentityProvider objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.links = config["_links"]\
-                if "_links" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
             self.created = config["created"]\
                 if "created" in config else None
             self.id = config["id"]\
@@ -37,10 +45,26 @@ class IdentityProvider(
                 if "lastUpdated" in config else None
             self.name = config["name"]\
                 if "name" in config else None
-            self.policy = config["policy"]\
-                if "policy" in config else None
-            self.protocol = config["protocol"]\
-                if "protocol" in config else None
+            if "policy" in config:
+                if isinstance(config["policy"],
+                              IdentityProviderPolicy):
+                    self.policy = config["policy"]
+                else:
+                    self.policy = IdentityProviderPolicy(
+                        config["policy"]
+                    )
+            else:
+                self.policy = None
+            if "protocol" in config:
+                if isinstance(config["protocol"],
+                              Protocol):
+                    self.protocol = config["protocol"]
+                else:
+                    self.protocol = Protocol(
+                        config["protocol"]
+                    )
+            else:
+                self.protocol = None
             self.status = config["status"]\
                 if "status" in config else None
             self.type = config["type"]\
@@ -56,3 +80,17 @@ class IdentityProvider(
             self.protocol = None
             self.status = None
             self.type = None
+
+    def request_format(self):
+        return {
+            "_links": self.links,
+            "created": self.created,
+            "id": self.id,
+            "issuerMode": self.issuer_mode,
+            "lastUpdated": self.last_updated,
+            "name": self.name,
+            "policy": self.policy,
+            "protocol": self.protocol,
+            "status": self.status,
+            "type": self.type
+        }

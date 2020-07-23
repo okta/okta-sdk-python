@@ -23,9 +23,18 @@ from okta.okta_object import OktaObject
 class GrantTypePolicyRuleCondition(
     OktaObject
 ):
+    """
+    A class for GrantTypePolicyRuleCondition objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.include = config["include"]\
                 if "include" in config else None
         else:
             self.include = None
+
+    def request_format(self):
+        return {
+            "include": self.include
+        }

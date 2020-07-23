@@ -18,20 +18,61 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.password_credential\
+    import PasswordCredential
+from okta.models.authentication_provider\
+    import AuthenticationProvider
+from okta.models.recovery_question_credential\
+    import RecoveryQuestionCredential
 
 
 class UserCredentials(
     OktaObject
 ):
+    """
+    A class for UserCredentials objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.password = config["password"]\
-                if "password" in config else None
-            self.provider = config["provider"]\
-                if "provider" in config else None
-            self.recovery_question = config["recovery_question"]\
-                if "recovery_question" in config else None
+            if "password" in config:
+                if isinstance(config["password"],
+                              PasswordCredential):
+                    self.password = config["password"]
+                else:
+                    self.password = PasswordCredential(
+                        config["password"]
+                    )
+            else:
+                self.password = None
+            if "provider" in config:
+                if isinstance(config["provider"],
+                              AuthenticationProvider):
+                    self.provider = config["provider"]
+                else:
+                    self.provider = AuthenticationProvider(
+                        config["provider"]
+                    )
+            else:
+                self.provider = None
+            if "recoveryQuestion" in config:
+                if isinstance(config["recoveryQuestion"],
+                              RecoveryQuestionCredential):
+                    self.recovery_question = config["recoveryQuestion"]
+                else:
+                    self.recovery_question = RecoveryQuestionCredential(
+                        config["recoveryQuestion"]
+                    )
+            else:
+                self.recovery_question = None
         else:
             self.password = None
             self.provider = None
             self.recovery_question = None
+
+    def request_format(self):
+        return {
+            "password": self.password,
+            "provider": self.provider,
+            "recovery_question": self.recovery_question
+        }

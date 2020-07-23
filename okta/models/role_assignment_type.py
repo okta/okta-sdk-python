@@ -24,5 +24,9 @@ class RoleAssignmentType(
     str,
     Enum
 ):
+    """
+    An enumeration class for RoleAssignmentType.
+    """
+
     GROUP = "GROUP"
     USER = "USER"

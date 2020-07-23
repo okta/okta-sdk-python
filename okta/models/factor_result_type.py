@@ -24,6 +24,10 @@ class FactorResultType(
     str,
     Enum
 ):
+    """
+    An enumeration class for FactorResultType.
+    """
+
     SUCCESS = "SUCCESS"
     CHALLENGE = "CHALLENGE"
     WAITING = "WAITING"

@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class InlineHookChannelConfigAuthScheme(
     OktaObject
 ):
+    """
+    A class for InlineHookChannelConfigAuthScheme objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.key = config["key"]\
@@ -35,3 +39,10 @@ class InlineHookChannelConfigAuthScheme(
             self.key = None
             self.type = None
             self.value = None
+
+    def request_format(self):
+        return {
+            "key": self.key,
+            "type": self.type,
+            "value": self.value
+        }

@@ -41,8 +41,13 @@
             return (None, error)
         {{/if}}
 
+        {{#if operation.responseModel}}
+        response, error = await self._request_executor\
+            .execute(request, {{pascalCase operation.responseModel}})
+        {{else}}
         response, error = await self._request_executor\
             .execute(request)
+        {{/if}}
 
         if error:
         {{#if operation.responseModel}}
@@ -63,7 +68,11 @@
             )
         {{/if}}
         except Exception as error:
+            {{#if operation.responseModel}}
+            return (None, None, error)
+            {{else}}
             return (None, error)
+            {{/if}}
         return (result, response, None)
         {{else}}
         return (response, None)

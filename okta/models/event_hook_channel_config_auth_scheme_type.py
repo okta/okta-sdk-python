@@ -24,4 +24,8 @@ class EventHookChannelConfigAuthSchemeType(
     str,
     Enum
 ):
+    """
+    An enumeration class for EventHookChannelConfigAuthSchemeType.
+    """
+
     HEADER = "HEADER"

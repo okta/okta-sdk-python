@@ -18,17 +18,47 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.group_rule_expression\
+    import GroupRuleExpression
+from okta.models.group_rule_people_condition\
+    import GroupRulePeopleCondition
 
 
 class GroupRuleConditions(
     OktaObject
 ):
+    """
+    A class for GroupRuleConditions objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.expression = config["expression"]\
-                if "expression" in config else None
-            self.people = config["people"]\
-                if "people" in config else None
+            if "expression" in config:
+                if isinstance(config["expression"],
+                              GroupRuleExpression):
+                    self.expression = config["expression"]
+                else:
+                    self.expression = GroupRuleExpression(
+                        config["expression"]
+                    )
+            else:
+                self.expression = None
+            if "people" in config:
+                if isinstance(config["people"],
+                              GroupRulePeopleCondition):
+                    self.people = config["people"]
+                else:
+                    self.people = GroupRulePeopleCondition(
+                        config["people"]
+                    )
+            else:
+                self.people = None
         else:
             self.expression = None
             self.people = None
+
+    def request_format(self):
+        return {
+            "expression": self.expression,
+            "people": self.people
+        }

@@ -17,15 +17,17 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
 from okta.models.application_settings_application\
     import ApplicationSettingsApplication
 
 
 class BookmarkApplicationSettingsApplication(
-    OktaObject,
     ApplicationSettingsApplication
 ):
+    """
+    A class for BookmarkApplicationSettingsApplication objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.request_integration = config["requestIntegration"]\
@@ -35,3 +37,9 @@ class BookmarkApplicationSettingsApplication(
         else:
             self.request_integration = None
             self.url = None
+
+    def request_format(self):
+        return {
+            "requestIntegration": self.request_integration,
+            "url": self.url
+        }

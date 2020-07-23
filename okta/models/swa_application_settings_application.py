@@ -17,15 +17,17 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
 from okta.models.application_settings_application\
     import ApplicationSettingsApplication
 
 
 class SwaApplicationSettingsApplication(
-    OktaObject,
     ApplicationSettingsApplication
 ):
+    """
+    A class for SwaApplicationSettingsApplication objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.button_field = config["buttonField"]\
@@ -44,3 +46,12 @@ class SwaApplicationSettingsApplication(
             self.password_field = None
             self.url = None
             self.username_field = None
+
+    def request_format(self):
+        return {
+            "buttonField": self.button_field,
+            "loginUrlRegex": self.login_url_regex,
+            "passwordField": self.password_field,
+            "url": self.url,
+            "usernameField": self.username_field
+        }

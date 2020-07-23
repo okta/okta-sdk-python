@@ -23,9 +23,18 @@ from okta.okta_object import OktaObject
 class PolicyRuleAuthContextCondition(
     OktaObject
 ):
+    """
+    A class for PolicyRuleAuthContextCondition objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.auth_type = config["authType"]\
                 if "authType" in config else None
         else:
             self.auth_type = None
+
+    def request_format(self):
+        return {
+            "authType": self.auth_type
+        }

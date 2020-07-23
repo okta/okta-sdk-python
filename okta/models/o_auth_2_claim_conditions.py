@@ -23,9 +23,18 @@ from okta.okta_object import OktaObject
 class OAuth2ClaimConditions(
     OktaObject
 ):
+    """
+    A class for OAuth2ClaimConditions objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.scopes = config["scopes"]\
                 if "scopes" in config else None
         else:
             self.scopes = None
+
+    def request_format(self):
+        return {
+            "scopes": self.scopes
+        }

@@ -24,5 +24,9 @@ class InlineHookStatus(
     str,
     Enum
 ):
+    """
+    An enumeration class for InlineHookStatus.
+    """
+
     ACTIVE = "ACTIVE"
     INACTIVE = "INACTIVE"

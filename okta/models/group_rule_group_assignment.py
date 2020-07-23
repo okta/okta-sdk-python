@@ -23,9 +23,18 @@ from okta.okta_object import OktaObject
 class GroupRuleGroupAssignment(
     OktaObject
 ):
+    """
+    A class for GroupRuleGroupAssignment objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.group_ids = config["groupIds"]\
                 if "groupIds" in config else None
         else:
             self.group_ids = None
+
+    def request_format(self):
+        return {
+            "groupIds": self.group_ids
+        }

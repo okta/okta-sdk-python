@@ -17,21 +17,39 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
 from okta.models.browser_plugin_application\
     import BrowserPluginApplication
+from okta.models.swa_application_settings\
+    import SwaApplicationSettings
 
 
 class SwaApplication(
-    OktaObject,
     BrowserPluginApplication
 ):
+    """
+    A class for SwaApplication objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.name = config["name"]\
                 if "name" in config else None
-            self.settings = config["settings"]\
-                if "settings" in config else None
+            if "settings" in config:
+                if isinstance(config["settings"],
+                              SwaApplicationSettings):
+                    self.settings = config["settings"]
+                else:
+                    self.settings = SwaApplicationSettings(
+                        config["settings"]
+                    )
+            else:
+                self.settings = None
         else:
             self.name = "template_swa"
             self.settings = None
+
+    def request_format(self):
+        return {
+            "name": self.name,
+            "settings": self.settings
+        }

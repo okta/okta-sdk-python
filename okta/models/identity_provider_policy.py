@@ -17,27 +17,67 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
 from okta.models.policy\
     import Policy
+from okta.models.policy_account_link\
+    import PolicyAccountLink
+from okta.models.provisioning\
+    import Provisioning
+from okta.models.policy_subject\
+    import PolicySubject
 
 
 class IdentityProviderPolicy(
-    OktaObject,
     Policy
 ):
+    """
+    A class for IdentityProviderPolicy objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.account_link = config["accountLink"]\
-                if "accountLink" in config else None
+            if "accountLink" in config:
+                if isinstance(config["accountLink"],
+                              PolicyAccountLink):
+                    self.account_link = config["accountLink"]
+                else:
+                    self.account_link = PolicyAccountLink(
+                        config["accountLink"]
+                    )
+            else:
+                self.account_link = None
             self.max_clock_skew = config["maxClockSkew"]\
                 if "maxClockSkew" in config else None
-            self.provisioning = config["provisioning"]\
-                if "provisioning" in config else None
-            self.subject = config["subject"]\
-                if "subject" in config else None
+            if "provisioning" in config:
+                if isinstance(config["provisioning"],
+                              Provisioning):
+                    self.provisioning = config["provisioning"]
+                else:
+                    self.provisioning = Provisioning(
+                        config["provisioning"]
+                    )
+            else:
+                self.provisioning = None
+            if "subject" in config:
+                if isinstance(config["subject"],
+                              PolicySubject):
+                    self.subject = config["subject"]
+                else:
+                    self.subject = PolicySubject(
+                        config["subject"]
+                    )
+            else:
+                self.subject = None
         else:
             self.account_link = None
             self.max_clock_skew = None
             self.provisioning = None
             self.subject = None
+
+    def request_format(self):
+        return {
+            "accountLink": self.account_link,
+            "maxClockSkew": self.max_clock_skew,
+            "provisioning": self.provisioning,
+            "subject": self.subject
+        }
