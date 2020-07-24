@@ -68,14 +68,14 @@ class SessionClient():
             .execute(request, Session)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = Session(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def end_session(
@@ -107,7 +107,7 @@ class SessionClient():
             .execute(request)
 
         if error:
-            return (None, error)
+            return (response, error)
 
         return (response, None)
 
@@ -141,14 +141,14 @@ class SessionClient():
             .execute(request, Session)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = Session(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def refresh_session(
@@ -182,12 +182,12 @@ class SessionClient():
             .execute(request, Session)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = Session(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)

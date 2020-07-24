@@ -79,14 +79,14 @@ class IdentityProviderClient():
             .execute(request, IdentityProvider)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = []
             for item in response.get_body():
                 result.append(IdentityProvider(item))
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def create_identity_provider(
@@ -122,14 +122,14 @@ class IdentityProviderClient():
             .execute(request, IdentityProvider)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = IdentityProvider(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def list_identity_provider_keys(
@@ -167,14 +167,14 @@ class IdentityProviderClient():
             .execute(request, JsonWebKey)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = []
             for item in response.get_body():
                 result.append(JsonWebKey(item))
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def create_identity_provider_key(
@@ -211,14 +211,14 @@ class IdentityProviderClient():
             .execute(request, JsonWebKey)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = JsonWebKey(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def delete_identity_provider_key(
@@ -250,7 +250,7 @@ class IdentityProviderClient():
             .execute(request)
 
         if error:
-            return (None, error)
+            return (response, error)
 
         return (response, None)
 
@@ -284,14 +284,14 @@ class IdentityProviderClient():
             .execute(request, JsonWebKey)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = JsonWebKey(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def delete_identity_provider(
@@ -322,7 +322,7 @@ class IdentityProviderClient():
             .execute(request)
 
         if error:
-            return (None, error)
+            return (response, error)
 
         return (response, None)
 
@@ -356,14 +356,14 @@ class IdentityProviderClient():
             .execute(request, IdentityProvider)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = IdentityProvider(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def update_identity_provider(
@@ -400,14 +400,14 @@ class IdentityProviderClient():
             .execute(request, IdentityProvider)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = IdentityProvider(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def list_csrs_for_identity_provider(
@@ -440,14 +440,14 @@ class IdentityProviderClient():
             .execute(request, Csr)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = []
             for item in response.get_body():
                 result.append(Csr(item))
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def generate_csr_for_identity_provider(
@@ -485,14 +485,14 @@ class IdentityProviderClient():
             .execute(request, Csr)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = Csr(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def revoke_csr_for_identity_provider(
@@ -525,7 +525,7 @@ class IdentityProviderClient():
             .execute(request)
 
         if error:
-            return (None, error)
+            return (response, error)
 
         return (response, None)
 
@@ -560,14 +560,14 @@ class IdentityProviderClient():
             .execute(request, Csr)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = Csr(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def publish_cer_cert_for_identity_provider(
@@ -608,14 +608,14 @@ class IdentityProviderClient():
             .execute(request, JsonWebKey)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = JsonWebKey(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def publish_binary_cer_cert_for_identity_provider(
@@ -656,14 +656,14 @@ class IdentityProviderClient():
             .execute(request, JsonWebKey)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = JsonWebKey(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def publish_der_cert_for_identity_provider(
@@ -704,14 +704,14 @@ class IdentityProviderClient():
             .execute(request, JsonWebKey)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = JsonWebKey(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def publish_binary_der_cert_for_identity_provider(
@@ -752,14 +752,14 @@ class IdentityProviderClient():
             .execute(request, JsonWebKey)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = JsonWebKey(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def publish_binary_pem_cert_for_identity_provider(
@@ -800,14 +800,14 @@ class IdentityProviderClient():
             .execute(request, JsonWebKey)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = JsonWebKey(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def list_identity_provider_signing_keys(
@@ -840,14 +840,14 @@ class IdentityProviderClient():
             .execute(request, JsonWebKey)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = []
             for item in response.get_body():
                 result.append(JsonWebKey(item))
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def generate_identity_provider_signing_key(
@@ -887,14 +887,14 @@ class IdentityProviderClient():
             .execute(request, JsonWebKey)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = JsonWebKey(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def get_identity_provider_signing_key(
@@ -928,14 +928,14 @@ class IdentityProviderClient():
             .execute(request, JsonWebKey)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = JsonWebKey(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def clone_identity_provider_key(
@@ -975,14 +975,14 @@ class IdentityProviderClient():
             .execute(request, JsonWebKey)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = JsonWebKey(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def activate_identity_provider(
@@ -1015,14 +1015,14 @@ class IdentityProviderClient():
             .execute(request, IdentityProvider)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = IdentityProvider(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def deactivate_identity_provider(
@@ -1055,14 +1055,14 @@ class IdentityProviderClient():
             .execute(request, IdentityProvider)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = IdentityProvider(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def list_identity_provider_application_users(
@@ -1095,14 +1095,14 @@ class IdentityProviderClient():
             .execute(request, IdentityProviderApplicationUser)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = []
             for item in response.get_body():
                 result.append(IdentityProviderApplicationUser(item))
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def unlink_user_from_identity_provider(
@@ -1135,7 +1135,7 @@ class IdentityProviderClient():
             .execute(request)
 
         if error:
-            return (None, error)
+            return (response, error)
 
         return (response, None)
 
@@ -1170,14 +1170,14 @@ class IdentityProviderClient():
             .execute(request, IdentityProviderApplicationUser)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = IdentityProviderApplicationUser(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def link_user_to_identity_provider(
@@ -1217,14 +1217,14 @@ class IdentityProviderClient():
             .execute(request, IdentityProviderApplicationUser)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = IdentityProviderApplicationUser(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def list_social_auth_tokens(
@@ -1261,12 +1261,12 @@ class IdentityProviderClient():
             .execute(request, SocialAuthToken)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = []
             for item in response.get_body():
                 result.append(SocialAuthToken(item))
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)

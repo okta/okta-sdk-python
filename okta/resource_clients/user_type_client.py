@@ -59,14 +59,14 @@ class UserTypeClient():
             .execute(request, UserType)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = []
             for item in response.get_body():
                 result.append(UserType(item))
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def create_user_type(
@@ -104,14 +104,14 @@ class UserTypeClient():
             .execute(request, UserType)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = UserType(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def delete_user_type(
@@ -144,7 +144,7 @@ class UserTypeClient():
             .execute(request)
 
         if error:
-            return (None, error)
+            return (response, error)
 
         return (response, None)
 
@@ -179,14 +179,14 @@ class UserTypeClient():
             .execute(request, UserType)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = UserType(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def update_user_type(
@@ -223,14 +223,14 @@ class UserTypeClient():
             .execute(request, UserType)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = UserType(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def replace_user_type(
@@ -267,12 +267,12 @@ class UserTypeClient():
             .execute(request, UserType)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = UserType(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)

@@ -58,14 +58,14 @@ class LinkedObjectClient():
             .execute(request, LinkedObject)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = []
             for item in response.get_body():
                 result.append(LinkedObject(item))
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def add_linked_object_definition(
@@ -100,14 +100,14 @@ class LinkedObjectClient():
             .execute(request, LinkedObject)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = LinkedObject(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def delete_linked_object_definition(
@@ -138,7 +138,7 @@ class LinkedObjectClient():
             .execute(request)
 
         if error:
-            return (None, error)
+            return (response, error)
 
         return (response, None)
 
@@ -172,12 +172,12 @@ class LinkedObjectClient():
             .execute(request, LinkedObject)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = LinkedObject(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)

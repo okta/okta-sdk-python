@@ -2,6 +2,7 @@ import tests.mocks as mocks
 import pytest
 import time
 import datetime as dt
+from http import HTTPStatus
 from okta.client import Client
 from okta.errors.http_error import HTTPError
 from okta.utils import convert_date_time_to_seconds
@@ -40,8 +41,8 @@ async def test_max_retries_no_timeout(monkeypatch, mocker):
     assert client.get_request_executor()._request_timeout == 0
     assert isinstance(error, HTTPError)
     assert error is not None
-    assert error.status == 429
-    assert resp is None
+    assert error.status == HTTPStatus.TOO_MANY_REQUESTS
+    assert resp.get_status() == HTTPStatus.TOO_MANY_REQUESTS
 
 
 @pytest.mark.asyncio
@@ -112,7 +113,6 @@ async def test_multiple_x_reset_headers(monkeypatch, mocker):
 
     assert error is not None
     assert users is None
-    assert resp is None
     assert backoff_spy.spy_return == 2
 
 

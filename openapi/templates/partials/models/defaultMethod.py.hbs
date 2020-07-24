@@ -51,9 +51,9 @@
 
         if error:
         {{#if operation.responseModel}}
-            return (None, None, error)
+            return (None, response, error)
         {{else}}
-            return (None, error)
+            return (response, error)
         {{/if}}
 
         {{#if operation.responseModel}}
@@ -69,9 +69,9 @@
         {{/if}}
         except Exception as error:
             {{#if operation.responseModel}}
-            return (None, None, error)
+            return (None, response, error)
             {{else}}
-            return (None, error)
+            return (response, error)
             {{/if}}
         return (result, response, None)
         {{else}}

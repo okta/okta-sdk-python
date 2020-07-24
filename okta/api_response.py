@@ -15,6 +15,7 @@ class OktaAPIResponse():
         self._self = None  # Link to first page of results
         self._body = None  # First page of results
         self._type = data_type
+        self._status = res_details.status
 
         # Status on if there's a next page of results (based on generator)
         self._next = None
@@ -45,6 +46,15 @@ class OktaAPIResponse():
             dict: Dictionary format of response
         """
         return self._body
+
+    def get_status(self):
+        """
+        Returns HTTP Status Code of response
+
+        Returns:
+            int: HTTP Code
+        """
+        return self._status
 
     def build_json_response(self, response_body):
         """
