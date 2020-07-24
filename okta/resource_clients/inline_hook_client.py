@@ -66,14 +66,14 @@ class InlineHookClient():
             .execute(request, InlineHook)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = []
             for item in response.get_body():
                 result.append(InlineHook(item))
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def create_inline_hook(
@@ -108,14 +108,14 @@ class InlineHookClient():
             .execute(request, InlineHook)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = InlineHook(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def delete_inline_hook(
@@ -149,7 +149,7 @@ class InlineHookClient():
             .execute(request)
 
         if error:
-            return (None, error)
+            return (response, error)
 
         return (response, None)
 
@@ -183,14 +183,14 @@ class InlineHookClient():
             .execute(request, InlineHook)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = InlineHook(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def update_inline_hook(
@@ -227,14 +227,14 @@ class InlineHookClient():
             .execute(request, InlineHook)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = InlineHook(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def execute_inline_hook(
@@ -276,14 +276,14 @@ class InlineHookClient():
             .execute(request, InlineHookResponse)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = InlineHookResponse(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def activate_inline_hook(
@@ -317,14 +317,14 @@ class InlineHookClient():
             .execute(request, InlineHook)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = InlineHook(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def deactivate_inline_hook(
@@ -358,12 +358,12 @@ class InlineHookClient():
             .execute(request, InlineHook)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = InlineHook(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)

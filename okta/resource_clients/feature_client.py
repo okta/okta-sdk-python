@@ -59,14 +59,14 @@ class FeatureClient():
             .execute(request, Feature)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = []
             for item in response.get_body():
                 result.append(Feature(item))
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def get_feature(
@@ -98,14 +98,14 @@ class FeatureClient():
             .execute(request, Feature)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = Feature(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def list_feature_dependencies(
@@ -137,14 +137,14 @@ class FeatureClient():
             .execute(request, Feature)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = []
             for item in response.get_body():
                 result.append(Feature(item))
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def list_feature_dependents(
@@ -176,14 +176,14 @@ class FeatureClient():
             .execute(request, Feature)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = []
             for item in response.get_body():
                 result.append(Feature(item))
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def update_feature_lifecycle(
@@ -221,12 +221,12 @@ class FeatureClient():
             .execute(request, Feature)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = Feature(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)

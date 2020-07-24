@@ -139,13 +139,10 @@ class RequestExecutor:
         _, error = self._http_client.check_response_for_error(
             request["url"], response, response_body)
 
-        if error is not None:
-            return (None, error)
-
         return (
             OktaAPIResponse(self, request, response,
                             response_body, response_type),
-            None
+            error
         )
 
     async def fire_request(self, request):

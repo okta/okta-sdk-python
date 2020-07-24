@@ -66,14 +66,14 @@ class UserFactorClient():
             .execute(request, UserFactor)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = []
             for item in response.get_body():
                 result.append(UserFactor(item))
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def enroll_factor(
@@ -118,14 +118,14 @@ class UserFactorClient():
             .execute(request, UserFactor)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = UserFactor(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def list_supported_factors(
@@ -159,14 +159,14 @@ class UserFactorClient():
             .execute(request, UserFactor)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = []
             for item in response.get_body():
                 result.append(UserFactor(item))
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def list_supported_security_questions(
@@ -200,14 +200,14 @@ class UserFactorClient():
             .execute(request, SecurityQuestion)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = []
             for item in response.get_body():
                 result.append(SecurityQuestion(item))
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def delete_factor(
@@ -240,7 +240,7 @@ class UserFactorClient():
             .execute(request)
 
         if error:
-            return (None, error)
+            return (response, error)
 
         return (response, None)
 
@@ -275,14 +275,14 @@ class UserFactorClient():
             .execute(request, UserFactor)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = UserFactor(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def activate_factor(
@@ -322,14 +322,14 @@ class UserFactorClient():
             .execute(request, UserFactor)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = UserFactor(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def get_factor_transaction_status(
@@ -365,14 +365,14 @@ class UserFactorClient():
             .execute(request, VerifyUserFactorResponse)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = VerifyUserFactorResponse(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def verify_factor(
@@ -417,12 +417,12 @@ class UserFactorClient():
             .execute(request, VerifyUserFactorResponse)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = VerifyUserFactorResponse(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)

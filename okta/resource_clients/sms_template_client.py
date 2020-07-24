@@ -67,14 +67,14 @@ class SmsTemplateClient():
             .execute(request, SmsTemplate)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = []
             for item in response.get_body():
                 result.append(SmsTemplate(item))
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def create_sms_template(
@@ -110,14 +110,14 @@ class SmsTemplateClient():
             .execute(request, SmsTemplate)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = SmsTemplate(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def delete_sms_template(
@@ -148,7 +148,7 @@ class SmsTemplateClient():
             .execute(request)
 
         if error:
-            return (None, error)
+            return (response, error)
 
         return (response, None)
 
@@ -182,14 +182,14 @@ class SmsTemplateClient():
             .execute(request, SmsTemplate)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = SmsTemplate(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def partial_update_sms_template(
@@ -226,14 +226,14 @@ class SmsTemplateClient():
             .execute(request, SmsTemplate)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = SmsTemplate(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def update_sms_template(
@@ -270,12 +270,12 @@ class SmsTemplateClient():
             .execute(request, SmsTemplate)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = SmsTemplate(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)

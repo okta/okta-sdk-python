@@ -67,14 +67,14 @@ class TrustedOriginClient():
             .execute(request, TrustedOrigin)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = []
             for item in response.get_body():
                 result.append(TrustedOrigin(item))
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def create_origin(
@@ -109,14 +109,14 @@ class TrustedOriginClient():
             .execute(request, TrustedOrigin)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = TrustedOrigin(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def delete_origin(
@@ -146,7 +146,7 @@ class TrustedOriginClient():
             .execute(request)
 
         if error:
-            return (None, error)
+            return (response, error)
 
         return (response, None)
 
@@ -179,14 +179,14 @@ class TrustedOriginClient():
             .execute(request, TrustedOrigin)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = TrustedOrigin(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def update_origin(
@@ -222,14 +222,14 @@ class TrustedOriginClient():
             .execute(request, TrustedOrigin)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = TrustedOrigin(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def activate_origin(
@@ -262,14 +262,14 @@ class TrustedOriginClient():
             .execute(request, TrustedOrigin)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = TrustedOrigin(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
 
     async def deactivate_origin(
@@ -302,12 +302,12 @@ class TrustedOriginClient():
             .execute(request, TrustedOrigin)
 
         if error:
-            return (None, None, error)
+            return (None, response, error)
 
         try:
             result = TrustedOrigin(
                 response.get_body()
             )
         except Exception as error:
-            return (None, None, error)
+            return (None, response, error)
         return (result, response, None)
