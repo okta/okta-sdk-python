@@ -17,18 +17,35 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
 from okta.models.application_settings\
     import ApplicationSettings
+from okta.models.auto_login_application_settings_sign_on\
+    import AutoLoginApplicationSettingsSignOn
 
 
 class AutoLoginApplicationSettings(
-    OktaObject,
     ApplicationSettings
 ):
+    """
+    A class for AutoLoginApplicationSettings objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.sign_on = config["signOn"]\
-                if "signOn" in config else None
+            if "signOn" in config:
+                if isinstance(config["signOn"],
+                              AutoLoginApplicationSettingsSignOn):
+                    self.sign_on = config["signOn"]
+                else:
+                    self.sign_on = AutoLoginApplicationSettingsSignOn(
+                        config["signOn"]
+                    )
+            else:
+                self.sign_on = None
         else:
             self.sign_on = None
+
+    def request_format(self):
+        return {
+            "signOn": self.sign_on
+        }

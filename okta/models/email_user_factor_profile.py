@@ -23,9 +23,18 @@ from okta.okta_object import OktaObject
 class EmailUserFactorProfile(
     OktaObject
 ):
+    """
+    A class for EmailUserFactorProfile objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.email = config["email"]\
                 if "email" in config else None
         else:
             self.email = None
+
+    def request_format(self):
+        return {
+            "email": self.email
+        }

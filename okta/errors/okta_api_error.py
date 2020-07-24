@@ -1,4 +1,7 @@
-class OktaAPIError():
+from okta.errors.error import Error
+
+
+class OktaAPIError(Error):
     def __init__(self, url, response_details, response_body):
         self.status = response_details.status
         self.error_code = response_body["errorCode"]
@@ -15,4 +18,4 @@ class OktaAPIError():
         self.stack = ""
 
         self.message = (f"Okta HTTP {self.status} {self.error_code} "
-                        f"{self.error_summary}. {error_causes_string}")
+                        f"{self.error_summary}\n{error_causes_string}")

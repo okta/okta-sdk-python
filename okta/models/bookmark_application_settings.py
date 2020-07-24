@@ -17,18 +17,35 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
 from okta.models.application_settings\
     import ApplicationSettings
+from okta.models.bookmark_application_settings_application\
+    import BookmarkApplicationSettingsApplication
 
 
 class BookmarkApplicationSettings(
-    OktaObject,
     ApplicationSettings
 ):
+    """
+    A class for BookmarkApplicationSettings objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.app = config["app"]\
-                if "app" in config else None
+            if "app" in config:
+                if isinstance(config["app"],
+                              BookmarkApplicationSettingsApplication):
+                    self.app = config["app"]
+                else:
+                    self.app = BookmarkApplicationSettingsApplication(
+                        config["app"]
+                    )
+            else:
+                self.app = None
         else:
             self.app = None
+
+    def request_format(self):
+        return {
+            "app": self.app
+        }

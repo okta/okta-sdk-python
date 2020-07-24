@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class AppAndInstanceConditionEvaluatorAppOrInstance(
     OktaObject
 ):
+    """
+    A class for AppAndInstanceConditionEvaluatorAppOrInstance objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.id = config["id"]\
@@ -35,3 +39,10 @@ class AppAndInstanceConditionEvaluatorAppOrInstance(
             self.id = None
             self.name = None
             self.type = None
+
+    def request_format(self):
+        return {
+            "id": self.id,
+            "name": self.name,
+            "type": self.type
+        }

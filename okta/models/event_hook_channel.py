@@ -18,15 +18,29 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.event_hook_channel_config\
+    import EventHookChannelConfig
 
 
 class EventHookChannel(
     OktaObject
 ):
+    """
+    A class for EventHookChannel objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.config = config["config"]\
-                if "config" in config else None
+            if "config" in config:
+                if isinstance(config["config"],
+                              EventHookChannelConfig):
+                    self.config = config["config"]
+                else:
+                    self.config = EventHookChannelConfig(
+                        config["config"]
+                    )
+            else:
+                self.config = None
             self.type = config["type"]\
                 if "type" in config else None
             self.version = config["version"]\
@@ -35,3 +49,10 @@ class EventHookChannel(
             self.config = None
             self.type = None
             self.version = None
+
+    def request_format(self):
+        return {
+            "config": self.config,
+            "type": self.type,
+            "version": self.version
+        }

@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class UserIdentifierPolicyRuleCondition(
     OktaObject
 ):
+    """
+    A class for UserIdentifierPolicyRuleCondition objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.attribute = config["attribute"]\
@@ -35,3 +39,10 @@ class UserIdentifierPolicyRuleCondition(
             self.attribute = None
             self.patterns = None
             self.type = None
+
+    def request_format(self):
+        return {
+            "attribute": self.attribute,
+            "patterns": self.patterns,
+            "type": self.type
+        }

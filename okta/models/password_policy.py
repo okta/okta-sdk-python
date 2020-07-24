@@ -17,21 +17,49 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
 from okta.models.policy\
     import Policy
+from okta.models.password_policy_conditions\
+    import PasswordPolicyConditions
+from okta.models.password_policy_settings\
+    import PasswordPolicySettings
 
 
 class PasswordPolicy(
-    OktaObject,
     Policy
 ):
+    """
+    A class for PasswordPolicy objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.conditions = config["conditions"]\
-                if "conditions" in config else None
-            self.settings = config["settings"]\
-                if "settings" in config else None
+            if "conditions" in config:
+                if isinstance(config["conditions"],
+                              PasswordPolicyConditions):
+                    self.conditions = config["conditions"]
+                else:
+                    self.conditions = PasswordPolicyConditions(
+                        config["conditions"]
+                    )
+            else:
+                self.conditions = None
+            if "settings" in config:
+                if isinstance(config["settings"],
+                              PasswordPolicySettings):
+                    self.settings = config["settings"]
+                else:
+                    self.settings = PasswordPolicySettings(
+                        config["settings"]
+                    )
+            else:
+                self.settings = None
         else:
             self.conditions = None
             self.settings = None
+
+    def request_format(self):
+        return {
+            "conditions": self.conditions,
+            "settings": self.settings
+        }

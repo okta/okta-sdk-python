@@ -18,25 +18,69 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.inactivity_policy_rule_condition\
+    import InactivityPolicyRuleCondition
+from okta.models.lifecycle_expiration_policy_rule_condition\
+    import LifecycleExpirationPolicyRuleCondition
+from okta.models.password_expiration_policy_rule_condition\
+    import PasswordExpirationPolicyRuleCondition
+from okta.models.user_lifecycle_attribute_policy_rule_condition\
+    import UserLifecycleAttributePolicyRuleCondition
 
 
 class UserPolicyRuleCondition(
     OktaObject
 ):
+    """
+    A class for UserPolicyRuleCondition objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.exclude = config["exclude"]\
                 if "exclude" in config else None
-            self.inactivity = config["inactivity"]\
-                if "inactivity" in config else None
+            if "inactivity" in config:
+                if isinstance(config["inactivity"],
+                              InactivityPolicyRuleCondition):
+                    self.inactivity = config["inactivity"]
+                else:
+                    self.inactivity = InactivityPolicyRuleCondition(
+                        config["inactivity"]
+                    )
+            else:
+                self.inactivity = None
             self.include = config["include"]\
                 if "include" in config else None
-            self.lifecycle_expiration = config["lifecycleExpiration"]\
-                if "lifecycleExpiration" in config else None
-            self.password_expiration = config["passwordExpiration"]\
-                if "passwordExpiration" in config else None
-            self.user_lifecycle_attribute = config["userLifecycleAttribute"]\
-                if "userLifecycleAttribute" in config else None
+            if "lifecycleExpiration" in config:
+                if isinstance(config["lifecycleExpiration"],
+                              LifecycleExpirationPolicyRuleCondition):
+                    self.lifecycle_expiration = config["lifecycleExpiration"]
+                else:
+                    self.lifecycle_expiration = LifecycleExpirationPolicyRuleCondition(
+                        config["lifecycleExpiration"]
+                    )
+            else:
+                self.lifecycle_expiration = None
+            if "passwordExpiration" in config:
+                if isinstance(config["passwordExpiration"],
+                              PasswordExpirationPolicyRuleCondition):
+                    self.password_expiration = config["passwordExpiration"]
+                else:
+                    self.password_expiration = PasswordExpirationPolicyRuleCondition(
+                        config["passwordExpiration"]
+                    )
+            else:
+                self.password_expiration = None
+            if "userLifecycleAttribute" in config:
+                if isinstance(config["userLifecycleAttribute"],
+                              UserLifecycleAttributePolicyRuleCondition):
+                    self.user_lifecycle_attribute = config["userLifecycleAttribute"]
+                else:
+                    self.user_lifecycle_attribute = UserLifecycleAttributePolicyRuleCondition(
+                        config["userLifecycleAttribute"]
+                    )
+            else:
+                self.user_lifecycle_attribute = None
         else:
             self.exclude = None
             self.inactivity = None
@@ -44,3 +88,13 @@ class UserPolicyRuleCondition(
             self.lifecycle_expiration = None
             self.password_expiration = None
             self.user_lifecycle_attribute = None
+
+    def request_format(self):
+        return {
+            "exclude": self.exclude,
+            "inactivity": self.inactivity,
+            "include": self.include,
+            "lifecycleExpiration": self.lifecycle_expiration,
+            "passwordExpiration": self.password_expiration,
+            "userLifecycleAttribute": self.user_lifecycle_attribute
+        }

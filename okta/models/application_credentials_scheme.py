@@ -24,6 +24,10 @@ class ApplicationCredentialsScheme(
     str,
     Enum
 ):
+    """
+    An enumeration class for ApplicationCredentialsScheme.
+    """
+
     SHARED_USERNAME_AND_PASSWORD = "SHARED_USERNAME_AND_PASSWORD"
     EXTERNAL_PASSWORD_SYNC = "EXTERNAL_PASSWORD_SYNC"
     EDIT_USERNAME_AND_PASSWORD = "EDIT_USERNAME_AND_PASSWORD"

@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class PasswordPolicyAuthenticationProviderCondition(
     OktaObject
 ):
+    """
+    A class for PasswordPolicyAuthenticationProviderCondition objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.include = config["include"]\
@@ -32,3 +36,9 @@ class PasswordPolicyAuthenticationProviderCondition(
         else:
             self.include = None
             self.provider = None
+
+    def request_format(self):
+        return {
+            "include": self.include,
+            "provider": self.provider
+        }

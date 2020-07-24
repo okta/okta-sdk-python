@@ -18,34 +18,36 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from urllib.parse import urlencode
+from okta.models.sms_template\
+    import SmsTemplate
 from okta.utils import format_url
-from okta.models.inline_hook\
-    import InlineHook
-from okta.models.inline_hook_response\
-    import InlineHookResponse
 
 
-class InlineHookClient():
+class SmsTemplateClient():
     """
-    A Client object for the InlineHook resource.
+    A Client object for the SmsTemplate resource.
     """
+
     def __init__(self):
         self._base_url = ""
 
-    async def list_inline_hooks(
+    async def list_sms_templates(
             self, query_params={}
     ):
         """
+        Enumerates custom SMS templates in your organization. A
+        subset of templates can be returned that match a templ
+        ate type.
         Args:
             query_params {dict}: Map of query parameters for request
-            [query_params.type] {str}
+            [query_params.templateType] {str}
         Returns:
-            list: Collection of InlineHook instances.
+            list: Collection of SmsTemplate instances.
         """
         http_method = "get".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/inlineHooks
+            /api/v1/templates/sms
             """)
         if query_params:
             encoded_query_params = urlencode(query_params)
@@ -62,7 +64,7 @@ class InlineHookClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, SmsTemplate)
 
         if error:
             return (None, None, error)
@@ -70,27 +72,28 @@ class InlineHookClient():
         try:
             result = []
             for item in response.get_body():
-                result.append(InlineHook(item))
+                result.append(SmsTemplate(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def create_inline_hook(
-            self, inline_hook
+    async def create_sms_template(
+            self, sms_template
     ):
         """
+        Adds a new custom SMS template to your organization.
         Args:
-            {inline_hook}
+            {sms_template}
         Returns:
-            InlineHook
+            SmsTemplate
         """
         http_method = "post".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/inlineHooks
+            /api/v1/templates/sms
             """)
 
-        body = inline_hook.as_dict()
+        body = sms_template.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -104,34 +107,31 @@ class InlineHookClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, SmsTemplate)
 
         if error:
             return (None, None, error)
 
         try:
-            result = InlineHook(
+            result = SmsTemplate(
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def delete_inline_hook(
-            self, inlineHookId
+    async def delete_sms_template(
+            self, templateId
     ):
         """
-        Deletes the Inline Hook matching the provided id. Once
-        deleted, the Inline Hook is unrecoverable. As a safety
-        precaution, only Inline Hooks with a status of INACTIVE
-        are eligible for deletion.
+        Removes an SMS template.
         Args:
-            inline_hook_id {str}
+            template_id {str}
         """
         http_method = "delete".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/inlineHooks/{inlineHookId}
+            /api/v1/templates/sms/{templateId}
             """)
 
         body = {}
@@ -152,20 +152,20 @@ class InlineHookClient():
 
         return (response, None)
 
-    async def get_inline_hook(
-            self, inlineHookId
+    async def get_sms_template(
+            self, templateId
     ):
         """
-        Gets an inline hook by ID
+        Fetches a specific template by `id`
         Args:
-            inline_hook_id {str}
+            template_id {str}
         Returns:
-            InlineHook
+            SmsTemplate
         """
         http_method = "get".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/inlineHooks/{inlineHookId}
+            /api/v1/templates/sms/{templateId}
             """)
 
         body = {}
@@ -179,37 +179,81 @@ class InlineHookClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, SmsTemplate)
 
         if error:
             return (None, None, error)
 
         try:
-            result = InlineHook(
+            result = SmsTemplate(
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def update_inline_hook(
-            self, inlineHookId, inline_hook
+    async def partial_update_sms_template(
+            self, templateId, sms_template
     ):
         """
-        Updates an inline hook by ID
+        Updates only some of the SMS template properties:
         Args:
-            inline_hook_id {str}
-            {inline_hook}
+            template_id {str}
+            {sms_template}
         Returns:
-            InlineHook
+            SmsTemplate
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/templates/sms/{templateId}
+            """)
+
+        body = sms_template.as_dict()
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, SmsTemplate)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = SmsTemplate(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def update_sms_template(
+            self, templateId, sms_template
+    ):
+        """
+        Updates the SMS template.
+        Args:
+            template_id {str}
+            {sms_template}
+        Returns:
+            SmsTemplate
         """
         http_method = "put".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/inlineHooks/{inlineHookId}
+            /api/v1/templates/sms/{templateId}
             """)
 
-        body = inline_hook.as_dict()
+        body = sms_template.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -223,146 +267,15 @@ class InlineHookClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, SmsTemplate)
 
         if error:
             return (None, None, error)
 
         try:
-            result = InlineHook(
+            result = SmsTemplate(
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def execute_inline_hook(
-            self, inlineHookId, inline_hook_payload
-    ):
-        """
-        Executes the Inline Hook matching the provided inlineHo
-        okId using the request body as the input. This will sen
-        d the provided data through the Channel and return a re
-        sponse if it matches the correct data contract. This ex
-        ecution endpoint should only be used for testing purpos
-        es.
-        Args:
-            inline_hook_id {str}
-            {inline_hook_payload}
-        Returns:
-            InlineHookResponse
-        """
-        http_method = "post".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/inlineHooks/{inlineHookId}/execute
-            """)
-
-        body = inline_hook_payload.as_dict()
-        headers = {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        }
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
             return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = InlineHookResponse(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def activate_inline_hook(
-            self, inlineHookId
-    ):
-        """
-        Activates the Inline Hook matching the provided id
-        Args:
-            inline_hook_id {str}
-        Returns:
-            InlineHook
-        """
-        http_method = "post".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/inlineHooks/{inlineHookId}/lifecycle
-                activate
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = InlineHook(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def deactivate_inline_hook(
-            self, inlineHookId
-    ):
-        """
-        Deactivates the Inline Hook matching the provided id
-        Args:
-            inline_hook_id {str}
-        Returns:
-            InlineHook
-        """
-        http_method = "post".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/inlineHooks/{inlineHookId}/lifecycle
-                deactivate
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = InlineHook(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
         return (result, response, None)

@@ -23,9 +23,18 @@ from okta.okta_object import OktaObject
 class PasswordDictionaryCommon(
     OktaObject
 ):
+    """
+    A class for PasswordDictionaryCommon objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.exclude = config["exclude"]\
                 if "exclude" in config else None
         else:
             self.exclude = "false"
+
+    def request_format(self):
+        return {
+            "exclude": self.exclude
+        }

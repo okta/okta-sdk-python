@@ -18,23 +18,37 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.o_auth_2_actor\
+    import OAuth2Actor
 
 
 class OAuth2RefreshToken(
     OktaObject
 ):
+    """
+    A class for OAuth2RefreshToken objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.embedded = config["_embedded"]\
-                if "_embedded" in config else None
-            self.links = config["_links"]\
-                if "_links" in config else None
+            self.embedded = config["embedded"]\
+                if "embedded" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
             self.client_id = config["clientId"]\
                 if "clientId" in config else None
             self.created = config["created"]\
                 if "created" in config else None
-            self.created_by = config["createdBy"]\
-                if "createdBy" in config else None
+            if "createdBy" in config:
+                if isinstance(config["createdBy"],
+                              OAuth2Actor):
+                    self.created_by = config["createdBy"]
+                else:
+                    self.created_by = OAuth2Actor(
+                        config["createdBy"]
+                    )
+            else:
+                self.created_by = None
             self.expires_at = config["expiresAt"]\
                 if "expiresAt" in config else None
             self.id = config["id"]\
@@ -62,3 +76,19 @@ class OAuth2RefreshToken(
             self.scopes = None
             self.status = None
             self.user_id = None
+
+    def request_format(self):
+        return {
+            "_embedded": self.embedded,
+            "_links": self.links,
+            "clientId": self.client_id,
+            "created": self.created,
+            "createdBy": self.created_by,
+            "expiresAt": self.expires_at,
+            "id": self.id,
+            "issuer": self.issuer,
+            "lastUpdated": self.last_updated,
+            "scopes": self.scopes,
+            "status": self.status,
+            "userId": self.user_id
+        }

@@ -18,17 +18,37 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.app_user_password_credential\
+    import AppUserPasswordCredential
 
 
 class AppUserCredentials(
     OktaObject
 ):
+    """
+    A class for AppUserCredentials objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.password = config["password"]\
-                if "password" in config else None
+            if "password" in config:
+                if isinstance(config["password"],
+                              AppUserPasswordCredential):
+                    self.password = config["password"]
+                else:
+                    self.password = AppUserPasswordCredential(
+                        config["password"]
+                    )
+            else:
+                self.password = None
             self.user_name = config["userName"]\
                 if "userName" in config else None
         else:
             self.password = None
             self.user_name = None
+
+    def request_format(self):
+        return {
+            "password": self.password,
+            "userName": self.user_name
+        }

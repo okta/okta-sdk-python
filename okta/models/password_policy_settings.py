@@ -18,20 +18,61 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.password_policy_delegation_settings\
+    import PasswordPolicyDelegationSettings
+from okta.models.password_policy_password_settings\
+    import PasswordPolicyPasswordSettings
+from okta.models.password_policy_recovery_settings\
+    import PasswordPolicyRecoverySettings
 
 
 class PasswordPolicySettings(
     OktaObject
 ):
+    """
+    A class for PasswordPolicySettings objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.delegation = config["delegation"]\
-                if "delegation" in config else None
-            self.password = config["password"]\
-                if "password" in config else None
-            self.recovery = config["recovery"]\
-                if "recovery" in config else None
+            if "delegation" in config:
+                if isinstance(config["delegation"],
+                              PasswordPolicyDelegationSettings):
+                    self.delegation = config["delegation"]
+                else:
+                    self.delegation = PasswordPolicyDelegationSettings(
+                        config["delegation"]
+                    )
+            else:
+                self.delegation = None
+            if "password" in config:
+                if isinstance(config["password"],
+                              PasswordPolicyPasswordSettings):
+                    self.password = config["password"]
+                else:
+                    self.password = PasswordPolicyPasswordSettings(
+                        config["password"]
+                    )
+            else:
+                self.password = None
+            if "recovery" in config:
+                if isinstance(config["recovery"],
+                              PasswordPolicyRecoverySettings):
+                    self.recovery = config["recovery"]
+                else:
+                    self.recovery = PasswordPolicyRecoverySettings(
+                        config["recovery"]
+                    )
+            else:
+                self.recovery = None
         else:
             self.delegation = None
             self.password = None
             self.recovery = None
+
+    def request_format(self):
+        return {
+            "delegation": self.delegation,
+            "password": self.password,
+            "recovery": self.recovery
+        }

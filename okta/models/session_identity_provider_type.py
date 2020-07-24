@@ -24,6 +24,10 @@ class SessionIdentityProviderType(
     str,
     Enum
 ):
+    """
+    An enumeration class for SessionIdentityProviderType.
+    """
+
     ACTIVE_DIRECTORY = "ACTIVE_DIRECTORY"
     LDAP = "LDAP"
     OKTA = "OKTA"

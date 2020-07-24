@@ -18,47 +18,49 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from urllib.parse import urlencode
-from okta.http_client import HTTPClient
+from okta.models.group\
+    import Group
+from okta.models.group_rule\
+    import GroupRule
+from okta.models.application\
+    import Application
+from okta.models.role\
+    import Role
+from okta.models.catalog_application\
+    import CatalogApplication
+from okta.models.user\
+    import User
 from okta.utils import format_url
-from okta.models.identity_provider\
-    import IdentityProvider
-from okta.models.json_web_key\
-    import JsonWebKey
-from okta.models.csr\
-    import Csr
-from okta.models.identity_provider_application_user\
-    import IdentityProviderApplicationUser
-from okta.models.social_auth_token\
-    import SocialAuthToken
 
 
-class IdentityProviderClient():
+class GroupClient():
     """
-    A Client object for the IdentityProvider resource.
+    A Client object for the Group resource.
     """
+
     def __init__(self):
         self._base_url = ""
 
-    async def list_identity_providers(
+    async def list_groups(
             self, query_params={}
     ):
         """
-        Enumerates IdPs in your organization with pagination. A
-        subset of IdPs can be returned that match a supported
-        filter expression or query.
+        Enumerates groups in your organization with pagination.
+        A subset of groups can be returned that match a suppor
+        ted filter expression or query.
         Args:
             query_params {dict}: Map of query parameters for request
             [query_params.q] {str}
+            [query_params.filter] {str}
             [query_params.after] {str}
             [query_params.limit] {str}
-            [query_params.type] {str}
         Returns:
-            list: Collection of IdentityProvider instances.
+            list: Collection of Group instances.
         """
         http_method = "get".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/idps
+            /api/v1/groups
             """)
         if query_params:
             encoded_query_params = urlencode(query_params)
@@ -75,7 +77,7 @@ class IdentityProviderClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Group)
 
         if error:
             return (None, None, error)
@@ -83,28 +85,29 @@ class IdentityProviderClient():
         try:
             result = []
             for item in response.get_body():
-                result.append(IdentityProvider(item))
+                result.append(Group(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def create_identity_provider(
-            self, identity_provider
+    async def create_group(
+            self, group
     ):
         """
-        Adds a new IdP to your organization.
+        Adds a new group with `OKTA_GROUP` type to your organiz
+        ation.
         Args:
-            {identity_provider}
+            {group}
         Returns:
-            IdentityProvider
+            Group
         """
         http_method = "post".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/idps
+            /api/v1/groups
             """)
 
-        body = identity_provider.as_dict()
+        body = group.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -118,35 +121,37 @@ class IdentityProviderClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Group)
 
         if error:
             return (None, None, error)
 
         try:
-            result = IdentityProvider(
+            result = Group(
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def list_identity_provider_keys(
+    async def list_group_rules(
             self, query_params={}
     ):
         """
-        Enumerates IdP key credentials.
+        Lists all group rules for your organization.
         Args:
             query_params {dict}: Map of query parameters for request
-            [query_params.after] {str}
             [query_params.limit] {str}
+            [query_params.after] {str}
+            [query_params.search] {str}
+            [query_params.expand] {str}
         Returns:
-            list: Collection of JsonWebKey instances.
+            list: Collection of GroupRule instances.
         """
         http_method = "get".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/idps/credentials/keys
+            /api/v1/groups/rules
             """)
         if query_params:
             encoded_query_params = urlencode(query_params)
@@ -163,7 +168,7 @@ class IdentityProviderClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, GroupRule)
 
         if error:
             return (None, None, error)
@@ -171,29 +176,29 @@ class IdentityProviderClient():
         try:
             result = []
             for item in response.get_body():
-                result.append(JsonWebKey(item))
+                result.append(GroupRule(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def create_identity_provider_key(
-            self, json_web_key
+    async def create_group_rule(
+            self, group_rule
     ):
         """
-        Adds a new X.509 certificate credential to the IdP key
-        store.
+        Creates a group rule to dynamically add users to the sp
+        ecified group if they match the condition
         Args:
-            {json_web_key}
+            {group_rule}
         Returns:
-            JsonWebKey
+            GroupRule
         """
         http_method = "post".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/idps/credentials/keys
+            /api/v1/groups/rules
             """)
 
-        body = json_web_key.as_dict()
+        body = group_rule.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -207,32 +212,32 @@ class IdentityProviderClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, GroupRule)
 
         if error:
             return (None, None, error)
 
         try:
-            result = JsonWebKey(
+            result = GroupRule(
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def delete_identity_provider_key(
-            self, keyId
+    async def delete_group_rule(
+            self, ruleId
     ):
         """
-        Deletes a specific IdP Key Credential by `kid` if it is
-        not currently being used by an Active or Inactive IdP.
+        Removes a specific group rule by id from your organizat
+        ion
         Args:
-            key_id {str}
+            rule_id {str}
         """
         http_method = "delete".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/idps/credentials/keys/{keyId}
+            /api/v1/groups/rules/{ruleId}
             """)
 
         body = {}
@@ -253,21 +258,27 @@ class IdentityProviderClient():
 
         return (response, None)
 
-    async def get_identity_provider_key(
-            self, keyId
+    async def get_group_rule(
+            self, ruleId, query_params={}
     ):
         """
-        Gets a specific IdP Key Credential by `kid`
+        Fetches a specific group rule by id from your organizat
+        ion
         Args:
-            key_id {str}
+            rule_id {str}
+            query_params {dict}: Map of query parameters for request
+            [query_params.expand] {str}
         Returns:
-            JsonWebKey
+            GroupRule
         """
         http_method = "get".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/idps/credentials/keys/{keyId}
+            /api/v1/groups/rules/{ruleId}
             """)
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
         body = {}
         headers = {}
@@ -280,109 +291,38 @@ class IdentityProviderClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, GroupRule)
 
         if error:
             return (None, None, error)
 
         try:
-            result = JsonWebKey(
+            result = GroupRule(
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def delete_identity_provider(
-            self, idpId
+    async def update_group_rule(
+            self, ruleId, group_rule
     ):
         """
-        Removes an IdP from your organization.
+        Updates a group rule. Only `INACTIVE` rules can be upda
+        ted.
         Args:
-            idp_id {str}
-        """
-        http_method = "delete".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/idps/{idpId}
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, error)
-
-        return (response, None)
-
-    async def get_identity_provider(
-            self, idpId
-    ):
-        """
-        Fetches an IdP by `id`.
-        Args:
-            idp_id {str}
+            rule_id {str}
+            {group_rule}
         Returns:
-            IdentityProvider
-        """
-        http_method = "get".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/idps/{idpId}
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = IdentityProvider(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def update_identity_provider(
-            self, idpId, identity_provider
-    ):
-        """
-        Updates the configuration for an IdP.
-        Args:
-            idp_id {str}
-            {identity_provider}
-        Returns:
-            IdentityProvider
+            GroupRule
         """
         http_method = "put".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/idps/{idpId}
+            /api/v1/groups/rules/{ruleId}
             """)
 
-        body = identity_provider.as_dict()
+        body = group_rule.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -396,118 +336,32 @@ class IdentityProviderClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, GroupRule)
 
         if error:
             return (None, None, error)
 
         try:
-            result = IdentityProvider(
+            result = GroupRule(
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def list_csrs_for_identity_provider(
-            self, idpId
+    async def activate_group_rule(
+            self, ruleId
     ):
         """
-        Enumerates Certificate Signing Requests for an IdP
+        Activates a specific group rule by id from your organiz
+        ation
         Args:
-            idp_id {str}
-        Returns:
-            list: Collection of Csr instances.
-        """
-        http_method = "get".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/idps/{idpId}/credentials/csrs
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = []
-            for item in response.get_body():
-                result.append(Csr(item))
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def generate_csr_for_identity_provider(
-            self, idpId, csr_metadata
-    ):
-        """
-        Generates a new key pair and returns a Certificate Sign
-        ing Request for it.
-        Args:
-            idp_id {str}
-            {csr_metadata}
-        Returns:
-            Csr
+            rule_id {str}
         """
         http_method = "post".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/idps/{idpId}/credentials/csrs
-            """)
-
-        body = csr_metadata.as_dict()
-        headers = {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        }
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = Csr(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def revoke_csr_for_identity_provider(
-            self, idpId, csrId
-    ):
-        """
-        Revoke a Certificate Signing Request and delete the key
-        pair from the IdP
-        Args:
-            idp_id {str}
-            csr_id {str}
-        """
-        http_method = "delete".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/idps/{idpId}/credentials/csrs/{csrId}
+            /api/v1/groups/rules/{ruleId}/lifecycle/activate
             """)
 
         body = {}
@@ -528,596 +382,19 @@ class IdentityProviderClient():
 
         return (response, None)
 
-    async def get_csr_for_identity_provider(
-            self, idpId, csrId
+    async def deactivate_group_rule(
+            self, ruleId
     ):
         """
-        Gets a specific Certificate Signing Request model by id
+        Deactivates a specific group rule by id from your organ
+        ization
         Args:
-            idp_id {str}
-            csr_id {str}
-        Returns:
-            Csr
-        """
-        http_method = "get".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/idps/{idpId}/credentials/csrs/{csrId}
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = Csr(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def publish_cer_cert_for_identity_provider(
-            self, idpId, csrId, string
-    ):
-        """
-        Update the Certificate Signing Request with a signed X.
-        509 certificate and add it into the signing key credent
-        ials for the IdP.
-        Args:
-            idp_id {str}
-            csr_id {str}
-            {string}
-        Returns:
-            JsonWebKey
+            rule_id {str}
         """
         http_method = "post".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/idps/{idpId}/credentials/csrs/{csrId}
-                lifecycle/publish
-            """)
-
-        body = string.as_dict()
-        headers = {
-            "Accept": "application/json",
-            "Content-Type": "application/x-x509-ca-cert"
-        }
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = JsonWebKey(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def publish_binary_cer_cert_for_identity_provider(
-            self, idpId, csrId, string
-    ):
-        """
-        Update the Certificate Signing Request with a signed X.
-        509 certificate and add it into the signing key credent
-        ials for the IdP.
-        Args:
-            idp_id {str}
-            csr_id {str}
-            {string}
-        Returns:
-            JsonWebKey
-        """
-        http_method = "post".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/idps/{idpId}/credentials/csrs/{csrId}
-                lifecycle/publish
-            """)
-
-        body = HTTPClient.format_binary_data(string)
-        headers = {
-            "Accept": "application/json",
-            "Content-Type": "application/x-x509-ca-cert"
-        }
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = JsonWebKey(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def publish_der_cert_for_identity_provider(
-            self, idpId, csrId, string
-    ):
-        """
-        Update the Certificate Signing Request with a signed X.
-        509 certificate and add it into the signing key credent
-        ials for the IdP.
-        Args:
-            idp_id {str}
-            csr_id {str}
-            {string}
-        Returns:
-            JsonWebKey
-        """
-        http_method = "post".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/idps/{idpId}/credentials/csrs/{csrId}
-                lifecycle/publish
-            """)
-
-        body = string.as_dict()
-        headers = {
-            "Accept": "application/json",
-            "Content-Type": "application/pkix-cert"
-        }
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = JsonWebKey(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def publish_binary_der_cert_for_identity_provider(
-            self, idpId, csrId, string
-    ):
-        """
-        Update the Certificate Signing Request with a signed X.
-        509 certificate and add it into the signing key credent
-        ials for the IdP.
-        Args:
-            idp_id {str}
-            csr_id {str}
-            {string}
-        Returns:
-            JsonWebKey
-        """
-        http_method = "post".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/idps/{idpId}/credentials/csrs/{csrId}
-                lifecycle/publish
-            """)
-
-        body = HTTPClient.format_binary_data(string)
-        headers = {
-            "Accept": "application/json",
-            "Content-Type": "application/pkix-cert"
-        }
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = JsonWebKey(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def publish_binary_pem_cert_for_identity_provider(
-            self, idpId, csrId, string
-    ):
-        """
-        Update the Certificate Signing Request with a signed X.
-        509 certificate and add it into the signing key credent
-        ials for the IdP.
-        Args:
-            idp_id {str}
-            csr_id {str}
-            {string}
-        Returns:
-            JsonWebKey
-        """
-        http_method = "post".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/idps/{idpId}/credentials/csrs/{csrId}
-                lifecycle/publish
-            """)
-
-        body = HTTPClient.format_binary_data(string)
-        headers = {
-            "Accept": "application/json",
-            "Content-Type": "application/x-pem-file"
-        }
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = JsonWebKey(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def list_identity_provider_signing_keys(
-            self, idpId
-    ):
-        """
-        Enumerates signing key credentials for an IdP
-        Args:
-            idp_id {str}
-        Returns:
-            list: Collection of JsonWebKey instances.
-        """
-        http_method = "get".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/idps/{idpId}/credentials/keys
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = []
-            for item in response.get_body():
-                result.append(JsonWebKey(item))
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def generate_identity_provider_signing_key(
-            self, idpId, query_params={}
-    ):
-        """
-        Generates a new X.509 certificate for an IdP signing ke
-        y credential to be used for signing assertions sent to
-        the IdP
-        Args:
-            idp_id {str}
-            query_params {dict}: Map of query parameters for request
-            [query_params.validityYears] {str}
-        Returns:
-            JsonWebKey
-        """
-        http_method = "post".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/idps/{idpId}/credentials/keys/generate
-            """)
-        if query_params:
-            encoded_query_params = urlencode(query_params)
-            api_url += f"/?{encoded_query_params}"
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = JsonWebKey(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def get_identity_provider_signing_key(
-            self, idpId, keyId
-    ):
-        """
-        Gets a specific IdP Key Credential by `kid`
-        Args:
-            idp_id {str}
-            key_id {str}
-        Returns:
-            JsonWebKey
-        """
-        http_method = "get".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/idps/{idpId}/credentials/keys/{keyId}
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = JsonWebKey(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def clone_identity_provider_key(
-            self, idpId, keyId, query_params={}
-    ):
-        """
-        Clones a X.509 certificate for an IdP signing key crede
-        ntial from a source IdP to target IdP
-        Args:
-            idp_id {str}
-            key_id {str}
-            query_params {dict}: Map of query parameters for request
-            [query_params.targetIdpId] {str}
-        Returns:
-            JsonWebKey
-        """
-        http_method = "post".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/idps/{idpId}/credentials/keys/{keyId}/clone
-            """)
-        if query_params:
-            encoded_query_params = urlencode(query_params)
-            api_url += f"/?{encoded_query_params}"
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = JsonWebKey(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def activate_identity_provider(
-            self, idpId
-    ):
-        """
-        Activates an inactive IdP.
-        Args:
-            idp_id {str}
-        Returns:
-            IdentityProvider
-        """
-        http_method = "post".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/idps/{idpId}/lifecycle/activate
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = IdentityProvider(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def deactivate_identity_provider(
-            self, idpId
-    ):
-        """
-        Deactivates an active IdP.
-        Args:
-            idp_id {str}
-        Returns:
-            IdentityProvider
-        """
-        http_method = "post".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/idps/{idpId}/lifecycle/deactivate
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = IdentityProvider(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def list_identity_provider_application_users(
-            self, idpId
-    ):
-        """
-        Find all the users linked to an identity provider
-        Args:
-            idp_id {str}
-        Returns:
-            list: Collection of IdentityProviderApplicationUser instances.
-        """
-        http_method = "get".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/idps/{idpId}/users
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = []
-            for item in response.get_body():
-                result.append(IdentityProviderApplicationUser(item))
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def unlink_user_from_identity_provider(
-            self, idpId, userId
-    ):
-        """
-        Removes the link between the Okta user and the IdP user
-        .
-        Args:
-            idp_id {str}
-            user_id {str}
-        """
-        http_method = "delete".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/idps/{idpId}/users/{userId}
+            /api/v1/groups/rules/{ruleId}/lifecycle/deactivate
             """)
 
         body = {}
@@ -1138,21 +415,53 @@ class IdentityProviderClient():
 
         return (response, None)
 
-    async def get_identity_provider_application_user(
-            self, idpId, userId
+    async def delete_group(
+            self, groupId
     ):
         """
-        Fetches a linked IdP user by ID
+        Removes a group with `OKTA_GROUP` type from your organi
+        zation.
         Args:
-            idp_id {str}
-            user_id {str}
+            group_id {str}
+        """
+        http_method = "delete".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/groups/{groupId}
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (None, error)
+
+        return (response, None)
+
+    async def get_group(
+            self, groupId
+    ):
+        """
+        Lists all group rules for your organization.
+        Args:
+            group_id {str}
         Returns:
-            IdentityProviderApplicationUser
+            Group
         """
         http_method = "get".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/idps/{idpId}/users/{userId}
+            /api/v1/groups/{groupId}
             """)
 
         body = {}
@@ -1166,40 +475,38 @@ class IdentityProviderClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Group)
 
         if error:
             return (None, None, error)
 
         try:
-            result = IdentityProviderApplicationUser(
+            result = Group(
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def link_user_to_identity_provider(
-            self, idpId, userId, user_identity_provider_link_request
+    async def update_group(
+            self, groupId, group
     ):
         """
-        Links an Okta user to an existing Social Identity Provi
-        der. This does not support the SAML2 Identity Provider
-        Type
+        Updates the profile for a group with `OKTA_GROUP` type
+        from your organization.
         Args:
-            idp_id {str}
-            user_id {str}
-            {user_identity_provider_link_request}
+            group_id {str}
+            {group}
         Returns:
-            IdentityProviderApplicationUser
+            Group
         """
-        http_method = "post".upper()
+        http_method = "put".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/idps/{idpId}/users/{userId}
+            /api/v1/groups/{groupId}
             """)
 
-        body = user_identity_provider_link_request.as_dict()
+        body = group.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1213,37 +520,206 @@ class IdentityProviderClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Group)
 
         if error:
             return (None, None, error)
 
         try:
-            result = IdentityProviderApplicationUser(
+            result = Group(
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def list_social_auth_tokens(
-            self, idpId, userId
+    async def list_assigned_applications_for_group(
+            self, groupId, query_params={}
     ):
         """
-        Fetches the tokens minted by the Social Authentication
-        Provider when the user authenticates with Okta via Soci
-        al Auth.
+        Enumerates all applications that are assigned to a grou
+        p.
         Args:
-            idp_id {str}
-            user_id {str}
+            group_id {str}
+            query_params {dict}: Map of query parameters for request
+            [query_params.after] {str}
+            [query_params.limit] {str}
         Returns:
-            list: Collection of SocialAuthToken instances.
+            list: Collection of Application instances.
         """
         http_method = "get".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/idps/{idpId}/users/{userId}/credentials
-                tokens
+            /api/v1/groups/{groupId}/apps
+            """)
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Application)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = []
+            for item in response.get_body():
+                result.append(Application(item))
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def list_group_assigned_roles(
+            self, groupId, query_params={}
+    ):
+        """
+        Args:
+            group_id {str}
+            query_params {dict}: Map of query parameters for request
+            [query_params.expand] {str}
+        Returns:
+            list: Collection of Role instances.
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/groups/{groupId}/roles
+            """)
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Role)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = []
+            for item in response.get_body():
+                result.append(Role(item))
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def assign_role_to_group(
+            self, groupId, assign_role_request, query_params={}
+    ):
+        """
+        Assigns a Role to a Group
+        Args:
+            group_id {str}
+            {assign_role_request}
+            query_params {dict}: Map of query parameters for request
+            [query_params.disableNotifications] {str}
+        Returns:
+            Role
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/groups/{groupId}/roles
+            """)
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
+
+        body = assign_role_request.as_dict()
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Role)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = Role(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def remove_role_from_group(
+            self, groupId, roleId
+    ):
+        """
+        Unassigns a Role from a Group
+        Args:
+            group_id {str}
+            role_id {str}
+        """
+        http_method = "delete".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/groups/{groupId}/roles/{roleId}
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (None, error)
+
+        return (response, None)
+
+    async def get_role(
+            self, groupId, roleId
+    ):
+        """
+        Args:
+            group_id {str}
+            role_id {str}
+        Returns:
+            Role
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/groups/{groupId}/roles/{roleId}
             """)
 
         body = {}
@@ -1257,7 +733,59 @@ class IdentityProviderClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Role)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = Role(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def list_app_targets_for_application_admin_role_for_group(
+            self, groupId, roleId, query_params={}
+    ):
+        """
+        Lists all App targets for an `APP_ADMIN` Role assigned
+        to a Group. This methods return list may include full A
+        pplications or Instances. The response for an instance
+        will have an `ID` value, while Application will not hav
+        e an ID.
+        Args:
+            group_id {str}
+            role_id {str}
+            query_params {dict}: Map of query parameters for request
+            [query_params.after] {str}
+            [query_params.limit] {str}
+        Returns:
+            list: Collection of CatalogApplication instances.
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/groups/{groupId}/roles/{roleId}/targets
+                /catalog/apps
+            """)
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, CatalogApplication)
 
         if error:
             return (None, None, error)
@@ -1265,7 +793,382 @@ class IdentityProviderClient():
         try:
             result = []
             for item in response.get_body():
-                result.append(SocialAuthToken(item))
+                result.append(CatalogApplication(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
+
+    async def remove_app_target_from_application_admin_role_given_to_group(
+            self, groupId, roleId, appName
+    ):
+        """
+        Args:
+            group_id {str}
+            role_id {str}
+            app_name {str}
+        """
+        http_method = "delete".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/groups/{groupId}/roles/{roleId}/targets
+                /catalog/apps/{appName}
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (None, error)
+
+        return (response, None)
+
+    async def add_application_target_to_admin_role_given_to_group(
+            self, groupId, roleId, appName
+    ):
+        """
+        Args:
+            group_id {str}
+            role_id {str}
+            app_name {str}
+        """
+        http_method = "put".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/groups/{groupId}/roles/{roleId}/targets
+                /catalog/apps/{appName}
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (None, error)
+
+        return (response, None)
+
+    async def remove_app_target_from_admin_role_given_to_group(
+            self, groupId, roleId, appName, applicationId
+    ):
+        """
+        Remove App Instance Target to App Administrator Role gi
+        ven to a Group
+        Args:
+            group_id {str}
+            role_id {str}
+            app_name {str}
+            application_id {str}
+        """
+        http_method = "delete".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/groups/{groupId}/roles/{roleId}/targets
+                /catalog/apps/{appName}/{applicationId}
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (None, error)
+
+        return (response, None)
+
+    async def add_app_instance_target_to_app_admin_role_given_to_group(
+            self, groupId, roleId, appName, applicationId
+    ):
+        """
+        Add App Instance Target to App Administrator Role given
+        to a Group
+        Args:
+            group_id {str}
+            role_id {str}
+            app_name {str}
+            application_id {str}
+        """
+        http_method = "put".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/groups/{groupId}/roles/{roleId}/targets
+                /catalog/apps/{appName}/{applicationId}
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (None, error)
+
+        return (response, None)
+
+    async def list_group_targets_for_group_role(
+            self, groupId, roleId, query_params={}
+    ):
+        """
+        Args:
+            group_id {str}
+            role_id {str}
+            query_params {dict}: Map of query parameters for request
+            [query_params.after] {str}
+            [query_params.limit] {str}
+        Returns:
+            list: Collection of Group instances.
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/groups/{groupId}/roles/{roleId}/targets
+                /groups
+            """)
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Group)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = []
+            for item in response.get_body():
+                result.append(Group(item))
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def remove_group_target_from_group_admin_role_given_to_group(
+            self, groupId, roleId, targetGroupId
+    ):
+        """
+        Method for
+        /api/v1/groups/{groupId}/roles/{roleId}/targets/groups/
+        {targetGroupId}
+        Args:
+            group_id {str}
+            role_id {str}
+            target_group_id {str}
+        """
+        http_method = "delete".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/groups/{groupId}/roles/{roleId}/targets
+                /groups/{targetGroupId}
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (None, error)
+
+        return (response, None)
+
+    async def add_group_target_to_group_administrator_role_for_group(
+            self, groupId, roleId, targetGroupId
+    ):
+        """
+        Method for
+        /api/v1/groups/{groupId}/roles/{roleId}/targets/groups/
+        {targetGroupId}
+        Args:
+            group_id {str}
+            role_id {str}
+            target_group_id {str}
+        """
+        http_method = "put".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/groups/{groupId}/roles/{roleId}/targets
+                /groups/{targetGroupId}
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (None, error)
+
+        return (response, None)
+
+    async def list_group_users(
+            self, groupId, query_params={}
+    ):
+        """
+        Enumerates all users that are a member of a group.
+        Args:
+            group_id {str}
+            query_params {dict}: Map of query parameters for request
+            [query_params.after] {str}
+            [query_params.limit] {str}
+        Returns:
+            list: Collection of User instances.
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/groups/{groupId}/users
+            """)
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, User)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = []
+            for item in response.get_body():
+                result.append(User(item))
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def remove_user_from_group(
+            self, groupId, userId
+    ):
+        """
+        Removes a user from a group with 'OKTA_GROUP' type.
+        Args:
+            group_id {str}
+            user_id {str}
+        """
+        http_method = "delete".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/groups/{groupId}/users/{userId}
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (None, error)
+
+        return (response, None)
+
+    async def add_user_to_group(
+            self, groupId, userId
+    ):
+        """
+        Adds a user to a group with 'OKTA_GROUP' type.
+        Args:
+            group_id {str}
+            user_id {str}
+        """
+        http_method = "put".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/groups/{groupId}/users/{userId}
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (None, error)
+
+        return (response, None)

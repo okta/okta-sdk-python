@@ -18,15 +18,29 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.password_dictionary\
+    import PasswordDictionary
 
 
 class PasswordPolicyPasswordSettingsComplexity(
     OktaObject
 ):
+    """
+    A class for PasswordPolicyPasswordSettingsComplexity objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.dictionary = config["dictionary"]\
-                if "dictionary" in config else None
+            if "dictionary" in config:
+                if isinstance(config["dictionary"],
+                              PasswordDictionary):
+                    self.dictionary = config["dictionary"]
+                else:
+                    self.dictionary = PasswordDictionary(
+                        config["dictionary"]
+                    )
+            else:
+                self.dictionary = None
             self.exclude_attributes = config["excludeAttributes"]\
                 if "excludeAttributes" in config else None
             self.exclude_username = config["excludeUsername"]\
@@ -50,3 +64,15 @@ class PasswordPolicyPasswordSettingsComplexity(
             self.min_number = "1"
             self.min_symbol = "1"
             self.min_upper_case = "1"
+
+    def request_format(self):
+        return {
+            "dictionary": self.dictionary,
+            "excludeAttributes": self.exclude_attributes,
+            "excludeUsername": self.exclude_username,
+            "minLength": self.min_length,
+            "minLowerCase": self.min_lower_case,
+            "minNumber": self.min_number,
+            "minSymbol": self.min_symbol,
+            "minUpperCase": self.min_upper_case
+        }

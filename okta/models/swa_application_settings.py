@@ -17,18 +17,35 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
 from okta.models.application_settings\
     import ApplicationSettings
+from okta.models.swa_application_settings_application\
+    import SwaApplicationSettingsApplication
 
 
 class SwaApplicationSettings(
-    OktaObject,
     ApplicationSettings
 ):
+    """
+    A class for SwaApplicationSettings objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.app = config["app"]\
-                if "app" in config else None
+            if "app" in config:
+                if isinstance(config["app"],
+                              SwaApplicationSettingsApplication):
+                    self.app = config["app"]
+                else:
+                    self.app = SwaApplicationSettingsApplication(
+                        config["app"]
+                    )
+            else:
+                self.app = None
         else:
             self.app = None
+
+    def request_format(self):
+        return {
+            "app": self.app
+        }

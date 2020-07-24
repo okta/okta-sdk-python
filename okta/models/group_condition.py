@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class GroupCondition(
     OktaObject
 ):
+    """
+    A class for GroupCondition objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.exclude = config["exclude"]\
@@ -32,3 +36,9 @@ class GroupCondition(
         else:
             self.exclude = None
             self.include = None
+
+    def request_format(self):
+        return {
+            "exclude": self.exclude,
+            "include": self.include
+        }

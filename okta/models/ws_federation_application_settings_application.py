@@ -17,15 +17,17 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
 from okta.models.application_settings_application\
     import ApplicationSettingsApplication
 
 
 class WsFederationApplicationSettingsApplication(
-    OktaObject,
     ApplicationSettingsApplication
 ):
+    """
+    A class for WsFederationApplicationSettingsApplication objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.attribute_statements = config["attributeStatements"]\
@@ -40,18 +42,18 @@ class WsFederationApplicationSettingsApplication(
                 if "groupName" in config else None
             self.group_value_format = config["groupValueFormat"]\
                 if "groupValueFormat" in config else None
-            self.name_id_format = config["nameIDFormat"]\
-                if "nameIDFormat" in config else None
+            self.name_id_format = config["nameIdFormat"]\
+                if "nameIdFormat" in config else None
             self.realm = config["realm"]\
                 if "realm" in config else None
-            self.site_url = config["siteURL"]\
-                if "siteURL" in config else None
+            self.site_url = config["siteUrl"]\
+                if "siteUrl" in config else None
             self.username_attribute = config["usernameAttribute"]\
                 if "usernameAttribute" in config else None
             self.w_reply_override = config["wReplyOverride"]\
                 if "wReplyOverride" in config else None
-            self.w_reply_url = config["wReplyURL"]\
-                if "wReplyURL" in config else None
+            self.w_reply_url = config["wReplyUrl"]\
+                if "wReplyUrl" in config else None
         else:
             self.attribute_statements = None
             self.audience_restriction = None
@@ -65,3 +67,19 @@ class WsFederationApplicationSettingsApplication(
             self.username_attribute = None
             self.w_reply_override = None
             self.w_reply_url = None
+
+    def request_format(self):
+        return {
+            "attributeStatements": self.attribute_statements,
+            "audienceRestriction": self.audience_restriction,
+            "authnContextClassRef": self.authn_context_class_ref,
+            "groupFilter": self.group_filter,
+            "groupName": self.group_name,
+            "groupValueFormat": self.group_value_format,
+            "nameIDFormat": self.name_id_format,
+            "realm": self.realm,
+            "siteURL": self.site_url,
+            "usernameAttribute": self.username_attribute,
+            "wReplyOverride": self.w_reply_override,
+            "wReplyURL": self.w_reply_url
+        }

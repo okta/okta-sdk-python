@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class CsrMetadataSubject(
     OktaObject
 ):
+    """
+    A class for CsrMetadataSubject objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.common_name = config["commonName"]\
@@ -44,3 +48,13 @@ class CsrMetadataSubject(
             self.organization_name = None
             self.organizational_unit_name = None
             self.state_or_province_name = None
+
+    def request_format(self):
+        return {
+            "commonName": self.common_name,
+            "countryName": self.country_name,
+            "localityName": self.locality_name,
+            "organizationName": self.organization_name,
+            "organizationalUnitName": self.organizational_unit_name,
+            "stateOrProvinceName": self.state_or_province_name
+        }

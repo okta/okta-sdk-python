@@ -17,18 +17,35 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
 from okta.models.application\
     import Application
+from okta.models.saml_application_settings\
+    import SamlApplicationSettings
 
 
 class SamlApplication(
-    OktaObject,
     Application
 ):
+    """
+    A class for SamlApplication objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.settings = config["settings"]\
-                if "settings" in config else None
+            if "settings" in config:
+                if isinstance(config["settings"],
+                              SamlApplicationSettings):
+                    self.settings = config["settings"]
+                else:
+                    self.settings = SamlApplicationSettings(
+                        config["settings"]
+                    )
+            else:
+                self.settings = None
         else:
             self.settings = None
+
+    def request_format(self):
+        return {
+            "settings": self.settings
+        }

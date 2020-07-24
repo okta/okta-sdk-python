@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class Duration(
     OktaObject
 ):
+    """
+    A class for Duration objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.number = config["number"]\
@@ -32,3 +36,9 @@ class Duration(
         else:
             self.number = None
             self.unit = None
+
+    def request_format(self):
+        return {
+            "number": self.number,
+            "unit": self.unit
+        }

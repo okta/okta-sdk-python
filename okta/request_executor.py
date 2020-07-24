@@ -61,11 +61,13 @@ class RequestExecutor:
 
         self._http_client = HTTPClient({
             'requestTimeout': self._request_timeout,
-            'headers': self._default_headers
+            'headers': self._default_headers,
+            'proxy': self._config["client"]["proxy"] if "proxy"
+            in self._config["client"] else None
         })
 
     async def create_request(self, method: str, url: str, body: dict = None,
-                             headers: dict = {}):
+                             headers: dict = {}, oauth=False):
         """
         Creates request for request executor's HTTP client.
 
@@ -91,7 +93,7 @@ class RequestExecutor:
             url = self._config["client"]["orgUrl"] + url
 
         # OAuth
-        if self._authorization_mode == "PrivateKey":
+        if self._authorization_mode == "PrivateKey" and not oauth:
             # check if access token exists
             if self._cache.contains("OKTA_ACCESS_TOKEN"):
                 access_token = self._cache.get("OKTA_ACCESS_TOKEN")
@@ -118,7 +120,7 @@ class RequestExecutor:
 
         return (request, None)
 
-    async def execute(self, request):
+    async def execute(self, request, response_type=None):
         """
         This function is the high level request execution method. Performs the
         API call and returns a formatted response object
@@ -141,7 +143,8 @@ class RequestExecutor:
             return (None, error)
 
         return (
-            OktaAPIResponse(self, request, response, response_body),
+            OktaAPIResponse(self, request, response,
+                            response_body, response_type),
             None
         )
 

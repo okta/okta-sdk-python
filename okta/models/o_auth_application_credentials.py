@@ -17,18 +17,35 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
 from okta.models.application_credentials\
     import ApplicationCredentials
+from okta.models.application_credentials_o_auth_client\
+    import ApplicationCredentialsOAuthClient
 
 
 class OAuthApplicationCredentials(
-    OktaObject,
     ApplicationCredentials
 ):
+    """
+    A class for OAuthApplicationCredentials objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.oauth_client = config["oauthClient"]\
-                if "oauthClient" in config else None
+            if "oauthClient" in config:
+                if isinstance(config["oauthClient"],
+                              ApplicationCredentialsOAuthClient):
+                    self.oauth_client = config["oauthClient"]
+                else:
+                    self.oauth_client = ApplicationCredentialsOAuthClient(
+                        config["oauthClient"]
+                    )
+            else:
+                self.oauth_client = None
         else:
             self.oauth_client = None
+
+    def request_format(self):
+        return {
+            "oauthClient": self.oauth_client
+        }

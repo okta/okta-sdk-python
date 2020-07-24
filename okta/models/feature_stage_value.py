@@ -24,5 +24,9 @@ class FeatureStageValue(
     str,
     Enum
 ):
+    """
+    An enumeration class for FeatureStageValue.
+    """
+
     EA = "EA"
     BETA = "BETA"

@@ -24,5 +24,9 @@ class FeatureStageState(
     str,
     Enum
 ):
+    """
+    An enumeration class for FeatureStageState.
+    """
+
     OPEN = "OPEN"
     CLOSED = "CLOSED"

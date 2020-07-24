@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class SecurityQuestion(
     OktaObject
 ):
+    """
+    A class for SecurityQuestion objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.answer = config["answer"]\
@@ -35,3 +39,10 @@ class SecurityQuestion(
             self.answer = None
             self.question = None
             self.question_text = None
+
+    def request_format(self):
+        return {
+            "answer": self.answer,
+            "question": self.question,
+            "questionText": self.question_text
+        }

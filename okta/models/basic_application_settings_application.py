@@ -17,21 +17,29 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
 from okta.models.application_settings_application\
     import ApplicationSettingsApplication
 
 
 class BasicApplicationSettingsApplication(
-    OktaObject,
     ApplicationSettingsApplication
 ):
+    """
+    A class for BasicApplicationSettingsApplication objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.auth_url = config["authURL"]\
-                if "authURL" in config else None
+            self.auth_url = config["authUrl"]\
+                if "authUrl" in config else None
             self.url = config["url"]\
                 if "url" in config else None
         else:
             self.auth_url = None
             self.url = None
+
+    def request_format(self):
+        return {
+            "authURL": self.auth_url,
+            "url": self.url
+        }

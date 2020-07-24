@@ -24,8 +24,12 @@ class OAuthGrantType(
     str,
     Enum
 ):
-    authorization_code = "authorization_code"
-    implicit = "implicit"
-    password = "password"
-    refresh_token = "refresh_token"
-    client_credentials = "client_credentials"
+    """
+    An enumeration class for OAuthGrantType.
+    """
+
+    AUTHORIZATION_CODE = "authorization_code"
+    IMPLICIT = "implicit"
+    PASSWORD = "password"
+    REFRESH_TOKEN = "refresh_token"
+    CLIENT_CREDENTIALS = "client_credentials"

@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class LifecycleExpirationPolicyRuleCondition(
     OktaObject
 ):
+    """
+    A class for LifecycleExpirationPolicyRuleCondition objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.lifecycle_status = config["lifecycleStatus"]\
@@ -35,3 +39,10 @@ class LifecycleExpirationPolicyRuleCondition(
             self.lifecycle_status = None
             self.number = None
             self.unit = None
+
+    def request_format(self):
+        return {
+            "lifecycleStatus": self.lifecycle_status,
+            "number": self.number,
+            "unit": self.unit
+        }

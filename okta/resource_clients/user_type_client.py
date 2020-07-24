@@ -17,31 +17,32 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from urllib.parse import urlencode
+from okta.models.user_type\
+    import UserType
 from okta.utils import format_url
-from okta.models.feature\
-    import Feature
 
 
-class FeatureClient():
+class UserTypeClient():
     """
-    A Client object for the Feature resource.
+    A Client object for the UserType resource.
     """
+
     def __init__(self):
         self._base_url = ""
 
-    async def list_features(
+    async def list_user_types(
             self
     ):
         """
+        Fetches all User Types in your org
         Args:
         Returns:
-            list: Collection of Feature instances.
+            list: Collection of UserType instances.
         """
         http_method = "get".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/features
+            /api/v1/meta/types/user
             """)
 
         body = {}
@@ -55,7 +56,7 @@ class FeatureClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, UserType)
 
         if error:
             return (None, None, error)
@@ -63,148 +64,106 @@ class FeatureClient():
         try:
             result = []
             for item in response.get_body():
-                result.append(Feature(item))
+                result.append(UserType(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def get_feature(
-            self, featureId
+    async def create_user_type(
+            self, user_type
     ):
         """
+        Creates a new User Type. A default User Type is automat
+        ically created along with your org, and you may add ano
+        ther 9 User Types for a maximum of 10.
         Args:
-            feature_id {str}
+            {user_type}
         Returns:
-            Feature
-        """
-        http_method = "get".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/features/{featureId}
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = Feature(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def list_feature_dependencies(
-            self, featureId
-    ):
-        """
-        Args:
-            feature_id {str}
-        Returns:
-            list: Collection of Feature instances.
-        """
-        http_method = "get".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/features/{featureId}/dependencies
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = []
-            for item in response.get_body():
-                result.append(Feature(item))
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def list_feature_dependents(
-            self, featureId
-    ):
-        """
-        Args:
-            feature_id {str}
-        Returns:
-            list: Collection of Feature instances.
-        """
-        http_method = "get".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/features/{featureId}/dependents
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = []
-            for item in response.get_body():
-                result.append(Feature(item))
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def update_feature_lifecycle(
-            self, featureId, lifecycle, query_params={}
-    ):
-        """
-        Args:
-            feature_id {str}
-            lifecycle {str}
-            query_params {dict}: Map of query parameters for request
-            [query_params.mode] {str}
-        Returns:
-            Feature
+            UserType
         """
         http_method = "post".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/features/{featureId}/{lifecycle}
+            /api/v1/meta/types/user
             """)
-        if query_params:
-            encoded_query_params = urlencode(query_params)
-            api_url += f"/?{encoded_query_params}"
+
+        body = user_type.as_dict()
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, UserType)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = UserType(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def delete_user_type(
+            self, typeId
+    ):
+        """
+        Deletes a User Type permanently. This operation is not
+        permitted for the default type, nor for any User Type t
+        hat has existing users
+        Args:
+            type_id {str}
+        """
+        http_method = "delete".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/meta/types/user/{typeId}
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (None, error)
+
+        return (response, None)
+
+    async def get_user_type(
+            self, typeId
+    ):
+        """
+        Fetches a User Type by ID. The special identifier `defa
+        ult` may be used to fetch the default User Type.
+        Args:
+            type_id {str}
+        Returns:
+            UserType
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/meta/types/user/{typeId}
+            """)
 
         body = {}
         headers = {}
@@ -217,15 +176,103 @@ class FeatureClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, UserType)
 
         if error:
             return (None, None, error)
 
         try:
-            result = Feature(
+            result = UserType(
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
+        return (result, response, None)
+
+    async def update_user_type(
+            self, typeId, user_type
+    ):
+        """
+        Updates an existing User Type
+        Args:
+            type_id {str}
+            {user_type}
+        Returns:
+            UserType
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/meta/types/user/{typeId}
+            """)
+
+        body = user_type.as_dict()
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, UserType)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = UserType(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def replace_user_type(
+            self, typeId, user_type
+    ):
+        """
+        Replace an existing User Type
+        Args:
+            type_id {str}
+            {user_type}
+        Returns:
+            UserType
+        """
+        http_method = "put".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/meta/types/user/{typeId}
+            """)
+
+        body = user_type.as_dict()
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, UserType)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = UserType(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, None, error)
         return (result, response, None)

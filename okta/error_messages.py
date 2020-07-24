@@ -66,3 +66,16 @@ ERROR_MESSAGE_SCOPES_PK_MISSING = (
 ERROR_MESSAGE_429_MISSING_DATE_X_RESET = (
     "429 response must have the 'X-Rate-Limit-Reset' and 'Date' headers"
 )
+
+ERROR_MESSAGE_PROXY_MISSING_HOST = (
+    "Please add a host URL to your proxy configuration."
+)
+
+ERROR_MESSAGE_PROXY_MISSING_AUTH = (
+    "Proxy configuration must include BOTH your username and password "
+    "if authentication is required"
+)
+
+ERROR_MESSAGE_PROXY_INVALID_PORT = (
+    "Proxy port number must be a number, and between 1 and 65535 (inclusive)"
+)

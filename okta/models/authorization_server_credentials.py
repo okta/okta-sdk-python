@@ -18,14 +18,33 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.authorization_server_credentials_signing_config\
+    import AuthorizationServerCredentialsSigningConfig
 
 
 class AuthorizationServerCredentials(
     OktaObject
 ):
+    """
+    A class for AuthorizationServerCredentials objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.signing = config["signing"]\
-                if "signing" in config else None
+            if "signing" in config:
+                if isinstance(config["signing"],
+                              AuthorizationServerCredentialsSigningConfig):
+                    self.signing = config["signing"]
+                else:
+                    self.signing = AuthorizationServerCredentialsSigningConfig(
+                        config["signing"]
+                    )
+            else:
+                self.signing = None
         else:
             self.signing = None
+
+    def request_format(self):
+        return {
+            "signing": self.signing
+        }

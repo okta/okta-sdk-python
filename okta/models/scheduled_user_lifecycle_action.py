@@ -23,9 +23,18 @@ from okta.okta_object import OktaObject
 class ScheduledUserLifecycleAction(
     OktaObject
 ):
+    """
+    A class for ScheduledUserLifecycleAction objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.status = config["status"]\
                 if "status" in config else None
         else:
             self.status = None
+
+    def request_format(self):
+        return {
+            "status": self.status
+        }

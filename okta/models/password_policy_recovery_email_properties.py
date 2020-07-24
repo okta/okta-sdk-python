@@ -18,14 +18,33 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.password_policy_recovery_email_recovery_token\
+    import PasswordPolicyRecoveryEmailRecoveryToken
 
 
 class PasswordPolicyRecoveryEmailProperties(
     OktaObject
 ):
+    """
+    A class for PasswordPolicyRecoveryEmailProperties objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.recovery_token = config["recoveryToken"]\
-                if "recoveryToken" in config else None
+            if "recoveryToken" in config:
+                if isinstance(config["recoveryToken"],
+                              PasswordPolicyRecoveryEmailRecoveryToken):
+                    self.recovery_token = config["recoveryToken"]
+                else:
+                    self.recovery_token = PasswordPolicyRecoveryEmailRecoveryToken(
+                        config["recoveryToken"]
+                    )
+            else:
+                self.recovery_token = None
         else:
             self.recovery_token = None
+
+    def request_format(self):
+        return {
+            "recoveryToken": self.recovery_token
+        }

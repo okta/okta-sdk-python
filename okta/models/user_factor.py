@@ -18,31 +18,75 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.factor_type\
+    import FactorType
+from okta.models.factor_provider\
+    import FactorProvider
+from okta.models.factor_status\
+    import FactorStatus
+from okta.models.verify_factor_request\
+    import VerifyFactorRequest
 
 
 class UserFactor(
     OktaObject
 ):
+    """
+    A class for UserFactor objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.embedded = config["_embedded"]\
-                if "_embedded" in config else None
-            self.links = config["_links"]\
-                if "_links" in config else None
+            self.embedded = config["embedded"]\
+                if "embedded" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
             self.created = config["created"]\
                 if "created" in config else None
-            self.factor_type = config["factorType"]\
-                if "factorType" in config else None
+            if "factorType" in config:
+                if isinstance(config["factorType"],
+                              FactorType):
+                    self.factor_type = config["factorType"]
+                else:
+                    self.factor_type = FactorType(
+                        config["factorType"]
+                    )
+            else:
+                self.factor_type = None
             self.id = config["id"]\
                 if "id" in config else None
             self.last_updated = config["lastUpdated"]\
                 if "lastUpdated" in config else None
-            self.provider = config["provider"]\
-                if "provider" in config else None
-            self.status = config["status"]\
-                if "status" in config else None
-            self.verify = config["verify"]\
-                if "verify" in config else None
+            if "provider" in config:
+                if isinstance(config["provider"],
+                              FactorProvider):
+                    self.provider = config["provider"]
+                else:
+                    self.provider = FactorProvider(
+                        config["provider"]
+                    )
+            else:
+                self.provider = None
+            if "status" in config:
+                if isinstance(config["status"],
+                              FactorStatus):
+                    self.status = config["status"]
+                else:
+                    self.status = FactorStatus(
+                        config["status"]
+                    )
+            else:
+                self.status = None
+            if "verify" in config:
+                if isinstance(config["verify"],
+                              VerifyFactorRequest):
+                    self.verify = config["verify"]
+                else:
+                    self.verify = VerifyFactorRequest(
+                        config["verify"]
+                    )
+            else:
+                self.verify = None
         else:
             self.embedded = None
             self.links = None
@@ -53,3 +97,16 @@ class UserFactor(
             self.provider = None
             self.status = None
             self.verify = None
+
+    def request_format(self):
+        return {
+            "_embedded": self.embedded,
+            "_links": self.links,
+            "created": self.created,
+            "factorType": self.factor_type,
+            "id": self.id,
+            "lastUpdated": self.last_updated,
+            "provider": self.provider,
+            "status": self.status,
+            "verify": self.verify
+        }

@@ -18,48 +18,1001 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from urllib.parse import urlencode
+from okta.models.authorization_server\
+    import AuthorizationServer
+from okta.models.o_auth_2_claim\
+    import OAuth2Claim
+from okta.models.o_auth_2_client\
+    import OAuth2Client
+from okta.models.o_auth_2_refresh_token\
+    import OAuth2RefreshToken
+from okta.models.json_web_key\
+    import JsonWebKey
+from okta.models.policy\
+    import Policy
+from okta.models.o_auth_2_scope\
+    import OAuth2Scope
 from okta.utils import format_url
-from okta.models.group\
-    import Group
-from okta.models.group_rule\
-    import GroupRule
-from okta.models.application\
-    import Application
-from okta.models.role\
-    import Role
-from okta.models.catalog_application\
-    import CatalogApplication
-from okta.models.user\
-    import User
 
 
-class GroupClient():
+class AuthorizationServerClient():
     """
-    A Client object for the Group resource.
+    A Client object for the AuthorizationServer resource.
     """
+
     def __init__(self):
         self._base_url = ""
 
-    async def list_groups(
+    async def list_authorization_servers(
             self, query_params={}
     ):
         """
-        Enumerates groups in your organization with pagination.
-        A subset of groups can be returned that match a suppor
-        ted filter expression or query.
         Args:
             query_params {dict}: Map of query parameters for request
             [query_params.q] {str}
+            [query_params.limit] {str}
+            [query_params.after] {str}
+        Returns:
+            list: Collection of AuthorizationServer instances.
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/authorizationServers
+            """)
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, AuthorizationServer)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = []
+            for item in response.get_body():
+                result.append(AuthorizationServer(item))
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def create_authorization_server(
+            self, authorization_server
+    ):
+        """
+        Args:
+            {authorization_server}
+        Returns:
+            AuthorizationServer
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/authorizationServers
+            """)
+
+        body = authorization_server.as_dict()
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, AuthorizationServer)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = AuthorizationServer(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def delete_authorization_server(
+            self, authServerId
+    ):
+        """
+        Args:
+            auth_server_id {str}
+        """
+        http_method = "delete".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/authorizationServers/{authServerId}
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (None, error)
+
+        return (response, None)
+
+    async def get_authorization_server(
+            self, authServerId
+    ):
+        """
+        Args:
+            auth_server_id {str}
+        Returns:
+            AuthorizationServer
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/authorizationServers/{authServerId}
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, AuthorizationServer)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = AuthorizationServer(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def update_authorization_server(
+            self, authServerId, authorization_server
+    ):
+        """
+        Args:
+            auth_server_id {str}
+            {authorization_server}
+        Returns:
+            AuthorizationServer
+        """
+        http_method = "put".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/authorizationServers/{authServerId}
+            """)
+
+        body = authorization_server.as_dict()
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, AuthorizationServer)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = AuthorizationServer(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def list_o_auth_2_claims(
+            self, authServerId
+    ):
+        """
+        Args:
+            auth_server_id {str}
+        Returns:
+            list: Collection of OAuth2Claim instances.
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/authorizationServers/{authServerId}/claims
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, OAuth2Claim)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = []
+            for item in response.get_body():
+                result.append(OAuth2Claim(item))
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def create_o_auth_2_claim(
+            self, authServerId, o_auth_2_claim
+    ):
+        """
+        Args:
+            auth_server_id {str}
+            {o_auth_2_claim}
+        Returns:
+            OAuth2Claim
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/authorizationServers/{authServerId}/claims
+            """)
+
+        body = o_auth_2_claim.as_dict()
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, OAuth2Claim)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = OAuth2Claim(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def delete_o_auth_2_claim(
+            self, authServerId, claimId
+    ):
+        """
+        Args:
+            auth_server_id {str}
+            claim_id {str}
+        """
+        http_method = "delete".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/authorizationServers/{authServerId}/claims
+                /{claimId}
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (None, error)
+
+        return (response, None)
+
+    async def get_o_auth_2_claim(
+            self, authServerId, claimId
+    ):
+        """
+        Args:
+            auth_server_id {str}
+            claim_id {str}
+        Returns:
+            OAuth2Claim
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/authorizationServers/{authServerId}/claims
+                /{claimId}
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, OAuth2Claim)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = OAuth2Claim(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def update_o_auth_2_claim(
+            self, authServerId, claimId, o_auth_2_claim
+    ):
+        """
+        Args:
+            auth_server_id {str}
+            claim_id {str}
+            {o_auth_2_claim}
+        Returns:
+            OAuth2Claim
+        """
+        http_method = "put".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/authorizationServers/{authServerId}/claims
+                /{claimId}
+            """)
+
+        body = o_auth_2_claim.as_dict()
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, OAuth2Claim)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = OAuth2Claim(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def list_o_auth_2_clients_for_authorization_server(
+            self, authServerId
+    ):
+        """
+        Args:
+            auth_server_id {str}
+        Returns:
+            list: Collection of OAuth2Client instances.
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/authorizationServers/{authServerId}/clients
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, OAuth2Client)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = []
+            for item in response.get_body():
+                result.append(OAuth2Client(item))
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def revoke_refresh_tokens_for_authorization_server_and_client(
+            self, authServerId, clientId
+    ):
+        """
+        Args:
+            auth_server_id {str}
+            client_id {str}
+        """
+        http_method = "delete".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/authorizationServers/{authServerId}/clients
+                /{clientId}/tokens
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (None, error)
+
+        return (response, None)
+
+    async def list_refresh_tokens_for_authorization_server_and_client(
+            self, authServerId, clientId, query_params={}
+    ):
+        """
+        Args:
+            auth_server_id {str}
+            client_id {str}
+            query_params {dict}: Map of query parameters for request
+            [query_params.expand] {str}
+            [query_params.after] {str}
+            [query_params.limit] {str}
+        Returns:
+            list: Collection of OAuth2RefreshToken instances.
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/authorizationServers/{authServerId}/clients
+                /{clientId}/tokens
+            """)
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, OAuth2RefreshToken)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = []
+            for item in response.get_body():
+                result.append(OAuth2RefreshToken(item))
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def revoke_refresh_token_for_authorization_server_and_client(
+            self, authServerId, clientId, tokenId
+    ):
+        """
+        Args:
+            auth_server_id {str}
+            client_id {str}
+            token_id {str}
+        """
+        http_method = "delete".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/authorizationServers/{authServerId}/clients
+                /{clientId}/tokens/{tokenId}
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (None, error)
+
+        return (response, None)
+
+    async def get_refresh_token_for_authorization_server_and_client(
+            self, authServerId, clientId, tokenId, query_params={}
+    ):
+        """
+        Args:
+            auth_server_id {str}
+            client_id {str}
+            token_id {str}
+            query_params {dict}: Map of query parameters for request
+            [query_params.expand] {str}
+        Returns:
+            OAuth2RefreshToken
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/authorizationServers/{authServerId}/clients
+                /{clientId}/tokens/{tokenId}
+            """)
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, OAuth2RefreshToken)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = OAuth2RefreshToken(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def list_authorization_server_keys(
+            self, authServerId
+    ):
+        """
+        Args:
+            auth_server_id {str}
+        Returns:
+            list: Collection of JsonWebKey instances.
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/authorizationServers/{authServerId}
+                /credentials/keys
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, JsonWebKey)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = []
+            for item in response.get_body():
+                result.append(JsonWebKey(item))
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def rotate_authorization_server_keys(
+            self, authServerId, jwk_use
+    ):
+        """
+        Args:
+            auth_server_id {str}
+        Returns:
+            list: Collection of JsonWebKey instances.
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/authorizationServers/{authServerId}
+                /credentials/lifecycle/keyRotate
+            """)
+
+        body = jwk_use.as_dict()
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, JsonWebKey)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = []
+            for item in response.get_body():
+                result.append(JsonWebKey(item))
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def activate_authorization_server(
+            self, authServerId
+    ):
+        """
+        Args:
+            auth_server_id {str}
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/authorizationServers/{authServerId}
+                /lifecycle/activate
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (None, error)
+
+        return (response, None)
+
+    async def deactivate_authorization_server(
+            self, authServerId
+    ):
+        """
+        Args:
+            auth_server_id {str}
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/authorizationServers/{authServerId}
+                /lifecycle/deactivate
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (None, error)
+
+        return (response, None)
+
+    async def list_authorization_server_policies(
+            self, authServerId
+    ):
+        """
+        Args:
+            auth_server_id {str}
+        Returns:
+            list: Collection of Policy instances.
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/authorizationServers/{authServerId}
+                /policies
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Policy)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = []
+            for item in response.get_body():
+                result.append(Policy(item))
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def create_authorization_server_policy(
+            self, authServerId, policy
+    ):
+        """
+        Args:
+            auth_server_id {str}
+            {policy}
+        Returns:
+            Policy
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/authorizationServers/{authServerId}
+                /policies
+            """)
+
+        body = policy.as_dict()
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Policy)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = Policy(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def delete_authorization_server_policy(
+            self, authServerId, policyId
+    ):
+        """
+        Args:
+            auth_server_id {str}
+            policy_id {str}
+        """
+        http_method = "delete".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/authorizationServers/{authServerId}
+                /policies/{policyId}
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (None, error)
+
+        return (response, None)
+
+    async def get_authorization_server_policy(
+            self, authServerId, policyId
+    ):
+        """
+        Args:
+            auth_server_id {str}
+            policy_id {str}
+        Returns:
+            Policy
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/authorizationServers/{authServerId}
+                /policies/{policyId}
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Policy)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = Policy(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def update_authorization_server_policy(
+            self, authServerId, policyId, policy
+    ):
+        """
+        Args:
+            auth_server_id {str}
+            policy_id {str}
+            {policy}
+        Returns:
+            Policy
+        """
+        http_method = "put".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/authorizationServers/{authServerId}
+                /policies/{policyId}
+            """)
+
+        body = policy.as_dict()
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Policy)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = Policy(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def list_o_auth_2_scopes(
+            self, authServerId, query_params={}
+    ):
+        """
+        Args:
+            auth_server_id {str}
+            query_params {dict}: Map of query parameters for request
+            [query_params.q] {str}
             [query_params.filter] {str}
-            [query_params.after] {str}
+            [query_params.cursor] {str}
             [query_params.limit] {str}
         Returns:
-            list: Collection of Group instances.
+            list: Collection of OAuth2Scope instances.
         """
         http_method = "get".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/groups
+            /api/v1/authorizationServers/{authServerId}/scopes
             """)
         if query_params:
             encoded_query_params = urlencode(query_params)
@@ -76,7 +1029,7 @@ class GroupClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2Scope)
 
         if error:
             return (None, None, error)
@@ -84,29 +1037,28 @@ class GroupClient():
         try:
             result = []
             for item in response.get_body():
-                result.append(Group(item))
+                result.append(OAuth2Scope(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def create_group(
-            self, group
+    async def create_o_auth_2_scope(
+            self, authServerId, o_auth_2_scope
     ):
         """
-        Adds a new group with `OKTA_GROUP` type to your organiz
-        ation.
         Args:
-            {group}
+            auth_server_id {str}
+            {o_auth_2_scope}
         Returns:
-            Group
+            OAuth2Scope
         """
         http_method = "post".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/groups
+            /api/v1/authorizationServers/{authServerId}/scopes
             """)
 
-        body = group.as_dict()
+        body = o_auth_2_scope.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -120,41 +1072,68 @@ class GroupClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2Scope)
 
         if error:
             return (None, None, error)
 
         try:
-            result = Group(
+            result = OAuth2Scope(
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def list_group_rules(
-            self, query_params={}
+    async def delete_o_auth_2_scope(
+            self, authServerId, scopeId
     ):
         """
-        Lists all group rules for your organization.
         Args:
-            query_params {dict}: Map of query parameters for request
-            [query_params.limit] {str}
-            [query_params.after] {str}
-            [query_params.search] {str}
-            [query_params.expand] {str}
+            auth_server_id {str}
+            scope_id {str}
+        """
+        http_method = "delete".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/authorizationServers/{authServerId}/scopes
+                /{scopeId}
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (None, error)
+
+        return (response, None)
+
+    async def get_o_auth_2_scope(
+            self, authServerId, scopeId
+    ):
+        """
+        Args:
+            auth_server_id {str}
+            scope_id {str}
         Returns:
-            list: Collection of GroupRule instances.
+            OAuth2Scope
         """
         http_method = "get".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/groups/rules
+            /api/v1/authorizationServers/{authServerId}/scopes
+                /{scopeId}
             """)
-        if query_params:
-            encoded_query_params = urlencode(query_params)
-            api_url += f"/?{encoded_query_params}"
 
         body = {}
         headers = {}
@@ -167,37 +1146,38 @@ class GroupClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2Scope)
 
         if error:
             return (None, None, error)
 
         try:
-            result = []
-            for item in response.get_body():
-                result.append(GroupRule(item))
+            result = OAuth2Scope(
+                response.get_body()
+            )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def create_group_rule(
-            self, group_rule
+    async def update_o_auth_2_scope(
+            self, authServerId, scopeId, o_auth_2_scope
     ):
         """
-        Creates a group rule to dynamically add users to the sp
-        ecified group if they match the condition
         Args:
-            {group_rule}
+            auth_server_id {str}
+            scope_id {str}
+            {o_auth_2_scope}
         Returns:
-            GroupRule
+            OAuth2Scope
         """
-        http_method = "post".upper()
+        http_method = "put".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/groups/rules
+            /api/v1/authorizationServers/{authServerId}/scopes
+                /{scopeId}
             """)
 
-        body = group_rule.as_dict()
+        body = o_auth_2_scope.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -211,963 +1191,15 @@ class GroupClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2Scope)
 
         if error:
             return (None, None, error)
 
         try:
-            result = GroupRule(
+            result = OAuth2Scope(
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
-
-    async def delete_group_rule(
-            self, ruleId
-    ):
-        """
-        Removes a specific group rule by id from your organizat
-        ion
-        Args:
-            rule_id {str}
-        """
-        http_method = "delete".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/groups/rules/{ruleId}
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, error)
-
-        return (response, None)
-
-    async def get_group_rule(
-            self, ruleId, query_params={}
-    ):
-        """
-        Fetches a specific group rule by id from your organizat
-        ion
-        Args:
-            rule_id {str}
-            query_params {dict}: Map of query parameters for request
-            [query_params.expand] {str}
-        Returns:
-            GroupRule
-        """
-        http_method = "get".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/groups/rules/{ruleId}
-            """)
-        if query_params:
-            encoded_query_params = urlencode(query_params)
-            api_url += f"/?{encoded_query_params}"
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = GroupRule(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def update_group_rule(
-            self, ruleId, group_rule
-    ):
-        """
-        Updates a group rule. Only `INACTIVE` rules can be upda
-        ted.
-        Args:
-            rule_id {str}
-            {group_rule}
-        Returns:
-            GroupRule
-        """
-        http_method = "put".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/groups/rules/{ruleId}
-            """)
-
-        body = group_rule.as_dict()
-        headers = {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        }
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = GroupRule(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def activate_group_rule(
-            self, ruleId
-    ):
-        """
-        Activates a specific group rule by id from your organiz
-        ation
-        Args:
-            rule_id {str}
-        """
-        http_method = "post".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/groups/rules/{ruleId}/lifecycle/activate
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, error)
-
-        return (response, None)
-
-    async def deactivate_group_rule(
-            self, ruleId
-    ):
-        """
-        Deactivates a specific group rule by id from your organ
-        ization
-        Args:
-            rule_id {str}
-        """
-        http_method = "post".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/groups/rules/{ruleId}/lifecycle/deactivate
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, error)
-
-        return (response, None)
-
-    async def delete_group(
-            self, groupId
-    ):
-        """
-        Removes a group with `OKTA_GROUP` type from your organi
-        zation.
-        Args:
-            group_id {str}
-        """
-        http_method = "delete".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/groups/{groupId}
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, error)
-
-        return (response, None)
-
-    async def get_group(
-            self, groupId
-    ):
-        """
-        Lists all group rules for your organization.
-        Args:
-            group_id {str}
-        Returns:
-            Group
-        """
-        http_method = "get".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/groups/{groupId}
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = Group(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def update_group(
-            self, groupId, group
-    ):
-        """
-        Updates the profile for a group with `OKTA_GROUP` type
-        from your organization.
-        Args:
-            group_id {str}
-            {group}
-        Returns:
-            Group
-        """
-        http_method = "put".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/groups/{groupId}
-            """)
-
-        body = group.as_dict()
-        headers = {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        }
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = Group(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def list_assigned_applications_for_group(
-            self, groupId, query_params={}
-    ):
-        """
-        Enumerates all applications that are assigned to a grou
-        p.
-        Args:
-            group_id {str}
-            query_params {dict}: Map of query parameters for request
-            [query_params.after] {str}
-            [query_params.limit] {str}
-        Returns:
-            list: Collection of Application instances.
-        """
-        http_method = "get".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/groups/{groupId}/apps
-            """)
-        if query_params:
-            encoded_query_params = urlencode(query_params)
-            api_url += f"/?{encoded_query_params}"
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = []
-            for item in response.get_body():
-                result.append(Application(item))
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def list_group_assigned_roles(
-            self, groupId, query_params={}
-    ):
-        """
-        Args:
-            group_id {str}
-            query_params {dict}: Map of query parameters for request
-            [query_params.expand] {str}
-        Returns:
-            list: Collection of Role instances.
-        """
-        http_method = "get".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/groups/{groupId}/roles
-            """)
-        if query_params:
-            encoded_query_params = urlencode(query_params)
-            api_url += f"/?{encoded_query_params}"
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = []
-            for item in response.get_body():
-                result.append(Role(item))
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def assign_role_to_group(
-            self, groupId, assign_role_request, query_params={}
-    ):
-        """
-        Assigns a Role to a Group
-        Args:
-            group_id {str}
-            {assign_role_request}
-            query_params {dict}: Map of query parameters for request
-            [query_params.disableNotifications] {str}
-        Returns:
-            Role
-        """
-        http_method = "post".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/groups/{groupId}/roles
-            """)
-        if query_params:
-            encoded_query_params = urlencode(query_params)
-            api_url += f"/?{encoded_query_params}"
-
-        body = assign_role_request.as_dict()
-        headers = {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        }
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = Role(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def remove_role_from_group(
-            self, groupId, roleId
-    ):
-        """
-        Unassigns a Role from a Group
-        Args:
-            group_id {str}
-            role_id {str}
-        """
-        http_method = "delete".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/groups/{groupId}/roles/{roleId}
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, error)
-
-        return (response, None)
-
-    async def get_role(
-            self, groupId, roleId
-    ):
-        """
-        Args:
-            group_id {str}
-            role_id {str}
-        Returns:
-            Role
-        """
-        http_method = "get".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/groups/{groupId}/roles/{roleId}
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = Role(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def list_app_targets_for_application_admin_role_for_group(
-            self, groupId, roleId, query_params={}
-    ):
-        """
-        Lists all App targets for an `APP_ADMIN` Role assigned
-        to a Group. This methods return list may include full A
-        pplications or Instances. The response for an instance
-        will have an `ID` value, while Application will not hav
-        e an ID.
-        Args:
-            group_id {str}
-            role_id {str}
-            query_params {dict}: Map of query parameters for request
-            [query_params.after] {str}
-            [query_params.limit] {str}
-        Returns:
-            list: Collection of CatalogApplication instances.
-        """
-        http_method = "get".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/groups/{groupId}/roles/{roleId}/targets
-                catalog/apps
-            """)
-        if query_params:
-            encoded_query_params = urlencode(query_params)
-            api_url += f"/?{encoded_query_params}"
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = []
-            for item in response.get_body():
-                result.append(CatalogApplication(item))
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def remove_app_target_from_application_admin_role_given_to_group(
-            self, groupId, roleId, appName
-    ):
-        """
-        Args:
-            group_id {str}
-            role_id {str}
-            app_name {str}
-        """
-        http_method = "delete".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/groups/{groupId}/roles/{roleId}/targets
-                catalog/apps/{appName}
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, error)
-
-        return (response, None)
-
-    async def add_application_target_to_admin_role_given_to_group(
-            self, groupId, roleId, appName
-    ):
-        """
-        Args:
-            group_id {str}
-            role_id {str}
-            app_name {str}
-        """
-        http_method = "put".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/groups/{groupId}/roles/{roleId}/targets
-                catalog/apps/{appName}
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, error)
-
-        return (response, None)
-
-    async def remove_app_target_from_admin_role_given_to_group(
-            self, groupId, roleId, appName, applicationId
-    ):
-        """
-        Remove App Instance Target to App Administrator Role gi
-        ven to a Group
-        Args:
-            group_id {str}
-            role_id {str}
-            app_name {str}
-            application_id {str}
-        """
-        http_method = "delete".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/groups/{groupId}/roles/{roleId}/targets
-                catalog/apps/{appName}/{applicationId}
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, error)
-
-        return (response, None)
-
-    async def add_app_instance_target_to_app_admin_role_given_to_group(
-            self, groupId, roleId, appName, applicationId
-    ):
-        """
-        Add App Instance Target to App Administrator Role given
-        to a Group
-        Args:
-            group_id {str}
-            role_id {str}
-            app_name {str}
-            application_id {str}
-        """
-        http_method = "put".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/groups/{groupId}/roles/{roleId}/targets
-                catalog/apps/{appName}/{applicationId}
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, error)
-
-        return (response, None)
-
-    async def list_group_targets_for_group_role(
-            self, groupId, roleId, query_params={}
-    ):
-        """
-        Args:
-            group_id {str}
-            role_id {str}
-            query_params {dict}: Map of query parameters for request
-            [query_params.after] {str}
-            [query_params.limit] {str}
-        Returns:
-            list: Collection of Group instances.
-        """
-        http_method = "get".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/groups/{groupId}/roles/{roleId}/targets
-                groups
-            """)
-        if query_params:
-            encoded_query_params = urlencode(query_params)
-            api_url += f"/?{encoded_query_params}"
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = []
-            for item in response.get_body():
-                result.append(Group(item))
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def remove_group_target_from_group_admin_role_given_to_group(
-            self, groupId, roleId, targetGroupId
-    ):
-        """
-        Method for
-        /api/v1/groups/{groupId}/roles/{roleId}/targets/groups/
-        {targetGroupId}
-        Args:
-            group_id {str}
-            role_id {str}
-            target_group_id {str}
-        """
-        http_method = "delete".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/groups/{groupId}/roles/{roleId}/targets
-                groups/{targetGroupId}
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, error)
-
-        return (response, None)
-
-    async def add_group_target_to_group_administrator_role_for_group(
-            self, groupId, roleId, targetGroupId
-    ):
-        """
-        Method for
-        /api/v1/groups/{groupId}/roles/{roleId}/targets/groups/
-        {targetGroupId}
-        Args:
-            group_id {str}
-            role_id {str}
-            target_group_id {str}
-        """
-        http_method = "put".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/groups/{groupId}/roles/{roleId}/targets
-                groups/{targetGroupId}
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, error)
-
-        return (response, None)
-
-    async def list_group_users(
-            self, groupId, query_params={}
-    ):
-        """
-        Enumerates all users that are a member of a group.
-        Args:
-            group_id {str}
-            query_params {dict}: Map of query parameters for request
-            [query_params.after] {str}
-            [query_params.limit] {str}
-        Returns:
-            list: Collection of User instances.
-        """
-        http_method = "get".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/groups/{groupId}/users
-            """)
-        if query_params:
-            encoded_query_params = urlencode(query_params)
-            api_url += f"/?{encoded_query_params}"
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = []
-            for item in response.get_body():
-                result.append(User(item))
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def remove_user_from_group(
-            self, groupId, userId
-    ):
-        """
-        Removes a user from a group with 'OKTA_GROUP' type.
-        Args:
-            group_id {str}
-            user_id {str}
-        """
-        http_method = "delete".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/groups/{groupId}/users/{userId}
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, error)
-
-        return (response, None)
-
-    async def add_user_to_group(
-            self, groupId, userId
-    ):
-        """
-        Adds a user to a group with 'OKTA_GROUP' type.
-        Args:
-            group_id {str}
-            user_id {str}
-        """
-        http_method = "put".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/groups/{groupId}/users/{userId}
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, error)
-
-        return (response, None)

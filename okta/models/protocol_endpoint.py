@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class ProtocolEndpoint(
     OktaObject
 ):
+    """
+    A class for ProtocolEndpoint objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.binding = config["binding"]\
@@ -38,3 +42,11 @@ class ProtocolEndpoint(
             self.destination = None
             self.type = None
             self.url = None
+
+    def request_format(self):
+        return {
+            "binding": self.binding,
+            "destination": self.destination,
+            "type": self.type,
+            "url": self.url
+        }

@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class UserActivationToken(
     OktaObject
 ):
+    """
+    A class for UserActivationToken objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.activation_token = config["activationToken"]\
@@ -32,3 +36,9 @@ class UserActivationToken(
         else:
             self.activation_token = None
             self.activation_url = None
+
+    def request_format(self):
+        return {
+            "activationToken": self.activation_token,
+            "activationUrl": self.activation_url
+        }

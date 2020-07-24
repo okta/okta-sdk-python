@@ -1,6 +1,7 @@
 import aiohttp
 import asyncio
 import json
+import os
 import xmltodict
 from okta.errors.http_error import HTTPError
 from okta.errors.okta_api_error import OktaAPIError
@@ -17,8 +18,13 @@ class HTTPClient:
         self._default_headers = http_config["headers"]
         # Create timeout for all HTTP requests
         self._timeout = aiohttp.ClientTimeout(
-            total=http_config["requestTimeout"]
+            total=http_config["requestTimeout"] if "requestTimeout" in
+            http_config and http_config["requestTimeout"] > 0 else None
         )
+        if "proxy" in http_config:
+            self._proxy = self._setup_proxy(http_config["proxy"])
+        else:
+            self._proxy = None
 
     async def send_request(self, request):
         """
@@ -43,14 +49,15 @@ class HTTPClient:
                 method=request["method"],
                 url=request["url"],
                 headers=self._default_headers,
-                data={} if "data" not in request else request["data"],
-                timeout=self._timeout
+                json=request["data"] if "data" in request else {},
+                timeout=self._timeout,
+                proxy=self._proxy
             ) as response:
                 return (response.request_info,
                         response,
                         await response.text(),
                         None)
-        except (aiohttp.ClientError, asyncio.exceptions.TimeoutError) as error:
+        except (aiohttp.ClientError, asyncio.TimeoutError) as error:
             # Return error if arises
             return (None, None, None, error)
 
@@ -70,21 +77,23 @@ class HTTPClient:
         """
         # Retrieve dictionary repr and response status code
         if response_details.content_type == "application/xml":
-            dict_resp = xmltodict.parse(response_body)
+            formatted_response = xmltodict.parse(response_body)
+        elif response_details.content_type == "application/json":
+            formatted_response = json.loads(response_body)
         else:
-            dict_resp = json.loads(response_body)
+            formatted_response = response_body
 
         status_code = response_details.status
 
         # check if call was succesful
         if 200 <= status_code <= 299:
-            return (dict_resp, None)
+            return (formatted_response, None)
         else:
             # create errors
             try:
-                error = OktaAPIError(url, response_details, dict_resp)
+                error = OktaAPIError(url, response_details, formatted_response)
             except Exception:
-                error = HTTPError(url, response_details, dict_resp)
+                error = HTTPError(url, response_details, formatted_response)
             return (None, error)
 
     @staticmethod
@@ -92,3 +101,30 @@ class HTTPClient:
         with aiohttp.MultipartWriter("mixed") as mpwriter:
             mpwriter.append(data)
         return mpwriter
+
+    def _setup_proxy(self, proxy):
+        proxy_string = ""
+
+        if proxy is None:
+            # check if env vars contain proxies
+            if "HTTP_PROXY" in os.environ:
+                proxy_string = os.environ["HTTP_PROXY"]
+            if "HTTPS_PROXY" in os.environ:
+                proxy_string = os.environ["HTTPS_PROXY"]
+            return proxy_string if proxy_string != "" else None
+
+        host = proxy["host"]
+        port = int(proxy["port"]) if "port" in proxy else ""
+
+        # config has credentials
+        if "username" in proxy and "password" in proxy:
+            username = proxy["username"]
+            password = proxy["password"]
+            proxy_string = f"http://{username}:{password}@{host}"
+        else:
+            proxy_string = f"http://{host}"
+
+        if port:
+            proxy_string += f":{port}/"
+
+        return proxy_string if proxy_string != "" else None

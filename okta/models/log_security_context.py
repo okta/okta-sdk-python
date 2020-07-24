@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class LogSecurityContext(
     OktaObject
 ):
+    """
+    A class for LogSecurityContext objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.as_number = config["asNumber"]\
@@ -41,3 +45,12 @@ class LogSecurityContext(
             self.domain = None
             self.is_proxy = None
             self.isp = None
+
+    def request_format(self):
+        return {
+            "asNumber": self.as_number,
+            "asOrg": self.as_org,
+            "domain": self.domain,
+            "isProxy": self.is_proxy,
+            "isp": self.isp
+        }

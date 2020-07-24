@@ -23,9 +23,18 @@ from okta.okta_object import OktaObject
 class ContextPolicyRuleCondition(
     OktaObject
 ):
+    """
+    A class for ContextPolicyRuleCondition objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.expression = config["expression"]\
                 if "expression" in config else None
         else:
             self.expression = None
+
+    def request_format(self):
+        return {
+            "expression": self.expression
+        }

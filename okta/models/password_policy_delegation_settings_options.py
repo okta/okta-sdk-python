@@ -23,9 +23,18 @@ from okta.okta_object import OktaObject
 class PasswordPolicyDelegationSettingsOptions(
     OktaObject
 ):
+    """
+    A class for PasswordPolicyDelegationSettingsOptions objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.skip_unlock = config["skipUnlock"]\
                 if "skipUnlock" in config else None
         else:
             self.skip_unlock = None
+
+    def request_format(self):
+        return {
+            "skipUnlock": self.skip_unlock
+        }

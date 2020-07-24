@@ -18,17 +18,35 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.inline_hook_channel\
+    import InlineHookChannel
+from okta.models.inline_hook_status\
+    import InlineHookStatus
+from okta.models.inline_hook_type\
+    import InlineHookType
 
 
 class InlineHook(
     OktaObject
 ):
+    """
+    A class for InlineHook objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.links = config["_links"]\
-                if "_links" in config else None
-            self.channel = config["channel"]\
-                if "channel" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
+            if "channel" in config:
+                if isinstance(config["channel"],
+                              InlineHookChannel):
+                    self.channel = config["channel"]
+                else:
+                    self.channel = InlineHookChannel(
+                        config["channel"]
+                    )
+            else:
+                self.channel = None
             self.created = config["created"]\
                 if "created" in config else None
             self.id = config["id"]\
@@ -37,10 +55,26 @@ class InlineHook(
                 if "lastUpdated" in config else None
             self.name = config["name"]\
                 if "name" in config else None
-            self.status = config["status"]\
-                if "status" in config else None
-            self.type = config["type"]\
-                if "type" in config else None
+            if "status" in config:
+                if isinstance(config["status"],
+                              InlineHookStatus):
+                    self.status = config["status"]
+                else:
+                    self.status = InlineHookStatus(
+                        config["status"]
+                    )
+            else:
+                self.status = None
+            if "type" in config:
+                if isinstance(config["type"],
+                              InlineHookType):
+                    self.type = config["type"]
+                else:
+                    self.type = InlineHookType(
+                        config["type"]
+                    )
+            else:
+                self.type = None
             self.version = config["version"]\
                 if "version" in config else None
         else:
@@ -53,3 +87,16 @@ class InlineHook(
             self.status = None
             self.type = None
             self.version = None
+
+    def request_format(self):
+        return {
+            "_links": self.links,
+            "channel": self.channel,
+            "created": self.created,
+            "id": self.id,
+            "lastUpdated": self.last_updated,
+            "name": self.name,
+            "status": self.status,
+            "type": self.type,
+            "version": self.version
+        }

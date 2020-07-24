@@ -18,23 +18,47 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.log_geographical_context\
+    import LogGeographicalContext
+from okta.models.log_user_agent\
+    import LogUserAgent
 
 
 class LogClient(
     OktaObject
 ):
+    """
+    A class for LogClient objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.device = config["device"]\
                 if "device" in config else None
-            self.geographical_context = config["geographicalContext"]\
-                if "geographicalContext" in config else None
+            if "geographicalContext" in config:
+                if isinstance(config["geographicalContext"],
+                              LogGeographicalContext):
+                    self.geographical_context = config["geographicalContext"]
+                else:
+                    self.geographical_context = LogGeographicalContext(
+                        config["geographicalContext"]
+                    )
+            else:
+                self.geographical_context = None
             self.id = config["id"]\
                 if "id" in config else None
             self.ip_address = config["ipAddress"]\
                 if "ipAddress" in config else None
-            self.user_agent = config["userAgent"]\
-                if "userAgent" in config else None
+            if "userAgent" in config:
+                if isinstance(config["userAgent"],
+                              LogUserAgent):
+                    self.user_agent = config["userAgent"]
+                else:
+                    self.user_agent = LogUserAgent(
+                        config["userAgent"]
+                    )
+            else:
+                self.user_agent = None
             self.zone = config["zone"]\
                 if "zone" in config else None
         else:
@@ -44,3 +68,13 @@ class LogClient(
             self.ip_address = None
             self.user_agent = None
             self.zone = None
+
+    def request_format(self):
+        return {
+            "device": self.device,
+            "geographicalContext": self.geographical_context,
+            "id": self.id,
+            "ipAddress": self.ip_address,
+            "userAgent": self.user_agent,
+            "zone": self.zone
+        }

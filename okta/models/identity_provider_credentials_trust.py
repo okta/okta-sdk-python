@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class IdentityProviderCredentialsTrust(
     OktaObject
 ):
+    """
+    A class for IdentityProviderCredentialsTrust objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.audience = config["audience"]\
@@ -41,3 +45,12 @@ class IdentityProviderCredentialsTrust(
             self.kid = None
             self.revocation = None
             self.revocation_cache_lifetime = None
+
+    def request_format(self):
+        return {
+            "audience": self.audience,
+            "issuer": self.issuer,
+            "kid": self.kid,
+            "revocation": self.revocation,
+            "revocationCacheLifetime": self.revocation_cache_lifetime
+        }

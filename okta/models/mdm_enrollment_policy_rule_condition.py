@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class MdmEnrollmentPolicyRuleCondition(
     OktaObject
 ):
+    """
+    A class for MdmEnrollmentPolicyRuleCondition objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.block_non_safe_android = config["blockNonSafeAndroid"]\
@@ -32,3 +36,9 @@ class MdmEnrollmentPolicyRuleCondition(
         else:
             self.block_non_safe_android = None
             self.enrollment = None
+
+    def request_format(self):
+        return {
+            "blockNonSafeAndroid": self.block_non_safe_android,
+            "enrollment": self.enrollment
+        }

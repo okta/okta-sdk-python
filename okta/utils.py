@@ -4,7 +4,6 @@ Class of utility functions.
 
 from enum import Enum
 from datetime import datetime as dt
-from datetime import timezone as tz
 from okta.constants import DATETIME_STRING_FORMAT, EPOCH_DAY, EPOCH_MONTH,\
     EPOCH_YEAR
 

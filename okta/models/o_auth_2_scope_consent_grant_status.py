@@ -24,5 +24,9 @@ class OAuth2ScopeConsentGrantStatus(
     str,
     Enum
 ):
+    """
+    An enumeration class for OAuth2ScopeConsentGrantStatus.
+    """
+
     ACTIVE = "ACTIVE"
     REVOKED = "REVOKED"

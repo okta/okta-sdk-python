@@ -18,11 +18,19 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.policy_subject_match_type\
+    import PolicySubjectMatchType
+from okta.models.policy_user_name_template\
+    import PolicyUserNameTemplate
 
 
 class PolicySubject(
     OktaObject
 ):
+    """
+    A class for PolicySubject objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.filter = config["filter"]\
@@ -31,13 +39,38 @@ class PolicySubject(
                 if "format" in config else None
             self.match_attribute = config["matchAttribute"]\
                 if "matchAttribute" in config else None
-            self.match_type = config["matchType"]\
-                if "matchType" in config else None
-            self.user_name_template = config["userNameTemplate"]\
-                if "userNameTemplate" in config else None
+            if "matchType" in config:
+                if isinstance(config["matchType"],
+                              PolicySubjectMatchType):
+                    self.match_type = config["matchType"]
+                else:
+                    self.match_type = PolicySubjectMatchType(
+                        config["matchType"]
+                    )
+            else:
+                self.match_type = None
+            if "userNameTemplate" in config:
+                if isinstance(config["userNameTemplate"],
+                              PolicyUserNameTemplate):
+                    self.user_name_template = config["userNameTemplate"]
+                else:
+                    self.user_name_template = PolicyUserNameTemplate(
+                        config["userNameTemplate"]
+                    )
+            else:
+                self.user_name_template = None
         else:
             self.filter = None
             self.format = None
             self.match_attribute = None
             self.match_type = None
             self.user_name_template = None
+
+    def request_format(self):
+        return {
+            "filter": self.filter,
+            "format": self.format,
+            "matchAttribute": self.match_attribute,
+            "matchType": self.match_type,
+            "userNameTemplate": self.user_name_template
+        }

@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class PasswordPolicyPasswordSettingsAge(
     OktaObject
 ):
+    """
+    A class for PasswordPolicyPasswordSettingsAge objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.expire_warn_days = config["expireWarnDays"]\
@@ -38,3 +42,11 @@ class PasswordPolicyPasswordSettingsAge(
             self.history_count = "0"
             self.max_age_days = "0"
             self.min_age_minutes = "0"
+
+    def request_format(self):
+        return {
+            "expireWarnDays": self.expire_warn_days,
+            "historyCount": self.history_count,
+            "maxAgeDays": self.max_age_days,
+            "minAgeMinutes": self.min_age_minutes
+        }

@@ -23,9 +23,18 @@ from okta.okta_object import OktaObject
 class TotpUserFactorProfile(
     OktaObject
 ):
+    """
+    A class for TotpUserFactorProfile objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.credential_id = config["credentialId"]\
                 if "credentialId" in config else None
         else:
             self.credential_id = None
+
+    def request_format(self):
+        return {
+            "credentialId": self.credential_id
+        }

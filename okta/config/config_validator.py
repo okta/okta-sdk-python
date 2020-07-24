@@ -4,7 +4,9 @@ from okta.error_messages import ERROR_MESSAGE_ORG_URL_MISSING, \
     ERROR_MESSAGE_AUTH_MODE_INVALID, ERROR_MESSAGE_CLIENT_ID_MISSING, \
     ERROR_MESSAGE_CLIENT_ID_DEFAULT, ERROR_MESSAGE_SCOPES_PK_MISSING, \
     ERROR_MESSAGE_ORG_URL_NOT_HTTPS, ERROR_MESSAGE_ORG_URL_YOUROKTADOMAIN, \
-    ERROR_MESSAGE_ORG_URL_TYPO, ERROR_MESSAGE_ORG_URL_ADMIN
+    ERROR_MESSAGE_ORG_URL_TYPO, ERROR_MESSAGE_ORG_URL_ADMIN, \
+    ERROR_MESSAGE_PROXY_MISSING_HOST, ERROR_MESSAGE_PROXY_MISSING_AUTH, \
+    ERROR_MESSAGE_PROXY_INVALID_PORT
 
 
 class ConfigValidator():
@@ -34,6 +36,9 @@ class ConfigValidator():
         errors += \
             self._validate_org_url(
                 client.get('orgUrl', ""))
+        # check proxy settings if provided
+        if "proxy" in client:
+            errors += self._validate_proxy_settings(client["proxy"])
         # check API details based on authorization mode
         if client.get('authorizationMode') == "SSWS":
             errors += \
@@ -136,3 +141,20 @@ class ConfigValidator():
                 f" it: {FINDING_OKTA_DOMAIN}"))
 
         return url_errors
+
+    def _validate_proxy_settings(self, proxy):
+        proxy_errors = []
+        if "host" not in proxy:
+            proxy_errors.append(ERROR_MESSAGE_PROXY_MISSING_HOST)
+        if "username" in proxy and "password" not in proxy or\
+                "username" not in proxy and "password" in proxy:
+            proxy_errors.append(ERROR_MESSAGE_PROXY_MISSING_AUTH)
+        if "port" in proxy:
+            try:
+                port_number = int(proxy["port"])
+                if not 1 <= port_number <= 65535:
+                    raise ValueError
+            except (TypeError, ValueError):
+                proxy_errors.append(ERROR_MESSAGE_PROXY_INVALID_PORT)
+
+        return proxy_errors

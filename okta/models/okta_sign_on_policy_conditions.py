@@ -18,14 +18,33 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.policy_people_condition\
+    import PolicyPeopleCondition
 
 
 class OktaSignOnPolicyConditions(
     OktaObject
 ):
+    """
+    A class for OktaSignOnPolicyConditions objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.people = config["people"]\
-                if "people" in config else None
+            if "people" in config:
+                if isinstance(config["people"],
+                              PolicyPeopleCondition):
+                    self.people = config["people"]
+                else:
+                    self.people = PolicyPeopleCondition(
+                        config["people"]
+                    )
+            else:
+                self.people = None
         else:
             self.people = None
+
+    def request_format(self):
+        return {
+            "people": self.people
+        }

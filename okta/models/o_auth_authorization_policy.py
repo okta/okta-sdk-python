@@ -17,14 +17,20 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
 from okta.models.policy\
     import Policy
 
 
 class OAuthAuthorizationPolicy(
-    OktaObject,
     Policy
 ):
+    """
+    A class for OAuthAuthorizationPolicy objects.
+    """
+
     def __init__(self, config=None):
         pass
+
+    def request_format(self):
+        return {
+        }

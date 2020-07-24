@@ -18,35 +18,190 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from urllib.parse import urlencode
+from okta.models.feature\
+    import Feature
 from okta.utils import format_url
-from okta.models.sms_template\
-    import SmsTemplate
 
 
-class SmsTemplateClient():
+class FeatureClient():
     """
-    A Client object for the SmsTemplate resource.
+    A Client object for the Feature resource.
     """
+
     def __init__(self):
         self._base_url = ""
 
-    async def list_sms_templates(
-            self, query_params={}
+    async def list_features(
+            self
     ):
         """
-        Enumerates custom SMS templates in your organization. A
-        subset of templates can be returned that match a templ
-        ate type.
         Args:
-            query_params {dict}: Map of query parameters for request
-            [query_params.templateType] {str}
         Returns:
-            list: Collection of SmsTemplate instances.
+            list: Collection of Feature instances.
         """
         http_method = "get".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/templates/sms
+            /api/v1/features
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Feature)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = []
+            for item in response.get_body():
+                result.append(Feature(item))
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def get_feature(
+            self, featureId
+    ):
+        """
+        Args:
+            feature_id {str}
+        Returns:
+            Feature
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/features/{featureId}
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Feature)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = Feature(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def list_feature_dependencies(
+            self, featureId
+    ):
+        """
+        Args:
+            feature_id {str}
+        Returns:
+            list: Collection of Feature instances.
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/features/{featureId}/dependencies
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Feature)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = []
+            for item in response.get_body():
+                result.append(Feature(item))
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def list_feature_dependents(
+            self, featureId
+    ):
+        """
+        Args:
+            feature_id {str}
+        Returns:
+            list: Collection of Feature instances.
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/features/{featureId}/dependents
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Feature)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = []
+            for item in response.get_body():
+                result.append(Feature(item))
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def update_feature_lifecycle(
+            self, featureId, lifecycle, query_params={}
+    ):
+        """
+        Args:
+            feature_id {str}
+            lifecycle {str}
+            query_params {dict}: Map of query parameters for request
+            [query_params.mode] {str}
+        Returns:
+            Feature
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/features/{featureId}/{lifecycle}
             """)
         if query_params:
             encoded_query_params = urlencode(query_params)
@@ -63,218 +218,15 @@ class SmsTemplateClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Feature)
 
         if error:
             return (None, None, error)
 
         try:
-            result = []
-            for item in response.get_body():
-                result.append(SmsTemplate(item))
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def create_sms_template(
-            self, sms_template
-    ):
-        """
-        Adds a new custom SMS template to your organization.
-        Args:
-            {sms_template}
-        Returns:
-            SmsTemplate
-        """
-        http_method = "post".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/templates/sms
-            """)
-
-        body = sms_template.as_dict()
-        headers = {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        }
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = SmsTemplate(
+            result = Feature(
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def delete_sms_template(
-            self, templateId
-    ):
-        """
-        Removes an SMS template.
-        Args:
-            template_id {str}
-        """
-        http_method = "delete".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/templates/sms/{templateId}
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, error)
-
-        return (response, None)
-
-    async def get_sms_template(
-            self, templateId
-    ):
-        """
-        Fetches a specific template by `id`
-        Args:
-            template_id {str}
-        Returns:
-            SmsTemplate
-        """
-        http_method = "get".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/templates/sms/{templateId}
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
             return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = SmsTemplate(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def partial_update_sms_template(
-            self, templateId, sms_template
-    ):
-        """
-        Updates only some of the SMS template properties:
-        Args:
-            template_id {str}
-            {sms_template}
-        Returns:
-            SmsTemplate
-        """
-        http_method = "post".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/templates/sms/{templateId}
-            """)
-
-        body = sms_template.as_dict()
-        headers = {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        }
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = SmsTemplate(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def update_sms_template(
-            self, templateId, sms_template
-    ):
-        """
-        Updates the SMS template.
-        Args:
-            template_id {str}
-            {sms_template}
-        Returns:
-            SmsTemplate
-        """
-        http_method = "put".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/templates/sms/{templateId}
-            """)
-
-        body = sms_template.as_dict()
-        headers = {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        }
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = SmsTemplate(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
         return (result, response, None)

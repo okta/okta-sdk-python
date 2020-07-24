@@ -23,12 +23,16 @@ from okta.okta_object import OktaObject
 class ApplicationGroupAssignment(
     OktaObject
 ):
+    """
+    A class for ApplicationGroupAssignment objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.embedded = config["_embedded"]\
-                if "_embedded" in config else None
-            self.links = config["_links"]\
-                if "_links" in config else None
+            self.embedded = config["embedded"]\
+                if "embedded" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
             self.id = config["id"]\
                 if "id" in config else None
             self.last_updated = config["lastUpdated"]\
@@ -44,3 +48,13 @@ class ApplicationGroupAssignment(
             self.last_updated = None
             self.priority = None
             self.profile = None
+
+    def request_format(self):
+        return {
+            "_embedded": self.embedded,
+            "_links": self.links,
+            "id": self.id,
+            "lastUpdated": self.last_updated,
+            "priority": self.priority,
+            "profile": self.profile
+        }

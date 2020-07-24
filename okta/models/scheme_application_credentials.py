@@ -17,25 +17,57 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
 from okta.models.application_credentials\
     import ApplicationCredentials
+from okta.models.password_credential\
+    import PasswordCredential
+from okta.models.application_credentials_scheme\
+    import ApplicationCredentialsScheme
+from okta.models.application_credentials_signing\
+    import ApplicationCredentialsSigning
 
 
 class SchemeApplicationCredentials(
-    OktaObject,
     ApplicationCredentials
 ):
+    """
+    A class for SchemeApplicationCredentials objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.password = config["password"]\
-                if "password" in config else None
+            if "password" in config:
+                if isinstance(config["password"],
+                              PasswordCredential):
+                    self.password = config["password"]
+                else:
+                    self.password = PasswordCredential(
+                        config["password"]
+                    )
+            else:
+                self.password = None
             self.reveal_password = config["revealPassword"]\
                 if "revealPassword" in config else None
-            self.scheme = config["scheme"]\
-                if "scheme" in config else None
-            self.signing = config["signing"]\
-                if "signing" in config else None
+            if "scheme" in config:
+                if isinstance(config["scheme"],
+                              ApplicationCredentialsScheme):
+                    self.scheme = config["scheme"]
+                else:
+                    self.scheme = ApplicationCredentialsScheme(
+                        config["scheme"]
+                    )
+            else:
+                self.scheme = None
+            if "signing" in config:
+                if isinstance(config["signing"],
+                              ApplicationCredentialsSigning):
+                    self.signing = config["signing"]
+                else:
+                    self.signing = ApplicationCredentialsSigning(
+                        config["signing"]
+                    )
+            else:
+                self.signing = None
             self.user_name = config["userName"]\
                 if "userName" in config else None
         else:
@@ -44,3 +76,12 @@ class SchemeApplicationCredentials(
             self.scheme = None
             self.signing = None
             self.user_name = None
+
+    def request_format(self):
+        return {
+            "password": self.password,
+            "revealPassword": self.reveal_password,
+            "scheme": self.scheme,
+            "signing": self.signing,
+            "userName": self.user_name
+        }

@@ -18,20 +18,49 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.linked_object_details\
+    import LinkedObjectDetails
 
 
 class LinkedObject(
     OktaObject
 ):
+    """
+    A class for LinkedObject objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.links = config["_links"]\
-                if "_links" in config else None
-            self.associated = config["associated"]\
-                if "associated" in config else None
-            self.primary = config["primary"]\
-                if "primary" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
+            if "associated" in config:
+                if isinstance(config["associated"],
+                              LinkedObjectDetails):
+                    self.associated = config["associated"]
+                else:
+                    self.associated = LinkedObjectDetails(
+                        config["associated"]
+                    )
+            else:
+                self.associated = None
+            if "primary" in config:
+                if isinstance(config["primary"],
+                              LinkedObjectDetails):
+                    self.primary = config["primary"]
+                else:
+                    self.primary = LinkedObjectDetails(
+                        config["primary"]
+                    )
+            else:
+                self.primary = None
         else:
             self.links = None
             self.associated = None
             self.primary = None
+
+    def request_format(self):
+        return {
+            "_links": self.links,
+            "associated": self.associated,
+            "primary": self.primary
+        }

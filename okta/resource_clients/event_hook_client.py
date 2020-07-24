@@ -17,40 +17,32 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from urllib.parse import urlencode
+from okta.models.event_hook\
+    import EventHook
 from okta.utils import format_url
-from okta.models.trusted_origin\
-    import TrustedOrigin
 
 
-class TrustedOriginClient():
+class EventHookClient():
     """
-    A Client object for the TrustedOrigin resource.
+    A Client object for the EventHook resource.
     """
+
     def __init__(self):
         self._base_url = ""
 
-    async def list_origins(
-            self, query_params={}
+    async def list_event_hooks(
+            self
     ):
         """
         Args:
-            query_params {dict}: Map of query parameters for request
-            [query_params.q] {str}
-            [query_params.filter] {str}
-            [query_params.after] {str}
-            [query_params.limit] {str}
         Returns:
-            list: Collection of TrustedOrigin instances.
+            list: Collection of EventHook instances.
         """
         http_method = "get".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/trustedOrigins
+            /api/v1/eventHooks
             """)
-        if query_params:
-            encoded_query_params = urlencode(query_params)
-            api_url += f"/?{encoded_query_params}"
 
         body = {}
         headers = {}
@@ -63,7 +55,7 @@ class TrustedOriginClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, EventHook)
 
         if error:
             return (None, None, error)
@@ -71,27 +63,27 @@ class TrustedOriginClient():
         try:
             result = []
             for item in response.get_body():
-                result.append(TrustedOrigin(item))
+                result.append(EventHook(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def create_origin(
-            self, trusted_origin
+    async def create_event_hook(
+            self, event_hook
     ):
         """
         Args:
-            {trusted_origin}
+            {event_hook}
         Returns:
-            TrustedOrigin
+            EventHook
         """
         http_method = "post".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/trustedOrigins
+            /api/v1/eventHooks
             """)
 
-        body = trusted_origin.as_dict()
+        body = event_hook.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -105,30 +97,30 @@ class TrustedOriginClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, EventHook)
 
         if error:
             return (None, None, error)
 
         try:
-            result = TrustedOrigin(
+            result = EventHook(
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def delete_origin(
-            self, trustedOriginId
+    async def delete_event_hook(
+            self, eventHookId
     ):
         """
         Args:
-            trusted_origin_id {str}
+            event_hook_id {str}
         """
         http_method = "delete".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/trustedOrigins/{trustedOriginId}
+            /api/v1/eventHooks/{eventHookId}
             """)
 
         body = {}
@@ -149,19 +141,19 @@ class TrustedOriginClient():
 
         return (response, None)
 
-    async def get_origin(
-            self, trustedOriginId
+    async def get_event_hook(
+            self, eventHookId
     ):
         """
         Args:
-            trusted_origin_id {str}
+            event_hook_id {str}
         Returns:
-            TrustedOrigin
+            EventHook
         """
         http_method = "get".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/trustedOrigins/{trustedOriginId}
+            /api/v1/eventHooks/{eventHookId}
             """)
 
         body = {}
@@ -175,36 +167,36 @@ class TrustedOriginClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, EventHook)
 
         if error:
             return (None, None, error)
 
         try:
-            result = TrustedOrigin(
+            result = EventHook(
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def update_origin(
-            self, trustedOriginId, trusted_origin
+    async def update_event_hook(
+            self, eventHookId, event_hook
     ):
         """
         Args:
-            trusted_origin_id {str}
-            {trusted_origin}
+            event_hook_id {str}
+            {event_hook}
         Returns:
-            TrustedOrigin
+            EventHook
         """
         http_method = "put".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/trustedOrigins/{trustedOriginId}
+            /api/v1/eventHooks/{eventHookId}
             """)
 
-        body = trusted_origin.as_dict()
+        body = event_hook.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -218,33 +210,32 @@ class TrustedOriginClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, EventHook)
 
         if error:
             return (None, None, error)
 
         try:
-            result = TrustedOrigin(
+            result = EventHook(
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def activate_origin(
-            self, trustedOriginId
+    async def activate_event_hook(
+            self, eventHookId
     ):
         """
         Args:
-            trusted_origin_id {str}
+            event_hook_id {str}
         Returns:
-            TrustedOrigin
+            EventHook
         """
         http_method = "post".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/trustedOrigins/{trustedOriginId}/lifecycle
-                activate
+            /api/v1/eventHooks/{eventHookId}/lifecycle/activate
             """)
 
         body = {}
@@ -258,33 +249,33 @@ class TrustedOriginClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, EventHook)
 
         if error:
             return (None, None, error)
 
         try:
-            result = TrustedOrigin(
+            result = EventHook(
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def deactivate_origin(
-            self, trustedOriginId
+    async def deactivate_event_hook(
+            self, eventHookId
     ):
         """
         Args:
-            trusted_origin_id {str}
+            event_hook_id {str}
         Returns:
-            TrustedOrigin
+            EventHook
         """
         http_method = "post".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/trustedOrigins/{trustedOriginId}/lifecycle
-                deactivate
+            /api/v1/eventHooks/{eventHookId}/lifecycle
+                /deactivate
             """)
 
         body = {}
@@ -298,15 +289,54 @@ class TrustedOriginClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, EventHook)
 
         if error:
             return (None, None, error)
 
         try:
-            result = TrustedOrigin(
+            result = EventHook(
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
+        return (result, response, None)
+
+    async def verify_event_hook(
+            self, eventHookId
+    ):
+        """
+        Args:
+            event_hook_id {str}
+        Returns:
+            EventHook
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/eventHooks/{eventHookId}/lifecycle/verify
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, EventHook)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = EventHook(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, None, error)
         return (result, response, None)

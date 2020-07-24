@@ -18,19 +18,20 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from urllib.parse import urlencode
-from okta.utils import format_url
 from okta.models.user_factor\
     import UserFactor
 from okta.models.security_question\
     import SecurityQuestion
 from okta.models.verify_user_factor_response\
     import VerifyUserFactorResponse
+from okta.utils import format_url
 
 
 class UserFactorClient():
     """
     A Client object for the UserFactor resource.
     """
+
     def __init__(self):
         self._base_url = ""
 
@@ -62,7 +63,7 @@ class UserFactorClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, UserFactor)
 
         if error:
             return (None, None, error)
@@ -72,7 +73,7 @@ class UserFactorClient():
             for item in response.get_body():
                 result.append(UserFactor(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def enroll_factor(
@@ -114,7 +115,7 @@ class UserFactorClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, UserFactor)
 
         if error:
             return (None, None, error)
@@ -124,7 +125,7 @@ class UserFactorClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_supported_factors(
@@ -155,7 +156,7 @@ class UserFactorClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, UserFactor)
 
         if error:
             return (None, None, error)
@@ -165,7 +166,7 @@ class UserFactorClient():
             for item in response.get_body():
                 result.append(UserFactor(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_supported_security_questions(
@@ -196,7 +197,7 @@ class UserFactorClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, SecurityQuestion)
 
         if error:
             return (None, None, error)
@@ -206,7 +207,7 @@ class UserFactorClient():
             for item in response.get_body():
                 result.append(SecurityQuestion(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def delete_factor(
@@ -271,7 +272,7 @@ class UserFactorClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, UserFactor)
 
         if error:
             return (None, None, error)
@@ -281,7 +282,7 @@ class UserFactorClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def activate_factor(
@@ -301,7 +302,7 @@ class UserFactorClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/factors/{factorId}/lifecycle
-                activate
+                /activate
             """)
 
         body = activate_factor_request.as_dict()
@@ -318,7 +319,7 @@ class UserFactorClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, UserFactor)
 
         if error:
             return (None, None, error)
@@ -328,7 +329,7 @@ class UserFactorClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def get_factor_transaction_status(
@@ -347,7 +348,7 @@ class UserFactorClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/factors/{factorId}
-                transactions/{transactionId}
+                /transactions/{transactionId}
             """)
 
         body = {}
@@ -361,7 +362,7 @@ class UserFactorClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, VerifyUserFactorResponse)
 
         if error:
             return (None, None, error)
@@ -371,7 +372,7 @@ class UserFactorClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def verify_factor(
@@ -413,7 +414,7 @@ class UserFactorClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, VerifyUserFactorResponse)
 
         if error:
             return (None, None, error)
@@ -423,5 +424,5 @@ class UserFactorClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)

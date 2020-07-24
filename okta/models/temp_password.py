@@ -23,9 +23,18 @@ from okta.okta_object import OktaObject
 class TempPassword(
     OktaObject
 ):
+    """
+    A class for TempPassword objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.temp_password = config["tempPassword"]\
                 if "tempPassword" in config else None
         else:
             self.temp_password = None
+
+    def request_format(self):
+        return {
+            "tempPassword": self.temp_password
+        }

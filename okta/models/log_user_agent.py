@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class LogUserAgent(
     OktaObject
 ):
+    """
+    A class for LogUserAgent objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.browser = config["browser"]\
@@ -35,3 +39,10 @@ class LogUserAgent(
             self.browser = None
             self.os = None
             self.raw_user_agent = None
+
+    def request_format(self):
+        return {
+            "browser": self.browser,
+            "os": self.os,
+            "rawUserAgent": self.raw_user_agent
+        }

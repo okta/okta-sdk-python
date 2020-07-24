@@ -19,7 +19,6 @@ limitations under the License.
 
 from urllib.parse import urlencode
 from okta.http_client import HTTPClient
-from okta.utils import format_url
 from okta.models.application\
     import Application
 from okta.models.csr\
@@ -34,12 +33,14 @@ from okta.models.o_auth_2_token\
     import OAuth2Token
 from okta.models.app_user\
     import AppUser
+from okta.utils import format_url
 
 
 class ApplicationClient():
     """
     A Client object for the Application resource.
     """
+
     def __init__(self):
         self._base_url = ""
 
@@ -81,7 +82,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Application)
 
         if error:
             return (None, None, error)
@@ -91,7 +92,7 @@ class ApplicationClient():
             for item in response.get_body():
                 result.append(Application(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def create_application(
@@ -129,7 +130,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Application)
 
         if error:
             return (None, None, error)
@@ -139,7 +140,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def delete_application(
@@ -207,7 +208,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Application)
 
         if error:
             return (None, None, error)
@@ -217,7 +218,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def update_application(
@@ -251,7 +252,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Application)
 
         if error:
             return (None, None, error)
@@ -261,7 +262,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_csrs_for_application(
@@ -292,7 +293,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Csr)
 
         if error:
             return (None, None, error)
@@ -302,7 +303,7 @@ class ApplicationClient():
             for item in response.get_body():
                 result.append(Csr(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def generate_csr_for_application(
@@ -337,7 +338,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Csr)
 
         if error:
             return (None, None, error)
@@ -347,7 +348,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def revoke_csr_from_application(
@@ -413,7 +414,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Csr)
 
         if error:
             return (None, None, error)
@@ -423,7 +424,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def publish_cer_cert(
@@ -444,7 +445,7 @@ class ApplicationClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/apps/{appId}/credentials/csrs/{csrId}
-                lifecycle/publish
+                /lifecycle/publish
             """)
 
         body = string.as_dict()
@@ -461,7 +462,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
@@ -471,7 +472,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def publish_binary_cer_cert(
@@ -492,7 +493,7 @@ class ApplicationClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/apps/{appId}/credentials/csrs/{csrId}
-                lifecycle/publish
+                /lifecycle/publish
             """)
 
         body = HTTPClient.format_binary_data(string)
@@ -509,7 +510,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
@@ -519,7 +520,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def publish_der_cert(
@@ -540,7 +541,7 @@ class ApplicationClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/apps/{appId}/credentials/csrs/{csrId}
-                lifecycle/publish
+                /lifecycle/publish
             """)
 
         body = string.as_dict()
@@ -557,7 +558,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
@@ -567,7 +568,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def publish_binary_der_cert(
@@ -588,7 +589,7 @@ class ApplicationClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/apps/{appId}/credentials/csrs/{csrId}
-                lifecycle/publish
+                /lifecycle/publish
             """)
 
         body = HTTPClient.format_binary_data(string)
@@ -605,7 +606,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
@@ -615,7 +616,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def publish_binary_pem_cert(
@@ -636,7 +637,7 @@ class ApplicationClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/apps/{appId}/credentials/csrs/{csrId}
-                lifecycle/publish
+                /lifecycle/publish
             """)
 
         body = HTTPClient.format_binary_data(string)
@@ -653,7 +654,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
@@ -663,7 +664,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_application_keys(
@@ -693,7 +694,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
@@ -703,7 +704,7 @@ class ApplicationClient():
             for item in response.get_body():
                 result.append(JsonWebKey(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def generate_application_key(
@@ -739,7 +740,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
@@ -749,7 +750,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def get_application_key(
@@ -780,7 +781,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
@@ -790,7 +791,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def clone_application_key(
@@ -827,7 +828,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, JsonWebKey)
 
         if error:
             return (None, None, error)
@@ -837,7 +838,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_scope_consent_grants(
@@ -872,7 +873,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2ScopeConsentGrant)
 
         if error:
             return (None, None, error)
@@ -882,7 +883,7 @@ class ApplicationClient():
             for item in response.get_body():
                 result.append(OAuth2ScopeConsentGrant(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def grant_consent_to_scope(
@@ -917,7 +918,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2ScopeConsentGrant)
 
         if error:
             return (None, None, error)
@@ -927,7 +928,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def revoke_scope_consent_grant(
@@ -998,7 +999,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2ScopeConsentGrant)
 
         if error:
             return (None, None, error)
@@ -1008,7 +1009,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_application_group_assignments(
@@ -1046,7 +1047,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, ApplicationGroupAssignment)
 
         if error:
             return (None, None, error)
@@ -1056,7 +1057,7 @@ class ApplicationClient():
             for item in response.get_body():
                 result.append(ApplicationGroupAssignment(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def delete_application_group_assignment(
@@ -1125,7 +1126,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, ApplicationGroupAssignment)
 
         if error:
             return (None, None, error)
@@ -1135,7 +1136,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def create_application_group_assignment(
@@ -1170,7 +1171,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, ApplicationGroupAssignment)
 
         if error:
             return (None, None, error)
@@ -1180,7 +1181,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def activate_application(
@@ -1313,7 +1314,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2Token)
 
         if error:
             return (None, None, error)
@@ -1323,7 +1324,7 @@ class ApplicationClient():
             for item in response.get_body():
                 result.append(OAuth2Token(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def revoke_o_auth_2_token_for_application(
@@ -1393,7 +1394,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2Token)
 
         if error:
             return (None, None, error)
@@ -1403,7 +1404,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_application_users(
@@ -1444,7 +1445,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, AppUser)
 
         if error:
             return (None, None, error)
@@ -1454,7 +1455,7 @@ class ApplicationClient():
             for item in response.get_body():
                 result.append(AppUser(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def assign_user_to_application(
@@ -1493,7 +1494,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, AppUser)
 
         if error:
             return (None, None, error)
@@ -1503,7 +1504,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def delete_application_user(
@@ -1578,7 +1579,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, AppUser)
 
         if error:
             return (None, None, error)
@@ -1588,7 +1589,7 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def update_application_user(
@@ -1623,7 +1624,7 @@ class ApplicationClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, AppUser)
 
         if error:
             return (None, None, error)
@@ -1633,5 +1634,5 @@ class ApplicationClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)

@@ -23,9 +23,18 @@ from okta.okta_object import OktaObject
 class PasswordPolicyRecoveryQuestionComplexity(
     OktaObject
 ):
+    """
+    A class for PasswordPolicyRecoveryQuestionComplexity objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.min_length = config["minLength"]\
                 if "minLength" in config else None
         else:
             self.min_length = None
+
+    def request_format(self):
+        return {
+            "minLength": self.min_length
+        }

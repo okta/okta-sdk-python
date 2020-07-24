@@ -23,9 +23,18 @@ from okta.okta_object import OktaObject
 class ApplicationLicensing(
     OktaObject
 ):
+    """
+    A class for ApplicationLicensing objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.seat_count = config["seatCount"]\
                 if "seatCount" in config else None
         else:
             self.seat_count = None
+
+    def request_format(self):
+        return {
+            "seatCount": self.seat_count
+        }

@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class UserIdentifierConditionEvaluatorPattern(
     OktaObject
 ):
+    """
+    A class for UserIdentifierConditionEvaluatorPattern objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.match_type = config["matchType"]\
@@ -32,3 +36,9 @@ class UserIdentifierConditionEvaluatorPattern(
         else:
             self.match_type = None
             self.value = None
+
+    def request_format(self):
+        return {
+            "matchType": self.match_type,
+            "value": self.value
+        }

@@ -17,32 +17,41 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
+from urllib.parse import urlencode
+from okta.models.trusted_origin\
+    import TrustedOrigin
 from okta.utils import format_url
-from okta.models.user_type\
-    import UserType
 
 
-class UserTypeClient():
+class TrustedOriginClient():
     """
-    A Client object for the UserType resource.
+    A Client object for the TrustedOrigin resource.
     """
+
     def __init__(self):
         self._base_url = ""
 
-    async def list_user_types(
-            self
+    async def list_origins(
+            self, query_params={}
     ):
         """
-        Fetches all User Types in your org
         Args:
+            query_params {dict}: Map of query parameters for request
+            [query_params.q] {str}
+            [query_params.filter] {str}
+            [query_params.after] {str}
+            [query_params.limit] {str}
         Returns:
-            list: Collection of UserType instances.
+            list: Collection of TrustedOrigin instances.
         """
         http_method = "get".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/meta/types/user
+            /api/v1/trustedOrigins
             """)
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
         body = {}
         headers = {}
@@ -55,7 +64,7 @@ class UserTypeClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, TrustedOrigin)
 
         if error:
             return (None, None, error)
@@ -63,30 +72,27 @@ class UserTypeClient():
         try:
             result = []
             for item in response.get_body():
-                result.append(UserType(item))
+                result.append(TrustedOrigin(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def create_user_type(
-            self, user_type
+    async def create_origin(
+            self, trusted_origin
     ):
         """
-        Creates a new User Type. A default User Type is automat
-        ically created along with your org, and you may add ano
-        ther 9 User Types for a maximum of 10.
         Args:
-            {user_type}
+            {trusted_origin}
         Returns:
-            UserType
+            TrustedOrigin
         """
         http_method = "post".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/meta/types/user
+            /api/v1/trustedOrigins
             """)
 
-        body = user_type.as_dict()
+        body = trusted_origin.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -100,33 +106,30 @@ class UserTypeClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, TrustedOrigin)
 
         if error:
             return (None, None, error)
 
         try:
-            result = UserType(
+            result = TrustedOrigin(
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def delete_user_type(
-            self, typeId
+    async def delete_origin(
+            self, trustedOriginId
     ):
         """
-        Deletes a User Type permanently. This operation is not
-        permitted for the default type, nor for any User Type t
-        hat has existing users
         Args:
-            type_id {str}
+            trusted_origin_id {str}
         """
         http_method = "delete".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/meta/types/user/{typeId}
+            /api/v1/trustedOrigins/{trustedOriginId}
             """)
 
         body = {}
@@ -147,21 +150,19 @@ class UserTypeClient():
 
         return (response, None)
 
-    async def get_user_type(
-            self, typeId
+    async def get_origin(
+            self, trustedOriginId
     ):
         """
-        Fetches a User Type by ID. The special identifier `defa
-        ult` may be used to fetch the default User Type.
         Args:
-            type_id {str}
+            trusted_origin_id {str}
         Returns:
-            UserType
+            TrustedOrigin
         """
         http_method = "get".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/meta/types/user/{typeId}
+            /api/v1/trustedOrigins/{trustedOriginId}
             """)
 
         body = {}
@@ -175,81 +176,36 @@ class UserTypeClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, TrustedOrigin)
 
         if error:
             return (None, None, error)
 
         try:
-            result = UserType(
+            result = TrustedOrigin(
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def update_user_type(
-            self, typeId, user_type
+    async def update_origin(
+            self, trustedOriginId, trusted_origin
     ):
         """
-        Updates an existing User Type
         Args:
-            type_id {str}
-            {user_type}
+            trusted_origin_id {str}
+            {trusted_origin}
         Returns:
-            UserType
-        """
-        http_method = "post".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/meta/types/user/{typeId}
-            """)
-
-        body = user_type.as_dict()
-        headers = {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        }
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
-            return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = UserType(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def replace_user_type(
-            self, typeId, user_type
-    ):
-        """
-        Replace an existing User Type
-        Args:
-            type_id {str}
-            {user_type}
-        Returns:
-            UserType
+            TrustedOrigin
         """
         http_method = "put".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/meta/types/user/{typeId}
+            /api/v1/trustedOrigins/{trustedOriginId}
             """)
 
-        body = user_type.as_dict()
+        body = trusted_origin.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -263,15 +219,95 @@ class UserTypeClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, TrustedOrigin)
 
         if error:
             return (None, None, error)
 
         try:
-            result = UserType(
+            result = TrustedOrigin(
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
+        return (result, response, None)
+
+    async def activate_origin(
+            self, trustedOriginId
+    ):
+        """
+        Args:
+            trusted_origin_id {str}
+        Returns:
+            TrustedOrigin
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/trustedOrigins/{trustedOriginId}/lifecycle
+                /activate
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, TrustedOrigin)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = TrustedOrigin(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def deactivate_origin(
+            self, trustedOriginId
+    ):
+        """
+        Args:
+            trusted_origin_id {str}
+        Returns:
+            TrustedOrigin
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/trustedOrigins/{trustedOriginId}/lifecycle
+                /deactivate
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, TrustedOrigin)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = TrustedOrigin(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, None, error)
         return (result, response, None)

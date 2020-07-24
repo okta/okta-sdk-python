@@ -17,18 +17,35 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
 from okta.models.application\
     import Application
+from okta.models.scheme_application_credentials\
+    import SchemeApplicationCredentials
 
 
 class BrowserPluginApplication(
-    OktaObject,
     Application
 ):
+    """
+    A class for BrowserPluginApplication objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.credentials = config["credentials"]\
-                if "credentials" in config else None
+            if "credentials" in config:
+                if isinstance(config["credentials"],
+                              SchemeApplicationCredentials):
+                    self.credentials = config["credentials"]
+                else:
+                    self.credentials = SchemeApplicationCredentials(
+                        config["credentials"]
+                    )
+            else:
+                self.credentials = None
         else:
             self.credentials = None
+
+    def request_format(self):
+        return {
+            "credentials": self.credentials
+        }

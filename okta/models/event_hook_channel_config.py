@@ -18,15 +18,29 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.event_hook_channel_config_auth_scheme\
+    import EventHookChannelConfigAuthScheme
 
 
 class EventHookChannelConfig(
     OktaObject
 ):
+    """
+    A class for EventHookChannelConfig objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.auth_scheme = config["authScheme"]\
-                if "authScheme" in config else None
+            if "authScheme" in config:
+                if isinstance(config["authScheme"],
+                              EventHookChannelConfigAuthScheme):
+                    self.auth_scheme = config["authScheme"]
+                else:
+                    self.auth_scheme = EventHookChannelConfigAuthScheme(
+                        config["authScheme"]
+                    )
+            else:
+                self.auth_scheme = None
             self.headers = config["headers"]\
                 if "headers" in config else None
             self.uri = config["uri"]\
@@ -35,3 +49,10 @@ class EventHookChannelConfig(
             self.auth_scheme = None
             self.headers = None
             self.uri = None
+
+    def request_format(self):
+        return {
+            "authScheme": self.auth_scheme,
+            "headers": self.headers,
+            "uri": self.uri
+        }

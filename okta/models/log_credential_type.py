@@ -24,11 +24,15 @@ class LogCredentialType(
     str,
     Enum
 ):
+    """
+    An enumeration class for LogCredentialType.
+    """
+
     OTP = "OTP"
     SMS = "SMS"
     PASSWORD = "PASSWORD"
     ASSERTION = "ASSERTION"
     IWA = "IWA"
     EMAIL = "EMAIL"
-    OAUTH2 = "OAUTH2"
+    OAUTH_2 = "OAUTH2"
     JWT = "JWT"

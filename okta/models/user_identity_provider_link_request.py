@@ -23,9 +23,18 @@ from okta.okta_object import OktaObject
 class UserIdentityProviderLinkRequest(
     OktaObject
 ):
+    """
+    A class for UserIdentityProviderLinkRequest objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.external_id = config["externalId"]\
                 if "externalId" in config else None
         else:
             self.external_id = None
+
+    def request_format(self):
+        return {
+            "externalId": self.external_id
+        }

@@ -8,11 +8,13 @@ class OktaAPIResponse():
     Allows for paginated results to be retrieved easily.
     """
 
-    def __init__(self, request_executor, req, res_details, response_body=""):
+    def __init__(self, request_executor, req, res_details, response_body="",
+                 data_type=None):
         self._url = res_details.url
         self._headers = req["headers"]
         self._self = None  # Link to first page of results
         self._body = None  # First page of results
+        self._type = data_type
 
         # Status on if there's a next page of results (based on generator)
         self._next = None
@@ -27,8 +29,8 @@ class OktaAPIResponse():
                 "" == res_details.content_type:
             self.build_json_response(response_body)
         else:
-            raise ValueError(("Can't build response for"
-                              f" {res_details.content_type}"))
+            # Save response as text
+            self._body = response_body
 
         # Get links for next if more results exist
         if self._body is not None:
@@ -99,7 +101,16 @@ class OktaAPIResponse():
         Returns:
             json: Next page of results
         """
-        return await self.get_next().__anext__()
+        next_page, error = await self.get_next().__anext__()
+        if error:
+            return (None, error)
+        if self._type is not None:
+            result = []
+            for item in next_page:
+                result.append(self._type(item))
+            return (result, None)
+
+        return (next_page, error)
 
     async def get_next(self):
         """

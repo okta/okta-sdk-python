@@ -23,9 +23,18 @@ from okta.okta_object import OktaObject
 class UserStatusPolicyRuleCondition(
     OktaObject
 ):
+    """
+    A class for UserStatusPolicyRuleCondition objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.value = config["value"]\
                 if "value" in config else None
         else:
             self.value = None
+
+    def request_format(self):
+        return {
+            "value": self.value
+        }

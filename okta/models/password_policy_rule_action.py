@@ -23,9 +23,18 @@ from okta.okta_object import OktaObject
 class PasswordPolicyRuleAction(
     OktaObject
 ):
+    """
+    A class for PasswordPolicyRuleAction objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.access = config["access"]\
                 if "access" in config else None
         else:
             self.access = None
+
+    def request_format(self):
+        return {
+            "access": self.access
+        }

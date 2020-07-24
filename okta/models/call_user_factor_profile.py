@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class CallUserFactorProfile(
     OktaObject
 ):
+    """
+    A class for CallUserFactorProfile objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.phone_extension = config["phoneExtension"]\
@@ -32,3 +36,9 @@ class CallUserFactorProfile(
         else:
             self.phone_extension = None
             self.phone_number = None
+
+    def request_format(self):
+        return {
+            "phoneExtension": self.phone_extension,
+            "phoneNumber": self.phone_number
+        }

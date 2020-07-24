@@ -24,4 +24,8 @@ class LinkedObjectDetailsType(
     str,
     Enum
 ):
+    """
+    An enumeration class for LinkedObjectDetailsType.
+    """
+
     USER = "USER"

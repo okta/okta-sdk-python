@@ -23,9 +23,18 @@ from okta.okta_object import OktaObject
 class RiskPolicyRuleCondition(
     OktaObject
 ):
+    """
+    A class for RiskPolicyRuleCondition objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.behaviors = config["behaviors"]\
                 if "behaviors" in config else None
         else:
             self.behaviors = None
+
+    def request_format(self):
+        return {
+            "behaviors": self.behaviors
+        }

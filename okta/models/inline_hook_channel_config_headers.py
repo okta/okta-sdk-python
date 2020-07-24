@@ -23,6 +23,10 @@ from okta.okta_object import OktaObject
 class InlineHookChannelConfigHeaders(
     OktaObject
 ):
+    """
+    A class for InlineHookChannelConfigHeaders objects.
+    """
+
     def __init__(self, config=None):
         if config:
             self.key = config["key"]\
@@ -32,3 +36,9 @@ class InlineHookChannelConfigHeaders(
         else:
             self.key = None
             self.value = None
+
+    def request_format(self):
+        return {
+            "key": self.key,
+            "value": self.value
+        }

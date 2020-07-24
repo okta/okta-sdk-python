@@ -17,31 +17,40 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
+from urllib.parse import urlencode
+from okta.models.inline_hook\
+    import InlineHook
+from okta.models.inline_hook_response\
+    import InlineHookResponse
 from okta.utils import format_url
-from okta.models.event_hook\
-    import EventHook
 
 
-class EventHookClient():
+class InlineHookClient():
     """
-    A Client object for the EventHook resource.
+    A Client object for the InlineHook resource.
     """
+
     def __init__(self):
         self._base_url = ""
 
-    async def list_event_hooks(
-            self
+    async def list_inline_hooks(
+            self, query_params={}
     ):
         """
         Args:
+            query_params {dict}: Map of query parameters for request
+            [query_params.type] {str}
         Returns:
-            list: Collection of EventHook instances.
+            list: Collection of InlineHook instances.
         """
         http_method = "get".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/eventHooks
+            /api/v1/inlineHooks
             """)
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
         body = {}
         headers = {}
@@ -54,7 +63,7 @@ class EventHookClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, InlineHook)
 
         if error:
             return (None, None, error)
@@ -62,27 +71,27 @@ class EventHookClient():
         try:
             result = []
             for item in response.get_body():
-                result.append(EventHook(item))
+                result.append(InlineHook(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def create_event_hook(
-            self, event_hook
+    async def create_inline_hook(
+            self, inline_hook
     ):
         """
         Args:
-            {event_hook}
+            {inline_hook}
         Returns:
-            EventHook
+            InlineHook
         """
         http_method = "post".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/eventHooks
+            /api/v1/inlineHooks
             """)
 
-        body = event_hook.as_dict()
+        body = inline_hook.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -96,30 +105,34 @@ class EventHookClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, InlineHook)
 
         if error:
             return (None, None, error)
 
         try:
-            result = EventHook(
+            result = InlineHook(
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def delete_event_hook(
-            self, eventHookId
+    async def delete_inline_hook(
+            self, inlineHookId
     ):
         """
+        Deletes the Inline Hook matching the provided id. Once
+        deleted, the Inline Hook is unrecoverable. As a safety
+        precaution, only Inline Hooks with a status of INACTIVE
+        are eligible for deletion.
         Args:
-            event_hook_id {str}
+            inline_hook_id {str}
         """
         http_method = "delete".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/eventHooks/{eventHookId}
+            /api/v1/inlineHooks/{inlineHookId}
             """)
 
         body = {}
@@ -140,19 +153,20 @@ class EventHookClient():
 
         return (response, None)
 
-    async def get_event_hook(
-            self, eventHookId
+    async def get_inline_hook(
+            self, inlineHookId
     ):
         """
+        Gets an inline hook by ID
         Args:
-            event_hook_id {str}
+            inline_hook_id {str}
         Returns:
-            EventHook
+            InlineHook
         """
         http_method = "get".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/eventHooks/{eventHookId}
+            /api/v1/inlineHooks/{inlineHookId}
             """)
 
         body = {}
@@ -166,36 +180,37 @@ class EventHookClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, InlineHook)
 
         if error:
             return (None, None, error)
 
         try:
-            result = EventHook(
+            result = InlineHook(
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def update_event_hook(
-            self, eventHookId, event_hook
+    async def update_inline_hook(
+            self, inlineHookId, inline_hook
     ):
         """
+        Updates an inline hook by ID
         Args:
-            event_hook_id {str}
-            {event_hook}
+            inline_hook_id {str}
+            {inline_hook}
         Returns:
-            EventHook
+            InlineHook
         """
         http_method = "put".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/eventHooks/{eventHookId}
+            /api/v1/inlineHooks/{inlineHookId}
             """)
 
-        body = event_hook.as_dict()
+        body = inline_hook.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -209,32 +224,83 @@ class EventHookClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, InlineHook)
 
         if error:
             return (None, None, error)
 
         try:
-            result = EventHook(
+            result = InlineHook(
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def activate_event_hook(
-            self, eventHookId
+    async def execute_inline_hook(
+            self, inlineHookId, inline_hook_payload
     ):
         """
+        Executes the Inline Hook matching the provided inlineHo
+        okId using the request body as the input. This will sen
+        d the provided data through the Channel and return a re
+        sponse if it matches the correct data contract. This ex
+        ecution endpoint should only be used for testing purpos
+        es.
         Args:
-            event_hook_id {str}
+            inline_hook_id {str}
+            {inline_hook_payload}
         Returns:
-            EventHook
+            InlineHookResponse
         """
         http_method = "post".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/eventHooks/{eventHookId}/lifecycle/activate
+            /api/v1/inlineHooks/{inlineHookId}/execute
+            """)
+
+        body = inline_hook_payload.as_dict()
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, InlineHookResponse)
+
+        if error:
+            return (None, None, error)
+
+        try:
+            result = InlineHookResponse(
+                response.get_body()
+            )
+        except Exception as error:
+            return (None, None, error)
+        return (result, response, None)
+
+    async def activate_inline_hook(
+            self, inlineHookId
+    ):
+        """
+        Activates the Inline Hook matching the provided id
+        Args:
+            inline_hook_id {str}
+        Returns:
+            InlineHook
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/inlineHooks/{inlineHookId}/lifecycle
+                /activate
             """)
 
         body = {}
@@ -248,33 +314,34 @@ class EventHookClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, InlineHook)
 
         if error:
             return (None, None, error)
 
         try:
-            result = EventHook(
+            result = InlineHook(
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
-    async def deactivate_event_hook(
-            self, eventHookId
+    async def deactivate_inline_hook(
+            self, inlineHookId
     ):
         """
+        Deactivates the Inline Hook matching the provided id
         Args:
-            event_hook_id {str}
+            inline_hook_id {str}
         Returns:
-            EventHook
+            InlineHook
         """
         http_method = "post".upper()
         api_url = format_url(f"""
             {self._base_url}
-            /api/v1/eventHooks/{eventHookId}/lifecycle
-                deactivate
+            /api/v1/inlineHooks/{inlineHookId}/lifecycle
+                /deactivate
             """)
 
         body = {}
@@ -288,54 +355,15 @@ class EventHookClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, InlineHook)
 
         if error:
             return (None, None, error)
 
         try:
-            result = EventHook(
+            result = InlineHook(
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
-        return (result, response, None)
-
-    async def verify_event_hook(
-            self, eventHookId
-    ):
-        """
-        Args:
-            event_hook_id {str}
-        Returns:
-            EventHook
-        """
-        http_method = "post".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/eventHooks/{eventHookId}/lifecycle/verify
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-
-        if error:
             return (None, None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (None, None, error)
-
-        try:
-            result = EventHook(
-                response.get_body()
-            )
-        except Exception as error:
-            return (None, error)
         return (result, response, None)

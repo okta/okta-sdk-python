@@ -18,7 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from urllib.parse import urlencode
-from okta.utils import format_url
 from okta.models.user\
     import User
 from okta.models.app_link\
@@ -49,12 +48,14 @@ from okta.models.role\
     import Role
 from okta.models.catalog_application\
     import CatalogApplication
+from okta.utils import format_url
 
 
 class UserClient():
     """
     A Client object for the User resource.
     """
+
     def __init__(self):
         self._base_url = ""
 
@@ -97,7 +98,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, User)
 
         if error:
             return (None, None, error)
@@ -107,7 +108,7 @@ class UserClient():
             for item in response.get_body():
                 result.append(User(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def create_user(
@@ -148,7 +149,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, User)
 
         if error:
             return (None, None, error)
@@ -158,7 +159,7 @@ class UserClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def set_linked_object_for_user(
@@ -177,7 +178,7 @@ class UserClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{associatedUserId}/linkedObjects
-                {primaryRelationshipName}/{primaryUserId}
+                /{primaryRelationshipName}/{primaryUserId}
             """)
 
         body = {}
@@ -264,7 +265,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, User)
 
         if error:
             return (None, None, error)
@@ -274,7 +275,7 @@ class UserClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def partial_update_user(
@@ -314,7 +315,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, User)
 
         if error:
             return (None, None, error)
@@ -324,7 +325,7 @@ class UserClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def update_user(
@@ -364,7 +365,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, User)
 
         if error:
             return (None, None, error)
@@ -374,7 +375,7 @@ class UserClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_app_links(
@@ -405,7 +406,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, AppLink)
 
         if error:
             return (None, None, error)
@@ -415,7 +416,7 @@ class UserClient():
             for item in response.get_body():
                 result.append(AppLink(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_user_clients(
@@ -446,7 +447,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2Client)
 
         if error:
             return (None, None, error)
@@ -456,7 +457,7 @@ class UserClient():
             for item in response.get_body():
                 result.append(OAuth2Client(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def revoke_grants_for_user_and_client(
@@ -527,7 +528,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2ScopeConsentGrant)
 
         if error:
             return (None, None, error)
@@ -537,7 +538,7 @@ class UserClient():
             for item in response.get_body():
                 result.append(OAuth2ScopeConsentGrant(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def revoke_tokens_for_user_and_client(
@@ -610,7 +611,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2RefreshToken)
 
         if error:
             return (None, None, error)
@@ -620,7 +621,7 @@ class UserClient():
             for item in response.get_body():
                 result.append(OAuth2RefreshToken(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def revoke_token_for_user_and_client(
@@ -637,7 +638,7 @@ class UserClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/clients/{clientId}/tokens
-                {tokenId}
+                /{tokenId}
             """)
 
         body = {}
@@ -679,7 +680,7 @@ class UserClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/clients/{clientId}/tokens
-                {tokenId}
+                /{tokenId}
             """)
         if query_params:
             encoded_query_params = urlencode(query_params)
@@ -696,7 +697,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2RefreshToken)
 
         if error:
             return (None, None, error)
@@ -706,7 +707,7 @@ class UserClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def change_password(
@@ -748,7 +749,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, UserCredentials)
 
         if error:
             return (None, None, error)
@@ -758,7 +759,7 @@ class UserClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def change_recovery_question(
@@ -780,7 +781,7 @@ class UserClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/credentials
-                change_recovery_question
+                /change_recovery_question
             """)
 
         body = user_credentials.as_dict()
@@ -797,7 +798,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, UserCredentials)
 
         if error:
             return (None, None, error)
@@ -807,7 +808,7 @@ class UserClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def forgot_password_generate_one_time_token(
@@ -843,7 +844,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, ForgotPasswordResponse)
 
         if error:
             return (None, None, error)
@@ -853,7 +854,7 @@ class UserClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def forgot_password_set_new_password(
@@ -893,7 +894,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, ForgotPasswordResponse)
 
         if error:
             return (None, None, error)
@@ -903,7 +904,7 @@ class UserClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def revoke_user_grants(
@@ -973,7 +974,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2ScopeConsentGrant)
 
         if error:
             return (None, None, error)
@@ -983,7 +984,7 @@ class UserClient():
             for item in response.get_body():
                 result.append(OAuth2ScopeConsentGrant(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def revoke_user_grant(
@@ -1052,7 +1053,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, OAuth2ScopeConsentGrant)
 
         if error:
             return (None, None, error)
@@ -1062,7 +1063,7 @@ class UserClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_user_groups(
@@ -1092,7 +1093,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Group)
 
         if error:
             return (None, None, error)
@@ -1102,7 +1103,7 @@ class UserClient():
             for item in response.get_body():
                 result.append(Group(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_user_identity_providers(
@@ -1132,7 +1133,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, IdentityProvider)
 
         if error:
             return (None, None, error)
@@ -1142,7 +1143,7 @@ class UserClient():
             for item in response.get_body():
                 result.append(IdentityProvider(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def activate_user(
@@ -1184,7 +1185,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, UserActivationToken)
 
         if error:
             return (None, None, error)
@@ -1194,7 +1195,7 @@ class UserClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def deactivate_user(
@@ -1257,7 +1258,7 @@ class UserClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/lifecycle
-                expire_password?tempPassword=false
+                /expire_password?tempPassword=false
             """)
 
         body = {}
@@ -1271,7 +1272,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, User)
 
         if error:
             return (None, None, error)
@@ -1281,7 +1282,7 @@ class UserClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def expire_password_and_get_temporary_password(
@@ -1300,7 +1301,7 @@ class UserClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/lifecycle
-                expire_password?tempPassword=true
+                /expire_password?tempPassword=true
             """)
 
         body = {}
@@ -1314,7 +1315,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, TempPassword)
 
         if error:
             return (None, None, error)
@@ -1324,7 +1325,7 @@ class UserClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def reactivate_user(
@@ -1363,7 +1364,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, UserActivationToken)
 
         if error:
             return (None, None, error)
@@ -1373,7 +1374,7 @@ class UserClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def reset_factors(
@@ -1447,7 +1448,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, ResetPasswordToken)
 
         if error:
             return (None, None, error)
@@ -1457,7 +1458,7 @@ class UserClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def suspend_user(
@@ -1576,7 +1577,7 @@ class UserClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/linkedObjects
-                {relationshipName}
+                /{relationshipName}
             """)
 
         body = {}
@@ -1616,7 +1617,7 @@ class UserClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/linkedObjects
-                {relationshipName}
+                /{relationshipName}
             """)
         if query_params:
             encoded_query_params = urlencode(query_params)
@@ -1633,7 +1634,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, ResponseLinks)
 
         if error:
             return (None, None, error)
@@ -1643,7 +1644,7 @@ class UserClient():
             for item in response.get_body():
                 result.append(ResponseLinks(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def list_assigned_roles_for_user(
@@ -1678,7 +1679,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Role)
 
         if error:
             return (None, None, error)
@@ -1688,7 +1689,7 @@ class UserClient():
             for item in response.get_body():
                 result.append(Role(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def assign_role_to_user(
@@ -1727,7 +1728,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Role)
 
         if error:
             return (None, None, error)
@@ -1737,7 +1738,7 @@ class UserClient():
                 response.get_body()
             )
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def remove_role_from_user(
@@ -1795,7 +1796,7 @@ class UserClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/roles/{roleId}/targets
-                catalog/apps
+                /catalog/apps
             """)
         if query_params:
             encoded_query_params = urlencode(query_params)
@@ -1812,7 +1813,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, CatalogApplication)
 
         if error:
             return (None, None, error)
@@ -1822,7 +1823,7 @@ class UserClient():
             for item in response.get_body():
                 result.append(CatalogApplication(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def add_all_apps_as_target_to_role(
@@ -1837,7 +1838,7 @@ class UserClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/roles/{roleId}/targets
-                catalog/apps
+                /catalog/apps
             """)
 
         body = {}
@@ -1871,7 +1872,7 @@ class UserClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/roles/{roleId}/targets
-                catalog/apps/{appName}
+                /catalog/apps/{appName}
             """)
 
         body = {}
@@ -1905,7 +1906,7 @@ class UserClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/roles/{roleId}/targets
-                catalog/apps/{appName}
+                /catalog/apps/{appName}
             """)
 
         body = {}
@@ -1942,7 +1943,7 @@ class UserClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/roles/{roleId}/targets
-                catalog/apps/{appName}/{applicationId}
+                /catalog/apps/{appName}/{applicationId}
             """)
 
         body = {}
@@ -1979,7 +1980,7 @@ class UserClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/roles/{roleId}/targets
-                catalog/apps/{appName}/{applicationId}
+                /catalog/apps/{appName}/{applicationId}
             """)
 
         body = {}
@@ -2017,7 +2018,7 @@ class UserClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/roles/{roleId}/targets
-                groups
+                /groups
             """)
         if query_params:
             encoded_query_params = urlencode(query_params)
@@ -2034,7 +2035,7 @@ class UserClient():
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Group)
 
         if error:
             return (None, None, error)
@@ -2044,7 +2045,7 @@ class UserClient():
             for item in response.get_body():
                 result.append(Group(item))
         except Exception as error:
-            return (None, error)
+            return (None, None, error)
         return (result, response, None)
 
     async def remove_group_target_from_role(
@@ -2060,7 +2061,7 @@ class UserClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/roles/{roleId}/targets
-                groups/{groupId}
+                /groups/{groupId}
             """)
 
         body = {}
@@ -2094,7 +2095,7 @@ class UserClient():
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/users/{userId}/roles/{roleId}/targets
-                groups/{groupId}
+                /groups/{groupId}
             """)
 
         body = {}

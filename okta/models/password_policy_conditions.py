@@ -18,17 +18,47 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models.password_policy_authentication_provider_condition\
+    import PasswordPolicyAuthenticationProviderCondition
+from okta.models.policy_people_condition\
+    import PolicyPeopleCondition
 
 
 class PasswordPolicyConditions(
     OktaObject
 ):
+    """
+    A class for PasswordPolicyConditions objects.
+    """
+
     def __init__(self, config=None):
         if config:
-            self.auth_provider = config["authProvider"]\
-                if "authProvider" in config else None
-            self.people = config["people"]\
-                if "people" in config else None
+            if "authProvider" in config:
+                if isinstance(config["authProvider"],
+                              PasswordPolicyAuthenticationProviderCondition):
+                    self.auth_provider = config["authProvider"]
+                else:
+                    self.auth_provider = PasswordPolicyAuthenticationProviderCondition(
+                        config["authProvider"]
+                    )
+            else:
+                self.auth_provider = None
+            if "people" in config:
+                if isinstance(config["people"],
+                              PolicyPeopleCondition):
+                    self.people = config["people"]
+                else:
+                    self.people = PolicyPeopleCondition(
+                        config["people"]
+                    )
+            else:
+                self.people = None
         else:
             self.auth_provider = None
             self.people = None
+
+    def request_format(self):
+        return {
+            "authProvider": self.auth_provider,
+            "people": self.people
+        }
