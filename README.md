@@ -6,6 +6,8 @@
 
 ![PyPI](https://img.shields.io/pypi/v/okta)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/okta)
+![Code Style](https://img.shields.io/badge/Code%20Style-flake8-informational.svg)
+
 
 # Okta Python Management SDK
 * [Release status](#release-status)
