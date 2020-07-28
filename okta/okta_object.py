@@ -1,5 +1,5 @@
 class OktaObject:
-    PRIMITIVE_PY_TYPES = (int, str, bool, dict, set, tuple)
+    PRIMITIVE_PY_TYPES = (int, str, bool, dict, set, tuple, list)
     """
     Base object for all Okta datatypes
     """
