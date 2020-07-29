@@ -662,7 +662,7 @@ class TestGroupsResource:
 
     # @pytest.mark.vcr()
     @pytest.mark.asyncio
-    @pytest.mark.skip
+    # @pytest.mark.skip
     async def test_group_assigned_applications(self):
         # Instantiate Mock Client
         client = MockOktaClient()
@@ -684,16 +684,19 @@ class TestGroupsResource:
 
         # Create Application object and Application in Org
         APP_LABEL = "Test Assigned-Applications"
+        APP_NAME = "template_swa"
         BUTTON_FIELD = "btn-login"
         PASSWORD_FIELD = "txt-box-password"
         USERNAME_FIELD = "txt-box-username"
-        URL = "https://test.okta.com/login.html"
+        URL = "https://example.com/login.html"
+        LOGIN_URL_REGEX = f"^{URL}$"
 
         swa_app_settings_app = models.SwaApplicationSettingsApplication({
             "buttonField": BUTTON_FIELD,
             "passwordField": PASSWORD_FIELD,
             "usernameField": USERNAME_FIELD,
-            "url": URL
+            "url": URL,
+            "loginUrlRegex": LOGIN_URL_REGEX
         })
 
         swa_app_settings = models.SwaApplicationSettings({
@@ -701,13 +704,19 @@ class TestGroupsResource:
         })
 
         swa_app_obj = models.SwaApplication({
+            "name": APP_NAME,
             "label": APP_LABEL,
-            "settings": swa_app_settings
+            "settings": swa_app_settings,
+            "signOnMode": models.ApplicationSignOnMode.BROWSER_PLUGIN
         })
+
+        print(swa_app_obj.sign_on_mode)
+        print(swa_app_obj.as_dict())
 
         swa_app, _, err = await client.create_application(swa_app_obj)
         assert err is None
         assert isinstance(swa_app, models.SwaApplication)
+        return
 
         # Assign app and group
         assign_ag_req = models.ApplicationGroupAssignment({
