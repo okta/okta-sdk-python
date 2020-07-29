@@ -57,8 +57,13 @@ class {{pascalCase model.modelName}}(
             else:
                 self.{{snakeCase prop.propertyName}} = None
             {{else}}
+            {{#if (ne prop.default undefined) }}
+            self.{{snakeCase prop.propertyName}} = config["{{camelCase prop.propertyName}}"]\
+                if "{{camelCase prop.propertyName}}" in config else "{{prop.default}}"
+            {{else}}
             self.{{snakeCase prop.propertyName}} = config["{{camelCase prop.propertyName}}"]\
                 if "{{camelCase prop.propertyName}}" in config else None
+            {{/if}}
             {{/if}}
             {{/each}}
         else:

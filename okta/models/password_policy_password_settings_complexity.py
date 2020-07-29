@@ -43,19 +43,19 @@ class PasswordPolicyPasswordSettingsComplexity(
             else:
                 self.dictionary = None
             self.exclude_attributes = config["excludeAttributes"]\
-                if "excludeAttributes" in config else None
+                if "excludeAttributes" in config else "1"
             self.exclude_username = config["excludeUsername"]\
-                if "excludeUsername" in config else None
+                if "excludeUsername" in config else "true"
             self.min_length = config["minLength"]\
-                if "minLength" in config else None
+                if "minLength" in config else "8"
             self.min_lower_case = config["minLowerCase"]\
-                if "minLowerCase" in config else None
+                if "minLowerCase" in config else "1"
             self.min_number = config["minNumber"]\
-                if "minNumber" in config else None
+                if "minNumber" in config else "1"
             self.min_symbol = config["minSymbol"]\
-                if "minSymbol" in config else None
+                if "minSymbol" in config else "1"
             self.min_upper_case = config["minUpperCase"]\
-                if "minUpperCase" in config else None
+                if "minUpperCase" in config else "1"
         else:
             self.dictionary = None
             self.exclude_attributes = "1"

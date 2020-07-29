@@ -31,7 +31,7 @@ class PasswordDictionaryCommon(
         super().__init__(config)
         if config:
             self.exclude = config["exclude"]\
-                if "exclude" in config else None
+                if "exclude" in config else "false"
         else:
             self.exclude = "false"
 

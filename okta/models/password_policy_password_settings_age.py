@@ -31,13 +31,13 @@ class PasswordPolicyPasswordSettingsAge(
         super().__init__(config)
         if config:
             self.expire_warn_days = config["expireWarnDays"]\
-                if "expireWarnDays" in config else None
+                if "expireWarnDays" in config else "0"
             self.history_count = config["historyCount"]\
-                if "historyCount" in config else None
+                if "historyCount" in config else "0"
             self.max_age_days = config["maxAgeDays"]\
-                if "maxAgeDays" in config else None
+                if "maxAgeDays" in config else "0"
             self.min_age_minutes = config["minAgeMinutes"]\
-                if "minAgeMinutes" in config else None
+                if "minAgeMinutes" in config else "0"
         else:
             self.expire_warn_days = "0"
             self.history_count = "0"

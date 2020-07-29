@@ -46,7 +46,7 @@ class SecurePasswordStoreApplication(
             else:
                 self.credentials = None
             self.name = config["name"]\
-                if "name" in config else None
+                if "name" in config else "template_sps"
             if "settings" in config:
                 if isinstance(config["settings"],
                               SecurePasswordStoreApplicationSettings):

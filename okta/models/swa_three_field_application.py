@@ -34,7 +34,7 @@ class SwaThreeFieldApplication(
         super().__init__(config)
         if config:
             self.name = config["name"]\
-                if "name" in config else None
+                if "name" in config else "template_swa3field"
             if "settings" in config:
                 if isinstance(config["settings"],
                               SwaThreeFieldApplicationSettings):

@@ -34,7 +34,7 @@ class WsFederationApplication(
         super().__init__(config)
         if config:
             self.name = config["name"]\
-                if "name" in config else None
+                if "name" in config else "template_wsfed"
             if "settings" in config:
                 if isinstance(config["settings"],
                               WsFederationApplicationSettings):

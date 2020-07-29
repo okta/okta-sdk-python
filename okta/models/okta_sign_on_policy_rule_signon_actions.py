@@ -39,9 +39,9 @@ class OktaSignOnPolicyRuleSignonActions(
             self.factor_prompt_mode = config["factorPromptMode"]\
                 if "factorPromptMode" in config else None
             self.remember_device_by_default = config["rememberDeviceByDefault"]\
-                if "rememberDeviceByDefault" in config else None
+                if "rememberDeviceByDefault" in config else "false"
             self.require_factor = config["requireFactor"]\
-                if "requireFactor" in config else None
+                if "requireFactor" in config else "false"
             if "session" in config:
                 if isinstance(config["session"],
                               OktaSignOnPolicyRuleSignonSessionActions):
