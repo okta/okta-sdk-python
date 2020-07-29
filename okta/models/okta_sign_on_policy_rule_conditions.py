@@ -34,6 +34,7 @@ class OktaSignOnPolicyRuleConditions(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "authContext" in config:
                 if isinstance(config["authContext"],
@@ -71,8 +72,11 @@ class OktaSignOnPolicyRuleConditions(
             self.people = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "authContext": self.auth_context,
             "network": self.network,
             "people": self.people
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

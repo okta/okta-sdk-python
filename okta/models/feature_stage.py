@@ -32,6 +32,7 @@ class FeatureStage(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "state" in config:
                 if isinstance(config["state"],
@@ -58,7 +59,10 @@ class FeatureStage(
             self.value = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "state": self.state,
             "value": self.value
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

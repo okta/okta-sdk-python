@@ -32,6 +32,7 @@ class PolicySubject(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.filter = config["filter"]\
                 if "filter" in config else None
@@ -67,10 +68,13 @@ class PolicySubject(
             self.user_name_template = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "filter": self.filter,
             "format": self.format,
             "matchAttribute": self.match_attribute,
             "matchType": self.match_type,
             "userNameTemplate": self.user_name_template
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

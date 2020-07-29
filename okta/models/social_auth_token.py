@@ -28,6 +28,7 @@ class SocialAuthToken(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.expires_at = config["expiresAt"]\
                 if "expiresAt" in config else None
@@ -50,7 +51,8 @@ class SocialAuthToken(
             self.token_type = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "expiresAt": self.expires_at,
             "id": self.id,
             "scopes": self.scopes,
@@ -58,3 +60,5 @@ class SocialAuthToken(
             "tokenAuthScheme": self.token_auth_scheme,
             "tokenType": self.token_type
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

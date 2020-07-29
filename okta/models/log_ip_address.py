@@ -30,6 +30,7 @@ class LogIpAddress(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "geographicalContext" in config:
                 if isinstance(config["geographicalContext"],
@@ -54,9 +55,12 @@ class LogIpAddress(
             self.version = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "geographicalContext": self.geographical_context,
             "ip": self.ip,
             "source": self.source,
             "version": self.version
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

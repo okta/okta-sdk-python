@@ -29,6 +29,7 @@ class BookmarkApplicationSettingsApplication(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.request_integration = config["requestIntegration"]\
                 if "requestIntegration" in config else None
@@ -39,7 +40,10 @@ class BookmarkApplicationSettingsApplication(
             self.url = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "requestIntegration": self.request_integration,
             "url": self.url
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

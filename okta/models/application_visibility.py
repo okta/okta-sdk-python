@@ -30,6 +30,7 @@ class ApplicationVisibility(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.app_links = config["appLinks"]\
                 if "appLinks" in config else None
@@ -51,8 +52,11 @@ class ApplicationVisibility(
             self.hide = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "appLinks": self.app_links,
             "autoSubmitToolbar": self.auto_submit_toolbar,
             "hide": self.hide
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

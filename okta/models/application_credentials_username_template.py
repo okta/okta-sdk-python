@@ -28,6 +28,7 @@ class ApplicationCredentialsUsernameTemplate(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.suffix = config["suffix"]\
                 if "suffix" in config else None
@@ -41,8 +42,11 @@ class ApplicationCredentialsUsernameTemplate(
             self.type = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "suffix": self.suffix,
             "template": self.template,
             "type": self.type
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

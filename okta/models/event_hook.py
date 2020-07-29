@@ -32,6 +32,7 @@ class EventHook(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.links = config["links"]\
                 if "links" in config else None
@@ -82,7 +83,8 @@ class EventHook(
             self.verification_status = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "_links": self.links,
             "channel": self.channel,
             "created": self.created,
@@ -94,3 +96,5 @@ class EventHook(
             "status": self.status,
             "verificationStatus": self.verification_status
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

@@ -28,6 +28,7 @@ class TrustedOrigin(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.links = config["links"]\
                 if "links" in config else None
@@ -62,7 +63,8 @@ class TrustedOrigin(
             self.status = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "_links": self.links,
             "created": self.created,
             "createdBy": self.created_by,
@@ -74,3 +76,5 @@ class TrustedOrigin(
             "scopes": self.scopes,
             "status": self.status
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

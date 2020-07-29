@@ -30,6 +30,7 @@ class PolicyAccountLinkFilter(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "groups" in config:
                 if isinstance(config["groups"],
@@ -45,6 +46,9 @@ class PolicyAccountLinkFilter(
             self.groups = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "groups": self.groups
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

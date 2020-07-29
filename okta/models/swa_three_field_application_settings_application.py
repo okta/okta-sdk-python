@@ -29,6 +29,7 @@ class SwaThreeFieldApplicationSettingsApplication(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.button_selector = config["buttonSelector"]\
                 if "buttonSelector" in config else None
@@ -54,7 +55,8 @@ class SwaThreeFieldApplicationSettingsApplication(
             self.user_name_selector = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "buttonSelector": self.button_selector,
             "extraFieldSelector": self.extra_field_selector,
             "extraFieldValue": self.extra_field_value,
@@ -63,3 +65,5 @@ class SwaThreeFieldApplicationSettingsApplication(
             "targetURL": self.target_url,
             "userNameSelector": self.user_name_selector
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

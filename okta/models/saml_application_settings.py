@@ -31,6 +31,7 @@ class SamlApplicationSettings(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "signOn" in config:
                 if isinstance(config["signOn"],
@@ -46,6 +47,9 @@ class SamlApplicationSettings(
             self.sign_on = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "signOn": self.sign_on
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

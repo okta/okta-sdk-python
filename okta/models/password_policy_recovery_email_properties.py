@@ -30,6 +30,7 @@ class PasswordPolicyRecoveryEmailProperties(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "recoveryToken" in config:
                 if isinstance(config["recoveryToken"],
@@ -45,6 +46,9 @@ class PasswordPolicyRecoveryEmailProperties(
             self.recovery_token = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "recoveryToken": self.recovery_token
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

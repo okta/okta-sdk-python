@@ -35,6 +35,7 @@ class IdentityProviderPolicy(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "accountLink" in config:
                 if isinstance(config["accountLink"],
@@ -75,9 +76,12 @@ class IdentityProviderPolicy(
             self.subject = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "accountLink": self.account_link,
             "maxClockSkew": self.max_clock_skew,
             "provisioning": self.provisioning,
             "subject": self.subject
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

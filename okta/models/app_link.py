@@ -28,6 +28,7 @@ class AppLink(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.app_assignment_id = config["appAssignmentId"]\
                 if "appAssignmentId" in config else None
@@ -62,7 +63,8 @@ class AppLink(
             self.sort_order = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "appAssignmentId": self.app_assignment_id,
             "appInstanceId": self.app_instance_id,
             "appName": self.app_name,
@@ -74,3 +76,5 @@ class AppLink(
             "logoUrl": self.logo_url,
             "sortOrder": self.sort_order
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

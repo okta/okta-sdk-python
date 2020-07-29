@@ -30,6 +30,7 @@ class ApplicationSettingsNotificationsVpn(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.help_url = config["helpUrl"]\
                 if "helpUrl" in config else None
@@ -51,8 +52,11 @@ class ApplicationSettingsNotificationsVpn(
             self.network = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "helpUrl": self.help_url,
             "message": self.message,
             "network": self.network
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

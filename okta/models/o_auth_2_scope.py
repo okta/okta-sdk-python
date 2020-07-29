@@ -28,6 +28,7 @@ class OAuth2Scope(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.consent = config["consent"]\
                 if "consent" in config else None
@@ -56,7 +57,8 @@ class OAuth2Scope(
             self.system = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "consent": self.consent,
             "default": self.default,
             "description": self.description,
@@ -66,3 +68,5 @@ class OAuth2Scope(
             "name": self.name,
             "system": self.system
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

@@ -28,6 +28,7 @@ class PolicyNetworkCondition(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.connection = config["connection"]\
                 if "connection" in config else None
@@ -41,8 +42,11 @@ class PolicyNetworkCondition(
             self.include = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "connection": self.connection,
             "exclude": self.exclude,
             "include": self.include
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

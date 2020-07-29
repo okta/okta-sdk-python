@@ -28,6 +28,7 @@ class LogRequest(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.ip_chain = config["ipChain"]\
                 if "ipChain" in config else None
@@ -35,6 +36,9 @@ class LogRequest(
             self.ip_chain = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "ipChain": self.ip_chain
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

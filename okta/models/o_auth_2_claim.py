@@ -30,6 +30,7 @@ class OAuth2Claim(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.links = config["links"]\
                 if "links" in config else None
@@ -75,7 +76,8 @@ class OAuth2Claim(
             self.value_type = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "_links": self.links,
             "alwaysIncludeInToken": self.always_include_in_token,
             "claimType": self.claim_type,
@@ -88,3 +90,5 @@ class OAuth2Claim(
             "value": self.value,
             "valueType": self.value_type
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

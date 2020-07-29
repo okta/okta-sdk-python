@@ -28,6 +28,7 @@ class IdentityProviderPolicyRuleCondition(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.idp_ids = config["idpIds"]\
                 if "idpIds" in config else None
@@ -38,7 +39,10 @@ class IdentityProviderPolicyRuleCondition(
             self.provider = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "idpIds": self.idp_ids,
             "provider": self.provider
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

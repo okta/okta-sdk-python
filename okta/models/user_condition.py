@@ -28,6 +28,7 @@ class UserCondition(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.exclude = config["exclude"]\
                 if "exclude" in config else None
@@ -38,7 +39,10 @@ class UserCondition(
             self.include = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "exclude": self.exclude,
             "include": self.include
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

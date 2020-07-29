@@ -28,6 +28,7 @@ class ActivateFactorRequest(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.attestation = config["attestation"]\
                 if "attestation" in config else None
@@ -47,10 +48,13 @@ class ActivateFactorRequest(
             self.state_token = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "attestation": self.attestation,
             "clientData": self.client_data,
             "passCode": self.pass_code,
             "registrationData": self.registration_data,
             "stateToken": self.state_token
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

@@ -30,6 +30,7 @@ class LogGeographicalContext(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.city = config["city"]\
                 if "city" in config else None
@@ -57,10 +58,13 @@ class LogGeographicalContext(
             self.state = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "city": self.city,
             "country": self.country,
             "geolocation": self.geolocation,
             "postalCode": self.postal_code,
             "state": self.state
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

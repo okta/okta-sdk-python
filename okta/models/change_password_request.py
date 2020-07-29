@@ -30,6 +30,7 @@ class ChangePasswordRequest(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "newPassword" in config:
                 if isinstance(config["newPassword"],
@@ -56,7 +57,10 @@ class ChangePasswordRequest(
             self.old_password = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "newPassword": self.new_password,
             "oldPassword": self.old_password
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

@@ -28,6 +28,7 @@ class OktaSignOnPolicyRuleSignonSessionActions(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.max_session_idle_minutes = config["maxSessionIdleMinutes"]\
                 if "maxSessionIdleMinutes" in config else None
@@ -41,8 +42,11 @@ class OktaSignOnPolicyRuleSignonSessionActions(
             self.use_persistent_cookie = "false"
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "maxSessionIdleMinutes": self.max_session_idle_minutes,
             "maxSessionLifetimeMinutes": self.max_session_lifetime_minutes,
             "usePersistentCookie": self.use_persistent_cookie
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

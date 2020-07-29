@@ -33,6 +33,7 @@ class OktaSignOnPolicyRule(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "actions" in config:
                 if isinstance(config["actions"],
@@ -62,8 +63,11 @@ class OktaSignOnPolicyRule(
             self.name = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "actions": self.actions,
             "conditions": self.conditions,
             "name": self.name
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

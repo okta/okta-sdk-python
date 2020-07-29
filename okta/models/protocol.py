@@ -40,6 +40,7 @@ class Protocol(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "algorithms" in config:
                 if isinstance(config["algorithms"],
@@ -116,7 +117,8 @@ class Protocol(
             self.type = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "algorithms": self.algorithms,
             "credentials": self.credentials,
             "endpoints": self.endpoints,
@@ -126,3 +128,5 @@ class Protocol(
             "settings": self.settings,
             "type": self.type
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

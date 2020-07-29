@@ -3,7 +3,7 @@ class OktaObject:
     """
     Base object for all Okta datatypes
     """
-    def __init__():
+    def __init__(self, config=None):
         pass
 
     def __repr__(self):
@@ -33,3 +33,6 @@ class OktaObject:
             var (any): variable given
         """
         return isinstance(var, OktaObject.PRIMITIVE_PY_TYPES)
+
+    def request_format(self):
+        return {}

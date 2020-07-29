@@ -31,6 +31,7 @@ class OpenIdConnectApplicationSettings(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "oauthClient" in config:
                 if isinstance(config["oauthClient"],
@@ -46,6 +47,9 @@ class OpenIdConnectApplicationSettings(
             self.oauth_client = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "oauthClient": self.oauth_client
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

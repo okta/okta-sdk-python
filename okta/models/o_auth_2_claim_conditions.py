@@ -28,6 +28,7 @@ class OAuth2ClaimConditions(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.scopes = config["scopes"]\
                 if "scopes" in config else None
@@ -35,6 +36,9 @@ class OAuth2ClaimConditions(
             self.scopes = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "scopes": self.scopes
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

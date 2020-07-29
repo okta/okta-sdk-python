@@ -36,6 +36,7 @@ class User(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.embedded = config["embedded"]\
                 if "embedded" in config else None
@@ -122,7 +123,8 @@ class User(
             self.type = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "_embedded": self.embedded,
             "_links": self.links,
             "activated": self.activated,
@@ -138,3 +140,5 @@ class User(
             "transitioningToStatus": self.transitioning_to_status,
             "type": self.type
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

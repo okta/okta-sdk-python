@@ -28,6 +28,7 @@ class PasswordDictionaryCommon(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.exclude = config["exclude"]\
                 if "exclude" in config else None
@@ -35,6 +36,9 @@ class PasswordDictionaryCommon(
             self.exclude = "false"
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "exclude": self.exclude
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

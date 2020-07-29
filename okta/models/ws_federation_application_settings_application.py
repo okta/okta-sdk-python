@@ -29,6 +29,7 @@ class WsFederationApplicationSettingsApplication(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.attribute_statements = config["attributeStatements"]\
                 if "attributeStatements" in config else None
@@ -69,7 +70,8 @@ class WsFederationApplicationSettingsApplication(
             self.w_reply_url = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "attributeStatements": self.attribute_statements,
             "audienceRestriction": self.audience_restriction,
             "authnContextClassRef": self.authn_context_class_ref,
@@ -83,3 +85,5 @@ class WsFederationApplicationSettingsApplication(
             "wReplyOverride": self.w_reply_override,
             "wReplyURL": self.w_reply_url
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

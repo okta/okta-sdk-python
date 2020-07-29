@@ -28,6 +28,7 @@ class ProtocolAlgorithmTypeSignature(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.algorithm = config["algorithm"]\
                 if "algorithm" in config else None
@@ -38,7 +39,10 @@ class ProtocolAlgorithmTypeSignature(
             self.scope = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "algorithm": self.algorithm,
             "scope": self.scope
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

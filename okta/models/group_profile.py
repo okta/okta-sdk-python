@@ -28,6 +28,7 @@ class GroupProfile(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.description = config["description"]\
                 if "description" in config else None
@@ -38,7 +39,10 @@ class GroupProfile(
             self.name = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "description": self.description,
             "name": self.name
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

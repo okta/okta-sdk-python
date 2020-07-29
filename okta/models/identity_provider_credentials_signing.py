@@ -28,6 +28,7 @@ class IdentityProviderCredentialsSigning(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.kid = config["kid"]\
                 if "kid" in config else None
@@ -35,6 +36,9 @@ class IdentityProviderCredentialsSigning(
             self.kid = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "kid": self.kid
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

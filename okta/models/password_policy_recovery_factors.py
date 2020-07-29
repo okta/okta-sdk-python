@@ -34,6 +34,7 @@ class PasswordPolicyRecoveryFactors(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "oktaCall" in config:
                 if isinstance(config["oktaCall"],
@@ -82,9 +83,12 @@ class PasswordPolicyRecoveryFactors(
             self.recovery_question = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "okta_call": self.okta_call,
             "okta_email": self.okta_email,
             "okta_sms": self.okta_sms,
             "recovery_question": self.recovery_question
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

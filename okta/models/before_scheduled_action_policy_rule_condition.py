@@ -32,6 +32,7 @@ class BeforeScheduledActionPolicyRuleCondition(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "duration" in config:
                 if isinstance(config["duration"],
@@ -58,7 +59,10 @@ class BeforeScheduledActionPolicyRuleCondition(
             self.lifecycle_action = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "duration": self.duration,
             "lifecycleAction": self.lifecycle_action
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

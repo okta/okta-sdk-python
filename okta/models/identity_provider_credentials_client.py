@@ -28,6 +28,7 @@ class IdentityProviderCredentialsClient(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.client_id = config["clientId"]\
                 if "clientId" in config else None
@@ -38,7 +39,10 @@ class IdentityProviderCredentialsClient(
             self.client_secret = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "client_id": self.client_id,
             "client_secret": self.client_secret
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

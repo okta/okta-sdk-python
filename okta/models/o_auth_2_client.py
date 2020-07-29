@@ -28,6 +28,7 @@ class OAuth2Client(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.links = config["links"]\
                 if "links" in config else None
@@ -47,10 +48,13 @@ class OAuth2Client(
             self.logo_uri = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "_links": self.links,
             "client_id": self.client_id,
             "client_name": self.client_name,
             "client_uri": self.client_uri,
             "logo_uri": self.logo_uri
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

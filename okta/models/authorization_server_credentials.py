@@ -30,6 +30,7 @@ class AuthorizationServerCredentials(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "signing" in config:
                 if isinstance(config["signing"],
@@ -45,6 +46,9 @@ class AuthorizationServerCredentials(
             self.signing = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "signing": self.signing
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

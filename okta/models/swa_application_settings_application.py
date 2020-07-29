@@ -29,6 +29,7 @@ class SwaApplicationSettingsApplication(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.button_field = config["buttonField"]\
                 if "buttonField" in config else None
@@ -48,10 +49,13 @@ class SwaApplicationSettingsApplication(
             self.username_field = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "buttonField": self.button_field,
             "loginUrlRegex": self.login_url_regex,
             "passwordField": self.password_field,
             "url": self.url,
             "usernameField": self.username_field
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

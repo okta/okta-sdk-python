@@ -28,6 +28,7 @@ class PushUserFactorProfile(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.credential_id = config["credentialId"]\
                 if "credentialId" in config else None
@@ -50,7 +51,8 @@ class PushUserFactorProfile(
             self.version = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "credentialId": self.credential_id,
             "deviceToken": self.device_token,
             "deviceType": self.device_type,
@@ -58,3 +60,5 @@ class PushUserFactorProfile(
             "platform": self.platform,
             "version": self.version
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

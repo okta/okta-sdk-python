@@ -28,6 +28,7 @@ class CallUserFactorProfile(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.phone_extension = config["phoneExtension"]\
                 if "phoneExtension" in config else None
@@ -38,7 +39,10 @@ class CallUserFactorProfile(
             self.phone_number = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "phoneExtension": self.phone_extension,
             "phoneNumber": self.phone_number
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

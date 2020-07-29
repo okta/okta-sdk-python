@@ -30,6 +30,7 @@ class ProtocolRelayState(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "format" in config:
                 if isinstance(config["format"],
@@ -45,6 +46,9 @@ class ProtocolRelayState(
             self.format = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "format": self.format
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

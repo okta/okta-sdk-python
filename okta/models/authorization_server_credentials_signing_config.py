@@ -32,6 +32,7 @@ class AuthorizationServerCredentialsSigningConfig(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.kid = config["kid"]\
                 if "kid" in config else None
@@ -67,10 +68,13 @@ class AuthorizationServerCredentialsSigningConfig(
             self.use = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "kid": self.kid,
             "lastRotated": self.last_rotated,
             "nextRotation": self.next_rotation,
             "rotationMode": self.rotation_mode,
             "use": self.use
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

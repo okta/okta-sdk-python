@@ -28,6 +28,7 @@ class LogDebugContext(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.debug_data = config["debugData"]\
                 if "debugData" in config else None
@@ -35,6 +36,9 @@ class LogDebugContext(
             self.debug_data = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "debugData": self.debug_data
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

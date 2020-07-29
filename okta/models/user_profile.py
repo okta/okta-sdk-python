@@ -28,6 +28,7 @@ class UserProfile(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.city = config["city"]\
                 if "city" in config else None
@@ -125,7 +126,8 @@ class UserProfile(
             self.zip_code = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "city": self.city,
             "costCenter": self.cost_center,
             "countryCode": self.country_code,
@@ -158,3 +160,5 @@ class UserProfile(
             "userType": self.user_type,
             "zipCode": self.zip_code
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

@@ -28,6 +28,7 @@ class Duration(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.number = config["number"]\
                 if "number" in config else None
@@ -38,7 +39,10 @@ class Duration(
             self.unit = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "number": self.number,
             "unit": self.unit
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

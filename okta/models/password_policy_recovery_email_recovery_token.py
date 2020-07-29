@@ -28,6 +28,7 @@ class PasswordPolicyRecoveryEmailRecoveryToken(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.token_lifetime_minutes = config["tokenLifetimeMinutes"]\
                 if "tokenLifetimeMinutes" in config else None
@@ -35,6 +36,9 @@ class PasswordPolicyRecoveryEmailRecoveryToken(
             self.token_lifetime_minutes = "10080"
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "tokenLifetimeMinutes": self.token_lifetime_minutes
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

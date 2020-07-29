@@ -28,6 +28,7 @@ class UserStatusPolicyRuleCondition(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.value = config["value"]\
                 if "value" in config else None
@@ -35,6 +36,9 @@ class UserStatusPolicyRuleCondition(
             self.value = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "value": self.value
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

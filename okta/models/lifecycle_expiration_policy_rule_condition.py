@@ -28,6 +28,7 @@ class LifecycleExpirationPolicyRuleCondition(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.lifecycle_status = config["lifecycleStatus"]\
                 if "lifecycleStatus" in config else None
@@ -41,8 +42,11 @@ class LifecycleExpirationPolicyRuleCondition(
             self.unit = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "lifecycleStatus": self.lifecycle_status,
             "number": self.number,
             "unit": self.unit
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

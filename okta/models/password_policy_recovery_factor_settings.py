@@ -28,6 +28,7 @@ class PasswordPolicyRecoveryFactorSettings(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.status = config["status"]\
                 if "status" in config else None
@@ -35,6 +36,9 @@ class PasswordPolicyRecoveryFactorSettings(
             self.status = "INACTIVE"
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "status": self.status
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

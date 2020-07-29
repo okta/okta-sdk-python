@@ -31,6 +31,7 @@ class EmailUserFactor(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "profile" in config:
                 if isinstance(config["profile"],
@@ -46,6 +47,9 @@ class EmailUserFactor(
             self.profile = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "profile": self.profile
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

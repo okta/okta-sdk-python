@@ -34,6 +34,7 @@ class PasswordPolicyPasswordSettings(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "age" in config:
                 if isinstance(config["age"],
@@ -71,8 +72,11 @@ class PasswordPolicyPasswordSettings(
             self.lockout = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "age": self.age,
             "complexity": self.complexity,
             "lockout": self.lockout
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

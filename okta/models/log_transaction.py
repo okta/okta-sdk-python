@@ -28,6 +28,7 @@ class LogTransaction(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.detail = config["detail"]\
                 if "detail" in config else None
@@ -41,8 +42,11 @@ class LogTransaction(
             self.type = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "detail": self.detail,
             "id": self.id,
             "type": self.type
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

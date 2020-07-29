@@ -33,6 +33,7 @@ class PushUserFactor(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.expires_at = config["expiresAt"]\
                 if "expiresAt" in config else None
@@ -62,8 +63,11 @@ class PushUserFactor(
             self.profile = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "expiresAt": self.expires_at,
             "factorResult": self.factor_result,
             "profile": self.profile
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

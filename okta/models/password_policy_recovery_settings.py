@@ -30,6 +30,7 @@ class PasswordPolicyRecoverySettings(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "factors" in config:
                 if isinstance(config["factors"],
@@ -45,6 +46,9 @@ class PasswordPolicyRecoverySettings(
             self.factors = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "factors": self.factors
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

@@ -30,6 +30,7 @@ class PasswordPolicyPasswordSettingsComplexity(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "dictionary" in config:
                 if isinstance(config["dictionary"],
@@ -66,7 +67,8 @@ class PasswordPolicyPasswordSettingsComplexity(
             self.min_upper_case = "1"
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "dictionary": self.dictionary,
             "excludeAttributes": self.exclude_attributes,
             "excludeUsername": self.exclude_username,
@@ -76,3 +78,5 @@ class PasswordPolicyPasswordSettingsComplexity(
             "minSymbol": self.min_symbol,
             "minUpperCase": self.min_upper_case
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

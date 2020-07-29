@@ -28,6 +28,7 @@ class UserActivationToken(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.activation_token = config["activationToken"]\
                 if "activationToken" in config else None
@@ -38,7 +39,10 @@ class UserActivationToken(
             self.activation_url = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "activationToken": self.activation_token,
             "activationUrl": self.activation_url
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

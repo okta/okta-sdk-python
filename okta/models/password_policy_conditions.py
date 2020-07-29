@@ -32,6 +32,7 @@ class PasswordPolicyConditions(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "authProvider" in config:
                 if isinstance(config["authProvider"],
@@ -58,7 +59,10 @@ class PasswordPolicyConditions(
             self.people = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "authProvider": self.auth_provider,
             "people": self.people
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

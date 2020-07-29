@@ -36,6 +36,7 @@ class UserPolicyRuleCondition(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.exclude = config["exclude"]\
                 if "exclude" in config else None
@@ -90,7 +91,8 @@ class UserPolicyRuleCondition(
             self.user_lifecycle_attribute = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "exclude": self.exclude,
             "inactivity": self.inactivity,
             "include": self.include,
@@ -98,3 +100,5 @@ class UserPolicyRuleCondition(
             "passwordExpiration": self.password_expiration,
             "userLifecycleAttribute": self.user_lifecycle_attribute
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

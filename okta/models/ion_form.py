@@ -28,6 +28,7 @@ class IonForm(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.accepts = config["accepts"]\
                 if "accepts" in config else None
@@ -59,7 +60,8 @@ class IonForm(
             self.value = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "accepts": self.accepts,
             "href": self.href,
             "method": self.method,
@@ -70,3 +72,5 @@ class IonForm(
             "relatesTo": self.relates_to,
             "value": self.value
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

@@ -28,6 +28,7 @@ class LogGeolocation(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.lat = config["lat"]\
                 if "lat" in config else None
@@ -38,7 +39,10 @@ class LogGeolocation(
             self.lon = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "lat": self.lat,
             "lon": self.lon
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

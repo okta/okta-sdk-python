@@ -28,6 +28,7 @@ class SamlApplicationSettingsSignOn(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.assertion_signed = config["assertionSigned"]\
                 if "assertionSigned" in config else None
@@ -95,7 +96,8 @@ class SamlApplicationSettingsSignOn(
             self.subject_name_id_template = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "assertionSigned": self.assertion_signed,
             "attributeStatements": self.attribute_statements,
             "audience": self.audience,
@@ -118,3 +120,5 @@ class SamlApplicationSettingsSignOn(
             "subjectNameIdFormat": self.subject_name_id_format,
             "subjectNameIdTemplate": self.subject_name_id_template
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format
