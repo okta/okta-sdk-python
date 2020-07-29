@@ -28,6 +28,7 @@ class VerifyFactorRequest(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.activation_token = config["activationToken"]\
                 if "activationToken" in config else None
@@ -56,7 +57,8 @@ class VerifyFactorRequest(
             self.state_token = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "activationToken": self.activation_token,
             "answer": self.answer,
             "attestation": self.attestation,
@@ -66,3 +68,5 @@ class VerifyFactorRequest(
             "registrationData": self.registration_data,
             "stateToken": self.state_token
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

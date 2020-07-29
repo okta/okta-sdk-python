@@ -34,6 +34,7 @@ class GroupRule(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "actions" in config:
                 if isinstance(config["actions"],
@@ -86,7 +87,8 @@ class GroupRule(
             self.type = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "actions": self.actions,
             "conditions": self.conditions,
             "created": self.created,
@@ -96,3 +98,5 @@ class GroupRule(
             "status": self.status,
             "type": self.type
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

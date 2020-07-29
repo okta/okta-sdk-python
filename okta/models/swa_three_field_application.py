@@ -31,6 +31,7 @@ class SwaThreeFieldApplication(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.name = config["name"]\
                 if "name" in config else None
@@ -49,7 +50,10 @@ class SwaThreeFieldApplication(
             self.settings = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "name": self.name,
             "settings": self.settings
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

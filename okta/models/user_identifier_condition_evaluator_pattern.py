@@ -28,6 +28,7 @@ class UserIdentifierConditionEvaluatorPattern(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.match_type = config["matchType"]\
                 if "matchType" in config else None
@@ -38,7 +39,10 @@ class UserIdentifierConditionEvaluatorPattern(
             self.value = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "matchType": self.match_type,
             "value": self.value
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

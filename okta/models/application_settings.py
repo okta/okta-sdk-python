@@ -32,6 +32,7 @@ class ApplicationSettings(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "app" in config:
                 if isinstance(config["app"],
@@ -64,9 +65,12 @@ class ApplicationSettings(
             self.notifications = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "app": self.app,
             "implicitAssignment": self.implicit_assignment,
             "inlineHookId": self.inline_hook_id,
             "notifications": self.notifications
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

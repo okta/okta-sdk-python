@@ -28,6 +28,7 @@ class CsrMetadataSubject(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.common_name = config["commonName"]\
                 if "commonName" in config else None
@@ -50,7 +51,8 @@ class CsrMetadataSubject(
             self.state_or_province_name = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "commonName": self.common_name,
             "countryName": self.country_name,
             "localityName": self.locality_name,
@@ -58,3 +60,5 @@ class CsrMetadataSubject(
             "organizationalUnitName": self.organizational_unit_name,
             "stateOrProvinceName": self.state_or_province_name
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

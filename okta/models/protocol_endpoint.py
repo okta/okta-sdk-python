@@ -28,6 +28,7 @@ class ProtocolEndpoint(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.binding = config["binding"]\
                 if "binding" in config else None
@@ -44,9 +45,12 @@ class ProtocolEndpoint(
             self.url = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "binding": self.binding,
             "destination": self.destination,
             "type": self.type,
             "url": self.url
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

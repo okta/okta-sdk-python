@@ -28,6 +28,7 @@ class ApplicationGroupAssignment(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.embedded = config["embedded"]\
                 if "embedded" in config else None
@@ -50,7 +51,8 @@ class ApplicationGroupAssignment(
             self.profile = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "_embedded": self.embedded,
             "_links": self.links,
             "id": self.id,
@@ -58,3 +60,5 @@ class ApplicationGroupAssignment(
             "priority": self.priority,
             "profile": self.profile
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

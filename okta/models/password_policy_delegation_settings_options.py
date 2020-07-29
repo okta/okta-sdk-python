@@ -28,6 +28,7 @@ class PasswordPolicyDelegationSettingsOptions(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.skip_unlock = config["skipUnlock"]\
                 if "skipUnlock" in config else None
@@ -35,6 +36,9 @@ class PasswordPolicyDelegationSettingsOptions(
             self.skip_unlock = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "skipUnlock": self.skip_unlock
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

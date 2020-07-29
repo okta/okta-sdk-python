@@ -28,6 +28,7 @@ class JwkUse(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.use = config["use"]\
                 if "use" in config else None
@@ -35,6 +36,9 @@ class JwkUse(
             self.use = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "use": self.use
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

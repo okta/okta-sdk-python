@@ -30,6 +30,7 @@ class InlineHookChannel(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "config" in config:
                 if isinstance(config["config"],
@@ -51,8 +52,11 @@ class InlineHookChannel(
             self.version = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "config": self.config,
             "type": self.type,
             "version": self.version
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

@@ -32,6 +32,7 @@ class Policy(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.embedded = config["embedded"]\
                 if "embedded" in config else None
@@ -88,7 +89,8 @@ class Policy(
             self.type = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "_embedded": self.embedded,
             "_links": self.links,
             "conditions": self.conditions,
@@ -102,3 +104,5 @@ class Policy(
             "system": self.system,
             "type": self.type
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

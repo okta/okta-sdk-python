@@ -30,6 +30,7 @@ class ApplicationSettingsNotifications(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "vpn" in config:
                 if isinstance(config["vpn"],
@@ -45,6 +46,9 @@ class ApplicationSettingsNotifications(
             self.vpn = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "vpn": self.vpn
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

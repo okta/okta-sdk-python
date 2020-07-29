@@ -28,6 +28,7 @@ class ApplicationLicensing(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.seat_count = config["seatCount"]\
                 if "seatCount" in config else None
@@ -35,6 +36,9 @@ class ApplicationLicensing(
             self.seat_count = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "seatCount": self.seat_count
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

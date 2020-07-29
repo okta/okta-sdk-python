@@ -28,6 +28,7 @@ class ApplicationAccessibility(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.error_redirect_url = config["errorRedirectUrl"]\
                 if "errorRedirectUrl" in config else None
@@ -41,8 +42,11 @@ class ApplicationAccessibility(
             self.self_service = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "errorRedirectUrl": self.error_redirect_url,
             "loginRedirectUrl": self.login_redirect_url,
             "selfService": self.self_service
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

@@ -28,6 +28,7 @@ class IdentityProviderApplicationUser(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.embedded = config["embedded"]\
                 if "embedded" in config else None
@@ -53,7 +54,8 @@ class IdentityProviderApplicationUser(
             self.profile = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "_embedded": self.embedded,
             "_links": self.links,
             "created": self.created,
@@ -62,3 +64,5 @@ class IdentityProviderApplicationUser(
             "lastUpdated": self.last_updated,
             "profile": self.profile
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

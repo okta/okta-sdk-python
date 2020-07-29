@@ -33,6 +33,7 @@ class PasswordPolicy(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "conditions" in config:
                 if isinstance(config["conditions"],
@@ -59,7 +60,10 @@ class PasswordPolicy(
             self.settings = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "conditions": self.conditions,
             "settings": self.settings
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

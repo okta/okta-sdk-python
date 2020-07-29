@@ -30,6 +30,7 @@ class PasswordCredentialHash(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "algorithm" in config:
                 if isinstance(config["algorithm"],
@@ -57,10 +58,13 @@ class PasswordCredentialHash(
             self.worker_factor = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "algorithm": self.algorithm,
             "salt": self.salt,
             "saltOrder": self.salt_order,
             "value": self.value,
             "workerFactor": self.worker_factor
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

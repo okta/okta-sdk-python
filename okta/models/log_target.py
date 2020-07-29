@@ -28,6 +28,7 @@ class LogTarget(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.alternate_id = config["alternateId"]\
                 if "alternateId" in config else None
@@ -47,10 +48,13 @@ class LogTarget(
             self.type = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "alternateId": self.alternate_id,
             "detailEntry": self.detail_entry,
             "displayName": self.display_name,
             "id": self.id,
             "type": self.type
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

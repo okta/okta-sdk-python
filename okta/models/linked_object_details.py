@@ -30,6 +30,7 @@ class LinkedObjectDetails(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.description = config["description"]\
                 if "description" in config else None
@@ -54,9 +55,12 @@ class LinkedObjectDetails(
             self.type = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "description": self.description,
             "name": self.name,
             "title": self.title,
             "type": self.type
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

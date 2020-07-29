@@ -28,6 +28,7 @@ class WebAuthnUserFactorProfile(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.authenticator_name = config["authenticatorName"]\
                 if "authenticatorName" in config else None
@@ -38,7 +39,10 @@ class WebAuthnUserFactorProfile(
             self.credential_id = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "authenticatorName": self.authenticator_name,
             "credentialId": self.credential_id
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

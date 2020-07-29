@@ -46,6 +46,7 @@ class LogEvent(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "actor" in config:
                 if isinstance(config["actor"],
@@ -170,7 +171,8 @@ class LogEvent(
             self.version = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "actor": self.actor,
             "authenticationContext": self.authentication_context,
             "client": self.client,
@@ -188,3 +190,5 @@ class LogEvent(
             "uuid": self.uuid,
             "version": self.version
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

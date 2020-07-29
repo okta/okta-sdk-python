@@ -28,6 +28,7 @@ class LogUserAgent(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.browser = config["browser"]\
                 if "browser" in config else None
@@ -41,8 +42,11 @@ class LogUserAgent(
             self.raw_user_agent = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "browser": self.browser,
             "os": self.os,
             "rawUserAgent": self.raw_user_agent
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

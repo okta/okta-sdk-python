@@ -28,6 +28,7 @@ class SmsUserFactorProfile(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.phone_number = config["phoneNumber"]\
                 if "phoneNumber" in config else None
@@ -35,6 +36,9 @@ class SmsUserFactorProfile(
             self.phone_number = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "phoneNumber": self.phone_number
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

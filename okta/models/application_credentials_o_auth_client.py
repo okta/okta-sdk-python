@@ -30,6 +30,7 @@ class ApplicationCredentialsOAuthClient(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.auto_key_rotation = config["autoKeyRotation"]\
                 if "autoKeyRotation" in config else None
@@ -54,9 +55,12 @@ class ApplicationCredentialsOAuthClient(
             self.token_endpoint_auth_method = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "autoKeyRotation": self.auto_key_rotation,
             "client_id": self.client_id,
             "client_secret": self.client_secret,
             "token_endpoint_auth_method": self.token_endpoint_auth_method
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

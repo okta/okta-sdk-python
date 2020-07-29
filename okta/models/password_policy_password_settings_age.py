@@ -28,6 +28,7 @@ class PasswordPolicyPasswordSettingsAge(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.expire_warn_days = config["expireWarnDays"]\
                 if "expireWarnDays" in config else None
@@ -44,9 +45,12 @@ class PasswordPolicyPasswordSettingsAge(
             self.min_age_minutes = "0"
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "expireWarnDays": self.expire_warn_days,
             "historyCount": self.history_count,
             "maxAgeDays": self.max_age_days,
             "minAgeMinutes": self.min_age_minutes
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

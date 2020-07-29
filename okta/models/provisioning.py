@@ -32,6 +32,7 @@ class Provisioning(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.action = config["action"]\
                 if "action" in config else None
@@ -64,9 +65,12 @@ class Provisioning(
             self.profile_master = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "action": self.action,
             "conditions": self.conditions,
             "groups": self.groups,
             "profileMaster": self.profile_master
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

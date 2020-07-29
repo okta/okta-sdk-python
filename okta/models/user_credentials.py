@@ -34,6 +34,7 @@ class UserCredentials(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "password" in config:
                 if isinstance(config["password"],
@@ -71,8 +72,11 @@ class UserCredentials(
             self.recovery_question = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "password": self.password,
             "provider": self.provider,
             "recovery_question": self.recovery_question
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

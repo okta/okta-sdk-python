@@ -28,6 +28,7 @@ class IdentityProviderCredentialsTrust(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.audience = config["audience"]\
                 if "audience" in config else None
@@ -47,10 +48,13 @@ class IdentityProviderCredentialsTrust(
             self.revocation_cache_lifetime = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "audience": self.audience,
             "issuer": self.issuer,
             "kid": self.kid,
             "revocation": self.revocation,
             "revocationCacheLifetime": self.revocation_cache_lifetime
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

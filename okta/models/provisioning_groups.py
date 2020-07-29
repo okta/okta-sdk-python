@@ -28,6 +28,7 @@ class ProvisioningGroups(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.action = config["action"]\
                 if "action" in config else None
@@ -44,9 +45,12 @@ class ProvisioningGroups(
             self.source_attribute_name = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "action": self.action,
             "assignments": self.assignments,
             "filter": self.filter,
             "sourceAttributeName": self.source_attribute_name
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

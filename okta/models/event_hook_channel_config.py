@@ -30,6 +30,7 @@ class EventHookChannelConfig(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "authScheme" in config:
                 if isinstance(config["authScheme"],
@@ -51,8 +52,11 @@ class EventHookChannelConfig(
             self.uri = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "authScheme": self.auth_scheme,
             "headers": self.headers,
             "uri": self.uri
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

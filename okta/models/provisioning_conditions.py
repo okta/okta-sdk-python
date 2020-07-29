@@ -32,6 +32,7 @@ class ProvisioningConditions(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "deprovisioned" in config:
                 if isinstance(config["deprovisioned"],
@@ -58,7 +59,10 @@ class ProvisioningConditions(
             self.suspended = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "deprovisioned": self.deprovisioned,
             "suspended": self.suspended
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

@@ -32,6 +32,7 @@ class Session(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.links = config["links"]\
                 if "links" in config else None
@@ -85,7 +86,8 @@ class Session(
             self.user_id = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "_links": self.links,
             "amr": self.amr,
             "createdAt": self.created_at,
@@ -98,3 +100,5 @@ class Session(
             "status": self.status,
             "userId": self.user_id
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

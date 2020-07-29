@@ -30,6 +30,7 @@ class GroupRuleAction(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "assignUserToGroups" in config:
                 if isinstance(config["assignUserToGroups"],
@@ -45,6 +46,9 @@ class GroupRuleAction(
             self.assign_user_to_groups = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "assignUserToGroups": self.assign_user_to_groups
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

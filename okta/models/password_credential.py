@@ -32,6 +32,7 @@ class PasswordCredential(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "hash" in config:
                 if isinstance(config["hash"],
@@ -61,8 +62,11 @@ class PasswordCredential(
             self.value = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "hash": self.hash,
             "hook": self.hook,
             "value": self.value
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

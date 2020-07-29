@@ -28,6 +28,7 @@ class Csr(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.created = config["created"]\
                 if "created" in config else None
@@ -44,9 +45,12 @@ class Csr(
             self.kty = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "created": self.created,
             "csr": self.csr,
             "id": self.id,
             "kty": self.kty
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

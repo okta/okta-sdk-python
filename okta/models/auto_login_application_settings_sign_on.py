@@ -28,6 +28,7 @@ class AutoLoginApplicationSettingsSignOn(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.login_url = config["loginUrl"]\
                 if "loginUrl" in config else None
@@ -38,7 +39,10 @@ class AutoLoginApplicationSettingsSignOn(
             self.redirect_url = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "loginUrl": self.login_url,
             "redirectUrl": self.redirect_url
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

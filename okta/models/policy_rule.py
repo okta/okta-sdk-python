@@ -28,6 +28,7 @@ class PolicyRule(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.created = config["created"]\
                 if "created" in config else None
@@ -53,7 +54,8 @@ class PolicyRule(
             self.type = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "created": self.created,
             "id": self.id,
             "lastUpdated": self.last_updated,
@@ -62,3 +64,5 @@ class PolicyRule(
             "system": self.system,
             "type": self.type
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

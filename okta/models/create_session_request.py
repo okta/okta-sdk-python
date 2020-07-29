@@ -28,6 +28,7 @@ class CreateSessionRequest(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.session_token = config["sessionToken"]\
                 if "sessionToken" in config else None
@@ -35,6 +36,9 @@ class CreateSessionRequest(
             self.session_token = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "sessionToken": self.session_token
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

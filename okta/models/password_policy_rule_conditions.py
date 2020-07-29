@@ -32,6 +32,7 @@ class PasswordPolicyRuleConditions(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "network" in config:
                 if isinstance(config["network"],
@@ -58,7 +59,10 @@ class PasswordPolicyRuleConditions(
             self.people = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "network": self.network,
             "people": self.people
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

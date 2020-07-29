@@ -28,6 +28,7 @@ class ResetPasswordToken(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.reset_password_url = config["resetPasswordUrl"]\
                 if "resetPasswordUrl" in config else None
@@ -35,6 +36,9 @@ class ResetPasswordToken(
             self.reset_password_url = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "resetPasswordUrl": self.reset_password_url
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

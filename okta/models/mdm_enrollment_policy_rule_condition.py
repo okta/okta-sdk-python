@@ -28,6 +28,7 @@ class MdmEnrollmentPolicyRuleCondition(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.block_non_safe_android = config["blockNonSafeAndroid"]\
                 if "blockNonSafeAndroid" in config else None
@@ -38,7 +39,10 @@ class MdmEnrollmentPolicyRuleCondition(
             self.enrollment = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "blockNonSafeAndroid": self.block_non_safe_android,
             "enrollment": self.enrollment
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

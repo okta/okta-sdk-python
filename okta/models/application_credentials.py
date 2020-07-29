@@ -32,6 +32,7 @@ class ApplicationCredentials(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "signing" in config:
                 if isinstance(config["signing"],
@@ -58,7 +59,10 @@ class ApplicationCredentials(
             self.user_name_template = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "signing": self.signing,
             "userNameTemplate": self.user_name_template
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

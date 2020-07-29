@@ -32,6 +32,7 @@ class LogClient(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.device = config["device"]\
                 if "device" in config else None
@@ -70,7 +71,8 @@ class LogClient(
             self.zone = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "device": self.device,
             "geographicalContext": self.geographical_context,
             "id": self.id,
@@ -78,3 +80,5 @@ class LogClient(
             "userAgent": self.user_agent,
             "zone": self.zone
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

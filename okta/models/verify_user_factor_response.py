@@ -28,6 +28,7 @@ class VerifyUserFactorResponse(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.embedded = config["embedded"]\
                 if "embedded" in config else None
@@ -47,10 +48,13 @@ class VerifyUserFactorResponse(
             self.factor_result_message = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "_embedded": self.embedded,
             "_links": self.links,
             "expiresAt": self.expires_at,
             "factorResult": self.factor_result,
             "factorResultMessage": self.factor_result_message
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

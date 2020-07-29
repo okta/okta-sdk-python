@@ -41,6 +41,7 @@ class {{pascalCase model.modelName}}(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         {{#if (gt model.properties.length 0)}}
         if config:
             {{#each model.properties as |prop|}}
@@ -73,9 +74,12 @@ class {{pascalCase model.modelName}}(
         {{/if}}
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             {{#each model.properties as |prop|}}
             "{{prop.propertyName}}": self.{{snakeCase prop.propertyName}}{{#unless @last}},{{/unless}}
             {{/each}}
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format
 {{/if}}

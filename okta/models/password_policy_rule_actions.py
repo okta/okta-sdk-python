@@ -30,6 +30,7 @@ class PasswordPolicyRuleActions(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "passwordChange" in config:
                 if isinstance(config["passwordChange"],
@@ -67,8 +68,11 @@ class PasswordPolicyRuleActions(
             self.self_service_unlock = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "passwordChange": self.password_change,
             "selfServicePasswordReset": self.self_service_password_reset,
             "selfServiceUnlock": self.self_service_unlock
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

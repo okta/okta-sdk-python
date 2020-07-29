@@ -34,6 +34,7 @@ class CreateUserRequest(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "credentials" in config:
                 if isinstance(config["credentials"],
@@ -74,9 +75,12 @@ class CreateUserRequest(
             self.type = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "credentials": self.credentials,
             "groupIds": self.group_ids,
             "profile": self.profile,
             "type": self.type
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

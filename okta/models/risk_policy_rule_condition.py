@@ -28,6 +28,7 @@ class RiskPolicyRuleCondition(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.behaviors = config["behaviors"]\
                 if "behaviors" in config else None
@@ -35,6 +36,9 @@ class RiskPolicyRuleCondition(
             self.behaviors = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "behaviors": self.behaviors
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

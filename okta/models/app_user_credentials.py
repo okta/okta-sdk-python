@@ -30,6 +30,7 @@ class AppUserCredentials(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "password" in config:
                 if isinstance(config["password"],
@@ -48,7 +49,10 @@ class AppUserCredentials(
             self.user_name = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "password": self.password,
             "userName": self.user_name
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

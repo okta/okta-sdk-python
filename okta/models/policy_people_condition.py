@@ -32,6 +32,7 @@ class PolicyPeopleCondition(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "groups" in config:
                 if isinstance(config["groups"],
@@ -58,7 +59,10 @@ class PolicyPeopleCondition(
             self.users = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "groups": self.groups,
             "users": self.users
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

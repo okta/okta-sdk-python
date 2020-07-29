@@ -28,6 +28,7 @@ class TempPassword(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.temp_password = config["tempPassword"]\
                 if "tempPassword" in config else None
@@ -35,6 +36,9 @@ class TempPassword(
             self.temp_password = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "tempPassword": self.temp_password
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

@@ -28,6 +28,7 @@ class JsonWebKey(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.links = config["links"]\
                 if "links" in config else None
@@ -80,7 +81,8 @@ class JsonWebKey(
             self.x_5_u = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "_links": self.links,
             "alg": self.alg,
             "created": self.created,
@@ -98,3 +100,5 @@ class JsonWebKey(
             "x5t#S256": self.x_5_t_s_256,
             "x5u": self.x_5_u
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

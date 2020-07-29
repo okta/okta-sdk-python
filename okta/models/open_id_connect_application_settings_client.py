@@ -34,6 +34,7 @@ class OpenIdConnectApplicationSettingsClient(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "applicationType" in config:
                 if isinstance(config["applicationType"],
@@ -98,7 +99,8 @@ class OpenIdConnectApplicationSettingsClient(
             self.tos_uri = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "application_type": self.application_type,
             "client_uri": self.client_uri,
             "consent_method": self.consent_method,
@@ -112,3 +114,5 @@ class OpenIdConnectApplicationSettingsClient(
             "response_types": self.response_types,
             "tos_uri": self.tos_uri
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

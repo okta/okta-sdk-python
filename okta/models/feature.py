@@ -34,6 +34,7 @@ class Feature(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.links = config["links"]\
                 if "links" in config else None
@@ -83,7 +84,8 @@ class Feature(
             self.type = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "_links": self.links,
             "description": self.description,
             "id": self.id,
@@ -92,3 +94,5 @@ class Feature(
             "status": self.status,
             "type": self.type
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

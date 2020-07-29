@@ -29,6 +29,7 @@ class SecurePasswordStoreApplicationSettingsApplication(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.optional_field_1 = config["optionalField1"]\
                 if "optionalField1" in config else None
@@ -60,7 +61,8 @@ class SecurePasswordStoreApplicationSettingsApplication(
             self.username_field = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "optionalField1": self.optional_field_1,
             "optionalField1Value": self.optional_field_1_value,
             "optionalField2": self.optional_field_2,
@@ -71,3 +73,5 @@ class SecurePasswordStoreApplicationSettingsApplication(
             "url": self.url,
             "usernameField": self.username_field
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

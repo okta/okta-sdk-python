@@ -28,6 +28,7 @@ class PasswordPolicyAuthenticationProviderCondition(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.include = config["include"]\
                 if "include" in config else None
@@ -38,7 +39,10 @@ class PasswordPolicyAuthenticationProviderCondition(
             self.provider = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "include": self.include,
             "provider": self.provider
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

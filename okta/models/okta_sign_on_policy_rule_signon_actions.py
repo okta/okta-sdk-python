@@ -30,6 +30,7 @@ class OktaSignOnPolicyRuleSignonActions(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.access = config["access"]\
                 if "access" in config else None
@@ -60,7 +61,8 @@ class OktaSignOnPolicyRuleSignonActions(
             self.session = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "access": self.access,
             "factorLifetime": self.factor_lifetime,
             "factorPromptMode": self.factor_prompt_mode,
@@ -68,3 +70,5 @@ class OktaSignOnPolicyRuleSignonActions(
             "requireFactor": self.require_factor,
             "session": self.session
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

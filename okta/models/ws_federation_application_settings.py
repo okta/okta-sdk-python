@@ -31,6 +31,7 @@ class WsFederationApplicationSettings(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             if "app" in config:
                 if isinstance(config["app"],
@@ -46,6 +47,9 @@ class WsFederationApplicationSettings(
             self.app = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "app": self.app
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

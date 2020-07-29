@@ -28,6 +28,7 @@ class PasswordPolicyRuleAction(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.access = config["access"]\
                 if "access" in config else None
@@ -35,6 +36,9 @@ class PasswordPolicyRuleAction(
             self.access = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "access": self.access
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

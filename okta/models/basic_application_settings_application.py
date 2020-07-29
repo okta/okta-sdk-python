@@ -29,6 +29,7 @@ class BasicApplicationSettingsApplication(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.auth_url = config["authUrl"]\
                 if "authUrl" in config else None
@@ -39,7 +40,10 @@ class BasicApplicationSettingsApplication(
             self.url = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "authURL": self.auth_url,
             "url": self.url
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

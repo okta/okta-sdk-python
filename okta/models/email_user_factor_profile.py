@@ -28,6 +28,7 @@ class EmailUserFactorProfile(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.email = config["email"]\
                 if "email" in config else None
@@ -35,6 +36,9 @@ class EmailUserFactorProfile(
             self.email = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "email": self.email
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

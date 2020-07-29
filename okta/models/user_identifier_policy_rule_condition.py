@@ -28,6 +28,7 @@ class UserIdentifierPolicyRuleCondition(
     """
 
     def __init__(self, config=None):
+        super().__init__(config)
         if config:
             self.attribute = config["attribute"]\
                 if "attribute" in config else None
@@ -41,8 +42,11 @@ class UserIdentifierPolicyRuleCondition(
             self.type = None
 
     def request_format(self):
-        return {
+        parent_req_format = super().request_format()
+        current_obj_format = {
             "attribute": self.attribute,
             "patterns": self.patterns,
             "type": self.type
         }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format
