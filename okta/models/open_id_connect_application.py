@@ -46,7 +46,7 @@ class OpenIdConnectApplication(
             else:
                 self.credentials = None
             self.name = config["name"]\
-                if "name" in config else None
+                if "name" in config else "oidc_client"
             if "settings" in config:
                 if isinstance(config["settings"],
                               OpenIdConnectApplicationSettings):

@@ -46,7 +46,7 @@ class BasicAuthApplication(
             else:
                 self.credentials = None
             self.name = config["name"]\
-                if "name" in config else None
+                if "name" in config else "template_basic_auth"
             if "settings" in config:
                 if isinstance(config["settings"],
                               BasicApplicationSettings):

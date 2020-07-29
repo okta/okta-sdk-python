@@ -34,7 +34,7 @@ class BookmarkApplication(
         super().__init__(config)
         if config:
             self.name = config["name"]\
-                if "name" in config else None
+                if "name" in config else "bookmark"
             if "settings" in config:
                 if isinstance(config["settings"],
                               BookmarkApplicationSettings):

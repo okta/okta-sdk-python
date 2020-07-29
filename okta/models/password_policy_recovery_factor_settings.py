@@ -31,7 +31,7 @@ class PasswordPolicyRecoveryFactorSettings(
         super().__init__(config)
         if config:
             self.status = config["status"]\
-                if "status" in config else None
+                if "status" in config else "INACTIVE"
         else:
             self.status = "INACTIVE"
 

@@ -39,9 +39,9 @@ class PolicyRule(
             self.priority = config["priority"]\
                 if "priority" in config else None
             self.status = config["status"]\
-                if "status" in config else None
+                if "status" in config else "ACTIVE"
             self.system = config["system"]\
-                if "system" in config else None
+                if "system" in config else "false"
             self.type = config["type"]\
                 if "type" in config else None
         else:

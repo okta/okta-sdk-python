@@ -31,7 +31,7 @@ class PasswordPolicyRecoveryEmailRecoveryToken(
         super().__init__(config)
         if config:
             self.token_lifetime_minutes = config["tokenLifetimeMinutes"]\
-                if "tokenLifetimeMinutes" in config else None
+                if "tokenLifetimeMinutes" in config else "10080"
         else:
             self.token_lifetime_minutes = "10080"
 
