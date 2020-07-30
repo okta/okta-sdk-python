@@ -34,6 +34,7 @@ from okta.models.o_auth_2_token\
 from okta.models.app_user\
     import AppUser
 from okta.utils import format_url
+from okta.constants import find_app_model
 
 
 class ApplicationClient():
@@ -90,7 +91,7 @@ class ApplicationClient():
         try:
             result = []
             for item in response.get_body():
-                result.append(Application(item))
+                result.append(find_app_model[item["sign_on_mode"]](item))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -136,9 +137,8 @@ class ApplicationClient():
             return (None, response, error)
 
         try:
-            result = Application(
-                response.get_body()
-            )
+            body = response.get_body()
+            result = find_app_model[body["sign_on_mode"]](body)
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -214,9 +214,8 @@ class ApplicationClient():
             return (None, response, error)
 
         try:
-            result = Application(
-                response.get_body()
-            )
+            body = response.get_body()
+            result = find_app_model[body["sign_on_mode"]](body)
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -258,9 +257,8 @@ class ApplicationClient():
             return (None, response, error)
 
         try:
-            result = Application(
-                response.get_body()
-            )
+            body = response.get_body()
+            result = find_app_model[body["sign_on_mode"]](body)
         except Exception as error:
             return (None, response, error)
         return (result, response, None)

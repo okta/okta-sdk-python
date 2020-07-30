@@ -1,4 +1,6 @@
 import os
+import okta.models as models
+from okta.models.application_sign_on_mode import ApplicationSignOnMode as ASM
 
 DEV_OKTA = "https://developer.okta.com"
 
@@ -19,3 +21,29 @@ DATETIME_STRING_FORMAT = "%a, %d %b %Y %H:%M:%S %Z"
 _GLOBAL_YAML_PATH = os.path.join(os.path.expanduser('~'), ".okta",
                                  "okta.yaml")
 _LOCAL_YAML_PATH = os.path.join(os.getcwd(), "okta.yaml")
+
+OKTA_APP_SIGN_ON_TO_MODEL = {
+    ASM.AUTO_LOGIN: models.AutoLoginApplication,
+    ASM.BASIC_AUTH: models.BasicAuthApplication,
+    ASM.BOOKMARK: models.BookmarkApplication,
+    ASM.OPENID_CONNECT: models.OpenIdConnectApplication,
+    ASM.SAML_1_1: models.SamlApplication,
+    ASM.SAML_2_0: models.SamlApplication,
+    ASM.SECURE_PASSWORD_STORE: models.SecurePasswordStoreApplication,
+    ASM.WS_FEDERATION: models.WsFederationApplication,
+}
+
+SWA_APP_NAME = "template_swa"
+
+SWA3_APP_NAME = "template_swa3field"
+
+
+def find_app_model(app):
+    # If ASM found in model map, return model
+    if app.sign_on_mode in OKTA_APP_SIGN_ON_TO_MODEL:
+        return OKTA_APP_SIGN_ON_TO_MODEL[app.sign_on_mode]
+    # O/W must be BROWSER PLUGIN APP
+    if app.name == SWA3_APP_NAME:
+        return models.SwaApplication
+    # O/W SWA 3
+    return models.SwaThreeFieldApplication
