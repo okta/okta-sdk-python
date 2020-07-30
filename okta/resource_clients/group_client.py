@@ -31,6 +31,7 @@ from okta.models.catalog_application\
 from okta.models.user\
     import User
 from okta.utils import format_url
+from okta.constants import find_app_model
 
 
 class GroupClient():
@@ -575,7 +576,7 @@ class GroupClient():
         try:
             result = []
             for item in response.get_body():
-                result.append(find_app_model[item["sign_on_mode"]](item))
+                result.append(find_app_model(item["signOnMode"])(item))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)

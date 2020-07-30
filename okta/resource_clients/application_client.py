@@ -91,7 +91,7 @@ class ApplicationClient():
         try:
             result = []
             for item in response.get_body():
-                result.append(find_app_model[item["sign_on_mode"]](item))
+                result.append(find_app_model(item["signOnMode"])(item))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -138,7 +138,7 @@ class ApplicationClient():
 
         try:
             body = response.get_body()
-            result = find_app_model[body["sign_on_mode"]](body)
+            result = find_app_model(body["signOnMode"])(body)
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -215,7 +215,7 @@ class ApplicationClient():
 
         try:
             body = response.get_body()
-            result = find_app_model[body["sign_on_mode"]](body)
+            result = find_app_model(body["signOnMode"])(body)
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -258,7 +258,7 @@ class ApplicationClient():
 
         try:
             body = response.get_body()
-            result = find_app_model[body["sign_on_mode"]](body)
+            result = find_app_model(body["signOnMode"])(body)
         except Exception as error:
             return (None, response, error)
         return (result, response, None)

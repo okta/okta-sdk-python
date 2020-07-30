@@ -1,7 +1,6 @@
 const py = module.exports;
 const fs = require("fs");
 const _ = require("lodash");
-const { isLength } = require("lodash");
 
 py.process = ({ spec, operations, models, handlebars }) => {
   py.spec = spec;
@@ -112,6 +111,7 @@ py.process = ({ spec, operations, models, handlebars }) => {
     getResourceImports,
     hasBinaryOps,
     replaceColons,
+    returnsApplication
   });
 
   handlebars.registerPartial(
@@ -304,4 +304,12 @@ function getSubtypes(model) {
   }
 
   return [...modelSubTypes];
+}
+
+function returnsApplication(operations) {
+  return (
+    operations.filter((operation) => {
+      return _.lowerCase(operation.responseModel) === "application";
+    }).length > 0
+  );
 }
