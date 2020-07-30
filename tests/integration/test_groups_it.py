@@ -662,7 +662,7 @@ class TestGroupsResource:
 
     # @pytest.mark.vcr()
     @pytest.mark.asyncio
-    # @pytest.mark.skip
+    @pytest.mark.skip
     async def test_group_assigned_applications(self):
         # Instantiate Mock Client
         client = MockOktaClient()
@@ -684,7 +684,6 @@ class TestGroupsResource:
 
         # Create Application object and Application in Org
         APP_LABEL = "Test Assigned-Applications"
-        APP_NAME = "template_swa"
         BUTTON_FIELD = "btn-login"
         PASSWORD_FIELD = "txt-box-password"
         USERNAME_FIELD = "txt-box-username"
@@ -704,14 +703,10 @@ class TestGroupsResource:
         })
 
         swa_app_obj = models.SwaApplication({
-            "name": APP_NAME,
             "label": APP_LABEL,
             "settings": swa_app_settings,
             "signOnMode": models.ApplicationSignOnMode.BROWSER_PLUGIN
         })
-
-        print(swa_app_obj.sign_on_mode)
-        print(swa_app_obj.as_dict())
 
         swa_app, _, err = await client.create_application(swa_app_obj)
         assert err is None
