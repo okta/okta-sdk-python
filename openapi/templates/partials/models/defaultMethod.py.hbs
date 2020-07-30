@@ -61,11 +61,20 @@
         {{#if operation.isArray}}
             result = []
             for item in response.get_body():
+                {{#if (eq (pascalCase operation.responseModel) "Application")}}
+                result.append(find_app_model[item["sign_on_mode"]](item))
+                {{else}}
                 result.append({{pascalCase operation.responseModel}}(item))
+                {{/if}}
         {{else}}
+            {{#if (eq (pascalCase operation.responseModel) "Application")}}
+            body = response.get_body()
+            result = find_app_model[body["sign_on_mode"]](body)
+            {{else}}
             result = {{pascalCase operation.responseModel}}(
                 response.get_body()
             )
+            {{/if}}
         {{/if}}
         except Exception as error:
             {{#if operation.responseModel}}

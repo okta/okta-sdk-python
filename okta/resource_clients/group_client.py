@@ -575,7 +575,7 @@ class GroupClient():
         try:
             result = []
             for item in response.get_body():
-                result.append(Application(item))
+                result.append(find_app_model[item["sign_on_mode"]](item))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)

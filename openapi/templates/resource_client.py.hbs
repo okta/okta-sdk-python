@@ -11,6 +11,9 @@ from okta.models.{{snakeCase import}}\
     import {{pascalCase import}}
 {{/each}}
 from okta.utils import format_url
+{{#if (eq (pascalCase resource) "Application")}}
+from okta.constants import find_app_model
+{{/if}}
 
 
 class {{pascalCase resource}}Client():
