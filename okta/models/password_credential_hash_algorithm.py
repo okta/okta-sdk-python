@@ -1,3 +1,4 @@
+# flake8: noqa
 """
 Copyright 2020 - Present Okta, Inc.
 
