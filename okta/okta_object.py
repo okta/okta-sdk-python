@@ -1,8 +1,12 @@
+from enum import Enum
+
+
 class OktaObject:
-    PRIMITIVE_PY_TYPES = (int, str, bool, dict, set, tuple)
+    PRIMITIVE_PY_TYPES = (int, str, bool, dict, set, tuple, list)
     """
     Base object for all Okta datatypes
     """
+
     def __init__(self, config=None):
         pass
 
@@ -18,8 +22,10 @@ class OktaObject:
         for key, val in self.request_format().items():
             if val is None:
                 continue
-            if self._is_primitive(val):
+            elif self._is_primitive(val):
                 result[key] = val
+            elif issubclass(type(val), Enum):
+                result[key] = val.value
             else:
                 result[key] = val.as_dict()
         return result
