@@ -34,6 +34,7 @@ class BrowserPluginApplication(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
+            self.sign_on_mode = "BROWSER_PLUGIN"
             if "credentials" in config:
                 if isinstance(config["credentials"],
                               SchemeApplicationCredentials):

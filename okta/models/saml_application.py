@@ -34,6 +34,7 @@ class SamlApplication(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
+            self.sign_on_mode = "SAML_2_0"
             if "settings" in config:
                 if isinstance(config["settings"],
                               SamlApplicationSettings):

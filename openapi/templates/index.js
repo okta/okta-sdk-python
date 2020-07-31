@@ -5,12 +5,17 @@ const _ = require("lodash");
 py.process = ({ spec, operations, models, handlebars }) => {
   py.spec = spec;
   const templates = [];
-  const modelsByName = [];
+  let modelsByName = [];
 
   // Model Name -> Model Object mapping
   for (let model of models) {
     modelsByName[model.modelName] = model;
   }
+
+  modelsByName = setApplicationSignOnMode(
+    modelsByName["Application"].resolutionStrategy.valueToModelMapping,
+    modelsByName
+  );
 
   for (let model of models) {
     if (model.extends !== undefined) {
@@ -45,6 +50,10 @@ py.process = ({ spec, operations, models, handlebars }) => {
       if (model.type === "integer") model.type = "int";
       if (model.type === "string") model.type = "str";
       if (!model.type) model.type = "str";
+    }
+
+    if (modelsByName[model.modelName].signOnMode) {
+      model.signOnMode = modelsByName[model.modelName].signOnMode;
     }
 
     templates.push({
@@ -111,7 +120,7 @@ py.process = ({ spec, operations, models, handlebars }) => {
     getResourceImports,
     hasBinaryOps,
     replaceColons,
-    returnsApplication
+    returnsApplication,
   });
 
   handlebars.registerPartial(
@@ -306,10 +315,19 @@ function getSubtypes(model) {
   return [...modelSubTypes];
 }
 
+// Determines if there exists an operation which returns an
+// Application object
 function returnsApplication(operations) {
   return (
     operations.filter((operation) => {
       return _.lowerCase(operation.responseModel) === "application";
     }).length > 0
   );
+}
+
+function setApplicationSignOnMode(mapping, models) {
+  for (const [key, value] of Object.entries(mapping)) {
+    models[value].signOnMode = key;
+  }
+  return models;
 }

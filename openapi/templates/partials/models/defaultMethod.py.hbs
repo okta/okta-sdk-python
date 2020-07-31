@@ -69,11 +69,7 @@
         {{else}}
             {{#if (eq (pascalCase operation.responseModel) "Application")}}
             body = response.get_body()
-<<<<<<< HEAD
-            result = find_app_model[body["sign_on_mode"]](body)
-=======
             result = find_app_model(body["signOnMode"])(body)
->>>>>>> apps_it
             {{else}}
             result = {{pascalCase operation.responseModel}}(
                 response.get_body()

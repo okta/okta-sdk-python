@@ -36,6 +36,7 @@ class BasicAuthApplication(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
+            self.sign_on_mode = "BASIC_AUTH"
             if "credentials" in config:
                 if isinstance(config["credentials"],
                               SchemeApplicationCredentials):

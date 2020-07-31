@@ -34,6 +34,7 @@ class BookmarkApplication(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
+            self.sign_on_mode = "BOOKMARK"
             self.name = config["name"]\
                 if "name" in config else "bookmark"
             if "settings" in config:
