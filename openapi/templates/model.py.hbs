@@ -2,19 +2,19 @@
 {{> partials.copyrightHeader }}
 {{#if (ne model.enum undefined)}}
 
-from enum import Enum
+from aenum import MultiValueEnum
 
 
 class {{pascalCase model.modelName}}(
     {{model.type}},
-    Enum
+    MultiValueEnum
 ):
     """
     An enumeration class for {{pascalCase model.modelName}}.
     """
 
     {{#each model.enum as |enum|}}
-    {{{replaceColons (upperCase (snakeCase enum))}}} = "{{enum}}"
+    {{{replaceColons (upperCase (snakeCase enum))}}} = "{{upperCase enum}}", "{{lowerCase enum}}"
     {{/each}}
 {{else}}
 

@@ -18,19 +18,19 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from enum import Enum
+from aenum import MultiValueEnum
 
 
 class InlineHookType(
     str,
-    Enum
+    MultiValueEnum
 ):
     """
     An enumeration class for InlineHookType.
     """
 
-    COM_OKTA_OAUTH_2_TOKENS_TRANSFORM = "com.okta.oauth2.tokens.transform"
-    COM_OKTA_IMPORT_TRANSFORM = "com.okta.import.transform"
-    COM_OKTA_SAML_TOKENS_TRANSFORM = "com.okta.saml.tokens.transform"
-    COM_OKTA_USER_PRE_REGISTRATION = "com.okta.user.pre-registration"
-    COM_OKTA_USER_CREDENTIAL_PASSWORD_IMPORT = "com.okta.user.credential.password.import"
+    COM_OKTA_OAUTH_2_TOKENS_TRANSFORM = "COM.OKTA.OAUTH2.TOKENS.TRANSFORM", "com.okta.oauth2.tokens.transform"
+    COM_OKTA_IMPORT_TRANSFORM = "COM.OKTA.IMPORT.TRANSFORM", "com.okta.import.transform"
+    COM_OKTA_SAML_TOKENS_TRANSFORM = "COM.OKTA.SAML.TOKENS.TRANSFORM", "com.okta.saml.tokens.transform"
+    COM_OKTA_USER_PRE_REGISTRATION = "COM.OKTA.USER.PRE-REGISTRATION", "com.okta.user.pre-registration"
+    COM_OKTA_USER_CREDENTIAL_PASSWORD_IMPORT = "COM.OKTA.USER.CREDENTIAL.PASSWORD.IMPORT", "com.okta.user.credential.password.import"

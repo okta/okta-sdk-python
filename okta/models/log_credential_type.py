@@ -18,22 +18,22 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from enum import Enum
+from aenum import MultiValueEnum
 
 
 class LogCredentialType(
     str,
-    Enum
+    MultiValueEnum
 ):
     """
     An enumeration class for LogCredentialType.
     """
 
-    OTP = "OTP"
-    SMS = "SMS"
-    PASSWORD = "PASSWORD"
-    ASSERTION = "ASSERTION"
-    IWA = "IWA"
-    EMAIL = "EMAIL"
-    OAUTH_2 = "OAUTH2"
-    JWT = "JWT"
+    OTP = "OTP", "otp"
+    SMS = "SMS", "sms"
+    PASSWORD = "PASSWORD", "password"
+    ASSERTION = "ASSERTION", "assertion"
+    IWA = "IWA", "iwa"
+    EMAIL = "EMAIL", "email"
+    OAUTH_2 = "OAUTH2", "oauth2"
+    JWT = "JWT", "jwt"

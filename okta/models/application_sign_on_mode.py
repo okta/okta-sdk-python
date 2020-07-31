@@ -18,23 +18,23 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from enum import Enum
+from aenum import MultiValueEnum
 
 
 class ApplicationSignOnMode(
     str,
-    Enum
+    MultiValueEnum
 ):
     """
     An enumeration class for ApplicationSignOnMode.
     """
 
-    BOOKMARK = "BOOKMARK"
-    BASIC_AUTH = "BASIC_AUTH"
-    BROWSER_PLUGIN = "BROWSER_PLUGIN"
-    SECURE_PASSWORD_STORE = "SECURE_PASSWORD_STORE"
-    AUTO_LOGIN = "AUTO_LOGIN"
-    WS_FEDERATION = "WS_FEDERATION"
-    SAML_2_0 = "SAML_2_0"
-    OPENID_CONNECT = "OPENID_CONNECT"
-    SAML_1_1 = "SAML_1_1"
+    BOOKMARK = "BOOKMARK", "bookmark"
+    BASIC_AUTH = "BASIC_AUTH", "basic_auth"
+    BROWSER_PLUGIN = "BROWSER_PLUGIN", "browser_plugin"
+    SECURE_PASSWORD_STORE = "SECURE_PASSWORD_STORE", "secure_password_store"
+    AUTO_LOGIN = "AUTO_LOGIN", "auto_login"
+    WS_FEDERATION = "WS_FEDERATION", "ws_federation"
+    SAML_2_0 = "SAML_2_0", "saml_2_0"
+    OPENID_CONNECT = "OPENID_CONNECT", "openid_connect"
+    SAML_1_1 = "SAML_1_1", "saml_1_1"

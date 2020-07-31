@@ -18,15 +18,15 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from enum import Enum
+from aenum import MultiValueEnum
 
 
 class FeatureType(
     str,
-    Enum
+    MultiValueEnum
 ):
     """
     An enumeration class for FeatureType.
     """
 
-    SELF_SERVICE = "self-service"
+    SELF_SERVICE = "SELF-SERVICE", "self-service"

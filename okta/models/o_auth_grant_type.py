@@ -18,19 +18,19 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from enum import Enum
+from aenum import MultiValueEnum
 
 
 class OAuthGrantType(
     str,
-    Enum
+    MultiValueEnum
 ):
     """
     An enumeration class for OAuthGrantType.
     """
 
-    AUTHORIZATION_CODE = "authorization_code"
-    IMPLICIT = "implicit"
-    PASSWORD = "password"
-    REFRESH_TOKEN = "refresh_token"
-    CLIENT_CREDENTIALS = "client_credentials"
+    AUTHORIZATION_CODE = "AUTHORIZATION_CODE", "authorization_code"
+    IMPLICIT = "IMPLICIT", "implicit"
+    PASSWORD = "PASSWORD", "password"
+    REFRESH_TOKEN = "REFRESH_TOKEN", "refresh_token"
+    CLIENT_CREDENTIALS = "CLIENT_CREDENTIALS", "client_credentials"

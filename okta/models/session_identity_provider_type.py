@@ -18,19 +18,19 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from enum import Enum
+from aenum import MultiValueEnum
 
 
 class SessionIdentityProviderType(
     str,
-    Enum
+    MultiValueEnum
 ):
     """
     An enumeration class for SessionIdentityProviderType.
     """
 
-    ACTIVE_DIRECTORY = "ACTIVE_DIRECTORY"
-    LDAP = "LDAP"
-    OKTA = "OKTA"
-    FEDERATION = "FEDERATION"
-    SOCIAL = "SOCIAL"
+    ACTIVE_DIRECTORY = "ACTIVE_DIRECTORY", "active_directory"
+    LDAP = "LDAP", "ldap"
+    OKTA = "OKTA", "okta"
+    FEDERATION = "FEDERATION", "federation"
+    SOCIAL = "SOCIAL", "social"

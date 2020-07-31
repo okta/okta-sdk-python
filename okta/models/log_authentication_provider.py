@@ -18,20 +18,20 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from enum import Enum
+from aenum import MultiValueEnum
 
 
 class LogAuthenticationProvider(
     str,
-    Enum
+    MultiValueEnum
 ):
     """
     An enumeration class for LogAuthenticationProvider.
     """
 
-    OKTA_AUTHENTICATION_PROVIDER = "OKTA_AUTHENTICATION_PROVIDER"
-    ACTIVE_DIRECTORY = "ACTIVE_DIRECTORY"
-    LDAP = "LDAP"
-    FEDERATION = "FEDERATION"
-    SOCIAL = "SOCIAL"
-    FACTOR_PROVIDER = "FACTOR_PROVIDER"
+    OKTA_AUTHENTICATION_PROVIDER = "OKTA_AUTHENTICATION_PROVIDER", "okta_authentication_provider"
+    ACTIVE_DIRECTORY = "ACTIVE_DIRECTORY", "active_directory"
+    LDAP = "LDAP", "ldap"
+    FEDERATION = "FEDERATION", "federation"
+    SOCIAL = "SOCIAL", "social"
+    FACTOR_PROVIDER = "FACTOR_PROVIDER", "factor_provider"

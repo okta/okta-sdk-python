@@ -18,19 +18,19 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from enum import Enum
+from aenum import MultiValueEnum
 
 
 class PasswordCredentialHashAlgorithm(
     str,
-    Enum
+    MultiValueEnum
 ):
     """
     An enumeration class for PasswordCredentialHashAlgorithm.
     """
 
-    BCRYPT = "BCRYPT"
-    SHA_512 = "SHA-512"
-    SHA_256 = "SHA-256"
-    SHA_1 = "SHA-1"
-    MD_5 = "MD5"
+    BCRYPT = "BCRYPT", "bcrypt"
+    SHA_512 = "SHA-512", "sha-512"
+    SHA_256 = "SHA-256", "sha-256"
+    SHA_1 = "SHA-1", "sha-1"
+    MD_5 = "MD5", "md5"

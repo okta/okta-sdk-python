@@ -18,16 +18,16 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from enum import Enum
+from aenum import MultiValueEnum
 
 
 class ProtocolRelayStateFormat(
     str,
-    Enum
+    MultiValueEnum
 ):
     """
     An enumeration class for ProtocolRelayStateFormat.
     """
 
-    OPAQUE = "OPAQUE"
-    FROM_URL = "FROM_URL"
+    OPAQUE = "OPAQUE", "opaque"
+    FROM_URL = "FROM_URL", "from_url"

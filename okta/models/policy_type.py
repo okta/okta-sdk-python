@@ -18,18 +18,18 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from enum import Enum
+from aenum import MultiValueEnum
 
 
 class PolicyType(
     str,
-    Enum
+    MultiValueEnum
 ):
     """
     An enumeration class for PolicyType.
     """
 
-    OAUTH_AUTHORIZATION_POLICY = "OAUTH_AUTHORIZATION_POLICY"
-    OKTA_SIGN_ON = "OKTA_SIGN_ON"
-    PASSWORD = "PASSWORD"
-    IDP_DISCOVERY = "IDP_DISCOVERY"
+    OAUTH_AUTHORIZATION_POLICY = "OAUTH_AUTHORIZATION_POLICY", "oauth_authorization_policy"
+    OKTA_SIGN_ON = "OKTA_SIGN_ON", "okta_sign_on"
+    PASSWORD = "PASSWORD", "password"
+    IDP_DISCOVERY = "IDP_DISCOVERY", "idp_discovery"

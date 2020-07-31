@@ -18,16 +18,16 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from enum import Enum
+from aenum import MultiValueEnum
 
 
 class ScopeType(
     str,
-    Enum
+    MultiValueEnum
 ):
     """
     An enumeration class for ScopeType.
     """
 
-    CORS = "CORS"
-    REDIRECT = "REDIRECT"
+    CORS = "CORS", "cors"
+    REDIRECT = "REDIRECT", "redirect"

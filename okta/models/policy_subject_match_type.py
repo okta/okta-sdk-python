@@ -18,18 +18,18 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from enum import Enum
+from aenum import MultiValueEnum
 
 
 class PolicySubjectMatchType(
     str,
-    Enum
+    MultiValueEnum
 ):
     """
     An enumeration class for PolicySubjectMatchType.
     """
 
-    USERNAME = "USERNAME"
-    EMAIL = "EMAIL"
-    USERNAME_OR_EMAIL = "USERNAME_OR_EMAIL"
-    CUSTOM_ATTRIBUTE = "CUSTOM_ATTRIBUTE"
+    USERNAME = "USERNAME", "username"
+    EMAIL = "EMAIL", "email"
+    USERNAME_OR_EMAIL = "USERNAME_OR_EMAIL", "username_or_email"
+    CUSTOM_ATTRIBUTE = "CUSTOM_ATTRIBUTE", "custom_attribute"
