@@ -72,7 +72,7 @@
             result = find_app_model(body["signOnMode"])(body)
             {{else}}
             result = {{pascalCase operation.responseModel}}(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
             {{/if}}
         {{/if}}

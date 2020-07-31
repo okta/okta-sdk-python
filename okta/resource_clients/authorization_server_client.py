@@ -125,7 +125,7 @@ class AuthorizationServerClient():
 
         try:
             result = AuthorizationServer(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -195,7 +195,7 @@ class AuthorizationServerClient():
 
         try:
             result = AuthorizationServer(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -238,7 +238,7 @@ class AuthorizationServerClient():
 
         try:
             result = AuthorizationServer(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -320,7 +320,7 @@ class AuthorizationServerClient():
 
         try:
             result = OAuth2Claim(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -394,7 +394,7 @@ class AuthorizationServerClient():
 
         try:
             result = OAuth2Claim(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -439,7 +439,7 @@ class AuthorizationServerClient():
 
         try:
             result = OAuth2Claim(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -640,7 +640,7 @@ class AuthorizationServerClient():
 
         try:
             result = OAuth2RefreshToken(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -871,7 +871,7 @@ class AuthorizationServerClient():
 
         try:
             result = Policy(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -945,7 +945,7 @@ class AuthorizationServerClient():
 
         try:
             result = Policy(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -990,7 +990,7 @@ class AuthorizationServerClient():
 
         try:
             result = Policy(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1080,7 +1080,7 @@ class AuthorizationServerClient():
 
         try:
             result = OAuth2Scope(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1154,7 +1154,7 @@ class AuthorizationServerClient():
 
         try:
             result = OAuth2Scope(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1199,7 +1199,7 @@ class AuthorizationServerClient():
 
         try:
             result = OAuth2Scope(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)

@@ -130,7 +130,7 @@ class GroupClient():
 
         try:
             result = Group(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -221,7 +221,7 @@ class GroupClient():
 
         try:
             result = GroupRule(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -300,7 +300,7 @@ class GroupClient():
 
         try:
             result = GroupRule(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -345,7 +345,7 @@ class GroupClient():
 
         try:
             result = GroupRule(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -484,7 +484,7 @@ class GroupClient():
 
         try:
             result = Group(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -529,7 +529,7 @@ class GroupClient():
 
         try:
             result = Group(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -669,7 +669,7 @@ class GroupClient():
 
         try:
             result = Role(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -742,7 +742,7 @@ class GroupClient():
 
         try:
             result = Role(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)

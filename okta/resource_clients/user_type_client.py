@@ -109,7 +109,7 @@ class UserTypeClient():
 
         try:
             result = UserType(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -184,7 +184,7 @@ class UserTypeClient():
 
         try:
             result = UserType(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -228,7 +228,7 @@ class UserTypeClient():
 
         try:
             result = UserType(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -272,7 +272,7 @@ class UserTypeClient():
 
         try:
             result = UserType(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)

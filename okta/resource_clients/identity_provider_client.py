@@ -127,7 +127,7 @@ class IdentityProviderClient():
 
         try:
             result = IdentityProvider(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -216,7 +216,7 @@ class IdentityProviderClient():
 
         try:
             result = JsonWebKey(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -289,7 +289,7 @@ class IdentityProviderClient():
 
         try:
             result = JsonWebKey(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -361,7 +361,7 @@ class IdentityProviderClient():
 
         try:
             result = IdentityProvider(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -405,7 +405,7 @@ class IdentityProviderClient():
 
         try:
             result = IdentityProvider(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -490,7 +490,7 @@ class IdentityProviderClient():
 
         try:
             result = Csr(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -565,7 +565,7 @@ class IdentityProviderClient():
 
         try:
             result = Csr(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -613,7 +613,7 @@ class IdentityProviderClient():
 
         try:
             result = JsonWebKey(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -661,7 +661,7 @@ class IdentityProviderClient():
 
         try:
             result = JsonWebKey(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -709,7 +709,7 @@ class IdentityProviderClient():
 
         try:
             result = JsonWebKey(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -757,7 +757,7 @@ class IdentityProviderClient():
 
         try:
             result = JsonWebKey(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -805,7 +805,7 @@ class IdentityProviderClient():
 
         try:
             result = JsonWebKey(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -892,7 +892,7 @@ class IdentityProviderClient():
 
         try:
             result = JsonWebKey(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -933,7 +933,7 @@ class IdentityProviderClient():
 
         try:
             result = JsonWebKey(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -980,7 +980,7 @@ class IdentityProviderClient():
 
         try:
             result = JsonWebKey(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1020,7 +1020,7 @@ class IdentityProviderClient():
 
         try:
             result = IdentityProvider(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1060,7 +1060,7 @@ class IdentityProviderClient():
 
         try:
             result = IdentityProvider(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1175,7 +1175,7 @@ class IdentityProviderClient():
 
         try:
             result = IdentityProviderApplicationUser(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1222,7 +1222,7 @@ class IdentityProviderClient():
 
         try:
             result = IdentityProviderApplicationUser(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)

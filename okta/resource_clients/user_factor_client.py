@@ -123,7 +123,7 @@ class UserFactorClient():
 
         try:
             result = UserFactor(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -280,7 +280,7 @@ class UserFactorClient():
 
         try:
             result = UserFactor(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -327,7 +327,7 @@ class UserFactorClient():
 
         try:
             result = UserFactor(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -370,7 +370,7 @@ class UserFactorClient():
 
         try:
             result = VerifyUserFactorResponse(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -422,7 +422,7 @@ class UserFactorClient():
 
         try:
             result = VerifyUserFactorResponse(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)

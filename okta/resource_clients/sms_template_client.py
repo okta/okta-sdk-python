@@ -115,7 +115,7 @@ class SmsTemplateClient():
 
         try:
             result = SmsTemplate(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -187,7 +187,7 @@ class SmsTemplateClient():
 
         try:
             result = SmsTemplate(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -231,7 +231,7 @@ class SmsTemplateClient():
 
         try:
             result = SmsTemplate(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -275,7 +275,7 @@ class SmsTemplateClient():
 
         try:
             result = SmsTemplate(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)

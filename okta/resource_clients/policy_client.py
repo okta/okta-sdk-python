@@ -122,7 +122,7 @@ class PolicyClient():
 
         try:
             result = Policy(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -199,7 +199,7 @@ class PolicyClient():
 
         try:
             result = Policy(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -243,7 +243,7 @@ class PolicyClient():
 
         try:
             result = Policy(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -391,7 +391,7 @@ class PolicyClient():
 
         try:
             result = PolicyRule(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -465,7 +465,7 @@ class PolicyClient():
 
         try:
             result = PolicyRule(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -510,7 +510,7 @@ class PolicyClient():
 
         try:
             result = PolicyRule(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)

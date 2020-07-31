@@ -73,7 +73,7 @@ class SessionClient():
 
         try:
             result = Session(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -146,7 +146,7 @@ class SessionClient():
 
         try:
             result = Session(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -187,7 +187,7 @@ class SessionClient():
 
         try:
             result = Session(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)

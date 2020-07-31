@@ -105,7 +105,7 @@ class EventHookClient():
 
         try:
             result = EventHook(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -175,7 +175,7 @@ class EventHookClient():
 
         try:
             result = EventHook(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -218,7 +218,7 @@ class EventHookClient():
 
         try:
             result = EventHook(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -257,7 +257,7 @@ class EventHookClient():
 
         try:
             result = EventHook(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -297,7 +297,7 @@ class EventHookClient():
 
         try:
             result = EventHook(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -336,7 +336,7 @@ class EventHookClient():
 
         try:
             result = EventHook(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)

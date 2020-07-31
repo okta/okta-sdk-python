@@ -157,7 +157,7 @@ class UserClient():
 
         try:
             result = User(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -273,7 +273,7 @@ class UserClient():
 
         try:
             result = User(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -323,7 +323,7 @@ class UserClient():
 
         try:
             result = User(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -373,7 +373,7 @@ class UserClient():
 
         try:
             result = User(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -705,7 +705,7 @@ class UserClient():
 
         try:
             result = OAuth2RefreshToken(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -757,7 +757,7 @@ class UserClient():
 
         try:
             result = UserCredentials(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -806,7 +806,7 @@ class UserClient():
 
         try:
             result = UserCredentials(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -852,7 +852,7 @@ class UserClient():
 
         try:
             result = ForgotPasswordResponse(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -902,7 +902,7 @@ class UserClient():
 
         try:
             result = ForgotPasswordResponse(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1061,7 +1061,7 @@ class UserClient():
 
         try:
             result = OAuth2ScopeConsentGrant(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1193,7 +1193,7 @@ class UserClient():
 
         try:
             result = UserActivationToken(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1280,7 +1280,7 @@ class UserClient():
 
         try:
             result = User(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1323,7 +1323,7 @@ class UserClient():
 
         try:
             result = TempPassword(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1372,7 +1372,7 @@ class UserClient():
 
         try:
             result = UserActivationToken(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1456,7 +1456,7 @@ class UserClient():
 
         try:
             result = ResetPasswordToken(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1736,7 +1736,7 @@ class UserClient():
 
         try:
             result = Role(
-                humps.camlize(response.get_body())
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
