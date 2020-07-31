@@ -18,20 +18,20 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_enum import OktaEnum
+from aenum import MultiValueEnum
 
 
 class FactorProvider(
     str,
-    OktaEnum
+    MultiValueEnum
 ):
     """
     An enumeration class for FactorProvider.
     """
 
-    OKTA = "OKTA"
-    RSA = "RSA"
-    GOOGLE = "GOOGLE"
-    SYMANTEC = "SYMANTEC"
-    DUO = "DUO"
-    YUBICO = "YUBICO"
+    OKTA = "OKTA", "okta"
+    RSA = "RSA", "rsa"
+    GOOGLE = "GOOGLE", "google"
+    SYMANTEC = "SYMANTEC", "symantec"
+    DUO = "DUO", "duo"
+    YUBICO = "YUBICO", "yubico"

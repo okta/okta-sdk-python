@@ -18,17 +18,17 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_enum import OktaEnum
+from aenum import MultiValueEnum
 
 
 class GroupType(
     str,
-    OktaEnum
+    MultiValueEnum
 ):
     """
     An enumeration class for GroupType.
     """
 
-    OKTA_GROUP = "OKTA_GROUP"
-    APP_GROUP = "APP_GROUP"
-    BUILT_IN = "BUILT_IN"
+    OKTA_GROUP = "OKTA_GROUP", "okta_group"
+    APP_GROUP = "APP_GROUP", "app_group"
+    BUILT_IN = "BUILT_IN", "built_in"

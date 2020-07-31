@@ -18,19 +18,19 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_enum import OktaEnum
+from aenum import MultiValueEnum
 
 
 class ApplicationCredentialsScheme(
     str,
-    OktaEnum
+    MultiValueEnum
 ):
     """
     An enumeration class for ApplicationCredentialsScheme.
     """
 
-    SHARED_USERNAME_AND_PASSWORD = "SHARED_USERNAME_AND_PASSWORD"
-    EXTERNAL_PASSWORD_SYNC = "EXTERNAL_PASSWORD_SYNC"
-    EDIT_USERNAME_AND_PASSWORD = "EDIT_USERNAME_AND_PASSWORD"
-    EDIT_PASSWORD_ONLY = "EDIT_PASSWORD_ONLY"
-    ADMIN_SETS_CREDENTIALS = "ADMIN_SETS_CREDENTIALS"
+    SHARED_USERNAME_AND_PASSWORD = "SHARED_USERNAME_AND_PASSWORD", "shared_username_and_password"
+    EXTERNAL_PASSWORD_SYNC = "EXTERNAL_PASSWORD_SYNC", "external_password_sync"
+    EDIT_USERNAME_AND_PASSWORD = "EDIT_USERNAME_AND_PASSWORD", "edit_username_and_password"
+    EDIT_PASSWORD_ONLY = "EDIT_PASSWORD_ONLY", "edit_password_only"
+    ADMIN_SETS_CREDENTIALS = "ADMIN_SETS_CREDENTIALS", "admin_sets_credentials"

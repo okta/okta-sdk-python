@@ -18,16 +18,16 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_enum import OktaEnum
+from aenum import MultiValueEnum
 
 
 class FeatureStageValue(
     str,
-    OktaEnum
+    MultiValueEnum
 ):
     """
     An enumeration class for FeatureStageValue.
     """
 
-    EA = "EA"
-    BETA = "BETA"
+    EA = "EA", "ea"
+    BETA = "BETA", "beta"

@@ -18,26 +18,26 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_enum import OktaEnum
+from aenum import MultiValueEnum
 
 
 class FactorType(
     str,
-    OktaEnum
+    MultiValueEnum
 ):
     """
     An enumeration class for FactorType.
     """
 
-    CALL = "call"
-    EMAIL = "email"
-    PUSH = "push"
-    QUESTION = "question"
-    SMS = "sms"
-    TOKEN_HARDWARE = "token:hardware"
-    TOKEN_HOTP = "token:hotp"
-    TOKEN_SOFTWARE_TOTP = "token:software:totp"
-    TOKEN = "token"
-    U_2_F = "u2f"
-    WEB = "web"
-    WEBAUTHN = "webauthn"
+    CALL = "CALL", "call"
+    EMAIL = "EMAIL", "email"
+    PUSH = "PUSH", "push"
+    QUESTION = "QUESTION", "question"
+    SMS = "SMS", "sms"
+    TOKEN_HARDWARE = "TOKEN:HARDWARE", "token:hardware"
+    TOKEN_HOTP = "TOKEN:HOTP", "token:hotp"
+    TOKEN_SOFTWARE_TOTP = "TOKEN:SOFTWARE:TOTP", "token:software:totp"
+    TOKEN = "TOKEN", "token"
+    U_2_F = "U2F", "u2f"
+    WEB = "WEB", "web"
+    WEBAUTHN = "WEBAUTHN", "webauthn"

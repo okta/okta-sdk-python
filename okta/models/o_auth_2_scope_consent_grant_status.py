@@ -18,16 +18,16 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_enum import OktaEnum
+from aenum import MultiValueEnum
 
 
 class OAuth2ScopeConsentGrantStatus(
     str,
-    OktaEnum
+    MultiValueEnum
 ):
     """
     An enumeration class for OAuth2ScopeConsentGrantStatus.
     """
 
-    ACTIVE = "ACTIVE"
-    REVOKED = "REVOKED"
+    ACTIVE = "ACTIVE", "active"
+    REVOKED = "REVOKED", "revoked"

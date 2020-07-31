@@ -18,16 +18,16 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_enum import OktaEnum
+from aenum import MultiValueEnum
 
 
 class OpenIdConnectApplicationIssuerMode(
     str,
-    OktaEnum
+    MultiValueEnum
 ):
     """
     An enumeration class for OpenIdConnectApplicationIssuerMode.
     """
 
-    CUSTOM_URL = "CUSTOM_URL"
-    ORG_URL = "ORG_URL"
+    CUSTOM_URL = "CUSTOM_URL", "custom_url"
+    ORG_URL = "ORG_URL", "org_url"

@@ -18,15 +18,15 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_enum import OktaEnum
+from aenum import MultiValueEnum
 
 
 class ApplicationCredentialsSigningUse(
     str,
-    OktaEnum
+    MultiValueEnum
 ):
     """
     An enumeration class for ApplicationCredentialsSigningUse.
     """
 
-    SIG = "sig"
+    SIG = "SIG", "sig"

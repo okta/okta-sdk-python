@@ -18,24 +18,24 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_enum import OktaEnum
+from aenum import MultiValueEnum
 
 
 class FactorResultType(
     str,
-    OktaEnum
+    MultiValueEnum
 ):
     """
     An enumeration class for FactorResultType.
     """
 
-    SUCCESS = "SUCCESS"
-    CHALLENGE = "CHALLENGE"
-    WAITING = "WAITING"
-    FAILED = "FAILED"
-    REJECTED = "REJECTED"
-    TIMEOUT = "TIMEOUT"
-    TIME_WINDOW_EXCEEDED = "TIME_WINDOW_EXCEEDED"
-    PASSCODE_REPLAYED = "PASSCODE_REPLAYED"
-    ERROR = "ERROR"
-    CANCELLED = "CANCELLED"
+    SUCCESS = "SUCCESS", "success"
+    CHALLENGE = "CHALLENGE", "challenge"
+    WAITING = "WAITING", "waiting"
+    FAILED = "FAILED", "failed"
+    REJECTED = "REJECTED", "rejected"
+    TIMEOUT = "TIMEOUT", "timeout"
+    TIME_WINDOW_EXCEEDED = "TIME_WINDOW_EXCEEDED", "time_window_exceeded"
+    PASSCODE_REPLAYED = "PASSCODE_REPLAYED", "passcode_replayed"
+    ERROR = "ERROR", "error"
+    CANCELLED = "CANCELLED", "cancelled"

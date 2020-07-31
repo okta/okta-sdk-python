@@ -18,17 +18,17 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_enum import OktaEnum
+from aenum import MultiValueEnum
 
 
 class GroupRuleStatus(
     str,
-    OktaEnum
+    MultiValueEnum
 ):
     """
     An enumeration class for GroupRuleStatus.
     """
 
-    ACTIVE = "ACTIVE"
-    INACTIVE = "INACTIVE"
-    INVALID = "INVALID"
+    ACTIVE = "ACTIVE", "active"
+    INACTIVE = "INACTIVE", "inactive"
+    INVALID = "INVALID", "invalid"

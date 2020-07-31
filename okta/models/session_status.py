@@ -18,17 +18,17 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_enum import OktaEnum
+from aenum import MultiValueEnum
 
 
 class SessionStatus(
     str,
-    OktaEnum
+    MultiValueEnum
 ):
     """
     An enumeration class for SessionStatus.
     """
 
-    ACTIVE = "ACTIVE"
-    MFA_ENROLL = "MFA_ENROLL"
-    MFA_REQUIRED = "MFA_REQUIRED"
+    ACTIVE = "ACTIVE", "active"
+    MFA_ENROLL = "MFA_ENROLL", "mfa_enroll"
+    MFA_REQUIRED = "MFA_REQUIRED", "mfa_required"

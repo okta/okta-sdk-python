@@ -18,16 +18,16 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_enum import OktaEnum
+from aenum import MultiValueEnum
 
 
 class OpenIdConnectApplicationConsentMethod(
     str,
-    OktaEnum
+    MultiValueEnum
 ):
     """
     An enumeration class for OpenIdConnectApplicationConsentMethod.
     """
 
-    REQUIRED = "REQUIRED"
-    TRUSTED = "TRUSTED"
+    REQUIRED = "REQUIRED", "required"
+    TRUSTED = "TRUSTED", "trusted"

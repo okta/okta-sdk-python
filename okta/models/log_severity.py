@@ -18,18 +18,18 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_enum import OktaEnum
+from aenum import MultiValueEnum
 
 
 class LogSeverity(
     str,
-    OktaEnum
+    MultiValueEnum
 ):
     """
     An enumeration class for LogSeverity.
     """
 
-    DEBUG = "DEBUG"
-    INFO = "INFO"
-    WARN = "WARN"
-    ERROR = "ERROR"
+    DEBUG = "DEBUG", "debug"
+    INFO = "INFO", "info"
+    WARN = "WARN", "warn"
+    ERROR = "ERROR", "error"

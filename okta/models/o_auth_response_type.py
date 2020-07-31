@@ -18,17 +18,17 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_enum import OktaEnum
+from aenum import MultiValueEnum
 
 
 class OAuthResponseType(
     str,
-    OktaEnum
+    MultiValueEnum
 ):
     """
     An enumeration class for OAuthResponseType.
     """
 
-    CODE = "code"
-    TOKEN = "token"
-    ID_TOKEN = "id_token"
+    CODE = "CODE", "code"
+    TOKEN = "TOKEN", "token"
+    ID_TOKEN = "ID_TOKEN", "id_token"

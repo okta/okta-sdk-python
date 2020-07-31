@@ -18,23 +18,23 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_enum import OktaEnum
+from aenum import MultiValueEnum
 
 
 class RoleType(
     str,
-    OktaEnum
+    MultiValueEnum
 ):
     """
     An enumeration class for RoleType.
     """
 
-    SUPER_ADMIN = "SUPER_ADMIN"
-    ORG_ADMIN = "ORG_ADMIN"
-    APP_ADMIN = "APP_ADMIN"
-    USER_ADMIN = "USER_ADMIN"
-    HELP_DESK_ADMIN = "HELP_DESK_ADMIN"
-    READ_ONLY_ADMIN = "READ_ONLY_ADMIN"
-    MOBILE_ADMIN = "MOBILE_ADMIN"
-    API_ACCESS_MANAGEMENT_ADMIN = "API_ACCESS_MANAGEMENT_ADMIN"
-    REPORT_ADMIN = "REPORT_ADMIN"
+    SUPER_ADMIN = "SUPER_ADMIN", "super_admin"
+    ORG_ADMIN = "ORG_ADMIN", "org_admin"
+    APP_ADMIN = "APP_ADMIN", "app_admin"
+    USER_ADMIN = "USER_ADMIN", "user_admin"
+    HELP_DESK_ADMIN = "HELP_DESK_ADMIN", "help_desk_admin"
+    READ_ONLY_ADMIN = "READ_ONLY_ADMIN", "read_only_admin"
+    MOBILE_ADMIN = "MOBILE_ADMIN", "mobile_admin"
+    API_ACCESS_MANAGEMENT_ADMIN = "API_ACCESS_MANAGEMENT_ADMIN", "api_access_management_admin"
+    REPORT_ADMIN = "REPORT_ADMIN", "report_admin"

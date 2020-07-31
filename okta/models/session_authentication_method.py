@@ -18,24 +18,24 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_enum import OktaEnum
+from aenum import MultiValueEnum
 
 
 class SessionAuthenticationMethod(
     str,
-    OktaEnum
+    MultiValueEnum
 ):
     """
     An enumeration class for SessionAuthenticationMethod.
     """
 
-    PWD = "pwd"
-    SWK = "swk"
-    HWK = "hwk"
-    OTP = "otp"
-    SMS = "sms"
-    TEL = "tel"
-    GEO = "geo"
-    FPT = "fpt"
-    KBA = "kba"
-    MFA = "mfa"
+    PWD = "PWD", "pwd"
+    SWK = "SWK", "swk"
+    HWK = "HWK", "hwk"
+    OTP = "OTP", "otp"
+    SMS = "SMS", "sms"
+    TEL = "TEL", "tel"
+    GEO = "GEO", "geo"
+    FPT = "FPT", "fpt"
+    KBA = "KBA", "kba"
+    MFA = "MFA", "mfa"

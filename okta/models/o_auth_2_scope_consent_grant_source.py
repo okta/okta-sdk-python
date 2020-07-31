@@ -18,16 +18,16 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_enum import OktaEnum
+from aenum import MultiValueEnum
 
 
 class OAuth2ScopeConsentGrantSource(
     str,
-    OktaEnum
+    MultiValueEnum
 ):
     """
     An enumeration class for OAuth2ScopeConsentGrantSource.
     """
 
-    END_USER = "END_USER"
-    ADMIN = "ADMIN"
+    END_USER = "END_USER", "end_user"
+    ADMIN = "ADMIN", "admin"

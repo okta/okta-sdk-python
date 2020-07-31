@@ -18,16 +18,16 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_enum import OktaEnum
+from aenum import MultiValueEnum
 
 
 class ScopeType(
     str,
-    OktaEnum
+    MultiValueEnum
 ):
     """
     An enumeration class for ScopeType.
     """
 
-    CORS = "CORS"
-    REDIRECT = "REDIRECT"
+    CORS = "CORS", "cors"
+    REDIRECT = "REDIRECT", "redirect"
