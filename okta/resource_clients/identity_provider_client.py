@@ -30,6 +30,7 @@ from okta.models.identity_provider_application_user\
 from okta.models.social_auth_token\
     import SocialAuthToken
 from okta.utils import format_url
+import humps
 
 
 class IdentityProviderClient():
@@ -83,7 +84,7 @@ class IdentityProviderClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(IdentityProvider(item))
         except Exception as error:
             return (None, response, error)
@@ -126,7 +127,7 @@ class IdentityProviderClient():
 
         try:
             result = IdentityProvider(
-                response.get_body()
+                humps.camlize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -171,7 +172,7 @@ class IdentityProviderClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(JsonWebKey(item))
         except Exception as error:
             return (None, response, error)
@@ -215,7 +216,7 @@ class IdentityProviderClient():
 
         try:
             result = JsonWebKey(
-                response.get_body()
+                humps.camlize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -288,7 +289,7 @@ class IdentityProviderClient():
 
         try:
             result = JsonWebKey(
-                response.get_body()
+                humps.camlize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -360,7 +361,7 @@ class IdentityProviderClient():
 
         try:
             result = IdentityProvider(
-                response.get_body()
+                humps.camlize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -404,7 +405,7 @@ class IdentityProviderClient():
 
         try:
             result = IdentityProvider(
-                response.get_body()
+                humps.camlize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -444,7 +445,7 @@ class IdentityProviderClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(Csr(item))
         except Exception as error:
             return (None, response, error)
@@ -489,7 +490,7 @@ class IdentityProviderClient():
 
         try:
             result = Csr(
-                response.get_body()
+                humps.camlize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -564,7 +565,7 @@ class IdentityProviderClient():
 
         try:
             result = Csr(
-                response.get_body()
+                humps.camlize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -612,7 +613,7 @@ class IdentityProviderClient():
 
         try:
             result = JsonWebKey(
-                response.get_body()
+                humps.camlize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -660,7 +661,7 @@ class IdentityProviderClient():
 
         try:
             result = JsonWebKey(
-                response.get_body()
+                humps.camlize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -708,7 +709,7 @@ class IdentityProviderClient():
 
         try:
             result = JsonWebKey(
-                response.get_body()
+                humps.camlize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -756,7 +757,7 @@ class IdentityProviderClient():
 
         try:
             result = JsonWebKey(
-                response.get_body()
+                humps.camlize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -804,7 +805,7 @@ class IdentityProviderClient():
 
         try:
             result = JsonWebKey(
-                response.get_body()
+                humps.camlize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -844,7 +845,7 @@ class IdentityProviderClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(JsonWebKey(item))
         except Exception as error:
             return (None, response, error)
@@ -891,7 +892,7 @@ class IdentityProviderClient():
 
         try:
             result = JsonWebKey(
-                response.get_body()
+                humps.camlize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -932,7 +933,7 @@ class IdentityProviderClient():
 
         try:
             result = JsonWebKey(
-                response.get_body()
+                humps.camlize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -979,7 +980,7 @@ class IdentityProviderClient():
 
         try:
             result = JsonWebKey(
-                response.get_body()
+                humps.camlize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1019,7 +1020,7 @@ class IdentityProviderClient():
 
         try:
             result = IdentityProvider(
-                response.get_body()
+                humps.camlize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1059,7 +1060,7 @@ class IdentityProviderClient():
 
         try:
             result = IdentityProvider(
-                response.get_body()
+                humps.camlize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1099,7 +1100,7 @@ class IdentityProviderClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(IdentityProviderApplicationUser(item))
         except Exception as error:
             return (None, response, error)
@@ -1174,7 +1175,7 @@ class IdentityProviderClient():
 
         try:
             result = IdentityProviderApplicationUser(
-                response.get_body()
+                humps.camlize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1221,7 +1222,7 @@ class IdentityProviderClient():
 
         try:
             result = IdentityProviderApplicationUser(
-                response.get_body()
+                humps.camlize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1265,7 +1266,7 @@ class IdentityProviderClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(SocialAuthToken(item))
         except Exception as error:
             return (None, response, error)

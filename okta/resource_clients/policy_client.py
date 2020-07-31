@@ -23,6 +23,7 @@ from okta.models.policy\
 from okta.models.policy_rule\
     import PolicyRule
 from okta.utils import format_url
+import humps
 
 
 class PolicyClient():
@@ -73,7 +74,7 @@ class PolicyClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(Policy(item))
         except Exception as error:
             return (None, response, error)
@@ -121,7 +122,7 @@ class PolicyClient():
 
         try:
             result = Policy(
-                response.get_body()
+                humps.camlize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -198,7 +199,7 @@ class PolicyClient():
 
         try:
             result = Policy(
-                response.get_body()
+                humps.camlize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -242,7 +243,7 @@ class PolicyClient():
 
         try:
             result = Policy(
-                response.get_body()
+                humps.camlize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -346,7 +347,7 @@ class PolicyClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(PolicyRule(item))
         except Exception as error:
             return (None, response, error)
@@ -390,7 +391,7 @@ class PolicyClient():
 
         try:
             result = PolicyRule(
-                response.get_body()
+                humps.camlize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -464,7 +465,7 @@ class PolicyClient():
 
         try:
             result = PolicyRule(
-                response.get_body()
+                humps.camlize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -509,7 +510,7 @@ class PolicyClient():
 
         try:
             result = PolicyRule(
-                response.get_body()
+                humps.camlize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
