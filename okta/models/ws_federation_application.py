@@ -34,6 +34,7 @@ class WsFederationApplication(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
+            self.sign_on_mode = "WS_FEDERATION"
             self.name = config["name"]\
                 if "name" in config else "template_wsfed"
             if "settings" in config:
