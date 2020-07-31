@@ -62,14 +62,18 @@
             result = []
             for item in response.get_body():
                 {{#if (eq (pascalCase operation.responseModel) "Application")}}
-                result.append(find_app_model[item["sign_on_mode"]](item))
+                result.append(find_app_model(item["signOnMode"])(item))
                 {{else}}
                 result.append({{pascalCase operation.responseModel}}(item))
                 {{/if}}
         {{else}}
             {{#if (eq (pascalCase operation.responseModel) "Application")}}
             body = response.get_body()
+<<<<<<< HEAD
             result = find_app_model[body["sign_on_mode"]](body)
+=======
+            result = find_app_model(body["signOnMode"])(body)
+>>>>>>> apps_it
             {{else}}
             result = {{pascalCase operation.responseModel}}(
                 response.get_body()

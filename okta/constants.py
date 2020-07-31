@@ -38,12 +38,12 @@ SWA_APP_NAME = "template_swa"
 SWA3_APP_NAME = "template_swa3field"
 
 
-def find_app_model(app):
+def find_app_model(sign_on_mode):
     # If ASM found in model map, return model
-    if app.sign_on_mode in OKTA_APP_SIGN_ON_TO_MODEL:
-        return OKTA_APP_SIGN_ON_TO_MODEL[app.sign_on_mode]
+    if sign_on_mode in OKTA_APP_SIGN_ON_TO_MODEL:
+        return OKTA_APP_SIGN_ON_TO_MODEL[sign_on_mode]
     # O/W must be BROWSER PLUGIN APP
-    if app.name == SWA3_APP_NAME:
+    if sign_on_mode == SWA3_APP_NAME:
         return models.SwaApplication
     # O/W SWA 3
     return models.SwaThreeFieldApplication
