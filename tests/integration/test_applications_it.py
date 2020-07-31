@@ -263,8 +263,6 @@ class TestApplicationsResource:
             # "signOnMode": "SECURE_PASSWORD_STORE"
         })
 
-        print(type(sps_app_obj.sign_on_mode))
-
         app, _, err = await client.create_application(sps_app_obj)
         assert err is None
         assert isinstance(app, models.Application)

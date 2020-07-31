@@ -2,12 +2,12 @@
 {{> partials.copyrightHeader }}
 {{#if (ne model.enum undefined)}}
 
-from enum import Enum
+from okta.okta_enum import OktaEnum
 
 
 class {{pascalCase model.modelName}}(
     {{model.type}},
-    Enum
+    OktaEnum
 ):
     """
     An enumeration class for {{pascalCase model.modelName}}.

@@ -18,12 +18,12 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from enum import Enum
+from okta.okta_enum import OktaEnum
 
 
 class SmsTemplateType(
     str,
-    Enum
+    OktaEnum
 ):
     """
     An enumeration class for SmsTemplateType.
