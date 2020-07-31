@@ -18,20 +18,20 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from enum import Enum
+from aenum import MultiValueEnum
 
 
 class AuthenticationProviderType(
     str,
-    Enum
+    MultiValueEnum
 ):
     """
     An enumeration class for AuthenticationProviderType.
     """
 
-    ACTIVE_DIRECTORY = "ACTIVE_DIRECTORY"
-    FEDERATION = "FEDERATION"
-    LDAP = "LDAP"
-    OKTA = "OKTA"
-    SOCIAL = "SOCIAL"
-    IMPORT = "IMPORT"
+    ACTIVE_DIRECTORY = "ACTIVE_DIRECTORY", "active_directory"
+    FEDERATION = "FEDERATION", "federation"
+    LDAP = "LDAP", "ldap"
+    OKTA = "OKTA", "okta"
+    SOCIAL = "SOCIAL", "social"
+    IMPORT = "IMPORT", "import"

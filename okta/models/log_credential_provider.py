@@ -18,20 +18,20 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from enum import Enum
+from aenum import MultiValueEnum
 
 
 class LogCredentialProvider(
     str,
-    Enum
+    MultiValueEnum
 ):
     """
     An enumeration class for LogCredentialProvider.
     """
 
-    OKTA_AUTHENTICATION_PROVIDER = "OKTA_AUTHENTICATION_PROVIDER"
-    RSA = "RSA"
-    SYMANTEC = "SYMANTEC"
-    GOOGLE = "GOOGLE"
-    DUO = "DUO"
-    YUBIKEY = "YUBIKEY"
+    OKTA_AUTHENTICATION_PROVIDER = "OKTA_AUTHENTICATION_PROVIDER", "okta_authentication_provider"
+    RSA = "RSA", "rsa"
+    SYMANTEC = "SYMANTEC", "symantec"
+    GOOGLE = "GOOGLE", "google"
+    DUO = "DUO", "duo"
+    YUBIKEY = "YUBIKEY", "yubikey"

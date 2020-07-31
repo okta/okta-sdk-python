@@ -18,16 +18,16 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from enum import Enum
+from aenum import MultiValueEnum
 
 
 class CatalogApplicationStatus(
     str,
-    Enum
+    MultiValueEnum
 ):
     """
     An enumeration class for CatalogApplicationStatus.
     """
 
-    ACTIVE = "ACTIVE"
-    INACTIVE = "INACTIVE"
+    ACTIVE = "ACTIVE", "active"
+    INACTIVE = "INACTIVE", "inactive"

@@ -18,16 +18,16 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from enum import Enum
+from aenum import MultiValueEnum
 
 
 class FeatureStageValue(
     str,
-    Enum
+    MultiValueEnum
 ):
     """
     An enumeration class for FeatureStageValue.
     """
 
-    EA = "EA"
-    BETA = "BETA"
+    EA = "EA", "ea"
+    BETA = "BETA", "beta"

@@ -18,22 +18,22 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from enum import Enum
+from aenum import MultiValueEnum
 
 
 class UserStatus(
     str,
-    Enum
+    MultiValueEnum
 ):
     """
     An enumeration class for UserStatus.
     """
 
-    ACTIVE = "ACTIVE"
-    DEPROVISIONED = "DEPROVISIONED"
-    LOCKED_OUT = "LOCKED_OUT"
-    PASSWORD_EXPIRED = "PASSWORD_EXPIRED"
-    PROVISIONED = "PROVISIONED"
-    RECOVERY = "RECOVERY"
-    STAGED = "STAGED"
-    SUSPENDED = "SUSPENDED"
+    ACTIVE = "ACTIVE", "active"
+    DEPROVISIONED = "DEPROVISIONED", "deprovisioned"
+    LOCKED_OUT = "LOCKED_OUT", "locked_out"
+    PASSWORD_EXPIRED = "PASSWORD_EXPIRED", "password_expired"
+    PROVISIONED = "PROVISIONED", "provisioned"
+    RECOVERY = "RECOVERY", "recovery"
+    STAGED = "STAGED", "staged"
+    SUSPENDED = "SUSPENDED", "suspended"

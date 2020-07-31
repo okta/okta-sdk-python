@@ -18,18 +18,18 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from enum import Enum
+from aenum import MultiValueEnum
 
 
 class OAuthEndpointAuthenticationMethod(
     str,
-    Enum
+    MultiValueEnum
 ):
     """
     An enumeration class for OAuthEndpointAuthenticationMethod.
     """
 
-    NONE = "none"
-    CLIENT_SECRET_POST = "client_secret_post"
-    CLIENT_SECRET_BASIC = "client_secret_basic"
-    CLIENT_SECRET_JWT = "client_secret_jwt"
+    NONE = "NONE", "none"
+    CLIENT_SECRET_POST = "CLIENT_SECRET_POST", "client_secret_post"
+    CLIENT_SECRET_BASIC = "CLIENT_SECRET_BASIC", "client_secret_basic"
+    CLIENT_SECRET_JWT = "CLIENT_SECRET_JWT", "client_secret_jwt"

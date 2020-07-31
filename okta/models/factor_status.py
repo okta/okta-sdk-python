@@ -18,21 +18,21 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from enum import Enum
+from aenum import MultiValueEnum
 
 
 class FactorStatus(
     str,
-    Enum
+    MultiValueEnum
 ):
     """
     An enumeration class for FactorStatus.
     """
 
-    PENDING_ACTIVATION = "PENDING_ACTIVATION"
-    ACTIVE = "ACTIVE"
-    INACTIVE = "INACTIVE"
-    NOT_SETUP = "NOT_SETUP"
-    ENROLLED = "ENROLLED"
-    DISABLED = "DISABLED"
-    EXPIRED = "EXPIRED"
+    PENDING_ACTIVATION = "PENDING_ACTIVATION", "pending_activation"
+    ACTIVE = "ACTIVE", "active"
+    INACTIVE = "INACTIVE", "inactive"
+    NOT_SETUP = "NOT_SETUP", "not_setup"
+    ENROLLED = "ENROLLED", "enrolled"
+    DISABLED = "DISABLED", "disabled"
+    EXPIRED = "EXPIRED", "expired"

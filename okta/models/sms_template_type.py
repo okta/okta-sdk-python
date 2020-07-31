@@ -18,15 +18,15 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from enum import Enum
+from aenum import MultiValueEnum
 
 
 class SmsTemplateType(
     str,
-    Enum
+    MultiValueEnum
 ):
     """
     An enumeration class for SmsTemplateType.
     """
 
-    SMS_VERIFY_CODE = "SMS_VERIFY_CODE"
+    SMS_VERIFY_CODE = "SMS_VERIFY_CODE", "sms_verify_code"

@@ -18,16 +18,16 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from enum import Enum
+from aenum import MultiValueEnum
 
 
 class OAuth2ScopeConsentGrantSource(
     str,
-    Enum
+    MultiValueEnum
 ):
     """
     An enumeration class for OAuth2ScopeConsentGrantSource.
     """
 
-    END_USER = "END_USER"
-    ADMIN = "ADMIN"
+    END_USER = "END_USER", "end_user"
+    ADMIN = "ADMIN", "admin"

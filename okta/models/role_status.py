@@ -18,16 +18,16 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from enum import Enum
+from aenum import MultiValueEnum
 
 
 class RoleStatus(
     str,
-    Enum
+    MultiValueEnum
 ):
     """
     An enumeration class for RoleStatus.
     """
 
-    ACTIVE = "ACTIVE"
-    INACTIVE = "INACTIVE"
+    ACTIVE = "ACTIVE", "active"
+    INACTIVE = "INACTIVE", "inactive"

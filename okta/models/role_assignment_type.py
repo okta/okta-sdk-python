@@ -18,16 +18,16 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from enum import Enum
+from aenum import MultiValueEnum
 
 
 class RoleAssignmentType(
     str,
-    Enum
+    MultiValueEnum
 ):
     """
     An enumeration class for RoleAssignmentType.
     """
 
-    GROUP = "GROUP"
-    USER = "USER"
+    GROUP = "GROUP", "group"
+    USER = "USER", "user"

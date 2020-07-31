@@ -18,16 +18,16 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from enum import Enum
+from aenum import MultiValueEnum
 
 
 class FeatureStageState(
     str,
-    Enum
+    MultiValueEnum
 ):
     """
     An enumeration class for FeatureStageState.
     """
 
-    OPEN = "OPEN"
-    CLOSED = "CLOSED"
+    OPEN = "OPEN", "open"
+    CLOSED = "CLOSED", "closed"

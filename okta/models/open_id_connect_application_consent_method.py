@@ -18,16 +18,16 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from enum import Enum
+from aenum import MultiValueEnum
 
 
 class OpenIdConnectApplicationConsentMethod(
     str,
-    Enum
+    MultiValueEnum
 ):
     """
     An enumeration class for OpenIdConnectApplicationConsentMethod.
     """
 
-    REQUIRED = "REQUIRED"
-    TRUSTED = "TRUSTED"
+    REQUIRED = "REQUIRED", "required"
+    TRUSTED = "TRUSTED", "trusted"

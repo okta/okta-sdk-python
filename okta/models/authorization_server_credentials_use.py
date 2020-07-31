@@ -18,15 +18,15 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from enum import Enum
+from aenum import MultiValueEnum
 
 
 class AuthorizationServerCredentialsUse(
     str,
-    Enum
+    MultiValueEnum
 ):
     """
     An enumeration class for AuthorizationServerCredentialsUse.
     """
 
-    SIG = "sig"
+    SIG = "SIG", "sig"

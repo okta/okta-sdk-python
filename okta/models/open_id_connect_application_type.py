@@ -18,18 +18,18 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from enum import Enum
+from aenum import MultiValueEnum
 
 
 class OpenIdConnectApplicationType(
     str,
-    Enum
+    MultiValueEnum
 ):
     """
     An enumeration class for OpenIdConnectApplicationType.
     """
 
-    WEB = "web"
-    NATIVE = "native"
-    BROWSER = "browser"
-    SERVICE = "service"
+    WEB = "WEB", "web"
+    NATIVE = "NATIVE", "native"
+    BROWSER = "BROWSER", "browser"
+    SERVICE = "SERVICE", "service"
