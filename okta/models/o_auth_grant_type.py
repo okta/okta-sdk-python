@@ -29,8 +29,8 @@ class OAuthGrantType(
     An enumeration class for OAuthGrantType.
     """
 
-    AUTHORIZATION_CODE = "AUTHORIZATION_CODE", "authorization_code"
-    IMPLICIT = "IMPLICIT", "implicit"
-    PASSWORD = "PASSWORD", "password"
-    REFRESH_TOKEN = "REFRESH_TOKEN", "refresh_token"
-    CLIENT_CREDENTIALS = "CLIENT_CREDENTIALS", "client_credentials"
+    AUTHORIZATION_CODE = "authorization_code", "AUTHORIZATION_CODE"
+    IMPLICIT = "implicit", "IMPLICIT"
+    PASSWORD = "password", "PASSWORD"
+    REFRESH_TOKEN = "refresh_token", "REFRESH_TOKEN"
+    CLIENT_CREDENTIALS = "client_credentials", "CLIENT_CREDENTIALS"

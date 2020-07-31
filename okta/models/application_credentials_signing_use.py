@@ -29,4 +29,4 @@ class ApplicationCredentialsSigningUse(
     An enumeration class for ApplicationCredentialsSigningUse.
     """
 
-    SIG = "SIG", "sig"
+    SIG = "sig", "SIG"

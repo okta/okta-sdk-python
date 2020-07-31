@@ -29,8 +29,8 @@ class InlineHookType(
     An enumeration class for InlineHookType.
     """
 
-    COM_OKTA_OAUTH_2_TOKENS_TRANSFORM = "COM.OKTA.OAUTH2.TOKENS.TRANSFORM", "com.okta.oauth2.tokens.transform"
-    COM_OKTA_IMPORT_TRANSFORM = "COM.OKTA.IMPORT.TRANSFORM", "com.okta.import.transform"
-    COM_OKTA_SAML_TOKENS_TRANSFORM = "COM.OKTA.SAML.TOKENS.TRANSFORM", "com.okta.saml.tokens.transform"
-    COM_OKTA_USER_PRE_REGISTRATION = "COM.OKTA.USER.PRE-REGISTRATION", "com.okta.user.pre-registration"
-    COM_OKTA_USER_CREDENTIAL_PASSWORD_IMPORT = "COM.OKTA.USER.CREDENTIAL.PASSWORD.IMPORT", "com.okta.user.credential.password.import"
+    COM_OKTA_OAUTH_2_TOKENS_TRANSFORM = "com.okta.oauth2.tokens.transform", "COM.OKTA.OAUTH2.TOKENS.TRANSFORM"
+    COM_OKTA_IMPORT_TRANSFORM = "com.okta.import.transform", "COM.OKTA.IMPORT.TRANSFORM"
+    COM_OKTA_SAML_TOKENS_TRANSFORM = "com.okta.saml.tokens.transform", "COM.OKTA.SAML.TOKENS.TRANSFORM"
+    COM_OKTA_USER_PRE_REGISTRATION = "com.okta.user.pre-registration", "COM.OKTA.USER.PRE-REGISTRATION"
+    COM_OKTA_USER_CREDENTIAL_PASSWORD_IMPORT = "com.okta.user.credential.password.import", "COM.OKTA.USER.CREDENTIAL.PASSWORD.IMPORT"

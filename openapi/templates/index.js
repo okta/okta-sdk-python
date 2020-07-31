@@ -121,6 +121,7 @@ py.process = ({ spec, operations, models, handlebars }) => {
     hasBinaryOps,
     replaceColons,
     returnsApplication,
+    oppositeCase,
   });
 
   handlebars.registerPartial(
@@ -325,9 +326,17 @@ function returnsApplication(operations) {
   );
 }
 
+// Set SignOnMode for each specific type of client
 function setApplicationSignOnMode(mapping, models) {
   for (const [key, value] of Object.entries(mapping)) {
     models[value].signOnMode = key;
   }
   return models;
+}
+
+// flips the case for enums in definition
+function oppositeCase(string) {
+  return string[0] === string[0].toUpperCase()
+    ? string.toLowerCase()
+    : string.toUpperCase();
 }

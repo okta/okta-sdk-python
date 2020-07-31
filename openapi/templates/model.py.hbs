@@ -14,7 +14,7 @@ class {{pascalCase model.modelName}}(
     """
 
     {{#each model.enum as |enum|}}
-    {{{replaceColons (upperCase (snakeCase enum))}}} = "{{upperCase enum}}", "{{lowerCase enum}}"
+    {{{replaceColons (upperCase (snakeCase enum))}}} = "{{enum}}", "{{oppositeCase enum}}"
     {{/each}}
 {{else}}
 

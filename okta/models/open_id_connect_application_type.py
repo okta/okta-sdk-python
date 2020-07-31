@@ -29,7 +29,7 @@ class OpenIdConnectApplicationType(
     An enumeration class for OpenIdConnectApplicationType.
     """
 
-    WEB = "WEB", "web"
-    NATIVE = "NATIVE", "native"
-    BROWSER = "BROWSER", "browser"
-    SERVICE = "SERVICE", "service"
+    WEB = "web", "WEB"
+    NATIVE = "native", "NATIVE"
+    BROWSER = "browser", "BROWSER"
+    SERVICE = "service", "SERVICE"

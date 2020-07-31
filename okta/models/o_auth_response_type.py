@@ -29,6 +29,6 @@ class OAuthResponseType(
     An enumeration class for OAuthResponseType.
     """
 
-    CODE = "CODE", "code"
-    TOKEN = "TOKEN", "token"
-    ID_TOKEN = "ID_TOKEN", "id_token"
+    CODE = "code", "CODE"
+    TOKEN = "token", "TOKEN"
+    ID_TOKEN = "id_token", "ID_TOKEN"

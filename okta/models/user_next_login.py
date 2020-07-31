@@ -29,4 +29,4 @@ class UserNextLogin(
     An enumeration class for UserNextLogin.
     """
 
-    CHANGE_PASSWORD = "CHANGEPASSWORD", "changepassword"
+    CHANGE_PASSWORD = "changePassword", "CHANGEPASSWORD"
