@@ -107,7 +107,7 @@ class Application(
                     self.sign_on_mode = config["signOnMode"]
                 else:
                     self.sign_on_mode = ApplicationSignOnMode(
-                        config["signOnMode"]
+                        config["signOnMode"].upper()
                     )
             else:
                 self.sign_on_mode = None

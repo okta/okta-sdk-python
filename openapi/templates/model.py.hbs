@@ -14,7 +14,7 @@ class {{pascalCase model.modelName}}(
     """
 
     {{#each model.enum as |enum|}}
-    {{{replaceColons (upperCase (snakeCase enum))}}} = "{{upperCase enum}}", "{{lowerCase enum}}"
+    {{{replaceColons (upperCase (snakeCase enum))}}} = "{{enum}}", "{{oppositeCase enum}}"
     {{/each}}
 {{else}}
 
@@ -55,9 +55,15 @@ class {{pascalCase model.modelName}}(
                               {{pascalCase prop.model}}):
                     self.{{snakeCase prop.propertyName}} = config["{{camelCase prop.propertyName}}"]
                 else:
+                    {{#if (eq prop.commonType "enum")}}
+                    self.{{snakeCase prop.propertyName}} = {{pascalCase prop.model}}(
+                        config["{{camelCase prop.propertyName}}"].upper()
+                    )
+                    {{else}}
                     self.{{snakeCase prop.propertyName}} = {{pascalCase prop.model}}(
                         config["{{camelCase prop.propertyName}}"]
                     )
+                    {{/if}}
             else:
                 self.{{snakeCase prop.propertyName}} = None
             {{else}}

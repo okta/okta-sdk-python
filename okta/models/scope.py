@@ -41,7 +41,7 @@ class Scope(
                     self.type = config["type"]
                 else:
                     self.type = ScopeType(
-                        config["type"]
+                        config["type"].upper()
                     )
             else:
                 self.type = None

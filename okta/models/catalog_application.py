@@ -57,7 +57,7 @@ class CatalogApplication(
                     self.status = config["status"]
                 else:
                     self.status = CatalogApplicationStatus(
-                        config["status"]
+                        config["status"].upper()
                     )
             else:
                 self.status = None

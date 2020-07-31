@@ -133,7 +133,7 @@ class LogEvent(
                     self.severity = config["severity"]
                 else:
                     self.severity = LogSeverity(
-                        config["severity"]
+                        config["severity"].upper()
                     )
             else:
                 self.severity = None

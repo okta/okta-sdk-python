@@ -45,7 +45,7 @@ class LinkedObjectDetails(
                     self.type = config["type"]
                 else:
                     self.type = LinkedObjectDetailsType(
-                        config["type"]
+                        config["type"].upper()
                     )
             else:
                 self.type = None

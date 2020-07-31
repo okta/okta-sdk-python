@@ -29,4 +29,4 @@ class FeatureType(
     An enumeration class for FeatureType.
     """
 
-    SELF_SERVICE = "SELF-SERVICE", "self-service"
+    SELF_SERVICE = "self-service", "SELF-SERVICE"

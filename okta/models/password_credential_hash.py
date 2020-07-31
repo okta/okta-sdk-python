@@ -39,7 +39,7 @@ class PasswordCredentialHash(
                     self.algorithm = config["algorithm"]
                 else:
                     self.algorithm = PasswordCredentialHashAlgorithm(
-                        config["algorithm"]
+                        config["algorithm"].upper()
                     )
             else:
                 self.algorithm = None

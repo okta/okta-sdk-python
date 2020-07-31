@@ -56,7 +56,7 @@ class SchemeApplicationCredentials(
                     self.scheme = config["scheme"]
                 else:
                     self.scheme = ApplicationCredentialsScheme(
-                        config["scheme"]
+                        config["scheme"].upper()
                     )
             else:
                 self.scheme = None

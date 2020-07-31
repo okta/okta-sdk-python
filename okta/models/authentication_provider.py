@@ -41,7 +41,7 @@ class AuthenticationProvider(
                     self.type = config["type"]
                 else:
                     self.type = AuthenticationProviderType(
-                        config["type"]
+                        config["type"].upper()
                     )
             else:
                 self.type = None

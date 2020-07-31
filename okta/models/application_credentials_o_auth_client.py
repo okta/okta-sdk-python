@@ -45,7 +45,7 @@ class ApplicationCredentialsOAuthClient(
                     self.token_endpoint_auth_method = config["tokenEndpointAuthMethod"]
                 else:
                     self.token_endpoint_auth_method = OAuthEndpointAuthenticationMethod(
-                        config["tokenEndpointAuthMethod"]
+                        config["tokenEndpointAuthMethod"].upper()
                     )
             else:
                 self.token_endpoint_auth_method = None

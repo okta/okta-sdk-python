@@ -71,7 +71,7 @@ class GroupRule(
                     self.status = config["status"]
                 else:
                     self.status = GroupRuleStatus(
-                        config["status"]
+                        config["status"].upper()
                     )
             else:
                 self.status = None

@@ -39,7 +39,7 @@ class ProtocolRelayState(
                     self.format = config["format"]
                 else:
                     self.format = ProtocolRelayStateFormat(
-                        config["format"]
+                        config["format"].upper()
                     )
             else:
                 self.format = None

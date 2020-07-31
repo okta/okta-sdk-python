@@ -29,7 +29,7 @@ class OAuthEndpointAuthenticationMethod(
     An enumeration class for OAuthEndpointAuthenticationMethod.
     """
 
-    NONE = "NONE", "none"
-    CLIENT_SECRET_POST = "CLIENT_SECRET_POST", "client_secret_post"
-    CLIENT_SECRET_BASIC = "CLIENT_SECRET_BASIC", "client_secret_basic"
-    CLIENT_SECRET_JWT = "CLIENT_SECRET_JWT", "client_secret_jwt"
+    NONE = "none", "NONE"
+    CLIENT_SECRET_POST = "client_secret_post", "CLIENT_SECRET_POST"
+    CLIENT_SECRET_BASIC = "client_secret_basic", "CLIENT_SECRET_BASIC"
+    CLIENT_SECRET_JWT = "client_secret_jwt", "CLIENT_SECRET_JWT"

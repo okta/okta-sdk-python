@@ -44,7 +44,7 @@ class PushUserFactor(
                     self.factor_result = config["factorResult"]
                 else:
                     self.factor_result = FactorResultType(
-                        config["factorResult"]
+                        config["factorResult"].upper()
                     )
             else:
                 self.factor_result = None

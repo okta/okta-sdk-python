@@ -61,7 +61,7 @@ class Feature(
                     self.status = config["status"]
                 else:
                     self.status = EnabledStatus(
-                        config["status"]
+                        config["status"].upper()
                     )
             else:
                 self.status = None
@@ -71,7 +71,7 @@ class Feature(
                     self.type = config["type"]
                 else:
                     self.type = FeatureType(
-                        config["type"]
+                        config["type"].upper()
                     )
             else:
                 self.type = None

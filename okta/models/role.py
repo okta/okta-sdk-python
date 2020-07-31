@@ -47,7 +47,7 @@ class Role(
                     self.assignment_type = config["assignmentType"]
                 else:
                     self.assignment_type = RoleAssignmentType(
-                        config["assignmentType"]
+                        config["assignmentType"].upper()
                     )
             else:
                 self.assignment_type = None
@@ -67,7 +67,7 @@ class Role(
                     self.status = config["status"]
                 else:
                     self.status = RoleStatus(
-                        config["status"]
+                        config["status"].upper()
                     )
             else:
                 self.status = None
@@ -77,7 +77,7 @@ class Role(
                     self.type = config["type"]
                 else:
                     self.type = RoleType(
-                        config["type"]
+                        config["type"].upper()
                     )
             else:
                 self.type = None

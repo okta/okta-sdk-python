@@ -29,4 +29,4 @@ class AuthorizationServerCredentialsUse(
     An enumeration class for AuthorizationServerCredentialsUse.
     """
 
-    SIG = "SIG", "sig"
+    SIG = "sig", "SIG"

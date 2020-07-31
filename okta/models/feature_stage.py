@@ -41,7 +41,7 @@ class FeatureStage(
                     self.state = config["state"]
                 else:
                     self.state = FeatureStageState(
-                        config["state"]
+                        config["state"].upper()
                     )
             else:
                 self.state = None
@@ -51,7 +51,7 @@ class FeatureStage(
                     self.value = config["value"]
                 else:
                     self.value = FeatureStageValue(
-                        config["value"]
+                        config["value"].upper()
                     )
             else:
                 self.value = None
