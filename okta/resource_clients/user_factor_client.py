@@ -25,6 +25,7 @@ from okta.models.security_question\
 from okta.models.verify_user_factor_response\
     import VerifyUserFactorResponse
 from okta.utils import format_url
+import humps
 
 
 class UserFactorClient():
@@ -70,7 +71,7 @@ class UserFactorClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(UserFactor(item))
         except Exception as error:
             return (None, response, error)
@@ -122,7 +123,7 @@ class UserFactorClient():
 
         try:
             result = UserFactor(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -163,7 +164,7 @@ class UserFactorClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(UserFactor(item))
         except Exception as error:
             return (None, response, error)
@@ -204,7 +205,7 @@ class UserFactorClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(SecurityQuestion(item))
         except Exception as error:
             return (None, response, error)
@@ -279,7 +280,7 @@ class UserFactorClient():
 
         try:
             result = UserFactor(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -326,7 +327,7 @@ class UserFactorClient():
 
         try:
             result = UserFactor(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -369,7 +370,7 @@ class UserFactorClient():
 
         try:
             result = VerifyUserFactorResponse(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -421,7 +422,7 @@ class UserFactorClient():
 
         try:
             result = VerifyUserFactorResponse(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)

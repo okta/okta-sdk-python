@@ -49,6 +49,7 @@ from okta.models.role\
 from okta.models.catalog_application\
     import CatalogApplication
 from okta.utils import format_url
+import humps
 
 
 class UserClient():
@@ -105,7 +106,7 @@ class UserClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(User(item))
         except Exception as error:
             return (None, response, error)
@@ -156,7 +157,7 @@ class UserClient():
 
         try:
             result = User(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -272,7 +273,7 @@ class UserClient():
 
         try:
             result = User(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -322,7 +323,7 @@ class UserClient():
 
         try:
             result = User(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -372,7 +373,7 @@ class UserClient():
 
         try:
             result = User(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -413,7 +414,7 @@ class UserClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(AppLink(item))
         except Exception as error:
             return (None, response, error)
@@ -454,7 +455,7 @@ class UserClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(OAuth2Client(item))
         except Exception as error:
             return (None, response, error)
@@ -535,7 +536,7 @@ class UserClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(OAuth2ScopeConsentGrant(item))
         except Exception as error:
             return (None, response, error)
@@ -618,7 +619,7 @@ class UserClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(OAuth2RefreshToken(item))
         except Exception as error:
             return (None, response, error)
@@ -704,7 +705,7 @@ class UserClient():
 
         try:
             result = OAuth2RefreshToken(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -756,7 +757,7 @@ class UserClient():
 
         try:
             result = UserCredentials(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -805,7 +806,7 @@ class UserClient():
 
         try:
             result = UserCredentials(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -851,7 +852,7 @@ class UserClient():
 
         try:
             result = ForgotPasswordResponse(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -901,7 +902,7 @@ class UserClient():
 
         try:
             result = ForgotPasswordResponse(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -981,7 +982,7 @@ class UserClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(OAuth2ScopeConsentGrant(item))
         except Exception as error:
             return (None, response, error)
@@ -1060,7 +1061,7 @@ class UserClient():
 
         try:
             result = OAuth2ScopeConsentGrant(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1100,7 +1101,7 @@ class UserClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(Group(item))
         except Exception as error:
             return (None, response, error)
@@ -1140,7 +1141,7 @@ class UserClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(IdentityProvider(item))
         except Exception as error:
             return (None, response, error)
@@ -1192,7 +1193,7 @@ class UserClient():
 
         try:
             result = UserActivationToken(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1279,7 +1280,7 @@ class UserClient():
 
         try:
             result = User(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1322,7 +1323,7 @@ class UserClient():
 
         try:
             result = TempPassword(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1371,7 +1372,7 @@ class UserClient():
 
         try:
             result = UserActivationToken(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1455,7 +1456,7 @@ class UserClient():
 
         try:
             result = ResetPasswordToken(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1641,7 +1642,7 @@ class UserClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(ResponseLinks(item))
         except Exception as error:
             return (None, response, error)
@@ -1686,7 +1687,7 @@ class UserClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(Role(item))
         except Exception as error:
             return (None, response, error)
@@ -1735,7 +1736,7 @@ class UserClient():
 
         try:
             result = Role(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1820,7 +1821,7 @@ class UserClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(CatalogApplication(item))
         except Exception as error:
             return (None, response, error)
@@ -2042,7 +2043,7 @@ class UserClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(Group(item))
         except Exception as error:
             return (None, response, error)

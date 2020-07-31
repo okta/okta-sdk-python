@@ -23,6 +23,7 @@ from okta.models.inline_hook\
 from okta.models.inline_hook_response\
     import InlineHookResponse
 from okta.utils import format_url
+import humps
 
 
 class InlineHookClient():
@@ -70,7 +71,7 @@ class InlineHookClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(InlineHook(item))
         except Exception as error:
             return (None, response, error)
@@ -112,7 +113,7 @@ class InlineHookClient():
 
         try:
             result = InlineHook(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -187,7 +188,7 @@ class InlineHookClient():
 
         try:
             result = InlineHook(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -231,7 +232,7 @@ class InlineHookClient():
 
         try:
             result = InlineHook(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -280,7 +281,7 @@ class InlineHookClient():
 
         try:
             result = InlineHookResponse(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -321,7 +322,7 @@ class InlineHookClient():
 
         try:
             result = InlineHook(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -362,7 +363,7 @@ class InlineHookClient():
 
         try:
             result = InlineHook(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
