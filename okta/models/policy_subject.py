@@ -47,7 +47,7 @@ class PolicySubject(
                     self.match_type = config["matchType"]
                 else:
                     self.match_type = PolicySubjectMatchType(
-                        config["matchType"]
+                        config["matchType"].upper()
                     )
             else:
                 self.match_type = None

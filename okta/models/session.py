@@ -67,7 +67,7 @@ class Session(
                     self.status = config["status"]
                 else:
                     self.status = SessionStatus(
-                        config["status"]
+                        config["status"].upper()
                     )
             else:
                 self.status = None

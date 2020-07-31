@@ -45,7 +45,7 @@ class LogAuthenticationContext(
                     self.authentication_provider = config["authenticationProvider"]
                 else:
                     self.authentication_provider = LogAuthenticationProvider(
-                        config["authenticationProvider"]
+                        config["authenticationProvider"].upper()
                     )
             else:
                 self.authentication_provider = None
@@ -57,7 +57,7 @@ class LogAuthenticationContext(
                     self.credential_provider = config["credentialProvider"]
                 else:
                     self.credential_provider = LogCredentialProvider(
-                        config["credentialProvider"]
+                        config["credentialProvider"].upper()
                     )
             else:
                 self.credential_provider = None
@@ -67,7 +67,7 @@ class LogAuthenticationContext(
                     self.credential_type = config["credentialType"]
                 else:
                     self.credential_type = LogCredentialType(
-                        config["credentialType"]
+                        config["credentialType"].upper()
                     )
             else:
                 self.credential_type = None

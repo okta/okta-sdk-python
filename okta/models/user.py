@@ -81,7 +81,7 @@ class User(
                     self.status = config["status"]
                 else:
                     self.status = UserStatus(
-                        config["status"]
+                        config["status"].upper()
                     )
             else:
                 self.status = None
@@ -93,7 +93,7 @@ class User(
                     self.transitioning_to_status = config["transitioningToStatus"]
                 else:
                     self.transitioning_to_status = UserStatus(
-                        config["transitioningToStatus"]
+                        config["transitioningToStatus"].upper()
                     )
             else:
                 self.transitioning_to_status = None

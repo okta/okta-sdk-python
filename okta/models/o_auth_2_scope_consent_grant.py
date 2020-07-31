@@ -69,7 +69,7 @@ class OAuth2ScopeConsentGrant(
                     self.source = config["source"]
                 else:
                     self.source = OAuth2ScopeConsentGrantSource(
-                        config["source"]
+                        config["source"].upper()
                     )
             else:
                 self.source = None
@@ -79,7 +79,7 @@ class OAuth2ScopeConsentGrant(
                     self.status = config["status"]
                 else:
                     self.status = OAuth2ScopeConsentGrantStatus(
-                        config["status"]
+                        config["status"].upper()
                     )
             else:
                 self.status = None

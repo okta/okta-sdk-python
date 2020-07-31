@@ -47,7 +47,7 @@ class AuthorizationServerCredentialsSigningConfig(
                     self.rotation_mode = config["rotationMode"]
                 else:
                     self.rotation_mode = AuthorizationServerCredentialsRotationMode(
-                        config["rotationMode"]
+                        config["rotationMode"].upper()
                     )
             else:
                 self.rotation_mode = None
@@ -57,7 +57,7 @@ class AuthorizationServerCredentialsSigningConfig(
                     self.use = config["use"]
                 else:
                     self.use = AuthorizationServerCredentialsUse(
-                        config["use"]
+                        config["use"].upper()
                     )
             else:
                 self.use = None

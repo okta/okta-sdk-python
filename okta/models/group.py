@@ -65,7 +65,7 @@ class Group(
                     self.type = config["type"]
                 else:
                     self.type = GroupType(
-                        config["type"]
+                        config["type"].upper()
                     )
             else:
                 self.type = None

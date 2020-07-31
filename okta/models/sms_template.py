@@ -61,7 +61,7 @@ class SmsTemplate(
                     self.type = config["type"]
                 else:
                     self.type = SmsTemplateType(
-                        config["type"]
+                        config["type"].upper()
                     )
             else:
                 self.type = None

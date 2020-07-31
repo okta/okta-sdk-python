@@ -41,7 +41,7 @@ class SessionIdentityProvider(
                     self.type = config["type"]
                 else:
                     self.type = SessionIdentityProviderType(
-                        config["type"]
+                        config["type"].upper()
                     )
             else:
                 self.type = None

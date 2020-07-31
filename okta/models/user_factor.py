@@ -51,7 +51,7 @@ class UserFactor(
                     self.factor_type = config["factorType"]
                 else:
                     self.factor_type = FactorType(
-                        config["factorType"]
+                        config["factorType"].upper()
                     )
             else:
                 self.factor_type = None
@@ -65,7 +65,7 @@ class UserFactor(
                     self.provider = config["provider"]
                 else:
                     self.provider = FactorProvider(
-                        config["provider"]
+                        config["provider"].upper()
                     )
             else:
                 self.provider = None
@@ -75,7 +75,7 @@ class UserFactor(
                     self.status = config["status"]
                 else:
                     self.status = FactorStatus(
-                        config["status"]
+                        config["status"].upper()
                     )
             else:
                 self.status = None

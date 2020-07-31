@@ -63,7 +63,7 @@ class InlineHook(
                     self.status = config["status"]
                 else:
                     self.status = InlineHookStatus(
-                        config["status"]
+                        config["status"].upper()
                     )
             else:
                 self.status = None
@@ -73,7 +73,7 @@ class InlineHook(
                     self.type = config["type"]
                 else:
                     self.type = InlineHookType(
-                        config["type"]
+                        config["type"].upper()
                     )
             else:
                 self.type = None

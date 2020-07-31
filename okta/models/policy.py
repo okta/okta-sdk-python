@@ -71,7 +71,7 @@ class Policy(
                     self.type = config["type"]
                 else:
                     self.type = PolicyType(
-                        config["type"]
+                        config["type"].upper()
                     )
             else:
                 self.type = None

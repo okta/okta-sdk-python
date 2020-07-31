@@ -47,7 +47,7 @@ class ApplicationCredentialsSigning(
                     self.use = config["use"]
                 else:
                     self.use = ApplicationCredentialsSigningUse(
-                        config["use"]
+                        config["use"].upper()
                     )
             else:
                 self.use = None

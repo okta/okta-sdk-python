@@ -43,7 +43,7 @@ class OpenIdConnectApplicationSettingsClient(
                     self.application_type = config["applicationType"]
                 else:
                     self.application_type = OpenIdConnectApplicationType(
-                        config["applicationType"]
+                        config["applicationType"].upper()
                     )
             else:
                 self.application_type = None
@@ -55,7 +55,7 @@ class OpenIdConnectApplicationSettingsClient(
                     self.consent_method = config["consentMethod"]
                 else:
                     self.consent_method = OpenIdConnectApplicationConsentMethod(
-                        config["consentMethod"]
+                        config["consentMethod"].upper()
                     )
             else:
                 self.consent_method = None
@@ -69,7 +69,7 @@ class OpenIdConnectApplicationSettingsClient(
                     self.issuer_mode = config["issuerMode"]
                 else:
                     self.issuer_mode = OpenIdConnectApplicationIssuerMode(
-                        config["issuerMode"]
+                        config["issuerMode"].upper()
                     )
             else:
                 self.issuer_mode = None

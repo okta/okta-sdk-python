@@ -39,7 +39,7 @@ class AssignRoleRequest(
                     self.type = config["type"]
                 else:
                     self.type = RoleType(
-                        config["type"]
+                        config["type"].upper()
                     )
             else:
                 self.type = None
