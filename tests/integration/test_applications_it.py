@@ -362,6 +362,16 @@ class TestApplicationsResource:
         assert found_app.label == APP_LABEL
         assert found_app.sign_on_mode ==\
             models.ApplicationSignOnMode.OPENID_CONNECT
+        assert found_app.settings.oauth_client.application_type == APP_TYPE
+        assert found_app.settings.oauth_client.client_uri == CLIENT_URI
+        assert found_app.settings.oauth_client.grant_types == GRANT_TYPES
+        assert found_app.settings.oauth_client.logo_uri == LOGO_URI
+        assert found_app.settings.oauth_client.policy_uri == POLICY_URI
+        assert found_app.settings.oauth_client.post_logout_redirect_uris ==\
+            POST_LOGOUT_REDIRECT_URIS
+        assert found_app.settings.oauth_client.redirect_uris == REDIRECT_URIS
+        assert found_app.settings.oauth_client.response_types == RESPONSE_TYPES
+        assert found_app.settings.oauth_client.tos_uri == TOS_URL
 
         # Deactivate & Delete created app
         _, err = await client.deactivate_application(app.id)
