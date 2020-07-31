@@ -31,6 +31,7 @@ from okta.models.catalog_application\
 from okta.models.user\
     import User
 from okta.utils import format_url
+import humps
 from okta.constants import find_app_model
 
 
@@ -85,7 +86,7 @@ class GroupClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(Group(item))
         except Exception as error:
             return (None, response, error)
@@ -129,7 +130,7 @@ class GroupClient():
 
         try:
             result = Group(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -176,7 +177,7 @@ class GroupClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(GroupRule(item))
         except Exception as error:
             return (None, response, error)
@@ -220,7 +221,7 @@ class GroupClient():
 
         try:
             result = GroupRule(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -299,7 +300,7 @@ class GroupClient():
 
         try:
             result = GroupRule(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -344,7 +345,7 @@ class GroupClient():
 
         try:
             result = GroupRule(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -483,7 +484,7 @@ class GroupClient():
 
         try:
             result = Group(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -528,7 +529,7 @@ class GroupClient():
 
         try:
             result = Group(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -575,7 +576,7 @@ class GroupClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(find_app_model(item["signOnMode"])(item))
         except Exception as error:
             return (None, response, error)
@@ -619,7 +620,7 @@ class GroupClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(Role(item))
         except Exception as error:
             return (None, response, error)
@@ -668,7 +669,7 @@ class GroupClient():
 
         try:
             result = Role(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -741,7 +742,7 @@ class GroupClient():
 
         try:
             result = Role(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -793,7 +794,7 @@ class GroupClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(CatalogApplication(item))
         except Exception as error:
             return (None, response, error)
@@ -982,7 +983,7 @@ class GroupClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(Group(item))
         except Exception as error:
             return (None, response, error)
@@ -1102,7 +1103,7 @@ class GroupClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(User(item))
         except Exception as error:
             return (None, response, error)

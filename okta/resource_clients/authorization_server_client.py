@@ -33,6 +33,7 @@ from okta.models.policy\
 from okta.models.o_auth_2_scope\
     import OAuth2Scope
 from okta.utils import format_url
+import humps
 
 
 class AuthorizationServerClient():
@@ -82,7 +83,7 @@ class AuthorizationServerClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(AuthorizationServer(item))
         except Exception as error:
             return (None, response, error)
@@ -124,7 +125,7 @@ class AuthorizationServerClient():
 
         try:
             result = AuthorizationServer(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -194,7 +195,7 @@ class AuthorizationServerClient():
 
         try:
             result = AuthorizationServer(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -237,7 +238,7 @@ class AuthorizationServerClient():
 
         try:
             result = AuthorizationServer(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -276,7 +277,7 @@ class AuthorizationServerClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(OAuth2Claim(item))
         except Exception as error:
             return (None, response, error)
@@ -319,7 +320,7 @@ class AuthorizationServerClient():
 
         try:
             result = OAuth2Claim(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -393,7 +394,7 @@ class AuthorizationServerClient():
 
         try:
             result = OAuth2Claim(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -438,7 +439,7 @@ class AuthorizationServerClient():
 
         try:
             result = OAuth2Claim(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -477,7 +478,7 @@ class AuthorizationServerClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(OAuth2Client(item))
         except Exception as error:
             return (None, response, error)
@@ -558,7 +559,7 @@ class AuthorizationServerClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(OAuth2RefreshToken(item))
         except Exception as error:
             return (None, response, error)
@@ -639,7 +640,7 @@ class AuthorizationServerClient():
 
         try:
             result = OAuth2RefreshToken(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -679,7 +680,7 @@ class AuthorizationServerClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(JsonWebKey(item))
         except Exception as error:
             return (None, response, error)
@@ -722,7 +723,7 @@ class AuthorizationServerClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(JsonWebKey(item))
         except Exception as error:
             return (None, response, error)
@@ -826,7 +827,7 @@ class AuthorizationServerClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(Policy(item))
         except Exception as error:
             return (None, response, error)
@@ -870,7 +871,7 @@ class AuthorizationServerClient():
 
         try:
             result = Policy(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -944,7 +945,7 @@ class AuthorizationServerClient():
 
         try:
             result = Policy(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -989,7 +990,7 @@ class AuthorizationServerClient():
 
         try:
             result = Policy(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1036,7 +1037,7 @@ class AuthorizationServerClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(OAuth2Scope(item))
         except Exception as error:
             return (None, response, error)
@@ -1079,7 +1080,7 @@ class AuthorizationServerClient():
 
         try:
             result = OAuth2Scope(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1153,7 +1154,7 @@ class AuthorizationServerClient():
 
         try:
             result = OAuth2Scope(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1198,7 +1199,7 @@ class AuthorizationServerClient():
 
         try:
             result = OAuth2Scope(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)

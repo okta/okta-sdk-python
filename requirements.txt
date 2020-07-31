@@ -11,3 +11,5 @@ pytest-asyncio
 pytest-vcr
 pytest-mock
 pyfakefs
+aenum
+pyhumps

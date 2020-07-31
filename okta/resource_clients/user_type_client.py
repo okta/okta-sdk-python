@@ -20,6 +20,7 @@ limitations under the License.
 from okta.models.user_type\
     import UserType
 from okta.utils import format_url
+import humps
 
 
 class UserTypeClient():
@@ -63,7 +64,7 @@ class UserTypeClient():
 
         try:
             result = []
-            for item in response.get_body():
+            for item in humps.camelize(response.get_body()):
                 result.append(UserType(item))
         except Exception as error:
             return (None, response, error)
@@ -108,7 +109,7 @@ class UserTypeClient():
 
         try:
             result = UserType(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -183,7 +184,7 @@ class UserTypeClient():
 
         try:
             result = UserType(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -227,7 +228,7 @@ class UserTypeClient():
 
         try:
             result = UserType(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -271,7 +272,7 @@ class UserTypeClient():
 
         try:
             result = UserType(
-                response.get_body()
+                humps.camelize(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
