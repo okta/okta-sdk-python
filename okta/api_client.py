@@ -17,8 +17,12 @@ class APIClient():
         Args:
             body (dict): Okta API response body
         """
-        # Camel case keys to match Lodash camel case
-        for original_key in body.keys():
-            body[camel_case(original_key)] = body.pop(original_key)
-
-        return body
+        result = {}
+        for key, val in body.items():
+            if val is None:
+                continue
+            if not isinstance(val, dict):
+                result[camel_case(key)] = val
+            else:
+                result[camel_case(key)] = self.form_response_body(val)
+        return result
