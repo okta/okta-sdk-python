@@ -1,10 +1,9 @@
 import pytest
 from tests.mocks import MockOktaClient
-# from http import HTTPStatus
+# from okta.client import Client
 import okta.models as models
-from okta.client import Client
 from okta.errors.okta_api_error import OktaAPIError
-import time
+# import time
 # import sys
 # import getopt
 
@@ -98,13 +97,11 @@ class TestApplicationsResource:
         _, err = await client.delete_application(app.id)
         assert err is None
 
-    # @pytest.mark.vcr()
+    @pytest.mark.vcr()
     @pytest.mark.asyncio
-    # @pytest.mark.skip
-    async def test_create_SWA_app(self):
+    async def test_create_SWA_app(self, fs):
         # Instantiate Mock Client
         client = MockOktaClient()
-        client = Client()
 
         # Create Application object and Application in Org
         APP_LABEL = "Test App"
@@ -132,22 +129,21 @@ class TestApplicationsResource:
         })
 
         app, _, err = await client.create_application(swa_app_obj)
-        # print(app, type(app))
-        # assert err is None
-        # assert isinstance(app, models.Application)
-        # assert isinstance(app, models.SwaApplication)
+        assert err is None
+        assert isinstance(app, models.Application)
+        assert isinstance(app, models.SwaApplication)
 
-        # # Get app and verify details
-        # found_app, _, err = await client.get_application(app.id)
-        # assert err is None
-        # assert found_app.label == APP_LABEL
-        # assert found_app.sign_on_mode == \
-        #     models.ApplicationSignOnMode.BROWSER_PLUGIN
-        # assert found_app.settings.app.button_field == BUTTON_FIELD
-        # assert found_app.settings.app.password_field == PASSWORD_FIELD
-        # assert found_app.settings.app.username_field == USERNAME_FIELD
-        # assert found_app.settings.app.url == URL
-        # assert found_app.settings.app.login_url_regex == LOGIN_URL_REGEX
+        # Get app and verify details
+        found_app, _, err = await client.get_application(app.id)
+        assert err is None
+        assert found_app.label == APP_LABEL
+        assert found_app.sign_on_mode == \
+            models.ApplicationSignOnMode.BROWSER_PLUGIN
+        assert found_app.settings.app.button_field == BUTTON_FIELD
+        assert found_app.settings.app.password_field == PASSWORD_FIELD
+        assert found_app.settings.app.username_field == USERNAME_FIELD
+        assert found_app.settings.app.url == URL
+        assert found_app.settings.app.login_url_regex == LOGIN_URL_REGEX
 
         # Deactivate & Delete created app
         _, err = await client.deactivate_application(app.id)
@@ -920,9 +916,9 @@ class TestApplicationsResource:
         assert err is None
 
         # Ensure user is not in list
-        lst_users_assigned, _, err = await client.list_application_users(app.id)
+        users_assigned, _, err = await client.list_application_users(app.id)
         assert err is None
-        assert len(lst_users_assigned) == 0
+        assert len(users_assigned) == 0
 
         # Deactivate and Delete User
         _, err = await client.deactivate_user(user.id)
