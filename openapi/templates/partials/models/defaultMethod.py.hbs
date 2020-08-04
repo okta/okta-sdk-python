@@ -60,18 +60,18 @@
         try:
         {{#if operation.isArray}}
             result = []
-            for item in humps.camelize(response.get_body()):
+            for item in camel_case(response.get_body()):
                 {{#if (eq (pascalCase operation.responseModel) "Application")}}
                 result.append(find_app_model(item["signOnMode"])(item))
                 {{else}}
                 result.append({{pascalCase operation.responseModel}}(item))
         {{else}}
             {{#if (eq (pascalCase operation.responseModel) "Application")}}
-            body = humps.camelize(response.get_body())
+            body = camel_case(response.get_body())
             result = find_app_model(body["signOnMode"])(body)
             {{else}}
             result = {{pascalCase operation.responseModel}}(
-                humps.camelize(response.get_body())
+                camel_case(response.get_body())
             )
         {{/if}}
         except Exception as error:

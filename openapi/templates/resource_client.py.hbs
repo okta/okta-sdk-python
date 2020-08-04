@@ -11,7 +11,7 @@ from okta.models.{{snakeCase import}}\
     import {{pascalCase import}}
 {{/each}}
 from okta.utils import format_url
-import humps
+from pydash.strings import camel_case
 {{#if (returnsApplication operations)}}
 from okta.constants import find_app_model
 {{/if}}

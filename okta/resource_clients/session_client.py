@@ -20,7 +20,7 @@ limitations under the License.
 from okta.models.session\
     import Session
 from okta.utils import format_url
-import humps
+from pydash.strings import camel_case
 
 
 class SessionClient():
@@ -73,7 +73,7 @@ class SessionClient():
 
         try:
             result = Session(
-                humps.camelize(response.get_body())
+                camel_case(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -146,7 +146,7 @@ class SessionClient():
 
         try:
             result = Session(
-                humps.camelize(response.get_body())
+                camel_case(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -187,7 +187,7 @@ class SessionClient():
 
         try:
             result = Session(
-                humps.camelize(response.get_body())
+                camel_case(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
