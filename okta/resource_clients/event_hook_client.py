@@ -20,7 +20,7 @@ limitations under the License.
 from okta.models.event_hook\
     import EventHook
 from okta.utils import format_url
-import humps
+from pydash.strings import camel_case
 
 
 class EventHookClient():
@@ -63,7 +63,7 @@ class EventHookClient():
 
         try:
             result = []
-            for item in humps.camelize(response.get_body()):
+            for item in camel_case(response.get_body()):
                 result.append(EventHook(item))
         except Exception as error:
             return (None, response, error)
@@ -105,7 +105,7 @@ class EventHookClient():
 
         try:
             result = EventHook(
-                humps.camelize(response.get_body())
+                camel_case(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -175,7 +175,7 @@ class EventHookClient():
 
         try:
             result = EventHook(
-                humps.camelize(response.get_body())
+                camel_case(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -218,7 +218,7 @@ class EventHookClient():
 
         try:
             result = EventHook(
-                humps.camelize(response.get_body())
+                camel_case(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -257,7 +257,7 @@ class EventHookClient():
 
         try:
             result = EventHook(
-                humps.camelize(response.get_body())
+                camel_case(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -297,7 +297,7 @@ class EventHookClient():
 
         try:
             result = EventHook(
-                humps.camelize(response.get_body())
+                camel_case(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -336,7 +336,7 @@ class EventHookClient():
 
         try:
             result = EventHook(
-                humps.camelize(response.get_body())
+                camel_case(response.get_body())
             )
         except Exception as error:
             return (None, response, error)

@@ -21,7 +21,7 @@ from urllib.parse import urlencode
 from okta.models.feature\
     import Feature
 from okta.utils import format_url
-import humps
+from pydash.strings import camel_case
 
 
 class FeatureClient():
@@ -64,7 +64,7 @@ class FeatureClient():
 
         try:
             result = []
-            for item in humps.camelize(response.get_body()):
+            for item in camel_case(response.get_body()):
                 result.append(Feature(item))
         except Exception as error:
             return (None, response, error)
@@ -103,7 +103,7 @@ class FeatureClient():
 
         try:
             result = Feature(
-                humps.camelize(response.get_body())
+                camel_case(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -142,7 +142,7 @@ class FeatureClient():
 
         try:
             result = []
-            for item in humps.camelize(response.get_body()):
+            for item in camel_case(response.get_body()):
                 result.append(Feature(item))
         except Exception as error:
             return (None, response, error)
@@ -181,7 +181,7 @@ class FeatureClient():
 
         try:
             result = []
-            for item in humps.camelize(response.get_body()):
+            for item in camel_case(response.get_body()):
                 result.append(Feature(item))
         except Exception as error:
             return (None, response, error)
@@ -226,7 +226,7 @@ class FeatureClient():
 
         try:
             result = Feature(
-                humps.camelize(response.get_body())
+                camel_case(response.get_body())
             )
         except Exception as error:
             return (None, response, error)

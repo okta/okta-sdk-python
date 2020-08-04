@@ -20,7 +20,7 @@ limitations under the License.
 from okta.models.user_type\
     import UserType
 from okta.utils import format_url
-import humps
+from pydash.strings import camel_case
 
 
 class UserTypeClient():
@@ -64,7 +64,7 @@ class UserTypeClient():
 
         try:
             result = []
-            for item in humps.camelize(response.get_body()):
+            for item in camel_case(response.get_body()):
                 result.append(UserType(item))
         except Exception as error:
             return (None, response, error)
@@ -109,7 +109,7 @@ class UserTypeClient():
 
         try:
             result = UserType(
-                humps.camelize(response.get_body())
+                camel_case(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -184,7 +184,7 @@ class UserTypeClient():
 
         try:
             result = UserType(
-                humps.camelize(response.get_body())
+                camel_case(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -228,7 +228,7 @@ class UserTypeClient():
 
         try:
             result = UserType(
-                humps.camelize(response.get_body())
+                camel_case(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -272,7 +272,7 @@ class UserTypeClient():
 
         try:
             result = UserType(
-                humps.camelize(response.get_body())
+                camel_case(response.get_body())
             )
         except Exception as error:
             return (None, response, error)

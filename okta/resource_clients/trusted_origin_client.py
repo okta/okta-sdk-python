@@ -21,7 +21,7 @@ from urllib.parse import urlencode
 from okta.models.trusted_origin\
     import TrustedOrigin
 from okta.utils import format_url
-import humps
+from pydash.strings import camel_case
 
 
 class TrustedOriginClient():
@@ -72,7 +72,7 @@ class TrustedOriginClient():
 
         try:
             result = []
-            for item in humps.camelize(response.get_body()):
+            for item in camel_case(response.get_body()):
                 result.append(TrustedOrigin(item))
         except Exception as error:
             return (None, response, error)
@@ -114,7 +114,7 @@ class TrustedOriginClient():
 
         try:
             result = TrustedOrigin(
-                humps.camelize(response.get_body())
+                camel_case(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -184,7 +184,7 @@ class TrustedOriginClient():
 
         try:
             result = TrustedOrigin(
-                humps.camelize(response.get_body())
+                camel_case(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -227,7 +227,7 @@ class TrustedOriginClient():
 
         try:
             result = TrustedOrigin(
-                humps.camelize(response.get_body())
+                camel_case(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -267,7 +267,7 @@ class TrustedOriginClient():
 
         try:
             result = TrustedOrigin(
-                humps.camelize(response.get_body())
+                camel_case(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -307,7 +307,7 @@ class TrustedOriginClient():
 
         try:
             result = TrustedOrigin(
-                humps.camelize(response.get_body())
+                camel_case(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
