@@ -577,7 +577,7 @@ class GroupClient(APIClient):
         try:
             result = []
             for item in self.form_response_body(response.get_body()):
-                result.append(find_app_model(item["signOnMode"])(item))
+                result.append(find_app_model(item["signOnMode"], item["name"])(item))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
