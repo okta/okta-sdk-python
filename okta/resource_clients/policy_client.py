@@ -74,8 +74,10 @@ class PolicyClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(Policy(item))
+            for item in response.get_body():
+                result.append(Policy(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -347,8 +349,10 @@ class PolicyClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(PolicyRule(item))
+            for item in response.get_body():
+                result.append(PolicyRule(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)

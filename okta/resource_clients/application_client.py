@@ -91,8 +91,12 @@ class ApplicationClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(find_app_model(item["signOnMode"], item["name"])(item))
+            for item in response.get_body():
+                result.append(
+                    find_app_model(item["signOnMode"], item["name"])(
+                        self.form_response_body(item)
+                        )
+                    )
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -299,8 +303,10 @@ class ApplicationClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(Csr(item))
+            for item in response.get_body():
+                result.append(Csr(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -700,8 +706,10 @@ class ApplicationClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(JsonWebKey(item))
+            for item in response.get_body():
+                result.append(JsonWebKey(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -879,8 +887,10 @@ class ApplicationClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(OAuth2ScopeConsentGrant(item))
+            for item in response.get_body():
+                result.append(OAuth2ScopeConsentGrant(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -1053,8 +1063,10 @@ class ApplicationClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(ApplicationGroupAssignment(item))
+            for item in response.get_body():
+                result.append(ApplicationGroupAssignment(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -1320,8 +1332,10 @@ class ApplicationClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(OAuth2Token(item))
+            for item in response.get_body():
+                result.append(OAuth2Token(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -1451,8 +1465,10 @@ class ApplicationClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(AppUser(item))
+            for item in response.get_body():
+                result.append(AppUser(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)

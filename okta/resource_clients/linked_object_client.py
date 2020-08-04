@@ -63,8 +63,10 @@ class LinkedObjectClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(LinkedObject(item))
+            for item in response.get_body():
+                result.append(LinkedObject(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)

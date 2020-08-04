@@ -72,8 +72,10 @@ class TrustedOriginClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(TrustedOrigin(item))
+            for item in response.get_body():
+                result.append(TrustedOrigin(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
