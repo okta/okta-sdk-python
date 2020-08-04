@@ -60,11 +60,17 @@
         try:
         {{#if operation.isArray}}
             result = []
-            for item in self.form_response_body(response.get_body()):
+            for item in response.get_body():
                 {{#if (eq (pascalCase operation.responseModel) "Application")}}
-                result.append(find_app_model(item["signOnMode"], item["name"])(item))
+                result.append(
+                    find_app_model(item["signOnMode"], item["name"])(
+                        self.form_response_body(item)
+                        )
+                    )
                 {{else}}
-                result.append({{pascalCase operation.responseModel}}(item))
+                result.append({{pascalCase operation.responseModel}}(
+                    self.form_response_body(item)
+                    ))
                 {{/if}}
         {{else}}
             {{#if (eq (pascalCase operation.responseModel) "Application")}}

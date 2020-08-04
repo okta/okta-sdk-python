@@ -84,8 +84,10 @@ class IdentityProviderClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(IdentityProvider(item))
+            for item in response.get_body():
+                result.append(IdentityProvider(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -172,8 +174,10 @@ class IdentityProviderClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(JsonWebKey(item))
+            for item in response.get_body():
+                result.append(JsonWebKey(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -445,8 +449,10 @@ class IdentityProviderClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(Csr(item))
+            for item in response.get_body():
+                result.append(Csr(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -845,8 +851,10 @@ class IdentityProviderClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(JsonWebKey(item))
+            for item in response.get_body():
+                result.append(JsonWebKey(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -1100,8 +1108,10 @@ class IdentityProviderClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(IdentityProviderApplicationUser(item))
+            for item in response.get_body():
+                result.append(IdentityProviderApplicationUser(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -1266,8 +1276,10 @@ class IdentityProviderClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(SocialAuthToken(item))
+            for item in response.get_body():
+                result.append(SocialAuthToken(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)

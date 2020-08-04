@@ -86,8 +86,10 @@ class GroupClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(Group(item))
+            for item in response.get_body():
+                result.append(Group(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -177,8 +179,10 @@ class GroupClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(GroupRule(item))
+            for item in response.get_body():
+                result.append(GroupRule(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -576,8 +580,12 @@ class GroupClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(find_app_model(item["signOnMode"], item["name"])(item))
+            for item in response.get_body():
+                result.append(
+                    find_app_model(item["signOnMode"], item["name"])(
+                        self.form_response_body(item)
+                        )
+                    )
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -620,8 +628,10 @@ class GroupClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(Role(item))
+            for item in response.get_body():
+                result.append(Role(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -794,8 +804,10 @@ class GroupClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(CatalogApplication(item))
+            for item in response.get_body():
+                result.append(CatalogApplication(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -983,8 +995,10 @@ class GroupClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(Group(item))
+            for item in response.get_body():
+                result.append(Group(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -1103,8 +1117,10 @@ class GroupClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(User(item))
+            for item in response.get_body():
+                result.append(User(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)

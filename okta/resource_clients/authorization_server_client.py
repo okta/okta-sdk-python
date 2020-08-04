@@ -83,8 +83,10 @@ class AuthorizationServerClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(AuthorizationServer(item))
+            for item in response.get_body():
+                result.append(AuthorizationServer(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -277,8 +279,10 @@ class AuthorizationServerClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(OAuth2Claim(item))
+            for item in response.get_body():
+                result.append(OAuth2Claim(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -478,8 +482,10 @@ class AuthorizationServerClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(OAuth2Client(item))
+            for item in response.get_body():
+                result.append(OAuth2Client(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -559,8 +565,10 @@ class AuthorizationServerClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(OAuth2RefreshToken(item))
+            for item in response.get_body():
+                result.append(OAuth2RefreshToken(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -680,8 +688,10 @@ class AuthorizationServerClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(JsonWebKey(item))
+            for item in response.get_body():
+                result.append(JsonWebKey(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -723,8 +733,10 @@ class AuthorizationServerClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(JsonWebKey(item))
+            for item in response.get_body():
+                result.append(JsonWebKey(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -827,8 +839,10 @@ class AuthorizationServerClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(Policy(item))
+            for item in response.get_body():
+                result.append(Policy(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -1037,8 +1051,10 @@ class AuthorizationServerClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(OAuth2Scope(item))
+            for item in response.get_body():
+                result.append(OAuth2Scope(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)

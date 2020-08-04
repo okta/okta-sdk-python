@@ -106,8 +106,10 @@ class UserClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(User(item))
+            for item in response.get_body():
+                result.append(User(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -414,8 +416,10 @@ class UserClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(AppLink(item))
+            for item in response.get_body():
+                result.append(AppLink(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -455,8 +459,10 @@ class UserClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(OAuth2Client(item))
+            for item in response.get_body():
+                result.append(OAuth2Client(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -536,8 +542,10 @@ class UserClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(OAuth2ScopeConsentGrant(item))
+            for item in response.get_body():
+                result.append(OAuth2ScopeConsentGrant(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -619,8 +627,10 @@ class UserClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(OAuth2RefreshToken(item))
+            for item in response.get_body():
+                result.append(OAuth2RefreshToken(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -982,8 +992,10 @@ class UserClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(OAuth2ScopeConsentGrant(item))
+            for item in response.get_body():
+                result.append(OAuth2ScopeConsentGrant(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -1101,8 +1113,10 @@ class UserClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(Group(item))
+            for item in response.get_body():
+                result.append(Group(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -1141,8 +1155,10 @@ class UserClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(IdentityProvider(item))
+            for item in response.get_body():
+                result.append(IdentityProvider(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -1642,8 +1658,10 @@ class UserClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(ResponseLinks(item))
+            for item in response.get_body():
+                result.append(ResponseLinks(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -1687,8 +1705,10 @@ class UserClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(Role(item))
+            for item in response.get_body():
+                result.append(Role(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -1821,8 +1841,10 @@ class UserClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(CatalogApplication(item))
+            for item in response.get_body():
+                result.append(CatalogApplication(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -2043,8 +2065,10 @@ class UserClient(APIClient):
 
         try:
             result = []
-            for item in self.form_response_body(response.get_body()):
-                result.append(Group(item))
+            for item in response.get_body():
+                result.append(Group(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
