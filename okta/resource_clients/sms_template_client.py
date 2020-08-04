@@ -21,10 +21,10 @@ from urllib.parse import urlencode
 from okta.models.sms_template\
     import SmsTemplate
 from okta.utils import format_url
-from pydash.strings import camel_case
+from okta.api_client import APIClient
 
 
-class SmsTemplateClient():
+class SmsTemplateClient(APIClient):
     """
     A Client object for the SmsTemplate resource.
     """
@@ -72,7 +72,7 @@ class SmsTemplateClient():
 
         try:
             result = []
-            for item in camel_case(response.get_body()):
+            for item in self.form_response_body(response.get_body()):
                 result.append(SmsTemplate(item))
         except Exception as error:
             return (None, response, error)
@@ -115,7 +115,7 @@ class SmsTemplateClient():
 
         try:
             result = SmsTemplate(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -187,7 +187,7 @@ class SmsTemplateClient():
 
         try:
             result = SmsTemplate(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -231,7 +231,7 @@ class SmsTemplateClient():
 
         try:
             result = SmsTemplate(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -275,7 +275,7 @@ class SmsTemplateClient():
 
         try:
             result = SmsTemplate(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)

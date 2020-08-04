@@ -21,10 +21,10 @@ from urllib.parse import urlencode
 from okta.models.trusted_origin\
     import TrustedOrigin
 from okta.utils import format_url
-from pydash.strings import camel_case
+from okta.api_client import APIClient
 
 
-class TrustedOriginClient():
+class TrustedOriginClient(APIClient):
     """
     A Client object for the TrustedOrigin resource.
     """
@@ -72,7 +72,7 @@ class TrustedOriginClient():
 
         try:
             result = []
-            for item in camel_case(response.get_body()):
+            for item in self.form_response_body(response.get_body()):
                 result.append(TrustedOrigin(item))
         except Exception as error:
             return (None, response, error)
@@ -114,7 +114,7 @@ class TrustedOriginClient():
 
         try:
             result = TrustedOrigin(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -184,7 +184,7 @@ class TrustedOriginClient():
 
         try:
             result = TrustedOrigin(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -227,7 +227,7 @@ class TrustedOriginClient():
 
         try:
             result = TrustedOrigin(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -267,7 +267,7 @@ class TrustedOriginClient():
 
         try:
             result = TrustedOrigin(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -307,7 +307,7 @@ class TrustedOriginClient():
 
         try:
             result = TrustedOrigin(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)

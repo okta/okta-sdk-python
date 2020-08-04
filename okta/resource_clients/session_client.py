@@ -20,10 +20,10 @@ limitations under the License.
 from okta.models.session\
     import Session
 from okta.utils import format_url
-from pydash.strings import camel_case
+from okta.api_client import APIClient
 
 
-class SessionClient():
+class SessionClient(APIClient):
     """
     A Client object for the Session resource.
     """
@@ -73,7 +73,7 @@ class SessionClient():
 
         try:
             result = Session(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -146,7 +146,7 @@ class SessionClient():
 
         try:
             result = Session(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -187,7 +187,7 @@ class SessionClient():
 
         try:
             result = Session(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
