@@ -62,14 +62,14 @@
             result = []
             for item in self.form_response_body(response.get_body()):
                 {{#if (eq (pascalCase operation.responseModel) "Application")}}
-                result.append(find_app_model(item["signOnMode"])(item))
+                result.append(find_app_model(item["signOnMode"], item["name"])(item))
                 {{else}}
                 result.append({{pascalCase operation.responseModel}}(item))
                 {{/if}}
         {{else}}
             {{#if (eq (pascalCase operation.responseModel) "Application")}}
             body = self.form_response_body(response.get_body())
-            result = find_app_model(body["signOnMode"])(body)
+            result = find_app_model(body["signOnMode"], body["name"])(body)
             {{else}}
             result = {{pascalCase operation.responseModel}}(
                 self.form_response_body(response.get_body())
