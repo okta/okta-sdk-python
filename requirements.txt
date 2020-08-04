@@ -12,4 +12,4 @@ pytest-vcr
 pytest-mock
 pyfakefs
 aenum
-pyhumps
+pydash
