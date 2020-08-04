@@ -30,10 +30,10 @@ from okta.models.identity_provider_application_user\
 from okta.models.social_auth_token\
     import SocialAuthToken
 from okta.utils import format_url
-from pydash.strings import camel_case
+from okta.api_client import APIClient
 
 
-class IdentityProviderClient():
+class IdentityProviderClient(APIClient):
     """
     A Client object for the IdentityProvider resource.
     """
@@ -84,7 +84,7 @@ class IdentityProviderClient():
 
         try:
             result = []
-            for item in camel_case(response.get_body()):
+            for item in self.form_response_body(response.get_body()):
                 result.append(IdentityProvider(item))
         except Exception as error:
             return (None, response, error)
@@ -127,7 +127,7 @@ class IdentityProviderClient():
 
         try:
             result = IdentityProvider(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -172,7 +172,7 @@ class IdentityProviderClient():
 
         try:
             result = []
-            for item in camel_case(response.get_body()):
+            for item in self.form_response_body(response.get_body()):
                 result.append(JsonWebKey(item))
         except Exception as error:
             return (None, response, error)
@@ -216,7 +216,7 @@ class IdentityProviderClient():
 
         try:
             result = JsonWebKey(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -289,7 +289,7 @@ class IdentityProviderClient():
 
         try:
             result = JsonWebKey(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -361,7 +361,7 @@ class IdentityProviderClient():
 
         try:
             result = IdentityProvider(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -405,7 +405,7 @@ class IdentityProviderClient():
 
         try:
             result = IdentityProvider(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -445,7 +445,7 @@ class IdentityProviderClient():
 
         try:
             result = []
-            for item in camel_case(response.get_body()):
+            for item in self.form_response_body(response.get_body()):
                 result.append(Csr(item))
         except Exception as error:
             return (None, response, error)
@@ -490,7 +490,7 @@ class IdentityProviderClient():
 
         try:
             result = Csr(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -565,7 +565,7 @@ class IdentityProviderClient():
 
         try:
             result = Csr(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -613,7 +613,7 @@ class IdentityProviderClient():
 
         try:
             result = JsonWebKey(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -661,7 +661,7 @@ class IdentityProviderClient():
 
         try:
             result = JsonWebKey(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -709,7 +709,7 @@ class IdentityProviderClient():
 
         try:
             result = JsonWebKey(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -757,7 +757,7 @@ class IdentityProviderClient():
 
         try:
             result = JsonWebKey(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -805,7 +805,7 @@ class IdentityProviderClient():
 
         try:
             result = JsonWebKey(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -845,7 +845,7 @@ class IdentityProviderClient():
 
         try:
             result = []
-            for item in camel_case(response.get_body()):
+            for item in self.form_response_body(response.get_body()):
                 result.append(JsonWebKey(item))
         except Exception as error:
             return (None, response, error)
@@ -892,7 +892,7 @@ class IdentityProviderClient():
 
         try:
             result = JsonWebKey(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -933,7 +933,7 @@ class IdentityProviderClient():
 
         try:
             result = JsonWebKey(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -980,7 +980,7 @@ class IdentityProviderClient():
 
         try:
             result = JsonWebKey(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1020,7 +1020,7 @@ class IdentityProviderClient():
 
         try:
             result = IdentityProvider(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1060,7 +1060,7 @@ class IdentityProviderClient():
 
         try:
             result = IdentityProvider(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1100,7 +1100,7 @@ class IdentityProviderClient():
 
         try:
             result = []
-            for item in camel_case(response.get_body()):
+            for item in self.form_response_body(response.get_body()):
                 result.append(IdentityProviderApplicationUser(item))
         except Exception as error:
             return (None, response, error)
@@ -1175,7 +1175,7 @@ class IdentityProviderClient():
 
         try:
             result = IdentityProviderApplicationUser(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1222,7 +1222,7 @@ class IdentityProviderClient():
 
         try:
             result = IdentityProviderApplicationUser(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1266,7 +1266,7 @@ class IdentityProviderClient():
 
         try:
             result = []
-            for item in camel_case(response.get_body()):
+            for item in self.form_response_body(response.get_body()):
                 result.append(SocialAuthToken(item))
         except Exception as error:
             return (None, response, error)

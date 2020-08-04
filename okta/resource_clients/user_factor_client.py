@@ -25,10 +25,10 @@ from okta.models.security_question\
 from okta.models.verify_user_factor_response\
     import VerifyUserFactorResponse
 from okta.utils import format_url
-from pydash.strings import camel_case
+from okta.api_client import APIClient
 
 
-class UserFactorClient():
+class UserFactorClient(APIClient):
     """
     A Client object for the UserFactor resource.
     """
@@ -71,7 +71,7 @@ class UserFactorClient():
 
         try:
             result = []
-            for item in camel_case(response.get_body()):
+            for item in self.form_response_body(response.get_body()):
                 result.append(UserFactor(item))
         except Exception as error:
             return (None, response, error)
@@ -123,7 +123,7 @@ class UserFactorClient():
 
         try:
             result = UserFactor(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -164,7 +164,7 @@ class UserFactorClient():
 
         try:
             result = []
-            for item in camel_case(response.get_body()):
+            for item in self.form_response_body(response.get_body()):
                 result.append(UserFactor(item))
         except Exception as error:
             return (None, response, error)
@@ -205,7 +205,7 @@ class UserFactorClient():
 
         try:
             result = []
-            for item in camel_case(response.get_body()):
+            for item in self.form_response_body(response.get_body()):
                 result.append(SecurityQuestion(item))
         except Exception as error:
             return (None, response, error)
@@ -280,7 +280,7 @@ class UserFactorClient():
 
         try:
             result = UserFactor(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -327,7 +327,7 @@ class UserFactorClient():
 
         try:
             result = UserFactor(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -370,7 +370,7 @@ class UserFactorClient():
 
         try:
             result = VerifyUserFactorResponse(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -422,7 +422,7 @@ class UserFactorClient():
 
         try:
             result = VerifyUserFactorResponse(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)

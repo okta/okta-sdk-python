@@ -20,10 +20,10 @@ limitations under the License.
 from okta.models.user_type\
     import UserType
 from okta.utils import format_url
-from pydash.strings import camel_case
+from okta.api_client import APIClient
 
 
-class UserTypeClient():
+class UserTypeClient(APIClient):
     """
     A Client object for the UserType resource.
     """
@@ -64,7 +64,7 @@ class UserTypeClient():
 
         try:
             result = []
-            for item in camel_case(response.get_body()):
+            for item in self.form_response_body(response.get_body()):
                 result.append(UserType(item))
         except Exception as error:
             return (None, response, error)
@@ -109,7 +109,7 @@ class UserTypeClient():
 
         try:
             result = UserType(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -184,7 +184,7 @@ class UserTypeClient():
 
         try:
             result = UserType(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -228,7 +228,7 @@ class UserTypeClient():
 
         try:
             result = UserType(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -272,7 +272,7 @@ class UserTypeClient():
 
         try:
             result = UserType(
-                camel_case(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
