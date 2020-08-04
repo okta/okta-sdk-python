@@ -20,10 +20,10 @@ limitations under the License.
 from okta.models.event_hook\
     import EventHook
 from okta.utils import format_url
-import humps
+from okta.api_client import APIClient
 
 
-class EventHookClient():
+class EventHookClient(APIClient):
     """
     A Client object for the EventHook resource.
     """
@@ -63,7 +63,7 @@ class EventHookClient():
 
         try:
             result = []
-            for item in humps.camelize(response.get_body()):
+            for item in self.form_response_body(response.get_body()):
                 result.append(EventHook(item))
         except Exception as error:
             return (None, response, error)
@@ -105,7 +105,7 @@ class EventHookClient():
 
         try:
             result = EventHook(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -175,7 +175,7 @@ class EventHookClient():
 
         try:
             result = EventHook(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -218,7 +218,7 @@ class EventHookClient():
 
         try:
             result = EventHook(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -257,7 +257,7 @@ class EventHookClient():
 
         try:
             result = EventHook(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -297,7 +297,7 @@ class EventHookClient():
 
         try:
             result = EventHook(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -336,7 +336,7 @@ class EventHookClient():
 
         try:
             result = EventHook(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)

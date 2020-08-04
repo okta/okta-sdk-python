@@ -60,7 +60,7 @@
         try:
         {{#if operation.isArray}}
             result = []
-            for item in humps.camelize(response.get_body()):
+            for item in self.form_response_body(response.get_body()):
                 {{#if (eq (pascalCase operation.responseModel) "Application")}}
                 result.append(find_app_model(item["signOnMode"])(item))
                 {{else}}
@@ -68,11 +68,11 @@
                 {{/if}}
         {{else}}
             {{#if (eq (pascalCase operation.responseModel) "Application")}}
-            body = humps.camelize(response.get_body())
+            body = self.form_response_body(response.get_body())
             result = find_app_model(body["signOnMode"])(body)
             {{else}}
             result = {{pascalCase operation.responseModel}}(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
             {{/if}}
         {{/if}}

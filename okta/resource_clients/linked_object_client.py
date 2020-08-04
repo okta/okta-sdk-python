@@ -20,10 +20,10 @@ limitations under the License.
 from okta.models.linked_object\
     import LinkedObject
 from okta.utils import format_url
-import humps
+from okta.api_client import APIClient
 
 
-class LinkedObjectClient():
+class LinkedObjectClient(APIClient):
     """
     A Client object for the LinkedObject resource.
     """
@@ -63,7 +63,7 @@ class LinkedObjectClient():
 
         try:
             result = []
-            for item in humps.camelize(response.get_body()):
+            for item in self.form_response_body(response.get_body()):
                 result.append(LinkedObject(item))
         except Exception as error:
             return (None, response, error)
@@ -105,7 +105,7 @@ class LinkedObjectClient():
 
         try:
             result = LinkedObject(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -177,7 +177,7 @@ class LinkedObjectClient():
 
         try:
             result = LinkedObject(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)

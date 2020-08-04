@@ -23,10 +23,10 @@ from okta.models.policy\
 from okta.models.policy_rule\
     import PolicyRule
 from okta.utils import format_url
-import humps
+from okta.api_client import APIClient
 
 
-class PolicyClient():
+class PolicyClient(APIClient):
     """
     A Client object for the Policy resource.
     """
@@ -74,7 +74,7 @@ class PolicyClient():
 
         try:
             result = []
-            for item in humps.camelize(response.get_body()):
+            for item in self.form_response_body(response.get_body()):
                 result.append(Policy(item))
         except Exception as error:
             return (None, response, error)
@@ -122,7 +122,7 @@ class PolicyClient():
 
         try:
             result = Policy(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -199,7 +199,7 @@ class PolicyClient():
 
         try:
             result = Policy(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -243,7 +243,7 @@ class PolicyClient():
 
         try:
             result = Policy(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -347,7 +347,7 @@ class PolicyClient():
 
         try:
             result = []
-            for item in humps.camelize(response.get_body()):
+            for item in self.form_response_body(response.get_body()):
                 result.append(PolicyRule(item))
         except Exception as error:
             return (None, response, error)
@@ -391,7 +391,7 @@ class PolicyClient():
 
         try:
             result = PolicyRule(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -465,7 +465,7 @@ class PolicyClient():
 
         try:
             result = PolicyRule(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -510,7 +510,7 @@ class PolicyClient():
 
         try:
             result = PolicyRule(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)

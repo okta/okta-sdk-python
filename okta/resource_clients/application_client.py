@@ -34,11 +34,11 @@ from okta.models.o_auth_2_token\
 from okta.models.app_user\
     import AppUser
 from okta.utils import format_url
-import humps
+from okta.api_client import APIClient
 from okta.constants import find_app_model
 
 
-class ApplicationClient():
+class ApplicationClient(APIClient):
     """
     A Client object for the Application resource.
     """
@@ -91,7 +91,7 @@ class ApplicationClient():
 
         try:
             result = []
-            for item in humps.camelize(response.get_body()):
+            for item in self.form_response_body(response.get_body()):
                 result.append(find_app_model(item["signOnMode"])(item))
         except Exception as error:
             return (None, response, error)
@@ -138,7 +138,7 @@ class ApplicationClient():
             return (None, response, error)
 
         try:
-            body = humps.camelize(response.get_body())
+            body = self.form_response_body(response.get_body())
             result = find_app_model(body["signOnMode"])(body)
         except Exception as error:
             return (None, response, error)
@@ -215,7 +215,7 @@ class ApplicationClient():
             return (None, response, error)
 
         try:
-            body = humps.camelize(response.get_body())
+            body = self.form_response_body(response.get_body())
             result = find_app_model(body["signOnMode"])(body)
         except Exception as error:
             return (None, response, error)
@@ -258,7 +258,7 @@ class ApplicationClient():
             return (None, response, error)
 
         try:
-            body = humps.camelize(response.get_body())
+            body = self.form_response_body(response.get_body())
             result = find_app_model(body["signOnMode"])(body)
         except Exception as error:
             return (None, response, error)
@@ -299,7 +299,7 @@ class ApplicationClient():
 
         try:
             result = []
-            for item in humps.camelize(response.get_body()):
+            for item in self.form_response_body(response.get_body()):
                 result.append(Csr(item))
         except Exception as error:
             return (None, response, error)
@@ -344,7 +344,7 @@ class ApplicationClient():
 
         try:
             result = Csr(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -420,7 +420,7 @@ class ApplicationClient():
 
         try:
             result = Csr(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -468,7 +468,7 @@ class ApplicationClient():
 
         try:
             result = JsonWebKey(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -516,7 +516,7 @@ class ApplicationClient():
 
         try:
             result = JsonWebKey(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -564,7 +564,7 @@ class ApplicationClient():
 
         try:
             result = JsonWebKey(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -612,7 +612,7 @@ class ApplicationClient():
 
         try:
             result = JsonWebKey(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -660,7 +660,7 @@ class ApplicationClient():
 
         try:
             result = JsonWebKey(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -700,7 +700,7 @@ class ApplicationClient():
 
         try:
             result = []
-            for item in humps.camelize(response.get_body()):
+            for item in self.form_response_body(response.get_body()):
                 result.append(JsonWebKey(item))
         except Exception as error:
             return (None, response, error)
@@ -746,7 +746,7 @@ class ApplicationClient():
 
         try:
             result = JsonWebKey(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -787,7 +787,7 @@ class ApplicationClient():
 
         try:
             result = JsonWebKey(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -834,7 +834,7 @@ class ApplicationClient():
 
         try:
             result = JsonWebKey(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -879,7 +879,7 @@ class ApplicationClient():
 
         try:
             result = []
-            for item in humps.camelize(response.get_body()):
+            for item in self.form_response_body(response.get_body()):
                 result.append(OAuth2ScopeConsentGrant(item))
         except Exception as error:
             return (None, response, error)
@@ -924,7 +924,7 @@ class ApplicationClient():
 
         try:
             result = OAuth2ScopeConsentGrant(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1005,7 +1005,7 @@ class ApplicationClient():
 
         try:
             result = OAuth2ScopeConsentGrant(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1053,7 +1053,7 @@ class ApplicationClient():
 
         try:
             result = []
-            for item in humps.camelize(response.get_body()):
+            for item in self.form_response_body(response.get_body()):
                 result.append(ApplicationGroupAssignment(item))
         except Exception as error:
             return (None, response, error)
@@ -1132,7 +1132,7 @@ class ApplicationClient():
 
         try:
             result = ApplicationGroupAssignment(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1177,7 +1177,7 @@ class ApplicationClient():
 
         try:
             result = ApplicationGroupAssignment(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1320,7 +1320,7 @@ class ApplicationClient():
 
         try:
             result = []
-            for item in humps.camelize(response.get_body()):
+            for item in self.form_response_body(response.get_body()):
                 result.append(OAuth2Token(item))
         except Exception as error:
             return (None, response, error)
@@ -1400,7 +1400,7 @@ class ApplicationClient():
 
         try:
             result = OAuth2Token(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1451,7 +1451,7 @@ class ApplicationClient():
 
         try:
             result = []
-            for item in humps.camelize(response.get_body()):
+            for item in self.form_response_body(response.get_body()):
                 result.append(AppUser(item))
         except Exception as error:
             return (None, response, error)
@@ -1500,7 +1500,7 @@ class ApplicationClient():
 
         try:
             result = AppUser(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1585,7 +1585,7 @@ class ApplicationClient():
 
         try:
             result = AppUser(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -1630,7 +1630,7 @@ class ApplicationClient():
 
         try:
             result = AppUser(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)

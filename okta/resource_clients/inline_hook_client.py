@@ -23,10 +23,10 @@ from okta.models.inline_hook\
 from okta.models.inline_hook_response\
     import InlineHookResponse
 from okta.utils import format_url
-import humps
+from okta.api_client import APIClient
 
 
-class InlineHookClient():
+class InlineHookClient(APIClient):
     """
     A Client object for the InlineHook resource.
     """
@@ -71,7 +71,7 @@ class InlineHookClient():
 
         try:
             result = []
-            for item in humps.camelize(response.get_body()):
+            for item in self.form_response_body(response.get_body()):
                 result.append(InlineHook(item))
         except Exception as error:
             return (None, response, error)
@@ -113,7 +113,7 @@ class InlineHookClient():
 
         try:
             result = InlineHook(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -188,7 +188,7 @@ class InlineHookClient():
 
         try:
             result = InlineHook(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -232,7 +232,7 @@ class InlineHookClient():
 
         try:
             result = InlineHook(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -281,7 +281,7 @@ class InlineHookClient():
 
         try:
             result = InlineHookResponse(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -322,7 +322,7 @@ class InlineHookClient():
 
         try:
             result = InlineHook(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)
@@ -363,7 +363,7 @@ class InlineHookClient():
 
         try:
             result = InlineHook(
-                humps.camelize(response.get_body())
+                self.form_response_body(response.get_body())
             )
         except Exception as error:
             return (None, response, error)

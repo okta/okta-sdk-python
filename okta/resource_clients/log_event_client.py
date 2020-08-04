@@ -21,10 +21,10 @@ from urllib.parse import urlencode
 from okta.models.log_event\
     import LogEvent
 from okta.utils import format_url
-import humps
+from okta.api_client import APIClient
 
 
-class LogEventClient():
+class LogEventClient(APIClient):
     """
     A Client object for the LogEvent resource.
     """
@@ -78,7 +78,7 @@ class LogEventClient():
 
         try:
             result = []
-            for item in humps.camelize(response.get_body()):
+            for item in self.form_response_body(response.get_body()):
                 result.append(LogEvent(item))
         except Exception as error:
             return (None, response, error)
