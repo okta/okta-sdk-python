@@ -1,3 +1,6 @@
+from enum import Enum
+
+
 class OktaObject:
     """
     Base object for all Okta datatypes
@@ -20,6 +23,8 @@ class OktaObject:
                 continue
             if not isinstance(val, OktaObject):
                 result[key] = val
+            elif issubclass(type(val), Enum):
+                result[key] = val.value
             else:
                 result[key] = val.as_dict()
         return result
