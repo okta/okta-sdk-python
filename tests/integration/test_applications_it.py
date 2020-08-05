@@ -931,3 +931,921 @@ class TestApplicationsResource:
         assert err is None
         _, err = await client.delete_application(app.id)
         assert err is None
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_assign_group_app(self, fs):
+        # Instantiate Mock Client
+        client = MockOktaClient()
+
+        # Create Bookmark Application Object
+        APP_URL = "https://example.com/bookmark.htm"
+        APP_LABEL = "AddBookmarkApp"
+        app_settings_app = models.BookmarkApplicationSettingsApplication({
+            "requestIntegration": False,
+            "url": APP_URL
+        })
+        app_settings = models.BookmarkApplicationSettings({
+            "app": app_settings_app
+        })
+        bookmark_app_obj = models.BookmarkApplication({
+            "label": APP_LABEL,
+            "settings": app_settings
+        })
+
+        # Create App in org
+        app, _, err = await client.create_application(bookmark_app_obj)
+        assert err is None
+        assert isinstance(app, models.Application)
+        assert isinstance(app, models.BookmarkApplication)
+
+        # Create Group Object
+        GROUP_NAME = "Group-Target-Test"
+        group_profile = models.GroupProfile({
+            "name": GROUP_NAME
+        })
+        group_obj = models.Group({
+            "profile": group_profile
+        })
+
+        # Create Group
+        group, _, err = await client.create_group(group_obj)
+        assert err is None
+        assert isinstance(group, models.Group)
+
+        # Assign app and group
+        assign_ag_req = models.ApplicationGroupAssignment({
+            "priority": 0,
+            "applicationId": app.id,
+            "groupId": group.id
+        })
+
+        assign_app_group, _, err = await \
+            client.create_application_group_assignment(
+                app.id, group.id, assign_ag_req)
+        assert err is None
+
+        # time.sleep(3)  # Allow for backend to update
+
+        found_app_group, _, err = await \
+            client.get_application_group_assignment(app.id, group.id)
+        assert err is None
+        assert found_app_group.id == assign_app_group.id
+        assert found_app_group.priority == 0
+
+        # Remove and deactivate+delete
+        _, err = await client.delete_group(group.id)
+        assert err is None
+
+        _, err = await client.deactivate_application(app.id)
+        assert err is None
+        _, err = await client.delete_application(app.id)
+        assert err is None
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_list_assign_group_app(self, fs):
+        # Instantiate Mock Client
+        client = MockOktaClient()
+
+        # Create Bookmark Application Object
+        APP_URL = "https://example.com/bookmark.htm"
+        APP_LABEL = "AddBookmarkApp"
+        app_settings_app = models.BookmarkApplicationSettingsApplication({
+            "requestIntegration": False,
+            "url": APP_URL
+        })
+        app_settings = models.BookmarkApplicationSettings({
+            "app": app_settings_app
+        })
+        bookmark_app_obj = models.BookmarkApplication({
+            "label": APP_LABEL,
+            "settings": app_settings
+        })
+
+        # Create App in org
+        app, _, err = await client.create_application(bookmark_app_obj)
+        assert err is None
+        assert isinstance(app, models.Application)
+        assert isinstance(app, models.BookmarkApplication)
+
+        # Create Group Object
+        GROUP_NAME = "Group-Target-Test"
+        group_profile = models.GroupProfile({
+            "name": GROUP_NAME
+        })
+        group_obj = models.Group({
+            "profile": group_profile
+        })
+
+        GROUP_NAME_2 = "Group-Target-Test-2"
+        group_profile_2 = models.GroupProfile({
+            "name": GROUP_NAME_2
+        })
+        group_obj_2 = models.Group({
+            "profile": group_profile_2
+        })
+
+        # Create Groups
+        group, _, err = await client.create_group(group_obj)
+        assert err is None
+        assert isinstance(group, models.Group)
+        group_2, _, err = await client.create_group(group_obj_2)
+        assert err is None
+        assert isinstance(group, models.Group)
+
+        # Assign app and group
+        assign_ag_req = models.ApplicationGroupAssignment({
+            "priority": 0,
+            "applicationId": app.id,
+            "groupId": group.id
+        })
+        assign_ag_req_2 = models.ApplicationGroupAssignment({
+            "priority": 0,
+            "applicationId": app.id,
+            "groupId": group_2.id
+        })
+
+        assign_app_group, _, err = await \
+            client.create_application_group_assignment(
+                app.id, group.id, assign_ag_req)
+        assert err is None
+        assign_app_group_2, _, err = await \
+            client.create_application_group_assignment(
+                app.id, group_2.id, assign_ag_req_2)
+        assert err is None
+
+        # time.sleep(3)  # Allow for backend to update
+
+        group_assign_list, _, err = await \
+            client.list_application_group_assignments(app.id)
+        assert err is None
+        assert len(group_assign_list) == 2
+        assert next(
+            (grp for grp in group_assign_list
+             if grp.id == assign_app_group.id))
+        assert next(
+            (grp for grp in group_assign_list
+             if grp.id == assign_app_group_2.id))
+
+        # Remove and deactivate+delete
+        _, err = await client.delete_group(group.id)
+        assert err is None
+        _, err = await client.delete_group(group_2.id)
+        assert err is None
+
+        _, err = await client.deactivate_application(app.id)
+        assert err is None
+        _, err = await client.delete_application(app.id)
+        assert err is None
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_remove_assign_group_app(self, fs):
+        # Instantiate Mock Client
+        client = MockOktaClient()
+
+        # Create Bookmark Application Object
+        APP_URL = "https://example.com/bookmark.htm"
+        APP_LABEL = "AddBookmarkApp"
+        app_settings_app = models.BookmarkApplicationSettingsApplication({
+            "requestIntegration": False,
+            "url": APP_URL
+        })
+        app_settings = models.BookmarkApplicationSettings({
+            "app": app_settings_app
+        })
+        bookmark_app_obj = models.BookmarkApplication({
+            "label": APP_LABEL,
+            "settings": app_settings
+        })
+
+        # Create App in org
+        app, _, err = await client.create_application(bookmark_app_obj)
+        assert err is None
+        assert isinstance(app, models.Application)
+        assert isinstance(app, models.BookmarkApplication)
+
+        # Create Group Object
+        GROUP_NAME = "Group-Target-Test"
+        group_profile = models.GroupProfile({
+            "name": GROUP_NAME
+        })
+        group_obj = models.Group({
+            "profile": group_profile
+        })
+
+        # Create Group
+        group, _, err = await client.create_group(group_obj)
+        assert err is None
+        assert isinstance(group, models.Group)
+
+        # Assign app and group
+        assign_ag_req = models.ApplicationGroupAssignment({
+            "priority": 0,
+            "applicationId": app.id,
+            "groupId": group.id
+        })
+
+        assign_app_group, _, err = await \
+            client.create_application_group_assignment(
+                app.id, group.id, assign_ag_req)
+        assert err is None
+
+        # time.sleep(3)  # Allow for backend to update
+
+        found_app_group, _, err = await \
+            client.get_application_group_assignment(app.id, group.id)
+        assert err is None
+        assert found_app_group.id == assign_app_group.id
+        assert found_app_group.priority == 0
+
+        # Remove
+        _, err = await \
+            client.delete_application_group_assignment(app.id, group.id)
+        assert err is None
+
+        # Verify gone
+        group_assign_list, _, err = await \
+            client.list_application_group_assignments(app.id)
+        assert err is None
+        assert len(group_assign_list) == 0
+
+        # Remove and deactivate+delete
+        _, err = await client.delete_group(group.id)
+        assert err is None
+
+        _, err = await client.deactivate_application(app.id)
+        assert err is None
+        _, err = await client.delete_application(app.id)
+        assert err is None
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_list_app_keys(self, fs):
+        # Instantiate Mock Client
+        client = MockOktaClient()
+
+        # Create Bookmark Application Object
+        APP_URL = "https://example.com/bookmark.htm"
+        APP_LABEL = "AddBookmarkApp"
+        app_settings_app = models.BookmarkApplicationSettingsApplication({
+            "requestIntegration": False,
+            "url": APP_URL
+        })
+        app_settings = models.BookmarkApplicationSettings({
+            "app": app_settings_app
+        })
+        bookmark_app_obj = models.BookmarkApplication({
+            "label": APP_LABEL,
+            "settings": app_settings
+        })
+
+        # Create App in org
+        app, _, err = await client.create_application(bookmark_app_obj)
+        assert err is None
+        assert isinstance(app, models.Application)
+        assert isinstance(app, models.BookmarkApplication)
+
+        # List app keys
+        app_keys, _, err = await client.list_application_keys(app.id)
+        assert err is None
+        assert len(app_keys) == 1
+
+        _, err = await client.deactivate_application(app.id)
+        assert err is None
+        _, err = await client.delete_application(app.id)
+        assert err is None
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_get_app_keys(self, fs):
+        # Instantiate Mock Client
+        client = MockOktaClient()
+
+        # Create Bookmark Application Object
+        APP_URL = "https://example.com/bookmark.htm"
+        APP_LABEL = "AddBookmarkApp"
+        app_settings_app = models.BookmarkApplicationSettingsApplication({
+            "requestIntegration": False,
+            "url": APP_URL
+        })
+        app_settings = models.BookmarkApplicationSettings({
+            "app": app_settings_app
+        })
+        bookmark_app_obj = models.BookmarkApplication({
+            "label": APP_LABEL,
+            "settings": app_settings
+        })
+
+        # Create App in org
+        app, _, err = await client.create_application(bookmark_app_obj)
+        assert err is None
+        assert isinstance(app, models.Application)
+        assert isinstance(app, models.BookmarkApplication)
+
+        # List app keys
+        app_keys, _, err = await client.list_application_keys(app.id)
+        assert err is None
+        assert len(app_keys) == 1
+
+        # Get default key
+        default_key = app_keys[0]
+
+        # Find key and verify details
+        found_key, _, err = await \
+            client.get_application_key(app.id, default_key.kid)
+        assert err is None
+        assert found_key.kid == default_key.kid
+        assert found_key.created == default_key.created
+        assert found_key.expires_at == default_key.expires_at
+        assert found_key.x_5_c == default_key.x_5_c
+
+        _, err = await client.deactivate_application(app.id)
+        assert err is None
+        _, err = await client.delete_application(app.id)
+        assert err is None
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_generate_app_key(self, fs):
+        # Instantiate Mock Client
+        client = MockOktaClient()
+
+        # Create Bookmark Application Object
+        APP_URL = "https://example.com/bookmark.htm"
+        APP_LABEL = "AddBookmarkApp"
+        app_settings_app = models.BookmarkApplicationSettingsApplication({
+            "requestIntegration": False,
+            "url": APP_URL
+        })
+        app_settings = models.BookmarkApplicationSettings({
+            "app": app_settings_app
+        })
+        bookmark_app_obj = models.BookmarkApplication({
+            "label": APP_LABEL,
+            "settings": app_settings
+        })
+
+        # Create App in org
+        app, _, err = await client.create_application(bookmark_app_obj)
+        assert err is None
+        assert isinstance(app, models.Application)
+        assert isinstance(app, models.BookmarkApplication)
+
+        # Generate key
+        query_params_generate = {"validityYears": 2}
+        generated, _, err = await\
+            client.generate_application_key(app.id, query_params_generate)
+        assert err is None
+
+        # List app keys
+        found, _, err = await\
+            client.get_application_key(app.id, generated.kid)
+        assert err is None
+        assert found.created == generated.created
+        assert found.expires_at == generated.expires_at
+        assert found.x_5_c == generated.x_5_c
+
+        _, err = await client.deactivate_application(app.id)
+        assert err is None
+        _, err = await client.delete_application(app.id)
+        assert err is None
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_clone_app_key(self, fs):
+        # Instantiate Mock Client
+        client = MockOktaClient()
+
+        # Create Bookmark Application Object
+        APP_URL = "https://example.com/bookmark.htm"
+        APP_LABEL = "AddBookmarkApp"
+        app_settings_app = models.BookmarkApplicationSettingsApplication({
+            "requestIntegration": False,
+            "url": APP_URL
+        })
+        app_settings = models.BookmarkApplicationSettings({
+            "app": app_settings_app
+        })
+        bookmark_app_obj = models.BookmarkApplication({
+            "label": APP_LABEL,
+            "settings": app_settings
+        })
+
+        APP_URL_2 = "https://example.com/bookmark2.htm"
+        APP_LABEL_2 = "AddBookmarkApp2"
+        app_settings_app_2 = models.BookmarkApplicationSettingsApplication({
+            "requestIntegration": False,
+            "url": APP_URL_2
+        })
+        app_settings_2 = models.BookmarkApplicationSettings({
+            "app": app_settings_app_2
+        })
+        bookmark_app_obj_2 = models.BookmarkApplication({
+            "label": APP_LABEL_2,
+            "settings": app_settings_2
+        })
+
+        # Create App in org
+        app, _, err = await client.create_application(bookmark_app_obj)
+        assert err is None
+        assert isinstance(app, models.Application)
+        assert isinstance(app, models.BookmarkApplication)
+
+        app_2, _, err = await client.create_application(bookmark_app_obj_2)
+        assert err is None
+        assert isinstance(app, models.Application)
+        assert isinstance(app, models.BookmarkApplication)
+
+        # Generate key
+        query_params_generate = {"validityYears": 2}
+        generated, _, err = await\
+            client.generate_application_key(app.id, query_params_generate)
+        assert err is None
+
+        # Clone key into second app
+        query_params_clone = {"targetAid": app_2.id}
+        cloned, _, err = await\
+            client.clone_application_key(
+                app.id, generated.kid, query_params_clone)
+        assert err is None
+        assert cloned.kid == generated.kid
+        assert cloned.expires_at == generated.expires_at
+        assert cloned.x_5_c == generated.x_5_c
+
+        _, err = await client.deactivate_application(app.id)
+        assert err is None
+        _, err = await client.delete_application(app.id)
+        assert err is None
+        _, err = await client.deactivate_application(app_2.id)
+        assert err is None
+        _, err = await client.delete_application(app_2.id)
+        assert err is None
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_generate_csr(self, fs):
+        # Instantiate Mock Client
+        client = MockOktaClient()
+
+        # Create CSR
+        csr_metadata = models.CsrMetadata({
+            "subject": models.CsrMetadataSubject({
+                "commonName": "SP Issuer",
+                "countryName": "Canada",
+                "localityName": "Toronto",
+                "organizationName": "Okta, Inc.",
+                "organizationalUnitName": "Dev"
+            }),
+            "subjectAltNames": models.CsrMetadataSubjectAltNames({
+                "dnsNames": ["dev.okta.com"]
+            })
+        })
+
+        # Create Bookmark Application Object
+        APP_URL = "https://example.com/bookmark.htm"
+        APP_LABEL = "AddBookmarkApp"
+        app_settings_app = models.BookmarkApplicationSettingsApplication({
+            "requestIntegration": False,
+            "url": APP_URL
+        })
+        app_settings = models.BookmarkApplicationSettings({
+            "app": app_settings_app
+        })
+        bookmark_app_obj = models.BookmarkApplication({
+            "label": APP_LABEL,
+            "settings": app_settings
+        })
+
+        # Create App in org
+        app, _, err = await client.create_application(bookmark_app_obj)
+        assert err is None
+        assert isinstance(app, models.Application)
+        assert isinstance(app, models.BookmarkApplication)
+
+        # Generate CSR
+        generated, _, err = await \
+            client.generate_csr_for_application(app.id, csr_metadata)
+        assert err is None
+        assert generated.kty == "RSA"
+        assert generated.csr is not None
+
+        # Deactivate + delete app
+        _, err = await client.deactivate_application(app.id)
+        assert err is None
+        _, err = await client.delete_application(app.id)
+        assert err is None
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_get_csr(self, fs):
+        # Instantiate Mock Client
+        client = MockOktaClient()
+
+        # Create CSR
+        csr_metadata = models.CsrMetadata({
+            "subject": models.CsrMetadataSubject({
+                "commonName": "SP Issuer",
+                "countryName": "Canada",
+                "localityName": "Toronto",
+                "organizationName": "Okta, Inc.",
+                "organizationalUnitName": "Dev"
+            }),
+            "subjectAltNames": models.CsrMetadataSubjectAltNames({
+                "dnsNames": ["dev.okta.com"]
+            })
+        })
+
+        # Create Bookmark Application Object
+        APP_URL = "https://example.com/bookmark.htm"
+        APP_LABEL = "AddBookmarkApp"
+        app_settings_app = models.BookmarkApplicationSettingsApplication({
+            "requestIntegration": False,
+            "url": APP_URL
+        })
+        app_settings = models.BookmarkApplicationSettings({
+            "app": app_settings_app
+        })
+        bookmark_app_obj = models.BookmarkApplication({
+            "label": APP_LABEL,
+            "settings": app_settings
+        })
+
+        # Create App in org
+        app, _, err = await client.create_application(bookmark_app_obj)
+        assert err is None
+        assert isinstance(app, models.Application)
+        assert isinstance(app, models.BookmarkApplication)
+
+        # Generate CSR
+        generated, _, err = await \
+            client.generate_csr_for_application(app.id, csr_metadata)
+        assert err is None
+        assert generated.kty == "RSA"
+        assert generated.csr is not None
+
+        # Get CSR
+        found, _, err = await client.get_csr_for_application(app.id,
+                                                             generated.id)
+        assert err is None
+        assert found is not None
+
+        # Deactivate + delete app
+        _, err = await client.deactivate_application(app.id)
+        assert err is None
+        _, err = await client.delete_application(app.id)
+        assert err is None
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_revoke_csr(self, fs):
+        # Instantiate Mock Client
+        client = MockOktaClient()
+
+        # Create CSR
+        csr_metadata = models.CsrMetadata({
+            "subject": models.CsrMetadataSubject({
+                "commonName": "SP Issuer",
+                "countryName": "Canada",
+                "localityName": "Toronto",
+                "organizationName": "Okta, Inc.",
+                "organizationalUnitName": "Dev"
+            }),
+            "subjectAltNames": models.CsrMetadataSubjectAltNames({
+                "dnsNames": ["dev.okta.com"]
+            })
+        })
+
+        # Create Bookmark Application Object
+        APP_URL = "https://example.com/bookmark.htm"
+        APP_LABEL = "AddBookmarkApp"
+        app_settings_app = models.BookmarkApplicationSettingsApplication({
+            "requestIntegration": False,
+            "url": APP_URL
+        })
+        app_settings = models.BookmarkApplicationSettings({
+            "app": app_settings_app
+        })
+        bookmark_app_obj = models.BookmarkApplication({
+            "label": APP_LABEL,
+            "settings": app_settings
+        })
+
+        # Create App in org
+        app, _, err = await client.create_application(bookmark_app_obj)
+        assert err is None
+        assert isinstance(app, models.Application)
+        assert isinstance(app, models.BookmarkApplication)
+
+        # Generate CSR
+        generated, _, err = await \
+            client.generate_csr_for_application(app.id, csr_metadata)
+        assert err is None
+        assert generated.kty == "RSA"
+        assert generated.csr is not None
+
+        # Get CSR
+        found, _, err = await client.get_csr_for_application(app.id,
+                                                             generated.id)
+        assert err is None
+        assert found is not None
+
+        # Revoke
+        _, err = await client.revoke_csr_from_application(app.id, generated.id)
+        assert err is None
+
+        # Verify deletion
+        csr_list, _, err = await client.list_csrs_for_application(app.id)
+        assert err is None
+        assert next((csr for csr in csr_list if csr.id == generated.id), None)\
+            is None
+
+        # Deactivate + delete app
+        _, err = await client.deactivate_application(app.id)
+        assert err is None
+        _, err = await client.delete_application(app.id)
+        assert err is None
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_grant_consent_to_scope(self, fs):
+        # Instantiate Mock Client
+        client = MockOktaClient()
+
+        # Create OIDC Application Object
+        APP_LABEL = "AddOpenIdConnectApp-Consent"
+        CLIENT_URI = "https://example.com/client"
+        LOGO_URI = "https://example.com/assets/images/logo-new.png"
+        POLICY_URI = "https://example.com/client/policy"
+        GRANT_TYPES = [models.OAuthGrantType.AUTHORIZATION_CODE,
+                       models.OAuthGrantType.IMPLICIT]
+        APP_TYPE = models.OpenIdConnectApplicationType.NATIVE
+        POST_LOGOUT_REDIRECT_URIS = ["https://example.com/postlogout",
+                                     "myapp://postlogoutcallback"]
+        REDIRECT_URIS = ["https://example.com/oauth2/callback",
+                         "myapp://callback"]
+        RESPONSE_TYPES = [models.OAuthResponseType.TOKEN,
+                          models.OAuthResponseType.ID_TOKEN,
+                          models.OAuthResponseType.CODE]
+        TOS_URL = "https://example.com/client/tos"
+        AUTO_KEY_ROTATION = True
+        CLIENT_ID = "testclientid12345"
+        TOKEN_ENDPOINT_AUTH_METHOD =\
+            models.OAuthEndpointAuthenticationMethod.CLIENT_SECRET_POST
+
+        app_settings_client = models.OpenIdConnectApplicationSettingsClient({
+            "applicationType": APP_TYPE,
+            "clientUri": CLIENT_URI,
+            "grantTypes": GRANT_TYPES,
+            "logoUri": LOGO_URI,
+            "policyUri": POLICY_URI,
+            "postLogoutRedirectUris": POST_LOGOUT_REDIRECT_URIS,
+            "redirectUris": REDIRECT_URIS,
+            "responseTypes": RESPONSE_TYPES,
+            "tosUri": TOS_URL
+        })
+        app_settings = models.OpenIdConnectApplicationSettings({
+            "oauthClient": app_settings_client
+        })
+        app_credentials = models.OAuthApplicationCredentials({
+            "oauthClient": models.ApplicationCredentialsOAuthClient({
+                "autoKeyRotation": AUTO_KEY_ROTATION,
+                "clientId": CLIENT_ID,
+                "tokenEndpointAuthMethod": TOKEN_ENDPOINT_AUTH_METHOD
+            })
+        })
+        oidc_app_obj = models.OpenIdConnectApplication({
+            "label": APP_LABEL,
+            "settings": app_settings,
+            "credentials": app_credentials
+        })
+
+        # Create App in org
+        app, _, err = await client.create_application(oidc_app_obj)
+        assert err is None
+        assert isinstance(app, models.Application)
+        assert isinstance(app, models.OpenIdConnectApplication)
+
+        # Create grant request
+        issuer = client.get_base_url()
+        SCOPE_ID = "okta.apps.read"
+        oauth_scope_consent_grant = models.OAuth2ScopeConsentGrant({
+            "issuer": issuer,
+            "scopeId": SCOPE_ID
+        })
+
+        # Grant consent
+        _, _, err = await client.grant_consent_to_scope(
+            app.id,
+            oauth_scope_consent_grant)
+        assert err is None
+
+        # Check grant
+        grants, _, err = await client.list_scope_consent_grants(app.id)
+        assert err is None
+        assert grants is not None
+        assert next((grant for grant in grants if grant.scope_id == SCOPE_ID
+                     and grant.issuer == issuer))
+
+        # Deactivate & Delete created app
+        _, err = await client.deactivate_application(app.id)
+        assert err is None
+        _, err = await client.delete_application(app.id)
+        assert err is None
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_get_consent_grant(self, fs):
+        # Instantiate Mock Client
+        client = MockOktaClient()
+
+        # Create OIDC Application Object
+        APP_LABEL = "AddOpenIdConnectApp-Get-Consent"
+        CLIENT_URI = "https://example.com/client"
+        LOGO_URI = "https://example.com/assets/images/logo-new.png"
+        POLICY_URI = "https://example.com/client/policy"
+        GRANT_TYPES = [models.OAuthGrantType.AUTHORIZATION_CODE,
+                       models.OAuthGrantType.IMPLICIT]
+        APP_TYPE = models.OpenIdConnectApplicationType.NATIVE
+        POST_LOGOUT_REDIRECT_URIS = ["https://example.com/postlogout",
+                                     "myapp://postlogoutcallback"]
+        REDIRECT_URIS = ["https://example.com/oauth2/callback",
+                         "myapp://callback"]
+        RESPONSE_TYPES = [models.OAuthResponseType.TOKEN,
+                          models.OAuthResponseType.ID_TOKEN,
+                          models.OAuthResponseType.CODE]
+        TOS_URL = "https://example.com/client/tos"
+        AUTO_KEY_ROTATION = True
+        CLIENT_ID = "testclientid123456"
+        TOKEN_ENDPOINT_AUTH_METHOD =\
+            models.OAuthEndpointAuthenticationMethod.CLIENT_SECRET_POST
+
+        app_settings_client = models.OpenIdConnectApplicationSettingsClient({
+            "applicationType": APP_TYPE,
+            "clientUri": CLIENT_URI,
+            "grantTypes": GRANT_TYPES,
+            "logoUri": LOGO_URI,
+            "policyUri": POLICY_URI,
+            "postLogoutRedirectUris": POST_LOGOUT_REDIRECT_URIS,
+            "redirectUris": REDIRECT_URIS,
+            "responseTypes": RESPONSE_TYPES,
+            "tosUri": TOS_URL
+        })
+        app_settings = models.OpenIdConnectApplicationSettings({
+            "oauthClient": app_settings_client
+        })
+        app_credentials = models.OAuthApplicationCredentials({
+            "oauthClient": models.ApplicationCredentialsOAuthClient({
+                "autoKeyRotation": AUTO_KEY_ROTATION,
+                "clientId": CLIENT_ID,
+                "tokenEndpointAuthMethod": TOKEN_ENDPOINT_AUTH_METHOD
+            })
+        })
+        oidc_app_obj = models.OpenIdConnectApplication({
+            "label": APP_LABEL,
+            "settings": app_settings,
+            "credentials": app_credentials
+        })
+
+        # Create App in org
+        app, _, err = await client.create_application(oidc_app_obj)
+        assert err is None
+        assert isinstance(app, models.Application)
+        assert isinstance(app, models.OpenIdConnectApplication)
+
+        # Create grant request
+        issuer = client.get_base_url()
+        SCOPE_ID = "okta.apps.read"
+        oauth_scope_consent_grant = models.OAuth2ScopeConsentGrant({
+            "issuer": issuer,
+            "scopeId": SCOPE_ID
+        })
+
+        # Grant consent
+        _, _, err = await client.grant_consent_to_scope(
+            app.id,
+            oauth_scope_consent_grant)
+        assert err is None
+
+        # Check grant
+        grants, _, err = await client.list_scope_consent_grants(app.id)
+        assert err is None
+        assert grants is not None
+        found_grant = next((grant for grant in grants if grant.scope_id
+                            == SCOPE_ID and grant.issuer == issuer))
+        assert found_grant
+        found, _, err = await\
+            client.get_scope_consent_grant(app.id, found_grant.id)
+        assert err is None
+        assert found is not None
+
+        # Deactivate & Delete created app
+        _, err = await client.deactivate_application(app.id)
+        assert err is None
+        _, err = await client.delete_application(app.id)
+        assert err is None
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_revoke_consent_grant(self, fs):
+        # Instantiate Mock Client
+        client = MockOktaClient()
+
+        # Create OIDC Application Object
+        APP_LABEL = "AddOpenIdConnectApp-Revoke-Consent"
+        CLIENT_URI = "https://example.com/client"
+        LOGO_URI = "https://example.com/assets/images/logo-new.png"
+        POLICY_URI = "https://example.com/client/policy"
+        GRANT_TYPES = [models.OAuthGrantType.AUTHORIZATION_CODE,
+                       models.OAuthGrantType.IMPLICIT]
+        APP_TYPE = models.OpenIdConnectApplicationType.NATIVE
+        POST_LOGOUT_REDIRECT_URIS = ["https://example.com/postlogout",
+                                     "myapp://postlogoutcallback"]
+        REDIRECT_URIS = ["https://example.com/oauth2/callback",
+                         "myapp://callback"]
+        RESPONSE_TYPES = [models.OAuthResponseType.TOKEN,
+                          models.OAuthResponseType.ID_TOKEN,
+                          models.OAuthResponseType.CODE]
+        TOS_URL = "https://example.com/client/tos"
+        AUTO_KEY_ROTATION = True
+        CLIENT_ID = "testclientid123456"
+        TOKEN_ENDPOINT_AUTH_METHOD =\
+            models.OAuthEndpointAuthenticationMethod.CLIENT_SECRET_POST
+
+        app_settings_client = models.OpenIdConnectApplicationSettingsClient({
+            "applicationType": APP_TYPE,
+            "clientUri": CLIENT_URI,
+            "grantTypes": GRANT_TYPES,
+            "logoUri": LOGO_URI,
+            "policyUri": POLICY_URI,
+            "postLogoutRedirectUris": POST_LOGOUT_REDIRECT_URIS,
+            "redirectUris": REDIRECT_URIS,
+            "responseTypes": RESPONSE_TYPES,
+            "tosUri": TOS_URL
+        })
+        app_settings = models.OpenIdConnectApplicationSettings({
+            "oauthClient": app_settings_client
+        })
+        app_credentials = models.OAuthApplicationCredentials({
+            "oauthClient": models.ApplicationCredentialsOAuthClient({
+                "autoKeyRotation": AUTO_KEY_ROTATION,
+                "clientId": CLIENT_ID,
+                "tokenEndpointAuthMethod": TOKEN_ENDPOINT_AUTH_METHOD
+            })
+        })
+        oidc_app_obj = models.OpenIdConnectApplication({
+            "label": APP_LABEL,
+            "settings": app_settings,
+            "credentials": app_credentials
+        })
+
+        # Create App in org
+        app, _, err = await client.create_application(oidc_app_obj)
+        assert err is None
+        assert isinstance(app, models.Application)
+        assert isinstance(app, models.OpenIdConnectApplication)
+
+        # Create grant request
+        issuer = client.get_base_url()
+        SCOPE_ID = "okta.users.read"
+        oauth_scope_consent_grant = models.OAuth2ScopeConsentGrant({
+            "issuer": issuer,
+            "scopeId": SCOPE_ID
+        })
+
+        # Grant consent
+        _, _, err = await client.grant_consent_to_scope(
+            app.id,
+            oauth_scope_consent_grant)
+        assert err is None
+
+        # Check grant
+        grants, _, err = await client.list_scope_consent_grants(app.id)
+        assert err is None
+        assert grants is not None
+        found_grant = next((grant for grant in grants if grant.scope_id
+                            == SCOPE_ID and grant.issuer == issuer))
+        assert found_grant
+        found, _, err = await\
+            client.get_scope_consent_grant(app.id, found_grant.id)
+        assert err is None
+        assert found is not None
+
+        # Revoke
+        _, err = await client.revoke_scope_consent_grant(app.id,
+                                                         found_grant.id)
+        assert err is None
+
+        # Check again
+        updated_grants, _, err = await client.list_scope_consent_grants(app.id)
+        assert err is None
+        found_grant = next((grant for grant in updated_grants if grant.scope_id
+                            == SCOPE_ID and grant.issuer == issuer), None)
+        assert found_grant is None
+
+        # Deactivate & Delete created app
+        _, err = await client.deactivate_application(app.id)
+        assert err is None
+        _, err = await client.delete_application(app.id)
+        assert err is None
