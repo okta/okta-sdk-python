@@ -2,10 +2,6 @@ import pytest
 from tests.mocks import MockOktaClient
 from http import HTTPStatus
 import okta.models as models
-from okta.client import Client
-import time
-# import sys
-# import getopt
 
 
 class TestGroupsResource:
@@ -440,7 +436,7 @@ class TestGroupsResource:
         _, err = await client.activate_group_rule(group_rule.id)
         assert err is None
 
-        # time.sleep(15) # Allow for backend to update
+        # 15 second sleep for backend to updateƒ
 
         users_in_group, _, err = await client.list_group_users(group.id)
         assert err is None
@@ -492,7 +488,7 @@ class TestGroupsResource:
         _, err = await client.activate_group_rule(new_group_rule.id)
         assert err is None
 
-        # time.sleep(15) # Allow for backend to update
+        # 15 second sleep for backend to update
 
         users_in_group, _, err = await client.list_group_users(group.id)
         assert err is None
@@ -660,13 +656,11 @@ class TestGroupsResource:
         _, err = await client.delete_group(group_3.id)
         assert err is None
 
-    # @pytest.mark.vcr()
+    @pytest.mark.vcr()
     @pytest.mark.asyncio
-    @pytest.mark.skip
-    async def test_group_assigned_applications(self):
+    async def test_group_assigned_applications(self, fs):
         # Instantiate Mock Client
         client = MockOktaClient()
-        client = Client()
 
         # Create Group Objects
         GROUP_NAME = "Group-Target-Test"
@@ -711,7 +705,6 @@ class TestGroupsResource:
         swa_app, _, err = await client.create_application(swa_app_obj)
         assert err is None
         assert isinstance(swa_app, models.SwaApplication)
-        return
 
         # Assign app and group
         assign_ag_req = models.ApplicationGroupAssignment({
@@ -725,7 +718,7 @@ class TestGroupsResource:
                 swa_app.id, group.id, assign_ag_req)
         assert err is None
 
-        time.sleep(3)  # Allow for backend to update
+        # 3 second sleep for backend to update
 
         # Check assigned apps and ensure created app is found
         assigned_apps, _, err = await \
