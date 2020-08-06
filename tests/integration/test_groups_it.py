@@ -2,10 +2,6 @@ import pytest
 from tests.mocks import MockOktaClient
 from http import HTTPStatus
 import okta.models as models
-# from okta.client import Client
-# import time
-# import sys
-# import getopt
 
 
 class TestGroupsResource:
@@ -440,7 +436,7 @@ class TestGroupsResource:
         _, err = await client.activate_group_rule(group_rule.id)
         assert err is None
 
-        # time.sleep(15) # Allow for backend to update
+        # 15 second sleep for backend to updateƒ
 
         users_in_group, _, err = await client.list_group_users(group.id)
         assert err is None
@@ -492,7 +488,7 @@ class TestGroupsResource:
         _, err = await client.activate_group_rule(new_group_rule.id)
         assert err is None
 
-        # time.sleep(15) # Allow for backend to update
+        # 15 second sleep for backend to update
 
         users_in_group, _, err = await client.list_group_users(group.id)
         assert err is None
@@ -722,7 +718,7 @@ class TestGroupsResource:
                 swa_app.id, group.id, assign_ag_req)
         assert err is None
 
-        # time.sleep(3)  # Allow for backend to update
+        # 3 second sleep for backend to update
 
         # Check assigned apps and ensure created app is found
         assigned_apps, _, err = await \
