@@ -1,11 +1,7 @@
 import pytest
 from tests.mocks import MockOktaClient
-# from okta.client import Client
 import okta.models as models
 from okta.errors.okta_api_error import OktaAPIError
-# import time
-# import sys
-# import getopt
 
 
 class TestApplicationsResource:
@@ -473,7 +469,7 @@ class TestApplicationsResource:
         _, err = await client.activate_application(app.id)
         assert err is None
 
-        # time.sleep(2)
+        # 2 second sleep for backend to update
 
         # Get app and verify details
         found_app, _, err = await client.get_application(app.id)
@@ -985,7 +981,7 @@ class TestApplicationsResource:
                 app.id, group.id, assign_ag_req)
         assert err is None
 
-        # time.sleep(3)  # Allow for backend to update
+        # 3 second sleep for backend to update
 
         found_app_group, _, err = await \
             client.get_application_group_assignment(app.id, group.id)
@@ -1075,7 +1071,7 @@ class TestApplicationsResource:
                 app.id, group_2.id, assign_ag_req_2)
         assert err is None
 
-        # time.sleep(3)  # Allow for backend to update
+        # 3 second sleep for backend to update
 
         group_assign_list, _, err = await \
             client.list_application_group_assignments(app.id)
@@ -1152,7 +1148,7 @@ class TestApplicationsResource:
                 app.id, group.id, assign_ag_req)
         assert err is None
 
-        # time.sleep(3)  # Allow for backend to update
+        # 3 second sleep for backend to update
 
         found_app_group, _, err = await \
             client.get_application_group_assignment(app.id, group.id)
