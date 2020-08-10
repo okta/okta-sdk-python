@@ -66,7 +66,7 @@ class EventHookClient(APIClient):
             for item in response.get_body():
                 result.append(EventHook(
                     self.form_response_body(item)
-                    ))
+                ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
