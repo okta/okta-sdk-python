@@ -1,4 +1,4 @@
-from enum import Enum
+from aenum import MultiValueEnum
 
 
 class OktaObject:
@@ -21,9 +21,17 @@ class OktaObject:
         for key, val in self.request_format().items():
             if val is None:
                 continue
-            if not isinstance(val, OktaObject):
+            if isinstance(val, list):
+                formatted_list = []
+                for item in val:
+                    if isinstance(item, OktaObject):
+                        formatted_list.append(item.as_dict())
+                    else:
+                        formatted_list.append(item)
+                result[key] = formatted_list
+            elif not isinstance(val, OktaObject):
                 result[key] = val
-            elif issubclass(type(val), Enum):
+            elif issubclass(type(val), MultiValueEnum):
                 result[key] = val.value
             else:
                 result[key] = val.as_dict()
