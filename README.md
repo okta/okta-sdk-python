@@ -60,9 +60,13 @@ You'll also need
 
 Construct a client instance by passing it your Okta domain name and API token:
 
-```
-Python Code Segment coming soon
-  - Build client with Okta domain and API token
+```py
+from okta.client import Client as OktaClient
+config = {
+    "orgUrl": "https://test.okta.com",
+    "token": "YOUR_API_TOKEN"
+}
+my_okta_client = OktaClient(config)
 ```
 
 Hard-coding the Okta domain and API token works for quick tests, but for real projects you should use a more secure way of storing these values (such as environment variables). This library supports a few different configuration sources, covered in the [configuration reference](#configuration-reference) section.
@@ -74,29 +78,59 @@ This SDK supports this feature (OAuth 2.0) only for service-to-service applicati
 
 When using this approach you won't need an API Token because the SDK will request an access token for you. In order to use OAuth 2.0, construct a client instance by passing the following parameters:
 
-```
-Python Code Segment coming soon
-  - Build client with Authorization Mode="PrivateKey", Client ID, Scopes, Private Key
+```py
+from okta.client import Client as OktaClient
+config = {
+    "orgUrl": "https://test.okta.com",
+    "authorizationMode": "PrivateKey",
+    "clientId": "clientID",
+    "scopes": ["okta.users.manage"],
+    "privateKey": {'JsonWebKey'}
+}
+client = OktaClient(config)
 ```
 
 ### Extending the Client
-When creating a new client, we allow for you to pass custom instances of `http.Client` and `cache.Cache`.
+When creating a new client, we allow for you to pass custom instances of `okta.request_executor`, `okta.http_client` and `okta.cache.cache`.
 
-```
+```py
+from okta.client import Client as OktaClient
+# Assuming implementations are in project.custom
+from project.custom.request_executor_impl import RequestExecImpl
+from project.custom.http_client_impl import HTTPClientImpl
+from project.custom.cache_impl import CacheImpl
+config = {
+    "orgUrl": "https://test.okta.com",
+    "token": "YOUR_API_TOKEN",
+    "requestExecutor": RequestExecImpl,
+    "httpClient": HTTPClientImpl,
+    "cacheManager": CacheImpl
+}
 Python Code Segment coming soon
   - Build client with HTTP client, Cache object and other parameters
 ```
 
 ### Extending or Creating New Cache Manager
-You can create a custom cache driver by implementing `cache.Cache`
+You can create a custom cache driver by implementing `okta.cache.cache`
 
-```
-Python Code Segment coming soon
-  - Build custom cache object constructor and get, set, delete, clear, has functions.
+```py
+from okta.cache.cache import Cache
+
+class CustomCache(Cache):
+  def __init__(self, params):
+    super().__init__()
+    # Constructor
+
+  # Must implement all methods from the Cache class
+  def get(self, key):
+    # Implementation
+  
+  # Rest of methods
+  ...
 ```
 
 ## Usage guide
-These examples will help you understand how to use this library. You can also browse the full [API reference documentation][sdkapiref] (not available yet for Python).
+These examples will help you understand how to use this library.
 
 Once you initialize a `client`, you can call methods to make requests to the Okta API. Most methods are grouped by the API endpoint they belong to. For example, methods that call the [Users API](https://developer.okta.com/docs/api/resources/users) are organized under `Python segment coming`.
 
