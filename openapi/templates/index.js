@@ -17,6 +17,11 @@ py.process = ({ spec, operations, models, handlebars }) => {
     modelsByName
   );
 
+  modelsByName = setFactorType(
+    modelsByName["UserFactor"].resolutionStrategy.valueToModelMapping,
+    modelsByName
+  );
+
   for (let model of models) {
     if (model.extends !== undefined) {
       // Get Resolution from parent
@@ -54,6 +59,10 @@ py.process = ({ spec, operations, models, handlebars }) => {
 
     if (modelsByName[model.modelName].signOnMode) {
       model.signOnMode = modelsByName[model.modelName].signOnMode;
+    }
+
+    if (modelsByName[model.modelName].factorType) {
+      model.factorType = modelsByName[model.modelName].factorType;
     }
 
     templates.push({
@@ -122,6 +131,7 @@ py.process = ({ spec, operations, models, handlebars }) => {
     replaceColons,
     returnsApplication,
     oppositeCase,
+    returnsUserFactor,
   });
 
   handlebars.registerPartial(
@@ -321,12 +331,12 @@ function getSubtypes(model) {
 function returnsApplication(operations) {
   return (
     operations.filter((operation) => {
-      return _.lowerCase(operation.responseModel) === "application";
+      return operation.responseModel === "Application";
     }).length > 0
   );
 }
 
-// Set SignOnMode for each specific type of client
+// Set SignOnMode for each specific type of app
 function setApplicationSignOnMode(mapping, models) {
   for (const [key, value] of Object.entries(mapping)) {
     models[value].signOnMode = key;
@@ -339,4 +349,22 @@ function oppositeCase(string) {
   return string[0] === string[0].toUpperCase()
     ? string.toLowerCase()
     : string.toUpperCase();
+}
+
+// Set FactorType for each specific type of user factor
+function setFactorType(mapping, models) {
+  for (const [key, value] of Object.entries(mapping)) {
+    models[value].factorType = key;
+  }
+  return models;
+}
+
+// Determines if there exists an operation which returns an
+// Application object
+function returnsUserFactor(operations) {
+  return (
+    operations.filter((operation) => {
+      return operation.responseModel === "UserFactor";
+    }).length > 0
+  );
 }

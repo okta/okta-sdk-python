@@ -68,18 +68,31 @@
                         )
                     )
                 {{else}}
+                {{#if (eq (pascalCase operation.responseModel) "UserFactor")}}
+                result.append(
+                    find_factor_model(item["factorType"])(
+                        self.form_response_body(item)
+                        )
+                    )
+                {{else}}
                 result.append({{pascalCase operation.responseModel}}(
                     self.form_response_body(item)
                     ))
+                {{/if}}
                 {{/if}}
         {{else}}
             {{#if (eq (pascalCase operation.responseModel) "Application")}}
             body = self.form_response_body(response.get_body())
             result = find_app_model(body["signOnMode"], body["name"])(body)
             {{else}}
+            {{#if (eq (pascalCase operation.responseModel) "UserFactor")}}
+            body = self.form_response_body(response.get_body())
+            result = find_factor_model(body["factorType"])(body)
+            {{else}}
             result = {{pascalCase operation.responseModel}}(
                 self.form_response_body(response.get_body())
             )
+            {{/if}}
             {{/if}}
         {{/if}}
         except Exception as error:

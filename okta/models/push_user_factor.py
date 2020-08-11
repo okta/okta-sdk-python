@@ -36,6 +36,7 @@ class PushUserFactor(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
+            self.factor_type = "push"
             self.expires_at = config["expiresAt"]\
                 if "expiresAt" in config else None
             if "factorResult" in config:

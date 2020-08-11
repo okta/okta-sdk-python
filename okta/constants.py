@@ -1,6 +1,7 @@
 import os
 import okta.models as models
 from okta.models.application_sign_on_mode import ApplicationSignOnMode as ASM
+from okta.models.factor_type import FactorType as FT
 
 DEV_OKTA = "https://developer.okta.com"
 
@@ -47,3 +48,22 @@ def find_app_model(sign_on_mode, template_name):
         return models.SwaApplication
     # O/W SWA 3
     return models.SwaThreeFieldApplication
+
+
+OKTA_FACTOR_TYPE_TO_FACTOR = {
+    FT.CALL: models.CallUserFactor,
+    FT.EMAIL: models.EmailUserFactor,
+    FT.PUSH: models.PushUserFactor,
+    FT.QUESTION: models.SecurityQuestionUserFactor,
+    FT.SMS: models.SmsUserFactor,
+    FT.TOKEN: models.TokenUserFactor,
+    FT.TOKEN_HARDWARE: models.HardwareUserFactor,
+    FT.TOKEN_SOFTWARE_TOTP: models.TotpUserFactor,
+    FT.U_2_F: models.U2FUserFactor,
+    FT.WEB: models.WebUserFactor,
+    FT.WEBAUTHN: models.WebAuthnUserFactor
+}
+
+
+def find_factor_model(factor_type):
+    return OKTA_FACTOR_TYPE_TO_FACTOR[factor_type]
