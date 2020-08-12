@@ -17,6 +17,3 @@ def random_string_of_length(length):
         string: random string generated
     """
     return "".join(random.choices(string.ascii_letters, k=length))
-
-
-print(random_string_of_length(5))

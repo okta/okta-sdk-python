@@ -56,6 +56,15 @@ class OktaAPIResponse():
         """
         return self._status
 
+    def get_type(self):
+        """
+        Returns datatype of the API response
+
+        Returns:
+            class: type of object
+        """
+        return self._type
+
     def build_json_response(self, response_body):
         """
         Converts JSON response text into Python dictionary.
