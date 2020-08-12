@@ -12,7 +12,6 @@ class TestFactorsResource:
     """
     SDK_PREFIX = "python_sdk"
 
-    # @pytest.mark.vcr()
     @pytest.mark.asyncio
     @pytest.mark.skip
     async def test_enroll_security_question_factor(self):
@@ -288,7 +287,6 @@ class TestFactorsResource:
         _, err = await client.deactivate_or_delete_user(created_user.id)
         assert err is None
 
-    # @pytest.mark.vcr()
     @pytest.mark.skip
     @pytest.mark.asyncio
     async def test_reset_factors(self):
@@ -354,7 +352,6 @@ class TestFactorsResource:
         _, err = await client.deactivate_or_delete_user(created_user.id)
         assert err is None
 
-    # @pytest.mark.vcr()
     @pytest.mark.asyncio
     @pytest.mark.skip
     async def test_list_supported_security_questions(self):
