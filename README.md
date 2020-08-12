@@ -40,7 +40,6 @@ This library uses semantic versioning and follows Okta's [Library Version Policy
 | ------- | -------------------------------- |
 | 0.x     | :warning: Beta Release (Retired) |
 | 1.x     | :heavy_check_mark: Release       |
-| 2.x     | :construction: Pre-Release       |
 
 The latest release can always be found on the [releases page][github-releases].
 
@@ -150,8 +149,7 @@ This library should only be used with the Okta management API. To call the [Auth
 
 #### Before each Example
 
-Assume the client is instantiated before each example below.
-
+> Assume the client is instantiated before each example below.
 ```py
 from okta.client import Client as OktaClient
 import okta.models as models
