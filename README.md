@@ -8,45 +8,51 @@
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/okta)
 ![Code Style](https://img.shields.io/badge/Code%20Style-flake8-informational.svg)
 
-
 # Okta Python Management SDK
-* [Release status](#release-status)
-* [Need help?](#need-help)
-* [Getting started](#getting-started)
-* [Usage guide](#usage-guide)
-* [Configuration reference](#configuration-reference)
-* [Building the SDK](#building-the-sdk)
-* [Contributing](#contributing)
+
+- [Release Status](#release-status)
+- [Need help?](#need-help)
+- [Getting Started](#getting-started)
+- [Usage Guide](#usage-guide)
+- [Pagination](#pagination)
+- [Configuration Reference](#configuration-reference)
+- [Rate Limiting](#rate-limiting)
+- [Building the SDK](#building-the-sdk)
+- [Contributing](#contributing)
 
 This repository contains the Okta management SDK for Python. This SDK can be used in your server-side code to interact with the Okta management API and
-* Create and update users with the [Users API](https://developer.okta.com/docs/api/resources/users)
-* Add security factors to users with the [Factors API](https://developer.okta.com/docs/api/resources/factors)
-* Manage groups with the [Groups API](https://developer.okta.com/docs/api/resources/groups)
-* Manage applications with the [Apps API](https://developer.okta.com/docs/api/resources/apps)
-* Much more!
+
+- Create and update users with the [Users API][users-api-docs]
+- Add security factors to users with the [Factors API][factors-api-docs]
+- Manage groups with the [Groups API][groups-api-docs]
+- Manage applications with the [Apps API][apps-api-docs]
+- Much more!
 
 > Requires Python version 3.6.0 or higher.
 
 You can also learn more on the [Okta + Python][lang-landing-page] page in our documentation.
 
 ## Release status
-This library uses semantic versioning and follows Okta's [library version policy](https://developer.okta.com/code/library-versions/).
 
-| Version | Status                             |
-| ------- | ---------------------------------- |
-| 0.x     |  :warning: Beta Release (Retired)  |
-| 1.x     |  :heavy_check_mark: Release        |
-| 2.x     |  :construction: Pre-Release        |
+This library uses semantic versioning and follows Okta's [Library Version Policy][okta-library-versioning].
+
+| Version | Status                           |
+| ------- | -------------------------------- |
+| 0.x     | :warning: Beta Release (Retired) |
+| 1.x     | :heavy_check_mark: Release       |
+| 2.x     | :construction: Pre-Release       |
 
 The latest release can always be found on the [releases page][github-releases].
 
 ## Need help?
 
 If you run into problems using the SDK, you can
-* Ask questions on the [Okta Developer Forums][devforum]
-* Post [issues][github-issues] here on GitHub (for code errors)
+
+- Ask questions on the [Okta Developer Forums][devforum]
+- Post [issues][github-issues] here on GitHub (for code errors)
 
 ## Getting started
+
 To install the Okta Python SDK in your project:
 
 ```sh
@@ -55,8 +61,8 @@ pip install okta
 
 You'll also need
 
-* An Okta account, called an _organization_ (sign up for a free [developer organization](https://developer.okta.com/signup) if you need one)
-* An [API token](https://developer.okta.com/docs/api/getting_started/getting_a_token)
+- An Okta account, called an _organization_ (sign up for a free [developer organization][dev-okta-signup] if you need one)
+- An [API token][api-token-docs]
 
 Construct a client instance by passing it your Okta domain name and API token:
 
@@ -72,9 +78,10 @@ my_okta_client = OktaClient(config)
 Hard-coding the Okta domain and API token works for quick tests, but for real projects you should use a more secure way of storing these values (such as environment variables). This library supports a few different configuration sources, covered in the [configuration reference](#configuration-reference) section.
 
 ### OAuth 2.0
+
 Okta allows you to interact with Okta APIs using scoped OAuth 2.0 access tokens. Each access token enables the bearer to perform specific actions on specific Okta endpoints, with that ability controlled by which scopes the access token contains.
 
-This SDK supports this feature (OAuth 2.0) only for service-to-service applications. Check out [our guides](https://developer.okta.com/docs/guides/implement-oauth-for-okta/overview/) to learn more about how to register a new service application using a private and public key pair.
+This SDK supports this feature (OAuth 2.0) only for service-to-service applications. Check out [our guides][oauth-guides] to learn more about how to register a new service application using a private and public key pair.
 
 When using this approach you won't need an API Token because the SDK will request an access token for you. In order to use OAuth 2.0, construct a client instance by passing the following parameters:
 
@@ -83,7 +90,7 @@ from okta.client import Client as OktaClient
 config = {
     "orgUrl": "https://test.okta.com",
     "authorizationMode": "PrivateKey",
-    "clientId": "clientID",
+    "clientId": "YOUR_CLIENT_ID",
     "scopes": ["okta.users.manage"],
     "privateKey": {'JsonWebKey'}
 }
@@ -91,6 +98,7 @@ client = OktaClient(config)
 ```
 
 ### Extending the Client
+
 When creating a new client, we allow for you to pass custom instances of `okta.request_executor`, `okta.http_client` and `okta.cache.cache`.
 
 ```py
@@ -106,12 +114,11 @@ config = {
     "httpClient": HTTPClientImpl,
     "cacheManager": CacheImpl
 }
-Python Code Segment coming soon
-  - Build client with HTTP client, Cache object and other parameters
 ```
 
-### Extending or Creating New Cache Manager
-You can create a custom cache driver by implementing `okta.cache.cache`
+### Extending or Creating New Classes
+
+Example: You can create a custom cache driver by implementing `okta.cache.cache`
 
 ```py
 from okta.cache.cache import Cache
@@ -124,123 +131,278 @@ class CustomCache(Cache):
   # Must implement all methods from the Cache class
   def get(self, key):
     # Implementation
-  
-  # Rest of methods
+
+  """Rest of methods"""
   ...
 ```
 
+A similar approach can be used to extend `okta.request_executor` and `okta.http_client`.
+
 ## Usage guide
+
 These examples will help you understand how to use this library.
 
-Once you initialize a `client`, you can call methods to make requests to the Okta API. Most methods are grouped by the API endpoint they belong to. For example, methods that call the [Users API](https://developer.okta.com/docs/api/resources/users) are organized under `Python segment coming`.
+Once you initialize a `client`, you can call methods to make requests to the Okta API. The client uses **asynchronous** methods to operate. Most methods are grouped by the API endpoint they belong to. For example, methods that call the [Users API][users-api-docs] are organized under [the User resource client (okta.resource_clients.user_client.py)][users-client].
 
 ### Authenticate a User
-This library should only be used with the Okta management API. To call the [Authentication API](https://developer.okta.com/docs/api/resources/authn), you should construct your own HTTP requests.
+
+This library should only be used with the Okta management API. To call the [Authentication API][authn-api], you should construct your own HTTP requests.
+
+#### Before each Example
+
+Assume the client is instantiated before each example below.
+
+```py
+from okta.client import Client as OktaClient
+import okta.models as models
+client = OktaClient({"orgUrl": "https://test.okta.com", "token": "YOUR_API_TOKEN"})
+```
 
 ### Get a User
-```
-Python Code Segment coming soon
+
+```py
+user, resp, err = await client.get_user(user.id)
+# OR using their login
+user, resp, err = await client.get_user(user.profile.login)
 ```
 
 ### List all Users
-```
-Python Code Segment coming soon
+
+```py
+users, resp, err = await client.list_users()
 ```
 
 ### Filter or search for Users
-```
-Python Code Segment coming soon
+
+```py
+# Query parameters are optional on methods that can use them! Check the method definition for details on what query parameters are accepted
+query_parameters = {"filter": "status eq \"ACTIVE\""}
+users, resp, err = await client.list_users(query_parameters)
 ```
 
 ### Create a User
-```
-Python Code Segment coming soon
+
+```py
+# Create Password
+password = models.PasswordCredential({
+    "value": "Password123"
+})
+
+# Create User Credentials
+user_creds = models.UserCredentials({
+    "password": password
+})
+
+# Create User Profile and CreateUser Request
+user_profile = models.UserProfile()
+user_profile.first_name = "John"
+user_profile.last_name = "Doe"
+user_profile.email = "John.Doe"
+user_profile.login = "John.Doe"
+
+create_user_req = models.CreateUserRequest({
+    "credentials": user_creds,
+    "profile": user_profile
+})
+
+# Create User
+user, resp, err = await client.create_user(create_user_req)
 ```
 
 ### Update a User
-```
-Python Code Segment coming soon
+
+```py
+# Assume user object saved to variable `user`
+# Craft new profile and get user object
+new_profile = user.profile
+new_profile.nick_name = "Oktanaut"
+updated_user_obj = models.User({"profile": new_profile})
+
+# Update User with new details
+updated_user, _, err = await client.update_user(user.id, updated_user_obj)
 ```
 
 ### Get and set custom attributes
+
 Custom attributes must first be defined in the Okta profile editor. Then, you can work with custom attributes on a user:
-```
-Python Code Segment coming soon
+
+```py
+user, resp, err = await client.get_user(user.id)
+nick_name = user.profile.nick_name
 ```
 
 ### Remove a User
+
 You must first deactivate the user, and then you can delete the user.
-```
-Python Code Segment coming soon
+
+```py
+# Assuming user starts off with a status of "ACTIVE"
+
+# Deactivate
+resp, err = await client.deactivate_or_delete_user(user.id)
+# Then delete
+resp, err = await client.deactivate_or_delete_user(user.id)
 ```
 
 ### List a User's Groups
-```
-Python Code Segment coming soon
+
+```py
+users_groups, resp, err = await client.list_user_groups(user.id)
 ```
 
 ### Create a Group
-```
-Python Code Segment coming soon
+
+```py
+# Create Group Model
+group_profile = models.GroupProfile({
+    "name": "Group-Test"
+})
+group_model = models.Group({
+    "profile": group_profile
+})
+
+# Create Group
+group, resp, err = await client.create_group(group_model)
 ```
 
 ### Add a User to a Group
-```
-Python Code Segment coming soon
+
+```py
+resp, err = await client.add_user_to_group(group.id, user.id)
 ```
 
 ### List a User's enrolled Factors
-```
-Python Code Segment coming soon
+
+```py
+supported_factors, resp, err = await client.list_supported_factors(user.id)
 ```
 
 ### Enroll a User in a new Factor
-```
-Python Code Segment coming soon
+
+```py
+# Create and enroll factor
+sms_factor = models.SmsUserFactor({
+    "profile": models.SmsUserFactorProfile({
+        "phoneNumber": "+12345678901"
+    })
+})
+enrolled_factor, _, err = await client.enroll_factor(created_user.id, sms_factor)
 ```
 
 ### Activate a Factor
-```
-Python Code Segment coming soon
+
+```py
+activate_factor_request = models.ActivateFactorRequest({
+  "passCode": "123456"
+})
+activated_factor, resp, err = await client.activate_factor(user.id, factor.id, activate_factor_request)
 ```
 
 ### Verify a Factor
-```
-Python Code Segment coming soon
+
+```py
+verify_factor_request = models.ActivateFactorRequest({
+  "passCode": "123456"
+})
+verified_factor, resp, err = await client.activate_factor(user.id, factor.id, verify_factor_request)
 ```
 
 ### List all Applications
-```
-Python Code Segment coming soon
+
+```py
+apps, resp, err = await client.list_applications()
 ```
 
 ### Get an Application
-```
-Python Code Segment coming soon
+
+```py
+app, resp, err = await client.get_application(app.id)
 ```
 
 ### Create a SWA Application
-```
-Python Code Segment coming soon
+
+```py
+# Create SWA Application model and SWA Application in Okta
+swa_app_settings_app = models.SwaApplicationSettingsApplication({
+    "buttonField": "btn-login",
+    "passwordField": "txt-box-password",
+    "usernameField": "txt-box-username",
+    "url": "https://example.com/login.html",
+    "loginUrlRegex": "^https://example.com/login.html$"
+})
+
+swa_app_settings = models.SwaApplicationSettings({
+    "app": swa_app_settings_app
+})
+
+swa_app_model = models.SwaApplication({
+    "label": "SWA Test App",
+    "settings": swa_app_settings,
+})
+
+app, resp, err = await client.create_application(swa_app_model)
 ```
 
 ### Call other API endpoints
+
 Not every API endpoint is represented by a method in this library. You can call any Okta management API endpoint using this generic syntax:
+
+```py
+# Example that doesn't return Object
+request, error = await client.get_request_executor().create_request(
+  method="POST",
+  url="/api/v1/users/USER_ID_HERE/lifecycle/activate",
+  body={},
+  headers={},
+  oauth=False
+)
+
+response, error = await client.get_request_executor().execute(request, None)
+response_body = response.get_body()
+
+# Example that does return Object
+request, error = await client.get_request_executor().create_request(
+  method="GET",
+  url="/api/v1/users/USER_ID_HERE",
+  body={},
+  headers={},
+  oauth=False
+)
+
+response, error = await client.get_request_executor().execute(request, models.User)
+
+response_body = client.form_response_body(response.get_body())
+user = response.get_type()(response_body)
 ```
-Python Code Segment coming soon
+
+## Pagination
+
+If your request comes back with more than the default or set limit, you can request the next page.
+
+Example of listing users 1 at a time:
+
+```py
+query_parameters = {"limit": "1"}
+users, resp, err = await client.list_users(query_parameters)
+
+# Do something with your users until you run out of users to iterate
+if resp.has_next:
+  next_user, error = await resp.next()  # Returns list of 1 user
 ```
 
 ## Configuration reference
+
 This library looks for configuration in the following sources:
 
 0. An `okta.yaml` file in a `.okta` folder in the current user's home directory (`~/.okta/okta.yaml` or `%userprofile\.okta\okta.yaml`)
-0. A `.okta.yaml` file in the application or project's root directory
-0. Environment variables
-0. Configuration explicitly passed to the constructor (see the example in [Getting started](#getting-started))
+1. A `.okta.yaml` file in the application or project's root directory
+2. Environment variables
+3. Configuration explicitly passed to the constructor (see the example in [Getting started](#getting-started))
 
 Higher numbers win. In other words, configuration passed via the constructor will override configuration found in environment variables, which will override configuration in `okta.yaml` (if any), and so on.
 
 ### YAML configuration
+
 When you use an API Token instead of OAuth 2.0 the full YAML configuration looks like:
 
 ```yaml
@@ -253,7 +415,7 @@ okta:
       host: null
       username: null
       password: null
-    token: {apiToken}
+    token: { apiToken }
 ```
 
 When you use OAuth 2.0 the full YAML configuration looks like:
@@ -274,35 +436,65 @@ okta:
       - scope.1
       - scope.2
     privateKey: |
-        -----BEGIN RSA PRIVATE KEY-----
-        MIIEogIBAAKCAQEAl4F5CrP6Wu2kKwH1Z+CNBdo0iteHhVRIXeHdeoqIB1iXvuv4
-        THQdM5PIlot6XmeV1KUKuzw2ewDeb5zcasA4QHPcSVh2+KzbttPQ+RUXCUAr5t+r
-        0r6gBc5Dy1IPjCFsqsPJXFwqe3RzUb...
-        -----END RSA PRIVATE KEY-----
+      -----BEGIN RSA PRIVATE KEY-----
+      MIIEogIBAAKCAQEAl4F5CrP6Wu2kKwH1Z+CNBdo0iteHhVRIXeHdeoqIB1iXvuv4
+      THQdM5PIlot6XmeV1KUKuzw2ewDeb5zcasA4QHPcSVh2+KzbttPQ+RUXCUAr5t+r
+      0r6gBc5Dy1IPjCFsqsPJXFwqe3RzUb...
+      -----END RSA PRIVATE KEY-----
     requestTimeout: 0 # seconds
     rateLimit:
       maxRetries: 4
 ```
 
 ### Environment variables
+
 Each one of the configuration values above can be turned into an environment variable name with the `_` (underscore) character and UPPERCASE characters:
 
-* `OKTA_CLIENT_CONNECTIONTIMEOUT`
-* `OKTA_CLIENT_TOKEN`
-* and so on
+- `OKTA_CLIENT_CONNECTIONTIMEOUT`
+- `OKTA_CLIENT_TOKEN`
+- and so on
+
+## Rate Limiting
+
+The Okta API will return 429 responses if too many requests are made within a given time. Please see [Rate Limiting at Okta][rate-limiting-okta] for a complete list of which endpoints are rate limited. When a 429 error is received, the X-Rate-Limit-Reset header will tell you the time at which you can retry. This section discusses the method for handling rate limiting with this SDK.
+
+### Built-In Retry
+
+This SDK uses the built-in retry strategy to automatically retry on 429 errors. You can use the default configuration options for the built-in retry strategy, or provide your desired values via the client configuration.
+
+You can configure the following options when using the built-in retry strategy:
+
+| Configuration Option        | Description                                                                                                                                          |
+| --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| client.requestTimeout       | The waiting time in seconds for a request to be resolved by the client. Less than or equal to 0 means "no timeout". The default value is `0` (None). |
+| client.rateLimit.maxRetries | The number of times to retry.                                                                                                                        |
+
+Check out the [Configuration Reference section](#configuration-reference) for more details about how to set these values via configuration.
 
 ## Building the SDK
+
 In most cases, you won't need to build the SDK from source. If you want to build it yourself, you'll need these prerequisites:
 
 - Clone the repo
 - Run `python setup.py build` from the root of the project (assuming Python is installed)
 
 ## Contributing
+
 We're happy to accept contributions and PRs! Please see the [Contribution Guide](CONTRIBUTING.md) to understand how to structure a contribution.
 
 [devforum]: https://devforum.okta.com/
 [github-issues]: https://github.com/okta/okta-sdk-python/issues
 [github-releases]: https://github.com/okta/okta-sdk-python/releases
-[Okta Developer Forum]: https://devforum.okta.com/
+[okta developer forum]: https://devforum.okta.com/
 [lang-landing-page]: https://developer.okta.com/code/python/
-[sdkapiref]: https://godoc.org/github.com/okta/okta-sdk-golang/okta
+[users-client]: okta/resource_clients/user_client.py
+[rate-limiting-okta]: https://developer.okta.com/docs/reference/rate-limits/
+[users-api-docs]: https://developer.okta.com/docs/api/resources/users
+[groups-api-docs]: https://developer.okta.com/docs/api/resources/groups
+[apps-api-docs]: https://developer.okta.com/docs/api/resources/apps
+[factors-api-docs]: https://developer.okta.com/docs/api/resources/factors
+[okta-library-versioning]: https://developer.okta.com/code/library-versions/
+[authn-api]: https://developer.okta.com/docs/api/resources/authn
+[oauth-guides]: https://developer.okta.com/docs/guides/implement-oauth-for-okta/overview/
+[dev-okta-signup]: https://developer.okta.com/signup
+[api-token-docs]: https://developer.okta.com/docs/api/getting_started/getting_a_token
