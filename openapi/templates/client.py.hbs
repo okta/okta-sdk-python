@@ -51,17 +51,11 @@ class Client(
                 cache = user_config.get("cacheManager")
 
         # Determine request executor to use
-        self._requestExecutor = \
-            user_config.get("requestExecutor"(
+        self._request_executor = \
+            user_config.get("requestExecutor", RequestExecutor)(
                 self._config,
                 cache,
-                user_config.get("httpClient", None),
-            ),
-                RequestExecutor(
-                self._config,
-                cache,
-                user_config.get("httpClient", None),
-            ))
+                user_config.get("httpClient", None))
 
         # set private key variables
         if self._authorization_mode == 'PrivateKey':
