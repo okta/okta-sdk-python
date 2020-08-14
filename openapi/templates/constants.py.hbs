@@ -24,18 +24,15 @@ _GLOBAL_YAML_PATH = os.path.join(os.path.expanduser('~'), ".okta",
 _LOCAL_YAML_PATH = os.path.join(os.getcwd(), "okta.yaml")
 
 OKTA_APP_SIGN_ON_TO_MODEL = {
-    ASM.AUTO_LOGIN: models.AutoLoginApplication,
-    ASM.BASIC_AUTH: models.BasicAuthApplication,
-    ASM.BOOKMARK: models.BookmarkApplication,
-    ASM.OPENID_CONNECT: models.OpenIdConnectApplication,
-    ASM.SAML_2_0: models.SamlApplication,
-    ASM.SECURE_PASSWORD_STORE: models.SecurePasswordStoreApplication,
-    ASM.WS_FEDERATION: models.WsFederationApplication
+    {{#each apps}}
+    ASM.{{upperCase @key}}: models.{{pascalCase this}}{{#unless @last}},{{/unless}}
+    {{/each}}
 }
 
 OKTA_APP_NAME_TO_MODEL = {
-    "template_swa": models.SwaApplication,
-    "template_swa3field": models.SwaThreeFieldApplication
+    {{#each other_apps}}
+    "{{@key}}": models.{{pascalCase this}}{{#unless @last}},{{/unless}}
+    {{/each}}
 }
 
 SWA_APP_NAME = "template_swa"
@@ -51,17 +48,9 @@ def find_app_model(sign_on_mode, template_name):
 
 
 OKTA_FACTOR_TYPE_TO_FACTOR = {
-    FT.CALL: models.CallUserFactor,
-    FT.EMAIL: models.EmailUserFactor,
-    FT.PUSH: models.PushUserFactor,
-    FT.QUESTION: models.SecurityQuestionUserFactor,
-    FT.SMS: models.SmsUserFactor,
-    FT.TOKEN: models.TokenUserFactor,
-    FT.TOKEN_HARDWARE: models.HardwareUserFactor,
-    FT.TOKEN_SOFTWARE_TOTP: models.TotpUserFactor,
-    FT.U_2_F: models.U2FUserFactor,
-    FT.WEB: models.WebUserFactor,
-    FT.WEBAUTHN: models.WebAuthnUserFactor
+    {{#each factors}}
+    FT.{{upperCase (snakeCase @key)}}: models.{{pascalCase this}}{{#unless @last}},{{/unless}}
+    {{/each}}
 }
 
 

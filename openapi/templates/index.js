@@ -22,6 +22,34 @@ py.process = ({ spec, operations, models, handlebars }) => {
     modelsByName
   );
 
+  // Set mappings for dynamically instantiating objects
+  let app_mapping =
+    modelsByName["Application"].resolutionStrategy.valueToModelMapping;
+  delete app_mapping["BROWSER_PLUGIN"];
+
+  let other_apps = {};
+  let children = models.filter((mod) => {
+    return mod.extends === "BrowserPluginApplication";
+  });
+
+  children.forEach((childModel) => {
+    let app_name = childModel.properties.filter((prop) => {
+      return prop.propertyName == "name";
+    })[0].default;
+    other_apps[app_name] = childModel.modelName;
+  });
+
+  templates.push({
+    src: "constants.py.hbs",
+    dest: `okta/constants.py`,
+    context: {
+      apps: app_mapping,
+      other_apps,
+      factors:
+        modelsByName["UserFactor"].resolutionStrategy.valueToModelMapping,
+    },
+  });
+
   for (let model of models) {
     if (model.extends !== undefined) {
       // Get Resolution from parent
