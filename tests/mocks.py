@@ -1,5 +1,5 @@
 from okta.user_agent import UserAgent
-from okta.constants import DATETIME_STRING_FORMAT
+from okta.constants import DATETIME_FORMAT
 from okta.client import Client
 import aiohttp
 import asyncio
@@ -68,7 +68,7 @@ class MockHTTP429ResponseDetails():
         one_sec_after = now + dt.timedelta(seconds=1)
         self.status = 429
         self.headers = multidict.CIMultiDict({
-            "Date": now.strftime(DATETIME_STRING_FORMAT),
+            "Date": now.strftime(DATETIME_FORMAT),
             "Content-Type": "application/json",
             "X-Okta-Now": "",
             "X-Rate-Limit-Reset": one_sec_after.timestamp(),
@@ -87,7 +87,7 @@ class MockHTTP429NoXResetResponseDetails():
 
         self.status = 429
         self.headers = multidict.CIMultiDict({
-            "Date": now.strftime(DATETIME_STRING_FORMAT),
+            "Date": now.strftime(DATETIME_FORMAT),
             "Content-Type": "application/json",
             "X-Okta-Now": "",
             "X-Okta-Request-id": "okta-request-id",
@@ -126,7 +126,7 @@ class MockHTTP429MultiXResetResponseDetails():
         two_sec_after = one_sec_after + dt.timedelta(seconds=1)
 
         base_headers = {
-            "Date": now.strftime(DATETIME_STRING_FORMAT),
+            "Date": now.strftime(DATETIME_FORMAT),
             "Content-Type": "application/json",
             "X-Okta-Now": "",
             "X-Rate-Limit-Reset": one_sec_after.timestamp(),
