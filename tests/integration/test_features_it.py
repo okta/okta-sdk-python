@@ -8,7 +8,6 @@ class TestFeaturesResource:
     Integration Tests for the Features Resource
     """
     SDK_PREFIX = "python_sdk"
-    EVENT_TYPE = "EVENT_TYPE"
 
     @pytest.mark.vcr()
     @pytest.mark.asyncio
