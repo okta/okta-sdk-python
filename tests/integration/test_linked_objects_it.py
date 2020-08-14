@@ -3,7 +3,6 @@ from tests.mocks import MockOktaClient
 import okta.models as models
 from http import HTTPStatus
 from okta.errors.okta_api_error import OktaAPIError
-from okta.client import Client
 
 
 class TestLinkedObjectsResource:
@@ -12,12 +11,11 @@ class TestLinkedObjectsResource:
     """
     SDK_PREFIX = "python_sdk"
 
-    # @pytest.mark.vcr()
+    @pytest.mark.vcr()
     @pytest.mark.asyncio
-    async def test_add_get_linked_object(self):
+    async def test_add_get_linked_object(self, fs):
         # Instantiate Mock Client
         client = MockOktaClient()
-        client = Client()
 
         # Add Linked Object definition
         linked_object_model = models.LinkedObject({
@@ -88,12 +86,11 @@ class TestLinkedObjectsResource:
             client.delete_linked_object_definition(
                 linked_object_model.primary.name)
 
-    # @pytest.mark.vcr()
+    @pytest.mark.vcr()
     @pytest.mark.asyncio
-    async def test_get_all_linked_objects(self):
+    async def test_get_all_linked_objects(self, fs):
         # Instantiate Mock Client
         client = MockOktaClient()
-        client = Client()
 
         # Add Linked Object definition
         linked_object_model_1 = models.LinkedObject({
@@ -160,12 +157,11 @@ class TestLinkedObjectsResource:
             client.delete_linked_object_definition(
                 linked_object_model_2.primary.name)
 
-    # @pytest.mark.vcr()
+    @pytest.mark.vcr()
     @pytest.mark.asyncio
-    async def test_delete_linked_object(self):
+    async def test_delete_linked_object(self, fs):
         # Instantiate Mock Client
         client = MockOktaClient()
-        client = Client()
 
         # Add Linked Object definition
         linked_object_model = models.LinkedObject({
