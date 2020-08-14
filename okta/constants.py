@@ -16,7 +16,7 @@ EPOCH_YEAR = 1970
 EPOCH_MONTH = 1
 EPOCH_DAY = 1
 
-DATETIME_STRING_FORMAT = "%a, %d %b %Y %H:%M:%S %Z"
+DATETIME_FORMAT = "%Y-%m-%dT%H:%M:%S.%fZ"
 
 _GLOBAL_YAML_PATH = os.path.join(os.path.expanduser('~'), ".okta",
                                  "okta.yaml")

@@ -4,7 +4,7 @@ Class of utility functions.
 
 from enum import Enum
 from datetime import datetime as dt
-from okta.constants import DATETIME_STRING_FORMAT, EPOCH_DAY, EPOCH_MONTH,\
+from okta.constants import DATETIME_FORMAT, EPOCH_DAY, EPOCH_MONTH,\
     EPOCH_YEAR
 
 
@@ -50,7 +50,7 @@ def convert_date_time_to_seconds(date_time):
         float: Number of seconds since the epoch
     """
     dt_obj = dt.strptime(date_time,
-                         DATETIME_STRING_FORMAT)
+                         DATETIME_FORMAT)
     return float((dt_obj
                   - dt(EPOCH_YEAR, EPOCH_MONTH, EPOCH_DAY))
                  .total_seconds())

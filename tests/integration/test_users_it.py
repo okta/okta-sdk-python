@@ -4,6 +4,7 @@ import time
 from datetime import datetime
 from tests.mocks import MockOktaClient as Client
 from okta.errors.okta_api_error import OktaAPIError
+from okta.constants import DATETIME_FORMAT
 
 
 class TestUsersResource:
@@ -302,7 +303,6 @@ class TestUsersResource:
         assert got_user.id == user.id
         assert err is None
         # Verify password in updated user obj, changed after original
-        DATETIME_FORMAT = "%Y-%m-%dT%H:%M:%S.%fZ"
         assert datetime.strptime(got_user.password_changed, DATETIME_FORMAT)\
             > datetime.strptime(user.password_changed, DATETIME_FORMAT)
 
