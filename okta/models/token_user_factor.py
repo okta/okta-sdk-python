@@ -34,6 +34,7 @@ class TokenUserFactor(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
+            self.factor_type = "token"
             if "profile" in config:
                 if isinstance(config["profile"],
                               TokenUserFactorProfile):

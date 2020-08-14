@@ -48,6 +48,9 @@ class {{pascalCase model.modelName}}(
             {{#if (ne model.signOnMode undefined)}}
             self.sign_on_mode = "{{model.signOnMode}}"
             {{/if}}
+            {{#if (ne model.factorType undefined)}}
+            self.factor_type = "{{model.factorType}}"
+            {{/if}}
             {{#each model.properties as |prop|}}
             {{#if (exists prop "$ref")}}
             if "{{camelCase prop.propertyName}}" in config:

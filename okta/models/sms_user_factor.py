@@ -34,6 +34,7 @@ class SmsUserFactor(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
+            self.factor_type = "sms"
             if "profile" in config:
                 if isinstance(config["profile"],
                               SmsUserFactorProfile):

@@ -34,6 +34,7 @@ class HardwareUserFactor(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
+            self.factor_type = "token:hardware"
             if "profile" in config:
                 if isinstance(config["profile"],
                               HardwareUserFactorProfile):

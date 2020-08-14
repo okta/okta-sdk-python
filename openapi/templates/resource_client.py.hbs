@@ -15,6 +15,9 @@ from okta.api_client import APIClient
 {{#if (returnsApplication operations)}}
 from okta.constants import find_app_model
 {{/if}}
+{{#if (returnsUserFactor operations)}}
+from okta.constants import find_factor_model
+{{/if}}
 
 
 class {{pascalCase resource}}Client(APIClient):

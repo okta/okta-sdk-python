@@ -26,6 +26,7 @@ from okta.models.verify_user_factor_response\
     import VerifyUserFactorResponse
 from okta.utils import format_url
 from okta.api_client import APIClient
+from okta.constants import find_factor_model
 
 
 class UserFactorClient(APIClient):
@@ -72,9 +73,11 @@ class UserFactorClient(APIClient):
         try:
             result = []
             for item in response.get_body():
-                result.append(UserFactor(
-                    self.form_response_body(item)
-                    ))
+                result.append(
+                    find_factor_model(item["factorType"])(
+                        self.form_response_body(item)
+                        )
+                    )
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -124,9 +127,8 @@ class UserFactorClient(APIClient):
             return (None, response, error)
 
         try:
-            result = UserFactor(
-                self.form_response_body(response.get_body())
-            )
+            body = self.form_response_body(response.get_body())
+            result = find_factor_model(body["factorType"])(body)
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -167,9 +169,11 @@ class UserFactorClient(APIClient):
         try:
             result = []
             for item in response.get_body():
-                result.append(UserFactor(
-                    self.form_response_body(item)
-                    ))
+                result.append(
+                    find_factor_model(item["factorType"])(
+                        self.form_response_body(item)
+                        )
+                    )
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -285,9 +289,8 @@ class UserFactorClient(APIClient):
             return (None, response, error)
 
         try:
-            result = UserFactor(
-                self.form_response_body(response.get_body())
-            )
+            body = self.form_response_body(response.get_body())
+            result = find_factor_model(body["factorType"])(body)
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -332,9 +335,8 @@ class UserFactorClient(APIClient):
             return (None, response, error)
 
         try:
-            result = UserFactor(
-                self.form_response_body(response.get_body())
-            )
+            body = self.form_response_body(response.get_body())
+            result = find_factor_model(body["factorType"])(body)
         except Exception as error:
             return (None, response, error)
         return (result, response, None)

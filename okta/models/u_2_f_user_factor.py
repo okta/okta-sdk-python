@@ -34,6 +34,7 @@ class U2FUserFactor(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
+            self.factor_type = "u2f"
             if "profile" in config:
                 if isinstance(config["profile"],
                               U2FUserFactorProfile):
