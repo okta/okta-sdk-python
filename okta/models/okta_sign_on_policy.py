@@ -20,6 +20,7 @@ limitations under the License.
 
 from okta.models.policy\
     import Policy
+from okta.models.policy_type import PolicyType
 from okta.models.okta_sign_on_policy_conditions\
     import OktaSignOnPolicyConditions
 
@@ -34,6 +35,7 @@ class OktaSignOnPolicy(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
+            self.type = PolicyType("OKTA_SIGN_ON")
             if "conditions" in config:
                 if isinstance(config["conditions"],
                               OktaSignOnPolicyConditions):

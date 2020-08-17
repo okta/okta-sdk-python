@@ -22,16 +22,24 @@ py.process = ({ spec, operations, models, handlebars }) => {
     modelsByName
   );
 
-  // Set mappings for dynamically instantiating objects
+  modelsByName = setPolicyType(
+    modelsByName["Policy"].resolutionStrategy.valueToModelMapping,
+    modelsByName
+  );
+
+  modelsByName = setPolicyRuleType(
+    modelsByName["PolicyRule"].resolutionStrategy.valueToModelMapping,
+    modelsByName
+  );
+
+  // Set mappings for dynamically instantiating apps (Browser_plugin covers 2 apps)
   let app_mapping =
     modelsByName["Application"].resolutionStrategy.valueToModelMapping;
   delete app_mapping["BROWSER_PLUGIN"];
-
   let other_apps = {};
   let children = models.filter((mod) => {
     return mod.extends === "BrowserPluginApplication";
   });
-
   children.forEach((childModel) => {
     let app_name = childModel.properties.filter((prop) => {
       return prop.propertyName == "name";
@@ -47,6 +55,9 @@ py.process = ({ spec, operations, models, handlebars }) => {
       other_apps,
       factors:
         modelsByName["UserFactor"].resolutionStrategy.valueToModelMapping,
+      policies: modelsByName["Policy"].resolutionStrategy.valueToModelMapping,
+      policyRules:
+        modelsByName["PolicyRule"].resolutionStrategy.valueToModelMapping,
     },
   });
 
@@ -160,6 +171,8 @@ py.process = ({ spec, operations, models, handlebars }) => {
     returnsApplication,
     oppositeCase,
     returnsUserFactor,
+    returnsPolicy,
+    returnsPolicyRule,
   });
 
   handlebars.registerPartial(
@@ -387,12 +400,48 @@ function setFactorType(mapping, models) {
   return models;
 }
 
-// Determines if there exists an operation which returns an
-// Application object
+// Set PolicyType for each specific type of Policy
+function setPolicyType(mapping, models) {
+  for (const [key, value] of Object.entries(mapping)) {
+    models[value].policyType = key;
+  }
+  return models;
+}
+
+// Set PolicyRule Type for each specific type of Policy
+function setPolicyRuleType(mapping, models) {
+  for (const [key, value] of Object.entries(mapping)) {
+    models[value].policyRuleType = key;
+  }
+  return models;
+}
+
+// Determines if there exists an operation which returns a
+// User Factor object
 function returnsUserFactor(operations) {
   return (
     operations.filter((operation) => {
       return operation.responseModel === "UserFactor";
+    }).length > 0
+  );
+}
+
+// Determines if there exists an operation which returns a
+// Policy object
+function returnsPolicy(operations) {
+  return (
+    operations.filter((operation) => {
+      return operation.responseModel === "Policy";
+    }).length > 0
+  );
+}
+
+// Determines if there exists an operation which returns a
+// PolicyRule object
+function returnsPolicyRule(operations) {
+  return (
+    operations.filter((operation) => {
+      return operation.responseModel === "PolicyRule";
     }).length > 0
   );
 }

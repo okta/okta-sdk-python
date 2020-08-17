@@ -24,6 +24,8 @@ from okta.models.policy_rule\
     import PolicyRule
 from okta.utils import format_url
 from okta.api_client import APIClient
+from okta.constants import find_policy_model
+from okta.constants import find_policy_rule_model
 
 
 class PolicyClient(APIClient):
@@ -75,9 +77,11 @@ class PolicyClient(APIClient):
         try:
             result = []
             for item in response.get_body():
-                result.append(Policy(
-                    self.form_response_body(item)
-                    ))
+                result.append(
+                    find_policy_model(item["type"])(
+                        self.form_response_body(item)
+                        )
+                    )
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -123,9 +127,8 @@ class PolicyClient(APIClient):
             return (None, response, error)
 
         try:
-            result = Policy(
-                self.form_response_body(response.get_body())
-            )
+            body = self.form_response_body(response.get_body())
+            result = find_policy_model(body["type"])(body)
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -200,9 +203,8 @@ class PolicyClient(APIClient):
             return (None, response, error)
 
         try:
-            result = Policy(
-                self.form_response_body(response.get_body())
-            )
+            body = self.form_response_body(response.get_body())
+            result = find_policy_model(body["type"])(body)
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -244,9 +246,8 @@ class PolicyClient(APIClient):
             return (None, response, error)
 
         try:
-            result = Policy(
-                self.form_response_body(response.get_body())
-            )
+            body = self.form_response_body(response.get_body())
+            result = find_policy_model(body["type"])(body)
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -350,9 +351,11 @@ class PolicyClient(APIClient):
         try:
             result = []
             for item in response.get_body():
-                result.append(PolicyRule(
-                    self.form_response_body(item)
-                    ))
+                result.append(
+                    find_policy_rule_model(item["type"])(
+                        self.form_response_body(item)
+                        )
+                    )
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -394,9 +397,8 @@ class PolicyClient(APIClient):
             return (None, response, error)
 
         try:
-            result = PolicyRule(
-                self.form_response_body(response.get_body())
-            )
+            body = self.form_response_body(response.get_body())
+            result = find_policy_rule_model(body["type"])(body)
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -468,9 +470,8 @@ class PolicyClient(APIClient):
             return (None, response, error)
 
         try:
-            result = PolicyRule(
-                self.form_response_body(response.get_body())
-            )
+            body = self.form_response_body(response.get_body())
+            result = find_policy_rule_model(body["type"])(body)
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -513,9 +514,8 @@ class PolicyClient(APIClient):
             return (None, response, error)
 
         try:
-            result = PolicyRule(
-                self.form_response_body(response.get_body())
-            )
+            body = self.form_response_body(response.get_body())
+            result = find_policy_rule_model(body["type"])(body)
         except Exception as error:
             return (None, response, error)
         return (result, response, None)

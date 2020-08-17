@@ -24,6 +24,12 @@ from okta.models.{{snakeCase model.extends}}\
 {{else}}
 from okta.okta_object import OktaObject
 {{/if}}
+{{#if (ne model.policyType undefined)}}
+from okta.models.policy_type import PolicyType
+{{/if}}
+{{#if (ne model.policyRuleType undefined)}}
+from okta.models.policy_type import PolicyType
+{{/if}}
 {{#each subTypes as |type|}}
 from okta.models.{{snakeCase type}}\
     import {{pascalCase type}}
@@ -50,6 +56,12 @@ class {{pascalCase model.modelName}}(
             {{/if}}
             {{#if (ne model.factorType undefined)}}
             self.factor_type = "{{model.factorType}}"
+            {{/if}}
+            {{#if (ne model.policyType undefined)}}
+            self.type = PolicyType("{{upperCase model.policyType}}")
+            {{/if}}
+            {{#if (ne model.policyRuleType undefined)}}
+            self.type = PolicyType("{{upperCase model.policyRuleType}}")
             {{/if}}
             {{#each model.properties as |prop|}}
             {{#if (exists prop "$ref")}}

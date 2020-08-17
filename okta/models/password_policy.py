@@ -20,6 +20,7 @@ limitations under the License.
 
 from okta.models.policy\
     import Policy
+from okta.models.policy_type import PolicyType
 from okta.models.password_policy_conditions\
     import PasswordPolicyConditions
 from okta.models.password_policy_settings\
@@ -36,6 +37,7 @@ class PasswordPolicy(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
+            self.type = PolicyType("PASSWORD")
             if "conditions" in config:
                 if isinstance(config["conditions"],
                               PasswordPolicyConditions):

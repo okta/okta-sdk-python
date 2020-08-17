@@ -34,6 +34,7 @@ from okta.models.o_auth_2_scope\
     import OAuth2Scope
 from okta.utils import format_url
 from okta.api_client import APIClient
+from okta.constants import find_policy_model
 
 
 class AuthorizationServerClient(APIClient):
@@ -840,9 +841,11 @@ class AuthorizationServerClient(APIClient):
         try:
             result = []
             for item in response.get_body():
-                result.append(Policy(
-                    self.form_response_body(item)
-                    ))
+                result.append(
+                    find_policy_model(item["type"])(
+                        self.form_response_body(item)
+                        )
+                    )
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -884,9 +887,8 @@ class AuthorizationServerClient(APIClient):
             return (None, response, error)
 
         try:
-            result = Policy(
-                self.form_response_body(response.get_body())
-            )
+            body = self.form_response_body(response.get_body())
+            result = find_policy_model(body["type"])(body)
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -958,9 +960,8 @@ class AuthorizationServerClient(APIClient):
             return (None, response, error)
 
         try:
-            result = Policy(
-                self.form_response_body(response.get_body())
-            )
+            body = self.form_response_body(response.get_body())
+            result = find_policy_model(body["type"])(body)
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -1003,9 +1004,8 @@ class AuthorizationServerClient(APIClient):
             return (None, response, error)
 
         try:
-            result = Policy(
-                self.form_response_body(response.get_body())
-            )
+            body = self.form_response_body(response.get_body())
+            result = find_policy_model(body["type"])(body)
         except Exception as error:
             return (None, response, error)
         return (result, response, None)

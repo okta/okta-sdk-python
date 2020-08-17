@@ -20,6 +20,7 @@ limitations under the License.
 
 from okta.models.policy\
     import Policy
+from okta.models.policy_type import PolicyType
 from okta.models.policy_account_link\
     import PolicyAccountLink
 from okta.models.provisioning\
@@ -38,6 +39,7 @@ class IdentityProviderPolicy(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
+            self.type = PolicyType("IDP_DISCOVERY")
             if "accountLink" in config:
                 if isinstance(config["accountLink"],
                               PolicyAccountLink):

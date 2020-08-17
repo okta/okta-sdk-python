@@ -20,6 +20,7 @@ limitations under the License.
 
 from okta.models.policy\
     import Policy
+from okta.models.policy_type import PolicyType
 
 
 class OAuthAuthorizationPolicy(
