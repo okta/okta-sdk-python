@@ -2,6 +2,7 @@ import os
 import okta.models as models
 from okta.models.application_sign_on_mode import ApplicationSignOnMode as ASM
 from okta.models.factor_type import FactorType as FT
+from okta.models.policy_type import PolicyType as PT
 
 DEV_OKTA = "https://developer.okta.com"
 
@@ -67,3 +68,27 @@ OKTA_FACTOR_TYPE_TO_FACTOR = {
 
 def find_factor_model(factor_type):
     return OKTA_FACTOR_TYPE_TO_FACTOR[factor_type]
+
+
+OKTA_POLICY_TYPE_TO_MODEL = {
+    PT.IDP_DISCOVERY: models.IdentityProviderPolicy,
+    PT.OAUTH_AUTHORIZATION_POLICY: models.OAuthAuthorizationPolicy,
+    PT.OKTA_SIGN_ON: models.OktaSignOnPolicy,
+    PT.PASSWORD: models.PasswordPolicy
+}
+
+
+def find_policy_model(policy_type):
+    return OKTA_POLICY_TYPE_TO_MODEL[policy_type]
+
+
+OKTA_POLICY_RULE_TYPE_TO_MODEL = {
+    "PASSWORD": models.PasswordPolicyRule,
+    "SIGN_ON": models.OktaSignOnPolicyRule
+}
+
+
+def find_policy_rule_model(policy_rule):
+    if policy_rule in OKTA_POLICY_RULE_TYPE_TO_MODEL:
+        return OKTA_POLICY_RULE_TYPE_TO_MODEL[policy_rule]
+    return models.PolicyRule

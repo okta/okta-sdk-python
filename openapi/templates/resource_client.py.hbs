@@ -18,6 +18,12 @@ from okta.constants import find_app_model
 {{#if (returnsUserFactor operations)}}
 from okta.constants import find_factor_model
 {{/if}}
+{{#if (returnsPolicy operations)}}
+from okta.constants import find_policy_model
+{{/if}}
+{{#if (returnsPolicyRule operations)}}
+from okta.constants import find_policy_rule_model
+{{/if}}
 
 
 class {{pascalCase resource}}Client(APIClient):

@@ -75,9 +75,25 @@
                         )
                     )
                 {{else}}
+                {{#if (eq (pascalCase operation.responseModel) "Policy")}}
+                result.append(
+                    find_policy_model(item["type"])(
+                        self.form_response_body(item)
+                        )
+                    )
+                {{else}}
+                {{#if (eq (pascalCase operation.responseModel) "PolicyRule")}}
+                result.append(
+                    find_policy_rule_model(item["type"])(
+                        self.form_response_body(item)
+                        )
+                    )
+                {{else}}
                 result.append({{pascalCase operation.responseModel}}(
                     self.form_response_body(item)
                     ))
+                {{/if}}
+                {{/if}}
                 {{/if}}
                 {{/if}}
         {{else}}
@@ -89,9 +105,19 @@
             body = self.form_response_body(response.get_body())
             result = find_factor_model(body["factorType"])(body)
             {{else}}
+            {{#if (eq (pascalCase operation.responseModel) "Policy")}}
+            body = self.form_response_body(response.get_body())
+            result = find_policy_model(body["type"])(body)
+            {{else}}
+            {{#if (eq (pascalCase operation.responseModel) "PolicyRule")}}
+            body = self.form_response_body(response.get_body())
+            result = find_policy_rule_model(body["type"])(body)
+            {{else}}
             result = {{pascalCase operation.responseModel}}(
                 self.form_response_body(response.get_body())
             )
+            {{/if}}
+            {{/if}}
             {{/if}}
             {{/if}}
         {{/if}}

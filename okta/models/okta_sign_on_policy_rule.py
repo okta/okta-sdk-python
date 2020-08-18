@@ -36,6 +36,7 @@ class OktaSignOnPolicyRule(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
+            self.type = "SIGN_ON"
             if "actions" in config:
                 if isinstance(config["actions"],
                               OktaSignOnPolicyRuleActions):

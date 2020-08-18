@@ -36,6 +36,7 @@ class PasswordPolicyRule(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
+            self.type = "PASSWORD"
             if "actions" in config:
                 if isinstance(config["actions"],
                               PasswordPolicyRuleActions):
