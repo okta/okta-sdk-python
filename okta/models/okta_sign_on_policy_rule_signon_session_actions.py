@@ -32,15 +32,15 @@ class OktaSignOnPolicyRuleSignonSessionActions(
         super().__init__(config)
         if config:
             self.max_session_idle_minutes = config["maxSessionIdleMinutes"]\
-                if "maxSessionIdleMinutes" in config else "120"
+                if "maxSessionIdleMinutes" in config else 120
             self.max_session_lifetime_minutes = config["maxSessionLifetimeMinutes"]\
-                if "maxSessionLifetimeMinutes" in config else "0"
+                if "maxSessionLifetimeMinutes" in config else 0
             self.use_persistent_cookie = config["usePersistentCookie"]\
-                if "usePersistentCookie" in config else "false"
+                if "usePersistentCookie" in config else False
         else:
-            self.max_session_idle_minutes = "120"
-            self.max_session_lifetime_minutes = "0"
-            self.use_persistent_cookie = "false"
+            self.max_session_idle_minutes = 120
+            self.max_session_lifetime_minutes = 0
+            self.use_persistent_cookie = False
 
     def request_format(self):
         parent_req_format = super().request_format()

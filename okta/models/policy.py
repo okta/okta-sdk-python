@@ -19,10 +19,10 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.policy_rule_conditions\
-    import PolicyRuleConditions
-from okta.models.policy_type\
-    import PolicyType
+import okta.models.policy_rule_conditions\
+    as policy_rule_conditions
+import okta.models.policy_type\
+    as policy_type
 
 
 class Policy(
@@ -41,10 +41,10 @@ class Policy(
                 if "links" in config else None
             if "conditions" in config:
                 if isinstance(config["conditions"],
-                              PolicyRuleConditions):
+                              policy_rule_conditions.PolicyRuleConditions):
                     self.conditions = config["conditions"]
                 else:
-                    self.conditions = PolicyRuleConditions(
+                    self.conditions = policy_rule_conditions.PolicyRuleConditions(
                         config["conditions"]
                     )
             else:
@@ -67,10 +67,10 @@ class Policy(
                 if "system" in config else None
             if "type" in config:
                 if isinstance(config["type"],
-                              PolicyType):
+                              policy_type.PolicyType):
                     self.type = config["type"]
                 else:
-                    self.type = PolicyType(
+                    self.type = policy_type.PolicyType(
                         config["type"].upper()
                     )
             else:

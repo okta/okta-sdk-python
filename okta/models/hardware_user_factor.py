@@ -20,8 +20,8 @@ limitations under the License.
 
 from okta.models.user_factor\
     import UserFactor
-from okta.models.hardware_user_factor_profile\
-    import HardwareUserFactorProfile
+import okta.models.hardware_user_factor_profile\
+    as hardware_user_factor_profile
 
 
 class HardwareUserFactor(
@@ -37,10 +37,10 @@ class HardwareUserFactor(
             self.factor_type = "token:hardware"
             if "profile" in config:
                 if isinstance(config["profile"],
-                              HardwareUserFactorProfile):
+                              hardware_user_factor_profile.HardwareUserFactorProfile):
                     self.profile = config["profile"]
                 else:
-                    self.profile = HardwareUserFactorProfile(
+                    self.profile = hardware_user_factor_profile.HardwareUserFactorProfile(
                         config["profile"]
                     )
             else:

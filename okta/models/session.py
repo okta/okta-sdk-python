@@ -19,10 +19,13 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.session_identity_provider\
-    import SessionIdentityProvider
-from okta.models.session_status\
-    import SessionStatus
+from okta.okta_collection import OktaCollection
+import okta.models.session_authentication_method\
+    as session_authentication_method
+import okta.models.session_identity_provider\
+    as session_identity_provider
+import okta.models.session_status\
+    as session_status
 
 
 class Session(
@@ -37,8 +40,11 @@ class Session(
         if config:
             self.links = config["links"]\
                 if "links" in config else None
-            self.amr = config["amr"]\
-                if "amr" in config else None
+            self.amr = OktaCollection.form_list(
+                config["amr"] if "amr"\
+                    in config else [],
+                session_authentication_method.SessionAuthenticationMethod
+            )
             self.created_at = config["createdAt"]\
                 if "createdAt" in config else None
             self.expires_at = config["expiresAt"]\
@@ -47,10 +53,10 @@ class Session(
                 if "id" in config else None
             if "idp" in config:
                 if isinstance(config["idp"],
-                              SessionIdentityProvider):
+                              session_identity_provider.SessionIdentityProvider):
                     self.idp = config["idp"]
                 else:
-                    self.idp = SessionIdentityProvider(
+                    self.idp = session_identity_provider.SessionIdentityProvider(
                         config["idp"]
                     )
             else:
@@ -63,10 +69,10 @@ class Session(
                 if "login" in config else None
             if "status" in config:
                 if isinstance(config["status"],
-                              SessionStatus):
+                              session_status.SessionStatus):
                     self.status = config["status"]
                 else:
-                    self.status = SessionStatus(
+                    self.status = session_status.SessionStatus(
                         config["status"].upper()
                     )
             else:
@@ -75,7 +81,7 @@ class Session(
                 if "userId" in config else None
         else:
             self.links = None
-            self.amr = None
+            self.amr = []
             self.created_at = None
             self.expires_at = None
             self.id = None

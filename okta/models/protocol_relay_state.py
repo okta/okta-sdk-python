@@ -19,8 +19,8 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.protocol_relay_state_format\
-    import ProtocolRelayStateFormat
+import okta.models.protocol_relay_state_format\
+    as protocol_relay_state_format
 
 
 class ProtocolRelayState(
@@ -35,10 +35,10 @@ class ProtocolRelayState(
         if config:
             if "format" in config:
                 if isinstance(config["format"],
-                              ProtocolRelayStateFormat):
+                              protocol_relay_state_format.ProtocolRelayStateFormat):
                     self.format = config["format"]
                 else:
-                    self.format = ProtocolRelayStateFormat(
+                    self.format = protocol_relay_state_format.ProtocolRelayStateFormat(
                         config["format"].upper()
                     )
             else:

@@ -19,8 +19,8 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.event_hook_channel_config\
-    import EventHookChannelConfig
+import okta.models.event_hook_channel_config\
+    as event_hook_channel_config
 
 
 class EventHookChannel(
@@ -35,10 +35,10 @@ class EventHookChannel(
         if config:
             if "config" in config:
                 if isinstance(config["config"],
-                              EventHookChannelConfig):
+                              event_hook_channel_config.EventHookChannelConfig):
                     self.config = config["config"]
                 else:
-                    self.config = EventHookChannelConfig(
+                    self.config = event_hook_channel_config.EventHookChannelConfig(
                         config["config"]
                     )
             else:

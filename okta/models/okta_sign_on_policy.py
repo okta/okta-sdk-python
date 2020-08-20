@@ -21,8 +21,8 @@ limitations under the License.
 from okta.models.policy\
     import Policy
 from okta.models.policy_type import PolicyType
-from okta.models.okta_sign_on_policy_conditions\
-    import OktaSignOnPolicyConditions
+import okta.models.okta_sign_on_policy_conditions\
+    as okta_sign_on_policy_conditions
 
 
 class OktaSignOnPolicy(
@@ -38,10 +38,10 @@ class OktaSignOnPolicy(
             self.type = PolicyType("OKTA_SIGN_ON")
             if "conditions" in config:
                 if isinstance(config["conditions"],
-                              OktaSignOnPolicyConditions):
+                              okta_sign_on_policy_conditions.OktaSignOnPolicyConditions):
                     self.conditions = config["conditions"]
                 else:
-                    self.conditions = OktaSignOnPolicyConditions(
+                    self.conditions = okta_sign_on_policy_conditions.OktaSignOnPolicyConditions(
                         config["conditions"]
                     )
             else:

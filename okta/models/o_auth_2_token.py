@@ -19,6 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.okta_collection import OktaCollection
 
 
 class OAuth2Token(
@@ -47,8 +48,11 @@ class OAuth2Token(
                 if "issuer" in config else None
             self.last_updated = config["lastUpdated"]\
                 if "lastUpdated" in config else None
-            self.scopes = config["scopes"]\
-                if "scopes" in config else None
+            self.scopes = OktaCollection.form_list(
+                config["scopes"] if "scopes"\
+                    in config else [],
+                str
+            )
             self.status = config["status"]\
                 if "status" in config else None
             self.user_id = config["userId"]\
@@ -62,7 +66,7 @@ class OAuth2Token(
             self.id = None
             self.issuer = None
             self.last_updated = None
-            self.scopes = None
+            self.scopes = []
             self.status = None
             self.user_id = None
 

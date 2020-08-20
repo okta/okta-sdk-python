@@ -19,10 +19,10 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.password_policy_authentication_provider_condition\
-    import PasswordPolicyAuthenticationProviderCondition
-from okta.models.policy_people_condition\
-    import PolicyPeopleCondition
+import okta.models.password_policy_authentication_provider_condition\
+    as password_policy_authentication_provider_condition
+import okta.models.policy_people_condition\
+    as policy_people_condition
 
 
 class PasswordPolicyConditions(
@@ -37,20 +37,20 @@ class PasswordPolicyConditions(
         if config:
             if "authProvider" in config:
                 if isinstance(config["authProvider"],
-                              PasswordPolicyAuthenticationProviderCondition):
+                              password_policy_authentication_provider_condition.PasswordPolicyAuthenticationProviderCondition):
                     self.auth_provider = config["authProvider"]
                 else:
-                    self.auth_provider = PasswordPolicyAuthenticationProviderCondition(
+                    self.auth_provider = password_policy_authentication_provider_condition.PasswordPolicyAuthenticationProviderCondition(
                         config["authProvider"]
                     )
             else:
                 self.auth_provider = None
             if "people" in config:
                 if isinstance(config["people"],
-                              PolicyPeopleCondition):
+                              policy_people_condition.PolicyPeopleCondition):
                     self.people = config["people"]
                 else:
-                    self.people = PolicyPeopleCondition(
+                    self.people = policy_people_condition.PolicyPeopleCondition(
                         config["people"]
                     )
             else:

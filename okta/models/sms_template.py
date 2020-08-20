@@ -19,10 +19,10 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.sms_template_translations\
-    import SmsTemplateTranslations
-from okta.models.sms_template_type\
-    import SmsTemplateType
+import okta.models.sms_template_translations\
+    as sms_template_translations
+import okta.models.sms_template_type\
+    as sms_template_type
 
 
 class SmsTemplate(
@@ -47,20 +47,20 @@ class SmsTemplate(
                 if "template" in config else None
             if "translations" in config:
                 if isinstance(config["translations"],
-                              SmsTemplateTranslations):
+                              sms_template_translations.SmsTemplateTranslations):
                     self.translations = config["translations"]
                 else:
-                    self.translations = SmsTemplateTranslations(
+                    self.translations = sms_template_translations.SmsTemplateTranslations(
                         config["translations"]
                     )
             else:
                 self.translations = None
             if "type" in config:
                 if isinstance(config["type"],
-                              SmsTemplateType):
+                              sms_template_type.SmsTemplateType):
                     self.type = config["type"]
                 else:
-                    self.type = SmsTemplateType(
+                    self.type = sms_template_type.SmsTemplateType(
                         config["type"].upper()
                     )
             else:

@@ -19,10 +19,10 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.group_rule_group_condition\
-    import GroupRuleGroupCondition
-from okta.models.group_rule_user_condition\
-    import GroupRuleUserCondition
+import okta.models.group_rule_group_condition\
+    as group_rule_group_condition
+import okta.models.group_rule_user_condition\
+    as group_rule_user_condition
 
 
 class GroupRulePeopleCondition(
@@ -37,20 +37,20 @@ class GroupRulePeopleCondition(
         if config:
             if "groups" in config:
                 if isinstance(config["groups"],
-                              GroupRuleGroupCondition):
+                              group_rule_group_condition.GroupRuleGroupCondition):
                     self.groups = config["groups"]
                 else:
-                    self.groups = GroupRuleGroupCondition(
+                    self.groups = group_rule_group_condition.GroupRuleGroupCondition(
                         config["groups"]
                     )
             else:
                 self.groups = None
             if "users" in config:
                 if isinstance(config["users"],
-                              GroupRuleUserCondition):
+                              group_rule_user_condition.GroupRuleUserCondition):
                     self.users = config["users"]
                 else:
-                    self.users = GroupRuleUserCondition(
+                    self.users = group_rule_user_condition.GroupRuleUserCondition(
                         config["users"]
                     )
             else:

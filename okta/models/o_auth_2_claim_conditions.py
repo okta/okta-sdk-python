@@ -19,6 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.okta_collection import OktaCollection
 
 
 class OAuth2ClaimConditions(
@@ -31,10 +32,13 @@ class OAuth2ClaimConditions(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.scopes = config["scopes"]\
-                if "scopes" in config else None
+            self.scopes = OktaCollection.form_list(
+                config["scopes"] if "scopes"\
+                    in config else [],
+                str
+            )
         else:
-            self.scopes = None
+            self.scopes = []
 
     def request_format(self):
         parent_req_format = super().request_format()

@@ -19,6 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.okta_collection import OktaCollection
 
 
 class EventSubscriptions(
@@ -31,12 +32,15 @@ class EventSubscriptions(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.items = config["items"]\
-                if "items" in config else None
+            self.items = OktaCollection.form_list(
+                config["items"] if "items"\
+                    in config else [],
+                str
+            )
             self.type = config["type"]\
                 if "type" in config else None
         else:
-            self.items = None
+            self.items = []
             self.type = None
 
     def request_format(self):

@@ -19,8 +19,9 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.o_auth_2_actor\
-    import OAuth2Actor
+from okta.okta_collection import OktaCollection
+import okta.models.o_auth_2_actor\
+    as o_auth_2_actor
 
 
 class OAuth2RefreshToken(
@@ -43,10 +44,10 @@ class OAuth2RefreshToken(
                 if "created" in config else None
             if "createdBy" in config:
                 if isinstance(config["createdBy"],
-                              OAuth2Actor):
+                              o_auth_2_actor.OAuth2Actor):
                     self.created_by = config["createdBy"]
                 else:
-                    self.created_by = OAuth2Actor(
+                    self.created_by = o_auth_2_actor.OAuth2Actor(
                         config["createdBy"]
                     )
             else:
@@ -59,8 +60,11 @@ class OAuth2RefreshToken(
                 if "issuer" in config else None
             self.last_updated = config["lastUpdated"]\
                 if "lastUpdated" in config else None
-            self.scopes = config["scopes"]\
-                if "scopes" in config else None
+            self.scopes = OktaCollection.form_list(
+                config["scopes"] if "scopes"\
+                    in config else [],
+                str
+            )
             self.status = config["status"]\
                 if "status" in config else None
             self.user_id = config["userId"]\
@@ -75,7 +79,7 @@ class OAuth2RefreshToken(
             self.id = None
             self.issuer = None
             self.last_updated = None
-            self.scopes = None
+            self.scopes = []
             self.status = None
             self.user_id = None
 

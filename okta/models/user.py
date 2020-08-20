@@ -19,14 +19,14 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.user_credentials\
-    import UserCredentials
-from okta.models.user_profile\
-    import UserProfile
-from okta.models.user_status\
-    import UserStatus
-from okta.models.user_type\
-    import UserType
+import okta.models.user_credentials\
+    as user_credentials
+import okta.models.user_profile\
+    as user_profile
+import okta.models.user_status\
+    as user_status
+import okta.models.user_type\
+    as user_type
 
 
 class User(
@@ -49,10 +49,10 @@ class User(
                 if "created" in config else None
             if "credentials" in config:
                 if isinstance(config["credentials"],
-                              UserCredentials):
+                              user_credentials.UserCredentials):
                     self.credentials = config["credentials"]
                 else:
-                    self.credentials = UserCredentials(
+                    self.credentials = user_credentials.UserCredentials(
                         config["credentials"]
                     )
             else:
@@ -67,20 +67,20 @@ class User(
                 if "passwordChanged" in config else None
             if "profile" in config:
                 if isinstance(config["profile"],
-                              UserProfile):
+                              user_profile.UserProfile):
                     self.profile = config["profile"]
                 else:
-                    self.profile = UserProfile(
+                    self.profile = user_profile.UserProfile(
                         config["profile"]
                     )
             else:
                 self.profile = None
             if "status" in config:
                 if isinstance(config["status"],
-                              UserStatus):
+                              user_status.UserStatus):
                     self.status = config["status"]
                 else:
-                    self.status = UserStatus(
+                    self.status = user_status.UserStatus(
                         config["status"].upper()
                     )
             else:
@@ -89,20 +89,20 @@ class User(
                 if "statusChanged" in config else None
             if "transitioningToStatus" in config:
                 if isinstance(config["transitioningToStatus"],
-                              UserStatus):
+                              user_status.UserStatus):
                     self.transitioning_to_status = config["transitioningToStatus"]
                 else:
-                    self.transitioning_to_status = UserStatus(
+                    self.transitioning_to_status = user_status.UserStatus(
                         config["transitioningToStatus"].upper()
                     )
             else:
                 self.transitioning_to_status = None
             if "type" in config:
                 if isinstance(config["type"],
-                              UserType):
+                              user_type.UserType):
                     self.type = config["type"]
                 else:
-                    self.type = UserType(
+                    self.type = user_type.UserType(
                         config["type"]
                     )
             else:

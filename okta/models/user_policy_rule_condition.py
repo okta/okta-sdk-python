@@ -19,14 +19,15 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.inactivity_policy_rule_condition\
-    import InactivityPolicyRuleCondition
-from okta.models.lifecycle_expiration_policy_rule_condition\
-    import LifecycleExpirationPolicyRuleCondition
-from okta.models.password_expiration_policy_rule_condition\
-    import PasswordExpirationPolicyRuleCondition
-from okta.models.user_lifecycle_attribute_policy_rule_condition\
-    import UserLifecycleAttributePolicyRuleCondition
+from okta.okta_collection import OktaCollection
+import okta.models.inactivity_policy_rule_condition\
+    as inactivity_policy_rule_condition
+import okta.models.lifecycle_expiration_policy_rule_condition\
+    as lifecycle_expiration_policy_rule_condition
+import okta.models.password_expiration_policy_rule_condition\
+    as password_expiration_policy_rule_condition
+import okta.models.user_lifecycle_attribute_policy_rule_condition\
+    as user_lifecycle_attribute_policy_rule_condition
 
 
 class UserPolicyRuleCondition(
@@ -39,54 +40,60 @@ class UserPolicyRuleCondition(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.exclude = config["exclude"]\
-                if "exclude" in config else None
+            self.exclude = OktaCollection.form_list(
+                config["exclude"] if "exclude"\
+                    in config else [],
+                str
+            )
             if "inactivity" in config:
                 if isinstance(config["inactivity"],
-                              InactivityPolicyRuleCondition):
+                              inactivity_policy_rule_condition.InactivityPolicyRuleCondition):
                     self.inactivity = config["inactivity"]
                 else:
-                    self.inactivity = InactivityPolicyRuleCondition(
+                    self.inactivity = inactivity_policy_rule_condition.InactivityPolicyRuleCondition(
                         config["inactivity"]
                     )
             else:
                 self.inactivity = None
-            self.include = config["include"]\
-                if "include" in config else None
+            self.include = OktaCollection.form_list(
+                config["include"] if "include"\
+                    in config else [],
+                str
+            )
             if "lifecycleExpiration" in config:
                 if isinstance(config["lifecycleExpiration"],
-                              LifecycleExpirationPolicyRuleCondition):
+                              lifecycle_expiration_policy_rule_condition.LifecycleExpirationPolicyRuleCondition):
                     self.lifecycle_expiration = config["lifecycleExpiration"]
                 else:
-                    self.lifecycle_expiration = LifecycleExpirationPolicyRuleCondition(
+                    self.lifecycle_expiration = lifecycle_expiration_policy_rule_condition.LifecycleExpirationPolicyRuleCondition(
                         config["lifecycleExpiration"]
                     )
             else:
                 self.lifecycle_expiration = None
             if "passwordExpiration" in config:
                 if isinstance(config["passwordExpiration"],
-                              PasswordExpirationPolicyRuleCondition):
+                              password_expiration_policy_rule_condition.PasswordExpirationPolicyRuleCondition):
                     self.password_expiration = config["passwordExpiration"]
                 else:
-                    self.password_expiration = PasswordExpirationPolicyRuleCondition(
+                    self.password_expiration = password_expiration_policy_rule_condition.PasswordExpirationPolicyRuleCondition(
                         config["passwordExpiration"]
                     )
             else:
                 self.password_expiration = None
             if "userLifecycleAttribute" in config:
                 if isinstance(config["userLifecycleAttribute"],
-                              UserLifecycleAttributePolicyRuleCondition):
+                              user_lifecycle_attribute_policy_rule_condition.UserLifecycleAttributePolicyRuleCondition):
                     self.user_lifecycle_attribute = config["userLifecycleAttribute"]
                 else:
-                    self.user_lifecycle_attribute = UserLifecycleAttributePolicyRuleCondition(
+                    self.user_lifecycle_attribute = user_lifecycle_attribute_policy_rule_condition.UserLifecycleAttributePolicyRuleCondition(
                         config["userLifecycleAttribute"]
                     )
             else:
                 self.user_lifecycle_attribute = None
         else:
-            self.exclude = None
+            self.exclude = []
             self.inactivity = None
-            self.include = None
+            self.include = []
             self.lifecycle_expiration = None
             self.password_expiration = None
             self.user_lifecycle_attribute = None

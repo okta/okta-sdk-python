@@ -21,12 +21,12 @@ limitations under the License.
 from okta.models.policy\
     import Policy
 from okta.models.policy_type import PolicyType
-from okta.models.policy_account_link\
-    import PolicyAccountLink
-from okta.models.provisioning\
-    import Provisioning
-from okta.models.policy_subject\
-    import PolicySubject
+import okta.models.policy_account_link\
+    as policy_account_link
+import okta.models.provisioning\
+    as provisioning
+import okta.models.policy_subject\
+    as policy_subject
 
 
 class IdentityProviderPolicy(
@@ -42,10 +42,10 @@ class IdentityProviderPolicy(
             self.type = PolicyType("IDP_DISCOVERY")
             if "accountLink" in config:
                 if isinstance(config["accountLink"],
-                              PolicyAccountLink):
+                              policy_account_link.PolicyAccountLink):
                     self.account_link = config["accountLink"]
                 else:
-                    self.account_link = PolicyAccountLink(
+                    self.account_link = policy_account_link.PolicyAccountLink(
                         config["accountLink"]
                     )
             else:
@@ -54,20 +54,20 @@ class IdentityProviderPolicy(
                 if "maxClockSkew" in config else None
             if "provisioning" in config:
                 if isinstance(config["provisioning"],
-                              Provisioning):
+                              provisioning.Provisioning):
                     self.provisioning = config["provisioning"]
                 else:
-                    self.provisioning = Provisioning(
+                    self.provisioning = provisioning.Provisioning(
                         config["provisioning"]
                     )
             else:
                 self.provisioning = None
             if "subject" in config:
                 if isinstance(config["subject"],
-                              PolicySubject):
+                              policy_subject.PolicySubject):
                     self.subject = config["subject"]
                 else:
-                    self.subject = PolicySubject(
+                    self.subject = policy_subject.PolicySubject(
                         config["subject"]
                     )
             else:

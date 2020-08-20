@@ -19,12 +19,12 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.identity_provider_credentials_client\
-    import IdentityProviderCredentialsClient
-from okta.models.identity_provider_credentials_signing\
-    import IdentityProviderCredentialsSigning
-from okta.models.identity_provider_credentials_trust\
-    import IdentityProviderCredentialsTrust
+import okta.models.identity_provider_credentials_client\
+    as identity_provider_credentials_client
+import okta.models.identity_provider_credentials_signing\
+    as identity_provider_credentials_signing
+import okta.models.identity_provider_credentials_trust\
+    as identity_provider_credentials_trust
 
 
 class IdentityProviderCredentials(
@@ -39,30 +39,30 @@ class IdentityProviderCredentials(
         if config:
             if "client" in config:
                 if isinstance(config["client"],
-                              IdentityProviderCredentialsClient):
+                              identity_provider_credentials_client.IdentityProviderCredentialsClient):
                     self.client = config["client"]
                 else:
-                    self.client = IdentityProviderCredentialsClient(
+                    self.client = identity_provider_credentials_client.IdentityProviderCredentialsClient(
                         config["client"]
                     )
             else:
                 self.client = None
             if "signing" in config:
                 if isinstance(config["signing"],
-                              IdentityProviderCredentialsSigning):
+                              identity_provider_credentials_signing.IdentityProviderCredentialsSigning):
                     self.signing = config["signing"]
                 else:
-                    self.signing = IdentityProviderCredentialsSigning(
+                    self.signing = identity_provider_credentials_signing.IdentityProviderCredentialsSigning(
                         config["signing"]
                     )
             else:
                 self.signing = None
             if "trust" in config:
                 if isinstance(config["trust"],
-                              IdentityProviderCredentialsTrust):
+                              identity_provider_credentials_trust.IdentityProviderCredentialsTrust):
                     self.trust = config["trust"]
                 else:
-                    self.trust = IdentityProviderCredentialsTrust(
+                    self.trust = identity_provider_credentials_trust.IdentityProviderCredentialsTrust(
                         config["trust"]
                     )
             else:

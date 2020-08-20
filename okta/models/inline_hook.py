@@ -19,12 +19,12 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.inline_hook_channel\
-    import InlineHookChannel
-from okta.models.inline_hook_status\
-    import InlineHookStatus
-from okta.models.inline_hook_type\
-    import InlineHookType
+import okta.models.inline_hook_channel\
+    as inline_hook_channel
+import okta.models.inline_hook_status\
+    as inline_hook_status
+import okta.models.inline_hook_type\
+    as inline_hook_type
 
 
 class InlineHook(
@@ -41,10 +41,10 @@ class InlineHook(
                 if "links" in config else None
             if "channel" in config:
                 if isinstance(config["channel"],
-                              InlineHookChannel):
+                              inline_hook_channel.InlineHookChannel):
                     self.channel = config["channel"]
                 else:
-                    self.channel = InlineHookChannel(
+                    self.channel = inline_hook_channel.InlineHookChannel(
                         config["channel"]
                     )
             else:
@@ -59,20 +59,20 @@ class InlineHook(
                 if "name" in config else None
             if "status" in config:
                 if isinstance(config["status"],
-                              InlineHookStatus):
+                              inline_hook_status.InlineHookStatus):
                     self.status = config["status"]
                 else:
-                    self.status = InlineHookStatus(
+                    self.status = inline_hook_status.InlineHookStatus(
                         config["status"].upper()
                     )
             else:
                 self.status = None
             if "type" in config:
                 if isinstance(config["type"],
-                              InlineHookType):
+                              inline_hook_type.InlineHookType):
                     self.type = config["type"]
                 else:
-                    self.type = InlineHookType(
+                    self.type = inline_hook_type.InlineHookType(
                         config["type"].upper()
                     )
             else:

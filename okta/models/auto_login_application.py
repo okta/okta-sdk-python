@@ -20,10 +20,10 @@ limitations under the License.
 
 from okta.models.application\
     import Application
-from okta.models.scheme_application_credentials\
-    import SchemeApplicationCredentials
-from okta.models.auto_login_application_settings\
-    import AutoLoginApplicationSettings
+import okta.models.scheme_application_credentials\
+    as scheme_application_credentials
+import okta.models.auto_login_application_settings\
+    as auto_login_application_settings
 
 
 class AutoLoginApplication(
@@ -39,20 +39,20 @@ class AutoLoginApplication(
             self.sign_on_mode = "AUTO_LOGIN"
             if "credentials" in config:
                 if isinstance(config["credentials"],
-                              SchemeApplicationCredentials):
+                              scheme_application_credentials.SchemeApplicationCredentials):
                     self.credentials = config["credentials"]
                 else:
-                    self.credentials = SchemeApplicationCredentials(
+                    self.credentials = scheme_application_credentials.SchemeApplicationCredentials(
                         config["credentials"]
                     )
             else:
                 self.credentials = None
             if "settings" in config:
                 if isinstance(config["settings"],
-                              AutoLoginApplicationSettings):
+                              auto_login_application_settings.AutoLoginApplicationSettings):
                     self.settings = config["settings"]
                 else:
-                    self.settings = AutoLoginApplicationSettings(
+                    self.settings = auto_login_application_settings.AutoLoginApplicationSettings(
                         config["settings"]
                     )
             else:

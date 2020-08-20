@@ -19,10 +19,10 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.policy_network_condition\
-    import PolicyNetworkCondition
-from okta.models.policy_people_condition\
-    import PolicyPeopleCondition
+import okta.models.policy_network_condition\
+    as policy_network_condition
+import okta.models.policy_people_condition\
+    as policy_people_condition
 
 
 class PasswordPolicyRuleConditions(
@@ -37,20 +37,20 @@ class PasswordPolicyRuleConditions(
         if config:
             if "network" in config:
                 if isinstance(config["network"],
-                              PolicyNetworkCondition):
+                              policy_network_condition.PolicyNetworkCondition):
                     self.network = config["network"]
                 else:
-                    self.network = PolicyNetworkCondition(
+                    self.network = policy_network_condition.PolicyNetworkCondition(
                         config["network"]
                     )
             else:
                 self.network = None
             if "people" in config:
                 if isinstance(config["people"],
-                              PolicyPeopleCondition):
+                              policy_people_condition.PolicyPeopleCondition):
                     self.people = config["people"]
                 else:
-                    self.people = PolicyPeopleCondition(
+                    self.people = policy_people_condition.PolicyPeopleCondition(
                         config["people"]
                     )
             else:

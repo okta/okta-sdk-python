@@ -19,10 +19,10 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.provisioning_conditions\
-    import ProvisioningConditions
-from okta.models.provisioning_groups\
-    import ProvisioningGroups
+import okta.models.provisioning_conditions\
+    as provisioning_conditions
+import okta.models.provisioning_groups\
+    as provisioning_groups
 
 
 class Provisioning(
@@ -39,20 +39,20 @@ class Provisioning(
                 if "action" in config else None
             if "conditions" in config:
                 if isinstance(config["conditions"],
-                              ProvisioningConditions):
+                              provisioning_conditions.ProvisioningConditions):
                     self.conditions = config["conditions"]
                 else:
-                    self.conditions = ProvisioningConditions(
+                    self.conditions = provisioning_conditions.ProvisioningConditions(
                         config["conditions"]
                     )
             else:
                 self.conditions = None
             if "groups" in config:
                 if isinstance(config["groups"],
-                              ProvisioningGroups):
+                              provisioning_groups.ProvisioningGroups):
                     self.groups = config["groups"]
                 else:
-                    self.groups = ProvisioningGroups(
+                    self.groups = provisioning_groups.ProvisioningGroups(
                         config["groups"]
                     )
             else:

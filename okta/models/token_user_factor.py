@@ -20,8 +20,8 @@ limitations under the License.
 
 from okta.models.user_factor\
     import UserFactor
-from okta.models.token_user_factor_profile\
-    import TokenUserFactorProfile
+import okta.models.token_user_factor_profile\
+    as token_user_factor_profile
 
 
 class TokenUserFactor(
@@ -37,10 +37,10 @@ class TokenUserFactor(
             self.factor_type = "token"
             if "profile" in config:
                 if isinstance(config["profile"],
-                              TokenUserFactorProfile):
+                              token_user_factor_profile.TokenUserFactorProfile):
                     self.profile = config["profile"]
                 else:
-                    self.profile = TokenUserFactorProfile(
+                    self.profile = token_user_factor_profile.TokenUserFactorProfile(
                         config["profile"]
                     )
             else:

@@ -19,12 +19,12 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.role_assignment_type\
-    import RoleAssignmentType
-from okta.models.role_status\
-    import RoleStatus
-from okta.models.role_type\
-    import RoleType
+import okta.models.role_assignment_type\
+    as role_assignment_type
+import okta.models.role_status\
+    as role_status
+import okta.models.role_type\
+    as role_type
 
 
 class Role(
@@ -43,10 +43,10 @@ class Role(
                 if "links" in config else None
             if "assignmentType" in config:
                 if isinstance(config["assignmentType"],
-                              RoleAssignmentType):
+                              role_assignment_type.RoleAssignmentType):
                     self.assignment_type = config["assignmentType"]
                 else:
-                    self.assignment_type = RoleAssignmentType(
+                    self.assignment_type = role_assignment_type.RoleAssignmentType(
                         config["assignmentType"].upper()
                     )
             else:
@@ -63,20 +63,20 @@ class Role(
                 if "lastUpdated" in config else None
             if "status" in config:
                 if isinstance(config["status"],
-                              RoleStatus):
+                              role_status.RoleStatus):
                     self.status = config["status"]
                 else:
-                    self.status = RoleStatus(
+                    self.status = role_status.RoleStatus(
                         config["status"].upper()
                     )
             else:
                 self.status = None
             if "type" in config:
                 if isinstance(config["type"],
-                              RoleType):
+                              role_type.RoleType):
                     self.type = config["type"]
                 else:
-                    self.type = RoleType(
+                    self.type = role_type.RoleType(
                         config["type"].upper()
                     )
             else:

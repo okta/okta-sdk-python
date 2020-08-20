@@ -20,10 +20,10 @@ limitations under the License.
 
 from okta.models.policy_rule\
     import PolicyRule
-from okta.models.password_policy_rule_actions\
-    import PasswordPolicyRuleActions
-from okta.models.password_policy_rule_conditions\
-    import PasswordPolicyRuleConditions
+import okta.models.password_policy_rule_actions\
+    as password_policy_rule_actions
+import okta.models.password_policy_rule_conditions\
+    as password_policy_rule_conditions
 
 
 class PasswordPolicyRule(
@@ -39,20 +39,20 @@ class PasswordPolicyRule(
             self.type = "PASSWORD"
             if "actions" in config:
                 if isinstance(config["actions"],
-                              PasswordPolicyRuleActions):
+                              password_policy_rule_actions.PasswordPolicyRuleActions):
                     self.actions = config["actions"]
                 else:
-                    self.actions = PasswordPolicyRuleActions(
+                    self.actions = password_policy_rule_actions.PasswordPolicyRuleActions(
                         config["actions"]
                     )
             else:
                 self.actions = None
             if "conditions" in config:
                 if isinstance(config["conditions"],
-                              PasswordPolicyRuleConditions):
+                              password_policy_rule_conditions.PasswordPolicyRuleConditions):
                     self.conditions = config["conditions"]
                 else:
-                    self.conditions = PasswordPolicyRuleConditions(
+                    self.conditions = password_policy_rule_conditions.PasswordPolicyRuleConditions(
                         config["conditions"]
                     )
             else:

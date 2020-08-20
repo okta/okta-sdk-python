@@ -19,8 +19,8 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.log_geolocation\
-    import LogGeolocation
+import okta.models.log_geolocation\
+    as log_geolocation
 
 
 class LogGeographicalContext(
@@ -39,10 +39,10 @@ class LogGeographicalContext(
                 if "country" in config else None
             if "geolocation" in config:
                 if isinstance(config["geolocation"],
-                              LogGeolocation):
+                              log_geolocation.LogGeolocation):
                     self.geolocation = config["geolocation"]
                 else:
-                    self.geolocation = LogGeolocation(
+                    self.geolocation = log_geolocation.LogGeolocation(
                         config["geolocation"]
                     )
             else:

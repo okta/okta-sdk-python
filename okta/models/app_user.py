@@ -19,8 +19,8 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.app_user_credentials\
-    import AppUserCredentials
+import okta.models.app_user_credentials\
+    as app_user_credentials
 
 
 class AppUser(
@@ -41,10 +41,10 @@ class AppUser(
                 if "created" in config else None
             if "credentials" in config:
                 if isinstance(config["credentials"],
-                              AppUserCredentials):
+                              app_user_credentials.AppUserCredentials):
                     self.credentials = config["credentials"]
                 else:
-                    self.credentials = AppUserCredentials(
+                    self.credentials = app_user_credentials.AppUserCredentials(
                         config["credentials"]
                     )
             else:

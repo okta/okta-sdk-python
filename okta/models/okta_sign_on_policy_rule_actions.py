@@ -19,8 +19,8 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.okta_sign_on_policy_rule_signon_actions\
-    import OktaSignOnPolicyRuleSignonActions
+import okta.models.okta_sign_on_policy_rule_signon_actions\
+    as okta_sign_on_policy_rule_signon_actions
 
 
 class OktaSignOnPolicyRuleActions(
@@ -35,10 +35,10 @@ class OktaSignOnPolicyRuleActions(
         if config:
             if "signon" in config:
                 if isinstance(config["signon"],
-                              OktaSignOnPolicyRuleSignonActions):
+                              okta_sign_on_policy_rule_signon_actions.OktaSignOnPolicyRuleSignonActions):
                     self.signon = config["signon"]
                 else:
-                    self.signon = OktaSignOnPolicyRuleSignonActions(
+                    self.signon = okta_sign_on_policy_rule_signon_actions.OktaSignOnPolicyRuleSignonActions(
                         config["signon"]
                     )
             else:

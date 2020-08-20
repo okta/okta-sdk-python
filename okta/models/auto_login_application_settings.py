@@ -20,8 +20,8 @@ limitations under the License.
 
 from okta.models.application_settings\
     import ApplicationSettings
-from okta.models.auto_login_application_settings_sign_on\
-    import AutoLoginApplicationSettingsSignOn
+import okta.models.auto_login_application_settings_sign_on\
+    as auto_login_application_settings_sign_on
 
 
 class AutoLoginApplicationSettings(
@@ -36,10 +36,10 @@ class AutoLoginApplicationSettings(
         if config:
             if "signOn" in config:
                 if isinstance(config["signOn"],
-                              AutoLoginApplicationSettingsSignOn):
+                              auto_login_application_settings_sign_on.AutoLoginApplicationSettingsSignOn):
                     self.sign_on = config["signOn"]
                 else:
-                    self.sign_on = AutoLoginApplicationSettingsSignOn(
+                    self.sign_on = auto_login_application_settings_sign_on.AutoLoginApplicationSettingsSignOn(
                         config["signOn"]
                     )
             else:

@@ -19,10 +19,10 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.identity_provider_policy\
-    import IdentityProviderPolicy
-from okta.models.protocol\
-    import Protocol
+import okta.models.identity_provider_policy\
+    as identity_provider_policy
+import okta.models.protocol\
+    as protocol
 
 
 class IdentityProvider(
@@ -49,20 +49,20 @@ class IdentityProvider(
                 if "name" in config else None
             if "policy" in config:
                 if isinstance(config["policy"],
-                              IdentityProviderPolicy):
+                              identity_provider_policy.IdentityProviderPolicy):
                     self.policy = config["policy"]
                 else:
-                    self.policy = IdentityProviderPolicy(
+                    self.policy = identity_provider_policy.IdentityProviderPolicy(
                         config["policy"]
                     )
             else:
                 self.policy = None
             if "protocol" in config:
                 if isinstance(config["protocol"],
-                              Protocol):
+                              protocol.Protocol):
                     self.protocol = config["protocol"]
                 else:
-                    self.protocol = Protocol(
+                    self.protocol = protocol.Protocol(
                         config["protocol"]
                     )
             else:

@@ -19,8 +19,8 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.o_auth_endpoint_authentication_method\
-    import OAuthEndpointAuthenticationMethod
+import okta.models.o_auth_endpoint_authentication_method\
+    as o_auth_endpoint_authentication_method
 
 
 class ApplicationCredentialsOAuthClient(
@@ -41,10 +41,10 @@ class ApplicationCredentialsOAuthClient(
                 if "clientSecret" in config else None
             if "tokenEndpointAuthMethod" in config:
                 if isinstance(config["tokenEndpointAuthMethod"],
-                              OAuthEndpointAuthenticationMethod):
+                              o_auth_endpoint_authentication_method.OAuthEndpointAuthenticationMethod):
                     self.token_endpoint_auth_method = config["tokenEndpointAuthMethod"]
                 else:
-                    self.token_endpoint_auth_method = OAuthEndpointAuthenticationMethod(
+                    self.token_endpoint_auth_method = o_auth_endpoint_authentication_method.OAuthEndpointAuthenticationMethod(
                         config["tokenEndpointAuthMethod"].upper()
                     )
             else:

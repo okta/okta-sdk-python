@@ -19,8 +19,8 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.inline_hook_channel_config\
-    import InlineHookChannelConfig
+import okta.models.inline_hook_channel_config\
+    as inline_hook_channel_config
 
 
 class InlineHookChannel(
@@ -35,10 +35,10 @@ class InlineHookChannel(
         if config:
             if "config" in config:
                 if isinstance(config["config"],
-                              InlineHookChannelConfig):
+                              inline_hook_channel_config.InlineHookChannelConfig):
                     self.config = config["config"]
                 else:
-                    self.config = InlineHookChannelConfig(
+                    self.config = inline_hook_channel_config.InlineHookChannelConfig(
                         config["config"]
                     )
             else:

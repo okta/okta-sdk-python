@@ -19,8 +19,8 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.password_credential\
-    import PasswordCredential
+import okta.models.password_credential\
+    as password_credential
 
 
 class ChangePasswordRequest(
@@ -35,20 +35,20 @@ class ChangePasswordRequest(
         if config:
             if "newPassword" in config:
                 if isinstance(config["newPassword"],
-                              PasswordCredential):
+                              password_credential.PasswordCredential):
                     self.new_password = config["newPassword"]
                 else:
-                    self.new_password = PasswordCredential(
+                    self.new_password = password_credential.PasswordCredential(
                         config["newPassword"]
                     )
             else:
                 self.new_password = None
             if "oldPassword" in config:
                 if isinstance(config["oldPassword"],
-                              PasswordCredential):
+                              password_credential.PasswordCredential):
                     self.old_password = config["oldPassword"]
                 else:
-                    self.old_password = PasswordCredential(
+                    self.old_password = password_credential.PasswordCredential(
                         config["oldPassword"]
                     )
             else:

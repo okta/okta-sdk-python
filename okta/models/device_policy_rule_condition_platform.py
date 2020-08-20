@@ -19,6 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.okta_collection import OktaCollection
 
 
 class DevicePolicyRuleConditionPlatform(
@@ -31,13 +32,19 @@ class DevicePolicyRuleConditionPlatform(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.supported_mdm_frameworks = config["supportedMdmFrameworks"]\
-                if "supportedMdmFrameworks" in config else None
-            self.types = config["types"]\
-                if "types" in config else None
+            self.supported_mdm_frameworks = OktaCollection.form_list(
+                config["supportedMdmFrameworks"] if "supportedMdmFrameworks"\
+                    in config else [],
+                str
+            )
+            self.types = OktaCollection.form_list(
+                config["types"] if "types"\
+                    in config else [],
+                str
+            )
         else:
-            self.supported_mdm_frameworks = None
-            self.types = None
+            self.supported_mdm_frameworks = []
+            self.types = []
 
     def request_format(self):
         parent_req_format = super().request_format()

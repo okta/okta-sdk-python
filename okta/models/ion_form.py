@@ -19,6 +19,9 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.okta_collection import OktaCollection
+import okta.models.ion_field\
+    as ion_field
 
 
 class IonForm(
@@ -43,12 +46,21 @@ class IonForm(
                 if "produces" in config else None
             self.refresh = config["refresh"]\
                 if "refresh" in config else None
-            self.rel = config["rel"]\
-                if "rel" in config else None
-            self.relates_to = config["relatesTo"]\
-                if "relatesTo" in config else None
-            self.value = config["value"]\
-                if "value" in config else None
+            self.rel = OktaCollection.form_list(
+                config["rel"] if "rel"\
+                    in config else [],
+                str
+            )
+            self.relates_to = OktaCollection.form_list(
+                config["relatesTo"] if "relatesTo"\
+                    in config else [],
+                str
+            )
+            self.value = OktaCollection.form_list(
+                config["value"] if "value"\
+                    in config else [],
+                ion_field.IonField
+            )
         else:
             self.accepts = None
             self.href = None
@@ -56,9 +68,9 @@ class IonForm(
             self.name = None
             self.produces = None
             self.refresh = None
-            self.rel = None
-            self.relates_to = None
-            self.value = None
+            self.rel = []
+            self.relates_to = []
+            self.value = []
 
     def request_format(self):
         parent_req_format = super().request_format()

@@ -19,6 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.okta_collection import OktaCollection
 
 
 class JsonWebKey(
@@ -41,8 +42,11 @@ class JsonWebKey(
                 if "e" in config else None
             self.expires_at = config["expiresAt"]\
                 if "expiresAt" in config else None
-            self.key_ops = config["keyOps"]\
-                if "keyOps" in config else None
+            self.key_ops = OktaCollection.form_list(
+                config["keyOps"] if "keyOps"\
+                    in config else [],
+                str
+            )
             self.kid = config["kid"]\
                 if "kid" in config else None
             self.kty = config["kty"]\
@@ -55,8 +59,11 @@ class JsonWebKey(
                 if "status" in config else None
             self.use = config["use"]\
                 if "use" in config else None
-            self.x_5_c = config["x5C"]\
-                if "x5C" in config else None
+            self.x_5_c = OktaCollection.form_list(
+                config["x5C"] if "x5C"\
+                    in config else [],
+                str
+            )
             self.x_5_t = config["x5T"]\
                 if "x5T" in config else None
             self.x_5_t_s_256 = config["x5TS256"]\
@@ -69,14 +76,14 @@ class JsonWebKey(
             self.created = None
             self.e = None
             self.expires_at = None
-            self.key_ops = None
+            self.key_ops = []
             self.kid = None
             self.kty = None
             self.last_updated = None
             self.n = None
             self.status = None
             self.use = None
-            self.x_5_c = None
+            self.x_5_c = []
             self.x_5_t = None
             self.x_5_t_s_256 = None
             self.x_5_u = None

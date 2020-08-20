@@ -19,6 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.okta_collection import OktaCollection
 
 
 class GroupRuleGroupAssignment(
@@ -31,10 +32,13 @@ class GroupRuleGroupAssignment(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.group_ids = config["groupIds"]\
-                if "groupIds" in config else None
+            self.group_ids = OktaCollection.form_list(
+                config["groupIds"] if "groupIds"\
+                    in config else [],
+                str
+            )
         else:
-            self.group_ids = None
+            self.group_ids = []
 
     def request_format(self):
         parent_req_format = super().request_format()

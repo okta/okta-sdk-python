@@ -19,8 +19,8 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.password_policy_delegation_settings_options\
-    import PasswordPolicyDelegationSettingsOptions
+import okta.models.password_policy_delegation_settings_options\
+    as password_policy_delegation_settings_options
 
 
 class PasswordPolicyDelegationSettings(
@@ -35,10 +35,10 @@ class PasswordPolicyDelegationSettings(
         if config:
             if "options" in config:
                 if isinstance(config["options"],
-                              PasswordPolicyDelegationSettingsOptions):
+                              password_policy_delegation_settings_options.PasswordPolicyDelegationSettingsOptions):
                     self.options = config["options"]
                 else:
-                    self.options = PasswordPolicyDelegationSettingsOptions(
+                    self.options = password_policy_delegation_settings_options.PasswordPolicyDelegationSettingsOptions(
                         config["options"]
                     )
             else:

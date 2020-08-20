@@ -19,10 +19,10 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.application_settings_application\
-    import ApplicationSettingsApplication
-from okta.models.application_settings_notifications\
-    import ApplicationSettingsNotifications
+import okta.models.application_settings_application\
+    as application_settings_application
+import okta.models.application_settings_notifications\
+    as application_settings_notifications
 
 
 class ApplicationSettings(
@@ -37,10 +37,10 @@ class ApplicationSettings(
         if config:
             if "app" in config:
                 if isinstance(config["app"],
-                              ApplicationSettingsApplication):
+                              application_settings_application.ApplicationSettingsApplication):
                     self.app = config["app"]
                 else:
-                    self.app = ApplicationSettingsApplication(
+                    self.app = application_settings_application.ApplicationSettingsApplication(
                         config["app"]
                     )
             else:
@@ -51,10 +51,10 @@ class ApplicationSettings(
                 if "inlineHookId" in config else None
             if "notifications" in config:
                 if isinstance(config["notifications"],
-                              ApplicationSettingsNotifications):
+                              application_settings_notifications.ApplicationSettingsNotifications):
                     self.notifications = config["notifications"]
                 else:
-                    self.notifications = ApplicationSettingsNotifications(
+                    self.notifications = application_settings_notifications.ApplicationSettingsNotifications(
                         config["notifications"]
                     )
             else:

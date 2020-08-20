@@ -20,8 +20,8 @@ limitations under the License.
 
 from okta.models.browser_plugin_application\
     import BrowserPluginApplication
-from okta.models.swa_three_field_application_settings\
-    import SwaThreeFieldApplicationSettings
+import okta.models.swa_three_field_application_settings\
+    as swa_three_field_application_settings
 
 
 class SwaThreeFieldApplication(
@@ -38,10 +38,10 @@ class SwaThreeFieldApplication(
                 if "name" in config else "template_swa3field"
             if "settings" in config:
                 if isinstance(config["settings"],
-                              SwaThreeFieldApplicationSettings):
+                              swa_three_field_application_settings.SwaThreeFieldApplicationSettings):
                     self.settings = config["settings"]
                 else:
-                    self.settings = SwaThreeFieldApplicationSettings(
+                    self.settings = swa_three_field_application_settings.SwaThreeFieldApplicationSettings(
                         config["settings"]
                     )
             else:
