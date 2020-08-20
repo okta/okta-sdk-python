@@ -251,8 +251,6 @@ updated_user_obj = models.User({"profile": new_profile})
 updated_user, _, err = await client.update_user(user.id, updated_user_obj)
 ```
 
-ƒ
-
 ### Remove a User
 
 You must first deactivate the user, and then you can delete the user.
