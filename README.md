@@ -67,14 +67,18 @@ Construct a client instance by passing it your Okta domain name and API token:
 
 ```py
 from okta.client import Client as OktaClient
+# Instantiating with a Python dictionary in the constructor
 config = {
     "orgUrl": "https://test.okta.com",
     "token": "YOUR_API_TOKEN"
 }
 my_okta_client = OktaClient(config)
+
+# Instantiating without in-text credentials
+my_okta_client = OktaClient()
 ```
 
-Hard-coding the Okta domain and API token works for quick tests, but for real projects you should use a more secure way of storing these values (such as environment variables). This library supports a few different configuration sources, covered in the [configuration reference](#configuration-reference) section.
+> Using a Python dictionary to hard-code the Okta domain and API token works, but for real projects you should use a more secure way of storing these values. Credentials This library supports a few different configuration sources, covered in the [configuration reference](#configuration-reference) section.
 
 ### OAuth 2.0
 
@@ -95,6 +99,8 @@ config = {
 }
 client = OktaClient(config)
 ```
+
+> Using a Python dictionary to hard-code the Okta domain and API token works, but for real projects you should use a more secure way of storing these values. Credentials This library supports a few different configuration sources, covered in the [configuration reference](#configuration-reference) section.
 
 ### Extending the Client
 
@@ -154,6 +160,32 @@ This library should only be used with the Okta management API. To call the [Auth
 > import okta.models as models
 > client = OktaClient({"orgUrl": "https://test.okta.com", "token": "YOUR_API_TOKEN"})
 > ```
+
+### Get and set custom attributes
+
+Custom attributes must first be defined in the Okta profile editor. Then, you can work with custom attributes on a user:
+
+```py
+""" Setting attributes """
+# Creating an instance through a Python Dictionary
+user_profile = models.UserProfile({
+  "firstName": "John",
+  "lastName": "Foe",
+  "email": "John.Foe@okta.com",
+  "login": "John.Foe@okta.com"
+})
+
+# Creating an empty object and using variables
+user_profile = models.UserProfile()
+user_profile.first_name = "John"
+user_profile.last_name = "Doe"
+user_profile.email = "John.Doe@okta.com"
+user_profile.login = "John.Doe@okta.com"
+
+""" Getting attributes from instance """
+user, resp, err = await client.get_user(user.id)
+nick_name = user.profile.nick_name
+```
 
 ### Get a User
 
@@ -219,14 +251,7 @@ updated_user_obj = models.User({"profile": new_profile})
 updated_user, _, err = await client.update_user(user.id, updated_user_obj)
 ```
 
-### Get and set custom attributes
-
-Custom attributes must first be defined in the Okta profile editor. Then, you can work with custom attributes on a user:
-
-```py
-user, resp, err = await client.get_user(user.id)
-nick_name = user.profile.nick_name
-```
+ƒ
 
 ### Remove a User
 
@@ -396,7 +421,9 @@ This library looks for configuration in the following sources:
 2. Environment variables
 3. Configuration explicitly passed to the constructor (see the example in [Getting started](#getting-started))
 
-Higher numbers win. In other words, configuration passed via the constructor will override configuration found in environment variables, which will override configuration in `okta.yaml` (if any), and so on.
+> Only ONE source needs to be provided!
+
+Higher numbers win. In other words, configuration passed via the constructor will OVVERRIDE configuration found in environment variables, which will override configuration in the designated `okta.yaml` files.
 
 ### YAML configuration
 
@@ -412,7 +439,7 @@ okta:
       host: null
       username: null
       password: null
-    token: { apiToken }
+    token: "YOUR_API_TOKEN"
 ```
 
 When you use OAuth 2.0 the full YAML configuration looks like:
@@ -428,7 +455,7 @@ okta:
       username: null
       password: null
     authorizationMode: "PrivateKey"
-    clientId: "{yourClientId}"
+    clientId: "YOUR_CLIENT_ID"
     scopes:
       - scope.1
       - scope.2
