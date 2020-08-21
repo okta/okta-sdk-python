@@ -78,7 +78,7 @@ my_okta_client = OktaClient(config)
 my_okta_client = OktaClient()
 ```
 
-> Using a Python dictionary to hard-code the Okta domain and API token works, but for real projects you should use a more secure way of storing these values. Credentials This library supports a few different configuration sources, covered in the [configuration reference](#configuration-reference) section.
+> Using a Python dictionary to hard-code the Okta domain and API token is encouraged for development; In production, you should use a more secure way of storing these values. This library supports a few different configuration sources, covered in the [configuration reference](#configuration-reference) section.
 
 ### OAuth 2.0
 
@@ -100,7 +100,7 @@ config = {
 client = OktaClient(config)
 ```
 
-> Using a Python dictionary to hard-code the Okta domain and API token works, but for real projects you should use a more secure way of storing these values. Credentials This library supports a few different configuration sources, covered in the [configuration reference](#configuration-reference) section.
+> Using a Python dictionary to hard-code the Okta domain and API token is encouraged for development; In production, you should use a more secure way of storing these values. This library supports a few different configuration sources, covered in the [configuration reference](#configuration-reference) section.
 
 ### Extending the Client
 
