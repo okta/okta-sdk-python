@@ -414,9 +414,9 @@ if resp.has_next:
 
 This library looks for configuration in the following sources:
 
-0. An `okta.yaml` file in a `.okta` folder in the current user's home directory (`~/.okta/okta.yaml` or `%userprofile\.okta\okta.yaml`)
-1. A `.okta.yaml` file in the application or project's root directory
-2. Environment variables
+0. An `okta.yaml` file in a `.okta` folder in the current user's home directory (`~/.okta/okta.yaml` or `%userprofile\.okta\okta.yaml`). See a sample here: [YAML Configuration](#yaml-configuration)
+1. A `.okta.yaml` file in the application or project's root directory. See a sample here: [YAML Configuration](#yaml-configuration)
+2. [Environment variables](#environment-variables)
 3. Configuration explicitly passed to the constructor (see the example in [Getting started](#getting-started))
 
 > Only ONE source needs to be provided!
@@ -438,6 +438,9 @@ okta:
       username: null
       password: null
     token: "YOUR_API_TOKEN"
+    requestTimeout: 0 # seconds
+    rateLimit:
+      maxRetries: 4
 ```
 
 When you use OAuth 2.0 the full YAML configuration looks like:
@@ -470,11 +473,27 @@ okta:
 
 ### Environment variables
 
-Each one of the configuration values above can be turned into an environment variable name with the `_` (underscore) character and UPPERCASE characters:
+Each one of the configuration values above can be turned into an environment variable name with the `_` (underscore) character and UPPERCASE characters. The following are accepted:
 
-- `OKTA_CLIENT_CONNECTIONTIMEOUT`
 - `OKTA_CLIENT_TOKEN`
-- and so on
+- `OKTA_CLIENT_AUTHORIZATION_MODE`
+- `OKTA_CLIENT_ORG_URL`
+- `OKTA_CLIENT_TOKEN`
+- `OKTA_CLIENT_CLIENT_ID`
+- `OKTA_CLIENT_SCOPES`
+- `OKTA_CLIENT_PRIVATE_KEY`
+- `OKTA_CLIENT_USER_AGENT`
+- `OKTA_CLIENT_CONNECTIONTIMEOUT`
+- `OKTA_CLIENT_REQUESTTIMEOUT`
+- `OKTA_CLIENT_CACHE_ENABLED`
+- `OKTA_CLIENT_CACHE_DEFAULT_TTI`
+- `OKTA_CLIENT_CACHE_DEFAULT_TTL`
+- `OKTA_CLIENT_PROXY_PORT`
+- `OKTA_CLIENT_PROXY_HOST`
+- `OKTA_CLIENT_PROXY_USERNAME`
+- `OKTA_CLIENT_PROXY_PASSWORD`
+- `OKTA_CLIENT_RATE_LIMIT_MAX_RETRIES`
+- `OKTA_TESTING_TESTING_DISABLE_HTTPS_CHECK`
 
 ## Rate Limiting
 
