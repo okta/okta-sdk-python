@@ -1,0 +1,25 @@
+language: python
+python:
+  - "3.6"
+  - "3.7"
+  - "3.8"
+install:
+  - pip install -r requirements.txt
+jobs:
+  include:
+    - stage: "Tests"
+      script:
+        - echo "Running tests..."
+    - name: "Unit Tests"
+      script: 
+        - echo "Unit tests..."
+        - pytest tests/unit/
+    - name: "Integration Tests" 
+      script: 
+        - echo "Integration tests..."
+        - pytest tests/integration/
+    - stage: "Code Style Test"
+      name: "Flake8 Check"
+      script: 
+        - echo "Code Style check..."
+        - "flake8 okta/"
