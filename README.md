@@ -407,9 +407,16 @@ Example of listing users 1 at a time:
 query_parameters = {"limit": "1"}
 users, resp, err = await client.list_users(query_parameters)
 
-# Do something with your users until you run out of users to iterate
+# Check if there more pages follow
 if resp.has_next:
-  next_user, error = await resp.next()  # Returns list of 1 user
+  next_user, error = await resp.next()  # Returns list of 1 user after the last retrieved user
+
+# Iterate through all of the rest of the pages
+while resp.has_next():
+  next_usr_list, err = await resp.next()
+  # Do stuff with users in next_usr_list
+
+print(resp.has_next()) # False
 ```
 
 ## Configuration reference
