@@ -430,7 +430,7 @@ This library looks for configuration in the following sources:
 
 > Only ONE source needs to be provided!
 
-Higher numbers win. In other words, configuration passed via the constructor will OVVERRIDE configuration found in environment variables, which will override configuration in the designated `okta.yaml` files.
+Higher numbers win. In other words, configuration passed via the constructor will OVERRIDE configuration found in environment variables, which will override configuration in the designated `okta.yaml` files.
 
 ### YAML configuration
 
