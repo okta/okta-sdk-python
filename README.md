@@ -149,6 +149,8 @@ These examples will help you understand how to use this library.
 
 Once you initialize a `client`, you can call methods to make requests to the Okta API. The client uses **asynchronous** methods to operate. Most methods are grouped by the API endpoint they belong to. For example, methods that call the [Users API][users-api-docs] are organized under [the User resource client (okta.resource_clients.user_client.py)][users-client].
 
+> Asynchronous I/O is fairly new to Python after making its debut in Python 3.5. It's powered by the `asyncio` library which provides avenues to produce concurrent code. This allows developers to define `async` functions and `await` asynchronous calls within them. For more information, you can check out the Python docs [here][python-docs].
+
 ### Authenticate a User
 
 This library should only be used with the Okta management API. To call the [Authentication API][authn-api], you should construct your own HTTP requests.
@@ -539,3 +541,4 @@ We're happy to accept contributions and PRs! Please see the [Contribution Guide]
 [oauth-guides]: https://developer.okta.com/docs/guides/implement-oauth-for-okta/overview/
 [dev-okta-signup]: https://developer.okta.com/signup
 [api-token-docs]: https://developer.okta.com/docs/api/getting_started/getting_a_token
+[python-docs]: https://docs.python.org/3/library/asyncio.html
