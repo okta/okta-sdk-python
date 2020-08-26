@@ -8,8 +8,8 @@ python:
 install:
   - pip install -U -r requirements.txt
 
-script: 
-  - echo $(which pytest) && pytest
+script:
+  - echo "Running tests in job stages..."
 
 jobs:
   include:
