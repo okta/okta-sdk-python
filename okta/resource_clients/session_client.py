@@ -52,7 +52,10 @@ class SessionClient(APIClient):
             /api/v1/sessions
             """)
 
-        body = create_session_request.as_dict()
+        if isinstance(create_session_request, dict):
+            body = create_session_request
+        else:
+            body = create_session_request.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"

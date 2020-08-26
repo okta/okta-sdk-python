@@ -90,7 +90,10 @@ class UserTypeClient(APIClient):
             /api/v1/meta/types/user
             """)
 
-        body = user_type.as_dict()
+        if isinstance(user_type, dict):
+            body = user_type
+        else:
+            body = user_type.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -209,7 +212,10 @@ class UserTypeClient(APIClient):
             /api/v1/meta/types/user/{typeId}
             """)
 
-        body = user_type.as_dict()
+        if isinstance(user_type, dict):
+            body = user_type
+        else:
+            body = user_type.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -253,7 +259,10 @@ class UserTypeClient(APIClient):
             /api/v1/meta/types/user/{typeId}
             """)
 
-        body = user_type.as_dict()
+        if isinstance(user_type, dict):
+            body = user_type
+        else:
+            body = user_type.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"

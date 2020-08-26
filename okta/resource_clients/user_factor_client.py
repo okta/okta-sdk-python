@@ -107,7 +107,10 @@ class UserFactorClient(APIClient):
             encoded_query_params = urlencode(query_params)
             api_url += f"/?{encoded_query_params}"
 
-        body = user_factor.as_dict()
+        if isinstance(user_factor, dict):
+            body = user_factor
+        else:
+            body = user_factor.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -315,7 +318,10 @@ class UserFactorClient(APIClient):
                 /activate
             """)
 
-        body = activate_factor_request.as_dict()
+        if isinstance(activate_factor_request, dict):
+            body = activate_factor_request
+        else:
+            body = activate_factor_request.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -409,7 +415,10 @@ class UserFactorClient(APIClient):
             encoded_query_params = urlencode(query_params)
             api_url += f"/?{encoded_query_params}"
 
-        body = verify_factor_request.as_dict()
+        if isinstance(verify_factor_request, dict):
+            body = verify_factor_request
+        else:
+            body = verify_factor_request.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"

@@ -138,7 +138,10 @@ class UserClient(APIClient):
             encoded_query_params = urlencode(query_params)
             api_url += f"/?{encoded_query_params}"
 
-        body = create_user_request.as_dict()
+        if isinstance(create_user_request, dict):
+            body = create_user_request
+        else:
+            body = create_user_request.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -304,7 +307,10 @@ class UserClient(APIClient):
             encoded_query_params = urlencode(query_params)
             api_url += f"/?{encoded_query_params}"
 
-        body = user.as_dict()
+        if isinstance(user, dict):
+            body = user
+        else:
+            body = user.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -354,7 +360,10 @@ class UserClient(APIClient):
             encoded_query_params = urlencode(query_params)
             api_url += f"/?{encoded_query_params}"
 
-        body = user.as_dict()
+        if isinstance(user, dict):
+            body = user
+        else:
+            body = user.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -746,7 +755,10 @@ class UserClient(APIClient):
             encoded_query_params = urlencode(query_params)
             api_url += f"/?{encoded_query_params}"
 
-        body = change_password_request.as_dict()
+        if isinstance(change_password_request, dict):
+            body = change_password_request
+        else:
+            body = change_password_request.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -795,7 +807,10 @@ class UserClient(APIClient):
                 /change_recovery_question
             """)
 
-        body = user_credentials.as_dict()
+        if isinstance(user_credentials, dict):
+            body = user_credentials
+        else:
+            body = user_credentials.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -891,7 +906,10 @@ class UserClient(APIClient):
             encoded_query_params = urlencode(query_params)
             api_url += f"/?{encoded_query_params}"
 
-        body = user_credentials.as_dict()
+        if isinstance(user_credentials, dict):
+            body = user_credentials
+        else:
+            body = user_credentials.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1735,7 +1753,10 @@ class UserClient(APIClient):
             encoded_query_params = urlencode(query_params)
             api_url += f"/?{encoded_query_params}"
 
-        body = assign_role_request.as_dict()
+        if isinstance(assign_role_request, dict):
+            body = assign_role_request
+        else:
+            body = assign_role_request.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
