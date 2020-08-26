@@ -30,11 +30,12 @@ class SmsTemplateTranslations(
 
     def __init__(self, config=None):
         super().__init__(config)
-        pass
+        if config:
+            for lang in config.keys():
+                setattr(self, lang, config[lang])
 
     def request_format(self):
         parent_req_format = super().request_format()
-        current_obj_format = {
-        }
+        current_obj_format = vars(self)
         parent_req_format.update(current_obj_format)
         return parent_req_format
