@@ -86,7 +86,10 @@ class EventHookClient(APIClient):
             /api/v1/eventHooks
             """)
 
-        body = event_hook.as_dict()
+        if isinstance(event_hook, dict):
+            body = event_hook
+        else:
+            body = event_hook.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -199,7 +202,10 @@ class EventHookClient(APIClient):
             /api/v1/eventHooks/{eventHookId}
             """)
 
-        body = event_hook.as_dict()
+        if isinstance(event_hook, dict):
+            body = event_hook
+        else:
+            body = event_hook.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"

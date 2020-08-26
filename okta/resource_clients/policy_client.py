@@ -107,7 +107,10 @@ class PolicyClient(APIClient):
             encoded_query_params = urlencode(query_params)
             api_url += f"/?{encoded_query_params}"
 
-        body = policy.as_dict()
+        if isinstance(policy, dict):
+            body = policy
+        else:
+            body = policy.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -226,7 +229,10 @@ class PolicyClient(APIClient):
             /api/v1/policies/{policyId}
             """)
 
-        body = policy.as_dict()
+        if isinstance(policy, dict):
+            body = policy
+        else:
+            body = policy.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -377,7 +383,10 @@ class PolicyClient(APIClient):
             /api/v1/policies/{policyId}/rules
             """)
 
-        body = policy_rule.as_dict()
+        if isinstance(policy_rule, dict):
+            body = policy_rule
+        else:
+            body = policy_rule.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -494,7 +503,10 @@ class PolicyClient(APIClient):
             /api/v1/policies/{policyId}/rules/{ruleId}
             """)
 
-        body = policy_rule.as_dict()
+        if isinstance(policy_rule, dict):
+            body = policy_rule
+        else:
+            body = policy_rule.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"

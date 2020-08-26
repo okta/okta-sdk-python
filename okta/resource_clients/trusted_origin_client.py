@@ -95,7 +95,10 @@ class TrustedOriginClient(APIClient):
             /api/v1/trustedOrigins
             """)
 
-        body = trusted_origin.as_dict()
+        if isinstance(trusted_origin, dict):
+            body = trusted_origin
+        else:
+            body = trusted_origin.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -208,7 +211,10 @@ class TrustedOriginClient(APIClient):
             /api/v1/trustedOrigins/{trustedOriginId}
             """)
 
-        body = trusted_origin.as_dict()
+        if isinstance(trusted_origin, dict):
+            body = trusted_origin
+        else:
+            body = trusted_origin.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"

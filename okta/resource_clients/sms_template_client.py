@@ -96,7 +96,10 @@ class SmsTemplateClient(APIClient):
             /api/v1/templates/sms
             """)
 
-        body = sms_template.as_dict()
+        if isinstance(sms_template, dict):
+            body = sms_template
+        else:
+            body = sms_template.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -212,7 +215,10 @@ class SmsTemplateClient(APIClient):
             /api/v1/templates/sms/{templateId}
             """)
 
-        body = sms_template.as_dict()
+        if isinstance(sms_template, dict):
+            body = sms_template
+        else:
+            body = sms_template.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -256,7 +262,10 @@ class SmsTemplateClient(APIClient):
             /api/v1/templates/sms/{templateId}
             """)
 
-        body = sms_template.as_dict()
+        if isinstance(sms_template, dict):
+            body = sms_template
+        else:
+            body = sms_template.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"

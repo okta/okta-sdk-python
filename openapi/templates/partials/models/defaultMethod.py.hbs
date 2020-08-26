@@ -19,7 +19,10 @@
         {{#if (eq operation.bodyFormat "binary")}}
         body = HTTPClient.format_binary_data(string)
         {{else}}
-        body = {{snakeCase operation.bodyModel}}.as_dict()
+        if isinstance({{snakeCase operation.bodyModel}}, dict):
+            body = {{snakeCase operation.bodyModel}}
+        else:
+            body = {{snakeCase operation.bodyModel}}.as_dict()
         {{/if}}
         headers = {
             "Accept": "{{operation.produces.[0]}}",

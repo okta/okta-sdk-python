@@ -49,6 +49,11 @@ class {{pascalCase model.modelName}}(
 
     def __init__(self, config=None):
         super().__init__(config)
+        {{#if (eq model.modelName "SmsTemplateTranslations")}}
+        if config:
+            for lang in config.keys():
+                setattr(self, lang, config[lang])
+        {{else}}
         {{#if (gt model.properties.length 0)}}
         if config:
             {{#if (ne model.signOnMode undefined)}}
@@ -118,14 +123,19 @@ class {{pascalCase model.modelName}}(
         {{else}}
         pass
         {{/if}}
+        {{/if}}
 
     def request_format(self):
         parent_req_format = super().request_format()
+        {{#if (eq model.modelName "SmsTemplateTranslations")}}
+        current_obj_format = vars(self)
+        {{else}}
         current_obj_format = {
             {{#each model.properties as |prop|}}
             "{{prop.propertyName}}": self.{{snakeCase prop.propertyName}}{{#unless @last}},{{/unless}}
             {{/each}}
         }
+        {{/if}}
         parent_req_format.update(current_obj_format)
         return parent_req_format
 {{/if}}
