@@ -107,7 +107,10 @@ class AuthorizationServerClient(APIClient):
             /api/v1/authorizationServers
             """)
 
-        body = authorization_server.as_dict()
+        if isinstance(authorization_server, dict):
+            body = authorization_server
+        else:
+            body = authorization_server.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -220,7 +223,10 @@ class AuthorizationServerClient(APIClient):
             /api/v1/authorizationServers/{authServerId}
             """)
 
-        body = authorization_server.as_dict()
+        if isinstance(authorization_server, dict):
+            body = authorization_server
+        else:
+            body = authorization_server.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -304,7 +310,10 @@ class AuthorizationServerClient(APIClient):
             /api/v1/authorizationServers/{authServerId}/claims
             """)
 
-        body = o_auth_2_claim.as_dict()
+        if isinstance(o_auth_2_claim, dict):
+            body = o_auth_2_claim
+        else:
+            body = o_auth_2_claim.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -423,7 +432,10 @@ class AuthorizationServerClient(APIClient):
                 /{claimId}
             """)
 
-        body = o_auth_2_claim.as_dict()
+        if isinstance(o_auth_2_claim, dict):
+            body = o_auth_2_claim
+        else:
+            body = o_auth_2_claim.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -713,7 +725,10 @@ class AuthorizationServerClient(APIClient):
                 /credentials/lifecycle/keyRotate
             """)
 
-        body = jwk_use.as_dict()
+        if isinstance(jwk_use, dict):
+            body = jwk_use
+        else:
+            body = jwk_use.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -867,7 +882,10 @@ class AuthorizationServerClient(APIClient):
                 /policies
             """)
 
-        body = policy.as_dict()
+        if isinstance(policy, dict):
+            body = policy
+        else:
+            body = policy.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -984,7 +1002,10 @@ class AuthorizationServerClient(APIClient):
                 /policies/{policyId}
             """)
 
-        body = policy.as_dict()
+        if isinstance(policy, dict):
+            body = policy
+        else:
+            body = policy.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1075,7 +1096,10 @@ class AuthorizationServerClient(APIClient):
             /api/v1/authorizationServers/{authServerId}/scopes
             """)
 
-        body = o_auth_2_scope.as_dict()
+        if isinstance(o_auth_2_scope, dict):
+            body = o_auth_2_scope
+        else:
+            body = o_auth_2_scope.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1194,7 +1218,10 @@ class AuthorizationServerClient(APIClient):
                 /{scopeId}
             """)
 
-        body = o_auth_2_scope.as_dict()
+        if isinstance(o_auth_2_scope, dict):
+            body = o_auth_2_scope
+        else:
+            body = o_auth_2_scope.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"

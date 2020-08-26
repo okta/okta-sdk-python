@@ -122,7 +122,10 @@ class ApplicationClient(APIClient):
             encoded_query_params = urlencode(query_params)
             api_url += f"/?{encoded_query_params}"
 
-        body = application.as_dict()
+        if isinstance(application, dict):
+            body = application
+        else:
+            body = application.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -242,7 +245,10 @@ class ApplicationClient(APIClient):
             /api/v1/apps/{appId}
             """)
 
-        body = application.as_dict()
+        if isinstance(application, dict):
+            body = application
+        else:
+            body = application.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -329,7 +335,10 @@ class ApplicationClient(APIClient):
             /api/v1/apps/{appId}/credentials/csrs
             """)
 
-        body = csr_metadata.as_dict()
+        if isinstance(csr_metadata, dict):
+            body = csr_metadata
+        else:
+            body = csr_metadata.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -453,7 +462,10 @@ class ApplicationClient(APIClient):
                 /lifecycle/publish
             """)
 
-        body = string.as_dict()
+        if isinstance(string, dict):
+            body = string
+        else:
+            body = string.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/x-x509-ca-cert"
@@ -549,7 +561,10 @@ class ApplicationClient(APIClient):
                 /lifecycle/publish
             """)
 
-        body = string.as_dict()
+        if isinstance(string, dict):
+            body = string
+        else:
+            body = string.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/pkix-cert"
@@ -913,7 +928,10 @@ class ApplicationClient(APIClient):
             /api/v1/apps/{appId}/grants
             """)
 
-        body = o_auth_2_scope_consent_grant.as_dict()
+        if isinstance(o_auth_2_scope_consent_grant, dict):
+            body = o_auth_2_scope_consent_grant
+        else:
+            body = o_auth_2_scope_consent_grant.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1168,7 +1186,10 @@ class ApplicationClient(APIClient):
             /api/v1/apps/{appId}/groups/{groupId}
             """)
 
-        body = application_group_assignment.as_dict()
+        if isinstance(application_group_assignment, dict):
+            body = application_group_assignment
+        else:
+            body = application_group_assignment.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1495,7 +1516,10 @@ class ApplicationClient(APIClient):
             /api/v1/apps/{appId}/users
             """)
 
-        body = app_user.as_dict()
+        if isinstance(app_user, dict):
+            body = app_user
+        else:
+            body = app_user.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1625,7 +1649,10 @@ class ApplicationClient(APIClient):
             /api/v1/apps/{appId}/users/{userId}
             """)
 
-        body = app_user.as_dict()
+        if isinstance(app_user, dict):
+            body = app_user
+        else:
+            body = app_user.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"

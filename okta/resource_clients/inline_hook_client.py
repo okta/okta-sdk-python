@@ -94,7 +94,10 @@ class InlineHookClient(APIClient):
             /api/v1/inlineHooks
             """)
 
-        body = inline_hook.as_dict()
+        if isinstance(inline_hook, dict):
+            body = inline_hook
+        else:
+            body = inline_hook.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -213,7 +216,10 @@ class InlineHookClient(APIClient):
             /api/v1/inlineHooks/{inlineHookId}
             """)
 
-        body = inline_hook.as_dict()
+        if isinstance(inline_hook, dict):
+            body = inline_hook
+        else:
+            body = inline_hook.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -262,7 +268,10 @@ class InlineHookClient(APIClient):
             /api/v1/inlineHooks/{inlineHookId}/execute
             """)
 
-        body = inline_hook_payload.as_dict()
+        if isinstance(inline_hook_payload, dict):
+            body = inline_hook_payload
+        else:
+            body = inline_hook_payload.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
