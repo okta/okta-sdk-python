@@ -399,7 +399,7 @@ user = response.get_type()(response_body)
 
 ## Pagination
 
-If your request comes back with more than the default or set limit, you can request the next page.
+If your request comes back with more than the default or set limit (`resp.has_next() == True`), you can request the next page.
 
 Example of listing users 1 at a time:
 
@@ -417,6 +417,10 @@ while resp.has_next():
   # Do stuff with users in next_usr_list
 
 print(resp.has_next()) # False
+try:
+  await resp.next()
+except StopAsyncIteration:
+  # Handle Exception raised
 ```
 
 ## Configuration reference
