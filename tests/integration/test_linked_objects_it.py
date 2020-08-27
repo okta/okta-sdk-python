@@ -15,7 +15,7 @@ class TestLinkedObjectsResource:
     @pytest.mark.asyncio
     async def test_add_get_linked_object(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Add Linked Object definition
         linked_object_model = models.LinkedObject({
@@ -90,7 +90,7 @@ class TestLinkedObjectsResource:
     @pytest.mark.asyncio
     async def test_get_all_linked_objects(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Add Linked Object definition
         linked_object_model_1 = models.LinkedObject({
@@ -161,7 +161,7 @@ class TestLinkedObjectsResource:
     @pytest.mark.asyncio
     async def test_delete_linked_object(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Add Linked Object definition
         linked_object_model = models.LinkedObject({

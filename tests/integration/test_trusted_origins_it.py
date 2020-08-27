@@ -15,7 +15,7 @@ class TestTrustedOriginsResource:
     @pytest.mark.asyncio
     async def test_create_get_origin(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Trusted Origin
         TO_NAME = f"{TestTrustedOriginsResource.SDK_PREFIX}_test_TO"
@@ -53,7 +53,7 @@ class TestTrustedOriginsResource:
     @pytest.mark.asyncio
     async def test_list_origins(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Trusted Origin
         TO_NAME = f"{TestTrustedOriginsResource.SDK_PREFIX}_test_TO"
@@ -93,7 +93,7 @@ class TestTrustedOriginsResource:
     @pytest.mark.asyncio
     async def test_delete_origin(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Trusted Origin
         TO_NAME = f"{TestTrustedOriginsResource.SDK_PREFIX}_test_TO"
@@ -139,7 +139,7 @@ class TestTrustedOriginsResource:
     @pytest.mark.asyncio
     async def test_update_origin(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Trusted Origin
         TO_NAME = f"{TestTrustedOriginsResource.SDK_PREFIX}_test_TO"
@@ -204,7 +204,7 @@ class TestTrustedOriginsResource:
     @pytest.mark.asyncio
     async def test_activate_deactivate_origin(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Trusted Origin
         TO_NAME = f"{TestTrustedOriginsResource.SDK_PREFIX}_test_TO"

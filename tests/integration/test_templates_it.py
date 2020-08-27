@@ -15,7 +15,7 @@ class TestTemplatesResource:
     @pytest.mark.asyncio
     async def test_create_get_sms_template(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create SMS Template
         sms_translations = models.SmsTemplateTranslations()
@@ -59,7 +59,7 @@ class TestTemplatesResource:
     @pytest.mark.asyncio
     async def test_create_list_sms_templates(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create SMS Template
         sms_translations = models.SmsTemplateTranslations()
@@ -102,7 +102,7 @@ class TestTemplatesResource:
     @pytest.mark.asyncio
     async def test_update_sms_template(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create SMS Template
         sms_translations = models.SmsTemplateTranslations()
@@ -165,7 +165,7 @@ class TestTemplatesResource:
     @pytest.mark.asyncio
     async def test_partial_update_sms_template(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create SMS Template
         sms_translations = models.SmsTemplateTranslations()
@@ -238,7 +238,7 @@ class TestTemplatesResource:
     @pytest.mark.asyncio
     async def test_delete_sms_template(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create SMS Template
         sms_translations = models.SmsTemplateTranslations()

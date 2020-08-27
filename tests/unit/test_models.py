@@ -33,7 +33,7 @@ Testing Okta Models Instantiation in different scenarios
                           ])
 async def test_create_group_different_inputs(fs, group_obj):
     # Instantiate Mock Client
-    client = MockOktaClient()
+    client = MockOktaClient(fs)
 
     # Create Group
     group, _, err = await client.create_group(group_obj)

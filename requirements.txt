@@ -8,8 +8,8 @@ pycryptodome
 python-jose
 pytest
 pytest-asyncio
-pytest-vcr
 pytest-mock
+pytest-recording
 pyfakefs
 aenum
 pydash

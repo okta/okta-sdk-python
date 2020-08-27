@@ -13,7 +13,7 @@ class TestFeaturesResource:
     @pytest.mark.asyncio
     async def test_list_features(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # List
         features, _, err = await client.list_features()
@@ -25,7 +25,7 @@ class TestFeaturesResource:
     @pytest.mark.asyncio
     async def test_get_feature(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # List
         features, _, err = await client.list_features()
@@ -46,7 +46,7 @@ class TestFeaturesResource:
     @pytest.mark.asyncio
     async def test_list_feature_dependencies(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # List
         features, _, err = await client.list_features()
@@ -66,7 +66,7 @@ class TestFeaturesResource:
     @pytest.mark.asyncio
     async def test_list_feature_dependents(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # List
         features, _, err = await client.list_features()
@@ -86,7 +86,7 @@ class TestFeaturesResource:
     @pytest.mark.asyncio
     async def test_update_feature_lifecycle(self):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # List
         features, _, err = await client.list_features()

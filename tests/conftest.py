@@ -1,10 +1,21 @@
 import pytest
 import re
+import os
 
 TEST_OKTA_URL = "test"
 B_TEST_OKTA_URL = b"test"
 URL_REGEX = r"dev-\d+"
 B_URL_REGEX = rb"dev-\d+"
+PYTEST_MOCK_CLIENT = "pytest_mock_client"
+PYTEST_RE_RECORD = "record_mode"
+
+
+def pytest_generate_tests(metafunc):
+    ''' just to attach the cmd-line args to a test-class that needs them '''
+    record_mode = metafunc.config.getoption(PYTEST_RE_RECORD)
+    # check if this function is in a test-class that needs the cmd-line args
+    if record_mode == "rewrite":
+        os.environ[PYTEST_MOCK_CLIENT] = "1"
 
 
 @pytest.fixture(scope='module')
@@ -47,3 +58,14 @@ def before_record_response(response):
             URL_REGEX, TEST_OKTA_URL, current)
 
     return response
+
+
+@pytest.fixture(scope="session", autouse=True)
+def cleanup(request):
+    """
+    To run at the end of a test run
+    """
+    def clean_up_env_vars():
+        if PYTEST_MOCK_CLIENT in os.environ:
+            del os.environ[PYTEST_MOCK_CLIENT]
+    request.addfinalizer(clean_up_env_vars)

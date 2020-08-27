@@ -3,7 +3,6 @@ from tests.mocks import MockOktaClient
 from http import HTTPStatus
 from okta.errors.okta_api_error import OktaAPIError
 import okta.models as models
-from okta.client import Client
 
 
 class TestIdentityProvidersResource:
@@ -16,7 +15,7 @@ class TestIdentityProvidersResource:
     @pytest.mark.asyncio
     async def test_add_get_generic_idp(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create IDP
         ISSUER_URL = "https://idp.example.com"
@@ -156,7 +155,7 @@ class TestIdentityProvidersResource:
     @pytest.mark.asyncio
     async def test_add_get_facebook_idp(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create IDP
         idp_model = models.IdentityProvider({
@@ -247,7 +246,7 @@ class TestIdentityProvidersResource:
     @pytest.mark.asyncio
     async def test_add_get_linkedin_idp(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create IDP
         idp_model = models.IdentityProvider({
@@ -338,7 +337,7 @@ class TestIdentityProvidersResource:
     @pytest.mark.asyncio
     async def test_list_idps(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create IDP
         ISSUER_URL = "https://idp.example.com"
@@ -448,7 +447,7 @@ class TestIdentityProvidersResource:
     @pytest.mark.asyncio
     async def test_activate_deactivate_idp(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create IDP
         ISSUER_URL = "https://idp.example.com"
@@ -584,7 +583,7 @@ class TestIdentityProvidersResource:
     @pytest.mark.asyncio
     async def test_delete_idp(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create IDP
         ISSUER_URL = "https://idp.example.com"
@@ -702,7 +701,7 @@ class TestIdentityProvidersResource:
     @pytest.mark.asyncio
     async def test_update_idp(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create IDP
         ISSUER_URL = "https://idp.example.com"
@@ -829,7 +828,7 @@ class TestIdentityProvidersResource:
     @pytest.mark.asyncio
     async def test_create_get_key(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Key
         key = "MIIDnjCCAoagAwIBAgIGAVG3MN+PMA0GCSqGSIb3DQEBBQUAMIGPMQswCQYDV\
@@ -874,12 +873,11 @@ class TestIdentityProvidersResource:
         _, err = await client.delete_identity_provider_key(created_key.kid)
         assert err is None
 
-    # @pytest.mark.vcr()
+    @pytest.mark.vcr()
     @pytest.mark.asyncio
-    async def test_list_keys(self):
+    async def test_list_keys(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
-        client = Client()
+        client = MockOktaClient(fs)
 
         # Create Key
         key = "MIIDnjCCAoagAwIBAgIGAVG3MN+PMA0GCSqGSIb3DQEBBQUAMIGPMQswCQYDV\
@@ -927,7 +925,7 @@ class TestIdentityProvidersResource:
     @pytest.mark.asyncio
     async def test_delete_key(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Key
         key = "MIIDnjCCAoagAwIBAgIGAVG3MN+PMA0GCSqGSIb3DQEBBQUAMIGPMQswCQYDV\
@@ -976,7 +974,7 @@ class TestIdentityProvidersResource:
     @pytest.mark.asyncio
     async def test_generate_get_idp_signing_key(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create IDP
         idp_model = models.IdentityProvider({
@@ -1058,7 +1056,7 @@ class TestIdentityProvidersResource:
     @pytest.mark.asyncio
     async def test_list_idp_signing_keys(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create IDP
         idp_model = models.IdentityProvider({
@@ -1149,7 +1147,7 @@ class TestIdentityProvidersResource:
     @pytest.mark.asyncio
     async def test_clone_idp_signing_key(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create IDPs
         idp_model = models.IdentityProvider({
@@ -1297,7 +1295,7 @@ class TestIdentityProvidersResource:
     @pytest.mark.asyncio
     async def test_generate_get_csr(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create IDP
         idp_model = models.IdentityProvider({
@@ -1391,7 +1389,7 @@ class TestIdentityProvidersResource:
     @pytest.mark.asyncio
     async def test_revoke_csr(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create IDP
         idp_model = models.IdentityProvider({

@@ -15,7 +15,7 @@ class TestLogEventsResource:
     @pytest.mark.skip
     async def test_get_logs(self):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
@@ -55,7 +55,7 @@ class TestLogEventsResource:
     @pytest.mark.skip
     async def test_get_logs_polling(self):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
@@ -104,7 +104,7 @@ class TestLogEventsResource:
     @pytest.mark.skip
     async def test_get_logs_bounded(self):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
