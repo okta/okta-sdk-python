@@ -3,9 +3,14 @@ aiohttp
 flatdict
 pyyaml
 xmltodict
-yarl==1.3.0; python_version=="3.5"
+yarl
 pycryptodome
 python-jose
+aenum
+pydash
+flake8
+
+# Testing dependencies
 pytest
 pytest-asyncio
 pytest-mock

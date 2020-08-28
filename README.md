@@ -531,6 +531,7 @@ In most cases, you won't need to build the SDK from source. If you want to build
 
 - Clone the repo
 - Run `python setup.py build` from the root of the project (assuming Python is installed)
+- Ensure tests run succesfully. Install `tox` if not installed already using: `pip install tox`. Run tests using `tox` in the root directory of the project.
 
 ## Contributing
 
