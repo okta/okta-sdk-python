@@ -15,7 +15,7 @@ class TestAuthorizationServerResource:
     @pytest.mark.asyncio
     async def test_create_auth_server(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Auth Server
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_aaPeZ"
@@ -48,7 +48,7 @@ class TestAuthorizationServerResource:
     @pytest.mark.asyncio
     async def test_list_auth_servers(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Auth Server
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_aaPeZ"
@@ -91,7 +91,7 @@ class TestAuthorizationServerResource:
     @pytest.mark.asyncio
     async def test_get_created_auth_server(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Auth Server
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_aaPeZ"
@@ -135,7 +135,7 @@ class TestAuthorizationServerResource:
     @pytest.mark.asyncio
     async def test_update_auth_server(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Auth Server
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abPeZ"
@@ -187,7 +187,7 @@ class TestAuthorizationServerResource:
     @pytest.mark.asyncio
     async def test_update_deactivate_delete_server(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Auth Server
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abCeZ"
@@ -243,7 +243,7 @@ class TestAuthorizationServerResource:
     @pytest.mark.asyncio
     async def test_activate_server(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Auth Server
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abCeZ"
@@ -308,7 +308,7 @@ class TestAuthorizationServerResource:
     @pytest.mark.asyncio
     async def test_list_auth_server_policies(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Auth Server
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abDeZ"
@@ -384,7 +384,7 @@ class TestAuthorizationServerResource:
     @pytest.mark.asyncio
     async def test_get_auth_server_policy(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Auth Server
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abDfZ"
@@ -460,7 +460,7 @@ class TestAuthorizationServerResource:
     @pytest.mark.asyncio
     async def test_update_auth_server_policy(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Auth Server
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abDfZ"
@@ -541,7 +541,7 @@ class TestAuthorizationServerResource:
     @pytest.mark.asyncio
     async def test_delete_auth_server_policy(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Auth Server
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abDfZ"
@@ -629,7 +629,7 @@ class TestAuthorizationServerResource:
     @pytest.mark.asyncio
     async def test_create_get_oauth2_scope(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Auth Server
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abDfZ"
@@ -687,7 +687,7 @@ class TestAuthorizationServerResource:
     @pytest.mark.asyncio
     async def test_list_oauth2_scopes(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Auth Server
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abDgZ"
@@ -747,7 +747,7 @@ class TestAuthorizationServerResource:
     @pytest.mark.asyncio
     async def test_update_oauth2_scope(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Auth Server
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abDfZ"
@@ -815,7 +815,7 @@ class TestAuthorizationServerResource:
     @pytest.mark.asyncio
     async def test_delete_oauth2_scope(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Auth Server
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abDfZ"
@@ -883,7 +883,7 @@ class TestAuthorizationServerResource:
     @pytest.mark.asyncio
     async def test_create_get_oauth2_claim(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Auth Server
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abDfZ"
@@ -951,7 +951,7 @@ class TestAuthorizationServerResource:
     @pytest.mark.asyncio
     async def test_list_oauth2_claims(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Auth Server
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abDfZ"
@@ -1019,7 +1019,7 @@ class TestAuthorizationServerResource:
     @pytest.mark.asyncio
     async def test_update_oauth2_claim(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Auth Server
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abDfZ"
@@ -1103,7 +1103,7 @@ class TestAuthorizationServerResource:
     @pytest.mark.asyncio
     async def test_delete_oauth2_claim(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Auth Server
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abDfZ"
@@ -1179,7 +1179,7 @@ class TestAuthorizationServerResource:
     @pytest.mark.asyncio
     async def test_list_auth_server_keys(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Auth Server
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abDfZ"
@@ -1221,7 +1221,7 @@ class TestAuthorizationServerResource:
     @pytest.mark.asyncio
     async def test_rotate_auth_server_keys(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Auth Server
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abDfZ"

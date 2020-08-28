@@ -2,7 +2,7 @@ import pytest
 import okta.models as models
 import time
 from datetime import datetime
-from tests.mocks import MockOktaClient as Client
+from tests.mocks import MockOktaClient
 from okta.errors.okta_api_error import OktaAPIError
 from okta.constants import DATETIME_FORMAT
 
@@ -16,7 +16,7 @@ class TestUsersResource:
     @pytest.mark.asyncio
     async def test_create_get_user(self, fs):
         # Instantiate Mock Client
-        test_client = Client()
+        test_client = MockOktaClient(fs)
 
         # Create Password
         password = models.PasswordCredential({
@@ -75,7 +75,7 @@ class TestUsersResource:
     @pytest.mark.asyncio
     async def test_activate_user(self, fs):
         # Instantiate Mock Client
-        test_client = Client()
+        test_client = MockOktaClient(fs)
 
         # Create Password
         password = models.PasswordCredential({
@@ -132,7 +132,7 @@ class TestUsersResource:
     @pytest.mark.asyncio
     async def test_update_user_profile(self, fs):
         # Instantiate Mock Client
-        test_client = Client()
+        test_client = MockOktaClient(fs)
 
         # Create Password
         password = models.PasswordCredential({
@@ -189,7 +189,7 @@ class TestUsersResource:
     @pytest.mark.asyncio
     async def test_suspend_user(self, fs):
         # Instantiate Mock Client
-        test_client = Client()
+        test_client = MockOktaClient(fs)
 
         # Create Password
         password = models.PasswordCredential({
@@ -252,7 +252,7 @@ class TestUsersResource:
     @pytest.mark.asyncio
     async def test_change_user_password(self, fs):
         # Instantiate Mock Client
-        test_client = Client()
+        test_client = MockOktaClient(fs)
 
         # Create Password
         password = models.PasswordCredential({
@@ -317,7 +317,7 @@ class TestUsersResource:
     @pytest.mark.asyncio
     async def test_get_reset_password_link_for_user(self, fs):
         # Instantiate Mock Client
-        test_client = Client()
+        test_client = MockOktaClient(fs)
 
         # Create Password
         password = models.PasswordCredential({
@@ -364,7 +364,7 @@ class TestUsersResource:
     @pytest.mark.asyncio
     async def test_expire_password_get_temporary(self, fs):
         # Instantiate Mock Client
-        test_client = Client()
+        test_client = MockOktaClient(fs)
 
         # Create Password
         password = models.PasswordCredential({
@@ -411,7 +411,7 @@ class TestUsersResource:
     @pytest.mark.asyncio
     async def test_change_recovery_question(self, fs):
         # Instantiate Mock Client
-        test_client = Client()
+        test_client = MockOktaClient(fs)
 
         # Create Password
         password = models.PasswordCredential({
@@ -498,7 +498,7 @@ class TestUsersResource:
     @pytest.mark.asyncio
     async def test_assign_user_to_role(self, fs):
         # Instantiate Mock Client
-        test_client = Client()
+        test_client = MockOktaClient(fs)
 
         # Create Password
         password = models.PasswordCredential({
@@ -567,7 +567,7 @@ class TestUsersResource:
     @pytest.mark.asyncio
     async def test_user_group_target_to_role(self, fs):
         # Instantiate Mock Client
-        test_client = Client()
+        test_client = MockOktaClient(fs)
 
         # Create Password
         password = models.PasswordCredential({
@@ -581,9 +581,9 @@ class TestUsersResource:
         # Create User Profile and CreateUser Request
         user_profile = models.UserProfile()
         user_profile.first_name = "John"
-        user_profile.last_name = "Doe-Group-Target-Role"
-        user_profile.email = "John.Doe-Group-Target-Role@example.com"
-        user_profile.login = "John.Doe-Group-Target-Role@example.com"
+        user_profile.last_name = "Doe-Group-Target-Role-Assign"
+        user_profile.email = "John.Doe-Group-Target-Role-Assign@example.com"
+        user_profile.login = "John.Doe-Group-Target-Role-Assign@example.com"
 
         create_user_req = models.CreateUserRequest({
             "credentials": user_creds,
@@ -597,7 +597,7 @@ class TestUsersResource:
         assert err is None
 
         # Create Group Object
-        NEW_GROUP_NAME = "Group-Target-Test"
+        NEW_GROUP_NAME = "Group-Target-Test-Assign"
         new_group_profile = models.GroupProfile({
             "name": NEW_GROUP_NAME
         })
@@ -632,7 +632,7 @@ class TestUsersResource:
                      group.id), None) is not None
 
         # Create another group to add
-        NEW_GROUP_NAME = "Temp-Group-Target-Test"
+        NEW_GROUP_NAME = "Temp-Group-Target-Test-Assign"
         new_group_profile = models.GroupProfile({
             "name": NEW_GROUP_NAME
         })
@@ -667,7 +667,7 @@ class TestUsersResource:
     @pytest.mark.asyncio
     async def test_user_pagination(self, fs):
         # Instantiate Mock Client
-        test_client = Client()
+        test_client = MockOktaClient(fs)
 
         # Create Password
         password = models.PasswordCredential({

@@ -15,7 +15,7 @@ class TestPoliciesResource:
     @pytest.mark.asyncio
     async def test_create_get_sign_on_policy(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Policy
         policy_model = models.OktaSignOnPolicy({
@@ -49,7 +49,7 @@ class TestPoliciesResource:
     @pytest.mark.asyncio
     async def test_create_password_policy(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Policy
         policy_model = models.PasswordPolicy({
@@ -83,7 +83,7 @@ class TestPoliciesResource:
     @pytest.mark.asyncio
     async def test_create_get_policy(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Policy
         policy_model = models.Policy({
@@ -118,7 +118,7 @@ class TestPoliciesResource:
     @pytest.mark.asyncio
     async def test_create_get_sign_on_policy_with_group_conditions(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Group
         GROUP_NAME = "Group-Target-Test"
@@ -181,7 +181,7 @@ class TestPoliciesResource:
     @pytest.mark.asyncio
     async def test_list_policies_by_type(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Policies
         policy_model = models.OktaSignOnPolicy({
@@ -239,7 +239,7 @@ class TestPoliciesResource:
     @pytest.mark.asyncio
     async def test_delete_policy(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Policy
         policy_model = models.OktaSignOnPolicy({
@@ -281,7 +281,7 @@ class TestPoliciesResource:
     @pytest.mark.asyncio
     async def test_update_policy(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Policy
         policy_model = models.OktaSignOnPolicy({
@@ -337,7 +337,7 @@ class TestPoliciesResource:
     @pytest.mark.asyncio
     async def test_activate_deactivate_policy(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Policy
         policy_model = models.OktaSignOnPolicy({
@@ -382,7 +382,7 @@ class TestPoliciesResource:
     @pytest.mark.asyncio
     async def test_create_get_sign_on_policy_rule(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Policy
         policy_model = models.OktaSignOnPolicy({
@@ -460,7 +460,7 @@ class TestPoliciesResource:
     @pytest.mark.asyncio
     async def test_create_get_password_policy_rule(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Policy
         policy_model = models.PasswordPolicy({
@@ -539,7 +539,7 @@ class TestPoliciesResource:
     @pytest.mark.asyncio
     async def test_update_policy_rule(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Policy
         policy_model = models.OktaSignOnPolicy({
@@ -639,7 +639,7 @@ class TestPoliciesResource:
     @pytest.mark.asyncio
     async def test_list_policy_rules(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Policy
         policy_model = models.OktaSignOnPolicy({
@@ -718,7 +718,7 @@ class TestPoliciesResource:
     @pytest.mark.asyncio
     async def test_delete_policy_rules(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Policy
         policy_model = models.OktaSignOnPolicy({
@@ -804,7 +804,7 @@ class TestPoliciesResource:
     @pytest.mark.asyncio
     async def test_activate_deactivate_policy_rule(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Policy
         policy_model = models.OktaSignOnPolicy({

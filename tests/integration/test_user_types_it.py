@@ -15,7 +15,7 @@ class TestUserTypesResource:
     @pytest.mark.asyncio
     async def test_create_user_type(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create object
         TEST_DESC = F"{TestUserTypesResource.SDK_PREFIX} description"
@@ -43,7 +43,7 @@ class TestUserTypesResource:
     @pytest.mark.asyncio
     async def test_get_user_type(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create object
         TEST_DESC = F"{TestUserTypesResource.SDK_PREFIX} description"
@@ -76,7 +76,7 @@ class TestUserTypesResource:
     @pytest.mark.asyncio
     async def test_update_user_type(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create object
         TEST_DESC = F"{TestUserTypesResource.SDK_PREFIX} description"
@@ -122,7 +122,7 @@ class TestUserTypesResource:
     @pytest.mark.asyncio
     async def test_replace_user_type(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create object
         TEST_DESC = F"{TestUserTypesResource.SDK_PREFIX} description"
@@ -171,7 +171,7 @@ class TestUserTypesResource:
     @pytest.mark.asyncio
     async def test_delete_user_type(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create object
         TEST_DESC = F"{TestUserTypesResource.SDK_PREFIX} description"
@@ -211,7 +211,7 @@ class TestUserTypesResource:
     @pytest.mark.asyncio
     async def test_list_user_types(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create object
         TEST_DESC = F"{TestUserTypesResource.SDK_PREFIX} description"

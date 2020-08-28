@@ -15,7 +15,7 @@ class TestInlineHooksResource:
     @pytest.mark.asyncio
     async def test_create_get_inline_hook(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Inline Hook
         inline_hook_model = models.InlineHook({
@@ -75,7 +75,7 @@ class TestInlineHooksResource:
     @pytest.mark.asyncio
     async def test_update_inline_hook(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Inline Hook
         inline_hook_model = models.InlineHook({
@@ -173,7 +173,7 @@ class TestInlineHooksResource:
     @pytest.mark.asyncio
     async def test_delete_inline_hook(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Inline Hook
         inline_hook_model = models.InlineHook({
@@ -233,7 +233,7 @@ class TestInlineHooksResource:
     @pytest.mark.asyncio
     async def test_activate_deactivate_inline_hook(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Inline Hook
         inline_hook_model = models.InlineHook({
@@ -309,7 +309,7 @@ class TestInlineHooksResource:
     @pytest.mark.asyncio
     async def test_list_inline_hooks(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Inline Hooks
         NUMBER_OF_HOOKS = 3

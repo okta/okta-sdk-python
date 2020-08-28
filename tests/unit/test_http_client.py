@@ -22,10 +22,7 @@ GET_USERS_CALL = mocks.GET_USERS_CALL
 @pytest.mark.vcr()
 @ pytest.mark.asyncio
 async def test_client_success_call_SSWS(fs):
-    ssws_client = Client({
-        "orgUrl": ORG_URL,
-        "token": API_TOKEN
-    })
+    ssws_client = mocks.MockOktaClient(fs)
 
     req, error = await ssws_client.get_request_executor()\
         .create_request("GET",

@@ -1,0 +1,129 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      Content-Type:
+      - application/json
+      User-Agent:
+      - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
+    method: GET
+    uri: https://test.okta.com/api/v1/features
+  response:
+    body:
+      string: "[{\"id\":\"ftrBBUMpPWbXqutKZYcW\",\"type\":\"self-service\",\"status\"\
+        :\"DISABLED\",\"name\":\"Import Monitoring Dashboard\",\"description\":\"\
+        This feature lets you monitor the import jobs that are in progress or were\
+        \ started in the last 24 hours\",\"stage\":{\"value\":\"BETA\",\"state\":\"\
+        OPEN\"},\"_links\":{\"helpDoc\":{\"href\":\"https://okta.box.com/s/io6u0o9dsn3ila42p5bnrz31lonmzc7x\"\
+        },\"self\":{\"href\":\"https://test.okta.com/api/v1/features/ftrBBUMpPWbXqutKZYcW\"\
+        },\"dependents\":{\"href\":\"https://test.okta.com/api/v1/features/ftrBBUMpPWbXqutKZYcW/dependents\"\
+        },\"dependencies\":{\"href\":\"https://test.okta.com/api/v1/features/ftrBBUMpPWbXqutKZYcW/dependencies\"\
+        }}},{\"id\":\"ftrj8SxnN6gQaFpkSTGg\",\"type\":\"self-service\",\"status\"\
+        :\"DISABLED\",\"name\":\"New Admin Dashboard\",\"description\":\"Introduces\
+        \ a new admin dashboard as part of the admin console that helps surface actionable\
+        \ insights and gives admins the ability to monitor their orgs.\",\"stage\"\
+        :{\"value\":\"BETA\",\"state\":\"OPEN\"},\"_links\":{\"helpDoc\":{\"href\"\
+        :\"https://okta.app.box.com/v/AdminDashboardRedesign\"},\"self\":{\"href\"\
+        :\"https://test.okta.com/api/v1/features/ftrj8SxnN6gQaFpkSTGg\"},\"dependents\"\
+        :{\"href\":\"https://test.okta.com/api/v1/features/ftrj8SxnN6gQaFpkSTGg/dependents\"\
+        },\"dependencies\":{\"href\":\"https://test.okta.com/api/v1/features/ftrj8SxnN6gQaFpkSTGg/dependencies\"\
+        }}},{\"id\":\"ftrFDVSQ9wBWPnDqohOS\",\"type\":\"self-service\",\"status\"\
+        :\"DISABLED\",\"name\":\"Allow end-users to quickly access everyday apps\"\
+        ,\"description\":\"End-users can find recently used apps in a separate Quick\
+        \ Access section on their dashboard. This section only appears if the user\
+        \ has 13+ apps assigned on their dashboard.\",\"stage\":{\"value\":\"EA\"\
+        },\"_links\":{\"enable\":{\"href\":\"https://test.okta.com/api/v1/features/ftrFDVSQ9wBWPnDqohOS/enable\"\
+        ,\"hints\":{\"allow\":[\"POST\"]}},\"self\":{\"href\":\"https://test.okta.com/api/v1/features/ftrFDVSQ9wBWPnDqohOS\"\
+        },\"dependents\":{\"href\":\"https://test.okta.com/api/v1/features/ftrFDVSQ9wBWPnDqohOS/dependents\"\
+        },\"dependencies\":{\"href\":\"https://test.okta.com/api/v1/features/ftrFDVSQ9wBWPnDqohOS/dependencies\"\
+        }}},{\"id\":\"ftrxOgrYBFeZWpXzNfx8\",\"type\":\"self-service\",\"status\"\
+        :\"DISABLED\",\"name\":\"Preview and test inline hook request and response\"\
+        ,\"description\":\"This feature lets you preview and test an inline hook.\"\
+        ,\"stage\":{\"value\":\"BETA\",\"state\":\"OPEN\"},\"_links\":{\"helpDoc\"\
+        :{\"href\":\"https://developer.okta.com/docs/reference/api/inline-hooks/\"\
+        },\"self\":{\"href\":\"https://test.okta.com/api/v1/features/ftrxOgrYBFeZWpXzNfx8\"\
+        },\"dependents\":{\"href\":\"https://test.okta.com/api/v1/features/ftrxOgrYBFeZWpXzNfx8/dependents\"\
+        },\"dependencies\":{\"href\":\"https://test.okta.com/api/v1/features/ftrxOgrYBFeZWpXzNfx8/dependencies\"\
+        }}},{\"id\":\"ftr02ksFB76Vla0gGMRm\",\"type\":\"self-service\",\"status\"\
+        :\"DISABLED\",\"name\":\"New End User Experience\",\"description\":\"Enables\
+        \ new design and enhanced user experience for the Okta End-User Dashboard\
+        \ and the Okta Browser Plugin. Includes usability enhancements including single-page\
+        \ experience, mobile-responsiveness, and sidebar nav.\",\"stage\":{\"value\"\
+        :\"EA\"},\"_links\":{\"helpDoc\":{\"href\":\"https://help.okta.com/en/prod/okta_help_CSH.htm#csh-new-eu-dashboard\"\
+        },\"enable\":{\"href\":\"https://test.okta.com/api/v1/features/ftr02ksFB76Vla0gGMRm/enable\"\
+        ,\"hints\":{\"allow\":[\"POST\"]}},\"self\":{\"href\":\"https://test.okta.com/api/v1/features/ftr02ksFB76Vla0gGMRm\"\
+        },\"dependents\":{\"href\":\"https://test.okta.com/api/v1/features/ftr02ksFB76Vla0gGMRm/dependents\"\
+        },\"dependencies\":{\"href\":\"https://test.okta.com/api/v1/features/ftr02ksFB76Vla0gGMRm/dependencies\"\
+        }}},{\"id\":\"ftrygtN0AtAqTxM5B4X9\",\"type\":\"self-service\",\"status\"\
+        :\"DISABLED\",\"name\":\"Allow end-users to quickly access everyday apps in\
+        \ the Okta Browser Plugin\",\"description\":\"End-users can find recently\
+        \ used apps in a separate Quick Access tab in their Okta Browser Plugin.\"\
+        ,\"stage\":{\"value\":\"EA\"},\"_links\":{\"helpDoc\":{\"href\":\"https://help.okta.com/en/prod/okta_help_CSH.htm#csh-eu-quick-access-apps\"\
+        },\"enable\":{\"href\":\"https://test.okta.com/api/v1/features/ftrygtN0AtAqTxM5B4X9/enable\"\
+        ,\"hints\":{\"allow\":[\"POST\"]}},\"self\":{\"href\":\"https://test.okta.com/api/v1/features/ftrygtN0AtAqTxM5B4X9\"\
+        },\"dependents\":{\"href\":\"https://test.okta.com/api/v1/features/ftrygtN0AtAqTxM5B4X9/dependents\"\
+        },\"dependencies\":{\"href\":\"https://test.okta.com/api/v1/features/ftrygtN0AtAqTxM5B4X9/dependencies\"\
+        }}},{\"id\":\"ftrQm81zrOvyCmjYQhhY\",\"type\":\"self-service\",\"status\"\
+        :\"DISABLED\",\"name\":\"\_Password Changed Email Notifications\",\"description\"\
+        :\"End users receive an email notification if they change or reset the password\
+        \ for their account.\",\"stage\":{\"value\":\"EA\"},\"_links\":{\"helpDoc\"\
+        :{\"href\":\"https://help.okta.com/en/prod/Content/Topics/Security/Security_General.htm\"\
+        },\"enable\":{\"href\":\"https://test.okta.com/api/v1/features/ftrQm81zrOvyCmjYQhhY/enable\"\
+        ,\"hints\":{\"allow\":[\"POST\"]}},\"self\":{\"href\":\"https://test.okta.com/api/v1/features/ftrQm81zrOvyCmjYQhhY\"\
+        },\"dependents\":{\"href\":\"https://test.okta.com/api/v1/features/ftrQm81zrOvyCmjYQhhY/dependents\"\
+        },\"dependencies\":{\"href\":\"https://test.okta.com/api/v1/features/ftrQm81zrOvyCmjYQhhY/dependencies\"\
+        }}},{\"id\":\"ftrJNUkk9B7NWauwNIes\",\"type\":\"self-service\",\"status\"\
+        :\"DISABLED\",\"name\":\"Improved plugin onboarding experience\",\"description\"\
+        :\"Get end users started with the browser plugin in less steps. May help reduce\
+        \ number of help desk tickets from end users who have trouble installing the\
+        \ plugin.\",\"stage\":{\"value\":\"EA\"},\"_links\":{\"helpDoc\":{\"href\"\
+        :\"https://help.okta.com/en/prod/okta_help_CSH.htm#ext_plugin_installation\"\
+        },\"enable\":{\"href\":\"https://test.okta.com/api/v1/features/ftrJNUkk9B7NWauwNIes/enable\"\
+        ,\"hints\":{\"allow\":[\"POST\"]}},\"self\":{\"href\":\"https://test.okta.com/api/v1/features/ftrJNUkk9B7NWauwNIes\"\
+        },\"dependents\":{\"href\":\"https://test.okta.com/api/v1/features/ftrJNUkk9B7NWauwNIes/dependents\"\
+        },\"dependencies\":{\"href\":\"https://test.okta.com/api/v1/features/ftrJNUkk9B7NWauwNIes/dependencies\"\
+        }}}]"
+    headers:
+      Connection: close
+      Content-Encoding: gzip
+      Content-Type: application/json;charset=UTF-8
+      Date: Thu, 27 Aug 2020 18:15:44 GMT
+      Public-Key-Pins-Report-Only: pin-sha256="r5EfzZxQVvQpKo3AgYRaT7X2bDO/kj3ACwmxfdT2zt8=";
+        pin-sha256="MaqlcUgk2mvY/RFSGeSwBRkI+rZ6/dxe/DuQfBT/vnQ="; pin-sha256="72G5IEvDEWn+EThf3qjR7/bQSWaS2ZSLqolhnO6iyJI=";
+        pin-sha256="rrV6CLCCvqnk89gWibYT0JO6fNQ8cCit7GGoiVTjCOg="; max-age=60; report-uri="https://okta.report-uri.com/r/default/hpkp/reportOnly"
+      Server: nginx
+      Strict-Transport-Security: max-age=315360000; includeSubDomains
+      Transfer-Encoding: chunked
+      Vary: Accept-Encoding
+      cache-control: no-cache, no-store
+      content-security-policy-report-only: 'default-src ''self'' *.oktacdn.com test.okta.com;
+        connect-src ''self'' *.oktacdn.com *.mixpanel.com *.mapbox.com app.pendo.io
+        data.pendo.io pendo-static-5634101834153984.storage.googleapis.com test.okta.com
+        test-admin.okta.com https://oinmanager.okta.com data:; script-src ''unsafe-inline''
+        ''unsafe-eval'' ''self'' *.oktacdn.com; style-src ''unsafe-inline'' ''self''
+        *.oktacdn.com app.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com;
+        frame-src ''self'' login.okta.com test.okta.com test-admin.okta.com; img-src
+        ''self'' *.oktacdn.com test.okta.com *.tiles.mapbox.com *.mapbox.com app.pendo.io
+        data.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        data: blob:; font-src data: ''self'' *.oktacdn.com fonts.gstatic.com; report-uri
+        https://okta.report-uri.com/r/d/csp/reportOnly; report-to csp-report'
+      expires: '0'
+      p3p: CP="HONK"
+      pragma: no-cache
+      report-to: '{"group":"csp-report","max_age":31536000,"endpoints":[{"url":"https://okta.report-uri.com/r/d/csp/reportOnly"}],"include_subdomains":true}'
+      set-cookie: JSESSIONID=607252069A8CC09FEEA3A8CCC0B3F57F; Path=/; Secure; HttpOnly
+      x-content-type-options: nosniff
+      x-okta-request-id: X0f4T0L0vUowoe7oRs9cWgAAB9s
+      x-rate-limit-limit: '1000'
+      x-rate-limit-remaining: '999'
+      x-rate-limit-reset: '1598552203'
+      x-xss-protection: 1; mode=block; report=https://okta.report-uri.com/r/d/xss/enforce
+    status:
+      code: 200
+      message: OK
+    url: https://test.okta.com/api/v1/features
+version: 1
