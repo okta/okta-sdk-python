@@ -19,8 +19,9 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.authorization_server_credentials\
-    import AuthorizationServerCredentials
+from okta.okta_collection import OktaCollection
+import okta.models.authorization_server_credentials\
+    as authorization_server_credentials
 
 
 class AuthorizationServer(
@@ -35,16 +36,19 @@ class AuthorizationServer(
         if config:
             self.links = config["links"]\
                 if "links" in config else None
-            self.audiences = config["audiences"]\
-                if "audiences" in config else None
+            self.audiences = OktaCollection.form_list(
+                config["audiences"] if "audiences"\
+                    in config else [],
+                str
+            )
             self.created = config["created"]\
                 if "created" in config else None
             if "credentials" in config:
                 if isinstance(config["credentials"],
-                              AuthorizationServerCredentials):
+                              authorization_server_credentials.AuthorizationServerCredentials):
                     self.credentials = config["credentials"]
                 else:
-                    self.credentials = AuthorizationServerCredentials(
+                    self.credentials = authorization_server_credentials.AuthorizationServerCredentials(
                         config["credentials"]
                     )
             else:
@@ -65,7 +69,7 @@ class AuthorizationServer(
                 if "status" in config else None
         else:
             self.links = None
-            self.audiences = None
+            self.audiences = []
             self.created = None
             self.credentials = None
             self.description = None

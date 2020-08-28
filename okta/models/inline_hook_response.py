@@ -19,6 +19,9 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.okta_collection import OktaCollection
+import okta.models.inline_hook_response_commands\
+    as inline_hook_response_commands
 
 
 class InlineHookResponse(
@@ -31,10 +34,13 @@ class InlineHookResponse(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.commands = config["commands"]\
-                if "commands" in config else None
+            self.commands = OktaCollection.form_list(
+                config["commands"] if "commands"\
+                    in config else [],
+                inline_hook_response_commands.InlineHookResponseCommands
+            )
         else:
-            self.commands = None
+            self.commands = []
 
     def request_format(self):
         parent_req_format = super().request_format()

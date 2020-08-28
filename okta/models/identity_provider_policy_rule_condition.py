@@ -19,6 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.okta_collection import OktaCollection
 
 
 class IdentityProviderPolicyRuleCondition(
@@ -31,12 +32,15 @@ class IdentityProviderPolicyRuleCondition(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.idp_ids = config["idpIds"]\
-                if "idpIds" in config else None
+            self.idp_ids = OktaCollection.form_list(
+                config["idpIds"] if "idpIds"\
+                    in config else [],
+                str
+            )
             self.provider = config["provider"]\
                 if "provider" in config else None
         else:
-            self.idp_ids = None
+            self.idp_ids = []
             self.provider = None
 
     def request_format(self):

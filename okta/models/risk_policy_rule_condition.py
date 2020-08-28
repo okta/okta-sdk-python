@@ -19,6 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.okta_collection import OktaCollection
 
 
 class RiskPolicyRuleCondition(
@@ -31,10 +32,13 @@ class RiskPolicyRuleCondition(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.behaviors = config["behaviors"]\
-                if "behaviors" in config else None
+            self.behaviors = OktaCollection.form_list(
+                config["behaviors"] if "behaviors"\
+                    in config else [],
+                str
+            )
         else:
-            self.behaviors = None
+            self.behaviors = []
 
     def request_format(self):
         parent_req_format = super().request_format()

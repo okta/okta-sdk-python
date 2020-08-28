@@ -20,10 +20,10 @@ limitations under the License.
 
 from okta.models.application\
     import Application
-from okta.models.scheme_application_credentials\
-    import SchemeApplicationCredentials
-from okta.models.basic_application_settings\
-    import BasicApplicationSettings
+import okta.models.scheme_application_credentials\
+    as scheme_application_credentials
+import okta.models.basic_application_settings\
+    as basic_application_settings
 
 
 class BasicAuthApplication(
@@ -39,10 +39,10 @@ class BasicAuthApplication(
             self.sign_on_mode = "BASIC_AUTH"
             if "credentials" in config:
                 if isinstance(config["credentials"],
-                              SchemeApplicationCredentials):
+                              scheme_application_credentials.SchemeApplicationCredentials):
                     self.credentials = config["credentials"]
                 else:
-                    self.credentials = SchemeApplicationCredentials(
+                    self.credentials = scheme_application_credentials.SchemeApplicationCredentials(
                         config["credentials"]
                     )
             else:
@@ -51,10 +51,10 @@ class BasicAuthApplication(
                 if "name" in config else "template_basic_auth"
             if "settings" in config:
                 if isinstance(config["settings"],
-                              BasicApplicationSettings):
+                              basic_application_settings.BasicApplicationSettings):
                     self.settings = config["settings"]
                 else:
-                    self.settings = BasicApplicationSettings(
+                    self.settings = basic_application_settings.BasicApplicationSettings(
                         config["settings"]
                     )
             else:

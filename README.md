@@ -149,6 +149,8 @@ These examples will help you understand how to use this library.
 
 Once you initialize a `client`, you can call methods to make requests to the Okta API. The client uses **asynchronous** methods to operate. Most methods are grouped by the API endpoint they belong to. For example, methods that call the [Users API][users-api-docs] are organized under [the User resource client (okta.resource_clients.user_client.py)][users-client].
 
+> Asynchronous I/O is fairly new to Python after making its debut in Python 3.5. It's powered by the `asyncio` library which provides avenues to produce concurrent code. This allows developers to define `async` functions and `await` asynchronous calls within them. For more information, you can check out the Python docs [here][python-docs].
+
 ### Authenticate a User
 
 This library should only be used with the Okta management API. To call the [Authentication API][authn-api], you should construct your own HTTP requests.
@@ -397,7 +399,7 @@ user = response.get_type()(response_body)
 
 ## Pagination
 
-If your request comes back with more than the default or set limit, you can request the next page.
+If your request comes back with more than the default or set limit (`resp.has_next() == True`), you can request the next page.
 
 Example of listing users 1 at a time:
 
@@ -405,9 +407,20 @@ Example of listing users 1 at a time:
 query_parameters = {"limit": "1"}
 users, resp, err = await client.list_users(query_parameters)
 
-# Do something with your users until you run out of users to iterate
+# Check if there more pages follow
 if resp.has_next:
-  next_user, error = await resp.next()  # Returns list of 1 user
+  next_user, error = await resp.next()  # Returns list of 1 user after the last retrieved user
+
+# Iterate through all of the rest of the pages
+while resp.has_next():
+  next_usr_list, err = await resp.next()
+  # Do stuff with users in next_usr_list
+
+print(resp.has_next()) # False
+try:
+  await resp.next()
+except StopAsyncIteration:
+  # Handle Exception raised
 ```
 
 ## Configuration reference
@@ -421,7 +434,7 @@ This library looks for configuration in the following sources:
 
 > Only ONE source needs to be provided!
 
-Higher numbers win. In other words, configuration passed via the constructor will OVVERRIDE configuration found in environment variables, which will override configuration in the designated `okta.yaml` files.
+Higher numbers win. In other words, configuration passed via the constructor will OVERRIDE configuration found in environment variables, which will override configuration in the designated `okta.yaml` files.
 
 ### YAML configuration
 
@@ -540,3 +553,4 @@ We're happy to accept contributions and PRs! Please see the [Contribution Guide]
 [oauth-guides]: https://developer.okta.com/docs/guides/implement-oauth-for-okta/overview/
 [dev-okta-signup]: https://developer.okta.com/signup
 [api-token-docs]: https://developer.okta.com/docs/api/getting_started/getting_a_token
+[python-docs]: https://docs.python.org/3/library/asyncio.html

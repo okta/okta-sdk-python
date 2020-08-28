@@ -19,48 +19,48 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.app_and_instance_policy_rule_condition\
-    import AppAndInstancePolicyRuleCondition
-from okta.models.app_instance_policy_rule_condition\
-    import AppInstancePolicyRuleCondition
-from okta.models.policy_rule_auth_context_condition\
-    import PolicyRuleAuthContextCondition
-from okta.models.password_policy_authentication_provider_condition\
-    import PasswordPolicyAuthenticationProviderCondition
-from okta.models.before_scheduled_action_policy_rule_condition\
-    import BeforeScheduledActionPolicyRuleCondition
-from okta.models.client_policy_condition\
-    import ClientPolicyCondition
-from okta.models.context_policy_rule_condition\
-    import ContextPolicyRuleCondition
-from okta.models.device_policy_rule_condition\
-    import DevicePolicyRuleCondition
-from okta.models.grant_type_policy_rule_condition\
-    import GrantTypePolicyRuleCondition
-from okta.models.group_policy_rule_condition\
-    import GroupPolicyRuleCondition
-from okta.models.identity_provider_policy_rule_condition\
-    import IdentityProviderPolicyRuleCondition
-from okta.models.mdm_enrollment_policy_rule_condition\
-    import MdmEnrollmentPolicyRuleCondition
-from okta.models.policy_network_condition\
-    import PolicyNetworkCondition
-from okta.models.policy_people_condition\
-    import PolicyPeopleCondition
-from okta.models.platform_policy_rule_condition\
-    import PlatformPolicyRuleCondition
-from okta.models.risk_policy_rule_condition\
-    import RiskPolicyRuleCondition
-from okta.models.risk_score_policy_rule_condition\
-    import RiskScorePolicyRuleCondition
-from okta.models.o_auth_2_scopes_mediation_policy_rule_condition\
-    import OAuth2ScopesMediationPolicyRuleCondition
-from okta.models.user_identifier_policy_rule_condition\
-    import UserIdentifierPolicyRuleCondition
-from okta.models.user_status_policy_rule_condition\
-    import UserStatusPolicyRuleCondition
-from okta.models.user_policy_rule_condition\
-    import UserPolicyRuleCondition
+import okta.models.app_and_instance_policy_rule_condition\
+    as app_and_instance_policy_rule_condition
+import okta.models.app_instance_policy_rule_condition\
+    as app_instance_policy_rule_condition
+import okta.models.policy_rule_auth_context_condition\
+    as policy_rule_auth_context_condition
+import okta.models.password_policy_authentication_provider_condition\
+    as password_policy_authentication_provider_condition
+import okta.models.before_scheduled_action_policy_rule_condition\
+    as before_scheduled_action_policy_rule_condition
+import okta.models.client_policy_condition\
+    as client_policy_condition
+import okta.models.context_policy_rule_condition\
+    as context_policy_rule_condition
+import okta.models.device_policy_rule_condition\
+    as device_policy_rule_condition
+import okta.models.grant_type_policy_rule_condition\
+    as grant_type_policy_rule_condition
+import okta.models.group_policy_rule_condition\
+    as group_policy_rule_condition
+import okta.models.identity_provider_policy_rule_condition\
+    as identity_provider_policy_rule_condition
+import okta.models.mdm_enrollment_policy_rule_condition\
+    as mdm_enrollment_policy_rule_condition
+import okta.models.policy_network_condition\
+    as policy_network_condition
+import okta.models.policy_people_condition\
+    as policy_people_condition
+import okta.models.platform_policy_rule_condition\
+    as platform_policy_rule_condition
+import okta.models.risk_policy_rule_condition\
+    as risk_policy_rule_condition
+import okta.models.risk_score_policy_rule_condition\
+    as risk_score_policy_rule_condition
+import okta.models.o_auth_2_scopes_mediation_policy_rule_condition\
+    as o_auth_2_scopes_mediation_policy_rule_condition
+import okta.models.user_identifier_policy_rule_condition\
+    as user_identifier_policy_rule_condition
+import okta.models.user_status_policy_rule_condition\
+    as user_status_policy_rule_condition
+import okta.models.user_policy_rule_condition\
+    as user_policy_rule_condition
 
 
 class PolicyRuleConditions(
@@ -75,210 +75,210 @@ class PolicyRuleConditions(
         if config:
             if "app" in config:
                 if isinstance(config["app"],
-                              AppAndInstancePolicyRuleCondition):
+                              app_and_instance_policy_rule_condition.AppAndInstancePolicyRuleCondition):
                     self.app = config["app"]
                 else:
-                    self.app = AppAndInstancePolicyRuleCondition(
+                    self.app = app_and_instance_policy_rule_condition.AppAndInstancePolicyRuleCondition(
                         config["app"]
                     )
             else:
                 self.app = None
             if "apps" in config:
                 if isinstance(config["apps"],
-                              AppInstancePolicyRuleCondition):
+                              app_instance_policy_rule_condition.AppInstancePolicyRuleCondition):
                     self.apps = config["apps"]
                 else:
-                    self.apps = AppInstancePolicyRuleCondition(
+                    self.apps = app_instance_policy_rule_condition.AppInstancePolicyRuleCondition(
                         config["apps"]
                     )
             else:
                 self.apps = None
             if "authContext" in config:
                 if isinstance(config["authContext"],
-                              PolicyRuleAuthContextCondition):
+                              policy_rule_auth_context_condition.PolicyRuleAuthContextCondition):
                     self.auth_context = config["authContext"]
                 else:
-                    self.auth_context = PolicyRuleAuthContextCondition(
+                    self.auth_context = policy_rule_auth_context_condition.PolicyRuleAuthContextCondition(
                         config["authContext"]
                     )
             else:
                 self.auth_context = None
             if "authProvider" in config:
                 if isinstance(config["authProvider"],
-                              PasswordPolicyAuthenticationProviderCondition):
+                              password_policy_authentication_provider_condition.PasswordPolicyAuthenticationProviderCondition):
                     self.auth_provider = config["authProvider"]
                 else:
-                    self.auth_provider = PasswordPolicyAuthenticationProviderCondition(
+                    self.auth_provider = password_policy_authentication_provider_condition.PasswordPolicyAuthenticationProviderCondition(
                         config["authProvider"]
                     )
             else:
                 self.auth_provider = None
             if "beforeScheduledAction" in config:
                 if isinstance(config["beforeScheduledAction"],
-                              BeforeScheduledActionPolicyRuleCondition):
+                              before_scheduled_action_policy_rule_condition.BeforeScheduledActionPolicyRuleCondition):
                     self.before_scheduled_action = config["beforeScheduledAction"]
                 else:
-                    self.before_scheduled_action = BeforeScheduledActionPolicyRuleCondition(
+                    self.before_scheduled_action = before_scheduled_action_policy_rule_condition.BeforeScheduledActionPolicyRuleCondition(
                         config["beforeScheduledAction"]
                     )
             else:
                 self.before_scheduled_action = None
             if "clients" in config:
                 if isinstance(config["clients"],
-                              ClientPolicyCondition):
+                              client_policy_condition.ClientPolicyCondition):
                     self.clients = config["clients"]
                 else:
-                    self.clients = ClientPolicyCondition(
+                    self.clients = client_policy_condition.ClientPolicyCondition(
                         config["clients"]
                     )
             else:
                 self.clients = None
             if "context" in config:
                 if isinstance(config["context"],
-                              ContextPolicyRuleCondition):
+                              context_policy_rule_condition.ContextPolicyRuleCondition):
                     self.context = config["context"]
                 else:
-                    self.context = ContextPolicyRuleCondition(
+                    self.context = context_policy_rule_condition.ContextPolicyRuleCondition(
                         config["context"]
                     )
             else:
                 self.context = None
             if "device" in config:
                 if isinstance(config["device"],
-                              DevicePolicyRuleCondition):
+                              device_policy_rule_condition.DevicePolicyRuleCondition):
                     self.device = config["device"]
                 else:
-                    self.device = DevicePolicyRuleCondition(
+                    self.device = device_policy_rule_condition.DevicePolicyRuleCondition(
                         config["device"]
                     )
             else:
                 self.device = None
             if "grantTypes" in config:
                 if isinstance(config["grantTypes"],
-                              GrantTypePolicyRuleCondition):
+                              grant_type_policy_rule_condition.GrantTypePolicyRuleCondition):
                     self.grant_types = config["grantTypes"]
                 else:
-                    self.grant_types = GrantTypePolicyRuleCondition(
+                    self.grant_types = grant_type_policy_rule_condition.GrantTypePolicyRuleCondition(
                         config["grantTypes"]
                     )
             else:
                 self.grant_types = None
             if "groups" in config:
                 if isinstance(config["groups"],
-                              GroupPolicyRuleCondition):
+                              group_policy_rule_condition.GroupPolicyRuleCondition):
                     self.groups = config["groups"]
                 else:
-                    self.groups = GroupPolicyRuleCondition(
+                    self.groups = group_policy_rule_condition.GroupPolicyRuleCondition(
                         config["groups"]
                     )
             else:
                 self.groups = None
             if "identityProvider" in config:
                 if isinstance(config["identityProvider"],
-                              IdentityProviderPolicyRuleCondition):
+                              identity_provider_policy_rule_condition.IdentityProviderPolicyRuleCondition):
                     self.identity_provider = config["identityProvider"]
                 else:
-                    self.identity_provider = IdentityProviderPolicyRuleCondition(
+                    self.identity_provider = identity_provider_policy_rule_condition.IdentityProviderPolicyRuleCondition(
                         config["identityProvider"]
                     )
             else:
                 self.identity_provider = None
             if "mdmEnrollment" in config:
                 if isinstance(config["mdmEnrollment"],
-                              MdmEnrollmentPolicyRuleCondition):
+                              mdm_enrollment_policy_rule_condition.MdmEnrollmentPolicyRuleCondition):
                     self.mdm_enrollment = config["mdmEnrollment"]
                 else:
-                    self.mdm_enrollment = MdmEnrollmentPolicyRuleCondition(
+                    self.mdm_enrollment = mdm_enrollment_policy_rule_condition.MdmEnrollmentPolicyRuleCondition(
                         config["mdmEnrollment"]
                     )
             else:
                 self.mdm_enrollment = None
             if "network" in config:
                 if isinstance(config["network"],
-                              PolicyNetworkCondition):
+                              policy_network_condition.PolicyNetworkCondition):
                     self.network = config["network"]
                 else:
-                    self.network = PolicyNetworkCondition(
+                    self.network = policy_network_condition.PolicyNetworkCondition(
                         config["network"]
                     )
             else:
                 self.network = None
             if "people" in config:
                 if isinstance(config["people"],
-                              PolicyPeopleCondition):
+                              policy_people_condition.PolicyPeopleCondition):
                     self.people = config["people"]
                 else:
-                    self.people = PolicyPeopleCondition(
+                    self.people = policy_people_condition.PolicyPeopleCondition(
                         config["people"]
                     )
             else:
                 self.people = None
             if "platform" in config:
                 if isinstance(config["platform"],
-                              PlatformPolicyRuleCondition):
+                              platform_policy_rule_condition.PlatformPolicyRuleCondition):
                     self.platform = config["platform"]
                 else:
-                    self.platform = PlatformPolicyRuleCondition(
+                    self.platform = platform_policy_rule_condition.PlatformPolicyRuleCondition(
                         config["platform"]
                     )
             else:
                 self.platform = None
             if "risk" in config:
                 if isinstance(config["risk"],
-                              RiskPolicyRuleCondition):
+                              risk_policy_rule_condition.RiskPolicyRuleCondition):
                     self.risk = config["risk"]
                 else:
-                    self.risk = RiskPolicyRuleCondition(
+                    self.risk = risk_policy_rule_condition.RiskPolicyRuleCondition(
                         config["risk"]
                     )
             else:
                 self.risk = None
             if "riskScore" in config:
                 if isinstance(config["riskScore"],
-                              RiskScorePolicyRuleCondition):
+                              risk_score_policy_rule_condition.RiskScorePolicyRuleCondition):
                     self.risk_score = config["riskScore"]
                 else:
-                    self.risk_score = RiskScorePolicyRuleCondition(
+                    self.risk_score = risk_score_policy_rule_condition.RiskScorePolicyRuleCondition(
                         config["riskScore"]
                     )
             else:
                 self.risk_score = None
             if "scopes" in config:
                 if isinstance(config["scopes"],
-                              OAuth2ScopesMediationPolicyRuleCondition):
+                              o_auth_2_scopes_mediation_policy_rule_condition.OAuth2ScopesMediationPolicyRuleCondition):
                     self.scopes = config["scopes"]
                 else:
-                    self.scopes = OAuth2ScopesMediationPolicyRuleCondition(
+                    self.scopes = o_auth_2_scopes_mediation_policy_rule_condition.OAuth2ScopesMediationPolicyRuleCondition(
                         config["scopes"]
                     )
             else:
                 self.scopes = None
             if "userIdentifier" in config:
                 if isinstance(config["userIdentifier"],
-                              UserIdentifierPolicyRuleCondition):
+                              user_identifier_policy_rule_condition.UserIdentifierPolicyRuleCondition):
                     self.user_identifier = config["userIdentifier"]
                 else:
-                    self.user_identifier = UserIdentifierPolicyRuleCondition(
+                    self.user_identifier = user_identifier_policy_rule_condition.UserIdentifierPolicyRuleCondition(
                         config["userIdentifier"]
                     )
             else:
                 self.user_identifier = None
             if "userStatus" in config:
                 if isinstance(config["userStatus"],
-                              UserStatusPolicyRuleCondition):
+                              user_status_policy_rule_condition.UserStatusPolicyRuleCondition):
                     self.user_status = config["userStatus"]
                 else:
-                    self.user_status = UserStatusPolicyRuleCondition(
+                    self.user_status = user_status_policy_rule_condition.UserStatusPolicyRuleCondition(
                         config["userStatus"]
                     )
             else:
                 self.user_status = None
             if "users" in config:
                 if isinstance(config["users"],
-                              UserPolicyRuleCondition):
+                              user_policy_rule_condition.UserPolicyRuleCondition):
                     self.users = config["users"]
                 else:
-                    self.users = UserPolicyRuleCondition(
+                    self.users = user_policy_rule_condition.UserPolicyRuleCondition(
                         config["users"]
                     )
             else:

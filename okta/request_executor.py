@@ -171,7 +171,7 @@ class RequestExecutor:
             _, res_details, resp_body, error = await\
                 self.fire_request_helper(request, 0, time.time())
             if error is not None:
-                return (None, None, None, error)
+                return (None, res_details, resp_body, error)
 
             # add to cache if not a list and valid response
             if method.upper() == "GET" and 200 <= res_details.status <= 299:
@@ -228,7 +228,7 @@ class RequestExecutor:
             retry_limit_reset = min(retry_limit_reset_headers) if len(
                 retry_limit_reset_headers) > 0 else None
             if not date_time or not retry_limit_reset:
-                return (None, None, None,
+                return (None, res_details, resp_body,
                         Exception(
                             ERROR_MESSAGE_429_MISSING_DATE_X_RESET
                         ))
@@ -240,7 +240,7 @@ class RequestExecutor:
                 self.pause_for_backoff(backoff_seconds)
                 if (current_req_start_time + backoff_seconds)\
                         - request_start_time > req_timeout and req_timeout > 0:
-                    return (None, None, None, resp_body)
+                    return (None, res_details, resp_body, resp_body)
 
             # Setup retry request
             attempts += 1
@@ -256,7 +256,7 @@ class RequestExecutor:
                 request, attempts, request_start_time
             )
             if error:
-                return (None, None, None, error)
+                return (None, res_details, resp_body, error)
 
         return (request, res_details, resp_body, error)
 
@@ -271,7 +271,7 @@ class RequestExecutor:
         Returns:
             bool: Returns True if this request has been called too many times
         """
-        return response is not None\
+        return response is not None and status is not None\
             and status == HTTPStatus.TOO_MANY_REQUESTS
 
     def parse_response(self, request, response):

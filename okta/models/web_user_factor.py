@@ -20,8 +20,8 @@ limitations under the License.
 
 from okta.models.user_factor\
     import UserFactor
-from okta.models.web_user_factor_profile\
-    import WebUserFactorProfile
+import okta.models.web_user_factor_profile\
+    as web_user_factor_profile
 
 
 class WebUserFactor(
@@ -37,10 +37,10 @@ class WebUserFactor(
             self.factor_type = "web"
             if "profile" in config:
                 if isinstance(config["profile"],
-                              WebUserFactorProfile):
+                              web_user_factor_profile.WebUserFactorProfile):
                     self.profile = config["profile"]
                 else:
-                    self.profile = WebUserFactorProfile(
+                    self.profile = web_user_factor_profile.WebUserFactorProfile(
                         config["profile"]
                     )
             else:

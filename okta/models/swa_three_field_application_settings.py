@@ -20,8 +20,8 @@ limitations under the License.
 
 from okta.models.application_settings\
     import ApplicationSettings
-from okta.models.swa_three_field_application_settings_application\
-    import SwaThreeFieldApplicationSettingsApplication
+import okta.models.swa_three_field_application_settings_application\
+    as swa_three_field_application_settings_application
 
 
 class SwaThreeFieldApplicationSettings(
@@ -36,10 +36,10 @@ class SwaThreeFieldApplicationSettings(
         if config:
             if "app" in config:
                 if isinstance(config["app"],
-                              SwaThreeFieldApplicationSettingsApplication):
+                              swa_three_field_application_settings_application.SwaThreeFieldApplicationSettingsApplication):
                     self.app = config["app"]
                 else:
-                    self.app = SwaThreeFieldApplicationSettingsApplication(
+                    self.app = swa_three_field_application_settings_application.SwaThreeFieldApplicationSettingsApplication(
                         config["app"]
                     )
             else:

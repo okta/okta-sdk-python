@@ -19,8 +19,9 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.catalog_application_status\
-    import CatalogApplicationStatus
+from okta.okta_collection import OktaCollection
+import okta.models.catalog_application_status\
+    as catalog_application_status
 
 
 class CatalogApplication(
@@ -41,22 +42,28 @@ class CatalogApplication(
                 if "description" in config else None
             self.display_name = config["displayName"]\
                 if "displayName" in config else None
-            self.features = config["features"]\
-                if "features" in config else None
+            self.features = OktaCollection.form_list(
+                config["features"] if "features"\
+                    in config else [],
+                str
+            )
             self.id = config["id"]\
                 if "id" in config else None
             self.last_updated = config["lastUpdated"]\
                 if "lastUpdated" in config else None
             self.name = config["name"]\
                 if "name" in config else None
-            self.sign_on_modes = config["signOnModes"]\
-                if "signOnModes" in config else None
+            self.sign_on_modes = OktaCollection.form_list(
+                config["signOnModes"] if "signOnModes"\
+                    in config else [],
+                str
+            )
             if "status" in config:
                 if isinstance(config["status"],
-                              CatalogApplicationStatus):
+                              catalog_application_status.CatalogApplicationStatus):
                     self.status = config["status"]
                 else:
-                    self.status = CatalogApplicationStatus(
+                    self.status = catalog_application_status.CatalogApplicationStatus(
                         config["status"].upper()
                     )
             else:
@@ -70,11 +77,11 @@ class CatalogApplication(
             self.category = None
             self.description = None
             self.display_name = None
-            self.features = None
+            self.features = []
             self.id = None
             self.last_updated = None
             self.name = None
-            self.sign_on_modes = None
+            self.sign_on_modes = []
             self.status = None
             self.verification_status = None
             self.website = None

@@ -13,7 +13,7 @@ class TestApplicationsResource:
     @pytest.mark.asyncio
     async def test_create_bookmark_app(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
@@ -54,7 +54,7 @@ class TestApplicationsResource:
     @pytest.mark.asyncio
     async def test_create_basic_auth_app(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create BasicAuth Application Object
         APP_AUTH_URL = "https://example.com/auth.html"
@@ -97,7 +97,7 @@ class TestApplicationsResource:
     @pytest.mark.asyncio
     async def test_create_SWA_app(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Application object and Application in Org
         APP_LABEL = "Test App"
@@ -151,7 +151,7 @@ class TestApplicationsResource:
     @pytest.mark.asyncio
     async def test_create_SWA_three_app(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Application object and Application in Org
         APP_LABEL = "Test App"
@@ -213,7 +213,7 @@ class TestApplicationsResource:
     @pytest.mark.asyncio
     async def test_create_secure_password_store_app(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Application object and Application in Org
         APP_LABEL = "Test App"
@@ -283,7 +283,7 @@ class TestApplicationsResource:
     @pytest.mark.asyncio
     async def test_create_open_id_connect_app(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create OIDC Application Object
         APP_LABEL = "AddOpenIdConnectApp"
@@ -364,7 +364,7 @@ class TestApplicationsResource:
     @pytest.mark.asyncio
     async def test_list_apps(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create OIDC Application Object
         APP_LABEL = "AddOpenIdConnectApp"
@@ -439,7 +439,7 @@ class TestApplicationsResource:
     @pytest.mark.asyncio
     async def test_activate_deactivate_delete_app(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
@@ -493,7 +493,7 @@ class TestApplicationsResource:
     @pytest.mark.asyncio
     async def test_assign_user_app(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
@@ -583,7 +583,7 @@ class TestApplicationsResource:
     @pytest.mark.asyncio
     async def test_get_list_assign_users_app(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
@@ -721,7 +721,7 @@ class TestApplicationsResource:
     @pytest.mark.asyncio
     async def test_app_update_assigned_user(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
@@ -827,7 +827,7 @@ class TestApplicationsResource:
     @pytest.mark.asyncio
     async def test_app_remove_assigned_user(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
@@ -932,7 +932,7 @@ class TestApplicationsResource:
     @pytest.mark.asyncio
     async def test_assign_group_app(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
@@ -1002,7 +1002,7 @@ class TestApplicationsResource:
     @pytest.mark.asyncio
     async def test_list_assign_group_app(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
@@ -1099,7 +1099,7 @@ class TestApplicationsResource:
     @pytest.mark.asyncio
     async def test_remove_assign_group_app(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
@@ -1180,7 +1180,7 @@ class TestApplicationsResource:
     @pytest.mark.asyncio
     async def test_list_app_keys(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
@@ -1217,7 +1217,7 @@ class TestApplicationsResource:
     @pytest.mark.asyncio
     async def test_get_app_keys(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
@@ -1266,7 +1266,7 @@ class TestApplicationsResource:
     @pytest.mark.asyncio
     async def test_generate_app_key(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
@@ -1312,7 +1312,7 @@ class TestApplicationsResource:
     @pytest.mark.asyncio
     async def test_clone_app_key(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
@@ -1383,7 +1383,7 @@ class TestApplicationsResource:
     @pytest.mark.asyncio
     async def test_generate_csr(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create CSR
         csr_metadata = models.CsrMetadata({
@@ -1437,7 +1437,7 @@ class TestApplicationsResource:
     @pytest.mark.asyncio
     async def test_get_csr(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create CSR
         csr_metadata = models.CsrMetadata({
@@ -1497,7 +1497,7 @@ class TestApplicationsResource:
     @pytest.mark.asyncio
     async def test_revoke_csr(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create CSR
         csr_metadata = models.CsrMetadata({
@@ -1567,10 +1567,10 @@ class TestApplicationsResource:
     @pytest.mark.asyncio
     async def test_grant_consent_to_scope(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create OIDC Application Object
-        APP_LABEL = "AddOpenIdConnectApp-Consent"
+        APP_LABEL = "AddOpenIdConnectApp-Grant-Consent-SCOPE"
         CLIENT_URI = "https://example.com/client"
         LOGO_URI = "https://example.com/assets/images/logo-new.png"
         POLICY_URI = "https://example.com/client/policy"
@@ -1625,7 +1625,7 @@ class TestApplicationsResource:
 
         # Create grant request
         issuer = client.get_base_url()
-        SCOPE_ID = "okta.apps.read"
+        SCOPE_ID = "okta.roles.read"
         oauth_scope_consent_grant = models.OAuth2ScopeConsentGrant({
             "issuer": issuer,
             "scopeId": SCOPE_ID
@@ -1654,10 +1654,10 @@ class TestApplicationsResource:
     @pytest.mark.asyncio
     async def test_get_consent_grant(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create OIDC Application Object
-        APP_LABEL = "AddOpenIdConnectApp-Get-Consent"
+        APP_LABEL = "AddOpenIdConnectApp-Get-Consent-Grant"
         CLIENT_URI = "https://example.com/client"
         LOGO_URI = "https://example.com/assets/images/logo-new.png"
         POLICY_URI = "https://example.com/client/policy"
@@ -1712,7 +1712,7 @@ class TestApplicationsResource:
 
         # Create grant request
         issuer = client.get_base_url()
-        SCOPE_ID = "okta.apps.read"
+        SCOPE_ID = "okta.roles.read"
         oauth_scope_consent_grant = models.OAuth2ScopeConsentGrant({
             "issuer": issuer,
             "scopeId": SCOPE_ID
@@ -1746,7 +1746,7 @@ class TestApplicationsResource:
     @pytest.mark.asyncio
     async def test_revoke_consent_grant(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create OIDC Application Object
         APP_LABEL = "AddOpenIdConnectApp-Revoke-Consent"

@@ -19,6 +19,9 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.okta_collection import OktaCollection
+import okta.models.platform_condition_evaluator_platform\
+    as platform_condition_evaluator_platform
 
 
 class PlatformPolicyRuleCondition(
@@ -31,13 +34,19 @@ class PlatformPolicyRuleCondition(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.exclude = config["exclude"]\
-                if "exclude" in config else None
-            self.include = config["include"]\
-                if "include" in config else None
+            self.exclude = OktaCollection.form_list(
+                config["exclude"] if "exclude"\
+                    in config else [],
+                platform_condition_evaluator_platform.PlatformConditionEvaluatorPlatform
+            )
+            self.include = OktaCollection.form_list(
+                config["include"] if "include"\
+                    in config else [],
+                platform_condition_evaluator_platform.PlatformConditionEvaluatorPlatform
+            )
         else:
-            self.exclude = None
-            self.include = None
+            self.exclude = []
+            self.include = []
 
     def request_format(self):
         parent_req_format = super().request_format()

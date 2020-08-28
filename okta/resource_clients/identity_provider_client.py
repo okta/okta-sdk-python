@@ -108,7 +108,10 @@ class IdentityProviderClient(APIClient):
             /api/v1/idps
             """)
 
-        body = identity_provider.as_dict()
+        if isinstance(identity_provider, dict):
+            body = identity_provider
+        else:
+            body = identity_provider.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -199,7 +202,10 @@ class IdentityProviderClient(APIClient):
             /api/v1/idps/credentials/keys
             """)
 
-        body = json_web_key.as_dict()
+        if isinstance(json_web_key, dict):
+            body = json_web_key
+        else:
+            body = json_web_key.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -388,7 +394,10 @@ class IdentityProviderClient(APIClient):
             /api/v1/idps/{idpId}
             """)
 
-        body = identity_provider.as_dict()
+        if isinstance(identity_provider, dict):
+            body = identity_provider
+        else:
+            body = identity_provider.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -475,7 +484,10 @@ class IdentityProviderClient(APIClient):
             /api/v1/idps/{idpId}/credentials/csrs
             """)
 
-        body = csr_metadata.as_dict()
+        if isinstance(csr_metadata, dict):
+            body = csr_metadata
+        else:
+            body = csr_metadata.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -598,7 +610,10 @@ class IdentityProviderClient(APIClient):
                 /lifecycle/publish
             """)
 
-        body = string.as_dict()
+        if isinstance(string, dict):
+            body = string
+        else:
+            body = string.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/x-x509-ca-cert"
@@ -694,7 +709,10 @@ class IdentityProviderClient(APIClient):
                 /lifecycle/publish
             """)
 
-        body = string.as_dict()
+        if isinstance(string, dict):
+            body = string
+        else:
+            body = string.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/pkix-cert"
@@ -1211,7 +1229,10 @@ class IdentityProviderClient(APIClient):
             /api/v1/idps/{idpId}/users/{userId}
             """)
 
-        body = user_identity_provider_link_request.as_dict()
+        if isinstance(user_identity_provider_link_request, dict):
+            body = user_identity_provider_link_request
+        else:
+            body = user_identity_provider_link_request.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"

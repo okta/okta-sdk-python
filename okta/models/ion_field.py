@@ -19,8 +19,8 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.ion_form\
-    import IonForm
+import okta.models.ion_form\
+    as ion_form
 
 
 class IonField(
@@ -35,10 +35,10 @@ class IonField(
         if config:
             if "form" in config:
                 if isinstance(config["form"],
-                              IonForm):
+                              ion_form.IonForm):
                     self.form = config["form"]
                 else:
-                    self.form = IonForm(
+                    self.form = ion_form.IonForm(
                         config["form"]
                     )
             else:

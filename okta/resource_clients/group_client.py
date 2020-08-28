@@ -111,7 +111,10 @@ class GroupClient(APIClient):
             /api/v1/groups
             """)
 
-        body = group.as_dict()
+        if isinstance(group, dict):
+            body = group
+        else:
+            body = group.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -204,7 +207,10 @@ class GroupClient(APIClient):
             /api/v1/groups/rules
             """)
 
-        body = group_rule.as_dict()
+        if isinstance(group_rule, dict):
+            body = group_rule
+        else:
+            body = group_rule.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -328,7 +334,10 @@ class GroupClient(APIClient):
             /api/v1/groups/rules/{ruleId}
             """)
 
-        body = group_rule.as_dict()
+        if isinstance(group_rule, dict):
+            body = group_rule
+        else:
+            body = group_rule.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -512,7 +521,10 @@ class GroupClient(APIClient):
             /api/v1/groups/{groupId}
             """)
 
-        body = group.as_dict()
+        if isinstance(group, dict):
+            body = group
+        else:
+            body = group.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -658,7 +670,10 @@ class GroupClient(APIClient):
             encoded_query_params = urlencode(query_params)
             api_url += f"/?{encoded_query_params}"
 
-        body = assign_role_request.as_dict()
+        if isinstance(assign_role_request, dict):
+            body = assign_role_request
+        else:
+            body = assign_role_request.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"

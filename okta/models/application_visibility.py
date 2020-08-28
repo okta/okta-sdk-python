@@ -19,8 +19,8 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.application_visibility_hide\
-    import ApplicationVisibilityHide
+import okta.models.application_visibility_hide\
+    as application_visibility_hide
 
 
 class ApplicationVisibility(
@@ -39,10 +39,10 @@ class ApplicationVisibility(
                 if "autoSubmitToolbar" in config else None
             if "hide" in config:
                 if isinstance(config["hide"],
-                              ApplicationVisibilityHide):
+                              application_visibility_hide.ApplicationVisibilityHide):
                     self.hide = config["hide"]
                 else:
-                    self.hide = ApplicationVisibilityHide(
+                    self.hide = application_visibility_hide.ApplicationVisibilityHide(
                         config["hide"]
                     )
             else:

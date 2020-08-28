@@ -16,7 +16,7 @@ class TestFactorsResource:
     @pytest.mark.skip
     async def test_enroll_security_question_factor(self):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
         client = Client()
 
         # Create User
@@ -76,7 +76,7 @@ class TestFactorsResource:
     @pytest.mark.asyncio
     async def test_enroll_sms_factor(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create User
         user_profile = models.UserProfile()
@@ -130,7 +130,7 @@ class TestFactorsResource:
     @pytest.mark.asyncio
     async def test_list_factors_new_user(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create User
         user_profile = models.UserProfile()
@@ -167,7 +167,7 @@ class TestFactorsResource:
     @pytest.mark.asyncio
     async def test_get_factor(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create User
         user_profile = models.UserProfile()
@@ -222,7 +222,7 @@ class TestFactorsResource:
     @pytest.mark.asyncio
     async def test_delete_factor(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create User
         user_profile = models.UserProfile()
@@ -291,7 +291,7 @@ class TestFactorsResource:
     @pytest.mark.asyncio
     async def test_reset_factors(self):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
         client = Client()
 
         # Create User
@@ -356,7 +356,7 @@ class TestFactorsResource:
     @pytest.mark.skip
     async def test_list_supported_security_questions(self):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
         client = Client()
 
         # Create User

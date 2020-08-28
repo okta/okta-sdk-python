@@ -19,6 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.okta_collection import OktaCollection
 
 
 class ProvisioningGroups(
@@ -33,16 +34,22 @@ class ProvisioningGroups(
         if config:
             self.action = config["action"]\
                 if "action" in config else None
-            self.assignments = config["assignments"]\
-                if "assignments" in config else None
-            self.filter = config["filter"]\
-                if "filter" in config else None
+            self.assignments = OktaCollection.form_list(
+                config["assignments"] if "assignments"\
+                    in config else [],
+                str
+            )
+            self.filter = OktaCollection.form_list(
+                config["filter"] if "filter"\
+                    in config else [],
+                str
+            )
             self.source_attribute_name = config["sourceAttributeName"]\
                 if "sourceAttributeName" in config else None
         else:
             self.action = None
-            self.assignments = None
-            self.filter = None
+            self.assignments = []
+            self.filter = []
             self.source_attribute_name = None
 
     def request_format(self):

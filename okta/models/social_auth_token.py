@@ -19,6 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.okta_collection import OktaCollection
 
 
 class SocialAuthToken(
@@ -35,8 +36,11 @@ class SocialAuthToken(
                 if "expiresAt" in config else None
             self.id = config["id"]\
                 if "id" in config else None
-            self.scopes = config["scopes"]\
-                if "scopes" in config else None
+            self.scopes = OktaCollection.form_list(
+                config["scopes"] if "scopes"\
+                    in config else [],
+                str
+            )
             self.token = config["token"]\
                 if "token" in config else None
             self.token_auth_scheme = config["tokenAuthScheme"]\
@@ -46,7 +50,7 @@ class SocialAuthToken(
         else:
             self.expires_at = None
             self.id = None
-            self.scopes = None
+            self.scopes = []
             self.token = None
             self.token_auth_scheme = None
             self.token_type = None

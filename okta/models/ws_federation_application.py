@@ -20,8 +20,8 @@ limitations under the License.
 
 from okta.models.application\
     import Application
-from okta.models.ws_federation_application_settings\
-    import WsFederationApplicationSettings
+import okta.models.ws_federation_application_settings\
+    as ws_federation_application_settings
 
 
 class WsFederationApplication(
@@ -39,10 +39,10 @@ class WsFederationApplication(
                 if "name" in config else "template_wsfed"
             if "settings" in config:
                 if isinstance(config["settings"],
-                              WsFederationApplicationSettings):
+                              ws_federation_application_settings.WsFederationApplicationSettings):
                     self.settings = config["settings"]
                 else:
-                    self.settings = WsFederationApplicationSettings(
+                    self.settings = ws_federation_application_settings.WsFederationApplicationSettings(
                         config["settings"]
                     )
             else:

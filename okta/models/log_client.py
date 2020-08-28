@@ -19,10 +19,10 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.log_geographical_context\
-    import LogGeographicalContext
-from okta.models.log_user_agent\
-    import LogUserAgent
+import okta.models.log_geographical_context\
+    as log_geographical_context
+import okta.models.log_user_agent\
+    as log_user_agent
 
 
 class LogClient(
@@ -39,10 +39,10 @@ class LogClient(
                 if "device" in config else None
             if "geographicalContext" in config:
                 if isinstance(config["geographicalContext"],
-                              LogGeographicalContext):
+                              log_geographical_context.LogGeographicalContext):
                     self.geographical_context = config["geographicalContext"]
                 else:
-                    self.geographical_context = LogGeographicalContext(
+                    self.geographical_context = log_geographical_context.LogGeographicalContext(
                         config["geographicalContext"]
                     )
             else:
@@ -53,10 +53,10 @@ class LogClient(
                 if "ipAddress" in config else None
             if "userAgent" in config:
                 if isinstance(config["userAgent"],
-                              LogUserAgent):
+                              log_user_agent.LogUserAgent):
                     self.user_agent = config["userAgent"]
                 else:
-                    self.user_agent = LogUserAgent(
+                    self.user_agent = log_user_agent.LogUserAgent(
                         config["userAgent"]
                     )
             else:

@@ -19,18 +19,19 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.application_accessibility\
-    import ApplicationAccessibility
-from okta.models.application_credentials\
-    import ApplicationCredentials
-from okta.models.application_licensing\
-    import ApplicationLicensing
-from okta.models.application_settings\
-    import ApplicationSettings
-from okta.models.application_sign_on_mode\
-    import ApplicationSignOnMode
-from okta.models.application_visibility\
-    import ApplicationVisibility
+from okta.okta_collection import OktaCollection
+import okta.models.application_accessibility\
+    as application_accessibility
+import okta.models.application_credentials\
+    as application_credentials
+import okta.models.application_licensing\
+    as application_licensing
+import okta.models.application_settings\
+    as application_settings
+import okta.models.application_sign_on_mode\
+    as application_sign_on_mode
+import okta.models.application_visibility\
+    as application_visibility
 
 
 class Application(
@@ -49,10 +50,10 @@ class Application(
                 if "links" in config else None
             if "accessibility" in config:
                 if isinstance(config["accessibility"],
-                              ApplicationAccessibility):
+                              application_accessibility.ApplicationAccessibility):
                     self.accessibility = config["accessibility"]
                 else:
-                    self.accessibility = ApplicationAccessibility(
+                    self.accessibility = application_accessibility.ApplicationAccessibility(
                         config["accessibility"]
                     )
             else:
@@ -61,16 +62,19 @@ class Application(
                 if "created" in config else None
             if "credentials" in config:
                 if isinstance(config["credentials"],
-                              ApplicationCredentials):
+                              application_credentials.ApplicationCredentials):
                     self.credentials = config["credentials"]
                 else:
-                    self.credentials = ApplicationCredentials(
+                    self.credentials = application_credentials.ApplicationCredentials(
                         config["credentials"]
                     )
             else:
                 self.credentials = None
-            self.features = config["features"]\
-                if "features" in config else None
+            self.features = OktaCollection.form_list(
+                config["features"] if "features"\
+                    in config else [],
+                str
+            )
             self.id = config["id"]\
                 if "id" in config else None
             self.label = config["label"]\
@@ -79,10 +83,10 @@ class Application(
                 if "lastUpdated" in config else None
             if "licensing" in config:
                 if isinstance(config["licensing"],
-                              ApplicationLicensing):
+                              application_licensing.ApplicationLicensing):
                     self.licensing = config["licensing"]
                 else:
-                    self.licensing = ApplicationLicensing(
+                    self.licensing = application_licensing.ApplicationLicensing(
                         config["licensing"]
                     )
             else:
@@ -93,20 +97,20 @@ class Application(
                 if "profile" in config else None
             if "settings" in config:
                 if isinstance(config["settings"],
-                              ApplicationSettings):
+                              application_settings.ApplicationSettings):
                     self.settings = config["settings"]
                 else:
-                    self.settings = ApplicationSettings(
+                    self.settings = application_settings.ApplicationSettings(
                         config["settings"]
                     )
             else:
                 self.settings = None
             if "signOnMode" in config:
                 if isinstance(config["signOnMode"],
-                              ApplicationSignOnMode):
+                              application_sign_on_mode.ApplicationSignOnMode):
                     self.sign_on_mode = config["signOnMode"]
                 else:
-                    self.sign_on_mode = ApplicationSignOnMode(
+                    self.sign_on_mode = application_sign_on_mode.ApplicationSignOnMode(
                         config["signOnMode"].upper()
                     )
             else:
@@ -115,10 +119,10 @@ class Application(
                 if "status" in config else None
             if "visibility" in config:
                 if isinstance(config["visibility"],
-                              ApplicationVisibility):
+                              application_visibility.ApplicationVisibility):
                     self.visibility = config["visibility"]
                 else:
-                    self.visibility = ApplicationVisibility(
+                    self.visibility = application_visibility.ApplicationVisibility(
                         config["visibility"]
                     )
             else:
@@ -129,7 +133,7 @@ class Application(
             self.accessibility = None
             self.created = None
             self.credentials = None
-            self.features = None
+            self.features = []
             self.id = None
             self.label = None
             self.last_updated = None

@@ -86,7 +86,10 @@ class LinkedObjectClient(APIClient):
             /api/v1/meta/schemas/user/linkedObjects
             """)
 
-        body = linked_object.as_dict()
+        if isinstance(linked_object, dict):
+            body = linked_object
+        else:
+            body = linked_object.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"

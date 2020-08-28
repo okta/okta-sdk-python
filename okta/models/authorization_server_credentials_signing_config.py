@@ -19,10 +19,10 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.authorization_server_credentials_rotation_mode\
-    import AuthorizationServerCredentialsRotationMode
-from okta.models.authorization_server_credentials_use\
-    import AuthorizationServerCredentialsUse
+import okta.models.authorization_server_credentials_rotation_mode\
+    as authorization_server_credentials_rotation_mode
+import okta.models.authorization_server_credentials_use\
+    as authorization_server_credentials_use
 
 
 class AuthorizationServerCredentialsSigningConfig(
@@ -43,20 +43,20 @@ class AuthorizationServerCredentialsSigningConfig(
                 if "nextRotation" in config else None
             if "rotationMode" in config:
                 if isinstance(config["rotationMode"],
-                              AuthorizationServerCredentialsRotationMode):
+                              authorization_server_credentials_rotation_mode.AuthorizationServerCredentialsRotationMode):
                     self.rotation_mode = config["rotationMode"]
                 else:
-                    self.rotation_mode = AuthorizationServerCredentialsRotationMode(
+                    self.rotation_mode = authorization_server_credentials_rotation_mode.AuthorizationServerCredentialsRotationMode(
                         config["rotationMode"].upper()
                     )
             else:
                 self.rotation_mode = None
             if "use" in config:
                 if isinstance(config["use"],
-                              AuthorizationServerCredentialsUse):
+                              authorization_server_credentials_use.AuthorizationServerCredentialsUse):
                     self.use = config["use"]
                 else:
-                    self.use = AuthorizationServerCredentialsUse(
+                    self.use = authorization_server_credentials_use.AuthorizationServerCredentialsUse(
                         config["use"].upper()
                     )
             else:

@@ -19,12 +19,12 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.o_auth_2_actor\
-    import OAuth2Actor
-from okta.models.o_auth_2_scope_consent_grant_source\
-    import OAuth2ScopeConsentGrantSource
-from okta.models.o_auth_2_scope_consent_grant_status\
-    import OAuth2ScopeConsentGrantStatus
+import okta.models.o_auth_2_actor\
+    as o_auth_2_actor
+import okta.models.o_auth_2_scope_consent_grant_source\
+    as o_auth_2_scope_consent_grant_source
+import okta.models.o_auth_2_scope_consent_grant_status\
+    as o_auth_2_scope_consent_grant_status
 
 
 class OAuth2ScopeConsentGrant(
@@ -47,10 +47,10 @@ class OAuth2ScopeConsentGrant(
                 if "created" in config else None
             if "createdBy" in config:
                 if isinstance(config["createdBy"],
-                              OAuth2Actor):
+                              o_auth_2_actor.OAuth2Actor):
                     self.created_by = config["createdBy"]
                 else:
-                    self.created_by = OAuth2Actor(
+                    self.created_by = o_auth_2_actor.OAuth2Actor(
                         config["createdBy"]
                     )
             else:
@@ -65,20 +65,20 @@ class OAuth2ScopeConsentGrant(
                 if "scopeId" in config else None
             if "source" in config:
                 if isinstance(config["source"],
-                              OAuth2ScopeConsentGrantSource):
+                              o_auth_2_scope_consent_grant_source.OAuth2ScopeConsentGrantSource):
                     self.source = config["source"]
                 else:
-                    self.source = OAuth2ScopeConsentGrantSource(
+                    self.source = o_auth_2_scope_consent_grant_source.OAuth2ScopeConsentGrantSource(
                         config["source"].upper()
                     )
             else:
                 self.source = None
             if "status" in config:
                 if isinstance(config["status"],
-                              OAuth2ScopeConsentGrantStatus):
+                              o_auth_2_scope_consent_grant_status.OAuth2ScopeConsentGrantStatus):
                     self.status = config["status"]
                 else:
-                    self.status = OAuth2ScopeConsentGrantStatus(
+                    self.status = o_auth_2_scope_consent_grant_status.OAuth2ScopeConsentGrantStatus(
                         config["status"].upper()
                     )
             else:

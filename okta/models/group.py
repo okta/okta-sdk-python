@@ -19,10 +19,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.group_profile\
-    import GroupProfile
-from okta.models.group_type\
-    import GroupType
+from okta.okta_collection import OktaCollection
+import okta.models.group_profile\
+    as group_profile
+import okta.models.group_type\
+    as group_type
 
 
 class Group(
@@ -47,24 +48,27 @@ class Group(
                 if "lastMembershipUpdated" in config else None
             self.last_updated = config["lastUpdated"]\
                 if "lastUpdated" in config else None
-            self.object_class = config["objectClass"]\
-                if "objectClass" in config else None
+            self.object_class = OktaCollection.form_list(
+                config["objectClass"] if "objectClass"\
+                    in config else [],
+                str
+            )
             if "profile" in config:
                 if isinstance(config["profile"],
-                              GroupProfile):
+                              group_profile.GroupProfile):
                     self.profile = config["profile"]
                 else:
-                    self.profile = GroupProfile(
+                    self.profile = group_profile.GroupProfile(
                         config["profile"]
                     )
             else:
                 self.profile = None
             if "type" in config:
                 if isinstance(config["type"],
-                              GroupType):
+                              group_type.GroupType):
                     self.type = config["type"]
                 else:
-                    self.type = GroupType(
+                    self.type = group_type.GroupType(
                         config["type"].upper()
                     )
             else:
@@ -76,7 +80,7 @@ class Group(
             self.id = None
             self.last_membership_updated = None
             self.last_updated = None
-            self.object_class = None
+            self.object_class = []
             self.profile = None
             self.type = None
 

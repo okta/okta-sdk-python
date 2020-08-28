@@ -19,6 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.okta_collection import OktaCollection
 
 
 class GrantTypePolicyRuleCondition(
@@ -31,10 +32,13 @@ class GrantTypePolicyRuleCondition(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.include = config["include"]\
-                if "include" in config else None
+            self.include = OktaCollection.form_list(
+                config["include"] if "include"\
+                    in config else [],
+                str
+            )
         else:
-            self.include = None
+            self.include = []
 
     def request_format(self):
         parent_req_format = super().request_format()

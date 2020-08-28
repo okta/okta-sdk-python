@@ -19,8 +19,8 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.o_auth_2_claim_conditions\
-    import OAuth2ClaimConditions
+import okta.models.o_auth_2_claim_conditions\
+    as o_auth_2_claim_conditions
 
 
 class OAuth2Claim(
@@ -41,10 +41,10 @@ class OAuth2Claim(
                 if "claimType" in config else None
             if "conditions" in config:
                 if isinstance(config["conditions"],
-                              OAuth2ClaimConditions):
+                              o_auth_2_claim_conditions.OAuth2ClaimConditions):
                     self.conditions = config["conditions"]
                 else:
-                    self.conditions = OAuth2ClaimConditions(
+                    self.conditions = o_auth_2_claim_conditions.OAuth2ClaimConditions(
                         config["conditions"]
                     )
             else:

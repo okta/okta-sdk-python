@@ -19,6 +19,9 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.okta_collection import OktaCollection
+import okta.models.scope\
+    as scope
 
 
 class TrustedOrigin(
@@ -47,8 +50,11 @@ class TrustedOrigin(
                 if "name" in config else None
             self.origin = config["origin"]\
                 if "origin" in config else None
-            self.scopes = config["scopes"]\
-                if "scopes" in config else None
+            self.scopes = OktaCollection.form_list(
+                config["scopes"] if "scopes"\
+                    in config else [],
+                scope.Scope
+            )
             self.status = config["status"]\
                 if "status" in config else None
         else:
@@ -60,7 +66,7 @@ class TrustedOrigin(
             self.last_updated_by = None
             self.name = None
             self.origin = None
-            self.scopes = None
+            self.scopes = []
             self.status = None
 
     def request_format(self):

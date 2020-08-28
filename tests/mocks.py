@@ -7,6 +7,9 @@ import json
 from yarl import URL
 import datetime as dt
 import multidict
+from tests.conftest import PYTEST_MOCK_CLIENT
+import os
+import time
 
 REQUEST_TIMEOUT = 5  # seconds
 ORG_URL = "https://test.okta.com"
@@ -29,8 +32,13 @@ ALT_CACHE_VALUE = "dbca"
 
 
 class MockOktaClient(Client):
-    def __init__(self):
-        super().__init__(CLIENT_CONFIG)
+    def __init__(self, fs):
+        if PYTEST_MOCK_CLIENT in os.environ:
+            fs.pause()
+            super().__init__()
+            fs.resume()
+        else:
+            super().__init__(CLIENT_CONFIG)
 
 
 async def mock_GET_HTTP_request(*args, **kwargs):
@@ -218,7 +226,8 @@ async def mock_access_token(*args, **kwargs):
 
 
 def mock_pause_function(*args, **kwargs):
-    pass
+    if PYTEST_MOCK_CLIENT in os.environ:
+        time.sleep(args[0])
 
 
 def mock_cache_return_none(*args, **kwargs):

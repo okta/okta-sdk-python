@@ -19,10 +19,10 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.password_credential_hash\
-    import PasswordCredentialHash
-from okta.models.password_credential_hook\
-    import PasswordCredentialHook
+import okta.models.password_credential_hash\
+    as password_credential_hash
+import okta.models.password_credential_hook\
+    as password_credential_hook
 
 
 class PasswordCredential(
@@ -37,20 +37,20 @@ class PasswordCredential(
         if config:
             if "hash" in config:
                 if isinstance(config["hash"],
-                              PasswordCredentialHash):
+                              password_credential_hash.PasswordCredentialHash):
                     self.hash = config["hash"]
                 else:
-                    self.hash = PasswordCredentialHash(
+                    self.hash = password_credential_hash.PasswordCredentialHash(
                         config["hash"]
                     )
             else:
                 self.hash = None
             if "hook" in config:
                 if isinstance(config["hook"],
-                              PasswordCredentialHook):
+                              password_credential_hook.PasswordCredentialHook):
                     self.hook = config["hook"]
                 else:
-                    self.hook = PasswordCredentialHook(
+                    self.hook = password_credential_hook.PasswordCredentialHook(
                         config["hook"]
                     )
             else:

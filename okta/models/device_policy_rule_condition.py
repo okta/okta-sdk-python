@@ -19,8 +19,8 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.device_policy_rule_condition_platform\
-    import DevicePolicyRuleConditionPlatform
+import okta.models.device_policy_rule_condition_platform\
+    as device_policy_rule_condition_platform
 
 
 class DevicePolicyRuleCondition(
@@ -37,10 +37,10 @@ class DevicePolicyRuleCondition(
                 if "migrated" in config else None
             if "platform" in config:
                 if isinstance(config["platform"],
-                              DevicePolicyRuleConditionPlatform):
+                              device_policy_rule_condition_platform.DevicePolicyRuleConditionPlatform):
                     self.platform = config["platform"]
                 else:
-                    self.platform = DevicePolicyRuleConditionPlatform(
+                    self.platform = device_policy_rule_condition_platform.DevicePolicyRuleConditionPlatform(
                         config["platform"]
                     )
             else:

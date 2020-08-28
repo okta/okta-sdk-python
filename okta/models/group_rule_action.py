@@ -19,8 +19,8 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.group_rule_group_assignment\
-    import GroupRuleGroupAssignment
+import okta.models.group_rule_group_assignment\
+    as group_rule_group_assignment
 
 
 class GroupRuleAction(
@@ -35,10 +35,10 @@ class GroupRuleAction(
         if config:
             if "assignUserToGroups" in config:
                 if isinstance(config["assignUserToGroups"],
-                              GroupRuleGroupAssignment):
+                              group_rule_group_assignment.GroupRuleGroupAssignment):
                     self.assign_user_to_groups = config["assignUserToGroups"]
                 else:
-                    self.assign_user_to_groups = GroupRuleGroupAssignment(
+                    self.assign_user_to_groups = group_rule_group_assignment.GroupRuleGroupAssignment(
                         config["assignUserToGroups"]
                     )
             else:

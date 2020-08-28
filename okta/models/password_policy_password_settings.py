@@ -19,12 +19,12 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.password_policy_password_settings_age\
-    import PasswordPolicyPasswordSettingsAge
-from okta.models.password_policy_password_settings_complexity\
-    import PasswordPolicyPasswordSettingsComplexity
-from okta.models.password_policy_password_settings_lockout\
-    import PasswordPolicyPasswordSettingsLockout
+import okta.models.password_policy_password_settings_age\
+    as password_policy_password_settings_age
+import okta.models.password_policy_password_settings_complexity\
+    as password_policy_password_settings_complexity
+import okta.models.password_policy_password_settings_lockout\
+    as password_policy_password_settings_lockout
 
 
 class PasswordPolicyPasswordSettings(
@@ -39,30 +39,30 @@ class PasswordPolicyPasswordSettings(
         if config:
             if "age" in config:
                 if isinstance(config["age"],
-                              PasswordPolicyPasswordSettingsAge):
+                              password_policy_password_settings_age.PasswordPolicyPasswordSettingsAge):
                     self.age = config["age"]
                 else:
-                    self.age = PasswordPolicyPasswordSettingsAge(
+                    self.age = password_policy_password_settings_age.PasswordPolicyPasswordSettingsAge(
                         config["age"]
                     )
             else:
                 self.age = None
             if "complexity" in config:
                 if isinstance(config["complexity"],
-                              PasswordPolicyPasswordSettingsComplexity):
+                              password_policy_password_settings_complexity.PasswordPolicyPasswordSettingsComplexity):
                     self.complexity = config["complexity"]
                 else:
-                    self.complexity = PasswordPolicyPasswordSettingsComplexity(
+                    self.complexity = password_policy_password_settings_complexity.PasswordPolicyPasswordSettingsComplexity(
                         config["complexity"]
                     )
             else:
                 self.complexity = None
             if "lockout" in config:
                 if isinstance(config["lockout"],
-                              PasswordPolicyPasswordSettingsLockout):
+                              password_policy_password_settings_lockout.PasswordPolicyPasswordSettingsLockout):
                     self.lockout = config["lockout"]
                 else:
-                    self.lockout = PasswordPolicyPasswordSettingsLockout(
+                    self.lockout = password_policy_password_settings_lockout.PasswordPolicyPasswordSettingsLockout(
                         config["lockout"]
                     )
             else:

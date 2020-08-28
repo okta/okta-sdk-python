@@ -16,7 +16,7 @@ class TestEventHooksResource:
     @pytest.mark.asyncio
     async def test_create_get_event_hook(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # create Event Hook
         event_hook_model = models.EventHook({
@@ -59,6 +59,9 @@ class TestEventHooksResource:
         assert created_event_hook.channel is not None
         assert created_event_hook.channel.config.uri ==\
             event_hook_model.channel.config.uri
+        assert len(created_event_hook.channel.config.headers) == 1
+        assert isinstance(created_event_hook.channel.config.headers[0],
+                          models.EventHookChannelConfigHeader)
 
         # Retrieve
         retrieved_event_hook, _, err = await client.get_event_hook(
@@ -78,7 +81,7 @@ class TestEventHooksResource:
     @pytest.mark.asyncio
     async def test_update_event_hook(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # create Event Hook
         event_hook_model = models.EventHook({
@@ -190,7 +193,7 @@ class TestEventHooksResource:
     @pytest.mark.asyncio
     async def test_delete_event_hook(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # create Event Hook
         event_hook_model = models.EventHook({
@@ -260,7 +263,7 @@ class TestEventHooksResource:
     @pytest.mark.asyncio
     async def test_list_event_hooks(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         EVENT_HOOKS_COUNT = 3
         # Keep IDs
@@ -330,7 +333,7 @@ class TestEventHooksResource:
     @pytest.mark.asyncio
     async def test_deactivate_event_hook(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # create Event Hook
         event_hook_model = models.EventHook({
@@ -405,7 +408,7 @@ class TestEventHooksResource:
     @pytest.mark.asyncio
     async def test_activate_event_hook(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # create Event Hook
         event_hook_model = models.EventHook({

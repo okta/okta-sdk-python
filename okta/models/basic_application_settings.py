@@ -20,8 +20,8 @@ limitations under the License.
 
 from okta.models.application_settings\
     import ApplicationSettings
-from okta.models.basic_application_settings_application\
-    import BasicApplicationSettingsApplication
+import okta.models.basic_application_settings_application\
+    as basic_application_settings_application
 
 
 class BasicApplicationSettings(
@@ -36,10 +36,10 @@ class BasicApplicationSettings(
         if config:
             if "app" in config:
                 if isinstance(config["app"],
-                              BasicApplicationSettingsApplication):
+                              basic_application_settings_application.BasicApplicationSettingsApplication):
                     self.app = config["app"]
                 else:
-                    self.app = BasicApplicationSettingsApplication(
+                    self.app = basic_application_settings_application.BasicApplicationSettingsApplication(
                         config["app"]
                     )
             else:

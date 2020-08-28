@@ -19,8 +19,8 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.protocol_endpoint\
-    import ProtocolEndpoint
+import okta.models.protocol_endpoint\
+    as protocol_endpoint
 
 
 class ProtocolEndpoints(
@@ -35,80 +35,80 @@ class ProtocolEndpoints(
         if config:
             if "acs" in config:
                 if isinstance(config["acs"],
-                              ProtocolEndpoint):
+                              protocol_endpoint.ProtocolEndpoint):
                     self.acs = config["acs"]
                 else:
-                    self.acs = ProtocolEndpoint(
+                    self.acs = protocol_endpoint.ProtocolEndpoint(
                         config["acs"]
                     )
             else:
                 self.acs = None
             if "authorization" in config:
                 if isinstance(config["authorization"],
-                              ProtocolEndpoint):
+                              protocol_endpoint.ProtocolEndpoint):
                     self.authorization = config["authorization"]
                 else:
-                    self.authorization = ProtocolEndpoint(
+                    self.authorization = protocol_endpoint.ProtocolEndpoint(
                         config["authorization"]
                     )
             else:
                 self.authorization = None
             if "jwks" in config:
                 if isinstance(config["jwks"],
-                              ProtocolEndpoint):
+                              protocol_endpoint.ProtocolEndpoint):
                     self.jwks = config["jwks"]
                 else:
-                    self.jwks = ProtocolEndpoint(
+                    self.jwks = protocol_endpoint.ProtocolEndpoint(
                         config["jwks"]
                     )
             else:
                 self.jwks = None
             if "metadata" in config:
                 if isinstance(config["metadata"],
-                              ProtocolEndpoint):
+                              protocol_endpoint.ProtocolEndpoint):
                     self.metadata = config["metadata"]
                 else:
-                    self.metadata = ProtocolEndpoint(
+                    self.metadata = protocol_endpoint.ProtocolEndpoint(
                         config["metadata"]
                     )
             else:
                 self.metadata = None
             if "slo" in config:
                 if isinstance(config["slo"],
-                              ProtocolEndpoint):
+                              protocol_endpoint.ProtocolEndpoint):
                     self.slo = config["slo"]
                 else:
-                    self.slo = ProtocolEndpoint(
+                    self.slo = protocol_endpoint.ProtocolEndpoint(
                         config["slo"]
                     )
             else:
                 self.slo = None
             if "sso" in config:
                 if isinstance(config["sso"],
-                              ProtocolEndpoint):
+                              protocol_endpoint.ProtocolEndpoint):
                     self.sso = config["sso"]
                 else:
-                    self.sso = ProtocolEndpoint(
+                    self.sso = protocol_endpoint.ProtocolEndpoint(
                         config["sso"]
                     )
             else:
                 self.sso = None
             if "token" in config:
                 if isinstance(config["token"],
-                              ProtocolEndpoint):
+                              protocol_endpoint.ProtocolEndpoint):
                     self.token = config["token"]
                 else:
-                    self.token = ProtocolEndpoint(
+                    self.token = protocol_endpoint.ProtocolEndpoint(
                         config["token"]
                     )
             else:
                 self.token = None
             if "userInfo" in config:
                 if isinstance(config["userInfo"],
-                              ProtocolEndpoint):
+                              protocol_endpoint.ProtocolEndpoint):
                     self.user_info = config["userInfo"]
                 else:
-                    self.user_info = ProtocolEndpoint(
+                    self.user_info = protocol_endpoint.ProtocolEndpoint(
                         config["userInfo"]
                     )
             else:

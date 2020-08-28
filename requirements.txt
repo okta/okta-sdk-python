@@ -13,6 +13,8 @@ flake8
 # Testing dependencies
 pytest
 pytest-asyncio
-pytest-vcr
 pytest-mock
+pytest-recording
 pyfakefs
+aenum
+pydash

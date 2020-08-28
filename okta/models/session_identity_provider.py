@@ -19,8 +19,8 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.session_identity_provider_type\
-    import SessionIdentityProviderType
+import okta.models.session_identity_provider_type\
+    as session_identity_provider_type
 
 
 class SessionIdentityProvider(
@@ -37,10 +37,10 @@ class SessionIdentityProvider(
                 if "id" in config else None
             if "type" in config:
                 if isinstance(config["type"],
-                              SessionIdentityProviderType):
+                              session_identity_provider_type.SessionIdentityProviderType):
                     self.type = config["type"]
                 else:
-                    self.type = SessionIdentityProviderType(
+                    self.type = session_identity_provider_type.SessionIdentityProviderType(
                         config["type"].upper()
                     )
             else:

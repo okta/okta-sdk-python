@@ -19,14 +19,14 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.log_authentication_provider\
-    import LogAuthenticationProvider
-from okta.models.log_credential_provider\
-    import LogCredentialProvider
-from okta.models.log_credential_type\
-    import LogCredentialType
-from okta.models.log_issuer\
-    import LogIssuer
+import okta.models.log_authentication_provider\
+    as log_authentication_provider
+import okta.models.log_credential_provider\
+    as log_credential_provider
+import okta.models.log_credential_type\
+    as log_credential_type
+import okta.models.log_issuer\
+    as log_issuer
 
 
 class LogAuthenticationContext(
@@ -41,10 +41,10 @@ class LogAuthenticationContext(
         if config:
             if "authenticationProvider" in config:
                 if isinstance(config["authenticationProvider"],
-                              LogAuthenticationProvider):
+                              log_authentication_provider.LogAuthenticationProvider):
                     self.authentication_provider = config["authenticationProvider"]
                 else:
-                    self.authentication_provider = LogAuthenticationProvider(
+                    self.authentication_provider = log_authentication_provider.LogAuthenticationProvider(
                         config["authenticationProvider"].upper()
                     )
             else:
@@ -53,20 +53,20 @@ class LogAuthenticationContext(
                 if "authenticationStep" in config else None
             if "credentialProvider" in config:
                 if isinstance(config["credentialProvider"],
-                              LogCredentialProvider):
+                              log_credential_provider.LogCredentialProvider):
                     self.credential_provider = config["credentialProvider"]
                 else:
-                    self.credential_provider = LogCredentialProvider(
+                    self.credential_provider = log_credential_provider.LogCredentialProvider(
                         config["credentialProvider"].upper()
                     )
             else:
                 self.credential_provider = None
             if "credentialType" in config:
                 if isinstance(config["credentialType"],
-                              LogCredentialType):
+                              log_credential_type.LogCredentialType):
                     self.credential_type = config["credentialType"]
                 else:
-                    self.credential_type = LogCredentialType(
+                    self.credential_type = log_credential_type.LogCredentialType(
                         config["credentialType"].upper()
                     )
             else:
@@ -77,10 +77,10 @@ class LogAuthenticationContext(
                 if "interface" in config else None
             if "issuer" in config:
                 if isinstance(config["issuer"],
-                              LogIssuer):
+                              log_issuer.LogIssuer):
                     self.issuer = config["issuer"]
                 else:
-                    self.issuer = LogIssuer(
+                    self.issuer = log_issuer.LogIssuer(
                         config["issuer"]
                     )
             else:

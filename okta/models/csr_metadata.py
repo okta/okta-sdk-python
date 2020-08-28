@@ -19,10 +19,10 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.csr_metadata_subject\
-    import CsrMetadataSubject
-from okta.models.csr_metadata_subject_alt_names\
-    import CsrMetadataSubjectAltNames
+import okta.models.csr_metadata_subject\
+    as csr_metadata_subject
+import okta.models.csr_metadata_subject_alt_names\
+    as csr_metadata_subject_alt_names
 
 
 class CsrMetadata(
@@ -37,20 +37,20 @@ class CsrMetadata(
         if config:
             if "subject" in config:
                 if isinstance(config["subject"],
-                              CsrMetadataSubject):
+                              csr_metadata_subject.CsrMetadataSubject):
                     self.subject = config["subject"]
                 else:
-                    self.subject = CsrMetadataSubject(
+                    self.subject = csr_metadata_subject.CsrMetadataSubject(
                         config["subject"]
                     )
             else:
                 self.subject = None
             if "subjectAltNames" in config:
                 if isinstance(config["subjectAltNames"],
-                              CsrMetadataSubjectAltNames):
+                              csr_metadata_subject_alt_names.CsrMetadataSubjectAltNames):
                     self.subject_alt_names = config["subjectAltNames"]
                 else:
-                    self.subject_alt_names = CsrMetadataSubjectAltNames(
+                    self.subject_alt_names = csr_metadata_subject_alt_names.CsrMetadataSubjectAltNames(
                         config["subjectAltNames"]
                     )
             else:

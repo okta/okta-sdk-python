@@ -20,10 +20,10 @@ limitations under the License.
 
 from okta.models.user_factor\
     import UserFactor
-from okta.models.factor_result_type\
-    import FactorResultType
-from okta.models.push_user_factor_profile\
-    import PushUserFactorProfile
+import okta.models.factor_result_type\
+    as factor_result_type
+import okta.models.push_user_factor_profile\
+    as push_user_factor_profile
 
 
 class PushUserFactor(
@@ -41,20 +41,20 @@ class PushUserFactor(
                 if "expiresAt" in config else None
             if "factorResult" in config:
                 if isinstance(config["factorResult"],
-                              FactorResultType):
+                              factor_result_type.FactorResultType):
                     self.factor_result = config["factorResult"]
                 else:
-                    self.factor_result = FactorResultType(
+                    self.factor_result = factor_result_type.FactorResultType(
                         config["factorResult"].upper()
                     )
             else:
                 self.factor_result = None
             if "profile" in config:
                 if isinstance(config["profile"],
-                              PushUserFactorProfile):
+                              push_user_factor_profile.PushUserFactorProfile):
                     self.profile = config["profile"]
                 else:
-                    self.profile = PushUserFactorProfile(
+                    self.profile = push_user_factor_profile.PushUserFactorProfile(
                         config["profile"]
                     )
             else:

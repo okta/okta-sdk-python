@@ -19,14 +19,14 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.factor_type\
-    import FactorType
-from okta.models.factor_provider\
-    import FactorProvider
-from okta.models.factor_status\
-    import FactorStatus
-from okta.models.verify_factor_request\
-    import VerifyFactorRequest
+import okta.models.factor_type\
+    as factor_type
+import okta.models.factor_provider\
+    as factor_provider
+import okta.models.factor_status\
+    as factor_status
+import okta.models.verify_factor_request\
+    as verify_factor_request
 
 
 class UserFactor(
@@ -47,10 +47,10 @@ class UserFactor(
                 if "created" in config else None
             if "factorType" in config:
                 if isinstance(config["factorType"],
-                              FactorType):
+                              factor_type.FactorType):
                     self.factor_type = config["factorType"]
                 else:
-                    self.factor_type = FactorType(
+                    self.factor_type = factor_type.FactorType(
                         config["factorType"].upper()
                     )
             else:
@@ -61,30 +61,30 @@ class UserFactor(
                 if "lastUpdated" in config else None
             if "provider" in config:
                 if isinstance(config["provider"],
-                              FactorProvider):
+                              factor_provider.FactorProvider):
                     self.provider = config["provider"]
                 else:
-                    self.provider = FactorProvider(
+                    self.provider = factor_provider.FactorProvider(
                         config["provider"].upper()
                     )
             else:
                 self.provider = None
             if "status" in config:
                 if isinstance(config["status"],
-                              FactorStatus):
+                              factor_status.FactorStatus):
                     self.status = config["status"]
                 else:
-                    self.status = FactorStatus(
+                    self.status = factor_status.FactorStatus(
                         config["status"].upper()
                     )
             else:
                 self.status = None
             if "verify" in config:
                 if isinstance(config["verify"],
-                              VerifyFactorRequest):
+                              verify_factor_request.VerifyFactorRequest):
                     self.verify = config["verify"]
                 else:
-                    self.verify = VerifyFactorRequest(
+                    self.verify = verify_factor_request.VerifyFactorRequest(
                         config["verify"]
                     )
             else:

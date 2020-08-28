@@ -1,5 +1,6 @@
 import pytest
 from tests.mocks import MockOktaClient
+from tests.mocks import mock_pause_function
 from http import HTTPStatus
 import okta.models as models
 
@@ -13,7 +14,7 @@ class TestGroupsResource:
     @pytest.mark.asyncio
     async def test_create_get_group(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Group Object
         GROUP_NAME = "Group-Target-Test"
@@ -48,7 +49,7 @@ class TestGroupsResource:
     @pytest.mark.asyncio
     async def test_list_groups(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Group Object
         GROUP_NAME = "Group-Target-Test"
@@ -77,7 +78,7 @@ class TestGroupsResource:
     @pytest.mark.asyncio
     async def test_search_group(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Group Object
         GROUP_NAME = "Group-Target-Test"
@@ -108,7 +109,7 @@ class TestGroupsResource:
     @pytest.mark.asyncio
     async def test_update_group(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Group Object
         GROUP_NAME = "Group-Target-Test"
@@ -151,7 +152,7 @@ class TestGroupsResource:
     @pytest.mark.asyncio
     async def test_remove_group(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Password
         password = models.PasswordCredential({
@@ -223,7 +224,7 @@ class TestGroupsResource:
     @pytest.mark.asyncio
     async def test_group_roles_operations(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Group Object
         GROUP_NAME = "Group-Target-Test"
@@ -278,7 +279,7 @@ class TestGroupsResource:
     @pytest.mark.asyncio
     async def test_group_users_operations(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Password
         password = models.PasswordCredential({
@@ -354,7 +355,7 @@ class TestGroupsResource:
     @pytest.mark.asyncio
     async def test_group_rule_operations(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Password
         password = models.PasswordCredential({
@@ -368,9 +369,9 @@ class TestGroupsResource:
         # Create User Profile and CreateUser Request
         user_profile = models.UserProfile()
         user_profile.first_name = "John"
-        user_profile.last_name = "Doe-Activate"
-        user_profile.email = "John.Doe-Activate@example.com"
-        user_profile.login = "John.Doe-Activate@example.com"
+        user_profile.last_name = "Doe-Group-Rule-Ops"
+        user_profile.email = "John.Doe-Group-Rule-Ops@example.com"
+        user_profile.login = "John.Doe-Group-Rule-Ops@example.com"
 
         create_user_req = models.CreateUserRequest({
             "credentials": user_creds,
@@ -385,7 +386,7 @@ class TestGroupsResource:
         assert isinstance(user, models.User)
 
         # Create Group Object
-        GROUP_NAME = "Group-Target-Test"
+        GROUP_NAME = "Group-Target-Test-Group-Rule-Ops"
         group_profile = models.GroupProfile({
             "name": GROUP_NAME
         })
@@ -400,7 +401,7 @@ class TestGroupsResource:
 
         # Create Group Rule
         last_name = user.profile.last_name
-        GROUP_RULE_NAME = "Test-Group-Rule"
+        GROUP_RULE_NAME = "Test-Group-Rule-Group-Rule-Ops"
         GROUP_RULE_TYPE = "group_rule"
         GROUP_RULE_EXP_TYPE = "urn:okta:expression:1.0"
         GROUP_RULE_EXP_VALUE = f"user.lastName==\"{last_name}\""
@@ -436,16 +437,19 @@ class TestGroupsResource:
         _, err = await client.activate_group_rule(group_rule.id)
         assert err is None
 
-        # 15 second sleep for backend to updateƒ
+        # 15 second sleep for backend to update
+        mock_pause_function(15)
 
         users_in_group, _, err = await client.list_group_users(group.id)
         assert err is None
-        assert next((usr for usr in users_in_group if usr.id == user.id))
+        assert next((usr for usr in users_in_group if usr.id ==
+                     user.id), None) is not None
 
         # Ensure activated rule is in group rules
         group_rules, _, err = await client.list_group_rules()
         assert err is None
-        assert next((rule for rule in group_rules if rule.id == group_rule.id))
+        assert next((rule for rule in group_rules if rule.id ==
+                     group_rule.id), None) is not None
 
         # Deactivate rule (to update)
         _, err = await client.deactivate_group_rule(group_rule.id)
@@ -489,6 +493,7 @@ class TestGroupsResource:
         assert err is None
 
         # 15 second sleep for backend to update
+        mock_pause_function(15)
 
         users_in_group, _, err = await client.list_group_users(group.id)
         assert err is None
@@ -517,7 +522,7 @@ class TestGroupsResource:
     @pytest.mark.asyncio
     async def test_group_target_add(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Group Objects
         GROUP_1_NAME = "Group-Target-Test 1"
@@ -574,7 +579,7 @@ class TestGroupsResource:
     @pytest.mark.asyncio
     async def test_group_target_remove(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Group Objects
         GROUP_1_NAME = "Group-Target-Test 1"
@@ -660,7 +665,7 @@ class TestGroupsResource:
     @pytest.mark.asyncio
     async def test_group_assigned_applications(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient()
+        client = MockOktaClient(fs)
 
         # Create Group Objects
         GROUP_NAME = "Group-Target-Test"
@@ -719,6 +724,7 @@ class TestGroupsResource:
         assert err is None
 
         # 3 second sleep for backend to update
+        mock_pause_function(3)
 
         # Check assigned apps and ensure created app is found
         assigned_apps, _, err = await \
