@@ -19,6 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.okta_collection import OktaCollection
 
 
 class CsrMetadataSubjectAltNames(
@@ -31,10 +32,13 @@ class CsrMetadataSubjectAltNames(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.dns_names = config["dnsNames"]\
-                if "dnsNames" in config else None
+            self.dns_names = OktaCollection.form_list(
+                config["dnsNames"] if "dnsNames"\
+                    in config else [],
+                str
+            )
         else:
-            self.dns_names = None
+            self.dns_names = []
 
     def request_format(self):
         parent_req_format = super().request_format()

@@ -19,6 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.okta_collection import OktaCollection
 
 
 class PasswordPolicyPasswordSettingsLockout(
@@ -37,13 +38,16 @@ class PasswordPolicyPasswordSettingsLockout(
                 if "maxAttempts" in config else None
             self.show_lockout_failures = config["showLockoutFailures"]\
                 if "showLockoutFailures" in config else None
-            self.user_lockout_notification_channels = config["userLockoutNotificationChannels"]\
-                if "userLockoutNotificationChannels" in config else None
+            self.user_lockout_notification_channels = OktaCollection.form_list(
+                config["userLockoutNotificationChannels"] if "userLockoutNotificationChannels"\
+                    in config else [],
+                str
+            )
         else:
             self.auto_unlock_minutes = None
             self.max_attempts = None
             self.show_lockout_failures = None
-            self.user_lockout_notification_channels = None
+            self.user_lockout_notification_channels = []
 
     def request_format(self):
         parent_req_format = super().request_format()

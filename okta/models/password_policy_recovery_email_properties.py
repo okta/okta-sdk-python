@@ -19,8 +19,8 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.password_policy_recovery_email_recovery_token\
-    import PasswordPolicyRecoveryEmailRecoveryToken
+import okta.models.password_policy_recovery_email_recovery_token\
+    as password_policy_recovery_email_recovery_token
 
 
 class PasswordPolicyRecoveryEmailProperties(
@@ -35,10 +35,10 @@ class PasswordPolicyRecoveryEmailProperties(
         if config:
             if "recoveryToken" in config:
                 if isinstance(config["recoveryToken"],
-                              PasswordPolicyRecoveryEmailRecoveryToken):
+                              password_policy_recovery_email_recovery_token.PasswordPolicyRecoveryEmailRecoveryToken):
                     self.recovery_token = config["recoveryToken"]
                 else:
-                    self.recovery_token = PasswordPolicyRecoveryEmailRecoveryToken(
+                    self.recovery_token = password_policy_recovery_email_recovery_token.PasswordPolicyRecoveryEmailRecoveryToken(
                         config["recoveryToken"]
                     )
             else:

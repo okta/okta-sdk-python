@@ -19,6 +19,9 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.okta_collection import OktaCollection
+import okta.models.log_ip_address\
+    as log_ip_address
 
 
 class LogRequest(
@@ -31,10 +34,13 @@ class LogRequest(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.ip_chain = config["ipChain"]\
-                if "ipChain" in config else None
+            self.ip_chain = OktaCollection.form_list(
+                config["ipChain"] if "ipChain"\
+                    in config else [],
+                log_ip_address.LogIpAddress
+            )
         else:
-            self.ip_chain = None
+            self.ip_chain = []
 
     def request_format(self):
         parent_req_format = super().request_format()

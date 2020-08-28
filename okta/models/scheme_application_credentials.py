@@ -20,12 +20,12 @@ limitations under the License.
 
 from okta.models.application_credentials\
     import ApplicationCredentials
-from okta.models.password_credential\
-    import PasswordCredential
-from okta.models.application_credentials_scheme\
-    import ApplicationCredentialsScheme
-from okta.models.application_credentials_signing\
-    import ApplicationCredentialsSigning
+import okta.models.password_credential\
+    as password_credential
+import okta.models.application_credentials_scheme\
+    as application_credentials_scheme
+import okta.models.application_credentials_signing\
+    as application_credentials_signing
 
 
 class SchemeApplicationCredentials(
@@ -40,10 +40,10 @@ class SchemeApplicationCredentials(
         if config:
             if "password" in config:
                 if isinstance(config["password"],
-                              PasswordCredential):
+                              password_credential.PasswordCredential):
                     self.password = config["password"]
                 else:
-                    self.password = PasswordCredential(
+                    self.password = password_credential.PasswordCredential(
                         config["password"]
                     )
             else:
@@ -52,20 +52,20 @@ class SchemeApplicationCredentials(
                 if "revealPassword" in config else None
             if "scheme" in config:
                 if isinstance(config["scheme"],
-                              ApplicationCredentialsScheme):
+                              application_credentials_scheme.ApplicationCredentialsScheme):
                     self.scheme = config["scheme"]
                 else:
-                    self.scheme = ApplicationCredentialsScheme(
+                    self.scheme = application_credentials_scheme.ApplicationCredentialsScheme(
                         config["scheme"].upper()
                     )
             else:
                 self.scheme = None
             if "signing" in config:
                 if isinstance(config["signing"],
-                              ApplicationCredentialsSigning):
+                              application_credentials_signing.ApplicationCredentialsSigning):
                     self.signing = config["signing"]
                 else:
-                    self.signing = ApplicationCredentialsSigning(
+                    self.signing = application_credentials_signing.ApplicationCredentialsSigning(
                         config["signing"]
                     )
             else:

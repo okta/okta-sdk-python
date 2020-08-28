@@ -20,10 +20,10 @@ limitations under the License.
 
 from okta.models.application\
     import Application
-from okta.models.o_auth_application_credentials\
-    import OAuthApplicationCredentials
-from okta.models.open_id_connect_application_settings\
-    import OpenIdConnectApplicationSettings
+import okta.models.o_auth_application_credentials\
+    as o_auth_application_credentials
+import okta.models.open_id_connect_application_settings\
+    as open_id_connect_application_settings
 
 
 class OpenIdConnectApplication(
@@ -39,10 +39,10 @@ class OpenIdConnectApplication(
             self.sign_on_mode = "OPENID_CONNECT"
             if "credentials" in config:
                 if isinstance(config["credentials"],
-                              OAuthApplicationCredentials):
+                              o_auth_application_credentials.OAuthApplicationCredentials):
                     self.credentials = config["credentials"]
                 else:
-                    self.credentials = OAuthApplicationCredentials(
+                    self.credentials = o_auth_application_credentials.OAuthApplicationCredentials(
                         config["credentials"]
                     )
             else:
@@ -51,10 +51,10 @@ class OpenIdConnectApplication(
                 if "name" in config else "oidc_client"
             if "settings" in config:
                 if isinstance(config["settings"],
-                              OpenIdConnectApplicationSettings):
+                              open_id_connect_application_settings.OpenIdConnectApplicationSettings):
                     self.settings = config["settings"]
                 else:
-                    self.settings = OpenIdConnectApplicationSettings(
+                    self.settings = open_id_connect_application_settings.OpenIdConnectApplicationSettings(
                         config["settings"]
                     )
             else:

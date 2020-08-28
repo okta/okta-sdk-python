@@ -19,12 +19,12 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.group_rule_action\
-    import GroupRuleAction
-from okta.models.group_rule_conditions\
-    import GroupRuleConditions
-from okta.models.group_rule_status\
-    import GroupRuleStatus
+import okta.models.group_rule_action\
+    as group_rule_action
+import okta.models.group_rule_conditions\
+    as group_rule_conditions
+import okta.models.group_rule_status\
+    as group_rule_status
 
 
 class GroupRule(
@@ -39,20 +39,20 @@ class GroupRule(
         if config:
             if "actions" in config:
                 if isinstance(config["actions"],
-                              GroupRuleAction):
+                              group_rule_action.GroupRuleAction):
                     self.actions = config["actions"]
                 else:
-                    self.actions = GroupRuleAction(
+                    self.actions = group_rule_action.GroupRuleAction(
                         config["actions"]
                     )
             else:
                 self.actions = None
             if "conditions" in config:
                 if isinstance(config["conditions"],
-                              GroupRuleConditions):
+                              group_rule_conditions.GroupRuleConditions):
                     self.conditions = config["conditions"]
                 else:
-                    self.conditions = GroupRuleConditions(
+                    self.conditions = group_rule_conditions.GroupRuleConditions(
                         config["conditions"]
                     )
             else:
@@ -67,10 +67,10 @@ class GroupRule(
                 if "name" in config else None
             if "status" in config:
                 if isinstance(config["status"],
-                              GroupRuleStatus):
+                              group_rule_status.GroupRuleStatus):
                     self.status = config["status"]
                 else:
-                    self.status = GroupRuleStatus(
+                    self.status = group_rule_status.GroupRuleStatus(
                         config["status"].upper()
                     )
             else:

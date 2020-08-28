@@ -20,8 +20,8 @@ limitations under the License.
 
 from okta.models.application_settings\
     import ApplicationSettings
-from okta.models.secure_password_store_application_settings_application\
-    import SecurePasswordStoreApplicationSettingsApplication
+import okta.models.secure_password_store_application_settings_application\
+    as secure_password_store_application_settings_application
 
 
 class SecurePasswordStoreApplicationSettings(
@@ -36,10 +36,10 @@ class SecurePasswordStoreApplicationSettings(
         if config:
             if "app" in config:
                 if isinstance(config["app"],
-                              SecurePasswordStoreApplicationSettingsApplication):
+                              secure_password_store_application_settings_application.SecurePasswordStoreApplicationSettingsApplication):
                     self.app = config["app"]
                 else:
-                    self.app = SecurePasswordStoreApplicationSettingsApplication(
+                    self.app = secure_password_store_application_settings_application.SecurePasswordStoreApplicationSettingsApplication(
                         config["app"]
                     )
             else:

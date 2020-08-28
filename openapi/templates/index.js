@@ -96,6 +96,29 @@ py.process = ({ spec, operations, models, handlebars }) => {
       if (!model.type) model.type = "str";
     }
 
+    if (model.properties) {
+      model.properties.forEach((prop) => {
+        // Check for arrays
+        if (prop.isArray === true) {
+          model.hasCollection = true;
+          if (prop.model === "string") prop.model = "str";
+          else if (prop.model === "integer") prop.model = "int";
+          else {
+            prop.$ref = prop.model;
+            prop.specialType = _.snakeCase(prop.model) + "." + prop.model;
+          }
+        }
+        // Check for default values
+        if (prop.default !== undefined) {
+          if (prop.commonType === "string" || prop.propertyName === "name")
+            prop.default = `"${prop.default}"`;
+          if (prop.commonType === "boolean") {
+            prop.default = _.capitalize(String(prop.default));
+          }
+        }
+      });
+    }
+
     if (modelsByName[model.modelName].signOnMode) {
       model.signOnMode = modelsByName[model.modelName].signOnMode;
     }

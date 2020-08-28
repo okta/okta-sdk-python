@@ -19,10 +19,10 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.feature_stage_state\
-    import FeatureStageState
-from okta.models.feature_stage_value\
-    import FeatureStageValue
+import okta.models.feature_stage_state\
+    as feature_stage_state
+import okta.models.feature_stage_value\
+    as feature_stage_value
 
 
 class FeatureStage(
@@ -37,20 +37,20 @@ class FeatureStage(
         if config:
             if "state" in config:
                 if isinstance(config["state"],
-                              FeatureStageState):
+                              feature_stage_state.FeatureStageState):
                     self.state = config["state"]
                 else:
-                    self.state = FeatureStageState(
+                    self.state = feature_stage_state.FeatureStageState(
                         config["state"].upper()
                     )
             else:
                 self.state = None
             if "value" in config:
                 if isinstance(config["value"],
-                              FeatureStageValue):
+                              feature_stage_value.FeatureStageValue):
                     self.value = config["value"]
                 else:
-                    self.value = FeatureStageValue(
+                    self.value = feature_stage_value.FeatureStageValue(
                         config["value"].upper()
                     )
             else:

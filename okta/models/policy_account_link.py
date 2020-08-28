@@ -19,8 +19,8 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.policy_account_link_filter\
-    import PolicyAccountLinkFilter
+import okta.models.policy_account_link_filter\
+    as policy_account_link_filter
 
 
 class PolicyAccountLink(
@@ -37,10 +37,10 @@ class PolicyAccountLink(
                 if "action" in config else None
             if "filter" in config:
                 if isinstance(config["filter"],
-                              PolicyAccountLinkFilter):
+                              policy_account_link_filter.PolicyAccountLinkFilter):
                     self.filter = config["filter"]
                 else:
-                    self.filter = PolicyAccountLinkFilter(
+                    self.filter = policy_account_link_filter.PolicyAccountLinkFilter(
                         config["filter"]
                     )
             else:

@@ -20,8 +20,8 @@ limitations under the License.
 
 from okta.models.user_factor\
     import UserFactor
-from okta.models.totp_user_factor_profile\
-    import TotpUserFactorProfile
+import okta.models.totp_user_factor_profile\
+    as totp_user_factor_profile
 
 
 class TotpUserFactor(
@@ -37,10 +37,10 @@ class TotpUserFactor(
             self.factor_type = "token:software:totp"
             if "profile" in config:
                 if isinstance(config["profile"],
-                              TotpUserFactorProfile):
+                              totp_user_factor_profile.TotpUserFactorProfile):
                     self.profile = config["profile"]
                 else:
-                    self.profile = TotpUserFactorProfile(
+                    self.profile = totp_user_factor_profile.TotpUserFactorProfile(
                         config["profile"]
                     )
             else:

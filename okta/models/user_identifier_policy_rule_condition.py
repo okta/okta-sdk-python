@@ -19,6 +19,9 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.okta_collection import OktaCollection
+import okta.models.user_identifier_condition_evaluator_pattern\
+    as user_identifier_condition_evaluator_pattern
 
 
 class UserIdentifierPolicyRuleCondition(
@@ -33,13 +36,16 @@ class UserIdentifierPolicyRuleCondition(
         if config:
             self.attribute = config["attribute"]\
                 if "attribute" in config else None
-            self.patterns = config["patterns"]\
-                if "patterns" in config else None
+            self.patterns = OktaCollection.form_list(
+                config["patterns"] if "patterns"\
+                    in config else [],
+                user_identifier_condition_evaluator_pattern.UserIdentifierConditionEvaluatorPattern
+            )
             self.type = config["type"]\
                 if "type" in config else None
         else:
             self.attribute = None
-            self.patterns = None
+            self.patterns = []
             self.type = None
 
     def request_format(self):

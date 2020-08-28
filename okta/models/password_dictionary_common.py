@@ -32,9 +32,9 @@ class PasswordDictionaryCommon(
         super().__init__(config)
         if config:
             self.exclude = config["exclude"]\
-                if "exclude" in config else "false"
+                if "exclude" in config else False
         else:
-            self.exclude = "false"
+            self.exclude = False
 
     def request_format(self):
         parent_req_format = super().request_format()

@@ -20,8 +20,8 @@ limitations under the License.
 
 from okta.models.user_factor\
     import UserFactor
-from okta.models.email_user_factor_profile\
-    import EmailUserFactorProfile
+import okta.models.email_user_factor_profile\
+    as email_user_factor_profile
 
 
 class EmailUserFactor(
@@ -37,10 +37,10 @@ class EmailUserFactor(
             self.factor_type = "email"
             if "profile" in config:
                 if isinstance(config["profile"],
-                              EmailUserFactorProfile):
+                              email_user_factor_profile.EmailUserFactorProfile):
                     self.profile = config["profile"]
                 else:
-                    self.profile = EmailUserFactorProfile(
+                    self.profile = email_user_factor_profile.EmailUserFactorProfile(
                         config["profile"]
                     )
             else:

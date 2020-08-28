@@ -19,12 +19,12 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.feature_stage\
-    import FeatureStage
-from okta.models.enabled_status\
-    import EnabledStatus
-from okta.models.feature_type\
-    import FeatureType
+import okta.models.feature_stage\
+    as feature_stage
+import okta.models.enabled_status\
+    as enabled_status
+import okta.models.feature_type\
+    as feature_type
 
 
 class Feature(
@@ -47,30 +47,30 @@ class Feature(
                 if "name" in config else None
             if "stage" in config:
                 if isinstance(config["stage"],
-                              FeatureStage):
+                              feature_stage.FeatureStage):
                     self.stage = config["stage"]
                 else:
-                    self.stage = FeatureStage(
+                    self.stage = feature_stage.FeatureStage(
                         config["stage"]
                     )
             else:
                 self.stage = None
             if "status" in config:
                 if isinstance(config["status"],
-                              EnabledStatus):
+                              enabled_status.EnabledStatus):
                     self.status = config["status"]
                 else:
-                    self.status = EnabledStatus(
+                    self.status = enabled_status.EnabledStatus(
                         config["status"].upper()
                     )
             else:
                 self.status = None
             if "type" in config:
                 if isinstance(config["type"],
-                              FeatureType):
+                              feature_type.FeatureType):
                     self.type = config["type"]
                 else:
-                    self.type = FeatureType(
+                    self.type = feature_type.FeatureType(
                         config["type"].upper()
                     )
             else:

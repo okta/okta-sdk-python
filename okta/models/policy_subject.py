@@ -19,10 +19,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.policy_subject_match_type\
-    import PolicySubjectMatchType
-from okta.models.policy_user_name_template\
-    import PolicyUserNameTemplate
+from okta.okta_collection import OktaCollection
+import okta.models.policy_subject_match_type\
+    as policy_subject_match_type
+import okta.models.policy_user_name_template\
+    as policy_user_name_template
 
 
 class PolicySubject(
@@ -37,33 +38,36 @@ class PolicySubject(
         if config:
             self.filter = config["filter"]\
                 if "filter" in config else None
-            self.format = config["format"]\
-                if "format" in config else None
+            self.format = OktaCollection.form_list(
+                config["format"] if "format"\
+                    in config else [],
+                str
+            )
             self.match_attribute = config["matchAttribute"]\
                 if "matchAttribute" in config else None
             if "matchType" in config:
                 if isinstance(config["matchType"],
-                              PolicySubjectMatchType):
+                              policy_subject_match_type.PolicySubjectMatchType):
                     self.match_type = config["matchType"]
                 else:
-                    self.match_type = PolicySubjectMatchType(
+                    self.match_type = policy_subject_match_type.PolicySubjectMatchType(
                         config["matchType"].upper()
                     )
             else:
                 self.match_type = None
             if "userNameTemplate" in config:
                 if isinstance(config["userNameTemplate"],
-                              PolicyUserNameTemplate):
+                              policy_user_name_template.PolicyUserNameTemplate):
                     self.user_name_template = config["userNameTemplate"]
                 else:
-                    self.user_name_template = PolicyUserNameTemplate(
+                    self.user_name_template = policy_user_name_template.PolicyUserNameTemplate(
                         config["userNameTemplate"]
                     )
             else:
                 self.user_name_template = None
         else:
             self.filter = None
-            self.format = None
+            self.format = []
             self.match_attribute = None
             self.match_type = None
             self.user_name_template = None

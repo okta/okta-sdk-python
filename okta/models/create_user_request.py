@@ -19,12 +19,13 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.user_credentials\
-    import UserCredentials
-from okta.models.user_profile\
-    import UserProfile
-from okta.models.user_type\
-    import UserType
+from okta.okta_collection import OktaCollection
+import okta.models.user_credentials\
+    as user_credentials
+import okta.models.user_profile\
+    as user_profile
+import okta.models.user_type\
+    as user_type
 
 
 class CreateUserRequest(
@@ -39,39 +40,42 @@ class CreateUserRequest(
         if config:
             if "credentials" in config:
                 if isinstance(config["credentials"],
-                              UserCredentials):
+                              user_credentials.UserCredentials):
                     self.credentials = config["credentials"]
                 else:
-                    self.credentials = UserCredentials(
+                    self.credentials = user_credentials.UserCredentials(
                         config["credentials"]
                     )
             else:
                 self.credentials = None
-            self.group_ids = config["groupIds"]\
-                if "groupIds" in config else None
+            self.group_ids = OktaCollection.form_list(
+                config["groupIds"] if "groupIds"\
+                    in config else [],
+                str
+            )
             if "profile" in config:
                 if isinstance(config["profile"],
-                              UserProfile):
+                              user_profile.UserProfile):
                     self.profile = config["profile"]
                 else:
-                    self.profile = UserProfile(
+                    self.profile = user_profile.UserProfile(
                         config["profile"]
                     )
             else:
                 self.profile = None
             if "type" in config:
                 if isinstance(config["type"],
-                              UserType):
+                              user_type.UserType):
                     self.type = config["type"]
                 else:
-                    self.type = UserType(
+                    self.type = user_type.UserType(
                         config["type"]
                     )
             else:
                 self.type = None
         else:
             self.credentials = None
-            self.group_ids = None
+            self.group_ids = []
             self.profile = None
             self.type = None
 

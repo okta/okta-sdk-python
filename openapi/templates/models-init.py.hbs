@@ -2,6 +2,6 @@
 {{> partials.copyrightHeader }}
 
 {{#each models as |model|}}
-from okta.models.{{snakeCase model.modelName}}\
-    import {{pascalCase model.modelName}}
+import okta.models.{{snakeCase model.modelName}} as {{snakeCase model.modelName}}
+{{pascalCase model.modelName}} = {{snakeCase model.modelName}}.{{pascalCase model.modelName}}
 {{/each}}

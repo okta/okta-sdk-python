@@ -20,8 +20,8 @@ limitations under the License.
 
 from okta.models.user_factor\
     import UserFactor
-from okta.models.u_2_f_user_factor_profile\
-    import U2FUserFactorProfile
+import okta.models.u_2_f_user_factor_profile\
+    as u_2_f_user_factor_profile
 
 
 class U2FUserFactor(
@@ -37,10 +37,10 @@ class U2FUserFactor(
             self.factor_type = "u2f"
             if "profile" in config:
                 if isinstance(config["profile"],
-                              U2FUserFactorProfile):
+                              u_2_f_user_factor_profile.U2FUserFactorProfile):
                     self.profile = config["profile"]
                 else:
-                    self.profile = U2FUserFactorProfile(
+                    self.profile = u_2_f_user_factor_profile.U2FUserFactorProfile(
                         config["profile"]
                     )
             else:

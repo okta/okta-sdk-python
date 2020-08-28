@@ -19,8 +19,8 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.okta_sign_on_policy_rule_signon_session_actions\
-    import OktaSignOnPolicyRuleSignonSessionActions
+import okta.models.okta_sign_on_policy_rule_signon_session_actions\
+    as okta_sign_on_policy_rule_signon_session_actions
 
 
 class OktaSignOnPolicyRuleSignonActions(
@@ -40,15 +40,15 @@ class OktaSignOnPolicyRuleSignonActions(
             self.factor_prompt_mode = config["factorPromptMode"]\
                 if "factorPromptMode" in config else None
             self.remember_device_by_default = config["rememberDeviceByDefault"]\
-                if "rememberDeviceByDefault" in config else "false"
+                if "rememberDeviceByDefault" in config else False
             self.require_factor = config["requireFactor"]\
-                if "requireFactor" in config else "false"
+                if "requireFactor" in config else False
             if "session" in config:
                 if isinstance(config["session"],
-                              OktaSignOnPolicyRuleSignonSessionActions):
+                              okta_sign_on_policy_rule_signon_session_actions.OktaSignOnPolicyRuleSignonSessionActions):
                     self.session = config["session"]
                 else:
-                    self.session = OktaSignOnPolicyRuleSignonSessionActions(
+                    self.session = okta_sign_on_policy_rule_signon_session_actions.OktaSignOnPolicyRuleSignonSessionActions(
                         config["session"]
                     )
             else:
@@ -57,8 +57,8 @@ class OktaSignOnPolicyRuleSignonActions(
             self.access = None
             self.factor_lifetime = None
             self.factor_prompt_mode = None
-            self.remember_device_by_default = "false"
-            self.require_factor = "false"
+            self.remember_device_by_default = False
+            self.require_factor = False
             self.session = None
 
     def request_format(self):

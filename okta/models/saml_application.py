@@ -20,8 +20,8 @@ limitations under the License.
 
 from okta.models.application\
     import Application
-from okta.models.saml_application_settings\
-    import SamlApplicationSettings
+import okta.models.saml_application_settings\
+    as saml_application_settings
 
 
 class SamlApplication(
@@ -37,10 +37,10 @@ class SamlApplication(
             self.sign_on_mode = "SAML_2_0"
             if "settings" in config:
                 if isinstance(config["settings"],
-                              SamlApplicationSettings):
+                              saml_application_settings.SamlApplicationSettings):
                     self.settings = config["settings"]
                 else:
-                    self.settings = SamlApplicationSettings(
+                    self.settings = saml_application_settings.SamlApplicationSettings(
                         config["settings"]
                     )
             else:

@@ -19,10 +19,10 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.event_hook_channel\
-    import EventHookChannel
-from okta.models.event_subscriptions\
-    import EventSubscriptions
+import okta.models.event_hook_channel\
+    as event_hook_channel
+import okta.models.event_subscriptions\
+    as event_subscriptions
 
 
 class EventHook(
@@ -39,10 +39,10 @@ class EventHook(
                 if "links" in config else None
             if "channel" in config:
                 if isinstance(config["channel"],
-                              EventHookChannel):
+                              event_hook_channel.EventHookChannel):
                     self.channel = config["channel"]
                 else:
-                    self.channel = EventHookChannel(
+                    self.channel = event_hook_channel.EventHookChannel(
                         config["channel"]
                     )
             else:
@@ -53,10 +53,10 @@ class EventHook(
                 if "createdBy" in config else None
             if "events" in config:
                 if isinstance(config["events"],
-                              EventSubscriptions):
+                              event_subscriptions.EventSubscriptions):
                     self.events = config["events"]
                 else:
-                    self.events = EventSubscriptions(
+                    self.events = event_subscriptions.EventSubscriptions(
                         config["events"]
                     )
             else:

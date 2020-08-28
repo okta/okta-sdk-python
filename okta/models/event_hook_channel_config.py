@@ -19,8 +19,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.event_hook_channel_config_auth_scheme\
-    import EventHookChannelConfigAuthScheme
+from okta.okta_collection import OktaCollection
+import okta.models.event_hook_channel_config_auth_scheme\
+    as event_hook_channel_config_auth_scheme
+import okta.models.event_hook_channel_config_header\
+    as event_hook_channel_config_header
 
 
 class EventHookChannelConfig(
@@ -35,21 +38,24 @@ class EventHookChannelConfig(
         if config:
             if "authScheme" in config:
                 if isinstance(config["authScheme"],
-                              EventHookChannelConfigAuthScheme):
+                              event_hook_channel_config_auth_scheme.EventHookChannelConfigAuthScheme):
                     self.auth_scheme = config["authScheme"]
                 else:
-                    self.auth_scheme = EventHookChannelConfigAuthScheme(
+                    self.auth_scheme = event_hook_channel_config_auth_scheme.EventHookChannelConfigAuthScheme(
                         config["authScheme"]
                     )
             else:
                 self.auth_scheme = None
-            self.headers = config["headers"]\
-                if "headers" in config else None
+            self.headers = OktaCollection.form_list(
+                config["headers"] if "headers"\
+                    in config else [],
+                event_hook_channel_config_header.EventHookChannelConfigHeader
+            )
             self.uri = config["uri"]\
                 if "uri" in config else None
         else:
             self.auth_scheme = None
-            self.headers = None
+            self.headers = []
             self.uri = None
 
     def request_format(self):

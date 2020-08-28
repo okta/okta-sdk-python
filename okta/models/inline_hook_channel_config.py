@@ -19,8 +19,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.inline_hook_channel_config_auth_scheme\
-    import InlineHookChannelConfigAuthScheme
+from okta.okta_collection import OktaCollection
+import okta.models.inline_hook_channel_config_auth_scheme\
+    as inline_hook_channel_config_auth_scheme
+import okta.models.inline_hook_channel_config_headers\
+    as inline_hook_channel_config_headers
 
 
 class InlineHookChannelConfig(
@@ -35,21 +38,24 @@ class InlineHookChannelConfig(
         if config:
             if "authScheme" in config:
                 if isinstance(config["authScheme"],
-                              InlineHookChannelConfigAuthScheme):
+                              inline_hook_channel_config_auth_scheme.InlineHookChannelConfigAuthScheme):
                     self.auth_scheme = config["authScheme"]
                 else:
-                    self.auth_scheme = InlineHookChannelConfigAuthScheme(
+                    self.auth_scheme = inline_hook_channel_config_auth_scheme.InlineHookChannelConfigAuthScheme(
                         config["authScheme"]
                     )
             else:
                 self.auth_scheme = None
-            self.headers = config["headers"]\
-                if "headers" in config else None
+            self.headers = OktaCollection.form_list(
+                config["headers"] if "headers"\
+                    in config else [],
+                inline_hook_channel_config_headers.InlineHookChannelConfigHeaders
+            )
             self.uri = config["uri"]\
                 if "uri" in config else None
         else:
             self.auth_scheme = None
-            self.headers = None
+            self.headers = []
             self.uri = None
 
     def request_format(self):

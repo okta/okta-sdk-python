@@ -42,7 +42,7 @@ class PolicyRule(
             self.status = config["status"]\
                 if "status" in config else "ACTIVE"
             self.system = config["system"]\
-                if "system" in config else "false"
+                if "system" in config else False
             self.type = config["type"]\
                 if "type" in config else None
         else:
@@ -51,7 +51,7 @@ class PolicyRule(
             self.last_updated = None
             self.priority = None
             self.status = "ACTIVE"
-            self.system = "false"
+            self.system = False
             self.type = None
 
     def request_format(self):

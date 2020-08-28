@@ -19,8 +19,8 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.log_geographical_context\
-    import LogGeographicalContext
+import okta.models.log_geographical_context\
+    as log_geographical_context
 
 
 class LogIpAddress(
@@ -35,10 +35,10 @@ class LogIpAddress(
         if config:
             if "geographicalContext" in config:
                 if isinstance(config["geographicalContext"],
-                              LogGeographicalContext):
+                              log_geographical_context.LogGeographicalContext):
                     self.geographical_context = config["geographicalContext"]
                 else:
-                    self.geographical_context = LogGeographicalContext(
+                    self.geographical_context = log_geographical_context.LogGeographicalContext(
                         config["geographicalContext"]
                     )
             else:

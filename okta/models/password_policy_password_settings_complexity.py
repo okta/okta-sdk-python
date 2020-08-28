@@ -19,8 +19,9 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.password_dictionary\
-    import PasswordDictionary
+from okta.okta_collection import OktaCollection
+import okta.models.password_dictionary\
+    as password_dictionary
 
 
 class PasswordPolicyPasswordSettingsComplexity(
@@ -35,37 +36,40 @@ class PasswordPolicyPasswordSettingsComplexity(
         if config:
             if "dictionary" in config:
                 if isinstance(config["dictionary"],
-                              PasswordDictionary):
+                              password_dictionary.PasswordDictionary):
                     self.dictionary = config["dictionary"]
                 else:
-                    self.dictionary = PasswordDictionary(
+                    self.dictionary = password_dictionary.PasswordDictionary(
                         config["dictionary"]
                     )
             else:
                 self.dictionary = None
-            self.exclude_attributes = config["excludeAttributes"]\
-                if "excludeAttributes" in config else "1"
+            self.exclude_attributes = OktaCollection.form_list(
+                config["excludeAttributes"] if "excludeAttributes"\
+                    in config else [],
+                str
+            )
             self.exclude_username = config["excludeUsername"]\
-                if "excludeUsername" in config else "true"
+                if "excludeUsername" in config else True
             self.min_length = config["minLength"]\
-                if "minLength" in config else "8"
+                if "minLength" in config else 8
             self.min_lower_case = config["minLowerCase"]\
-                if "minLowerCase" in config else "1"
+                if "minLowerCase" in config else 1
             self.min_number = config["minNumber"]\
-                if "minNumber" in config else "1"
+                if "minNumber" in config else 1
             self.min_symbol = config["minSymbol"]\
-                if "minSymbol" in config else "1"
+                if "minSymbol" in config else 1
             self.min_upper_case = config["minUpperCase"]\
-                if "minUpperCase" in config else "1"
+                if "minUpperCase" in config else 1
         else:
             self.dictionary = None
-            self.exclude_attributes = "1"
-            self.exclude_username = "true"
-            self.min_length = "8"
-            self.min_lower_case = "1"
-            self.min_number = "1"
-            self.min_symbol = "1"
-            self.min_upper_case = "1"
+            self.exclude_attributes = 1
+            self.exclude_username = True
+            self.min_length = 8
+            self.min_lower_case = 1
+            self.min_number = 1
+            self.min_symbol = 1
+            self.min_upper_case = 1
 
     def request_format(self):
         parent_req_format = super().request_format()

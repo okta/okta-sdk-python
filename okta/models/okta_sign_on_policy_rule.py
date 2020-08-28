@@ -20,10 +20,10 @@ limitations under the License.
 
 from okta.models.policy_rule\
     import PolicyRule
-from okta.models.okta_sign_on_policy_rule_actions\
-    import OktaSignOnPolicyRuleActions
-from okta.models.okta_sign_on_policy_rule_conditions\
-    import OktaSignOnPolicyRuleConditions
+import okta.models.okta_sign_on_policy_rule_actions\
+    as okta_sign_on_policy_rule_actions
+import okta.models.okta_sign_on_policy_rule_conditions\
+    as okta_sign_on_policy_rule_conditions
 
 
 class OktaSignOnPolicyRule(
@@ -39,20 +39,20 @@ class OktaSignOnPolicyRule(
             self.type = "SIGN_ON"
             if "actions" in config:
                 if isinstance(config["actions"],
-                              OktaSignOnPolicyRuleActions):
+                              okta_sign_on_policy_rule_actions.OktaSignOnPolicyRuleActions):
                     self.actions = config["actions"]
                 else:
-                    self.actions = OktaSignOnPolicyRuleActions(
+                    self.actions = okta_sign_on_policy_rule_actions.OktaSignOnPolicyRuleActions(
                         config["actions"]
                     )
             else:
                 self.actions = None
             if "conditions" in config:
                 if isinstance(config["conditions"],
-                              OktaSignOnPolicyRuleConditions):
+                              okta_sign_on_policy_rule_conditions.OktaSignOnPolicyRuleConditions):
                     self.conditions = config["conditions"]
                 else:
-                    self.conditions = OktaSignOnPolicyRuleConditions(
+                    self.conditions = okta_sign_on_policy_rule_conditions.OktaSignOnPolicyRuleConditions(
                         config["conditions"]
                     )
             else:

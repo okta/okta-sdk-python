@@ -20,8 +20,8 @@ limitations under the License.
 
 from okta.models.application_credentials\
     import ApplicationCredentials
-from okta.models.application_credentials_o_auth_client\
-    import ApplicationCredentialsOAuthClient
+import okta.models.application_credentials_o_auth_client\
+    as application_credentials_o_auth_client
 
 
 class OAuthApplicationCredentials(
@@ -36,10 +36,10 @@ class OAuthApplicationCredentials(
         if config:
             if "oauthClient" in config:
                 if isinstance(config["oauthClient"],
-                              ApplicationCredentialsOAuthClient):
+                              application_credentials_o_auth_client.ApplicationCredentialsOAuthClient):
                     self.oauth_client = config["oauthClient"]
                 else:
-                    self.oauth_client = ApplicationCredentialsOAuthClient(
+                    self.oauth_client = application_credentials_o_auth_client.ApplicationCredentialsOAuthClient(
                         config["oauthClient"]
                     )
             else:

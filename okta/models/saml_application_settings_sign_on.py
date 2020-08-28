@@ -19,6 +19,9 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.okta_collection import OktaCollection
+import okta.models.saml_attribute_statement\
+    as saml_attribute_statement
 
 
 class SamlApplicationSettingsSignOn(
@@ -33,8 +36,11 @@ class SamlApplicationSettingsSignOn(
         if config:
             self.assertion_signed = config["assertionSigned"]\
                 if "assertionSigned" in config else None
-            self.attribute_statements = config["attributeStatements"]\
-                if "attributeStatements" in config else None
+            self.attribute_statements = OktaCollection.form_list(
+                config["attributeStatements"] if "attributeStatements"\
+                    in config else [],
+                saml_attribute_statement.SamlAttributeStatement
+            )
             self.audience = config["audience"]\
                 if "audience" in config else None
             self.audience_override = config["audienceOverride"]\
@@ -75,7 +81,7 @@ class SamlApplicationSettingsSignOn(
                 if "subjectNameIdTemplate" in config else None
         else:
             self.assertion_signed = None
-            self.attribute_statements = None
+            self.attribute_statements = []
             self.audience = None
             self.audience_override = None
             self.authn_context_class_ref = None

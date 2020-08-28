@@ -19,12 +19,12 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.password_policy_delegation_settings\
-    import PasswordPolicyDelegationSettings
-from okta.models.password_policy_password_settings\
-    import PasswordPolicyPasswordSettings
-from okta.models.password_policy_recovery_settings\
-    import PasswordPolicyRecoverySettings
+import okta.models.password_policy_delegation_settings\
+    as password_policy_delegation_settings
+import okta.models.password_policy_password_settings\
+    as password_policy_password_settings
+import okta.models.password_policy_recovery_settings\
+    as password_policy_recovery_settings
 
 
 class PasswordPolicySettings(
@@ -39,30 +39,30 @@ class PasswordPolicySettings(
         if config:
             if "delegation" in config:
                 if isinstance(config["delegation"],
-                              PasswordPolicyDelegationSettings):
+                              password_policy_delegation_settings.PasswordPolicyDelegationSettings):
                     self.delegation = config["delegation"]
                 else:
-                    self.delegation = PasswordPolicyDelegationSettings(
+                    self.delegation = password_policy_delegation_settings.PasswordPolicyDelegationSettings(
                         config["delegation"]
                     )
             else:
                 self.delegation = None
             if "password" in config:
                 if isinstance(config["password"],
-                              PasswordPolicyPasswordSettings):
+                              password_policy_password_settings.PasswordPolicyPasswordSettings):
                     self.password = config["password"]
                 else:
-                    self.password = PasswordPolicyPasswordSettings(
+                    self.password = password_policy_password_settings.PasswordPolicyPasswordSettings(
                         config["password"]
                     )
             else:
                 self.password = None
             if "recovery" in config:
                 if isinstance(config["recovery"],
-                              PasswordPolicyRecoverySettings):
+                              password_policy_recovery_settings.PasswordPolicyRecoverySettings):
                     self.recovery = config["recovery"]
                 else:
-                    self.recovery = PasswordPolicyRecoverySettings(
+                    self.recovery = password_policy_recovery_settings.PasswordPolicyRecoverySettings(
                         config["recovery"]
                     )
             else:

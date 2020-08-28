@@ -59,6 +59,9 @@ class TestEventHooksResource:
         assert created_event_hook.channel is not None
         assert created_event_hook.channel.config.uri ==\
             event_hook_model.channel.config.uri
+        assert len(created_event_hook.channel.config.headers) == 1
+        assert isinstance(created_event_hook.channel.config.headers[0],
+                          models.EventHookChannelConfigHeader)
 
         # Retrieve
         retrieved_event_hook, _, err = await client.get_event_hook(

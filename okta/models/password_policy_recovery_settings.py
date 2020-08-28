@@ -19,8 +19,8 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.password_policy_recovery_factors\
-    import PasswordPolicyRecoveryFactors
+import okta.models.password_policy_recovery_factors\
+    as password_policy_recovery_factors
 
 
 class PasswordPolicyRecoverySettings(
@@ -35,10 +35,10 @@ class PasswordPolicyRecoverySettings(
         if config:
             if "factors" in config:
                 if isinstance(config["factors"],
-                              PasswordPolicyRecoveryFactors):
+                              password_policy_recovery_factors.PasswordPolicyRecoveryFactors):
                     self.factors = config["factors"]
                 else:
-                    self.factors = PasswordPolicyRecoveryFactors(
+                    self.factors = password_policy_recovery_factors.PasswordPolicyRecoveryFactors(
                         config["factors"]
                     )
             else:

@@ -27,9 +27,12 @@ from okta.okta_object import OktaObject
 {{#if (ne model.policyType undefined)}}
 from okta.models.policy_type import PolicyType
 {{/if}}
+{{#if (ne model.hasCollection undefined)}}
+from okta.okta_collection import OktaCollection
+{{/if}}
 {{#each subTypes as |type|}}
-from okta.models.{{snakeCase type}}\
-    import {{pascalCase type}}
+import okta.models.{{snakeCase type}}\
+    as {{snakeCase type}}
 {{/each}}
 
 
@@ -66,18 +69,29 @@ class {{pascalCase model.modelName}}(
             self.type = "{{upperCase model.policyRuleType}}"
             {{/if}}
             {{#each model.properties as |prop|}}
+            {{#if (eq prop.isArray true) }}
+            self.{{snakeCase prop.propertyName}} = OktaCollection.form_list(
+                config["{{camelCase prop.propertyName}}"] if "{{camelCase prop.propertyName}}"\
+                    in config else [],
+                {{#if (ne prop.specialType undefined)}}
+                {{prop.specialType}}
+                {{else}}
+                {{{prop.model}}}
+                {{/if}}
+            )
+            {{else}}
             {{#if (exists prop "$ref")}}
             if "{{camelCase prop.propertyName}}" in config:
                 if isinstance(config["{{camelCase prop.propertyName}}"],
-                              {{pascalCase prop.model}}):
+                              {{snakeCase prop.model}}.{{pascalCase prop.model}}):
                     self.{{snakeCase prop.propertyName}} = config["{{camelCase prop.propertyName}}"]
                 else:
                     {{#if (eq prop.commonType "enum")}}
-                    self.{{snakeCase prop.propertyName}} = {{pascalCase prop.model}}(
+                    self.{{snakeCase prop.propertyName}} = {{snakeCase prop.model}}.{{pascalCase prop.model}}(
                         config["{{camelCase prop.propertyName}}"].upper()
                     )
                     {{else}}
-                    self.{{snakeCase prop.propertyName}} = {{pascalCase prop.model}}(
+                    self.{{snakeCase prop.propertyName}} = {{snakeCase prop.model}}.{{pascalCase prop.model}}(
                         config["{{camelCase prop.propertyName}}"]
                     )
                     {{/if}}
@@ -86,19 +100,24 @@ class {{pascalCase model.modelName}}(
             {{else}}
             {{#if (ne prop.default undefined) }}
             self.{{snakeCase prop.propertyName}} = config["{{camelCase prop.propertyName}}"]\
-                if "{{camelCase prop.propertyName}}" in config else "{{prop.default}}"
+                if "{{camelCase prop.propertyName}}" in config else {{{prop.default}}}
             {{else}}
             self.{{snakeCase prop.propertyName}} = config["{{camelCase prop.propertyName}}"]\
                 if "{{camelCase prop.propertyName}}" in config else None
+            {{/if}}
             {{/if}}
             {{/if}}
             {{/each}}
         else:
             {{#each model.properties as |prop|}}
             {{#if (ne prop.default undefined) }}
-            self.{{snakeCase prop.propertyName}} = "{{prop.default}}"
+            self.{{snakeCase prop.propertyName}} = {{{prop.default}}}
+            {{else}}
+            {{#if (eq prop.isArray true) }}
+            self.{{snakeCase prop.propertyName}} = []
             {{else}}
             self.{{snakeCase prop.propertyName}} = None
+            {{/if}}
             {{/if}}
             {{/each}}
         {{else}}

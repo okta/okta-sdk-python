@@ -19,8 +19,8 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.application_credentials_signing_use\
-    import ApplicationCredentialsSigningUse
+import okta.models.application_credentials_signing_use\
+    as application_credentials_signing_use
 
 
 class ApplicationCredentialsSigning(
@@ -43,10 +43,10 @@ class ApplicationCredentialsSigning(
                 if "rotationMode" in config else None
             if "use" in config:
                 if isinstance(config["use"],
-                              ApplicationCredentialsSigningUse):
+                              application_credentials_signing_use.ApplicationCredentialsSigningUse):
                     self.use = config["use"]
                 else:
-                    self.use = ApplicationCredentialsSigningUse(
+                    self.use = application_credentials_signing_use.ApplicationCredentialsSigningUse(
                         config["use"].upper()
                     )
             else:

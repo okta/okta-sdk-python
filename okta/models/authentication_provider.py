@@ -19,8 +19,8 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.models.authentication_provider_type\
-    import AuthenticationProviderType
+import okta.models.authentication_provider_type\
+    as authentication_provider_type
 
 
 class AuthenticationProvider(
@@ -37,10 +37,10 @@ class AuthenticationProvider(
                 if "name" in config else None
             if "type" in config:
                 if isinstance(config["type"],
-                              AuthenticationProviderType):
+                              authentication_provider_type.AuthenticationProviderType):
                     self.type = config["type"]
                 else:
-                    self.type = AuthenticationProviderType(
+                    self.type = authentication_provider_type.AuthenticationProviderType(
                         config["type"].upper()
                     )
             else:

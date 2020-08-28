@@ -19,6 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.okta_collection import OktaCollection
 
 
 class SamlAttributeStatement(
@@ -37,13 +38,16 @@ class SamlAttributeStatement(
                 if "namespace" in config else None
             self.type = config["type"]\
                 if "type" in config else None
-            self.values = config["values"]\
-                if "values" in config else None
+            self.values = OktaCollection.form_list(
+                config["values"] if "values"\
+                    in config else [],
+                str
+            )
         else:
             self.name = None
             self.namespace = None
             self.type = None
-            self.values = None
+            self.values = []
 
     def request_format(self):
         parent_req_format = super().request_format()

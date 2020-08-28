@@ -20,8 +20,8 @@ limitations under the License.
 
 from okta.models.browser_plugin_application\
     import BrowserPluginApplication
-from okta.models.swa_application_settings\
-    import SwaApplicationSettings
+import okta.models.swa_application_settings\
+    as swa_application_settings
 
 
 class SwaApplication(
@@ -38,10 +38,10 @@ class SwaApplication(
                 if "name" in config else "template_swa"
             if "settings" in config:
                 if isinstance(config["settings"],
-                              SwaApplicationSettings):
+                              swa_application_settings.SwaApplicationSettings):
                     self.settings = config["settings"]
                 else:
-                    self.settings = SwaApplicationSettings(
+                    self.settings = swa_application_settings.SwaApplicationSettings(
                         config["settings"]
                     )
             else:

@@ -32,18 +32,18 @@ class PasswordPolicyPasswordSettingsAge(
         super().__init__(config)
         if config:
             self.expire_warn_days = config["expireWarnDays"]\
-                if "expireWarnDays" in config else "0"
+                if "expireWarnDays" in config else 0
             self.history_count = config["historyCount"]\
-                if "historyCount" in config else "0"
+                if "historyCount" in config else 0
             self.max_age_days = config["maxAgeDays"]\
-                if "maxAgeDays" in config else "0"
+                if "maxAgeDays" in config else 0
             self.min_age_minutes = config["minAgeMinutes"]\
-                if "minAgeMinutes" in config else "0"
+                if "minAgeMinutes" in config else 0
         else:
-            self.expire_warn_days = "0"
-            self.history_count = "0"
-            self.max_age_days = "0"
-            self.min_age_minutes = "0"
+            self.expire_warn_days = 0
+            self.history_count = 0
+            self.max_age_days = 0
+            self.min_age_minutes = 0
 
     def request_format(self):
         parent_req_format = super().request_format()
