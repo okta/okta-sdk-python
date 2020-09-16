@@ -1,4 +1,5 @@
 import os
+import re
 import yaml
 from okta.constants import _GLOBAL_YAML_PATH, _LOCAL_YAML_PATH
 from flatdict import FlatDict
@@ -68,7 +69,7 @@ class ConfigSetter():
         flat_current_config = FlatDict(config, delimiter='_')
         # Iterate through keys and remove if value is still empty string
         for key in flat_current_config.keys():
-            if flat_current_config.get(key) == "":
+            if flat_current_config.get(key) == '':
                 del flat_current_config[key]
 
         return flat_current_config.as_dict()
@@ -161,15 +162,16 @@ class ConfigSetter():
 
         # Go through keys and search for it in the environment vars
         # using the format described in the README
-        for key in flattened_keys:
-            env_key = ConfigSetter._OKTA + "_" + key.upper()
+        for camel_case_key in flattened_keys:
+            snake_case_key = re.sub("([A-Z])", "_\\1", camel_case_key)
+            env_key = ConfigSetter._OKTA + "_" + snake_case_key.upper()
             env_value = os.environ.get(env_key, None)
 
             if env_value is not None:
                 # If value is found, add to config
-                if "scopes" in key.lower():
-                    updated_config[key] = env_value.split(',')
+                if "scopes" in snake_case_key.lower():
+                    updated_config[camel_case_key] = env_value.split(',')
                 else:
-                    updated_config[key] = env_value
+                    updated_config[camel_case_key] = env_value
             # apply to current configuration
         self._apply_config(updated_config.as_dict())
