@@ -133,3 +133,14 @@ class UserGroupsClient(ApiClient):
         :return: None
         """
         response = ApiClient.put_path(self, '/{0}/users/{1}'.format(gid, uid))
+
+    def remove_user_from_group_by_id(self, gid, uid):
+        """Remove a user from a group
+
+        :param gid: the target group id
+        :type gid: str
+        :param uid: the target user id
+        :type uid: str
+        :return: None
+        """
+        response = ApiClient.delete_path(self, '/{0}/users/{1}'.format(gid, uid))
