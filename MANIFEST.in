@@ -1,0 +1,2 @@
+include CHANGELOG.md LICENSE.md README.md LONG_DESCRIPTION.md tox.ini requirements.txt
+recursive-include tests *

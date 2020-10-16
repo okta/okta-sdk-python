@@ -1,0 +1,20 @@
+asyncio
+aiohttp
+flatdict
+pyyaml
+xmltodict
+yarl
+pycryptodome
+python-jose
+aenum
+pydash
+flake8
+
+# Testing dependencies
+pytest
+pytest-asyncio
+pytest-mock
+pytest-recording
+pyfakefs
+aenum
+pydash

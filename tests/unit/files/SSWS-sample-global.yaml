@@ -1,0 +1,4 @@
+okta:
+  client:
+    orgUrl: "https://test.global.okta.com"
+    token: apiToken-global

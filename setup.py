@@ -1,45 +1,44 @@
 from setuptools import setup, find_packages
-from codecs import open
-from os import path
-import ast
-import re
+import os
 
-# Find the version in the package's __init__.py
-_version_re = re.compile(r'__version__\s+=\s+(.*)')
 
-here = path.abspath(path.dirname(__file__))
+def get_version():
+    # Get version number from VERSION file
+    with open(os.path.join(os.path.dirname(__file__), "okta", "__init__.py")) \
+            as version_file:
+        # File has format: __version__ = '{version_number}'
+        line = version_file.read().split("=")
+        version_number = line[1].strip().replace("'", "")
+        return version_number
 
-with open(path.join(here, 'okta', '__init__.py'), 'rb') as f:
-    version = str(ast.literal_eval(_version_re.search(
-        f.read().decode('utf-8')).group(1)))
 
-# Get the long description
-with open(path.join(here, 'README.md'), encoding='utf-8') as f:
-    long_description = f.read()
+def get_requirements():
+    # Get requirement packages from requirements.txt
+    with open("requirements.txt") as requirements_file:
+        return requirements_file.readlines()
+
 
 setup(
-    name='okta',
-    version=version,
-    description='Okta client APIs',
-    long_description=long_description,
-    license='Apache License 2.0',
-    author='Okta',
-    author_email='developers@okta.com',
-    url='https://github.com/okta/oktasdk-python',
-    classifiers=[
-        'Development Status :: 4 - Beta',
-        'Intended Audience :: Developers',
-        'Programming Language :: Python',
-        'Programming Language :: Python :: 2',
-        'Programming Language :: Python :: 2.7',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.3',
-        'Programming Language :: Python :: 3.4',
-        'License :: OSI Approved :: Apache Software License'],
+    name="okta",
+    version=get_version(),
+    author="Okta, Inc.",
+    author_email="devex@okta.com",
+    url="https://github.com/okta/okta-sdk-python",
+    license="Apache License 2.0",
+    description="Python SDK for the Okta Management API",
+    long_description=open("LONG_DESCRIPTION.md").read(),
+    test_suite="tests",
     packages=find_packages(),
-    install_requires=[
-        'requests>=2.5.3',
-        'python-dateutil>=2.4.2',
-        'six>=1.9.0'
-    ]
+    python_requires=">=3.6'",
+    classifiers=[
+        "Development Status :: 3 - Alpha"
+        "Intended Audience :: Developers",
+        "Programming Language :: Python'",
+        "Programming Language :: Python :: 3.6",
+        "Programming Language :: Python :: 3.7",
+        "Programming Language :: Python :: 3.8",
+        "License :: OSI Approved :: Apache Software License"
+        "Topic :: Software Development :: Libraries :: Python Modules",
+    ],
+    install_requires=get_requirements()
 )

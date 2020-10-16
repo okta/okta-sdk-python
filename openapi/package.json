@@ -1,0 +1,10 @@
+{
+  "dependencies": {
+    "@okta/openapi": "https://github.com/okta/openapi.git#master",
+    "lodash": "^4.17.15"
+  },
+  "scripts": {
+    "build": "cd .. && ./openapi/node_modules/.bin/okta-sdk-generator -t ./openapi/templates/ -o .",
+    "prebuild": "rm -rf ../okta/models ../okta/generated_clients ../okta/client.py"
+  }
+}

@@ -1,7 +1,30 @@
-language: node_js
-node_js:
-- '5.8'
+language: python
+
+python:
+  - "3.6"
+  - "3.7"
+  - "3.8"
+
 install:
-- npm install
+  - pip install -U -r requirements.txt
+
 script:
-- npm test
+  - echo "Running tests in job stages..."
+
+jobs:
+  include:
+    - stage: test
+      python: 3.8
+      name: "Unit Tests"
+      script: 
+        - echo "Running unit tests..."
+        - pytest tests/unit/
+      name: "Integration Tests"
+      script: 
+        - echo "Running integration tests..."
+        - pytest tests/integration/
+    - stage: code_style_test
+      name: "Flake8 Check"
+      script: 
+        - echo "Code Style check..."
+        - "flake8 okta/"

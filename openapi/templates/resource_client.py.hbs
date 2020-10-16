@@ -1,0 +1,40 @@
+{{> partials.copyrightHeader }}
+
+{{#if (importURLEncode operations)}}
+from urllib.parse import urlencode
+{{/if}}
+{{#if (hasBinaryOps operations)}}
+from okta.http_client import HTTPClient
+{{/if}}
+{{#each (getResourceImports operations) as |import|}}
+from okta.models.{{snakeCase import}}\
+    import {{pascalCase import}}
+{{/each}}
+from okta.utils import format_url
+from okta.api_client import APIClient
+{{#if (returnsApplication operations)}}
+from okta.constants import find_app_model
+{{/if}}
+{{#if (returnsUserFactor operations)}}
+from okta.constants import find_factor_model
+{{/if}}
+{{#if (returnsPolicy operations)}}
+from okta.constants import find_policy_model
+{{/if}}
+{{#if (returnsPolicyRule operations)}}
+from okta.constants import find_policy_rule_model
+{{/if}}
+
+
+class {{pascalCase resource}}Client(APIClient):
+    """
+    A Client object for the {{pascalCase resource}} resource.
+    """
+
+    def __init__(self):
+        self._base_url = ""
+
+{{#each operations as |operation|}}
+{{> partials.defaultMethod  operation=operation}}{{#unless @last}}
+{{/unless}}
+{{/each}}

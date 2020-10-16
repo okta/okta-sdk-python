@@ -1,0 +1,136 @@
+    async def {{displayMethodName (snakeCase operation.operationId)}}(
+            {{{operationArgumentBuilder operation}}}
+    ):
+        """
+{{{pyDocstringBuilder operation}}}
+        """
+        http_method = "{{operation.method}}".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            {{{updatePath operation}}}
+            """)
+        {{#if operation.queryParams.length}}
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
+        {{/if}}
+
+        {{#if operation.bodyModel}}
+        {{#if (eq operation.bodyFormat "binary")}}
+        body = HTTPClient.format_binary_data(string)
+        {{else}}
+        if isinstance({{snakeCase operation.bodyModel}}, dict):
+            body = {{snakeCase operation.bodyModel}}
+        else:
+            body = {{snakeCase operation.bodyModel}}.as_dict()
+        {{/if}}
+        headers = {
+            "Accept": "{{operation.produces.[0]}}",
+            "Content-Type": "{{operation.consumes.[0]}}"
+        }
+        {{else}}
+        body = {}
+        headers = {}
+        {{/if}}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+        {{#if operation.responseModel}}
+            return (None, None, error)
+        {{else}}
+            return (None, error)
+        {{/if}}
+
+        {{#if operation.responseModel}}
+        response, error = await self._request_executor\
+            .execute(request, {{pascalCase operation.responseModel}})
+        {{else}}
+        response, error = await self._request_executor\
+            .execute(request)
+        {{/if}}
+
+        if error:
+        {{#if operation.responseModel}}
+            return (None, response, error)
+        {{else}}
+            return (response, error)
+        {{/if}}
+
+        {{#if operation.responseModel}}
+        try:
+        {{#if operation.isArray}}
+            result = []
+            for item in response.get_body():
+                {{#if (eq (pascalCase operation.responseModel) "Application")}}
+                result.append(
+                    find_app_model(item["signOnMode"], item["name"])(
+                        self.form_response_body(item)
+                        )
+                    )
+                {{else}}
+                {{#if (eq (pascalCase operation.responseModel) "UserFactor")}}
+                result.append(
+                    find_factor_model(item["factorType"])(
+                        self.form_response_body(item)
+                        )
+                    )
+                {{else}}
+                {{#if (eq (pascalCase operation.responseModel) "Policy")}}
+                result.append(
+                    find_policy_model(item["type"])(
+                        self.form_response_body(item)
+                        )
+                    )
+                {{else}}
+                {{#if (eq (pascalCase operation.responseModel) "PolicyRule")}}
+                result.append(
+                    find_policy_rule_model(item["type"])(
+                        self.form_response_body(item)
+                        )
+                    )
+                {{else}}
+                result.append({{pascalCase operation.responseModel}}(
+                    self.form_response_body(item)
+                    ))
+                {{/if}}
+                {{/if}}
+                {{/if}}
+                {{/if}}
+        {{else}}
+            {{#if (eq (pascalCase operation.responseModel) "Application")}}
+            body = self.form_response_body(response.get_body())
+            result = find_app_model(body["signOnMode"], body["name"])(body)
+            {{else}}
+            {{#if (eq (pascalCase operation.responseModel) "UserFactor")}}
+            body = self.form_response_body(response.get_body())
+            result = find_factor_model(body["factorType"])(body)
+            {{else}}
+            {{#if (eq (pascalCase operation.responseModel) "Policy")}}
+            body = self.form_response_body(response.get_body())
+            result = find_policy_model(body["type"])(body)
+            {{else}}
+            {{#if (eq (pascalCase operation.responseModel) "PolicyRule")}}
+            body = self.form_response_body(response.get_body())
+            result = find_policy_rule_model(body["type"])(body)
+            {{else}}
+            result = {{pascalCase operation.responseModel}}(
+                self.form_response_body(response.get_body())
+            )
+            {{/if}}
+            {{/if}}
+            {{/if}}
+            {{/if}}
+        {{/if}}
+        except Exception as error:
+            {{#if operation.responseModel}}
+            return (None, response, error)
+            {{else}}
+            return (response, error)
+            {{/if}}
+        return (result, response, None)
+        {{else}}
+        return (response, None)
+        {{/if}}
