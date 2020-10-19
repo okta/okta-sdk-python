@@ -31,13 +31,13 @@ setup(
     packages=find_packages(),
     python_requires=">=3.6'",
     classifiers=[
-        "Development Status :: 3 - Alpha"
+        "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
-        "Programming Language :: Python'",
+        "Programming Language :: Python",
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
-        "License :: OSI Approved :: Apache Software License"
+        "License :: OSI Approved :: Apache Software License",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     install_requires=get_requirements()
