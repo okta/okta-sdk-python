@@ -1,5 +1,11 @@
 # Okta Python SDK Changelog
 
+## v1.0.1
+- Add `__init__.py` files for all modules so imports work correctly during publish
+
+## v1.0.0
+- Initial Release
+
 ## v1.0.0-alpha.1
 
 - Official Release of v1.0.0-alpha.1 Okta Python Management SDK
