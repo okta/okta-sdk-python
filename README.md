@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Support](https://img.shields.io/badge/support-Developer%20Forum-blue.svg)][devforum]
 
-![PyPI](https://img.shields.io/pypi/v/okta)
+[![PyPI](https://img.shields.io/pypi/v/okta)](https://pypi.org/project/okta/)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/okta)
 ![Code Style](https://img.shields.io/badge/Code%20Style-flake8-informational.svg)
 
@@ -48,7 +48,7 @@ The latest release can always be found on the [releases page][github-releases].
 If you run into problems using the SDK, you can
 
 - Ask questions on the [Okta Developer Forums][devforum]
-- Post [issues][github-issues] here on GitHub (for code errors)
+- Post [issues on GitHub][github-issues] (for code errors)
 
 ## Getting started
 
@@ -72,10 +72,10 @@ config = {
     "orgUrl": "https://test.okta.com",
     "token": "YOUR_API_TOKEN"
 }
-my_okta_client = OktaClient(config)
+okta_client = OktaClient(config)
 
 # Instantiating without in-text credentials
-my_okta_client = OktaClient()
+okta_client = OktaClient()
 ```
 
 > Using a Python dictionary to hard-code the Okta domain and API token is encouraged for development; In production, you should use a more secure way of storing these values. This library supports a few different configuration sources, covered in the [configuration reference](#configuration-reference) section.
@@ -149,7 +149,22 @@ These examples will help you understand how to use this library.
 
 Once you initialize a `client`, you can call methods to make requests to the Okta API. The client uses **asynchronous** methods to operate. Most methods are grouped by the API endpoint they belong to. For example, methods that call the [Users API][users-api-docs] are organized under [the User resource client (okta.resource_clients.user_client.py)][users-client].
 
-> Asynchronous I/O is fairly new to Python after making its debut in Python 3.5. It's powered by the `asyncio` library which provides avenues to produce concurrent code. This allows developers to define `async` functions and `await` asynchronous calls within them. For more information, you can check out the Python docs [here][python-docs].
+> Asynchronous I/O is fairly new to Python after making its debut in Python 3.5. It's powered by the `asyncio` library which provides avenues to produce concurrent code. This allows developers to define `async` functions and `await` asynchronous calls within them. For more information, you can check out the [Python docs][python-docs].
+
+Calls using `await` must be made in an `async def` function. That function must be called by `asyncio` (see example below).
+
+```python
+from okta.client import Client as OktaClient
+import asyncio
+
+async def main():
+    client = OktaClient()
+    users, resp, err = await client.list_users()
+    print(len(users))
+
+loop = asyncio.get_event_loop()
+loop.run_until_complete(main())
+```
 
 ### Authenticate a User
 
@@ -206,7 +221,8 @@ users, resp, err = await client.list_users()
 ### Filter or search for Users
 
 ```py
-# Query parameters are optional on methods that can use them! Check the method definition for details on what query parameters are accepted
+# Query parameters are optional on methods that can use them!
+# Check the method definition for details on which query parameters are accepted.
 query_parameters = {"filter": "status eq \"ACTIVE\""}
 users, resp, err = await client.list_users(query_parameters)
 ```
@@ -427,8 +443,8 @@ except StopAsyncIteration:
 
 This library looks for configuration in the following sources:
 
-0. An `okta.yaml` file in a `.okta` folder in the current user's home directory (`~/.okta/okta.yaml` or `%userprofile\.okta\okta.yaml`). See a sample here: [YAML Configuration](#yaml-configuration)
-1. A `.okta.yaml` file in the application or project's root directory. See a sample here: [YAML Configuration](#yaml-configuration)
+0. An `okta.yaml` file in a `.okta` folder in the current user's home directory (`~/.okta/okta.yaml` or `%userprofile\.okta\okta.yaml`). See a sample [YAML Configuration](#yaml-configuration)
+1. A `okta.yaml` file in the application or project's root directory. See a sample [YAML Configuration](#yaml-configuration)
 2. [Environment variables](#environment-variables)
 3. Configuration explicitly passed to the constructor (see the example in [Getting started](#getting-started))
 
