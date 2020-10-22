@@ -424,7 +424,7 @@ query_parameters = {"limit": "1"}
 users, resp, err = await client.list_users(query_parameters)
 
 # Check if there more pages follow
-if resp.has_next:
+if resp.has_next():
   next_user, error = await resp.next()  # Returns list of 1 user after the last retrieved user
 
 # Iterate through all of the rest of the pages
