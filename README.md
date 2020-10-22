@@ -69,8 +69,8 @@ Construct a client instance by passing it your Okta domain name and API token:
 from okta.client import Client as OktaClient
 # Instantiating with a Python dictionary in the constructor
 config = {
-    "orgUrl": "https://test.okta.com",
-    "token": "YOUR_API_TOKEN"
+    'orgUrl': 'https://test.okta.com',
+    'token': 'YOUR_API_TOKEN'
 }
 okta_client = OktaClient(config)
 
@@ -91,11 +91,11 @@ When using this approach you won't need an API Token because the SDK will reques
 ```py
 from okta.client import Client as OktaClient
 config = {
-    "orgUrl": "https://test.okta.com",
-    "authorizationMode": "PrivateKey",
-    "clientId": "YOUR_CLIENT_ID",
-    "scopes": ["okta.users.manage"],
-    "privateKey": {'JsonWebKey'}
+    'orgUrl': 'https://test.okta.com',
+    'authorizationMode': 'PrivateKey',
+    'clientId': 'YOUR_CLIENT_ID',
+    'scopes': ['okta.users.manage'],
+    'privateKey': {'JsonWebKey'}
 }
 client = OktaClient(config)
 ```
@@ -113,11 +113,11 @@ from project.custom.request_executor_impl import RequestExecImpl
 from project.custom.http_client_impl import HTTPClientImpl
 from project.custom.cache_impl import CacheImpl
 config = {
-    "orgUrl": "https://test.okta.com",
-    "token": "YOUR_API_TOKEN",
-    "requestExecutor": RequestExecImpl,
-    "httpClient": HTTPClientImpl,
-    "cacheManager": CacheImpl
+    'orgUrl': 'https://test.okta.com',
+    'token': 'YOUR_API_TOKEN',
+    'requestExecutor': RequestExecImpl,
+    'httpClient': HTTPClientImpl,
+    'cacheManager': CacheImpl
 }
 ```
 
@@ -175,7 +175,7 @@ This library should only be used with the Okta management API. To call the [Auth
 > ```py
 > from okta.client import Client as OktaClient
 > import okta.models as models
-> client = OktaClient({"orgUrl": "https://test.okta.com", "token": "YOUR_API_TOKEN"})
+> client = OktaClient({'orgUrl': 'https://test.okta.com', 'token': 'YOUR_API_TOKEN'})
 > ```
 
 ### Get and set custom attributes
@@ -186,18 +186,18 @@ Custom attributes must first be defined in the Okta profile editor. Then, you ca
 """ Setting attributes """
 # Creating an instance through a Python Dictionary
 user_profile = models.UserProfile({
-  "firstName": "John",
-  "lastName": "Foe",
-  "email": "John.Foe@okta.com",
-  "login": "John.Foe@okta.com"
+  'firstName': 'John',
+  'lastName': 'Foe',
+  'email': 'John.Foe@okta.com',
+  'login': 'John.Foe@okta.com'
 })
 
 # Creating an empty object and using variables
 user_profile = models.UserProfile()
-user_profile.first_name = "John"
-user_profile.last_name = "Doe"
-user_profile.email = "John.Doe@okta.com"
-user_profile.login = "John.Doe@okta.com"
+user_profile.first_name = 'John'
+user_profile.last_name = 'Doe'
+user_profile.email = 'John.Doe@okta.com'
+user_profile.login = 'John.Doe@okta.com'
 
 """ Getting attributes from instance """
 user, resp, err = await client.get_user(user.id)
@@ -223,7 +223,7 @@ users, resp, err = await client.list_users()
 ```py
 # Query parameters are optional on methods that can use them!
 # Check the method definition for details on which query parameters are accepted.
-query_parameters = {"filter": "status eq \"ACTIVE\""}
+query_parameters = {'filter': 'status eq "ACTIVE"'}
 users, resp, err = await client.list_users(query_parameters)
 ```
 
@@ -232,24 +232,24 @@ users, resp, err = await client.list_users(query_parameters)
 ```py
 # Create Password
 password = models.PasswordCredential({
-    "value": "Password123"
+    'value': 'Password123'
 })
 
 # Create User Credentials
 user_creds = models.UserCredentials({
-    "password": password
+    'password': password
 })
 
 # Create User Profile and CreateUser Request
 user_profile = models.UserProfile()
-user_profile.first_name = "John"
-user_profile.last_name = "Doe"
-user_profile.email = "John.Doe"
-user_profile.login = "John.Doe"
+user_profile.first_name = 'John'
+user_profile.last_name = 'Doe'
+user_profile.email = 'John.Doe'
+user_profile.login = 'John.Doe'
 
 create_user_req = models.CreateUserRequest({
-    "credentials": user_creds,
-    "profile": user_profile
+    'credentials': user_creds,
+    'profile': user_profile
 })
 
 # Create User
@@ -262,8 +262,8 @@ user, resp, err = await client.create_user(create_user_req)
 # Assume user object saved to variable `user`
 # Craft new profile and get user object
 new_profile = user.profile
-new_profile.nick_name = "Oktanaut"
-updated_user_obj = models.User({"profile": new_profile})
+new_profile.nick_name = 'Oktanaut'
+updated_user_obj = models.User({'profile': new_profile})
 
 # Update User with new details
 updated_user, _, err = await client.update_user(user.id, updated_user_obj)
@@ -274,7 +274,7 @@ updated_user, _, err = await client.update_user(user.id, updated_user_obj)
 You must first deactivate the user, and then you can delete the user.
 
 ```py
-# Assuming user starts off with a status of "ACTIVE"
+# Assuming user starts off with a status of 'ACTIVE'
 
 # Deactivate
 resp, err = await client.deactivate_or_delete_user(user.id)
@@ -293,10 +293,10 @@ users_groups, resp, err = await client.list_user_groups(user.id)
 ```py
 # Create Group Model
 group_profile = models.GroupProfile({
-    "name": "Group-Test"
+    'name': 'Group-Test'
 })
 group_model = models.Group({
-    "profile": group_profile
+    'profile': group_profile
 })
 
 # Create Group
@@ -320,8 +320,8 @@ supported_factors, resp, err = await client.list_supported_factors(user.id)
 ```py
 # Create and enroll factor
 sms_factor = models.SmsUserFactor({
-    "profile": models.SmsUserFactorProfile({
-        "phoneNumber": "+12345678901"
+    'profile': models.SmsUserFactorProfile({
+        'phoneNumber': '+12345678901'
     })
 })
 enrolled_factor, _, err = await client.enroll_factor(created_user.id, sms_factor)
@@ -331,7 +331,7 @@ enrolled_factor, _, err = await client.enroll_factor(created_user.id, sms_factor
 
 ```py
 activate_factor_request = models.ActivateFactorRequest({
-  "passCode": "123456"
+  'passCode': '123456'
 })
 activated_factor, resp, err = await client.activate_factor(user.id, factor.id, activate_factor_request)
 ```
@@ -340,7 +340,7 @@ activated_factor, resp, err = await client.activate_factor(user.id, factor.id, a
 
 ```py
 verify_factor_request = models.ActivateFactorRequest({
-  "passCode": "123456"
+  'passCode': '123456'
 })
 verified_factor, resp, err = await client.activate_factor(user.id, factor.id, verify_factor_request)
 ```
@@ -362,20 +362,20 @@ app, resp, err = await client.get_application(app.id)
 ```py
 # Create SWA Application model and SWA Application in Okta
 swa_app_settings_app = models.SwaApplicationSettingsApplication({
-    "buttonField": "btn-login",
-    "passwordField": "txt-box-password",
-    "usernameField": "txt-box-username",
-    "url": "https://example.com/login.html",
-    "loginUrlRegex": "^https://example.com/login.html$"
+    'buttonField': 'btn-login',
+    'passwordField': 'txt-box-password',
+    'usernameField': 'txt-box-username',
+    'url': 'https://example.com/login.html',
+    'loginUrlRegex': '^https://example.com/login.html$'
 })
 
 swa_app_settings = models.SwaApplicationSettings({
-    "app": swa_app_settings_app
+    'app': swa_app_settings_app
 })
 
 swa_app_model = models.SwaApplication({
-    "label": "SWA Test App",
-    "settings": swa_app_settings,
+    'label': 'SWA Test App',
+    'settings': swa_app_settings,
 })
 
 app, resp, err = await client.create_application(swa_app_model)
@@ -388,8 +388,8 @@ Not every API endpoint is represented by a method in this library. You can call 
 ```py
 # Example that doesn't return Object
 request, error = await client.get_request_executor().create_request(
-  method="POST",
-  url="/api/v1/users/USER_ID_HERE/lifecycle/activate",
+  method='POST',
+  url='/api/v1/users/USER_ID_HERE/lifecycle/activate',
   body={},
   headers={},
   oauth=False
@@ -400,8 +400,8 @@ response_body = response.get_body()
 
 # Example that does return Object
 request, error = await client.get_request_executor().create_request(
-  method="GET",
-  url="/api/v1/users/USER_ID_HERE",
+  method='GET',
+  url='/api/v1/users/USER_ID_HERE',
   body={},
   headers={},
   oauth=False
@@ -420,7 +420,7 @@ If your request comes back with more than the default or set limit (`resp.has_ne
 Example of listing users 1 at a time:
 
 ```py
-query_parameters = {"limit": "1"}
+query_parameters = {'limit': '1'}
 users, resp, err = await client.list_users(query_parameters)
 
 # Check if there more pages follow
@@ -463,7 +463,7 @@ loop.run_until_complete(main())
 
 This library looks for configuration in the following sources:
 
-0. An `okta.yaml` file in a `.okta` folder in the current user's home directory (`~/.okta/okta.yaml` or `%userprofile\.okta\okta.yaml`). See a sample [YAML Configuration](#yaml-configuration)
+0. An `okta.yaml` file in a `.okta` folder in the current user's home directory (`~/.okta/okta.yaml` or `%userprofile%\.okta\okta.yaml`). See a sample [YAML Configuration](#yaml-configuration)
 1. A `okta.yaml` file in the application or project's root directory. See a sample [YAML Configuration](#yaml-configuration)
 2. [Environment variables](#environment-variables)
 3. Configuration explicitly passed to the constructor (see the example in [Getting started](#getting-started))
