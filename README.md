@@ -425,18 +425,38 @@ users, resp, err = await client.list_users(query_parameters)
 
 # Check if there more pages follow
 if resp.has_next():
-  next_user, error = await resp.next()  # Returns list of 1 user after the last retrieved user
+  users, err = await resp.next()  # Returns list of 1 user after the last retrieved user
 
 # Iterate through all of the rest of the pages
 while resp.has_next():
-  next_usr_list, err = await resp.next()
-  # Do stuff with users in next_usr_list
+  users, err = await resp.next()
+  # Do stuff with users in users
 
 print(resp.has_next()) # False
 try:
   await resp.next()
 except StopAsyncIteration:
   # Handle Exception raised
+```
+
+Here's a complete example:
+```python
+from okta.client import Client as OktaClient
+import asyncio
+
+async def main():
+    client = OktaClient()
+    users, resp, err = await client.list_users()
+    while True:
+        for user in users:
+            print(user.profile.login) # Add more properties here.
+        if resp.has_next():
+            users, err = await resp.next()
+        else:
+            break
+
+loop = asyncio.get_event_loop()
+loop.run_until_complete(main())
 ```
 
 ## Configuration reference
