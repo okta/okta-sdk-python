@@ -4,7 +4,7 @@
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Support](https://img.shields.io/badge/support-Developer%20Forum-blue.svg)][devforum]
 
-![PyPI](https://img.shields.io/pypi/v/okta)
+[![PyPI](https://img.shields.io/pypi/v/okta)](https://pypi.org/project/okta/)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/okta)
 ![Code Style](https://img.shields.io/badge/Code%20Style-flake8-informational.svg)
 
@@ -48,7 +48,7 @@ The latest release can always be found on the [releases page][github-releases].
 If you run into problems using the SDK, you can
 
 - Ask questions on the [Okta Developer Forums][devforum]
-- Post [issues][github-issues] here on GitHub (for code errors)
+- Post [issues on GitHub][github-issues] (for code errors)
 
 ## Getting started
 
@@ -69,13 +69,13 @@ Construct a client instance by passing it your Okta domain name and API token:
 from okta.client import Client as OktaClient
 # Instantiating with a Python dictionary in the constructor
 config = {
-    "orgUrl": "https://test.okta.com",
-    "token": "YOUR_API_TOKEN"
+    'orgUrl': 'https://test.okta.com',
+    'token': 'YOUR_API_TOKEN'
 }
-my_okta_client = OktaClient(config)
+okta_client = OktaClient(config)
 
 # Instantiating without in-text credentials
-my_okta_client = OktaClient()
+okta_client = OktaClient()
 ```
 
 > Using a Python dictionary to hard-code the Okta domain and API token is encouraged for development; In production, you should use a more secure way of storing these values. This library supports a few different configuration sources, covered in the [configuration reference](#configuration-reference) section.
@@ -91,11 +91,11 @@ When using this approach you won't need an API Token because the SDK will reques
 ```py
 from okta.client import Client as OktaClient
 config = {
-    "orgUrl": "https://test.okta.com",
-    "authorizationMode": "PrivateKey",
-    "clientId": "YOUR_CLIENT_ID",
-    "scopes": ["okta.users.manage"],
-    "privateKey": {'JsonWebKey'}
+    'orgUrl': 'https://test.okta.com',
+    'authorizationMode': 'PrivateKey',
+    'clientId': 'YOUR_CLIENT_ID',
+    'scopes': ['okta.users.manage'],
+    'privateKey': {'JsonWebKey'}
 }
 client = OktaClient(config)
 ```
@@ -113,11 +113,11 @@ from project.custom.request_executor_impl import RequestExecImpl
 from project.custom.http_client_impl import HTTPClientImpl
 from project.custom.cache_impl import CacheImpl
 config = {
-    "orgUrl": "https://test.okta.com",
-    "token": "YOUR_API_TOKEN",
-    "requestExecutor": RequestExecImpl,
-    "httpClient": HTTPClientImpl,
-    "cacheManager": CacheImpl
+    'orgUrl': 'https://test.okta.com',
+    'token': 'YOUR_API_TOKEN',
+    'requestExecutor': RequestExecImpl,
+    'httpClient': HTTPClientImpl,
+    'cacheManager': CacheImpl
 }
 ```
 
@@ -149,7 +149,22 @@ These examples will help you understand how to use this library.
 
 Once you initialize a `client`, you can call methods to make requests to the Okta API. The client uses **asynchronous** methods to operate. Most methods are grouped by the API endpoint they belong to. For example, methods that call the [Users API][users-api-docs] are organized under [the User resource client (okta.resource_clients.user_client.py)][users-client].
 
-> Asynchronous I/O is fairly new to Python after making its debut in Python 3.5. It's powered by the `asyncio` library which provides avenues to produce concurrent code. This allows developers to define `async` functions and `await` asynchronous calls within them. For more information, you can check out the Python docs [here][python-docs].
+> Asynchronous I/O is fairly new to Python after making its debut in Python 3.5. It's powered by the `asyncio` library which provides avenues to produce concurrent code. This allows developers to define `async` functions and `await` asynchronous calls within them. For more information, you can check out the [Python docs][python-docs].
+
+Calls using `await` must be made in an `async def` function. That function must be called by `asyncio` (see example below).
+
+```python
+from okta.client import Client as OktaClient
+import asyncio
+
+async def main():
+    client = OktaClient()
+    users, resp, err = await client.list_users()
+    print(len(users))
+
+loop = asyncio.get_event_loop()
+loop.run_until_complete(main())
+```
 
 ### Authenticate a User
 
@@ -160,7 +175,7 @@ This library should only be used with the Okta management API. To call the [Auth
 > ```py
 > from okta.client import Client as OktaClient
 > import okta.models as models
-> client = OktaClient({"orgUrl": "https://test.okta.com", "token": "YOUR_API_TOKEN"})
+> client = OktaClient({'orgUrl': 'https://test.okta.com', 'token': 'YOUR_API_TOKEN'})
 > ```
 
 ### Get and set custom attributes
@@ -171,18 +186,18 @@ Custom attributes must first be defined in the Okta profile editor. Then, you ca
 """ Setting attributes """
 # Creating an instance through a Python Dictionary
 user_profile = models.UserProfile({
-  "firstName": "John",
-  "lastName": "Foe",
-  "email": "John.Foe@okta.com",
-  "login": "John.Foe@okta.com"
+  'firstName': 'John',
+  'lastName': 'Foe',
+  'email': 'John.Foe@okta.com',
+  'login': 'John.Foe@okta.com'
 })
 
 # Creating an empty object and using variables
 user_profile = models.UserProfile()
-user_profile.first_name = "John"
-user_profile.last_name = "Doe"
-user_profile.email = "John.Doe@okta.com"
-user_profile.login = "John.Doe@okta.com"
+user_profile.first_name = 'John'
+user_profile.last_name = 'Doe'
+user_profile.email = 'John.Doe@okta.com'
+user_profile.login = 'John.Doe@okta.com'
 
 """ Getting attributes from instance """
 user, resp, err = await client.get_user(user.id)
@@ -206,8 +221,9 @@ users, resp, err = await client.list_users()
 ### Filter or search for Users
 
 ```py
-# Query parameters are optional on methods that can use them! Check the method definition for details on what query parameters are accepted
-query_parameters = {"filter": "status eq \"ACTIVE\""}
+# Query parameters are optional on methods that can use them!
+# Check the method definition for details on which query parameters are accepted.
+query_parameters = {'filter': 'status eq "ACTIVE"'}
 users, resp, err = await client.list_users(query_parameters)
 ```
 
@@ -216,24 +232,24 @@ users, resp, err = await client.list_users(query_parameters)
 ```py
 # Create Password
 password = models.PasswordCredential({
-    "value": "Password123"
+    'value': 'Password123'
 })
 
 # Create User Credentials
 user_creds = models.UserCredentials({
-    "password": password
+    'password': password
 })
 
 # Create User Profile and CreateUser Request
 user_profile = models.UserProfile()
-user_profile.first_name = "John"
-user_profile.last_name = "Doe"
-user_profile.email = "John.Doe"
-user_profile.login = "John.Doe"
+user_profile.first_name = 'John'
+user_profile.last_name = 'Doe'
+user_profile.email = 'John.Doe'
+user_profile.login = 'John.Doe'
 
 create_user_req = models.CreateUserRequest({
-    "credentials": user_creds,
-    "profile": user_profile
+    'credentials': user_creds,
+    'profile': user_profile
 })
 
 # Create User
@@ -246,8 +262,8 @@ user, resp, err = await client.create_user(create_user_req)
 # Assume user object saved to variable `user`
 # Craft new profile and get user object
 new_profile = user.profile
-new_profile.nick_name = "Oktanaut"
-updated_user_obj = models.User({"profile": new_profile})
+new_profile.nick_name = 'Oktanaut'
+updated_user_obj = models.User({'profile': new_profile})
 
 # Update User with new details
 updated_user, _, err = await client.update_user(user.id, updated_user_obj)
@@ -258,7 +274,7 @@ updated_user, _, err = await client.update_user(user.id, updated_user_obj)
 You must first deactivate the user, and then you can delete the user.
 
 ```py
-# Assuming user starts off with a status of "ACTIVE"
+# Assuming user starts off with a status of 'ACTIVE'
 
 # Deactivate
 resp, err = await client.deactivate_or_delete_user(user.id)
@@ -277,10 +293,10 @@ users_groups, resp, err = await client.list_user_groups(user.id)
 ```py
 # Create Group Model
 group_profile = models.GroupProfile({
-    "name": "Group-Test"
+    'name': 'Group-Test'
 })
 group_model = models.Group({
-    "profile": group_profile
+    'profile': group_profile
 })
 
 # Create Group
@@ -304,8 +320,8 @@ supported_factors, resp, err = await client.list_supported_factors(user.id)
 ```py
 # Create and enroll factor
 sms_factor = models.SmsUserFactor({
-    "profile": models.SmsUserFactorProfile({
-        "phoneNumber": "+12345678901"
+    'profile': models.SmsUserFactorProfile({
+        'phoneNumber': '+12345678901'
     })
 })
 enrolled_factor, _, err = await client.enroll_factor(created_user.id, sms_factor)
@@ -315,7 +331,7 @@ enrolled_factor, _, err = await client.enroll_factor(created_user.id, sms_factor
 
 ```py
 activate_factor_request = models.ActivateFactorRequest({
-  "passCode": "123456"
+  'passCode': '123456'
 })
 activated_factor, resp, err = await client.activate_factor(user.id, factor.id, activate_factor_request)
 ```
@@ -324,7 +340,7 @@ activated_factor, resp, err = await client.activate_factor(user.id, factor.id, a
 
 ```py
 verify_factor_request = models.ActivateFactorRequest({
-  "passCode": "123456"
+  'passCode': '123456'
 })
 verified_factor, resp, err = await client.activate_factor(user.id, factor.id, verify_factor_request)
 ```
@@ -346,20 +362,20 @@ app, resp, err = await client.get_application(app.id)
 ```py
 # Create SWA Application model and SWA Application in Okta
 swa_app_settings_app = models.SwaApplicationSettingsApplication({
-    "buttonField": "btn-login",
-    "passwordField": "txt-box-password",
-    "usernameField": "txt-box-username",
-    "url": "https://example.com/login.html",
-    "loginUrlRegex": "^https://example.com/login.html$"
+    'buttonField': 'btn-login',
+    'passwordField': 'txt-box-password',
+    'usernameField': 'txt-box-username',
+    'url': 'https://example.com/login.html',
+    'loginUrlRegex': '^https://example.com/login.html$'
 })
 
 swa_app_settings = models.SwaApplicationSettings({
-    "app": swa_app_settings_app
+    'app': swa_app_settings_app
 })
 
 swa_app_model = models.SwaApplication({
-    "label": "SWA Test App",
-    "settings": swa_app_settings,
+    'label': 'SWA Test App',
+    'settings': swa_app_settings,
 })
 
 app, resp, err = await client.create_application(swa_app_model)
@@ -372,8 +388,8 @@ Not every API endpoint is represented by a method in this library. You can call 
 ```py
 # Example that doesn't return Object
 request, error = await client.get_request_executor().create_request(
-  method="POST",
-  url="/api/v1/users/USER_ID_HERE/lifecycle/activate",
+  method='POST',
+  url='/api/v1/users/USER_ID_HERE/lifecycle/activate',
   body={},
   headers={},
   oauth=False
@@ -384,8 +400,8 @@ response_body = response.get_body()
 
 # Example that does return Object
 request, error = await client.get_request_executor().create_request(
-  method="GET",
-  url="/api/v1/users/USER_ID_HERE",
+  method='GET',
+  url='/api/v1/users/USER_ID_HERE',
   body={},
   headers={},
   oauth=False
@@ -404,17 +420,17 @@ If your request comes back with more than the default or set limit (`resp.has_ne
 Example of listing users 1 at a time:
 
 ```py
-query_parameters = {"limit": "1"}
+query_parameters = {'limit': '1'}
 users, resp, err = await client.list_users(query_parameters)
 
 # Check if there more pages follow
-if resp.has_next:
-  next_user, error = await resp.next()  # Returns list of 1 user after the last retrieved user
+if resp.has_next():
+  users, err = await resp.next()  # Returns list of 1 user after the last retrieved user
 
 # Iterate through all of the rest of the pages
 while resp.has_next():
-  next_usr_list, err = await resp.next()
-  # Do stuff with users in next_usr_list
+  users, err = await resp.next()
+  # Do stuff with users in users
 
 print(resp.has_next()) # False
 try:
@@ -423,12 +439,32 @@ except StopAsyncIteration:
   # Handle Exception raised
 ```
 
+Here's a complete example:
+```python
+from okta.client import Client as OktaClient
+import asyncio
+
+async def main():
+    client = OktaClient()
+    users, resp, err = await client.list_users()
+    while True:
+        for user in users:
+            print(user.profile.login) # Add more properties here.
+        if resp.has_next():
+            users, err = await resp.next()
+        else:
+            break
+
+loop = asyncio.get_event_loop()
+loop.run_until_complete(main())
+```
+
 ## Configuration reference
 
 This library looks for configuration in the following sources:
 
-0. An `okta.yaml` file in a `.okta` folder in the current user's home directory (`~/.okta/okta.yaml` or `%userprofile\.okta\okta.yaml`). See a sample here: [YAML Configuration](#yaml-configuration)
-1. A `.okta.yaml` file in the application or project's root directory. See a sample here: [YAML Configuration](#yaml-configuration)
+0. An `okta.yaml` file in a `.okta` folder in the current user's home directory (`~/.okta/okta.yaml` or `%userprofile%\.okta\okta.yaml`). See a sample [YAML Configuration](#yaml-configuration)
+1. A `okta.yaml` file in the application or project's root directory. See a sample [YAML Configuration](#yaml-configuration)
 2. [Environment variables](#environment-variables)
 3. Configuration explicitly passed to the constructor (see the example in [Getting started](#getting-started))
 
@@ -446,10 +482,10 @@ okta:
     connectionTimeout: 30 # seconds
     orgUrl: "https://{yourOktaDomain}"
     proxy:
-      port: null
-      host: null
-      username: null
-      password: null
+      port: {proxy_port}
+      host: {proxy_host}
+      username: {proxy_username}
+      password: {proxy_password}
     token: "YOUR_API_TOKEN"
     requestTimeout: 0 # seconds
     rateLimit:
@@ -464,10 +500,10 @@ okta:
     connectionTimeout: 30 # seconds
     orgUrl: "https://{yourOktaDomain}"
     proxy:
-      port: null
-      host: null
-      username: null
-      password: null
+      port: {proxy_port}
+      host: {proxy_host}
+      username: {proxy_username}
+      password: {proxy_password}
     authorizationMode: "PrivateKey"
     clientId: "YOUR_CLIENT_ID"
     scopes:
@@ -483,6 +519,8 @@ okta:
     rateLimit:
       maxRetries: 4
 ```
+
+> If a proxy is not going to be used for the SDK, you may omit the `okta.client.proxy` section from your `okta.yaml` file
 
 ### Environment variables
 
