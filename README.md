@@ -482,10 +482,10 @@ okta:
     connectionTimeout: 30 # seconds
     orgUrl: "https://{yourOktaDomain}"
     proxy:
-      port: null
-      host: null
-      username: null
-      password: null
+      port: {proxy_port}
+      host: {proxy_host}
+      username: {proxy_username}
+      password: {proxy_password}
     token: "YOUR_API_TOKEN"
     requestTimeout: 0 # seconds
     rateLimit:
@@ -500,10 +500,10 @@ okta:
     connectionTimeout: 30 # seconds
     orgUrl: "https://{yourOktaDomain}"
     proxy:
-      port: null
-      host: null
-      username: null
-      password: null
+      port: {proxy_port}
+      host: {proxy_host}
+      username: {proxy_username}
+      password: {proxy_password}
     authorizationMode: "PrivateKey"
     clientId: "YOUR_CLIENT_ID"
     scopes:
@@ -519,6 +519,8 @@ okta:
     rateLimit:
       maxRetries: 4
 ```
+
+> If a proxy is not going to be used for the SDK, you may omit the `okta.client.proxy` section from your `okta.yaml` file
 
 ### Environment variables
 
