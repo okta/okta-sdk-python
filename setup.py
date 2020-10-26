@@ -29,7 +29,7 @@ setup(
     long_description=open("LONG_DESCRIPTION.md").read(),
     test_suite="tests",
     packages=find_packages(),
-    python_requires=">=3.6'",
+    python_requires=">=3.6",
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Intended Audience :: Developers",
