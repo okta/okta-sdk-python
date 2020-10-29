@@ -66,7 +66,10 @@ You'll also need
 Construct a client instance by passing it your Okta domain name and API token:
 
 ```py
+import asyncio
+
 from okta.client import Client as OktaClient
+
 # Instantiating with a Python dictionary in the constructor
 config = {
     'orgUrl': 'https://test.okta.com',
@@ -74,6 +77,18 @@ config = {
 }
 okta_client = OktaClient(config)
 
+# example of usage, list all users and print their first name and last name
+async def main():
+    users, resp, err = await okta_client.list_users()
+    for user in users:
+        print(user.profile.first_name, user.profile.last_name)
+
+loop = asyncio.get_event_loop()
+loop.run_until_complete(main())
+```
+
+Another way to instantiate okta_client (config should be provided in other place as described below):
+```py
 # Instantiating without in-text credentials
 okta_client = OktaClient()
 ```
