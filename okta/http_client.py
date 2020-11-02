@@ -49,8 +49,8 @@ class HTTPClient:
                       'url': request['url'],
                       'headers': self._default_headers}
             json_data = request.get('json')
-            # even empty json parameter may cause issue, so include it if needed only
-            # for more details visit https://github.com/okta/okta-sdk-python/issues/131
+            # empty json param may cause issue, so include it if needed only
+            # more details: https://github.com/okta/okta-sdk-python/issues/131
             if json_data:
                 params['json'] = json_data
             if self._timeout:
