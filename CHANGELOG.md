@@ -1,7 +1,10 @@
 # Okta Python SDK Changelog
 
-## v1.0.2
+## v1.0.3
 - Fix construction of async http request, fix method not allowed issue.
+
+## v1.0.2
+- Update setup.py, fix python_requires parameter
 
 ## v1.0.1
 - Add `__init__.py` files for all modules so imports work correctly during publish
