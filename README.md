@@ -72,7 +72,7 @@ from okta.client import Client as OktaClient
 
 # Instantiating with a Python dictionary in the constructor
 config = {
-    'orgUrl': 'https://test.okta.com',
+    'orgUrl': 'https://{yourOktaDomain}',
     'token': 'YOUR_API_TOKEN'
 }
 okta_client = OktaClient(config)
@@ -106,11 +106,11 @@ When using this approach you won't need an API Token because the SDK will reques
 ```py
 from okta.client import Client as OktaClient
 config = {
-    'orgUrl': 'https://YOUR_DOMAIN',
+    'orgUrl': 'https://{yourOktaDomain}',
     'authorizationMode': 'PrivateKey',
-    'clientId': 'YOUR_CLIENT_ID',
+    'clientId': '{yourClientId}',
     'scopes': ['okta.users.manage'],
-    'privateKey': 'YOUR_PRIVATE_JWK'
+    'privateKey': 'YOUR_PRIVATE_JWK' # this parameter should be type of str
 }
 okta_client = OktaClient(config)
 
