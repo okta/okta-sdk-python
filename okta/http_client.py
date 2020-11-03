@@ -44,15 +44,21 @@ class HTTPClient:
         try:
             # Set headers
             self._default_headers.update(request["headers"])
+            # Prepare request parameters
+            params = {'method': request['method'],
+                      'url': request['url'],
+                      'headers': self._default_headers}
+            json_data = request.get('json')
+            # empty json param may cause issue, so include it if needed only
+            # more details: https://github.com/okta/okta-sdk-python/issues/131
+            if json_data:
+                params['json'] = json_data
+            if self._timeout:
+                params['timeout'] = self._timeout
+            if self._proxy:
+                params['proxy'] = self._proxy
             # Fire request
-            async with aiohttp.request(
-                method=request["method"],
-                url=request["url"],
-                headers=self._default_headers,
-                json=request["data"] if "data" in request else {},
-                timeout=self._timeout,
-                proxy=self._proxy
-            ) as response:
+            async with aiohttp.request(**params) as response:
                 return (response.request_info,
                         response,
                         await response.text(),
