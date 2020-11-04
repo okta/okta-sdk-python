@@ -43,7 +43,7 @@ class LogAuthenticationContext(
                 if isinstance(config["authenticationProvider"],
                               log_authentication_provider.LogAuthenticationProvider):
                     self.authentication_provider = config["authenticationProvider"]
-                else:
+                elif config["authenticationProvider"] is not None:
                     self.authentication_provider = log_authentication_provider.LogAuthenticationProvider(
                         config["authenticationProvider"].upper()
                     )
@@ -55,7 +55,7 @@ class LogAuthenticationContext(
                 if isinstance(config["credentialProvider"],
                               log_credential_provider.LogCredentialProvider):
                     self.credential_provider = config["credentialProvider"]
-                else:
+                elif config["credentialProvider"] is not None:
                     self.credential_provider = log_credential_provider.LogCredentialProvider(
                         config["credentialProvider"].upper()
                     )
@@ -65,7 +65,7 @@ class LogAuthenticationContext(
                 if isinstance(config["credentialType"],
                               log_credential_type.LogCredentialType):
                     self.credential_type = config["credentialType"]
-                else:
+                elif config["credentialType"] is not None:
                     self.credential_type = log_credential_type.LogCredentialType(
                         config["credentialType"].upper()
                     )
