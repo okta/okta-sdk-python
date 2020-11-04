@@ -37,10 +37,12 @@ class ProtocolRelayState(
                 if isinstance(config["format"],
                               protocol_relay_state_format.ProtocolRelayStateFormat):
                     self.format = config["format"]
-                else:
+                elif config["format"] is not None:
                     self.format = protocol_relay_state_format.ProtocolRelayStateFormat(
                         config["format"].upper()
                     )
+                else:
+                    self.format = None
             else:
                 self.format = None
         else:

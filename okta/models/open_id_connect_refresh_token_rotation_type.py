@@ -21,18 +21,13 @@ limitations under the License.
 from aenum import MultiValueEnum
 
 
-class FactorProvider(
+class OpenIdConnectRefreshTokenRotationType(
     str,
     MultiValueEnum
 ):
     """
-    An enumeration class for FactorProvider.
+    An enumeration class for OpenIdConnectRefreshTokenRotationType.
     """
 
-    OKTA = "OKTA", "okta"
-    RSA = "RSA", "rsa"
-    GOOGLE = "GOOGLE", "google"
-    SYMANTEC = "SYMANTEC", "symantec"
-    DUO = "DUO", "duo"
-    YUBICO = "YUBICO", "yubico"
-    CUSTOM = "CUSTOM", "custom"
+    ROTATE = "rotate", "ROTATE"
+    STATIC = "static", "STATIC"

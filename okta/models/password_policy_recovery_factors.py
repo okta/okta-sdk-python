@@ -41,40 +41,48 @@ class PasswordPolicyRecoveryFactors(
                 if isinstance(config["oktaCall"],
                               password_policy_recovery_factor_settings.PasswordPolicyRecoveryFactorSettings):
                     self.okta_call = config["oktaCall"]
-                else:
+                elif config["oktaCall"] is not None:
                     self.okta_call = password_policy_recovery_factor_settings.PasswordPolicyRecoveryFactorSettings(
                         config["oktaCall"]
                     )
+                else:
+                    self.okta_call = None
             else:
                 self.okta_call = None
             if "oktaEmail" in config:
                 if isinstance(config["oktaEmail"],
                               password_policy_recovery_email.PasswordPolicyRecoveryEmail):
                     self.okta_email = config["oktaEmail"]
-                else:
+                elif config["oktaEmail"] is not None:
                     self.okta_email = password_policy_recovery_email.PasswordPolicyRecoveryEmail(
                         config["oktaEmail"]
                     )
+                else:
+                    self.okta_email = None
             else:
                 self.okta_email = None
             if "oktaSms" in config:
                 if isinstance(config["oktaSms"],
                               password_policy_recovery_factor_settings.PasswordPolicyRecoveryFactorSettings):
                     self.okta_sms = config["oktaSms"]
-                else:
+                elif config["oktaSms"] is not None:
                     self.okta_sms = password_policy_recovery_factor_settings.PasswordPolicyRecoveryFactorSettings(
                         config["oktaSms"]
                     )
+                else:
+                    self.okta_sms = None
             else:
                 self.okta_sms = None
             if "recoveryQuestion" in config:
                 if isinstance(config["recoveryQuestion"],
                               password_policy_recovery_question.PasswordPolicyRecoveryQuestion):
                     self.recovery_question = config["recoveryQuestion"]
-                else:
+                elif config["recoveryQuestion"] is not None:
                     self.recovery_question = password_policy_recovery_question.PasswordPolicyRecoveryQuestion(
                         config["recoveryQuestion"]
                     )
+                else:
+                    self.recovery_question = None
             else:
                 self.recovery_question = None
         else:

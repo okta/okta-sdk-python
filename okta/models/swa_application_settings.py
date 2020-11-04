@@ -38,10 +38,12 @@ class SwaApplicationSettings(
                 if isinstance(config["app"],
                               swa_application_settings_application.SwaApplicationSettingsApplication):
                     self.app = config["app"]
-                else:
+                elif config["app"] is not None:
                     self.app = swa_application_settings_application.SwaApplicationSettingsApplication(
                         config["app"]
                     )
+                else:
+                    self.app = None
             else:
                 self.app = None
         else:

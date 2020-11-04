@@ -37,10 +37,12 @@ class OktaSignOnPolicyConditions(
                 if isinstance(config["people"],
                               policy_people_condition.PolicyPeopleCondition):
                     self.people = config["people"]
-                else:
+                elif config["people"] is not None:
                     self.people = policy_people_condition.PolicyPeopleCondition(
                         config["people"]
                     )
+                else:
+                    self.people = None
             else:
                 self.people = None
         else:

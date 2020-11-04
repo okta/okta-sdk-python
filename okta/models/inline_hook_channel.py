@@ -37,10 +37,12 @@ class InlineHookChannel(
                 if isinstance(config["config"],
                               inline_hook_channel_config.InlineHookChannelConfig):
                     self.config = config["config"]
-                else:
+                elif config["config"] is not None:
                     self.config = inline_hook_channel_config.InlineHookChannelConfig(
                         config["config"]
                     )
+                else:
+                    self.config = None
             else:
                 self.config = None
             self.type = config["type"]\

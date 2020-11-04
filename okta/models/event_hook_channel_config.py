@@ -40,10 +40,12 @@ class EventHookChannelConfig(
                 if isinstance(config["authScheme"],
                               event_hook_channel_config_auth_scheme.EventHookChannelConfigAuthScheme):
                     self.auth_scheme = config["authScheme"]
-                else:
+                elif config["authScheme"] is not None:
                     self.auth_scheme = event_hook_channel_config_auth_scheme.EventHookChannelConfigAuthScheme(
                         config["authScheme"]
                     )
+                else:
+                    self.auth_scheme = None
             else:
                 self.auth_scheme = None
             self.headers = OktaCollection.form_list(

@@ -49,30 +49,36 @@ class Feature(
                 if isinstance(config["stage"],
                               feature_stage.FeatureStage):
                     self.stage = config["stage"]
-                else:
+                elif config["stage"] is not None:
                     self.stage = feature_stage.FeatureStage(
                         config["stage"]
                     )
+                else:
+                    self.stage = None
             else:
                 self.stage = None
             if "status" in config:
                 if isinstance(config["status"],
                               enabled_status.EnabledStatus):
                     self.status = config["status"]
-                else:
+                elif config["status"] is not None:
                     self.status = enabled_status.EnabledStatus(
                         config["status"].upper()
                     )
+                else:
+                    self.status = None
             else:
                 self.status = None
             if "type" in config:
                 if isinstance(config["type"],
                               feature_type.FeatureType):
                     self.type = config["type"]
-                else:
+                elif config["type"] is not None:
                     self.type = feature_type.FeatureType(
                         config["type"].upper()
                     )
+                else:
+                    self.type = None
             else:
                 self.type = None
         else:

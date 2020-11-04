@@ -38,10 +38,12 @@ class SwaThreeFieldApplicationSettings(
                 if isinstance(config["app"],
                               swa_three_field_application_settings_application.SwaThreeFieldApplicationSettingsApplication):
                     self.app = config["app"]
-                else:
+                elif config["app"] is not None:
                     self.app = swa_three_field_application_settings_application.SwaThreeFieldApplicationSettingsApplication(
                         config["app"]
                     )
+                else:
+                    self.app = None
             else:
                 self.app = None
         else:

@@ -41,20 +41,24 @@ class GroupRule(
                 if isinstance(config["actions"],
                               group_rule_action.GroupRuleAction):
                     self.actions = config["actions"]
-                else:
+                elif config["actions"] is not None:
                     self.actions = group_rule_action.GroupRuleAction(
                         config["actions"]
                     )
+                else:
+                    self.actions = None
             else:
                 self.actions = None
             if "conditions" in config:
                 if isinstance(config["conditions"],
                               group_rule_conditions.GroupRuleConditions):
                     self.conditions = config["conditions"]
-                else:
+                elif config["conditions"] is not None:
                     self.conditions = group_rule_conditions.GroupRuleConditions(
                         config["conditions"]
                     )
+                else:
+                    self.conditions = None
             else:
                 self.conditions = None
             self.created = config["created"]\
@@ -69,10 +73,12 @@ class GroupRule(
                 if isinstance(config["status"],
                               group_rule_status.GroupRuleStatus):
                     self.status = config["status"]
-                else:
+                elif config["status"] is not None:
                     self.status = group_rule_status.GroupRuleStatus(
                         config["status"].upper()
                     )
+                else:
+                    self.status = None
             else:
                 self.status = None
             self.type = config["type"]\

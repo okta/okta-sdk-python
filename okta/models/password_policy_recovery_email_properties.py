@@ -37,10 +37,12 @@ class PasswordPolicyRecoveryEmailProperties(
                 if isinstance(config["recoveryToken"],
                               password_policy_recovery_email_recovery_token.PasswordPolicyRecoveryEmailRecoveryToken):
                     self.recovery_token = config["recoveryToken"]
-                else:
+                elif config["recoveryToken"] is not None:
                     self.recovery_token = password_policy_recovery_email_recovery_token.PasswordPolicyRecoveryEmailRecoveryToken(
                         config["recoveryToken"]
                     )
+                else:
+                    self.recovery_token = None
             else:
                 self.recovery_token = None
         else:

@@ -41,20 +41,24 @@ class Provisioning(
                 if isinstance(config["conditions"],
                               provisioning_conditions.ProvisioningConditions):
                     self.conditions = config["conditions"]
-                else:
+                elif config["conditions"] is not None:
                     self.conditions = provisioning_conditions.ProvisioningConditions(
                         config["conditions"]
                     )
+                else:
+                    self.conditions = None
             else:
                 self.conditions = None
             if "groups" in config:
                 if isinstance(config["groups"],
                               provisioning_groups.ProvisioningGroups):
                     self.groups = config["groups"]
-                else:
+                elif config["groups"] is not None:
                     self.groups = provisioning_groups.ProvisioningGroups(
                         config["groups"]
                     )
+                else:
+                    self.groups = None
             else:
                 self.groups = None
             self.profile_master = config["profileMaster"]\

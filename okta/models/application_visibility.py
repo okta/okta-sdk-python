@@ -41,10 +41,12 @@ class ApplicationVisibility(
                 if isinstance(config["hide"],
                               application_visibility_hide.ApplicationVisibilityHide):
                     self.hide = config["hide"]
-                else:
+                elif config["hide"] is not None:
                     self.hide = application_visibility_hide.ApplicationVisibilityHide(
                         config["hide"]
                     )
+                else:
+                    self.hide = None
             else:
                 self.hide = None
         else:

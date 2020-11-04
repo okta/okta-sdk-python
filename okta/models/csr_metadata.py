@@ -39,20 +39,24 @@ class CsrMetadata(
                 if isinstance(config["subject"],
                               csr_metadata_subject.CsrMetadataSubject):
                     self.subject = config["subject"]
-                else:
+                elif config["subject"] is not None:
                     self.subject = csr_metadata_subject.CsrMetadataSubject(
                         config["subject"]
                     )
+                else:
+                    self.subject = None
             else:
                 self.subject = None
             if "subjectAltNames" in config:
                 if isinstance(config["subjectAltNames"],
                               csr_metadata_subject_alt_names.CsrMetadataSubjectAltNames):
                     self.subject_alt_names = config["subjectAltNames"]
-                else:
+                elif config["subjectAltNames"] is not None:
                     self.subject_alt_names = csr_metadata_subject_alt_names.CsrMetadataSubjectAltNames(
                         config["subjectAltNames"]
                     )
+                else:
+                    self.subject_alt_names = None
             else:
                 self.subject_alt_names = None
         else:

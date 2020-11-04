@@ -37,10 +37,12 @@ class PasswordPolicyRecoverySettings(
                 if isinstance(config["factors"],
                               password_policy_recovery_factors.PasswordPolicyRecoveryFactors):
                     self.factors = config["factors"]
-                else:
+                elif config["factors"] is not None:
                     self.factors = password_policy_recovery_factors.PasswordPolicyRecoveryFactors(
                         config["factors"]
                     )
+                else:
+                    self.factors = None
             else:
                 self.factors = None
         else:

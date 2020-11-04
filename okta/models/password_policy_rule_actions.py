@@ -37,30 +37,36 @@ class PasswordPolicyRuleActions(
                 if isinstance(config["passwordChange"],
                               password_policy_rule_action.PasswordPolicyRuleAction):
                     self.password_change = config["passwordChange"]
-                else:
+                elif config["passwordChange"] is not None:
                     self.password_change = password_policy_rule_action.PasswordPolicyRuleAction(
                         config["passwordChange"]
                     )
+                else:
+                    self.password_change = None
             else:
                 self.password_change = None
             if "selfServicePasswordReset" in config:
                 if isinstance(config["selfServicePasswordReset"],
                               password_policy_rule_action.PasswordPolicyRuleAction):
                     self.self_service_password_reset = config["selfServicePasswordReset"]
-                else:
+                elif config["selfServicePasswordReset"] is not None:
                     self.self_service_password_reset = password_policy_rule_action.PasswordPolicyRuleAction(
                         config["selfServicePasswordReset"]
                     )
+                else:
+                    self.self_service_password_reset = None
             else:
                 self.self_service_password_reset = None
             if "selfServiceUnlock" in config:
                 if isinstance(config["selfServiceUnlock"],
                               password_policy_rule_action.PasswordPolicyRuleAction):
                     self.self_service_unlock = config["selfServiceUnlock"]
-                else:
+                elif config["selfServiceUnlock"] is not None:
                     self.self_service_unlock = password_policy_rule_action.PasswordPolicyRuleAction(
                         config["selfServiceUnlock"]
                     )
+                else:
+                    self.self_service_unlock = None
             else:
                 self.self_service_unlock = None
         else:

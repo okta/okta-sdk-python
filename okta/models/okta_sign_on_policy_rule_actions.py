@@ -37,10 +37,12 @@ class OktaSignOnPolicyRuleActions(
                 if isinstance(config["signon"],
                               okta_sign_on_policy_rule_signon_actions.OktaSignOnPolicyRuleSignonActions):
                     self.signon = config["signon"]
-                else:
+                elif config["signon"] is not None:
                     self.signon = okta_sign_on_policy_rule_signon_actions.OktaSignOnPolicyRuleSignonActions(
                         config["signon"]
                     )
+                else:
+                    self.signon = None
             else:
                 self.signon = None
         else:

@@ -41,10 +41,12 @@ class ApplicationSettingsNotificationsVpn(
                 if isinstance(config["network"],
                               application_settings_notifications_vpn_network.ApplicationSettingsNotificationsVpnNetwork):
                     self.network = config["network"]
-                else:
+                elif config["network"] is not None:
                     self.network = application_settings_notifications_vpn_network.ApplicationSettingsNotificationsVpnNetwork(
                         config["network"]
                     )
+                else:
+                    self.network = None
             else:
                 self.network = None
         else:

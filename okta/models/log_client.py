@@ -41,10 +41,12 @@ class LogClient(
                 if isinstance(config["geographicalContext"],
                               log_geographical_context.LogGeographicalContext):
                     self.geographical_context = config["geographicalContext"]
-                else:
+                elif config["geographicalContext"] is not None:
                     self.geographical_context = log_geographical_context.LogGeographicalContext(
                         config["geographicalContext"]
                     )
+                else:
+                    self.geographical_context = None
             else:
                 self.geographical_context = None
             self.id = config["id"]\
@@ -55,10 +57,12 @@ class LogClient(
                 if isinstance(config["userAgent"],
                               log_user_agent.LogUserAgent):
                     self.user_agent = config["userAgent"]
-                else:
+                elif config["userAgent"] is not None:
                     self.user_agent = log_user_agent.LogUserAgent(
                         config["userAgent"]
                     )
+                else:
+                    self.user_agent = None
             else:
                 self.user_agent = None
             self.zone = config["zone"]\

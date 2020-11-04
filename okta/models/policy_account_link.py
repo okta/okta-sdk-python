@@ -39,10 +39,12 @@ class PolicyAccountLink(
                 if isinstance(config["filter"],
                               policy_account_link_filter.PolicyAccountLinkFilter):
                     self.filter = config["filter"]
-                else:
+                elif config["filter"] is not None:
                     self.filter = policy_account_link_filter.PolicyAccountLinkFilter(
                         config["filter"]
                     )
+                else:
+                    self.filter = None
             else:
                 self.filter = None
         else:

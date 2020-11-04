@@ -41,10 +41,12 @@ class BasicAuthApplication(
                 if isinstance(config["credentials"],
                               scheme_application_credentials.SchemeApplicationCredentials):
                     self.credentials = config["credentials"]
-                else:
+                elif config["credentials"] is not None:
                     self.credentials = scheme_application_credentials.SchemeApplicationCredentials(
                         config["credentials"]
                     )
+                else:
+                    self.credentials = None
             else:
                 self.credentials = None
             self.name = config["name"]\
@@ -53,10 +55,12 @@ class BasicAuthApplication(
                 if isinstance(config["settings"],
                               basic_application_settings.BasicApplicationSettings):
                     self.settings = config["settings"]
-                else:
+                elif config["settings"] is not None:
                     self.settings = basic_application_settings.BasicApplicationSettings(
                         config["settings"]
                     )
+                else:
+                    self.settings = None
             else:
                 self.settings = None
         else:

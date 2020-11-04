@@ -56,40 +56,48 @@ class LogEvent(
                 if isinstance(config["actor"],
                               log_actor.LogActor):
                     self.actor = config["actor"]
-                else:
+                elif config["actor"] is not None:
                     self.actor = log_actor.LogActor(
                         config["actor"]
                     )
+                else:
+                    self.actor = None
             else:
                 self.actor = None
             if "authenticationContext" in config:
                 if isinstance(config["authenticationContext"],
                               log_authentication_context.LogAuthenticationContext):
                     self.authentication_context = config["authenticationContext"]
-                else:
+                elif config["authenticationContext"] is not None:
                     self.authentication_context = log_authentication_context.LogAuthenticationContext(
                         config["authenticationContext"]
                     )
+                else:
+                    self.authentication_context = None
             else:
                 self.authentication_context = None
             if "client" in config:
                 if isinstance(config["client"],
                               log_client.LogClient):
                     self.client = config["client"]
-                else:
+                elif config["client"] is not None:
                     self.client = log_client.LogClient(
                         config["client"]
                     )
+                else:
+                    self.client = None
             else:
                 self.client = None
             if "debugContext" in config:
                 if isinstance(config["debugContext"],
                               log_debug_context.LogDebugContext):
                     self.debug_context = config["debugContext"]
-                else:
+                elif config["debugContext"] is not None:
                     self.debug_context = log_debug_context.LogDebugContext(
                         config["debugContext"]
                     )
+                else:
+                    self.debug_context = None
             else:
                 self.debug_context = None
             self.display_message = config["displayMessage"]\
@@ -102,10 +110,12 @@ class LogEvent(
                 if isinstance(config["outcome"],
                               log_outcome.LogOutcome):
                     self.outcome = config["outcome"]
-                else:
+                elif config["outcome"] is not None:
                     self.outcome = log_outcome.LogOutcome(
                         config["outcome"]
                     )
+                else:
+                    self.outcome = None
             else:
                 self.outcome = None
             self.published = config["published"]\
@@ -114,30 +124,36 @@ class LogEvent(
                 if isinstance(config["request"],
                               log_request.LogRequest):
                     self.request = config["request"]
-                else:
+                elif config["request"] is not None:
                     self.request = log_request.LogRequest(
                         config["request"]
                     )
+                else:
+                    self.request = None
             else:
                 self.request = None
             if "securityContext" in config:
                 if isinstance(config["securityContext"],
                               log_security_context.LogSecurityContext):
                     self.security_context = config["securityContext"]
-                else:
+                elif config["securityContext"] is not None:
                     self.security_context = log_security_context.LogSecurityContext(
                         config["securityContext"]
                     )
+                else:
+                    self.security_context = None
             else:
                 self.security_context = None
             if "severity" in config:
                 if isinstance(config["severity"],
                               log_severity.LogSeverity):
                     self.severity = config["severity"]
-                else:
+                elif config["severity"] is not None:
                     self.severity = log_severity.LogSeverity(
                         config["severity"].upper()
                     )
+                else:
+                    self.severity = None
             else:
                 self.severity = None
             self.target = OktaCollection.form_list(
@@ -149,10 +165,12 @@ class LogEvent(
                 if isinstance(config["transaction"],
                               log_transaction.LogTransaction):
                     self.transaction = config["transaction"]
-                else:
+                elif config["transaction"] is not None:
                     self.transaction = log_transaction.LogTransaction(
                         config["transaction"]
                     )
+                else:
+                    self.transaction = None
             else:
                 self.transaction = None
             self.uuid = config["uuid"]\

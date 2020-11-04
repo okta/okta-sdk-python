@@ -39,10 +39,12 @@ class EventHookChannelConfigAuthScheme(
                 if isinstance(config["type"],
                               event_hook_channel_config_auth_scheme_type.EventHookChannelConfigAuthSchemeType):
                     self.type = config["type"]
-                else:
+                elif config["type"] is not None:
                     self.type = event_hook_channel_config_auth_scheme_type.EventHookChannelConfigAuthSchemeType(
                         config["type"].upper()
                     )
+                else:
+                    self.type = None
             else:
                 self.type = None
             self.value = config["value"]\

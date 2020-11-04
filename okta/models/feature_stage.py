@@ -39,20 +39,24 @@ class FeatureStage(
                 if isinstance(config["state"],
                               feature_stage_state.FeatureStageState):
                     self.state = config["state"]
-                else:
+                elif config["state"] is not None:
                     self.state = feature_stage_state.FeatureStageState(
                         config["state"].upper()
                     )
+                else:
+                    self.state = None
             else:
                 self.state = None
             if "value" in config:
                 if isinstance(config["value"],
                               feature_stage_value.FeatureStageValue):
                     self.value = config["value"]
-                else:
+                elif config["value"] is not None:
                     self.value = feature_stage_value.FeatureStageValue(
                         config["value"].upper()
                     )
+                else:
+                    self.value = None
             else:
                 self.value = None
         else:

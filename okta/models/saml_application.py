@@ -39,10 +39,12 @@ class SamlApplication(
                 if isinstance(config["settings"],
                               saml_application_settings.SamlApplicationSettings):
                     self.settings = config["settings"]
-                else:
+                elif config["settings"] is not None:
                     self.settings = saml_application_settings.SamlApplicationSettings(
                         config["settings"]
                     )
+                else:
+                    self.settings = None
             else:
                 self.settings = None
         else:

@@ -39,10 +39,12 @@ class WebAuthnUserFactor(
                 if isinstance(config["profile"],
                               web_authn_user_factor_profile.WebAuthnUserFactorProfile):
                     self.profile = config["profile"]
-                else:
+                elif config["profile"] is not None:
                     self.profile = web_authn_user_factor_profile.WebAuthnUserFactorProfile(
                         config["profile"]
                     )
+                else:
+                    self.profile = None
             else:
                 self.profile = None
         else:

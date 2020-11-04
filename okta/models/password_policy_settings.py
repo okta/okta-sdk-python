@@ -41,30 +41,36 @@ class PasswordPolicySettings(
                 if isinstance(config["delegation"],
                               password_policy_delegation_settings.PasswordPolicyDelegationSettings):
                     self.delegation = config["delegation"]
-                else:
+                elif config["delegation"] is not None:
                     self.delegation = password_policy_delegation_settings.PasswordPolicyDelegationSettings(
                         config["delegation"]
                     )
+                else:
+                    self.delegation = None
             else:
                 self.delegation = None
             if "password" in config:
                 if isinstance(config["password"],
                               password_policy_password_settings.PasswordPolicyPasswordSettings):
                     self.password = config["password"]
-                else:
+                elif config["password"] is not None:
                     self.password = password_policy_password_settings.PasswordPolicyPasswordSettings(
                         config["password"]
                     )
+                else:
+                    self.password = None
             else:
                 self.password = None
             if "recovery" in config:
                 if isinstance(config["recovery"],
                               password_policy_recovery_settings.PasswordPolicyRecoverySettings):
                     self.recovery = config["recovery"]
-                else:
+                elif config["recovery"] is not None:
                     self.recovery = password_policy_recovery_settings.PasswordPolicyRecoverySettings(
                         config["recovery"]
                     )
+                else:
+                    self.recovery = None
             else:
                 self.recovery = None
         else:

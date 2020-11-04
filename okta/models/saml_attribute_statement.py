@@ -32,6 +32,10 @@ class SamlAttributeStatement(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
+            self.filter_type = config["filterType"]\
+                if "filterType" in config else None
+            self.filter_value = config["filterValue"]\
+                if "filterValue" in config else None
             self.name = config["name"]\
                 if "name" in config else None
             self.namespace = config["namespace"]\
@@ -44,6 +48,8 @@ class SamlAttributeStatement(
                 str
             )
         else:
+            self.filter_type = None
+            self.filter_value = None
             self.name = None
             self.namespace = None
             self.type = None
@@ -52,6 +58,8 @@ class SamlAttributeStatement(
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
+            "filterType": self.filter_type,
+            "filterValue": self.filter_value,
             "name": self.name,
             "namespace": self.namespace,
             "type": self.type,

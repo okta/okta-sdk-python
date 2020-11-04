@@ -49,20 +49,24 @@ class SmsTemplate(
                 if isinstance(config["translations"],
                               sms_template_translations.SmsTemplateTranslations):
                     self.translations = config["translations"]
-                else:
+                elif config["translations"] is not None:
                     self.translations = sms_template_translations.SmsTemplateTranslations(
                         config["translations"]
                     )
+                else:
+                    self.translations = None
             else:
                 self.translations = None
             if "type" in config:
                 if isinstance(config["type"],
                               sms_template_type.SmsTemplateType):
                     self.type = config["type"]
-                else:
+                elif config["type"] is not None:
                     self.type = sms_template_type.SmsTemplateType(
                         config["type"].upper()
                     )
+                else:
+                    self.type = None
             else:
                 self.type = None
         else:

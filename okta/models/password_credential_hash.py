@@ -37,10 +37,12 @@ class PasswordCredentialHash(
                 if isinstance(config["algorithm"],
                               password_credential_hash_algorithm.PasswordCredentialHashAlgorithm):
                     self.algorithm = config["algorithm"]
-                else:
+                elif config["algorithm"] is not None:
                     self.algorithm = password_credential_hash_algorithm.PasswordCredentialHashAlgorithm(
                         config["algorithm"].upper()
                     )
+                else:
+                    self.algorithm = None
             else:
                 self.algorithm = None
             self.salt = config["salt"]\
@@ -49,14 +51,14 @@ class PasswordCredentialHash(
                 if "saltOrder" in config else None
             self.value = config["value"]\
                 if "value" in config else None
-            self.worker_factor = config["workerFactor"]\
-                if "workerFactor" in config else None
+            self.work_factor = config["workFactor"]\
+                if "workFactor" in config else None
         else:
             self.algorithm = None
             self.salt = None
             self.salt_order = None
             self.value = None
-            self.worker_factor = None
+            self.work_factor = None
 
     def request_format(self):
         parent_req_format = super().request_format()
@@ -65,7 +67,7 @@ class PasswordCredentialHash(
             "salt": self.salt,
             "saltOrder": self.salt_order,
             "value": self.value,
-            "workerFactor": self.worker_factor
+            "workFactor": self.work_factor
         }
         parent_req_format.update(current_obj_format)
         return parent_req_format

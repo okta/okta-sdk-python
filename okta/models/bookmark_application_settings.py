@@ -38,10 +38,12 @@ class BookmarkApplicationSettings(
                 if isinstance(config["app"],
                               bookmark_application_settings_application.BookmarkApplicationSettingsApplication):
                     self.app = config["app"]
-                else:
+                elif config["app"] is not None:
                     self.app = bookmark_application_settings_application.BookmarkApplicationSettingsApplication(
                         config["app"]
                     )
+                else:
+                    self.app = None
             else:
                 self.app = None
         else:

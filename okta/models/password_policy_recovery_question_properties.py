@@ -37,10 +37,12 @@ class PasswordPolicyRecoveryQuestionProperties(
                 if isinstance(config["complexity"],
                               password_policy_recovery_question_complexity.PasswordPolicyRecoveryQuestionComplexity):
                     self.complexity = config["complexity"]
-                else:
+                elif config["complexity"] is not None:
                     self.complexity = password_policy_recovery_question_complexity.PasswordPolicyRecoveryQuestionComplexity(
                         config["complexity"]
                     )
+                else:
+                    self.complexity = None
             else:
                 self.complexity = None
         else:

@@ -43,10 +43,12 @@ class AppUser(
                 if isinstance(config["credentials"],
                               app_user_credentials.AppUserCredentials):
                     self.credentials = config["credentials"]
-                else:
+                elif config["credentials"] is not None:
                     self.credentials = app_user_credentials.AppUserCredentials(
                         config["credentials"]
                     )
+                else:
+                    self.credentials = None
             else:
                 self.credentials = None
             self.external_id = config["externalId"]\

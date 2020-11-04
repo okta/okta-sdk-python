@@ -37,10 +37,12 @@ class PasswordDictionary(
                 if isinstance(config["common"],
                               password_dictionary_common.PasswordDictionaryCommon):
                     self.common = config["common"]
-                else:
+                elif config["common"] is not None:
                     self.common = password_dictionary_common.PasswordDictionaryCommon(
                         config["common"]
                     )
+                else:
+                    self.common = None
             else:
                 self.common = None
         else:

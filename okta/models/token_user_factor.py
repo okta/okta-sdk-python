@@ -39,10 +39,12 @@ class TokenUserFactor(
                 if isinstance(config["profile"],
                               token_user_factor_profile.TokenUserFactorProfile):
                     self.profile = config["profile"]
-                else:
+                elif config["profile"] is not None:
                     self.profile = token_user_factor_profile.TokenUserFactorProfile(
                         config["profile"]
                     )
+                else:
+                    self.profile = None
             else:
                 self.profile = None
         else:

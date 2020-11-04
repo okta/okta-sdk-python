@@ -47,10 +47,12 @@ class OktaSignOnPolicyRuleSignonActions(
                 if isinstance(config["session"],
                               okta_sign_on_policy_rule_signon_session_actions.OktaSignOnPolicyRuleSignonSessionActions):
                     self.session = config["session"]
-                else:
+                elif config["session"] is not None:
                     self.session = okta_sign_on_policy_rule_signon_session_actions.OktaSignOnPolicyRuleSignonSessionActions(
                         config["session"]
                     )
+                else:
+                    self.session = None
             else:
                 self.session = None
         else:

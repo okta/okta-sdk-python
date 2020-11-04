@@ -41,20 +41,24 @@ class OktaSignOnPolicyRule(
                 if isinstance(config["actions"],
                               okta_sign_on_policy_rule_actions.OktaSignOnPolicyRuleActions):
                     self.actions = config["actions"]
-                else:
+                elif config["actions"] is not None:
                     self.actions = okta_sign_on_policy_rule_actions.OktaSignOnPolicyRuleActions(
                         config["actions"]
                     )
+                else:
+                    self.actions = None
             else:
                 self.actions = None
             if "conditions" in config:
                 if isinstance(config["conditions"],
                               okta_sign_on_policy_rule_conditions.OktaSignOnPolicyRuleConditions):
                     self.conditions = config["conditions"]
-                else:
+                elif config["conditions"] is not None:
                     self.conditions = okta_sign_on_policy_rule_conditions.OktaSignOnPolicyRuleConditions(
                         config["conditions"]
                     )
+                else:
+                    self.conditions = None
             else:
                 self.conditions = None
             self.name = config["name"]\

@@ -37,10 +37,12 @@ class PasswordPolicyRecoveryQuestion(
                 if isinstance(config["properties"],
                               password_policy_recovery_question_properties.PasswordPolicyRecoveryQuestionProperties):
                     self.properties = config["properties"]
-                else:
+                elif config["properties"] is not None:
                     self.properties = password_policy_recovery_question_properties.PasswordPolicyRecoveryQuestionProperties(
                         config["properties"]
                     )
+                else:
+                    self.properties = None
             else:
                 self.properties = None
             self.status = config["status"]\

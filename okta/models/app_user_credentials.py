@@ -37,10 +37,12 @@ class AppUserCredentials(
                 if isinstance(config["password"],
                               app_user_password_credential.AppUserPasswordCredential):
                     self.password = config["password"]
-                else:
+                elif config["password"] is not None:
                     self.password = app_user_password_credential.AppUserPasswordCredential(
                         config["password"]
                     )
+                else:
+                    self.password = None
             else:
                 self.password = None
             self.user_name = config["userName"]\

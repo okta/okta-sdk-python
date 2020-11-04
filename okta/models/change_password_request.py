@@ -37,20 +37,24 @@ class ChangePasswordRequest(
                 if isinstance(config["newPassword"],
                               password_credential.PasswordCredential):
                     self.new_password = config["newPassword"]
-                else:
+                elif config["newPassword"] is not None:
                     self.new_password = password_credential.PasswordCredential(
                         config["newPassword"]
                     )
+                else:
+                    self.new_password = None
             else:
                 self.new_password = None
             if "oldPassword" in config:
                 if isinstance(config["oldPassword"],
                               password_credential.PasswordCredential):
                     self.old_password = config["oldPassword"]
-                else:
+                elif config["oldPassword"] is not None:
                     self.old_password = password_credential.PasswordCredential(
                         config["oldPassword"]
                     )
+                else:
+                    self.old_password = None
             else:
                 self.old_password = None
         else:

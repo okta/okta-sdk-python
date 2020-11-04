@@ -39,20 +39,24 @@ class PasswordPolicyRuleConditions(
                 if isinstance(config["network"],
                               policy_network_condition.PolicyNetworkCondition):
                     self.network = config["network"]
-                else:
+                elif config["network"] is not None:
                     self.network = policy_network_condition.PolicyNetworkCondition(
                         config["network"]
                     )
+                else:
+                    self.network = None
             else:
                 self.network = None
             if "people" in config:
                 if isinstance(config["people"],
                               policy_people_condition.PolicyPeopleCondition):
                     self.people = config["people"]
-                else:
+                elif config["people"] is not None:
                     self.people = policy_people_condition.PolicyPeopleCondition(
                         config["people"]
                     )
+                else:
+                    self.people = None
             else:
                 self.people = None
         else:

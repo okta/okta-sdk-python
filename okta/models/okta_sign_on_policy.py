@@ -40,10 +40,12 @@ class OktaSignOnPolicy(
                 if isinstance(config["conditions"],
                               okta_sign_on_policy_conditions.OktaSignOnPolicyConditions):
                     self.conditions = config["conditions"]
-                else:
+                elif config["conditions"] is not None:
                     self.conditions = okta_sign_on_policy_conditions.OktaSignOnPolicyConditions(
                         config["conditions"]
                     )
+                else:
+                    self.conditions = None
             else:
                 self.conditions = None
         else:
