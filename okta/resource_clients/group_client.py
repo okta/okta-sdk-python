@@ -56,6 +56,7 @@ class GroupClient(APIClient):
             [query_params.filter] {str}
             [query_params.after] {str}
             [query_params.limit] {str}
+            [query_params.expand] {str}
         Returns:
             list: Collection of Group instances.
         """
