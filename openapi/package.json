@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@okta/openapi": "^2.1.5",
+    "@okta/openapi": "^2.1.6",
     "lodash": "^4.17.15"
   },
   "scripts": {

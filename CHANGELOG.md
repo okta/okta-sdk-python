@@ -1,5 +1,8 @@
 # Okta Python SDK Changelog
 
+## v1.0.5
+- Update according to openapi 2.1.6
+
 ## v1.0.4
 - Fix logs pagination.
 
