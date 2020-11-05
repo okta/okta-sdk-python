@@ -20,27 +20,29 @@ limitations under the License.
 
 from okta.models.user_factor\
     import UserFactor
-import okta.models.web_user_factor_profile\
-    as web_user_factor_profile
+import okta.models.custom_hotp_user_factor_profile\
+    as custom_hotp_user_factor_profile
 
 
-class WebUserFactor(
+class CustomHotpUserFactor(
     UserFactor
 ):
     """
-    A class for WebUserFactor objects.
+    A class for CustomHotpUserFactor objects.
     """
 
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.factor_type = "web"
+            self.factor_type = "token:hotp"
+            self.factor_profile_id = config["factorProfileId"]\
+                if "factorProfileId" in config else None
             if "profile" in config:
                 if isinstance(config["profile"],
-                              web_user_factor_profile.WebUserFactorProfile):
+                              custom_hotp_user_factor_profile.CustomHotpUserFactorProfile):
                     self.profile = config["profile"]
                 elif config["profile"] is not None:
-                    self.profile = web_user_factor_profile.WebUserFactorProfile(
+                    self.profile = custom_hotp_user_factor_profile.CustomHotpUserFactorProfile(
                         config["profile"]
                     )
                 else:
@@ -48,11 +50,13 @@ class WebUserFactor(
             else:
                 self.profile = None
         else:
+            self.factor_profile_id = None
             self.profile = None
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
+            "factorProfileId": self.factor_profile_id,
             "profile": self.profile
         }
         parent_req_format.update(current_obj_format)

@@ -39,20 +39,24 @@ class PasswordPolicyConditions(
                 if isinstance(config["authProvider"],
                               password_policy_authentication_provider_condition.PasswordPolicyAuthenticationProviderCondition):
                     self.auth_provider = config["authProvider"]
-                else:
+                elif config["authProvider"] is not None:
                     self.auth_provider = password_policy_authentication_provider_condition.PasswordPolicyAuthenticationProviderCondition(
                         config["authProvider"]
                     )
+                else:
+                    self.auth_provider = None
             else:
                 self.auth_provider = None
             if "people" in config:
                 if isinstance(config["people"],
                               policy_people_condition.PolicyPeopleCondition):
                     self.people = config["people"]
-                else:
+                elif config["people"] is not None:
                     self.people = policy_people_condition.PolicyPeopleCondition(
                         config["people"]
                     )
+                else:
+                    self.people = None
             else:
                 self.people = None
         else:

@@ -41,8 +41,8 @@ class LogEventClient(APIClient):
         nality than the Events API
         Args:
             query_params {dict}: Map of query parameters for request
-            [query_params.until] {str}
             [query_params.since] {str}
+            [query_params.until] {str}
             [query_params.filter] {str}
             [query_params.q] {str}
             [query_params.limit] {str}

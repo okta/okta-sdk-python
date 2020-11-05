@@ -47,10 +47,12 @@ class AuthorizationServer(
                 if isinstance(config["credentials"],
                               authorization_server_credentials.AuthorizationServerCredentials):
                     self.credentials = config["credentials"]
-                else:
+                elif config["credentials"] is not None:
                     self.credentials = authorization_server_credentials.AuthorizationServerCredentials(
                         config["credentials"]
                     )
+                else:
+                    self.credentials = None
             else:
                 self.credentials = None
             self.description = config["description"]\

@@ -52,10 +52,12 @@ class Application(
                 if isinstance(config["accessibility"],
                               application_accessibility.ApplicationAccessibility):
                     self.accessibility = config["accessibility"]
-                else:
+                elif config["accessibility"] is not None:
                     self.accessibility = application_accessibility.ApplicationAccessibility(
                         config["accessibility"]
                     )
+                else:
+                    self.accessibility = None
             else:
                 self.accessibility = None
             self.created = config["created"]\
@@ -64,10 +66,12 @@ class Application(
                 if isinstance(config["credentials"],
                               application_credentials.ApplicationCredentials):
                     self.credentials = config["credentials"]
-                else:
+                elif config["credentials"] is not None:
                     self.credentials = application_credentials.ApplicationCredentials(
                         config["credentials"]
                     )
+                else:
+                    self.credentials = None
             else:
                 self.credentials = None
             self.features = OktaCollection.form_list(
@@ -85,10 +89,12 @@ class Application(
                 if isinstance(config["licensing"],
                               application_licensing.ApplicationLicensing):
                     self.licensing = config["licensing"]
-                else:
+                elif config["licensing"] is not None:
                     self.licensing = application_licensing.ApplicationLicensing(
                         config["licensing"]
                     )
+                else:
+                    self.licensing = None
             else:
                 self.licensing = None
             self.name = config["name"]\
@@ -99,20 +105,24 @@ class Application(
                 if isinstance(config["settings"],
                               application_settings.ApplicationSettings):
                     self.settings = config["settings"]
-                else:
+                elif config["settings"] is not None:
                     self.settings = application_settings.ApplicationSettings(
                         config["settings"]
                     )
+                else:
+                    self.settings = None
             else:
                 self.settings = None
             if "signOnMode" in config:
                 if isinstance(config["signOnMode"],
                               application_sign_on_mode.ApplicationSignOnMode):
                     self.sign_on_mode = config["signOnMode"]
-                else:
+                elif config["signOnMode"] is not None:
                     self.sign_on_mode = application_sign_on_mode.ApplicationSignOnMode(
                         config["signOnMode"].upper()
                     )
+                else:
+                    self.sign_on_mode = None
             else:
                 self.sign_on_mode = None
             self.status = config["status"]\
@@ -121,10 +131,12 @@ class Application(
                 if isinstance(config["visibility"],
                               application_visibility.ApplicationVisibility):
                     self.visibility = config["visibility"]
-                else:
+                elif config["visibility"] is not None:
                     self.visibility = application_visibility.ApplicationVisibility(
                         config["visibility"]
                     )
+                else:
+                    self.visibility = None
             else:
                 self.visibility = None
         else:

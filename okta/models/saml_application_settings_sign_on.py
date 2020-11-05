@@ -20,6 +20,8 @@ limitations under the License.
 
 from okta.okta_object import OktaObject
 from okta.okta_collection import OktaCollection
+import okta.models.acs_endpoint\
+    as acs_endpoint
 import okta.models.saml_attribute_statement\
     as saml_attribute_statement
 
@@ -34,6 +36,13 @@ class SamlApplicationSettingsSignOn(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
+            self.acs_endpoints = OktaCollection.form_list(
+                config["acsEndpoints"] if "acsEndpoints"\
+                    in config else [],
+                acs_endpoint.AcsEndpoint
+            )
+            self.allow_multiple_acs_endpoints = config["allowMultipleAcsEndpoints"]\
+                if "allowMultipleAcsEndpoints" in config else None
             self.assertion_signed = config["assertionSigned"]\
                 if "assertionSigned" in config else None
             self.attribute_statements = OktaCollection.form_list(
@@ -80,6 +89,8 @@ class SamlApplicationSettingsSignOn(
             self.subject_name_id_template = config["subjectNameIdTemplate"]\
                 if "subjectNameIdTemplate" in config else None
         else:
+            self.acs_endpoints = []
+            self.allow_multiple_acs_endpoints = None
             self.assertion_signed = None
             self.attribute_statements = []
             self.audience = None
@@ -105,6 +116,8 @@ class SamlApplicationSettingsSignOn(
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
+            "acsEndpoints": self.acs_endpoints,
+            "allowMultipleAcsEndpoints": self.allow_multiple_acs_endpoints,
             "assertionSigned": self.assertion_signed,
             "attributeStatements": self.attribute_statements,
             "audience": self.audience,

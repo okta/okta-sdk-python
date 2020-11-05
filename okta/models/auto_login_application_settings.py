@@ -38,10 +38,12 @@ class AutoLoginApplicationSettings(
                 if isinstance(config["signOn"],
                               auto_login_application_settings_sign_on.AutoLoginApplicationSettingsSignOn):
                     self.sign_on = config["signOn"]
-                else:
+                elif config["signOn"] is not None:
                     self.sign_on = auto_login_application_settings_sign_on.AutoLoginApplicationSettingsSignOn(
                         config["signOn"]
                     )
+                else:
+                    self.sign_on = None
             else:
                 self.sign_on = None
         else:

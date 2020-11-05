@@ -38,10 +38,12 @@ class WsFederationApplicationSettings(
                 if isinstance(config["app"],
                               ws_federation_application_settings_application.WsFederationApplicationSettingsApplication):
                     self.app = config["app"]
-                else:
+                elif config["app"] is not None:
                     self.app = ws_federation_application_settings_application.WsFederationApplicationSettingsApplication(
                         config["app"]
                     )
+                else:
+                    self.app = None
             else:
                 self.app = None
         else:

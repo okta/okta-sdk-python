@@ -39,10 +39,12 @@ class DevicePolicyRuleCondition(
                 if isinstance(config["platform"],
                               device_policy_rule_condition_platform.DevicePolicyRuleConditionPlatform):
                     self.platform = config["platform"]
-                else:
+                elif config["platform"] is not None:
                     self.platform = device_policy_rule_condition_platform.DevicePolicyRuleConditionPlatform(
                         config["platform"]
                     )
+                else:
+                    self.platform = None
             else:
                 self.platform = None
             self.rooted = config["rooted"]\

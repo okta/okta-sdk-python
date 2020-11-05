@@ -41,10 +41,12 @@ class EventHook(
                 if isinstance(config["channel"],
                               event_hook_channel.EventHookChannel):
                     self.channel = config["channel"]
-                else:
+                elif config["channel"] is not None:
                     self.channel = event_hook_channel.EventHookChannel(
                         config["channel"]
                     )
+                else:
+                    self.channel = None
             else:
                 self.channel = None
             self.created = config["created"]\
@@ -55,10 +57,12 @@ class EventHook(
                 if isinstance(config["events"],
                               event_subscriptions.EventSubscriptions):
                     self.events = config["events"]
-                else:
+                elif config["events"] is not None:
                     self.events = event_subscriptions.EventSubscriptions(
                         config["events"]
                     )
+                else:
+                    self.events = None
             else:
                 self.events = None
             self.id = config["id"]\

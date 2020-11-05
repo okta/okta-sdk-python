@@ -40,10 +40,12 @@ class InlineHookChannelConfig(
                 if isinstance(config["authScheme"],
                               inline_hook_channel_config_auth_scheme.InlineHookChannelConfigAuthScheme):
                     self.auth_scheme = config["authScheme"]
-                else:
+                elif config["authScheme"] is not None:
                     self.auth_scheme = inline_hook_channel_config_auth_scheme.InlineHookChannelConfigAuthScheme(
                         config["authScheme"]
                     )
+                else:
+                    self.auth_scheme = None
             else:
                 self.auth_scheme = None
             self.headers = OktaCollection.form_list(

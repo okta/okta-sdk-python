@@ -38,10 +38,12 @@ class OpenIdConnectApplicationSettings(
                 if isinstance(config["oauthClient"],
                               open_id_connect_application_settings_client.OpenIdConnectApplicationSettingsClient):
                     self.oauth_client = config["oauthClient"]
-                else:
+                elif config["oauthClient"] is not None:
                     self.oauth_client = open_id_connect_application_settings_client.OpenIdConnectApplicationSettingsClient(
                         config["oauthClient"]
                     )
+                else:
+                    self.oauth_client = None
             else:
                 self.oauth_client = None
         else:

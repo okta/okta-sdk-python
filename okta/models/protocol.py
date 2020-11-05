@@ -48,50 +48,60 @@ class Protocol(
                 if isinstance(config["algorithms"],
                               protocol_algorithms.ProtocolAlgorithms):
                     self.algorithms = config["algorithms"]
-                else:
+                elif config["algorithms"] is not None:
                     self.algorithms = protocol_algorithms.ProtocolAlgorithms(
                         config["algorithms"]
                     )
+                else:
+                    self.algorithms = None
             else:
                 self.algorithms = None
             if "credentials" in config:
                 if isinstance(config["credentials"],
                               identity_provider_credentials.IdentityProviderCredentials):
                     self.credentials = config["credentials"]
-                else:
+                elif config["credentials"] is not None:
                     self.credentials = identity_provider_credentials.IdentityProviderCredentials(
                         config["credentials"]
                     )
+                else:
+                    self.credentials = None
             else:
                 self.credentials = None
             if "endpoints" in config:
                 if isinstance(config["endpoints"],
                               protocol_endpoints.ProtocolEndpoints):
                     self.endpoints = config["endpoints"]
-                else:
+                elif config["endpoints"] is not None:
                     self.endpoints = protocol_endpoints.ProtocolEndpoints(
                         config["endpoints"]
                     )
+                else:
+                    self.endpoints = None
             else:
                 self.endpoints = None
             if "issuer" in config:
                 if isinstance(config["issuer"],
                               protocol_endpoint.ProtocolEndpoint):
                     self.issuer = config["issuer"]
-                else:
+                elif config["issuer"] is not None:
                     self.issuer = protocol_endpoint.ProtocolEndpoint(
                         config["issuer"]
                     )
+                else:
+                    self.issuer = None
             else:
                 self.issuer = None
             if "relayState" in config:
                 if isinstance(config["relayState"],
                               protocol_relay_state.ProtocolRelayState):
                     self.relay_state = config["relayState"]
-                else:
+                elif config["relayState"] is not None:
                     self.relay_state = protocol_relay_state.ProtocolRelayState(
                         config["relayState"]
                     )
+                else:
+                    self.relay_state = None
             else:
                 self.relay_state = None
             self.scopes = OktaCollection.form_list(
@@ -103,10 +113,12 @@ class Protocol(
                 if isinstance(config["settings"],
                               protocol_settings.ProtocolSettings):
                     self.settings = config["settings"]
-                else:
+                elif config["settings"] is not None:
                     self.settings = protocol_settings.ProtocolSettings(
                         config["settings"]
                     )
+                else:
+                    self.settings = None
             else:
                 self.settings = None
             self.type = config["type"]\

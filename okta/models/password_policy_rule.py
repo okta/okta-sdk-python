@@ -41,20 +41,24 @@ class PasswordPolicyRule(
                 if isinstance(config["actions"],
                               password_policy_rule_actions.PasswordPolicyRuleActions):
                     self.actions = config["actions"]
-                else:
+                elif config["actions"] is not None:
                     self.actions = password_policy_rule_actions.PasswordPolicyRuleActions(
                         config["actions"]
                     )
+                else:
+                    self.actions = None
             else:
                 self.actions = None
             if "conditions" in config:
                 if isinstance(config["conditions"],
                               password_policy_rule_conditions.PasswordPolicyRuleConditions):
                     self.conditions = config["conditions"]
-                else:
+                elif config["conditions"] is not None:
                     self.conditions = password_policy_rule_conditions.PasswordPolicyRuleConditions(
                         config["conditions"]
                     )
+                else:
+                    self.conditions = None
             else:
                 self.conditions = None
             self.name = config["name"]\

@@ -51,20 +51,24 @@ class IdentityProvider(
                 if isinstance(config["policy"],
                               identity_provider_policy.IdentityProviderPolicy):
                     self.policy = config["policy"]
-                else:
+                elif config["policy"] is not None:
                     self.policy = identity_provider_policy.IdentityProviderPolicy(
                         config["policy"]
                     )
+                else:
+                    self.policy = None
             else:
                 self.policy = None
             if "protocol" in config:
                 if isinstance(config["protocol"],
                               protocol.Protocol):
                     self.protocol = config["protocol"]
-                else:
+                elif config["protocol"] is not None:
                     self.protocol = protocol.Protocol(
                         config["protocol"]
                     )
+                else:
+                    self.protocol = None
             else:
                 self.protocol = None
             self.status = config["status"]\

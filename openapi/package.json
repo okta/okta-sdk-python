@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "@okta/openapi": "https://github.com/okta/openapi.git#master",
+    "@okta/openapi": "^2.1.5",
     "lodash": "^4.17.15"
   },
   "scripts": {

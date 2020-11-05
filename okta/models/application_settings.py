@@ -39,10 +39,12 @@ class ApplicationSettings(
                 if isinstance(config["app"],
                               application_settings_application.ApplicationSettingsApplication):
                     self.app = config["app"]
-                else:
+                elif config["app"] is not None:
                     self.app = application_settings_application.ApplicationSettingsApplication(
                         config["app"]
                     )
+                else:
+                    self.app = None
             else:
                 self.app = None
             self.implicit_assignment = config["implicitAssignment"]\
@@ -53,10 +55,12 @@ class ApplicationSettings(
                 if isinstance(config["notifications"],
                               application_settings_notifications.ApplicationSettingsNotifications):
                     self.notifications = config["notifications"]
-                else:
+                elif config["notifications"] is not None:
                     self.notifications = application_settings_notifications.ApplicationSettingsNotifications(
                         config["notifications"]
                     )
+                else:
+                    self.notifications = None
             else:
                 self.notifications = None
         else:

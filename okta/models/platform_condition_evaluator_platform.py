@@ -37,10 +37,12 @@ class PlatformConditionEvaluatorPlatform(
                 if isinstance(config["os"],
                               platform_condition_evaluator_platform_operating_system.PlatformConditionEvaluatorPlatformOperatingSystem):
                     self.os = config["os"]
-                else:
+                elif config["os"] is not None:
                     self.os = platform_condition_evaluator_platform_operating_system.PlatformConditionEvaluatorPlatformOperatingSystem(
                         config["os"]
                     )
+                else:
+                    self.os = None
             else:
                 self.os = None
             self.type = config["type"]\

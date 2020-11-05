@@ -38,10 +38,12 @@ class SamlApplicationSettings(
                 if isinstance(config["signOn"],
                               saml_application_settings_sign_on.SamlApplicationSettingsSignOn):
                     self.sign_on = config["signOn"]
-                else:
+                elif config["signOn"] is not None:
                     self.sign_on = saml_application_settings_sign_on.SamlApplicationSettingsSignOn(
                         config["signOn"]
                     )
+                else:
+                    self.sign_on = None
             else:
                 self.sign_on = None
         else:

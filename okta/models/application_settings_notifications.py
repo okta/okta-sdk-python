@@ -37,10 +37,12 @@ class ApplicationSettingsNotifications(
                 if isinstance(config["vpn"],
                               application_settings_notifications_vpn.ApplicationSettingsNotificationsVpn):
                     self.vpn = config["vpn"]
-                else:
+                elif config["vpn"] is not None:
                     self.vpn = application_settings_notifications_vpn.ApplicationSettingsNotificationsVpn(
                         config["vpn"]
                     )
+                else:
+                    self.vpn = None
             else:
                 self.vpn = None
         else:

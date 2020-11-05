@@ -85,7 +85,7 @@ class {{pascalCase model.modelName}}(
                 if isinstance(config["{{camelCase prop.propertyName}}"],
                               {{snakeCase prop.model}}.{{pascalCase prop.model}}):
                     self.{{snakeCase prop.propertyName}} = config["{{camelCase prop.propertyName}}"]
-                else:
+                elif config["{{camelCase prop.propertyName}}"] is not None:
                     {{#if (eq prop.commonType "enum")}}
                     self.{{snakeCase prop.propertyName}} = {{snakeCase prop.model}}.{{pascalCase prop.model}}(
                         config["{{camelCase prop.propertyName}}"].upper()
@@ -95,6 +95,8 @@ class {{pascalCase model.modelName}}(
                         config["{{camelCase prop.propertyName}}"]
                     )
                     {{/if}}
+                else:
+                    self.{{snakeCase prop.propertyName}} = None
             else:
                 self.{{snakeCase prop.propertyName}} = None
             {{else}}

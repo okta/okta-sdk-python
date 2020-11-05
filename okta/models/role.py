@@ -45,10 +45,12 @@ class Role(
                 if isinstance(config["assignmentType"],
                               role_assignment_type.RoleAssignmentType):
                     self.assignment_type = config["assignmentType"]
-                else:
+                elif config["assignmentType"] is not None:
                     self.assignment_type = role_assignment_type.RoleAssignmentType(
                         config["assignmentType"].upper()
                     )
+                else:
+                    self.assignment_type = None
             else:
                 self.assignment_type = None
             self.created = config["created"]\
@@ -65,20 +67,24 @@ class Role(
                 if isinstance(config["status"],
                               role_status.RoleStatus):
                     self.status = config["status"]
-                else:
+                elif config["status"] is not None:
                     self.status = role_status.RoleStatus(
                         config["status"].upper()
                     )
+                else:
+                    self.status = None
             else:
                 self.status = None
             if "type" in config:
                 if isinstance(config["type"],
                               role_type.RoleType):
                     self.type = config["type"]
-                else:
+                elif config["type"] is not None:
                     self.type = role_type.RoleType(
                         config["type"].upper()
                     )
+                else:
+                    self.type = None
             else:
                 self.type = None
         else:

@@ -43,10 +43,12 @@ class LinkedObjectDetails(
                 if isinstance(config["type"],
                               linked_object_details_type.LinkedObjectDetailsType):
                     self.type = config["type"]
-                else:
+                elif config["type"] is not None:
                     self.type = linked_object_details_type.LinkedObjectDetailsType(
                         config["type"].upper()
                     )
+                else:
+                    self.type = None
             else:
                 self.type = None
         else:

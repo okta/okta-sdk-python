@@ -1,5 +1,8 @@
 # Okta Python SDK Changelog
 
+## v1.0.4
+- Fix logs pagination.
+
 ## v1.0.3
 - Fix construction of async http request, fix method not allowed issue.
 

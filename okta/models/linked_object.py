@@ -39,20 +39,24 @@ class LinkedObject(
                 if isinstance(config["associated"],
                               linked_object_details.LinkedObjectDetails):
                     self.associated = config["associated"]
-                else:
+                elif config["associated"] is not None:
                     self.associated = linked_object_details.LinkedObjectDetails(
                         config["associated"]
                     )
+                else:
+                    self.associated = None
             else:
                 self.associated = None
             if "primary" in config:
                 if isinstance(config["primary"],
                               linked_object_details.LinkedObjectDetails):
                     self.primary = config["primary"]
-                else:
+                elif config["primary"] is not None:
                     self.primary = linked_object_details.LinkedObjectDetails(
                         config["primary"]
                     )
+                else:
+                    self.primary = None
             else:
                 self.primary = None
         else:

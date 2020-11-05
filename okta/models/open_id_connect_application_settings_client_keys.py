@@ -19,43 +19,33 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.session_identity_provider_type\
-    as session_identity_provider_type
+from okta.okta_collection import OktaCollection
+import okta.models.json_web_key\
+    as json_web_key
 
 
-class SessionIdentityProvider(
+class OpenIdConnectApplicationSettingsClientKeys(
     OktaObject
 ):
     """
-    A class for SessionIdentityProvider objects.
+    A class for OpenIdConnectApplicationSettingsClientKeys objects.
     """
 
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.id = config["id"]\
-                if "id" in config else None
-            if "type" in config:
-                if isinstance(config["type"],
-                              session_identity_provider_type.SessionIdentityProviderType):
-                    self.type = config["type"]
-                elif config["type"] is not None:
-                    self.type = session_identity_provider_type.SessionIdentityProviderType(
-                        config["type"].upper()
-                    )
-                else:
-                    self.type = None
-            else:
-                self.type = None
+            self.keys = OktaCollection.form_list(
+                config["keys"] if "keys"\
+                    in config else [],
+                json_web_key.JsonWebKey
+            )
         else:
-            self.id = None
-            self.type = None
+            self.keys = []
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
-            "id": self.id,
-            "type": self.type
+            "keys": self.keys
         }
         parent_req_format.update(current_obj_format)
         return parent_req_format

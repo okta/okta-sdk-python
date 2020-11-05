@@ -37,10 +37,12 @@ class ProtocolAlgorithmType(
                 if isinstance(config["signature"],
                               protocol_algorithm_type_signature.ProtocolAlgorithmTypeSignature):
                     self.signature = config["signature"]
-                else:
+                elif config["signature"] is not None:
                     self.signature = protocol_algorithm_type_signature.ProtocolAlgorithmTypeSignature(
                         config["signature"]
                     )
+                else:
+                    self.signature = None
             else:
                 self.signature = None
         else:

@@ -37,10 +37,12 @@ class PasswordPolicyDelegationSettings(
                 if isinstance(config["options"],
                               password_policy_delegation_settings_options.PasswordPolicyDelegationSettingsOptions):
                     self.options = config["options"]
-                else:
+                elif config["options"] is not None:
                     self.options = password_policy_delegation_settings_options.PasswordPolicyDelegationSettingsOptions(
                         config["options"]
                     )
+                else:
+                    self.options = None
             else:
                 self.options = None
         else:

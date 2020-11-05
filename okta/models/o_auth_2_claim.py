@@ -43,10 +43,12 @@ class OAuth2Claim(
                 if isinstance(config["conditions"],
                               o_auth_2_claim_conditions.OAuth2ClaimConditions):
                     self.conditions = config["conditions"]
-                else:
+                elif config["conditions"] is not None:
                     self.conditions = o_auth_2_claim_conditions.OAuth2ClaimConditions(
                         config["conditions"]
                     )
+                else:
+                    self.conditions = None
             else:
                 self.conditions = None
             self.group_filter_type = config["groupFilterType"]\

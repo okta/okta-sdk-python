@@ -41,20 +41,24 @@ class AutoLoginApplication(
                 if isinstance(config["credentials"],
                               scheme_application_credentials.SchemeApplicationCredentials):
                     self.credentials = config["credentials"]
-                else:
+                elif config["credentials"] is not None:
                     self.credentials = scheme_application_credentials.SchemeApplicationCredentials(
                         config["credentials"]
                     )
+                else:
+                    self.credentials = None
             else:
                 self.credentials = None
             if "settings" in config:
                 if isinstance(config["settings"],
                               auto_login_application_settings.AutoLoginApplicationSettings):
                     self.settings = config["settings"]
-                else:
+                elif config["settings"] is not None:
                     self.settings = auto_login_application_settings.AutoLoginApplicationSettings(
                         config["settings"]
                     )
+                else:
+                    self.settings = None
             else:
                 self.settings = None
         else:

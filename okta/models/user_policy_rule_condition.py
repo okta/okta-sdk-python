@@ -49,10 +49,12 @@ class UserPolicyRuleCondition(
                 if isinstance(config["inactivity"],
                               inactivity_policy_rule_condition.InactivityPolicyRuleCondition):
                     self.inactivity = config["inactivity"]
-                else:
+                elif config["inactivity"] is not None:
                     self.inactivity = inactivity_policy_rule_condition.InactivityPolicyRuleCondition(
                         config["inactivity"]
                     )
+                else:
+                    self.inactivity = None
             else:
                 self.inactivity = None
             self.include = OktaCollection.form_list(
@@ -64,30 +66,36 @@ class UserPolicyRuleCondition(
                 if isinstance(config["lifecycleExpiration"],
                               lifecycle_expiration_policy_rule_condition.LifecycleExpirationPolicyRuleCondition):
                     self.lifecycle_expiration = config["lifecycleExpiration"]
-                else:
+                elif config["lifecycleExpiration"] is not None:
                     self.lifecycle_expiration = lifecycle_expiration_policy_rule_condition.LifecycleExpirationPolicyRuleCondition(
                         config["lifecycleExpiration"]
                     )
+                else:
+                    self.lifecycle_expiration = None
             else:
                 self.lifecycle_expiration = None
             if "passwordExpiration" in config:
                 if isinstance(config["passwordExpiration"],
                               password_expiration_policy_rule_condition.PasswordExpirationPolicyRuleCondition):
                     self.password_expiration = config["passwordExpiration"]
-                else:
+                elif config["passwordExpiration"] is not None:
                     self.password_expiration = password_expiration_policy_rule_condition.PasswordExpirationPolicyRuleCondition(
                         config["passwordExpiration"]
                     )
+                else:
+                    self.password_expiration = None
             else:
                 self.password_expiration = None
             if "userLifecycleAttribute" in config:
                 if isinstance(config["userLifecycleAttribute"],
                               user_lifecycle_attribute_policy_rule_condition.UserLifecycleAttributePolicyRuleCondition):
                     self.user_lifecycle_attribute = config["userLifecycleAttribute"]
-                else:
+                elif config["userLifecycleAttribute"] is not None:
                     self.user_lifecycle_attribute = user_lifecycle_attribute_policy_rule_condition.UserLifecycleAttributePolicyRuleCondition(
                         config["userLifecycleAttribute"]
                     )
+                else:
+                    self.user_lifecycle_attribute = None
             else:
                 self.user_lifecycle_attribute = None
         else:

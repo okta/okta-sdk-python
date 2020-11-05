@@ -37,80 +37,96 @@ class ProtocolEndpoints(
                 if isinstance(config["acs"],
                               protocol_endpoint.ProtocolEndpoint):
                     self.acs = config["acs"]
-                else:
+                elif config["acs"] is not None:
                     self.acs = protocol_endpoint.ProtocolEndpoint(
                         config["acs"]
                     )
+                else:
+                    self.acs = None
             else:
                 self.acs = None
             if "authorization" in config:
                 if isinstance(config["authorization"],
                               protocol_endpoint.ProtocolEndpoint):
                     self.authorization = config["authorization"]
-                else:
+                elif config["authorization"] is not None:
                     self.authorization = protocol_endpoint.ProtocolEndpoint(
                         config["authorization"]
                     )
+                else:
+                    self.authorization = None
             else:
                 self.authorization = None
             if "jwks" in config:
                 if isinstance(config["jwks"],
                               protocol_endpoint.ProtocolEndpoint):
                     self.jwks = config["jwks"]
-                else:
+                elif config["jwks"] is not None:
                     self.jwks = protocol_endpoint.ProtocolEndpoint(
                         config["jwks"]
                     )
+                else:
+                    self.jwks = None
             else:
                 self.jwks = None
             if "metadata" in config:
                 if isinstance(config["metadata"],
                               protocol_endpoint.ProtocolEndpoint):
                     self.metadata = config["metadata"]
-                else:
+                elif config["metadata"] is not None:
                     self.metadata = protocol_endpoint.ProtocolEndpoint(
                         config["metadata"]
                     )
+                else:
+                    self.metadata = None
             else:
                 self.metadata = None
             if "slo" in config:
                 if isinstance(config["slo"],
                               protocol_endpoint.ProtocolEndpoint):
                     self.slo = config["slo"]
-                else:
+                elif config["slo"] is not None:
                     self.slo = protocol_endpoint.ProtocolEndpoint(
                         config["slo"]
                     )
+                else:
+                    self.slo = None
             else:
                 self.slo = None
             if "sso" in config:
                 if isinstance(config["sso"],
                               protocol_endpoint.ProtocolEndpoint):
                     self.sso = config["sso"]
-                else:
+                elif config["sso"] is not None:
                     self.sso = protocol_endpoint.ProtocolEndpoint(
                         config["sso"]
                     )
+                else:
+                    self.sso = None
             else:
                 self.sso = None
             if "token" in config:
                 if isinstance(config["token"],
                               protocol_endpoint.ProtocolEndpoint):
                     self.token = config["token"]
-                else:
+                elif config["token"] is not None:
                     self.token = protocol_endpoint.ProtocolEndpoint(
                         config["token"]
                     )
+                else:
+                    self.token = None
             else:
                 self.token = None
             if "userInfo" in config:
                 if isinstance(config["userInfo"],
                               protocol_endpoint.ProtocolEndpoint):
                     self.user_info = config["userInfo"]
-                else:
+                elif config["userInfo"] is not None:
                     self.user_info = protocol_endpoint.ProtocolEndpoint(
                         config["userInfo"]
                     )
+                else:
+                    self.user_info = None
             else:
                 self.user_info = None
         else:

@@ -37,10 +37,12 @@ class AuthorizationServerCredentials(
                 if isinstance(config["signing"],
                               authorization_server_credentials_signing_config.AuthorizationServerCredentialsSigningConfig):
                     self.signing = config["signing"]
-                else:
+                elif config["signing"] is not None:
                     self.signing = authorization_server_credentials_signing_config.AuthorizationServerCredentialsSigningConfig(
                         config["signing"]
                     )
+                else:
+                    self.signing = None
             else:
                 self.signing = None
         else:

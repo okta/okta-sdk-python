@@ -41,30 +41,36 @@ class IdentityProviderCredentials(
                 if isinstance(config["client"],
                               identity_provider_credentials_client.IdentityProviderCredentialsClient):
                     self.client = config["client"]
-                else:
+                elif config["client"] is not None:
                     self.client = identity_provider_credentials_client.IdentityProviderCredentialsClient(
                         config["client"]
                     )
+                else:
+                    self.client = None
             else:
                 self.client = None
             if "signing" in config:
                 if isinstance(config["signing"],
                               identity_provider_credentials_signing.IdentityProviderCredentialsSigning):
                     self.signing = config["signing"]
-                else:
+                elif config["signing"] is not None:
                     self.signing = identity_provider_credentials_signing.IdentityProviderCredentialsSigning(
                         config["signing"]
                     )
+                else:
+                    self.signing = None
             else:
                 self.signing = None
             if "trust" in config:
                 if isinstance(config["trust"],
                               identity_provider_credentials_trust.IdentityProviderCredentialsTrust):
                     self.trust = config["trust"]
-                else:
+                elif config["trust"] is not None:
                     self.trust = identity_provider_credentials_trust.IdentityProviderCredentialsTrust(
                         config["trust"]
                     )
+                else:
+                    self.trust = None
             else:
                 self.trust = None
         else:

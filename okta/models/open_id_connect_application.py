@@ -41,10 +41,12 @@ class OpenIdConnectApplication(
                 if isinstance(config["credentials"],
                               o_auth_application_credentials.OAuthApplicationCredentials):
                     self.credentials = config["credentials"]
-                else:
+                elif config["credentials"] is not None:
                     self.credentials = o_auth_application_credentials.OAuthApplicationCredentials(
                         config["credentials"]
                     )
+                else:
+                    self.credentials = None
             else:
                 self.credentials = None
             self.name = config["name"]\
@@ -53,10 +55,12 @@ class OpenIdConnectApplication(
                 if isinstance(config["settings"],
                               open_id_connect_application_settings.OpenIdConnectApplicationSettings):
                     self.settings = config["settings"]
-                else:
+                elif config["settings"] is not None:
                     self.settings = open_id_connect_application_settings.OpenIdConnectApplicationSettings(
                         config["settings"]
                     )
+                else:
+                    self.settings = None
             else:
                 self.settings = None
         else:

@@ -29,6 +29,7 @@ OKTA_APP_SIGN_ON_TO_MODEL = {
     ASM.BASIC_AUTH: models.BasicAuthApplication,
     ASM.BOOKMARK: models.BookmarkApplication,
     ASM.OPENID_CONNECT: models.OpenIdConnectApplication,
+    ASM.SAML_1_1: models.SamlApplication,
     ASM.SAML_2_0: models.SamlApplication,
     ASM.SECURE_PASSWORD_STORE: models.SecurePasswordStoreApplication,
     ASM.WS_FEDERATION: models.WsFederationApplication
@@ -59,6 +60,7 @@ OKTA_FACTOR_TYPE_TO_FACTOR = {
     FT.SMS: models.SmsUserFactor,
     FT.TOKEN: models.TokenUserFactor,
     FT.TOKEN_HARDWARE: models.HardwareUserFactor,
+    FT.TOKEN_HOTP: models.CustomHotpUserFactor,
     FT.TOKEN_SOFTWARE_TOTP: models.TotpUserFactor,
     FT.U_2_F: models.U2FUserFactor,
     FT.WEB: models.WebUserFactor,

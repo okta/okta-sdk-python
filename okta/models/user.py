@@ -51,10 +51,12 @@ class User(
                 if isinstance(config["credentials"],
                               user_credentials.UserCredentials):
                     self.credentials = config["credentials"]
-                else:
+                elif config["credentials"] is not None:
                     self.credentials = user_credentials.UserCredentials(
                         config["credentials"]
                     )
+                else:
+                    self.credentials = None
             else:
                 self.credentials = None
             self.id = config["id"]\
@@ -69,20 +71,24 @@ class User(
                 if isinstance(config["profile"],
                               user_profile.UserProfile):
                     self.profile = config["profile"]
-                else:
+                elif config["profile"] is not None:
                     self.profile = user_profile.UserProfile(
                         config["profile"]
                     )
+                else:
+                    self.profile = None
             else:
                 self.profile = None
             if "status" in config:
                 if isinstance(config["status"],
                               user_status.UserStatus):
                     self.status = config["status"]
-                else:
+                elif config["status"] is not None:
                     self.status = user_status.UserStatus(
                         config["status"].upper()
                     )
+                else:
+                    self.status = None
             else:
                 self.status = None
             self.status_changed = config["statusChanged"]\
@@ -91,20 +97,24 @@ class User(
                 if isinstance(config["transitioningToStatus"],
                               user_status.UserStatus):
                     self.transitioning_to_status = config["transitioningToStatus"]
-                else:
+                elif config["transitioningToStatus"] is not None:
                     self.transitioning_to_status = user_status.UserStatus(
                         config["transitioningToStatus"].upper()
                     )
+                else:
+                    self.transitioning_to_status = None
             else:
                 self.transitioning_to_status = None
             if "type" in config:
                 if isinstance(config["type"],
                               user_type.UserType):
                     self.type = config["type"]
-                else:
+                elif config["type"] is not None:
                     self.type = user_type.UserType(
                         config["type"]
                     )
+                else:
+                    self.type = None
             else:
                 self.type = None
         else:

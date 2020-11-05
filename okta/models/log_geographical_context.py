@@ -41,10 +41,12 @@ class LogGeographicalContext(
                 if isinstance(config["geolocation"],
                               log_geolocation.LogGeolocation):
                     self.geolocation = config["geolocation"]
-                else:
+                elif config["geolocation"] is not None:
                     self.geolocation = log_geolocation.LogGeolocation(
                         config["geolocation"]
                     )
+                else:
+                    self.geolocation = None
             else:
                 self.geolocation = None
             self.postal_code = config["postalCode"]\

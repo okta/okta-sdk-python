@@ -43,20 +43,24 @@ class PushUserFactor(
                 if isinstance(config["factorResult"],
                               factor_result_type.FactorResultType):
                     self.factor_result = config["factorResult"]
-                else:
+                elif config["factorResult"] is not None:
                     self.factor_result = factor_result_type.FactorResultType(
                         config["factorResult"].upper()
                     )
+                else:
+                    self.factor_result = None
             else:
                 self.factor_result = None
             if "profile" in config:
                 if isinstance(config["profile"],
                               push_user_factor_profile.PushUserFactorProfile):
                     self.profile = config["profile"]
-                else:
+                elif config["profile"] is not None:
                     self.profile = push_user_factor_profile.PushUserFactorProfile(
                         config["profile"]
                     )
+                else:
+                    self.profile = None
             else:
                 self.profile = None
         else:

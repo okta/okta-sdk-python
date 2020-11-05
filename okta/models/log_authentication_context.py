@@ -43,10 +43,12 @@ class LogAuthenticationContext(
                 if isinstance(config["authenticationProvider"],
                               log_authentication_provider.LogAuthenticationProvider):
                     self.authentication_provider = config["authenticationProvider"]
-                else:
+                elif config["authenticationProvider"] is not None:
                     self.authentication_provider = log_authentication_provider.LogAuthenticationProvider(
                         config["authenticationProvider"].upper()
                     )
+                else:
+                    self.authentication_provider = None
             else:
                 self.authentication_provider = None
             self.authentication_step = config["authenticationStep"]\
@@ -55,20 +57,24 @@ class LogAuthenticationContext(
                 if isinstance(config["credentialProvider"],
                               log_credential_provider.LogCredentialProvider):
                     self.credential_provider = config["credentialProvider"]
-                else:
+                elif config["credentialProvider"] is not None:
                     self.credential_provider = log_credential_provider.LogCredentialProvider(
                         config["credentialProvider"].upper()
                     )
+                else:
+                    self.credential_provider = None
             else:
                 self.credential_provider = None
             if "credentialType" in config:
                 if isinstance(config["credentialType"],
                               log_credential_type.LogCredentialType):
                     self.credential_type = config["credentialType"]
-                else:
+                elif config["credentialType"] is not None:
                     self.credential_type = log_credential_type.LogCredentialType(
                         config["credentialType"].upper()
                     )
+                else:
+                    self.credential_type = None
             else:
                 self.credential_type = None
             self.external_session_id = config["externalSessionId"]\
@@ -79,10 +85,12 @@ class LogAuthenticationContext(
                 if isinstance(config["issuer"],
                               log_issuer.LogIssuer):
                     self.issuer = config["issuer"]
-                else:
+                elif config["issuer"] is not None:
                     self.issuer = log_issuer.LogIssuer(
                         config["issuer"]
                     )
+                else:
+                    self.issuer = None
             else:
                 self.issuer = None
         else:

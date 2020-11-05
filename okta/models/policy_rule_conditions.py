@@ -77,210 +77,252 @@ class PolicyRuleConditions(
                 if isinstance(config["app"],
                               app_and_instance_policy_rule_condition.AppAndInstancePolicyRuleCondition):
                     self.app = config["app"]
-                else:
+                elif config["app"] is not None:
                     self.app = app_and_instance_policy_rule_condition.AppAndInstancePolicyRuleCondition(
                         config["app"]
                     )
+                else:
+                    self.app = None
             else:
                 self.app = None
             if "apps" in config:
                 if isinstance(config["apps"],
                               app_instance_policy_rule_condition.AppInstancePolicyRuleCondition):
                     self.apps = config["apps"]
-                else:
+                elif config["apps"] is not None:
                     self.apps = app_instance_policy_rule_condition.AppInstancePolicyRuleCondition(
                         config["apps"]
                     )
+                else:
+                    self.apps = None
             else:
                 self.apps = None
             if "authContext" in config:
                 if isinstance(config["authContext"],
                               policy_rule_auth_context_condition.PolicyRuleAuthContextCondition):
                     self.auth_context = config["authContext"]
-                else:
+                elif config["authContext"] is not None:
                     self.auth_context = policy_rule_auth_context_condition.PolicyRuleAuthContextCondition(
                         config["authContext"]
                     )
+                else:
+                    self.auth_context = None
             else:
                 self.auth_context = None
             if "authProvider" in config:
                 if isinstance(config["authProvider"],
                               password_policy_authentication_provider_condition.PasswordPolicyAuthenticationProviderCondition):
                     self.auth_provider = config["authProvider"]
-                else:
+                elif config["authProvider"] is not None:
                     self.auth_provider = password_policy_authentication_provider_condition.PasswordPolicyAuthenticationProviderCondition(
                         config["authProvider"]
                     )
+                else:
+                    self.auth_provider = None
             else:
                 self.auth_provider = None
             if "beforeScheduledAction" in config:
                 if isinstance(config["beforeScheduledAction"],
                               before_scheduled_action_policy_rule_condition.BeforeScheduledActionPolicyRuleCondition):
                     self.before_scheduled_action = config["beforeScheduledAction"]
-                else:
+                elif config["beforeScheduledAction"] is not None:
                     self.before_scheduled_action = before_scheduled_action_policy_rule_condition.BeforeScheduledActionPolicyRuleCondition(
                         config["beforeScheduledAction"]
                     )
+                else:
+                    self.before_scheduled_action = None
             else:
                 self.before_scheduled_action = None
             if "clients" in config:
                 if isinstance(config["clients"],
                               client_policy_condition.ClientPolicyCondition):
                     self.clients = config["clients"]
-                else:
+                elif config["clients"] is not None:
                     self.clients = client_policy_condition.ClientPolicyCondition(
                         config["clients"]
                     )
+                else:
+                    self.clients = None
             else:
                 self.clients = None
             if "context" in config:
                 if isinstance(config["context"],
                               context_policy_rule_condition.ContextPolicyRuleCondition):
                     self.context = config["context"]
-                else:
+                elif config["context"] is not None:
                     self.context = context_policy_rule_condition.ContextPolicyRuleCondition(
                         config["context"]
                     )
+                else:
+                    self.context = None
             else:
                 self.context = None
             if "device" in config:
                 if isinstance(config["device"],
                               device_policy_rule_condition.DevicePolicyRuleCondition):
                     self.device = config["device"]
-                else:
+                elif config["device"] is not None:
                     self.device = device_policy_rule_condition.DevicePolicyRuleCondition(
                         config["device"]
                     )
+                else:
+                    self.device = None
             else:
                 self.device = None
             if "grantTypes" in config:
                 if isinstance(config["grantTypes"],
                               grant_type_policy_rule_condition.GrantTypePolicyRuleCondition):
                     self.grant_types = config["grantTypes"]
-                else:
+                elif config["grantTypes"] is not None:
                     self.grant_types = grant_type_policy_rule_condition.GrantTypePolicyRuleCondition(
                         config["grantTypes"]
                     )
+                else:
+                    self.grant_types = None
             else:
                 self.grant_types = None
             if "groups" in config:
                 if isinstance(config["groups"],
                               group_policy_rule_condition.GroupPolicyRuleCondition):
                     self.groups = config["groups"]
-                else:
+                elif config["groups"] is not None:
                     self.groups = group_policy_rule_condition.GroupPolicyRuleCondition(
                         config["groups"]
                     )
+                else:
+                    self.groups = None
             else:
                 self.groups = None
             if "identityProvider" in config:
                 if isinstance(config["identityProvider"],
                               identity_provider_policy_rule_condition.IdentityProviderPolicyRuleCondition):
                     self.identity_provider = config["identityProvider"]
-                else:
+                elif config["identityProvider"] is not None:
                     self.identity_provider = identity_provider_policy_rule_condition.IdentityProviderPolicyRuleCondition(
                         config["identityProvider"]
                     )
+                else:
+                    self.identity_provider = None
             else:
                 self.identity_provider = None
             if "mdmEnrollment" in config:
                 if isinstance(config["mdmEnrollment"],
                               mdm_enrollment_policy_rule_condition.MdmEnrollmentPolicyRuleCondition):
                     self.mdm_enrollment = config["mdmEnrollment"]
-                else:
+                elif config["mdmEnrollment"] is not None:
                     self.mdm_enrollment = mdm_enrollment_policy_rule_condition.MdmEnrollmentPolicyRuleCondition(
                         config["mdmEnrollment"]
                     )
+                else:
+                    self.mdm_enrollment = None
             else:
                 self.mdm_enrollment = None
             if "network" in config:
                 if isinstance(config["network"],
                               policy_network_condition.PolicyNetworkCondition):
                     self.network = config["network"]
-                else:
+                elif config["network"] is not None:
                     self.network = policy_network_condition.PolicyNetworkCondition(
                         config["network"]
                     )
+                else:
+                    self.network = None
             else:
                 self.network = None
             if "people" in config:
                 if isinstance(config["people"],
                               policy_people_condition.PolicyPeopleCondition):
                     self.people = config["people"]
-                else:
+                elif config["people"] is not None:
                     self.people = policy_people_condition.PolicyPeopleCondition(
                         config["people"]
                     )
+                else:
+                    self.people = None
             else:
                 self.people = None
             if "platform" in config:
                 if isinstance(config["platform"],
                               platform_policy_rule_condition.PlatformPolicyRuleCondition):
                     self.platform = config["platform"]
-                else:
+                elif config["platform"] is not None:
                     self.platform = platform_policy_rule_condition.PlatformPolicyRuleCondition(
                         config["platform"]
                     )
+                else:
+                    self.platform = None
             else:
                 self.platform = None
             if "risk" in config:
                 if isinstance(config["risk"],
                               risk_policy_rule_condition.RiskPolicyRuleCondition):
                     self.risk = config["risk"]
-                else:
+                elif config["risk"] is not None:
                     self.risk = risk_policy_rule_condition.RiskPolicyRuleCondition(
                         config["risk"]
                     )
+                else:
+                    self.risk = None
             else:
                 self.risk = None
             if "riskScore" in config:
                 if isinstance(config["riskScore"],
                               risk_score_policy_rule_condition.RiskScorePolicyRuleCondition):
                     self.risk_score = config["riskScore"]
-                else:
+                elif config["riskScore"] is not None:
                     self.risk_score = risk_score_policy_rule_condition.RiskScorePolicyRuleCondition(
                         config["riskScore"]
                     )
+                else:
+                    self.risk_score = None
             else:
                 self.risk_score = None
             if "scopes" in config:
                 if isinstance(config["scopes"],
                               o_auth_2_scopes_mediation_policy_rule_condition.OAuth2ScopesMediationPolicyRuleCondition):
                     self.scopes = config["scopes"]
-                else:
+                elif config["scopes"] is not None:
                     self.scopes = o_auth_2_scopes_mediation_policy_rule_condition.OAuth2ScopesMediationPolicyRuleCondition(
                         config["scopes"]
                     )
+                else:
+                    self.scopes = None
             else:
                 self.scopes = None
             if "userIdentifier" in config:
                 if isinstance(config["userIdentifier"],
                               user_identifier_policy_rule_condition.UserIdentifierPolicyRuleCondition):
                     self.user_identifier = config["userIdentifier"]
-                else:
+                elif config["userIdentifier"] is not None:
                     self.user_identifier = user_identifier_policy_rule_condition.UserIdentifierPolicyRuleCondition(
                         config["userIdentifier"]
                     )
+                else:
+                    self.user_identifier = None
             else:
                 self.user_identifier = None
             if "userStatus" in config:
                 if isinstance(config["userStatus"],
                               user_status_policy_rule_condition.UserStatusPolicyRuleCondition):
                     self.user_status = config["userStatus"]
-                else:
+                elif config["userStatus"] is not None:
                     self.user_status = user_status_policy_rule_condition.UserStatusPolicyRuleCondition(
                         config["userStatus"]
                     )
+                else:
+                    self.user_status = None
             else:
                 self.user_status = None
             if "users" in config:
                 if isinstance(config["users"],
                               user_policy_rule_condition.UserPolicyRuleCondition):
                     self.users = config["users"]
-                else:
+                elif config["users"] is not None:
                     self.users = user_policy_rule_condition.UserPolicyRuleCondition(
                         config["users"]
                     )
+                else:
+                    self.users = None
             else:
                 self.users = None
         else:

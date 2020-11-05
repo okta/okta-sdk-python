@@ -39,20 +39,24 @@ class PolicyPeopleCondition(
                 if isinstance(config["groups"],
                               group_condition.GroupCondition):
                     self.groups = config["groups"]
-                else:
+                elif config["groups"] is not None:
                     self.groups = group_condition.GroupCondition(
                         config["groups"]
                     )
+                else:
+                    self.groups = None
             else:
                 self.groups = None
             if "users" in config:
                 if isinstance(config["users"],
                               user_condition.UserCondition):
                     self.users = config["users"]
-                else:
+                elif config["users"] is not None:
                     self.users = user_condition.UserCondition(
                         config["users"]
                     )
+                else:
+                    self.users = None
             else:
                 self.users = None
         else:

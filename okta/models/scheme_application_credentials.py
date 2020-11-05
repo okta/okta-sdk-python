@@ -42,10 +42,12 @@ class SchemeApplicationCredentials(
                 if isinstance(config["password"],
                               password_credential.PasswordCredential):
                     self.password = config["password"]
-                else:
+                elif config["password"] is not None:
                     self.password = password_credential.PasswordCredential(
                         config["password"]
                     )
+                else:
+                    self.password = None
             else:
                 self.password = None
             self.reveal_password = config["revealPassword"]\
@@ -54,20 +56,24 @@ class SchemeApplicationCredentials(
                 if isinstance(config["scheme"],
                               application_credentials_scheme.ApplicationCredentialsScheme):
                     self.scheme = config["scheme"]
-                else:
+                elif config["scheme"] is not None:
                     self.scheme = application_credentials_scheme.ApplicationCredentialsScheme(
                         config["scheme"].upper()
                     )
+                else:
+                    self.scheme = None
             else:
                 self.scheme = None
             if "signing" in config:
                 if isinstance(config["signing"],
                               application_credentials_signing.ApplicationCredentialsSigning):
                     self.signing = config["signing"]
-                else:
+                elif config["signing"] is not None:
                     self.signing = application_credentials_signing.ApplicationCredentialsSigning(
                         config["signing"]
                     )
+                else:
+                    self.signing = None
             else:
                 self.signing = None
             self.user_name = config["userName"]\

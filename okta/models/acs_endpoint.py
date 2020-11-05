@@ -19,43 +19,31 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.session_identity_provider_type\
-    as session_identity_provider_type
 
 
-class SessionIdentityProvider(
+class AcsEndpoint(
     OktaObject
 ):
     """
-    A class for SessionIdentityProvider objects.
+    A class for AcsEndpoint objects.
     """
 
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.id = config["id"]\
-                if "id" in config else None
-            if "type" in config:
-                if isinstance(config["type"],
-                              session_identity_provider_type.SessionIdentityProviderType):
-                    self.type = config["type"]
-                elif config["type"] is not None:
-                    self.type = session_identity_provider_type.SessionIdentityProviderType(
-                        config["type"].upper()
-                    )
-                else:
-                    self.type = None
-            else:
-                self.type = None
+            self.index = config["index"]\
+                if "index" in config else None
+            self.url = config["url"]\
+                if "url" in config else None
         else:
-            self.id = None
-            self.type = None
+            self.index = None
+            self.url = None
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
-            "id": self.id,
-            "type": self.type
+            "index": self.index,
+            "url": self.url
         }
         parent_req_format.update(current_obj_format)
         return parent_req_format
