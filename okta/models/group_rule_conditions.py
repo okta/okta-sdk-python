@@ -19,9 +19,9 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.group_rule_expression\
+from okta.models import group_rule_expression\
     as group_rule_expression
-import okta.models.group_rule_people_condition\
+from okta.models import group_rule_people_condition\
     as group_rule_people_condition
 
 

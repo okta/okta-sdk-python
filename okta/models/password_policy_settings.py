@@ -19,11 +19,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.password_policy_delegation_settings\
+from okta.models import password_policy_delegation_settings\
     as password_policy_delegation_settings
-import okta.models.password_policy_password_settings\
+from okta.models import password_policy_password_settings\
     as password_policy_password_settings
-import okta.models.password_policy_recovery_settings\
+from okta.models import password_policy_recovery_settings\
     as password_policy_recovery_settings
 
 

@@ -19,7 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.session_identity_provider_type\
+from okta.models import session_identity_provider_type\
     as session_identity_provider_type
 
 

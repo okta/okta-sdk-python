@@ -20,9 +20,9 @@ limitations under the License.
 
 from okta.models.policy_rule\
     import PolicyRule
-import okta.models.okta_sign_on_policy_rule_actions\
+from okta.models import okta_sign_on_policy_rule_actions\
     as okta_sign_on_policy_rule_actions
-import okta.models.okta_sign_on_policy_rule_conditions\
+from okta.models import okta_sign_on_policy_rule_conditions\
     as okta_sign_on_policy_rule_conditions
 
 

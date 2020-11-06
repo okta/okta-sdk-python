@@ -19,9 +19,9 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.duration\
+from okta.models import duration\
     as duration
-import okta.models.scheduled_user_lifecycle_action\
+from okta.models import scheduled_user_lifecycle_action\
     as scheduled_user_lifecycle_action
 
 

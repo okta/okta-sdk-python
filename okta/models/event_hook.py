@@ -19,9 +19,9 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.event_hook_channel\
+from okta.models import event_hook_channel\
     as event_hook_channel
-import okta.models.event_subscriptions\
+from okta.models import event_subscriptions\
     as event_subscriptions
 
 

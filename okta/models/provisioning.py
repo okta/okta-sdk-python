@@ -19,9 +19,9 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.provisioning_conditions\
+from okta.models import provisioning_conditions\
     as provisioning_conditions
-import okta.models.provisioning_groups\
+from okta.models import provisioning_groups\
     as provisioning_groups
 
 

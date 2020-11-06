@@ -19,11 +19,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.policy_rule_auth_context_condition\
+from okta.models import policy_rule_auth_context_condition\
     as policy_rule_auth_context_condition
-import okta.models.policy_network_condition\
+from okta.models import policy_network_condition\
     as policy_network_condition
-import okta.models.policy_people_condition\
+from okta.models import policy_people_condition\
     as policy_people_condition
 
 

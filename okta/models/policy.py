@@ -19,9 +19,9 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.policy_rule_conditions\
+from okta.models import policy_rule_conditions\
     as policy_rule_conditions
-import okta.models.policy_type\
+from okta.models import policy_type\
     as policy_type
 
 

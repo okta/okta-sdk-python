@@ -19,7 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.application_settings_notifications_vpn\
+from okta.models import application_settings_notifications_vpn\
     as application_settings_notifications_vpn
 
 

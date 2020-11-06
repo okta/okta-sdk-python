@@ -19,9 +19,9 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.application_settings_application\
+from okta.models import application_settings_application\
     as application_settings_application
-import okta.models.application_settings_notifications\
+from okta.models import application_settings_notifications\
     as application_settings_notifications
 
 

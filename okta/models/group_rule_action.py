@@ -19,7 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.group_rule_group_assignment\
+from okta.models import group_rule_group_assignment\
     as group_rule_group_assignment
 
 

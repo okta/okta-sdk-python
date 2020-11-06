@@ -19,7 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.log_geolocation\
+from okta.models import log_geolocation\
     as log_geolocation
 
 

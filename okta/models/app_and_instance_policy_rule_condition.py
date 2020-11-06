@@ -20,7 +20,7 @@ limitations under the License.
 
 from okta.okta_object import OktaObject
 from okta.okta_collection import OktaCollection
-import okta.models.app_and_instance_condition_evaluator_app_or_instance\
+from okta.models import app_and_instance_condition_evaluator_app_or_instance\
     as app_and_instance_condition_evaluator_app_or_instance
 
 

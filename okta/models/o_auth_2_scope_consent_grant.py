@@ -19,11 +19,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.o_auth_2_actor\
+from okta.models import o_auth_2_actor\
     as o_auth_2_actor
-import okta.models.o_auth_2_scope_consent_grant_source\
+from okta.models import o_auth_2_scope_consent_grant_source\
     as o_auth_2_scope_consent_grant_source
-import okta.models.o_auth_2_scope_consent_grant_status\
+from okta.models import o_auth_2_scope_consent_grant_status\
     as o_auth_2_scope_consent_grant_status
 
 

@@ -19,11 +19,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.password_policy_password_settings_age\
+from okta.models import password_policy_password_settings_age\
     as password_policy_password_settings_age
-import okta.models.password_policy_password_settings_complexity\
+from okta.models import password_policy_password_settings_complexity\
     as password_policy_password_settings_complexity
-import okta.models.password_policy_password_settings_lockout\
+from okta.models import password_policy_password_settings_lockout\
     as password_policy_password_settings_lockout
 
 

@@ -19,13 +19,13 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.user_credentials\
+from okta.models import user_credentials\
     as user_credentials
-import okta.models.user_profile\
+from okta.models import user_profile\
     as user_profile
-import okta.models.user_status\
+from okta.models import user_status\
     as user_status
-import okta.models.user_type\
+from okta.models import user_type\
     as user_type
 
 

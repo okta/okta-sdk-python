@@ -20,7 +20,7 @@ limitations under the License.
 
 from okta.models.application_settings\
     import ApplicationSettings
-import okta.models.saml_application_settings_sign_on\
+from okta.models import saml_application_settings_sign_on\
     as saml_application_settings_sign_on
 
 

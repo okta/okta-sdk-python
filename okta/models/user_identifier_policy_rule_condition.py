@@ -20,7 +20,7 @@ limitations under the License.
 
 from okta.okta_object import OktaObject
 from okta.okta_collection import OktaCollection
-import okta.models.user_identifier_condition_evaluator_pattern\
+from okta.models import user_identifier_condition_evaluator_pattern\
     as user_identifier_condition_evaluator_pattern
 
 

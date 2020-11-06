@@ -19,9 +19,9 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.sms_template_translations\
+from okta.models import sms_template_translations\
     as sms_template_translations
-import okta.models.sms_template_type\
+from okta.models import sms_template_type\
     as sms_template_type
 
 

@@ -20,7 +20,7 @@ limitations under the License.
 
 from okta.models.application_settings\
     import ApplicationSettings
-import okta.models.open_id_connect_application_settings_client\
+from okta.models import open_id_connect_application_settings_client\
     as open_id_connect_application_settings_client
 
 

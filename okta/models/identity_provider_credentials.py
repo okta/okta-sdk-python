@@ -19,11 +19,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.identity_provider_credentials_client\
+from okta.models import identity_provider_credentials_client\
     as identity_provider_credentials_client
-import okta.models.identity_provider_credentials_signing\
+from okta.models import identity_provider_credentials_signing\
     as identity_provider_credentials_signing
-import okta.models.identity_provider_credentials_trust\
+from okta.models import identity_provider_credentials_trust\
     as identity_provider_credentials_trust
 
 

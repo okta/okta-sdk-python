@@ -20,7 +20,7 @@ limitations under the License.
 
 from okta.okta_object import OktaObject
 from okta.okta_collection import OktaCollection
-import okta.models.inline_hook_response_commands\
+from okta.models import inline_hook_response_commands\
     as inline_hook_response_commands
 
 

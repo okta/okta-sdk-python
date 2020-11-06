@@ -19,9 +19,9 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.feature_stage_state\
+from okta.models import feature_stage_state\
     as feature_stage_state
-import okta.models.feature_stage_value\
+from okta.models import feature_stage_value\
     as feature_stage_value
 
 

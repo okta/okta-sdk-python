@@ -20,7 +20,7 @@ limitations under the License.
 
 from okta.okta_object import OktaObject
 from okta.okta_collection import OktaCollection
-import okta.models.o_auth_2_actor\
+from okta.models import o_auth_2_actor\
     as o_auth_2_actor
 
 

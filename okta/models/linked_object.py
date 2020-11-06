@@ -19,7 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.linked_object_details\
+from okta.models import linked_object_details\
     as linked_object_details
 
 

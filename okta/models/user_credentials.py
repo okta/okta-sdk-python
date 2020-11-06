@@ -19,11 +19,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.password_credential\
+from okta.models import password_credential\
     as password_credential
-import okta.models.authentication_provider\
+from okta.models import authentication_provider\
     as authentication_provider
-import okta.models.recovery_question_credential\
+from okta.models import recovery_question_credential\
     as recovery_question_credential
 
 

@@ -19,7 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.authentication_provider_type\
+from okta.models import authentication_provider_type\
     as authentication_provider_type
 
 

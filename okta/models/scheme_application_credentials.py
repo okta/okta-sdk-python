@@ -20,11 +20,11 @@ limitations under the License.
 
 from okta.models.application_credentials\
     import ApplicationCredentials
-import okta.models.password_credential\
+from okta.models import password_credential\
     as password_credential
-import okta.models.application_credentials_scheme\
+from okta.models import application_credentials_scheme\
     as application_credentials_scheme
-import okta.models.application_credentials_signing\
+from okta.models import application_credentials_signing\
     as application_credentials_signing
 
 

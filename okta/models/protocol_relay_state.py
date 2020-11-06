@@ -19,7 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.protocol_relay_state_format\
+from okta.models import protocol_relay_state_format\
     as protocol_relay_state_format
 
 

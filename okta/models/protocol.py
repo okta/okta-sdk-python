@@ -20,17 +20,17 @@ limitations under the License.
 
 from okta.okta_object import OktaObject
 from okta.okta_collection import OktaCollection
-import okta.models.protocol_algorithms\
+from okta.models import protocol_algorithms\
     as protocol_algorithms
-import okta.models.identity_provider_credentials\
+from okta.models import identity_provider_credentials\
     as identity_provider_credentials
-import okta.models.protocol_endpoints\
+from okta.models import protocol_endpoints\
     as protocol_endpoints
-import okta.models.protocol_endpoint\
+from okta.models import protocol_endpoint\
     as protocol_endpoint
-import okta.models.protocol_relay_state\
+from okta.models import protocol_relay_state\
     as protocol_relay_state
-import okta.models.protocol_settings\
+from okta.models import protocol_settings\
     as protocol_settings
 
 

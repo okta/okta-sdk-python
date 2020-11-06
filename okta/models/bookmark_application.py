@@ -20,7 +20,7 @@ limitations under the License.
 
 from okta.models.application\
     import Application
-import okta.models.bookmark_application_settings\
+from okta.models import bookmark_application_settings\
     as bookmark_application_settings
 
 

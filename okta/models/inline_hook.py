@@ -19,11 +19,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.inline_hook_channel\
+from okta.models import inline_hook_channel\
     as inline_hook_channel
-import okta.models.inline_hook_status\
+from okta.models import inline_hook_status\
     as inline_hook_status
-import okta.models.inline_hook_type\
+from okta.models import inline_hook_type\
     as inline_hook_type
 
 

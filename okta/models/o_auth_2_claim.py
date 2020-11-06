@@ -19,7 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.o_auth_2_claim_conditions\
+from okta.models import o_auth_2_claim_conditions\
     as o_auth_2_claim_conditions
 
 

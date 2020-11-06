@@ -31,7 +31,7 @@ from okta.models.policy_type import PolicyType
 from okta.okta_collection import OktaCollection
 {{/if}}
 {{#each subTypes as |type|}}
-import okta.models.{{snakeCase type}}\
+from okta.models import {{snakeCase type}}\
     as {{snakeCase type}}
 {{/each}}
 

@@ -20,7 +20,7 @@ limitations under the License.
 
 from okta.models.user_factor\
     import UserFactor
-import okta.models.web_authn_user_factor_profile\
+from okta.models import web_authn_user_factor_profile\
     as web_authn_user_factor_profile
 
 
