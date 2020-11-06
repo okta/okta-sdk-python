@@ -20,7 +20,7 @@ limitations under the License.
 
 from okta.okta_object import OktaObject
 from okta.okta_collection import OktaCollection
-import okta.models.json_web_key\
+from okta.models import json_web_key\
     as json_web_key
 
 

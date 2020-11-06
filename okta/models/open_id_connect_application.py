@@ -20,9 +20,9 @@ limitations under the License.
 
 from okta.models.application\
     import Application
-import okta.models.o_auth_application_credentials\
+from okta.models import o_auth_application_credentials\
     as o_auth_application_credentials
-import okta.models.open_id_connect_application_settings\
+from okta.models import open_id_connect_application_settings\
     as open_id_connect_application_settings
 
 

@@ -19,7 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.log_geographical_context\
+from okta.models import log_geographical_context\
     as log_geographical_context
 
 

@@ -19,9 +19,9 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.provisioning_deprovisioned_condition\
+from okta.models import provisioning_deprovisioned_condition\
     as provisioning_deprovisioned_condition
-import okta.models.provisioning_suspended_condition\
+from okta.models import provisioning_suspended_condition\
     as provisioning_suspended_condition
 
 

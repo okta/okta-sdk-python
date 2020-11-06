@@ -21,9 +21,9 @@ limitations under the License.
 from okta.models.policy\
     import Policy
 from okta.models.policy_type import PolicyType
-import okta.models.password_policy_conditions\
+from okta.models import password_policy_conditions\
     as password_policy_conditions
-import okta.models.password_policy_settings\
+from okta.models import password_policy_settings\
     as password_policy_settings
 
 

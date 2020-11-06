@@ -19,7 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.protocol_endpoint\
+from okta.models import protocol_endpoint\
     as protocol_endpoint
 
 

@@ -19,7 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.application_visibility_hide\
+from okta.models import application_visibility_hide\
     as application_visibility_hide
 
 

@@ -19,7 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.o_auth_endpoint_authentication_method\
+from okta.models import o_auth_endpoint_authentication_method\
     as o_auth_endpoint_authentication_method
 
 

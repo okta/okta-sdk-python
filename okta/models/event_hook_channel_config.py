@@ -20,9 +20,9 @@ limitations under the License.
 
 from okta.okta_object import OktaObject
 from okta.okta_collection import OktaCollection
-import okta.models.event_hook_channel_config_auth_scheme\
+from okta.models import event_hook_channel_config_auth_scheme\
     as event_hook_channel_config_auth_scheme
-import okta.models.event_hook_channel_config_header\
+from okta.models import event_hook_channel_config_header\
     as event_hook_channel_config_header
 
 

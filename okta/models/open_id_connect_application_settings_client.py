@@ -20,19 +20,19 @@ limitations under the License.
 
 from okta.okta_object import OktaObject
 from okta.okta_collection import OktaCollection
-import okta.models.open_id_connect_application_type\
+from okta.models import open_id_connect_application_type\
     as open_id_connect_application_type
-import okta.models.open_id_connect_application_consent_method\
+from okta.models import open_id_connect_application_consent_method\
     as open_id_connect_application_consent_method
-import okta.models.o_auth_grant_type\
+from okta.models import o_auth_grant_type\
     as o_auth_grant_type
-import okta.models.open_id_connect_application_issuer_mode\
+from okta.models import open_id_connect_application_issuer_mode\
     as open_id_connect_application_issuer_mode
-import okta.models.open_id_connect_application_settings_client_keys\
+from okta.models import open_id_connect_application_settings_client_keys\
     as open_id_connect_application_settings_client_keys
-import okta.models.open_id_connect_application_settings_refresh_token\
+from okta.models import open_id_connect_application_settings_refresh_token\
     as open_id_connect_application_settings_refresh_token
-import okta.models.o_auth_response_type\
+from okta.models import o_auth_response_type\
     as o_auth_response_type
 
 

@@ -19,7 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.protocol_algorithm_type\
+from okta.models import protocol_algorithm_type\
     as protocol_algorithm_type
 
 

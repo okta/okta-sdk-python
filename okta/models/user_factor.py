@@ -19,13 +19,13 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.factor_type\
+from okta.models import factor_type\
     as factor_type
-import okta.models.factor_provider\
+from okta.models import factor_provider\
     as factor_provider
-import okta.models.factor_status\
+from okta.models import factor_status\
     as factor_status
-import okta.models.verify_factor_request\
+from okta.models import verify_factor_request\
     as verify_factor_request
 
 

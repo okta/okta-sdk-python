@@ -19,13 +19,13 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.log_authentication_provider\
+from okta.models import log_authentication_provider\
     as log_authentication_provider
-import okta.models.log_credential_provider\
+from okta.models import log_credential_provider\
     as log_credential_provider
-import okta.models.log_credential_type\
+from okta.models import log_credential_type\
     as log_credential_type
-import okta.models.log_issuer\
+from okta.models import log_issuer\
     as log_issuer
 
 

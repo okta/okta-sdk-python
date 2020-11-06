@@ -20,7 +20,7 @@ limitations under the License.
 
 from okta.models.user_factor\
     import UserFactor
-import okta.models.email_user_factor_profile\
+from okta.models import email_user_factor_profile\
     as email_user_factor_profile
 
 

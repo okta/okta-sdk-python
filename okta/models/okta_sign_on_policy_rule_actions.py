@@ -19,7 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.okta_sign_on_policy_rule_signon_actions\
+from okta.models import okta_sign_on_policy_rule_signon_actions\
     as okta_sign_on_policy_rule_signon_actions
 
 

@@ -20,7 +20,7 @@ limitations under the License.
 
 from okta.models.user_factor\
     import UserFactor
-import okta.models.security_question_user_factor_profile\
+from okta.models import security_question_user_factor_profile\
     as security_question_user_factor_profile
 
 

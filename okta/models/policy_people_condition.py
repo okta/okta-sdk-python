@@ -19,9 +19,9 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.group_condition\
+from okta.models import group_condition\
     as group_condition
-import okta.models.user_condition\
+from okta.models import user_condition\
     as user_condition
 
 

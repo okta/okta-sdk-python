@@ -19,47 +19,47 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.app_and_instance_policy_rule_condition\
+from okta.models import app_and_instance_policy_rule_condition\
     as app_and_instance_policy_rule_condition
-import okta.models.app_instance_policy_rule_condition\
+from okta.models import app_instance_policy_rule_condition\
     as app_instance_policy_rule_condition
-import okta.models.policy_rule_auth_context_condition\
+from okta.models import policy_rule_auth_context_condition\
     as policy_rule_auth_context_condition
-import okta.models.password_policy_authentication_provider_condition\
+from okta.models import password_policy_authentication_provider_condition\
     as password_policy_authentication_provider_condition
-import okta.models.before_scheduled_action_policy_rule_condition\
+from okta.models import before_scheduled_action_policy_rule_condition\
     as before_scheduled_action_policy_rule_condition
-import okta.models.client_policy_condition\
+from okta.models import client_policy_condition\
     as client_policy_condition
-import okta.models.context_policy_rule_condition\
+from okta.models import context_policy_rule_condition\
     as context_policy_rule_condition
-import okta.models.device_policy_rule_condition\
+from okta.models import device_policy_rule_condition\
     as device_policy_rule_condition
-import okta.models.grant_type_policy_rule_condition\
+from okta.models import grant_type_policy_rule_condition\
     as grant_type_policy_rule_condition
-import okta.models.group_policy_rule_condition\
+from okta.models import group_policy_rule_condition\
     as group_policy_rule_condition
-import okta.models.identity_provider_policy_rule_condition\
+from okta.models import identity_provider_policy_rule_condition\
     as identity_provider_policy_rule_condition
-import okta.models.mdm_enrollment_policy_rule_condition\
+from okta.models import mdm_enrollment_policy_rule_condition\
     as mdm_enrollment_policy_rule_condition
-import okta.models.policy_network_condition\
+from okta.models import policy_network_condition\
     as policy_network_condition
-import okta.models.policy_people_condition\
+from okta.models import policy_people_condition\
     as policy_people_condition
-import okta.models.platform_policy_rule_condition\
+from okta.models import platform_policy_rule_condition\
     as platform_policy_rule_condition
-import okta.models.risk_policy_rule_condition\
+from okta.models import risk_policy_rule_condition\
     as risk_policy_rule_condition
-import okta.models.risk_score_policy_rule_condition\
+from okta.models import risk_score_policy_rule_condition\
     as risk_score_policy_rule_condition
-import okta.models.o_auth_2_scopes_mediation_policy_rule_condition\
+from okta.models import o_auth_2_scopes_mediation_policy_rule_condition\
     as o_auth_2_scopes_mediation_policy_rule_condition
-import okta.models.user_identifier_policy_rule_condition\
+from okta.models import user_identifier_policy_rule_condition\
     as user_identifier_policy_rule_condition
-import okta.models.user_status_policy_rule_condition\
+from okta.models import user_status_policy_rule_condition\
     as user_status_policy_rule_condition
-import okta.models.user_policy_rule_condition\
+from okta.models import user_policy_rule_condition\
     as user_policy_rule_condition
 
 

@@ -20,7 +20,7 @@ limitations under the License.
 
 from okta.models.application_credentials\
     import ApplicationCredentials
-import okta.models.application_credentials_o_auth_client\
+from okta.models import application_credentials_o_auth_client\
     as application_credentials_o_auth_client
 
 

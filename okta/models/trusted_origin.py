@@ -20,7 +20,7 @@ limitations under the License.
 
 from okta.okta_object import OktaObject
 from okta.okta_collection import OktaCollection
-import okta.models.scope\
+from okta.models import scope\
     as scope
 
 

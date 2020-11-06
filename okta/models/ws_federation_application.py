@@ -20,7 +20,7 @@ limitations under the License.
 
 from okta.models.application\
     import Application
-import okta.models.ws_federation_application_settings\
+from okta.models import ws_federation_application_settings\
     as ws_federation_application_settings
 
 

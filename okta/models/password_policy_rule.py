@@ -20,9 +20,9 @@ limitations under the License.
 
 from okta.models.policy_rule\
     import PolicyRule
-import okta.models.password_policy_rule_actions\
+from okta.models import password_policy_rule_actions\
     as password_policy_rule_actions
-import okta.models.password_policy_rule_conditions\
+from okta.models import password_policy_rule_conditions\
     as password_policy_rule_conditions
 
 

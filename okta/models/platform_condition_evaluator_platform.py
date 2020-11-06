@@ -19,7 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.platform_condition_evaluator_platform_operating_system\
+from okta.models import platform_condition_evaluator_platform_operating_system\
     as platform_condition_evaluator_platform_operating_system
 
 

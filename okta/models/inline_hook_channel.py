@@ -19,7 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.inline_hook_channel_config\
+from okta.models import inline_hook_channel_config\
     as inline_hook_channel_config
 
 

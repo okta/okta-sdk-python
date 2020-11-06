@@ -19,11 +19,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.group_rule_action\
+from okta.models import group_rule_action\
     as group_rule_action
-import okta.models.group_rule_conditions\
+from okta.models import group_rule_conditions\
     as group_rule_conditions
-import okta.models.group_rule_status\
+from okta.models import group_rule_status\
     as group_rule_status
 
 

@@ -20,7 +20,7 @@ limitations under the License.
 
 from okta.models.application\
     import Application
-import okta.models.scheme_application_credentials\
+from okta.models import scheme_application_credentials\
     as scheme_application_credentials
 
 

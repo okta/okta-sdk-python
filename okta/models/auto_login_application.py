@@ -20,9 +20,9 @@ limitations under the License.
 
 from okta.models.application\
     import Application
-import okta.models.scheme_application_credentials\
+from okta.models import scheme_application_credentials\
     as scheme_application_credentials
-import okta.models.auto_login_application_settings\
+from okta.models import auto_login_application_settings\
     as auto_login_application_settings
 
 

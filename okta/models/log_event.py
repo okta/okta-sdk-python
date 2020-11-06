@@ -20,25 +20,25 @@ limitations under the License.
 
 from okta.okta_object import OktaObject
 from okta.okta_collection import OktaCollection
-import okta.models.log_actor\
+from okta.models import log_actor\
     as log_actor
-import okta.models.log_authentication_context\
+from okta.models import log_authentication_context\
     as log_authentication_context
-import okta.models.log_client\
+from okta.models import log_client\
     as log_client
-import okta.models.log_debug_context\
+from okta.models import log_debug_context\
     as log_debug_context
-import okta.models.log_outcome\
+from okta.models import log_outcome\
     as log_outcome
-import okta.models.log_request\
+from okta.models import log_request\
     as log_request
-import okta.models.log_security_context\
+from okta.models import log_security_context\
     as log_security_context
-import okta.models.log_severity\
+from okta.models import log_severity\
     as log_severity
-import okta.models.log_target\
+from okta.models import log_target\
     as log_target
-import okta.models.log_transaction\
+from okta.models import log_transaction\
     as log_transaction
 
 

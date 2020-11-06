@@ -20,7 +20,7 @@ limitations under the License.
 
 from okta.okta_object import OktaObject
 from okta.okta_collection import OktaCollection
-import okta.models.password_dictionary\
+from okta.models import password_dictionary\
     as password_dictionary
 
 

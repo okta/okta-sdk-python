@@ -20,11 +20,11 @@ limitations under the License.
 
 from okta.okta_object import OktaObject
 from okta.okta_collection import OktaCollection
-import okta.models.user_credentials\
+from okta.models import user_credentials\
     as user_credentials
-import okta.models.user_profile\
+from okta.models import user_profile\
     as user_profile
-import okta.models.user_type\
+from okta.models import user_type\
     as user_type
 
 

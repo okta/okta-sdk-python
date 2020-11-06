@@ -19,7 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.app_user_credentials\
+from okta.models import app_user_credentials\
     as app_user_credentials
 
 

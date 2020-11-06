@@ -20,7 +20,7 @@ limitations under the License.
 
 from okta.models.application_settings\
     import ApplicationSettings
-import okta.models.swa_three_field_application_settings_application\
+from okta.models import swa_three_field_application_settings_application\
     as swa_three_field_application_settings_application
 
 

@@ -19,9 +19,9 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.identity_provider_policy\
+from okta.models import identity_provider_policy\
     as identity_provider_policy
-import okta.models.protocol\
+from okta.models import protocol\
     as protocol
 
 

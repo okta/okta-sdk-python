@@ -20,9 +20,9 @@ limitations under the License.
 
 from okta.okta_object import OktaObject
 from okta.okta_collection import OktaCollection
-import okta.models.acs_endpoint\
+from okta.models import acs_endpoint\
     as acs_endpoint
-import okta.models.saml_attribute_statement\
+from okta.models import saml_attribute_statement\
     as saml_attribute_statement
 
 

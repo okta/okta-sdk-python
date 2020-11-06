@@ -19,7 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.password_credential_hash_algorithm\
+from okta.models import password_credential_hash_algorithm\
     as password_credential_hash_algorithm
 
 
