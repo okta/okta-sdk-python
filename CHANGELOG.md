@@ -1,9 +1,8 @@
 # Okta Python SDK Changelog
 
-## v1.0.5
-- Update according to openapi 2.1.6
-
 ## v1.0.4
+- Fix cyclic imports for Python3.6
+- Update according to openapi 2.1.6
 - Fix logs pagination.
 
 ## v1.0.3

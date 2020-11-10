@@ -20,13 +20,13 @@ limitations under the License.
 
 from okta.okta_object import OktaObject
 from okta.okta_collection import OktaCollection
-import okta.models.inactivity_policy_rule_condition\
+from okta.models import inactivity_policy_rule_condition\
     as inactivity_policy_rule_condition
-import okta.models.lifecycle_expiration_policy_rule_condition\
+from okta.models import lifecycle_expiration_policy_rule_condition\
     as lifecycle_expiration_policy_rule_condition
-import okta.models.password_expiration_policy_rule_condition\
+from okta.models import password_expiration_policy_rule_condition\
     as password_expiration_policy_rule_condition
-import okta.models.user_lifecycle_attribute_policy_rule_condition\
+from okta.models import user_lifecycle_attribute_policy_rule_condition\
     as user_lifecycle_attribute_policy_rule_condition
 
 

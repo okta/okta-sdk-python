@@ -20,9 +20,9 @@ limitations under the License.
 
 from okta.okta_object import OktaObject
 from okta.okta_collection import OktaCollection
-import okta.models.policy_subject_match_type\
+from okta.models import policy_subject_match_type\
     as policy_subject_match_type
-import okta.models.policy_user_name_template\
+from okta.models import policy_user_name_template\
     as policy_user_name_template
 
 

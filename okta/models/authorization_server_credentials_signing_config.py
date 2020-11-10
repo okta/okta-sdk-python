@@ -19,9 +19,9 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.authorization_server_credentials_rotation_mode\
+from okta.models import authorization_server_credentials_rotation_mode\
     as authorization_server_credentials_rotation_mode
-import okta.models.authorization_server_credentials_use\
+from okta.models import authorization_server_credentials_use\
     as authorization_server_credentials_use
 
 

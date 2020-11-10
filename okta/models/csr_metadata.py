@@ -19,9 +19,9 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.csr_metadata_subject\
+from okta.models import csr_metadata_subject\
     as csr_metadata_subject
-import okta.models.csr_metadata_subject_alt_names\
+from okta.models import csr_metadata_subject_alt_names\
     as csr_metadata_subject_alt_names
 
 

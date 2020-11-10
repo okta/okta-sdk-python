@@ -19,7 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.password_dictionary_common\
+from okta.models import password_dictionary_common\
     as password_dictionary_common
 
 

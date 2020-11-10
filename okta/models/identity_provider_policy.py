@@ -21,11 +21,11 @@ limitations under the License.
 from okta.models.policy\
     import Policy
 from okta.models.policy_type import PolicyType
-import okta.models.policy_account_link\
+from okta.models import policy_account_link\
     as policy_account_link
-import okta.models.provisioning\
+from okta.models import provisioning\
     as provisioning
-import okta.models.policy_subject\
+from okta.models import policy_subject\
     as policy_subject
 
 

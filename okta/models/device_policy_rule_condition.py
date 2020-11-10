@@ -19,7 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.device_policy_rule_condition_platform\
+from okta.models import device_policy_rule_condition_platform\
     as device_policy_rule_condition_platform
 
 

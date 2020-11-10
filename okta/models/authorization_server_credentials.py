@@ -19,7 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.authorization_server_credentials_signing_config\
+from okta.models import authorization_server_credentials_signing_config\
     as authorization_server_credentials_signing_config
 
 

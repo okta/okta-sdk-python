@@ -19,7 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.event_hook_channel_config\
+from okta.models import event_hook_channel_config\
     as event_hook_channel_config
 
 

@@ -20,9 +20,9 @@ limitations under the License.
 
 from okta.models.user_factor\
     import UserFactor
-import okta.models.factor_result_type\
+from okta.models import factor_result_type\
     as factor_result_type
-import okta.models.push_user_factor_profile\
+from okta.models import push_user_factor_profile\
     as push_user_factor_profile
 
 

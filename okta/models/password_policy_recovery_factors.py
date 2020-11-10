@@ -19,11 +19,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.password_policy_recovery_factor_settings\
+from okta.models import password_policy_recovery_factor_settings\
     as password_policy_recovery_factor_settings
-import okta.models.password_policy_recovery_email\
+from okta.models import password_policy_recovery_email\
     as password_policy_recovery_email
-import okta.models.password_policy_recovery_question\
+from okta.models import password_policy_recovery_question\
     as password_policy_recovery_question
 
 

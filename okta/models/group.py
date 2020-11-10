@@ -20,9 +20,9 @@ limitations under the License.
 
 from okta.okta_object import OktaObject
 from okta.okta_collection import OktaCollection
-import okta.models.group_profile\
+from okta.models import group_profile\
     as group_profile
-import okta.models.group_type\
+from okta.models import group_type\
     as group_type
 
 

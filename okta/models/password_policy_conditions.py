@@ -19,9 +19,9 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.password_policy_authentication_provider_condition\
+from okta.models import password_policy_authentication_provider_condition\
     as password_policy_authentication_provider_condition
-import okta.models.policy_people_condition\
+from okta.models import policy_people_condition\
     as policy_people_condition
 
 

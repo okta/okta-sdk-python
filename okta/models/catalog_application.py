@@ -20,7 +20,7 @@ limitations under the License.
 
 from okta.okta_object import OktaObject
 from okta.okta_collection import OktaCollection
-import okta.models.catalog_application_status\
+from okta.models import catalog_application_status\
     as catalog_application_status
 
 

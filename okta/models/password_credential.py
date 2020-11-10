@@ -19,9 +19,9 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.password_credential_hash\
+from okta.models import password_credential_hash\
     as password_credential_hash
-import okta.models.password_credential_hook\
+from okta.models import password_credential_hook\
     as password_credential_hook
 
 

@@ -19,7 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.open_id_connect_refresh_token_rotation_type\
+from okta.models import open_id_connect_refresh_token_rotation_type\
     as open_id_connect_refresh_token_rotation_type
 
 

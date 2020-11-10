@@ -19,9 +19,9 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.application_credentials_signing\
+from okta.models import application_credentials_signing\
     as application_credentials_signing
-import okta.models.application_credentials_username_template\
+from okta.models import application_credentials_username_template\
     as application_credentials_username_template
 
 

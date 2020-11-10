@@ -20,17 +20,17 @@ limitations under the License.
 
 from okta.okta_object import OktaObject
 from okta.okta_collection import OktaCollection
-import okta.models.application_accessibility\
+from okta.models import application_accessibility\
     as application_accessibility
-import okta.models.application_credentials\
+from okta.models import application_credentials\
     as application_credentials
-import okta.models.application_licensing\
+from okta.models import application_licensing\
     as application_licensing
-import okta.models.application_settings\
+from okta.models import application_settings\
     as application_settings
-import okta.models.application_sign_on_mode\
+from okta.models import application_sign_on_mode\
     as application_sign_on_mode
-import okta.models.application_visibility\
+from okta.models import application_visibility\
     as application_visibility
 
 

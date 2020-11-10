@@ -19,7 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.password_policy_delegation_settings_options\
+from okta.models import password_policy_delegation_settings_options\
     as password_policy_delegation_settings_options
 
 

@@ -20,7 +20,7 @@ limitations under the License.
 
 from okta.models.user_factor\
     import UserFactor
-import okta.models.sms_user_factor_profile\
+from okta.models import sms_user_factor_profile\
     as sms_user_factor_profile
 
 

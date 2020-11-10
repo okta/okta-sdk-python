@@ -21,7 +21,7 @@ limitations under the License.
 from okta.models.policy\
     import Policy
 from okta.models.policy_type import PolicyType
-import okta.models.okta_sign_on_policy_conditions\
+from okta.models import okta_sign_on_policy_conditions\
     as okta_sign_on_policy_conditions
 
 

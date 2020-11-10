@@ -20,7 +20,7 @@ limitations under the License.
 
 from okta.okta_object import OktaObject
 from okta.okta_collection import OktaCollection
-import okta.models.log_ip_address\
+from okta.models import log_ip_address\
     as log_ip_address
 
 

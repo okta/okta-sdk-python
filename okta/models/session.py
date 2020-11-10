@@ -20,11 +20,11 @@ limitations under the License.
 
 from okta.okta_object import OktaObject
 from okta.okta_collection import OktaCollection
-import okta.models.session_authentication_method\
+from okta.models import session_authentication_method\
     as session_authentication_method
-import okta.models.session_identity_provider\
+from okta.models import session_identity_provider\
     as session_identity_provider
-import okta.models.session_status\
+from okta.models import session_status\
     as session_status
 
 

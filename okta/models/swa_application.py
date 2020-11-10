@@ -20,7 +20,7 @@ limitations under the License.
 
 from okta.models.browser_plugin_application\
     import BrowserPluginApplication
-import okta.models.swa_application_settings\
+from okta.models import swa_application_settings\
     as swa_application_settings
 
 

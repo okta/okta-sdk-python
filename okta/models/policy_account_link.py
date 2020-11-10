@@ -19,7 +19,7 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-import okta.models.policy_account_link_filter\
+from okta.models import policy_account_link_filter\
     as policy_account_link_filter
 
 
