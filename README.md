@@ -186,13 +186,26 @@ from okta.client import Client as OktaClient
 from project.custom.request_executor_impl import RequestExecImpl
 from project.custom.http_client_impl import HTTPClientImpl
 from project.custom.cache_impl import CacheImpl
+
+
 config = {
-    'orgUrl': 'https://test.okta.com',
+    'orgUrl': 'https://{yourOktaDomain}',
     'token': 'YOUR_API_TOKEN',
     'requestExecutor': RequestExecImpl,
     'httpClient': HTTPClientImpl,
-    'cacheManager': CacheImpl
+    'cacheManager': CacheImpl(), # pass instance of CacheImpl
+    'cache': {'enabled': True}
 }
+
+
+async def main():
+    client = OktaClient(config)
+    user_info, resp, err = await client.get_user({YOUR_USER_ID})
+    print(user_info)
+
+
+loop = asyncio.get_event_loop()
+loop.run_until_complete(main())
 ```
 
 ### Extending or Creating New Classes
@@ -200,22 +213,100 @@ config = {
 Example: You can create a custom cache driver by implementing `okta.cache.cache`
 
 ```py
+# Fully working example for Custom Cache class
 from okta.cache.cache import Cache
 
-class CustomCache(Cache):
-  def __init__(self, params):
-    super().__init__()
-    # Constructor
 
-  # Must implement all methods from the Cache class
-  def get(self, key):
-    # Implementation
+class CacheImpl(Cache):
+    def __init__(self):
+        super().__init__()
+        self.cache_dict = {}
 
-  """Rest of methods"""
-  ...
+    def add(self, key, value):
+        self.cache_dict[key] = value
+
+    def get(self, key):
+        return self.cache_dict.get(key, None)
+
+    def contains(self, key):
+        return key in self.cache_dict
+
+    def delete(self, key):
+        if self.contains(key):
+            del self.cache_dict[key]
 ```
 
-A similar approach can be used to extend `okta.request_executor` and `okta.http_client`.
+A similar approach can be used to extend `okta.request_executor`:
+```py
+from okta.request_executor import RequestExecutor
+
+
+class RequestExecImpl(RequestExecutor):
+    def __init__(self, config, cache, http_client=None):
+        super().__init__(config, cache, http_client)
+        # custom code
+
+    # Note, this method shoud be defined as async
+    async def create_request(self, method: str, url: str, body: dict = None,
+                             headers: dict = {}, oauth=False):
+        """
+        Creates request for request executor's HTTP client.
+
+        Args:
+            method (str): HTTP Method to be used
+            url (str): URL to send request to
+            body (dict, optional): Request body. Defaults to None.
+            headers (dict, optional): Request headers. Defaults to {}.
+
+        Returns:
+            dict, Exception: Tuple of Dictionary repr of HTTP request and
+            exception raised during execution
+        """
+        # custom code
+
+    # Note, this method shoud be defined as async
+    async def execute(self, request, response_type=None):
+        """
+        This function is the high level request execution method. Performs the
+        API call and returns a formatted response object
+
+        Args:
+            request (dict): dictionary object containing request details
+
+        Returns:
+            (OktaAPIResponse, Exception): Response obj for the Okta API, Error
+        """
+        # custom code
+```
+
+and `okta.http_client`:
+```py
+from okta.http_client import HTTPClient
+
+
+class HTTPClientImpl(HTTPClient):
+    def __init__(self, http_config={}):
+        super().__init__(http_config)
+        # custom code
+
+    # Note, this method shoud be defined as async
+    async def send_request(self, request):
+        """
+        This method fires HTTP requests
+
+        Arguments:
+            request {dict} -- This dictionary contains all information needed
+            for the request.
+            - HTTP method (as str)
+            - Headers (as dict)
+            - Request body (as dict)
+
+        Returns:
+            Tuple(RequestInfo, ClientResponse, JSONBody, ErrorObject)
+            -- A tuple containing the request and response of the HTTP call
+        """
+        # custom code
+```
 
 ## Usage guide
 
