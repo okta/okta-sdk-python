@@ -50,7 +50,6 @@ class HTTPClient:
                       'headers': self._default_headers,
                       'data': json.dumps(request['data'])}
             json_data = request.get('json')
-            
             # empty json param may cause issue, so include it if needed only
             # more details: https://github.com/okta/okta-sdk-python/issues/131
             if json_data:
