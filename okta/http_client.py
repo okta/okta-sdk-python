@@ -48,6 +48,8 @@ class HTTPClient:
             params = {'method': request['method'],
                       'url': request['url'],
                       'headers': self._default_headers}
+            if request['data']:
+                params['data'] = json.dumps(request['data'])
             json_data = request.get('json')
             # empty json param may cause issue, so include it if needed only
             # more details: https://github.com/okta/okta-sdk-python/issues/131
