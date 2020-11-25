@@ -5,6 +5,7 @@ import os
 import xmltodict
 from okta.errors.http_error import HTTPError
 from okta.errors.okta_api_error import OktaAPIError
+from okta.exceptions import HTTPException, OktaAPIException
 
 
 class HTTPClient:
@@ -12,6 +13,7 @@ class HTTPClient:
     This class is the basic HTTPClient for the Okta Client.
     Custom HTTP clients should inherit from this class.
     """
+    raise_exception = False
 
     def __init__(self, http_config={}):
         # Get headers from Request Executor
@@ -100,8 +102,14 @@ class HTTPClient:
             # create errors
             try:
                 error = OktaAPIError(url, response_details, formatted_response)
+                if HTTPClient.raise_exception:
+                    raise OktaAPIException(formatted_response)
+            except OktaAPIException:
+                raise
             except Exception:
                 error = HTTPError(url, response_details, formatted_response)
+                if HTTPClient.raise_exception:
+                    raise HTTPException(formatted_response)
             return (None, error)
 
     @staticmethod

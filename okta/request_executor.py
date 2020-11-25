@@ -65,6 +65,8 @@ class RequestExecutor:
             'proxy': self._config["client"]["proxy"] if "proxy"
             in self._config["client"] else None
         })
+        HTTPClient.raise_exception = \
+            self._config['client'].get("raiseException", False)
 
     async def create_request(self, method: str, url: str, body: dict = None,
                              headers: dict = {}, oauth=False):

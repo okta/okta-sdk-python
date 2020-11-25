@@ -1,3 +1,4 @@
+import asyncio
 from okta.client import Client as OktaClient
 import pytest
 from okta.constants import FINDING_OKTA_DOMAIN
@@ -12,6 +13,7 @@ from okta.error_messages import ERROR_MESSAGE_API_TOKEN_DEFAULT, \
     ERROR_MESSAGE_PROXY_MISSING_HOST, ERROR_MESSAGE_PROXY_MISSING_AUTH, \
     ERROR_MESSAGE_PROXY_INVALID_PORT
 from okta.constants import _GLOBAL_YAML_PATH, _LOCAL_YAML_PATH
+from okta.exceptions import HTTPException, OktaAPIException
 
 
 """
@@ -586,3 +588,12 @@ def test_constructor_invalid_port_number(port):
     with pytest.raises(ValueError) as exception_info:
         OktaClient(user_config=config)
         assert ERROR_MESSAGE_PROXY_INVALID_PORT in exception_info.value
+
+
+def test_client_raise_exception():
+    org_url = "https://test.okta.com"
+    token = "TOKEN"
+    config = {'orgUrl': org_url, 'token': token, 'raiseException': True}
+    client = OktaClient(config)
+    with pytest.raises(HTTPException):
+        asyncio.run(client.list_users())
