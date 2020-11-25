@@ -1,7 +1,7 @@
 # Okta Python SDK Changelog
 
-## v1.0.6
-- Add option `raiseException` to OktaClient
+## v1.1.0
+- Add exceptions and option `raiseException` to OktaClient
 
 ## v1.0.5
 - Fix construction of http request
