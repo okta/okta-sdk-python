@@ -12,13 +12,13 @@ PYTEST_MOCK_CLIENT = "pytest_mock_client"
 PYTEST_RE_RECORD = "record_mode"
 MOCK_TESTS = 'MOCK_TESTS'
 
+
 def is_mock_tests_flag_true():
     """Return True by default, i.e. variable is not set.
     Return False if env variable `MOCK_TESTS` is set to `false`, `FALSE`, etc.
     Return True in all other cases.
     """
     return os.environ.get('MOCK_TESTS', 'true').strip().lower() != 'false'
-
 
 
 # Override vcr fixture from pytest_recording library
