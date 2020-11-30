@@ -7,7 +7,7 @@ import json
 from yarl import URL
 import datetime as dt
 import multidict
-from tests.conftest import PYTEST_MOCK_CLIENT
+from tests.conftest import PYTEST_MOCK_CLIENT, is_mock_tests_flag_true
 import os
 import time
 
@@ -37,6 +37,8 @@ class MockOktaClient(Client):
             fs.pause()
             super().__init__()
             fs.resume()
+        elif not is_mock_tests_flag_true():
+            super().__init__()
         else:
             super().__init__(CLIENT_CONFIG)
 
