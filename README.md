@@ -14,6 +14,7 @@
 - [Need help?](#need-help)
 - [Getting Started](#getting-started)
 - [Usage Guide](#usage-guide)
+- [Exceptions](#exceptions)
 - [Pagination](#pagination)
 - [Configuration Reference](#configuration-reference)
 - [Rate Limiting](#rate-limiting)
@@ -576,6 +577,51 @@ response, error = await client.get_request_executor().execute(request, models.Us
 
 response_body = client.form_response_body(response.get_body())
 user = response.get_type()(response_body)
+```
+
+## Exceptions
+
+Starting from v1.1.0 SDK introduces exceptions, which are disabled by default, thus feature is backward compatible.
+To force client raise an exception instead of returning custom error, option 'raiseException' should be provided:
+
+```py
+import asyncio
+
+from okta.client import Client as OktaClient
+from okta.exceptions import OktaAPIException
+
+
+async def main():
+    config = {'orgUrl': 'https://{yourOktaDomain}',
+              'token': 'bad_token',
+              'raiseException': True}
+    client = OktaClient(config)
+    try:
+        users, resp, err = await client.list_users()
+        for user in users:
+            print(user.profile.first_name, user.profile.last_name)
+    except OktaAPIException as err:
+        print(err)
+
+
+asyncio.run(main())
+```
+Result should look like:
+```py
+{'errorCode': 'E0000011', 'errorSummary': 'Invalid token provided', 'errorLink': 'E0000011', 'errorId': 'oaeqWcqizEUQ_-iHc2hCbH9LA', 'errorCauses': []}
+```
+
+List of available exceptions: OktaAPIException, HTTPException (to raise instead of returning errors OktaAPIError and HTTPError respectively).
+It is possible to inherit and/or extend given exceptions:
+```py
+from okta.exceptions import HTTPException
+
+
+class MyHTTPException(HTTPException):
+    pass
+
+
+raise MyHTTPException('My HTTP Exception')
 ```
 
 ## Pagination

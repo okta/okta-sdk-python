@@ -5,6 +5,7 @@ from okta.user_agent import UserAgent
 from okta.client import Client
 from okta.oauth import OAuth
 from okta.errors.http_error import HTTPError
+from okta.exceptions import HTTPException, OktaAPIException
 import tests.mocks as mocks
 import pytest
 import aiohttp
@@ -251,3 +252,34 @@ async def test_client_timeout(monkeypatch):
 
     assert all(values in [None] for values in [req, res_details, resp_body])
     assert type(error) == asyncio.TimeoutError
+
+
+@ pytest.mark.asyncio
+async def test_client_error_raise_okta_api_exception(monkeypatch, mocker):
+    """Verify http_client raises OktaAPIException in case of API error
+    and `raise_exception` attribute is True
+    """
+    mock_res_details = mocker.Mock()
+    mock_res_details.status = 500
+    mock_resp_body = {'errorCode': 500,
+                      'errorLink': 'https://test_okta_error',
+                      'errorId': 'test_id'}
+    monkeypatch.setattr(HTTPClient, 'raise_exception', True)
+
+    with pytest.raises(OktaAPIException):
+        parsed, error = HTTPClient.check_response_for_error(
+            'https://test.okta.com', mock_res_details, mock_resp_body)
+
+
+@ pytest.mark.asyncio
+async def test_client_error_raise_http_exception(monkeypatch, mocker):
+    """Verify http_client raises HTTPException in case of HTTP error
+    and `raise_exception` attribute is True
+    """
+    mock_res_details = mocker.Mock()
+    mock_res_details.status = 500
+    monkeypatch.setattr(HTTPClient, 'raise_exception', True)
+
+    with pytest.raises(HTTPException):
+        parsed, error = HTTPClient.check_response_for_error(
+            'https://test.okta.com', mock_res_details, {})
