@@ -20,6 +20,8 @@ limitations under the License.
 
 from okta.okta_object import OktaObject
 
+from okta.helpers import to_snake_case, to_lower_camel_case
+
 
 class UserProfile(
     OktaObject

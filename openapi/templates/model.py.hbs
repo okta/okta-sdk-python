@@ -24,6 +24,10 @@ from okta.models.{{snakeCase model.extends}}\
 {{else}}
 from okta.okta_object import OktaObject
 {{/if}}
+{{#if (eq model.modelName "UserProfile")}}
+
+from okta.helpers import to_snake_case, to_lower_camel_case
+{{/if}}
 {{#if (ne model.policyType undefined)}}
 from okta.models.policy_type import PolicyType
 {{/if}}
