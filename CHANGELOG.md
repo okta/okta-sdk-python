@@ -1,5 +1,8 @@
 # Okta Python SDK Changelog
 
+## v1.2.0
+- Add possibility to create user with custom attributes in profile
+
 ## v1.1.0
 - Add exceptions and option `raiseException` to OktaClient
 
