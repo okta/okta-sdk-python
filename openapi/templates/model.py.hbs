@@ -24,6 +24,10 @@ from okta.models.{{snakeCase model.extends}}\
 {{else}}
 from okta.okta_object import OktaObject
 {{/if}}
+{{#if (eq model.modelName "UserProfile")}}
+
+from okta.helpers import to_snake_case, to_lower_camel_case
+{{/if}}
 {{#if (ne model.policyType undefined)}}
 from okta.models.policy_type import PolicyType
 {{/if}}
@@ -110,6 +114,12 @@ class {{pascalCase model.modelName}}(
             {{/if}}
             {{/if}}
             {{/each}}
+            {{#if (eq model.modelName "UserProfile")}}
+            # set custom attributes not defined in model
+            for attr_name in config:
+                if attr_name not in vars(self):
+                    setattr(self, to_snake_case(attr_name), config[attr_name])
+            {{/if}}
         else:
             {{#each model.properties as |prop|}}
             {{#if (ne prop.default undefined) }}
@@ -132,11 +142,16 @@ class {{pascalCase model.modelName}}(
         {{#if (eq model.modelName "SmsTemplateTranslations")}}
         current_obj_format = vars(self)
         {{else}}
+        {{#if (eq model.modelName "UserProfile")}}
+        current_obj_format = {to_lower_camel_case(key): value
+                              for key, value in vars(self).items()}
+        {{else}}
         current_obj_format = {
             {{#each model.properties as |prop|}}
             "{{prop.propertyName}}": self.{{snakeCase prop.propertyName}}{{#unless @last}},{{/unless}}
             {{/each}}
         }
+        {{/if}}
         {{/if}}
         parent_req_format.update(current_obj_format)
         return parent_req_format
