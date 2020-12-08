@@ -19,7 +19,13 @@ help:
 	@echo "$(COLOR_OK)  make [command]$(COLOR_NONE)"
 	@echo ""
 	@echo "$(COLOR_WARNING)Available commands:$(COLOR_NONE)"
-	@echo "$(COLOR_OK)  help$(COLOR_NONE)     Show this help message"
+	@echo "$(COLOR_OK)  help$(COLOR_NONE)           Show this help message"
+	@echo "$(COLOR_WARNING)build$(COLOR_NONE)"
+	@echo "$(COLOR_OK)  build:dist                  Build the distribution for publishing$(COLOR_NONE)"
+	@echo "$(COLOR_WARNING)publish$(COLOR_NONE)"
+	@echo "$(COLOR_OK)  publish:test                Publish distribution to testpypi$(COLOR_NONE)"
+	@echo "$(COLOR_OK)  publish:prod                Publish distribution to pypi$(COLOR_NONE)"
+
 
 build\:dist:
 	python3 setup.py sdist bdist_wheel
