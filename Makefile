@@ -23,8 +23,8 @@ help:
 	@echo "$(COLOR_WARNING)build$(COLOR_NONE)"
 	@echo "$(COLOR_OK)  build:dist                  Build the distribution for publishing$(COLOR_NONE)"
 	@echo "$(COLOR_WARNING)publish$(COLOR_NONE)"
-	@echo "$(COLOR_OK)  publish:test                Publish distribution to testpypi$(COLOR_NONE)"
-	@echo "$(COLOR_OK)  publish:prod                Publish distribution to pypi$(COLOR_NONE)"
+	@echo "$(COLOR_OK)  publish:test                Publish distribution to testpypi (Will ask for credentials)$(COLOR_NONE)"
+	@echo "$(COLOR_OK)  publish:prod                Publish distribution to pypi (Will ask for credentials)$(COLOR_NONE)"
 
 
 build\:dist:
