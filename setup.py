@@ -28,7 +28,7 @@ setup(
     description="Python SDK for the Okta Management API",
     long_description=open("LONG_DESCRIPTION.md").read(),
     test_suite="tests",
-    packages=find_packages(),
+    packages=find_packages(exclude=("tests",)),
     python_requires=">=3.6",
     classifiers=[
         "Development Status :: 5 - Production/Stable",
