@@ -1,5 +1,8 @@
 # Okta Python SDK Changelog
 
+## v1.2.1
+- Exclude tests from packaging
+
 ## v1.2.0
 - Add possibility to create user with custom attributes in profile
 
