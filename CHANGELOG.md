@@ -1,5 +1,8 @@
 # Okta Python SDK Changelog
 
+## v1.2.2
+- Fix installation requirements
+
 ## v1.2.1
 - Exclude tests from packaging
 
