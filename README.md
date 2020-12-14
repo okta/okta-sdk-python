@@ -347,16 +347,22 @@ This library should only be used with the Okta management API. To call the [Auth
 ### Get and set custom attributes
 
 Custom attributes must first be defined in the Okta profile editor. Then, you can work with custom attributes on a user:
+> Feature is fully supported with SDK version >= 1.2.0
 
 ```py
 """ Setting attributes """
 # Creating an instance through a Python Dictionary
-user_profile = models.UserProfile({
+from okta.models import UserProfile
+
+user_profile = UserProfile({
   'firstName': 'John',
   'lastName': 'Foe',
   'email': 'John.Foe@okta.com',
-  'login': 'John.Foe@okta.com'
+  'login': 'John.Foe@okta.com',
+  'customAttr': 'custom value'
 })
+
+print(user_profile.custom_attr)
 
 # Creating an empty object and using variables
 user_profile = models.UserProfile()
@@ -364,10 +370,64 @@ user_profile.first_name = 'John'
 user_profile.last_name = 'Doe'
 user_profile.email = 'John.Doe@okta.com'
 user_profile.login = 'John.Doe@okta.com'
+user_profile.custom_attr = 'custom value'
+```
 
-""" Getting attributes from instance """
-user, resp, err = await client.get_user(user.id)
-nick_name = user.profile.nick_name
+Full example:
+
+```py
+from okta.client import Client as OktaClient
+import asyncio
+
+async def main():
+    client = OktaClient()
+
+    # create user with custom attribute
+    body = {
+      "profile": {
+        "firstName": "John",
+        "lastName": "Smith",
+        "email": "jsmith@matrix.com",
+        "login": "jsmith@matrix.com",
+        "customAttr": "custom value"
+      },
+      "credentials": {
+        "password" : { "value": "Knock*knock*neo*111" }
+      }
+    }
+    result = await client.create_user(body)
+
+    # create user without custom attribute
+    body = {
+      "profile": {
+        "firstName": "Neo",
+        "lastName": "Anderson",
+        "email": "nanderson@matrix.com",
+        "login": "nanderson@matrix.com"
+      },
+      "credentials": {
+        "password" : { "value": "Knock*knock*neo*111" }
+      }
+    }
+    result = await client.create_user(body)
+
+    users, resp, err = await client.list_users()
+    for user in users:
+        print(user.profile.first_name, user.profile.last_name)
+        try:
+            print(user.profile.custom_attr)
+        except:
+            print('User has no customAttr')
+
+
+asyncio.run(main())
+```
+Output should look like the following (removed pre-existing users from output):
+```sh
+John Smith
+custom value
+Neo Anderson
+User has no customAttr
 ```
 
 ### Get a User

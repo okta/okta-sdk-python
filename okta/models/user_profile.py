@@ -20,6 +20,8 @@ limitations under the License.
 
 from okta.okta_object import OktaObject
 
+from okta.helpers import to_snake_case, to_lower_camel_case
+
 
 class UserProfile(
     OktaObject
@@ -93,6 +95,10 @@ class UserProfile(
                 if "userType" in config else None
             self.zip_code = config["zipCode"]\
                 if "zipCode" in config else None
+            # set custom attributes not defined in model
+            for attr_name in config:
+                if attr_name not in vars(self):
+                    setattr(self, to_snake_case(attr_name), config[attr_name])
         else:
             self.city = None
             self.cost_center = None
@@ -128,38 +134,7 @@ class UserProfile(
 
     def request_format(self):
         parent_req_format = super().request_format()
-        current_obj_format = {
-            "city": self.city,
-            "costCenter": self.cost_center,
-            "countryCode": self.country_code,
-            "department": self.department,
-            "displayName": self.display_name,
-            "division": self.division,
-            "email": self.email,
-            "employeeNumber": self.employee_number,
-            "firstName": self.first_name,
-            "honorificPrefix": self.honorific_prefix,
-            "honorificSuffix": self.honorific_suffix,
-            "lastName": self.last_name,
-            "locale": self.locale,
-            "login": self.login,
-            "manager": self.manager,
-            "managerId": self.manager_id,
-            "middleName": self.middle_name,
-            "mobilePhone": self.mobile_phone,
-            "nickName": self.nick_name,
-            "organization": self.organization,
-            "postalAddress": self.postal_address,
-            "preferredLanguage": self.preferred_language,
-            "primaryPhone": self.primary_phone,
-            "profileUrl": self.profile_url,
-            "secondEmail": self.second_email,
-            "state": self.state,
-            "streetAddress": self.street_address,
-            "timezone": self.timezone,
-            "title": self.title,
-            "userType": self.user_type,
-            "zipCode": self.zip_code
-        }
+        current_obj_format = {to_lower_camel_case(key): value
+                              for key, value in vars(self).items()}
         parent_req_format.update(current_obj_format)
         return parent_req_format
