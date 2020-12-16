@@ -12,12 +12,6 @@ def get_version():
         return version_number
 
 
-def get_requirements():
-    # Get requirement packages from requirements.txt
-    with open("requirements.txt") as requirements_file:
-        return requirements_file.readlines()
-
-
 setup(
     name="okta",
     version=get_version(),
@@ -40,5 +34,15 @@ setup(
         "License :: OSI Approved :: Apache Software License",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
-    install_requires=get_requirements()
+    install_requires=[
+        "aiohttp",
+        "flatdict",
+        "pyyaml",
+        "xmltodict",
+        "yarl",
+        "pycryptodome",
+        "python-jose",
+        "aenum",
+        "pydash"
+    ]
 )
