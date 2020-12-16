@@ -1,4 +1,3 @@
-asyncio
 aiohttp
 flatdict
 pyyaml
