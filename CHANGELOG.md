@@ -2,8 +2,6 @@
 
 ## v1.3.0
 - Add custom http headers to client
-
-## v1.2.2
 - Fix installation requirements
 
 ## v1.2.1
