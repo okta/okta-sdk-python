@@ -67,6 +67,7 @@ class RequestExecutor:
         })
         HTTPClient.raise_exception = \
             self._config['client'].get("raiseException", False)
+        self._custom_headers = {}
 
     async def create_request(self, method: str, url: str, body: dict = None,
                              headers: dict = {}, oauth=False):
@@ -90,6 +91,7 @@ class RequestExecutor:
 
         # Build request
         # Get predetermined headers and build URL
+        headers.update(self._custom_headers)
         headers.update(self._default_headers)
         if self._config["client"]["orgUrl"] not in url:
             url = self._config["client"]["orgUrl"] + url
@@ -284,3 +286,15 @@ class RequestExecutor:
 
     def pause_for_backoff(self, backoff_time):
         time.sleep(backoff_time)
+
+    def set_custom_headers(self, headers):
+        self._custom_headers.update(headers)
+
+    def clear_custom_headers(self):
+        self._custom_headers = {}
+
+    def get_custom_headers(self):
+        return self._custom_headers
+
+    def get_default_headers(self):
+        return self._default_headers

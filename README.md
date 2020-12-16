@@ -430,6 +430,45 @@ Neo Anderson
 User has no customAttr
 ```
 
+### Get and set custom headers
+
+> Feature appears in v1.3.0
+
+It is possible to set custom headers, which will be sent with each request:
+
+```py
+import asyncio
+
+from okta.client import Client as OktaClient
+
+async def main():
+    client = OktaClient()
+
+    # set custom headers
+    client.set_custom_headers({'Custom-Header': 'custom value'})
+
+    # perform different requests with custom headers
+    users, resp, err = await client.list_users()
+    for user in users:
+        print(user.profile.first_name, user.profile.last_name)
+
+    # clear all custom headers
+    client.clear_custom_headers()
+
+    # output should be: {}
+    print(client.get_custom_headers())
+
+
+asyncio.run(main())
+```
+
+Note, that custom headers will be overwritten with default headers with the same name.
+This doesn't allow breaking the client. Get default headers:
+
+```py
+client.get_default_headers()
+```
+
 ### Get a User
 
 ```py

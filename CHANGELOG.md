@@ -1,6 +1,7 @@
 # Okta Python SDK Changelog
 
-## v1.2.2
+## v1.3.0
+- Add custom http headers to client
 - Fix installation requirements
 
 ## v1.2.1
