@@ -135,3 +135,18 @@ class Client(
 
     def get_request_executor(self):
         return self._request_executor
+
+    """
+    Misc
+    """
+    def set_custom_headers(self, headers):
+        self._request_executor.set_custom_headers(headers)
+
+    def clear_custom_headers(self):
+        self._request_executor.clear_custom_headers()
+
+    def get_custom_headers(self):
+        return self._request_executor.get_custom_headers()
+
+    def get_default_headers(self):
+        return self._request_executor.get_default_headers()
