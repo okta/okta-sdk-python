@@ -12,12 +12,6 @@ def get_version():
         return version_number
 
 
-def get_requirements():
-    # Get requirement packages from requirements.txt
-    with open("requirements.txt") as requirements_file:
-        return requirements_file.readlines()
-
-
 setup(
     name="okta",
     version=get_version(),
@@ -28,7 +22,7 @@ setup(
     description="Python SDK for the Okta Management API",
     long_description=open("LONG_DESCRIPTION.md").read(),
     test_suite="tests",
-    packages=find_packages(),
+    packages=find_packages(exclude=("tests",)),
     python_requires=">=3.6",
     classifiers=[
         "Development Status :: 5 - Production/Stable",
@@ -40,5 +34,15 @@ setup(
         "License :: OSI Approved :: Apache Software License",
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
-    install_requires=get_requirements()
+    install_requires=[
+        "aiohttp",
+        "flatdict",
+        "pyyaml",
+        "xmltodict",
+        "yarl",
+        "pycryptodome",
+        "python-jose",
+        "aenum",
+        "pydash"
+    ]
 )

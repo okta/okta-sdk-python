@@ -1,3 +1,5 @@
+import aiohttp
+import asyncio
 from okta.client import Client as OktaClient
 import pytest
 from okta.constants import FINDING_OKTA_DOMAIN
@@ -12,6 +14,7 @@ from okta.error_messages import ERROR_MESSAGE_API_TOKEN_DEFAULT, \
     ERROR_MESSAGE_PROXY_MISSING_HOST, ERROR_MESSAGE_PROXY_MISSING_AUTH, \
     ERROR_MESSAGE_PROXY_INVALID_PORT
 from okta.constants import _GLOBAL_YAML_PATH, _LOCAL_YAML_PATH
+from okta.exceptions import HTTPException, OktaAPIException
 
 
 """
@@ -586,3 +589,57 @@ def test_constructor_invalid_port_number(port):
     with pytest.raises(ValueError) as exception_info:
         OktaClient(user_config=config)
         assert ERROR_MESSAGE_PROXY_INVALID_PORT in exception_info.value
+
+
+def test_client_raise_exception():
+    org_url = "https://test.okta.com"
+    token = "TOKEN"
+    config = {'orgUrl': org_url, 'token': token, 'raiseException': True}
+    client = OktaClient(config)
+    with pytest.raises(HTTPException):
+        asyncio.run(client.list_users())
+
+
+def test_client_custom_headers(monkeypatch, mocker):
+    org_url = "https://test.okta.com"
+    token = "TOKEN"
+    config = {'orgUrl': org_url, 'token': token}
+    custom_headers = {'Header-Test-1': 'test value 1',
+                      'Header-Test-2': 'test value 2'}
+    client = OktaClient(config)
+
+    # verify custom headers are set
+    client.set_custom_headers(custom_headers)
+    assert client.get_custom_headers() == custom_headers
+
+    # mock http requests, verify if custom header is present in request
+    class MockHTTPRequest():
+        def __call__(self, **params):
+            self.request_info = params
+            self.headers = params['headers']
+            self.url = params['url']
+            self.content_type = 'application/json'
+            self.links = ''
+            self.text = MockHTTPRequest.mock_response_text
+            self.status = 200
+            return self
+
+        async def __aenter__(self):
+            return self
+
+        async def __aexit__(self, exc_type, exc, tb):
+            pass
+
+        @staticmethod
+        async def mock_response_text():
+            return '{"text": "mock response text"}'
+
+    mock_http_request = MockHTTPRequest()
+    monkeypatch.setattr(aiohttp, 'request', mock_http_request)
+    asyncio.run(client.list_users())
+    assert 'Header-Test-1' in mock_http_request.headers
+    assert 'Header-Test-2' in mock_http_request.headers
+
+    # verify custom headers are cleared
+    client.clear_custom_headers()
+    assert client.get_custom_headers() == {}

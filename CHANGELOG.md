@@ -1,5 +1,21 @@
 # Okta Python SDK Changelog
 
+## v1.3.1
+- Fix application mapping
+
+## v1.3.0
+- Add custom http headers to client
+- Fix installation requirements
+
+## v1.2.1
+- Exclude tests from packaging
+
+## v1.2.0
+- Add possibility to create user with custom attributes in profile
+
+## v1.1.0
+- Add exceptions and option `raiseException` to OktaClient
+
 ## v1.0.5
 - Fix construction of http request
 

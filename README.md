@@ -14,6 +14,7 @@
 - [Need help?](#need-help)
 - [Getting Started](#getting-started)
 - [Usage Guide](#usage-guide)
+- [Exceptions](#exceptions)
 - [Pagination](#pagination)
 - [Configuration Reference](#configuration-reference)
 - [Rate Limiting](#rate-limiting)
@@ -346,16 +347,22 @@ This library should only be used with the Okta management API. To call the [Auth
 ### Get and set custom attributes
 
 Custom attributes must first be defined in the Okta profile editor. Then, you can work with custom attributes on a user:
+> Feature is fully supported with SDK version >= 1.2.0
 
 ```py
 """ Setting attributes """
 # Creating an instance through a Python Dictionary
-user_profile = models.UserProfile({
+from okta.models import UserProfile
+
+user_profile = UserProfile({
   'firstName': 'John',
   'lastName': 'Foe',
   'email': 'John.Foe@okta.com',
-  'login': 'John.Foe@okta.com'
+  'login': 'John.Foe@okta.com',
+  'customAttr': 'custom value'
 })
+
+print(user_profile.custom_attr)
 
 # Creating an empty object and using variables
 user_profile = models.UserProfile()
@@ -363,10 +370,103 @@ user_profile.first_name = 'John'
 user_profile.last_name = 'Doe'
 user_profile.email = 'John.Doe@okta.com'
 user_profile.login = 'John.Doe@okta.com'
+user_profile.custom_attr = 'custom value'
+```
 
-""" Getting attributes from instance """
-user, resp, err = await client.get_user(user.id)
-nick_name = user.profile.nick_name
+Full example:
+
+```py
+from okta.client import Client as OktaClient
+import asyncio
+
+async def main():
+    client = OktaClient()
+
+    # create user with custom attribute
+    body = {
+      "profile": {
+        "firstName": "John",
+        "lastName": "Smith",
+        "email": "jsmith@matrix.com",
+        "login": "jsmith@matrix.com",
+        "customAttr": "custom value"
+      },
+      "credentials": {
+        "password" : { "value": "Knock*knock*neo*111" }
+      }
+    }
+    result = await client.create_user(body)
+
+    # create user without custom attribute
+    body = {
+      "profile": {
+        "firstName": "Neo",
+        "lastName": "Anderson",
+        "email": "nanderson@matrix.com",
+        "login": "nanderson@matrix.com"
+      },
+      "credentials": {
+        "password" : { "value": "Knock*knock*neo*111" }
+      }
+    }
+    result = await client.create_user(body)
+
+    users, resp, err = await client.list_users()
+    for user in users:
+        print(user.profile.first_name, user.profile.last_name)
+        try:
+            print(user.profile.custom_attr)
+        except:
+            print('User has no customAttr')
+
+
+asyncio.run(main())
+```
+Output should look like the following (removed pre-existing users from output):
+```sh
+John Smith
+custom value
+Neo Anderson
+User has no customAttr
+```
+
+### Get and set custom headers
+
+> Feature appears in v1.3.0
+
+It is possible to set custom headers, which will be sent with each request:
+
+```py
+import asyncio
+
+from okta.client import Client as OktaClient
+
+async def main():
+    client = OktaClient()
+
+    # set custom headers
+    client.set_custom_headers({'Custom-Header': 'custom value'})
+
+    # perform different requests with custom headers
+    users, resp, err = await client.list_users()
+    for user in users:
+        print(user.profile.first_name, user.profile.last_name)
+
+    # clear all custom headers
+    client.clear_custom_headers()
+
+    # output should be: {}
+    print(client.get_custom_headers())
+
+
+asyncio.run(main())
+```
+
+Note, that custom headers will be overwritten with default headers with the same name.
+This doesn't allow breaking the client. Get default headers:
+
+```py
+client.get_default_headers()
 ```
 
 ### Get a User
@@ -576,6 +676,51 @@ response, error = await client.get_request_executor().execute(request, models.Us
 
 response_body = client.form_response_body(response.get_body())
 user = response.get_type()(response_body)
+```
+
+## Exceptions
+
+Starting from v1.1.0 SDK introduces exceptions, which are disabled by default, thus feature is backward compatible.
+To force client raise an exception instead of returning custom error, option 'raiseException' should be provided:
+
+```py
+import asyncio
+
+from okta.client import Client as OktaClient
+from okta.exceptions import OktaAPIException
+
+
+async def main():
+    config = {'orgUrl': 'https://{yourOktaDomain}',
+              'token': 'bad_token',
+              'raiseException': True}
+    client = OktaClient(config)
+    try:
+        users, resp, err = await client.list_users()
+        for user in users:
+            print(user.profile.first_name, user.profile.last_name)
+    except OktaAPIException as err:
+        print(err)
+
+
+asyncio.run(main())
+```
+Result should look like:
+```py
+{'errorCode': 'E0000011', 'errorSummary': 'Invalid token provided', 'errorLink': 'E0000011', 'errorId': 'oaeqWcqizEUQ_-iHc2hCbH9LA', 'errorCauses': []}
+```
+
+List of available exceptions: OktaAPIException, HTTPException (to raise instead of returning errors OktaAPIError and HTTPError respectively).
+It is possible to inherit and/or extend given exceptions:
+```py
+from okta.exceptions import HTTPException
+
+
+class MyHTTPException(HTTPException):
+    pass
+
+
+raise MyHTTPException('My HTTP Exception')
 ```
 
 ## Pagination

@@ -49,7 +49,10 @@ def find_app_model(sign_on_mode, template_name):
     if sign_on_mode in OKTA_APP_SIGN_ON_TO_MODEL:
         return OKTA_APP_SIGN_ON_TO_MODEL[sign_on_mode]
     # O/W must be BROWSER PLUGIN APP
-    return OKTA_APP_NAME_TO_MODEL[template_name]
+    if template_name in OKTA_APP_NAME_TO_MODEL:
+        return OKTA_APP_NAME_TO_MODEL[template_name]
+    # If nothing matches, use default basic application:
+    return models.Application
 
 
 OKTA_FACTOR_TYPE_TO_FACTOR = {

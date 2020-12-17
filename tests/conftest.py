@@ -2,12 +2,43 @@ import pytest
 import re
 import os
 
+from pytest_recording._vcr import use_cassette
+
 TEST_OKTA_URL = "test"
 B_TEST_OKTA_URL = b"test"
 URL_REGEX = r"dev-\d+"
 B_URL_REGEX = rb"dev-\d+"
 PYTEST_MOCK_CLIENT = "pytest_mock_client"
 PYTEST_RE_RECORD = "record_mode"
+MOCK_TESTS = 'MOCK_TESTS'
+
+
+def is_mock_tests_flag_true():
+    """Return True by default, i.e. variable is not set.
+    Return False if env variable `MOCK_TESTS` is set to `false`, `FALSE`, etc.
+    Return True in all other cases.
+    """
+    return os.environ.get('MOCK_TESTS', 'true').strip().lower() != 'false'
+
+
+# Override vcr fixture from pytest_recording library
+@pytest.fixture(autouse=True)
+def vcr(request, vcr_markers, vcr_cassette_dir, record_mode, pytestconfig):
+    """Install a cassette if a test is marked with `pytest.mark.vcr`."""
+    if vcr_markers and is_mock_tests_flag_true():
+        config = request.getfixturevalue("vcr_config")
+        default_cassette = request.getfixturevalue("default_cassette_name")
+        with use_cassette(
+            default_cassette,
+            vcr_cassette_dir,
+            record_mode,
+            vcr_markers,
+            config,
+            pytestconfig
+        ) as cassette:
+            yield cassette
+    else:
+        yield None
 
 
 def pytest_generate_tests(metafunc):
