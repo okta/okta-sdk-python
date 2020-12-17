@@ -316,13 +316,13 @@ def test_constructor_local_config_PK(fs):
 def test_constructor_env_vars_SSWS():
     org_url = "https://test.okta.com"
     token = "TOKEN"
-    os.environ["OKTA_CLIENT_ORGURL"] = org_url
+    os.environ["OKTA_CLIENT_ORG_URL"] = org_url
     os.environ["OKTA_CLIENT_TOKEN"] = token
 
     client = OktaClient()
     loaded_config = client.get_config()
 
-    os.environ.pop("OKTA_CLIENT_ORGURL")
+    os.environ.pop("OKTA_CLIENT_ORG_URL")
     os.environ.pop("OKTA_CLIENT_TOKEN")
 
     assert org_url == loaded_config['client']['orgUrl']
@@ -335,20 +335,20 @@ def test_constructor_env_vars_PK():
     client_id = "clientID"
     scopes = "scope1,scope2,scope3"
     private_key = "private key"
-    os.environ["OKTA_CLIENT_AUTHORIZATIONMODE"] = authorizationMode
-    os.environ["OKTA_CLIENT_ORGURL"] = org_url
-    os.environ["OKTA_CLIENT_CLIENTID"] = client_id
+    os.environ["OKTA_CLIENT_AUTHORIZATION_MODE"] = authorizationMode
+    os.environ["OKTA_CLIENT_ORG_URL"] = org_url
+    os.environ["OKTA_CLIENT_CLIENT_ID"] = client_id
     os.environ["OKTA_CLIENT_SCOPES"] = scopes
-    os.environ["OKTA_CLIENT_PRIVATEKEY"] = private_key
+    os.environ["OKTA_CLIENT_PRIVATE_KEY"] = private_key
 
     client = OktaClient()
     loaded_config = client.get_config()
 
-    os.environ.pop("OKTA_CLIENT_ORGURL")
-    os.environ.pop("OKTA_CLIENT_AUTHORIZATIONMODE")
-    os.environ.pop("OKTA_CLIENT_CLIENTID")
+    os.environ.pop("OKTA_CLIENT_ORG_URL")
+    os.environ.pop("OKTA_CLIENT_AUTHORIZATION_MODE")
+    os.environ.pop("OKTA_CLIENT_CLIENT_ID")
     os.environ.pop("OKTA_CLIENT_SCOPES")
-    os.environ.pop("OKTA_CLIENT_PRIVATEKEY")
+    os.environ.pop("OKTA_CLIENT_PRIVATE_KEY")
 
     assert authorizationMode == loaded_config['client']['authorizationMode']
     assert org_url == loaded_config['client']['orgUrl']
@@ -406,13 +406,13 @@ def test_constructor_precedence_highest_rank_env_vars(fs):
     # Setup env. vars
     env_org_url = "https://test.env.okta.com"
     env_token = "envTOKEN"
-    os.environ["OKTA_CLIENT_ORGURL"] = env_org_url
+    os.environ["OKTA_CLIENT_ORG_URL"] = env_org_url
     os.environ["OKTA_CLIENT_TOKEN"] = env_token
 
     client = OktaClient()
     loaded_config = client.get_config()
 
-    os.environ.pop("OKTA_CLIENT_ORGURL")
+    os.environ.pop("OKTA_CLIENT_ORG_URL")
     os.environ.pop("OKTA_CLIENT_TOKEN")
 
     assert local_org_url != loaded_config['client']['orgUrl']
