@@ -1,5 +1,8 @@
 # Okta Python SDK Changelog
 
+## v1.3.2
+- Fix outdated date format which comes from header "Date"
+
 ## v1.3.1
 - Fix application mapping
 
