@@ -1,5 +1,4 @@
 import os
-import re
 import yaml
 from okta.constants import _GLOBAL_YAML_PATH, _LOCAL_YAML_PATH
 from flatdict import FlatDict

@@ -14,7 +14,7 @@ from okta.error_messages import ERROR_MESSAGE_API_TOKEN_DEFAULT, \
     ERROR_MESSAGE_PROXY_MISSING_HOST, ERROR_MESSAGE_PROXY_MISSING_AUTH, \
     ERROR_MESSAGE_PROXY_INVALID_PORT
 from okta.constants import _GLOBAL_YAML_PATH, _LOCAL_YAML_PATH
-from okta.exceptions import HTTPException, OktaAPIException
+from okta.exceptions import HTTPException
 
 
 """
