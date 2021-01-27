@@ -1,5 +1,4 @@
 import os
-import re
 import yaml
 from okta.constants import _GLOBAL_YAML_PATH, _LOCAL_YAML_PATH
 from flatdict import FlatDict
@@ -162,16 +161,15 @@ class ConfigSetter():
 
         # Go through keys and search for it in the environment vars
         # using the format described in the README
-        for camel_case_key in flattened_keys:
-            snake_case_key = re.sub("([A-Z])", "_\\1", camel_case_key)
-            env_key = ConfigSetter._OKTA + "_" + snake_case_key.upper()
+        for key in flattened_keys:
+            env_key = ConfigSetter._OKTA + "_" + key.upper()
             env_value = os.environ.get(env_key, None)
 
             if env_value is not None:
                 # If value is found, add to config
-                if "scopes" in snake_case_key.lower():
-                    updated_config[camel_case_key] = env_value.split(',')
+                if "scopes" in env_key.lower():
+                    updated_config[key] = env_value.split(',')
                 else:
-                    updated_config[camel_case_key] = env_value
+                    updated_config[key] = env_value
             # apply to current configuration
         self._apply_config(updated_config.as_dict())
