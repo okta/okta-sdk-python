@@ -1,5 +1,8 @@
 # Okta Python SDK Changelog
 
+## v1.4.0
+- Update env variables to match conventions
+
 ## v1.3.2
 - Fix outdated date format which comes from header "Date"
 
