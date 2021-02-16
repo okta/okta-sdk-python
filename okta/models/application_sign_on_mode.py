@@ -38,3 +38,8 @@ class ApplicationSignOnMode(
     SAML_2_0 = "SAML_2_0", "saml_2_0"
     OPENID_CONNECT = "OPENID_CONNECT", "openid_connect"
     SAML_1_1 = "SAML_1_1", "saml_1_1"
+    CUSTOM = "CUSTOM", "custom"
+
+    @classmethod
+    def _missing_(cls, value):
+        return ApplicationSignOnMode.CUSTOM

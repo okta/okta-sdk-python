@@ -16,6 +16,13 @@ class {{pascalCase model.modelName}}(
     {{#each model.enum as |enum|}}
     {{{replaceColons (upperCase (snakeCase enum))}}} = "{{enum}}", "{{oppositeCase enum}}"
     {{/each}}
+    {{#if (eq model.modelName "ApplicationSignOnMode")}}
+    CUSTOM = "CUSTOM", "custom"
+
+    @classmethod
+    def _missing_(cls, value):
+        return ApplicationSignOnMode.CUSTOM
+    {{/if}}
 {{else}}
 
 {{#if (ne model.extends undefined)}}
