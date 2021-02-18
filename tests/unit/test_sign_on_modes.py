@@ -1,7 +1,5 @@
 import asyncio
 import copy
-import pytest
-from pytest_mock import mock
 
 from okta.client import Client
 from okta.models import Application, SamlApplication, ApplicationSignOnMode
@@ -198,12 +196,14 @@ def test_known_sign_on_mode():
     client._request_executor.set_response([response])
     event_loop = asyncio.get_event_loop()
     result, resp, err = event_loop.run_until_complete(client.list_applications())
+    assert type(result[0]) == SamlApplication
     assert result[0].as_dict() == EXPECTED_SAML_APP_AS_DICT
 
     # check get application
     client._request_executor.set_response(response)
     event_loop = asyncio.get_event_loop()
     result, resp, err = event_loop.run_until_complete(client.get_application("test_id"))
+    assert type(result) == SamlApplication
     assert result.as_dict() == EXPECTED_SAML_APP_AS_DICT
 
 
@@ -230,10 +230,16 @@ def test_unknown_sign_on_mode():
     client._request_executor.set_response([response])
     event_loop = asyncio.get_event_loop()
     result, resp, err = event_loop.run_until_complete(client.list_applications())
+    # verify if result fallbacks to generic Application
+    assert type(result[0]) != SamlApplication
+    assert type(result[0]) == Application
     assert result[0].as_dict() == expected
 
     # check get application
     client._request_executor.set_response(response)
     event_loop = asyncio.get_event_loop()
     result, resp, err = event_loop.run_until_complete(client.get_application("test_id"))
+    # verify if result fallbacks to generic Application
+    assert type(result) != SamlApplication
+    assert type(result) == Application
     assert result.as_dict() == expected
