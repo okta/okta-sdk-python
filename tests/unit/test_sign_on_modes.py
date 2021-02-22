@@ -243,3 +243,39 @@ def test_unknown_sign_on_mode():
     assert type(result) != SamlApplication
     assert type(result) == Application
     assert result.as_dict() == expected
+
+
+def test_no_sign_on_mode():
+    response = copy.deepcopy(SAML_APP_RESP_DICT)
+    response["signOnMode"] = None
+    expected = copy.deepcopy(EXPECTED_SAML_APP_AS_DICT)
+    expected.pop("signOnMode")
+    expected["settings"] = {
+        "app": {},
+        "notifications": {
+            "vpn": {"network": {"connection": "DISABLED", "exclude": [], "include": []}}
+        },
+    }
+
+    config = {
+        "orgUrl": "https://test_org.okta.com",
+        "token": "test_token",
+        "requestExecutor": MockRequestExecutor,
+    }
+    client = Client(config)
+
+    # check list applications
+    client._request_executor.set_response([response])
+    event_loop = asyncio.get_event_loop()
+    result, resp, err = event_loop.run_until_complete(client.list_applications())
+    assert type(result[0]) != SamlApplication
+    assert type(result[0]) == Application
+    assert result[0].as_dict() == expected
+
+    # check get application
+    client._request_executor.set_response(response)
+    event_loop = asyncio.get_event_loop()
+    result, resp, err = event_loop.run_until_complete(client.get_application("test_id"))
+    assert type(result) != SamlApplication
+    assert type(result) == Application
+    assert result.as_dict() == expected

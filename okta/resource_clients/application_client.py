@@ -145,8 +145,10 @@ class ApplicationClient(APIClient):
             return (None, response, error)
 
         try:
-            body = self.form_response_body(response.get_body())
-            result = find_app_model(body["signOnMode"], body["name"])(body)
+            body = response.get_body()
+            result = find_app_model(body["signOnMode"], body["name"])(
+                self.form_response_body(body)
+            )
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -222,8 +224,10 @@ class ApplicationClient(APIClient):
             return (None, response, error)
 
         try:
-            body = self.form_response_body(response.get_body())
-            result = find_app_model(body["signOnMode"], body["name"])(body)
+            body = response.get_body()
+            result = find_app_model(body["signOnMode"], body["name"])(
+                self.form_response_body(body)
+            )
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -268,8 +272,10 @@ class ApplicationClient(APIClient):
             return (None, response, error)
 
         try:
-            body = self.form_response_body(response.get_body())
-            result = find_app_model(body["signOnMode"], body["name"])(body)
+            body = response.get_body()
+            result = find_app_model(body["signOnMode"], body["name"])(
+                self.form_response_body(body)
+            )
         except Exception as error:
             return (None, response, error)
         return (result, response, None)

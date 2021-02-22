@@ -101,8 +101,10 @@
                 {{/if}}
         {{else}}
             {{#if (eq (pascalCase operation.responseModel) "Application")}}
-            body = self.form_response_body(response.get_body())
-            result = find_app_model(body["signOnMode"], body["name"])(body)
+            body = response.get_body()
+            result = find_app_model(body["signOnMode"], body["name"])(
+                self.form_response_body(body)
+            )
             {{else}}
             {{#if (eq (pascalCase operation.responseModel) "UserFactor")}}
             body = self.form_response_body(response.get_body())
