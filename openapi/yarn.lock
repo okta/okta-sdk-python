@@ -212,9 +212,9 @@
   "version" "4.5.0"
 
 "lodash@^4.17.15":
-  "integrity" "sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A=="
-  "resolved" "https://registry.npmjs.org/lodash/-/lodash-4.17.15.tgz"
-  "version" "4.17.15"
+  "integrity" "sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA=="
+  "resolved" "https://registry.npmjs.org/lodash/-/lodash-4.17.20.tgz"
+  "version" "4.17.20"
 
 "minimist@^1.2.5":
   "integrity" "sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw=="
@@ -234,9 +234,9 @@
   "version" "2.6.1"
 
 "node-fetch@^2.6.0":
-  "integrity" "sha512-8dG4H5ujfvFiqDmVu9fQ5bOHUC15JMjMY/Zumv26oOvvVJjM67KF8koCWIabKQ1GJIa9r2mMZscBq/TbdOcmNA=="
-  "resolved" "https://registry.npmjs.org/node-fetch/-/node-fetch-2.6.0.tgz"
-  "version" "2.6.0"
+  "integrity" "sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw=="
+  "resolved" "https://registry.npmjs.org/node-fetch/-/node-fetch-2.6.1.tgz"
+  "version" "2.6.1"
 
 "ono@^6.0.0":
   "integrity" "sha512-5rdYW/106kHqLeG22GE2MHKq+FlsxMERZev9DCzQX1zwkxnFwBivSn5i17a5O/rDmOJOdf4Wyt80UZljzx9+DA=="
