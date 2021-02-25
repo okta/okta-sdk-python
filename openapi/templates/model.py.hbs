@@ -17,11 +17,11 @@ class {{pascalCase model.modelName}}(
     {{{replaceColons (upperCase (snakeCase enum))}}} = "{{enum}}", "{{oppositeCase enum}}"
     {{/each}}
     {{#if (eq model.modelName "ApplicationSignOnMode")}}
-    CUSTOM = "CUSTOM", "custom"
+    SDK_UNKNOWN = "SDK_UNKNOWN", "sdk_unknown"
 
     @classmethod
     def _missing_(cls, value):
-        return ApplicationSignOnMode.CUSTOM
+        return ApplicationSignOnMode.SDK_UNKNOWN
     {{/if}}
 {{else}}
 
