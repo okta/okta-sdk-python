@@ -2,6 +2,31 @@
 {{> partials.copyrightHeader }}
 {{#if (ne model.enum undefined)}}
 
+{{#if (eq model.modelName "ApplicationSignOnMode")}}
+from aenum import Enum, extend_enum
+
+
+class {{pascalCase model.modelName}}(
+    {{model.type}},
+    Enum
+):
+    """
+    An enumeration class for {{pascalCase model.modelName}}.
+    """
+
+    {{#each model.enum as |enum|}}
+    {{{replaceColons (upperCase (snakeCase enum))}}} = "{{enum}}"
+    {{/each}}
+
+    @classmethod
+    def _missing_(cls, value):
+        value_upper_case = value.upper()
+        try:
+            return getattr(cls, value_upper_case)
+        except:
+            extend_enum(ApplicationSignOnMode, value_upper_case, value_upper_case)
+            return getattr(cls, value_upper_case)
+{{else}}
 from aenum import MultiValueEnum
 
 
@@ -16,13 +41,7 @@ class {{pascalCase model.modelName}}(
     {{#each model.enum as |enum|}}
     {{{replaceColons (upperCase (snakeCase enum))}}} = "{{enum}}", "{{oppositeCase enum}}"
     {{/each}}
-    {{#if (eq model.modelName "ApplicationSignOnMode")}}
-    CUSTOM = "CUSTOM", "custom"
-
-    @classmethod
-    def _missing_(cls, value):
-        return ApplicationSignOnMode.CUSTOM
-    {{/if}}
+{{/if}}
 {{else}}
 
 {{#if (ne model.extends undefined)}}
