@@ -219,6 +219,9 @@ class RequestExecutor:
         # Execute request
         _, res_details, resp_body, error = \
             await self._http_client.send_request(request)
+        # return immediately if request failed, i.e. resp_body - None
+        if resp_body is None:
+            return (None, None, None, error)
 
         check_429 = self.is_too_many_requests(res_details.status, resp_body)
         headers = res_details.headers
