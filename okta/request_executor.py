@@ -59,7 +59,8 @@ class RequestExecutor:
             # OAuth
             self._oauth = OAuth(self, self._config)
 
-        self._http_client = HTTPClient({
+        http_client_impl = http_client or HTTPClient
+        self._http_client = http_client_impl({
             'requestTimeout': self._request_timeout,
             'headers': self._default_headers,
             'proxy': self._config["client"]["proxy"] if "proxy"
