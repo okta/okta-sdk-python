@@ -1,5 +1,10 @@
 # Okta Python SDK Changelog
 
+## v1.4.1
+- Fix unknown signOnMode issue
+- Handle aiohttp errors
+- Fix unused custom HTTPClient implementation
+
 ## v1.4.0
 - Update env variables to match conventions
 
