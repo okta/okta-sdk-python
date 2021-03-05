@@ -211,7 +211,7 @@ def test_unknown_sign_on_mode():
     response = copy.deepcopy(SAML_APP_RESP_DICT)
     response["signOnMode"] = "UNKNOWN_SIGN_ON_MODE"
     expected = copy.deepcopy(EXPECTED_SAML_APP_AS_DICT)
-    expected["signOnMode"] = ApplicationSignOnMode.CUSTOM
+    expected["signOnMode"] = ApplicationSignOnMode("UNKNOWN_SIGN_ON_MODE")
     expected["settings"] = {
         "app": {},
         "notifications": {
