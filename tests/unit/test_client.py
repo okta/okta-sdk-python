@@ -15,6 +15,7 @@ from okta.error_messages import ERROR_MESSAGE_API_TOKEN_DEFAULT, \
     ERROR_MESSAGE_PROXY_INVALID_PORT
 from okta.constants import _GLOBAL_YAML_PATH, _LOCAL_YAML_PATH
 from okta.exceptions import HTTPException
+from okta.http_client import HTTPClient
 
 
 """
@@ -589,6 +590,14 @@ def test_constructor_invalid_port_number(port):
     with pytest.raises(ValueError) as exception_info:
         OktaClient(user_config=config)
         assert ERROR_MESSAGE_PROXY_INVALID_PORT in exception_info.value
+
+
+def test_constructor_custom_http_client_impl():
+    class CustomHTTPClient(HTTPClient):
+        pass
+    config = {'httpClient': CustomHTTPClient}
+    client = OktaClient(config)
+    assert isinstance(client._request_executor._http_client, CustomHTTPClient)
 
 
 def test_client_raise_exception():
