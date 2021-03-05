@@ -1,5 +1,8 @@
 import aiohttp
 import asyncio
+from aiohttp.client_reqrep import ConnectionKey
+from ssl import SSLCertVerificationError
+
 from okta.client import Client as OktaClient
 import pytest
 from okta.constants import FINDING_OKTA_DOMAIN
@@ -15,6 +18,7 @@ from okta.error_messages import ERROR_MESSAGE_API_TOKEN_DEFAULT, \
     ERROR_MESSAGE_PROXY_INVALID_PORT
 from okta.constants import _GLOBAL_YAML_PATH, _LOCAL_YAML_PATH
 from okta.exceptions import HTTPException
+from okta.http_client import HTTPClient
 
 
 """
@@ -591,6 +595,14 @@ def test_constructor_invalid_port_number(port):
         assert ERROR_MESSAGE_PROXY_INVALID_PORT in exception_info.value
 
 
+def test_constructor_custom_http_client_impl():
+    class CustomHTTPClient(HTTPClient):
+        pass
+    config = {'httpClient': CustomHTTPClient}
+    client = OktaClient(config)
+    assert isinstance(client._request_executor._http_client, CustomHTTPClient)
+
+
 def test_client_raise_exception():
     org_url = "https://test.okta.com"
     token = "TOKEN"
@@ -643,3 +655,41 @@ def test_client_custom_headers(monkeypatch, mocker):
     # verify custom headers are cleared
     client.clear_custom_headers()
     assert client.get_custom_headers() == {}
+
+
+def test_client_handle_aiohttp_error(monkeypatch, mocker):
+    org_url = "https://test.okta.com"
+    token = "TOKEN"
+    config = {'orgUrl': org_url, 'token': token}
+    client = OktaClient(config)
+
+    class MockHTTPRequest():
+        def __call__(self, **params):
+            raise aiohttp.ClientConnectorCertificateError(
+                ConnectionKey(host=org_url,
+                              port=443,
+                              is_ssl=True,
+                              ssl=None,
+                              proxy=None,
+                              proxy_auth=None,
+                              proxy_headers_hash=None),
+                SSLCertVerificationError(1,
+                                         '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: '
+                                         'unable to get local issuer certificate (_ssl.c:1123)'))
+
+        async def __aenter__(self):
+            return self
+
+        async def __aexit__(self, exc_type, exc, tb):
+            pass
+
+        @staticmethod
+        async def mock_response_text():
+            return '{"text": "mock response text"}'
+
+    mock_http_request = MockHTTPRequest()
+    monkeypatch.setattr(aiohttp, 'request', mock_http_request)
+    res, resp_body, error = asyncio.run(client.list_users())
+    assert res is None
+    assert resp_body is None
+    assert isinstance(error, aiohttp.ClientError)

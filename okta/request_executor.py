@@ -59,7 +59,8 @@ class RequestExecutor:
             # OAuth
             self._oauth = OAuth(self, self._config)
 
-        self._http_client = HTTPClient({
+        http_client_impl = http_client or HTTPClient
+        self._http_client = http_client_impl({
             'requestTimeout': self._request_timeout,
             'headers': self._default_headers,
             'proxy': self._config["client"]["proxy"] if "proxy"
@@ -219,6 +220,9 @@ class RequestExecutor:
         # Execute request
         _, res_details, resp_body, error = \
             await self._http_client.send_request(request)
+        # return immediately if request failed, i.e. resp_body - None
+        if resp_body is None:
+            return (None, None, None, error)
 
         check_429 = self.is_too_many_requests(res_details.status, resp_body)
         headers = res_details.headers
