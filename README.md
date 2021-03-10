@@ -16,6 +16,7 @@
 - [Usage Guide](#usage-guide)
 - [Exceptions](#exceptions)
 - [Pagination](#pagination)
+- [Logging](#logging)
 - [Configuration Reference](#configuration-reference)
 - [Rate Limiting](#rate-limiting)
 - [Building the SDK](#building-the-sdk)
@@ -768,6 +769,57 @@ async def main():
 loop = asyncio.get_event_loop()
 loop.run_until_complete(main())
 ```
+
+## Logging
+
+> Feature appears in version 1.5.0
+
+SDK v1.5.0 introduces logging for debug purposes.
+Logs are disabled by default, thus SDK behavior remains the same. Logging should be enabled explicitly via client configuration:
+
+```py
+from okta.client import Client as OktaClient
+
+
+config = {"logging": {"enabled": True}}
+client = OktaClient(config)
+```
+
+SDK utilizes standard python library `logging`. By default, log level INFO is set. You can set another log level via config:
+
+```py
+from okta.client import Client as OktaClient
+import logging
+
+config = {"logging": {"enabled": True, "logLevel": logging.DEBUG}}
+client = OktaClient(config)
+```
+
+**NOTE**: DO NOT SET DEBUG LEVEL IN PRODUCTION!
+
+Here's a complete example:
+```python
+from okta.client import Client as OktaClient
+import asyncio
+import logging
+
+async def main():
+    config = {"logging": {"enabled": True, "logLevel": logging.DEBUG}}
+    client = OktaClient(config)
+    users, resp, err = await client.list_users()
+    assert users is not None
+
+loop = asyncio.get_event_loop()
+loop.run_until_complete(main())
+```
+
+You should see in logs something like the following (some values redacted only for readme and willbe real in your case, thus do not use DEBUG level in production):
+```
+2021-03-10 16:42:53,665 - okta-sdk-python - http_client - DEBUG - Request: {'method': 'GET', 'headers': {'User-Agent': 'okta-sdk-python/1.5.0 python/3.8.2 Darwin/19.6.0', 'Accept': 'application/json', 'Authorization': 'SSWS TOKEN_REDACTED', 'Content-Type': 'application/json'}, 'url': 'https://ORG_REDACTED.okta.com/api/v1/users', 'data': {}}
+```
+
+Logging might log requests, few errors, cache manipulations.
+
 
 ## Configuration reference
 

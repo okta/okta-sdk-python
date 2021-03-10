@@ -1,11 +1,15 @@
 import aiohttp
 import asyncio
 import json
+import logging
 import os
 import xmltodict
 from okta.errors.http_error import HTTPError
 from okta.errors.okta_api_error import OktaAPIError
 from okta.exceptions import HTTPException, OktaAPIException
+
+
+logger = logging.getLogger('okta-sdk-python')
 
 
 class HTTPClient:
@@ -44,6 +48,7 @@ class HTTPClient:
             -- A tuple containing the request and response of the HTTP call
         """
         try:
+            logger.debug(f"Request: {request}")
             # Set headers
             self._default_headers.update(request["headers"])
             # Prepare request parameters
@@ -69,6 +74,7 @@ class HTTPClient:
                         None)
         except (aiohttp.ClientError, asyncio.TimeoutError) as error:
             # Return error if arises
+            logger.exception(error)
             return (None, None, None, error)
 
     @staticmethod
@@ -109,7 +115,9 @@ class HTTPClient:
             except Exception:
                 error = HTTPError(url, response_details, formatted_response)
                 if HTTPClient.raise_exception:
+                    logger.exception(formatted_response)
                     raise HTTPException(formatted_response)
+            logger.error(error)
             return (None, error)
 
     @staticmethod

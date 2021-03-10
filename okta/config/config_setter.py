@@ -1,4 +1,5 @@
 import os
+import logging
 import yaml
 from okta.constants import _GLOBAL_YAML_PATH, _LOCAL_YAML_PATH
 from flatdict import FlatDict
@@ -24,6 +25,9 @@ class ConfigSetter():
                 "enabled": '',
                 "defaultTti": '',
                 "defaultTtl": ''
+            },
+            "logging": {
+                "enabled": '',
             },
             "proxy": {
                 "port": "",
@@ -102,6 +106,10 @@ class ConfigSetter():
             "enabled": False,
             "defaultTtl": 300,
             "defaultTti": 300
+        }
+        self._config["client"]["logging"] = {
+            "enabled": False,
+            "logLevel": logging.INFO
         }
         self._config["client"]["userAgent"] = ""
         self._config["client"]["requestTimeout"] = 0

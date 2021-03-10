@@ -17,11 +17,14 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
+import logging
+
 from okta.config.config_setter import ConfigSetter
 from okta.config.config_validator import ConfigValidator
 from okta.request_executor import RequestExecutor
 from okta.cache.no_op_cache import NoOpCache
 from okta.cache.okta_cache import OktaCache
+from okta.logger import setup_logging
 from okta.resource_clients.application_client\
     import ApplicationClient
 from okta.resource_clients.authorization_server_client\
@@ -120,6 +123,12 @@ class Client(
             self._client_id = self._config["client"]["clientId"]
             self._scopes = self._config["client"]["scopes"]
             self._private_key = self._config["client"]["privateKey"]
+
+        setup_logging(log_level=self._config["client"]["logging"]["logLevel"])
+        # Check if logging should be enabled
+        if self._config["client"]["logging"]["enabled"] is True:
+            logger = logging.getLogger('okta-sdk-python')
+            logger.disabled = False
     """
     Getters
     """
