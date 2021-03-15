@@ -813,12 +813,9 @@ loop = asyncio.get_event_loop()
 loop.run_until_complete(main())
 ```
 
-You should see in logs something like the following (some values redacted only for readme and willbe real in your case, thus do not use DEBUG level in production):
-```
-2021-03-10 16:42:53,665 - okta-sdk-python - http_client - DEBUG - Request: {'method': 'GET', 'headers': {'User-Agent': 'okta-sdk-python/1.5.0 python/3.8.2 Darwin/19.6.0', 'Accept': 'application/json', 'Authorization': 'SSWS TOKEN_REDACTED', 'Content-Type': 'application/json'}, 'url': 'https://ORG_REDACTED.okta.com/api/v1/users', 'data': {}}
-```
+You should now see logs in your console. Actual API Tokens will be logged to the console, so use caution and never use `DEBUG` level logging in production.
 
-Logging might log requests, few errors, cache manipulations.
+What it being logged: requests, http errors, caching responses.
 
 
 ## Configuration reference
