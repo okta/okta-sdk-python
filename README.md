@@ -16,6 +16,7 @@
 - [Usage Guide](#usage-guide)
 - [Exceptions](#exceptions)
 - [Pagination](#pagination)
+- [Logging](#logging)
 - [Configuration Reference](#configuration-reference)
 - [Rate Limiting](#rate-limiting)
 - [Building the SDK](#building-the-sdk)
@@ -770,6 +771,54 @@ async def main():
 loop = asyncio.get_event_loop()
 loop.run_until_complete(main())
 ```
+
+## Logging
+
+> Feature appears in version 1.5.0
+
+SDK v1.5.0 introduces logging for debug purposes.
+Logs are disabled by default, thus SDK behavior remains the same. Logging should be enabled explicitly via client configuration:
+
+```py
+from okta.client import Client as OktaClient
+
+
+config = {"logging": {"enabled": True}}
+client = OktaClient(config)
+```
+
+SDK utilizes standard python library `logging`. By default, log level INFO is set. You can set another log level via config:
+
+```py
+from okta.client import Client as OktaClient
+import logging
+
+config = {"logging": {"enabled": True, "logLevel": logging.DEBUG}}
+client = OktaClient(config)
+```
+
+**NOTE**: DO NOT SET DEBUG LEVEL IN PRODUCTION!
+
+Here's a complete example:
+```python
+from okta.client import Client as OktaClient
+import asyncio
+import logging
+
+async def main():
+    config = {"logging": {"enabled": True, "logLevel": logging.DEBUG}}
+    client = OktaClient(config)
+    users, resp, err = await client.list_users()
+    assert users is not None
+
+loop = asyncio.get_event_loop()
+loop.run_until_complete(main())
+```
+
+You should now see logs in your console. Actual API Tokens will be logged to the console, so use caution and never use `DEBUG` level logging in production.
+
+What it being logged: requests, http errors, caching responses.
+
 
 ## Configuration reference
 

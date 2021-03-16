@@ -1,5 +1,6 @@
 import aiohttp
 import asyncio
+import logging
 from aiohttp.client_reqrep import ConnectionKey
 from ssl import SSLCertVerificationError
 
@@ -603,6 +604,15 @@ def test_constructor_custom_http_client_impl():
     assert isinstance(client._request_executor._http_client, CustomHTTPClient)
 
 
+def test_constructor_client_logging():
+    logger = logging.getLogger('okta-sdk-python')
+    assert logger.disabled
+    config = {'logging': {"enabled": True, "logLevel": logging.DEBUG}}
+    client = OktaClient(config)
+    assert not logger.disabled
+    assert logger.level == logging.DEBUG
+
+
 def test_client_raise_exception():
     org_url = "https://test.okta.com"
     token = "TOKEN"
@@ -644,7 +654,7 @@ def test_client_custom_headers(monkeypatch, mocker):
 
         @staticmethod
         async def mock_response_text():
-            return '{"text": "mock response text"}'
+            return '[{"text": "mock response text"}]'
 
     mock_http_request = MockHTTPRequest()
     monkeypatch.setattr(aiohttp, 'request', mock_http_request)
@@ -685,7 +695,7 @@ def test_client_handle_aiohttp_error(monkeypatch, mocker):
 
         @staticmethod
         async def mock_response_text():
-            return '{"text": "mock response text"}'
+            return '[{"text": "mock response text"}]'
 
     mock_http_request = MockHTTPRequest()
     monkeypatch.setattr(aiohttp, 'request', mock_http_request)
@@ -693,3 +703,136 @@ def test_client_handle_aiohttp_error(monkeypatch, mocker):
     assert res is None
     assert resp_body is None
     assert isinstance(error, aiohttp.ClientError)
+
+
+def test_client_log_debug(monkeypatch, caplog):
+    org_url = "https://test.okta.com"
+    token = "TOKEN"
+    config = {'orgUrl': org_url, 'token': token,
+              'logging': {'enabled': True, 'logLevel': logging.DEBUG}}
+    client = OktaClient(config)
+
+    class MockHTTPRequest():
+        def __call__(self, **params):
+            self.request_info = params
+            self.headers = params['headers']
+            self.url = params['url']
+            self.content_type = 'application/json'
+            self.links = ''
+            self.text = MockHTTPRequest.mock_response_text
+            self.status = 200
+            return self
+
+        async def __aenter__(self):
+            return self
+
+        async def __aexit__(self, exc_type, exc, tb):
+            pass
+
+        @staticmethod
+        async def mock_response_text():
+            return '[{"embedded": null,' \
+                   '"links": {"self": {"href": "https://test.okta.com/v1/users/test_id"}},' \
+                   '"activated": "2021-01-01T00:00:00.000Z",' \
+                   '"created": "2021-01-01T00:00:00.000Z",' \
+                   '"credentials": null,' \
+                   '"id": "test_id",' \
+                   '"last_login": null,' \
+                   '"profile": {"name": "test_name"},' \
+                   '"status": null,' \
+                   '"status_changed": null,' \
+                   '"transitioning_to_status": null,' \
+                   '"type": null}]'
+
+    mock_http_request = MockHTTPRequest()
+    monkeypatch.setattr(aiohttp, 'request', mock_http_request)
+    with caplog.at_level(logging.DEBUG):
+        res, resp_body, error = asyncio.run(client.list_users())
+        assert 'okta-sdk-python' in caplog.text
+        assert 'DEBUG' in caplog.text
+        assert "'method': 'GET'" in caplog.text
+        assert "'url': 'https://test.okta.com/api/v1/users'" in caplog.text
+
+
+def test_client_log_info(monkeypatch, caplog):
+    org_url = "https://test.okta.com"
+    token = "TOKEN"
+    config = {'orgUrl': org_url, 'token': token,
+              'logging': {'enabled': True, 'logLevel': logging.INFO}}
+    client = OktaClient(config)
+
+    class MockHTTPRequest():
+        def __call__(self, **params):
+            self.request_info = params
+            self.headers = params['headers']
+            self.url = params['url']
+            self.content_type = 'application/json'
+            self.links = ''
+            self.text = MockHTTPRequest.mock_response_text
+            self.status = 200
+            return self
+
+        async def __aenter__(self):
+            return self
+
+        async def __aexit__(self, exc_type, exc, tb):
+            pass
+
+        @staticmethod
+        async def mock_response_text():
+            return '[{"embedded": null,' \
+                   '"links": {"self": {"href": "https://test.okta.com/v1/users/test_id"}},' \
+                   '"activated": "2021-01-01T00:00:00.000Z",' \
+                   '"created": "2021-01-01T00:00:00.000Z",' \
+                   '"credentials": null,' \
+                   '"id": "test_id",' \
+                   '"last_login": null,' \
+                   '"profile": {"name": "test_name"},' \
+                   '"status": null,' \
+                   '"status_changed": null,' \
+                   '"transitioning_to_status": null,' \
+                   '"type": null}]'
+
+    mock_http_request = MockHTTPRequest()
+    monkeypatch.setattr(aiohttp, 'request', mock_http_request)
+    with caplog.at_level(logging.INFO):
+        res, resp_body, error = asyncio.run(client.list_users())
+        assert caplog.text == ''
+
+
+def test_client_log_exception(monkeypatch, caplog):
+    org_url = "https://test.okta.com"
+    token = "TOKEN"
+    config = {'orgUrl': org_url, 'token': token,
+              'logging': {'enabled': True, 'logLevel': logging.DEBUG}}
+    client = OktaClient(config)
+
+    class MockHTTPRequest():
+        def __call__(self, **params):
+            raise aiohttp.ClientConnectorCertificateError(
+                ConnectionKey(host=org_url,
+                              port=443,
+                              is_ssl=True,
+                              ssl=None,
+                              proxy=None,
+                              proxy_auth=None,
+                              proxy_headers_hash=None),
+                SSLCertVerificationError(1,
+                                         '[SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: '
+                                         'unable to get local issuer certificate (_ssl.c:1123)'))
+
+        async def __aenter__(self):
+            return self
+
+        async def __aexit__(self, exc_type, exc, tb):
+            pass
+
+        @staticmethod
+        async def mock_response_text():
+            return '[{"text": "mock response text"}]'
+
+    mock_http_request = MockHTTPRequest()
+    monkeypatch.setattr(aiohttp, 'request', mock_http_request)
+    with caplog.at_level(logging.DEBUG):
+        res, resp_body, error = asyncio.run(client.list_users())
+        assert 'Cannot connect to host https://test.okta.com' in caplog.text

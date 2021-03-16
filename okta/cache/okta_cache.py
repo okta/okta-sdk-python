@@ -1,5 +1,9 @@
 from okta.cache.cache import Cache
+import logging
 import time
+
+
+logger = logging.getLogger('okta-sdk-python')
 
 
 class OktaCache(Cache):
@@ -41,6 +45,8 @@ class OktaCache(Cache):
             entry["tti"] = now + self._time_to_idle
             # Return desired value and update cache
             self._clean_cache()
+            logger.info(f'Got value from cache for key "{key}".')
+            logger.debug(f'Cached value for key {key}: {entry["value"]}')
             return entry["value"]
 
         # Return None if key isn't in cache and update cache
@@ -78,6 +84,8 @@ class OktaCache(Cache):
                 'tti': now + self._time_to_idle,
                 'ttl': now + self._time_to_live
             }
+            logger.info(f'Added to cache value for key "{key}".')
+            logger.debug(f'Cached value for key {key}: {value}.')
         # Update cache
         self._clean_cache()
 
@@ -92,12 +100,14 @@ class OktaCache(Cache):
         if key in self._store:
             # Delete entry
             del self._store[key]
+            logger.info(f'Removed value from cache for key "{key}".')
 
     def clear(self):
         """
         Clear the cache.
         """
         self._store.clear()
+        logger.info('Cleared the cache.')
 
     def _clean_cache(self):
         """
