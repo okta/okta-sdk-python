@@ -1,5 +1,10 @@
 # Okta Python SDK Changelog
 
+## v1.5.0
+- Fix return access_token when it already exists.
+- Small README updates.
+- Add logging facility for easier debugging.
+
 ## v1.4.1
 - Fix unknown signOnMode issue
 - Handle aiohttp errors
