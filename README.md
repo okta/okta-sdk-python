@@ -420,8 +420,8 @@ async def main():
         except:
             print('User has no customAttr')
 
-
-asyncio.run(main())
+loop = asyncio.get_event_loop()
+loop.run_until_complete(main())
 ```
 Output should look like the following (removed pre-existing users from output):
 ```sh
@@ -460,7 +460,8 @@ async def main():
     print(client.get_custom_headers())
 
 
-asyncio.run(main())
+loop = asyncio.get_event_loop()
+loop.run_until_complete(main())
 ```
 
 Note, that custom headers will be overwritten with default headers with the same name.
@@ -704,7 +705,8 @@ async def main():
         print(err)
 
 
-asyncio.run(main())
+loop = asyncio.get_event_loop()
+loop.run_until_complete(main())
 ```
 Result should look like:
 ```py

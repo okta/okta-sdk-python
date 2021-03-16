@@ -37,7 +37,7 @@ class OAuth:
         """
         # Return token if already generated
         if self._access_token:
-            return self._access_token
+            return (self._access_token, None)
 
         # Otherwise create new one
         # Get JWT and create parameters for new Oauth token
