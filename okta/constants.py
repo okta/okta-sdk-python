@@ -58,12 +58,12 @@ def find_app_model(sign_on_mode, template_name):
 OKTA_FACTOR_TYPE_TO_FACTOR = {
     FT.CALL: models.CallUserFactor,
     FT.EMAIL: models.EmailUserFactor,
+    FT.TOKEN_HOTP: models.CustomHotpUserFactor,
     FT.PUSH: models.PushUserFactor,
     FT.QUESTION: models.SecurityQuestionUserFactor,
     FT.SMS: models.SmsUserFactor,
     FT.TOKEN: models.TokenUserFactor,
     FT.TOKEN_HARDWARE: models.HardwareUserFactor,
-    FT.TOKEN_HOTP: models.CustomHotpUserFactor,
     FT.TOKEN_SOFTWARE_TOTP: models.TotpUserFactor,
     FT.U_2_F: models.U2FUserFactor,
     FT.WEB: models.WebUserFactor,

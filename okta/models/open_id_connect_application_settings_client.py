@@ -26,6 +26,8 @@ from okta.models import open_id_connect_application_consent_method\
     as open_id_connect_application_consent_method
 from okta.models import o_auth_grant_type\
     as o_auth_grant_type
+from okta.models import open_id_connect_application_idp_initiated_login\
+    as open_id_connect_application_idp_initiated_login
 from okta.models import open_id_connect_application_issuer_mode\
     as open_id_connect_application_issuer_mode
 from okta.models import open_id_connect_application_settings_client_keys\
@@ -77,6 +79,18 @@ class OpenIdConnectApplicationSettingsClient(
                     in config else [],
                 o_auth_grant_type.OAuthGrantType
             )
+            if "idpInitiatedLogin" in config:
+                if isinstance(config["idpInitiatedLogin"],
+                              open_id_connect_application_idp_initiated_login.OpenIdConnectApplicationIdpInitiatedLogin):
+                    self.idp_initiated_login = config["idpInitiatedLogin"]
+                elif config["idpInitiatedLogin"] is not None:
+                    self.idp_initiated_login = open_id_connect_application_idp_initiated_login.OpenIdConnectApplicationIdpInitiatedLogin(
+                        config["idpInitiatedLogin"]
+                    )
+                else:
+                    self.idp_initiated_login = None
+            else:
+                self.idp_initiated_login = None
             self.initiate_login_uri = config["initiateLoginUri"]\
                 if "initiateLoginUri" in config else None
             if "issuerMode" in config:
@@ -141,6 +155,7 @@ class OpenIdConnectApplicationSettingsClient(
             self.client_uri = None
             self.consent_method = None
             self.grant_types = []
+            self.idp_initiated_login = None
             self.initiate_login_uri = None
             self.issuer_mode = None
             self.jwks = None
@@ -159,6 +174,7 @@ class OpenIdConnectApplicationSettingsClient(
             "client_uri": self.client_uri,
             "consent_method": self.consent_method,
             "grant_types": self.grant_types,
+            "idp_initiated_login": self.idp_initiated_login,
             "initiate_login_uri": self.initiate_login_uri,
             "issuer_mode": self.issuer_mode,
             "jwks": self.jwks,

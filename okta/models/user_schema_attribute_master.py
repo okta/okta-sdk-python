@@ -18,21 +18,28 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from aenum import MultiValueEnum
+from okta.okta_object import OktaObject
 
 
-class LogCredentialProvider(
-    str,
-    MultiValueEnum
+class UserSchemaAttributeMaster(
+    OktaObject
 ):
     """
-    An enumeration class for LogCredentialProvider.
+    A class for UserSchemaAttributeMaster objects.
     """
 
-    OKTA_AUTHENTICATION_PROVIDER = "OKTA_AUTHENTICATION_PROVIDER", "okta_authentication_provider"
-    OKTA_CREDENTIAL_PROVIDER = "OKTA_CREDENTIAL_PROVIDER", "okta_credential_provider"
-    RSA = "RSA", "rsa"
-    SYMANTEC = "SYMANTEC", "symantec"
-    GOOGLE = "GOOGLE", "google"
-    DUO = "DUO", "duo"
-    YUBIKEY = "YUBIKEY", "yubikey"
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config:
+            self.type = config["type"]\
+                if "type" in config else None
+        else:
+            self.type = None
+
+    def request_format(self):
+        parent_req_format = super().request_format()
+        current_obj_format = {
+            "type": self.type
+        }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

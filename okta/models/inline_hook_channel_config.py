@@ -53,11 +53,14 @@ class InlineHookChannelConfig(
                     in config else [],
                 inline_hook_channel_config_headers.InlineHookChannelConfigHeaders
             )
+            self.method = config["method"]\
+                if "method" in config else None
             self.uri = config["uri"]\
                 if "uri" in config else None
         else:
             self.auth_scheme = None
             self.headers = []
+            self.method = None
             self.uri = None
 
     def request_format(self):
@@ -65,6 +68,7 @@ class InlineHookChannelConfig(
         current_obj_format = {
             "authScheme": self.auth_scheme,
             "headers": self.headers,
+            "method": self.method,
             "uri": self.uri
         }
         parent_req_format.update(current_obj_format)

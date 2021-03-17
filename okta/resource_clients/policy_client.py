@@ -18,6 +18,8 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from urllib.parse import urlencode
+from okta.models.authorization_server_policy\
+    import AuthorizationServerPolicy
 from okta.models.policy\
     import Policy
 from okta.models.policy_rule\
@@ -47,7 +49,7 @@ class PolicyClient(APIClient):
             [query_params.status] {str}
             [query_params.expand] {str}
         Returns:
-            list: Collection of Policy instances.
+            list: Collection of AuthorizationServerPolicy instances.
         """
         http_method = "get".upper()
         api_url = format_url(f"""
@@ -69,7 +71,7 @@ class PolicyClient(APIClient):
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request, Policy)
+            .execute(request, AuthorizationServerPolicy)
 
         if error:
             return (None, response, error)
@@ -77,11 +79,9 @@ class PolicyClient(APIClient):
         try:
             result = []
             for item in response.get_body():
-                result.append(
-                    find_policy_model(item["type"])(
-                        self.form_response_body(item)
-                        )
-                    )
+                result.append(AuthorizationServerPolicy(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
