@@ -27,4 +27,4 @@ jobs:
       name: "Flake8 Check"
       script: 
         - echo "Code Style check..."
-        - "flake8 okta/"
+        - "flake8 --extend-ignore=E501 okta/"
