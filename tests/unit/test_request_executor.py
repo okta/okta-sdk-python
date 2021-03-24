@@ -6,6 +6,7 @@ import time
 from http import HTTPStatus
 from multidict import MultiDict
 from okta.client import Client as OktaClient
+from okta.request_executor import RequestExecutor
 
 
 def test_retry_count_header(monkeypatch):
@@ -66,3 +67,17 @@ def test_retry_count_header(monkeypatch):
     res, resp_body, error = asyncio.run(client.list_users())
     # Check request was retried max times and header 'X-Okta-Retry-Count' was set properly
     assert mock_http_request.request_info['headers'].get('X-Okta-Retry-Count') == '2'
+
+
+def test_is_retryable_status():
+    org_url = "https://test.okta.com"
+    token = "TOKEN"
+    config = {'client': {'orgUrl': org_url,
+                         'token': token,
+                         'rateLimit': {},
+                         'authorizationMode': None}}
+    req_exec = RequestExecutor(config=config, cache=None)
+    assert req_exec.is_retryable_status(HTTPStatus.TOO_MANY_REQUESTS)
+    assert req_exec.is_retryable_status(HTTPStatus.SERVICE_UNAVAILABLE)
+    assert req_exec.is_retryable_status(HTTPStatus.GATEWAY_TIMEOUT)
+    assert not req_exec.is_retryable_status(HTTPStatus.FORBIDDEN)
