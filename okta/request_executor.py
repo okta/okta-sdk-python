@@ -220,19 +220,21 @@ class RequestExecutor:
         # Execute request
         _, res_details, resp_body, error = \
             await self._http_client.send_request(request)
-        # return immediately if request failed, i.e. resp_body - None
-        if resp_body is None:
+        # return immediately if request failed to launch (e.g. network is down, thus res_details is None)
+        if res_details is None:
             return (None, None, None, error)
 
-        check_429 = self.is_too_many_requests(res_details.status, resp_body)
         headers = res_details.headers
 
-        if attempts < max_retries and (error or check_429):
+        if attempts < max_retries and self.is_retryable_status(res_details.status):
             date_time = headers.get("Date", "")
             if date_time:
                 date_time = convert_date_time_to_seconds(date_time)
             retry_limit_reset_headers = list(map(float, headers.getall(
                 "X-Rate-Limit-Reset", [])))
+            # header might be in lowercase, so check this too
+            retry_limit_reset_headers.extend(list(map(float, headers.getall(
+                "x-rate-limit-reset", []))))
             retry_limit_reset = min(retry_limit_reset_headers) if len(
                 retry_limit_reset_headers) > 0 else None
             if not date_time or not retry_limit_reset:
@@ -241,6 +243,7 @@ class RequestExecutor:
                             ERROR_MESSAGE_429_MISSING_DATE_X_RESET
                         ))
 
+            check_429 = self.is_too_many_requests(res_details.status, resp_body)
             if check_429:
                 # backoff
                 backoff_seconds = self.calculate_backoff(
@@ -256,7 +259,7 @@ class RequestExecutor:
                 {
                     RequestExecutor.RETRY_FOR_HEADER: headers.get(
                         "X-Okta-Request-Id", ""),
-                    RequestExecutor.RETRY_COUNT_HEADER: attempts
+                    RequestExecutor.RETRY_COUNT_HEADER: str(attempts)
                 }
             )
 
@@ -267,6 +270,16 @@ class RequestExecutor:
                 return (None, res_details, resp_body, error)
 
         return (request, res_details, resp_body, error)
+
+    def is_retryable_status(self, status):
+        """
+        Checks if HTTP status is retryable.
+
+        Retryable statuses: 429, 503, 504
+        """
+        return status is not None and status in (HTTPStatus.TOO_MANY_REQUESTS,
+                                                 HTTPStatus.SERVICE_UNAVAILABLE,
+                                                 HTTPStatus.GATEWAY_TIMEOUT)
 
     def is_too_many_requests(self, status, response):
         """
