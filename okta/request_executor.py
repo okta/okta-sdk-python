@@ -233,6 +233,9 @@ class RequestExecutor:
                 date_time = convert_date_time_to_seconds(date_time)
             retry_limit_reset_headers = list(map(float, headers.getall(
                 "X-Rate-Limit-Reset", [])))
+            # header might be in lowercase, so check this too
+            retry_limit_reset_headers.extend(list(map(float, headers.getall(
+                "x-rate-limit-reset", []))))
             retry_limit_reset = min(retry_limit_reset_headers) if len(
                 retry_limit_reset_headers) > 0 else None
             if not date_time or not retry_limit_reset:
@@ -256,7 +259,7 @@ class RequestExecutor:
                 {
                     RequestExecutor.RETRY_FOR_HEADER: headers.get(
                         "X-Okta-Request-Id", ""),
-                    RequestExecutor.RETRY_COUNT_HEADER: attempts
+                    RequestExecutor.RETRY_COUNT_HEADER: str(attempts)
                 }
             )
 
