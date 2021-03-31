@@ -7,6 +7,10 @@ from okta.utils import convert_date_time_to_seconds
 import time
 from http import HTTPStatus
 import json
+import logging
+
+
+logger = logging.getLogger('okta-sdk-python')
 
 
 class RequestExecutor:
@@ -248,6 +252,9 @@ class RequestExecutor:
                 # backoff
                 backoff_seconds = self.calculate_backoff(
                     retry_limit_reset, date_time)
+                logger.info(f'Hit rate limit. Retry request in {backoff_seconds} seconds.')
+                logger.debug(f'Value of retry_limit_reset: {retry_limit_reset}')
+                logger.debug(f'Value of date_time: {date_time}')
                 self.pause_for_backoff(backoff_seconds)
                 if (current_req_start_time + backoff_seconds)\
                         - request_start_time > req_timeout and req_timeout > 0:
