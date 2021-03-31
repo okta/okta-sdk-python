@@ -1,5 +1,10 @@
 # Okta Python SDK Changelog
 
+## v1.5.1
+- Fix request headers serializing.
+- Fix retry logic.
+- Log wait time when hit rate limit.
+
 ## v1.5.0
 - Fix return access_token when it already exists.
 - Small README updates.
