@@ -1,0 +1,479 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      Content-Type:
+      - application/json
+      User-Agent:
+      - okta-sdk-python/1.5.1 python/3.8.2 Darwin/19.6.0
+    method: GET
+    uri: https://test.okta.com/api/v1/meta/schemas/user/default
+  response:
+    body:
+      string: '{"id":"https://test.okta.com/meta/schemas/user/default","$schema":"http://json-schema.org/draft-04/schema#","name":"user","title":"User","description":"Okta
+        user profile template with default permission settings","lastUpdated":"2021-04-05T15:07:31.000Z","created":"2020-10-11T11:35:22.000Z","definitions":{"custom":{"id":"#custom","type":"object","properties":{"customAttr":{"title":"Custom
+        Attribute","description":"Custom attribute for testing purposes","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"badgeNumber":{"title":"Badge
+        Number","description":"","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"some_snake_case_attr":{"title":"some_snake_case_attr","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"someSnakeCaseAttr":{"title":"some_snake_case_attr","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]}},"required":[]},"base":{"id":"#base","type":"object","properties":{"login":{"title":"Username","type":"string","required":true,"mutability":"READ_WRITE","scope":"NONE","minLength":5,"maxLength":100,"permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"firstName":{"title":"First
+        name","type":"string","required":true,"mutability":"READ_WRITE","scope":"NONE","minLength":1,"maxLength":50,"permissions":[{"principal":"SELF","action":"READ_WRITE"}]},"lastName":{"title":"Last
+        name","type":"string","required":true,"mutability":"READ_WRITE","scope":"NONE","minLength":1,"maxLength":50,"permissions":[{"principal":"SELF","action":"READ_WRITE"}]},"middleName":{"title":"Middle
+        name","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"honorificPrefix":{"title":"Honorific
+        prefix","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"honorificSuffix":{"title":"Honorific
+        suffix","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"email":{"title":"Primary
+        email","type":"string","required":true,"format":"email","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_WRITE"}]},"title":{"title":"Title","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"displayName":{"title":"Display
+        name","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"nickName":{"title":"Nickname","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"profileUrl":{"title":"Profile
+        Url","type":"string","format":"uri","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"secondEmail":{"title":"Secondary
+        email","type":"string","format":"email","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_WRITE"}]},"mobilePhone":{"title":"Mobile
+        phone","type":"string","mutability":"READ_WRITE","scope":"NONE","maxLength":100,"permissions":[{"principal":"SELF","action":"READ_WRITE"}]},"primaryPhone":{"title":"Primary
+        phone","type":"string","mutability":"READ_WRITE","scope":"NONE","maxLength":100,"permissions":[{"principal":"SELF","action":"HIDE"}]},"streetAddress":{"title":"Street
+        address","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"HIDE"}]},"city":{"title":"City","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"HIDE"}]},"state":{"title":"State","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"HIDE"}]},"zipCode":{"title":"Zip
+        code","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"HIDE"}]},"countryCode":{"title":"Country
+        code","type":"string","format":"country-code","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"HIDE"}]},"postalAddress":{"title":"Postal
+        Address","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"HIDE"}]},"preferredLanguage":{"title":"Preferred
+        language","type":"string","format":"language-code","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"locale":{"title":"Locale","type":"string","format":"locale","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"timezone":{"title":"Time
+        zone","type":"string","format":"timezone","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"userType":{"title":"User
+        type","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"employeeNumber":{"title":"Employee
+        number","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"costCenter":{"title":"Cost
+        center","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"organization":{"title":"Organization","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"division":{"title":"Division","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"department":{"title":"Department","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"managerId":{"title":"ManagerId","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"manager":{"title":"Manager","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]}},"required":["login","firstName","lastName","email"]}},"type":"object","properties":{"profile":{"allOf":[{"$ref":"#/definitions/custom"},{"$ref":"#/definitions/base"}]}},"_links":{"self":{"rel":"self","href":"https://test.okta.com/api/v1/meta/schemas/user/osc8hu2tnV8drfqhC5d5","method":"GET"},"type":{"rel":"type","href":"https://test.okta.com/api/v1/meta/types/user/oty8hu2tnV8drfqhC5d5","method":"GET"}}}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 05 Apr 2021 15:10:33 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Public-Key-Pins-Report-Only:
+      - pin-sha256="r5EfzZxQVvQpKo3AgYRaT7X2bDO/kj3ACwmxfdT2zt8="; pin-sha256="MaqlcUgk2mvY/RFSGeSwBRkI+rZ6/dxe/DuQfBT/vnQ=";
+        pin-sha256="72G5IEvDEWn+EThf3qjR7/bQSWaS2ZSLqolhnO6iyJI="; pin-sha256="rrV6CLCCvqnk89gWibYT0JO6fNQ8cCit7GGoiVTjCOg=";
+        max-age=60; report-uri="https://okta.report-uri.com/r/default/hpkp/reportOnly"
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
+      - JSESSIONID=FABCD2536B77EE2E34A36FC89040D82A; Path=/; Secure; HttpOnly
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      content-security-policy-report-only: 'default-src ''self'' *.oktacdn.com test.okta.com
+        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
+        connect-src ''self'' *.oktacdn.com *.mixpanel.com *.mapbox.com app.pendo.io
+        data.pendo.io pendo-static-5634101834153984.storage.googleapis.com test.okta.com
+        test-admin.okta.com https://oinmanager.okta.com data: *.zscloud.net *.zscalerbeta.net
+        *.zscaler.net *.zscalertwo.net *.zscalerthree.net; script-src ''unsafe-inline''
+        ''unsafe-eval'' ''self'' *.oktacdn.com *.zscloud.net *.zscalerbeta.net *.zscaler.net
+        *.zscalertwo.net *.zscalerthree.net; style-src ''unsafe-inline'' ''self''
+        *.oktacdn.com app.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
+        frame-src ''self'' login.okta.com test.okta.com test-admin.okta.com *.zscloud.net
+        *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net; img-src
+        ''self'' *.oktacdn.com test.okta.com *.tiles.mapbox.com *.mapbox.com app.pendo.io
+        data.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        data: blob: *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net
+        *.zscalerthree.net; font-src data: ''self'' *.oktacdn.com fonts.gstatic.com
+        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net'
+      expect-ct:
+      - report-uri="https://oktaexpectct.report-uri.com/r/t/ct/reportOnly", max-age=0
+      p3p:
+      - CP="HONK"
+      x-content-type-options:
+      - nosniff
+      x-okta-request-id:
+      - YGsoaYxBnMIKos4e52ZeBgAADW4
+      x-rate-limit-limit:
+      - '1000'
+      x-rate-limit-remaining:
+      - '998'
+      x-rate-limit-reset:
+      - '1617635492'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://test.okta.com/api/v1/meta/schemas/user/default
+- request:
+    body: '{"$schema": "http://json-schema.org/draft-04/schema#", "_links": {"self":
+      {"rel": "self", "href": "https://dev-4942226.okta.com/api/v1/meta/schemas/user/osc8hu2tnV8drfqhC5d5",
+      "method": "GET"}, "type": {"rel": "type", "href": "https://dev-4942226.okta.com/api/v1/meta/types/user/oty8hu2tnV8drfqhC5d5",
+      "method": "GET"}}, "created": "2020-10-11T11:35:22.000Z", "definitions": {"base":
+      {"id": "#base", "properties": {"city": {"mutability": "READ_WRITE", "permissions":
+      [{"action": "HIDE", "principal": "SELF"}], "scope": "NONE", "title": "City",
+      "type": "string"}, "costCenter": {"mutability": "READ_WRITE", "permissions":
+      [{"action": "READ_ONLY", "principal": "SELF"}], "scope": "NONE", "title": "Cost
+      center", "type": "string"}, "countryCode": {"mutability": "READ_WRITE", "permissions":
+      [{"action": "HIDE", "principal": "SELF"}], "scope": "NONE", "title": "Country
+      code", "type": "string"}, "department": {"mutability": "READ_WRITE", "permissions":
+      [{"action": "READ_ONLY", "principal": "SELF"}], "scope": "NONE", "title": "Department",
+      "type": "string"}, "displayName": {"mutability": "READ_WRITE", "permissions":
+      [{"action": "READ_ONLY", "principal": "SELF"}], "scope": "NONE", "title": "Display
+      name", "type": "string"}, "division": {"mutability": "READ_WRITE", "permissions":
+      [{"action": "READ_ONLY", "principal": "SELF"}], "scope": "NONE", "title": "Division",
+      "type": "string"}, "email": {"mutability": "READ_WRITE", "permissions": [{"action":
+      "READ_WRITE", "principal": "SELF"}], "required": true, "scope": "NONE", "title":
+      "Primary email", "type": "string"}, "employeeNumber": {"mutability": "READ_WRITE",
+      "permissions": [{"action": "READ_ONLY", "principal": "SELF"}], "scope": "NONE",
+      "title": "Employee number", "type": "string"}, "firstName": {"maxLength": 50,
+      "minLength": 1, "mutability": "READ_WRITE", "permissions": [{"action": "READ_WRITE",
+      "principal": "SELF"}], "required": true, "scope": "NONE", "title": "First name",
+      "type": "string"}, "honorificPrefix": {"mutability": "READ_WRITE", "permissions":
+      [{"action": "READ_ONLY", "principal": "SELF"}], "scope": "NONE", "title": "Honorific
+      prefix", "type": "string"}, "honorificSuffix": {"mutability": "READ_WRITE",
+      "permissions": [{"action": "READ_ONLY", "principal": "SELF"}], "scope": "NONE",
+      "title": "Honorific suffix", "type": "string"}, "lastName": {"maxLength": 50,
+      "minLength": 1, "mutability": "READ_WRITE", "permissions": [{"action": "READ_WRITE",
+      "principal": "SELF"}], "required": true, "scope": "NONE", "title": "Last name",
+      "type": "string"}, "locale": {"mutability": "READ_WRITE", "permissions": [{"action":
+      "READ_ONLY", "principal": "SELF"}], "scope": "NONE", "title": "Locale", "type":
+      "string"}, "login": {"maxLength": 100, "minLength": 5, "mutability": "READ_WRITE",
+      "permissions": [{"action": "READ_ONLY", "principal": "SELF"}], "required": true,
+      "scope": "NONE", "title": "Username", "type": "string"}, "manager": {"mutability":
+      "READ_WRITE", "permissions": [{"action": "READ_ONLY", "principal": "SELF"}],
+      "scope": "NONE", "title": "Manager", "type": "string"}, "managerId": {"mutability":
+      "READ_WRITE", "permissions": [{"action": "READ_ONLY", "principal": "SELF"}],
+      "scope": "NONE", "title": "ManagerId", "type": "string"}, "middleName": {"mutability":
+      "READ_WRITE", "permissions": [{"action": "READ_ONLY", "principal": "SELF"}],
+      "scope": "NONE", "title": "Middle name", "type": "string"}, "mobilePhone": {"maxLength":
+      100, "mutability": "READ_WRITE", "permissions": [{"action": "READ_WRITE", "principal":
+      "SELF"}], "scope": "NONE", "title": "Mobile phone", "type": "string"}, "nickName":
+      {"mutability": "READ_WRITE", "permissions": [{"action": "READ_ONLY", "principal":
+      "SELF"}], "scope": "NONE", "title": "Nickname", "type": "string"}, "organization":
+      {"mutability": "READ_WRITE", "permissions": [{"action": "READ_ONLY", "principal":
+      "SELF"}], "scope": "NONE", "title": "Organization", "type": "string"}, "postalAddress":
+      {"mutability": "READ_WRITE", "permissions": [{"action": "HIDE", "principal":
+      "SELF"}], "scope": "NONE", "title": "Postal Address", "type": "string"}, "preferredLanguage":
+      {"mutability": "READ_WRITE", "permissions": [{"action": "READ_ONLY", "principal":
+      "SELF"}], "scope": "NONE", "title": "Preferred language", "type": "string"},
+      "primaryPhone": {"maxLength": 100, "mutability": "READ_WRITE", "permissions":
+      [{"action": "HIDE", "principal": "SELF"}], "scope": "NONE", "title": "Primary
+      phone", "type": "string"}, "profileUrl": {"mutability": "READ_WRITE", "permissions":
+      [{"action": "READ_ONLY", "principal": "SELF"}], "scope": "NONE", "title": "Profile
+      Url", "type": "string"}, "secondEmail": {"mutability": "READ_WRITE", "permissions":
+      [{"action": "READ_WRITE", "principal": "SELF"}], "scope": "NONE", "title": "Secondary
+      email", "type": "string"}, "state": {"mutability": "READ_WRITE", "permissions":
+      [{"action": "HIDE", "principal": "SELF"}], "scope": "NONE", "title": "State",
+      "type": "string"}, "streetAddress": {"mutability": "READ_WRITE", "permissions":
+      [{"action": "HIDE", "principal": "SELF"}], "scope": "NONE", "title": "Street
+      address", "type": "string"}, "timezone": {"mutability": "READ_WRITE", "permissions":
+      [{"action": "READ_ONLY", "principal": "SELF"}], "scope": "NONE", "title": "Time
+      zone", "type": "string"}, "title": {"mutability": "READ_WRITE", "permissions":
+      [{"action": "READ_ONLY", "principal": "SELF"}], "scope": "NONE", "title": "Title",
+      "type": "string"}, "userType": {"mutability": "READ_WRITE", "permissions": [{"action":
+      "READ_ONLY", "principal": "SELF"}], "scope": "NONE", "title": "User type", "type":
+      "string"}, "zipCode": {"mutability": "READ_WRITE", "permissions": [{"action":
+      "HIDE", "principal": "SELF"}], "scope": "NONE", "title": "Zip code", "type":
+      "string"}}, "required": ["login", "firstName", "lastName", "email"], "type":
+      "object"}, "custom": {"id": "#custom", "properties": {"testCustomAttribute":
+      {"description": "test custom user attribute", "maxLength": 20, "minLength":
+      1, "permissions": [{"action": "READ_WRITE", "principal": "SELF"}], "title":
+      "Test Custom User Attribute", "type": "string"}}, "required": [], "type": "object"}},
+      "id": "https://dev-4942226.okta.com/meta/schemas/user/default", "lastUpdated":
+      "2021-04-05T15:07:31.000Z", "name": "user", "properties": {"profile": {"allOf":
+      [{"$ref": "#/definitions/custom"}, {"$ref": "#/definitions/base"}]}}, "title":
+      "User", "type": "object"}'
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      Content-Type:
+      - application/json
+      User-Agent:
+      - okta-sdk-python/1.5.1 python/3.8.2 Darwin/19.6.0
+    method: POST
+    uri: https://test.okta.com/api/v1/meta/schemas/user/default
+  response:
+    body:
+      string: '{"id":"https://test.okta.com/meta/schemas/user/default","$schema":"http://json-schema.org/draft-04/schema#","name":"user","title":"User","description":"Okta
+        user profile template with default permission settings","lastUpdated":"2021-04-05T15:10:34.000Z","created":"2020-10-11T11:35:22.000Z","definitions":{"custom":{"id":"#custom","type":"object","properties":{"customAttr":{"title":"Custom
+        Attribute","description":"Custom attribute for testing purposes","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"badgeNumber":{"title":"Badge
+        Number","description":"","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"some_snake_case_attr":{"title":"some_snake_case_attr","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"someSnakeCaseAttr":{"title":"some_snake_case_attr","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"testCustomAttribute":{"title":"Test
+        Custom User Attribute","description":"test custom user attribute","type":"string","mutability":"READ_WRITE","scope":"NONE","minLength":1,"maxLength":20,"permissions":[{"principal":"SELF","action":"READ_WRITE"}]}},"required":[]},"base":{"id":"#base","type":"object","properties":{"login":{"title":"Username","type":"string","required":true,"mutability":"READ_WRITE","scope":"NONE","minLength":5,"maxLength":100,"permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"firstName":{"title":"First
+        name","type":"string","required":true,"mutability":"READ_WRITE","scope":"NONE","minLength":1,"maxLength":50,"permissions":[{"principal":"SELF","action":"READ_WRITE"}]},"lastName":{"title":"Last
+        name","type":"string","required":true,"mutability":"READ_WRITE","scope":"NONE","minLength":1,"maxLength":50,"permissions":[{"principal":"SELF","action":"READ_WRITE"}]},"middleName":{"title":"Middle
+        name","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"honorificPrefix":{"title":"Honorific
+        prefix","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"honorificSuffix":{"title":"Honorific
+        suffix","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"email":{"title":"Primary
+        email","type":"string","required":true,"format":"email","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_WRITE"}]},"title":{"title":"Title","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"displayName":{"title":"Display
+        name","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"nickName":{"title":"Nickname","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"profileUrl":{"title":"Profile
+        Url","type":"string","format":"uri","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"secondEmail":{"title":"Secondary
+        email","type":"string","format":"email","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_WRITE"}]},"mobilePhone":{"title":"Mobile
+        phone","type":"string","mutability":"READ_WRITE","scope":"NONE","maxLength":100,"permissions":[{"principal":"SELF","action":"READ_WRITE"}]},"primaryPhone":{"title":"Primary
+        phone","type":"string","mutability":"READ_WRITE","scope":"NONE","maxLength":100,"permissions":[{"principal":"SELF","action":"HIDE"}]},"streetAddress":{"title":"Street
+        address","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"HIDE"}]},"city":{"title":"City","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"HIDE"}]},"state":{"title":"State","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"HIDE"}]},"zipCode":{"title":"Zip
+        code","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"HIDE"}]},"countryCode":{"title":"Country
+        code","type":"string","format":"country-code","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"HIDE"}]},"postalAddress":{"title":"Postal
+        Address","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"HIDE"}]},"preferredLanguage":{"title":"Preferred
+        language","type":"string","format":"language-code","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"locale":{"title":"Locale","type":"string","format":"locale","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"timezone":{"title":"Time
+        zone","type":"string","format":"timezone","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"userType":{"title":"User
+        type","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"employeeNumber":{"title":"Employee
+        number","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"costCenter":{"title":"Cost
+        center","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"organization":{"title":"Organization","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"division":{"title":"Division","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"department":{"title":"Department","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"managerId":{"title":"ManagerId","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"manager":{"title":"Manager","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]}},"required":["login","firstName","lastName","email"]}},"type":"object","properties":{"profile":{"allOf":[{"$ref":"#/definitions/custom"},{"$ref":"#/definitions/base"}]}},"_links":{"self":{"rel":"self","href":"https://test.okta.com/api/v1/meta/schemas/user/osc8hu2tnV8drfqhC5d5","method":"GET"},"type":{"rel":"type","href":"https://test.okta.com/api/v1/meta/types/user/oty8hu2tnV8drfqhC5d5","method":"GET"}}}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 05 Apr 2021 15:10:34 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Public-Key-Pins-Report-Only:
+      - pin-sha256="r5EfzZxQVvQpKo3AgYRaT7X2bDO/kj3ACwmxfdT2zt8="; pin-sha256="MaqlcUgk2mvY/RFSGeSwBRkI+rZ6/dxe/DuQfBT/vnQ=";
+        pin-sha256="72G5IEvDEWn+EThf3qjR7/bQSWaS2ZSLqolhnO6iyJI="; pin-sha256="rrV6CLCCvqnk89gWibYT0JO6fNQ8cCit7GGoiVTjCOg=";
+        max-age=60; report-uri="https://okta.report-uri.com/r/default/hpkp/reportOnly"
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
+      - JSESSIONID=6790E47124E676DE1C63EB754E3A2A64; Path=/; Secure; HttpOnly
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      content-security-policy-report-only: 'default-src ''self'' *.oktacdn.com test.okta.com
+        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
+        connect-src ''self'' *.oktacdn.com *.mixpanel.com *.mapbox.com app.pendo.io
+        data.pendo.io pendo-static-5634101834153984.storage.googleapis.com test.okta.com
+        test-admin.okta.com https://oinmanager.okta.com data: *.zscloud.net *.zscalerbeta.net
+        *.zscaler.net *.zscalertwo.net *.zscalerthree.net; script-src ''unsafe-inline''
+        ''unsafe-eval'' ''self'' *.oktacdn.com *.zscloud.net *.zscalerbeta.net *.zscaler.net
+        *.zscalertwo.net *.zscalerthree.net; style-src ''unsafe-inline'' ''self''
+        *.oktacdn.com app.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
+        frame-src ''self'' login.okta.com test.okta.com test-admin.okta.com *.zscloud.net
+        *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net; img-src
+        ''self'' *.oktacdn.com test.okta.com *.tiles.mapbox.com *.mapbox.com app.pendo.io
+        data.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        data: blob: *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net
+        *.zscalerthree.net; font-src data: ''self'' *.oktacdn.com fonts.gstatic.com
+        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net'
+      expect-ct:
+      - report-uri="https://oktaexpectct.report-uri.com/r/t/ct/reportOnly", max-age=0
+      p3p:
+      - CP="HONK"
+      x-content-type-options:
+      - nosniff
+      x-okta-request-id:
+      - YGsoal@ECkAxEl1PUSkn7AAACYw
+      x-rate-limit-limit:
+      - '1000'
+      x-rate-limit-remaining:
+      - '997'
+      x-rate-limit-reset:
+      - '1617635492'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://test.okta.com/api/v1/meta/schemas/user/default
+- request:
+    body: '{"$schema": "http://json-schema.org/draft-04/schema#", "_links": {"self":
+      {"rel": "self", "href": "https://dev-4942226.okta.com/api/v1/meta/schemas/user/osc8hu2tnV8drfqhC5d5",
+      "method": "GET"}, "type": {"rel": "type", "href": "https://dev-4942226.okta.com/api/v1/meta/types/user/oty8hu2tnV8drfqhC5d5",
+      "method": "GET"}}, "created": "2020-10-11T11:35:22.000Z", "definitions": {"base":
+      {"id": "#base", "properties": {"city": {"mutability": "READ_WRITE", "permissions":
+      [{"action": "HIDE", "principal": "SELF"}], "scope": "NONE", "title": "City",
+      "type": "string"}, "costCenter": {"mutability": "READ_WRITE", "permissions":
+      [{"action": "READ_ONLY", "principal": "SELF"}], "scope": "NONE", "title": "Cost
+      center", "type": "string"}, "countryCode": {"mutability": "READ_WRITE", "permissions":
+      [{"action": "HIDE", "principal": "SELF"}], "scope": "NONE", "title": "Country
+      code", "type": "string"}, "department": {"mutability": "READ_WRITE", "permissions":
+      [{"action": "READ_ONLY", "principal": "SELF"}], "scope": "NONE", "title": "Department",
+      "type": "string"}, "displayName": {"mutability": "READ_WRITE", "permissions":
+      [{"action": "READ_ONLY", "principal": "SELF"}], "scope": "NONE", "title": "Display
+      name", "type": "string"}, "division": {"mutability": "READ_WRITE", "permissions":
+      [{"action": "READ_ONLY", "principal": "SELF"}], "scope": "NONE", "title": "Division",
+      "type": "string"}, "email": {"mutability": "READ_WRITE", "permissions": [{"action":
+      "READ_WRITE", "principal": "SELF"}], "required": true, "scope": "NONE", "title":
+      "Primary email", "type": "string"}, "employeeNumber": {"mutability": "READ_WRITE",
+      "permissions": [{"action": "READ_ONLY", "principal": "SELF"}], "scope": "NONE",
+      "title": "Employee number", "type": "string"}, "firstName": {"maxLength": 50,
+      "minLength": 1, "mutability": "READ_WRITE", "permissions": [{"action": "READ_WRITE",
+      "principal": "SELF"}], "required": true, "scope": "NONE", "title": "First name",
+      "type": "string"}, "honorificPrefix": {"mutability": "READ_WRITE", "permissions":
+      [{"action": "READ_ONLY", "principal": "SELF"}], "scope": "NONE", "title": "Honorific
+      prefix", "type": "string"}, "honorificSuffix": {"mutability": "READ_WRITE",
+      "permissions": [{"action": "READ_ONLY", "principal": "SELF"}], "scope": "NONE",
+      "title": "Honorific suffix", "type": "string"}, "lastName": {"maxLength": 50,
+      "minLength": 1, "mutability": "READ_WRITE", "permissions": [{"action": "READ_WRITE",
+      "principal": "SELF"}], "required": true, "scope": "NONE", "title": "Last name",
+      "type": "string"}, "locale": {"mutability": "READ_WRITE", "permissions": [{"action":
+      "READ_ONLY", "principal": "SELF"}], "scope": "NONE", "title": "Locale", "type":
+      "string"}, "login": {"maxLength": 100, "minLength": 5, "mutability": "READ_WRITE",
+      "permissions": [{"action": "READ_ONLY", "principal": "SELF"}], "required": true,
+      "scope": "NONE", "title": "Username", "type": "string"}, "manager": {"mutability":
+      "READ_WRITE", "permissions": [{"action": "READ_ONLY", "principal": "SELF"}],
+      "scope": "NONE", "title": "Manager", "type": "string"}, "managerId": {"mutability":
+      "READ_WRITE", "permissions": [{"action": "READ_ONLY", "principal": "SELF"}],
+      "scope": "NONE", "title": "ManagerId", "type": "string"}, "middleName": {"mutability":
+      "READ_WRITE", "permissions": [{"action": "READ_ONLY", "principal": "SELF"}],
+      "scope": "NONE", "title": "Middle name", "type": "string"}, "mobilePhone": {"maxLength":
+      100, "mutability": "READ_WRITE", "permissions": [{"action": "READ_WRITE", "principal":
+      "SELF"}], "scope": "NONE", "title": "Mobile phone", "type": "string"}, "nickName":
+      {"mutability": "READ_WRITE", "permissions": [{"action": "READ_ONLY", "principal":
+      "SELF"}], "scope": "NONE", "title": "Nickname", "type": "string"}, "organization":
+      {"mutability": "READ_WRITE", "permissions": [{"action": "READ_ONLY", "principal":
+      "SELF"}], "scope": "NONE", "title": "Organization", "type": "string"}, "postalAddress":
+      {"mutability": "READ_WRITE", "permissions": [{"action": "HIDE", "principal":
+      "SELF"}], "scope": "NONE", "title": "Postal Address", "type": "string"}, "preferredLanguage":
+      {"mutability": "READ_WRITE", "permissions": [{"action": "READ_ONLY", "principal":
+      "SELF"}], "scope": "NONE", "title": "Preferred language", "type": "string"},
+      "primaryPhone": {"maxLength": 100, "mutability": "READ_WRITE", "permissions":
+      [{"action": "HIDE", "principal": "SELF"}], "scope": "NONE", "title": "Primary
+      phone", "type": "string"}, "profileUrl": {"mutability": "READ_WRITE", "permissions":
+      [{"action": "READ_ONLY", "principal": "SELF"}], "scope": "NONE", "title": "Profile
+      Url", "type": "string"}, "secondEmail": {"mutability": "READ_WRITE", "permissions":
+      [{"action": "READ_WRITE", "principal": "SELF"}], "scope": "NONE", "title": "Secondary
+      email", "type": "string"}, "state": {"mutability": "READ_WRITE", "permissions":
+      [{"action": "HIDE", "principal": "SELF"}], "scope": "NONE", "title": "State",
+      "type": "string"}, "streetAddress": {"mutability": "READ_WRITE", "permissions":
+      [{"action": "HIDE", "principal": "SELF"}], "scope": "NONE", "title": "Street
+      address", "type": "string"}, "timezone": {"mutability": "READ_WRITE", "permissions":
+      [{"action": "READ_ONLY", "principal": "SELF"}], "scope": "NONE", "title": "Time
+      zone", "type": "string"}, "title": {"mutability": "READ_WRITE", "permissions":
+      [{"action": "READ_ONLY", "principal": "SELF"}], "scope": "NONE", "title": "Title",
+      "type": "string"}, "userType": {"mutability": "READ_WRITE", "permissions": [{"action":
+      "READ_ONLY", "principal": "SELF"}], "scope": "NONE", "title": "User type", "type":
+      "string"}, "zipCode": {"mutability": "READ_WRITE", "permissions": [{"action":
+      "HIDE", "principal": "SELF"}], "scope": "NONE", "title": "Zip code", "type":
+      "string"}}, "required": ["login", "firstName", "lastName", "email"], "type":
+      "object"}, "custom": {"id": "#custom", "properties": {"customAttr": {"title":
+      "Custom Attribute", "description": "Custom attribute for testing purposes",
+      "type": "string", "mutability": "READ_WRITE", "scope": "NONE", "permissions":
+      [{"principal": "SELF", "action": "READ_ONLY"}]}, "badgeNumber": {"title": "Badge
+      Number", "description": "", "type": "string", "mutability": "READ_WRITE", "scope":
+      "NONE", "permissions": [{"principal": "SELF", "action": "READ_ONLY"}]}, "someSnakeCaseAttr":
+      {"title": "some_snake_case_attr", "type": "string", "mutability": "READ_WRITE",
+      "scope": "NONE", "permissions": [{"principal": "SELF", "action": "READ_ONLY"}]},
+      "testCustomAttribute": null}, "required": [], "type": "object"}}, "id": "https://dev-4942226.okta.com/meta/schemas/user/default",
+      "lastUpdated": "2021-04-05T15:10:34.000Z", "name": "user", "properties": {"profile":
+      {"allOf": [{"$ref": "#/definitions/custom"}, {"$ref": "#/definitions/base"}]}},
+      "title": "User", "type": "object"}'
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      Content-Type:
+      - application/json
+      User-Agent:
+      - okta-sdk-python/1.5.1 python/3.8.2 Darwin/19.6.0
+    method: POST
+    uri: https://test.okta.com/api/v1/meta/schemas/user/default
+  response:
+    body:
+      string: '{"id":"https://test.okta.com/meta/schemas/user/default","$schema":"http://json-schema.org/draft-04/schema#","name":"user","title":"User","description":"Okta
+        user profile template with default permission settings","lastUpdated":"2021-04-05T15:10:35.000Z","created":"2020-10-11T11:35:22.000Z","definitions":{"custom":{"id":"#custom","type":"object","properties":{"customAttr":{"title":"Custom
+        Attribute","description":"Custom attribute for testing purposes","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"badgeNumber":{"title":"Badge
+        Number","description":"","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"some_snake_case_attr":{"title":"some_snake_case_attr","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"someSnakeCaseAttr":{"title":"some_snake_case_attr","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]}},"required":[]},"base":{"id":"#base","type":"object","properties":{"login":{"title":"Username","type":"string","required":true,"mutability":"READ_WRITE","scope":"NONE","minLength":5,"maxLength":100,"permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"firstName":{"title":"First
+        name","type":"string","required":true,"mutability":"READ_WRITE","scope":"NONE","minLength":1,"maxLength":50,"permissions":[{"principal":"SELF","action":"READ_WRITE"}]},"lastName":{"title":"Last
+        name","type":"string","required":true,"mutability":"READ_WRITE","scope":"NONE","minLength":1,"maxLength":50,"permissions":[{"principal":"SELF","action":"READ_WRITE"}]},"middleName":{"title":"Middle
+        name","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"honorificPrefix":{"title":"Honorific
+        prefix","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"honorificSuffix":{"title":"Honorific
+        suffix","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"email":{"title":"Primary
+        email","type":"string","required":true,"format":"email","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_WRITE"}]},"title":{"title":"Title","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"displayName":{"title":"Display
+        name","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"nickName":{"title":"Nickname","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"profileUrl":{"title":"Profile
+        Url","type":"string","format":"uri","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"secondEmail":{"title":"Secondary
+        email","type":"string","format":"email","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_WRITE"}]},"mobilePhone":{"title":"Mobile
+        phone","type":"string","mutability":"READ_WRITE","scope":"NONE","maxLength":100,"permissions":[{"principal":"SELF","action":"READ_WRITE"}]},"primaryPhone":{"title":"Primary
+        phone","type":"string","mutability":"READ_WRITE","scope":"NONE","maxLength":100,"permissions":[{"principal":"SELF","action":"HIDE"}]},"streetAddress":{"title":"Street
+        address","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"HIDE"}]},"city":{"title":"City","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"HIDE"}]},"state":{"title":"State","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"HIDE"}]},"zipCode":{"title":"Zip
+        code","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"HIDE"}]},"countryCode":{"title":"Country
+        code","type":"string","format":"country-code","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"HIDE"}]},"postalAddress":{"title":"Postal
+        Address","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"HIDE"}]},"preferredLanguage":{"title":"Preferred
+        language","type":"string","format":"language-code","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"locale":{"title":"Locale","type":"string","format":"locale","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"timezone":{"title":"Time
+        zone","type":"string","format":"timezone","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"userType":{"title":"User
+        type","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"employeeNumber":{"title":"Employee
+        number","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"costCenter":{"title":"Cost
+        center","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"organization":{"title":"Organization","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"division":{"title":"Division","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"department":{"title":"Department","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"managerId":{"title":"ManagerId","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]},"manager":{"title":"Manager","type":"string","mutability":"READ_WRITE","scope":"NONE","permissions":[{"principal":"SELF","action":"READ_ONLY"}]}},"required":["login","firstName","lastName","email"]}},"type":"object","properties":{"profile":{"allOf":[{"$ref":"#/definitions/custom"},{"$ref":"#/definitions/base"}]}},"_links":{"self":{"rel":"self","href":"https://test.okta.com/api/v1/meta/schemas/user/osc8hu2tnV8drfqhC5d5","method":"GET"},"type":{"rel":"type","href":"https://test.okta.com/api/v1/meta/types/user/oty8hu2tnV8drfqhC5d5","method":"GET"}}}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 05 Apr 2021 15:10:35 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Public-Key-Pins-Report-Only:
+      - pin-sha256="r5EfzZxQVvQpKo3AgYRaT7X2bDO/kj3ACwmxfdT2zt8="; pin-sha256="MaqlcUgk2mvY/RFSGeSwBRkI+rZ6/dxe/DuQfBT/vnQ=";
+        pin-sha256="72G5IEvDEWn+EThf3qjR7/bQSWaS2ZSLqolhnO6iyJI="; pin-sha256="rrV6CLCCvqnk89gWibYT0JO6fNQ8cCit7GGoiVTjCOg=";
+        max-age=60; report-uri="https://okta.report-uri.com/r/default/hpkp/reportOnly"
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
+      - JSESSIONID=E7E9B246A7700444FB8B8FDA3DFFF79F; Path=/; Secure; HttpOnly
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      content-security-policy-report-only: 'default-src ''self'' *.oktacdn.com test.okta.com
+        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
+        connect-src ''self'' *.oktacdn.com *.mixpanel.com *.mapbox.com app.pendo.io
+        data.pendo.io pendo-static-5634101834153984.storage.googleapis.com test.okta.com
+        test-admin.okta.com https://oinmanager.okta.com data: *.zscloud.net *.zscalerbeta.net
+        *.zscaler.net *.zscalertwo.net *.zscalerthree.net; script-src ''unsafe-inline''
+        ''unsafe-eval'' ''self'' *.oktacdn.com *.zscloud.net *.zscalerbeta.net *.zscaler.net
+        *.zscalertwo.net *.zscalerthree.net; style-src ''unsafe-inline'' ''self''
+        *.oktacdn.com app.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
+        frame-src ''self'' login.okta.com test.okta.com test-admin.okta.com *.zscloud.net
+        *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net; img-src
+        ''self'' *.oktacdn.com test.okta.com *.tiles.mapbox.com *.mapbox.com app.pendo.io
+        data.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        data: blob: *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net
+        *.zscalerthree.net; font-src data: ''self'' *.oktacdn.com fonts.gstatic.com
+        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net'
+      expect-ct:
+      - report-uri="https://oktaexpectct.report-uri.com/r/t/ct/reportOnly", max-age=0
+      p3p:
+      - CP="HONK"
+      x-content-type-options:
+      - nosniff
+      x-okta-request-id:
+      - YGsoa17CkDxKBIlKc@kfLgAAAPo
+      x-rate-limit-limit:
+      - '1000'
+      x-rate-limit-remaining:
+      - '996'
+      x-rate-limit-reset:
+      - '1617635492'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://test.okta.com/api/v1/meta/schemas/user/default
+version: 1

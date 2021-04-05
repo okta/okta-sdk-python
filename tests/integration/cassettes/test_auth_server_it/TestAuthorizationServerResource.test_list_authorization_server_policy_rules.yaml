@@ -1,0 +1,632 @@
+interactions:
+- request:
+    body: '{"audiences": ["api://default"], "description": "Test Auth Server", "name":
+      "python_sdk_test_abDeZ"}'
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      Content-Type:
+      - application/json
+      User-Agent:
+      - okta-sdk-python/1.5.1 python/3.8.2 Darwin/19.6.0
+    method: POST
+    uri: https://test.okta.com/api/v1/authorizationServers
+  response:
+    body:
+      string: '{"id":"aushotpnzxzCXmFlR5d6","name":"python_sdk_test_abDeZ","description":"Test
+        Auth Server","audiences":["api://default"],"issuer":"https://test.okta.com/oauth2/aushotpnzxzCXmFlR5d6","issuerMode":"ORG_URL","status":"ACTIVE","created":"2021-04-02T18:19:55.000Z","lastUpdated":"2021-04-02T18:19:55.000Z","credentials":{"signing":{"kid":"4lFCKDbkQrKCykkPIEqRGdnteVdgU1K-opVb5_CcQbE","rotationMode":"AUTO","lastRotated":"2021-04-02T18:19:55.000Z","nextRotation":"2021-07-01T18:19:55.000Z"}},"_links":{"rotateKey":{"href":"https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/credentials/lifecycle/keyRotate","hints":{"allow":["POST"]}},"metadata":[{"name":"oauth-authorization-server","href":"https://test.okta.com/oauth2/aushotpnzxzCXmFlR5d6/.well-known/oauth-authorization-server","hints":{"allow":["GET"]}},{"name":"openid-configuration","href":"https://test.okta.com/oauth2/aushotpnzxzCXmFlR5d6/.well-known/openid-configuration","hints":{"allow":["GET"]}}],"keys":{"href":"https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/credentials/keys","hints":{"allow":["GET"]}},"claims":{"href":"https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/claims","hints":{"allow":["GET","POST"]}},"policies":{"href":"https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies","hints":{"allow":["GET","POST"]}},"self":{"href":"https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6","hints":{"allow":["GET","DELETE","PUT"]}},"scopes":{"href":"https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/scopes","hints":{"allow":["GET","POST"]}},"deactivate":{"href":"https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/lifecycle/deactivate","hints":{"allow":["POST"]}}}}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 02 Apr 2021 18:19:55 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Public-Key-Pins-Report-Only:
+      - pin-sha256="r5EfzZxQVvQpKo3AgYRaT7X2bDO/kj3ACwmxfdT2zt8="; pin-sha256="MaqlcUgk2mvY/RFSGeSwBRkI+rZ6/dxe/DuQfBT/vnQ=";
+        pin-sha256="72G5IEvDEWn+EThf3qjR7/bQSWaS2ZSLqolhnO6iyJI="; pin-sha256="rrV6CLCCvqnk89gWibYT0JO6fNQ8cCit7GGoiVTjCOg=";
+        max-age=60; report-uri="https://okta.report-uri.com/r/default/hpkp/reportOnly"
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
+      - JSESSIONID=C2A7332E4D58C35AA63250211FAEAA52; Path=/; Secure; HttpOnly
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      content-security-policy-report-only: 'default-src ''self'' *.oktacdn.com test.okta.com
+        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
+        connect-src ''self'' *.oktacdn.com *.mixpanel.com *.mapbox.com app.pendo.io
+        data.pendo.io pendo-static-5634101834153984.storage.googleapis.com test.okta.com
+        test-admin.okta.com https://oinmanager.okta.com data: *.zscloud.net *.zscalerbeta.net
+        *.zscaler.net *.zscalertwo.net *.zscalerthree.net; script-src ''unsafe-inline''
+        ''unsafe-eval'' ''self'' *.oktacdn.com *.zscloud.net *.zscalerbeta.net *.zscaler.net
+        *.zscalertwo.net *.zscalerthree.net; style-src ''unsafe-inline'' ''self''
+        *.oktacdn.com app.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
+        frame-src ''self'' login.okta.com test.okta.com test-admin.okta.com *.zscloud.net
+        *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net; img-src
+        ''self'' *.oktacdn.com test.okta.com *.tiles.mapbox.com *.mapbox.com app.pendo.io
+        data.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        data: blob: *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net
+        *.zscalerthree.net; font-src data: ''self'' *.oktacdn.com fonts.gstatic.com
+        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net'
+      expect-ct:
+      - report-uri="https://oktaexpectct.report-uri.com/r/t/ct/reportOnly", max-age=0
+      p3p:
+      - CP="HONK"
+      x-content-type-options:
+      - nosniff
+      x-okta-request-id:
+      - YGdgS5RmUErE1k1JccGWVgAACzc
+      x-rate-limit-limit:
+      - '1000'
+      x-rate-limit-remaining:
+      - '997'
+      x-rate-limit-reset:
+      - '1617387611'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 201
+      message: Created
+    url: https://test.okta.com/api/v1/authorizationServers
+- request:
+    body: '{"conditions": {"clients": {"include": ["ALL_CLIENTS"]}}, "description":
+      "Test Policy", "name": "Test Policy", "priority": 1, "status": "ACTIVE", "type":
+      "OAUTH_AUTHORIZATION_POLICY"}'
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      Content-Type:
+      - application/json
+      User-Agent:
+      - okta-sdk-python/1.5.1 python/3.8.2 Darwin/19.6.0
+    method: POST
+    uri: https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies
+  response:
+    body:
+      string: '{"id":"00phosj2e6s9cqNM85d6","status":"ACTIVE","name":"Test Policy","description":"Test
+        Policy","priority":1,"system":false,"conditions":{"clients":{"include":["ALL_CLIENTS"]}},"created":"2021-04-02T18:19:56.000Z","lastUpdated":"2021-04-02T18:19:56.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6","hints":{"allow":["GET","PUT","DELETE"]}},"rules":{"href":"https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6/rules","hints":{"allow":["GET"]}},"deactivate":{"href":"https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6/lifecycle/deactivate","hints":{"allow":["POST"]}}},"type":"OAUTH_AUTHORIZATION_POLICY"}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 02 Apr 2021 18:19:56 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Public-Key-Pins-Report-Only:
+      - pin-sha256="r5EfzZxQVvQpKo3AgYRaT7X2bDO/kj3ACwmxfdT2zt8="; pin-sha256="MaqlcUgk2mvY/RFSGeSwBRkI+rZ6/dxe/DuQfBT/vnQ=";
+        pin-sha256="72G5IEvDEWn+EThf3qjR7/bQSWaS2ZSLqolhnO6iyJI="; pin-sha256="rrV6CLCCvqnk89gWibYT0JO6fNQ8cCit7GGoiVTjCOg=";
+        max-age=60; report-uri="https://okta.report-uri.com/r/default/hpkp/reportOnly"
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
+      - JSESSIONID=A04CFFF1413BBE6911A7D05AE55FC0B6; Path=/; Secure; HttpOnly
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      content-security-policy-report-only: 'default-src ''self'' *.oktacdn.com test.okta.com
+        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
+        connect-src ''self'' *.oktacdn.com *.mixpanel.com *.mapbox.com app.pendo.io
+        data.pendo.io pendo-static-5634101834153984.storage.googleapis.com test.okta.com
+        test-admin.okta.com https://oinmanager.okta.com data: *.zscloud.net *.zscalerbeta.net
+        *.zscaler.net *.zscalertwo.net *.zscalerthree.net; script-src ''unsafe-inline''
+        ''unsafe-eval'' ''self'' *.oktacdn.com *.zscloud.net *.zscalerbeta.net *.zscaler.net
+        *.zscalertwo.net *.zscalerthree.net; style-src ''unsafe-inline'' ''self''
+        *.oktacdn.com app.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
+        frame-src ''self'' login.okta.com test.okta.com test-admin.okta.com *.zscloud.net
+        *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net; img-src
+        ''self'' *.oktacdn.com test.okta.com *.tiles.mapbox.com *.mapbox.com app.pendo.io
+        data.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        data: blob: *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net
+        *.zscalerthree.net; font-src data: ''self'' *.oktacdn.com fonts.gstatic.com
+        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net'
+      expect-ct:
+      - report-uri="https://oktaexpectct.report-uri.com/r/t/ct/reportOnly", max-age=0
+      p3p:
+      - CP="HONK"
+      x-content-type-options:
+      - nosniff
+      x-okta-request-id:
+      - YGdgTCTen1JnwwZZO6umPwAACyA
+      x-rate-limit-limit:
+      - '1000'
+      x-rate-limit-remaining:
+      - '996'
+      x-rate-limit-reset:
+      - '1617387611'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 201
+      message: Created
+    url: https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies
+- request:
+    body: '{"actions": {"token": {"accessTokenLifetimeMinutes": 60, "refreshTokenLifetimeMinutes":
+      0, "refreshTokenWindowMinutes": 10080}}, "conditions": {"grantTypes": {"include":
+      ["client_credentials"]}, "scopes": {"include": ["*"]}}, "name": "Test Policy
+      Rule", "priority": 1, "status": "ACTIVE", "system": false, "type": "RESOURCE_ACCESS"}'
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      Content-Type:
+      - application/json
+      User-Agent:
+      - okta-sdk-python/1.5.1 python/3.8.2 Darwin/19.6.0
+    method: POST
+    uri: https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6/rules
+  response:
+    body:
+      string: '{"id":"0prhosj2jy3zJNhxt5d6","status":"ACTIVE","name":"Test Policy
+        Rule","priority":1,"created":"2021-04-02T18:19:57.000Z","lastUpdated":"2021-04-02T18:19:57.000Z","system":false,"conditions":{"people":{"users":{"exclude":[]}},"grantTypes":{"include":["client_credentials"]},"scopes":{"include":["*"]}},"actions":{"token":{"accessTokenLifetimeMinutes":60,"refreshTokenLifetimeMinutes":0,"refreshTokenWindowMinutes":10080}},"_links":{"self":{"href":"https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6/rules/0prhosj2jy3zJNhxt5d6","hints":{"allow":["GET","PUT","DELETE"]}},"deactivate":{"href":"https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6/rules/0prhosj2jy3zJNhxt5d6/lifecycle/deactivate","hints":{"allow":["POST"]}}},"type":"RESOURCE_ACCESS"}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 02 Apr 2021 18:19:57 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Public-Key-Pins-Report-Only:
+      - pin-sha256="r5EfzZxQVvQpKo3AgYRaT7X2bDO/kj3ACwmxfdT2zt8="; pin-sha256="MaqlcUgk2mvY/RFSGeSwBRkI+rZ6/dxe/DuQfBT/vnQ=";
+        pin-sha256="72G5IEvDEWn+EThf3qjR7/bQSWaS2ZSLqolhnO6iyJI="; pin-sha256="rrV6CLCCvqnk89gWibYT0JO6fNQ8cCit7GGoiVTjCOg=";
+        max-age=60; report-uri="https://okta.report-uri.com/r/default/hpkp/reportOnly"
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
+      - JSESSIONID=826007A26FC7AB9F89649B27040A1369; Path=/; Secure; HttpOnly
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      content-security-policy-report-only: 'default-src ''self'' *.oktacdn.com test.okta.com
+        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
+        connect-src ''self'' *.oktacdn.com *.mixpanel.com *.mapbox.com app.pendo.io
+        data.pendo.io pendo-static-5634101834153984.storage.googleapis.com test.okta.com
+        test-admin.okta.com https://oinmanager.okta.com data: *.zscloud.net *.zscalerbeta.net
+        *.zscaler.net *.zscalertwo.net *.zscalerthree.net; script-src ''unsafe-inline''
+        ''unsafe-eval'' ''self'' *.oktacdn.com *.zscloud.net *.zscalerbeta.net *.zscaler.net
+        *.zscalertwo.net *.zscalerthree.net; style-src ''unsafe-inline'' ''self''
+        *.oktacdn.com app.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
+        frame-src ''self'' login.okta.com test.okta.com test-admin.okta.com *.zscloud.net
+        *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net; img-src
+        ''self'' *.oktacdn.com test.okta.com *.tiles.mapbox.com *.mapbox.com app.pendo.io
+        data.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        data: blob: *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net
+        *.zscalerthree.net; font-src data: ''self'' *.oktacdn.com fonts.gstatic.com
+        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net'
+      expect-ct:
+      - report-uri="https://oktaexpectct.report-uri.com/r/t/ct/reportOnly", max-age=0
+      p3p:
+      - CP="HONK"
+      x-content-type-options:
+      - nosniff
+      x-okta-request-id:
+      - YGdgTT70God2XHWFqMawFAAADKY
+      x-rate-limit-limit:
+      - '1000'
+      x-rate-limit-remaining:
+      - '995'
+      x-rate-limit-reset:
+      - '1617387611'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 201
+      message: Created
+    url: https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6/rules
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      Content-Type:
+      - application/json
+      User-Agent:
+      - okta-sdk-python/1.5.1 python/3.8.2 Darwin/19.6.0
+    method: GET
+    uri: https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6/rules
+  response:
+    body:
+      string: '[{"id":"0prhosj2jy3zJNhxt5d6","status":"ACTIVE","name":"Test Policy
+        Rule","priority":1,"created":"2021-04-02T18:19:57.000Z","lastUpdated":"2021-04-02T18:19:57.000Z","system":false,"conditions":{"people":{"users":{"exclude":[]}},"grantTypes":{"include":["client_credentials"]},"scopes":{"include":["*"]}},"actions":{"token":{"accessTokenLifetimeMinutes":60,"refreshTokenLifetimeMinutes":0,"refreshTokenWindowMinutes":10080}},"_links":{"self":{"href":"https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6/rules/0prhosj2jy3zJNhxt5d6","hints":{"allow":["GET","PUT","DELETE"]}},"deactivate":{"href":"https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6/rules/0prhosj2jy3zJNhxt5d6/lifecycle/deactivate","hints":{"allow":["POST"]}}},"type":"RESOURCE_ACCESS"}]'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 02 Apr 2021 18:19:58 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Public-Key-Pins-Report-Only:
+      - pin-sha256="r5EfzZxQVvQpKo3AgYRaT7X2bDO/kj3ACwmxfdT2zt8="; pin-sha256="MaqlcUgk2mvY/RFSGeSwBRkI+rZ6/dxe/DuQfBT/vnQ=";
+        pin-sha256="72G5IEvDEWn+EThf3qjR7/bQSWaS2ZSLqolhnO6iyJI="; pin-sha256="rrV6CLCCvqnk89gWibYT0JO6fNQ8cCit7GGoiVTjCOg=";
+        max-age=60; report-uri="https://okta.report-uri.com/r/default/hpkp/reportOnly"
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
+      - JSESSIONID=4A03C4285C516DE4AD507B90481CE61C; Path=/; Secure; HttpOnly
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      content-security-policy-report-only: 'default-src ''self'' *.oktacdn.com test.okta.com
+        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
+        connect-src ''self'' *.oktacdn.com *.mixpanel.com *.mapbox.com app.pendo.io
+        data.pendo.io pendo-static-5634101834153984.storage.googleapis.com test.okta.com
+        test-admin.okta.com https://oinmanager.okta.com data: *.zscloud.net *.zscalerbeta.net
+        *.zscaler.net *.zscalertwo.net *.zscalerthree.net; script-src ''unsafe-inline''
+        ''unsafe-eval'' ''self'' *.oktacdn.com *.zscloud.net *.zscalerbeta.net *.zscaler.net
+        *.zscalertwo.net *.zscalerthree.net; style-src ''unsafe-inline'' ''self''
+        *.oktacdn.com app.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
+        frame-src ''self'' login.okta.com test.okta.com test-admin.okta.com *.zscloud.net
+        *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net; img-src
+        ''self'' *.oktacdn.com test.okta.com *.tiles.mapbox.com *.mapbox.com app.pendo.io
+        data.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        data: blob: *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net
+        *.zscalerthree.net; font-src data: ''self'' *.oktacdn.com fonts.gstatic.com
+        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net'
+      expect-ct:
+      - report-uri="https://oktaexpectct.report-uri.com/r/t/ct/reportOnly", max-age=0
+      p3p:
+      - CP="HONK"
+      x-content-type-options:
+      - nosniff
+      x-okta-request-id:
+      - YGdgTrUyX9w4XKc46MA-lgAAC@w
+      x-rate-limit-limit:
+      - '1000'
+      x-rate-limit-remaining:
+      - '994'
+      x-rate-limit-reset:
+      - '1617387611'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+    url: https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6/rules
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      Content-Type:
+      - application/json
+      User-Agent:
+      - okta-sdk-python/1.5.1 python/3.8.2 Darwin/19.6.0
+    method: DELETE
+    uri: https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6/rules/0prhosj2jy3zJNhxt5d6
+  response:
+    body:
+      string: ''
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Connection:
+      - keep-alive
+      Date:
+      - Fri, 02 Apr 2021 18:19:59 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Public-Key-Pins-Report-Only:
+      - pin-sha256="r5EfzZxQVvQpKo3AgYRaT7X2bDO/kj3ACwmxfdT2zt8="; pin-sha256="MaqlcUgk2mvY/RFSGeSwBRkI+rZ6/dxe/DuQfBT/vnQ=";
+        pin-sha256="72G5IEvDEWn+EThf3qjR7/bQSWaS2ZSLqolhnO6iyJI="; pin-sha256="rrV6CLCCvqnk89gWibYT0JO6fNQ8cCit7GGoiVTjCOg=";
+        max-age=60; report-uri="https://okta.report-uri.com/r/default/hpkp/reportOnly"
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
+      - JSESSIONID=02ACC33066CE90E8EF8247A57ABABBD4; Path=/; Secure; HttpOnly
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      content-security-policy-report-only: 'default-src ''self'' *.oktacdn.com test.okta.com
+        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
+        connect-src ''self'' *.oktacdn.com *.mixpanel.com *.mapbox.com app.pendo.io
+        data.pendo.io pendo-static-5634101834153984.storage.googleapis.com test.okta.com
+        test-admin.okta.com https://oinmanager.okta.com data: *.zscloud.net *.zscalerbeta.net
+        *.zscaler.net *.zscalertwo.net *.zscalerthree.net; script-src ''unsafe-inline''
+        ''unsafe-eval'' ''self'' *.oktacdn.com *.zscloud.net *.zscalerbeta.net *.zscaler.net
+        *.zscalertwo.net *.zscalerthree.net; style-src ''unsafe-inline'' ''self''
+        *.oktacdn.com app.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
+        frame-src ''self'' login.okta.com test.okta.com test-admin.okta.com *.zscloud.net
+        *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net; img-src
+        ''self'' *.oktacdn.com test.okta.com *.tiles.mapbox.com *.mapbox.com app.pendo.io
+        data.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        data: blob: *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net
+        *.zscalerthree.net; font-src data: ''self'' *.oktacdn.com fonts.gstatic.com
+        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net'
+      expect-ct:
+      - report-uri="https://oktaexpectct.report-uri.com/r/t/ct/reportOnly", max-age=0
+      p3p:
+      - CP="HONK"
+      x-frame-options:
+      - SAMEORIGIN
+      x-okta-request-id:
+      - YGdgT-GxN6yz5XILcqBUugAAA20
+      x-rate-limit-limit:
+      - '1000'
+      x-rate-limit-remaining:
+      - '993'
+      x-rate-limit-reset:
+      - '1617387611'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 204
+      message: No Content
+    url: https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6/rules/0prhosj2jy3zJNhxt5d6
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      Content-Type:
+      - application/json
+      User-Agent:
+      - okta-sdk-python/1.5.1 python/3.8.2 Darwin/19.6.0
+    method: DELETE
+    uri: https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6
+  response:
+    body:
+      string: ''
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Connection:
+      - keep-alive
+      Date:
+      - Fri, 02 Apr 2021 18:20:00 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Public-Key-Pins-Report-Only:
+      - pin-sha256="r5EfzZxQVvQpKo3AgYRaT7X2bDO/kj3ACwmxfdT2zt8="; pin-sha256="MaqlcUgk2mvY/RFSGeSwBRkI+rZ6/dxe/DuQfBT/vnQ=";
+        pin-sha256="72G5IEvDEWn+EThf3qjR7/bQSWaS2ZSLqolhnO6iyJI="; pin-sha256="rrV6CLCCvqnk89gWibYT0JO6fNQ8cCit7GGoiVTjCOg=";
+        max-age=60; report-uri="https://okta.report-uri.com/r/default/hpkp/reportOnly"
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
+      - JSESSIONID=E67039CBD0025D11CC64B707CD11B70A; Path=/; Secure; HttpOnly
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      content-security-policy-report-only: 'default-src ''self'' *.oktacdn.com test.okta.com
+        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
+        connect-src ''self'' *.oktacdn.com *.mixpanel.com *.mapbox.com app.pendo.io
+        data.pendo.io pendo-static-5634101834153984.storage.googleapis.com test.okta.com
+        test-admin.okta.com https://oinmanager.okta.com data: *.zscloud.net *.zscalerbeta.net
+        *.zscaler.net *.zscalertwo.net *.zscalerthree.net; script-src ''unsafe-inline''
+        ''unsafe-eval'' ''self'' *.oktacdn.com *.zscloud.net *.zscalerbeta.net *.zscaler.net
+        *.zscalertwo.net *.zscalerthree.net; style-src ''unsafe-inline'' ''self''
+        *.oktacdn.com app.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
+        frame-src ''self'' login.okta.com test.okta.com test-admin.okta.com *.zscloud.net
+        *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net; img-src
+        ''self'' *.oktacdn.com test.okta.com *.tiles.mapbox.com *.mapbox.com app.pendo.io
+        data.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        data: blob: *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net
+        *.zscalerthree.net; font-src data: ''self'' *.oktacdn.com fonts.gstatic.com
+        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net'
+      expect-ct:
+      - report-uri="https://oktaexpectct.report-uri.com/r/t/ct/reportOnly", max-age=0
+      p3p:
+      - CP="HONK"
+      x-frame-options:
+      - SAMEORIGIN
+      x-okta-request-id:
+      - YGdgUPL3B1ppMW9ftLNK1gAACTc
+      x-rate-limit-limit:
+      - '1000'
+      x-rate-limit-remaining:
+      - '992'
+      x-rate-limit-reset:
+      - '1617387611'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 204
+      message: No Content
+    url: https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      Content-Type:
+      - application/json
+      User-Agent:
+      - okta-sdk-python/1.5.1 python/3.8.2 Darwin/19.6.0
+    method: POST
+    uri: https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/lifecycle/deactivate
+  response:
+    body:
+      string: ''
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Connection:
+      - keep-alive
+      Date:
+      - Fri, 02 Apr 2021 18:20:01 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Public-Key-Pins-Report-Only:
+      - pin-sha256="r5EfzZxQVvQpKo3AgYRaT7X2bDO/kj3ACwmxfdT2zt8="; pin-sha256="MaqlcUgk2mvY/RFSGeSwBRkI+rZ6/dxe/DuQfBT/vnQ=";
+        pin-sha256="72G5IEvDEWn+EThf3qjR7/bQSWaS2ZSLqolhnO6iyJI="; pin-sha256="rrV6CLCCvqnk89gWibYT0JO6fNQ8cCit7GGoiVTjCOg=";
+        max-age=60; report-uri="https://okta.report-uri.com/r/default/hpkp/reportOnly"
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
+      - JSESSIONID=0B9EDD45E75158BA2A421D2B2BF42D34; Path=/; Secure; HttpOnly
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      content-security-policy-report-only: 'default-src ''self'' *.oktacdn.com test.okta.com
+        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
+        connect-src ''self'' *.oktacdn.com *.mixpanel.com *.mapbox.com app.pendo.io
+        data.pendo.io pendo-static-5634101834153984.storage.googleapis.com test.okta.com
+        test-admin.okta.com https://oinmanager.okta.com data: *.zscloud.net *.zscalerbeta.net
+        *.zscaler.net *.zscalertwo.net *.zscalerthree.net; script-src ''unsafe-inline''
+        ''unsafe-eval'' ''self'' *.oktacdn.com *.zscloud.net *.zscalerbeta.net *.zscaler.net
+        *.zscalertwo.net *.zscalerthree.net; style-src ''unsafe-inline'' ''self''
+        *.oktacdn.com app.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
+        frame-src ''self'' login.okta.com test.okta.com test-admin.okta.com *.zscloud.net
+        *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net; img-src
+        ''self'' *.oktacdn.com test.okta.com *.tiles.mapbox.com *.mapbox.com app.pendo.io
+        data.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        data: blob: *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net
+        *.zscalerthree.net; font-src data: ''self'' *.oktacdn.com fonts.gstatic.com
+        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net'
+      expect-ct:
+      - report-uri="https://oktaexpectct.report-uri.com/r/t/ct/reportOnly", max-age=0
+      p3p:
+      - CP="HONK"
+      x-frame-options:
+      - SAMEORIGIN
+      x-okta-request-id:
+      - YGdgUfnVyRqWLIQyJVLVWAAABc0
+      x-rate-limit-limit:
+      - '1000'
+      x-rate-limit-remaining:
+      - '991'
+      x-rate-limit-reset:
+      - '1617387611'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 204
+      message: No Content
+    url: https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/lifecycle/deactivate
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      Content-Type:
+      - application/json
+      User-Agent:
+      - okta-sdk-python/1.5.1 python/3.8.2 Darwin/19.6.0
+    method: DELETE
+    uri: https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6
+  response:
+    body:
+      string: ''
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Connection:
+      - keep-alive
+      Date:
+      - Fri, 02 Apr 2021 18:20:02 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Public-Key-Pins-Report-Only:
+      - pin-sha256="r5EfzZxQVvQpKo3AgYRaT7X2bDO/kj3ACwmxfdT2zt8="; pin-sha256="MaqlcUgk2mvY/RFSGeSwBRkI+rZ6/dxe/DuQfBT/vnQ=";
+        pin-sha256="72G5IEvDEWn+EThf3qjR7/bQSWaS2ZSLqolhnO6iyJI="; pin-sha256="rrV6CLCCvqnk89gWibYT0JO6fNQ8cCit7GGoiVTjCOg=";
+        max-age=60; report-uri="https://okta.report-uri.com/r/default/hpkp/reportOnly"
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
+      - JSESSIONID=97E13420C391497BF4B32EA2BEFBE9B8; Path=/; Secure; HttpOnly
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      content-security-policy-report-only: 'default-src ''self'' *.oktacdn.com test.okta.com
+        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
+        connect-src ''self'' *.oktacdn.com *.mixpanel.com *.mapbox.com app.pendo.io
+        data.pendo.io pendo-static-5634101834153984.storage.googleapis.com test.okta.com
+        test-admin.okta.com https://oinmanager.okta.com data: *.zscloud.net *.zscalerbeta.net
+        *.zscaler.net *.zscalertwo.net *.zscalerthree.net; script-src ''unsafe-inline''
+        ''unsafe-eval'' ''self'' *.oktacdn.com *.zscloud.net *.zscalerbeta.net *.zscaler.net
+        *.zscalertwo.net *.zscalerthree.net; style-src ''unsafe-inline'' ''self''
+        *.oktacdn.com app.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
+        frame-src ''self'' login.okta.com test.okta.com test-admin.okta.com *.zscloud.net
+        *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net; img-src
+        ''self'' *.oktacdn.com test.okta.com *.tiles.mapbox.com *.mapbox.com app.pendo.io
+        data.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        data: blob: *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net
+        *.zscalerthree.net; font-src data: ''self'' *.oktacdn.com fonts.gstatic.com
+        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net'
+      expect-ct:
+      - report-uri="https://oktaexpectct.report-uri.com/r/t/ct/reportOnly", max-age=0
+      p3p:
+      - CP="HONK"
+      x-frame-options:
+      - SAMEORIGIN
+      x-okta-request-id:
+      - YGdgUnm462PNU1R1QbZcHwAADmI
+      x-rate-limit-limit:
+      - '1000'
+      x-rate-limit-remaining:
+      - '990'
+      x-rate-limit-reset:
+      - '1617387611'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 204
+      message: No Content
+    url: https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6
+version: 1
