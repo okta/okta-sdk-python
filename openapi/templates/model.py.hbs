@@ -141,10 +141,12 @@ class {{pascalCase model.modelName}}(
             {{/if}}
             {{/each}}
             {{#if (eq model.modelName "UserProfile")}}
-            # set custom attributes not defined in model
+            # set custom attributes not defined in model, do not change string case
+            self.custom_attributes = []
             for attr_name in config:
                 if attr_name not in vars(self):
-                    setattr(self, to_snake_case(attr_name), config[attr_name])
+                    setattr(self, attr_name, config[attr_name])
+                    self.custom_attributes.append(attr_name)
             {{/if}}
         else:
             {{#each model.properties as |prop|}}
@@ -158,6 +160,9 @@ class {{pascalCase model.modelName}}(
             {{/if}}
             {{/if}}
             {{/each}}
+            {{#if (eq model.modelName "UserProfile")}}
+            self.custom_attributes = []
+            {{/if}}
         {{else}}
         pass
         {{/if}}
@@ -169,8 +174,43 @@ class {{pascalCase model.modelName}}(
         current_obj_format = vars(self)
         {{else}}
         {{#if (eq model.modelName "UserProfile")}}
-        current_obj_format = {to_lower_camel_case(key): value
-                              for key, value in vars(self).items()}
+        current_obj_format = {
+            "city": self.city,
+            "costCenter": self.cost_center,
+            "countryCode": self.country_code,
+            "department": self.department,
+            "displayName": self.display_name,
+            "division": self.division,
+            "email": self.email,
+            "employeeNumber": self.employee_number,
+            "firstName": self.first_name,
+            "honorificPrefix": self.honorific_prefix,
+            "honorificSuffix": self.honorific_suffix,
+            "lastName": self.last_name,
+            "locale": self.locale,
+            "login": self.login,
+            "manager": self.manager,
+            "managerId": self.manager_id,
+            "middleName": self.middle_name,
+            "mobilePhone": self.mobile_phone,
+            "nickName": self.nick_name,
+            "organization": self.organization,
+            "postalAddress": self.postal_address,
+            "preferredLanguage": self.preferred_language,
+            "primaryPhone": self.primary_phone,
+            "profileUrl": self.profile_url,
+            "secondEmail": self.second_email,
+            "state": self.state,
+            "streetAddress": self.street_address,
+            "timezone": self.timezone,
+            "title": self.title,
+            "userType": self.user_type,
+            "zipCode": self.zip_code
+        }
+        for attr in self.custom_attributes:
+            # do not allow overriding of base attributes
+            if not attr in current_obj_format:
+                current_obj_format[attr] = getattr(self, attr)
         {{else}}
         current_obj_format = {
             {{#each model.properties as |prop|}}
@@ -181,4 +221,19 @@ class {{pascalCase model.modelName}}(
         {{/if}}
         parent_req_format.update(current_obj_format)
         return parent_req_format
+    {{#if (eq model.modelName "UserProfile")}}
+
+    def __getattr__(self, attr_name):
+        """
+        Try different cases for backward compatibility.
+        """
+        available_attrs = vars(self)
+        snake_case = to_snake_case(attr_name)
+        if snake_case in available_attrs:
+            return available_attrs[snake_case]
+        lower_camel_case = to_lower_camel_case(attr_name)
+        if lower_camel_case in available_attrs:
+            return available_attrs[lower_camel_case]
+        raise AttributeError(f"'UserProfile' object has no attribute '{attr_name}'")
+    {{/if}}
 {{/if}}
