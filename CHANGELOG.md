@@ -1,5 +1,9 @@
 # Okta Python SDK Changelog
 
+## v1.6.0
+- Update SDK according to openapi spec v2.3.0.
+- Fix custom user attributes.
+
 ## v1.5.1
 - Fix request headers serializing.
 - Fix retry logic.
