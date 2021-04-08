@@ -82,7 +82,7 @@ def before_record_response(response):
     if "content-security-policy-report-only" in response["headers"]:
         response["headers"]["content-security-policy-report-only"] = re.sub(
             URL_REGEX, TEST_OKTA_URL,
-            response["headers"]["content-security-policy-report-only"])
+            response["headers"]["content-security-policy-report-only"][0])
     if "link" in response["headers"]:
         current = response["headers"]["link"]
         response["headers"]["link"] = re.sub(

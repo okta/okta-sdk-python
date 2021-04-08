@@ -33,9 +33,15 @@
         headers = {}
         {{/if}}
 
+        {{#if (eq operation.tags.[0] "UserSchema")}}
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers, keep_empty_params=True
+        )
+        {{else}}
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers
         )
+        {{/if}}
 
         if error:
         {{#if operation.responseModel}}

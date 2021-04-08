@@ -81,3 +81,31 @@ def test_is_retryable_status():
     assert req_exec.is_retryable_status(HTTPStatus.SERVICE_UNAVAILABLE)
     assert req_exec.is_retryable_status(HTTPStatus.GATEWAY_TIMEOUT)
     assert not req_exec.is_retryable_status(HTTPStatus.FORBIDDEN)
+
+
+def test_clear_empty_params():
+    org_url = "https://test.okta.com"
+    token = "TOKEN"
+    config = {'client': {'orgUrl': org_url,
+                         'token': token,
+                         'rateLimit': {},
+                         'authorizationMode': None}}
+    req_exec = RequestExecutor(config=config, cache=None)
+
+    body = {'int_value': 0,
+            'str_value': '0',
+            'empty_str_value': '',
+            'list_value': [1,2,3],
+            'empty_list_value': [],
+            'dict_value': {'int_value': 0},
+            'empty_dict_value': {},
+            'nested_empty_dict_value': {'list_value': [1,2,3], 'empty_list_value': []},
+            'nested_empty_list_value': {'empty_list_value': []}}
+
+    cleared_body = {'int_value': 0,
+                    'str_value': '0',
+                    'list_value': [1,2,3],
+                    'dict_value': {'int_value': 0},
+                    'nested_empty_dict_value': {'list_value': [1,2,3]}}
+
+    assert req_exec.clear_empty_params(body) == cleared_body

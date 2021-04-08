@@ -28,13 +28,14 @@ from okta.models.o_auth_2_refresh_token\
     import OAuth2RefreshToken
 from okta.models.json_web_key\
     import JsonWebKey
-from okta.models.policy\
-    import Policy
+from okta.models.authorization_server_policy\
+    import AuthorizationServerPolicy
+from okta.models.authorization_server_policy_rule\
+    import AuthorizationServerPolicyRule
 from okta.models.o_auth_2_scope\
     import OAuth2Scope
 from okta.utils import format_url
 from okta.api_client import APIClient
-from okta.constants import find_policy_model
 
 
 class AuthorizationServerClient(APIClient):
@@ -828,7 +829,7 @@ class AuthorizationServerClient(APIClient):
         Args:
             auth_server_id {str}
         Returns:
-            list: Collection of Policy instances.
+            list: Collection of AuthorizationServerPolicy instances.
         """
         http_method = "get".upper()
         api_url = format_url(f"""
@@ -848,7 +849,7 @@ class AuthorizationServerClient(APIClient):
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request, Policy)
+            .execute(request, AuthorizationServerPolicy)
 
         if error:
             return (None, response, error)
@@ -856,24 +857,22 @@ class AuthorizationServerClient(APIClient):
         try:
             result = []
             for item in response.get_body():
-                result.append(
-                    find_policy_model(item["type"])(
-                        self.form_response_body(item)
-                        )
-                    )
+                result.append(AuthorizationServerPolicy(
+                    self.form_response_body(item)
+                    ))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
 
     async def create_authorization_server_policy(
-            self, authServerId, policy
+            self, authServerId, authorization_server_policy
     ):
         """
         Args:
             auth_server_id {str}
-            {policy}
+            {authorization_server_policy}
         Returns:
-            Policy
+            AuthorizationServerPolicy
         """
         http_method = "post".upper()
         api_url = format_url(f"""
@@ -882,10 +881,10 @@ class AuthorizationServerClient(APIClient):
                 /policies
             """)
 
-        if isinstance(policy, dict):
-            body = policy
+        if isinstance(authorization_server_policy, dict):
+            body = authorization_server_policy
         else:
-            body = policy.as_dict()
+            body = authorization_server_policy.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -899,14 +898,15 @@ class AuthorizationServerClient(APIClient):
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request, Policy)
+            .execute(request, AuthorizationServerPolicy)
 
         if error:
             return (None, response, error)
 
         try:
-            body = self.form_response_body(response.get_body())
-            result = find_policy_model(body["type"])(body)
+            result = AuthorizationServerPolicy(
+                self.form_response_body(response.get_body())
+            )
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -952,7 +952,7 @@ class AuthorizationServerClient(APIClient):
             auth_server_id {str}
             policy_id {str}
         Returns:
-            Policy
+            AuthorizationServerPolicy
         """
         http_method = "get".upper()
         api_url = format_url(f"""
@@ -972,28 +972,29 @@ class AuthorizationServerClient(APIClient):
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request, Policy)
+            .execute(request, AuthorizationServerPolicy)
 
         if error:
             return (None, response, error)
 
         try:
-            body = self.form_response_body(response.get_body())
-            result = find_policy_model(body["type"])(body)
+            result = AuthorizationServerPolicy(
+                self.form_response_body(response.get_body())
+            )
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
 
     async def update_authorization_server_policy(
-            self, authServerId, policyId, policy
+            self, authServerId, policyId, authorization_server_policy
     ):
         """
         Args:
             auth_server_id {str}
             policy_id {str}
-            {policy}
+            {authorization_server_policy}
         Returns:
-            Policy
+            AuthorizationServerPolicy
         """
         http_method = "put".upper()
         api_url = format_url(f"""
@@ -1002,10 +1003,10 @@ class AuthorizationServerClient(APIClient):
                 /policies/{policyId}
             """)
 
-        if isinstance(policy, dict):
-            body = policy
+        if isinstance(authorization_server_policy, dict):
+            body = authorization_server_policy
         else:
-            body = policy.as_dict()
+            body = authorization_server_policy.as_dict()
         headers = {
             "Accept": "application/json",
             "Content-Type": "application/json"
@@ -1019,14 +1020,241 @@ class AuthorizationServerClient(APIClient):
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request, Policy)
+            .execute(request, AuthorizationServerPolicy)
 
         if error:
             return (None, response, error)
 
         try:
-            body = self.form_response_body(response.get_body())
-            result = find_policy_model(body["type"])(body)
+            result = AuthorizationServerPolicy(
+                self.form_response_body(response.get_body())
+            )
+        except Exception as error:
+            return (None, response, error)
+        return (result, response, None)
+
+    async def list_authorization_server_policy_rules(
+            self, policyId, authServerId
+    ):
+        """
+        Enumerates all policy rules for the specified Custom Au
+        thorization Server and Policy.
+        Args:
+            policy_id {str}
+            auth_server_id {str}
+        Returns:
+            list: Collection of AuthorizationServerPolicyRule instances.
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/authorizationServers/{authServerId}
+                /policies/{policyId}/rules
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, AuthorizationServerPolicyRule)
+
+        if error:
+            return (None, response, error)
+
+        try:
+            result = []
+            for item in response.get_body():
+                result.append(AuthorizationServerPolicyRule(
+                    self.form_response_body(item)
+                    ))
+        except Exception as error:
+            return (None, response, error)
+        return (result, response, None)
+
+    async def create_authorization_server_policy_rule(
+            self, policyId, authServerId, authorization_server_policy_rule
+    ):
+        """
+        Creates a policy rule for the specified Custom Authoriz
+        ation Server and Policy.
+        Args:
+            policy_id {str}
+            auth_server_id {str}
+            {authorization_server_policy_rule}
+        Returns:
+            AuthorizationServerPolicyRule
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/authorizationServers/{authServerId}
+                /policies/{policyId}/rules
+            """)
+
+        if isinstance(authorization_server_policy_rule, dict):
+            body = authorization_server_policy_rule
+        else:
+            body = authorization_server_policy_rule.as_dict()
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, AuthorizationServerPolicyRule)
+
+        if error:
+            return (None, response, error)
+
+        try:
+            result = AuthorizationServerPolicyRule(
+                self.form_response_body(response.get_body())
+            )
+        except Exception as error:
+            return (None, response, error)
+        return (result, response, None)
+
+    async def delete_authorization_server_policy_rule(
+            self, policyId, authServerId, ruleId
+    ):
+        """
+        Deletes a Policy Rule defined in the specified Custom A
+        uthorization Server and Policy.
+        Args:
+            policy_id {str}
+            auth_server_id {str}
+            rule_id {str}
+        """
+        http_method = "delete".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/authorizationServers/{authServerId}
+                /policies/{policyId}/rules/{ruleId}
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (response, error)
+
+        return (response, None)
+
+    async def get_authorization_server_policy_rule(
+            self, policyId, authServerId, ruleId
+    ):
+        """
+        Returns a Policy Rule by ID that is defined in the spec
+        ified Custom Authorization Server and Policy.
+        Args:
+            policy_id {str}
+            auth_server_id {str}
+            rule_id {str}
+        Returns:
+            AuthorizationServerPolicyRule
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/authorizationServers/{authServerId}
+                /policies/{policyId}/rules/{ruleId}
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, AuthorizationServerPolicyRule)
+
+        if error:
+            return (None, response, error)
+
+        try:
+            result = AuthorizationServerPolicyRule(
+                self.form_response_body(response.get_body())
+            )
+        except Exception as error:
+            return (None, response, error)
+        return (result, response, None)
+
+    async def update_authorization_server_policy_rule(
+            self, policyId, authServerId, ruleId, authorization_server_policy_rule
+    ):
+        """
+        Updates the configuration of the Policy Rule defined in
+        the specified Custom Authorization Server and Policy.
+        Args:
+            policy_id {str}
+            auth_server_id {str}
+            rule_id {str}
+            {authorization_server_policy_rule}
+        Returns:
+            AuthorizationServerPolicyRule
+        """
+        http_method = "put".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/authorizationServers/{authServerId}
+                /policies/{policyId}/rules/{ruleId}
+            """)
+
+        if isinstance(authorization_server_policy_rule, dict):
+            body = authorization_server_policy_rule
+        else:
+            body = authorization_server_policy_rule.as_dict()
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, AuthorizationServerPolicyRule)
+
+        if error:
+            return (None, response, error)
+
+        try:
+            result = AuthorizationServerPolicyRule(
+                self.form_response_body(response.get_body())
+            )
         except Exception as error:
             return (None, response, error)
         return (result, response, None)

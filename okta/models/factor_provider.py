@@ -31,6 +31,7 @@ class FactorProvider(
 
     OKTA = "OKTA", "okta"
     RSA = "RSA", "rsa"
+    FIDO = "FIDO", "fido"
     GOOGLE = "GOOGLE", "google"
     SYMANTEC = "SYMANTEC", "symantec"
     DUO = "DUO", "duo"

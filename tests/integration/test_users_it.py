@@ -303,6 +303,7 @@ class TestUsersResource:
         assert got_user.id == user.id
         assert err is None
         # Verify password in updated user obj, changed after original
+        DATETIME_FORMAT = "%Y-%m-%dT%H:%M:%S.%fZ"
         assert datetime.strptime(got_user.password_changed, DATETIME_FORMAT)\
             > datetime.strptime(user.password_changed, DATETIME_FORMAT)
 

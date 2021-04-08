@@ -41,6 +41,8 @@ from okta.resource_clients.inline_hook_client\
     import InlineHookClient
 from okta.resource_clients.log_event_client\
     import LogEventClient
+from okta.resource_clients.user_schema_client\
+    import UserSchemaClient
 from okta.resource_clients.linked_object_client\
     import LinkedObjectClient
 from okta.resource_clients.user_type_client\
@@ -68,6 +70,7 @@ class Client(
     IdentityProviderClient,
     InlineHookClient,
     LogEventClient,
+    UserSchemaClient,
     LinkedObjectClient,
     UserTypeClient,
     PolicyClient,

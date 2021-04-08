@@ -4,7 +4,7 @@ Additionally, provide orgUrl and creds via env variable. Example:
 
 ```sh
 export MOCK_TESTS=false
-export OKTA_CLIENT_ORG_URL="https://{testOktaDomain}"
+export OKTA_CLIENT_ORGURL="https://{testOktaDomain}"
 export OKTA_CLIENT_TOKEN="{testToken}"
 
 pytest tests/integration/

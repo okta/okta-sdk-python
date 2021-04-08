@@ -24,6 +24,10 @@ from okta.models import acs_endpoint\
     as acs_endpoint
 from okta.models import saml_attribute_statement\
     as saml_attribute_statement
+from okta.models import single_logout\
+    as single_logout
+from okta.models import sp_certificate\
+    as sp_certificate
 
 
 class SamlApplicationSettingsSignOn(
@@ -78,6 +82,30 @@ class SamlApplicationSettingsSignOn(
                 if "responseSigned" in config else None
             self.signature_algorithm = config["signatureAlgorithm"]\
                 if "signatureAlgorithm" in config else None
+            if "slo" in config:
+                if isinstance(config["slo"],
+                              single_logout.SingleLogout):
+                    self.slo = config["slo"]
+                elif config["slo"] is not None:
+                    self.slo = single_logout.SingleLogout(
+                        config["slo"]
+                    )
+                else:
+                    self.slo = None
+            else:
+                self.slo = None
+            if "spCertificate" in config:
+                if isinstance(config["spCertificate"],
+                              sp_certificate.SpCertificate):
+                    self.sp_certificate = config["spCertificate"]
+                elif config["spCertificate"] is not None:
+                    self.sp_certificate = sp_certificate.SpCertificate(
+                        config["spCertificate"]
+                    )
+                else:
+                    self.sp_certificate = None
+            else:
+                self.sp_certificate = None
             self.sp_issuer = config["spIssuer"]\
                 if "spIssuer" in config else None
             self.sso_acs_url = config["ssoAcsUrl"]\
@@ -107,6 +135,8 @@ class SamlApplicationSettingsSignOn(
             self.request_compressed = None
             self.response_signed = None
             self.signature_algorithm = None
+            self.slo = None
+            self.sp_certificate = None
             self.sp_issuer = None
             self.sso_acs_url = None
             self.sso_acs_url_override = None
@@ -134,6 +164,8 @@ class SamlApplicationSettingsSignOn(
             "requestCompressed": self.request_compressed,
             "responseSigned": self.response_signed,
             "signatureAlgorithm": self.signature_algorithm,
+            "slo": self.slo,
+            "spCertificate": self.sp_certificate,
             "spIssuer": self.sp_issuer,
             "ssoAcsUrl": self.sso_acs_url,
             "ssoAcsUrlOverride": self.sso_acs_url_override,

@@ -151,6 +151,7 @@ EXPECTED_SAML_APP_AS_DICT = {
             "requestCompressed": False,
             "responseSigned": True,
             "signatureAlgorithm": "RSA_SHA256",
+            "slo": {"enabled": False},
             "ssoAcsUrl": "http://example.okta.com",
             "subjectNameIdFormat": "urn:oasis:names:tc:SAML:1.1:nameid-format:emailAddress",
             "subjectNameIdTemplate": "${user.userName}",
