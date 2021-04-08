@@ -1262,3 +1262,141 @@ class TestAuthorizationServerResource:
         _, err = await client.delete_authorization_server(
             created_auth_server.id)
         assert err is None
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_list_authorization_server_policy_rules(self, fs):
+        try:
+            # Instantiate Mock Client
+            client = MockOktaClient(fs)
+
+            # Create Auth Server
+            TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abDeZ"
+            TEST_DESC = "Test Auth Server"
+            TEST_AUDS = ["api://default"]
+            auth_server_model = models.AuthorizationServer({
+                "name": TEST_NAME,
+                "description": TEST_DESC,
+                "audiences": TEST_AUDS
+            })
+
+            created_auth_server, _, err = await \
+                client.create_authorization_server(auth_server_model)
+            assert err is None
+            assert isinstance(created_auth_server, models.AuthorizationServer)
+            assert created_auth_server.name == TEST_NAME
+            assert created_auth_server.description == TEST_DESC
+            assert created_auth_server.audiences == TEST_AUDS
+            assert created_auth_server.audiences[0] == TEST_AUDS[0]
+
+            # Create Policy
+            POLICY_TYPE = models.PolicyType.OAUTH_AUTHORIZATION_POLICY
+            POLICY_STATUS = "ACTIVE"
+            POLICY_NAME = "Test Policy"
+            POLICY_DESC = "Test Policy"
+            POLICY_PRIORITY = 1
+            POLICY_CONDITIONS = models.PolicyRuleConditions({
+                "clients": models.ClientPolicyCondition({
+                    "include": ["ALL_CLIENTS"]
+                })
+            })
+
+            policy_model = models.Policy({
+                "type": POLICY_TYPE,
+                "status": POLICY_STATUS,
+                "name": POLICY_NAME,
+                "description": POLICY_DESC,
+                "priority": POLICY_PRIORITY,
+                "conditions": POLICY_CONDITIONS
+            })
+
+            created_policy, _, err = await\
+                client.create_authorization_server_policy(
+                    created_auth_server.id, policy_model
+                )
+            assert err is None
+
+            POLICY_RULE_ACTIONS = models.AuthorizationServerPolicyRuleActions({
+                "token": {
+                    "accessTokenLifetimeMinutes": 60,
+                    "refreshTokenLifetimeMinutes": 0,
+                    "refreshTokenWindowMinutes": 10080
+                }
+            })
+            POLICY_RULE_CONDITIONS = models.AuthorizationServerPolicyRuleConditions({
+                "people": models.PolicyPeopleCondition({
+                    "include": ["EVERYONE"]
+                }),
+                "grantTypes": models.GrantTypePolicyRuleCondition({
+                    "include": [
+                        "client_credentials",
+                    ]
+                }),
+                "scopes":{"include": ["*"]}
+            })
+            policy_rule_model = models.AuthorizationServerPolicyRule({
+                "type": "RESOURCE_ACCESS",
+                "name": "Test Policy Rule",
+                "priority": 1,
+                "actions": POLICY_RULE_ACTIONS,
+                "conditions": POLICY_RULE_CONDITIONS,
+            })
+
+            created_policy_rule, _, err = await \
+                client.create_authorization_server_policy_rule(
+                    created_policy.id, created_auth_server.id, policy_rule_model
+                )
+            assert err is None
+
+            # Get Policy Rules
+            policy_rules, _, err = await client.list_authorization_server_policy_rules(
+                created_policy.id, created_auth_server.id
+            )
+
+            assert err is None
+            assert len(policy_rules) > 0
+            assert next((plcy_rule for plcy_rule in policy_rules
+                         if plcy_rule.id == created_policy_rule.id))
+
+        finally:
+            # Clear everything despite of any error
+            errors = []
+            try:
+                # Delete Policy Rule
+                _, err = await client.delete_authorization_server_policy_rule(
+                    created_policy.id, created_auth_server.id, created_policy_rule.id
+                )
+                if err:
+                    errors.append(err)
+            except Exception as exc:
+                errors.append(exc)
+
+            try:
+                # Delete Policy
+                _, err = await client.delete_authorization_server_policy(
+                    created_auth_server.id, created_policy.id
+                )
+                if err:
+                    errors.append(err)
+            except Exception as exc:
+                errors.append(exc)
+
+            try:
+                # DeActivate Auth server
+                _, err = await client.deactivate_authorization_server(
+                    created_auth_server.id)
+                if err:
+                    errors.append(err)
+            except Exception as exc:
+                errors.append(exc)
+
+            try:
+                # Delete Auth server
+                _, err = await client.delete_authorization_server(
+                    created_auth_server.id)
+                if err:
+                    errors.append(err)
+            except Exception as exc:
+                errors.append(exc)
+
+            assert len(errors) == 0

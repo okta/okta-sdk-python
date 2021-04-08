@@ -74,8 +74,28 @@ class RequestExecutor:
             self._config['client'].get("raiseException", False)
         self._custom_headers = {}
 
+    def clear_empty_params(self, body: dict):
+        """
+        Removes all key-value pairs where value is empty, i.e. empty string, list or dict.
+
+        Args:
+            body (dict): request body to be cleared
+
+        Returns:
+            dict: body without empty values.
+        """
+        if isinstance(body, dict):
+            return {
+                k: v
+                for k, v in ((k, self.clear_empty_params(v)) for k, v in body.items())
+                if v or v == 0 or v is False
+            }
+        if isinstance(body, list):
+            return [v for v in map(self.clear_empty_params, body) if v or v == 0 or v is False]
+        return body
+
     async def create_request(self, method: str, url: str, body: dict = None,
-                             headers: dict = {}, oauth=False):
+                             headers: dict = {}, oauth=False, keep_empty_params=False):
         """
         Creates request for request executor's HTTP client.
 
@@ -84,6 +104,8 @@ class RequestExecutor:
             url (str): URL to send request to
             body (dict, optional): Request body. Defaults to None.
             headers (dict, optional): Request headers. Defaults to {}.
+            oauth: Should use oauth? Defaults to False.
+            keep_empty_params: Should request body keep parameters with empty values? Defaults to False.
 
         Returns:
             dict, Exception: Tuple of Dictionary repr of HTTP request and
@@ -121,6 +143,8 @@ class RequestExecutor:
         # Add content type header if request body exists
         if body is not None:
             headers.update({"Content-Type": "application/json"})
+            if not keep_empty_params:
+                body = self.clear_empty_params(body)
 
         # finish building request and return
         request["headers"] = headers

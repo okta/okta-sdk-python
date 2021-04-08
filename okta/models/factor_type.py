@@ -31,6 +31,7 @@ class FactorType(
 
     CALL = "call", "CALL"
     EMAIL = "email", "EMAIL"
+    HOTP = "hotp", "HOTP"
     PUSH = "push", "PUSH"
     QUESTION = "question", "QUESTION"
     SMS = "sms", "SMS"
