@@ -101,55 +101,65 @@ class TestIdentityProvidersResource:
             })
         })
 
-        created_idp, _, err = await client.create_identity_provider(idp_model)
-        assert err is None
-        assert isinstance(created_idp, models.IdentityProvider)
-        assert created_idp.name == idp_model.name
+        try:
+            created_idp, _, err = await client.create_identity_provider(idp_model)
+            assert err is None
+            assert isinstance(created_idp, models.IdentityProvider)
+            assert created_idp.name == idp_model.name
 
-        # Retrieve for verification
-        retrieved_idp, _, err = await client.\
-            get_identity_provider(created_idp.id)
-        assert err is None
-        assert isinstance(retrieved_idp, models.IdentityProvider)
-        assert retrieved_idp.name == idp_model.name
-        assert retrieved_idp.type == idp_model.type
-        assert retrieved_idp.status == "ACTIVE"
-        prot_endp = retrieved_idp.protocol.endpoints
-        assert prot_endp.authorization.url == ISSUER_URL + "/authorize"
-        assert prot_endp.authorization.binding == "HTTP-REDIRECT"
-        assert prot_endp.token.url == ISSUER_URL + "/token"
-        assert prot_endp.token.binding == "HTTP-POST"
-        assert prot_endp.user_info.url == ISSUER_URL + "/userinfo"
-        assert prot_endp.user_info.binding == "HTTP-REDIRECT"
-        assert prot_endp.jwks.url == ISSUER_URL + "/keys"
-        assert prot_endp.jwks.binding == "HTTP-REDIRECT"
-        assert set(retrieved_idp.protocol.scopes) == set(
-            idp_model.protocol.scopes)
-        assert retrieved_idp.protocol.issuer.url == ISSUER_URL
-        assert retrieved_idp.protocol.credentials.client.client_id ==\
-            "your-client-id"
-        assert retrieved_idp.protocol.credentials.client.client_secret ==\
-            "your-client-secret"
-        prov = retrieved_idp.policy.provisioning
-        assert prov.action == "AUTO"
-        assert prov.profile_master is False
-        assert prov.groups.action == "NONE"
-        assert prov.conditions.deprovisioned.action == "NONE"
-        assert prov.conditions.suspended.action == "NONE"
-        assert retrieved_idp.policy.account_link.action == "AUTO"
-        subj = retrieved_idp.policy.subject
-        assert subj.user_name_template.template == "idpuser.email"
-        assert subj.filter is None
-        assert subj.match_type == models.PolicySubjectMatchType.USERNAME
-        assert subj.match_attribute is None
+            # Retrieve for verification
+            retrieved_idp, _, err = await client.\
+                get_identity_provider(created_idp.id)
+            assert err is None
+            assert isinstance(retrieved_idp, models.IdentityProvider)
+            assert retrieved_idp.name == idp_model.name
+            assert retrieved_idp.type == idp_model.type
+            assert retrieved_idp.status == "ACTIVE"
+            prot_endp = retrieved_idp.protocol.endpoints
+            assert prot_endp.authorization.url == ISSUER_URL + "/authorize"
+            assert prot_endp.authorization.binding == "HTTP-REDIRECT"
+            assert prot_endp.token.url == ISSUER_URL + "/token"
+            assert prot_endp.token.binding == "HTTP-POST"
+            assert prot_endp.user_info.url == ISSUER_URL + "/userinfo"
+            assert prot_endp.user_info.binding == "HTTP-REDIRECT"
+            assert prot_endp.jwks.url == ISSUER_URL + "/keys"
+            assert prot_endp.jwks.binding == "HTTP-REDIRECT"
+            assert set(retrieved_idp.protocol.scopes) == set(
+                idp_model.protocol.scopes)
+            assert retrieved_idp.protocol.issuer.url == ISSUER_URL
+            assert retrieved_idp.protocol.credentials.client.client_id ==\
+                "your-client-id"
+            assert retrieved_idp.protocol.credentials.client.client_secret ==\
+                "your-client-secret"
+            prov = retrieved_idp.policy.provisioning
+            assert prov.action == "AUTO"
+            assert prov.profile_master is False
+            assert prov.groups.action == "NONE"
+            assert prov.conditions.deprovisioned.action == "NONE"
+            assert prov.conditions.suspended.action == "NONE"
+            assert retrieved_idp.policy.account_link.action == "AUTO"
+            subj = retrieved_idp.policy.subject
+            assert subj.user_name_template.template == "idpuser.email"
+            assert subj.filter is None
+            assert subj.match_type == models.PolicySubjectMatchType.USERNAME
+            assert subj.match_attribute is None
 
-        # Deactivate and delete
-        deactivated_idp, _, err = await \
-            client.deactivate_identity_provider(created_idp.id)
-        assert err is None
-        assert isinstance(deactivated_idp, models.IdentityProvider)
-        _, err = await client.delete_identity_provider(created_idp.id)
-        assert err is None
+        finally:
+            errors = []
+            # Deactivate and delete
+            try:
+                deactivated_idp, _, err = await \
+                    client.deactivate_identity_provider(created_idp.id)
+                assert err is None
+                assert isinstance(deactivated_idp, models.IdentityProvider)
+            except Exception as exc:
+                errors.append(exc)
+            try:
+                _, err = await client.delete_identity_provider(created_idp.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0
 
     @pytest.mark.vcr()
     @pytest.mark.asyncio
@@ -203,44 +213,54 @@ class TestIdentityProvidersResource:
             })
         })
 
-        created_idp, _, err = await client.create_identity_provider(idp_model)
-        assert err is None
-        assert isinstance(created_idp, models.IdentityProvider)
-        assert created_idp.name == idp_model.name
+        try:
+            created_idp, _, err = await client.create_identity_provider(idp_model)
+            assert err is None
+            assert isinstance(created_idp, models.IdentityProvider)
+            assert created_idp.name == idp_model.name
 
-        # Retrieve for verification
-        retrieved_idp, _, err = await client.\
-            get_identity_provider(created_idp.id)
-        assert err is None
-        assert isinstance(retrieved_idp, models.IdentityProvider)
-        assert retrieved_idp.name == idp_model.name
-        assert retrieved_idp.type == idp_model.type
-        assert retrieved_idp.status == "ACTIVE"
-        assert set(retrieved_idp.protocol.scopes) == set(
-            idp_model.protocol.scopes)
-        assert retrieved_idp.protocol.credentials.client.client_id ==\
-            "your-client-id"
-        assert retrieved_idp.protocol.credentials.client.client_secret ==\
-            "your-client-secret"
-        prov = retrieved_idp.policy.provisioning
-        assert prov.action == "AUTO"
-        assert prov.profile_master is True
-        assert prov.groups.action == "NONE"
-        assert prov.conditions.deprovisioned.action == "NONE"
-        assert prov.conditions.suspended.action == "NONE"
-        assert retrieved_idp.policy.account_link.action == "AUTO"
-        subj = retrieved_idp.policy.subject
-        assert subj.user_name_template.template == "idpuser.email"
-        assert subj.filter is None
-        assert subj.match_type == models.PolicySubjectMatchType.USERNAME
+            # Retrieve for verification
+            retrieved_idp, _, err = await client.\
+                get_identity_provider(created_idp.id)
+            assert err is None
+            assert isinstance(retrieved_idp, models.IdentityProvider)
+            assert retrieved_idp.name == idp_model.name
+            assert retrieved_idp.type == idp_model.type
+            assert retrieved_idp.status == "ACTIVE"
+            assert set(retrieved_idp.protocol.scopes) == set(
+                idp_model.protocol.scopes)
+            assert retrieved_idp.protocol.credentials.client.client_id ==\
+                "your-client-id"
+            assert retrieved_idp.protocol.credentials.client.client_secret ==\
+                "your-client-secret"
+            prov = retrieved_idp.policy.provisioning
+            assert prov.action == "AUTO"
+            assert prov.profile_master is True
+            assert prov.groups.action == "NONE"
+            assert prov.conditions.deprovisioned.action == "NONE"
+            assert prov.conditions.suspended.action == "NONE"
+            assert retrieved_idp.policy.account_link.action == "AUTO"
+            subj = retrieved_idp.policy.subject
+            assert subj.user_name_template.template == "idpuser.email"
+            assert subj.filter is None
+            assert subj.match_type == models.PolicySubjectMatchType.USERNAME
 
-        # Deactivate and delete
-        deactivated_idp, _, err = await \
-            client.deactivate_identity_provider(created_idp.id)
-        assert err is None
-        assert isinstance(deactivated_idp, models.IdentityProvider)
-        _, err = await client.delete_identity_provider(created_idp.id)
-        assert err is None
+        finally:
+            errors = []
+            # Deactivate and delete
+            try:
+                deactivated_idp, _, err = await \
+                    client.deactivate_identity_provider(created_idp.id)
+                assert err is None
+                assert isinstance(deactivated_idp, models.IdentityProvider)
+            except Exception as exc:
+                errors.append(exc)
+            try:
+                _, err = await client.delete_identity_provider(created_idp.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0
 
     @pytest.mark.vcr()
     @pytest.mark.asyncio
@@ -294,44 +314,54 @@ class TestIdentityProvidersResource:
             })
         })
 
-        created_idp, _, err = await client.create_identity_provider(idp_model)
-        assert err is None
-        assert isinstance(created_idp, models.IdentityProvider)
-        assert created_idp.name == idp_model.name
+        try:
+            created_idp, _, err = await client.create_identity_provider(idp_model)
+            assert err is None
+            assert isinstance(created_idp, models.IdentityProvider)
+            assert created_idp.name == idp_model.name
 
-        # Retrieve for verification
-        retrieved_idp, _, err = await client.\
-            get_identity_provider(created_idp.id)
-        assert err is None
-        assert isinstance(retrieved_idp, models.IdentityProvider)
-        assert retrieved_idp.name == idp_model.name
-        assert retrieved_idp.type == idp_model.type
-        assert retrieved_idp.status == "ACTIVE"
-        assert set(retrieved_idp.protocol.scopes) == set(
-            idp_model.protocol.scopes)
-        assert retrieved_idp.protocol.credentials.client.client_id ==\
-            "your-client-id"
-        assert retrieved_idp.protocol.credentials.client.client_secret ==\
-            "your-client-secret"
-        prov = retrieved_idp.policy.provisioning
-        assert prov.action == "AUTO"
-        assert prov.profile_master is True
-        assert prov.groups.action == "NONE"
-        assert prov.conditions.deprovisioned.action == "NONE"
-        assert prov.conditions.suspended.action == "NONE"
-        assert retrieved_idp.policy.account_link.action == "AUTO"
-        subj = retrieved_idp.policy.subject
-        assert subj.user_name_template.template == "idpuser.email"
-        assert subj.filter is None
-        assert subj.match_type == models.PolicySubjectMatchType.USERNAME
+            # Retrieve for verification
+            retrieved_idp, _, err = await client.\
+                get_identity_provider(created_idp.id)
+            assert err is None
+            assert isinstance(retrieved_idp, models.IdentityProvider)
+            assert retrieved_idp.name == idp_model.name
+            assert retrieved_idp.type == idp_model.type
+            assert retrieved_idp.status == "ACTIVE"
+            assert set(retrieved_idp.protocol.scopes) == set(
+                idp_model.protocol.scopes)
+            assert retrieved_idp.protocol.credentials.client.client_id ==\
+                "your-client-id"
+            assert retrieved_idp.protocol.credentials.client.client_secret ==\
+                "your-client-secret"
+            prov = retrieved_idp.policy.provisioning
+            assert prov.action == "AUTO"
+            assert prov.profile_master is True
+            assert prov.groups.action == "NONE"
+            assert prov.conditions.deprovisioned.action == "NONE"
+            assert prov.conditions.suspended.action == "NONE"
+            assert retrieved_idp.policy.account_link.action == "AUTO"
+            subj = retrieved_idp.policy.subject
+            assert subj.user_name_template.template == "idpuser.email"
+            assert subj.filter is None
+            assert subj.match_type == models.PolicySubjectMatchType.USERNAME
 
-        # Deactivate and delete
-        deactivated_idp, _, err = await \
-            client.deactivate_identity_provider(created_idp.id)
-        assert err is None
-        assert isinstance(deactivated_idp, models.IdentityProvider)
-        _, err = await client.delete_identity_provider(created_idp.id)
-        assert err is None
+        finally:
+            errors = []
+            # Deactivate and delete
+            try:
+                deactivated_idp, _, err = await \
+                    client.deactivate_identity_provider(created_idp.id)
+                assert err is None
+                assert isinstance(deactivated_idp, models.IdentityProvider)
+            except Exception as exc:
+                errors.append(exc)
+            try:
+                _, err = await client.delete_identity_provider(created_idp.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0
 
     @pytest.mark.vcr()
     @pytest.mark.asyncio
@@ -423,25 +453,35 @@ class TestIdentityProvidersResource:
             })
         })
 
-        created_idp, _, err = await client.create_identity_provider(idp_model)
-        assert err is None
-        assert isinstance(created_idp, models.IdentityProvider)
-        assert created_idp.name == idp_model.name
+        try:
+            created_idp, _, err = await client.create_identity_provider(idp_model)
+            assert err is None
+            assert isinstance(created_idp, models.IdentityProvider)
+            assert created_idp.name == idp_model.name
 
-        # List IDPs
-        idp_list, _, err = await client.list_identity_providers()
-        assert err is None
-        assert isinstance(idp_list, list)
-        assert next((idp for idp in idp_list
-                     if idp.id == created_idp.id), None) is not None
+            # List IDPs
+            idp_list, _, err = await client.list_identity_providers()
+            assert err is None
+            assert isinstance(idp_list, list)
+            assert next((idp for idp in idp_list
+                         if idp.id == created_idp.id), None) is not None
 
-        # Deactivate and delete
-        deactivated_idp, _, err = await \
-            client.deactivate_identity_provider(created_idp.id)
-        assert err is None
-        assert isinstance(deactivated_idp, models.IdentityProvider)
-        _, err = await client.delete_identity_provider(created_idp.id)
-        assert err is None
+        finally:
+            errors = []
+            # Deactivate and delete
+            try:
+                deactivated_idp, _, err = await \
+                    client.deactivate_identity_provider(created_idp.id)
+                assert err is None
+                assert isinstance(deactivated_idp, models.IdentityProvider)
+            except Exception as exc:
+                errors.append(exc)
+            try:
+                _, err = await client.delete_identity_provider(created_idp.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0
 
     @pytest.mark.vcr()
     @pytest.mark.asyncio
@@ -533,51 +573,61 @@ class TestIdentityProvidersResource:
             })
         })
 
-        created_idp, _, err = await client.create_identity_provider(idp_model)
-        assert err is None
-        assert isinstance(created_idp, models.IdentityProvider)
-        assert created_idp.name == idp_model.name
+        try:
+            created_idp, _, err = await client.create_identity_provider(idp_model)
+            assert err is None
+            assert isinstance(created_idp, models.IdentityProvider)
+            assert created_idp.name == idp_model.name
 
-        # Retrieve for verification
-        retrieved_idp, _, err = await client.\
-            get_identity_provider(created_idp.id)
-        assert err is None
-        assert isinstance(retrieved_idp, models.IdentityProvider)
-        assert retrieved_idp.status == "ACTIVE"
+            # Retrieve for verification
+            retrieved_idp, _, err = await client.\
+                get_identity_provider(created_idp.id)
+            assert err is None
+            assert isinstance(retrieved_idp, models.IdentityProvider)
+            assert retrieved_idp.status == "ACTIVE"
 
-        # Deactivate
-        deactivated_idp, _, err = await \
-            client.deactivate_identity_provider(created_idp.id)
-        assert err is None
-        assert isinstance(deactivated_idp, models.IdentityProvider)
+            # Deactivate
+            deactivated_idp, _, err = await \
+                client.deactivate_identity_provider(created_idp.id)
+            assert err is None
+            assert isinstance(deactivated_idp, models.IdentityProvider)
 
-        # Retrieve for verification
-        retrieved_idp, _, err = await client.\
-            get_identity_provider(created_idp.id)
-        assert err is None
-        assert isinstance(retrieved_idp, models.IdentityProvider)
-        assert retrieved_idp.status == "INACTIVE"
+            # Retrieve for verification
+            retrieved_idp, _, err = await client.\
+                get_identity_provider(created_idp.id)
+            assert err is None
+            assert isinstance(retrieved_idp, models.IdentityProvider)
+            assert retrieved_idp.status == "INACTIVE"
 
-        # Reactivate
-        reactivated_idp, _, err = await \
-            client.activate_identity_provider(created_idp.id)
-        assert err is None
-        assert isinstance(reactivated_idp, models.IdentityProvider)
+            # Reactivate
+            reactivated_idp, _, err = await \
+                client.activate_identity_provider(created_idp.id)
+            assert err is None
+            assert isinstance(reactivated_idp, models.IdentityProvider)
 
-        # Retrieve for verification
-        retrieved_idp, _, err = await client.\
-            get_identity_provider(created_idp.id)
-        assert err is None
-        assert isinstance(retrieved_idp, models.IdentityProvider)
-        assert retrieved_idp.status == "ACTIVE"
+            # Retrieve for verification
+            retrieved_idp, _, err = await client.\
+                get_identity_provider(created_idp.id)
+            assert err is None
+            assert isinstance(retrieved_idp, models.IdentityProvider)
+            assert retrieved_idp.status == "ACTIVE"
 
-        # Deactivate and delete
-        deactivated_idp, _, err = await \
-            client.deactivate_identity_provider(created_idp.id)
-        assert err is None
-        assert isinstance(deactivated_idp, models.IdentityProvider)
-        _, err = await client.delete_identity_provider(created_idp.id)
-        assert err is None
+        finally:
+            errors = []
+            # Deactivate and delete
+            try:
+                deactivated_idp, _, err = await \
+                    client.deactivate_identity_provider(created_idp.id)
+                assert err is None
+                assert isinstance(deactivated_idp, models.IdentityProvider)
+            except Exception as exc:
+                errors.append(exc)
+            try:
+                _, err = await client.delete_identity_provider(created_idp.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0
 
     @pytest.mark.vcr()
     @pytest.mark.asyncio
@@ -669,33 +719,44 @@ class TestIdentityProvidersResource:
             })
         })
 
-        created_idp, _, err = await client.create_identity_provider(idp_model)
-        assert err is None
-        assert isinstance(created_idp, models.IdentityProvider)
-        assert created_idp.name == idp_model.name
+        try:
+            created_idp, _, err = await client.create_identity_provider(idp_model)
+            assert err is None
+            assert isinstance(created_idp, models.IdentityProvider)
+            assert created_idp.name == idp_model.name
 
-        # Retrieve for verification
-        retrieved_idp, _, err = await client.\
-            get_identity_provider(created_idp.id)
-        assert err is None
-        assert isinstance(retrieved_idp, models.IdentityProvider)
-        assert retrieved_idp.status == "ACTIVE"
+            # Retrieve for verification
+            retrieved_idp, _, err = await client.\
+                get_identity_provider(created_idp.id)
+            assert err is None
+            assert isinstance(retrieved_idp, models.IdentityProvider)
+            assert retrieved_idp.status == "ACTIVE"
 
-        # Deactivate and delete
-        deactivated_idp, _, err = await \
-            client.deactivate_identity_provider(created_idp.id)
-        assert err is None
-        assert isinstance(deactivated_idp, models.IdentityProvider)
-        _, err = await client.delete_identity_provider(created_idp.id)
-        assert err is None
+            # Deactivate and delete
+            deactivated_idp, _, err = await \
+                client.deactivate_identity_provider(created_idp.id)
+            assert err is None
+            assert isinstance(deactivated_idp, models.IdentityProvider)
+            _, err = await client.delete_identity_provider(created_idp.id)
+            assert err is None
 
-        # Retrieve for verification
-        retrieved_idp, resp, err = await client.\
-            get_identity_provider(created_idp.id)
-        assert err is not None
-        assert isinstance(err, OktaAPIError)
-        assert resp.get_status() == HTTPStatus.NOT_FOUND
-        assert retrieved_idp is None
+            # Retrieve for verification
+            retrieved_idp, resp, err = await client.\
+                get_identity_provider(created_idp.id)
+            assert err is not None
+            assert isinstance(err, OktaAPIError)
+            assert resp.get_status() == HTTPStatus.NOT_FOUND
+            assert retrieved_idp is None
+        finally:
+            # Deactivate and delete if it wasn't removed during test
+            try:
+                _, _, err = await client.deactivate_identity_provider(created_idp.id)
+            except Exception:
+                pass
+            try:
+                _, err = await client.delete_identity_provider(created_idp.id)
+            except Exception:
+                pass
 
     @pytest.mark.vcr()
     @pytest.mark.asyncio
@@ -787,42 +848,52 @@ class TestIdentityProvidersResource:
             })
         })
 
-        created_idp, _, err = await client.create_identity_provider(idp_model)
-        assert err is None
-        assert isinstance(created_idp, models.IdentityProvider)
-        assert created_idp.name == idp_model.name
+        try:
+            created_idp, _, err = await client.create_identity_provider(idp_model)
+            assert err is None
+            assert isinstance(created_idp, models.IdentityProvider)
+            assert created_idp.name == idp_model.name
 
-        # Retrieve for verification
-        retrieved_idp, _, err = await client.\
-            get_identity_provider(created_idp.id)
-        assert err is None
-        assert isinstance(retrieved_idp, models.IdentityProvider)
-        assert retrieved_idp.status == "ACTIVE"
+            # Retrieve for verification
+            retrieved_idp, _, err = await client.\
+                get_identity_provider(created_idp.id)
+            assert err is None
+            assert isinstance(retrieved_idp, models.IdentityProvider)
+            assert retrieved_idp.status == "ACTIVE"
 
-        # Update
-        created_idp.name = created_idp.name + "UPDATE"
-        updated_idp, _, err = await \
-            client.update_identity_provider(created_idp.id, created_idp)
-        assert err is None
-        assert isinstance(updated_idp, models.IdentityProvider)
-        assert updated_idp.id == created_idp.id
-        assert updated_idp.name != idp_model.name
+            # Update
+            created_idp.name = created_idp.name + "UPDATE"
+            updated_idp, _, err = await \
+                client.update_identity_provider(created_idp.id, created_idp)
+            assert err is None
+            assert isinstance(updated_idp, models.IdentityProvider)
+            assert updated_idp.id == created_idp.id
+            assert updated_idp.name != idp_model.name
 
-        # Retrieve for verification
-        retrieved_idp, _, err = await client.\
-            get_identity_provider(created_idp.id)
-        assert err is None
-        assert isinstance(retrieved_idp, models.IdentityProvider)
-        assert retrieved_idp.id == created_idp.id
-        assert retrieved_idp.name == idp_model.name + "UPDATE"
+            # Retrieve for verification
+            retrieved_idp, _, err = await client.\
+                get_identity_provider(created_idp.id)
+            assert err is None
+            assert isinstance(retrieved_idp, models.IdentityProvider)
+            assert retrieved_idp.id == created_idp.id
+            assert retrieved_idp.name == idp_model.name + "UPDATE"
 
-        # Deactivate and delete
-        deactivated_idp, _, err = await \
-            client.deactivate_identity_provider(created_idp.id)
-        assert err is None
-        assert isinstance(deactivated_idp, models.IdentityProvider)
-        _, err = await client.delete_identity_provider(created_idp.id)
-        assert err is None
+        finally:
+            errors = []
+            # Deactivate and delete
+            try:
+                deactivated_idp, _, err = await \
+                    client.deactivate_identity_provider(created_idp.id)
+                assert err is None
+                assert isinstance(deactivated_idp, models.IdentityProvider)
+            except Exception as exc:
+                errors.append(exc)
+            try:
+                _, err = await client.delete_identity_provider(created_idp.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0
 
     @pytest.mark.vcr()
     @pytest.mark.asyncio
@@ -855,23 +926,26 @@ class TestIdentityProvidersResource:
         jwk_model = models.JsonWebKey({
             "x5C": [key]
         })
-        created_key, _, err = await client.\
-            create_identity_provider_key(jwk_model)
-        assert err is None
-        assert isinstance(created_key, models.JsonWebKey)
-        assert key in created_key.x_5_c
 
-        # Retrieve
-        retrieved_key, _, err = await client.\
-            get_identity_provider_key(created_key.kid)
-        assert err is None
-        assert isinstance(retrieved_key, models.JsonWebKey)
-        assert retrieved_key.kid == created_key.kid
-        assert key in retrieved_key.x_5_c
+        try:
+            created_key, _, err = await client.\
+                create_identity_provider_key(jwk_model)
+            assert err is None
+            assert isinstance(created_key, models.JsonWebKey)
+            assert key in created_key.x_5_c
 
-        # Delete
-        _, err = await client.delete_identity_provider_key(created_key.kid)
-        assert err is None
+            # Retrieve
+            retrieved_key, _, err = await client.\
+                get_identity_provider_key(created_key.kid)
+            assert err is None
+            assert isinstance(retrieved_key, models.JsonWebKey)
+            assert retrieved_key.kid == created_key.kid
+            assert key in retrieved_key.x_5_c
+
+        finally:
+            # Delete
+            _, err = await client.delete_identity_provider_key(created_key.kid)
+            assert err is None
 
     @pytest.mark.vcr()
     @pytest.mark.asyncio
@@ -904,22 +978,25 @@ class TestIdentityProvidersResource:
         jwk_model = models.JsonWebKey({
             "x5C": [key]
         })
-        created_key, _, err = await client.\
-            create_identity_provider_key(jwk_model)
-        assert err is None
-        assert isinstance(created_key, models.JsonWebKey)
-        assert key in created_key.x_5_c
 
-        # List
-        idp_keys, _, err = await client.list_identity_provider_keys()
-        assert err is None
-        assert isinstance(idp_keys, list)
-        assert next((key for key in idp_keys if key.kid == created_key.kid),
-                    None) is not None
+        try:
+            created_key, _, err = await client.\
+                create_identity_provider_key(jwk_model)
+            assert err is None
+            assert isinstance(created_key, models.JsonWebKey)
+            assert key in created_key.x_5_c
 
-        # Delete
-        _, err = await client.delete_identity_provider_key(created_key.kid)
-        assert err is None
+            # List
+            idp_keys, _, err = await client.list_identity_provider_keys()
+            assert err is None
+            assert isinstance(idp_keys, list)
+            assert next((key for key in idp_keys if key.kid == created_key.kid),
+                        None) is not None
+
+        finally:
+            # Delete
+            _, err = await client.delete_identity_provider_key(created_key.kid)
+            assert err is None
 
     @pytest.mark.vcr()
     @pytest.mark.asyncio
@@ -952,23 +1029,30 @@ class TestIdentityProvidersResource:
         jwk_model = models.JsonWebKey({
             "x5C": [key]
         })
-        created_key, _, err = await client.\
-            create_identity_provider_key(jwk_model)
-        assert err is None
-        assert isinstance(created_key, models.JsonWebKey)
-        assert key in created_key.x_5_c
 
-        # Delete
-        _, err = await client.delete_identity_provider_key(created_key.kid)
-        assert err is None
+        try:
+            created_key, _, err = await client.\
+                create_identity_provider_key(jwk_model)
+            assert err is None
+            assert isinstance(created_key, models.JsonWebKey)
+            assert key in created_key.x_5_c
 
-        # Retrieve
-        retrieved_key, resp, err = await client.\
-            get_identity_provider_key(created_key.kid)
-        assert err is not None
-        assert isinstance(err, OktaAPIError)
-        assert resp.get_status() == HTTPStatus.NOT_FOUND
-        assert retrieved_key is None
+            # Delete
+            _, err = await client.delete_identity_provider_key(created_key.kid)
+            assert err is None
+
+            # Retrieve
+            retrieved_key, resp, err = await client.\
+                get_identity_provider_key(created_key.kid)
+            assert err is not None
+            assert isinstance(err, OktaAPIError)
+            assert resp.get_status() == HTTPStatus.NOT_FOUND
+            assert retrieved_key is None
+        finally:
+            try:
+                _, err = await client.delete_identity_provider_key(created_key.kid)
+            except Exception:
+                pass
 
     @pytest.mark.vcr()
     @pytest.mark.asyncio
@@ -1022,35 +1106,45 @@ class TestIdentityProvidersResource:
             })
         })
 
-        created_idp, _, err = await client.create_identity_provider(idp_model)
-        assert err is None
-        assert isinstance(created_idp, models.IdentityProvider)
-        assert created_idp.name == idp_model.name
+        try:
+            created_idp, _, err = await client.create_identity_provider(idp_model)
+            assert err is None
+            assert isinstance(created_idp, models.IdentityProvider)
+            assert created_idp.name == idp_model.name
 
-        # Generate Key
-        query_params_generate = {"validityYears": 2}
-        generated_key, _, err = await client.\
-            generate_identity_provider_signing_key(
-                created_idp.id, query_params_generate)
-        assert err is None
-        assert isinstance(generated_key, models.JsonWebKey)
-        assert generated_key is not None
+            # Generate Key
+            query_params_generate = {"validityYears": 2}
+            generated_key, _, err = await client.\
+                generate_identity_provider_signing_key(
+                    created_idp.id, query_params_generate)
+            assert err is None
+            assert isinstance(generated_key, models.JsonWebKey)
+            assert generated_key is not None
 
-        # Retrieve Key
-        retrieved_key, _, err = await client.\
-            get_identity_provider_signing_key(
-                created_idp.id, generated_key.kid)
-        assert err is None
-        assert isinstance(retrieved_key, models.JsonWebKey)
-        assert retrieved_key.kid == generated_key.kid
+            # Retrieve Key
+            retrieved_key, _, err = await client.\
+                get_identity_provider_signing_key(
+                    created_idp.id, generated_key.kid)
+            assert err is None
+            assert isinstance(retrieved_key, models.JsonWebKey)
+            assert retrieved_key.kid == generated_key.kid
 
-        # Deactivate and delete
-        deactivated_idp, _, err = await \
-            client.deactivate_identity_provider(created_idp.id)
-        assert err is None
-        assert isinstance(deactivated_idp, models.IdentityProvider)
-        _, err = await client.delete_identity_provider(created_idp.id)
-        assert err is None
+        finally:
+            errors = []
+            # Deactivate and delete
+            try:
+                deactivated_idp, _, err = await \
+                    client.deactivate_identity_provider(created_idp.id)
+                assert err is None
+                assert isinstance(deactivated_idp, models.IdentityProvider)
+            except Exception as exc:
+                errors.append(exc)
+            try:
+                _, err = await client.delete_identity_provider(created_idp.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0
 
     @pytest.mark.vcr()
     @pytest.mark.asyncio
@@ -1104,44 +1198,54 @@ class TestIdentityProvidersResource:
             })
         })
 
-        created_idp, _, err = await client.create_identity_provider(idp_model)
-        assert err is None
-        assert isinstance(created_idp, models.IdentityProvider)
-        assert created_idp.name == idp_model.name
+        try:
+            created_idp, _, err = await client.create_identity_provider(idp_model)
+            assert err is None
+            assert isinstance(created_idp, models.IdentityProvider)
+            assert created_idp.name == idp_model.name
 
-        # Generate Keys
-        query_params_generate = {"validityYears": 2}
-        generated_key_1, _, err = await client.\
-            generate_identity_provider_signing_key(
-                created_idp.id, query_params_generate)
-        assert err is None
-        assert isinstance(generated_key_1, models.JsonWebKey)
-        assert generated_key_1 is not None
+            # Generate Keys
+            query_params_generate = {"validityYears": 2}
+            generated_key_1, _, err = await client.\
+                generate_identity_provider_signing_key(
+                    created_idp.id, query_params_generate)
+            assert err is None
+            assert isinstance(generated_key_1, models.JsonWebKey)
+            assert generated_key_1 is not None
 
-        generated_key_2, _, err = await client.\
-            generate_identity_provider_signing_key(
-                created_idp.id, query_params_generate)
-        assert err is None
-        assert isinstance(generated_key_2, models.JsonWebKey)
-        assert generated_key_2 is not None
+            generated_key_2, _, err = await client.\
+                generate_identity_provider_signing_key(
+                    created_idp.id, query_params_generate)
+            assert err is None
+            assert isinstance(generated_key_2, models.JsonWebKey)
+            assert generated_key_2 is not None
 
-        # List Keys
-        idp_signing_keys, _, err = await client.\
-            list_identity_provider_signing_keys(created_idp.id)
-        assert err is None
-        assert isinstance(idp_signing_keys, list)
-        assert next((key for key in idp_signing_keys
-                     if key.kid == generated_key_1.kid), None) is not None
-        assert next((key for key in idp_signing_keys
-                     if key.kid == generated_key_2.kid), None) is not None
+            # List Keys
+            idp_signing_keys, _, err = await client.\
+                list_identity_provider_signing_keys(created_idp.id)
+            assert err is None
+            assert isinstance(idp_signing_keys, list)
+            assert next((key for key in idp_signing_keys
+                         if key.kid == generated_key_1.kid), None) is not None
+            assert next((key for key in idp_signing_keys
+                         if key.kid == generated_key_2.kid), None) is not None
 
-        # Deactivate and delete
-        deactivated_idp, _, err = await \
-            client.deactivate_identity_provider(created_idp.id)
-        assert err is None
-        assert isinstance(deactivated_idp, models.IdentityProvider)
-        _, err = await client.delete_identity_provider(created_idp.id)
-        assert err is None
+        finally:
+            errors = []
+            # Deactivate and delete
+            try:
+                deactivated_idp, _, err = await \
+                    client.deactivate_identity_provider(created_idp.id)
+                assert err is None
+                assert isinstance(deactivated_idp, models.IdentityProvider)
+            except Exception as exc:
+                errors.append(exc)
+            try:
+                _, err = await client.delete_identity_provider(created_idp.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0
 
     @pytest.mark.vcr()
     @pytest.mark.asyncio
@@ -1240,56 +1344,72 @@ class TestIdentityProvidersResource:
             })
         })
 
-        created_idp, _, err = await client.create_identity_provider(idp_model)
-        assert err is None
-        assert isinstance(created_idp, models.IdentityProvider)
-        assert created_idp.name == idp_model.name
+        try:
+            created_idp, _, err = await client.create_identity_provider(idp_model)
+            assert err is None
+            assert isinstance(created_idp, models.IdentityProvider)
+            assert created_idp.name == idp_model.name
 
-        created_idp_2, _, err = await\
-            client.create_identity_provider(idp_model_2)
-        assert err is None
-        assert isinstance(created_idp_2, models.IdentityProvider)
-        assert created_idp_2.name == idp_model.name
+            created_idp_2, _, err = await\
+                client.create_identity_provider(idp_model_2)
+            assert err is None
+            assert isinstance(created_idp_2, models.IdentityProvider)
+            assert created_idp_2.name == idp_model.name
 
-        # Generate Key
-        query_params_generate = {"validityYears": 2}
-        generated_key, _, err = await client.\
-            generate_identity_provider_signing_key(
-                created_idp.id, query_params_generate)
-        assert err is None
-        assert isinstance(generated_key, models.JsonWebKey)
-        assert generated_key is not None
+            # Generate Key
+            query_params_generate = {"validityYears": 2}
+            generated_key, _, err = await client.\
+                generate_identity_provider_signing_key(
+                    created_idp.id, query_params_generate)
+            assert err is None
+            assert isinstance(generated_key, models.JsonWebKey)
+            assert generated_key is not None
 
-        # Clone Key
-        query_params_clone = {"targetIdpId": created_idp_2.id}
-        cloned_key, _, err = await \
-            client.clone_identity_provider_key(
-                created_idp.id, generated_key.kid, query_params_clone)
-        assert err is None
-        assert isinstance(cloned_key, models.JsonWebKey)
-        assert cloned_key.kid == generated_key.kid
+            # Clone Key
+            query_params_clone = {"targetIdpId": created_idp_2.id}
+            cloned_key, _, err = await \
+                client.clone_identity_provider_key(
+                    created_idp.id, generated_key.kid, query_params_clone)
+            assert err is None
+            assert isinstance(cloned_key, models.JsonWebKey)
+            assert cloned_key.kid == generated_key.kid
 
-        # Retrieve Key
-        retrieved_key, _, err = await client.\
-            get_identity_provider_signing_key(
-                created_idp_2.id, cloned_key.kid)
-        assert err is None
-        assert isinstance(retrieved_key, models.JsonWebKey)
-        assert retrieved_key.kid == cloned_key.kid
+            # Retrieve Key
+            retrieved_key, _, err = await client.\
+                get_identity_provider_signing_key(
+                    created_idp_2.id, cloned_key.kid)
+            assert err is None
+            assert isinstance(retrieved_key, models.JsonWebKey)
+            assert retrieved_key.kid == cloned_key.kid
 
-        # Deactivate and delete
-        deactivated_idp, _, err = await \
-            client.deactivate_identity_provider(created_idp.id)
-        assert err is None
-        assert isinstance(deactivated_idp, models.IdentityProvider)
-        _, err = await client.delete_identity_provider(created_idp.id)
-        assert err is None
-        deactivated_idp, _, err = await \
-            client.deactivate_identity_provider(created_idp_2.id)
-        assert err is None
-        assert isinstance(deactivated_idp, models.IdentityProvider)
-        _, err = await client.delete_identity_provider(created_idp_2.id)
-        assert err is None
+        finally:
+            errors = []
+            # Deactivate and delete
+            try:
+                deactivated_idp, _, err = await \
+                    client.deactivate_identity_provider(created_idp.id)
+                assert err is None
+                assert isinstance(deactivated_idp, models.IdentityProvider)
+            except Exception as exc:
+                errors.append(exc)
+            try:
+                _, err = await client.delete_identity_provider(created_idp.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            try:
+                deactivated_idp, _, err = await \
+                    client.deactivate_identity_provider(created_idp_2.id)
+                assert err is None
+                assert isinstance(deactivated_idp, models.IdentityProvider)
+            except Exception as exc:
+                errors.append(exc)
+            try:
+                _, err = await client.delete_identity_provider(created_idp_2.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0
 
     @pytest.mark.vcr()
     @pytest.mark.asyncio
@@ -1343,47 +1463,57 @@ class TestIdentityProvidersResource:
             })
         })
 
-        created_idp, _, err = await client.create_identity_provider(idp_model)
-        assert err is None
-        assert isinstance(created_idp, models.IdentityProvider)
-        assert created_idp.name == idp_model.name
+        try:
+            created_idp, _, err = await client.create_identity_provider(idp_model)
+            assert err is None
+            assert isinstance(created_idp, models.IdentityProvider)
+            assert created_idp.name == idp_model.name
 
-        # Generate CSR
-        csr_metadata_model = models.CsrMetadata({
-            "subject": models.CsrMetadataSubject({
-                "countryName": "CAN",
-                "stateOrProvinceName": "Ontario",
-                "localityName": "Toronto",
-                "organizationName": "Okta, Inc.",
-                "organizationalUnitName": "Dev",
-                "commonName": "SP Issuer"
-            }),
-            "subjectAltNames": models.CsrMetadataSubjectAltNames({
-                "dnsNames": ["dev.okta.com"]
+            # Generate CSR
+            csr_metadata_model = models.CsrMetadata({
+                "subject": models.CsrMetadataSubject({
+                    "countryName": "CAN",
+                    "stateOrProvinceName": "Ontario",
+                    "localityName": "Toronto",
+                    "organizationName": "Okta, Inc.",
+                    "organizationalUnitName": "Dev",
+                    "commonName": "SP Issuer"
+                }),
+                "subjectAltNames": models.CsrMetadataSubjectAltNames({
+                    "dnsNames": ["dev.okta.com"]
+                })
             })
-        })
-        generated_csr, _, err = await client.\
-            generate_csr_for_identity_provider(
-                created_idp.id, csr_metadata_model)
-        assert err is None
-        assert isinstance(generated_csr, models.Csr)
-        assert generated_csr.kty == "RSA"
+            generated_csr, _, err = await client.\
+                generate_csr_for_identity_provider(
+                    created_idp.id, csr_metadata_model)
+            assert err is None
+            assert isinstance(generated_csr, models.Csr)
+            assert generated_csr.kty == "RSA"
 
-        # Retrieve
-        retrieved_csr, _, err = await client.\
-            get_csr_for_identity_provider(created_idp.id, generated_csr.id)
-        assert err is None
-        assert isinstance(retrieved_csr, models.Csr)
-        assert retrieved_csr.id == generated_csr.id
-        assert retrieved_csr.kty == generated_csr.kty
+            # Retrieve
+            retrieved_csr, _, err = await client.\
+                get_csr_for_identity_provider(created_idp.id, generated_csr.id)
+            assert err is None
+            assert isinstance(retrieved_csr, models.Csr)
+            assert retrieved_csr.id == generated_csr.id
+            assert retrieved_csr.kty == generated_csr.kty
 
-        # Deactivate and delete
-        deactivated_idp, _, err = await \
-            client.deactivate_identity_provider(created_idp.id)
-        assert err is None
-        assert isinstance(deactivated_idp, models.IdentityProvider)
-        _, err = await client.delete_identity_provider(created_idp.id)
-        assert err is None
+        finally:
+            errors = []
+            # Deactivate and delete
+            try:
+                deactivated_idp, _, err = await \
+                    client.deactivate_identity_provider(created_idp.id)
+                assert err is None
+                assert isinstance(deactivated_idp, models.IdentityProvider)
+            except Exception as exc:
+                errors.append(exc)
+            try:
+                _, err = await client.delete_identity_provider(created_idp.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0
 
     @pytest.mark.vcr()
     @pytest.mark.asyncio
@@ -1437,57 +1567,67 @@ class TestIdentityProvidersResource:
             })
         })
 
-        created_idp, _, err = await client.create_identity_provider(idp_model)
-        assert err is None
-        assert isinstance(created_idp, models.IdentityProvider)
-        assert created_idp.name == idp_model.name
+        try:
+            created_idp, _, err = await client.create_identity_provider(idp_model)
+            assert err is None
+            assert isinstance(created_idp, models.IdentityProvider)
+            assert created_idp.name == idp_model.name
 
-        # Generate CSR
-        csr_metadata_model = models.CsrMetadata({
-            "subject": models.CsrMetadataSubject({
-                "countryName": "CAN",
-                "stateOrProvinceName": "Ontario",
-                "localityName": "Toronto",
-                "organizationName": "Okta, Inc.",
-                "organizationalUnitName": "Dev",
-                "commonName": "SP Issuer"
-            }),
-            "subjectAltNames": models.CsrMetadataSubjectAltNames({
-                "dnsNames": ["dev.okta.com"]
+            # Generate CSR
+            csr_metadata_model = models.CsrMetadata({
+                "subject": models.CsrMetadataSubject({
+                    "countryName": "CAN",
+                    "stateOrProvinceName": "Ontario",
+                    "localityName": "Toronto",
+                    "organizationName": "Okta, Inc.",
+                    "organizationalUnitName": "Dev",
+                    "commonName": "SP Issuer"
+                }),
+                "subjectAltNames": models.CsrMetadataSubjectAltNames({
+                    "dnsNames": ["dev.okta.com"]
+                })
             })
-        })
-        generated_csr, _, err = await client.\
-            generate_csr_for_identity_provider(
-                created_idp.id, csr_metadata_model)
-        assert err is None
-        assert isinstance(generated_csr, models.Csr)
-        assert generated_csr.kty == "RSA"
+            generated_csr, _, err = await client.\
+                generate_csr_for_identity_provider(
+                    created_idp.id, csr_metadata_model)
+            assert err is None
+            assert isinstance(generated_csr, models.Csr)
+            assert generated_csr.kty == "RSA"
 
-        # Retrieve
-        retrieved_csr, _, err = await client.\
-            get_csr_for_identity_provider(created_idp.id, generated_csr.id)
-        assert err is None
-        assert isinstance(retrieved_csr, models.Csr)
-        assert retrieved_csr.id == generated_csr.id
-        assert retrieved_csr.kty == generated_csr.kty
+            # Retrieve
+            retrieved_csr, _, err = await client.\
+                get_csr_for_identity_provider(created_idp.id, generated_csr.id)
+            assert err is None
+            assert isinstance(retrieved_csr, models.Csr)
+            assert retrieved_csr.id == generated_csr.id
+            assert retrieved_csr.kty == generated_csr.kty
 
-        # Revoke
-        _, err = await client.\
-            revoke_csr_for_identity_provider(created_idp.id, generated_csr.id)
-        assert err is None
+            # Revoke
+            _, err = await client.\
+                revoke_csr_for_identity_provider(created_idp.id, generated_csr.id)
+            assert err is None
 
-        # Retrieve for verification
-        retrieved_csr, resp, err = await client.\
-            get_csr_for_identity_provider(created_idp.id, generated_csr.id)
-        assert err is not None
-        assert isinstance(err, OktaAPIError)
-        assert resp.get_status() == HTTPStatus.NOT_FOUND
-        assert retrieved_csr is None
+            # Retrieve for verification
+            retrieved_csr, resp, err = await client.\
+                get_csr_for_identity_provider(created_idp.id, generated_csr.id)
+            assert err is not None
+            assert isinstance(err, OktaAPIError)
+            assert resp.get_status() == HTTPStatus.NOT_FOUND
+            assert retrieved_csr is None
 
-        # Deactivate and delete
-        deactivated_idp, _, err = await \
-            client.deactivate_identity_provider(created_idp.id)
-        assert err is None
-        assert isinstance(deactivated_idp, models.IdentityProvider)
-        _, err = await client.delete_identity_provider(created_idp.id)
-        assert err is None
+        finally:
+            errors = []
+            # Deactivate and delete
+            try:
+                deactivated_idp, _, err = await \
+                    client.deactivate_identity_provider(created_idp.id)
+                assert err is None
+                assert isinstance(deactivated_idp, models.IdentityProvider)
+            except Exception as exc:
+                errors.append(exc)
+            try:
+                _, err = await client.delete_identity_provider(created_idp.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0

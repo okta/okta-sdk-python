@@ -33,58 +33,61 @@ class TestLinkedObjectsResource:
             })
         })
 
-        created_linked_object_definition, _, err = await client.\
-            add_linked_object_definition(linked_object_model)
-        assert err is None
-        assert isinstance(created_linked_object_definition,
-                          models.LinkedObject)
-        assert created_linked_object_definition.primary
-        assert created_linked_object_definition.associated
+        try:
+            created_linked_object_definition, _, err = await client.\
+                add_linked_object_definition(linked_object_model)
+            assert err is None
+            assert isinstance(created_linked_object_definition,
+                              models.LinkedObject)
+            assert created_linked_object_definition.primary
+            assert created_linked_object_definition.associated
 
-        # Retrieve by Primary Name
-        retrieved_linked_object_definition, _, err = await \
-            client.get_linked_object_definition(
-                linked_object_model.primary.name)
-        assert err is None
-        assert isinstance(retrieved_linked_object_definition,
-                          models.LinkedObject)
-        assert retrieved_linked_object_definition.primary.name ==\
-            created_linked_object_definition.primary.name
-        assert retrieved_linked_object_definition.associated.name ==\
-            created_linked_object_definition.associated.name
-        assert retrieved_linked_object_definition.primary.title ==\
-            created_linked_object_definition.primary.title
-        assert retrieved_linked_object_definition.associated.title ==\
-            created_linked_object_definition.associated.title
-        assert retrieved_linked_object_definition.primary.type ==\
-            created_linked_object_definition.primary.type
-        assert retrieved_linked_object_definition.associated.type ==\
-            created_linked_object_definition.associated.type
+            # Retrieve by Primary Name
+            retrieved_linked_object_definition, _, err = await \
+                client.get_linked_object_definition(
+                    linked_object_model.primary.name)
+            assert err is None
+            assert isinstance(retrieved_linked_object_definition,
+                              models.LinkedObject)
+            assert retrieved_linked_object_definition.primary.name ==\
+                created_linked_object_definition.primary.name
+            assert retrieved_linked_object_definition.associated.name ==\
+                created_linked_object_definition.associated.name
+            assert retrieved_linked_object_definition.primary.title ==\
+                created_linked_object_definition.primary.title
+            assert retrieved_linked_object_definition.associated.title ==\
+                created_linked_object_definition.associated.title
+            assert retrieved_linked_object_definition.primary.type ==\
+                created_linked_object_definition.primary.type
+            assert retrieved_linked_object_definition.associated.type ==\
+                created_linked_object_definition.associated.type
 
-        # Retrieve by Associated Name
-        retrieved_linked_object_definition, _, err = await \
-            client.get_linked_object_definition(
-                linked_object_model.associated.name)
-        assert err is None
-        assert isinstance(retrieved_linked_object_definition,
-                          models.LinkedObject)
-        assert retrieved_linked_object_definition.primary.name ==\
-            created_linked_object_definition.primary.name
-        assert retrieved_linked_object_definition.associated.name ==\
-            created_linked_object_definition.associated.name
-        assert retrieved_linked_object_definition.primary.title ==\
-            created_linked_object_definition.primary.title
-        assert retrieved_linked_object_definition.associated.title ==\
-            created_linked_object_definition.associated.title
-        assert retrieved_linked_object_definition.primary.type ==\
-            created_linked_object_definition.primary.type
-        assert retrieved_linked_object_definition.associated.type ==\
-            created_linked_object_definition.associated.type
+            # Retrieve by Associated Name
+            retrieved_linked_object_definition, _, err = await \
+                client.get_linked_object_definition(
+                    linked_object_model.associated.name)
+            assert err is None
+            assert isinstance(retrieved_linked_object_definition,
+                              models.LinkedObject)
+            assert retrieved_linked_object_definition.primary.name ==\
+                created_linked_object_definition.primary.name
+            assert retrieved_linked_object_definition.associated.name ==\
+                created_linked_object_definition.associated.name
+            assert retrieved_linked_object_definition.primary.title ==\
+                created_linked_object_definition.primary.title
+            assert retrieved_linked_object_definition.associated.title ==\
+                created_linked_object_definition.associated.title
+            assert retrieved_linked_object_definition.primary.type ==\
+                created_linked_object_definition.primary.type
+            assert retrieved_linked_object_definition.associated.type ==\
+                created_linked_object_definition.associated.type
 
-        # Delete Linked Object definition
-        _, err = await \
-            client.delete_linked_object_definition(
-                linked_object_model.primary.name)
+        finally:
+            # Delete Linked Object definition
+            _, err = await \
+                client.delete_linked_object_definition(
+                    linked_object_model.primary.name)
+            assert err is None
 
     @pytest.mark.vcr()
     @pytest.mark.asyncio
@@ -123,39 +126,51 @@ class TestLinkedObjectsResource:
             })
         })
 
-        created_linked_object_definition, _, err = await client.\
-            add_linked_object_definition(linked_object_model_1)
-        assert err is None
-        assert isinstance(created_linked_object_definition,
-                          models.LinkedObject)
-        assert created_linked_object_definition.primary
-        assert created_linked_object_definition.associated
+        try:
+            created_linked_object_definition, _, err = await client.\
+                add_linked_object_definition(linked_object_model_1)
+            assert err is None
+            assert isinstance(created_linked_object_definition,
+                              models.LinkedObject)
+            assert created_linked_object_definition.primary
+            assert created_linked_object_definition.associated
 
-        created_linked_object_definition_2, _, err = await client.\
-            add_linked_object_definition(linked_object_model_2)
-        assert err is None
-        assert isinstance(created_linked_object_definition_2,
-                          models.LinkedObject)
-        assert created_linked_object_definition_2.primary
-        assert created_linked_object_definition_2.associated
+            created_linked_object_definition_2, _, err = await client.\
+                add_linked_object_definition(linked_object_model_2)
+            assert err is None
+            assert isinstance(created_linked_object_definition_2,
+                              models.LinkedObject)
+            assert created_linked_object_definition_2.primary
+            assert created_linked_object_definition_2.associated
 
-        # List
-        all_linked_obj_defs, _, err = await\
-            client.list_linked_object_definitions()
-        assert err is None
-        assert len(all_linked_obj_defs) > 0
-        assert next((lo for lo in all_linked_obj_defs
-                     if linked_object_model_1.primary.name == lo.primary.name))
-        assert next((lo for lo in all_linked_obj_defs
-                     if linked_object_model_2.primary.name == lo.primary.name))
+            # List
+            all_linked_obj_defs, _, err = await\
+                client.list_linked_object_definitions()
+            assert err is None
+            assert len(all_linked_obj_defs) > 0
+            assert next((lo for lo in all_linked_obj_defs
+                         if linked_object_model_1.primary.name == lo.primary.name))
+            assert next((lo for lo in all_linked_obj_defs
+                         if linked_object_model_2.primary.name == lo.primary.name))
 
-        # Delete Linked Object definition
-        _, err = await \
-            client.delete_linked_object_definition(
-                linked_object_model_1.primary.name)
-        _, err = await \
-            client.delete_linked_object_definition(
-                linked_object_model_2.primary.name)
+        finally:
+            errors = []
+            # Delete Linked Object definition
+            try:
+                _, err = await \
+                    client.delete_linked_object_definition(
+                        linked_object_model_1.primary.name)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            try:
+                _, err = await \
+                    client.delete_linked_object_definition(
+                        linked_object_model_2.primary.name)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0
 
     @pytest.mark.vcr()
     @pytest.mark.asyncio
@@ -179,44 +194,53 @@ class TestLinkedObjectsResource:
             })
         })
 
-        created_linked_object_definition, _, err = await client.\
-            add_linked_object_definition(linked_object_model)
-        assert err is None
-        assert isinstance(created_linked_object_definition,
-                          models.LinkedObject)
-        assert created_linked_object_definition.primary
-        assert created_linked_object_definition.associated
+        try:
+            created_linked_object_definition, _, err = await client.\
+                add_linked_object_definition(linked_object_model)
+            assert err is None
+            assert isinstance(created_linked_object_definition,
+                              models.LinkedObject)
+            assert created_linked_object_definition.primary
+            assert created_linked_object_definition.associated
 
-        # Retrieve by Primary Name
-        retrieved_linked_object_definition, _, err = await \
-            client.get_linked_object_definition(
-                linked_object_model.primary.name)
-        assert err is None
-        assert isinstance(retrieved_linked_object_definition,
-                          models.LinkedObject)
-        assert retrieved_linked_object_definition.primary.name ==\
-            created_linked_object_definition.primary.name
-        assert retrieved_linked_object_definition.associated.name ==\
-            created_linked_object_definition.associated.name
-        assert retrieved_linked_object_definition.primary.title ==\
-            created_linked_object_definition.primary.title
-        assert retrieved_linked_object_definition.associated.title ==\
-            created_linked_object_definition.associated.title
-        assert retrieved_linked_object_definition.primary.type ==\
-            created_linked_object_definition.primary.type
-        assert retrieved_linked_object_definition.associated.type ==\
-            created_linked_object_definition.associated.type
+            # Retrieve by Primary Name
+            retrieved_linked_object_definition, _, err = await \
+                client.get_linked_object_definition(
+                    linked_object_model.primary.name)
+            assert err is None
+            assert isinstance(retrieved_linked_object_definition,
+                              models.LinkedObject)
+            assert retrieved_linked_object_definition.primary.name ==\
+                created_linked_object_definition.primary.name
+            assert retrieved_linked_object_definition.associated.name ==\
+                created_linked_object_definition.associated.name
+            assert retrieved_linked_object_definition.primary.title ==\
+                created_linked_object_definition.primary.title
+            assert retrieved_linked_object_definition.associated.title ==\
+                created_linked_object_definition.associated.title
+            assert retrieved_linked_object_definition.primary.type ==\
+                created_linked_object_definition.primary.type
+            assert retrieved_linked_object_definition.associated.type ==\
+                created_linked_object_definition.associated.type
 
-        # Delete Linked Object definition
-        _, err = await \
-            client.delete_linked_object_definition(
-                linked_object_model.primary.name)
+            # Delete Linked Object definition
+            _, err = await \
+                client.delete_linked_object_definition(
+                    linked_object_model.primary.name)
 
-        # Retrieve by Primary Name
-        retrieved_linked_object_definition, resp, err = await \
-            client.get_linked_object_definition(
-                linked_object_model.primary.name)
-        assert err is not None
-        assert isinstance(err, OktaAPIError)
-        assert resp.get_status() == HTTPStatus.NOT_FOUND
-        assert retrieved_linked_object_definition is None
+            # Retrieve by Primary Name
+            retrieved_linked_object_definition, resp, err = await \
+                client.get_linked_object_definition(
+                    linked_object_model.primary.name)
+            assert err is not None
+            assert isinstance(err, OktaAPIError)
+            assert resp.get_status() == HTTPStatus.NOT_FOUND
+            assert retrieved_linked_object_definition is None
+        finally:
+            # Delete Linked Object definition
+            try:
+                _, err = await \
+                    client.delete_linked_object_definition(
+                        linked_object_model.primary.name)
+            except Exception:
+                pass

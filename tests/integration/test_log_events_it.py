@@ -32,24 +32,34 @@ class TestLogEventsResource:
             "settings": app_settings
         })
 
-        # Create App in org
-        app, _, err = await client.create_application(bookmark_app_obj)
-        assert err is None
-        assert isinstance(app, models.Application)
-        assert isinstance(app, models.BookmarkApplication)
+        try:
+            # Create App in org
+            app, _, err = await client.create_application(bookmark_app_obj)
+            assert err is None
+            assert isinstance(app, models.Application)
+            assert isinstance(app, models.BookmarkApplication)
 
-        logs, _, err = await client.get_logs()
-        assert err is None
-        assert logs is not None
-        assert isinstance(logs, list)
-        if logs[0]:
-            assert isinstance(logs[0], models.LogEvent)
+            logs, _, err = await client.get_logs()
+            assert err is None
+            assert logs is not None
+            assert isinstance(logs, list)
+            if logs[0]:
+                assert isinstance(logs[0], models.LogEvent)
 
-        # Deactivate & Delete created app
-        _, err = await client.deactivate_application(app.id)
-        assert err is None
-        _, err = await client.delete_application(app.id)
-        assert err is None
+        finally:
+            errors = []
+            # Deactivate & Delete created app
+            try:
+                _, err = await client.deactivate_application(app.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            try:
+                _, err = await client.delete_application(app.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0
 
     @pytest.mark.asyncio
     @pytest.mark.skip
@@ -72,33 +82,43 @@ class TestLogEventsResource:
             "settings": app_settings
         })
 
-        # Create App in org
-        app, _, err = await client.create_application(bookmark_app_obj)
-        assert err is None
-        assert isinstance(app, models.Application)
-        assert isinstance(app, models.BookmarkApplication)
+        try:
+            # Create App in org
+            app, _, err = await client.create_application(bookmark_app_obj)
+            assert err is None
+            assert isinstance(app, models.Application)
+            assert isinstance(app, models.BookmarkApplication)
 
-        now = dt.datetime.now(dt.timezone.utc)
-        now = now.replace(microsecond=0)
-        one_minute_after = now + dt.timedelta(minutes=1)
+            now = dt.datetime.now(dt.timezone.utc)
+            now = now.replace(microsecond=0)
+            one_minute_after = now + dt.timedelta(minutes=1)
 
-        log_query_params = {
-            "sortOrder": "ASCENDING",
-            "until": one_minute_after.strftime(DATETIME_FORMAT)
-        }
+            log_query_params = {
+                "sortOrder": "ASCENDING",
+                "until": one_minute_after.strftime(DATETIME_FORMAT)
+            }
 
-        logs, _, err = await client.get_logs(log_query_params)
-        assert err is None
-        assert logs is not None
-        assert isinstance(logs, list)
-        if logs[0]:
-            assert isinstance(logs[0], models.LogEvent)
+            logs, _, err = await client.get_logs(log_query_params)
+            assert err is None
+            assert logs is not None
+            assert isinstance(logs, list)
+            if logs[0]:
+                assert isinstance(logs[0], models.LogEvent)
 
-        # Deactivate & Delete created app
-        _, err = await client.deactivate_application(app.id)
-        assert err is None
-        _, err = await client.delete_application(app.id)
-        assert err is None
+        finally:
+            errors = []
+            # Deactivate & Delete created app
+            try:
+                _, err = await client.deactivate_application(app.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            try:
+                _, err = await client.delete_application(app.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0
 
     @pytest.mark.asyncio
     @pytest.mark.skip
@@ -121,30 +141,40 @@ class TestLogEventsResource:
             "settings": app_settings
         })
 
-        # Create App in org
-        app, _, err = await client.create_application(bookmark_app_obj)
-        assert err is None
-        assert isinstance(app, models.Application)
-        assert isinstance(app, models.BookmarkApplication)
+        try:
+            # Create App in org
+            app, _, err = await client.create_application(bookmark_app_obj)
+            assert err is None
+            assert isinstance(app, models.Application)
+            assert isinstance(app, models.BookmarkApplication)
 
-        # Retrieve logs
-        now = dt.datetime.now(dt.timezone.utc)
-        now = now.replace(microsecond=0)
-        one_hour_before = now - dt.timedelta(hours=1)
+            # Retrieve logs
+            now = dt.datetime.now(dt.timezone.utc)
+            now = now.replace(microsecond=0)
+            one_hour_before = now - dt.timedelta(hours=1)
 
-        log_query_params = {
-            "since": one_hour_before.strftime(DATETIME_FORMAT),
-            "until": now.strftime(DATETIME_FORMAT)
-        }
-        logs, _, err = await client.get_logs(log_query_params)
-        assert err is None
-        assert logs is not None
-        assert isinstance(logs, list)
-        if logs[0]:
-            assert isinstance(logs[0], models.LogEvent)
+            log_query_params = {
+                "since": one_hour_before.strftime(DATETIME_FORMAT),
+                "until": now.strftime(DATETIME_FORMAT)
+            }
+            logs, _, err = await client.get_logs(log_query_params)
+            assert err is None
+            assert logs is not None
+            assert isinstance(logs, list)
+            if logs[0]:
+                assert isinstance(logs[0], models.LogEvent)
 
-        # Deactivate & Delete created app
-        _, err = await client.deactivate_application(app.id)
-        assert err is None
-        _, err = await client.delete_application(app.id)
-        assert err is None
+        finally:
+            errors = []
+            # Deactivate & Delete created app
+            try:
+                _, err = await client.deactivate_application(app.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            try:
+                _, err = await client.delete_application(app.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0

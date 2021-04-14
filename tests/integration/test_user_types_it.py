@@ -29,15 +29,17 @@ class TestUserTypesResource:
             "name": TEST_NAME
         })
 
-        created, _, err = await client.create_user_type(user_type_obj)
-        assert err is None
-        assert created.id is not None
-        assert created.description == TEST_DESC
-        assert created.display_name == TEST_DISPLAY_NAME
-        assert created.name == TEST_NAME
+        try:
+            created, _, err = await client.create_user_type(user_type_obj)
+            assert err is None
+            assert created.id is not None
+            assert created.description == TEST_DESC
+            assert created.display_name == TEST_DISPLAY_NAME
+            assert created.name == TEST_NAME
 
-        _, err = await client.delete_user_type(created.id)
-        assert err is None
+        finally:
+            _, err = await client.delete_user_type(created.id)
+            assert err is None
 
     @pytest.mark.vcr()
     @pytest.mark.asyncio
@@ -57,20 +59,22 @@ class TestUserTypesResource:
             "name": TEST_NAME
         })
 
-        created, _, err = await client.create_user_type(user_type_obj)
-        assert err is None
-        assert created.id is not None
+        try:
+            created, _, err = await client.create_user_type(user_type_obj)
+            assert err is None
+            assert created.id is not None
 
-        # Retrieve
-        found, _, err = await client.get_user_type(created.id)
-        assert err is None
-        assert found.id == created.id
-        assert found.description == TEST_DESC
-        assert found.display_name == TEST_DISPLAY_NAME
-        assert found.name == TEST_NAME
+            # Retrieve
+            found, _, err = await client.get_user_type(created.id)
+            assert err is None
+            assert found.id == created.id
+            assert found.description == TEST_DESC
+            assert found.display_name == TEST_DISPLAY_NAME
+            assert found.name == TEST_NAME
 
-        _, err = await client.delete_user_type(created.id)
-        assert err is None
+        finally:
+            _, err = await client.delete_user_type(created.id)
+            assert err is None
 
     @pytest.mark.vcr()
     @pytest.mark.asyncio
@@ -90,33 +94,35 @@ class TestUserTypesResource:
             "name": TEST_NAME
         })
 
-        created, _, err = await client.create_user_type(user_type_obj)
-        assert err is None
-        assert created.id is not None
+        try:
+            created, _, err = await client.create_user_type(user_type_obj)
+            assert err is None
+            assert created.id is not None
 
-        # Update
-        UPDATED_TEST_DESC = f"{TEST_DESC}-updated"
-        UPDATED_TEST_DISPLAY_NAME = f"{TEST_DISPLAY_NAME}-updated"
-        updated_obj = models.UserType({
-            "description": UPDATED_TEST_DESC,
-            "displayName": UPDATED_TEST_DISPLAY_NAME,
-        })
-        updated, _, err = await client.update_user_type(created.id,
-                                                        updated_obj)
-        assert err is None
-        assert updated.id == created.id
-        assert updated.description == UPDATED_TEST_DESC
-        assert updated.display_name == UPDATED_TEST_DISPLAY_NAME
+            # Update
+            UPDATED_TEST_DESC = f"{TEST_DESC}-updated"
+            UPDATED_TEST_DISPLAY_NAME = f"{TEST_DISPLAY_NAME}-updated"
+            updated_obj = models.UserType({
+                "description": UPDATED_TEST_DESC,
+                "displayName": UPDATED_TEST_DISPLAY_NAME,
+            })
+            updated, _, err = await client.update_user_type(created.id,
+                                                            updated_obj)
+            assert err is None
+            assert updated.id == created.id
+            assert updated.description == UPDATED_TEST_DESC
+            assert updated.display_name == UPDATED_TEST_DISPLAY_NAME
 
-        # Retrieve
-        found, _, err = await client.get_user_type(created.id)
-        assert err is None
-        assert found.id == created.id
-        assert found.description == UPDATED_TEST_DESC
-        assert found.display_name == UPDATED_TEST_DISPLAY_NAME
+            # Retrieve
+            found, _, err = await client.get_user_type(created.id)
+            assert err is None
+            assert found.id == created.id
+            assert found.description == UPDATED_TEST_DESC
+            assert found.display_name == UPDATED_TEST_DISPLAY_NAME
 
-        _, err = await client.delete_user_type(created.id)
-        assert err is None
+        finally:
+            _, err = await client.delete_user_type(created.id)
+            assert err is None
 
     @pytest.mark.vcr()
     @pytest.mark.asyncio
@@ -136,36 +142,38 @@ class TestUserTypesResource:
             "name": TEST_NAME
         })
 
-        created, _, err = await client.create_user_type(user_type_obj)
-        assert err is None
-        assert created.id is not None
+        try:
+            created, _, err = await client.create_user_type(user_type_obj)
+            assert err is None
+            assert created.id is not None
 
-        # Replace
-        REPLACED_TEST_DESC = f"{TEST_DESC}-replaced"
-        REPLACED_TEST_DISPLAY_NAME = f"{TEST_DISPLAY_NAME}-replaced"
-        replaced_obj = models.UserType({
-            "description": REPLACED_TEST_DESC,
-            "displayName": REPLACED_TEST_DISPLAY_NAME,
-            "name": TEST_NAME
-        })
-        replaced, _, err = await client.replace_user_type(created.id,
-                                                          replaced_obj)
-        assert err is None
-        assert replaced.id == created.id
-        assert replaced.description == REPLACED_TEST_DESC
-        assert replaced.display_name == REPLACED_TEST_DISPLAY_NAME
-        assert replaced.name == TEST_NAME
+            # Replace
+            REPLACED_TEST_DESC = f"{TEST_DESC}-replaced"
+            REPLACED_TEST_DISPLAY_NAME = f"{TEST_DISPLAY_NAME}-replaced"
+            replaced_obj = models.UserType({
+                "description": REPLACED_TEST_DESC,
+                "displayName": REPLACED_TEST_DISPLAY_NAME,
+                "name": TEST_NAME
+            })
+            replaced, _, err = await client.replace_user_type(created.id,
+                                                              replaced_obj)
+            assert err is None
+            assert replaced.id == created.id
+            assert replaced.description == REPLACED_TEST_DESC
+            assert replaced.display_name == REPLACED_TEST_DISPLAY_NAME
+            assert replaced.name == TEST_NAME
 
-        # Retrieve
-        found, _, err = await client.get_user_type(created.id)
-        assert err is None
-        assert found.id == created.id
-        assert found.description == REPLACED_TEST_DESC
-        assert found.display_name == REPLACED_TEST_DISPLAY_NAME
-        assert found.name == TEST_NAME
+            # Retrieve
+            found, _, err = await client.get_user_type(created.id)
+            assert err is None
+            assert found.id == created.id
+            assert found.description == REPLACED_TEST_DESC
+            assert found.display_name == REPLACED_TEST_DISPLAY_NAME
+            assert found.name == TEST_NAME
 
-        _, err = await client.delete_user_type(created.id)
-        assert err is None
+        finally:
+            _, err = await client.delete_user_type(created.id)
+            assert err is None
 
     @pytest.mark.vcr()
     @pytest.mark.asyncio
@@ -185,27 +193,33 @@ class TestUserTypesResource:
             "name": TEST_NAME
         })
 
-        created, _, err = await client.create_user_type(user_type_obj)
-        assert err is None
-        assert created.id is not None
+        try:
+            created, _, err = await client.create_user_type(user_type_obj)
+            assert err is None
+            assert created.id is not None
 
-        # Retrieve
-        found, _, err = await client.get_user_type(created.id)
-        assert err is None
-        assert found.id == created.id
-        assert found.description == TEST_DESC
-        assert found.display_name == TEST_DISPLAY_NAME
-        assert found.name == TEST_NAME
+            # Retrieve
+            found, _, err = await client.get_user_type(created.id)
+            assert err is None
+            assert found.id == created.id
+            assert found.description == TEST_DESC
+            assert found.display_name == TEST_DISPLAY_NAME
+            assert found.name == TEST_NAME
 
-        # Delete
-        _, err = await client.delete_user_type(created.id)
-        assert err is None
+            # Delete
+            _, err = await client.delete_user_type(created.id)
+            assert err is None
 
-        # Retrieve
-        found, resp, err = await client.get_user_type(created.id)
-        assert err is not None
-        assert isinstance(err, OktaAPIError)
-        assert resp.get_status() == HTTPStatus.NOT_FOUND
+            # Retrieve
+            found, resp, err = await client.get_user_type(created.id)
+            assert err is not None
+            assert isinstance(err, OktaAPIError)
+            assert resp.get_status() == HTTPStatus.NOT_FOUND
+        finally:
+            try:
+                _, err = await client.delete_user_type(created.id)
+            except Exception:
+                pass
 
     @pytest.mark.vcr()
     @pytest.mark.asyncio
@@ -233,21 +247,31 @@ class TestUserTypesResource:
             "name": TEST_NAME_2
         })
 
-        ut1, _, err = await client.create_user_type(user_type_obj)
-        assert err is None
-        assert ut1.id is not None
-        ut2, _, err = await client.create_user_type(user_type_obj_2)
-        assert err is None
-        assert ut2.id is not None
+        try:
+            ut1, _, err = await client.create_user_type(user_type_obj)
+            assert err is None
+            assert ut1.id is not None
+            ut2, _, err = await client.create_user_type(user_type_obj_2)
+            assert err is None
+            assert ut2.id is not None
 
-        # List
-        user_types, _, err = await client.list_user_types()
-        assert err is None
-        assert len(user_types) > 0
-        assert next((ut for ut in user_types if ut.id == ut1.id))
-        assert next((ut for ut in user_types if ut.id == ut2.id))
+            # List
+            user_types, _, err = await client.list_user_types()
+            assert err is None
+            assert len(user_types) > 0
+            assert next((ut for ut in user_types if ut.id == ut1.id))
+            assert next((ut for ut in user_types if ut.id == ut2.id))
 
-        _, err = await client.delete_user_type(ut1.id)
-        assert err is None
-        _, err = await client.delete_user_type(ut2.id)
-        assert err is None
+        finally:
+            errors = []
+            try:
+                _, err = await client.delete_user_type(ut1.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            try:
+                _, err = await client.delete_user_type(ut2.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0
