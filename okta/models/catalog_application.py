@@ -61,11 +61,11 @@ class CatalogApplication(
             if "status" in config:
                 if isinstance(config["status"],
                               catalog_application_status.CatalogApplicationStatus):
-                    self.status = config["status"]
+                    self.status = config["status"].value
                 elif config["status"] is not None:
                     self.status = catalog_application_status.CatalogApplicationStatus(
                         config["status"].upper()
-                    )
+                    ).value
                 else:
                     self.status = None
             else:

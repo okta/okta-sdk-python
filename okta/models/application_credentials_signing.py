@@ -44,11 +44,11 @@ class ApplicationCredentialsSigning(
             if "use" in config:
                 if isinstance(config["use"],
                               application_credentials_signing_use.ApplicationCredentialsSigningUse):
-                    self.use = config["use"]
+                    self.use = config["use"].value
                 elif config["use"] is not None:
                     self.use = application_credentials_signing_use.ApplicationCredentialsSigningUse(
                         config["use"].upper()
-                    )
+                    ).value
                 else:
                     self.use = None
             else:

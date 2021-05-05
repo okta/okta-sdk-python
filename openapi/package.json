@@ -1,7 +1,9 @@
 {
   "dependencies": {
-    "@okta/openapi": "^2.1.6",
-    "lodash": "^4.17.15"
+    "@okta/openapi": "^2.3.0",
+    "install": "^0.13.0",
+    "lodash": "^4.17.15",
+    "npm": "^7.11.2"
   },
   "scripts": {
     "build": "cd .. && ./openapi/node_modules/.bin/okta-sdk-generator -t ./openapi/templates/ -o .",

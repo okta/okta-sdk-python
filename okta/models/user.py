@@ -82,11 +82,11 @@ class User(
             if "status" in config:
                 if isinstance(config["status"],
                               user_status.UserStatus):
-                    self.status = config["status"]
+                    self.status = config["status"].value
                 elif config["status"] is not None:
                     self.status = user_status.UserStatus(
                         config["status"].upper()
-                    )
+                    ).value
                 else:
                     self.status = None
             else:
@@ -96,11 +96,11 @@ class User(
             if "transitioningToStatus" in config:
                 if isinstance(config["transitioningToStatus"],
                               user_status.UserStatus):
-                    self.transitioning_to_status = config["transitioningToStatus"]
+                    self.transitioning_to_status = config["transitioningToStatus"].value
                 elif config["transitioningToStatus"] is not None:
                     self.transitioning_to_status = user_status.UserStatus(
                         config["transitioningToStatus"].upper()
-                    )
+                    ).value
                 else:
                     self.transitioning_to_status = None
             else:

@@ -112,14 +112,20 @@ class {{pascalCase model.modelName}}(
             {{else}}
             {{#if (exists prop "$ref")}}
             if "{{camelCase prop.propertyName}}" in config:
+                {{#if (eq prop.commonType "enum")}}
+                if isinstance(config["{{camelCase prop.propertyName}}"],
+                              {{snakeCase prop.model}}.{{pascalCase prop.model}}):
+                    self.{{snakeCase prop.propertyName}} = config["{{camelCase prop.propertyName}}"].value
+                {{else}}
                 if isinstance(config["{{camelCase prop.propertyName}}"],
                               {{snakeCase prop.model}}.{{pascalCase prop.model}}):
                     self.{{snakeCase prop.propertyName}} = config["{{camelCase prop.propertyName}}"]
+                {{/if}}
                 elif config["{{camelCase prop.propertyName}}"] is not None:
                     {{#if (eq prop.commonType "enum")}}
                     self.{{snakeCase prop.propertyName}} = {{snakeCase prop.model}}.{{pascalCase prop.model}}(
                         config["{{camelCase prop.propertyName}}"].upper()
-                    )
+                    ).value
                     {{else}}
                     self.{{snakeCase prop.propertyName}} = {{snakeCase prop.model}}.{{pascalCase prop.model}}(
                         config["{{camelCase prop.propertyName}}"]

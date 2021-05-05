@@ -42,11 +42,11 @@ class PushUserFactor(
             if "factorResult" in config:
                 if isinstance(config["factorResult"],
                               factor_result_type.FactorResultType):
-                    self.factor_result = config["factorResult"]
+                    self.factor_result = config["factorResult"].value
                 elif config["factorResult"] is not None:
                     self.factor_result = factor_result_type.FactorResultType(
                         config["factorResult"].upper()
-                    )
+                    ).value
                 else:
                     self.factor_result = None
             else:

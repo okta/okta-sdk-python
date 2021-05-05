@@ -60,11 +60,11 @@ class SmsTemplate(
             if "type" in config:
                 if isinstance(config["type"],
                               sms_template_type.SmsTemplateType):
-                    self.type = config["type"]
+                    self.type = config["type"].value
                 elif config["type"] is not None:
                     self.type = sms_template_type.SmsTemplateType(
                         config["type"].upper()
-                    )
+                    ).value
                 else:
                     self.type = None
             else:

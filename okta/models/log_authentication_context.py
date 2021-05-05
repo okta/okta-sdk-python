@@ -42,11 +42,11 @@ class LogAuthenticationContext(
             if "authenticationProvider" in config:
                 if isinstance(config["authenticationProvider"],
                               log_authentication_provider.LogAuthenticationProvider):
-                    self.authentication_provider = config["authenticationProvider"]
+                    self.authentication_provider = config["authenticationProvider"].value
                 elif config["authenticationProvider"] is not None:
                     self.authentication_provider = log_authentication_provider.LogAuthenticationProvider(
                         config["authenticationProvider"].upper()
-                    )
+                    ).value
                 else:
                     self.authentication_provider = None
             else:
@@ -56,11 +56,11 @@ class LogAuthenticationContext(
             if "credentialProvider" in config:
                 if isinstance(config["credentialProvider"],
                               log_credential_provider.LogCredentialProvider):
-                    self.credential_provider = config["credentialProvider"]
+                    self.credential_provider = config["credentialProvider"].value
                 elif config["credentialProvider"] is not None:
                     self.credential_provider = log_credential_provider.LogCredentialProvider(
                         config["credentialProvider"].upper()
-                    )
+                    ).value
                 else:
                     self.credential_provider = None
             else:
@@ -68,11 +68,11 @@ class LogAuthenticationContext(
             if "credentialType" in config:
                 if isinstance(config["credentialType"],
                               log_credential_type.LogCredentialType):
-                    self.credential_type = config["credentialType"]
+                    self.credential_type = config["credentialType"].value
                 elif config["credentialType"] is not None:
                     self.credential_type = log_credential_type.LogCredentialType(
                         config["credentialType"].upper()
-                    )
+                    ).value
                 else:
                     self.credential_type = None
             else:

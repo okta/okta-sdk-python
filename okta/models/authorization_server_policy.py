@@ -70,11 +70,11 @@ class AuthorizationServerPolicy(
             if "type" in config:
                 if isinstance(config["type"],
                               policy_type.PolicyType):
-                    self.type = config["type"]
+                    self.type = config["type"].value
                 elif config["type"] is not None:
                     self.type = policy_type.PolicyType(
                         config["type"].upper()
-                    )
+                    ).value
                 else:
                     self.type = None
             else:

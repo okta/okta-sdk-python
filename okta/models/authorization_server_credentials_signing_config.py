@@ -44,11 +44,11 @@ class AuthorizationServerCredentialsSigningConfig(
             if "rotationMode" in config:
                 if isinstance(config["rotationMode"],
                               authorization_server_credentials_rotation_mode.AuthorizationServerCredentialsRotationMode):
-                    self.rotation_mode = config["rotationMode"]
+                    self.rotation_mode = config["rotationMode"].value
                 elif config["rotationMode"] is not None:
                     self.rotation_mode = authorization_server_credentials_rotation_mode.AuthorizationServerCredentialsRotationMode(
                         config["rotationMode"].upper()
-                    )
+                    ).value
                 else:
                     self.rotation_mode = None
             else:
@@ -56,11 +56,11 @@ class AuthorizationServerCredentialsSigningConfig(
             if "use" in config:
                 if isinstance(config["use"],
                               authorization_server_credentials_use.AuthorizationServerCredentialsUse):
-                    self.use = config["use"]
+                    self.use = config["use"].value
                 elif config["use"] is not None:
                     self.use = authorization_server_credentials_use.AuthorizationServerCredentialsUse(
                         config["use"].upper()
-                    )
+                    ).value
                 else:
                     self.use = None
             else:

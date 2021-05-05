@@ -48,11 +48,11 @@ class PolicySubject(
             if "matchType" in config:
                 if isinstance(config["matchType"],
                               policy_subject_match_type.PolicySubjectMatchType):
-                    self.match_type = config["matchType"]
+                    self.match_type = config["matchType"].value
                 elif config["matchType"] is not None:
                     self.match_type = policy_subject_match_type.PolicySubjectMatchType(
                         config["matchType"].upper()
-                    )
+                    ).value
                 else:
                     self.match_type = None
             else:

@@ -38,11 +38,11 @@ class Scope(
             if "type" in config:
                 if isinstance(config["type"],
                               scope_type.ScopeType):
-                    self.type = config["type"]
+                    self.type = config["type"].value
                 elif config["type"] is not None:
                     self.type = scope_type.ScopeType(
                         config["type"].upper()
-                    )
+                    ).value
                 else:
                     self.type = None
             else:

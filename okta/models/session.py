@@ -72,11 +72,11 @@ class Session(
             if "status" in config:
                 if isinstance(config["status"],
                               session_status.SessionStatus):
-                    self.status = config["status"]
+                    self.status = config["status"].value
                 elif config["status"] is not None:
                     self.status = session_status.SessionStatus(
                         config["status"].upper()
-                    )
+                    ).value
                 else:
                     self.status = None
             else:

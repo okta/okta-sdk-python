@@ -55,11 +55,11 @@ class SchemeApplicationCredentials(
             if "scheme" in config:
                 if isinstance(config["scheme"],
                               application_credentials_scheme.ApplicationCredentialsScheme):
-                    self.scheme = config["scheme"]
+                    self.scheme = config["scheme"].value
                 elif config["scheme"] is not None:
                     self.scheme = application_credentials_scheme.ApplicationCredentialsScheme(
                         config["scheme"].upper()
-                    )
+                    ).value
                 else:
                     self.scheme = None
             else:

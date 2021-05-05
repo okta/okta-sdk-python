@@ -62,11 +62,11 @@ class InlineHook(
             if "status" in config:
                 if isinstance(config["status"],
                               inline_hook_status.InlineHookStatus):
-                    self.status = config["status"]
+                    self.status = config["status"].value
                 elif config["status"] is not None:
                     self.status = inline_hook_status.InlineHookStatus(
                         config["status"].upper()
-                    )
+                    ).value
                 else:
                     self.status = None
             else:
@@ -74,11 +74,11 @@ class InlineHook(
             if "type" in config:
                 if isinstance(config["type"],
                               inline_hook_type.InlineHookType):
-                    self.type = config["type"]
+                    self.type = config["type"].value
                 elif config["type"] is not None:
                     self.type = inline_hook_type.InlineHookType(
                         config["type"].upper()
-                    )
+                    ).value
                 else:
                     self.type = None
             else:

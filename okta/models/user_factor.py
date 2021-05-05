@@ -48,11 +48,11 @@ class UserFactor(
             if "factorType" in config:
                 if isinstance(config["factorType"],
                               factor_type.FactorType):
-                    self.factor_type = config["factorType"]
+                    self.factor_type = config["factorType"].value
                 elif config["factorType"] is not None:
                     self.factor_type = factor_type.FactorType(
                         config["factorType"].upper()
-                    )
+                    ).value
                 else:
                     self.factor_type = None
             else:
@@ -64,11 +64,11 @@ class UserFactor(
             if "provider" in config:
                 if isinstance(config["provider"],
                               factor_provider.FactorProvider):
-                    self.provider = config["provider"]
+                    self.provider = config["provider"].value
                 elif config["provider"] is not None:
                     self.provider = factor_provider.FactorProvider(
                         config["provider"].upper()
-                    )
+                    ).value
                 else:
                     self.provider = None
             else:
@@ -76,11 +76,11 @@ class UserFactor(
             if "status" in config:
                 if isinstance(config["status"],
                               factor_status.FactorStatus):
-                    self.status = config["status"]
+                    self.status = config["status"].value
                 elif config["status"] is not None:
                     self.status = factor_status.FactorStatus(
                         config["status"].upper()
-                    )
+                    ).value
                 else:
                     self.status = None
             else:

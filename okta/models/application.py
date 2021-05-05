@@ -116,11 +116,11 @@ class Application(
             if "signOnMode" in config:
                 if isinstance(config["signOnMode"],
                               application_sign_on_mode.ApplicationSignOnMode):
-                    self.sign_on_mode = config["signOnMode"]
+                    self.sign_on_mode = config["signOnMode"].value
                 elif config["signOnMode"] is not None:
                     self.sign_on_mode = application_sign_on_mode.ApplicationSignOnMode(
                         config["signOnMode"].upper()
-                    )
+                    ).value
                 else:
                     self.sign_on_mode = None
             else:
