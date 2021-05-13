@@ -377,7 +377,7 @@ user_profile.customAttr = 'custom value'
 **NOTE**: Custom Attributes should always keep letter case the same as defined in `Profile` tab on your org UI.
 
 It is possible to use original (lowerCamelCase) case for basic attributes to make your code look more consistent and nicer:
-> Feature is fully supported with SDK version >= 1.7.0
+> Feature is fully supported with SDK version >= 1.6.1
 
 ```py
 user_profile = models.UserProfile()
