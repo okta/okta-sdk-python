@@ -98,9 +98,13 @@
                         )
                     )
                 {{else}}
+                {{#if (eq (pascalCase operation.responseModel) "User")}}
+                result.append({{pascalCase operation.responseModel}}(item))
+                {{else}}
                 result.append({{pascalCase operation.responseModel}}(
                     self.form_response_body(item)
                     ))
+                {{/if}}
                 {{/if}}
                 {{/if}}
                 {{/if}}
@@ -124,9 +128,15 @@
             body = self.form_response_body(response.get_body())
             result = find_policy_rule_model(body["type"])(body)
             {{else}}
+            {{#if (eq (pascalCase operation.responseModel) "User")}}
+            result = {{pascalCase operation.responseModel}}(
+                response.get_body()
+            )
+            {{else}}
             result = {{pascalCase operation.responseModel}}(
                 self.form_response_body(response.get_body())
             )
+            {{/if}}
             {{/if}}
             {{/if}}
             {{/if}}

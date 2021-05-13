@@ -1134,9 +1134,7 @@ class GroupClient(APIClient):
         try:
             result = []
             for item in response.get_body():
-                result.append(User(
-                    self.form_response_body(item)
-                    ))
+                result.append(User(item))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)

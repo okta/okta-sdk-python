@@ -363,7 +363,7 @@ user_profile = UserProfile({
   'customAttr': 'custom value'
 })
 
-print(user_profile.custom_attr)
+print(user_profile.customAttr)
 
 # Creating an empty object and using variables
 user_profile = models.UserProfile()
@@ -371,7 +371,21 @@ user_profile.first_name = 'John'
 user_profile.last_name = 'Doe'
 user_profile.email = 'John.Doe@okta.com'
 user_profile.login = 'John.Doe@okta.com'
-user_profile.custom_attr = 'custom value'
+user_profile.customAttr = 'custom value'
+```
+
+**NOTE**: Custom Attributes should always keep letter case the same as defined in `Profile` tab on your org UI.
+
+It is possible to use original (lowerCamelCase) case for basic attributes to make your code look more consistent and nicer:
+> Feature is fully supported with SDK version >= 1.7.0
+
+```py
+user_profile = models.UserProfile()
+user_profile.firstName = 'John'
+user_profile.lastName = 'Doe'
+user_profile.email = 'John.Doe@okta.com'
+user_profile.login = 'John.Doe@okta.com'
+user_profile.customAttr = 'custom value'
 ```
 
 Full example:
@@ -416,7 +430,7 @@ async def main():
     for user in users:
         print(user.profile.first_name, user.profile.last_name)
         try:
-            print(user.profile.custom_attr)
+            print(user.profile.customAttr)
         except:
             print('User has no customAttr')
 

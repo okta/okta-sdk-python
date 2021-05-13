@@ -30,6 +30,40 @@ class UserProfile(
     A class for UserProfile objects.
     """
 
+    BASIC_ATTRIBUTES = (
+        "city",
+        "costCenter",
+        "countryCode",
+        "department",
+        "displayName",
+        "division",
+        "email",
+        "employeeNumber",
+        "firstName",
+        "honorificPrefix",
+        "honorificSuffix",
+        "lastName",
+        "locale",
+        "login",
+        "manager",
+        "managerId",
+        "middleName",
+        "mobilePhone",
+        "nickName",
+        "organization",
+        "postalAddress",
+        "preferredLanguage",
+        "primaryPhone",
+        "profileUrl",
+        "secondEmail",
+        "state",
+        "streetAddress",
+        "timezone",
+        "title",
+        "userType",
+        "zipCode",
+    )
+
     def __init__(self, config=None):
         super().__init__(config)
         if config:
@@ -96,11 +130,10 @@ class UserProfile(
             self.zip_code = config["zipCode"]\
                 if "zipCode" in config else None
             # set custom attributes not defined in model, do not change string case
-            self.custom_attributes = []
             for attr_name in config:
-                if attr_name not in vars(self):
+                lower_camel_case = to_lower_camel_case(attr_name)
+                if lower_camel_case not in UserProfile.BASIC_ATTRIBUTES:
                     setattr(self, attr_name, config[attr_name])
-                    self.custom_attributes.append(attr_name)
         else:
             self.city = None
             self.cost_center = None
@@ -133,7 +166,6 @@ class UserProfile(
             self.title = None
             self.user_type = None
             self.zip_code = None
-            self.custom_attributes = []
 
     def request_format(self):
         parent_req_format = super().request_format()
@@ -170,7 +202,8 @@ class UserProfile(
             "userType": self.user_type,
             "zipCode": self.zip_code
         }
-        for attr in self.custom_attributes:
+        available_attrs = vars(self)
+        for attr in available_attrs:
             # do not allow overriding of base attributes
             if not attr in current_obj_format:
                 current_obj_format[attr] = getattr(self, attr)
@@ -189,3 +222,13 @@ class UserProfile(
         if lower_camel_case in available_attrs:
             return available_attrs[lower_camel_case]
         raise AttributeError(f"'UserProfile' object has no attribute '{attr_name}'")
+
+    def __setattr__(self, attr_name, attr_value):
+        """
+        Keep custom attributes unchanged and keep backward compatibility for basic attributes.
+        """
+        lower_camel_case = to_lower_camel_case(attr_name)
+        if lower_camel_case in UserProfile.BASIC_ATTRIBUTES:
+            super(UserProfile, self).__setattr__(lower_camel_case, attr_value)
+        else:
+            super(UserProfile, self).__setattr__(attr_name, attr_value)

@@ -76,6 +76,14 @@ class {{pascalCase model.modelName}}(
     """
     A class for {{pascalCase model.modelName}} objects.
     """
+    {{#if (eq model.modelName "UserProfile")}}
+
+    BASIC_ATTRIBUTES = (
+        {{#each model.properties as |prop|}}
+        "{{camelCase prop.propertyName}}",
+        {{/each}}
+    )
+    {{/if}}
 
     def __init__(self, config=None):
         super().__init__(config)
@@ -142,11 +150,10 @@ class {{pascalCase model.modelName}}(
             {{/each}}
             {{#if (eq model.modelName "UserProfile")}}
             # set custom attributes not defined in model, do not change string case
-            self.custom_attributes = []
             for attr_name in config:
-                if attr_name not in vars(self):
+                lower_camel_case = to_lower_camel_case(attr_name)
+                if lower_camel_case not in UserProfile.BASIC_ATTRIBUTES:
                     setattr(self, attr_name, config[attr_name])
-                    self.custom_attributes.append(attr_name)
             {{/if}}
         else:
             {{#each model.properties as |prop|}}
@@ -160,9 +167,6 @@ class {{pascalCase model.modelName}}(
             {{/if}}
             {{/if}}
             {{/each}}
-            {{#if (eq model.modelName "UserProfile")}}
-            self.custom_attributes = []
-            {{/if}}
         {{else}}
         pass
         {{/if}}
@@ -173,51 +177,18 @@ class {{pascalCase model.modelName}}(
         {{#if (eq model.modelName "SmsTemplateTranslations")}}
         current_obj_format = vars(self)
         {{else}}
-        {{#if (eq model.modelName "UserProfile")}}
-        current_obj_format = {
-            "city": self.city,
-            "costCenter": self.cost_center,
-            "countryCode": self.country_code,
-            "department": self.department,
-            "displayName": self.display_name,
-            "division": self.division,
-            "email": self.email,
-            "employeeNumber": self.employee_number,
-            "firstName": self.first_name,
-            "honorificPrefix": self.honorific_prefix,
-            "honorificSuffix": self.honorific_suffix,
-            "lastName": self.last_name,
-            "locale": self.locale,
-            "login": self.login,
-            "manager": self.manager,
-            "managerId": self.manager_id,
-            "middleName": self.middle_name,
-            "mobilePhone": self.mobile_phone,
-            "nickName": self.nick_name,
-            "organization": self.organization,
-            "postalAddress": self.postal_address,
-            "preferredLanguage": self.preferred_language,
-            "primaryPhone": self.primary_phone,
-            "profileUrl": self.profile_url,
-            "secondEmail": self.second_email,
-            "state": self.state,
-            "streetAddress": self.street_address,
-            "timezone": self.timezone,
-            "title": self.title,
-            "userType": self.user_type,
-            "zipCode": self.zip_code
-        }
-        for attr in self.custom_attributes:
-            # do not allow overriding of base attributes
-            if not attr in current_obj_format:
-                current_obj_format[attr] = getattr(self, attr)
-        {{else}}
         current_obj_format = {
             {{#each model.properties as |prop|}}
             "{{prop.propertyName}}": self.{{snakeCase prop.propertyName}}{{#unless @last}},{{/unless}}
             {{/each}}
         }
         {{/if}}
+        {{#if (eq model.modelName "UserProfile")}}
+        available_attrs = vars(self)
+        for attr in available_attrs:
+            # do not allow overriding of base attributes
+            if not attr in current_obj_format:
+                current_obj_format[attr] = getattr(self, attr)
         {{/if}}
         parent_req_format.update(current_obj_format)
         return parent_req_format
@@ -235,5 +206,15 @@ class {{pascalCase model.modelName}}(
         if lower_camel_case in available_attrs:
             return available_attrs[lower_camel_case]
         raise AttributeError(f"'UserProfile' object has no attribute '{attr_name}'")
+
+    def __setattr__(self, attr_name, attr_value):
+        """
+        Keep custom attributes unchanged and keep backward compatibility for basic attributes.
+        """
+        lower_camel_case = to_lower_camel_case(attr_name)
+        if lower_camel_case in UserProfile.BASIC_ATTRIBUTES:
+            super(UserProfile, self).__setattr__(lower_camel_case, attr_value)
+        else:
+            super(UserProfile, self).__setattr__(attr_name, attr_value)
     {{/if}}
 {{/if}}
