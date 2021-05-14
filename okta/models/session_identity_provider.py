@@ -38,11 +38,11 @@ class SessionIdentityProvider(
             if "type" in config:
                 if isinstance(config["type"],
                               session_identity_provider_type.SessionIdentityProviderType):
-                    self.type = config["type"].value
+                    self.type = config["type"]
                 elif config["type"] is not None:
                     self.type = session_identity_provider_type.SessionIdentityProviderType(
                         config["type"].upper()
-                    ).value
+                    )
                 else:
                     self.type = None
             else:

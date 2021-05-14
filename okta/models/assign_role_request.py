@@ -36,11 +36,11 @@ class AssignRoleRequest(
             if "type" in config:
                 if isinstance(config["type"],
                               role_type.RoleType):
-                    self.type = config["type"].value
+                    self.type = config["type"]
                 elif config["type"] is not None:
                     self.type = role_type.RoleType(
                         config["type"].upper()
-                    ).value
+                    )
                 else:
                     self.type = None
             else:

@@ -115,7 +115,11 @@ class {{pascalCase model.modelName}}(
                 {{#if (eq prop.commonType "enum")}}
                 if isinstance(config["{{camelCase prop.propertyName}}"],
                               {{snakeCase prop.model}}.{{pascalCase prop.model}}):
+                    {{#if (eq prop.propertyName "signOnMode")}}
                     self.{{snakeCase prop.propertyName}} = config["{{camelCase prop.propertyName}}"].value
+                    {{else}}
+                    self.{{snakeCase prop.propertyName}} = config["{{camelCase prop.propertyName}}"]
+                    {{/if}}
                 {{else}}
                 if isinstance(config["{{camelCase prop.propertyName}}"],
                               {{snakeCase prop.model}}.{{pascalCase prop.model}}):
@@ -123,9 +127,15 @@ class {{pascalCase model.modelName}}(
                 {{/if}}
                 elif config["{{camelCase prop.propertyName}}"] is not None:
                     {{#if (eq prop.commonType "enum")}}
+                    {{#if (eq prop.propertyName "signOnMode")}}
                     self.{{snakeCase prop.propertyName}} = {{snakeCase prop.model}}.{{pascalCase prop.model}}(
                         config["{{camelCase prop.propertyName}}"].upper()
                     ).value
+                    {{else}}
+                    self.{{snakeCase prop.propertyName}} = {{snakeCase prop.model}}.{{pascalCase prop.model}}(
+                        config["{{camelCase prop.propertyName}}"].upper()
+                    )
+                    {{/if}}
                     {{else}}
                     self.{{snakeCase prop.propertyName}} = {{snakeCase prop.model}}.{{pascalCase prop.model}}(
                         config["{{camelCase prop.propertyName}}"]

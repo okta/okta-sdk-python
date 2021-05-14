@@ -38,11 +38,11 @@ class AuthenticationProvider(
             if "type" in config:
                 if isinstance(config["type"],
                               authentication_provider_type.AuthenticationProviderType):
-                    self.type = config["type"].value
+                    self.type = config["type"]
                 elif config["type"] is not None:
                     self.type = authentication_provider_type.AuthenticationProviderType(
                         config["type"].upper()
-                    ).value
+                    )
                 else:
                     self.type = None
             else:

@@ -38,11 +38,11 @@ class OpenIdConnectApplicationSettingsRefreshToken(
             if "rotationType" in config:
                 if isinstance(config["rotationType"],
                               open_id_connect_refresh_token_rotation_type.OpenIdConnectRefreshTokenRotationType):
-                    self.rotation_type = config["rotationType"].value
+                    self.rotation_type = config["rotationType"]
                 elif config["rotationType"] is not None:
                     self.rotation_type = open_id_connect_refresh_token_rotation_type.OpenIdConnectRefreshTokenRotationType(
                         config["rotationType"].upper()
-                    ).value
+                    )
                 else:
                     self.rotation_type = None
             else:

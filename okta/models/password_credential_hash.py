@@ -36,11 +36,11 @@ class PasswordCredentialHash(
             if "algorithm" in config:
                 if isinstance(config["algorithm"],
                               password_credential_hash_algorithm.PasswordCredentialHashAlgorithm):
-                    self.algorithm = config["algorithm"].value
+                    self.algorithm = config["algorithm"]
                 elif config["algorithm"] is not None:
                     self.algorithm = password_credential_hash_algorithm.PasswordCredentialHashAlgorithm(
                         config["algorithm"].upper()
-                    ).value
+                    )
                 else:
                     self.algorithm = None
             else:

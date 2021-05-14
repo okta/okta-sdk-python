@@ -68,11 +68,11 @@ class OAuth2ScopeConsentGrant(
             if "source" in config:
                 if isinstance(config["source"],
                               o_auth_2_scope_consent_grant_source.OAuth2ScopeConsentGrantSource):
-                    self.source = config["source"].value
+                    self.source = config["source"]
                 elif config["source"] is not None:
                     self.source = o_auth_2_scope_consent_grant_source.OAuth2ScopeConsentGrantSource(
                         config["source"].upper()
-                    ).value
+                    )
                 else:
                     self.source = None
             else:
@@ -80,11 +80,11 @@ class OAuth2ScopeConsentGrant(
             if "status" in config:
                 if isinstance(config["status"],
                               o_auth_2_scope_consent_grant_status.OAuth2ScopeConsentGrantStatus):
-                    self.status = config["status"].value
+                    self.status = config["status"]
                 elif config["status"] is not None:
                     self.status = o_auth_2_scope_consent_grant_status.OAuth2ScopeConsentGrantStatus(
                         config["status"].upper()
-                    ).value
+                    )
                 else:
                     self.status = None
             else:

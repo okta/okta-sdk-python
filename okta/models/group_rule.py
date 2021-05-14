@@ -72,11 +72,11 @@ class GroupRule(
             if "status" in config:
                 if isinstance(config["status"],
                               group_rule_status.GroupRuleStatus):
-                    self.status = config["status"].value
+                    self.status = config["status"]
                 elif config["status"] is not None:
                     self.status = group_rule_status.GroupRuleStatus(
                         config["status"].upper()
-                    ).value
+                    )
                 else:
                     self.status = None
             else:

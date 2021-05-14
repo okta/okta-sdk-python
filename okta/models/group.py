@@ -68,11 +68,11 @@ class Group(
             if "type" in config:
                 if isinstance(config["type"],
                               group_type.GroupType):
-                    self.type = config["type"].value
+                    self.type = config["type"]
                 elif config["type"] is not None:
                     self.type = group_type.GroupType(
                         config["type"].upper()
-                    ).value
+                    )
                 else:
                     self.type = None
             else:

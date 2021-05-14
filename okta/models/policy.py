@@ -70,11 +70,11 @@ class Policy(
             if "type" in config:
                 if isinstance(config["type"],
                               policy_type.PolicyType):
-                    self.type = config["type"].value
+                    self.type = config["type"]
                 elif config["type"] is not None:
                     self.type = policy_type.PolicyType(
                         config["type"].upper()
-                    ).value
+                    )
                 else:
                     self.type = None
             else:

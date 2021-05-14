@@ -51,11 +51,11 @@ class OpenIdConnectApplicationSettingsClient(
             if "applicationType" in config:
                 if isinstance(config["applicationType"],
                               open_id_connect_application_type.OpenIdConnectApplicationType):
-                    self.application_type = config["applicationType"].value
+                    self.application_type = config["applicationType"]
                 elif config["applicationType"] is not None:
                     self.application_type = open_id_connect_application_type.OpenIdConnectApplicationType(
                         config["applicationType"].upper()
-                    ).value
+                    )
                 else:
                     self.application_type = None
             else:
@@ -65,11 +65,11 @@ class OpenIdConnectApplicationSettingsClient(
             if "consentMethod" in config:
                 if isinstance(config["consentMethod"],
                               open_id_connect_application_consent_method.OpenIdConnectApplicationConsentMethod):
-                    self.consent_method = config["consentMethod"].value
+                    self.consent_method = config["consentMethod"]
                 elif config["consentMethod"] is not None:
                     self.consent_method = open_id_connect_application_consent_method.OpenIdConnectApplicationConsentMethod(
                         config["consentMethod"].upper()
-                    ).value
+                    )
                 else:
                     self.consent_method = None
             else:
@@ -96,11 +96,11 @@ class OpenIdConnectApplicationSettingsClient(
             if "issuerMode" in config:
                 if isinstance(config["issuerMode"],
                               open_id_connect_application_issuer_mode.OpenIdConnectApplicationIssuerMode):
-                    self.issuer_mode = config["issuerMode"].value
+                    self.issuer_mode = config["issuerMode"]
                 elif config["issuerMode"] is not None:
                     self.issuer_mode = open_id_connect_application_issuer_mode.OpenIdConnectApplicationIssuerMode(
                         config["issuerMode"].upper()
-                    ).value
+                    )
                 else:
                     self.issuer_mode = None
             else:

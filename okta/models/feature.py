@@ -60,11 +60,11 @@ class Feature(
             if "status" in config:
                 if isinstance(config["status"],
                               enabled_status.EnabledStatus):
-                    self.status = config["status"].value
+                    self.status = config["status"]
                 elif config["status"] is not None:
                     self.status = enabled_status.EnabledStatus(
                         config["status"].upper()
-                    ).value
+                    )
                 else:
                     self.status = None
             else:
@@ -72,11 +72,11 @@ class Feature(
             if "type" in config:
                 if isinstance(config["type"],
                               feature_type.FeatureType):
-                    self.type = config["type"].value
+                    self.type = config["type"]
                 elif config["type"] is not None:
                     self.type = feature_type.FeatureType(
                         config["type"].upper()
-                    ).value
+                    )
                 else:
                     self.type = None
             else:

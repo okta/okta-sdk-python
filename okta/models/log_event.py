@@ -147,11 +147,11 @@ class LogEvent(
             if "severity" in config:
                 if isinstance(config["severity"],
                               log_severity.LogSeverity):
-                    self.severity = config["severity"].value
+                    self.severity = config["severity"]
                 elif config["severity"] is not None:
                     self.severity = log_severity.LogSeverity(
                         config["severity"].upper()
-                    ).value
+                    )
                 else:
                     self.severity = None
             else:
