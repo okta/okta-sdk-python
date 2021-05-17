@@ -47,7 +47,7 @@ class FactorsClient(ApiClient):
         response = ApiClient.get_path(self, '/{0}/factors/questions'.format(user_id))
         return Utils.deserialize(response.text, Question)
 
-    def enroll_factor(self, user_id, factor_enroll_request, update_phone=None):
+    def enroll_factor(self, user_id, factor_enroll_request, update_phone=True, activate=False):
         """Enroll a user into a factor
 
         :param user_id: target user id
@@ -61,7 +61,12 @@ class FactorsClient(ApiClient):
         params = {
             'updatePhone': update_phone
         }
-        response = ApiClient.post_path(self, '/{0}/factors'.format(user_id), factor_enroll_request, params=params)
+
+        url = '/{0}/factors'.format(user_id)
+        if (activate):
+            url += '?activate=true'
+
+        response = ApiClient.post_path(self, url, factor_enroll_request, params=params)
         return Utils.deserialize(response.text, Factor)
 
     def get_factor(self, user_id, user_factor_id):
