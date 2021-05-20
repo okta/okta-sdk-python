@@ -107,9 +107,7 @@ class UserClient(APIClient):
         try:
             result = []
             for item in response.get_body():
-                result.append(User(
-                    self.form_response_body(item)
-                    ))
+                result.append(User(item))
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
@@ -162,7 +160,7 @@ class UserClient(APIClient):
 
         try:
             result = User(
-                self.form_response_body(response.get_body())
+                response.get_body()
             )
         except Exception as error:
             return (None, response, error)
@@ -278,7 +276,7 @@ class UserClient(APIClient):
 
         try:
             result = User(
-                self.form_response_body(response.get_body())
+                response.get_body()
             )
         except Exception as error:
             return (None, response, error)
@@ -331,7 +329,7 @@ class UserClient(APIClient):
 
         try:
             result = User(
-                self.form_response_body(response.get_body())
+                response.get_body()
             )
         except Exception as error:
             return (None, response, error)
@@ -384,7 +382,7 @@ class UserClient(APIClient):
 
         try:
             result = User(
-                self.form_response_body(response.get_body())
+                response.get_body()
             )
         except Exception as error:
             return (None, response, error)
@@ -1314,7 +1312,7 @@ class UserClient(APIClient):
 
         try:
             result = User(
-                self.form_response_body(response.get_body())
+                response.get_body()
             )
         except Exception as error:
             return (None, response, error)
