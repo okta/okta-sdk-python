@@ -374,9 +374,9 @@ user_profile.login = 'John.Doe@okta.com'
 user_profile.customAttr = 'custom value'
 ```
 
-**NOTE**: Custom Attributes should always keep letter case the same as defined in `Profile` tab on your org UI.
+**NOTE**: Custom Attributes case must be the same as defined in the Profile tab of your organization UI.
 
-It is possible to use original (lowerCamelCase) case for basic attributes to make your code look more consistent and nicer:
+To maintain consistent code, you can use camelCase for all default attributes:
 > Feature is fully supported with SDK version >= 1.6.1
 
 ```py
