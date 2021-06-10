@@ -210,6 +210,9 @@ class UserProfile(
         parent_req_format.update(current_obj_format)
         return parent_req_format
 
+    def __getstate__(self):
+        return vars(self)
+
     def __getattr__(self, attr_name):
         """
         Try different cases for backward compatibility.
