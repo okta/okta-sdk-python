@@ -18,13 +18,14 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
+from okta.models.policy_rule_actions\
+    import PolicyRuleActions
 from okta.models import okta_sign_on_policy_rule_signon_actions\
     as okta_sign_on_policy_rule_signon_actions
 
 
 class OktaSignOnPolicyRuleActions(
-    OktaObject
+    PolicyRuleActions
 ):
     """
     A class for OktaSignOnPolicyRuleActions objects.

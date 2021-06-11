@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@okta/openapi@^2.1.6":
-  "integrity" "sha512-9Ln2TKp/tv9pq8WNOpC2wIgz4PuSWrC8YeYBdH3S5ICf9Q9wYFtk6/KF7ArCYVIs0WGGeOfd0vgJPqjvd/lvgw=="
-  "resolved" "https://registry.npmjs.org/@okta/openapi/-/openapi-2.1.6.tgz"
-  "version" "2.1.6"
+"@okta/openapi@^2.4.0":
+  "integrity" "sha512-isPw9DuGLbLI1UndwHWeinIn0uToCiuYXhJok/h2NEuciv7dD3SBz4SwkPuyKIETJgsKdhWgo0naK5c9KH031w=="
+  "resolved" "https://registry.npmjs.org/@okta/openapi/-/openapi-2.4.0.tgz"
+  "version" "2.4.0"
   dependencies:
     "commander" "2.9.0"
     "fs-extra" "3.0.1"
@@ -134,9 +134,9 @@
   "version" "1.0.1"
 
 "handlebars@^4.7.6":
-  "integrity" "sha512-1f2BACcBfiwAfStCKZNrUCgqNZkGsAT7UM3kkYtXuLo0KnaVfjKOyf7PRzB6++aK9STyT1Pd2ZCPe3EGOXleXA=="
-  "resolved" "https://registry.npmjs.org/handlebars/-/handlebars-4.7.6.tgz"
-  "version" "4.7.6"
+  "integrity" "sha512-aAcXm5OAfE/8IXkcZvCepKU3VzW1/39Fb5ZuqMtgI/hT8X2YgoMvBY5dLhq/cpOvw7Lk1nK/UF71aLG/ZnVYRA=="
+  "resolved" "https://registry.npmjs.org/handlebars/-/handlebars-4.7.7.tgz"
+  "version" "4.7.7"
   dependencies:
     "minimist" "^1.2.5"
     "neo-async" "^2.6.0"
@@ -212,9 +212,9 @@
   "version" "4.5.0"
 
 "lodash@^4.17.15":
-  "integrity" "sha512-PlhdFcillOINfeV7Ni6oF1TAEayyZBoZ8bcshTHqOYJYlrqzRK5hagpagky5o4HfCzzd1TRkXPMFq6cKk9rGmA=="
-  "resolved" "https://registry.npmjs.org/lodash/-/lodash-4.17.20.tgz"
-  "version" "4.17.20"
+  "integrity" "sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg=="
+  "resolved" "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz"
+  "version" "4.17.21"
 
 "minimist@^1.2.5":
   "integrity" "sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw=="

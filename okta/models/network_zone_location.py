@@ -18,41 +18,32 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.models.policy_rule_conditions\
-    import PolicyRuleConditions
-from okta.models import policy_people_condition\
-    as policy_people_condition
+from okta.okta_object import OktaObject
 
 
-class OktaSignOnPolicyConditions(
-    PolicyRuleConditions
+class NetworkZoneLocation(
+    OktaObject
 ):
     """
-    A class for OktaSignOnPolicyConditions objects.
+    A class for NetworkZoneLocation objects.
     """
 
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            if "people" in config:
-                if isinstance(config["people"],
-                              policy_people_condition.PolicyPeopleCondition):
-                    self.people = config["people"]
-                elif config["people"] is not None:
-                    self.people = policy_people_condition.PolicyPeopleCondition(
-                        config["people"]
-                    )
-                else:
-                    self.people = None
-            else:
-                self.people = None
+            self.country = config["country"]\
+                if "country" in config else None
+            self.region = config["region"]\
+                if "region" in config else None
         else:
-            self.people = None
+            self.country = None
+            self.region = None
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
-            "people": self.people
+            "country": self.country,
+            "region": self.region
         }
         parent_req_format.update(current_obj_format)
         return parent_req_format

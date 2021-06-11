@@ -18,7 +18,8 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
+from okta.models.policy_rule_conditions\
+    import PolicyRuleConditions
 from okta.models import password_policy_authentication_provider_condition\
     as password_policy_authentication_provider_condition
 from okta.models import policy_people_condition\
@@ -26,7 +27,7 @@ from okta.models import policy_people_condition\
 
 
 class PasswordPolicyConditions(
-    OktaObject
+    PolicyRuleConditions
 ):
     """
     A class for PasswordPolicyConditions objects.

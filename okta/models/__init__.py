@@ -324,6 +324,20 @@ from okta.models import log_user_agent as log_user_agent
 LogUserAgent = log_user_agent.LogUserAgent
 from okta.models import mdm_enrollment_policy_rule_condition as mdm_enrollment_policy_rule_condition
 MdmEnrollmentPolicyRuleCondition = mdm_enrollment_policy_rule_condition.MdmEnrollmentPolicyRuleCondition
+from okta.models import network_zone as network_zone
+NetworkZone = network_zone.NetworkZone
+from okta.models import network_zone_address as network_zone_address
+NetworkZoneAddress = network_zone_address.NetworkZoneAddress
+from okta.models import network_zone_address_type as network_zone_address_type
+NetworkZoneAddressType = network_zone_address_type.NetworkZoneAddressType
+from okta.models import network_zone_location as network_zone_location
+NetworkZoneLocation = network_zone_location.NetworkZoneLocation
+from okta.models import network_zone_status as network_zone_status
+NetworkZoneStatus = network_zone_status.NetworkZoneStatus
+from okta.models import network_zone_type as network_zone_type
+NetworkZoneType = network_zone_type.NetworkZoneType
+from okta.models import network_zone_usage as network_zone_usage
+NetworkZoneUsage = network_zone_usage.NetworkZoneUsage
 from okta.models import o_auth_2_actor as o_auth_2_actor
 OAuth2Actor = o_auth_2_actor.OAuth2Actor
 from okta.models import o_auth_2_claim as o_auth_2_claim
@@ -472,6 +486,12 @@ from okta.models import policy_people_condition as policy_people_condition
 PolicyPeopleCondition = policy_people_condition.PolicyPeopleCondition
 from okta.models import policy_rule as policy_rule
 PolicyRule = policy_rule.PolicyRule
+from okta.models import policy_rule_actions as policy_rule_actions
+PolicyRuleActions = policy_rule_actions.PolicyRuleActions
+from okta.models import policy_rule_actions_enroll as policy_rule_actions_enroll
+PolicyRuleActionsEnroll = policy_rule_actions_enroll.PolicyRuleActionsEnroll
+from okta.models import policy_rule_actions_enroll_self as policy_rule_actions_enroll_self
+PolicyRuleActionsEnrollSelf = policy_rule_actions_enroll_self.PolicyRuleActionsEnrollSelf
 from okta.models import policy_rule_auth_context_condition as policy_rule_auth_context_condition
 PolicyRuleAuthContextCondition = policy_rule_auth_context_condition.PolicyRuleAuthContextCondition
 from okta.models import policy_rule_conditions as policy_rule_conditions
@@ -484,6 +504,14 @@ from okta.models import policy_type as policy_type
 PolicyType = policy_type.PolicyType
 from okta.models import policy_user_name_template as policy_user_name_template
 PolicyUserNameTemplate = policy_user_name_template.PolicyUserNameTemplate
+from okta.models import profile_mapping as profile_mapping
+ProfileMapping = profile_mapping.ProfileMapping
+from okta.models import profile_mapping_property as profile_mapping_property
+ProfileMappingProperty = profile_mapping_property.ProfileMappingProperty
+from okta.models import profile_mapping_property_push_status as profile_mapping_property_push_status
+ProfileMappingPropertyPushStatus = profile_mapping_property_push_status.ProfileMappingPropertyPushStatus
+from okta.models import profile_mapping_source as profile_mapping_source
+ProfileMappingSource = profile_mapping_source.ProfileMappingSource
 from okta.models import protocol as protocol
 Protocol = protocol.Protocol
 from okta.models import protocol_algorithm_type as protocol_algorithm_type
@@ -602,6 +630,8 @@ from okta.models import swa_three_field_application_settings_application as swa_
 SwaThreeFieldApplicationSettingsApplication = swa_three_field_application_settings_application.SwaThreeFieldApplicationSettingsApplication
 from okta.models import temp_password as temp_password
 TempPassword = temp_password.TempPassword
+from okta.models import threat_insight_configuration as threat_insight_configuration
+ThreatInsightConfiguration = threat_insight_configuration.ThreatInsightConfiguration
 from okta.models import token_authorization_server_policy_rule_action as token_authorization_server_policy_rule_action
 TokenAuthorizationServerPolicyRuleAction = token_authorization_server_policy_rule_action.TokenAuthorizationServerPolicyRuleAction
 from okta.models import token_user_factor as token_user_factor

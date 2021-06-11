@@ -19,6 +19,10 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models import policy_rule_actions\
+    as policy_rule_actions
+from okta.models import policy_rule_conditions\
+    as policy_rule_conditions
 
 
 class PolicyRule(
@@ -31,12 +35,38 @@ class PolicyRule(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
+            if "actions" in config:
+                if isinstance(config["actions"],
+                              policy_rule_actions.PolicyRuleActions):
+                    self.actions = config["actions"]
+                elif config["actions"] is not None:
+                    self.actions = policy_rule_actions.PolicyRuleActions(
+                        config["actions"]
+                    )
+                else:
+                    self.actions = None
+            else:
+                self.actions = None
+            if "conditions" in config:
+                if isinstance(config["conditions"],
+                              policy_rule_conditions.PolicyRuleConditions):
+                    self.conditions = config["conditions"]
+                elif config["conditions"] is not None:
+                    self.conditions = policy_rule_conditions.PolicyRuleConditions(
+                        config["conditions"]
+                    )
+                else:
+                    self.conditions = None
+            else:
+                self.conditions = None
             self.created = config["created"]\
                 if "created" in config else None
             self.id = config["id"]\
                 if "id" in config else None
             self.last_updated = config["lastUpdated"]\
                 if "lastUpdated" in config else None
+            self.name = config["name"]\
+                if "name" in config else None
             self.priority = config["priority"]\
                 if "priority" in config else None
             self.status = config["status"]\
@@ -46,9 +76,12 @@ class PolicyRule(
             self.type = config["type"]\
                 if "type" in config else None
         else:
+            self.actions = None
+            self.conditions = None
             self.created = None
             self.id = None
             self.last_updated = None
+            self.name = None
             self.priority = None
             self.status = "ACTIVE"
             self.system = False
@@ -57,9 +90,12 @@ class PolicyRule(
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
+            "actions": self.actions,
+            "conditions": self.conditions,
             "created": self.created,
             "id": self.id,
             "lastUpdated": self.last_updated,
+            "name": self.name,
             "priority": self.priority,
             "status": self.status,
             "system": self.system,
