@@ -1,3 +1,4 @@
+import pickle
 import pytest
 import okta.models as models
 
@@ -35,3 +36,18 @@ def test_attribute_case():
     assert req_format['firstName'] == first_name
     assert req_format['lastName'] == last_name
     assert req_format['displayName'] == new_display_name
+
+
+def test_profile_serializing():
+    """Verify UserProfile can be serialized and deserialized with pickle library."""
+    first_name = 'TestFirstName'
+    last_name = 'TestLastName'
+    custom_attr = 'TestCustomAttr'
+    config = {'firstName': first_name,
+              'lastName': last_name,
+              'CustomAttr': custom_attr}
+    profile = models.UserProfile(config)
+    pickled_profile = pickle.dumps(profile)
+    unpickled_profile = pickle.loads(pickled_profile)
+    assert isinstance(unpickled_profile, models.UserProfile)
+    assert profile.as_dict() == unpickled_profile.as_dict()
