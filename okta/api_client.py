@@ -9,7 +9,8 @@ class APIClient():
     def __init__(self):
         pass
 
-    def form_response_body(self, body: dict):
+    @staticmethod
+    def form_response_body(body: dict):
         """
         Method to verify the response body from the Okta API before
         passing it into the constructor.
@@ -24,5 +25,5 @@ class APIClient():
             if not isinstance(val, dict):
                 result[camel_case(key)] = val
             else:
-                result[camel_case(key)] = self.form_response_body(val)
+                result[camel_case(key)] = APIClient.form_response_body(val)
         return result
