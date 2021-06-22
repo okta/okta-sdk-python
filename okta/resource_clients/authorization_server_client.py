@@ -1033,6 +1033,74 @@ class AuthorizationServerClient(APIClient):
             return (None, response, error)
         return (result, response, None)
 
+    async def activate_authorization_server_policy(
+            self, authServerId, policyId
+    ):
+        """
+        Activate Authorization Server Policy
+        Args:
+            auth_server_id {str}
+            policy_id {str}
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/authorizationServers/{authServerId}
+                /policies/{policyId}/lifecycle/activate
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (response, error)
+
+        return (response, None)
+
+    async def deactivate_authorization_server_policy(
+            self, authServerId, policyId
+    ):
+        """
+        Deactivate Authorization Server Policy
+        Args:
+            auth_server_id {str}
+            policy_id {str}
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/authorizationServers/{authServerId}
+                /policies/{policyId}/lifecycle/deactivate
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (response, error)
+
+        return (response, None)
+
     async def list_authorization_server_policy_rules(
             self, policyId, authServerId
     ):
@@ -1258,6 +1326,78 @@ class AuthorizationServerClient(APIClient):
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
+
+    async def activate_authorization_server_policy_rule(
+            self, authServerId, policyId, ruleId
+    ):
+        """
+        Activate Authorization Server Policy Rule
+        Args:
+            auth_server_id {str}
+            policy_id {str}
+            rule_id {str}
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/authorizationServers/{authServerId}
+                /policies/{policyId}/rules/{ruleId}/lifecycle
+                /activate
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (response, error)
+
+        return (response, None)
+
+    async def deactivate_authorization_server_policy_rule(
+            self, authServerId, policyId, ruleId
+    ):
+        """
+        Deactivate Authorization Server Policy Rule
+        Args:
+            auth_server_id {str}
+            policy_id {str}
+            rule_id {str}
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/authorizationServers/{authServerId}
+                /policies/{policyId}/rules/{ruleId}/lifecycle
+                /deactivate
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (response, error)
+
+        return (response, None)
 
     async def list_o_auth_2_scopes(
             self, authServerId, query_params={}

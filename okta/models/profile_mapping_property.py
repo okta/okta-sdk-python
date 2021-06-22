@@ -18,41 +18,44 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.models.policy_rule_conditions\
-    import PolicyRuleConditions
-from okta.models import policy_people_condition\
-    as policy_people_condition
+from okta.okta_object import OktaObject
+from okta.models import profile_mapping_property_push_status\
+    as profile_mapping_property_push_status
 
 
-class OktaSignOnPolicyConditions(
-    PolicyRuleConditions
+class ProfileMappingProperty(
+    OktaObject
 ):
     """
-    A class for OktaSignOnPolicyConditions objects.
+    A class for ProfileMappingProperty objects.
     """
 
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            if "people" in config:
-                if isinstance(config["people"],
-                              policy_people_condition.PolicyPeopleCondition):
-                    self.people = config["people"]
-                elif config["people"] is not None:
-                    self.people = policy_people_condition.PolicyPeopleCondition(
-                        config["people"]
+            self.expression = config["expression"]\
+                if "expression" in config else None
+            if "pushStatus" in config:
+                if isinstance(config["pushStatus"],
+                              profile_mapping_property_push_status.ProfileMappingPropertyPushStatus):
+                    self.push_status = config["pushStatus"]
+                elif config["pushStatus"] is not None:
+                    self.push_status = profile_mapping_property_push_status.ProfileMappingPropertyPushStatus(
+                        config["pushStatus"].upper()
                     )
                 else:
-                    self.people = None
+                    self.push_status = None
             else:
-                self.people = None
+                self.push_status = None
         else:
-            self.people = None
+            self.expression = None
+            self.push_status = None
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
-            "people": self.people
+            "expression": self.expression,
+            "pushStatus": self.push_status
         }
         parent_req_format.update(current_obj_format)
         return parent_req_format
