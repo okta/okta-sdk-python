@@ -41,6 +41,8 @@ from okta.resource_clients.inline_hook_client\
     import InlineHookClient
 from okta.resource_clients.log_event_client\
     import LogEventClient
+from okta.resource_clients.profile_mapping_client\
+    import ProfileMappingClient
 from okta.resource_clients.user_schema_client\
     import UserSchemaClient
 from okta.resource_clients.linked_object_client\
@@ -53,12 +55,16 @@ from okta.resource_clients.session_client\
     import SessionClient
 from okta.resource_clients.sms_template_client\
     import SmsTemplateClient
+from okta.resource_clients.threat_insight_client\
+    import ThreatInsightClient
 from okta.resource_clients.trusted_origin_client\
     import TrustedOriginClient
 from okta.resource_clients.user_client\
     import UserClient
 from okta.resource_clients.user_factor_client\
     import UserFactorClient
+from okta.resource_clients.network_zone_client\
+    import NetworkZoneClient
 
 
 class Client(
@@ -70,15 +76,18 @@ class Client(
     IdentityProviderClient,
     InlineHookClient,
     LogEventClient,
+    ProfileMappingClient,
     UserSchemaClient,
     LinkedObjectClient,
     UserTypeClient,
     PolicyClient,
     SessionClient,
     SmsTemplateClient,
+    ThreatInsightClient,
     TrustedOriginClient,
     UserClient,
-    UserFactorClient
+    UserFactorClient,
+    NetworkZoneClient
 ):
     """An Okta client object"""
 

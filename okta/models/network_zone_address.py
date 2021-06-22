@@ -18,41 +18,44 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.models.policy_rule_conditions\
-    import PolicyRuleConditions
-from okta.models import policy_people_condition\
-    as policy_people_condition
+from okta.okta_object import OktaObject
+from okta.models import network_zone_address_type\
+    as network_zone_address_type
 
 
-class OktaSignOnPolicyConditions(
-    PolicyRuleConditions
+class NetworkZoneAddress(
+    OktaObject
 ):
     """
-    A class for OktaSignOnPolicyConditions objects.
+    A class for NetworkZoneAddress objects.
     """
 
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            if "people" in config:
-                if isinstance(config["people"],
-                              policy_people_condition.PolicyPeopleCondition):
-                    self.people = config["people"]
-                elif config["people"] is not None:
-                    self.people = policy_people_condition.PolicyPeopleCondition(
-                        config["people"]
+            if "type" in config:
+                if isinstance(config["type"],
+                              network_zone_address_type.NetworkZoneAddressType):
+                    self.type = config["type"]
+                elif config["type"] is not None:
+                    self.type = network_zone_address_type.NetworkZoneAddressType(
+                        config["type"].upper()
                     )
                 else:
-                    self.people = None
+                    self.type = None
             else:
-                self.people = None
+                self.type = None
+            self.value = config["value"]\
+                if "value" in config else None
         else:
-            self.people = None
+            self.type = None
+            self.value = None
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
-            "people": self.people
+            "type": self.type,
+            "value": self.value
         }
         parent_req_format.update(current_obj_format)
         return parent_req_format
