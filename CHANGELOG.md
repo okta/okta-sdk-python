@@ -1,5 +1,33 @@
 # Okta Python SDK Changelog
 
+## v1.7.0
+- Regenerate code using the [open API spec v2.4.0](https://github.com/okta/okta-management-openapi-spec/releases/tag/openapi-2.4.0).
+- Fix case issue with user custom attributes, issue #202.
+- Fix UserProfile serializing, PR #207.
+- Fix inconsistent responses within pagination, issue #210.
+
+_New resources:_
+* ThreatInsight
+* NetworkZone
+* ProfileMapping
+
+_New models:_
+* NetworkZone
+* NetworkZoneAddress
+* NetworkZoneAddressType
+* NetworkZoneLocation
+* NetworkZoneStatus
+* NetworkZoneType
+* NetworkZoneUsage
+* PolicyRuleActions
+* PolicyRuleActionsEnroll
+* PolicyRuleActionsEnrollSelf
+* ProfileMapping
+* ProfileMappingProperty
+* ProfileMappingPropertyPushStatus
+* ProfileMappingSource
+* ThreatInsightConfiguration
+
 ## v1.6.0
 - Update SDK according to openapi spec v2.3.0.
 - Fix custom user attributes.
