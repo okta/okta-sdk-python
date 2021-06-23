@@ -1,6 +1,7 @@
 import json
-from okta.api_client import APIClient
 import xmltodict
+
+from okta.api_client import APIClient
 
 
 class OktaAPIResponse():
