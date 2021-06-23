@@ -148,10 +148,24 @@ from okta.models import custom_hotp_user_factor as custom_hotp_user_factor
 CustomHotpUserFactor = custom_hotp_user_factor.CustomHotpUserFactor
 from okta.models import custom_hotp_user_factor_profile as custom_hotp_user_factor_profile
 CustomHotpUserFactorProfile = custom_hotp_user_factor_profile.CustomHotpUserFactorProfile
+from okta.models import dns_record as dns_record
+DnsRecord = dns_record.DnsRecord
 from okta.models import device_policy_rule_condition as device_policy_rule_condition
 DevicePolicyRuleCondition = device_policy_rule_condition.DevicePolicyRuleCondition
 from okta.models import device_policy_rule_condition_platform as device_policy_rule_condition_platform
 DevicePolicyRuleConditionPlatform = device_policy_rule_condition_platform.DevicePolicyRuleConditionPlatform
+from okta.models import domain as domain
+Domain = domain.Domain
+from okta.models import domain_certificate as domain_certificate
+DomainCertificate = domain_certificate.DomainCertificate
+from okta.models import domain_certificate_metadata as domain_certificate_metadata
+DomainCertificateMetadata = domain_certificate_metadata.DomainCertificateMetadata
+from okta.models import domain_links as domain_links
+DomainLinks = domain_links.DomainLinks
+from okta.models import domain_list_response as domain_list_response
+DomainListResponse = domain_list_response.DomainListResponse
+from okta.models import domain_response as domain_response
+DomainResponse = domain_response.DomainResponse
 from okta.models import duration as duration
 Duration = duration.Duration
 from okta.models import email_user_factor as email_user_factor

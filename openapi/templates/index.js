@@ -105,7 +105,7 @@ py.process = ({ spec, operations, models, handlebars }) => {
           else if (prop.model === "integer") prop.model = "int";
           else {
             prop.$ref = prop.model;
-            prop.specialType = _.snakeCase(prop.model) + "." + prop.model;
+            prop.specialType = _.snakeCase(prop.model) + "." + _.upperFirst(_.camelCase(prop.model));
           }
         }
         // Check for default values

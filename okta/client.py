@@ -29,6 +29,8 @@ from okta.resource_clients.application_client\
     import ApplicationClient
 from okta.resource_clients.authorization_server_client\
     import AuthorizationServerClient
+from okta.resource_clients.domain_client\
+    import DomainClient
 from okta.resource_clients.event_hook_client\
     import EventHookClient
 from okta.resource_clients.feature_client\
@@ -70,6 +72,7 @@ from okta.resource_clients.network_zone_client\
 class Client(
     ApplicationClient,
     AuthorizationServerClient,
+    DomainClient,
     EventHookClient,
     FeatureClient,
     GroupClient,
