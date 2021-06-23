@@ -1,5 +1,11 @@
 # Okta Python SDK Changelog
 
+## v1.7.0
+- Update SDK according to openapi spec v2.4.0.
+- Fix case issue with user custom attributes.
+- Fix UserProfile serializing.
+- Fix inconsistent responses within pagination.
+
 ## v1.6.0
 - Update SDK according to openapi spec v2.3.0.
 - Fix custom user attributes.
