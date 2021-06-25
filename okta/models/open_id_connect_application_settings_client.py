@@ -150,6 +150,8 @@ class OpenIdConnectApplicationSettingsClient(
             )
             self.tos_uri = config["tosUri"]\
                 if "tosUri" in config else None
+            self.wildcard_redirect = config["wildcardRedirect"]\
+                if "wildcardRedirect" in config else None
         else:
             self.application_type = None
             self.client_uri = None
@@ -166,6 +168,7 @@ class OpenIdConnectApplicationSettingsClient(
             self.refresh_token = None
             self.response_types = []
             self.tos_uri = None
+            self.wildcard_redirect = None
 
     def request_format(self):
         parent_req_format = super().request_format()
@@ -184,7 +187,8 @@ class OpenIdConnectApplicationSettingsClient(
             "redirect_uris": self.redirect_uris,
             "refresh_token": self.refresh_token,
             "response_types": self.response_types,
-            "tos_uri": self.tos_uri
+            "tos_uri": self.tos_uri,
+            "wildcard_redirect": self.wildcard_redirect
         }
         parent_req_format.update(current_obj_format)
         return parent_req_format
