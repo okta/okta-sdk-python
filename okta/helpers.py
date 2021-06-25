@@ -39,6 +39,7 @@ def to_lower_camel_case(string):
     """
     components = string.split('_')
     # lower first letter in the first component
-    components[0] = components[0][0].lower() + components[0][1:]
+    if components[0]:
+        components[0] = components[0][0].lower() + components[0][1:]
     # join other components with first capitalized first letter
     return components[0] + ''.join(x.title() for x in components[1:])

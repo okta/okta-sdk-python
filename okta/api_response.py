@@ -1,6 +1,8 @@
 import json
 import xmltodict
 
+from okta.api_client import APIClient
+
 
 class OktaAPIResponse():
     """
@@ -126,7 +128,11 @@ class OktaAPIResponse():
         if self._type is not None:
             result = []
             for item in next_page:
-                result.append(self._type(item))
+                result.append(
+                    self._type(
+                        APIClient.form_response_body(item)
+                    )
+                )
             return (result, None)
 
         return (next_page, error)
