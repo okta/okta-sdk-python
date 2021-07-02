@@ -22,6 +22,7 @@ from okta.models.application\
     import Application
 from okta.models import saml_application_settings\
     as saml_application_settings
+from okta.models import ApplicationSignOnMode
 
 
 class SamlApplication(
@@ -34,7 +35,7 @@ class SamlApplication(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.sign_on_mode = "SAML_2_0"
+            self.sign_on_mode = ApplicationSignOnMode("SAML_2_0")
             if "settings" in config:
                 if isinstance(config["settings"],
                               saml_application_settings.SamlApplicationSettings):

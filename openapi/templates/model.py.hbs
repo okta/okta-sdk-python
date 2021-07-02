@@ -64,6 +64,9 @@ from okta.okta_collection import OktaCollection
 from okta.models import {{snakeCase type}}\
     as {{snakeCase type}}
 {{/each}}
+{{#if (ne model.signOnMode undefined)}}
+from okta.models import ApplicationSignOnMode
+{{/if}}
 
 
 class {{pascalCase model.modelName}}(
@@ -95,7 +98,7 @@ class {{pascalCase model.modelName}}(
         {{#if (gt model.properties.length 0)}}
         if config:
             {{#if (ne model.signOnMode undefined)}}
-            self.sign_on_mode = "{{model.signOnMode}}"
+            self.sign_on_mode = ApplicationSignOnMode("{{model.signOnMode}}")
             {{/if}}
             {{#if (ne model.factorType undefined)}}
             self.factor_type = "{{model.factorType}}"

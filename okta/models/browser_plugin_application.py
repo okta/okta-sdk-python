@@ -22,6 +22,7 @@ from okta.models.application\
     import Application
 from okta.models import scheme_application_credentials\
     as scheme_application_credentials
+from okta.models import ApplicationSignOnMode
 
 
 class BrowserPluginApplication(
@@ -34,7 +35,7 @@ class BrowserPluginApplication(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.sign_on_mode = "BROWSER_PLUGIN"
+            self.sign_on_mode = ApplicationSignOnMode("BROWSER_PLUGIN")
             if "credentials" in config:
                 if isinstance(config["credentials"],
                               scheme_application_credentials.SchemeApplicationCredentials):

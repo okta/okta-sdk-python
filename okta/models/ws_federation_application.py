@@ -22,6 +22,7 @@ from okta.models.application\
     import Application
 from okta.models import ws_federation_application_settings\
     as ws_federation_application_settings
+from okta.models import ApplicationSignOnMode
 
 
 class WsFederationApplication(
@@ -34,7 +35,7 @@ class WsFederationApplication(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.sign_on_mode = "WS_FEDERATION"
+            self.sign_on_mode = ApplicationSignOnMode("WS_FEDERATION")
             self.name = config["name"]\
                 if "name" in config else "template_wsfed"
             if "settings" in config:

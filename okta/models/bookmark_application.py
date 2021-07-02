@@ -22,6 +22,7 @@ from okta.models.application\
     import Application
 from okta.models import bookmark_application_settings\
     as bookmark_application_settings
+from okta.models import ApplicationSignOnMode
 
 
 class BookmarkApplication(
@@ -34,7 +35,7 @@ class BookmarkApplication(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.sign_on_mode = "BOOKMARK"
+            self.sign_on_mode = ApplicationSignOnMode("BOOKMARK")
             self.name = config["name"]\
                 if "name" in config else "bookmark"
             if "settings" in config:

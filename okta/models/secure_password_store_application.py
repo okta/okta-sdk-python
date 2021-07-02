@@ -24,6 +24,7 @@ from okta.models import scheme_application_credentials\
     as scheme_application_credentials
 from okta.models import secure_password_store_application_settings\
     as secure_password_store_application_settings
+from okta.models import ApplicationSignOnMode
 
 
 class SecurePasswordStoreApplication(
@@ -36,7 +37,7 @@ class SecurePasswordStoreApplication(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.sign_on_mode = "SECURE_PASSWORD_STORE"
+            self.sign_on_mode = ApplicationSignOnMode("SECURE_PASSWORD_STORE")
             if "credentials" in config:
                 if isinstance(config["credentials"],
                               scheme_application_credentials.SchemeApplicationCredentials):
