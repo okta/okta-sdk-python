@@ -24,6 +24,7 @@ from okta.models import scheme_application_credentials\
     as scheme_application_credentials
 from okta.models import auto_login_application_settings\
     as auto_login_application_settings
+from okta.models import ApplicationSignOnMode
 
 
 class AutoLoginApplication(
@@ -36,7 +37,7 @@ class AutoLoginApplication(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.sign_on_mode = "AUTO_LOGIN"
+            self.sign_on_mode = ApplicationSignOnMode("AUTO_LOGIN")
             if "credentials" in config:
                 if isinstance(config["credentials"],
                               scheme_application_credentials.SchemeApplicationCredentials):

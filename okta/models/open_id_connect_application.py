@@ -24,6 +24,7 @@ from okta.models import o_auth_application_credentials\
     as o_auth_application_credentials
 from okta.models import open_id_connect_application_settings\
     as open_id_connect_application_settings
+from okta.models import ApplicationSignOnMode
 
 
 class OpenIdConnectApplication(
@@ -36,7 +37,7 @@ class OpenIdConnectApplication(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.sign_on_mode = "OPENID_CONNECT"
+            self.sign_on_mode = ApplicationSignOnMode("OPENID_CONNECT")
             if "credentials" in config:
                 if isinstance(config["credentials"],
                               o_auth_application_credentials.OAuthApplicationCredentials):
