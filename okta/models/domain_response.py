@@ -50,6 +50,8 @@ class DomainResponse(
                     self.links = None
             else:
                 self.links = None
+            self.certificate_sourcetype = config["certificateSourcetype"]\
+                if "certificateSourcetype" in config else None
             self.dns_records = OktaCollection.form_list(
                 config["dnsRecords"] if "dnsRecords"\
                     in config else [],
@@ -75,6 +77,7 @@ class DomainResponse(
                 if "validationStatus" in config else None
         else:
             self.links = None
+            self.certificate_sourcetype = None
             self.dns_records = []
             self.domain = None
             self.id = None
@@ -85,6 +88,7 @@ class DomainResponse(
         parent_req_format = super().request_format()
         current_obj_format = {
             "_links": self.links,
+            "certificateSourcetype": self.certificate_sourcetype,
             "dnsRecords": self.dns_records,
             "domain": self.domain,
             "id": self.id,
