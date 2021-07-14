@@ -32,6 +32,8 @@ class DnsRecord(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
+            self.expiration = config["expiration"]\
+                if "expiration" in config else None
             self.fqdn = config["fqdn"]\
                 if "fqdn" in config else None
             self.record_type = config["recordType"]\
@@ -42,6 +44,7 @@ class DnsRecord(
                 str
             )
         else:
+            self.expiration = None
             self.fqdn = None
             self.record_type = None
             self.values = []
@@ -49,6 +52,7 @@ class DnsRecord(
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
+            "expiration": self.expiration,
             "fqdn": self.fqdn,
             "recordType": self.record_type,
             "values": self.values
