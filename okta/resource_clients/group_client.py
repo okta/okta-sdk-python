@@ -53,7 +53,7 @@ class GroupClient(APIClient):
         Args:
             query_params {dict}: Map of query parameters for request
             [query_params.q] {str}
-            [query_params.filter] {str}
+            [query_params.search] {str}
             [query_params.after] {str}
             [query_params.limit] {str}
             [query_params.expand] {str}
@@ -239,19 +239,24 @@ class GroupClient(APIClient):
         return (result, response, None)
 
     async def delete_group_rule(
-            self, ruleId
+            self, ruleId, query_params={}
     ):
         """
         Removes a specific group rule by id from your organizat
         ion
         Args:
             rule_id {str}
+            query_params {dict}: Map of query parameters for request
+            [query_params.removeUsers] {str}
         """
         http_method = "delete".upper()
         api_url = format_url(f"""
             {self._base_url}
             /api/v1/groups/rules/{ruleId}
             """)
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
 
         body = {}
         headers = {}

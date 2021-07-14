@@ -61,13 +61,12 @@ class TestNetworkZoneResource:
         finally:
             errors = []
             try:
-                _, err = await client.deactivate_network_zone(resp.id)
+                _, _, err = await client.deactivate_network_zone(resp.id)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
             try:
                 _, err = await client.delete_network_zone(resp.id)
-                assert err is None
             except Exception as exc:
                 errors.append(exc)
             assert len(errors) == 0
@@ -108,7 +107,7 @@ class TestNetworkZoneResource:
         finally:
             errors = []
             try:
-                _, err = await client.deactivate_network_zone(resp.id)
+                _, _, err = await client.deactivate_network_zone(resp.id)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
