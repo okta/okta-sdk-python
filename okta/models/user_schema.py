@@ -21,6 +21,8 @@ limitations under the License.
 from okta.okta_object import OktaObject
 from okta.models import user_schema_definitions\
     as user_schema_definitions
+from okta.models import user_schema_properties\
+    as user_schema_properties
 
 
 class UserSchema(
@@ -57,8 +59,18 @@ class UserSchema(
                 if "lastUpdated" in config else None
             self.name = config["name"]\
                 if "name" in config else None
-            self.properties = config["properties"]\
-                if "properties" in config else None
+            if "properties" in config:
+                if isinstance(config["properties"],
+                              user_schema_properties.UserSchemaProperties):
+                    self.properties = config["properties"]
+                elif config["properties"] is not None:
+                    self.properties = user_schema_properties.UserSchemaProperties(
+                        config["properties"]
+                    )
+                else:
+                    self.properties = None
+            else:
+                self.properties = None
             self.title = config["title"]\
                 if "title" in config else None
             self.type = config["type"]\
