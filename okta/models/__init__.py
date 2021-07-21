@@ -150,6 +150,8 @@ from okta.models import custom_hotp_user_factor_profile as custom_hotp_user_fact
 CustomHotpUserFactorProfile = custom_hotp_user_factor_profile.CustomHotpUserFactorProfile
 from okta.models import dns_record as dns_record
 DnsRecord = dns_record.DnsRecord
+from okta.models import dns_record_type as dns_record_type
+DnsRecordType = dns_record_type.DnsRecordType
 from okta.models import device_policy_rule_condition as device_policy_rule_condition
 DevicePolicyRuleCondition = device_policy_rule_condition.DevicePolicyRuleCondition
 from okta.models import device_policy_rule_condition_platform as device_policy_rule_condition_platform
@@ -160,12 +162,14 @@ from okta.models import domain_certificate as domain_certificate
 DomainCertificate = domain_certificate.DomainCertificate
 from okta.models import domain_certificate_metadata as domain_certificate_metadata
 DomainCertificateMetadata = domain_certificate_metadata.DomainCertificateMetadata
-from okta.models import domain_links as domain_links
-DomainLinks = domain_links.DomainLinks
+from okta.models import domain_certificate_source_type as domain_certificate_source_type
+DomainCertificateSourceType = domain_certificate_source_type.DomainCertificateSourceType
+from okta.models import domain_certificate_type as domain_certificate_type
+DomainCertificateType = domain_certificate_type.DomainCertificateType
 from okta.models import domain_list_response as domain_list_response
 DomainListResponse = domain_list_response.DomainListResponse
-from okta.models import domain_response as domain_response
-DomainResponse = domain_response.DomainResponse
+from okta.models import domain_validation_status as domain_validation_status
+DomainValidationStatus = domain_validation_status.DomainValidationStatus
 from okta.models import duration as duration
 Duration = duration.Duration
 from okta.models import email_user_factor as email_user_factor

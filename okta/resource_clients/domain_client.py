@@ -19,8 +19,8 @@ limitations under the License.
 
 from okta.models.domain_list_response\
     import DomainListResponse
-from okta.models.domain_response\
-    import DomainResponse
+from okta.models.domain\
+    import Domain
 from okta.utils import format_url
 from okta.api_client import APIClient
 
@@ -80,7 +80,7 @@ class DomainClient(APIClient):
         Args:
             {domain}
         Returns:
-            DomainResponse
+            Domain
         """
         http_method = "post".upper()
         api_url = format_url(f"""
@@ -105,13 +105,13 @@ class DomainClient(APIClient):
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request, DomainResponse)
+            .execute(request, Domain)
 
         if error:
             return (None, response, error)
 
         try:
-            result = DomainResponse(
+            result = Domain(
                 self.form_response_body(response.get_body())
             )
         except Exception as error:
@@ -158,7 +158,7 @@ class DomainClient(APIClient):
         Args:
             domain_id {str}
         Returns:
-            DomainResponse
+            Domain
         """
         http_method = "get".upper()
         api_url = format_url(f"""
@@ -177,13 +177,13 @@ class DomainClient(APIClient):
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request, DomainResponse)
+            .execute(request, Domain)
 
         if error:
             return (None, response, error)
 
         try:
-            result = DomainResponse(
+            result = Domain(
                 self.form_response_body(response.get_body())
             )
         except Exception as error:
@@ -237,7 +237,7 @@ class DomainClient(APIClient):
         Args:
             domain_id {str}
         Returns:
-            DomainResponse
+            Domain
         """
         http_method = "post".upper()
         api_url = format_url(f"""
@@ -256,13 +256,13 @@ class DomainClient(APIClient):
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request, DomainResponse)
+            .execute(request, Domain)
 
         if error:
             return (None, response, error)
 
         try:
-            result = DomainResponse(
+            result = Domain(
                 self.form_response_body(response.get_body())
             )
         except Exception as error:

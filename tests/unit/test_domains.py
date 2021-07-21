@@ -1,7 +1,7 @@
 import aiohttp
 import asyncio
 from okta.client import Client as OktaClient
-from okta.models import DnsRecord, DomainCertificate, DomainCertificateMetadata, DomainResponse
+from okta.models import DnsRecord, DomainCertificate, DomainCertificateMetadata, Domain
 
 
 CREATE_DOMAIN_RESP = """{
@@ -185,7 +185,7 @@ class TestDomainResource:
 
         domain_resp, _, err = asyncio.run(client.get_domain('OcDz6iRyjkaCTXkdo0g3'))
         assert err is None
-        assert isinstance(domain_resp, DomainResponse)
+        assert isinstance(domain_resp, Domain)
         assert isinstance(domain_resp.public_certificate, DomainCertificateMetadata)
         assert len(domain_resp.dns_records) > 0
         for dns_record in domain_resp.dns_records:

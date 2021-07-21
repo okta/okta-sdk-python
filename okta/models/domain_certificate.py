@@ -19,6 +19,8 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models import domain_certificate_type\
+    as domain_certificate_type
 
 
 class DomainCertificate(
@@ -37,8 +39,18 @@ class DomainCertificate(
                 if "certificateChain" in config else None
             self.private_key = config["privateKey"]\
                 if "privateKey" in config else None
-            self.type = config["type"]\
-                if "type" in config else None
+            if "type" in config:
+                if isinstance(config["type"],
+                              domain_certificate_type.DomainCertificateType):
+                    self.type = config["type"]
+                elif config["type"] is not None:
+                    self.type = domain_certificate_type.DomainCertificateType(
+                        config["type"].upper()
+                    )
+                else:
+                    self.type = None
+            else:
+                self.type = None
         else:
             self.certificate = None
             self.certificate_chain = None

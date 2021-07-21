@@ -20,8 +20,8 @@ limitations under the License.
 
 from okta.okta_object import OktaObject
 from okta.okta_collection import OktaCollection
-from okta.models import domain_response\
-    as domain_response
+from okta.models import domain\
+    as domain
 
 
 class DomainListResponse(
@@ -37,7 +37,7 @@ class DomainListResponse(
             self.domains = OktaCollection.form_list(
                 config["domains"] if "domains"\
                     in config else [],
-                domain_response.DomainResponse
+                domain.Domain
             )
         else:
             self.domains = []

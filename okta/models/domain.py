@@ -19,6 +19,15 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.okta_collection import OktaCollection
+from okta.models import domain_certificate_source_type\
+    as domain_certificate_source_type
+from okta.models import dns_record\
+    as dns_record
+from okta.models import domain_certificate_metadata\
+    as domain_certificate_metadata
+from okta.models import domain_validation_status\
+    as domain_validation_status
 
 
 class Domain(
@@ -31,19 +40,68 @@ class Domain(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.certificate_sourcetype = config["certificateSourcetype"]\
-                if "certificateSourcetype" in config else None
+            if "certificateSourcetype" in config:
+                if isinstance(config["certificateSourcetype"],
+                              domain_certificate_source_type.DomainCertificateSourceType):
+                    self.certificate_sourcetype = config["certificateSourcetype"]
+                elif config["certificateSourcetype"] is not None:
+                    self.certificate_sourcetype = domain_certificate_source_type.DomainCertificateSourceType(
+                        config["certificateSourcetype"].upper()
+                    )
+                else:
+                    self.certificate_sourcetype = None
+            else:
+                self.certificate_sourcetype = None
+            self.dns_records = OktaCollection.form_list(
+                config["dnsRecords"] if "dnsRecords"\
+                    in config else [],
+                dns_record.DnsRecord
+            )
             self.domain = config["domain"]\
                 if "domain" in config else None
+            self.id = config["id"]\
+                if "id" in config else None
+            if "publicCertificate" in config:
+                if isinstance(config["publicCertificate"],
+                              domain_certificate_metadata.DomainCertificateMetadata):
+                    self.public_certificate = config["publicCertificate"]
+                elif config["publicCertificate"] is not None:
+                    self.public_certificate = domain_certificate_metadata.DomainCertificateMetadata(
+                        config["publicCertificate"]
+                    )
+                else:
+                    self.public_certificate = None
+            else:
+                self.public_certificate = None
+            if "validationStatus" in config:
+                if isinstance(config["validationStatus"],
+                              domain_validation_status.DomainValidationStatus):
+                    self.validation_status = config["validationStatus"]
+                elif config["validationStatus"] is not None:
+                    self.validation_status = domain_validation_status.DomainValidationStatus(
+                        config["validationStatus"].upper()
+                    )
+                else:
+                    self.validation_status = None
+            else:
+                self.validation_status = None
         else:
             self.certificate_sourcetype = None
+            self.dns_records = []
             self.domain = None
+            self.id = None
+            self.public_certificate = None
+            self.validation_status = None
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
             "certificateSourcetype": self.certificate_sourcetype,
-            "domain": self.domain
+            "dnsRecords": self.dns_records,
+            "domain": self.domain,
+            "id": self.id,
+            "publicCertificate": self.public_certificate,
+            "validationStatus": self.validation_status
         }
         parent_req_format.update(current_obj_format)
         return parent_req_format
