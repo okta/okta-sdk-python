@@ -19,6 +19,11 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.okta_collection import OktaCollection
+from okta.models import user_schema_attribute_master_priority\
+    as user_schema_attribute_master_priority
+from okta.models import user_schema_attribute_master_type\
+    as user_schema_attribute_master_type
 
 
 class UserSchemaAttributeMaster(
@@ -31,14 +36,31 @@ class UserSchemaAttributeMaster(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.type = config["type"]\
-                if "type" in config else None
+            self.priority = OktaCollection.form_list(
+                config["priority"] if "priority"\
+                    in config else [],
+                user_schema_attribute_master_priority.UserSchemaAttributeMasterPriority
+            )
+            if "type" in config:
+                if isinstance(config["type"],
+                              user_schema_attribute_master_type.UserSchemaAttributeMasterType):
+                    self.type = config["type"]
+                elif config["type"] is not None:
+                    self.type = user_schema_attribute_master_type.UserSchemaAttributeMasterType(
+                        config["type"].upper()
+                    )
+                else:
+                    self.type = None
+            else:
+                self.type = None
         else:
+            self.priority = []
             self.type = None
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
+            "priority": self.priority,
             "type": self.type
         }
         parent_req_format.update(current_obj_format)

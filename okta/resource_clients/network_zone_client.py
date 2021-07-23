@@ -255,6 +255,8 @@ class NetworkZoneClient(APIClient):
         Activate Network Zone
         Args:
             zone_id {str}
+        Returns:
+            NetworkZone
         """
         http_method = "post".upper()
         api_url = format_url(f"""
@@ -270,15 +272,21 @@ class NetworkZoneClient(APIClient):
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, NetworkZone)
 
         if error:
-            return (response, error)
+            return (None, response, error)
 
-        return (response, None)
+        try:
+            result = NetworkZone(
+                self.form_response_body(response.get_body())
+            )
+        except Exception as error:
+            return (None, response, error)
+        return (result, response, None)
 
     async def deactivate_network_zone(
             self, zoneId
@@ -287,6 +295,8 @@ class NetworkZoneClient(APIClient):
         Deactivates a network zone.
         Args:
             zone_id {str}
+        Returns:
+            NetworkZone
         """
         http_method = "post".upper()
         api_url = format_url(f"""
@@ -302,12 +312,18 @@ class NetworkZoneClient(APIClient):
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, NetworkZone)
 
         if error:
-            return (response, error)
+            return (None, response, error)
 
-        return (response, None)
+        try:
+            result = NetworkZone(
+                self.form_response_body(response.get_body())
+            )
+        except Exception as error:
+            return (None, response, error)
+        return (result, response, None)
