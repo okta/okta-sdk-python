@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@okta/openapi@^2.4.0":
-  "integrity" "sha512-isPw9DuGLbLI1UndwHWeinIn0uToCiuYXhJok/h2NEuciv7dD3SBz4SwkPuyKIETJgsKdhWgo0naK5c9KH031w=="
-  "resolved" "https://registry.npmjs.org/@okta/openapi/-/openapi-2.4.0.tgz"
-  "version" "2.4.0"
+"@okta/openapi@^2.5.0":
+  "integrity" "sha512-Hke9OXDVaq8lSJI3XepZXxoD2xysQH0KeQta6s/V2fS5aE8HB0utv8DrOaSjnXF7/bFUxteBxRIO7hllpkx1cw=="
+  "resolved" "https://registry.npmjs.org/@okta/openapi/-/openapi-2.5.0.tgz"
+  "version" "2.5.0"
   dependencies:
     "commander" "2.9.0"
     "fs-extra" "3.0.1"
