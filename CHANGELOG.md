@@ -31,7 +31,8 @@ _New models:_
 * UserSchemaPropertiesProfileItem
 
 ### Breaking changes
-Previously, some predefined apps set string type for attribute `sign_on_mode`, while some other apps, including generic app, leave ApplicationSignOnMode type.
+Previously, the type of `sign_on_mode` attribute was inconsistent among different applications. While some applications, including the generic application, defined this attribute as string, others defined it as `ApplicationSignOnMode`.
+
 To make type consistent, sign_on_mode attribute of all applications are ApplicationSignOnMode type now. Thus, code like the following, which was working previously, won't provide desired result:
 
 ```py
