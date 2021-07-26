@@ -30,6 +30,16 @@ _New models:_
 * UserSchemaPropertiesProfile
 * UserSchemaPropertiesProfileItem
 
+### Breaking changes
+Previously, some predefined apps set string type for attribute `sign_on_mode`, while some other apps, including generic app, leave ApplicationSignOnMode type.
+To make type consistent, sign_on_mode attribute of all applications are ApplicationSignOnMode type now. Thus, code like the following, which was working previously, won't provide desired result:
+
+```py
+# if sign_on_mode is not an ApplicationSignOnMode type, then it should be string, but now all sign_on_modes are string
+if not isinstance(app.sign_on_mode, ApplicationSignOnMode):
+    do_some_stuff()
+```
+
 ## v1.7.0
 - Regenerate code using the [open API spec v2.4.0](https://github.com/okta/okta-management-openapi-spec/releases/tag/openapi-2.4.0).
 - Fix case issue with user custom attributes, issue #202.
