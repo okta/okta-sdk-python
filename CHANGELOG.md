@@ -36,7 +36,7 @@ Previously, the type of `sign_on_mode` attribute was inconsistent among differen
 We have now standardized the sign_on_mode attribute making its type an ApplicationSignOnMode. Thus, code like the following, which was working previously, won't provide desired result:
 
 ```py
-# if sign_on_mode is not an ApplicationSignOnMode type, then it should be string, but now all sign_on_modes are string
+# if sign_on_mode is not an ApplicationSignOnMode type, then it should be string, but now all sign_on_modes are an ApplicationSignOnMode
 if not isinstance(app.sign_on_mode, ApplicationSignOnMode):
     do_some_stuff()
 ```
