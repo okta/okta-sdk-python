@@ -14,6 +14,7 @@ class OktaAPIResponse():
                  data_type=None):
         self._url = res_details.url
         self._headers = req["headers"]
+        self._resp_headers = res_details.headers
         self._self = None  # Link to first page of results
         self._body = None  # First page of results
         self._type = data_type
@@ -39,6 +40,15 @@ class OktaAPIResponse():
         if self._body is not None:
             self.extract_pagination(res_details.links)
             self._current = self._body
+
+    def get_headers(self):
+        """
+        Returns the response body of the Okta API Response.
+
+        Returns:
+            CIMultiDictProxy: dict-like object
+        """
+        return self._resp_headers
 
     def get_body(self):
         """
