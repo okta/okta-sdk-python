@@ -33,7 +33,7 @@ _New models:_
 ### Breaking changes
 Previously, the type of `sign_on_mode` attribute was inconsistent among different applications. While some applications, including the generic application, defined this attribute as string, others defined it as `ApplicationSignOnMode`.
 
-To make type consistent, sign_on_mode attribute of all applications are ApplicationSignOnMode type now. Thus, code like the following, which was working previously, won't provide desired result:
+We have now standardized the sign_on_mode attribute making its type an ApplicationSignOnMode. Thus, code like the following, which was working previously, won't provide desired result:
 
 ```py
 # if sign_on_mode is not an ApplicationSignOnMode type, then it should be string, but now all sign_on_modes are string
