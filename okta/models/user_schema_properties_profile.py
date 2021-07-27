@@ -20,32 +20,32 @@ limitations under the License.
 
 from okta.okta_object import OktaObject
 from okta.okta_collection import OktaCollection
-from okta.models import domain\
-    as domain
+from okta.models import user_schema_properties_profile_item\
+    as user_schema_properties_profile_item
 
 
-class DomainListResponse(
+class UserSchemaPropertiesProfile(
     OktaObject
 ):
     """
-    A class for DomainListResponse objects.
+    A class for UserSchemaPropertiesProfile objects.
     """
 
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.domains = OktaCollection.form_list(
-                config["domains"] if "domains"\
+            self.all_of = OktaCollection.form_list(
+                config["allOf"] if "allOf"\
                     in config else [],
-                domain.Domain
+                user_schema_properties_profile_item.UserSchemaPropertiesProfileItem
             )
         else:
-            self.domains = []
+            self.all_of = []
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
-            "domains": self.domains
+            "allOf": self.all_of
         }
         parent_req_format.update(current_obj_format)
         return parent_req_format

@@ -19,35 +19,44 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.okta_collection import OktaCollection
+from okta.models import user_schema_attribute_enum\
+    as user_schema_attribute_enum
 
 
-class DomainLinks(
+class UserSchemaAttributeItems(
     OktaObject
 ):
     """
-    A class for DomainLinks objects.
+    A class for UserSchemaAttributeItems objects.
     """
 
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.certificate = config["certificate"]\
-                if "certificate" in config else None
-            self.self = config["self"]\
-                if "self" in config else None
-            self.verify = config["verify"]\
-                if "verify" in config else None
+            self.enum = OktaCollection.form_list(
+                config["enum"] if "enum"\
+                    in config else [],
+                str
+            )
+            self.one_of = OktaCollection.form_list(
+                config["oneOf"] if "oneOf"\
+                    in config else [],
+                user_schema_attribute_enum.UserSchemaAttributeEnum
+            )
+            self.type = config["type"]\
+                if "type" in config else None
         else:
-            self.certificate = None
-            self.self = None
-            self.verify = None
+            self.enum = []
+            self.one_of = []
+            self.type = None
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
-            "certificate": self.certificate,
-            "self": self.self,
-            "verify": self.verify
+            "enum": self.enum,
+            "oneOf": self.one_of,
+            "type": self.type
         }
         parent_req_format.update(current_obj_format)
         return parent_req_format

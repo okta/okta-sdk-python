@@ -20,6 +20,8 @@ limitations under the License.
 
 from okta.okta_object import OktaObject
 from okta.okta_collection import OktaCollection
+from okta.models import dns_record_type\
+    as dns_record_type
 
 
 class DnsRecord(
@@ -32,16 +34,29 @@ class DnsRecord(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
+            self.expiration = config["expiration"]\
+                if "expiration" in config else None
             self.fqdn = config["fqdn"]\
                 if "fqdn" in config else None
-            self.record_type = config["recordType"]\
-                if "recordType" in config else None
+            if "recordType" in config:
+                if isinstance(config["recordType"],
+                              dns_record_type.DnsRecordType):
+                    self.record_type = config["recordType"]
+                elif config["recordType"] is not None:
+                    self.record_type = dns_record_type.DnsRecordType(
+                        config["recordType"].upper()
+                    )
+                else:
+                    self.record_type = None
+            else:
+                self.record_type = None
             self.values = OktaCollection.form_list(
                 config["values"] if "values"\
                     in config else [],
                 str
             )
         else:
+            self.expiration = None
             self.fqdn = None
             self.record_type = None
             self.values = []
@@ -49,6 +64,7 @@ class DnsRecord(
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
+            "expiration": self.expiration,
             "fqdn": self.fqdn,
             "recordType": self.record_type,
             "values": self.values

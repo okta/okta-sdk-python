@@ -150,6 +150,8 @@ from okta.models import custom_hotp_user_factor_profile as custom_hotp_user_fact
 CustomHotpUserFactorProfile = custom_hotp_user_factor_profile.CustomHotpUserFactorProfile
 from okta.models import dns_record as dns_record
 DnsRecord = dns_record.DnsRecord
+from okta.models import dns_record_type as dns_record_type
+DnsRecordType = dns_record_type.DnsRecordType
 from okta.models import device_policy_rule_condition as device_policy_rule_condition
 DevicePolicyRuleCondition = device_policy_rule_condition.DevicePolicyRuleCondition
 from okta.models import device_policy_rule_condition_platform as device_policy_rule_condition_platform
@@ -160,12 +162,14 @@ from okta.models import domain_certificate as domain_certificate
 DomainCertificate = domain_certificate.DomainCertificate
 from okta.models import domain_certificate_metadata as domain_certificate_metadata
 DomainCertificateMetadata = domain_certificate_metadata.DomainCertificateMetadata
-from okta.models import domain_links as domain_links
-DomainLinks = domain_links.DomainLinks
+from okta.models import domain_certificate_source_type as domain_certificate_source_type
+DomainCertificateSourceType = domain_certificate_source_type.DomainCertificateSourceType
+from okta.models import domain_certificate_type as domain_certificate_type
+DomainCertificateType = domain_certificate_type.DomainCertificateType
 from okta.models import domain_list_response as domain_list_response
 DomainListResponse = domain_list_response.DomainListResponse
-from okta.models import domain_response as domain_response
-DomainResponse = domain_response.DomainResponse
+from okta.models import domain_validation_status as domain_validation_status
+DomainValidationStatus = domain_validation_status.DomainValidationStatus
 from okta.models import duration as duration
 Duration = duration.Duration
 from okta.models import email_user_factor as email_user_factor
@@ -690,16 +694,36 @@ from okta.models import user_schema as user_schema
 UserSchema = user_schema.UserSchema
 from okta.models import user_schema_attribute as user_schema_attribute
 UserSchemaAttribute = user_schema_attribute.UserSchemaAttribute
+from okta.models import user_schema_attribute_enum as user_schema_attribute_enum
+UserSchemaAttributeEnum = user_schema_attribute_enum.UserSchemaAttributeEnum
+from okta.models import user_schema_attribute_items as user_schema_attribute_items
+UserSchemaAttributeItems = user_schema_attribute_items.UserSchemaAttributeItems
 from okta.models import user_schema_attribute_master as user_schema_attribute_master
 UserSchemaAttributeMaster = user_schema_attribute_master.UserSchemaAttributeMaster
+from okta.models import user_schema_attribute_master_priority as user_schema_attribute_master_priority
+UserSchemaAttributeMasterPriority = user_schema_attribute_master_priority.UserSchemaAttributeMasterPriority
+from okta.models import user_schema_attribute_master_type as user_schema_attribute_master_type
+UserSchemaAttributeMasterType = user_schema_attribute_master_type.UserSchemaAttributeMasterType
 from okta.models import user_schema_attribute_permission as user_schema_attribute_permission
 UserSchemaAttributePermission = user_schema_attribute_permission.UserSchemaAttributePermission
+from okta.models import user_schema_attribute_scope as user_schema_attribute_scope
+UserSchemaAttributeScope = user_schema_attribute_scope.UserSchemaAttributeScope
+from okta.models import user_schema_attribute_type as user_schema_attribute_type
+UserSchemaAttributeType = user_schema_attribute_type.UserSchemaAttributeType
+from okta.models import user_schema_attribute_union as user_schema_attribute_union
+UserSchemaAttributeUnion = user_schema_attribute_union.UserSchemaAttributeUnion
 from okta.models import user_schema_base as user_schema_base
 UserSchemaBase = user_schema_base.UserSchemaBase
 from okta.models import user_schema_base_properties as user_schema_base_properties
 UserSchemaBaseProperties = user_schema_base_properties.UserSchemaBaseProperties
 from okta.models import user_schema_definitions as user_schema_definitions
 UserSchemaDefinitions = user_schema_definitions.UserSchemaDefinitions
+from okta.models import user_schema_properties as user_schema_properties
+UserSchemaProperties = user_schema_properties.UserSchemaProperties
+from okta.models import user_schema_properties_profile as user_schema_properties_profile
+UserSchemaPropertiesProfile = user_schema_properties_profile.UserSchemaPropertiesProfile
+from okta.models import user_schema_properties_profile_item as user_schema_properties_profile_item
+UserSchemaPropertiesProfileItem = user_schema_properties_profile_item.UserSchemaPropertiesProfileItem
 from okta.models import user_schema_public as user_schema_public
 UserSchemaPublic = user_schema_public.UserSchemaPublic
 from okta.models import user_status as user_status

@@ -19,33 +19,31 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.okta_collection import OktaCollection
-from okta.models import domain\
-    as domain
 
 
-class DomainListResponse(
+class UserSchemaAttributeEnum(
     OktaObject
 ):
     """
-    A class for DomainListResponse objects.
+    A class for UserSchemaAttributeEnum objects.
     """
 
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.domains = OktaCollection.form_list(
-                config["domains"] if "domains"\
-                    in config else [],
-                domain.Domain
-            )
+            self.const = config["const"]\
+                if "const" in config else None
+            self.title = config["title"]\
+                if "title" in config else None
         else:
-            self.domains = []
+            self.const = None
+            self.title = None
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
-            "domains": self.domains
+            "const": self.const,
+            "title": self.title
         }
         parent_req_format.update(current_obj_format)
         return parent_req_format
