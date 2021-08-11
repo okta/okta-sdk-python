@@ -473,7 +473,7 @@ class GroupClient(APIClient):
             self, groupId
     ):
         """
-        Lists all group rules for your organization.
+        Fetches a group from your Okta organization.
         Args:
             group_id {str}
         Returns:
