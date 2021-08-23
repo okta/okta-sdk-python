@@ -21,29 +21,25 @@ limitations under the License.
 from okta.okta_object import OktaObject
 
 
-class UserSchemaAttributeMasterPriority(
+class SignOnInlineHook(
     OktaObject
 ):
     """
-    A class for UserSchemaAttributeMasterPriority objects.
+    A class for SignOnInlineHook objects.
     """
 
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.type = config["type"]\
-                if "type" in config else None
-            self.value = config["value"]\
-                if "value" in config else None
+            self.id = config["id"]\
+                if "id" in config else None
         else:
-            self.type = None
-            self.value = None
+            self.id = None
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
-            "type": self.type,
-            "value": self.value
+            "id": self.id
         }
         parent_req_format.update(current_obj_format)
         return parent_req_format

@@ -32,7 +32,8 @@ class UserSchemaClient(APIClient):
         self._base_url = ""
 
     async def get_application_user_schema(
-            self, appInstanceId
+            self, appInstanceId,
+            keep_empty_params=True
     ):
         """
         Fetches the Schema for an App User
@@ -51,7 +52,7 @@ class UserSchemaClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers, keep_empty_params=True
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -72,7 +73,8 @@ class UserSchemaClient(APIClient):
         return (result, response, None)
 
     async def update_application_user_profile(
-            self, appInstanceId, user_schema
+            self, appInstanceId, user_schema,
+            keep_empty_params=True
     ):
         """
         Partial updates on the User Profile properties of the A
@@ -99,7 +101,7 @@ class UserSchemaClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers, keep_empty_params=True
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -120,7 +122,8 @@ class UserSchemaClient(APIClient):
         return (result, response, None)
 
     async def get_user_schema(
-            self, schemaId
+            self, schemaId,
+            keep_empty_params=True
     ):
         """
         Fetches the schema for a Schema Id.
@@ -139,7 +142,7 @@ class UserSchemaClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers, keep_empty_params=True
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -160,7 +163,8 @@ class UserSchemaClient(APIClient):
         return (result, response, None)
 
     async def update_user_profile(
-            self, schemaId, user_schema
+            self, schemaId, user_schema,
+            keep_empty_params=True
     ):
         """
         Partial updates on the User Profile properties of the u
@@ -187,7 +191,7 @@ class UserSchemaClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers, keep_empty_params=True
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:

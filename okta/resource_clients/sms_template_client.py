@@ -33,7 +33,8 @@ class SmsTemplateClient(APIClient):
         self._base_url = ""
 
     async def list_sms_templates(
-            self, query_params={}
+            self, query_params={},
+            keep_empty_params=False
     ):
         """
         Enumerates custom SMS templates in your organization. A
@@ -58,7 +59,7 @@ class SmsTemplateClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -81,7 +82,8 @@ class SmsTemplateClient(APIClient):
         return (result, response, None)
 
     async def create_sms_template(
-            self, sms_template
+            self, sms_template,
+            keep_empty_params=False
     ):
         """
         Adds a new custom SMS template to your organization.
@@ -106,7 +108,7 @@ class SmsTemplateClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -127,7 +129,8 @@ class SmsTemplateClient(APIClient):
         return (result, response, None)
 
     async def delete_sms_template(
-            self, templateId
+            self, templateId,
+            keep_empty_params=False
     ):
         """
         Removes an SMS template.
@@ -144,7 +147,7 @@ class SmsTemplateClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -159,7 +162,8 @@ class SmsTemplateClient(APIClient):
         return (response, None)
 
     async def get_sms_template(
-            self, templateId
+            self, templateId,
+            keep_empty_params=False
     ):
         """
         Fetches a specific template by `id`
@@ -178,7 +182,7 @@ class SmsTemplateClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -199,7 +203,8 @@ class SmsTemplateClient(APIClient):
         return (result, response, None)
 
     async def partial_update_sms_template(
-            self, templateId, sms_template
+            self, templateId, sms_template,
+            keep_empty_params=False
     ):
         """
         Updates only some of the SMS template properties:
@@ -225,7 +230,7 @@ class SmsTemplateClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -246,7 +251,8 @@ class SmsTemplateClient(APIClient):
         return (result, response, None)
 
     async def update_sms_template(
-            self, templateId, sms_template
+            self, templateId, sms_template,
+            keep_empty_params=False
     ):
         """
         Updates the SMS template.
@@ -272,7 +278,7 @@ class SmsTemplateClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:

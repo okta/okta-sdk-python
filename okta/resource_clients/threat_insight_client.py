@@ -32,7 +32,8 @@ class ThreatInsightClient(APIClient):
         self._base_url = ""
 
     async def get_current_configuration(
-            self
+            self,
+            keep_empty_params=False
     ):
         """
         Gets current ThreatInsight configuration
@@ -50,7 +51,7 @@ class ThreatInsightClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -71,7 +72,8 @@ class ThreatInsightClient(APIClient):
         return (result, response, None)
 
     async def update_configuration(
-            self, threat_insight_configuration
+            self, threat_insight_configuration,
+            keep_empty_params=False
     ):
         """
         Updates ThreatInsight configuration
@@ -96,7 +98,7 @@ class ThreatInsightClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:

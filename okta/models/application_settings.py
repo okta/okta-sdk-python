@@ -21,6 +21,8 @@ limitations under the License.
 from okta.okta_object import OktaObject
 from okta.models import application_settings_application\
     as application_settings_application
+from okta.models import application_settings_notes\
+    as application_settings_notes
 from okta.models import application_settings_notifications\
     as application_settings_notifications
 
@@ -51,6 +53,18 @@ class ApplicationSettings(
                 if "implicitAssignment" in config else None
             self.inline_hook_id = config["inlineHookId"]\
                 if "inlineHookId" in config else None
+            if "notes" in config:
+                if isinstance(config["notes"],
+                              application_settings_notes.ApplicationSettingsNotes):
+                    self.notes = config["notes"]
+                elif config["notes"] is not None:
+                    self.notes = application_settings_notes.ApplicationSettingsNotes(
+                        config["notes"]
+                    )
+                else:
+                    self.notes = None
+            else:
+                self.notes = None
             if "notifications" in config:
                 if isinstance(config["notifications"],
                               application_settings_notifications.ApplicationSettingsNotifications):
@@ -67,6 +81,7 @@ class ApplicationSettings(
             self.app = None
             self.implicit_assignment = None
             self.inline_hook_id = None
+            self.notes = None
             self.notifications = None
 
     def request_format(self):
@@ -75,6 +90,7 @@ class ApplicationSettings(
             "app": self.app,
             "implicitAssignment": self.implicit_assignment,
             "inlineHookId": self.inline_hook_id,
+            "notes": self.notes,
             "notifications": self.notifications
         }
         parent_req_format.update(current_obj_format)

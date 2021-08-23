@@ -32,7 +32,8 @@ class LinkedObjectClient(APIClient):
         self._base_url = ""
 
     async def list_linked_object_definitions(
-            self
+            self,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -49,7 +50,7 @@ class LinkedObjectClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -72,7 +73,8 @@ class LinkedObjectClient(APIClient):
         return (result, response, None)
 
     async def add_linked_object_definition(
-            self, linked_object
+            self, linked_object,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -96,7 +98,7 @@ class LinkedObjectClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -117,7 +119,8 @@ class LinkedObjectClient(APIClient):
         return (result, response, None)
 
     async def delete_linked_object_definition(
-            self, linkedObjectName
+            self, linkedObjectName,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -134,7 +137,7 @@ class LinkedObjectClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -149,7 +152,8 @@ class LinkedObjectClient(APIClient):
         return (response, None)
 
     async def get_linked_object_definition(
-            self, linkedObjectName
+            self, linkedObjectName,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -168,7 +172,7 @@ class LinkedObjectClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:

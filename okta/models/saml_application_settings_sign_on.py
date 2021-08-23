@@ -24,6 +24,8 @@ from okta.models import acs_endpoint\
     as acs_endpoint
 from okta.models import saml_attribute_statement\
     as saml_attribute_statement
+from okta.models import sign_on_inline_hook\
+    as sign_on_inline_hook
 from okta.models import single_logout\
     as single_logout
 from okta.models import sp_certificate\
@@ -72,6 +74,11 @@ class SamlApplicationSettingsSignOn(
                 if "honorForceAuthn" in config else None
             self.idp_issuer = config["idpIssuer"]\
                 if "idpIssuer" in config else None
+            self.inline_hooks = OktaCollection.form_list(
+                config["inlineHooks"] if "inlineHooks"\
+                    in config else [],
+                sign_on_inline_hook.SignOnInlineHook
+            )
             self.recipient = config["recipient"]\
                 if "recipient" in config else None
             self.recipient_override = config["recipientOverride"]\
@@ -130,6 +137,7 @@ class SamlApplicationSettingsSignOn(
             self.digest_algorithm = None
             self.honor_force_authn = None
             self.idp_issuer = None
+            self.inline_hooks = []
             self.recipient = None
             self.recipient_override = None
             self.request_compressed = None
@@ -159,6 +167,7 @@ class SamlApplicationSettingsSignOn(
             "digestAlgorithm": self.digest_algorithm,
             "honorForceAuthn": self.honor_force_authn,
             "idpIssuer": self.idp_issuer,
+            "inlineHooks": self.inline_hooks,
             "recipient": self.recipient,
             "recipientOverride": self.recipient_override,
             "requestCompressed": self.request_compressed,

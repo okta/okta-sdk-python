@@ -34,7 +34,8 @@ class DomainClient(APIClient):
         self._base_url = ""
 
     async def list_domains(
-            self
+            self,
+            keep_empty_params=False
     ):
         """
         List all verified custom Domains for the org.
@@ -52,7 +53,7 @@ class DomainClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -73,7 +74,8 @@ class DomainClient(APIClient):
         return (result, response, None)
 
     async def create_domain(
-            self, domain
+            self, domain,
+            keep_empty_params=False
     ):
         """
         Creates your domain.
@@ -98,7 +100,7 @@ class DomainClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -119,7 +121,8 @@ class DomainClient(APIClient):
         return (result, response, None)
 
     async def delete_domain(
-            self, domainId
+            self, domainId,
+            keep_empty_params=False
     ):
         """
         Deletes a Domain by `id`.
@@ -136,7 +139,7 @@ class DomainClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -151,7 +154,8 @@ class DomainClient(APIClient):
         return (response, None)
 
     async def get_domain(
-            self, domainId
+            self, domainId,
+            keep_empty_params=False
     ):
         """
         Fetches a Domain by `id`.
@@ -170,7 +174,7 @@ class DomainClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -191,7 +195,8 @@ class DomainClient(APIClient):
         return (result, response, None)
 
     async def create_certificate(
-            self, domainId, domain_certificate
+            self, domainId, domain_certificate,
+            keep_empty_params=False
     ):
         """
         Creates the Certificate for the Domain.
@@ -215,7 +220,7 @@ class DomainClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -230,7 +235,8 @@ class DomainClient(APIClient):
         return (response, None)
 
     async def verify_domain(
-            self, domainId
+            self, domainId,
+            keep_empty_params=False
     ):
         """
         Verifies the Domain by `id`.
@@ -249,7 +255,7 @@ class DomainClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:

@@ -33,7 +33,8 @@ class LogEventClient(APIClient):
         self._base_url = ""
 
     async def get_logs(
-            self, query_params={}
+            self, query_params={},
+            keep_empty_params=False
     ):
         """
         The Okta System Log API provides read access to your or
@@ -64,7 +65,7 @@ class LogEventClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:

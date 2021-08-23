@@ -47,7 +47,8 @@ class AuthorizationServerClient(APIClient):
         self._base_url = ""
 
     async def list_authorization_servers(
-            self, query_params={}
+            self, query_params={},
+            keep_empty_params=False
     ):
         """
         Args:
@@ -71,7 +72,7 @@ class AuthorizationServerClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -94,7 +95,8 @@ class AuthorizationServerClient(APIClient):
         return (result, response, None)
 
     async def create_authorization_server(
-            self, authorization_server
+            self, authorization_server,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -118,7 +120,7 @@ class AuthorizationServerClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -139,7 +141,8 @@ class AuthorizationServerClient(APIClient):
         return (result, response, None)
 
     async def delete_authorization_server(
-            self, authServerId
+            self, authServerId,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -155,7 +158,7 @@ class AuthorizationServerClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -170,7 +173,8 @@ class AuthorizationServerClient(APIClient):
         return (response, None)
 
     async def get_authorization_server(
-            self, authServerId
+            self, authServerId,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -188,7 +192,7 @@ class AuthorizationServerClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -209,7 +213,8 @@ class AuthorizationServerClient(APIClient):
         return (result, response, None)
 
     async def update_authorization_server(
-            self, authServerId, authorization_server
+            self, authServerId, authorization_server,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -234,7 +239,7 @@ class AuthorizationServerClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -255,7 +260,8 @@ class AuthorizationServerClient(APIClient):
         return (result, response, None)
 
     async def list_o_auth_2_claims(
-            self, authServerId
+            self, authServerId,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -273,7 +279,7 @@ class AuthorizationServerClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -296,7 +302,8 @@ class AuthorizationServerClient(APIClient):
         return (result, response, None)
 
     async def create_o_auth_2_claim(
-            self, authServerId, o_auth_2_claim
+            self, authServerId, o_auth_2_claim,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -321,7 +328,7 @@ class AuthorizationServerClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -342,7 +349,8 @@ class AuthorizationServerClient(APIClient):
         return (result, response, None)
 
     async def delete_o_auth_2_claim(
-            self, authServerId, claimId
+            self, authServerId, claimId,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -360,7 +368,7 @@ class AuthorizationServerClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -375,7 +383,8 @@ class AuthorizationServerClient(APIClient):
         return (response, None)
 
     async def get_o_auth_2_claim(
-            self, authServerId, claimId
+            self, authServerId, claimId,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -395,7 +404,7 @@ class AuthorizationServerClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -416,7 +425,8 @@ class AuthorizationServerClient(APIClient):
         return (result, response, None)
 
     async def update_o_auth_2_claim(
-            self, authServerId, claimId, o_auth_2_claim
+            self, authServerId, claimId, o_auth_2_claim,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -443,7 +453,7 @@ class AuthorizationServerClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -464,7 +474,8 @@ class AuthorizationServerClient(APIClient):
         return (result, response, None)
 
     async def list_o_auth_2_clients_for_authorization_server(
-            self, authServerId
+            self, authServerId,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -482,7 +493,7 @@ class AuthorizationServerClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -505,7 +516,8 @@ class AuthorizationServerClient(APIClient):
         return (result, response, None)
 
     async def revoke_refresh_tokens_for_authorization_server_and_client(
-            self, authServerId, clientId
+            self, authServerId, clientId,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -523,7 +535,7 @@ class AuthorizationServerClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -538,7 +550,8 @@ class AuthorizationServerClient(APIClient):
         return (response, None)
 
     async def list_refresh_tokens_for_authorization_server_and_client(
-            self, authServerId, clientId, query_params={}
+            self, authServerId, clientId, query_params={},
+            keep_empty_params=False
     ):
         """
         Args:
@@ -565,7 +578,7 @@ class AuthorizationServerClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -588,7 +601,8 @@ class AuthorizationServerClient(APIClient):
         return (result, response, None)
 
     async def revoke_refresh_token_for_authorization_server_and_client(
-            self, authServerId, clientId, tokenId
+            self, authServerId, clientId, tokenId,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -607,7 +621,7 @@ class AuthorizationServerClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -622,7 +636,8 @@ class AuthorizationServerClient(APIClient):
         return (response, None)
 
     async def get_refresh_token_for_authorization_server_and_client(
-            self, authServerId, clientId, tokenId, query_params={}
+            self, authServerId, clientId, tokenId, query_params={},
+            keep_empty_params=False
     ):
         """
         Args:
@@ -648,7 +663,7 @@ class AuthorizationServerClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -669,7 +684,8 @@ class AuthorizationServerClient(APIClient):
         return (result, response, None)
 
     async def list_authorization_server_keys(
-            self, authServerId
+            self, authServerId,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -688,7 +704,7 @@ class AuthorizationServerClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -711,7 +727,8 @@ class AuthorizationServerClient(APIClient):
         return (result, response, None)
 
     async def rotate_authorization_server_keys(
-            self, authServerId, jwk_use
+            self, authServerId, jwk_use,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -736,7 +753,7 @@ class AuthorizationServerClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -759,7 +776,8 @@ class AuthorizationServerClient(APIClient):
         return (result, response, None)
 
     async def activate_authorization_server(
-            self, authServerId
+            self, authServerId,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -776,7 +794,7 @@ class AuthorizationServerClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -791,7 +809,8 @@ class AuthorizationServerClient(APIClient):
         return (response, None)
 
     async def deactivate_authorization_server(
-            self, authServerId
+            self, authServerId,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -808,7 +827,7 @@ class AuthorizationServerClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -823,7 +842,8 @@ class AuthorizationServerClient(APIClient):
         return (response, None)
 
     async def list_authorization_server_policies(
-            self, authServerId
+            self, authServerId,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -842,7 +862,7 @@ class AuthorizationServerClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -865,7 +885,8 @@ class AuthorizationServerClient(APIClient):
         return (result, response, None)
 
     async def create_authorization_server_policy(
-            self, authServerId, authorization_server_policy
+            self, authServerId, authorization_server_policy,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -891,7 +912,7 @@ class AuthorizationServerClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -912,7 +933,8 @@ class AuthorizationServerClient(APIClient):
         return (result, response, None)
 
     async def delete_authorization_server_policy(
-            self, authServerId, policyId
+            self, authServerId, policyId,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -930,7 +952,7 @@ class AuthorizationServerClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -945,7 +967,8 @@ class AuthorizationServerClient(APIClient):
         return (response, None)
 
     async def get_authorization_server_policy(
-            self, authServerId, policyId
+            self, authServerId, policyId,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -965,7 +988,7 @@ class AuthorizationServerClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -986,7 +1009,8 @@ class AuthorizationServerClient(APIClient):
         return (result, response, None)
 
     async def update_authorization_server_policy(
-            self, authServerId, policyId, authorization_server_policy
+            self, authServerId, policyId, authorization_server_policy,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -1013,7 +1037,7 @@ class AuthorizationServerClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1034,7 +1058,8 @@ class AuthorizationServerClient(APIClient):
         return (result, response, None)
 
     async def activate_authorization_server_policy(
-            self, authServerId, policyId
+            self, authServerId, policyId,
+            keep_empty_params=False
     ):
         """
         Activate Authorization Server Policy
@@ -1053,7 +1078,7 @@ class AuthorizationServerClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1068,7 +1093,8 @@ class AuthorizationServerClient(APIClient):
         return (response, None)
 
     async def deactivate_authorization_server_policy(
-            self, authServerId, policyId
+            self, authServerId, policyId,
+            keep_empty_params=False
     ):
         """
         Deactivate Authorization Server Policy
@@ -1087,7 +1113,7 @@ class AuthorizationServerClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1102,7 +1128,8 @@ class AuthorizationServerClient(APIClient):
         return (response, None)
 
     async def list_authorization_server_policy_rules(
-            self, policyId, authServerId
+            self, policyId, authServerId,
+            keep_empty_params=False
     ):
         """
         Enumerates all policy rules for the specified Custom Au
@@ -1124,7 +1151,7 @@ class AuthorizationServerClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1147,7 +1174,8 @@ class AuthorizationServerClient(APIClient):
         return (result, response, None)
 
     async def create_authorization_server_policy_rule(
-            self, policyId, authServerId, authorization_server_policy_rule
+            self, policyId, authServerId, authorization_server_policy_rule,
+            keep_empty_params=False
     ):
         """
         Creates a policy rule for the specified Custom Authoriz
@@ -1176,7 +1204,7 @@ class AuthorizationServerClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1197,7 +1225,8 @@ class AuthorizationServerClient(APIClient):
         return (result, response, None)
 
     async def delete_authorization_server_policy_rule(
-            self, policyId, authServerId, ruleId
+            self, policyId, authServerId, ruleId,
+            keep_empty_params=False
     ):
         """
         Deletes a Policy Rule defined in the specified Custom A
@@ -1218,7 +1247,7 @@ class AuthorizationServerClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1233,7 +1262,8 @@ class AuthorizationServerClient(APIClient):
         return (response, None)
 
     async def get_authorization_server_policy_rule(
-            self, policyId, authServerId, ruleId
+            self, policyId, authServerId, ruleId,
+            keep_empty_params=False
     ):
         """
         Returns a Policy Rule by ID that is defined in the spec
@@ -1256,7 +1286,7 @@ class AuthorizationServerClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1277,7 +1307,8 @@ class AuthorizationServerClient(APIClient):
         return (result, response, None)
 
     async def update_authorization_server_policy_rule(
-            self, policyId, authServerId, ruleId, authorization_server_policy_rule
+            self, policyId, authServerId, ruleId, authorization_server_policy_rule,
+            keep_empty_params=False
     ):
         """
         Updates the configuration of the Policy Rule defined in
@@ -1307,7 +1338,7 @@ class AuthorizationServerClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1328,7 +1359,8 @@ class AuthorizationServerClient(APIClient):
         return (result, response, None)
 
     async def activate_authorization_server_policy_rule(
-            self, authServerId, policyId, ruleId
+            self, authServerId, policyId, ruleId,
+            keep_empty_params=False
     ):
         """
         Activate Authorization Server Policy Rule
@@ -1349,7 +1381,7 @@ class AuthorizationServerClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1364,7 +1396,8 @@ class AuthorizationServerClient(APIClient):
         return (response, None)
 
     async def deactivate_authorization_server_policy_rule(
-            self, authServerId, policyId, ruleId
+            self, authServerId, policyId, ruleId,
+            keep_empty_params=False
     ):
         """
         Deactivate Authorization Server Policy Rule
@@ -1385,7 +1418,7 @@ class AuthorizationServerClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1400,7 +1433,8 @@ class AuthorizationServerClient(APIClient):
         return (response, None)
 
     async def list_o_auth_2_scopes(
-            self, authServerId, query_params={}
+            self, authServerId, query_params={},
+            keep_empty_params=False
     ):
         """
         Args:
@@ -1426,7 +1460,7 @@ class AuthorizationServerClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1449,7 +1483,8 @@ class AuthorizationServerClient(APIClient):
         return (result, response, None)
 
     async def create_o_auth_2_scope(
-            self, authServerId, o_auth_2_scope
+            self, authServerId, o_auth_2_scope,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -1474,7 +1509,7 @@ class AuthorizationServerClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1495,7 +1530,8 @@ class AuthorizationServerClient(APIClient):
         return (result, response, None)
 
     async def delete_o_auth_2_scope(
-            self, authServerId, scopeId
+            self, authServerId, scopeId,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -1513,7 +1549,7 @@ class AuthorizationServerClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1528,7 +1564,8 @@ class AuthorizationServerClient(APIClient):
         return (response, None)
 
     async def get_o_auth_2_scope(
-            self, authServerId, scopeId
+            self, authServerId, scopeId,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -1548,7 +1585,7 @@ class AuthorizationServerClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1569,7 +1606,8 @@ class AuthorizationServerClient(APIClient):
         return (result, response, None)
 
     async def update_o_auth_2_scope(
-            self, authServerId, scopeId, o_auth_2_scope
+            self, authServerId, scopeId, o_auth_2_scope,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -1596,7 +1634,7 @@ class AuthorizationServerClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:

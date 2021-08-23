@@ -61,7 +61,8 @@ class UserClient(APIClient):
         self._base_url = ""
 
     async def list_users(
-            self, query_params={}
+            self, query_params={},
+            keep_empty_params=False
     ):
         """
         Lists users in your organization with pagination in mos
@@ -92,7 +93,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -113,7 +114,8 @@ class UserClient(APIClient):
         return (result, response, None)
 
     async def create_user(
-            self, create_user_request, query_params={}
+            self, create_user_request, query_params={},
+            keep_empty_params=False
     ):
         """
         Creates a new user in your Okta organization with or wi
@@ -146,7 +148,7 @@ class UserClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -167,7 +169,8 @@ class UserClient(APIClient):
         return (result, response, None)
 
     async def set_linked_object_for_user(
-            self, associatedUserId, primaryRelationshipName, primaryUserId
+            self, associatedUserId, primaryRelationshipName, primaryUserId,
+            keep_empty_params=False
     ):
         """
         Method for
@@ -189,7 +192,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -204,7 +207,8 @@ class UserClient(APIClient):
         return (response, None)
 
     async def deactivate_or_delete_user(
-            self, userId, query_params={}
+            self, userId, query_params={},
+            keep_empty_params=False
     ):
         """
         Deletes a user permanently.  This operation can only be
@@ -228,7 +232,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -243,7 +247,8 @@ class UserClient(APIClient):
         return (response, None)
 
     async def get_user(
-            self, userId
+            self, userId,
+            keep_empty_params=False
     ):
         """
         Fetches a user from your Okta organization.
@@ -262,7 +267,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -283,7 +288,8 @@ class UserClient(APIClient):
         return (result, response, None)
 
     async def partial_update_user(
-            self, userId, user, query_params={}
+            self, userId, user, query_params={},
+            keep_empty_params=False
     ):
         """
         Fetch a user by `id`, `login`, or `login shortname` if
@@ -315,7 +321,7 @@ class UserClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -336,7 +342,8 @@ class UserClient(APIClient):
         return (result, response, None)
 
     async def update_user(
-            self, userId, user, query_params={}
+            self, userId, user, query_params={},
+            keep_empty_params=False
     ):
         """
         Update a user's profile and/or credentials using strict
@@ -368,7 +375,7 @@ class UserClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -389,7 +396,8 @@ class UserClient(APIClient):
         return (result, response, None)
 
     async def list_app_links(
-            self, userId
+            self, userId,
+            keep_empty_params=False
     ):
         """
         Fetches appLinks for all direct or indirect (via group
@@ -409,7 +417,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -432,7 +440,8 @@ class UserClient(APIClient):
         return (result, response, None)
 
     async def list_user_clients(
-            self, userId
+            self, userId,
+            keep_empty_params=False
     ):
         """
         Lists all client resources for which the specified user
@@ -452,7 +461,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -475,7 +484,8 @@ class UserClient(APIClient):
         return (result, response, None)
 
     async def revoke_grants_for_user_and_client(
-            self, userId, clientId
+            self, userId, clientId,
+            keep_empty_params=False
     ):
         """
         Revokes all grants for the specified user and client
@@ -493,7 +503,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -508,7 +518,8 @@ class UserClient(APIClient):
         return (response, None)
 
     async def list_grants_for_user_and_client(
-            self, userId, clientId, query_params={}
+            self, userId, clientId, query_params={},
+            keep_empty_params=False
     ):
         """
         Lists all grants for a specified user and client
@@ -535,7 +546,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -558,7 +569,8 @@ class UserClient(APIClient):
         return (result, response, None)
 
     async def revoke_tokens_for_user_and_client(
-            self, userId, clientId
+            self, userId, clientId,
+            keep_empty_params=False
     ):
         """
         Revokes all refresh tokens issued for the specified Use
@@ -577,7 +589,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -592,7 +604,8 @@ class UserClient(APIClient):
         return (response, None)
 
     async def list_refresh_tokens_for_user_and_client(
-            self, userId, clientId, query_params={}
+            self, userId, clientId, query_params={},
+            keep_empty_params=False
     ):
         """
         Lists all refresh tokens issued for the specified User
@@ -620,7 +633,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -643,7 +656,8 @@ class UserClient(APIClient):
         return (result, response, None)
 
     async def revoke_token_for_user_and_client(
-            self, userId, clientId, tokenId
+            self, userId, clientId, tokenId,
+            keep_empty_params=False
     ):
         """
         Revokes the specified refresh token.
@@ -663,7 +677,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -678,7 +692,8 @@ class UserClient(APIClient):
         return (response, None)
 
     async def get_refresh_token_for_user_and_client(
-            self, userId, clientId, tokenId, query_params={}
+            self, userId, clientId, tokenId, query_params={},
+            keep_empty_params=False
     ):
         """
         Gets a refresh token issued for the specified User and
@@ -708,7 +723,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -729,7 +744,8 @@ class UserClient(APIClient):
         return (result, response, None)
 
     async def change_password(
-            self, userId, change_password_request, query_params={}
+            self, userId, change_password_request, query_params={},
+            keep_empty_params=False
     ):
         """
         Changes a user's password by validating the user's curr
@@ -763,7 +779,7 @@ class UserClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -784,7 +800,8 @@ class UserClient(APIClient):
         return (result, response, None)
 
     async def change_recovery_question(
-            self, userId, user_credentials
+            self, userId, user_credentials,
+            keep_empty_params=False
     ):
         """
         Changes a user's recovery question & answer credential
@@ -815,7 +832,7 @@ class UserClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -836,7 +853,8 @@ class UserClient(APIClient):
         return (result, response, None)
 
     async def forgot_password_generate_one_time_token(
-            self, userId, query_params={}
+            self, userId, query_params={},
+            keep_empty_params=False
     ):
         """
         Generates a one-time token (OTT) that can be used to re
@@ -861,7 +879,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -882,7 +900,8 @@ class UserClient(APIClient):
         return (result, response, None)
 
     async def forgot_password_set_new_password(
-            self, userId, user_credentials, query_params={}
+            self, userId, user_credentials, query_params={},
+            keep_empty_params=False
     ):
         """
         Sets a new password for a user by validating the user's
@@ -914,7 +933,7 @@ class UserClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -935,7 +954,8 @@ class UserClient(APIClient):
         return (result, response, None)
 
     async def revoke_user_grants(
-            self, userId
+            self, userId,
+            keep_empty_params=False
     ):
         """
         Revokes all grants for a specified user
@@ -952,7 +972,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -967,7 +987,8 @@ class UserClient(APIClient):
         return (response, None)
 
     async def list_user_grants(
-            self, userId, query_params={}
+            self, userId, query_params={},
+            keep_empty_params=False
     ):
         """
         Lists all grants for the specified user
@@ -994,7 +1015,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1017,7 +1038,8 @@ class UserClient(APIClient):
         return (result, response, None)
 
     async def revoke_user_grant(
-            self, userId, grantId
+            self, userId, grantId,
+            keep_empty_params=False
     ):
         """
         Revokes one grant for a specified user
@@ -1035,7 +1057,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1050,7 +1072,8 @@ class UserClient(APIClient):
         return (response, None)
 
     async def get_user_grant(
-            self, userId, grantId, query_params={}
+            self, userId, grantId, query_params={},
+            keep_empty_params=False
     ):
         """
         Gets a grant for the specified user
@@ -1075,7 +1098,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1096,7 +1119,8 @@ class UserClient(APIClient):
         return (result, response, None)
 
     async def list_user_groups(
-            self, userId
+            self, userId,
+            keep_empty_params=False
     ):
         """
         Fetches the groups of which the user is a member.
@@ -1115,7 +1139,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1138,7 +1162,8 @@ class UserClient(APIClient):
         return (result, response, None)
 
     async def list_user_identity_providers(
-            self, userId
+            self, userId,
+            keep_empty_params=False
     ):
         """
         Lists the IdPs associated with the user.
@@ -1157,7 +1182,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1180,7 +1205,8 @@ class UserClient(APIClient):
         return (result, response, None)
 
     async def activate_user(
-            self, userId, query_params={}
+            self, userId, query_params={},
+            keep_empty_params=False
     ):
         """
         Activates a user.  This operation can only be performed
@@ -1211,7 +1237,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1232,7 +1258,8 @@ class UserClient(APIClient):
         return (result, response, None)
 
     async def deactivate_user(
-            self, userId, query_params={}
+            self, userId, query_params={},
+            keep_empty_params=False
     ):
         """
         Deactivates a user.  This operation can only be perform
@@ -1261,7 +1288,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1276,7 +1303,8 @@ class UserClient(APIClient):
         return (response, None)
 
     async def expire_password(
-            self, userId
+            self, userId,
+            keep_empty_params=False
     ):
         """
         This operation transitions the user to the status of `P
@@ -1298,7 +1326,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1319,7 +1347,8 @@ class UserClient(APIClient):
         return (result, response, None)
 
     async def expire_password_and_get_temporary_password(
-            self, userId
+            self, userId,
+            keep_empty_params=False
     ):
         """
         This operation transitions the user to the status of `P
@@ -1341,7 +1370,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1362,7 +1391,8 @@ class UserClient(APIClient):
         return (result, response, None)
 
     async def reactivate_user(
-            self, userId, query_params={}
+            self, userId, query_params={},
+            keep_empty_params=False
     ):
         """
         Reactivates a user.  This operation can only be perform
@@ -1390,7 +1420,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1411,7 +1441,8 @@ class UserClient(APIClient):
         return (result, response, None)
 
     async def reset_factors(
-            self, userId
+            self, userId,
+            keep_empty_params=False
     ):
         """
         This operation resets all factors for the specified use
@@ -1432,7 +1463,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1447,7 +1478,8 @@ class UserClient(APIClient):
         return (response, None)
 
     async def reset_password(
-            self, userId, query_params={}
+            self, userId, query_params={},
+            keep_empty_params=False
     ):
         """
         Generates a one-time token (OTT) that can be used to re
@@ -1474,7 +1506,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1495,7 +1527,8 @@ class UserClient(APIClient):
         return (result, response, None)
 
     async def suspend_user(
-            self, userId
+            self, userId,
+            keep_empty_params=False
     ):
         """
         Suspends a user.  This operation can only be performed
@@ -1514,7 +1547,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1529,7 +1562,8 @@ class UserClient(APIClient):
         return (response, None)
 
     async def unlock_user(
-            self, userId
+            self, userId,
+            keep_empty_params=False
     ):
         """
         Unlocks a user with a `LOCKED_OUT` status and returns t
@@ -1548,7 +1582,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1563,7 +1597,8 @@ class UserClient(APIClient):
         return (response, None)
 
     async def unsuspend_user(
-            self, userId
+            self, userId,
+            keep_empty_params=False
     ):
         """
         Unsuspends a user and returns them to the `ACTIVE` stat
@@ -1582,7 +1617,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1597,7 +1632,8 @@ class UserClient(APIClient):
         return (response, None)
 
     async def remove_linked_object_for_user(
-            self, userId, relationshipName
+            self, userId, relationshipName,
+            keep_empty_params=False
     ):
         """
         Delete linked objects for a user, relationshipName can
@@ -1617,7 +1653,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1632,7 +1668,8 @@ class UserClient(APIClient):
         return (response, None)
 
     async def get_linked_objects_for_user(
-            self, userId, relationshipName, query_params={}
+            self, userId, relationshipName, query_params={},
+            keep_empty_params=False
     ):
         """
         Get linked objects for a user, relationshipName can be
@@ -1660,7 +1697,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1683,7 +1720,8 @@ class UserClient(APIClient):
         return (result, response, None)
 
     async def list_assigned_roles_for_user(
-            self, userId, query_params={}
+            self, userId, query_params={},
+            keep_empty_params=False
     ):
         """
         Lists all roles assigned to a user.
@@ -1707,7 +1745,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1730,7 +1768,8 @@ class UserClient(APIClient):
         return (result, response, None)
 
     async def assign_role_to_user(
-            self, userId, assign_role_request, query_params={}
+            self, userId, assign_role_request, query_params={},
+            keep_empty_params=False
     ):
         """
         Assigns a role to a user.
@@ -1761,7 +1800,7 @@ class UserClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1782,7 +1821,8 @@ class UserClient(APIClient):
         return (result, response, None)
 
     async def remove_role_from_user(
-            self, userId, roleId
+            self, userId, roleId,
+            keep_empty_params=False
     ):
         """
         Unassigns a role from a user.
@@ -1800,7 +1840,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1815,7 +1855,8 @@ class UserClient(APIClient):
         return (response, None)
 
     async def list_app_targets_for_application_admin_role_for_user(
-            self, userId, roleId, query_params={}
+            self, userId, roleId, query_params={},
+            keep_empty_params=False
     ):
         """
         Lists all App targets for an `APP_ADMIN` Role assigned
@@ -1846,7 +1887,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1869,7 +1910,8 @@ class UserClient(APIClient):
         return (result, response, None)
 
     async def add_all_apps_as_target_to_role(
-            self, userId, roleId
+            self, userId, roleId,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -1887,7 +1929,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1902,7 +1944,8 @@ class UserClient(APIClient):
         return (response, None)
 
     async def remove_app_target_from_application_admin_role_for_user(
-            self, userId, roleId, appName
+            self, userId, roleId, appName,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -1921,7 +1964,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1936,7 +1979,8 @@ class UserClient(APIClient):
         return (response, None)
 
     async def add_application_target_to_admin_role_for_user(
-            self, userId, roleId, appName
+            self, userId, roleId, appName,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -1955,7 +1999,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1970,7 +2014,8 @@ class UserClient(APIClient):
         return (response, None)
 
     async def remove_application_target_from_administrator_role_for_user(
-            self, userId, roleId, appName, applicationId
+            self, userId, roleId, appName, applicationId,
+            keep_empty_params=False
     ):
         """
         Remove App Instance Target to App Administrator Role gi
@@ -1992,7 +2037,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -2007,7 +2052,8 @@ class UserClient(APIClient):
         return (response, None)
 
     async def add_application_target_to_app_admin_role_for_user(
-            self, userId, roleId, appName, applicationId
+            self, userId, roleId, appName, applicationId,
+            keep_empty_params=False
     ):
         """
         Add App Instance Target to App Administrator Role given
@@ -2029,7 +2075,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -2044,7 +2090,8 @@ class UserClient(APIClient):
         return (response, None)
 
     async def list_group_targets_for_role(
-            self, userId, roleId, query_params={}
+            self, userId, roleId, query_params={},
+            keep_empty_params=False
     ):
         """
         Args:
@@ -2070,7 +2117,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -2093,7 +2140,8 @@ class UserClient(APIClient):
         return (result, response, None)
 
     async def remove_group_target_from_role(
-            self, userId, roleId, groupId
+            self, userId, roleId, groupId,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -2112,7 +2160,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -2127,7 +2175,8 @@ class UserClient(APIClient):
         return (response, None)
 
     async def add_group_target_to_role(
-            self, userId, roleId, groupId
+            self, userId, roleId, groupId,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -2146,7 +2195,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -2161,7 +2210,8 @@ class UserClient(APIClient):
         return (response, None)
 
     async def clear_user_sessions(
-            self, userId, query_params={}
+            self, userId, query_params={},
+            keep_empty_params=False
     ):
         """
         Removes all active identity provider sessions. This for
@@ -2186,7 +2236,7 @@ class UserClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:

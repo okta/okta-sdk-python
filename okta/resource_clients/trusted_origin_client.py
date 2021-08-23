@@ -33,7 +33,8 @@ class TrustedOriginClient(APIClient):
         self._base_url = ""
 
     async def list_origins(
-            self, query_params={}
+            self, query_params={},
+            keep_empty_params=False
     ):
         """
         Args:
@@ -58,7 +59,7 @@ class TrustedOriginClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -81,7 +82,8 @@ class TrustedOriginClient(APIClient):
         return (result, response, None)
 
     async def create_origin(
-            self, trusted_origin
+            self, trusted_origin,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -105,7 +107,7 @@ class TrustedOriginClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -126,7 +128,8 @@ class TrustedOriginClient(APIClient):
         return (result, response, None)
 
     async def delete_origin(
-            self, trustedOriginId
+            self, trustedOriginId,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -142,7 +145,7 @@ class TrustedOriginClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -157,7 +160,8 @@ class TrustedOriginClient(APIClient):
         return (response, None)
 
     async def get_origin(
-            self, trustedOriginId
+            self, trustedOriginId,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -175,7 +179,7 @@ class TrustedOriginClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -196,7 +200,8 @@ class TrustedOriginClient(APIClient):
         return (result, response, None)
 
     async def update_origin(
-            self, trustedOriginId, trusted_origin
+            self, trustedOriginId, trusted_origin,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -221,7 +226,7 @@ class TrustedOriginClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -242,7 +247,8 @@ class TrustedOriginClient(APIClient):
         return (result, response, None)
 
     async def activate_origin(
-            self, trustedOriginId
+            self, trustedOriginId,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -261,7 +267,7 @@ class TrustedOriginClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -282,7 +288,8 @@ class TrustedOriginClient(APIClient):
         return (result, response, None)
 
     async def deactivate_origin(
-            self, trustedOriginId
+            self, trustedOriginId,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -301,7 +308,7 @@ class TrustedOriginClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:

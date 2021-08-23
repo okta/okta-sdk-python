@@ -19,6 +19,8 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models import token_authorization_server_policy_rule_action_inline_hook\
+    as token_authorization_server_policy_rule_action_inline_hook
 
 
 class TokenAuthorizationServerPolicyRuleAction(
@@ -33,12 +35,25 @@ class TokenAuthorizationServerPolicyRuleAction(
         if config:
             self.access_token_lifetime_minutes = config["accessTokenLifetimeMinutes"]\
                 if "accessTokenLifetimeMinutes" in config else None
+            if "inlineHook" in config:
+                if isinstance(config["inlineHook"],
+                              token_authorization_server_policy_rule_action_inline_hook.TokenAuthorizationServerPolicyRuleActionInlineHook):
+                    self.inline_hook = config["inlineHook"]
+                elif config["inlineHook"] is not None:
+                    self.inline_hook = token_authorization_server_policy_rule_action_inline_hook.TokenAuthorizationServerPolicyRuleActionInlineHook(
+                        config["inlineHook"]
+                    )
+                else:
+                    self.inline_hook = None
+            else:
+                self.inline_hook = None
             self.refresh_token_lifetime_minutes = config["refreshTokenLifetimeMinutes"]\
                 if "refreshTokenLifetimeMinutes" in config else None
             self.refresh_token_window_minutes = config["refreshTokenWindowMinutes"]\
                 if "refreshTokenWindowMinutes" in config else None
         else:
             self.access_token_lifetime_minutes = None
+            self.inline_hook = None
             self.refresh_token_lifetime_minutes = None
             self.refresh_token_window_minutes = None
 
@@ -46,6 +61,7 @@ class TokenAuthorizationServerPolicyRuleAction(
         parent_req_format = super().request_format()
         current_obj_format = {
             "accessTokenLifetimeMinutes": self.access_token_lifetime_minutes,
+            "inlineHook": self.inline_hook,
             "refreshTokenLifetimeMinutes": self.refresh_token_lifetime_minutes,
             "refreshTokenWindowMinutes": self.refresh_token_window_minutes
         }

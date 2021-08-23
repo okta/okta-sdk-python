@@ -38,7 +38,8 @@ class UserFactorClient(APIClient):
         self._base_url = ""
 
     async def list_factors(
-            self, userId
+            self, userId,
+            keep_empty_params=False
     ):
         """
         Enumerates all the enrolled factors for the specified u
@@ -58,7 +59,7 @@ class UserFactorClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -83,7 +84,8 @@ class UserFactorClient(APIClient):
         return (result, response, None)
 
     async def enroll_factor(
-            self, userId, user_factor, query_params={}
+            self, userId, user_factor, query_params={},
+            keep_empty_params=False
     ):
         """
         Enrolls a user with a supported factor.
@@ -117,7 +119,7 @@ class UserFactorClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -137,7 +139,8 @@ class UserFactorClient(APIClient):
         return (result, response, None)
 
     async def list_supported_factors(
-            self, userId
+            self, userId,
+            keep_empty_params=False
     ):
         """
         Enumerates all the supported factors that can be enroll
@@ -157,7 +160,7 @@ class UserFactorClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -182,7 +185,8 @@ class UserFactorClient(APIClient):
         return (result, response, None)
 
     async def list_supported_security_questions(
-            self, userId
+            self, userId,
+            keep_empty_params=False
     ):
         """
         Enumerates all available security questions for a user'
@@ -202,7 +206,7 @@ class UserFactorClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -225,7 +229,8 @@ class UserFactorClient(APIClient):
         return (result, response, None)
 
     async def delete_factor(
-            self, userId, factorId
+            self, userId, factorId,
+            keep_empty_params=False
     ):
         """
         Unenrolls an existing factor for the specified user, al
@@ -244,7 +249,7 @@ class UserFactorClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -259,7 +264,8 @@ class UserFactorClient(APIClient):
         return (response, None)
 
     async def get_factor(
-            self, userId, factorId
+            self, userId, factorId,
+            keep_empty_params=False
     ):
         """
         Fetches a factor for the specified user
@@ -279,7 +285,7 @@ class UserFactorClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -299,7 +305,8 @@ class UserFactorClient(APIClient):
         return (result, response, None)
 
     async def activate_factor(
-            self, userId, factorId, activate_factor_request
+            self, userId, factorId, activate_factor_request,
+            keep_empty_params=False
     ):
         """
         The `sms` and `token:software:totp` factor types requir
@@ -328,7 +335,7 @@ class UserFactorClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -348,7 +355,8 @@ class UserFactorClient(APIClient):
         return (result, response, None)
 
     async def get_factor_transaction_status(
-            self, userId, factorId, transactionId
+            self, userId, factorId, transactionId,
+            keep_empty_params=False
     ):
         """
         Polls factors verification transaction for status.
@@ -370,7 +378,7 @@ class UserFactorClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -391,7 +399,8 @@ class UserFactorClient(APIClient):
         return (result, response, None)
 
     async def verify_factor(
-            self, userId, factorId, verify_factor_request, query_params={}
+            self, userId, factorId, verify_factor_request, query_params={},
+            keep_empty_params=False
     ):
         """
         Verifies an OTP for a `token` or `token:hardware` facto
@@ -425,7 +434,7 @@ class UserFactorClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:

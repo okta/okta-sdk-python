@@ -32,7 +32,8 @@ class SessionClient(APIClient):
         self._base_url = ""
 
     async def create_session(
-            self, create_session_request
+            self, create_session_request,
+            keep_empty_params=False
     ):
         """
         Creates a new session for a user with a valid session t
@@ -62,7 +63,7 @@ class SessionClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -83,7 +84,8 @@ class SessionClient(APIClient):
         return (result, response, None)
 
     async def end_session(
-            self, sessionId
+            self, sessionId,
+            keep_empty_params=False
     ):
         """
         Method for
@@ -101,7 +103,7 @@ class SessionClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -116,7 +118,8 @@ class SessionClient(APIClient):
         return (response, None)
 
     async def get_session(
-            self, sessionId
+            self, sessionId,
+            keep_empty_params=False
     ):
         """
         Get details about a session.
@@ -135,7 +138,7 @@ class SessionClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -156,7 +159,8 @@ class SessionClient(APIClient):
         return (result, response, None)
 
     async def refresh_session(
-            self, sessionId
+            self, sessionId,
+            keep_empty_params=False
     ):
         """
         Method for
@@ -176,7 +180,7 @@ class SessionClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:

@@ -32,7 +32,8 @@ class EventHookClient(APIClient):
         self._base_url = ""
 
     async def list_event_hooks(
-            self
+            self,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -49,7 +50,7 @@ class EventHookClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -72,7 +73,8 @@ class EventHookClient(APIClient):
         return (result, response, None)
 
     async def create_event_hook(
-            self, event_hook
+            self, event_hook,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -96,7 +98,7 @@ class EventHookClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -117,7 +119,8 @@ class EventHookClient(APIClient):
         return (result, response, None)
 
     async def delete_event_hook(
-            self, eventHookId
+            self, eventHookId,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -133,7 +136,7 @@ class EventHookClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -148,7 +151,8 @@ class EventHookClient(APIClient):
         return (response, None)
 
     async def get_event_hook(
-            self, eventHookId
+            self, eventHookId,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -166,7 +170,7 @@ class EventHookClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -187,7 +191,8 @@ class EventHookClient(APIClient):
         return (result, response, None)
 
     async def update_event_hook(
-            self, eventHookId, event_hook
+            self, eventHookId, event_hook,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -212,7 +217,7 @@ class EventHookClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -233,7 +238,8 @@ class EventHookClient(APIClient):
         return (result, response, None)
 
     async def activate_event_hook(
-            self, eventHookId
+            self, eventHookId,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -251,7 +257,7 @@ class EventHookClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -272,7 +278,8 @@ class EventHookClient(APIClient):
         return (result, response, None)
 
     async def deactivate_event_hook(
-            self, eventHookId
+            self, eventHookId,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -291,7 +298,7 @@ class EventHookClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -312,7 +319,8 @@ class EventHookClient(APIClient):
         return (result, response, None)
 
     async def verify_event_hook(
-            self, eventHookId
+            self, eventHookId,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -330,7 +338,7 @@ class EventHookClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:

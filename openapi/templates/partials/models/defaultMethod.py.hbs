@@ -1,6 +1,14 @@
+    {{#if (eq operation.tags.[0] "UserSchema")}}
     async def {{displayMethodName (snakeCase operation.operationId)}}(
-            {{{operationArgumentBuilder operation}}}
+            {{{operationArgumentBuilder operation}}},
+            keep_empty_params=True
     ):
+    {{else}}
+    async def {{displayMethodName (snakeCase operation.operationId)}}(
+            {{{operationArgumentBuilder operation}}},
+            keep_empty_params=False
+    ):
+    {{/if}}
         """
 {{{pyDocstringBuilder operation}}}
         """
@@ -33,15 +41,9 @@
         headers = {}
         {{/if}}
 
-        {{#if (eq operation.tags.[0] "UserSchema")}}
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers, keep_empty_params=True
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
-        {{else}}
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
-        )
-        {{/if}}
 
         if error:
         {{#if operation.responseModel}}
