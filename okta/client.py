@@ -51,6 +51,8 @@ from okta.resource_clients.linked_object_client\
     import LinkedObjectClient
 from okta.resource_clients.user_type_client\
     import UserTypeClient
+from okta.resource_clients.org_client\
+    import OrgClient
 from okta.resource_clients.policy_client\
     import PolicyClient
 from okta.resource_clients.session_client\
@@ -83,6 +85,7 @@ class Client(
     UserSchemaClient,
     LinkedObjectClient,
     UserTypeClient,
+    OrgClient,
     PolicyClient,
     SessionClient,
     SmsTemplateClient,
