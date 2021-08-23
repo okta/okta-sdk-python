@@ -1,5 +1,14 @@
 # Okta Python SDK Changelog
 
+## v2.1.0
+- Regenerate code using the [open API spec v2.6.0](https://github.com/okta/okta-management-openapi-spec/releases/tag/openapi-2.6.0).
+- Expose parameter `keep_empty_params` to all user interfaces.
+
+_New models:_
+* ApplicationSettingsNotes
+* SignOnInlineHook
+* TokenAuthorizationServerPolicyRuleActionInlineHook
+
 ## v2.0.0
 - Regenerate code using the [open API spec v2.5.0](https://github.com/okta/okta-management-openapi-spec/releases/tag/openapi-2.5.0).
 - Make sign_on_mode of all apps instance of enum, issue #198 (this change might be not compatible with custom clients code, although probability is low)
