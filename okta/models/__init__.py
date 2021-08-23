@@ -424,6 +424,22 @@ from okta.models import open_id_connect_application_type as open_id_connect_appl
 OpenIdConnectApplicationType = open_id_connect_application_type.OpenIdConnectApplicationType
 from okta.models import open_id_connect_refresh_token_rotation_type as open_id_connect_refresh_token_rotation_type
 OpenIdConnectRefreshTokenRotationType = open_id_connect_refresh_token_rotation_type.OpenIdConnectRefreshTokenRotationType
+from okta.models import org_contact_type as org_contact_type
+OrgContactType = org_contact_type.OrgContactType
+from okta.models import org_contact_type_obj as org_contact_type_obj
+OrgContactTypeObj = org_contact_type_obj.OrgContactTypeObj
+from okta.models import org_contact_user as org_contact_user
+OrgContactUser = org_contact_user.OrgContactUser
+from okta.models import org_okta_communication_setting as org_okta_communication_setting
+OrgOktaCommunicationSetting = org_okta_communication_setting.OrgOktaCommunicationSetting
+from okta.models import org_okta_support_setting as org_okta_support_setting
+OrgOktaSupportSetting = org_okta_support_setting.OrgOktaSupportSetting
+from okta.models import org_okta_support_settings_obj as org_okta_support_settings_obj
+OrgOktaSupportSettingsObj = org_okta_support_settings_obj.OrgOktaSupportSettingsObj
+from okta.models import org_preferences as org_preferences
+OrgPreferences = org_preferences.OrgPreferences
+from okta.models import org_setting as org_setting
+OrgSetting = org_setting.OrgSetting
 from okta.models import password_credential as password_credential
 PasswordCredential = password_credential.PasswordCredential
 from okta.models import password_credential_hash as password_credential_hash
@@ -682,6 +698,8 @@ from okta.models import user_credentials as user_credentials
 UserCredentials = user_credentials.UserCredentials
 from okta.models import user_factor as user_factor
 UserFactor = user_factor.UserFactor
+from okta.models import user_id_string as user_id_string
+UserIdString = user_id_string.UserIdString
 from okta.models import user_identifier_condition_evaluator_pattern as user_identifier_condition_evaluator_pattern
 UserIdentifierConditionEvaluatorPattern = user_identifier_condition_evaluator_pattern.UserIdentifierConditionEvaluatorPattern
 from okta.models import user_identifier_policy_rule_condition as user_identifier_policy_rule_condition
