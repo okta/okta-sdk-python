@@ -39,6 +39,8 @@ class OrgSetting(
                 if "address2" in config else None
             self.city = config["city"]\
                 if "city" in config else None
+            self.company_name = config["companyName"]\
+                if "companyName" in config else None
             self.country = config["country"]\
                 if "country" in config else None
             self.created = config["created"]\
@@ -51,8 +53,6 @@ class OrgSetting(
                 if "id" in config else None
             self.last_updated = config["lastUpdated"]\
                 if "lastUpdated" in config else None
-            self.name = config["name"]\
-                if "name" in config else None
             self.phone_number = config["phoneNumber"]\
                 if "phoneNumber" in config else None
             self.postal_code = config["postalCode"]\
@@ -72,13 +72,13 @@ class OrgSetting(
             self.address_1 = None
             self.address_2 = None
             self.city = None
+            self.company_name = None
             self.country = None
             self.created = None
             self.end_user_support_help_url = None
             self.expires_at = None
             self.id = None
             self.last_updated = None
-            self.name = None
             self.phone_number = None
             self.postal_code = None
             self.state = None
@@ -94,13 +94,13 @@ class OrgSetting(
             "address1": self.address_1,
             "address2": self.address_2,
             "city": self.city,
+            "companyName": self.company_name,
             "country": self.country,
             "created": self.created,
             "endUserSupportHelpURL": self.end_user_support_help_url,
             "expiresAt": self.expires_at,
             "id": self.id,
             "lastUpdated": self.last_updated,
-            "name": self.name,
             "phoneNumber": self.phone_number,
             "postalCode": self.postal_code,
             "state": self.state,

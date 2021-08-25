@@ -35,6 +35,8 @@ class ApplicationVisibility(
         if config:
             self.app_links = config["appLinks"]\
                 if "appLinks" in config else None
+            self.auto_launch = config["autoLaunch"]\
+                if "autoLaunch" in config else None
             self.auto_submit_toolbar = config["autoSubmitToolbar"]\
                 if "autoSubmitToolbar" in config else None
             if "hide" in config:
@@ -51,6 +53,7 @@ class ApplicationVisibility(
                 self.hide = None
         else:
             self.app_links = None
+            self.auto_launch = None
             self.auto_submit_toolbar = None
             self.hide = None
 
@@ -58,6 +61,7 @@ class ApplicationVisibility(
         parent_req_format = super().request_format()
         current_obj_format = {
             "appLinks": self.app_links,
+            "autoLaunch": self.auto_launch,
             "autoSubmitToolbar": self.auto_submit_toolbar,
             "hide": self.hide
         }
