@@ -152,7 +152,7 @@ class OrgClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=True
         )
 
         if error:
