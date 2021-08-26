@@ -42,7 +42,8 @@ class IdentityProviderClient(APIClient):
         self._base_url = ""
 
     async def list_identity_providers(
-            self, query_params={}
+            self, query_params={},
+            keep_empty_params=False
     ):
         """
         Enumerates IdPs in your organization with pagination. A
@@ -70,7 +71,7 @@ class IdentityProviderClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -93,7 +94,8 @@ class IdentityProviderClient(APIClient):
         return (result, response, None)
 
     async def create_identity_provider(
-            self, identity_provider
+            self, identity_provider,
+            keep_empty_params=False
     ):
         """
         Adds a new IdP to your organization.
@@ -118,7 +120,7 @@ class IdentityProviderClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -139,7 +141,8 @@ class IdentityProviderClient(APIClient):
         return (result, response, None)
 
     async def list_identity_provider_keys(
-            self, query_params={}
+            self, query_params={},
+            keep_empty_params=False
     ):
         """
         Enumerates IdP key credentials.
@@ -163,7 +166,7 @@ class IdentityProviderClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -186,7 +189,8 @@ class IdentityProviderClient(APIClient):
         return (result, response, None)
 
     async def create_identity_provider_key(
-            self, json_web_key
+            self, json_web_key,
+            keep_empty_params=False
     ):
         """
         Adds a new X.509 certificate credential to the IdP key
@@ -212,7 +216,7 @@ class IdentityProviderClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -233,7 +237,8 @@ class IdentityProviderClient(APIClient):
         return (result, response, None)
 
     async def delete_identity_provider_key(
-            self, keyId
+            self, keyId,
+            keep_empty_params=False
     ):
         """
         Deletes a specific IdP Key Credential by `kid` if it is
@@ -251,7 +256,7 @@ class IdentityProviderClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -266,7 +271,8 @@ class IdentityProviderClient(APIClient):
         return (response, None)
 
     async def get_identity_provider_key(
-            self, keyId
+            self, keyId,
+            keep_empty_params=False
     ):
         """
         Gets a specific IdP Key Credential by `kid`
@@ -285,7 +291,7 @@ class IdentityProviderClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -306,7 +312,8 @@ class IdentityProviderClient(APIClient):
         return (result, response, None)
 
     async def delete_identity_provider(
-            self, idpId
+            self, idpId,
+            keep_empty_params=False
     ):
         """
         Removes an IdP from your organization.
@@ -323,7 +330,7 @@ class IdentityProviderClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -338,7 +345,8 @@ class IdentityProviderClient(APIClient):
         return (response, None)
 
     async def get_identity_provider(
-            self, idpId
+            self, idpId,
+            keep_empty_params=False
     ):
         """
         Fetches an IdP by `id`.
@@ -357,7 +365,7 @@ class IdentityProviderClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -378,7 +386,8 @@ class IdentityProviderClient(APIClient):
         return (result, response, None)
 
     async def update_identity_provider(
-            self, idpId, identity_provider
+            self, idpId, identity_provider,
+            keep_empty_params=False
     ):
         """
         Updates the configuration for an IdP.
@@ -404,7 +413,7 @@ class IdentityProviderClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -425,7 +434,8 @@ class IdentityProviderClient(APIClient):
         return (result, response, None)
 
     async def list_csrs_for_identity_provider(
-            self, idpId
+            self, idpId,
+            keep_empty_params=False
     ):
         """
         Enumerates Certificate Signing Requests for an IdP
@@ -444,7 +454,7 @@ class IdentityProviderClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -467,7 +477,8 @@ class IdentityProviderClient(APIClient):
         return (result, response, None)
 
     async def generate_csr_for_identity_provider(
-            self, idpId, csr_metadata
+            self, idpId, csr_metadata,
+            keep_empty_params=False
     ):
         """
         Generates a new key pair and returns a Certificate Sign
@@ -494,7 +505,7 @@ class IdentityProviderClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -515,7 +526,8 @@ class IdentityProviderClient(APIClient):
         return (result, response, None)
 
     async def revoke_csr_for_identity_provider(
-            self, idpId, csrId
+            self, idpId, csrId,
+            keep_empty_params=False
     ):
         """
         Revoke a Certificate Signing Request and delete the key
@@ -534,7 +546,7 @@ class IdentityProviderClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -549,7 +561,8 @@ class IdentityProviderClient(APIClient):
         return (response, None)
 
     async def get_csr_for_identity_provider(
-            self, idpId, csrId
+            self, idpId, csrId,
+            keep_empty_params=False
     ):
         """
         Gets a specific Certificate Signing Request model by id
@@ -569,7 +582,7 @@ class IdentityProviderClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -590,7 +603,8 @@ class IdentityProviderClient(APIClient):
         return (result, response, None)
 
     async def publish_cer_cert_for_identity_provider(
-            self, idpId, csrId, string
+            self, idpId, csrId, string,
+            keep_empty_params=False
     ):
         """
         Update the Certificate Signing Request with a signed X.
@@ -620,7 +634,7 @@ class IdentityProviderClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -641,7 +655,8 @@ class IdentityProviderClient(APIClient):
         return (result, response, None)
 
     async def publish_binary_cer_cert_for_identity_provider(
-            self, idpId, csrId, string
+            self, idpId, csrId, string,
+            keep_empty_params=False
     ):
         """
         Update the Certificate Signing Request with a signed X.
@@ -668,7 +683,7 @@ class IdentityProviderClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -689,7 +704,8 @@ class IdentityProviderClient(APIClient):
         return (result, response, None)
 
     async def publish_der_cert_for_identity_provider(
-            self, idpId, csrId, string
+            self, idpId, csrId, string,
+            keep_empty_params=False
     ):
         """
         Update the Certificate Signing Request with a signed X.
@@ -719,7 +735,7 @@ class IdentityProviderClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -740,7 +756,8 @@ class IdentityProviderClient(APIClient):
         return (result, response, None)
 
     async def publish_binary_der_cert_for_identity_provider(
-            self, idpId, csrId, string
+            self, idpId, csrId, string,
+            keep_empty_params=False
     ):
         """
         Update the Certificate Signing Request with a signed X.
@@ -767,7 +784,7 @@ class IdentityProviderClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -788,7 +805,8 @@ class IdentityProviderClient(APIClient):
         return (result, response, None)
 
     async def publish_binary_pem_cert_for_identity_provider(
-            self, idpId, csrId, string
+            self, idpId, csrId, string,
+            keep_empty_params=False
     ):
         """
         Update the Certificate Signing Request with a signed X.
@@ -815,7 +833,7 @@ class IdentityProviderClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -836,7 +854,8 @@ class IdentityProviderClient(APIClient):
         return (result, response, None)
 
     async def list_identity_provider_signing_keys(
-            self, idpId
+            self, idpId,
+            keep_empty_params=False
     ):
         """
         Enumerates signing key credentials for an IdP
@@ -855,7 +874,7 @@ class IdentityProviderClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -878,7 +897,8 @@ class IdentityProviderClient(APIClient):
         return (result, response, None)
 
     async def generate_identity_provider_signing_key(
-            self, idpId, query_params={}
+            self, idpId, query_params={},
+            keep_empty_params=False
     ):
         """
         Generates a new X.509 certificate for an IdP signing ke
@@ -904,7 +924,7 @@ class IdentityProviderClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -925,7 +945,8 @@ class IdentityProviderClient(APIClient):
         return (result, response, None)
 
     async def get_identity_provider_signing_key(
-            self, idpId, keyId
+            self, idpId, keyId,
+            keep_empty_params=False
     ):
         """
         Gets a specific IdP Key Credential by `kid`
@@ -945,7 +966,7 @@ class IdentityProviderClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -966,7 +987,8 @@ class IdentityProviderClient(APIClient):
         return (result, response, None)
 
     async def clone_identity_provider_key(
-            self, idpId, keyId, query_params={}
+            self, idpId, keyId, query_params={},
+            keep_empty_params=False
     ):
         """
         Clones a X.509 certificate for an IdP signing key crede
@@ -992,7 +1014,7 @@ class IdentityProviderClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1013,7 +1035,8 @@ class IdentityProviderClient(APIClient):
         return (result, response, None)
 
     async def activate_identity_provider(
-            self, idpId
+            self, idpId,
+            keep_empty_params=False
     ):
         """
         Activates an inactive IdP.
@@ -1032,7 +1055,7 @@ class IdentityProviderClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1053,7 +1076,8 @@ class IdentityProviderClient(APIClient):
         return (result, response, None)
 
     async def deactivate_identity_provider(
-            self, idpId
+            self, idpId,
+            keep_empty_params=False
     ):
         """
         Deactivates an active IdP.
@@ -1072,7 +1096,7 @@ class IdentityProviderClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1093,7 +1117,8 @@ class IdentityProviderClient(APIClient):
         return (result, response, None)
 
     async def list_identity_provider_application_users(
-            self, idpId
+            self, idpId,
+            keep_empty_params=False
     ):
         """
         Find all the users linked to an identity provider
@@ -1112,7 +1137,7 @@ class IdentityProviderClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1135,7 +1160,8 @@ class IdentityProviderClient(APIClient):
         return (result, response, None)
 
     async def unlink_user_from_identity_provider(
-            self, idpId, userId
+            self, idpId, userId,
+            keep_empty_params=False
     ):
         """
         Removes the link between the Okta user and the IdP user
@@ -1154,7 +1180,7 @@ class IdentityProviderClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1169,7 +1195,8 @@ class IdentityProviderClient(APIClient):
         return (response, None)
 
     async def get_identity_provider_application_user(
-            self, idpId, userId
+            self, idpId, userId,
+            keep_empty_params=False
     ):
         """
         Fetches a linked IdP user by ID
@@ -1189,7 +1216,7 @@ class IdentityProviderClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1210,7 +1237,8 @@ class IdentityProviderClient(APIClient):
         return (result, response, None)
 
     async def link_user_to_identity_provider(
-            self, idpId, userId, user_identity_provider_link_request
+            self, idpId, userId, user_identity_provider_link_request,
+            keep_empty_params=False
     ):
         """
         Links an Okta user to an existing Social Identity Provi
@@ -1239,7 +1267,7 @@ class IdentityProviderClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1260,7 +1288,8 @@ class IdentityProviderClient(APIClient):
         return (result, response, None)
 
     async def list_social_auth_tokens(
-            self, idpId, userId
+            self, idpId, userId,
+            keep_empty_params=False
     ):
         """
         Fetches the tokens minted by the Social Authentication
@@ -1283,7 +1312,7 @@ class IdentityProviderClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:

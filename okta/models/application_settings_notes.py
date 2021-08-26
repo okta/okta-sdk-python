@@ -21,33 +21,29 @@ limitations under the License.
 from okta.okta_object import OktaObject
 
 
-class DomainCertificateMetadata(
+class ApplicationSettingsNotes(
     OktaObject
 ):
     """
-    A class for DomainCertificateMetadata objects.
+    A class for ApplicationSettingsNotes objects.
     """
 
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.expiration = config["expiration"]\
-                if "expiration" in config else None
-            self.fingerprint = config["fingerprint"]\
-                if "fingerprint" in config else None
-            self.subject = config["subject"]\
-                if "subject" in config else None
+            self.admin = config["admin"]\
+                if "admin" in config else None
+            self.enduser = config["enduser"]\
+                if "enduser" in config else None
         else:
-            self.expiration = None
-            self.fingerprint = None
-            self.subject = None
+            self.admin = None
+            self.enduser = None
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
-            "expiration": self.expiration,
-            "fingerprint": self.fingerprint,
-            "subject": self.subject
+            "admin": self.admin,
+            "enduser": self.enduser
         }
         parent_req_format.update(current_obj_format)
         return parent_req_format

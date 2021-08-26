@@ -694,6 +694,64 @@ response_body = client.form_response_body(response.get_body())
 user = response.get_type()(response_body)
 ```
 
+### Perform requests with empty parameters
+
+Some group of api calls requires no empty parameters in request body, i.e. it is not allowed to pass within body the following samples `{"some_var": ""}` or `{"some_var": []}`. Meanwhile, other group of api calls allows setting empty parameters, which is used to clear value of related parameter on the server-side. By default all api calls are being performed without "empty" parameters, i.e. all empty parameters are being removed automatically before actual request. Starting from v2.1.0 users can control this behavior with parameter `keep_empty_params`:
+
+> This feature is supported with SDK version >= 2.1.0
+
+```py
+# Default behavior, parameter "badgeNumber" won't be present in actual request
+from okta.client import Client as OktaClient
+import asyncio
+
+async def main():
+    client = OktaClient()
+    user_id = 'REDACTED'
+    user_params = {"phoneNumber": "1234567890", "badgeNumber": ""}
+    updated_user, resp, err = await client.partial_update_user(user_id, user_params)
+    print(updated_user)
+
+loop = asyncio.get_event_loop()
+loop.run_until_complete(main())
+```
+
+The same behavior when "keep_empty_params" is set to "False" (which is default for most methods, except UserSchema methods):
+
+```py
+# Parameter "badgeNumber" won't be present in actual request
+from okta.client import Client as OktaClient
+import asyncio
+
+async def main():
+    client = OktaClient()
+    user_id = 'REDACTED'
+    user_params = {"phoneNumber": "1234567890", "badgeNumber": ""}
+    updated_user, resp, err = await client.partial_update_user(user_id, user_params, keep_empty_params=False)
+    print(updated_user)
+
+loop = asyncio.get_event_loop()
+loop.run_until_complete(main())
+```
+
+All empty parameters will be present in request when "keep_empty_params" is set to "True":
+
+```py
+# Parameter "badgeNumber" will be present in actual request
+from okta.client import Client as OktaClient
+import asyncio
+
+async def main():
+    client = OktaClient()
+    user_id = 'REDACTED'
+    user_params = {"phoneNumber": "1234567890", "badgeNumber": ""}
+    updated_user, resp, err = await client.partial_update_user(user_id, user_params, keep_empty_params=True)
+    print(updated_user)
+
+loop = asyncio.get_event_loop()
+loop.run_until_complete(main())
+```
+
 ## Exceptions
 
 Starting from v1.1.0 SDK introduces exceptions, which are disabled by default, thus feature is backward compatible.

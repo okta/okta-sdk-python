@@ -147,6 +147,7 @@ EXPECTED_SAML_APP_AS_DICT = {
             "digestAlgorithm": "SHA256",
             "honorForceAuthn": True,
             "idpIssuer": "http://www.okta.com/${org.externalKey}",
+            "inlineHooks": [],
             "recipient": "http://recipient.okta.com",
             "requestCompressed": False,
             "responseSigned": True,
@@ -157,7 +158,7 @@ EXPECTED_SAML_APP_AS_DICT = {
             "subjectNameIdTemplate": "${user.userName}",
         },
     },
-    "signOnMode": "SAML_2_0",
+    "signOnMode": ApplicationSignOnMode('SAML_2_0'),
     "status": "ACTIVE",
     "visibility": {
         "appLinks": {"testOrgCustomSamlAppLink": True},

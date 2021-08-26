@@ -35,7 +35,8 @@ class InlineHookClient(APIClient):
         self._base_url = ""
 
     async def list_inline_hooks(
-            self, query_params={}
+            self, query_params={},
+            keep_empty_params=False
     ):
         """
         Args:
@@ -57,7 +58,7 @@ class InlineHookClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -80,7 +81,8 @@ class InlineHookClient(APIClient):
         return (result, response, None)
 
     async def create_inline_hook(
-            self, inline_hook
+            self, inline_hook,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -104,7 +106,7 @@ class InlineHookClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -125,7 +127,8 @@ class InlineHookClient(APIClient):
         return (result, response, None)
 
     async def delete_inline_hook(
-            self, inlineHookId
+            self, inlineHookId,
+            keep_empty_params=False
     ):
         """
         Deletes the Inline Hook matching the provided id. Once
@@ -145,7 +148,7 @@ class InlineHookClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -160,7 +163,8 @@ class InlineHookClient(APIClient):
         return (response, None)
 
     async def get_inline_hook(
-            self, inlineHookId
+            self, inlineHookId,
+            keep_empty_params=False
     ):
         """
         Gets an inline hook by ID
@@ -179,7 +183,7 @@ class InlineHookClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -200,7 +204,8 @@ class InlineHookClient(APIClient):
         return (result, response, None)
 
     async def update_inline_hook(
-            self, inlineHookId, inline_hook
+            self, inlineHookId, inline_hook,
+            keep_empty_params=False
     ):
         """
         Updates an inline hook by ID
@@ -226,7 +231,7 @@ class InlineHookClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -247,7 +252,8 @@ class InlineHookClient(APIClient):
         return (result, response, None)
 
     async def execute_inline_hook(
-            self, inlineHookId, inline_hook_payload
+            self, inlineHookId, inline_hook_payload,
+            keep_empty_params=False
     ):
         """
         Executes the Inline Hook matching the provided inlineHo
@@ -278,7 +284,7 @@ class InlineHookClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -299,7 +305,8 @@ class InlineHookClient(APIClient):
         return (result, response, None)
 
     async def activate_inline_hook(
-            self, inlineHookId
+            self, inlineHookId,
+            keep_empty_params=False
     ):
         """
         Activates the Inline Hook matching the provided id
@@ -319,7 +326,7 @@ class InlineHookClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -340,7 +347,8 @@ class InlineHookClient(APIClient):
         return (result, response, None)
 
     async def deactivate_inline_hook(
-            self, inlineHookId
+            self, inlineHookId,
+            keep_empty_params=False
     ):
         """
         Deactivates the Inline Hook matching the provided id
@@ -360,7 +368,7 @@ class InlineHookClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:

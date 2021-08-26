@@ -21,33 +21,25 @@ limitations under the License.
 from okta.okta_object import OktaObject
 
 
-class DomainCertificateMetadata(
+class SignOnInlineHook(
     OktaObject
 ):
     """
-    A class for DomainCertificateMetadata objects.
+    A class for SignOnInlineHook objects.
     """
 
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.expiration = config["expiration"]\
-                if "expiration" in config else None
-            self.fingerprint = config["fingerprint"]\
-                if "fingerprint" in config else None
-            self.subject = config["subject"]\
-                if "subject" in config else None
+            self.id = config["id"]\
+                if "id" in config else None
         else:
-            self.expiration = None
-            self.fingerprint = None
-            self.subject = None
+            self.id = None
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
-            "expiration": self.expiration,
-            "fingerprint": self.fingerprint,
-            "subject": self.subject
+            "id": self.id
         }
         parent_req_format.update(current_obj_format)
         return parent_req_format

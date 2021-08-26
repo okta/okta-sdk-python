@@ -47,7 +47,8 @@ class ApplicationClient(APIClient):
         self._base_url = ""
 
     async def list_applications(
-            self, query_params={}
+            self, query_params={},
+            keep_empty_params=False
     ):
         """
         Enumerates apps added to your organization with paginat
@@ -77,7 +78,7 @@ class ApplicationClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -102,7 +103,8 @@ class ApplicationClient(APIClient):
         return (result, response, None)
 
     async def create_application(
-            self, application, query_params={}
+            self, application, query_params={},
+            keep_empty_params=False
     ):
         """
         Adds a new application to your Okta organization.
@@ -132,7 +134,7 @@ class ApplicationClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -154,7 +156,8 @@ class ApplicationClient(APIClient):
         return (result, response, None)
 
     async def delete_application(
-            self, appId
+            self, appId,
+            keep_empty_params=False
     ):
         """
         Removes an inactive application.
@@ -171,7 +174,7 @@ class ApplicationClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -186,7 +189,8 @@ class ApplicationClient(APIClient):
         return (response, None)
 
     async def get_application(
-            self, appId, query_params={}
+            self, appId, query_params={},
+            keep_empty_params=False
     ):
         """
         Fetches an application from your Okta organization by `
@@ -211,7 +215,7 @@ class ApplicationClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -233,7 +237,8 @@ class ApplicationClient(APIClient):
         return (result, response, None)
 
     async def update_application(
-            self, appId, application
+            self, appId, application,
+            keep_empty_params=False
     ):
         """
         Updates an application in your organization.
@@ -259,7 +264,7 @@ class ApplicationClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -281,7 +286,8 @@ class ApplicationClient(APIClient):
         return (result, response, None)
 
     async def list_csrs_for_application(
-            self, appId
+            self, appId,
+            keep_empty_params=False
     ):
         """
         Enumerates Certificate Signing Requests for an applicat
@@ -301,7 +307,7 @@ class ApplicationClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -324,7 +330,8 @@ class ApplicationClient(APIClient):
         return (result, response, None)
 
     async def generate_csr_for_application(
-            self, appId, csr_metadata
+            self, appId, csr_metadata,
+            keep_empty_params=False
     ):
         """
         Generates a new key pair and returns the Certificate Si
@@ -351,7 +358,7 @@ class ApplicationClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -372,7 +379,8 @@ class ApplicationClient(APIClient):
         return (result, response, None)
 
     async def revoke_csr_from_application(
-            self, appId, csrId
+            self, appId, csrId,
+            keep_empty_params=False
     ):
         """
         Method for
@@ -391,7 +399,7 @@ class ApplicationClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -406,7 +414,8 @@ class ApplicationClient(APIClient):
         return (response, None)
 
     async def get_csr_for_application(
-            self, appId, csrId
+            self, appId, csrId,
+            keep_empty_params=False
     ):
         """
         Method for
@@ -427,7 +436,7 @@ class ApplicationClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -448,7 +457,8 @@ class ApplicationClient(APIClient):
         return (result, response, None)
 
     async def publish_cer_cert(
-            self, appId, csrId, string
+            self, appId, csrId, string,
+            keep_empty_params=False
     ):
         """
         Method for
@@ -478,7 +488,7 @@ class ApplicationClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -499,7 +509,8 @@ class ApplicationClient(APIClient):
         return (result, response, None)
 
     async def publish_binary_cer_cert(
-            self, appId, csrId, string
+            self, appId, csrId, string,
+            keep_empty_params=False
     ):
         """
         Method for
@@ -526,7 +537,7 @@ class ApplicationClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -547,7 +558,8 @@ class ApplicationClient(APIClient):
         return (result, response, None)
 
     async def publish_der_cert(
-            self, appId, csrId, string
+            self, appId, csrId, string,
+            keep_empty_params=False
     ):
         """
         Method for
@@ -577,7 +589,7 @@ class ApplicationClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -598,7 +610,8 @@ class ApplicationClient(APIClient):
         return (result, response, None)
 
     async def publish_binary_der_cert(
-            self, appId, csrId, string
+            self, appId, csrId, string,
+            keep_empty_params=False
     ):
         """
         Method for
@@ -625,7 +638,7 @@ class ApplicationClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -646,7 +659,8 @@ class ApplicationClient(APIClient):
         return (result, response, None)
 
     async def publish_binary_pem_cert(
-            self, appId, csrId, string
+            self, appId, csrId, string,
+            keep_empty_params=False
     ):
         """
         Method for
@@ -673,7 +687,7 @@ class ApplicationClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -694,7 +708,8 @@ class ApplicationClient(APIClient):
         return (result, response, None)
 
     async def list_application_keys(
-            self, appId
+            self, appId,
+            keep_empty_params=False
     ):
         """
         Enumerates key credentials for an application
@@ -713,7 +728,7 @@ class ApplicationClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -736,7 +751,8 @@ class ApplicationClient(APIClient):
         return (result, response, None)
 
     async def generate_application_key(
-            self, appId, query_params={}
+            self, appId, query_params={},
+            keep_empty_params=False
     ):
         """
         Generates a new X.509 certificate for an application ke
@@ -761,7 +777,7 @@ class ApplicationClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -782,7 +798,8 @@ class ApplicationClient(APIClient):
         return (result, response, None)
 
     async def get_application_key(
-            self, appId, keyId
+            self, appId, keyId,
+            keep_empty_params=False
     ):
         """
         Gets a specific application key credential by kid
@@ -802,7 +819,7 @@ class ApplicationClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -823,7 +840,8 @@ class ApplicationClient(APIClient):
         return (result, response, None)
 
     async def clone_application_key(
-            self, appId, keyId, query_params={}
+            self, appId, keyId, query_params={},
+            keep_empty_params=False
     ):
         """
         Clones a X.509 certificate for an application key crede
@@ -849,7 +867,7 @@ class ApplicationClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -870,7 +888,8 @@ class ApplicationClient(APIClient):
         return (result, response, None)
 
     async def list_scope_consent_grants(
-            self, appId, query_params={}
+            self, appId, query_params={},
+            keep_empty_params=False
     ):
         """
         Lists all scope consent grants for the application
@@ -894,7 +913,7 @@ class ApplicationClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -917,7 +936,8 @@ class ApplicationClient(APIClient):
         return (result, response, None)
 
     async def grant_consent_to_scope(
-            self, appId, o_auth_2_scope_consent_grant
+            self, appId, o_auth_2_scope_consent_grant,
+            keep_empty_params=False
     ):
         """
         Grants consent for the application to request an OAuth
@@ -944,7 +964,7 @@ class ApplicationClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -965,7 +985,8 @@ class ApplicationClient(APIClient):
         return (result, response, None)
 
     async def revoke_scope_consent_grant(
-            self, appId, grantId
+            self, appId, grantId,
+            keep_empty_params=False
     ):
         """
         Revokes permission for the application to request the g
@@ -984,7 +1005,7 @@ class ApplicationClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -999,7 +1020,8 @@ class ApplicationClient(APIClient):
         return (response, None)
 
     async def get_scope_consent_grant(
-            self, appId, grantId, query_params={}
+            self, appId, grantId, query_params={},
+            keep_empty_params=False
     ):
         """
         Fetches a single scope consent grant for the applicatio
@@ -1025,7 +1047,7 @@ class ApplicationClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1046,7 +1068,8 @@ class ApplicationClient(APIClient):
         return (result, response, None)
 
     async def list_application_group_assignments(
-            self, appId, query_params={}
+            self, appId, query_params={},
+            keep_empty_params=False
     ):
         """
         Enumerates group assignments for an application.
@@ -1073,7 +1096,7 @@ class ApplicationClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1096,7 +1119,8 @@ class ApplicationClient(APIClient):
         return (result, response, None)
 
     async def delete_application_group_assignment(
-            self, appId, groupId
+            self, appId, groupId,
+            keep_empty_params=False
     ):
         """
         Removes a group assignment from an application.
@@ -1114,7 +1138,7 @@ class ApplicationClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1129,7 +1153,8 @@ class ApplicationClient(APIClient):
         return (response, None)
 
     async def get_application_group_assignment(
-            self, appId, groupId, query_params={}
+            self, appId, groupId, query_params={},
+            keep_empty_params=False
     ):
         """
         Fetches an application group assignment
@@ -1154,7 +1179,7 @@ class ApplicationClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1175,7 +1200,8 @@ class ApplicationClient(APIClient):
         return (result, response, None)
 
     async def create_application_group_assignment(
-            self, appId, groupId, application_group_assignment
+            self, appId, groupId, application_group_assignment,
+            keep_empty_params=False
     ):
         """
         Assigns a group to an application
@@ -1202,7 +1228,7 @@ class ApplicationClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1223,7 +1249,8 @@ class ApplicationClient(APIClient):
         return (result, response, None)
 
     async def activate_application(
-            self, appId
+            self, appId,
+            keep_empty_params=False
     ):
         """
         Activates an inactive application.
@@ -1240,7 +1267,7 @@ class ApplicationClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1255,7 +1282,8 @@ class ApplicationClient(APIClient):
         return (response, None)
 
     async def deactivate_application(
-            self, appId
+            self, appId,
+            keep_empty_params=False
     ):
         """
         Deactivates an active application.
@@ -1272,7 +1300,7 @@ class ApplicationClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1287,7 +1315,8 @@ class ApplicationClient(APIClient):
         return (response, None)
 
     async def revoke_o_auth_2_tokens_for_application(
-            self, appId
+            self, appId,
+            keep_empty_params=False
     ):
         """
         Revokes all tokens for the specified application
@@ -1304,7 +1333,7 @@ class ApplicationClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1319,7 +1348,8 @@ class ApplicationClient(APIClient):
         return (response, None)
 
     async def list_o_auth_2_tokens_for_application(
-            self, appId, query_params={}
+            self, appId, query_params={},
+            keep_empty_params=False
     ):
         """
         Lists all tokens for the application
@@ -1345,7 +1375,7 @@ class ApplicationClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1368,7 +1398,8 @@ class ApplicationClient(APIClient):
         return (result, response, None)
 
     async def revoke_o_auth_2_token_for_application(
-            self, appId, tokenId
+            self, appId, tokenId,
+            keep_empty_params=False
     ):
         """
         Revokes the specified token for the specified applicati
@@ -1387,7 +1418,7 @@ class ApplicationClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1402,7 +1433,8 @@ class ApplicationClient(APIClient):
         return (response, None)
 
     async def get_o_auth_2_token_for_application(
-            self, appId, tokenId, query_params={}
+            self, appId, tokenId, query_params={},
+            keep_empty_params=False
     ):
         """
         Gets a token for the specified application
@@ -1427,7 +1459,7 @@ class ApplicationClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1448,7 +1480,8 @@ class ApplicationClient(APIClient):
         return (result, response, None)
 
     async def list_application_users(
-            self, appId, query_params={}
+            self, appId, query_params={},
+            keep_empty_params=False
     ):
         """
         Enumerates all assigned [application users](#applicatio
@@ -1478,7 +1511,7 @@ class ApplicationClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1501,7 +1534,8 @@ class ApplicationClient(APIClient):
         return (result, response, None)
 
     async def assign_user_to_application(
-            self, appId, app_user
+            self, appId, app_user,
+            keep_empty_params=False
     ):
         """
         Assigns an user to an application with [credentials](#a
@@ -1532,7 +1566,7 @@ class ApplicationClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1553,7 +1587,8 @@ class ApplicationClient(APIClient):
         return (result, response, None)
 
     async def delete_application_user(
-            self, appId, userId, query_params={}
+            self, appId, userId, query_params={},
+            keep_empty_params=False
     ):
         """
         Removes an assignment for a user from an application.
@@ -1576,7 +1611,7 @@ class ApplicationClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1591,7 +1626,8 @@ class ApplicationClient(APIClient):
         return (response, None)
 
     async def get_application_user(
-            self, appId, userId, query_params={}
+            self, appId, userId, query_params={},
+            keep_empty_params=False
     ):
         """
         Fetches a specific user assignment for application by `
@@ -1617,7 +1653,7 @@ class ApplicationClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1638,7 +1674,8 @@ class ApplicationClient(APIClient):
         return (result, response, None)
 
     async def update_application_user(
-            self, appId, userId, app_user
+            self, appId, userId, app_user,
+            keep_empty_params=False
     ):
         """
         Updates a user's profile for an application
@@ -1665,7 +1702,7 @@ class ApplicationClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:

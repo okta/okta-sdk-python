@@ -33,17 +33,17 @@ class UserSchemaAttributeMasterPriority(
         if config:
             self.type = config["type"]\
                 if "type" in config else None
-            self.valuse = config["valuse"]\
-                if "valuse" in config else None
+            self.value = config["value"]\
+                if "value" in config else None
         else:
             self.type = None
-            self.valuse = None
+            self.value = None
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
             "type": self.type,
-            "valuse": self.valuse
+            "value": self.value
         }
         parent_req_format.update(current_obj_format)
         return parent_req_format

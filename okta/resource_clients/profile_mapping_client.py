@@ -33,7 +33,8 @@ class ProfileMappingClient(APIClient):
         self._base_url = ""
 
     async def list_profile_mappings(
-            self, query_params={}
+            self, query_params={},
+            keep_empty_params=False
     ):
         """
         Enumerates Profile Mappings in your organization with p
@@ -60,7 +61,7 @@ class ProfileMappingClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -83,7 +84,8 @@ class ProfileMappingClient(APIClient):
         return (result, response, None)
 
     async def get_profile_mapping(
-            self, mappingId
+            self, mappingId,
+            keep_empty_params=False
     ):
         """
         Fetches a single Profile Mapping referenced by its ID.
@@ -102,7 +104,7 @@ class ProfileMappingClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -123,7 +125,8 @@ class ProfileMappingClient(APIClient):
         return (result, response, None)
 
     async def update_profile_mapping(
-            self, mappingId, profile_mapping
+            self, mappingId, profile_mapping,
+            keep_empty_params=False
     ):
         """
         Updates an existing Profile Mapping by adding, updating
@@ -150,7 +153,7 @@ class ProfileMappingClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:

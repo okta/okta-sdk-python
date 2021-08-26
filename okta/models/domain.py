@@ -1,6 +1,6 @@
 # flake8: noqa
 """
-Copyright 2020 - Present Okta, Inc.
+Copyright 2021 - Present Okta, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -40,18 +40,18 @@ class Domain(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            if "certificateSourcetype" in config:
-                if isinstance(config["certificateSourcetype"],
+            if "certificateSourceType" in config:
+                if isinstance(config["certificateSourceType"],
                               domain_certificate_source_type.DomainCertificateSourceType):
-                    self.certificate_sourcetype = config["certificateSourcetype"]
-                elif config["certificateSourcetype"] is not None:
-                    self.certificate_sourcetype = domain_certificate_source_type.DomainCertificateSourceType(
-                        config["certificateSourcetype"].upper()
+                    self.certificate_source_type = config["certificateSourceType"]
+                elif config["certificateSourceType"] is not None:
+                    self.certificate_source_type = domain_certificate_source_type.DomainCertificateSourceType(
+                        config["certificateSourceType"].upper()
                     )
                 else:
-                    self.certificate_sourcetype = None
+                    self.certificate_source_type = None
             else:
-                self.certificate_sourcetype = None
+                self.certificate_source_type = None
             self.dns_records = OktaCollection.form_list(
                 config["dnsRecords"] if "dnsRecords"\
                     in config else [],
@@ -86,7 +86,7 @@ class Domain(
             else:
                 self.validation_status = None
         else:
-            self.certificate_sourcetype = None
+            self.certificate_source_type = None
             self.dns_records = []
             self.domain = None
             self.id = None
@@ -96,7 +96,7 @@ class Domain(
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
-            "certificateSourcetype": self.certificate_sourcetype,
+            "certificateSourceType": self.certificate_source_type,
             "dnsRecords": self.dns_records,
             "domain": self.domain,
             "id": self.id,

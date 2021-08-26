@@ -44,7 +44,8 @@ class GroupClient(APIClient):
         self._base_url = ""
 
     async def list_groups(
-            self, query_params={}
+            self, query_params={},
+            keep_empty_params=False
     ):
         """
         Enumerates groups in your organization with pagination.
@@ -73,7 +74,7 @@ class GroupClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -96,7 +97,8 @@ class GroupClient(APIClient):
         return (result, response, None)
 
     async def create_group(
-            self, group
+            self, group,
+            keep_empty_params=False
     ):
         """
         Adds a new group with `OKTA_GROUP` type to your organiz
@@ -122,7 +124,7 @@ class GroupClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -143,7 +145,8 @@ class GroupClient(APIClient):
         return (result, response, None)
 
     async def list_group_rules(
-            self, query_params={}
+            self, query_params={},
+            keep_empty_params=False
     ):
         """
         Lists all group rules for your organization.
@@ -169,7 +172,7 @@ class GroupClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -192,7 +195,8 @@ class GroupClient(APIClient):
         return (result, response, None)
 
     async def create_group_rule(
-            self, group_rule
+            self, group_rule,
+            keep_empty_params=False
     ):
         """
         Creates a group rule to dynamically add users to the sp
@@ -218,7 +222,7 @@ class GroupClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -239,7 +243,8 @@ class GroupClient(APIClient):
         return (result, response, None)
 
     async def delete_group_rule(
-            self, ruleId, query_params={}
+            self, ruleId, query_params={},
+            keep_empty_params=False
     ):
         """
         Removes a specific group rule by id from your organizat
@@ -262,7 +267,7 @@ class GroupClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -277,7 +282,8 @@ class GroupClient(APIClient):
         return (response, None)
 
     async def get_group_rule(
-            self, ruleId, query_params={}
+            self, ruleId, query_params={},
+            keep_empty_params=False
     ):
         """
         Fetches a specific group rule by id from your organizat
@@ -302,7 +308,7 @@ class GroupClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -323,7 +329,8 @@ class GroupClient(APIClient):
         return (result, response, None)
 
     async def update_group_rule(
-            self, ruleId, group_rule
+            self, ruleId, group_rule,
+            keep_empty_params=False
     ):
         """
         Updates a group rule. Only `INACTIVE` rules can be upda
@@ -350,7 +357,7 @@ class GroupClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -371,7 +378,8 @@ class GroupClient(APIClient):
         return (result, response, None)
 
     async def activate_group_rule(
-            self, ruleId
+            self, ruleId,
+            keep_empty_params=False
     ):
         """
         Activates a specific group rule by id from your organiz
@@ -389,7 +397,7 @@ class GroupClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -404,7 +412,8 @@ class GroupClient(APIClient):
         return (response, None)
 
     async def deactivate_group_rule(
-            self, ruleId
+            self, ruleId,
+            keep_empty_params=False
     ):
         """
         Deactivates a specific group rule by id from your organ
@@ -422,7 +431,7 @@ class GroupClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -437,7 +446,8 @@ class GroupClient(APIClient):
         return (response, None)
 
     async def delete_group(
-            self, groupId
+            self, groupId,
+            keep_empty_params=False
     ):
         """
         Removes a group with `OKTA_GROUP` type from your organi
@@ -455,7 +465,7 @@ class GroupClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -470,10 +480,11 @@ class GroupClient(APIClient):
         return (response, None)
 
     async def get_group(
-            self, groupId
+            self, groupId,
+            keep_empty_params=False
     ):
         """
-        Lists all group rules for your organization.
+        Fetches a group from your organization.
         Args:
             group_id {str}
         Returns:
@@ -489,7 +500,7 @@ class GroupClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -510,7 +521,8 @@ class GroupClient(APIClient):
         return (result, response, None)
 
     async def update_group(
-            self, groupId, group
+            self, groupId, group,
+            keep_empty_params=False
     ):
         """
         Updates the profile for a group with `OKTA_GROUP` type
@@ -537,7 +549,7 @@ class GroupClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -558,7 +570,8 @@ class GroupClient(APIClient):
         return (result, response, None)
 
     async def list_assigned_applications_for_group(
-            self, groupId, query_params={}
+            self, groupId, query_params={},
+            keep_empty_params=False
     ):
         """
         Enumerates all applications that are assigned to a grou
@@ -584,7 +597,7 @@ class GroupClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -609,7 +622,8 @@ class GroupClient(APIClient):
         return (result, response, None)
 
     async def list_group_assigned_roles(
-            self, groupId, query_params={}
+            self, groupId, query_params={},
+            keep_empty_params=False
     ):
         """
         Args:
@@ -632,7 +646,7 @@ class GroupClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -655,7 +669,8 @@ class GroupClient(APIClient):
         return (result, response, None)
 
     async def assign_role_to_group(
-            self, groupId, assign_role_request, query_params={}
+            self, groupId, assign_role_request, query_params={},
+            keep_empty_params=False
     ):
         """
         Assigns a Role to a Group
@@ -686,7 +701,7 @@ class GroupClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -707,7 +722,8 @@ class GroupClient(APIClient):
         return (result, response, None)
 
     async def remove_role_from_group(
-            self, groupId, roleId
+            self, groupId, roleId,
+            keep_empty_params=False
     ):
         """
         Unassigns a Role from a Group
@@ -725,7 +741,7 @@ class GroupClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -740,7 +756,8 @@ class GroupClient(APIClient):
         return (response, None)
 
     async def get_role(
-            self, groupId, roleId
+            self, groupId, roleId,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -759,7 +776,7 @@ class GroupClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -780,7 +797,8 @@ class GroupClient(APIClient):
         return (result, response, None)
 
     async def list_app_targets_for_application_admin_role_for_group(
-            self, groupId, roleId, query_params={}
+            self, groupId, roleId, query_params={},
+            keep_empty_params=False
     ):
         """
         Lists all App targets for an `APP_ADMIN` Role assigned
@@ -811,7 +829,7 @@ class GroupClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -834,7 +852,8 @@ class GroupClient(APIClient):
         return (result, response, None)
 
     async def remove_app_target_from_application_admin_role_given_to_group(
-            self, groupId, roleId, appName
+            self, groupId, roleId, appName,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -853,7 +872,7 @@ class GroupClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -868,7 +887,8 @@ class GroupClient(APIClient):
         return (response, None)
 
     async def add_application_target_to_admin_role_given_to_group(
-            self, groupId, roleId, appName
+            self, groupId, roleId, appName,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -887,7 +907,7 @@ class GroupClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -902,7 +922,8 @@ class GroupClient(APIClient):
         return (response, None)
 
     async def remove_app_target_from_admin_role_given_to_group(
-            self, groupId, roleId, appName, applicationId
+            self, groupId, roleId, appName, applicationId,
+            keep_empty_params=False
     ):
         """
         Remove App Instance Target to App Administrator Role gi
@@ -924,7 +945,7 @@ class GroupClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -939,7 +960,8 @@ class GroupClient(APIClient):
         return (response, None)
 
     async def add_app_instance_target_to_app_admin_role_given_to_group(
-            self, groupId, roleId, appName, applicationId
+            self, groupId, roleId, appName, applicationId,
+            keep_empty_params=False
     ):
         """
         Add App Instance Target to App Administrator Role given
@@ -961,7 +983,7 @@ class GroupClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -976,7 +998,8 @@ class GroupClient(APIClient):
         return (response, None)
 
     async def list_group_targets_for_group_role(
-            self, groupId, roleId, query_params={}
+            self, groupId, roleId, query_params={},
+            keep_empty_params=False
     ):
         """
         Args:
@@ -1002,7 +1025,7 @@ class GroupClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1025,7 +1048,8 @@ class GroupClient(APIClient):
         return (result, response, None)
 
     async def remove_group_target_from_group_admin_role_given_to_group(
-            self, groupId, roleId, targetGroupId
+            self, groupId, roleId, targetGroupId,
+            keep_empty_params=False
     ):
         """
         Method for
@@ -1047,7 +1071,7 @@ class GroupClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1062,7 +1086,8 @@ class GroupClient(APIClient):
         return (response, None)
 
     async def add_group_target_to_group_administrator_role_for_group(
-            self, groupId, roleId, targetGroupId
+            self, groupId, roleId, targetGroupId,
+            keep_empty_params=False
     ):
         """
         Method for
@@ -1084,7 +1109,7 @@ class GroupClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1099,7 +1124,8 @@ class GroupClient(APIClient):
         return (response, None)
 
     async def list_group_users(
-            self, groupId, query_params={}
+            self, groupId, query_params={},
+            keep_empty_params=False
     ):
         """
         Enumerates all users that are a member of a group.
@@ -1124,7 +1150,7 @@ class GroupClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1145,7 +1171,8 @@ class GroupClient(APIClient):
         return (result, response, None)
 
     async def remove_user_from_group(
-            self, groupId, userId
+            self, groupId, userId,
+            keep_empty_params=False
     ):
         """
         Removes a user from a group with 'OKTA_GROUP' type.
@@ -1163,7 +1190,7 @@ class GroupClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -1178,7 +1205,8 @@ class GroupClient(APIClient):
         return (response, None)
 
     async def add_user_to_group(
-            self, groupId, userId
+            self, groupId, userId,
+            keep_empty_params=False
     ):
         """
         Adds a user to a group with 'OKTA_GROUP' type.
@@ -1196,7 +1224,7 @@ class GroupClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:

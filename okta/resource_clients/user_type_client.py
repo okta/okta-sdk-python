@@ -32,7 +32,8 @@ class UserTypeClient(APIClient):
         self._base_url = ""
 
     async def list_user_types(
-            self
+            self,
+            keep_empty_params=False
     ):
         """
         Fetches all User Types in your org
@@ -50,7 +51,7 @@ class UserTypeClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -73,7 +74,8 @@ class UserTypeClient(APIClient):
         return (result, response, None)
 
     async def create_user_type(
-            self, user_type
+            self, user_type,
+            keep_empty_params=False
     ):
         """
         Creates a new User Type. A default User Type is automat
@@ -100,7 +102,7 @@ class UserTypeClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -121,7 +123,8 @@ class UserTypeClient(APIClient):
         return (result, response, None)
 
     async def delete_user_type(
-            self, typeId
+            self, typeId,
+            keep_empty_params=False
     ):
         """
         Deletes a User Type permanently. This operation is not
@@ -140,7 +143,7 @@ class UserTypeClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -155,7 +158,8 @@ class UserTypeClient(APIClient):
         return (response, None)
 
     async def get_user_type(
-            self, typeId
+            self, typeId,
+            keep_empty_params=False
     ):
         """
         Fetches a User Type by ID. The special identifier `defa
@@ -175,7 +179,7 @@ class UserTypeClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -196,7 +200,8 @@ class UserTypeClient(APIClient):
         return (result, response, None)
 
     async def update_user_type(
-            self, typeId, user_type
+            self, typeId, user_type,
+            keep_empty_params=False
     ):
         """
         Updates an existing User Type
@@ -222,7 +227,7 @@ class UserTypeClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -243,7 +248,8 @@ class UserTypeClient(APIClient):
         return (result, response, None)
 
     async def replace_user_type(
-            self, typeId, user_type
+            self, typeId, user_type,
+            keep_empty_params=False
     ):
         """
         Replace an existing User Type
@@ -269,7 +275,7 @@ class UserTypeClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:

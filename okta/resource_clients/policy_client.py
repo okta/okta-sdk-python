@@ -18,8 +18,6 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from urllib.parse import urlencode
-from okta.models.authorization_server_policy\
-    import AuthorizationServerPolicy
 from okta.models.policy\
     import Policy
 from okta.models.policy_rule\
@@ -39,7 +37,8 @@ class PolicyClient(APIClient):
         self._base_url = ""
 
     async def list_policies(
-            self, query_params={}
+            self, query_params={},
+            keep_empty_params=False
     ):
         """
         Gets all policies with the specified type.
@@ -49,7 +48,7 @@ class PolicyClient(APIClient):
             [query_params.status] {str}
             [query_params.expand] {str}
         Returns:
-            list: Collection of AuthorizationServerPolicy instances.
+            list: Collection of Policy instances.
         """
         http_method = "get".upper()
         api_url = format_url(f"""
@@ -64,14 +63,14 @@ class PolicyClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request, AuthorizationServerPolicy)
+            .execute(request, Policy)
 
         if error:
             return (None, response, error)
@@ -79,15 +78,18 @@ class PolicyClient(APIClient):
         try:
             result = []
             for item in response.get_body():
-                result.append(AuthorizationServerPolicy(
-                    self.form_response_body(item)
-                    ))
+                result.append(
+                    find_policy_model(item["type"])(
+                        self.form_response_body(item)
+                        )
+                    )
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
 
     async def create_policy(
-            self, policy, query_params={}
+            self, policy, query_params={},
+            keep_empty_params=False
     ):
         """
         Creates a policy.
@@ -117,7 +119,7 @@ class PolicyClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -137,7 +139,8 @@ class PolicyClient(APIClient):
         return (result, response, None)
 
     async def delete_policy(
-            self, policyId
+            self, policyId,
+            keep_empty_params=False
     ):
         """
         Removes a policy.
@@ -154,7 +157,7 @@ class PolicyClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -169,7 +172,8 @@ class PolicyClient(APIClient):
         return (response, None)
 
     async def get_policy(
-            self, policyId, query_params={}
+            self, policyId, query_params={},
+            keep_empty_params=False
     ):
         """
         Gets a policy.
@@ -193,7 +197,7 @@ class PolicyClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -213,7 +217,8 @@ class PolicyClient(APIClient):
         return (result, response, None)
 
     async def update_policy(
-            self, policyId, policy
+            self, policyId, policy,
+            keep_empty_params=False
     ):
         """
         Updates a policy.
@@ -239,7 +244,7 @@ class PolicyClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -259,7 +264,8 @@ class PolicyClient(APIClient):
         return (result, response, None)
 
     async def activate_policy(
-            self, policyId
+            self, policyId,
+            keep_empty_params=False
     ):
         """
         Activates a policy.
@@ -276,7 +282,7 @@ class PolicyClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -291,7 +297,8 @@ class PolicyClient(APIClient):
         return (response, None)
 
     async def deactivate_policy(
-            self, policyId
+            self, policyId,
+            keep_empty_params=False
     ):
         """
         Deactivates a policy.
@@ -308,7 +315,7 @@ class PolicyClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -323,7 +330,8 @@ class PolicyClient(APIClient):
         return (response, None)
 
     async def list_policy_rules(
-            self, policyId
+            self, policyId,
+            keep_empty_params=False
     ):
         """
         Enumerates all policy rules.
@@ -342,7 +350,7 @@ class PolicyClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -367,7 +375,8 @@ class PolicyClient(APIClient):
         return (result, response, None)
 
     async def create_policy_rule(
-            self, policyId, policy_rule
+            self, policyId, policy_rule,
+            keep_empty_params=False
     ):
         """
         Creates a policy rule.
@@ -393,7 +402,7 @@ class PolicyClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -413,7 +422,8 @@ class PolicyClient(APIClient):
         return (result, response, None)
 
     async def delete_policy_rule(
-            self, policyId, ruleId
+            self, policyId, ruleId,
+            keep_empty_params=False
     ):
         """
         Removes a policy rule.
@@ -431,7 +441,7 @@ class PolicyClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -446,7 +456,8 @@ class PolicyClient(APIClient):
         return (response, None)
 
     async def get_policy_rule(
-            self, policyId, ruleId
+            self, policyId, ruleId,
+            keep_empty_params=False
     ):
         """
         Gets a policy rule.
@@ -466,7 +477,7 @@ class PolicyClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -486,7 +497,8 @@ class PolicyClient(APIClient):
         return (result, response, None)
 
     async def update_policy_rule(
-            self, policyId, ruleId, policy_rule
+            self, policyId, ruleId, policy_rule,
+            keep_empty_params=False
     ):
         """
         Updates a policy rule.
@@ -513,7 +525,7 @@ class PolicyClient(APIClient):
         }
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -533,7 +545,8 @@ class PolicyClient(APIClient):
         return (result, response, None)
 
     async def activate_policy_rule(
-            self, policyId, ruleId
+            self, policyId, ruleId,
+            keep_empty_params=False
     ):
         """
         Activates a policy rule.
@@ -552,7 +565,7 @@ class PolicyClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -567,7 +580,8 @@ class PolicyClient(APIClient):
         return (response, None)
 
     async def deactivate_policy_rule(
-            self, policyId, ruleId
+            self, policyId, ruleId,
+            keep_empty_params=False
     ):
         """
         Deactivates a policy rule.
@@ -586,7 +600,7 @@ class PolicyClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:

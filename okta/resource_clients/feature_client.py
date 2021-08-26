@@ -33,7 +33,8 @@ class FeatureClient(APIClient):
         self._base_url = ""
 
     async def list_features(
-            self
+            self,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -50,7 +51,7 @@ class FeatureClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -73,7 +74,8 @@ class FeatureClient(APIClient):
         return (result, response, None)
 
     async def get_feature(
-            self, featureId
+            self, featureId,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -91,7 +93,7 @@ class FeatureClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -112,7 +114,8 @@ class FeatureClient(APIClient):
         return (result, response, None)
 
     async def list_feature_dependencies(
-            self, featureId
+            self, featureId,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -130,7 +133,7 @@ class FeatureClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -153,7 +156,8 @@ class FeatureClient(APIClient):
         return (result, response, None)
 
     async def list_feature_dependents(
-            self, featureId
+            self, featureId,
+            keep_empty_params=False
     ):
         """
         Args:
@@ -171,7 +175,7 @@ class FeatureClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -194,7 +198,8 @@ class FeatureClient(APIClient):
         return (result, response, None)
 
     async def update_feature_lifecycle(
-            self, featureId, lifecycle, query_params={}
+            self, featureId, lifecycle, query_params={},
+            keep_empty_params=False
     ):
         """
         Args:
@@ -218,7 +223,7 @@ class FeatureClient(APIClient):
         headers = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
         )
 
         if error:
