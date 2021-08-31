@@ -46,7 +46,7 @@ class OrgClient(APIClient):
             keep_empty_params=False
     ):
         """
-        Gets settings of your organization.
+        Get settings of your organization.
         Args:
         Returns:
             OrgSetting
@@ -81,7 +81,7 @@ class OrgClient(APIClient):
             return (None, response, error)
         return (result, response, None)
 
-    async def partial_setting_update(
+    async def partial_update_org_setting(
             self, org_setting,
             keep_empty_params=False
     ):
@@ -128,7 +128,7 @@ class OrgClient(APIClient):
             return (None, response, error)
         return (result, response, None)
 
-    async def setting_update(
+    async def update_org_setting(
             self, org_setting,
             keep_empty_params=False
     ):
@@ -307,38 +307,6 @@ class OrgClient(APIClient):
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
-
-    async def update_org_logo(
-            self,
-            keep_empty_params=False
-    ):
-        """
-        Updates the logo for your organization.
-        Args:
-        """
-        http_method = "post".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/org/logo
-            """)
-
-        body = {}
-        headers = {}
-
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            return (None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (response, error)
-
-        return (response, None)
 
     async def get_org_preferences(
             self,

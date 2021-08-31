@@ -36,12 +36,12 @@ class TestOrgResource:
 
         updated_setting = {'supportPhoneNumber': '1234567890'}
         try:
-            updated_org_settings, _, err = await client.partial_setting_update(updated_setting)
+            updated_org_settings, _, err = await client.partial_update_org_setting(updated_setting)
             assert err is None
             assert updated_org_settings.support_phone_number == '1234567890'
         finally:
             updated_setting = {'supportPhoneNumber': get_org_settings.support_phone_number}
-            updated_org_settings, _, err = await client.partial_setting_update(updated_setting, keep_empty_params=True)
+            updated_org_settings, _, err = await client.partial_update_org_setting(updated_setting, keep_empty_params=True)
             assert err is None
             assert updated_org_settings.support_phone_number == get_org_settings.support_phone_number
 
@@ -55,13 +55,13 @@ class TestOrgResource:
         new_org_settings.support_phone_number = '1234567890'
         new_org_settings.company_name = 'NewOrgName'
         try:
-            updated_org_settings, _, err = await client.setting_update(new_org_settings)
+            updated_org_settings, _, err = await client.update_org_setting(new_org_settings)
             assert err is None
             assert updated_org_settings.support_phone_number == '1234567890'
             assert updated_org_settings.company_name == 'NewOrgName'
 
         finally:
-            updated_org_settings, _, err = await client.setting_update(get_org_settings, keep_empty_params=True)
+            updated_org_settings, _, err = await client.update_org_setting(get_org_settings, keep_empty_params=True)
             assert err is None
             assert updated_org_settings.support_phone_number == get_org_settings.support_phone_number
             assert updated_org_settings.company_name == get_org_settings.company_name
