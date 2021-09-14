@@ -20,54 +20,54 @@ limitations under the License.
 
 from okta.okta_object import OktaObject
 from okta.okta_collection import OktaCollection
-from okta.models import dns_record_type\
-    as dns_record_type
+from okta.models import group_schema_base_properties\
+    as group_schema_base_properties
 
 
-class DnsRecord(
+class GroupSchemaBase(
     OktaObject
 ):
     """
-    A class for DnsRecord objects.
+    A class for GroupSchemaBase objects.
     """
 
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.expiration = config["expiration"]\
-                if "expiration" in config else None
-            self.fqdn = config["fqdn"]\
-                if "fqdn" in config else None
-            if "recordType" in config:
-                if isinstance(config["recordType"],
-                              dns_record_type.DnsRecordType):
-                    self.record_type = config["recordType"]
-                elif config["recordType"] is not None:
-                    self.record_type = dns_record_type.DnsRecordType(
-                        config["recordType"].upper()
+            self.id = config["id"]\
+                if "id" in config else None
+            if "properties" in config:
+                if isinstance(config["properties"],
+                              group_schema_base_properties.GroupSchemaBaseProperties):
+                    self.properties = config["properties"]
+                elif config["properties"] is not None:
+                    self.properties = group_schema_base_properties.GroupSchemaBaseProperties(
+                        config["properties"]
                     )
                 else:
-                    self.record_type = None
+                    self.properties = None
             else:
-                self.record_type = None
-            self.values = OktaCollection.form_list(
-                config["values"] if "values"\
+                self.properties = None
+            self.required = OktaCollection.form_list(
+                config["required"] if "required"\
                     in config else [],
                 str
             )
+            self.type = config["type"]\
+                if "type" in config else None
         else:
-            self.expiration = None
-            self.fqdn = None
-            self.record_type = None
-            self.values = []
+            self.id = None
+            self.properties = None
+            self.required = []
+            self.type = None
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
-            "expiration": self.expiration,
-            "fqdn": self.fqdn,
-            "recordType": self.record_type,
-            "values": self.values
+            "id": self.id,
+            "properties": self.properties,
+            "required": self.required,
+            "type": self.type
         }
         parent_req_format.update(current_obj_format)
         return parent_req_format

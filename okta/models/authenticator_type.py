@@ -21,13 +21,16 @@ limitations under the License.
 from aenum import MultiValueEnum
 
 
-class DnsRecordType(
+class AuthenticatorType(
     str,
     MultiValueEnum
 ):
     """
-    An enumeration class for DnsRecordType.
+    An enumeration class for AuthenticatorType.
     """
 
-    TXT = "TXT", "txt"
-    CNAME = "CNAME", "cname"
+    PASSWORD = "password", "PASSWORD"
+    SECURITY_QUESTION = "security_question", "SECURITY_QUESTION"
+    PHONE = "phone", "PHONE"
+    EMAIL = "email", "EMAIL"
+    SECURITY_KEY = "security_key", "SECURITY_KEY"

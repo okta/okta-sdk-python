@@ -19,33 +19,43 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
-from okta.okta_collection import OktaCollection
-from okta.models import domain\
-    as domain
+from okta.models import allowed_for_enum\
+    as allowed_for_enum
 
 
-class DomainListResponse(
+class AuthenticatorSettings(
     OktaObject
 ):
     """
-    A class for DomainListResponse objects.
+    A class for AuthenticatorSettings objects.
     """
 
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.domains = OktaCollection.form_list(
-                config["domains"] if "domains"\
-                    in config else [],
-                domain.Domain
-            )
+            if "allowedFor" in config:
+                if isinstance(config["allowedFor"],
+                              allowed_for_enum.AllowedForEnum):
+                    self.allowed_for = config["allowedFor"]
+                elif config["allowedFor"] is not None:
+                    self.allowed_for = allowed_for_enum.AllowedForEnum(
+                        config["allowedFor"].upper()
+                    )
+                else:
+                    self.allowed_for = None
+            else:
+                self.allowed_for = None
+            self.token_lifetime_in_minutes = config["tokenLifetimeInMinutes"]\
+                if "tokenLifetimeInMinutes" in config else None
         else:
-            self.domains = []
+            self.allowed_for = None
+            self.token_lifetime_in_minutes = None
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
-            "domains": self.domains
+            "allowedFor": self.allowed_for,
+            "tokenLifetimeInMinutes": self.token_lifetime_in_minutes
         }
         parent_req_format.update(current_obj_format)
         return parent_req_format

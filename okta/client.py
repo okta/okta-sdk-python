@@ -27,6 +27,8 @@ from okta.cache.okta_cache import OktaCache
 from okta.logger import setup_logging
 from okta.resource_clients.application_client\
     import ApplicationClient
+from okta.resource_clients.authenticator_client\
+    import AuthenticatorClient
 from okta.resource_clients.authorization_server_client\
     import AuthorizationServerClient
 from okta.resource_clients.domain_client\
@@ -47,6 +49,8 @@ from okta.resource_clients.profile_mapping_client\
     import ProfileMappingClient
 from okta.resource_clients.user_schema_client\
     import UserSchemaClient
+from okta.resource_clients.group_schema_client\
+    import GroupSchemaClient
 from okta.resource_clients.linked_object_client\
     import LinkedObjectClient
 from okta.resource_clients.user_type_client\
@@ -73,6 +77,7 @@ from okta.resource_clients.network_zone_client\
 
 class Client(
     ApplicationClient,
+    AuthenticatorClient,
     AuthorizationServerClient,
     DomainClient,
     EventHookClient,
@@ -83,6 +88,7 @@ class Client(
     LogEventClient,
     ProfileMappingClient,
     UserSchemaClient,
+    GroupSchemaClient,
     LinkedObjectClient,
     UserTypeClient,
     OrgClient,

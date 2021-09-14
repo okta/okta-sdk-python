@@ -20,32 +20,42 @@ limitations under the License.
 
 from okta.okta_object import OktaObject
 from okta.okta_collection import OktaCollection
-from okta.models import domain\
-    as domain
 
 
-class DomainListResponse(
+class GroupSchemaCustom(
     OktaObject
 ):
     """
-    A class for DomainListResponse objects.
+    A class for GroupSchemaCustom objects.
     """
 
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.domains = OktaCollection.form_list(
-                config["domains"] if "domains"\
+            self.id = config["id"]\
+                if "id" in config else None
+            self.properties = config["properties"]\
+                if "properties" in config else None
+            self.required = OktaCollection.form_list(
+                config["required"] if "required"\
                     in config else [],
-                domain.Domain
+                str
             )
+            self.type = config["type"]\
+                if "type" in config else None
         else:
-            self.domains = []
+            self.id = None
+            self.properties = None
+            self.required = []
+            self.type = None
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
-            "domains": self.domains
+            "id": self.id,
+            "properties": self.properties,
+            "required": self.required,
+            "type": self.type
         }
         parent_req_format.update(current_obj_format)
         return parent_req_format

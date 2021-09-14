@@ -21,13 +21,15 @@ limitations under the License.
 from aenum import MultiValueEnum
 
 
-class DnsRecordType(
+class AllowedForEnum(
     str,
     MultiValueEnum
 ):
     """
-    An enumeration class for DnsRecordType.
+    An enumeration class for AllowedForEnum.
     """
 
-    TXT = "TXT", "txt"
-    CNAME = "CNAME", "cname"
+    RECOVERY = "recovery", "RECOVERY"
+    SSO = "sso", "SSO"
+    ANY = "any", "ANY"
+    NONE = "none", "NONE"
