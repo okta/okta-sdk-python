@@ -48,7 +48,7 @@ The latest release can always be found on the [releases page][github-releases].
 
 ## Need help?
 
-If you run into problems using the SDK, you can
+If you run into problems using the SDK, you can:
 
 - Ask questions on the [Okta Developer Forums][devforum]
 - Post [issues on GitHub][github-issues] (for code errors)
