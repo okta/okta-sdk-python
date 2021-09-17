@@ -29,6 +29,7 @@ class AuthenticatorType(
     An enumeration class for AuthenticatorType.
     """
 
+    APP = "app", "APP"
     PASSWORD = "password", "PASSWORD"
     SECURITY_QUESTION = "security_question", "SECURITY_QUESTION"
     PHONE = "phone", "PHONE"
