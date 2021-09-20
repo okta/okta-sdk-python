@@ -113,6 +113,10 @@ class OktaAPIResponse():
         if "next" in links:
             self._next = API + \
                 links["next"]["url"].human_repr().partition(API)[2]
+        # temporary fix to avoid eternal loop, should be fixed on api side, GH #231
+        if self._self == self._next:
+            self._next = None
+        # end of temporary fix
 
     def has_next(self):
         """
