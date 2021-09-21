@@ -132,6 +132,17 @@ def test_constructor_user_config_SSWS():
     assert org_url == loaded_config['client']['orgUrl']
     assert token == loaded_config['client']['token']
 
+def test_constructor_user_config_Bearer():
+    authorizationMode = "Bearer"
+    org_url = "https://test.okta.com"
+    token = "TOKEN"
+    config = {'orgUrl': org_url,
+              'token': token,
+              'authorizationMode': authorizationMode}
+    client = OktaClient(user_config=config)
+    loaded_config = client.get_config()
+    assert org_url == loaded_config['client']['orgUrl']
+    assert token == loaded_config['client']['token']
 
 @ pytest.mark.parametrize("private_key", ["private key hash",
                                           "pem_file.pem",

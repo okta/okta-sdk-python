@@ -53,11 +53,11 @@ class RequestExecutor:
             'Accept': "application/json"
         }
 
-        # SSWS header
-        if config["client"]["authorizationMode"] == "SSWS":
+        # SSWS or Bearer header
+        token_type = config["client"]["authorizationMode"]
+        if token_type in ("SSWS", "Bearer"):
             self._default_headers['Authorization'] = (
-                "SSWS "
-                f"{self._config['client']['token']}"
+                f"{token_type} {self._config['client']['token']}"
             )
         else:
             # OAuth

@@ -13,7 +13,7 @@ ERROR_MESSAGE_ORG_URL_NOT_HTTPS = (
 ERROR_MESSAGE_AUTH_MODE_INVALID = (
     "The AuthorizationMode configuration "
     "option must be one of: "
-    "[SSWS, PrivateKey]. "
+    "[SSWS, Bearer, PrivateKey]. "
     "You provided the SDK with "
 )
 ERROR_MESSAGE_ORG_URL_YOUROKTADOMAIN = (

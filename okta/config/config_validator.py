@@ -40,7 +40,7 @@ class ConfigValidator():
         if "proxy" in client:
             errors += self._validate_proxy_settings(client["proxy"])
         # check API details based on authorization mode
-        if client.get('authorizationMode') == "SSWS":
+        if client.get('authorizationMode') in ("SSWS", "Bearer"):
             errors += \
                 self._validate_token(
                     client.get('token', ""))
