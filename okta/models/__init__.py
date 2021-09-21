@@ -22,6 +22,8 @@ from okta.models import acs_endpoint as acs_endpoint
 AcsEndpoint = acs_endpoint.AcsEndpoint
 from okta.models import activate_factor_request as activate_factor_request
 ActivateFactorRequest = activate_factor_request.ActivateFactorRequest
+from okta.models import allowed_for_enum as allowed_for_enum
+AllowedForEnum = allowed_for_enum.AllowedForEnum
 from okta.models import app_and_instance_condition_evaluator_app_or_instance as app_and_instance_condition_evaluator_app_or_instance
 AppAndInstanceConditionEvaluatorAppOrInstance = app_and_instance_condition_evaluator_app_or_instance.AppAndInstanceConditionEvaluatorAppOrInstance
 from okta.models import app_and_instance_policy_rule_condition as app_and_instance_policy_rule_condition
@@ -80,6 +82,14 @@ from okta.models import authentication_provider as authentication_provider
 AuthenticationProvider = authentication_provider.AuthenticationProvider
 from okta.models import authentication_provider_type as authentication_provider_type
 AuthenticationProviderType = authentication_provider_type.AuthenticationProviderType
+from okta.models import authenticator as authenticator
+Authenticator = authenticator.Authenticator
+from okta.models import authenticator_settings as authenticator_settings
+AuthenticatorSettings = authenticator_settings.AuthenticatorSettings
+from okta.models import authenticator_status as authenticator_status
+AuthenticatorStatus = authenticator_status.AuthenticatorStatus
+from okta.models import authenticator_type as authenticator_type
+AuthenticatorType = authenticator_type.AuthenticatorType
 from okta.models import authorization_server as authorization_server
 AuthorizationServer = authorization_server.AuthorizationServer
 from okta.models import authorization_server_credentials as authorization_server_credentials
@@ -242,6 +252,18 @@ from okta.models import group_rule_status as group_rule_status
 GroupRuleStatus = group_rule_status.GroupRuleStatus
 from okta.models import group_rule_user_condition as group_rule_user_condition
 GroupRuleUserCondition = group_rule_user_condition.GroupRuleUserCondition
+from okta.models import group_schema as group_schema
+GroupSchema = group_schema.GroupSchema
+from okta.models import group_schema_attribute as group_schema_attribute
+GroupSchemaAttribute = group_schema_attribute.GroupSchemaAttribute
+from okta.models import group_schema_base as group_schema_base
+GroupSchemaBase = group_schema_base.GroupSchemaBase
+from okta.models import group_schema_base_properties as group_schema_base_properties
+GroupSchemaBaseProperties = group_schema_base_properties.GroupSchemaBaseProperties
+from okta.models import group_schema_custom as group_schema_custom
+GroupSchemaCustom = group_schema_custom.GroupSchemaCustom
+from okta.models import group_schema_definitions as group_schema_definitions
+GroupSchemaDefinitions = group_schema_definitions.GroupSchemaDefinitions
 from okta.models import group_type as group_type
 GroupType = group_type.GroupType
 from okta.models import hardware_user_factor as hardware_user_factor

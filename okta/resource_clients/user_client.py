@@ -1854,6 +1854,48 @@ class UserClient(APIClient):
 
         return (response, None)
 
+    async def get_user_role(
+            self, userId, roleId,
+            keep_empty_params=False
+    ):
+        """
+        Gets role that is assigne to user.
+        Args:
+            user_id {str}
+            role_id {str}
+        Returns:
+            Role
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/users/{userId}/roles/{roleId}
+            """)
+
+        body = {}
+        headers = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Role)
+
+        if error:
+            return (None, response, error)
+
+        try:
+            result = Role(
+                self.form_response_body(response.get_body())
+            )
+        except Exception as error:
+            return (None, response, error)
+        return (result, response, None)
+
     async def list_app_targets_for_application_admin_role_for_user(
             self, userId, roleId, query_params={},
             keep_empty_params=False
