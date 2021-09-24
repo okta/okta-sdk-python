@@ -119,6 +119,8 @@ class AuthenticatorClient(APIClient):
         """
         Args:
             authenticator_id {str}
+        Returns:
+            Authenticator
         """
         http_method = "post".upper()
         api_url = format_url(f"""
@@ -135,15 +137,21 @@ class AuthenticatorClient(APIClient):
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Authenticator)
 
         if error:
-            return (response, error)
+            return (None, response, error)
 
-        return (response, None)
+        try:
+            result = Authenticator(
+                self.form_response_body(response.get_body())
+            )
+        except Exception as error:
+            return (None, response, error)
+        return (result, response, None)
 
     async def deactivate_authenticator(
             self, authenticatorId,
@@ -152,6 +160,8 @@ class AuthenticatorClient(APIClient):
         """
         Args:
             authenticator_id {str}
+        Returns:
+            Authenticator
         """
         http_method = "post".upper()
         api_url = format_url(f"""
@@ -168,12 +178,18 @@ class AuthenticatorClient(APIClient):
         )
 
         if error:
-            return (None, error)
+            return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request)
+            .execute(request, Authenticator)
 
         if error:
-            return (response, error)
+            return (None, response, error)
 
-        return (response, None)
+        try:
+            result = Authenticator(
+                self.form_response_body(response.get_body())
+            )
+        except Exception as error:
+            return (None, response, error)
+        return (result, response, None)

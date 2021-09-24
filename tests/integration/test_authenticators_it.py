@@ -39,8 +39,12 @@ class TestAuthenticatorsResource:
 
         app_authenticator = [a for a in authenticators_list if a.type == 'phone'][0]
         try:
-            _, err = await client.activate_authenticator(app_authenticator.id)
+            resp, _, err = await client.activate_authenticator(app_authenticator.id)
             assert err is None
+            assert isinstance(resp, models.Authenticator)
+            assert resp.status == 'ACTIVE'
         finally:
-            _, err = await client.deactivate_authenticator(app_authenticator.id)
+            resp, _, err = await client.deactivate_authenticator(app_authenticator.id)
             assert err is None
+            assert isinstance(resp, models.Authenticator)
+            assert resp.status == 'INACTIVE'
