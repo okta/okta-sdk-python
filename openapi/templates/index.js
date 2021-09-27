@@ -236,6 +236,12 @@ function operationArgumentBuilder(operation) {
   if (operation.queryParams.length) {
     args.push("query_params={}");
   }
+
+  // check if payload is given within form
+  if (operation.formData) {
+    operation.formData.map((param) => args.push(param.name));
+  }
+
   return args.join(", ");
 }
 

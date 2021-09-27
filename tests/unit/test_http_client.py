@@ -142,7 +142,8 @@ async def test_client_invalid_url():
         'method': 'GET',
         'url': "",
         'headers': {},
-        'data': {}
+        'data': {},
+        'form': {}
     })
     assert all(values in [None] for values in [req, res_details, resp_body])
     assert issubclass(type(error), aiohttp.ClientError)

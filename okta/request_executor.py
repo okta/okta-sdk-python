@@ -95,7 +95,7 @@ class RequestExecutor:
         return body
 
     async def create_request(self, method: str, url: str, body: dict = None,
-                             headers: dict = {}, oauth=False, keep_empty_params=False):
+                             headers: dict = {}, form: dict = {}, oauth=False, keep_empty_params=False):
         """
         Creates request for request executor's HTTP client.
 
@@ -141,7 +141,7 @@ class RequestExecutor:
             self._cache.add("OKTA_ACCESS_TOKEN", access_token)
 
         # Add content type header if request body exists
-        if body is not None:
+        if body:
             headers.update({"Content-Type": "application/json"})
             if not keep_empty_params:
                 body = self.clear_empty_params(body)
@@ -150,6 +150,7 @@ class RequestExecutor:
         request["headers"] = headers
         request["url"] = url
         request["data"] = body
+        request["form"] = form
 
         return (request, None)
 

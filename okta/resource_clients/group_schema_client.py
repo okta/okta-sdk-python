@@ -1,5 +1,5 @@
 """
-Copyright 2021 - Present Okta, Inc.
+Copyright 2020 - Present Okta, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -49,9 +49,10 @@ class GroupSchemaClient(APIClient):
 
         body = {}
         headers = {}
+        form = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -97,9 +98,10 @@ class GroupSchemaClient(APIClient):
             "Accept": "application/json",
             "Content-Type": "application/json"
         }
+        form = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
         )
 
         if error:

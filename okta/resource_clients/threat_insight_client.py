@@ -49,9 +49,10 @@ class ThreatInsightClient(APIClient):
 
         body = {}
         headers = {}
+        form = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -96,9 +97,10 @@ class ThreatInsightClient(APIClient):
             "Accept": "application/json",
             "Content-Type": "application/json"
         }
+        form = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
         )
 
         if error:
