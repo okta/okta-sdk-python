@@ -131,6 +131,7 @@ def test_constructor_user_config_SSWS():
     loaded_config = client.get_config()
     assert org_url == loaded_config['client']['orgUrl']
     assert token == loaded_config['client']['token']
+    assert 'SSWS' == loaded_config['client']['authorizationMode']
 
 def test_constructor_user_config_Bearer():
     authorizationMode = "Bearer"
@@ -143,6 +144,7 @@ def test_constructor_user_config_Bearer():
     loaded_config = client.get_config()
     assert org_url == loaded_config['client']['orgUrl']
     assert token == loaded_config['client']['token']
+    assert authorizationMode == loaded_config['client']['authorizationMode']
 
 @ pytest.mark.parametrize("private_key", ["private key hash",
                                           "pem_file.pem",
