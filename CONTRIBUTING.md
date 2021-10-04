@@ -50,20 +50,20 @@ $ git commit -m "descriptive commit message for your changes"
 Models and resource clients are auto-generated in accordance with specific openapi spec version https://github.com/okta/okta-management-openapi-spec.
 In order to make changes in models and/or resource clients you need to determine what is the root of changes:
 1. if change is needed because of new version of openapi spec has been released, then:
-    1.1. get specific openapi spec version (v2.7.1 in the following example):
+   1.1. get specific openapi spec version (v2.7.1 in the following example):
   ```sh
   cd openapi
   npm install @okta/openapi@2.7.1
   ```
   or copy file `https://github.com/okta/okta-management-openapi-spec/blob/master/dist/spec.json` to `openapi/node_modules/@okta/openapi/dist/spec.json` (in order to get specific version of a file use release tags or clone repo and checkout specific commit)
-    1.2. re-generate okta-sdk-python (in openapi directory):
+   1.2. re-generate okta-sdk-python (in openapi directory):
   ```sh
   yarn build
   ```
 
 2. if change isn't related to new openapi spec version, for example, update template for models, then:
-    2.1. edit needed templates under `openapi/templates` directory
-    2.2. re-generate okta-sdk-python (in openapi directory):
+   2.1. edit needed templates under `openapi/templates` directory
+   2.2. re-generate okta-sdk-python (in openapi directory):
   ```sh
   yarn build
   ```
