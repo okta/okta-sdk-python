@@ -663,6 +663,43 @@ swa_app_model = models.SwaApplication({
 app, resp, err = await client.create_application(swa_app_model)
 ```
 
+### Manage Group Schema custom atributes
+
+There are 2 ways of creating custom attribute for Group Schema Profile:
+1) via UI of your ORG (Directory -> Profile Editor -> Groups)
+2) with the following request (create custom attribute with name "testCustomAttr"):
+
+```py
+definition = {'custom':
+                {'id': '#custom',
+                 'properties':
+                     {'testCustomAttr':
+                         {'description': 'Custom attribute for testing purposes',
+                                         'maxLength': 20,
+                                         'minLength': 1,
+                                         'permissions': [{'action': 'READ_WRITE',
+                                                          'principal': 'SELF'}],
+                                         'required': False,
+                                         'title': 'Test Custom Attribute',
+                                         'type': 'string'},
+                          'required': []},
+                 'type': 'object'
+                }
+             }
+resp, _, err = await client.update_group_schema({'definitions': definition})
+```
+
+Update existing attribute:
+
+```py
+# Get existing GroupSchema
+resp, _, err = await client.get_group_schema()
+# Set new title for custom attribute 'testCustomAttr'
+resp.definitions.custom.properties['testCustomAttr']['title'] = 'New Title'
+# Launch api request to update GroupSchema
+resp, _, err = await client.update_group_schema(resp)
+```
+
 ### Call other API endpoints
 
 Not every API endpoint is represented by a method in this library. You can call any Okta management API endpoint using this generic syntax:

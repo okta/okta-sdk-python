@@ -1,5 +1,36 @@
 # Okta Python SDK Changelog
 
+## v2.2.0
+- Regenerate code using the [open API spec v2.7.0](https://github.com/okta/okta-management-openapi-spec/releases/tag/openapi-2.7.0).
+- Allow Bearer auth
+- Support Python 3.9
+
+_New resources:_
+* Authenticator
+* GroupSchema
+* Org
+
+_New models:_
+* AllowedForEnum
+* Authenticator
+* AuthenticatorSettings
+* AuthenticatorStatus
+* AuthenticatorType
+* GroupSchema
+* GroupSchemaBase
+* GroupSchemaCustom
+* GroupSchemaAttribute
+* GroupSchemaDefinitions
+* GroupSchemaBaseProperties
+* OrgContactType
+* OrgContactTypeObj
+* OrgContactUser
+* OrgOktaCommunicationSetting
+* OrgOktaSupportSetting
+* OrgOktaSupportSettingsObj
+* OrgPreferences
+* OrgSetting
+
 ## v2.1.0
 - Regenerate code using the [open API spec v2.6.0](https://github.com/okta/okta-management-openapi-spec/releases/tag/openapi-2.6.0).
 - Expose parameter `keep_empty_params` to all user interfaces.

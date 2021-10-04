@@ -1,6 +1,6 @@
 # flake8: noqa
 """
-Copyright 2020 - Present Okta, Inc.
+Copyright 2021 - Present Okta, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -21,21 +21,17 @@ limitations under the License.
 from aenum import MultiValueEnum
 
 
-class RoleType(
+class AuthenticatorType(
     str,
     MultiValueEnum
 ):
     """
-    An enumeration class for RoleType.
+    An enumeration class for AuthenticatorType.
     """
 
-    SUPER_ADMIN = "SUPER_ADMIN", "super_admin"
-    ORG_ADMIN = "ORG_ADMIN", "org_admin"
-    APP_ADMIN = "APP_ADMIN", "app_admin"
-    USER_ADMIN = "USER_ADMIN", "user_admin"
-    HELP_DESK_ADMIN = "HELP_DESK_ADMIN", "help_desk_admin"
-    READ_ONLY_ADMIN = "READ_ONLY_ADMIN", "read_only_admin"
-    MOBILE_ADMIN = "MOBILE_ADMIN", "mobile_admin"
-    API_ACCESS_MANAGEMENT_ADMIN = "API_ACCESS_MANAGEMENT_ADMIN", "api_access_management_admin"
-    REPORT_ADMIN = "REPORT_ADMIN", "report_admin"
-    GROUP_MEMBERSHIP_ADMIN = "GROUP_MEMBERSHIP_ADMIN", "group_membership_admin"
+    APP = "app", "APP"
+    PASSWORD = "password", "PASSWORD"
+    SECURITY_QUESTION = "security_question", "SECURITY_QUESTION"
+    PHONE = "phone", "PHONE"
+    EMAIL = "email", "EMAIL"
+    SECURITY_KEY = "security_key", "SECURITY_KEY"
