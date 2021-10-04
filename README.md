@@ -41,13 +41,14 @@ This library uses semantic versioning and follows Okta's [Library Version Policy
 | Version | Status                           |
 | ------- | -------------------------------- |
 | 0.x     | :warning: Beta Release (Retired) |
-| 1.x     | :heavy_check_mark: Release       |
+| 1.x     | :warning: Retired                |
+| 2.x     | :heavy_check_mark: Release       |
 
 The latest release can always be found on the [releases page][github-releases].
 
 ## Need help?
 
-If you run into problems using the SDK, you can
+If you run into problems using the SDK, you can:
 
 - Ask questions on the [Okta Developer Forums][devforum]
 - Post [issues on GitHub][github-issues] (for code errors)
