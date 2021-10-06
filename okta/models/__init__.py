@@ -22,6 +22,8 @@ from okta.models import acs_endpoint as acs_endpoint
 AcsEndpoint = acs_endpoint.AcsEndpoint
 from okta.models import activate_factor_request as activate_factor_request
 ActivateFactorRequest = activate_factor_request.ActivateFactorRequest
+from okta.models import allowed_for_enum as allowed_for_enum
+AllowedForEnum = allowed_for_enum.AllowedForEnum
 from okta.models import app_and_instance_condition_evaluator_app_or_instance as app_and_instance_condition_evaluator_app_or_instance
 AppAndInstanceConditionEvaluatorAppOrInstance = app_and_instance_condition_evaluator_app_or_instance.AppAndInstanceConditionEvaluatorAppOrInstance
 from okta.models import app_and_instance_policy_rule_condition as app_and_instance_policy_rule_condition
@@ -80,6 +82,14 @@ from okta.models import authentication_provider as authentication_provider
 AuthenticationProvider = authentication_provider.AuthenticationProvider
 from okta.models import authentication_provider_type as authentication_provider_type
 AuthenticationProviderType = authentication_provider_type.AuthenticationProviderType
+from okta.models import authenticator as authenticator
+Authenticator = authenticator.Authenticator
+from okta.models import authenticator_settings as authenticator_settings
+AuthenticatorSettings = authenticator_settings.AuthenticatorSettings
+from okta.models import authenticator_status as authenticator_status
+AuthenticatorStatus = authenticator_status.AuthenticatorStatus
+from okta.models import authenticator_type as authenticator_type
+AuthenticatorType = authenticator_type.AuthenticatorType
 from okta.models import authorization_server as authorization_server
 AuthorizationServer = authorization_server.AuthorizationServer
 from okta.models import authorization_server_credentials as authorization_server_credentials
@@ -242,6 +252,18 @@ from okta.models import group_rule_status as group_rule_status
 GroupRuleStatus = group_rule_status.GroupRuleStatus
 from okta.models import group_rule_user_condition as group_rule_user_condition
 GroupRuleUserCondition = group_rule_user_condition.GroupRuleUserCondition
+from okta.models import group_schema as group_schema
+GroupSchema = group_schema.GroupSchema
+from okta.models import group_schema_attribute as group_schema_attribute
+GroupSchemaAttribute = group_schema_attribute.GroupSchemaAttribute
+from okta.models import group_schema_base as group_schema_base
+GroupSchemaBase = group_schema_base.GroupSchemaBase
+from okta.models import group_schema_base_properties as group_schema_base_properties
+GroupSchemaBaseProperties = group_schema_base_properties.GroupSchemaBaseProperties
+from okta.models import group_schema_custom as group_schema_custom
+GroupSchemaCustom = group_schema_custom.GroupSchemaCustom
+from okta.models import group_schema_definitions as group_schema_definitions
+GroupSchemaDefinitions = group_schema_definitions.GroupSchemaDefinitions
 from okta.models import group_type as group_type
 GroupType = group_type.GroupType
 from okta.models import hardware_user_factor as hardware_user_factor
@@ -424,6 +446,22 @@ from okta.models import open_id_connect_application_type as open_id_connect_appl
 OpenIdConnectApplicationType = open_id_connect_application_type.OpenIdConnectApplicationType
 from okta.models import open_id_connect_refresh_token_rotation_type as open_id_connect_refresh_token_rotation_type
 OpenIdConnectRefreshTokenRotationType = open_id_connect_refresh_token_rotation_type.OpenIdConnectRefreshTokenRotationType
+from okta.models import org_contact_type as org_contact_type
+OrgContactType = org_contact_type.OrgContactType
+from okta.models import org_contact_type_obj as org_contact_type_obj
+OrgContactTypeObj = org_contact_type_obj.OrgContactTypeObj
+from okta.models import org_contact_user as org_contact_user
+OrgContactUser = org_contact_user.OrgContactUser
+from okta.models import org_okta_communication_setting as org_okta_communication_setting
+OrgOktaCommunicationSetting = org_okta_communication_setting.OrgOktaCommunicationSetting
+from okta.models import org_okta_support_setting as org_okta_support_setting
+OrgOktaSupportSetting = org_okta_support_setting.OrgOktaSupportSetting
+from okta.models import org_okta_support_settings_obj as org_okta_support_settings_obj
+OrgOktaSupportSettingsObj = org_okta_support_settings_obj.OrgOktaSupportSettingsObj
+from okta.models import org_preferences as org_preferences
+OrgPreferences = org_preferences.OrgPreferences
+from okta.models import org_setting as org_setting
+OrgSetting = org_setting.OrgSetting
 from okta.models import password_credential as password_credential
 PasswordCredential = password_credential.PasswordCredential
 from okta.models import password_credential_hash as password_credential_hash
@@ -682,6 +720,8 @@ from okta.models import user_credentials as user_credentials
 UserCredentials = user_credentials.UserCredentials
 from okta.models import user_factor as user_factor
 UserFactor = user_factor.UserFactor
+from okta.models import user_id_string as user_id_string
+UserIdString = user_id_string.UserIdString
 from okta.models import user_identifier_condition_evaluator_pattern as user_identifier_condition_evaluator_pattern
 UserIdentifierConditionEvaluatorPattern = user_identifier_condition_evaluator_pattern.UserIdentifierConditionEvaluatorPattern
 from okta.models import user_identifier_policy_rule_condition as user_identifier_policy_rule_condition
