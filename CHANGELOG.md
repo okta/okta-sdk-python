@@ -109,6 +109,9 @@ _New models:_
 * ProfileMappingSource
 * ThreatInsightConfiguration
 
+### Breaking changes
+Custom attributes, set on instances of the `UserProfile` model, will now no longer be automatically converted to lower camel case.
+
 ## v1.6.0
 - Update SDK according to openapi spec v2.3.0.
 - Fix custom user attributes.
