@@ -105,7 +105,6 @@ class OktaAPIResponse():
             links (dict): Dictionary object of values in the 'Link' header
         """
 
-        API = "/api/"
         # Check for 'self' link
         if "self" in links:
             self._self = convert_absolute_url_into_relative_url(links["self"]["url"].human_repr())
