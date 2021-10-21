@@ -2,6 +2,7 @@ import json
 import xmltodict
 
 from okta.api_client import APIClient
+from okta.utils import convert_absolute_url_into_relative_url
 
 
 class OktaAPIResponse():
@@ -107,12 +108,10 @@ class OktaAPIResponse():
         API = "/api/"
         # Check for 'self' link
         if "self" in links:
-            self._self = API + \
-                links["self"]["url"].human_repr().partition(API)[2]
+            self._self = convert_absolute_url_into_relative_url(links["self"]["url"].human_repr())
         # Check for 'next' link
         if "next" in links:
-            self._next = API + \
-                links["next"]["url"].human_repr().partition(API)[2]
+            self._next = convert_absolute_url_into_relative_url(links["next"]["url"].human_repr())
 
     def has_next(self):
         """
