@@ -22,7 +22,6 @@ PRIVATE_KEY = "yourPrivateKey"
 GET_USERS_CALL = "/api/v1/users"
 GET_OAUTH_CLIENTS_CALL = "/oauth2/v1/clients"
 CLIENT_CONFIG = {'orgUrl': ORG_URL, 'token': API_TOKEN}
-AFTER = "eiwhgrW6hpnNkDZAV4YH"
 
 # Cache Test Details
 TTI = 5.0
@@ -245,7 +244,7 @@ def mock_cache_return_value(*args, **kwargs):
     return CACHE_VALUE
 
 def mock_next_link(self_url: URL):
-    return self_url.update_query({'after': AFTER})
+    return self_url.update_query({'after': 'mock_after_id'})
 
 
 SAMPLE_RSA = '''-----BEGIN RSA PRIVATE KEY-----
