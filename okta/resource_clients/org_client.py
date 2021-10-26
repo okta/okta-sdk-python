@@ -1,5 +1,5 @@
 """
-Copyright 2021 - Present Okta, Inc.
+Copyright 2020 - Present Okta, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -59,9 +59,10 @@ class OrgClient(APIClient):
 
         body = {}
         headers = {}
+        form = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -106,9 +107,10 @@ class OrgClient(APIClient):
             "Accept": "application/json",
             "Content-Type": "application/json"
         }
+        form = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -153,9 +155,10 @@ class OrgClient(APIClient):
             "Accept": "application/json",
             "Content-Type": "application/json"
         }
+        form = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -193,9 +196,10 @@ class OrgClient(APIClient):
 
         body = {}
         headers = {}
+        form = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -237,9 +241,10 @@ class OrgClient(APIClient):
 
         body = {}
         headers = {}
+        form = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -286,9 +291,10 @@ class OrgClient(APIClient):
             "Accept": "application/json",
             "Content-Type": "application/json"
         }
+        form = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -308,6 +314,41 @@ class OrgClient(APIClient):
             return (None, response, error)
         return (result, response, None)
 
+    async def update_org_logo(
+            self, file,
+            keep_empty_params=False
+    ):
+        """
+        Updates the logo for your organization.
+        Args:
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/org/logo
+            """)
+
+        body = {}
+        headers = {}
+        form = {
+            "file": file,
+        }
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (response, error)
+
+        return (response, None)
+
     async def get_org_preferences(
             self,
             keep_empty_params=False
@@ -326,9 +367,10 @@ class OrgClient(APIClient):
 
         body = {}
         headers = {}
+        form = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -367,9 +409,10 @@ class OrgClient(APIClient):
 
         body = {}
         headers = {}
+        form = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -408,9 +451,10 @@ class OrgClient(APIClient):
 
         body = {}
         headers = {}
+        form = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -448,9 +492,10 @@ class OrgClient(APIClient):
 
         body = {}
         headers = {}
+        form = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -489,9 +534,10 @@ class OrgClient(APIClient):
 
         body = {}
         headers = {}
+        form = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -530,9 +576,10 @@ class OrgClient(APIClient):
 
         body = {}
         headers = {}
+        form = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -570,9 +617,10 @@ class OrgClient(APIClient):
 
         body = {}
         headers = {}
+        form = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -612,9 +660,10 @@ class OrgClient(APIClient):
 
         body = {}
         headers = {}
+        form = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -653,9 +702,10 @@ class OrgClient(APIClient):
 
         body = {}
         headers = {}
+        form = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
         )
 
         if error:
@@ -693,9 +743,10 @@ class OrgClient(APIClient):
 
         body = {}
         headers = {}
+        form = {}
 
         request, error = await self._request_executor.create_request(
-            http_method, api_url, body, headers, keep_empty_params=keep_empty_params
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
         )
 
         if error:

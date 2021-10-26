@@ -1,4 +1,5 @@
 import copy
+import os
 import pytest
 from datetime import datetime
 from tests.mocks import MockOktaClient
@@ -201,3 +202,15 @@ class TestOrgResource:
         finally:
             org_okta_support_setting, _, err = await client.revoke_okta_support()
             assert err is None
+
+    # skip test until solution with writing cassette is found
+    @pytest.mark.skip
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_upload_org_logo(self, fs):
+        client = MockOktaClient(fs)
+        fs.pause()
+        logo = open(f'tests/integration/data/logo.png', 'rb')
+        _, err = await client.update_org_logo(logo)
+        fs.resume()
+        assert err is None
