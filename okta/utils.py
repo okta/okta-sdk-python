@@ -4,6 +4,8 @@ Class of utility functions.
 
 from enum import Enum
 from datetime import datetime as dt
+from urllib.parse import urlsplit, urlunsplit
+
 from okta.constants import DATETIME_FORMAT, EPOCH_DAY, EPOCH_MONTH,\
     EPOCH_YEAR
 
@@ -54,3 +56,21 @@ def convert_date_time_to_seconds(date_time):
     return float((dt_obj
                   - dt(EPOCH_YEAR, EPOCH_MONTH, EPOCH_DAY))
                  .total_seconds())
+
+
+def convert_absolute_url_into_relative_url(absolute_url):
+    """
+    Converts absolute url into relative url.
+
+    Args:
+        absolute_url (str): URL
+
+    Returns:
+        str: URL
+
+    Example:
+        >>> convert_absolute_url_into_relative_url('https://test.okta.com/api/v1/users')
+        '/api/v1/users'
+    """
+    url_parts = urlsplit(absolute_url)
+    return urlunsplit(('', '', url_parts[2], url_parts[3], url_parts[4]))
