@@ -114,6 +114,7 @@ class TestIdentityProvidersResource:
             assert isinstance(retrieved_idp, models.IdentityProvider)
             assert retrieved_idp.name == idp_model.name
             assert retrieved_idp.type == idp_model.type
+            assert isinstance(retrieved_idp.type, str)
             assert retrieved_idp.status == "ACTIVE"
             prot_endp = retrieved_idp.protocol.endpoints
             assert prot_endp.authorization.url == ISSUER_URL + "/authorize"
