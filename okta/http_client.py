@@ -31,6 +31,8 @@ class HTTPClient:
             self._proxy = self._setup_proxy(http_config["proxy"])
         else:
             self._proxy = None
+        if "ssl_context" in http_config:
+        	self._ssl_context = http_config["ssl_context"]
 
     async def send_request(self, request):
         """
@@ -67,7 +69,9 @@ class HTTPClient:
             if self._proxy:
                 params['proxy'] = self._proxy
             # Fire request
-            async with aiohttp.request(**params) as response:
+            if hasattr(self, '_ssl_context'):
+                params['ssl_context'] = self._ssl_context
+            async with aiohttp.ClientSession().request(**params) as response:
                 return (response.request_info,
                         response,
                         await response.text(),
