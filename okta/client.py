@@ -31,6 +31,8 @@ from okta.resource_clients.authenticator_client\
     import AuthenticatorClient
 from okta.resource_clients.authorization_server_client\
     import AuthorizationServerClient
+from okta.resource_clients.brand_client\
+    import BrandClient
 from okta.resource_clients.domain_client\
     import DomainClient
 from okta.resource_clients.event_hook_client\
@@ -79,6 +81,7 @@ class Client(
     ApplicationClient,
     AuthenticatorClient,
     AuthorizationServerClient,
+    BrandClient,
     DomainClient,
     EventHookClient,
     FeatureClient,

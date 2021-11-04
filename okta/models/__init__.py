@@ -128,6 +128,8 @@ from okta.models import bookmark_application_settings as bookmark_application_se
 BookmarkApplicationSettings = bookmark_application_settings.BookmarkApplicationSettings
 from okta.models import bookmark_application_settings_application as bookmark_application_settings_application
 BookmarkApplicationSettingsApplication = bookmark_application_settings_application.BookmarkApplicationSettingsApplication
+from okta.models import brand as brand
+Brand = brand.Brand
 from okta.models import browser_plugin_application as browser_plugin_application
 BrowserPluginApplication = browser_plugin_application.BrowserPluginApplication
 from okta.models import call_user_factor as call_user_factor
@@ -184,12 +186,18 @@ from okta.models import domain_validation_status as domain_validation_status
 DomainValidationStatus = domain_validation_status.DomainValidationStatus
 from okta.models import duration as duration
 Duration = duration.Duration
+from okta.models import email_template_touch_point_variant as email_template_touch_point_variant
+EmailTemplateTouchPointVariant = email_template_touch_point_variant.EmailTemplateTouchPointVariant
 from okta.models import email_user_factor as email_user_factor
 EmailUserFactor = email_user_factor.EmailUserFactor
 from okta.models import email_user_factor_profile as email_user_factor_profile
 EmailUserFactorProfile = email_user_factor_profile.EmailUserFactorProfile
 from okta.models import enabled_status as enabled_status
 EnabledStatus = enabled_status.EnabledStatus
+from okta.models import end_user_dashboard_touch_point_variant as end_user_dashboard_touch_point_variant
+EndUserDashboardTouchPointVariant = end_user_dashboard_touch_point_variant.EndUserDashboardTouchPointVariant
+from okta.models import error_page_touch_point_variant as error_page_touch_point_variant
+ErrorPageTouchPointVariant = error_page_touch_point_variant.ErrorPageTouchPointVariant
 from okta.models import event_hook as event_hook
 EventHook = event_hook.EventHook
 from okta.models import event_hook_channel as event_hook_channel
@@ -286,6 +294,8 @@ from okta.models import identity_provider_policy as identity_provider_policy
 IdentityProviderPolicy = identity_provider_policy.IdentityProviderPolicy
 from okta.models import identity_provider_policy_rule_condition as identity_provider_policy_rule_condition
 IdentityProviderPolicyRuleCondition = identity_provider_policy_rule_condition.IdentityProviderPolicyRuleCondition
+from okta.models import image_upload_response as image_upload_response
+ImageUploadResponse = image_upload_response.ImageUploadResponse
 from okta.models import inactivity_policy_rule_condition as inactivity_policy_rule_condition
 InactivityPolicyRuleCondition = inactivity_policy_rule_condition.InactivityPolicyRuleCondition
 from okta.models import inline_hook as inline_hook
@@ -658,6 +668,8 @@ from okta.models import session_identity_provider_type as session_identity_provi
 SessionIdentityProviderType = session_identity_provider_type.SessionIdentityProviderType
 from okta.models import session_status as session_status
 SessionStatus = session_status.SessionStatus
+from okta.models import sign_in_page_touch_point_variant as sign_in_page_touch_point_variant
+SignInPageTouchPointVariant = sign_in_page_touch_point_variant.SignInPageTouchPointVariant
 from okta.models import sign_on_inline_hook as sign_on_inline_hook
 SignOnInlineHook = sign_on_inline_hook.SignOnInlineHook
 from okta.models import single_logout as single_logout
@@ -690,6 +702,8 @@ from okta.models import swa_three_field_application_settings_application as swa_
 SwaThreeFieldApplicationSettingsApplication = swa_three_field_application_settings_application.SwaThreeFieldApplicationSettingsApplication
 from okta.models import temp_password as temp_password
 TempPassword = temp_password.TempPassword
+from okta.models import theme as theme
+Theme = theme.Theme
 from okta.models import threat_insight_configuration as threat_insight_configuration
 ThreatInsightConfiguration = threat_insight_configuration.ThreatInsightConfiguration
 from okta.models import token_authorization_server_policy_rule_action as token_authorization_server_policy_rule_action
