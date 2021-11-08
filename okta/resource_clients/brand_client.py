@@ -19,8 +19,8 @@ limitations under the License.
 
 from okta.models.brand\
     import Brand
-from okta.models.theme\
-    import Theme
+from okta.models.theme_response\
+    import ThemeResponse
 from okta.models.image_upload_response\
     import ImageUploadResponse
 from okta.utils import format_url
@@ -178,7 +178,7 @@ class BrandClient(APIClient):
         Args:
             brand_id {str}
         Returns:
-            list: Collection of Theme instances.
+            list: Collection of ThemeResponse instances.
         """
         http_method = "get".upper()
         api_url = format_url(f"""
@@ -198,7 +198,7 @@ class BrandClient(APIClient):
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request, Theme)
+            .execute(request, ThemeResponse)
 
         if error:
             return (None, response, error)
@@ -206,7 +206,7 @@ class BrandClient(APIClient):
         try:
             result = []
             for item in response.get_body():
-                result.append(Theme(
+                result.append(ThemeResponse(
                     self.form_response_body(item)
                     ))
         except Exception as error:
@@ -223,7 +223,7 @@ class BrandClient(APIClient):
             brand_id {str}
             theme_id {str}
         Returns:
-            Theme
+            ThemeResponse
         """
         http_method = "get".upper()
         api_url = format_url(f"""
@@ -243,13 +243,13 @@ class BrandClient(APIClient):
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request, Theme)
+            .execute(request, ThemeResponse)
 
         if error:
             return (None, response, error)
 
         try:
-            result = Theme(
+            result = ThemeResponse(
                 self.form_response_body(response.get_body())
             )
         except Exception as error:
@@ -267,7 +267,7 @@ class BrandClient(APIClient):
             theme_id {str}
             {theme}
         Returns:
-            Theme
+            ThemeResponse
         """
         http_method = "put".upper()
         api_url = format_url(f"""
@@ -293,13 +293,13 @@ class BrandClient(APIClient):
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request, Theme)
+            .execute(request, ThemeResponse)
 
         if error:
             return (None, response, error)
 
         try:
-            result = Theme(
+            result = ThemeResponse(
                 self.form_response_body(response.get_body())
             )
         except Exception as error:

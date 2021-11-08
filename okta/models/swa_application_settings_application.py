@@ -34,18 +34,24 @@ class SwaApplicationSettingsApplication(
         if config:
             self.button_field = config["buttonField"]\
                 if "buttonField" in config else None
+            self.checkbox = config["checkbox"]\
+                if "checkbox" in config else None
             self.login_url_regex = config["loginUrlRegex"]\
                 if "loginUrlRegex" in config else None
             self.password_field = config["passwordField"]\
                 if "passwordField" in config else None
+            self.redirect_url = config["redirectUrl"]\
+                if "redirectUrl" in config else None
             self.url = config["url"]\
                 if "url" in config else None
             self.username_field = config["usernameField"]\
                 if "usernameField" in config else None
         else:
             self.button_field = None
+            self.checkbox = None
             self.login_url_regex = None
             self.password_field = None
+            self.redirect_url = None
             self.url = None
             self.username_field = None
 
@@ -53,8 +59,10 @@ class SwaApplicationSettingsApplication(
         parent_req_format = super().request_format()
         current_obj_format = {
             "buttonField": self.button_field,
+            "checkbox": self.checkbox,
             "loginUrlRegex": self.login_url_regex,
             "passwordField": self.password_field,
+            "redirectUrl": self.redirect_url,
             "url": self.url,
             "usernameField": self.username_field
         }

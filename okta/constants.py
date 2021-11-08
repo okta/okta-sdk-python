@@ -77,10 +77,12 @@ def find_factor_model(factor_type):
 
 
 OKTA_POLICY_TYPE_TO_MODEL = {
+    PT.ACCESS_POLICY: models.AccessPolicy,
     PT.IDP_DISCOVERY: models.IdentityProviderPolicy,
     PT.OAUTH_AUTHORIZATION_POLICY: models.OAuthAuthorizationPolicy,
     PT.OKTA_SIGN_ON: models.OktaSignOnPolicy,
-    PT.PASSWORD: models.PasswordPolicy
+    PT.PASSWORD: models.PasswordPolicy,
+    PT.PROFILE_ENROLLMENT: models.ProfileEnrollmentPolicy
 }
 
 
@@ -89,7 +91,9 @@ def find_policy_model(policy_type):
 
 
 OKTA_POLICY_RULE_TYPE_TO_MODEL = {
+    "ACCESS_POLICY": models.AccessPolicyRule,
     "PASSWORD": models.PasswordPolicyRule,
+    "PROFILE_ENROLLMENT": models.ProfileEnrollmentPolicyRule,
     "SIGN_ON": models.OktaSignOnPolicyRule
 }
 

@@ -29,11 +29,11 @@ from okta.models import sign_in_page_touch_point_variant\
     as sign_in_page_touch_point_variant
 
 
-class Theme(
+class ThemeResponse(
     OktaObject
 ):
     """
-    A class for Theme objects.
+    A class for ThemeResponse objects.
     """
 
     def __init__(self, config=None):
@@ -79,6 +79,12 @@ class Theme(
                     self.error_page_touch_point_variant = None
             else:
                 self.error_page_touch_point_variant = None
+            self.favicon = config["favicon"]\
+                if "favicon" in config else None
+            self.id = config["id"]\
+                if "id" in config else None
+            self.logo = config["logo"]\
+                if "logo" in config else None
             self.primary_color_contrast_hex = config["primaryColorContrastHex"]\
                 if "primaryColorContrastHex" in config else None
             self.primary_color_hex = config["primaryColorHex"]\
@@ -105,6 +111,9 @@ class Theme(
             self.email_template_touch_point_variant = None
             self.end_user_dashboard_touch_point_variant = None
             self.error_page_touch_point_variant = None
+            self.favicon = None
+            self.id = None
+            self.logo = None
             self.primary_color_contrast_hex = None
             self.primary_color_hex = None
             self.secondary_color_contrast_hex = None
@@ -119,6 +128,9 @@ class Theme(
             "emailTemplateTouchPointVariant": self.email_template_touch_point_variant,
             "endUserDashboardTouchPointVariant": self.end_user_dashboard_touch_point_variant,
             "errorPageTouchPointVariant": self.error_page_touch_point_variant,
+            "favicon": self.favicon,
+            "id": self.id,
+            "logo": self.logo,
             "primaryColorContrastHex": self.primary_color_contrast_hex,
             "primaryColorHex": self.primary_color_hex,
             "secondaryColorContrastHex": self.secondary_color_contrast_hex,

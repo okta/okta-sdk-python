@@ -1,6 +1,6 @@
 # flake8: noqa
 """
-Copyright 2020 - Present Okta, Inc.
+Copyright 2021 - Present Okta, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -19,39 +19,38 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.okta_collection import OktaCollection
 
 
-class ApplicationCredentialsUsernameTemplate(
+class UserTypeCondition(
     OktaObject
 ):
     """
-    A class for ApplicationCredentialsUsernameTemplate objects.
+    A class for UserTypeCondition objects.
     """
 
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.push_status = config["pushStatus"]\
-                if "pushStatus" in config else None
-            self.suffix = config["suffix"]\
-                if "suffix" in config else None
-            self.template = config["template"]\
-                if "template" in config else None
-            self.type = config["type"]\
-                if "type" in config else None
+            self.exclude = OktaCollection.form_list(
+                config["exclude"] if "exclude"\
+                    in config else [],
+                str
+            )
+            self.include = OktaCollection.form_list(
+                config["include"] if "include"\
+                    in config else [],
+                str
+            )
         else:
-            self.push_status = None
-            self.suffix = None
-            self.template = None
-            self.type = None
+            self.exclude = []
+            self.include = []
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
-            "pushStatus": self.push_status,
-            "suffix": self.suffix,
-            "template": self.template,
-            "type": self.type
+            "exclude": self.exclude,
+            "include": self.include
         }
         parent_req_format.update(current_obj_format)
         return parent_req_format

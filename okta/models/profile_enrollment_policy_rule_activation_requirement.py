@@ -1,6 +1,6 @@
 # flake8: noqa
 """
-Copyright 2020 - Present Okta, Inc.
+Copyright 2021 - Present Okta, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -21,37 +21,25 @@ limitations under the License.
 from okta.okta_object import OktaObject
 
 
-class ApplicationCredentialsUsernameTemplate(
+class ProfileEnrollmentPolicyRuleActivationRequirement(
     OktaObject
 ):
     """
-    A class for ApplicationCredentialsUsernameTemplate objects.
+    A class for ProfileEnrollmentPolicyRuleActivationRequirement objects.
     """
 
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.push_status = config["pushStatus"]\
-                if "pushStatus" in config else None
-            self.suffix = config["suffix"]\
-                if "suffix" in config else None
-            self.template = config["template"]\
-                if "template" in config else None
-            self.type = config["type"]\
-                if "type" in config else None
+            self.email_verification = config["emailVerification"]\
+                if "emailVerification" in config else None
         else:
-            self.push_status = None
-            self.suffix = None
-            self.template = None
-            self.type = None
+            self.email_verification = None
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
-            "pushStatus": self.push_status,
-            "suffix": self.suffix,
-            "template": self.template,
-            "type": self.type
+            "emailVerification": self.email_verification
         }
         parent_req_format.update(current_obj_format)
         return parent_req_format

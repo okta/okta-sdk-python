@@ -1,6 +1,6 @@
 # flake8: noqa
 """
-Copyright 2020 - Present Okta, Inc.
+Copyright 2021 - Present Okta, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -19,39 +19,42 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.okta_collection import OktaCollection
 
 
-class ApplicationCredentialsUsernameTemplate(
+class AccessPolicyConstraint(
     OktaObject
 ):
     """
-    A class for ApplicationCredentialsUsernameTemplate objects.
+    A class for AccessPolicyConstraint objects.
     """
 
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.push_status = config["pushStatus"]\
-                if "pushStatus" in config else None
-            self.suffix = config["suffix"]\
-                if "suffix" in config else None
-            self.template = config["template"]\
-                if "template" in config else None
-            self.type = config["type"]\
-                if "type" in config else None
+            self.methods = OktaCollection.form_list(
+                config["methods"] if "methods"\
+                    in config else [],
+                str
+            )
+            self.reauthenticate_in = config["reauthenticateIn"]\
+                if "reauthenticateIn" in config else None
+            self.types = OktaCollection.form_list(
+                config["types"] if "types"\
+                    in config else [],
+                str
+            )
         else:
-            self.push_status = None
-            self.suffix = None
-            self.template = None
-            self.type = None
+            self.methods = []
+            self.reauthenticate_in = None
+            self.types = []
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
-            "pushStatus": self.push_status,
-            "suffix": self.suffix,
-            "template": self.template,
-            "type": self.type
+            "methods": self.methods,
+            "reauthenticateIn": self.reauthenticate_in,
+            "types": self.types
         }
         parent_req_format.update(current_obj_format)
         return parent_req_format

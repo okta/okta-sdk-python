@@ -32,3 +32,4 @@ class EndUserDashboardTouchPointVariant(
     OKTA_DEFAULT = "OKTA_DEFAULT", "okta_default"
     WHITE_LOGO_BACKGROUND = "WHITE_LOGO_BACKGROUND", "white_logo_background"
     FULL_THEME = "FULL_THEME", "full_theme"
+    LOGO_ON_FULL_WHITE_BACKGROUND = "LOGO_ON_FULL_WHITE_BACKGROUND", "logo_on_full_white_background"

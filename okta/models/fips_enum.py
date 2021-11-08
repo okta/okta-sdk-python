@@ -1,6 +1,6 @@
 # flake8: noqa
 """
-Copyright 2020 - Present Okta, Inc.
+Copyright 2021 - Present Okta, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -21,17 +21,13 @@ limitations under the License.
 from aenum import MultiValueEnum
 
 
-class PolicyType(
+class FipsEnum(
     str,
     MultiValueEnum
 ):
     """
-    An enumeration class for PolicyType.
+    An enumeration class for FipsEnum.
     """
 
-    OAUTH_AUTHORIZATION_POLICY = "OAUTH_AUTHORIZATION_POLICY", "oauth_authorization_policy"
-    OKTA_SIGN_ON = "OKTA_SIGN_ON", "okta_sign_on"
-    PASSWORD = "PASSWORD", "password"
-    IDP_DISCOVERY = "IDP_DISCOVERY", "idp_discovery"
-    PROFILE_ENROLLMENT = "PROFILE_ENROLLMENT", "profile_enrollment"
-    ACCESS_POLICY = "ACCESS_POLICY", "access_policy"
+    REQUIRED = "REQUIRED", "required"
+    OPTIONAL = "OPTIONAL", "optional"

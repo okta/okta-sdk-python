@@ -114,6 +114,55 @@ class AuthenticatorClient(APIClient):
             return (None, response, error)
         return (result, response, None)
 
+    async def update_authenticator(
+            self, authenticatorId, authenticator,
+            keep_empty_params=False
+    ):
+        """
+        Updates an authenticator
+        Args:
+            authenticator_id {str}
+            {authenticator}
+        Returns:
+            Authenticator
+        """
+        http_method = "put".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/authenticators/{authenticatorId}
+            """)
+
+        if isinstance(authenticator, dict):
+            body = authenticator
+        else:
+            body = authenticator.as_dict()
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+        form = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Authenticator)
+
+        if error:
+            return (None, response, error)
+
+        try:
+            result = Authenticator(
+                self.form_response_body(response.get_body())
+            )
+        except Exception as error:
+            return (None, response, error)
+        return (result, response, None)
+
     async def activate_authenticator(
             self, authenticatorId,
             keep_empty_params=False

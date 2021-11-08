@@ -1,6 +1,6 @@
 # flake8: noqa
 """
-Copyright 2020 - Present Okta, Inc.
+Copyright 2021 - Present Okta, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -19,39 +19,39 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models import fips_enum\
+    as fips_enum
 
 
-class ApplicationCredentialsUsernameTemplate(
+class Compliance(
     OktaObject
 ):
     """
-    A class for ApplicationCredentialsUsernameTemplate objects.
+    A class for Compliance objects.
     """
 
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.push_status = config["pushStatus"]\
-                if "pushStatus" in config else None
-            self.suffix = config["suffix"]\
-                if "suffix" in config else None
-            self.template = config["template"]\
-                if "template" in config else None
-            self.type = config["type"]\
-                if "type" in config else None
+            if "fips" in config:
+                if isinstance(config["fips"],
+                              fips_enum.FipsEnum):
+                    self.fips = config["fips"]
+                elif config["fips"] is not None:
+                    self.fips = fips_enum.FipsEnum(
+                        config["fips"].upper()
+                    )
+                else:
+                    self.fips = None
+            else:
+                self.fips = None
         else:
-            self.push_status = None
-            self.suffix = None
-            self.template = None
-            self.type = None
+            self.fips = None
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
-            "pushStatus": self.push_status,
-            "suffix": self.suffix,
-            "template": self.template,
-            "type": self.type
+            "fips": self.fips
         }
         parent_req_format.update(current_obj_format)
         return parent_req_format
