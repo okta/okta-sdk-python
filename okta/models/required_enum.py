@@ -30,6 +30,5 @@ class RequiredEnum(
     """
 
     ALWAYS = "ALWAYS", "always"
-    HIGH_RISK_ALWAYS = "HIGH_RISK_ALWAYS", "high_risk_always"
     HIGH_RISK_ONLY = "HIGH_RISK_ONLY", "high_risk_only"
     NEVER = "NEVER", "never"

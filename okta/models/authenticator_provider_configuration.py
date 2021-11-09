@@ -39,6 +39,8 @@ class AuthenticatorProviderConfiguration(
                 if "hostName" in config else None
             self.instance_id = config["instanceId"]\
                 if "instanceId" in config else None
+            self.shared_secret = config["sharedSecret"]\
+                if "sharedSecret" in config else None
             if "userNameTemplate" in config:
                 if isinstance(config["userNameTemplate"],
                               authenticator_provider_configuration_user_name_plate.AuthenticatorProviderConfigurationUserNamePlate):
@@ -55,6 +57,7 @@ class AuthenticatorProviderConfiguration(
             self.auth_port = None
             self.host_name = None
             self.instance_id = None
+            self.shared_secret = None
             self.user_name_template = None
 
     def request_format(self):
@@ -63,6 +66,7 @@ class AuthenticatorProviderConfiguration(
             "authPort": self.auth_port,
             "hostName": self.host_name,
             "instanceId": self.instance_id,
+            "sharedSecret": self.shared_secret,
             "userNameTemplate": self.user_name_template
         }
         parent_req_format.update(current_obj_format)
