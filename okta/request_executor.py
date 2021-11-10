@@ -67,8 +67,8 @@ class RequestExecutor:
         self._http_client = http_client_impl({
             'requestTimeout': self._request_timeout,
             'headers': self._default_headers,
-            'proxy': self._config["client"]["proxy"] if "proxy"
-            in self._config["client"] else None
+            'proxy': self._config["client"].get("proxy"),
+            'sslContext': self._config["client"].get("sslContext")
         })
         HTTPClient.raise_exception = \
             self._config['client'].get("raiseException", False)

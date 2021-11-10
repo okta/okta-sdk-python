@@ -84,7 +84,7 @@ class TestUserSchemaResource:
     @pytest.mark.asyncio
     async def test_get_application_user_schema(self, monkeypatch):
         mock_http_request = MockHTTPRequest()
-        monkeypatch.setattr(aiohttp, 'request', mock_http_request)
+        monkeypatch.setattr(aiohttp.ClientSession, 'request', mock_http_request)
 
         org_url = "https://test.okta.com"
         token = "TOKEN"
@@ -111,7 +111,7 @@ class TestUserSchemaResource:
     @pytest.mark.asyncio
     async def test_update_application_user_profile(self, monkeypatch):
         mock_http_request = MockHTTPRequest()
-        monkeypatch.setattr(aiohttp, 'request', mock_http_request)
+        monkeypatch.setattr(aiohttp.ClientSession, 'request', mock_http_request)
 
         org_url = "https://test.okta.com"
         token = "TOKEN"

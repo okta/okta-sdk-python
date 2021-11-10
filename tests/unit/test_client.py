@@ -670,7 +670,7 @@ def test_client_custom_headers(monkeypatch, mocker):
             return '[{"text": "mock response text"}]'
 
     mock_http_request = MockHTTPRequest()
-    monkeypatch.setattr(aiohttp, 'request', mock_http_request)
+    monkeypatch.setattr(aiohttp.ClientSession, 'request', mock_http_request)
     asyncio.run(client.list_users())
     assert 'Header-Test-1' in mock_http_request.headers
     assert 'Header-Test-2' in mock_http_request.headers
@@ -711,7 +711,7 @@ def test_client_handle_aiohttp_error(monkeypatch, mocker):
             return '[{"text": "mock response text"}]'
 
     mock_http_request = MockHTTPRequest()
-    monkeypatch.setattr(aiohttp, 'request', mock_http_request)
+    monkeypatch.setattr(aiohttp.ClientSession, 'request', mock_http_request)
     res, resp_body, error = asyncio.run(client.list_users())
     assert res is None
     assert resp_body is None
@@ -758,7 +758,7 @@ def test_client_log_debug(monkeypatch, caplog):
                    '"type": null}]'
 
     mock_http_request = MockHTTPRequest()
-    monkeypatch.setattr(aiohttp, 'request', mock_http_request)
+    monkeypatch.setattr(aiohttp.ClientSession, 'request', mock_http_request)
     with caplog.at_level(logging.DEBUG):
         res, resp_body, error = asyncio.run(client.list_users())
         assert 'okta-sdk-python' in caplog.text
@@ -807,7 +807,7 @@ def test_client_log_info(monkeypatch, caplog):
                    '"type": null}]'
 
     mock_http_request = MockHTTPRequest()
-    monkeypatch.setattr(aiohttp, 'request', mock_http_request)
+    monkeypatch.setattr(aiohttp.ClientSession, 'request', mock_http_request)
     with caplog.at_level(logging.INFO):
         res, resp_body, error = asyncio.run(client.list_users())
         assert caplog.text == ''
@@ -845,7 +845,43 @@ def test_client_log_exception(monkeypatch, caplog):
             return '[{"text": "mock response text"}]'
 
     mock_http_request = MockHTTPRequest()
-    monkeypatch.setattr(aiohttp, 'request', mock_http_request)
+    monkeypatch.setattr(aiohttp.ClientSession, 'request', mock_http_request)
     with caplog.at_level(logging.DEBUG):
         res, resp_body, error = asyncio.run(client.list_users())
         assert 'Cannot connect to host https://test.okta.com' in caplog.text
+
+
+def test_client_ssl_context(monkeypatch, mocker):
+    org_url = "https://test.okta.com"
+    token = "TOKEN"
+    mock_ssl_context = mocker.MagicMock()
+    config = {'orgUrl': org_url, 'token': token, 'sslContext': mock_ssl_context}
+    client = OktaClient(config)
+
+    # mock http requests, verify if custom header is present in request
+    class MockHTTPRequest():
+        def __call__(self, **params):
+            self.request_info = params
+            self.headers = params['headers']
+            self.url = params['url']
+            self.content_type = 'application/json'
+            self.links = ''
+            self.text = MockHTTPRequest.mock_response_text
+            self.status = 200
+            return self
+
+        async def __aenter__(self):
+            return self
+
+        async def __aexit__(self, exc_type, exc, tb):
+            pass
+
+        @staticmethod
+        async def mock_response_text():
+            return '[{"text": "mock response text"}]'
+
+    mock_http_request = MockHTTPRequest()
+    monkeypatch.setattr(aiohttp.ClientSession, 'request', mock_http_request)
+    asyncio.run(client.list_users())
+
+    assert mock_http_request.request_info['ssl_context'] == mock_ssl_context
