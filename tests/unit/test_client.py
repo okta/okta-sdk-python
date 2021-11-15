@@ -612,7 +612,11 @@ def test_constructor_invalid_port_number(port):
 def test_constructor_custom_http_client_impl():
     class CustomHTTPClient(HTTPClient):
         pass
-    config = {'httpClient': CustomHTTPClient}
+    org_url = "https://test.okta.com"
+    token = "TOKEN"
+    config = {'orgUrl': org_url,
+              'token': token,
+              'httpClient': CustomHTTPClient}
     client = OktaClient(config)
     assert isinstance(client._request_executor._http_client, CustomHTTPClient)
 
@@ -620,7 +624,11 @@ def test_constructor_custom_http_client_impl():
 def test_constructor_client_logging():
     logger = logging.getLogger('okta-sdk-python')
     assert logger.disabled
-    config = {'logging': {"enabled": True, "logLevel": logging.DEBUG}}
+    org_url = "https://test.okta.com"
+    token = "TOKEN"
+    config = {'orgUrl': org_url,
+              'token': token,
+              'logging': {"enabled": True, "logLevel": logging.DEBUG}}
     client = OktaClient(config)
     assert not logger.disabled
     assert logger.level == logging.DEBUG
