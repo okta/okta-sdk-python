@@ -1,5 +1,53 @@
 # Okta Python SDK Changelog
 
+## v2.3.0
+- Regenerate code using the [open API spec v2.9.1](https://github.com/okta/okta-management-openapi-spec/releases/tag/openapi-2.9.1).
+- Allow next for all requests
+- Allow upload files within FormData
+- Add updateOrgLogo operation to Org resource (Org appeared in v2.2.0)
+- Allow custom SSL Context settings
+
+_New resources:_
+* Brand
+
+_New models:_
+AccessPolicy
+AccessPolicyConstraint
+AccessPolicyConstraints
+AccessPolicyRule
+AccessPolicyRuleActions
+AccessPolicyRuleApplicationSignOn
+AccessPolicyRuleConditions
+AccessPolicyRuleCustomCondition
+AuthenticatorProvider
+AuthenticatorProviderConfiguration
+AuthenticatorProviderConfigurationUserNamePlate
+Brand
+ChannelBinding
+Compliance
+DeviceAccessPolicyRuleCondition
+EmailTemplateTouchPointVariant
+EndUserDashboardTouchPointVariant
+ErrorPageTouchPointVariant
+FipsEnum
+ImageUploadResponse
+KnowledgeConstraint
+PossessionConstraint
+PreRegistrationInlineHook
+ProfileEnrollmentPolicy
+ProfileEnrollmentPolicyRule
+ProfileEnrollmentPolicyRuleAction
+ProfileEnrollmentPolicyRuleActions
+ProfileEnrollmentPolicyRuleActivationRequirement
+ProfileEnrollmentPolicyRuleProfileAttribute
+RequiredEnum
+SignInPageTouchPointVariant
+Theme
+ThemeResponse
+UserTypeCondition
+UserVerificationEnum
+VerificationMethod
+
 ## v2.2.0
 - Regenerate code using the [open API spec v2.7.0](https://github.com/okta/okta-management-openapi-spec/releases/tag/openapi-2.7.0).
 - Allow Bearer auth
