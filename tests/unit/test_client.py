@@ -2,15 +2,7 @@ import aiohttp
 import asyncio
 import logging
 from aiohttp.client_reqrep import ConnectionKey
-try:
-    from ssl import SSLCertVerificationError
-except ImportError:
-    # workaround for python 3.6
-    class SSLCertVerificationError:
-        def __init__(self, *args, **kwargs):
-            self.args = args
-            self.kwargs = kwargs
-
+from ssl import SSLCertVerificationError
 from okta.client import Client as OktaClient
 import pytest
 from okta.constants import FINDING_OKTA_DOMAIN
