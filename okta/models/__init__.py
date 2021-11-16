@@ -18,6 +18,22 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
+from okta.models import access_policy as access_policy
+AccessPolicy = access_policy.AccessPolicy
+from okta.models import access_policy_constraint as access_policy_constraint
+AccessPolicyConstraint = access_policy_constraint.AccessPolicyConstraint
+from okta.models import access_policy_constraints as access_policy_constraints
+AccessPolicyConstraints = access_policy_constraints.AccessPolicyConstraints
+from okta.models import access_policy_rule as access_policy_rule
+AccessPolicyRule = access_policy_rule.AccessPolicyRule
+from okta.models import access_policy_rule_actions as access_policy_rule_actions
+AccessPolicyRuleActions = access_policy_rule_actions.AccessPolicyRuleActions
+from okta.models import access_policy_rule_application_sign_on as access_policy_rule_application_sign_on
+AccessPolicyRuleApplicationSignOn = access_policy_rule_application_sign_on.AccessPolicyRuleApplicationSignOn
+from okta.models import access_policy_rule_conditions as access_policy_rule_conditions
+AccessPolicyRuleConditions = access_policy_rule_conditions.AccessPolicyRuleConditions
+from okta.models import access_policy_rule_custom_condition as access_policy_rule_custom_condition
+AccessPolicyRuleCustomCondition = access_policy_rule_custom_condition.AccessPolicyRuleCustomCondition
 from okta.models import acs_endpoint as acs_endpoint
 AcsEndpoint = acs_endpoint.AcsEndpoint
 from okta.models import activate_factor_request as activate_factor_request
@@ -84,6 +100,12 @@ from okta.models import authentication_provider_type as authentication_provider_
 AuthenticationProviderType = authentication_provider_type.AuthenticationProviderType
 from okta.models import authenticator as authenticator
 Authenticator = authenticator.Authenticator
+from okta.models import authenticator_provider as authenticator_provider
+AuthenticatorProvider = authenticator_provider.AuthenticatorProvider
+from okta.models import authenticator_provider_configuration as authenticator_provider_configuration
+AuthenticatorProviderConfiguration = authenticator_provider_configuration.AuthenticatorProviderConfiguration
+from okta.models import authenticator_provider_configuration_user_name_plate as authenticator_provider_configuration_user_name_plate
+AuthenticatorProviderConfigurationUserNamePlate = authenticator_provider_configuration_user_name_plate.AuthenticatorProviderConfigurationUserNamePlate
 from okta.models import authenticator_settings as authenticator_settings
 AuthenticatorSettings = authenticator_settings.AuthenticatorSettings
 from okta.models import authenticator_status as authenticator_status
@@ -128,6 +150,8 @@ from okta.models import bookmark_application_settings as bookmark_application_se
 BookmarkApplicationSettings = bookmark_application_settings.BookmarkApplicationSettings
 from okta.models import bookmark_application_settings_application as bookmark_application_settings_application
 BookmarkApplicationSettingsApplication = bookmark_application_settings_application.BookmarkApplicationSettingsApplication
+from okta.models import brand as brand
+Brand = brand.Brand
 from okta.models import browser_plugin_application as browser_plugin_application
 BrowserPluginApplication = browser_plugin_application.BrowserPluginApplication
 from okta.models import call_user_factor as call_user_factor
@@ -140,8 +164,12 @@ from okta.models import catalog_application_status as catalog_application_status
 CatalogApplicationStatus = catalog_application_status.CatalogApplicationStatus
 from okta.models import change_password_request as change_password_request
 ChangePasswordRequest = change_password_request.ChangePasswordRequest
+from okta.models import channel_binding as channel_binding
+ChannelBinding = channel_binding.ChannelBinding
 from okta.models import client_policy_condition as client_policy_condition
 ClientPolicyCondition = client_policy_condition.ClientPolicyCondition
+from okta.models import compliance as compliance
+Compliance = compliance.Compliance
 from okta.models import context_policy_rule_condition as context_policy_rule_condition
 ContextPolicyRuleCondition = context_policy_rule_condition.ContextPolicyRuleCondition
 from okta.models import create_session_request as create_session_request
@@ -164,6 +192,8 @@ from okta.models import dns_record as dns_record
 DnsRecord = dns_record.DnsRecord
 from okta.models import dns_record_type as dns_record_type
 DnsRecordType = dns_record_type.DnsRecordType
+from okta.models import device_access_policy_rule_condition as device_access_policy_rule_condition
+DeviceAccessPolicyRuleCondition = device_access_policy_rule_condition.DeviceAccessPolicyRuleCondition
 from okta.models import device_policy_rule_condition as device_policy_rule_condition
 DevicePolicyRuleCondition = device_policy_rule_condition.DevicePolicyRuleCondition
 from okta.models import device_policy_rule_condition_platform as device_policy_rule_condition_platform
@@ -184,12 +214,18 @@ from okta.models import domain_validation_status as domain_validation_status
 DomainValidationStatus = domain_validation_status.DomainValidationStatus
 from okta.models import duration as duration
 Duration = duration.Duration
+from okta.models import email_template_touch_point_variant as email_template_touch_point_variant
+EmailTemplateTouchPointVariant = email_template_touch_point_variant.EmailTemplateTouchPointVariant
 from okta.models import email_user_factor as email_user_factor
 EmailUserFactor = email_user_factor.EmailUserFactor
 from okta.models import email_user_factor_profile as email_user_factor_profile
 EmailUserFactorProfile = email_user_factor_profile.EmailUserFactorProfile
 from okta.models import enabled_status as enabled_status
 EnabledStatus = enabled_status.EnabledStatus
+from okta.models import end_user_dashboard_touch_point_variant as end_user_dashboard_touch_point_variant
+EndUserDashboardTouchPointVariant = end_user_dashboard_touch_point_variant.EndUserDashboardTouchPointVariant
+from okta.models import error_page_touch_point_variant as error_page_touch_point_variant
+ErrorPageTouchPointVariant = error_page_touch_point_variant.ErrorPageTouchPointVariant
 from okta.models import event_hook as event_hook
 EventHook = event_hook.EventHook
 from okta.models import event_hook_channel as event_hook_channel
@@ -222,6 +258,8 @@ from okta.models import feature_stage_value as feature_stage_value
 FeatureStageValue = feature_stage_value.FeatureStageValue
 from okta.models import feature_type as feature_type
 FeatureType = feature_type.FeatureType
+from okta.models import fips_enum as fips_enum
+FipsEnum = fips_enum.FipsEnum
 from okta.models import forgot_password_response as forgot_password_response
 ForgotPasswordResponse = forgot_password_response.ForgotPasswordResponse
 from okta.models import grant_type_policy_rule_condition as grant_type_policy_rule_condition
@@ -286,6 +324,8 @@ from okta.models import identity_provider_policy as identity_provider_policy
 IdentityProviderPolicy = identity_provider_policy.IdentityProviderPolicy
 from okta.models import identity_provider_policy_rule_condition as identity_provider_policy_rule_condition
 IdentityProviderPolicyRuleCondition = identity_provider_policy_rule_condition.IdentityProviderPolicyRuleCondition
+from okta.models import image_upload_response as image_upload_response
+ImageUploadResponse = image_upload_response.ImageUploadResponse
 from okta.models import inactivity_policy_rule_condition as inactivity_policy_rule_condition
 InactivityPolicyRuleCondition = inactivity_policy_rule_condition.InactivityPolicyRuleCondition
 from okta.models import inline_hook as inline_hook
@@ -318,6 +358,8 @@ from okta.models import json_web_key as json_web_key
 JsonWebKey = json_web_key.JsonWebKey
 from okta.models import jwk_use as jwk_use
 JwkUse = jwk_use.JwkUse
+from okta.models import knowledge_constraint as knowledge_constraint
+KnowledgeConstraint = knowledge_constraint.KnowledgeConstraint
 from okta.models import lifecycle_expiration_policy_rule_condition as lifecycle_expiration_policy_rule_condition
 LifecycleExpirationPolicyRuleCondition = lifecycle_expiration_policy_rule_condition.LifecycleExpirationPolicyRuleCondition
 from okta.models import linked_object as linked_object
@@ -562,6 +604,22 @@ from okta.models import policy_type as policy_type
 PolicyType = policy_type.PolicyType
 from okta.models import policy_user_name_template as policy_user_name_template
 PolicyUserNameTemplate = policy_user_name_template.PolicyUserNameTemplate
+from okta.models import possession_constraint as possession_constraint
+PossessionConstraint = possession_constraint.PossessionConstraint
+from okta.models import pre_registration_inline_hook as pre_registration_inline_hook
+PreRegistrationInlineHook = pre_registration_inline_hook.PreRegistrationInlineHook
+from okta.models import profile_enrollment_policy as profile_enrollment_policy
+ProfileEnrollmentPolicy = profile_enrollment_policy.ProfileEnrollmentPolicy
+from okta.models import profile_enrollment_policy_rule as profile_enrollment_policy_rule
+ProfileEnrollmentPolicyRule = profile_enrollment_policy_rule.ProfileEnrollmentPolicyRule
+from okta.models import profile_enrollment_policy_rule_action as profile_enrollment_policy_rule_action
+ProfileEnrollmentPolicyRuleAction = profile_enrollment_policy_rule_action.ProfileEnrollmentPolicyRuleAction
+from okta.models import profile_enrollment_policy_rule_actions as profile_enrollment_policy_rule_actions
+ProfileEnrollmentPolicyRuleActions = profile_enrollment_policy_rule_actions.ProfileEnrollmentPolicyRuleActions
+from okta.models import profile_enrollment_policy_rule_activation_requirement as profile_enrollment_policy_rule_activation_requirement
+ProfileEnrollmentPolicyRuleActivationRequirement = profile_enrollment_policy_rule_activation_requirement.ProfileEnrollmentPolicyRuleActivationRequirement
+from okta.models import profile_enrollment_policy_rule_profile_attribute as profile_enrollment_policy_rule_profile_attribute
+ProfileEnrollmentPolicyRuleProfileAttribute = profile_enrollment_policy_rule_profile_attribute.ProfileEnrollmentPolicyRuleProfileAttribute
 from okta.models import profile_mapping as profile_mapping
 ProfileMapping = profile_mapping.ProfileMapping
 from okta.models import profile_mapping_property as profile_mapping_property
@@ -604,6 +662,8 @@ from okta.models import push_user_factor_profile as push_user_factor_profile
 PushUserFactorProfile = push_user_factor_profile.PushUserFactorProfile
 from okta.models import recovery_question_credential as recovery_question_credential
 RecoveryQuestionCredential = recovery_question_credential.RecoveryQuestionCredential
+from okta.models import required_enum as required_enum
+RequiredEnum = required_enum.RequiredEnum
 from okta.models import reset_password_token as reset_password_token
 ResetPasswordToken = reset_password_token.ResetPasswordToken
 from okta.models import response_links as response_links
@@ -658,6 +718,8 @@ from okta.models import session_identity_provider_type as session_identity_provi
 SessionIdentityProviderType = session_identity_provider_type.SessionIdentityProviderType
 from okta.models import session_status as session_status
 SessionStatus = session_status.SessionStatus
+from okta.models import sign_in_page_touch_point_variant as sign_in_page_touch_point_variant
+SignInPageTouchPointVariant = sign_in_page_touch_point_variant.SignInPageTouchPointVariant
 from okta.models import sign_on_inline_hook as sign_on_inline_hook
 SignOnInlineHook = sign_on_inline_hook.SignOnInlineHook
 from okta.models import single_logout as single_logout
@@ -690,6 +752,10 @@ from okta.models import swa_three_field_application_settings_application as swa_
 SwaThreeFieldApplicationSettingsApplication = swa_three_field_application_settings_application.SwaThreeFieldApplicationSettingsApplication
 from okta.models import temp_password as temp_password
 TempPassword = temp_password.TempPassword
+from okta.models import theme as theme
+Theme = theme.Theme
+from okta.models import theme_response as theme_response
+ThemeResponse = theme_response.ThemeResponse
 from okta.models import threat_insight_configuration as threat_insight_configuration
 ThreatInsightConfiguration = threat_insight_configuration.ThreatInsightConfiguration
 from okta.models import token_authorization_server_policy_rule_action as token_authorization_server_policy_rule_action
@@ -778,6 +844,12 @@ from okta.models import user_status_policy_rule_condition as user_status_policy_
 UserStatusPolicyRuleCondition = user_status_policy_rule_condition.UserStatusPolicyRuleCondition
 from okta.models import user_type as user_type
 UserType = user_type.UserType
+from okta.models import user_type_condition as user_type_condition
+UserTypeCondition = user_type_condition.UserTypeCondition
+from okta.models import user_verification_enum as user_verification_enum
+UserVerificationEnum = user_verification_enum.UserVerificationEnum
+from okta.models import verification_method as verification_method
+VerificationMethod = verification_method.VerificationMethod
 from okta.models import verify_factor_request as verify_factor_request
 VerifyFactorRequest = verify_factor_request.VerifyFactorRequest
 from okta.models import verify_user_factor_response as verify_user_factor_response

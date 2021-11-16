@@ -35,3 +35,4 @@ class AuthenticatorType(
     PHONE = "phone", "PHONE"
     EMAIL = "email", "EMAIL"
     SECURITY_KEY = "security_key", "SECURITY_KEY"
+    FEDERATED = "federated", "FEDERATED"

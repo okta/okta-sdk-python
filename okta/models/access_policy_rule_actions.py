@@ -18,29 +18,41 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.models.org_contact_user\
-    import OrgContactUser
+from okta.models.policy_rule_actions\
+    import PolicyRuleActions
+from okta.models import access_policy_rule_application_sign_on\
+    as access_policy_rule_application_sign_on
 
 
-class UserIdString(
-    OrgContactUser
+class AccessPolicyRuleActions(
+    PolicyRuleActions
 ):
     """
-    A class for UserIdString objects.
+    A class for AccessPolicyRuleActions objects.
     """
 
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.user_id = config["userId"]\
-                if "userId" in config else None
+            if "appSignOn" in config:
+                if isinstance(config["appSignOn"],
+                              access_policy_rule_application_sign_on.AccessPolicyRuleApplicationSignOn):
+                    self.app_sign_on = config["appSignOn"]
+                elif config["appSignOn"] is not None:
+                    self.app_sign_on = access_policy_rule_application_sign_on.AccessPolicyRuleApplicationSignOn(
+                        config["appSignOn"]
+                    )
+                else:
+                    self.app_sign_on = None
+            else:
+                self.app_sign_on = None
         else:
-            self.user_id = None
+            self.app_sign_on = None
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
-            "userId": self.user_id
+            "appSignOn": self.app_sign_on
         }
         parent_req_format.update(current_obj_format)
         return parent_req_format

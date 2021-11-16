@@ -18,29 +18,25 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.models.org_contact_user\
-    import OrgContactUser
+from okta.models.policy\
+    import Policy
+from okta.models.policy_type import PolicyType
 
 
-class UserIdString(
-    OrgContactUser
+class AccessPolicy(
+    Policy
 ):
     """
-    A class for UserIdString objects.
+    A class for AccessPolicy objects.
     """
 
     def __init__(self, config=None):
         super().__init__(config)
-        if config:
-            self.user_id = config["userId"]\
-                if "userId" in config else None
-        else:
-            self.user_id = None
+        pass
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
-            "userId": self.user_id
         }
         parent_req_format.update(current_obj_format)
         return parent_req_format

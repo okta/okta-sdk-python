@@ -21,6 +21,12 @@ limitations under the License.
 from okta.okta_object import OktaObject
 from okta.models import allowed_for_enum\
     as allowed_for_enum
+from okta.models import channel_binding\
+    as channel_binding
+from okta.models import compliance\
+    as compliance
+from okta.models import user_verification_enum\
+    as user_verification_enum
 
 
 class AuthenticatorSettings(
@@ -45,17 +51,63 @@ class AuthenticatorSettings(
                     self.allowed_for = None
             else:
                 self.allowed_for = None
+            self.app_instance_id = config["appInstanceId"]\
+                if "appInstanceId" in config else None
+            if "channelBinding" in config:
+                if isinstance(config["channelBinding"],
+                              channel_binding.ChannelBinding):
+                    self.channel_binding = config["channelBinding"]
+                elif config["channelBinding"] is not None:
+                    self.channel_binding = channel_binding.ChannelBinding(
+                        config["channelBinding"]
+                    )
+                else:
+                    self.channel_binding = None
+            else:
+                self.channel_binding = None
+            if "compliance" in config:
+                if isinstance(config["compliance"],
+                              compliance.Compliance):
+                    self.compliance = config["compliance"]
+                elif config["compliance"] is not None:
+                    self.compliance = compliance.Compliance(
+                        config["compliance"]
+                    )
+                else:
+                    self.compliance = None
+            else:
+                self.compliance = None
             self.token_lifetime_in_minutes = config["tokenLifetimeInMinutes"]\
                 if "tokenLifetimeInMinutes" in config else None
+            if "userVerification" in config:
+                if isinstance(config["userVerification"],
+                              user_verification_enum.UserVerificationEnum):
+                    self.user_verification = config["userVerification"]
+                elif config["userVerification"] is not None:
+                    self.user_verification = user_verification_enum.UserVerificationEnum(
+                        config["userVerification"].upper()
+                    )
+                else:
+                    self.user_verification = None
+            else:
+                self.user_verification = None
         else:
             self.allowed_for = None
+            self.app_instance_id = None
+            self.channel_binding = None
+            self.compliance = None
             self.token_lifetime_in_minutes = None
+            self.user_verification = None
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
             "allowedFor": self.allowed_for,
-            "tokenLifetimeInMinutes": self.token_lifetime_in_minutes
+            "appInstanceId": self.app_instance_id,
+            "channelBinding": self.channel_binding,
+            "compliance": self.compliance,
+            "tokenLifetimeInMinutes": self.token_lifetime_in_minutes,
+            "userVerification": self.user_verification
         }
         parent_req_format.update(current_obj_format)
         return parent_req_format

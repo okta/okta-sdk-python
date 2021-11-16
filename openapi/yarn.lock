@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@okta/openapi@^2.7.0":
-  "integrity" "sha512-iZNkyWvwSUsY5DjG5OqnvP7DpKPfoVOtd9/OitBZB8Ta0fM6RnN2BlSMSW10V6uuODxQ/IWPwGYttar09L8P9Q=="
-  "resolved" "https://registry.npmjs.org/@okta/openapi/-/openapi-2.7.0.tgz"
-  "version" "2.7.0"
+"@okta/openapi@^2.9.1":
+  "integrity" "sha512-hib3lKNFxQ+oS8ZR+eDTjSwUlGNBYMAKhcmefN3oOJJGyId+iP88r8n9VlydxZe22A0sGu9XYmWX/thG8iTv7g=="
+  "resolved" "https://registry.npmjs.org/@okta/openapi/-/openapi-2.9.1.tgz"
+  "version" "2.9.1"
   dependencies:
     "commander" "2.9.0"
     "fs-extra" "3.0.1"
@@ -21,9 +21,9 @@
   "version" "1.1.1"
 
 "ansi-regex@^5.0.0":
-  "integrity" "sha512-bY6fj56OUQ0hU1KjFNDQuJFezqKdrAyFdIevADiqrWHwSlbmBNMHp5ak2f40Pm8JTFyM2mqxkG6ngkHO11f/lg=="
-  "resolved" "https://registry.npmjs.org/ansi-regex/-/ansi-regex-5.0.0.tgz"
-  "version" "5.0.0"
+  "integrity" "sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ=="
+  "resolved" "https://registry.npmjs.org/ansi-regex/-/ansi-regex-5.0.1.tgz"
+  "version" "5.0.1"
 
 "ansi-styles@^4.0.0", "ansi-styles@^4.1.0":
   "integrity" "sha512-9VGjrMsG1vePxcSweQsN20KY/c4zN0h9fLjqAbwbPfahM3t+NL+M9HC8xeXG2I8pX5NoamTGNuomEUFI7fcUjA=="
@@ -141,7 +141,6 @@
     "minimist" "^1.2.5"
     "neo-async" "^2.6.0"
     "source-map" "^0.6.1"
-    "uglify-js" "^3.1.4"
     "wordwrap" "^1.0.0"
   optionalDependencies:
     "uglify-js" "^3.1.4"
@@ -184,8 +183,6 @@
   "integrity" "sha1-pezG9l9T9mLEQVx2daAzHQmS7GY="
   "resolved" "https://registry.npmjs.org/jsonfile/-/jsonfile-3.0.1.tgz"
   "version" "3.0.1"
-  dependencies:
-    "graceful-fs" "^4.1.6"
   optionalDependencies:
     "graceful-fs" "^4.1.6"
 
@@ -364,10 +361,10 @@
   "resolved" "https://registry.npmjs.org/universalify/-/universalify-0.1.2.tgz"
   "version" "0.1.2"
 
-"validator@^12.0.0":
-  "integrity" "sha512-jJfE/DW6tIK1Ek8nCfNFqt8Wb3nzMoAbocBF6/Icgg1ZFSBpObdnwVY2jQj6qUqzhx5jc71fpvBWyLGO7Xl+nQ=="
-  "resolved" "https://registry.npmjs.org/validator/-/validator-12.2.0.tgz"
-  "version" "12.2.0"
+"validator@^13.6.0":
+  "integrity" "sha512-nYXQLCBkpJ8X6ltALua9dRrZDHVYxjJ1wgskNt1lH9fzGjs3tgojGSCBjmEPwkWS1y29+DrizMTW19Pr9uB2nw=="
+  "resolved" "https://registry.npmjs.org/validator/-/validator-13.7.0.tgz"
+  "version" "13.7.0"
 
 "which-module@^2.0.0":
   "integrity" "sha1-2e8H3Od7mQK4o6j6SzHD4/fm6Ho="
@@ -419,13 +416,12 @@
     "yargs-parser" "^18.1.1"
 
 "z-schema@^4.2.2":
-  "integrity" "sha512-zkvK/9TC6p38IwcrbnT3ul9in1UX4cm1y/VZSs4GHKIiDCrlafc+YQBgQBUdDXLAoZHf2qvQ7gJJOo6yT1LH6A=="
-  "resolved" "https://registry.npmjs.org/z-schema/-/z-schema-4.2.3.tgz"
-  "version" "4.2.3"
+  "integrity" "sha512-YvBeW5RGNeNzKOUJs3rTL4+9rpcvHXt5I051FJbOcitV8bl40pEfcG0Q+dWSwS0/BIYrMZ/9HHoqLllMkFhD0w=="
+  "resolved" "https://registry.npmjs.org/z-schema/-/z-schema-4.2.4.tgz"
+  "version" "4.2.4"
   dependencies:
-    "commander" "^2.7.1"
     "lodash.get" "^4.4.2"
     "lodash.isequal" "^4.5.0"
-    "validator" "^12.0.0"
+    "validator" "^13.6.0"
   optionalDependencies:
     "commander" "^2.7.1"

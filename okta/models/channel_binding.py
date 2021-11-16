@@ -18,29 +18,44 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.models.org_contact_user\
-    import OrgContactUser
+from okta.okta_object import OktaObject
+from okta.models import required_enum\
+    as required_enum
 
 
-class UserIdString(
-    OrgContactUser
+class ChannelBinding(
+    OktaObject
 ):
     """
-    A class for UserIdString objects.
+    A class for ChannelBinding objects.
     """
 
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.user_id = config["userId"]\
-                if "userId" in config else None
+            if "required" in config:
+                if isinstance(config["required"],
+                              required_enum.RequiredEnum):
+                    self.required = config["required"]
+                elif config["required"] is not None:
+                    self.required = required_enum.RequiredEnum(
+                        config["required"].upper()
+                    )
+                else:
+                    self.required = None
+            else:
+                self.required = None
+            self.style = config["style"]\
+                if "style" in config else None
         else:
-            self.user_id = None
+            self.required = None
+            self.style = None
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
-            "userId": self.user_id
+            "required": self.required,
+            "style": self.style
         }
         parent_req_format.update(current_obj_format)
         return parent_req_format

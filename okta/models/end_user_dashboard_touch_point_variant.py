@@ -18,29 +18,18 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.models.org_contact_user\
-    import OrgContactUser
+from aenum import MultiValueEnum
 
 
-class UserIdString(
-    OrgContactUser
+class EndUserDashboardTouchPointVariant(
+    str,
+    MultiValueEnum
 ):
     """
-    A class for UserIdString objects.
+    An enumeration class for EndUserDashboardTouchPointVariant.
     """
 
-    def __init__(self, config=None):
-        super().__init__(config)
-        if config:
-            self.user_id = config["userId"]\
-                if "userId" in config else None
-        else:
-            self.user_id = None
-
-    def request_format(self):
-        parent_req_format = super().request_format()
-        current_obj_format = {
-            "userId": self.user_id
-        }
-        parent_req_format.update(current_obj_format)
-        return parent_req_format
+    OKTA_DEFAULT = "OKTA_DEFAULT", "okta_default"
+    WHITE_LOGO_BACKGROUND = "WHITE_LOGO_BACKGROUND", "white_logo_background"
+    FULL_THEME = "FULL_THEME", "full_theme"
+    LOGO_ON_FULL_WHITE_BACKGROUND = "LOGO_ON_FULL_WHITE_BACKGROUND", "logo_on_full_white_background"

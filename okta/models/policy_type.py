@@ -33,3 +33,5 @@ class PolicyType(
     OKTA_SIGN_ON = "OKTA_SIGN_ON", "okta_sign_on"
     PASSWORD = "PASSWORD", "password"
     IDP_DISCOVERY = "IDP_DISCOVERY", "idp_discovery"
+    PROFILE_ENROLLMENT = "PROFILE_ENROLLMENT", "profile_enrollment"
+    ACCESS_POLICY = "ACCESS_POLICY", "access_policy"

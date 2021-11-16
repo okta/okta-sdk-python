@@ -1288,14 +1288,13 @@ class UserClient(APIClient):
             keep_empty_params=False
     ):
         """
-        Deactivates a user.  This operation can only be perform
-        ed on users that do not have a `DEPROVISIONED` status.
-        Deactivation of a user is an asynchronous operation.
-        The user will have the `transitioningToStatus` property
-        with a value of `DEPROVISIONED` during deactivation to
-        indicate that the user hasn't completed the asynchrono
-        us operation.  The user will have a status of `DEPROVIS
-        IONED` when the deactivation process is complete.
+        Deactivates a user. This operation can only be performe
+        d on users that do not have a `DEPROVISIONED` status. W
+        hile the asynchronous operation (triggered by HTTP head
+        er `Prefer: respond-async`) is proceeding the user's `t
+        ransitioningToStatus` property is `DEPROVISIONED`. The
+        user's status is `DEPROVISIONED` when the deactivation
+        process is complete.
         Args:
             user_id {str}
             query_params {dict}: Map of query parameters for request

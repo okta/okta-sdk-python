@@ -18,29 +18,28 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.models.org_contact_user\
-    import OrgContactUser
+from okta.okta_object import OktaObject
 
 
-class UserIdString(
-    OrgContactUser
+class AuthenticatorProviderConfigurationUserNamePlate(
+    OktaObject
 ):
     """
-    A class for UserIdString objects.
+    A class for AuthenticatorProviderConfigurationUserNamePlate objects.
     """
 
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.user_id = config["userId"]\
-                if "userId" in config else None
+            self.template = config["template"]\
+                if "template" in config else None
         else:
-            self.user_id = None
+            self.template = None
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
-            "userId": self.user_id
+            "template": self.template
         }
         parent_req_format.update(current_obj_format)
         return parent_req_format

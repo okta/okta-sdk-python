@@ -1,6 +1,6 @@
 # flake8: noqa
 """
-Copyright 2020 - Present Okta, Inc.
+Copyright 2021 - Present Okta, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -19,38 +19,42 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models import authenticator_provider_configuration\
+    as authenticator_provider_configuration
 
 
-class ApplicationCredentialsUsernameTemplate(
+class AuthenticatorProvider(
     OktaObject
 ):
     """
-    A class for ApplicationCredentialsUsernameTemplate objects.
+    A class for AuthenticatorProvider objects.
     """
 
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.push_status = config["pushStatus"]\
-                if "pushStatus" in config else None
-            self.suffix = config["suffix"]\
-                if "suffix" in config else None
-            self.template = config["template"]\
-                if "template" in config else None
+            if "configuration" in config:
+                if isinstance(config["configuration"],
+                              authenticator_provider_configuration.AuthenticatorProviderConfiguration):
+                    self.configuration = config["configuration"]
+                elif config["configuration"] is not None:
+                    self.configuration = authenticator_provider_configuration.AuthenticatorProviderConfiguration(
+                        config["configuration"]
+                    )
+                else:
+                    self.configuration = None
+            else:
+                self.configuration = None
             self.type = config["type"]\
                 if "type" in config else None
         else:
-            self.push_status = None
-            self.suffix = None
-            self.template = None
+            self.configuration = None
             self.type = None
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
-            "pushStatus": self.push_status,
-            "suffix": self.suffix,
-            "template": self.template,
+            "configuration": self.configuration,
             "type": self.type
         }
         parent_req_format.update(current_obj_format)

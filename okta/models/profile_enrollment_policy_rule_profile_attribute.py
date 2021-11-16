@@ -18,29 +18,36 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.models.org_contact_user\
-    import OrgContactUser
+from okta.okta_object import OktaObject
 
 
-class UserIdString(
-    OrgContactUser
+class ProfileEnrollmentPolicyRuleProfileAttribute(
+    OktaObject
 ):
     """
-    A class for UserIdString objects.
+    A class for ProfileEnrollmentPolicyRuleProfileAttribute objects.
     """
 
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.user_id = config["userId"]\
-                if "userId" in config else None
+            self.label = config["label"]\
+                if "label" in config else None
+            self.name = config["name"]\
+                if "name" in config else None
+            self.required = config["required"]\
+                if "required" in config else None
         else:
-            self.user_id = None
+            self.label = None
+            self.name = None
+            self.required = None
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
-            "userId": self.user_id
+            "label": self.label,
+            "name": self.name,
+            "required": self.required
         }
         parent_req_format.update(current_obj_format)
         return parent_req_format
