@@ -18,11 +18,12 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
+from okta.models.org_contact_user\
+    import OrgContactUser
 
 
 class UserIdString(
-    OktaObject
+    OrgContactUser
 ):
     """
     A class for UserIdString objects.

@@ -1017,6 +1017,28 @@ Each one of the configuration values above can be turned into an environment var
 - `OKTA_CLIENT_RATELIMIT_MAXRETRIES`
 - `OKTA_TESTING_TESTINGDISABLEHTTPSCHECK`
 
+### Other configuration options
+
+Starting with SDK v2.3.0 you can provide custom SSL context:
+
+```py
+import asyncio
+import ssl
+
+from okta.client import Client as OktaClient
+
+
+async def main():
+    # create default context for demo purpose
+    ssl_context = ssl.create_default_context()
+    client = OktaClient({"sslContext": ssl_context})
+    users, resp, err = await client.list_users()
+    print(users)
+
+loop = asyncio.get_event_loop()
+loop.run_until_complete(main())
+```
+
 ## Rate Limiting
 
 The Okta API will return 429 responses if too many requests are made within a given time. Please see [Rate Limiting at Okta][rate-limiting-okta] for a complete list of which endpoints are rate limited. When a 429 error is received, the X-Rate-Limit-Reset header will tell you the time at which you can retry. This section discusses the method for handling rate limiting with this SDK.

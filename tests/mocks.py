@@ -1,3 +1,5 @@
+from urllib.parse import urlsplit, parse_qsl, urlencode, urlunsplit
+
 from okta.user_agent import UserAgent
 from okta.constants import DATETIME_FORMAT
 from okta.client import Client
@@ -18,6 +20,7 @@ CLIENT_ID = "yourClientId"
 SCOPES = ["okta.scope.1", "okta.scope.2"]
 PRIVATE_KEY = "yourPrivateKey"
 GET_USERS_CALL = "/api/v1/users"
+GET_OAUTH_CLIENTS_CALL = "/oauth2/v1/clients"
 CLIENT_CONFIG = {'orgUrl': ORG_URL, 'token': API_TOKEN}
 
 # Cache Test Details
@@ -162,11 +165,12 @@ async def mock_GET_HTTP_Client_response_valid(*args, **kwargs):
     return (request, response_details, response_body, error)
 
 
-async def mock_GET_HTTP_Client_response_valid_with_next(*args, **kwargs):
-    request = await mock_GET_HTTP_request()
+async def mock_GET_HTTP_Client_response_valid_with_next(request_executor, request):
+    next_link = mock_next_link(URL(request.get('url')))
+
     response_details = MockHTTPResponseDetails()
     response_details.links = {
-        "next": {"url": URL("https://www.next.okta.com")}
+        "next": {"url": next_link}
     }
     response_body = '[{"ID": "user.id.1"}, {"ID": "user.id.2"}]'
     error = None
@@ -238,6 +242,9 @@ def mock_cache_return_none(*args, **kwargs):
 
 def mock_cache_return_value(*args, **kwargs):
     return CACHE_VALUE
+
+def mock_next_link(self_url: URL):
+    return self_url.update_query({'after': 'mock_after_id'})
 
 
 SAMPLE_RSA = '''-----BEGIN RSA PRIVATE KEY-----

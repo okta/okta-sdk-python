@@ -10,6 +10,8 @@ CLIENT_ID = mocks.CLIENT_ID
 SCOPES = mocks.SCOPES
 PRIVATE_KEY = mocks.PRIVATE_KEY
 GET_USERS_CALL = mocks.GET_USERS_CALL
+GET_OAUTH_CLIENTS_CALL = mocks.GET_OAUTH_CLIENTS_CALL
+CLIENT_CONFIG = mocks.CLIENT_CONFIG
 API_LIMIT = "?limit=1"
 
 
@@ -33,6 +35,33 @@ async def test_response_pagination_with_next(monkeypatch):
 
     assert result.get_body() is not None
     assert result.has_next()
+    assert result._next.startswith(GET_USERS_CALL)
+    monkeypatch.setattr(RequestExecutor, 'fire_request',
+                        mocks.mock_GET_HTTP_Client_response_valid)
+    assert await result.next() is not None
+    assert not result.has_next()
+    with pytest.raises(StopAsyncIteration):
+        await result.next()
+
+
+@ pytest.mark.asyncio
+async def test_response_pagination_with_next_not_starting_with_api(monkeypatch):
+    ssws_client = Client(CLIENT_CONFIG)
+
+    req, error = await ssws_client.get_request_executor() \
+        .create_request("GET",
+                        GET_OAUTH_CLIENTS_CALL + API_LIMIT,
+                        {},
+                        {})
+
+    monkeypatch.setattr(RequestExecutor, 'fire_request',
+                        mocks.mock_GET_HTTP_Client_response_valid_with_next)
+
+    result, error = await ssws_client.get_request_executor().execute(req)
+
+    assert result.get_body() is not None
+    assert result.has_next()
+    assert result._next.startswith(GET_OAUTH_CLIENTS_CALL)
     monkeypatch.setattr(RequestExecutor, 'fire_request',
                         mocks.mock_GET_HTTP_Client_response_valid)
     assert await result.next() is not None

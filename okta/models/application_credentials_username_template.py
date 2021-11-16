@@ -31,6 +31,8 @@ class ApplicationCredentialsUsernameTemplate(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
+            self.push_status = config["pushStatus"]\
+                if "pushStatus" in config else None
             self.suffix = config["suffix"]\
                 if "suffix" in config else None
             self.template = config["template"]\
@@ -38,6 +40,7 @@ class ApplicationCredentialsUsernameTemplate(
             self.type = config["type"]\
                 if "type" in config else None
         else:
+            self.push_status = None
             self.suffix = None
             self.template = None
             self.type = None
@@ -45,6 +48,7 @@ class ApplicationCredentialsUsernameTemplate(
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
+            "pushStatus": self.push_status,
             "suffix": self.suffix,
             "template": self.template,
             "type": self.type

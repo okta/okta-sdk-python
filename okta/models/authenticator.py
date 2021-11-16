@@ -19,6 +19,8 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.models import authenticator_provider\
+    as authenticator_provider
 from okta.models import authenticator_settings\
     as authenticator_settings
 from okta.models import authenticator_status\
@@ -49,6 +51,18 @@ class Authenticator(
                 if "lastUpdated" in config else None
             self.name = config["name"]\
                 if "name" in config else None
+            if "provider" in config:
+                if isinstance(config["provider"],
+                              authenticator_provider.AuthenticatorProvider):
+                    self.provider = config["provider"]
+                elif config["provider"] is not None:
+                    self.provider = authenticator_provider.AuthenticatorProvider(
+                        config["provider"]
+                    )
+                else:
+                    self.provider = None
+            else:
+                self.provider = None
             if "settings" in config:
                 if isinstance(config["settings"],
                               authenticator_settings.AuthenticatorSettings):
@@ -92,6 +106,7 @@ class Authenticator(
             self.key = None
             self.last_updated = None
             self.name = None
+            self.provider = None
             self.settings = None
             self.status = None
             self.type = None
@@ -105,6 +120,7 @@ class Authenticator(
             "key": self.key,
             "lastUpdated": self.last_updated,
             "name": self.name,
+            "provider": self.provider,
             "settings": self.settings,
             "status": self.status,
             "type": self.type
