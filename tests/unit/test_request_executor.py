@@ -63,7 +63,7 @@ def test_retry_count_header(monkeypatch):
                    '"type": null}]'
 
     mock_http_request = MockHTTPRequest()
-    monkeypatch.setattr(aiohttp, 'request', mock_http_request)
+    monkeypatch.setattr(aiohttp.ClientSession, 'request', mock_http_request)
     res, resp_body, error = asyncio.run(client.list_users())
     # Check request was retried max times and header 'X-Okta-Retry-Count' was set properly
     assert mock_http_request.request_info['headers'].get('X-Okta-Retry-Count') == '2'

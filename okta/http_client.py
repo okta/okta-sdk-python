@@ -31,6 +31,10 @@ class HTTPClient:
             self._proxy = self._setup_proxy(http_config["proxy"])
         else:
             self._proxy = None
+        if "sslContext" in http_config:
+            self._ssl_context = http_config["sslContext"]
+        else:
+            self._ssl_context = None
 
     async def send_request(self, request):
         """
@@ -68,12 +72,15 @@ class HTTPClient:
                 params['timeout'] = self._timeout
             if self._proxy:
                 params['proxy'] = self._proxy
+            if self._ssl_context:
+                params['ssl_context'] = self._ssl_context
             # Fire request
-            async with aiohttp.request(**params) as response:
-                return (response.request_info,
-                        response,
-                        await response.text(),
-                        None)
+            async with aiohttp.ClientSession() as session:
+                async with session.request(**params) as response:
+                    return (response.request_info,
+                            response,
+                            await response.text(),
+                            None)
         except (aiohttp.ClientError, asyncio.TimeoutError) as error:
             # Return error if arises
             logger.exception(error)

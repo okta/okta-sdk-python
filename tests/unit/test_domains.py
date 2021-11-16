@@ -181,7 +181,7 @@ class TestDomainResource:
                 return GET_DOMAIN_RESP
 
         mock_http_request = MockHTTPRequest()
-        monkeypatch.setattr(aiohttp, 'request', mock_http_request)
+        monkeypatch.setattr(aiohttp.ClientSession, 'request', mock_http_request)
 
         domain_resp, _, err = asyncio.run(client.get_domain('OcDz6iRyjkaCTXkdo0g3'))
         assert err is None
@@ -234,7 +234,7 @@ class TestDomainResource:
                 return MockHTTPRequest._mocked_response
 
         mock_http_request = MockHTTPRequest()
-        monkeypatch.setattr(aiohttp, 'request', mock_http_request)
+        monkeypatch.setattr(aiohttp.ClientSession, 'request', mock_http_request)
 
         domain_config = {
             "domain": "login.example.com",
