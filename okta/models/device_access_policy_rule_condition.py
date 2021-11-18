@@ -1,6 +1,6 @@
 # flake8: noqa
 """
-Copyright 2021 - Present Okta, Inc.
+Copyright 2020 - Present Okta, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -18,11 +18,12 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
+from okta.models.device_policy_rule_condition\
+    import DevicePolicyRuleCondition
 
 
 class DeviceAccessPolicyRuleCondition(
-    OktaObject
+    DevicePolicyRuleCondition
 ):
     """
     A class for DeviceAccessPolicyRuleCondition objects.
