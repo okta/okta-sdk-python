@@ -1,5 +1,9 @@
 # Okta Python SDK Changelog
 
+## v2.3.1
+- Regenerate code using the [open API spec v2.9.2](https://github.com/okta/okta-management-openapi-spec/releases/tag/openapi-2.9.2).
+- Make DevicePolicyRuleCondition model parent for DeviceAccessPolicyRuleCondition
+
 ## v2.3.0
 - Regenerate code using the [open API spec v2.9.1](https://github.com/okta/okta-management-openapi-spec/releases/tag/openapi-2.9.1).
 - Allow next for all requests
