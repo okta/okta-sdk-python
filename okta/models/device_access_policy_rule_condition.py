@@ -18,11 +18,12 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
+from okta.models.device_policy_rule_condition\
+    import DevicePolicyRuleCondition
 
 
 class DeviceAccessPolicyRuleCondition(
-    OktaObject
+    DevicePolicyRuleCondition
 ):
     """
     A class for DeviceAccessPolicyRuleCondition objects.
