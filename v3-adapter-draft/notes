@@ -1,0 +1,23 @@
+Dependency graph
+
+Swagger:
+
+Api -> ApiClient -> RestClient
+
+Okta:
+
+Resource Client -> RequestExecutor -> HttpClient
+
+--------
+Adapter:
+
+Api -> ApiClientAdapter -> HttpClient
+or
+Api -> ApiClientAdapter -> RequestExecutor -> HttpClient
+or
+Api -> ApiClientAdapter(RequestExecutor) -> HttpClient
+(ApiClientAdapter and RequestExecutor are the same object)
+
+RequestExecutor is being used for pagination
+
+Need to substitute models, resource clients, use ApiClientAdapter as entry point

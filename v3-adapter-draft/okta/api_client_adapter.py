@@ -1,0 +1,432 @@
+import datetime
+import json
+import re
+# python 2 and python 3 compatibility library
+import six
+from six.moves.urllib.parse import quote, urlencode
+
+import okta.models as okta_models
+from .api_response import OktaAPIResponse
+from .exceptions import OktaAPIException
+from .http_client import HTTPClient
+from .request_executor import RequestExecutor
+from .user_agent import UserAgent
+from swagger_client import ApiClient
+
+
+class ApiClientAdapter(ApiClient):
+    """Api Client Adapter to fit okta-sdk-python interface"""
+
+    def __init__(self, configuration=None, header_name=None, header_value=None,
+                 cookie=None, cache=None, http_client=None):
+        """
+        # TODO: add configuration for storing files if any (look at swagger api_client)
+        if configuration is None:
+            configuration = Configuration()
+        self.configuration = configuration
+        """
+        # From RequestExecutor:
+        # Raise Value Error if numerical inputs are invalid (< 0)
+        self._request_timeout = configuration["client"].get('requestTimeout', 0)
+        if self._request_timeout < 0:
+            raise ValueError(
+                ("okta.client.requestTimeout provided as "
+                 f"{self._request_timeout} but must be 0 (disabled) or "
+                 "greater than zero"))
+        self._max_retries = configuration["client"]["rateLimit"].get('maxRetries', 2)
+        if self._max_retries < 0:
+            raise ValueError(
+                ("okta.client.rateLimit.maxRetries provided as "
+                 f"{self._max_retries} but must be 0 (disabled) or "
+                 "greater than zero"))
+        # Setup other fields
+        self._authorization_mode = configuration["client"]["authorizationMode"]
+        self._base_url = configuration["client"]["orgUrl"]
+        self._config = configuration
+        self._cache = cache
+        self._default_headers = {
+            'User-Agent': UserAgent(configuration["client"].get("userAgent", None))
+            .get_user_agent_string(),
+            'Accept': "application/json"
+        }
+
+        # SSWS or Bearer header
+        token_type = configuration["client"]["authorizationMode"]
+        if token_type in ("SSWS", "Bearer"):
+            self._default_headers['Authorization'] = (
+                f"{token_type} {self._config['client']['token']}"
+            )
+        else:
+            # OAuth
+            self._oauth = OAuth(self, self._config)
+
+        http_client_impl = http_client or HTTPClient
+        self.rest_client = http_client_impl({
+            'requestTimeout': self._request_timeout,
+            'headers': self._default_headers,
+            'proxy': self._config["client"].get("proxy"),
+            'sslContext': self._config["client"].get("sslContext")
+        })
+        HTTPClient.raise_exception = \
+            self._config['client'].get("raiseException", False)
+        self._custom_headers = {}
+
+        #self.rest_client = HTTPClient(http_config)
+        #self.rest_client = request_executor or RequestExecutor(configuration)
+
+        #self.default_headers = {}
+        if header_name is not None:
+            self._default_headers[header_name] = header_value
+        self.cookie = cookie
+        # Set default User-Agent.
+        #self.user_agent = 'Swagger-Codegen/1.0.0/python'
+        #self.user_agent = 'okta-sdk-python/3.0.0'
+
+    def __del__(self):
+        pass
+
+    async def create_request(self, method, url, query_params=None, headers=None,
+                             body=None, post_params=None, _preload_content=True,
+                             _request_timeout=None):
+        """Create the HTTP request."""
+        method = method.upper()
+
+        if post_params and body:
+            raise ValueError(
+                "body parameter cannot be used with post_params parameter."
+            )
+
+        post_params = post_params or {}
+        headers = headers or {}
+        headers.update(self._custom_headers)
+        headers.update(self._default_headers)
+        timeout = _request_timeout or 5 * 60
+
+        if 'Content-Type' not in headers:
+            headers['Content-Type'] = 'application/json'
+
+        args = {
+            "method": method,
+            "url": url,
+            "timeout": timeout,
+            "headers": headers
+        }
+
+        if query_params:
+            args["url"] += '?' + urlencode(query_params)
+
+        if method in ['POST', 'PUT', 'PATCH', 'OPTIONS', 'DELETE']:
+            if re.search('json', headers['Content-Type'], re.IGNORECASE):
+                if body is not None:
+                    body = json.dumps(body)
+                args["data"] = body
+            elif headers['Content-Type'] == 'application/x-www-form-urlencoded':  # noqa: E501
+                args["data"] = aiohttp.FormData(post_params)
+            elif headers['Content-Type'] == 'multipart/form-data':
+                # must del headers['Content-Type'], or the correct
+                # Content-Type which generated by aiohttp
+                del headers['Content-Type']
+                data = aiohttp.FormData()
+                for param in post_params:
+                    k, v = param
+                    if isinstance(v, tuple) and len(v) == 3:
+                        data.add_field(k,
+                                       value=v[1],
+                                       filename=v[0],
+                                       content_type=v[2])
+                    else:
+                        data.add_field(k, v)
+                args["data"] = data
+
+            # Pass a `bytes` parameter directly in the body to support
+            # other content types than Json when `body` argument is provided
+            # in serialized form
+            elif isinstance(body, bytes):
+                args["data"] = body
+            else:
+                # Cannot generate the request from given parameters
+                msg = """Cannot prepare a request message for provided
+                         arguments. Please check that your arguments match
+                         declared content type."""
+                raise OktaApiException(msg)
+
+        # OAuth
+        if self._authorization_mode == "PrivateKey" and not oauth:
+            # check if access token exists
+            if self._cache.contains("OKTA_ACCESS_TOKEN"):
+                access_token = self._cache.get("OKTA_ACCESS_TOKEN")
+            else:
+                # if not, make one
+                # Generate using private key provided
+                access_token, error = await self._oauth.get_access_token()
+                # return error if problem retrieving token
+                if error:
+                    return (None, error)
+
+            # finally, add to header and cache
+            headers.update({"Authorization": f"Bearer {access_token}"})
+            self._cache.add("OKTA_ACCESS_TOKEN", access_token)
+
+        return args
+
+    async def execute(self, request):
+        return await self.rest_client.send_request(request)
+
+    async def request(self, method, url, query_params=None, headers=None,
+                      body=None, post_params=None, _preload_content=True,
+                      _request_timeout=None):
+        """Makes the HTTP request using RESTClient."""
+        method = method.upper()
+
+        if post_params and body:
+            raise ValueError(
+                "body parameter cannot be used with post_params parameter."
+            )
+
+        post_params = post_params or {}
+        headers = headers or {}
+        headers.update(self._custom_headers)
+        headers.update(self._default_headers)
+        timeout = _request_timeout or 5 * 60
+
+        if 'Content-Type' not in headers:
+            headers['Content-Type'] = 'application/json'
+
+        args = {
+            "method": method,
+            "url": url,
+            "timeout": timeout,
+            "headers": headers
+        }
+
+        if query_params:
+            args["url"] += '?' + urlencode(query_params)
+
+        if method in ['POST', 'PUT', 'PATCH', 'OPTIONS', 'DELETE']:
+            if re.search('json', headers['Content-Type'], re.IGNORECASE):
+                if body is not None:
+                    body = json.dumps(body)
+                args["data"] = body
+            elif headers['Content-Type'] == 'application/x-www-form-urlencoded':  # noqa: E501
+                args["data"] = aiohttp.FormData(post_params)
+            elif headers['Content-Type'] == 'multipart/form-data':
+                # must del headers['Content-Type'], or the correct
+                # Content-Type which generated by aiohttp
+                del headers['Content-Type']
+                data = aiohttp.FormData()
+                for param in post_params:
+                    k, v = param
+                    if isinstance(v, tuple) and len(v) == 3:
+                        data.add_field(k,
+                                       value=v[1],
+                                       filename=v[0],
+                                       content_type=v[2])
+                    else:
+                        data.add_field(k, v)
+                args["data"] = data
+
+            # Pass a `bytes` parameter directly in the body to support
+            # other content types than Json when `body` argument is provided
+            # in serialized form
+            elif isinstance(body, bytes):
+                args["data"] = body
+            else:
+                # Cannot generate the request from given parameters
+                msg = """Cannot prepare a request message for provided
+                         arguments. Please check that your arguments match
+                         declared content type."""
+                raise OktaApiException(msg)
+
+        print('*' * 50)
+        print(args)
+        print('*' * 50)
+
+        # Get predetermined headers and build URL
+        #if self._config["client"]["orgUrl"] not in url:
+        #    url = self._config["client"]["orgUrl"] + url
+
+        # OAuth
+        if self._authorization_mode == "PrivateKey" and not oauth:
+            # check if access token exists
+            if self._cache.contains("OKTA_ACCESS_TOKEN"):
+                access_token = self._cache.get("OKTA_ACCESS_TOKEN")
+            else:
+                # if not, make one
+                # Generate using private key provided
+                access_token, error = await self._oauth.get_access_token()
+                # return error if problem retrieving token
+                if error:
+                    return (None, error)
+
+            # finally, add to header and cache
+            headers.update({"Authorization": f"Bearer {access_token}"})
+            self._cache.add("OKTA_ACCESS_TOKEN", access_token)
+
+        ## Add content type header if request body exists
+        #if body:
+        #    headers.update({"Content-Type": "application/json"})
+        #    if not keep_empty_params:
+        #        body = self.clear_empty_params(body)
+
+        ## finish building request and return
+        #request["headers"] = headers
+        #request["url"] = url
+        #request["data"] = body
+        #request["form"] = form
+        request = args
+        return await self.rest_client.send_request(request)
+
+
+    def call_api(self, resource_path, method,
+                 path_params=None, query_params=None, header_params=None,
+                 body=None, post_params=None, files=None,
+                 response_type=None, auth_settings=None, async_req=None,
+                 _return_http_data_only=None, collection_formats=None,
+                 _preload_content=True, _request_timeout=None):
+        """Makes the HTTP request (synchronous) and returns deserialized data.
+
+
+        :param resource_path: Path to method endpoint.
+        :param method: Method to call.
+        :param path_params: Path parameters in the url.
+        :param query_params: Query parameters in the url.
+        :param header_params: Header parameters to be
+            placed in the request header.
+        :param body: Request body.
+        :param post_params dict: Request post form parameters,
+            for `application/x-www-form-urlencoded`, `multipart/form-data`.
+        :param auth_settings list: Auth Settings names for the request.
+        :param response: Response data type.
+        :param files dict: key -> filename, value -> filepath,
+            for `multipart/form-data`.
+        :param async_req bool: execute request asynchronously
+        :param _return_http_data_only: response data without head status code
+                                       and headers
+        :param collection_formats: dict of collection formats for path, query,
+            header, and post parameters.
+        :param _preload_content: if False, the urllib3.HTTPResponse object will
+                                 be returned without reading/decoding response
+                                 data. Default is True.
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :return:
+            If async_req parameter is True,
+            the request will be called asynchronously.
+            The method will return the request thread.
+            If parameter async_req is False or missing,
+            then the method will return the response directly.
+        """
+        return self.__call_api(resource_path, method,
+                               path_params, query_params, header_params,
+                               body, post_params, files,
+                               response_type, auth_settings,
+                               _return_http_data_only, collection_formats,
+                               _preload_content, _request_timeout)
+
+    async def __call_api(
+            self, resource_path, method, path_params=None,
+            query_params=None, header_params=None, body=None, post_params=None,
+            files=None, response_type=None, auth_settings=None,
+            _return_http_data_only=None, collection_formats=None,
+            _preload_content=True, _request_timeout=None):
+
+        config = self._config
+
+        # header parameters
+        header_params = header_params or {}
+        header_params.update(self._default_headers)
+        if self.cookie:
+            header_params['Cookie'] = self.cookie
+        if header_params:
+            header_params = self.sanitize_for_serialization(header_params)
+            header_params = dict(self.parameters_to_tuples(header_params,
+                                                           collection_formats))
+
+        # path parameters
+        if path_params:
+            path_params = self.sanitize_for_serialization(path_params)
+            path_params = self.parameters_to_tuples(path_params,
+                                                    collection_formats)
+            for k, v in path_params:
+                # specified safe chars, encode everything
+                resource_path = resource_path.replace(
+                    '{%s}' % k,
+                    quote(str(v), safe=config.get('safe_chars_for_path_param', ''))
+                )
+
+        # query parameters
+        if query_params:
+            query_params = self.sanitize_for_serialization(query_params)
+            query_params = self.parameters_to_tuples(query_params,
+                                                     collection_formats)
+
+        # post parameters
+        if post_params or files:
+            post_params = self.prepare_post_parameters(post_params, files)
+            post_params = self.sanitize_for_serialization(post_params)
+            post_params = self.parameters_to_tuples(post_params,
+                                                    collection_formats)
+
+        # auth setting
+        #self.update_params_for_auth(header_params, query_params, auth_settings)
+
+        # body
+        if body:
+            body = self.sanitize_for_serialization(body)
+
+        # request url
+        #url = self.configuration.host + resource_path
+        if self._config["client"]["orgUrl"] not in resource_path:
+            url = self._config["client"]["orgUrl"] + resource_path
+
+        request = await self.create_request(method=method,
+                                            url=url,
+                                            query_params=query_params,
+                                            headers=header_params,
+                                            post_params=post_params,
+                                            body=body,
+                                            _preload_content=_preload_content,
+                                            _request_timeout=_request_timeout)
+        try:
+            req_info, response, response_data, error = await self.execute(request)
+        except Exception as err:
+            return (None, None, str(err))
+
+        _, error = self.rest_client.check_response_for_error(
+            url, response, response_data)
+
+        okta_api_resp = OktaAPIResponse(self,
+                                        request,
+                                        response,
+                                        response_data,
+                                        response_type)
+
+        if error:
+            return (None, okta_api_resp, error)
+
+        self.last_response = response_data
+
+        return_data = response_data
+        if _preload_content:
+            # deserialize response data
+            if response_type:
+                response.data = response_data
+                return_data = self.deserialize(response, response_type)
+            else:
+                return_data = None
+
+        # TODO: consider removing if clause
+        if _return_http_data_only:
+            if return_data:
+                return (return_data, OktaAPIResponse(self, request, response, response_data, response_type), None)
+            else:
+                return (OktaAPIResponse(self, request, response, response_data, response_type), None)
+
+        else:
+            # TODO: return status codes/headers or anything will be in OktaAPIResponse?
+            if return_data:
+                return (return_data, OktaAPIResponse(self, request, response, response_data, response_type), None)
+            else:
+                return (OktaAPIResponse(self, request, response, response_data, response_type), None)
