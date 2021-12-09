@@ -1,11 +1,14 @@
 import inspect
 
 from swagger_client import models as swagger_models
+from .helpers import to_snake_case
 
 
 def init_adapter(self, config=None):
     if config is None:
         config = {}
+    else:
+        config = {to_snake_case(key): config[key] for key in config}
     super(self.__class__, self).__init__(**config)
 
 

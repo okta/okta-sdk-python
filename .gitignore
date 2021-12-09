@@ -18,3 +18,7 @@ __pycache__/
 # JS files
 */node_modules/
 *package-lock.json
+
+# My files
+my_*
+build.output

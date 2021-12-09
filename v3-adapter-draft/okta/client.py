@@ -83,6 +83,9 @@ def swagger_args_adapter(f):
             query_params = okta_kwargs.pop('query_params')
             okta_kwargs.update(query_params)
 
+        # TODO: to_snake_case all params?
+        swagger_args_list = [to_snake_case(arg) for arg in swagger_args_list]
+        swagger_kwargs = {to_snake_case(key): swagger_kwargs[key] for key in swagger_kwargs}
         return f(*swagger_args_list, **swagger_kwargs)
     return wrapper
 

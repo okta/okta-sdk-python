@@ -21,3 +21,9 @@ Api -> ApiClientAdapter(RequestExecutor) -> HttpClient
 RequestExecutor is being used for pagination
 
 Need to substitute models, resource clients, use ApiClientAdapter as entry point
+
+------------------------------------------------------------------------------------
+# Add custom generator module
+
+- rename package swagger_client to okta
+- conflicts: __init__.py, api_client.py (keep old)
