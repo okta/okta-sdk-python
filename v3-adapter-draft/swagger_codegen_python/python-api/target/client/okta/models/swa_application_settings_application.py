@@ -48,7 +48,16 @@ class SwaApplicationSettingsApplication(ApplicationSettingsApplication):
     if hasattr(ApplicationSettingsApplication, "attribute_map"):
         attribute_map.update(ApplicationSettingsApplication.attribute_map)
 
-    def __init__(self, button_field=None, login_url_regex=None, password_field=None, url=None, username_field=None, *args, **kwargs):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, button_field=None, login_url_regex=None, password_field=None, url=None, username_field=None, *args, **kwargs):  # noqa: E501
         """SwaApplicationSettingsApplication - a model defined in Swagger"""  # noqa: E501
         self._button_field = None
         self._login_url_regex = None
@@ -66,7 +75,6 @@ class SwaApplicationSettingsApplication(ApplicationSettingsApplication):
             self.url = url
         if username_field is not None:
             self.username_field = username_field
-        ApplicationSettingsApplication.__init__(self, *args, **kwargs)
 
     @property
     def button_field(self):

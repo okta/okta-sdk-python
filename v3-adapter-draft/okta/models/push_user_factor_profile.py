@@ -45,7 +45,16 @@ class PushUserFactorProfile(object):
         'version': 'version'
     }
 
-    def __init__(self, credential_id=None, device_token=None, device_type=None, name=None, platform=None, version=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, credential_id=None, device_token=None, device_type=None, name=None, platform=None, version=None):  # noqa: E501
         """PushUserFactorProfile - a model defined in Swagger"""  # noqa: E501
         self._credential_id = None
         self._device_token = None

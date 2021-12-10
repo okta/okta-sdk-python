@@ -41,7 +41,16 @@ class ApplicationVisibility(object):
         'hide': 'hide'
     }
 
-    def __init__(self, app_links=None, auto_launch=None, auto_submit_toolbar=None, hide=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, app_links=None, auto_launch=None, auto_submit_toolbar=None, hide=None):  # noqa: E501
         """ApplicationVisibility - a model defined in Swagger"""  # noqa: E501
         self._app_links = None
         self._auto_launch = None

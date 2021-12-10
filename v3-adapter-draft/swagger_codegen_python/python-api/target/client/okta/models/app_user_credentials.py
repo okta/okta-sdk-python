@@ -37,7 +37,16 @@ class AppUserCredentials(object):
         'user_name': 'userName'
     }
 
-    def __init__(self, password=None, user_name=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, password=None, user_name=None):  # noqa: E501
         """AppUserCredentials - a model defined in Swagger"""  # noqa: E501
         self._password = None
         self._user_name = None

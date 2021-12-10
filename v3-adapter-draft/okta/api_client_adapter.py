@@ -10,8 +10,8 @@ from .api_response import OktaAPIResponse
 from .exceptions import OktaAPIException
 from .http_client import HTTPClient
 from .request_executor import RequestExecutor
+from .swagger_api_client import ApiClient
 from .user_agent import UserAgent
-from swagger_client import ApiClient
 
 
 class ApiClientAdapter(ApiClient):

@@ -39,7 +39,16 @@ class UserCredentials(object):
         'recovery_question': 'recovery_question'
     }
 
-    def __init__(self, password=None, provider=None, recovery_question=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, password=None, provider=None, recovery_question=None):  # noqa: E501
         """UserCredentials - a model defined in Swagger"""  # noqa: E501
         self._password = None
         self._provider = None

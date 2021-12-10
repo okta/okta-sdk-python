@@ -39,7 +39,16 @@ class PasswordPolicySettings(object):
         'recovery': 'recovery'
     }
 
-    def __init__(self, delegation=None, password=None, recovery=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, delegation=None, password=None, recovery=None):  # noqa: E501
         """PasswordPolicySettings - a model defined in Swagger"""  # noqa: E501
         self._delegation = None
         self._password = None

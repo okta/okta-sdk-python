@@ -49,7 +49,16 @@ class ProtocolEndpoints(object):
         'user_info': 'userInfo'
     }
 
-    def __init__(self, acs=None, authorization=None, jwks=None, metadata=None, slo=None, sso=None, token=None, user_info=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, acs=None, authorization=None, jwks=None, metadata=None, slo=None, sso=None, token=None, user_info=None):  # noqa: E501
         """ProtocolEndpoints - a model defined in Swagger"""  # noqa: E501
         self._acs = None
         self._authorization = None

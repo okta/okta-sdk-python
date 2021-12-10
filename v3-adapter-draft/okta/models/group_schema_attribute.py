@@ -67,7 +67,16 @@ class GroupSchemaAttribute(object):
         'unique': 'unique'
     }
 
-    def __init__(self, description=None, enum=None, external_name=None, external_namespace=None, items=None, master=None, max_length=None, min_length=None, mutability=None, one_of=None, permissions=None, required=None, scope=None, title=None, type=None, union=None, unique=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, description=None, enum=None, external_name=None, external_namespace=None, items=None, master=None, max_length=None, min_length=None, mutability=None, one_of=None, permissions=None, required=None, scope=None, title=None, type=None, union=None, unique=None):  # noqa: E501
         """GroupSchemaAttribute - a model defined in Swagger"""  # noqa: E501
         self._description = None
         self._enum = None

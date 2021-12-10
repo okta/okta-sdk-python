@@ -42,7 +42,16 @@ class AutoLoginApplication(Application):
     if hasattr(Application, "attribute_map"):
         attribute_map.update(Application.attribute_map)
 
-    def __init__(self, credentials=None, settings=None, *args, **kwargs):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, credentials=None, settings=None, *args, **kwargs):  # noqa: E501
         """AutoLoginApplication - a model defined in Swagger"""  # noqa: E501
         self._credentials = None
         self._settings = None
@@ -51,7 +60,6 @@ class AutoLoginApplication(Application):
             self.credentials = credentials
         if settings is not None:
             self.settings = settings
-        Application.__init__(self, *args, **kwargs)
 
     @property
     def credentials(self):

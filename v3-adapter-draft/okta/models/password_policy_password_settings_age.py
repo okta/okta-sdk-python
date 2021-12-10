@@ -41,7 +41,16 @@ class PasswordPolicyPasswordSettingsAge(object):
         'min_age_minutes': 'minAgeMinutes'
     }
 
-    def __init__(self, expire_warn_days=None, history_count=None, max_age_days=None, min_age_minutes=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, expire_warn_days=None, history_count=None, max_age_days=None, min_age_minutes=None):  # noqa: E501
         """PasswordPolicyPasswordSettingsAge - a model defined in Swagger"""  # noqa: E501
         self._expire_warn_days = None
         self._history_count = None

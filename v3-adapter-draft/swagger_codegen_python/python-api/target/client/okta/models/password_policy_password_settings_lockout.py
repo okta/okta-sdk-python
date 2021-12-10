@@ -41,7 +41,16 @@ class PasswordPolicyPasswordSettingsLockout(object):
         'user_lockout_notification_channels': 'userLockoutNotificationChannels'
     }
 
-    def __init__(self, auto_unlock_minutes=None, max_attempts=None, show_lockout_failures=None, user_lockout_notification_channels=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, auto_unlock_minutes=None, max_attempts=None, show_lockout_failures=None, user_lockout_notification_channels=None):  # noqa: E501
         """PasswordPolicyPasswordSettingsLockout - a model defined in Swagger"""  # noqa: E501
         self._auto_unlock_minutes = None
         self._max_attempts = None

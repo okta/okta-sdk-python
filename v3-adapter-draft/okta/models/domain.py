@@ -45,7 +45,16 @@ class Domain(object):
         'validation_status': 'validationStatus'
     }
 
-    def __init__(self, certificate_source_type=None, dns_records=None, domain=None, id=None, public_certificate=None, validation_status=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, certificate_source_type=None, dns_records=None, domain=None, id=None, public_certificate=None, validation_status=None):  # noqa: E501
         """Domain - a model defined in Swagger"""  # noqa: E501
         self._certificate_source_type = None
         self._dns_records = None

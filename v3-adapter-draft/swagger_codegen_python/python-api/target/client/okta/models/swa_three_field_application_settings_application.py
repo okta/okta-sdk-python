@@ -52,7 +52,16 @@ class SwaThreeFieldApplicationSettingsApplication(ApplicationSettingsApplication
     if hasattr(ApplicationSettingsApplication, "attribute_map"):
         attribute_map.update(ApplicationSettingsApplication.attribute_map)
 
-    def __init__(self, button_selector=None, extra_field_selector=None, extra_field_value=None, login_url_regex=None, password_selector=None, target_url=None, user_name_selector=None, *args, **kwargs):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, button_selector=None, extra_field_selector=None, extra_field_value=None, login_url_regex=None, password_selector=None, target_url=None, user_name_selector=None, *args, **kwargs):  # noqa: E501
         """SwaThreeFieldApplicationSettingsApplication - a model defined in Swagger"""  # noqa: E501
         self._button_selector = None
         self._extra_field_selector = None
@@ -76,7 +85,6 @@ class SwaThreeFieldApplicationSettingsApplication(ApplicationSettingsApplication
             self.target_url = target_url
         if user_name_selector is not None:
             self.user_name_selector = user_name_selector
-        ApplicationSettingsApplication.__init__(self, *args, **kwargs)
 
     @property
     def button_selector(self):

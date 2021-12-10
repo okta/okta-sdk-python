@@ -45,7 +45,16 @@ class OktaSignOnPolicyRuleSignonActions(object):
         'session': 'session'
     }
 
-    def __init__(self, access=None, factor_lifetime=None, factor_prompt_mode=None, remember_device_by_default=False, require_factor=False, session=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, access=None, factor_lifetime=None, factor_prompt_mode=None, remember_device_by_default=False, require_factor=False, session=None):  # noqa: E501
         """OktaSignOnPolicyRuleSignonActions - a model defined in Swagger"""  # noqa: E501
         self._access = None
         self._factor_lifetime = None

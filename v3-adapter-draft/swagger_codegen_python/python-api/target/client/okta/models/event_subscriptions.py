@@ -40,7 +40,16 @@ class EventSubscriptions(object):
     discriminator_value_class_map = {
               }
 
-    def __init__(self, items=None, type=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, items=None, type=None):  # noqa: E501
         """EventSubscriptions - a model defined in Swagger"""  # noqa: E501
         self._items = None
         self._type = None

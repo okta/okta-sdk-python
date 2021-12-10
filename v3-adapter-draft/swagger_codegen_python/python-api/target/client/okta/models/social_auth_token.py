@@ -45,7 +45,16 @@ class SocialAuthToken(object):
         'token_type': 'tokenType'
     }
 
-    def __init__(self, expires_at=None, id=None, scopes=None, token=None, token_auth_scheme=None, token_type=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, expires_at=None, id=None, scopes=None, token=None, token_auth_scheme=None, token_type=None):  # noqa: E501
         """SocialAuthToken - a model defined in Swagger"""  # noqa: E501
         self._expires_at = None
         self._id = None

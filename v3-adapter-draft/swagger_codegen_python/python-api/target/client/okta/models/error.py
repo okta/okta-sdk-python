@@ -43,7 +43,16 @@ class Error(object):
         'error_causes': 'errorCauses'
     }
 
-    def __init__(self, error_code=None, error_summary=None, error_link=None, error_id=None, error_causes=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, error_code=None, error_summary=None, error_link=None, error_id=None, error_causes=None):  # noqa: E501
         """Error - a model defined in Swagger"""  # noqa: E501
         self._error_code = None
         self._error_summary = None

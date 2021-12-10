@@ -48,7 +48,16 @@ class SchemeApplicationCredentials(ApplicationCredentials):
     if hasattr(ApplicationCredentials, "attribute_map"):
         attribute_map.update(ApplicationCredentials.attribute_map)
 
-    def __init__(self, password=None, reveal_password=None, scheme=None, signing=None, user_name=None, *args, **kwargs):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, password=None, reveal_password=None, scheme=None, signing=None, user_name=None, *args, **kwargs):  # noqa: E501
         """SchemeApplicationCredentials - a model defined in Swagger"""  # noqa: E501
         self._password = None
         self._reveal_password = None
@@ -66,7 +75,6 @@ class SchemeApplicationCredentials(ApplicationCredentials):
             self.signing = signing
         if user_name is not None:
             self.user_name = user_name
-        ApplicationCredentials.__init__(self, *args, **kwargs)
 
     @property
     def password(self):

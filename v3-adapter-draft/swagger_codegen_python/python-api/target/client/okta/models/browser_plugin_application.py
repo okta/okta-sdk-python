@@ -45,13 +45,21 @@ class BrowserPluginApplication(Application):
             'template_swa3field'.lower(): '#/components/schemas/SwaThreeFieldApplication',
     }
 
-    def __init__(self, credentials=None, *args, **kwargs):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, credentials=None, *args, **kwargs):  # noqa: E501
         """BrowserPluginApplication - a model defined in Swagger"""  # noqa: E501
         self._credentials = None
         self.discriminator = 'name'
         if credentials is not None:
             self.credentials = credentials
-        Application.__init__(self, *args, **kwargs)
 
     @property
     def credentials(self):

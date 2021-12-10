@@ -95,7 +95,16 @@ class UserSchemaBaseProperties(object):
         'manager': 'manager'
     }
 
-    def __init__(self, login=None, first_name=None, last_name=None, middle_name=None, honorific_prefix=None, honorific_suffix=None, email=None, title=None, display_name=None, nick_name=None, profile_url=None, second_email=None, mobile_phone=None, primary_phone=None, street_address=None, city=None, state=None, zip_code=None, country_code=None, postal_address=None, preferred_language=None, locale=None, timezone=None, user_type=None, employee_number=None, cost_center=None, organization=None, division=None, department=None, manager_id=None, manager=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, login=None, first_name=None, last_name=None, middle_name=None, honorific_prefix=None, honorific_suffix=None, email=None, title=None, display_name=None, nick_name=None, profile_url=None, second_email=None, mobile_phone=None, primary_phone=None, street_address=None, city=None, state=None, zip_code=None, country_code=None, postal_address=None, preferred_language=None, locale=None, timezone=None, user_type=None, employee_number=None, cost_center=None, organization=None, division=None, department=None, manager_id=None, manager=None):  # noqa: E501
         """UserSchemaBaseProperties - a model defined in Swagger"""  # noqa: E501
         self._login = None
         self._first_name = None

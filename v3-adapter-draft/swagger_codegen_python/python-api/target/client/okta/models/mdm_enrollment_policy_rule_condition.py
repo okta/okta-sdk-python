@@ -37,7 +37,16 @@ class MDMEnrollmentPolicyRuleCondition(object):
         'enrollment': 'enrollment'
     }
 
-    def __init__(self, block_non_safe_android=None, enrollment=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, block_non_safe_android=None, enrollment=None):  # noqa: E501
         """MDMEnrollmentPolicyRuleCondition - a model defined in Swagger"""  # noqa: E501
         self._block_non_safe_android = None
         self._enrollment = None

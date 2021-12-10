@@ -49,7 +49,16 @@ class Protocol(object):
         'type': 'type'
     }
 
-    def __init__(self, algorithms=None, credentials=None, endpoints=None, issuer=None, relay_state=None, scopes=None, settings=None, type=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, algorithms=None, credentials=None, endpoints=None, issuer=None, relay_state=None, scopes=None, settings=None, type=None):  # noqa: E501
         """Protocol - a model defined in Swagger"""  # noqa: E501
         self._algorithms = None
         self._credentials = None

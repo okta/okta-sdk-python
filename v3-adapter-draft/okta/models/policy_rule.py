@@ -58,7 +58,16 @@ class PolicyRule(object):
             'SIGN_ON'.lower(): '#/components/schemas/OktaSignOnPolicyRule',
     }
 
-    def __init__(self, created=None, id=None, last_updated=None, priority=None, status='ACTIVE', system=False, type=None, name=None, conditions=None, actions=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, created=None, id=None, last_updated=None, priority=None, status='ACTIVE', system=False, type=None, name=None, conditions=None, actions=None):  # noqa: E501
         """PolicyRule - a model defined in Swagger"""  # noqa: E501
         self._created = None
         self._id = None

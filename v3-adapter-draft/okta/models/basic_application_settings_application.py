@@ -42,7 +42,16 @@ class BasicApplicationSettingsApplication(ApplicationSettingsApplication):
     if hasattr(ApplicationSettingsApplication, "attribute_map"):
         attribute_map.update(ApplicationSettingsApplication.attribute_map)
 
-    def __init__(self, auth_url=None, url=None, *args, **kwargs):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, auth_url=None, url=None, *args, **kwargs):  # noqa: E501
         """BasicApplicationSettingsApplication - a model defined in Swagger"""  # noqa: E501
         self._auth_url = None
         self._url = None
@@ -51,7 +60,6 @@ class BasicApplicationSettingsApplication(ApplicationSettingsApplication):
             self.auth_url = auth_url
         if url is not None:
             self.url = url
-        ApplicationSettingsApplication.__init__(self, *args, **kwargs)
 
     @property
     def auth_url(self):

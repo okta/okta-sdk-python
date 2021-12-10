@@ -69,7 +69,16 @@ class UserSchemaAttribute(object):
         'external_namespace': 'externalNamespace'
     }
 
-    def __init__(self, title=None, type=None, required=None, mutability=None, scope=None, enum=None, one_of=None, min_length=None, max_length=None, description=None, permissions=None, master=None, union=None, items=None, pattern=None, unique=None, external_name=None, external_namespace=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, title=None, type=None, required=None, mutability=None, scope=None, enum=None, one_of=None, min_length=None, max_length=None, description=None, permissions=None, master=None, union=None, items=None, pattern=None, unique=None, external_name=None, external_namespace=None):  # noqa: E501
         """UserSchemaAttribute - a model defined in Swagger"""  # noqa: E501
         self._title = None
         self._type = None

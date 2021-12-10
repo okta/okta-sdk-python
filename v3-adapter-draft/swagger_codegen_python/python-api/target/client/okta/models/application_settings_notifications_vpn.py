@@ -39,7 +39,16 @@ class ApplicationSettingsNotificationsVpn(object):
         'network': 'network'
     }
 
-    def __init__(self, help_url=None, message=None, network=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, help_url=None, message=None, network=None):  # noqa: E501
         """ApplicationSettingsNotificationsVpn - a model defined in Swagger"""  # noqa: E501
         self._help_url = None
         self._message = None

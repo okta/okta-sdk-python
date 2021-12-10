@@ -45,7 +45,16 @@ class UserPolicyRuleCondition(object):
         'user_lifecycle_attribute': 'userLifecycleAttribute'
     }
 
-    def __init__(self, exclude=None, inactivity=None, include=None, lifecycle_expiration=None, password_expiration=None, user_lifecycle_attribute=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, exclude=None, inactivity=None, include=None, lifecycle_expiration=None, password_expiration=None, user_lifecycle_attribute=None):  # noqa: E501
         """UserPolicyRuleCondition - a model defined in Swagger"""  # noqa: E501
         self._exclude = None
         self._inactivity = None

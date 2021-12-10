@@ -47,7 +47,16 @@ class LogAuthenticationContext(object):
         'issuer': 'issuer'
     }
 
-    def __init__(self, authentication_provider=None, authentication_step=None, credential_provider=None, credential_type=None, external_session_id=None, interface=None, issuer=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, authentication_provider=None, authentication_step=None, credential_provider=None, credential_type=None, external_session_id=None, interface=None, issuer=None):  # noqa: E501
         """LogAuthenticationContext - a model defined in Swagger"""  # noqa: E501
         self._authentication_provider = None
         self._authentication_step = None

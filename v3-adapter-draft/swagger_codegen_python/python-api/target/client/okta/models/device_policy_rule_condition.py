@@ -41,7 +41,16 @@ class DevicePolicyRuleCondition(object):
         'trust_level': 'trustLevel'
     }
 
-    def __init__(self, migrated=None, platform=None, rooted=None, trust_level=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, migrated=None, platform=None, rooted=None, trust_level=None):  # noqa: E501
         """DevicePolicyRuleCondition - a model defined in Swagger"""  # noqa: E501
         self._migrated = None
         self._platform = None

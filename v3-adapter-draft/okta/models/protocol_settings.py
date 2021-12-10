@@ -35,7 +35,16 @@ class ProtocolSettings(object):
         'name_format': 'nameFormat'
     }
 
-    def __init__(self, name_format=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, name_format=None):  # noqa: E501
         """ProtocolSettings - a model defined in Swagger"""  # noqa: E501
         self._name_format = None
         self.discriminator = None

@@ -51,7 +51,16 @@ class IonField(object):
         'visible': 'visible'
     }
 
-    def __init__(self, form=None, label=None, mutable=None, name=None, required=None, secret=None, type=None, value=None, visible=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, form=None, label=None, mutable=None, name=None, required=None, secret=None, type=None, value=None, visible=None):  # noqa: E501
         """IonField - a model defined in Swagger"""  # noqa: E501
         self._form = None
         self._label = None

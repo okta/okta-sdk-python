@@ -17,7 +17,7 @@ import re  # noqa: F401
 # python 2 and python 3 compatibility library
 import six
 
-from okta.api_client import ApiClient
+from okta.swagger_api_client import ApiClient
 
 
 class InlineHook(object):

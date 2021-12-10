@@ -37,7 +37,16 @@ class ChangePasswordRequest(object):
         'old_password': 'oldPassword'
     }
 
-    def __init__(self, new_password=None, old_password=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, new_password=None, old_password=None):  # noqa: E501
         """ChangePasswordRequest - a model defined in Swagger"""  # noqa: E501
         self._new_password = None
         self._old_password = None

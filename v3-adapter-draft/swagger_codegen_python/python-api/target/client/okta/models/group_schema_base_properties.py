@@ -37,7 +37,16 @@ class GroupSchemaBaseProperties(object):
         'name': 'name'
     }
 
-    def __init__(self, description=None, name=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, description=None, name=None):  # noqa: E501
         """GroupSchemaBaseProperties - a model defined in Swagger"""  # noqa: E501
         self._description = None
         self._name = None

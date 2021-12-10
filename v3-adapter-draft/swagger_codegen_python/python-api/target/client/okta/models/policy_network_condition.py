@@ -39,7 +39,16 @@ class PolicyNetworkCondition(object):
         'include': 'include'
     }
 
-    def __init__(self, connection=None, exclude=None, include=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, connection=None, exclude=None, include=None):  # noqa: E501
         """PolicyNetworkCondition - a model defined in Swagger"""  # noqa: E501
         self._connection = None
         self._exclude = None

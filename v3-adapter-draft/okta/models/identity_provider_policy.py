@@ -46,7 +46,16 @@ class IdentityProviderPolicy(Policy):
     if hasattr(Policy, "attribute_map"):
         attribute_map.update(Policy.attribute_map)
 
-    def __init__(self, account_link=None, max_clock_skew=None, provisioning=None, subject=None, *args, **kwargs):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, account_link=None, max_clock_skew=None, provisioning=None, subject=None, *args, **kwargs):  # noqa: E501
         """IdentityProviderPolicy - a model defined in Swagger"""  # noqa: E501
         self._account_link = None
         self._max_clock_skew = None
@@ -61,7 +70,6 @@ class IdentityProviderPolicy(Policy):
             self.provisioning = provisioning
         if subject is not None:
             self.subject = subject
-        Policy.__init__(self, *args, **kwargs)
 
     @property
     def account_link(self):

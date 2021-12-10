@@ -43,7 +43,16 @@ class ThreatInsightConfiguration(object):
         'links': '_links'
     }
 
-    def __init__(self, action=None, exclude_zones=None, created=None, last_updated=None, links=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, action=None, exclude_zones=None, created=None, last_updated=None, links=None):  # noqa: E501
         """ThreatInsightConfiguration - a model defined in Swagger"""  # noqa: E501
         self._action = None
         self._exclude_zones = None

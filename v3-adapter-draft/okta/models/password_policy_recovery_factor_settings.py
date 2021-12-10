@@ -35,7 +35,16 @@ class PasswordPolicyRecoveryFactorSettings(object):
         'status': 'status'
     }
 
-    def __init__(self, status='INACTIVE'):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, status='INACTIVE'):  # noqa: E501
         """PasswordPolicyRecoveryFactorSettings - a model defined in Swagger"""  # noqa: E501
         self._status = None
         self.discriminator = None

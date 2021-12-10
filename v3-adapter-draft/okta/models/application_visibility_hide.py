@@ -37,7 +37,16 @@ class ApplicationVisibilityHide(object):
         'web': 'web'
     }
 
-    def __init__(self, i_os=None, web=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, i_os=None, web=None):  # noqa: E501
         """ApplicationVisibilityHide - a model defined in Swagger"""  # noqa: E501
         self._i_os = None
         self._web = None

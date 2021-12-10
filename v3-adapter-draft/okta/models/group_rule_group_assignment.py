@@ -35,7 +35,16 @@ class GroupRuleGroupAssignment(object):
         'group_ids': 'groupIds'
     }
 
-    def __init__(self, group_ids=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, group_ids=None):  # noqa: E501
         """GroupRuleGroupAssignment - a model defined in Swagger"""  # noqa: E501
         self._group_ids = None
         self.discriminator = None

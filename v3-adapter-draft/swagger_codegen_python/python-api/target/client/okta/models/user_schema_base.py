@@ -41,7 +41,16 @@ class UserSchemaBase(object):
         'required': 'required'
     }
 
-    def __init__(self, id=None, type=None, properties=None, required=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, id=None, type=None, properties=None, required=None):  # noqa: E501
         """UserSchemaBase - a model defined in Swagger"""  # noqa: E501
         self._id = None
         self._type = None

@@ -65,7 +65,16 @@ class LogEvent(object):
         'version': 'version'
     }
 
-    def __init__(self, actor=None, authentication_context=None, client=None, debug_context=None, display_message=None, event_type=None, legacy_event_type=None, outcome=None, published=None, request=None, security_context=None, severity=None, target=None, transaction=None, uuid=None, version=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, actor=None, authentication_context=None, client=None, debug_context=None, display_message=None, event_type=None, legacy_event_type=None, outcome=None, published=None, request=None, security_context=None, severity=None, target=None, transaction=None, uuid=None, version=None):  # noqa: E501
         """LogEvent - a model defined in Swagger"""  # noqa: E501
         self._actor = None
         self._authentication_context = None

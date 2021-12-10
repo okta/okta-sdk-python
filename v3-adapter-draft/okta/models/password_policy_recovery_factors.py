@@ -41,7 +41,16 @@ class PasswordPolicyRecoveryFactors(object):
         'recovery_question': 'recovery_question'
     }
 
-    def __init__(self, okta_call=None, okta_email=None, okta_sms=None, recovery_question=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, okta_call=None, okta_email=None, okta_sms=None, recovery_question=None):  # noqa: E501
         """PasswordPolicyRecoveryFactors - a model defined in Swagger"""  # noqa: E501
         self._okta_call = None
         self._okta_email = None

@@ -35,7 +35,16 @@ class TempPassword(object):
         'temp_password': 'tempPassword'
     }
 
-    def __init__(self, temp_password=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, temp_password=None):  # noqa: E501
         """TempPassword - a model defined in Swagger"""  # noqa: E501
         self._temp_password = None
         self.discriminator = None

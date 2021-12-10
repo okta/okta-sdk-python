@@ -39,7 +39,16 @@ class SecurityQuestionUserFactorProfile(object):
         'question_text': 'questionText'
     }
 
-    def __init__(self, answer=None, question=None, question_text=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, answer=None, question=None, question_text=None):  # noqa: E501
         """SecurityQuestionUserFactorProfile - a model defined in Swagger"""  # noqa: E501
         self._answer = None
         self._question = None

@@ -35,7 +35,16 @@ class CsrMetadataSubjectAltNames(object):
         'dns_names': 'dnsNames'
     }
 
-    def __init__(self, dns_names=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, dns_names=None):  # noqa: E501
         """CsrMetadataSubjectAltNames - a model defined in Swagger"""  # noqa: E501
         self._dns_names = None
         self.discriminator = None

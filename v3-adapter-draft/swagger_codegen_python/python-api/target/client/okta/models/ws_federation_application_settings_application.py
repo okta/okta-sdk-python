@@ -62,7 +62,16 @@ class WsFederationApplicationSettingsApplication(ApplicationSettingsApplication)
     if hasattr(ApplicationSettingsApplication, "attribute_map"):
         attribute_map.update(ApplicationSettingsApplication.attribute_map)
 
-    def __init__(self, attribute_statements=None, audience_restriction=None, authn_context_class_ref=None, group_filter=None, group_name=None, group_value_format=None, name_id_format=None, realm=None, site_url=None, username_attribute=None, w_reply_override=None, w_reply_url=None, *args, **kwargs):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, attribute_statements=None, audience_restriction=None, authn_context_class_ref=None, group_filter=None, group_name=None, group_value_format=None, name_id_format=None, realm=None, site_url=None, username_attribute=None, w_reply_override=None, w_reply_url=None, *args, **kwargs):  # noqa: E501
         """WsFederationApplicationSettingsApplication - a model defined in Swagger"""  # noqa: E501
         self._attribute_statements = None
         self._audience_restriction = None
@@ -101,7 +110,6 @@ class WsFederationApplicationSettingsApplication(ApplicationSettingsApplication)
             self.w_reply_override = w_reply_override
         if w_reply_url is not None:
             self.w_reply_url = w_reply_url
-        ApplicationSettingsApplication.__init__(self, *args, **kwargs)
 
     @property
     def attribute_statements(self):

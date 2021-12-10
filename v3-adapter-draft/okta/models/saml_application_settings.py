@@ -40,13 +40,21 @@ class SamlApplicationSettings(ApplicationSettings):
     if hasattr(ApplicationSettings, "attribute_map"):
         attribute_map.update(ApplicationSettings.attribute_map)
 
-    def __init__(self, sign_on=None, *args, **kwargs):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, sign_on=None, *args, **kwargs):  # noqa: E501
         """SamlApplicationSettings - a model defined in Swagger"""  # noqa: E501
         self._sign_on = None
         self.discriminator = None
         if sign_on is not None:
             self.sign_on = sign_on
-        ApplicationSettings.__init__(self, *args, **kwargs)
 
     @property
     def sign_on(self):

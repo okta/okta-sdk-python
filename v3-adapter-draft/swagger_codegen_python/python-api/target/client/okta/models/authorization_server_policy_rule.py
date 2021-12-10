@@ -53,7 +53,16 @@ class AuthorizationServerPolicyRule(object):
         'actions': 'actions'
     }
 
-    def __init__(self, created=None, id=None, name=None, last_updated=None, priority=None, status='ACTIVE', system=False, type=None, conditions=None, actions=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, created=None, id=None, name=None, last_updated=None, priority=None, status='ACTIVE', system=False, type=None, conditions=None, actions=None):  # noqa: E501
         """AuthorizationServerPolicyRule - a model defined in Swagger"""  # noqa: E501
         self._created = None
         self._id = None

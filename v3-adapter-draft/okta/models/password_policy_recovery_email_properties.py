@@ -35,7 +35,16 @@ class PasswordPolicyRecoveryEmailProperties(object):
         'recovery_token': 'recoveryToken'
     }
 
-    def __init__(self, recovery_token=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, recovery_token=None):  # noqa: E501
         """PasswordPolicyRecoveryEmailProperties - a model defined in Swagger"""  # noqa: E501
         self._recovery_token = None
         self.discriminator = None

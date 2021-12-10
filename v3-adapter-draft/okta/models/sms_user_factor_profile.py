@@ -35,7 +35,16 @@ class SmsUserFactorProfile(object):
         'phone_number': 'phoneNumber'
     }
 
-    def __init__(self, phone_number=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, phone_number=None):  # noqa: E501
         """SmsUserFactorProfile - a model defined in Swagger"""  # noqa: E501
         self._phone_number = None
         self.discriminator = None

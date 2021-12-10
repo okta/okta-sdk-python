@@ -49,7 +49,16 @@ class VerifyFactorRequest(object):
         'state_token': 'stateToken'
     }
 
-    def __init__(self, activation_token=None, answer=None, attestation=None, client_data=None, next_pass_code=None, pass_code=None, registration_data=None, state_token=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, activation_token=None, answer=None, attestation=None, client_data=None, next_pass_code=None, pass_code=None, registration_data=None, state_token=None):  # noqa: E501
         """VerifyFactorRequest - a model defined in Swagger"""  # noqa: E501
         self._activation_token = None
         self._answer = None

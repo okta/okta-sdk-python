@@ -37,7 +37,16 @@ class ApplicationSettingsNotes(object):
         'enduser': 'enduser'
     }
 
-    def __init__(self, admin=None, enduser=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, admin=None, enduser=None):  # noqa: E501
         """ApplicationSettingsNotes - a model defined in Swagger"""  # noqa: E501
         self._admin = None
         self._enduser = None

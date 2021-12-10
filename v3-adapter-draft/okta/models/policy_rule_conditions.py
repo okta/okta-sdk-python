@@ -75,7 +75,16 @@ class PolicyRuleConditions(object):
         'users': 'users'
     }
 
-    def __init__(self, app=None, apps=None, auth_context=None, auth_provider=None, before_scheduled_action=None, clients=None, context=None, device=None, grant_types=None, groups=None, identity_provider=None, mdm_enrollment=None, network=None, people=None, platform=None, risk=None, risk_score=None, scopes=None, user_identifier=None, user_status=None, users=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, app=None, apps=None, auth_context=None, auth_provider=None, before_scheduled_action=None, clients=None, context=None, device=None, grant_types=None, groups=None, identity_provider=None, mdm_enrollment=None, network=None, people=None, platform=None, risk=None, risk_score=None, scopes=None, user_identifier=None, user_status=None, users=None):  # noqa: E501
         """PolicyRuleConditions - a model defined in Swagger"""  # noqa: E501
         self._app = None
         self._apps = None

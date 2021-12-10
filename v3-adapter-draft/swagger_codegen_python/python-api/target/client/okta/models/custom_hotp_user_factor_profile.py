@@ -35,7 +35,16 @@ class CustomHotpUserFactorProfile(object):
         'shared_secret': 'sharedSecret'
     }
 
-    def __init__(self, shared_secret=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, shared_secret=None):  # noqa: E501
         """CustomHotpUserFactorProfile - a model defined in Swagger"""  # noqa: E501
         self._shared_secret = None
         self.discriminator = None

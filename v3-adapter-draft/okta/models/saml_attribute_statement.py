@@ -45,7 +45,16 @@ class SamlAttributeStatement(object):
         'values': 'values'
     }
 
-    def __init__(self, name=None, namespace=None, type=None, filter_type=None, filter_value=None, values=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, name=None, namespace=None, type=None, filter_type=None, filter_value=None, values=None):  # noqa: E501
         """SamlAttributeStatement - a model defined in Swagger"""  # noqa: E501
         self._name = None
         self._namespace = None

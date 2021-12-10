@@ -35,7 +35,16 @@ class LogDebugContext(object):
         'debug_data': 'debugData'
     }
 
-    def __init__(self, debug_data=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, debug_data=None):  # noqa: E501
         """LogDebugContext - a model defined in Swagger"""  # noqa: E501
         self._debug_data = None
         self.discriminator = None

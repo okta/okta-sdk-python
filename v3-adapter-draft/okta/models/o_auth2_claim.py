@@ -55,7 +55,16 @@ class OAuth2Claim(object):
         'value_type': 'valueType'
     }
 
-    def __init__(self, links=None, always_include_in_token=None, claim_type=None, conditions=None, group_filter_type=None, id=None, name=None, status=None, system=None, value=None, value_type=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, links=None, always_include_in_token=None, claim_type=None, conditions=None, group_filter_type=None, id=None, name=None, status=None, system=None, value=None, value_type=None):  # noqa: E501
         """OAuth2Claim - a model defined in Swagger"""  # noqa: E501
         self._links = None
         self._always_include_in_token = None

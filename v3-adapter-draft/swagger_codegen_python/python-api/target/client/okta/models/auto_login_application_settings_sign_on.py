@@ -37,7 +37,16 @@ class AutoLoginApplicationSettingsSignOn(object):
         'redirect_url': 'redirectUrl'
     }
 
-    def __init__(self, login_url=None, redirect_url=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, login_url=None, redirect_url=None):  # noqa: E501
         """AutoLoginApplicationSettingsSignOn - a model defined in Swagger"""  # noqa: E501
         self._login_url = None
         self._redirect_url = None

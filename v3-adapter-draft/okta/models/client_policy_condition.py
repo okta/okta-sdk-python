@@ -35,7 +35,16 @@ class ClientPolicyCondition(object):
         'include': 'include'
     }
 
-    def __init__(self, include=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, include=None):  # noqa: E501
         """ClientPolicyCondition - a model defined in Swagger"""  # noqa: E501
         self._include = None
         self.discriminator = None

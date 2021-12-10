@@ -43,7 +43,16 @@ class PolicyRuleActions(object):
         'self_service_unlock': 'selfServiceUnlock'
     }
 
-    def __init__(self, enroll=None, signon=None, password_change=None, self_service_password_reset=None, self_service_unlock=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, enroll=None, signon=None, password_change=None, self_service_password_reset=None, self_service_unlock=None):  # noqa: E501
         """PolicyRuleActions - a model defined in Swagger"""  # noqa: E501
         self._enroll = None
         self._signon = None

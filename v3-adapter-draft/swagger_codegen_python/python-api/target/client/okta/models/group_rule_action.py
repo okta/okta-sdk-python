@@ -35,7 +35,16 @@ class GroupRuleAction(object):
         'assign_user_to_groups': 'assignUserToGroups'
     }
 
-    def __init__(self, assign_user_to_groups=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, assign_user_to_groups=None):  # noqa: E501
         """GroupRuleAction - a model defined in Swagger"""  # noqa: E501
         self._assign_user_to_groups = None
         self.discriminator = None

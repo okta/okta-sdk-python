@@ -39,7 +39,16 @@ class DomainLinks(object):
         'verify': 'verify'
     }
 
-    def __init__(self, certificate=None, _self=None, verify=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, certificate=None, _self=None, verify=None):  # noqa: E501
         """DomainLinks - a model defined in Swagger"""  # noqa: E501
         self._certificate = None
         self.__self = None

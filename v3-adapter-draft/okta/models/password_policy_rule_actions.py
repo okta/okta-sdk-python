@@ -44,7 +44,16 @@ class PasswordPolicyRuleActions(PolicyRuleActions):
     if hasattr(PolicyRuleActions, "attribute_map"):
         attribute_map.update(PolicyRuleActions.attribute_map)
 
-    def __init__(self, password_change=None, self_service_password_reset=None, self_service_unlock=None, *args, **kwargs):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, password_change=None, self_service_password_reset=None, self_service_unlock=None, *args, **kwargs):  # noqa: E501
         """PasswordPolicyRuleActions - a model defined in Swagger"""  # noqa: E501
         self._password_change = None
         self._self_service_password_reset = None
@@ -56,7 +65,6 @@ class PasswordPolicyRuleActions(PolicyRuleActions):
             self.self_service_password_reset = self_service_password_reset
         if self_service_unlock is not None:
             self.self_service_unlock = self_service_unlock
-        PolicyRuleActions.__init__(self, *args, **kwargs)
 
     @property
     def password_change(self):

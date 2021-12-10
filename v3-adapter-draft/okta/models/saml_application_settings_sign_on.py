@@ -85,7 +85,16 @@ class SamlApplicationSettingsSignOn(object):
         'subject_name_id_template': 'subjectNameIdTemplate'
     }
 
-    def __init__(self, allow_multiple_acs_endpoints=None, acs_endpoints=None, assertion_signed=None, attribute_statements=None, audience=None, audience_override=None, authn_context_class_ref=None, default_relay_state=None, destination=None, destination_override=None, digest_algorithm=None, honor_force_authn=None, idp_issuer=None, inline_hooks=None, recipient=None, recipient_override=None, request_compressed=None, response_signed=None, signature_algorithm=None, slo=None, sp_issuer=None, sso_acs_url=None, sso_acs_url_override=None, sp_certificate=None, subject_name_id_format=None, subject_name_id_template=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, allow_multiple_acs_endpoints=None, acs_endpoints=None, assertion_signed=None, attribute_statements=None, audience=None, audience_override=None, authn_context_class_ref=None, default_relay_state=None, destination=None, destination_override=None, digest_algorithm=None, honor_force_authn=None, idp_issuer=None, inline_hooks=None, recipient=None, recipient_override=None, request_compressed=None, response_signed=None, signature_algorithm=None, slo=None, sp_issuer=None, sso_acs_url=None, sso_acs_url_override=None, sp_certificate=None, subject_name_id_format=None, subject_name_id_template=None):  # noqa: E501
         """SamlApplicationSettingsSignOn - a model defined in Swagger"""  # noqa: E501
         self._allow_multiple_acs_endpoints = None
         self._acs_endpoints = None

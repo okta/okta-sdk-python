@@ -56,7 +56,16 @@ class SecurePasswordStoreApplicationSettingsApplication(ApplicationSettingsAppli
     if hasattr(ApplicationSettingsApplication, "attribute_map"):
         attribute_map.update(ApplicationSettingsApplication.attribute_map)
 
-    def __init__(self, optional_field1=None, optional_field1_value=None, optional_field2=None, optional_field2_value=None, optional_field3=None, optional_field3_value=None, password_field=None, url=None, username_field=None, *args, **kwargs):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, optional_field1=None, optional_field1_value=None, optional_field2=None, optional_field2_value=None, optional_field3=None, optional_field3_value=None, password_field=None, url=None, username_field=None, *args, **kwargs):  # noqa: E501
         """SecurePasswordStoreApplicationSettingsApplication - a model defined in Swagger"""  # noqa: E501
         self._optional_field1 = None
         self._optional_field1_value = None
@@ -86,7 +95,6 @@ class SecurePasswordStoreApplicationSettingsApplication(ApplicationSettingsAppli
             self.url = url
         if username_field is not None:
             self.username_field = username_field
-        ApplicationSettingsApplication.__init__(self, *args, **kwargs)
 
     @property
     def optional_field1(self):

@@ -47,7 +47,16 @@ class IdentityProviderApplicationUser(object):
         'profile': 'profile'
     }
 
-    def __init__(self, embedded=None, links=None, created=None, external_id=None, id=None, last_updated=None, profile=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, embedded=None, links=None, created=None, external_id=None, id=None, last_updated=None, profile=None):  # noqa: E501
         """IdentityProviderApplicationUser - a model defined in Swagger"""  # noqa: E501
         self._embedded = None
         self._links = None

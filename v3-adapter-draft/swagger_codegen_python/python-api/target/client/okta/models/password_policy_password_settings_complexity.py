@@ -49,7 +49,16 @@ class PasswordPolicyPasswordSettingsComplexity(object):
         'min_upper_case': 'minUpperCase'
     }
 
-    def __init__(self, dictionary=None, exclude_attributes=None, exclude_username=True, min_length=None, min_lower_case=None, min_number=None, min_symbol=None, min_upper_case=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, dictionary=None, exclude_attributes=None, exclude_username=True, min_length=None, min_lower_case=None, min_number=None, min_symbol=None, min_upper_case=None):  # noqa: E501
         """PasswordPolicyPasswordSettingsComplexity - a model defined in Swagger"""  # noqa: E501
         self._dictionary = None
         self._exclude_attributes = None

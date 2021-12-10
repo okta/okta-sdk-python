@@ -61,7 +61,16 @@ class NetworkZone(object):
         'links': '_links'
     }
 
-    def __init__(self, type=None, id=None, name=None, system=None, usage=None, status=None, proxy_type=None, locations=None, gateways=None, proxies=None, asns=None, created=None, last_updated=None, links=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, type=None, id=None, name=None, system=None, usage=None, status=None, proxy_type=None, locations=None, gateways=None, proxies=None, asns=None, created=None, last_updated=None, links=None):  # noqa: E501
         """NetworkZone - a model defined in Swagger"""  # noqa: E501
         self._type = None
         self._id = None

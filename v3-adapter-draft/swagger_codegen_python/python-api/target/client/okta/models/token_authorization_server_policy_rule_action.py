@@ -41,7 +41,16 @@ class TokenAuthorizationServerPolicyRuleAction(object):
         'inline_hook': 'inlineHook'
     }
 
-    def __init__(self, access_token_lifetime_minutes=None, refresh_token_lifetime_minutes=None, refresh_token_window_minutes=None, inline_hook=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, access_token_lifetime_minutes=None, refresh_token_lifetime_minutes=None, refresh_token_window_minutes=None, inline_hook=None):  # noqa: E501
         """TokenAuthorizationServerPolicyRuleAction - a model defined in Swagger"""  # noqa: E501
         self._access_token_lifetime_minutes = None
         self._refresh_token_lifetime_minutes = None

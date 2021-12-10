@@ -42,7 +42,16 @@ class SwaApplication(BrowserPluginApplication):
     if hasattr(BrowserPluginApplication, "attribute_map"):
         attribute_map.update(BrowserPluginApplication.attribute_map)
 
-    def __init__(self, name='template_swa', settings=None, *args, **kwargs):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, name='template_swa', settings=None, *args, **kwargs):  # noqa: E501
         """SwaApplication - a model defined in Swagger"""  # noqa: E501
         self._name = None
         self._settings = None
@@ -51,7 +60,6 @@ class SwaApplication(BrowserPluginApplication):
             self.name = name
         if settings is not None:
             self.settings = settings
-        BrowserPluginApplication.__init__(self, *args, **kwargs)
 
     @property
     def name(self):

@@ -35,7 +35,16 @@ class LogRequest(object):
         'ip_chain': 'ipChain'
     }
 
-    def __init__(self, ip_chain=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, ip_chain=None):  # noqa: E501
         """LogRequest - a model defined in Swagger"""  # noqa: E501
         self._ip_chain = None
         self.discriminator = None

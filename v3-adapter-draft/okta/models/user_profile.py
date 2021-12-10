@@ -95,7 +95,16 @@ class UserProfile(object):
         'zip_code': 'zipCode'
     }
 
-    def __init__(self, city=None, cost_center=None, country_code=None, department=None, display_name=None, division=None, email=None, employee_number=None, first_name=None, honorific_prefix=None, honorific_suffix=None, last_name=None, locale=None, login=None, manager=None, manager_id=None, middle_name=None, mobile_phone=None, nick_name=None, organization=None, postal_address=None, preferred_language=None, primary_phone=None, profile_url=None, second_email=None, state=None, street_address=None, timezone=None, title=None, user_type=None, zip_code=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, city=None, cost_center=None, country_code=None, department=None, display_name=None, division=None, email=None, employee_number=None, first_name=None, honorific_prefix=None, honorific_suffix=None, last_name=None, locale=None, login=None, manager=None, manager_id=None, middle_name=None, mobile_phone=None, nick_name=None, organization=None, postal_address=None, preferred_language=None, primary_phone=None, profile_url=None, second_email=None, state=None, street_address=None, timezone=None, title=None, user_type=None, zip_code=None):  # noqa: E501
         """UserProfile - a model defined in Swagger"""  # noqa: E501
         self._city = None
         self._cost_center = None

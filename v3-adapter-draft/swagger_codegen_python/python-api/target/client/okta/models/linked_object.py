@@ -39,7 +39,16 @@ class LinkedObject(object):
         'primary': 'primary'
     }
 
-    def __init__(self, links=None, associated=None, primary=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, links=None, associated=None, primary=None):  # noqa: E501
         """LinkedObject - a model defined in Swagger"""  # noqa: E501
         self._links = None
         self._associated = None

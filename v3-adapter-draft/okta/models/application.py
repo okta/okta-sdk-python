@@ -77,7 +77,16 @@ class Application(object):
             'WS_FEDERATION'.lower(): '#/components/schemas/WsFederationApplication',
     }
 
-    def __init__(self, embedded=None, links=None, accessibility=None, created=None, credentials=None, features=None, id=None, label=None, last_updated=None, licensing=None, name=None, profile=None, settings=None, sign_on_mode=None, status=None, visibility=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, embedded=None, links=None, accessibility=None, created=None, credentials=None, features=None, id=None, label=None, last_updated=None, licensing=None, name=None, profile=None, settings=None, sign_on_mode=None, status=None, visibility=None):  # noqa: E501
         """Application - a model defined in Swagger"""  # noqa: E501
         self._embedded = None
         self._links = None

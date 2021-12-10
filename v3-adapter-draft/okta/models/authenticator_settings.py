@@ -37,7 +37,16 @@ class AuthenticatorSettings(object):
         'token_lifetime_in_minutes': 'tokenLifetimeInMinutes'
     }
 
-    def __init__(self, allowed_for=None, token_lifetime_in_minutes=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, allowed_for=None, token_lifetime_in_minutes=None):  # noqa: E501
         """AuthenticatorSettings - a model defined in Swagger"""  # noqa: E501
         self._allowed_for = None
         self._token_lifetime_in_minutes = None

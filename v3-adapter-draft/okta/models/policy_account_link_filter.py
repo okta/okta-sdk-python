@@ -35,7 +35,16 @@ class PolicyAccountLinkFilter(object):
         'groups': 'groups'
     }
 
-    def __init__(self, groups=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, groups=None):  # noqa: E501
         """PolicyAccountLinkFilter - a model defined in Swagger"""  # noqa: E501
         self._groups = None
         self.discriminator = None

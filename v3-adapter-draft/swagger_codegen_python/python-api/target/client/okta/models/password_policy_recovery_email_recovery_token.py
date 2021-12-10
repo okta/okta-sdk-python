@@ -35,7 +35,16 @@ class PasswordPolicyRecoveryEmailRecoveryToken(object):
         'token_lifetime_minutes': 'tokenLifetimeMinutes'
     }
 
-    def __init__(self, token_lifetime_minutes=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, token_lifetime_minutes=None):  # noqa: E501
         """PasswordPolicyRecoveryEmailRecoveryToken - a model defined in Swagger"""  # noqa: E501
         self._token_lifetime_minutes = None
         self.discriminator = None

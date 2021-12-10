@@ -69,7 +69,16 @@ class OrgSetting(object):
         'website': 'website'
     }
 
-    def __init__(self, links=None, address1=None, address2=None, city=None, company_name=None, country=None, created=None, end_user_support_help_url=None, expires_at=None, id=None, last_updated=None, phone_number=None, postal_code=None, state=None, status=None, subdomain=None, support_phone_number=None, website=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, links=None, address1=None, address2=None, city=None, company_name=None, country=None, created=None, end_user_support_help_url=None, expires_at=None, id=None, last_updated=None, phone_number=None, postal_code=None, state=None, status=None, subdomain=None, support_phone_number=None, website=None):  # noqa: E501
         """OrgSetting - a model defined in Swagger"""  # noqa: E501
         self._links = None
         self._address1 = None

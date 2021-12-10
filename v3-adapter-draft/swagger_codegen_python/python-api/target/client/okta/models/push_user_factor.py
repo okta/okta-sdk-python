@@ -44,7 +44,16 @@ class PushUserFactor(UserFactor):
     if hasattr(UserFactor, "attribute_map"):
         attribute_map.update(UserFactor.attribute_map)
 
-    def __init__(self, expires_at=None, factor_result=None, profile=None, *args, **kwargs):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, expires_at=None, factor_result=None, profile=None, *args, **kwargs):  # noqa: E501
         """PushUserFactor - a model defined in Swagger"""  # noqa: E501
         self._expires_at = None
         self._factor_result = None
@@ -56,7 +65,6 @@ class PushUserFactor(UserFactor):
             self.factor_result = factor_result
         if profile is not None:
             self.profile = profile
-        UserFactor.__init__(self, *args, **kwargs)
 
     @property
     def expires_at(self):

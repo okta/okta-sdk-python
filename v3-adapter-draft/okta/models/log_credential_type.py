@@ -45,7 +45,16 @@ class LogCredentialType(object):
     attribute_map = {
     }
 
-    def __init__(self):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self):  # noqa: E501
         """LogCredentialType - a model defined in Swagger"""  # noqa: E501
         self.discriminator = None
 

@@ -39,7 +39,16 @@ class UserSchemaAttributeItems(object):
         'type': 'type'
     }
 
-    def __init__(self, enum=None, one_of=None, type=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, enum=None, one_of=None, type=None):  # noqa: E501
         """UserSchemaAttributeItems - a model defined in Swagger"""  # noqa: E501
         self._enum = None
         self._one_of = None

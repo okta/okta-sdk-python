@@ -67,7 +67,16 @@ class {{classname}}({{#parent}}{{parent}}{{/parent}}{{^parent}}object{{/parent}}
     }
 {{/discriminator}}
 
-    def __init__(self{{#vars}}, {{name}}={{#defaultValue}}{{{defaultValue}}}{{/defaultValue}}{{^defaultValue}}None{{/defaultValue}}{{/vars}}{{#parent}}, *args, **kwargs{{/parent}}):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self{{#vars}}, {{name}}={{#defaultValue}}{{{defaultValue}}}{{/defaultValue}}{{^defaultValue}}None{{/defaultValue}}{{/vars}}{{#parent}}, *args, **kwargs{{/parent}}):  # noqa: E501
         """{{classname}} - a model defined in Swagger"""  # noqa: E501
 {{#vars}}{{#@first}}
 {{/@first}}
@@ -84,9 +93,6 @@ class {{classname}}({{#parent}}{{parent}}{{/parent}}{{^parent}}object{{/parent}}
             self.{{name}} = {{name}}
 {{/required}}
 {{/vars}}
-{{#parent}}
-        {{parent}}.__init__(self, *args, **kwargs)
-{{/parent}}
 
 {{#vars}}
     @property

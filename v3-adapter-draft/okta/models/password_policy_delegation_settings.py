@@ -35,7 +35,16 @@ class PasswordPolicyDelegationSettings(object):
         'options': 'options'
     }
 
-    def __init__(self, options=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, options=None):  # noqa: E501
         """PasswordPolicyDelegationSettings - a model defined in Swagger"""  # noqa: E501
         self._options = None
         self.discriminator = None

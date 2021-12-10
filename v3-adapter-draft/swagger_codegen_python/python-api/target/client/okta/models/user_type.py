@@ -53,7 +53,16 @@ class UserType(object):
         'name': 'name'
     }
 
-    def __init__(self, links=None, created=None, created_by=None, default=None, description=None, display_name=None, id=None, last_updated=None, last_updated_by=None, name=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, links=None, created=None, created_by=None, default=None, description=None, display_name=None, id=None, last_updated=None, last_updated_by=None, name=None):  # noqa: E501
         """UserType - a model defined in Swagger"""  # noqa: E501
         self._links = None
         self._created = None

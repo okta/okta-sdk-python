@@ -53,7 +53,16 @@ class AppLink(object):
         'sort_order': 'sortOrder'
     }
 
-    def __init__(self, app_assignment_id=None, app_instance_id=None, app_name=None, credentials_setup=None, hidden=None, id=None, label=None, link_url=None, logo_url=None, sort_order=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, app_assignment_id=None, app_instance_id=None, app_name=None, credentials_setup=None, hidden=None, id=None, label=None, link_url=None, logo_url=None, sort_order=None):  # noqa: E501
         """AppLink - a model defined in Swagger"""  # noqa: E501
         self._app_assignment_id = None
         self._app_instance_id = None

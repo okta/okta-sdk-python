@@ -43,7 +43,16 @@ class LogGeographicalContext(object):
         'state': 'state'
     }
 
-    def __init__(self, city=None, country=None, geolocation=None, postal_code=None, state=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, city=None, country=None, geolocation=None, postal_code=None, state=None):  # noqa: E501
         """LogGeographicalContext - a model defined in Swagger"""  # noqa: E501
         self._city = None
         self._country = None

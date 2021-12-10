@@ -18,8 +18,6 @@ import os
 import re
 import tempfile
 
-# import something_custom_to_test
-
 # python 2 and python 3 compatibility library
 import six
 from six.moves.urllib.parse import quote

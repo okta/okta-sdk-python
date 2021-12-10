@@ -35,7 +35,16 @@ class SpCertificate(object):
         'x5c': 'x5c'
     }
 
-    def __init__(self, x5c=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, x5c=None):  # noqa: E501
         """SpCertificate - a model defined in Swagger"""  # noqa: E501
         self._x5c = None
         self.discriminator = None

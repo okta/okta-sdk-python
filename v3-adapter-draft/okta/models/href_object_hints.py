@@ -35,7 +35,16 @@ class HrefObjectHints(object):
         'allow': 'allow'
     }
 
-    def __init__(self, allow=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, allow=None):  # noqa: E501
         """HrefObjectHints - a model defined in Swagger"""  # noqa: E501
         self._allow = None
         self.discriminator = None

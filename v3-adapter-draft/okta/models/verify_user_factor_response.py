@@ -43,7 +43,16 @@ class VerifyUserFactorResponse(object):
         'factor_result_message': 'factorResultMessage'
     }
 
-    def __init__(self, embedded=None, links=None, expires_at=None, factor_result=None, factor_result_message=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, embedded=None, links=None, expires_at=None, factor_result=None, factor_result_message=None):  # noqa: E501
         """VerifyUserFactorResponse - a model defined in Swagger"""  # noqa: E501
         self._embedded = None
         self._links = None

@@ -65,7 +65,16 @@ class OpenIdConnectApplicationSettingsClient(object):
         'jwks': 'jwks'
     }
 
-    def __init__(self, application_type=None, client_uri=None, consent_method=None, grant_types=None, initiate_login_uri=None, issuer_mode=None, idp_initiated_login=None, logo_uri=None, policy_uri=None, post_logout_redirect_uris=None, redirect_uris=None, wildcard_redirect=None, response_types=None, refresh_token=None, tos_uri=None, jwks=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, application_type=None, client_uri=None, consent_method=None, grant_types=None, initiate_login_uri=None, issuer_mode=None, idp_initiated_login=None, logo_uri=None, policy_uri=None, post_logout_redirect_uris=None, redirect_uris=None, wildcard_redirect=None, response_types=None, refresh_token=None, tos_uri=None, jwks=None):  # noqa: E501
         """OpenIdConnectApplicationSettingsClient - a model defined in Swagger"""  # noqa: E501
         self._application_type = None
         self._client_uri = None

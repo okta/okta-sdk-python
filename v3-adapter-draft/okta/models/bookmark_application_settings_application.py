@@ -42,7 +42,16 @@ class BookmarkApplicationSettingsApplication(ApplicationSettingsApplication):
     if hasattr(ApplicationSettingsApplication, "attribute_map"):
         attribute_map.update(ApplicationSettingsApplication.attribute_map)
 
-    def __init__(self, request_integration=None, url=None, *args, **kwargs):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, request_integration=None, url=None, *args, **kwargs):  # noqa: E501
         """BookmarkApplicationSettingsApplication - a model defined in Swagger"""  # noqa: E501
         self._request_integration = None
         self._url = None
@@ -51,7 +60,6 @@ class BookmarkApplicationSettingsApplication(ApplicationSettingsApplication):
             self.request_integration = request_integration
         if url is not None:
             self.url = url
-        ApplicationSettingsApplication.__init__(self, *args, **kwargs)
 
     @property
     def request_integration(self):

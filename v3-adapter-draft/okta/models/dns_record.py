@@ -41,7 +41,16 @@ class DNSRecord(object):
         'values': 'values'
     }
 
-    def __init__(self, expiration=None, fqdn=None, record_type=None, values=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, expiration=None, fqdn=None, record_type=None, values=None):  # noqa: E501
         """DNSRecord - a model defined in Swagger"""  # noqa: E501
         self._expiration = None
         self._fqdn = None

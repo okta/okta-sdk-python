@@ -29,12 +29,12 @@ from .helpers import to_snake_case
 from .request_executor import RequestExecutor
 
 # TODO: consider creating a package (with or separate)
-parent_dir = os.path.dirname(os.path.realpath(__name__))
-sys.path.insert(0, parent_dir)
+#parent_dir = os.path.dirname(os.path.realpath(__name__))
+#sys.path.insert(0, parent_dir)
 
-import swagger_client.api as swagger_api
+import okta.api as swagger_api
 
-from swagger_client import Configuration
+from okta.configuration import Configuration
 
 
 def swagger_args_adapter(f):

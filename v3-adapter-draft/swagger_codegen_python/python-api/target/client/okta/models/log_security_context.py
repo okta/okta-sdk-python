@@ -43,7 +43,16 @@ class LogSecurityContext(object):
         'isp': 'isp'
     }
 
-    def __init__(self, as_number=None, as_org=None, domain=None, is_proxy=None, isp=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, as_number=None, as_org=None, domain=None, is_proxy=None, isp=None):  # noqa: E501
         """LogSecurityContext - a model defined in Swagger"""  # noqa: E501
         self._as_number = None
         self._as_org = None

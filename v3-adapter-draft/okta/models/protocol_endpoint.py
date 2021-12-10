@@ -41,7 +41,16 @@ class ProtocolEndpoint(object):
         'url': 'url'
     }
 
-    def __init__(self, binding=None, destination=None, type=None, url=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, binding=None, destination=None, type=None, url=None):  # noqa: E501
         """ProtocolEndpoint - a model defined in Swagger"""  # noqa: E501
         self._binding = None
         self._destination = None

@@ -45,7 +45,16 @@ class CsrMetadataSubject(object):
         'state_or_province_name': 'stateOrProvinceName'
     }
 
-    def __init__(self, common_name=None, country_name=None, locality_name=None, organization_name=None, organizational_unit_name=None, state_or_province_name=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, common_name=None, country_name=None, locality_name=None, organization_name=None, organizational_unit_name=None, state_or_province_name=None):  # noqa: E501
         """CsrMetadataSubject - a model defined in Swagger"""  # noqa: E501
         self._common_name = None
         self._country_name = None

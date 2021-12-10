@@ -55,7 +55,16 @@ class Session(object):
         'user_id': 'userId'
     }
 
-    def __init__(self, links=None, amr=None, created_at=None, expires_at=None, id=None, idp=None, last_factor_verification=None, last_password_verification=None, login=None, status=None, user_id=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, links=None, amr=None, created_at=None, expires_at=None, id=None, idp=None, last_factor_verification=None, last_password_verification=None, login=None, status=None, user_id=None):  # noqa: E501
         """Session - a model defined in Swagger"""  # noqa: E501
         self._links = None
         self._amr = None

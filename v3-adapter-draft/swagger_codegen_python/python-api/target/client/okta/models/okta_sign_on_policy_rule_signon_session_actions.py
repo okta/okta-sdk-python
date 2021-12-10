@@ -39,7 +39,16 @@ class OktaSignOnPolicyRuleSignonSessionActions(object):
         'use_persistent_cookie': 'usePersistentCookie'
     }
 
-    def __init__(self, max_session_idle_minutes=None, max_session_lifetime_minutes=None, use_persistent_cookie=False):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, max_session_idle_minutes=None, max_session_lifetime_minutes=None, use_persistent_cookie=False):  # noqa: E501
         """OktaSignOnPolicyRuleSignonSessionActions - a model defined in Swagger"""  # noqa: E501
         self._max_session_idle_minutes = None
         self._max_session_lifetime_minutes = None

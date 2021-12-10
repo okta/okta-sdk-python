@@ -42,7 +42,16 @@ class PasswordPolicyConditions(PolicyRuleConditions):
     if hasattr(PolicyRuleConditions, "attribute_map"):
         attribute_map.update(PolicyRuleConditions.attribute_map)
 
-    def __init__(self, auth_provider=None, people=None, *args, **kwargs):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, auth_provider=None, people=None, *args, **kwargs):  # noqa: E501
         """PasswordPolicyConditions - a model defined in Swagger"""  # noqa: E501
         self._auth_provider = None
         self._people = None
@@ -51,7 +60,6 @@ class PasswordPolicyConditions(PolicyRuleConditions):
             self.auth_provider = auth_provider
         if people is not None:
             self.people = people
-        PolicyRuleConditions.__init__(self, *args, **kwargs)
 
     @property
     def auth_provider(self):

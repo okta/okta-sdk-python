@@ -35,7 +35,16 @@ class PasswordPolicyDelegationSettingsOptions(object):
         'skip_unlock': 'skipUnlock'
     }
 
-    def __init__(self, skip_unlock=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, skip_unlock=None):  # noqa: E501
         """PasswordPolicyDelegationSettingsOptions - a model defined in Swagger"""  # noqa: E501
         self._skip_unlock = None
         self.discriminator = None

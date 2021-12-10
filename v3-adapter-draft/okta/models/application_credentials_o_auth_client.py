@@ -41,7 +41,16 @@ class ApplicationCredentialsOAuthClient(object):
         'token_endpoint_auth_method': 'token_endpoint_auth_method'
     }
 
-    def __init__(self, auto_key_rotation=None, client_id=None, client_secret=None, token_endpoint_auth_method=None):  # noqa: E501
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config is not None:
+            self.set_attributes(**config)
+
+    @classmethod
+    def from_kwargs(cls, **kwargs):
+        return cls(config=kwargs)
+
+    def set_attributes(self, auto_key_rotation=None, client_id=None, client_secret=None, token_endpoint_auth_method=None):  # noqa: E501
         """ApplicationCredentialsOAuthClient - a model defined in Swagger"""  # noqa: E501
         self._auto_key_rotation = None
         self._client_id = None
