@@ -2,12 +2,14 @@ package org.example.swagger.codegen;
 
 import io.swagger.codegen.v3.CodegenModel;
 import io.swagger.codegen.v3.CodegenOperation;
+import io.swagger.codegen.v3.SupportingFile;
 import io.swagger.codegen.v3.generators.python.PythonClientCodegen;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.media.Schema;
 import org.apache.commons.lang3.StringUtils;
 import org.yaml.snakeyaml.Yaml;
 
+import java.io.File;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,6 +40,21 @@ public class CustomPythonClientCodegen extends PythonClientCodegen {
         super.preprocessOpenAPI(openAPI);
 
         this.buildDiscriminationMap(openAPI);
+    }
+
+    @Override
+    public void processOpts() {
+        super.processOpts();
+
+        replaceDestinationFilename("api_client.py", "swagger_api_client.py");
+    }
+
+    void replaceDestinationFilename(String oldName, String newName) {
+        for (SupportingFile supportingFile: supportingFiles) {
+            if(supportingFile.destinationFilename.equals(oldName)) {
+                supportingFile.destinationFilename = newName;
+            }
+        }
     }
 
     @Override
