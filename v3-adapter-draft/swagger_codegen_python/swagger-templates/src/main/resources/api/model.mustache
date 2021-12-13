@@ -68,7 +68,9 @@ class {{classname}}({{#parent}}{{parent}}{{/parent}}{{^parent}}object{{/parent}}
 {{/discriminator}}
 
     def __init__(self, config=None):
+        {{#parent}}
         super().__init__(config)
+        {{/parent}}
         if config is not None:
             self.set_attributes(**config)
 

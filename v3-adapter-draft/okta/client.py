@@ -83,8 +83,8 @@ def swagger_args_adapter(f):
             query_params = okta_kwargs.pop('query_params')
             okta_kwargs.update(query_params)
 
-        # TODO: to_snake_case all params?
-        swagger_args_list = [to_snake_case(arg) for arg in swagger_args_list]
+        # TODO: to_snake_case some args, but we can have user.id as arg and it will be malformed
+        #swagger_args_list = [to_snake_case(arg) for arg in swagger_args_list]
         swagger_kwargs = {to_snake_case(key): swagger_kwargs[key] for key in swagger_kwargs}
         return f(*swagger_args_list, **swagger_kwargs)
     return wrapper
@@ -151,13 +151,12 @@ class Client():
 
         # assign all available methods in api clients to okta main client
         for api_client_name, api_client_class in swagger_api_clients:
-            if api_client_name == 'UserApi':
-                #client = api_client_class(api_client_adapter)
-                client = api_client_class(self._request_executor)
-                api_methods = inspect.getmembers(client, predicate=inspect.ismethod)
-                for method_name, method in api_methods:
-                    if method_name != '__init__':
-                        setattr(self, method_name, swagger_args_adapter(method))
+            #client = api_client_class(api_client_adapter)
+            client = api_client_class(self._request_executor)
+            api_methods = inspect.getmembers(client, predicate=inspect.ismethod)
+            for method_name, method in api_methods:
+                if method_name != '__init__':
+                    setattr(self, method_name, swagger_args_adapter(method))
         # ------------------ v3 end -----------------
 
     """

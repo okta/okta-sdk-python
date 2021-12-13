@@ -70,7 +70,6 @@ class OrgSetting(object):
     }
 
     def __init__(self, config=None):
-        super().__init__(config)
         if config is not None:
             self.set_attributes(**config)
 
