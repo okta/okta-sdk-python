@@ -11,6 +11,8 @@ import six
 {{import}}  # noqa: F401,E501
 {{/imports}}
 
+from okta.helpers import to_snake_case
+
 {{#models}}
 {{#model}}
 class {{classname}}({{#parent}}{{parent}}{{/parent}}{{^parent}}object{{/parent}}):
@@ -72,6 +74,7 @@ class {{classname}}({{#parent}}{{parent}}{{/parent}}{{^parent}}object{{/parent}}
         super().__init__(config)
         {{/parent}}
         if config is not None:
+            config = {to_snake_case(key): value for key, value in config.items()}
             self.set_attributes(**config)
 
     @classmethod
