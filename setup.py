@@ -38,13 +38,17 @@ setup(
     ],
     install_requires=[
         "aiohttp",
+        "certifi",
         "flatdict",
         "pyyaml",
+        "six",
         "xmltodict",
         "yarl",
         "pycryptodome",
         "python-jose",
+        "python-dateutil",
         "aenum",
-        "pydash"
+        "pydash",
+        "urllib3"
     ]
 )

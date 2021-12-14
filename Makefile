@@ -30,8 +30,20 @@ help:
 build\:dist:
 	python3 setup.py sdist bdist_wheel
 
+generate:
+	cd openapi && mvn clean compile
+	cp -r openapi/python-api/target/client/okta/api okta/
+	cp -r openapi/python-api/target/client/okta/configuration.py okta/
+	cp -r openapi/python-api/target/client/okta/models okta/
+	cp -r openapi/python-api/target/client/okta/rest.py okta/
+	cp -r openapi/python-api/target/client/okta/swagger_api_client.py okta/
+	rm -rf openapi/python-api/target
+
 publish\:test:
 	python3 -m twine upload --repository testpypi dist/*
 
 publish\:prod:
 	python3 -m twine upload dist/*
+
+test_it:
+	pytest tests/integration
