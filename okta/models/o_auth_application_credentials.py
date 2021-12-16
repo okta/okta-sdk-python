@@ -43,10 +43,11 @@ class OAuthApplicationCredentials(ApplicationCredentials):
         attribute_map.update(ApplicationCredentials.attribute_map)
 
     def __init__(self, config=None):
-        super().__init__(config)
         if config is not None:
             config = {to_snake_case(key): value for key, value in config.items()}
-            self.set_attributes(**config)
+        else:
+            config = {}
+        self.set_attributes(**config)
 
     @classmethod
     def from_kwargs(cls, **kwargs):
@@ -58,6 +59,7 @@ class OAuthApplicationCredentials(ApplicationCredentials):
         self.discriminator = None
         if oauth_client is not None:
             self.oauth_client = oauth_client
+        super().set_attributes(*args, **kwargs)
 
     @property
     def oauth_client(self):

@@ -51,10 +51,11 @@ class SchemeApplicationCredentials(ApplicationCredentials):
         attribute_map.update(ApplicationCredentials.attribute_map)
 
     def __init__(self, config=None):
-        super().__init__(config)
         if config is not None:
             config = {to_snake_case(key): value for key, value in config.items()}
-            self.set_attributes(**config)
+        else:
+            config = {}
+        self.set_attributes(**config)
 
     @classmethod
     def from_kwargs(cls, **kwargs):
@@ -78,6 +79,7 @@ class SchemeApplicationCredentials(ApplicationCredentials):
             self.signing = signing
         if user_name is not None:
             self.user_name = user_name
+        super().set_attributes(*args, **kwargs)
 
     @property
     def password(self):

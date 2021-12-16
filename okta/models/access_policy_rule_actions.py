@@ -43,10 +43,11 @@ class AccessPolicyRuleActions(PolicyRuleActions):
         attribute_map.update(PolicyRuleActions.attribute_map)
 
     def __init__(self, config=None):
-        super().__init__(config)
         if config is not None:
             config = {to_snake_case(key): value for key, value in config.items()}
-            self.set_attributes(**config)
+        else:
+            config = {}
+        self.set_attributes(**config)
 
     @classmethod
     def from_kwargs(cls, **kwargs):
@@ -58,6 +59,7 @@ class AccessPolicyRuleActions(PolicyRuleActions):
         self.discriminator = None
         if app_sign_on is not None:
             self.app_sign_on = app_sign_on
+        super().set_attributes(*args, **kwargs)
 
     @property
     def app_sign_on(self):

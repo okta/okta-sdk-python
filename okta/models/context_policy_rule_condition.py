@@ -43,10 +43,11 @@ class ContextPolicyRuleCondition(DevicePolicyRuleCondition):
         attribute_map.update(DevicePolicyRuleCondition.attribute_map)
 
     def __init__(self, config=None):
-        super().__init__(config)
         if config is not None:
             config = {to_snake_case(key): value for key, value in config.items()}
-            self.set_attributes(**config)
+        else:
+            config = {}
+        self.set_attributes(**config)
 
     @classmethod
     def from_kwargs(cls, **kwargs):
@@ -58,6 +59,7 @@ class ContextPolicyRuleCondition(DevicePolicyRuleCondition):
         self.discriminator = None
         if expression is not None:
             self.expression = expression
+        super().set_attributes(*args, **kwargs)
 
     @property
     def expression(self):

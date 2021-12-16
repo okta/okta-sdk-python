@@ -45,10 +45,11 @@ class BookmarkApplicationSettingsApplication(ApplicationSettingsApplication):
         attribute_map.update(ApplicationSettingsApplication.attribute_map)
 
     def __init__(self, config=None):
-        super().__init__(config)
         if config is not None:
             config = {to_snake_case(key): value for key, value in config.items()}
-            self.set_attributes(**config)
+        else:
+            config = {}
+        self.set_attributes(**config)
 
     @classmethod
     def from_kwargs(cls, **kwargs):
@@ -63,6 +64,7 @@ class BookmarkApplicationSettingsApplication(ApplicationSettingsApplication):
             self.request_integration = request_integration
         if url is not None:
             self.url = url
+        super().set_attributes(*args, **kwargs)
 
     @property
     def request_integration(self):

@@ -41,10 +41,11 @@ class OAuthAuthorizationPolicy(Policy):
         attribute_map.update(Policy.attribute_map)
 
     def __init__(self, config=None):
-        super().__init__(config)
         if config is not None:
             config = {to_snake_case(key): value for key, value in config.items()}
-            self.set_attributes(**config)
+        else:
+            config = {}
+        self.set_attributes(**config)
 
     @classmethod
     def from_kwargs(cls, **kwargs):
@@ -53,6 +54,7 @@ class OAuthAuthorizationPolicy(Policy):
     def set_attributes(self, *args, **kwargs):  # noqa: E501
         """OAuthAuthorizationPolicy - a model defined in Swagger"""  # noqa: E501
         self.discriminator = None
+        super().set_attributes(*args, **kwargs)
 
     def to_dict(self):
         """Returns the model properties as a dict"""

@@ -33,12 +33,18 @@ class TestApplicationsResource:
         try:
             # Create App in org
             app, _, err = await client.create_application(bookmark_app_obj)
+            print('*' * 50)
+            print(err)
+            print('*' * 50)
             assert err is None
             assert isinstance(app, models.Application)
             assert isinstance(app, models.BookmarkApplication)
 
             # Get app and verify details
             found_app, _, err = await client.get_application(app.id)
+            print('*' * 50)
+            print(err)
+            print('*' * 50)
             assert err is None
             assert found_app.label == APP_LABEL
             assert found_app.sign_on_mode == models.ApplicationSignOnMode.BOOKMARK

@@ -70,12 +70,11 @@ class {{classname}}({{#parent}}{{parent}}{{/parent}}{{^parent}}object{{/parent}}
 {{/discriminator}}
 
     def __init__(self, config=None):
-        {{#parent}}
-        super().__init__(config)
-        {{/parent}}
         if config is not None:
             config = {to_snake_case(key): value for key, value in config.items()}
-            self.set_attributes(**config)
+        else:
+            config = {}
+        self.set_attributes(**config)
 
     @classmethod
     def from_kwargs(cls, **kwargs):
@@ -98,6 +97,9 @@ class {{classname}}({{#parent}}{{parent}}{{/parent}}{{^parent}}object{{/parent}}
             self.{{name}} = {{name}}
 {{/required}}
 {{/vars}}
+{{#parent}}
+        super().set_attributes(*args, **kwargs)
+{{/parent}}
 
 {{#vars}}
     @property

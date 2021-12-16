@@ -48,10 +48,11 @@ class BrowserPluginApplication(Application):
     }
 
     def __init__(self, config=None):
-        super().__init__(config)
         if config is not None:
             config = {to_snake_case(key): value for key, value in config.items()}
-            self.set_attributes(**config)
+        else:
+            config = {}
+        self.set_attributes(**config)
 
     @classmethod
     def from_kwargs(cls, **kwargs):
@@ -63,6 +64,7 @@ class BrowserPluginApplication(Application):
         self.discriminator = 'name'
         if credentials is not None:
             self.credentials = credentials
+        super().set_attributes(*args, **kwargs)
 
     @property
     def credentials(self):

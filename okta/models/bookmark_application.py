@@ -45,10 +45,11 @@ class BookmarkApplication(Application):
         attribute_map.update(Application.attribute_map)
 
     def __init__(self, config=None):
-        super().__init__(config)
         if config is not None:
             config = {to_snake_case(key): value for key, value in config.items()}
-            self.set_attributes(**config)
+        else:
+            config = {}
+        self.set_attributes(**config)
 
     @classmethod
     def from_kwargs(cls, **kwargs):
@@ -63,6 +64,7 @@ class BookmarkApplication(Application):
             self.name = name
         if settings is not None:
             self.settings = settings
+        super().set_attributes(*args, **kwargs)
 
     @property
     def name(self):

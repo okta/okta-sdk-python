@@ -40,7 +40,9 @@ class AuthorizationServerCredentials(object):
     def __init__(self, config=None):
         if config is not None:
             config = {to_snake_case(key): value for key, value in config.items()}
-            self.set_attributes(**config)
+        else:
+            config = {}
+        self.set_attributes(**config)
 
     @classmethod
     def from_kwargs(cls, **kwargs):

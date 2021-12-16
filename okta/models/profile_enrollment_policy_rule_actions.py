@@ -43,10 +43,11 @@ class ProfileEnrollmentPolicyRuleActions(PolicyRuleActions):
         attribute_map.update(PolicyRuleActions.attribute_map)
 
     def __init__(self, config=None):
-        super().__init__(config)
         if config is not None:
             config = {to_snake_case(key): value for key, value in config.items()}
-            self.set_attributes(**config)
+        else:
+            config = {}
+        self.set_attributes(**config)
 
     @classmethod
     def from_kwargs(cls, **kwargs):
@@ -58,6 +59,7 @@ class ProfileEnrollmentPolicyRuleActions(PolicyRuleActions):
         self.discriminator = None
         if profile_enrollment is not None:
             self.profile_enrollment = profile_enrollment
+        super().set_attributes(*args, **kwargs)
 
     @property
     def profile_enrollment(self):

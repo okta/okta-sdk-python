@@ -65,10 +65,11 @@ class WsFederationApplicationSettingsApplication(ApplicationSettingsApplication)
         attribute_map.update(ApplicationSettingsApplication.attribute_map)
 
     def __init__(self, config=None):
-        super().__init__(config)
         if config is not None:
             config = {to_snake_case(key): value for key, value in config.items()}
-            self.set_attributes(**config)
+        else:
+            config = {}
+        self.set_attributes(**config)
 
     @classmethod
     def from_kwargs(cls, **kwargs):
@@ -113,6 +114,7 @@ class WsFederationApplicationSettingsApplication(ApplicationSettingsApplication)
             self.w_reply_override = w_reply_override
         if w_reply_url is not None:
             self.w_reply_url = w_reply_url
+        super().set_attributes(*args, **kwargs)
 
     @property
     def attribute_statements(self):

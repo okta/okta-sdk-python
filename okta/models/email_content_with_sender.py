@@ -45,10 +45,11 @@ class EmailContentWithSender(EmailContent):
         attribute_map.update(EmailContent.attribute_map)
 
     def __init__(self, config=None):
-        super().__init__(config)
         if config is not None:
             config = {to_snake_case(key): value for key, value in config.items()}
-            self.set_attributes(**config)
+        else:
+            config = {}
+        self.set_attributes(**config)
 
     @classmethod
     def from_kwargs(cls, **kwargs):
@@ -61,6 +62,7 @@ class EmailContentWithSender(EmailContent):
         self.discriminator = None
         self.from_address = from_address
         self.from_name = from_name
+        super().set_attributes(*args, **kwargs)
 
     @property
     def from_address(self):

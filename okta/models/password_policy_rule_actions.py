@@ -47,10 +47,11 @@ class PasswordPolicyRuleActions(PolicyRuleActions):
         attribute_map.update(PolicyRuleActions.attribute_map)
 
     def __init__(self, config=None):
-        super().__init__(config)
         if config is not None:
             config = {to_snake_case(key): value for key, value in config.items()}
-            self.set_attributes(**config)
+        else:
+            config = {}
+        self.set_attributes(**config)
 
     @classmethod
     def from_kwargs(cls, **kwargs):
@@ -68,6 +69,7 @@ class PasswordPolicyRuleActions(PolicyRuleActions):
             self.self_service_password_reset = self_service_password_reset
         if self_service_unlock is not None:
             self.self_service_unlock = self_service_unlock
+        super().set_attributes(*args, **kwargs)
 
     @property
     def password_change(self):

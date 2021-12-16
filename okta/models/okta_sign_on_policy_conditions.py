@@ -43,10 +43,11 @@ class OktaSignOnPolicyConditions(PolicyRuleConditions):
         attribute_map.update(PolicyRuleConditions.attribute_map)
 
     def __init__(self, config=None):
-        super().__init__(config)
         if config is not None:
             config = {to_snake_case(key): value for key, value in config.items()}
-            self.set_attributes(**config)
+        else:
+            config = {}
+        self.set_attributes(**config)
 
     @classmethod
     def from_kwargs(cls, **kwargs):
@@ -58,6 +59,7 @@ class OktaSignOnPolicyConditions(PolicyRuleConditions):
         self.discriminator = None
         if people is not None:
             self.people = people
+        super().set_attributes(*args, **kwargs)
 
     @property
     def people(self):

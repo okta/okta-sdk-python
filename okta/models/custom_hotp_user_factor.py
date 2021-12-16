@@ -45,10 +45,11 @@ class CustomHotpUserFactor(UserFactor):
         attribute_map.update(UserFactor.attribute_map)
 
     def __init__(self, config=None):
-        super().__init__(config)
         if config is not None:
             config = {to_snake_case(key): value for key, value in config.items()}
-            self.set_attributes(**config)
+        else:
+            config = {}
+        self.set_attributes(**config)
 
     @classmethod
     def from_kwargs(cls, **kwargs):
@@ -63,6 +64,7 @@ class CustomHotpUserFactor(UserFactor):
             self.factor_profile_id = factor_profile_id
         if profile is not None:
             self.profile = profile
+        super().set_attributes(*args, **kwargs)
 
     @property
     def factor_profile_id(self):
