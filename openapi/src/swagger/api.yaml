@@ -1,19 +1,4 @@
-#
-# Copyright 2020-Present Okta, Inc.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-openapi: 3.0.1
+openapi: 3.0.2
 info:
   title: Okta API
   description: Allows customers to easily access the Okta API
@@ -25,16 +10,32 @@ info:
   license:
     name: Apache-2.0
     url: https://www.apache.org/licenses/LICENSE-2.0.html
-  version: 2.7.0
+  version: 2.9.2
   x-logo:
     url: logo.svg
     backgroundColor: transparent
-    altText: Okta Logo
+    altText: Okta Developer
 externalDocs:
   description: Find more info here
   url: https://developer.okta.com/docs/api/getting_started/design_principles.html
 servers:
-- url: https://your-subdomain.okta.com
+- url: https://{subdomain}.{domain}
+  variables:
+    subdomain:
+      default: your-subdomain
+      description: The subdomain of your organization
+    domain:
+      enum:
+      - okta.com
+      - oktapreview.com
+      - okta-emea.com
+      default: okta.com
+      description: The okta domain of your organization.
+- url: https://{customDomain}
+  variables:
+    customDomain:
+      default: auth.your-custom-domain.com
+      description: The custom domain configured for your organization
 paths:
   /api/v1/apps:
     get:
@@ -293,63 +294,63 @@ paths:
           content: {}
       security:
       - api_token: []
-#  /api/v1/apps/{appId}/credentials/csrs/{csrId}/lifecycle/publish:
-#    post:
-#      tags:
-#      - Application
-#      summary: Publish Certificate Signing Request
-#      description: Updates a certificate signing request for the app with a signed X.509 certificate and adds it into the application key credentials
-#      operationId: publishCsrFromApplication
-#      parameters:
-#      - name: appId
-#        in: path
-#        required: true
-#        schema:
-#          type: string
-#      - name: csrId
-#        in: path
-#        required: true
-#        schema:
-#          type: string
-#      requestBody:
-#        required: true
-#        content:
-#          application/octet-stream:
-#            schema:
-#              type: string
-#              format: binary
-#          application/x-x509-ca-cert:
-#            schema:
-#              oneOf:
-#              - type: string
-#                format: binary
-#                x-okta-operationId: publishBinaryCerCert
-#              - type: string
-#                format: base64
-#                x-okta-operationId: publishBase64CerCert
-#          application/pkix-cert:
-#            schema:
-#              oneOf:
-#              - type: string
-#                format: binary
-#                x-okta-operationId: publishBinaryDerCert
-#              - type: string
-#                format: base64
-#                x-okta-operationId: publishBase64DerCert
-#          application/x-pem-file:
-#            schema:
-#              type: string
-#              format: binary
-#              x-okta-operationId: publishBinaryPemCert
-#      responses:
-#        '201':
-#          description: Created
-#          content:
-#            application/json:
-#              schema:
-#                $ref: '#/components/schemas/JsonWebKey'
-#      security:
-#      - api_token: []
+  /api/v1/apps/{appId}/credentials/csrs/{csrId}/lifecycle/publish:
+    post:
+      tags:
+      - Application
+      summary: Publish Certificate Signing Request
+      description: Updates a certificate signing request for the app with a signed X.509 certificate and adds it into the application key credentials
+      operationId: publishCsrFromApplication
+      parameters:
+      - name: appId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: csrId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+          application/x-x509-ca-cert:
+            schema:
+              oneOf:
+              - type: string
+                format: binary
+                x-okta-operationId: publishBinaryCerCert
+              - type: string
+                format: base64
+                x-okta-operationId: publishBase64CerCert
+          application/pkix-cert:
+            schema:
+              oneOf:
+              - type: string
+                format: binary
+                x-okta-operationId: publishBinaryDerCert
+              - type: string
+                format: base64
+                x-okta-operationId: publishBase64DerCert
+          application/x-pem-file:
+            schema:
+              type: string
+              format: binary
+              x-okta-operationId: publishBinaryPemCert
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonWebKey'
+      security:
+      - api_token: []
   /api/v1/apps/{appId}/credentials/keys:
     get:
       tags:
@@ -1053,6 +1054,33 @@ paths:
       - api_token: []
       tags:
       - Authenticator
+    put:
+      description: Updates an authenticator
+      operationId: updateAuthenticator
+      parameters:
+      - in: path
+        name: authenticatorId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Authenticator'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Authenticator'
+      x-okta-request-body-name: authenticator
+      security:
+      - api_token: []
+      summary: Update Authenticator
+      tags:
+      - Authenticator
   /api/v1/authenticators/{authenticatorId}/lifecycle/activate:
     post:
       summary: Activate Authenticator
@@ -1067,6 +1095,10 @@ paths:
       responses:
         '200':
           description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Authenticator'
       security:
       - api_token: []
       tags:
@@ -1085,6 +1117,10 @@ paths:
       responses:
         '200':
           description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Authenticator'
       security:
       - api_token: []
       tags:
@@ -2120,6 +2156,745 @@ paths:
           content: {}
       security:
       - api_token: []
+  /api/v1/brands:
+    get:
+      description: List all the brands in your org.
+      operationId: listBrands
+      parameters: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Brand'
+      security:
+      - api_token: []
+      summary: List Brands
+      tags:
+      - Brand
+  /api/v1/brands/{brandId}:
+    get:
+      description: Fetches a brand by `brandId`
+      operationId: getBrand
+      parameters:
+      - in: path
+        name: brandId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Brand'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_token: []
+      summary: Get Brand
+      tags:
+      - Brand
+    put:
+      description: Updates a brand by `brandId`
+      operationId: updateBrand
+      parameters:
+      - in: path
+        name: brandId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Brand'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Brand'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-okta-request-body-name: brand
+      security:
+      - api_token: []
+      summary: Update Brand
+      tags:
+      - Brand
+  /api/v1/brands/{brandId}/themes:
+    get:
+      description: List all the themes in your brand
+      operationId: listBrandThemes
+      parameters:
+      - in: path
+        name: brandId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ThemeResponse'
+      security:
+      - api_token: []
+      summary: Get Brand Themes
+      tags:
+      - Brand
+  /api/v1/brands/{brandId}/themes/{themeId}:
+    get:
+      description: Fetches a theme for a brand
+      operationId: getBrandTheme
+      parameters:
+      - in: path
+        name: brandId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: themeId
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThemeResponse'
+      security:
+      - api_token: []
+      summary: Get a theme for a brand
+      tags:
+      - Brand
+    put:
+      description: Updates a theme for a brand
+      operationId: updateBrandTheme
+      parameters:
+      - in: path
+        name: brandId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: themeId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Theme'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ThemeResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      x-okta-request-body-name: theme
+      security:
+      - api_token: []
+      summary: Update a theme for a brand
+      tags:
+      - Brand
+  /api/v1/brands/{brandId}/themes/{themeId}/background-image:
+    delete:
+      description: Deletes a Theme background image
+      operationId: deleteBrandThemeBackgroundImage
+      parameters:
+      - in: path
+        name: brandId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: themeId
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+          content: {}
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_token: []
+      summary: Deletes a Theme background image
+      tags:
+      - Brand
+    post:
+      description: Updates the background image for your Theme
+      operationId: uploadBrandThemeBackgroundImage
+      parameters:
+      - in: path
+        name: brandId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: themeId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              description: The file must be in PNG, JPG, or GIF format and less than 2 MB in size.
+        description: background image file
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageUploadResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_token: []
+      summary: Updates the background image for your Theme
+      tags:
+      - Brand
+  /api/v1/brands/{brandId}/themes/{themeId}/favicon:
+    delete:
+      description: Deletes a Theme favicon. The org then uses the Okta default favicon.
+      operationId: deleteBrandThemeFavicon
+      parameters:
+      - in: path
+        name: brandId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: themeId
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+          content: {}
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_token: []
+      summary: Deletes a Theme favicon. The org then uses the Okta default favicon.
+      tags:
+      - Brand
+    post:
+      description: Updates the favicon for your theme
+      operationId: uploadBrandThemeFavicon
+      parameters:
+      - in: path
+        name: brandId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: themeId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              description: The file must be in PNG, or ico format and less than ?? in size and 128 x 128 dimensions
+        description: favicon file
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageUploadResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_token: []
+      summary: Updates the favicon for your theme
+      tags:
+      - Brand
+  /api/v1/brands/{brandId}/themes/{themeId}/logo:
+    delete:
+      description: Deletes a Theme logo. The org then uses the Okta default logo.
+      operationId: deleteBrandThemeLogo
+      parameters:
+      - in: path
+        name: brandId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: themeId
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+          content: {}
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_token: []
+      summary: Deletes a Theme logo. The org then uses the Okta default logo.
+      tags:
+      - Brand
+    post:
+      description: Updates the logo for your Theme
+      operationId: uploadBrandThemeLogo
+      parameters:
+      - in: path
+        name: brandId
+        required: true
+        schema:
+          type: string
+      - in: path
+        name: themeId
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              description: The file must be in PNG, JPG, or GIF format and less than 100kB in size. For best results use landscape orientation, a transparent background, and a minimum size of 300px by 50px to prevent upscaling.
+              type: object
+        description: logo file
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageUploadResponse'
+        '400':
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - api_token: []
+      summary: Update a themes logo
+      tags:
+      - Brand
+  /api/v1/brands/{brandId}/templates/email:
+    parameters:
+    - schema:
+        type: string
+      name: brandId
+      in: path
+      required: true
+      description: brand id
+    get:
+      summary: List Email Templates
+      responses:
+        '200':
+          description: Successfully fetch a list of email templates.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EmailTemplate'
+          headers:
+            Link:
+              schema:
+                type: string
+                example: <http://oienapa.okta1.com:1802/api/v1/brands/{brandId}/templates/email?limit=200>; rel="self"
+              description: Links to the current and next page of results.
+      operationId: listEmailTemplates
+      description: List email templates in your organization with pagination.
+      security:
+      - api_token: []
+      parameters:
+      - schema:
+          type: string
+        in: query
+        description: Specifies the pagination cursor for the next page of email templates.
+        name: after
+      - schema:
+          type: integer
+          default: 20
+        in: query
+        name: limit
+        description: Specifies the number of results returned (maximum 200)
+      tags:
+      - Brand
+  /api/v1/brands/{brandId}/templates/email/{templateName}:
+    get:
+      summary: Get Email Template
+      responses:
+        '200':
+          description: Successfully fetch an email template by name.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailTemplate'
+      operationId: getEmailTemplate
+      description: Fetch an email template by `templateName`
+      security:
+      - api_token: []
+      tags:
+      - Brand
+    parameters:
+    - schema:
+        type: string
+      name: brandId
+      in: path
+      required: true
+    - schema:
+        type: string
+      name: templateName
+      in: path
+      required: true
+  /api/v1/brands/{brandId}/templates/email/{templateName}/default-content:
+    get:
+      summary: Get Default Content of Email Template
+      responses:
+        '200':
+          description: Successfully fetch the default content for an email template.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailDefaultContent'
+      operationId: getEmailTemplateDefaultContent
+      description: Fetch the default content for an email template.
+      security:
+      - api_token: []
+      tags:
+      - Brand
+    parameters:
+    - schema:
+        type: string
+      name: brandId
+      in: path
+      required: true
+    - schema:
+        type: string
+      name: templateName
+      in: path
+      required: true
+  /api/v1/brands/{brandId}/templates/email/{templateName}/default-content/preview:
+    parameters:
+    - schema:
+        type: string
+      name: brandId
+      in: path
+      required: true
+    - schema:
+        type: string
+      name: templateName
+      in: path
+      required: true
+    get:
+      summary: Get Preview of Email Template Default Content
+      responses:
+        '200':
+          description: ' Successfully fetch the preview of an email template''s default content.'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailPreview'
+      operationId: previewEmailDefaultContent
+      security:
+      - api_token: []
+      description: Fetch a preview of an email template's default content by populating velocity references with the current user's environment.
+      tags:
+      - Brand
+  /api/v1/brands/{brandId}/templates/email/{templateName}/customizations:
+    get:
+      summary: List Email Customizations
+      responses:
+        '200':
+          description: Successfully fetch all email customizations of a given email template name.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EmailCustomization'
+      operationId: getAllEmailCustomizations
+      description: List all email customcations for an email template
+      security:
+      - api_token: []
+      tags:
+      - Brand
+    parameters:
+    - schema:
+        type: string
+      name: brandId
+      in: path
+      required: true
+    - schema:
+        type: string
+      name: templateName
+      in: path
+      required: true
+    delete:
+      summary: Delete Email Customizations
+      operationId: deleteAllCustomizations
+      responses:
+        '204':
+          description: Successfully deletes all customizations for an email template.
+          content: {}
+      description: Delete all customizations for an email template. Also known as “Reset to Default”.
+      security:
+      - api_token: []
+      tags:
+      - Brand
+    post:
+      summary: Create Email Customization
+      operationId: createEmailCustomization
+      responses:
+        '201':
+          description: If success, return the created email customization
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailCustomization'
+      description: Create an email customization
+      tags:
+      - Brand
+      security:
+      - api_token: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmailCustomization'
+            examples:
+              example-1:
+                value:
+                  language: cs-CZ
+                  isDefault: true
+                  subject: Welcome to $org.name
+                  body: Hello, $user.profile.firstName!
+                  fromAddress: noreply@okta.com
+                  fromName: $org.name
+      x-okta-request-body-name: instance
+  /api/v1/brands/{brandId}/templates/email/{templateName}/customizations/{customizationId}:
+    parameters:
+    - schema:
+        type: string
+      name: brandId
+      in: path
+      required: true
+    - schema:
+        type: string
+      name: templateName
+      in: path
+      required: true
+    - schema:
+        type: string
+      name: customizationId
+      in: path
+      required: true
+    get:
+      summary: Get Email Customization
+      responses:
+        '200':
+          description: Successfully get an email template's customization by `id`.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailCustomization'
+      operationId: getEmailCustomization
+      security:
+      - api_token: []
+      description: Fetch an email customization by `id`.
+      tags:
+      - Brand
+    put:
+      summary: Update Email Customization
+      operationId: updateEmailCustomization
+      responses:
+        '200':
+          description: If update successfully, return the updated email customization
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailCustomization'
+      description: Update an email customization
+      security:
+      - api_token: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmailCustomization'
+            examples:
+              example-1:
+                value:
+                  language: cs-CZ
+                  isDefault: true
+                  subject: Welcome to $org.name
+                  body: Hello, $user.profile.firstName!
+                  fromAddress: noreply@okta.com
+                  fromName: $org.name
+        description: Request
+      tags:
+      - Brand
+      x-okta-request-body-name: instance
+    delete:
+      summary: Delete Email Customization
+      operationId: deleteEmailCustomization
+      responses:
+        '204':
+          description: Successfully delete an email customization by `id`
+          content: {}
+      security:
+      - api_token: []
+      description: Delete an email customization
+      tags:
+      - Brand
+  /api/v1/brands/{brandId}/templates/email/{templateName}/customizations/{customizationId}/preview:
+    parameters:
+    - schema:
+        type: string
+      name: brandId
+      in: path
+      required: true
+    - schema:
+        type: string
+      name: templateName
+      in: path
+      required: true
+    - schema:
+        type: string
+      name: customizationId
+      in: path
+      required: true
+    get:
+      summary: Get Preview Content of Email Customization
+      responses:
+        '200':
+          description: Successfully fetch the preview content of an email customization.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmailPreview'
+      operationId: previewEmailCustomizationContent
+      description: Get a preview of an email template customization.
+      security:
+      - api_token: []
+      tags:
+      - Brand
+  /api/v1/brands/{brandId}/templates/email/{templateName}/test:
+    post:
+      summary: Send Test Email
+      operationId: sendTestEmailFromTemplate
+      responses:
+        '204':
+          description: No Content
+          content: {}
+      description: |-
+        Send a test email to the current user’s primary and secondary email addresses. The email content is selected based on the following priority:
+        1. An email customization specifically for the user’s locale.
+        2. The default language of email customizations.
+        3. The email template’s default content.
+      security:
+      - api_token: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmailTestResponse'
+            examples:
+              example-1:
+                value:
+                  customizationId: oel11u6DqUiMbQkpl0g4
+      tags:
+      - Brand
+    parameters:
+    - schema:
+        type: string
+      name: templateName
+      in: path
+      required: true
+    - schema:
+        type: string
+      name: brandId
+      in: path
+      required: true
   /api/v1/captchas:
     get:
       summary: List CAPTCHA instances
@@ -2168,6 +2943,8 @@ paths:
       parameters: []
       security:
       - api_token: []
+      - oauth2:
+        - okta.captchas.read
     post:
       summary: Create new CAPTCHA instance
       operationId: createCaptchaInstance
@@ -2225,6 +3002,8 @@ paths:
       - CAPTCHA
       security:
       - api_token: []
+      - oauth2:
+        - okta.captchas.manage
       x-okta-request-body-name: instance
   /api/v1/captchas/{captchaId}:
     parameters:
@@ -2280,6 +3059,8 @@ paths:
       description: Fetches a CAPTCHA instance by `id`.
       security:
       - api_token: []
+      - oauth2:
+        - okta.captchas.read
     put:
       summary: Update CAPTCHA instance
       operationId: updateCaptchaInstance
@@ -2353,6 +3134,8 @@ paths:
       - CAPTCHA
       security:
       - api_token: []
+      - oauth2:
+        - okta.captchas.manage
       x-okta-request-body-name: instance
     delete:
       summary: Delete CAPTCHA Instance
@@ -2394,6 +3177,8 @@ paths:
       - CAPTCHA
       security:
       - api_token: []
+      - oauth2:
+        - okta.captchas.manage
     post:
       summary: Partial Update CAPTCHA instance
       operationId: partialUpdateCaptchaInstance
@@ -2458,6 +3243,8 @@ paths:
       - CAPTCHA
       security:
       - api_token: []
+      - oauth2:
+        - okta.captchas.manage
       x-okta-request-body-name: instance
   /api/v1/domains:
     get:
@@ -3256,7 +4043,7 @@ paths:
       - name: disableNotifications
         in: query
         schema:
-          type: string
+          type: boolean
       requestBody:
         content:
           application/json:
@@ -3983,62 +4770,62 @@ paths:
           content: {}
       security:
       - api_token: []
-#  /api/v1/idps/{idpId}/credentials/csrs/{csrId}/lifecycle/publish:
-#    post:
-#      tags:
-#      - IdentityProvider
-#      description: Update the Certificate Signing Request with a signed X.509 certificate and add it into the signing key credentials for the IdP.
-#      operationId: publishCsrForIdentityProvider
-#      parameters:
-#      - name: idpId
-#        in: path
-#        required: true
-#        schema:
-#          type: string
-#      - name: csrId
-#        in: path
-#        required: true
-#        schema:
-#          type: string
-#      requestBody:
-#        required: true
-#        content:
-#          application/octet-stream:
-#            schema:
-#              type: string
-#              format: binary
-#          application/x-x509-ca-cert:
-#            schema:
-#              oneOf:
-#              - type: string
-#                format: binary
-#                x-okta-operationId: publishBinaryCerCertForIdentityProvider
-#              - type: string
-#                format: base64
-#                x-okta-operationId: publishBase64CerCertForIdentityProvider
-#          application/pkix-cert:
-#            schema:
-#              oneOf:
-#              - type: string
-#                format: binary
-#                x-okta-operationId: publishBinaryDerCertForIdentityProvider
-#              - type: string
-#                format: base64
-#                x-okta-operationId: publishBase64DerCertForIdentityProvider
-#          application/x-pem-file:
-#            schema:
-#              type: string
-#              format: binary
-#              x-okta-operationId: publishBinaryPemCertForIdentityProvider
-#      responses:
-#        '201':
-#          description: Created
-#          content:
-#            application/json:
-#              schema:
-#                $ref: '#/components/schemas/JsonWebKey'
-#      security:
-#      - api_token: []
+  /api/v1/idps/{idpId}/credentials/csrs/{csrId}/lifecycle/publish:
+    post:
+      tags:
+      - IdentityProvider
+      description: Update the Certificate Signing Request with a signed X.509 certificate and add it into the signing key credentials for the IdP.
+      operationId: publishCsrForIdentityProvider
+      parameters:
+      - name: idpId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: csrId
+        in: path
+        required: true
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/octet-stream:
+            schema:
+              type: string
+              format: binary
+          application/x-x509-ca-cert:
+            schema:
+              oneOf:
+              - type: string
+                format: binary
+                x-okta-operationId: publishBinaryCerCertForIdentityProvider
+              - type: string
+                format: base64
+                x-okta-operationId: publishBase64CerCertForIdentityProvider
+          application/pkix-cert:
+            schema:
+              oneOf:
+              - type: string
+                format: binary
+                x-okta-operationId: publishBinaryDerCertForIdentityProvider
+              - type: string
+                format: base64
+                x-okta-operationId: publishBase64DerCertForIdentityProvider
+          application/x-pem-file:
+            schema:
+              type: string
+              format: binary
+              x-okta-operationId: publishBinaryPemCertForIdentityProvider
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JsonWebKey'
+      security:
+      - api_token: []
   /api/v1/idps/{idpId}/credentials/keys:
     get:
       tags:
@@ -4645,7 +5432,7 @@ paths:
   /api/v1/meta/schemas/apps/{appInstanceId}/default:
     get:
       tags:
-      - UserSchema
+      - Schema
       summary: Fetches the Schema for an App User
       description: Fetches the Schema for an App User
       operationId: getApplicationUserSchema
@@ -4666,7 +5453,7 @@ paths:
       - api_token: []
     post:
       tags:
-      - UserSchema
+      - Schema
       summary: Partial updates on the User Profile properties of the Application User Schema.
       description: Partial updates on the User Profile properties of the Application User Schema.
       operationId: updateApplicationUserProfile
@@ -4708,7 +5495,7 @@ paths:
       - api_token: []
       summary: Fetches the group schema
       tags:
-      - GroupSchema
+      - Schema
     post:
       description: Updates, adds ore removes one or more custom Group Profile properties in the schema
       operationId: updateGroupSchema
@@ -4728,11 +5515,11 @@ paths:
       - api_token: []
       summary: Updates, adds ore removes one or more custom Group Profile properties in the schema
       tags:
-      - GroupSchema
+      - Schema
   /api/v1/meta/schemas/user/{schemaId}:
     get:
       tags:
-      - UserSchema
+      - Schema
       summary: Fetches the schema for a Schema Id.
       description: Fetches the schema for a Schema Id.
       operationId: getUserSchema
@@ -4753,7 +5540,7 @@ paths:
       - api_token: []
     post:
       tags:
-      - UserSchema
+      - Schema
       description: Partial updates on the User Profile properties of the user schema.
       operationId: updateUserProfile
       parameters:
@@ -5112,6 +5899,25 @@ paths:
       tags:
       - Org
       x-okta-request-body-name: orgContactUser
+  /api/v1/org/logo:
+    post:
+      description: Updates the logo for your organization.
+      operationId: updateOrgLogo
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              description: The file must be in PNG, JPG, or GIF format and less than 100kB in size. For best results use landscape orientation, a transparent background, and a minimum size of 300px by 50px to prevent upscaling.
+              type: object
+        description: logo file
+      responses:
+        '201':
+          description: Created
+      security:
+      - api_token: []
+      summary: Update org logo
+      tags:
+      - Org
   /api/v1/org/privacy/oktaSupport:
     get:
       description: Gets Okta Support Settings of your organization.
@@ -7137,7 +7943,7 @@ paths:
       tags:
       - User
       summary: Deactivate User
-      description: Deactivates a user.  This operation can only be performed on users that do not have a `DEPROVISIONED` status.  Deactivation of a user is an asynchronous operation.  The user will have the `transitioningToStatus` property with a value of `DEPROVISIONED` during deactivation to indicate that the user hasn't completed the asynchronous operation.  The user will have a status of `DEPROVISIONED` when the deactivation process is complete.
+      description: 'Deactivates a user. This operation can only be performed on users that do not have a `DEPROVISIONED` status. While the asynchronous operation (triggered by HTTP header `Prefer: respond-async`) is proceeding the user''s `transitioningToStatus` property is `DEPROVISIONED`. The user''s status is `DEPROVISIONED` when the deactivation process is complete.'
       operationId: deactivateUser
       parameters:
       - name: userId
@@ -7433,7 +8239,7 @@ paths:
       - name: disableNotifications
         in: query
         schema:
-          type: string
+          type: boolean
       requestBody:
         content:
           application/json:
@@ -7970,10 +8776,20 @@ paths:
 components:
   securitySchemes:
     api_token:
-      description: SSWS {API Token}
+      description: 'Pass the API token as the Authorization header value prefixed with SSWS: ''Authorizaion: SSWS {API Token}'''
       name: Authorization
       type: apiKey
       in: header
+    oauth2:
+      type: oauth2
+      description: 'Pass the access_token as the value of the Authorization header: ''Authorization: {access_token}'''
+      flows:
+        authorizationCode:
+          authorizationUrl: /oauth2/v1/authorize
+          tokenUrl: /oauth2/v1/token
+          scopes:
+            okta.captchas.manage: Read or modify catpcha instances in your org.
+            okta.captchas.read: Read catpcha instances in your org.
   schemas:
     AppUser:
       type: object
@@ -8118,12 +8934,7 @@ components:
         signOnMode:
           $ref: '#/components/schemas/ApplicationSignOnMode'
         status:
-          type: string
-          readOnly: true
-          enum:
-          - ACTIVE
-          - INACTIVE
-          - DELETED
+          $ref: '#/components/schemas/ApplicationLifecycleStatus'
         visibility:
           $ref: '#/components/schemas/ApplicationVisibility'
       x-okta-crud:
@@ -8369,6 +9180,8 @@ components:
     ApplicationCredentialsUsernameTemplate:
       type: object
       properties:
+        pushStatus:
+          type: string
         suffix:
           type: string
         template:
@@ -8421,6 +9234,15 @@ components:
       properties:
         seatCount:
           type: integer
+      x-okta-tags:
+      - Application
+    ApplicationLifecycleStatus:
+      type: string
+      readOnly: true
+      enum:
+      - ACTIVE
+      - INACTIVE
+      - DELETED
       x-okta-tags:
       - Application
     ApplicationSettings:
@@ -8734,13 +9556,24 @@ components:
           type: string
       x-okta-tags:
       - Application
+    GrantOrTokenStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - REVOKED
+      x-okta-tags:
+      - Application
     JwkUse:
       type: object
       properties:
         use:
-          type: string
-          enum:
-          - sig
+          $ref: '#/components/schemas/JwkUseType'
+      x-okta-tags:
+      - Application
+    JwkUseType:
+      type: string
+      enum:
+      - sig
       x-okta-tags:
       - Application
     OAuth2Actor:
@@ -8765,39 +9598,48 @@ components:
         alwaysIncludeInToken:
           type: boolean
         claimType:
-          type: string
-          enum:
-          - IDENTITY
-          - RESOURCE
+          $ref: '#/components/schemas/OAuth2ClaimType'
         conditions:
           $ref: '#/components/schemas/OAuth2ClaimConditions'
         group_filter_type:
-          type: string
-          enum:
-          - STARTS_WITH
-          - EQUALS
-          - CONTAINS
-          - REGEX
+          $ref: '#/components/schemas/OAuth2ClaimGroupFilterType'
         id:
           type: string
           readOnly: true
         name:
           type: string
         status:
-          type: string
-          enum:
-          - ACTIVE
-          - INACTIVE
+          $ref: '#/components/schemas/LifecycleStatus'
         system:
           type: boolean
         value:
           type: string
         valueType:
-          type: string
-          enum:
-          - EXPRESSION
-          - GROUPS
-          - SYSTEM
+          $ref: '#/components/schemas/OAuth2ClaimValueType'
+      x-okta-tags:
+      - Application
+    OAuth2ClaimType:
+      type: string
+      enum:
+      - IDENTITY
+      - RESOURCE
+      x-okta-tags:
+      - Application
+    OAuth2ClaimValueType:
+      type: string
+      enum:
+      - EXPRESSION
+      - GROUPS
+      - SYSTEM
+      x-okta-tags:
+      - Application
+    OAuth2ClaimGroupFilterType:
+      type: string
+      enum:
+      - STARTS_WITH
+      - EQUALS
+      - CONTAINS
+      - REGEX
       x-okta-tags:
       - Application
     OAuth2ClaimConditions:
@@ -8873,10 +9715,7 @@ components:
           items:
             type: string
         status:
-          type: string
-          enum:
-          - ACTIVE
-          - REVOKED
+          $ref: '#/components/schemas/GrantOrTokenStatus'
         userId:
           type: string
       x-okta-tags:
@@ -8885,11 +9724,7 @@ components:
       type: object
       properties:
         consent:
-          type: string
-          enum:
-          - REQUIRED
-          - IMPLICIT
-          - ADMIN
+          $ref: '#/components/schemas/OAuth2ScopeConsentType'
         default:
           type: boolean
         description:
@@ -8900,14 +9735,26 @@ components:
           type: string
           readOnly: true
         metadataPublish:
-          type: string
-          enum:
-          - ALL_CLIENTS
-          - NO_CLIENTS
+          $ref: '#/components/schemas/OAuth2ScopeMetadataPublish'
         name:
           type: string
         system:
           type: boolean
+      x-okta-tags:
+      - Application
+    OAuth2ScopeConsentType:
+      type: string
+      enum:
+      - REQUIRED
+      - IMPLICIT
+      - ADMIN
+      x-okta-tags:
+      - Application
+    OAuth2ScopeMetadataPublish:
+      type: string
+      enum:
+      - ALL_CLIENTS
+      - NO_CLIENTS
       x-okta-tags:
       - Application
     OAuth2ScopeConsentGrant:
@@ -8949,7 +9796,7 @@ components:
         source:
           $ref: '#/components/schemas/OAuth2ScopeConsentGrantSource'
         status:
-          $ref: '#/components/schemas/OAuth2ScopeConsentGrantStatus'
+          $ref: '#/components/schemas/GrantOrTokenStatus'
       x-okta-tags:
       - Application
     OAuth2ScopeConsentGrantSource:
@@ -8957,13 +9804,6 @@ components:
       enum:
       - END_USER
       - ADMIN
-      x-okta-tags:
-      - Application
-    OAuth2ScopeConsentGrantStatus:
-      type: string
-      enum:
-      - ACTIVE
-      - REVOKED
       x-okta-tags:
       - Application
     OAuth2ScopesMediationPolicyRuleCondition:
@@ -9014,10 +9854,7 @@ components:
           items:
             type: string
         status:
-          type: string
-          enum:
-          - ACTIVE
-          - REVOKED
+          $ref: '#/components/schemas/GrantOrTokenStatus'
         userId:
           type: string
       x-okta-tags:
@@ -9408,9 +10245,13 @@ components:
       properties:
         buttonField:
           type: string
+        checkbox:
+          type: string
         loginUrlRegex:
           type: string
         passwordField:
+          type: string
+        redirectUrl:
           type: string
         url:
           type: string
@@ -9535,11 +10376,24 @@ components:
           type: string
         name:
           type: string
+        provider:
+          $ref: '#/components/schemas/AuthenticatorProvider'
         type:
           $ref: '#/components/schemas/AuthenticatorType'
         settings:
           $ref: '#/components/schemas/AuthenticatorSettings'
       type: object
+      x-okta-crud:
+      - alias: read
+        arguments: []
+        operationId: getAuthenticator
+      - alias: update
+        arguments:
+        - dest: authenticatorId
+          src: id
+        - dest: authenticator
+          self: true
+        operationId: updateAuthenticator
       x-okta-operations:
       - alias: activate
         arguments:
@@ -9553,12 +10407,48 @@ components:
         operationId: deactivateAuthenticator
       x-okta-tags:
       - Authenticator
+    AuthenticatorProvider:
+      properties:
+        configuration:
+          $ref: '#/components/schemas/AuthenticatorProviderConfiguration'
+        type:
+          type: string
+      x-okta-tags:
+      - Authenticator
+    AuthenticatorProviderConfiguration:
+      properties:
+        authPort:
+          type: integer
+        hostName:
+          type: string
+        instanceId:
+          type: string
+        sharedSecret:
+          type: string
+        userNameTemplate:
+          $ref: '#/components/schemas/AuthenticatorProviderConfigurationUserNameTemplate'
+      x-okta-tags:
+      - Authenticator
+    AuthenticatorProviderConfigurationUserNameTemplate:
+      properties:
+        template:
+          type: string
+      x-okta-tags:
+      - Authenticator
     AuthenticatorSettings:
       properties:
         allowedFor:
           $ref: '#/components/schemas/AllowedForEnum'
+        appInstanceId:
+          type: string
+        channelBinding:
+          $ref: '#/components/schemas/ChannelBinding'
+        compliance:
+          $ref: '#/components/schemas/Compliance'
         tokenLifetimeInMinutes:
           type: integer
+        userVerification:
+          $ref: '#/components/schemas/UserVerificationEnum'
       type: object
       x-okta-tags:
       - Authenticator
@@ -9571,11 +10461,13 @@ components:
       - Authenticator
     AuthenticatorType:
       enum:
+      - app
       - password
       - security_question
       - phone
       - email
       - security_key
+      - federated
       type: string
       x-okta-tags:
       - Authenticator
@@ -9585,6 +10477,44 @@ components:
       - sso
       - any
       - none
+      type: string
+      x-okta-tags:
+      - Authenticator
+    ChannelBinding:
+      properties:
+        required:
+          $ref: '#/components/schemas/RequiredEnum'
+        style:
+          type: string
+      type: object
+      x-okta-tags:
+      - Authenticator
+    Compliance:
+      properties:
+        fips:
+          $ref: '#/components/schemas/FipsEnum'
+      type: object
+      x-okta-tags:
+      - Authenticator
+    FipsEnum:
+      enum:
+      - REQUIRED
+      - OPTIONAL
+      type: string
+      x-okta-tags:
+      - Authenticator
+    RequiredEnum:
+      enum:
+      - ALWAYS
+      - HIGH_RISK_ONLY
+      - NEVER
+      type: string
+      x-okta-tags:
+      - Authenticator
+    UserVerificationEnum:
+      enum:
+      - REQUIRED
+      - PREFERRED
       type: string
       x-okta-tags:
       - Authenticator
@@ -9621,10 +10551,7 @@ components:
         issuer:
           type: string
         issuerMode:
-          type: string
-          enum:
-          - ORG_URL
-          - CUSTOM_URL
+          $ref: '#/components/schemas/IssuerMode'
         lastUpdated:
           type: string
           format: date-time
@@ -9632,10 +10559,7 @@ components:
         name:
           type: string
         status:
-          type: string
-          enum:
-          - ACTIVE
-          - INACTIVE
+          $ref: '#/components/schemas/LifecycleStatus'
       x-okta-crud:
       - alias: create
         arguments:
@@ -9849,10 +10773,7 @@ components:
         priority:
           type: integer
         status:
-          type: string
-          enum:
-          - ACTIVE
-          - INACTIVE
+          $ref: '#/components/schemas/LifecycleStatus'
         system:
           type: boolean
         type:
@@ -9976,14 +10897,14 @@ components:
           parentSrc: policyId
         operationId: deactivateAuthorizationServerPolicyRule
       x-okta-tags:
-      - AuthorizationServerPolicy
+      - AuthorizationServer
     AuthorizationServerPolicyRuleActions:
       type: object
       properties:
         token:
           $ref: '#/components/schemas/TokenAuthorizationServerPolicyRuleAction'
       x-okta-tags:
-      - AuthorizationServerPolicy
+      - AuthorizationServer
     TokenAuthorizationServerPolicyRuleAction:
       type: object
       properties:
@@ -9996,7 +10917,7 @@ components:
         inlineHook:
           $ref: '#/components/schemas/TokenAuthorizationServerPolicyRuleActionInlineHook'
       x-okta-tags:
-      - AuthorizationServerPolicy
+      - AuthorizationServer
     TokenAuthorizationServerPolicyRuleActionInlineHook:
       properties:
         id:
@@ -10004,7 +10925,7 @@ components:
           readOnly: false
       type: object
       x-okta-tags:
-      - AuthorizationServerPolicy
+      - AuthorizationServer
     AuthorizationServerPolicyRuleConditions:
       type: object
       properties:
@@ -10017,7 +10938,414 @@ components:
         scopes:
           $ref: '#/components/schemas/OAuth2ScopesMediationPolicyRuleCondition'
       x-okta-tags:
-      - AuthorizationServerPolicy
+      - AuthorizationServer
+    Brand:
+      type: object
+      properties:
+        _links:
+          additionalProperties:
+            type: object
+          readOnly: true
+          type: object
+        agreeToCustomPrivacyPolicy:
+          type: boolean
+        customPrivacyPolicyUrl:
+          type: string
+        id:
+          readOnly: true
+          type: string
+        removePoweredByOkta:
+          type: boolean
+      x-okta-crud:
+      - alias: read
+        arguments:
+        - dest: brandId
+          src: id
+        operationId: getBrand
+      - alias: update
+        arguments:
+        - dest: brandId
+          src: id
+        - dest: brand
+          self: true
+        operationId: updateBrand
+      x-okta-tags:
+      - Brand
+    EmailTemplateTouchPointVariant:
+      enum:
+      - OKTA_DEFAULT
+      - FULL_THEME
+      type: string
+      x-okta-tags:
+      - Brand
+    EmailTestResponse:
+      type: object
+      properties:
+        customizationId:
+          type: string
+      x-okta-tags:
+      - Brand
+    EndUserDashboardTouchPointVariant:
+      enum:
+      - OKTA_DEFAULT
+      - WHITE_LOGO_BACKGROUND
+      - FULL_THEME
+      - LOGO_ON_FULL_WHITE_BACKGROUND
+      type: string
+      x-okta-tags:
+      - Brand
+    ErrorPageTouchPointVariant:
+      enum:
+      - OKTA_DEFAULT
+      - BACKGROUND_SECONDARY_COLOR
+      - BACKGROUND_IMAGE
+      type: string
+      x-okta-tags:
+      - Brand
+    ImageUploadResponse:
+      type: object
+      properties:
+        url:
+          readOnly: true
+          type: string
+      x-okta-tags:
+      - Brand
+    SignInPageTouchPointVariant:
+      enum:
+      - OKTA_DEFAULT
+      - BACKGROUND_SECONDARY_COLOR
+      - BACKGROUND_IMAGE
+      type: string
+      x-okta-tags:
+      - Brand
+    Theme:
+      type: object
+      properties:
+        _links:
+          additionalProperties:
+            type: object
+          readOnly: true
+          type: object
+        backgroundImage:
+          readOnly: true
+          type: string
+        emailTemplateTouchPointVariant:
+          $ref: '#/components/schemas/EmailTemplateTouchPointVariant'
+        endUserDashboardTouchPointVariant:
+          $ref: '#/components/schemas/EndUserDashboardTouchPointVariant'
+        errorPageTouchPointVariant:
+          $ref: '#/components/schemas/ErrorPageTouchPointVariant'
+        primaryColorContrastHex:
+          type: string
+        primaryColorHex:
+          type: string
+        secondaryColorContrastHex:
+          type: string
+        secondaryColorHex:
+          type: string
+        signInPageTouchPointVariant:
+          $ref: '#/components/schemas/SignInPageTouchPointVariant'
+      x-okta-crud:
+      - alias: read
+        operationId: getBrandTheme
+      - alias: update
+        operationId: updateBrandTheme
+      x-okta-operations:
+      - alias: uploadBrandThemeLogo
+        operationId: uploadBrandThemeLogo
+      - alias: deleteBrandThemeLogo
+        operationId: deleteBrandThemeLogo
+      - alias: uploadBrandThemeFavicon
+        operationId: uploadBrandThemeFavicon
+      - alias: deleteBrandThemeFavicon
+        operationId: deleteBrandThemeFavicon
+      - alias: uploadBrandThemeBackgroundImage
+        operationId: uploadBrandThemeBackgroundImage
+      - alias: deleteBrandThemeBackgroundImage
+        operationId: deleteBrandThemeBackgroundImage
+      x-okta-tags:
+      - Brand
+    ThemeResponse:
+      type: object
+      properties:
+        _links:
+          additionalProperties:
+            type: object
+          readOnly: true
+          type: object
+        backgroundImage:
+          readOnly: true
+          type: string
+        emailTemplateTouchPointVariant:
+          $ref: '#/components/schemas/EmailTemplateTouchPointVariant'
+        endUserDashboardTouchPointVariant:
+          $ref: '#/components/schemas/EndUserDashboardTouchPointVariant'
+        errorPageTouchPointVariant:
+          $ref: '#/components/schemas/ErrorPageTouchPointVariant'
+        favicon:
+          readOnly: true
+          type: string
+        id:
+          readOnly: true
+          type: string
+        logo:
+          readOnly: true
+          type: string
+        primaryColorContrastHex:
+          type: string
+        primaryColorHex:
+          type: string
+        secondaryColorContrastHex:
+          type: string
+        secondaryColorHex:
+          type: string
+        signInPageTouchPointVariant:
+          $ref: '#/components/schemas/SignInPageTouchPointVariant'
+      x-okta-tags:
+      - Brand
+    EmailTemplate:
+      x-okta-tags:
+      - Brand
+      title: EmailTemplate
+      type: object
+      x-examples:
+      - name: email.welcome
+        _links:
+          self:
+            href: /templates/email/email.welcome
+            hints:
+              allow:
+              - GET
+          customizations:
+            href: /templates/email/email.welcome/customizations
+            hints:
+              allow:
+              - GET
+          defaultContent:
+            href: /templates/email/email.welcome/default-content
+            hints:
+              allow:
+              - GET
+          test:
+            href: /templates/email/email.welcome/test
+            hints:
+              allow:
+              - POST
+      description: An email template object
+      properties:
+        name:
+          type: string
+        _links:
+          type: object
+          properties:
+            self:
+              $ref: '#/components/schemas/HrefObject'
+            customizations:
+              $ref: '#/components/schemas/HrefObject'
+            defaultContent:
+              $ref: '#/components/schemas/HrefObject'
+            test:
+              $ref: '#/components/schemas/HrefObject'
+          readOnly: true
+      x-tags:
+      - Brand
+    EmailDefaultContent:
+      x-okta-tags:
+      - Brand
+      title: EmailDefaultContent
+      description: The default content for an email template
+      x-examples:
+      - subject: Welcome to Okta!
+        body: '...<tr><td style="color: #5e5e5e; font-size: 22px; line-height: 22px;">${org.name} - Welcome to Okta!</td></tr><tr><td style="padding-top: 24px; vertical-align: bottom;">Hi ${f:escapeHtml(user.firstName)},</td></tr>...'
+        fromAddress: noreply@okta.com
+        fromName: Okta
+        _links:
+          self:
+            href: /templates/email/email.welcome/default-content
+            hints:
+              allow:
+              - GET
+          template:
+            href: /templates/email/email.welcome
+            hints:
+              allow:
+              - GET
+      allOf:
+      - $ref: '#/components/schemas/EmailContentWithSender'
+      - type: object
+        properties:
+          _links:
+            type: object
+            properties:
+              self:
+                $ref: '#/components/schemas/HrefObject'
+              template:
+                $ref: '#/components/schemas/HrefObject'
+              preview:
+                $ref: '#/components/schemas/HrefObject'
+            readOnly: true
+    EmailPreview:
+      x-okta-tags:
+      - Brand
+      title: EmailPreview
+      x-examples:
+      - subject: Welcome to Okta!
+        body: |
+          <tr>
+          <td style="color:#5e5e5e;font-size:22px;line-height:22px"> henryli-oie - Welcome to Okta! </td>
+          </tr>
+          <tr>
+          <td style="padding-top:24px;vertical-align:bottom"> Hi Henry, </td>
+          </tr>
+        fromAddress: noreply@okta.com
+        fromName: Okta
+        _links:
+          self:
+            href: /templates/email/email.welcome/default-content/preview
+            hints:
+              allow:
+              - GET
+          contentSource:
+            href: /templates/email/email.welcome/default-content
+            hints:
+              allow:
+              - GET
+          template:
+            href: /templates/email/email.welcome
+            hints:
+              allow:
+              - GET
+      - subject: Welcome to MyOrg!
+        body: Hello, Henry Li!
+        fromAddress: noreply@okta.com
+        fromName: MyOrg
+        _links:
+          self:
+            href: /templates/email/email.welcome/customizations/oel11u6DqUiMbQkpl0g4/preview
+            hints:
+              allow:
+              - GET
+          contentSource:
+            href: /templates/email/email.welcome/customizations/oel11u6DqUiMbQkpl0g4
+            hints:
+              allow:
+              - GET
+          template:
+            href: /templates/email/email.welcome
+            hints:
+              allow:
+              - GET
+      description: The preview content of email template based on current user
+      allOf:
+      - $ref: '#/components/schemas/EmailContentWithSender'
+      - type: object
+        properties:
+          _links:
+            type: object
+            properties:
+              self:
+                $ref: '#/components/schemas/HrefObject'
+              contentSource:
+                $ref: '#/components/schemas/HrefObject'
+              template:
+                $ref: '#/components/schemas/HrefObject'
+            readOnly: true
+    EmailCustomization:
+      x-okta-tags:
+      - Brand
+      title: Email Customization
+      x-examples:
+      - id: oel11u6DqUiMbQkpl0g4
+        language: cs-CZ
+        isDefault: true
+        subject: Welcome to $org.name
+        body: Hello, $user.profile.firstName!
+        created: '2021-11-09T20:38:10.000Z'
+        lastUpdated: '2021-11-11T20:38:10.000Z'
+        _links:
+          self:
+            href: /templates/email/email.welcome/customizations/oel11u6DqUiMbQkpl0g4
+            hints:
+              allow:
+              - GET
+              - PUT
+              - DELETE
+          template:
+            href: /templates/email/email.welcome
+            hints:
+              allow:
+              - GET
+          preview:
+            href: /templates/email/email.welcome/customizations/oel11u6DqUiMbQkpl0g4/preview
+            hints:
+              allow:
+              - GET
+      description: A customized email template
+      allOf:
+      - $ref: '#/components/schemas/EmailContent'
+      - type: object
+        properties:
+          id:
+            type: string
+            description: ''
+            example: oel11u6DqUiMbQkpl0g4
+            readOnly: true
+          language:
+            type: string
+            example: cs-CZ
+            description: unique under each email templage
+          isDefault:
+            type: boolean
+          created:
+            type: string
+            format: date-time
+            readOnly: true
+          lastUpdated:
+            type: string
+            format: date-time
+            readOnly: true
+          _links:
+            type: object
+            properties:
+              self:
+                $ref: '#/components/schemas/HrefObject'
+              template:
+                $ref: '#/components/schemas/HrefObject'
+              preview:
+                $ref: '#/components/schemas/HrefObject'
+            readOnly: true
+        required:
+        - language
+        readOnly: true
+    EmailContentWithSender:
+      allOf:
+      - $ref: '#/components/schemas/EmailContent'
+      - type: object
+        properties:
+          fromAddress:
+            type: string
+          fromName:
+            type: string
+        required:
+        - fromAddress
+        - fromName
+      x-internal: true
+      x-okta-tags:
+      - Brand
+    EmailContent:
+      title: EmailContent
+      type: object
+      properties:
+        subject:
+          type: string
+        body:
+          type: string
+      required:
+      - subject
+      - body
+      x-internal: true
+      x-okta-tags:
+      - Brand
     CAPTCHAInstance:
       title: CAPTCHAInstance
       type: object
@@ -10050,10 +11378,7 @@ components:
         siteKey:
           type: string
         type:
-          type: string
-          enum:
-          - HCAPTCHA
-          - RECAPTCHA_V2
+          $ref: '#/components/schemas/CAPTCHAType'
         _link:
           type: object
           properties:
@@ -10063,6 +11388,13 @@ components:
       x-okta-operations:
       - alias: update
         operationId: updateCaptchaInstance
+      x-okta-tags:
+      - CAPTCHA
+    CAPTCHAType:
+      type: string
+      enum:
+      - HCAPTCHA
+      - RECAPTCHA_V2
       x-okta-tags:
       - CAPTCHA
     EnabledStatus:
@@ -10101,7 +11433,6 @@ components:
       title: hrefObject
       type: object
       description: Used for links
-      x-examples: {}
       properties:
         href:
           type: string
@@ -10111,12 +11442,30 @@ components:
             allow:
               type: array
               items:
-                type: string
-                enum:
-                - GET
-                - PUT
-                - DELETE
-                - POST
+                $ref: '#/components/schemas/HttpMethod'
+      x-okta-tags:
+      - Common
+    HttpMethod:
+      type: string
+      enum:
+      - GET
+      - PUT
+      - DELETE
+      - POST
+      x-okta-tags:
+      - Common
+    IssuerMode:
+      type: string
+      enum:
+      - ORG_URL
+      - CUSTOM_URL
+      x-okta-tags:
+      - Common
+    LifecycleStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - INACTIVE
       x-okta-tags:
       - Common
     DNSRecord:
@@ -10194,6 +11543,7 @@ components:
       type: string
       enum:
       - MANUAL
+      - OKTA_MANAGED
       x-okta-tags:
       - Domain
     DomainCertificateType:
@@ -10229,9 +11579,7 @@ components:
       type: object
       properties:
         certificateSourceType:
-          type: string
-          enum:
-          - MANUAL
+          $ref: '#/components/schemas/DomainCertificateSourceType'
         dnsRecords:
           type: array
           items:
@@ -10245,12 +11593,7 @@ components:
         publicCertificate:
           $ref: '#/components/schemas/DomainCertificateMetadata'
         validationStatus:
-          type: string
-          enum:
-          - NOT_STARTED
-          - IN_PROGRESS
-          - VERIFIED
-          - COMPLETED
+          $ref: '#/components/schemas/DomainValidationStatus'
       x-okta-tags:
       - Domain
     DomainValidationStatus:
@@ -10291,15 +11634,9 @@ components:
         name:
           type: string
         status:
-          type: string
-          enum:
-          - ACTIVE
-          - INACTIVE
+          $ref: '#/components/schemas/LifecycleStatus'
         verificationStatus:
-          type: string
-          enum:
-          - UNVERIFIED
-          - VERIFIED
+          $ref: '#/components/schemas/EventHookVerificationStatus'
       x-okta-crud:
       - alias: create
         arguments:
@@ -10345,9 +11682,7 @@ components:
         config:
           $ref: '#/components/schemas/EventHookChannelConfig'
         type:
-          type: string
-          enum:
-          - HTTP
+          $ref: '#/components/schemas/EventHookChannelType'
         version:
           type: string
       x-okta-tags:
@@ -10391,6 +11726,12 @@ components:
           type: string
       x-okta-tags:
       - EventHook
+    EventHookChannelType:
+      type: string
+      enum:
+      - HTTP
+      x-okta-tags:
+      - EventHook
     EventSubscriptions:
       type: object
       properties:
@@ -10399,12 +11740,23 @@ components:
           items:
             type: string
         type:
-          type: string
-          enum:
-          - EVENT_TYPE
-          - FLOW_EVENT
+          $ref: '#/components/schemas/EventSubscriptionType'
       discriminator:
         propertyName: type
+      x-okta-tags:
+      - EventHook
+    EventSubscriptionType:
+      type: string
+      enum:
+      - EVENT_TYPE
+      - FLOW_EVENT
+      x-okta-tags:
+      - EventHook
+    EventHookVerificationStatus:
+      type: string
+      enum:
+      - UNVERIFIED
+      - VERIFIED
       x-okta-tags:
       - EventHook
     Feature:
@@ -10562,14 +11914,7 @@ components:
           type: string
         name:
           type: string
-      x-okta-tags:
-      - Group
-    GroupType:
-      type: string
-      enum:
-      - OKTA_GROUP
-      - APP_GROUP
-      - BUILT_IN
+      x-okta-extensible: true
       x-okta-tags:
       - Group
     GroupRule:
@@ -10621,14 +11966,14 @@ components:
           src: id
         operationId: deactivateGroupRule
       x-okta-tags:
-      - GroupRule
+      - Group
     GroupRuleAction:
       type: object
       properties:
         assignUserToGroups:
           $ref: '#/components/schemas/GroupRuleGroupAssignment'
       x-okta-tags:
-      - GroupRule
+      - Group
     GroupRuleConditions:
       type: object
       properties:
@@ -10637,7 +11982,7 @@ components:
         people:
           $ref: '#/components/schemas/GroupRulePeopleCondition'
       x-okta-tags:
-      - GroupRule
+      - Group
     GroupRuleExpression:
       type: object
       properties:
@@ -10646,7 +11991,7 @@ components:
         value:
           type: string
       x-okta-tags:
-      - GroupRule
+      - Group
     GroupRuleGroupAssignment:
       type: object
       properties:
@@ -10655,7 +12000,7 @@ components:
           items:
             type: string
       x-okta-tags:
-      - GroupRule
+      - Group
     GroupRuleGroupCondition:
       type: object
       properties:
@@ -10668,7 +12013,7 @@ components:
           items:
             type: string
       x-okta-tags:
-      - GroupRule
+      - Group
     GroupRulePeopleCondition:
       type: object
       properties:
@@ -10677,7 +12022,7 @@ components:
         users:
           $ref: '#/components/schemas/GroupRuleUserCondition'
       x-okta-tags:
-      - GroupRule
+      - Group
     GroupRuleStatus:
       type: string
       enum:
@@ -10685,7 +12030,7 @@ components:
       - INACTIVE
       - INVALID
       x-okta-tags:
-      - GroupRule
+      - Group
     GroupRuleUserCondition:
       type: object
       properties:
@@ -10698,7 +12043,15 @@ components:
           items:
             type: string
       x-okta-tags:
-      - GroupRule
+      - Group
+    GroupType:
+      type: string
+      enum:
+      - OKTA_GROUP
+      - APP_GROUP
+      - BUILT_IN
+      x-okta-tags:
+      - Group
     GroupSchema:
       properties:
         $schema:
@@ -10734,7 +12087,7 @@ components:
           type: string
       type: object
       x-okta-tags:
-      - GroupSchema
+      - Schema
     GroupSchemaAttribute:
       properties:
         description:
@@ -10779,7 +12132,7 @@ components:
           type: string
       type: object
       x-okta-tags:
-      - GroupSchema
+      - Schema
     GroupSchemaBase:
       properties:
         id:
@@ -10795,7 +12148,7 @@ components:
           type: string
       type: object
       x-okta-tags:
-      - GroupSchema
+      - Schema
     GroupSchemaBaseProperties:
       properties:
         description:
@@ -10804,7 +12157,7 @@ components:
           $ref: '#/components/schemas/GroupSchemaAttribute'
       type: object
       x-okta-tags:
-      - GroupSchema
+      - Schema
     GroupSchemaCustom:
       properties:
         id:
@@ -10822,7 +12175,7 @@ components:
           type: string
       type: object
       x-okta-tags:
-      - GroupSchema
+      - Schema
     GroupSchemaDefinitions:
       properties:
         base:
@@ -10831,7 +12184,7 @@ components:
           $ref: '#/components/schemas/GroupSchemaCustom'
       type: object
       x-okta-tags:
-      - GroupSchema
+      - Schema
     IdentityProvider:
       type: object
       properties:
@@ -10849,10 +12202,7 @@ components:
           type: string
           readOnly: true
         issuerMode:
-          type: string
-          enum:
-          - ORG_URL
-          - CUSTOM_URL_DOMAIN
+          $ref: '#/components/schemas/IssuerMode'
         lastUpdated:
           type: string
           format: date-time
@@ -10864,10 +12214,7 @@ components:
         protocol:
           $ref: '#/components/schemas/Protocol'
         status:
-          type: string
-          enum:
-          - ACTIVE
-          - INACTIVE
+          $ref: '#/components/schemas/LifecycleStatus'
         type:
           type: string
           x-okta-known-values:
@@ -10923,36 +12270,6 @@ components:
         - dest: idpId
           src: id
         operationId: getCsrForIdentityProvider
-      - alias: publishCsr
-        arguments:
-        - dest: idpId
-          src: id
-        operationId: publishCsrForIdentityProvider
-      - alias: publishBinaryCerCert
-        arguments:
-          - dest: idpId
-            src: id
-        operationId: publishBinaryCerCertForIdentityProvider
-      - alias: publishBase64CerCert
-        arguments:
-          - dest: idpId
-            src: id
-        operationId: publishBase64CerCertForIdentityProvider
-      - alias: publishBinaryDerCert
-        arguments:
-          - dest: idpId
-            src: id
-        operationId: publishBinaryDerCertForIdentityProvider
-      - alias: publishBase64DerCert
-        arguments:
-          - dest: idpId
-            src: id
-        operationId: publishBase64DerCertForIdentityProvider
-      - alias: publishBinaryPemCert
-        arguments:
-          - dest: idpId
-            src: id
-        operationId: publishBinaryPemCertForIdentityProvider
       - alias: listSigningKeys
         arguments:
         - dest: idpId
@@ -11078,13 +12395,17 @@ components:
         kid:
           type: string
         revocation:
-          type: string
-          enum:
-          - CRL
-          - DELTA_CRL
-          - OCSP
+          $ref: '#/components/schemas/IdentityProviderCredentialsTrustRevocation'
         revocationCacheLifetime:
           type: integer
+      x-okta-tags:
+      - IdentityProvider
+    IdentityProviderCredentialsTrustRevocation:
+      type: string
+      enum:
+      - CRL
+      - DELTA_CRL
+      - OCSP
       x-okta-tags:
       - IdentityProvider
     Protocol:
@@ -11107,12 +12428,16 @@ components:
         settings:
           $ref: '#/components/schemas/ProtocolSettings'
         type:
-          type: string
-          enum:
-          - SAML2
-          - OIDC
-          - OAUTH2
-          - MTLS
+          $ref: '#/components/schemas/ProtocolType'
+      x-okta-tags:
+      - IdentityProvider
+    ProtocolType:
+      type: string
+      enum:
+      - SAML2
+      - OIDC
+      - OAUTH2
+      - MTLS
       x-okta-tags:
       - IdentityProvider
     ProtocolAlgorithmType:
@@ -11128,13 +12453,17 @@ components:
         algorithm:
           type: string
         scope:
-          type: string
-          enum:
-          - RESPONSE
-          - TOKEN
-          - ANY
-          - REQUEST
-          - NONE
+          $ref: '#/components/schemas/ProtocolAlgorithmTypeSignatureScope'
+      x-okta-tags:
+      - IdentityProvider
+    ProtocolAlgorithmTypeSignatureScope:
+      type: string
+      enum:
+      - RESPONSE
+      - TOKEN
+      - ANY
+      - REQUEST
+      - NONE
       x-okta-tags:
       - IdentityProvider
     ProtocolAlgorithms:
@@ -11150,19 +12479,27 @@ components:
       type: object
       properties:
         binding:
-          type: string
-          enum:
-          - HTTP-POST
-          - HTTP-REDIRECT
+          $ref: '#/components/schemas/ProtocolEndpointBinding'
         destination:
           type: string
         type:
-          type: string
-          enum:
-          - INSTANCE
-          - ORG
+          $ref: '#/components/schemas/ProtocolEndpointType'
         url:
           type: string
+      x-okta-tags:
+      - IdentityProvider
+    ProtocolEndpointType:
+      type: string
+      enum:
+      - INSTANCE
+      - ORG
+      x-okta-tags:
+      - IdentityProvider
+    ProtocolEndpointBinding:
+      type: string
+      enum:
+      - HTTP-POST
+      - HTTP-REDIRECT
       x-okta-tags:
       - IdentityProvider
     ProtocolEndpoints:
@@ -11211,17 +12548,21 @@ components:
       type: object
       properties:
         action:
-          type: string
-          enum:
-          - AUTO
-          - CALLOUT
-          - DISABLED
+          $ref: '#/components/schemas/ProvisioningAction'
         conditions:
           $ref: '#/components/schemas/ProvisioningConditions'
         groups:
           $ref: '#/components/schemas/ProvisioningGroups'
         profileMaster:
           type: boolean
+      x-okta-tags:
+      - IdentityProvider
+    ProvisioningAction:
+      type: string
+      enum:
+      - AUTO
+      - CALLOUT
+      - DISABLED
       x-okta-tags:
       - IdentityProvider
     ProvisioningConditions:
@@ -11237,22 +12578,21 @@ components:
       type: object
       properties:
         action:
-          type: string
-          enum:
-          - NONE
-          - REACTIVATE
+          $ref: '#/components/schemas/ProvisioningDeprovisionedAction'
+      x-okta-tags:
+      - IdentityProvider
+    ProvisioningDeprovisionedAction:
+      type: string
+      enum:
+      - NONE
+      - REACTIVATE
       x-okta-tags:
       - IdentityProvider
     ProvisioningGroups:
       type: object
       properties:
         action:
-          type: string
-          enum:
-          - NONE
-          - APPEND
-          - SYNC
-          - ASSIGN
+          $ref: '#/components/schemas/ProvisioningGroupsAction'
         assignments:
           type: array
           items:
@@ -11265,14 +12605,27 @@ components:
           type: string
       x-okta-tags:
       - IdentityProvider
+    ProvisioningGroupsAction:
+      type: string
+      enum:
+      - NONE
+      - APPEND
+      - SYNC
+      - ASSIGN
+      x-okta-tags:
+      - IdentityProvider
     ProvisioningSuspendedCondition:
       type: object
       properties:
         action:
-          type: string
-          enum:
-          - NONE
-          - UNSUSPEND
+          $ref: '#/components/schemas/ProvisioningSuspendedAction'
+      x-okta-tags:
+      - IdentityProvider
+    ProvisioningSuspendedAction:
+      type: string
+      enum:
+      - NONE
+      - UNSUSPEND
       x-okta-tags:
       - IdentityProvider
     SocialAuthToken:
@@ -11295,9 +12648,6 @@ components:
           type: string
         tokenType:
           type: string
-          enum:
-          - ACCESS
-          - REFRESH
       x-okta-tags:
       - IdentityProvider
     InlineHook:
@@ -11375,9 +12725,7 @@ components:
         config:
           $ref: '#/components/schemas/InlineHookChannelConfig'
         type:
-          type: string
-          enum:
-          - HTTP
+          $ref: '#/components/schemas/InlineHookChannelType'
         version:
           type: string
       x-okta-tags:
@@ -11415,6 +12763,12 @@ components:
           type: string
         value:
           type: string
+      x-okta-tags:
+      - InlineHook
+    InlineHookChannelType:
+      type: string
+      enum:
+      - HTTP
       x-okta-tags:
       - InlineHook
     InlineHookPayload:
@@ -11470,62 +12824,6 @@ components:
       - com.okta.user.credential.password.import
       x-okta-tags:
       - InlineHook
-    IonField:
-      type: object
-      properties:
-        form:
-          $ref: '#/components/schemas/IonForm'
-        label:
-          type: string
-        mutable:
-          type: boolean
-        name:
-          type: string
-        required:
-          type: boolean
-        secret:
-          type: boolean
-        type:
-          type: string
-        value:
-          type: object
-          additionalProperties:
-            type: object
-            properties: {}
-        visible:
-          type: boolean
-      x-okta-tags:
-      - Ion
-    IonForm:
-      type: object
-      properties:
-        accepts:
-          type: string
-        href:
-          type: string
-        method:
-          type: string
-        name:
-          type: string
-        produces:
-          type: string
-        refresh:
-          type: integer
-        rel:
-          type: array
-          items:
-            type: string
-        relatesTo:
-          type: array
-          items:
-            type: string
-        value:
-          type: array
-          readOnly: true
-          items:
-            $ref: '#/components/schemas/IonField'
-      x-okta-tags:
-      - Ion
     LinkedObject:
       type: object
       properties:
@@ -12046,10 +13344,6 @@ components:
         contactType:
           $ref: '#/components/schemas/OrgContactType'
       type: object
-      x-okta-crud:
-      - alias: read
-        arguments: []
-        operationId: getOrgContactTypes
       x-okta-tags:
       - Org
     OrgContactType:
@@ -12127,16 +13421,44 @@ components:
           type: string
       type: object
       x-okta-crud:
+      - alias: read
+        arguments:
+        - dest: orgSetting
+          self: true
+        operationId: getOrgSettings
       - alias: update
         arguments:
         - dest: orgSetting
           self: true
         operationId: updateOrgSetting
+      x-okta-operations:
       - alias: partialUpdate
         arguments:
         - dest: orgSetting
           self: true
         operationId: partialUpdateOrgSetting
+      - alias: getContactTypes
+        operationId: getOrgContactTypes
+      - alias: getOrgContactUser
+        operationId: getOrgContactUser
+      - alias: getSupportSettings
+        operationId: getOrgOktaSupportSettings
+      - alias: communicationSettings
+        operationId: getOktaCommunicationSettings
+      - alias: orgPreferences
+        operationId: getOrgPreferences
+      - alias: showFooter
+        arguments:
+        - dest: orgSetting
+          self: true
+        operationId: showOktaUIFooter
+      - alias: hideFooter
+        arguments:
+        - dest: orgSetting
+          self: true
+        operationId: hideOktaUIFooter
+      - alias: updateOrgLogo
+        operationId: updateOrgLogo
       x-okta-tags:
       - Org
     OrgOktaSupportSetting:
@@ -12190,6 +13512,80 @@ components:
       type: object
       x-okta-tags:
       - Org
+    AccessPolicy:
+      x-okta-parent: '#/components/schemas/Policy'
+      x-okta-tags:
+      - Policy
+    AccessPolicyConstraint:
+      properties:
+        methods:
+          items:
+            type: string
+          type: array
+        reauthenticateIn:
+          type: string
+        types:
+          items:
+            type: string
+          type: array
+      type: object
+      x-okta-tags:
+      - Policy
+    AccessPolicyConstraints:
+      properties:
+        knowledge:
+          $ref: '#/components/schemas/KnowledgeConstraint'
+        possession:
+          $ref: '#/components/schemas/PossessionConstraint'
+      type: object
+      x-okta-tags:
+      - Policy
+    AccessPolicyRule:
+      properties:
+        actions:
+          $ref: '#/components/schemas/AccessPolicyRuleActions'
+        conditions:
+          $ref: '#/components/schemas/AccessPolicyRuleConditions'
+        name:
+          type: string
+      type: object
+      x-okta-parent: '#/components/schemas/PolicyRule'
+      x-okta-tags:
+      - Policy
+    AccessPolicyRuleActions:
+      properties:
+        appSignOn:
+          $ref: '#/components/schemas/AccessPolicyRuleApplicationSignOn'
+      type: object
+      x-okta-parent: '#/components/schemas/PolicyRuleActions'
+      x-okta-tags:
+      - Policy
+    AccessPolicyRuleApplicationSignOn:
+      properties:
+        access:
+          type: string
+        verificationMethod:
+          $ref: '#/components/schemas/VerificationMethod'
+      type: object
+      x-okta-tags:
+      - Policy
+    AccessPolicyRuleConditions:
+      properties:
+        device:
+          $ref: '#/components/schemas/DeviceAccessPolicyRuleCondition'
+        elCondition:
+          $ref: '#/components/schemas/AccessPolicyRuleCustomCondition'
+        userType:
+          $ref: '#/components/schemas/UserTypeCondition'
+      x-okta-parent: '#/components/schemas/PolicyRuleConditions'
+      x-okta-tags:
+      - Policy
+    AccessPolicyRuleCustomCondition:
+      properties:
+        condition:
+          type: string
+      x-okta-tags:
+      - Policy
     AppAndInstanceConditionEvaluatorAppOrInstance:
       type: object
       properties:
@@ -12199,10 +13595,7 @@ components:
         name:
           type: string
         type:
-          type: string
-          enum:
-          - APP_TYPE
-          - APP
+          $ref: '#/components/schemas/AppAndInstanceType'
       x-okta-tags:
       - Policy
     AppAndInstancePolicyRuleCondition:
@@ -12216,6 +13609,13 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AppAndInstanceConditionEvaluatorAppOrInstance'
+      x-okta-tags:
+      - Policy
+    AppAndInstanceType:
+      type: string
+      enum:
+      - APP_TYPE
+      - APP
       x-okta-tags:
       - Policy
     AppInstancePolicyRuleCondition:
@@ -12254,6 +13654,16 @@ components:
       properties:
         expression:
           type: string
+      x-okta-parent: '#/definitions/DevicePolicyRuleCondition'
+      x-okta-tags:
+      - Policy
+    DeviceAccessPolicyRuleCondition:
+      properties:
+        managed:
+          type: boolean
+        registered:
+          type: boolean
+      x-okta-parent: '#/definitions/DevicePolicyRuleCondition'
       x-okta-tags:
       - Policy
     DevicePolicyRuleCondition:
@@ -12266,10 +13676,14 @@ components:
         rooted:
           type: boolean
         trustLevel:
-          type: string
-          enum:
-          - ANY
-          - TRUSTED
+          $ref: '#/components/schemas/DevicePolicyTrustLevel'
+      x-okta-tags:
+      - Policy
+    DevicePolicyTrustLevel:
+      type: string
+      enum:
+      - ANY
+      - TRUSTED
       x-okta-tags:
       - Policy
     DevicePolicyRuleConditionPlatform:
@@ -12278,20 +13692,28 @@ components:
         supportedMDMFrameworks:
           type: array
           items:
-            type: string
-            enum:
-            - AFW
-            - SAFE
-            - NATIVE
+            $ref: '#/components/schemas/DevicePolicyMDMFramework'
         types:
           type: array
           items:
-            type: string
-            enum:
-            - IOS
-            - ANDROID
-            - OSX
-            - WINDOWS
+            $ref: '#/components/schemas/DevicePolicyPlatformType'
+      x-okta-tags:
+      - Policy
+    DevicePolicyPlatformType:
+      type: string
+      enum:
+      - IOS
+      - ANDROID
+      - OSX
+      - WINDOWS
+      x-okta-tags:
+      - Policy
+    DevicePolicyMDMFramework:
+      type: string
+      enum:
+      - AFW
+      - SAFE
+      - NATIVE
       x-okta-tags:
       - Policy
     Duration:
@@ -12360,11 +13782,15 @@ components:
           items:
             type: string
         provider:
-          type: string
-          enum:
-          - ANY
-          - OKTA
-          - SPECIFIC_IDP
+          $ref: '#/components/schemas/IdentityProviderPolicyProvider'
+      x-okta-tags:
+      - Policy
+    IdentityProviderPolicyProvider:
+      type: string
+      enum:
+      - ANY
+      - OKTA
+      - SPECIFIC_IDP
       x-okta-tags:
       - Policy
     InactivityPolicyRuleCondition:
@@ -12374,6 +13800,10 @@ components:
           type: integer
         unit:
           type: string
+      x-okta-tags:
+      - Policy
+    KnowledgeConstraint:
+      x-okta-parent: '#/components/schemas/AccessPolicyConstraint'
       x-okta-tags:
       - Policy
     LifecycleExpirationPolicyRuleCondition:
@@ -12393,10 +13823,14 @@ components:
         blockNonSafeAndroid:
           type: boolean
         enrollment:
-          type: string
-          enum:
-          - OMM
-          - ANY_OR_NONE
+          $ref: '#/components/schemas/MDMEnrollmentPolicyEnrollment'
+      x-okta-tags:
+      - Policy
+    MDMEnrollmentPolicyEnrollment:
+      type: string
+      enum:
+      - OMM
+      - ANY_OR_NONE
       x-okta-tags:
       - Policy
     OAuthAuthorizationPolicy:
@@ -12456,18 +13890,11 @@ components:
       type: object
       properties:
         access:
-          type: string
-          enum:
-          - ALLOW
-          - DENY
+          $ref: '#/components/schemas/PolicyAccess'
         factorLifetime:
           type: integer
         factorPromptMode:
-          type: string
-          enum:
-          - ALWAYS
-          - DEVICE
-          - SESSION
+          $ref: '#/components/schemas/OktaSignOnPolicyFactorPromptMode'
         rememberDeviceByDefault:
           type: boolean
           default: false
@@ -12476,6 +13903,14 @@ components:
           default: false
         session:
           $ref: '#/components/schemas/OktaSignOnPolicyRuleSignonSessionActions'
+      x-okta-tags:
+      - Policy
+    OktaSignOnPolicyFactorPromptMode:
+      type: string
+      enum:
+      - ALWAYS
+      - DEVICE
+      - SESSION
       x-okta-tags:
       - Policy
     OktaSignOnPolicyRuleSignonSessionActions:
@@ -12532,12 +13967,16 @@ components:
           items:
             type: string
         provider:
-          type: string
-          enum:
-          - ACTIVE_DIRECTORY
-          - ANY
-          - LDAP
-          - OKTA
+          $ref: '#/components/schemas/PasswordPolicyAuthenticationProviderType'
+      x-okta-tags:
+      - Policy
+    PasswordPolicyAuthenticationProviderType:
+      type: string
+      enum:
+      - ACTIVE_DIRECTORY
+      - ANY
+      - LDAP
+      - OKTA
       x-okta-tags:
       - Policy
     PasswordPolicyConditions:
@@ -12633,11 +14072,7 @@ components:
         properties:
           $ref: '#/components/schemas/PasswordPolicyRecoveryEmailProperties'
         status:
-          type: string
-          readOnly: true
-          enum:
-          - ACTIVE
-          - INACTIVE
+          $ref: '#/components/schemas/LifecycleStatus'
       x-okta-tags:
       - Policy
     PasswordPolicyRecoveryEmailProperties:
@@ -12658,11 +14093,7 @@ components:
       type: object
       properties:
         status:
-          type: string
-          default: INACTIVE
-          enum:
-          - ACTIVE
-          - INACTIVE
+          $ref: '#/components/schemas/LifecycleStatus'
       x-okta-tags:
       - Policy
     PasswordPolicyRecoveryFactors:
@@ -12684,11 +14115,7 @@ components:
         properties:
           $ref: '#/components/schemas/PasswordPolicyRecoveryQuestionProperties'
         status:
-          type: string
-          readOnly: true
-          enum:
-          - ACTIVE
-          - INACTIVE
+          $ref: '#/components/schemas/LifecycleStatus'
       x-okta-tags:
       - Policy
     PasswordPolicyRecoveryQuestionComplexity:
@@ -12729,10 +14156,7 @@ components:
       type: object
       properties:
         access:
-          type: string
-          enum:
-          - ALLOW
-          - DENY
+          $ref: '#/components/schemas/PolicyAccess'
       x-okta-tags:
       - Policy
     PasswordPolicyRuleActions:
@@ -12774,12 +14198,16 @@ components:
         os:
           $ref: '#/components/schemas/PlatformConditionEvaluatorPlatformOperatingSystem'
         type:
-          type: string
-          enum:
-          - DESKTOP
-          - MOBILE
-          - OTHER
-          - ANY
+          $ref: '#/components/schemas/PolicyPlatformType'
+      x-okta-tags:
+      - Policy
+    PolicyPlatformType:
+      type: string
+      enum:
+      - DESKTOP
+      - MOBILE
+      - OTHER
+      - ANY
       x-okta-tags:
       - Policy
     PlatformConditionEvaluatorPlatformOperatingSystem:
@@ -12788,28 +14216,36 @@ components:
         expression:
           type: string
         type:
-          type: string
-          enum:
-          - ANDROID
-          - IOS
-          - WINDOWS
-          - OSX
-          - OTHER
-          - ANY
+          $ref: '#/components/schemas/PolicyPlatformOperatingSystemType'
         version:
           $ref: '#/components/schemas/PlatformConditionEvaluatorPlatformOperatingSystemVersion'
+      x-okta-tags:
+      - Policy
+    PolicyPlatformOperatingSystemType:
+      type: string
+      enum:
+      - ANDROID
+      - IOS
+      - WINDOWS
+      - OSX
+      - OTHER
+      - ANY
       x-okta-tags:
       - Policy
     PlatformConditionEvaluatorPlatformOperatingSystemVersion:
       type: object
       properties:
         matchType:
-          type: string
-          enum:
-          - EXPRESSION
-          - SEMVER
+          $ref: '#/components/schemas/PlatformConditionOperatingSystemVersionMatchType'
         value:
           type: string
+      x-okta-tags:
+      - Policy
+    PlatformConditionOperatingSystemVersionMatchType:
+      type: string
+      enum:
+      - EXPRESSION
+      - SEMVER
       x-okta-tags:
       - Policy
     PlatformPolicyRuleCondition:
@@ -12860,10 +14296,7 @@ components:
         priority:
           type: integer
         status:
-          type: string
-          enum:
-          - ACTIVE
-          - INACTIVE
+          $ref: '#/components/schemas/LifecycleStatus'
         system:
           type: boolean
         type:
@@ -12916,21 +14349,34 @@ components:
       - Policy
       discriminator:
         mapping:
+          ACCESS_POLICY: '#/components/schemas/AccessPolicy'
           IDP_DISCOVERY: '#/components/schemas/IdentityProviderPolicy'
           OAUTH_AUTHORIZATION_POLICY: '#/components/schemas/OAuthAuthorizationPolicy'
           OKTA_SIGN_ON: '#/components/schemas/OktaSignOnPolicy'
           PASSWORD: '#/components/schemas/PasswordPolicy'
+          PROFILE_ENROLLMENT: '#/components/schemas/ProfileEnrollmentPolicy'
         propertyName: type
+    PolicyAccess:
+      type: string
+      enum:
+      - ALLOW
+      - DENY
+      x-okta-tags:
+      - Policy
     PolicyAccountLink:
       type: object
       properties:
         action:
-          type: string
-          enum:
-          - AUTO
-          - DISABLED
+          $ref: '#/components/schemas/PolicyAccountLinkAction'
         filter:
           $ref: '#/components/schemas/PolicyAccountLinkFilter'
+      x-okta-tags:
+      - Policy
+    PolicyAccountLinkAction:
+      type: string
+      enum:
+      - AUTO
+      - DISABLED
       x-okta-tags:
       - Policy
     PolicyAccountLinkFilter:
@@ -12953,10 +14399,7 @@ components:
       type: object
       properties:
         connection:
-          type: string
-          enum:
-          - ANYWHERE
-          - ZONE
+          $ref: '#/components/schemas/PolicyNetworkConnection'
         exclude:
           type: array
           items:
@@ -12965,6 +14408,13 @@ components:
           type: array
           items:
             type: string
+      x-okta-tags:
+      - Policy
+    PolicyNetworkConnection:
+      type: string
+      enum:
+      - ANYWHERE
+      - ZONE
       x-okta-tags:
       - Policy
     PolicyPeopleCondition:
@@ -12992,19 +14442,12 @@ components:
         priority:
           type: integer
         status:
-          type: string
-          default: ACTIVE
-          enum:
-          - ACTIVE
-          - INACTIVE
+          $ref: '#/components/schemas/LifecycleStatus'
         system:
           type: boolean
           default: false
         type:
-          type: string
-          enum:
-          - SIGN_ON
-          - PASSWORD
+          $ref: '#/components/schemas/PolicyRuleType'
         name:
           type: string
         conditions:
@@ -13047,17 +14490,33 @@ components:
       - Policy
       discriminator:
         mapping:
+          ACCESS_POLICY: '#/components/schemas/AccessPolicyRule'
           PASSWORD: '#/components/schemas/PasswordPolicyRule'
+          PROFILE_ENROLLMENT: '#/components/schemas/ProfileEnrollmentPolicyRule'
           SIGN_ON: '#/components/schemas/OktaSignOnPolicyRule'
         propertyName: type
+    PolicyRuleType:
+      type: string
+      enum:
+      - SIGN_ON
+      - PASSWORD
+      - ACCESS_POLICY
+      - IDP_DISCOVERY
+      - MFA_ENROLL
+      x-okta-tags:
+      - Policy
     PolicyRuleAuthContextCondition:
       type: object
       properties:
         authType:
-          type: string
-          enum:
-          - ANY
-          - RADIUS
+          $ref: '#/components/schemas/PolicyRuleAuthContextType'
+      x-okta-tags:
+      - Policy
+    PolicyRuleAuthContextType:
+      type: string
+      enum:
+      - ANY
+      - RADIUS
       x-okta-tags:
       - Policy
     PolicyRuleConditions:
@@ -13170,6 +14629,8 @@ components:
       - OKTA_SIGN_ON
       - PASSWORD
       - IDP_DISCOVERY
+      - PROFILE_ENROLLMENT
+      - ACCESS_POLICY
       x-okta-tags:
       - Policy
     PolicyUserNameTemplate:
@@ -13177,6 +14638,102 @@ components:
       properties:
         template:
           type: string
+      x-okta-tags:
+      - Policy
+    PossessionConstraint:
+      properties:
+        deviceBound:
+          type: string
+        hardwareProtection:
+          type: string
+        phishingResistant:
+          type: string
+        userPresence:
+          type: string
+      x-okta-parent: '#/components/schemas/AccessPolicyConstraint'
+      x-okta-tags:
+      - Policy
+    PreRegistrationInlineHook:
+      properties:
+        inlineHookId:
+          type: string
+      type: object
+      x-okta-tags:
+      - Policy
+    ProfileEnrollmentPolicy:
+      x-okta-parent: '#/components/schemas/Policy'
+      x-okta-tags:
+      - Policy
+    ProfileEnrollmentPolicyRule:
+      properties:
+        actions:
+          $ref: '#/components/schemas/ProfileEnrollmentPolicyRuleActions'
+        name:
+          type: string
+      type: object
+      x-okta-parent: '#/components/schemas/PolicyRule'
+      x-okta-tags:
+      - Policy
+    ProfileEnrollmentPolicyRuleAction:
+      properties:
+        access:
+          type: string
+        activationRequirements:
+          $ref: '#/components/schemas/ProfileEnrollmentPolicyRuleActivationRequirement'
+        preRegistrationInlineHooks:
+          items:
+            $ref: '#/components/schemas/PreRegistrationInlineHook'
+          type: array
+        profileAttributes:
+          items:
+            $ref: '#/components/schemas/ProfileEnrollmentPolicyRuleProfileAttribute'
+          type: array
+        targetGroupIds:
+          items:
+            type: string
+          type: array
+        unknownUserAction:
+          type: string
+      type: object
+      x-okta-tags:
+      - Policy
+    ProfileEnrollmentPolicyRuleActions:
+      properties:
+        profileEnrollment:
+          $ref: '#/components/schemas/ProfileEnrollmentPolicyRuleAction'
+      type: object
+      x-okta-parent: '#/components/schemas/PolicyRuleActions'
+      x-okta-tags:
+      - Policy
+    ProfileEnrollmentPolicyRuleActivationRequirement:
+      properties:
+        emailVerification:
+          type: boolean
+      type: object
+      x-okta-tags:
+      - Policy
+    ProfileEnrollmentPolicyRuleProfileAttribute:
+      properties:
+        label:
+          type: string
+        name:
+          type: string
+        required:
+          type: boolean
+      type: object
+      x-okta-tags:
+      - Policy
+    PolicyUserStatus:
+      type: string
+      enum:
+      - ACTIVE
+      - INACTIVE
+      - PENDING
+      - DELETED
+      - EXPIRED_PASSWORD
+      - ACTIVATING
+      - SUSPENDED
+      - DELETING
       x-okta-tags:
       - Policy
     RiskPolicyRuleCondition:
@@ -13200,16 +14757,7 @@ components:
       type: object
       properties:
         status:
-          type: string
-          enum:
-          - ACTIVE
-          - INACTIVE
-          - PENDING
-          - DELETED
-          - EXPIRED_PASSWORD
-          - ACTIVATING
-          - SUSPENDED
-          - DELETING
+          $ref: '#/components/schemas/PolicyUserStatus'
       x-okta-tags:
       - Policy
     UserCondition:
@@ -13229,15 +14777,19 @@ components:
       type: object
       properties:
         matchType:
-          type: string
-          enum:
-          - SUFFIX
-          - EXPRESSION
-          - STARTS_WITH
-          - EQUALS
-          - CONTAINS
+          $ref: '#/components/schemas/UserIdentifierMatchType'
         value:
           type: string
+      x-okta-tags:
+      - Policy
+    UserIdentifierMatchType:
+      type: string
+      enum:
+      - SUFFIX
+      - EXPRESSION
+      - STARTS_WITH
+      - EQUALS
+      - CONTAINS
       x-okta-tags:
       - Policy
     UserIdentifierPolicyRuleCondition:
@@ -13250,10 +14802,14 @@ components:
           items:
             $ref: '#/components/schemas/UserIdentifierConditionEvaluatorPattern'
         type:
-          type: string
-          enum:
-          - IDENTIFIER
-          - ATTRIBUTE
+          $ref: '#/components/schemas/UserIdentifierType'
+      x-okta-tags:
+      - Policy
+    UserIdentifierType:
+      type: string
+      enum:
+      - IDENTIFIER
+      - ATTRIBUTE
       x-okta-tags:
       - Policy
     UserIdentityProviderLinkRequest:
@@ -13297,16 +14853,34 @@ components:
       type: object
       properties:
         value:
+          $ref: '#/components/schemas/PolicyUserStatus'
+      x-okta-tags:
+      - Policy
+    UserTypeCondition:
+      properties:
+        exclude:
+          items:
+            type: string
+          type: array
+        include:
+          items:
+            type: string
+          type: array
+      x-okta-tags:
+      - Policy
+    VerificationMethod:
+      properties:
+        constraints:
+          items:
+            $ref: '#/components/schemas/AccessPolicyConstraints'
+          type: array
+        factorMode:
           type: string
-          enum:
-          - ACTIVE
-          - INACTIVE
-          - PENDING
-          - DELETED
-          - EXPIRED_PASSWORD
-          - ACTIVATING
-          - SUSPENDED
-          - DELETING
+        reauthenticateIn:
+          type: string
+        type:
+          type: string
+      type: object
       x-okta-tags:
       - Policy
     ProfileMapping:
@@ -13385,7 +14959,8 @@ components:
         type:
           $ref: '#/components/schemas/RoleType'
       x-okta-tags:
-      - Role
+      - User
+      - Group
     CatalogApplication:
       type: object
       properties:
@@ -13425,21 +15000,24 @@ components:
             properties: {}
           readOnly: true
       x-okta-tags:
-      - Role
+      - User
+      - Group
     CatalogApplicationStatus:
       type: string
       enum:
       - ACTIVE
       - INACTIVE
       x-okta-tags:
-      - Role
+      - User
+      - Group
     RoleAssignmentType:
       type: string
       enum:
       - GROUP
       - USER
       x-okta-tags:
-      - Role
+      - User
+      - Group
     RoleType:
       type: string
       enum:
@@ -13452,8 +15030,10 @@ components:
       - MOBILE_ADMIN
       - API_ACCESS_MANAGEMENT_ADMIN
       - REPORT_ADMIN
+      - GROUP_MEMBERSHIP_ADMIN
       x-okta-tags:
-      - Role
+      - User
+      - Group
     Scope:
       type: object
       properties:
@@ -13462,14 +15042,16 @@ components:
         type:
           $ref: '#/components/schemas/ScopeType'
       x-okta-tags:
-      - Role
+      - User
+      - Group
     ScopeType:
       type: string
       enum:
       - CORS
       - REDIRECT
       x-okta-tags:
-      - Role
+      - User
+      - Group
     CreateSessionRequest:
       type: object
       properties:
@@ -13923,7 +15505,7 @@ components:
           format: date-time
           readOnly: true
         status:
-          $ref: '#/components/schemas/RoleStatus'
+          $ref: '#/components/schemas/LifecycleStatus'
         type:
           $ref: '#/components/schemas/RoleType'
       x-okta-tags:
@@ -13971,13 +15553,6 @@ components:
         - dest: userId
           parentSrc: id
         operationId: addApplicationTargetToAdminRoleForUser
-    RoleStatus:
-      type: string
-      enum:
-      - ACTIVE
-      - INACTIVE
-      x-okta-tags:
-      - User
     TempPassword:
       type: object
       properties:
@@ -14092,6 +15667,11 @@ components:
         - dest: userId
           src: id
         operationId: assignRoleToUser
+      - alias: getRole
+        arguments:
+        - dest: userId
+          src: id
+        operationId: getUserRole
       - alias: removeRole
         arguments:
         - dest: userId
@@ -14767,20 +16347,24 @@ components:
           format: date-time
           readOnly: true
         factorResult:
-          type: string
-          enum:
-          - SUCCESS
-          - EXPIRED
-          - CHALLENGE
-          - WAITING
-          - FAILED
-          - REJECTED
-          - TIMEOUT
-          - TIME_WINDOW_EXCEEDED
-          - PASSCODE_REPLAYED
-          - ERROR
+          $ref: '#/components/schemas/VerifyUserFactorResult'
         factorResultMessage:
           type: string
+      x-okta-tags:
+      - UserFactor
+    VerifyUserFactorResult:
+      type: string
+      enum:
+      - SUCCESS
+      - EXPIRED
+      - CHALLENGE
+      - WAITING
+      - FAILED
+      - REJECTED
+      - TIMEOUT
+      - TIME_WINDOW_EXCEEDED
+      - PASSCODE_REPLAYED
+      - ERROR
       x-okta-tags:
       - UserFactor
     WebUserFactor:
@@ -14849,14 +16433,14 @@ components:
             properties: {}
           readOnly: true
       x-okta-tags:
-      - UserSchema
+      - Schema
     UserSchemaProperties:
       type: object
       properties:
         profile:
           $ref: '#/components/schemas/UserSchemaPropertiesProfile'
       x-okta-tags:
-      - UserSchema
+      - Schema
     UserSchemaPropertiesProfile:
       type: object
       properties:
@@ -14865,14 +16449,14 @@ components:
           items:
             $ref: '#/components/schemas/UserSchemaPropertiesProfileItem'
       x-okta-tags:
-      - UserSchema
+      - Schema
     UserSchemaPropertiesProfileItem:
       type: object
       properties:
         $ref:
           type: string
       x-okta-tags:
-      - UserSchema
+      - Schema
     UserSchemaDefinitions:
       type: object
       properties:
@@ -14881,7 +16465,7 @@ components:
         custom:
           $ref: '#/components/schemas/UserSchemaPublic'
       x-okta-tags:
-      - UserSchema
+      - Schema
     UserSchemaAttribute:
       type: object
       properties:
@@ -14928,7 +16512,7 @@ components:
         externalNamespace:
           type: string
       x-okta-tags:
-      - UserSchema
+      - Schema
     UserSchemaAttributeItems:
       type: object
       properties:
@@ -14943,7 +16527,7 @@ components:
         type:
           type: string
       x-okta-tags:
-      - UserSchema
+      - Schema
     UserSchemaAttributeType:
       type: string
       enum:
@@ -14953,21 +16537,21 @@ components:
       - integer
       - array
       x-okta-tags:
-      - UserSchema
+      - Schema
     UserSchemaAttributeScope:
       type: string
       enum:
       - SELF
       - NONE
       x-okta-tags:
-      - UserSchema
+      - Schema
     UserSchemaAttributeUnion:
       type: string
       enum:
       - DISABLE
       - ENABLE
       x-okta-tags:
-      - UserSchema
+      - Schema
     UserSchemaAttributeEnum:
       type: object
       properties:
@@ -14976,7 +16560,7 @@ components:
         title:
           type: string
       x-okta-tags:
-      - UserSchema
+      - Schema
     UserSchemaAttributePermission:
       type: object
       properties:
@@ -14985,7 +16569,7 @@ components:
         action:
           type: string
       x-okta-tags:
-      - UserSchema
+      - Schema
     UserSchemaAttributeMaster:
       type: object
       properties:
@@ -14996,7 +16580,7 @@ components:
           items:
             $ref: '#/components/schemas/UserSchemaAttributeMasterPriority'
       x-okta-tags:
-      - UserSchema
+      - Schema
     UserSchemaAttributeMasterType:
       type: string
       enum:
@@ -15004,7 +16588,7 @@ components:
       - OKTA
       - OVERRIDE
       x-okta-tags:
-      - UserSchema
+      - Schema
     UserSchemaAttributeMasterPriority:
       type: object
       properties:
@@ -15013,7 +16597,7 @@ components:
         value:
           type: string
       x-okta-tags:
-      - UserSchema
+      - Schema
     UserSchemaBase:
       type: object
       properties:
@@ -15028,7 +16612,7 @@ components:
           items:
             type: string
       x-okta-tags:
-      - UserSchema
+      - Schema
     UserSchemaBaseProperties:
       type: object
       properties:
@@ -15095,7 +16679,7 @@ components:
         manager:
           $ref: '#/components/schemas/UserSchemaAttribute'
       x-okta-tags:
-      - UserSchema
+      - Schema
     UserSchemaPublic:
       type: object
       properties:
@@ -15112,7 +16696,7 @@ components:
           items:
             type: string
       x-okta-tags:
-      - UserSchema
+      - Schema
     UserType:
       type: object
       properties:
@@ -15182,30 +16766,26 @@ tags:
 - name: Application
 - name: Authenticator
 - name: AuthorizationServer
-- name: AuthorizationServerPolicy
+- name: Brand
 - name: CAPTCHA
 - name: Common
 - name: Domain
 - name: EventHook
 - name: Feature
 - name: Group
-- name: GroupRule
-- name: GroupSchema
 - name: IdentityProvider
 - name: InlineHook
-- name: Ion
 - name: LinkedObject
 - name: Log
 - name: NetworkZone
 - name: Org
 - name: Policy
 - name: ProfileMapping
-- name: Role
+- name: Schema
 - name: Session
 - name: Template
 - name: ThreatInsight
 - name: TrustedOrigin
 - name: User
 - name: UserFactor
-- name: UserSchema
 - name: UserType
