@@ -68,6 +68,18 @@ public class CustomPythonClientCodegen extends PythonClientCodegen {
         // super add these imports, and we don't want that dependency
         codegenModel.imports.remove("ApiModel");
 
+        //TODO Review this and optimize if possible
+        if(codegenModel.discriminator != null) {
+            Map<String, String> map = codegenModel.discriminator.getMapping();
+            if(map != null) {
+                for (Map.Entry<String, String> item : map.entrySet()) {
+                    if(item.getValue().lastIndexOf("/") != -1) {
+                        item.setValue(toApiName(item.getValue().substring(item.getValue().lastIndexOf("/"))));
+                    }
+                }
+            }
+        }
+
         if (model.getExtensions() !=null && model.getExtensions().containsKey("x-baseType")) {
             String baseType = (String) model.getExtensions().get("x-baseType");
             codegenModel.vendorExtensions.put("baseType", toModelName(baseType));

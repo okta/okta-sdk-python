@@ -68,15 +68,15 @@ class Application(object):
     }
 
     discriminator_value_class_map = {
-            'AUTO_LOGIN'.lower(): '#/components/schemas/AutoLoginApplication',
-            'BASIC_AUTH'.lower(): '#/components/schemas/BasicAuthApplication',
-            'BOOKMARK'.lower(): '#/components/schemas/BookmarkApplication',
-            'BROWSER_PLUGIN'.lower(): '#/components/schemas/BrowserPluginApplication',
-            'OPENID_CONNECT'.lower(): '#/components/schemas/OpenIdConnectApplication',
-            'SAML_1_1'.lower(): '#/components/schemas/SamlApplication',
-            'SAML_2_0'.lower(): '#/components/schemas/SamlApplication',
-            'SECURE_PASSWORD_STORE'.lower(): '#/components/schemas/SecurePasswordStoreApplication',
-            'WS_FEDERATION'.lower(): '#/components/schemas/WsFederationApplication',
+            'AUTO_LOGIN'.lower(): 'AutoLoginApplication',
+            'BASIC_AUTH'.lower(): 'BasicAuthApplication',
+            'BOOKMARK'.lower(): 'BookmarkApplication',
+            'BROWSER_PLUGIN'.lower(): 'BrowserPluginApplication',
+            'OPENID_CONNECT'.lower(): 'OpenIdConnectApplication',
+            'SAML_1_1'.lower(): 'SamlApplication',
+            'SAML_2_0'.lower(): 'SamlApplication',
+            'SECURE_PASSWORD_STORE'.lower(): 'SecurePasswordStoreApplication',
+            'WS_FEDERATION'.lower(): 'WsFederationApplication',
     }
 
     def __init__(self, config=None):

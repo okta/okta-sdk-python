@@ -5,7 +5,7 @@ import re
 import six
 from six.moves.urllib.parse import quote, urlencode
 
-import okta.models as okta_models
+from okta import models
 from .api_response import OktaAPIResponse
 from .exceptions import OktaAPIException
 from .http_client import HTTPClient
@@ -487,7 +487,7 @@ class ApiClientAdapter(ApiClient):
             if klass in self.NATIVE_TYPES_MAPPING:
                 klass = self.NATIVE_TYPES_MAPPING[klass]
             else:
-                klass = getattr(okta_models, klass)
+                klass = getattr(models, klass)
 
         if klass in self.PRIMITIVE_TYPES:
             return self.__deserialize_primitive(data, klass)

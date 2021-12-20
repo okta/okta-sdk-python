@@ -43,8 +43,8 @@ class BrowserPluginApplication(Application):
         attribute_map.update(Application.attribute_map)
 
     discriminator_value_class_map = {
-            'template_swa'.lower(): '#/components/schemas/SwaApplication',
-            'template_swa3field'.lower(): '#/components/schemas/SwaThreeFieldApplication',
+            'template_swa'.lower(): 'SwaApplication',
+            'template_swa3field'.lower(): 'SwaThreeFieldApplication',
     }
 
     def __init__(self, config=None):

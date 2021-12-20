@@ -54,19 +54,19 @@ class UserFactor(object):
     }
 
     discriminator_value_class_map = {
-            'call'.lower(): '#/components/schemas/CallUserFactor',
-            'email'.lower(): '#/components/schemas/EmailUserFactor',
-            'push'.lower(): '#/components/schemas/PushUserFactor',
-            'question'.lower(): '#/components/schemas/SecurityQuestionUserFactor',
-            'sms'.lower(): '#/components/schemas/SmsUserFactor',
-            'token'.lower(): '#/components/schemas/TokenUserFactor',
-            'token:hardware'.lower(): '#/components/schemas/HardwareUserFactor',
-            'token:hotp'.lower(): '#/components/schemas/CustomHotpUserFactor',
-            'token:software:totp'.lower(): '#/components/schemas/TotpUserFactor',
-            'u2f'.lower(): '#/components/schemas/U2fUserFactor',
-            'web'.lower(): '#/components/schemas/WebUserFactor',
-            'webauthn'.lower(): '#/components/schemas/WebAuthnUserFactor',
-            'hotp'.lower(): '#/components/schemas/CustomHotpUserFactor',
+            'call'.lower(): 'CallUserFactor',
+            'email'.lower(): 'EmailUserFactor',
+            'push'.lower(): 'PushUserFactor',
+            'question'.lower(): 'SecurityQuestionUserFactor',
+            'sms'.lower(): 'SmsUserFactor',
+            'token'.lower(): 'TokenUserFactor',
+            'token:hardware'.lower(): 'HardwareUserFactor',
+            'token:hotp'.lower(): 'CustomHotpUserFactor',
+            'token:software:totp'.lower(): 'TotpUserFactor',
+            'u2f'.lower(): 'U2fUserFactor',
+            'web'.lower(): 'WebUserFactor',
+            'webauthn'.lower(): 'WebAuthnUserFactor',
+            'hotp'.lower(): 'CustomHotpUserFactor',
     }
 
     def __init__(self, config=None):

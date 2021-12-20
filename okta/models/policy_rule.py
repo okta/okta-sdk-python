@@ -56,10 +56,10 @@ class PolicyRule(object):
     }
 
     discriminator_value_class_map = {
-            'ACCESS_POLICY'.lower(): '#/components/schemas/AccessPolicyRule',
-            'PASSWORD'.lower(): '#/components/schemas/PasswordPolicyRule',
-            'PROFILE_ENROLLMENT'.lower(): '#/components/schemas/ProfileEnrollmentPolicyRule',
-            'SIGN_ON'.lower(): '#/components/schemas/OktaSignOnPolicyRule',
+            'ACCESS_POLICY'.lower(): 'AccessPolicyRule',
+            'PASSWORD'.lower(): 'PasswordPolicyRule',
+            'PROFILE_ENROLLMENT'.lower(): 'ProfileEnrollmentPolicyRule',
+            'SIGN_ON'.lower(): 'OktaSignOnPolicyRule',
     }
 
     def __init__(self, config=None):

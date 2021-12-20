@@ -60,12 +60,12 @@ class Policy(object):
     }
 
     discriminator_value_class_map = {
-            'ACCESS_POLICY'.lower(): '#/components/schemas/AccessPolicy',
-            'IDP_DISCOVERY'.lower(): '#/components/schemas/IdentityProviderPolicy',
-            'OAUTH_AUTHORIZATION_POLICY'.lower(): '#/components/schemas/OAuthAuthorizationPolicy',
-            'OKTA_SIGN_ON'.lower(): '#/components/schemas/OktaSignOnPolicy',
-            'PASSWORD'.lower(): '#/components/schemas/PasswordPolicy',
-            'PROFILE_ENROLLMENT'.lower(): '#/components/schemas/ProfileEnrollmentPolicy',
+            'ACCESS_POLICY'.lower(): 'AccessPolicy',
+            'IDP_DISCOVERY'.lower(): 'IdentityProviderPolicy',
+            'OAUTH_AUTHORIZATION_POLICY'.lower(): 'OAuthAuthorizationPolicy',
+            'OKTA_SIGN_ON'.lower(): 'OktaSignOnPolicy',
+            'PASSWORD'.lower(): 'PasswordPolicy',
+            'PROFILE_ENROLLMENT'.lower(): 'ProfileEnrollmentPolicy',
     }
 
     def __init__(self, config=None):
