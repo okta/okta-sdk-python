@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class OktaSignOnPolicyRuleSignonActions(object):
@@ -29,14 +30,13 @@ class OktaSignOnPolicyRuleSignonActions(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'access': 'PolicyAccess',
-        'factor_lifetime': 'int',
-        'factor_prompt_mode': 'OktaSignOnPolicyFactorPromptMode',
-        'remember_device_by_default': 'bool',
-        'require_factor': 'bool',
-        'session': 'OktaSignOnPolicyRuleSignonSessionActions'
-    }
+    swagger_types = {}
+    swagger_types['access'] = 'PolicyAccess'
+    swagger_types['factor_lifetime'] = 'int'
+    swagger_types['factor_prompt_mode'] = 'OktaSignOnPolicyFactorPromptMode'
+    swagger_types['remember_device_by_default'] = 'bool'
+    swagger_types['require_factor'] = 'bool'
+    swagger_types['session'] = 'OktaSignOnPolicyRuleSignonSessionActions'
 
     attribute_map = {
         'access': 'access',
@@ -58,7 +58,7 @@ class OktaSignOnPolicyRuleSignonActions(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, access=None, factor_lifetime=None, factor_prompt_mode=None, remember_device_by_default=False, require_factor=False, session=None):  # noqa: E501
+    def set_attributes(self, access=None, factor_lifetime=None, factor_prompt_mode=None, remember_device_by_default=False, require_factor=False, session=None, **kwargs):  # noqa: E501
         """OktaSignOnPolicyRuleSignonActions - a model defined in Swagger"""  # noqa: E501
         self._access = None
         self._factor_lifetime = None
@@ -68,17 +68,71 @@ class OktaSignOnPolicyRuleSignonActions(object):
         self._session = None
         self.discriminator = None
         if access is not None:
-            self.access = access
+            if hasattr(models, self.swagger_types['access']):
+                nested_class = getattr(models, self.swagger_types['access'])
+                if isinstance(access, nested_class):
+                    self.access = access
+                elif isinstance(access, dict):
+                    self.access = nested_class.from_kwargs(**access)
+                else:
+                    self.access = access
+            else:
+                self.access = access
         if factor_lifetime is not None:
-            self.factor_lifetime = factor_lifetime
+            if hasattr(models, self.swagger_types['factor_lifetime']):
+                nested_class = getattr(models, self.swagger_types['factor_lifetime'])
+                if isinstance(factor_lifetime, nested_class):
+                    self.factor_lifetime = factor_lifetime
+                elif isinstance(factor_lifetime, dict):
+                    self.factor_lifetime = nested_class.from_kwargs(**factor_lifetime)
+                else:
+                    self.factor_lifetime = factor_lifetime
+            else:
+                self.factor_lifetime = factor_lifetime
         if factor_prompt_mode is not None:
-            self.factor_prompt_mode = factor_prompt_mode
+            if hasattr(models, self.swagger_types['factor_prompt_mode']):
+                nested_class = getattr(models, self.swagger_types['factor_prompt_mode'])
+                if isinstance(factor_prompt_mode, nested_class):
+                    self.factor_prompt_mode = factor_prompt_mode
+                elif isinstance(factor_prompt_mode, dict):
+                    self.factor_prompt_mode = nested_class.from_kwargs(**factor_prompt_mode)
+                else:
+                    self.factor_prompt_mode = factor_prompt_mode
+            else:
+                self.factor_prompt_mode = factor_prompt_mode
         if remember_device_by_default is not None:
-            self.remember_device_by_default = remember_device_by_default
+            if hasattr(models, self.swagger_types['remember_device_by_default']):
+                nested_class = getattr(models, self.swagger_types['remember_device_by_default'])
+                if isinstance(remember_device_by_default, nested_class):
+                    self.remember_device_by_default = remember_device_by_default
+                elif isinstance(remember_device_by_default, dict):
+                    self.remember_device_by_default = nested_class.from_kwargs(**remember_device_by_default)
+                else:
+                    self.remember_device_by_default = remember_device_by_default
+            else:
+                self.remember_device_by_default = remember_device_by_default
         if require_factor is not None:
-            self.require_factor = require_factor
+            if hasattr(models, self.swagger_types['require_factor']):
+                nested_class = getattr(models, self.swagger_types['require_factor'])
+                if isinstance(require_factor, nested_class):
+                    self.require_factor = require_factor
+                elif isinstance(require_factor, dict):
+                    self.require_factor = nested_class.from_kwargs(**require_factor)
+                else:
+                    self.require_factor = require_factor
+            else:
+                self.require_factor = require_factor
         if session is not None:
-            self.session = session
+            if hasattr(models, self.swagger_types['session']):
+                nested_class = getattr(models, self.swagger_types['session'])
+                if isinstance(session, nested_class):
+                    self.session = session
+                elif isinstance(session, dict):
+                    self.session = nested_class.from_kwargs(**session)
+                else:
+                    self.session = session
+            else:
+                self.session = session
 
     @property
     def access(self):

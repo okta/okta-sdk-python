@@ -16,6 +16,7 @@ import re  # noqa: F401
 import six
 from okta.models.application_settings_application import ApplicationSettingsApplication  # noqa: F401,E501
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class BasicApplicationSettingsApplication(ApplicationSettingsApplication):
@@ -30,12 +31,11 @@ class BasicApplicationSettingsApplication(ApplicationSettingsApplication):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'auth_url': 'str',
-        'url': 'str'
-    }
+    swagger_types = {}
     if hasattr(ApplicationSettingsApplication, "swagger_types"):
         swagger_types.update(ApplicationSettingsApplication.swagger_types)
+    swagger_types['auth_url'] = 'str'
+    swagger_types['url'] = 'str'
 
     attribute_map = {
         'auth_url': 'authURL',
@@ -55,16 +55,37 @@ class BasicApplicationSettingsApplication(ApplicationSettingsApplication):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, auth_url=None, url=None, *args, **kwargs):  # noqa: E501
+    def set_attributes(self, auth_url=None, url=None, **kwargs):  # noqa: E501
         """BasicApplicationSettingsApplication - a model defined in Swagger"""  # noqa: E501
+        config = {}
+        if kwargs is not None:
+            config = {to_snake_case(key): value for key, value in kwargs.items()}
+        super().set_attributes(**config)
         self._auth_url = None
         self._url = None
         self.discriminator = None
         if auth_url is not None:
-            self.auth_url = auth_url
+            if hasattr(models, self.swagger_types['auth_url']):
+                nested_class = getattr(models, self.swagger_types['auth_url'])
+                if isinstance(auth_url, nested_class):
+                    self.auth_url = auth_url
+                elif isinstance(auth_url, dict):
+                    self.auth_url = nested_class.from_kwargs(**auth_url)
+                else:
+                    self.auth_url = auth_url
+            else:
+                self.auth_url = auth_url
         if url is not None:
-            self.url = url
-        super().set_attributes(*args, **kwargs)
+            if hasattr(models, self.swagger_types['url']):
+                nested_class = getattr(models, self.swagger_types['url'])
+                if isinstance(url, nested_class):
+                    self.url = url
+                elif isinstance(url, dict):
+                    self.url = nested_class.from_kwargs(**url)
+                else:
+                    self.url = url
+            else:
+                self.url = url
 
     @property
     def auth_url(self):

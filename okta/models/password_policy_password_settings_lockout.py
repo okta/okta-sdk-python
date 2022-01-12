@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class PasswordPolicyPasswordSettingsLockout(object):
@@ -29,12 +30,11 @@ class PasswordPolicyPasswordSettingsLockout(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'auto_unlock_minutes': 'int',
-        'max_attempts': 'int',
-        'show_lockout_failures': 'bool',
-        'user_lockout_notification_channels': 'list[str]'
-    }
+    swagger_types = {}
+    swagger_types['auto_unlock_minutes'] = 'int'
+    swagger_types['max_attempts'] = 'int'
+    swagger_types['show_lockout_failures'] = 'bool'
+    swagger_types['user_lockout_notification_channels'] = 'list[str]'
 
     attribute_map = {
         'auto_unlock_minutes': 'autoUnlockMinutes',
@@ -54,7 +54,7 @@ class PasswordPolicyPasswordSettingsLockout(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, auto_unlock_minutes=None, max_attempts=None, show_lockout_failures=None, user_lockout_notification_channels=None):  # noqa: E501
+    def set_attributes(self, auto_unlock_minutes=None, max_attempts=None, show_lockout_failures=None, user_lockout_notification_channels=None, **kwargs):  # noqa: E501
         """PasswordPolicyPasswordSettingsLockout - a model defined in Swagger"""  # noqa: E501
         self._auto_unlock_minutes = None
         self._max_attempts = None
@@ -62,13 +62,49 @@ class PasswordPolicyPasswordSettingsLockout(object):
         self._user_lockout_notification_channels = None
         self.discriminator = None
         if auto_unlock_minutes is not None:
-            self.auto_unlock_minutes = auto_unlock_minutes
+            if hasattr(models, self.swagger_types['auto_unlock_minutes']):
+                nested_class = getattr(models, self.swagger_types['auto_unlock_minutes'])
+                if isinstance(auto_unlock_minutes, nested_class):
+                    self.auto_unlock_minutes = auto_unlock_minutes
+                elif isinstance(auto_unlock_minutes, dict):
+                    self.auto_unlock_minutes = nested_class.from_kwargs(**auto_unlock_minutes)
+                else:
+                    self.auto_unlock_minutes = auto_unlock_minutes
+            else:
+                self.auto_unlock_minutes = auto_unlock_minutes
         if max_attempts is not None:
-            self.max_attempts = max_attempts
+            if hasattr(models, self.swagger_types['max_attempts']):
+                nested_class = getattr(models, self.swagger_types['max_attempts'])
+                if isinstance(max_attempts, nested_class):
+                    self.max_attempts = max_attempts
+                elif isinstance(max_attempts, dict):
+                    self.max_attempts = nested_class.from_kwargs(**max_attempts)
+                else:
+                    self.max_attempts = max_attempts
+            else:
+                self.max_attempts = max_attempts
         if show_lockout_failures is not None:
-            self.show_lockout_failures = show_lockout_failures
+            if hasattr(models, self.swagger_types['show_lockout_failures']):
+                nested_class = getattr(models, self.swagger_types['show_lockout_failures'])
+                if isinstance(show_lockout_failures, nested_class):
+                    self.show_lockout_failures = show_lockout_failures
+                elif isinstance(show_lockout_failures, dict):
+                    self.show_lockout_failures = nested_class.from_kwargs(**show_lockout_failures)
+                else:
+                    self.show_lockout_failures = show_lockout_failures
+            else:
+                self.show_lockout_failures = show_lockout_failures
         if user_lockout_notification_channels is not None:
-            self.user_lockout_notification_channels = user_lockout_notification_channels
+            if hasattr(models, self.swagger_types['user_lockout_notification_channels']):
+                nested_class = getattr(models, self.swagger_types['user_lockout_notification_channels'])
+                if isinstance(user_lockout_notification_channels, nested_class):
+                    self.user_lockout_notification_channels = user_lockout_notification_channels
+                elif isinstance(user_lockout_notification_channels, dict):
+                    self.user_lockout_notification_channels = nested_class.from_kwargs(**user_lockout_notification_channels)
+                else:
+                    self.user_lockout_notification_channels = user_lockout_notification_channels
+            else:
+                self.user_lockout_notification_channels = user_lockout_notification_channels
 
     @property
     def auto_unlock_minutes(self):

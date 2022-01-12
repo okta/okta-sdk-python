@@ -16,6 +16,7 @@ import re  # noqa: F401
 import six
 from okta.models.policy import Policy  # noqa: F401,E501
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class PasswordPolicy(Policy):
@@ -30,12 +31,11 @@ class PasswordPolicy(Policy):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'conditions': 'PasswordPolicyConditions',
-        'settings': 'PasswordPolicySettings'
-    }
+    swagger_types = {}
     if hasattr(Policy, "swagger_types"):
         swagger_types.update(Policy.swagger_types)
+    swagger_types['conditions'] = 'PasswordPolicyConditions'
+    swagger_types['settings'] = 'PasswordPolicySettings'
 
     attribute_map = {
         'conditions': 'conditions',
@@ -55,16 +55,37 @@ class PasswordPolicy(Policy):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, conditions=None, settings=None, *args, **kwargs):  # noqa: E501
+    def set_attributes(self, conditions=None, settings=None, **kwargs):  # noqa: E501
         """PasswordPolicy - a model defined in Swagger"""  # noqa: E501
+        config = {}
+        if kwargs is not None:
+            config = {to_snake_case(key): value for key, value in kwargs.items()}
+        super().set_attributes(**config)
         self._conditions = None
         self._settings = None
         self.discriminator = None
         if conditions is not None:
-            self.conditions = conditions
+            if hasattr(models, self.swagger_types['conditions']):
+                nested_class = getattr(models, self.swagger_types['conditions'])
+                if isinstance(conditions, nested_class):
+                    self.conditions = conditions
+                elif isinstance(conditions, dict):
+                    self.conditions = nested_class.from_kwargs(**conditions)
+                else:
+                    self.conditions = conditions
+            else:
+                self.conditions = conditions
         if settings is not None:
-            self.settings = settings
-        super().set_attributes(*args, **kwargs)
+            if hasattr(models, self.swagger_types['settings']):
+                nested_class = getattr(models, self.swagger_types['settings'])
+                if isinstance(settings, nested_class):
+                    self.settings = settings
+                elif isinstance(settings, dict):
+                    self.settings = nested_class.from_kwargs(**settings)
+                else:
+                    self.settings = settings
+            else:
+                self.settings = settings
 
     @property
     def conditions(self):

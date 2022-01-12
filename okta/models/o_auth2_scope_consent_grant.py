@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class OAuth2ScopeConsentGrant(object):
@@ -29,20 +30,19 @@ class OAuth2ScopeConsentGrant(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'embedded': 'dict(str, object)',
-        'links': 'dict(str, object)',
-        'client_id': 'str',
-        'user_id': 'str',
-        'created': 'datetime',
-        'created_by': 'OAuth2Actor',
-        'id': 'str',
-        'issuer': 'str',
-        'last_updated': 'datetime',
-        'scope_id': 'str',
-        'source': 'OAuth2ScopeConsentGrantSource',
-        'status': 'GrantOrTokenStatus'
-    }
+    swagger_types = {}
+    swagger_types['embedded'] = 'dict(str, object)'
+    swagger_types['links'] = 'dict(str, object)'
+    swagger_types['client_id'] = 'str'
+    swagger_types['user_id'] = 'str'
+    swagger_types['created'] = 'datetime'
+    swagger_types['created_by'] = 'OAuth2Actor'
+    swagger_types['id'] = 'str'
+    swagger_types['issuer'] = 'str'
+    swagger_types['last_updated'] = 'datetime'
+    swagger_types['scope_id'] = 'str'
+    swagger_types['source'] = 'OAuth2ScopeConsentGrantSource'
+    swagger_types['status'] = 'GrantOrTokenStatus'
 
     attribute_map = {
         'embedded': '_embedded',
@@ -70,7 +70,7 @@ class OAuth2ScopeConsentGrant(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, embedded=None, links=None, client_id=None, user_id=None, created=None, created_by=None, id=None, issuer=None, last_updated=None, scope_id=None, source=None, status=None):  # noqa: E501
+    def set_attributes(self, embedded=None, links=None, client_id=None, user_id=None, created=None, created_by=None, id=None, issuer=None, last_updated=None, scope_id=None, source=None, status=None, **kwargs):  # noqa: E501
         """OAuth2ScopeConsentGrant - a model defined in Swagger"""  # noqa: E501
         self._embedded = None
         self._links = None
@@ -86,29 +86,137 @@ class OAuth2ScopeConsentGrant(object):
         self._status = None
         self.discriminator = None
         if embedded is not None:
-            self.embedded = embedded
+            if hasattr(models, self.swagger_types['embedded']):
+                nested_class = getattr(models, self.swagger_types['embedded'])
+                if isinstance(embedded, nested_class):
+                    self.embedded = embedded
+                elif isinstance(embedded, dict):
+                    self.embedded = nested_class.from_kwargs(**embedded)
+                else:
+                    self.embedded = embedded
+            else:
+                self.embedded = embedded
         if links is not None:
-            self.links = links
+            if hasattr(models, self.swagger_types['links']):
+                nested_class = getattr(models, self.swagger_types['links'])
+                if isinstance(links, nested_class):
+                    self.links = links
+                elif isinstance(links, dict):
+                    self.links = nested_class.from_kwargs(**links)
+                else:
+                    self.links = links
+            else:
+                self.links = links
         if client_id is not None:
-            self.client_id = client_id
+            if hasattr(models, self.swagger_types['client_id']):
+                nested_class = getattr(models, self.swagger_types['client_id'])
+                if isinstance(client_id, nested_class):
+                    self.client_id = client_id
+                elif isinstance(client_id, dict):
+                    self.client_id = nested_class.from_kwargs(**client_id)
+                else:
+                    self.client_id = client_id
+            else:
+                self.client_id = client_id
         if user_id is not None:
-            self.user_id = user_id
+            if hasattr(models, self.swagger_types['user_id']):
+                nested_class = getattr(models, self.swagger_types['user_id'])
+                if isinstance(user_id, nested_class):
+                    self.user_id = user_id
+                elif isinstance(user_id, dict):
+                    self.user_id = nested_class.from_kwargs(**user_id)
+                else:
+                    self.user_id = user_id
+            else:
+                self.user_id = user_id
         if created is not None:
-            self.created = created
+            if hasattr(models, self.swagger_types['created']):
+                nested_class = getattr(models, self.swagger_types['created'])
+                if isinstance(created, nested_class):
+                    self.created = created
+                elif isinstance(created, dict):
+                    self.created = nested_class.from_kwargs(**created)
+                else:
+                    self.created = created
+            else:
+                self.created = created
         if created_by is not None:
-            self.created_by = created_by
+            if hasattr(models, self.swagger_types['created_by']):
+                nested_class = getattr(models, self.swagger_types['created_by'])
+                if isinstance(created_by, nested_class):
+                    self.created_by = created_by
+                elif isinstance(created_by, dict):
+                    self.created_by = nested_class.from_kwargs(**created_by)
+                else:
+                    self.created_by = created_by
+            else:
+                self.created_by = created_by
         if id is not None:
-            self.id = id
+            if hasattr(models, self.swagger_types['id']):
+                nested_class = getattr(models, self.swagger_types['id'])
+                if isinstance(id, nested_class):
+                    self.id = id
+                elif isinstance(id, dict):
+                    self.id = nested_class.from_kwargs(**id)
+                else:
+                    self.id = id
+            else:
+                self.id = id
         if issuer is not None:
-            self.issuer = issuer
+            if hasattr(models, self.swagger_types['issuer']):
+                nested_class = getattr(models, self.swagger_types['issuer'])
+                if isinstance(issuer, nested_class):
+                    self.issuer = issuer
+                elif isinstance(issuer, dict):
+                    self.issuer = nested_class.from_kwargs(**issuer)
+                else:
+                    self.issuer = issuer
+            else:
+                self.issuer = issuer
         if last_updated is not None:
-            self.last_updated = last_updated
+            if hasattr(models, self.swagger_types['last_updated']):
+                nested_class = getattr(models, self.swagger_types['last_updated'])
+                if isinstance(last_updated, nested_class):
+                    self.last_updated = last_updated
+                elif isinstance(last_updated, dict):
+                    self.last_updated = nested_class.from_kwargs(**last_updated)
+                else:
+                    self.last_updated = last_updated
+            else:
+                self.last_updated = last_updated
         if scope_id is not None:
-            self.scope_id = scope_id
+            if hasattr(models, self.swagger_types['scope_id']):
+                nested_class = getattr(models, self.swagger_types['scope_id'])
+                if isinstance(scope_id, nested_class):
+                    self.scope_id = scope_id
+                elif isinstance(scope_id, dict):
+                    self.scope_id = nested_class.from_kwargs(**scope_id)
+                else:
+                    self.scope_id = scope_id
+            else:
+                self.scope_id = scope_id
         if source is not None:
-            self.source = source
+            if hasattr(models, self.swagger_types['source']):
+                nested_class = getattr(models, self.swagger_types['source'])
+                if isinstance(source, nested_class):
+                    self.source = source
+                elif isinstance(source, dict):
+                    self.source = nested_class.from_kwargs(**source)
+                else:
+                    self.source = source
+            else:
+                self.source = source
         if status is not None:
-            self.status = status
+            if hasattr(models, self.swagger_types['status']):
+                nested_class = getattr(models, self.swagger_types['status'])
+                if isinstance(status, nested_class):
+                    self.status = status
+                elif isinstance(status, dict):
+                    self.status = nested_class.from_kwargs(**status)
+                else:
+                    self.status = status
+            else:
+                self.status = status
 
     @property
     def embedded(self):

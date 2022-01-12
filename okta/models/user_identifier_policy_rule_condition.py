@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class UserIdentifierPolicyRuleCondition(object):
@@ -29,11 +30,10 @@ class UserIdentifierPolicyRuleCondition(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'attribute': 'str',
-        'patterns': 'list[UserIdentifierConditionEvaluatorPattern]',
-        'type': 'UserIdentifierType'
-    }
+    swagger_types = {}
+    swagger_types['attribute'] = 'str'
+    swagger_types['patterns'] = 'list[UserIdentifierConditionEvaluatorPattern]'
+    swagger_types['type'] = 'UserIdentifierType'
 
     attribute_map = {
         'attribute': 'attribute',
@@ -52,18 +52,45 @@ class UserIdentifierPolicyRuleCondition(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, attribute=None, patterns=None, type=None):  # noqa: E501
+    def set_attributes(self, attribute=None, patterns=None, type=None, **kwargs):  # noqa: E501
         """UserIdentifierPolicyRuleCondition - a model defined in Swagger"""  # noqa: E501
         self._attribute = None
         self._patterns = None
         self._type = None
         self.discriminator = None
         if attribute is not None:
-            self.attribute = attribute
+            if hasattr(models, self.swagger_types['attribute']):
+                nested_class = getattr(models, self.swagger_types['attribute'])
+                if isinstance(attribute, nested_class):
+                    self.attribute = attribute
+                elif isinstance(attribute, dict):
+                    self.attribute = nested_class.from_kwargs(**attribute)
+                else:
+                    self.attribute = attribute
+            else:
+                self.attribute = attribute
         if patterns is not None:
-            self.patterns = patterns
+            if hasattr(models, self.swagger_types['patterns']):
+                nested_class = getattr(models, self.swagger_types['patterns'])
+                if isinstance(patterns, nested_class):
+                    self.patterns = patterns
+                elif isinstance(patterns, dict):
+                    self.patterns = nested_class.from_kwargs(**patterns)
+                else:
+                    self.patterns = patterns
+            else:
+                self.patterns = patterns
         if type is not None:
-            self.type = type
+            if hasattr(models, self.swagger_types['type']):
+                nested_class = getattr(models, self.swagger_types['type'])
+                if isinstance(type, nested_class):
+                    self.type = type
+                elif isinstance(type, dict):
+                    self.type = nested_class.from_kwargs(**type)
+                else:
+                    self.type = type
+            else:
+                self.type = type
 
     @property
     def attribute(self):

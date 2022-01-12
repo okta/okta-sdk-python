@@ -16,6 +16,7 @@ import re  # noqa: F401
 import six
 from okta.models.policy_rule_conditions import PolicyRuleConditions  # noqa: F401,E501
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class PasswordPolicyConditions(PolicyRuleConditions):
@@ -30,12 +31,11 @@ class PasswordPolicyConditions(PolicyRuleConditions):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'auth_provider': 'PasswordPolicyAuthenticationProviderCondition',
-        'people': 'PolicyPeopleCondition'
-    }
+    swagger_types = {}
     if hasattr(PolicyRuleConditions, "swagger_types"):
         swagger_types.update(PolicyRuleConditions.swagger_types)
+    swagger_types['auth_provider'] = 'PasswordPolicyAuthenticationProviderCondition'
+    swagger_types['people'] = 'PolicyPeopleCondition'
 
     attribute_map = {
         'auth_provider': 'authProvider',
@@ -55,16 +55,37 @@ class PasswordPolicyConditions(PolicyRuleConditions):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, auth_provider=None, people=None, *args, **kwargs):  # noqa: E501
+    def set_attributes(self, auth_provider=None, people=None, **kwargs):  # noqa: E501
         """PasswordPolicyConditions - a model defined in Swagger"""  # noqa: E501
+        config = {}
+        if kwargs is not None:
+            config = {to_snake_case(key): value for key, value in kwargs.items()}
+        super().set_attributes(**config)
         self._auth_provider = None
         self._people = None
         self.discriminator = None
         if auth_provider is not None:
-            self.auth_provider = auth_provider
+            if hasattr(models, self.swagger_types['auth_provider']):
+                nested_class = getattr(models, self.swagger_types['auth_provider'])
+                if isinstance(auth_provider, nested_class):
+                    self.auth_provider = auth_provider
+                elif isinstance(auth_provider, dict):
+                    self.auth_provider = nested_class.from_kwargs(**auth_provider)
+                else:
+                    self.auth_provider = auth_provider
+            else:
+                self.auth_provider = auth_provider
         if people is not None:
-            self.people = people
-        super().set_attributes(*args, **kwargs)
+            if hasattr(models, self.swagger_types['people']):
+                nested_class = getattr(models, self.swagger_types['people'])
+                if isinstance(people, nested_class):
+                    self.people = people
+                elif isinstance(people, dict):
+                    self.people = nested_class.from_kwargs(**people)
+                else:
+                    self.people = people
+            else:
+                self.people = people
 
     @property
     def auth_provider(self):

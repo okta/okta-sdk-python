@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class IdentityProviderPolicyRuleCondition(object):
@@ -29,10 +30,9 @@ class IdentityProviderPolicyRuleCondition(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'idp_ids': 'list[str]',
-        'provider': 'IdentityProviderPolicyProvider'
-    }
+    swagger_types = {}
+    swagger_types['idp_ids'] = 'list[str]'
+    swagger_types['provider'] = 'IdentityProviderPolicyProvider'
 
     attribute_map = {
         'idp_ids': 'idpIds',
@@ -50,15 +50,33 @@ class IdentityProviderPolicyRuleCondition(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, idp_ids=None, provider=None):  # noqa: E501
+    def set_attributes(self, idp_ids=None, provider=None, **kwargs):  # noqa: E501
         """IdentityProviderPolicyRuleCondition - a model defined in Swagger"""  # noqa: E501
         self._idp_ids = None
         self._provider = None
         self.discriminator = None
         if idp_ids is not None:
-            self.idp_ids = idp_ids
+            if hasattr(models, self.swagger_types['idp_ids']):
+                nested_class = getattr(models, self.swagger_types['idp_ids'])
+                if isinstance(idp_ids, nested_class):
+                    self.idp_ids = idp_ids
+                elif isinstance(idp_ids, dict):
+                    self.idp_ids = nested_class.from_kwargs(**idp_ids)
+                else:
+                    self.idp_ids = idp_ids
+            else:
+                self.idp_ids = idp_ids
         if provider is not None:
-            self.provider = provider
+            if hasattr(models, self.swagger_types['provider']):
+                nested_class = getattr(models, self.swagger_types['provider'])
+                if isinstance(provider, nested_class):
+                    self.provider = provider
+                elif isinstance(provider, dict):
+                    self.provider = nested_class.from_kwargs(**provider)
+                else:
+                    self.provider = provider
+            else:
+                self.provider = provider
 
     @property
     def idp_ids(self):

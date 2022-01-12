@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class UserActivationToken(object):
@@ -29,10 +30,9 @@ class UserActivationToken(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'activation_token': 'str',
-        'activation_url': 'str'
-    }
+    swagger_types = {}
+    swagger_types['activation_token'] = 'str'
+    swagger_types['activation_url'] = 'str'
 
     attribute_map = {
         'activation_token': 'activationToken',
@@ -50,15 +50,33 @@ class UserActivationToken(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, activation_token=None, activation_url=None):  # noqa: E501
+    def set_attributes(self, activation_token=None, activation_url=None, **kwargs):  # noqa: E501
         """UserActivationToken - a model defined in Swagger"""  # noqa: E501
         self._activation_token = None
         self._activation_url = None
         self.discriminator = None
         if activation_token is not None:
-            self.activation_token = activation_token
+            if hasattr(models, self.swagger_types['activation_token']):
+                nested_class = getattr(models, self.swagger_types['activation_token'])
+                if isinstance(activation_token, nested_class):
+                    self.activation_token = activation_token
+                elif isinstance(activation_token, dict):
+                    self.activation_token = nested_class.from_kwargs(**activation_token)
+                else:
+                    self.activation_token = activation_token
+            else:
+                self.activation_token = activation_token
         if activation_url is not None:
-            self.activation_url = activation_url
+            if hasattr(models, self.swagger_types['activation_url']):
+                nested_class = getattr(models, self.swagger_types['activation_url'])
+                if isinstance(activation_url, nested_class):
+                    self.activation_url = activation_url
+                elif isinstance(activation_url, dict):
+                    self.activation_url = nested_class.from_kwargs(**activation_url)
+                else:
+                    self.activation_url = activation_url
+            else:
+                self.activation_url = activation_url
 
     @property
     def activation_token(self):

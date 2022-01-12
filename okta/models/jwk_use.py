@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class JwkUse(object):
@@ -29,9 +30,8 @@ class JwkUse(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'use': 'JwkUseType'
-    }
+    swagger_types = {}
+    swagger_types['use'] = 'JwkUseType'
 
     attribute_map = {
         'use': 'use'
@@ -48,12 +48,21 @@ class JwkUse(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, use=None):  # noqa: E501
+    def set_attributes(self, use=None, **kwargs):  # noqa: E501
         """JwkUse - a model defined in Swagger"""  # noqa: E501
         self._use = None
         self.discriminator = None
         if use is not None:
-            self.use = use
+            if hasattr(models, self.swagger_types['use']):
+                nested_class = getattr(models, self.swagger_types['use'])
+                if isinstance(use, nested_class):
+                    self.use = use
+                elif isinstance(use, dict):
+                    self.use = nested_class.from_kwargs(**use)
+                else:
+                    self.use = use
+            else:
+                self.use = use
 
     @property
     def use(self):

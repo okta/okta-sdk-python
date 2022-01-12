@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class LinkedObjectDetails(object):
@@ -29,12 +30,11 @@ class LinkedObjectDetails(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'description': 'str',
-        'name': 'str',
-        'title': 'str',
-        'type': 'LinkedObjectDetailsType'
-    }
+    swagger_types = {}
+    swagger_types['description'] = 'str'
+    swagger_types['name'] = 'str'
+    swagger_types['title'] = 'str'
+    swagger_types['type'] = 'LinkedObjectDetailsType'
 
     attribute_map = {
         'description': 'description',
@@ -54,7 +54,7 @@ class LinkedObjectDetails(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, description=None, name=None, title=None, type=None):  # noqa: E501
+    def set_attributes(self, description=None, name=None, title=None, type=None, **kwargs):  # noqa: E501
         """LinkedObjectDetails - a model defined in Swagger"""  # noqa: E501
         self._description = None
         self._name = None
@@ -62,13 +62,49 @@ class LinkedObjectDetails(object):
         self._type = None
         self.discriminator = None
         if description is not None:
-            self.description = description
+            if hasattr(models, self.swagger_types['description']):
+                nested_class = getattr(models, self.swagger_types['description'])
+                if isinstance(description, nested_class):
+                    self.description = description
+                elif isinstance(description, dict):
+                    self.description = nested_class.from_kwargs(**description)
+                else:
+                    self.description = description
+            else:
+                self.description = description
         if name is not None:
-            self.name = name
+            if hasattr(models, self.swagger_types['name']):
+                nested_class = getattr(models, self.swagger_types['name'])
+                if isinstance(name, nested_class):
+                    self.name = name
+                elif isinstance(name, dict):
+                    self.name = nested_class.from_kwargs(**name)
+                else:
+                    self.name = name
+            else:
+                self.name = name
         if title is not None:
-            self.title = title
+            if hasattr(models, self.swagger_types['title']):
+                nested_class = getattr(models, self.swagger_types['title'])
+                if isinstance(title, nested_class):
+                    self.title = title
+                elif isinstance(title, dict):
+                    self.title = nested_class.from_kwargs(**title)
+                else:
+                    self.title = title
+            else:
+                self.title = title
         if type is not None:
-            self.type = type
+            if hasattr(models, self.swagger_types['type']):
+                nested_class = getattr(models, self.swagger_types['type'])
+                if isinstance(type, nested_class):
+                    self.type = type
+                elif isinstance(type, dict):
+                    self.type = nested_class.from_kwargs(**type)
+                else:
+                    self.type = type
+            else:
+                self.type = type
 
     @property
     def description(self):

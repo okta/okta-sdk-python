@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class BeforeScheduledActionPolicyRuleCondition(object):
@@ -29,10 +30,9 @@ class BeforeScheduledActionPolicyRuleCondition(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'duration': 'Duration',
-        'lifecycle_action': 'ScheduledUserLifecycleAction'
-    }
+    swagger_types = {}
+    swagger_types['duration'] = 'Duration'
+    swagger_types['lifecycle_action'] = 'ScheduledUserLifecycleAction'
 
     attribute_map = {
         'duration': 'duration',
@@ -50,15 +50,33 @@ class BeforeScheduledActionPolicyRuleCondition(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, duration=None, lifecycle_action=None):  # noqa: E501
+    def set_attributes(self, duration=None, lifecycle_action=None, **kwargs):  # noqa: E501
         """BeforeScheduledActionPolicyRuleCondition - a model defined in Swagger"""  # noqa: E501
         self._duration = None
         self._lifecycle_action = None
         self.discriminator = None
         if duration is not None:
-            self.duration = duration
+            if hasattr(models, self.swagger_types['duration']):
+                nested_class = getattr(models, self.swagger_types['duration'])
+                if isinstance(duration, nested_class):
+                    self.duration = duration
+                elif isinstance(duration, dict):
+                    self.duration = nested_class.from_kwargs(**duration)
+                else:
+                    self.duration = duration
+            else:
+                self.duration = duration
         if lifecycle_action is not None:
-            self.lifecycle_action = lifecycle_action
+            if hasattr(models, self.swagger_types['lifecycle_action']):
+                nested_class = getattr(models, self.swagger_types['lifecycle_action'])
+                if isinstance(lifecycle_action, nested_class):
+                    self.lifecycle_action = lifecycle_action
+                elif isinstance(lifecycle_action, dict):
+                    self.lifecycle_action = nested_class.from_kwargs(**lifecycle_action)
+                else:
+                    self.lifecycle_action = lifecycle_action
+            else:
+                self.lifecycle_action = lifecycle_action
 
     @property
     def duration(self):

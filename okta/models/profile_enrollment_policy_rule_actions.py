@@ -16,6 +16,7 @@ import re  # noqa: F401
 import six
 from okta.models.policy_rule_actions import PolicyRuleActions  # noqa: F401,E501
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class ProfileEnrollmentPolicyRuleActions(PolicyRuleActions):
@@ -30,11 +31,10 @@ class ProfileEnrollmentPolicyRuleActions(PolicyRuleActions):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'profile_enrollment': 'ProfileEnrollmentPolicyRuleAction'
-    }
+    swagger_types = {}
     if hasattr(PolicyRuleActions, "swagger_types"):
         swagger_types.update(PolicyRuleActions.swagger_types)
+    swagger_types['profile_enrollment'] = 'ProfileEnrollmentPolicyRuleAction'
 
     attribute_map = {
         'profile_enrollment': 'profileEnrollment'
@@ -53,13 +53,25 @@ class ProfileEnrollmentPolicyRuleActions(PolicyRuleActions):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, profile_enrollment=None, *args, **kwargs):  # noqa: E501
+    def set_attributes(self, profile_enrollment=None, **kwargs):  # noqa: E501
         """ProfileEnrollmentPolicyRuleActions - a model defined in Swagger"""  # noqa: E501
+        config = {}
+        if kwargs is not None:
+            config = {to_snake_case(key): value for key, value in kwargs.items()}
+        super().set_attributes(**config)
         self._profile_enrollment = None
         self.discriminator = None
         if profile_enrollment is not None:
-            self.profile_enrollment = profile_enrollment
-        super().set_attributes(*args, **kwargs)
+            if hasattr(models, self.swagger_types['profile_enrollment']):
+                nested_class = getattr(models, self.swagger_types['profile_enrollment'])
+                if isinstance(profile_enrollment, nested_class):
+                    self.profile_enrollment = profile_enrollment
+                elif isinstance(profile_enrollment, dict):
+                    self.profile_enrollment = nested_class.from_kwargs(**profile_enrollment)
+                else:
+                    self.profile_enrollment = profile_enrollment
+            else:
+                self.profile_enrollment = profile_enrollment
 
     @property
     def profile_enrollment(self):

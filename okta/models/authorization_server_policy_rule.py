@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class AuthorizationServerPolicyRule(object):
@@ -29,18 +30,17 @@ class AuthorizationServerPolicyRule(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'created': 'datetime',
-        'id': 'str',
-        'name': 'str',
-        'last_updated': 'datetime',
-        'priority': 'int',
-        'status': 'str',
-        'system': 'bool',
-        'type': 'str',
-        'conditions': 'AuthorizationServerPolicyRuleConditions',
-        'actions': 'AuthorizationServerPolicyRuleActions'
-    }
+    swagger_types = {}
+    swagger_types['created'] = 'datetime'
+    swagger_types['id'] = 'str'
+    swagger_types['name'] = 'str'
+    swagger_types['last_updated'] = 'datetime'
+    swagger_types['priority'] = 'int'
+    swagger_types['status'] = 'str'
+    swagger_types['system'] = 'bool'
+    swagger_types['type'] = 'str'
+    swagger_types['conditions'] = 'AuthorizationServerPolicyRuleConditions'
+    swagger_types['actions'] = 'AuthorizationServerPolicyRuleActions'
 
     attribute_map = {
         'created': 'created',
@@ -66,7 +66,7 @@ class AuthorizationServerPolicyRule(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, created=None, id=None, name=None, last_updated=None, priority=None, status='ACTIVE', system=False, type=None, conditions=None, actions=None):  # noqa: E501
+    def set_attributes(self, created=None, id=None, name=None, last_updated=None, priority=None, status='ACTIVE', system=False, type=None, conditions=None, actions=None, **kwargs):  # noqa: E501
         """AuthorizationServerPolicyRule - a model defined in Swagger"""  # noqa: E501
         self._created = None
         self._id = None
@@ -80,25 +80,115 @@ class AuthorizationServerPolicyRule(object):
         self._actions = None
         self.discriminator = None
         if created is not None:
-            self.created = created
+            if hasattr(models, self.swagger_types['created']):
+                nested_class = getattr(models, self.swagger_types['created'])
+                if isinstance(created, nested_class):
+                    self.created = created
+                elif isinstance(created, dict):
+                    self.created = nested_class.from_kwargs(**created)
+                else:
+                    self.created = created
+            else:
+                self.created = created
         if id is not None:
-            self.id = id
+            if hasattr(models, self.swagger_types['id']):
+                nested_class = getattr(models, self.swagger_types['id'])
+                if isinstance(id, nested_class):
+                    self.id = id
+                elif isinstance(id, dict):
+                    self.id = nested_class.from_kwargs(**id)
+                else:
+                    self.id = id
+            else:
+                self.id = id
         if name is not None:
-            self.name = name
+            if hasattr(models, self.swagger_types['name']):
+                nested_class = getattr(models, self.swagger_types['name'])
+                if isinstance(name, nested_class):
+                    self.name = name
+                elif isinstance(name, dict):
+                    self.name = nested_class.from_kwargs(**name)
+                else:
+                    self.name = name
+            else:
+                self.name = name
         if last_updated is not None:
-            self.last_updated = last_updated
+            if hasattr(models, self.swagger_types['last_updated']):
+                nested_class = getattr(models, self.swagger_types['last_updated'])
+                if isinstance(last_updated, nested_class):
+                    self.last_updated = last_updated
+                elif isinstance(last_updated, dict):
+                    self.last_updated = nested_class.from_kwargs(**last_updated)
+                else:
+                    self.last_updated = last_updated
+            else:
+                self.last_updated = last_updated
         if priority is not None:
-            self.priority = priority
+            if hasattr(models, self.swagger_types['priority']):
+                nested_class = getattr(models, self.swagger_types['priority'])
+                if isinstance(priority, nested_class):
+                    self.priority = priority
+                elif isinstance(priority, dict):
+                    self.priority = nested_class.from_kwargs(**priority)
+                else:
+                    self.priority = priority
+            else:
+                self.priority = priority
         if status is not None:
-            self.status = status
+            if hasattr(models, self.swagger_types['status']):
+                nested_class = getattr(models, self.swagger_types['status'])
+                if isinstance(status, nested_class):
+                    self.status = status
+                elif isinstance(status, dict):
+                    self.status = nested_class.from_kwargs(**status)
+                else:
+                    self.status = status
+            else:
+                self.status = status
         if system is not None:
-            self.system = system
+            if hasattr(models, self.swagger_types['system']):
+                nested_class = getattr(models, self.swagger_types['system'])
+                if isinstance(system, nested_class):
+                    self.system = system
+                elif isinstance(system, dict):
+                    self.system = nested_class.from_kwargs(**system)
+                else:
+                    self.system = system
+            else:
+                self.system = system
         if type is not None:
-            self.type = type
+            if hasattr(models, self.swagger_types['type']):
+                nested_class = getattr(models, self.swagger_types['type'])
+                if isinstance(type, nested_class):
+                    self.type = type
+                elif isinstance(type, dict):
+                    self.type = nested_class.from_kwargs(**type)
+                else:
+                    self.type = type
+            else:
+                self.type = type
         if conditions is not None:
-            self.conditions = conditions
+            if hasattr(models, self.swagger_types['conditions']):
+                nested_class = getattr(models, self.swagger_types['conditions'])
+                if isinstance(conditions, nested_class):
+                    self.conditions = conditions
+                elif isinstance(conditions, dict):
+                    self.conditions = nested_class.from_kwargs(**conditions)
+                else:
+                    self.conditions = conditions
+            else:
+                self.conditions = conditions
         if actions is not None:
-            self.actions = actions
+            if hasattr(models, self.swagger_types['actions']):
+                nested_class = getattr(models, self.swagger_types['actions'])
+                if isinstance(actions, nested_class):
+                    self.actions = actions
+                elif isinstance(actions, dict):
+                    self.actions = nested_class.from_kwargs(**actions)
+                else:
+                    self.actions = actions
+            else:
+                self.actions = actions
 
     @property
     def created(self):

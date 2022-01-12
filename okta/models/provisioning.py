@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class Provisioning(object):
@@ -29,12 +30,11 @@ class Provisioning(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'action': 'ProvisioningAction',
-        'conditions': 'ProvisioningConditions',
-        'groups': 'ProvisioningGroups',
-        'profile_master': 'bool'
-    }
+    swagger_types = {}
+    swagger_types['action'] = 'ProvisioningAction'
+    swagger_types['conditions'] = 'ProvisioningConditions'
+    swagger_types['groups'] = 'ProvisioningGroups'
+    swagger_types['profile_master'] = 'bool'
 
     attribute_map = {
         'action': 'action',
@@ -54,7 +54,7 @@ class Provisioning(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, action=None, conditions=None, groups=None, profile_master=None):  # noqa: E501
+    def set_attributes(self, action=None, conditions=None, groups=None, profile_master=None, **kwargs):  # noqa: E501
         """Provisioning - a model defined in Swagger"""  # noqa: E501
         self._action = None
         self._conditions = None
@@ -62,13 +62,49 @@ class Provisioning(object):
         self._profile_master = None
         self.discriminator = None
         if action is not None:
-            self.action = action
+            if hasattr(models, self.swagger_types['action']):
+                nested_class = getattr(models, self.swagger_types['action'])
+                if isinstance(action, nested_class):
+                    self.action = action
+                elif isinstance(action, dict):
+                    self.action = nested_class.from_kwargs(**action)
+                else:
+                    self.action = action
+            else:
+                self.action = action
         if conditions is not None:
-            self.conditions = conditions
+            if hasattr(models, self.swagger_types['conditions']):
+                nested_class = getattr(models, self.swagger_types['conditions'])
+                if isinstance(conditions, nested_class):
+                    self.conditions = conditions
+                elif isinstance(conditions, dict):
+                    self.conditions = nested_class.from_kwargs(**conditions)
+                else:
+                    self.conditions = conditions
+            else:
+                self.conditions = conditions
         if groups is not None:
-            self.groups = groups
+            if hasattr(models, self.swagger_types['groups']):
+                nested_class = getattr(models, self.swagger_types['groups'])
+                if isinstance(groups, nested_class):
+                    self.groups = groups
+                elif isinstance(groups, dict):
+                    self.groups = nested_class.from_kwargs(**groups)
+                else:
+                    self.groups = groups
+            else:
+                self.groups = groups
         if profile_master is not None:
-            self.profile_master = profile_master
+            if hasattr(models, self.swagger_types['profile_master']):
+                nested_class = getattr(models, self.swagger_types['profile_master'])
+                if isinstance(profile_master, nested_class):
+                    self.profile_master = profile_master
+                elif isinstance(profile_master, dict):
+                    self.profile_master = nested_class.from_kwargs(**profile_master)
+                else:
+                    self.profile_master = profile_master
+            else:
+                self.profile_master = profile_master
 
     @property
     def action(self):

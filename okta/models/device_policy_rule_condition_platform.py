@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class DevicePolicyRuleConditionPlatform(object):
@@ -29,10 +30,9 @@ class DevicePolicyRuleConditionPlatform(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'supported_mdm_frameworks': 'list[DevicePolicyMDMFramework]',
-        'types': 'list[DevicePolicyPlatformType]'
-    }
+    swagger_types = {}
+    swagger_types['supported_mdm_frameworks'] = 'list[DevicePolicyMDMFramework]'
+    swagger_types['types'] = 'list[DevicePolicyPlatformType]'
 
     attribute_map = {
         'supported_mdm_frameworks': 'supportedMDMFrameworks',
@@ -50,15 +50,33 @@ class DevicePolicyRuleConditionPlatform(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, supported_mdm_frameworks=None, types=None):  # noqa: E501
+    def set_attributes(self, supported_mdm_frameworks=None, types=None, **kwargs):  # noqa: E501
         """DevicePolicyRuleConditionPlatform - a model defined in Swagger"""  # noqa: E501
         self._supported_mdm_frameworks = None
         self._types = None
         self.discriminator = None
         if supported_mdm_frameworks is not None:
-            self.supported_mdm_frameworks = supported_mdm_frameworks
+            if hasattr(models, self.swagger_types['supported_mdm_frameworks']):
+                nested_class = getattr(models, self.swagger_types['supported_mdm_frameworks'])
+                if isinstance(supported_mdm_frameworks, nested_class):
+                    self.supported_mdm_frameworks = supported_mdm_frameworks
+                elif isinstance(supported_mdm_frameworks, dict):
+                    self.supported_mdm_frameworks = nested_class.from_kwargs(**supported_mdm_frameworks)
+                else:
+                    self.supported_mdm_frameworks = supported_mdm_frameworks
+            else:
+                self.supported_mdm_frameworks = supported_mdm_frameworks
         if types is not None:
-            self.types = types
+            if hasattr(models, self.swagger_types['types']):
+                nested_class = getattr(models, self.swagger_types['types'])
+                if isinstance(types, nested_class):
+                    self.types = types
+                elif isinstance(types, dict):
+                    self.types = nested_class.from_kwargs(**types)
+                else:
+                    self.types = types
+            else:
+                self.types = types
 
     @property
     def supported_mdm_frameworks(self):

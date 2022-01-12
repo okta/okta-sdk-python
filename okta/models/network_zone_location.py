@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class NetworkZoneLocation(object):
@@ -29,10 +30,9 @@ class NetworkZoneLocation(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'country': 'str',
-        'region': 'str'
-    }
+    swagger_types = {}
+    swagger_types['country'] = 'str'
+    swagger_types['region'] = 'str'
 
     attribute_map = {
         'country': 'country',
@@ -50,15 +50,33 @@ class NetworkZoneLocation(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, country=None, region=None):  # noqa: E501
+    def set_attributes(self, country=None, region=None, **kwargs):  # noqa: E501
         """NetworkZoneLocation - a model defined in Swagger"""  # noqa: E501
         self._country = None
         self._region = None
         self.discriminator = None
         if country is not None:
-            self.country = country
+            if hasattr(models, self.swagger_types['country']):
+                nested_class = getattr(models, self.swagger_types['country'])
+                if isinstance(country, nested_class):
+                    self.country = country
+                elif isinstance(country, dict):
+                    self.country = nested_class.from_kwargs(**country)
+                else:
+                    self.country = country
+            else:
+                self.country = country
         if region is not None:
-            self.region = region
+            if hasattr(models, self.swagger_types['region']):
+                nested_class = getattr(models, self.swagger_types['region'])
+                if isinstance(region, nested_class):
+                    self.region = region
+                elif isinstance(region, dict):
+                    self.region = nested_class.from_kwargs(**region)
+                else:
+                    self.region = region
+            else:
+                self.region = region
 
     @property
     def country(self):

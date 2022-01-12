@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class AccessPolicyRuleCustomCondition(object):
@@ -29,9 +30,8 @@ class AccessPolicyRuleCustomCondition(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'condition': 'str'
-    }
+    swagger_types = {}
+    swagger_types['condition'] = 'str'
 
     attribute_map = {
         'condition': 'condition'
@@ -48,12 +48,21 @@ class AccessPolicyRuleCustomCondition(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, condition=None):  # noqa: E501
+    def set_attributes(self, condition=None, **kwargs):  # noqa: E501
         """AccessPolicyRuleCustomCondition - a model defined in Swagger"""  # noqa: E501
         self._condition = None
         self.discriminator = None
         if condition is not None:
-            self.condition = condition
+            if hasattr(models, self.swagger_types['condition']):
+                nested_class = getattr(models, self.swagger_types['condition'])
+                if isinstance(condition, nested_class):
+                    self.condition = condition
+                elif isinstance(condition, dict):
+                    self.condition = nested_class.from_kwargs(**condition)
+                else:
+                    self.condition = condition
+            else:
+                self.condition = condition
 
     @property
     def condition(self):

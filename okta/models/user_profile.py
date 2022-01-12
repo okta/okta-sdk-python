@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class UserProfile(object):
@@ -29,39 +30,38 @@ class UserProfile(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'city': 'str',
-        'cost_center': 'str',
-        'country_code': 'str',
-        'department': 'str',
-        'display_name': 'str',
-        'division': 'str',
-        'email': 'str',
-        'employee_number': 'str',
-        'first_name': 'str',
-        'honorific_prefix': 'str',
-        'honorific_suffix': 'str',
-        'last_name': 'str',
-        'locale': 'str',
-        'login': 'str',
-        'manager': 'str',
-        'manager_id': 'str',
-        'middle_name': 'str',
-        'mobile_phone': 'str',
-        'nick_name': 'str',
-        'organization': 'str',
-        'postal_address': 'str',
-        'preferred_language': 'str',
-        'primary_phone': 'str',
-        'profile_url': 'str',
-        'second_email': 'str',
-        'state': 'str',
-        'street_address': 'str',
-        'timezone': 'str',
-        'title': 'str',
-        'user_type': 'str',
-        'zip_code': 'str'
-    }
+    swagger_types = {}
+    swagger_types['city'] = 'str'
+    swagger_types['cost_center'] = 'str'
+    swagger_types['country_code'] = 'str'
+    swagger_types['department'] = 'str'
+    swagger_types['display_name'] = 'str'
+    swagger_types['division'] = 'str'
+    swagger_types['email'] = 'str'
+    swagger_types['employee_number'] = 'str'
+    swagger_types['first_name'] = 'str'
+    swagger_types['honorific_prefix'] = 'str'
+    swagger_types['honorific_suffix'] = 'str'
+    swagger_types['last_name'] = 'str'
+    swagger_types['locale'] = 'str'
+    swagger_types['login'] = 'str'
+    swagger_types['manager'] = 'str'
+    swagger_types['manager_id'] = 'str'
+    swagger_types['middle_name'] = 'str'
+    swagger_types['mobile_phone'] = 'str'
+    swagger_types['nick_name'] = 'str'
+    swagger_types['organization'] = 'str'
+    swagger_types['postal_address'] = 'str'
+    swagger_types['preferred_language'] = 'str'
+    swagger_types['primary_phone'] = 'str'
+    swagger_types['profile_url'] = 'str'
+    swagger_types['second_email'] = 'str'
+    swagger_types['state'] = 'str'
+    swagger_types['street_address'] = 'str'
+    swagger_types['timezone'] = 'str'
+    swagger_types['title'] = 'str'
+    swagger_types['user_type'] = 'str'
+    swagger_types['zip_code'] = 'str'
 
     attribute_map = {
         'city': 'city',
@@ -108,7 +108,7 @@ class UserProfile(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, city=None, cost_center=None, country_code=None, department=None, display_name=None, division=None, email=None, employee_number=None, first_name=None, honorific_prefix=None, honorific_suffix=None, last_name=None, locale=None, login=None, manager=None, manager_id=None, middle_name=None, mobile_phone=None, nick_name=None, organization=None, postal_address=None, preferred_language=None, primary_phone=None, profile_url=None, second_email=None, state=None, street_address=None, timezone=None, title=None, user_type=None, zip_code=None):  # noqa: E501
+    def set_attributes(self, city=None, cost_center=None, country_code=None, department=None, display_name=None, division=None, email=None, employee_number=None, first_name=None, honorific_prefix=None, honorific_suffix=None, last_name=None, locale=None, login=None, manager=None, manager_id=None, middle_name=None, mobile_phone=None, nick_name=None, organization=None, postal_address=None, preferred_language=None, primary_phone=None, profile_url=None, second_email=None, state=None, street_address=None, timezone=None, title=None, user_type=None, zip_code=None, **kwargs):  # noqa: E501
         """UserProfile - a model defined in Swagger"""  # noqa: E501
         self._city = None
         self._cost_center = None
@@ -143,67 +143,346 @@ class UserProfile(object):
         self._zip_code = None
         self.discriminator = None
         if city is not None:
-            self.city = city
+            if hasattr(models, self.swagger_types['city']):
+                nested_class = getattr(models, self.swagger_types['city'])
+                if isinstance(city, nested_class):
+                    self.city = city
+                elif isinstance(city, dict):
+                    self.city = nested_class.from_kwargs(**city)
+                else:
+                    self.city = city
+            else:
+                self.city = city
         if cost_center is not None:
-            self.cost_center = cost_center
+            if hasattr(models, self.swagger_types['cost_center']):
+                nested_class = getattr(models, self.swagger_types['cost_center'])
+                if isinstance(cost_center, nested_class):
+                    self.cost_center = cost_center
+                elif isinstance(cost_center, dict):
+                    self.cost_center = nested_class.from_kwargs(**cost_center)
+                else:
+                    self.cost_center = cost_center
+            else:
+                self.cost_center = cost_center
         if country_code is not None:
-            self.country_code = country_code
+            if hasattr(models, self.swagger_types['country_code']):
+                nested_class = getattr(models, self.swagger_types['country_code'])
+                if isinstance(country_code, nested_class):
+                    self.country_code = country_code
+                elif isinstance(country_code, dict):
+                    self.country_code = nested_class.from_kwargs(**country_code)
+                else:
+                    self.country_code = country_code
+            else:
+                self.country_code = country_code
         if department is not None:
-            self.department = department
+            if hasattr(models, self.swagger_types['department']):
+                nested_class = getattr(models, self.swagger_types['department'])
+                if isinstance(department, nested_class):
+                    self.department = department
+                elif isinstance(department, dict):
+                    self.department = nested_class.from_kwargs(**department)
+                else:
+                    self.department = department
+            else:
+                self.department = department
         if display_name is not None:
-            self.display_name = display_name
+            if hasattr(models, self.swagger_types['display_name']):
+                nested_class = getattr(models, self.swagger_types['display_name'])
+                if isinstance(display_name, nested_class):
+                    self.display_name = display_name
+                elif isinstance(display_name, dict):
+                    self.display_name = nested_class.from_kwargs(**display_name)
+                else:
+                    self.display_name = display_name
+            else:
+                self.display_name = display_name
         if division is not None:
-            self.division = division
+            if hasattr(models, self.swagger_types['division']):
+                nested_class = getattr(models, self.swagger_types['division'])
+                if isinstance(division, nested_class):
+                    self.division = division
+                elif isinstance(division, dict):
+                    self.division = nested_class.from_kwargs(**division)
+                else:
+                    self.division = division
+            else:
+                self.division = division
         if email is not None:
-            self.email = email
+            if hasattr(models, self.swagger_types['email']):
+                nested_class = getattr(models, self.swagger_types['email'])
+                if isinstance(email, nested_class):
+                    self.email = email
+                elif isinstance(email, dict):
+                    self.email = nested_class.from_kwargs(**email)
+                else:
+                    self.email = email
+            else:
+                self.email = email
         if employee_number is not None:
-            self.employee_number = employee_number
+            if hasattr(models, self.swagger_types['employee_number']):
+                nested_class = getattr(models, self.swagger_types['employee_number'])
+                if isinstance(employee_number, nested_class):
+                    self.employee_number = employee_number
+                elif isinstance(employee_number, dict):
+                    self.employee_number = nested_class.from_kwargs(**employee_number)
+                else:
+                    self.employee_number = employee_number
+            else:
+                self.employee_number = employee_number
         if first_name is not None:
-            self.first_name = first_name
+            if hasattr(models, self.swagger_types['first_name']):
+                nested_class = getattr(models, self.swagger_types['first_name'])
+                if isinstance(first_name, nested_class):
+                    self.first_name = first_name
+                elif isinstance(first_name, dict):
+                    self.first_name = nested_class.from_kwargs(**first_name)
+                else:
+                    self.first_name = first_name
+            else:
+                self.first_name = first_name
         if honorific_prefix is not None:
-            self.honorific_prefix = honorific_prefix
+            if hasattr(models, self.swagger_types['honorific_prefix']):
+                nested_class = getattr(models, self.swagger_types['honorific_prefix'])
+                if isinstance(honorific_prefix, nested_class):
+                    self.honorific_prefix = honorific_prefix
+                elif isinstance(honorific_prefix, dict):
+                    self.honorific_prefix = nested_class.from_kwargs(**honorific_prefix)
+                else:
+                    self.honorific_prefix = honorific_prefix
+            else:
+                self.honorific_prefix = honorific_prefix
         if honorific_suffix is not None:
-            self.honorific_suffix = honorific_suffix
+            if hasattr(models, self.swagger_types['honorific_suffix']):
+                nested_class = getattr(models, self.swagger_types['honorific_suffix'])
+                if isinstance(honorific_suffix, nested_class):
+                    self.honorific_suffix = honorific_suffix
+                elif isinstance(honorific_suffix, dict):
+                    self.honorific_suffix = nested_class.from_kwargs(**honorific_suffix)
+                else:
+                    self.honorific_suffix = honorific_suffix
+            else:
+                self.honorific_suffix = honorific_suffix
         if last_name is not None:
-            self.last_name = last_name
+            if hasattr(models, self.swagger_types['last_name']):
+                nested_class = getattr(models, self.swagger_types['last_name'])
+                if isinstance(last_name, nested_class):
+                    self.last_name = last_name
+                elif isinstance(last_name, dict):
+                    self.last_name = nested_class.from_kwargs(**last_name)
+                else:
+                    self.last_name = last_name
+            else:
+                self.last_name = last_name
         if locale is not None:
-            self.locale = locale
+            if hasattr(models, self.swagger_types['locale']):
+                nested_class = getattr(models, self.swagger_types['locale'])
+                if isinstance(locale, nested_class):
+                    self.locale = locale
+                elif isinstance(locale, dict):
+                    self.locale = nested_class.from_kwargs(**locale)
+                else:
+                    self.locale = locale
+            else:
+                self.locale = locale
         if login is not None:
-            self.login = login
+            if hasattr(models, self.swagger_types['login']):
+                nested_class = getattr(models, self.swagger_types['login'])
+                if isinstance(login, nested_class):
+                    self.login = login
+                elif isinstance(login, dict):
+                    self.login = nested_class.from_kwargs(**login)
+                else:
+                    self.login = login
+            else:
+                self.login = login
         if manager is not None:
-            self.manager = manager
+            if hasattr(models, self.swagger_types['manager']):
+                nested_class = getattr(models, self.swagger_types['manager'])
+                if isinstance(manager, nested_class):
+                    self.manager = manager
+                elif isinstance(manager, dict):
+                    self.manager = nested_class.from_kwargs(**manager)
+                else:
+                    self.manager = manager
+            else:
+                self.manager = manager
         if manager_id is not None:
-            self.manager_id = manager_id
+            if hasattr(models, self.swagger_types['manager_id']):
+                nested_class = getattr(models, self.swagger_types['manager_id'])
+                if isinstance(manager_id, nested_class):
+                    self.manager_id = manager_id
+                elif isinstance(manager_id, dict):
+                    self.manager_id = nested_class.from_kwargs(**manager_id)
+                else:
+                    self.manager_id = manager_id
+            else:
+                self.manager_id = manager_id
         if middle_name is not None:
-            self.middle_name = middle_name
+            if hasattr(models, self.swagger_types['middle_name']):
+                nested_class = getattr(models, self.swagger_types['middle_name'])
+                if isinstance(middle_name, nested_class):
+                    self.middle_name = middle_name
+                elif isinstance(middle_name, dict):
+                    self.middle_name = nested_class.from_kwargs(**middle_name)
+                else:
+                    self.middle_name = middle_name
+            else:
+                self.middle_name = middle_name
         if mobile_phone is not None:
-            self.mobile_phone = mobile_phone
+            if hasattr(models, self.swagger_types['mobile_phone']):
+                nested_class = getattr(models, self.swagger_types['mobile_phone'])
+                if isinstance(mobile_phone, nested_class):
+                    self.mobile_phone = mobile_phone
+                elif isinstance(mobile_phone, dict):
+                    self.mobile_phone = nested_class.from_kwargs(**mobile_phone)
+                else:
+                    self.mobile_phone = mobile_phone
+            else:
+                self.mobile_phone = mobile_phone
         if nick_name is not None:
-            self.nick_name = nick_name
+            if hasattr(models, self.swagger_types['nick_name']):
+                nested_class = getattr(models, self.swagger_types['nick_name'])
+                if isinstance(nick_name, nested_class):
+                    self.nick_name = nick_name
+                elif isinstance(nick_name, dict):
+                    self.nick_name = nested_class.from_kwargs(**nick_name)
+                else:
+                    self.nick_name = nick_name
+            else:
+                self.nick_name = nick_name
         if organization is not None:
-            self.organization = organization
+            if hasattr(models, self.swagger_types['organization']):
+                nested_class = getattr(models, self.swagger_types['organization'])
+                if isinstance(organization, nested_class):
+                    self.organization = organization
+                elif isinstance(organization, dict):
+                    self.organization = nested_class.from_kwargs(**organization)
+                else:
+                    self.organization = organization
+            else:
+                self.organization = organization
         if postal_address is not None:
-            self.postal_address = postal_address
+            if hasattr(models, self.swagger_types['postal_address']):
+                nested_class = getattr(models, self.swagger_types['postal_address'])
+                if isinstance(postal_address, nested_class):
+                    self.postal_address = postal_address
+                elif isinstance(postal_address, dict):
+                    self.postal_address = nested_class.from_kwargs(**postal_address)
+                else:
+                    self.postal_address = postal_address
+            else:
+                self.postal_address = postal_address
         if preferred_language is not None:
-            self.preferred_language = preferred_language
+            if hasattr(models, self.swagger_types['preferred_language']):
+                nested_class = getattr(models, self.swagger_types['preferred_language'])
+                if isinstance(preferred_language, nested_class):
+                    self.preferred_language = preferred_language
+                elif isinstance(preferred_language, dict):
+                    self.preferred_language = nested_class.from_kwargs(**preferred_language)
+                else:
+                    self.preferred_language = preferred_language
+            else:
+                self.preferred_language = preferred_language
         if primary_phone is not None:
-            self.primary_phone = primary_phone
+            if hasattr(models, self.swagger_types['primary_phone']):
+                nested_class = getattr(models, self.swagger_types['primary_phone'])
+                if isinstance(primary_phone, nested_class):
+                    self.primary_phone = primary_phone
+                elif isinstance(primary_phone, dict):
+                    self.primary_phone = nested_class.from_kwargs(**primary_phone)
+                else:
+                    self.primary_phone = primary_phone
+            else:
+                self.primary_phone = primary_phone
         if profile_url is not None:
-            self.profile_url = profile_url
+            if hasattr(models, self.swagger_types['profile_url']):
+                nested_class = getattr(models, self.swagger_types['profile_url'])
+                if isinstance(profile_url, nested_class):
+                    self.profile_url = profile_url
+                elif isinstance(profile_url, dict):
+                    self.profile_url = nested_class.from_kwargs(**profile_url)
+                else:
+                    self.profile_url = profile_url
+            else:
+                self.profile_url = profile_url
         if second_email is not None:
-            self.second_email = second_email
+            if hasattr(models, self.swagger_types['second_email']):
+                nested_class = getattr(models, self.swagger_types['second_email'])
+                if isinstance(second_email, nested_class):
+                    self.second_email = second_email
+                elif isinstance(second_email, dict):
+                    self.second_email = nested_class.from_kwargs(**second_email)
+                else:
+                    self.second_email = second_email
+            else:
+                self.second_email = second_email
         if state is not None:
-            self.state = state
+            if hasattr(models, self.swagger_types['state']):
+                nested_class = getattr(models, self.swagger_types['state'])
+                if isinstance(state, nested_class):
+                    self.state = state
+                elif isinstance(state, dict):
+                    self.state = nested_class.from_kwargs(**state)
+                else:
+                    self.state = state
+            else:
+                self.state = state
         if street_address is not None:
-            self.street_address = street_address
+            if hasattr(models, self.swagger_types['street_address']):
+                nested_class = getattr(models, self.swagger_types['street_address'])
+                if isinstance(street_address, nested_class):
+                    self.street_address = street_address
+                elif isinstance(street_address, dict):
+                    self.street_address = nested_class.from_kwargs(**street_address)
+                else:
+                    self.street_address = street_address
+            else:
+                self.street_address = street_address
         if timezone is not None:
-            self.timezone = timezone
+            if hasattr(models, self.swagger_types['timezone']):
+                nested_class = getattr(models, self.swagger_types['timezone'])
+                if isinstance(timezone, nested_class):
+                    self.timezone = timezone
+                elif isinstance(timezone, dict):
+                    self.timezone = nested_class.from_kwargs(**timezone)
+                else:
+                    self.timezone = timezone
+            else:
+                self.timezone = timezone
         if title is not None:
-            self.title = title
+            if hasattr(models, self.swagger_types['title']):
+                nested_class = getattr(models, self.swagger_types['title'])
+                if isinstance(title, nested_class):
+                    self.title = title
+                elif isinstance(title, dict):
+                    self.title = nested_class.from_kwargs(**title)
+                else:
+                    self.title = title
+            else:
+                self.title = title
         if user_type is not None:
-            self.user_type = user_type
+            if hasattr(models, self.swagger_types['user_type']):
+                nested_class = getattr(models, self.swagger_types['user_type'])
+                if isinstance(user_type, nested_class):
+                    self.user_type = user_type
+                elif isinstance(user_type, dict):
+                    self.user_type = nested_class.from_kwargs(**user_type)
+                else:
+                    self.user_type = user_type
+            else:
+                self.user_type = user_type
         if zip_code is not None:
-            self.zip_code = zip_code
+            if hasattr(models, self.swagger_types['zip_code']):
+                nested_class = getattr(models, self.swagger_types['zip_code'])
+                if isinstance(zip_code, nested_class):
+                    self.zip_code = zip_code
+                elif isinstance(zip_code, dict):
+                    self.zip_code = nested_class.from_kwargs(**zip_code)
+                else:
+                    self.zip_code = zip_code
+            else:
+                self.zip_code = zip_code
 
     @property
     def city(self):

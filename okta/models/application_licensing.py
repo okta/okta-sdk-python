@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class ApplicationLicensing(object):
@@ -29,9 +30,8 @@ class ApplicationLicensing(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'seat_count': 'int'
-    }
+    swagger_types = {}
+    swagger_types['seat_count'] = 'int'
 
     attribute_map = {
         'seat_count': 'seatCount'
@@ -48,12 +48,21 @@ class ApplicationLicensing(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, seat_count=None):  # noqa: E501
+    def set_attributes(self, seat_count=None, **kwargs):  # noqa: E501
         """ApplicationLicensing - a model defined in Swagger"""  # noqa: E501
         self._seat_count = None
         self.discriminator = None
         if seat_count is not None:
-            self.seat_count = seat_count
+            if hasattr(models, self.swagger_types['seat_count']):
+                nested_class = getattr(models, self.swagger_types['seat_count'])
+                if isinstance(seat_count, nested_class):
+                    self.seat_count = seat_count
+                elif isinstance(seat_count, dict):
+                    self.seat_count = nested_class.from_kwargs(**seat_count)
+                else:
+                    self.seat_count = seat_count
+            else:
+                self.seat_count = seat_count
 
     @property
     def seat_count(self):

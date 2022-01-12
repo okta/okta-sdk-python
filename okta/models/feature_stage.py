@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class FeatureStage(object):
@@ -29,10 +30,9 @@ class FeatureStage(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'state': 'FeatureStageState',
-        'value': 'FeatureStageValue'
-    }
+    swagger_types = {}
+    swagger_types['state'] = 'FeatureStageState'
+    swagger_types['value'] = 'FeatureStageValue'
 
     attribute_map = {
         'state': 'state',
@@ -50,15 +50,33 @@ class FeatureStage(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, state=None, value=None):  # noqa: E501
+    def set_attributes(self, state=None, value=None, **kwargs):  # noqa: E501
         """FeatureStage - a model defined in Swagger"""  # noqa: E501
         self._state = None
         self._value = None
         self.discriminator = None
         if state is not None:
-            self.state = state
+            if hasattr(models, self.swagger_types['state']):
+                nested_class = getattr(models, self.swagger_types['state'])
+                if isinstance(state, nested_class):
+                    self.state = state
+                elif isinstance(state, dict):
+                    self.state = nested_class.from_kwargs(**state)
+                else:
+                    self.state = state
+            else:
+                self.state = state
         if value is not None:
-            self.value = value
+            if hasattr(models, self.swagger_types['value']):
+                nested_class = getattr(models, self.swagger_types['value'])
+                if isinstance(value, nested_class):
+                    self.value = value
+                elif isinstance(value, dict):
+                    self.value = nested_class.from_kwargs(**value)
+                else:
+                    self.value = value
+            else:
+                self.value = value
 
     @property
     def state(self):

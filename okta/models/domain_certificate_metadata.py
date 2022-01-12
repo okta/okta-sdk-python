@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class DomainCertificateMetadata(object):
@@ -29,11 +30,10 @@ class DomainCertificateMetadata(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'expiration': 'str',
-        'fingerprint': 'str',
-        'subject': 'str'
-    }
+    swagger_types = {}
+    swagger_types['expiration'] = 'str'
+    swagger_types['fingerprint'] = 'str'
+    swagger_types['subject'] = 'str'
 
     attribute_map = {
         'expiration': 'expiration',
@@ -52,18 +52,45 @@ class DomainCertificateMetadata(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, expiration=None, fingerprint=None, subject=None):  # noqa: E501
+    def set_attributes(self, expiration=None, fingerprint=None, subject=None, **kwargs):  # noqa: E501
         """DomainCertificateMetadata - a model defined in Swagger"""  # noqa: E501
         self._expiration = None
         self._fingerprint = None
         self._subject = None
         self.discriminator = None
         if expiration is not None:
-            self.expiration = expiration
+            if hasattr(models, self.swagger_types['expiration']):
+                nested_class = getattr(models, self.swagger_types['expiration'])
+                if isinstance(expiration, nested_class):
+                    self.expiration = expiration
+                elif isinstance(expiration, dict):
+                    self.expiration = nested_class.from_kwargs(**expiration)
+                else:
+                    self.expiration = expiration
+            else:
+                self.expiration = expiration
         if fingerprint is not None:
-            self.fingerprint = fingerprint
+            if hasattr(models, self.swagger_types['fingerprint']):
+                nested_class = getattr(models, self.swagger_types['fingerprint'])
+                if isinstance(fingerprint, nested_class):
+                    self.fingerprint = fingerprint
+                elif isinstance(fingerprint, dict):
+                    self.fingerprint = nested_class.from_kwargs(**fingerprint)
+                else:
+                    self.fingerprint = fingerprint
+            else:
+                self.fingerprint = fingerprint
         if subject is not None:
-            self.subject = subject
+            if hasattr(models, self.swagger_types['subject']):
+                nested_class = getattr(models, self.swagger_types['subject'])
+                if isinstance(subject, nested_class):
+                    self.subject = subject
+                elif isinstance(subject, dict):
+                    self.subject = nested_class.from_kwargs(**subject)
+                else:
+                    self.subject = subject
+            else:
+                self.subject = subject
 
     @property
     def expiration(self):

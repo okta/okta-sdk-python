@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class ChangePasswordRequest(object):
@@ -29,10 +30,9 @@ class ChangePasswordRequest(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'new_password': 'PasswordCredential',
-        'old_password': 'PasswordCredential'
-    }
+    swagger_types = {}
+    swagger_types['new_password'] = 'PasswordCredential'
+    swagger_types['old_password'] = 'PasswordCredential'
 
     attribute_map = {
         'new_password': 'newPassword',
@@ -50,15 +50,33 @@ class ChangePasswordRequest(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, new_password=None, old_password=None):  # noqa: E501
+    def set_attributes(self, new_password=None, old_password=None, **kwargs):  # noqa: E501
         """ChangePasswordRequest - a model defined in Swagger"""  # noqa: E501
         self._new_password = None
         self._old_password = None
         self.discriminator = None
         if new_password is not None:
-            self.new_password = new_password
+            if hasattr(models, self.swagger_types['new_password']):
+                nested_class = getattr(models, self.swagger_types['new_password'])
+                if isinstance(new_password, nested_class):
+                    self.new_password = new_password
+                elif isinstance(new_password, dict):
+                    self.new_password = nested_class.from_kwargs(**new_password)
+                else:
+                    self.new_password = new_password
+            else:
+                self.new_password = new_password
         if old_password is not None:
-            self.old_password = old_password
+            if hasattr(models, self.swagger_types['old_password']):
+                nested_class = getattr(models, self.swagger_types['old_password'])
+                if isinstance(old_password, nested_class):
+                    self.old_password = old_password
+                elif isinstance(old_password, dict):
+                    self.old_password = nested_class.from_kwargs(**old_password)
+                else:
+                    self.old_password = old_password
+            else:
+                self.old_password = old_password
 
     @property
     def new_password(self):

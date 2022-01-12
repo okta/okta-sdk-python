@@ -16,6 +16,7 @@ import re  # noqa: F401
 import six
 from okta.models.user_factor import UserFactor  # noqa: F401,E501
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class WebUserFactor(UserFactor):
@@ -30,11 +31,10 @@ class WebUserFactor(UserFactor):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'profile': 'WebUserFactorProfile'
-    }
+    swagger_types = {}
     if hasattr(UserFactor, "swagger_types"):
         swagger_types.update(UserFactor.swagger_types)
+    swagger_types['profile'] = 'WebUserFactorProfile'
 
     attribute_map = {
         'profile': 'profile'
@@ -53,13 +53,25 @@ class WebUserFactor(UserFactor):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, profile=None, *args, **kwargs):  # noqa: E501
+    def set_attributes(self, profile=None, **kwargs):  # noqa: E501
         """WebUserFactor - a model defined in Swagger"""  # noqa: E501
+        config = {}
+        if kwargs is not None:
+            config = {to_snake_case(key): value for key, value in kwargs.items()}
+        super().set_attributes(**config)
         self._profile = None
         self.discriminator = None
         if profile is not None:
-            self.profile = profile
-        super().set_attributes(*args, **kwargs)
+            if hasattr(models, self.swagger_types['profile']):
+                nested_class = getattr(models, self.swagger_types['profile'])
+                if isinstance(profile, nested_class):
+                    self.profile = profile
+                elif isinstance(profile, dict):
+                    self.profile = nested_class.from_kwargs(**profile)
+                else:
+                    self.profile = profile
+            else:
+                self.profile = profile
 
     @property
     def profile(self):

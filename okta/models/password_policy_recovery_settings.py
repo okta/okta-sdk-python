@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class PasswordPolicyRecoverySettings(object):
@@ -29,9 +30,8 @@ class PasswordPolicyRecoverySettings(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'factors': 'PasswordPolicyRecoveryFactors'
-    }
+    swagger_types = {}
+    swagger_types['factors'] = 'PasswordPolicyRecoveryFactors'
 
     attribute_map = {
         'factors': 'factors'
@@ -48,12 +48,21 @@ class PasswordPolicyRecoverySettings(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, factors=None):  # noqa: E501
+    def set_attributes(self, factors=None, **kwargs):  # noqa: E501
         """PasswordPolicyRecoverySettings - a model defined in Swagger"""  # noqa: E501
         self._factors = None
         self.discriminator = None
         if factors is not None:
-            self.factors = factors
+            if hasattr(models, self.swagger_types['factors']):
+                nested_class = getattr(models, self.swagger_types['factors'])
+                if isinstance(factors, nested_class):
+                    self.factors = factors
+                elif isinstance(factors, dict):
+                    self.factors = nested_class.from_kwargs(**factors)
+                else:
+                    self.factors = factors
+            else:
+                self.factors = factors
 
     @property
     def factors(self):

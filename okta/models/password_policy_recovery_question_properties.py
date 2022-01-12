@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class PasswordPolicyRecoveryQuestionProperties(object):
@@ -29,9 +30,8 @@ class PasswordPolicyRecoveryQuestionProperties(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'complexity': 'PasswordPolicyRecoveryQuestionComplexity'
-    }
+    swagger_types = {}
+    swagger_types['complexity'] = 'PasswordPolicyRecoveryQuestionComplexity'
 
     attribute_map = {
         'complexity': 'complexity'
@@ -48,12 +48,21 @@ class PasswordPolicyRecoveryQuestionProperties(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, complexity=None):  # noqa: E501
+    def set_attributes(self, complexity=None, **kwargs):  # noqa: E501
         """PasswordPolicyRecoveryQuestionProperties - a model defined in Swagger"""  # noqa: E501
         self._complexity = None
         self.discriminator = None
         if complexity is not None:
-            self.complexity = complexity
+            if hasattr(models, self.swagger_types['complexity']):
+                nested_class = getattr(models, self.swagger_types['complexity'])
+                if isinstance(complexity, nested_class):
+                    self.complexity = complexity
+                elif isinstance(complexity, dict):
+                    self.complexity = nested_class.from_kwargs(**complexity)
+                else:
+                    self.complexity = complexity
+            else:
+                self.complexity = complexity
 
     @property
     def complexity(self):

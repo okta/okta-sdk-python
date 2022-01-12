@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class JsonWebKey(object):
@@ -29,24 +30,23 @@ class JsonWebKey(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'links': 'dict(str, object)',
-        'alg': 'str',
-        'created': 'datetime',
-        'e': 'str',
-        'expires_at': 'datetime',
-        'key_ops': 'list[str]',
-        'kid': 'str',
-        'kty': 'str',
-        'last_updated': 'datetime',
-        'n': 'str',
-        'status': 'str',
-        'use': 'str',
-        'x5c': 'list[str]',
-        'x5t': 'str',
-        'x5t_s256': 'str',
-        'x5u': 'str'
-    }
+    swagger_types = {}
+    swagger_types['links'] = 'dict(str, object)'
+    swagger_types['alg'] = 'str'
+    swagger_types['created'] = 'datetime'
+    swagger_types['e'] = 'str'
+    swagger_types['expires_at'] = 'datetime'
+    swagger_types['key_ops'] = 'list[str]'
+    swagger_types['kid'] = 'str'
+    swagger_types['kty'] = 'str'
+    swagger_types['last_updated'] = 'datetime'
+    swagger_types['n'] = 'str'
+    swagger_types['status'] = 'str'
+    swagger_types['use'] = 'str'
+    swagger_types['x5c'] = 'list[str]'
+    swagger_types['x5t'] = 'str'
+    swagger_types['x5t_s256'] = 'str'
+    swagger_types['x5u'] = 'str'
 
     attribute_map = {
         'links': '_links',
@@ -78,7 +78,7 @@ class JsonWebKey(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, links=None, alg=None, created=None, e=None, expires_at=None, key_ops=None, kid=None, kty=None, last_updated=None, n=None, status=None, use=None, x5c=None, x5t=None, x5t_s256=None, x5u=None):  # noqa: E501
+    def set_attributes(self, links=None, alg=None, created=None, e=None, expires_at=None, key_ops=None, kid=None, kty=None, last_updated=None, n=None, status=None, use=None, x5c=None, x5t=None, x5t_s256=None, x5u=None, **kwargs):  # noqa: E501
         """JsonWebKey - a model defined in Swagger"""  # noqa: E501
         self._links = None
         self._alg = None
@@ -98,37 +98,181 @@ class JsonWebKey(object):
         self._x5u = None
         self.discriminator = None
         if links is not None:
-            self.links = links
+            if hasattr(models, self.swagger_types['links']):
+                nested_class = getattr(models, self.swagger_types['links'])
+                if isinstance(links, nested_class):
+                    self.links = links
+                elif isinstance(links, dict):
+                    self.links = nested_class.from_kwargs(**links)
+                else:
+                    self.links = links
+            else:
+                self.links = links
         if alg is not None:
-            self.alg = alg
+            if hasattr(models, self.swagger_types['alg']):
+                nested_class = getattr(models, self.swagger_types['alg'])
+                if isinstance(alg, nested_class):
+                    self.alg = alg
+                elif isinstance(alg, dict):
+                    self.alg = nested_class.from_kwargs(**alg)
+                else:
+                    self.alg = alg
+            else:
+                self.alg = alg
         if created is not None:
-            self.created = created
+            if hasattr(models, self.swagger_types['created']):
+                nested_class = getattr(models, self.swagger_types['created'])
+                if isinstance(created, nested_class):
+                    self.created = created
+                elif isinstance(created, dict):
+                    self.created = nested_class.from_kwargs(**created)
+                else:
+                    self.created = created
+            else:
+                self.created = created
         if e is not None:
-            self.e = e
+            if hasattr(models, self.swagger_types['e']):
+                nested_class = getattr(models, self.swagger_types['e'])
+                if isinstance(e, nested_class):
+                    self.e = e
+                elif isinstance(e, dict):
+                    self.e = nested_class.from_kwargs(**e)
+                else:
+                    self.e = e
+            else:
+                self.e = e
         if expires_at is not None:
-            self.expires_at = expires_at
+            if hasattr(models, self.swagger_types['expires_at']):
+                nested_class = getattr(models, self.swagger_types['expires_at'])
+                if isinstance(expires_at, nested_class):
+                    self.expires_at = expires_at
+                elif isinstance(expires_at, dict):
+                    self.expires_at = nested_class.from_kwargs(**expires_at)
+                else:
+                    self.expires_at = expires_at
+            else:
+                self.expires_at = expires_at
         if key_ops is not None:
-            self.key_ops = key_ops
+            if hasattr(models, self.swagger_types['key_ops']):
+                nested_class = getattr(models, self.swagger_types['key_ops'])
+                if isinstance(key_ops, nested_class):
+                    self.key_ops = key_ops
+                elif isinstance(key_ops, dict):
+                    self.key_ops = nested_class.from_kwargs(**key_ops)
+                else:
+                    self.key_ops = key_ops
+            else:
+                self.key_ops = key_ops
         if kid is not None:
-            self.kid = kid
+            if hasattr(models, self.swagger_types['kid']):
+                nested_class = getattr(models, self.swagger_types['kid'])
+                if isinstance(kid, nested_class):
+                    self.kid = kid
+                elif isinstance(kid, dict):
+                    self.kid = nested_class.from_kwargs(**kid)
+                else:
+                    self.kid = kid
+            else:
+                self.kid = kid
         if kty is not None:
-            self.kty = kty
+            if hasattr(models, self.swagger_types['kty']):
+                nested_class = getattr(models, self.swagger_types['kty'])
+                if isinstance(kty, nested_class):
+                    self.kty = kty
+                elif isinstance(kty, dict):
+                    self.kty = nested_class.from_kwargs(**kty)
+                else:
+                    self.kty = kty
+            else:
+                self.kty = kty
         if last_updated is not None:
-            self.last_updated = last_updated
+            if hasattr(models, self.swagger_types['last_updated']):
+                nested_class = getattr(models, self.swagger_types['last_updated'])
+                if isinstance(last_updated, nested_class):
+                    self.last_updated = last_updated
+                elif isinstance(last_updated, dict):
+                    self.last_updated = nested_class.from_kwargs(**last_updated)
+                else:
+                    self.last_updated = last_updated
+            else:
+                self.last_updated = last_updated
         if n is not None:
-            self.n = n
+            if hasattr(models, self.swagger_types['n']):
+                nested_class = getattr(models, self.swagger_types['n'])
+                if isinstance(n, nested_class):
+                    self.n = n
+                elif isinstance(n, dict):
+                    self.n = nested_class.from_kwargs(**n)
+                else:
+                    self.n = n
+            else:
+                self.n = n
         if status is not None:
-            self.status = status
+            if hasattr(models, self.swagger_types['status']):
+                nested_class = getattr(models, self.swagger_types['status'])
+                if isinstance(status, nested_class):
+                    self.status = status
+                elif isinstance(status, dict):
+                    self.status = nested_class.from_kwargs(**status)
+                else:
+                    self.status = status
+            else:
+                self.status = status
         if use is not None:
-            self.use = use
+            if hasattr(models, self.swagger_types['use']):
+                nested_class = getattr(models, self.swagger_types['use'])
+                if isinstance(use, nested_class):
+                    self.use = use
+                elif isinstance(use, dict):
+                    self.use = nested_class.from_kwargs(**use)
+                else:
+                    self.use = use
+            else:
+                self.use = use
         if x5c is not None:
-            self.x5c = x5c
+            if hasattr(models, self.swagger_types['x5c']):
+                nested_class = getattr(models, self.swagger_types['x5c'])
+                if isinstance(x5c, nested_class):
+                    self.x5c = x5c
+                elif isinstance(x5c, dict):
+                    self.x5c = nested_class.from_kwargs(**x5c)
+                else:
+                    self.x5c = x5c
+            else:
+                self.x5c = x5c
         if x5t is not None:
-            self.x5t = x5t
+            if hasattr(models, self.swagger_types['x5t']):
+                nested_class = getattr(models, self.swagger_types['x5t'])
+                if isinstance(x5t, nested_class):
+                    self.x5t = x5t
+                elif isinstance(x5t, dict):
+                    self.x5t = nested_class.from_kwargs(**x5t)
+                else:
+                    self.x5t = x5t
+            else:
+                self.x5t = x5t
         if x5t_s256 is not None:
-            self.x5t_s256 = x5t_s256
+            if hasattr(models, self.swagger_types['x5t_s256']):
+                nested_class = getattr(models, self.swagger_types['x5t_s256'])
+                if isinstance(x5t_s256, nested_class):
+                    self.x5t_s256 = x5t_s256
+                elif isinstance(x5t_s256, dict):
+                    self.x5t_s256 = nested_class.from_kwargs(**x5t_s256)
+                else:
+                    self.x5t_s256 = x5t_s256
+            else:
+                self.x5t_s256 = x5t_s256
         if x5u is not None:
-            self.x5u = x5u
+            if hasattr(models, self.swagger_types['x5u']):
+                nested_class = getattr(models, self.swagger_types['x5u'])
+                if isinstance(x5u, nested_class):
+                    self.x5u = x5u
+                elif isinstance(x5u, dict):
+                    self.x5u = nested_class.from_kwargs(**x5u)
+                else:
+                    self.x5u = x5u
+            else:
+                self.x5u = x5u
 
     @property
     def links(self):

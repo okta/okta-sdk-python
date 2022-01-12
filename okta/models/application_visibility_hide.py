@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class ApplicationVisibilityHide(object):
@@ -29,10 +30,9 @@ class ApplicationVisibilityHide(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'i_os': 'bool',
-        'web': 'bool'
-    }
+    swagger_types = {}
+    swagger_types['i_os'] = 'bool'
+    swagger_types['web'] = 'bool'
 
     attribute_map = {
         'i_os': 'iOS',
@@ -50,15 +50,33 @@ class ApplicationVisibilityHide(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, i_os=None, web=None):  # noqa: E501
+    def set_attributes(self, i_os=None, web=None, **kwargs):  # noqa: E501
         """ApplicationVisibilityHide - a model defined in Swagger"""  # noqa: E501
         self._i_os = None
         self._web = None
         self.discriminator = None
         if i_os is not None:
-            self.i_os = i_os
+            if hasattr(models, self.swagger_types['i_os']):
+                nested_class = getattr(models, self.swagger_types['i_os'])
+                if isinstance(i_os, nested_class):
+                    self.i_os = i_os
+                elif isinstance(i_os, dict):
+                    self.i_os = nested_class.from_kwargs(**i_os)
+                else:
+                    self.i_os = i_os
+            else:
+                self.i_os = i_os
         if web is not None:
-            self.web = web
+            if hasattr(models, self.swagger_types['web']):
+                nested_class = getattr(models, self.swagger_types['web'])
+                if isinstance(web, nested_class):
+                    self.web = web
+                elif isinstance(web, dict):
+                    self.web = nested_class.from_kwargs(**web)
+                else:
+                    self.web = web
+            else:
+                self.web = web
 
     @property
     def i_os(self):

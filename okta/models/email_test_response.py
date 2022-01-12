@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class EmailTestResponse(object):
@@ -29,9 +30,8 @@ class EmailTestResponse(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'customization_id': 'str'
-    }
+    swagger_types = {}
+    swagger_types['customization_id'] = 'str'
 
     attribute_map = {
         'customization_id': 'customizationId'
@@ -48,12 +48,21 @@ class EmailTestResponse(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, customization_id=None):  # noqa: E501
+    def set_attributes(self, customization_id=None, **kwargs):  # noqa: E501
         """EmailTestResponse - a model defined in Swagger"""  # noqa: E501
         self._customization_id = None
         self.discriminator = None
         if customization_id is not None:
-            self.customization_id = customization_id
+            if hasattr(models, self.swagger_types['customization_id']):
+                nested_class = getattr(models, self.swagger_types['customization_id'])
+                if isinstance(customization_id, nested_class):
+                    self.customization_id = customization_id
+                elif isinstance(customization_id, dict):
+                    self.customization_id = nested_class.from_kwargs(**customization_id)
+                else:
+                    self.customization_id = customization_id
+            else:
+                self.customization_id = customization_id
 
     @property
     def customization_id(self):

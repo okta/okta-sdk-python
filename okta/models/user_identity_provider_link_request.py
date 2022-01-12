@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class UserIdentityProviderLinkRequest(object):
@@ -29,9 +30,8 @@ class UserIdentityProviderLinkRequest(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'external_id': 'str'
-    }
+    swagger_types = {}
+    swagger_types['external_id'] = 'str'
 
     attribute_map = {
         'external_id': 'externalId'
@@ -48,12 +48,21 @@ class UserIdentityProviderLinkRequest(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, external_id=None):  # noqa: E501
+    def set_attributes(self, external_id=None, **kwargs):  # noqa: E501
         """UserIdentityProviderLinkRequest - a model defined in Swagger"""  # noqa: E501
         self._external_id = None
         self.discriminator = None
         if external_id is not None:
-            self.external_id = external_id
+            if hasattr(models, self.swagger_types['external_id']):
+                nested_class = getattr(models, self.swagger_types['external_id'])
+                if isinstance(external_id, nested_class):
+                    self.external_id = external_id
+                elif isinstance(external_id, dict):
+                    self.external_id = nested_class.from_kwargs(**external_id)
+                else:
+                    self.external_id = external_id
+            else:
+                self.external_id = external_id
 
     @property
     def external_id(self):

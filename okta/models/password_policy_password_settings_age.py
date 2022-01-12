@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class PasswordPolicyPasswordSettingsAge(object):
@@ -29,12 +30,11 @@ class PasswordPolicyPasswordSettingsAge(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'expire_warn_days': 'int',
-        'history_count': 'int',
-        'max_age_days': 'int',
-        'min_age_minutes': 'int'
-    }
+    swagger_types = {}
+    swagger_types['expire_warn_days'] = 'int'
+    swagger_types['history_count'] = 'int'
+    swagger_types['max_age_days'] = 'int'
+    swagger_types['min_age_minutes'] = 'int'
 
     attribute_map = {
         'expire_warn_days': 'expireWarnDays',
@@ -54,7 +54,7 @@ class PasswordPolicyPasswordSettingsAge(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, expire_warn_days=None, history_count=None, max_age_days=None, min_age_minutes=None):  # noqa: E501
+    def set_attributes(self, expire_warn_days=None, history_count=None, max_age_days=None, min_age_minutes=None, **kwargs):  # noqa: E501
         """PasswordPolicyPasswordSettingsAge - a model defined in Swagger"""  # noqa: E501
         self._expire_warn_days = None
         self._history_count = None
@@ -62,13 +62,49 @@ class PasswordPolicyPasswordSettingsAge(object):
         self._min_age_minutes = None
         self.discriminator = None
         if expire_warn_days is not None:
-            self.expire_warn_days = expire_warn_days
+            if hasattr(models, self.swagger_types['expire_warn_days']):
+                nested_class = getattr(models, self.swagger_types['expire_warn_days'])
+                if isinstance(expire_warn_days, nested_class):
+                    self.expire_warn_days = expire_warn_days
+                elif isinstance(expire_warn_days, dict):
+                    self.expire_warn_days = nested_class.from_kwargs(**expire_warn_days)
+                else:
+                    self.expire_warn_days = expire_warn_days
+            else:
+                self.expire_warn_days = expire_warn_days
         if history_count is not None:
-            self.history_count = history_count
+            if hasattr(models, self.swagger_types['history_count']):
+                nested_class = getattr(models, self.swagger_types['history_count'])
+                if isinstance(history_count, nested_class):
+                    self.history_count = history_count
+                elif isinstance(history_count, dict):
+                    self.history_count = nested_class.from_kwargs(**history_count)
+                else:
+                    self.history_count = history_count
+            else:
+                self.history_count = history_count
         if max_age_days is not None:
-            self.max_age_days = max_age_days
+            if hasattr(models, self.swagger_types['max_age_days']):
+                nested_class = getattr(models, self.swagger_types['max_age_days'])
+                if isinstance(max_age_days, nested_class):
+                    self.max_age_days = max_age_days
+                elif isinstance(max_age_days, dict):
+                    self.max_age_days = nested_class.from_kwargs(**max_age_days)
+                else:
+                    self.max_age_days = max_age_days
+            else:
+                self.max_age_days = max_age_days
         if min_age_minutes is not None:
-            self.min_age_minutes = min_age_minutes
+            if hasattr(models, self.swagger_types['min_age_minutes']):
+                nested_class = getattr(models, self.swagger_types['min_age_minutes'])
+                if isinstance(min_age_minutes, nested_class):
+                    self.min_age_minutes = min_age_minutes
+                elif isinstance(min_age_minutes, dict):
+                    self.min_age_minutes = nested_class.from_kwargs(**min_age_minutes)
+                else:
+                    self.min_age_minutes = min_age_minutes
+            else:
+                self.min_age_minutes = min_age_minutes
 
     @property
     def expire_warn_days(self):

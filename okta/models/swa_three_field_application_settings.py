@@ -16,6 +16,7 @@ import re  # noqa: F401
 import six
 from okta.models.application_settings import ApplicationSettings  # noqa: F401,E501
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class SwaThreeFieldApplicationSettings(ApplicationSettings):
@@ -30,11 +31,10 @@ class SwaThreeFieldApplicationSettings(ApplicationSettings):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'app': 'SwaThreeFieldApplicationSettingsApplication'
-    }
+    swagger_types = {}
     if hasattr(ApplicationSettings, "swagger_types"):
         swagger_types.update(ApplicationSettings.swagger_types)
+    swagger_types['app'] = 'SwaThreeFieldApplicationSettingsApplication'
 
     attribute_map = {
         'app': 'app'
@@ -53,13 +53,25 @@ class SwaThreeFieldApplicationSettings(ApplicationSettings):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, app=None, *args, **kwargs):  # noqa: E501
+    def set_attributes(self, app=None, **kwargs):  # noqa: E501
         """SwaThreeFieldApplicationSettings - a model defined in Swagger"""  # noqa: E501
+        config = {}
+        if kwargs is not None:
+            config = {to_snake_case(key): value for key, value in kwargs.items()}
+        super().set_attributes(**config)
         self._app = None
         self.discriminator = None
         if app is not None:
-            self.app = app
-        super().set_attributes(*args, **kwargs)
+            if hasattr(models, self.swagger_types['app']):
+                nested_class = getattr(models, self.swagger_types['app'])
+                if isinstance(app, nested_class):
+                    self.app = app
+                elif isinstance(app, dict):
+                    self.app = nested_class.from_kwargs(**app)
+                else:
+                    self.app = app
+            else:
+                self.app = app
 
     @property
     def app(self):

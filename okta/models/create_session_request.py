@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class CreateSessionRequest(object):
@@ -29,9 +30,8 @@ class CreateSessionRequest(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'session_token': 'str'
-    }
+    swagger_types = {}
+    swagger_types['session_token'] = 'str'
 
     attribute_map = {
         'session_token': 'sessionToken'
@@ -48,12 +48,21 @@ class CreateSessionRequest(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, session_token=None):  # noqa: E501
+    def set_attributes(self, session_token=None, **kwargs):  # noqa: E501
         """CreateSessionRequest - a model defined in Swagger"""  # noqa: E501
         self._session_token = None
         self.discriminator = None
         if session_token is not None:
-            self.session_token = session_token
+            if hasattr(models, self.swagger_types['session_token']):
+                nested_class = getattr(models, self.swagger_types['session_token'])
+                if isinstance(session_token, nested_class):
+                    self.session_token = session_token
+                elif isinstance(session_token, dict):
+                    self.session_token = nested_class.from_kwargs(**session_token)
+                else:
+                    self.session_token = session_token
+            else:
+                self.session_token = session_token
 
     @property
     def session_token(self):

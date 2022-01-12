@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class PolicySubject(object):
@@ -29,13 +30,12 @@ class PolicySubject(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'filter': 'str',
-        'format': 'list[str]',
-        'match_attribute': 'str',
-        'match_type': 'PolicySubjectMatchType',
-        'user_name_template': 'PolicyUserNameTemplate'
-    }
+    swagger_types = {}
+    swagger_types['filter'] = 'str'
+    swagger_types['format'] = 'list[str]'
+    swagger_types['match_attribute'] = 'str'
+    swagger_types['match_type'] = 'PolicySubjectMatchType'
+    swagger_types['user_name_template'] = 'PolicyUserNameTemplate'
 
     attribute_map = {
         'filter': 'filter',
@@ -56,7 +56,7 @@ class PolicySubject(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, filter=None, format=None, match_attribute=None, match_type=None, user_name_template=None):  # noqa: E501
+    def set_attributes(self, filter=None, format=None, match_attribute=None, match_type=None, user_name_template=None, **kwargs):  # noqa: E501
         """PolicySubject - a model defined in Swagger"""  # noqa: E501
         self._filter = None
         self._format = None
@@ -65,15 +65,60 @@ class PolicySubject(object):
         self._user_name_template = None
         self.discriminator = None
         if filter is not None:
-            self.filter = filter
+            if hasattr(models, self.swagger_types['filter']):
+                nested_class = getattr(models, self.swagger_types['filter'])
+                if isinstance(filter, nested_class):
+                    self.filter = filter
+                elif isinstance(filter, dict):
+                    self.filter = nested_class.from_kwargs(**filter)
+                else:
+                    self.filter = filter
+            else:
+                self.filter = filter
         if format is not None:
-            self.format = format
+            if hasattr(models, self.swagger_types['format']):
+                nested_class = getattr(models, self.swagger_types['format'])
+                if isinstance(format, nested_class):
+                    self.format = format
+                elif isinstance(format, dict):
+                    self.format = nested_class.from_kwargs(**format)
+                else:
+                    self.format = format
+            else:
+                self.format = format
         if match_attribute is not None:
-            self.match_attribute = match_attribute
+            if hasattr(models, self.swagger_types['match_attribute']):
+                nested_class = getattr(models, self.swagger_types['match_attribute'])
+                if isinstance(match_attribute, nested_class):
+                    self.match_attribute = match_attribute
+                elif isinstance(match_attribute, dict):
+                    self.match_attribute = nested_class.from_kwargs(**match_attribute)
+                else:
+                    self.match_attribute = match_attribute
+            else:
+                self.match_attribute = match_attribute
         if match_type is not None:
-            self.match_type = match_type
+            if hasattr(models, self.swagger_types['match_type']):
+                nested_class = getattr(models, self.swagger_types['match_type'])
+                if isinstance(match_type, nested_class):
+                    self.match_type = match_type
+                elif isinstance(match_type, dict):
+                    self.match_type = nested_class.from_kwargs(**match_type)
+                else:
+                    self.match_type = match_type
+            else:
+                self.match_type = match_type
         if user_name_template is not None:
-            self.user_name_template = user_name_template
+            if hasattr(models, self.swagger_types['user_name_template']):
+                nested_class = getattr(models, self.swagger_types['user_name_template'])
+                if isinstance(user_name_template, nested_class):
+                    self.user_name_template = user_name_template
+                elif isinstance(user_name_template, dict):
+                    self.user_name_template = nested_class.from_kwargs(**user_name_template)
+                else:
+                    self.user_name_template = user_name_template
+            else:
+                self.user_name_template = user_name_template
 
     @property
     def filter(self):

@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class LogTarget(object):
@@ -29,13 +30,12 @@ class LogTarget(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'alternate_id': 'str',
-        'detail_entry': 'dict(str, object)',
-        'display_name': 'str',
-        'id': 'str',
-        'type': 'str'
-    }
+    swagger_types = {}
+    swagger_types['alternate_id'] = 'str'
+    swagger_types['detail_entry'] = 'dict(str, object)'
+    swagger_types['display_name'] = 'str'
+    swagger_types['id'] = 'str'
+    swagger_types['type'] = 'str'
 
     attribute_map = {
         'alternate_id': 'alternateId',
@@ -56,7 +56,7 @@ class LogTarget(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, alternate_id=None, detail_entry=None, display_name=None, id=None, type=None):  # noqa: E501
+    def set_attributes(self, alternate_id=None, detail_entry=None, display_name=None, id=None, type=None, **kwargs):  # noqa: E501
         """LogTarget - a model defined in Swagger"""  # noqa: E501
         self._alternate_id = None
         self._detail_entry = None
@@ -65,15 +65,60 @@ class LogTarget(object):
         self._type = None
         self.discriminator = None
         if alternate_id is not None:
-            self.alternate_id = alternate_id
+            if hasattr(models, self.swagger_types['alternate_id']):
+                nested_class = getattr(models, self.swagger_types['alternate_id'])
+                if isinstance(alternate_id, nested_class):
+                    self.alternate_id = alternate_id
+                elif isinstance(alternate_id, dict):
+                    self.alternate_id = nested_class.from_kwargs(**alternate_id)
+                else:
+                    self.alternate_id = alternate_id
+            else:
+                self.alternate_id = alternate_id
         if detail_entry is not None:
-            self.detail_entry = detail_entry
+            if hasattr(models, self.swagger_types['detail_entry']):
+                nested_class = getattr(models, self.swagger_types['detail_entry'])
+                if isinstance(detail_entry, nested_class):
+                    self.detail_entry = detail_entry
+                elif isinstance(detail_entry, dict):
+                    self.detail_entry = nested_class.from_kwargs(**detail_entry)
+                else:
+                    self.detail_entry = detail_entry
+            else:
+                self.detail_entry = detail_entry
         if display_name is not None:
-            self.display_name = display_name
+            if hasattr(models, self.swagger_types['display_name']):
+                nested_class = getattr(models, self.swagger_types['display_name'])
+                if isinstance(display_name, nested_class):
+                    self.display_name = display_name
+                elif isinstance(display_name, dict):
+                    self.display_name = nested_class.from_kwargs(**display_name)
+                else:
+                    self.display_name = display_name
+            else:
+                self.display_name = display_name
         if id is not None:
-            self.id = id
+            if hasattr(models, self.swagger_types['id']):
+                nested_class = getattr(models, self.swagger_types['id'])
+                if isinstance(id, nested_class):
+                    self.id = id
+                elif isinstance(id, dict):
+                    self.id = nested_class.from_kwargs(**id)
+                else:
+                    self.id = id
+            else:
+                self.id = id
         if type is not None:
-            self.type = type
+            if hasattr(models, self.swagger_types['type']):
+                nested_class = getattr(models, self.swagger_types['type'])
+                if isinstance(type, nested_class):
+                    self.type = type
+                elif isinstance(type, dict):
+                    self.type = nested_class.from_kwargs(**type)
+                else:
+                    self.type = type
+            else:
+                self.type = type
 
     @property
     def alternate_id(self):

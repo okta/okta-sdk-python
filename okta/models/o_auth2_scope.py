@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class OAuth2Scope(object):
@@ -29,16 +30,15 @@ class OAuth2Scope(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'consent': 'OAuth2ScopeConsentType',
-        'default': 'bool',
-        'description': 'str',
-        'display_name': 'str',
-        'id': 'str',
-        'metadata_publish': 'OAuth2ScopeMetadataPublish',
-        'name': 'str',
-        'system': 'bool'
-    }
+    swagger_types = {}
+    swagger_types['consent'] = 'OAuth2ScopeConsentType'
+    swagger_types['default'] = 'bool'
+    swagger_types['description'] = 'str'
+    swagger_types['display_name'] = 'str'
+    swagger_types['id'] = 'str'
+    swagger_types['metadata_publish'] = 'OAuth2ScopeMetadataPublish'
+    swagger_types['name'] = 'str'
+    swagger_types['system'] = 'bool'
 
     attribute_map = {
         'consent': 'consent',
@@ -62,7 +62,7 @@ class OAuth2Scope(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, consent=None, default=None, description=None, display_name=None, id=None, metadata_publish=None, name=None, system=None):  # noqa: E501
+    def set_attributes(self, consent=None, default=None, description=None, display_name=None, id=None, metadata_publish=None, name=None, system=None, **kwargs):  # noqa: E501
         """OAuth2Scope - a model defined in Swagger"""  # noqa: E501
         self._consent = None
         self._default = None
@@ -74,21 +74,93 @@ class OAuth2Scope(object):
         self._system = None
         self.discriminator = None
         if consent is not None:
-            self.consent = consent
+            if hasattr(models, self.swagger_types['consent']):
+                nested_class = getattr(models, self.swagger_types['consent'])
+                if isinstance(consent, nested_class):
+                    self.consent = consent
+                elif isinstance(consent, dict):
+                    self.consent = nested_class.from_kwargs(**consent)
+                else:
+                    self.consent = consent
+            else:
+                self.consent = consent
         if default is not None:
-            self.default = default
+            if hasattr(models, self.swagger_types['default']):
+                nested_class = getattr(models, self.swagger_types['default'])
+                if isinstance(default, nested_class):
+                    self.default = default
+                elif isinstance(default, dict):
+                    self.default = nested_class.from_kwargs(**default)
+                else:
+                    self.default = default
+            else:
+                self.default = default
         if description is not None:
-            self.description = description
+            if hasattr(models, self.swagger_types['description']):
+                nested_class = getattr(models, self.swagger_types['description'])
+                if isinstance(description, nested_class):
+                    self.description = description
+                elif isinstance(description, dict):
+                    self.description = nested_class.from_kwargs(**description)
+                else:
+                    self.description = description
+            else:
+                self.description = description
         if display_name is not None:
-            self.display_name = display_name
+            if hasattr(models, self.swagger_types['display_name']):
+                nested_class = getattr(models, self.swagger_types['display_name'])
+                if isinstance(display_name, nested_class):
+                    self.display_name = display_name
+                elif isinstance(display_name, dict):
+                    self.display_name = nested_class.from_kwargs(**display_name)
+                else:
+                    self.display_name = display_name
+            else:
+                self.display_name = display_name
         if id is not None:
-            self.id = id
+            if hasattr(models, self.swagger_types['id']):
+                nested_class = getattr(models, self.swagger_types['id'])
+                if isinstance(id, nested_class):
+                    self.id = id
+                elif isinstance(id, dict):
+                    self.id = nested_class.from_kwargs(**id)
+                else:
+                    self.id = id
+            else:
+                self.id = id
         if metadata_publish is not None:
-            self.metadata_publish = metadata_publish
+            if hasattr(models, self.swagger_types['metadata_publish']):
+                nested_class = getattr(models, self.swagger_types['metadata_publish'])
+                if isinstance(metadata_publish, nested_class):
+                    self.metadata_publish = metadata_publish
+                elif isinstance(metadata_publish, dict):
+                    self.metadata_publish = nested_class.from_kwargs(**metadata_publish)
+                else:
+                    self.metadata_publish = metadata_publish
+            else:
+                self.metadata_publish = metadata_publish
         if name is not None:
-            self.name = name
+            if hasattr(models, self.swagger_types['name']):
+                nested_class = getattr(models, self.swagger_types['name'])
+                if isinstance(name, nested_class):
+                    self.name = name
+                elif isinstance(name, dict):
+                    self.name = nested_class.from_kwargs(**name)
+                else:
+                    self.name = name
+            else:
+                self.name = name
         if system is not None:
-            self.system = system
+            if hasattr(models, self.swagger_types['system']):
+                nested_class = getattr(models, self.swagger_types['system'])
+                if isinstance(system, nested_class):
+                    self.system = system
+                elif isinstance(system, dict):
+                    self.system = nested_class.from_kwargs(**system)
+                else:
+                    self.system = system
+            else:
+                self.system = system
 
     @property
     def consent(self):

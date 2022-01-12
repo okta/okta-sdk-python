@@ -16,6 +16,7 @@ import re  # noqa: F401
 import six
 from okta.models.application_settings_application import ApplicationSettingsApplication  # noqa: F401,E501
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class WsFederationApplicationSettingsApplication(ApplicationSettingsApplication):
@@ -30,22 +31,21 @@ class WsFederationApplicationSettingsApplication(ApplicationSettingsApplication)
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'attribute_statements': 'str',
-        'audience_restriction': 'str',
-        'authn_context_class_ref': 'str',
-        'group_filter': 'str',
-        'group_name': 'str',
-        'group_value_format': 'str',
-        'name_id_format': 'str',
-        'realm': 'str',
-        'site_url': 'str',
-        'username_attribute': 'str',
-        'w_reply_override': 'bool',
-        'w_reply_url': 'str'
-    }
+    swagger_types = {}
     if hasattr(ApplicationSettingsApplication, "swagger_types"):
         swagger_types.update(ApplicationSettingsApplication.swagger_types)
+    swagger_types['attribute_statements'] = 'str'
+    swagger_types['audience_restriction'] = 'str'
+    swagger_types['authn_context_class_ref'] = 'str'
+    swagger_types['group_filter'] = 'str'
+    swagger_types['group_name'] = 'str'
+    swagger_types['group_value_format'] = 'str'
+    swagger_types['name_id_format'] = 'str'
+    swagger_types['realm'] = 'str'
+    swagger_types['site_url'] = 'str'
+    swagger_types['username_attribute'] = 'str'
+    swagger_types['w_reply_override'] = 'bool'
+    swagger_types['w_reply_url'] = 'str'
 
     attribute_map = {
         'attribute_statements': 'attributeStatements',
@@ -75,8 +75,12 @@ class WsFederationApplicationSettingsApplication(ApplicationSettingsApplication)
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, attribute_statements=None, audience_restriction=None, authn_context_class_ref=None, group_filter=None, group_name=None, group_value_format=None, name_id_format=None, realm=None, site_url=None, username_attribute=None, w_reply_override=None, w_reply_url=None, *args, **kwargs):  # noqa: E501
+    def set_attributes(self, attribute_statements=None, audience_restriction=None, authn_context_class_ref=None, group_filter=None, group_name=None, group_value_format=None, name_id_format=None, realm=None, site_url=None, username_attribute=None, w_reply_override=None, w_reply_url=None, **kwargs):  # noqa: E501
         """WsFederationApplicationSettingsApplication - a model defined in Swagger"""  # noqa: E501
+        config = {}
+        if kwargs is not None:
+            config = {to_snake_case(key): value for key, value in kwargs.items()}
+        super().set_attributes(**config)
         self._attribute_statements = None
         self._audience_restriction = None
         self._authn_context_class_ref = None
@@ -91,30 +95,137 @@ class WsFederationApplicationSettingsApplication(ApplicationSettingsApplication)
         self._w_reply_url = None
         self.discriminator = None
         if attribute_statements is not None:
-            self.attribute_statements = attribute_statements
+            if hasattr(models, self.swagger_types['attribute_statements']):
+                nested_class = getattr(models, self.swagger_types['attribute_statements'])
+                if isinstance(attribute_statements, nested_class):
+                    self.attribute_statements = attribute_statements
+                elif isinstance(attribute_statements, dict):
+                    self.attribute_statements = nested_class.from_kwargs(**attribute_statements)
+                else:
+                    self.attribute_statements = attribute_statements
+            else:
+                self.attribute_statements = attribute_statements
         if audience_restriction is not None:
-            self.audience_restriction = audience_restriction
+            if hasattr(models, self.swagger_types['audience_restriction']):
+                nested_class = getattr(models, self.swagger_types['audience_restriction'])
+                if isinstance(audience_restriction, nested_class):
+                    self.audience_restriction = audience_restriction
+                elif isinstance(audience_restriction, dict):
+                    self.audience_restriction = nested_class.from_kwargs(**audience_restriction)
+                else:
+                    self.audience_restriction = audience_restriction
+            else:
+                self.audience_restriction = audience_restriction
         if authn_context_class_ref is not None:
-            self.authn_context_class_ref = authn_context_class_ref
+            if hasattr(models, self.swagger_types['authn_context_class_ref']):
+                nested_class = getattr(models, self.swagger_types['authn_context_class_ref'])
+                if isinstance(authn_context_class_ref, nested_class):
+                    self.authn_context_class_ref = authn_context_class_ref
+                elif isinstance(authn_context_class_ref, dict):
+                    self.authn_context_class_ref = nested_class.from_kwargs(**authn_context_class_ref)
+                else:
+                    self.authn_context_class_ref = authn_context_class_ref
+            else:
+                self.authn_context_class_ref = authn_context_class_ref
         if group_filter is not None:
-            self.group_filter = group_filter
+            if hasattr(models, self.swagger_types['group_filter']):
+                nested_class = getattr(models, self.swagger_types['group_filter'])
+                if isinstance(group_filter, nested_class):
+                    self.group_filter = group_filter
+                elif isinstance(group_filter, dict):
+                    self.group_filter = nested_class.from_kwargs(**group_filter)
+                else:
+                    self.group_filter = group_filter
+            else:
+                self.group_filter = group_filter
         if group_name is not None:
-            self.group_name = group_name
+            if hasattr(models, self.swagger_types['group_name']):
+                nested_class = getattr(models, self.swagger_types['group_name'])
+                if isinstance(group_name, nested_class):
+                    self.group_name = group_name
+                elif isinstance(group_name, dict):
+                    self.group_name = nested_class.from_kwargs(**group_name)
+                else:
+                    self.group_name = group_name
+            else:
+                self.group_name = group_name
         if group_value_format is not None:
-            self.group_value_format = group_value_format
+            if hasattr(models, self.swagger_types['group_value_format']):
+                nested_class = getattr(models, self.swagger_types['group_value_format'])
+                if isinstance(group_value_format, nested_class):
+                    self.group_value_format = group_value_format
+                elif isinstance(group_value_format, dict):
+                    self.group_value_format = nested_class.from_kwargs(**group_value_format)
+                else:
+                    self.group_value_format = group_value_format
+            else:
+                self.group_value_format = group_value_format
         if name_id_format is not None:
-            self.name_id_format = name_id_format
+            if hasattr(models, self.swagger_types['name_id_format']):
+                nested_class = getattr(models, self.swagger_types['name_id_format'])
+                if isinstance(name_id_format, nested_class):
+                    self.name_id_format = name_id_format
+                elif isinstance(name_id_format, dict):
+                    self.name_id_format = nested_class.from_kwargs(**name_id_format)
+                else:
+                    self.name_id_format = name_id_format
+            else:
+                self.name_id_format = name_id_format
         if realm is not None:
-            self.realm = realm
+            if hasattr(models, self.swagger_types['realm']):
+                nested_class = getattr(models, self.swagger_types['realm'])
+                if isinstance(realm, nested_class):
+                    self.realm = realm
+                elif isinstance(realm, dict):
+                    self.realm = nested_class.from_kwargs(**realm)
+                else:
+                    self.realm = realm
+            else:
+                self.realm = realm
         if site_url is not None:
-            self.site_url = site_url
+            if hasattr(models, self.swagger_types['site_url']):
+                nested_class = getattr(models, self.swagger_types['site_url'])
+                if isinstance(site_url, nested_class):
+                    self.site_url = site_url
+                elif isinstance(site_url, dict):
+                    self.site_url = nested_class.from_kwargs(**site_url)
+                else:
+                    self.site_url = site_url
+            else:
+                self.site_url = site_url
         if username_attribute is not None:
-            self.username_attribute = username_attribute
+            if hasattr(models, self.swagger_types['username_attribute']):
+                nested_class = getattr(models, self.swagger_types['username_attribute'])
+                if isinstance(username_attribute, nested_class):
+                    self.username_attribute = username_attribute
+                elif isinstance(username_attribute, dict):
+                    self.username_attribute = nested_class.from_kwargs(**username_attribute)
+                else:
+                    self.username_attribute = username_attribute
+            else:
+                self.username_attribute = username_attribute
         if w_reply_override is not None:
-            self.w_reply_override = w_reply_override
+            if hasattr(models, self.swagger_types['w_reply_override']):
+                nested_class = getattr(models, self.swagger_types['w_reply_override'])
+                if isinstance(w_reply_override, nested_class):
+                    self.w_reply_override = w_reply_override
+                elif isinstance(w_reply_override, dict):
+                    self.w_reply_override = nested_class.from_kwargs(**w_reply_override)
+                else:
+                    self.w_reply_override = w_reply_override
+            else:
+                self.w_reply_override = w_reply_override
         if w_reply_url is not None:
-            self.w_reply_url = w_reply_url
-        super().set_attributes(*args, **kwargs)
+            if hasattr(models, self.swagger_types['w_reply_url']):
+                nested_class = getattr(models, self.swagger_types['w_reply_url'])
+                if isinstance(w_reply_url, nested_class):
+                    self.w_reply_url = w_reply_url
+                elif isinstance(w_reply_url, dict):
+                    self.w_reply_url = nested_class.from_kwargs(**w_reply_url)
+                else:
+                    self.w_reply_url = w_reply_url
+            else:
+                self.w_reply_url = w_reply_url
 
     @property
     def attribute_statements(self):

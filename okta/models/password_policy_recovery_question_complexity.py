@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class PasswordPolicyRecoveryQuestionComplexity(object):
@@ -29,9 +30,8 @@ class PasswordPolicyRecoveryQuestionComplexity(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'min_length': 'int'
-    }
+    swagger_types = {}
+    swagger_types['min_length'] = 'int'
 
     attribute_map = {
         'min_length': 'minLength'
@@ -48,12 +48,21 @@ class PasswordPolicyRecoveryQuestionComplexity(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, min_length=None):  # noqa: E501
+    def set_attributes(self, min_length=None, **kwargs):  # noqa: E501
         """PasswordPolicyRecoveryQuestionComplexity - a model defined in Swagger"""  # noqa: E501
         self._min_length = None
         self.discriminator = None
         if min_length is not None:
-            self.min_length = min_length
+            if hasattr(models, self.swagger_types['min_length']):
+                nested_class = getattr(models, self.swagger_types['min_length'])
+                if isinstance(min_length, nested_class):
+                    self.min_length = min_length
+                elif isinstance(min_length, dict):
+                    self.min_length = nested_class.from_kwargs(**min_length)
+                else:
+                    self.min_length = min_length
+            else:
+                self.min_length = min_length
 
     @property
     def min_length(self):

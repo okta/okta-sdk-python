@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class CAPTCHAInstance(object):
@@ -29,14 +30,13 @@ class CAPTCHAInstance(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'id': 'str',
-        'name': 'str',
-        'secret_key': 'str',
-        'site_key': 'str',
-        'type': 'CAPTCHAType',
-        'link': 'CAPTCHAInstanceLink'
-    }
+    swagger_types = {}
+    swagger_types['id'] = 'str'
+    swagger_types['name'] = 'str'
+    swagger_types['secret_key'] = 'str'
+    swagger_types['site_key'] = 'str'
+    swagger_types['type'] = 'CAPTCHAType'
+    swagger_types['link'] = 'CAPTCHAInstanceLink'
 
     attribute_map = {
         'id': 'id',
@@ -58,7 +58,7 @@ class CAPTCHAInstance(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, id=None, name=None, secret_key=None, site_key=None, type=None, link=None):  # noqa: E501
+    def set_attributes(self, id=None, name=None, secret_key=None, site_key=None, type=None, link=None, **kwargs):  # noqa: E501
         """CAPTCHAInstance - a model defined in Swagger"""  # noqa: E501
         self._id = None
         self._name = None
@@ -68,17 +68,71 @@ class CAPTCHAInstance(object):
         self._link = None
         self.discriminator = None
         if id is not None:
-            self.id = id
+            if hasattr(models, self.swagger_types['id']):
+                nested_class = getattr(models, self.swagger_types['id'])
+                if isinstance(id, nested_class):
+                    self.id = id
+                elif isinstance(id, dict):
+                    self.id = nested_class.from_kwargs(**id)
+                else:
+                    self.id = id
+            else:
+                self.id = id
         if name is not None:
-            self.name = name
+            if hasattr(models, self.swagger_types['name']):
+                nested_class = getattr(models, self.swagger_types['name'])
+                if isinstance(name, nested_class):
+                    self.name = name
+                elif isinstance(name, dict):
+                    self.name = nested_class.from_kwargs(**name)
+                else:
+                    self.name = name
+            else:
+                self.name = name
         if secret_key is not None:
-            self.secret_key = secret_key
+            if hasattr(models, self.swagger_types['secret_key']):
+                nested_class = getattr(models, self.swagger_types['secret_key'])
+                if isinstance(secret_key, nested_class):
+                    self.secret_key = secret_key
+                elif isinstance(secret_key, dict):
+                    self.secret_key = nested_class.from_kwargs(**secret_key)
+                else:
+                    self.secret_key = secret_key
+            else:
+                self.secret_key = secret_key
         if site_key is not None:
-            self.site_key = site_key
+            if hasattr(models, self.swagger_types['site_key']):
+                nested_class = getattr(models, self.swagger_types['site_key'])
+                if isinstance(site_key, nested_class):
+                    self.site_key = site_key
+                elif isinstance(site_key, dict):
+                    self.site_key = nested_class.from_kwargs(**site_key)
+                else:
+                    self.site_key = site_key
+            else:
+                self.site_key = site_key
         if type is not None:
-            self.type = type
+            if hasattr(models, self.swagger_types['type']):
+                nested_class = getattr(models, self.swagger_types['type'])
+                if isinstance(type, nested_class):
+                    self.type = type
+                elif isinstance(type, dict):
+                    self.type = nested_class.from_kwargs(**type)
+                else:
+                    self.type = type
+            else:
+                self.type = type
         if link is not None:
-            self.link = link
+            if hasattr(models, self.swagger_types['link']):
+                nested_class = getattr(models, self.swagger_types['link'])
+                if isinstance(link, nested_class):
+                    self.link = link
+                elif isinstance(link, dict):
+                    self.link = nested_class.from_kwargs(**link)
+                else:
+                    self.link = link
+            else:
+                self.link = link
 
     @property
     def id(self):

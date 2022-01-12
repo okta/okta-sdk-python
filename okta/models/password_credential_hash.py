@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class PasswordCredentialHash(object):
@@ -29,13 +30,12 @@ class PasswordCredentialHash(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'algorithm': 'PasswordCredentialHashAlgorithm',
-        'salt': 'str',
-        'salt_order': 'str',
-        'value': 'str',
-        'work_factor': 'int'
-    }
+    swagger_types = {}
+    swagger_types['algorithm'] = 'PasswordCredentialHashAlgorithm'
+    swagger_types['salt'] = 'str'
+    swagger_types['salt_order'] = 'str'
+    swagger_types['value'] = 'str'
+    swagger_types['work_factor'] = 'int'
 
     attribute_map = {
         'algorithm': 'algorithm',
@@ -56,7 +56,7 @@ class PasswordCredentialHash(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, algorithm=None, salt=None, salt_order=None, value=None, work_factor=None):  # noqa: E501
+    def set_attributes(self, algorithm=None, salt=None, salt_order=None, value=None, work_factor=None, **kwargs):  # noqa: E501
         """PasswordCredentialHash - a model defined in Swagger"""  # noqa: E501
         self._algorithm = None
         self._salt = None
@@ -65,15 +65,60 @@ class PasswordCredentialHash(object):
         self._work_factor = None
         self.discriminator = None
         if algorithm is not None:
-            self.algorithm = algorithm
+            if hasattr(models, self.swagger_types['algorithm']):
+                nested_class = getattr(models, self.swagger_types['algorithm'])
+                if isinstance(algorithm, nested_class):
+                    self.algorithm = algorithm
+                elif isinstance(algorithm, dict):
+                    self.algorithm = nested_class.from_kwargs(**algorithm)
+                else:
+                    self.algorithm = algorithm
+            else:
+                self.algorithm = algorithm
         if salt is not None:
-            self.salt = salt
+            if hasattr(models, self.swagger_types['salt']):
+                nested_class = getattr(models, self.swagger_types['salt'])
+                if isinstance(salt, nested_class):
+                    self.salt = salt
+                elif isinstance(salt, dict):
+                    self.salt = nested_class.from_kwargs(**salt)
+                else:
+                    self.salt = salt
+            else:
+                self.salt = salt
         if salt_order is not None:
-            self.salt_order = salt_order
+            if hasattr(models, self.swagger_types['salt_order']):
+                nested_class = getattr(models, self.swagger_types['salt_order'])
+                if isinstance(salt_order, nested_class):
+                    self.salt_order = salt_order
+                elif isinstance(salt_order, dict):
+                    self.salt_order = nested_class.from_kwargs(**salt_order)
+                else:
+                    self.salt_order = salt_order
+            else:
+                self.salt_order = salt_order
         if value is not None:
-            self.value = value
+            if hasattr(models, self.swagger_types['value']):
+                nested_class = getattr(models, self.swagger_types['value'])
+                if isinstance(value, nested_class):
+                    self.value = value
+                elif isinstance(value, dict):
+                    self.value = nested_class.from_kwargs(**value)
+                else:
+                    self.value = value
+            else:
+                self.value = value
         if work_factor is not None:
-            self.work_factor = work_factor
+            if hasattr(models, self.swagger_types['work_factor']):
+                nested_class = getattr(models, self.swagger_types['work_factor'])
+                if isinstance(work_factor, nested_class):
+                    self.work_factor = work_factor
+                elif isinstance(work_factor, dict):
+                    self.work_factor = nested_class.from_kwargs(**work_factor)
+                else:
+                    self.work_factor = work_factor
+            else:
+                self.work_factor = work_factor
 
     @property
     def algorithm(self):

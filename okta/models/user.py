@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class User(object):
@@ -29,22 +30,21 @@ class User(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'embedded': 'dict(str, object)',
-        'links': 'dict(str, object)',
-        'activated': 'datetime',
-        'created': 'datetime',
-        'credentials': 'UserCredentials',
-        'id': 'str',
-        'last_login': 'datetime',
-        'last_updated': 'datetime',
-        'password_changed': 'datetime',
-        'profile': 'UserProfile',
-        'status': 'UserStatus',
-        'status_changed': 'datetime',
-        'transitioning_to_status': 'UserStatus',
-        'type': 'UserType'
-    }
+    swagger_types = {}
+    swagger_types['embedded'] = 'dict(str, object)'
+    swagger_types['links'] = 'dict(str, object)'
+    swagger_types['activated'] = 'datetime'
+    swagger_types['created'] = 'datetime'
+    swagger_types['credentials'] = 'UserCredentials'
+    swagger_types['id'] = 'str'
+    swagger_types['last_login'] = 'datetime'
+    swagger_types['last_updated'] = 'datetime'
+    swagger_types['password_changed'] = 'datetime'
+    swagger_types['profile'] = 'UserProfile'
+    swagger_types['status'] = 'UserStatus'
+    swagger_types['status_changed'] = 'datetime'
+    swagger_types['transitioning_to_status'] = 'UserStatus'
+    swagger_types['type'] = 'UserType'
 
     attribute_map = {
         'embedded': '_embedded',
@@ -74,7 +74,7 @@ class User(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, embedded=None, links=None, activated=None, created=None, credentials=None, id=None, last_login=None, last_updated=None, password_changed=None, profile=None, status=None, status_changed=None, transitioning_to_status=None, type=None):  # noqa: E501
+    def set_attributes(self, embedded=None, links=None, activated=None, created=None, credentials=None, id=None, last_login=None, last_updated=None, password_changed=None, profile=None, status=None, status_changed=None, transitioning_to_status=None, type=None, **kwargs):  # noqa: E501
         """User - a model defined in Swagger"""  # noqa: E501
         self._embedded = None
         self._links = None
@@ -92,33 +92,159 @@ class User(object):
         self._type = None
         self.discriminator = None
         if embedded is not None:
-            self.embedded = embedded
+            if hasattr(models, self.swagger_types['embedded']):
+                nested_class = getattr(models, self.swagger_types['embedded'])
+                if isinstance(embedded, nested_class):
+                    self.embedded = embedded
+                elif isinstance(embedded, dict):
+                    self.embedded = nested_class.from_kwargs(**embedded)
+                else:
+                    self.embedded = embedded
+            else:
+                self.embedded = embedded
         if links is not None:
-            self.links = links
+            if hasattr(models, self.swagger_types['links']):
+                nested_class = getattr(models, self.swagger_types['links'])
+                if isinstance(links, nested_class):
+                    self.links = links
+                elif isinstance(links, dict):
+                    self.links = nested_class.from_kwargs(**links)
+                else:
+                    self.links = links
+            else:
+                self.links = links
         if activated is not None:
-            self.activated = activated
+            if hasattr(models, self.swagger_types['activated']):
+                nested_class = getattr(models, self.swagger_types['activated'])
+                if isinstance(activated, nested_class):
+                    self.activated = activated
+                elif isinstance(activated, dict):
+                    self.activated = nested_class.from_kwargs(**activated)
+                else:
+                    self.activated = activated
+            else:
+                self.activated = activated
         if created is not None:
-            self.created = created
+            if hasattr(models, self.swagger_types['created']):
+                nested_class = getattr(models, self.swagger_types['created'])
+                if isinstance(created, nested_class):
+                    self.created = created
+                elif isinstance(created, dict):
+                    self.created = nested_class.from_kwargs(**created)
+                else:
+                    self.created = created
+            else:
+                self.created = created
         if credentials is not None:
-            self.credentials = credentials
+            if hasattr(models, self.swagger_types['credentials']):
+                nested_class = getattr(models, self.swagger_types['credentials'])
+                if isinstance(credentials, nested_class):
+                    self.credentials = credentials
+                elif isinstance(credentials, dict):
+                    self.credentials = nested_class.from_kwargs(**credentials)
+                else:
+                    self.credentials = credentials
+            else:
+                self.credentials = credentials
         if id is not None:
-            self.id = id
+            if hasattr(models, self.swagger_types['id']):
+                nested_class = getattr(models, self.swagger_types['id'])
+                if isinstance(id, nested_class):
+                    self.id = id
+                elif isinstance(id, dict):
+                    self.id = nested_class.from_kwargs(**id)
+                else:
+                    self.id = id
+            else:
+                self.id = id
         if last_login is not None:
-            self.last_login = last_login
+            if hasattr(models, self.swagger_types['last_login']):
+                nested_class = getattr(models, self.swagger_types['last_login'])
+                if isinstance(last_login, nested_class):
+                    self.last_login = last_login
+                elif isinstance(last_login, dict):
+                    self.last_login = nested_class.from_kwargs(**last_login)
+                else:
+                    self.last_login = last_login
+            else:
+                self.last_login = last_login
         if last_updated is not None:
-            self.last_updated = last_updated
+            if hasattr(models, self.swagger_types['last_updated']):
+                nested_class = getattr(models, self.swagger_types['last_updated'])
+                if isinstance(last_updated, nested_class):
+                    self.last_updated = last_updated
+                elif isinstance(last_updated, dict):
+                    self.last_updated = nested_class.from_kwargs(**last_updated)
+                else:
+                    self.last_updated = last_updated
+            else:
+                self.last_updated = last_updated
         if password_changed is not None:
-            self.password_changed = password_changed
+            if hasattr(models, self.swagger_types['password_changed']):
+                nested_class = getattr(models, self.swagger_types['password_changed'])
+                if isinstance(password_changed, nested_class):
+                    self.password_changed = password_changed
+                elif isinstance(password_changed, dict):
+                    self.password_changed = nested_class.from_kwargs(**password_changed)
+                else:
+                    self.password_changed = password_changed
+            else:
+                self.password_changed = password_changed
         if profile is not None:
-            self.profile = profile
+            if hasattr(models, self.swagger_types['profile']):
+                nested_class = getattr(models, self.swagger_types['profile'])
+                if isinstance(profile, nested_class):
+                    self.profile = profile
+                elif isinstance(profile, dict):
+                    self.profile = nested_class.from_kwargs(**profile)
+                else:
+                    self.profile = profile
+            else:
+                self.profile = profile
         if status is not None:
-            self.status = status
+            if hasattr(models, self.swagger_types['status']):
+                nested_class = getattr(models, self.swagger_types['status'])
+                if isinstance(status, nested_class):
+                    self.status = status
+                elif isinstance(status, dict):
+                    self.status = nested_class.from_kwargs(**status)
+                else:
+                    self.status = status
+            else:
+                self.status = status
         if status_changed is not None:
-            self.status_changed = status_changed
+            if hasattr(models, self.swagger_types['status_changed']):
+                nested_class = getattr(models, self.swagger_types['status_changed'])
+                if isinstance(status_changed, nested_class):
+                    self.status_changed = status_changed
+                elif isinstance(status_changed, dict):
+                    self.status_changed = nested_class.from_kwargs(**status_changed)
+                else:
+                    self.status_changed = status_changed
+            else:
+                self.status_changed = status_changed
         if transitioning_to_status is not None:
-            self.transitioning_to_status = transitioning_to_status
+            if hasattr(models, self.swagger_types['transitioning_to_status']):
+                nested_class = getattr(models, self.swagger_types['transitioning_to_status'])
+                if isinstance(transitioning_to_status, nested_class):
+                    self.transitioning_to_status = transitioning_to_status
+                elif isinstance(transitioning_to_status, dict):
+                    self.transitioning_to_status = nested_class.from_kwargs(**transitioning_to_status)
+                else:
+                    self.transitioning_to_status = transitioning_to_status
+            else:
+                self.transitioning_to_status = transitioning_to_status
         if type is not None:
-            self.type = type
+            if hasattr(models, self.swagger_types['type']):
+                nested_class = getattr(models, self.swagger_types['type'])
+                if isinstance(type, nested_class):
+                    self.type = type
+                elif isinstance(type, dict):
+                    self.type = nested_class.from_kwargs(**type)
+                else:
+                    self.type = type
+            else:
+                self.type = type
 
     @property
     def embedded(self):

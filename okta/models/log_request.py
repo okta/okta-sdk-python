@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class LogRequest(object):
@@ -29,9 +30,8 @@ class LogRequest(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'ip_chain': 'list[LogIpAddress]'
-    }
+    swagger_types = {}
+    swagger_types['ip_chain'] = 'list[LogIpAddress]'
 
     attribute_map = {
         'ip_chain': 'ipChain'
@@ -48,12 +48,21 @@ class LogRequest(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, ip_chain=None):  # noqa: E501
+    def set_attributes(self, ip_chain=None, **kwargs):  # noqa: E501
         """LogRequest - a model defined in Swagger"""  # noqa: E501
         self._ip_chain = None
         self.discriminator = None
         if ip_chain is not None:
-            self.ip_chain = ip_chain
+            if hasattr(models, self.swagger_types['ip_chain']):
+                nested_class = getattr(models, self.swagger_types['ip_chain'])
+                if isinstance(ip_chain, nested_class):
+                    self.ip_chain = ip_chain
+                elif isinstance(ip_chain, dict):
+                    self.ip_chain = nested_class.from_kwargs(**ip_chain)
+                else:
+                    self.ip_chain = ip_chain
+            else:
+                self.ip_chain = ip_chain
 
     @property
     def ip_chain(self):

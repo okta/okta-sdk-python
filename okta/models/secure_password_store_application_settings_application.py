@@ -16,6 +16,7 @@ import re  # noqa: F401
 import six
 from okta.models.application_settings_application import ApplicationSettingsApplication  # noqa: F401,E501
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class SecurePasswordStoreApplicationSettingsApplication(ApplicationSettingsApplication):
@@ -30,19 +31,18 @@ class SecurePasswordStoreApplicationSettingsApplication(ApplicationSettingsAppli
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'optional_field1': 'str',
-        'optional_field1_value': 'str',
-        'optional_field2': 'str',
-        'optional_field2_value': 'str',
-        'optional_field3': 'str',
-        'optional_field3_value': 'str',
-        'password_field': 'str',
-        'url': 'str',
-        'username_field': 'str'
-    }
+    swagger_types = {}
     if hasattr(ApplicationSettingsApplication, "swagger_types"):
         swagger_types.update(ApplicationSettingsApplication.swagger_types)
+    swagger_types['optional_field1'] = 'str'
+    swagger_types['optional_field1_value'] = 'str'
+    swagger_types['optional_field2'] = 'str'
+    swagger_types['optional_field2_value'] = 'str'
+    swagger_types['optional_field3'] = 'str'
+    swagger_types['optional_field3_value'] = 'str'
+    swagger_types['password_field'] = 'str'
+    swagger_types['url'] = 'str'
+    swagger_types['username_field'] = 'str'
 
     attribute_map = {
         'optional_field1': 'optionalField1',
@@ -69,8 +69,12 @@ class SecurePasswordStoreApplicationSettingsApplication(ApplicationSettingsAppli
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, optional_field1=None, optional_field1_value=None, optional_field2=None, optional_field2_value=None, optional_field3=None, optional_field3_value=None, password_field=None, url=None, username_field=None, *args, **kwargs):  # noqa: E501
+    def set_attributes(self, optional_field1=None, optional_field1_value=None, optional_field2=None, optional_field2_value=None, optional_field3=None, optional_field3_value=None, password_field=None, url=None, username_field=None, **kwargs):  # noqa: E501
         """SecurePasswordStoreApplicationSettingsApplication - a model defined in Swagger"""  # noqa: E501
+        config = {}
+        if kwargs is not None:
+            config = {to_snake_case(key): value for key, value in kwargs.items()}
+        super().set_attributes(**config)
         self._optional_field1 = None
         self._optional_field1_value = None
         self._optional_field2 = None
@@ -82,24 +86,104 @@ class SecurePasswordStoreApplicationSettingsApplication(ApplicationSettingsAppli
         self._username_field = None
         self.discriminator = None
         if optional_field1 is not None:
-            self.optional_field1 = optional_field1
+            if hasattr(models, self.swagger_types['optional_field1']):
+                nested_class = getattr(models, self.swagger_types['optional_field1'])
+                if isinstance(optional_field1, nested_class):
+                    self.optional_field1 = optional_field1
+                elif isinstance(optional_field1, dict):
+                    self.optional_field1 = nested_class.from_kwargs(**optional_field1)
+                else:
+                    self.optional_field1 = optional_field1
+            else:
+                self.optional_field1 = optional_field1
         if optional_field1_value is not None:
-            self.optional_field1_value = optional_field1_value
+            if hasattr(models, self.swagger_types['optional_field1_value']):
+                nested_class = getattr(models, self.swagger_types['optional_field1_value'])
+                if isinstance(optional_field1_value, nested_class):
+                    self.optional_field1_value = optional_field1_value
+                elif isinstance(optional_field1_value, dict):
+                    self.optional_field1_value = nested_class.from_kwargs(**optional_field1_value)
+                else:
+                    self.optional_field1_value = optional_field1_value
+            else:
+                self.optional_field1_value = optional_field1_value
         if optional_field2 is not None:
-            self.optional_field2 = optional_field2
+            if hasattr(models, self.swagger_types['optional_field2']):
+                nested_class = getattr(models, self.swagger_types['optional_field2'])
+                if isinstance(optional_field2, nested_class):
+                    self.optional_field2 = optional_field2
+                elif isinstance(optional_field2, dict):
+                    self.optional_field2 = nested_class.from_kwargs(**optional_field2)
+                else:
+                    self.optional_field2 = optional_field2
+            else:
+                self.optional_field2 = optional_field2
         if optional_field2_value is not None:
-            self.optional_field2_value = optional_field2_value
+            if hasattr(models, self.swagger_types['optional_field2_value']):
+                nested_class = getattr(models, self.swagger_types['optional_field2_value'])
+                if isinstance(optional_field2_value, nested_class):
+                    self.optional_field2_value = optional_field2_value
+                elif isinstance(optional_field2_value, dict):
+                    self.optional_field2_value = nested_class.from_kwargs(**optional_field2_value)
+                else:
+                    self.optional_field2_value = optional_field2_value
+            else:
+                self.optional_field2_value = optional_field2_value
         if optional_field3 is not None:
-            self.optional_field3 = optional_field3
+            if hasattr(models, self.swagger_types['optional_field3']):
+                nested_class = getattr(models, self.swagger_types['optional_field3'])
+                if isinstance(optional_field3, nested_class):
+                    self.optional_field3 = optional_field3
+                elif isinstance(optional_field3, dict):
+                    self.optional_field3 = nested_class.from_kwargs(**optional_field3)
+                else:
+                    self.optional_field3 = optional_field3
+            else:
+                self.optional_field3 = optional_field3
         if optional_field3_value is not None:
-            self.optional_field3_value = optional_field3_value
+            if hasattr(models, self.swagger_types['optional_field3_value']):
+                nested_class = getattr(models, self.swagger_types['optional_field3_value'])
+                if isinstance(optional_field3_value, nested_class):
+                    self.optional_field3_value = optional_field3_value
+                elif isinstance(optional_field3_value, dict):
+                    self.optional_field3_value = nested_class.from_kwargs(**optional_field3_value)
+                else:
+                    self.optional_field3_value = optional_field3_value
+            else:
+                self.optional_field3_value = optional_field3_value
         if password_field is not None:
-            self.password_field = password_field
+            if hasattr(models, self.swagger_types['password_field']):
+                nested_class = getattr(models, self.swagger_types['password_field'])
+                if isinstance(password_field, nested_class):
+                    self.password_field = password_field
+                elif isinstance(password_field, dict):
+                    self.password_field = nested_class.from_kwargs(**password_field)
+                else:
+                    self.password_field = password_field
+            else:
+                self.password_field = password_field
         if url is not None:
-            self.url = url
+            if hasattr(models, self.swagger_types['url']):
+                nested_class = getattr(models, self.swagger_types['url'])
+                if isinstance(url, nested_class):
+                    self.url = url
+                elif isinstance(url, dict):
+                    self.url = nested_class.from_kwargs(**url)
+                else:
+                    self.url = url
+            else:
+                self.url = url
         if username_field is not None:
-            self.username_field = username_field
-        super().set_attributes(*args, **kwargs)
+            if hasattr(models, self.swagger_types['username_field']):
+                nested_class = getattr(models, self.swagger_types['username_field'])
+                if isinstance(username_field, nested_class):
+                    self.username_field = username_field
+                elif isinstance(username_field, dict):
+                    self.username_field = nested_class.from_kwargs(**username_field)
+                else:
+                    self.username_field = username_field
+            else:
+                self.username_field = username_field
 
     @property
     def optional_field1(self):

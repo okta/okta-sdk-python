@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class UserSchemaAttributeItems(object):
@@ -29,11 +30,10 @@ class UserSchemaAttributeItems(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'enum': 'list[str]',
-        'one_of': 'list[UserSchemaAttributeEnum]',
-        'type': 'str'
-    }
+    swagger_types = {}
+    swagger_types['enum'] = 'list[str]'
+    swagger_types['one_of'] = 'list[UserSchemaAttributeEnum]'
+    swagger_types['type'] = 'str'
 
     attribute_map = {
         'enum': 'enum',
@@ -52,18 +52,45 @@ class UserSchemaAttributeItems(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, enum=None, one_of=None, type=None):  # noqa: E501
+    def set_attributes(self, enum=None, one_of=None, type=None, **kwargs):  # noqa: E501
         """UserSchemaAttributeItems - a model defined in Swagger"""  # noqa: E501
         self._enum = None
         self._one_of = None
         self._type = None
         self.discriminator = None
         if enum is not None:
-            self.enum = enum
+            if hasattr(models, self.swagger_types['enum']):
+                nested_class = getattr(models, self.swagger_types['enum'])
+                if isinstance(enum, nested_class):
+                    self.enum = enum
+                elif isinstance(enum, dict):
+                    self.enum = nested_class.from_kwargs(**enum)
+                else:
+                    self.enum = enum
+            else:
+                self.enum = enum
         if one_of is not None:
-            self.one_of = one_of
+            if hasattr(models, self.swagger_types['one_of']):
+                nested_class = getattr(models, self.swagger_types['one_of'])
+                if isinstance(one_of, nested_class):
+                    self.one_of = one_of
+                elif isinstance(one_of, dict):
+                    self.one_of = nested_class.from_kwargs(**one_of)
+                else:
+                    self.one_of = one_of
+            else:
+                self.one_of = one_of
         if type is not None:
-            self.type = type
+            if hasattr(models, self.swagger_types['type']):
+                nested_class = getattr(models, self.swagger_types['type'])
+                if isinstance(type, nested_class):
+                    self.type = type
+                elif isinstance(type, dict):
+                    self.type = nested_class.from_kwargs(**type)
+                else:
+                    self.type = type
+            else:
+                self.type = type
 
     @property
     def enum(self):

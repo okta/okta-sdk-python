@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class ApplicationAccessibility(object):
@@ -29,11 +30,10 @@ class ApplicationAccessibility(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'error_redirect_url': 'str',
-        'login_redirect_url': 'str',
-        'self_service': 'bool'
-    }
+    swagger_types = {}
+    swagger_types['error_redirect_url'] = 'str'
+    swagger_types['login_redirect_url'] = 'str'
+    swagger_types['self_service'] = 'bool'
 
     attribute_map = {
         'error_redirect_url': 'errorRedirectUrl',
@@ -52,18 +52,45 @@ class ApplicationAccessibility(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, error_redirect_url=None, login_redirect_url=None, self_service=None):  # noqa: E501
+    def set_attributes(self, error_redirect_url=None, login_redirect_url=None, self_service=None, **kwargs):  # noqa: E501
         """ApplicationAccessibility - a model defined in Swagger"""  # noqa: E501
         self._error_redirect_url = None
         self._login_redirect_url = None
         self._self_service = None
         self.discriminator = None
         if error_redirect_url is not None:
-            self.error_redirect_url = error_redirect_url
+            if hasattr(models, self.swagger_types['error_redirect_url']):
+                nested_class = getattr(models, self.swagger_types['error_redirect_url'])
+                if isinstance(error_redirect_url, nested_class):
+                    self.error_redirect_url = error_redirect_url
+                elif isinstance(error_redirect_url, dict):
+                    self.error_redirect_url = nested_class.from_kwargs(**error_redirect_url)
+                else:
+                    self.error_redirect_url = error_redirect_url
+            else:
+                self.error_redirect_url = error_redirect_url
         if login_redirect_url is not None:
-            self.login_redirect_url = login_redirect_url
+            if hasattr(models, self.swagger_types['login_redirect_url']):
+                nested_class = getattr(models, self.swagger_types['login_redirect_url'])
+                if isinstance(login_redirect_url, nested_class):
+                    self.login_redirect_url = login_redirect_url
+                elif isinstance(login_redirect_url, dict):
+                    self.login_redirect_url = nested_class.from_kwargs(**login_redirect_url)
+                else:
+                    self.login_redirect_url = login_redirect_url
+            else:
+                self.login_redirect_url = login_redirect_url
         if self_service is not None:
-            self.self_service = self_service
+            if hasattr(models, self.swagger_types['self_service']):
+                nested_class = getattr(models, self.swagger_types['self_service'])
+                if isinstance(self_service, nested_class):
+                    self.self_service = self_service
+                elif isinstance(self_service, dict):
+                    self.self_service = nested_class.from_kwargs(**self_service)
+                else:
+                    self.self_service = self_service
+            else:
+                self.self_service = self_service
 
     @property
     def error_redirect_url(self):

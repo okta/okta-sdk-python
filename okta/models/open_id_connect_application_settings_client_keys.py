@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class OpenIdConnectApplicationSettingsClientKeys(object):
@@ -29,9 +30,8 @@ class OpenIdConnectApplicationSettingsClientKeys(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'keys': 'list[JsonWebKey]'
-    }
+    swagger_types = {}
+    swagger_types['keys'] = 'list[JsonWebKey]'
 
     attribute_map = {
         'keys': 'keys'
@@ -48,12 +48,21 @@ class OpenIdConnectApplicationSettingsClientKeys(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, keys=None):  # noqa: E501
+    def set_attributes(self, keys=None, **kwargs):  # noqa: E501
         """OpenIdConnectApplicationSettingsClientKeys - a model defined in Swagger"""  # noqa: E501
         self._keys = None
         self.discriminator = None
         if keys is not None:
-            self.keys = keys
+            if hasattr(models, self.swagger_types['keys']):
+                nested_class = getattr(models, self.swagger_types['keys'])
+                if isinstance(keys, nested_class):
+                    self.keys = keys
+                elif isinstance(keys, dict):
+                    self.keys = nested_class.from_kwargs(**keys)
+                else:
+                    self.keys = keys
+            else:
+                self.keys = keys
 
     @property
     def keys(self):

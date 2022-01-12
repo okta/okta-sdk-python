@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class LogSecurityContext(object):
@@ -29,13 +30,12 @@ class LogSecurityContext(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'as_number': 'int',
-        'as_org': 'str',
-        'domain': 'str',
-        'is_proxy': 'bool',
-        'isp': 'str'
-    }
+    swagger_types = {}
+    swagger_types['as_number'] = 'int'
+    swagger_types['as_org'] = 'str'
+    swagger_types['domain'] = 'str'
+    swagger_types['is_proxy'] = 'bool'
+    swagger_types['isp'] = 'str'
 
     attribute_map = {
         'as_number': 'asNumber',
@@ -56,7 +56,7 @@ class LogSecurityContext(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, as_number=None, as_org=None, domain=None, is_proxy=None, isp=None):  # noqa: E501
+    def set_attributes(self, as_number=None, as_org=None, domain=None, is_proxy=None, isp=None, **kwargs):  # noqa: E501
         """LogSecurityContext - a model defined in Swagger"""  # noqa: E501
         self._as_number = None
         self._as_org = None
@@ -65,15 +65,60 @@ class LogSecurityContext(object):
         self._isp = None
         self.discriminator = None
         if as_number is not None:
-            self.as_number = as_number
+            if hasattr(models, self.swagger_types['as_number']):
+                nested_class = getattr(models, self.swagger_types['as_number'])
+                if isinstance(as_number, nested_class):
+                    self.as_number = as_number
+                elif isinstance(as_number, dict):
+                    self.as_number = nested_class.from_kwargs(**as_number)
+                else:
+                    self.as_number = as_number
+            else:
+                self.as_number = as_number
         if as_org is not None:
-            self.as_org = as_org
+            if hasattr(models, self.swagger_types['as_org']):
+                nested_class = getattr(models, self.swagger_types['as_org'])
+                if isinstance(as_org, nested_class):
+                    self.as_org = as_org
+                elif isinstance(as_org, dict):
+                    self.as_org = nested_class.from_kwargs(**as_org)
+                else:
+                    self.as_org = as_org
+            else:
+                self.as_org = as_org
         if domain is not None:
-            self.domain = domain
+            if hasattr(models, self.swagger_types['domain']):
+                nested_class = getattr(models, self.swagger_types['domain'])
+                if isinstance(domain, nested_class):
+                    self.domain = domain
+                elif isinstance(domain, dict):
+                    self.domain = nested_class.from_kwargs(**domain)
+                else:
+                    self.domain = domain
+            else:
+                self.domain = domain
         if is_proxy is not None:
-            self.is_proxy = is_proxy
+            if hasattr(models, self.swagger_types['is_proxy']):
+                nested_class = getattr(models, self.swagger_types['is_proxy'])
+                if isinstance(is_proxy, nested_class):
+                    self.is_proxy = is_proxy
+                elif isinstance(is_proxy, dict):
+                    self.is_proxy = nested_class.from_kwargs(**is_proxy)
+                else:
+                    self.is_proxy = is_proxy
+            else:
+                self.is_proxy = is_proxy
         if isp is not None:
-            self.isp = isp
+            if hasattr(models, self.swagger_types['isp']):
+                nested_class = getattr(models, self.swagger_types['isp'])
+                if isinstance(isp, nested_class):
+                    self.isp = isp
+                elif isinstance(isp, dict):
+                    self.isp = nested_class.from_kwargs(**isp)
+                else:
+                    self.isp = isp
+            else:
+                self.isp = isp
 
     @property
     def as_number(self):

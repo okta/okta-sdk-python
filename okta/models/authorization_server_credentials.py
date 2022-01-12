@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class AuthorizationServerCredentials(object):
@@ -29,9 +30,8 @@ class AuthorizationServerCredentials(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'signing': 'AuthorizationServerCredentialsSigningConfig'
-    }
+    swagger_types = {}
+    swagger_types['signing'] = 'AuthorizationServerCredentialsSigningConfig'
 
     attribute_map = {
         'signing': 'signing'
@@ -48,12 +48,21 @@ class AuthorizationServerCredentials(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, signing=None):  # noqa: E501
+    def set_attributes(self, signing=None, **kwargs):  # noqa: E501
         """AuthorizationServerCredentials - a model defined in Swagger"""  # noqa: E501
         self._signing = None
         self.discriminator = None
         if signing is not None:
-            self.signing = signing
+            if hasattr(models, self.swagger_types['signing']):
+                nested_class = getattr(models, self.swagger_types['signing'])
+                if isinstance(signing, nested_class):
+                    self.signing = signing
+                elif isinstance(signing, dict):
+                    self.signing = nested_class.from_kwargs(**signing)
+                else:
+                    self.signing = signing
+            else:
+                self.signing = signing
 
     @property
     def signing(self):

@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class Brand(object):
@@ -29,13 +30,12 @@ class Brand(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'links': 'dict(str, object)',
-        'agree_to_custom_privacy_policy': 'bool',
-        'custom_privacy_policy_url': 'str',
-        'id': 'str',
-        'remove_powered_by_okta': 'bool'
-    }
+    swagger_types = {}
+    swagger_types['links'] = 'dict(str, object)'
+    swagger_types['agree_to_custom_privacy_policy'] = 'bool'
+    swagger_types['custom_privacy_policy_url'] = 'str'
+    swagger_types['id'] = 'str'
+    swagger_types['remove_powered_by_okta'] = 'bool'
 
     attribute_map = {
         'links': '_links',
@@ -56,7 +56,7 @@ class Brand(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, links=None, agree_to_custom_privacy_policy=None, custom_privacy_policy_url=None, id=None, remove_powered_by_okta=None):  # noqa: E501
+    def set_attributes(self, links=None, agree_to_custom_privacy_policy=None, custom_privacy_policy_url=None, id=None, remove_powered_by_okta=None, **kwargs):  # noqa: E501
         """Brand - a model defined in Swagger"""  # noqa: E501
         self._links = None
         self._agree_to_custom_privacy_policy = None
@@ -65,15 +65,60 @@ class Brand(object):
         self._remove_powered_by_okta = None
         self.discriminator = None
         if links is not None:
-            self.links = links
+            if hasattr(models, self.swagger_types['links']):
+                nested_class = getattr(models, self.swagger_types['links'])
+                if isinstance(links, nested_class):
+                    self.links = links
+                elif isinstance(links, dict):
+                    self.links = nested_class.from_kwargs(**links)
+                else:
+                    self.links = links
+            else:
+                self.links = links
         if agree_to_custom_privacy_policy is not None:
-            self.agree_to_custom_privacy_policy = agree_to_custom_privacy_policy
+            if hasattr(models, self.swagger_types['agree_to_custom_privacy_policy']):
+                nested_class = getattr(models, self.swagger_types['agree_to_custom_privacy_policy'])
+                if isinstance(agree_to_custom_privacy_policy, nested_class):
+                    self.agree_to_custom_privacy_policy = agree_to_custom_privacy_policy
+                elif isinstance(agree_to_custom_privacy_policy, dict):
+                    self.agree_to_custom_privacy_policy = nested_class.from_kwargs(**agree_to_custom_privacy_policy)
+                else:
+                    self.agree_to_custom_privacy_policy = agree_to_custom_privacy_policy
+            else:
+                self.agree_to_custom_privacy_policy = agree_to_custom_privacy_policy
         if custom_privacy_policy_url is not None:
-            self.custom_privacy_policy_url = custom_privacy_policy_url
+            if hasattr(models, self.swagger_types['custom_privacy_policy_url']):
+                nested_class = getattr(models, self.swagger_types['custom_privacy_policy_url'])
+                if isinstance(custom_privacy_policy_url, nested_class):
+                    self.custom_privacy_policy_url = custom_privacy_policy_url
+                elif isinstance(custom_privacy_policy_url, dict):
+                    self.custom_privacy_policy_url = nested_class.from_kwargs(**custom_privacy_policy_url)
+                else:
+                    self.custom_privacy_policy_url = custom_privacy_policy_url
+            else:
+                self.custom_privacy_policy_url = custom_privacy_policy_url
         if id is not None:
-            self.id = id
+            if hasattr(models, self.swagger_types['id']):
+                nested_class = getattr(models, self.swagger_types['id'])
+                if isinstance(id, nested_class):
+                    self.id = id
+                elif isinstance(id, dict):
+                    self.id = nested_class.from_kwargs(**id)
+                else:
+                    self.id = id
+            else:
+                self.id = id
         if remove_powered_by_okta is not None:
-            self.remove_powered_by_okta = remove_powered_by_okta
+            if hasattr(models, self.swagger_types['remove_powered_by_okta']):
+                nested_class = getattr(models, self.swagger_types['remove_powered_by_okta'])
+                if isinstance(remove_powered_by_okta, nested_class):
+                    self.remove_powered_by_okta = remove_powered_by_okta
+                elif isinstance(remove_powered_by_okta, dict):
+                    self.remove_powered_by_okta = nested_class.from_kwargs(**remove_powered_by_okta)
+                else:
+                    self.remove_powered_by_okta = remove_powered_by_okta
+            else:
+                self.remove_powered_by_okta = remove_powered_by_okta
 
     @property
     def links(self):

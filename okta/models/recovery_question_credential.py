@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class RecoveryQuestionCredential(object):
@@ -29,10 +30,9 @@ class RecoveryQuestionCredential(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'answer': 'str',
-        'question': 'str'
-    }
+    swagger_types = {}
+    swagger_types['answer'] = 'str'
+    swagger_types['question'] = 'str'
 
     attribute_map = {
         'answer': 'answer',
@@ -50,15 +50,33 @@ class RecoveryQuestionCredential(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, answer=None, question=None):  # noqa: E501
+    def set_attributes(self, answer=None, question=None, **kwargs):  # noqa: E501
         """RecoveryQuestionCredential - a model defined in Swagger"""  # noqa: E501
         self._answer = None
         self._question = None
         self.discriminator = None
         if answer is not None:
-            self.answer = answer
+            if hasattr(models, self.swagger_types['answer']):
+                nested_class = getattr(models, self.swagger_types['answer'])
+                if isinstance(answer, nested_class):
+                    self.answer = answer
+                elif isinstance(answer, dict):
+                    self.answer = nested_class.from_kwargs(**answer)
+                else:
+                    self.answer = answer
+            else:
+                self.answer = answer
         if question is not None:
-            self.question = question
+            if hasattr(models, self.swagger_types['question']):
+                nested_class = getattr(models, self.swagger_types['question'])
+                if isinstance(question, nested_class):
+                    self.question = question
+                elif isinstance(question, dict):
+                    self.question = nested_class.from_kwargs(**question)
+                else:
+                    self.question = question
+            else:
+                self.question = question
 
     @property
     def answer(self):

@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class Domain(object):
@@ -29,14 +30,13 @@ class Domain(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'certificate_source_type': 'DomainCertificateSourceType',
-        'dns_records': 'list[DNSRecord]',
-        'domain': 'str',
-        'id': 'str',
-        'public_certificate': 'DomainCertificateMetadata',
-        'validation_status': 'DomainValidationStatus'
-    }
+    swagger_types = {}
+    swagger_types['certificate_source_type'] = 'DomainCertificateSourceType'
+    swagger_types['dns_records'] = 'list[DNSRecord]'
+    swagger_types['domain'] = 'str'
+    swagger_types['id'] = 'str'
+    swagger_types['public_certificate'] = 'DomainCertificateMetadata'
+    swagger_types['validation_status'] = 'DomainValidationStatus'
 
     attribute_map = {
         'certificate_source_type': 'certificateSourceType',
@@ -58,7 +58,7 @@ class Domain(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, certificate_source_type=None, dns_records=None, domain=None, id=None, public_certificate=None, validation_status=None):  # noqa: E501
+    def set_attributes(self, certificate_source_type=None, dns_records=None, domain=None, id=None, public_certificate=None, validation_status=None, **kwargs):  # noqa: E501
         """Domain - a model defined in Swagger"""  # noqa: E501
         self._certificate_source_type = None
         self._dns_records = None
@@ -68,17 +68,71 @@ class Domain(object):
         self._validation_status = None
         self.discriminator = None
         if certificate_source_type is not None:
-            self.certificate_source_type = certificate_source_type
+            if hasattr(models, self.swagger_types['certificate_source_type']):
+                nested_class = getattr(models, self.swagger_types['certificate_source_type'])
+                if isinstance(certificate_source_type, nested_class):
+                    self.certificate_source_type = certificate_source_type
+                elif isinstance(certificate_source_type, dict):
+                    self.certificate_source_type = nested_class.from_kwargs(**certificate_source_type)
+                else:
+                    self.certificate_source_type = certificate_source_type
+            else:
+                self.certificate_source_type = certificate_source_type
         if dns_records is not None:
-            self.dns_records = dns_records
+            if hasattr(models, self.swagger_types['dns_records']):
+                nested_class = getattr(models, self.swagger_types['dns_records'])
+                if isinstance(dns_records, nested_class):
+                    self.dns_records = dns_records
+                elif isinstance(dns_records, dict):
+                    self.dns_records = nested_class.from_kwargs(**dns_records)
+                else:
+                    self.dns_records = dns_records
+            else:
+                self.dns_records = dns_records
         if domain is not None:
-            self.domain = domain
+            if hasattr(models, self.swagger_types['domain']):
+                nested_class = getattr(models, self.swagger_types['domain'])
+                if isinstance(domain, nested_class):
+                    self.domain = domain
+                elif isinstance(domain, dict):
+                    self.domain = nested_class.from_kwargs(**domain)
+                else:
+                    self.domain = domain
+            else:
+                self.domain = domain
         if id is not None:
-            self.id = id
+            if hasattr(models, self.swagger_types['id']):
+                nested_class = getattr(models, self.swagger_types['id'])
+                if isinstance(id, nested_class):
+                    self.id = id
+                elif isinstance(id, dict):
+                    self.id = nested_class.from_kwargs(**id)
+                else:
+                    self.id = id
+            else:
+                self.id = id
         if public_certificate is not None:
-            self.public_certificate = public_certificate
+            if hasattr(models, self.swagger_types['public_certificate']):
+                nested_class = getattr(models, self.swagger_types['public_certificate'])
+                if isinstance(public_certificate, nested_class):
+                    self.public_certificate = public_certificate
+                elif isinstance(public_certificate, dict):
+                    self.public_certificate = nested_class.from_kwargs(**public_certificate)
+                else:
+                    self.public_certificate = public_certificate
+            else:
+                self.public_certificate = public_certificate
         if validation_status is not None:
-            self.validation_status = validation_status
+            if hasattr(models, self.swagger_types['validation_status']):
+                nested_class = getattr(models, self.swagger_types['validation_status'])
+                if isinstance(validation_status, nested_class):
+                    self.validation_status = validation_status
+                elif isinstance(validation_status, dict):
+                    self.validation_status = nested_class.from_kwargs(**validation_status)
+                else:
+                    self.validation_status = validation_status
+            else:
+                self.validation_status = validation_status
 
     @property
     def certificate_source_type(self):

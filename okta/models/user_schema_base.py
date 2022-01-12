@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class UserSchemaBase(object):
@@ -29,12 +30,11 @@ class UserSchemaBase(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'id': 'str',
-        'type': 'str',
-        'properties': 'UserSchemaBaseProperties',
-        'required': 'list[str]'
-    }
+    swagger_types = {}
+    swagger_types['id'] = 'str'
+    swagger_types['type'] = 'str'
+    swagger_types['properties'] = 'UserSchemaBaseProperties'
+    swagger_types['required'] = 'list[str]'
 
     attribute_map = {
         'id': 'id',
@@ -54,7 +54,7 @@ class UserSchemaBase(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, id=None, type=None, properties=None, required=None):  # noqa: E501
+    def set_attributes(self, id=None, type=None, properties=None, required=None, **kwargs):  # noqa: E501
         """UserSchemaBase - a model defined in Swagger"""  # noqa: E501
         self._id = None
         self._type = None
@@ -62,13 +62,49 @@ class UserSchemaBase(object):
         self._required = None
         self.discriminator = None
         if id is not None:
-            self.id = id
+            if hasattr(models, self.swagger_types['id']):
+                nested_class = getattr(models, self.swagger_types['id'])
+                if isinstance(id, nested_class):
+                    self.id = id
+                elif isinstance(id, dict):
+                    self.id = nested_class.from_kwargs(**id)
+                else:
+                    self.id = id
+            else:
+                self.id = id
         if type is not None:
-            self.type = type
+            if hasattr(models, self.swagger_types['type']):
+                nested_class = getattr(models, self.swagger_types['type'])
+                if isinstance(type, nested_class):
+                    self.type = type
+                elif isinstance(type, dict):
+                    self.type = nested_class.from_kwargs(**type)
+                else:
+                    self.type = type
+            else:
+                self.type = type
         if properties is not None:
-            self.properties = properties
+            if hasattr(models, self.swagger_types['properties']):
+                nested_class = getattr(models, self.swagger_types['properties'])
+                if isinstance(properties, nested_class):
+                    self.properties = properties
+                elif isinstance(properties, dict):
+                    self.properties = nested_class.from_kwargs(**properties)
+                else:
+                    self.properties = properties
+            else:
+                self.properties = properties
         if required is not None:
-            self.required = required
+            if hasattr(models, self.swagger_types['required']):
+                nested_class = getattr(models, self.swagger_types['required'])
+                if isinstance(required, nested_class):
+                    self.required = required
+                elif isinstance(required, dict):
+                    self.required = nested_class.from_kwargs(**required)
+                else:
+                    self.required = required
+            else:
+                self.required = required
 
     @property
     def id(self):

@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class ApplicationGroupAssignment(object):
@@ -29,14 +30,13 @@ class ApplicationGroupAssignment(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'embedded': 'dict(str, object)',
-        'links': 'dict(str, object)',
-        'id': 'str',
-        'last_updated': 'datetime',
-        'priority': 'int',
-        'profile': 'dict(str, object)'
-    }
+    swagger_types = {}
+    swagger_types['embedded'] = 'dict(str, object)'
+    swagger_types['links'] = 'dict(str, object)'
+    swagger_types['id'] = 'str'
+    swagger_types['last_updated'] = 'datetime'
+    swagger_types['priority'] = 'int'
+    swagger_types['profile'] = 'dict(str, object)'
 
     attribute_map = {
         'embedded': '_embedded',
@@ -58,7 +58,7 @@ class ApplicationGroupAssignment(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, embedded=None, links=None, id=None, last_updated=None, priority=None, profile=None):  # noqa: E501
+    def set_attributes(self, embedded=None, links=None, id=None, last_updated=None, priority=None, profile=None, **kwargs):  # noqa: E501
         """ApplicationGroupAssignment - a model defined in Swagger"""  # noqa: E501
         self._embedded = None
         self._links = None
@@ -68,17 +68,71 @@ class ApplicationGroupAssignment(object):
         self._profile = None
         self.discriminator = None
         if embedded is not None:
-            self.embedded = embedded
+            if hasattr(models, self.swagger_types['embedded']):
+                nested_class = getattr(models, self.swagger_types['embedded'])
+                if isinstance(embedded, nested_class):
+                    self.embedded = embedded
+                elif isinstance(embedded, dict):
+                    self.embedded = nested_class.from_kwargs(**embedded)
+                else:
+                    self.embedded = embedded
+            else:
+                self.embedded = embedded
         if links is not None:
-            self.links = links
+            if hasattr(models, self.swagger_types['links']):
+                nested_class = getattr(models, self.swagger_types['links'])
+                if isinstance(links, nested_class):
+                    self.links = links
+                elif isinstance(links, dict):
+                    self.links = nested_class.from_kwargs(**links)
+                else:
+                    self.links = links
+            else:
+                self.links = links
         if id is not None:
-            self.id = id
+            if hasattr(models, self.swagger_types['id']):
+                nested_class = getattr(models, self.swagger_types['id'])
+                if isinstance(id, nested_class):
+                    self.id = id
+                elif isinstance(id, dict):
+                    self.id = nested_class.from_kwargs(**id)
+                else:
+                    self.id = id
+            else:
+                self.id = id
         if last_updated is not None:
-            self.last_updated = last_updated
+            if hasattr(models, self.swagger_types['last_updated']):
+                nested_class = getattr(models, self.swagger_types['last_updated'])
+                if isinstance(last_updated, nested_class):
+                    self.last_updated = last_updated
+                elif isinstance(last_updated, dict):
+                    self.last_updated = nested_class.from_kwargs(**last_updated)
+                else:
+                    self.last_updated = last_updated
+            else:
+                self.last_updated = last_updated
         if priority is not None:
-            self.priority = priority
+            if hasattr(models, self.swagger_types['priority']):
+                nested_class = getattr(models, self.swagger_types['priority'])
+                if isinstance(priority, nested_class):
+                    self.priority = priority
+                elif isinstance(priority, dict):
+                    self.priority = nested_class.from_kwargs(**priority)
+                else:
+                    self.priority = priority
+            else:
+                self.priority = priority
         if profile is not None:
-            self.profile = profile
+            if hasattr(models, self.swagger_types['profile']):
+                nested_class = getattr(models, self.swagger_types['profile'])
+                if isinstance(profile, nested_class):
+                    self.profile = profile
+                elif isinstance(profile, dict):
+                    self.profile = nested_class.from_kwargs(**profile)
+                else:
+                    self.profile = profile
+            else:
+                self.profile = profile
 
     @property
     def embedded(self):

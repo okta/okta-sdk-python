@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class LogAuthenticationContext(object):
@@ -29,15 +30,14 @@ class LogAuthenticationContext(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'authentication_provider': 'LogAuthenticationProvider',
-        'authentication_step': 'int',
-        'credential_provider': 'LogCredentialProvider',
-        'credential_type': 'LogCredentialType',
-        'external_session_id': 'str',
-        'interface': 'str',
-        'issuer': 'LogIssuer'
-    }
+    swagger_types = {}
+    swagger_types['authentication_provider'] = 'LogAuthenticationProvider'
+    swagger_types['authentication_step'] = 'int'
+    swagger_types['credential_provider'] = 'LogCredentialProvider'
+    swagger_types['credential_type'] = 'LogCredentialType'
+    swagger_types['external_session_id'] = 'str'
+    swagger_types['interface'] = 'str'
+    swagger_types['issuer'] = 'LogIssuer'
 
     attribute_map = {
         'authentication_provider': 'authenticationProvider',
@@ -60,7 +60,7 @@ class LogAuthenticationContext(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, authentication_provider=None, authentication_step=None, credential_provider=None, credential_type=None, external_session_id=None, interface=None, issuer=None):  # noqa: E501
+    def set_attributes(self, authentication_provider=None, authentication_step=None, credential_provider=None, credential_type=None, external_session_id=None, interface=None, issuer=None, **kwargs):  # noqa: E501
         """LogAuthenticationContext - a model defined in Swagger"""  # noqa: E501
         self._authentication_provider = None
         self._authentication_step = None
@@ -71,19 +71,82 @@ class LogAuthenticationContext(object):
         self._issuer = None
         self.discriminator = None
         if authentication_provider is not None:
-            self.authentication_provider = authentication_provider
+            if hasattr(models, self.swagger_types['authentication_provider']):
+                nested_class = getattr(models, self.swagger_types['authentication_provider'])
+                if isinstance(authentication_provider, nested_class):
+                    self.authentication_provider = authentication_provider
+                elif isinstance(authentication_provider, dict):
+                    self.authentication_provider = nested_class.from_kwargs(**authentication_provider)
+                else:
+                    self.authentication_provider = authentication_provider
+            else:
+                self.authentication_provider = authentication_provider
         if authentication_step is not None:
-            self.authentication_step = authentication_step
+            if hasattr(models, self.swagger_types['authentication_step']):
+                nested_class = getattr(models, self.swagger_types['authentication_step'])
+                if isinstance(authentication_step, nested_class):
+                    self.authentication_step = authentication_step
+                elif isinstance(authentication_step, dict):
+                    self.authentication_step = nested_class.from_kwargs(**authentication_step)
+                else:
+                    self.authentication_step = authentication_step
+            else:
+                self.authentication_step = authentication_step
         if credential_provider is not None:
-            self.credential_provider = credential_provider
+            if hasattr(models, self.swagger_types['credential_provider']):
+                nested_class = getattr(models, self.swagger_types['credential_provider'])
+                if isinstance(credential_provider, nested_class):
+                    self.credential_provider = credential_provider
+                elif isinstance(credential_provider, dict):
+                    self.credential_provider = nested_class.from_kwargs(**credential_provider)
+                else:
+                    self.credential_provider = credential_provider
+            else:
+                self.credential_provider = credential_provider
         if credential_type is not None:
-            self.credential_type = credential_type
+            if hasattr(models, self.swagger_types['credential_type']):
+                nested_class = getattr(models, self.swagger_types['credential_type'])
+                if isinstance(credential_type, nested_class):
+                    self.credential_type = credential_type
+                elif isinstance(credential_type, dict):
+                    self.credential_type = nested_class.from_kwargs(**credential_type)
+                else:
+                    self.credential_type = credential_type
+            else:
+                self.credential_type = credential_type
         if external_session_id is not None:
-            self.external_session_id = external_session_id
+            if hasattr(models, self.swagger_types['external_session_id']):
+                nested_class = getattr(models, self.swagger_types['external_session_id'])
+                if isinstance(external_session_id, nested_class):
+                    self.external_session_id = external_session_id
+                elif isinstance(external_session_id, dict):
+                    self.external_session_id = nested_class.from_kwargs(**external_session_id)
+                else:
+                    self.external_session_id = external_session_id
+            else:
+                self.external_session_id = external_session_id
         if interface is not None:
-            self.interface = interface
+            if hasattr(models, self.swagger_types['interface']):
+                nested_class = getattr(models, self.swagger_types['interface'])
+                if isinstance(interface, nested_class):
+                    self.interface = interface
+                elif isinstance(interface, dict):
+                    self.interface = nested_class.from_kwargs(**interface)
+                else:
+                    self.interface = interface
+            else:
+                self.interface = interface
         if issuer is not None:
-            self.issuer = issuer
+            if hasattr(models, self.swagger_types['issuer']):
+                nested_class = getattr(models, self.swagger_types['issuer'])
+                if isinstance(issuer, nested_class):
+                    self.issuer = issuer
+                elif isinstance(issuer, dict):
+                    self.issuer = nested_class.from_kwargs(**issuer)
+                else:
+                    self.issuer = issuer
+            else:
+                self.issuer = issuer
 
     @property
     def authentication_provider(self):

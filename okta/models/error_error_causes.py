@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class ErrorErrorCauses(object):
@@ -29,9 +30,8 @@ class ErrorErrorCauses(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'error_summary': 'str'
-    }
+    swagger_types = {}
+    swagger_types['error_summary'] = 'str'
 
     attribute_map = {
         'error_summary': 'errorSummary'
@@ -48,12 +48,21 @@ class ErrorErrorCauses(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, error_summary=None):  # noqa: E501
+    def set_attributes(self, error_summary=None, **kwargs):  # noqa: E501
         """ErrorErrorCauses - a model defined in Swagger"""  # noqa: E501
         self._error_summary = None
         self.discriminator = None
         if error_summary is not None:
-            self.error_summary = error_summary
+            if hasattr(models, self.swagger_types['error_summary']):
+                nested_class = getattr(models, self.swagger_types['error_summary'])
+                if isinstance(error_summary, nested_class):
+                    self.error_summary = error_summary
+                elif isinstance(error_summary, dict):
+                    self.error_summary = nested_class.from_kwargs(**error_summary)
+                else:
+                    self.error_summary = error_summary
+            else:
+                self.error_summary = error_summary
 
     @property
     def error_summary(self):

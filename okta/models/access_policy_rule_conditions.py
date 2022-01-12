@@ -16,6 +16,7 @@ import re  # noqa: F401
 import six
 from okta.models.policy_rule_conditions import PolicyRuleConditions  # noqa: F401,E501
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class AccessPolicyRuleConditions(PolicyRuleConditions):
@@ -30,13 +31,12 @@ class AccessPolicyRuleConditions(PolicyRuleConditions):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'device': 'DeviceAccessPolicyRuleCondition',
-        'el_condition': 'AccessPolicyRuleCustomCondition',
-        'user_type': 'UserTypeCondition'
-    }
+    swagger_types = {}
     if hasattr(PolicyRuleConditions, "swagger_types"):
         swagger_types.update(PolicyRuleConditions.swagger_types)
+    swagger_types['device'] = 'DeviceAccessPolicyRuleCondition'
+    swagger_types['el_condition'] = 'AccessPolicyRuleCustomCondition'
+    swagger_types['user_type'] = 'UserTypeCondition'
 
     attribute_map = {
         'device': 'device',
@@ -57,19 +57,49 @@ class AccessPolicyRuleConditions(PolicyRuleConditions):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, device=None, el_condition=None, user_type=None, *args, **kwargs):  # noqa: E501
+    def set_attributes(self, device=None, el_condition=None, user_type=None, **kwargs):  # noqa: E501
         """AccessPolicyRuleConditions - a model defined in Swagger"""  # noqa: E501
+        config = {}
+        if kwargs is not None:
+            config = {to_snake_case(key): value for key, value in kwargs.items()}
+        super().set_attributes(**config)
         self._device = None
         self._el_condition = None
         self._user_type = None
         self.discriminator = None
         if device is not None:
-            self.device = device
+            if hasattr(models, self.swagger_types['device']):
+                nested_class = getattr(models, self.swagger_types['device'])
+                if isinstance(device, nested_class):
+                    self.device = device
+                elif isinstance(device, dict):
+                    self.device = nested_class.from_kwargs(**device)
+                else:
+                    self.device = device
+            else:
+                self.device = device
         if el_condition is not None:
-            self.el_condition = el_condition
+            if hasattr(models, self.swagger_types['el_condition']):
+                nested_class = getattr(models, self.swagger_types['el_condition'])
+                if isinstance(el_condition, nested_class):
+                    self.el_condition = el_condition
+                elif isinstance(el_condition, dict):
+                    self.el_condition = nested_class.from_kwargs(**el_condition)
+                else:
+                    self.el_condition = el_condition
+            else:
+                self.el_condition = el_condition
         if user_type is not None:
-            self.user_type = user_type
-        super().set_attributes(*args, **kwargs)
+            if hasattr(models, self.swagger_types['user_type']):
+                nested_class = getattr(models, self.swagger_types['user_type'])
+                if isinstance(user_type, nested_class):
+                    self.user_type = user_type
+                elif isinstance(user_type, dict):
+                    self.user_type = nested_class.from_kwargs(**user_type)
+                else:
+                    self.user_type = user_type
+            else:
+                self.user_type = user_type
 
     @property
     def device(self):

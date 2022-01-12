@@ -16,6 +16,7 @@ import re  # noqa: F401
 import six
 from okta.models.policy_rule_actions import PolicyRuleActions  # noqa: F401,E501
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class AccessPolicyRuleActions(PolicyRuleActions):
@@ -30,11 +31,10 @@ class AccessPolicyRuleActions(PolicyRuleActions):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'app_sign_on': 'AccessPolicyRuleApplicationSignOn'
-    }
+    swagger_types = {}
     if hasattr(PolicyRuleActions, "swagger_types"):
         swagger_types.update(PolicyRuleActions.swagger_types)
+    swagger_types['app_sign_on'] = 'AccessPolicyRuleApplicationSignOn'
 
     attribute_map = {
         'app_sign_on': 'appSignOn'
@@ -53,13 +53,25 @@ class AccessPolicyRuleActions(PolicyRuleActions):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, app_sign_on=None, *args, **kwargs):  # noqa: E501
+    def set_attributes(self, app_sign_on=None, **kwargs):  # noqa: E501
         """AccessPolicyRuleActions - a model defined in Swagger"""  # noqa: E501
+        config = {}
+        if kwargs is not None:
+            config = {to_snake_case(key): value for key, value in kwargs.items()}
+        super().set_attributes(**config)
         self._app_sign_on = None
         self.discriminator = None
         if app_sign_on is not None:
-            self.app_sign_on = app_sign_on
-        super().set_attributes(*args, **kwargs)
+            if hasattr(models, self.swagger_types['app_sign_on']):
+                nested_class = getattr(models, self.swagger_types['app_sign_on'])
+                if isinstance(app_sign_on, nested_class):
+                    self.app_sign_on = app_sign_on
+                elif isinstance(app_sign_on, dict):
+                    self.app_sign_on = nested_class.from_kwargs(**app_sign_on)
+                else:
+                    self.app_sign_on = app_sign_on
+            else:
+                self.app_sign_on = app_sign_on
 
     @property
     def app_sign_on(self):

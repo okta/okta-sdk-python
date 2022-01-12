@@ -16,6 +16,7 @@ import re  # noqa: F401
 import six
 from okta.models.access_policy_constraint import AccessPolicyConstraint  # noqa: F401,E501
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class KnowledgeConstraint(AccessPolicyConstraint):
@@ -30,8 +31,7 @@ class KnowledgeConstraint(AccessPolicyConstraint):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-    }
+    swagger_types = {}
     if hasattr(AccessPolicyConstraint, "swagger_types"):
         swagger_types.update(AccessPolicyConstraint.swagger_types)
 
@@ -51,10 +51,13 @@ class KnowledgeConstraint(AccessPolicyConstraint):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, *args, **kwargs):  # noqa: E501
+    def set_attributes(self, **kwargs):  # noqa: E501
         """KnowledgeConstraint - a model defined in Swagger"""  # noqa: E501
+        config = {}
+        if kwargs is not None:
+            config = {to_snake_case(key): value for key, value in kwargs.items()}
+        super().set_attributes(**config)
         self.discriminator = None
-        super().set_attributes(*args, **kwargs)
 
     def to_dict(self):
         """Returns the model properties as a dict"""

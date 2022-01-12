@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class PreRegistrationInlineHook(object):
@@ -29,9 +30,8 @@ class PreRegistrationInlineHook(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'inline_hook_id': 'str'
-    }
+    swagger_types = {}
+    swagger_types['inline_hook_id'] = 'str'
 
     attribute_map = {
         'inline_hook_id': 'inlineHookId'
@@ -48,12 +48,21 @@ class PreRegistrationInlineHook(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, inline_hook_id=None):  # noqa: E501
+    def set_attributes(self, inline_hook_id=None, **kwargs):  # noqa: E501
         """PreRegistrationInlineHook - a model defined in Swagger"""  # noqa: E501
         self._inline_hook_id = None
         self.discriminator = None
         if inline_hook_id is not None:
-            self.inline_hook_id = inline_hook_id
+            if hasattr(models, self.swagger_types['inline_hook_id']):
+                nested_class = getattr(models, self.swagger_types['inline_hook_id'])
+                if isinstance(inline_hook_id, nested_class):
+                    self.inline_hook_id = inline_hook_id
+                elif isinstance(inline_hook_id, dict):
+                    self.inline_hook_id = nested_class.from_kwargs(**inline_hook_id)
+                else:
+                    self.inline_hook_id = inline_hook_id
+            else:
+                self.inline_hook_id = inline_hook_id
 
     @property
     def inline_hook_id(self):

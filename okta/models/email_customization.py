@@ -16,6 +16,7 @@ import re  # noqa: F401
 import six
 from okta.models.email_content import EmailContent  # noqa: F401,E501
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class EmailCustomization(EmailContent):
@@ -30,16 +31,15 @@ class EmailCustomization(EmailContent):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'id': 'str',
-        'language': 'str',
-        'is_default': 'bool',
-        'created': 'datetime',
-        'last_updated': 'datetime',
-        'links': 'EmailDefaultContentLinks'
-    }
+    swagger_types = {}
     if hasattr(EmailContent, "swagger_types"):
         swagger_types.update(EmailContent.swagger_types)
+    swagger_types['id'] = 'str'
+    swagger_types['language'] = 'str'
+    swagger_types['is_default'] = 'bool'
+    swagger_types['created'] = 'datetime'
+    swagger_types['last_updated'] = 'datetime'
+    swagger_types['links'] = 'EmailDefaultContentLinks'
 
     attribute_map = {
         'id': 'id',
@@ -63,8 +63,12 @@ class EmailCustomization(EmailContent):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, id=None, language=None, is_default=None, created=None, last_updated=None, links=None, *args, **kwargs):  # noqa: E501
+    def set_attributes(self, id=None, language=None, is_default=None, created=None, last_updated=None, links=None, **kwargs):  # noqa: E501
         """EmailCustomization - a model defined in Swagger"""  # noqa: E501
+        config = {}
+        if kwargs is not None:
+            config = {to_snake_case(key): value for key, value in kwargs.items()}
+        super().set_attributes(**config)
         self._id = None
         self._language = None
         self._is_default = None
@@ -73,17 +77,61 @@ class EmailCustomization(EmailContent):
         self._links = None
         self.discriminator = None
         if id is not None:
-            self.id = id
+            if hasattr(models, self.swagger_types['id']):
+                nested_class = getattr(models, self.swagger_types['id'])
+                if isinstance(id, nested_class):
+                    self.id = id
+                elif isinstance(id, dict):
+                    self.id = nested_class.from_kwargs(**id)
+                else:
+                    self.id = id
+            else:
+                self.id = id
         self.language = language
         if is_default is not None:
-            self.is_default = is_default
+            if hasattr(models, self.swagger_types['is_default']):
+                nested_class = getattr(models, self.swagger_types['is_default'])
+                if isinstance(is_default, nested_class):
+                    self.is_default = is_default
+                elif isinstance(is_default, dict):
+                    self.is_default = nested_class.from_kwargs(**is_default)
+                else:
+                    self.is_default = is_default
+            else:
+                self.is_default = is_default
         if created is not None:
-            self.created = created
+            if hasattr(models, self.swagger_types['created']):
+                nested_class = getattr(models, self.swagger_types['created'])
+                if isinstance(created, nested_class):
+                    self.created = created
+                elif isinstance(created, dict):
+                    self.created = nested_class.from_kwargs(**created)
+                else:
+                    self.created = created
+            else:
+                self.created = created
         if last_updated is not None:
-            self.last_updated = last_updated
+            if hasattr(models, self.swagger_types['last_updated']):
+                nested_class = getattr(models, self.swagger_types['last_updated'])
+                if isinstance(last_updated, nested_class):
+                    self.last_updated = last_updated
+                elif isinstance(last_updated, dict):
+                    self.last_updated = nested_class.from_kwargs(**last_updated)
+                else:
+                    self.last_updated = last_updated
+            else:
+                self.last_updated = last_updated
         if links is not None:
-            self.links = links
-        super().set_attributes(*args, **kwargs)
+            if hasattr(models, self.swagger_types['links']):
+                nested_class = getattr(models, self.swagger_types['links'])
+                if isinstance(links, nested_class):
+                    self.links = links
+                elif isinstance(links, dict):
+                    self.links = nested_class.from_kwargs(**links)
+                else:
+                    self.links = links
+            else:
+                self.links = links
 
     @property
     def id(self):

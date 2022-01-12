@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class PasswordDictionary(object):
@@ -29,9 +30,8 @@ class PasswordDictionary(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'common': 'PasswordDictionaryCommon'
-    }
+    swagger_types = {}
+    swagger_types['common'] = 'PasswordDictionaryCommon'
 
     attribute_map = {
         'common': 'common'
@@ -48,12 +48,21 @@ class PasswordDictionary(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, common=None):  # noqa: E501
+    def set_attributes(self, common=None, **kwargs):  # noqa: E501
         """PasswordDictionary - a model defined in Swagger"""  # noqa: E501
         self._common = None
         self.discriminator = None
         if common is not None:
-            self.common = common
+            if hasattr(models, self.swagger_types['common']):
+                nested_class = getattr(models, self.swagger_types['common'])
+                if isinstance(common, nested_class):
+                    self.common = common
+                elif isinstance(common, dict):
+                    self.common = nested_class.from_kwargs(**common)
+                else:
+                    self.common = common
+            else:
+                self.common = common
 
     @property
     def common(self):

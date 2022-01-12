@@ -16,6 +16,7 @@ import re  # noqa: F401
 import six
 from okta.models.application import Application  # noqa: F401,E501
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class AutoLoginApplication(Application):
@@ -30,12 +31,11 @@ class AutoLoginApplication(Application):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'credentials': 'SchemeApplicationCredentials',
-        'settings': 'AutoLoginApplicationSettings'
-    }
+    swagger_types = {}
     if hasattr(Application, "swagger_types"):
         swagger_types.update(Application.swagger_types)
+    swagger_types['credentials'] = 'SchemeApplicationCredentials'
+    swagger_types['settings'] = 'AutoLoginApplicationSettings'
 
     attribute_map = {
         'credentials': 'credentials',
@@ -55,16 +55,37 @@ class AutoLoginApplication(Application):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, credentials=None, settings=None, *args, **kwargs):  # noqa: E501
+    def set_attributes(self, credentials=None, settings=None, **kwargs):  # noqa: E501
         """AutoLoginApplication - a model defined in Swagger"""  # noqa: E501
+        config = {}
+        if kwargs is not None:
+            config = {to_snake_case(key): value for key, value in kwargs.items()}
+        super().set_attributes(**config)
         self._credentials = None
         self._settings = None
         self.discriminator = None
         if credentials is not None:
-            self.credentials = credentials
+            if hasattr(models, self.swagger_types['credentials']):
+                nested_class = getattr(models, self.swagger_types['credentials'])
+                if isinstance(credentials, nested_class):
+                    self.credentials = credentials
+                elif isinstance(credentials, dict):
+                    self.credentials = nested_class.from_kwargs(**credentials)
+                else:
+                    self.credentials = credentials
+            else:
+                self.credentials = credentials
         if settings is not None:
-            self.settings = settings
-        super().set_attributes(*args, **kwargs)
+            if hasattr(models, self.swagger_types['settings']):
+                nested_class = getattr(models, self.swagger_types['settings'])
+                if isinstance(settings, nested_class):
+                    self.settings = settings
+                elif isinstance(settings, dict):
+                    self.settings = nested_class.from_kwargs(**settings)
+                else:
+                    self.settings = settings
+            else:
+                self.settings = settings
 
     @property
     def credentials(self):

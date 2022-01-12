@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class VerifyFactorRequest(object):
@@ -29,16 +30,15 @@ class VerifyFactorRequest(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'activation_token': 'str',
-        'answer': 'str',
-        'attestation': 'str',
-        'client_data': 'str',
-        'next_pass_code': 'str',
-        'pass_code': 'str',
-        'registration_data': 'str',
-        'state_token': 'str'
-    }
+    swagger_types = {}
+    swagger_types['activation_token'] = 'str'
+    swagger_types['answer'] = 'str'
+    swagger_types['attestation'] = 'str'
+    swagger_types['client_data'] = 'str'
+    swagger_types['next_pass_code'] = 'str'
+    swagger_types['pass_code'] = 'str'
+    swagger_types['registration_data'] = 'str'
+    swagger_types['state_token'] = 'str'
 
     attribute_map = {
         'activation_token': 'activationToken',
@@ -62,7 +62,7 @@ class VerifyFactorRequest(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, activation_token=None, answer=None, attestation=None, client_data=None, next_pass_code=None, pass_code=None, registration_data=None, state_token=None):  # noqa: E501
+    def set_attributes(self, activation_token=None, answer=None, attestation=None, client_data=None, next_pass_code=None, pass_code=None, registration_data=None, state_token=None, **kwargs):  # noqa: E501
         """VerifyFactorRequest - a model defined in Swagger"""  # noqa: E501
         self._activation_token = None
         self._answer = None
@@ -74,21 +74,93 @@ class VerifyFactorRequest(object):
         self._state_token = None
         self.discriminator = None
         if activation_token is not None:
-            self.activation_token = activation_token
+            if hasattr(models, self.swagger_types['activation_token']):
+                nested_class = getattr(models, self.swagger_types['activation_token'])
+                if isinstance(activation_token, nested_class):
+                    self.activation_token = activation_token
+                elif isinstance(activation_token, dict):
+                    self.activation_token = nested_class.from_kwargs(**activation_token)
+                else:
+                    self.activation_token = activation_token
+            else:
+                self.activation_token = activation_token
         if answer is not None:
-            self.answer = answer
+            if hasattr(models, self.swagger_types['answer']):
+                nested_class = getattr(models, self.swagger_types['answer'])
+                if isinstance(answer, nested_class):
+                    self.answer = answer
+                elif isinstance(answer, dict):
+                    self.answer = nested_class.from_kwargs(**answer)
+                else:
+                    self.answer = answer
+            else:
+                self.answer = answer
         if attestation is not None:
-            self.attestation = attestation
+            if hasattr(models, self.swagger_types['attestation']):
+                nested_class = getattr(models, self.swagger_types['attestation'])
+                if isinstance(attestation, nested_class):
+                    self.attestation = attestation
+                elif isinstance(attestation, dict):
+                    self.attestation = nested_class.from_kwargs(**attestation)
+                else:
+                    self.attestation = attestation
+            else:
+                self.attestation = attestation
         if client_data is not None:
-            self.client_data = client_data
+            if hasattr(models, self.swagger_types['client_data']):
+                nested_class = getattr(models, self.swagger_types['client_data'])
+                if isinstance(client_data, nested_class):
+                    self.client_data = client_data
+                elif isinstance(client_data, dict):
+                    self.client_data = nested_class.from_kwargs(**client_data)
+                else:
+                    self.client_data = client_data
+            else:
+                self.client_data = client_data
         if next_pass_code is not None:
-            self.next_pass_code = next_pass_code
+            if hasattr(models, self.swagger_types['next_pass_code']):
+                nested_class = getattr(models, self.swagger_types['next_pass_code'])
+                if isinstance(next_pass_code, nested_class):
+                    self.next_pass_code = next_pass_code
+                elif isinstance(next_pass_code, dict):
+                    self.next_pass_code = nested_class.from_kwargs(**next_pass_code)
+                else:
+                    self.next_pass_code = next_pass_code
+            else:
+                self.next_pass_code = next_pass_code
         if pass_code is not None:
-            self.pass_code = pass_code
+            if hasattr(models, self.swagger_types['pass_code']):
+                nested_class = getattr(models, self.swagger_types['pass_code'])
+                if isinstance(pass_code, nested_class):
+                    self.pass_code = pass_code
+                elif isinstance(pass_code, dict):
+                    self.pass_code = nested_class.from_kwargs(**pass_code)
+                else:
+                    self.pass_code = pass_code
+            else:
+                self.pass_code = pass_code
         if registration_data is not None:
-            self.registration_data = registration_data
+            if hasattr(models, self.swagger_types['registration_data']):
+                nested_class = getattr(models, self.swagger_types['registration_data'])
+                if isinstance(registration_data, nested_class):
+                    self.registration_data = registration_data
+                elif isinstance(registration_data, dict):
+                    self.registration_data = nested_class.from_kwargs(**registration_data)
+                else:
+                    self.registration_data = registration_data
+            else:
+                self.registration_data = registration_data
         if state_token is not None:
-            self.state_token = state_token
+            if hasattr(models, self.swagger_types['state_token']):
+                nested_class = getattr(models, self.swagger_types['state_token'])
+                if isinstance(state_token, nested_class):
+                    self.state_token = state_token
+                elif isinstance(state_token, dict):
+                    self.state_token = nested_class.from_kwargs(**state_token)
+                else:
+                    self.state_token = state_token
+            else:
+                self.state_token = state_token
 
     @property
     def activation_token(self):

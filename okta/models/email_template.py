@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class EmailTemplate(object):
@@ -29,10 +30,9 @@ class EmailTemplate(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'name': 'str',
-        'links': 'EmailTemplateLinks'
-    }
+    swagger_types = {}
+    swagger_types['name'] = 'str'
+    swagger_types['links'] = 'EmailTemplateLinks'
 
     attribute_map = {
         'name': 'name',
@@ -50,15 +50,33 @@ class EmailTemplate(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, name=None, links=None):  # noqa: E501
+    def set_attributes(self, name=None, links=None, **kwargs):  # noqa: E501
         """EmailTemplate - a model defined in Swagger"""  # noqa: E501
         self._name = None
         self._links = None
         self.discriminator = None
         if name is not None:
-            self.name = name
+            if hasattr(models, self.swagger_types['name']):
+                nested_class = getattr(models, self.swagger_types['name'])
+                if isinstance(name, nested_class):
+                    self.name = name
+                elif isinstance(name, dict):
+                    self.name = nested_class.from_kwargs(**name)
+                else:
+                    self.name = name
+            else:
+                self.name = name
         if links is not None:
-            self.links = links
+            if hasattr(models, self.swagger_types['links']):
+                nested_class = getattr(models, self.swagger_types['links'])
+                if isinstance(links, nested_class):
+                    self.links = links
+                elif isinstance(links, dict):
+                    self.links = nested_class.from_kwargs(**links)
+                else:
+                    self.links = links
+            else:
+                self.links = links
 
     @property
     def name(self):

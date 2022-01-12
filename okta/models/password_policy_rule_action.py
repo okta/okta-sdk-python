@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class PasswordPolicyRuleAction(object):
@@ -29,9 +30,8 @@ class PasswordPolicyRuleAction(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'access': 'PolicyAccess'
-    }
+    swagger_types = {}
+    swagger_types['access'] = 'PolicyAccess'
 
     attribute_map = {
         'access': 'access'
@@ -48,12 +48,21 @@ class PasswordPolicyRuleAction(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, access=None):  # noqa: E501
+    def set_attributes(self, access=None, **kwargs):  # noqa: E501
         """PasswordPolicyRuleAction - a model defined in Swagger"""  # noqa: E501
         self._access = None
         self.discriminator = None
         if access is not None:
-            self.access = access
+            if hasattr(models, self.swagger_types['access']):
+                nested_class = getattr(models, self.swagger_types['access'])
+                if isinstance(access, nested_class):
+                    self.access = access
+                elif isinstance(access, dict):
+                    self.access = nested_class.from_kwargs(**access)
+                else:
+                    self.access = access
+            else:
+                self.access = access
 
     @property
     def access(self):

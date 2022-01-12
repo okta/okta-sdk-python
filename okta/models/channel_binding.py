@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class ChannelBinding(object):
@@ -29,10 +30,9 @@ class ChannelBinding(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'required': 'RequiredEnum',
-        'style': 'str'
-    }
+    swagger_types = {}
+    swagger_types['required'] = 'RequiredEnum'
+    swagger_types['style'] = 'str'
 
     attribute_map = {
         'required': 'required',
@@ -50,15 +50,33 @@ class ChannelBinding(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, required=None, style=None):  # noqa: E501
+    def set_attributes(self, required=None, style=None, **kwargs):  # noqa: E501
         """ChannelBinding - a model defined in Swagger"""  # noqa: E501
         self._required = None
         self._style = None
         self.discriminator = None
         if required is not None:
-            self.required = required
+            if hasattr(models, self.swagger_types['required']):
+                nested_class = getattr(models, self.swagger_types['required'])
+                if isinstance(required, nested_class):
+                    self.required = required
+                elif isinstance(required, dict):
+                    self.required = nested_class.from_kwargs(**required)
+                else:
+                    self.required = required
+            else:
+                self.required = required
         if style is not None:
-            self.style = style
+            if hasattr(models, self.swagger_types['style']):
+                nested_class = getattr(models, self.swagger_types['style'])
+                if isinstance(style, nested_class):
+                    self.style = style
+                elif isinstance(style, dict):
+                    self.style = nested_class.from_kwargs(**style)
+                else:
+                    self.style = style
+            else:
+                self.style = style
 
     @property
     def required(self):

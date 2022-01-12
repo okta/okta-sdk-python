@@ -16,6 +16,7 @@ import re  # noqa: F401
 import six
 from okta.models.application_settings_application import ApplicationSettingsApplication  # noqa: F401,E501
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class SwaApplicationSettingsApplication(ApplicationSettingsApplication):
@@ -30,17 +31,16 @@ class SwaApplicationSettingsApplication(ApplicationSettingsApplication):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'button_field': 'str',
-        'checkbox': 'str',
-        'login_url_regex': 'str',
-        'password_field': 'str',
-        'redirect_url': 'str',
-        'url': 'str',
-        'username_field': 'str'
-    }
+    swagger_types = {}
     if hasattr(ApplicationSettingsApplication, "swagger_types"):
         swagger_types.update(ApplicationSettingsApplication.swagger_types)
+    swagger_types['button_field'] = 'str'
+    swagger_types['checkbox'] = 'str'
+    swagger_types['login_url_regex'] = 'str'
+    swagger_types['password_field'] = 'str'
+    swagger_types['redirect_url'] = 'str'
+    swagger_types['url'] = 'str'
+    swagger_types['username_field'] = 'str'
 
     attribute_map = {
         'button_field': 'buttonField',
@@ -65,8 +65,12 @@ class SwaApplicationSettingsApplication(ApplicationSettingsApplication):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, button_field=None, checkbox=None, login_url_regex=None, password_field=None, redirect_url=None, url=None, username_field=None, *args, **kwargs):  # noqa: E501
+    def set_attributes(self, button_field=None, checkbox=None, login_url_regex=None, password_field=None, redirect_url=None, url=None, username_field=None, **kwargs):  # noqa: E501
         """SwaApplicationSettingsApplication - a model defined in Swagger"""  # noqa: E501
+        config = {}
+        if kwargs is not None:
+            config = {to_snake_case(key): value for key, value in kwargs.items()}
+        super().set_attributes(**config)
         self._button_field = None
         self._checkbox = None
         self._login_url_regex = None
@@ -76,20 +80,82 @@ class SwaApplicationSettingsApplication(ApplicationSettingsApplication):
         self._username_field = None
         self.discriminator = None
         if button_field is not None:
-            self.button_field = button_field
+            if hasattr(models, self.swagger_types['button_field']):
+                nested_class = getattr(models, self.swagger_types['button_field'])
+                if isinstance(button_field, nested_class):
+                    self.button_field = button_field
+                elif isinstance(button_field, dict):
+                    self.button_field = nested_class.from_kwargs(**button_field)
+                else:
+                    self.button_field = button_field
+            else:
+                self.button_field = button_field
         if checkbox is not None:
-            self.checkbox = checkbox
+            if hasattr(models, self.swagger_types['checkbox']):
+                nested_class = getattr(models, self.swagger_types['checkbox'])
+                if isinstance(checkbox, nested_class):
+                    self.checkbox = checkbox
+                elif isinstance(checkbox, dict):
+                    self.checkbox = nested_class.from_kwargs(**checkbox)
+                else:
+                    self.checkbox = checkbox
+            else:
+                self.checkbox = checkbox
         if login_url_regex is not None:
-            self.login_url_regex = login_url_regex
+            if hasattr(models, self.swagger_types['login_url_regex']):
+                nested_class = getattr(models, self.swagger_types['login_url_regex'])
+                if isinstance(login_url_regex, nested_class):
+                    self.login_url_regex = login_url_regex
+                elif isinstance(login_url_regex, dict):
+                    self.login_url_regex = nested_class.from_kwargs(**login_url_regex)
+                else:
+                    self.login_url_regex = login_url_regex
+            else:
+                self.login_url_regex = login_url_regex
         if password_field is not None:
-            self.password_field = password_field
+            if hasattr(models, self.swagger_types['password_field']):
+                nested_class = getattr(models, self.swagger_types['password_field'])
+                if isinstance(password_field, nested_class):
+                    self.password_field = password_field
+                elif isinstance(password_field, dict):
+                    self.password_field = nested_class.from_kwargs(**password_field)
+                else:
+                    self.password_field = password_field
+            else:
+                self.password_field = password_field
         if redirect_url is not None:
-            self.redirect_url = redirect_url
+            if hasattr(models, self.swagger_types['redirect_url']):
+                nested_class = getattr(models, self.swagger_types['redirect_url'])
+                if isinstance(redirect_url, nested_class):
+                    self.redirect_url = redirect_url
+                elif isinstance(redirect_url, dict):
+                    self.redirect_url = nested_class.from_kwargs(**redirect_url)
+                else:
+                    self.redirect_url = redirect_url
+            else:
+                self.redirect_url = redirect_url
         if url is not None:
-            self.url = url
+            if hasattr(models, self.swagger_types['url']):
+                nested_class = getattr(models, self.swagger_types['url'])
+                if isinstance(url, nested_class):
+                    self.url = url
+                elif isinstance(url, dict):
+                    self.url = nested_class.from_kwargs(**url)
+                else:
+                    self.url = url
+            else:
+                self.url = url
         if username_field is not None:
-            self.username_field = username_field
-        super().set_attributes(*args, **kwargs)
+            if hasattr(models, self.swagger_types['username_field']):
+                nested_class = getattr(models, self.swagger_types['username_field'])
+                if isinstance(username_field, nested_class):
+                    self.username_field = username_field
+                elif isinstance(username_field, dict):
+                    self.username_field = nested_class.from_kwargs(**username_field)
+                else:
+                    self.username_field = username_field
+            else:
+                self.username_field = username_field
 
     @property
     def button_field(self):

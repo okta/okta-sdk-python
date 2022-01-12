@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class AuthenticatorSettings(object):
@@ -29,14 +30,13 @@ class AuthenticatorSettings(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'allowed_for': 'AllowedForEnum',
-        'app_instance_id': 'str',
-        'channel_binding': 'ChannelBinding',
-        'compliance': 'Compliance',
-        'token_lifetime_in_minutes': 'int',
-        'user_verification': 'UserVerificationEnum'
-    }
+    swagger_types = {}
+    swagger_types['allowed_for'] = 'AllowedForEnum'
+    swagger_types['app_instance_id'] = 'str'
+    swagger_types['channel_binding'] = 'ChannelBinding'
+    swagger_types['compliance'] = 'Compliance'
+    swagger_types['token_lifetime_in_minutes'] = 'int'
+    swagger_types['user_verification'] = 'UserVerificationEnum'
 
     attribute_map = {
         'allowed_for': 'allowedFor',
@@ -58,7 +58,7 @@ class AuthenticatorSettings(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, allowed_for=None, app_instance_id=None, channel_binding=None, compliance=None, token_lifetime_in_minutes=None, user_verification=None):  # noqa: E501
+    def set_attributes(self, allowed_for=None, app_instance_id=None, channel_binding=None, compliance=None, token_lifetime_in_minutes=None, user_verification=None, **kwargs):  # noqa: E501
         """AuthenticatorSettings - a model defined in Swagger"""  # noqa: E501
         self._allowed_for = None
         self._app_instance_id = None
@@ -68,17 +68,71 @@ class AuthenticatorSettings(object):
         self._user_verification = None
         self.discriminator = None
         if allowed_for is not None:
-            self.allowed_for = allowed_for
+            if hasattr(models, self.swagger_types['allowed_for']):
+                nested_class = getattr(models, self.swagger_types['allowed_for'])
+                if isinstance(allowed_for, nested_class):
+                    self.allowed_for = allowed_for
+                elif isinstance(allowed_for, dict):
+                    self.allowed_for = nested_class.from_kwargs(**allowed_for)
+                else:
+                    self.allowed_for = allowed_for
+            else:
+                self.allowed_for = allowed_for
         if app_instance_id is not None:
-            self.app_instance_id = app_instance_id
+            if hasattr(models, self.swagger_types['app_instance_id']):
+                nested_class = getattr(models, self.swagger_types['app_instance_id'])
+                if isinstance(app_instance_id, nested_class):
+                    self.app_instance_id = app_instance_id
+                elif isinstance(app_instance_id, dict):
+                    self.app_instance_id = nested_class.from_kwargs(**app_instance_id)
+                else:
+                    self.app_instance_id = app_instance_id
+            else:
+                self.app_instance_id = app_instance_id
         if channel_binding is not None:
-            self.channel_binding = channel_binding
+            if hasattr(models, self.swagger_types['channel_binding']):
+                nested_class = getattr(models, self.swagger_types['channel_binding'])
+                if isinstance(channel_binding, nested_class):
+                    self.channel_binding = channel_binding
+                elif isinstance(channel_binding, dict):
+                    self.channel_binding = nested_class.from_kwargs(**channel_binding)
+                else:
+                    self.channel_binding = channel_binding
+            else:
+                self.channel_binding = channel_binding
         if compliance is not None:
-            self.compliance = compliance
+            if hasattr(models, self.swagger_types['compliance']):
+                nested_class = getattr(models, self.swagger_types['compliance'])
+                if isinstance(compliance, nested_class):
+                    self.compliance = compliance
+                elif isinstance(compliance, dict):
+                    self.compliance = nested_class.from_kwargs(**compliance)
+                else:
+                    self.compliance = compliance
+            else:
+                self.compliance = compliance
         if token_lifetime_in_minutes is not None:
-            self.token_lifetime_in_minutes = token_lifetime_in_minutes
+            if hasattr(models, self.swagger_types['token_lifetime_in_minutes']):
+                nested_class = getattr(models, self.swagger_types['token_lifetime_in_minutes'])
+                if isinstance(token_lifetime_in_minutes, nested_class):
+                    self.token_lifetime_in_minutes = token_lifetime_in_minutes
+                elif isinstance(token_lifetime_in_minutes, dict):
+                    self.token_lifetime_in_minutes = nested_class.from_kwargs(**token_lifetime_in_minutes)
+                else:
+                    self.token_lifetime_in_minutes = token_lifetime_in_minutes
+            else:
+                self.token_lifetime_in_minutes = token_lifetime_in_minutes
         if user_verification is not None:
-            self.user_verification = user_verification
+            if hasattr(models, self.swagger_types['user_verification']):
+                nested_class = getattr(models, self.swagger_types['user_verification'])
+                if isinstance(user_verification, nested_class):
+                    self.user_verification = user_verification
+                elif isinstance(user_verification, dict):
+                    self.user_verification = nested_class.from_kwargs(**user_verification)
+                else:
+                    self.user_verification = user_verification
+            else:
+                self.user_verification = user_verification
 
     @property
     def allowed_for(self):

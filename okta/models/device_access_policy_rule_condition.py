@@ -16,6 +16,7 @@ import re  # noqa: F401
 import six
 from okta.models.device_policy_rule_condition import DevicePolicyRuleCondition  # noqa: F401,E501
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class DeviceAccessPolicyRuleCondition(DevicePolicyRuleCondition):
@@ -30,12 +31,11 @@ class DeviceAccessPolicyRuleCondition(DevicePolicyRuleCondition):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'managed': 'bool',
-        'registered': 'bool'
-    }
+    swagger_types = {}
     if hasattr(DevicePolicyRuleCondition, "swagger_types"):
         swagger_types.update(DevicePolicyRuleCondition.swagger_types)
+    swagger_types['managed'] = 'bool'
+    swagger_types['registered'] = 'bool'
 
     attribute_map = {
         'managed': 'managed',
@@ -55,16 +55,37 @@ class DeviceAccessPolicyRuleCondition(DevicePolicyRuleCondition):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, managed=None, registered=None, *args, **kwargs):  # noqa: E501
+    def set_attributes(self, managed=None, registered=None, **kwargs):  # noqa: E501
         """DeviceAccessPolicyRuleCondition - a model defined in Swagger"""  # noqa: E501
+        config = {}
+        if kwargs is not None:
+            config = {to_snake_case(key): value for key, value in kwargs.items()}
+        super().set_attributes(**config)
         self._managed = None
         self._registered = None
         self.discriminator = None
         if managed is not None:
-            self.managed = managed
+            if hasattr(models, self.swagger_types['managed']):
+                nested_class = getattr(models, self.swagger_types['managed'])
+                if isinstance(managed, nested_class):
+                    self.managed = managed
+                elif isinstance(managed, dict):
+                    self.managed = nested_class.from_kwargs(**managed)
+                else:
+                    self.managed = managed
+            else:
+                self.managed = managed
         if registered is not None:
-            self.registered = registered
-        super().set_attributes(*args, **kwargs)
+            if hasattr(models, self.swagger_types['registered']):
+                nested_class = getattr(models, self.swagger_types['registered'])
+                if isinstance(registered, nested_class):
+                    self.registered = registered
+                elif isinstance(registered, dict):
+                    self.registered = nested_class.from_kwargs(**registered)
+                else:
+                    self.registered = registered
+            else:
+                self.registered = registered
 
     @property
     def managed(self):

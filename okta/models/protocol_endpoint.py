@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class ProtocolEndpoint(object):
@@ -29,12 +30,11 @@ class ProtocolEndpoint(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'binding': 'ProtocolEndpointBinding',
-        'destination': 'str',
-        'type': 'ProtocolEndpointType',
-        'url': 'str'
-    }
+    swagger_types = {}
+    swagger_types['binding'] = 'ProtocolEndpointBinding'
+    swagger_types['destination'] = 'str'
+    swagger_types['type'] = 'ProtocolEndpointType'
+    swagger_types['url'] = 'str'
 
     attribute_map = {
         'binding': 'binding',
@@ -54,7 +54,7 @@ class ProtocolEndpoint(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, binding=None, destination=None, type=None, url=None):  # noqa: E501
+    def set_attributes(self, binding=None, destination=None, type=None, url=None, **kwargs):  # noqa: E501
         """ProtocolEndpoint - a model defined in Swagger"""  # noqa: E501
         self._binding = None
         self._destination = None
@@ -62,13 +62,49 @@ class ProtocolEndpoint(object):
         self._url = None
         self.discriminator = None
         if binding is not None:
-            self.binding = binding
+            if hasattr(models, self.swagger_types['binding']):
+                nested_class = getattr(models, self.swagger_types['binding'])
+                if isinstance(binding, nested_class):
+                    self.binding = binding
+                elif isinstance(binding, dict):
+                    self.binding = nested_class.from_kwargs(**binding)
+                else:
+                    self.binding = binding
+            else:
+                self.binding = binding
         if destination is not None:
-            self.destination = destination
+            if hasattr(models, self.swagger_types['destination']):
+                nested_class = getattr(models, self.swagger_types['destination'])
+                if isinstance(destination, nested_class):
+                    self.destination = destination
+                elif isinstance(destination, dict):
+                    self.destination = nested_class.from_kwargs(**destination)
+                else:
+                    self.destination = destination
+            else:
+                self.destination = destination
         if type is not None:
-            self.type = type
+            if hasattr(models, self.swagger_types['type']):
+                nested_class = getattr(models, self.swagger_types['type'])
+                if isinstance(type, nested_class):
+                    self.type = type
+                elif isinstance(type, dict):
+                    self.type = nested_class.from_kwargs(**type)
+                else:
+                    self.type = type
+            else:
+                self.type = type
         if url is not None:
-            self.url = url
+            if hasattr(models, self.swagger_types['url']):
+                nested_class = getattr(models, self.swagger_types['url'])
+                if isinstance(url, nested_class):
+                    self.url = url
+                elif isinstance(url, dict):
+                    self.url = nested_class.from_kwargs(**url)
+                else:
+                    self.url = url
+            else:
+                self.url = url
 
     @property
     def binding(self):

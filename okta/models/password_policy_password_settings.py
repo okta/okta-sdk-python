@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class PasswordPolicyPasswordSettings(object):
@@ -29,11 +30,10 @@ class PasswordPolicyPasswordSettings(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'age': 'PasswordPolicyPasswordSettingsAge',
-        'complexity': 'PasswordPolicyPasswordSettingsComplexity',
-        'lockout': 'PasswordPolicyPasswordSettingsLockout'
-    }
+    swagger_types = {}
+    swagger_types['age'] = 'PasswordPolicyPasswordSettingsAge'
+    swagger_types['complexity'] = 'PasswordPolicyPasswordSettingsComplexity'
+    swagger_types['lockout'] = 'PasswordPolicyPasswordSettingsLockout'
 
     attribute_map = {
         'age': 'age',
@@ -52,18 +52,45 @@ class PasswordPolicyPasswordSettings(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, age=None, complexity=None, lockout=None):  # noqa: E501
+    def set_attributes(self, age=None, complexity=None, lockout=None, **kwargs):  # noqa: E501
         """PasswordPolicyPasswordSettings - a model defined in Swagger"""  # noqa: E501
         self._age = None
         self._complexity = None
         self._lockout = None
         self.discriminator = None
         if age is not None:
-            self.age = age
+            if hasattr(models, self.swagger_types['age']):
+                nested_class = getattr(models, self.swagger_types['age'])
+                if isinstance(age, nested_class):
+                    self.age = age
+                elif isinstance(age, dict):
+                    self.age = nested_class.from_kwargs(**age)
+                else:
+                    self.age = age
+            else:
+                self.age = age
         if complexity is not None:
-            self.complexity = complexity
+            if hasattr(models, self.swagger_types['complexity']):
+                nested_class = getattr(models, self.swagger_types['complexity'])
+                if isinstance(complexity, nested_class):
+                    self.complexity = complexity
+                elif isinstance(complexity, dict):
+                    self.complexity = nested_class.from_kwargs(**complexity)
+                else:
+                    self.complexity = complexity
+            else:
+                self.complexity = complexity
         if lockout is not None:
-            self.lockout = lockout
+            if hasattr(models, self.swagger_types['lockout']):
+                nested_class = getattr(models, self.swagger_types['lockout'])
+                if isinstance(lockout, nested_class):
+                    self.lockout = lockout
+                elif isinstance(lockout, dict):
+                    self.lockout = nested_class.from_kwargs(**lockout)
+                else:
+                    self.lockout = lockout
+            else:
+                self.lockout = lockout
 
     @property
     def age(self):

@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class IdentityProviderCredentials(object):
@@ -29,11 +30,10 @@ class IdentityProviderCredentials(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'client': 'IdentityProviderCredentialsClient',
-        'signing': 'IdentityProviderCredentialsSigning',
-        'trust': 'IdentityProviderCredentialsTrust'
-    }
+    swagger_types = {}
+    swagger_types['client'] = 'IdentityProviderCredentialsClient'
+    swagger_types['signing'] = 'IdentityProviderCredentialsSigning'
+    swagger_types['trust'] = 'IdentityProviderCredentialsTrust'
 
     attribute_map = {
         'client': 'client',
@@ -52,18 +52,45 @@ class IdentityProviderCredentials(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, client=None, signing=None, trust=None):  # noqa: E501
+    def set_attributes(self, client=None, signing=None, trust=None, **kwargs):  # noqa: E501
         """IdentityProviderCredentials - a model defined in Swagger"""  # noqa: E501
         self._client = None
         self._signing = None
         self._trust = None
         self.discriminator = None
         if client is not None:
-            self.client = client
+            if hasattr(models, self.swagger_types['client']):
+                nested_class = getattr(models, self.swagger_types['client'])
+                if isinstance(client, nested_class):
+                    self.client = client
+                elif isinstance(client, dict):
+                    self.client = nested_class.from_kwargs(**client)
+                else:
+                    self.client = client
+            else:
+                self.client = client
         if signing is not None:
-            self.signing = signing
+            if hasattr(models, self.swagger_types['signing']):
+                nested_class = getattr(models, self.swagger_types['signing'])
+                if isinstance(signing, nested_class):
+                    self.signing = signing
+                elif isinstance(signing, dict):
+                    self.signing = nested_class.from_kwargs(**signing)
+                else:
+                    self.signing = signing
+            else:
+                self.signing = signing
         if trust is not None:
-            self.trust = trust
+            if hasattr(models, self.swagger_types['trust']):
+                nested_class = getattr(models, self.swagger_types['trust'])
+                if isinstance(trust, nested_class):
+                    self.trust = trust
+                elif isinstance(trust, dict):
+                    self.trust = nested_class.from_kwargs(**trust)
+                else:
+                    self.trust = trust
+            else:
+                self.trust = trust
 
     @property
     def client(self):

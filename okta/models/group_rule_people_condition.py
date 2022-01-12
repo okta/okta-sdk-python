@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class GroupRulePeopleCondition(object):
@@ -29,10 +30,9 @@ class GroupRulePeopleCondition(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'groups': 'GroupRuleGroupCondition',
-        'users': 'GroupRuleUserCondition'
-    }
+    swagger_types = {}
+    swagger_types['groups'] = 'GroupRuleGroupCondition'
+    swagger_types['users'] = 'GroupRuleUserCondition'
 
     attribute_map = {
         'groups': 'groups',
@@ -50,15 +50,33 @@ class GroupRulePeopleCondition(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, groups=None, users=None):  # noqa: E501
+    def set_attributes(self, groups=None, users=None, **kwargs):  # noqa: E501
         """GroupRulePeopleCondition - a model defined in Swagger"""  # noqa: E501
         self._groups = None
         self._users = None
         self.discriminator = None
         if groups is not None:
-            self.groups = groups
+            if hasattr(models, self.swagger_types['groups']):
+                nested_class = getattr(models, self.swagger_types['groups'])
+                if isinstance(groups, nested_class):
+                    self.groups = groups
+                elif isinstance(groups, dict):
+                    self.groups = nested_class.from_kwargs(**groups)
+                else:
+                    self.groups = groups
+            else:
+                self.groups = groups
         if users is not None:
-            self.users = users
+            if hasattr(models, self.swagger_types['users']):
+                nested_class = getattr(models, self.swagger_types['users'])
+                if isinstance(users, nested_class):
+                    self.users = users
+                elif isinstance(users, dict):
+                    self.users = nested_class.from_kwargs(**users)
+                else:
+                    self.users = users
+            else:
+                self.users = users
 
     @property
     def groups(self):

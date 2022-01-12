@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class LogEvent(object):
@@ -29,24 +30,23 @@ class LogEvent(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'actor': 'LogActor',
-        'authentication_context': 'LogAuthenticationContext',
-        'client': 'LogClient',
-        'debug_context': 'LogDebugContext',
-        'display_message': 'str',
-        'event_type': 'str',
-        'legacy_event_type': 'str',
-        'outcome': 'LogOutcome',
-        'published': 'datetime',
-        'request': 'LogRequest',
-        'security_context': 'LogSecurityContext',
-        'severity': 'LogSeverity',
-        'target': 'list[LogTarget]',
-        'transaction': 'LogTransaction',
-        'uuid': 'str',
-        'version': 'str'
-    }
+    swagger_types = {}
+    swagger_types['actor'] = 'LogActor'
+    swagger_types['authentication_context'] = 'LogAuthenticationContext'
+    swagger_types['client'] = 'LogClient'
+    swagger_types['debug_context'] = 'LogDebugContext'
+    swagger_types['display_message'] = 'str'
+    swagger_types['event_type'] = 'str'
+    swagger_types['legacy_event_type'] = 'str'
+    swagger_types['outcome'] = 'LogOutcome'
+    swagger_types['published'] = 'datetime'
+    swagger_types['request'] = 'LogRequest'
+    swagger_types['security_context'] = 'LogSecurityContext'
+    swagger_types['severity'] = 'LogSeverity'
+    swagger_types['target'] = 'list[LogTarget]'
+    swagger_types['transaction'] = 'LogTransaction'
+    swagger_types['uuid'] = 'str'
+    swagger_types['version'] = 'str'
 
     attribute_map = {
         'actor': 'actor',
@@ -78,7 +78,7 @@ class LogEvent(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, actor=None, authentication_context=None, client=None, debug_context=None, display_message=None, event_type=None, legacy_event_type=None, outcome=None, published=None, request=None, security_context=None, severity=None, target=None, transaction=None, uuid=None, version=None):  # noqa: E501
+    def set_attributes(self, actor=None, authentication_context=None, client=None, debug_context=None, display_message=None, event_type=None, legacy_event_type=None, outcome=None, published=None, request=None, security_context=None, severity=None, target=None, transaction=None, uuid=None, version=None, **kwargs):  # noqa: E501
         """LogEvent - a model defined in Swagger"""  # noqa: E501
         self._actor = None
         self._authentication_context = None
@@ -98,37 +98,181 @@ class LogEvent(object):
         self._version = None
         self.discriminator = None
         if actor is not None:
-            self.actor = actor
+            if hasattr(models, self.swagger_types['actor']):
+                nested_class = getattr(models, self.swagger_types['actor'])
+                if isinstance(actor, nested_class):
+                    self.actor = actor
+                elif isinstance(actor, dict):
+                    self.actor = nested_class.from_kwargs(**actor)
+                else:
+                    self.actor = actor
+            else:
+                self.actor = actor
         if authentication_context is not None:
-            self.authentication_context = authentication_context
+            if hasattr(models, self.swagger_types['authentication_context']):
+                nested_class = getattr(models, self.swagger_types['authentication_context'])
+                if isinstance(authentication_context, nested_class):
+                    self.authentication_context = authentication_context
+                elif isinstance(authentication_context, dict):
+                    self.authentication_context = nested_class.from_kwargs(**authentication_context)
+                else:
+                    self.authentication_context = authentication_context
+            else:
+                self.authentication_context = authentication_context
         if client is not None:
-            self.client = client
+            if hasattr(models, self.swagger_types['client']):
+                nested_class = getattr(models, self.swagger_types['client'])
+                if isinstance(client, nested_class):
+                    self.client = client
+                elif isinstance(client, dict):
+                    self.client = nested_class.from_kwargs(**client)
+                else:
+                    self.client = client
+            else:
+                self.client = client
         if debug_context is not None:
-            self.debug_context = debug_context
+            if hasattr(models, self.swagger_types['debug_context']):
+                nested_class = getattr(models, self.swagger_types['debug_context'])
+                if isinstance(debug_context, nested_class):
+                    self.debug_context = debug_context
+                elif isinstance(debug_context, dict):
+                    self.debug_context = nested_class.from_kwargs(**debug_context)
+                else:
+                    self.debug_context = debug_context
+            else:
+                self.debug_context = debug_context
         if display_message is not None:
-            self.display_message = display_message
+            if hasattr(models, self.swagger_types['display_message']):
+                nested_class = getattr(models, self.swagger_types['display_message'])
+                if isinstance(display_message, nested_class):
+                    self.display_message = display_message
+                elif isinstance(display_message, dict):
+                    self.display_message = nested_class.from_kwargs(**display_message)
+                else:
+                    self.display_message = display_message
+            else:
+                self.display_message = display_message
         if event_type is not None:
-            self.event_type = event_type
+            if hasattr(models, self.swagger_types['event_type']):
+                nested_class = getattr(models, self.swagger_types['event_type'])
+                if isinstance(event_type, nested_class):
+                    self.event_type = event_type
+                elif isinstance(event_type, dict):
+                    self.event_type = nested_class.from_kwargs(**event_type)
+                else:
+                    self.event_type = event_type
+            else:
+                self.event_type = event_type
         if legacy_event_type is not None:
-            self.legacy_event_type = legacy_event_type
+            if hasattr(models, self.swagger_types['legacy_event_type']):
+                nested_class = getattr(models, self.swagger_types['legacy_event_type'])
+                if isinstance(legacy_event_type, nested_class):
+                    self.legacy_event_type = legacy_event_type
+                elif isinstance(legacy_event_type, dict):
+                    self.legacy_event_type = nested_class.from_kwargs(**legacy_event_type)
+                else:
+                    self.legacy_event_type = legacy_event_type
+            else:
+                self.legacy_event_type = legacy_event_type
         if outcome is not None:
-            self.outcome = outcome
+            if hasattr(models, self.swagger_types['outcome']):
+                nested_class = getattr(models, self.swagger_types['outcome'])
+                if isinstance(outcome, nested_class):
+                    self.outcome = outcome
+                elif isinstance(outcome, dict):
+                    self.outcome = nested_class.from_kwargs(**outcome)
+                else:
+                    self.outcome = outcome
+            else:
+                self.outcome = outcome
         if published is not None:
-            self.published = published
+            if hasattr(models, self.swagger_types['published']):
+                nested_class = getattr(models, self.swagger_types['published'])
+                if isinstance(published, nested_class):
+                    self.published = published
+                elif isinstance(published, dict):
+                    self.published = nested_class.from_kwargs(**published)
+                else:
+                    self.published = published
+            else:
+                self.published = published
         if request is not None:
-            self.request = request
+            if hasattr(models, self.swagger_types['request']):
+                nested_class = getattr(models, self.swagger_types['request'])
+                if isinstance(request, nested_class):
+                    self.request = request
+                elif isinstance(request, dict):
+                    self.request = nested_class.from_kwargs(**request)
+                else:
+                    self.request = request
+            else:
+                self.request = request
         if security_context is not None:
-            self.security_context = security_context
+            if hasattr(models, self.swagger_types['security_context']):
+                nested_class = getattr(models, self.swagger_types['security_context'])
+                if isinstance(security_context, nested_class):
+                    self.security_context = security_context
+                elif isinstance(security_context, dict):
+                    self.security_context = nested_class.from_kwargs(**security_context)
+                else:
+                    self.security_context = security_context
+            else:
+                self.security_context = security_context
         if severity is not None:
-            self.severity = severity
+            if hasattr(models, self.swagger_types['severity']):
+                nested_class = getattr(models, self.swagger_types['severity'])
+                if isinstance(severity, nested_class):
+                    self.severity = severity
+                elif isinstance(severity, dict):
+                    self.severity = nested_class.from_kwargs(**severity)
+                else:
+                    self.severity = severity
+            else:
+                self.severity = severity
         if target is not None:
-            self.target = target
+            if hasattr(models, self.swagger_types['target']):
+                nested_class = getattr(models, self.swagger_types['target'])
+                if isinstance(target, nested_class):
+                    self.target = target
+                elif isinstance(target, dict):
+                    self.target = nested_class.from_kwargs(**target)
+                else:
+                    self.target = target
+            else:
+                self.target = target
         if transaction is not None:
-            self.transaction = transaction
+            if hasattr(models, self.swagger_types['transaction']):
+                nested_class = getattr(models, self.swagger_types['transaction'])
+                if isinstance(transaction, nested_class):
+                    self.transaction = transaction
+                elif isinstance(transaction, dict):
+                    self.transaction = nested_class.from_kwargs(**transaction)
+                else:
+                    self.transaction = transaction
+            else:
+                self.transaction = transaction
         if uuid is not None:
-            self.uuid = uuid
+            if hasattr(models, self.swagger_types['uuid']):
+                nested_class = getattr(models, self.swagger_types['uuid'])
+                if isinstance(uuid, nested_class):
+                    self.uuid = uuid
+                elif isinstance(uuid, dict):
+                    self.uuid = nested_class.from_kwargs(**uuid)
+                else:
+                    self.uuid = uuid
+            else:
+                self.uuid = uuid
         if version is not None:
-            self.version = version
+            if hasattr(models, self.swagger_types['version']):
+                nested_class = getattr(models, self.swagger_types['version'])
+                if isinstance(version, nested_class):
+                    self.version = version
+                elif isinstance(version, dict):
+                    self.version = nested_class.from_kwargs(**version)
+                else:
+                    self.version = version
+            else:
+                self.version = version
 
     @property
     def actor(self):

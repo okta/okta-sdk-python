@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class DomainListResponse(object):
@@ -29,9 +30,8 @@ class DomainListResponse(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'domains': 'list[DomainResponse]'
-    }
+    swagger_types = {}
+    swagger_types['domains'] = 'list[DomainResponse]'
 
     attribute_map = {
         'domains': 'domains'
@@ -48,12 +48,21 @@ class DomainListResponse(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, domains=None):  # noqa: E501
+    def set_attributes(self, domains=None, **kwargs):  # noqa: E501
         """DomainListResponse - a model defined in Swagger"""  # noqa: E501
         self._domains = None
         self.discriminator = None
         if domains is not None:
-            self.domains = domains
+            if hasattr(models, self.swagger_types['domains']):
+                nested_class = getattr(models, self.swagger_types['domains'])
+                if isinstance(domains, nested_class):
+                    self.domains = domains
+                elif isinstance(domains, dict):
+                    self.domains = nested_class.from_kwargs(**domains)
+                else:
+                    self.domains = domains
+            else:
+                self.domains = domains
 
     @property
     def domains(self):

@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class Csr(object):
@@ -29,12 +30,11 @@ class Csr(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'created': 'datetime',
-        'csr': 'str',
-        'id': 'str',
-        'kty': 'str'
-    }
+    swagger_types = {}
+    swagger_types['created'] = 'datetime'
+    swagger_types['csr'] = 'str'
+    swagger_types['id'] = 'str'
+    swagger_types['kty'] = 'str'
 
     attribute_map = {
         'created': 'created',
@@ -54,7 +54,7 @@ class Csr(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, created=None, csr=None, id=None, kty=None):  # noqa: E501
+    def set_attributes(self, created=None, csr=None, id=None, kty=None, **kwargs):  # noqa: E501
         """Csr - a model defined in Swagger"""  # noqa: E501
         self._created = None
         self._csr = None
@@ -62,13 +62,49 @@ class Csr(object):
         self._kty = None
         self.discriminator = None
         if created is not None:
-            self.created = created
+            if hasattr(models, self.swagger_types['created']):
+                nested_class = getattr(models, self.swagger_types['created'])
+                if isinstance(created, nested_class):
+                    self.created = created
+                elif isinstance(created, dict):
+                    self.created = nested_class.from_kwargs(**created)
+                else:
+                    self.created = created
+            else:
+                self.created = created
         if csr is not None:
-            self.csr = csr
+            if hasattr(models, self.swagger_types['csr']):
+                nested_class = getattr(models, self.swagger_types['csr'])
+                if isinstance(csr, nested_class):
+                    self.csr = csr
+                elif isinstance(csr, dict):
+                    self.csr = nested_class.from_kwargs(**csr)
+                else:
+                    self.csr = csr
+            else:
+                self.csr = csr
         if id is not None:
-            self.id = id
+            if hasattr(models, self.swagger_types['id']):
+                nested_class = getattr(models, self.swagger_types['id'])
+                if isinstance(id, nested_class):
+                    self.id = id
+                elif isinstance(id, dict):
+                    self.id = nested_class.from_kwargs(**id)
+                else:
+                    self.id = id
+            else:
+                self.id = id
         if kty is not None:
-            self.kty = kty
+            if hasattr(models, self.swagger_types['kty']):
+                nested_class = getattr(models, self.swagger_types['kty'])
+                if isinstance(kty, nested_class):
+                    self.kty = kty
+                elif isinstance(kty, dict):
+                    self.kty = nested_class.from_kwargs(**kty)
+                else:
+                    self.kty = kty
+            else:
+                self.kty = kty
 
     @property
     def created(self):

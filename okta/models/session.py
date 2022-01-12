@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class Session(object):
@@ -29,19 +30,18 @@ class Session(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'links': 'dict(str, object)',
-        'amr': 'list[SessionAuthenticationMethod]',
-        'created_at': 'datetime',
-        'expires_at': 'datetime',
-        'id': 'str',
-        'idp': 'SessionIdentityProvider',
-        'last_factor_verification': 'datetime',
-        'last_password_verification': 'datetime',
-        'login': 'str',
-        'status': 'SessionStatus',
-        'user_id': 'str'
-    }
+    swagger_types = {}
+    swagger_types['links'] = 'dict(str, object)'
+    swagger_types['amr'] = 'list[SessionAuthenticationMethod]'
+    swagger_types['created_at'] = 'datetime'
+    swagger_types['expires_at'] = 'datetime'
+    swagger_types['id'] = 'str'
+    swagger_types['idp'] = 'SessionIdentityProvider'
+    swagger_types['last_factor_verification'] = 'datetime'
+    swagger_types['last_password_verification'] = 'datetime'
+    swagger_types['login'] = 'str'
+    swagger_types['status'] = 'SessionStatus'
+    swagger_types['user_id'] = 'str'
 
     attribute_map = {
         'links': '_links',
@@ -68,7 +68,7 @@ class Session(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, links=None, amr=None, created_at=None, expires_at=None, id=None, idp=None, last_factor_verification=None, last_password_verification=None, login=None, status=None, user_id=None):  # noqa: E501
+    def set_attributes(self, links=None, amr=None, created_at=None, expires_at=None, id=None, idp=None, last_factor_verification=None, last_password_verification=None, login=None, status=None, user_id=None, **kwargs):  # noqa: E501
         """Session - a model defined in Swagger"""  # noqa: E501
         self._links = None
         self._amr = None
@@ -83,27 +83,126 @@ class Session(object):
         self._user_id = None
         self.discriminator = None
         if links is not None:
-            self.links = links
+            if hasattr(models, self.swagger_types['links']):
+                nested_class = getattr(models, self.swagger_types['links'])
+                if isinstance(links, nested_class):
+                    self.links = links
+                elif isinstance(links, dict):
+                    self.links = nested_class.from_kwargs(**links)
+                else:
+                    self.links = links
+            else:
+                self.links = links
         if amr is not None:
-            self.amr = amr
+            if hasattr(models, self.swagger_types['amr']):
+                nested_class = getattr(models, self.swagger_types['amr'])
+                if isinstance(amr, nested_class):
+                    self.amr = amr
+                elif isinstance(amr, dict):
+                    self.amr = nested_class.from_kwargs(**amr)
+                else:
+                    self.amr = amr
+            else:
+                self.amr = amr
         if created_at is not None:
-            self.created_at = created_at
+            if hasattr(models, self.swagger_types['created_at']):
+                nested_class = getattr(models, self.swagger_types['created_at'])
+                if isinstance(created_at, nested_class):
+                    self.created_at = created_at
+                elif isinstance(created_at, dict):
+                    self.created_at = nested_class.from_kwargs(**created_at)
+                else:
+                    self.created_at = created_at
+            else:
+                self.created_at = created_at
         if expires_at is not None:
-            self.expires_at = expires_at
+            if hasattr(models, self.swagger_types['expires_at']):
+                nested_class = getattr(models, self.swagger_types['expires_at'])
+                if isinstance(expires_at, nested_class):
+                    self.expires_at = expires_at
+                elif isinstance(expires_at, dict):
+                    self.expires_at = nested_class.from_kwargs(**expires_at)
+                else:
+                    self.expires_at = expires_at
+            else:
+                self.expires_at = expires_at
         if id is not None:
-            self.id = id
+            if hasattr(models, self.swagger_types['id']):
+                nested_class = getattr(models, self.swagger_types['id'])
+                if isinstance(id, nested_class):
+                    self.id = id
+                elif isinstance(id, dict):
+                    self.id = nested_class.from_kwargs(**id)
+                else:
+                    self.id = id
+            else:
+                self.id = id
         if idp is not None:
-            self.idp = idp
+            if hasattr(models, self.swagger_types['idp']):
+                nested_class = getattr(models, self.swagger_types['idp'])
+                if isinstance(idp, nested_class):
+                    self.idp = idp
+                elif isinstance(idp, dict):
+                    self.idp = nested_class.from_kwargs(**idp)
+                else:
+                    self.idp = idp
+            else:
+                self.idp = idp
         if last_factor_verification is not None:
-            self.last_factor_verification = last_factor_verification
+            if hasattr(models, self.swagger_types['last_factor_verification']):
+                nested_class = getattr(models, self.swagger_types['last_factor_verification'])
+                if isinstance(last_factor_verification, nested_class):
+                    self.last_factor_verification = last_factor_verification
+                elif isinstance(last_factor_verification, dict):
+                    self.last_factor_verification = nested_class.from_kwargs(**last_factor_verification)
+                else:
+                    self.last_factor_verification = last_factor_verification
+            else:
+                self.last_factor_verification = last_factor_verification
         if last_password_verification is not None:
-            self.last_password_verification = last_password_verification
+            if hasattr(models, self.swagger_types['last_password_verification']):
+                nested_class = getattr(models, self.swagger_types['last_password_verification'])
+                if isinstance(last_password_verification, nested_class):
+                    self.last_password_verification = last_password_verification
+                elif isinstance(last_password_verification, dict):
+                    self.last_password_verification = nested_class.from_kwargs(**last_password_verification)
+                else:
+                    self.last_password_verification = last_password_verification
+            else:
+                self.last_password_verification = last_password_verification
         if login is not None:
-            self.login = login
+            if hasattr(models, self.swagger_types['login']):
+                nested_class = getattr(models, self.swagger_types['login'])
+                if isinstance(login, nested_class):
+                    self.login = login
+                elif isinstance(login, dict):
+                    self.login = nested_class.from_kwargs(**login)
+                else:
+                    self.login = login
+            else:
+                self.login = login
         if status is not None:
-            self.status = status
+            if hasattr(models, self.swagger_types['status']):
+                nested_class = getattr(models, self.swagger_types['status'])
+                if isinstance(status, nested_class):
+                    self.status = status
+                elif isinstance(status, dict):
+                    self.status = nested_class.from_kwargs(**status)
+                else:
+                    self.status = status
+            else:
+                self.status = status
         if user_id is not None:
-            self.user_id = user_id
+            if hasattr(models, self.swagger_types['user_id']):
+                nested_class = getattr(models, self.swagger_types['user_id'])
+                if isinstance(user_id, nested_class):
+                    self.user_id = user_id
+                elif isinstance(user_id, dict):
+                    self.user_id = nested_class.from_kwargs(**user_id)
+                else:
+                    self.user_id = user_id
+            else:
+                self.user_id = user_id
 
     @property
     def links(self):

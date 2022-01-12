@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class SamlAttributeStatement(object):
@@ -29,14 +30,13 @@ class SamlAttributeStatement(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'name': 'str',
-        'namespace': 'str',
-        'type': 'str',
-        'filter_type': 'str',
-        'filter_value': 'str',
-        'values': 'list[str]'
-    }
+    swagger_types = {}
+    swagger_types['name'] = 'str'
+    swagger_types['namespace'] = 'str'
+    swagger_types['type'] = 'str'
+    swagger_types['filter_type'] = 'str'
+    swagger_types['filter_value'] = 'str'
+    swagger_types['values'] = 'list[str]'
 
     attribute_map = {
         'name': 'name',
@@ -58,7 +58,7 @@ class SamlAttributeStatement(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, name=None, namespace=None, type=None, filter_type=None, filter_value=None, values=None):  # noqa: E501
+    def set_attributes(self, name=None, namespace=None, type=None, filter_type=None, filter_value=None, values=None, **kwargs):  # noqa: E501
         """SamlAttributeStatement - a model defined in Swagger"""  # noqa: E501
         self._name = None
         self._namespace = None
@@ -68,17 +68,71 @@ class SamlAttributeStatement(object):
         self._values = None
         self.discriminator = None
         if name is not None:
-            self.name = name
+            if hasattr(models, self.swagger_types['name']):
+                nested_class = getattr(models, self.swagger_types['name'])
+                if isinstance(name, nested_class):
+                    self.name = name
+                elif isinstance(name, dict):
+                    self.name = nested_class.from_kwargs(**name)
+                else:
+                    self.name = name
+            else:
+                self.name = name
         if namespace is not None:
-            self.namespace = namespace
+            if hasattr(models, self.swagger_types['namespace']):
+                nested_class = getattr(models, self.swagger_types['namespace'])
+                if isinstance(namespace, nested_class):
+                    self.namespace = namespace
+                elif isinstance(namespace, dict):
+                    self.namespace = nested_class.from_kwargs(**namespace)
+                else:
+                    self.namespace = namespace
+            else:
+                self.namespace = namespace
         if type is not None:
-            self.type = type
+            if hasattr(models, self.swagger_types['type']):
+                nested_class = getattr(models, self.swagger_types['type'])
+                if isinstance(type, nested_class):
+                    self.type = type
+                elif isinstance(type, dict):
+                    self.type = nested_class.from_kwargs(**type)
+                else:
+                    self.type = type
+            else:
+                self.type = type
         if filter_type is not None:
-            self.filter_type = filter_type
+            if hasattr(models, self.swagger_types['filter_type']):
+                nested_class = getattr(models, self.swagger_types['filter_type'])
+                if isinstance(filter_type, nested_class):
+                    self.filter_type = filter_type
+                elif isinstance(filter_type, dict):
+                    self.filter_type = nested_class.from_kwargs(**filter_type)
+                else:
+                    self.filter_type = filter_type
+            else:
+                self.filter_type = filter_type
         if filter_value is not None:
-            self.filter_value = filter_value
+            if hasattr(models, self.swagger_types['filter_value']):
+                nested_class = getattr(models, self.swagger_types['filter_value'])
+                if isinstance(filter_value, nested_class):
+                    self.filter_value = filter_value
+                elif isinstance(filter_value, dict):
+                    self.filter_value = nested_class.from_kwargs(**filter_value)
+                else:
+                    self.filter_value = filter_value
+            else:
+                self.filter_value = filter_value
         if values is not None:
-            self.values = values
+            if hasattr(models, self.swagger_types['values']):
+                nested_class = getattr(models, self.swagger_types['values'])
+                if isinstance(values, nested_class):
+                    self.values = values
+                elif isinstance(values, dict):
+                    self.values = nested_class.from_kwargs(**values)
+                else:
+                    self.values = values
+            else:
+                self.values = values
 
     @property
     def name(self):

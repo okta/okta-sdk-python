@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class MDMEnrollmentPolicyRuleCondition(object):
@@ -29,10 +30,9 @@ class MDMEnrollmentPolicyRuleCondition(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'block_non_safe_android': 'bool',
-        'enrollment': 'MDMEnrollmentPolicyEnrollment'
-    }
+    swagger_types = {}
+    swagger_types['block_non_safe_android'] = 'bool'
+    swagger_types['enrollment'] = 'MDMEnrollmentPolicyEnrollment'
 
     attribute_map = {
         'block_non_safe_android': 'blockNonSafeAndroid',
@@ -50,15 +50,33 @@ class MDMEnrollmentPolicyRuleCondition(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, block_non_safe_android=None, enrollment=None):  # noqa: E501
+    def set_attributes(self, block_non_safe_android=None, enrollment=None, **kwargs):  # noqa: E501
         """MDMEnrollmentPolicyRuleCondition - a model defined in Swagger"""  # noqa: E501
         self._block_non_safe_android = None
         self._enrollment = None
         self.discriminator = None
         if block_non_safe_android is not None:
-            self.block_non_safe_android = block_non_safe_android
+            if hasattr(models, self.swagger_types['block_non_safe_android']):
+                nested_class = getattr(models, self.swagger_types['block_non_safe_android'])
+                if isinstance(block_non_safe_android, nested_class):
+                    self.block_non_safe_android = block_non_safe_android
+                elif isinstance(block_non_safe_android, dict):
+                    self.block_non_safe_android = nested_class.from_kwargs(**block_non_safe_android)
+                else:
+                    self.block_non_safe_android = block_non_safe_android
+            else:
+                self.block_non_safe_android = block_non_safe_android
         if enrollment is not None:
-            self.enrollment = enrollment
+            if hasattr(models, self.swagger_types['enrollment']):
+                nested_class = getattr(models, self.swagger_types['enrollment'])
+                if isinstance(enrollment, nested_class):
+                    self.enrollment = enrollment
+                elif isinstance(enrollment, dict):
+                    self.enrollment = nested_class.from_kwargs(**enrollment)
+                else:
+                    self.enrollment = enrollment
+            else:
+                self.enrollment = enrollment
 
     @property
     def block_non_safe_android(self):

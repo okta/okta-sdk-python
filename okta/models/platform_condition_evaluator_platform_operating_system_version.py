@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class PlatformConditionEvaluatorPlatformOperatingSystemVersion(object):
@@ -29,10 +30,9 @@ class PlatformConditionEvaluatorPlatformOperatingSystemVersion(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'match_type': 'PlatformConditionOperatingSystemVersionMatchType',
-        'value': 'str'
-    }
+    swagger_types = {}
+    swagger_types['match_type'] = 'PlatformConditionOperatingSystemVersionMatchType'
+    swagger_types['value'] = 'str'
 
     attribute_map = {
         'match_type': 'matchType',
@@ -50,15 +50,33 @@ class PlatformConditionEvaluatorPlatformOperatingSystemVersion(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, match_type=None, value=None):  # noqa: E501
+    def set_attributes(self, match_type=None, value=None, **kwargs):  # noqa: E501
         """PlatformConditionEvaluatorPlatformOperatingSystemVersion - a model defined in Swagger"""  # noqa: E501
         self._match_type = None
         self._value = None
         self.discriminator = None
         if match_type is not None:
-            self.match_type = match_type
+            if hasattr(models, self.swagger_types['match_type']):
+                nested_class = getattr(models, self.swagger_types['match_type'])
+                if isinstance(match_type, nested_class):
+                    self.match_type = match_type
+                elif isinstance(match_type, dict):
+                    self.match_type = nested_class.from_kwargs(**match_type)
+                else:
+                    self.match_type = match_type
+            else:
+                self.match_type = match_type
         if value is not None:
-            self.value = value
+            if hasattr(models, self.swagger_types['value']):
+                nested_class = getattr(models, self.swagger_types['value'])
+                if isinstance(value, nested_class):
+                    self.value = value
+                elif isinstance(value, dict):
+                    self.value = nested_class.from_kwargs(**value)
+                else:
+                    self.value = value
+            else:
+                self.value = value
 
     @property
     def match_type(self):

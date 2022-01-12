@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class SamlApplicationSettingsSignOn(object):
@@ -29,34 +30,33 @@ class SamlApplicationSettingsSignOn(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'allow_multiple_acs_endpoints': 'bool',
-        'acs_endpoints': 'list[AcsEndpoint]',
-        'assertion_signed': 'bool',
-        'attribute_statements': 'list[SamlAttributeStatement]',
-        'audience': 'str',
-        'audience_override': 'str',
-        'authn_context_class_ref': 'str',
-        'default_relay_state': 'str',
-        'destination': 'str',
-        'destination_override': 'str',
-        'digest_algorithm': 'str',
-        'honor_force_authn': 'bool',
-        'idp_issuer': 'str',
-        'inline_hooks': 'list[SignOnInlineHook]',
-        'recipient': 'str',
-        'recipient_override': 'str',
-        'request_compressed': 'bool',
-        'response_signed': 'bool',
-        'signature_algorithm': 'str',
-        'slo': 'SingleLogout',
-        'sp_issuer': 'str',
-        'sso_acs_url': 'str',
-        'sso_acs_url_override': 'str',
-        'sp_certificate': 'SpCertificate',
-        'subject_name_id_format': 'str',
-        'subject_name_id_template': 'str'
-    }
+    swagger_types = {}
+    swagger_types['allow_multiple_acs_endpoints'] = 'bool'
+    swagger_types['acs_endpoints'] = 'list[AcsEndpoint]'
+    swagger_types['assertion_signed'] = 'bool'
+    swagger_types['attribute_statements'] = 'list[SamlAttributeStatement]'
+    swagger_types['audience'] = 'str'
+    swagger_types['audience_override'] = 'str'
+    swagger_types['authn_context_class_ref'] = 'str'
+    swagger_types['default_relay_state'] = 'str'
+    swagger_types['destination'] = 'str'
+    swagger_types['destination_override'] = 'str'
+    swagger_types['digest_algorithm'] = 'str'
+    swagger_types['honor_force_authn'] = 'bool'
+    swagger_types['idp_issuer'] = 'str'
+    swagger_types['inline_hooks'] = 'list[SignOnInlineHook]'
+    swagger_types['recipient'] = 'str'
+    swagger_types['recipient_override'] = 'str'
+    swagger_types['request_compressed'] = 'bool'
+    swagger_types['response_signed'] = 'bool'
+    swagger_types['signature_algorithm'] = 'str'
+    swagger_types['slo'] = 'SingleLogout'
+    swagger_types['sp_issuer'] = 'str'
+    swagger_types['sso_acs_url'] = 'str'
+    swagger_types['sso_acs_url_override'] = 'str'
+    swagger_types['sp_certificate'] = 'SpCertificate'
+    swagger_types['subject_name_id_format'] = 'str'
+    swagger_types['subject_name_id_template'] = 'str'
 
     attribute_map = {
         'allow_multiple_acs_endpoints': 'allowMultipleAcsEndpoints',
@@ -98,7 +98,7 @@ class SamlApplicationSettingsSignOn(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, allow_multiple_acs_endpoints=None, acs_endpoints=None, assertion_signed=None, attribute_statements=None, audience=None, audience_override=None, authn_context_class_ref=None, default_relay_state=None, destination=None, destination_override=None, digest_algorithm=None, honor_force_authn=None, idp_issuer=None, inline_hooks=None, recipient=None, recipient_override=None, request_compressed=None, response_signed=None, signature_algorithm=None, slo=None, sp_issuer=None, sso_acs_url=None, sso_acs_url_override=None, sp_certificate=None, subject_name_id_format=None, subject_name_id_template=None):  # noqa: E501
+    def set_attributes(self, allow_multiple_acs_endpoints=None, acs_endpoints=None, assertion_signed=None, attribute_statements=None, audience=None, audience_override=None, authn_context_class_ref=None, default_relay_state=None, destination=None, destination_override=None, digest_algorithm=None, honor_force_authn=None, idp_issuer=None, inline_hooks=None, recipient=None, recipient_override=None, request_compressed=None, response_signed=None, signature_algorithm=None, slo=None, sp_issuer=None, sso_acs_url=None, sso_acs_url_override=None, sp_certificate=None, subject_name_id_format=None, subject_name_id_template=None, **kwargs):  # noqa: E501
         """SamlApplicationSettingsSignOn - a model defined in Swagger"""  # noqa: E501
         self._allow_multiple_acs_endpoints = None
         self._acs_endpoints = None
@@ -128,57 +128,291 @@ class SamlApplicationSettingsSignOn(object):
         self._subject_name_id_template = None
         self.discriminator = None
         if allow_multiple_acs_endpoints is not None:
-            self.allow_multiple_acs_endpoints = allow_multiple_acs_endpoints
+            if hasattr(models, self.swagger_types['allow_multiple_acs_endpoints']):
+                nested_class = getattr(models, self.swagger_types['allow_multiple_acs_endpoints'])
+                if isinstance(allow_multiple_acs_endpoints, nested_class):
+                    self.allow_multiple_acs_endpoints = allow_multiple_acs_endpoints
+                elif isinstance(allow_multiple_acs_endpoints, dict):
+                    self.allow_multiple_acs_endpoints = nested_class.from_kwargs(**allow_multiple_acs_endpoints)
+                else:
+                    self.allow_multiple_acs_endpoints = allow_multiple_acs_endpoints
+            else:
+                self.allow_multiple_acs_endpoints = allow_multiple_acs_endpoints
         if acs_endpoints is not None:
-            self.acs_endpoints = acs_endpoints
+            if hasattr(models, self.swagger_types['acs_endpoints']):
+                nested_class = getattr(models, self.swagger_types['acs_endpoints'])
+                if isinstance(acs_endpoints, nested_class):
+                    self.acs_endpoints = acs_endpoints
+                elif isinstance(acs_endpoints, dict):
+                    self.acs_endpoints = nested_class.from_kwargs(**acs_endpoints)
+                else:
+                    self.acs_endpoints = acs_endpoints
+            else:
+                self.acs_endpoints = acs_endpoints
         if assertion_signed is not None:
-            self.assertion_signed = assertion_signed
+            if hasattr(models, self.swagger_types['assertion_signed']):
+                nested_class = getattr(models, self.swagger_types['assertion_signed'])
+                if isinstance(assertion_signed, nested_class):
+                    self.assertion_signed = assertion_signed
+                elif isinstance(assertion_signed, dict):
+                    self.assertion_signed = nested_class.from_kwargs(**assertion_signed)
+                else:
+                    self.assertion_signed = assertion_signed
+            else:
+                self.assertion_signed = assertion_signed
         if attribute_statements is not None:
-            self.attribute_statements = attribute_statements
+            if hasattr(models, self.swagger_types['attribute_statements']):
+                nested_class = getattr(models, self.swagger_types['attribute_statements'])
+                if isinstance(attribute_statements, nested_class):
+                    self.attribute_statements = attribute_statements
+                elif isinstance(attribute_statements, dict):
+                    self.attribute_statements = nested_class.from_kwargs(**attribute_statements)
+                else:
+                    self.attribute_statements = attribute_statements
+            else:
+                self.attribute_statements = attribute_statements
         if audience is not None:
-            self.audience = audience
+            if hasattr(models, self.swagger_types['audience']):
+                nested_class = getattr(models, self.swagger_types['audience'])
+                if isinstance(audience, nested_class):
+                    self.audience = audience
+                elif isinstance(audience, dict):
+                    self.audience = nested_class.from_kwargs(**audience)
+                else:
+                    self.audience = audience
+            else:
+                self.audience = audience
         if audience_override is not None:
-            self.audience_override = audience_override
+            if hasattr(models, self.swagger_types['audience_override']):
+                nested_class = getattr(models, self.swagger_types['audience_override'])
+                if isinstance(audience_override, nested_class):
+                    self.audience_override = audience_override
+                elif isinstance(audience_override, dict):
+                    self.audience_override = nested_class.from_kwargs(**audience_override)
+                else:
+                    self.audience_override = audience_override
+            else:
+                self.audience_override = audience_override
         if authn_context_class_ref is not None:
-            self.authn_context_class_ref = authn_context_class_ref
+            if hasattr(models, self.swagger_types['authn_context_class_ref']):
+                nested_class = getattr(models, self.swagger_types['authn_context_class_ref'])
+                if isinstance(authn_context_class_ref, nested_class):
+                    self.authn_context_class_ref = authn_context_class_ref
+                elif isinstance(authn_context_class_ref, dict):
+                    self.authn_context_class_ref = nested_class.from_kwargs(**authn_context_class_ref)
+                else:
+                    self.authn_context_class_ref = authn_context_class_ref
+            else:
+                self.authn_context_class_ref = authn_context_class_ref
         if default_relay_state is not None:
-            self.default_relay_state = default_relay_state
+            if hasattr(models, self.swagger_types['default_relay_state']):
+                nested_class = getattr(models, self.swagger_types['default_relay_state'])
+                if isinstance(default_relay_state, nested_class):
+                    self.default_relay_state = default_relay_state
+                elif isinstance(default_relay_state, dict):
+                    self.default_relay_state = nested_class.from_kwargs(**default_relay_state)
+                else:
+                    self.default_relay_state = default_relay_state
+            else:
+                self.default_relay_state = default_relay_state
         if destination is not None:
-            self.destination = destination
+            if hasattr(models, self.swagger_types['destination']):
+                nested_class = getattr(models, self.swagger_types['destination'])
+                if isinstance(destination, nested_class):
+                    self.destination = destination
+                elif isinstance(destination, dict):
+                    self.destination = nested_class.from_kwargs(**destination)
+                else:
+                    self.destination = destination
+            else:
+                self.destination = destination
         if destination_override is not None:
-            self.destination_override = destination_override
+            if hasattr(models, self.swagger_types['destination_override']):
+                nested_class = getattr(models, self.swagger_types['destination_override'])
+                if isinstance(destination_override, nested_class):
+                    self.destination_override = destination_override
+                elif isinstance(destination_override, dict):
+                    self.destination_override = nested_class.from_kwargs(**destination_override)
+                else:
+                    self.destination_override = destination_override
+            else:
+                self.destination_override = destination_override
         if digest_algorithm is not None:
-            self.digest_algorithm = digest_algorithm
+            if hasattr(models, self.swagger_types['digest_algorithm']):
+                nested_class = getattr(models, self.swagger_types['digest_algorithm'])
+                if isinstance(digest_algorithm, nested_class):
+                    self.digest_algorithm = digest_algorithm
+                elif isinstance(digest_algorithm, dict):
+                    self.digest_algorithm = nested_class.from_kwargs(**digest_algorithm)
+                else:
+                    self.digest_algorithm = digest_algorithm
+            else:
+                self.digest_algorithm = digest_algorithm
         if honor_force_authn is not None:
-            self.honor_force_authn = honor_force_authn
+            if hasattr(models, self.swagger_types['honor_force_authn']):
+                nested_class = getattr(models, self.swagger_types['honor_force_authn'])
+                if isinstance(honor_force_authn, nested_class):
+                    self.honor_force_authn = honor_force_authn
+                elif isinstance(honor_force_authn, dict):
+                    self.honor_force_authn = nested_class.from_kwargs(**honor_force_authn)
+                else:
+                    self.honor_force_authn = honor_force_authn
+            else:
+                self.honor_force_authn = honor_force_authn
         if idp_issuer is not None:
-            self.idp_issuer = idp_issuer
+            if hasattr(models, self.swagger_types['idp_issuer']):
+                nested_class = getattr(models, self.swagger_types['idp_issuer'])
+                if isinstance(idp_issuer, nested_class):
+                    self.idp_issuer = idp_issuer
+                elif isinstance(idp_issuer, dict):
+                    self.idp_issuer = nested_class.from_kwargs(**idp_issuer)
+                else:
+                    self.idp_issuer = idp_issuer
+            else:
+                self.idp_issuer = idp_issuer
         if inline_hooks is not None:
-            self.inline_hooks = inline_hooks
+            if hasattr(models, self.swagger_types['inline_hooks']):
+                nested_class = getattr(models, self.swagger_types['inline_hooks'])
+                if isinstance(inline_hooks, nested_class):
+                    self.inline_hooks = inline_hooks
+                elif isinstance(inline_hooks, dict):
+                    self.inline_hooks = nested_class.from_kwargs(**inline_hooks)
+                else:
+                    self.inline_hooks = inline_hooks
+            else:
+                self.inline_hooks = inline_hooks
         if recipient is not None:
-            self.recipient = recipient
+            if hasattr(models, self.swagger_types['recipient']):
+                nested_class = getattr(models, self.swagger_types['recipient'])
+                if isinstance(recipient, nested_class):
+                    self.recipient = recipient
+                elif isinstance(recipient, dict):
+                    self.recipient = nested_class.from_kwargs(**recipient)
+                else:
+                    self.recipient = recipient
+            else:
+                self.recipient = recipient
         if recipient_override is not None:
-            self.recipient_override = recipient_override
+            if hasattr(models, self.swagger_types['recipient_override']):
+                nested_class = getattr(models, self.swagger_types['recipient_override'])
+                if isinstance(recipient_override, nested_class):
+                    self.recipient_override = recipient_override
+                elif isinstance(recipient_override, dict):
+                    self.recipient_override = nested_class.from_kwargs(**recipient_override)
+                else:
+                    self.recipient_override = recipient_override
+            else:
+                self.recipient_override = recipient_override
         if request_compressed is not None:
-            self.request_compressed = request_compressed
+            if hasattr(models, self.swagger_types['request_compressed']):
+                nested_class = getattr(models, self.swagger_types['request_compressed'])
+                if isinstance(request_compressed, nested_class):
+                    self.request_compressed = request_compressed
+                elif isinstance(request_compressed, dict):
+                    self.request_compressed = nested_class.from_kwargs(**request_compressed)
+                else:
+                    self.request_compressed = request_compressed
+            else:
+                self.request_compressed = request_compressed
         if response_signed is not None:
-            self.response_signed = response_signed
+            if hasattr(models, self.swagger_types['response_signed']):
+                nested_class = getattr(models, self.swagger_types['response_signed'])
+                if isinstance(response_signed, nested_class):
+                    self.response_signed = response_signed
+                elif isinstance(response_signed, dict):
+                    self.response_signed = nested_class.from_kwargs(**response_signed)
+                else:
+                    self.response_signed = response_signed
+            else:
+                self.response_signed = response_signed
         if signature_algorithm is not None:
-            self.signature_algorithm = signature_algorithm
+            if hasattr(models, self.swagger_types['signature_algorithm']):
+                nested_class = getattr(models, self.swagger_types['signature_algorithm'])
+                if isinstance(signature_algorithm, nested_class):
+                    self.signature_algorithm = signature_algorithm
+                elif isinstance(signature_algorithm, dict):
+                    self.signature_algorithm = nested_class.from_kwargs(**signature_algorithm)
+                else:
+                    self.signature_algorithm = signature_algorithm
+            else:
+                self.signature_algorithm = signature_algorithm
         if slo is not None:
-            self.slo = slo
+            if hasattr(models, self.swagger_types['slo']):
+                nested_class = getattr(models, self.swagger_types['slo'])
+                if isinstance(slo, nested_class):
+                    self.slo = slo
+                elif isinstance(slo, dict):
+                    self.slo = nested_class.from_kwargs(**slo)
+                else:
+                    self.slo = slo
+            else:
+                self.slo = slo
         if sp_issuer is not None:
-            self.sp_issuer = sp_issuer
+            if hasattr(models, self.swagger_types['sp_issuer']):
+                nested_class = getattr(models, self.swagger_types['sp_issuer'])
+                if isinstance(sp_issuer, nested_class):
+                    self.sp_issuer = sp_issuer
+                elif isinstance(sp_issuer, dict):
+                    self.sp_issuer = nested_class.from_kwargs(**sp_issuer)
+                else:
+                    self.sp_issuer = sp_issuer
+            else:
+                self.sp_issuer = sp_issuer
         if sso_acs_url is not None:
-            self.sso_acs_url = sso_acs_url
+            if hasattr(models, self.swagger_types['sso_acs_url']):
+                nested_class = getattr(models, self.swagger_types['sso_acs_url'])
+                if isinstance(sso_acs_url, nested_class):
+                    self.sso_acs_url = sso_acs_url
+                elif isinstance(sso_acs_url, dict):
+                    self.sso_acs_url = nested_class.from_kwargs(**sso_acs_url)
+                else:
+                    self.sso_acs_url = sso_acs_url
+            else:
+                self.sso_acs_url = sso_acs_url
         if sso_acs_url_override is not None:
-            self.sso_acs_url_override = sso_acs_url_override
+            if hasattr(models, self.swagger_types['sso_acs_url_override']):
+                nested_class = getattr(models, self.swagger_types['sso_acs_url_override'])
+                if isinstance(sso_acs_url_override, nested_class):
+                    self.sso_acs_url_override = sso_acs_url_override
+                elif isinstance(sso_acs_url_override, dict):
+                    self.sso_acs_url_override = nested_class.from_kwargs(**sso_acs_url_override)
+                else:
+                    self.sso_acs_url_override = sso_acs_url_override
+            else:
+                self.sso_acs_url_override = sso_acs_url_override
         if sp_certificate is not None:
-            self.sp_certificate = sp_certificate
+            if hasattr(models, self.swagger_types['sp_certificate']):
+                nested_class = getattr(models, self.swagger_types['sp_certificate'])
+                if isinstance(sp_certificate, nested_class):
+                    self.sp_certificate = sp_certificate
+                elif isinstance(sp_certificate, dict):
+                    self.sp_certificate = nested_class.from_kwargs(**sp_certificate)
+                else:
+                    self.sp_certificate = sp_certificate
+            else:
+                self.sp_certificate = sp_certificate
         if subject_name_id_format is not None:
-            self.subject_name_id_format = subject_name_id_format
+            if hasattr(models, self.swagger_types['subject_name_id_format']):
+                nested_class = getattr(models, self.swagger_types['subject_name_id_format'])
+                if isinstance(subject_name_id_format, nested_class):
+                    self.subject_name_id_format = subject_name_id_format
+                elif isinstance(subject_name_id_format, dict):
+                    self.subject_name_id_format = nested_class.from_kwargs(**subject_name_id_format)
+                else:
+                    self.subject_name_id_format = subject_name_id_format
+            else:
+                self.subject_name_id_format = subject_name_id_format
         if subject_name_id_template is not None:
-            self.subject_name_id_template = subject_name_id_template
+            if hasattr(models, self.swagger_types['subject_name_id_template']):
+                nested_class = getattr(models, self.swagger_types['subject_name_id_template'])
+                if isinstance(subject_name_id_template, nested_class):
+                    self.subject_name_id_template = subject_name_id_template
+                elif isinstance(subject_name_id_template, dict):
+                    self.subject_name_id_template = nested_class.from_kwargs(**subject_name_id_template)
+                else:
+                    self.subject_name_id_template = subject_name_id_template
+            else:
+                self.subject_name_id_template = subject_name_id_template
 
     @property
     def allow_multiple_acs_endpoints(self):

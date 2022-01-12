@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class OrgSetting(object):
@@ -29,26 +30,25 @@ class OrgSetting(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'links': 'dict(str, object)',
-        'address1': 'str',
-        'address2': 'str',
-        'city': 'str',
-        'company_name': 'str',
-        'country': 'str',
-        'created': 'datetime',
-        'end_user_support_help_url': 'str',
-        'expires_at': 'datetime',
-        'id': 'str',
-        'last_updated': 'datetime',
-        'phone_number': 'str',
-        'postal_code': 'str',
-        'state': 'str',
-        'status': 'str',
-        'subdomain': 'str',
-        'support_phone_number': 'str',
-        'website': 'str'
-    }
+    swagger_types = {}
+    swagger_types['links'] = 'dict(str, object)'
+    swagger_types['address1'] = 'str'
+    swagger_types['address2'] = 'str'
+    swagger_types['city'] = 'str'
+    swagger_types['company_name'] = 'str'
+    swagger_types['country'] = 'str'
+    swagger_types['created'] = 'datetime'
+    swagger_types['end_user_support_help_url'] = 'str'
+    swagger_types['expires_at'] = 'datetime'
+    swagger_types['id'] = 'str'
+    swagger_types['last_updated'] = 'datetime'
+    swagger_types['phone_number'] = 'str'
+    swagger_types['postal_code'] = 'str'
+    swagger_types['state'] = 'str'
+    swagger_types['status'] = 'str'
+    swagger_types['subdomain'] = 'str'
+    swagger_types['support_phone_number'] = 'str'
+    swagger_types['website'] = 'str'
 
     attribute_map = {
         'links': '_links',
@@ -82,7 +82,7 @@ class OrgSetting(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, links=None, address1=None, address2=None, city=None, company_name=None, country=None, created=None, end_user_support_help_url=None, expires_at=None, id=None, last_updated=None, phone_number=None, postal_code=None, state=None, status=None, subdomain=None, support_phone_number=None, website=None):  # noqa: E501
+    def set_attributes(self, links=None, address1=None, address2=None, city=None, company_name=None, country=None, created=None, end_user_support_help_url=None, expires_at=None, id=None, last_updated=None, phone_number=None, postal_code=None, state=None, status=None, subdomain=None, support_phone_number=None, website=None, **kwargs):  # noqa: E501
         """OrgSetting - a model defined in Swagger"""  # noqa: E501
         self._links = None
         self._address1 = None
@@ -104,41 +104,203 @@ class OrgSetting(object):
         self._website = None
         self.discriminator = None
         if links is not None:
-            self.links = links
+            if hasattr(models, self.swagger_types['links']):
+                nested_class = getattr(models, self.swagger_types['links'])
+                if isinstance(links, nested_class):
+                    self.links = links
+                elif isinstance(links, dict):
+                    self.links = nested_class.from_kwargs(**links)
+                else:
+                    self.links = links
+            else:
+                self.links = links
         if address1 is not None:
-            self.address1 = address1
+            if hasattr(models, self.swagger_types['address1']):
+                nested_class = getattr(models, self.swagger_types['address1'])
+                if isinstance(address1, nested_class):
+                    self.address1 = address1
+                elif isinstance(address1, dict):
+                    self.address1 = nested_class.from_kwargs(**address1)
+                else:
+                    self.address1 = address1
+            else:
+                self.address1 = address1
         if address2 is not None:
-            self.address2 = address2
+            if hasattr(models, self.swagger_types['address2']):
+                nested_class = getattr(models, self.swagger_types['address2'])
+                if isinstance(address2, nested_class):
+                    self.address2 = address2
+                elif isinstance(address2, dict):
+                    self.address2 = nested_class.from_kwargs(**address2)
+                else:
+                    self.address2 = address2
+            else:
+                self.address2 = address2
         if city is not None:
-            self.city = city
+            if hasattr(models, self.swagger_types['city']):
+                nested_class = getattr(models, self.swagger_types['city'])
+                if isinstance(city, nested_class):
+                    self.city = city
+                elif isinstance(city, dict):
+                    self.city = nested_class.from_kwargs(**city)
+                else:
+                    self.city = city
+            else:
+                self.city = city
         if company_name is not None:
-            self.company_name = company_name
+            if hasattr(models, self.swagger_types['company_name']):
+                nested_class = getattr(models, self.swagger_types['company_name'])
+                if isinstance(company_name, nested_class):
+                    self.company_name = company_name
+                elif isinstance(company_name, dict):
+                    self.company_name = nested_class.from_kwargs(**company_name)
+                else:
+                    self.company_name = company_name
+            else:
+                self.company_name = company_name
         if country is not None:
-            self.country = country
+            if hasattr(models, self.swagger_types['country']):
+                nested_class = getattr(models, self.swagger_types['country'])
+                if isinstance(country, nested_class):
+                    self.country = country
+                elif isinstance(country, dict):
+                    self.country = nested_class.from_kwargs(**country)
+                else:
+                    self.country = country
+            else:
+                self.country = country
         if created is not None:
-            self.created = created
+            if hasattr(models, self.swagger_types['created']):
+                nested_class = getattr(models, self.swagger_types['created'])
+                if isinstance(created, nested_class):
+                    self.created = created
+                elif isinstance(created, dict):
+                    self.created = nested_class.from_kwargs(**created)
+                else:
+                    self.created = created
+            else:
+                self.created = created
         if end_user_support_help_url is not None:
-            self.end_user_support_help_url = end_user_support_help_url
+            if hasattr(models, self.swagger_types['end_user_support_help_url']):
+                nested_class = getattr(models, self.swagger_types['end_user_support_help_url'])
+                if isinstance(end_user_support_help_url, nested_class):
+                    self.end_user_support_help_url = end_user_support_help_url
+                elif isinstance(end_user_support_help_url, dict):
+                    self.end_user_support_help_url = nested_class.from_kwargs(**end_user_support_help_url)
+                else:
+                    self.end_user_support_help_url = end_user_support_help_url
+            else:
+                self.end_user_support_help_url = end_user_support_help_url
         if expires_at is not None:
-            self.expires_at = expires_at
+            if hasattr(models, self.swagger_types['expires_at']):
+                nested_class = getattr(models, self.swagger_types['expires_at'])
+                if isinstance(expires_at, nested_class):
+                    self.expires_at = expires_at
+                elif isinstance(expires_at, dict):
+                    self.expires_at = nested_class.from_kwargs(**expires_at)
+                else:
+                    self.expires_at = expires_at
+            else:
+                self.expires_at = expires_at
         if id is not None:
-            self.id = id
+            if hasattr(models, self.swagger_types['id']):
+                nested_class = getattr(models, self.swagger_types['id'])
+                if isinstance(id, nested_class):
+                    self.id = id
+                elif isinstance(id, dict):
+                    self.id = nested_class.from_kwargs(**id)
+                else:
+                    self.id = id
+            else:
+                self.id = id
         if last_updated is not None:
-            self.last_updated = last_updated
+            if hasattr(models, self.swagger_types['last_updated']):
+                nested_class = getattr(models, self.swagger_types['last_updated'])
+                if isinstance(last_updated, nested_class):
+                    self.last_updated = last_updated
+                elif isinstance(last_updated, dict):
+                    self.last_updated = nested_class.from_kwargs(**last_updated)
+                else:
+                    self.last_updated = last_updated
+            else:
+                self.last_updated = last_updated
         if phone_number is not None:
-            self.phone_number = phone_number
+            if hasattr(models, self.swagger_types['phone_number']):
+                nested_class = getattr(models, self.swagger_types['phone_number'])
+                if isinstance(phone_number, nested_class):
+                    self.phone_number = phone_number
+                elif isinstance(phone_number, dict):
+                    self.phone_number = nested_class.from_kwargs(**phone_number)
+                else:
+                    self.phone_number = phone_number
+            else:
+                self.phone_number = phone_number
         if postal_code is not None:
-            self.postal_code = postal_code
+            if hasattr(models, self.swagger_types['postal_code']):
+                nested_class = getattr(models, self.swagger_types['postal_code'])
+                if isinstance(postal_code, nested_class):
+                    self.postal_code = postal_code
+                elif isinstance(postal_code, dict):
+                    self.postal_code = nested_class.from_kwargs(**postal_code)
+                else:
+                    self.postal_code = postal_code
+            else:
+                self.postal_code = postal_code
         if state is not None:
-            self.state = state
+            if hasattr(models, self.swagger_types['state']):
+                nested_class = getattr(models, self.swagger_types['state'])
+                if isinstance(state, nested_class):
+                    self.state = state
+                elif isinstance(state, dict):
+                    self.state = nested_class.from_kwargs(**state)
+                else:
+                    self.state = state
+            else:
+                self.state = state
         if status is not None:
-            self.status = status
+            if hasattr(models, self.swagger_types['status']):
+                nested_class = getattr(models, self.swagger_types['status'])
+                if isinstance(status, nested_class):
+                    self.status = status
+                elif isinstance(status, dict):
+                    self.status = nested_class.from_kwargs(**status)
+                else:
+                    self.status = status
+            else:
+                self.status = status
         if subdomain is not None:
-            self.subdomain = subdomain
+            if hasattr(models, self.swagger_types['subdomain']):
+                nested_class = getattr(models, self.swagger_types['subdomain'])
+                if isinstance(subdomain, nested_class):
+                    self.subdomain = subdomain
+                elif isinstance(subdomain, dict):
+                    self.subdomain = nested_class.from_kwargs(**subdomain)
+                else:
+                    self.subdomain = subdomain
+            else:
+                self.subdomain = subdomain
         if support_phone_number is not None:
-            self.support_phone_number = support_phone_number
+            if hasattr(models, self.swagger_types['support_phone_number']):
+                nested_class = getattr(models, self.swagger_types['support_phone_number'])
+                if isinstance(support_phone_number, nested_class):
+                    self.support_phone_number = support_phone_number
+                elif isinstance(support_phone_number, dict):
+                    self.support_phone_number = nested_class.from_kwargs(**support_phone_number)
+                else:
+                    self.support_phone_number = support_phone_number
+            else:
+                self.support_phone_number = support_phone_number
         if website is not None:
-            self.website = website
+            if hasattr(models, self.swagger_types['website']):
+                nested_class = getattr(models, self.swagger_types['website'])
+                if isinstance(website, nested_class):
+                    self.website = website
+                elif isinstance(website, dict):
+                    self.website = nested_class.from_kwargs(**website)
+                else:
+                    self.website = website
+            else:
+                self.website = website
 
     @property
     def links(self):

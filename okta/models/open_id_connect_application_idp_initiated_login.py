@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class OpenIdConnectApplicationIdpInitiatedLogin(object):
@@ -29,10 +30,9 @@ class OpenIdConnectApplicationIdpInitiatedLogin(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'mode': 'str',
-        'default_scope': 'list[str]'
-    }
+    swagger_types = {}
+    swagger_types['mode'] = 'str'
+    swagger_types['default_scope'] = 'list[str]'
 
     attribute_map = {
         'mode': 'mode',
@@ -50,15 +50,33 @@ class OpenIdConnectApplicationIdpInitiatedLogin(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, mode=None, default_scope=None):  # noqa: E501
+    def set_attributes(self, mode=None, default_scope=None, **kwargs):  # noqa: E501
         """OpenIdConnectApplicationIdpInitiatedLogin - a model defined in Swagger"""  # noqa: E501
         self._mode = None
         self._default_scope = None
         self.discriminator = None
         if mode is not None:
-            self.mode = mode
+            if hasattr(models, self.swagger_types['mode']):
+                nested_class = getattr(models, self.swagger_types['mode'])
+                if isinstance(mode, nested_class):
+                    self.mode = mode
+                elif isinstance(mode, dict):
+                    self.mode = nested_class.from_kwargs(**mode)
+                else:
+                    self.mode = mode
+            else:
+                self.mode = mode
         if default_scope is not None:
-            self.default_scope = default_scope
+            if hasattr(models, self.swagger_types['default_scope']):
+                nested_class = getattr(models, self.swagger_types['default_scope'])
+                if isinstance(default_scope, nested_class):
+                    self.default_scope = default_scope
+                elif isinstance(default_scope, dict):
+                    self.default_scope = nested_class.from_kwargs(**default_scope)
+                else:
+                    self.default_scope = default_scope
+            else:
+                self.default_scope = default_scope
 
     @property
     def mode(self):

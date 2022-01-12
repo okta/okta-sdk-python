@@ -16,6 +16,7 @@ import re  # noqa: F401
 import six
 from okta.models.policy import Policy  # noqa: F401,E501
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class OktaSignOnPolicy(Policy):
@@ -30,11 +31,10 @@ class OktaSignOnPolicy(Policy):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'conditions': 'OktaSignOnPolicyConditions'
-    }
+    swagger_types = {}
     if hasattr(Policy, "swagger_types"):
         swagger_types.update(Policy.swagger_types)
+    swagger_types['conditions'] = 'OktaSignOnPolicyConditions'
 
     attribute_map = {
         'conditions': 'conditions'
@@ -53,13 +53,25 @@ class OktaSignOnPolicy(Policy):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, conditions=None, *args, **kwargs):  # noqa: E501
+    def set_attributes(self, conditions=None, **kwargs):  # noqa: E501
         """OktaSignOnPolicy - a model defined in Swagger"""  # noqa: E501
+        config = {}
+        if kwargs is not None:
+            config = {to_snake_case(key): value for key, value in kwargs.items()}
+        super().set_attributes(**config)
         self._conditions = None
         self.discriminator = None
         if conditions is not None:
-            self.conditions = conditions
-        super().set_attributes(*args, **kwargs)
+            if hasattr(models, self.swagger_types['conditions']):
+                nested_class = getattr(models, self.swagger_types['conditions'])
+                if isinstance(conditions, nested_class):
+                    self.conditions = conditions
+                elif isinstance(conditions, dict):
+                    self.conditions = nested_class.from_kwargs(**conditions)
+                else:
+                    self.conditions = conditions
+            else:
+                self.conditions = conditions
 
     @property
     def conditions(self):

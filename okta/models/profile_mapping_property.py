@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class ProfileMappingProperty(object):
@@ -29,10 +30,9 @@ class ProfileMappingProperty(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'expression': 'str',
-        'push_status': 'ProfileMappingPropertyPushStatus'
-    }
+    swagger_types = {}
+    swagger_types['expression'] = 'str'
+    swagger_types['push_status'] = 'ProfileMappingPropertyPushStatus'
 
     attribute_map = {
         'expression': 'expression',
@@ -50,15 +50,33 @@ class ProfileMappingProperty(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, expression=None, push_status=None):  # noqa: E501
+    def set_attributes(self, expression=None, push_status=None, **kwargs):  # noqa: E501
         """ProfileMappingProperty - a model defined in Swagger"""  # noqa: E501
         self._expression = None
         self._push_status = None
         self.discriminator = None
         if expression is not None:
-            self.expression = expression
+            if hasattr(models, self.swagger_types['expression']):
+                nested_class = getattr(models, self.swagger_types['expression'])
+                if isinstance(expression, nested_class):
+                    self.expression = expression
+                elif isinstance(expression, dict):
+                    self.expression = nested_class.from_kwargs(**expression)
+                else:
+                    self.expression = expression
+            else:
+                self.expression = expression
         if push_status is not None:
-            self.push_status = push_status
+            if hasattr(models, self.swagger_types['push_status']):
+                nested_class = getattr(models, self.swagger_types['push_status'])
+                if isinstance(push_status, nested_class):
+                    self.push_status = push_status
+                elif isinstance(push_status, dict):
+                    self.push_status = nested_class.from_kwargs(**push_status)
+                else:
+                    self.push_status = push_status
+            else:
+                self.push_status = push_status
 
     @property
     def expression(self):

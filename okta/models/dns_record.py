@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class DNSRecord(object):
@@ -29,12 +30,11 @@ class DNSRecord(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'expiration': 'str',
-        'fqdn': 'str',
-        'record_type': 'DNSRecordType',
-        'values': 'list[str]'
-    }
+    swagger_types = {}
+    swagger_types['expiration'] = 'str'
+    swagger_types['fqdn'] = 'str'
+    swagger_types['record_type'] = 'DNSRecordType'
+    swagger_types['values'] = 'list[str]'
 
     attribute_map = {
         'expiration': 'expiration',
@@ -54,7 +54,7 @@ class DNSRecord(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, expiration=None, fqdn=None, record_type=None, values=None):  # noqa: E501
+    def set_attributes(self, expiration=None, fqdn=None, record_type=None, values=None, **kwargs):  # noqa: E501
         """DNSRecord - a model defined in Swagger"""  # noqa: E501
         self._expiration = None
         self._fqdn = None
@@ -62,13 +62,49 @@ class DNSRecord(object):
         self._values = None
         self.discriminator = None
         if expiration is not None:
-            self.expiration = expiration
+            if hasattr(models, self.swagger_types['expiration']):
+                nested_class = getattr(models, self.swagger_types['expiration'])
+                if isinstance(expiration, nested_class):
+                    self.expiration = expiration
+                elif isinstance(expiration, dict):
+                    self.expiration = nested_class.from_kwargs(**expiration)
+                else:
+                    self.expiration = expiration
+            else:
+                self.expiration = expiration
         if fqdn is not None:
-            self.fqdn = fqdn
+            if hasattr(models, self.swagger_types['fqdn']):
+                nested_class = getattr(models, self.swagger_types['fqdn'])
+                if isinstance(fqdn, nested_class):
+                    self.fqdn = fqdn
+                elif isinstance(fqdn, dict):
+                    self.fqdn = nested_class.from_kwargs(**fqdn)
+                else:
+                    self.fqdn = fqdn
+            else:
+                self.fqdn = fqdn
         if record_type is not None:
-            self.record_type = record_type
+            if hasattr(models, self.swagger_types['record_type']):
+                nested_class = getattr(models, self.swagger_types['record_type'])
+                if isinstance(record_type, nested_class):
+                    self.record_type = record_type
+                elif isinstance(record_type, dict):
+                    self.record_type = nested_class.from_kwargs(**record_type)
+                else:
+                    self.record_type = record_type
+            else:
+                self.record_type = record_type
         if values is not None:
-            self.values = values
+            if hasattr(models, self.swagger_types['values']):
+                nested_class = getattr(models, self.swagger_types['values'])
+                if isinstance(values, nested_class):
+                    self.values = values
+                elif isinstance(values, dict):
+                    self.values = nested_class.from_kwargs(**values)
+                else:
+                    self.values = values
+            else:
+                self.values = values
 
     @property
     def expiration(self):

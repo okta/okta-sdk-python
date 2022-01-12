@@ -16,6 +16,7 @@ import re  # noqa: F401
 import six
 from okta.models.policy_rule_actions import PolicyRuleActions  # noqa: F401,E501
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class OktaSignOnPolicyRuleActions(PolicyRuleActions):
@@ -30,11 +31,10 @@ class OktaSignOnPolicyRuleActions(PolicyRuleActions):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'signon': 'OktaSignOnPolicyRuleSignonActions'
-    }
+    swagger_types = {}
     if hasattr(PolicyRuleActions, "swagger_types"):
         swagger_types.update(PolicyRuleActions.swagger_types)
+    swagger_types['signon'] = 'OktaSignOnPolicyRuleSignonActions'
 
     attribute_map = {
         'signon': 'signon'
@@ -53,13 +53,25 @@ class OktaSignOnPolicyRuleActions(PolicyRuleActions):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, signon=None, *args, **kwargs):  # noqa: E501
+    def set_attributes(self, signon=None, **kwargs):  # noqa: E501
         """OktaSignOnPolicyRuleActions - a model defined in Swagger"""  # noqa: E501
+        config = {}
+        if kwargs is not None:
+            config = {to_snake_case(key): value for key, value in kwargs.items()}
+        super().set_attributes(**config)
         self._signon = None
         self.discriminator = None
         if signon is not None:
-            self.signon = signon
-        super().set_attributes(*args, **kwargs)
+            if hasattr(models, self.swagger_types['signon']):
+                nested_class = getattr(models, self.swagger_types['signon'])
+                if isinstance(signon, nested_class):
+                    self.signon = signon
+                elif isinstance(signon, dict):
+                    self.signon = nested_class.from_kwargs(**signon)
+                else:
+                    self.signon = signon
+            else:
+                self.signon = signon
 
     @property
     def signon(self):

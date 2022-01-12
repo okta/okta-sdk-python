@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class InlineHookResponseCommandValue(object):
@@ -29,11 +30,10 @@ class InlineHookResponseCommandValue(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'op': 'str',
-        'path': 'str',
-        'value': 'str'
-    }
+    swagger_types = {}
+    swagger_types['op'] = 'str'
+    swagger_types['path'] = 'str'
+    swagger_types['value'] = 'str'
 
     attribute_map = {
         'op': 'op',
@@ -52,18 +52,45 @@ class InlineHookResponseCommandValue(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, op=None, path=None, value=None):  # noqa: E501
+    def set_attributes(self, op=None, path=None, value=None, **kwargs):  # noqa: E501
         """InlineHookResponseCommandValue - a model defined in Swagger"""  # noqa: E501
         self._op = None
         self._path = None
         self._value = None
         self.discriminator = None
         if op is not None:
-            self.op = op
+            if hasattr(models, self.swagger_types['op']):
+                nested_class = getattr(models, self.swagger_types['op'])
+                if isinstance(op, nested_class):
+                    self.op = op
+                elif isinstance(op, dict):
+                    self.op = nested_class.from_kwargs(**op)
+                else:
+                    self.op = op
+            else:
+                self.op = op
         if path is not None:
-            self.path = path
+            if hasattr(models, self.swagger_types['path']):
+                nested_class = getattr(models, self.swagger_types['path'])
+                if isinstance(path, nested_class):
+                    self.path = path
+                elif isinstance(path, dict):
+                    self.path = nested_class.from_kwargs(**path)
+                else:
+                    self.path = path
+            else:
+                self.path = path
         if value is not None:
-            self.value = value
+            if hasattr(models, self.swagger_types['value']):
+                nested_class = getattr(models, self.swagger_types['value'])
+                if isinstance(value, nested_class):
+                    self.value = value
+                elif isinstance(value, dict):
+                    self.value = nested_class.from_kwargs(**value)
+                else:
+                    self.value = value
+            else:
+                self.value = value
 
     @property
     def op(self):

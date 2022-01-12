@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class PlatformConditionEvaluatorPlatform(object):
@@ -29,10 +30,9 @@ class PlatformConditionEvaluatorPlatform(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'os': 'PlatformConditionEvaluatorPlatformOperatingSystem',
-        'type': 'PolicyPlatformType'
-    }
+    swagger_types = {}
+    swagger_types['os'] = 'PlatformConditionEvaluatorPlatformOperatingSystem'
+    swagger_types['type'] = 'PolicyPlatformType'
 
     attribute_map = {
         'os': 'os',
@@ -50,15 +50,33 @@ class PlatformConditionEvaluatorPlatform(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, os=None, type=None):  # noqa: E501
+    def set_attributes(self, os=None, type=None, **kwargs):  # noqa: E501
         """PlatformConditionEvaluatorPlatform - a model defined in Swagger"""  # noqa: E501
         self._os = None
         self._type = None
         self.discriminator = None
         if os is not None:
-            self.os = os
+            if hasattr(models, self.swagger_types['os']):
+                nested_class = getattr(models, self.swagger_types['os'])
+                if isinstance(os, nested_class):
+                    self.os = os
+                elif isinstance(os, dict):
+                    self.os = nested_class.from_kwargs(**os)
+                else:
+                    self.os = os
+            else:
+                self.os = os
         if type is not None:
-            self.type = type
+            if hasattr(models, self.swagger_types['type']):
+                nested_class = getattr(models, self.swagger_types['type'])
+                if isinstance(type, nested_class):
+                    self.type = type
+                elif isinstance(type, dict):
+                    self.type = nested_class.from_kwargs(**type)
+                else:
+                    self.type = type
+            else:
+                self.type = type
 
     @property
     def os(self):

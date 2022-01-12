@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class Theme(object):
@@ -29,18 +30,17 @@ class Theme(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'links': 'dict(str, object)',
-        'background_image': 'str',
-        'email_template_touch_point_variant': 'EmailTemplateTouchPointVariant',
-        'end_user_dashboard_touch_point_variant': 'EndUserDashboardTouchPointVariant',
-        'error_page_touch_point_variant': 'ErrorPageTouchPointVariant',
-        'primary_color_contrast_hex': 'str',
-        'primary_color_hex': 'str',
-        'secondary_color_contrast_hex': 'str',
-        'secondary_color_hex': 'str',
-        'sign_in_page_touch_point_variant': 'SignInPageTouchPointVariant'
-    }
+    swagger_types = {}
+    swagger_types['links'] = 'dict(str, object)'
+    swagger_types['background_image'] = 'str'
+    swagger_types['email_template_touch_point_variant'] = 'EmailTemplateTouchPointVariant'
+    swagger_types['end_user_dashboard_touch_point_variant'] = 'EndUserDashboardTouchPointVariant'
+    swagger_types['error_page_touch_point_variant'] = 'ErrorPageTouchPointVariant'
+    swagger_types['primary_color_contrast_hex'] = 'str'
+    swagger_types['primary_color_hex'] = 'str'
+    swagger_types['secondary_color_contrast_hex'] = 'str'
+    swagger_types['secondary_color_hex'] = 'str'
+    swagger_types['sign_in_page_touch_point_variant'] = 'SignInPageTouchPointVariant'
 
     attribute_map = {
         'links': '_links',
@@ -66,7 +66,7 @@ class Theme(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, links=None, background_image=None, email_template_touch_point_variant=None, end_user_dashboard_touch_point_variant=None, error_page_touch_point_variant=None, primary_color_contrast_hex=None, primary_color_hex=None, secondary_color_contrast_hex=None, secondary_color_hex=None, sign_in_page_touch_point_variant=None):  # noqa: E501
+    def set_attributes(self, links=None, background_image=None, email_template_touch_point_variant=None, end_user_dashboard_touch_point_variant=None, error_page_touch_point_variant=None, primary_color_contrast_hex=None, primary_color_hex=None, secondary_color_contrast_hex=None, secondary_color_hex=None, sign_in_page_touch_point_variant=None, **kwargs):  # noqa: E501
         """Theme - a model defined in Swagger"""  # noqa: E501
         self._links = None
         self._background_image = None
@@ -80,25 +80,115 @@ class Theme(object):
         self._sign_in_page_touch_point_variant = None
         self.discriminator = None
         if links is not None:
-            self.links = links
+            if hasattr(models, self.swagger_types['links']):
+                nested_class = getattr(models, self.swagger_types['links'])
+                if isinstance(links, nested_class):
+                    self.links = links
+                elif isinstance(links, dict):
+                    self.links = nested_class.from_kwargs(**links)
+                else:
+                    self.links = links
+            else:
+                self.links = links
         if background_image is not None:
-            self.background_image = background_image
+            if hasattr(models, self.swagger_types['background_image']):
+                nested_class = getattr(models, self.swagger_types['background_image'])
+                if isinstance(background_image, nested_class):
+                    self.background_image = background_image
+                elif isinstance(background_image, dict):
+                    self.background_image = nested_class.from_kwargs(**background_image)
+                else:
+                    self.background_image = background_image
+            else:
+                self.background_image = background_image
         if email_template_touch_point_variant is not None:
-            self.email_template_touch_point_variant = email_template_touch_point_variant
+            if hasattr(models, self.swagger_types['email_template_touch_point_variant']):
+                nested_class = getattr(models, self.swagger_types['email_template_touch_point_variant'])
+                if isinstance(email_template_touch_point_variant, nested_class):
+                    self.email_template_touch_point_variant = email_template_touch_point_variant
+                elif isinstance(email_template_touch_point_variant, dict):
+                    self.email_template_touch_point_variant = nested_class.from_kwargs(**email_template_touch_point_variant)
+                else:
+                    self.email_template_touch_point_variant = email_template_touch_point_variant
+            else:
+                self.email_template_touch_point_variant = email_template_touch_point_variant
         if end_user_dashboard_touch_point_variant is not None:
-            self.end_user_dashboard_touch_point_variant = end_user_dashboard_touch_point_variant
+            if hasattr(models, self.swagger_types['end_user_dashboard_touch_point_variant']):
+                nested_class = getattr(models, self.swagger_types['end_user_dashboard_touch_point_variant'])
+                if isinstance(end_user_dashboard_touch_point_variant, nested_class):
+                    self.end_user_dashboard_touch_point_variant = end_user_dashboard_touch_point_variant
+                elif isinstance(end_user_dashboard_touch_point_variant, dict):
+                    self.end_user_dashboard_touch_point_variant = nested_class.from_kwargs(**end_user_dashboard_touch_point_variant)
+                else:
+                    self.end_user_dashboard_touch_point_variant = end_user_dashboard_touch_point_variant
+            else:
+                self.end_user_dashboard_touch_point_variant = end_user_dashboard_touch_point_variant
         if error_page_touch_point_variant is not None:
-            self.error_page_touch_point_variant = error_page_touch_point_variant
+            if hasattr(models, self.swagger_types['error_page_touch_point_variant']):
+                nested_class = getattr(models, self.swagger_types['error_page_touch_point_variant'])
+                if isinstance(error_page_touch_point_variant, nested_class):
+                    self.error_page_touch_point_variant = error_page_touch_point_variant
+                elif isinstance(error_page_touch_point_variant, dict):
+                    self.error_page_touch_point_variant = nested_class.from_kwargs(**error_page_touch_point_variant)
+                else:
+                    self.error_page_touch_point_variant = error_page_touch_point_variant
+            else:
+                self.error_page_touch_point_variant = error_page_touch_point_variant
         if primary_color_contrast_hex is not None:
-            self.primary_color_contrast_hex = primary_color_contrast_hex
+            if hasattr(models, self.swagger_types['primary_color_contrast_hex']):
+                nested_class = getattr(models, self.swagger_types['primary_color_contrast_hex'])
+                if isinstance(primary_color_contrast_hex, nested_class):
+                    self.primary_color_contrast_hex = primary_color_contrast_hex
+                elif isinstance(primary_color_contrast_hex, dict):
+                    self.primary_color_contrast_hex = nested_class.from_kwargs(**primary_color_contrast_hex)
+                else:
+                    self.primary_color_contrast_hex = primary_color_contrast_hex
+            else:
+                self.primary_color_contrast_hex = primary_color_contrast_hex
         if primary_color_hex is not None:
-            self.primary_color_hex = primary_color_hex
+            if hasattr(models, self.swagger_types['primary_color_hex']):
+                nested_class = getattr(models, self.swagger_types['primary_color_hex'])
+                if isinstance(primary_color_hex, nested_class):
+                    self.primary_color_hex = primary_color_hex
+                elif isinstance(primary_color_hex, dict):
+                    self.primary_color_hex = nested_class.from_kwargs(**primary_color_hex)
+                else:
+                    self.primary_color_hex = primary_color_hex
+            else:
+                self.primary_color_hex = primary_color_hex
         if secondary_color_contrast_hex is not None:
-            self.secondary_color_contrast_hex = secondary_color_contrast_hex
+            if hasattr(models, self.swagger_types['secondary_color_contrast_hex']):
+                nested_class = getattr(models, self.swagger_types['secondary_color_contrast_hex'])
+                if isinstance(secondary_color_contrast_hex, nested_class):
+                    self.secondary_color_contrast_hex = secondary_color_contrast_hex
+                elif isinstance(secondary_color_contrast_hex, dict):
+                    self.secondary_color_contrast_hex = nested_class.from_kwargs(**secondary_color_contrast_hex)
+                else:
+                    self.secondary_color_contrast_hex = secondary_color_contrast_hex
+            else:
+                self.secondary_color_contrast_hex = secondary_color_contrast_hex
         if secondary_color_hex is not None:
-            self.secondary_color_hex = secondary_color_hex
+            if hasattr(models, self.swagger_types['secondary_color_hex']):
+                nested_class = getattr(models, self.swagger_types['secondary_color_hex'])
+                if isinstance(secondary_color_hex, nested_class):
+                    self.secondary_color_hex = secondary_color_hex
+                elif isinstance(secondary_color_hex, dict):
+                    self.secondary_color_hex = nested_class.from_kwargs(**secondary_color_hex)
+                else:
+                    self.secondary_color_hex = secondary_color_hex
+            else:
+                self.secondary_color_hex = secondary_color_hex
         if sign_in_page_touch_point_variant is not None:
-            self.sign_in_page_touch_point_variant = sign_in_page_touch_point_variant
+            if hasattr(models, self.swagger_types['sign_in_page_touch_point_variant']):
+                nested_class = getattr(models, self.swagger_types['sign_in_page_touch_point_variant'])
+                if isinstance(sign_in_page_touch_point_variant, nested_class):
+                    self.sign_in_page_touch_point_variant = sign_in_page_touch_point_variant
+                elif isinstance(sign_in_page_touch_point_variant, dict):
+                    self.sign_in_page_touch_point_variant = nested_class.from_kwargs(**sign_in_page_touch_point_variant)
+                else:
+                    self.sign_in_page_touch_point_variant = sign_in_page_touch_point_variant
+            else:
+                self.sign_in_page_touch_point_variant = sign_in_page_touch_point_variant
 
     @property
     def links(self):

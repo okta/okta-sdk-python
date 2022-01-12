@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class GroupRuleGroupAssignment(object):
@@ -29,9 +30,8 @@ class GroupRuleGroupAssignment(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'group_ids': 'list[str]'
-    }
+    swagger_types = {}
+    swagger_types['group_ids'] = 'list[str]'
 
     attribute_map = {
         'group_ids': 'groupIds'
@@ -48,12 +48,21 @@ class GroupRuleGroupAssignment(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, group_ids=None):  # noqa: E501
+    def set_attributes(self, group_ids=None, **kwargs):  # noqa: E501
         """GroupRuleGroupAssignment - a model defined in Swagger"""  # noqa: E501
         self._group_ids = None
         self.discriminator = None
         if group_ids is not None:
-            self.group_ids = group_ids
+            if hasattr(models, self.swagger_types['group_ids']):
+                nested_class = getattr(models, self.swagger_types['group_ids'])
+                if isinstance(group_ids, nested_class):
+                    self.group_ids = group_ids
+                elif isinstance(group_ids, dict):
+                    self.group_ids = nested_class.from_kwargs(**group_ids)
+                else:
+                    self.group_ids = group_ids
+            else:
+                self.group_ids = group_ids
 
     @property
     def group_ids(self):

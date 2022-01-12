@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class EmailUserFactorProfile(object):
@@ -29,9 +30,8 @@ class EmailUserFactorProfile(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'email': 'str'
-    }
+    swagger_types = {}
+    swagger_types['email'] = 'str'
 
     attribute_map = {
         'email': 'email'
@@ -48,12 +48,21 @@ class EmailUserFactorProfile(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, email=None):  # noqa: E501
+    def set_attributes(self, email=None, **kwargs):  # noqa: E501
         """EmailUserFactorProfile - a model defined in Swagger"""  # noqa: E501
         self._email = None
         self.discriminator = None
         if email is not None:
-            self.email = email
+            if hasattr(models, self.swagger_types['email']):
+                nested_class = getattr(models, self.swagger_types['email'])
+                if isinstance(email, nested_class):
+                    self.email = email
+                elif isinstance(email, dict):
+                    self.email = nested_class.from_kwargs(**email)
+                else:
+                    self.email = email
+            else:
+                self.email = email
 
     @property
     def email(self):

@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class PolicyAccountLinkFilterGroups(object):
@@ -29,9 +30,8 @@ class PolicyAccountLinkFilterGroups(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'include': 'list[str]'
-    }
+    swagger_types = {}
+    swagger_types['include'] = 'list[str]'
 
     attribute_map = {
         'include': 'include'
@@ -48,12 +48,21 @@ class PolicyAccountLinkFilterGroups(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, include=None):  # noqa: E501
+    def set_attributes(self, include=None, **kwargs):  # noqa: E501
         """PolicyAccountLinkFilterGroups - a model defined in Swagger"""  # noqa: E501
         self._include = None
         self.discriminator = None
         if include is not None:
-            self.include = include
+            if hasattr(models, self.swagger_types['include']):
+                nested_class = getattr(models, self.swagger_types['include'])
+                if isinstance(include, nested_class):
+                    self.include = include
+                elif isinstance(include, dict):
+                    self.include = nested_class.from_kwargs(**include)
+                else:
+                    self.include = include
+            else:
+                self.include = include
 
     @property
     def include(self):

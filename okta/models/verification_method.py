@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class VerificationMethod(object):
@@ -29,12 +30,11 @@ class VerificationMethod(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'constraints': 'list[AccessPolicyConstraints]',
-        'factor_mode': 'str',
-        'reauthenticate_in': 'str',
-        'type': 'str'
-    }
+    swagger_types = {}
+    swagger_types['constraints'] = 'list[AccessPolicyConstraints]'
+    swagger_types['factor_mode'] = 'str'
+    swagger_types['reauthenticate_in'] = 'str'
+    swagger_types['type'] = 'str'
 
     attribute_map = {
         'constraints': 'constraints',
@@ -54,7 +54,7 @@ class VerificationMethod(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, constraints=None, factor_mode=None, reauthenticate_in=None, type=None):  # noqa: E501
+    def set_attributes(self, constraints=None, factor_mode=None, reauthenticate_in=None, type=None, **kwargs):  # noqa: E501
         """VerificationMethod - a model defined in Swagger"""  # noqa: E501
         self._constraints = None
         self._factor_mode = None
@@ -62,13 +62,49 @@ class VerificationMethod(object):
         self._type = None
         self.discriminator = None
         if constraints is not None:
-            self.constraints = constraints
+            if hasattr(models, self.swagger_types['constraints']):
+                nested_class = getattr(models, self.swagger_types['constraints'])
+                if isinstance(constraints, nested_class):
+                    self.constraints = constraints
+                elif isinstance(constraints, dict):
+                    self.constraints = nested_class.from_kwargs(**constraints)
+                else:
+                    self.constraints = constraints
+            else:
+                self.constraints = constraints
         if factor_mode is not None:
-            self.factor_mode = factor_mode
+            if hasattr(models, self.swagger_types['factor_mode']):
+                nested_class = getattr(models, self.swagger_types['factor_mode'])
+                if isinstance(factor_mode, nested_class):
+                    self.factor_mode = factor_mode
+                elif isinstance(factor_mode, dict):
+                    self.factor_mode = nested_class.from_kwargs(**factor_mode)
+                else:
+                    self.factor_mode = factor_mode
+            else:
+                self.factor_mode = factor_mode
         if reauthenticate_in is not None:
-            self.reauthenticate_in = reauthenticate_in
+            if hasattr(models, self.swagger_types['reauthenticate_in']):
+                nested_class = getattr(models, self.swagger_types['reauthenticate_in'])
+                if isinstance(reauthenticate_in, nested_class):
+                    self.reauthenticate_in = reauthenticate_in
+                elif isinstance(reauthenticate_in, dict):
+                    self.reauthenticate_in = nested_class.from_kwargs(**reauthenticate_in)
+                else:
+                    self.reauthenticate_in = reauthenticate_in
+            else:
+                self.reauthenticate_in = reauthenticate_in
         if type is not None:
-            self.type = type
+            if hasattr(models, self.swagger_types['type']):
+                nested_class = getattr(models, self.swagger_types['type'])
+                if isinstance(type, nested_class):
+                    self.type = type
+                elif isinstance(type, dict):
+                    self.type = nested_class.from_kwargs(**type)
+                else:
+                    self.type = type
+            else:
+                self.type = type
 
     @property
     def constraints(self):

@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class LogDebugContext(object):
@@ -29,9 +30,8 @@ class LogDebugContext(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'debug_data': 'dict(str, object)'
-    }
+    swagger_types = {}
+    swagger_types['debug_data'] = 'dict(str, object)'
 
     attribute_map = {
         'debug_data': 'debugData'
@@ -48,12 +48,21 @@ class LogDebugContext(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, debug_data=None):  # noqa: E501
+    def set_attributes(self, debug_data=None, **kwargs):  # noqa: E501
         """LogDebugContext - a model defined in Swagger"""  # noqa: E501
         self._debug_data = None
         self.discriminator = None
         if debug_data is not None:
-            self.debug_data = debug_data
+            if hasattr(models, self.swagger_types['debug_data']):
+                nested_class = getattr(models, self.swagger_types['debug_data'])
+                if isinstance(debug_data, nested_class):
+                    self.debug_data = debug_data
+                elif isinstance(debug_data, dict):
+                    self.debug_data = nested_class.from_kwargs(**debug_data)
+                else:
+                    self.debug_data = debug_data
+            else:
+                self.debug_data = debug_data
 
     @property
     def debug_data(self):

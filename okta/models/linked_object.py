@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class LinkedObject(object):
@@ -29,11 +30,10 @@ class LinkedObject(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'links': 'dict(str, object)',
-        'associated': 'LinkedObjectDetails',
-        'primary': 'LinkedObjectDetails'
-    }
+    swagger_types = {}
+    swagger_types['links'] = 'dict(str, object)'
+    swagger_types['associated'] = 'LinkedObjectDetails'
+    swagger_types['primary'] = 'LinkedObjectDetails'
 
     attribute_map = {
         'links': '_links',
@@ -52,18 +52,45 @@ class LinkedObject(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, links=None, associated=None, primary=None):  # noqa: E501
+    def set_attributes(self, links=None, associated=None, primary=None, **kwargs):  # noqa: E501
         """LinkedObject - a model defined in Swagger"""  # noqa: E501
         self._links = None
         self._associated = None
         self._primary = None
         self.discriminator = None
         if links is not None:
-            self.links = links
+            if hasattr(models, self.swagger_types['links']):
+                nested_class = getattr(models, self.swagger_types['links'])
+                if isinstance(links, nested_class):
+                    self.links = links
+                elif isinstance(links, dict):
+                    self.links = nested_class.from_kwargs(**links)
+                else:
+                    self.links = links
+            else:
+                self.links = links
         if associated is not None:
-            self.associated = associated
+            if hasattr(models, self.swagger_types['associated']):
+                nested_class = getattr(models, self.swagger_types['associated'])
+                if isinstance(associated, nested_class):
+                    self.associated = associated
+                elif isinstance(associated, dict):
+                    self.associated = nested_class.from_kwargs(**associated)
+                else:
+                    self.associated = associated
+            else:
+                self.associated = associated
         if primary is not None:
-            self.primary = primary
+            if hasattr(models, self.swagger_types['primary']):
+                nested_class = getattr(models, self.swagger_types['primary'])
+                if isinstance(primary, nested_class):
+                    self.primary = primary
+                elif isinstance(primary, dict):
+                    self.primary = nested_class.from_kwargs(**primary)
+                else:
+                    self.primary = primary
+            else:
+                self.primary = primary
 
     @property
     def links(self):

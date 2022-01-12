@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class RiskPolicyRuleCondition(object):
@@ -29,9 +30,8 @@ class RiskPolicyRuleCondition(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'behaviors': 'list[str]'
-    }
+    swagger_types = {}
+    swagger_types['behaviors'] = 'list[str]'
 
     attribute_map = {
         'behaviors': 'behaviors'
@@ -48,12 +48,21 @@ class RiskPolicyRuleCondition(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, behaviors=None):  # noqa: E501
+    def set_attributes(self, behaviors=None, **kwargs):  # noqa: E501
         """RiskPolicyRuleCondition - a model defined in Swagger"""  # noqa: E501
         self._behaviors = None
         self.discriminator = None
         if behaviors is not None:
-            self.behaviors = behaviors
+            if hasattr(models, self.swagger_types['behaviors']):
+                nested_class = getattr(models, self.swagger_types['behaviors'])
+                if isinstance(behaviors, nested_class):
+                    self.behaviors = behaviors
+                elif isinstance(behaviors, dict):
+                    self.behaviors = nested_class.from_kwargs(**behaviors)
+                else:
+                    self.behaviors = behaviors
+            else:
+                self.behaviors = behaviors
 
     @property
     def behaviors(self):

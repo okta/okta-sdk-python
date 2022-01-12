@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class InlineHookChannelConfigHeaders(object):
@@ -29,10 +30,9 @@ class InlineHookChannelConfigHeaders(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'key': 'str',
-        'value': 'str'
-    }
+    swagger_types = {}
+    swagger_types['key'] = 'str'
+    swagger_types['value'] = 'str'
 
     attribute_map = {
         'key': 'key',
@@ -50,15 +50,33 @@ class InlineHookChannelConfigHeaders(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, key=None, value=None):  # noqa: E501
+    def set_attributes(self, key=None, value=None, **kwargs):  # noqa: E501
         """InlineHookChannelConfigHeaders - a model defined in Swagger"""  # noqa: E501
         self._key = None
         self._value = None
         self.discriminator = None
         if key is not None:
-            self.key = key
+            if hasattr(models, self.swagger_types['key']):
+                nested_class = getattr(models, self.swagger_types['key'])
+                if isinstance(key, nested_class):
+                    self.key = key
+                elif isinstance(key, dict):
+                    self.key = nested_class.from_kwargs(**key)
+                else:
+                    self.key = key
+            else:
+                self.key = key
         if value is not None:
-            self.value = value
+            if hasattr(models, self.swagger_types['value']):
+                nested_class = getattr(models, self.swagger_types['value'])
+                if isinstance(value, nested_class):
+                    self.value = value
+                elif isinstance(value, dict):
+                    self.value = nested_class.from_kwargs(**value)
+                else:
+                    self.value = value
+            else:
+                self.value = value
 
     @property
     def key(self):

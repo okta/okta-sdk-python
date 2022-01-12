@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class InactivityPolicyRuleCondition(object):
@@ -29,10 +30,9 @@ class InactivityPolicyRuleCondition(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'number': 'int',
-        'unit': 'str'
-    }
+    swagger_types = {}
+    swagger_types['number'] = 'int'
+    swagger_types['unit'] = 'str'
 
     attribute_map = {
         'number': 'number',
@@ -50,15 +50,33 @@ class InactivityPolicyRuleCondition(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, number=None, unit=None):  # noqa: E501
+    def set_attributes(self, number=None, unit=None, **kwargs):  # noqa: E501
         """InactivityPolicyRuleCondition - a model defined in Swagger"""  # noqa: E501
         self._number = None
         self._unit = None
         self.discriminator = None
         if number is not None:
-            self.number = number
+            if hasattr(models, self.swagger_types['number']):
+                nested_class = getattr(models, self.swagger_types['number'])
+                if isinstance(number, nested_class):
+                    self.number = number
+                elif isinstance(number, dict):
+                    self.number = nested_class.from_kwargs(**number)
+                else:
+                    self.number = number
+            else:
+                self.number = number
         if unit is not None:
-            self.unit = unit
+            if hasattr(models, self.swagger_types['unit']):
+                nested_class = getattr(models, self.swagger_types['unit'])
+                if isinstance(unit, nested_class):
+                    self.unit = unit
+                elif isinstance(unit, dict):
+                    self.unit = nested_class.from_kwargs(**unit)
+                else:
+                    self.unit = unit
+            else:
+                self.unit = unit
 
     @property
     def number(self):

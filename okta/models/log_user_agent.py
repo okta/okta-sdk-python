@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class LogUserAgent(object):
@@ -29,11 +30,10 @@ class LogUserAgent(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'browser': 'str',
-        'os': 'str',
-        'raw_user_agent': 'str'
-    }
+    swagger_types = {}
+    swagger_types['browser'] = 'str'
+    swagger_types['os'] = 'str'
+    swagger_types['raw_user_agent'] = 'str'
 
     attribute_map = {
         'browser': 'browser',
@@ -52,18 +52,45 @@ class LogUserAgent(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, browser=None, os=None, raw_user_agent=None):  # noqa: E501
+    def set_attributes(self, browser=None, os=None, raw_user_agent=None, **kwargs):  # noqa: E501
         """LogUserAgent - a model defined in Swagger"""  # noqa: E501
         self._browser = None
         self._os = None
         self._raw_user_agent = None
         self.discriminator = None
         if browser is not None:
-            self.browser = browser
+            if hasattr(models, self.swagger_types['browser']):
+                nested_class = getattr(models, self.swagger_types['browser'])
+                if isinstance(browser, nested_class):
+                    self.browser = browser
+                elif isinstance(browser, dict):
+                    self.browser = nested_class.from_kwargs(**browser)
+                else:
+                    self.browser = browser
+            else:
+                self.browser = browser
         if os is not None:
-            self.os = os
+            if hasattr(models, self.swagger_types['os']):
+                nested_class = getattr(models, self.swagger_types['os'])
+                if isinstance(os, nested_class):
+                    self.os = os
+                elif isinstance(os, dict):
+                    self.os = nested_class.from_kwargs(**os)
+                else:
+                    self.os = os
+            else:
+                self.os = os
         if raw_user_agent is not None:
-            self.raw_user_agent = raw_user_agent
+            if hasattr(models, self.swagger_types['raw_user_agent']):
+                nested_class = getattr(models, self.swagger_types['raw_user_agent'])
+                if isinstance(raw_user_agent, nested_class):
+                    self.raw_user_agent = raw_user_agent
+                elif isinstance(raw_user_agent, dict):
+                    self.raw_user_agent = nested_class.from_kwargs(**raw_user_agent)
+                else:
+                    self.raw_user_agent = raw_user_agent
+            else:
+                self.raw_user_agent = raw_user_agent
 
     @property
     def browser(self):

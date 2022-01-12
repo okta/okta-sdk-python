@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class ApplicationCredentialsUsernameTemplate(object):
@@ -29,12 +30,11 @@ class ApplicationCredentialsUsernameTemplate(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'push_status': 'str',
-        'suffix': 'str',
-        'template': 'str',
-        'type': 'str'
-    }
+    swagger_types = {}
+    swagger_types['push_status'] = 'str'
+    swagger_types['suffix'] = 'str'
+    swagger_types['template'] = 'str'
+    swagger_types['type'] = 'str'
 
     attribute_map = {
         'push_status': 'pushStatus',
@@ -54,7 +54,7 @@ class ApplicationCredentialsUsernameTemplate(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, push_status=None, suffix=None, template=None, type=None):  # noqa: E501
+    def set_attributes(self, push_status=None, suffix=None, template=None, type=None, **kwargs):  # noqa: E501
         """ApplicationCredentialsUsernameTemplate - a model defined in Swagger"""  # noqa: E501
         self._push_status = None
         self._suffix = None
@@ -62,13 +62,49 @@ class ApplicationCredentialsUsernameTemplate(object):
         self._type = None
         self.discriminator = None
         if push_status is not None:
-            self.push_status = push_status
+            if hasattr(models, self.swagger_types['push_status']):
+                nested_class = getattr(models, self.swagger_types['push_status'])
+                if isinstance(push_status, nested_class):
+                    self.push_status = push_status
+                elif isinstance(push_status, dict):
+                    self.push_status = nested_class.from_kwargs(**push_status)
+                else:
+                    self.push_status = push_status
+            else:
+                self.push_status = push_status
         if suffix is not None:
-            self.suffix = suffix
+            if hasattr(models, self.swagger_types['suffix']):
+                nested_class = getattr(models, self.swagger_types['suffix'])
+                if isinstance(suffix, nested_class):
+                    self.suffix = suffix
+                elif isinstance(suffix, dict):
+                    self.suffix = nested_class.from_kwargs(**suffix)
+                else:
+                    self.suffix = suffix
+            else:
+                self.suffix = suffix
         if template is not None:
-            self.template = template
+            if hasattr(models, self.swagger_types['template']):
+                nested_class = getattr(models, self.swagger_types['template'])
+                if isinstance(template, nested_class):
+                    self.template = template
+                elif isinstance(template, dict):
+                    self.template = nested_class.from_kwargs(**template)
+                else:
+                    self.template = template
+            else:
+                self.template = template
         if type is not None:
-            self.type = type
+            if hasattr(models, self.swagger_types['type']):
+                nested_class = getattr(models, self.swagger_types['type'])
+                if isinstance(type, nested_class):
+                    self.type = type
+                elif isinstance(type, dict):
+                    self.type = nested_class.from_kwargs(**type)
+                else:
+                    self.type = type
+            else:
+                self.type = type
 
     @property
     def push_status(self):

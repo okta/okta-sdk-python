@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class TokenAuthorizationServerPolicyRuleActionInlineHook(object):
@@ -29,9 +30,8 @@ class TokenAuthorizationServerPolicyRuleActionInlineHook(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'id': 'str'
-    }
+    swagger_types = {}
+    swagger_types['id'] = 'str'
 
     attribute_map = {
         'id': 'id'
@@ -48,12 +48,21 @@ class TokenAuthorizationServerPolicyRuleActionInlineHook(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, id=None):  # noqa: E501
+    def set_attributes(self, id=None, **kwargs):  # noqa: E501
         """TokenAuthorizationServerPolicyRuleActionInlineHook - a model defined in Swagger"""  # noqa: E501
         self._id = None
         self.discriminator = None
         if id is not None:
-            self.id = id
+            if hasattr(models, self.swagger_types['id']):
+                nested_class = getattr(models, self.swagger_types['id'])
+                if isinstance(id, nested_class):
+                    self.id = id
+                elif isinstance(id, dict):
+                    self.id = nested_class.from_kwargs(**id)
+                else:
+                    self.id = id
+            else:
+                self.id = id
 
     @property
     def id(self):

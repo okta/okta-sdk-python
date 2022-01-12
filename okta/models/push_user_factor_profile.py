@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class PushUserFactorProfile(object):
@@ -29,14 +30,13 @@ class PushUserFactorProfile(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'credential_id': 'str',
-        'device_token': 'str',
-        'device_type': 'str',
-        'name': 'str',
-        'platform': 'str',
-        'version': 'str'
-    }
+    swagger_types = {}
+    swagger_types['credential_id'] = 'str'
+    swagger_types['device_token'] = 'str'
+    swagger_types['device_type'] = 'str'
+    swagger_types['name'] = 'str'
+    swagger_types['platform'] = 'str'
+    swagger_types['version'] = 'str'
 
     attribute_map = {
         'credential_id': 'credentialId',
@@ -58,7 +58,7 @@ class PushUserFactorProfile(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, credential_id=None, device_token=None, device_type=None, name=None, platform=None, version=None):  # noqa: E501
+    def set_attributes(self, credential_id=None, device_token=None, device_type=None, name=None, platform=None, version=None, **kwargs):  # noqa: E501
         """PushUserFactorProfile - a model defined in Swagger"""  # noqa: E501
         self._credential_id = None
         self._device_token = None
@@ -68,17 +68,71 @@ class PushUserFactorProfile(object):
         self._version = None
         self.discriminator = None
         if credential_id is not None:
-            self.credential_id = credential_id
+            if hasattr(models, self.swagger_types['credential_id']):
+                nested_class = getattr(models, self.swagger_types['credential_id'])
+                if isinstance(credential_id, nested_class):
+                    self.credential_id = credential_id
+                elif isinstance(credential_id, dict):
+                    self.credential_id = nested_class.from_kwargs(**credential_id)
+                else:
+                    self.credential_id = credential_id
+            else:
+                self.credential_id = credential_id
         if device_token is not None:
-            self.device_token = device_token
+            if hasattr(models, self.swagger_types['device_token']):
+                nested_class = getattr(models, self.swagger_types['device_token'])
+                if isinstance(device_token, nested_class):
+                    self.device_token = device_token
+                elif isinstance(device_token, dict):
+                    self.device_token = nested_class.from_kwargs(**device_token)
+                else:
+                    self.device_token = device_token
+            else:
+                self.device_token = device_token
         if device_type is not None:
-            self.device_type = device_type
+            if hasattr(models, self.swagger_types['device_type']):
+                nested_class = getattr(models, self.swagger_types['device_type'])
+                if isinstance(device_type, nested_class):
+                    self.device_type = device_type
+                elif isinstance(device_type, dict):
+                    self.device_type = nested_class.from_kwargs(**device_type)
+                else:
+                    self.device_type = device_type
+            else:
+                self.device_type = device_type
         if name is not None:
-            self.name = name
+            if hasattr(models, self.swagger_types['name']):
+                nested_class = getattr(models, self.swagger_types['name'])
+                if isinstance(name, nested_class):
+                    self.name = name
+                elif isinstance(name, dict):
+                    self.name = nested_class.from_kwargs(**name)
+                else:
+                    self.name = name
+            else:
+                self.name = name
         if platform is not None:
-            self.platform = platform
+            if hasattr(models, self.swagger_types['platform']):
+                nested_class = getattr(models, self.swagger_types['platform'])
+                if isinstance(platform, nested_class):
+                    self.platform = platform
+                elif isinstance(platform, dict):
+                    self.platform = nested_class.from_kwargs(**platform)
+                else:
+                    self.platform = platform
+            else:
+                self.platform = platform
         if version is not None:
-            self.version = version
+            if hasattr(models, self.swagger_types['version']):
+                nested_class = getattr(models, self.swagger_types['version'])
+                if isinstance(version, nested_class):
+                    self.version = version
+                elif isinstance(version, dict):
+                    self.version = nested_class.from_kwargs(**version)
+                else:
+                    self.version = version
+            else:
+                self.version = version
 
     @property
     def credential_id(self):

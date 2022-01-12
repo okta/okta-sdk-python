@@ -16,6 +16,7 @@ import re  # noqa: F401
 import six
 from okta.models.policy_rule_actions import PolicyRuleActions  # noqa: F401,E501
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class PasswordPolicyRuleActions(PolicyRuleActions):
@@ -30,13 +31,12 @@ class PasswordPolicyRuleActions(PolicyRuleActions):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'password_change': 'PasswordPolicyRuleAction',
-        'self_service_password_reset': 'PasswordPolicyRuleAction',
-        'self_service_unlock': 'PasswordPolicyRuleAction'
-    }
+    swagger_types = {}
     if hasattr(PolicyRuleActions, "swagger_types"):
         swagger_types.update(PolicyRuleActions.swagger_types)
+    swagger_types['password_change'] = 'PasswordPolicyRuleAction'
+    swagger_types['self_service_password_reset'] = 'PasswordPolicyRuleAction'
+    swagger_types['self_service_unlock'] = 'PasswordPolicyRuleAction'
 
     attribute_map = {
         'password_change': 'passwordChange',
@@ -57,19 +57,49 @@ class PasswordPolicyRuleActions(PolicyRuleActions):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, password_change=None, self_service_password_reset=None, self_service_unlock=None, *args, **kwargs):  # noqa: E501
+    def set_attributes(self, password_change=None, self_service_password_reset=None, self_service_unlock=None, **kwargs):  # noqa: E501
         """PasswordPolicyRuleActions - a model defined in Swagger"""  # noqa: E501
+        config = {}
+        if kwargs is not None:
+            config = {to_snake_case(key): value for key, value in kwargs.items()}
+        super().set_attributes(**config)
         self._password_change = None
         self._self_service_password_reset = None
         self._self_service_unlock = None
         self.discriminator = None
         if password_change is not None:
-            self.password_change = password_change
+            if hasattr(models, self.swagger_types['password_change']):
+                nested_class = getattr(models, self.swagger_types['password_change'])
+                if isinstance(password_change, nested_class):
+                    self.password_change = password_change
+                elif isinstance(password_change, dict):
+                    self.password_change = nested_class.from_kwargs(**password_change)
+                else:
+                    self.password_change = password_change
+            else:
+                self.password_change = password_change
         if self_service_password_reset is not None:
-            self.self_service_password_reset = self_service_password_reset
+            if hasattr(models, self.swagger_types['self_service_password_reset']):
+                nested_class = getattr(models, self.swagger_types['self_service_password_reset'])
+                if isinstance(self_service_password_reset, nested_class):
+                    self.self_service_password_reset = self_service_password_reset
+                elif isinstance(self_service_password_reset, dict):
+                    self.self_service_password_reset = nested_class.from_kwargs(**self_service_password_reset)
+                else:
+                    self.self_service_password_reset = self_service_password_reset
+            else:
+                self.self_service_password_reset = self_service_password_reset
         if self_service_unlock is not None:
-            self.self_service_unlock = self_service_unlock
-        super().set_attributes(*args, **kwargs)
+            if hasattr(models, self.swagger_types['self_service_unlock']):
+                nested_class = getattr(models, self.swagger_types['self_service_unlock'])
+                if isinstance(self_service_unlock, nested_class):
+                    self.self_service_unlock = self_service_unlock
+                elif isinstance(self_service_unlock, dict):
+                    self.self_service_unlock = nested_class.from_kwargs(**self_service_unlock)
+                else:
+                    self.self_service_unlock = self_service_unlock
+            else:
+                self.self_service_unlock = self_service_unlock
 
     @property
     def password_change(self):

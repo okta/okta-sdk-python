@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class ForgotPasswordResponse(object):
@@ -29,9 +30,8 @@ class ForgotPasswordResponse(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'reset_password_url': 'str'
-    }
+    swagger_types = {}
+    swagger_types['reset_password_url'] = 'str'
 
     attribute_map = {
         'reset_password_url': 'resetPasswordUrl'
@@ -48,12 +48,21 @@ class ForgotPasswordResponse(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, reset_password_url=None):  # noqa: E501
+    def set_attributes(self, reset_password_url=None, **kwargs):  # noqa: E501
         """ForgotPasswordResponse - a model defined in Swagger"""  # noqa: E501
         self._reset_password_url = None
         self.discriminator = None
         if reset_password_url is not None:
-            self.reset_password_url = reset_password_url
+            if hasattr(models, self.swagger_types['reset_password_url']):
+                nested_class = getattr(models, self.swagger_types['reset_password_url'])
+                if isinstance(reset_password_url, nested_class):
+                    self.reset_password_url = reset_password_url
+                elif isinstance(reset_password_url, dict):
+                    self.reset_password_url = nested_class.from_kwargs(**reset_password_url)
+                else:
+                    self.reset_password_url = reset_password_url
+            else:
+                self.reset_password_url = reset_password_url
 
     @property
     def reset_password_url(self):

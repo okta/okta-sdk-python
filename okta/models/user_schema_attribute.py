@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class UserSchemaAttribute(object):
@@ -29,26 +30,25 @@ class UserSchemaAttribute(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'title': 'str',
-        'type': 'UserSchemaAttributeType',
-        'required': 'bool',
-        'mutability': 'str',
-        'scope': 'UserSchemaAttributeScope',
-        'enum': 'list[str]',
-        'one_of': 'list[UserSchemaAttributeEnum]',
-        'min_length': 'int',
-        'max_length': 'int',
-        'description': 'str',
-        'permissions': 'list[UserSchemaAttributePermission]',
-        'master': 'UserSchemaAttributeMaster',
-        'union': 'UserSchemaAttributeUnion',
-        'items': 'UserSchemaAttributeItems',
-        'pattern': 'str',
-        'unique': 'str',
-        'external_name': 'str',
-        'external_namespace': 'str'
-    }
+    swagger_types = {}
+    swagger_types['title'] = 'str'
+    swagger_types['type'] = 'UserSchemaAttributeType'
+    swagger_types['required'] = 'bool'
+    swagger_types['mutability'] = 'str'
+    swagger_types['scope'] = 'UserSchemaAttributeScope'
+    swagger_types['enum'] = 'list[str]'
+    swagger_types['one_of'] = 'list[UserSchemaAttributeEnum]'
+    swagger_types['min_length'] = 'int'
+    swagger_types['max_length'] = 'int'
+    swagger_types['description'] = 'str'
+    swagger_types['permissions'] = 'list[UserSchemaAttributePermission]'
+    swagger_types['master'] = 'UserSchemaAttributeMaster'
+    swagger_types['union'] = 'UserSchemaAttributeUnion'
+    swagger_types['items'] = 'UserSchemaAttributeItems'
+    swagger_types['pattern'] = 'str'
+    swagger_types['unique'] = 'str'
+    swagger_types['external_name'] = 'str'
+    swagger_types['external_namespace'] = 'str'
 
     attribute_map = {
         'title': 'title',
@@ -82,7 +82,7 @@ class UserSchemaAttribute(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, title=None, type=None, required=None, mutability=None, scope=None, enum=None, one_of=None, min_length=None, max_length=None, description=None, permissions=None, master=None, union=None, items=None, pattern=None, unique=None, external_name=None, external_namespace=None):  # noqa: E501
+    def set_attributes(self, title=None, type=None, required=None, mutability=None, scope=None, enum=None, one_of=None, min_length=None, max_length=None, description=None, permissions=None, master=None, union=None, items=None, pattern=None, unique=None, external_name=None, external_namespace=None, **kwargs):  # noqa: E501
         """UserSchemaAttribute - a model defined in Swagger"""  # noqa: E501
         self._title = None
         self._type = None
@@ -104,41 +104,203 @@ class UserSchemaAttribute(object):
         self._external_namespace = None
         self.discriminator = None
         if title is not None:
-            self.title = title
+            if hasattr(models, self.swagger_types['title']):
+                nested_class = getattr(models, self.swagger_types['title'])
+                if isinstance(title, nested_class):
+                    self.title = title
+                elif isinstance(title, dict):
+                    self.title = nested_class.from_kwargs(**title)
+                else:
+                    self.title = title
+            else:
+                self.title = title
         if type is not None:
-            self.type = type
+            if hasattr(models, self.swagger_types['type']):
+                nested_class = getattr(models, self.swagger_types['type'])
+                if isinstance(type, nested_class):
+                    self.type = type
+                elif isinstance(type, dict):
+                    self.type = nested_class.from_kwargs(**type)
+                else:
+                    self.type = type
+            else:
+                self.type = type
         if required is not None:
-            self.required = required
+            if hasattr(models, self.swagger_types['required']):
+                nested_class = getattr(models, self.swagger_types['required'])
+                if isinstance(required, nested_class):
+                    self.required = required
+                elif isinstance(required, dict):
+                    self.required = nested_class.from_kwargs(**required)
+                else:
+                    self.required = required
+            else:
+                self.required = required
         if mutability is not None:
-            self.mutability = mutability
+            if hasattr(models, self.swagger_types['mutability']):
+                nested_class = getattr(models, self.swagger_types['mutability'])
+                if isinstance(mutability, nested_class):
+                    self.mutability = mutability
+                elif isinstance(mutability, dict):
+                    self.mutability = nested_class.from_kwargs(**mutability)
+                else:
+                    self.mutability = mutability
+            else:
+                self.mutability = mutability
         if scope is not None:
-            self.scope = scope
+            if hasattr(models, self.swagger_types['scope']):
+                nested_class = getattr(models, self.swagger_types['scope'])
+                if isinstance(scope, nested_class):
+                    self.scope = scope
+                elif isinstance(scope, dict):
+                    self.scope = nested_class.from_kwargs(**scope)
+                else:
+                    self.scope = scope
+            else:
+                self.scope = scope
         if enum is not None:
-            self.enum = enum
+            if hasattr(models, self.swagger_types['enum']):
+                nested_class = getattr(models, self.swagger_types['enum'])
+                if isinstance(enum, nested_class):
+                    self.enum = enum
+                elif isinstance(enum, dict):
+                    self.enum = nested_class.from_kwargs(**enum)
+                else:
+                    self.enum = enum
+            else:
+                self.enum = enum
         if one_of is not None:
-            self.one_of = one_of
+            if hasattr(models, self.swagger_types['one_of']):
+                nested_class = getattr(models, self.swagger_types['one_of'])
+                if isinstance(one_of, nested_class):
+                    self.one_of = one_of
+                elif isinstance(one_of, dict):
+                    self.one_of = nested_class.from_kwargs(**one_of)
+                else:
+                    self.one_of = one_of
+            else:
+                self.one_of = one_of
         if min_length is not None:
-            self.min_length = min_length
+            if hasattr(models, self.swagger_types['min_length']):
+                nested_class = getattr(models, self.swagger_types['min_length'])
+                if isinstance(min_length, nested_class):
+                    self.min_length = min_length
+                elif isinstance(min_length, dict):
+                    self.min_length = nested_class.from_kwargs(**min_length)
+                else:
+                    self.min_length = min_length
+            else:
+                self.min_length = min_length
         if max_length is not None:
-            self.max_length = max_length
+            if hasattr(models, self.swagger_types['max_length']):
+                nested_class = getattr(models, self.swagger_types['max_length'])
+                if isinstance(max_length, nested_class):
+                    self.max_length = max_length
+                elif isinstance(max_length, dict):
+                    self.max_length = nested_class.from_kwargs(**max_length)
+                else:
+                    self.max_length = max_length
+            else:
+                self.max_length = max_length
         if description is not None:
-            self.description = description
+            if hasattr(models, self.swagger_types['description']):
+                nested_class = getattr(models, self.swagger_types['description'])
+                if isinstance(description, nested_class):
+                    self.description = description
+                elif isinstance(description, dict):
+                    self.description = nested_class.from_kwargs(**description)
+                else:
+                    self.description = description
+            else:
+                self.description = description
         if permissions is not None:
-            self.permissions = permissions
+            if hasattr(models, self.swagger_types['permissions']):
+                nested_class = getattr(models, self.swagger_types['permissions'])
+                if isinstance(permissions, nested_class):
+                    self.permissions = permissions
+                elif isinstance(permissions, dict):
+                    self.permissions = nested_class.from_kwargs(**permissions)
+                else:
+                    self.permissions = permissions
+            else:
+                self.permissions = permissions
         if master is not None:
-            self.master = master
+            if hasattr(models, self.swagger_types['master']):
+                nested_class = getattr(models, self.swagger_types['master'])
+                if isinstance(master, nested_class):
+                    self.master = master
+                elif isinstance(master, dict):
+                    self.master = nested_class.from_kwargs(**master)
+                else:
+                    self.master = master
+            else:
+                self.master = master
         if union is not None:
-            self.union = union
+            if hasattr(models, self.swagger_types['union']):
+                nested_class = getattr(models, self.swagger_types['union'])
+                if isinstance(union, nested_class):
+                    self.union = union
+                elif isinstance(union, dict):
+                    self.union = nested_class.from_kwargs(**union)
+                else:
+                    self.union = union
+            else:
+                self.union = union
         if items is not None:
-            self.items = items
+            if hasattr(models, self.swagger_types['items']):
+                nested_class = getattr(models, self.swagger_types['items'])
+                if isinstance(items, nested_class):
+                    self.items = items
+                elif isinstance(items, dict):
+                    self.items = nested_class.from_kwargs(**items)
+                else:
+                    self.items = items
+            else:
+                self.items = items
         if pattern is not None:
-            self.pattern = pattern
+            if hasattr(models, self.swagger_types['pattern']):
+                nested_class = getattr(models, self.swagger_types['pattern'])
+                if isinstance(pattern, nested_class):
+                    self.pattern = pattern
+                elif isinstance(pattern, dict):
+                    self.pattern = nested_class.from_kwargs(**pattern)
+                else:
+                    self.pattern = pattern
+            else:
+                self.pattern = pattern
         if unique is not None:
-            self.unique = unique
+            if hasattr(models, self.swagger_types['unique']):
+                nested_class = getattr(models, self.swagger_types['unique'])
+                if isinstance(unique, nested_class):
+                    self.unique = unique
+                elif isinstance(unique, dict):
+                    self.unique = nested_class.from_kwargs(**unique)
+                else:
+                    self.unique = unique
+            else:
+                self.unique = unique
         if external_name is not None:
-            self.external_name = external_name
+            if hasattr(models, self.swagger_types['external_name']):
+                nested_class = getattr(models, self.swagger_types['external_name'])
+                if isinstance(external_name, nested_class):
+                    self.external_name = external_name
+                elif isinstance(external_name, dict):
+                    self.external_name = nested_class.from_kwargs(**external_name)
+                else:
+                    self.external_name = external_name
+            else:
+                self.external_name = external_name
         if external_namespace is not None:
-            self.external_namespace = external_namespace
+            if hasattr(models, self.swagger_types['external_namespace']):
+                nested_class = getattr(models, self.swagger_types['external_namespace'])
+                if isinstance(external_namespace, nested_class):
+                    self.external_namespace = external_namespace
+                elif isinstance(external_namespace, dict):
+                    self.external_namespace = nested_class.from_kwargs(**external_namespace)
+                else:
+                    self.external_namespace = external_namespace
+            else:
+                self.external_namespace = external_namespace
 
     @property
     def title(self):

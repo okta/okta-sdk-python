@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class SingleLogout(object):
@@ -29,11 +30,10 @@ class SingleLogout(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'enabled': 'bool',
-        'issuer': 'str',
-        'logout_url': 'str'
-    }
+    swagger_types = {}
+    swagger_types['enabled'] = 'bool'
+    swagger_types['issuer'] = 'str'
+    swagger_types['logout_url'] = 'str'
 
     attribute_map = {
         'enabled': 'enabled',
@@ -52,18 +52,45 @@ class SingleLogout(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, enabled=None, issuer=None, logout_url=None):  # noqa: E501
+    def set_attributes(self, enabled=None, issuer=None, logout_url=None, **kwargs):  # noqa: E501
         """SingleLogout - a model defined in Swagger"""  # noqa: E501
         self._enabled = None
         self._issuer = None
         self._logout_url = None
         self.discriminator = None
         if enabled is not None:
-            self.enabled = enabled
+            if hasattr(models, self.swagger_types['enabled']):
+                nested_class = getattr(models, self.swagger_types['enabled'])
+                if isinstance(enabled, nested_class):
+                    self.enabled = enabled
+                elif isinstance(enabled, dict):
+                    self.enabled = nested_class.from_kwargs(**enabled)
+                else:
+                    self.enabled = enabled
+            else:
+                self.enabled = enabled
         if issuer is not None:
-            self.issuer = issuer
+            if hasattr(models, self.swagger_types['issuer']):
+                nested_class = getattr(models, self.swagger_types['issuer'])
+                if isinstance(issuer, nested_class):
+                    self.issuer = issuer
+                elif isinstance(issuer, dict):
+                    self.issuer = nested_class.from_kwargs(**issuer)
+                else:
+                    self.issuer = issuer
+            else:
+                self.issuer = issuer
         if logout_url is not None:
-            self.logout_url = logout_url
+            if hasattr(models, self.swagger_types['logout_url']):
+                nested_class = getattr(models, self.swagger_types['logout_url'])
+                if isinstance(logout_url, nested_class):
+                    self.logout_url = logout_url
+                elif isinstance(logout_url, dict):
+                    self.logout_url = nested_class.from_kwargs(**logout_url)
+                else:
+                    self.logout_url = logout_url
+            else:
+                self.logout_url = logout_url
 
     @property
     def enabled(self):

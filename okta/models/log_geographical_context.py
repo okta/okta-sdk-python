@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class LogGeographicalContext(object):
@@ -29,13 +30,12 @@ class LogGeographicalContext(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'city': 'str',
-        'country': 'str',
-        'geolocation': 'LogGeolocation',
-        'postal_code': 'str',
-        'state': 'str'
-    }
+    swagger_types = {}
+    swagger_types['city'] = 'str'
+    swagger_types['country'] = 'str'
+    swagger_types['geolocation'] = 'LogGeolocation'
+    swagger_types['postal_code'] = 'str'
+    swagger_types['state'] = 'str'
 
     attribute_map = {
         'city': 'city',
@@ -56,7 +56,7 @@ class LogGeographicalContext(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, city=None, country=None, geolocation=None, postal_code=None, state=None):  # noqa: E501
+    def set_attributes(self, city=None, country=None, geolocation=None, postal_code=None, state=None, **kwargs):  # noqa: E501
         """LogGeographicalContext - a model defined in Swagger"""  # noqa: E501
         self._city = None
         self._country = None
@@ -65,15 +65,60 @@ class LogGeographicalContext(object):
         self._state = None
         self.discriminator = None
         if city is not None:
-            self.city = city
+            if hasattr(models, self.swagger_types['city']):
+                nested_class = getattr(models, self.swagger_types['city'])
+                if isinstance(city, nested_class):
+                    self.city = city
+                elif isinstance(city, dict):
+                    self.city = nested_class.from_kwargs(**city)
+                else:
+                    self.city = city
+            else:
+                self.city = city
         if country is not None:
-            self.country = country
+            if hasattr(models, self.swagger_types['country']):
+                nested_class = getattr(models, self.swagger_types['country'])
+                if isinstance(country, nested_class):
+                    self.country = country
+                elif isinstance(country, dict):
+                    self.country = nested_class.from_kwargs(**country)
+                else:
+                    self.country = country
+            else:
+                self.country = country
         if geolocation is not None:
-            self.geolocation = geolocation
+            if hasattr(models, self.swagger_types['geolocation']):
+                nested_class = getattr(models, self.swagger_types['geolocation'])
+                if isinstance(geolocation, nested_class):
+                    self.geolocation = geolocation
+                elif isinstance(geolocation, dict):
+                    self.geolocation = nested_class.from_kwargs(**geolocation)
+                else:
+                    self.geolocation = geolocation
+            else:
+                self.geolocation = geolocation
         if postal_code is not None:
-            self.postal_code = postal_code
+            if hasattr(models, self.swagger_types['postal_code']):
+                nested_class = getattr(models, self.swagger_types['postal_code'])
+                if isinstance(postal_code, nested_class):
+                    self.postal_code = postal_code
+                elif isinstance(postal_code, dict):
+                    self.postal_code = nested_class.from_kwargs(**postal_code)
+                else:
+                    self.postal_code = postal_code
+            else:
+                self.postal_code = postal_code
         if state is not None:
-            self.state = state
+            if hasattr(models, self.swagger_types['state']):
+                nested_class = getattr(models, self.swagger_types['state'])
+                if isinstance(state, nested_class):
+                    self.state = state
+                elif isinstance(state, dict):
+                    self.state = nested_class.from_kwargs(**state)
+                else:
+                    self.state = state
+            else:
+                self.state = state
 
     @property
     def city(self):

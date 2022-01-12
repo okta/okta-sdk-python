@@ -16,6 +16,7 @@ import re  # noqa: F401
 import six
 from okta.models.access_policy_constraint import AccessPolicyConstraint  # noqa: F401,E501
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class PossessionConstraint(AccessPolicyConstraint):
@@ -30,14 +31,13 @@ class PossessionConstraint(AccessPolicyConstraint):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'device_bound': 'str',
-        'hardware_protection': 'str',
-        'phishing_resistant': 'str',
-        'user_presence': 'str'
-    }
+    swagger_types = {}
     if hasattr(AccessPolicyConstraint, "swagger_types"):
         swagger_types.update(AccessPolicyConstraint.swagger_types)
+    swagger_types['device_bound'] = 'str'
+    swagger_types['hardware_protection'] = 'str'
+    swagger_types['phishing_resistant'] = 'str'
+    swagger_types['user_presence'] = 'str'
 
     attribute_map = {
         'device_bound': 'deviceBound',
@@ -59,22 +59,61 @@ class PossessionConstraint(AccessPolicyConstraint):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, device_bound=None, hardware_protection=None, phishing_resistant=None, user_presence=None, *args, **kwargs):  # noqa: E501
+    def set_attributes(self, device_bound=None, hardware_protection=None, phishing_resistant=None, user_presence=None, **kwargs):  # noqa: E501
         """PossessionConstraint - a model defined in Swagger"""  # noqa: E501
+        config = {}
+        if kwargs is not None:
+            config = {to_snake_case(key): value for key, value in kwargs.items()}
+        super().set_attributes(**config)
         self._device_bound = None
         self._hardware_protection = None
         self._phishing_resistant = None
         self._user_presence = None
         self.discriminator = None
         if device_bound is not None:
-            self.device_bound = device_bound
+            if hasattr(models, self.swagger_types['device_bound']):
+                nested_class = getattr(models, self.swagger_types['device_bound'])
+                if isinstance(device_bound, nested_class):
+                    self.device_bound = device_bound
+                elif isinstance(device_bound, dict):
+                    self.device_bound = nested_class.from_kwargs(**device_bound)
+                else:
+                    self.device_bound = device_bound
+            else:
+                self.device_bound = device_bound
         if hardware_protection is not None:
-            self.hardware_protection = hardware_protection
+            if hasattr(models, self.swagger_types['hardware_protection']):
+                nested_class = getattr(models, self.swagger_types['hardware_protection'])
+                if isinstance(hardware_protection, nested_class):
+                    self.hardware_protection = hardware_protection
+                elif isinstance(hardware_protection, dict):
+                    self.hardware_protection = nested_class.from_kwargs(**hardware_protection)
+                else:
+                    self.hardware_protection = hardware_protection
+            else:
+                self.hardware_protection = hardware_protection
         if phishing_resistant is not None:
-            self.phishing_resistant = phishing_resistant
+            if hasattr(models, self.swagger_types['phishing_resistant']):
+                nested_class = getattr(models, self.swagger_types['phishing_resistant'])
+                if isinstance(phishing_resistant, nested_class):
+                    self.phishing_resistant = phishing_resistant
+                elif isinstance(phishing_resistant, dict):
+                    self.phishing_resistant = nested_class.from_kwargs(**phishing_resistant)
+                else:
+                    self.phishing_resistant = phishing_resistant
+            else:
+                self.phishing_resistant = phishing_resistant
         if user_presence is not None:
-            self.user_presence = user_presence
-        super().set_attributes(*args, **kwargs)
+            if hasattr(models, self.swagger_types['user_presence']):
+                nested_class = getattr(models, self.swagger_types['user_presence'])
+                if isinstance(user_presence, nested_class):
+                    self.user_presence = user_presence
+                elif isinstance(user_presence, dict):
+                    self.user_presence = nested_class.from_kwargs(**user_presence)
+                else:
+                    self.user_presence = user_presence
+            else:
+                self.user_presence = user_presence
 
     @property
     def device_bound(self):

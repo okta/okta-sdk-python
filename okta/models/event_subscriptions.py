@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class EventSubscriptions(object):
@@ -29,10 +30,9 @@ class EventSubscriptions(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'items': 'list[str]',
-        'type': 'EventSubscriptionType'
-    }
+    swagger_types = {}
+    swagger_types['items'] = 'list[str]'
+    swagger_types['type'] = 'EventSubscriptionType'
 
     attribute_map = {
         'items': 'items',
@@ -53,15 +53,33 @@ class EventSubscriptions(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, items=None, type=None):  # noqa: E501
+    def set_attributes(self, items=None, type=None, **kwargs):  # noqa: E501
         """EventSubscriptions - a model defined in Swagger"""  # noqa: E501
         self._items = None
         self._type = None
         self.discriminator = 'type'
         if items is not None:
-            self.items = items
+            if hasattr(models, self.swagger_types['items']):
+                nested_class = getattr(models, self.swagger_types['items'])
+                if isinstance(items, nested_class):
+                    self.items = items
+                elif isinstance(items, dict):
+                    self.items = nested_class.from_kwargs(**items)
+                else:
+                    self.items = items
+            else:
+                self.items = items
         if type is not None:
-            self.type = type
+            if hasattr(models, self.swagger_types['type']):
+                nested_class = getattr(models, self.swagger_types['type'])
+                if isinstance(type, nested_class):
+                    self.type = type
+                elif isinstance(type, dict):
+                    self.type = nested_class.from_kwargs(**type)
+                else:
+                    self.type = type
+            else:
+                self.type = type
 
     @property
     def items(self):

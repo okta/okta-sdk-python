@@ -16,6 +16,7 @@ import re  # noqa: F401
 import six
 from okta.models.policy_rule_conditions import PolicyRuleConditions  # noqa: F401,E501
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class OktaSignOnPolicyRuleConditions(PolicyRuleConditions):
@@ -30,13 +31,12 @@ class OktaSignOnPolicyRuleConditions(PolicyRuleConditions):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'auth_context': 'PolicyRuleAuthContextCondition',
-        'network': 'PolicyNetworkCondition',
-        'people': 'PolicyPeopleCondition'
-    }
+    swagger_types = {}
     if hasattr(PolicyRuleConditions, "swagger_types"):
         swagger_types.update(PolicyRuleConditions.swagger_types)
+    swagger_types['auth_context'] = 'PolicyRuleAuthContextCondition'
+    swagger_types['network'] = 'PolicyNetworkCondition'
+    swagger_types['people'] = 'PolicyPeopleCondition'
 
     attribute_map = {
         'auth_context': 'authContext',
@@ -57,19 +57,49 @@ class OktaSignOnPolicyRuleConditions(PolicyRuleConditions):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, auth_context=None, network=None, people=None, *args, **kwargs):  # noqa: E501
+    def set_attributes(self, auth_context=None, network=None, people=None, **kwargs):  # noqa: E501
         """OktaSignOnPolicyRuleConditions - a model defined in Swagger"""  # noqa: E501
+        config = {}
+        if kwargs is not None:
+            config = {to_snake_case(key): value for key, value in kwargs.items()}
+        super().set_attributes(**config)
         self._auth_context = None
         self._network = None
         self._people = None
         self.discriminator = None
         if auth_context is not None:
-            self.auth_context = auth_context
+            if hasattr(models, self.swagger_types['auth_context']):
+                nested_class = getattr(models, self.swagger_types['auth_context'])
+                if isinstance(auth_context, nested_class):
+                    self.auth_context = auth_context
+                elif isinstance(auth_context, dict):
+                    self.auth_context = nested_class.from_kwargs(**auth_context)
+                else:
+                    self.auth_context = auth_context
+            else:
+                self.auth_context = auth_context
         if network is not None:
-            self.network = network
+            if hasattr(models, self.swagger_types['network']):
+                nested_class = getattr(models, self.swagger_types['network'])
+                if isinstance(network, nested_class):
+                    self.network = network
+                elif isinstance(network, dict):
+                    self.network = nested_class.from_kwargs(**network)
+                else:
+                    self.network = network
+            else:
+                self.network = network
         if people is not None:
-            self.people = people
-        super().set_attributes(*args, **kwargs)
+            if hasattr(models, self.swagger_types['people']):
+                nested_class = getattr(models, self.swagger_types['people'])
+                if isinstance(people, nested_class):
+                    self.people = people
+                elif isinstance(people, dict):
+                    self.people = nested_class.from_kwargs(**people)
+                else:
+                    self.people = people
+            else:
+                self.people = people
 
     @property
     def auth_context(self):

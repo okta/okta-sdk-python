@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class PolicyRuleConditions(object):
@@ -29,29 +30,28 @@ class PolicyRuleConditions(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'app': 'AppAndInstancePolicyRuleCondition',
-        'apps': 'AppInstancePolicyRuleCondition',
-        'auth_context': 'PolicyRuleAuthContextCondition',
-        'auth_provider': 'PasswordPolicyAuthenticationProviderCondition',
-        'before_scheduled_action': 'BeforeScheduledActionPolicyRuleCondition',
-        'clients': 'ClientPolicyCondition',
-        'context': 'ContextPolicyRuleCondition',
-        'device': 'DevicePolicyRuleCondition',
-        'grant_types': 'GrantTypePolicyRuleCondition',
-        'groups': 'GroupPolicyRuleCondition',
-        'identity_provider': 'IdentityProviderPolicyRuleCondition',
-        'mdm_enrollment': 'MDMEnrollmentPolicyRuleCondition',
-        'network': 'PolicyNetworkCondition',
-        'people': 'PolicyPeopleCondition',
-        'platform': 'PlatformPolicyRuleCondition',
-        'risk': 'RiskPolicyRuleCondition',
-        'risk_score': 'RiskScorePolicyRuleCondition',
-        'scopes': 'OAuth2ScopesMediationPolicyRuleCondition',
-        'user_identifier': 'UserIdentifierPolicyRuleCondition',
-        'user_status': 'UserStatusPolicyRuleCondition',
-        'users': 'UserPolicyRuleCondition'
-    }
+    swagger_types = {}
+    swagger_types['app'] = 'AppAndInstancePolicyRuleCondition'
+    swagger_types['apps'] = 'AppInstancePolicyRuleCondition'
+    swagger_types['auth_context'] = 'PolicyRuleAuthContextCondition'
+    swagger_types['auth_provider'] = 'PasswordPolicyAuthenticationProviderCondition'
+    swagger_types['before_scheduled_action'] = 'BeforeScheduledActionPolicyRuleCondition'
+    swagger_types['clients'] = 'ClientPolicyCondition'
+    swagger_types['context'] = 'ContextPolicyRuleCondition'
+    swagger_types['device'] = 'DevicePolicyRuleCondition'
+    swagger_types['grant_types'] = 'GrantTypePolicyRuleCondition'
+    swagger_types['groups'] = 'GroupPolicyRuleCondition'
+    swagger_types['identity_provider'] = 'IdentityProviderPolicyRuleCondition'
+    swagger_types['mdm_enrollment'] = 'MDMEnrollmentPolicyRuleCondition'
+    swagger_types['network'] = 'PolicyNetworkCondition'
+    swagger_types['people'] = 'PolicyPeopleCondition'
+    swagger_types['platform'] = 'PlatformPolicyRuleCondition'
+    swagger_types['risk'] = 'RiskPolicyRuleCondition'
+    swagger_types['risk_score'] = 'RiskScorePolicyRuleCondition'
+    swagger_types['scopes'] = 'OAuth2ScopesMediationPolicyRuleCondition'
+    swagger_types['user_identifier'] = 'UserIdentifierPolicyRuleCondition'
+    swagger_types['user_status'] = 'UserStatusPolicyRuleCondition'
+    swagger_types['users'] = 'UserPolicyRuleCondition'
 
     attribute_map = {
         'app': 'app',
@@ -88,7 +88,7 @@ class PolicyRuleConditions(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, app=None, apps=None, auth_context=None, auth_provider=None, before_scheduled_action=None, clients=None, context=None, device=None, grant_types=None, groups=None, identity_provider=None, mdm_enrollment=None, network=None, people=None, platform=None, risk=None, risk_score=None, scopes=None, user_identifier=None, user_status=None, users=None):  # noqa: E501
+    def set_attributes(self, app=None, apps=None, auth_context=None, auth_provider=None, before_scheduled_action=None, clients=None, context=None, device=None, grant_types=None, groups=None, identity_provider=None, mdm_enrollment=None, network=None, people=None, platform=None, risk=None, risk_score=None, scopes=None, user_identifier=None, user_status=None, users=None, **kwargs):  # noqa: E501
         """PolicyRuleConditions - a model defined in Swagger"""  # noqa: E501
         self._app = None
         self._apps = None
@@ -113,47 +113,236 @@ class PolicyRuleConditions(object):
         self._users = None
         self.discriminator = None
         if app is not None:
-            self.app = app
+            if hasattr(models, self.swagger_types['app']):
+                nested_class = getattr(models, self.swagger_types['app'])
+                if isinstance(app, nested_class):
+                    self.app = app
+                elif isinstance(app, dict):
+                    self.app = nested_class.from_kwargs(**app)
+                else:
+                    self.app = app
+            else:
+                self.app = app
         if apps is not None:
-            self.apps = apps
+            if hasattr(models, self.swagger_types['apps']):
+                nested_class = getattr(models, self.swagger_types['apps'])
+                if isinstance(apps, nested_class):
+                    self.apps = apps
+                elif isinstance(apps, dict):
+                    self.apps = nested_class.from_kwargs(**apps)
+                else:
+                    self.apps = apps
+            else:
+                self.apps = apps
         if auth_context is not None:
-            self.auth_context = auth_context
+            if hasattr(models, self.swagger_types['auth_context']):
+                nested_class = getattr(models, self.swagger_types['auth_context'])
+                if isinstance(auth_context, nested_class):
+                    self.auth_context = auth_context
+                elif isinstance(auth_context, dict):
+                    self.auth_context = nested_class.from_kwargs(**auth_context)
+                else:
+                    self.auth_context = auth_context
+            else:
+                self.auth_context = auth_context
         if auth_provider is not None:
-            self.auth_provider = auth_provider
+            if hasattr(models, self.swagger_types['auth_provider']):
+                nested_class = getattr(models, self.swagger_types['auth_provider'])
+                if isinstance(auth_provider, nested_class):
+                    self.auth_provider = auth_provider
+                elif isinstance(auth_provider, dict):
+                    self.auth_provider = nested_class.from_kwargs(**auth_provider)
+                else:
+                    self.auth_provider = auth_provider
+            else:
+                self.auth_provider = auth_provider
         if before_scheduled_action is not None:
-            self.before_scheduled_action = before_scheduled_action
+            if hasattr(models, self.swagger_types['before_scheduled_action']):
+                nested_class = getattr(models, self.swagger_types['before_scheduled_action'])
+                if isinstance(before_scheduled_action, nested_class):
+                    self.before_scheduled_action = before_scheduled_action
+                elif isinstance(before_scheduled_action, dict):
+                    self.before_scheduled_action = nested_class.from_kwargs(**before_scheduled_action)
+                else:
+                    self.before_scheduled_action = before_scheduled_action
+            else:
+                self.before_scheduled_action = before_scheduled_action
         if clients is not None:
-            self.clients = clients
+            if hasattr(models, self.swagger_types['clients']):
+                nested_class = getattr(models, self.swagger_types['clients'])
+                if isinstance(clients, nested_class):
+                    self.clients = clients
+                elif isinstance(clients, dict):
+                    self.clients = nested_class.from_kwargs(**clients)
+                else:
+                    self.clients = clients
+            else:
+                self.clients = clients
         if context is not None:
-            self.context = context
+            if hasattr(models, self.swagger_types['context']):
+                nested_class = getattr(models, self.swagger_types['context'])
+                if isinstance(context, nested_class):
+                    self.context = context
+                elif isinstance(context, dict):
+                    self.context = nested_class.from_kwargs(**context)
+                else:
+                    self.context = context
+            else:
+                self.context = context
         if device is not None:
-            self.device = device
+            if hasattr(models, self.swagger_types['device']):
+                nested_class = getattr(models, self.swagger_types['device'])
+                if isinstance(device, nested_class):
+                    self.device = device
+                elif isinstance(device, dict):
+                    self.device = nested_class.from_kwargs(**device)
+                else:
+                    self.device = device
+            else:
+                self.device = device
         if grant_types is not None:
-            self.grant_types = grant_types
+            if hasattr(models, self.swagger_types['grant_types']):
+                nested_class = getattr(models, self.swagger_types['grant_types'])
+                if isinstance(grant_types, nested_class):
+                    self.grant_types = grant_types
+                elif isinstance(grant_types, dict):
+                    self.grant_types = nested_class.from_kwargs(**grant_types)
+                else:
+                    self.grant_types = grant_types
+            else:
+                self.grant_types = grant_types
         if groups is not None:
-            self.groups = groups
+            if hasattr(models, self.swagger_types['groups']):
+                nested_class = getattr(models, self.swagger_types['groups'])
+                if isinstance(groups, nested_class):
+                    self.groups = groups
+                elif isinstance(groups, dict):
+                    self.groups = nested_class.from_kwargs(**groups)
+                else:
+                    self.groups = groups
+            else:
+                self.groups = groups
         if identity_provider is not None:
-            self.identity_provider = identity_provider
+            if hasattr(models, self.swagger_types['identity_provider']):
+                nested_class = getattr(models, self.swagger_types['identity_provider'])
+                if isinstance(identity_provider, nested_class):
+                    self.identity_provider = identity_provider
+                elif isinstance(identity_provider, dict):
+                    self.identity_provider = nested_class.from_kwargs(**identity_provider)
+                else:
+                    self.identity_provider = identity_provider
+            else:
+                self.identity_provider = identity_provider
         if mdm_enrollment is not None:
-            self.mdm_enrollment = mdm_enrollment
+            if hasattr(models, self.swagger_types['mdm_enrollment']):
+                nested_class = getattr(models, self.swagger_types['mdm_enrollment'])
+                if isinstance(mdm_enrollment, nested_class):
+                    self.mdm_enrollment = mdm_enrollment
+                elif isinstance(mdm_enrollment, dict):
+                    self.mdm_enrollment = nested_class.from_kwargs(**mdm_enrollment)
+                else:
+                    self.mdm_enrollment = mdm_enrollment
+            else:
+                self.mdm_enrollment = mdm_enrollment
         if network is not None:
-            self.network = network
+            if hasattr(models, self.swagger_types['network']):
+                nested_class = getattr(models, self.swagger_types['network'])
+                if isinstance(network, nested_class):
+                    self.network = network
+                elif isinstance(network, dict):
+                    self.network = nested_class.from_kwargs(**network)
+                else:
+                    self.network = network
+            else:
+                self.network = network
         if people is not None:
-            self.people = people
+            if hasattr(models, self.swagger_types['people']):
+                nested_class = getattr(models, self.swagger_types['people'])
+                if isinstance(people, nested_class):
+                    self.people = people
+                elif isinstance(people, dict):
+                    self.people = nested_class.from_kwargs(**people)
+                else:
+                    self.people = people
+            else:
+                self.people = people
         if platform is not None:
-            self.platform = platform
+            if hasattr(models, self.swagger_types['platform']):
+                nested_class = getattr(models, self.swagger_types['platform'])
+                if isinstance(platform, nested_class):
+                    self.platform = platform
+                elif isinstance(platform, dict):
+                    self.platform = nested_class.from_kwargs(**platform)
+                else:
+                    self.platform = platform
+            else:
+                self.platform = platform
         if risk is not None:
-            self.risk = risk
+            if hasattr(models, self.swagger_types['risk']):
+                nested_class = getattr(models, self.swagger_types['risk'])
+                if isinstance(risk, nested_class):
+                    self.risk = risk
+                elif isinstance(risk, dict):
+                    self.risk = nested_class.from_kwargs(**risk)
+                else:
+                    self.risk = risk
+            else:
+                self.risk = risk
         if risk_score is not None:
-            self.risk_score = risk_score
+            if hasattr(models, self.swagger_types['risk_score']):
+                nested_class = getattr(models, self.swagger_types['risk_score'])
+                if isinstance(risk_score, nested_class):
+                    self.risk_score = risk_score
+                elif isinstance(risk_score, dict):
+                    self.risk_score = nested_class.from_kwargs(**risk_score)
+                else:
+                    self.risk_score = risk_score
+            else:
+                self.risk_score = risk_score
         if scopes is not None:
-            self.scopes = scopes
+            if hasattr(models, self.swagger_types['scopes']):
+                nested_class = getattr(models, self.swagger_types['scopes'])
+                if isinstance(scopes, nested_class):
+                    self.scopes = scopes
+                elif isinstance(scopes, dict):
+                    self.scopes = nested_class.from_kwargs(**scopes)
+                else:
+                    self.scopes = scopes
+            else:
+                self.scopes = scopes
         if user_identifier is not None:
-            self.user_identifier = user_identifier
+            if hasattr(models, self.swagger_types['user_identifier']):
+                nested_class = getattr(models, self.swagger_types['user_identifier'])
+                if isinstance(user_identifier, nested_class):
+                    self.user_identifier = user_identifier
+                elif isinstance(user_identifier, dict):
+                    self.user_identifier = nested_class.from_kwargs(**user_identifier)
+                else:
+                    self.user_identifier = user_identifier
+            else:
+                self.user_identifier = user_identifier
         if user_status is not None:
-            self.user_status = user_status
+            if hasattr(models, self.swagger_types['user_status']):
+                nested_class = getattr(models, self.swagger_types['user_status'])
+                if isinstance(user_status, nested_class):
+                    self.user_status = user_status
+                elif isinstance(user_status, dict):
+                    self.user_status = nested_class.from_kwargs(**user_status)
+                else:
+                    self.user_status = user_status
+            else:
+                self.user_status = user_status
         if users is not None:
-            self.users = users
+            if hasattr(models, self.swagger_types['users']):
+                nested_class = getattr(models, self.swagger_types['users'])
+                if isinstance(users, nested_class):
+                    self.users = users
+                elif isinstance(users, dict):
+                    self.users = nested_class.from_kwargs(**users)
+                else:
+                    self.users = users
+            else:
+                self.users = users
 
     @property
     def app(self):

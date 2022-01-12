@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class TokenAuthorizationServerPolicyRuleAction(object):
@@ -29,12 +30,11 @@ class TokenAuthorizationServerPolicyRuleAction(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'access_token_lifetime_minutes': 'int',
-        'refresh_token_lifetime_minutes': 'int',
-        'refresh_token_window_minutes': 'int',
-        'inline_hook': 'TokenAuthorizationServerPolicyRuleActionInlineHook'
-    }
+    swagger_types = {}
+    swagger_types['access_token_lifetime_minutes'] = 'int'
+    swagger_types['refresh_token_lifetime_minutes'] = 'int'
+    swagger_types['refresh_token_window_minutes'] = 'int'
+    swagger_types['inline_hook'] = 'TokenAuthorizationServerPolicyRuleActionInlineHook'
 
     attribute_map = {
         'access_token_lifetime_minutes': 'accessTokenLifetimeMinutes',
@@ -54,7 +54,7 @@ class TokenAuthorizationServerPolicyRuleAction(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, access_token_lifetime_minutes=None, refresh_token_lifetime_minutes=None, refresh_token_window_minutes=None, inline_hook=None):  # noqa: E501
+    def set_attributes(self, access_token_lifetime_minutes=None, refresh_token_lifetime_minutes=None, refresh_token_window_minutes=None, inline_hook=None, **kwargs):  # noqa: E501
         """TokenAuthorizationServerPolicyRuleAction - a model defined in Swagger"""  # noqa: E501
         self._access_token_lifetime_minutes = None
         self._refresh_token_lifetime_minutes = None
@@ -62,13 +62,49 @@ class TokenAuthorizationServerPolicyRuleAction(object):
         self._inline_hook = None
         self.discriminator = None
         if access_token_lifetime_minutes is not None:
-            self.access_token_lifetime_minutes = access_token_lifetime_minutes
+            if hasattr(models, self.swagger_types['access_token_lifetime_minutes']):
+                nested_class = getattr(models, self.swagger_types['access_token_lifetime_minutes'])
+                if isinstance(access_token_lifetime_minutes, nested_class):
+                    self.access_token_lifetime_minutes = access_token_lifetime_minutes
+                elif isinstance(access_token_lifetime_minutes, dict):
+                    self.access_token_lifetime_minutes = nested_class.from_kwargs(**access_token_lifetime_minutes)
+                else:
+                    self.access_token_lifetime_minutes = access_token_lifetime_minutes
+            else:
+                self.access_token_lifetime_minutes = access_token_lifetime_minutes
         if refresh_token_lifetime_minutes is not None:
-            self.refresh_token_lifetime_minutes = refresh_token_lifetime_minutes
+            if hasattr(models, self.swagger_types['refresh_token_lifetime_minutes']):
+                nested_class = getattr(models, self.swagger_types['refresh_token_lifetime_minutes'])
+                if isinstance(refresh_token_lifetime_minutes, nested_class):
+                    self.refresh_token_lifetime_minutes = refresh_token_lifetime_minutes
+                elif isinstance(refresh_token_lifetime_minutes, dict):
+                    self.refresh_token_lifetime_minutes = nested_class.from_kwargs(**refresh_token_lifetime_minutes)
+                else:
+                    self.refresh_token_lifetime_minutes = refresh_token_lifetime_minutes
+            else:
+                self.refresh_token_lifetime_minutes = refresh_token_lifetime_minutes
         if refresh_token_window_minutes is not None:
-            self.refresh_token_window_minutes = refresh_token_window_minutes
+            if hasattr(models, self.swagger_types['refresh_token_window_minutes']):
+                nested_class = getattr(models, self.swagger_types['refresh_token_window_minutes'])
+                if isinstance(refresh_token_window_minutes, nested_class):
+                    self.refresh_token_window_minutes = refresh_token_window_minutes
+                elif isinstance(refresh_token_window_minutes, dict):
+                    self.refresh_token_window_minutes = nested_class.from_kwargs(**refresh_token_window_minutes)
+                else:
+                    self.refresh_token_window_minutes = refresh_token_window_minutes
+            else:
+                self.refresh_token_window_minutes = refresh_token_window_minutes
         if inline_hook is not None:
-            self.inline_hook = inline_hook
+            if hasattr(models, self.swagger_types['inline_hook']):
+                nested_class = getattr(models, self.swagger_types['inline_hook'])
+                if isinstance(inline_hook, nested_class):
+                    self.inline_hook = inline_hook
+                elif isinstance(inline_hook, dict):
+                    self.inline_hook = nested_class.from_kwargs(**inline_hook)
+                else:
+                    self.inline_hook = inline_hook
+            else:
+                self.inline_hook = inline_hook
 
     @property
     def access_token_lifetime_minutes(self):

@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class OAuth2Claim(object):
@@ -29,19 +30,18 @@ class OAuth2Claim(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'links': 'dict(str, object)',
-        'always_include_in_token': 'bool',
-        'claim_type': 'OAuth2ClaimType',
-        'conditions': 'OAuth2ClaimConditions',
-        'group_filter_type': 'OAuth2ClaimGroupFilterType',
-        'id': 'str',
-        'name': 'str',
-        'status': 'LifecycleStatus',
-        'system': 'bool',
-        'value': 'str',
-        'value_type': 'OAuth2ClaimValueType'
-    }
+    swagger_types = {}
+    swagger_types['links'] = 'dict(str, object)'
+    swagger_types['always_include_in_token'] = 'bool'
+    swagger_types['claim_type'] = 'OAuth2ClaimType'
+    swagger_types['conditions'] = 'OAuth2ClaimConditions'
+    swagger_types['group_filter_type'] = 'OAuth2ClaimGroupFilterType'
+    swagger_types['id'] = 'str'
+    swagger_types['name'] = 'str'
+    swagger_types['status'] = 'LifecycleStatus'
+    swagger_types['system'] = 'bool'
+    swagger_types['value'] = 'str'
+    swagger_types['value_type'] = 'OAuth2ClaimValueType'
 
     attribute_map = {
         'links': '_links',
@@ -68,7 +68,7 @@ class OAuth2Claim(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, links=None, always_include_in_token=None, claim_type=None, conditions=None, group_filter_type=None, id=None, name=None, status=None, system=None, value=None, value_type=None):  # noqa: E501
+    def set_attributes(self, links=None, always_include_in_token=None, claim_type=None, conditions=None, group_filter_type=None, id=None, name=None, status=None, system=None, value=None, value_type=None, **kwargs):  # noqa: E501
         """OAuth2Claim - a model defined in Swagger"""  # noqa: E501
         self._links = None
         self._always_include_in_token = None
@@ -83,27 +83,126 @@ class OAuth2Claim(object):
         self._value_type = None
         self.discriminator = None
         if links is not None:
-            self.links = links
+            if hasattr(models, self.swagger_types['links']):
+                nested_class = getattr(models, self.swagger_types['links'])
+                if isinstance(links, nested_class):
+                    self.links = links
+                elif isinstance(links, dict):
+                    self.links = nested_class.from_kwargs(**links)
+                else:
+                    self.links = links
+            else:
+                self.links = links
         if always_include_in_token is not None:
-            self.always_include_in_token = always_include_in_token
+            if hasattr(models, self.swagger_types['always_include_in_token']):
+                nested_class = getattr(models, self.swagger_types['always_include_in_token'])
+                if isinstance(always_include_in_token, nested_class):
+                    self.always_include_in_token = always_include_in_token
+                elif isinstance(always_include_in_token, dict):
+                    self.always_include_in_token = nested_class.from_kwargs(**always_include_in_token)
+                else:
+                    self.always_include_in_token = always_include_in_token
+            else:
+                self.always_include_in_token = always_include_in_token
         if claim_type is not None:
-            self.claim_type = claim_type
+            if hasattr(models, self.swagger_types['claim_type']):
+                nested_class = getattr(models, self.swagger_types['claim_type'])
+                if isinstance(claim_type, nested_class):
+                    self.claim_type = claim_type
+                elif isinstance(claim_type, dict):
+                    self.claim_type = nested_class.from_kwargs(**claim_type)
+                else:
+                    self.claim_type = claim_type
+            else:
+                self.claim_type = claim_type
         if conditions is not None:
-            self.conditions = conditions
+            if hasattr(models, self.swagger_types['conditions']):
+                nested_class = getattr(models, self.swagger_types['conditions'])
+                if isinstance(conditions, nested_class):
+                    self.conditions = conditions
+                elif isinstance(conditions, dict):
+                    self.conditions = nested_class.from_kwargs(**conditions)
+                else:
+                    self.conditions = conditions
+            else:
+                self.conditions = conditions
         if group_filter_type is not None:
-            self.group_filter_type = group_filter_type
+            if hasattr(models, self.swagger_types['group_filter_type']):
+                nested_class = getattr(models, self.swagger_types['group_filter_type'])
+                if isinstance(group_filter_type, nested_class):
+                    self.group_filter_type = group_filter_type
+                elif isinstance(group_filter_type, dict):
+                    self.group_filter_type = nested_class.from_kwargs(**group_filter_type)
+                else:
+                    self.group_filter_type = group_filter_type
+            else:
+                self.group_filter_type = group_filter_type
         if id is not None:
-            self.id = id
+            if hasattr(models, self.swagger_types['id']):
+                nested_class = getattr(models, self.swagger_types['id'])
+                if isinstance(id, nested_class):
+                    self.id = id
+                elif isinstance(id, dict):
+                    self.id = nested_class.from_kwargs(**id)
+                else:
+                    self.id = id
+            else:
+                self.id = id
         if name is not None:
-            self.name = name
+            if hasattr(models, self.swagger_types['name']):
+                nested_class = getattr(models, self.swagger_types['name'])
+                if isinstance(name, nested_class):
+                    self.name = name
+                elif isinstance(name, dict):
+                    self.name = nested_class.from_kwargs(**name)
+                else:
+                    self.name = name
+            else:
+                self.name = name
         if status is not None:
-            self.status = status
+            if hasattr(models, self.swagger_types['status']):
+                nested_class = getattr(models, self.swagger_types['status'])
+                if isinstance(status, nested_class):
+                    self.status = status
+                elif isinstance(status, dict):
+                    self.status = nested_class.from_kwargs(**status)
+                else:
+                    self.status = status
+            else:
+                self.status = status
         if system is not None:
-            self.system = system
+            if hasattr(models, self.swagger_types['system']):
+                nested_class = getattr(models, self.swagger_types['system'])
+                if isinstance(system, nested_class):
+                    self.system = system
+                elif isinstance(system, dict):
+                    self.system = nested_class.from_kwargs(**system)
+                else:
+                    self.system = system
+            else:
+                self.system = system
         if value is not None:
-            self.value = value
+            if hasattr(models, self.swagger_types['value']):
+                nested_class = getattr(models, self.swagger_types['value'])
+                if isinstance(value, nested_class):
+                    self.value = value
+                elif isinstance(value, dict):
+                    self.value = nested_class.from_kwargs(**value)
+                else:
+                    self.value = value
+            else:
+                self.value = value
         if value_type is not None:
-            self.value_type = value_type
+            if hasattr(models, self.swagger_types['value_type']):
+                nested_class = getattr(models, self.swagger_types['value_type'])
+                if isinstance(value_type, nested_class):
+                    self.value_type = value_type
+                elif isinstance(value_type, dict):
+                    self.value_type = nested_class.from_kwargs(**value_type)
+                else:
+                    self.value_type = value_type
+            else:
+                self.value_type = value_type
 
     @property
     def links(self):

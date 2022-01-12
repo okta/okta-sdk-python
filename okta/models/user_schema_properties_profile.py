@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class UserSchemaPropertiesProfile(object):
@@ -29,9 +30,8 @@ class UserSchemaPropertiesProfile(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'all_of': 'list[UserSchemaPropertiesProfileItem]'
-    }
+    swagger_types = {}
+    swagger_types['all_of'] = 'list[UserSchemaPropertiesProfileItem]'
 
     attribute_map = {
         'all_of': 'allOf'
@@ -48,12 +48,21 @@ class UserSchemaPropertiesProfile(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, all_of=None):  # noqa: E501
+    def set_attributes(self, all_of=None, **kwargs):  # noqa: E501
         """UserSchemaPropertiesProfile - a model defined in Swagger"""  # noqa: E501
         self._all_of = None
         self.discriminator = None
         if all_of is not None:
-            self.all_of = all_of
+            if hasattr(models, self.swagger_types['all_of']):
+                nested_class = getattr(models, self.swagger_types['all_of'])
+                if isinstance(all_of, nested_class):
+                    self.all_of = all_of
+                elif isinstance(all_of, dict):
+                    self.all_of = nested_class.from_kwargs(**all_of)
+                else:
+                    self.all_of = all_of
+            else:
+                self.all_of = all_of
 
     @property
     def all_of(self):

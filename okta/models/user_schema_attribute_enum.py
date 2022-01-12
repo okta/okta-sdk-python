@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class UserSchemaAttributeEnum(object):
@@ -29,10 +30,9 @@ class UserSchemaAttributeEnum(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'const': 'str',
-        'title': 'str'
-    }
+    swagger_types = {}
+    swagger_types['const'] = 'str'
+    swagger_types['title'] = 'str'
 
     attribute_map = {
         'const': 'const',
@@ -50,15 +50,33 @@ class UserSchemaAttributeEnum(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, const=None, title=None):  # noqa: E501
+    def set_attributes(self, const=None, title=None, **kwargs):  # noqa: E501
         """UserSchemaAttributeEnum - a model defined in Swagger"""  # noqa: E501
         self._const = None
         self._title = None
         self.discriminator = None
         if const is not None:
-            self.const = const
+            if hasattr(models, self.swagger_types['const']):
+                nested_class = getattr(models, self.swagger_types['const'])
+                if isinstance(const, nested_class):
+                    self.const = const
+                elif isinstance(const, dict):
+                    self.const = nested_class.from_kwargs(**const)
+                else:
+                    self.const = const
+            else:
+                self.const = const
         if title is not None:
-            self.title = title
+            if hasattr(models, self.swagger_types['title']):
+                nested_class = getattr(models, self.swagger_types['title'])
+                if isinstance(title, nested_class):
+                    self.title = title
+                elif isinstance(title, dict):
+                    self.title = nested_class.from_kwargs(**title)
+                else:
+                    self.title = title
+            else:
+                self.title = title
 
     @property
     def const(self):

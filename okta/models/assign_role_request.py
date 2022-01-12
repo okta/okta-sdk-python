@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class AssignRoleRequest(object):
@@ -29,9 +30,8 @@ class AssignRoleRequest(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'type': 'RoleType'
-    }
+    swagger_types = {}
+    swagger_types['type'] = 'RoleType'
 
     attribute_map = {
         'type': 'type'
@@ -48,12 +48,21 @@ class AssignRoleRequest(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, type=None):  # noqa: E501
+    def set_attributes(self, type=None, **kwargs):  # noqa: E501
         """AssignRoleRequest - a model defined in Swagger"""  # noqa: E501
         self._type = None
         self.discriminator = None
         if type is not None:
-            self.type = type
+            if hasattr(models, self.swagger_types['type']):
+                nested_class = getattr(models, self.swagger_types['type'])
+                if isinstance(type, nested_class):
+                    self.type = type
+                elif isinstance(type, dict):
+                    self.type = nested_class.from_kwargs(**type)
+                else:
+                    self.type = type
+            else:
+                self.type = type
 
     @property
     def type(self):

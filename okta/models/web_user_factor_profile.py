@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class WebUserFactorProfile(object):
@@ -29,9 +30,8 @@ class WebUserFactorProfile(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'credential_id': 'str'
-    }
+    swagger_types = {}
+    swagger_types['credential_id'] = 'str'
 
     attribute_map = {
         'credential_id': 'credentialId'
@@ -48,12 +48,21 @@ class WebUserFactorProfile(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, credential_id=None):  # noqa: E501
+    def set_attributes(self, credential_id=None, **kwargs):  # noqa: E501
         """WebUserFactorProfile - a model defined in Swagger"""  # noqa: E501
         self._credential_id = None
         self.discriminator = None
         if credential_id is not None:
-            self.credential_id = credential_id
+            if hasattr(models, self.swagger_types['credential_id']):
+                nested_class = getattr(models, self.swagger_types['credential_id'])
+                if isinstance(credential_id, nested_class):
+                    self.credential_id = credential_id
+                elif isinstance(credential_id, dict):
+                    self.credential_id = nested_class.from_kwargs(**credential_id)
+                else:
+                    self.credential_id = credential_id
+            else:
+                self.credential_id = credential_id
 
     @property
     def credential_id(self):

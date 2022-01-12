@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class AuthorizationServer(object):
@@ -29,19 +30,18 @@ class AuthorizationServer(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'links': 'dict(str, object)',
-        'audiences': 'list[str]',
-        'created': 'datetime',
-        'credentials': 'AuthorizationServerCredentials',
-        'description': 'str',
-        'id': 'str',
-        'issuer': 'str',
-        'issuer_mode': 'IssuerMode',
-        'last_updated': 'datetime',
-        'name': 'str',
-        'status': 'LifecycleStatus'
-    }
+    swagger_types = {}
+    swagger_types['links'] = 'dict(str, object)'
+    swagger_types['audiences'] = 'list[str]'
+    swagger_types['created'] = 'datetime'
+    swagger_types['credentials'] = 'AuthorizationServerCredentials'
+    swagger_types['description'] = 'str'
+    swagger_types['id'] = 'str'
+    swagger_types['issuer'] = 'str'
+    swagger_types['issuer_mode'] = 'IssuerMode'
+    swagger_types['last_updated'] = 'datetime'
+    swagger_types['name'] = 'str'
+    swagger_types['status'] = 'LifecycleStatus'
 
     attribute_map = {
         'links': '_links',
@@ -68,7 +68,7 @@ class AuthorizationServer(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, links=None, audiences=None, created=None, credentials=None, description=None, id=None, issuer=None, issuer_mode=None, last_updated=None, name=None, status=None):  # noqa: E501
+    def set_attributes(self, links=None, audiences=None, created=None, credentials=None, description=None, id=None, issuer=None, issuer_mode=None, last_updated=None, name=None, status=None, **kwargs):  # noqa: E501
         """AuthorizationServer - a model defined in Swagger"""  # noqa: E501
         self._links = None
         self._audiences = None
@@ -83,27 +83,126 @@ class AuthorizationServer(object):
         self._status = None
         self.discriminator = None
         if links is not None:
-            self.links = links
+            if hasattr(models, self.swagger_types['links']):
+                nested_class = getattr(models, self.swagger_types['links'])
+                if isinstance(links, nested_class):
+                    self.links = links
+                elif isinstance(links, dict):
+                    self.links = nested_class.from_kwargs(**links)
+                else:
+                    self.links = links
+            else:
+                self.links = links
         if audiences is not None:
-            self.audiences = audiences
+            if hasattr(models, self.swagger_types['audiences']):
+                nested_class = getattr(models, self.swagger_types['audiences'])
+                if isinstance(audiences, nested_class):
+                    self.audiences = audiences
+                elif isinstance(audiences, dict):
+                    self.audiences = nested_class.from_kwargs(**audiences)
+                else:
+                    self.audiences = audiences
+            else:
+                self.audiences = audiences
         if created is not None:
-            self.created = created
+            if hasattr(models, self.swagger_types['created']):
+                nested_class = getattr(models, self.swagger_types['created'])
+                if isinstance(created, nested_class):
+                    self.created = created
+                elif isinstance(created, dict):
+                    self.created = nested_class.from_kwargs(**created)
+                else:
+                    self.created = created
+            else:
+                self.created = created
         if credentials is not None:
-            self.credentials = credentials
+            if hasattr(models, self.swagger_types['credentials']):
+                nested_class = getattr(models, self.swagger_types['credentials'])
+                if isinstance(credentials, nested_class):
+                    self.credentials = credentials
+                elif isinstance(credentials, dict):
+                    self.credentials = nested_class.from_kwargs(**credentials)
+                else:
+                    self.credentials = credentials
+            else:
+                self.credentials = credentials
         if description is not None:
-            self.description = description
+            if hasattr(models, self.swagger_types['description']):
+                nested_class = getattr(models, self.swagger_types['description'])
+                if isinstance(description, nested_class):
+                    self.description = description
+                elif isinstance(description, dict):
+                    self.description = nested_class.from_kwargs(**description)
+                else:
+                    self.description = description
+            else:
+                self.description = description
         if id is not None:
-            self.id = id
+            if hasattr(models, self.swagger_types['id']):
+                nested_class = getattr(models, self.swagger_types['id'])
+                if isinstance(id, nested_class):
+                    self.id = id
+                elif isinstance(id, dict):
+                    self.id = nested_class.from_kwargs(**id)
+                else:
+                    self.id = id
+            else:
+                self.id = id
         if issuer is not None:
-            self.issuer = issuer
+            if hasattr(models, self.swagger_types['issuer']):
+                nested_class = getattr(models, self.swagger_types['issuer'])
+                if isinstance(issuer, nested_class):
+                    self.issuer = issuer
+                elif isinstance(issuer, dict):
+                    self.issuer = nested_class.from_kwargs(**issuer)
+                else:
+                    self.issuer = issuer
+            else:
+                self.issuer = issuer
         if issuer_mode is not None:
-            self.issuer_mode = issuer_mode
+            if hasattr(models, self.swagger_types['issuer_mode']):
+                nested_class = getattr(models, self.swagger_types['issuer_mode'])
+                if isinstance(issuer_mode, nested_class):
+                    self.issuer_mode = issuer_mode
+                elif isinstance(issuer_mode, dict):
+                    self.issuer_mode = nested_class.from_kwargs(**issuer_mode)
+                else:
+                    self.issuer_mode = issuer_mode
+            else:
+                self.issuer_mode = issuer_mode
         if last_updated is not None:
-            self.last_updated = last_updated
+            if hasattr(models, self.swagger_types['last_updated']):
+                nested_class = getattr(models, self.swagger_types['last_updated'])
+                if isinstance(last_updated, nested_class):
+                    self.last_updated = last_updated
+                elif isinstance(last_updated, dict):
+                    self.last_updated = nested_class.from_kwargs(**last_updated)
+                else:
+                    self.last_updated = last_updated
+            else:
+                self.last_updated = last_updated
         if name is not None:
-            self.name = name
+            if hasattr(models, self.swagger_types['name']):
+                nested_class = getattr(models, self.swagger_types['name'])
+                if isinstance(name, nested_class):
+                    self.name = name
+                elif isinstance(name, dict):
+                    self.name = nested_class.from_kwargs(**name)
+                else:
+                    self.name = name
+            else:
+                self.name = name
         if status is not None:
-            self.status = status
+            if hasattr(models, self.swagger_types['status']):
+                nested_class = getattr(models, self.swagger_types['status'])
+                if isinstance(status, nested_class):
+                    self.status = status
+                elif isinstance(status, dict):
+                    self.status = nested_class.from_kwargs(**status)
+                else:
+                    self.status = status
+            else:
+                self.status = status
 
     @property
     def links(self):

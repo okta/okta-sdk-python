@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class ThreatInsightConfiguration(object):
@@ -29,13 +30,12 @@ class ThreatInsightConfiguration(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'action': 'str',
-        'exclude_zones': 'list[str]',
-        'created': 'datetime',
-        'last_updated': 'datetime',
-        'links': 'dict(str, object)'
-    }
+    swagger_types = {}
+    swagger_types['action'] = 'str'
+    swagger_types['exclude_zones'] = 'list[str]'
+    swagger_types['created'] = 'datetime'
+    swagger_types['last_updated'] = 'datetime'
+    swagger_types['links'] = 'dict(str, object)'
 
     attribute_map = {
         'action': 'action',
@@ -56,7 +56,7 @@ class ThreatInsightConfiguration(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, action=None, exclude_zones=None, created=None, last_updated=None, links=None):  # noqa: E501
+    def set_attributes(self, action=None, exclude_zones=None, created=None, last_updated=None, links=None, **kwargs):  # noqa: E501
         """ThreatInsightConfiguration - a model defined in Swagger"""  # noqa: E501
         self._action = None
         self._exclude_zones = None
@@ -65,15 +65,60 @@ class ThreatInsightConfiguration(object):
         self._links = None
         self.discriminator = None
         if action is not None:
-            self.action = action
+            if hasattr(models, self.swagger_types['action']):
+                nested_class = getattr(models, self.swagger_types['action'])
+                if isinstance(action, nested_class):
+                    self.action = action
+                elif isinstance(action, dict):
+                    self.action = nested_class.from_kwargs(**action)
+                else:
+                    self.action = action
+            else:
+                self.action = action
         if exclude_zones is not None:
-            self.exclude_zones = exclude_zones
+            if hasattr(models, self.swagger_types['exclude_zones']):
+                nested_class = getattr(models, self.swagger_types['exclude_zones'])
+                if isinstance(exclude_zones, nested_class):
+                    self.exclude_zones = exclude_zones
+                elif isinstance(exclude_zones, dict):
+                    self.exclude_zones = nested_class.from_kwargs(**exclude_zones)
+                else:
+                    self.exclude_zones = exclude_zones
+            else:
+                self.exclude_zones = exclude_zones
         if created is not None:
-            self.created = created
+            if hasattr(models, self.swagger_types['created']):
+                nested_class = getattr(models, self.swagger_types['created'])
+                if isinstance(created, nested_class):
+                    self.created = created
+                elif isinstance(created, dict):
+                    self.created = nested_class.from_kwargs(**created)
+                else:
+                    self.created = created
+            else:
+                self.created = created
         if last_updated is not None:
-            self.last_updated = last_updated
+            if hasattr(models, self.swagger_types['last_updated']):
+                nested_class = getattr(models, self.swagger_types['last_updated'])
+                if isinstance(last_updated, nested_class):
+                    self.last_updated = last_updated
+                elif isinstance(last_updated, dict):
+                    self.last_updated = nested_class.from_kwargs(**last_updated)
+                else:
+                    self.last_updated = last_updated
+            else:
+                self.last_updated = last_updated
         if links is not None:
-            self.links = links
+            if hasattr(models, self.swagger_types['links']):
+                nested_class = getattr(models, self.swagger_types['links'])
+                if isinstance(links, nested_class):
+                    self.links = links
+                elif isinstance(links, dict):
+                    self.links = nested_class.from_kwargs(**links)
+                else:
+                    self.links = links
+            else:
+                self.links = links
 
     @property
     def action(self):

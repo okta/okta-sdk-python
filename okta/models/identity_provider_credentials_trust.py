@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class IdentityProviderCredentialsTrust(object):
@@ -29,13 +30,12 @@ class IdentityProviderCredentialsTrust(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'audience': 'str',
-        'issuer': 'str',
-        'kid': 'str',
-        'revocation': 'IdentityProviderCredentialsTrustRevocation',
-        'revocation_cache_lifetime': 'int'
-    }
+    swagger_types = {}
+    swagger_types['audience'] = 'str'
+    swagger_types['issuer'] = 'str'
+    swagger_types['kid'] = 'str'
+    swagger_types['revocation'] = 'IdentityProviderCredentialsTrustRevocation'
+    swagger_types['revocation_cache_lifetime'] = 'int'
 
     attribute_map = {
         'audience': 'audience',
@@ -56,7 +56,7 @@ class IdentityProviderCredentialsTrust(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, audience=None, issuer=None, kid=None, revocation=None, revocation_cache_lifetime=None):  # noqa: E501
+    def set_attributes(self, audience=None, issuer=None, kid=None, revocation=None, revocation_cache_lifetime=None, **kwargs):  # noqa: E501
         """IdentityProviderCredentialsTrust - a model defined in Swagger"""  # noqa: E501
         self._audience = None
         self._issuer = None
@@ -65,15 +65,60 @@ class IdentityProviderCredentialsTrust(object):
         self._revocation_cache_lifetime = None
         self.discriminator = None
         if audience is not None:
-            self.audience = audience
+            if hasattr(models, self.swagger_types['audience']):
+                nested_class = getattr(models, self.swagger_types['audience'])
+                if isinstance(audience, nested_class):
+                    self.audience = audience
+                elif isinstance(audience, dict):
+                    self.audience = nested_class.from_kwargs(**audience)
+                else:
+                    self.audience = audience
+            else:
+                self.audience = audience
         if issuer is not None:
-            self.issuer = issuer
+            if hasattr(models, self.swagger_types['issuer']):
+                nested_class = getattr(models, self.swagger_types['issuer'])
+                if isinstance(issuer, nested_class):
+                    self.issuer = issuer
+                elif isinstance(issuer, dict):
+                    self.issuer = nested_class.from_kwargs(**issuer)
+                else:
+                    self.issuer = issuer
+            else:
+                self.issuer = issuer
         if kid is not None:
-            self.kid = kid
+            if hasattr(models, self.swagger_types['kid']):
+                nested_class = getattr(models, self.swagger_types['kid'])
+                if isinstance(kid, nested_class):
+                    self.kid = kid
+                elif isinstance(kid, dict):
+                    self.kid = nested_class.from_kwargs(**kid)
+                else:
+                    self.kid = kid
+            else:
+                self.kid = kid
         if revocation is not None:
-            self.revocation = revocation
+            if hasattr(models, self.swagger_types['revocation']):
+                nested_class = getattr(models, self.swagger_types['revocation'])
+                if isinstance(revocation, nested_class):
+                    self.revocation = revocation
+                elif isinstance(revocation, dict):
+                    self.revocation = nested_class.from_kwargs(**revocation)
+                else:
+                    self.revocation = revocation
+            else:
+                self.revocation = revocation
         if revocation_cache_lifetime is not None:
-            self.revocation_cache_lifetime = revocation_cache_lifetime
+            if hasattr(models, self.swagger_types['revocation_cache_lifetime']):
+                nested_class = getattr(models, self.swagger_types['revocation_cache_lifetime'])
+                if isinstance(revocation_cache_lifetime, nested_class):
+                    self.revocation_cache_lifetime = revocation_cache_lifetime
+                elif isinstance(revocation_cache_lifetime, dict):
+                    self.revocation_cache_lifetime = nested_class.from_kwargs(**revocation_cache_lifetime)
+                else:
+                    self.revocation_cache_lifetime = revocation_cache_lifetime
+            else:
+                self.revocation_cache_lifetime = revocation_cache_lifetime
 
     @property
     def audience(self):

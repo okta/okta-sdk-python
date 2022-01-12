@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class PolicyRuleActions(object):
@@ -29,13 +30,12 @@ class PolicyRuleActions(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'enroll': 'PolicyRuleActionsEnroll',
-        'signon': 'OktaSignOnPolicyRuleSignonActions',
-        'password_change': 'PasswordPolicyRuleAction',
-        'self_service_password_reset': 'PasswordPolicyRuleAction',
-        'self_service_unlock': 'PasswordPolicyRuleAction'
-    }
+    swagger_types = {}
+    swagger_types['enroll'] = 'PolicyRuleActionsEnroll'
+    swagger_types['signon'] = 'OktaSignOnPolicyRuleSignonActions'
+    swagger_types['password_change'] = 'PasswordPolicyRuleAction'
+    swagger_types['self_service_password_reset'] = 'PasswordPolicyRuleAction'
+    swagger_types['self_service_unlock'] = 'PasswordPolicyRuleAction'
 
     attribute_map = {
         'enroll': 'enroll',
@@ -56,7 +56,7 @@ class PolicyRuleActions(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, enroll=None, signon=None, password_change=None, self_service_password_reset=None, self_service_unlock=None):  # noqa: E501
+    def set_attributes(self, enroll=None, signon=None, password_change=None, self_service_password_reset=None, self_service_unlock=None, **kwargs):  # noqa: E501
         """PolicyRuleActions - a model defined in Swagger"""  # noqa: E501
         self._enroll = None
         self._signon = None
@@ -65,15 +65,60 @@ class PolicyRuleActions(object):
         self._self_service_unlock = None
         self.discriminator = None
         if enroll is not None:
-            self.enroll = enroll
+            if hasattr(models, self.swagger_types['enroll']):
+                nested_class = getattr(models, self.swagger_types['enroll'])
+                if isinstance(enroll, nested_class):
+                    self.enroll = enroll
+                elif isinstance(enroll, dict):
+                    self.enroll = nested_class.from_kwargs(**enroll)
+                else:
+                    self.enroll = enroll
+            else:
+                self.enroll = enroll
         if signon is not None:
-            self.signon = signon
+            if hasattr(models, self.swagger_types['signon']):
+                nested_class = getattr(models, self.swagger_types['signon'])
+                if isinstance(signon, nested_class):
+                    self.signon = signon
+                elif isinstance(signon, dict):
+                    self.signon = nested_class.from_kwargs(**signon)
+                else:
+                    self.signon = signon
+            else:
+                self.signon = signon
         if password_change is not None:
-            self.password_change = password_change
+            if hasattr(models, self.swagger_types['password_change']):
+                nested_class = getattr(models, self.swagger_types['password_change'])
+                if isinstance(password_change, nested_class):
+                    self.password_change = password_change
+                elif isinstance(password_change, dict):
+                    self.password_change = nested_class.from_kwargs(**password_change)
+                else:
+                    self.password_change = password_change
+            else:
+                self.password_change = password_change
         if self_service_password_reset is not None:
-            self.self_service_password_reset = self_service_password_reset
+            if hasattr(models, self.swagger_types['self_service_password_reset']):
+                nested_class = getattr(models, self.swagger_types['self_service_password_reset'])
+                if isinstance(self_service_password_reset, nested_class):
+                    self.self_service_password_reset = self_service_password_reset
+                elif isinstance(self_service_password_reset, dict):
+                    self.self_service_password_reset = nested_class.from_kwargs(**self_service_password_reset)
+                else:
+                    self.self_service_password_reset = self_service_password_reset
+            else:
+                self.self_service_password_reset = self_service_password_reset
         if self_service_unlock is not None:
-            self.self_service_unlock = self_service_unlock
+            if hasattr(models, self.swagger_types['self_service_unlock']):
+                nested_class = getattr(models, self.swagger_types['self_service_unlock'])
+                if isinstance(self_service_unlock, nested_class):
+                    self.self_service_unlock = self_service_unlock
+                elif isinstance(self_service_unlock, dict):
+                    self.self_service_unlock = nested_class.from_kwargs(**self_service_unlock)
+                else:
+                    self.self_service_unlock = self_service_unlock
+            else:
+                self.self_service_unlock = self_service_unlock
 
     @property
     def enroll(self):

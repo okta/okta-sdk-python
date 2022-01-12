@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class OAuth2Client(object):
@@ -29,13 +30,12 @@ class OAuth2Client(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'links': 'dict(str, object)',
-        'client_id': 'str',
-        'client_name': 'str',
-        'client_uri': 'str',
-        'logo_uri': 'str'
-    }
+    swagger_types = {}
+    swagger_types['links'] = 'dict(str, object)'
+    swagger_types['client_id'] = 'str'
+    swagger_types['client_name'] = 'str'
+    swagger_types['client_uri'] = 'str'
+    swagger_types['logo_uri'] = 'str'
 
     attribute_map = {
         'links': '_links',
@@ -56,7 +56,7 @@ class OAuth2Client(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, links=None, client_id=None, client_name=None, client_uri=None, logo_uri=None):  # noqa: E501
+    def set_attributes(self, links=None, client_id=None, client_name=None, client_uri=None, logo_uri=None, **kwargs):  # noqa: E501
         """OAuth2Client - a model defined in Swagger"""  # noqa: E501
         self._links = None
         self._client_id = None
@@ -65,15 +65,60 @@ class OAuth2Client(object):
         self._logo_uri = None
         self.discriminator = None
         if links is not None:
-            self.links = links
+            if hasattr(models, self.swagger_types['links']):
+                nested_class = getattr(models, self.swagger_types['links'])
+                if isinstance(links, nested_class):
+                    self.links = links
+                elif isinstance(links, dict):
+                    self.links = nested_class.from_kwargs(**links)
+                else:
+                    self.links = links
+            else:
+                self.links = links
         if client_id is not None:
-            self.client_id = client_id
+            if hasattr(models, self.swagger_types['client_id']):
+                nested_class = getattr(models, self.swagger_types['client_id'])
+                if isinstance(client_id, nested_class):
+                    self.client_id = client_id
+                elif isinstance(client_id, dict):
+                    self.client_id = nested_class.from_kwargs(**client_id)
+                else:
+                    self.client_id = client_id
+            else:
+                self.client_id = client_id
         if client_name is not None:
-            self.client_name = client_name
+            if hasattr(models, self.swagger_types['client_name']):
+                nested_class = getattr(models, self.swagger_types['client_name'])
+                if isinstance(client_name, nested_class):
+                    self.client_name = client_name
+                elif isinstance(client_name, dict):
+                    self.client_name = nested_class.from_kwargs(**client_name)
+                else:
+                    self.client_name = client_name
+            else:
+                self.client_name = client_name
         if client_uri is not None:
-            self.client_uri = client_uri
+            if hasattr(models, self.swagger_types['client_uri']):
+                nested_class = getattr(models, self.swagger_types['client_uri'])
+                if isinstance(client_uri, nested_class):
+                    self.client_uri = client_uri
+                elif isinstance(client_uri, dict):
+                    self.client_uri = nested_class.from_kwargs(**client_uri)
+                else:
+                    self.client_uri = client_uri
+            else:
+                self.client_uri = client_uri
         if logo_uri is not None:
-            self.logo_uri = logo_uri
+            if hasattr(models, self.swagger_types['logo_uri']):
+                nested_class = getattr(models, self.swagger_types['logo_uri'])
+                if isinstance(logo_uri, nested_class):
+                    self.logo_uri = logo_uri
+                elif isinstance(logo_uri, dict):
+                    self.logo_uri = nested_class.from_kwargs(**logo_uri)
+                else:
+                    self.logo_uri = logo_uri
+            else:
+                self.logo_uri = logo_uri
 
     @property
     def links(self):

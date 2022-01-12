@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class PlatformConditionEvaluatorPlatformOperatingSystem(object):
@@ -29,11 +30,10 @@ class PlatformConditionEvaluatorPlatformOperatingSystem(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'expression': 'str',
-        'type': 'PolicyPlatformOperatingSystemType',
-        'version': 'PlatformConditionEvaluatorPlatformOperatingSystemVersion'
-    }
+    swagger_types = {}
+    swagger_types['expression'] = 'str'
+    swagger_types['type'] = 'PolicyPlatformOperatingSystemType'
+    swagger_types['version'] = 'PlatformConditionEvaluatorPlatformOperatingSystemVersion'
 
     attribute_map = {
         'expression': 'expression',
@@ -52,18 +52,45 @@ class PlatformConditionEvaluatorPlatformOperatingSystem(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, expression=None, type=None, version=None):  # noqa: E501
+    def set_attributes(self, expression=None, type=None, version=None, **kwargs):  # noqa: E501
         """PlatformConditionEvaluatorPlatformOperatingSystem - a model defined in Swagger"""  # noqa: E501
         self._expression = None
         self._type = None
         self._version = None
         self.discriminator = None
         if expression is not None:
-            self.expression = expression
+            if hasattr(models, self.swagger_types['expression']):
+                nested_class = getattr(models, self.swagger_types['expression'])
+                if isinstance(expression, nested_class):
+                    self.expression = expression
+                elif isinstance(expression, dict):
+                    self.expression = nested_class.from_kwargs(**expression)
+                else:
+                    self.expression = expression
+            else:
+                self.expression = expression
         if type is not None:
-            self.type = type
+            if hasattr(models, self.swagger_types['type']):
+                nested_class = getattr(models, self.swagger_types['type'])
+                if isinstance(type, nested_class):
+                    self.type = type
+                elif isinstance(type, dict):
+                    self.type = nested_class.from_kwargs(**type)
+                else:
+                    self.type = type
+            else:
+                self.type = type
         if version is not None:
-            self.version = version
+            if hasattr(models, self.swagger_types['version']):
+                nested_class = getattr(models, self.swagger_types['version'])
+                if isinstance(version, nested_class):
+                    self.version = version
+                elif isinstance(version, dict):
+                    self.version = nested_class.from_kwargs(**version)
+                else:
+                    self.version = version
+            else:
+                self.version = version
 
     @property
     def expression(self):

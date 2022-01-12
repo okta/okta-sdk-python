@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class AccessPolicyConstraints(object):
@@ -29,10 +30,9 @@ class AccessPolicyConstraints(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'knowledge': 'KnowledgeConstraint',
-        'possession': 'PossessionConstraint'
-    }
+    swagger_types = {}
+    swagger_types['knowledge'] = 'KnowledgeConstraint'
+    swagger_types['possession'] = 'PossessionConstraint'
 
     attribute_map = {
         'knowledge': 'knowledge',
@@ -50,15 +50,33 @@ class AccessPolicyConstraints(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, knowledge=None, possession=None):  # noqa: E501
+    def set_attributes(self, knowledge=None, possession=None, **kwargs):  # noqa: E501
         """AccessPolicyConstraints - a model defined in Swagger"""  # noqa: E501
         self._knowledge = None
         self._possession = None
         self.discriminator = None
         if knowledge is not None:
-            self.knowledge = knowledge
+            if hasattr(models, self.swagger_types['knowledge']):
+                nested_class = getattr(models, self.swagger_types['knowledge'])
+                if isinstance(knowledge, nested_class):
+                    self.knowledge = knowledge
+                elif isinstance(knowledge, dict):
+                    self.knowledge = nested_class.from_kwargs(**knowledge)
+                else:
+                    self.knowledge = knowledge
+            else:
+                self.knowledge = knowledge
         if possession is not None:
-            self.possession = possession
+            if hasattr(models, self.swagger_types['possession']):
+                nested_class = getattr(models, self.swagger_types['possession'])
+                if isinstance(possession, nested_class):
+                    self.possession = possession
+                elif isinstance(possession, dict):
+                    self.possession = nested_class.from_kwargs(**possession)
+                else:
+                    self.possession = possession
+            else:
+                self.possession = possession
 
     @property
     def knowledge(self):

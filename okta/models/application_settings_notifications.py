@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class ApplicationSettingsNotifications(object):
@@ -29,9 +30,8 @@ class ApplicationSettingsNotifications(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'vpn': 'ApplicationSettingsNotificationsVpn'
-    }
+    swagger_types = {}
+    swagger_types['vpn'] = 'ApplicationSettingsNotificationsVpn'
 
     attribute_map = {
         'vpn': 'vpn'
@@ -48,12 +48,21 @@ class ApplicationSettingsNotifications(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, vpn=None):  # noqa: E501
+    def set_attributes(self, vpn=None, **kwargs):  # noqa: E501
         """ApplicationSettingsNotifications - a model defined in Swagger"""  # noqa: E501
         self._vpn = None
         self.discriminator = None
         if vpn is not None:
-            self.vpn = vpn
+            if hasattr(models, self.swagger_types['vpn']):
+                nested_class = getattr(models, self.swagger_types['vpn'])
+                if isinstance(vpn, nested_class):
+                    self.vpn = vpn
+                elif isinstance(vpn, dict):
+                    self.vpn = nested_class.from_kwargs(**vpn)
+                else:
+                    self.vpn = vpn
+            else:
+                self.vpn = vpn
 
     @property
     def vpn(self):

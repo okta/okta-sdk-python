@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class EmailTemplateLinks(object):
@@ -29,12 +30,11 @@ class EmailTemplateLinks(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        '_self': 'HrefObject',
-        'customizations': 'HrefObject',
-        'default_content': 'HrefObject',
-        'test': 'HrefObject'
-    }
+    swagger_types = {}
+    swagger_types['_self'] = 'HrefObject'
+    swagger_types['customizations'] = 'HrefObject'
+    swagger_types['default_content'] = 'HrefObject'
+    swagger_types['test'] = 'HrefObject'
 
     attribute_map = {
         '_self': 'self',
@@ -54,7 +54,7 @@ class EmailTemplateLinks(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, _self=None, customizations=None, default_content=None, test=None):  # noqa: E501
+    def set_attributes(self, _self=None, customizations=None, default_content=None, test=None, **kwargs):  # noqa: E501
         """EmailTemplateLinks - a model defined in Swagger"""  # noqa: E501
         self.__self = None
         self._customizations = None
@@ -62,13 +62,49 @@ class EmailTemplateLinks(object):
         self._test = None
         self.discriminator = None
         if _self is not None:
-            self._self = _self
+            if hasattr(models, self.swagger_types['_self']):
+                nested_class = getattr(models, self.swagger_types['_self'])
+                if isinstance(_self, nested_class):
+                    self._self = _self
+                elif isinstance(_self, dict):
+                    self._self = nested_class.from_kwargs(**_self)
+                else:
+                    self._self = _self
+            else:
+                self._self = _self
         if customizations is not None:
-            self.customizations = customizations
+            if hasattr(models, self.swagger_types['customizations']):
+                nested_class = getattr(models, self.swagger_types['customizations'])
+                if isinstance(customizations, nested_class):
+                    self.customizations = customizations
+                elif isinstance(customizations, dict):
+                    self.customizations = nested_class.from_kwargs(**customizations)
+                else:
+                    self.customizations = customizations
+            else:
+                self.customizations = customizations
         if default_content is not None:
-            self.default_content = default_content
+            if hasattr(models, self.swagger_types['default_content']):
+                nested_class = getattr(models, self.swagger_types['default_content'])
+                if isinstance(default_content, nested_class):
+                    self.default_content = default_content
+                elif isinstance(default_content, dict):
+                    self.default_content = nested_class.from_kwargs(**default_content)
+                else:
+                    self.default_content = default_content
+            else:
+                self.default_content = default_content
         if test is not None:
-            self.test = test
+            if hasattr(models, self.swagger_types['test']):
+                nested_class = getattr(models, self.swagger_types['test'])
+                if isinstance(test, nested_class):
+                    self.test = test
+                elif isinstance(test, dict):
+                    self.test = nested_class.from_kwargs(**test)
+                else:
+                    self.test = test
+            else:
+                self.test = test
 
     @property
     def _self(self):

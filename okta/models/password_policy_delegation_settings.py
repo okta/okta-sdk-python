@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class PasswordPolicyDelegationSettings(object):
@@ -29,9 +30,8 @@ class PasswordPolicyDelegationSettings(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'options': 'PasswordPolicyDelegationSettingsOptions'
-    }
+    swagger_types = {}
+    swagger_types['options'] = 'PasswordPolicyDelegationSettingsOptions'
 
     attribute_map = {
         'options': 'options'
@@ -48,12 +48,21 @@ class PasswordPolicyDelegationSettings(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, options=None):  # noqa: E501
+    def set_attributes(self, options=None, **kwargs):  # noqa: E501
         """PasswordPolicyDelegationSettings - a model defined in Swagger"""  # noqa: E501
         self._options = None
         self.discriminator = None
         if options is not None:
-            self.options = options
+            if hasattr(models, self.swagger_types['options']):
+                nested_class = getattr(models, self.swagger_types['options'])
+                if isinstance(options, nested_class):
+                    self.options = options
+                elif isinstance(options, dict):
+                    self.options = nested_class.from_kwargs(**options)
+                else:
+                    self.options = options
+            else:
+                self.options = options
 
     @property
     def options(self):

@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class HrefObject(object):
@@ -29,10 +30,9 @@ class HrefObject(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'href': 'str',
-        'hints': 'HrefObjectHints'
-    }
+    swagger_types = {}
+    swagger_types['href'] = 'str'
+    swagger_types['hints'] = 'HrefObjectHints'
 
     attribute_map = {
         'href': 'href',
@@ -50,15 +50,33 @@ class HrefObject(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, href=None, hints=None):  # noqa: E501
+    def set_attributes(self, href=None, hints=None, **kwargs):  # noqa: E501
         """HrefObject - a model defined in Swagger"""  # noqa: E501
         self._href = None
         self._hints = None
         self.discriminator = None
         if href is not None:
-            self.href = href
+            if hasattr(models, self.swagger_types['href']):
+                nested_class = getattr(models, self.swagger_types['href'])
+                if isinstance(href, nested_class):
+                    self.href = href
+                elif isinstance(href, dict):
+                    self.href = nested_class.from_kwargs(**href)
+                else:
+                    self.href = href
+            else:
+                self.href = href
         if hints is not None:
-            self.hints = hints
+            if hasattr(models, self.swagger_types['hints']):
+                nested_class = getattr(models, self.swagger_types['hints'])
+                if isinstance(hints, nested_class):
+                    self.hints = hints
+                elif isinstance(hints, dict):
+                    self.hints = nested_class.from_kwargs(**hints)
+                else:
+                    self.hints = hints
+            else:
+                self.hints = hints
 
     @property
     def href(self):

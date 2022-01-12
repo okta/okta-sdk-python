@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class AutoLoginApplicationSettingsSignOn(object):
@@ -29,10 +30,9 @@ class AutoLoginApplicationSettingsSignOn(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'login_url': 'str',
-        'redirect_url': 'str'
-    }
+    swagger_types = {}
+    swagger_types['login_url'] = 'str'
+    swagger_types['redirect_url'] = 'str'
 
     attribute_map = {
         'login_url': 'loginUrl',
@@ -50,15 +50,33 @@ class AutoLoginApplicationSettingsSignOn(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, login_url=None, redirect_url=None):  # noqa: E501
+    def set_attributes(self, login_url=None, redirect_url=None, **kwargs):  # noqa: E501
         """AutoLoginApplicationSettingsSignOn - a model defined in Swagger"""  # noqa: E501
         self._login_url = None
         self._redirect_url = None
         self.discriminator = None
         if login_url is not None:
-            self.login_url = login_url
+            if hasattr(models, self.swagger_types['login_url']):
+                nested_class = getattr(models, self.swagger_types['login_url'])
+                if isinstance(login_url, nested_class):
+                    self.login_url = login_url
+                elif isinstance(login_url, dict):
+                    self.login_url = nested_class.from_kwargs(**login_url)
+                else:
+                    self.login_url = login_url
+            else:
+                self.login_url = login_url
         if redirect_url is not None:
-            self.redirect_url = redirect_url
+            if hasattr(models, self.swagger_types['redirect_url']):
+                nested_class = getattr(models, self.swagger_types['redirect_url'])
+                if isinstance(redirect_url, nested_class):
+                    self.redirect_url = redirect_url
+                elif isinstance(redirect_url, dict):
+                    self.redirect_url = nested_class.from_kwargs(**redirect_url)
+                else:
+                    self.redirect_url = redirect_url
+            else:
+                self.redirect_url = redirect_url
 
     @property
     def login_url(self):

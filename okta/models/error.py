@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class Error(object):
@@ -29,13 +30,12 @@ class Error(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'error_code': 'str',
-        'error_summary': 'str',
-        'error_link': 'str',
-        'error_id': 'str',
-        'error_causes': 'list[ErrorErrorCauses]'
-    }
+    swagger_types = {}
+    swagger_types['error_code'] = 'str'
+    swagger_types['error_summary'] = 'str'
+    swagger_types['error_link'] = 'str'
+    swagger_types['error_id'] = 'str'
+    swagger_types['error_causes'] = 'list[ErrorErrorCauses]'
 
     attribute_map = {
         'error_code': 'errorCode',
@@ -56,7 +56,7 @@ class Error(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, error_code=None, error_summary=None, error_link=None, error_id=None, error_causes=None):  # noqa: E501
+    def set_attributes(self, error_code=None, error_summary=None, error_link=None, error_id=None, error_causes=None, **kwargs):  # noqa: E501
         """Error - a model defined in Swagger"""  # noqa: E501
         self._error_code = None
         self._error_summary = None
@@ -65,15 +65,60 @@ class Error(object):
         self._error_causes = None
         self.discriminator = None
         if error_code is not None:
-            self.error_code = error_code
+            if hasattr(models, self.swagger_types['error_code']):
+                nested_class = getattr(models, self.swagger_types['error_code'])
+                if isinstance(error_code, nested_class):
+                    self.error_code = error_code
+                elif isinstance(error_code, dict):
+                    self.error_code = nested_class.from_kwargs(**error_code)
+                else:
+                    self.error_code = error_code
+            else:
+                self.error_code = error_code
         if error_summary is not None:
-            self.error_summary = error_summary
+            if hasattr(models, self.swagger_types['error_summary']):
+                nested_class = getattr(models, self.swagger_types['error_summary'])
+                if isinstance(error_summary, nested_class):
+                    self.error_summary = error_summary
+                elif isinstance(error_summary, dict):
+                    self.error_summary = nested_class.from_kwargs(**error_summary)
+                else:
+                    self.error_summary = error_summary
+            else:
+                self.error_summary = error_summary
         if error_link is not None:
-            self.error_link = error_link
+            if hasattr(models, self.swagger_types['error_link']):
+                nested_class = getattr(models, self.swagger_types['error_link'])
+                if isinstance(error_link, nested_class):
+                    self.error_link = error_link
+                elif isinstance(error_link, dict):
+                    self.error_link = nested_class.from_kwargs(**error_link)
+                else:
+                    self.error_link = error_link
+            else:
+                self.error_link = error_link
         if error_id is not None:
-            self.error_id = error_id
+            if hasattr(models, self.swagger_types['error_id']):
+                nested_class = getattr(models, self.swagger_types['error_id'])
+                if isinstance(error_id, nested_class):
+                    self.error_id = error_id
+                elif isinstance(error_id, dict):
+                    self.error_id = nested_class.from_kwargs(**error_id)
+                else:
+                    self.error_id = error_id
+            else:
+                self.error_id = error_id
         if error_causes is not None:
-            self.error_causes = error_causes
+            if hasattr(models, self.swagger_types['error_causes']):
+                nested_class = getattr(models, self.swagger_types['error_causes'])
+                if isinstance(error_causes, nested_class):
+                    self.error_causes = error_causes
+                elif isinstance(error_causes, dict):
+                    self.error_causes = nested_class.from_kwargs(**error_causes)
+                else:
+                    self.error_causes = error_causes
+            else:
+                self.error_causes = error_causes
 
     @property
     def error_code(self):

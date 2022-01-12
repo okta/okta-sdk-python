@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class ApplicationSettings(object):
@@ -29,13 +30,12 @@ class ApplicationSettings(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'app': 'ApplicationSettingsApplication',
-        'implicit_assignment': 'bool',
-        'inline_hook_id': 'str',
-        'notifications': 'ApplicationSettingsNotifications',
-        'notes': 'ApplicationSettingsNotes'
-    }
+    swagger_types = {}
+    swagger_types['app'] = 'ApplicationSettingsApplication'
+    swagger_types['implicit_assignment'] = 'bool'
+    swagger_types['inline_hook_id'] = 'str'
+    swagger_types['notifications'] = 'ApplicationSettingsNotifications'
+    swagger_types['notes'] = 'ApplicationSettingsNotes'
 
     attribute_map = {
         'app': 'app',
@@ -56,7 +56,7 @@ class ApplicationSettings(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, app=None, implicit_assignment=None, inline_hook_id=None, notifications=None, notes=None):  # noqa: E501
+    def set_attributes(self, app=None, implicit_assignment=None, inline_hook_id=None, notifications=None, notes=None, **kwargs):  # noqa: E501
         """ApplicationSettings - a model defined in Swagger"""  # noqa: E501
         self._app = None
         self._implicit_assignment = None
@@ -65,15 +65,60 @@ class ApplicationSettings(object):
         self._notes = None
         self.discriminator = None
         if app is not None:
-            self.app = app
+            if hasattr(models, self.swagger_types['app']):
+                nested_class = getattr(models, self.swagger_types['app'])
+                if isinstance(app, nested_class):
+                    self.app = app
+                elif isinstance(app, dict):
+                    self.app = nested_class.from_kwargs(**app)
+                else:
+                    self.app = app
+            else:
+                self.app = app
         if implicit_assignment is not None:
-            self.implicit_assignment = implicit_assignment
+            if hasattr(models, self.swagger_types['implicit_assignment']):
+                nested_class = getattr(models, self.swagger_types['implicit_assignment'])
+                if isinstance(implicit_assignment, nested_class):
+                    self.implicit_assignment = implicit_assignment
+                elif isinstance(implicit_assignment, dict):
+                    self.implicit_assignment = nested_class.from_kwargs(**implicit_assignment)
+                else:
+                    self.implicit_assignment = implicit_assignment
+            else:
+                self.implicit_assignment = implicit_assignment
         if inline_hook_id is not None:
-            self.inline_hook_id = inline_hook_id
+            if hasattr(models, self.swagger_types['inline_hook_id']):
+                nested_class = getattr(models, self.swagger_types['inline_hook_id'])
+                if isinstance(inline_hook_id, nested_class):
+                    self.inline_hook_id = inline_hook_id
+                elif isinstance(inline_hook_id, dict):
+                    self.inline_hook_id = nested_class.from_kwargs(**inline_hook_id)
+                else:
+                    self.inline_hook_id = inline_hook_id
+            else:
+                self.inline_hook_id = inline_hook_id
         if notifications is not None:
-            self.notifications = notifications
+            if hasattr(models, self.swagger_types['notifications']):
+                nested_class = getattr(models, self.swagger_types['notifications'])
+                if isinstance(notifications, nested_class):
+                    self.notifications = notifications
+                elif isinstance(notifications, dict):
+                    self.notifications = nested_class.from_kwargs(**notifications)
+                else:
+                    self.notifications = notifications
+            else:
+                self.notifications = notifications
         if notes is not None:
-            self.notes = notes
+            if hasattr(models, self.swagger_types['notes']):
+                nested_class = getattr(models, self.swagger_types['notes'])
+                if isinstance(notes, nested_class):
+                    self.notes = notes
+                elif isinstance(notes, dict):
+                    self.notes = nested_class.from_kwargs(**notes)
+                else:
+                    self.notes = notes
+            else:
+                self.notes = notes
 
     @property
     def app(self):

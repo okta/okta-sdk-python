@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class CallUserFactorProfile(object):
@@ -29,10 +30,9 @@ class CallUserFactorProfile(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'phone_extension': 'str',
-        'phone_number': 'str'
-    }
+    swagger_types = {}
+    swagger_types['phone_extension'] = 'str'
+    swagger_types['phone_number'] = 'str'
 
     attribute_map = {
         'phone_extension': 'phoneExtension',
@@ -50,15 +50,33 @@ class CallUserFactorProfile(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, phone_extension=None, phone_number=None):  # noqa: E501
+    def set_attributes(self, phone_extension=None, phone_number=None, **kwargs):  # noqa: E501
         """CallUserFactorProfile - a model defined in Swagger"""  # noqa: E501
         self._phone_extension = None
         self._phone_number = None
         self.discriminator = None
         if phone_extension is not None:
-            self.phone_extension = phone_extension
+            if hasattr(models, self.swagger_types['phone_extension']):
+                nested_class = getattr(models, self.swagger_types['phone_extension'])
+                if isinstance(phone_extension, nested_class):
+                    self.phone_extension = phone_extension
+                elif isinstance(phone_extension, dict):
+                    self.phone_extension = nested_class.from_kwargs(**phone_extension)
+                else:
+                    self.phone_extension = phone_extension
+            else:
+                self.phone_extension = phone_extension
         if phone_number is not None:
-            self.phone_number = phone_number
+            if hasattr(models, self.swagger_types['phone_number']):
+                nested_class = getattr(models, self.swagger_types['phone_number'])
+                if isinstance(phone_number, nested_class):
+                    self.phone_number = phone_number
+                elif isinstance(phone_number, dict):
+                    self.phone_number = nested_class.from_kwargs(**phone_number)
+                else:
+                    self.phone_number = phone_number
+            else:
+                self.phone_number = phone_number
 
     @property
     def phone_extension(self):

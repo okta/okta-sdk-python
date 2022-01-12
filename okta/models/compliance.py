@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class Compliance(object):
@@ -29,9 +30,8 @@ class Compliance(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'fips': 'FipsEnum'
-    }
+    swagger_types = {}
+    swagger_types['fips'] = 'FipsEnum'
 
     attribute_map = {
         'fips': 'fips'
@@ -48,12 +48,21 @@ class Compliance(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, fips=None):  # noqa: E501
+    def set_attributes(self, fips=None, **kwargs):  # noqa: E501
         """Compliance - a model defined in Swagger"""  # noqa: E501
         self._fips = None
         self.discriminator = None
         if fips is not None:
-            self.fips = fips
+            if hasattr(models, self.swagger_types['fips']):
+                nested_class = getattr(models, self.swagger_types['fips'])
+                if isinstance(fips, nested_class):
+                    self.fips = fips
+                elif isinstance(fips, dict):
+                    self.fips = nested_class.from_kwargs(**fips)
+                else:
+                    self.fips = fips
+            else:
+                self.fips = fips
 
     @property
     def fips(self):

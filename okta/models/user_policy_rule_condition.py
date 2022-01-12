@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class UserPolicyRuleCondition(object):
@@ -29,14 +30,13 @@ class UserPolicyRuleCondition(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'exclude': 'list[str]',
-        'inactivity': 'InactivityPolicyRuleCondition',
-        'include': 'list[str]',
-        'lifecycle_expiration': 'LifecycleExpirationPolicyRuleCondition',
-        'password_expiration': 'PasswordExpirationPolicyRuleCondition',
-        'user_lifecycle_attribute': 'UserLifecycleAttributePolicyRuleCondition'
-    }
+    swagger_types = {}
+    swagger_types['exclude'] = 'list[str]'
+    swagger_types['inactivity'] = 'InactivityPolicyRuleCondition'
+    swagger_types['include'] = 'list[str]'
+    swagger_types['lifecycle_expiration'] = 'LifecycleExpirationPolicyRuleCondition'
+    swagger_types['password_expiration'] = 'PasswordExpirationPolicyRuleCondition'
+    swagger_types['user_lifecycle_attribute'] = 'UserLifecycleAttributePolicyRuleCondition'
 
     attribute_map = {
         'exclude': 'exclude',
@@ -58,7 +58,7 @@ class UserPolicyRuleCondition(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, exclude=None, inactivity=None, include=None, lifecycle_expiration=None, password_expiration=None, user_lifecycle_attribute=None):  # noqa: E501
+    def set_attributes(self, exclude=None, inactivity=None, include=None, lifecycle_expiration=None, password_expiration=None, user_lifecycle_attribute=None, **kwargs):  # noqa: E501
         """UserPolicyRuleCondition - a model defined in Swagger"""  # noqa: E501
         self._exclude = None
         self._inactivity = None
@@ -68,17 +68,71 @@ class UserPolicyRuleCondition(object):
         self._user_lifecycle_attribute = None
         self.discriminator = None
         if exclude is not None:
-            self.exclude = exclude
+            if hasattr(models, self.swagger_types['exclude']):
+                nested_class = getattr(models, self.swagger_types['exclude'])
+                if isinstance(exclude, nested_class):
+                    self.exclude = exclude
+                elif isinstance(exclude, dict):
+                    self.exclude = nested_class.from_kwargs(**exclude)
+                else:
+                    self.exclude = exclude
+            else:
+                self.exclude = exclude
         if inactivity is not None:
-            self.inactivity = inactivity
+            if hasattr(models, self.swagger_types['inactivity']):
+                nested_class = getattr(models, self.swagger_types['inactivity'])
+                if isinstance(inactivity, nested_class):
+                    self.inactivity = inactivity
+                elif isinstance(inactivity, dict):
+                    self.inactivity = nested_class.from_kwargs(**inactivity)
+                else:
+                    self.inactivity = inactivity
+            else:
+                self.inactivity = inactivity
         if include is not None:
-            self.include = include
+            if hasattr(models, self.swagger_types['include']):
+                nested_class = getattr(models, self.swagger_types['include'])
+                if isinstance(include, nested_class):
+                    self.include = include
+                elif isinstance(include, dict):
+                    self.include = nested_class.from_kwargs(**include)
+                else:
+                    self.include = include
+            else:
+                self.include = include
         if lifecycle_expiration is not None:
-            self.lifecycle_expiration = lifecycle_expiration
+            if hasattr(models, self.swagger_types['lifecycle_expiration']):
+                nested_class = getattr(models, self.swagger_types['lifecycle_expiration'])
+                if isinstance(lifecycle_expiration, nested_class):
+                    self.lifecycle_expiration = lifecycle_expiration
+                elif isinstance(lifecycle_expiration, dict):
+                    self.lifecycle_expiration = nested_class.from_kwargs(**lifecycle_expiration)
+                else:
+                    self.lifecycle_expiration = lifecycle_expiration
+            else:
+                self.lifecycle_expiration = lifecycle_expiration
         if password_expiration is not None:
-            self.password_expiration = password_expiration
+            if hasattr(models, self.swagger_types['password_expiration']):
+                nested_class = getattr(models, self.swagger_types['password_expiration'])
+                if isinstance(password_expiration, nested_class):
+                    self.password_expiration = password_expiration
+                elif isinstance(password_expiration, dict):
+                    self.password_expiration = nested_class.from_kwargs(**password_expiration)
+                else:
+                    self.password_expiration = password_expiration
+            else:
+                self.password_expiration = password_expiration
         if user_lifecycle_attribute is not None:
-            self.user_lifecycle_attribute = user_lifecycle_attribute
+            if hasattr(models, self.swagger_types['user_lifecycle_attribute']):
+                nested_class = getattr(models, self.swagger_types['user_lifecycle_attribute'])
+                if isinstance(user_lifecycle_attribute, nested_class):
+                    self.user_lifecycle_attribute = user_lifecycle_attribute
+                elif isinstance(user_lifecycle_attribute, dict):
+                    self.user_lifecycle_attribute = nested_class.from_kwargs(**user_lifecycle_attribute)
+                else:
+                    self.user_lifecycle_attribute = user_lifecycle_attribute
+            else:
+                self.user_lifecycle_attribute = user_lifecycle_attribute
 
     @property
     def exclude(self):

@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class WebAuthnUserFactorProfile(object):
@@ -29,10 +30,9 @@ class WebAuthnUserFactorProfile(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'credential_id': 'str',
-        'authenticator_name': 'str'
-    }
+    swagger_types = {}
+    swagger_types['credential_id'] = 'str'
+    swagger_types['authenticator_name'] = 'str'
 
     attribute_map = {
         'credential_id': 'credentialId',
@@ -50,15 +50,33 @@ class WebAuthnUserFactorProfile(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, credential_id=None, authenticator_name=None):  # noqa: E501
+    def set_attributes(self, credential_id=None, authenticator_name=None, **kwargs):  # noqa: E501
         """WebAuthnUserFactorProfile - a model defined in Swagger"""  # noqa: E501
         self._credential_id = None
         self._authenticator_name = None
         self.discriminator = None
         if credential_id is not None:
-            self.credential_id = credential_id
+            if hasattr(models, self.swagger_types['credential_id']):
+                nested_class = getattr(models, self.swagger_types['credential_id'])
+                if isinstance(credential_id, nested_class):
+                    self.credential_id = credential_id
+                elif isinstance(credential_id, dict):
+                    self.credential_id = nested_class.from_kwargs(**credential_id)
+                else:
+                    self.credential_id = credential_id
+            else:
+                self.credential_id = credential_id
         if authenticator_name is not None:
-            self.authenticator_name = authenticator_name
+            if hasattr(models, self.swagger_types['authenticator_name']):
+                nested_class = getattr(models, self.swagger_types['authenticator_name'])
+                if isinstance(authenticator_name, nested_class):
+                    self.authenticator_name = authenticator_name
+                elif isinstance(authenticator_name, dict):
+                    self.authenticator_name = nested_class.from_kwargs(**authenticator_name)
+                else:
+                    self.authenticator_name = authenticator_name
+            else:
+                self.authenticator_name = authenticator_name
 
     @property
     def credential_id(self):

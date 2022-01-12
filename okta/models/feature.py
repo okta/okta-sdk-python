@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class Feature(object):
@@ -29,15 +30,14 @@ class Feature(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'links': 'dict(str, object)',
-        'description': 'str',
-        'id': 'str',
-        'name': 'str',
-        'stage': 'FeatureStage',
-        'status': 'EnabledStatus',
-        'type': 'FeatureType'
-    }
+    swagger_types = {}
+    swagger_types['links'] = 'dict(str, object)'
+    swagger_types['description'] = 'str'
+    swagger_types['id'] = 'str'
+    swagger_types['name'] = 'str'
+    swagger_types['stage'] = 'FeatureStage'
+    swagger_types['status'] = 'EnabledStatus'
+    swagger_types['type'] = 'FeatureType'
 
     attribute_map = {
         'links': '_links',
@@ -60,7 +60,7 @@ class Feature(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, links=None, description=None, id=None, name=None, stage=None, status=None, type=None):  # noqa: E501
+    def set_attributes(self, links=None, description=None, id=None, name=None, stage=None, status=None, type=None, **kwargs):  # noqa: E501
         """Feature - a model defined in Swagger"""  # noqa: E501
         self._links = None
         self._description = None
@@ -71,19 +71,82 @@ class Feature(object):
         self._type = None
         self.discriminator = None
         if links is not None:
-            self.links = links
+            if hasattr(models, self.swagger_types['links']):
+                nested_class = getattr(models, self.swagger_types['links'])
+                if isinstance(links, nested_class):
+                    self.links = links
+                elif isinstance(links, dict):
+                    self.links = nested_class.from_kwargs(**links)
+                else:
+                    self.links = links
+            else:
+                self.links = links
         if description is not None:
-            self.description = description
+            if hasattr(models, self.swagger_types['description']):
+                nested_class = getattr(models, self.swagger_types['description'])
+                if isinstance(description, nested_class):
+                    self.description = description
+                elif isinstance(description, dict):
+                    self.description = nested_class.from_kwargs(**description)
+                else:
+                    self.description = description
+            else:
+                self.description = description
         if id is not None:
-            self.id = id
+            if hasattr(models, self.swagger_types['id']):
+                nested_class = getattr(models, self.swagger_types['id'])
+                if isinstance(id, nested_class):
+                    self.id = id
+                elif isinstance(id, dict):
+                    self.id = nested_class.from_kwargs(**id)
+                else:
+                    self.id = id
+            else:
+                self.id = id
         if name is not None:
-            self.name = name
+            if hasattr(models, self.swagger_types['name']):
+                nested_class = getattr(models, self.swagger_types['name'])
+                if isinstance(name, nested_class):
+                    self.name = name
+                elif isinstance(name, dict):
+                    self.name = nested_class.from_kwargs(**name)
+                else:
+                    self.name = name
+            else:
+                self.name = name
         if stage is not None:
-            self.stage = stage
+            if hasattr(models, self.swagger_types['stage']):
+                nested_class = getattr(models, self.swagger_types['stage'])
+                if isinstance(stage, nested_class):
+                    self.stage = stage
+                elif isinstance(stage, dict):
+                    self.stage = nested_class.from_kwargs(**stage)
+                else:
+                    self.stage = stage
+            else:
+                self.stage = stage
         if status is not None:
-            self.status = status
+            if hasattr(models, self.swagger_types['status']):
+                nested_class = getattr(models, self.swagger_types['status'])
+                if isinstance(status, nested_class):
+                    self.status = status
+                elif isinstance(status, dict):
+                    self.status = nested_class.from_kwargs(**status)
+                else:
+                    self.status = status
+            else:
+                self.status = status
         if type is not None:
-            self.type = type
+            if hasattr(models, self.swagger_types['type']):
+                nested_class = getattr(models, self.swagger_types['type'])
+                if isinstance(type, nested_class):
+                    self.type = type
+                elif isinstance(type, dict):
+                    self.type = nested_class.from_kwargs(**type)
+                else:
+                    self.type = type
+            else:
+                self.type = type
 
     @property
     def links(self):

@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class InlineHookChannelConfig(object):
@@ -29,12 +30,11 @@ class InlineHookChannelConfig(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'auth_scheme': 'InlineHookChannelConfigAuthScheme',
-        'headers': 'list[InlineHookChannelConfigHeaders]',
-        'uri': 'str',
-        'method': 'str'
-    }
+    swagger_types = {}
+    swagger_types['auth_scheme'] = 'InlineHookChannelConfigAuthScheme'
+    swagger_types['headers'] = 'list[InlineHookChannelConfigHeaders]'
+    swagger_types['uri'] = 'str'
+    swagger_types['method'] = 'str'
 
     attribute_map = {
         'auth_scheme': 'authScheme',
@@ -54,7 +54,7 @@ class InlineHookChannelConfig(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, auth_scheme=None, headers=None, uri=None, method=None):  # noqa: E501
+    def set_attributes(self, auth_scheme=None, headers=None, uri=None, method=None, **kwargs):  # noqa: E501
         """InlineHookChannelConfig - a model defined in Swagger"""  # noqa: E501
         self._auth_scheme = None
         self._headers = None
@@ -62,13 +62,49 @@ class InlineHookChannelConfig(object):
         self._method = None
         self.discriminator = None
         if auth_scheme is not None:
-            self.auth_scheme = auth_scheme
+            if hasattr(models, self.swagger_types['auth_scheme']):
+                nested_class = getattr(models, self.swagger_types['auth_scheme'])
+                if isinstance(auth_scheme, nested_class):
+                    self.auth_scheme = auth_scheme
+                elif isinstance(auth_scheme, dict):
+                    self.auth_scheme = nested_class.from_kwargs(**auth_scheme)
+                else:
+                    self.auth_scheme = auth_scheme
+            else:
+                self.auth_scheme = auth_scheme
         if headers is not None:
-            self.headers = headers
+            if hasattr(models, self.swagger_types['headers']):
+                nested_class = getattr(models, self.swagger_types['headers'])
+                if isinstance(headers, nested_class):
+                    self.headers = headers
+                elif isinstance(headers, dict):
+                    self.headers = nested_class.from_kwargs(**headers)
+                else:
+                    self.headers = headers
+            else:
+                self.headers = headers
         if uri is not None:
-            self.uri = uri
+            if hasattr(models, self.swagger_types['uri']):
+                nested_class = getattr(models, self.swagger_types['uri'])
+                if isinstance(uri, nested_class):
+                    self.uri = uri
+                elif isinstance(uri, dict):
+                    self.uri = nested_class.from_kwargs(**uri)
+                else:
+                    self.uri = uri
+            else:
+                self.uri = uri
         if method is not None:
-            self.method = method
+            if hasattr(models, self.swagger_types['method']):
+                nested_class = getattr(models, self.swagger_types['method'])
+                if isinstance(method, nested_class):
+                    self.method = method
+                elif isinstance(method, dict):
+                    self.method = nested_class.from_kwargs(**method)
+                else:
+                    self.method = method
+            else:
+                self.method = method
 
     @property
     def auth_scheme(self):

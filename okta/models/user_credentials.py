@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class UserCredentials(object):
@@ -29,11 +30,10 @@ class UserCredentials(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'password': 'PasswordCredential',
-        'provider': 'AuthenticationProvider',
-        'recovery_question': 'RecoveryQuestionCredential'
-    }
+    swagger_types = {}
+    swagger_types['password'] = 'PasswordCredential'
+    swagger_types['provider'] = 'AuthenticationProvider'
+    swagger_types['recovery_question'] = 'RecoveryQuestionCredential'
 
     attribute_map = {
         'password': 'password',
@@ -52,18 +52,45 @@ class UserCredentials(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, password=None, provider=None, recovery_question=None):  # noqa: E501
+    def set_attributes(self, password=None, provider=None, recovery_question=None, **kwargs):  # noqa: E501
         """UserCredentials - a model defined in Swagger"""  # noqa: E501
         self._password = None
         self._provider = None
         self._recovery_question = None
         self.discriminator = None
         if password is not None:
-            self.password = password
+            if hasattr(models, self.swagger_types['password']):
+                nested_class = getattr(models, self.swagger_types['password'])
+                if isinstance(password, nested_class):
+                    self.password = password
+                elif isinstance(password, dict):
+                    self.password = nested_class.from_kwargs(**password)
+                else:
+                    self.password = password
+            else:
+                self.password = password
         if provider is not None:
-            self.provider = provider
+            if hasattr(models, self.swagger_types['provider']):
+                nested_class = getattr(models, self.swagger_types['provider'])
+                if isinstance(provider, nested_class):
+                    self.provider = provider
+                elif isinstance(provider, dict):
+                    self.provider = nested_class.from_kwargs(**provider)
+                else:
+                    self.provider = provider
+            else:
+                self.provider = provider
         if recovery_question is not None:
-            self.recovery_question = recovery_question
+            if hasattr(models, self.swagger_types['recovery_question']):
+                nested_class = getattr(models, self.swagger_types['recovery_question'])
+                if isinstance(recovery_question, nested_class):
+                    self.recovery_question = recovery_question
+                elif isinstance(recovery_question, dict):
+                    self.recovery_question = nested_class.from_kwargs(**recovery_question)
+                else:
+                    self.recovery_question = recovery_question
+            else:
+                self.recovery_question = recovery_question
 
     @property
     def password(self):

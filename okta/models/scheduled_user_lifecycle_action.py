@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class ScheduledUserLifecycleAction(object):
@@ -29,9 +30,8 @@ class ScheduledUserLifecycleAction(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'status': 'PolicyUserStatus'
-    }
+    swagger_types = {}
+    swagger_types['status'] = 'PolicyUserStatus'
 
     attribute_map = {
         'status': 'status'
@@ -48,12 +48,21 @@ class ScheduledUserLifecycleAction(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, status=None):  # noqa: E501
+    def set_attributes(self, status=None, **kwargs):  # noqa: E501
         """ScheduledUserLifecycleAction - a model defined in Swagger"""  # noqa: E501
         self._status = None
         self.discriminator = None
         if status is not None:
-            self.status = status
+            if hasattr(models, self.swagger_types['status']):
+                nested_class = getattr(models, self.swagger_types['status'])
+                if isinstance(status, nested_class):
+                    self.status = status
+                elif isinstance(status, dict):
+                    self.status = nested_class.from_kwargs(**status)
+                else:
+                    self.status = status
+            else:
+                self.status = status
 
     @property
     def status(self):

@@ -16,6 +16,7 @@ import re  # noqa: F401
 import six
 from okta.models.user_factor import UserFactor  # noqa: F401,E501
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class CustomHotpUserFactor(UserFactor):
@@ -30,12 +31,11 @@ class CustomHotpUserFactor(UserFactor):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'factor_profile_id': 'str',
-        'profile': 'CustomHotpUserFactorProfile'
-    }
+    swagger_types = {}
     if hasattr(UserFactor, "swagger_types"):
         swagger_types.update(UserFactor.swagger_types)
+    swagger_types['factor_profile_id'] = 'str'
+    swagger_types['profile'] = 'CustomHotpUserFactorProfile'
 
     attribute_map = {
         'factor_profile_id': 'factorProfileId',
@@ -55,16 +55,37 @@ class CustomHotpUserFactor(UserFactor):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, factor_profile_id=None, profile=None, *args, **kwargs):  # noqa: E501
+    def set_attributes(self, factor_profile_id=None, profile=None, **kwargs):  # noqa: E501
         """CustomHotpUserFactor - a model defined in Swagger"""  # noqa: E501
+        config = {}
+        if kwargs is not None:
+            config = {to_snake_case(key): value for key, value in kwargs.items()}
+        super().set_attributes(**config)
         self._factor_profile_id = None
         self._profile = None
         self.discriminator = None
         if factor_profile_id is not None:
-            self.factor_profile_id = factor_profile_id
+            if hasattr(models, self.swagger_types['factor_profile_id']):
+                nested_class = getattr(models, self.swagger_types['factor_profile_id'])
+                if isinstance(factor_profile_id, nested_class):
+                    self.factor_profile_id = factor_profile_id
+                elif isinstance(factor_profile_id, dict):
+                    self.factor_profile_id = nested_class.from_kwargs(**factor_profile_id)
+                else:
+                    self.factor_profile_id = factor_profile_id
+            else:
+                self.factor_profile_id = factor_profile_id
         if profile is not None:
-            self.profile = profile
-        super().set_attributes(*args, **kwargs)
+            if hasattr(models, self.swagger_types['profile']):
+                nested_class = getattr(models, self.swagger_types['profile'])
+                if isinstance(profile, nested_class):
+                    self.profile = profile
+                elif isinstance(profile, dict):
+                    self.profile = nested_class.from_kwargs(**profile)
+                else:
+                    self.profile = profile
+            else:
+                self.profile = profile
 
     @property
     def factor_profile_id(self):

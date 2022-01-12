@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class OpenIdConnectApplicationSettingsClient(object):
@@ -29,24 +30,23 @@ class OpenIdConnectApplicationSettingsClient(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'application_type': 'OpenIdConnectApplicationType',
-        'client_uri': 'str',
-        'consent_method': 'OpenIdConnectApplicationConsentMethod',
-        'grant_types': 'list[OAuthGrantType]',
-        'initiate_login_uri': 'str',
-        'issuer_mode': 'OpenIdConnectApplicationIssuerMode',
-        'idp_initiated_login': 'OpenIdConnectApplicationIdpInitiatedLogin',
-        'logo_uri': 'str',
-        'policy_uri': 'str',
-        'post_logout_redirect_uris': 'list[str]',
-        'redirect_uris': 'list[str]',
-        'wildcard_redirect': 'str',
-        'response_types': 'list[OAuthResponseType]',
-        'refresh_token': 'OpenIdConnectApplicationSettingsRefreshToken',
-        'tos_uri': 'str',
-        'jwks': 'OpenIdConnectApplicationSettingsClientKeys'
-    }
+    swagger_types = {}
+    swagger_types['application_type'] = 'OpenIdConnectApplicationType'
+    swagger_types['client_uri'] = 'str'
+    swagger_types['consent_method'] = 'OpenIdConnectApplicationConsentMethod'
+    swagger_types['grant_types'] = 'list[OAuthGrantType]'
+    swagger_types['initiate_login_uri'] = 'str'
+    swagger_types['issuer_mode'] = 'OpenIdConnectApplicationIssuerMode'
+    swagger_types['idp_initiated_login'] = 'OpenIdConnectApplicationIdpInitiatedLogin'
+    swagger_types['logo_uri'] = 'str'
+    swagger_types['policy_uri'] = 'str'
+    swagger_types['post_logout_redirect_uris'] = 'list[str]'
+    swagger_types['redirect_uris'] = 'list[str]'
+    swagger_types['wildcard_redirect'] = 'str'
+    swagger_types['response_types'] = 'list[OAuthResponseType]'
+    swagger_types['refresh_token'] = 'OpenIdConnectApplicationSettingsRefreshToken'
+    swagger_types['tos_uri'] = 'str'
+    swagger_types['jwks'] = 'OpenIdConnectApplicationSettingsClientKeys'
 
     attribute_map = {
         'application_type': 'application_type',
@@ -78,7 +78,7 @@ class OpenIdConnectApplicationSettingsClient(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, application_type=None, client_uri=None, consent_method=None, grant_types=None, initiate_login_uri=None, issuer_mode=None, idp_initiated_login=None, logo_uri=None, policy_uri=None, post_logout_redirect_uris=None, redirect_uris=None, wildcard_redirect=None, response_types=None, refresh_token=None, tos_uri=None, jwks=None):  # noqa: E501
+    def set_attributes(self, application_type=None, client_uri=None, consent_method=None, grant_types=None, initiate_login_uri=None, issuer_mode=None, idp_initiated_login=None, logo_uri=None, policy_uri=None, post_logout_redirect_uris=None, redirect_uris=None, wildcard_redirect=None, response_types=None, refresh_token=None, tos_uri=None, jwks=None, **kwargs):  # noqa: E501
         """OpenIdConnectApplicationSettingsClient - a model defined in Swagger"""  # noqa: E501
         self._application_type = None
         self._client_uri = None
@@ -98,37 +98,181 @@ class OpenIdConnectApplicationSettingsClient(object):
         self._jwks = None
         self.discriminator = None
         if application_type is not None:
-            self.application_type = application_type
+            if hasattr(models, self.swagger_types['application_type']):
+                nested_class = getattr(models, self.swagger_types['application_type'])
+                if isinstance(application_type, nested_class):
+                    self.application_type = application_type
+                elif isinstance(application_type, dict):
+                    self.application_type = nested_class.from_kwargs(**application_type)
+                else:
+                    self.application_type = application_type
+            else:
+                self.application_type = application_type
         if client_uri is not None:
-            self.client_uri = client_uri
+            if hasattr(models, self.swagger_types['client_uri']):
+                nested_class = getattr(models, self.swagger_types['client_uri'])
+                if isinstance(client_uri, nested_class):
+                    self.client_uri = client_uri
+                elif isinstance(client_uri, dict):
+                    self.client_uri = nested_class.from_kwargs(**client_uri)
+                else:
+                    self.client_uri = client_uri
+            else:
+                self.client_uri = client_uri
         if consent_method is not None:
-            self.consent_method = consent_method
+            if hasattr(models, self.swagger_types['consent_method']):
+                nested_class = getattr(models, self.swagger_types['consent_method'])
+                if isinstance(consent_method, nested_class):
+                    self.consent_method = consent_method
+                elif isinstance(consent_method, dict):
+                    self.consent_method = nested_class.from_kwargs(**consent_method)
+                else:
+                    self.consent_method = consent_method
+            else:
+                self.consent_method = consent_method
         if grant_types is not None:
-            self.grant_types = grant_types
+            if hasattr(models, self.swagger_types['grant_types']):
+                nested_class = getattr(models, self.swagger_types['grant_types'])
+                if isinstance(grant_types, nested_class):
+                    self.grant_types = grant_types
+                elif isinstance(grant_types, dict):
+                    self.grant_types = nested_class.from_kwargs(**grant_types)
+                else:
+                    self.grant_types = grant_types
+            else:
+                self.grant_types = grant_types
         if initiate_login_uri is not None:
-            self.initiate_login_uri = initiate_login_uri
+            if hasattr(models, self.swagger_types['initiate_login_uri']):
+                nested_class = getattr(models, self.swagger_types['initiate_login_uri'])
+                if isinstance(initiate_login_uri, nested_class):
+                    self.initiate_login_uri = initiate_login_uri
+                elif isinstance(initiate_login_uri, dict):
+                    self.initiate_login_uri = nested_class.from_kwargs(**initiate_login_uri)
+                else:
+                    self.initiate_login_uri = initiate_login_uri
+            else:
+                self.initiate_login_uri = initiate_login_uri
         if issuer_mode is not None:
-            self.issuer_mode = issuer_mode
+            if hasattr(models, self.swagger_types['issuer_mode']):
+                nested_class = getattr(models, self.swagger_types['issuer_mode'])
+                if isinstance(issuer_mode, nested_class):
+                    self.issuer_mode = issuer_mode
+                elif isinstance(issuer_mode, dict):
+                    self.issuer_mode = nested_class.from_kwargs(**issuer_mode)
+                else:
+                    self.issuer_mode = issuer_mode
+            else:
+                self.issuer_mode = issuer_mode
         if idp_initiated_login is not None:
-            self.idp_initiated_login = idp_initiated_login
+            if hasattr(models, self.swagger_types['idp_initiated_login']):
+                nested_class = getattr(models, self.swagger_types['idp_initiated_login'])
+                if isinstance(idp_initiated_login, nested_class):
+                    self.idp_initiated_login = idp_initiated_login
+                elif isinstance(idp_initiated_login, dict):
+                    self.idp_initiated_login = nested_class.from_kwargs(**idp_initiated_login)
+                else:
+                    self.idp_initiated_login = idp_initiated_login
+            else:
+                self.idp_initiated_login = idp_initiated_login
         if logo_uri is not None:
-            self.logo_uri = logo_uri
+            if hasattr(models, self.swagger_types['logo_uri']):
+                nested_class = getattr(models, self.swagger_types['logo_uri'])
+                if isinstance(logo_uri, nested_class):
+                    self.logo_uri = logo_uri
+                elif isinstance(logo_uri, dict):
+                    self.logo_uri = nested_class.from_kwargs(**logo_uri)
+                else:
+                    self.logo_uri = logo_uri
+            else:
+                self.logo_uri = logo_uri
         if policy_uri is not None:
-            self.policy_uri = policy_uri
+            if hasattr(models, self.swagger_types['policy_uri']):
+                nested_class = getattr(models, self.swagger_types['policy_uri'])
+                if isinstance(policy_uri, nested_class):
+                    self.policy_uri = policy_uri
+                elif isinstance(policy_uri, dict):
+                    self.policy_uri = nested_class.from_kwargs(**policy_uri)
+                else:
+                    self.policy_uri = policy_uri
+            else:
+                self.policy_uri = policy_uri
         if post_logout_redirect_uris is not None:
-            self.post_logout_redirect_uris = post_logout_redirect_uris
+            if hasattr(models, self.swagger_types['post_logout_redirect_uris']):
+                nested_class = getattr(models, self.swagger_types['post_logout_redirect_uris'])
+                if isinstance(post_logout_redirect_uris, nested_class):
+                    self.post_logout_redirect_uris = post_logout_redirect_uris
+                elif isinstance(post_logout_redirect_uris, dict):
+                    self.post_logout_redirect_uris = nested_class.from_kwargs(**post_logout_redirect_uris)
+                else:
+                    self.post_logout_redirect_uris = post_logout_redirect_uris
+            else:
+                self.post_logout_redirect_uris = post_logout_redirect_uris
         if redirect_uris is not None:
-            self.redirect_uris = redirect_uris
+            if hasattr(models, self.swagger_types['redirect_uris']):
+                nested_class = getattr(models, self.swagger_types['redirect_uris'])
+                if isinstance(redirect_uris, nested_class):
+                    self.redirect_uris = redirect_uris
+                elif isinstance(redirect_uris, dict):
+                    self.redirect_uris = nested_class.from_kwargs(**redirect_uris)
+                else:
+                    self.redirect_uris = redirect_uris
+            else:
+                self.redirect_uris = redirect_uris
         if wildcard_redirect is not None:
-            self.wildcard_redirect = wildcard_redirect
+            if hasattr(models, self.swagger_types['wildcard_redirect']):
+                nested_class = getattr(models, self.swagger_types['wildcard_redirect'])
+                if isinstance(wildcard_redirect, nested_class):
+                    self.wildcard_redirect = wildcard_redirect
+                elif isinstance(wildcard_redirect, dict):
+                    self.wildcard_redirect = nested_class.from_kwargs(**wildcard_redirect)
+                else:
+                    self.wildcard_redirect = wildcard_redirect
+            else:
+                self.wildcard_redirect = wildcard_redirect
         if response_types is not None:
-            self.response_types = response_types
+            if hasattr(models, self.swagger_types['response_types']):
+                nested_class = getattr(models, self.swagger_types['response_types'])
+                if isinstance(response_types, nested_class):
+                    self.response_types = response_types
+                elif isinstance(response_types, dict):
+                    self.response_types = nested_class.from_kwargs(**response_types)
+                else:
+                    self.response_types = response_types
+            else:
+                self.response_types = response_types
         if refresh_token is not None:
-            self.refresh_token = refresh_token
+            if hasattr(models, self.swagger_types['refresh_token']):
+                nested_class = getattr(models, self.swagger_types['refresh_token'])
+                if isinstance(refresh_token, nested_class):
+                    self.refresh_token = refresh_token
+                elif isinstance(refresh_token, dict):
+                    self.refresh_token = nested_class.from_kwargs(**refresh_token)
+                else:
+                    self.refresh_token = refresh_token
+            else:
+                self.refresh_token = refresh_token
         if tos_uri is not None:
-            self.tos_uri = tos_uri
+            if hasattr(models, self.swagger_types['tos_uri']):
+                nested_class = getattr(models, self.swagger_types['tos_uri'])
+                if isinstance(tos_uri, nested_class):
+                    self.tos_uri = tos_uri
+                elif isinstance(tos_uri, dict):
+                    self.tos_uri = nested_class.from_kwargs(**tos_uri)
+                else:
+                    self.tos_uri = tos_uri
+            else:
+                self.tos_uri = tos_uri
         if jwks is not None:
-            self.jwks = jwks
+            if hasattr(models, self.swagger_types['jwks']):
+                nested_class = getattr(models, self.swagger_types['jwks'])
+                if isinstance(jwks, nested_class):
+                    self.jwks = jwks
+                elif isinstance(jwks, dict):
+                    self.jwks = nested_class.from_kwargs(**jwks)
+                else:
+                    self.jwks = jwks
+            else:
+                self.jwks = jwks
 
     @property
     def application_type(self):

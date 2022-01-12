@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class OktaSignOnPolicyRuleSignonSessionActions(object):
@@ -29,11 +30,10 @@ class OktaSignOnPolicyRuleSignonSessionActions(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'max_session_idle_minutes': 'int',
-        'max_session_lifetime_minutes': 'int',
-        'use_persistent_cookie': 'bool'
-    }
+    swagger_types = {}
+    swagger_types['max_session_idle_minutes'] = 'int'
+    swagger_types['max_session_lifetime_minutes'] = 'int'
+    swagger_types['use_persistent_cookie'] = 'bool'
 
     attribute_map = {
         'max_session_idle_minutes': 'maxSessionIdleMinutes',
@@ -52,18 +52,45 @@ class OktaSignOnPolicyRuleSignonSessionActions(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, max_session_idle_minutes=None, max_session_lifetime_minutes=None, use_persistent_cookie=False):  # noqa: E501
+    def set_attributes(self, max_session_idle_minutes=None, max_session_lifetime_minutes=None, use_persistent_cookie=False, **kwargs):  # noqa: E501
         """OktaSignOnPolicyRuleSignonSessionActions - a model defined in Swagger"""  # noqa: E501
         self._max_session_idle_minutes = None
         self._max_session_lifetime_minutes = None
         self._use_persistent_cookie = None
         self.discriminator = None
         if max_session_idle_minutes is not None:
-            self.max_session_idle_minutes = max_session_idle_minutes
+            if hasattr(models, self.swagger_types['max_session_idle_minutes']):
+                nested_class = getattr(models, self.swagger_types['max_session_idle_minutes'])
+                if isinstance(max_session_idle_minutes, nested_class):
+                    self.max_session_idle_minutes = max_session_idle_minutes
+                elif isinstance(max_session_idle_minutes, dict):
+                    self.max_session_idle_minutes = nested_class.from_kwargs(**max_session_idle_minutes)
+                else:
+                    self.max_session_idle_minutes = max_session_idle_minutes
+            else:
+                self.max_session_idle_minutes = max_session_idle_minutes
         if max_session_lifetime_minutes is not None:
-            self.max_session_lifetime_minutes = max_session_lifetime_minutes
+            if hasattr(models, self.swagger_types['max_session_lifetime_minutes']):
+                nested_class = getattr(models, self.swagger_types['max_session_lifetime_minutes'])
+                if isinstance(max_session_lifetime_minutes, nested_class):
+                    self.max_session_lifetime_minutes = max_session_lifetime_minutes
+                elif isinstance(max_session_lifetime_minutes, dict):
+                    self.max_session_lifetime_minutes = nested_class.from_kwargs(**max_session_lifetime_minutes)
+                else:
+                    self.max_session_lifetime_minutes = max_session_lifetime_minutes
+            else:
+                self.max_session_lifetime_minutes = max_session_lifetime_minutes
         if use_persistent_cookie is not None:
-            self.use_persistent_cookie = use_persistent_cookie
+            if hasattr(models, self.swagger_types['use_persistent_cookie']):
+                nested_class = getattr(models, self.swagger_types['use_persistent_cookie'])
+                if isinstance(use_persistent_cookie, nested_class):
+                    self.use_persistent_cookie = use_persistent_cookie
+                elif isinstance(use_persistent_cookie, dict):
+                    self.use_persistent_cookie = nested_class.from_kwargs(**use_persistent_cookie)
+                else:
+                    self.use_persistent_cookie = use_persistent_cookie
+            else:
+                self.use_persistent_cookie = use_persistent_cookie
 
     @property
     def max_session_idle_minutes(self):

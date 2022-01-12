@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class SocialAuthToken(object):
@@ -29,14 +30,13 @@ class SocialAuthToken(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'expires_at': 'datetime',
-        'id': 'str',
-        'scopes': 'list[str]',
-        'token': 'str',
-        'token_auth_scheme': 'str',
-        'token_type': 'str'
-    }
+    swagger_types = {}
+    swagger_types['expires_at'] = 'datetime'
+    swagger_types['id'] = 'str'
+    swagger_types['scopes'] = 'list[str]'
+    swagger_types['token'] = 'str'
+    swagger_types['token_auth_scheme'] = 'str'
+    swagger_types['token_type'] = 'str'
 
     attribute_map = {
         'expires_at': 'expiresAt',
@@ -58,7 +58,7 @@ class SocialAuthToken(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, expires_at=None, id=None, scopes=None, token=None, token_auth_scheme=None, token_type=None):  # noqa: E501
+    def set_attributes(self, expires_at=None, id=None, scopes=None, token=None, token_auth_scheme=None, token_type=None, **kwargs):  # noqa: E501
         """SocialAuthToken - a model defined in Swagger"""  # noqa: E501
         self._expires_at = None
         self._id = None
@@ -68,17 +68,71 @@ class SocialAuthToken(object):
         self._token_type = None
         self.discriminator = None
         if expires_at is not None:
-            self.expires_at = expires_at
+            if hasattr(models, self.swagger_types['expires_at']):
+                nested_class = getattr(models, self.swagger_types['expires_at'])
+                if isinstance(expires_at, nested_class):
+                    self.expires_at = expires_at
+                elif isinstance(expires_at, dict):
+                    self.expires_at = nested_class.from_kwargs(**expires_at)
+                else:
+                    self.expires_at = expires_at
+            else:
+                self.expires_at = expires_at
         if id is not None:
-            self.id = id
+            if hasattr(models, self.swagger_types['id']):
+                nested_class = getattr(models, self.swagger_types['id'])
+                if isinstance(id, nested_class):
+                    self.id = id
+                elif isinstance(id, dict):
+                    self.id = nested_class.from_kwargs(**id)
+                else:
+                    self.id = id
+            else:
+                self.id = id
         if scopes is not None:
-            self.scopes = scopes
+            if hasattr(models, self.swagger_types['scopes']):
+                nested_class = getattr(models, self.swagger_types['scopes'])
+                if isinstance(scopes, nested_class):
+                    self.scopes = scopes
+                elif isinstance(scopes, dict):
+                    self.scopes = nested_class.from_kwargs(**scopes)
+                else:
+                    self.scopes = scopes
+            else:
+                self.scopes = scopes
         if token is not None:
-            self.token = token
+            if hasattr(models, self.swagger_types['token']):
+                nested_class = getattr(models, self.swagger_types['token'])
+                if isinstance(token, nested_class):
+                    self.token = token
+                elif isinstance(token, dict):
+                    self.token = nested_class.from_kwargs(**token)
+                else:
+                    self.token = token
+            else:
+                self.token = token
         if token_auth_scheme is not None:
-            self.token_auth_scheme = token_auth_scheme
+            if hasattr(models, self.swagger_types['token_auth_scheme']):
+                nested_class = getattr(models, self.swagger_types['token_auth_scheme'])
+                if isinstance(token_auth_scheme, nested_class):
+                    self.token_auth_scheme = token_auth_scheme
+                elif isinstance(token_auth_scheme, dict):
+                    self.token_auth_scheme = nested_class.from_kwargs(**token_auth_scheme)
+                else:
+                    self.token_auth_scheme = token_auth_scheme
+            else:
+                self.token_auth_scheme = token_auth_scheme
         if token_type is not None:
-            self.token_type = token_type
+            if hasattr(models, self.swagger_types['token_type']):
+                nested_class = getattr(models, self.swagger_types['token_type'])
+                if isinstance(token_type, nested_class):
+                    self.token_type = token_type
+                elif isinstance(token_type, dict):
+                    self.token_type = nested_class.from_kwargs(**token_type)
+                else:
+                    self.token_type = token_type
+            else:
+                self.token_type = token_type
 
     @property
     def expires_at(self):

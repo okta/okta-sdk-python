@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class OrgOktaCommunicationSetting(object):
@@ -29,10 +30,9 @@ class OrgOktaCommunicationSetting(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'links': 'dict(str, object)',
-        'opt_out_email_users': 'bool'
-    }
+    swagger_types = {}
+    swagger_types['links'] = 'dict(str, object)'
+    swagger_types['opt_out_email_users'] = 'bool'
 
     attribute_map = {
         'links': '_links',
@@ -50,15 +50,33 @@ class OrgOktaCommunicationSetting(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, links=None, opt_out_email_users=None):  # noqa: E501
+    def set_attributes(self, links=None, opt_out_email_users=None, **kwargs):  # noqa: E501
         """OrgOktaCommunicationSetting - a model defined in Swagger"""  # noqa: E501
         self._links = None
         self._opt_out_email_users = None
         self.discriminator = None
         if links is not None:
-            self.links = links
+            if hasattr(models, self.swagger_types['links']):
+                nested_class = getattr(models, self.swagger_types['links'])
+                if isinstance(links, nested_class):
+                    self.links = links
+                elif isinstance(links, dict):
+                    self.links = nested_class.from_kwargs(**links)
+                else:
+                    self.links = links
+            else:
+                self.links = links
         if opt_out_email_users is not None:
-            self.opt_out_email_users = opt_out_email_users
+            if hasattr(models, self.swagger_types['opt_out_email_users']):
+                nested_class = getattr(models, self.swagger_types['opt_out_email_users'])
+                if isinstance(opt_out_email_users, nested_class):
+                    self.opt_out_email_users = opt_out_email_users
+                elif isinstance(opt_out_email_users, dict):
+                    self.opt_out_email_users = nested_class.from_kwargs(**opt_out_email_users)
+                else:
+                    self.opt_out_email_users = opt_out_email_users
+            else:
+                self.opt_out_email_users = opt_out_email_users
 
     @property
     def links(self):

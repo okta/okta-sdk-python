@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class CsrMetadataSubjectAltNames(object):
@@ -29,9 +30,8 @@ class CsrMetadataSubjectAltNames(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'dns_names': 'list[str]'
-    }
+    swagger_types = {}
+    swagger_types['dns_names'] = 'list[str]'
 
     attribute_map = {
         'dns_names': 'dnsNames'
@@ -48,12 +48,21 @@ class CsrMetadataSubjectAltNames(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, dns_names=None):  # noqa: E501
+    def set_attributes(self, dns_names=None, **kwargs):  # noqa: E501
         """CsrMetadataSubjectAltNames - a model defined in Swagger"""  # noqa: E501
         self._dns_names = None
         self.discriminator = None
         if dns_names is not None:
-            self.dns_names = dns_names
+            if hasattr(models, self.swagger_types['dns_names']):
+                nested_class = getattr(models, self.swagger_types['dns_names'])
+                if isinstance(dns_names, nested_class):
+                    self.dns_names = dns_names
+                elif isinstance(dns_names, dict):
+                    self.dns_names = nested_class.from_kwargs(**dns_names)
+                else:
+                    self.dns_names = dns_names
+            else:
+                self.dns_names = dns_names
 
     @property
     def dns_names(self):

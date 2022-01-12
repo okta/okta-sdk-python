@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class NetworkZone(object):
@@ -29,22 +30,21 @@ class NetworkZone(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'type': 'NetworkZoneType',
-        'id': 'str',
-        'name': 'str',
-        'system': 'bool',
-        'usage': 'NetworkZoneUsage',
-        'status': 'NetworkZoneStatus',
-        'proxy_type': 'str',
-        'locations': 'list[NetworkZoneLocation]',
-        'gateways': 'list[NetworkZoneAddress]',
-        'proxies': 'list[NetworkZoneAddress]',
-        'asns': 'list[str]',
-        'created': 'datetime',
-        'last_updated': 'datetime',
-        'links': 'dict(str, object)'
-    }
+    swagger_types = {}
+    swagger_types['type'] = 'NetworkZoneType'
+    swagger_types['id'] = 'str'
+    swagger_types['name'] = 'str'
+    swagger_types['system'] = 'bool'
+    swagger_types['usage'] = 'NetworkZoneUsage'
+    swagger_types['status'] = 'NetworkZoneStatus'
+    swagger_types['proxy_type'] = 'str'
+    swagger_types['locations'] = 'list[NetworkZoneLocation]'
+    swagger_types['gateways'] = 'list[NetworkZoneAddress]'
+    swagger_types['proxies'] = 'list[NetworkZoneAddress]'
+    swagger_types['asns'] = 'list[str]'
+    swagger_types['created'] = 'datetime'
+    swagger_types['last_updated'] = 'datetime'
+    swagger_types['links'] = 'dict(str, object)'
 
     attribute_map = {
         'type': 'type',
@@ -74,7 +74,7 @@ class NetworkZone(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, type=None, id=None, name=None, system=None, usage=None, status=None, proxy_type=None, locations=None, gateways=None, proxies=None, asns=None, created=None, last_updated=None, links=None):  # noqa: E501
+    def set_attributes(self, type=None, id=None, name=None, system=None, usage=None, status=None, proxy_type=None, locations=None, gateways=None, proxies=None, asns=None, created=None, last_updated=None, links=None, **kwargs):  # noqa: E501
         """NetworkZone - a model defined in Swagger"""  # noqa: E501
         self._type = None
         self._id = None
@@ -92,33 +92,159 @@ class NetworkZone(object):
         self._links = None
         self.discriminator = None
         if type is not None:
-            self.type = type
+            if hasattr(models, self.swagger_types['type']):
+                nested_class = getattr(models, self.swagger_types['type'])
+                if isinstance(type, nested_class):
+                    self.type = type
+                elif isinstance(type, dict):
+                    self.type = nested_class.from_kwargs(**type)
+                else:
+                    self.type = type
+            else:
+                self.type = type
         if id is not None:
-            self.id = id
+            if hasattr(models, self.swagger_types['id']):
+                nested_class = getattr(models, self.swagger_types['id'])
+                if isinstance(id, nested_class):
+                    self.id = id
+                elif isinstance(id, dict):
+                    self.id = nested_class.from_kwargs(**id)
+                else:
+                    self.id = id
+            else:
+                self.id = id
         if name is not None:
-            self.name = name
+            if hasattr(models, self.swagger_types['name']):
+                nested_class = getattr(models, self.swagger_types['name'])
+                if isinstance(name, nested_class):
+                    self.name = name
+                elif isinstance(name, dict):
+                    self.name = nested_class.from_kwargs(**name)
+                else:
+                    self.name = name
+            else:
+                self.name = name
         if system is not None:
-            self.system = system
+            if hasattr(models, self.swagger_types['system']):
+                nested_class = getattr(models, self.swagger_types['system'])
+                if isinstance(system, nested_class):
+                    self.system = system
+                elif isinstance(system, dict):
+                    self.system = nested_class.from_kwargs(**system)
+                else:
+                    self.system = system
+            else:
+                self.system = system
         if usage is not None:
-            self.usage = usage
+            if hasattr(models, self.swagger_types['usage']):
+                nested_class = getattr(models, self.swagger_types['usage'])
+                if isinstance(usage, nested_class):
+                    self.usage = usage
+                elif isinstance(usage, dict):
+                    self.usage = nested_class.from_kwargs(**usage)
+                else:
+                    self.usage = usage
+            else:
+                self.usage = usage
         if status is not None:
-            self.status = status
+            if hasattr(models, self.swagger_types['status']):
+                nested_class = getattr(models, self.swagger_types['status'])
+                if isinstance(status, nested_class):
+                    self.status = status
+                elif isinstance(status, dict):
+                    self.status = nested_class.from_kwargs(**status)
+                else:
+                    self.status = status
+            else:
+                self.status = status
         if proxy_type is not None:
-            self.proxy_type = proxy_type
+            if hasattr(models, self.swagger_types['proxy_type']):
+                nested_class = getattr(models, self.swagger_types['proxy_type'])
+                if isinstance(proxy_type, nested_class):
+                    self.proxy_type = proxy_type
+                elif isinstance(proxy_type, dict):
+                    self.proxy_type = nested_class.from_kwargs(**proxy_type)
+                else:
+                    self.proxy_type = proxy_type
+            else:
+                self.proxy_type = proxy_type
         if locations is not None:
-            self.locations = locations
+            if hasattr(models, self.swagger_types['locations']):
+                nested_class = getattr(models, self.swagger_types['locations'])
+                if isinstance(locations, nested_class):
+                    self.locations = locations
+                elif isinstance(locations, dict):
+                    self.locations = nested_class.from_kwargs(**locations)
+                else:
+                    self.locations = locations
+            else:
+                self.locations = locations
         if gateways is not None:
-            self.gateways = gateways
+            if hasattr(models, self.swagger_types['gateways']):
+                nested_class = getattr(models, self.swagger_types['gateways'])
+                if isinstance(gateways, nested_class):
+                    self.gateways = gateways
+                elif isinstance(gateways, dict):
+                    self.gateways = nested_class.from_kwargs(**gateways)
+                else:
+                    self.gateways = gateways
+            else:
+                self.gateways = gateways
         if proxies is not None:
-            self.proxies = proxies
+            if hasattr(models, self.swagger_types['proxies']):
+                nested_class = getattr(models, self.swagger_types['proxies'])
+                if isinstance(proxies, nested_class):
+                    self.proxies = proxies
+                elif isinstance(proxies, dict):
+                    self.proxies = nested_class.from_kwargs(**proxies)
+                else:
+                    self.proxies = proxies
+            else:
+                self.proxies = proxies
         if asns is not None:
-            self.asns = asns
+            if hasattr(models, self.swagger_types['asns']):
+                nested_class = getattr(models, self.swagger_types['asns'])
+                if isinstance(asns, nested_class):
+                    self.asns = asns
+                elif isinstance(asns, dict):
+                    self.asns = nested_class.from_kwargs(**asns)
+                else:
+                    self.asns = asns
+            else:
+                self.asns = asns
         if created is not None:
-            self.created = created
+            if hasattr(models, self.swagger_types['created']):
+                nested_class = getattr(models, self.swagger_types['created'])
+                if isinstance(created, nested_class):
+                    self.created = created
+                elif isinstance(created, dict):
+                    self.created = nested_class.from_kwargs(**created)
+                else:
+                    self.created = created
+            else:
+                self.created = created
         if last_updated is not None:
-            self.last_updated = last_updated
+            if hasattr(models, self.swagger_types['last_updated']):
+                nested_class = getattr(models, self.swagger_types['last_updated'])
+                if isinstance(last_updated, nested_class):
+                    self.last_updated = last_updated
+                elif isinstance(last_updated, dict):
+                    self.last_updated = nested_class.from_kwargs(**last_updated)
+                else:
+                    self.last_updated = last_updated
+            else:
+                self.last_updated = last_updated
         if links is not None:
-            self.links = links
+            if hasattr(models, self.swagger_types['links']):
+                nested_class = getattr(models, self.swagger_types['links'])
+                if isinstance(links, nested_class):
+                    self.links = links
+                elif isinstance(links, dict):
+                    self.links = nested_class.from_kwargs(**links)
+                else:
+                    self.links = links
+            else:
+                self.links = links
 
     @property
     def type(self):

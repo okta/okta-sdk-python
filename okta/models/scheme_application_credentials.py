@@ -16,6 +16,7 @@ import re  # noqa: F401
 import six
 from okta.models.application_credentials import ApplicationCredentials  # noqa: F401,E501
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class SchemeApplicationCredentials(ApplicationCredentials):
@@ -30,15 +31,14 @@ class SchemeApplicationCredentials(ApplicationCredentials):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'password': 'PasswordCredential',
-        'reveal_password': 'bool',
-        'scheme': 'ApplicationCredentialsScheme',
-        'signing': 'ApplicationCredentialsSigning',
-        'user_name': 'str'
-    }
+    swagger_types = {}
     if hasattr(ApplicationCredentials, "swagger_types"):
         swagger_types.update(ApplicationCredentials.swagger_types)
+    swagger_types['password'] = 'PasswordCredential'
+    swagger_types['reveal_password'] = 'bool'
+    swagger_types['scheme'] = 'ApplicationCredentialsScheme'
+    swagger_types['signing'] = 'ApplicationCredentialsSigning'
+    swagger_types['user_name'] = 'str'
 
     attribute_map = {
         'password': 'password',
@@ -61,8 +61,12 @@ class SchemeApplicationCredentials(ApplicationCredentials):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, password=None, reveal_password=None, scheme=None, signing=None, user_name=None, *args, **kwargs):  # noqa: E501
+    def set_attributes(self, password=None, reveal_password=None, scheme=None, signing=None, user_name=None, **kwargs):  # noqa: E501
         """SchemeApplicationCredentials - a model defined in Swagger"""  # noqa: E501
+        config = {}
+        if kwargs is not None:
+            config = {to_snake_case(key): value for key, value in kwargs.items()}
+        super().set_attributes(**config)
         self._password = None
         self._reveal_password = None
         self._scheme = None
@@ -70,16 +74,60 @@ class SchemeApplicationCredentials(ApplicationCredentials):
         self._user_name = None
         self.discriminator = None
         if password is not None:
-            self.password = password
+            if hasattr(models, self.swagger_types['password']):
+                nested_class = getattr(models, self.swagger_types['password'])
+                if isinstance(password, nested_class):
+                    self.password = password
+                elif isinstance(password, dict):
+                    self.password = nested_class.from_kwargs(**password)
+                else:
+                    self.password = password
+            else:
+                self.password = password
         if reveal_password is not None:
-            self.reveal_password = reveal_password
+            if hasattr(models, self.swagger_types['reveal_password']):
+                nested_class = getattr(models, self.swagger_types['reveal_password'])
+                if isinstance(reveal_password, nested_class):
+                    self.reveal_password = reveal_password
+                elif isinstance(reveal_password, dict):
+                    self.reveal_password = nested_class.from_kwargs(**reveal_password)
+                else:
+                    self.reveal_password = reveal_password
+            else:
+                self.reveal_password = reveal_password
         if scheme is not None:
-            self.scheme = scheme
+            if hasattr(models, self.swagger_types['scheme']):
+                nested_class = getattr(models, self.swagger_types['scheme'])
+                if isinstance(scheme, nested_class):
+                    self.scheme = scheme
+                elif isinstance(scheme, dict):
+                    self.scheme = nested_class.from_kwargs(**scheme)
+                else:
+                    self.scheme = scheme
+            else:
+                self.scheme = scheme
         if signing is not None:
-            self.signing = signing
+            if hasattr(models, self.swagger_types['signing']):
+                nested_class = getattr(models, self.swagger_types['signing'])
+                if isinstance(signing, nested_class):
+                    self.signing = signing
+                elif isinstance(signing, dict):
+                    self.signing = nested_class.from_kwargs(**signing)
+                else:
+                    self.signing = signing
+            else:
+                self.signing = signing
         if user_name is not None:
-            self.user_name = user_name
-        super().set_attributes(*args, **kwargs)
+            if hasattr(models, self.swagger_types['user_name']):
+                nested_class = getattr(models, self.swagger_types['user_name'])
+                if isinstance(user_name, nested_class):
+                    self.user_name = user_name
+                elif isinstance(user_name, dict):
+                    self.user_name = nested_class.from_kwargs(**user_name)
+                else:
+                    self.user_name = user_name
+            else:
+                self.user_name = user_name
 
     @property
     def password(self):

@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class ProfileEnrollmentPolicyRuleActivationRequirement(object):
@@ -29,9 +30,8 @@ class ProfileEnrollmentPolicyRuleActivationRequirement(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'email_verification': 'bool'
-    }
+    swagger_types = {}
+    swagger_types['email_verification'] = 'bool'
 
     attribute_map = {
         'email_verification': 'emailVerification'
@@ -48,12 +48,21 @@ class ProfileEnrollmentPolicyRuleActivationRequirement(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, email_verification=None):  # noqa: E501
+    def set_attributes(self, email_verification=None, **kwargs):  # noqa: E501
         """ProfileEnrollmentPolicyRuleActivationRequirement - a model defined in Swagger"""  # noqa: E501
         self._email_verification = None
         self.discriminator = None
         if email_verification is not None:
-            self.email_verification = email_verification
+            if hasattr(models, self.swagger_types['email_verification']):
+                nested_class = getattr(models, self.swagger_types['email_verification'])
+                if isinstance(email_verification, nested_class):
+                    self.email_verification = email_verification
+                elif isinstance(email_verification, dict):
+                    self.email_verification = nested_class.from_kwargs(**email_verification)
+                else:
+                    self.email_verification = email_verification
+            else:
+                self.email_verification = email_verification
 
     @property
     def email_verification(self):

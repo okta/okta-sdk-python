@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class UserSchemaAttributePermission(object):
@@ -29,10 +30,9 @@ class UserSchemaAttributePermission(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'principal': 'str',
-        'action': 'str'
-    }
+    swagger_types = {}
+    swagger_types['principal'] = 'str'
+    swagger_types['action'] = 'str'
 
     attribute_map = {
         'principal': 'principal',
@@ -50,15 +50,33 @@ class UserSchemaAttributePermission(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, principal=None, action=None):  # noqa: E501
+    def set_attributes(self, principal=None, action=None, **kwargs):  # noqa: E501
         """UserSchemaAttributePermission - a model defined in Swagger"""  # noqa: E501
         self._principal = None
         self._action = None
         self.discriminator = None
         if principal is not None:
-            self.principal = principal
+            if hasattr(models, self.swagger_types['principal']):
+                nested_class = getattr(models, self.swagger_types['principal'])
+                if isinstance(principal, nested_class):
+                    self.principal = principal
+                elif isinstance(principal, dict):
+                    self.principal = nested_class.from_kwargs(**principal)
+                else:
+                    self.principal = principal
+            else:
+                self.principal = principal
         if action is not None:
-            self.action = action
+            if hasattr(models, self.swagger_types['action']):
+                nested_class = getattr(models, self.swagger_types['action'])
+                if isinstance(action, nested_class):
+                    self.action = action
+                elif isinstance(action, dict):
+                    self.action = nested_class.from_kwargs(**action)
+                else:
+                    self.action = action
+            else:
+                self.action = action
 
     @property
     def principal(self):

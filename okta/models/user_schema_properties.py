@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class UserSchemaProperties(object):
@@ -29,9 +30,8 @@ class UserSchemaProperties(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'profile': 'UserSchemaPropertiesProfile'
-    }
+    swagger_types = {}
+    swagger_types['profile'] = 'UserSchemaPropertiesProfile'
 
     attribute_map = {
         'profile': 'profile'
@@ -48,12 +48,21 @@ class UserSchemaProperties(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, profile=None):  # noqa: E501
+    def set_attributes(self, profile=None, **kwargs):  # noqa: E501
         """UserSchemaProperties - a model defined in Swagger"""  # noqa: E501
         self._profile = None
         self.discriminator = None
         if profile is not None:
-            self.profile = profile
+            if hasattr(models, self.swagger_types['profile']):
+                nested_class = getattr(models, self.swagger_types['profile'])
+                if isinstance(profile, nested_class):
+                    self.profile = profile
+                elif isinstance(profile, dict):
+                    self.profile = nested_class.from_kwargs(**profile)
+                else:
+                    self.profile = profile
+            else:
+                self.profile = profile
 
     @property
     def profile(self):

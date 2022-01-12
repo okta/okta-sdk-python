@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class Role(object):
@@ -29,18 +30,17 @@ class Role(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'embedded': 'dict(str, object)',
-        'links': 'dict(str, object)',
-        'assignment_type': 'RoleAssignmentType',
-        'created': 'datetime',
-        'description': 'str',
-        'id': 'str',
-        'label': 'str',
-        'last_updated': 'datetime',
-        'status': 'LifecycleStatus',
-        'type': 'RoleType'
-    }
+    swagger_types = {}
+    swagger_types['embedded'] = 'dict(str, object)'
+    swagger_types['links'] = 'dict(str, object)'
+    swagger_types['assignment_type'] = 'RoleAssignmentType'
+    swagger_types['created'] = 'datetime'
+    swagger_types['description'] = 'str'
+    swagger_types['id'] = 'str'
+    swagger_types['label'] = 'str'
+    swagger_types['last_updated'] = 'datetime'
+    swagger_types['status'] = 'LifecycleStatus'
+    swagger_types['type'] = 'RoleType'
 
     attribute_map = {
         'embedded': '_embedded',
@@ -66,7 +66,7 @@ class Role(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, embedded=None, links=None, assignment_type=None, created=None, description=None, id=None, label=None, last_updated=None, status=None, type=None):  # noqa: E501
+    def set_attributes(self, embedded=None, links=None, assignment_type=None, created=None, description=None, id=None, label=None, last_updated=None, status=None, type=None, **kwargs):  # noqa: E501
         """Role - a model defined in Swagger"""  # noqa: E501
         self._embedded = None
         self._links = None
@@ -80,25 +80,115 @@ class Role(object):
         self._type = None
         self.discriminator = None
         if embedded is not None:
-            self.embedded = embedded
+            if hasattr(models, self.swagger_types['embedded']):
+                nested_class = getattr(models, self.swagger_types['embedded'])
+                if isinstance(embedded, nested_class):
+                    self.embedded = embedded
+                elif isinstance(embedded, dict):
+                    self.embedded = nested_class.from_kwargs(**embedded)
+                else:
+                    self.embedded = embedded
+            else:
+                self.embedded = embedded
         if links is not None:
-            self.links = links
+            if hasattr(models, self.swagger_types['links']):
+                nested_class = getattr(models, self.swagger_types['links'])
+                if isinstance(links, nested_class):
+                    self.links = links
+                elif isinstance(links, dict):
+                    self.links = nested_class.from_kwargs(**links)
+                else:
+                    self.links = links
+            else:
+                self.links = links
         if assignment_type is not None:
-            self.assignment_type = assignment_type
+            if hasattr(models, self.swagger_types['assignment_type']):
+                nested_class = getattr(models, self.swagger_types['assignment_type'])
+                if isinstance(assignment_type, nested_class):
+                    self.assignment_type = assignment_type
+                elif isinstance(assignment_type, dict):
+                    self.assignment_type = nested_class.from_kwargs(**assignment_type)
+                else:
+                    self.assignment_type = assignment_type
+            else:
+                self.assignment_type = assignment_type
         if created is not None:
-            self.created = created
+            if hasattr(models, self.swagger_types['created']):
+                nested_class = getattr(models, self.swagger_types['created'])
+                if isinstance(created, nested_class):
+                    self.created = created
+                elif isinstance(created, dict):
+                    self.created = nested_class.from_kwargs(**created)
+                else:
+                    self.created = created
+            else:
+                self.created = created
         if description is not None:
-            self.description = description
+            if hasattr(models, self.swagger_types['description']):
+                nested_class = getattr(models, self.swagger_types['description'])
+                if isinstance(description, nested_class):
+                    self.description = description
+                elif isinstance(description, dict):
+                    self.description = nested_class.from_kwargs(**description)
+                else:
+                    self.description = description
+            else:
+                self.description = description
         if id is not None:
-            self.id = id
+            if hasattr(models, self.swagger_types['id']):
+                nested_class = getattr(models, self.swagger_types['id'])
+                if isinstance(id, nested_class):
+                    self.id = id
+                elif isinstance(id, dict):
+                    self.id = nested_class.from_kwargs(**id)
+                else:
+                    self.id = id
+            else:
+                self.id = id
         if label is not None:
-            self.label = label
+            if hasattr(models, self.swagger_types['label']):
+                nested_class = getattr(models, self.swagger_types['label'])
+                if isinstance(label, nested_class):
+                    self.label = label
+                elif isinstance(label, dict):
+                    self.label = nested_class.from_kwargs(**label)
+                else:
+                    self.label = label
+            else:
+                self.label = label
         if last_updated is not None:
-            self.last_updated = last_updated
+            if hasattr(models, self.swagger_types['last_updated']):
+                nested_class = getattr(models, self.swagger_types['last_updated'])
+                if isinstance(last_updated, nested_class):
+                    self.last_updated = last_updated
+                elif isinstance(last_updated, dict):
+                    self.last_updated = nested_class.from_kwargs(**last_updated)
+                else:
+                    self.last_updated = last_updated
+            else:
+                self.last_updated = last_updated
         if status is not None:
-            self.status = status
+            if hasattr(models, self.swagger_types['status']):
+                nested_class = getattr(models, self.swagger_types['status'])
+                if isinstance(status, nested_class):
+                    self.status = status
+                elif isinstance(status, dict):
+                    self.status = nested_class.from_kwargs(**status)
+                else:
+                    self.status = status
+            else:
+                self.status = status
         if type is not None:
-            self.type = type
+            if hasattr(models, self.swagger_types['type']):
+                nested_class = getattr(models, self.swagger_types['type'])
+                if isinstance(type, nested_class):
+                    self.type = type
+                elif isinstance(type, dict):
+                    self.type = nested_class.from_kwargs(**type)
+                else:
+                    self.type = type
+            else:
+                self.type = type
 
     @property
     def embedded(self):

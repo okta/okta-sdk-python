@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class ProtocolAlgorithmTypeSignature(object):
@@ -29,10 +30,9 @@ class ProtocolAlgorithmTypeSignature(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'algorithm': 'str',
-        'scope': 'ProtocolAlgorithmTypeSignatureScope'
-    }
+    swagger_types = {}
+    swagger_types['algorithm'] = 'str'
+    swagger_types['scope'] = 'ProtocolAlgorithmTypeSignatureScope'
 
     attribute_map = {
         'algorithm': 'algorithm',
@@ -50,15 +50,33 @@ class ProtocolAlgorithmTypeSignature(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, algorithm=None, scope=None):  # noqa: E501
+    def set_attributes(self, algorithm=None, scope=None, **kwargs):  # noqa: E501
         """ProtocolAlgorithmTypeSignature - a model defined in Swagger"""  # noqa: E501
         self._algorithm = None
         self._scope = None
         self.discriminator = None
         if algorithm is not None:
-            self.algorithm = algorithm
+            if hasattr(models, self.swagger_types['algorithm']):
+                nested_class = getattr(models, self.swagger_types['algorithm'])
+                if isinstance(algorithm, nested_class):
+                    self.algorithm = algorithm
+                elif isinstance(algorithm, dict):
+                    self.algorithm = nested_class.from_kwargs(**algorithm)
+                else:
+                    self.algorithm = algorithm
+            else:
+                self.algorithm = algorithm
         if scope is not None:
-            self.scope = scope
+            if hasattr(models, self.swagger_types['scope']):
+                nested_class = getattr(models, self.swagger_types['scope'])
+                if isinstance(scope, nested_class):
+                    self.scope = scope
+                elif isinstance(scope, dict):
+                    self.scope = nested_class.from_kwargs(**scope)
+                else:
+                    self.scope = scope
+            else:
+                self.scope = scope
 
     @property
     def algorithm(self):

@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class Scope(object):
@@ -29,10 +30,9 @@ class Scope(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'string_value': 'str',
-        'type': 'ScopeType'
-    }
+    swagger_types = {}
+    swagger_types['string_value'] = 'str'
+    swagger_types['type'] = 'ScopeType'
 
     attribute_map = {
         'string_value': 'stringValue',
@@ -50,15 +50,33 @@ class Scope(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, string_value=None, type=None):  # noqa: E501
+    def set_attributes(self, string_value=None, type=None, **kwargs):  # noqa: E501
         """Scope - a model defined in Swagger"""  # noqa: E501
         self._string_value = None
         self._type = None
         self.discriminator = None
         if string_value is not None:
-            self.string_value = string_value
+            if hasattr(models, self.swagger_types['string_value']):
+                nested_class = getattr(models, self.swagger_types['string_value'])
+                if isinstance(string_value, nested_class):
+                    self.string_value = string_value
+                elif isinstance(string_value, dict):
+                    self.string_value = nested_class.from_kwargs(**string_value)
+                else:
+                    self.string_value = string_value
+            else:
+                self.string_value = string_value
         if type is not None:
-            self.type = type
+            if hasattr(models, self.swagger_types['type']):
+                nested_class = getattr(models, self.swagger_types['type'])
+                if isinstance(type, nested_class):
+                    self.type = type
+                elif isinstance(type, dict):
+                    self.type = nested_class.from_kwargs(**type)
+                else:
+                    self.type = type
+            else:
+                self.type = type
 
     @property
     def string_value(self):

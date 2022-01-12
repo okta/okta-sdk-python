@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class ApplicationCredentialsOAuthClient(object):
@@ -29,12 +30,11 @@ class ApplicationCredentialsOAuthClient(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'auto_key_rotation': 'bool',
-        'client_id': 'str',
-        'client_secret': 'str',
-        'token_endpoint_auth_method': 'OAuthEndpointAuthenticationMethod'
-    }
+    swagger_types = {}
+    swagger_types['auto_key_rotation'] = 'bool'
+    swagger_types['client_id'] = 'str'
+    swagger_types['client_secret'] = 'str'
+    swagger_types['token_endpoint_auth_method'] = 'OAuthEndpointAuthenticationMethod'
 
     attribute_map = {
         'auto_key_rotation': 'autoKeyRotation',
@@ -54,7 +54,7 @@ class ApplicationCredentialsOAuthClient(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, auto_key_rotation=None, client_id=None, client_secret=None, token_endpoint_auth_method=None):  # noqa: E501
+    def set_attributes(self, auto_key_rotation=None, client_id=None, client_secret=None, token_endpoint_auth_method=None, **kwargs):  # noqa: E501
         """ApplicationCredentialsOAuthClient - a model defined in Swagger"""  # noqa: E501
         self._auto_key_rotation = None
         self._client_id = None
@@ -62,13 +62,49 @@ class ApplicationCredentialsOAuthClient(object):
         self._token_endpoint_auth_method = None
         self.discriminator = None
         if auto_key_rotation is not None:
-            self.auto_key_rotation = auto_key_rotation
+            if hasattr(models, self.swagger_types['auto_key_rotation']):
+                nested_class = getattr(models, self.swagger_types['auto_key_rotation'])
+                if isinstance(auto_key_rotation, nested_class):
+                    self.auto_key_rotation = auto_key_rotation
+                elif isinstance(auto_key_rotation, dict):
+                    self.auto_key_rotation = nested_class.from_kwargs(**auto_key_rotation)
+                else:
+                    self.auto_key_rotation = auto_key_rotation
+            else:
+                self.auto_key_rotation = auto_key_rotation
         if client_id is not None:
-            self.client_id = client_id
+            if hasattr(models, self.swagger_types['client_id']):
+                nested_class = getattr(models, self.swagger_types['client_id'])
+                if isinstance(client_id, nested_class):
+                    self.client_id = client_id
+                elif isinstance(client_id, dict):
+                    self.client_id = nested_class.from_kwargs(**client_id)
+                else:
+                    self.client_id = client_id
+            else:
+                self.client_id = client_id
         if client_secret is not None:
-            self.client_secret = client_secret
+            if hasattr(models, self.swagger_types['client_secret']):
+                nested_class = getattr(models, self.swagger_types['client_secret'])
+                if isinstance(client_secret, nested_class):
+                    self.client_secret = client_secret
+                elif isinstance(client_secret, dict):
+                    self.client_secret = nested_class.from_kwargs(**client_secret)
+                else:
+                    self.client_secret = client_secret
+            else:
+                self.client_secret = client_secret
         if token_endpoint_auth_method is not None:
-            self.token_endpoint_auth_method = token_endpoint_auth_method
+            if hasattr(models, self.swagger_types['token_endpoint_auth_method']):
+                nested_class = getattr(models, self.swagger_types['token_endpoint_auth_method'])
+                if isinstance(token_endpoint_auth_method, nested_class):
+                    self.token_endpoint_auth_method = token_endpoint_auth_method
+                elif isinstance(token_endpoint_auth_method, dict):
+                    self.token_endpoint_auth_method = nested_class.from_kwargs(**token_endpoint_auth_method)
+                else:
+                    self.token_endpoint_auth_method = token_endpoint_auth_method
+            else:
+                self.token_endpoint_auth_method = token_endpoint_auth_method
 
     @property
     def auto_key_rotation(self):

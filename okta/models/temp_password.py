@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class TempPassword(object):
@@ -29,9 +30,8 @@ class TempPassword(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'temp_password': 'str'
-    }
+    swagger_types = {}
+    swagger_types['temp_password'] = 'str'
 
     attribute_map = {
         'temp_password': 'tempPassword'
@@ -48,12 +48,21 @@ class TempPassword(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, temp_password=None):  # noqa: E501
+    def set_attributes(self, temp_password=None, **kwargs):  # noqa: E501
         """TempPassword - a model defined in Swagger"""  # noqa: E501
         self._temp_password = None
         self.discriminator = None
         if temp_password is not None:
-            self.temp_password = temp_password
+            if hasattr(models, self.swagger_types['temp_password']):
+                nested_class = getattr(models, self.swagger_types['temp_password'])
+                if isinstance(temp_password, nested_class):
+                    self.temp_password = temp_password
+                elif isinstance(temp_password, dict):
+                    self.temp_password = nested_class.from_kwargs(**temp_password)
+                else:
+                    self.temp_password = temp_password
+            else:
+                self.temp_password = temp_password
 
     @property
     def temp_password(self):

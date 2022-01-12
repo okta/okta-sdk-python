@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class GroupRuleAction(object):
@@ -29,9 +30,8 @@ class GroupRuleAction(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'assign_user_to_groups': 'GroupRuleGroupAssignment'
-    }
+    swagger_types = {}
+    swagger_types['assign_user_to_groups'] = 'GroupRuleGroupAssignment'
 
     attribute_map = {
         'assign_user_to_groups': 'assignUserToGroups'
@@ -48,12 +48,21 @@ class GroupRuleAction(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, assign_user_to_groups=None):  # noqa: E501
+    def set_attributes(self, assign_user_to_groups=None, **kwargs):  # noqa: E501
         """GroupRuleAction - a model defined in Swagger"""  # noqa: E501
         self._assign_user_to_groups = None
         self.discriminator = None
         if assign_user_to_groups is not None:
-            self.assign_user_to_groups = assign_user_to_groups
+            if hasattr(models, self.swagger_types['assign_user_to_groups']):
+                nested_class = getattr(models, self.swagger_types['assign_user_to_groups'])
+                if isinstance(assign_user_to_groups, nested_class):
+                    self.assign_user_to_groups = assign_user_to_groups
+                elif isinstance(assign_user_to_groups, dict):
+                    self.assign_user_to_groups = nested_class.from_kwargs(**assign_user_to_groups)
+                else:
+                    self.assign_user_to_groups = assign_user_to_groups
+            else:
+                self.assign_user_to_groups = assign_user_to_groups
 
     @property
     def assign_user_to_groups(self):

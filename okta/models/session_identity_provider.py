@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class SessionIdentityProvider(object):
@@ -29,10 +30,9 @@ class SessionIdentityProvider(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'id': 'str',
-        'type': 'SessionIdentityProviderType'
-    }
+    swagger_types = {}
+    swagger_types['id'] = 'str'
+    swagger_types['type'] = 'SessionIdentityProviderType'
 
     attribute_map = {
         'id': 'id',
@@ -50,15 +50,33 @@ class SessionIdentityProvider(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, id=None, type=None):  # noqa: E501
+    def set_attributes(self, id=None, type=None, **kwargs):  # noqa: E501
         """SessionIdentityProvider - a model defined in Swagger"""  # noqa: E501
         self._id = None
         self._type = None
         self.discriminator = None
         if id is not None:
-            self.id = id
+            if hasattr(models, self.swagger_types['id']):
+                nested_class = getattr(models, self.swagger_types['id'])
+                if isinstance(id, nested_class):
+                    self.id = id
+                elif isinstance(id, dict):
+                    self.id = nested_class.from_kwargs(**id)
+                else:
+                    self.id = id
+            else:
+                self.id = id
         if type is not None:
-            self.type = type
+            if hasattr(models, self.swagger_types['type']):
+                nested_class = getattr(models, self.swagger_types['type'])
+                if isinstance(type, nested_class):
+                    self.type = type
+                elif isinstance(type, dict):
+                    self.type = nested_class.from_kwargs(**type)
+                else:
+                    self.type = type
+            else:
+                self.type = type
 
     @property
     def id(self):

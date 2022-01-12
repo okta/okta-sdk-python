@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class LogIpAddress(object):
@@ -29,12 +30,11 @@ class LogIpAddress(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'geographical_context': 'LogGeographicalContext',
-        'ip': 'str',
-        'source': 'str',
-        'version': 'str'
-    }
+    swagger_types = {}
+    swagger_types['geographical_context'] = 'LogGeographicalContext'
+    swagger_types['ip'] = 'str'
+    swagger_types['source'] = 'str'
+    swagger_types['version'] = 'str'
 
     attribute_map = {
         'geographical_context': 'geographicalContext',
@@ -54,7 +54,7 @@ class LogIpAddress(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, geographical_context=None, ip=None, source=None, version=None):  # noqa: E501
+    def set_attributes(self, geographical_context=None, ip=None, source=None, version=None, **kwargs):  # noqa: E501
         """LogIpAddress - a model defined in Swagger"""  # noqa: E501
         self._geographical_context = None
         self._ip = None
@@ -62,13 +62,49 @@ class LogIpAddress(object):
         self._version = None
         self.discriminator = None
         if geographical_context is not None:
-            self.geographical_context = geographical_context
+            if hasattr(models, self.swagger_types['geographical_context']):
+                nested_class = getattr(models, self.swagger_types['geographical_context'])
+                if isinstance(geographical_context, nested_class):
+                    self.geographical_context = geographical_context
+                elif isinstance(geographical_context, dict):
+                    self.geographical_context = nested_class.from_kwargs(**geographical_context)
+                else:
+                    self.geographical_context = geographical_context
+            else:
+                self.geographical_context = geographical_context
         if ip is not None:
-            self.ip = ip
+            if hasattr(models, self.swagger_types['ip']):
+                nested_class = getattr(models, self.swagger_types['ip'])
+                if isinstance(ip, nested_class):
+                    self.ip = ip
+                elif isinstance(ip, dict):
+                    self.ip = nested_class.from_kwargs(**ip)
+                else:
+                    self.ip = ip
+            else:
+                self.ip = ip
         if source is not None:
-            self.source = source
+            if hasattr(models, self.swagger_types['source']):
+                nested_class = getattr(models, self.swagger_types['source'])
+                if isinstance(source, nested_class):
+                    self.source = source
+                elif isinstance(source, dict):
+                    self.source = nested_class.from_kwargs(**source)
+                else:
+                    self.source = source
+            else:
+                self.source = source
         if version is not None:
-            self.version = version
+            if hasattr(models, self.swagger_types['version']):
+                nested_class = getattr(models, self.swagger_types['version'])
+                if isinstance(version, nested_class):
+                    self.version = version
+                elif isinstance(version, dict):
+                    self.version = nested_class.from_kwargs(**version)
+                else:
+                    self.version = version
+            else:
+                self.version = version
 
     @property
     def geographical_context(self):

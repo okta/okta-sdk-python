@@ -16,6 +16,7 @@ import re  # noqa: F401
 import six
 from okta.models.application_settings_application import ApplicationSettingsApplication  # noqa: F401,E501
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class BookmarkApplicationSettingsApplication(ApplicationSettingsApplication):
@@ -30,12 +31,11 @@ class BookmarkApplicationSettingsApplication(ApplicationSettingsApplication):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'request_integration': 'bool',
-        'url': 'str'
-    }
+    swagger_types = {}
     if hasattr(ApplicationSettingsApplication, "swagger_types"):
         swagger_types.update(ApplicationSettingsApplication.swagger_types)
+    swagger_types['request_integration'] = 'bool'
+    swagger_types['url'] = 'str'
 
     attribute_map = {
         'request_integration': 'requestIntegration',
@@ -55,16 +55,37 @@ class BookmarkApplicationSettingsApplication(ApplicationSettingsApplication):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, request_integration=None, url=None, *args, **kwargs):  # noqa: E501
+    def set_attributes(self, request_integration=None, url=None, **kwargs):  # noqa: E501
         """BookmarkApplicationSettingsApplication - a model defined in Swagger"""  # noqa: E501
+        config = {}
+        if kwargs is not None:
+            config = {to_snake_case(key): value for key, value in kwargs.items()}
+        super().set_attributes(**config)
         self._request_integration = None
         self._url = None
         self.discriminator = None
         if request_integration is not None:
-            self.request_integration = request_integration
+            if hasattr(models, self.swagger_types['request_integration']):
+                nested_class = getattr(models, self.swagger_types['request_integration'])
+                if isinstance(request_integration, nested_class):
+                    self.request_integration = request_integration
+                elif isinstance(request_integration, dict):
+                    self.request_integration = nested_class.from_kwargs(**request_integration)
+                else:
+                    self.request_integration = request_integration
+            else:
+                self.request_integration = request_integration
         if url is not None:
-            self.url = url
-        super().set_attributes(*args, **kwargs)
+            if hasattr(models, self.swagger_types['url']):
+                nested_class = getattr(models, self.swagger_types['url'])
+                if isinstance(url, nested_class):
+                    self.url = url
+                elif isinstance(url, dict):
+                    self.url = nested_class.from_kwargs(**url)
+                else:
+                    self.url = url
+            else:
+                self.url = url
 
     @property
     def request_integration(self):

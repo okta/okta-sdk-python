@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class CsrMetadataSubject(object):
@@ -29,14 +30,13 @@ class CsrMetadataSubject(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'common_name': 'str',
-        'country_name': 'str',
-        'locality_name': 'str',
-        'organization_name': 'str',
-        'organizational_unit_name': 'str',
-        'state_or_province_name': 'str'
-    }
+    swagger_types = {}
+    swagger_types['common_name'] = 'str'
+    swagger_types['country_name'] = 'str'
+    swagger_types['locality_name'] = 'str'
+    swagger_types['organization_name'] = 'str'
+    swagger_types['organizational_unit_name'] = 'str'
+    swagger_types['state_or_province_name'] = 'str'
 
     attribute_map = {
         'common_name': 'commonName',
@@ -58,7 +58,7 @@ class CsrMetadataSubject(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, common_name=None, country_name=None, locality_name=None, organization_name=None, organizational_unit_name=None, state_or_province_name=None):  # noqa: E501
+    def set_attributes(self, common_name=None, country_name=None, locality_name=None, organization_name=None, organizational_unit_name=None, state_or_province_name=None, **kwargs):  # noqa: E501
         """CsrMetadataSubject - a model defined in Swagger"""  # noqa: E501
         self._common_name = None
         self._country_name = None
@@ -68,17 +68,71 @@ class CsrMetadataSubject(object):
         self._state_or_province_name = None
         self.discriminator = None
         if common_name is not None:
-            self.common_name = common_name
+            if hasattr(models, self.swagger_types['common_name']):
+                nested_class = getattr(models, self.swagger_types['common_name'])
+                if isinstance(common_name, nested_class):
+                    self.common_name = common_name
+                elif isinstance(common_name, dict):
+                    self.common_name = nested_class.from_kwargs(**common_name)
+                else:
+                    self.common_name = common_name
+            else:
+                self.common_name = common_name
         if country_name is not None:
-            self.country_name = country_name
+            if hasattr(models, self.swagger_types['country_name']):
+                nested_class = getattr(models, self.swagger_types['country_name'])
+                if isinstance(country_name, nested_class):
+                    self.country_name = country_name
+                elif isinstance(country_name, dict):
+                    self.country_name = nested_class.from_kwargs(**country_name)
+                else:
+                    self.country_name = country_name
+            else:
+                self.country_name = country_name
         if locality_name is not None:
-            self.locality_name = locality_name
+            if hasattr(models, self.swagger_types['locality_name']):
+                nested_class = getattr(models, self.swagger_types['locality_name'])
+                if isinstance(locality_name, nested_class):
+                    self.locality_name = locality_name
+                elif isinstance(locality_name, dict):
+                    self.locality_name = nested_class.from_kwargs(**locality_name)
+                else:
+                    self.locality_name = locality_name
+            else:
+                self.locality_name = locality_name
         if organization_name is not None:
-            self.organization_name = organization_name
+            if hasattr(models, self.swagger_types['organization_name']):
+                nested_class = getattr(models, self.swagger_types['organization_name'])
+                if isinstance(organization_name, nested_class):
+                    self.organization_name = organization_name
+                elif isinstance(organization_name, dict):
+                    self.organization_name = nested_class.from_kwargs(**organization_name)
+                else:
+                    self.organization_name = organization_name
+            else:
+                self.organization_name = organization_name
         if organizational_unit_name is not None:
-            self.organizational_unit_name = organizational_unit_name
+            if hasattr(models, self.swagger_types['organizational_unit_name']):
+                nested_class = getattr(models, self.swagger_types['organizational_unit_name'])
+                if isinstance(organizational_unit_name, nested_class):
+                    self.organizational_unit_name = organizational_unit_name
+                elif isinstance(organizational_unit_name, dict):
+                    self.organizational_unit_name = nested_class.from_kwargs(**organizational_unit_name)
+                else:
+                    self.organizational_unit_name = organizational_unit_name
+            else:
+                self.organizational_unit_name = organizational_unit_name
         if state_or_province_name is not None:
-            self.state_or_province_name = state_or_province_name
+            if hasattr(models, self.swagger_types['state_or_province_name']):
+                nested_class = getattr(models, self.swagger_types['state_or_province_name'])
+                if isinstance(state_or_province_name, nested_class):
+                    self.state_or_province_name = state_or_province_name
+                elif isinstance(state_or_province_name, dict):
+                    self.state_or_province_name = nested_class.from_kwargs(**state_or_province_name)
+                else:
+                    self.state_or_province_name = state_or_province_name
+            else:
+                self.state_or_province_name = state_or_province_name
 
     @property
     def common_name(self):

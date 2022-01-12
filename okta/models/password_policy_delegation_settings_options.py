@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class PasswordPolicyDelegationSettingsOptions(object):
@@ -29,9 +30,8 @@ class PasswordPolicyDelegationSettingsOptions(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'skip_unlock': 'bool'
-    }
+    swagger_types = {}
+    swagger_types['skip_unlock'] = 'bool'
 
     attribute_map = {
         'skip_unlock': 'skipUnlock'
@@ -48,12 +48,21 @@ class PasswordPolicyDelegationSettingsOptions(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, skip_unlock=None):  # noqa: E501
+    def set_attributes(self, skip_unlock=None, **kwargs):  # noqa: E501
         """PasswordPolicyDelegationSettingsOptions - a model defined in Swagger"""  # noqa: E501
         self._skip_unlock = None
         self.discriminator = None
         if skip_unlock is not None:
-            self.skip_unlock = skip_unlock
+            if hasattr(models, self.swagger_types['skip_unlock']):
+                nested_class = getattr(models, self.swagger_types['skip_unlock'])
+                if isinstance(skip_unlock, nested_class):
+                    self.skip_unlock = skip_unlock
+                elif isinstance(skip_unlock, dict):
+                    self.skip_unlock = nested_class.from_kwargs(**skip_unlock)
+                else:
+                    self.skip_unlock = skip_unlock
+            else:
+                self.skip_unlock = skip_unlock
 
     @property
     def skip_unlock(self):

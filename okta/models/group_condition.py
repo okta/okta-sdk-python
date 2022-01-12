@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class GroupCondition(object):
@@ -29,10 +30,9 @@ class GroupCondition(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'exclude': 'list[str]',
-        'include': 'list[str]'
-    }
+    swagger_types = {}
+    swagger_types['exclude'] = 'list[str]'
+    swagger_types['include'] = 'list[str]'
 
     attribute_map = {
         'exclude': 'exclude',
@@ -50,15 +50,33 @@ class GroupCondition(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, exclude=None, include=None):  # noqa: E501
+    def set_attributes(self, exclude=None, include=None, **kwargs):  # noqa: E501
         """GroupCondition - a model defined in Swagger"""  # noqa: E501
         self._exclude = None
         self._include = None
         self.discriminator = None
         if exclude is not None:
-            self.exclude = exclude
+            if hasattr(models, self.swagger_types['exclude']):
+                nested_class = getattr(models, self.swagger_types['exclude'])
+                if isinstance(exclude, nested_class):
+                    self.exclude = exclude
+                elif isinstance(exclude, dict):
+                    self.exclude = nested_class.from_kwargs(**exclude)
+                else:
+                    self.exclude = exclude
+            else:
+                self.exclude = exclude
         if include is not None:
-            self.include = include
+            if hasattr(models, self.swagger_types['include']):
+                nested_class = getattr(models, self.swagger_types['include'])
+                if isinstance(include, nested_class):
+                    self.include = include
+                elif isinstance(include, dict):
+                    self.include = nested_class.from_kwargs(**include)
+                else:
+                    self.include = include
+            else:
+                self.include = include
 
     @property
     def exclude(self):

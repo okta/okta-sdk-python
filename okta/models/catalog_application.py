@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class CatalogApplication(object):
@@ -29,20 +30,19 @@ class CatalogApplication(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'id': 'str',
-        'name': 'str',
-        'display_name': 'str',
-        'description': 'str',
-        'status': 'CatalogApplicationStatus',
-        'last_updated': 'datetime',
-        'category': 'str',
-        'verification_status': 'str',
-        'website': 'str',
-        'sign_on_modes': 'list[str]',
-        'features': 'list[str]',
-        'links': 'dict(str, object)'
-    }
+    swagger_types = {}
+    swagger_types['id'] = 'str'
+    swagger_types['name'] = 'str'
+    swagger_types['display_name'] = 'str'
+    swagger_types['description'] = 'str'
+    swagger_types['status'] = 'CatalogApplicationStatus'
+    swagger_types['last_updated'] = 'datetime'
+    swagger_types['category'] = 'str'
+    swagger_types['verification_status'] = 'str'
+    swagger_types['website'] = 'str'
+    swagger_types['sign_on_modes'] = 'list[str]'
+    swagger_types['features'] = 'list[str]'
+    swagger_types['links'] = 'dict(str, object)'
 
     attribute_map = {
         'id': 'id',
@@ -70,7 +70,7 @@ class CatalogApplication(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, id=None, name=None, display_name=None, description=None, status=None, last_updated=None, category=None, verification_status=None, website=None, sign_on_modes=None, features=None, links=None):  # noqa: E501
+    def set_attributes(self, id=None, name=None, display_name=None, description=None, status=None, last_updated=None, category=None, verification_status=None, website=None, sign_on_modes=None, features=None, links=None, **kwargs):  # noqa: E501
         """CatalogApplication - a model defined in Swagger"""  # noqa: E501
         self._id = None
         self._name = None
@@ -86,29 +86,137 @@ class CatalogApplication(object):
         self._links = None
         self.discriminator = None
         if id is not None:
-            self.id = id
+            if hasattr(models, self.swagger_types['id']):
+                nested_class = getattr(models, self.swagger_types['id'])
+                if isinstance(id, nested_class):
+                    self.id = id
+                elif isinstance(id, dict):
+                    self.id = nested_class.from_kwargs(**id)
+                else:
+                    self.id = id
+            else:
+                self.id = id
         if name is not None:
-            self.name = name
+            if hasattr(models, self.swagger_types['name']):
+                nested_class = getattr(models, self.swagger_types['name'])
+                if isinstance(name, nested_class):
+                    self.name = name
+                elif isinstance(name, dict):
+                    self.name = nested_class.from_kwargs(**name)
+                else:
+                    self.name = name
+            else:
+                self.name = name
         if display_name is not None:
-            self.display_name = display_name
+            if hasattr(models, self.swagger_types['display_name']):
+                nested_class = getattr(models, self.swagger_types['display_name'])
+                if isinstance(display_name, nested_class):
+                    self.display_name = display_name
+                elif isinstance(display_name, dict):
+                    self.display_name = nested_class.from_kwargs(**display_name)
+                else:
+                    self.display_name = display_name
+            else:
+                self.display_name = display_name
         if description is not None:
-            self.description = description
+            if hasattr(models, self.swagger_types['description']):
+                nested_class = getattr(models, self.swagger_types['description'])
+                if isinstance(description, nested_class):
+                    self.description = description
+                elif isinstance(description, dict):
+                    self.description = nested_class.from_kwargs(**description)
+                else:
+                    self.description = description
+            else:
+                self.description = description
         if status is not None:
-            self.status = status
+            if hasattr(models, self.swagger_types['status']):
+                nested_class = getattr(models, self.swagger_types['status'])
+                if isinstance(status, nested_class):
+                    self.status = status
+                elif isinstance(status, dict):
+                    self.status = nested_class.from_kwargs(**status)
+                else:
+                    self.status = status
+            else:
+                self.status = status
         if last_updated is not None:
-            self.last_updated = last_updated
+            if hasattr(models, self.swagger_types['last_updated']):
+                nested_class = getattr(models, self.swagger_types['last_updated'])
+                if isinstance(last_updated, nested_class):
+                    self.last_updated = last_updated
+                elif isinstance(last_updated, dict):
+                    self.last_updated = nested_class.from_kwargs(**last_updated)
+                else:
+                    self.last_updated = last_updated
+            else:
+                self.last_updated = last_updated
         if category is not None:
-            self.category = category
+            if hasattr(models, self.swagger_types['category']):
+                nested_class = getattr(models, self.swagger_types['category'])
+                if isinstance(category, nested_class):
+                    self.category = category
+                elif isinstance(category, dict):
+                    self.category = nested_class.from_kwargs(**category)
+                else:
+                    self.category = category
+            else:
+                self.category = category
         if verification_status is not None:
-            self.verification_status = verification_status
+            if hasattr(models, self.swagger_types['verification_status']):
+                nested_class = getattr(models, self.swagger_types['verification_status'])
+                if isinstance(verification_status, nested_class):
+                    self.verification_status = verification_status
+                elif isinstance(verification_status, dict):
+                    self.verification_status = nested_class.from_kwargs(**verification_status)
+                else:
+                    self.verification_status = verification_status
+            else:
+                self.verification_status = verification_status
         if website is not None:
-            self.website = website
+            if hasattr(models, self.swagger_types['website']):
+                nested_class = getattr(models, self.swagger_types['website'])
+                if isinstance(website, nested_class):
+                    self.website = website
+                elif isinstance(website, dict):
+                    self.website = nested_class.from_kwargs(**website)
+                else:
+                    self.website = website
+            else:
+                self.website = website
         if sign_on_modes is not None:
-            self.sign_on_modes = sign_on_modes
+            if hasattr(models, self.swagger_types['sign_on_modes']):
+                nested_class = getattr(models, self.swagger_types['sign_on_modes'])
+                if isinstance(sign_on_modes, nested_class):
+                    self.sign_on_modes = sign_on_modes
+                elif isinstance(sign_on_modes, dict):
+                    self.sign_on_modes = nested_class.from_kwargs(**sign_on_modes)
+                else:
+                    self.sign_on_modes = sign_on_modes
+            else:
+                self.sign_on_modes = sign_on_modes
         if features is not None:
-            self.features = features
+            if hasattr(models, self.swagger_types['features']):
+                nested_class = getattr(models, self.swagger_types['features'])
+                if isinstance(features, nested_class):
+                    self.features = features
+                elif isinstance(features, dict):
+                    self.features = nested_class.from_kwargs(**features)
+                else:
+                    self.features = features
+            else:
+                self.features = features
         if links is not None:
-            self.links = links
+            if hasattr(models, self.swagger_types['links']):
+                nested_class = getattr(models, self.swagger_types['links'])
+                if isinstance(links, nested_class):
+                    self.links = links
+                elif isinstance(links, dict):
+                    self.links = nested_class.from_kwargs(**links)
+                else:
+                    self.links = links
+            else:
+                self.links = links
 
     @property
     def id(self):

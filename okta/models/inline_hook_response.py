@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class InlineHookResponse(object):
@@ -29,9 +30,8 @@ class InlineHookResponse(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'commands': 'list[InlineHookResponseCommands]'
-    }
+    swagger_types = {}
+    swagger_types['commands'] = 'list[InlineHookResponseCommands]'
 
     attribute_map = {
         'commands': 'commands'
@@ -48,12 +48,21 @@ class InlineHookResponse(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, commands=None):  # noqa: E501
+    def set_attributes(self, commands=None, **kwargs):  # noqa: E501
         """InlineHookResponse - a model defined in Swagger"""  # noqa: E501
         self._commands = None
         self.discriminator = None
         if commands is not None:
-            self.commands = commands
+            if hasattr(models, self.swagger_types['commands']):
+                nested_class = getattr(models, self.swagger_types['commands'])
+                if isinstance(commands, nested_class):
+                    self.commands = commands
+                elif isinstance(commands, dict):
+                    self.commands = nested_class.from_kwargs(**commands)
+                else:
+                    self.commands = commands
+            else:
+                self.commands = commands
 
     @property
     def commands(self):

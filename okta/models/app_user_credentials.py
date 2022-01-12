@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class AppUserCredentials(object):
@@ -29,10 +30,9 @@ class AppUserCredentials(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'password': 'AppUserPasswordCredential',
-        'user_name': 'str'
-    }
+    swagger_types = {}
+    swagger_types['password'] = 'AppUserPasswordCredential'
+    swagger_types['user_name'] = 'str'
 
     attribute_map = {
         'password': 'password',
@@ -50,15 +50,33 @@ class AppUserCredentials(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, password=None, user_name=None):  # noqa: E501
+    def set_attributes(self, password=None, user_name=None, **kwargs):  # noqa: E501
         """AppUserCredentials - a model defined in Swagger"""  # noqa: E501
         self._password = None
         self._user_name = None
         self.discriminator = None
         if password is not None:
-            self.password = password
+            if hasattr(models, self.swagger_types['password']):
+                nested_class = getattr(models, self.swagger_types['password'])
+                if isinstance(password, nested_class):
+                    self.password = password
+                elif isinstance(password, dict):
+                    self.password = nested_class.from_kwargs(**password)
+                else:
+                    self.password = password
+            else:
+                self.password = password
         if user_name is not None:
-            self.user_name = user_name
+            if hasattr(models, self.swagger_types['user_name']):
+                nested_class = getattr(models, self.swagger_types['user_name'])
+                if isinstance(user_name, nested_class):
+                    self.user_name = user_name
+                elif isinstance(user_name, dict):
+                    self.user_name = nested_class.from_kwargs(**user_name)
+                else:
+                    self.user_name = user_name
+            else:
+                self.user_name = user_name
 
     @property
     def password(self):

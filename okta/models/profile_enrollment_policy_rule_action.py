@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class ProfileEnrollmentPolicyRuleAction(object):
@@ -29,14 +30,13 @@ class ProfileEnrollmentPolicyRuleAction(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'access': 'str',
-        'activation_requirements': 'ProfileEnrollmentPolicyRuleActivationRequirement',
-        'pre_registration_inline_hooks': 'list[PreRegistrationInlineHook]',
-        'profile_attributes': 'list[ProfileEnrollmentPolicyRuleProfileAttribute]',
-        'target_group_ids': 'list[str]',
-        'unknown_user_action': 'str'
-    }
+    swagger_types = {}
+    swagger_types['access'] = 'str'
+    swagger_types['activation_requirements'] = 'ProfileEnrollmentPolicyRuleActivationRequirement'
+    swagger_types['pre_registration_inline_hooks'] = 'list[PreRegistrationInlineHook]'
+    swagger_types['profile_attributes'] = 'list[ProfileEnrollmentPolicyRuleProfileAttribute]'
+    swagger_types['target_group_ids'] = 'list[str]'
+    swagger_types['unknown_user_action'] = 'str'
 
     attribute_map = {
         'access': 'access',
@@ -58,7 +58,7 @@ class ProfileEnrollmentPolicyRuleAction(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, access=None, activation_requirements=None, pre_registration_inline_hooks=None, profile_attributes=None, target_group_ids=None, unknown_user_action=None):  # noqa: E501
+    def set_attributes(self, access=None, activation_requirements=None, pre_registration_inline_hooks=None, profile_attributes=None, target_group_ids=None, unknown_user_action=None, **kwargs):  # noqa: E501
         """ProfileEnrollmentPolicyRuleAction - a model defined in Swagger"""  # noqa: E501
         self._access = None
         self._activation_requirements = None
@@ -68,17 +68,71 @@ class ProfileEnrollmentPolicyRuleAction(object):
         self._unknown_user_action = None
         self.discriminator = None
         if access is not None:
-            self.access = access
+            if hasattr(models, self.swagger_types['access']):
+                nested_class = getattr(models, self.swagger_types['access'])
+                if isinstance(access, nested_class):
+                    self.access = access
+                elif isinstance(access, dict):
+                    self.access = nested_class.from_kwargs(**access)
+                else:
+                    self.access = access
+            else:
+                self.access = access
         if activation_requirements is not None:
-            self.activation_requirements = activation_requirements
+            if hasattr(models, self.swagger_types['activation_requirements']):
+                nested_class = getattr(models, self.swagger_types['activation_requirements'])
+                if isinstance(activation_requirements, nested_class):
+                    self.activation_requirements = activation_requirements
+                elif isinstance(activation_requirements, dict):
+                    self.activation_requirements = nested_class.from_kwargs(**activation_requirements)
+                else:
+                    self.activation_requirements = activation_requirements
+            else:
+                self.activation_requirements = activation_requirements
         if pre_registration_inline_hooks is not None:
-            self.pre_registration_inline_hooks = pre_registration_inline_hooks
+            if hasattr(models, self.swagger_types['pre_registration_inline_hooks']):
+                nested_class = getattr(models, self.swagger_types['pre_registration_inline_hooks'])
+                if isinstance(pre_registration_inline_hooks, nested_class):
+                    self.pre_registration_inline_hooks = pre_registration_inline_hooks
+                elif isinstance(pre_registration_inline_hooks, dict):
+                    self.pre_registration_inline_hooks = nested_class.from_kwargs(**pre_registration_inline_hooks)
+                else:
+                    self.pre_registration_inline_hooks = pre_registration_inline_hooks
+            else:
+                self.pre_registration_inline_hooks = pre_registration_inline_hooks
         if profile_attributes is not None:
-            self.profile_attributes = profile_attributes
+            if hasattr(models, self.swagger_types['profile_attributes']):
+                nested_class = getattr(models, self.swagger_types['profile_attributes'])
+                if isinstance(profile_attributes, nested_class):
+                    self.profile_attributes = profile_attributes
+                elif isinstance(profile_attributes, dict):
+                    self.profile_attributes = nested_class.from_kwargs(**profile_attributes)
+                else:
+                    self.profile_attributes = profile_attributes
+            else:
+                self.profile_attributes = profile_attributes
         if target_group_ids is not None:
-            self.target_group_ids = target_group_ids
+            if hasattr(models, self.swagger_types['target_group_ids']):
+                nested_class = getattr(models, self.swagger_types['target_group_ids'])
+                if isinstance(target_group_ids, nested_class):
+                    self.target_group_ids = target_group_ids
+                elif isinstance(target_group_ids, dict):
+                    self.target_group_ids = nested_class.from_kwargs(**target_group_ids)
+                else:
+                    self.target_group_ids = target_group_ids
+            else:
+                self.target_group_ids = target_group_ids
         if unknown_user_action is not None:
-            self.unknown_user_action = unknown_user_action
+            if hasattr(models, self.swagger_types['unknown_user_action']):
+                nested_class = getattr(models, self.swagger_types['unknown_user_action'])
+                if isinstance(unknown_user_action, nested_class):
+                    self.unknown_user_action = unknown_user_action
+                elif isinstance(unknown_user_action, dict):
+                    self.unknown_user_action = nested_class.from_kwargs(**unknown_user_action)
+                else:
+                    self.unknown_user_action = unknown_user_action
+            else:
+                self.unknown_user_action = unknown_user_action
 
     @property
     def access(self):

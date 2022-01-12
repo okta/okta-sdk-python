@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class AcsEndpoint(object):
@@ -29,10 +30,9 @@ class AcsEndpoint(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'url': 'str',
-        'index': 'int'
-    }
+    swagger_types = {}
+    swagger_types['url'] = 'str'
+    swagger_types['index'] = 'int'
 
     attribute_map = {
         'url': 'url',
@@ -50,15 +50,33 @@ class AcsEndpoint(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, url=None, index=None):  # noqa: E501
+    def set_attributes(self, url=None, index=None, **kwargs):  # noqa: E501
         """AcsEndpoint - a model defined in Swagger"""  # noqa: E501
         self._url = None
         self._index = None
         self.discriminator = None
         if url is not None:
-            self.url = url
+            if hasattr(models, self.swagger_types['url']):
+                nested_class = getattr(models, self.swagger_types['url'])
+                if isinstance(url, nested_class):
+                    self.url = url
+                elif isinstance(url, dict):
+                    self.url = nested_class.from_kwargs(**url)
+                else:
+                    self.url = url
+            else:
+                self.url = url
         if index is not None:
-            self.index = index
+            if hasattr(models, self.swagger_types['index']):
+                nested_class = getattr(models, self.swagger_types['index'])
+                if isinstance(index, nested_class):
+                    self.index = index
+                elif isinstance(index, dict):
+                    self.index = nested_class.from_kwargs(**index)
+                else:
+                    self.index = index
+            else:
+                self.index = index
 
     @property
     def url(self):

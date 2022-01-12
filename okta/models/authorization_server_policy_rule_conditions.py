@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class AuthorizationServerPolicyRuleConditions(object):
@@ -29,12 +30,11 @@ class AuthorizationServerPolicyRuleConditions(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'people': 'PolicyPeopleCondition',
-        'clients': 'ClientPolicyCondition',
-        'grant_types': 'GrantTypePolicyRuleCondition',
-        'scopes': 'OAuth2ScopesMediationPolicyRuleCondition'
-    }
+    swagger_types = {}
+    swagger_types['people'] = 'PolicyPeopleCondition'
+    swagger_types['clients'] = 'ClientPolicyCondition'
+    swagger_types['grant_types'] = 'GrantTypePolicyRuleCondition'
+    swagger_types['scopes'] = 'OAuth2ScopesMediationPolicyRuleCondition'
 
     attribute_map = {
         'people': 'people',
@@ -54,7 +54,7 @@ class AuthorizationServerPolicyRuleConditions(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, people=None, clients=None, grant_types=None, scopes=None):  # noqa: E501
+    def set_attributes(self, people=None, clients=None, grant_types=None, scopes=None, **kwargs):  # noqa: E501
         """AuthorizationServerPolicyRuleConditions - a model defined in Swagger"""  # noqa: E501
         self._people = None
         self._clients = None
@@ -62,13 +62,49 @@ class AuthorizationServerPolicyRuleConditions(object):
         self._scopes = None
         self.discriminator = None
         if people is not None:
-            self.people = people
+            if hasattr(models, self.swagger_types['people']):
+                nested_class = getattr(models, self.swagger_types['people'])
+                if isinstance(people, nested_class):
+                    self.people = people
+                elif isinstance(people, dict):
+                    self.people = nested_class.from_kwargs(**people)
+                else:
+                    self.people = people
+            else:
+                self.people = people
         if clients is not None:
-            self.clients = clients
+            if hasattr(models, self.swagger_types['clients']):
+                nested_class = getattr(models, self.swagger_types['clients'])
+                if isinstance(clients, nested_class):
+                    self.clients = clients
+                elif isinstance(clients, dict):
+                    self.clients = nested_class.from_kwargs(**clients)
+                else:
+                    self.clients = clients
+            else:
+                self.clients = clients
         if grant_types is not None:
-            self.grant_types = grant_types
+            if hasattr(models, self.swagger_types['grant_types']):
+                nested_class = getattr(models, self.swagger_types['grant_types'])
+                if isinstance(grant_types, nested_class):
+                    self.grant_types = grant_types
+                elif isinstance(grant_types, dict):
+                    self.grant_types = nested_class.from_kwargs(**grant_types)
+                else:
+                    self.grant_types = grant_types
+            else:
+                self.grant_types = grant_types
         if scopes is not None:
-            self.scopes = scopes
+            if hasattr(models, self.swagger_types['scopes']):
+                nested_class = getattr(models, self.swagger_types['scopes'])
+                if isinstance(scopes, nested_class):
+                    self.scopes = scopes
+                elif isinstance(scopes, dict):
+                    self.scopes = nested_class.from_kwargs(**scopes)
+                else:
+                    self.scopes = scopes
+            else:
+                self.scopes = scopes
 
     @property
     def people(self):

@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class AuthorizationServerCredentialsSigningConfig(object):
@@ -29,13 +30,12 @@ class AuthorizationServerCredentialsSigningConfig(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'kid': 'str',
-        'last_rotated': 'datetime',
-        'next_rotation': 'datetime',
-        'rotation_mode': 'AuthorizationServerCredentialsRotationMode',
-        'use': 'AuthorizationServerCredentialsUse'
-    }
+    swagger_types = {}
+    swagger_types['kid'] = 'str'
+    swagger_types['last_rotated'] = 'datetime'
+    swagger_types['next_rotation'] = 'datetime'
+    swagger_types['rotation_mode'] = 'AuthorizationServerCredentialsRotationMode'
+    swagger_types['use'] = 'AuthorizationServerCredentialsUse'
 
     attribute_map = {
         'kid': 'kid',
@@ -56,7 +56,7 @@ class AuthorizationServerCredentialsSigningConfig(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, kid=None, last_rotated=None, next_rotation=None, rotation_mode=None, use=None):  # noqa: E501
+    def set_attributes(self, kid=None, last_rotated=None, next_rotation=None, rotation_mode=None, use=None, **kwargs):  # noqa: E501
         """AuthorizationServerCredentialsSigningConfig - a model defined in Swagger"""  # noqa: E501
         self._kid = None
         self._last_rotated = None
@@ -65,15 +65,60 @@ class AuthorizationServerCredentialsSigningConfig(object):
         self._use = None
         self.discriminator = None
         if kid is not None:
-            self.kid = kid
+            if hasattr(models, self.swagger_types['kid']):
+                nested_class = getattr(models, self.swagger_types['kid'])
+                if isinstance(kid, nested_class):
+                    self.kid = kid
+                elif isinstance(kid, dict):
+                    self.kid = nested_class.from_kwargs(**kid)
+                else:
+                    self.kid = kid
+            else:
+                self.kid = kid
         if last_rotated is not None:
-            self.last_rotated = last_rotated
+            if hasattr(models, self.swagger_types['last_rotated']):
+                nested_class = getattr(models, self.swagger_types['last_rotated'])
+                if isinstance(last_rotated, nested_class):
+                    self.last_rotated = last_rotated
+                elif isinstance(last_rotated, dict):
+                    self.last_rotated = nested_class.from_kwargs(**last_rotated)
+                else:
+                    self.last_rotated = last_rotated
+            else:
+                self.last_rotated = last_rotated
         if next_rotation is not None:
-            self.next_rotation = next_rotation
+            if hasattr(models, self.swagger_types['next_rotation']):
+                nested_class = getattr(models, self.swagger_types['next_rotation'])
+                if isinstance(next_rotation, nested_class):
+                    self.next_rotation = next_rotation
+                elif isinstance(next_rotation, dict):
+                    self.next_rotation = nested_class.from_kwargs(**next_rotation)
+                else:
+                    self.next_rotation = next_rotation
+            else:
+                self.next_rotation = next_rotation
         if rotation_mode is not None:
-            self.rotation_mode = rotation_mode
+            if hasattr(models, self.swagger_types['rotation_mode']):
+                nested_class = getattr(models, self.swagger_types['rotation_mode'])
+                if isinstance(rotation_mode, nested_class):
+                    self.rotation_mode = rotation_mode
+                elif isinstance(rotation_mode, dict):
+                    self.rotation_mode = nested_class.from_kwargs(**rotation_mode)
+                else:
+                    self.rotation_mode = rotation_mode
+            else:
+                self.rotation_mode = rotation_mode
         if use is not None:
-            self.use = use
+            if hasattr(models, self.swagger_types['use']):
+                nested_class = getattr(models, self.swagger_types['use'])
+                if isinstance(use, nested_class):
+                    self.use = use
+                elif isinstance(use, dict):
+                    self.use = nested_class.from_kwargs(**use)
+                else:
+                    self.use = use
+            else:
+                self.use = use
 
     @property
     def kid(self):

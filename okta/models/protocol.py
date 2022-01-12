@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class Protocol(object):
@@ -29,16 +30,15 @@ class Protocol(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'algorithms': 'ProtocolAlgorithms',
-        'credentials': 'IdentityProviderCredentials',
-        'endpoints': 'ProtocolEndpoints',
-        'issuer': 'ProtocolEndpoint',
-        'relay_state': 'ProtocolRelayState',
-        'scopes': 'list[str]',
-        'settings': 'ProtocolSettings',
-        'type': 'ProtocolType'
-    }
+    swagger_types = {}
+    swagger_types['algorithms'] = 'ProtocolAlgorithms'
+    swagger_types['credentials'] = 'IdentityProviderCredentials'
+    swagger_types['endpoints'] = 'ProtocolEndpoints'
+    swagger_types['issuer'] = 'ProtocolEndpoint'
+    swagger_types['relay_state'] = 'ProtocolRelayState'
+    swagger_types['scopes'] = 'list[str]'
+    swagger_types['settings'] = 'ProtocolSettings'
+    swagger_types['type'] = 'ProtocolType'
 
     attribute_map = {
         'algorithms': 'algorithms',
@@ -62,7 +62,7 @@ class Protocol(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, algorithms=None, credentials=None, endpoints=None, issuer=None, relay_state=None, scopes=None, settings=None, type=None):  # noqa: E501
+    def set_attributes(self, algorithms=None, credentials=None, endpoints=None, issuer=None, relay_state=None, scopes=None, settings=None, type=None, **kwargs):  # noqa: E501
         """Protocol - a model defined in Swagger"""  # noqa: E501
         self._algorithms = None
         self._credentials = None
@@ -74,21 +74,93 @@ class Protocol(object):
         self._type = None
         self.discriminator = None
         if algorithms is not None:
-            self.algorithms = algorithms
+            if hasattr(models, self.swagger_types['algorithms']):
+                nested_class = getattr(models, self.swagger_types['algorithms'])
+                if isinstance(algorithms, nested_class):
+                    self.algorithms = algorithms
+                elif isinstance(algorithms, dict):
+                    self.algorithms = nested_class.from_kwargs(**algorithms)
+                else:
+                    self.algorithms = algorithms
+            else:
+                self.algorithms = algorithms
         if credentials is not None:
-            self.credentials = credentials
+            if hasattr(models, self.swagger_types['credentials']):
+                nested_class = getattr(models, self.swagger_types['credentials'])
+                if isinstance(credentials, nested_class):
+                    self.credentials = credentials
+                elif isinstance(credentials, dict):
+                    self.credentials = nested_class.from_kwargs(**credentials)
+                else:
+                    self.credentials = credentials
+            else:
+                self.credentials = credentials
         if endpoints is not None:
-            self.endpoints = endpoints
+            if hasattr(models, self.swagger_types['endpoints']):
+                nested_class = getattr(models, self.swagger_types['endpoints'])
+                if isinstance(endpoints, nested_class):
+                    self.endpoints = endpoints
+                elif isinstance(endpoints, dict):
+                    self.endpoints = nested_class.from_kwargs(**endpoints)
+                else:
+                    self.endpoints = endpoints
+            else:
+                self.endpoints = endpoints
         if issuer is not None:
-            self.issuer = issuer
+            if hasattr(models, self.swagger_types['issuer']):
+                nested_class = getattr(models, self.swagger_types['issuer'])
+                if isinstance(issuer, nested_class):
+                    self.issuer = issuer
+                elif isinstance(issuer, dict):
+                    self.issuer = nested_class.from_kwargs(**issuer)
+                else:
+                    self.issuer = issuer
+            else:
+                self.issuer = issuer
         if relay_state is not None:
-            self.relay_state = relay_state
+            if hasattr(models, self.swagger_types['relay_state']):
+                nested_class = getattr(models, self.swagger_types['relay_state'])
+                if isinstance(relay_state, nested_class):
+                    self.relay_state = relay_state
+                elif isinstance(relay_state, dict):
+                    self.relay_state = nested_class.from_kwargs(**relay_state)
+                else:
+                    self.relay_state = relay_state
+            else:
+                self.relay_state = relay_state
         if scopes is not None:
-            self.scopes = scopes
+            if hasattr(models, self.swagger_types['scopes']):
+                nested_class = getattr(models, self.swagger_types['scopes'])
+                if isinstance(scopes, nested_class):
+                    self.scopes = scopes
+                elif isinstance(scopes, dict):
+                    self.scopes = nested_class.from_kwargs(**scopes)
+                else:
+                    self.scopes = scopes
+            else:
+                self.scopes = scopes
         if settings is not None:
-            self.settings = settings
+            if hasattr(models, self.swagger_types['settings']):
+                nested_class = getattr(models, self.swagger_types['settings'])
+                if isinstance(settings, nested_class):
+                    self.settings = settings
+                elif isinstance(settings, dict):
+                    self.settings = nested_class.from_kwargs(**settings)
+                else:
+                    self.settings = settings
+            else:
+                self.settings = settings
         if type is not None:
-            self.type = type
+            if hasattr(models, self.swagger_types['type']):
+                nested_class = getattr(models, self.swagger_types['type'])
+                if isinstance(type, nested_class):
+                    self.type = type
+                elif isinstance(type, dict):
+                    self.type = nested_class.from_kwargs(**type)
+                else:
+                    self.type = type
+            else:
+                self.type = type
 
     @property
     def algorithms(self):

@@ -16,6 +16,7 @@ import re  # noqa: F401
 import six
 from okta.models.email_content_with_sender import EmailContentWithSender  # noqa: F401,E501
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class EmailPreview(EmailContentWithSender):
@@ -30,11 +31,10 @@ class EmailPreview(EmailContentWithSender):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'links': 'EmailPreviewLinks'
-    }
+    swagger_types = {}
     if hasattr(EmailContentWithSender, "swagger_types"):
         swagger_types.update(EmailContentWithSender.swagger_types)
+    swagger_types['links'] = 'EmailPreviewLinks'
 
     attribute_map = {
         'links': '_links'
@@ -53,13 +53,25 @@ class EmailPreview(EmailContentWithSender):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, links=None, *args, **kwargs):  # noqa: E501
+    def set_attributes(self, links=None, **kwargs):  # noqa: E501
         """EmailPreview - a model defined in Swagger"""  # noqa: E501
+        config = {}
+        if kwargs is not None:
+            config = {to_snake_case(key): value for key, value in kwargs.items()}
+        super().set_attributes(**config)
         self._links = None
         self.discriminator = None
         if links is not None:
-            self.links = links
-        super().set_attributes(*args, **kwargs)
+            if hasattr(models, self.swagger_types['links']):
+                nested_class = getattr(models, self.swagger_types['links'])
+                if isinstance(links, nested_class):
+                    self.links = links
+                elif isinstance(links, dict):
+                    self.links = nested_class.from_kwargs(**links)
+                else:
+                    self.links = links
+            else:
+                self.links = links
 
     @property
     def links(self):

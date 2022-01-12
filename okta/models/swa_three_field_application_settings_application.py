@@ -16,6 +16,7 @@ import re  # noqa: F401
 import six
 from okta.models.application_settings_application import ApplicationSettingsApplication  # noqa: F401,E501
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class SwaThreeFieldApplicationSettingsApplication(ApplicationSettingsApplication):
@@ -30,17 +31,16 @@ class SwaThreeFieldApplicationSettingsApplication(ApplicationSettingsApplication
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'button_selector': 'str',
-        'extra_field_selector': 'str',
-        'extra_field_value': 'str',
-        'login_url_regex': 'str',
-        'password_selector': 'str',
-        'target_url': 'str',
-        'user_name_selector': 'str'
-    }
+    swagger_types = {}
     if hasattr(ApplicationSettingsApplication, "swagger_types"):
         swagger_types.update(ApplicationSettingsApplication.swagger_types)
+    swagger_types['button_selector'] = 'str'
+    swagger_types['extra_field_selector'] = 'str'
+    swagger_types['extra_field_value'] = 'str'
+    swagger_types['login_url_regex'] = 'str'
+    swagger_types['password_selector'] = 'str'
+    swagger_types['target_url'] = 'str'
+    swagger_types['user_name_selector'] = 'str'
 
     attribute_map = {
         'button_selector': 'buttonSelector',
@@ -65,8 +65,12 @@ class SwaThreeFieldApplicationSettingsApplication(ApplicationSettingsApplication
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, button_selector=None, extra_field_selector=None, extra_field_value=None, login_url_regex=None, password_selector=None, target_url=None, user_name_selector=None, *args, **kwargs):  # noqa: E501
+    def set_attributes(self, button_selector=None, extra_field_selector=None, extra_field_value=None, login_url_regex=None, password_selector=None, target_url=None, user_name_selector=None, **kwargs):  # noqa: E501
         """SwaThreeFieldApplicationSettingsApplication - a model defined in Swagger"""  # noqa: E501
+        config = {}
+        if kwargs is not None:
+            config = {to_snake_case(key): value for key, value in kwargs.items()}
+        super().set_attributes(**config)
         self._button_selector = None
         self._extra_field_selector = None
         self._extra_field_value = None
@@ -76,20 +80,82 @@ class SwaThreeFieldApplicationSettingsApplication(ApplicationSettingsApplication
         self._user_name_selector = None
         self.discriminator = None
         if button_selector is not None:
-            self.button_selector = button_selector
+            if hasattr(models, self.swagger_types['button_selector']):
+                nested_class = getattr(models, self.swagger_types['button_selector'])
+                if isinstance(button_selector, nested_class):
+                    self.button_selector = button_selector
+                elif isinstance(button_selector, dict):
+                    self.button_selector = nested_class.from_kwargs(**button_selector)
+                else:
+                    self.button_selector = button_selector
+            else:
+                self.button_selector = button_selector
         if extra_field_selector is not None:
-            self.extra_field_selector = extra_field_selector
+            if hasattr(models, self.swagger_types['extra_field_selector']):
+                nested_class = getattr(models, self.swagger_types['extra_field_selector'])
+                if isinstance(extra_field_selector, nested_class):
+                    self.extra_field_selector = extra_field_selector
+                elif isinstance(extra_field_selector, dict):
+                    self.extra_field_selector = nested_class.from_kwargs(**extra_field_selector)
+                else:
+                    self.extra_field_selector = extra_field_selector
+            else:
+                self.extra_field_selector = extra_field_selector
         if extra_field_value is not None:
-            self.extra_field_value = extra_field_value
+            if hasattr(models, self.swagger_types['extra_field_value']):
+                nested_class = getattr(models, self.swagger_types['extra_field_value'])
+                if isinstance(extra_field_value, nested_class):
+                    self.extra_field_value = extra_field_value
+                elif isinstance(extra_field_value, dict):
+                    self.extra_field_value = nested_class.from_kwargs(**extra_field_value)
+                else:
+                    self.extra_field_value = extra_field_value
+            else:
+                self.extra_field_value = extra_field_value
         if login_url_regex is not None:
-            self.login_url_regex = login_url_regex
+            if hasattr(models, self.swagger_types['login_url_regex']):
+                nested_class = getattr(models, self.swagger_types['login_url_regex'])
+                if isinstance(login_url_regex, nested_class):
+                    self.login_url_regex = login_url_regex
+                elif isinstance(login_url_regex, dict):
+                    self.login_url_regex = nested_class.from_kwargs(**login_url_regex)
+                else:
+                    self.login_url_regex = login_url_regex
+            else:
+                self.login_url_regex = login_url_regex
         if password_selector is not None:
-            self.password_selector = password_selector
+            if hasattr(models, self.swagger_types['password_selector']):
+                nested_class = getattr(models, self.swagger_types['password_selector'])
+                if isinstance(password_selector, nested_class):
+                    self.password_selector = password_selector
+                elif isinstance(password_selector, dict):
+                    self.password_selector = nested_class.from_kwargs(**password_selector)
+                else:
+                    self.password_selector = password_selector
+            else:
+                self.password_selector = password_selector
         if target_url is not None:
-            self.target_url = target_url
+            if hasattr(models, self.swagger_types['target_url']):
+                nested_class = getattr(models, self.swagger_types['target_url'])
+                if isinstance(target_url, nested_class):
+                    self.target_url = target_url
+                elif isinstance(target_url, dict):
+                    self.target_url = nested_class.from_kwargs(**target_url)
+                else:
+                    self.target_url = target_url
+            else:
+                self.target_url = target_url
         if user_name_selector is not None:
-            self.user_name_selector = user_name_selector
-        super().set_attributes(*args, **kwargs)
+            if hasattr(models, self.swagger_types['user_name_selector']):
+                nested_class = getattr(models, self.swagger_types['user_name_selector'])
+                if isinstance(user_name_selector, nested_class):
+                    self.user_name_selector = user_name_selector
+                elif isinstance(user_name_selector, dict):
+                    self.user_name_selector = nested_class.from_kwargs(**user_name_selector)
+                else:
+                    self.user_name_selector = user_name_selector
+            else:
+                self.user_name_selector = user_name_selector
 
     @property
     def button_selector(self):

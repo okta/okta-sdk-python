@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class ProvisioningGroups(object):
@@ -29,12 +30,11 @@ class ProvisioningGroups(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'action': 'ProvisioningGroupsAction',
-        'assignments': 'list[str]',
-        'filter': 'list[str]',
-        'source_attribute_name': 'str'
-    }
+    swagger_types = {}
+    swagger_types['action'] = 'ProvisioningGroupsAction'
+    swagger_types['assignments'] = 'list[str]'
+    swagger_types['filter'] = 'list[str]'
+    swagger_types['source_attribute_name'] = 'str'
 
     attribute_map = {
         'action': 'action',
@@ -54,7 +54,7 @@ class ProvisioningGroups(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, action=None, assignments=None, filter=None, source_attribute_name=None):  # noqa: E501
+    def set_attributes(self, action=None, assignments=None, filter=None, source_attribute_name=None, **kwargs):  # noqa: E501
         """ProvisioningGroups - a model defined in Swagger"""  # noqa: E501
         self._action = None
         self._assignments = None
@@ -62,13 +62,49 @@ class ProvisioningGroups(object):
         self._source_attribute_name = None
         self.discriminator = None
         if action is not None:
-            self.action = action
+            if hasattr(models, self.swagger_types['action']):
+                nested_class = getattr(models, self.swagger_types['action'])
+                if isinstance(action, nested_class):
+                    self.action = action
+                elif isinstance(action, dict):
+                    self.action = nested_class.from_kwargs(**action)
+                else:
+                    self.action = action
+            else:
+                self.action = action
         if assignments is not None:
-            self.assignments = assignments
+            if hasattr(models, self.swagger_types['assignments']):
+                nested_class = getattr(models, self.swagger_types['assignments'])
+                if isinstance(assignments, nested_class):
+                    self.assignments = assignments
+                elif isinstance(assignments, dict):
+                    self.assignments = nested_class.from_kwargs(**assignments)
+                else:
+                    self.assignments = assignments
+            else:
+                self.assignments = assignments
         if filter is not None:
-            self.filter = filter
+            if hasattr(models, self.swagger_types['filter']):
+                nested_class = getattr(models, self.swagger_types['filter'])
+                if isinstance(filter, nested_class):
+                    self.filter = filter
+                elif isinstance(filter, dict):
+                    self.filter = nested_class.from_kwargs(**filter)
+                else:
+                    self.filter = filter
+            else:
+                self.filter = filter
         if source_attribute_name is not None:
-            self.source_attribute_name = source_attribute_name
+            if hasattr(models, self.swagger_types['source_attribute_name']):
+                nested_class = getattr(models, self.swagger_types['source_attribute_name'])
+                if isinstance(source_attribute_name, nested_class):
+                    self.source_attribute_name = source_attribute_name
+                elif isinstance(source_attribute_name, dict):
+                    self.source_attribute_name = nested_class.from_kwargs(**source_attribute_name)
+                else:
+                    self.source_attribute_name = source_attribute_name
+            else:
+                self.source_attribute_name = source_attribute_name
 
     @property
     def action(self):

@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class ApplicationSettingsNotes(object):
@@ -29,10 +30,9 @@ class ApplicationSettingsNotes(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'admin': 'str',
-        'enduser': 'str'
-    }
+    swagger_types = {}
+    swagger_types['admin'] = 'str'
+    swagger_types['enduser'] = 'str'
 
     attribute_map = {
         'admin': 'admin',
@@ -50,15 +50,33 @@ class ApplicationSettingsNotes(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, admin=None, enduser=None):  # noqa: E501
+    def set_attributes(self, admin=None, enduser=None, **kwargs):  # noqa: E501
         """ApplicationSettingsNotes - a model defined in Swagger"""  # noqa: E501
         self._admin = None
         self._enduser = None
         self.discriminator = None
         if admin is not None:
-            self.admin = admin
+            if hasattr(models, self.swagger_types['admin']):
+                nested_class = getattr(models, self.swagger_types['admin'])
+                if isinstance(admin, nested_class):
+                    self.admin = admin
+                elif isinstance(admin, dict):
+                    self.admin = nested_class.from_kwargs(**admin)
+                else:
+                    self.admin = admin
+            else:
+                self.admin = admin
         if enduser is not None:
-            self.enduser = enduser
+            if hasattr(models, self.swagger_types['enduser']):
+                nested_class = getattr(models, self.swagger_types['enduser'])
+                if isinstance(enduser, nested_class):
+                    self.enduser = enduser
+                elif isinstance(enduser, dict):
+                    self.enduser = nested_class.from_kwargs(**enduser)
+                else:
+                    self.enduser = enduser
+            else:
+                self.enduser = enduser
 
     @property
     def admin(self):

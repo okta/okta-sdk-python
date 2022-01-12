@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class GroupProfile(object):
@@ -29,10 +30,9 @@ class GroupProfile(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'description': 'str',
-        'name': 'str'
-    }
+    swagger_types = {}
+    swagger_types['description'] = 'str'
+    swagger_types['name'] = 'str'
 
     attribute_map = {
         'description': 'description',
@@ -50,15 +50,33 @@ class GroupProfile(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, description=None, name=None):  # noqa: E501
+    def set_attributes(self, description=None, name=None, **kwargs):  # noqa: E501
         """GroupProfile - a model defined in Swagger"""  # noqa: E501
         self._description = None
         self._name = None
         self.discriminator = None
         if description is not None:
-            self.description = description
+            if hasattr(models, self.swagger_types['description']):
+                nested_class = getattr(models, self.swagger_types['description'])
+                if isinstance(description, nested_class):
+                    self.description = description
+                elif isinstance(description, dict):
+                    self.description = nested_class.from_kwargs(**description)
+                else:
+                    self.description = description
+            else:
+                self.description = description
         if name is not None:
-            self.name = name
+            if hasattr(models, self.swagger_types['name']):
+                nested_class = getattr(models, self.swagger_types['name'])
+                if isinstance(name, nested_class):
+                    self.name = name
+                elif isinstance(name, dict):
+                    self.name = nested_class.from_kwargs(**name)
+                else:
+                    self.name = name
+            else:
+                self.name = name
 
     @property
     def description(self):

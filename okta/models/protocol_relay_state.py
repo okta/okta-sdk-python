@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class ProtocolRelayState(object):
@@ -29,9 +30,8 @@ class ProtocolRelayState(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'format': 'ProtocolRelayStateFormat'
-    }
+    swagger_types = {}
+    swagger_types['format'] = 'ProtocolRelayStateFormat'
 
     attribute_map = {
         'format': 'format'
@@ -48,12 +48,21 @@ class ProtocolRelayState(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, format=None):  # noqa: E501
+    def set_attributes(self, format=None, **kwargs):  # noqa: E501
         """ProtocolRelayState - a model defined in Swagger"""  # noqa: E501
         self._format = None
         self.discriminator = None
         if format is not None:
-            self.format = format
+            if hasattr(models, self.swagger_types['format']):
+                nested_class = getattr(models, self.swagger_types['format'])
+                if isinstance(format, nested_class):
+                    self.format = format
+                elif isinstance(format, dict):
+                    self.format = nested_class.from_kwargs(**format)
+                else:
+                    self.format = format
+            else:
+                self.format = format
 
     @property
     def format(self):

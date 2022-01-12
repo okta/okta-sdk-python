@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class CAPTCHAInstanceLink(object):
@@ -29,9 +30,8 @@ class CAPTCHAInstanceLink(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        '_self': 'HrefObject'
-    }
+    swagger_types = {}
+    swagger_types['_self'] = 'HrefObject'
 
     attribute_map = {
         '_self': 'self'
@@ -48,12 +48,21 @@ class CAPTCHAInstanceLink(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, _self=None):  # noqa: E501
+    def set_attributes(self, _self=None, **kwargs):  # noqa: E501
         """CAPTCHAInstanceLink - a model defined in Swagger"""  # noqa: E501
         self.__self = None
         self.discriminator = None
         if _self is not None:
-            self._self = _self
+            if hasattr(models, self.swagger_types['_self']):
+                nested_class = getattr(models, self.swagger_types['_self'])
+                if isinstance(_self, nested_class):
+                    self._self = _self
+                elif isinstance(_self, dict):
+                    self._self = nested_class.from_kwargs(**_self)
+                else:
+                    self._self = _self
+            else:
+                self._self = _self
 
     @property
     def _self(self):

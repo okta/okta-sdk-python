@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class ApplicationCredentials(object):
@@ -29,10 +30,9 @@ class ApplicationCredentials(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'signing': 'ApplicationCredentialsSigning',
-        'user_name_template': 'ApplicationCredentialsUsernameTemplate'
-    }
+    swagger_types = {}
+    swagger_types['signing'] = 'ApplicationCredentialsSigning'
+    swagger_types['user_name_template'] = 'ApplicationCredentialsUsernameTemplate'
 
     attribute_map = {
         'signing': 'signing',
@@ -50,15 +50,33 @@ class ApplicationCredentials(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, signing=None, user_name_template=None):  # noqa: E501
+    def set_attributes(self, signing=None, user_name_template=None, **kwargs):  # noqa: E501
         """ApplicationCredentials - a model defined in Swagger"""  # noqa: E501
         self._signing = None
         self._user_name_template = None
         self.discriminator = None
         if signing is not None:
-            self.signing = signing
+            if hasattr(models, self.swagger_types['signing']):
+                nested_class = getattr(models, self.swagger_types['signing'])
+                if isinstance(signing, nested_class):
+                    self.signing = signing
+                elif isinstance(signing, dict):
+                    self.signing = nested_class.from_kwargs(**signing)
+                else:
+                    self.signing = signing
+            else:
+                self.signing = signing
         if user_name_template is not None:
-            self.user_name_template = user_name_template
+            if hasattr(models, self.swagger_types['user_name_template']):
+                nested_class = getattr(models, self.swagger_types['user_name_template'])
+                if isinstance(user_name_template, nested_class):
+                    self.user_name_template = user_name_template
+                elif isinstance(user_name_template, dict):
+                    self.user_name_template = nested_class.from_kwargs(**user_name_template)
+                else:
+                    self.user_name_template = user_name_template
+            else:
+                self.user_name_template = user_name_template
 
     @property
     def signing(self):

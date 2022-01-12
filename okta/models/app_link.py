@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class AppLink(object):
@@ -29,18 +30,17 @@ class AppLink(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'app_assignment_id': 'str',
-        'app_instance_id': 'str',
-        'app_name': 'str',
-        'credentials_setup': 'bool',
-        'hidden': 'bool',
-        'id': 'str',
-        'label': 'str',
-        'link_url': 'str',
-        'logo_url': 'str',
-        'sort_order': 'int'
-    }
+    swagger_types = {}
+    swagger_types['app_assignment_id'] = 'str'
+    swagger_types['app_instance_id'] = 'str'
+    swagger_types['app_name'] = 'str'
+    swagger_types['credentials_setup'] = 'bool'
+    swagger_types['hidden'] = 'bool'
+    swagger_types['id'] = 'str'
+    swagger_types['label'] = 'str'
+    swagger_types['link_url'] = 'str'
+    swagger_types['logo_url'] = 'str'
+    swagger_types['sort_order'] = 'int'
 
     attribute_map = {
         'app_assignment_id': 'appAssignmentId',
@@ -66,7 +66,7 @@ class AppLink(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, app_assignment_id=None, app_instance_id=None, app_name=None, credentials_setup=None, hidden=None, id=None, label=None, link_url=None, logo_url=None, sort_order=None):  # noqa: E501
+    def set_attributes(self, app_assignment_id=None, app_instance_id=None, app_name=None, credentials_setup=None, hidden=None, id=None, label=None, link_url=None, logo_url=None, sort_order=None, **kwargs):  # noqa: E501
         """AppLink - a model defined in Swagger"""  # noqa: E501
         self._app_assignment_id = None
         self._app_instance_id = None
@@ -80,25 +80,115 @@ class AppLink(object):
         self._sort_order = None
         self.discriminator = None
         if app_assignment_id is not None:
-            self.app_assignment_id = app_assignment_id
+            if hasattr(models, self.swagger_types['app_assignment_id']):
+                nested_class = getattr(models, self.swagger_types['app_assignment_id'])
+                if isinstance(app_assignment_id, nested_class):
+                    self.app_assignment_id = app_assignment_id
+                elif isinstance(app_assignment_id, dict):
+                    self.app_assignment_id = nested_class.from_kwargs(**app_assignment_id)
+                else:
+                    self.app_assignment_id = app_assignment_id
+            else:
+                self.app_assignment_id = app_assignment_id
         if app_instance_id is not None:
-            self.app_instance_id = app_instance_id
+            if hasattr(models, self.swagger_types['app_instance_id']):
+                nested_class = getattr(models, self.swagger_types['app_instance_id'])
+                if isinstance(app_instance_id, nested_class):
+                    self.app_instance_id = app_instance_id
+                elif isinstance(app_instance_id, dict):
+                    self.app_instance_id = nested_class.from_kwargs(**app_instance_id)
+                else:
+                    self.app_instance_id = app_instance_id
+            else:
+                self.app_instance_id = app_instance_id
         if app_name is not None:
-            self.app_name = app_name
+            if hasattr(models, self.swagger_types['app_name']):
+                nested_class = getattr(models, self.swagger_types['app_name'])
+                if isinstance(app_name, nested_class):
+                    self.app_name = app_name
+                elif isinstance(app_name, dict):
+                    self.app_name = nested_class.from_kwargs(**app_name)
+                else:
+                    self.app_name = app_name
+            else:
+                self.app_name = app_name
         if credentials_setup is not None:
-            self.credentials_setup = credentials_setup
+            if hasattr(models, self.swagger_types['credentials_setup']):
+                nested_class = getattr(models, self.swagger_types['credentials_setup'])
+                if isinstance(credentials_setup, nested_class):
+                    self.credentials_setup = credentials_setup
+                elif isinstance(credentials_setup, dict):
+                    self.credentials_setup = nested_class.from_kwargs(**credentials_setup)
+                else:
+                    self.credentials_setup = credentials_setup
+            else:
+                self.credentials_setup = credentials_setup
         if hidden is not None:
-            self.hidden = hidden
+            if hasattr(models, self.swagger_types['hidden']):
+                nested_class = getattr(models, self.swagger_types['hidden'])
+                if isinstance(hidden, nested_class):
+                    self.hidden = hidden
+                elif isinstance(hidden, dict):
+                    self.hidden = nested_class.from_kwargs(**hidden)
+                else:
+                    self.hidden = hidden
+            else:
+                self.hidden = hidden
         if id is not None:
-            self.id = id
+            if hasattr(models, self.swagger_types['id']):
+                nested_class = getattr(models, self.swagger_types['id'])
+                if isinstance(id, nested_class):
+                    self.id = id
+                elif isinstance(id, dict):
+                    self.id = nested_class.from_kwargs(**id)
+                else:
+                    self.id = id
+            else:
+                self.id = id
         if label is not None:
-            self.label = label
+            if hasattr(models, self.swagger_types['label']):
+                nested_class = getattr(models, self.swagger_types['label'])
+                if isinstance(label, nested_class):
+                    self.label = label
+                elif isinstance(label, dict):
+                    self.label = nested_class.from_kwargs(**label)
+                else:
+                    self.label = label
+            else:
+                self.label = label
         if link_url is not None:
-            self.link_url = link_url
+            if hasattr(models, self.swagger_types['link_url']):
+                nested_class = getattr(models, self.swagger_types['link_url'])
+                if isinstance(link_url, nested_class):
+                    self.link_url = link_url
+                elif isinstance(link_url, dict):
+                    self.link_url = nested_class.from_kwargs(**link_url)
+                else:
+                    self.link_url = link_url
+            else:
+                self.link_url = link_url
         if logo_url is not None:
-            self.logo_url = logo_url
+            if hasattr(models, self.swagger_types['logo_url']):
+                nested_class = getattr(models, self.swagger_types['logo_url'])
+                if isinstance(logo_url, nested_class):
+                    self.logo_url = logo_url
+                elif isinstance(logo_url, dict):
+                    self.logo_url = nested_class.from_kwargs(**logo_url)
+                else:
+                    self.logo_url = logo_url
+            else:
+                self.logo_url = logo_url
         if sort_order is not None:
-            self.sort_order = sort_order
+            if hasattr(models, self.swagger_types['sort_order']):
+                nested_class = getattr(models, self.swagger_types['sort_order'])
+                if isinstance(sort_order, nested_class):
+                    self.sort_order = sort_order
+                elif isinstance(sort_order, dict):
+                    self.sort_order = nested_class.from_kwargs(**sort_order)
+                else:
+                    self.sort_order = sort_order
+            else:
+                self.sort_order = sort_order
 
     @property
     def app_assignment_id(self):

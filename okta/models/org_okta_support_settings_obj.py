@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class OrgOktaSupportSettingsObj(object):
@@ -29,11 +30,10 @@ class OrgOktaSupportSettingsObj(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'links': 'dict(str, object)',
-        'expiration': 'datetime',
-        'support': 'OrgOktaSupportSetting'
-    }
+    swagger_types = {}
+    swagger_types['links'] = 'dict(str, object)'
+    swagger_types['expiration'] = 'datetime'
+    swagger_types['support'] = 'OrgOktaSupportSetting'
 
     attribute_map = {
         'links': '_links',
@@ -52,18 +52,45 @@ class OrgOktaSupportSettingsObj(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, links=None, expiration=None, support=None):  # noqa: E501
+    def set_attributes(self, links=None, expiration=None, support=None, **kwargs):  # noqa: E501
         """OrgOktaSupportSettingsObj - a model defined in Swagger"""  # noqa: E501
         self._links = None
         self._expiration = None
         self._support = None
         self.discriminator = None
         if links is not None:
-            self.links = links
+            if hasattr(models, self.swagger_types['links']):
+                nested_class = getattr(models, self.swagger_types['links'])
+                if isinstance(links, nested_class):
+                    self.links = links
+                elif isinstance(links, dict):
+                    self.links = nested_class.from_kwargs(**links)
+                else:
+                    self.links = links
+            else:
+                self.links = links
         if expiration is not None:
-            self.expiration = expiration
+            if hasattr(models, self.swagger_types['expiration']):
+                nested_class = getattr(models, self.swagger_types['expiration'])
+                if isinstance(expiration, nested_class):
+                    self.expiration = expiration
+                elif isinstance(expiration, dict):
+                    self.expiration = nested_class.from_kwargs(**expiration)
+                else:
+                    self.expiration = expiration
+            else:
+                self.expiration = expiration
         if support is not None:
-            self.support = support
+            if hasattr(models, self.swagger_types['support']):
+                nested_class = getattr(models, self.swagger_types['support'])
+                if isinstance(support, nested_class):
+                    self.support = support
+                elif isinstance(support, dict):
+                    self.support = nested_class.from_kwargs(**support)
+                else:
+                    self.support = support
+            else:
+                self.support = support
 
     @property
     def links(self):

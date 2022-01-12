@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class PasswordPolicySettings(object):
@@ -29,11 +30,10 @@ class PasswordPolicySettings(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'delegation': 'PasswordPolicyDelegationSettings',
-        'password': 'PasswordPolicyPasswordSettings',
-        'recovery': 'PasswordPolicyRecoverySettings'
-    }
+    swagger_types = {}
+    swagger_types['delegation'] = 'PasswordPolicyDelegationSettings'
+    swagger_types['password'] = 'PasswordPolicyPasswordSettings'
+    swagger_types['recovery'] = 'PasswordPolicyRecoverySettings'
 
     attribute_map = {
         'delegation': 'delegation',
@@ -52,18 +52,45 @@ class PasswordPolicySettings(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, delegation=None, password=None, recovery=None):  # noqa: E501
+    def set_attributes(self, delegation=None, password=None, recovery=None, **kwargs):  # noqa: E501
         """PasswordPolicySettings - a model defined in Swagger"""  # noqa: E501
         self._delegation = None
         self._password = None
         self._recovery = None
         self.discriminator = None
         if delegation is not None:
-            self.delegation = delegation
+            if hasattr(models, self.swagger_types['delegation']):
+                nested_class = getattr(models, self.swagger_types['delegation'])
+                if isinstance(delegation, nested_class):
+                    self.delegation = delegation
+                elif isinstance(delegation, dict):
+                    self.delegation = nested_class.from_kwargs(**delegation)
+                else:
+                    self.delegation = delegation
+            else:
+                self.delegation = delegation
         if password is not None:
-            self.password = password
+            if hasattr(models, self.swagger_types['password']):
+                nested_class = getattr(models, self.swagger_types['password'])
+                if isinstance(password, nested_class):
+                    self.password = password
+                elif isinstance(password, dict):
+                    self.password = nested_class.from_kwargs(**password)
+                else:
+                    self.password = password
+            else:
+                self.password = password
         if recovery is not None:
-            self.recovery = recovery
+            if hasattr(models, self.swagger_types['recovery']):
+                nested_class = getattr(models, self.swagger_types['recovery'])
+                if isinstance(recovery, nested_class):
+                    self.recovery = recovery
+                elif isinstance(recovery, dict):
+                    self.recovery = nested_class.from_kwargs(**recovery)
+                else:
+                    self.recovery = recovery
+            else:
+                self.recovery = recovery
 
     @property
     def delegation(self):

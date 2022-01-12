@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class RiskScorePolicyRuleCondition(object):
@@ -29,9 +30,8 @@ class RiskScorePolicyRuleCondition(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'level': 'str'
-    }
+    swagger_types = {}
+    swagger_types['level'] = 'str'
 
     attribute_map = {
         'level': 'level'
@@ -48,12 +48,21 @@ class RiskScorePolicyRuleCondition(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, level=None):  # noqa: E501
+    def set_attributes(self, level=None, **kwargs):  # noqa: E501
         """RiskScorePolicyRuleCondition - a model defined in Swagger"""  # noqa: E501
         self._level = None
         self.discriminator = None
         if level is not None:
-            self.level = level
+            if hasattr(models, self.swagger_types['level']):
+                nested_class = getattr(models, self.swagger_types['level'])
+                if isinstance(level, nested_class):
+                    self.level = level
+                elif isinstance(level, dict):
+                    self.level = nested_class.from_kwargs(**level)
+                else:
+                    self.level = level
+            else:
+                self.level = level
 
     @property
     def level(self):

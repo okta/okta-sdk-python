@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class GroupRuleConditions(object):
@@ -29,10 +30,9 @@ class GroupRuleConditions(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'expression': 'GroupRuleExpression',
-        'people': 'GroupRulePeopleCondition'
-    }
+    swagger_types = {}
+    swagger_types['expression'] = 'GroupRuleExpression'
+    swagger_types['people'] = 'GroupRulePeopleCondition'
 
     attribute_map = {
         'expression': 'expression',
@@ -50,15 +50,33 @@ class GroupRuleConditions(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, expression=None, people=None):  # noqa: E501
+    def set_attributes(self, expression=None, people=None, **kwargs):  # noqa: E501
         """GroupRuleConditions - a model defined in Swagger"""  # noqa: E501
         self._expression = None
         self._people = None
         self.discriminator = None
         if expression is not None:
-            self.expression = expression
+            if hasattr(models, self.swagger_types['expression']):
+                nested_class = getattr(models, self.swagger_types['expression'])
+                if isinstance(expression, nested_class):
+                    self.expression = expression
+                elif isinstance(expression, dict):
+                    self.expression = nested_class.from_kwargs(**expression)
+                else:
+                    self.expression = expression
+            else:
+                self.expression = expression
         if people is not None:
-            self.people = people
+            if hasattr(models, self.swagger_types['people']):
+                nested_class = getattr(models, self.swagger_types['people'])
+                if isinstance(people, nested_class):
+                    self.people = people
+                elif isinstance(people, dict):
+                    self.people = nested_class.from_kwargs(**people)
+                else:
+                    self.people = people
+            else:
+                self.people = people
 
     @property
     def expression(self):

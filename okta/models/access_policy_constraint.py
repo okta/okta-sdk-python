@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class AccessPolicyConstraint(object):
@@ -29,11 +30,10 @@ class AccessPolicyConstraint(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'methods': 'list[str]',
-        'reauthenticate_in': 'str',
-        'types': 'list[str]'
-    }
+    swagger_types = {}
+    swagger_types['methods'] = 'list[str]'
+    swagger_types['reauthenticate_in'] = 'str'
+    swagger_types['types'] = 'list[str]'
 
     attribute_map = {
         'methods': 'methods',
@@ -52,18 +52,45 @@ class AccessPolicyConstraint(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, methods=None, reauthenticate_in=None, types=None):  # noqa: E501
+    def set_attributes(self, methods=None, reauthenticate_in=None, types=None, **kwargs):  # noqa: E501
         """AccessPolicyConstraint - a model defined in Swagger"""  # noqa: E501
         self._methods = None
         self._reauthenticate_in = None
         self._types = None
         self.discriminator = None
         if methods is not None:
-            self.methods = methods
+            if hasattr(models, self.swagger_types['methods']):
+                nested_class = getattr(models, self.swagger_types['methods'])
+                if isinstance(methods, nested_class):
+                    self.methods = methods
+                elif isinstance(methods, dict):
+                    self.methods = nested_class.from_kwargs(**methods)
+                else:
+                    self.methods = methods
+            else:
+                self.methods = methods
         if reauthenticate_in is not None:
-            self.reauthenticate_in = reauthenticate_in
+            if hasattr(models, self.swagger_types['reauthenticate_in']):
+                nested_class = getattr(models, self.swagger_types['reauthenticate_in'])
+                if isinstance(reauthenticate_in, nested_class):
+                    self.reauthenticate_in = reauthenticate_in
+                elif isinstance(reauthenticate_in, dict):
+                    self.reauthenticate_in = nested_class.from_kwargs(**reauthenticate_in)
+                else:
+                    self.reauthenticate_in = reauthenticate_in
+            else:
+                self.reauthenticate_in = reauthenticate_in
         if types is not None:
-            self.types = types
+            if hasattr(models, self.swagger_types['types']):
+                nested_class = getattr(models, self.swagger_types['types'])
+                if isinstance(types, nested_class):
+                    self.types = types
+                elif isinstance(types, dict):
+                    self.types = nested_class.from_kwargs(**types)
+                else:
+                    self.types = types
+            else:
+                self.types = types
 
     @property
     def methods(self):

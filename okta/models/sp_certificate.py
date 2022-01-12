@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class SpCertificate(object):
@@ -29,9 +30,8 @@ class SpCertificate(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'x5c': 'list[str]'
-    }
+    swagger_types = {}
+    swagger_types['x5c'] = 'list[str]'
 
     attribute_map = {
         'x5c': 'x5c'
@@ -48,12 +48,21 @@ class SpCertificate(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, x5c=None):  # noqa: E501
+    def set_attributes(self, x5c=None, **kwargs):  # noqa: E501
         """SpCertificate - a model defined in Swagger"""  # noqa: E501
         self._x5c = None
         self.discriminator = None
         if x5c is not None:
-            self.x5c = x5c
+            if hasattr(models, self.swagger_types['x5c']):
+                nested_class = getattr(models, self.swagger_types['x5c'])
+                if isinstance(x5c, nested_class):
+                    self.x5c = x5c
+                elif isinstance(x5c, dict):
+                    self.x5c = nested_class.from_kwargs(**x5c)
+                else:
+                    self.x5c = x5c
+            else:
+                self.x5c = x5c
 
     @property
     def x5c(self):

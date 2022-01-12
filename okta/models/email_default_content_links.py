@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class EmailDefaultContentLinks(object):
@@ -29,11 +30,10 @@ class EmailDefaultContentLinks(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        '_self': 'HrefObject',
-        'template': 'HrefObject',
-        'preview': 'HrefObject'
-    }
+    swagger_types = {}
+    swagger_types['_self'] = 'HrefObject'
+    swagger_types['template'] = 'HrefObject'
+    swagger_types['preview'] = 'HrefObject'
 
     attribute_map = {
         '_self': 'self',
@@ -52,18 +52,45 @@ class EmailDefaultContentLinks(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, _self=None, template=None, preview=None):  # noqa: E501
+    def set_attributes(self, _self=None, template=None, preview=None, **kwargs):  # noqa: E501
         """EmailDefaultContentLinks - a model defined in Swagger"""  # noqa: E501
         self.__self = None
         self._template = None
         self._preview = None
         self.discriminator = None
         if _self is not None:
-            self._self = _self
+            if hasattr(models, self.swagger_types['_self']):
+                nested_class = getattr(models, self.swagger_types['_self'])
+                if isinstance(_self, nested_class):
+                    self._self = _self
+                elif isinstance(_self, dict):
+                    self._self = nested_class.from_kwargs(**_self)
+                else:
+                    self._self = _self
+            else:
+                self._self = _self
         if template is not None:
-            self.template = template
+            if hasattr(models, self.swagger_types['template']):
+                nested_class = getattr(models, self.swagger_types['template'])
+                if isinstance(template, nested_class):
+                    self.template = template
+                elif isinstance(template, dict):
+                    self.template = nested_class.from_kwargs(**template)
+                else:
+                    self.template = template
+            else:
+                self.template = template
         if preview is not None:
-            self.preview = preview
+            if hasattr(models, self.swagger_types['preview']):
+                nested_class = getattr(models, self.swagger_types['preview'])
+                if isinstance(preview, nested_class):
+                    self.preview = preview
+                elif isinstance(preview, dict):
+                    self.preview = nested_class.from_kwargs(**preview)
+                else:
+                    self.preview = preview
+            else:
+                self.preview = preview
 
     @property
     def _self(self):

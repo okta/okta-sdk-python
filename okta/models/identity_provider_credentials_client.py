@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class IdentityProviderCredentialsClient(object):
@@ -29,10 +30,9 @@ class IdentityProviderCredentialsClient(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'client_id': 'str',
-        'client_secret': 'str'
-    }
+    swagger_types = {}
+    swagger_types['client_id'] = 'str'
+    swagger_types['client_secret'] = 'str'
 
     attribute_map = {
         'client_id': 'client_id',
@@ -50,15 +50,33 @@ class IdentityProviderCredentialsClient(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, client_id=None, client_secret=None):  # noqa: E501
+    def set_attributes(self, client_id=None, client_secret=None, **kwargs):  # noqa: E501
         """IdentityProviderCredentialsClient - a model defined in Swagger"""  # noqa: E501
         self._client_id = None
         self._client_secret = None
         self.discriminator = None
         if client_id is not None:
-            self.client_id = client_id
+            if hasattr(models, self.swagger_types['client_id']):
+                nested_class = getattr(models, self.swagger_types['client_id'])
+                if isinstance(client_id, nested_class):
+                    self.client_id = client_id
+                elif isinstance(client_id, dict):
+                    self.client_id = nested_class.from_kwargs(**client_id)
+                else:
+                    self.client_id = client_id
+            else:
+                self.client_id = client_id
         if client_secret is not None:
-            self.client_secret = client_secret
+            if hasattr(models, self.swagger_types['client_secret']):
+                nested_class = getattr(models, self.swagger_types['client_secret'])
+                if isinstance(client_secret, nested_class):
+                    self.client_secret = client_secret
+                elif isinstance(client_secret, dict):
+                    self.client_secret = nested_class.from_kwargs(**client_secret)
+                else:
+                    self.client_secret = client_secret
+            else:
+                self.client_secret = client_secret
 
     @property
     def client_id(self):

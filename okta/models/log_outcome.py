@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class LogOutcome(object):
@@ -29,10 +30,9 @@ class LogOutcome(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'reason': 'str',
-        'result': 'str'
-    }
+    swagger_types = {}
+    swagger_types['reason'] = 'str'
+    swagger_types['result'] = 'str'
 
     attribute_map = {
         'reason': 'reason',
@@ -50,15 +50,33 @@ class LogOutcome(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, reason=None, result=None):  # noqa: E501
+    def set_attributes(self, reason=None, result=None, **kwargs):  # noqa: E501
         """LogOutcome - a model defined in Swagger"""  # noqa: E501
         self._reason = None
         self._result = None
         self.discriminator = None
         if reason is not None:
-            self.reason = reason
+            if hasattr(models, self.swagger_types['reason']):
+                nested_class = getattr(models, self.swagger_types['reason'])
+                if isinstance(reason, nested_class):
+                    self.reason = reason
+                elif isinstance(reason, dict):
+                    self.reason = nested_class.from_kwargs(**reason)
+                else:
+                    self.reason = reason
+            else:
+                self.reason = reason
         if result is not None:
-            self.result = result
+            if hasattr(models, self.swagger_types['result']):
+                nested_class = getattr(models, self.swagger_types['result'])
+                if isinstance(result, nested_class):
+                    self.result = result
+                elif isinstance(result, dict):
+                    self.result = nested_class.from_kwargs(**result)
+                else:
+                    self.result = result
+            else:
+                self.result = result
 
     @property
     def reason(self):

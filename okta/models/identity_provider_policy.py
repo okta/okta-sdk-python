@@ -16,6 +16,7 @@ import re  # noqa: F401
 import six
 from okta.models.policy import Policy  # noqa: F401,E501
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class IdentityProviderPolicy(Policy):
@@ -30,14 +31,13 @@ class IdentityProviderPolicy(Policy):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'account_link': 'PolicyAccountLink',
-        'max_clock_skew': 'int',
-        'provisioning': 'Provisioning',
-        'subject': 'PolicySubject'
-    }
+    swagger_types = {}
     if hasattr(Policy, "swagger_types"):
         swagger_types.update(Policy.swagger_types)
+    swagger_types['account_link'] = 'PolicyAccountLink'
+    swagger_types['max_clock_skew'] = 'int'
+    swagger_types['provisioning'] = 'Provisioning'
+    swagger_types['subject'] = 'PolicySubject'
 
     attribute_map = {
         'account_link': 'accountLink',
@@ -59,22 +59,61 @@ class IdentityProviderPolicy(Policy):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, account_link=None, max_clock_skew=None, provisioning=None, subject=None, *args, **kwargs):  # noqa: E501
+    def set_attributes(self, account_link=None, max_clock_skew=None, provisioning=None, subject=None, **kwargs):  # noqa: E501
         """IdentityProviderPolicy - a model defined in Swagger"""  # noqa: E501
+        config = {}
+        if kwargs is not None:
+            config = {to_snake_case(key): value for key, value in kwargs.items()}
+        super().set_attributes(**config)
         self._account_link = None
         self._max_clock_skew = None
         self._provisioning = None
         self._subject = None
         self.discriminator = None
         if account_link is not None:
-            self.account_link = account_link
+            if hasattr(models, self.swagger_types['account_link']):
+                nested_class = getattr(models, self.swagger_types['account_link'])
+                if isinstance(account_link, nested_class):
+                    self.account_link = account_link
+                elif isinstance(account_link, dict):
+                    self.account_link = nested_class.from_kwargs(**account_link)
+                else:
+                    self.account_link = account_link
+            else:
+                self.account_link = account_link
         if max_clock_skew is not None:
-            self.max_clock_skew = max_clock_skew
+            if hasattr(models, self.swagger_types['max_clock_skew']):
+                nested_class = getattr(models, self.swagger_types['max_clock_skew'])
+                if isinstance(max_clock_skew, nested_class):
+                    self.max_clock_skew = max_clock_skew
+                elif isinstance(max_clock_skew, dict):
+                    self.max_clock_skew = nested_class.from_kwargs(**max_clock_skew)
+                else:
+                    self.max_clock_skew = max_clock_skew
+            else:
+                self.max_clock_skew = max_clock_skew
         if provisioning is not None:
-            self.provisioning = provisioning
+            if hasattr(models, self.swagger_types['provisioning']):
+                nested_class = getattr(models, self.swagger_types['provisioning'])
+                if isinstance(provisioning, nested_class):
+                    self.provisioning = provisioning
+                elif isinstance(provisioning, dict):
+                    self.provisioning = nested_class.from_kwargs(**provisioning)
+                else:
+                    self.provisioning = provisioning
+            else:
+                self.provisioning = provisioning
         if subject is not None:
-            self.subject = subject
-        super().set_attributes(*args, **kwargs)
+            if hasattr(models, self.swagger_types['subject']):
+                nested_class = getattr(models, self.swagger_types['subject'])
+                if isinstance(subject, nested_class):
+                    self.subject = subject
+                elif isinstance(subject, dict):
+                    self.subject = nested_class.from_kwargs(**subject)
+                else:
+                    self.subject = subject
+            else:
+                self.subject = subject
 
     @property
     def account_link(self):

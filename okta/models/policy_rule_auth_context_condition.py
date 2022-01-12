@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class PolicyRuleAuthContextCondition(object):
@@ -29,9 +30,8 @@ class PolicyRuleAuthContextCondition(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'auth_type': 'PolicyRuleAuthContextType'
-    }
+    swagger_types = {}
+    swagger_types['auth_type'] = 'PolicyRuleAuthContextType'
 
     attribute_map = {
         'auth_type': 'authType'
@@ -48,12 +48,21 @@ class PolicyRuleAuthContextCondition(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, auth_type=None):  # noqa: E501
+    def set_attributes(self, auth_type=None, **kwargs):  # noqa: E501
         """PolicyRuleAuthContextCondition - a model defined in Swagger"""  # noqa: E501
         self._auth_type = None
         self.discriminator = None
         if auth_type is not None:
-            self.auth_type = auth_type
+            if hasattr(models, self.swagger_types['auth_type']):
+                nested_class = getattr(models, self.swagger_types['auth_type'])
+                if isinstance(auth_type, nested_class):
+                    self.auth_type = auth_type
+                elif isinstance(auth_type, dict):
+                    self.auth_type = nested_class.from_kwargs(**auth_type)
+                else:
+                    self.auth_type = auth_type
+            else:
+                self.auth_type = auth_type
 
     @property
     def auth_type(self):

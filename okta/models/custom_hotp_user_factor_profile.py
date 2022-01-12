@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class CustomHotpUserFactorProfile(object):
@@ -29,9 +30,8 @@ class CustomHotpUserFactorProfile(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'shared_secret': 'str'
-    }
+    swagger_types = {}
+    swagger_types['shared_secret'] = 'str'
 
     attribute_map = {
         'shared_secret': 'sharedSecret'
@@ -48,12 +48,21 @@ class CustomHotpUserFactorProfile(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, shared_secret=None):  # noqa: E501
+    def set_attributes(self, shared_secret=None, **kwargs):  # noqa: E501
         """CustomHotpUserFactorProfile - a model defined in Swagger"""  # noqa: E501
         self._shared_secret = None
         self.discriminator = None
         if shared_secret is not None:
-            self.shared_secret = shared_secret
+            if hasattr(models, self.swagger_types['shared_secret']):
+                nested_class = getattr(models, self.swagger_types['shared_secret'])
+                if isinstance(shared_secret, nested_class):
+                    self.shared_secret = shared_secret
+                elif isinstance(shared_secret, dict):
+                    self.shared_secret = nested_class.from_kwargs(**shared_secret)
+                else:
+                    self.shared_secret = shared_secret
+            else:
+                self.shared_secret = shared_secret
 
     @property
     def shared_secret(self):

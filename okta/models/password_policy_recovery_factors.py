@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class PasswordPolicyRecoveryFactors(object):
@@ -29,12 +30,11 @@ class PasswordPolicyRecoveryFactors(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'okta_call': 'PasswordPolicyRecoveryFactorSettings',
-        'okta_email': 'PasswordPolicyRecoveryEmail',
-        'okta_sms': 'PasswordPolicyRecoveryFactorSettings',
-        'recovery_question': 'PasswordPolicyRecoveryQuestion'
-    }
+    swagger_types = {}
+    swagger_types['okta_call'] = 'PasswordPolicyRecoveryFactorSettings'
+    swagger_types['okta_email'] = 'PasswordPolicyRecoveryEmail'
+    swagger_types['okta_sms'] = 'PasswordPolicyRecoveryFactorSettings'
+    swagger_types['recovery_question'] = 'PasswordPolicyRecoveryQuestion'
 
     attribute_map = {
         'okta_call': 'okta_call',
@@ -54,7 +54,7 @@ class PasswordPolicyRecoveryFactors(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, okta_call=None, okta_email=None, okta_sms=None, recovery_question=None):  # noqa: E501
+    def set_attributes(self, okta_call=None, okta_email=None, okta_sms=None, recovery_question=None, **kwargs):  # noqa: E501
         """PasswordPolicyRecoveryFactors - a model defined in Swagger"""  # noqa: E501
         self._okta_call = None
         self._okta_email = None
@@ -62,13 +62,49 @@ class PasswordPolicyRecoveryFactors(object):
         self._recovery_question = None
         self.discriminator = None
         if okta_call is not None:
-            self.okta_call = okta_call
+            if hasattr(models, self.swagger_types['okta_call']):
+                nested_class = getattr(models, self.swagger_types['okta_call'])
+                if isinstance(okta_call, nested_class):
+                    self.okta_call = okta_call
+                elif isinstance(okta_call, dict):
+                    self.okta_call = nested_class.from_kwargs(**okta_call)
+                else:
+                    self.okta_call = okta_call
+            else:
+                self.okta_call = okta_call
         if okta_email is not None:
-            self.okta_email = okta_email
+            if hasattr(models, self.swagger_types['okta_email']):
+                nested_class = getattr(models, self.swagger_types['okta_email'])
+                if isinstance(okta_email, nested_class):
+                    self.okta_email = okta_email
+                elif isinstance(okta_email, dict):
+                    self.okta_email = nested_class.from_kwargs(**okta_email)
+                else:
+                    self.okta_email = okta_email
+            else:
+                self.okta_email = okta_email
         if okta_sms is not None:
-            self.okta_sms = okta_sms
+            if hasattr(models, self.swagger_types['okta_sms']):
+                nested_class = getattr(models, self.swagger_types['okta_sms'])
+                if isinstance(okta_sms, nested_class):
+                    self.okta_sms = okta_sms
+                elif isinstance(okta_sms, dict):
+                    self.okta_sms = nested_class.from_kwargs(**okta_sms)
+                else:
+                    self.okta_sms = okta_sms
+            else:
+                self.okta_sms = okta_sms
         if recovery_question is not None:
-            self.recovery_question = recovery_question
+            if hasattr(models, self.swagger_types['recovery_question']):
+                nested_class = getattr(models, self.swagger_types['recovery_question'])
+                if isinstance(recovery_question, nested_class):
+                    self.recovery_question = recovery_question
+                elif isinstance(recovery_question, dict):
+                    self.recovery_question = nested_class.from_kwargs(**recovery_question)
+                else:
+                    self.recovery_question = recovery_question
+            else:
+                self.recovery_question = recovery_question
 
     @property
     def okta_call(self):

@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class DomainLinks(object):
@@ -29,11 +30,10 @@ class DomainLinks(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'certificate': 'object',
-        '_self': 'object',
-        'verify': 'object'
-    }
+    swagger_types = {}
+    swagger_types['certificate'] = 'object'
+    swagger_types['_self'] = 'object'
+    swagger_types['verify'] = 'object'
 
     attribute_map = {
         'certificate': 'certificate',
@@ -52,18 +52,45 @@ class DomainLinks(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, certificate=None, _self=None, verify=None):  # noqa: E501
+    def set_attributes(self, certificate=None, _self=None, verify=None, **kwargs):  # noqa: E501
         """DomainLinks - a model defined in Swagger"""  # noqa: E501
         self._certificate = None
         self.__self = None
         self._verify = None
         self.discriminator = None
         if certificate is not None:
-            self.certificate = certificate
+            if hasattr(models, self.swagger_types['certificate']):
+                nested_class = getattr(models, self.swagger_types['certificate'])
+                if isinstance(certificate, nested_class):
+                    self.certificate = certificate
+                elif isinstance(certificate, dict):
+                    self.certificate = nested_class.from_kwargs(**certificate)
+                else:
+                    self.certificate = certificate
+            else:
+                self.certificate = certificate
         if _self is not None:
-            self._self = _self
+            if hasattr(models, self.swagger_types['_self']):
+                nested_class = getattr(models, self.swagger_types['_self'])
+                if isinstance(_self, nested_class):
+                    self._self = _self
+                elif isinstance(_self, dict):
+                    self._self = nested_class.from_kwargs(**_self)
+                else:
+                    self._self = _self
+            else:
+                self._self = _self
         if verify is not None:
-            self.verify = verify
+            if hasattr(models, self.swagger_types['verify']):
+                nested_class = getattr(models, self.swagger_types['verify'])
+                if isinstance(verify, nested_class):
+                    self.verify = verify
+                elif isinstance(verify, dict):
+                    self.verify = nested_class.from_kwargs(**verify)
+                else:
+                    self.verify = verify
+            else:
+                self.verify = verify
 
     @property
     def certificate(self):

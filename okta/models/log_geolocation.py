@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class LogGeolocation(object):
@@ -29,10 +30,9 @@ class LogGeolocation(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'lat': 'float',
-        'lon': 'float'
-    }
+    swagger_types = {}
+    swagger_types['lat'] = 'float'
+    swagger_types['lon'] = 'float'
 
     attribute_map = {
         'lat': 'lat',
@@ -50,15 +50,33 @@ class LogGeolocation(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, lat=None, lon=None):  # noqa: E501
+    def set_attributes(self, lat=None, lon=None, **kwargs):  # noqa: E501
         """LogGeolocation - a model defined in Swagger"""  # noqa: E501
         self._lat = None
         self._lon = None
         self.discriminator = None
         if lat is not None:
-            self.lat = lat
+            if hasattr(models, self.swagger_types['lat']):
+                nested_class = getattr(models, self.swagger_types['lat'])
+                if isinstance(lat, nested_class):
+                    self.lat = lat
+                elif isinstance(lat, dict):
+                    self.lat = nested_class.from_kwargs(**lat)
+                else:
+                    self.lat = lat
+            else:
+                self.lat = lat
         if lon is not None:
-            self.lon = lon
+            if hasattr(models, self.swagger_types['lon']):
+                nested_class = getattr(models, self.swagger_types['lon'])
+                if isinstance(lon, nested_class):
+                    self.lon = lon
+                elif isinstance(lon, dict):
+                    self.lon = nested_class.from_kwargs(**lon)
+                else:
+                    self.lon = lon
+            else:
+                self.lon = lon
 
     @property
     def lat(self):

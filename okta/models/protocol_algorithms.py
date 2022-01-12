@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class ProtocolAlgorithms(object):
@@ -29,10 +30,9 @@ class ProtocolAlgorithms(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'request': 'ProtocolAlgorithmType',
-        'response': 'ProtocolAlgorithmType'
-    }
+    swagger_types = {}
+    swagger_types['request'] = 'ProtocolAlgorithmType'
+    swagger_types['response'] = 'ProtocolAlgorithmType'
 
     attribute_map = {
         'request': 'request',
@@ -50,15 +50,33 @@ class ProtocolAlgorithms(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, request=None, response=None):  # noqa: E501
+    def set_attributes(self, request=None, response=None, **kwargs):  # noqa: E501
         """ProtocolAlgorithms - a model defined in Swagger"""  # noqa: E501
         self._request = None
         self._response = None
         self.discriminator = None
         if request is not None:
-            self.request = request
+            if hasattr(models, self.swagger_types['request']):
+                nested_class = getattr(models, self.swagger_types['request'])
+                if isinstance(request, nested_class):
+                    self.request = request
+                elif isinstance(request, dict):
+                    self.request = nested_class.from_kwargs(**request)
+                else:
+                    self.request = request
+            else:
+                self.request = request
         if response is not None:
-            self.response = response
+            if hasattr(models, self.swagger_types['response']):
+                nested_class = getattr(models, self.swagger_types['response'])
+                if isinstance(response, nested_class):
+                    self.response = response
+                elif isinstance(response, dict):
+                    self.response = nested_class.from_kwargs(**response)
+                else:
+                    self.response = response
+            else:
+                self.response = response
 
     @property
     def request(self):

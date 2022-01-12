@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class AppAndInstanceType(object):
@@ -35,8 +36,7 @@ class AppAndInstanceType(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-    }
+    swagger_types = {}
 
     attribute_map = {
     }
@@ -52,7 +52,7 @@ class AppAndInstanceType(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self):  # noqa: E501
+    def set_attributes(self, **kwargs):  # noqa: E501
         """AppAndInstanceType - a model defined in Swagger"""  # noqa: E501
         self.discriminator = None
 

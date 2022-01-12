@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class ProfileMapping(object):
@@ -29,13 +30,12 @@ class ProfileMapping(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'links': 'dict(str, object)',
-        'id': 'str',
-        'properties': 'dict(str, ProfileMappingProperty)',
-        'source': 'ProfileMappingSource',
-        'target': 'ProfileMappingSource'
-    }
+    swagger_types = {}
+    swagger_types['links'] = 'dict(str, object)'
+    swagger_types['id'] = 'str'
+    swagger_types['properties'] = 'dict(str, ProfileMappingProperty)'
+    swagger_types['source'] = 'ProfileMappingSource'
+    swagger_types['target'] = 'ProfileMappingSource'
 
     attribute_map = {
         'links': '_links',
@@ -56,7 +56,7 @@ class ProfileMapping(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, links=None, id=None, properties=None, source=None, target=None):  # noqa: E501
+    def set_attributes(self, links=None, id=None, properties=None, source=None, target=None, **kwargs):  # noqa: E501
         """ProfileMapping - a model defined in Swagger"""  # noqa: E501
         self._links = None
         self._id = None
@@ -65,15 +65,60 @@ class ProfileMapping(object):
         self._target = None
         self.discriminator = None
         if links is not None:
-            self.links = links
+            if hasattr(models, self.swagger_types['links']):
+                nested_class = getattr(models, self.swagger_types['links'])
+                if isinstance(links, nested_class):
+                    self.links = links
+                elif isinstance(links, dict):
+                    self.links = nested_class.from_kwargs(**links)
+                else:
+                    self.links = links
+            else:
+                self.links = links
         if id is not None:
-            self.id = id
+            if hasattr(models, self.swagger_types['id']):
+                nested_class = getattr(models, self.swagger_types['id'])
+                if isinstance(id, nested_class):
+                    self.id = id
+                elif isinstance(id, dict):
+                    self.id = nested_class.from_kwargs(**id)
+                else:
+                    self.id = id
+            else:
+                self.id = id
         if properties is not None:
-            self.properties = properties
+            if hasattr(models, self.swagger_types['properties']):
+                nested_class = getattr(models, self.swagger_types['properties'])
+                if isinstance(properties, nested_class):
+                    self.properties = properties
+                elif isinstance(properties, dict):
+                    self.properties = nested_class.from_kwargs(**properties)
+                else:
+                    self.properties = properties
+            else:
+                self.properties = properties
         if source is not None:
-            self.source = source
+            if hasattr(models, self.swagger_types['source']):
+                nested_class = getattr(models, self.swagger_types['source'])
+                if isinstance(source, nested_class):
+                    self.source = source
+                elif isinstance(source, dict):
+                    self.source = nested_class.from_kwargs(**source)
+                else:
+                    self.source = source
+            else:
+                self.source = source
         if target is not None:
-            self.target = target
+            if hasattr(models, self.swagger_types['target']):
+                nested_class = getattr(models, self.swagger_types['target'])
+                if isinstance(target, nested_class):
+                    self.target = target
+                elif isinstance(target, dict):
+                    self.target = nested_class.from_kwargs(**target)
+                else:
+                    self.target = target
+            else:
+                self.target = target
 
     @property
     def links(self):

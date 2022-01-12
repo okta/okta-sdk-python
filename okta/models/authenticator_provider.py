@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class AuthenticatorProvider(object):
@@ -29,10 +30,9 @@ class AuthenticatorProvider(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'configuration': 'AuthenticatorProviderConfiguration',
-        'type': 'str'
-    }
+    swagger_types = {}
+    swagger_types['configuration'] = 'AuthenticatorProviderConfiguration'
+    swagger_types['type'] = 'str'
 
     attribute_map = {
         'configuration': 'configuration',
@@ -50,15 +50,33 @@ class AuthenticatorProvider(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, configuration=None, type=None):  # noqa: E501
+    def set_attributes(self, configuration=None, type=None, **kwargs):  # noqa: E501
         """AuthenticatorProvider - a model defined in Swagger"""  # noqa: E501
         self._configuration = None
         self._type = None
         self.discriminator = None
         if configuration is not None:
-            self.configuration = configuration
+            if hasattr(models, self.swagger_types['configuration']):
+                nested_class = getattr(models, self.swagger_types['configuration'])
+                if isinstance(configuration, nested_class):
+                    self.configuration = configuration
+                elif isinstance(configuration, dict):
+                    self.configuration = nested_class.from_kwargs(**configuration)
+                else:
+                    self.configuration = configuration
+            else:
+                self.configuration = configuration
         if type is not None:
-            self.type = type
+            if hasattr(models, self.swagger_types['type']):
+                nested_class = getattr(models, self.swagger_types['type'])
+                if isinstance(type, nested_class):
+                    self.type = type
+                elif isinstance(type, dict):
+                    self.type = nested_class.from_kwargs(**type)
+                else:
+                    self.type = type
+            else:
+                self.type = type
 
     @property
     def configuration(self):

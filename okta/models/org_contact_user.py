@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class OrgContactUser(object):
@@ -29,10 +30,9 @@ class OrgContactUser(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'links': 'dict(str, object)',
-        'user_id': 'str'
-    }
+    swagger_types = {}
+    swagger_types['links'] = 'dict(str, object)'
+    swagger_types['user_id'] = 'str'
 
     attribute_map = {
         'links': '_links',
@@ -50,15 +50,33 @@ class OrgContactUser(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, links=None, user_id=None):  # noqa: E501
+    def set_attributes(self, links=None, user_id=None, **kwargs):  # noqa: E501
         """OrgContactUser - a model defined in Swagger"""  # noqa: E501
         self._links = None
         self._user_id = None
         self.discriminator = None
         if links is not None:
-            self.links = links
+            if hasattr(models, self.swagger_types['links']):
+                nested_class = getattr(models, self.swagger_types['links'])
+                if isinstance(links, nested_class):
+                    self.links = links
+                elif isinstance(links, dict):
+                    self.links = nested_class.from_kwargs(**links)
+                else:
+                    self.links = links
+            else:
+                self.links = links
         if user_id is not None:
-            self.user_id = user_id
+            if hasattr(models, self.swagger_types['user_id']):
+                nested_class = getattr(models, self.swagger_types['user_id'])
+                if isinstance(user_id, nested_class):
+                    self.user_id = user_id
+                elif isinstance(user_id, dict):
+                    self.user_id = nested_class.from_kwargs(**user_id)
+                else:
+                    self.user_id = user_id
+            else:
+                self.user_id = user_id
 
     @property
     def links(self):

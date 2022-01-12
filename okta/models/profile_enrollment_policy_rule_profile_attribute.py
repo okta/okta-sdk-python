@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class ProfileEnrollmentPolicyRuleProfileAttribute(object):
@@ -29,11 +30,10 @@ class ProfileEnrollmentPolicyRuleProfileAttribute(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'label': 'str',
-        'name': 'str',
-        'required': 'bool'
-    }
+    swagger_types = {}
+    swagger_types['label'] = 'str'
+    swagger_types['name'] = 'str'
+    swagger_types['required'] = 'bool'
 
     attribute_map = {
         'label': 'label',
@@ -52,18 +52,45 @@ class ProfileEnrollmentPolicyRuleProfileAttribute(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, label=None, name=None, required=None):  # noqa: E501
+    def set_attributes(self, label=None, name=None, required=None, **kwargs):  # noqa: E501
         """ProfileEnrollmentPolicyRuleProfileAttribute - a model defined in Swagger"""  # noqa: E501
         self._label = None
         self._name = None
         self._required = None
         self.discriminator = None
         if label is not None:
-            self.label = label
+            if hasattr(models, self.swagger_types['label']):
+                nested_class = getattr(models, self.swagger_types['label'])
+                if isinstance(label, nested_class):
+                    self.label = label
+                elif isinstance(label, dict):
+                    self.label = nested_class.from_kwargs(**label)
+                else:
+                    self.label = label
+            else:
+                self.label = label
         if name is not None:
-            self.name = name
+            if hasattr(models, self.swagger_types['name']):
+                nested_class = getattr(models, self.swagger_types['name'])
+                if isinstance(name, nested_class):
+                    self.name = name
+                elif isinstance(name, dict):
+                    self.name = nested_class.from_kwargs(**name)
+                else:
+                    self.name = name
+            else:
+                self.name = name
         if required is not None:
-            self.required = required
+            if hasattr(models, self.swagger_types['required']):
+                nested_class = getattr(models, self.swagger_types['required'])
+                if isinstance(required, nested_class):
+                    self.required = required
+                elif isinstance(required, dict):
+                    self.required = nested_class.from_kwargs(**required)
+                else:
+                    self.required = required
+            else:
+                self.required = required
 
     @property
     def label(self):

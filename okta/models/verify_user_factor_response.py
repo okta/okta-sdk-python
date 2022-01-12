@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class VerifyUserFactorResponse(object):
@@ -29,13 +30,12 @@ class VerifyUserFactorResponse(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'embedded': 'dict(str, object)',
-        'links': 'dict(str, object)',
-        'expires_at': 'datetime',
-        'factor_result': 'VerifyUserFactorResult',
-        'factor_result_message': 'str'
-    }
+    swagger_types = {}
+    swagger_types['embedded'] = 'dict(str, object)'
+    swagger_types['links'] = 'dict(str, object)'
+    swagger_types['expires_at'] = 'datetime'
+    swagger_types['factor_result'] = 'VerifyUserFactorResult'
+    swagger_types['factor_result_message'] = 'str'
 
     attribute_map = {
         'embedded': '_embedded',
@@ -56,7 +56,7 @@ class VerifyUserFactorResponse(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, embedded=None, links=None, expires_at=None, factor_result=None, factor_result_message=None):  # noqa: E501
+    def set_attributes(self, embedded=None, links=None, expires_at=None, factor_result=None, factor_result_message=None, **kwargs):  # noqa: E501
         """VerifyUserFactorResponse - a model defined in Swagger"""  # noqa: E501
         self._embedded = None
         self._links = None
@@ -65,15 +65,60 @@ class VerifyUserFactorResponse(object):
         self._factor_result_message = None
         self.discriminator = None
         if embedded is not None:
-            self.embedded = embedded
+            if hasattr(models, self.swagger_types['embedded']):
+                nested_class = getattr(models, self.swagger_types['embedded'])
+                if isinstance(embedded, nested_class):
+                    self.embedded = embedded
+                elif isinstance(embedded, dict):
+                    self.embedded = nested_class.from_kwargs(**embedded)
+                else:
+                    self.embedded = embedded
+            else:
+                self.embedded = embedded
         if links is not None:
-            self.links = links
+            if hasattr(models, self.swagger_types['links']):
+                nested_class = getattr(models, self.swagger_types['links'])
+                if isinstance(links, nested_class):
+                    self.links = links
+                elif isinstance(links, dict):
+                    self.links = nested_class.from_kwargs(**links)
+                else:
+                    self.links = links
+            else:
+                self.links = links
         if expires_at is not None:
-            self.expires_at = expires_at
+            if hasattr(models, self.swagger_types['expires_at']):
+                nested_class = getattr(models, self.swagger_types['expires_at'])
+                if isinstance(expires_at, nested_class):
+                    self.expires_at = expires_at
+                elif isinstance(expires_at, dict):
+                    self.expires_at = nested_class.from_kwargs(**expires_at)
+                else:
+                    self.expires_at = expires_at
+            else:
+                self.expires_at = expires_at
         if factor_result is not None:
-            self.factor_result = factor_result
+            if hasattr(models, self.swagger_types['factor_result']):
+                nested_class = getattr(models, self.swagger_types['factor_result'])
+                if isinstance(factor_result, nested_class):
+                    self.factor_result = factor_result
+                elif isinstance(factor_result, dict):
+                    self.factor_result = nested_class.from_kwargs(**factor_result)
+                else:
+                    self.factor_result = factor_result
+            else:
+                self.factor_result = factor_result
         if factor_result_message is not None:
-            self.factor_result_message = factor_result_message
+            if hasattr(models, self.swagger_types['factor_result_message']):
+                nested_class = getattr(models, self.swagger_types['factor_result_message'])
+                if isinstance(factor_result_message, nested_class):
+                    self.factor_result_message = factor_result_message
+                elif isinstance(factor_result_message, dict):
+                    self.factor_result_message = nested_class.from_kwargs(**factor_result_message)
+                else:
+                    self.factor_result_message = factor_result_message
+            else:
+                self.factor_result_message = factor_result_message
 
     @property
     def embedded(self):

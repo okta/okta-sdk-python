@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class AuthenticatorProviderConfigurationUserNameTemplate(object):
@@ -29,9 +30,8 @@ class AuthenticatorProviderConfigurationUserNameTemplate(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'template': 'str'
-    }
+    swagger_types = {}
+    swagger_types['template'] = 'str'
 
     attribute_map = {
         'template': 'template'
@@ -48,12 +48,21 @@ class AuthenticatorProviderConfigurationUserNameTemplate(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, template=None):  # noqa: E501
+    def set_attributes(self, template=None, **kwargs):  # noqa: E501
         """AuthenticatorProviderConfigurationUserNameTemplate - a model defined in Swagger"""  # noqa: E501
         self._template = None
         self.discriminator = None
         if template is not None:
-            self.template = template
+            if hasattr(models, self.swagger_types['template']):
+                nested_class = getattr(models, self.swagger_types['template'])
+                if isinstance(template, nested_class):
+                    self.template = template
+                elif isinstance(template, dict):
+                    self.template = nested_class.from_kwargs(**template)
+                else:
+                    self.template = template
+            else:
+                self.template = template
 
     @property
     def template(self):

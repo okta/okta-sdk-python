@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class AccessPolicyRuleApplicationSignOn(object):
@@ -29,10 +30,9 @@ class AccessPolicyRuleApplicationSignOn(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'access': 'str',
-        'verification_method': 'VerificationMethod'
-    }
+    swagger_types = {}
+    swagger_types['access'] = 'str'
+    swagger_types['verification_method'] = 'VerificationMethod'
 
     attribute_map = {
         'access': 'access',
@@ -50,15 +50,33 @@ class AccessPolicyRuleApplicationSignOn(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, access=None, verification_method=None):  # noqa: E501
+    def set_attributes(self, access=None, verification_method=None, **kwargs):  # noqa: E501
         """AccessPolicyRuleApplicationSignOn - a model defined in Swagger"""  # noqa: E501
         self._access = None
         self._verification_method = None
         self.discriminator = None
         if access is not None:
-            self.access = access
+            if hasattr(models, self.swagger_types['access']):
+                nested_class = getattr(models, self.swagger_types['access'])
+                if isinstance(access, nested_class):
+                    self.access = access
+                elif isinstance(access, dict):
+                    self.access = nested_class.from_kwargs(**access)
+                else:
+                    self.access = access
+            else:
+                self.access = access
         if verification_method is not None:
-            self.verification_method = verification_method
+            if hasattr(models, self.swagger_types['verification_method']):
+                nested_class = getattr(models, self.swagger_types['verification_method'])
+                if isinstance(verification_method, nested_class):
+                    self.verification_method = verification_method
+                elif isinstance(verification_method, dict):
+                    self.verification_method = nested_class.from_kwargs(**verification_method)
+                else:
+                    self.verification_method = verification_method
+            else:
+                self.verification_method = verification_method
 
     @property
     def access(self):

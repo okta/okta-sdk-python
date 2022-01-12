@@ -16,6 +16,7 @@ import re  # noqa: F401
 import six
 from okta.models.browser_plugin_application import BrowserPluginApplication  # noqa: F401,E501
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class SwaApplication(BrowserPluginApplication):
@@ -30,12 +31,11 @@ class SwaApplication(BrowserPluginApplication):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'name': 'str',
-        'settings': 'SwaApplicationSettings'
-    }
+    swagger_types = {}
     if hasattr(BrowserPluginApplication, "swagger_types"):
         swagger_types.update(BrowserPluginApplication.swagger_types)
+    swagger_types['name'] = 'str'
+    swagger_types['settings'] = 'SwaApplicationSettings'
 
     attribute_map = {
         'name': 'name',
@@ -55,16 +55,37 @@ class SwaApplication(BrowserPluginApplication):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, name='template_swa', settings=None, *args, **kwargs):  # noqa: E501
+    def set_attributes(self, name='template_swa', settings=None, **kwargs):  # noqa: E501
         """SwaApplication - a model defined in Swagger"""  # noqa: E501
+        config = {}
+        if kwargs is not None:
+            config = {to_snake_case(key): value for key, value in kwargs.items()}
+        super().set_attributes(**config)
         self._name = None
         self._settings = None
         self.discriminator = None
         if name is not None:
-            self.name = name
+            if hasattr(models, self.swagger_types['name']):
+                nested_class = getattr(models, self.swagger_types['name'])
+                if isinstance(name, nested_class):
+                    self.name = name
+                elif isinstance(name, dict):
+                    self.name = nested_class.from_kwargs(**name)
+                else:
+                    self.name = name
+            else:
+                self.name = name
         if settings is not None:
-            self.settings = settings
-        super().set_attributes(*args, **kwargs)
+            if hasattr(models, self.swagger_types['settings']):
+                nested_class = getattr(models, self.swagger_types['settings'])
+                if isinstance(settings, nested_class):
+                    self.settings = settings
+                elif isinstance(settings, dict):
+                    self.settings = nested_class.from_kwargs(**settings)
+                else:
+                    self.settings = settings
+            else:
+                self.settings = settings
 
     @property
     def name(self):

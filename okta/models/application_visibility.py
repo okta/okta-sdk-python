@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class ApplicationVisibility(object):
@@ -29,12 +30,11 @@ class ApplicationVisibility(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'app_links': 'dict(str, bool)',
-        'auto_launch': 'bool',
-        'auto_submit_toolbar': 'bool',
-        'hide': 'ApplicationVisibilityHide'
-    }
+    swagger_types = {}
+    swagger_types['app_links'] = 'dict(str, bool)'
+    swagger_types['auto_launch'] = 'bool'
+    swagger_types['auto_submit_toolbar'] = 'bool'
+    swagger_types['hide'] = 'ApplicationVisibilityHide'
 
     attribute_map = {
         'app_links': 'appLinks',
@@ -54,7 +54,7 @@ class ApplicationVisibility(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, app_links=None, auto_launch=None, auto_submit_toolbar=None, hide=None):  # noqa: E501
+    def set_attributes(self, app_links=None, auto_launch=None, auto_submit_toolbar=None, hide=None, **kwargs):  # noqa: E501
         """ApplicationVisibility - a model defined in Swagger"""  # noqa: E501
         self._app_links = None
         self._auto_launch = None
@@ -62,13 +62,49 @@ class ApplicationVisibility(object):
         self._hide = None
         self.discriminator = None
         if app_links is not None:
-            self.app_links = app_links
+            if hasattr(models, self.swagger_types['app_links']):
+                nested_class = getattr(models, self.swagger_types['app_links'])
+                if isinstance(app_links, nested_class):
+                    self.app_links = app_links
+                elif isinstance(app_links, dict):
+                    self.app_links = nested_class.from_kwargs(**app_links)
+                else:
+                    self.app_links = app_links
+            else:
+                self.app_links = app_links
         if auto_launch is not None:
-            self.auto_launch = auto_launch
+            if hasattr(models, self.swagger_types['auto_launch']):
+                nested_class = getattr(models, self.swagger_types['auto_launch'])
+                if isinstance(auto_launch, nested_class):
+                    self.auto_launch = auto_launch
+                elif isinstance(auto_launch, dict):
+                    self.auto_launch = nested_class.from_kwargs(**auto_launch)
+                else:
+                    self.auto_launch = auto_launch
+            else:
+                self.auto_launch = auto_launch
         if auto_submit_toolbar is not None:
-            self.auto_submit_toolbar = auto_submit_toolbar
+            if hasattr(models, self.swagger_types['auto_submit_toolbar']):
+                nested_class = getattr(models, self.swagger_types['auto_submit_toolbar'])
+                if isinstance(auto_submit_toolbar, nested_class):
+                    self.auto_submit_toolbar = auto_submit_toolbar
+                elif isinstance(auto_submit_toolbar, dict):
+                    self.auto_submit_toolbar = nested_class.from_kwargs(**auto_submit_toolbar)
+                else:
+                    self.auto_submit_toolbar = auto_submit_toolbar
+            else:
+                self.auto_submit_toolbar = auto_submit_toolbar
         if hide is not None:
-            self.hide = hide
+            if hasattr(models, self.swagger_types['hide']):
+                nested_class = getattr(models, self.swagger_types['hide'])
+                if isinstance(hide, nested_class):
+                    self.hide = hide
+                elif isinstance(hide, dict):
+                    self.hide = nested_class.from_kwargs(**hide)
+                else:
+                    self.hide = hide
+            else:
+                self.hide = hide
 
     @property
     def app_links(self):

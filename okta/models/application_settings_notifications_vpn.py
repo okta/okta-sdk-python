@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class ApplicationSettingsNotificationsVpn(object):
@@ -29,11 +30,10 @@ class ApplicationSettingsNotificationsVpn(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'help_url': 'str',
-        'message': 'str',
-        'network': 'ApplicationSettingsNotificationsVpnNetwork'
-    }
+    swagger_types = {}
+    swagger_types['help_url'] = 'str'
+    swagger_types['message'] = 'str'
+    swagger_types['network'] = 'ApplicationSettingsNotificationsVpnNetwork'
 
     attribute_map = {
         'help_url': 'helpUrl',
@@ -52,18 +52,45 @@ class ApplicationSettingsNotificationsVpn(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, help_url=None, message=None, network=None):  # noqa: E501
+    def set_attributes(self, help_url=None, message=None, network=None, **kwargs):  # noqa: E501
         """ApplicationSettingsNotificationsVpn - a model defined in Swagger"""  # noqa: E501
         self._help_url = None
         self._message = None
         self._network = None
         self.discriminator = None
         if help_url is not None:
-            self.help_url = help_url
+            if hasattr(models, self.swagger_types['help_url']):
+                nested_class = getattr(models, self.swagger_types['help_url'])
+                if isinstance(help_url, nested_class):
+                    self.help_url = help_url
+                elif isinstance(help_url, dict):
+                    self.help_url = nested_class.from_kwargs(**help_url)
+                else:
+                    self.help_url = help_url
+            else:
+                self.help_url = help_url
         if message is not None:
-            self.message = message
+            if hasattr(models, self.swagger_types['message']):
+                nested_class = getattr(models, self.swagger_types['message'])
+                if isinstance(message, nested_class):
+                    self.message = message
+                elif isinstance(message, dict):
+                    self.message = nested_class.from_kwargs(**message)
+                else:
+                    self.message = message
+            else:
+                self.message = message
         if network is not None:
-            self.network = network
+            if hasattr(models, self.swagger_types['network']):
+                nested_class = getattr(models, self.swagger_types['network'])
+                if isinstance(network, nested_class):
+                    self.network = network
+                elif isinstance(network, dict):
+                    self.network = nested_class.from_kwargs(**network)
+                else:
+                    self.network = network
+            else:
+                self.network = network
 
     @property
     def help_url(self):

@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class UserSchemaDefinitions(object):
@@ -29,10 +30,9 @@ class UserSchemaDefinitions(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'base': 'UserSchemaBase',
-        'custom': 'UserSchemaPublic'
-    }
+    swagger_types = {}
+    swagger_types['base'] = 'UserSchemaBase'
+    swagger_types['custom'] = 'UserSchemaPublic'
 
     attribute_map = {
         'base': 'base',
@@ -50,15 +50,33 @@ class UserSchemaDefinitions(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, base=None, custom=None):  # noqa: E501
+    def set_attributes(self, base=None, custom=None, **kwargs):  # noqa: E501
         """UserSchemaDefinitions - a model defined in Swagger"""  # noqa: E501
         self._base = None
         self._custom = None
         self.discriminator = None
         if base is not None:
-            self.base = base
+            if hasattr(models, self.swagger_types['base']):
+                nested_class = getattr(models, self.swagger_types['base'])
+                if isinstance(base, nested_class):
+                    self.base = base
+                elif isinstance(base, dict):
+                    self.base = nested_class.from_kwargs(**base)
+                else:
+                    self.base = base
+            else:
+                self.base = base
         if custom is not None:
-            self.custom = custom
+            if hasattr(models, self.swagger_types['custom']):
+                nested_class = getattr(models, self.swagger_types['custom'])
+                if isinstance(custom, nested_class):
+                    self.custom = custom
+                elif isinstance(custom, dict):
+                    self.custom = nested_class.from_kwargs(**custom)
+                else:
+                    self.custom = custom
+            else:
+                self.custom = custom
 
     @property
     def base(self):

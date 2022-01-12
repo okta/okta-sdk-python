@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class EventHookChannel(object):
@@ -29,11 +30,10 @@ class EventHookChannel(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'config': 'EventHookChannelConfig',
-        'type': 'EventHookChannelType',
-        'version': 'str'
-    }
+    swagger_types = {}
+    swagger_types['config'] = 'EventHookChannelConfig'
+    swagger_types['type'] = 'EventHookChannelType'
+    swagger_types['version'] = 'str'
 
     attribute_map = {
         'config': 'config',
@@ -52,18 +52,45 @@ class EventHookChannel(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, config=None, type=None, version=None):  # noqa: E501
+    def set_attributes(self, config=None, type=None, version=None, **kwargs):  # noqa: E501
         """EventHookChannel - a model defined in Swagger"""  # noqa: E501
         self._config = None
         self._type = None
         self._version = None
         self.discriminator = None
         if config is not None:
-            self.config = config
+            if hasattr(models, self.swagger_types['config']):
+                nested_class = getattr(models, self.swagger_types['config'])
+                if isinstance(config, nested_class):
+                    self.config = config
+                elif isinstance(config, dict):
+                    self.config = nested_class.from_kwargs(**config)
+                else:
+                    self.config = config
+            else:
+                self.config = config
         if type is not None:
-            self.type = type
+            if hasattr(models, self.swagger_types['type']):
+                nested_class = getattr(models, self.swagger_types['type'])
+                if isinstance(type, nested_class):
+                    self.type = type
+                elif isinstance(type, dict):
+                    self.type = nested_class.from_kwargs(**type)
+                else:
+                    self.type = type
+            else:
+                self.type = type
         if version is not None:
-            self.version = version
+            if hasattr(models, self.swagger_types['version']):
+                nested_class = getattr(models, self.swagger_types['version'])
+                if isinstance(version, nested_class):
+                    self.version = version
+                elif isinstance(version, dict):
+                    self.version = nested_class.from_kwargs(**version)
+                else:
+                    self.version = version
+            else:
+                self.version = version
 
     @property
     def config(self):

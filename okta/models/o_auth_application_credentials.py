@@ -16,6 +16,7 @@ import re  # noqa: F401
 import six
 from okta.models.application_credentials import ApplicationCredentials  # noqa: F401,E501
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class OAuthApplicationCredentials(ApplicationCredentials):
@@ -30,11 +31,10 @@ class OAuthApplicationCredentials(ApplicationCredentials):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'oauth_client': 'ApplicationCredentialsOAuthClient'
-    }
+    swagger_types = {}
     if hasattr(ApplicationCredentials, "swagger_types"):
         swagger_types.update(ApplicationCredentials.swagger_types)
+    swagger_types['oauth_client'] = 'ApplicationCredentialsOAuthClient'
 
     attribute_map = {
         'oauth_client': 'oauthClient'
@@ -53,13 +53,25 @@ class OAuthApplicationCredentials(ApplicationCredentials):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, oauth_client=None, *args, **kwargs):  # noqa: E501
+    def set_attributes(self, oauth_client=None, **kwargs):  # noqa: E501
         """OAuthApplicationCredentials - a model defined in Swagger"""  # noqa: E501
+        config = {}
+        if kwargs is not None:
+            config = {to_snake_case(key): value for key, value in kwargs.items()}
+        super().set_attributes(**config)
         self._oauth_client = None
         self.discriminator = None
         if oauth_client is not None:
-            self.oauth_client = oauth_client
-        super().set_attributes(*args, **kwargs)
+            if hasattr(models, self.swagger_types['oauth_client']):
+                nested_class = getattr(models, self.swagger_types['oauth_client'])
+                if isinstance(oauth_client, nested_class):
+                    self.oauth_client = oauth_client
+                elif isinstance(oauth_client, dict):
+                    self.oauth_client = nested_class.from_kwargs(**oauth_client)
+                else:
+                    self.oauth_client = oauth_client
+            else:
+                self.oauth_client = oauth_client
 
     @property
     def oauth_client(self):

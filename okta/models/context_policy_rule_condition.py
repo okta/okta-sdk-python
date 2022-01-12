@@ -16,6 +16,7 @@ import re  # noqa: F401
 import six
 from okta.models.device_policy_rule_condition import DevicePolicyRuleCondition  # noqa: F401,E501
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class ContextPolicyRuleCondition(DevicePolicyRuleCondition):
@@ -30,11 +31,10 @@ class ContextPolicyRuleCondition(DevicePolicyRuleCondition):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'expression': 'str'
-    }
+    swagger_types = {}
     if hasattr(DevicePolicyRuleCondition, "swagger_types"):
         swagger_types.update(DevicePolicyRuleCondition.swagger_types)
+    swagger_types['expression'] = 'str'
 
     attribute_map = {
         'expression': 'expression'
@@ -53,13 +53,25 @@ class ContextPolicyRuleCondition(DevicePolicyRuleCondition):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, expression=None, *args, **kwargs):  # noqa: E501
+    def set_attributes(self, expression=None, **kwargs):  # noqa: E501
         """ContextPolicyRuleCondition - a model defined in Swagger"""  # noqa: E501
+        config = {}
+        if kwargs is not None:
+            config = {to_snake_case(key): value for key, value in kwargs.items()}
+        super().set_attributes(**config)
         self._expression = None
         self.discriminator = None
         if expression is not None:
-            self.expression = expression
-        super().set_attributes(*args, **kwargs)
+            if hasattr(models, self.swagger_types['expression']):
+                nested_class = getattr(models, self.swagger_types['expression'])
+                if isinstance(expression, nested_class):
+                    self.expression = expression
+                elif isinstance(expression, dict):
+                    self.expression = nested_class.from_kwargs(**expression)
+                else:
+                    self.expression = expression
+            else:
+                self.expression = expression
 
     @property
     def expression(self):

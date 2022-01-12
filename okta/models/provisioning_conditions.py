@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class ProvisioningConditions(object):
@@ -29,10 +30,9 @@ class ProvisioningConditions(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'deprovisioned': 'ProvisioningDeprovisionedCondition',
-        'suspended': 'ProvisioningSuspendedCondition'
-    }
+    swagger_types = {}
+    swagger_types['deprovisioned'] = 'ProvisioningDeprovisionedCondition'
+    swagger_types['suspended'] = 'ProvisioningSuspendedCondition'
 
     attribute_map = {
         'deprovisioned': 'deprovisioned',
@@ -50,15 +50,33 @@ class ProvisioningConditions(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, deprovisioned=None, suspended=None):  # noqa: E501
+    def set_attributes(self, deprovisioned=None, suspended=None, **kwargs):  # noqa: E501
         """ProvisioningConditions - a model defined in Swagger"""  # noqa: E501
         self._deprovisioned = None
         self._suspended = None
         self.discriminator = None
         if deprovisioned is not None:
-            self.deprovisioned = deprovisioned
+            if hasattr(models, self.swagger_types['deprovisioned']):
+                nested_class = getattr(models, self.swagger_types['deprovisioned'])
+                if isinstance(deprovisioned, nested_class):
+                    self.deprovisioned = deprovisioned
+                elif isinstance(deprovisioned, dict):
+                    self.deprovisioned = nested_class.from_kwargs(**deprovisioned)
+                else:
+                    self.deprovisioned = deprovisioned
+            else:
+                self.deprovisioned = deprovisioned
         if suspended is not None:
-            self.suspended = suspended
+            if hasattr(models, self.swagger_types['suspended']):
+                nested_class = getattr(models, self.swagger_types['suspended'])
+                if isinstance(suspended, nested_class):
+                    self.suspended = suspended
+                elif isinstance(suspended, dict):
+                    self.suspended = nested_class.from_kwargs(**suspended)
+                else:
+                    self.suspended = suspended
+            else:
+                self.suspended = suspended
 
     @property
     def deprovisioned(self):

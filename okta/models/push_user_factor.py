@@ -16,6 +16,7 @@ import re  # noqa: F401
 import six
 from okta.models.user_factor import UserFactor  # noqa: F401,E501
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class PushUserFactor(UserFactor):
@@ -30,13 +31,12 @@ class PushUserFactor(UserFactor):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'expires_at': 'datetime',
-        'factor_result': 'FactorResultType',
-        'profile': 'PushUserFactorProfile'
-    }
+    swagger_types = {}
     if hasattr(UserFactor, "swagger_types"):
         swagger_types.update(UserFactor.swagger_types)
+    swagger_types['expires_at'] = 'datetime'
+    swagger_types['factor_result'] = 'FactorResultType'
+    swagger_types['profile'] = 'PushUserFactorProfile'
 
     attribute_map = {
         'expires_at': 'expiresAt',
@@ -57,19 +57,49 @@ class PushUserFactor(UserFactor):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, expires_at=None, factor_result=None, profile=None, *args, **kwargs):  # noqa: E501
+    def set_attributes(self, expires_at=None, factor_result=None, profile=None, **kwargs):  # noqa: E501
         """PushUserFactor - a model defined in Swagger"""  # noqa: E501
+        config = {}
+        if kwargs is not None:
+            config = {to_snake_case(key): value for key, value in kwargs.items()}
+        super().set_attributes(**config)
         self._expires_at = None
         self._factor_result = None
         self._profile = None
         self.discriminator = None
         if expires_at is not None:
-            self.expires_at = expires_at
+            if hasattr(models, self.swagger_types['expires_at']):
+                nested_class = getattr(models, self.swagger_types['expires_at'])
+                if isinstance(expires_at, nested_class):
+                    self.expires_at = expires_at
+                elif isinstance(expires_at, dict):
+                    self.expires_at = nested_class.from_kwargs(**expires_at)
+                else:
+                    self.expires_at = expires_at
+            else:
+                self.expires_at = expires_at
         if factor_result is not None:
-            self.factor_result = factor_result
+            if hasattr(models, self.swagger_types['factor_result']):
+                nested_class = getattr(models, self.swagger_types['factor_result'])
+                if isinstance(factor_result, nested_class):
+                    self.factor_result = factor_result
+                elif isinstance(factor_result, dict):
+                    self.factor_result = nested_class.from_kwargs(**factor_result)
+                else:
+                    self.factor_result = factor_result
+            else:
+                self.factor_result = factor_result
         if profile is not None:
-            self.profile = profile
-        super().set_attributes(*args, **kwargs)
+            if hasattr(models, self.swagger_types['profile']):
+                nested_class = getattr(models, self.swagger_types['profile'])
+                if isinstance(profile, nested_class):
+                    self.profile = profile
+                elif isinstance(profile, dict):
+                    self.profile = nested_class.from_kwargs(**profile)
+                else:
+                    self.profile = profile
+            else:
+                self.profile = profile
 
     @property
     def expires_at(self):

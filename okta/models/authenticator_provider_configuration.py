@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class AuthenticatorProviderConfiguration(object):
@@ -29,13 +30,12 @@ class AuthenticatorProviderConfiguration(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'auth_port': 'int',
-        'host_name': 'str',
-        'instance_id': 'str',
-        'shared_secret': 'str',
-        'user_name_template': 'AuthenticatorProviderConfigurationUserNameTemplate'
-    }
+    swagger_types = {}
+    swagger_types['auth_port'] = 'int'
+    swagger_types['host_name'] = 'str'
+    swagger_types['instance_id'] = 'str'
+    swagger_types['shared_secret'] = 'str'
+    swagger_types['user_name_template'] = 'AuthenticatorProviderConfigurationUserNameTemplate'
 
     attribute_map = {
         'auth_port': 'authPort',
@@ -56,7 +56,7 @@ class AuthenticatorProviderConfiguration(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, auth_port=None, host_name=None, instance_id=None, shared_secret=None, user_name_template=None):  # noqa: E501
+    def set_attributes(self, auth_port=None, host_name=None, instance_id=None, shared_secret=None, user_name_template=None, **kwargs):  # noqa: E501
         """AuthenticatorProviderConfiguration - a model defined in Swagger"""  # noqa: E501
         self._auth_port = None
         self._host_name = None
@@ -65,15 +65,60 @@ class AuthenticatorProviderConfiguration(object):
         self._user_name_template = None
         self.discriminator = None
         if auth_port is not None:
-            self.auth_port = auth_port
+            if hasattr(models, self.swagger_types['auth_port']):
+                nested_class = getattr(models, self.swagger_types['auth_port'])
+                if isinstance(auth_port, nested_class):
+                    self.auth_port = auth_port
+                elif isinstance(auth_port, dict):
+                    self.auth_port = nested_class.from_kwargs(**auth_port)
+                else:
+                    self.auth_port = auth_port
+            else:
+                self.auth_port = auth_port
         if host_name is not None:
-            self.host_name = host_name
+            if hasattr(models, self.swagger_types['host_name']):
+                nested_class = getattr(models, self.swagger_types['host_name'])
+                if isinstance(host_name, nested_class):
+                    self.host_name = host_name
+                elif isinstance(host_name, dict):
+                    self.host_name = nested_class.from_kwargs(**host_name)
+                else:
+                    self.host_name = host_name
+            else:
+                self.host_name = host_name
         if instance_id is not None:
-            self.instance_id = instance_id
+            if hasattr(models, self.swagger_types['instance_id']):
+                nested_class = getattr(models, self.swagger_types['instance_id'])
+                if isinstance(instance_id, nested_class):
+                    self.instance_id = instance_id
+                elif isinstance(instance_id, dict):
+                    self.instance_id = nested_class.from_kwargs(**instance_id)
+                else:
+                    self.instance_id = instance_id
+            else:
+                self.instance_id = instance_id
         if shared_secret is not None:
-            self.shared_secret = shared_secret
+            if hasattr(models, self.swagger_types['shared_secret']):
+                nested_class = getattr(models, self.swagger_types['shared_secret'])
+                if isinstance(shared_secret, nested_class):
+                    self.shared_secret = shared_secret
+                elif isinstance(shared_secret, dict):
+                    self.shared_secret = nested_class.from_kwargs(**shared_secret)
+                else:
+                    self.shared_secret = shared_secret
+            else:
+                self.shared_secret = shared_secret
         if user_name_template is not None:
-            self.user_name_template = user_name_template
+            if hasattr(models, self.swagger_types['user_name_template']):
+                nested_class = getattr(models, self.swagger_types['user_name_template'])
+                if isinstance(user_name_template, nested_class):
+                    self.user_name_template = user_name_template
+                elif isinstance(user_name_template, dict):
+                    self.user_name_template = nested_class.from_kwargs(**user_name_template)
+                else:
+                    self.user_name_template = user_name_template
+            else:
+                self.user_name_template = user_name_template
 
     @property
     def auth_port(self):

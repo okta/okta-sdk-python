@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class OpenIdConnectApplicationSettingsRefreshToken(object):
@@ -29,10 +30,9 @@ class OpenIdConnectApplicationSettingsRefreshToken(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'leeway': 'int',
-        'rotation_type': 'OpenIdConnectRefreshTokenRotationType'
-    }
+    swagger_types = {}
+    swagger_types['leeway'] = 'int'
+    swagger_types['rotation_type'] = 'OpenIdConnectRefreshTokenRotationType'
 
     attribute_map = {
         'leeway': 'leeway',
@@ -50,15 +50,33 @@ class OpenIdConnectApplicationSettingsRefreshToken(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, leeway=None, rotation_type=None):  # noqa: E501
+    def set_attributes(self, leeway=None, rotation_type=None, **kwargs):  # noqa: E501
         """OpenIdConnectApplicationSettingsRefreshToken - a model defined in Swagger"""  # noqa: E501
         self._leeway = None
         self._rotation_type = None
         self.discriminator = None
         if leeway is not None:
-            self.leeway = leeway
+            if hasattr(models, self.swagger_types['leeway']):
+                nested_class = getattr(models, self.swagger_types['leeway'])
+                if isinstance(leeway, nested_class):
+                    self.leeway = leeway
+                elif isinstance(leeway, dict):
+                    self.leeway = nested_class.from_kwargs(**leeway)
+                else:
+                    self.leeway = leeway
+            else:
+                self.leeway = leeway
         if rotation_type is not None:
-            self.rotation_type = rotation_type
+            if hasattr(models, self.swagger_types['rotation_type']):
+                nested_class = getattr(models, self.swagger_types['rotation_type'])
+                if isinstance(rotation_type, nested_class):
+                    self.rotation_type = rotation_type
+                elif isinstance(rotation_type, dict):
+                    self.rotation_type = nested_class.from_kwargs(**rotation_type)
+                else:
+                    self.rotation_type = rotation_type
+            else:
+                self.rotation_type = rotation_type
 
     @property
     def leeway(self):

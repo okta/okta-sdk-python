@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class DevicePolicyRuleCondition(object):
@@ -29,12 +30,11 @@ class DevicePolicyRuleCondition(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'migrated': 'bool',
-        'platform': 'DevicePolicyRuleConditionPlatform',
-        'rooted': 'bool',
-        'trust_level': 'DevicePolicyTrustLevel'
-    }
+    swagger_types = {}
+    swagger_types['migrated'] = 'bool'
+    swagger_types['platform'] = 'DevicePolicyRuleConditionPlatform'
+    swagger_types['rooted'] = 'bool'
+    swagger_types['trust_level'] = 'DevicePolicyTrustLevel'
 
     attribute_map = {
         'migrated': 'migrated',
@@ -54,7 +54,7 @@ class DevicePolicyRuleCondition(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, migrated=None, platform=None, rooted=None, trust_level=None):  # noqa: E501
+    def set_attributes(self, migrated=None, platform=None, rooted=None, trust_level=None, **kwargs):  # noqa: E501
         """DevicePolicyRuleCondition - a model defined in Swagger"""  # noqa: E501
         self._migrated = None
         self._platform = None
@@ -62,13 +62,49 @@ class DevicePolicyRuleCondition(object):
         self._trust_level = None
         self.discriminator = None
         if migrated is not None:
-            self.migrated = migrated
+            if hasattr(models, self.swagger_types['migrated']):
+                nested_class = getattr(models, self.swagger_types['migrated'])
+                if isinstance(migrated, nested_class):
+                    self.migrated = migrated
+                elif isinstance(migrated, dict):
+                    self.migrated = nested_class.from_kwargs(**migrated)
+                else:
+                    self.migrated = migrated
+            else:
+                self.migrated = migrated
         if platform is not None:
-            self.platform = platform
+            if hasattr(models, self.swagger_types['platform']):
+                nested_class = getattr(models, self.swagger_types['platform'])
+                if isinstance(platform, nested_class):
+                    self.platform = platform
+                elif isinstance(platform, dict):
+                    self.platform = nested_class.from_kwargs(**platform)
+                else:
+                    self.platform = platform
+            else:
+                self.platform = platform
         if rooted is not None:
-            self.rooted = rooted
+            if hasattr(models, self.swagger_types['rooted']):
+                nested_class = getattr(models, self.swagger_types['rooted'])
+                if isinstance(rooted, nested_class):
+                    self.rooted = rooted
+                elif isinstance(rooted, dict):
+                    self.rooted = nested_class.from_kwargs(**rooted)
+                else:
+                    self.rooted = rooted
+            else:
+                self.rooted = rooted
         if trust_level is not None:
-            self.trust_level = trust_level
+            if hasattr(models, self.swagger_types['trust_level']):
+                nested_class = getattr(models, self.swagger_types['trust_level'])
+                if isinstance(trust_level, nested_class):
+                    self.trust_level = trust_level
+                elif isinstance(trust_level, dict):
+                    self.trust_level = nested_class.from_kwargs(**trust_level)
+                else:
+                    self.trust_level = trust_level
+            else:
+                self.trust_level = trust_level
 
     @property
     def migrated(self):

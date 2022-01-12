@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class CsrMetadata(object):
@@ -29,10 +30,9 @@ class CsrMetadata(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'subject': 'CsrMetadataSubject',
-        'subject_alt_names': 'CsrMetadataSubjectAltNames'
-    }
+    swagger_types = {}
+    swagger_types['subject'] = 'CsrMetadataSubject'
+    swagger_types['subject_alt_names'] = 'CsrMetadataSubjectAltNames'
 
     attribute_map = {
         'subject': 'subject',
@@ -50,15 +50,33 @@ class CsrMetadata(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, subject=None, subject_alt_names=None):  # noqa: E501
+    def set_attributes(self, subject=None, subject_alt_names=None, **kwargs):  # noqa: E501
         """CsrMetadata - a model defined in Swagger"""  # noqa: E501
         self._subject = None
         self._subject_alt_names = None
         self.discriminator = None
         if subject is not None:
-            self.subject = subject
+            if hasattr(models, self.swagger_types['subject']):
+                nested_class = getattr(models, self.swagger_types['subject'])
+                if isinstance(subject, nested_class):
+                    self.subject = subject
+                elif isinstance(subject, dict):
+                    self.subject = nested_class.from_kwargs(**subject)
+                else:
+                    self.subject = subject
+            else:
+                self.subject = subject
         if subject_alt_names is not None:
-            self.subject_alt_names = subject_alt_names
+            if hasattr(models, self.swagger_types['subject_alt_names']):
+                nested_class = getattr(models, self.swagger_types['subject_alt_names'])
+                if isinstance(subject_alt_names, nested_class):
+                    self.subject_alt_names = subject_alt_names
+                elif isinstance(subject_alt_names, dict):
+                    self.subject_alt_names = nested_class.from_kwargs(**subject_alt_names)
+                else:
+                    self.subject_alt_names = subject_alt_names
+            else:
+                self.subject_alt_names = subject_alt_names
 
     @property
     def subject(self):

@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class ProvisioningSuspendedCondition(object):
@@ -29,9 +30,8 @@ class ProvisioningSuspendedCondition(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'action': 'ProvisioningSuspendedAction'
-    }
+    swagger_types = {}
+    swagger_types['action'] = 'ProvisioningSuspendedAction'
 
     attribute_map = {
         'action': 'action'
@@ -48,12 +48,21 @@ class ProvisioningSuspendedCondition(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, action=None):  # noqa: E501
+    def set_attributes(self, action=None, **kwargs):  # noqa: E501
         """ProvisioningSuspendedCondition - a model defined in Swagger"""  # noqa: E501
         self._action = None
         self.discriminator = None
         if action is not None:
-            self.action = action
+            if hasattr(models, self.swagger_types['action']):
+                nested_class = getattr(models, self.swagger_types['action'])
+                if isinstance(action, nested_class):
+                    self.action = action
+                elif isinstance(action, dict):
+                    self.action = nested_class.from_kwargs(**action)
+                else:
+                    self.action = action
+            else:
+                self.action = action
 
     @property
     def action(self):

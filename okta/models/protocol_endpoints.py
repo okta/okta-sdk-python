@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class ProtocolEndpoints(object):
@@ -29,16 +30,15 @@ class ProtocolEndpoints(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'acs': 'ProtocolEndpoint',
-        'authorization': 'ProtocolEndpoint',
-        'jwks': 'ProtocolEndpoint',
-        'metadata': 'ProtocolEndpoint',
-        'slo': 'ProtocolEndpoint',
-        'sso': 'ProtocolEndpoint',
-        'token': 'ProtocolEndpoint',
-        'user_info': 'ProtocolEndpoint'
-    }
+    swagger_types = {}
+    swagger_types['acs'] = 'ProtocolEndpoint'
+    swagger_types['authorization'] = 'ProtocolEndpoint'
+    swagger_types['jwks'] = 'ProtocolEndpoint'
+    swagger_types['metadata'] = 'ProtocolEndpoint'
+    swagger_types['slo'] = 'ProtocolEndpoint'
+    swagger_types['sso'] = 'ProtocolEndpoint'
+    swagger_types['token'] = 'ProtocolEndpoint'
+    swagger_types['user_info'] = 'ProtocolEndpoint'
 
     attribute_map = {
         'acs': 'acs',
@@ -62,7 +62,7 @@ class ProtocolEndpoints(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, acs=None, authorization=None, jwks=None, metadata=None, slo=None, sso=None, token=None, user_info=None):  # noqa: E501
+    def set_attributes(self, acs=None, authorization=None, jwks=None, metadata=None, slo=None, sso=None, token=None, user_info=None, **kwargs):  # noqa: E501
         """ProtocolEndpoints - a model defined in Swagger"""  # noqa: E501
         self._acs = None
         self._authorization = None
@@ -74,21 +74,93 @@ class ProtocolEndpoints(object):
         self._user_info = None
         self.discriminator = None
         if acs is not None:
-            self.acs = acs
+            if hasattr(models, self.swagger_types['acs']):
+                nested_class = getattr(models, self.swagger_types['acs'])
+                if isinstance(acs, nested_class):
+                    self.acs = acs
+                elif isinstance(acs, dict):
+                    self.acs = nested_class.from_kwargs(**acs)
+                else:
+                    self.acs = acs
+            else:
+                self.acs = acs
         if authorization is not None:
-            self.authorization = authorization
+            if hasattr(models, self.swagger_types['authorization']):
+                nested_class = getattr(models, self.swagger_types['authorization'])
+                if isinstance(authorization, nested_class):
+                    self.authorization = authorization
+                elif isinstance(authorization, dict):
+                    self.authorization = nested_class.from_kwargs(**authorization)
+                else:
+                    self.authorization = authorization
+            else:
+                self.authorization = authorization
         if jwks is not None:
-            self.jwks = jwks
+            if hasattr(models, self.swagger_types['jwks']):
+                nested_class = getattr(models, self.swagger_types['jwks'])
+                if isinstance(jwks, nested_class):
+                    self.jwks = jwks
+                elif isinstance(jwks, dict):
+                    self.jwks = nested_class.from_kwargs(**jwks)
+                else:
+                    self.jwks = jwks
+            else:
+                self.jwks = jwks
         if metadata is not None:
-            self.metadata = metadata
+            if hasattr(models, self.swagger_types['metadata']):
+                nested_class = getattr(models, self.swagger_types['metadata'])
+                if isinstance(metadata, nested_class):
+                    self.metadata = metadata
+                elif isinstance(metadata, dict):
+                    self.metadata = nested_class.from_kwargs(**metadata)
+                else:
+                    self.metadata = metadata
+            else:
+                self.metadata = metadata
         if slo is not None:
-            self.slo = slo
+            if hasattr(models, self.swagger_types['slo']):
+                nested_class = getattr(models, self.swagger_types['slo'])
+                if isinstance(slo, nested_class):
+                    self.slo = slo
+                elif isinstance(slo, dict):
+                    self.slo = nested_class.from_kwargs(**slo)
+                else:
+                    self.slo = slo
+            else:
+                self.slo = slo
         if sso is not None:
-            self.sso = sso
+            if hasattr(models, self.swagger_types['sso']):
+                nested_class = getattr(models, self.swagger_types['sso'])
+                if isinstance(sso, nested_class):
+                    self.sso = sso
+                elif isinstance(sso, dict):
+                    self.sso = nested_class.from_kwargs(**sso)
+                else:
+                    self.sso = sso
+            else:
+                self.sso = sso
         if token is not None:
-            self.token = token
+            if hasattr(models, self.swagger_types['token']):
+                nested_class = getattr(models, self.swagger_types['token'])
+                if isinstance(token, nested_class):
+                    self.token = token
+                elif isinstance(token, dict):
+                    self.token = nested_class.from_kwargs(**token)
+                else:
+                    self.token = token
+            else:
+                self.token = token
         if user_info is not None:
-            self.user_info = user_info
+            if hasattr(models, self.swagger_types['user_info']):
+                nested_class = getattr(models, self.swagger_types['user_info'])
+                if isinstance(user_info, nested_class):
+                    self.user_info = user_info
+                elif isinstance(user_info, dict):
+                    self.user_info = nested_class.from_kwargs(**user_info)
+                else:
+                    self.user_info = user_info
+            else:
+                self.user_info = user_info
 
     @property
     def acs(self):

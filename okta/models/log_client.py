@@ -15,6 +15,7 @@ import re  # noqa: F401
 
 import six
 
+import okta.models as models  # noqa
 from okta.helpers import to_snake_case
 
 class LogClient(object):
@@ -29,14 +30,13 @@ class LogClient(object):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """
-    swagger_types = {
-        'device': 'str',
-        'geographical_context': 'LogGeographicalContext',
-        'id': 'str',
-        'ip_address': 'str',
-        'user_agent': 'LogUserAgent',
-        'zone': 'str'
-    }
+    swagger_types = {}
+    swagger_types['device'] = 'str'
+    swagger_types['geographical_context'] = 'LogGeographicalContext'
+    swagger_types['id'] = 'str'
+    swagger_types['ip_address'] = 'str'
+    swagger_types['user_agent'] = 'LogUserAgent'
+    swagger_types['zone'] = 'str'
 
     attribute_map = {
         'device': 'device',
@@ -58,7 +58,7 @@ class LogClient(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, device=None, geographical_context=None, id=None, ip_address=None, user_agent=None, zone=None):  # noqa: E501
+    def set_attributes(self, device=None, geographical_context=None, id=None, ip_address=None, user_agent=None, zone=None, **kwargs):  # noqa: E501
         """LogClient - a model defined in Swagger"""  # noqa: E501
         self._device = None
         self._geographical_context = None
@@ -68,17 +68,71 @@ class LogClient(object):
         self._zone = None
         self.discriminator = None
         if device is not None:
-            self.device = device
+            if hasattr(models, self.swagger_types['device']):
+                nested_class = getattr(models, self.swagger_types['device'])
+                if isinstance(device, nested_class):
+                    self.device = device
+                elif isinstance(device, dict):
+                    self.device = nested_class.from_kwargs(**device)
+                else:
+                    self.device = device
+            else:
+                self.device = device
         if geographical_context is not None:
-            self.geographical_context = geographical_context
+            if hasattr(models, self.swagger_types['geographical_context']):
+                nested_class = getattr(models, self.swagger_types['geographical_context'])
+                if isinstance(geographical_context, nested_class):
+                    self.geographical_context = geographical_context
+                elif isinstance(geographical_context, dict):
+                    self.geographical_context = nested_class.from_kwargs(**geographical_context)
+                else:
+                    self.geographical_context = geographical_context
+            else:
+                self.geographical_context = geographical_context
         if id is not None:
-            self.id = id
+            if hasattr(models, self.swagger_types['id']):
+                nested_class = getattr(models, self.swagger_types['id'])
+                if isinstance(id, nested_class):
+                    self.id = id
+                elif isinstance(id, dict):
+                    self.id = nested_class.from_kwargs(**id)
+                else:
+                    self.id = id
+            else:
+                self.id = id
         if ip_address is not None:
-            self.ip_address = ip_address
+            if hasattr(models, self.swagger_types['ip_address']):
+                nested_class = getattr(models, self.swagger_types['ip_address'])
+                if isinstance(ip_address, nested_class):
+                    self.ip_address = ip_address
+                elif isinstance(ip_address, dict):
+                    self.ip_address = nested_class.from_kwargs(**ip_address)
+                else:
+                    self.ip_address = ip_address
+            else:
+                self.ip_address = ip_address
         if user_agent is not None:
-            self.user_agent = user_agent
+            if hasattr(models, self.swagger_types['user_agent']):
+                nested_class = getattr(models, self.swagger_types['user_agent'])
+                if isinstance(user_agent, nested_class):
+                    self.user_agent = user_agent
+                elif isinstance(user_agent, dict):
+                    self.user_agent = nested_class.from_kwargs(**user_agent)
+                else:
+                    self.user_agent = user_agent
+            else:
+                self.user_agent = user_agent
         if zone is not None:
-            self.zone = zone
+            if hasattr(models, self.swagger_types['zone']):
+                nested_class = getattr(models, self.swagger_types['zone'])
+                if isinstance(zone, nested_class):
+                    self.zone = zone
+                elif isinstance(zone, dict):
+                    self.zone = nested_class.from_kwargs(**zone)
+                else:
+                    self.zone = zone
+            else:
+                self.zone = zone
 
     @property
     def device(self):
