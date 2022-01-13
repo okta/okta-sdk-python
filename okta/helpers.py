@@ -19,8 +19,15 @@ def to_snake_case(string):
     Example:
         >>> to_snake_case('lowerCamelCaseString')
         'lower_camel_case_string'
+        >>> to_snake_case('camel2snake')
+        'camel_2_snake'
     """
-    return re.sub(r'(?<!^)(?=[A-Z])', '_', string).lower()
+    # Simulate the same behavior as "lodash" library
+    string = re.sub("([A-Za-z]+)([0-9]+)", "\g<1>_\g<2>", string)
+    string = re.sub("([0-9])([A-Za-z]+)", "\g<1>_\g<2>", string)
+    string = re.sub("([A-Z]+)([A-Z][a-z])", "\g<1>_\g<2>", string)
+    string = re.sub("([a-z])([A-Z])", "\g<1>_\g<2>", string);
+    return string.lower()
 
 
 def to_lower_camel_case(string):

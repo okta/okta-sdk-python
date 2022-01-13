@@ -31,10 +31,10 @@ class SpCertificate(object):
                             and the value is json key in definition.
     """
     swagger_types = {}
-    swagger_types['x5c'] = 'list[str]'
+    swagger_types['x_5_c'] = 'list[str]'
 
     attribute_map = {
-        'x5c': 'x5c'
+        'x_5_c': 'x5c'
     }
 
     def __init__(self, config=None):
@@ -48,42 +48,42 @@ class SpCertificate(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, x5c=None, **kwargs):  # noqa: E501
+    def set_attributes(self, x_5_c=None, **kwargs):  # noqa: E501
         """SpCertificate - a model defined in Swagger"""  # noqa: E501
-        self._x5c = None
+        self._x_5_c = None
         self.discriminator = None
-        if x5c is not None:
-            if hasattr(models, self.swagger_types['x5c']):
-                nested_class = getattr(models, self.swagger_types['x5c'])
-                if isinstance(x5c, nested_class):
-                    self.x5c = x5c
-                elif isinstance(x5c, dict):
-                    self.x5c = nested_class.from_kwargs(**x5c)
+        if x_5_c is not None:
+            if hasattr(models, self.swagger_types['x_5_c']):
+                nested_class = getattr(models, self.swagger_types['x_5_c'])
+                if isinstance(x_5_c, nested_class):
+                    self.x_5_c = x_5_c
+                elif isinstance(x_5_c, dict):
+                    self.x_5_c = nested_class.from_kwargs(**x_5_c)
                 else:
-                    self.x5c = x5c
+                    self.x_5_c = x_5_c
             else:
-                self.x5c = x5c
+                self.x_5_c = x_5_c
 
     @property
-    def x5c(self):
-        """Gets the x5c of this SpCertificate.  # noqa: E501
+    def x_5_c(self):
+        """Gets the x_5_c of this SpCertificate.  # noqa: E501
 
 
-        :return: The x5c of this SpCertificate.  # noqa: E501
+        :return: The x_5_c of this SpCertificate.  # noqa: E501
         :rtype: list[str]
         """
-        return self._x5c
+        return self._x_5_c
 
-    @x5c.setter
-    def x5c(self, x5c):
-        """Sets the x5c of this SpCertificate.
+    @x_5_c.setter
+    def x_5_c(self, x_5_c):
+        """Sets the x_5_c of this SpCertificate.
 
 
-        :param x5c: The x5c of this SpCertificate.  # noqa: E501
+        :param x_5_c: The x_5_c of this SpCertificate.  # noqa: E501
         :type: list[str]
         """
 
-        self._x5c = x5c
+        self._x_5_c = x_5_c
 
     def to_dict(self):
         """Returns the model properties as a dict"""

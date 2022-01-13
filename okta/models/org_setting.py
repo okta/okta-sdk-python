@@ -32,8 +32,8 @@ class OrgSetting(object):
     """
     swagger_types = {}
     swagger_types['links'] = 'dict(str, object)'
-    swagger_types['address1'] = 'str'
-    swagger_types['address2'] = 'str'
+    swagger_types['address_1'] = 'str'
+    swagger_types['address_2'] = 'str'
     swagger_types['city'] = 'str'
     swagger_types['company_name'] = 'str'
     swagger_types['country'] = 'str'
@@ -52,8 +52,8 @@ class OrgSetting(object):
 
     attribute_map = {
         'links': '_links',
-        'address1': 'address1',
-        'address2': 'address2',
+        'address_1': 'address1',
+        'address_2': 'address2',
         'city': 'city',
         'company_name': 'companyName',
         'country': 'country',
@@ -82,11 +82,11 @@ class OrgSetting(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, links=None, address1=None, address2=None, city=None, company_name=None, country=None, created=None, end_user_support_help_url=None, expires_at=None, id=None, last_updated=None, phone_number=None, postal_code=None, state=None, status=None, subdomain=None, support_phone_number=None, website=None, **kwargs):  # noqa: E501
+    def set_attributes(self, links=None, address_1=None, address_2=None, city=None, company_name=None, country=None, created=None, end_user_support_help_url=None, expires_at=None, id=None, last_updated=None, phone_number=None, postal_code=None, state=None, status=None, subdomain=None, support_phone_number=None, website=None, **kwargs):  # noqa: E501
         """OrgSetting - a model defined in Swagger"""  # noqa: E501
         self._links = None
-        self._address1 = None
-        self._address2 = None
+        self._address_1 = None
+        self._address_2 = None
         self._city = None
         self._company_name = None
         self._country = None
@@ -114,28 +114,28 @@ class OrgSetting(object):
                     self.links = links
             else:
                 self.links = links
-        if address1 is not None:
-            if hasattr(models, self.swagger_types['address1']):
-                nested_class = getattr(models, self.swagger_types['address1'])
-                if isinstance(address1, nested_class):
-                    self.address1 = address1
-                elif isinstance(address1, dict):
-                    self.address1 = nested_class.from_kwargs(**address1)
+        if address_1 is not None:
+            if hasattr(models, self.swagger_types['address_1']):
+                nested_class = getattr(models, self.swagger_types['address_1'])
+                if isinstance(address_1, nested_class):
+                    self.address_1 = address_1
+                elif isinstance(address_1, dict):
+                    self.address_1 = nested_class.from_kwargs(**address_1)
                 else:
-                    self.address1 = address1
+                    self.address_1 = address_1
             else:
-                self.address1 = address1
-        if address2 is not None:
-            if hasattr(models, self.swagger_types['address2']):
-                nested_class = getattr(models, self.swagger_types['address2'])
-                if isinstance(address2, nested_class):
-                    self.address2 = address2
-                elif isinstance(address2, dict):
-                    self.address2 = nested_class.from_kwargs(**address2)
+                self.address_1 = address_1
+        if address_2 is not None:
+            if hasattr(models, self.swagger_types['address_2']):
+                nested_class = getattr(models, self.swagger_types['address_2'])
+                if isinstance(address_2, nested_class):
+                    self.address_2 = address_2
+                elif isinstance(address_2, dict):
+                    self.address_2 = nested_class.from_kwargs(**address_2)
                 else:
-                    self.address2 = address2
+                    self.address_2 = address_2
             else:
-                self.address2 = address2
+                self.address_2 = address_2
         if city is not None:
             if hasattr(models, self.swagger_types['city']):
                 nested_class = getattr(models, self.swagger_types['city'])
@@ -324,46 +324,46 @@ class OrgSetting(object):
         self._links = links
 
     @property
-    def address1(self):
-        """Gets the address1 of this OrgSetting.  # noqa: E501
+    def address_1(self):
+        """Gets the address_1 of this OrgSetting.  # noqa: E501
 
 
-        :return: The address1 of this OrgSetting.  # noqa: E501
+        :return: The address_1 of this OrgSetting.  # noqa: E501
         :rtype: str
         """
-        return self._address1
+        return self._address_1
 
-    @address1.setter
-    def address1(self, address1):
-        """Sets the address1 of this OrgSetting.
+    @address_1.setter
+    def address_1(self, address_1):
+        """Sets the address_1 of this OrgSetting.
 
 
-        :param address1: The address1 of this OrgSetting.  # noqa: E501
+        :param address_1: The address_1 of this OrgSetting.  # noqa: E501
         :type: str
         """
 
-        self._address1 = address1
+        self._address_1 = address_1
 
     @property
-    def address2(self):
-        """Gets the address2 of this OrgSetting.  # noqa: E501
+    def address_2(self):
+        """Gets the address_2 of this OrgSetting.  # noqa: E501
 
 
-        :return: The address2 of this OrgSetting.  # noqa: E501
+        :return: The address_2 of this OrgSetting.  # noqa: E501
         :rtype: str
         """
-        return self._address2
+        return self._address_2
 
-    @address2.setter
-    def address2(self, address2):
-        """Sets the address2 of this OrgSetting.
+    @address_2.setter
+    def address_2(self, address_2):
+        """Sets the address_2 of this OrgSetting.
 
 
-        :param address2: The address2 of this OrgSetting.  # noqa: E501
+        :param address_2: The address_2 of this OrgSetting.  # noqa: E501
         :type: str
         """
 
-        self._address2 = address2
+        self._address_2 = address_2
 
     @property
     def city(self):

@@ -43,10 +43,10 @@ class JsonWebKey(object):
     swagger_types['n'] = 'str'
     swagger_types['status'] = 'str'
     swagger_types['use'] = 'str'
-    swagger_types['x5c'] = 'list[str]'
-    swagger_types['x5t'] = 'str'
-    swagger_types['x5t_s256'] = 'str'
-    swagger_types['x5u'] = 'str'
+    swagger_types['x_5_c'] = 'list[str]'
+    swagger_types['x_5_t'] = 'str'
+    swagger_types['x_5_t_s_256'] = 'str'
+    swagger_types['x_5_u'] = 'str'
 
     attribute_map = {
         'links': '_links',
@@ -61,10 +61,10 @@ class JsonWebKey(object):
         'n': 'n',
         'status': 'status',
         'use': 'use',
-        'x5c': 'x5c',
-        'x5t': 'x5t',
-        'x5t_s256': 'x5t#S256',
-        'x5u': 'x5u'
+        'x_5_c': 'x5c',
+        'x_5_t': 'x5t',
+        'x_5_t_s_256': 'x5t#S256',
+        'x_5_u': 'x5u'
     }
 
     def __init__(self, config=None):
@@ -78,7 +78,7 @@ class JsonWebKey(object):
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, links=None, alg=None, created=None, e=None, expires_at=None, key_ops=None, kid=None, kty=None, last_updated=None, n=None, status=None, use=None, x5c=None, x5t=None, x5t_s256=None, x5u=None, **kwargs):  # noqa: E501
+    def set_attributes(self, links=None, alg=None, created=None, e=None, expires_at=None, key_ops=None, kid=None, kty=None, last_updated=None, n=None, status=None, use=None, x_5_c=None, x_5_t=None, x_5_t_s_256=None, x_5_u=None, **kwargs):  # noqa: E501
         """JsonWebKey - a model defined in Swagger"""  # noqa: E501
         self._links = None
         self._alg = None
@@ -92,10 +92,10 @@ class JsonWebKey(object):
         self._n = None
         self._status = None
         self._use = None
-        self._x5c = None
-        self._x5t = None
-        self._x5t_s256 = None
-        self._x5u = None
+        self._x_5_c = None
+        self._x_5_t = None
+        self._x_5_t_s_256 = None
+        self._x_5_u = None
         self.discriminator = None
         if links is not None:
             if hasattr(models, self.swagger_types['links']):
@@ -229,50 +229,50 @@ class JsonWebKey(object):
                     self.use = use
             else:
                 self.use = use
-        if x5c is not None:
-            if hasattr(models, self.swagger_types['x5c']):
-                nested_class = getattr(models, self.swagger_types['x5c'])
-                if isinstance(x5c, nested_class):
-                    self.x5c = x5c
-                elif isinstance(x5c, dict):
-                    self.x5c = nested_class.from_kwargs(**x5c)
+        if x_5_c is not None:
+            if hasattr(models, self.swagger_types['x_5_c']):
+                nested_class = getattr(models, self.swagger_types['x_5_c'])
+                if isinstance(x_5_c, nested_class):
+                    self.x_5_c = x_5_c
+                elif isinstance(x_5_c, dict):
+                    self.x_5_c = nested_class.from_kwargs(**x_5_c)
                 else:
-                    self.x5c = x5c
+                    self.x_5_c = x_5_c
             else:
-                self.x5c = x5c
-        if x5t is not None:
-            if hasattr(models, self.swagger_types['x5t']):
-                nested_class = getattr(models, self.swagger_types['x5t'])
-                if isinstance(x5t, nested_class):
-                    self.x5t = x5t
-                elif isinstance(x5t, dict):
-                    self.x5t = nested_class.from_kwargs(**x5t)
+                self.x_5_c = x_5_c
+        if x_5_t is not None:
+            if hasattr(models, self.swagger_types['x_5_t']):
+                nested_class = getattr(models, self.swagger_types['x_5_t'])
+                if isinstance(x_5_t, nested_class):
+                    self.x_5_t = x_5_t
+                elif isinstance(x_5_t, dict):
+                    self.x_5_t = nested_class.from_kwargs(**x_5_t)
                 else:
-                    self.x5t = x5t
+                    self.x_5_t = x_5_t
             else:
-                self.x5t = x5t
-        if x5t_s256 is not None:
-            if hasattr(models, self.swagger_types['x5t_s256']):
-                nested_class = getattr(models, self.swagger_types['x5t_s256'])
-                if isinstance(x5t_s256, nested_class):
-                    self.x5t_s256 = x5t_s256
-                elif isinstance(x5t_s256, dict):
-                    self.x5t_s256 = nested_class.from_kwargs(**x5t_s256)
+                self.x_5_t = x_5_t
+        if x_5_t_s_256 is not None:
+            if hasattr(models, self.swagger_types['x_5_t_s_256']):
+                nested_class = getattr(models, self.swagger_types['x_5_t_s_256'])
+                if isinstance(x_5_t_s_256, nested_class):
+                    self.x_5_t_s_256 = x_5_t_s_256
+                elif isinstance(x_5_t_s_256, dict):
+                    self.x_5_t_s_256 = nested_class.from_kwargs(**x_5_t_s_256)
                 else:
-                    self.x5t_s256 = x5t_s256
+                    self.x_5_t_s_256 = x_5_t_s_256
             else:
-                self.x5t_s256 = x5t_s256
-        if x5u is not None:
-            if hasattr(models, self.swagger_types['x5u']):
-                nested_class = getattr(models, self.swagger_types['x5u'])
-                if isinstance(x5u, nested_class):
-                    self.x5u = x5u
-                elif isinstance(x5u, dict):
-                    self.x5u = nested_class.from_kwargs(**x5u)
+                self.x_5_t_s_256 = x_5_t_s_256
+        if x_5_u is not None:
+            if hasattr(models, self.swagger_types['x_5_u']):
+                nested_class = getattr(models, self.swagger_types['x_5_u'])
+                if isinstance(x_5_u, nested_class):
+                    self.x_5_u = x_5_u
+                elif isinstance(x_5_u, dict):
+                    self.x_5_u = nested_class.from_kwargs(**x_5_u)
                 else:
-                    self.x5u = x5u
+                    self.x_5_u = x_5_u
             else:
-                self.x5u = x5u
+                self.x_5_u = x_5_u
 
     @property
     def links(self):
@@ -527,88 +527,88 @@ class JsonWebKey(object):
         self._use = use
 
     @property
-    def x5c(self):
-        """Gets the x5c of this JsonWebKey.  # noqa: E501
+    def x_5_c(self):
+        """Gets the x_5_c of this JsonWebKey.  # noqa: E501
 
 
-        :return: The x5c of this JsonWebKey.  # noqa: E501
+        :return: The x_5_c of this JsonWebKey.  # noqa: E501
         :rtype: list[str]
         """
-        return self._x5c
+        return self._x_5_c
 
-    @x5c.setter
-    def x5c(self, x5c):
-        """Sets the x5c of this JsonWebKey.
+    @x_5_c.setter
+    def x_5_c(self, x_5_c):
+        """Sets the x_5_c of this JsonWebKey.
 
 
-        :param x5c: The x5c of this JsonWebKey.  # noqa: E501
+        :param x_5_c: The x_5_c of this JsonWebKey.  # noqa: E501
         :type: list[str]
         """
 
-        self._x5c = x5c
+        self._x_5_c = x_5_c
 
     @property
-    def x5t(self):
-        """Gets the x5t of this JsonWebKey.  # noqa: E501
+    def x_5_t(self):
+        """Gets the x_5_t of this JsonWebKey.  # noqa: E501
 
 
-        :return: The x5t of this JsonWebKey.  # noqa: E501
+        :return: The x_5_t of this JsonWebKey.  # noqa: E501
         :rtype: str
         """
-        return self._x5t
+        return self._x_5_t
 
-    @x5t.setter
-    def x5t(self, x5t):
-        """Sets the x5t of this JsonWebKey.
+    @x_5_t.setter
+    def x_5_t(self, x_5_t):
+        """Sets the x_5_t of this JsonWebKey.
 
 
-        :param x5t: The x5t of this JsonWebKey.  # noqa: E501
+        :param x_5_t: The x_5_t of this JsonWebKey.  # noqa: E501
         :type: str
         """
 
-        self._x5t = x5t
+        self._x_5_t = x_5_t
 
     @property
-    def x5t_s256(self):
-        """Gets the x5t_s256 of this JsonWebKey.  # noqa: E501
+    def x_5_t_s_256(self):
+        """Gets the x_5_t_s_256 of this JsonWebKey.  # noqa: E501
 
 
-        :return: The x5t_s256 of this JsonWebKey.  # noqa: E501
+        :return: The x_5_t_s_256 of this JsonWebKey.  # noqa: E501
         :rtype: str
         """
-        return self._x5t_s256
+        return self._x_5_t_s_256
 
-    @x5t_s256.setter
-    def x5t_s256(self, x5t_s256):
-        """Sets the x5t_s256 of this JsonWebKey.
+    @x_5_t_s_256.setter
+    def x_5_t_s_256(self, x_5_t_s_256):
+        """Sets the x_5_t_s_256 of this JsonWebKey.
 
 
-        :param x5t_s256: The x5t_s256 of this JsonWebKey.  # noqa: E501
+        :param x_5_t_s_256: The x_5_t_s_256 of this JsonWebKey.  # noqa: E501
         :type: str
         """
 
-        self._x5t_s256 = x5t_s256
+        self._x_5_t_s_256 = x_5_t_s_256
 
     @property
-    def x5u(self):
-        """Gets the x5u of this JsonWebKey.  # noqa: E501
+    def x_5_u(self):
+        """Gets the x_5_u of this JsonWebKey.  # noqa: E501
 
 
-        :return: The x5u of this JsonWebKey.  # noqa: E501
+        :return: The x_5_u of this JsonWebKey.  # noqa: E501
         :rtype: str
         """
-        return self._x5u
+        return self._x_5_u
 
-    @x5u.setter
-    def x5u(self, x5u):
-        """Sets the x5u of this JsonWebKey.
+    @x_5_u.setter
+    def x_5_u(self, x_5_u):
+        """Sets the x_5_u of this JsonWebKey.
 
 
-        :param x5u: The x5u of this JsonWebKey.  # noqa: E501
+        :param x_5_u: The x_5_u of this JsonWebKey.  # noqa: E501
         :type: str
         """
 
-        self._x5u = x5u
+        self._x_5_u = x_5_u
 
     def to_dict(self):
         """Returns the model properties as a dict"""

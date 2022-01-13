@@ -34,23 +34,23 @@ class SecurePasswordStoreApplicationSettingsApplication(ApplicationSettingsAppli
     swagger_types = {}
     if hasattr(ApplicationSettingsApplication, "swagger_types"):
         swagger_types.update(ApplicationSettingsApplication.swagger_types)
-    swagger_types['optional_field1'] = 'str'
-    swagger_types['optional_field1_value'] = 'str'
-    swagger_types['optional_field2'] = 'str'
-    swagger_types['optional_field2_value'] = 'str'
-    swagger_types['optional_field3'] = 'str'
-    swagger_types['optional_field3_value'] = 'str'
+    swagger_types['optional_field_1'] = 'str'
+    swagger_types['optional_field_1_value'] = 'str'
+    swagger_types['optional_field_2'] = 'str'
+    swagger_types['optional_field_2_value'] = 'str'
+    swagger_types['optional_field_3'] = 'str'
+    swagger_types['optional_field_3_value'] = 'str'
     swagger_types['password_field'] = 'str'
     swagger_types['url'] = 'str'
     swagger_types['username_field'] = 'str'
 
     attribute_map = {
-        'optional_field1': 'optionalField1',
-        'optional_field1_value': 'optionalField1Value',
-        'optional_field2': 'optionalField2',
-        'optional_field2_value': 'optionalField2Value',
-        'optional_field3': 'optionalField3',
-        'optional_field3_value': 'optionalField3Value',
+        'optional_field_1': 'optionalField1',
+        'optional_field_1_value': 'optionalField1Value',
+        'optional_field_2': 'optionalField2',
+        'optional_field_2_value': 'optionalField2Value',
+        'optional_field_3': 'optionalField3',
+        'optional_field_3_value': 'optionalField3Value',
         'password_field': 'passwordField',
         'url': 'url',
         'username_field': 'usernameField'
@@ -69,88 +69,88 @@ class SecurePasswordStoreApplicationSettingsApplication(ApplicationSettingsAppli
     def from_kwargs(cls, **kwargs):
         return cls(config=kwargs)
 
-    def set_attributes(self, optional_field1=None, optional_field1_value=None, optional_field2=None, optional_field2_value=None, optional_field3=None, optional_field3_value=None, password_field=None, url=None, username_field=None, **kwargs):  # noqa: E501
+    def set_attributes(self, optional_field_1=None, optional_field_1_value=None, optional_field_2=None, optional_field_2_value=None, optional_field_3=None, optional_field_3_value=None, password_field=None, url=None, username_field=None, **kwargs):  # noqa: E501
         """SecurePasswordStoreApplicationSettingsApplication - a model defined in Swagger"""  # noqa: E501
         config = {}
         if kwargs is not None:
             config = {to_snake_case(key): value for key, value in kwargs.items()}
         super().set_attributes(**config)
-        self._optional_field1 = None
-        self._optional_field1_value = None
-        self._optional_field2 = None
-        self._optional_field2_value = None
-        self._optional_field3 = None
-        self._optional_field3_value = None
+        self._optional_field_1 = None
+        self._optional_field_1_value = None
+        self._optional_field_2 = None
+        self._optional_field_2_value = None
+        self._optional_field_3 = None
+        self._optional_field_3_value = None
         self._password_field = None
         self._url = None
         self._username_field = None
         self.discriminator = None
-        if optional_field1 is not None:
-            if hasattr(models, self.swagger_types['optional_field1']):
-                nested_class = getattr(models, self.swagger_types['optional_field1'])
-                if isinstance(optional_field1, nested_class):
-                    self.optional_field1 = optional_field1
-                elif isinstance(optional_field1, dict):
-                    self.optional_field1 = nested_class.from_kwargs(**optional_field1)
+        if optional_field_1 is not None:
+            if hasattr(models, self.swagger_types['optional_field_1']):
+                nested_class = getattr(models, self.swagger_types['optional_field_1'])
+                if isinstance(optional_field_1, nested_class):
+                    self.optional_field_1 = optional_field_1
+                elif isinstance(optional_field_1, dict):
+                    self.optional_field_1 = nested_class.from_kwargs(**optional_field_1)
                 else:
-                    self.optional_field1 = optional_field1
+                    self.optional_field_1 = optional_field_1
             else:
-                self.optional_field1 = optional_field1
-        if optional_field1_value is not None:
-            if hasattr(models, self.swagger_types['optional_field1_value']):
-                nested_class = getattr(models, self.swagger_types['optional_field1_value'])
-                if isinstance(optional_field1_value, nested_class):
-                    self.optional_field1_value = optional_field1_value
-                elif isinstance(optional_field1_value, dict):
-                    self.optional_field1_value = nested_class.from_kwargs(**optional_field1_value)
+                self.optional_field_1 = optional_field_1
+        if optional_field_1_value is not None:
+            if hasattr(models, self.swagger_types['optional_field_1_value']):
+                nested_class = getattr(models, self.swagger_types['optional_field_1_value'])
+                if isinstance(optional_field_1_value, nested_class):
+                    self.optional_field_1_value = optional_field_1_value
+                elif isinstance(optional_field_1_value, dict):
+                    self.optional_field_1_value = nested_class.from_kwargs(**optional_field_1_value)
                 else:
-                    self.optional_field1_value = optional_field1_value
+                    self.optional_field_1_value = optional_field_1_value
             else:
-                self.optional_field1_value = optional_field1_value
-        if optional_field2 is not None:
-            if hasattr(models, self.swagger_types['optional_field2']):
-                nested_class = getattr(models, self.swagger_types['optional_field2'])
-                if isinstance(optional_field2, nested_class):
-                    self.optional_field2 = optional_field2
-                elif isinstance(optional_field2, dict):
-                    self.optional_field2 = nested_class.from_kwargs(**optional_field2)
+                self.optional_field_1_value = optional_field_1_value
+        if optional_field_2 is not None:
+            if hasattr(models, self.swagger_types['optional_field_2']):
+                nested_class = getattr(models, self.swagger_types['optional_field_2'])
+                if isinstance(optional_field_2, nested_class):
+                    self.optional_field_2 = optional_field_2
+                elif isinstance(optional_field_2, dict):
+                    self.optional_field_2 = nested_class.from_kwargs(**optional_field_2)
                 else:
-                    self.optional_field2 = optional_field2
+                    self.optional_field_2 = optional_field_2
             else:
-                self.optional_field2 = optional_field2
-        if optional_field2_value is not None:
-            if hasattr(models, self.swagger_types['optional_field2_value']):
-                nested_class = getattr(models, self.swagger_types['optional_field2_value'])
-                if isinstance(optional_field2_value, nested_class):
-                    self.optional_field2_value = optional_field2_value
-                elif isinstance(optional_field2_value, dict):
-                    self.optional_field2_value = nested_class.from_kwargs(**optional_field2_value)
+                self.optional_field_2 = optional_field_2
+        if optional_field_2_value is not None:
+            if hasattr(models, self.swagger_types['optional_field_2_value']):
+                nested_class = getattr(models, self.swagger_types['optional_field_2_value'])
+                if isinstance(optional_field_2_value, nested_class):
+                    self.optional_field_2_value = optional_field_2_value
+                elif isinstance(optional_field_2_value, dict):
+                    self.optional_field_2_value = nested_class.from_kwargs(**optional_field_2_value)
                 else:
-                    self.optional_field2_value = optional_field2_value
+                    self.optional_field_2_value = optional_field_2_value
             else:
-                self.optional_field2_value = optional_field2_value
-        if optional_field3 is not None:
-            if hasattr(models, self.swagger_types['optional_field3']):
-                nested_class = getattr(models, self.swagger_types['optional_field3'])
-                if isinstance(optional_field3, nested_class):
-                    self.optional_field3 = optional_field3
-                elif isinstance(optional_field3, dict):
-                    self.optional_field3 = nested_class.from_kwargs(**optional_field3)
+                self.optional_field_2_value = optional_field_2_value
+        if optional_field_3 is not None:
+            if hasattr(models, self.swagger_types['optional_field_3']):
+                nested_class = getattr(models, self.swagger_types['optional_field_3'])
+                if isinstance(optional_field_3, nested_class):
+                    self.optional_field_3 = optional_field_3
+                elif isinstance(optional_field_3, dict):
+                    self.optional_field_3 = nested_class.from_kwargs(**optional_field_3)
                 else:
-                    self.optional_field3 = optional_field3
+                    self.optional_field_3 = optional_field_3
             else:
-                self.optional_field3 = optional_field3
-        if optional_field3_value is not None:
-            if hasattr(models, self.swagger_types['optional_field3_value']):
-                nested_class = getattr(models, self.swagger_types['optional_field3_value'])
-                if isinstance(optional_field3_value, nested_class):
-                    self.optional_field3_value = optional_field3_value
-                elif isinstance(optional_field3_value, dict):
-                    self.optional_field3_value = nested_class.from_kwargs(**optional_field3_value)
+                self.optional_field_3 = optional_field_3
+        if optional_field_3_value is not None:
+            if hasattr(models, self.swagger_types['optional_field_3_value']):
+                nested_class = getattr(models, self.swagger_types['optional_field_3_value'])
+                if isinstance(optional_field_3_value, nested_class):
+                    self.optional_field_3_value = optional_field_3_value
+                elif isinstance(optional_field_3_value, dict):
+                    self.optional_field_3_value = nested_class.from_kwargs(**optional_field_3_value)
                 else:
-                    self.optional_field3_value = optional_field3_value
+                    self.optional_field_3_value = optional_field_3_value
             else:
-                self.optional_field3_value = optional_field3_value
+                self.optional_field_3_value = optional_field_3_value
         if password_field is not None:
             if hasattr(models, self.swagger_types['password_field']):
                 nested_class = getattr(models, self.swagger_types['password_field'])
@@ -186,130 +186,130 @@ class SecurePasswordStoreApplicationSettingsApplication(ApplicationSettingsAppli
                 self.username_field = username_field
 
     @property
-    def optional_field1(self):
-        """Gets the optional_field1 of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
+    def optional_field_1(self):
+        """Gets the optional_field_1 of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
 
 
-        :return: The optional_field1 of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
+        :return: The optional_field_1 of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
         :rtype: str
         """
-        return self._optional_field1
+        return self._optional_field_1
 
-    @optional_field1.setter
-    def optional_field1(self, optional_field1):
-        """Sets the optional_field1 of this SecurePasswordStoreApplicationSettingsApplication.
+    @optional_field_1.setter
+    def optional_field_1(self, optional_field_1):
+        """Sets the optional_field_1 of this SecurePasswordStoreApplicationSettingsApplication.
 
 
-        :param optional_field1: The optional_field1 of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
+        :param optional_field_1: The optional_field_1 of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
         :type: str
         """
 
-        self._optional_field1 = optional_field1
+        self._optional_field_1 = optional_field_1
 
     @property
-    def optional_field1_value(self):
-        """Gets the optional_field1_value of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
+    def optional_field_1_value(self):
+        """Gets the optional_field_1_value of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
 
 
-        :return: The optional_field1_value of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
+        :return: The optional_field_1_value of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
         :rtype: str
         """
-        return self._optional_field1_value
+        return self._optional_field_1_value
 
-    @optional_field1_value.setter
-    def optional_field1_value(self, optional_field1_value):
-        """Sets the optional_field1_value of this SecurePasswordStoreApplicationSettingsApplication.
+    @optional_field_1_value.setter
+    def optional_field_1_value(self, optional_field_1_value):
+        """Sets the optional_field_1_value of this SecurePasswordStoreApplicationSettingsApplication.
 
 
-        :param optional_field1_value: The optional_field1_value of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
+        :param optional_field_1_value: The optional_field_1_value of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
         :type: str
         """
 
-        self._optional_field1_value = optional_field1_value
+        self._optional_field_1_value = optional_field_1_value
 
     @property
-    def optional_field2(self):
-        """Gets the optional_field2 of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
+    def optional_field_2(self):
+        """Gets the optional_field_2 of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
 
 
-        :return: The optional_field2 of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
+        :return: The optional_field_2 of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
         :rtype: str
         """
-        return self._optional_field2
+        return self._optional_field_2
 
-    @optional_field2.setter
-    def optional_field2(self, optional_field2):
-        """Sets the optional_field2 of this SecurePasswordStoreApplicationSettingsApplication.
+    @optional_field_2.setter
+    def optional_field_2(self, optional_field_2):
+        """Sets the optional_field_2 of this SecurePasswordStoreApplicationSettingsApplication.
 
 
-        :param optional_field2: The optional_field2 of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
+        :param optional_field_2: The optional_field_2 of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
         :type: str
         """
 
-        self._optional_field2 = optional_field2
+        self._optional_field_2 = optional_field_2
 
     @property
-    def optional_field2_value(self):
-        """Gets the optional_field2_value of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
+    def optional_field_2_value(self):
+        """Gets the optional_field_2_value of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
 
 
-        :return: The optional_field2_value of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
+        :return: The optional_field_2_value of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
         :rtype: str
         """
-        return self._optional_field2_value
+        return self._optional_field_2_value
 
-    @optional_field2_value.setter
-    def optional_field2_value(self, optional_field2_value):
-        """Sets the optional_field2_value of this SecurePasswordStoreApplicationSettingsApplication.
+    @optional_field_2_value.setter
+    def optional_field_2_value(self, optional_field_2_value):
+        """Sets the optional_field_2_value of this SecurePasswordStoreApplicationSettingsApplication.
 
 
-        :param optional_field2_value: The optional_field2_value of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
+        :param optional_field_2_value: The optional_field_2_value of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
         :type: str
         """
 
-        self._optional_field2_value = optional_field2_value
+        self._optional_field_2_value = optional_field_2_value
 
     @property
-    def optional_field3(self):
-        """Gets the optional_field3 of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
+    def optional_field_3(self):
+        """Gets the optional_field_3 of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
 
 
-        :return: The optional_field3 of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
+        :return: The optional_field_3 of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
         :rtype: str
         """
-        return self._optional_field3
+        return self._optional_field_3
 
-    @optional_field3.setter
-    def optional_field3(self, optional_field3):
-        """Sets the optional_field3 of this SecurePasswordStoreApplicationSettingsApplication.
+    @optional_field_3.setter
+    def optional_field_3(self, optional_field_3):
+        """Sets the optional_field_3 of this SecurePasswordStoreApplicationSettingsApplication.
 
 
-        :param optional_field3: The optional_field3 of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
+        :param optional_field_3: The optional_field_3 of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
         :type: str
         """
 
-        self._optional_field3 = optional_field3
+        self._optional_field_3 = optional_field_3
 
     @property
-    def optional_field3_value(self):
-        """Gets the optional_field3_value of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
+    def optional_field_3_value(self):
+        """Gets the optional_field_3_value of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
 
 
-        :return: The optional_field3_value of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
+        :return: The optional_field_3_value of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
         :rtype: str
         """
-        return self._optional_field3_value
+        return self._optional_field_3_value
 
-    @optional_field3_value.setter
-    def optional_field3_value(self, optional_field3_value):
-        """Sets the optional_field3_value of this SecurePasswordStoreApplicationSettingsApplication.
+    @optional_field_3_value.setter
+    def optional_field_3_value(self, optional_field_3_value):
+        """Sets the optional_field_3_value of this SecurePasswordStoreApplicationSettingsApplication.
 
 
-        :param optional_field3_value: The optional_field3_value of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
+        :param optional_field_3_value: The optional_field_3_value of this SecurePasswordStoreApplicationSettingsApplication.  # noqa: E501
         :type: str
         """
 
-        self._optional_field3_value = optional_field3_value
+        self._optional_field_3_value = optional_field_3_value
 
     @property
     def password_field(self):
