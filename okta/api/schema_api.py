@@ -507,47 +507,47 @@ class Schema(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def update_user_profile(self, body, schema_id, **kwargs):  # noqa: E501
+    def update_user_profile(self, schema_id, body, **kwargs):  # noqa: E501
         """update_user_profile  # noqa: E501
 
         Partial updates on the User Profile properties of the user schema.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_user_profile(body, schema_id, async_req=True)
+        >>> thread = api.update_user_profile(schema_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param UserSchema body: (required)
         :param str schema_id: (required)
+        :param UserSchema body: (required)
         :return: UserSchema
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.update_user_profile_with_http_info(body, schema_id, **kwargs)  # noqa: E501
+            return self.update_user_profile_with_http_info(schema_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.update_user_profile_with_http_info(body, schema_id, **kwargs)  # noqa: E501
+            (data) = self.update_user_profile_with_http_info(schema_id, body, **kwargs)  # noqa: E501
             return data
 
-    def update_user_profile_with_http_info(self, body, schema_id, **kwargs):  # noqa: E501
+    def update_user_profile_with_http_info(self, schema_id, body, **kwargs):  # noqa: E501
         """update_user_profile  # noqa: E501
 
         Partial updates on the User Profile properties of the user schema.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_user_profile_with_http_info(body, schema_id, async_req=True)
+        >>> thread = api.update_user_profile_with_http_info(schema_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param UserSchema body: (required)
         :param str schema_id: (required)
+        :param UserSchema body: (required)
         :return: UserSchema
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'schema_id']  # noqa: E501
+        all_params = ['schema_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -562,14 +562,14 @@ class Schema(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `update_user_profile`")  # noqa: E501
         # verify the required parameter 'schema_id' is set
         if ('schema_id' not in params or
                 params['schema_id'] is None):
             raise ValueError("Missing the required parameter `schema_id` when calling `update_user_profile`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `update_user_profile`")  # noqa: E501
 
         collection_formats = {}
 

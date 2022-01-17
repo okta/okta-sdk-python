@@ -123,47 +123,47 @@ class Application(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def assign_user_to_application(self, body, app_id, **kwargs):  # noqa: E501
+    def assign_user_to_application(self, app_id, body, **kwargs):  # noqa: E501
         """Assign User to Application for SSO & Provisioning  # noqa: E501
 
         Assigns an user to an application with [credentials](#application-user-credentials-object) and an app-specific [profile](#application-user-profile-object). Profile mappings defined for the application are first applied before applying any profile properties specified in the request.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.assign_user_to_application(body, app_id, async_req=True)
+        >>> thread = api.assign_user_to_application(app_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param AppUser body: (required)
         :param str app_id: (required)
+        :param AppUser body: (required)
         :return: AppUser
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.assign_user_to_application_with_http_info(body, app_id, **kwargs)  # noqa: E501
+            return self.assign_user_to_application_with_http_info(app_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.assign_user_to_application_with_http_info(body, app_id, **kwargs)  # noqa: E501
+            (data) = self.assign_user_to_application_with_http_info(app_id, body, **kwargs)  # noqa: E501
             return data
 
-    def assign_user_to_application_with_http_info(self, body, app_id, **kwargs):  # noqa: E501
+    def assign_user_to_application_with_http_info(self, app_id, body, **kwargs):  # noqa: E501
         """Assign User to Application for SSO & Provisioning  # noqa: E501
 
         Assigns an user to an application with [credentials](#application-user-credentials-object) and an app-specific [profile](#application-user-profile-object). Profile mappings defined for the application are first applied before applying any profile properties specified in the request.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.assign_user_to_application_with_http_info(body, app_id, async_req=True)
+        >>> thread = api.assign_user_to_application_with_http_info(app_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param AppUser body: (required)
         :param str app_id: (required)
+        :param AppUser body: (required)
         :return: AppUser
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'app_id']  # noqa: E501
+        all_params = ['app_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -178,14 +178,14 @@ class Application(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `assign_user_to_application`")  # noqa: E501
         # verify the required parameter 'app_id' is set
         if ('app_id' not in params or
                 params['app_id'] is None):
             raise ValueError("Missing the required parameter `app_id` when calling `assign_user_to_application`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `assign_user_to_application`")  # noqa: E501
 
         collection_formats = {}
 
@@ -1042,47 +1042,47 @@ class Application(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def generate_csr_for_application(self, body, app_id, **kwargs):  # noqa: E501
+    def generate_csr_for_application(self, app_id, body, **kwargs):  # noqa: E501
         """Generate Certificate Signing Request for Application  # noqa: E501
 
         Generates a new key pair and returns the Certificate Signing Request for it.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.generate_csr_for_application(body, app_id, async_req=True)
+        >>> thread = api.generate_csr_for_application(app_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param CsrMetadata body: (required)
         :param str app_id: (required)
+        :param CsrMetadata body: (required)
         :return: Csr
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.generate_csr_for_application_with_http_info(body, app_id, **kwargs)  # noqa: E501
+            return self.generate_csr_for_application_with_http_info(app_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.generate_csr_for_application_with_http_info(body, app_id, **kwargs)  # noqa: E501
+            (data) = self.generate_csr_for_application_with_http_info(app_id, body, **kwargs)  # noqa: E501
             return data
 
-    def generate_csr_for_application_with_http_info(self, body, app_id, **kwargs):  # noqa: E501
+    def generate_csr_for_application_with_http_info(self, app_id, body, **kwargs):  # noqa: E501
         """Generate Certificate Signing Request for Application  # noqa: E501
 
         Generates a new key pair and returns the Certificate Signing Request for it.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.generate_csr_for_application_with_http_info(body, app_id, async_req=True)
+        >>> thread = api.generate_csr_for_application_with_http_info(app_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param CsrMetadata body: (required)
         :param str app_id: (required)
+        :param CsrMetadata body: (required)
         :return: Csr
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'app_id']  # noqa: E501
+        all_params = ['app_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1097,14 +1097,14 @@ class Application(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `generate_csr_for_application`")  # noqa: E501
         # verify the required parameter 'app_id' is set
         if ('app_id' not in params or
                 params['app_id'] is None):
             raise ValueError("Missing the required parameter `app_id` when calling `generate_csr_for_application`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `generate_csr_for_application`")  # noqa: E501
 
         collection_formats = {}
 
@@ -1882,47 +1882,47 @@ class Application(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def grant_consent_to_scope(self, body, app_id, **kwargs):  # noqa: E501
+    def grant_consent_to_scope(self, app_id, body, **kwargs):  # noqa: E501
         """grant_consent_to_scope  # noqa: E501
 
         Grants consent for the application to request an OAuth 2.0 Okta scope  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.grant_consent_to_scope(body, app_id, async_req=True)
+        >>> thread = api.grant_consent_to_scope(app_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param OAuth2ScopeConsentGrant body: (required)
         :param str app_id: (required)
+        :param OAuth2ScopeConsentGrant body: (required)
         :return: OAuth2ScopeConsentGrant
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.grant_consent_to_scope_with_http_info(body, app_id, **kwargs)  # noqa: E501
+            return self.grant_consent_to_scope_with_http_info(app_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.grant_consent_to_scope_with_http_info(body, app_id, **kwargs)  # noqa: E501
+            (data) = self.grant_consent_to_scope_with_http_info(app_id, body, **kwargs)  # noqa: E501
             return data
 
-    def grant_consent_to_scope_with_http_info(self, body, app_id, **kwargs):  # noqa: E501
+    def grant_consent_to_scope_with_http_info(self, app_id, body, **kwargs):  # noqa: E501
         """grant_consent_to_scope  # noqa: E501
 
         Grants consent for the application to request an OAuth 2.0 Okta scope  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.grant_consent_to_scope_with_http_info(body, app_id, async_req=True)
+        >>> thread = api.grant_consent_to_scope_with_http_info(app_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param OAuth2ScopeConsentGrant body: (required)
         :param str app_id: (required)
+        :param OAuth2ScopeConsentGrant body: (required)
         :return: OAuth2ScopeConsentGrant
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'app_id']  # noqa: E501
+        all_params = ['app_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1937,14 +1937,14 @@ class Application(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `grant_consent_to_scope`")  # noqa: E501
         # verify the required parameter 'app_id' is set
         if ('app_id' not in params or
                 params['app_id'] is None):
             raise ValueError("Missing the required parameter `app_id` when calling `grant_consent_to_scope`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `grant_consent_to_scope`")  # noqa: E501
 
         collection_formats = {}
 
@@ -2726,49 +2726,49 @@ class Application(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def publish_csr_from_application(self, body, app_id, csr_id, **kwargs):  # noqa: E501
+    def publish_csr_from_application(self, app_id, csr_id, body, **kwargs):  # noqa: E501
         """Publish Certificate Signing Request  # noqa: E501
 
         Updates a certificate signing request for the app with a signed X.509 certificate and adds it into the application key credentials  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.publish_csr_from_application(body, app_id, csr_id, async_req=True)
+        >>> thread = api.publish_csr_from_application(app_id, csr_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Object body: (required)
         :param str app_id: (required)
         :param str csr_id: (required)
+        :param Object body: (required)
         :return: JsonWebKey
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.publish_csr_from_application_with_http_info(body, app_id, csr_id, **kwargs)  # noqa: E501
+            return self.publish_csr_from_application_with_http_info(app_id, csr_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.publish_csr_from_application_with_http_info(body, app_id, csr_id, **kwargs)  # noqa: E501
+            (data) = self.publish_csr_from_application_with_http_info(app_id, csr_id, body, **kwargs)  # noqa: E501
             return data
 
-    def publish_csr_from_application_with_http_info(self, body, app_id, csr_id, **kwargs):  # noqa: E501
+    def publish_csr_from_application_with_http_info(self, app_id, csr_id, body, **kwargs):  # noqa: E501
         """Publish Certificate Signing Request  # noqa: E501
 
         Updates a certificate signing request for the app with a signed X.509 certificate and adds it into the application key credentials  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.publish_csr_from_application_with_http_info(body, app_id, csr_id, async_req=True)
+        >>> thread = api.publish_csr_from_application_with_http_info(app_id, csr_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Object body: (required)
         :param str app_id: (required)
         :param str csr_id: (required)
+        :param Object body: (required)
         :return: JsonWebKey
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'app_id', 'csr_id']  # noqa: E501
+        all_params = ['app_id', 'csr_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -2783,10 +2783,6 @@ class Application(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `publish_csr_from_application`")  # noqa: E501
         # verify the required parameter 'app_id' is set
         if ('app_id' not in params or
                 params['app_id'] is None):
@@ -2795,6 +2791,10 @@ class Application(object):
         if ('csr_id' not in params or
                 params['csr_id'] is None):
             raise ValueError("Missing the required parameter `csr_id` when calling `publish_csr_from_application`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `publish_csr_from_application`")  # noqa: E501
 
         collection_formats = {}
 
@@ -2841,49 +2841,49 @@ class Application(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def publish_csr_from_application(self, body, app_id, csr_id, **kwargs):  # noqa: E501
+    def publish_csr_from_application(self, app_id, csr_id, body, **kwargs):  # noqa: E501
         """Publish Certificate Signing Request  # noqa: E501
 
         Updates a certificate signing request for the app with a signed X.509 certificate and adds it into the application key credentials  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.publish_csr_from_application(body, app_id, csr_id, async_req=True)
+        >>> thread = api.publish_csr_from_application(app_id, csr_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Object body: (required)
         :param str app_id: (required)
         :param str csr_id: (required)
+        :param Object body: (required)
         :return: JsonWebKey
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.publish_csr_from_application_with_http_info(body, app_id, csr_id, **kwargs)  # noqa: E501
+            return self.publish_csr_from_application_with_http_info(app_id, csr_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.publish_csr_from_application_with_http_info(body, app_id, csr_id, **kwargs)  # noqa: E501
+            (data) = self.publish_csr_from_application_with_http_info(app_id, csr_id, body, **kwargs)  # noqa: E501
             return data
 
-    def publish_csr_from_application_with_http_info(self, body, app_id, csr_id, **kwargs):  # noqa: E501
+    def publish_csr_from_application_with_http_info(self, app_id, csr_id, body, **kwargs):  # noqa: E501
         """Publish Certificate Signing Request  # noqa: E501
 
         Updates a certificate signing request for the app with a signed X.509 certificate and adds it into the application key credentials  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.publish_csr_from_application_with_http_info(body, app_id, csr_id, async_req=True)
+        >>> thread = api.publish_csr_from_application_with_http_info(app_id, csr_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Object body: (required)
         :param str app_id: (required)
         :param str csr_id: (required)
+        :param Object body: (required)
         :return: JsonWebKey
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'app_id', 'csr_id']  # noqa: E501
+        all_params = ['app_id', 'csr_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -2898,10 +2898,6 @@ class Application(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `publish_csr_from_application`")  # noqa: E501
         # verify the required parameter 'app_id' is set
         if ('app_id' not in params or
                 params['app_id'] is None):
@@ -2910,6 +2906,10 @@ class Application(object):
         if ('csr_id' not in params or
                 params['csr_id'] is None):
             raise ValueError("Missing the required parameter `csr_id` when calling `publish_csr_from_application`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `publish_csr_from_application`")  # noqa: E501
 
         collection_formats = {}
 
@@ -2956,49 +2956,49 @@ class Application(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def publish_csr_from_application(self, body, app_id, csr_id, **kwargs):  # noqa: E501
+    def publish_csr_from_application(self, app_id, csr_id, body, **kwargs):  # noqa: E501
         """Publish Certificate Signing Request  # noqa: E501
 
         Updates a certificate signing request for the app with a signed X.509 certificate and adds it into the application key credentials  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.publish_csr_from_application(body, app_id, csr_id, async_req=True)
+        >>> thread = api.publish_csr_from_application(app_id, csr_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Object body: (required)
         :param str app_id: (required)
         :param str csr_id: (required)
+        :param Object body: (required)
         :return: JsonWebKey
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.publish_csr_from_application_with_http_info(body, app_id, csr_id, **kwargs)  # noqa: E501
+            return self.publish_csr_from_application_with_http_info(app_id, csr_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.publish_csr_from_application_with_http_info(body, app_id, csr_id, **kwargs)  # noqa: E501
+            (data) = self.publish_csr_from_application_with_http_info(app_id, csr_id, body, **kwargs)  # noqa: E501
             return data
 
-    def publish_csr_from_application_with_http_info(self, body, app_id, csr_id, **kwargs):  # noqa: E501
+    def publish_csr_from_application_with_http_info(self, app_id, csr_id, body, **kwargs):  # noqa: E501
         """Publish Certificate Signing Request  # noqa: E501
 
         Updates a certificate signing request for the app with a signed X.509 certificate and adds it into the application key credentials  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.publish_csr_from_application_with_http_info(body, app_id, csr_id, async_req=True)
+        >>> thread = api.publish_csr_from_application_with_http_info(app_id, csr_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Object body: (required)
         :param str app_id: (required)
         :param str csr_id: (required)
+        :param Object body: (required)
         :return: JsonWebKey
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'app_id', 'csr_id']  # noqa: E501
+        all_params = ['app_id', 'csr_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -3013,10 +3013,6 @@ class Application(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `publish_csr_from_application`")  # noqa: E501
         # verify the required parameter 'app_id' is set
         if ('app_id' not in params or
                 params['app_id'] is None):
@@ -3025,6 +3021,10 @@ class Application(object):
         if ('csr_id' not in params or
                 params['csr_id'] is None):
             raise ValueError("Missing the required parameter `csr_id` when calling `publish_csr_from_application`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `publish_csr_from_application`")  # noqa: E501
 
         collection_formats = {}
 
@@ -3071,49 +3071,49 @@ class Application(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def publish_csr_from_application(self, body, app_id, csr_id, **kwargs):  # noqa: E501
+    def publish_csr_from_application(self, app_id, csr_id, body, **kwargs):  # noqa: E501
         """Publish Certificate Signing Request  # noqa: E501
 
         Updates a certificate signing request for the app with a signed X.509 certificate and adds it into the application key credentials  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.publish_csr_from_application(body, app_id, csr_id, async_req=True)
+        >>> thread = api.publish_csr_from_application(app_id, csr_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Object body: (required)
         :param str app_id: (required)
         :param str csr_id: (required)
+        :param Object body: (required)
         :return: JsonWebKey
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.publish_csr_from_application_with_http_info(body, app_id, csr_id, **kwargs)  # noqa: E501
+            return self.publish_csr_from_application_with_http_info(app_id, csr_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.publish_csr_from_application_with_http_info(body, app_id, csr_id, **kwargs)  # noqa: E501
+            (data) = self.publish_csr_from_application_with_http_info(app_id, csr_id, body, **kwargs)  # noqa: E501
             return data
 
-    def publish_csr_from_application_with_http_info(self, body, app_id, csr_id, **kwargs):  # noqa: E501
+    def publish_csr_from_application_with_http_info(self, app_id, csr_id, body, **kwargs):  # noqa: E501
         """Publish Certificate Signing Request  # noqa: E501
 
         Updates a certificate signing request for the app with a signed X.509 certificate and adds it into the application key credentials  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.publish_csr_from_application_with_http_info(body, app_id, csr_id, async_req=True)
+        >>> thread = api.publish_csr_from_application_with_http_info(app_id, csr_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Object body: (required)
         :param str app_id: (required)
         :param str csr_id: (required)
+        :param Object body: (required)
         :return: JsonWebKey
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'app_id', 'csr_id']  # noqa: E501
+        all_params = ['app_id', 'csr_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -3128,10 +3128,6 @@ class Application(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `publish_csr_from_application`")  # noqa: E501
         # verify the required parameter 'app_id' is set
         if ('app_id' not in params or
                 params['app_id'] is None):
@@ -3140,6 +3136,10 @@ class Application(object):
         if ('csr_id' not in params or
                 params['csr_id'] is None):
             raise ValueError("Missing the required parameter `csr_id` when calling `publish_csr_from_application`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `publish_csr_from_application`")  # noqa: E501
 
         collection_formats = {}
 
@@ -3574,47 +3574,47 @@ class Application(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def update_application(self, body, app_id, **kwargs):  # noqa: E501
+    def update_application(self, app_id, body, **kwargs):  # noqa: E501
         """Update Application  # noqa: E501
 
         Updates an application in your organization.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_application(body, app_id, async_req=True)
+        >>> thread = api.update_application(app_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Application body: (required)
         :param str app_id: (required)
+        :param Application body: (required)
         :return: Application
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.update_application_with_http_info(body, app_id, **kwargs)  # noqa: E501
+            return self.update_application_with_http_info(app_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.update_application_with_http_info(body, app_id, **kwargs)  # noqa: E501
+            (data) = self.update_application_with_http_info(app_id, body, **kwargs)  # noqa: E501
             return data
 
-    def update_application_with_http_info(self, body, app_id, **kwargs):  # noqa: E501
+    def update_application_with_http_info(self, app_id, body, **kwargs):  # noqa: E501
         """Update Application  # noqa: E501
 
         Updates an application in your organization.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_application_with_http_info(body, app_id, async_req=True)
+        >>> thread = api.update_application_with_http_info(app_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Application body: (required)
         :param str app_id: (required)
+        :param Application body: (required)
         :return: Application
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'app_id']  # noqa: E501
+        all_params = ['app_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -3629,14 +3629,14 @@ class Application(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `update_application`")  # noqa: E501
         # verify the required parameter 'app_id' is set
         if ('app_id' not in params or
                 params['app_id'] is None):
             raise ValueError("Missing the required parameter `app_id` when calling `update_application`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `update_application`")  # noqa: E501
 
         collection_formats = {}
 
@@ -3681,49 +3681,49 @@ class Application(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def update_application_user(self, body, app_id, user_id, **kwargs):  # noqa: E501
+    def update_application_user(self, app_id, user_id, body, **kwargs):  # noqa: E501
         """Update Application Profile for Assigned User  # noqa: E501
 
         Updates a user's profile for an application  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_application_user(body, app_id, user_id, async_req=True)
+        >>> thread = api.update_application_user(app_id, user_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param AppUser body: (required)
         :param str app_id: (required)
         :param str user_id: (required)
+        :param AppUser body: (required)
         :return: AppUser
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.update_application_user_with_http_info(body, app_id, user_id, **kwargs)  # noqa: E501
+            return self.update_application_user_with_http_info(app_id, user_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.update_application_user_with_http_info(body, app_id, user_id, **kwargs)  # noqa: E501
+            (data) = self.update_application_user_with_http_info(app_id, user_id, body, **kwargs)  # noqa: E501
             return data
 
-    def update_application_user_with_http_info(self, body, app_id, user_id, **kwargs):  # noqa: E501
+    def update_application_user_with_http_info(self, app_id, user_id, body, **kwargs):  # noqa: E501
         """Update Application Profile for Assigned User  # noqa: E501
 
         Updates a user's profile for an application  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_application_user_with_http_info(body, app_id, user_id, async_req=True)
+        >>> thread = api.update_application_user_with_http_info(app_id, user_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param AppUser body: (required)
         :param str app_id: (required)
         :param str user_id: (required)
+        :param AppUser body: (required)
         :return: AppUser
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'app_id', 'user_id']  # noqa: E501
+        all_params = ['app_id', 'user_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -3738,10 +3738,6 @@ class Application(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `update_application_user`")  # noqa: E501
         # verify the required parameter 'app_id' is set
         if ('app_id' not in params or
                 params['app_id'] is None):
@@ -3750,6 +3746,10 @@ class Application(object):
         if ('user_id' not in params or
                 params['user_id'] is None):
             raise ValueError("Missing the required parameter `user_id` when calling `update_application_user`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `update_application_user`")  # noqa: E501
 
         collection_formats = {}
 

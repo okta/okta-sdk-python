@@ -563,18 +563,18 @@ class User(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def assign_role_to_user(self, body, user_id, **kwargs):  # noqa: E501
+    def assign_role_to_user(self, user_id, body, **kwargs):  # noqa: E501
         """assign_role_to_user  # noqa: E501
 
         Assigns a role to a user.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.assign_role_to_user(body, user_id, async_req=True)
+        >>> thread = api.assign_role_to_user(user_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param AssignRoleRequest body: (required)
         :param str user_id: (required)
+        :param AssignRoleRequest body: (required)
         :param bool disable_notifications:
         :return: Role
                  If the method is called asynchronously,
@@ -582,30 +582,30 @@ class User(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.assign_role_to_user_with_http_info(body, user_id, **kwargs)  # noqa: E501
+            return self.assign_role_to_user_with_http_info(user_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.assign_role_to_user_with_http_info(body, user_id, **kwargs)  # noqa: E501
+            (data) = self.assign_role_to_user_with_http_info(user_id, body, **kwargs)  # noqa: E501
             return data
 
-    def assign_role_to_user_with_http_info(self, body, user_id, **kwargs):  # noqa: E501
+    def assign_role_to_user_with_http_info(self, user_id, body, **kwargs):  # noqa: E501
         """assign_role_to_user  # noqa: E501
 
         Assigns a role to a user.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.assign_role_to_user_with_http_info(body, user_id, async_req=True)
+        >>> thread = api.assign_role_to_user_with_http_info(user_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param AssignRoleRequest body: (required)
         :param str user_id: (required)
+        :param AssignRoleRequest body: (required)
         :param bool disable_notifications:
         :return: Role
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'user_id', 'disable_notifications']  # noqa: E501
+        all_params = ['user_id', 'body', 'disable_notifications']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -620,14 +620,14 @@ class User(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `assign_role_to_user`")  # noqa: E501
         # verify the required parameter 'user_id' is set
         if ('user_id' not in params or
                 params['user_id'] is None):
             raise ValueError("Missing the required parameter `user_id` when calling `assign_role_to_user`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `assign_role_to_user`")  # noqa: E501
 
         collection_formats = {}
 
@@ -674,18 +674,18 @@ class User(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def change_password(self, body, user_id, **kwargs):  # noqa: E501
+    def change_password(self, user_id, body, **kwargs):  # noqa: E501
         """Change Password  # noqa: E501
 
         Changes a user's password by validating the user's current password. This operation can only be performed on users in `STAGED`, `ACTIVE`, `PASSWORD_EXPIRED`, or `RECOVERY` status that have a valid password credential  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.change_password(body, user_id, async_req=True)
+        >>> thread = api.change_password(user_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param ChangePasswordRequest body: (required)
         :param str user_id: (required)
+        :param ChangePasswordRequest body: (required)
         :param bool strict:
         :return: UserCredentials
                  If the method is called asynchronously,
@@ -693,30 +693,30 @@ class User(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.change_password_with_http_info(body, user_id, **kwargs)  # noqa: E501
+            return self.change_password_with_http_info(user_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.change_password_with_http_info(body, user_id, **kwargs)  # noqa: E501
+            (data) = self.change_password_with_http_info(user_id, body, **kwargs)  # noqa: E501
             return data
 
-    def change_password_with_http_info(self, body, user_id, **kwargs):  # noqa: E501
+    def change_password_with_http_info(self, user_id, body, **kwargs):  # noqa: E501
         """Change Password  # noqa: E501
 
         Changes a user's password by validating the user's current password. This operation can only be performed on users in `STAGED`, `ACTIVE`, `PASSWORD_EXPIRED`, or `RECOVERY` status that have a valid password credential  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.change_password_with_http_info(body, user_id, async_req=True)
+        >>> thread = api.change_password_with_http_info(user_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param ChangePasswordRequest body: (required)
         :param str user_id: (required)
+        :param ChangePasswordRequest body: (required)
         :param bool strict:
         :return: UserCredentials
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'user_id', 'strict']  # noqa: E501
+        all_params = ['user_id', 'body', 'strict']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -731,14 +731,14 @@ class User(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `change_password`")  # noqa: E501
         # verify the required parameter 'user_id' is set
         if ('user_id' not in params or
                 params['user_id'] is None):
             raise ValueError("Missing the required parameter `user_id` when calling `change_password`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `change_password`")  # noqa: E501
 
         collection_formats = {}
 
@@ -785,47 +785,47 @@ class User(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def change_recovery_question(self, body, user_id, **kwargs):  # noqa: E501
+    def change_recovery_question(self, user_id, body, **kwargs):  # noqa: E501
         """Change Recovery Question  # noqa: E501
 
         Changes a user's recovery question & answer credential by validating the user's current password.  This operation can only be performed on users in **STAGED**, **ACTIVE** or **RECOVERY** `status` that have a valid password credential  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.change_recovery_question(body, user_id, async_req=True)
+        >>> thread = api.change_recovery_question(user_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param UserCredentials body: (required)
         :param str user_id: (required)
+        :param UserCredentials body: (required)
         :return: UserCredentials
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.change_recovery_question_with_http_info(body, user_id, **kwargs)  # noqa: E501
+            return self.change_recovery_question_with_http_info(user_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.change_recovery_question_with_http_info(body, user_id, **kwargs)  # noqa: E501
+            (data) = self.change_recovery_question_with_http_info(user_id, body, **kwargs)  # noqa: E501
             return data
 
-    def change_recovery_question_with_http_info(self, body, user_id, **kwargs):  # noqa: E501
+    def change_recovery_question_with_http_info(self, user_id, body, **kwargs):  # noqa: E501
         """Change Recovery Question  # noqa: E501
 
         Changes a user's recovery question & answer credential by validating the user's current password.  This operation can only be performed on users in **STAGED**, **ACTIVE** or **RECOVERY** `status` that have a valid password credential  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.change_recovery_question_with_http_info(body, user_id, async_req=True)
+        >>> thread = api.change_recovery_question_with_http_info(user_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param UserCredentials body: (required)
         :param str user_id: (required)
+        :param UserCredentials body: (required)
         :return: UserCredentials
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'user_id']  # noqa: E501
+        all_params = ['user_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -840,14 +840,14 @@ class User(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `change_recovery_question`")  # noqa: E501
         # verify the required parameter 'user_id' is set
         if ('user_id' not in params or
                 params['user_id'] is None):
             raise ValueError("Missing the required parameter `user_id` when calling `change_recovery_question`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `change_recovery_question`")  # noqa: E501
 
         collection_formats = {}
 
@@ -3380,18 +3380,18 @@ class User(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def partial_update_user(self, body, user_id, **kwargs):  # noqa: E501
+    def partial_update_user(self, user_id, body, **kwargs):  # noqa: E501
         """partial_update_user  # noqa: E501
 
         Fetch a user by `id`, `login`, or `login shortname` if the short name is unambiguous.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.partial_update_user(body, user_id, async_req=True)
+        >>> thread = api.partial_update_user(user_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param User body: (required)
         :param str user_id: (required)
+        :param User body: (required)
         :param bool strict:
         :return: User
                  If the method is called asynchronously,
@@ -3399,30 +3399,30 @@ class User(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.partial_update_user_with_http_info(body, user_id, **kwargs)  # noqa: E501
+            return self.partial_update_user_with_http_info(user_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.partial_update_user_with_http_info(body, user_id, **kwargs)  # noqa: E501
+            (data) = self.partial_update_user_with_http_info(user_id, body, **kwargs)  # noqa: E501
             return data
 
-    def partial_update_user_with_http_info(self, body, user_id, **kwargs):  # noqa: E501
+    def partial_update_user_with_http_info(self, user_id, body, **kwargs):  # noqa: E501
         """partial_update_user  # noqa: E501
 
         Fetch a user by `id`, `login`, or `login shortname` if the short name is unambiguous.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.partial_update_user_with_http_info(body, user_id, async_req=True)
+        >>> thread = api.partial_update_user_with_http_info(user_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param User body: (required)
         :param str user_id: (required)
+        :param User body: (required)
         :param bool strict:
         :return: User
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'user_id', 'strict']  # noqa: E501
+        all_params = ['user_id', 'body', 'strict']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -3437,14 +3437,14 @@ class User(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `partial_update_user`")  # noqa: E501
         # verify the required parameter 'user_id' is set
         if ('user_id' not in params or
                 params['user_id'] is None):
             raise ValueError("Missing the required parameter `user_id` when calling `partial_update_user`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `partial_update_user`")  # noqa: E501
 
         collection_formats = {}
 
@@ -5186,18 +5186,18 @@ class User(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def update_user(self, body, user_id, **kwargs):  # noqa: E501
+    def update_user(self, user_id, body, **kwargs):  # noqa: E501
         """Update User  # noqa: E501
 
         Update a user's profile and/or credentials using strict-update semantics.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_user(body, user_id, async_req=True)
+        >>> thread = api.update_user(user_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param User body: (required)
         :param str user_id: (required)
+        :param User body: (required)
         :param bool strict:
         :return: User
                  If the method is called asynchronously,
@@ -5205,30 +5205,30 @@ class User(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.update_user_with_http_info(body, user_id, **kwargs)  # noqa: E501
+            return self.update_user_with_http_info(user_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.update_user_with_http_info(body, user_id, **kwargs)  # noqa: E501
+            (data) = self.update_user_with_http_info(user_id, body, **kwargs)  # noqa: E501
             return data
 
-    def update_user_with_http_info(self, body, user_id, **kwargs):  # noqa: E501
+    def update_user_with_http_info(self, user_id, body, **kwargs):  # noqa: E501
         """Update User  # noqa: E501
 
         Update a user's profile and/or credentials using strict-update semantics.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_user_with_http_info(body, user_id, async_req=True)
+        >>> thread = api.update_user_with_http_info(user_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param User body: (required)
         :param str user_id: (required)
+        :param User body: (required)
         :param bool strict:
         :return: User
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'user_id', 'strict']  # noqa: E501
+        all_params = ['user_id', 'body', 'strict']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -5243,14 +5243,14 @@ class User(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `update_user`")  # noqa: E501
         # verify the required parameter 'user_id' is set
         if ('user_id' not in params or
                 params['user_id'] is None):
             raise ValueError("Missing the required parameter `user_id` when calling `update_user`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `update_user`")  # noqa: E501
 
         collection_formats = {}
 

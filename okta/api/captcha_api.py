@@ -404,47 +404,47 @@ class CAPTCHA(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def partial_update_captcha_instance(self, body, captcha_id, **kwargs):  # noqa: E501
+    def partial_update_captcha_instance(self, captcha_id, body, **kwargs):  # noqa: E501
         """Partial Update CAPTCHA instance  # noqa: E501
 
         Partially update a CAPTCHA instance by `id`.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.partial_update_captcha_instance(body, captcha_id, async_req=True)
+        >>> thread = api.partial_update_captcha_instance(captcha_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param CAPTCHAInstance body: (required)
         :param str captcha_id: id of the CAPTCHA (required)
+        :param CAPTCHAInstance body: (required)
         :return: CAPTCHAInstance
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.partial_update_captcha_instance_with_http_info(body, captcha_id, **kwargs)  # noqa: E501
+            return self.partial_update_captcha_instance_with_http_info(captcha_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.partial_update_captcha_instance_with_http_info(body, captcha_id, **kwargs)  # noqa: E501
+            (data) = self.partial_update_captcha_instance_with_http_info(captcha_id, body, **kwargs)  # noqa: E501
             return data
 
-    def partial_update_captcha_instance_with_http_info(self, body, captcha_id, **kwargs):  # noqa: E501
+    def partial_update_captcha_instance_with_http_info(self, captcha_id, body, **kwargs):  # noqa: E501
         """Partial Update CAPTCHA instance  # noqa: E501
 
         Partially update a CAPTCHA instance by `id`.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.partial_update_captcha_instance_with_http_info(body, captcha_id, async_req=True)
+        >>> thread = api.partial_update_captcha_instance_with_http_info(captcha_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param CAPTCHAInstance body: (required)
         :param str captcha_id: id of the CAPTCHA (required)
+        :param CAPTCHAInstance body: (required)
         :return: CAPTCHAInstance
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'captcha_id']  # noqa: E501
+        all_params = ['captcha_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -459,14 +459,14 @@ class CAPTCHA(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `partial_update_captcha_instance`")  # noqa: E501
         # verify the required parameter 'captcha_id' is set
         if ('captcha_id' not in params or
                 params['captcha_id'] is None):
             raise ValueError("Missing the required parameter `captcha_id` when calling `partial_update_captcha_instance`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `partial_update_captcha_instance`")  # noqa: E501
 
         collection_formats = {}
 
@@ -511,47 +511,47 @@ class CAPTCHA(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def update_captcha_instance(self, body, captcha_id, **kwargs):  # noqa: E501
+    def update_captcha_instance(self, captcha_id, body, **kwargs):  # noqa: E501
         """Update CAPTCHA instance  # noqa: E501
 
         Update a CAPTCHA instance by `id`.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_captcha_instance(body, captcha_id, async_req=True)
+        >>> thread = api.update_captcha_instance(captcha_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param CAPTCHAInstance body: (required)
         :param str captcha_id: id of the CAPTCHA (required)
+        :param CAPTCHAInstance body: (required)
         :return: CAPTCHAInstance
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.update_captcha_instance_with_http_info(body, captcha_id, **kwargs)  # noqa: E501
+            return self.update_captcha_instance_with_http_info(captcha_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.update_captcha_instance_with_http_info(body, captcha_id, **kwargs)  # noqa: E501
+            (data) = self.update_captcha_instance_with_http_info(captcha_id, body, **kwargs)  # noqa: E501
             return data
 
-    def update_captcha_instance_with_http_info(self, body, captcha_id, **kwargs):  # noqa: E501
+    def update_captcha_instance_with_http_info(self, captcha_id, body, **kwargs):  # noqa: E501
         """Update CAPTCHA instance  # noqa: E501
 
         Update a CAPTCHA instance by `id`.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_captcha_instance_with_http_info(body, captcha_id, async_req=True)
+        >>> thread = api.update_captcha_instance_with_http_info(captcha_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param CAPTCHAInstance body: (required)
         :param str captcha_id: id of the CAPTCHA (required)
+        :param CAPTCHAInstance body: (required)
         :return: CAPTCHAInstance
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'captcha_id']  # noqa: E501
+        all_params = ['captcha_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -566,14 +566,14 @@ class CAPTCHA(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `update_captcha_instance`")  # noqa: E501
         # verify the required parameter 'captcha_id' is set
         if ('captcha_id' not in params or
                 params['captcha_id'] is None):
             raise ValueError("Missing the required parameter `captcha_id` when calling `update_captcha_instance`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `update_captcha_instance`")  # noqa: E501
 
         collection_formats = {}
 

@@ -408,47 +408,47 @@ class Template(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def partial_update_sms_template(self, body, template_id, **kwargs):  # noqa: E501
+    def partial_update_sms_template(self, template_id, body, **kwargs):  # noqa: E501
         """Partial SMS Template Update  # noqa: E501
 
         Updates only some of the SMS template properties:  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.partial_update_sms_template(body, template_id, async_req=True)
+        >>> thread = api.partial_update_sms_template(template_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param SmsTemplate body: (required)
         :param str template_id: (required)
+        :param SmsTemplate body: (required)
         :return: SmsTemplate
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.partial_update_sms_template_with_http_info(body, template_id, **kwargs)  # noqa: E501
+            return self.partial_update_sms_template_with_http_info(template_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.partial_update_sms_template_with_http_info(body, template_id, **kwargs)  # noqa: E501
+            (data) = self.partial_update_sms_template_with_http_info(template_id, body, **kwargs)  # noqa: E501
             return data
 
-    def partial_update_sms_template_with_http_info(self, body, template_id, **kwargs):  # noqa: E501
+    def partial_update_sms_template_with_http_info(self, template_id, body, **kwargs):  # noqa: E501
         """Partial SMS Template Update  # noqa: E501
 
         Updates only some of the SMS template properties:  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.partial_update_sms_template_with_http_info(body, template_id, async_req=True)
+        >>> thread = api.partial_update_sms_template_with_http_info(template_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param SmsTemplate body: (required)
         :param str template_id: (required)
+        :param SmsTemplate body: (required)
         :return: SmsTemplate
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'template_id']  # noqa: E501
+        all_params = ['template_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -463,14 +463,14 @@ class Template(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `partial_update_sms_template`")  # noqa: E501
         # verify the required parameter 'template_id' is set
         if ('template_id' not in params or
                 params['template_id'] is None):
             raise ValueError("Missing the required parameter `template_id` when calling `partial_update_sms_template`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `partial_update_sms_template`")  # noqa: E501
 
         collection_formats = {}
 
@@ -515,47 +515,47 @@ class Template(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def update_sms_template(self, body, template_id, **kwargs):  # noqa: E501
+    def update_sms_template(self, template_id, body, **kwargs):  # noqa: E501
         """Update SMS Template  # noqa: E501
 
         Updates the SMS template.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_sms_template(body, template_id, async_req=True)
+        >>> thread = api.update_sms_template(template_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param SmsTemplate body: (required)
         :param str template_id: (required)
+        :param SmsTemplate body: (required)
         :return: SmsTemplate
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.update_sms_template_with_http_info(body, template_id, **kwargs)  # noqa: E501
+            return self.update_sms_template_with_http_info(template_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.update_sms_template_with_http_info(body, template_id, **kwargs)  # noqa: E501
+            (data) = self.update_sms_template_with_http_info(template_id, body, **kwargs)  # noqa: E501
             return data
 
-    def update_sms_template_with_http_info(self, body, template_id, **kwargs):  # noqa: E501
+    def update_sms_template_with_http_info(self, template_id, body, **kwargs):  # noqa: E501
         """Update SMS Template  # noqa: E501
 
         Updates the SMS template.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_sms_template_with_http_info(body, template_id, async_req=True)
+        >>> thread = api.update_sms_template_with_http_info(template_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param SmsTemplate body: (required)
         :param str template_id: (required)
+        :param SmsTemplate body: (required)
         :return: SmsTemplate
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'template_id']  # noqa: E501
+        all_params = ['template_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -570,14 +570,14 @@ class Template(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `update_sms_template`")  # noqa: E501
         # verify the required parameter 'template_id' is set
         if ('template_id' not in params or
                 params['template_id'] is None):
             raise ValueError("Missing the required parameter `template_id` when calling `update_sms_template`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `update_sms_template`")  # noqa: E501
 
         collection_formats = {}
 

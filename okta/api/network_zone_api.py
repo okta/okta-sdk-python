@@ -606,47 +606,47 @@ class NetworkZone(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def update_network_zone(self, body, zone_id, **kwargs):  # noqa: E501
+    def update_network_zone(self, zone_id, body, **kwargs):  # noqa: E501
         """Update Network Zone  # noqa: E501
 
         Updates a network zone in your organization.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_network_zone(body, zone_id, async_req=True)
+        >>> thread = api.update_network_zone(zone_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param NetworkZone body: (required)
         :param str zone_id: (required)
+        :param NetworkZone body: (required)
         :return: NetworkZone
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.update_network_zone_with_http_info(body, zone_id, **kwargs)  # noqa: E501
+            return self.update_network_zone_with_http_info(zone_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.update_network_zone_with_http_info(body, zone_id, **kwargs)  # noqa: E501
+            (data) = self.update_network_zone_with_http_info(zone_id, body, **kwargs)  # noqa: E501
             return data
 
-    def update_network_zone_with_http_info(self, body, zone_id, **kwargs):  # noqa: E501
+    def update_network_zone_with_http_info(self, zone_id, body, **kwargs):  # noqa: E501
         """Update Network Zone  # noqa: E501
 
         Updates a network zone in your organization.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_network_zone_with_http_info(body, zone_id, async_req=True)
+        >>> thread = api.update_network_zone_with_http_info(zone_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param NetworkZone body: (required)
         :param str zone_id: (required)
+        :param NetworkZone body: (required)
         :return: NetworkZone
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'zone_id']  # noqa: E501
+        all_params = ['zone_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -661,14 +661,14 @@ class NetworkZone(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `update_network_zone`")  # noqa: E501
         # verify the required parameter 'zone_id' is set
         if ('zone_id' not in params or
                 params['zone_id'] is None):
             raise ValueError("Missing the required parameter `zone_id` when calling `update_network_zone`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `update_network_zone`")  # noqa: E501
 
         collection_formats = {}
 

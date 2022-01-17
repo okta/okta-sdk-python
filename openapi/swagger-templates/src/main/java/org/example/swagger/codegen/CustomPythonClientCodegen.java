@@ -2,16 +2,18 @@ package org.example.swagger.codegen;
 
 import io.swagger.codegen.v3.CodegenModel;
 import io.swagger.codegen.v3.CodegenOperation;
+import io.swagger.codegen.v3.CodegenParameter;
 import io.swagger.codegen.v3.SupportingFile;
 import io.swagger.codegen.v3.generators.python.PythonClientCodegen;
 import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.Operation;
 import io.swagger.v3.oas.models.media.Schema;
 import org.apache.commons.lang3.StringUtils;
 import org.yaml.snakeyaml.Yaml;
 
-import java.io.File;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -121,6 +123,83 @@ public class CustomPythonClientCodegen extends PythonClientCodegen {
     @Override
     public String toApiName(String name) {
         return name.length() == 0 ? "object" : camelize(name);
+    }
+
+    @Override
+    public String toVarName(String name) {
+
+        // sanitize name
+        name = sanitizeName(name); // FIXME: a parameter should not be assigned. Also declare the methods parameters as 'final'.
+
+        // remove dollar sign
+        name = name.replaceAll("$", "");
+
+        // if it's all uppper case, convert to lower case
+        if (name.matches("^[A-Z_]*$")) {
+            name = name.toLowerCase();
+        }
+
+        // underscore the variable name
+        // petId => pet_id
+        name = camelToSnakeAndToLower(name);
+
+        // remove leading underscore
+        name = name.replaceAll("^_*", "");
+
+        // for reserved word or word starting with number, append _
+        if (isReservedWord(name) || name.matches("^\\d.*")) {
+            name = escapeReservedWord(name);
+        }
+
+        return name;
+    }
+
+    @Override
+    public CodegenOperation fromOperation(String path, String httpMethod, Operation operation, Map<String, Schema> schemas, OpenAPI openAPI) {
+
+        CodegenOperation codegenOperation = super.fromOperation(path, httpMethod, operation, schemas, openAPI);
+
+        //put a weight for each parameter
+        codegenOperation.getContents().forEach(x -> setParamWeight(x.getParameters()));
+
+        //sort required only parameters according to param weight
+        codegenOperation.getContents().forEach(x -> x.getParameters().sort((left, right) -> {
+            if (left.required && right.required) {
+                return Integer.compare(
+                        (Integer) left.getVendorExtensions().get("param-weight"),
+                        (Integer) right.getVendorExtensions().get("param-weight")
+                );
+            } else {
+                return 0;
+            }
+        }));
+
+        return codegenOperation;
+    }
+
+    private void setParamWeight(List<CodegenParameter> list) {
+        list.forEach(x -> {
+            if(x.getVendorExtensions().containsKey("x-is-path-param")) {
+                x.getVendorExtensions().put("param-weight", 0);
+            } else if(x.getVendorExtensions().containsKey("x-is-body-param")) {
+                x.getVendorExtensions().put("param-weight", 1);
+            } else if(x.getVendorExtensions().containsKey("x-is-query-param")) {
+                x.getVendorExtensions().put("param-weight", 2);
+            } else if(x.getVendorExtensions().containsKey("x-is-form-data-param")) {
+                x.getVendorExtensions().put("param-weight", 3);
+            } else {
+                x.getVendorExtensions().put("param-weight", 4);
+            }
+        });
+    }
+
+    private String camelToSnakeAndToLower(String camelString) {
+
+        String ret = camelString.replaceAll("([A-Za-z]+)([0-9]+)", "$1_$2")
+                .replaceAll("([0-9])([A-Za-z]+)", "$1_$2")
+                .replaceAll("([A-Z]+)([A-Z][a-z])", "$1_$2")
+                .replaceAll("([a-z])([A-Z])", "$1_$2");
+        return ret.toLowerCase();
     }
 
     private String getRootDiscriminator(String name) {

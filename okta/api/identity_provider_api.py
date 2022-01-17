@@ -713,47 +713,47 @@ class IdentityProvider(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def generate_csr_for_identity_provider(self, body, idp_id, **kwargs):  # noqa: E501
+    def generate_csr_for_identity_provider(self, idp_id, body, **kwargs):  # noqa: E501
         """Generate Certificate Signing Request for IdP  # noqa: E501
 
         Generates a new key pair and returns a Certificate Signing Request for it.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.generate_csr_for_identity_provider(body, idp_id, async_req=True)
+        >>> thread = api.generate_csr_for_identity_provider(idp_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param CsrMetadata body: (required)
         :param str idp_id: (required)
+        :param CsrMetadata body: (required)
         :return: Csr
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.generate_csr_for_identity_provider_with_http_info(body, idp_id, **kwargs)  # noqa: E501
+            return self.generate_csr_for_identity_provider_with_http_info(idp_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.generate_csr_for_identity_provider_with_http_info(body, idp_id, **kwargs)  # noqa: E501
+            (data) = self.generate_csr_for_identity_provider_with_http_info(idp_id, body, **kwargs)  # noqa: E501
             return data
 
-    def generate_csr_for_identity_provider_with_http_info(self, body, idp_id, **kwargs):  # noqa: E501
+    def generate_csr_for_identity_provider_with_http_info(self, idp_id, body, **kwargs):  # noqa: E501
         """Generate Certificate Signing Request for IdP  # noqa: E501
 
         Generates a new key pair and returns a Certificate Signing Request for it.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.generate_csr_for_identity_provider_with_http_info(body, idp_id, async_req=True)
+        >>> thread = api.generate_csr_for_identity_provider_with_http_info(idp_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param CsrMetadata body: (required)
         :param str idp_id: (required)
+        :param CsrMetadata body: (required)
         :return: Csr
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'idp_id']  # noqa: E501
+        all_params = ['idp_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -768,14 +768,14 @@ class IdentityProvider(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `generate_csr_for_identity_provider`")  # noqa: E501
         # verify the required parameter 'idp_id' is set
         if ('idp_id' not in params or
                 params['idp_id'] is None):
             raise ValueError("Missing the required parameter `idp_id` when calling `generate_csr_for_identity_provider`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `generate_csr_for_identity_provider`")  # noqa: E501
 
         collection_formats = {}
 
@@ -1422,49 +1422,49 @@ class IdentityProvider(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def link_user_to_identity_provider(self, body, idp_id, user_id, **kwargs):  # noqa: E501
+    def link_user_to_identity_provider(self, idp_id, user_id, body, **kwargs):  # noqa: E501
         """Link a user to a Social IdP without a transaction  # noqa: E501
 
         Links an Okta user to an existing Social Identity Provider. This does not support the SAML2 Identity Provider Type  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.link_user_to_identity_provider(body, idp_id, user_id, async_req=True)
+        >>> thread = api.link_user_to_identity_provider(idp_id, user_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param UserIdentityProviderLinkRequest body: (required)
         :param str idp_id: (required)
         :param str user_id: (required)
+        :param UserIdentityProviderLinkRequest body: (required)
         :return: IdentityProviderApplicationUser
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.link_user_to_identity_provider_with_http_info(body, idp_id, user_id, **kwargs)  # noqa: E501
+            return self.link_user_to_identity_provider_with_http_info(idp_id, user_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.link_user_to_identity_provider_with_http_info(body, idp_id, user_id, **kwargs)  # noqa: E501
+            (data) = self.link_user_to_identity_provider_with_http_info(idp_id, user_id, body, **kwargs)  # noqa: E501
             return data
 
-    def link_user_to_identity_provider_with_http_info(self, body, idp_id, user_id, **kwargs):  # noqa: E501
+    def link_user_to_identity_provider_with_http_info(self, idp_id, user_id, body, **kwargs):  # noqa: E501
         """Link a user to a Social IdP without a transaction  # noqa: E501
 
         Links an Okta user to an existing Social Identity Provider. This does not support the SAML2 Identity Provider Type  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.link_user_to_identity_provider_with_http_info(body, idp_id, user_id, async_req=True)
+        >>> thread = api.link_user_to_identity_provider_with_http_info(idp_id, user_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param UserIdentityProviderLinkRequest body: (required)
         :param str idp_id: (required)
         :param str user_id: (required)
+        :param UserIdentityProviderLinkRequest body: (required)
         :return: IdentityProviderApplicationUser
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'idp_id', 'user_id']  # noqa: E501
+        all_params = ['idp_id', 'user_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1479,10 +1479,6 @@ class IdentityProvider(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `link_user_to_identity_provider`")  # noqa: E501
         # verify the required parameter 'idp_id' is set
         if ('idp_id' not in params or
                 params['idp_id'] is None):
@@ -1491,6 +1487,10 @@ class IdentityProvider(object):
         if ('user_id' not in params or
                 params['user_id'] is None):
             raise ValueError("Missing the required parameter `user_id` when calling `link_user_to_identity_provider`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `link_user_to_identity_provider`")  # noqa: E501
 
         collection_formats = {}
 
@@ -2123,49 +2123,49 @@ class IdentityProvider(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def publish_csr_for_identity_provider(self, body, idp_id, csr_id, **kwargs):  # noqa: E501
+    def publish_csr_for_identity_provider(self, idp_id, csr_id, body, **kwargs):  # noqa: E501
         """publish_csr_for_identity_provider  # noqa: E501
 
         Update the Certificate Signing Request with a signed X.509 certificate and add it into the signing key credentials for the IdP.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.publish_csr_for_identity_provider(body, idp_id, csr_id, async_req=True)
+        >>> thread = api.publish_csr_for_identity_provider(idp_id, csr_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Object body: (required)
         :param str idp_id: (required)
         :param str csr_id: (required)
+        :param Object body: (required)
         :return: JsonWebKey
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.publish_csr_for_identity_provider_with_http_info(body, idp_id, csr_id, **kwargs)  # noqa: E501
+            return self.publish_csr_for_identity_provider_with_http_info(idp_id, csr_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.publish_csr_for_identity_provider_with_http_info(body, idp_id, csr_id, **kwargs)  # noqa: E501
+            (data) = self.publish_csr_for_identity_provider_with_http_info(idp_id, csr_id, body, **kwargs)  # noqa: E501
             return data
 
-    def publish_csr_for_identity_provider_with_http_info(self, body, idp_id, csr_id, **kwargs):  # noqa: E501
+    def publish_csr_for_identity_provider_with_http_info(self, idp_id, csr_id, body, **kwargs):  # noqa: E501
         """publish_csr_for_identity_provider  # noqa: E501
 
         Update the Certificate Signing Request with a signed X.509 certificate and add it into the signing key credentials for the IdP.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.publish_csr_for_identity_provider_with_http_info(body, idp_id, csr_id, async_req=True)
+        >>> thread = api.publish_csr_for_identity_provider_with_http_info(idp_id, csr_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Object body: (required)
         :param str idp_id: (required)
         :param str csr_id: (required)
+        :param Object body: (required)
         :return: JsonWebKey
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'idp_id', 'csr_id']  # noqa: E501
+        all_params = ['idp_id', 'csr_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -2180,10 +2180,6 @@ class IdentityProvider(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `publish_csr_for_identity_provider`")  # noqa: E501
         # verify the required parameter 'idp_id' is set
         if ('idp_id' not in params or
                 params['idp_id'] is None):
@@ -2192,6 +2188,10 @@ class IdentityProvider(object):
         if ('csr_id' not in params or
                 params['csr_id'] is None):
             raise ValueError("Missing the required parameter `csr_id` when calling `publish_csr_for_identity_provider`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `publish_csr_for_identity_provider`")  # noqa: E501
 
         collection_formats = {}
 
@@ -2238,49 +2238,49 @@ class IdentityProvider(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def publish_csr_for_identity_provider(self, body, idp_id, csr_id, **kwargs):  # noqa: E501
+    def publish_csr_for_identity_provider(self, idp_id, csr_id, body, **kwargs):  # noqa: E501
         """publish_csr_for_identity_provider  # noqa: E501
 
         Update the Certificate Signing Request with a signed X.509 certificate and add it into the signing key credentials for the IdP.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.publish_csr_for_identity_provider(body, idp_id, csr_id, async_req=True)
+        >>> thread = api.publish_csr_for_identity_provider(idp_id, csr_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Object body: (required)
         :param str idp_id: (required)
         :param str csr_id: (required)
+        :param Object body: (required)
         :return: JsonWebKey
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.publish_csr_for_identity_provider_with_http_info(body, idp_id, csr_id, **kwargs)  # noqa: E501
+            return self.publish_csr_for_identity_provider_with_http_info(idp_id, csr_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.publish_csr_for_identity_provider_with_http_info(body, idp_id, csr_id, **kwargs)  # noqa: E501
+            (data) = self.publish_csr_for_identity_provider_with_http_info(idp_id, csr_id, body, **kwargs)  # noqa: E501
             return data
 
-    def publish_csr_for_identity_provider_with_http_info(self, body, idp_id, csr_id, **kwargs):  # noqa: E501
+    def publish_csr_for_identity_provider_with_http_info(self, idp_id, csr_id, body, **kwargs):  # noqa: E501
         """publish_csr_for_identity_provider  # noqa: E501
 
         Update the Certificate Signing Request with a signed X.509 certificate and add it into the signing key credentials for the IdP.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.publish_csr_for_identity_provider_with_http_info(body, idp_id, csr_id, async_req=True)
+        >>> thread = api.publish_csr_for_identity_provider_with_http_info(idp_id, csr_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Object body: (required)
         :param str idp_id: (required)
         :param str csr_id: (required)
+        :param Object body: (required)
         :return: JsonWebKey
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'idp_id', 'csr_id']  # noqa: E501
+        all_params = ['idp_id', 'csr_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -2295,10 +2295,6 @@ class IdentityProvider(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `publish_csr_for_identity_provider`")  # noqa: E501
         # verify the required parameter 'idp_id' is set
         if ('idp_id' not in params or
                 params['idp_id'] is None):
@@ -2307,6 +2303,10 @@ class IdentityProvider(object):
         if ('csr_id' not in params or
                 params['csr_id'] is None):
             raise ValueError("Missing the required parameter `csr_id` when calling `publish_csr_for_identity_provider`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `publish_csr_for_identity_provider`")  # noqa: E501
 
         collection_formats = {}
 
@@ -2353,49 +2353,49 @@ class IdentityProvider(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def publish_csr_for_identity_provider(self, body, idp_id, csr_id, **kwargs):  # noqa: E501
+    def publish_csr_for_identity_provider(self, idp_id, csr_id, body, **kwargs):  # noqa: E501
         """publish_csr_for_identity_provider  # noqa: E501
 
         Update the Certificate Signing Request with a signed X.509 certificate and add it into the signing key credentials for the IdP.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.publish_csr_for_identity_provider(body, idp_id, csr_id, async_req=True)
+        >>> thread = api.publish_csr_for_identity_provider(idp_id, csr_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Object body: (required)
         :param str idp_id: (required)
         :param str csr_id: (required)
+        :param Object body: (required)
         :return: JsonWebKey
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.publish_csr_for_identity_provider_with_http_info(body, idp_id, csr_id, **kwargs)  # noqa: E501
+            return self.publish_csr_for_identity_provider_with_http_info(idp_id, csr_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.publish_csr_for_identity_provider_with_http_info(body, idp_id, csr_id, **kwargs)  # noqa: E501
+            (data) = self.publish_csr_for_identity_provider_with_http_info(idp_id, csr_id, body, **kwargs)  # noqa: E501
             return data
 
-    def publish_csr_for_identity_provider_with_http_info(self, body, idp_id, csr_id, **kwargs):  # noqa: E501
+    def publish_csr_for_identity_provider_with_http_info(self, idp_id, csr_id, body, **kwargs):  # noqa: E501
         """publish_csr_for_identity_provider  # noqa: E501
 
         Update the Certificate Signing Request with a signed X.509 certificate and add it into the signing key credentials for the IdP.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.publish_csr_for_identity_provider_with_http_info(body, idp_id, csr_id, async_req=True)
+        >>> thread = api.publish_csr_for_identity_provider_with_http_info(idp_id, csr_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Object body: (required)
         :param str idp_id: (required)
         :param str csr_id: (required)
+        :param Object body: (required)
         :return: JsonWebKey
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'idp_id', 'csr_id']  # noqa: E501
+        all_params = ['idp_id', 'csr_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -2410,10 +2410,6 @@ class IdentityProvider(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `publish_csr_for_identity_provider`")  # noqa: E501
         # verify the required parameter 'idp_id' is set
         if ('idp_id' not in params or
                 params['idp_id'] is None):
@@ -2422,6 +2418,10 @@ class IdentityProvider(object):
         if ('csr_id' not in params or
                 params['csr_id'] is None):
             raise ValueError("Missing the required parameter `csr_id` when calling `publish_csr_for_identity_provider`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `publish_csr_for_identity_provider`")  # noqa: E501
 
         collection_formats = {}
 
@@ -2468,49 +2468,49 @@ class IdentityProvider(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def publish_csr_for_identity_provider(self, body, idp_id, csr_id, **kwargs):  # noqa: E501
+    def publish_csr_for_identity_provider(self, idp_id, csr_id, body, **kwargs):  # noqa: E501
         """publish_csr_for_identity_provider  # noqa: E501
 
         Update the Certificate Signing Request with a signed X.509 certificate and add it into the signing key credentials for the IdP.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.publish_csr_for_identity_provider(body, idp_id, csr_id, async_req=True)
+        >>> thread = api.publish_csr_for_identity_provider(idp_id, csr_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Object body: (required)
         :param str idp_id: (required)
         :param str csr_id: (required)
+        :param Object body: (required)
         :return: JsonWebKey
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.publish_csr_for_identity_provider_with_http_info(body, idp_id, csr_id, **kwargs)  # noqa: E501
+            return self.publish_csr_for_identity_provider_with_http_info(idp_id, csr_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.publish_csr_for_identity_provider_with_http_info(body, idp_id, csr_id, **kwargs)  # noqa: E501
+            (data) = self.publish_csr_for_identity_provider_with_http_info(idp_id, csr_id, body, **kwargs)  # noqa: E501
             return data
 
-    def publish_csr_for_identity_provider_with_http_info(self, body, idp_id, csr_id, **kwargs):  # noqa: E501
+    def publish_csr_for_identity_provider_with_http_info(self, idp_id, csr_id, body, **kwargs):  # noqa: E501
         """publish_csr_for_identity_provider  # noqa: E501
 
         Update the Certificate Signing Request with a signed X.509 certificate and add it into the signing key credentials for the IdP.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.publish_csr_for_identity_provider_with_http_info(body, idp_id, csr_id, async_req=True)
+        >>> thread = api.publish_csr_for_identity_provider_with_http_info(idp_id, csr_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Object body: (required)
         :param str idp_id: (required)
         :param str csr_id: (required)
+        :param Object body: (required)
         :return: JsonWebKey
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'idp_id', 'csr_id']  # noqa: E501
+        all_params = ['idp_id', 'csr_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -2525,10 +2525,6 @@ class IdentityProvider(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `publish_csr_for_identity_provider`")  # noqa: E501
         # verify the required parameter 'idp_id' is set
         if ('idp_id' not in params or
                 params['idp_id'] is None):
@@ -2537,6 +2533,10 @@ class IdentityProvider(object):
         if ('csr_id' not in params or
                 params['csr_id'] is None):
             raise ValueError("Missing the required parameter `csr_id` when calling `publish_csr_for_identity_provider`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `publish_csr_for_identity_provider`")  # noqa: E501
 
         collection_formats = {}
 
@@ -2781,47 +2781,47 @@ class IdentityProvider(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def update_identity_provider(self, body, idp_id, **kwargs):  # noqa: E501
+    def update_identity_provider(self, idp_id, body, **kwargs):  # noqa: E501
         """Update Identity Provider  # noqa: E501
 
         Updates the configuration for an IdP.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_identity_provider(body, idp_id, async_req=True)
+        >>> thread = api.update_identity_provider(idp_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param IdentityProvider body: (required)
         :param str idp_id: (required)
+        :param IdentityProvider body: (required)
         :return: IdentityProvider
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.update_identity_provider_with_http_info(body, idp_id, **kwargs)  # noqa: E501
+            return self.update_identity_provider_with_http_info(idp_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.update_identity_provider_with_http_info(body, idp_id, **kwargs)  # noqa: E501
+            (data) = self.update_identity_provider_with_http_info(idp_id, body, **kwargs)  # noqa: E501
             return data
 
-    def update_identity_provider_with_http_info(self, body, idp_id, **kwargs):  # noqa: E501
+    def update_identity_provider_with_http_info(self, idp_id, body, **kwargs):  # noqa: E501
         """Update Identity Provider  # noqa: E501
 
         Updates the configuration for an IdP.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_identity_provider_with_http_info(body, idp_id, async_req=True)
+        >>> thread = api.update_identity_provider_with_http_info(idp_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param IdentityProvider body: (required)
         :param str idp_id: (required)
+        :param IdentityProvider body: (required)
         :return: IdentityProvider
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'idp_id']  # noqa: E501
+        all_params = ['idp_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -2836,14 +2836,14 @@ class IdentityProvider(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `update_identity_provider`")  # noqa: E501
         # verify the required parameter 'idp_id' is set
         if ('idp_id' not in params or
                 params['idp_id'] is None):
             raise ValueError("Missing the required parameter `idp_id` when calling `update_identity_provider`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `update_identity_provider`")  # noqa: E501
 
         collection_formats = {}
 

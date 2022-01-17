@@ -325,47 +325,47 @@ class Policy(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def create_policy_rule(self, body, policy_id, **kwargs):  # noqa: E501
+    def create_policy_rule(self, policy_id, body, **kwargs):  # noqa: E501
         """create_policy_rule  # noqa: E501
 
         Creates a policy rule.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.create_policy_rule(body, policy_id, async_req=True)
+        >>> thread = api.create_policy_rule(policy_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param PolicyRule body: (required)
         :param str policy_id: (required)
+        :param PolicyRule body: (required)
         :return: PolicyRule
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.create_policy_rule_with_http_info(body, policy_id, **kwargs)  # noqa: E501
+            return self.create_policy_rule_with_http_info(policy_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.create_policy_rule_with_http_info(body, policy_id, **kwargs)  # noqa: E501
+            (data) = self.create_policy_rule_with_http_info(policy_id, body, **kwargs)  # noqa: E501
             return data
 
-    def create_policy_rule_with_http_info(self, body, policy_id, **kwargs):  # noqa: E501
+    def create_policy_rule_with_http_info(self, policy_id, body, **kwargs):  # noqa: E501
         """create_policy_rule  # noqa: E501
 
         Creates a policy rule.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.create_policy_rule_with_http_info(body, policy_id, async_req=True)
+        >>> thread = api.create_policy_rule_with_http_info(policy_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param PolicyRule body: (required)
         :param str policy_id: (required)
+        :param PolicyRule body: (required)
         :return: PolicyRule
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'policy_id']  # noqa: E501
+        all_params = ['policy_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -380,14 +380,14 @@ class Policy(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `create_policy_rule`")  # noqa: E501
         # verify the required parameter 'policy_id' is set
         if ('policy_id' not in params or
                 params['policy_id'] is None):
             raise ValueError("Missing the required parameter `policy_id` when calling `create_policy_rule`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `create_policy_rule`")  # noqa: E501
 
         collection_formats = {}
 
@@ -1212,47 +1212,47 @@ class Policy(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def update_policy(self, body, policy_id, **kwargs):  # noqa: E501
+    def update_policy(self, policy_id, body, **kwargs):  # noqa: E501
         """update_policy  # noqa: E501
 
         Updates a policy.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_policy(body, policy_id, async_req=True)
+        >>> thread = api.update_policy(policy_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Policy body: (required)
         :param str policy_id: (required)
+        :param Policy body: (required)
         :return: Policy
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.update_policy_with_http_info(body, policy_id, **kwargs)  # noqa: E501
+            return self.update_policy_with_http_info(policy_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.update_policy_with_http_info(body, policy_id, **kwargs)  # noqa: E501
+            (data) = self.update_policy_with_http_info(policy_id, body, **kwargs)  # noqa: E501
             return data
 
-    def update_policy_with_http_info(self, body, policy_id, **kwargs):  # noqa: E501
+    def update_policy_with_http_info(self, policy_id, body, **kwargs):  # noqa: E501
         """update_policy  # noqa: E501
 
         Updates a policy.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_policy_with_http_info(body, policy_id, async_req=True)
+        >>> thread = api.update_policy_with_http_info(policy_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Policy body: (required)
         :param str policy_id: (required)
+        :param Policy body: (required)
         :return: Policy
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'policy_id']  # noqa: E501
+        all_params = ['policy_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1267,14 +1267,14 @@ class Policy(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `update_policy`")  # noqa: E501
         # verify the required parameter 'policy_id' is set
         if ('policy_id' not in params or
                 params['policy_id'] is None):
             raise ValueError("Missing the required parameter `policy_id` when calling `update_policy`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `update_policy`")  # noqa: E501
 
         collection_formats = {}
 
@@ -1319,49 +1319,49 @@ class Policy(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def update_policy_rule(self, body, policy_id, rule_id, **kwargs):  # noqa: E501
+    def update_policy_rule(self, policy_id, rule_id, body, **kwargs):  # noqa: E501
         """update_policy_rule  # noqa: E501
 
         Updates a policy rule.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_policy_rule(body, policy_id, rule_id, async_req=True)
+        >>> thread = api.update_policy_rule(policy_id, rule_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param PolicyRule body: (required)
         :param str policy_id: (required)
         :param str rule_id: (required)
+        :param PolicyRule body: (required)
         :return: PolicyRule
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.update_policy_rule_with_http_info(body, policy_id, rule_id, **kwargs)  # noqa: E501
+            return self.update_policy_rule_with_http_info(policy_id, rule_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.update_policy_rule_with_http_info(body, policy_id, rule_id, **kwargs)  # noqa: E501
+            (data) = self.update_policy_rule_with_http_info(policy_id, rule_id, body, **kwargs)  # noqa: E501
             return data
 
-    def update_policy_rule_with_http_info(self, body, policy_id, rule_id, **kwargs):  # noqa: E501
+    def update_policy_rule_with_http_info(self, policy_id, rule_id, body, **kwargs):  # noqa: E501
         """update_policy_rule  # noqa: E501
 
         Updates a policy rule.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_policy_rule_with_http_info(body, policy_id, rule_id, async_req=True)
+        >>> thread = api.update_policy_rule_with_http_info(policy_id, rule_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param PolicyRule body: (required)
         :param str policy_id: (required)
         :param str rule_id: (required)
+        :param PolicyRule body: (required)
         :return: PolicyRule
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'policy_id', 'rule_id']  # noqa: E501
+        all_params = ['policy_id', 'rule_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -1376,10 +1376,6 @@ class Policy(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `update_policy_rule`")  # noqa: E501
         # verify the required parameter 'policy_id' is set
         if ('policy_id' not in params or
                 params['policy_id'] is None):
@@ -1388,6 +1384,10 @@ class Policy(object):
         if ('rule_id' not in params or
                 params['rule_id'] is None):
             raise ValueError("Missing the required parameter `rule_id` when calling `update_policy_rule`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `update_policy_rule`")  # noqa: E501
 
         collection_formats = {}
 

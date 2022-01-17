@@ -230,47 +230,47 @@ class ProfileMapping(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def update_profile_mapping(self, body, mapping_id, **kwargs):  # noqa: E501
+    def update_profile_mapping(self, mapping_id, body, **kwargs):  # noqa: E501
         """Update Profile Mapping  # noqa: E501
 
         Updates an existing Profile Mapping by adding, updating, or removing one or many Property Mappings.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_profile_mapping(body, mapping_id, async_req=True)
+        >>> thread = api.update_profile_mapping(mapping_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param ProfileMapping body: (required)
         :param str mapping_id: (required)
+        :param ProfileMapping body: (required)
         :return: ProfileMapping
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.update_profile_mapping_with_http_info(body, mapping_id, **kwargs)  # noqa: E501
+            return self.update_profile_mapping_with_http_info(mapping_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.update_profile_mapping_with_http_info(body, mapping_id, **kwargs)  # noqa: E501
+            (data) = self.update_profile_mapping_with_http_info(mapping_id, body, **kwargs)  # noqa: E501
             return data
 
-    def update_profile_mapping_with_http_info(self, body, mapping_id, **kwargs):  # noqa: E501
+    def update_profile_mapping_with_http_info(self, mapping_id, body, **kwargs):  # noqa: E501
         """Update Profile Mapping  # noqa: E501
 
         Updates an existing Profile Mapping by adding, updating, or removing one or many Property Mappings.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_profile_mapping_with_http_info(body, mapping_id, async_req=True)
+        >>> thread = api.update_profile_mapping_with_http_info(mapping_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param ProfileMapping body: (required)
         :param str mapping_id: (required)
+        :param ProfileMapping body: (required)
         :return: ProfileMapping
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'mapping_id']  # noqa: E501
+        all_params = ['mapping_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -285,14 +285,14 @@ class ProfileMapping(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `update_profile_mapping`")  # noqa: E501
         # verify the required parameter 'mapping_id' is set
         if ('mapping_id' not in params or
                 params['mapping_id'] is None):
             raise ValueError("Missing the required parameter `mapping_id` when calling `update_profile_mapping`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `update_profile_mapping`")  # noqa: E501
 
         collection_formats = {}
 

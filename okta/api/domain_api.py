@@ -32,47 +32,47 @@ class Domain(object):
             api_client = ApiClient()
         self.api_client = api_client
 
-    def create_certificate(self, body, domain_id, **kwargs):  # noqa: E501
+    def create_certificate(self, domain_id, body, **kwargs):  # noqa: E501
         """Create Certificate  # noqa: E501
 
         Creates the Certificate for the Domain.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.create_certificate(body, domain_id, async_req=True)
+        >>> thread = api.create_certificate(domain_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param DomainCertificate body: (required)
         :param str domain_id: (required)
+        :param DomainCertificate body: (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.create_certificate_with_http_info(body, domain_id, **kwargs)  # noqa: E501
+            return self.create_certificate_with_http_info(domain_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.create_certificate_with_http_info(body, domain_id, **kwargs)  # noqa: E501
+            (data) = self.create_certificate_with_http_info(domain_id, body, **kwargs)  # noqa: E501
             return data
 
-    def create_certificate_with_http_info(self, body, domain_id, **kwargs):  # noqa: E501
+    def create_certificate_with_http_info(self, domain_id, body, **kwargs):  # noqa: E501
         """Create Certificate  # noqa: E501
 
         Creates the Certificate for the Domain.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.create_certificate_with_http_info(body, domain_id, async_req=True)
+        >>> thread = api.create_certificate_with_http_info(domain_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param DomainCertificate body: (required)
         :param str domain_id: (required)
+        :param DomainCertificate body: (required)
         :return: None
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'domain_id']  # noqa: E501
+        all_params = ['domain_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -87,14 +87,14 @@ class Domain(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `create_certificate`")  # noqa: E501
         # verify the required parameter 'domain_id' is set
         if ('domain_id' not in params or
                 params['domain_id'] is None):
             raise ValueError("Missing the required parameter `domain_id` when calling `create_certificate`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `create_certificate`")  # noqa: E501
 
         collection_formats = {}
 

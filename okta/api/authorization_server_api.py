@@ -428,47 +428,47 @@ class AuthorizationServer(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def create_authorization_server_policy(self, body, auth_server_id, **kwargs):  # noqa: E501
+    def create_authorization_server_policy(self, auth_server_id, body, **kwargs):  # noqa: E501
         """create_authorization_server_policy  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.create_authorization_server_policy(body, auth_server_id, async_req=True)
+        >>> thread = api.create_authorization_server_policy(auth_server_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param AuthorizationServerPolicy body: (required)
         :param str auth_server_id: (required)
+        :param AuthorizationServerPolicy body: (required)
         :return: AuthorizationServerPolicy
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.create_authorization_server_policy_with_http_info(body, auth_server_id, **kwargs)  # noqa: E501
+            return self.create_authorization_server_policy_with_http_info(auth_server_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.create_authorization_server_policy_with_http_info(body, auth_server_id, **kwargs)  # noqa: E501
+            (data) = self.create_authorization_server_policy_with_http_info(auth_server_id, body, **kwargs)  # noqa: E501
             return data
 
-    def create_authorization_server_policy_with_http_info(self, body, auth_server_id, **kwargs):  # noqa: E501
+    def create_authorization_server_policy_with_http_info(self, auth_server_id, body, **kwargs):  # noqa: E501
         """create_authorization_server_policy  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.create_authorization_server_policy_with_http_info(body, auth_server_id, async_req=True)
+        >>> thread = api.create_authorization_server_policy_with_http_info(auth_server_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param AuthorizationServerPolicy body: (required)
         :param str auth_server_id: (required)
+        :param AuthorizationServerPolicy body: (required)
         :return: AuthorizationServerPolicy
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'auth_server_id']  # noqa: E501
+        all_params = ['auth_server_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -483,14 +483,14 @@ class AuthorizationServer(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `create_authorization_server_policy`")  # noqa: E501
         # verify the required parameter 'auth_server_id' is set
         if ('auth_server_id' not in params or
                 params['auth_server_id'] is None):
             raise ValueError("Missing the required parameter `auth_server_id` when calling `create_authorization_server_policy`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `create_authorization_server_policy`")  # noqa: E501
 
         collection_formats = {}
 
@@ -535,49 +535,49 @@ class AuthorizationServer(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def create_authorization_server_policy_rule(self, body, policy_id, auth_server_id, **kwargs):  # noqa: E501
+    def create_authorization_server_policy_rule(self, policy_id, auth_server_id, body, **kwargs):  # noqa: E501
         """create_authorization_server_policy_rule  # noqa: E501
 
         Creates a policy rule for the specified Custom Authorization Server and Policy.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.create_authorization_server_policy_rule(body, policy_id, auth_server_id, async_req=True)
+        >>> thread = api.create_authorization_server_policy_rule(policy_id, auth_server_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param AuthorizationServerPolicyRule body: (required)
         :param str policy_id: (required)
         :param str auth_server_id: (required)
+        :param AuthorizationServerPolicyRule body: (required)
         :return: AuthorizationServerPolicyRule
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.create_authorization_server_policy_rule_with_http_info(body, policy_id, auth_server_id, **kwargs)  # noqa: E501
+            return self.create_authorization_server_policy_rule_with_http_info(policy_id, auth_server_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.create_authorization_server_policy_rule_with_http_info(body, policy_id, auth_server_id, **kwargs)  # noqa: E501
+            (data) = self.create_authorization_server_policy_rule_with_http_info(policy_id, auth_server_id, body, **kwargs)  # noqa: E501
             return data
 
-    def create_authorization_server_policy_rule_with_http_info(self, body, policy_id, auth_server_id, **kwargs):  # noqa: E501
+    def create_authorization_server_policy_rule_with_http_info(self, policy_id, auth_server_id, body, **kwargs):  # noqa: E501
         """create_authorization_server_policy_rule  # noqa: E501
 
         Creates a policy rule for the specified Custom Authorization Server and Policy.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.create_authorization_server_policy_rule_with_http_info(body, policy_id, auth_server_id, async_req=True)
+        >>> thread = api.create_authorization_server_policy_rule_with_http_info(policy_id, auth_server_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param AuthorizationServerPolicyRule body: (required)
         :param str policy_id: (required)
         :param str auth_server_id: (required)
+        :param AuthorizationServerPolicyRule body: (required)
         :return: AuthorizationServerPolicyRule
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'policy_id', 'auth_server_id']  # noqa: E501
+        all_params = ['policy_id', 'auth_server_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -592,10 +592,6 @@ class AuthorizationServer(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `create_authorization_server_policy_rule`")  # noqa: E501
         # verify the required parameter 'policy_id' is set
         if ('policy_id' not in params or
                 params['policy_id'] is None):
@@ -604,6 +600,10 @@ class AuthorizationServer(object):
         if ('auth_server_id' not in params or
                 params['auth_server_id'] is None):
             raise ValueError("Missing the required parameter `auth_server_id` when calling `create_authorization_server_policy_rule`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `create_authorization_server_policy_rule`")  # noqa: E501
 
         collection_formats = {}
 
@@ -650,47 +650,47 @@ class AuthorizationServer(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def create_o_auth2_claim(self, body, auth_server_id, **kwargs):  # noqa: E501
+    def create_o_auth2_claim(self, auth_server_id, body, **kwargs):  # noqa: E501
         """create_o_auth2_claim  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.create_o_auth2_claim(body, auth_server_id, async_req=True)
+        >>> thread = api.create_o_auth2_claim(auth_server_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param OAuth2Claim body: (required)
         :param str auth_server_id: (required)
+        :param OAuth2Claim body: (required)
         :return: OAuth2Claim
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.create_o_auth2_claim_with_http_info(body, auth_server_id, **kwargs)  # noqa: E501
+            return self.create_o_auth2_claim_with_http_info(auth_server_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.create_o_auth2_claim_with_http_info(body, auth_server_id, **kwargs)  # noqa: E501
+            (data) = self.create_o_auth2_claim_with_http_info(auth_server_id, body, **kwargs)  # noqa: E501
             return data
 
-    def create_o_auth2_claim_with_http_info(self, body, auth_server_id, **kwargs):  # noqa: E501
+    def create_o_auth2_claim_with_http_info(self, auth_server_id, body, **kwargs):  # noqa: E501
         """create_o_auth2_claim  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.create_o_auth2_claim_with_http_info(body, auth_server_id, async_req=True)
+        >>> thread = api.create_o_auth2_claim_with_http_info(auth_server_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param OAuth2Claim body: (required)
         :param str auth_server_id: (required)
+        :param OAuth2Claim body: (required)
         :return: OAuth2Claim
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'auth_server_id']  # noqa: E501
+        all_params = ['auth_server_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -705,14 +705,14 @@ class AuthorizationServer(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `create_o_auth2_claim`")  # noqa: E501
         # verify the required parameter 'auth_server_id' is set
         if ('auth_server_id' not in params or
                 params['auth_server_id'] is None):
             raise ValueError("Missing the required parameter `auth_server_id` when calling `create_o_auth2_claim`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `create_o_auth2_claim`")  # noqa: E501
 
         collection_formats = {}
 
@@ -757,47 +757,47 @@ class AuthorizationServer(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def create_o_auth2_scope(self, body, auth_server_id, **kwargs):  # noqa: E501
+    def create_o_auth2_scope(self, auth_server_id, body, **kwargs):  # noqa: E501
         """create_o_auth2_scope  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.create_o_auth2_scope(body, auth_server_id, async_req=True)
+        >>> thread = api.create_o_auth2_scope(auth_server_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param OAuth2Scope body: (required)
         :param str auth_server_id: (required)
+        :param OAuth2Scope body: (required)
         :return: OAuth2Scope
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.create_o_auth2_scope_with_http_info(body, auth_server_id, **kwargs)  # noqa: E501
+            return self.create_o_auth2_scope_with_http_info(auth_server_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.create_o_auth2_scope_with_http_info(body, auth_server_id, **kwargs)  # noqa: E501
+            (data) = self.create_o_auth2_scope_with_http_info(auth_server_id, body, **kwargs)  # noqa: E501
             return data
 
-    def create_o_auth2_scope_with_http_info(self, body, auth_server_id, **kwargs):  # noqa: E501
+    def create_o_auth2_scope_with_http_info(self, auth_server_id, body, **kwargs):  # noqa: E501
         """create_o_auth2_scope  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.create_o_auth2_scope_with_http_info(body, auth_server_id, async_req=True)
+        >>> thread = api.create_o_auth2_scope_with_http_info(auth_server_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param OAuth2Scope body: (required)
         :param str auth_server_id: (required)
+        :param OAuth2Scope body: (required)
         :return: OAuth2Scope
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'auth_server_id']  # noqa: E501
+        all_params = ['auth_server_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -812,14 +812,14 @@ class AuthorizationServer(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `create_o_auth2_scope`")  # noqa: E501
         # verify the required parameter 'auth_server_id' is set
         if ('auth_server_id' not in params or
                 params['auth_server_id'] is None):
             raise ValueError("Missing the required parameter `auth_server_id` when calling `create_o_auth2_scope`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `create_o_auth2_scope`")  # noqa: E501
 
         collection_formats = {}
 
@@ -3300,47 +3300,47 @@ class AuthorizationServer(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def rotate_authorization_server_keys(self, body, auth_server_id, **kwargs):  # noqa: E501
+    def rotate_authorization_server_keys(self, auth_server_id, body, **kwargs):  # noqa: E501
         """rotate_authorization_server_keys  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.rotate_authorization_server_keys(body, auth_server_id, async_req=True)
+        >>> thread = api.rotate_authorization_server_keys(auth_server_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param JwkUse body: (required)
         :param str auth_server_id: (required)
+        :param JwkUse body: (required)
         :return: list[JsonWebKey]
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.rotate_authorization_server_keys_with_http_info(body, auth_server_id, **kwargs)  # noqa: E501
+            return self.rotate_authorization_server_keys_with_http_info(auth_server_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.rotate_authorization_server_keys_with_http_info(body, auth_server_id, **kwargs)  # noqa: E501
+            (data) = self.rotate_authorization_server_keys_with_http_info(auth_server_id, body, **kwargs)  # noqa: E501
             return data
 
-    def rotate_authorization_server_keys_with_http_info(self, body, auth_server_id, **kwargs):  # noqa: E501
+    def rotate_authorization_server_keys_with_http_info(self, auth_server_id, body, **kwargs):  # noqa: E501
         """rotate_authorization_server_keys  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.rotate_authorization_server_keys_with_http_info(body, auth_server_id, async_req=True)
+        >>> thread = api.rotate_authorization_server_keys_with_http_info(auth_server_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param JwkUse body: (required)
         :param str auth_server_id: (required)
+        :param JwkUse body: (required)
         :return: list[JsonWebKey]
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'auth_server_id']  # noqa: E501
+        all_params = ['auth_server_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -3355,14 +3355,14 @@ class AuthorizationServer(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `rotate_authorization_server_keys`")  # noqa: E501
         # verify the required parameter 'auth_server_id' is set
         if ('auth_server_id' not in params or
                 params['auth_server_id'] is None):
             raise ValueError("Missing the required parameter `auth_server_id` when calling `rotate_authorization_server_keys`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `rotate_authorization_server_keys`")  # noqa: E501
 
         collection_formats = {}
 
@@ -3407,47 +3407,47 @@ class AuthorizationServer(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def update_authorization_server(self, body, auth_server_id, **kwargs):  # noqa: E501
+    def update_authorization_server(self, auth_server_id, body, **kwargs):  # noqa: E501
         """update_authorization_server  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_authorization_server(body, auth_server_id, async_req=True)
+        >>> thread = api.update_authorization_server(auth_server_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param AuthorizationServer body: (required)
         :param str auth_server_id: (required)
+        :param AuthorizationServer body: (required)
         :return: AuthorizationServer
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.update_authorization_server_with_http_info(body, auth_server_id, **kwargs)  # noqa: E501
+            return self.update_authorization_server_with_http_info(auth_server_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.update_authorization_server_with_http_info(body, auth_server_id, **kwargs)  # noqa: E501
+            (data) = self.update_authorization_server_with_http_info(auth_server_id, body, **kwargs)  # noqa: E501
             return data
 
-    def update_authorization_server_with_http_info(self, body, auth_server_id, **kwargs):  # noqa: E501
+    def update_authorization_server_with_http_info(self, auth_server_id, body, **kwargs):  # noqa: E501
         """update_authorization_server  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_authorization_server_with_http_info(body, auth_server_id, async_req=True)
+        >>> thread = api.update_authorization_server_with_http_info(auth_server_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param AuthorizationServer body: (required)
         :param str auth_server_id: (required)
+        :param AuthorizationServer body: (required)
         :return: AuthorizationServer
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'auth_server_id']  # noqa: E501
+        all_params = ['auth_server_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -3462,14 +3462,14 @@ class AuthorizationServer(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `update_authorization_server`")  # noqa: E501
         # verify the required parameter 'auth_server_id' is set
         if ('auth_server_id' not in params or
                 params['auth_server_id'] is None):
             raise ValueError("Missing the required parameter `auth_server_id` when calling `update_authorization_server`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `update_authorization_server`")  # noqa: E501
 
         collection_formats = {}
 
@@ -3514,49 +3514,49 @@ class AuthorizationServer(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def update_authorization_server_policy(self, body, auth_server_id, policy_id, **kwargs):  # noqa: E501
+    def update_authorization_server_policy(self, auth_server_id, policy_id, body, **kwargs):  # noqa: E501
         """update_authorization_server_policy  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_authorization_server_policy(body, auth_server_id, policy_id, async_req=True)
+        >>> thread = api.update_authorization_server_policy(auth_server_id, policy_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param AuthorizationServerPolicy body: (required)
         :param str auth_server_id: (required)
         :param str policy_id: (required)
+        :param AuthorizationServerPolicy body: (required)
         :return: AuthorizationServerPolicy
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.update_authorization_server_policy_with_http_info(body, auth_server_id, policy_id, **kwargs)  # noqa: E501
+            return self.update_authorization_server_policy_with_http_info(auth_server_id, policy_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.update_authorization_server_policy_with_http_info(body, auth_server_id, policy_id, **kwargs)  # noqa: E501
+            (data) = self.update_authorization_server_policy_with_http_info(auth_server_id, policy_id, body, **kwargs)  # noqa: E501
             return data
 
-    def update_authorization_server_policy_with_http_info(self, body, auth_server_id, policy_id, **kwargs):  # noqa: E501
+    def update_authorization_server_policy_with_http_info(self, auth_server_id, policy_id, body, **kwargs):  # noqa: E501
         """update_authorization_server_policy  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_authorization_server_policy_with_http_info(body, auth_server_id, policy_id, async_req=True)
+        >>> thread = api.update_authorization_server_policy_with_http_info(auth_server_id, policy_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param AuthorizationServerPolicy body: (required)
         :param str auth_server_id: (required)
         :param str policy_id: (required)
+        :param AuthorizationServerPolicy body: (required)
         :return: AuthorizationServerPolicy
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'auth_server_id', 'policy_id']  # noqa: E501
+        all_params = ['auth_server_id', 'policy_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -3571,10 +3571,6 @@ class AuthorizationServer(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `update_authorization_server_policy`")  # noqa: E501
         # verify the required parameter 'auth_server_id' is set
         if ('auth_server_id' not in params or
                 params['auth_server_id'] is None):
@@ -3583,6 +3579,10 @@ class AuthorizationServer(object):
         if ('policy_id' not in params or
                 params['policy_id'] is None):
             raise ValueError("Missing the required parameter `policy_id` when calling `update_authorization_server_policy`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `update_authorization_server_policy`")  # noqa: E501
 
         collection_formats = {}
 
@@ -3629,51 +3629,51 @@ class AuthorizationServer(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def update_authorization_server_policy_rule(self, body, policy_id, auth_server_id, rule_id, **kwargs):  # noqa: E501
+    def update_authorization_server_policy_rule(self, policy_id, auth_server_id, rule_id, body, **kwargs):  # noqa: E501
         """update_authorization_server_policy_rule  # noqa: E501
 
         Updates the configuration of the Policy Rule defined in the specified Custom Authorization Server and Policy.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_authorization_server_policy_rule(body, policy_id, auth_server_id, rule_id, async_req=True)
+        >>> thread = api.update_authorization_server_policy_rule(policy_id, auth_server_id, rule_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param AuthorizationServerPolicyRule body: (required)
         :param str policy_id: (required)
         :param str auth_server_id: (required)
         :param str rule_id: (required)
+        :param AuthorizationServerPolicyRule body: (required)
         :return: AuthorizationServerPolicyRule
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.update_authorization_server_policy_rule_with_http_info(body, policy_id, auth_server_id, rule_id, **kwargs)  # noqa: E501
+            return self.update_authorization_server_policy_rule_with_http_info(policy_id, auth_server_id, rule_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.update_authorization_server_policy_rule_with_http_info(body, policy_id, auth_server_id, rule_id, **kwargs)  # noqa: E501
+            (data) = self.update_authorization_server_policy_rule_with_http_info(policy_id, auth_server_id, rule_id, body, **kwargs)  # noqa: E501
             return data
 
-    def update_authorization_server_policy_rule_with_http_info(self, body, policy_id, auth_server_id, rule_id, **kwargs):  # noqa: E501
+    def update_authorization_server_policy_rule_with_http_info(self, policy_id, auth_server_id, rule_id, body, **kwargs):  # noqa: E501
         """update_authorization_server_policy_rule  # noqa: E501
 
         Updates the configuration of the Policy Rule defined in the specified Custom Authorization Server and Policy.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_authorization_server_policy_rule_with_http_info(body, policy_id, auth_server_id, rule_id, async_req=True)
+        >>> thread = api.update_authorization_server_policy_rule_with_http_info(policy_id, auth_server_id, rule_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param AuthorizationServerPolicyRule body: (required)
         :param str policy_id: (required)
         :param str auth_server_id: (required)
         :param str rule_id: (required)
+        :param AuthorizationServerPolicyRule body: (required)
         :return: AuthorizationServerPolicyRule
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'policy_id', 'auth_server_id', 'rule_id']  # noqa: E501
+        all_params = ['policy_id', 'auth_server_id', 'rule_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -3688,10 +3688,6 @@ class AuthorizationServer(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `update_authorization_server_policy_rule`")  # noqa: E501
         # verify the required parameter 'policy_id' is set
         if ('policy_id' not in params or
                 params['policy_id'] is None):
@@ -3704,6 +3700,10 @@ class AuthorizationServer(object):
         if ('rule_id' not in params or
                 params['rule_id'] is None):
             raise ValueError("Missing the required parameter `rule_id` when calling `update_authorization_server_policy_rule`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `update_authorization_server_policy_rule`")  # noqa: E501
 
         collection_formats = {}
 
@@ -3752,49 +3752,49 @@ class AuthorizationServer(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def update_o_auth2_claim(self, body, auth_server_id, claim_id, **kwargs):  # noqa: E501
+    def update_o_auth2_claim(self, auth_server_id, claim_id, body, **kwargs):  # noqa: E501
         """update_o_auth2_claim  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_o_auth2_claim(body, auth_server_id, claim_id, async_req=True)
+        >>> thread = api.update_o_auth2_claim(auth_server_id, claim_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param OAuth2Claim body: (required)
         :param str auth_server_id: (required)
         :param str claim_id: (required)
+        :param OAuth2Claim body: (required)
         :return: OAuth2Claim
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.update_o_auth2_claim_with_http_info(body, auth_server_id, claim_id, **kwargs)  # noqa: E501
+            return self.update_o_auth2_claim_with_http_info(auth_server_id, claim_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.update_o_auth2_claim_with_http_info(body, auth_server_id, claim_id, **kwargs)  # noqa: E501
+            (data) = self.update_o_auth2_claim_with_http_info(auth_server_id, claim_id, body, **kwargs)  # noqa: E501
             return data
 
-    def update_o_auth2_claim_with_http_info(self, body, auth_server_id, claim_id, **kwargs):  # noqa: E501
+    def update_o_auth2_claim_with_http_info(self, auth_server_id, claim_id, body, **kwargs):  # noqa: E501
         """update_o_auth2_claim  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_o_auth2_claim_with_http_info(body, auth_server_id, claim_id, async_req=True)
+        >>> thread = api.update_o_auth2_claim_with_http_info(auth_server_id, claim_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param OAuth2Claim body: (required)
         :param str auth_server_id: (required)
         :param str claim_id: (required)
+        :param OAuth2Claim body: (required)
         :return: OAuth2Claim
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'auth_server_id', 'claim_id']  # noqa: E501
+        all_params = ['auth_server_id', 'claim_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -3809,10 +3809,6 @@ class AuthorizationServer(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `update_o_auth2_claim`")  # noqa: E501
         # verify the required parameter 'auth_server_id' is set
         if ('auth_server_id' not in params or
                 params['auth_server_id'] is None):
@@ -3821,6 +3817,10 @@ class AuthorizationServer(object):
         if ('claim_id' not in params or
                 params['claim_id'] is None):
             raise ValueError("Missing the required parameter `claim_id` when calling `update_o_auth2_claim`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `update_o_auth2_claim`")  # noqa: E501
 
         collection_formats = {}
 
@@ -3867,49 +3867,49 @@ class AuthorizationServer(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def update_o_auth2_scope(self, body, auth_server_id, scope_id, **kwargs):  # noqa: E501
+    def update_o_auth2_scope(self, auth_server_id, scope_id, body, **kwargs):  # noqa: E501
         """update_o_auth2_scope  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_o_auth2_scope(body, auth_server_id, scope_id, async_req=True)
+        >>> thread = api.update_o_auth2_scope(auth_server_id, scope_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param OAuth2Scope body: (required)
         :param str auth_server_id: (required)
         :param str scope_id: (required)
+        :param OAuth2Scope body: (required)
         :return: OAuth2Scope
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.update_o_auth2_scope_with_http_info(body, auth_server_id, scope_id, **kwargs)  # noqa: E501
+            return self.update_o_auth2_scope_with_http_info(auth_server_id, scope_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.update_o_auth2_scope_with_http_info(body, auth_server_id, scope_id, **kwargs)  # noqa: E501
+            (data) = self.update_o_auth2_scope_with_http_info(auth_server_id, scope_id, body, **kwargs)  # noqa: E501
             return data
 
-    def update_o_auth2_scope_with_http_info(self, body, auth_server_id, scope_id, **kwargs):  # noqa: E501
+    def update_o_auth2_scope_with_http_info(self, auth_server_id, scope_id, body, **kwargs):  # noqa: E501
         """update_o_auth2_scope  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_o_auth2_scope_with_http_info(body, auth_server_id, scope_id, async_req=True)
+        >>> thread = api.update_o_auth2_scope_with_http_info(auth_server_id, scope_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param OAuth2Scope body: (required)
         :param str auth_server_id: (required)
         :param str scope_id: (required)
+        :param OAuth2Scope body: (required)
         :return: OAuth2Scope
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'auth_server_id', 'scope_id']  # noqa: E501
+        all_params = ['auth_server_id', 'scope_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -3924,10 +3924,6 @@ class AuthorizationServer(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `update_o_auth2_scope`")  # noqa: E501
         # verify the required parameter 'auth_server_id' is set
         if ('auth_server_id' not in params or
                 params['auth_server_id'] is None):
@@ -3936,6 +3932,10 @@ class AuthorizationServer(object):
         if ('scope_id' not in params or
                 params['scope_id'] is None):
             raise ValueError("Missing the required parameter `scope_id` when calling `update_o_auth2_scope`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `update_o_auth2_scope`")  # noqa: E501
 
         collection_formats = {}
 

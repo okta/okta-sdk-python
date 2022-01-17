@@ -551,18 +551,18 @@ class Group(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def assign_role_to_group(self, body, group_id, **kwargs):  # noqa: E501
+    def assign_role_to_group(self, group_id, body, **kwargs):  # noqa: E501
         """assign_role_to_group  # noqa: E501
 
         Assigns a Role to a Group  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.assign_role_to_group(body, group_id, async_req=True)
+        >>> thread = api.assign_role_to_group(group_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param AssignRoleRequest body: (required)
         :param str group_id: (required)
+        :param AssignRoleRequest body: (required)
         :param bool disable_notifications:
         :return: Role
                  If the method is called asynchronously,
@@ -570,30 +570,30 @@ class Group(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.assign_role_to_group_with_http_info(body, group_id, **kwargs)  # noqa: E501
+            return self.assign_role_to_group_with_http_info(group_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.assign_role_to_group_with_http_info(body, group_id, **kwargs)  # noqa: E501
+            (data) = self.assign_role_to_group_with_http_info(group_id, body, **kwargs)  # noqa: E501
             return data
 
-    def assign_role_to_group_with_http_info(self, body, group_id, **kwargs):  # noqa: E501
+    def assign_role_to_group_with_http_info(self, group_id, body, **kwargs):  # noqa: E501
         """assign_role_to_group  # noqa: E501
 
         Assigns a Role to a Group  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.assign_role_to_group_with_http_info(body, group_id, async_req=True)
+        >>> thread = api.assign_role_to_group_with_http_info(group_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param AssignRoleRequest body: (required)
         :param str group_id: (required)
+        :param AssignRoleRequest body: (required)
         :param bool disable_notifications:
         :return: Role
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'group_id', 'disable_notifications']  # noqa: E501
+        all_params = ['group_id', 'body', 'disable_notifications']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -608,14 +608,14 @@ class Group(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `assign_role_to_group`")  # noqa: E501
         # verify the required parameter 'group_id' is set
         if ('group_id' not in params or
                 params['group_id'] is None):
             raise ValueError("Missing the required parameter `group_id` when calling `assign_role_to_group`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `assign_role_to_group`")  # noqa: E501
 
         collection_formats = {}
 
@@ -2698,47 +2698,47 @@ class Group(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def update_group(self, body, group_id, **kwargs):  # noqa: E501
+    def update_group(self, group_id, body, **kwargs):  # noqa: E501
         """Update Group  # noqa: E501
 
         Updates the profile for a group with `OKTA_GROUP` type from your organization.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_group(body, group_id, async_req=True)
+        >>> thread = api.update_group(group_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Group body: (required)
         :param str group_id: (required)
+        :param Group body: (required)
         :return: Group
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.update_group_with_http_info(body, group_id, **kwargs)  # noqa: E501
+            return self.update_group_with_http_info(group_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.update_group_with_http_info(body, group_id, **kwargs)  # noqa: E501
+            (data) = self.update_group_with_http_info(group_id, body, **kwargs)  # noqa: E501
             return data
 
-    def update_group_with_http_info(self, body, group_id, **kwargs):  # noqa: E501
+    def update_group_with_http_info(self, group_id, body, **kwargs):  # noqa: E501
         """Update Group  # noqa: E501
 
         Updates the profile for a group with `OKTA_GROUP` type from your organization.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_group_with_http_info(body, group_id, async_req=True)
+        >>> thread = api.update_group_with_http_info(group_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param Group body: (required)
         :param str group_id: (required)
+        :param Group body: (required)
         :return: Group
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'group_id']  # noqa: E501
+        all_params = ['group_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -2753,14 +2753,14 @@ class Group(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `update_group`")  # noqa: E501
         # verify the required parameter 'group_id' is set
         if ('group_id' not in params or
                 params['group_id'] is None):
             raise ValueError("Missing the required parameter `group_id` when calling `update_group`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `update_group`")  # noqa: E501
 
         collection_formats = {}
 
@@ -2805,47 +2805,47 @@ class Group(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def update_group_rule(self, body, rule_id, **kwargs):  # noqa: E501
+    def update_group_rule(self, rule_id, body, **kwargs):  # noqa: E501
         """update_group_rule  # noqa: E501
 
         Updates a group rule. Only `INACTIVE` rules can be updated.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_group_rule(body, rule_id, async_req=True)
+        >>> thread = api.update_group_rule(rule_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param GroupRule body: (required)
         :param str rule_id: (required)
+        :param GroupRule body: (required)
         :return: GroupRule
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.update_group_rule_with_http_info(body, rule_id, **kwargs)  # noqa: E501
+            return self.update_group_rule_with_http_info(rule_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.update_group_rule_with_http_info(body, rule_id, **kwargs)  # noqa: E501
+            (data) = self.update_group_rule_with_http_info(rule_id, body, **kwargs)  # noqa: E501
             return data
 
-    def update_group_rule_with_http_info(self, body, rule_id, **kwargs):  # noqa: E501
+    def update_group_rule_with_http_info(self, rule_id, body, **kwargs):  # noqa: E501
         """update_group_rule  # noqa: E501
 
         Updates a group rule. Only `INACTIVE` rules can be updated.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_group_rule_with_http_info(body, rule_id, async_req=True)
+        >>> thread = api.update_group_rule_with_http_info(rule_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param GroupRule body: (required)
         :param str rule_id: (required)
+        :param GroupRule body: (required)
         :return: GroupRule
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'rule_id']  # noqa: E501
+        all_params = ['rule_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -2860,14 +2860,14 @@ class Group(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `update_group_rule`")  # noqa: E501
         # verify the required parameter 'rule_id' is set
         if ('rule_id' not in params or
                 params['rule_id'] is None):
             raise ValueError("Missing the required parameter `rule_id` when calling `update_group_rule`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `update_group_rule`")  # noqa: E501
 
         collection_formats = {}
 

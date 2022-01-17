@@ -412,47 +412,47 @@ class InlineHook(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def execute_inline_hook(self, body, inline_hook_id, **kwargs):  # noqa: E501
+    def execute_inline_hook(self, inline_hook_id, body, **kwargs):  # noqa: E501
         """execute_inline_hook  # noqa: E501
 
         Executes the Inline Hook matching the provided inlineHookId using the request body as the input. This will send the provided data through the Channel and return a response if it matches the correct data contract. This execution endpoint should only be used for testing purposes.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.execute_inline_hook(body, inline_hook_id, async_req=True)
+        >>> thread = api.execute_inline_hook(inline_hook_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param InlineHookPayload body: (required)
         :param str inline_hook_id: (required)
+        :param InlineHookPayload body: (required)
         :return: InlineHookResponse
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.execute_inline_hook_with_http_info(body, inline_hook_id, **kwargs)  # noqa: E501
+            return self.execute_inline_hook_with_http_info(inline_hook_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.execute_inline_hook_with_http_info(body, inline_hook_id, **kwargs)  # noqa: E501
+            (data) = self.execute_inline_hook_with_http_info(inline_hook_id, body, **kwargs)  # noqa: E501
             return data
 
-    def execute_inline_hook_with_http_info(self, body, inline_hook_id, **kwargs):  # noqa: E501
+    def execute_inline_hook_with_http_info(self, inline_hook_id, body, **kwargs):  # noqa: E501
         """execute_inline_hook  # noqa: E501
 
         Executes the Inline Hook matching the provided inlineHookId using the request body as the input. This will send the provided data through the Channel and return a response if it matches the correct data contract. This execution endpoint should only be used for testing purposes.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.execute_inline_hook_with_http_info(body, inline_hook_id, async_req=True)
+        >>> thread = api.execute_inline_hook_with_http_info(inline_hook_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param InlineHookPayload body: (required)
         :param str inline_hook_id: (required)
+        :param InlineHookPayload body: (required)
         :return: InlineHookResponse
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'inline_hook_id']  # noqa: E501
+        all_params = ['inline_hook_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -467,14 +467,14 @@ class InlineHook(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `execute_inline_hook`")  # noqa: E501
         # verify the required parameter 'inline_hook_id' is set
         if ('inline_hook_id' not in params or
                 params['inline_hook_id'] is None):
             raise ValueError("Missing the required parameter `inline_hook_id` when calling `execute_inline_hook`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `execute_inline_hook`")  # noqa: E501
 
         collection_formats = {}
 
@@ -705,47 +705,47 @@ class InlineHook(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def update_inline_hook(self, body, inline_hook_id, **kwargs):  # noqa: E501
+    def update_inline_hook(self, inline_hook_id, body, **kwargs):  # noqa: E501
         """update_inline_hook  # noqa: E501
 
         Updates an inline hook by ID  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_inline_hook(body, inline_hook_id, async_req=True)
+        >>> thread = api.update_inline_hook(inline_hook_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param InlineHook body: (required)
         :param str inline_hook_id: (required)
+        :param InlineHook body: (required)
         :return: InlineHook
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.update_inline_hook_with_http_info(body, inline_hook_id, **kwargs)  # noqa: E501
+            return self.update_inline_hook_with_http_info(inline_hook_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.update_inline_hook_with_http_info(body, inline_hook_id, **kwargs)  # noqa: E501
+            (data) = self.update_inline_hook_with_http_info(inline_hook_id, body, **kwargs)  # noqa: E501
             return data
 
-    def update_inline_hook_with_http_info(self, body, inline_hook_id, **kwargs):  # noqa: E501
+    def update_inline_hook_with_http_info(self, inline_hook_id, body, **kwargs):  # noqa: E501
         """update_inline_hook  # noqa: E501
 
         Updates an inline hook by ID  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_inline_hook_with_http_info(body, inline_hook_id, async_req=True)
+        >>> thread = api.update_inline_hook_with_http_info(inline_hook_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param InlineHook body: (required)
         :param str inline_hook_id: (required)
+        :param InlineHook body: (required)
         :return: InlineHook
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'inline_hook_id']  # noqa: E501
+        all_params = ['inline_hook_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -760,14 +760,14 @@ class InlineHook(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `update_inline_hook`")  # noqa: E501
         # verify the required parameter 'inline_hook_id' is set
         if ('inline_hook_id' not in params or
                 params['inline_hook_id'] is None):
             raise ValueError("Missing the required parameter `inline_hook_id` when calling `update_inline_hook`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `update_inline_hook`")  # noqa: E501
 
         collection_formats = {}
 

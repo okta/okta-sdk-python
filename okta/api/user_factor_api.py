@@ -242,18 +242,18 @@ class UserFactor(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def enroll_factor(self, body, user_id, **kwargs):  # noqa: E501
+    def enroll_factor(self, user_id, body, **kwargs):  # noqa: E501
         """Enroll Factor  # noqa: E501
 
         Enrolls a user with a supported factor.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.enroll_factor(body, user_id, async_req=True)
+        >>> thread = api.enroll_factor(user_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param UserFactor body: Factor (required)
         :param str user_id: (required)
+        :param UserFactor body: Factor (required)
         :param bool update_phone:
         :param str template_id: id of SMS template (only for SMS factor)
         :param int token_lifetime_seconds:
@@ -264,23 +264,23 @@ class UserFactor(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.enroll_factor_with_http_info(body, user_id, **kwargs)  # noqa: E501
+            return self.enroll_factor_with_http_info(user_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.enroll_factor_with_http_info(body, user_id, **kwargs)  # noqa: E501
+            (data) = self.enroll_factor_with_http_info(user_id, body, **kwargs)  # noqa: E501
             return data
 
-    def enroll_factor_with_http_info(self, body, user_id, **kwargs):  # noqa: E501
+    def enroll_factor_with_http_info(self, user_id, body, **kwargs):  # noqa: E501
         """Enroll Factor  # noqa: E501
 
         Enrolls a user with a supported factor.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.enroll_factor_with_http_info(body, user_id, async_req=True)
+        >>> thread = api.enroll_factor_with_http_info(user_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param UserFactor body: Factor (required)
         :param str user_id: (required)
+        :param UserFactor body: Factor (required)
         :param bool update_phone:
         :param str template_id: id of SMS template (only for SMS factor)
         :param int token_lifetime_seconds:
@@ -290,7 +290,7 @@ class UserFactor(object):
                  returns the request thread.
         """
 
-        all_params = ['body', 'user_id', 'update_phone', 'template_id', 'token_lifetime_seconds', 'activate']  # noqa: E501
+        all_params = ['user_id', 'body', 'update_phone', 'template_id', 'token_lifetime_seconds', 'activate']  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -305,14 +305,14 @@ class UserFactor(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `enroll_factor`")  # noqa: E501
         # verify the required parameter 'user_id' is set
         if ('user_id' not in params or
                 params['user_id'] is None):
             raise ValueError("Missing the required parameter `user_id` when calling `enroll_factor`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `enroll_factor`")  # noqa: E501
 
         collection_formats = {}
 

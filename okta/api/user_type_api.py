@@ -404,47 +404,47 @@ class UserType(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def replace_user_type(self, body, type_id, **kwargs):  # noqa: E501
+    def replace_user_type(self, type_id, body, **kwargs):  # noqa: E501
         """replace_user_type  # noqa: E501
 
         Replace an existing User Type  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.replace_user_type(body, type_id, async_req=True)
+        >>> thread = api.replace_user_type(type_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param UserType body: (required)
         :param str type_id: (required)
+        :param UserType body: (required)
         :return: UserType
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.replace_user_type_with_http_info(body, type_id, **kwargs)  # noqa: E501
+            return self.replace_user_type_with_http_info(type_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.replace_user_type_with_http_info(body, type_id, **kwargs)  # noqa: E501
+            (data) = self.replace_user_type_with_http_info(type_id, body, **kwargs)  # noqa: E501
             return data
 
-    def replace_user_type_with_http_info(self, body, type_id, **kwargs):  # noqa: E501
+    def replace_user_type_with_http_info(self, type_id, body, **kwargs):  # noqa: E501
         """replace_user_type  # noqa: E501
 
         Replace an existing User Type  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.replace_user_type_with_http_info(body, type_id, async_req=True)
+        >>> thread = api.replace_user_type_with_http_info(type_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param UserType body: (required)
         :param str type_id: (required)
+        :param UserType body: (required)
         :return: UserType
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'type_id']  # noqa: E501
+        all_params = ['type_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -459,14 +459,14 @@ class UserType(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `replace_user_type`")  # noqa: E501
         # verify the required parameter 'type_id' is set
         if ('type_id' not in params or
                 params['type_id'] is None):
             raise ValueError("Missing the required parameter `type_id` when calling `replace_user_type`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `replace_user_type`")  # noqa: E501
 
         collection_formats = {}
 
@@ -511,47 +511,47 @@ class UserType(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def update_user_type(self, body, type_id, **kwargs):  # noqa: E501
+    def update_user_type(self, type_id, body, **kwargs):  # noqa: E501
         """update_user_type  # noqa: E501
 
         Updates an existing User Type  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_user_type(body, type_id, async_req=True)
+        >>> thread = api.update_user_type(type_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param UserType body: (required)
         :param str type_id: (required)
+        :param UserType body: (required)
         :return: UserType
                  If the method is called asynchronously,
                  returns the request thread.
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.update_user_type_with_http_info(body, type_id, **kwargs)  # noqa: E501
+            return self.update_user_type_with_http_info(type_id, body, **kwargs)  # noqa: E501
         else:
-            (data) = self.update_user_type_with_http_info(body, type_id, **kwargs)  # noqa: E501
+            (data) = self.update_user_type_with_http_info(type_id, body, **kwargs)  # noqa: E501
             return data
 
-    def update_user_type_with_http_info(self, body, type_id, **kwargs):  # noqa: E501
+    def update_user_type_with_http_info(self, type_id, body, **kwargs):  # noqa: E501
         """update_user_type  # noqa: E501
 
         Updates an existing User Type  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_user_type_with_http_info(body, type_id, async_req=True)
+        >>> thread = api.update_user_type_with_http_info(type_id, body, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
-        :param UserType body: (required)
         :param str type_id: (required)
+        :param UserType body: (required)
         :return: UserType
                  If the method is called asynchronously,
                  returns the request thread.
         """
 
-        all_params = ['body', 'type_id']  # noqa: E501
+        all_params = ['type_id''body', ]  # noqa: E501
         all_params.append('async_req')
         all_params.append('_return_http_data_only')
         all_params.append('_preload_content')
@@ -566,14 +566,14 @@ class UserType(object):
                 )
             params[key] = val
         del params['kwargs']
-        # verify the required parameter 'body' is set
-        if ('body' not in params or
-                params['body'] is None):
-            raise ValueError("Missing the required parameter `body` when calling `update_user_type`")  # noqa: E501
         # verify the required parameter 'type_id' is set
         if ('type_id' not in params or
                 params['type_id'] is None):
             raise ValueError("Missing the required parameter `type_id` when calling `update_user_type`")  # noqa: E501
+        # verify the required parameter 'body' is set
+        if ('body' not in params or
+                params['body'] is None):
+            raise ValueError("Missing the required parameter `body` when calling `update_user_type`")  # noqa: E501
 
         collection_formats = {}
 
