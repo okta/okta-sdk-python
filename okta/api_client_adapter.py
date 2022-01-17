@@ -404,7 +404,10 @@ class ApiClientAdapter(ApiClient):
                                         response_type)
 
         if error:
-            return (None, okta_api_resp, error)
+            if response_type:
+                return (None, okta_api_resp, error)
+            else:
+                return (okta_api_resp, error)
 
         self.last_response = response_data
 

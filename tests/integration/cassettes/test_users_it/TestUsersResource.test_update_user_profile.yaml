@@ -11,7 +11,7 @@ interactions:
       User-Agent:
       - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
     method: POST
-    uri: https://test.okta.com/api/v1/users/?activate=False
+    uri: https://test.okta.com/api/v1/users?activate=False
   response:
     body:
       string: '{"id":"00usfdbbnIjyhFqU74x6","status":"STAGED","created":"2020-08-27T18:19:27.000Z","activated":null,"statusChanged":null,"lastLogin":null,"lastUpdated":"2020-08-27T18:19:27.000Z","passwordChanged":"2020-08-27T18:19:28.000Z","type":{"id":"otyc04qb2rUDcq2YA4x6"},"profile":{"firstName":"John","lastName":"Doe-Update-Profile","mobilePhone":null,"secondEmail":null,"login":"John.Doe-Update-Profile@example.com","email":"John.Doe-Update-Profile@example.com"},"credentials":{"password":{},"emails":[{"value":"John.Doe-Update-Profile@example.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"schema":{"href":"https://test.okta.com/api/v1/meta/schemas/user/oscc04qb2rUDcq2YA4x6"},"activate":{"href":"https://test.okta.com/api/v1/users/00usfdbbnIjyhFqU74x6/lifecycle/activate","method":"POST"},"self":{"href":"https://test.okta.com/api/v1/users/00usfdbbnIjyhFqU74x6"},"type":{"href":"https://test.okta.com/api/v1/meta/types/user/otyc04qb2rUDcq2YA4x6"}}}'
