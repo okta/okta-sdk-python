@@ -33,7 +33,7 @@ class UserType(object):
         self.api_client = api_client
 
     def create_user_type(self, body, **kwargs):  # noqa: E501
-        """create_user_type  # noqa: E501
+        """Create User Type  # noqa: E501
 
         Creates a new User Type. A default User Type is automatically created along with your org, and you may add another 9 User Types for a maximum of 10.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -55,7 +55,7 @@ class UserType(object):
             return data
 
     def create_user_type_with_http_info(self, body, **kwargs):  # noqa: E501
-        """create_user_type  # noqa: E501
+        """Create User Type  # noqa: E501
 
         Creates a new User Type. A default User Type is automatically created along with your org, and you may add another 9 User Types for a maximum of 10.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -113,7 +113,7 @@ class UserType(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/meta/types/user', 'POST',
@@ -132,7 +132,7 @@ class UserType(object):
             collection_formats=collection_formats)
 
     def delete_user_type(self, type_id, **kwargs):  # noqa: E501
-        """delete_user_type  # noqa: E501
+        """Delete User Type  # noqa: E501
 
         Deletes a User Type permanently. This operation is not permitted for the default type, nor for any User Type that has existing users  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -154,7 +154,7 @@ class UserType(object):
             return data
 
     def delete_user_type_with_http_info(self, type_id, **kwargs):  # noqa: E501
-        """delete_user_type  # noqa: E501
+        """Delete User Type  # noqa: E501
 
         Deletes a User Type permanently. This operation is not permitted for the default type, nor for any User Type that has existing users  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -204,7 +204,7 @@ class UserType(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/meta/types/user/{typeId}', 'DELETE',
@@ -223,7 +223,7 @@ class UserType(object):
             collection_formats=collection_formats)
 
     def get_user_type(self, type_id, **kwargs):  # noqa: E501
-        """get_user_type  # noqa: E501
+        """Get User Type  # noqa: E501
 
         Fetches a User Type by ID. The special identifier `default` may be used to fetch the default User Type.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -245,7 +245,7 @@ class UserType(object):
             return data
 
     def get_user_type_with_http_info(self, type_id, **kwargs):  # noqa: E501
-        """get_user_type  # noqa: E501
+        """Get User Type  # noqa: E501
 
         Fetches a User Type by ID. The special identifier `default` may be used to fetch the default User Type.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -299,7 +299,7 @@ class UserType(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/meta/types/user/{typeId}', 'GET',
@@ -318,7 +318,7 @@ class UserType(object):
             collection_formats=collection_formats)
 
     def list_user_types(self, **kwargs):  # noqa: E501
-        """list_user_types  # noqa: E501
+        """List User Types  # noqa: E501
 
         Fetches all User Types in your org  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -339,7 +339,7 @@ class UserType(object):
             return data
 
     def list_user_types_with_http_info(self, **kwargs):  # noqa: E501
-        """list_user_types  # noqa: E501
+        """List User Types  # noqa: E501
 
         Fetches all User Types in your org  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -386,7 +386,7 @@ class UserType(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/meta/types/user', 'GET',
@@ -405,7 +405,7 @@ class UserType(object):
             collection_formats=collection_formats)
 
     def replace_user_type(self, type_id, body, **kwargs):  # noqa: E501
-        """replace_user_type  # noqa: E501
+        """Replace User Type  # noqa: E501
 
         Replace an existing User Type  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -428,7 +428,7 @@ class UserType(object):
             return data
 
     def replace_user_type_with_http_info(self, type_id, body, **kwargs):  # noqa: E501
-        """replace_user_type  # noqa: E501
+        """Replace User Type  # noqa: E501
 
         Replace an existing User Type  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -493,7 +493,7 @@ class UserType(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/meta/types/user/{typeId}', 'PUT',
@@ -512,7 +512,7 @@ class UserType(object):
             collection_formats=collection_formats)
 
     def update_user_type(self, type_id, body, **kwargs):  # noqa: E501
-        """update_user_type  # noqa: E501
+        """Update User Type  # noqa: E501
 
         Updates an existing User Type  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -535,7 +535,7 @@ class UserType(object):
             return data
 
     def update_user_type_with_http_info(self, type_id, body, **kwargs):  # noqa: E501
-        """update_user_type  # noqa: E501
+        """Update User Type  # noqa: E501
 
         Updates an existing User Type  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -600,7 +600,7 @@ class UserType(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/meta/types/user/{typeId}', 'POST',

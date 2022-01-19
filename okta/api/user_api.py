@@ -117,7 +117,7 @@ class User(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/lifecycle/activate', 'POST',
@@ -136,7 +136,7 @@ class User(object):
             collection_formats=collection_formats)
 
     def add_all_apps_as_target_to_role(self, user_id, role_id, **kwargs):  # noqa: E501
-        """add_all_apps_as_target_to_role  # noqa: E501
+        """Add All Apps as Target to Role  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -159,7 +159,7 @@ class User(object):
             return data
 
     def add_all_apps_as_target_to_role_with_http_info(self, user_id, role_id, **kwargs):  # noqa: E501
-        """add_all_apps_as_target_to_role  # noqa: E501
+        """Add All Apps as Target to Role  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -216,7 +216,7 @@ class User(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/roles/{roleId}/targets/catalog/apps', 'PUT',
@@ -235,7 +235,7 @@ class User(object):
             collection_formats=collection_formats)
 
     def add_application_target_to_admin_role_for_user(self, user_id, role_id, app_name, **kwargs):  # noqa: E501
-        """add_application_target_to_admin_role_for_user  # noqa: E501
+        """Add Application Target to Admin Role for User  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -259,7 +259,7 @@ class User(object):
             return data
 
     def add_application_target_to_admin_role_for_user_with_http_info(self, user_id, role_id, app_name, **kwargs):  # noqa: E501
-        """add_application_target_to_admin_role_for_user  # noqa: E501
+        """Add Application Target to Admin Role for User  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -323,7 +323,7 @@ class User(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/roles/{roleId}/targets/catalog/apps/{appName}', 'PUT',
@@ -438,7 +438,7 @@ class User(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/roles/{roleId}/targets/catalog/apps/{appName}/{applicationId}', 'PUT',
@@ -457,7 +457,7 @@ class User(object):
             collection_formats=collection_formats)
 
     def add_group_target_to_role(self, user_id, role_id, group_id, **kwargs):  # noqa: E501
-        """add_group_target_to_role  # noqa: E501
+        """Add Group Target to Role  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -481,7 +481,7 @@ class User(object):
             return data
 
     def add_group_target_to_role_with_http_info(self, user_id, role_id, group_id, **kwargs):  # noqa: E501
-        """add_group_target_to_role  # noqa: E501
+        """Add Group Target to Role  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -545,7 +545,7 @@ class User(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/roles/{roleId}/targets/groups/{groupId}', 'PUT',
@@ -564,7 +564,7 @@ class User(object):
             collection_formats=collection_formats)
 
     def assign_role_to_user(self, user_id, body, **kwargs):  # noqa: E501
-        """assign_role_to_user  # noqa: E501
+        """Assign Role to User  # noqa: E501
 
         Assigns a role to a user.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -588,7 +588,7 @@ class User(object):
             return data
 
     def assign_role_to_user_with_http_info(self, user_id, body, **kwargs):  # noqa: E501
-        """assign_role_to_user  # noqa: E501
+        """Assign Role to User  # noqa: E501
 
         Assigns a role to a user.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -656,7 +656,7 @@ class User(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/roles', 'POST',
@@ -767,7 +767,7 @@ class User(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/credentials/change_password', 'POST',
@@ -874,7 +874,7 @@ class User(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/credentials/change_recovery_question', 'POST',
@@ -893,7 +893,7 @@ class User(object):
             collection_formats=collection_formats)
 
     def clear_user_sessions(self, user_id, **kwargs):  # noqa: E501
-        """clear_user_sessions  # noqa: E501
+        """Clear User Sessions  # noqa: E501
 
         Removes all active identity provider sessions. This forces the user to authenticate on the next operation. Optionally revokes OpenID Connect and OAuth refresh and access tokens issued to the user.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -916,7 +916,7 @@ class User(object):
             return data
 
     def clear_user_sessions_with_http_info(self, user_id, **kwargs):  # noqa: E501
-        """clear_user_sessions  # noqa: E501
+        """Clear User Sessions  # noqa: E501
 
         Removes all active identity provider sessions. This forces the user to authenticate on the next operation. Optionally revokes OpenID Connect and OAuth refresh and access tokens issued to the user.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -969,7 +969,7 @@ class User(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/sessions', 'DELETE',
@@ -1080,7 +1080,7 @@ class User(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users', 'POST',
@@ -1175,7 +1175,7 @@ class User(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}', 'DELETE',
@@ -1270,7 +1270,7 @@ class User(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/lifecycle/deactivate', 'POST',
@@ -1365,7 +1365,7 @@ class User(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/lifecycle/expire_password', 'POST',
@@ -1460,7 +1460,7 @@ class User(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/lifecycle/expire_password_with_temp_password', 'POST',
@@ -1559,7 +1559,7 @@ class User(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/credentials/forgot_password', 'POST',
@@ -1666,7 +1666,7 @@ class User(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/credentials/forgot_password_recovery_question', 'POST',
@@ -1685,7 +1685,7 @@ class User(object):
             collection_formats=collection_formats)
 
     def get_linked_objects_for_user(self, user_id, relationship_name, **kwargs):  # noqa: E501
-        """get_linked_objects_for_user  # noqa: E501
+        """Get Linked Objects for User  # noqa: E501
 
         Get linked objects for a user, relationshipName can be a primary or associated relationship name  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1710,7 +1710,7 @@ class User(object):
             return data
 
     def get_linked_objects_for_user_with_http_info(self, user_id, relationship_name, **kwargs):  # noqa: E501
-        """get_linked_objects_for_user  # noqa: E501
+        """Get Linked Objects for User  # noqa: E501
 
         Get linked objects for a user, relationshipName can be a primary or associated relationship name  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1777,7 +1777,7 @@ class User(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/linkedObjects/{relationshipName}', 'GET',
@@ -1796,7 +1796,7 @@ class User(object):
             collection_formats=collection_formats)
 
     def get_refresh_token_for_user_and_client(self, user_id, client_id, token_id, **kwargs):  # noqa: E501
-        """get_refresh_token_for_user_and_client  # noqa: E501
+        """Get Refresh Token for User and Client  # noqa: E501
 
         Gets a refresh token issued for the specified User and Client.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1823,7 +1823,7 @@ class User(object):
             return data
 
     def get_refresh_token_for_user_and_client_with_http_info(self, user_id, client_id, token_id, **kwargs):  # noqa: E501
-        """get_refresh_token_for_user_and_client  # noqa: E501
+        """Get Refresh Token for User and Client  # noqa: E501
 
         Gets a refresh token issued for the specified User and Client.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1900,7 +1900,7 @@ class User(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/clients/{clientId}/tokens/{tokenId}', 'GET',
@@ -1995,7 +1995,7 @@ class User(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}', 'GET',
@@ -2014,7 +2014,7 @@ class User(object):
             collection_formats=collection_formats)
 
     def get_user_grant(self, user_id, grant_id, **kwargs):  # noqa: E501
-        """get_user_grant  # noqa: E501
+        """Get User Grant  # noqa: E501
 
         Gets a grant for the specified user  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2038,7 +2038,7 @@ class User(object):
             return data
 
     def get_user_grant_with_http_info(self, user_id, grant_id, **kwargs):  # noqa: E501
-        """get_user_grant  # noqa: E501
+        """Get User Grant  # noqa: E501
 
         Gets a grant for the specified user  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2102,7 +2102,7 @@ class User(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/grants/{grantId}', 'GET',
@@ -2121,7 +2121,7 @@ class User(object):
             collection_formats=collection_formats)
 
     def get_user_role(self, user_id, role_id, **kwargs):  # noqa: E501
-        """get_user_role  # noqa: E501
+        """Get User Role  # noqa: E501
 
         Gets role that is assigned to user.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2144,7 +2144,7 @@ class User(object):
             return data
 
     def get_user_role_with_http_info(self, user_id, role_id, **kwargs):  # noqa: E501
-        """get_user_role  # noqa: E501
+        """Get User Role  # noqa: E501
 
         Gets role that is assigned to user.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2205,7 +2205,7 @@ class User(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/roles/{roleId}', 'GET',
@@ -2300,7 +2300,7 @@ class User(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/appLinks', 'GET',
@@ -2319,7 +2319,7 @@ class User(object):
             collection_formats=collection_formats)
 
     def list_application_targets_for_application_administrator_role_for_user(self, user_id, role_id, **kwargs):  # noqa: E501
-        """list_application_targets_for_application_administrator_role_for_user  # noqa: E501
+        """List Application Targets for Application Administrator Role for User  # noqa: E501
 
         Lists all App targets for an `APP_ADMIN` Role assigned to a User. This methods return list may include full Applications or Instances. The response for an instance will have an `ID` value, while Application will not have an ID.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2344,7 +2344,7 @@ class User(object):
             return data
 
     def list_application_targets_for_application_administrator_role_for_user_with_http_info(self, user_id, role_id, **kwargs):  # noqa: E501
-        """list_application_targets_for_application_administrator_role_for_user  # noqa: E501
+        """List Application Targets for Application Administrator Role for User  # noqa: E501
 
         Lists all App targets for an `APP_ADMIN` Role assigned to a User. This methods return list may include full Applications or Instances. The response for an instance will have an `ID` value, while Application will not have an ID.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2411,7 +2411,7 @@ class User(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/roles/{roleId}/targets/catalog/apps', 'GET',
@@ -2430,7 +2430,7 @@ class User(object):
             collection_formats=collection_formats)
 
     def list_assigned_roles_for_user(self, user_id, **kwargs):  # noqa: E501
-        """list_assigned_roles_for_user  # noqa: E501
+        """List Assigned Roles for User  # noqa: E501
 
         Lists all roles assigned to a user.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2453,7 +2453,7 @@ class User(object):
             return data
 
     def list_assigned_roles_for_user_with_http_info(self, user_id, **kwargs):  # noqa: E501
-        """list_assigned_roles_for_user  # noqa: E501
+        """List Assigned Roles for User  # noqa: E501
 
         Lists all roles assigned to a user.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2510,7 +2510,7 @@ class User(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/roles', 'GET',
@@ -2529,7 +2529,7 @@ class User(object):
             collection_formats=collection_formats)
 
     def list_grants_for_user_and_client(self, user_id, client_id, **kwargs):  # noqa: E501
-        """list_grants_for_user_and_client  # noqa: E501
+        """List Grants for User and Client  # noqa: E501
 
         Lists all grants for a specified user and client  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2555,7 +2555,7 @@ class User(object):
             return data
 
     def list_grants_for_user_and_client_with_http_info(self, user_id, client_id, **kwargs):  # noqa: E501
-        """list_grants_for_user_and_client  # noqa: E501
+        """List Grants for User and Client  # noqa: E501
 
         Lists all grants for a specified user and client  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2625,7 +2625,7 @@ class User(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/clients/{clientId}/grants', 'GET',
@@ -2644,7 +2644,7 @@ class User(object):
             collection_formats=collection_formats)
 
     def list_group_targets_for_role(self, user_id, role_id, **kwargs):  # noqa: E501
-        """list_group_targets_for_role  # noqa: E501
+        """List Group Targets for Role  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2669,7 +2669,7 @@ class User(object):
             return data
 
     def list_group_targets_for_role_with_http_info(self, user_id, role_id, **kwargs):  # noqa: E501
-        """list_group_targets_for_role  # noqa: E501
+        """List Group Targets for Role  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2736,7 +2736,7 @@ class User(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/roles/{roleId}/targets/groups', 'GET',
@@ -2755,7 +2755,7 @@ class User(object):
             collection_formats=collection_formats)
 
     def list_refresh_tokens_for_user_and_client(self, user_id, client_id, **kwargs):  # noqa: E501
-        """list_refresh_tokens_for_user_and_client  # noqa: E501
+        """List Refresh Tokens for User and Client  # noqa: E501
 
         Lists all refresh tokens issued for the specified User and Client.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2781,7 +2781,7 @@ class User(object):
             return data
 
     def list_refresh_tokens_for_user_and_client_with_http_info(self, user_id, client_id, **kwargs):  # noqa: E501
-        """list_refresh_tokens_for_user_and_client  # noqa: E501
+        """List Refresh Tokens for User and Client  # noqa: E501
 
         Lists all refresh tokens issued for the specified User and Client.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2851,7 +2851,7 @@ class User(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/clients/{clientId}/tokens', 'GET',
@@ -2870,7 +2870,7 @@ class User(object):
             collection_formats=collection_formats)
 
     def list_user_clients(self, user_id, **kwargs):  # noqa: E501
-        """list_user_clients  # noqa: E501
+        """List User Clients  # noqa: E501
 
         Lists all client resources for which the specified user has grants or tokens.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2892,7 +2892,7 @@ class User(object):
             return data
 
     def list_user_clients_with_http_info(self, user_id, **kwargs):  # noqa: E501
-        """list_user_clients  # noqa: E501
+        """List User Clients  # noqa: E501
 
         Lists all client resources for which the specified user has grants or tokens.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2946,7 +2946,7 @@ class User(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/clients', 'GET',
@@ -2965,7 +2965,7 @@ class User(object):
             collection_formats=collection_formats)
 
     def list_user_grants(self, user_id, **kwargs):  # noqa: E501
-        """list_user_grants  # noqa: E501
+        """List User Grants  # noqa: E501
 
         Lists all grants for the specified user  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2991,7 +2991,7 @@ class User(object):
             return data
 
     def list_user_grants_with_http_info(self, user_id, **kwargs):  # noqa: E501
-        """list_user_grants  # noqa: E501
+        """List User Grants  # noqa: E501
 
         Lists all grants for the specified user  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3057,7 +3057,7 @@ class User(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/grants', 'GET',
@@ -3152,7 +3152,7 @@ class User(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/groups', 'GET',
@@ -3247,7 +3247,7 @@ class User(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/idps', 'GET',
@@ -3362,7 +3362,7 @@ class User(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users', 'GET',
@@ -3381,7 +3381,7 @@ class User(object):
             collection_formats=collection_formats)
 
     def partial_update_user(self, user_id, body, **kwargs):  # noqa: E501
-        """partial_update_user  # noqa: E501
+        """Partial Update User  # noqa: E501
 
         Fetch a user by `id`, `login`, or `login shortname` if the short name is unambiguous.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3405,7 +3405,7 @@ class User(object):
             return data
 
     def partial_update_user_with_http_info(self, user_id, body, **kwargs):  # noqa: E501
-        """partial_update_user  # noqa: E501
+        """Partial Update User  # noqa: E501
 
         Fetch a user by `id`, `login`, or `login shortname` if the short name is unambiguous.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3473,7 +3473,7 @@ class User(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}', 'POST',
@@ -3572,7 +3572,7 @@ class User(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/lifecycle/reactivate', 'POST',
@@ -3687,7 +3687,7 @@ class User(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/roles/{roleId}/targets/catalog/apps/{appName}/{applicationId}', 'DELETE',
@@ -3706,7 +3706,7 @@ class User(object):
             collection_formats=collection_formats)
 
     def remove_application_target_from_application_administrator_role_for_user(self, user_id, role_id, app_name, **kwargs):  # noqa: E501
-        """remove_application_target_from_application_administrator_role_for_user  # noqa: E501
+        """Remove Application Target from Application Administrator Role for User  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3730,7 +3730,7 @@ class User(object):
             return data
 
     def remove_application_target_from_application_administrator_role_for_user_with_http_info(self, user_id, role_id, app_name, **kwargs):  # noqa: E501
-        """remove_application_target_from_application_administrator_role_for_user  # noqa: E501
+        """Remove Application Target from Application Administrator Role for User  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3794,7 +3794,7 @@ class User(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/roles/{roleId}/targets/catalog/apps/{appName}', 'DELETE',
@@ -3813,7 +3813,7 @@ class User(object):
             collection_formats=collection_formats)
 
     def remove_group_target_from_role(self, user_id, role_id, group_id, **kwargs):  # noqa: E501
-        """remove_group_target_from_role  # noqa: E501
+        """Remove Group Target from Role  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3837,7 +3837,7 @@ class User(object):
             return data
 
     def remove_group_target_from_role_with_http_info(self, user_id, role_id, group_id, **kwargs):  # noqa: E501
-        """remove_group_target_from_role  # noqa: E501
+        """Remove Group Target from Role  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3901,7 +3901,7 @@ class User(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/roles/{roleId}/targets/groups/{groupId}', 'DELETE',
@@ -3920,7 +3920,7 @@ class User(object):
             collection_formats=collection_formats)
 
     def remove_linked_object_for_user(self, user_id, relationship_name, **kwargs):  # noqa: E501
-        """remove_linked_object_for_user  # noqa: E501
+        """Remove Linked Object for User  # noqa: E501
 
         Delete linked objects for a user, relationshipName can be ONLY a primary relationship name  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3943,7 +3943,7 @@ class User(object):
             return data
 
     def remove_linked_object_for_user_with_http_info(self, user_id, relationship_name, **kwargs):  # noqa: E501
-        """remove_linked_object_for_user  # noqa: E501
+        """Remove Linked Object for User  # noqa: E501
 
         Delete linked objects for a user, relationshipName can be ONLY a primary relationship name  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4000,7 +4000,7 @@ class User(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/linkedObjects/{relationshipName}', 'DELETE',
@@ -4019,7 +4019,7 @@ class User(object):
             collection_formats=collection_formats)
 
     def remove_role_from_user(self, user_id, role_id, **kwargs):  # noqa: E501
-        """remove_role_from_user  # noqa: E501
+        """Remove Role from User  # noqa: E501
 
         Unassigns a role from a user.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4042,7 +4042,7 @@ class User(object):
             return data
 
     def remove_role_from_user_with_http_info(self, user_id, role_id, **kwargs):  # noqa: E501
-        """remove_role_from_user  # noqa: E501
+        """Remove Role from User  # noqa: E501
 
         Unassigns a role from a user.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4099,7 +4099,7 @@ class User(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/roles/{roleId}', 'DELETE',
@@ -4190,7 +4190,7 @@ class User(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/lifecycle/reset_factors', 'POST',
@@ -4293,7 +4293,7 @@ class User(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/lifecycle/reset_password', 'POST',
@@ -4312,7 +4312,7 @@ class User(object):
             collection_formats=collection_formats)
 
     def revoke_grants_for_user_and_client(self, user_id, client_id, **kwargs):  # noqa: E501
-        """revoke_grants_for_user_and_client  # noqa: E501
+        """Revoke Grants for User and Client  # noqa: E501
 
         Revokes all grants for the specified user and client  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4335,7 +4335,7 @@ class User(object):
             return data
 
     def revoke_grants_for_user_and_client_with_http_info(self, user_id, client_id, **kwargs):  # noqa: E501
-        """revoke_grants_for_user_and_client  # noqa: E501
+        """Revoke Grants for User and Client  # noqa: E501
 
         Revokes all grants for the specified user and client  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4392,7 +4392,7 @@ class User(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/clients/{clientId}/grants', 'DELETE',
@@ -4411,7 +4411,7 @@ class User(object):
             collection_formats=collection_formats)
 
     def revoke_token_for_user_and_client(self, user_id, client_id, token_id, **kwargs):  # noqa: E501
-        """revoke_token_for_user_and_client  # noqa: E501
+        """Revoke Token for User and Client  # noqa: E501
 
         Revokes the specified refresh token.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4435,7 +4435,7 @@ class User(object):
             return data
 
     def revoke_token_for_user_and_client_with_http_info(self, user_id, client_id, token_id, **kwargs):  # noqa: E501
-        """revoke_token_for_user_and_client  # noqa: E501
+        """Revoke Token for User and Client  # noqa: E501
 
         Revokes the specified refresh token.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4499,7 +4499,7 @@ class User(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/clients/{clientId}/tokens/{tokenId}', 'DELETE',
@@ -4518,7 +4518,7 @@ class User(object):
             collection_formats=collection_formats)
 
     def revoke_tokens_for_user_and_client(self, user_id, client_id, **kwargs):  # noqa: E501
-        """revoke_tokens_for_user_and_client  # noqa: E501
+        """Revoke Tokens for User and Client  # noqa: E501
 
         Revokes all refresh tokens issued for the specified User and Client.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4541,7 +4541,7 @@ class User(object):
             return data
 
     def revoke_tokens_for_user_and_client_with_http_info(self, user_id, client_id, **kwargs):  # noqa: E501
-        """revoke_tokens_for_user_and_client  # noqa: E501
+        """Revoke Tokens for User and Client  # noqa: E501
 
         Revokes all refresh tokens issued for the specified User and Client.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4598,7 +4598,7 @@ class User(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/clients/{clientId}/tokens', 'DELETE',
@@ -4617,7 +4617,7 @@ class User(object):
             collection_formats=collection_formats)
 
     def revoke_user_grant(self, user_id, grant_id, **kwargs):  # noqa: E501
-        """revoke_user_grant  # noqa: E501
+        """Revoke User Grant  # noqa: E501
 
         Revokes one grant for a specified user  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4640,7 +4640,7 @@ class User(object):
             return data
 
     def revoke_user_grant_with_http_info(self, user_id, grant_id, **kwargs):  # noqa: E501
-        """revoke_user_grant  # noqa: E501
+        """Revoke User Grant  # noqa: E501
 
         Revokes one grant for a specified user  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4697,7 +4697,7 @@ class User(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/grants/{grantId}', 'DELETE',
@@ -4716,7 +4716,7 @@ class User(object):
             collection_formats=collection_formats)
 
     def revoke_user_grants(self, user_id, **kwargs):  # noqa: E501
-        """revoke_user_grants  # noqa: E501
+        """Revoke User Grants  # noqa: E501
 
         Revokes all grants for a specified user  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4738,7 +4738,7 @@ class User(object):
             return data
 
     def revoke_user_grants_with_http_info(self, user_id, **kwargs):  # noqa: E501
-        """revoke_user_grants  # noqa: E501
+        """Revoke User Grants  # noqa: E501
 
         Revokes all grants for a specified user  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -4788,7 +4788,7 @@ class User(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/grants', 'DELETE',
@@ -4895,7 +4895,7 @@ class User(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = []  # noqa: E501
+        auth_settings = ['oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{associatedUserId}/linkedObjects/{primaryRelationshipName}/{primaryUserId}', 'PUT',
@@ -4986,7 +4986,7 @@ class User(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/lifecycle/suspend', 'POST',
@@ -5077,7 +5077,7 @@ class User(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/lifecycle/unlock', 'POST',
@@ -5168,7 +5168,7 @@ class User(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/lifecycle/unsuspend', 'POST',
@@ -5279,7 +5279,7 @@ class User(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}', 'PUT',

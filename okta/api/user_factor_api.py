@@ -125,7 +125,7 @@ class UserFactor(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/factors/{factorId}/lifecycle/activate', 'POST',
@@ -144,7 +144,7 @@ class UserFactor(object):
             collection_formats=collection_formats)
 
     def delete_factor(self, user_id, factor_id, **kwargs):  # noqa: E501
-        """delete_factor  # noqa: E501
+        """Delete Factor  # noqa: E501
 
         Unenrolls an existing factor for the specified user, allowing the user to enroll a new factor.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -167,7 +167,7 @@ class UserFactor(object):
             return data
 
     def delete_factor_with_http_info(self, user_id, factor_id, **kwargs):  # noqa: E501
-        """delete_factor  # noqa: E501
+        """Delete Factor  # noqa: E501
 
         Unenrolls an existing factor for the specified user, allowing the user to enroll a new factor.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -224,7 +224,7 @@ class UserFactor(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/factors/{factorId}', 'DELETE',
@@ -347,7 +347,7 @@ class UserFactor(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/factors', 'POST',
@@ -366,7 +366,7 @@ class UserFactor(object):
             collection_formats=collection_formats)
 
     def get_factor(self, user_id, factor_id, **kwargs):  # noqa: E501
-        """get_factor  # noqa: E501
+        """Get Factor  # noqa: E501
 
         Fetches a factor for the specified user  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -389,7 +389,7 @@ class UserFactor(object):
             return data
 
     def get_factor_with_http_info(self, user_id, factor_id, **kwargs):  # noqa: E501
-        """get_factor  # noqa: E501
+        """Get Factor  # noqa: E501
 
         Fetches a factor for the specified user  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -450,7 +450,7 @@ class UserFactor(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/factors/{factorId}', 'GET',
@@ -469,7 +469,7 @@ class UserFactor(object):
             collection_formats=collection_formats)
 
     def get_factor_transaction_status(self, user_id, factor_id, transaction_id, **kwargs):  # noqa: E501
-        """get_factor_transaction_status  # noqa: E501
+        """Get Factor Transaction Status  # noqa: E501
 
         Polls factors verification transaction for status.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -493,7 +493,7 @@ class UserFactor(object):
             return data
 
     def get_factor_transaction_status_with_http_info(self, user_id, factor_id, transaction_id, **kwargs):  # noqa: E501
-        """get_factor_transaction_status  # noqa: E501
+        """Get Factor Transaction Status  # noqa: E501
 
         Polls factors verification transaction for status.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -580,7 +580,7 @@ class UserFactor(object):
             collection_formats=collection_formats)
 
     def list_factors(self, user_id, **kwargs):  # noqa: E501
-        """list_factors  # noqa: E501
+        """List Factors  # noqa: E501
 
         Enumerates all the enrolled factors for the specified user  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -602,7 +602,7 @@ class UserFactor(object):
             return data
 
     def list_factors_with_http_info(self, user_id, **kwargs):  # noqa: E501
-        """list_factors  # noqa: E501
+        """List Factors  # noqa: E501
 
         Enumerates all the enrolled factors for the specified user  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -656,7 +656,7 @@ class UserFactor(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/factors', 'GET',
@@ -675,7 +675,7 @@ class UserFactor(object):
             collection_formats=collection_formats)
 
     def list_supported_factors(self, user_id, **kwargs):  # noqa: E501
-        """list_supported_factors  # noqa: E501
+        """List Supported Factors  # noqa: E501
 
         Enumerates all the supported factors that can be enrolled for the specified user  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -697,7 +697,7 @@ class UserFactor(object):
             return data
 
     def list_supported_factors_with_http_info(self, user_id, **kwargs):  # noqa: E501
-        """list_supported_factors  # noqa: E501
+        """List Supported Factors  # noqa: E501
 
         Enumerates all the supported factors that can be enrolled for the specified user  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -751,7 +751,7 @@ class UserFactor(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/factors/catalog', 'GET',
@@ -770,7 +770,7 @@ class UserFactor(object):
             collection_formats=collection_formats)
 
     def list_supported_security_questions(self, user_id, **kwargs):  # noqa: E501
-        """list_supported_security_questions  # noqa: E501
+        """List Supported Security Questions  # noqa: E501
 
         Enumerates all available security questions for a user's `question` factor  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -792,7 +792,7 @@ class UserFactor(object):
             return data
 
     def list_supported_security_questions_with_http_info(self, user_id, **kwargs):  # noqa: E501
-        """list_supported_security_questions  # noqa: E501
+        """List Supported Security Questions  # noqa: E501
 
         Enumerates all available security questions for a user's `question` factor  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -977,7 +977,7 @@ class UserFactor(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/users/{userId}/factors/{factorId}/verify', 'POST',

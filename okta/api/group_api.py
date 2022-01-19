@@ -105,7 +105,7 @@ class Group(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/groups/rules/{ruleId}/lifecycle/activate', 'POST',
@@ -220,7 +220,7 @@ class Group(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/groups/{groupId}/roles/{roleId}/targets/catalog/apps/{appName}/{applicationId}', 'PUT',
@@ -239,7 +239,7 @@ class Group(object):
             collection_formats=collection_formats)
 
     def add_application_target_to_admin_role_given_to_group(self, group_id, role_id, app_name, **kwargs):  # noqa: E501
-        """add_application_target_to_admin_role_given_to_group  # noqa: E501
+        """Add Application Target to Admin Role Given to Group  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -263,7 +263,7 @@ class Group(object):
             return data
 
     def add_application_target_to_admin_role_given_to_group_with_http_info(self, group_id, role_id, app_name, **kwargs):  # noqa: E501
-        """add_application_target_to_admin_role_given_to_group  # noqa: E501
+        """Add Application Target to Admin Role Given to Group  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -327,7 +327,7 @@ class Group(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/groups/{groupId}/roles/{roleId}/targets/catalog/apps/{appName}', 'PUT',
@@ -434,7 +434,7 @@ class Group(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = []  # noqa: E501
+        auth_settings = ['oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/groups/{groupId}/roles/{roleId}/targets/groups/{targetGroupId}', 'PUT',
@@ -533,7 +533,7 @@ class Group(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/groups/{groupId}/users/{userId}', 'PUT',
@@ -552,7 +552,7 @@ class Group(object):
             collection_formats=collection_formats)
 
     def assign_role_to_group(self, group_id, body, **kwargs):  # noqa: E501
-        """assign_role_to_group  # noqa: E501
+        """Assign Role to Group  # noqa: E501
 
         Assigns a Role to a Group  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -576,7 +576,7 @@ class Group(object):
             return data
 
     def assign_role_to_group_with_http_info(self, group_id, body, **kwargs):  # noqa: E501
-        """assign_role_to_group  # noqa: E501
+        """Assign Role to Group  # noqa: E501
 
         Assigns a Role to a Group  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -644,7 +644,7 @@ class Group(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/groups/{groupId}/roles', 'POST',
@@ -743,7 +743,7 @@ class Group(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/groups', 'POST',
@@ -842,7 +842,7 @@ class Group(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/groups/rules', 'POST',
@@ -933,7 +933,7 @@ class Group(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/groups/rules/{ruleId}/lifecycle/deactivate', 'POST',
@@ -1024,7 +1024,7 @@ class Group(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/groups/{groupId}', 'DELETE',
@@ -1119,7 +1119,7 @@ class Group(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/groups/rules/{ruleId}', 'DELETE',
@@ -1214,7 +1214,7 @@ class Group(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/groups/{groupId}', 'GET',
@@ -1313,7 +1313,7 @@ class Group(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/groups/rules/{ruleId}', 'GET',
@@ -1332,7 +1332,7 @@ class Group(object):
             collection_formats=collection_formats)
 
     def get_role(self, group_id, role_id, **kwargs):  # noqa: E501
-        """get_role  # noqa: E501
+        """Get Role  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1355,7 +1355,7 @@ class Group(object):
             return data
 
     def get_role_with_http_info(self, group_id, role_id, **kwargs):  # noqa: E501
-        """get_role  # noqa: E501
+        """Get Role  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1416,7 +1416,7 @@ class Group(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/groups/{groupId}/roles/{roleId}', 'GET',
@@ -1435,7 +1435,7 @@ class Group(object):
             collection_formats=collection_formats)
 
     def list_application_targets_for_application_administrator_role_for_group(self, group_id, role_id, **kwargs):  # noqa: E501
-        """list_application_targets_for_application_administrator_role_for_group  # noqa: E501
+        """List Application Targets for Application Administrator Role for Group  # noqa: E501
 
         Lists all App targets for an `APP_ADMIN` Role assigned to a Group. This methods return list may include full Applications or Instances. The response for an instance will have an `ID` value, while Application will not have an ID.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1460,7 +1460,7 @@ class Group(object):
             return data
 
     def list_application_targets_for_application_administrator_role_for_group_with_http_info(self, group_id, role_id, **kwargs):  # noqa: E501
-        """list_application_targets_for_application_administrator_role_for_group  # noqa: E501
+        """List Application Targets for Application Administrator Role for Group  # noqa: E501
 
         Lists all App targets for an `APP_ADMIN` Role assigned to a Group. This methods return list may include full Applications or Instances. The response for an instance will have an `ID` value, while Application will not have an ID.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1527,7 +1527,7 @@ class Group(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/groups/{groupId}/roles/{roleId}/targets/catalog/apps', 'GET',
@@ -1630,7 +1630,7 @@ class Group(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/groups/{groupId}/apps', 'GET',
@@ -1649,7 +1649,7 @@ class Group(object):
             collection_formats=collection_formats)
 
     def list_group_assigned_roles(self, group_id, **kwargs):  # noqa: E501
-        """list_group_assigned_roles  # noqa: E501
+        """List Group Assigned Roles  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1672,7 +1672,7 @@ class Group(object):
             return data
 
     def list_group_assigned_roles_with_http_info(self, group_id, **kwargs):  # noqa: E501
-        """list_group_assigned_roles  # noqa: E501
+        """List Group Assigned Roles  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1729,7 +1729,7 @@ class Group(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/groups/{groupId}/roles', 'GET',
@@ -1832,7 +1832,7 @@ class Group(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/groups/rules', 'GET',
@@ -1943,7 +1943,7 @@ class Group(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/groups/{groupId}/roles/{roleId}/targets/groups', 'GET',
@@ -2046,7 +2046,7 @@ class Group(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/groups/{groupId}/users', 'GET',
@@ -2153,7 +2153,7 @@ class Group(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/groups', 'GET',
@@ -2268,7 +2268,7 @@ class Group(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/groups/{groupId}/roles/{roleId}/targets/catalog/apps/{appName}/{applicationId}', 'DELETE',
@@ -2287,7 +2287,7 @@ class Group(object):
             collection_formats=collection_formats)
 
     def remove_application_target_from_application_administrator_role_given_to_group(self, group_id, role_id, app_name, **kwargs):  # noqa: E501
-        """remove_application_target_from_application_administrator_role_given_to_group  # noqa: E501
+        """Remove Application Target from Application Administrator Role Given to Group  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2311,7 +2311,7 @@ class Group(object):
             return data
 
     def remove_application_target_from_application_administrator_role_given_to_group_with_http_info(self, group_id, role_id, app_name, **kwargs):  # noqa: E501
-        """remove_application_target_from_application_administrator_role_given_to_group  # noqa: E501
+        """Remove Application Target from Application Administrator Role Given to Group  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2375,7 +2375,7 @@ class Group(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/groups/{groupId}/roles/{roleId}/targets/catalog/apps/{appName}', 'DELETE',
@@ -2482,7 +2482,7 @@ class Group(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = []  # noqa: E501
+        auth_settings = ['oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/groups/{groupId}/roles/{roleId}/targets/groups/{targetGroupId}', 'DELETE',
@@ -2501,7 +2501,7 @@ class Group(object):
             collection_formats=collection_formats)
 
     def remove_role_from_group(self, group_id, role_id, **kwargs):  # noqa: E501
-        """remove_role_from_group  # noqa: E501
+        """Remove Role from Group  # noqa: E501
 
         Unassigns a Role from a Group  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2524,7 +2524,7 @@ class Group(object):
             return data
 
     def remove_role_from_group_with_http_info(self, group_id, role_id, **kwargs):  # noqa: E501
-        """remove_role_from_group  # noqa: E501
+        """Remove Role from Group  # noqa: E501
 
         Unassigns a Role from a Group  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2581,7 +2581,7 @@ class Group(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/groups/{groupId}/roles/{roleId}', 'DELETE',
@@ -2680,7 +2680,7 @@ class Group(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/groups/{groupId}/users/{userId}', 'DELETE',
@@ -2787,7 +2787,7 @@ class Group(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/groups/{groupId}', 'PUT',
@@ -2806,7 +2806,7 @@ class Group(object):
             collection_formats=collection_formats)
 
     def update_group_rule(self, rule_id, body, **kwargs):  # noqa: E501
-        """update_group_rule  # noqa: E501
+        """Update Group Rule  # noqa: E501
 
         Updates a group rule. Only `INACTIVE` rules can be updated.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2829,7 +2829,7 @@ class Group(object):
             return data
 
     def update_group_rule_with_http_info(self, rule_id, body, **kwargs):  # noqa: E501
-        """update_group_rule  # noqa: E501
+        """Update Group Rule  # noqa: E501
 
         Updates a group rule. Only `INACTIVE` rules can be updated.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2894,7 +2894,7 @@ class Group(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/groups/rules/{ruleId}', 'PUT',

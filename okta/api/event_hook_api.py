@@ -33,7 +33,7 @@ class EventHook(object):
         self.api_client = api_client
 
     def activate_event_hook(self, event_hook_id, **kwargs):  # noqa: E501
-        """activate_event_hook  # noqa: E501
+        """Activate Event Hook  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -55,7 +55,7 @@ class EventHook(object):
             return data
 
     def activate_event_hook_with_http_info(self, event_hook_id, **kwargs):  # noqa: E501
-        """activate_event_hook  # noqa: E501
+        """Activate Event Hook  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -109,7 +109,7 @@ class EventHook(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/eventHooks/{eventHookId}/lifecycle/activate', 'POST',
@@ -128,7 +128,7 @@ class EventHook(object):
             collection_formats=collection_formats)
 
     def create_event_hook(self, body, **kwargs):  # noqa: E501
-        """create_event_hook  # noqa: E501
+        """Create Event Hook  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -150,7 +150,7 @@ class EventHook(object):
             return data
 
     def create_event_hook_with_http_info(self, body, **kwargs):  # noqa: E501
-        """create_event_hook  # noqa: E501
+        """Create Event Hook  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -208,7 +208,7 @@ class EventHook(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/eventHooks', 'POST',
@@ -227,7 +227,7 @@ class EventHook(object):
             collection_formats=collection_formats)
 
     def deactivate_event_hook(self, event_hook_id, **kwargs):  # noqa: E501
-        """deactivate_event_hook  # noqa: E501
+        """Deactivate Event Hook  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -249,7 +249,7 @@ class EventHook(object):
             return data
 
     def deactivate_event_hook_with_http_info(self, event_hook_id, **kwargs):  # noqa: E501
-        """deactivate_event_hook  # noqa: E501
+        """Deactivate Event Hook  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -303,7 +303,7 @@ class EventHook(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/eventHooks/{eventHookId}/lifecycle/deactivate', 'POST',
@@ -322,7 +322,7 @@ class EventHook(object):
             collection_formats=collection_formats)
 
     def delete_event_hook(self, event_hook_id, **kwargs):  # noqa: E501
-        """delete_event_hook  # noqa: E501
+        """Delete Event Hook  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -344,7 +344,7 @@ class EventHook(object):
             return data
 
     def delete_event_hook_with_http_info(self, event_hook_id, **kwargs):  # noqa: E501
-        """delete_event_hook  # noqa: E501
+        """Delete Event Hook  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -394,7 +394,7 @@ class EventHook(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/eventHooks/{eventHookId}', 'DELETE',
@@ -413,7 +413,7 @@ class EventHook(object):
             collection_formats=collection_formats)
 
     def get_event_hook(self, event_hook_id, **kwargs):  # noqa: E501
-        """get_event_hook  # noqa: E501
+        """Get Event Hook  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -435,7 +435,7 @@ class EventHook(object):
             return data
 
     def get_event_hook_with_http_info(self, event_hook_id, **kwargs):  # noqa: E501
-        """get_event_hook  # noqa: E501
+        """Get Event Hook  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -489,7 +489,7 @@ class EventHook(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/eventHooks/{eventHookId}', 'GET',
@@ -508,7 +508,7 @@ class EventHook(object):
             collection_formats=collection_formats)
 
     def list_event_hooks(self, **kwargs):  # noqa: E501
-        """list_event_hooks  # noqa: E501
+        """List Event Hooks  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -529,7 +529,7 @@ class EventHook(object):
             return data
 
     def list_event_hooks_with_http_info(self, **kwargs):  # noqa: E501
-        """list_event_hooks  # noqa: E501
+        """List Event Hooks  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -576,7 +576,7 @@ class EventHook(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/eventHooks', 'GET',
@@ -595,7 +595,7 @@ class EventHook(object):
             collection_formats=collection_formats)
 
     def update_event_hook(self, event_hook_id, body, **kwargs):  # noqa: E501
-        """update_event_hook  # noqa: E501
+        """Update Event Hook  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -618,7 +618,7 @@ class EventHook(object):
             return data
 
     def update_event_hook_with_http_info(self, event_hook_id, body, **kwargs):  # noqa: E501
-        """update_event_hook  # noqa: E501
+        """Update Event Hook  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -683,7 +683,7 @@ class EventHook(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/eventHooks/{eventHookId}', 'PUT',
@@ -702,7 +702,7 @@ class EventHook(object):
             collection_formats=collection_formats)
 
     def verify_event_hook(self, event_hook_id, **kwargs):  # noqa: E501
-        """verify_event_hook  # noqa: E501
+        """Verify Event Hook  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -724,7 +724,7 @@ class EventHook(object):
             return data
 
     def verify_event_hook_with_http_info(self, event_hook_id, **kwargs):  # noqa: E501
-        """verify_event_hook  # noqa: E501
+        """Verify Event Hook  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -778,7 +778,7 @@ class EventHook(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/eventHooks/{eventHookId}/lifecycle/verify', 'POST',

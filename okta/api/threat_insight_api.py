@@ -33,7 +33,7 @@ class ThreatInsight(object):
         self.api_client = api_client
 
     def get_current_configuration(self, **kwargs):  # noqa: E501
-        """get_current_configuration  # noqa: E501
+        """Get Current Configuration  # noqa: E501
 
         Gets current ThreatInsight configuration  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -54,7 +54,7 @@ class ThreatInsight(object):
             return data
 
     def get_current_configuration_with_http_info(self, **kwargs):  # noqa: E501
-        """get_current_configuration  # noqa: E501
+        """Get Current Configuration  # noqa: E501
 
         Gets current ThreatInsight configuration  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -120,7 +120,7 @@ class ThreatInsight(object):
             collection_formats=collection_formats)
 
     def update_configuration(self, body, **kwargs):  # noqa: E501
-        """update_configuration  # noqa: E501
+        """Update Configuration  # noqa: E501
 
         Updates ThreatInsight configuration  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -142,7 +142,7 @@ class ThreatInsight(object):
             return data
 
     def update_configuration_with_http_info(self, body, **kwargs):  # noqa: E501
-        """update_configuration  # noqa: E501
+        """Update Configuration  # noqa: E501
 
         Updates ThreatInsight configuration  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

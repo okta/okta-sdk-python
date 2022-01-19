@@ -34,7 +34,7 @@ class EmailDefaultContent(EmailContentWithSender):
     swagger_types = {}
     if hasattr(EmailContentWithSender, "swagger_types"):
         swagger_types.update(EmailContentWithSender.swagger_types)
-    swagger_types['links'] = 'EmailDefaultContentLinks'
+    swagger_types['links'] = 'EmailCustomizationLinks'
 
     attribute_map = {
         'links': '_links'
@@ -79,7 +79,7 @@ class EmailDefaultContent(EmailContentWithSender):
 
 
         :return: The links of this EmailDefaultContent.  # noqa: E501
-        :rtype: EmailDefaultContentLinks
+        :rtype: EmailCustomizationLinks
         """
         return self._links
 
@@ -89,7 +89,7 @@ class EmailDefaultContent(EmailContentWithSender):
 
 
         :param links: The links of this EmailDefaultContent.  # noqa: E501
-        :type: EmailDefaultContentLinks
+        :type: EmailCustomizationLinks
         """
 
         self._links = links

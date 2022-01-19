@@ -125,8 +125,8 @@ from okta.models.duration import Duration
 from okta.models.email_content import EmailContent
 from okta.models.email_content_with_sender import EmailContentWithSender
 from okta.models.email_customization import EmailCustomization
+from okta.models.email_customization_links import EmailCustomizationLinks
 from okta.models.email_default_content import EmailDefaultContent
-from okta.models.email_default_content_links import EmailDefaultContentLinks
 from okta.models.email_preview import EmailPreview
 from okta.models.email_preview_links import EmailPreviewLinks
 from okta.models.email_template import EmailTemplate
@@ -270,7 +270,6 @@ from okta.models.o_auth2_scope_metadata_publish import OAuth2ScopeMetadataPublis
 from okta.models.o_auth2_scopes_mediation_policy_rule_condition import OAuth2ScopesMediationPolicyRuleCondition
 from okta.models.o_auth2_token import OAuth2Token
 from okta.models.o_auth_application_credentials import OAuthApplicationCredentials
-from okta.models.o_auth_authorization_policy import OAuthAuthorizationPolicy
 from okta.models.o_auth_endpoint_authentication_method import OAuthEndpointAuthenticationMethod
 from okta.models.o_auth_grant_type import OAuthGrantType
 from okta.models.o_auth_response_type import OAuthResponseType

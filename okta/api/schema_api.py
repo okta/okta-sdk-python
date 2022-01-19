@@ -109,7 +109,7 @@ class Schema(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/meta/schemas/apps/{appInstanceId}/default', 'GET',
@@ -196,7 +196,7 @@ class Schema(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/meta/schemas/group/default', 'GET',
@@ -291,7 +291,7 @@ class Schema(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/meta/schemas/user/{schemaId}', 'GET',
@@ -394,7 +394,7 @@ class Schema(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/meta/schemas/apps/{appInstanceId}/default', 'POST',
@@ -489,7 +489,7 @@ class Schema(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/meta/schemas/group/default', 'POST',
@@ -508,7 +508,7 @@ class Schema(object):
             collection_formats=collection_formats)
 
     def update_user_profile(self, schema_id, body, **kwargs):  # noqa: E501
-        """update_user_profile  # noqa: E501
+        """Update User Profile  # noqa: E501
 
         Partial updates on the User Profile properties of the user schema.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -531,7 +531,7 @@ class Schema(object):
             return data
 
     def update_user_profile_with_http_info(self, schema_id, body, **kwargs):  # noqa: E501
-        """update_user_profile  # noqa: E501
+        """Update User Profile  # noqa: E501
 
         Partial updates on the User Profile properties of the user schema.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -596,7 +596,7 @@ class Schema(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/meta/schemas/user/{schemaId}', 'POST',

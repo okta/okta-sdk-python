@@ -11,7 +11,7 @@ interactions:
       User-Agent:
       - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
     method: POST
-    uri: https://test.okta.com/api/v1/users/?activate=True
+    uri: https://test.okta.com/api/v1/users?activate=True
   response:
     body:
       string: '{"id":"00usfdd3eO3sfObs54x6","status":"ACTIVE","created":"2020-08-27T18:19:29.000Z","activated":"2020-08-27T18:19:30.000Z","statusChanged":"2020-08-27T18:19:30.000Z","lastLogin":null,"lastUpdated":"2020-08-27T18:19:30.000Z","passwordChanged":"2020-08-27T18:19:30.000Z","type":{"id":"otyc04qb2rUDcq2YA4x6"},"profile":{"firstName":"John","lastName":"Doe-Suspend","mobilePhone":null,"secondEmail":null,"login":"John.Doe-Suspend@example.com","email":"John.Doe-Suspend@example.com"},"credentials":{"password":{},"emails":[{"value":"John.Doe-Suspend@example.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"suspend":{"href":"https://test.okta.com/api/v1/users/00usfdd3eO3sfObs54x6/lifecycle/suspend","method":"POST"},"schema":{"href":"https://test.okta.com/api/v1/meta/schemas/user/oscc04qb2rUDcq2YA4x6"},"resetPassword":{"href":"https://test.okta.com/api/v1/users/00usfdd3eO3sfObs54x6/lifecycle/reset_password","method":"POST"},"expirePassword":{"href":"https://test.okta.com/api/v1/users/00usfdd3eO3sfObs54x6/lifecycle/expire_password","method":"POST"},"changeRecoveryQuestion":{"href":"https://test.okta.com/api/v1/users/00usfdd3eO3sfObs54x6/credentials/change_recovery_question","method":"POST"},"self":{"href":"https://test.okta.com/api/v1/users/00usfdd3eO3sfObs54x6"},"type":{"href":"https://test.okta.com/api/v1/meta/types/user/otyc04qb2rUDcq2YA4x6"},"changePassword":{"href":"https://test.okta.com/api/v1/users/00usfdd3eO3sfObs54x6/credentials/change_password","method":"POST"},"deactivate":{"href":"https://test.okta.com/api/v1/users/00usfdd3eO3sfObs54x6/lifecycle/deactivate","method":"POST"}}}'
@@ -53,7 +53,7 @@ interactions:
     status:
       code: 200
       message: OK
-    url: https://test.okta.com/api/v1/users/?activate=True
+    url: https://test.okta.com/api/v1/users?activate=True
 - request:
     body: null
     headers:
@@ -121,7 +121,7 @@ interactions:
       User-Agent:
       - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
     method: GET
-    uri: https://test.okta.com/api/v1/users/?filter=status+eq+%22SUSPENDED%22
+    uri: https://test.okta.com/api/v1/users?filter=status+eq+%22SUSPENDED%22
   response:
     body:
       string: '[{"id":"00usfdd3eO3sfObs54x6","status":"SUSPENDED","created":"2020-08-27T18:19:29.000Z","activated":"2020-08-27T18:19:30.000Z","statusChanged":"2020-08-27T18:19:30.000Z","lastLogin":null,"lastUpdated":"2020-08-27T18:19:30.000Z","passwordChanged":"2020-08-27T18:19:30.000Z","type":{"id":"otyc04qb2rUDcq2YA4x6"},"profile":{"firstName":"John","lastName":"Doe-Suspend","mobilePhone":null,"secondEmail":null,"login":"John.Doe-Suspend@example.com","email":"John.Doe-Suspend@example.com"},"credentials":{"password":{},"emails":[{"value":"John.Doe-Suspend@example.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"self":{"href":"https://test.okta.com/api/v1/users/00usfdd3eO3sfObs54x6"}}}]'
@@ -165,7 +165,7 @@ interactions:
     status:
       code: 200
       message: OK
-    url: https://test.okta.com/api/v1/users/?filter=status+eq+%22SUSPENDED%22
+    url: https://test.okta.com/api/v1/users?filter=status+eq+%22SUSPENDED%22
 - request:
     body: null
     headers:
@@ -233,7 +233,7 @@ interactions:
       User-Agent:
       - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
     method: GET
-    uri: https://test.okta.com/api/v1/users/?filter=status+eq+%22ACTIVE%22
+    uri: https://test.okta.com/api/v1/users?filter=status+eq+%22ACTIVE%22
   response:
     body:
       string: '[{"id":"00uc04qdrQsSHjsDO4x6","status":"ACTIVE","created":"2020-05-13T13:29:28.000Z","activated":null,"statusChanged":"2020-05-13T13:33:05.000Z","lastLogin":"2020-08-27T13:30:59.000Z","lastUpdated":"2020-05-13T13:33:05.000Z","passwordChanged":"2020-05-13T13:33:05.000Z","type":{"id":"otyc04qb2rUDcq2YA4x6"},"profile":{"firstName":"Justin","lastName":"Abrokwah","mobilePhone":null,"secondEmail":null,"login":"justin.abrokwah@okta.com","email":"justin.abrokwah@okta.com"},"credentials":{"password":{},"emails":[{"value":"justin.abrokwah@okta.com","status":"VERIFIED","type":"PRIMARY"}],"recovery_question":{"question":"What
@@ -279,7 +279,7 @@ interactions:
     status:
       code: 200
       message: OK
-    url: https://test.okta.com/api/v1/users/?filter=status+eq+%22ACTIVE%22
+    url: https://test.okta.com/api/v1/users?filter=status+eq+%22ACTIVE%22
 - request:
     body: null
     headers:

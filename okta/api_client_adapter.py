@@ -422,14 +422,14 @@ class ApiClientAdapter(ApiClient):
 
         # TODO: consider removing if clause
         if _return_http_data_only:
-            if return_data:
+            if return_data is not None:
                 return (return_data, OktaAPIResponse(self, request, response, response_data, response_type), None)
             else:
                 return (OktaAPIResponse(self, request, response, response_data, response_type), None)
 
         else:
             # TODO: return status codes/headers or anything will be in OktaAPIResponse?
-            if return_data:
+            if return_data is not None:
                 return (return_data, OktaAPIResponse(self, request, response, response_data, response_type), None)
             else:
                 return (OktaAPIResponse(self, request, response, response_data, response_type), None)

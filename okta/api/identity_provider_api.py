@@ -109,7 +109,7 @@ class IdentityProvider(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/idps/{idpId}/lifecycle/activate', 'POST',
@@ -220,7 +220,7 @@ class IdentityProvider(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/idps/{idpId}/credentials/keys/{keyId}/clone', 'POST',
@@ -319,7 +319,7 @@ class IdentityProvider(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/idps', 'POST',
@@ -338,7 +338,7 @@ class IdentityProvider(object):
             collection_formats=collection_formats)
 
     def create_identity_provider_key(self, body, **kwargs):  # noqa: E501
-        """Add X.509 Certificate Public Key  # noqa: E501
+        """Add X.509 Certificate Public Key for Identity Providers  # noqa: E501
 
         Adds a new X.509 certificate credential to the IdP key store.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -360,7 +360,7 @@ class IdentityProvider(object):
             return data
 
     def create_identity_provider_key_with_http_info(self, body, **kwargs):  # noqa: E501
-        """Add X.509 Certificate Public Key  # noqa: E501
+        """Add X.509 Certificate Public Key for Identity Providers  # noqa: E501
 
         Adds a new X.509 certificate credential to the IdP key store.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -418,7 +418,7 @@ class IdentityProvider(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/idps/credentials/keys', 'POST',
@@ -513,7 +513,7 @@ class IdentityProvider(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/idps/{idpId}/lifecycle/deactivate', 'POST',
@@ -604,7 +604,7 @@ class IdentityProvider(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/idps/{idpId}', 'DELETE',
@@ -695,7 +695,7 @@ class IdentityProvider(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/idps/credentials/keys/{keyId}', 'DELETE',
@@ -802,7 +802,7 @@ class IdentityProvider(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/idps/{idpId}/credentials/csrs', 'POST',
@@ -905,7 +905,7 @@ class IdentityProvider(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/idps/{idpId}/credentials/keys/generate', 'POST',
@@ -924,7 +924,7 @@ class IdentityProvider(object):
             collection_formats=collection_formats)
 
     def get_csr_for_identity_provider(self, idp_id, csr_id, **kwargs):  # noqa: E501
-        """get_csr_for_identity_provider  # noqa: E501
+        """Get Csr for Identity Provider  # noqa: E501
 
         Gets a specific Certificate Signing Request model by id  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -947,7 +947,7 @@ class IdentityProvider(object):
             return data
 
     def get_csr_for_identity_provider_with_http_info(self, idp_id, csr_id, **kwargs):  # noqa: E501
-        """get_csr_for_identity_provider  # noqa: E501
+        """Get Csr for Identity Provider  # noqa: E501
 
         Gets a specific Certificate Signing Request model by id  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1008,7 +1008,7 @@ class IdentityProvider(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/idps/{idpId}/credentials/csrs/{csrId}', 'GET',
@@ -1103,7 +1103,7 @@ class IdentityProvider(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/idps/{idpId}', 'GET',
@@ -1122,7 +1122,7 @@ class IdentityProvider(object):
             collection_formats=collection_formats)
 
     def get_identity_provider_application_user(self, idp_id, user_id, **kwargs):  # noqa: E501
-        """get_identity_provider_application_user  # noqa: E501
+        """Get Identity Provider Application User  # noqa: E501
 
         Fetches a linked IdP user by ID  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1145,7 +1145,7 @@ class IdentityProvider(object):
             return data
 
     def get_identity_provider_application_user_with_http_info(self, idp_id, user_id, **kwargs):  # noqa: E501
-        """get_identity_provider_application_user  # noqa: E501
+        """Get Identity Provider Application User  # noqa: E501
 
         Fetches a linked IdP user by ID  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1206,7 +1206,7 @@ class IdentityProvider(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/idps/{idpId}/users/{userId}', 'GET',
@@ -1225,7 +1225,7 @@ class IdentityProvider(object):
             collection_formats=collection_formats)
 
     def get_identity_provider_key(self, key_id, **kwargs):  # noqa: E501
-        """Get Key  # noqa: E501
+        """Get Identity Provider Key  # noqa: E501
 
         Gets a specific IdP Key Credential by `kid`  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1247,7 +1247,7 @@ class IdentityProvider(object):
             return data
 
     def get_identity_provider_key_with_http_info(self, key_id, **kwargs):  # noqa: E501
-        """Get Key  # noqa: E501
+        """Get Identity Provider Key  # noqa: E501
 
         Gets a specific IdP Key Credential by `kid`  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1301,7 +1301,7 @@ class IdentityProvider(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/idps/credentials/keys/{keyId}', 'GET',
@@ -1404,7 +1404,7 @@ class IdentityProvider(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/idps/{idpId}/credentials/keys/{keyId}', 'GET',
@@ -1519,7 +1519,7 @@ class IdentityProvider(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/idps/{idpId}/users/{userId}', 'POST',
@@ -1614,7 +1614,7 @@ class IdentityProvider(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/idps/{idpId}/credentials/csrs', 'GET',
@@ -1709,7 +1709,7 @@ class IdentityProvider(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/idps/{idpId}/users', 'GET',
@@ -1728,7 +1728,7 @@ class IdentityProvider(object):
             collection_formats=collection_formats)
 
     def list_identity_provider_keys(self, **kwargs):  # noqa: E501
-        """List Keys  # noqa: E501
+        """List Identity Provider Keys  # noqa: E501
 
         Enumerates IdP key credentials.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1751,7 +1751,7 @@ class IdentityProvider(object):
             return data
 
     def list_identity_provider_keys_with_http_info(self, **kwargs):  # noqa: E501
-        """List Keys  # noqa: E501
+        """List Identity Provider Keys  # noqa: E501
 
         Enumerates IdP key credentials.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1804,7 +1804,7 @@ class IdentityProvider(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/idps/credentials/keys', 'GET',
@@ -1899,7 +1899,7 @@ class IdentityProvider(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/idps/{idpId}/credentials/keys', 'GET',
@@ -2002,7 +2002,7 @@ class IdentityProvider(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/idps', 'GET',
@@ -2105,7 +2105,7 @@ class IdentityProvider(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/idps/{idpId}/users/{userId}/credentials/tokens', 'GET',
@@ -2124,7 +2124,7 @@ class IdentityProvider(object):
             collection_formats=collection_formats)
 
     def publish_csr_for_identity_provider(self, idp_id, csr_id, body, **kwargs):  # noqa: E501
-        """publish_csr_for_identity_provider  # noqa: E501
+        """Publish Csr for Identity Provider  # noqa: E501
 
         Update the Certificate Signing Request with a signed X.509 certificate and add it into the signing key credentials for the IdP.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2148,7 +2148,7 @@ class IdentityProvider(object):
             return data
 
     def publish_csr_for_identity_provider_with_http_info(self, idp_id, csr_id, body, **kwargs):  # noqa: E501
-        """publish_csr_for_identity_provider  # noqa: E501
+        """Publish Csr for Identity Provider  # noqa: E501
 
         Update the Certificate Signing Request with a signed X.509 certificate and add it into the signing key credentials for the IdP.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2220,7 +2220,7 @@ class IdentityProvider(object):
             ['application/octet-stream', 'application/x-x509-ca-cert', 'application/pkix-cert', 'application/x-pem-file'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/idps/{idpId}/credentials/csrs/{csrId}/lifecycle/publish', 'POST',
@@ -2239,7 +2239,7 @@ class IdentityProvider(object):
             collection_formats=collection_formats)
 
     def publish_csr_for_identity_provider(self, idp_id, csr_id, body, **kwargs):  # noqa: E501
-        """publish_csr_for_identity_provider  # noqa: E501
+        """Publish Csr for Identity Provider  # noqa: E501
 
         Update the Certificate Signing Request with a signed X.509 certificate and add it into the signing key credentials for the IdP.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2263,7 +2263,7 @@ class IdentityProvider(object):
             return data
 
     def publish_csr_for_identity_provider_with_http_info(self, idp_id, csr_id, body, **kwargs):  # noqa: E501
-        """publish_csr_for_identity_provider  # noqa: E501
+        """Publish Csr for Identity Provider  # noqa: E501
 
         Update the Certificate Signing Request with a signed X.509 certificate and add it into the signing key credentials for the IdP.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2335,7 +2335,7 @@ class IdentityProvider(object):
             ['application/octet-stream', 'application/x-x509-ca-cert', 'application/pkix-cert', 'application/x-pem-file'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/idps/{idpId}/credentials/csrs/{csrId}/lifecycle/publish', 'POST',
@@ -2354,7 +2354,7 @@ class IdentityProvider(object):
             collection_formats=collection_formats)
 
     def publish_csr_for_identity_provider(self, idp_id, csr_id, body, **kwargs):  # noqa: E501
-        """publish_csr_for_identity_provider  # noqa: E501
+        """Publish Csr for Identity Provider  # noqa: E501
 
         Update the Certificate Signing Request with a signed X.509 certificate and add it into the signing key credentials for the IdP.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2378,7 +2378,7 @@ class IdentityProvider(object):
             return data
 
     def publish_csr_for_identity_provider_with_http_info(self, idp_id, csr_id, body, **kwargs):  # noqa: E501
-        """publish_csr_for_identity_provider  # noqa: E501
+        """Publish Csr for Identity Provider  # noqa: E501
 
         Update the Certificate Signing Request with a signed X.509 certificate and add it into the signing key credentials for the IdP.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2450,7 +2450,7 @@ class IdentityProvider(object):
             ['application/octet-stream', 'application/x-x509-ca-cert', 'application/pkix-cert', 'application/x-pem-file'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/idps/{idpId}/credentials/csrs/{csrId}/lifecycle/publish', 'POST',
@@ -2469,7 +2469,7 @@ class IdentityProvider(object):
             collection_formats=collection_formats)
 
     def publish_csr_for_identity_provider(self, idp_id, csr_id, body, **kwargs):  # noqa: E501
-        """publish_csr_for_identity_provider  # noqa: E501
+        """Publish Csr for Identity Provider  # noqa: E501
 
         Update the Certificate Signing Request with a signed X.509 certificate and add it into the signing key credentials for the IdP.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2493,7 +2493,7 @@ class IdentityProvider(object):
             return data
 
     def publish_csr_for_identity_provider_with_http_info(self, idp_id, csr_id, body, **kwargs):  # noqa: E501
-        """publish_csr_for_identity_provider  # noqa: E501
+        """Publish Csr for Identity Provider  # noqa: E501
 
         Update the Certificate Signing Request with a signed X.509 certificate and add it into the signing key credentials for the IdP.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2565,7 +2565,7 @@ class IdentityProvider(object):
             ['application/octet-stream', 'application/x-x509-ca-cert', 'application/pkix-cert', 'application/x-pem-file'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/idps/{idpId}/credentials/csrs/{csrId}/lifecycle/publish', 'POST',
@@ -2584,7 +2584,7 @@ class IdentityProvider(object):
             collection_formats=collection_formats)
 
     def revoke_csr_for_identity_provider(self, idp_id, csr_id, **kwargs):  # noqa: E501
-        """revoke_csr_for_identity_provider  # noqa: E501
+        """Revoke Csr for Identity Provider  # noqa: E501
 
         Revoke a Certificate Signing Request and delete the key pair from the IdP  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2607,7 +2607,7 @@ class IdentityProvider(object):
             return data
 
     def revoke_csr_for_identity_provider_with_http_info(self, idp_id, csr_id, **kwargs):  # noqa: E501
-        """revoke_csr_for_identity_provider  # noqa: E501
+        """Revoke Csr for Identity Provider  # noqa: E501
 
         Revoke a Certificate Signing Request and delete the key pair from the IdP  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2664,7 +2664,7 @@ class IdentityProvider(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/idps/{idpId}/credentials/csrs/{csrId}', 'DELETE',
@@ -2763,7 +2763,7 @@ class IdentityProvider(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/idps/{idpId}/users/{userId}', 'DELETE',
@@ -2870,7 +2870,7 @@ class IdentityProvider(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/idps/{idpId}', 'PUT',

@@ -39,7 +39,7 @@ class EmailCustomization(EmailContent):
     swagger_types['is_default'] = 'bool'
     swagger_types['created'] = 'datetime'
     swagger_types['last_updated'] = 'datetime'
-    swagger_types['links'] = 'EmailDefaultContentLinks'
+    swagger_types['links'] = 'EmailCustomizationLinks'
 
     attribute_map = {
         'id': 'id',
@@ -248,7 +248,7 @@ class EmailCustomization(EmailContent):
 
 
         :return: The links of this EmailCustomization.  # noqa: E501
-        :rtype: EmailDefaultContentLinks
+        :rtype: EmailCustomizationLinks
         """
         return self._links
 
@@ -258,7 +258,7 @@ class EmailCustomization(EmailContent):
 
 
         :param links: The links of this EmailCustomization.  # noqa: E501
-        :type: EmailDefaultContentLinks
+        :type: EmailCustomizationLinks
         """
 
         self._links = links

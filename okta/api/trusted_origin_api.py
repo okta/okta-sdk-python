@@ -33,7 +33,7 @@ class TrustedOrigin(object):
         self.api_client = api_client
 
     def activate_origin(self, trusted_origin_id, **kwargs):  # noqa: E501
-        """activate_origin  # noqa: E501
+        """Activate Trusted Origin  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -55,7 +55,7 @@ class TrustedOrigin(object):
             return data
 
     def activate_origin_with_http_info(self, trusted_origin_id, **kwargs):  # noqa: E501
-        """activate_origin  # noqa: E501
+        """Activate Trusted Origin  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -109,7 +109,7 @@ class TrustedOrigin(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/trustedOrigins/{trustedOriginId}/lifecycle/activate', 'POST',
@@ -128,7 +128,7 @@ class TrustedOrigin(object):
             collection_formats=collection_formats)
 
     def create_origin(self, body, **kwargs):  # noqa: E501
-        """create_origin  # noqa: E501
+        """Create Trusted Origin  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -150,7 +150,7 @@ class TrustedOrigin(object):
             return data
 
     def create_origin_with_http_info(self, body, **kwargs):  # noqa: E501
-        """create_origin  # noqa: E501
+        """Create Trusted Origin  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -208,7 +208,7 @@ class TrustedOrigin(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/trustedOrigins', 'POST',
@@ -227,7 +227,7 @@ class TrustedOrigin(object):
             collection_formats=collection_formats)
 
     def deactivate_origin(self, trusted_origin_id, **kwargs):  # noqa: E501
-        """deactivate_origin  # noqa: E501
+        """Deactivate Trusted Origin  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -249,7 +249,7 @@ class TrustedOrigin(object):
             return data
 
     def deactivate_origin_with_http_info(self, trusted_origin_id, **kwargs):  # noqa: E501
-        """deactivate_origin  # noqa: E501
+        """Deactivate Trusted Origin  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -303,7 +303,7 @@ class TrustedOrigin(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/trustedOrigins/{trustedOriginId}/lifecycle/deactivate', 'POST',
@@ -322,7 +322,7 @@ class TrustedOrigin(object):
             collection_formats=collection_formats)
 
     def delete_origin(self, trusted_origin_id, **kwargs):  # noqa: E501
-        """delete_origin  # noqa: E501
+        """Delete Trusted Origin  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -344,7 +344,7 @@ class TrustedOrigin(object):
             return data
 
     def delete_origin_with_http_info(self, trusted_origin_id, **kwargs):  # noqa: E501
-        """delete_origin  # noqa: E501
+        """Delete Trusted Origin  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -394,7 +394,7 @@ class TrustedOrigin(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/trustedOrigins/{trustedOriginId}', 'DELETE',
@@ -413,7 +413,7 @@ class TrustedOrigin(object):
             collection_formats=collection_formats)
 
     def get_origin(self, trusted_origin_id, **kwargs):  # noqa: E501
-        """get_origin  # noqa: E501
+        """Get Trusted Origin  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -435,7 +435,7 @@ class TrustedOrigin(object):
             return data
 
     def get_origin_with_http_info(self, trusted_origin_id, **kwargs):  # noqa: E501
-        """get_origin  # noqa: E501
+        """Get Trusted Origin  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -489,7 +489,7 @@ class TrustedOrigin(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/trustedOrigins/{trustedOriginId}', 'GET',
@@ -508,7 +508,7 @@ class TrustedOrigin(object):
             collection_formats=collection_formats)
 
     def list_origins(self, **kwargs):  # noqa: E501
-        """list_origins  # noqa: E501
+        """List Trusted Origins  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -533,7 +533,7 @@ class TrustedOrigin(object):
             return data
 
     def list_origins_with_http_info(self, **kwargs):  # noqa: E501
-        """list_origins  # noqa: E501
+        """List Trusted Origins  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -592,7 +592,7 @@ class TrustedOrigin(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/trustedOrigins', 'GET',
@@ -611,7 +611,7 @@ class TrustedOrigin(object):
             collection_formats=collection_formats)
 
     def update_origin(self, trusted_origin_id, body, **kwargs):  # noqa: E501
-        """update_origin  # noqa: E501
+        """Update Trusted Origin  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -634,7 +634,7 @@ class TrustedOrigin(object):
             return data
 
     def update_origin_with_http_info(self, trusted_origin_id, body, **kwargs):  # noqa: E501
-        """update_origin  # noqa: E501
+        """Update Trusted Origin  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -699,7 +699,7 @@ class TrustedOrigin(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/trustedOrigins/{trustedOriginId}', 'PUT',

@@ -33,7 +33,7 @@ class LinkedObject(object):
         self.api_client = api_client
 
     def add_linked_object_definition(self, body, **kwargs):  # noqa: E501
-        """add_linked_object_definition  # noqa: E501
+        """Add Linked Object Definition  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -55,7 +55,7 @@ class LinkedObject(object):
             return data
 
     def add_linked_object_definition_with_http_info(self, body, **kwargs):  # noqa: E501
-        """add_linked_object_definition  # noqa: E501
+        """Add Linked Object Definition  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -113,7 +113,7 @@ class LinkedObject(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/meta/schemas/user/linkedObjects', 'POST',
@@ -132,7 +132,7 @@ class LinkedObject(object):
             collection_formats=collection_formats)
 
     def delete_linked_object_definition(self, linked_object_name, **kwargs):  # noqa: E501
-        """delete_linked_object_definition  # noqa: E501
+        """Delete Linked Object Definition  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -154,7 +154,7 @@ class LinkedObject(object):
             return data
 
     def delete_linked_object_definition_with_http_info(self, linked_object_name, **kwargs):  # noqa: E501
-        """delete_linked_object_definition  # noqa: E501
+        """Delete Linked Object Definition  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -204,7 +204,7 @@ class LinkedObject(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/meta/schemas/user/linkedObjects/{linkedObjectName}', 'DELETE',
@@ -223,7 +223,7 @@ class LinkedObject(object):
             collection_formats=collection_formats)
 
     def get_linked_object_definition(self, linked_object_name, **kwargs):  # noqa: E501
-        """get_linked_object_definition  # noqa: E501
+        """Get Linked Object Definition  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -245,7 +245,7 @@ class LinkedObject(object):
             return data
 
     def get_linked_object_definition_with_http_info(self, linked_object_name, **kwargs):  # noqa: E501
-        """get_linked_object_definition  # noqa: E501
+        """Get Linked Object Definition  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -299,7 +299,7 @@ class LinkedObject(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/meta/schemas/user/linkedObjects/{linkedObjectName}', 'GET',
@@ -318,7 +318,7 @@ class LinkedObject(object):
             collection_formats=collection_formats)
 
     def list_linked_object_definitions(self, **kwargs):  # noqa: E501
-        """list_linked_object_definitions  # noqa: E501
+        """List Linked Object Definitions  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -339,7 +339,7 @@ class LinkedObject(object):
             return data
 
     def list_linked_object_definitions_with_http_info(self, **kwargs):  # noqa: E501
-        """list_linked_object_definitions  # noqa: E501
+        """List Linked Object Definitions  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -386,7 +386,7 @@ class LinkedObject(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/meta/schemas/user/linkedObjects', 'GET',

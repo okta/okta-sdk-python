@@ -59,6 +59,7 @@ class PolicyRule(object):
             'ACCESS_POLICY'.lower(): 'AccessPolicyRule',
             'PASSWORD'.lower(): 'PasswordPolicyRule',
             'PROFILE_ENROLLMENT'.lower(): 'ProfileEnrollmentPolicyRule',
+            'RESOURCE_ACCESS'.lower(): 'AuthorizationServerPolicyRule',
             'SIGN_ON'.lower(): 'OktaSignOnPolicyRule',
     }
 

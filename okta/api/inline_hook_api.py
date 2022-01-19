@@ -33,7 +33,7 @@ class InlineHook(object):
         self.api_client = api_client
 
     def activate_inline_hook(self, inline_hook_id, **kwargs):  # noqa: E501
-        """activate_inline_hook  # noqa: E501
+        """Activate Inline Hook  # noqa: E501
 
         Activates the Inline Hook matching the provided id  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -55,7 +55,7 @@ class InlineHook(object):
             return data
 
     def activate_inline_hook_with_http_info(self, inline_hook_id, **kwargs):  # noqa: E501
-        """activate_inline_hook  # noqa: E501
+        """Activate Inline Hook  # noqa: E501
 
         Activates the Inline Hook matching the provided id  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -128,7 +128,7 @@ class InlineHook(object):
             collection_formats=collection_formats)
 
     def create_inline_hook(self, body, **kwargs):  # noqa: E501
-        """create_inline_hook  # noqa: E501
+        """Create Inline Hook  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -150,7 +150,7 @@ class InlineHook(object):
             return data
 
     def create_inline_hook_with_http_info(self, body, **kwargs):  # noqa: E501
-        """create_inline_hook  # noqa: E501
+        """Create Inline Hook  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -208,7 +208,7 @@ class InlineHook(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/inlineHooks', 'POST',
@@ -227,7 +227,7 @@ class InlineHook(object):
             collection_formats=collection_formats)
 
     def deactivate_inline_hook(self, inline_hook_id, **kwargs):  # noqa: E501
-        """deactivate_inline_hook  # noqa: E501
+        """Deactivate Inline Hook  # noqa: E501
 
         Deactivates the Inline Hook matching the provided id  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -249,7 +249,7 @@ class InlineHook(object):
             return data
 
     def deactivate_inline_hook_with_http_info(self, inline_hook_id, **kwargs):  # noqa: E501
-        """deactivate_inline_hook  # noqa: E501
+        """Deactivate Inline Hook  # noqa: E501
 
         Deactivates the Inline Hook matching the provided id  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -322,7 +322,7 @@ class InlineHook(object):
             collection_formats=collection_formats)
 
     def delete_inline_hook(self, inline_hook_id, **kwargs):  # noqa: E501
-        """delete_inline_hook  # noqa: E501
+        """Delete Inline Hook  # noqa: E501
 
         Deletes the Inline Hook matching the provided id. Once deleted, the Inline Hook is unrecoverable. As a safety precaution, only Inline Hooks with a status of INACTIVE are eligible for deletion.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -344,7 +344,7 @@ class InlineHook(object):
             return data
 
     def delete_inline_hook_with_http_info(self, inline_hook_id, **kwargs):  # noqa: E501
-        """delete_inline_hook  # noqa: E501
+        """Delete Inline Hook  # noqa: E501
 
         Deletes the Inline Hook matching the provided id. Once deleted, the Inline Hook is unrecoverable. As a safety precaution, only Inline Hooks with a status of INACTIVE are eligible for deletion.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -394,7 +394,7 @@ class InlineHook(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/inlineHooks/{inlineHookId}', 'DELETE',
@@ -413,7 +413,7 @@ class InlineHook(object):
             collection_formats=collection_formats)
 
     def execute_inline_hook(self, inline_hook_id, body, **kwargs):  # noqa: E501
-        """execute_inline_hook  # noqa: E501
+        """Execute Inline Hook  # noqa: E501
 
         Executes the Inline Hook matching the provided inlineHookId using the request body as the input. This will send the provided data through the Channel and return a response if it matches the correct data contract. This execution endpoint should only be used for testing purposes.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -436,7 +436,7 @@ class InlineHook(object):
             return data
 
     def execute_inline_hook_with_http_info(self, inline_hook_id, body, **kwargs):  # noqa: E501
-        """execute_inline_hook  # noqa: E501
+        """Execute Inline Hook  # noqa: E501
 
         Executes the Inline Hook matching the provided inlineHookId using the request body as the input. This will send the provided data through the Channel and return a response if it matches the correct data contract. This execution endpoint should only be used for testing purposes.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -501,7 +501,7 @@ class InlineHook(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/inlineHooks/{inlineHookId}/execute', 'POST',
@@ -520,7 +520,7 @@ class InlineHook(object):
             collection_formats=collection_formats)
 
     def get_inline_hook(self, inline_hook_id, **kwargs):  # noqa: E501
-        """get_inline_hook  # noqa: E501
+        """Get Inline Hook  # noqa: E501
 
         Gets an inline hook by ID  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -542,7 +542,7 @@ class InlineHook(object):
             return data
 
     def get_inline_hook_with_http_info(self, inline_hook_id, **kwargs):  # noqa: E501
-        """get_inline_hook  # noqa: E501
+        """Get Inline Hook  # noqa: E501
 
         Gets an inline hook by ID  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -596,7 +596,7 @@ class InlineHook(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/inlineHooks/{inlineHookId}', 'GET',
@@ -615,7 +615,7 @@ class InlineHook(object):
             collection_formats=collection_formats)
 
     def list_inline_hooks(self, **kwargs):  # noqa: E501
-        """list_inline_hooks  # noqa: E501
+        """List Inline Hooks  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -637,7 +637,7 @@ class InlineHook(object):
             return data
 
     def list_inline_hooks_with_http_info(self, **kwargs):  # noqa: E501
-        """list_inline_hooks  # noqa: E501
+        """List Inline Hooks  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -687,7 +687,7 @@ class InlineHook(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/inlineHooks', 'GET',
@@ -706,7 +706,7 @@ class InlineHook(object):
             collection_formats=collection_formats)
 
     def update_inline_hook(self, inline_hook_id, body, **kwargs):  # noqa: E501
-        """update_inline_hook  # noqa: E501
+        """Update Inline Hook  # noqa: E501
 
         Updates an inline hook by ID  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -729,7 +729,7 @@ class InlineHook(object):
             return data
 
     def update_inline_hook_with_http_info(self, inline_hook_id, body, **kwargs):  # noqa: E501
-        """update_inline_hook  # noqa: E501
+        """Update Inline Hook  # noqa: E501
 
         Updates an inline hook by ID  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -794,7 +794,7 @@ class InlineHook(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/inlineHooks/{inlineHookId}', 'PUT',

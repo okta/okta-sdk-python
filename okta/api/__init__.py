@@ -15,13 +15,13 @@ from okta.api.group_api import Group
 from okta.api.identity_provider_api import IdentityProvider
 from okta.api.inline_hook_api import InlineHook
 from okta.api.linked_object_api import LinkedObject
-from okta.api.log_api import Log
 from okta.api.network_zone_api import NetworkZone
-from okta.api.org_api import Org
+from okta.api.org_setting_api import OrgSetting
 from okta.api.policy_api import Policy
 from okta.api.profile_mapping_api import ProfileMapping
 from okta.api.schema_api import Schema
 from okta.api.session_api import Session
+from okta.api.system_log_api import SystemLog
 from okta.api.template_api import Template
 from okta.api.threat_insight_api import ThreatInsight
 from okta.api.trusted_origin_api import TrustedOrigin

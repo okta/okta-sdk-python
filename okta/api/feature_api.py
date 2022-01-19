@@ -33,7 +33,7 @@ class Feature(object):
         self.api_client = api_client
 
     def get_feature(self, feature_id, **kwargs):  # noqa: E501
-        """get_feature  # noqa: E501
+        """Get Feature  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -55,7 +55,7 @@ class Feature(object):
             return data
 
     def get_feature_with_http_info(self, feature_id, **kwargs):  # noqa: E501
-        """get_feature  # noqa: E501
+        """Get Feature  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -128,7 +128,7 @@ class Feature(object):
             collection_formats=collection_formats)
 
     def list_feature_dependencies(self, feature_id, **kwargs):  # noqa: E501
-        """list_feature_dependencies  # noqa: E501
+        """List Feature Dependencies  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -150,7 +150,7 @@ class Feature(object):
             return data
 
     def list_feature_dependencies_with_http_info(self, feature_id, **kwargs):  # noqa: E501
-        """list_feature_dependencies  # noqa: E501
+        """List Feature Dependencies  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -223,7 +223,7 @@ class Feature(object):
             collection_formats=collection_formats)
 
     def list_feature_dependents(self, feature_id, **kwargs):  # noqa: E501
-        """list_feature_dependents  # noqa: E501
+        """List Feature Dependents  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -245,7 +245,7 @@ class Feature(object):
             return data
 
     def list_feature_dependents_with_http_info(self, feature_id, **kwargs):  # noqa: E501
-        """list_feature_dependents  # noqa: E501
+        """List Feature Dependents  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -318,7 +318,7 @@ class Feature(object):
             collection_formats=collection_formats)
 
     def list_features(self, **kwargs):  # noqa: E501
-        """list_features  # noqa: E501
+        """List Features  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -339,7 +339,7 @@ class Feature(object):
             return data
 
     def list_features_with_http_info(self, **kwargs):  # noqa: E501
-        """list_features  # noqa: E501
+        """List Features  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -405,7 +405,7 @@ class Feature(object):
             collection_formats=collection_formats)
 
     def update_feature_lifecycle(self, feature_id, lifecycle, **kwargs):  # noqa: E501
-        """update_feature_lifecycle  # noqa: E501
+        """Update Feature Lifecycle  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -429,7 +429,7 @@ class Feature(object):
             return data
 
     def update_feature_lifecycle_with_http_info(self, feature_id, lifecycle, **kwargs):  # noqa: E501
-        """update_feature_lifecycle  # noqa: E501
+        """Update Feature Lifecycle  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an

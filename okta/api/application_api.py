@@ -105,7 +105,7 @@ class Application(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/apps/{appId}/lifecycle/activate', 'POST',
@@ -212,7 +212,7 @@ class Application(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/apps/{appId}/users', 'POST',
@@ -323,7 +323,7 @@ class Application(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/apps/{appId}/credentials/keys/{keyId}/clone', 'POST',
@@ -430,7 +430,7 @@ class Application(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/apps', 'POST',
@@ -541,7 +541,7 @@ class Application(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/apps/{appId}/groups/{groupId}', 'PUT',
@@ -632,7 +632,7 @@ class Application(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/apps/{appId}/lifecycle/deactivate', 'POST',
@@ -723,7 +723,7 @@ class Application(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/apps/{appId}', 'DELETE',
@@ -822,7 +822,7 @@ class Application(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/apps/{appId}/groups/{groupId}', 'DELETE',
@@ -925,7 +925,7 @@ class Application(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/apps/{appId}/users/{userId}', 'DELETE',
@@ -944,7 +944,7 @@ class Application(object):
             collection_formats=collection_formats)
 
     def generate_application_key(self, app_id, **kwargs):  # noqa: E501
-        """generate_application_key  # noqa: E501
+        """Generate Key Credential for Application  # noqa: E501
 
         Generates a new X.509 certificate for an application key credential  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -967,7 +967,7 @@ class Application(object):
             return data
 
     def generate_application_key_with_http_info(self, app_id, **kwargs):  # noqa: E501
-        """generate_application_key  # noqa: E501
+        """Generate Key Credential for Application  # noqa: E501
 
         Generates a new X.509 certificate for an application key credential  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1024,7 +1024,7 @@ class Application(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/apps/{appId}/credentials/keys/generate', 'POST',
@@ -1131,7 +1131,7 @@ class Application(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/apps/{appId}/credentials/csrs', 'POST',
@@ -1230,7 +1230,7 @@ class Application(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/apps/{appId}', 'GET',
@@ -1337,7 +1337,7 @@ class Application(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/apps/{appId}/groups/{groupId}', 'GET',
@@ -1440,7 +1440,7 @@ class Application(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/apps/{appId}/credentials/keys/{keyId}', 'GET',
@@ -1547,7 +1547,7 @@ class Application(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/apps/{appId}/users/{userId}', 'GET',
@@ -1650,7 +1650,7 @@ class Application(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/apps/{appId}/credentials/csrs/{csrId}', 'GET',
@@ -1669,7 +1669,7 @@ class Application(object):
             collection_formats=collection_formats)
 
     def get_o_auth2_token_for_application(self, app_id, token_id, **kwargs):  # noqa: E501
-        """get_o_auth2_token_for_application  # noqa: E501
+        """Get OAuth 2.0 Token for Application  # noqa: E501
 
         Gets a token for the specified application  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1693,7 +1693,7 @@ class Application(object):
             return data
 
     def get_o_auth2_token_for_application_with_http_info(self, app_id, token_id, **kwargs):  # noqa: E501
-        """get_o_auth2_token_for_application  # noqa: E501
+        """Get OAuth 2.0 Token for Application  # noqa: E501
 
         Gets a token for the specified application  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1757,7 +1757,7 @@ class Application(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/apps/{appId}/tokens/{tokenId}', 'GET',
@@ -1776,7 +1776,7 @@ class Application(object):
             collection_formats=collection_formats)
 
     def get_scope_consent_grant(self, app_id, grant_id, **kwargs):  # noqa: E501
-        """get_scope_consent_grant  # noqa: E501
+        """Get Scope Consent Grant for Application  # noqa: E501
 
         Fetches a single scope consent grant for the application  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1800,7 +1800,7 @@ class Application(object):
             return data
 
     def get_scope_consent_grant_with_http_info(self, app_id, grant_id, **kwargs):  # noqa: E501
-        """get_scope_consent_grant  # noqa: E501
+        """Get Scope Consent Grant for Application  # noqa: E501
 
         Fetches a single scope consent grant for the application  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1883,7 +1883,7 @@ class Application(object):
             collection_formats=collection_formats)
 
     def grant_consent_to_scope(self, app_id, body, **kwargs):  # noqa: E501
-        """grant_consent_to_scope  # noqa: E501
+        """Grant Consent to Scope for Application  # noqa: E501
 
         Grants consent for the application to request an OAuth 2.0 Okta scope  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1906,7 +1906,7 @@ class Application(object):
             return data
 
     def grant_consent_to_scope_with_http_info(self, app_id, body, **kwargs):  # noqa: E501
-        """grant_consent_to_scope  # noqa: E501
+        """Grant Consent to Scope for Application  # noqa: E501
 
         Grants consent for the application to request an OAuth 2.0 Okta scope  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2082,7 +2082,7 @@ class Application(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/apps/{appId}/groups', 'GET',
@@ -2177,7 +2177,7 @@ class Application(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/apps/{appId}/credentials/keys', 'GET',
@@ -2296,7 +2296,7 @@ class Application(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/apps/{appId}/users', 'GET',
@@ -2407,7 +2407,7 @@ class Application(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/apps', 'GET',
@@ -2502,7 +2502,7 @@ class Application(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/apps/{appId}/credentials/csrs', 'GET',
@@ -2521,7 +2521,7 @@ class Application(object):
             collection_formats=collection_formats)
 
     def list_o_auth2_tokens_for_application(self, app_id, **kwargs):  # noqa: E501
-        """list_o_auth2_tokens_for_application  # noqa: E501
+        """Lists OAuth 2.0 Tokens for Application  # noqa: E501
 
         Lists all tokens for the application  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2546,7 +2546,7 @@ class Application(object):
             return data
 
     def list_o_auth2_tokens_for_application_with_http_info(self, app_id, **kwargs):  # noqa: E501
-        """list_o_auth2_tokens_for_application  # noqa: E501
+        """Lists OAuth 2.0 Tokens for Application  # noqa: E501
 
         Lists all tokens for the application  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2609,7 +2609,7 @@ class Application(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/apps/{appId}/tokens', 'GET',
@@ -2628,7 +2628,7 @@ class Application(object):
             collection_formats=collection_formats)
 
     def list_scope_consent_grants(self, app_id, **kwargs):  # noqa: E501
-        """list_scope_consent_grants  # noqa: E501
+        """List Scope Consent Grants for Application  # noqa: E501
 
         Lists all scope consent grants for the application  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2651,7 +2651,7 @@ class Application(object):
             return data
 
     def list_scope_consent_grants_with_http_info(self, app_id, **kwargs):  # noqa: E501
-        """list_scope_consent_grants  # noqa: E501
+        """List Scope Consent Grants for Application  # noqa: E501
 
         Lists all scope consent grants for the application  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2823,7 +2823,7 @@ class Application(object):
             ['application/octet-stream', 'application/x-x509-ca-cert', 'application/pkix-cert', 'application/x-pem-file'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/apps/{appId}/credentials/csrs/{csrId}/lifecycle/publish', 'POST',
@@ -2938,7 +2938,7 @@ class Application(object):
             ['application/octet-stream', 'application/x-x509-ca-cert', 'application/pkix-cert', 'application/x-pem-file'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/apps/{appId}/credentials/csrs/{csrId}/lifecycle/publish', 'POST',
@@ -3053,7 +3053,7 @@ class Application(object):
             ['application/octet-stream', 'application/x-x509-ca-cert', 'application/pkix-cert', 'application/x-pem-file'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/apps/{appId}/credentials/csrs/{csrId}/lifecycle/publish', 'POST',
@@ -3168,7 +3168,7 @@ class Application(object):
             ['application/octet-stream', 'application/x-x509-ca-cert', 'application/pkix-cert', 'application/x-pem-file'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/apps/{appId}/credentials/csrs/{csrId}/lifecycle/publish', 'POST',
@@ -3267,7 +3267,7 @@ class Application(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/apps/{appId}/credentials/csrs/{csrId}', 'DELETE',
@@ -3286,7 +3286,7 @@ class Application(object):
             collection_formats=collection_formats)
 
     def revoke_o_auth2_token_for_application(self, app_id, token_id, **kwargs):  # noqa: E501
-        """revoke_o_auth2_token_for_application  # noqa: E501
+        """Revoke an OAuth 2.0 Token for Application  # noqa: E501
 
         Revokes the specified token for the specified application  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3309,7 +3309,7 @@ class Application(object):
             return data
 
     def revoke_o_auth2_token_for_application_with_http_info(self, app_id, token_id, **kwargs):  # noqa: E501
-        """revoke_o_auth2_token_for_application  # noqa: E501
+        """Revoke an OAuth 2.0 Token for Application  # noqa: E501
 
         Revokes the specified token for the specified application  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3366,7 +3366,7 @@ class Application(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/apps/{appId}/tokens/{tokenId}', 'DELETE',
@@ -3385,7 +3385,7 @@ class Application(object):
             collection_formats=collection_formats)
 
     def revoke_o_auth2_tokens_for_application(self, app_id, **kwargs):  # noqa: E501
-        """revoke_o_auth2_tokens_for_application  # noqa: E501
+        """Revoke All OAuth 2.0 Tokens for Application  # noqa: E501
 
         Revokes all tokens for the specified application  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3407,7 +3407,7 @@ class Application(object):
             return data
 
     def revoke_o_auth2_tokens_for_application_with_http_info(self, app_id, **kwargs):  # noqa: E501
-        """revoke_o_auth2_tokens_for_application  # noqa: E501
+        """Revoke All OAuth 2.0 Tokens for Application  # noqa: E501
 
         Revokes all tokens for the specified application  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3457,7 +3457,7 @@ class Application(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/apps/{appId}/tokens', 'DELETE',
@@ -3476,7 +3476,7 @@ class Application(object):
             collection_formats=collection_formats)
 
     def revoke_scope_consent_grant(self, app_id, grant_id, **kwargs):  # noqa: E501
-        """revoke_scope_consent_grant  # noqa: E501
+        """Revoke Scope Consent Grant for Application  # noqa: E501
 
         Revokes permission for the application to request the given scope  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3499,7 +3499,7 @@ class Application(object):
             return data
 
     def revoke_scope_consent_grant_with_http_info(self, app_id, grant_id, **kwargs):  # noqa: E501
-        """revoke_scope_consent_grant  # noqa: E501
+        """Revoke Scope Consent Grant for Application  # noqa: E501
 
         Revokes permission for the application to request the given scope  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3663,7 +3663,7 @@ class Application(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/apps/{appId}', 'PUT',
@@ -3778,7 +3778,7 @@ class Application(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/apps/{appId}/users/{userId}', 'POST',

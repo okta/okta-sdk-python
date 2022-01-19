@@ -33,7 +33,7 @@ class AuthorizationServer(object):
         self.api_client = api_client
 
     def activate_authorization_server(self, auth_server_id, **kwargs):  # noqa: E501
-        """activate_authorization_server  # noqa: E501
+        """Activate Authorization Server  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -55,7 +55,7 @@ class AuthorizationServer(object):
             return data
 
     def activate_authorization_server_with_http_info(self, auth_server_id, **kwargs):  # noqa: E501
-        """activate_authorization_server  # noqa: E501
+        """Activate Authorization Server  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -105,7 +105,7 @@ class AuthorizationServer(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}/lifecycle/activate', 'POST',
@@ -124,7 +124,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def activate_authorization_server_policy(self, auth_server_id, policy_id, **kwargs):  # noqa: E501
-        """activate_authorization_server_policy  # noqa: E501
+        """Activate Authorization Server Policy  # noqa: E501
 
         Activate Authorization Server Policy  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -147,7 +147,7 @@ class AuthorizationServer(object):
             return data
 
     def activate_authorization_server_policy_with_http_info(self, auth_server_id, policy_id, **kwargs):  # noqa: E501
-        """activate_authorization_server_policy  # noqa: E501
+        """Activate Authorization Server Policy  # noqa: E501
 
         Activate Authorization Server Policy  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -204,7 +204,7 @@ class AuthorizationServer(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}/policies/{policyId}/lifecycle/activate', 'POST',
@@ -223,7 +223,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def activate_authorization_server_policy_rule(self, auth_server_id, policy_id, rule_id, **kwargs):  # noqa: E501
-        """activate_authorization_server_policy_rule  # noqa: E501
+        """Activate Authorization Server Policy Rule  # noqa: E501
 
         Activate Authorization Server Policy Rule  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -247,7 +247,7 @@ class AuthorizationServer(object):
             return data
 
     def activate_authorization_server_policy_rule_with_http_info(self, auth_server_id, policy_id, rule_id, **kwargs):  # noqa: E501
-        """activate_authorization_server_policy_rule  # noqa: E501
+        """Activate Authorization Server Policy Rule  # noqa: E501
 
         Activate Authorization Server Policy Rule  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -311,7 +311,7 @@ class AuthorizationServer(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}/policies/{policyId}/rules/{ruleId}/lifecycle/activate', 'POST',
@@ -330,7 +330,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def create_authorization_server(self, body, **kwargs):  # noqa: E501
-        """create_authorization_server  # noqa: E501
+        """Create Authorization Server  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -352,7 +352,7 @@ class AuthorizationServer(object):
             return data
 
     def create_authorization_server_with_http_info(self, body, **kwargs):  # noqa: E501
-        """create_authorization_server  # noqa: E501
+        """Create Authorization Server  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -410,7 +410,7 @@ class AuthorizationServer(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers', 'POST',
@@ -429,7 +429,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def create_authorization_server_policy(self, auth_server_id, body, **kwargs):  # noqa: E501
-        """create_authorization_server_policy  # noqa: E501
+        """Create Authorization Server Policy  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -452,7 +452,7 @@ class AuthorizationServer(object):
             return data
 
     def create_authorization_server_policy_with_http_info(self, auth_server_id, body, **kwargs):  # noqa: E501
-        """create_authorization_server_policy  # noqa: E501
+        """Create Authorization Server Policy  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -517,7 +517,7 @@ class AuthorizationServer(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}/policies', 'POST',
@@ -536,7 +536,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def create_authorization_server_policy_rule(self, policy_id, auth_server_id, body, **kwargs):  # noqa: E501
-        """create_authorization_server_policy_rule  # noqa: E501
+        """Create Authorization Server Policy Rule  # noqa: E501
 
         Creates a policy rule for the specified Custom Authorization Server and Policy.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -560,7 +560,7 @@ class AuthorizationServer(object):
             return data
 
     def create_authorization_server_policy_rule_with_http_info(self, policy_id, auth_server_id, body, **kwargs):  # noqa: E501
-        """create_authorization_server_policy_rule  # noqa: E501
+        """Create Authorization Server Policy Rule  # noqa: E501
 
         Creates a policy rule for the specified Custom Authorization Server and Policy.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -632,7 +632,7 @@ class AuthorizationServer(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}/policies/{policyId}/rules', 'POST',
@@ -651,7 +651,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def create_o_auth2_claim(self, auth_server_id, body, **kwargs):  # noqa: E501
-        """create_o_auth2_claim  # noqa: E501
+        """Create Custom OAuth 2.0 Token Claim  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -674,7 +674,7 @@ class AuthorizationServer(object):
             return data
 
     def create_o_auth2_claim_with_http_info(self, auth_server_id, body, **kwargs):  # noqa: E501
-        """create_o_auth2_claim  # noqa: E501
+        """Create Custom OAuth 2.0 Token Claim  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -739,7 +739,7 @@ class AuthorizationServer(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}/claims', 'POST',
@@ -758,7 +758,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def create_o_auth2_scope(self, auth_server_id, body, **kwargs):  # noqa: E501
-        """create_o_auth2_scope  # noqa: E501
+        """Create Oauth2scope  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -781,7 +781,7 @@ class AuthorizationServer(object):
             return data
 
     def create_o_auth2_scope_with_http_info(self, auth_server_id, body, **kwargs):  # noqa: E501
-        """create_o_auth2_scope  # noqa: E501
+        """Create Oauth2scope  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -846,7 +846,7 @@ class AuthorizationServer(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}/scopes', 'POST',
@@ -865,7 +865,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def deactivate_authorization_server(self, auth_server_id, **kwargs):  # noqa: E501
-        """deactivate_authorization_server  # noqa: E501
+        """Deactivate Authorization Server  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -887,7 +887,7 @@ class AuthorizationServer(object):
             return data
 
     def deactivate_authorization_server_with_http_info(self, auth_server_id, **kwargs):  # noqa: E501
-        """deactivate_authorization_server  # noqa: E501
+        """Deactivate Authorization Server  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -937,7 +937,7 @@ class AuthorizationServer(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}/lifecycle/deactivate', 'POST',
@@ -956,7 +956,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def deactivate_authorization_server_policy(self, auth_server_id, policy_id, **kwargs):  # noqa: E501
-        """deactivate_authorization_server_policy  # noqa: E501
+        """Deactivate Authorization Server Policy  # noqa: E501
 
         Deactivate Authorization Server Policy  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -979,7 +979,7 @@ class AuthorizationServer(object):
             return data
 
     def deactivate_authorization_server_policy_with_http_info(self, auth_server_id, policy_id, **kwargs):  # noqa: E501
-        """deactivate_authorization_server_policy  # noqa: E501
+        """Deactivate Authorization Server Policy  # noqa: E501
 
         Deactivate Authorization Server Policy  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1036,7 +1036,7 @@ class AuthorizationServer(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}/policies/{policyId}/lifecycle/deactivate', 'POST',
@@ -1055,7 +1055,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def deactivate_authorization_server_policy_rule(self, auth_server_id, policy_id, rule_id, **kwargs):  # noqa: E501
-        """deactivate_authorization_server_policy_rule  # noqa: E501
+        """Deactivate Authorization Server Policy Rule  # noqa: E501
 
         Deactivate Authorization Server Policy Rule  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1079,7 +1079,7 @@ class AuthorizationServer(object):
             return data
 
     def deactivate_authorization_server_policy_rule_with_http_info(self, auth_server_id, policy_id, rule_id, **kwargs):  # noqa: E501
-        """deactivate_authorization_server_policy_rule  # noqa: E501
+        """Deactivate Authorization Server Policy Rule  # noqa: E501
 
         Deactivate Authorization Server Policy Rule  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1143,7 +1143,7 @@ class AuthorizationServer(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}/policies/{policyId}/rules/{ruleId}/lifecycle/deactivate', 'POST',
@@ -1162,7 +1162,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def delete_authorization_server(self, auth_server_id, **kwargs):  # noqa: E501
-        """delete_authorization_server  # noqa: E501
+        """Delete Authorization Server  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1184,7 +1184,7 @@ class AuthorizationServer(object):
             return data
 
     def delete_authorization_server_with_http_info(self, auth_server_id, **kwargs):  # noqa: E501
-        """delete_authorization_server  # noqa: E501
+        """Delete Authorization Server  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1234,7 +1234,7 @@ class AuthorizationServer(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}', 'DELETE',
@@ -1253,7 +1253,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def delete_authorization_server_policy(self, auth_server_id, policy_id, **kwargs):  # noqa: E501
-        """delete_authorization_server_policy  # noqa: E501
+        """Delete Authorization Server Policy  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1276,7 +1276,7 @@ class AuthorizationServer(object):
             return data
 
     def delete_authorization_server_policy_with_http_info(self, auth_server_id, policy_id, **kwargs):  # noqa: E501
-        """delete_authorization_server_policy  # noqa: E501
+        """Delete Authorization Server Policy  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1333,7 +1333,7 @@ class AuthorizationServer(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}/policies/{policyId}', 'DELETE',
@@ -1352,7 +1352,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def delete_authorization_server_policy_rule(self, policy_id, auth_server_id, rule_id, **kwargs):  # noqa: E501
-        """delete_authorization_server_policy_rule  # noqa: E501
+        """Delete Authorization Server Policy Rule  # noqa: E501
 
         Deletes a Policy Rule defined in the specified Custom Authorization Server and Policy.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1376,7 +1376,7 @@ class AuthorizationServer(object):
             return data
 
     def delete_authorization_server_policy_rule_with_http_info(self, policy_id, auth_server_id, rule_id, **kwargs):  # noqa: E501
-        """delete_authorization_server_policy_rule  # noqa: E501
+        """Delete Authorization Server Policy Rule  # noqa: E501
 
         Deletes a Policy Rule defined in the specified Custom Authorization Server and Policy.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1440,7 +1440,7 @@ class AuthorizationServer(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}/policies/{policyId}/rules/{ruleId}', 'DELETE',
@@ -1459,7 +1459,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def delete_o_auth2_claim(self, auth_server_id, claim_id, **kwargs):  # noqa: E501
-        """delete_o_auth2_claim  # noqa: E501
+        """Delete Custom OAuth 2.0 Token Claim  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1482,7 +1482,7 @@ class AuthorizationServer(object):
             return data
 
     def delete_o_auth2_claim_with_http_info(self, auth_server_id, claim_id, **kwargs):  # noqa: E501
-        """delete_o_auth2_claim  # noqa: E501
+        """Delete Custom OAuth 2.0 Token Claim  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1539,7 +1539,7 @@ class AuthorizationServer(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}/claims/{claimId}', 'DELETE',
@@ -1558,7 +1558,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def delete_o_auth2_scope(self, auth_server_id, scope_id, **kwargs):  # noqa: E501
-        """delete_o_auth2_scope  # noqa: E501
+        """Delete Oauth2scope  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1581,7 +1581,7 @@ class AuthorizationServer(object):
             return data
 
     def delete_o_auth2_scope_with_http_info(self, auth_server_id, scope_id, **kwargs):  # noqa: E501
-        """delete_o_auth2_scope  # noqa: E501
+        """Delete Oauth2scope  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1638,7 +1638,7 @@ class AuthorizationServer(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}/scopes/{scopeId}', 'DELETE',
@@ -1657,7 +1657,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def get_authorization_server(self, auth_server_id, **kwargs):  # noqa: E501
-        """get_authorization_server  # noqa: E501
+        """Get Authorization Server  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1679,7 +1679,7 @@ class AuthorizationServer(object):
             return data
 
     def get_authorization_server_with_http_info(self, auth_server_id, **kwargs):  # noqa: E501
-        """get_authorization_server  # noqa: E501
+        """Get Authorization Server  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1733,7 +1733,7 @@ class AuthorizationServer(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}', 'GET',
@@ -1752,7 +1752,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def get_authorization_server_policy(self, auth_server_id, policy_id, **kwargs):  # noqa: E501
-        """get_authorization_server_policy  # noqa: E501
+        """Get Authorization Server Policy  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1775,7 +1775,7 @@ class AuthorizationServer(object):
             return data
 
     def get_authorization_server_policy_with_http_info(self, auth_server_id, policy_id, **kwargs):  # noqa: E501
-        """get_authorization_server_policy  # noqa: E501
+        """Get Authorization Server Policy  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1836,7 +1836,7 @@ class AuthorizationServer(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}/policies/{policyId}', 'GET',
@@ -1855,7 +1855,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def get_authorization_server_policy_rule(self, policy_id, auth_server_id, rule_id, **kwargs):  # noqa: E501
-        """get_authorization_server_policy_rule  # noqa: E501
+        """Get Authorization Server Policy Rule  # noqa: E501
 
         Returns a Policy Rule by ID that is defined in the specified Custom Authorization Server and Policy.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1879,7 +1879,7 @@ class AuthorizationServer(object):
             return data
 
     def get_authorization_server_policy_rule_with_http_info(self, policy_id, auth_server_id, rule_id, **kwargs):  # noqa: E501
-        """get_authorization_server_policy_rule  # noqa: E501
+        """Get Authorization Server Policy Rule  # noqa: E501
 
         Returns a Policy Rule by ID that is defined in the specified Custom Authorization Server and Policy.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1947,7 +1947,7 @@ class AuthorizationServer(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}/policies/{policyId}/rules/{ruleId}', 'GET',
@@ -1966,7 +1966,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def get_o_auth2_claim(self, auth_server_id, claim_id, **kwargs):  # noqa: E501
-        """get_o_auth2_claim  # noqa: E501
+        """Get Oauth2claim  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -1989,7 +1989,7 @@ class AuthorizationServer(object):
             return data
 
     def get_o_auth2_claim_with_http_info(self, auth_server_id, claim_id, **kwargs):  # noqa: E501
-        """get_o_auth2_claim  # noqa: E501
+        """Get Oauth2claim  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2050,7 +2050,7 @@ class AuthorizationServer(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}/claims/{claimId}', 'GET',
@@ -2069,7 +2069,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def get_o_auth2_scope(self, auth_server_id, scope_id, **kwargs):  # noqa: E501
-        """get_o_auth2_scope  # noqa: E501
+        """Get Oauth2scope  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2092,7 +2092,7 @@ class AuthorizationServer(object):
             return data
 
     def get_o_auth2_scope_with_http_info(self, auth_server_id, scope_id, **kwargs):  # noqa: E501
-        """get_o_auth2_scope  # noqa: E501
+        """Get Oauth2scope  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2153,7 +2153,7 @@ class AuthorizationServer(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}/scopes/{scopeId}', 'GET',
@@ -2172,7 +2172,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def get_refresh_token_for_authorization_server_and_client(self, auth_server_id, client_id, token_id, **kwargs):  # noqa: E501
-        """get_refresh_token_for_authorization_server_and_client  # noqa: E501
+        """Get Refresh Token for Authorization Server and Client  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2197,7 +2197,7 @@ class AuthorizationServer(object):
             return data
 
     def get_refresh_token_for_authorization_server_and_client_with_http_info(self, auth_server_id, client_id, token_id, **kwargs):  # noqa: E501
-        """get_refresh_token_for_authorization_server_and_client  # noqa: E501
+        """Get Refresh Token for Authorization Server and Client  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2268,7 +2268,7 @@ class AuthorizationServer(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}/clients/{clientId}/tokens/{tokenId}', 'GET',
@@ -2287,7 +2287,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def list_authorization_server_keys(self, auth_server_id, **kwargs):  # noqa: E501
-        """list_authorization_server_keys  # noqa: E501
+        """List Authorization Server Keys  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2309,7 +2309,7 @@ class AuthorizationServer(object):
             return data
 
     def list_authorization_server_keys_with_http_info(self, auth_server_id, **kwargs):  # noqa: E501
-        """list_authorization_server_keys  # noqa: E501
+        """List Authorization Server Keys  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2363,7 +2363,7 @@ class AuthorizationServer(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}/credentials/keys', 'GET',
@@ -2382,7 +2382,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def list_authorization_server_policies(self, auth_server_id, **kwargs):  # noqa: E501
-        """list_authorization_server_policies  # noqa: E501
+        """List Authorization Server Policies  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2404,7 +2404,7 @@ class AuthorizationServer(object):
             return data
 
     def list_authorization_server_policies_with_http_info(self, auth_server_id, **kwargs):  # noqa: E501
-        """list_authorization_server_policies  # noqa: E501
+        """List Authorization Server Policies  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2458,7 +2458,7 @@ class AuthorizationServer(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}/policies', 'GET',
@@ -2477,7 +2477,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def list_authorization_server_policy_rules(self, policy_id, auth_server_id, **kwargs):  # noqa: E501
-        """list_authorization_server_policy_rules  # noqa: E501
+        """List Authorization Server Policy Rules  # noqa: E501
 
         Enumerates all policy rules for the specified Custom Authorization Server and Policy.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2500,7 +2500,7 @@ class AuthorizationServer(object):
             return data
 
     def list_authorization_server_policy_rules_with_http_info(self, policy_id, auth_server_id, **kwargs):  # noqa: E501
-        """list_authorization_server_policy_rules  # noqa: E501
+        """List Authorization Server Policy Rules  # noqa: E501
 
         Enumerates all policy rules for the specified Custom Authorization Server and Policy.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2561,7 +2561,7 @@ class AuthorizationServer(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}/policies/{policyId}/rules', 'GET',
@@ -2580,7 +2580,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def list_authorization_servers(self, **kwargs):  # noqa: E501
-        """list_authorization_servers  # noqa: E501
+        """List Authorization Servers  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2604,7 +2604,7 @@ class AuthorizationServer(object):
             return data
 
     def list_authorization_servers_with_http_info(self, **kwargs):  # noqa: E501
-        """list_authorization_servers  # noqa: E501
+        """List Authorization Servers  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2660,7 +2660,7 @@ class AuthorizationServer(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers', 'GET',
@@ -2679,7 +2679,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def list_o_auth2_claims(self, auth_server_id, **kwargs):  # noqa: E501
-        """list_o_auth2_claims  # noqa: E501
+        """List Custom OAuth 2.0 Token Claims  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2701,7 +2701,7 @@ class AuthorizationServer(object):
             return data
 
     def list_o_auth2_claims_with_http_info(self, auth_server_id, **kwargs):  # noqa: E501
-        """list_o_auth2_claims  # noqa: E501
+        """List Custom OAuth 2.0 Token Claims  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2755,7 +2755,7 @@ class AuthorizationServer(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}/claims', 'GET',
@@ -2774,7 +2774,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def list_o_auth2_clients_for_authorization_server(self, auth_server_id, **kwargs):  # noqa: E501
-        """list_o_auth2_clients_for_authorization_server  # noqa: E501
+        """List Oauth2clients for Authorization Server  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2796,7 +2796,7 @@ class AuthorizationServer(object):
             return data
 
     def list_o_auth2_clients_for_authorization_server_with_http_info(self, auth_server_id, **kwargs):  # noqa: E501
-        """list_o_auth2_clients_for_authorization_server  # noqa: E501
+        """List Oauth2clients for Authorization Server  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2850,7 +2850,7 @@ class AuthorizationServer(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}/clients', 'GET',
@@ -2869,7 +2869,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def list_o_auth2_scopes(self, auth_server_id, **kwargs):  # noqa: E501
-        """list_o_auth2_scopes  # noqa: E501
+        """List Oauth2scopes  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2895,7 +2895,7 @@ class AuthorizationServer(object):
             return data
 
     def list_o_auth2_scopes_with_http_info(self, auth_server_id, **kwargs):  # noqa: E501
-        """list_o_auth2_scopes  # noqa: E501
+        """List Oauth2scopes  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -2961,7 +2961,7 @@ class AuthorizationServer(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}/scopes', 'GET',
@@ -2980,7 +2980,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def list_refresh_tokens_for_authorization_server_and_client(self, auth_server_id, client_id, **kwargs):  # noqa: E501
-        """list_refresh_tokens_for_authorization_server_and_client  # noqa: E501
+        """List Refresh Tokens for Authorization Server and Client  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3006,7 +3006,7 @@ class AuthorizationServer(object):
             return data
 
     def list_refresh_tokens_for_authorization_server_and_client_with_http_info(self, auth_server_id, client_id, **kwargs):  # noqa: E501
-        """list_refresh_tokens_for_authorization_server_and_client  # noqa: E501
+        """List Refresh Tokens for Authorization Server and Client  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3076,7 +3076,7 @@ class AuthorizationServer(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}/clients/{clientId}/tokens', 'GET',
@@ -3095,7 +3095,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def revoke_refresh_token_for_authorization_server_and_client(self, auth_server_id, client_id, token_id, **kwargs):  # noqa: E501
-        """revoke_refresh_token_for_authorization_server_and_client  # noqa: E501
+        """Revoke Refresh Token for Authorization Server and Client  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3119,7 +3119,7 @@ class AuthorizationServer(object):
             return data
 
     def revoke_refresh_token_for_authorization_server_and_client_with_http_info(self, auth_server_id, client_id, token_id, **kwargs):  # noqa: E501
-        """revoke_refresh_token_for_authorization_server_and_client  # noqa: E501
+        """Revoke Refresh Token for Authorization Server and Client  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3183,7 +3183,7 @@ class AuthorizationServer(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}/clients/{clientId}/tokens/{tokenId}', 'DELETE',
@@ -3202,7 +3202,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def revoke_refresh_tokens_for_authorization_server_and_client(self, auth_server_id, client_id, **kwargs):  # noqa: E501
-        """revoke_refresh_tokens_for_authorization_server_and_client  # noqa: E501
+        """Revoke Refresh Tokens for Authorization Server and Client  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3225,7 +3225,7 @@ class AuthorizationServer(object):
             return data
 
     def revoke_refresh_tokens_for_authorization_server_and_client_with_http_info(self, auth_server_id, client_id, **kwargs):  # noqa: E501
-        """revoke_refresh_tokens_for_authorization_server_and_client  # noqa: E501
+        """Revoke Refresh Tokens for Authorization Server and Client  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3282,7 +3282,7 @@ class AuthorizationServer(object):
 
         body_params = None
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}/clients/{clientId}/tokens', 'DELETE',
@@ -3301,7 +3301,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def rotate_authorization_server_keys(self, auth_server_id, body, **kwargs):  # noqa: E501
-        """rotate_authorization_server_keys  # noqa: E501
+        """Rotate Authorization Server Keys  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3324,7 +3324,7 @@ class AuthorizationServer(object):
             return data
 
     def rotate_authorization_server_keys_with_http_info(self, auth_server_id, body, **kwargs):  # noqa: E501
-        """rotate_authorization_server_keys  # noqa: E501
+        """Rotate Authorization Server Keys  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3389,7 +3389,7 @@ class AuthorizationServer(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}/credentials/lifecycle/keyRotate', 'POST',
@@ -3408,7 +3408,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def update_authorization_server(self, auth_server_id, body, **kwargs):  # noqa: E501
-        """update_authorization_server  # noqa: E501
+        """Update Authorization Server  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3431,7 +3431,7 @@ class AuthorizationServer(object):
             return data
 
     def update_authorization_server_with_http_info(self, auth_server_id, body, **kwargs):  # noqa: E501
-        """update_authorization_server  # noqa: E501
+        """Update Authorization Server  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3496,7 +3496,7 @@ class AuthorizationServer(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}', 'PUT',
@@ -3515,7 +3515,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def update_authorization_server_policy(self, auth_server_id, policy_id, body, **kwargs):  # noqa: E501
-        """update_authorization_server_policy  # noqa: E501
+        """Update Authorization Server Policy  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3539,7 +3539,7 @@ class AuthorizationServer(object):
             return data
 
     def update_authorization_server_policy_with_http_info(self, auth_server_id, policy_id, body, **kwargs):  # noqa: E501
-        """update_authorization_server_policy  # noqa: E501
+        """Update Authorization Server Policy  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3611,7 +3611,7 @@ class AuthorizationServer(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}/policies/{policyId}', 'PUT',
@@ -3630,7 +3630,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def update_authorization_server_policy_rule(self, policy_id, auth_server_id, rule_id, body, **kwargs):  # noqa: E501
-        """update_authorization_server_policy_rule  # noqa: E501
+        """Update Authorization Server Policy Rule  # noqa: E501
 
         Updates the configuration of the Policy Rule defined in the specified Custom Authorization Server and Policy.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3655,7 +3655,7 @@ class AuthorizationServer(object):
             return data
 
     def update_authorization_server_policy_rule_with_http_info(self, policy_id, auth_server_id, rule_id, body, **kwargs):  # noqa: E501
-        """update_authorization_server_policy_rule  # noqa: E501
+        """Update Authorization Server Policy Rule  # noqa: E501
 
         Updates the configuration of the Policy Rule defined in the specified Custom Authorization Server and Policy.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3734,7 +3734,7 @@ class AuthorizationServer(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}/policies/{policyId}/rules/{ruleId}', 'PUT',
@@ -3753,7 +3753,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def update_o_auth2_claim(self, auth_server_id, claim_id, body, **kwargs):  # noqa: E501
-        """update_o_auth2_claim  # noqa: E501
+        """Update Custom OAuth 2.0 Token Claim  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3777,7 +3777,7 @@ class AuthorizationServer(object):
             return data
 
     def update_o_auth2_claim_with_http_info(self, auth_server_id, claim_id, body, **kwargs):  # noqa: E501
-        """update_o_auth2_claim  # noqa: E501
+        """Update Custom OAuth 2.0 Token Claim  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3849,7 +3849,7 @@ class AuthorizationServer(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}/claims/{claimId}', 'PUT',
@@ -3868,7 +3868,7 @@ class AuthorizationServer(object):
             collection_formats=collection_formats)
 
     def update_o_auth2_scope(self, auth_server_id, scope_id, body, **kwargs):  # noqa: E501
-        """update_o_auth2_scope  # noqa: E501
+        """Update Oauth2scope  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3892,7 +3892,7 @@ class AuthorizationServer(object):
             return data
 
     def update_o_auth2_scope_with_http_info(self, auth_server_id, scope_id, body, **kwargs):  # noqa: E501
-        """update_o_auth2_scope  # noqa: E501
+        """Update Oauth2scope  # noqa: E501
 
         Success  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -3964,7 +3964,7 @@ class AuthorizationServer(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/authorizationServers/{authServerId}/scopes/{scopeId}', 'PUT',

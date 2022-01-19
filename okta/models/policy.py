@@ -62,7 +62,7 @@ class Policy(object):
     discriminator_value_class_map = {
             'ACCESS_POLICY'.lower(): 'AccessPolicy',
             'IDP_DISCOVERY'.lower(): 'IdentityProviderPolicy',
-            'OAUTH_AUTHORIZATION_POLICY'.lower(): 'OAuthAuthorizationPolicy',
+            'OAUTH_AUTHORIZATION_POLICY'.lower(): 'AuthorizationServerPolicy',
             'OKTA_SIGN_ON'.lower(): 'OktaSignOnPolicy',
             'PASSWORD'.lower(): 'PasswordPolicy',
             'PROFILE_ENROLLMENT'.lower(): 'ProfileEnrollmentPolicy',

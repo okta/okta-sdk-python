@@ -109,7 +109,7 @@ class ProfileMapping(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/mappings/{mappingId}', 'GET',
@@ -128,7 +128,7 @@ class ProfileMapping(object):
             collection_formats=collection_formats)
 
     def list_profile_mappings(self, **kwargs):  # noqa: E501
-        """list_profile_mappings  # noqa: E501
+        """List Profile Mappings  # noqa: E501
 
         Enumerates Profile Mappings in your organization with pagination.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -153,7 +153,7 @@ class ProfileMapping(object):
             return data
 
     def list_profile_mappings_with_http_info(self, **kwargs):  # noqa: E501
-        """list_profile_mappings  # noqa: E501
+        """List Profile Mappings  # noqa: E501
 
         Enumerates Profile Mappings in your organization with pagination.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
@@ -212,7 +212,7 @@ class ProfileMapping(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/mappings', 'GET',
@@ -319,7 +319,7 @@ class ProfileMapping(object):
             ['application/json'])  # noqa: E501
 
         # Authentication setting
-        auth_settings = ['api_token']  # noqa: E501
+        auth_settings = ['api_token', 'oauth2']  # noqa: E501
 
         return self.api_client.call_api(
             '/api/v1/mappings/{mappingId}', 'POST',
