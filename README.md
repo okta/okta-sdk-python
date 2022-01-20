@@ -887,7 +887,7 @@ loop.run_until_complete(main())
 > Feature appears in version 1.5.0
 
 SDK v1.5.0 introduces logging for debug purposes.
-Logs are disabled by default, thus SDK behavior remains the same. Logging should be enabled explicitly via client configuration:
+Logs are disabled by default, thus SDK behavior remains the same. Logging should be enabled explicitly via client configuration or via a [configuration file](#configuration-reference):
 
 ```py
 from okta.client import Client as OktaClient
@@ -897,7 +897,7 @@ config = {"logging": {"enabled": True}}
 client = OktaClient(config)
 ```
 
-SDK utilizes standard python library `logging`. By default, log level INFO is set. You can set another log level via config:
+SDK utilizes the standard Python library `logging`. By default, log level INFO is set. You can set another log level via config:
 
 ```py
 from okta.client import Client as OktaClient
@@ -961,6 +961,9 @@ okta:
     requestTimeout: 0 # seconds
     rateLimit:
       maxRetries: 4
+    logging:
+      enabled: true
+      logLevel: INFO
 ```
 
 When you use OAuth 2.0 the full YAML configuration looks like:
@@ -989,6 +992,9 @@ okta:
     requestTimeout: 0 # seconds
     rateLimit:
       maxRetries: 4
+    logging:
+      enabled: true
+      logLevel: INFO
 ```
 
 > If a proxy is not going to be used for the SDK, you may omit the `okta.client.proxy` section from your `okta.yaml` file
