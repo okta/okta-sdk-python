@@ -134,14 +134,7 @@ class OktaAPIResponse():
         if error:
             return (None, error)
         if self._type is not None:
-            result = []
-            for item in next_page:
-                result.append(
-                    self._type(
-                        APIClient.form_response_body(item)
-                    )
-                )
-            return (result, None)
+            return (self._request_executor.deserialize(next_page, self._type), None)
 
         return (next_page, error)
 
@@ -164,7 +157,7 @@ class OktaAPIResponse():
                 yield (None, error)
 
             req, res_details, resp_body, error = await \
-                self._request_executor.fire_request(next_request)
+                self._request_executor.execute(next_request)
             if error:
                 # Return None if error and set next to none
                 self._next = None
@@ -176,4 +169,5 @@ class OktaAPIResponse():
                     self._request_executor, req, res_details, resp_body)
                 self._next = next_response._next
                 # yield next page
-                yield (next_response.get_body(), None)
+                res_details.data = resp_body
+                yield (res_details, None)

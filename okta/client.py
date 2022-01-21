@@ -26,11 +26,6 @@ from .config.config_validator import ConfigValidator
 from .cache.no_op_cache import NoOpCache
 from .cache.okta_cache import OktaCache
 from .helpers import to_snake_case
-from .request_executor import RequestExecutor
-
-# TODO: consider creating a package (with or separate)
-#parent_dir = os.path.dirname(os.path.realpath(__name__))
-#sys.path.insert(0, parent_dir)
 
 import okta.api as swagger_api
 
