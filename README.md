@@ -1039,6 +1039,27 @@ loop = asyncio.get_event_loop()
 loop.run_until_complete(main())
 ```
 
+Http session was introduced within v2.3.0 to allow custom SSL contest. Starting with SDK v2.4.0 you can reuse http session to gain better performance:
+
+```py
+import okta.client
+import asyncio
+import aiohttp
+
+
+async def main():
+    async with aiohttp.ClientSession() as session:
+        client = okta.client.Client({"session": session})
+
+        # perform all queries within given session
+        users, okta_resp, err = await client.list_users()
+        user, okta_resp, err = await client.get_user(users[0].id)
+
+
+loop = asyncio.get_event_loop()
+loop.run_until_complete(main())
+```
+
 ## Rate Limiting
 
 The Okta API will return 429 responses if too many requests are made within a given time. Please see [Rate Limiting at Okta][rate-limiting-okta] for a complete list of which endpoints are rate limited. When a 429 error is received, the X-Rate-Limit-Reset header will tell you the time at which you can retry. This section discusses the method for handling rate limiting with this SDK.

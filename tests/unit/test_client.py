@@ -892,3 +892,18 @@ def test_client_ssl_context(monkeypatch, mocker):
     asyncio.run(client.list_users())
 
     assert mock_http_request.request_info['ssl_context'] == mock_ssl_context
+
+
+def test_client_session(mocker):
+    org_url = "https://test.okta.com"
+    token = "TOKEN"
+    # no session
+    config = {'orgUrl': org_url, 'token': token}
+    client = OktaClient(config)
+    assert client._request_executor._http_client._session is None
+
+    # with session
+    session = mocker.Mock()
+    config = {'orgUrl': org_url, 'token': token, 'session': session}
+    client = OktaClient(config)
+    assert client._request_executor._http_client._session is session

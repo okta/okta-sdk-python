@@ -143,7 +143,8 @@ class Client(
             user_config.get("requestExecutor", RequestExecutor)(
                 self._config,
                 cache,
-                user_config.get("httpClient", None))
+                user_config.get("httpClient", None),
+                session=user_config.get("session"))
 
         # set private key variables
         if self._authorization_mode == 'PrivateKey':

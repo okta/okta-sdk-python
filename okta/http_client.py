@@ -19,7 +19,7 @@ class HTTPClient:
     """
     raise_exception = False
 
-    def __init__(self, http_config={}):
+    def __init__(self, http_config={}, session=None):
         # Get headers from Request Executor
         self._default_headers = http_config["headers"]
         # Create timeout for all HTTP requests
@@ -35,6 +35,7 @@ class HTTPClient:
             self._ssl_context = http_config["sslContext"]
         else:
             self._ssl_context = None
+        self._session = session
 
     async def send_request(self, request):
         """
@@ -75,12 +76,21 @@ class HTTPClient:
             if self._ssl_context:
                 params['ssl_context'] = self._ssl_context
             # Fire request
-            async with aiohttp.ClientSession() as session:
-                async with session.request(**params) as response:
+            if self._session is not None:
+                logger.debug('Request with re-usable session.')
+                async with self._session.request(**params) as response:
                     return (response.request_info,
                             response,
                             await response.text(),
                             None)
+            else:
+                logger.debug('Request without re-usable session.')
+                async with aiohttp.ClientSession() as session:
+                    async with session.request(**params) as response:
+                        return (response.request_info,
+                                response,
+                                await response.text(),
+                                None)
         except (aiohttp.ClientError, asyncio.TimeoutError) as error:
             # Return error if arises
             logger.exception(error)
