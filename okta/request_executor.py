@@ -21,7 +21,7 @@ class RequestExecutor:
     RETRY_COUNT_HEADER = 'X-Okta-Retry-Count'
     RETRY_FOR_HEADER = 'X-Okta-Retry-For'
 
-    def __init__(self, config, cache, http_client=None, session=None):
+    def __init__(self, config, cache, http_client=None):
         """
         Constructor for Request Executor object for Okta Client
 
@@ -69,9 +69,7 @@ class RequestExecutor:
             'headers': self._default_headers,
             'proxy': self._config["client"].get("proxy"),
             'sslContext': self._config["client"].get("sslContext"),
-        },
-            session=session
-        )
+        })
         HTTPClient.raise_exception = \
             self._config['client'].get("raiseException", False)
         self._custom_headers = {}
@@ -340,6 +338,9 @@ class RequestExecutor:
 
     def set_custom_headers(self, headers):
         self._custom_headers.update(headers)
+
+    def set_session(self, session):
+        self._http_client.set_session(session)
 
     def clear_custom_headers(self):
         self._custom_headers = {}

@@ -17,6 +17,7 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
+import aiohttp
 import logging
 
 from okta.config.config_setter import ConfigSetter
@@ -143,8 +144,7 @@ class Client(
             user_config.get("requestExecutor", RequestExecutor)(
                 self._config,
                 cache,
-                user_config.get("httpClient", None),
-                session=user_config.get("session"))
+                user_config.get("httpClient", None))
 
         # set private key variables
         if self._authorization_mode == 'PrivateKey':
@@ -157,6 +157,17 @@ class Client(
         if self._config["client"]["logging"]["enabled"] is True:
             logger = logging.getLogger('okta-sdk-python')
             logger.disabled = False
+
+    async def __aenter__(self):
+        """Automatically create and set session within context manager."""
+        self._session = aiohttp.ClientSession()
+        self._request_executor.set_session(self._session)
+        return self
+
+    async def __aexit__(self, exc_type, exc_val, exc_tb):
+        """Automatically close session within context manager."""
+        await self._session.close()
+
     """
     Getters
     """

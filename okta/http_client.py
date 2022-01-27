@@ -19,7 +19,7 @@ class HTTPClient:
     """
     raise_exception = False
 
-    def __init__(self, http_config={}, session=None):
+    def __init__(self, http_config={}):
         # Get headers from Request Executor
         self._default_headers = http_config["headers"]
         # Create timeout for all HTTP requests
@@ -35,7 +35,17 @@ class HTTPClient:
             self._ssl_context = http_config["sslContext"]
         else:
             self._ssl_context = None
+        self._session = None
+
+    def set_session(self, session):
+        """Set Client Session to improve performance by reusing session.
+
+        Session should be closed manually or within context manager.
+        """
         self._session = session
+
+    async def close_session(self):
+        await self._session.close()
 
     async def send_request(self, request):
         """

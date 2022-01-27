@@ -1,5 +1,6 @@
 import aiohttp
 import asyncio
+import aiohttp
 import logging
 from aiohttp.client_reqrep import ConnectionKey
 from ssl import SSLCertVerificationError
@@ -894,7 +895,8 @@ def test_client_ssl_context(monkeypatch, mocker):
     assert mock_http_request.request_info['ssl_context'] == mock_ssl_context
 
 
-def test_client_session(mocker):
+@pytest.mark.asyncio
+async def test_client_session(mocker):
     org_url = "https://test.okta.com"
     token = "TOKEN"
     # no session
@@ -903,7 +905,6 @@ def test_client_session(mocker):
     assert client._request_executor._http_client._session is None
 
     # with session
-    session = mocker.Mock()
-    config = {'orgUrl': org_url, 'token': token, 'session': session}
-    client = OktaClient(config)
-    assert client._request_executor._http_client._session is session
+    config = {'orgUrl': org_url, 'token': token}
+    async with OktaClient(config) as client:
+        assert isinstance(client._request_executor._http_client._session, aiohttp.ClientSession)
