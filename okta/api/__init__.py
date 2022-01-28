@@ -21,6 +21,7 @@ from okta.api.policy_api import Policy
 from okta.api.profile_mapping_api import ProfileMapping
 from okta.api.schema_api import Schema
 from okta.api.session_api import Session
+from okta.api.subscription_api import Subscription
 from okta.api.system_log_api import SystemLog
 from okta.api.template_api import Template
 from okta.api.threat_insight_api import ThreatInsight

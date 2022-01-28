@@ -393,9 +393,13 @@ class ApiClientAdapter(ApiClient):
         elif klass == object:
             return self.__deserialize_object(data)
         elif klass == datetime.date:
-            return self.__deserialize_date(data)
+            # Temporary disable to keep backward compatibility
+            # return self.__deserialize_date(data)
+            return data
         elif klass == datetime.datetime:
-            return self.__deserialize_datatime(data)
+            # Temporary disable to keep backward compatibility
+            # return self.__deserialize_datatime(data)
+            return data
         else:
             return self.__deserialize_model(data, klass)
 

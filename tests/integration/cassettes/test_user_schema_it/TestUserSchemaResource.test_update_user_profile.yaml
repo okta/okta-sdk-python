@@ -107,8 +107,8 @@ interactions:
     url: https://test.okta.com/api/v1/meta/schemas/user/default
 - request:
     body: '{"$schema": "http://json-schema.org/draft-04/schema#", "_links": {"self":
-      {"rel": "self", "href": "https://dev-4942226.okta.com/api/v1/meta/schemas/user/osc8hu2tnV8drfqhC5d5",
-      "method": "GET"}, "type": {"rel": "type", "href": "https://dev-4942226.okta.com/api/v1/meta/types/user/oty8hu2tnV8drfqhC5d5",
+      {"rel": "self", "href": "https://test.okta.com/api/v1/meta/schemas/user/osc8hu2tnV8drfqhC5d5",
+      "method": "GET"}, "type": {"rel": "type", "href": "https://test.okta.com/api/v1/meta/types/user/oty8hu2tnV8drfqhC5d5",
       "method": "GET"}}, "created": "2020-10-11T11:35:22.000Z", "definitions": {"base":
       {"id": "#base", "properties": {"city": {"mutability": "READ_WRITE", "permissions":
       [{"action": "HIDE", "principal": "SELF"}], "scope": "NONE", "title": "City",
@@ -180,7 +180,7 @@ interactions:
       {"description": "test custom user attribute", "maxLength": 20, "minLength":
       1, "permissions": [{"action": "READ_WRITE", "principal": "SELF"}], "title":
       "Test Custom User Attribute", "type": "string"}}, "required": [], "type": "object"}},
-      "id": "https://dev-4942226.okta.com/meta/schemas/user/default", "lastUpdated":
+      "id": "https://test.okta.com/meta/schemas/user/default", "lastUpdated":
       "2021-04-05T15:07:31.000Z", "name": "user", "properties": {"profile": {"allOf":
       [{"$ref": "#/definitions/custom"}, {"$ref": "#/definitions/base"}]}}, "title":
       "User", "type": "object"}'
@@ -291,8 +291,8 @@ interactions:
     url: https://test.okta.com/api/v1/meta/schemas/user/default
 - request:
     body: '{"$schema": "http://json-schema.org/draft-04/schema#", "_links": {"self":
-      {"rel": "self", "href": "https://dev-4942226.okta.com/api/v1/meta/schemas/user/osc8hu2tnV8drfqhC5d5",
-      "method": "GET"}, "type": {"rel": "type", "href": "https://dev-4942226.okta.com/api/v1/meta/types/user/oty8hu2tnV8drfqhC5d5",
+      {"rel": "self", "href": "https://test.okta.com/api/v1/meta/schemas/user/osc8hu2tnV8drfqhC5d5",
+      "method": "GET"}, "type": {"rel": "type", "href": "https://test.okta.com/api/v1/meta/types/user/oty8hu2tnV8drfqhC5d5",
       "method": "GET"}}, "created": "2020-10-11T11:35:22.000Z", "definitions": {"base":
       {"id": "#base", "properties": {"city": {"mutability": "READ_WRITE", "permissions":
       [{"action": "HIDE", "principal": "SELF"}], "scope": "NONE", "title": "City",
@@ -368,7 +368,7 @@ interactions:
       "NONE", "permissions": [{"principal": "SELF", "action": "READ_ONLY"}]}, "someSnakeCaseAttr":
       {"title": "some_snake_case_attr", "type": "string", "mutability": "READ_WRITE",
       "scope": "NONE", "permissions": [{"principal": "SELF", "action": "READ_ONLY"}]},
-      "testCustomAttribute": null}, "required": [], "type": "object"}}, "id": "https://dev-4942226.okta.com/meta/schemas/user/default",
+      "testCustomAttribute": null}, "required": [], "type": "object"}}, "id": "https://test.okta.com/meta/schemas/user/default",
       "lastUpdated": "2021-04-05T15:10:34.000Z", "name": "user", "properties": {"profile":
       {"allOf": [{"$ref": "#/definitions/custom"}, {"$ref": "#/definitions/base"}]}},
       "title": "User", "type": "object"}'
