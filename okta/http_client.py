@@ -35,6 +35,17 @@ class HTTPClient:
             self._ssl_context = http_config["sslContext"]
         else:
             self._ssl_context = None
+        self._session = None
+
+    def set_session(self, session):
+        """Set Client Session to improve performance by reusing session.
+
+        Session should be closed manually or within context manager.
+        """
+        self._session = session
+
+    async def close_session(self):
+        await self._session.close()
 
     async def send_request(self, request):
         """
@@ -75,12 +86,21 @@ class HTTPClient:
             if self._ssl_context:
                 params['ssl_context'] = self._ssl_context
             # Fire request
-            async with aiohttp.ClientSession() as session:
-                async with session.request(**params) as response:
+            if self._session is not None:
+                logger.debug('Request with re-usable session.')
+                async with self._session.request(**params) as response:
                     return (response.request_info,
                             response,
                             await response.text(),
                             None)
+            else:
+                logger.debug('Request without re-usable session.')
+                async with aiohttp.ClientSession() as session:
+                    async with session.request(**params) as response:
+                        return (response.request_info,
+                                response,
+                                await response.text(),
+                                None)
         except (aiohttp.ClientError, asyncio.TimeoutError) as error:
             # Return error if arises
             logger.exception(error)
