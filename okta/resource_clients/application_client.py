@@ -21,10 +21,14 @@ from urllib.parse import urlencode
 from okta.http_client import HTTPClient
 from okta.models.application\
     import Application
+from okta.models.provisioning_connection\
+    import ProvisioningConnection
 from okta.models.csr\
     import Csr
 from okta.models.json_web_key\
     import JsonWebKey
+from okta.models.application_feature\
+    import ApplicationFeature
 from okta.models.o_auth_2_scope_consent_grant\
     import OAuth2ScopeConsentGrant
 from okta.models.application_group_assignment\
@@ -289,6 +293,174 @@ class ApplicationClient(APIClient):
         except Exception as error:
             return (None, response, error)
         return (result, response, None)
+
+    async def get_default_provisioning_connection_for_application(
+            self, appId,
+            keep_empty_params=False
+    ):
+        """
+        Get default Provisioning Connection for application
+        Args:
+            app_id {str}
+        Returns:
+            ProvisioningConnection
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/apps/{appId}/connections/default
+            """)
+
+        body = {}
+        headers = {}
+        form = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, ProvisioningConnection)
+
+        if error:
+            return (None, response, error)
+
+        try:
+            result = ProvisioningConnection(
+                self.form_response_body(response.get_body())
+            )
+        except Exception as error:
+            return (None, response, error)
+        return (result, response, None)
+
+    async def set_default_provisioning_connection_for_application(
+            self, appId, provisioning_connection_request, query_params={},
+            keep_empty_params=False
+    ):
+        """
+        Set default Provisioning Connection for application
+        Args:
+            app_id {str}
+            {provisioning_connection_request}
+            query_params {dict}: Map of query parameters for request
+            [query_params.activate] {str}
+        Returns:
+            ProvisioningConnection
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/apps/{appId}/connections/default
+            """)
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
+
+        if isinstance(provisioning_connection_request, dict):
+            body = provisioning_connection_request
+        else:
+            body = provisioning_connection_request.as_dict()
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+        form = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, ProvisioningConnection)
+
+        if error:
+            return (None, response, error)
+
+        try:
+            result = ProvisioningConnection(
+                self.form_response_body(response.get_body())
+            )
+        except Exception as error:
+            return (None, response, error)
+        return (result, response, None)
+
+    async def activate_default_provisioning_connection_for_application(
+            self, appId,
+            keep_empty_params=False
+    ):
+        """
+        Activates the default Provisioning Connection for an ap
+        plication.
+        Args:
+            app_id {str}
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/apps/{appId}/connections/default/lifecycle
+                /activate
+            """)
+
+        body = {}
+        headers = {}
+        form = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (response, error)
+
+        return (response, None)
+
+    async def deactivate_default_provisioning_connection_for_application(
+            self, appId,
+            keep_empty_params=False
+    ):
+        """
+        Deactivates the default Provisioning Connection for an
+        application.
+        Args:
+            app_id {str}
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/apps/{appId}/connections/default/lifecycle
+                /deactivate
+            """)
+
+        body = {}
+        headers = {}
+        form = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (response, error)
+
+        return (response, None)
 
     async def list_csrs_for_application(
             self, appId,
@@ -905,6 +1077,143 @@ class ApplicationClient(APIClient):
             return (None, response, error)
         return (result, response, None)
 
+    async def list_features_for_application(
+            self, appId,
+            keep_empty_params=False
+    ):
+        """
+        List Features for application
+        Args:
+            app_id {str}
+        Returns:
+            list: Collection of ApplicationFeature instances.
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/apps/{appId}/features
+            """)
+
+        body = {}
+        headers = {}
+        form = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, ApplicationFeature)
+
+        if error:
+            return (None, response, error)
+
+        try:
+            result = []
+            for item in response.get_body():
+                result.append(ApplicationFeature(
+                    self.form_response_body(item)
+                    ))
+        except Exception as error:
+            return (None, response, error)
+        return (result, response, None)
+
+    async def get_feature_for_application(
+            self, appId, name,
+            keep_empty_params=False
+    ):
+        """
+        Fetches a Feature object for an application.
+        Args:
+            app_id {str}
+            name {str}
+        Returns:
+            ApplicationFeature
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/apps/{appId}/features/{name}
+            """)
+
+        body = {}
+        headers = {}
+        form = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, ApplicationFeature)
+
+        if error:
+            return (None, response, error)
+
+        try:
+            result = ApplicationFeature(
+                self.form_response_body(response.get_body())
+            )
+        except Exception as error:
+            return (None, response, error)
+        return (result, response, None)
+
+    async def update_feature_for_application(
+            self, appId, name, capabilities_object,
+            keep_empty_params=False
+    ):
+        """
+        Updates a Feature object for an application.
+        Args:
+            app_id {str}
+            name {str}
+            {capabilities_object}
+        Returns:
+            ApplicationFeature
+        """
+        http_method = "put".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/apps/{appId}/features/{name}
+            """)
+
+        if isinstance(capabilities_object, dict):
+            body = capabilities_object
+        else:
+            body = capabilities_object.as_dict()
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+        form = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, ApplicationFeature)
+
+        if error:
+            return (None, response, error)
+
+        try:
+            result = ApplicationFeature(
+                self.form_response_body(response.get_body())
+            )
+        except Exception as error:
+            return (None, response, error)
+        return (result, response, None)
+
     async def list_scope_consent_grants(
             self, appId, query_params={},
             keep_empty_params=False
@@ -1326,6 +1635,42 @@ class ApplicationClient(APIClient):
         body = {}
         headers = {}
         form = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (response, error)
+
+        return (response, None)
+
+    async def upload_application_logo(
+            self, appId, file,
+            keep_empty_params=False
+    ):
+        """
+        Update the logo for an application.
+        Args:
+            app_id {str}
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/apps/{appId}/logo
+            """)
+
+        body = {}
+        headers = {}
+        form = {
+            "file": file,
+        }
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
