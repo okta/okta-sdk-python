@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@okta/openapi@^2.9.2":
-  "integrity" "sha512-GhUDr7gawiGz5yGKETqReSgt6PvbKMHnFOxs4Gu/mG6tQAruJ7d42Y6ZK3JA2e0/6bBlxc7IsNfukaCVcOZALg=="
-  "resolved" "https://registry.npmjs.org/@okta/openapi/-/openapi-2.9.2.tgz"
-  "version" "2.9.2"
+"@okta/openapi@^2.10.0":
+  "integrity" "sha512-QYdQIHy4zGE4MqlAcGMqeuTvH1bPzqlf8rVd0tlKKSbb1UWtu+HSkNnFJj005fE3+OX++Z0YvumygYhpylXsxQ=="
+  "resolved" "https://registry.npmjs.org/@okta/openapi/-/openapi-2.10.0.tgz"
+  "version" "2.10.0"
   dependencies:
     "commander" "2.9.0"
     "fs-extra" "3.0.1"
@@ -231,9 +231,11 @@
   "version" "2.6.1"
 
 "node-fetch@^2.6.0":
-  "integrity" "sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw=="
-  "resolved" "https://registry.npmjs.org/node-fetch/-/node-fetch-2.6.1.tgz"
-  "version" "2.6.1"
+  "integrity" "sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ=="
+  "resolved" "https://registry.npmjs.org/node-fetch/-/node-fetch-2.6.7.tgz"
+  "version" "2.6.7"
+  dependencies:
+    "whatwg-url" "^5.0.0"
 
 "ono@^6.0.0":
   "integrity" "sha512-5rdYW/106kHqLeG22GE2MHKq+FlsxMERZev9DCzQX1zwkxnFwBivSn5i17a5O/rDmOJOdf4Wyt80UZljzx9+DA=="
@@ -351,6 +353,11 @@
     "swagger-methods" "^2.0.1"
     "z-schema" "^4.2.2"
 
+"tr46@~0.0.3":
+  "integrity" "sha1-gYT9NH2snNwYWZLzpmIuFLnZq2o="
+  "resolved" "https://registry.npmjs.org/tr46/-/tr46-0.0.3.tgz"
+  "version" "0.0.3"
+
 "uglify-js@^3.1.4":
   "integrity" "sha512-Esj5HG5WAyrLIdYU74Z3JdG2PxdIusvj6IWHMtlyESxc7kcDz7zYlYjpnSokn1UbpV0d/QX9fan7gkCNd/9BQA=="
   "resolved" "https://registry.npmjs.org/uglify-js/-/uglify-js-3.10.0.tgz"
@@ -365,6 +372,19 @@
   "integrity" "sha512-nYXQLCBkpJ8X6ltALua9dRrZDHVYxjJ1wgskNt1lH9fzGjs3tgojGSCBjmEPwkWS1y29+DrizMTW19Pr9uB2nw=="
   "resolved" "https://registry.npmjs.org/validator/-/validator-13.7.0.tgz"
   "version" "13.7.0"
+
+"webidl-conversions@^3.0.0":
+  "integrity" "sha1-JFNCdeKnvGvnvIZhHMFq4KVlSHE="
+  "resolved" "https://registry.npmjs.org/webidl-conversions/-/webidl-conversions-3.0.1.tgz"
+  "version" "3.0.1"
+
+"whatwg-url@^5.0.0":
+  "integrity" "sha1-lmRU6HZUYuN2RNNib2dCzotwll0="
+  "resolved" "https://registry.npmjs.org/whatwg-url/-/whatwg-url-5.0.0.tgz"
+  "version" "5.0.0"
+  dependencies:
+    "tr46" "~0.0.3"
+    "webidl-conversions" "^3.0.0"
 
 "which-module@^2.0.0":
   "integrity" "sha1-2e8H3Od7mQK4o6j6SzHD4/fm6Ho="

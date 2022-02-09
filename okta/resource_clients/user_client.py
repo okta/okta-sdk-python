@@ -48,6 +48,8 @@ from okta.models.role\
     import Role
 from okta.models.catalog_application\
     import CatalogApplication
+from okta.models.subscription\
+    import Subscription
 from okta.utils import format_url
 from okta.api_client import APIClient
 
@@ -2341,3 +2343,96 @@ class UserClient(APIClient):
             return (response, error)
 
         return (response, None)
+
+    async def list_user_subscriptions(
+            self, userId,
+            keep_empty_params=False
+    ):
+        """
+        List subscriptions of a User. Only lists subscriptions
+        for current user. An AccessDeniedException message is s
+        ent if requests are made from other users.
+        Args:
+            user_id {str}
+        Returns:
+            list: Collection of Subscription instances.
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/users/{userId}/subscriptions
+            """)
+
+        body = {}
+        headers = {}
+        form = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Subscription)
+
+        if error:
+            return (None, response, error)
+
+        try:
+            result = []
+            for item in response.get_body():
+                result.append(Subscription(
+                    self.form_response_body(item)
+                    ))
+        except Exception as error:
+            return (None, response, error)
+        return (result, response, None)
+
+    async def get_user_subscription_by_notification_type(
+            self, userId, notificationType,
+            keep_empty_params=False
+    ):
+        """
+        Get the subscriptions of a User with a specific notific
+        ation type. Only gets subscriptions for current user. A
+        n AccessDeniedException message is sent if requests are
+        made from other users.
+        Args:
+            user_id {str}
+            notification_type {str}
+        Returns:
+            Subscription
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/users/{userId}/subscriptions
+                /{notificationType}
+            """)
+
+        body = {}
+        headers = {}
+        form = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Subscription)
+
+        if error:
+            return (None, response, error)
+
+        try:
+            result = Subscription(
+                self.form_response_body(response.get_body())
+            )
+        except Exception as error:
+            return (None, response, error)
+        return (result, response, None)

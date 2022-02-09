@@ -2139,3 +2139,43 @@ class TestApplicationsResource:
             except Exception as exc:
                 errors.append(exc)
             assert len(errors) == 0
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_get_default_provisioning_connection_for_application(self, fs):
+        # Instantiate Mock Client
+        client = MockOktaClient(fs)
+
+        # Create ORG2ORG Application Object
+        APP_LABEL = "AddOrg2OrgApp"
+        app_settings_app = models.Org2OrgApplicationSettingsApp({
+            'acsUrl': 'https://example.okta.com/sso/saml2/exampleid',
+            'audRestriction': 'https://www.okta.com/saml2/service-provider/exampleid',
+            'baseUrl':        'https://example.okta.com'
+        })
+        app_settings = models.Org2OrgApplicationSettings({
+            "app": app_settings_app
+        })
+        org2org_app_obj = models.Org2OrgApplication({
+            "label": APP_LABEL,
+            "settings": app_settings
+        })
+
+        org2org_app_obj.name = 'okta_org2org'
+        org2org_app_obj.sign_on_mode = models.ApplicationSignOnMode('SAML_2_0')
+        app, _, err = await client.create_application(org2org_app_obj, query_params={'activate': True})
+        assert err is None
+
+        try:
+            provisioning_conn, _, err = await client.get_default_provisioning_connection_for_application(app.id)
+            assert isinstance(provisioning_conn, models.ProvisioningConnection)
+            assert isinstance(provisioning_conn.auth_scheme, models.ProvisioningConnectionAuthScheme)
+            assert provisioning_conn.auth_scheme == 'TOKEN'
+            assert isinstance(provisioning_conn.status, models.ProvisioningConnectionStatus)
+            assert provisioning_conn.status == 'DISABLED'
+
+            # Note: set provisioning connection is unavailable in test env
+        finally:
+            _, err = await client.deactivate_application(app.id)
+            _, err = await client.delete_application(app.id)
+            assert err is None

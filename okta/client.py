@@ -62,6 +62,8 @@ from okta.resource_clients.org_client\
     import OrgClient
 from okta.resource_clients.policy_client\
     import PolicyClient
+from okta.resource_clients.subscription_client\
+    import SubscriptionClient
 from okta.resource_clients.session_client\
     import SessionClient
 from okta.resource_clients.sms_template_client\
@@ -97,6 +99,7 @@ class Client(
     UserTypeClient,
     OrgClient,
     PolicyClient,
+    SubscriptionClient,
     SessionClient,
     SmsTemplateClient,
     ThreatInsightClient,

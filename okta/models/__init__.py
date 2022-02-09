@@ -70,6 +70,8 @@ from okta.models import application_credentials_signing_use as application_crede
 ApplicationCredentialsSigningUse = application_credentials_signing_use.ApplicationCredentialsSigningUse
 from okta.models import application_credentials_username_template as application_credentials_username_template
 ApplicationCredentialsUsernameTemplate = application_credentials_username_template.ApplicationCredentialsUsernameTemplate
+from okta.models import application_feature as application_feature
+ApplicationFeature = application_feature.ApplicationFeature
 from okta.models import application_group_assignment as application_group_assignment
 ApplicationGroupAssignment = application_group_assignment.ApplicationGroupAssignment
 from okta.models import application_licensing as application_licensing
@@ -158,10 +160,18 @@ from okta.models import call_user_factor as call_user_factor
 CallUserFactor = call_user_factor.CallUserFactor
 from okta.models import call_user_factor_profile as call_user_factor_profile
 CallUserFactorProfile = call_user_factor_profile.CallUserFactorProfile
+from okta.models import capabilities_create_object as capabilities_create_object
+CapabilitiesCreateObject = capabilities_create_object.CapabilitiesCreateObject
+from okta.models import capabilities_object as capabilities_object
+CapabilitiesObject = capabilities_object.CapabilitiesObject
+from okta.models import capabilities_update_object as capabilities_update_object
+CapabilitiesUpdateObject = capabilities_update_object.CapabilitiesUpdateObject
 from okta.models import catalog_application as catalog_application
 CatalogApplication = catalog_application.CatalogApplication
 from okta.models import catalog_application_status as catalog_application_status
 CatalogApplicationStatus = catalog_application_status.CatalogApplicationStatus
+from okta.models import change_enum as change_enum
+ChangeEnum = change_enum.ChangeEnum
 from okta.models import change_password_request as change_password_request
 ChangePasswordRequest = change_password_request.ChangePasswordRequest
 from okta.models import channel_binding as channel_binding
@@ -360,6 +370,10 @@ from okta.models import jwk_use as jwk_use
 JwkUse = jwk_use.JwkUse
 from okta.models import knowledge_constraint as knowledge_constraint
 KnowledgeConstraint = knowledge_constraint.KnowledgeConstraint
+from okta.models import lifecycle_create_setting_object as lifecycle_create_setting_object
+LifecycleCreateSettingObject = lifecycle_create_setting_object.LifecycleCreateSettingObject
+from okta.models import lifecycle_deactivate_setting_object as lifecycle_deactivate_setting_object
+LifecycleDeactivateSettingObject = lifecycle_deactivate_setting_object.LifecycleDeactivateSettingObject
 from okta.models import lifecycle_expiration_policy_rule_condition as lifecycle_expiration_policy_rule_condition
 LifecycleExpirationPolicyRuleCondition = lifecycle_expiration_policy_rule_condition.LifecycleExpirationPolicyRuleCondition
 from okta.models import linked_object as linked_object
@@ -422,6 +436,8 @@ from okta.models import network_zone_type as network_zone_type
 NetworkZoneType = network_zone_type.NetworkZoneType
 from okta.models import network_zone_usage as network_zone_usage
 NetworkZoneUsage = network_zone_usage.NetworkZoneUsage
+from okta.models import notification_type as notification_type
+NotificationType = notification_type.NotificationType
 from okta.models import o_auth_2_actor as o_auth_2_actor
 OAuth2Actor = o_auth_2_actor.OAuth2Actor
 from okta.models import o_auth_2_claim as o_auth_2_claim
@@ -488,6 +504,12 @@ from okta.models import open_id_connect_application_type as open_id_connect_appl
 OpenIdConnectApplicationType = open_id_connect_application_type.OpenIdConnectApplicationType
 from okta.models import open_id_connect_refresh_token_rotation_type as open_id_connect_refresh_token_rotation_type
 OpenIdConnectRefreshTokenRotationType = open_id_connect_refresh_token_rotation_type.OpenIdConnectRefreshTokenRotationType
+from okta.models import org_2_org_application as org_2_org_application
+Org2OrgApplication = org_2_org_application.Org2OrgApplication
+from okta.models import org_2_org_application_settings as org_2_org_application_settings
+Org2OrgApplicationSettings = org_2_org_application_settings.Org2OrgApplicationSettings
+from okta.models import org_2_org_application_settings_app as org_2_org_application_settings_app
+Org2OrgApplicationSettingsApp = org_2_org_application_settings_app.Org2OrgApplicationSettingsApp
 from okta.models import org_contact_type as org_contact_type
 OrgContactType = org_contact_type.OrgContactType
 from okta.models import org_contact_type_obj as org_contact_type_obj
@@ -564,6 +586,8 @@ from okta.models import password_policy_rule_conditions as password_policy_rule_
 PasswordPolicyRuleConditions = password_policy_rule_conditions.PasswordPolicyRuleConditions
 from okta.models import password_policy_settings as password_policy_settings
 PasswordPolicySettings = password_policy_settings.PasswordPolicySettings
+from okta.models import password_setting_object as password_setting_object
+PasswordSettingObject = password_setting_object.PasswordSettingObject
 from okta.models import platform_condition_evaluator_platform as platform_condition_evaluator_platform
 PlatformConditionEvaluatorPlatform = platform_condition_evaluator_platform.PlatformConditionEvaluatorPlatform
 from okta.models import platform_condition_evaluator_platform_operating_system as platform_condition_evaluator_platform_operating_system
@@ -628,6 +652,8 @@ from okta.models import profile_mapping_property_push_status as profile_mapping_
 ProfileMappingPropertyPushStatus = profile_mapping_property_push_status.ProfileMappingPropertyPushStatus
 from okta.models import profile_mapping_source as profile_mapping_source
 ProfileMappingSource = profile_mapping_source.ProfileMappingSource
+from okta.models import profile_setting_object as profile_setting_object
+ProfileSettingObject = profile_setting_object.ProfileSettingObject
 from okta.models import protocol as protocol
 Protocol = protocol.Protocol
 from okta.models import protocol_algorithm_type as protocol_algorithm_type
@@ -650,6 +676,16 @@ from okta.models import provisioning as provisioning
 Provisioning = provisioning.Provisioning
 from okta.models import provisioning_conditions as provisioning_conditions
 ProvisioningConditions = provisioning_conditions.ProvisioningConditions
+from okta.models import provisioning_connection as provisioning_connection
+ProvisioningConnection = provisioning_connection.ProvisioningConnection
+from okta.models import provisioning_connection_auth_scheme as provisioning_connection_auth_scheme
+ProvisioningConnectionAuthScheme = provisioning_connection_auth_scheme.ProvisioningConnectionAuthScheme
+from okta.models import provisioning_connection_profile as provisioning_connection_profile
+ProvisioningConnectionProfile = provisioning_connection_profile.ProvisioningConnectionProfile
+from okta.models import provisioning_connection_request as provisioning_connection_request
+ProvisioningConnectionRequest = provisioning_connection_request.ProvisioningConnectionRequest
+from okta.models import provisioning_connection_status as provisioning_connection_status
+ProvisioningConnectionStatus = provisioning_connection_status.ProvisioningConnectionStatus
 from okta.models import provisioning_deprovisioned_condition as provisioning_deprovisioned_condition
 ProvisioningDeprovisionedCondition = provisioning_deprovisioned_condition.ProvisioningDeprovisionedCondition
 from okta.models import provisioning_groups as provisioning_groups
@@ -708,6 +744,8 @@ from okta.models import security_question_user_factor as security_question_user_
 SecurityQuestionUserFactor = security_question_user_factor.SecurityQuestionUserFactor
 from okta.models import security_question_user_factor_profile as security_question_user_factor_profile
 SecurityQuestionUserFactorProfile = security_question_user_factor_profile.SecurityQuestionUserFactorProfile
+from okta.models import seed_enum as seed_enum
+SeedEnum = seed_enum.SeedEnum
 from okta.models import session as session
 Session = session.Session
 from okta.models import session_authentication_method as session_authentication_method
@@ -738,6 +776,10 @@ from okta.models import social_auth_token as social_auth_token
 SocialAuthToken = social_auth_token.SocialAuthToken
 from okta.models import sp_certificate as sp_certificate
 SpCertificate = sp_certificate.SpCertificate
+from okta.models import subscription as subscription
+Subscription = subscription.Subscription
+from okta.models import subscription_status as subscription_status
+SubscriptionStatus = subscription_status.SubscriptionStatus
 from okta.models import swa_application as swa_application
 SwaApplication = swa_application.SwaApplication
 from okta.models import swa_application_settings as swa_application_settings
