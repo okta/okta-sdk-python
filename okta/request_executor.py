@@ -68,7 +68,7 @@ class RequestExecutor:
             'requestTimeout': self._request_timeout,
             'headers': self._default_headers,
             'proxy': self._config["client"].get("proxy"),
-            'sslContext': self._config["client"].get("sslContext")
+            'sslContext': self._config["client"].get("sslContext"),
         })
         HTTPClient.raise_exception = \
             self._config['client'].get("raiseException", False)
@@ -338,6 +338,9 @@ class RequestExecutor:
 
     def set_custom_headers(self, headers):
         self._custom_headers.update(headers)
+
+    def set_session(self, session):
+        self._http_client.set_session(session)
 
     def clear_custom_headers(self):
         self._custom_headers = {}

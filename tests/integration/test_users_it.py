@@ -868,3 +868,20 @@ class TestUsersResource:
                 _, err = await test_client.deactivate_or_delete_user(user2.id)
             except Exception:
                 pass
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_list_user_subscriptions(self, fs):
+        # Instantiate Mock Client
+        client = MockOktaClient(fs)
+
+        users, _, err = await client.list_users()
+        assert err is None
+        user = users[0]
+
+        resp, _, err = await client.list_user_subscriptions(user.id)
+        assert len(resp) > 0
+        for item in resp:
+            assert isinstance(item, models.Subscription)
+            assert isinstance(item.status, models.SubscriptionStatus)
+            assert isinstance(item.notification_type, models.NotificationType)

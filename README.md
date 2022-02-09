@@ -96,6 +96,28 @@ Another way to instantiate okta_client (config should be provided in other place
 okta_client = OktaClient()
 ```
 
+Http session was introduced within v2.3.0 to allow custom SSL contest. Starting with SDK v2.4.0 you can reuse http session to gain better performance:
+
+```py
+import asyncio
+import aiohttp
+
+from okta.client import Client as OktaClient
+
+
+async def main():
+    async with OktaClient() as client:
+        # perform all queries within same session
+        users, okta_resp, err = await client.list_users()
+        user, okta_resp, err = await client.get_user(users[0].id)
+
+
+loop = asyncio.get_event_loop()
+loop.run_until_complete(main())
+```
+
+Context Manager is a preferable way to use OktaClient to perform bunch of API requests.
+
 > Using a Python dictionary to hard-code the Okta domain and API token is encouraged for development; In production, you should use a more secure way of storing these values. This library supports a few different configuration sources, covered in the [configuration reference](#configuration-reference) section.
 
 ### OAuth 2.0
