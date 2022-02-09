@@ -1,5 +1,55 @@
 # Okta Python SDK Changelog
 
+## v2.4.0
+- Regenerate code using the [open API spec v2.10.0](https://github.com/okta/okta-management-openapi-spec/releases/tag/openapi-2.10.0).
+- Allow possibility to re-use http session.
+
+_New resources:_
+* Subscription
+
+_New models:_
+* ApplicationFeature
+* CapabilitiesCreateObject
+* CapabilitiesObject
+* CapabilitiesUpdateObject
+* ChangeEnum
+* LifecycleCreateSettingObject
+* LifecycleDeactivateSettingObject
+* NotificationType
+* Org2OrgApplication
+* Org2OrgApplicationSettings
+* Org2OrgApplicationSettingsApp
+* PasswordSettingObject
+* ProfileSettingObject
+* ProvisioningConnection
+* ProvisioningConnectionAuthScheme
+* ProvisioningConnectionProfile
+* ProvisioningConnectionRequest
+* ProvisioningConnectionStatus
+* SeedEnum
+* Subscription
+* SubscriptionStatus
+
+_New features:_
+Reuse http session to improve performance using client as a context manager:
+```py
+import asyncio
+import aiohttp
+
+from okta.client import Client as OktaClient
+
+
+async def main():
+    async with OktaClient() as client:
+        # perform all queries within same session
+        users, okta_resp, err = await client.list_users()
+        user, okta_resp, err = await client.get_user(users[0].id)
+
+
+loop = asyncio.get_event_loop()
+loop.run_until_complete(main())
+```
+
 ## v2.3.1
 - Regenerate code using the [open API spec v2.9.2](https://github.com/okta/okta-management-openapi-spec/releases/tag/openapi-2.9.2).
 - Make DevicePolicyRuleCondition model parent for DeviceAccessPolicyRuleCondition
