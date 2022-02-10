@@ -27,7 +27,7 @@ class {{classname}}(object):
 {{#operation}}
 {{#contents}}
 
-    def {{operationId}}(self, {{#sortParamsByRequiredFlag}}{{#parameters}}{{#required}}{{paramName}}, {{/required}}{{^required}}{{^vendorExtensions.x-is-query-param}}{{paramName}}=None, {{/vendorExtensions.x-is-query-param}}{{/required}}{{/parameters}}{{/sortParamsByRequiredFlag}}**kwargs):  # noqa: E501
+    def {{operationId}}(self, {{#sortParamsByRequiredFlag}}{{#parameters}}{{#required}}{{paramName}}, {{/required}}{{^required}}{{^vendorExtensions.x-is-query-param}}{{^vendorExtensions.x-is-header-param}}{{paramName}}=None, {{/vendorExtensions.x-is-header-param}}{{/vendorExtensions.x-is-query-param}}{{/required}}{{/parameters}}{{/sortParamsByRequiredFlag}}**kwargs):  # noqa: E501
         """{{#summary}}{{{.}}}{{/summary}}{{^summary}}{{operationId}}{{/summary}}  # noqa: E501
 
 {{#notes}}
@@ -36,10 +36,10 @@ class {{classname}}(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 {{#sortParamsByRequiredFlag}}
-        >>> thread = api.{{operationId}}({{#parameters}}{{#required}}{{paramName}}, {{/required}}{{^required}}{{^vendorExtensions.x-is-query-param}}{{paramName}}=None, {{/vendorExtensions.x-is-query-param}}{{/required}}{{/parameters}}async_req=True)
+        >>> thread = api.{{operationId}}({{#parameters}}{{#required}}{{paramName}}, {{/required}}{{^required}}{{^vendorExtensions.x-is-query-param}}{{^vendorExtensions.x-is-header-param}}{{paramName}}=None, {{/vendorExtensions.x-is-header-param}}{{/vendorExtensions.x-is-query-param}}{{/required}}{{/parameters}}async_req=True)
 {{/sortParamsByRequiredFlag}}
 {{^sortParamsByRequiredFlag}}
-        >>> thread = api.{{operationId}}({{#parameters}}{{#required}}{{paramName}}={{paramName}}_value, {{/required}}{{^required}}{{^vendorExtensions.x-is-query-param}}{{paramName}}=None, {{/vendorExtensions.x-is-query-param}}{{/required}}{{/parameters}}async_req=True)
+        >>> thread = api.{{operationId}}({{#parameters}}{{#required}}{{paramName}}={{paramName}}_value, {{/required}}{{^required}}{{^vendorExtensions.x-is-query-param}}{{^vendorExtensions.x-is-header-param}}{{paramName}}=None, {{/vendorExtensions.x-is-header-param}}{{/vendorExtensions.x-is-query-param}}{{/required}}{{/parameters}}async_req=True)
 {{/sortParamsByRequiredFlag}}
         >>> result = thread.get()
 
@@ -53,12 +53,12 @@ class {{classname}}(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.{{operationId}}_with_http_info({{#sortParamsByRequiredFlag}}{{#parameters}}{{#required}}{{paramName}}, {{/required}}{{^required}}{{^vendorExtensions.x-is-query-param}}{{paramName}}=None, {{/vendorExtensions.x-is-query-param}}{{/required}}{{/parameters}}{{/sortParamsByRequiredFlag}}**kwargs)  # noqa: E501
+            return self.{{operationId}}_with_http_info({{#sortParamsByRequiredFlag}}{{#parameters}}{{#required}}{{paramName}}, {{/required}}{{^required}}{{^vendorExtensions.x-is-query-param}}{{^vendorExtensions.x-is-header-param}}{{paramName}}=None, {{/vendorExtensions.x-is-header-param}}{{/vendorExtensions.x-is-query-param}}{{/required}}{{/parameters}}{{/sortParamsByRequiredFlag}}**kwargs)  # noqa: E501
         else:
-            (data) = self.{{operationId}}_with_http_info({{#sortParamsByRequiredFlag}}{{#parameters}}{{#required}}{{paramName}}, {{/required}}{{^required}}{{^vendorExtensions.x-is-query-param}}{{paramName}}=None, {{/vendorExtensions.x-is-query-param}}{{/required}}{{/parameters}}{{/sortParamsByRequiredFlag}}**kwargs)  # noqa: E501
+            (data) = self.{{operationId}}_with_http_info({{#sortParamsByRequiredFlag}}{{#parameters}}{{#required}}{{paramName}}, {{/required}}{{^required}}{{^vendorExtensions.x-is-query-param}}{{^vendorExtensions.x-is-header-param}}{{paramName}}=None, {{/vendorExtensions.x-is-header-param}}{{/vendorExtensions.x-is-query-param}}{{/required}}{{/parameters}}{{/sortParamsByRequiredFlag}}**kwargs)  # noqa: E501
             return data
 
-    def {{operationId}}_with_http_info(self, {{#sortParamsByRequiredFlag}}{{#parameters}}{{#required}}{{paramName}}, {{/required}}{{^required}}{{^vendorExtensions.x-is-query-param}}{{paramName}}=None, {{/vendorExtensions.x-is-query-param}}{{/required}}{{/parameters}}{{/sortParamsByRequiredFlag}}**kwargs):  # noqa: E501
+    def {{operationId}}_with_http_info(self, {{#sortParamsByRequiredFlag}}{{#parameters}}{{#required}}{{paramName}}, {{/required}}{{^required}}{{^vendorExtensions.x-is-query-param}}{{^vendorExtensions.x-is-header-param}}{{paramName}}=None, {{/vendorExtensions.x-is-header-param}}{{/vendorExtensions.x-is-query-param}}{{/required}}{{/parameters}}{{/sortParamsByRequiredFlag}}**kwargs):  # noqa: E501
         """{{#summary}}{{{.}}}{{/summary}}{{^summary}}{{operationId}}{{/summary}}  # noqa: E501
 
 {{#notes}}
@@ -67,10 +67,10 @@ class {{classname}}(object):
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
 {{#sortParamsByRequiredFlag}}
-        >>> thread = api.{{operationId}}_with_http_info({{#parameters}}{{#required}}{{paramName}}, {{/required}}{{^required}}{{^vendorExtensions.x-is-query-param}}{{paramName}}=None, {{/vendorExtensions.x-is-query-param}}{{/required}}{{/parameters}}async_req=True)
+        >>> thread = api.{{operationId}}_with_http_info({{#parameters}}{{#required}}{{paramName}}, {{/required}}{{^required}}{{^vendorExtensions.x-is-query-param}}{{^vendorExtensions.x-is-header-param}}{{paramName}}=None, {{/vendorExtensions.x-is-header-param}}{{/vendorExtensions.x-is-query-param}}{{/required}}{{/parameters}}async_req=True)
 {{/sortParamsByRequiredFlag}}
 {{^sortParamsByRequiredFlag}}
-        >>> thread = api.{{operationId}}_with_http_info({{#parameters}}{{#required}}{{paramName}}={{paramName}}_value, {{/required}}{{^required}}{{^vendorExtensions.x-is-query-param}}{{paramName}}=None, {{/vendorExtensions.x-is-query-param}}{{/required}}{{/parameters}}async_req=True)
+        >>> thread = api.{{operationId}}_with_http_info({{#parameters}}{{#required}}{{paramName}}={{paramName}}_value, {{/required}}{{^required}}{{^vendorExtensions.x-is-query-param}}{{^vendorExtensions.x-is-header-param}}{{paramName}}=None, {{/vendorExtensions.x-is-header-param}}{{/vendorExtensions.x-is-query-param}}{{/required}}{{/parameters}}async_req=True)
 {{/sortParamsByRequiredFlag}}
         >>> result = thread.get()
 

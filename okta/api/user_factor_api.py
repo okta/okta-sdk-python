@@ -864,13 +864,13 @@ class UserFactor(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def verify_factor(self, user_id, factor_id, body=None, x_forwarded_for=None, user_agent=None, accept_language=None, **kwargs):  # noqa: E501
+    def verify_factor(self, user_id, factor_id, body=None, **kwargs):  # noqa: E501
         """Verify MFA Factor  # noqa: E501
 
         Verifies an OTP for a `token` or `token:hardware` factor  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.verify_factor(user_id, factor_id, body=None, x_forwarded_for=None, user_agent=None, accept_language=None, async_req=True)
+        >>> thread = api.verify_factor(user_id, factor_id, body=None, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -888,18 +888,18 @@ class UserFactor(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.verify_factor_with_http_info(user_id, factor_id, body=None, x_forwarded_for=None, user_agent=None, accept_language=None, **kwargs)  # noqa: E501
+            return self.verify_factor_with_http_info(user_id, factor_id, body=None, **kwargs)  # noqa: E501
         else:
-            (data) = self.verify_factor_with_http_info(user_id, factor_id, body=None, x_forwarded_for=None, user_agent=None, accept_language=None, **kwargs)  # noqa: E501
+            (data) = self.verify_factor_with_http_info(user_id, factor_id, body=None, **kwargs)  # noqa: E501
             return data
 
-    def verify_factor_with_http_info(self, user_id, factor_id, body=None, x_forwarded_for=None, user_agent=None, accept_language=None, **kwargs):  # noqa: E501
+    def verify_factor_with_http_info(self, user_id, factor_id, body=None, **kwargs):  # noqa: E501
         """Verify MFA Factor  # noqa: E501
 
         Verifies an OTP for a `token` or `token:hardware` factor  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.verify_factor_with_http_info(user_id, factor_id, body=None, x_forwarded_for=None, user_agent=None, accept_language=None, async_req=True)
+        >>> thread = api.verify_factor_with_http_info(user_id, factor_id, body=None, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
