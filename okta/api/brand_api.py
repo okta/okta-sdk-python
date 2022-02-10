@@ -32,13 +32,13 @@ class Brand(object):
             api_client = ApiClient()
         self.api_client = api_client
 
-    def create_email_customization(self, brand_id, template_name, **kwargs):  # noqa: E501
+    def create_email_customization(self, brand_id, template_name, body=None, **kwargs):  # noqa: E501
         """Create Email Customization  # noqa: E501
 
         Create an email customization  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.create_email_customization(brand_id, template_name, async_req=True)
+        >>> thread = api.create_email_customization(brand_id, template_name, body=None, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -51,18 +51,18 @@ class Brand(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.create_email_customization_with_http_info(brand_id, template_name, **kwargs)  # noqa: E501
+            return self.create_email_customization_with_http_info(brand_id, template_name, body=None, **kwargs)  # noqa: E501
         else:
-            (data) = self.create_email_customization_with_http_info(brand_id, template_name, **kwargs)  # noqa: E501
+            (data) = self.create_email_customization_with_http_info(brand_id, template_name, body=None, **kwargs)  # noqa: E501
             return data
 
-    def create_email_customization_with_http_info(self, brand_id, template_name, **kwargs):  # noqa: E501
+    def create_email_customization_with_http_info(self, brand_id, template_name, body=None, **kwargs):  # noqa: E501
         """Create Email Customization  # noqa: E501
 
         Create an email customization  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.create_email_customization_with_http_info(brand_id, template_name, async_req=True)
+        >>> thread = api.create_email_customization_with_http_info(brand_id, template_name, body=None, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -1779,13 +1779,13 @@ class Brand(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def send_test_email_from_template(self, template_name, brand_id, **kwargs):  # noqa: E501
+    def send_test_email_from_template(self, template_name, brand_id, body=None, **kwargs):  # noqa: E501
         """Send Test Email  # noqa: E501
 
         Send a test email to the current user’s primary and secondary email addresses. The email content is selected based on the following priority: 1. An email customization specifically for the user’s locale. 2. The default language of email customizations. 3. The email template’s default content.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.send_test_email_from_template(template_name, brand_id, async_req=True)
+        >>> thread = api.send_test_email_from_template(template_name, brand_id, body=None, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -1798,18 +1798,18 @@ class Brand(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.send_test_email_from_template_with_http_info(template_name, brand_id, **kwargs)  # noqa: E501
+            return self.send_test_email_from_template_with_http_info(template_name, brand_id, body=None, **kwargs)  # noqa: E501
         else:
-            (data) = self.send_test_email_from_template_with_http_info(template_name, brand_id, **kwargs)  # noqa: E501
+            (data) = self.send_test_email_from_template_with_http_info(template_name, brand_id, body=None, **kwargs)  # noqa: E501
             return data
 
-    def send_test_email_from_template_with_http_info(self, template_name, brand_id, **kwargs):  # noqa: E501
+    def send_test_email_from_template_with_http_info(self, template_name, brand_id, body=None, **kwargs):  # noqa: E501
         """Send Test Email  # noqa: E501
 
         Send a test email to the current user’s primary and secondary email addresses. The email content is selected based on the following priority: 1. An email customization specifically for the user’s locale. 2. The default language of email customizations. 3. The email template’s default content.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.send_test_email_from_template_with_http_info(template_name, brand_id, async_req=True)
+        >>> thread = api.send_test_email_from_template_with_http_info(template_name, brand_id, body=None, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -1886,13 +1886,13 @@ class Brand(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def update_brand(self, brand_id, **kwargs):  # noqa: E501
+    def update_brand(self, brand_id, body=None, **kwargs):  # noqa: E501
         """Update Brand  # noqa: E501
 
         Updates a brand by `brandId`  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_brand(brand_id, async_req=True)
+        >>> thread = api.update_brand(brand_id, body=None, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -1904,18 +1904,18 @@ class Brand(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.update_brand_with_http_info(brand_id, **kwargs)  # noqa: E501
+            return self.update_brand_with_http_info(brand_id, body=None, **kwargs)  # noqa: E501
         else:
-            (data) = self.update_brand_with_http_info(brand_id, **kwargs)  # noqa: E501
+            (data) = self.update_brand_with_http_info(brand_id, body=None, **kwargs)  # noqa: E501
             return data
 
-    def update_brand_with_http_info(self, brand_id, **kwargs):  # noqa: E501
+    def update_brand_with_http_info(self, brand_id, body=None, **kwargs):  # noqa: E501
         """Update Brand  # noqa: E501
 
         Updates a brand by `brandId`  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_brand_with_http_info(brand_id, async_req=True)
+        >>> thread = api.update_brand_with_http_info(brand_id, body=None, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -1989,13 +1989,13 @@ class Brand(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def update_brand_theme(self, brand_id, theme_id, **kwargs):  # noqa: E501
+    def update_brand_theme(self, brand_id, theme_id, body=None, **kwargs):  # noqa: E501
         """Update a theme for a brand  # noqa: E501
 
         Updates a theme for a brand  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_brand_theme(brand_id, theme_id, async_req=True)
+        >>> thread = api.update_brand_theme(brand_id, theme_id, body=None, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -2008,18 +2008,18 @@ class Brand(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.update_brand_theme_with_http_info(brand_id, theme_id, **kwargs)  # noqa: E501
+            return self.update_brand_theme_with_http_info(brand_id, theme_id, body=None, **kwargs)  # noqa: E501
         else:
-            (data) = self.update_brand_theme_with_http_info(brand_id, theme_id, **kwargs)  # noqa: E501
+            (data) = self.update_brand_theme_with_http_info(brand_id, theme_id, body=None, **kwargs)  # noqa: E501
             return data
 
-    def update_brand_theme_with_http_info(self, brand_id, theme_id, **kwargs):  # noqa: E501
+    def update_brand_theme_with_http_info(self, brand_id, theme_id, body=None, **kwargs):  # noqa: E501
         """Update a theme for a brand  # noqa: E501
 
         Updates a theme for a brand  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_brand_theme_with_http_info(brand_id, theme_id, async_req=True)
+        >>> thread = api.update_brand_theme_with_http_info(brand_id, theme_id, body=None, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -2100,13 +2100,13 @@ class Brand(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def update_email_customization(self, brand_id, template_name, customization_id, **kwargs):  # noqa: E501
+    def update_email_customization(self, brand_id, template_name, customization_id, body=None, **kwargs):  # noqa: E501
         """Update Email Customization  # noqa: E501
 
         Update an email customization  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_email_customization(brand_id, template_name, customization_id, async_req=True)
+        >>> thread = api.update_email_customization(brand_id, template_name, customization_id, body=None, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -2120,18 +2120,18 @@ class Brand(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.update_email_customization_with_http_info(brand_id, template_name, customization_id, **kwargs)  # noqa: E501
+            return self.update_email_customization_with_http_info(brand_id, template_name, customization_id, body=None, **kwargs)  # noqa: E501
         else:
-            (data) = self.update_email_customization_with_http_info(brand_id, template_name, customization_id, **kwargs)  # noqa: E501
+            (data) = self.update_email_customization_with_http_info(brand_id, template_name, customization_id, body=None, **kwargs)  # noqa: E501
             return data
 
-    def update_email_customization_with_http_info(self, brand_id, template_name, customization_id, **kwargs):  # noqa: E501
+    def update_email_customization_with_http_info(self, brand_id, template_name, customization_id, body=None, **kwargs):  # noqa: E501
         """Update Email Customization  # noqa: E501
 
         Update an email customization  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_email_customization_with_http_info(brand_id, template_name, customization_id, async_req=True)
+        >>> thread = api.update_email_customization_with_http_info(brand_id, template_name, customization_id, body=None, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool

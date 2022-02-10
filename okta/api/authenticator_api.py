@@ -404,13 +404,13 @@ class Authenticator(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def update_authenticator(self, authenticator_id, **kwargs):  # noqa: E501
+    def update_authenticator(self, authenticator_id, body=None, **kwargs):  # noqa: E501
         """Update Authenticator  # noqa: E501
 
         Updates an authenticator  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_authenticator(authenticator_id, async_req=True)
+        >>> thread = api.update_authenticator(authenticator_id, body=None, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -422,18 +422,18 @@ class Authenticator(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.update_authenticator_with_http_info(authenticator_id, **kwargs)  # noqa: E501
+            return self.update_authenticator_with_http_info(authenticator_id, body=None, **kwargs)  # noqa: E501
         else:
-            (data) = self.update_authenticator_with_http_info(authenticator_id, **kwargs)  # noqa: E501
+            (data) = self.update_authenticator_with_http_info(authenticator_id, body=None, **kwargs)  # noqa: E501
             return data
 
-    def update_authenticator_with_http_info(self, authenticator_id, **kwargs):  # noqa: E501
+    def update_authenticator_with_http_info(self, authenticator_id, body=None, **kwargs):  # noqa: E501
         """Update Authenticator  # noqa: E501
 
         Updates an authenticator  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_authenticator_with_http_info(authenticator_id, async_req=True)
+        >>> thread = api.update_authenticator_with_http_info(authenticator_id, body=None, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool

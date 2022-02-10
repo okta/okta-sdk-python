@@ -309,13 +309,13 @@ class Schema(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def update_application_user_profile(self, app_instance_id, **kwargs):  # noqa: E501
+    def update_application_user_profile(self, app_instance_id, body=None, **kwargs):  # noqa: E501
         """Partial updates on the User Profile properties of the Application User Schema.  # noqa: E501
 
         Partial updates on the User Profile properties of the Application User Schema.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_application_user_profile(app_instance_id, async_req=True)
+        >>> thread = api.update_application_user_profile(app_instance_id, body=None, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -327,18 +327,18 @@ class Schema(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.update_application_user_profile_with_http_info(app_instance_id, **kwargs)  # noqa: E501
+            return self.update_application_user_profile_with_http_info(app_instance_id, body=None, **kwargs)  # noqa: E501
         else:
-            (data) = self.update_application_user_profile_with_http_info(app_instance_id, **kwargs)  # noqa: E501
+            (data) = self.update_application_user_profile_with_http_info(app_instance_id, body=None, **kwargs)  # noqa: E501
             return data
 
-    def update_application_user_profile_with_http_info(self, app_instance_id, **kwargs):  # noqa: E501
+    def update_application_user_profile_with_http_info(self, app_instance_id, body=None, **kwargs):  # noqa: E501
         """Partial updates on the User Profile properties of the Application User Schema.  # noqa: E501
 
         Partial updates on the User Profile properties of the Application User Schema.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_application_user_profile_with_http_info(app_instance_id, async_req=True)
+        >>> thread = api.update_application_user_profile_with_http_info(app_instance_id, body=None, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -412,13 +412,13 @@ class Schema(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def update_group_schema(self, **kwargs):  # noqa: E501
+    def update_group_schema(self, body=None, **kwargs):  # noqa: E501
         """Updates, adds ore removes one or more custom Group Profile properties in the schema  # noqa: E501
 
         Updates, adds ore removes one or more custom Group Profile properties in the schema  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_group_schema(async_req=True)
+        >>> thread = api.update_group_schema(body=None, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -429,18 +429,18 @@ class Schema(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.update_group_schema_with_http_info(**kwargs)  # noqa: E501
+            return self.update_group_schema_with_http_info(body=None, **kwargs)  # noqa: E501
         else:
-            (data) = self.update_group_schema_with_http_info(**kwargs)  # noqa: E501
+            (data) = self.update_group_schema_with_http_info(body=None, **kwargs)  # noqa: E501
             return data
 
-    def update_group_schema_with_http_info(self, **kwargs):  # noqa: E501
+    def update_group_schema_with_http_info(self, body=None, **kwargs):  # noqa: E501
         """Updates, adds ore removes one or more custom Group Profile properties in the schema  # noqa: E501
 
         Updates, adds ore removes one or more custom Group Profile properties in the schema  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.update_group_schema_with_http_info(async_req=True)
+        >>> thread = api.update_group_schema_with_http_info(body=None, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool

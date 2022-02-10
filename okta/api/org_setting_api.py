@@ -997,13 +997,13 @@ class OrgSetting(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def partial_update_org_setting(self, **kwargs):  # noqa: E501
+    def partial_update_org_setting(self, body=None, **kwargs):  # noqa: E501
         """Partial update Org Setting  # noqa: E501
 
         Partial update settings of your organization.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.partial_update_org_setting(async_req=True)
+        >>> thread = api.partial_update_org_setting(body=None, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -1014,18 +1014,18 @@ class OrgSetting(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.partial_update_org_setting_with_http_info(**kwargs)  # noqa: E501
+            return self.partial_update_org_setting_with_http_info(body=None, **kwargs)  # noqa: E501
         else:
-            (data) = self.partial_update_org_setting_with_http_info(**kwargs)  # noqa: E501
+            (data) = self.partial_update_org_setting_with_http_info(body=None, **kwargs)  # noqa: E501
             return data
 
-    def partial_update_org_setting_with_http_info(self, **kwargs):  # noqa: E501
+    def partial_update_org_setting_with_http_info(self, body=None, **kwargs):  # noqa: E501
         """Partial update Org Setting  # noqa: E501
 
         Partial update settings of your organization.  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.partial_update_org_setting_with_http_info(async_req=True)
+        >>> thread = api.partial_update_org_setting_with_http_info(body=None, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
