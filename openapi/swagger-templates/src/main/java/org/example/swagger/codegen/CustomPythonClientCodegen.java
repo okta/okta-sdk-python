@@ -231,4 +231,50 @@ public class CustomPythonClientCodegen extends PythonClientCodegen {
             }
         });
     }
+
+    /**
+     * Underscore the given word.
+     * Copied from Twitter elephant bird
+     * https://github.com/twitter/elephant-bird/blob/master/core/src/main/java/com/twitter/elephantbird/util/Strings.java
+     * Modified to underscore numbers, added thirdPattern/fourthPattern for this purpose
+     *
+     * @param word The word
+     * @return The underscored version of the word
+     */
+    public static String underscore(String word) {
+        String firstPattern = "([A-Z]+)([A-Z][a-z])";
+        String secondPattern = "([a-z\\d])([A-Z])";
+        String thirdPattern = "([a-zA-Z]+)([0-9]+)";
+        String fourthPattern = "([0-9]+)([a-zA-Z]+)";
+        String replacementPattern = "$1_$2";
+        // Replace package separator with slash.
+        word = word.replaceAll("\\.", "/"); // FIXME: a parameter should not be assigned. Also declare the methods parameters as 'final'.
+        // Replace $ with two underscores for inner classes.
+        word = word.replaceAll("\\$", "__");
+        // Replace capital letter with _ plus lowercase letter.
+        word = word.replaceAll(firstPattern, replacementPattern);
+        word = word.replaceAll(secondPattern, replacementPattern);
+        word = word.replaceAll(thirdPattern, replacementPattern);
+        word = word.replaceAll(fourthPattern, replacementPattern);
+        word = word.replace('-', '_');
+        // replace space with underscore
+        word = word.replace(' ', '_');
+        word = word.toLowerCase();
+        return word;
+    }
+
+    @Override
+    public String toOperationId(String operationId) {
+        // throw exception if method name is empty (should not occur as an auto-generated method name will be used)
+        if (StringUtils.isEmpty(operationId)) {
+            throw new RuntimeException("Empty method name (operationId) not allowed");
+        }
+
+        // method name cannot use reserved keyword, e.g. return
+        if (isReservedWord(operationId)) {
+            operationId = "call_" + operationId;
+        }
+
+        return underscore(sanitizeName(operationId));
+    }
 }

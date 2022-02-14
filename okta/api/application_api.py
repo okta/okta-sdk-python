@@ -2048,13 +2048,13 @@ class Application(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def get_o_auth2_token_for_application(self, app_id, token_id, **kwargs):  # noqa: E501
+    def get_o_auth_2_token_for_application(self, app_id, token_id, **kwargs):  # noqa: E501
         """Get OAuth 2.0 Token for Application  # noqa: E501
 
         Gets a token for the specified application  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_o_auth2_token_for_application(app_id, token_id, async_req=True)
+        >>> thread = api.get_o_auth_2_token_for_application(app_id, token_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -2067,18 +2067,18 @@ class Application(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.get_o_auth2_token_for_application_with_http_info(app_id, token_id, **kwargs)  # noqa: E501
+            return self.get_o_auth_2_token_for_application_with_http_info(app_id, token_id, **kwargs)  # noqa: E501
         else:
-            (data) = self.get_o_auth2_token_for_application_with_http_info(app_id, token_id, **kwargs)  # noqa: E501
+            (data) = self.get_o_auth_2_token_for_application_with_http_info(app_id, token_id, **kwargs)  # noqa: E501
             return data
 
-    def get_o_auth2_token_for_application_with_http_info(self, app_id, token_id, **kwargs):  # noqa: E501
+    def get_o_auth_2_token_for_application_with_http_info(self, app_id, token_id, **kwargs):  # noqa: E501
         """Get OAuth 2.0 Token for Application  # noqa: E501
 
         Gets a token for the specified application  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.get_o_auth2_token_for_application_with_http_info(app_id, token_id, async_req=True)
+        >>> thread = api.get_o_auth_2_token_for_application_with_http_info(app_id, token_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -2101,18 +2101,18 @@ class Application(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method get_o_auth2_token_for_application" % key
+                    " to method get_o_auth_2_token_for_application" % key
                 )
             params[key] = val
         del params['kwargs']
         # verify the required parameter 'app_id' is set
         if ('app_id' not in params or
                 params['app_id'] is None):
-            raise ValueError("Missing the required parameter `app_id` when calling `get_o_auth2_token_for_application`")  # noqa: E501
+            raise ValueError("Missing the required parameter `app_id` when calling `get_o_auth_2_token_for_application`")  # noqa: E501
         # verify the required parameter 'token_id' is set
         if ('token_id' not in params or
                 params['token_id'] is None):
-            raise ValueError("Missing the required parameter `token_id` when calling `get_o_auth2_token_for_application`")  # noqa: E501
+            raise ValueError("Missing the required parameter `token_id` when calling `get_o_auth_2_token_for_application`")  # noqa: E501
 
         collection_formats = {}
 
@@ -2995,13 +2995,13 @@ class Application(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def list_o_auth2_tokens_for_application(self, app_id, **kwargs):  # noqa: E501
+    def list_o_auth_2_tokens_for_application(self, app_id, **kwargs):  # noqa: E501
         """Lists OAuth 2.0 Tokens for Application  # noqa: E501
 
         Lists all tokens for the application  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.list_o_auth2_tokens_for_application(app_id, async_req=True)
+        >>> thread = api.list_o_auth_2_tokens_for_application(app_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -3015,18 +3015,18 @@ class Application(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.list_o_auth2_tokens_for_application_with_http_info(app_id, **kwargs)  # noqa: E501
+            return self.list_o_auth_2_tokens_for_application_with_http_info(app_id, **kwargs)  # noqa: E501
         else:
-            (data) = self.list_o_auth2_tokens_for_application_with_http_info(app_id, **kwargs)  # noqa: E501
+            (data) = self.list_o_auth_2_tokens_for_application_with_http_info(app_id, **kwargs)  # noqa: E501
             return data
 
-    def list_o_auth2_tokens_for_application_with_http_info(self, app_id, **kwargs):  # noqa: E501
+    def list_o_auth_2_tokens_for_application_with_http_info(self, app_id, **kwargs):  # noqa: E501
         """Lists OAuth 2.0 Tokens for Application  # noqa: E501
 
         Lists all tokens for the application  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.list_o_auth2_tokens_for_application_with_http_info(app_id, async_req=True)
+        >>> thread = api.list_o_auth_2_tokens_for_application_with_http_info(app_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -3050,14 +3050,14 @@ class Application(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method list_o_auth2_tokens_for_application" % key
+                    " to method list_o_auth_2_tokens_for_application" % key
                 )
             params[key] = val
         del params['kwargs']
         # verify the required parameter 'app_id' is set
         if ('app_id' not in params or
                 params['app_id'] is None):
-            raise ValueError("Missing the required parameter `app_id` when calling `list_o_auth2_tokens_for_application`")  # noqa: E501
+            raise ValueError("Missing the required parameter `app_id` when calling `list_o_auth_2_tokens_for_application`")  # noqa: E501
 
         collection_formats = {}
 
@@ -3760,13 +3760,13 @@ class Application(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def revoke_o_auth2_token_for_application(self, app_id, token_id, **kwargs):  # noqa: E501
+    def revoke_o_auth_2_token_for_application(self, app_id, token_id, **kwargs):  # noqa: E501
         """Revoke an OAuth 2.0 Token for Application  # noqa: E501
 
         Revokes the specified token for the specified application  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.revoke_o_auth2_token_for_application(app_id, token_id, async_req=True)
+        >>> thread = api.revoke_o_auth_2_token_for_application(app_id, token_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -3778,18 +3778,18 @@ class Application(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.revoke_o_auth2_token_for_application_with_http_info(app_id, token_id, **kwargs)  # noqa: E501
+            return self.revoke_o_auth_2_token_for_application_with_http_info(app_id, token_id, **kwargs)  # noqa: E501
         else:
-            (data) = self.revoke_o_auth2_token_for_application_with_http_info(app_id, token_id, **kwargs)  # noqa: E501
+            (data) = self.revoke_o_auth_2_token_for_application_with_http_info(app_id, token_id, **kwargs)  # noqa: E501
             return data
 
-    def revoke_o_auth2_token_for_application_with_http_info(self, app_id, token_id, **kwargs):  # noqa: E501
+    def revoke_o_auth_2_token_for_application_with_http_info(self, app_id, token_id, **kwargs):  # noqa: E501
         """Revoke an OAuth 2.0 Token for Application  # noqa: E501
 
         Revokes the specified token for the specified application  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.revoke_o_auth2_token_for_application_with_http_info(app_id, token_id, async_req=True)
+        >>> thread = api.revoke_o_auth_2_token_for_application_with_http_info(app_id, token_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -3811,18 +3811,18 @@ class Application(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method revoke_o_auth2_token_for_application" % key
+                    " to method revoke_o_auth_2_token_for_application" % key
                 )
             params[key] = val
         del params['kwargs']
         # verify the required parameter 'app_id' is set
         if ('app_id' not in params or
                 params['app_id'] is None):
-            raise ValueError("Missing the required parameter `app_id` when calling `revoke_o_auth2_token_for_application`")  # noqa: E501
+            raise ValueError("Missing the required parameter `app_id` when calling `revoke_o_auth_2_token_for_application`")  # noqa: E501
         # verify the required parameter 'token_id' is set
         if ('token_id' not in params or
                 params['token_id'] is None):
-            raise ValueError("Missing the required parameter `token_id` when calling `revoke_o_auth2_token_for_application`")  # noqa: E501
+            raise ValueError("Missing the required parameter `token_id` when calling `revoke_o_auth_2_token_for_application`")  # noqa: E501
 
         collection_formats = {}
 
@@ -3859,13 +3859,13 @@ class Application(object):
             _request_timeout=params.get('_request_timeout'),
             collection_formats=collection_formats)
 
-    def revoke_o_auth2_tokens_for_application(self, app_id, **kwargs):  # noqa: E501
+    def revoke_o_auth_2_tokens_for_application(self, app_id, **kwargs):  # noqa: E501
         """Revoke All OAuth 2.0 Tokens for Application  # noqa: E501
 
         Revokes all tokens for the specified application  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.revoke_o_auth2_tokens_for_application(app_id, async_req=True)
+        >>> thread = api.revoke_o_auth_2_tokens_for_application(app_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -3876,18 +3876,18 @@ class Application(object):
         """
         kwargs['_return_http_data_only'] = True
         if kwargs.get('async_req'):
-            return self.revoke_o_auth2_tokens_for_application_with_http_info(app_id, **kwargs)  # noqa: E501
+            return self.revoke_o_auth_2_tokens_for_application_with_http_info(app_id, **kwargs)  # noqa: E501
         else:
-            (data) = self.revoke_o_auth2_tokens_for_application_with_http_info(app_id, **kwargs)  # noqa: E501
+            (data) = self.revoke_o_auth_2_tokens_for_application_with_http_info(app_id, **kwargs)  # noqa: E501
             return data
 
-    def revoke_o_auth2_tokens_for_application_with_http_info(self, app_id, **kwargs):  # noqa: E501
+    def revoke_o_auth_2_tokens_for_application_with_http_info(self, app_id, **kwargs):  # noqa: E501
         """Revoke All OAuth 2.0 Tokens for Application  # noqa: E501
 
         Revokes all tokens for the specified application  # noqa: E501
         This method makes a synchronous HTTP request by default. To make an
         asynchronous HTTP request, please pass async_req=True
-        >>> thread = api.revoke_o_auth2_tokens_for_application_with_http_info(app_id, async_req=True)
+        >>> thread = api.revoke_o_auth_2_tokens_for_application_with_http_info(app_id, async_req=True)
         >>> result = thread.get()
 
         :param async_req bool
@@ -3908,14 +3908,14 @@ class Application(object):
             if key not in all_params:
                 raise TypeError(
                     "Got an unexpected keyword argument '%s'"
-                    " to method revoke_o_auth2_tokens_for_application" % key
+                    " to method revoke_o_auth_2_tokens_for_application" % key
                 )
             params[key] = val
         del params['kwargs']
         # verify the required parameter 'app_id' is set
         if ('app_id' not in params or
                 params['app_id'] is None):
-            raise ValueError("Missing the required parameter `app_id` when calling `revoke_o_auth2_tokens_for_application`")  # noqa: E501
+            raise ValueError("Missing the required parameter `app_id` when calling `revoke_o_auth_2_tokens_for_application`")  # noqa: E501
 
         collection_formats = {}
 
