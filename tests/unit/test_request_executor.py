@@ -1,5 +1,4 @@
 import aiohttp
-import asyncio
 import datetime
 import pytest
 import time
@@ -10,7 +9,8 @@ from okta.client import Client as OktaClient
 from okta.request_executor import RequestExecutor
 
 
-def test_retry_count_header(monkeypatch):
+@pytest.mark.asyncio
+async def test_retry_count_header(monkeypatch):
     org_url = "https://test.okta.com"
     token = "TOKEN"
     config = {'orgUrl': org_url, 'token': token, 'rateLimit': {'maxRetries': 2}}
@@ -67,7 +67,7 @@ def test_retry_count_header(monkeypatch):
 
     mock_http_request = MockHTTPRequest()
     monkeypatch.setattr(aiohttp.ClientSession, 'request', mock_http_request)
-    res, resp_body, error = asyncio.run(client.list_users())
+    res, resp_body, error = await client.list_users()
     # Check request was retried max times and header 'X-Okta-Retry-Count' was set properly
     assert mock_http_request.request_info['headers'].get('X-Okta-Retry-Count') == '2'
 
