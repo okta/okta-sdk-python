@@ -224,6 +224,16 @@ from okta.models import domain_validation_status as domain_validation_status
 DomainValidationStatus = domain_validation_status.DomainValidationStatus
 from okta.models import duration as duration
 Duration = duration.Duration
+from okta.models import email_template as email_template
+EmailTemplate = email_template.EmailTemplate
+from okta.models import email_template_content as email_template_content
+EmailTemplateContent = email_template_content.EmailTemplateContent
+from okta.models import email_template_customization as email_template_customization
+EmailTemplateCustomization = email_template_customization.EmailTemplateCustomization
+from okta.models import email_template_customization_request as email_template_customization_request
+EmailTemplateCustomizationRequest = email_template_customization_request.EmailTemplateCustomizationRequest
+from okta.models import email_template_test_request as email_template_test_request
+EmailTemplateTestRequest = email_template_test_request.EmailTemplateTestRequest
 from okta.models import email_template_touch_point_variant as email_template_touch_point_variant
 EmailTemplateTouchPointVariant = email_template_touch_point_variant.EmailTemplateTouchPointVariant
 from okta.models import email_user_factor as email_user_factor
