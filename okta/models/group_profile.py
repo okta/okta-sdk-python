@@ -35,6 +35,11 @@ class GroupProfile(
                 if "description" in config else None
             self.name = config["name"]\
                 if "name" in config else None
+            # set custom attributes not defined in model, do not change string case
+            for attr_name in config:
+                lower_camel_case = to_lower_camel_case(attr_name)
+                if lower_camel_case not in GroupProfile.BASIC_ATTRIBUTES:
+                    setattr(self, attr_name, config[attr_name])
         else:
             self.description = None
             self.name = None
