@@ -499,6 +499,10 @@ class ApiClientAdapter(ApiClient):
         :return: model object.
         """
 
+        # deserialize enums
+        if not hasattr(klass, 'swagger_types'):
+            return klass(data)
+
         if not klass.swagger_types and not self.__hasattr(klass, 'get_real_child_model'):
             return data
 
