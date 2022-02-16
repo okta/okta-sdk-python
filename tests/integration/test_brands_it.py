@@ -234,3 +234,28 @@ class TestBrandsResource:
         finally:
             _, err = await client.delete_brand_theme_logo(brand_id, theme_id)
             assert err is None
+
+    #@pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_list_email_templates(self, fs):
+        client = MockOktaClient(fs)
+        brands, _, err = await client.list_brands()
+        assert err is None
+        brand_id = brands[0].id
+        email_templates, _, err = await client.list_email_templates(brand_id)
+        assert err is None
+        for template in email_templates:
+            print(template)
+            assert isinstance(template, models.EmailTemplate)
+
+    #@pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_get_email_template(self, fs):
+        client = MockOktaClient(fs)
+        brands, _, err = await client.list_brands()
+        assert err is None
+        brand_id = brands[0].id
+        email_templates, _, err = await client.list_email_templates(brand_id)
+        assert err is None
+        template = email_templates[0]
+        received_template = await client.get_email_template(brand_id, template.name)
