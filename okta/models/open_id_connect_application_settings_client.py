@@ -609,7 +609,7 @@ class OpenIdConnectApplicationSettingsClient(object):
 
         self._jwks = jwks
 
-    def to_dict(self):
+    def as_dict(self):
         """Returns the model properties as a dict"""
         result = {}
 
@@ -617,15 +617,15 @@ class OpenIdConnectApplicationSettingsClient(object):
             value = getattr(self, attr)
             if isinstance(value, list):
                 result[attr] = list(map(
-                    lambda x: x.to_dict() if hasattr(x, "to_dict") else x,
+                    lambda x: x.as_dict() if hasattr(x, "as_dict") else x,
                     value
                 ))
-            elif hasattr(value, "to_dict"):
-                result[attr] = value.to_dict()
+            elif hasattr(value, "as_dict"):
+                result[attr] = value.as_dict()
             elif isinstance(value, dict):
                 result[attr] = dict(map(
-                    lambda item: (item[0], item[1].to_dict())
-                    if hasattr(item[1], "to_dict") else item,
+                    lambda item: (item[0], item[1].as_dict())
+                    if hasattr(item[1], "as_dict") else item,
                     value.items()
                 ))
             else:
@@ -638,7 +638,7 @@ class OpenIdConnectApplicationSettingsClient(object):
 
     def to_str(self):
         """Returns the string representation of the model"""
-        return pprint.pformat(self.to_dict())
+        return pprint.pformat(self.as_dict())
 
     def __repr__(self):
         """For `print` and `pprint`"""
