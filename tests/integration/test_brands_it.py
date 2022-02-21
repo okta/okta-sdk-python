@@ -235,7 +235,7 @@ class TestBrandsResource:
             _, err = await client.delete_brand_theme_logo(brand_id, theme_id)
             assert err is None
 
-    #@pytest.mark.vcr()
+    @pytest.mark.vcr()
     @pytest.mark.asyncio
     async def test_list_email_templates(self, fs):
         client = MockOktaClient(fs)
@@ -245,10 +245,9 @@ class TestBrandsResource:
         email_templates, _, err = await client.list_email_templates(brand_id)
         assert err is None
         for template in email_templates:
-            print(template)
             assert isinstance(template, models.EmailTemplate)
 
-    #@pytest.mark.vcr()
+    @pytest.mark.vcr()
     @pytest.mark.asyncio
     async def test_get_email_template(self, fs):
         client = MockOktaClient(fs)
@@ -258,4 +257,177 @@ class TestBrandsResource:
         email_templates, _, err = await client.list_email_templates(brand_id)
         assert err is None
         template = email_templates[0]
-        received_template = await client.get_email_template(brand_id, template.name)
+        received_template, _, err = await client.get_email_template(brand_id, template.name)
+        assert isinstance(received_template, models.EmailTemplate)
+        assert template.name == received_template.name
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_list_email_template_customizations(self, fs):
+        client = MockOktaClient(fs)
+        brands, _, err = await client.list_brands()
+        assert err is None
+        brand_id = brands[0].id
+        email_templates, _, err = await client.list_email_templates(brand_id)
+        assert err is None
+        template = email_templates[0]
+
+        # clear all customizations
+        _, err = await client.delete_email_template_customizations(brand_id, template.name)
+        assert err is None
+
+        # create email template customization
+        email_template_customization_request = models.EmailTemplateCustomizationRequest({
+            "language": "en",
+            "subject": "Welcome to ${org.name}!",
+            "body": "<!DOCTYPE html><html><body><p>Hello ${user.profile.firstName}. <a href=\"${activationLink}\">Activate account</a></p></body></html>",
+            "isDefault": False
+        })
+        customization, _, err = await client.create_email_template_customization(brand_id, template.name, email_template_customization_request)
+        assert err is None
+        assert isinstance(customization, models.EmailTemplateCustomization)
+
+        customizations, _, err = await client.list_email_template_customizations(brand_id, template.name)
+        assert err is None
+        assert len(customizations) == 1
+        for template_customization in customizations:
+            assert isinstance(template_customization, models.EmailTemplateCustomization)
+
+        # clear all customizations
+        _, err = await client.delete_email_template_customizations(brand_id, template.name)
+        assert err is None
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_create_delete_email_template_customizations(self, fs):
+        client = MockOktaClient(fs)
+        brands, _, err = await client.list_brands()
+        assert err is None
+        brand_id = brands[0].id
+        email_templates, _, err = await client.list_email_templates(brand_id)
+        assert err is None
+        template = email_templates[0]
+
+        # clear all customizations
+        _, err = await client.delete_email_template_customizations(brand_id, template.name)
+        assert err is None
+
+        email_template_customization_request = models.EmailTemplateCustomizationRequest({
+            "language": "fr",
+            "subject": "Bienvenue dans ${org.name}!",
+            "body": "<!DOCTYPE html><html><body><p>Bonjour ${user.profile.firstName}. <a href=\"${activationLink}\">Activer le compte</a></p></body></html>",
+            "isDefault": False
+        })
+        customization, _, err = await client.create_email_template_customization(brand_id, template.name, email_template_customization_request)
+        assert err is None
+        assert isinstance(customization, models.EmailTemplateCustomization)
+        assert customization.language == 'fr'
+
+        # create 2nd customization as it is possible to delete only non-default customization
+        email_template_customization_request = models.EmailTemplateCustomizationRequest({
+            "language": "en",
+            "subject": "Welcome to ${org.name}!",
+            "body": "<!DOCTYPE html><html><body><p>Hello ${user.profile.firstName}. <a href=\"${activationLink}\">Activate account</a></p></body></html>",
+            "isDefault": False
+        })
+        customization, _, err = await client.create_email_template_customization(brand_id, template.name, email_template_customization_request)
+        assert err is None
+        assert isinstance(customization, models.EmailTemplateCustomization)
+        assert customization.language == 'en'
+
+        _, err = await client.delete_email_template_customization(brand_id, template.name, customization.id)
+        assert err is None
+
+        # clear all customizations
+        _, err = await client.delete_email_template_customizations(brand_id, template.name)
+        assert err is None
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_get_update_email_template_customization(self, fs):
+        client = MockOktaClient(fs)
+        brands, _, err = await client.list_brands()
+        assert err is None
+        brand_id = brands[0].id
+        email_templates, _, err = await client.list_email_templates(brand_id)
+        assert err is None
+        template = email_templates[0]
+
+        # clear all customizations
+        _, err = await client.delete_email_template_customizations(brand_id, template.name)
+        assert err is None
+
+        email_template_customization_request = models.EmailTemplateCustomizationRequest({
+            "language": "fr",
+            "subject": "Bienvenue dans ${org.name}!",
+            "body": "<!DOCTYPE html><html><body><p>Bonjour ${user.profile.firstName}. <a href=\"${activationLink}\">Activer le compte</a></p></body></html>",
+            "isDefault": True
+        })
+        customization, _, err = await client.create_email_template_customization(brand_id, template.name, email_template_customization_request)
+        assert err is None
+        assert isinstance(customization, models.EmailTemplateCustomization)
+        assert customization.language == 'fr'
+
+        # update customization
+        email_template_customization_request = models.EmailTemplateCustomizationRequest({
+            "language": "en",
+            "subject": "Welcome to ${org.name}!",
+            "body": "<!DOCTYPE html><html><body><p>Hello ${user.profile.firstName}. <a href=\"${activationLink}\">Activate account</a></p></body></html>",
+            "isDefault": True
+        })
+        customization, _, err = await client.update_email_template_customization(brand_id, template.name, customization.id, email_template_customization_request)
+        assert err is None
+        assert customization.language == 'en'
+
+        # get customization
+        customization, _, err = await client.get_email_template_customization(brand_id, template.name, customization.id)
+        assert err is None
+        assert customization.language == 'en'
+
+        # clear all customizations
+        _, err = await client.delete_email_template_customizations(brand_id, template.name)
+        assert err is None
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_get_email_template_customization_preview(self, fs):
+        client = MockOktaClient(fs)
+        brands, _, err = await client.list_brands()
+        assert err is None
+        brand_id = brands[0].id
+        email_templates, _, err = await client.list_email_templates(brand_id)
+        assert err is None
+        template = email_templates[0]
+
+        # clear all customizations
+        _, err = await client.delete_email_template_customizations(brand_id, template.name)
+        assert err is None
+
+        email_template_customization_request = models.EmailTemplateCustomizationRequest({
+            "language": "en",
+            "subject": "Hello, welcome to ${org.name}!",
+            "body": "<!DOCTYPE html><html><body><p>Hello ${user.profile.firstName}. <a href=\"${activationLink}\">Activate account</a></p></body></html>",
+            "isDefault": True
+        })
+
+        customization, _, err = await client.create_email_template_customization(brand_id, template.name, email_template_customization_request)
+        assert err is None
+
+        preview, _, err = await client.get_email_template_customization_preview(brand_id, template.name, customization.id)
+        assert err is None
+        assert isinstance(preview, models.EmailTemplateContent)
+        assert 'Hello, welcome to' in preview.subject
+
+        preview, _, err = await client.get_email_template_default_content(brand_id, template.name)
+        assert err is None
+        assert isinstance(preview, models.EmailTemplateContent)
+        assert 'Welcome to Okta' in preview.subject
+
+        preview, _, err = await client.get_email_template_default_content_preview(brand_id, template.name)
+        assert err is None
+        assert isinstance(preview, models.EmailTemplateContent)
+        assert 'Welcome to Okta' in preview.subject
+
+        # clear all customizations
+        _, err = await client.delete_email_template_customizations(brand_id, template.name)
+        assert err is None

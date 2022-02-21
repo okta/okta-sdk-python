@@ -320,7 +320,7 @@ class BrandClient(APIClient):
             brand_id {str}
             template_name {str}
         Returns:
-            list: Collection of EmailTemplateCustomizationRequest instances.
+            list: Collection of EmailTemplateCustomization instances.
         """
         http_method = "get".upper()
         api_url = format_url(f"""
@@ -341,7 +341,7 @@ class BrandClient(APIClient):
             return (None, None, error)
 
         response, error = await self._request_executor\
-            .execute(request, EmailTemplateCustomizationRequest)
+            .execute(request, EmailTemplateCustomization)
 
         if error:
             return (None, response, error)
@@ -349,7 +349,7 @@ class BrandClient(APIClient):
         try:
             result = []
             for item in response.get_body():
-                result.append(EmailTemplateCustomizationRequest(
+                result.append(EmailTemplateCustomization(
                     self.form_response_body(item)
                     ))
         except Exception as error:
