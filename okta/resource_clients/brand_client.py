@@ -22,8 +22,6 @@ from okta.models.brand\
     import Brand
 from okta.models.email_template\
     import EmailTemplate
-from okta.models.email_template_customization_request\
-    import EmailTemplateCustomizationRequest
 from okta.models.email_template_customization\
     import EmailTemplateCustomization
 from okta.models.email_template_content\
