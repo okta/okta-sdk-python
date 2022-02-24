@@ -47,7 +47,9 @@ class SmsTemplateTranslations(object):
 
     def set_attributes(self, **kwargs):  # noqa: E501
         """SmsTemplateTranslations - a model defined in Swagger"""  # noqa: E501
-        self.discriminator = None
+        if kwargs:
+            for lang in kwargs.keys():
+                setattr(self, lang, kwargs[lang])
 
     def as_dict(self):
         """Returns the model properties as a dict"""

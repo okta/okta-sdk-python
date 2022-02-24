@@ -87,6 +87,12 @@ class {{classname}}({{#parent}}{{parent}}{{/parent}}{{^parent}}object{{/parent}}
 
     def set_attributes(self{{#vars}}, {{name}}={{#defaultValue}}{{{defaultValue}}}{{/defaultValue}}{{^defaultValue}}None{{/defaultValue}}{{/vars}}, **kwargs):  # noqa: E501
         """{{classname}} - a model defined in Swagger"""  # noqa: E501
+{{#eq classname 'SmsTemplateTranslations'}}
+        if kwargs:
+            for lang in kwargs.keys():
+                setattr(self, lang, kwargs[lang])
+{{/eq}}
+{{#neq classname 'SmsTemplateTranslations'}}
 {{#parent}}
         config = {}
         if kwargs is not None:
@@ -117,6 +123,7 @@ class {{classname}}({{#parent}}{{parent}}{{/parent}}{{^parent}}object{{/parent}}
                 self.{{name}} = {{name}}
 {{/required}}
 {{/vars}}
+{{/neq}}
 
 {{#vars}}
     @property

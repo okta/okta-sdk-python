@@ -1,9 +1,20 @@
 package org.example.swagger.codegen;
 
+import com.github.jknack.handlebars.Handlebars;
+import com.github.jknack.handlebars.helper.ConditionalHelpers;
 import io.swagger.codegen.v3.CodegenModel;
 import io.swagger.codegen.v3.CodegenOperation;
 import io.swagger.codegen.v3.CodegenParameter;
 import io.swagger.codegen.v3.SupportingFile;
+import io.swagger.codegen.v3.generators.handlebars.BaseItemsHelper;
+import io.swagger.codegen.v3.generators.handlebars.BracesHelper;
+import io.swagger.codegen.v3.generators.handlebars.ExtensionHelper;
+import io.swagger.codegen.v3.generators.handlebars.HasHelper;
+import io.swagger.codegen.v3.generators.handlebars.HasNotHelper;
+import io.swagger.codegen.v3.generators.handlebars.IsHelper;
+import io.swagger.codegen.v3.generators.handlebars.IsNotHelper;
+import io.swagger.codegen.v3.generators.handlebars.NotEmptyHelper;
+import io.swagger.codegen.v3.generators.handlebars.StringUtilHelper;
 import io.swagger.codegen.v3.generators.python.PythonClientCodegen;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.Operation;
@@ -27,6 +38,7 @@ public class CustomPythonClientCodegen extends PythonClientCodegen {
         super();
 
         this.additionalProperties.put("packageName", "okta");
+        //this.additionalProperties.put("templateEngine", "handlebars");
     }
 
     @Override
@@ -276,5 +288,20 @@ public class CustomPythonClientCodegen extends PythonClientCodegen {
         }
 
         return underscore(sanitizeName(operationId));
+    }
+
+    @Override
+    public void addHandlebarHelpers(Handlebars handlebars) {
+        handlebars.registerHelper("is", new IsHelper());
+        handlebars.registerHelper("has", new HasHelper());
+        handlebars.registerHelper("isNot", new IsNotHelper());
+        handlebars.registerHelper("hasNot", new HasNotHelper());
+        handlebars.registerHelper("braces", new BracesHelper());
+        handlebars.registerHelper("baseItems", new BaseItemsHelper());
+        handlebars.registerHelper("notEmpty", new NotEmptyHelper());
+        handlebars.registerHelpers(new StringUtilHelper());
+        for (ConditionalHelpers helper : ConditionalHelpers.values()) {
+            handlebars.registerHelper(helper.name(), helper);
+        }
     }
 }
