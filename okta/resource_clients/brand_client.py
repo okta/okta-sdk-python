@@ -1,5 +1,5 @@
 """
-Copyright 2021 - Present Okta, Inc.
+Copyright 2020 - Present Okta, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -682,17 +682,14 @@ class BrandClient(APIClient):
         """
         Send a test email to the current users primary and seco
         ndary email addresses. The email content is selected ba
-        sed on the following priority:
-        An email customization specifically for the users loc
-        ale.
-        The default language of email customizations.
-        The email templates default content.
+        sed on the following priority: An email customization s
+        pecifically for the users locale. The default language
+        of email customizations. The email templates default co
+        ntent.
         Args:
             brand_id {str}
             template_name {str}
             {email_template_test_request}
-        Returns:
-            EmailTemplateContent
         """
         http_method = "post".upper()
         api_url = format_url(f"""
@@ -716,21 +713,15 @@ class BrandClient(APIClient):
         )
 
         if error:
-            return (None, None, error)
+            return (None, error)
 
         response, error = await self._request_executor\
-            .execute(request, EmailTemplateContent)
+            .execute(request)
 
         if error:
-            return (None, response, error)
+            return (response, error)
 
-        try:
-            result = EmailTemplateContent(
-                self.form_response_body(response.get_body())
-            )
-        except Exception as error:
-            return (None, response, error)
-        return (result, response, None)
+        return (response, None)
 
     async def list_brand_themes(
             self, brandId,

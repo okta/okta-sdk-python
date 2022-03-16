@@ -18,37 +18,34 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.models.application_settings_application\
-    import ApplicationSettingsApplication
+from okta.okta_object import OktaObject
+from okta.okta_collection import OktaCollection
+from okta.models import idp_policy_rule_action_provider\
+    as idp_policy_rule_action_provider
 
 
-class Org2OrgApplicationSettingsApp(
-    ApplicationSettingsApplication
+class IdpPolicyRuleAction(
+    OktaObject
 ):
     """
-    A class for Org2OrgApplicationSettingsApp objects.
+    A class for IdpPolicyRuleAction objects.
     """
 
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.acs_url = config["acsUrl"]\
-                if "acsUrl" in config else None
-            self.aud_restriction = config["audRestriction"]\
-                if "audRestriction" in config else None
-            self.base_url = config["baseUrl"]\
-                if "baseUrl" in config else None
+            self.providers = OktaCollection.form_list(
+                config["providers"] if "providers"\
+                    in config else [],
+                idp_policy_rule_action_provider.IdpPolicyRuleActionProvider
+            )
         else:
-            self.acs_url = None
-            self.aud_restriction = None
-            self.base_url = None
+            self.providers = []
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
-            "acsUrl": self.acs_url,
-            "audRestriction": self.aud_restriction,
-            "baseUrl": self.base_url
+            "providers": self.providers
         }
         parent_req_format.update(current_obj_format)
         return parent_req_format
