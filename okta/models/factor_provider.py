@@ -37,3 +37,4 @@ class FactorProvider(
     DUO = "DUO", "duo"
     YUBICO = "YUBICO", "yubico"
     CUSTOM = "CUSTOM", "custom"
+    APPLE = "APPLE", "apple"
