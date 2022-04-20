@@ -92,7 +92,7 @@ class JWT():
         return (my_pem, my_jwk)
 
     @staticmethod
-    def create_token(org_url, client_id, private_key):
+    def create_token(org_url, client_id, private_key, kid=None):
         """
         Create a JSON Web Token using Oauth details from the Okta Client
         config.
@@ -123,5 +123,10 @@ class JWT():
             'jti': generated_JWT_ID
         }
 
-        token = jwt.encode(claims, my_jwk.to_dict(), JWT.HASH_ALGORITHM)
+        # Check if kid was supplied
+        if kid:
+            kid = {'kid': kid}
+
+        token = jwt.encode(claims, my_jwk.to_dict(), JWT.HASH_ALGORITHM, kid)
         return token
+
