@@ -893,7 +893,6 @@ class ApplicationClient(APIClient):
             return (None, response, error)
         return (result, response, None)
 
-
     async def get_metadata_for_saml_application(self, appId, kid):
         http_method = "get".upper()
         api_url = format_url(f"""
@@ -930,7 +929,6 @@ class ApplicationClient(APIClient):
         except Exception as error:
             return None, response, error
         return result, response, None
-
 
     async def list_application_keys(
             self, appId,
