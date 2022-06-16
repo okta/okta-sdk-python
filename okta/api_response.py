@@ -94,7 +94,7 @@ class OktaAPIResponse():
         Args:
             response_body ([type]): [description]
         """
-        self._body = xmltodict.parse(response_body, xml_attribs=False)
+        self._body = xmltodict.parse(response_body, xml_attribs=True)
 
     def extract_pagination(self, links):
         """

@@ -118,8 +118,8 @@ class RequestExecutor:
 
         # Build request
         # Get predetermined headers and build URL
-        headers.update(self._custom_headers)
-        headers.update(self._default_headers)
+        headers = {**self._custom_headers, **headers}
+        headers = {**self._default_headers, **headers}
         if self._config["client"]["orgUrl"] not in url:
             url = self._config["client"]["orgUrl"] + url
 
