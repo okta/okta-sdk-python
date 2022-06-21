@@ -1,5 +1,6 @@
 # IDE generated files
 .vscode/
+.idea/
 
 # Python generated files
 __pycache__/
