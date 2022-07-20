@@ -21,6 +21,8 @@ limitations under the License.
 from okta.okta_object import OktaObject
 from okta.models import policy_rule_actions_enroll\
     as policy_rule_actions_enroll
+from okta.models import idp_policy_rule_action\
+    as idp_policy_rule_action
 from okta.models import password_policy_rule_action\
     as password_policy_rule_action
 from okta.models import okta_sign_on_policy_rule_signon_actions\
@@ -49,6 +51,18 @@ class PolicyRuleActions(
                     self.enroll = None
             else:
                 self.enroll = None
+            if "idp" in config:
+                if isinstance(config["idp"],
+                              idp_policy_rule_action.IdpPolicyRuleAction):
+                    self.idp = config["idp"]
+                elif config["idp"] is not None:
+                    self.idp = idp_policy_rule_action.IdpPolicyRuleAction(
+                        config["idp"]
+                    )
+                else:
+                    self.idp = None
+            else:
+                self.idp = None
             if "passwordChange" in config:
                 if isinstance(config["passwordChange"],
                               password_policy_rule_action.PasswordPolicyRuleAction):
@@ -99,6 +113,7 @@ class PolicyRuleActions(
                 self.signon = None
         else:
             self.enroll = None
+            self.idp = None
             self.password_change = None
             self.self_service_password_reset = None
             self.self_service_unlock = None
@@ -108,6 +123,7 @@ class PolicyRuleActions(
         parent_req_format = super().request_format()
         current_obj_format = {
             "enroll": self.enroll,
+            "idp": self.idp,
             "passwordChange": self.password_change,
             "selfServicePasswordReset": self.self_service_password_reset,
             "selfServiceUnlock": self.self_service_unlock,

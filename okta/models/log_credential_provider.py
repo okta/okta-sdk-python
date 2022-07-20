@@ -36,3 +36,4 @@ class LogCredentialProvider(
     GOOGLE = "GOOGLE", "google"
     DUO = "DUO", "duo"
     YUBIKEY = "YUBIKEY", "yubikey"
+    APPLE = "APPLE", "apple"

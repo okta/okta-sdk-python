@@ -1,5 +1,21 @@
 # Okta Python SDK Changelog
 
+## v2.5.0
+- Regenerate code using the [open API spec v2.11.1](https://github.com/okta/okta-management-openapi-spec/releases/tag/openapi-2.11.1)
+- Updates client template to persist aiohttp and related logic
+- Fixed copyright headers which had the incorrect starting year
+
+_New resources:_
+* Brand
+
+_New models:_
+* EmailTemplate
+* EmailTemplateContent
+* EmailTemplateCustomization
+* EmailTemplateCustomizationRequest
+* EmailTemplateTestTrequest
+* IdpPolicyRuleAction
+* IdpPolicyRuleActionProvider
 ## v2.4.0
 - Regenerate code using the [open API spec v2.10.0](https://github.com/okta/okta-management-openapi-spec/releases/tag/openapi-2.10.0).
 - Allow possibility to re-use http session.

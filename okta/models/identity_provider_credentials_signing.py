@@ -33,13 +33,21 @@ class IdentityProviderCredentialsSigning(
         if config:
             self.kid = config["kid"]\
                 if "kid" in config else None
+            self.private_key = config["privateKey"]\
+                if "privateKey" in config else None
+            self.team_id = config["teamId"]\
+                if "teamId" in config else None
         else:
             self.kid = None
+            self.private_key = None
+            self.team_id = None
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
-            "kid": self.kid
+            "kid": self.kid,
+            "privateKey": self.private_key,
+            "teamId": self.team_id
         }
         parent_req_format.update(current_obj_format)
         return parent_req_format
