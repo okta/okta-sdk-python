@@ -1,5 +1,7 @@
 # Okta Python SDK Changelog
 
+## v2.6.0
+- Manage custom group profile attributes (Fixes #279)
 ## v2.5.0
 - Regenerate code using the [open API spec v2.11.1](https://github.com/okta/okta-management-openapi-spec/releases/tag/openapi-2.11.1)
 - Updates client template to persist aiohttp and related logic
