@@ -1,3 +1,4 @@
+import os
 import pytest
 from tests.mocks import MockOktaClient
 from tests.mocks import mock_pause_function
@@ -839,3 +840,47 @@ class TestGroupsResource:
             except Exception as exc:
                 errors.append(exc)
             assert len(errors) == 0
+
+    @pytest.mark.skipif(os.environ.get('MOCK_TESTS', 'true') == 'false', reason='Need predefined custom attribute')
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_group_profile_custom_attributes(self, fs):
+        """Test works only with predefined custom attribute, thus run with vcr cassete."""
+        # Instantiate Mock Client
+        client = MockOktaClient(fs)
+
+        group_id = 'test_group_id'
+
+        try:
+            group, _, err = await client.get_group(group_id)
+            assert err is None
+            assert group.id == group_id
+            assert group.profile.customGroupAttribute == 'custom_group_attr_value'
+
+            new_group_profile = models.GroupProfile({
+                'name': group.profile.name,
+                'customGroupAttribute': 'new_custom_group_attr_value'
+            })
+            new_group_obj = models.Group({
+                "profile": new_group_profile
+            })
+
+            updated_group, _, err = await client.update_group(group_id, new_group_obj)
+            assert err is None
+            assert updated_group.profile.customGroupAttribute == 'new_custom_group_attr_value'
+
+        finally:
+            # Delete created group if it wasn't deleted during test
+            try:
+                new_group_profile = models.GroupProfile({
+                    'name': group.profile.name,
+                    'customGroupAttribute': 'custom_group_attr_value'
+                })
+                new_group_obj = models.Group({
+                    "profile": new_group_profile
+                })
+
+                _, _, err = await client.update_group(group_id, new_group_obj)
+                assert err is None
+            except Exception:
+                pass
