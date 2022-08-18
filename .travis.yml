@@ -8,6 +8,7 @@ python:
   - "3.10-dev"
 
 install:
+  - pip install -U importlib_metadata
   - pip install -U -r requirements.txt
 
 script:
