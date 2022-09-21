@@ -104,9 +104,14 @@ import aiohttp
 
 from okta.client import Client as OktaClient
 
+config = {
+    'orgUrl': 'https://{yourOktaDomain}',
+    'token': 'YOUR_API_TOKEN'
+}
+
 
 async def main():
-    async with OktaClient() as client:
+    async with OktaClient(config) as client:
         # perform all queries within same session
         users, okta_resp, err = await client.list_users()
         user, okta_resp, err = await client.get_user(users[0].id)
