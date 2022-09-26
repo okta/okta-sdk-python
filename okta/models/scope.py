@@ -19,6 +19,9 @@ limitations under the License.
 # SEE CONTRIBUTOR DOCUMENTATION
 
 from okta.okta_object import OktaObject
+from okta.okta_collection import OktaCollection
+from okta.models import iframe_embed_scope_allowed_apps\
+    as iframe_embed_scope_allowed_apps
 from okta.models import scope_type\
     as scope_type
 
@@ -33,6 +36,11 @@ class Scope(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
+            self.allowed_okta_apps = OktaCollection.form_list(
+                config["allowedOktaApps"] if "allowedOktaApps"\
+                    in config else [],
+                iframe_embed_scope_allowed_apps.IframeEmbedScopeAllowedApps
+            )
             self.string_value = config["stringValue"]\
                 if "stringValue" in config else None
             if "type" in config:
@@ -48,12 +56,14 @@ class Scope(
             else:
                 self.type = None
         else:
+            self.allowed_okta_apps = []
             self.string_value = None
             self.type = None
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
+            "allowedOktaApps": self.allowed_okta_apps,
             "stringValue": self.string_value,
             "type": self.type
         }

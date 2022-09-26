@@ -41,6 +41,8 @@ class VerificationMethod(
             )
             self.factor_mode = config["factorMode"]\
                 if "factorMode" in config else None
+            self.inactivity_period = config["inactivityPeriod"]\
+                if "inactivityPeriod" in config else None
             self.reauthenticate_in = config["reauthenticateIn"]\
                 if "reauthenticateIn" in config else None
             self.type = config["type"]\
@@ -48,6 +50,7 @@ class VerificationMethod(
         else:
             self.constraints = []
             self.factor_mode = None
+            self.inactivity_period = None
             self.reauthenticate_in = None
             self.type = None
 
@@ -56,6 +59,7 @@ class VerificationMethod(
         current_obj_format = {
             "constraints": self.constraints,
             "factorMode": self.factor_mode,
+            "inactivityPeriod": self.inactivity_period,
             "reauthenticateIn": self.reauthenticate_in,
             "type": self.type
         }

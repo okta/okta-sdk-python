@@ -21,14 +21,12 @@ limitations under the License.
 from aenum import MultiValueEnum
 
 
-class OpenIdConnectApplicationIssuerMode(
+class IframeEmbedScopeAllowedApps(
     str,
     MultiValueEnum
 ):
     """
-    An enumeration class for OpenIdConnectApplicationIssuerMode.
+    An enumeration class for IframeEmbedScopeAllowedApps.
     """
 
-    CUSTOM_URL = "CUSTOM_URL", "custom_url"
-    ORG_URL = "ORG_URL", "org_url"
-    DYNAMIC = "DYNAMIC", "dynamic"
+    OKTA_ENDUSER = "OKTA_ENDUSER", "okta_enduser"

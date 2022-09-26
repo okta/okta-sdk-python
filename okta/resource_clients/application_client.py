@@ -1687,6 +1687,42 @@ class ApplicationClient(APIClient):
 
         return (response, None)
 
+    async def update_application_policy(
+            self, appId, policyId,
+            keep_empty_params=False
+    ):
+        """
+        Assign an application to a specific policy. This unassi
+        gns the application from its currently assigned policy.
+        Args:
+            app_id {str}
+            policy_id {str}
+        """
+        http_method = "put".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/apps/{appId}/policies/{policyId}
+            """)
+
+        body = {}
+        headers = {}
+        form = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (response, error)
+
+        return (response, None)
+
     async def revoke_o_auth_2_tokens_for_application(
             self, appId,
             keep_empty_params=False
