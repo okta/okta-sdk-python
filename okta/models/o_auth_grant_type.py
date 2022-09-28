@@ -34,3 +34,4 @@ class OAuthGrantType(
     PASSWORD = "password", "PASSWORD"
     REFRESH_TOKEN = "refresh_token", "REFRESH_TOKEN"
     CLIENT_CREDENTIALS = "client_credentials", "CLIENT_CREDENTIALS"
+    SAML = "urn:ietf:params:oauth:grant-type:saml2-bearer", "URN:IETF:PARAMS:OAUTH:GRANT-TYPE:SAML2-BEARER"
