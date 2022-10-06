@@ -39,3 +39,5 @@ class SessionAuthenticationMethod(
     FPT = "fpt", "FPT"
     KBA = "kba", "KBA"
     MFA = "mfa", "MFA"
+    MCA = "mca", "MCA"
+    SC = "sc", "SC"

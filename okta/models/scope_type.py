@@ -31,3 +31,4 @@ class ScopeType(
 
     CORS = "CORS", "cors"
     REDIRECT = "REDIRECT", "redirect"
+    IFRAME_EMBED = "IFRAME_EMBED", "iframe_embed"

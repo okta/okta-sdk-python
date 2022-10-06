@@ -1,5 +1,12 @@
 # Okta Python SDK Changelog
 
+## v2.7.0
+_What's Changed_
+* Regenerated and added pkce_requried to app oauth credentials by @drewcarmichael-okta in https://github.com/okta/okta-sdk-python/pull/313
+
+_New Contributors_
+* @drewcarmichael-okta made their first contribution in https://github.com/okta/okta-sdk-python/pull/313
+
 ## v2.6.0
 - Manage custom group profile attributes (Fixes #279)
 ## v2.5.0

@@ -54,10 +54,11 @@ class GroupClient(APIClient):
         Args:
             query_params {dict}: Map of query parameters for request
             [query_params.q] {str}
-            [query_params.search] {str}
+            [query_params.filter] {str}
             [query_params.after] {str}
             [query_params.limit] {str}
             [query_params.expand] {str}
+            [query_params.search] {str}
         Returns:
             list: Collection of Group instances.
         """
