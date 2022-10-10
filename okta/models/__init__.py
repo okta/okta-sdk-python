@@ -486,6 +486,8 @@ from okta.models import o_auth_grant_type as o_auth_grant_type
 OAuthGrantType = o_auth_grant_type.OAuthGrantType
 from okta.models import o_auth_response_type as o_auth_response_type
 OAuthResponseType = o_auth_response_type.OAuthResponseType
+from okta.models import mfa_enrollment_policy as mfa_enrollment_policy
+MFAEnrollPolicy = mfa_enrollment_policy.MFAEnrollPolicy
 from okta.models import okta_sign_on_policy as okta_sign_on_policy
 OktaSignOnPolicy = okta_sign_on_policy.OktaSignOnPolicy
 from okta.models import okta_sign_on_policy_conditions as okta_sign_on_policy_conditions

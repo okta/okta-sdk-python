@@ -18,21 +18,30 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from aenum import MultiValueEnum
+from okta.models.policy\
+    import Policy
+from okta.models.policy_type import PolicyType
 
 
-class PolicyType(
-    str,
-    MultiValueEnum
+class MFAEnrollPolicy(
+    Policy
 ):
     """
-    An enumeration class for PolicyType.
+    A class for MFAEnrollPolicy objects.
     """
 
-    OAUTH_AUTHORIZATION_POLICY = "OAUTH_AUTHORIZATION_POLICY", "oauth_authorization_policy"
-    OKTA_SIGN_ON = "OKTA_SIGN_ON", "okta_sign_on"
-    PASSWORD = "PASSWORD", "password"
-    IDP_DISCOVERY = "IDP_DISCOVERY", "idp_discovery"
-    PROFILE_ENROLLMENT = "PROFILE_ENROLLMENT", "profile_enrollment"
-    ACCESS_POLICY = "ACCESS_POLICY", "access_policy"
-    MFA_ENROLL = "MFA_ENROLL", "mfa_enroll"
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config:
+            self.type = PolicyType("MFA_ENROLL")
+            self.conditions = None
+        else:
+            self.conditions = None
+
+    def request_format(self):
+        parent_req_format = super().request_format()
+        current_obj_format = {
+            "conditions": self.conditions
+        }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format
