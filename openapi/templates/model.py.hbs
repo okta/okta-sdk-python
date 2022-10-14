@@ -38,9 +38,21 @@ class {{pascalCase model.modelName}}(
     An enumeration class for {{pascalCase model.modelName}}.
     """
 
-    {{#each model.enum as |enum|}}
+    {{!-- Handle special cases within OAuthGrantType --}}
+    {{#if (eq model.modelName "OAuthGrantType")}}
+        {{#each model.enum as |enum|}}
+            {{#if (isUrnGrantType enum)}}
+    {{{replaceColons (upperCase (snakeCase enum))}}} = "{{prefixUrnGrantType enum}}", "{{oppositeCase (prefixUrnGrantType enum)}}"
+            {{else}}
     {{{replaceColons (upperCase (snakeCase enum))}}} = "{{enum}}", "{{oppositeCase enum}}"
-    {{/each}}
+            {{/if}}
+        {{/each}}
+    {{else}}
+        {{!-- Handle general multiValueEnum types --}}
+        {{#each model.enum as |enum|}}
+    {{{replaceColons (upperCase (snakeCase enum))}}} = "{{enum}}", "{{oppositeCase enum}}"
+        {{/each}}
+    {{/if}}
 {{/if}}
 {{else}}
 

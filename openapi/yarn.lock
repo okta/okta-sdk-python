@@ -2,23 +2,85 @@
 # yarn lockfile v1
 
 
-"@okta/openapi@^2.11.0":
-  version "2.11.1"
-  resolved "https://registry.yarnpkg.com/@okta/openapi/-/openapi-2.11.1.tgz#49e9738fbd68520b7a2deaf74d63f67e41a3e924"
-  integrity sha512-FdDTwscwULg94nGFAhlncLpKr+46nfkjWe2npe9+Th8xaMcnRYtymsUMI8wXNMrOxOJ9+lxTplnfJVl1n4i/Cw==
+"@apidevtools/json-schema-ref-parser@9.0.6":
+  version "9.0.6"
+  resolved "https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-master/@apidevtools/json-schema-ref-parser/-/json-schema-ref-parser-9.0.6.tgz#5d9000a3ac1fd25404da886da6b266adcd99cf1c"
+  integrity sha1-XZAAo6wf0lQE2ohtprJmrc2Zzxw=
   dependencies:
+    "@jsdevtools/ono" "^7.1.3"
+    call-me-maybe "^1.0.1"
+    js-yaml "^3.13.1"
+
+"@apidevtools/openapi-schemas@^2.1.0":
+  version "2.1.0"
+  resolved "https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-master/@apidevtools/openapi-schemas/-/openapi-schemas-2.1.0.tgz#9fa08017fb59d80538812f03fc7cac5992caaa17"
+  integrity sha1-n6CAF/tZ2AU4gS8D/HysWZLKqhc=
+
+"@apidevtools/swagger-cli@^4.0.4":
+  version "4.0.4"
+  resolved "https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-master/@apidevtools/swagger-cli/-/swagger-cli-4.0.4.tgz#c645c291f56e4add583111aca9edeee23d60fa10"
+  integrity sha1-xkXCkfVuSt1YMRGsqe3u4j1g+hA=
+  dependencies:
+    "@apidevtools/swagger-parser" "^10.0.1"
+    chalk "^4.1.0"
+    js-yaml "^3.14.0"
+    yargs "^15.4.1"
+
+"@apidevtools/swagger-methods@^3.0.2":
+  version "3.0.2"
+  resolved "https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-master/@apidevtools/swagger-methods/-/swagger-methods-3.0.2.tgz#b789a362e055b0340d04712eafe7027ddc1ac267"
+  integrity sha1-t4mjYuBVsDQNBHEur+cCfdwawmc=
+
+"@apidevtools/swagger-parser@^10.0.1":
+  version "10.1.0"
+  resolved "https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-master/@apidevtools/swagger-parser/-/swagger-parser-10.1.0.tgz#a987d71e5be61feb623203be0c96e5985b192ab6"
+  integrity sha1-qYfXHlvmH+tiMgO+DJblmFsZKrY=
+  dependencies:
+    "@apidevtools/json-schema-ref-parser" "9.0.6"
+    "@apidevtools/openapi-schemas" "^2.1.0"
+    "@apidevtools/swagger-methods" "^3.0.2"
+    "@jsdevtools/ono" "^7.1.3"
+    ajv "^8.6.3"
+    ajv-draft-04 "^1.0.0"
+    call-me-maybe "^1.0.1"
+
+"@jsdevtools/ono@^7.1.3":
+  version "7.1.3"
+  resolved "https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-master/@jsdevtools/ono/-/ono-7.1.3.tgz#9df03bbd7c696a5c58885c34aa06da41c8543796"
+  integrity sha1-nfA7vXxpalxYiFw0qgbaQchUN5Y=
+
+"@okta/openapi@^2.14.0":
+  version "2.14.0"
+  resolved "https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-all/@okta/openapi/-/@okta/openapi-2.14.0.tgz#cbf6c8c1303ca8949daaa1a45136c2e06df562e7"
+  integrity sha1-y/bIwTA8qJSdqqGkUTbC4G31Yuc=
+  dependencies:
+    "@apidevtools/swagger-cli" "^4.0.4"
     commander "2.9.0"
     fs-extra "3.0.1"
     handlebars "^4.7.6"
     js-yaml "^3.13.1"
     json-stable-stringify "1.0.1"
     node-fetch "^2.6.0"
-    swagger-cli "^2.3.0"
 
 "@types/color-name@^1.1.1":
   version "1.1.1"
   resolved "https://registry.npmjs.org/@types/color-name/-/color-name-1.1.1.tgz"
   integrity sha512-rr+OQyAjxze7GgWrSaJwydHStIhHq2lvY3BOC2Mj7KnzI7XK0Uw1TOOdI9lDoajEbSWLiYgoo4f1R51erQfhPQ==
+
+ajv-draft-04@^1.0.0:
+  version "1.0.0"
+  resolved "https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-master/ajv-draft-04/-/ajv-draft-04-1.0.0.tgz#3b64761b268ba0b9e668f0b41ba53fce0ad77fc8"
+  integrity sha1-O2R2GyaLoLnmaPC0G6U/zgrXf8g=
+
+ajv@^8.6.3:
+  version "8.11.0"
+  resolved "https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-master/ajv/-/ajv-8.11.0.tgz#977e91dd96ca669f54a11e23e378e33b884a565f"
+  integrity sha1-l36R3ZbKZp9UoR4j43jjO4hKVl8=
+  dependencies:
+    fast-deep-equal "^3.1.1"
+    json-schema-traverse "^1.0.0"
+    require-from-string "^2.0.2"
+    uri-js "^4.2.2"
 
 ansi-regex@^5.0.0:
   version "5.0.1"
@@ -50,10 +112,10 @@ camelcase@^5.0.0:
   resolved "https://registry.npmjs.org/camelcase/-/camelcase-5.3.1.tgz"
   integrity sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==
 
-chalk@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.npmjs.org/chalk/-/chalk-3.0.0.tgz"
-  integrity sha512-4D3B6Wf41KOYRFdszmDqMCGq5VV/uMAB273JILmO+3jAlh8X4qDtdtgCR3fxtbLEMzSx22QdhnDcJvu2u1fVwg==
+chalk@^4.1.0:
+  version "4.1.2"
+  resolved "https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-master/chalk/-/chalk-4.1.2.tgz#aac4e2b7734a740867aeb16bf02aad556a1e7a01"
+  integrity sha1-qsTit3NKdAhnrrFr8CqtVWoeegE=
   dependencies:
     ansi-styles "^4.1.0"
     supports-color "^7.1.0"
@@ -79,7 +141,7 @@ color-name@~1.1.4:
   resolved "https://registry.npmjs.org/color-name/-/color-name-1.1.4.tgz"
   integrity sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==
 
-commander@2.9.0, commander@^2.7.1:
+commander@2.9.0:
   version "2.9.0"
   resolved "https://registry.npmjs.org/commander/-/commander-2.9.0.tgz"
   integrity sha1-nJkJQXbhIkDLItbFFGCYQA/g99Q=
@@ -100,6 +162,11 @@ esprima@^4.0.0:
   version "4.0.1"
   resolved "https://registry.npmjs.org/esprima/-/esprima-4.0.1.tgz"
   integrity sha512-eGuFFw7Upda+g4p+QHvnW0RyTX/SVeJBDM/gCtMARO0cLuT2HcEKnTPvhjV6aGeqrCB/sbNop0Kszm0jsaWU4A==
+
+fast-deep-equal@^3.1.1:
+  version "3.1.3"
+  resolved "https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-master/fast-deep-equal/-/fast-deep-equal-3.1.3.tgz#3a7d56b559d6cbc3eb512325244e619a65c6c525"
+  integrity sha1-On1WtVnWy8PrUSMlJE5hmmXGxSU=
 
 find-up@^4.1.0:
   version "4.1.0"
@@ -138,7 +205,7 @@ handlebars@^4.7.6:
   resolved "https://registry.npmjs.org/handlebars/-/handlebars-4.7.7.tgz"
   integrity sha512-aAcXm5OAfE/8IXkcZvCepKU3VzW1/39Fb5ZuqMtgI/hT8X2YgoMvBY5dLhq/cpOvw7Lk1nK/UF71aLG/ZnVYRA==
   dependencies:
-    minimist "^1.2.6"
+    minimist "^1.2.5"
     neo-async "^2.6.0"
     source-map "^0.6.1"
     wordwrap "^1.0.0"
@@ -163,14 +230,18 @@ js-yaml@^3.13.1:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
-json-schema-ref-parser@^7.1.3:
-  version "7.1.4"
-  resolved "https://registry.npmjs.org/json-schema-ref-parser/-/json-schema-ref-parser-7.1.4.tgz"
-  integrity sha512-AD7bvav0vak1/63w3jH8F7eHId/4E4EPdMAEZhGxtjktteUv9dnNB/cJy6nVnMyoTPBJnLwFK6tiQPSTeleCtQ==
+js-yaml@^3.14.0:
+  version "3.14.1"
+  resolved "https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-master/js-yaml/-/js-yaml-3.14.1.tgz#dae812fdb3825fa306609a8717383c50c36a0537"
+  integrity sha1-2ugS/bOCX6MGYJqHFzg8UMNqBTc=
   dependencies:
-    call-me-maybe "^1.0.1"
-    js-yaml "^3.13.1"
-    ono "^6.0.0"
+    argparse "^1.0.7"
+    esprima "^4.0.0"
+
+json-schema-traverse@^1.0.0:
+  version "1.0.0"
+  resolved "https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-master/json-schema-traverse/-/json-schema-traverse-1.0.0.tgz#ae7bcb3656ab77a73ba5c49bf654f38e6b6860e2"
+  integrity sha1-rnvLNlard6c7pcSb9lTzjmtoYOI=
 
 json-stable-stringify@1.0.1:
   version "1.0.1"
@@ -198,32 +269,15 @@ locate-path@^5.0.0:
   dependencies:
     p-locate "^4.1.0"
 
-lodash.get@^4.4.2:
-  version "4.4.2"
-  resolved "https://registry.npmjs.org/lodash.get/-/lodash.get-4.4.2.tgz"
-  integrity sha1-LRd/ZS+jHpObRDjVNBSZ36OCXpk=
-
-lodash.isequal@^4.5.0:
-  version "4.5.0"
-  resolved "https://registry.npmjs.org/lodash.isequal/-/lodash.isequal-4.5.0.tgz"
-  integrity sha1-QVxEePK8wwEgwizhDtMib30+GOA=
-
-lodash@^4.17.15:
+lodash@^4.17.21:
   version "4.17.21"
-  resolved "https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz"
-  integrity sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==
+  resolved "https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-master/lodash/-/lodash-4.17.21.tgz#679591c564c3bffaae8454cf0b3df370c3d6911c"
+  integrity sha1-Z5WRxWTDv/quhFTPCz3zcMPWkRw=
 
-minimist@^1.2.5:
-  version "1.2.5"
-  resolved "https://registry.npmjs.org/minimist/-/minimist-1.2.5.tgz"
-  integrity sha512-FM9nNUYrRBAELZQT3xeZQ7fmMOBg6nWNmJKTcgsJeaLstP/UODVpGsr5OhXhhXg6f+qtJ8uiZ+PUxkDWcgIXLw==
-
-mkdirp@^0.5.1:
-  version "0.5.5"
-  resolved "https://registry.npmjs.org/mkdirp/-/mkdirp-0.5.5.tgz"
-  integrity sha512-NKmAlESf6jMGym1++R0Ra7wvhV+wFW63FaSOFPwRahvea0gMUcGUhVeAg/0BC0wiv9ih5NYPB1Wn1UEI1/L+xQ==
-  dependencies:
-    minimist "^1.2.5"
+minimist@^1.2.6:
+  version "1.2.7"
+  resolved "https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-master/minimist/-/minimist-1.2.7.tgz#daa1c4d91f507390437c6a8bc01078e7000c4d18"
+  integrity sha1-2qHE2R9Qc5BDfGqLwBB45wAMTRg=
 
 neo-async@^2.6.0:
   version "2.6.1"
@@ -236,21 +290,6 @@ node-fetch@^2.6.0:
   integrity sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==
   dependencies:
     whatwg-url "^5.0.0"
-
-ono@^6.0.0:
-  version "6.0.1"
-  resolved "https://registry.npmjs.org/ono/-/ono-6.0.1.tgz"
-  integrity sha512-5rdYW/106kHqLeG22GE2MHKq+FlsxMERZev9DCzQX1zwkxnFwBivSn5i17a5O/rDmOJOdf4Wyt80UZljzx9+DA==
-
-openapi-schemas@^1.0.2:
-  version "1.0.3"
-  resolved "https://registry.npmjs.org/openapi-schemas/-/openapi-schemas-1.0.3.tgz"
-  integrity sha512-KtMWcK2VtOS+nD8RKSIyScJsj8JrmVWcIX7Kjx4xEHijFYuvMTDON8WfeKOgeSb4uNG6UsqLj5Na7nKbSav9RQ==
-
-openapi-types@^1.3.5:
-  version "1.3.5"
-  resolved "https://registry.npmjs.org/openapi-types/-/openapi-types-1.3.5.tgz"
-  integrity sha512-11oi4zYorsgvg5yBarZplAqbpev5HkuVNPlZaPTknPDzAynq+lnJdXAmruGWP0s+dNYZS7bjM+xrTpJw7184Fg==
 
 p-limit@^2.2.0:
   version "2.3.0"
@@ -276,10 +315,20 @@ path-exists@^4.0.0:
   resolved "https://registry.npmjs.org/path-exists/-/path-exists-4.0.0.tgz"
   integrity sha512-ak9Qy5Q7jYb2Wwcey5Fpvg2KoAc/ZIhLSLOSBmRmygPsGwkVVt0fZa0qrtMz+m6tJTAHfZQ8FnmB4MG4LWy7/w==
 
+punycode@^2.1.0:
+  version "2.1.1"
+  resolved "https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-master/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
+  integrity sha1-tYsBCsQMIsVldhbI0sLALHv0eew=
+
 require-directory@^2.1.1:
   version "2.1.1"
   resolved "https://registry.npmjs.org/require-directory/-/require-directory-2.1.1.tgz"
   integrity sha1-jGStX9MNqxyXbiNE/+f3kqam30I=
+
+require-from-string@^2.0.2:
+  version "2.0.2"
+  resolved "https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-master/require-from-string/-/require-from-string-2.0.2.tgz#89a7fdd938261267318eafe14f9c32e598c36909"
+  integrity sha1-iaf92TgmEmcxjq/hT5wy5ZjDaQk=
 
 require-main-filename@^2.0.0:
   version "2.0.0"
@@ -324,35 +373,6 @@ supports-color@^7.1.0:
   dependencies:
     has-flag "^4.0.0"
 
-swagger-cli@^2.3.0:
-  version "2.3.5"
-  resolved "https://registry.npmjs.org/swagger-cli/-/swagger-cli-2.3.5.tgz"
-  integrity sha512-UL3S053zT0P9prYJj2zaiokER2KxJh2GWTJ12SbBAJZnlUKJrUZn3qK+zVc/i/bUcyrRRttA4cp8Lzk6cNm0nw==
-  dependencies:
-    chalk "^3.0.0"
-    js-yaml "^3.13.1"
-    mkdirp "^0.5.1"
-    swagger-parser "^8.0.4"
-    yargs "^15.0.2"
-
-swagger-methods@^2.0.1:
-  version "2.0.2"
-  resolved "https://registry.npmjs.org/swagger-methods/-/swagger-methods-2.0.2.tgz"
-  integrity sha512-/RNqvBZkH8+3S/FqBPejHxJxZenaYq3MrpeXnzi06aDIS39Mqf5YCUNb/ZBjsvFFt8h9FxfKs8EXPtcYdfLiRg==
-
-swagger-parser@^8.0.4:
-  version "8.0.4"
-  resolved "https://registry.npmjs.org/swagger-parser/-/swagger-parser-8.0.4.tgz"
-  integrity sha512-KGRdAaMJogSEB7sPKI31ptKIWX8lydEDAwWgB4pBMU7zys5cd54XNhoPSVlTxG/A3LphjX47EBn9j0dOGyzWbA==
-  dependencies:
-    call-me-maybe "^1.0.1"
-    json-schema-ref-parser "^7.1.3"
-    ono "^6.0.0"
-    openapi-schemas "^1.0.2"
-    openapi-types "^1.3.5"
-    swagger-methods "^2.0.1"
-    z-schema "^4.2.2"
-
 tr46@~0.0.3:
   version "0.0.3"
   resolved "https://registry.npmjs.org/tr46/-/tr46-0.0.3.tgz"
@@ -368,10 +388,12 @@ universalify@^0.1.0:
   resolved "https://registry.npmjs.org/universalify/-/universalify-0.1.2.tgz"
   integrity sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg==
 
-validator@^13.6.0:
-  version "13.7.0"
-  resolved "https://registry.npmjs.org/validator/-/validator-13.7.0.tgz"
-  integrity sha512-nYXQLCBkpJ8X6ltALua9dRrZDHVYxjJ1wgskNt1lH9fzGjs3tgojGSCBjmEPwkWS1y29+DrizMTW19Pr9uB2nw==
+uri-js@^4.2.2:
+  version "4.4.1"
+  resolved "https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-master/uri-js/-/uri-js-4.4.1.tgz#9b1a52595225859e55f669d928f88c6c57f2a77e"
+  integrity sha1-mxpSWVIlhZ5V9mnZKPiMbFfyp34=
+  dependencies:
+    punycode "^2.1.0"
 
 webidl-conversions@^3.0.0:
   version "3.0.1"
@@ -410,18 +432,18 @@ y18n@^4.0.0:
   resolved "https://registry.npmjs.org/y18n/-/y18n-4.0.1.tgz"
   integrity sha512-wNcy4NvjMYL8gogWWYAO7ZFWFfHcbdbE57tZO8e4cbpj8tfUcwrwqSl3ad8HxpYWCdXcJUCeKKZS62Av1affwQ==
 
-yargs-parser@^18.1.1:
+yargs-parser@^18.1.2:
   version "18.1.3"
-  resolved "https://registry.npmjs.org/yargs-parser/-/yargs-parser-18.1.3.tgz"
-  integrity sha512-o50j0JeToy/4K6OZcaQmW6lyXXKhq7csREXcDwk2omFPJEwUNOVtJKvmDr9EI1fAJZUyZcRF7kxGBWmRXudrCQ==
+  resolved "https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-master/yargs-parser/-/yargs-parser-18.1.3.tgz#be68c4975c6b2abf469236b0c870362fab09a7b0"
+  integrity sha1-vmjEl1xrKr9GkjawyHA2L6sJp7A=
   dependencies:
     camelcase "^5.0.0"
     decamelize "^1.2.0"
 
-yargs@^15.0.2:
-  version "15.3.1"
-  resolved "https://registry.npmjs.org/yargs/-/yargs-15.3.1.tgz"
-  integrity sha512-92O1HWEjw27sBfgmXiixJWT5hRBp2eobqXicLtPBIDBhYB+1HpwZlXmbW2luivBJHBzki+7VyCLRtAkScbTBQA==
+yargs@^15.4.1:
+  version "15.4.1"
+  resolved "https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-master/yargs/-/yargs-15.4.1.tgz#0d87a16de01aee9d8bec2bfbf74f67851730f4f8"
+  integrity sha1-DYehbeAa7p2L7Cv7909nhRcw9Pg=
   dependencies:
     cliui "^6.0.0"
     decamelize "^1.2.0"
@@ -433,15 +455,4 @@ yargs@^15.0.2:
     string-width "^4.2.0"
     which-module "^2.0.0"
     y18n "^4.0.0"
-    yargs-parser "^18.1.1"
-
-z-schema@^4.2.2:
-  version "4.2.4"
-  resolved "https://registry.npmjs.org/z-schema/-/z-schema-4.2.4.tgz"
-  integrity sha512-YvBeW5RGNeNzKOUJs3rTL4+9rpcvHXt5I051FJbOcitV8bl40pEfcG0Q+dWSwS0/BIYrMZ/9HHoqLllMkFhD0w==
-  dependencies:
-    lodash.get "^4.4.2"
-    lodash.isequal "^4.5.0"
-    validator "^13.6.0"
-  optionalDependencies:
-    commander "^2.7.1"
+    yargs-parser "^18.1.2"
