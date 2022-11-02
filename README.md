@@ -1,4 +1,4 @@
-[<img src="https://aws1.discourse-cdn.com/standard14/uploads/oktadev/original/1X/0c6402653dfb70edc661d4976a43a46f33e5e919.png" align="right" width="256px"/>](https://devforum.okta.com/)
+[<img src="https://global.discourse-cdn.com/oktadev/original/1X/0c6402653dfb70edc661d4976a43a46f33e5e919.png" align="right" width="256px"/>](https://devforum.okta.com/)
 [![Build Status](https://img.shields.io/travis/okta/okta-sdk-python.svg?logo=travis)](https://travis-ci.org/okta/okta-sdk-python)
 ![Beta Release](https://img.shields.io/badge/Beta-Upcoming-inactive.svg)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
@@ -91,6 +91,7 @@ loop.run_until_complete(main())
 ```
 
 Another way to instantiate okta_client (config should be provided in other place as described below):
+
 ```py
 # Instantiating without in-text credentials
 okta_client = OktaClient()
@@ -156,6 +157,7 @@ loop.run_until_complete(main())
 ```
 
 Note, that privateKey can be passed in JWK format or in PEM format, i.e. (examples generated with https://mkjwk.org):
+
 ```
 {
     "p": "4VmEO2ztlIHvalMHX797rWhETbKgB6bRbdGevYpRLZH167hKHB5vsuRjIAXJdujQw8W3rnas9Z-_Ddv1TbR5Qnz0UmhnxQAIbdDDUE9r5P_LEholrjY9Jz0P-W4jey-7cDATeITYHb3t67HcIwVbxQF5fkRdJAhfO029RqkH3OE",
@@ -172,7 +174,9 @@ Note, that privateKey can be passed in JWK format or in PEM format, i.e. (exampl
     "n": "r95K3WIN8-4dB-tEKHjyTIIZZUMbHz8ad5oBX2BGiGxfPGfHbz2RH4QLT9ffzL-tgEo8IKs0Myh0VTwauiwz0cdHuS2gUTasK9OsosX1h1scSu_eZ-g-__lXBogU-SvBXBAgjv8hdcZjqWYQwmhJp2Ilv0CuXKxQwZyjso775PDjWDCH5HkVcSxHyUvpThLfWfkfz5PNDZvRpuPltv55ILRaVZhwPb7VXLAm2ebfeYUdybUKpGnEogKQdaL7TdNvP-HRnUSXTiYeXWHzU04FaXJ7yLmtXOQ52FT9dwkwLrCDOmDSBGafZ9asUtgOKhKN6wQW5mndhMK_1zThfjZyxQ"
 }
 ```
+
 or
+
 ```
 -----BEGIN PRIVATE KEY-----
 MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCv3krdYg3z7h0H
@@ -267,6 +271,7 @@ class CacheImpl(Cache):
 ```
 
 A similar approach can be used to extend `okta.request_executor`:
+
 ```py
 from okta.request_executor import RequestExecutor
 
@@ -310,6 +315,7 @@ class RequestExecImpl(RequestExecutor):
 ```
 
 and `okta.http_client`:
+
 ```py
 from okta.http_client import HTTPClient
 
@@ -376,6 +382,7 @@ This library should only be used with the Okta management API. To call the [Auth
 ### Get and set custom attributes
 
 Custom attributes must first be defined in the Okta profile editor. Then, you can work with custom attributes on a user:
+
 > Feature is fully supported with SDK version >= 1.2.0
 
 ```py
@@ -405,6 +412,7 @@ user_profile.customAttr = 'custom value'
 **NOTE**: Custom Attributes case must be the same as defined in the Profile tab of your organization UI.
 
 To maintain consistent code, you can use camelCase for all default attributes:
+
 > Feature is fully supported with SDK version >= 1.6.1
 
 ```py
@@ -465,7 +473,9 @@ async def main():
 loop = asyncio.get_event_loop()
 loop.run_until_complete(main())
 ```
+
 Output should look like the following (removed pre-existing users from output):
+
 ```sh
 John Smith
 custom value
@@ -693,8 +703,9 @@ app, resp, err = await client.create_application(swa_app_model)
 ### Manage Group Schema custom atributes
 
 There are 2 ways of creating custom attribute for Group Schema Profile:
-1) via UI of your ORG (Directory -> Profile Editor -> Groups)
-2) with the following request (create custom attribute with name "testCustomAttr"):
+
+1. via UI of your ORG (Directory -> Profile Editor -> Groups)
+2. with the following request (create custom attribute with name "testCustomAttr"):
 
 ```py
 definition = {'custom':
@@ -845,13 +856,16 @@ async def main():
 loop = asyncio.get_event_loop()
 loop.run_until_complete(main())
 ```
+
 Result should look like:
+
 ```py
 {'errorCode': 'E0000011', 'errorSummary': 'Invalid token provided', 'errorLink': 'E0000011', 'errorId': 'oaeqWcqizEUQ_-iHc2hCbH9LA', 'errorCauses': []}
 ```
 
 List of available exceptions: OktaAPIException, HTTPException (to raise instead of returning errors OktaAPIError and HTTPError respectively).
 It is possible to inherit and/or extend given exceptions:
+
 ```py
 from okta.exceptions import HTTPException
 
@@ -890,6 +904,7 @@ except StopAsyncIteration:
 ```
 
 Here's a complete example:
+
 ```python
 from okta.client import Client as OktaClient
 import asyncio
@@ -937,6 +952,7 @@ client = OktaClient(config)
 **NOTE**: DO NOT SET DEBUG LEVEL IN PRODUCTION!
 
 Here's a complete example:
+
 ```python
 from okta.client import Client as OktaClient
 import asyncio
@@ -955,7 +971,6 @@ loop.run_until_complete(main())
 You should now see logs in your console. Actual API Tokens will be logged to the console, so use caution and never use `DEBUG` level logging in production.
 
 What it being logged: requests, http errors, caching responses.
-
 
 ## Configuration reference
 
@@ -980,10 +995,10 @@ okta:
     connectionTimeout: 30 # seconds
     orgUrl: "https://{yourOktaDomain}"
     proxy:
-      port: {proxy_port}
-      host: {proxy_host}
-      username: {proxy_username}
-      password: {proxy_password}
+      port: { proxy_port }
+      host: { proxy_host }
+      username: { proxy_username }
+      password: { proxy_password }
     token: "YOUR_API_TOKEN"
     requestTimeout: 0 # seconds
     rateLimit:
@@ -1001,10 +1016,10 @@ okta:
     connectionTimeout: 30 # seconds
     orgUrl: "https://{yourOktaDomain}"
     proxy:
-      port: {proxy_port}
-      host: {proxy_host}
-      username: {proxy_username}
-      password: {proxy_password}
+      port: { proxy_port }
+      host: { proxy_host }
+      username: { proxy_username }
+      password: { proxy_password }
     authorizationMode: "PrivateKey"
     clientId: "YOUR_CLIENT_ID"
     scopes:
