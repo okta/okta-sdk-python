@@ -130,6 +130,8 @@ class OktaAPIResponse():
         Returns:
             json: Next page of results
         """
+        if not self._next:
+            return (None, None)
         next_page, error = await self.get_next().__anext__()
         if error:
             return (None, error)
