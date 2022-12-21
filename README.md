@@ -30,7 +30,7 @@ This repository contains the Okta management SDK for Python. This SDK can be use
 - Manage applications with the [Apps API][apps-api-docs]
 - Much more!
 
-> Requires Python version 3.6.0 or higher.
+> Requires Python version 3.7.0 or higher.
 
 You can also learn more on the [Okta + Python][lang-landing-page] page in our documentation.
 
