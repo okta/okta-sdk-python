@@ -1,13 +1,13 @@
 import aiohttp
 import asyncio
 import datetime
+import pytest
 import time
 
 from http import HTTPStatus
 from multidict import MultiDict
 from okta.client import Client as OktaClient
 from okta.request_executor import RequestExecutor
-
 
 def test_retry_count_header(monkeypatch):
     org_url = "https://test.okta.com"
@@ -109,3 +109,31 @@ def test_clear_empty_params():
                     'nested_empty_dict_value': {'list_value': [1,2,3]}}
 
     assert req_exec.clear_empty_params(body) == cleared_body
+
+
+@pytest.mark.parametrize(
+    "accept_header",
+    ["", "application/xml", "application/json",
+        "text/html", "application/xhtml+xml", "image/jpeg"]
+)
+@pytest.mark.asyncio
+async def test_overwrite_default_request_executor_headers(accept_header):
+    org_url = "https://test.okta.com"
+    token = "TOKEN"
+    config = {'client': {'orgUrl': org_url,
+                         'token': token,
+                         'rateLimit': {},
+                         'authorizationMode': None}}
+    req_exec = RequestExecutor(config=config, cache=None)
+
+    # overwrite headers if parameter present
+    header_overwrite = {'Accept': accept_header} if accept_header else {}
+    request, error = await req_exec.create_request(
+        'GET',
+        f'{org_url}/api/v1/users',
+        {},
+        header_overwrite,
+        {}
+    )
+    assert request["headers"]["Accept"] ==\
+        accept_header if accept_header else "application/json"
