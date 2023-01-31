@@ -9,6 +9,7 @@ from multidict import MultiDict
 from okta.client import Client as OktaClient
 from okta.request_executor import RequestExecutor
 
+
 def test_retry_count_header(monkeypatch):
     org_url = "https://test.okta.com"
     token = "TOKEN"
@@ -29,11 +30,13 @@ def test_retry_count_header(monkeypatch):
 
         def __call__(self, **params):
             self.request_info = params
-            self.headers = MultiDict({'Date': datetime.datetime.now(tz=datetime.timezone.utc).strftime('%a, %d %b %Y %H:%M:%S %Z'),
-                                      'Content-Type': 'application/json',
-                                      'X-Rate-Limit-Limit': 600,
-                                      'X-Rate-Limit-Remaining': 599,
-                                      'X-Rate-Limit-Reset': str(time.time())})
+            self.headers = MultiDict(
+                {'Date': datetime.datetime.now(tz=datetime.timezone.utc).strftime('%a, %d %b %Y %H:%M:%S %Z'),
+                 'Content-Type': 'application/json',
+                 'X-Rate-Limit-Limit': 600,
+                 'X-Rate-Limit-Remaining': 599,
+                 'X-Rate-Limit-Reset': str(time.time())}
+            )
             self.url = params['url']
             self.content_type = 'application/json'
             self.links = ''
@@ -95,18 +98,18 @@ def test_clear_empty_params():
     body = {'int_value': 0,
             'str_value': '0',
             'empty_str_value': '',
-            'list_value': [1,2,3],
+            'list_value': [1, 2, 3],
             'empty_list_value': [],
             'dict_value': {'int_value': 0},
             'empty_dict_value': {},
-            'nested_empty_dict_value': {'list_value': [1,2,3], 'empty_list_value': []},
+            'nested_empty_dict_value': {'list_value': [1, 2, 3], 'empty_list_value': []},
             'nested_empty_list_value': {'empty_list_value': []}}
 
     cleared_body = {'int_value': 0,
                     'str_value': '0',
-                    'list_value': [1,2,3],
+                    'list_value': [1, 2, 3],
                     'dict_value': {'int_value': 0},
-                    'nested_empty_dict_value': {'list_value': [1,2,3]}}
+                    'nested_empty_dict_value': {'list_value': [1, 2, 3]}}
 
     assert req_exec.clear_empty_params(body) == cleared_body
 
@@ -135,5 +138,6 @@ async def test_overwrite_default_request_executor_headers(accept_header):
         header_overwrite,
         {}
     )
+    assert request is not None
     assert request["headers"]["Accept"] ==\
         accept_header if accept_header else "application/json"
