@@ -18,6 +18,6 @@ jobs:
           name: Run Tests
           command: pytest
 workflows:
-  main:
+  "Circle CI Tests":
     jobs:
       - build_and_test
