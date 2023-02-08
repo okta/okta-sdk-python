@@ -243,6 +243,7 @@ def mock_cache_return_none(*args, **kwargs):
 def mock_cache_return_value(*args, **kwargs):
     return CACHE_VALUE
 
+
 def mock_next_link(self_url: URL):
     return self_url.update_query({'after': 'mock_after_id'})
 
@@ -345,3 +346,45 @@ SAMPLE_JWK = {'alg': 'RS256',
                  kHsfHpFi4d4qS3J5kMvVUyIY3DwOsQenLo8C-
                  orgmo4UstEjNQ1OQt04mV1fp1aE2b9JVjv72c
                  PEE1SMqaEp7W0dBcm49L0mY7sNyEFS0U'''}
+
+SAMPLE_JWK_WITH_KID = {
+    "p": '''7nyZPzjUrUKoM-1DlzkJdFfD2R6hYTY9BMkoXYIu4S
+    ChhFrEgInH9hwQeMYT0wZTx2lcwVM3ZMpMaotaVAIVBHAK9i_C
+    Is2hANqtoXhE7IDKnaecV10htbV2dD1PpgDyK7_tv_vdAlsN1K
+    OSmg4Yb4uCsaambTUbV3rAUsSyu9E''',
+    "kty": "RSA",
+    "q": '''zijXO-JzhzBeBtg4zIkMdKGj0ewvWoLTDni7sNXhkt
+    XDKQT_5FvOptzFDn39sVJvBE69bF6pf_dH1rpKJxrLCkk0p734
+    0bdfq4AoHSnTIYToX31PlOWwgfJVebB7q_oGRe9UcA5Svb_WDh
+    4IkN9IyRrnFBWpPClpcNz_KOHMRck''',
+    "d": '''rP42vnls34ptQZHDXduD521BLqZX6Mgu2YrWXZN3-N
+    aMziVn_t14Q0ifpJR7rfD5Cw1yTpRmyc01VN2wBWfpwqJrzQZ3
+    2a1pFB_KgLGRBctjQx6DIDrqGVkRHUZHghnVVdrjEjolTaqBRP
+    4R20_csZEikNrz36zntUUtiG9Mnz27Z26UyD-odXSVZmtseRMX
+    aiGPKwg837w1ubT0lMZkYCZIdU2okxaLPw4L-peDaX4JLS7ZPE
+    7FkKK6rBXK9FquESMr6wTatz7TVyU0tToTL6JIS6pze29jaQ4A
+    w9iPxQZqR6-LeidTOLmwkYKx8WSoM5ymCMmW4ERDxsWYEP48AQ''',
+    "e": "AQAB",
+    "use": "sig",
+    "qi": '''vz8N-1OZb_Mc9qtBGaY3c2sLkGf9IaagEEzxC2sr00
+    4fGIqqXivpaZrs21y8y0d1sQG08K1zW6_S3_rpOZ7iJHnt3qD_U
+    J57JDX76LaQY0YyF9-R_qlRgvcnK_mU1OXSnGYhwZxqb78D3TAa
+    nKou31h-iEyxy_Mf-OpoPDAoLBE''',
+    "dp": '''CI4htTnlrz136Tz2ssMSCsFnPi-yHFmkwLoyn4AfDG
+    ZuROA4sl--8544HQ0GAwj0EnA-KpVApHX5Xc0X9XGJrXoTepdmA
+    Hed8fjmR6eX2WAZZKRxoFSv8-PJlwvoAo2AIn-lGMEBQadgjKM9
+    jBc7Wy0HCDZxO_Ouwmmd4po5yzE''',
+    "alg": "RS256",
+    "dq": '''c1I9M-50mYbg0gtZmnB_Wy6gKOlpg8PytAGtXDoIOM
+    8CoIt_aQpCCu0r_fNUWkC2gT5aj6hUQJTexqrmmAFQ2qwgnESUT
+    xu4lILX7Zhb1kA2jFPYlH33wnkAf1XNmGH_6Fb8cMJSXnpVDwiV
+    2hRM7tHxuTZ0uIahyNSWlxPX5KE''',
+    "n": '''wA5PSz_9DibXonaaLJxD31L9CIhNgB8v_OttNyt-lDP
+    JWBhhk0uySnSDDua1u5Ifaid4H_JargmkEooHtxwQJLBNpAD-F6
+    74D9vGRdrRBdj5k0eZTZmPwHTAtnK3SPcduwf7wUNNbx757TGJY
+    _VHpbgiSQ2EH12rJnYJtCWy1huYPa5bW3vDBnT7b1i83pESjyT1
+    g3DFnDzReGe-UIx8UTJOOgNRb_C9DXtotD8Gjdj56NiaDg7V1ek
+    YBFFIZp9Urm39Hlaus0FRT7xL8tHEuSfD7S6HpFsTk5yDDDDqyv
+    KLElmMvzocvFaWKvup_a3vPaBi6y4K5kBiq60o-IDMGQ''',
+    "kid": "5ashWt3LP1zkYwMGbfMsVizRfx52QTyky4GTHd9MykE"
+}

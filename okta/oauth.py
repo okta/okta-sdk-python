@@ -24,8 +24,10 @@ class OAuth:
         org_url = self._config["client"]["orgUrl"]
         client_id = self._config["client"]["clientId"]
         private_key = self._config["client"]["privateKey"]
+        # check if kid is provided in config - set if so
+        kid = self._config["client"]["kid"] if "kid" in self._config["client"] else None
 
-        return JWT.create_token(org_url, client_id, private_key)
+        return JWT.create_token(org_url, client_id, private_key, kid)
 
     async def get_access_token(self):
         """

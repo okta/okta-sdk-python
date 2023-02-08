@@ -9,7 +9,7 @@ Testing Private Key Inputs
 
 
 @ pytest.mark.parametrize("jwk_input",
-                          [mocks.SAMPLE_JWK, str(mocks.SAMPLE_JWK)])
+                          [mocks.SAMPLE_JWK, str(mocks.SAMPLE_JWK), mocks.SAMPLE_JWK_WITH_KID])
 def test_private_key_PEM_JWK_dict(jwk_input):
     generated_pem, generated_jwk = JWT.get_PEM_JWK(jwk_input)
 
