@@ -140,7 +140,8 @@ config = {
     'authorizationMode': 'PrivateKey',
     'clientId': '{yourClientId}',
     'scopes': ['okta.users.manage'],
-    'privateKey': 'YOUR_PRIVATE_JWK' # this parameter should be type of str
+    'privateKey': 'YOUR_PRIVATE_JWK', # this parameter should be type of str
+    'kid': 'YOUR_PRIVATE_KEY_ID' # if a key ID needs to be provided, it can be provided here or part of the privateKey under "kid"
 }
 okta_client = OktaClient(config)
 
