@@ -37,49 +37,49 @@ class PasswordPolicyRecoveryFactors(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            if "okta_call" in config:
-                if isinstance(config["okta_call"],
+            if "oktaCall" in config:
+                if isinstance(config["oktaCall"],
                               password_policy_recovery_factor_settings.PasswordPolicyRecoveryFactorSettings):
-                    self.okta_call = config["okta_call"]
-                elif config["okta_call"] is not None:
+                    self.okta_call = config["oktaCall"]
+                elif config["oktaCall"] is not None:
                     self.okta_call = password_policy_recovery_factor_settings.PasswordPolicyRecoveryFactorSettings(
-                        config["okta_call"]
+                        config["oktaCall"]
                     )
                 else:
                     self.okta_call = None
             else:
                 self.okta_call = None
-            if "okta_email" in config:
-                if isinstance(config["okta_email"],
+            if "oktaEmail" in config:
+                if isinstance(config["oktaEmail"],
                               password_policy_recovery_email.PasswordPolicyRecoveryEmail):
-                    self.okta_email = config["okta_email"]
-                elif config["okta_email"] is not None:
+                    self.okta_email = config["oktaEmail"]
+                elif config["oktaEmail"] is not None:
                     self.okta_email = password_policy_recovery_email.PasswordPolicyRecoveryEmail(
-                        config["okta_email"]
+                        config["oktaEmail"]
                     )
                 else:
                     self.okta_email = None
             else:
                 self.okta_email = None
-            if "okta_sms" in config:
-                if isinstance(config["okta_sms"],
+            if "oktaSms" in config:
+                if isinstance(config["oktaSms"],
                               password_policy_recovery_factor_settings.PasswordPolicyRecoveryFactorSettings):
-                    self.okta_sms = config["okta_sms"]
-                elif config["okta_sms"] is not None:
+                    self.okta_sms = config["oktaSms"]
+                elif config["oktaSms"] is not None:
                     self.okta_sms = password_policy_recovery_factor_settings.PasswordPolicyRecoveryFactorSettings(
-                        config["okta_sms"]
+                        config["oktaSms"]
                     )
                 else:
                     self.okta_sms = None
             else:
                 self.okta_sms = None
-            if "recovery_question" in config:
-                if isinstance(config["recovery_question"],
+            if "recoveryQuestion" in config:
+                if isinstance(config["recoveryQuestion"],
                               password_policy_recovery_question.PasswordPolicyRecoveryQuestion):
-                    self.recovery_question = config["recovery_question"]
-                elif config["recovery_question"] is not None:
+                    self.recovery_question = config["recoveryQuestion"]
+                elif config["recoveryQuestion"] is not None:
                     self.recovery_question = password_policy_recovery_question.PasswordPolicyRecoveryQuestion(
-                        config["recovery_question"]
+                        config["recoveryQuestion"]
                     )
                 else:
                     self.recovery_question = None

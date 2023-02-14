@@ -31,8 +31,8 @@ class ApplicationVisibilityHide(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.i_os = config["iOS"]\
-                if "iOS" in config else None
+            self.i_os = config["iOs"]\
+                if "iOs" in config else None
             self.web = config["web"]\
                 if "web" in config else None
         else:

@@ -48,58 +48,58 @@ class OpenIdConnectApplicationSettingsClient(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            if "application_type" in config:
-                if isinstance(config["application_type"],
+            if "applicationType" in config:
+                if isinstance(config["applicationType"],
                               open_id_connect_application_type.OpenIdConnectApplicationType):
-                    self.application_type = config["application_type"]
-                elif config["application_type"] is not None:
+                    self.application_type = config["applicationType"]
+                elif config["applicationType"] is not None:
                     self.application_type = open_id_connect_application_type.OpenIdConnectApplicationType(
-                        config["application_type"].upper()
+                        config["applicationType"].upper()
                     )
                 else:
                     self.application_type = None
             else:
                 self.application_type = None
-            self.client_uri = config["client_uri"]\
-                if "client_uri" in config else None
-            if "consent_method" in config:
-                if isinstance(config["consent_method"],
+            self.client_uri = config["clientUri"]\
+                if "clientUri" in config else None
+            if "consentMethod" in config:
+                if isinstance(config["consentMethod"],
                               open_id_connect_application_consent_method.OpenIdConnectApplicationConsentMethod):
-                    self.consent_method = config["consent_method"]
-                elif config["consent_method"] is not None:
+                    self.consent_method = config["consentMethod"]
+                elif config["consentMethod"] is not None:
                     self.consent_method = open_id_connect_application_consent_method.OpenIdConnectApplicationConsentMethod(
-                        config["consent_method"].upper()
+                        config["consentMethod"].upper()
                     )
                 else:
                     self.consent_method = None
             else:
                 self.consent_method = None
             self.grant_types = OktaCollection.form_list(
-                config["grant_types"] if "grant_types"\
+                config["grantTypes"] if "grantTypes"\
                     in config else [],
                 o_auth_grant_type.OAuthGrantType
             )
-            if "idp_initiated_login" in config:
-                if isinstance(config["idp_initiated_login"],
+            if "idpInitiatedLogin" in config:
+                if isinstance(config["idpInitiatedLogin"],
                               open_id_connect_application_idp_initiated_login.OpenIdConnectApplicationIdpInitiatedLogin):
-                    self.idp_initiated_login = config["idp_initiated_login"]
-                elif config["idp_initiated_login"] is not None:
+                    self.idp_initiated_login = config["idpInitiatedLogin"]
+                elif config["idpInitiatedLogin"] is not None:
                     self.idp_initiated_login = open_id_connect_application_idp_initiated_login.OpenIdConnectApplicationIdpInitiatedLogin(
-                        config["idp_initiated_login"]
+                        config["idpInitiatedLogin"]
                     )
                 else:
                     self.idp_initiated_login = None
             else:
                 self.idp_initiated_login = None
-            self.initiate_login_uri = config["initiate_login_uri"]\
-                if "initiate_login_uri" in config else None
-            if "issuer_mode" in config:
-                if isinstance(config["issuer_mode"],
+            self.initiate_login_uri = config["initiateLoginUri"]\
+                if "initiateLoginUri" in config else None
+            if "issuerMode" in config:
+                if isinstance(config["issuerMode"],
                               open_id_connect_application_issuer_mode.OpenIdConnectApplicationIssuerMode):
-                    self.issuer_mode = config["issuer_mode"]
-                elif config["issuer_mode"] is not None:
+                    self.issuer_mode = config["issuerMode"]
+                elif config["issuerMode"] is not None:
                     self.issuer_mode = open_id_connect_application_issuer_mode.OpenIdConnectApplicationIssuerMode(
-                        config["issuer_mode"].upper()
+                        config["issuerMode"].upper()
                     )
                 else:
                     self.issuer_mode = None
@@ -117,41 +117,41 @@ class OpenIdConnectApplicationSettingsClient(
                     self.jwks = None
             else:
                 self.jwks = None
-            self.logo_uri = config["logo_uri"]\
-                if "logo_uri" in config else None
-            self.policy_uri = config["policy_uri"]\
-                if "policy_uri" in config else None
+            self.logo_uri = config["logoUri"]\
+                if "logoUri" in config else None
+            self.policy_uri = config["policyUri"]\
+                if "policyUri" in config else None
             self.post_logout_redirect_uris = OktaCollection.form_list(
-                config["post_logout_redirect_uris"] if "post_logout_redirect_uris"\
+                config["postLogoutRedirectUris"] if "postLogoutRedirectUris"\
                     in config else [],
                 str
             )
             self.redirect_uris = OktaCollection.form_list(
-                config["redirect_uris"] if "redirect_uris"\
+                config["redirectUris"] if "redirectUris"\
                     in config else [],
                 str
             )
-            if "refresh_token" in config:
-                if isinstance(config["refresh_token"],
+            if "refreshToken" in config:
+                if isinstance(config["refreshToken"],
                               open_id_connect_application_settings_refresh_token.OpenIdConnectApplicationSettingsRefreshToken):
-                    self.refresh_token = config["refresh_token"]
-                elif config["refresh_token"] is not None:
+                    self.refresh_token = config["refreshToken"]
+                elif config["refreshToken"] is not None:
                     self.refresh_token = open_id_connect_application_settings_refresh_token.OpenIdConnectApplicationSettingsRefreshToken(
-                        config["refresh_token"]
+                        config["refreshToken"]
                     )
                 else:
                     self.refresh_token = None
             else:
                 self.refresh_token = None
             self.response_types = OktaCollection.form_list(
-                config["response_types"] if "response_types"\
+                config["responseTypes"] if "responseTypes"\
                     in config else [],
                 o_auth_response_type.OAuthResponseType
             )
-            self.tos_uri = config["tos_uri"]\
-                if "tos_uri" in config else None
-            self.wildcard_redirect = config["wildcard_redirect"]\
-                if "wildcard_redirect" in config else None
+            self.tos_uri = config["tosUri"]\
+                if "tosUri" in config else None
+            self.wildcard_redirect = config["wildcardRedirect"]\
+                if "wildcardRedirect" in config else None
         else:
             self.application_type = None
             self.client_uri = None

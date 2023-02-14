@@ -33,7 +33,7 @@ class SpCertificate(
         super().__init__(config)
         if config:
             self.x_5_c = OktaCollection.form_list(
-                config["x5c"] if "x5c"\
+                config["x5C"] if "x5C"\
                     in config else [],
                 str
             )

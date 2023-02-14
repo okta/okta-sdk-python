@@ -31,8 +31,8 @@ class Brand(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.links = config["_links"]\
-                if "_links" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
             self.agree_to_custom_privacy_policy = config["agreeToCustomPrivacyPolicy"]\
                 if "agreeToCustomPrivacyPolicy" in config else None
             self.custom_privacy_policy_url = config["customPrivacyPolicyUrl"]\

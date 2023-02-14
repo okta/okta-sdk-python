@@ -31,10 +31,10 @@ class VerifyUserFactorResponse(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.embedded = config["_embedded"]\
-                if "_embedded" in config else None
-            self.links = config["_links"]\
-                if "_links" in config else None
+            self.embedded = config["embedded"]\
+                if "embedded" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
             self.expires_at = config["expiresAt"]\
                 if "expiresAt" in config else None
             self.factor_result = config["factorResult"]\

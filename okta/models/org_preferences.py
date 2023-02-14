@@ -31,8 +31,8 @@ class OrgPreferences(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.links = config["_links"]\
-                if "_links" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
             self.show_end_user_footer = config["showEndUserFooter"]\
                 if "showEndUserFooter" in config else None
         else:

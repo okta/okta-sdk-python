@@ -32,10 +32,10 @@ class OAuth2Token(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.embedded = config["_embedded"]\
-                if "_embedded" in config else None
-            self.links = config["_links"]\
-                if "_links" in config else None
+            self.embedded = config["embedded"]\
+                if "embedded" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
             self.client_id = config["clientId"]\
                 if "clientId" in config else None
             self.created = config["created"]\

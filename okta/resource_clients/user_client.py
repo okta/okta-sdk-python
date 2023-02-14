@@ -67,11 +67,9 @@ class UserClient(APIClient):
             keep_empty_params=False
     ):
         """
-        Lists users that do not have a status of 'DEPROVISIONED
-        ' (by default), up to the maximum (200 for most orgs),
-        with pagination in most cases. A subset of users can be
-        returned that match a supported filter expression or s
-        earch criteria.
+        Lists users in your organization with pagination in mos
+        t cases.  A subset of users can be returned that match
+        a supported filter expression or search criteria.
         Args:
             query_params {dict}: Map of query parameters for request
             [query_params.q] {str}

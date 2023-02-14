@@ -35,8 +35,8 @@ class ProvisioningConnection(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.links = config["_links"]\
-                if "_links" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
             if "authScheme" in config:
                 if isinstance(config["authScheme"],
                               provisioning_connection_auth_scheme.ProvisioningConnectionAuthScheme):

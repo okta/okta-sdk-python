@@ -31,8 +31,8 @@ class EmailTemplateCustomization(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.links = config["_links"]\
-                if "_links" in config else None
+            self.links = config["links"]\
+                if "links" in config else None
             self.body = config["body"]\
                 if "body" in config else None
             self.created = config["created"]\
