@@ -1154,15 +1154,15 @@ class AuthorizationServerClient(APIClient):
         return (response, None)
 
     async def list_authorization_server_policy_rules(
-            self, policyId, authServerId,
+            self, authServerId, policyId,
             keep_empty_params=False
     ):
         """
         Enumerates all policy rules for the specified Custom Au
         thorization Server and Policy.
         Args:
-            policy_id {str}
             auth_server_id {str}
+            policy_id {str}
         Returns:
             list: Collection of AuthorizationServerPolicyRule instances.
         """
@@ -1201,15 +1201,15 @@ class AuthorizationServerClient(APIClient):
         return (result, response, None)
 
     async def create_authorization_server_policy_rule(
-            self, policyId, authServerId, authorization_server_policy_rule,
+            self, authServerId, policyId, authorization_server_policy_rule,
             keep_empty_params=False
     ):
         """
         Creates a policy rule for the specified Custom Authoriz
         ation Server and Policy.
         Args:
-            policy_id {str}
             auth_server_id {str}
+            policy_id {str}
             {authorization_server_policy_rule}
         Returns:
             AuthorizationServerPolicyRule
@@ -1253,15 +1253,15 @@ class AuthorizationServerClient(APIClient):
         return (result, response, None)
 
     async def delete_authorization_server_policy_rule(
-            self, policyId, authServerId, ruleId,
+            self, authServerId, policyId, ruleId,
             keep_empty_params=False
     ):
         """
         Deletes a Policy Rule defined in the specified Custom A
         uthorization Server and Policy.
         Args:
-            policy_id {str}
             auth_server_id {str}
+            policy_id {str}
             rule_id {str}
         """
         http_method = "delete".upper()
@@ -1291,15 +1291,15 @@ class AuthorizationServerClient(APIClient):
         return (response, None)
 
     async def get_authorization_server_policy_rule(
-            self, policyId, authServerId, ruleId,
+            self, authServerId, policyId, ruleId,
             keep_empty_params=False
     ):
         """
         Returns a Policy Rule by ID that is defined in the spec
         ified Custom Authorization Server and Policy.
         Args:
-            policy_id {str}
             auth_server_id {str}
+            policy_id {str}
             rule_id {str}
         Returns:
             AuthorizationServerPolicyRule
@@ -1337,15 +1337,15 @@ class AuthorizationServerClient(APIClient):
         return (result, response, None)
 
     async def update_authorization_server_policy_rule(
-            self, policyId, authServerId, ruleId, authorization_server_policy_rule,
+            self, authServerId, policyId, ruleId, authorization_server_policy_rule,
             keep_empty_params=False
     ):
         """
         Updates the configuration of the Policy Rule defined in
         the specified Custom Authorization Server and Policy.
         Args:
-            policy_id {str}
             auth_server_id {str}
+            policy_id {str}
             rule_id {str}
             {authorization_server_policy_rule}
         Returns:

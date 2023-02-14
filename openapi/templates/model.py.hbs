@@ -95,7 +95,7 @@ class {{pascalCase model.modelName}}(
 
     BASIC_ATTRIBUTES = (
         {{#each model.properties as |prop|}}
-        "{{camelCase prop.propertyName}}",
+        "{{prop.propertyName}}",
         {{/each}}
     )
     {{/if}}
@@ -124,7 +124,7 @@ class {{pascalCase model.modelName}}(
             {{#each model.properties as |prop|}}
             {{#if (eq prop.isArray true) }}
             self.{{snakeCase prop.propertyName}} = OktaCollection.form_list(
-                config["{{camelCase prop.propertyName}}"] if "{{camelCase prop.propertyName}}"\
+                config["{{prop.propertyName}}"] if "{{prop.propertyName}}"\
                     in config else [],
                 {{#if (ne prop.specialType undefined)}}
                 {{prop.specialType}}
@@ -134,18 +134,18 @@ class {{pascalCase model.modelName}}(
             )
             {{else}}
             {{#if (exists prop "$ref")}}
-            if "{{camelCase prop.propertyName}}" in config:
-                if isinstance(config["{{camelCase prop.propertyName}}"],
+            if "{{prop.propertyName}}" in config:
+                if isinstance(config["{{prop.propertyName}}"],
                               {{snakeCase prop.model}}.{{pascalCase prop.model}}):
-                    self.{{snakeCase prop.propertyName}} = config["{{camelCase prop.propertyName}}"]
-                elif config["{{camelCase prop.propertyName}}"] is not None:
+                    self.{{snakeCase prop.propertyName}} = config["{{prop.propertyName}}"]
+                elif config["{{prop.propertyName}}"] is not None:
                     {{#if (eq prop.commonType "enum")}}
                     self.{{snakeCase prop.propertyName}} = {{snakeCase prop.model}}.{{pascalCase prop.model}}(
-                        config["{{camelCase prop.propertyName}}"].upper()
+                        config["{{prop.propertyName}}"].upper()
                     )
                     {{else}}
                     self.{{snakeCase prop.propertyName}} = {{snakeCase prop.model}}.{{pascalCase prop.model}}(
-                        config["{{camelCase prop.propertyName}}"]
+                        config["{{prop.propertyName}}"]
                     )
                     {{/if}}
                 else:
@@ -154,11 +154,11 @@ class {{pascalCase model.modelName}}(
                 self.{{snakeCase prop.propertyName}} = None
             {{else}}
             {{#if (ne prop.default undefined) }}
-            self.{{snakeCase prop.propertyName}} = config["{{camelCase prop.propertyName}}"]\
-                if "{{camelCase prop.propertyName}}" in config else {{{prop.default}}}
+            self.{{snakeCase prop.propertyName}} = config["{{prop.propertyName}}"]\
+                if "{{prop.propertyName}}" in config else {{{prop.default}}}
             {{else}}
-            self.{{snakeCase prop.propertyName}} = config["{{camelCase prop.propertyName}}"]\
-                if "{{camelCase prop.propertyName}}" in config else None
+            self.{{snakeCase prop.propertyName}} = config["{{prop.propertyName}}"]\
+                if "{{prop.propertyName}}" in config else None
             {{/if}}
             {{/if}}
             {{/if}}
@@ -166,8 +166,7 @@ class {{pascalCase model.modelName}}(
             {{#if (or (eq model.modelName "UserProfile") (eq model.modelName "GroupProfile"))}}
             # set custom attributes not defined in model, do not change string case
             for attr_name in config:
-                lower_camel_case = to_lower_camel_case(attr_name)
-                if lower_camel_case not in {{model.modelName}}.BASIC_ATTRIBUTES:
+                if attr_name not in {{model.modelName}}.BASIC_ATTRIBUTES:
                     setattr(self, attr_name, config[attr_name])
             {{/if}}
         else:

@@ -34,8 +34,8 @@ class CatalogApplication(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.links = config["links"]\
-                if "links" in config else None
+            self.links = config["_links"]\
+                if "_links" in config else None
             self.category = config["category"]\
                 if "category" in config else None
             self.description = config["description"]\

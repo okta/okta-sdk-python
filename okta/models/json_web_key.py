@@ -32,8 +32,8 @@ class JsonWebKey(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.links = config["links"]\
-                if "links" in config else None
+            self.links = config["_links"]\
+                if "_links" in config else None
             self.alg = config["alg"]\
                 if "alg" in config else None
             self.created = config["created"]\
@@ -43,7 +43,7 @@ class JsonWebKey(
             self.expires_at = config["expiresAt"]\
                 if "expiresAt" in config else None
             self.key_ops = OktaCollection.form_list(
-                config["keyOps"] if "keyOps"\
+                config["key_ops"] if "key_ops"\
                     in config else [],
                 str
             )
@@ -60,16 +60,16 @@ class JsonWebKey(
             self.use = config["use"]\
                 if "use" in config else None
             self.x_5_c = OktaCollection.form_list(
-                config["x5C"] if "x5C"\
+                config["x5c"] if "x5c"\
                     in config else [],
                 str
             )
-            self.x_5_t = config["x5T"]\
-                if "x5T" in config else None
-            self.x_5_t_s_256 = config["x5TS256"]\
-                if "x5TS256" in config else None
-            self.x_5_u = config["x5U"]\
-                if "x5U" in config else None
+            self.x_5_t = config["x5t"]\
+                if "x5t" in config else None
+            self.x_5_t_s_256 = config["x5t#S256"]\
+                if "x5t#S256" in config else None
+            self.x_5_u = config["x5u"]\
+                if "x5u" in config else None
         else:
             self.links = None
             self.alg = None

@@ -1,8 +1,10 @@
+import time
 import pytest
 from tests.mocks import MockOktaClient
 import okta.models as models
 from http import HTTPStatus
 from okta.errors.okta_api_error import OktaAPIError
+from okta.client import Client
 
 
 class TestAuthorizationServerResource:
@@ -1494,7 +1496,6 @@ class TestAuthorizationServerResource:
     @pytest.mark.vcr()
     @pytest.mark.asyncio
     async def test_list_authorization_server_policy_rules(self, fs):
-        # Instantiate Mock Client
         client = MockOktaClient(fs)
 
         # Create Auth Server
@@ -1572,13 +1573,13 @@ class TestAuthorizationServerResource:
 
             created_policy_rule, _, err = await \
                 client.create_authorization_server_policy_rule(
-                    created_policy.id, created_auth_server.id, policy_rule_model
+                    created_auth_server.id, created_policy.id, policy_rule_model
                 )
             assert err is None
 
             # Get Policy Rules
             policy_rules, _, err = await client.list_authorization_server_policy_rules(
-                created_policy.id, created_auth_server.id
+                created_auth_server.id, created_policy.id
             )
 
             assert err is None
@@ -1592,7 +1593,7 @@ class TestAuthorizationServerResource:
             try:
                 # Delete Policy Rule
                 _, err = await client.delete_authorization_server_policy_rule(
-                    created_policy.id, created_auth_server.id, created_policy_rule.id
+                    created_auth_server.id, created_policy.id, created_policy_rule.id
                 )
                 if err:
                     errors.append(err)

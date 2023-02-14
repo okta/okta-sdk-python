@@ -33,7 +33,7 @@ class DevicePolicyRuleConditionPlatform(
         super().__init__(config)
         if config:
             self.supported_mdm_frameworks = OktaCollection.form_list(
-                config["supportedMdmFrameworks"] if "supportedMdmFrameworks"\
+                config["supportedMDMFrameworks"] if "supportedMDMFrameworks"\
                     in config else [],
                 str
             )

@@ -21,11 +21,11 @@ limitations under the License.
 from okta.okta_object import OktaObject
 
 
-class OrgPreferences(
+class ClientSecret(
     OktaObject
 ):
     """
-    A class for OrgPreferences objects.
+    A class for ClientSecret objects.
     """
 
     def __init__(self, config=None):
@@ -33,17 +33,37 @@ class OrgPreferences(
         if config:
             self.links = config["_links"]\
                 if "_links" in config else None
-            self.show_end_user_footer = config["showEndUserFooter"]\
-                if "showEndUserFooter" in config else None
+            self.client_secret = config["client_secret"]\
+                if "client_secret" in config else None
+            self.created = config["created"]\
+                if "created" in config else None
+            self.id = config["id"]\
+                if "id" in config else None
+            self.last_updated = config["lastUpdated"]\
+                if "lastUpdated" in config else None
+            self.secret_hash = config["secret_hash"]\
+                if "secret_hash" in config else None
+            self.status = config["status"]\
+                if "status" in config else None
         else:
             self.links = None
-            self.show_end_user_footer = None
+            self.client_secret = None
+            self.created = None
+            self.id = None
+            self.last_updated = None
+            self.secret_hash = None
+            self.status = None
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
             "_links": self.links,
-            "showEndUserFooter": self.show_end_user_footer
+            "client_secret": self.client_secret,
+            "created": self.created,
+            "id": self.id,
+            "lastUpdated": self.last_updated,
+            "secret_hash": self.secret_hash,
+            "status": self.status
         }
         parent_req_format.update(current_obj_format)
         return parent_req_format

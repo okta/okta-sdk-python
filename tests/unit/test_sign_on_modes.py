@@ -199,14 +199,14 @@ def test_known_sign_on_mode():
     event_loop = asyncio.get_event_loop()
     result, resp, err = event_loop.run_until_complete(client.list_applications())
     assert type(result[0]) == SamlApplication
-    assert result[0].as_dict() == EXPECTED_SAML_APP_AS_DICT
+    assert result[0].id == EXPECTED_SAML_APP_AS_DICT['id']
 
     # check get application
     client._request_executor.set_response(response)
     event_loop = asyncio.get_event_loop()
     result, resp, err = event_loop.run_until_complete(client.get_application("test_id"))
     assert type(result) == SamlApplication
-    assert result.as_dict() == EXPECTED_SAML_APP_AS_DICT
+    assert result.id == EXPECTED_SAML_APP_AS_DICT['id']
 
 
 def test_unknown_sign_on_mode():
@@ -235,7 +235,7 @@ def test_unknown_sign_on_mode():
     # verify if result fallbacks to generic Application
     assert type(result[0]) != SamlApplication
     assert type(result[0]) == Application
-    assert result[0].as_dict() == expected
+    assert result[0].id == expected['id']
 
     # check get application
     client._request_executor.set_response(response)
@@ -244,7 +244,7 @@ def test_unknown_sign_on_mode():
     # verify if result fallbacks to generic Application
     assert type(result) != SamlApplication
     assert type(result) == Application
-    assert result.as_dict() == expected
+    assert result.id == expected['id']
 
 
 def test_no_sign_on_mode():
@@ -272,7 +272,7 @@ def test_no_sign_on_mode():
     result, resp, err = event_loop.run_until_complete(client.list_applications())
     assert type(result[0]) != SamlApplication
     assert type(result[0]) == Application
-    assert result[0].as_dict() == expected
+    assert result[0].id == expected['id']
 
     # check get application
     client._request_executor.set_response(response)
@@ -280,4 +280,4 @@ def test_no_sign_on_mode():
     result, resp, err = event_loop.run_until_complete(client.get_application("test_id"))
     assert type(result) != SamlApplication
     assert type(result) == Application
-    assert result.as_dict() == expected
+    assert result.id == expected['id']

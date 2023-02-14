@@ -33,8 +33,8 @@ class OrgOktaSupportSettingsObj(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.links = config["links"]\
-                if "links" in config else None
+            self.links = config["_links"]\
+                if "_links" in config else None
             self.expiration = config["expiration"]\
                 if "expiration" in config else None
             if "support" in config:

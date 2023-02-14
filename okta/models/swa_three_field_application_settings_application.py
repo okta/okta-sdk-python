@@ -42,8 +42,8 @@ class SwaThreeFieldApplicationSettingsApplication(
                 if "loginUrlRegex" in config else None
             self.password_selector = config["passwordSelector"]\
                 if "passwordSelector" in config else None
-            self.target_url = config["targetUrl"]\
-                if "targetUrl" in config else None
+            self.target_url = config["targetURL"]\
+                if "targetURL" in config else None
             self.user_name_selector = config["userNameSelector"]\
                 if "userNameSelector" in config else None
         else:

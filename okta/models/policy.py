@@ -35,10 +35,10 @@ class Policy(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.embedded = config["embedded"]\
-                if "embedded" in config else None
-            self.links = config["links"]\
-                if "links" in config else None
+            self.embedded = config["_embedded"]\
+                if "_embedded" in config else None
+            self.links = config["_links"]\
+                if "_links" in config else None
             if "conditions" in config:
                 if isinstance(config["conditions"],
                               policy_rule_conditions.PolicyRuleConditions):

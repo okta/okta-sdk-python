@@ -35,13 +35,13 @@ class OpenIdConnectApplicationSettingsRefreshToken(
         if config:
             self.leeway = config["leeway"]\
                 if "leeway" in config else None
-            if "rotationType" in config:
-                if isinstance(config["rotationType"],
+            if "rotation_type" in config:
+                if isinstance(config["rotation_type"],
                               open_id_connect_refresh_token_rotation_type.OpenIdConnectRefreshTokenRotationType):
-                    self.rotation_type = config["rotationType"]
-                elif config["rotationType"] is not None:
+                    self.rotation_type = config["rotation_type"]
+                elif config["rotation_type"] is not None:
                     self.rotation_type = open_id_connect_refresh_token_rotation_type.OpenIdConnectRefreshTokenRotationType(
-                        config["rotationType"].upper()
+                        config["rotation_type"].upper()
                     )
                 else:
                     self.rotation_type = None

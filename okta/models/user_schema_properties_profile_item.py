@@ -31,8 +31,8 @@ class UserSchemaPropertiesProfileItem(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.ref = config["ref"]\
-                if "ref" in config else None
+            self.ref = config["$ref"]\
+                if "$ref" in config else None
         else:
             self.ref = None
 

@@ -21,29 +21,25 @@ limitations under the License.
 from okta.okta_object import OktaObject
 
 
-class OrgPreferences(
+class ClientSecretMetadata(
     OktaObject
 ):
     """
-    A class for OrgPreferences objects.
+    A class for ClientSecretMetadata objects.
     """
 
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.links = config["_links"]\
-                if "_links" in config else None
-            self.show_end_user_footer = config["showEndUserFooter"]\
-                if "showEndUserFooter" in config else None
+            self.client_secret = config["client_secret"]\
+                if "client_secret" in config else None
         else:
-            self.links = None
-            self.show_end_user_footer = None
+            self.client_secret = None
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
-            "_links": self.links,
-            "showEndUserFooter": self.show_end_user_footer
+            "client_secret": self.client_secret
         }
         parent_req_format.update(current_obj_format)
         return parent_req_format

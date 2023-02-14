@@ -10,13 +10,13 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - okta-sdk-python/1.5.1 python/3.8.2 Darwin/19.6.0
+      - okta-sdk-python/2.8.0 python/3.10.1 Darwin/21.6.0
     method: POST
     uri: https://test.okta.com/api/v1/authorizationServers
   response:
     body:
-      string: '{"id":"aushotpnzxzCXmFlR5d6","name":"python_sdk_test_abDeZ","description":"Test
-        Auth Server","audiences":["api://default"],"issuer":"https://test.okta.com/oauth2/aushotpnzxzCXmFlR5d6","issuerMode":"ORG_URL","status":"ACTIVE","created":"2021-04-02T18:19:55.000Z","lastUpdated":"2021-04-02T18:19:55.000Z","credentials":{"signing":{"kid":"4lFCKDbkQrKCykkPIEqRGdnteVdgU1K-opVb5_CcQbE","rotationMode":"AUTO","lastRotated":"2021-04-02T18:19:55.000Z","nextRotation":"2021-07-01T18:19:55.000Z"}},"_links":{"rotateKey":{"href":"https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/credentials/lifecycle/keyRotate","hints":{"allow":["POST"]}},"metadata":[{"name":"oauth-authorization-server","href":"https://test.okta.com/oauth2/aushotpnzxzCXmFlR5d6/.well-known/oauth-authorization-server","hints":{"allow":["GET"]}},{"name":"openid-configuration","href":"https://test.okta.com/oauth2/aushotpnzxzCXmFlR5d6/.well-known/openid-configuration","hints":{"allow":["GET"]}}],"keys":{"href":"https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/credentials/keys","hints":{"allow":["GET"]}},"claims":{"href":"https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/claims","hints":{"allow":["GET","POST"]}},"policies":{"href":"https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies","hints":{"allow":["GET","POST"]}},"self":{"href":"https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6","hints":{"allow":["GET","DELETE","PUT"]}},"scopes":{"href":"https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/scopes","hints":{"allow":["GET","POST"]}},"deactivate":{"href":"https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/lifecycle/deactivate","hints":{"allow":["POST"]}}}}'
+      string: '{"id":"aus4dnbe96RN8oWne0g7","name":"python_sdk_test_abDeZ","description":"Test
+        Auth Server","audiences":["api://default"],"issuer":"https://test.okta.com/oauth2/aus4dnbe96RN8oWne0g7","issuerMode":"DYNAMIC","status":"ACTIVE","created":"2023-02-14T17:48:37.000Z","lastUpdated":"2023-02-14T17:48:37.000Z","credentials":{"signing":{"kid":"koQAPsntst9JZHjBDBdDZ58eJfarRJbqUhotOWGJ6ug","rotationMode":"AUTO","lastRotated":"2023-02-14T17:48:37.000Z","nextRotation":"2023-05-15T17:48:37.000Z"}},"default":false,"_links":{"rotateKey":{"href":"https://test.okta.com/api/v1/authorizationServers/aus4dnbe96RN8oWne0g7/credentials/lifecycle/keyRotate","hints":{"allow":["POST"]}},"metadata":[{"name":"oauth-authorization-server","href":"https://test.okta.com/oauth2/aus4dnbe96RN8oWne0g7/.well-known/oauth-authorization-server","hints":{"allow":["GET"]}},{"name":"openid-configuration","href":"https://test.okta.com/oauth2/aus4dnbe96RN8oWne0g7/.well-known/openid-configuration","hints":{"allow":["GET"]}}],"keys":{"href":"https://test.okta.com/api/v1/authorizationServers/aus4dnbe96RN8oWne0g7/credentials/keys","hints":{"allow":["GET"]}},"claims":{"href":"https://test.okta.com/api/v1/authorizationServers/aus4dnbe96RN8oWne0g7/claims","hints":{"allow":["GET","POST"]}},"policies":{"href":"https://test.okta.com/api/v1/authorizationServers/aus4dnbe96RN8oWne0g7/policies","hints":{"allow":["GET","POST"]}},"self":{"href":"https://test.okta.com/api/v1/authorizationServers/aus4dnbe96RN8oWne0g7","hints":{"allow":["GET","DELETE","PUT"]}},"scopes":{"href":"https://test.okta.com/api/v1/authorizationServers/aus4dnbe96RN8oWne0g7/scopes","hints":{"allow":["GET","POST"]}},"deactivate":{"href":"https://test.okta.com/api/v1/authorizationServers/aus4dnbe96RN8oWne0g7/lifecycle/deactivate","hints":{"allow":["POST"]}}}}'
     headers:
       Cache-Control:
       - no-cache, no-store
@@ -25,55 +25,64 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 02 Apr 2021 18:19:55 GMT
+      - Tue, 14 Feb 2023 17:48:37 GMT
       Expires:
       - '0'
       Pragma:
       - no-cache
       Public-Key-Pins-Report-Only:
-      - pin-sha256="r5EfzZxQVvQpKo3AgYRaT7X2bDO/kj3ACwmxfdT2zt8="; pin-sha256="MaqlcUgk2mvY/RFSGeSwBRkI+rZ6/dxe/DuQfBT/vnQ=";
-        pin-sha256="72G5IEvDEWn+EThf3qjR7/bQSWaS2ZSLqolhnO6iyJI="; pin-sha256="rrV6CLCCvqnk89gWibYT0JO6fNQ8cCit7GGoiVTjCOg=";
+      - pin-sha256="MAbZWK1eIklkAxEkc7uqoZ/QX3cgLZT0HY5TRG1JXrs="; pin-sha256="PJ1QGTlW5ViFNhswMsYKp4X8C7KdG8nDW4ZcXLmYMyI=";
+        pin-sha256="5LlRWGTBVjpfNXXU5T7cYVUbOSPcgpMgdjaWd/R9Leg="; pin-sha256="lpaMLlEsp7/dVZoeWt3f9ciJIMGimixAIaKNsn9/bCY=";
         max-age=60; report-uri="https://okta.report-uri.com/r/default/hpkp/reportOnly"
       Server:
       - nginx
       Set-Cookie:
       - sid=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
-      - JSESSIONID=C2A7332E4D58C35AA63250211FAEAA52; Path=/; Secure; HttpOnly
+      - autolaunch_triggered=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
+      - JSESSIONID=8978AD1F305FAE356CE8A70EBF5CF608; Path=/; Secure; HttpOnly
       Strict-Transport-Security:
       - max-age=315360000; includeSubDomains
       Transfer-Encoding:
       - chunked
-      content-security-policy-report-only: 'default-src ''self'' *.oktacdn.com test.okta.com
-        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
-        connect-src ''self'' *.oktacdn.com *.mixpanel.com *.mapbox.com app.pendo.io
-        data.pendo.io pendo-static-5634101834153984.storage.googleapis.com test.okta.com
-        test-admin.okta.com https://oinmanager.okta.com data: *.zscloud.net *.zscalerbeta.net
-        *.zscaler.net *.zscalertwo.net *.zscalerthree.net; script-src ''unsafe-inline''
-        ''unsafe-eval'' ''self'' *.oktacdn.com *.zscloud.net *.zscalerbeta.net *.zscaler.net
-        *.zscalertwo.net *.zscalerthree.net; style-src ''unsafe-inline'' ''self''
-        *.oktacdn.com app.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
-        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
-        frame-src ''self'' login.okta.com test.okta.com test-admin.okta.com *.zscloud.net
-        *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net; img-src
-        ''self'' *.oktacdn.com test.okta.com *.tiles.mapbox.com *.mapbox.com app.pendo.io
-        data.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
-        data: blob: *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net
-        *.zscalerthree.net; font-src data: ''self'' *.oktacdn.com fonts.gstatic.com
-        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net'
+      content-security-policy:
+      - 'default-src ''self'' dev-jabro-oie.trexcloud.com *.oktacdn.com; connect-src
+        ''self'' dev-jabro-oie.trexcloud.com dev-jabro-oie-admin.trexcloud.com *.oktacdn.com
+        *.mixpanel.com *.mapbox.com app.pendo.io data.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        pendo-static-5391521872216064.storage.googleapis.com *.mtls.trexcloud.com
+        dev-jabro-oie.kerberos.trexcloud.com *.authenticatorlocaldev.com:8769 http://localhost:8769
+        http://127.0.0.1:8769 *.authenticatorlocaldev.com:65111 http://localhost:65111
+        http://127.0.0.1:65111 *.authenticatorlocaldev.com:65121 http://localhost:65121
+        http://127.0.0.1:65121 *.authenticatorlocaldev.com:65131 http://localhost:65131
+        http://127.0.0.1:65131 *.authenticatorlocaldev.com:65141 http://localhost:65141
+        http://127.0.0.1:65141 *.authenticatorlocaldev.com:65151 http://localhost:65151
+        http://127.0.0.1:65151 https://oinmanager.trexcloud.com data:; script-src
+        ''unsafe-inline'' ''nonce-i9IMkYiU9YUHIXgRt78jJR8uqC_EYQwa4YBgSR17yOA'' ''unsafe-eval''
+        ''self'' dev-jabro-oie.trexcloud.com *.oktacdn.com; style-src ''unsafe-inline''
+        ''self'' dev-jabro-oie.trexcloud.com *.oktacdn.com app.pendo.io cdn.pendo.io
+        pendo-static-5634101834153984.storage.googleapis.com pendo-static-5391521872216064.storage.googleapis.com;
+        frame-src ''self'' dev-jabro-oie.trexcloud.com dev-jabro-oie-admin.trexcloud.com
+        login.trexcloud.com com-okta-authenticator:; img-src ''self'' dev-jabro-oie.trexcloud.com
+        *.oktacdn.com *.tiles.mapbox.com *.mapbox.com app.pendo.io data.pendo.io cdn.pendo.io
+        pendo-static-5634101834153984.storage.googleapis.com pendo-static-5391521872216064.storage.googleapis.com
+        data: blob:; font-src ''self'' dev-jabro-oie.trexcloud.com data: *.oktacdn.com
+        fonts.gstatic.com; frame-ancestors ''self''; report-uri https://oktacsp.report-uri.com/r/t/csp/enforce;
+        report-to csp'
       expect-ct:
       - report-uri="https://oktaexpectct.report-uri.com/r/t/ct/reportOnly", max-age=0
       p3p:
       - CP="HONK"
+      report-to:
+      - '{"group":"csp","max_age":31536000,"endpoints":[{"url":"https://oktacsp.report-uri.com/a/t/g"}],"include_subdomains":true}'
       x-content-type-options:
       - nosniff
       x-okta-request-id:
-      - YGdgS5RmUErE1k1JccGWVgAACzc
+      - Y-vJdMdmDqzIytQkaKTOgwAADjw
       x-rate-limit-limit:
-      - '1000'
+      - '500'
       x-rate-limit-remaining:
-      - '997'
+      - '493'
       x-rate-limit-reset:
-      - '1617387611'
+      - '1676396930'
       x-xss-protection:
       - '0'
     status:
@@ -92,13 +101,13 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - okta-sdk-python/1.5.1 python/3.8.2 Darwin/19.6.0
+      - okta-sdk-python/2.8.0 python/3.10.1 Darwin/21.6.0
     method: POST
-    uri: https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies
+    uri: https://test.okta.com/api/v1/authorizationServers/aus4dnbe96RN8oWne0g7/policies
   response:
     body:
-      string: '{"id":"00phosj2e6s9cqNM85d6","status":"ACTIVE","name":"Test Policy","description":"Test
-        Policy","priority":1,"system":false,"conditions":{"clients":{"include":["ALL_CLIENTS"]}},"created":"2021-04-02T18:19:56.000Z","lastUpdated":"2021-04-02T18:19:56.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6","hints":{"allow":["GET","PUT","DELETE"]}},"rules":{"href":"https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6/rules","hints":{"allow":["GET"]}},"deactivate":{"href":"https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6/lifecycle/deactivate","hints":{"allow":["POST"]}}},"type":"OAUTH_AUTHORIZATION_POLICY"}'
+      string: '{"id":"00p4dnbsqdqGslqhj0g7","status":"ACTIVE","name":"Test Policy","description":"Test
+        Policy","priority":1,"system":false,"conditions":{"clients":{"include":["ALL_CLIENTS"]}},"created":"2023-02-14T17:48:39.000Z","lastUpdated":"2023-02-14T17:48:39.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/authorizationServers/aus4dnbe96RN8oWne0g7/policies/00p4dnbsqdqGslqhj0g7","hints":{"allow":["GET","PUT","DELETE"]}},"rules":{"href":"https://test.okta.com/api/v1/authorizationServers/aus4dnbe96RN8oWne0g7/policies/00p4dnbsqdqGslqhj0g7/rules","hints":{"allow":["GET"]}},"deactivate":{"href":"https://test.okta.com/api/v1/authorizationServers/aus4dnbe96RN8oWne0g7/policies/00p4dnbsqdqGslqhj0g7/lifecycle/deactivate","hints":{"allow":["POST"]}}},"type":"OAUTH_AUTHORIZATION_POLICY"}'
     headers:
       Cache-Control:
       - no-cache, no-store
@@ -107,61 +116,70 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 02 Apr 2021 18:19:56 GMT
+      - Tue, 14 Feb 2023 17:48:39 GMT
       Expires:
       - '0'
       Pragma:
       - no-cache
       Public-Key-Pins-Report-Only:
-      - pin-sha256="r5EfzZxQVvQpKo3AgYRaT7X2bDO/kj3ACwmxfdT2zt8="; pin-sha256="MaqlcUgk2mvY/RFSGeSwBRkI+rZ6/dxe/DuQfBT/vnQ=";
-        pin-sha256="72G5IEvDEWn+EThf3qjR7/bQSWaS2ZSLqolhnO6iyJI="; pin-sha256="rrV6CLCCvqnk89gWibYT0JO6fNQ8cCit7GGoiVTjCOg=";
+      - pin-sha256="MAbZWK1eIklkAxEkc7uqoZ/QX3cgLZT0HY5TRG1JXrs="; pin-sha256="PJ1QGTlW5ViFNhswMsYKp4X8C7KdG8nDW4ZcXLmYMyI=";
+        pin-sha256="5LlRWGTBVjpfNXXU5T7cYVUbOSPcgpMgdjaWd/R9Leg="; pin-sha256="lpaMLlEsp7/dVZoeWt3f9ciJIMGimixAIaKNsn9/bCY=";
         max-age=60; report-uri="https://okta.report-uri.com/r/default/hpkp/reportOnly"
       Server:
       - nginx
       Set-Cookie:
       - sid=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
-      - JSESSIONID=A04CFFF1413BBE6911A7D05AE55FC0B6; Path=/; Secure; HttpOnly
+      - autolaunch_triggered=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
+      - JSESSIONID=9B83706D9F0D8C24154877371B8E854A; Path=/; Secure; HttpOnly
       Strict-Transport-Security:
       - max-age=315360000; includeSubDomains
       Transfer-Encoding:
       - chunked
-      content-security-policy-report-only: 'default-src ''self'' *.oktacdn.com test.okta.com
-        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
-        connect-src ''self'' *.oktacdn.com *.mixpanel.com *.mapbox.com app.pendo.io
-        data.pendo.io pendo-static-5634101834153984.storage.googleapis.com test.okta.com
-        test-admin.okta.com https://oinmanager.okta.com data: *.zscloud.net *.zscalerbeta.net
-        *.zscaler.net *.zscalertwo.net *.zscalerthree.net; script-src ''unsafe-inline''
-        ''unsafe-eval'' ''self'' *.oktacdn.com *.zscloud.net *.zscalerbeta.net *.zscaler.net
-        *.zscalertwo.net *.zscalerthree.net; style-src ''unsafe-inline'' ''self''
-        *.oktacdn.com app.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
-        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
-        frame-src ''self'' login.okta.com test.okta.com test-admin.okta.com *.zscloud.net
-        *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net; img-src
-        ''self'' *.oktacdn.com test.okta.com *.tiles.mapbox.com *.mapbox.com app.pendo.io
-        data.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
-        data: blob: *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net
-        *.zscalerthree.net; font-src data: ''self'' *.oktacdn.com fonts.gstatic.com
-        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net'
+      content-security-policy:
+      - 'default-src ''self'' dev-jabro-oie.trexcloud.com *.oktacdn.com; connect-src
+        ''self'' dev-jabro-oie.trexcloud.com dev-jabro-oie-admin.trexcloud.com *.oktacdn.com
+        *.mixpanel.com *.mapbox.com app.pendo.io data.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        pendo-static-5391521872216064.storage.googleapis.com *.mtls.trexcloud.com
+        dev-jabro-oie.kerberos.trexcloud.com *.authenticatorlocaldev.com:8769 http://localhost:8769
+        http://127.0.0.1:8769 *.authenticatorlocaldev.com:65111 http://localhost:65111
+        http://127.0.0.1:65111 *.authenticatorlocaldev.com:65121 http://localhost:65121
+        http://127.0.0.1:65121 *.authenticatorlocaldev.com:65131 http://localhost:65131
+        http://127.0.0.1:65131 *.authenticatorlocaldev.com:65141 http://localhost:65141
+        http://127.0.0.1:65141 *.authenticatorlocaldev.com:65151 http://localhost:65151
+        http://127.0.0.1:65151 https://oinmanager.trexcloud.com data:; script-src
+        ''unsafe-inline'' ''nonce-kP199KzB9EObrxFbHs_zNjQI8xrtjNhxhmsDz9wUkAU'' ''unsafe-eval''
+        ''self'' dev-jabro-oie.trexcloud.com *.oktacdn.com; style-src ''unsafe-inline''
+        ''self'' dev-jabro-oie.trexcloud.com *.oktacdn.com app.pendo.io cdn.pendo.io
+        pendo-static-5634101834153984.storage.googleapis.com pendo-static-5391521872216064.storage.googleapis.com;
+        frame-src ''self'' dev-jabro-oie.trexcloud.com dev-jabro-oie-admin.trexcloud.com
+        login.trexcloud.com com-okta-authenticator:; img-src ''self'' dev-jabro-oie.trexcloud.com
+        *.oktacdn.com *.tiles.mapbox.com *.mapbox.com app.pendo.io data.pendo.io cdn.pendo.io
+        pendo-static-5634101834153984.storage.googleapis.com pendo-static-5391521872216064.storage.googleapis.com
+        data: blob:; font-src ''self'' dev-jabro-oie.trexcloud.com data: *.oktacdn.com
+        fonts.gstatic.com; frame-ancestors ''self''; report-uri https://oktacsp.report-uri.com/r/t/csp/enforce;
+        report-to csp'
       expect-ct:
       - report-uri="https://oktaexpectct.report-uri.com/r/t/ct/reportOnly", max-age=0
       p3p:
       - CP="HONK"
+      report-to:
+      - '{"group":"csp","max_age":31536000,"endpoints":[{"url":"https://oktacsp.report-uri.com/a/t/g"}],"include_subdomains":true}'
       x-content-type-options:
       - nosniff
       x-okta-request-id:
-      - YGdgTCTen1JnwwZZO6umPwAACyA
+      - Y-vJd3F6rInlL8UXU5zYvAAAAws
       x-rate-limit-limit:
-      - '1000'
+      - '500'
       x-rate-limit-remaining:
-      - '996'
+      - '492'
       x-rate-limit-reset:
-      - '1617387611'
+      - '1676396930'
       x-xss-protection:
       - '0'
     status:
       code: 201
       message: Created
-    url: https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies
+    url: https://test.okta.com/api/v1/authorizationServers/aus4dnbe96RN8oWne0g7/policies
 - request:
     body: '{"actions": {"token": {"accessTokenLifetimeMinutes": 60, "refreshTokenLifetimeMinutes":
       0, "refreshTokenWindowMinutes": 10080}}, "conditions": {"grantTypes": {"include":
@@ -175,13 +193,13 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - okta-sdk-python/1.5.1 python/3.8.2 Darwin/19.6.0
+      - okta-sdk-python/2.8.0 python/3.10.1 Darwin/21.6.0
     method: POST
-    uri: https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6/rules
+    uri: https://test.okta.com/api/v1/authorizationServers/aus4dnbe96RN8oWne0g7/policies/00p4dnbsqdqGslqhj0g7/rules
   response:
     body:
-      string: '{"id":"0prhosj2jy3zJNhxt5d6","status":"ACTIVE","name":"Test Policy
-        Rule","priority":1,"created":"2021-04-02T18:19:57.000Z","lastUpdated":"2021-04-02T18:19:57.000Z","system":false,"conditions":{"people":{"users":{"exclude":[]}},"grantTypes":{"include":["client_credentials"]},"scopes":{"include":["*"]}},"actions":{"token":{"accessTokenLifetimeMinutes":60,"refreshTokenLifetimeMinutes":0,"refreshTokenWindowMinutes":10080}},"_links":{"self":{"href":"https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6/rules/0prhosj2jy3zJNhxt5d6","hints":{"allow":["GET","PUT","DELETE"]}},"deactivate":{"href":"https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6/rules/0prhosj2jy3zJNhxt5d6/lifecycle/deactivate","hints":{"allow":["POST"]}}},"type":"RESOURCE_ACCESS"}'
+      string: '{"id":"0pr4dnbak1J5uncXq0g7","status":"ACTIVE","name":"Test Policy
+        Rule","priority":1,"created":"2023-02-14T17:48:41.000Z","lastUpdated":"2023-02-14T17:48:41.000Z","system":false,"conditions":{"people":{"users":{"exclude":[]}},"grantTypes":{"include":["client_credentials"]},"scopes":{"include":["*"]}},"actions":{"token":{"accessTokenLifetimeMinutes":60,"refreshTokenLifetimeMinutes":0,"refreshTokenWindowMinutes":10080}},"_links":{"self":{"href":"https://test.okta.com/api/v1/authorizationServers/aus4dnbe96RN8oWne0g7/policies/00p4dnbsqdqGslqhj0g7/rules/0pr4dnbak1J5uncXq0g7","hints":{"allow":["GET","PUT","DELETE"]}},"deactivate":{"href":"https://test.okta.com/api/v1/authorizationServers/aus4dnbe96RN8oWne0g7/policies/00p4dnbsqdqGslqhj0g7/rules/0pr4dnbak1J5uncXq0g7/lifecycle/deactivate","hints":{"allow":["POST"]}}},"type":"RESOURCE_ACCESS"}'
     headers:
       Cache-Control:
       - no-cache, no-store
@@ -190,61 +208,70 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 02 Apr 2021 18:19:57 GMT
+      - Tue, 14 Feb 2023 17:48:41 GMT
       Expires:
       - '0'
       Pragma:
       - no-cache
       Public-Key-Pins-Report-Only:
-      - pin-sha256="r5EfzZxQVvQpKo3AgYRaT7X2bDO/kj3ACwmxfdT2zt8="; pin-sha256="MaqlcUgk2mvY/RFSGeSwBRkI+rZ6/dxe/DuQfBT/vnQ=";
-        pin-sha256="72G5IEvDEWn+EThf3qjR7/bQSWaS2ZSLqolhnO6iyJI="; pin-sha256="rrV6CLCCvqnk89gWibYT0JO6fNQ8cCit7GGoiVTjCOg=";
+      - pin-sha256="MAbZWK1eIklkAxEkc7uqoZ/QX3cgLZT0HY5TRG1JXrs="; pin-sha256="PJ1QGTlW5ViFNhswMsYKp4X8C7KdG8nDW4ZcXLmYMyI=";
+        pin-sha256="5LlRWGTBVjpfNXXU5T7cYVUbOSPcgpMgdjaWd/R9Leg="; pin-sha256="lpaMLlEsp7/dVZoeWt3f9ciJIMGimixAIaKNsn9/bCY=";
         max-age=60; report-uri="https://okta.report-uri.com/r/default/hpkp/reportOnly"
       Server:
       - nginx
       Set-Cookie:
       - sid=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
-      - JSESSIONID=826007A26FC7AB9F89649B27040A1369; Path=/; Secure; HttpOnly
+      - autolaunch_triggered=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
+      - JSESSIONID=8C461F68B2F79467CC48E5047B100F55; Path=/; Secure; HttpOnly
       Strict-Transport-Security:
       - max-age=315360000; includeSubDomains
       Transfer-Encoding:
       - chunked
-      content-security-policy-report-only: 'default-src ''self'' *.oktacdn.com test.okta.com
-        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
-        connect-src ''self'' *.oktacdn.com *.mixpanel.com *.mapbox.com app.pendo.io
-        data.pendo.io pendo-static-5634101834153984.storage.googleapis.com test.okta.com
-        test-admin.okta.com https://oinmanager.okta.com data: *.zscloud.net *.zscalerbeta.net
-        *.zscaler.net *.zscalertwo.net *.zscalerthree.net; script-src ''unsafe-inline''
-        ''unsafe-eval'' ''self'' *.oktacdn.com *.zscloud.net *.zscalerbeta.net *.zscaler.net
-        *.zscalertwo.net *.zscalerthree.net; style-src ''unsafe-inline'' ''self''
-        *.oktacdn.com app.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
-        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
-        frame-src ''self'' login.okta.com test.okta.com test-admin.okta.com *.zscloud.net
-        *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net; img-src
-        ''self'' *.oktacdn.com test.okta.com *.tiles.mapbox.com *.mapbox.com app.pendo.io
-        data.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
-        data: blob: *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net
-        *.zscalerthree.net; font-src data: ''self'' *.oktacdn.com fonts.gstatic.com
-        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net'
+      content-security-policy:
+      - 'default-src ''self'' dev-jabro-oie.trexcloud.com *.oktacdn.com; connect-src
+        ''self'' dev-jabro-oie.trexcloud.com dev-jabro-oie-admin.trexcloud.com *.oktacdn.com
+        *.mixpanel.com *.mapbox.com app.pendo.io data.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        pendo-static-5391521872216064.storage.googleapis.com *.mtls.trexcloud.com
+        dev-jabro-oie.kerberos.trexcloud.com *.authenticatorlocaldev.com:8769 http://localhost:8769
+        http://127.0.0.1:8769 *.authenticatorlocaldev.com:65111 http://localhost:65111
+        http://127.0.0.1:65111 *.authenticatorlocaldev.com:65121 http://localhost:65121
+        http://127.0.0.1:65121 *.authenticatorlocaldev.com:65131 http://localhost:65131
+        http://127.0.0.1:65131 *.authenticatorlocaldev.com:65141 http://localhost:65141
+        http://127.0.0.1:65141 *.authenticatorlocaldev.com:65151 http://localhost:65151
+        http://127.0.0.1:65151 https://oinmanager.trexcloud.com data:; script-src
+        ''unsafe-inline'' ''nonce-bLDmKwZ_MkCiEV1PDN8cClEB8eMgOZKjXuNJHERoyhE'' ''unsafe-eval''
+        ''self'' dev-jabro-oie.trexcloud.com *.oktacdn.com; style-src ''unsafe-inline''
+        ''self'' dev-jabro-oie.trexcloud.com *.oktacdn.com app.pendo.io cdn.pendo.io
+        pendo-static-5634101834153984.storage.googleapis.com pendo-static-5391521872216064.storage.googleapis.com;
+        frame-src ''self'' dev-jabro-oie.trexcloud.com dev-jabro-oie-admin.trexcloud.com
+        login.trexcloud.com com-okta-authenticator:; img-src ''self'' dev-jabro-oie.trexcloud.com
+        *.oktacdn.com *.tiles.mapbox.com *.mapbox.com app.pendo.io data.pendo.io cdn.pendo.io
+        pendo-static-5634101834153984.storage.googleapis.com pendo-static-5391521872216064.storage.googleapis.com
+        data: blob:; font-src ''self'' dev-jabro-oie.trexcloud.com data: *.oktacdn.com
+        fonts.gstatic.com; frame-ancestors ''self''; report-uri https://oktacsp.report-uri.com/r/t/csp/enforce;
+        report-to csp'
       expect-ct:
       - report-uri="https://oktaexpectct.report-uri.com/r/t/ct/reportOnly", max-age=0
       p3p:
       - CP="HONK"
+      report-to:
+      - '{"group":"csp","max_age":31536000,"endpoints":[{"url":"https://oktacsp.report-uri.com/a/t/g"}],"include_subdomains":true}'
       x-content-type-options:
       - nosniff
       x-okta-request-id:
-      - YGdgTT70God2XHWFqMawFAAADKY
+      - Y-vJefrePMyfFSPA2LqSugAAAyA
       x-rate-limit-limit:
-      - '1000'
+      - '500'
       x-rate-limit-remaining:
-      - '995'
+      - '491'
       x-rate-limit-reset:
-      - '1617387611'
+      - '1676396930'
       x-xss-protection:
       - '0'
     status:
       code: 201
       message: Created
-    url: https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6/rules
+    url: https://test.okta.com/api/v1/authorizationServers/aus4dnbe96RN8oWne0g7/policies/00p4dnbsqdqGslqhj0g7/rules
 - request:
     body: null
     headers:
@@ -255,13 +282,13 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - okta-sdk-python/1.5.1 python/3.8.2 Darwin/19.6.0
+      - okta-sdk-python/2.8.0 python/3.10.1 Darwin/21.6.0
     method: GET
-    uri: https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6/rules
+    uri: https://test.okta.com/api/v1/authorizationServers/aus4dnbe96RN8oWne0g7/policies/00p4dnbsqdqGslqhj0g7/rules
   response:
     body:
-      string: '[{"id":"0prhosj2jy3zJNhxt5d6","status":"ACTIVE","name":"Test Policy
-        Rule","priority":1,"created":"2021-04-02T18:19:57.000Z","lastUpdated":"2021-04-02T18:19:57.000Z","system":false,"conditions":{"people":{"users":{"exclude":[]}},"grantTypes":{"include":["client_credentials"]},"scopes":{"include":["*"]}},"actions":{"token":{"accessTokenLifetimeMinutes":60,"refreshTokenLifetimeMinutes":0,"refreshTokenWindowMinutes":10080}},"_links":{"self":{"href":"https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6/rules/0prhosj2jy3zJNhxt5d6","hints":{"allow":["GET","PUT","DELETE"]}},"deactivate":{"href":"https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6/rules/0prhosj2jy3zJNhxt5d6/lifecycle/deactivate","hints":{"allow":["POST"]}}},"type":"RESOURCE_ACCESS"}]'
+      string: '[{"id":"0pr4dnbak1J5uncXq0g7","status":"ACTIVE","name":"Test Policy
+        Rule","priority":1,"created":null,"lastUpdated":null,"system":false,"conditions":{"people":{"users":{"exclude":[]}},"grantTypes":{"include":["client_credentials"]},"scopes":{"include":["*"]}},"actions":{"token":{"accessTokenLifetimeMinutes":60,"refreshTokenLifetimeMinutes":0,"refreshTokenWindowMinutes":10080}},"_links":{"self":{"href":"https://test.okta.com/api/v1/authorizationServers/aus4dnbe96RN8oWne0g7/policies/00p4dnbsqdqGslqhj0g7/rules/0pr4dnbak1J5uncXq0g7","hints":{"allow":["GET","PUT","DELETE"]}},"deactivate":{"href":"https://test.okta.com/api/v1/authorizationServers/aus4dnbe96RN8oWne0g7/policies/00p4dnbsqdqGslqhj0g7/rules/0pr4dnbak1J5uncXq0g7/lifecycle/deactivate","hints":{"allow":["POST"]}}},"type":"RESOURCE_ACCESS"}]'
     headers:
       Cache-Control:
       - no-cache, no-store
@@ -272,63 +299,72 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 02 Apr 2021 18:19:58 GMT
+      - Tue, 14 Feb 2023 17:48:44 GMT
       Expires:
       - '0'
       Pragma:
       - no-cache
       Public-Key-Pins-Report-Only:
-      - pin-sha256="r5EfzZxQVvQpKo3AgYRaT7X2bDO/kj3ACwmxfdT2zt8="; pin-sha256="MaqlcUgk2mvY/RFSGeSwBRkI+rZ6/dxe/DuQfBT/vnQ=";
-        pin-sha256="72G5IEvDEWn+EThf3qjR7/bQSWaS2ZSLqolhnO6iyJI="; pin-sha256="rrV6CLCCvqnk89gWibYT0JO6fNQ8cCit7GGoiVTjCOg=";
+      - pin-sha256="MAbZWK1eIklkAxEkc7uqoZ/QX3cgLZT0HY5TRG1JXrs="; pin-sha256="PJ1QGTlW5ViFNhswMsYKp4X8C7KdG8nDW4ZcXLmYMyI=";
+        pin-sha256="5LlRWGTBVjpfNXXU5T7cYVUbOSPcgpMgdjaWd/R9Leg="; pin-sha256="lpaMLlEsp7/dVZoeWt3f9ciJIMGimixAIaKNsn9/bCY=";
         max-age=60; report-uri="https://okta.report-uri.com/r/default/hpkp/reportOnly"
       Server:
       - nginx
       Set-Cookie:
       - sid=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
-      - JSESSIONID=4A03C4285C516DE4AD507B90481CE61C; Path=/; Secure; HttpOnly
+      - autolaunch_triggered=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
+      - JSESSIONID=4EA51B77BBF1215B234C13DD9C18BDCB; Path=/; Secure; HttpOnly
       Strict-Transport-Security:
       - max-age=315360000; includeSubDomains
       Transfer-Encoding:
       - chunked
       Vary:
       - Accept-Encoding
-      content-security-policy-report-only: 'default-src ''self'' *.oktacdn.com test.okta.com
-        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
-        connect-src ''self'' *.oktacdn.com *.mixpanel.com *.mapbox.com app.pendo.io
-        data.pendo.io pendo-static-5634101834153984.storage.googleapis.com test.okta.com
-        test-admin.okta.com https://oinmanager.okta.com data: *.zscloud.net *.zscalerbeta.net
-        *.zscaler.net *.zscalertwo.net *.zscalerthree.net; script-src ''unsafe-inline''
-        ''unsafe-eval'' ''self'' *.oktacdn.com *.zscloud.net *.zscalerbeta.net *.zscaler.net
-        *.zscalertwo.net *.zscalerthree.net; style-src ''unsafe-inline'' ''self''
-        *.oktacdn.com app.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
-        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
-        frame-src ''self'' login.okta.com test.okta.com test-admin.okta.com *.zscloud.net
-        *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net; img-src
-        ''self'' *.oktacdn.com test.okta.com *.tiles.mapbox.com *.mapbox.com app.pendo.io
-        data.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
-        data: blob: *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net
-        *.zscalerthree.net; font-src data: ''self'' *.oktacdn.com fonts.gstatic.com
-        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net'
+      content-security-policy:
+      - 'default-src ''self'' dev-jabro-oie.trexcloud.com *.oktacdn.com; connect-src
+        ''self'' dev-jabro-oie.trexcloud.com dev-jabro-oie-admin.trexcloud.com *.oktacdn.com
+        *.mixpanel.com *.mapbox.com app.pendo.io data.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        pendo-static-5391521872216064.storage.googleapis.com *.mtls.trexcloud.com
+        dev-jabro-oie.kerberos.trexcloud.com *.authenticatorlocaldev.com:8769 http://localhost:8769
+        http://127.0.0.1:8769 *.authenticatorlocaldev.com:65111 http://localhost:65111
+        http://127.0.0.1:65111 *.authenticatorlocaldev.com:65121 http://localhost:65121
+        http://127.0.0.1:65121 *.authenticatorlocaldev.com:65131 http://localhost:65131
+        http://127.0.0.1:65131 *.authenticatorlocaldev.com:65141 http://localhost:65141
+        http://127.0.0.1:65141 *.authenticatorlocaldev.com:65151 http://localhost:65151
+        http://127.0.0.1:65151 https://oinmanager.trexcloud.com data:; script-src
+        ''unsafe-inline'' ''nonce-kcgkGy2mZvD-bMXk5Tb7YxR7LUqUuTtz9kOgXd-Dix4'' ''unsafe-eval''
+        ''self'' dev-jabro-oie.trexcloud.com *.oktacdn.com; style-src ''unsafe-inline''
+        ''self'' dev-jabro-oie.trexcloud.com *.oktacdn.com app.pendo.io cdn.pendo.io
+        pendo-static-5634101834153984.storage.googleapis.com pendo-static-5391521872216064.storage.googleapis.com;
+        frame-src ''self'' dev-jabro-oie.trexcloud.com dev-jabro-oie-admin.trexcloud.com
+        login.trexcloud.com com-okta-authenticator:; img-src ''self'' dev-jabro-oie.trexcloud.com
+        *.oktacdn.com *.tiles.mapbox.com *.mapbox.com app.pendo.io data.pendo.io cdn.pendo.io
+        pendo-static-5634101834153984.storage.googleapis.com pendo-static-5391521872216064.storage.googleapis.com
+        data: blob:; font-src ''self'' dev-jabro-oie.trexcloud.com data: *.oktacdn.com
+        fonts.gstatic.com; frame-ancestors ''self''; report-uri https://oktacsp.report-uri.com/r/t/csp/enforce;
+        report-to csp'
       expect-ct:
       - report-uri="https://oktaexpectct.report-uri.com/r/t/ct/reportOnly", max-age=0
       p3p:
       - CP="HONK"
+      report-to:
+      - '{"group":"csp","max_age":31536000,"endpoints":[{"url":"https://oktacsp.report-uri.com/a/t/g"}],"include_subdomains":true}'
       x-content-type-options:
       - nosniff
       x-okta-request-id:
-      - YGdgTrUyX9w4XKc46MA-lgAAC@w
+      - Y-vJfCwqoMB3SYQ4ZxKWHAAACGs
       x-rate-limit-limit:
-      - '1000'
+      - '500'
       x-rate-limit-remaining:
-      - '994'
+      - '490'
       x-rate-limit-reset:
-      - '1617387611'
+      - '1676396930'
       x-xss-protection:
       - '0'
     status:
       code: 200
       message: OK
-    url: https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6/rules
+    url: https://test.okta.com/api/v1/authorizationServers/aus4dnbe96RN8oWne0g7/policies/00p4dnbsqdqGslqhj0g7/rules
 - request:
     body: null
     headers:
@@ -339,9 +375,9 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - okta-sdk-python/1.5.1 python/3.8.2 Darwin/19.6.0
+      - okta-sdk-python/2.8.0 python/3.10.1 Darwin/21.6.0
     method: DELETE
-    uri: https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6/rules/0prhosj2jy3zJNhxt5d6
+    uri: https://test.okta.com/api/v1/authorizationServers/aus4dnbe96RN8oWne0g7/policies/00p4dnbsqdqGslqhj0g7/rules/0pr4dnbak1J5uncXq0g7
   response:
     body:
       string: ''
@@ -351,59 +387,68 @@ interactions:
       Connection:
       - keep-alive
       Date:
-      - Fri, 02 Apr 2021 18:19:59 GMT
+      - Tue, 14 Feb 2023 17:48:44 GMT
       Expires:
       - '0'
       Pragma:
       - no-cache
       Public-Key-Pins-Report-Only:
-      - pin-sha256="r5EfzZxQVvQpKo3AgYRaT7X2bDO/kj3ACwmxfdT2zt8="; pin-sha256="MaqlcUgk2mvY/RFSGeSwBRkI+rZ6/dxe/DuQfBT/vnQ=";
-        pin-sha256="72G5IEvDEWn+EThf3qjR7/bQSWaS2ZSLqolhnO6iyJI="; pin-sha256="rrV6CLCCvqnk89gWibYT0JO6fNQ8cCit7GGoiVTjCOg=";
+      - pin-sha256="MAbZWK1eIklkAxEkc7uqoZ/QX3cgLZT0HY5TRG1JXrs="; pin-sha256="PJ1QGTlW5ViFNhswMsYKp4X8C7KdG8nDW4ZcXLmYMyI=";
+        pin-sha256="5LlRWGTBVjpfNXXU5T7cYVUbOSPcgpMgdjaWd/R9Leg="; pin-sha256="lpaMLlEsp7/dVZoeWt3f9ciJIMGimixAIaKNsn9/bCY=";
         max-age=60; report-uri="https://okta.report-uri.com/r/default/hpkp/reportOnly"
       Server:
       - nginx
       Set-Cookie:
       - sid=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
-      - JSESSIONID=02ACC33066CE90E8EF8247A57ABABBD4; Path=/; Secure; HttpOnly
+      - autolaunch_triggered=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
+      - JSESSIONID=59F02A29097CF05CA2639905B77CE96C; Path=/; Secure; HttpOnly
       Strict-Transport-Security:
       - max-age=315360000; includeSubDomains
-      content-security-policy-report-only: 'default-src ''self'' *.oktacdn.com test.okta.com
-        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
-        connect-src ''self'' *.oktacdn.com *.mixpanel.com *.mapbox.com app.pendo.io
-        data.pendo.io pendo-static-5634101834153984.storage.googleapis.com test.okta.com
-        test-admin.okta.com https://oinmanager.okta.com data: *.zscloud.net *.zscalerbeta.net
-        *.zscaler.net *.zscalertwo.net *.zscalerthree.net; script-src ''unsafe-inline''
-        ''unsafe-eval'' ''self'' *.oktacdn.com *.zscloud.net *.zscalerbeta.net *.zscaler.net
-        *.zscalertwo.net *.zscalerthree.net; style-src ''unsafe-inline'' ''self''
-        *.oktacdn.com app.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
-        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
-        frame-src ''self'' login.okta.com test.okta.com test-admin.okta.com *.zscloud.net
-        *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net; img-src
-        ''self'' *.oktacdn.com test.okta.com *.tiles.mapbox.com *.mapbox.com app.pendo.io
-        data.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
-        data: blob: *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net
-        *.zscalerthree.net; font-src data: ''self'' *.oktacdn.com fonts.gstatic.com
-        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net'
+      content-security-policy:
+      - 'default-src ''self'' dev-jabro-oie.trexcloud.com *.oktacdn.com; connect-src
+        ''self'' dev-jabro-oie.trexcloud.com dev-jabro-oie-admin.trexcloud.com *.oktacdn.com
+        *.mixpanel.com *.mapbox.com app.pendo.io data.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        pendo-static-5391521872216064.storage.googleapis.com *.mtls.trexcloud.com
+        dev-jabro-oie.kerberos.trexcloud.com *.authenticatorlocaldev.com:8769 http://localhost:8769
+        http://127.0.0.1:8769 *.authenticatorlocaldev.com:65111 http://localhost:65111
+        http://127.0.0.1:65111 *.authenticatorlocaldev.com:65121 http://localhost:65121
+        http://127.0.0.1:65121 *.authenticatorlocaldev.com:65131 http://localhost:65131
+        http://127.0.0.1:65131 *.authenticatorlocaldev.com:65141 http://localhost:65141
+        http://127.0.0.1:65141 *.authenticatorlocaldev.com:65151 http://localhost:65151
+        http://127.0.0.1:65151 https://oinmanager.trexcloud.com data:; script-src
+        ''unsafe-inline'' ''nonce-FFNOWamtpIgRJLEco7EKCkSJx3fCZRabhA1GB7wr0u4'' ''unsafe-eval''
+        ''self'' dev-jabro-oie.trexcloud.com *.oktacdn.com; style-src ''unsafe-inline''
+        ''self'' dev-jabro-oie.trexcloud.com *.oktacdn.com app.pendo.io cdn.pendo.io
+        pendo-static-5634101834153984.storage.googleapis.com pendo-static-5391521872216064.storage.googleapis.com;
+        frame-src ''self'' dev-jabro-oie.trexcloud.com dev-jabro-oie-admin.trexcloud.com
+        login.trexcloud.com com-okta-authenticator:; img-src ''self'' dev-jabro-oie.trexcloud.com
+        *.oktacdn.com *.tiles.mapbox.com *.mapbox.com app.pendo.io data.pendo.io cdn.pendo.io
+        pendo-static-5634101834153984.storage.googleapis.com pendo-static-5391521872216064.storage.googleapis.com
+        data: blob:; font-src ''self'' dev-jabro-oie.trexcloud.com data: *.oktacdn.com
+        fonts.gstatic.com; frame-ancestors ''self''; report-uri https://oktacsp.report-uri.com/r/t/csp/enforce;
+        report-to csp'
       expect-ct:
       - report-uri="https://oktaexpectct.report-uri.com/r/t/ct/reportOnly", max-age=0
       p3p:
       - CP="HONK"
+      report-to:
+      - '{"group":"csp","max_age":31536000,"endpoints":[{"url":"https://oktacsp.report-uri.com/a/t/g"}],"include_subdomains":true}'
       x-frame-options:
       - SAMEORIGIN
       x-okta-request-id:
-      - YGdgT-GxN6yz5XILcqBUugAAA20
+      - Y-vJfKH8dzKpmjmp3hpsGQAADkY
       x-rate-limit-limit:
-      - '1000'
+      - '500'
       x-rate-limit-remaining:
-      - '993'
+      - '489'
       x-rate-limit-reset:
-      - '1617387611'
+      - '1676396930'
       x-xss-protection:
       - '0'
     status:
       code: 204
       message: No Content
-    url: https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6/rules/0prhosj2jy3zJNhxt5d6
+    url: https://test.okta.com/api/v1/authorizationServers/aus4dnbe96RN8oWne0g7/policies/00p4dnbsqdqGslqhj0g7/rules/0pr4dnbak1J5uncXq0g7
 - request:
     body: null
     headers:
@@ -414,9 +459,9 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - okta-sdk-python/1.5.1 python/3.8.2 Darwin/19.6.0
+      - okta-sdk-python/2.8.0 python/3.10.1 Darwin/21.6.0
     method: DELETE
-    uri: https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6
+    uri: https://test.okta.com/api/v1/authorizationServers/aus4dnbe96RN8oWne0g7/policies/00p4dnbsqdqGslqhj0g7
   response:
     body:
       string: ''
@@ -426,59 +471,68 @@ interactions:
       Connection:
       - keep-alive
       Date:
-      - Fri, 02 Apr 2021 18:20:00 GMT
+      - Tue, 14 Feb 2023 17:48:44 GMT
       Expires:
       - '0'
       Pragma:
       - no-cache
       Public-Key-Pins-Report-Only:
-      - pin-sha256="r5EfzZxQVvQpKo3AgYRaT7X2bDO/kj3ACwmxfdT2zt8="; pin-sha256="MaqlcUgk2mvY/RFSGeSwBRkI+rZ6/dxe/DuQfBT/vnQ=";
-        pin-sha256="72G5IEvDEWn+EThf3qjR7/bQSWaS2ZSLqolhnO6iyJI="; pin-sha256="rrV6CLCCvqnk89gWibYT0JO6fNQ8cCit7GGoiVTjCOg=";
+      - pin-sha256="MAbZWK1eIklkAxEkc7uqoZ/QX3cgLZT0HY5TRG1JXrs="; pin-sha256="PJ1QGTlW5ViFNhswMsYKp4X8C7KdG8nDW4ZcXLmYMyI=";
+        pin-sha256="5LlRWGTBVjpfNXXU5T7cYVUbOSPcgpMgdjaWd/R9Leg="; pin-sha256="lpaMLlEsp7/dVZoeWt3f9ciJIMGimixAIaKNsn9/bCY=";
         max-age=60; report-uri="https://okta.report-uri.com/r/default/hpkp/reportOnly"
       Server:
       - nginx
       Set-Cookie:
       - sid=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
-      - JSESSIONID=E67039CBD0025D11CC64B707CD11B70A; Path=/; Secure; HttpOnly
+      - autolaunch_triggered=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
+      - JSESSIONID=F20E78C833C02AFAB4FC9D515B613992; Path=/; Secure; HttpOnly
       Strict-Transport-Security:
       - max-age=315360000; includeSubDomains
-      content-security-policy-report-only: 'default-src ''self'' *.oktacdn.com test.okta.com
-        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
-        connect-src ''self'' *.oktacdn.com *.mixpanel.com *.mapbox.com app.pendo.io
-        data.pendo.io pendo-static-5634101834153984.storage.googleapis.com test.okta.com
-        test-admin.okta.com https://oinmanager.okta.com data: *.zscloud.net *.zscalerbeta.net
-        *.zscaler.net *.zscalertwo.net *.zscalerthree.net; script-src ''unsafe-inline''
-        ''unsafe-eval'' ''self'' *.oktacdn.com *.zscloud.net *.zscalerbeta.net *.zscaler.net
-        *.zscalertwo.net *.zscalerthree.net; style-src ''unsafe-inline'' ''self''
-        *.oktacdn.com app.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
-        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
-        frame-src ''self'' login.okta.com test.okta.com test-admin.okta.com *.zscloud.net
-        *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net; img-src
-        ''self'' *.oktacdn.com test.okta.com *.tiles.mapbox.com *.mapbox.com app.pendo.io
-        data.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
-        data: blob: *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net
-        *.zscalerthree.net; font-src data: ''self'' *.oktacdn.com fonts.gstatic.com
-        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net'
+      content-security-policy:
+      - 'default-src ''self'' dev-jabro-oie.trexcloud.com *.oktacdn.com; connect-src
+        ''self'' dev-jabro-oie.trexcloud.com dev-jabro-oie-admin.trexcloud.com *.oktacdn.com
+        *.mixpanel.com *.mapbox.com app.pendo.io data.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        pendo-static-5391521872216064.storage.googleapis.com *.mtls.trexcloud.com
+        dev-jabro-oie.kerberos.trexcloud.com *.authenticatorlocaldev.com:8769 http://localhost:8769
+        http://127.0.0.1:8769 *.authenticatorlocaldev.com:65111 http://localhost:65111
+        http://127.0.0.1:65111 *.authenticatorlocaldev.com:65121 http://localhost:65121
+        http://127.0.0.1:65121 *.authenticatorlocaldev.com:65131 http://localhost:65131
+        http://127.0.0.1:65131 *.authenticatorlocaldev.com:65141 http://localhost:65141
+        http://127.0.0.1:65141 *.authenticatorlocaldev.com:65151 http://localhost:65151
+        http://127.0.0.1:65151 https://oinmanager.trexcloud.com data:; script-src
+        ''unsafe-inline'' ''nonce-n6lM5T9pTpbFbIeJDEoiLmjjyA7c0XkCA3Eiu-ZK-tE'' ''unsafe-eval''
+        ''self'' dev-jabro-oie.trexcloud.com *.oktacdn.com; style-src ''unsafe-inline''
+        ''self'' dev-jabro-oie.trexcloud.com *.oktacdn.com app.pendo.io cdn.pendo.io
+        pendo-static-5634101834153984.storage.googleapis.com pendo-static-5391521872216064.storage.googleapis.com;
+        frame-src ''self'' dev-jabro-oie.trexcloud.com dev-jabro-oie-admin.trexcloud.com
+        login.trexcloud.com com-okta-authenticator:; img-src ''self'' dev-jabro-oie.trexcloud.com
+        *.oktacdn.com *.tiles.mapbox.com *.mapbox.com app.pendo.io data.pendo.io cdn.pendo.io
+        pendo-static-5634101834153984.storage.googleapis.com pendo-static-5391521872216064.storage.googleapis.com
+        data: blob:; font-src ''self'' dev-jabro-oie.trexcloud.com data: *.oktacdn.com
+        fonts.gstatic.com; frame-ancestors ''self''; report-uri https://oktacsp.report-uri.com/r/t/csp/enforce;
+        report-to csp'
       expect-ct:
       - report-uri="https://oktaexpectct.report-uri.com/r/t/ct/reportOnly", max-age=0
       p3p:
       - CP="HONK"
+      report-to:
+      - '{"group":"csp","max_age":31536000,"endpoints":[{"url":"https://oktacsp.report-uri.com/a/t/g"}],"include_subdomains":true}'
       x-frame-options:
       - SAMEORIGIN
       x-okta-request-id:
-      - YGdgUPL3B1ppMW9ftLNK1gAACTc
+      - Y-vJfKG2OvWz-J_wPvJDqwAABJ8
       x-rate-limit-limit:
-      - '1000'
+      - '500'
       x-rate-limit-remaining:
-      - '992'
+      - '488'
       x-rate-limit-reset:
-      - '1617387611'
+      - '1676396930'
       x-xss-protection:
       - '0'
     status:
       code: 204
       message: No Content
-    url: https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6
+    url: https://test.okta.com/api/v1/authorizationServers/aus4dnbe96RN8oWne0g7/policies/00p4dnbsqdqGslqhj0g7
 - request:
     body: null
     headers:
@@ -489,9 +543,9 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - okta-sdk-python/1.5.1 python/3.8.2 Darwin/19.6.0
+      - okta-sdk-python/2.8.0 python/3.10.1 Darwin/21.6.0
     method: POST
-    uri: https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/lifecycle/deactivate
+    uri: https://test.okta.com/api/v1/authorizationServers/aus4dnbe96RN8oWne0g7/lifecycle/deactivate
   response:
     body:
       string: ''
@@ -501,59 +555,68 @@ interactions:
       Connection:
       - keep-alive
       Date:
-      - Fri, 02 Apr 2021 18:20:01 GMT
+      - Tue, 14 Feb 2023 17:48:45 GMT
       Expires:
       - '0'
       Pragma:
       - no-cache
       Public-Key-Pins-Report-Only:
-      - pin-sha256="r5EfzZxQVvQpKo3AgYRaT7X2bDO/kj3ACwmxfdT2zt8="; pin-sha256="MaqlcUgk2mvY/RFSGeSwBRkI+rZ6/dxe/DuQfBT/vnQ=";
-        pin-sha256="72G5IEvDEWn+EThf3qjR7/bQSWaS2ZSLqolhnO6iyJI="; pin-sha256="rrV6CLCCvqnk89gWibYT0JO6fNQ8cCit7GGoiVTjCOg=";
+      - pin-sha256="MAbZWK1eIklkAxEkc7uqoZ/QX3cgLZT0HY5TRG1JXrs="; pin-sha256="PJ1QGTlW5ViFNhswMsYKp4X8C7KdG8nDW4ZcXLmYMyI=";
+        pin-sha256="5LlRWGTBVjpfNXXU5T7cYVUbOSPcgpMgdjaWd/R9Leg="; pin-sha256="lpaMLlEsp7/dVZoeWt3f9ciJIMGimixAIaKNsn9/bCY=";
         max-age=60; report-uri="https://okta.report-uri.com/r/default/hpkp/reportOnly"
       Server:
       - nginx
       Set-Cookie:
       - sid=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
-      - JSESSIONID=0B9EDD45E75158BA2A421D2B2BF42D34; Path=/; Secure; HttpOnly
+      - autolaunch_triggered=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
+      - JSESSIONID=011431EE3609E34AEAF58D724EB02350; Path=/; Secure; HttpOnly
       Strict-Transport-Security:
       - max-age=315360000; includeSubDomains
-      content-security-policy-report-only: 'default-src ''self'' *.oktacdn.com test.okta.com
-        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
-        connect-src ''self'' *.oktacdn.com *.mixpanel.com *.mapbox.com app.pendo.io
-        data.pendo.io pendo-static-5634101834153984.storage.googleapis.com test.okta.com
-        test-admin.okta.com https://oinmanager.okta.com data: *.zscloud.net *.zscalerbeta.net
-        *.zscaler.net *.zscalertwo.net *.zscalerthree.net; script-src ''unsafe-inline''
-        ''unsafe-eval'' ''self'' *.oktacdn.com *.zscloud.net *.zscalerbeta.net *.zscaler.net
-        *.zscalertwo.net *.zscalerthree.net; style-src ''unsafe-inline'' ''self''
-        *.oktacdn.com app.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
-        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
-        frame-src ''self'' login.okta.com test.okta.com test-admin.okta.com *.zscloud.net
-        *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net; img-src
-        ''self'' *.oktacdn.com test.okta.com *.tiles.mapbox.com *.mapbox.com app.pendo.io
-        data.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
-        data: blob: *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net
-        *.zscalerthree.net; font-src data: ''self'' *.oktacdn.com fonts.gstatic.com
-        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net'
+      content-security-policy:
+      - 'default-src ''self'' dev-jabro-oie.trexcloud.com *.oktacdn.com; connect-src
+        ''self'' dev-jabro-oie.trexcloud.com dev-jabro-oie-admin.trexcloud.com *.oktacdn.com
+        *.mixpanel.com *.mapbox.com app.pendo.io data.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        pendo-static-5391521872216064.storage.googleapis.com *.mtls.trexcloud.com
+        dev-jabro-oie.kerberos.trexcloud.com *.authenticatorlocaldev.com:8769 http://localhost:8769
+        http://127.0.0.1:8769 *.authenticatorlocaldev.com:65111 http://localhost:65111
+        http://127.0.0.1:65111 *.authenticatorlocaldev.com:65121 http://localhost:65121
+        http://127.0.0.1:65121 *.authenticatorlocaldev.com:65131 http://localhost:65131
+        http://127.0.0.1:65131 *.authenticatorlocaldev.com:65141 http://localhost:65141
+        http://127.0.0.1:65141 *.authenticatorlocaldev.com:65151 http://localhost:65151
+        http://127.0.0.1:65151 https://oinmanager.trexcloud.com data:; script-src
+        ''unsafe-inline'' ''nonce-92R1KcwZifDbaPemml_rFloHDGndWD7XH_muLVVThVI'' ''unsafe-eval''
+        ''self'' dev-jabro-oie.trexcloud.com *.oktacdn.com; style-src ''unsafe-inline''
+        ''self'' dev-jabro-oie.trexcloud.com *.oktacdn.com app.pendo.io cdn.pendo.io
+        pendo-static-5634101834153984.storage.googleapis.com pendo-static-5391521872216064.storage.googleapis.com;
+        frame-src ''self'' dev-jabro-oie.trexcloud.com dev-jabro-oie-admin.trexcloud.com
+        login.trexcloud.com com-okta-authenticator:; img-src ''self'' dev-jabro-oie.trexcloud.com
+        *.oktacdn.com *.tiles.mapbox.com *.mapbox.com app.pendo.io data.pendo.io cdn.pendo.io
+        pendo-static-5634101834153984.storage.googleapis.com pendo-static-5391521872216064.storage.googleapis.com
+        data: blob:; font-src ''self'' dev-jabro-oie.trexcloud.com data: *.oktacdn.com
+        fonts.gstatic.com; frame-ancestors ''self''; report-uri https://oktacsp.report-uri.com/r/t/csp/enforce;
+        report-to csp'
       expect-ct:
       - report-uri="https://oktaexpectct.report-uri.com/r/t/ct/reportOnly", max-age=0
       p3p:
       - CP="HONK"
+      report-to:
+      - '{"group":"csp","max_age":31536000,"endpoints":[{"url":"https://oktacsp.report-uri.com/a/t/g"}],"include_subdomains":true}'
       x-frame-options:
       - SAMEORIGIN
       x-okta-request-id:
-      - YGdgUfnVyRqWLIQyJVLVWAAABc0
+      - Y-vJfNkk4JbybC1AdrsxfAAABT4
       x-rate-limit-limit:
-      - '1000'
+      - '500'
       x-rate-limit-remaining:
-      - '991'
+      - '487'
       x-rate-limit-reset:
-      - '1617387611'
+      - '1676396930'
       x-xss-protection:
       - '0'
     status:
       code: 204
       message: No Content
-    url: https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/lifecycle/deactivate
+    url: https://test.okta.com/api/v1/authorizationServers/aus4dnbe96RN8oWne0g7/lifecycle/deactivate
 - request:
     body: null
     headers:
@@ -564,9 +627,9 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - okta-sdk-python/1.5.1 python/3.8.2 Darwin/19.6.0
+      - okta-sdk-python/2.8.0 python/3.10.1 Darwin/21.6.0
     method: DELETE
-    uri: https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6
+    uri: https://test.okta.com/api/v1/authorizationServers/aus4dnbe96RN8oWne0g7
   response:
     body:
       string: ''
@@ -576,57 +639,66 @@ interactions:
       Connection:
       - keep-alive
       Date:
-      - Fri, 02 Apr 2021 18:20:02 GMT
+      - Tue, 14 Feb 2023 17:48:45 GMT
       Expires:
       - '0'
       Pragma:
       - no-cache
       Public-Key-Pins-Report-Only:
-      - pin-sha256="r5EfzZxQVvQpKo3AgYRaT7X2bDO/kj3ACwmxfdT2zt8="; pin-sha256="MaqlcUgk2mvY/RFSGeSwBRkI+rZ6/dxe/DuQfBT/vnQ=";
-        pin-sha256="72G5IEvDEWn+EThf3qjR7/bQSWaS2ZSLqolhnO6iyJI="; pin-sha256="rrV6CLCCvqnk89gWibYT0JO6fNQ8cCit7GGoiVTjCOg=";
+      - pin-sha256="MAbZWK1eIklkAxEkc7uqoZ/QX3cgLZT0HY5TRG1JXrs="; pin-sha256="PJ1QGTlW5ViFNhswMsYKp4X8C7KdG8nDW4ZcXLmYMyI=";
+        pin-sha256="5LlRWGTBVjpfNXXU5T7cYVUbOSPcgpMgdjaWd/R9Leg="; pin-sha256="lpaMLlEsp7/dVZoeWt3f9ciJIMGimixAIaKNsn9/bCY=";
         max-age=60; report-uri="https://okta.report-uri.com/r/default/hpkp/reportOnly"
       Server:
       - nginx
       Set-Cookie:
       - sid=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
-      - JSESSIONID=97E13420C391497BF4B32EA2BEFBE9B8; Path=/; Secure; HttpOnly
+      - autolaunch_triggered=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
+      - JSESSIONID=423C6C766077EEBB1AE337A2435F2849; Path=/; Secure; HttpOnly
       Strict-Transport-Security:
       - max-age=315360000; includeSubDomains
-      content-security-policy-report-only: 'default-src ''self'' *.oktacdn.com test.okta.com
-        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
-        connect-src ''self'' *.oktacdn.com *.mixpanel.com *.mapbox.com app.pendo.io
-        data.pendo.io pendo-static-5634101834153984.storage.googleapis.com test.okta.com
-        test-admin.okta.com https://oinmanager.okta.com data: *.zscloud.net *.zscalerbeta.net
-        *.zscaler.net *.zscalertwo.net *.zscalerthree.net; script-src ''unsafe-inline''
-        ''unsafe-eval'' ''self'' *.oktacdn.com *.zscloud.net *.zscalerbeta.net *.zscaler.net
-        *.zscalertwo.net *.zscalerthree.net; style-src ''unsafe-inline'' ''self''
-        *.oktacdn.com app.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
-        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net;
-        frame-src ''self'' login.okta.com test.okta.com test-admin.okta.com *.zscloud.net
-        *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net; img-src
-        ''self'' *.oktacdn.com test.okta.com *.tiles.mapbox.com *.mapbox.com app.pendo.io
-        data.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
-        data: blob: *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net
-        *.zscalerthree.net; font-src data: ''self'' *.oktacdn.com fonts.gstatic.com
-        *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net'
+      content-security-policy:
+      - 'default-src ''self'' dev-jabro-oie.trexcloud.com *.oktacdn.com; connect-src
+        ''self'' dev-jabro-oie.trexcloud.com dev-jabro-oie-admin.trexcloud.com *.oktacdn.com
+        *.mixpanel.com *.mapbox.com app.pendo.io data.pendo.io pendo-static-5634101834153984.storage.googleapis.com
+        pendo-static-5391521872216064.storage.googleapis.com *.mtls.trexcloud.com
+        dev-jabro-oie.kerberos.trexcloud.com *.authenticatorlocaldev.com:8769 http://localhost:8769
+        http://127.0.0.1:8769 *.authenticatorlocaldev.com:65111 http://localhost:65111
+        http://127.0.0.1:65111 *.authenticatorlocaldev.com:65121 http://localhost:65121
+        http://127.0.0.1:65121 *.authenticatorlocaldev.com:65131 http://localhost:65131
+        http://127.0.0.1:65131 *.authenticatorlocaldev.com:65141 http://localhost:65141
+        http://127.0.0.1:65141 *.authenticatorlocaldev.com:65151 http://localhost:65151
+        http://127.0.0.1:65151 https://oinmanager.trexcloud.com data:; script-src
+        ''unsafe-inline'' ''nonce-rxPeSlYm3rIOzz9XyeqN3GedG66EzpQf4c4c12Rz7PE'' ''unsafe-eval''
+        ''self'' dev-jabro-oie.trexcloud.com *.oktacdn.com; style-src ''unsafe-inline''
+        ''self'' dev-jabro-oie.trexcloud.com *.oktacdn.com app.pendo.io cdn.pendo.io
+        pendo-static-5634101834153984.storage.googleapis.com pendo-static-5391521872216064.storage.googleapis.com;
+        frame-src ''self'' dev-jabro-oie.trexcloud.com dev-jabro-oie-admin.trexcloud.com
+        login.trexcloud.com com-okta-authenticator:; img-src ''self'' dev-jabro-oie.trexcloud.com
+        *.oktacdn.com *.tiles.mapbox.com *.mapbox.com app.pendo.io data.pendo.io cdn.pendo.io
+        pendo-static-5634101834153984.storage.googleapis.com pendo-static-5391521872216064.storage.googleapis.com
+        data: blob:; font-src ''self'' dev-jabro-oie.trexcloud.com data: *.oktacdn.com
+        fonts.gstatic.com; frame-ancestors ''self''; report-uri https://oktacsp.report-uri.com/r/t/csp/enforce;
+        report-to csp'
       expect-ct:
       - report-uri="https://oktaexpectct.report-uri.com/r/t/ct/reportOnly", max-age=0
       p3p:
       - CP="HONK"
+      report-to:
+      - '{"group":"csp","max_age":31536000,"endpoints":[{"url":"https://oktacsp.report-uri.com/a/t/g"}],"include_subdomains":true}'
       x-frame-options:
       - SAMEORIGIN
       x-okta-request-id:
-      - YGdgUnm462PNU1R1QbZcHwAADmI
+      - Y-vJfQFByhRFu8ZpcV85hgAACM8
       x-rate-limit-limit:
-      - '1000'
+      - '500'
       x-rate-limit-remaining:
-      - '990'
+      - '486'
       x-rate-limit-reset:
-      - '1617387611'
+      - '1676396930'
       x-xss-protection:
       - '0'
     status:
       code: 204
       message: No Content
-    url: https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6
+    url: https://test.okta.com/api/v1/authorizationServers/aus4dnbe96RN8oWne0g7
 version: 1

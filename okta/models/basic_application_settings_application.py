@@ -32,8 +32,8 @@ class BasicApplicationSettingsApplication(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.auth_url = config["authUrl"]\
-                if "authUrl" in config else None
+            self.auth_url = config["authURL"]\
+                if "authURL" in config else None
             self.url = config["url"]\
                 if "url" in config else None
         else:

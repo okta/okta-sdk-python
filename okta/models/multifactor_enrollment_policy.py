@@ -18,32 +18,25 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from okta.okta_object import OktaObject
+from okta.models.policy\
+    import Policy
+from okta.models.policy_type import PolicyType
 
 
-class OrgPreferences(
-    OktaObject
+class MultifactorEnrollmentPolicy(
+    Policy
 ):
     """
-    A class for OrgPreferences objects.
+    A class for MultifactorEnrollmentPolicy objects.
     """
 
     def __init__(self, config=None):
         super().__init__(config)
-        if config:
-            self.links = config["_links"]\
-                if "_links" in config else None
-            self.show_end_user_footer = config["showEndUserFooter"]\
-                if "showEndUserFooter" in config else None
-        else:
-            self.links = None
-            self.show_end_user_footer = None
+        pass
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
-            "_links": self.links,
-            "showEndUserFooter": self.show_end_user_footer
         }
         parent_req_format.update(current_obj_format)
         return parent_req_format

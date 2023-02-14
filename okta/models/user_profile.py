@@ -131,8 +131,9 @@ class UserProfile(
                 if "zipCode" in config else None
             # set custom attributes not defined in model, do not change string case
             for attr_name in config:
-                lower_camel_case = to_lower_camel_case(attr_name)
-                if lower_camel_case not in UserProfile.BASIC_ATTRIBUTES:
+                # lower_camel_case = to_lower_camel_case(attr_name)
+                # if lower_camel_case not in UserProfile.BASIC_ATTRIBUTES:
+                if attr_name not in UserProfile.BASIC_ATTRIBUTES:
                     setattr(self, attr_name, config[attr_name])
         else:
             self.city = None

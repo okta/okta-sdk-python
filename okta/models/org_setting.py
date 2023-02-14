@@ -31,8 +31,8 @@ class OrgSetting(
     def __init__(self, config=None):
         super().__init__(config)
         if config:
-            self.links = config["links"]\
-                if "links" in config else None
+            self.links = config["_links"]\
+                if "_links" in config else None
             self.address_1 = config["address1"]\
                 if "address1" in config else None
             self.address_2 = config["address2"]\
@@ -45,8 +45,8 @@ class OrgSetting(
                 if "country" in config else None
             self.created = config["created"]\
                 if "created" in config else None
-            self.end_user_support_help_url = config["endUserSupportHelpUrl"]\
-                if "endUserSupportHelpUrl" in config else None
+            self.end_user_support_help_url = config["endUserSupportHelpURL"]\
+                if "endUserSupportHelpURL" in config else None
             self.expires_at = config["expiresAt"]\
                 if "expiresAt" in config else None
             self.id = config["id"]\

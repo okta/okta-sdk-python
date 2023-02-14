@@ -61,13 +61,13 @@ class UserCredentials(
                     self.provider = None
             else:
                 self.provider = None
-            if "recoveryQuestion" in config:
-                if isinstance(config["recoveryQuestion"],
+            if "recovery_question" in config:
+                if isinstance(config["recovery_question"],
                               recovery_question_credential.RecoveryQuestionCredential):
-                    self.recovery_question = config["recoveryQuestion"]
-                elif config["recoveryQuestion"] is not None:
+                    self.recovery_question = config["recovery_question"]
+                elif config["recovery_question"] is not None:
                     self.recovery_question = recovery_question_credential.RecoveryQuestionCredential(
-                        config["recoveryQuestion"]
+                        config["recovery_question"]
                     )
                 else:
                     self.recovery_question = None

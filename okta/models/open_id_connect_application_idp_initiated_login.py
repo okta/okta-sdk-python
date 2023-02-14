@@ -33,7 +33,7 @@ class OpenIdConnectApplicationIdpInitiatedLogin(
         super().__init__(config)
         if config:
             self.default_scope = OktaCollection.form_list(
-                config["defaultScope"] if "defaultScope"\
+                config["default_scope"] if "default_scope"\
                     in config else [],
                 str
             )
