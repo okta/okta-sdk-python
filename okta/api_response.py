@@ -1,7 +1,6 @@
 import json
 import xmltodict
 
-from okta.api_client import APIClient
 from okta.utils import convert_absolute_url_into_relative_url
 
 
@@ -136,11 +135,7 @@ class OktaAPIResponse():
         if self._type is not None:
             result = []
             for item in next_page:
-                result.append(
-                    self._type(
-                        APIClient.form_response_body(item)
-                    )
-                )
+                result.append(self._type(item))
             return (result, None)
 
         return (next_page, error)
