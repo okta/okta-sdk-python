@@ -41,6 +41,8 @@ class Theme(
         if config:
             self.links = config["links"]\
                 if "links" in config else None
+            if "_links" in config:
+                self.links = config["_links"]
             self.background_image = config["backgroundImage"]\
                 if "backgroundImage" in config else None
             if "emailTemplateTouchPointVariant" in config:

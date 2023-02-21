@@ -33,6 +33,8 @@ class OrgContactUser(
         if config:
             self.links = config["links"]\
                 if "links" in config else None
+            if "_links" in config:
+                self.links = config["_links"]
             self.user_id = config["userId"]\
                 if "userId" in config else None
         else:

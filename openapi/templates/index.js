@@ -198,6 +198,7 @@ py.process = ({ spec, operations, models, handlebars }) => {
     returnsPolicyRule,
     isUrnGrantType,
     prefixUrnGrantType,
+    canContainCustomAttributes,
   });
 
   handlebars.registerPartial(
@@ -493,4 +494,9 @@ function isUrnGrantType(grantType) {
 // Prefixes openAPI spec enum with OAuthGrantType urn prefix
 function prefixUrnGrantType(grantType) {
   return URN_PREFIX + URN_SUFFIXES[grantType];
+}
+
+const RESPONSE_MODELS_WITH_CUSTOM_ATTRIBUTES = ['User', 'Group', 'UserSchema', 'GroupSchema'];
+function canContainCustomAttributes(responseModel) {
+  return RESPONSE_MODELS_WITH_CUSTOM_ATTRIBUTES.includes(responseModel);
 }

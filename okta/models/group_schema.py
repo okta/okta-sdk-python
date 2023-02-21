@@ -37,8 +37,12 @@ class GroupSchema(
         if config:
             self.schema = config["schema"]\
                 if "schema" in config else None
+            if "$schema" in config:
+                self.schema = config["$schema"]
             self.links = config["links"]\
                 if "links" in config else None
+            if "_links" in config:
+                self.links = config["_links"]
             self.created = config["created"]\
                 if "created" in config else None
             if "definitions" in config:

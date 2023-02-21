@@ -139,7 +139,7 @@
             body = self.form_response_body(response.get_body())
             result = find_policy_rule_model(body["type"])(body)
             {{else}}
-            {{#if (eq (pascalCase operation.responseModel) "User")}}
+            {{#if (canContainCustomAttributes (pascalCase operation.responseModel))}}
             result = {{pascalCase operation.responseModel}}(
                 response.get_body()
             )

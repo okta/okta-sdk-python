@@ -35,6 +35,8 @@ class OAuth2Claim(
         if config:
             self.links = config["links"]\
                 if "links" in config else None
+            if "_links" in config:
+                self.links = config["_links"]
             self.always_include_in_token = config["alwaysIncludeInToken"]\
                 if "alwaysIncludeInToken" in config else None
             self.claim_type = config["claimType"]\
