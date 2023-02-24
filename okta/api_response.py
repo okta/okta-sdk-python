@@ -1,7 +1,8 @@
 import json
 import xmltodict
-
 from okta.api_client import APIClient
+from okta.models import Group, GroupSchema, User, UserSchema
+
 from okta.utils import convert_absolute_url_into_relative_url
 
 
@@ -130,17 +131,15 @@ class OktaAPIResponse():
         Returns:
             json: Next page of results
         """
+        MODELS_NOT_TO_CAMEL_CASE = [User, Group, UserSchema, GroupSchema]
         next_page, error = await self.get_next().__anext__()
         if error:
             return (None, error)
         if self._type is not None:
             result = []
             for item in next_page:
-                result.append(
-                    self._type(
-                        APIClient.form_response_body(item)
-                    )
-                )
+                result.append(self._type(item) if self._type in MODELS_NOT_TO_CAMEL_CASE
+                              else self._type(APIClient.form_response_body(item)))
             return (result, None)
 
         return (next_page, error)

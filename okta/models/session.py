@@ -40,6 +40,8 @@ class Session(
         if config:
             self.links = config["links"]\
                 if "links" in config else None
+            if "_links" in config:
+                self.links = config["_links"]
             self.amr = OktaCollection.form_list(
                 config["amr"] if "amr"\
                     in config else [],

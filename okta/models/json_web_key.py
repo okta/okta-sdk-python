@@ -34,6 +34,8 @@ class JsonWebKey(
         if config:
             self.links = config["links"]\
                 if "links" in config else None
+            if "_links" in config:
+                self.links = config["_links"]
             self.alg = config["alg"]\
                 if "alg" in config else None
             self.created = config["created"]\

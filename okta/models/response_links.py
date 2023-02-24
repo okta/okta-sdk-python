@@ -33,6 +33,8 @@ class ResponseLinks(
         if config:
             self.links = config["links"]\
                 if "links" in config else None
+            if "_links" in config:
+                self.links = config["_links"]
         else:
             self.links = None
 
