@@ -1,5 +1,3 @@
-from urllib.parse import urlsplit, parse_qsl, urlencode, urlunsplit
-
 from okta.user_agent import UserAgent
 from okta.constants import DATETIME_FORMAT
 from okta.client import Client
