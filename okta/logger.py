@@ -13,7 +13,7 @@ def setup_logging(log_level=logging.INFO):
 
     logger = logging.getLogger('okta-sdk-python')
     logger.addHandler(stream_handler)
-    logger.setLevel(logging.DEBUG)
+    logger.setLevel(log_level)
 
     # disable logger by default
     logger.disabled = True
