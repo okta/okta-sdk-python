@@ -64,8 +64,6 @@ interactions:
         data: blob:; font-src ''self'' test.okta.com data: *.oktacdn.com
         fonts.gstatic.com; frame-ancestors ''self''; report-uri https://okta.report-uri.com/r/d/csp/enforce;
         report-to csp'
-      expect-ct:
-      - report-uri="https://oktaexpectct.report-uri.com/r/t/ct/reportOnly", max-age=0
       p3p:
       - CP="HONK"
       report-to:
@@ -156,8 +154,6 @@ interactions:
         data: blob:; font-src ''self'' test.okta.com data: *.oktacdn.com
         fonts.gstatic.com; frame-ancestors ''self''; report-uri https://okta.report-uri.com/r/d/csp/enforce;
         report-to csp'
-      expect-ct:
-      - report-uri="https://oktaexpectct.report-uri.com/r/t/ct/reportOnly", max-age=0
       p3p:
       - CP="HONK"
       report-to:
@@ -235,8 +231,6 @@ interactions:
         data: blob:; font-src ''self'' test.okta.com data: *.oktacdn.com
         fonts.gstatic.com; frame-ancestors ''self''; report-uri https://okta.report-uri.com/r/d/csp/enforce;
         report-to csp'
-      expect-ct:
-      - report-uri="https://oktaexpectct.report-uri.com/r/t/ct/reportOnly", max-age=0
       p3p:
       - CP="HONK"
       report-to:
@@ -323,8 +317,6 @@ interactions:
         data: blob:; font-src ''self'' test.okta.com data: *.oktacdn.com
         fonts.gstatic.com; frame-ancestors ''self''; report-uri https://okta.report-uri.com/r/d/csp/enforce;
         report-to csp'
-      expect-ct:
-      - report-uri="https://oktaexpectct.report-uri.com/r/t/ct/reportOnly", max-age=0
       p3p:
       - CP="HONK"
       report-to:
@@ -416,8 +408,6 @@ interactions:
         data: blob:; font-src ''self'' test.okta.com data: *.oktacdn.com
         fonts.gstatic.com; frame-ancestors ''self''; report-uri https://okta.report-uri.com/r/d/csp/enforce;
         report-to csp'
-      expect-ct:
-      - report-uri="https://oktaexpectct.report-uri.com/r/t/ct/reportOnly", max-age=0
       p3p:
       - CP="HONK"
       report-to:
@@ -497,8 +487,6 @@ interactions:
         data: blob:; font-src ''self'' test.okta.com data: *.oktacdn.com
         fonts.gstatic.com; frame-ancestors ''self''; report-uri https://okta.report-uri.com/r/d/csp/enforce;
         report-to csp'
-      expect-ct:
-      - report-uri="https://oktaexpectct.report-uri.com/r/t/ct/reportOnly", max-age=0
       p3p:
       - CP="HONK"
       report-to:
