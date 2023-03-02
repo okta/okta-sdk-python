@@ -1,5 +1,5 @@
 import json
-from Crypto.PublicKey import RSA
+from Cryptodome.PublicKey import RSA
 from ast import literal_eval
 import jose.jwk as jwk
 import jose.jwt as jwt
