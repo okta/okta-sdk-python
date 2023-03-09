@@ -361,7 +361,7 @@ class RequestExecutor:
         return retry_limit_reset - date_time + 1
 
     async def pause_for_backoff(self, backoff_time):
-        await asyncio.sleep(backoff_time)
+        await asyncio.sleep(float(backoff_time))
 
     def set_custom_headers(self, headers):
         self._custom_headers.update(headers)
