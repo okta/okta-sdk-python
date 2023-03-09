@@ -91,6 +91,28 @@ class MockHTTP429ResponseDetails():
         self.content_type = "application/json"
 
 
+class MockHTTP429ConcurrentRateLimitErrorResponseDetails():
+    def __init__(self):
+        now = dt.datetime.now(dt.timezone.utc)
+        now = now.replace(microsecond=0)
+
+        one_sec_after = now + dt.timedelta(seconds=1)
+        self.status = 429
+        self.headers = multidict.CIMultiDict({
+            "Date": now.strftime(DATETIME_FORMAT),
+            "Content-Type": "application/json",
+            "X-Okta-Now": "",
+            "X-Rate-Limit-Reset": one_sec_after.timestamp(),
+            "X-Rate-Limit-Limit": 0,
+            "X-Rate-Limit-Remaining": 0,
+            "X-Okta-Request-id": "okta-request-id",
+        })
+        self.url = ORG_URL + GET_USERS_CALL
+        self.method = "GET"
+        self.links = {}
+        self.content_type = "application/json"
+
+
 class MockHTTP429NoXResetResponseDetails():
     def __init__(self):
         now = dt.datetime.now(dt.timezone.utc)
@@ -178,6 +200,14 @@ async def mock_GET_HTTP_Client_response_valid_with_next(request_executor, reques
 async def mock_GET_HTTP_Client_response_429(*args, **kwargs):
     request = await mock_GET_HTTP_request()
     response_details = MockHTTP429ResponseDetails()
+    response_body = '{}'
+    error = None
+    return (request, response_details, response_body, error)
+
+
+async def mock_GET_HTTP_Client_response_429_concurrent_limit_error(*args, **kwargs):
+    request = await mock_GET_HTTP_request()
+    response_details = MockHTTP429ConcurrentRateLimitErrorResponseDetails()
     response_body = '{}'
     error = None
     return (request, response_details, response_body, error)
