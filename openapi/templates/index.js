@@ -196,6 +196,9 @@ py.process = ({ spec, operations, models, handlebars }) => {
     returnsUserFactor,
     returnsPolicy,
     returnsPolicyRule,
+    isUrnGrantType,
+    prefixUrnGrantType,
+    canContainCustomAttributes,
   });
 
   handlebars.registerPartial(
@@ -473,4 +476,27 @@ function returnsPolicyRule(operations) {
       return operation.responseModel === "PolicyRule";
     }).length > 0
   );
+}
+
+const URN_GRANT_TYPES = ['device_code', 'saml2_bearer', 'token_exchange'];
+const URN_PREFIX = 'urn:ietf:params:oauth:grant-type:';
+const URN_SUFFIXES = {
+  'device_code': 'device_code',
+  'saml2_bearer': 'saml2-bearer',
+  'token_exchange': 'token-exchange'
+};
+
+// Determines if OAuthGrantType needs prefix
+function isUrnGrantType(grantType) {
+  return URN_GRANT_TYPES.includes(grantType);
+}
+
+// Prefixes openAPI spec enum with OAuthGrantType urn prefix
+function prefixUrnGrantType(grantType) {
+  return URN_PREFIX + URN_SUFFIXES[grantType];
+}
+
+const RESPONSE_MODELS_WITH_CUSTOM_ATTRIBUTES = ['User', 'Group', 'UserSchema', 'GroupSchema'];
+function canContainCustomAttributes(responseModel) {
+  return RESPONSE_MODELS_WITH_CUSTOM_ATTRIBUTES.includes(responseModel);
 }

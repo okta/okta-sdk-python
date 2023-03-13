@@ -33,6 +33,8 @@ class OrgOktaCommunicationSetting(
         if config:
             self.links = config["links"]\
                 if "links" in config else None
+            if "_links" in config:
+                self.links = config["_links"]
             self.opt_out_email_users = config["optOutEmailUsers"]\
                 if "optOutEmailUsers" in config else None
         else:

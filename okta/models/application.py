@@ -48,6 +48,8 @@ class Application(
                 if "embedded" in config else None
             self.links = config["links"]\
                 if "links" in config else None
+            if "_links" in config:
+                self.links = config["_links"]
             if "accessibility" in config:
                 if isinstance(config["accessibility"],
                               application_accessibility.ApplicationAccessibility):

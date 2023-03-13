@@ -65,8 +65,6 @@ interactions:
         com-okta-authenticator:; img-src ''self'' test.okta.com *.oktacdn.com
         *.tiles.mapbox.com *.mapbox.com app.pendo.io data.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
         data: blob:; font-src ''self'' test.okta.com data: *.oktacdn.com fonts.gstatic.com'
-      expect-ct:
-      - report-uri="https://oktaexpectct.report-uri.com/r/t/ct/reportOnly", max-age=0
       p3p:
       - CP="HONK"
       x-content-type-options:
@@ -148,8 +146,6 @@ interactions:
         com-okta-authenticator:; img-src ''self'' test.okta.com *.oktacdn.com
         *.tiles.mapbox.com *.mapbox.com app.pendo.io data.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
         data: blob:; font-src ''self'' test.okta.com data: *.oktacdn.com fonts.gstatic.com'
-      expect-ct:
-      - report-uri="https://oktaexpectct.report-uri.com/r/t/ct/reportOnly", max-age=0
       p3p:
       - CP="HONK"
       x-content-type-options:

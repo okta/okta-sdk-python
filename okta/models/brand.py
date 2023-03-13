@@ -33,6 +33,8 @@ class Brand(
         if config:
             self.links = config["links"]\
                 if "links" in config else None
+            if "_links" in config:
+                self.links = config["_links"]
             self.agree_to_custom_privacy_policy = config["agreeToCustomPrivacyPolicy"]\
                 if "agreeToCustomPrivacyPolicy" in config else None
             self.custom_privacy_policy_url = config["customPrivacyPolicyUrl"]\

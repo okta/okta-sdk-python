@@ -35,6 +35,8 @@ class VerifyUserFactorResponse(
                 if "embedded" in config else None
             self.links = config["links"]\
                 if "links" in config else None
+            if "_links" in config:
+                self.links = config["_links"]
             self.expires_at = config["expiresAt"]\
                 if "expiresAt" in config else None
             self.factor_result = config["factorResult"]\

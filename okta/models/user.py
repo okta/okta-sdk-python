@@ -43,6 +43,8 @@ class User(
                 if "embedded" in config else None
             self.links = config["links"]\
                 if "links" in config else None
+            if "_links" in config:
+                self.links = config["_links"]
             self.activated = config["activated"]\
                 if "activated" in config else None
             self.created = config["created"]\

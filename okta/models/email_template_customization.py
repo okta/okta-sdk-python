@@ -33,6 +33,8 @@ class EmailTemplateCustomization(
         if config:
             self.links = config["links"]\
                 if "links" in config else None
+            if "_links" in config:
+                self.links = config["_links"]
             self.body = config["body"]\
                 if "body" in config else None
             self.created = config["created"]\
