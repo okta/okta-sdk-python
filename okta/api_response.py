@@ -131,7 +131,7 @@ class OktaAPIResponse():
         Returns:
             json: Next page of results
         """
-        if not self._next:
+        if not self.has_next():
             return (None, None)
         MODELS_NOT_TO_CAMEL_CASE = [User, Group, UserSchema, GroupSchema]
         next_page, error = await self.get_next().__anext__()
