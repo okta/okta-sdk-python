@@ -1572,13 +1572,13 @@ class TestAuthorizationServerResource:
 
             created_policy_rule, _, err = await \
                 client.create_authorization_server_policy_rule(
-                    created_policy.id, created_auth_server.id, policy_rule_model
+                    created_auth_server.id, created_policy.id, policy_rule_model
                 )
             assert err is None
 
             # Get Policy Rules
             policy_rules, _, err = await client.list_authorization_server_policy_rules(
-                created_policy.id, created_auth_server.id
+                created_auth_server.id, created_policy.id
             )
 
             assert err is None
@@ -1592,7 +1592,7 @@ class TestAuthorizationServerResource:
             try:
                 # Delete Policy Rule
                 _, err = await client.delete_authorization_server_policy_rule(
-                    created_policy.id, created_auth_server.id, created_policy_rule.id
+                    created_auth_server.id, created_policy.id, created_policy_rule.id
                 )
                 if err:
                     errors.append(err)

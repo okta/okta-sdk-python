@@ -1,0 +1,23 @@
+# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
+version: 2.1
+
+orbs:
+  python: circleci/python@2.1.1
+
+jobs:
+  build_and_test:
+    executor: python/default
+    steps:
+      - checkout
+      - python/install-packages:
+          pkg-manager: pip
+      - run:
+          name: Build
+          command: python setup.py build
+      - run:
+          name: Run Tests
+          command: pytest
+workflows:
+  "Circle CI Tests":
+    jobs:
+      - build_and_test

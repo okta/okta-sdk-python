@@ -162,6 +162,10 @@ class {{pascalCase model.modelName}}(
             {{/if}}
             {{/if}}
             {{/if}}
+            {{#if (or (eq prop.propertyName "$schema") (eq prop.propertyName "_links"))}}
+            if "{{prop.propertyName}}" in config:
+                self.{{snakeCase prop.propertyName}} = config["{{prop.propertyName}}"]
+            {{/if}}
             {{/each}}
             {{#if (or (eq model.modelName "UserProfile") (eq model.modelName "GroupProfile"))}}
             # set custom attributes not defined in model, do not change string case

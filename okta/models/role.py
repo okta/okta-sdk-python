@@ -41,6 +41,8 @@ class Role(
                 if "embedded" in config else None
             self.links = config["links"]\
                 if "links" in config else None
+            if "_links" in config:
+                self.links = config["_links"]
             if "assignmentType" in config:
                 if isinstance(config["assignmentType"],
                               role_assignment_type.RoleAssignmentType):

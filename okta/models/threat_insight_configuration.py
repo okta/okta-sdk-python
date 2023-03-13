@@ -34,6 +34,8 @@ class ThreatInsightConfiguration(
         if config:
             self.links = config["links"]\
                 if "links" in config else None
+            if "_links" in config:
+                self.links = config["_links"]
             self.action = config["action"]\
                 if "action" in config else None
             self.created = config["created"]\

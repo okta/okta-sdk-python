@@ -1,5 +1,4 @@
 import aiohttp
-import asyncio
 import aiohttp
 import logging
 from aiohttp.client_reqrep import ConnectionKey
@@ -634,16 +633,18 @@ def test_constructor_client_logging():
     assert logger.level == logging.DEBUG
 
 
-def test_client_raise_exception():
+@pytest.mark.asyncio
+async def test_client_raise_exception():
     org_url = "https://test.okta.com"
     token = "TOKEN"
     config = {'orgUrl': org_url, 'token': token, 'raiseException': True}
     client = OktaClient(config)
     with pytest.raises(HTTPException):
-        asyncio.run(client.list_users())
+        _ = await client.list_users()
 
 
-def test_client_custom_headers(monkeypatch, mocker):
+@pytest.mark.asyncio
+async def test_client_custom_headers(monkeypatch, mocker):
     org_url = "https://test.okta.com"
     token = "TOKEN"
     config = {'orgUrl': org_url, 'token': token}
@@ -679,7 +680,7 @@ def test_client_custom_headers(monkeypatch, mocker):
 
     mock_http_request = MockHTTPRequest()
     monkeypatch.setattr(aiohttp.ClientSession, 'request', mock_http_request)
-    asyncio.run(client.list_users())
+    _ = await client.list_users()
     assert 'Header-Test-1' in mock_http_request.headers
     assert 'Header-Test-2' in mock_http_request.headers
 
@@ -688,7 +689,8 @@ def test_client_custom_headers(monkeypatch, mocker):
     assert client.get_custom_headers() == {}
 
 
-def test_client_handle_aiohttp_error(monkeypatch, mocker):
+@pytest.mark.asyncio
+async def test_client_handle_aiohttp_error(monkeypatch, mocker):
     org_url = "https://test.okta.com"
     token = "TOKEN"
     config = {'orgUrl': org_url, 'token': token}
@@ -720,13 +722,14 @@ def test_client_handle_aiohttp_error(monkeypatch, mocker):
 
     mock_http_request = MockHTTPRequest()
     monkeypatch.setattr(aiohttp.ClientSession, 'request', mock_http_request)
-    res, resp_body, error = asyncio.run(client.list_users())
+    res, resp_body, error = await client.list_users()
     assert res is None
     assert resp_body is None
     assert isinstance(error, aiohttp.ClientError)
 
 
-def test_client_log_debug(monkeypatch, caplog):
+@pytest.mark.asyncio
+async def test_client_log_debug(monkeypatch, caplog):
     org_url = "https://test.okta.com"
     token = "TOKEN"
     config = {'orgUrl': org_url, 'token': token,
@@ -768,14 +771,15 @@ def test_client_log_debug(monkeypatch, caplog):
     mock_http_request = MockHTTPRequest()
     monkeypatch.setattr(aiohttp.ClientSession, 'request', mock_http_request)
     with caplog.at_level(logging.DEBUG):
-        res, resp_body, error = asyncio.run(client.list_users())
+        res, resp_body, error = await client.list_users()
         assert 'okta-sdk-python' in caplog.text
         assert 'DEBUG' in caplog.text
         assert "'method': 'GET'" in caplog.text
         assert "'url': 'https://test.okta.com/api/v1/users'" in caplog.text
 
 
-def test_client_log_info(monkeypatch, caplog):
+@pytest.mark.asyncio
+async def test_client_log_info(monkeypatch, caplog):
     org_url = "https://test.okta.com"
     token = "TOKEN"
     config = {'orgUrl': org_url, 'token': token,
@@ -817,11 +821,12 @@ def test_client_log_info(monkeypatch, caplog):
     mock_http_request = MockHTTPRequest()
     monkeypatch.setattr(aiohttp.ClientSession, 'request', mock_http_request)
     with caplog.at_level(logging.INFO):
-        res, resp_body, error = asyncio.run(client.list_users())
+        res, resp_body, error = await client.list_users()
         assert caplog.text == ''
 
 
-def test_client_log_exception(monkeypatch, caplog):
+@pytest.mark.asyncio
+async def test_client_log_exception(monkeypatch, caplog):
     org_url = "https://test.okta.com"
     token = "TOKEN"
     config = {'orgUrl': org_url, 'token': token,
@@ -855,11 +860,12 @@ def test_client_log_exception(monkeypatch, caplog):
     mock_http_request = MockHTTPRequest()
     monkeypatch.setattr(aiohttp.ClientSession, 'request', mock_http_request)
     with caplog.at_level(logging.DEBUG):
-        res, resp_body, error = asyncio.run(client.list_users())
+        res, resp_body, error = await client.list_users()
         assert 'Cannot connect to host https://test.okta.com' in caplog.text
 
 
-def test_client_ssl_context(monkeypatch, mocker):
+@pytest.mark.asyncio
+async def test_client_ssl_context(monkeypatch, mocker):
     org_url = "https://test.okta.com"
     token = "TOKEN"
     mock_ssl_context = mocker.MagicMock()
@@ -890,7 +896,7 @@ def test_client_ssl_context(monkeypatch, mocker):
 
     mock_http_request = MockHTTPRequest()
     monkeypatch.setattr(aiohttp.ClientSession, 'request', mock_http_request)
-    asyncio.run(client.list_users())
+    _ = await client.list_users()
 
     assert mock_http_request.request_info['ssl_context'] == mock_ssl_context
 

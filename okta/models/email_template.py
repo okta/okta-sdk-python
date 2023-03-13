@@ -33,6 +33,8 @@ class EmailTemplate(
         if config:
             self.links = config["links"]\
                 if "links" in config else None
+            if "_links" in config:
+                self.links = config["_links"]
             self.name = config["name"]\
                 if "name" in config else None
         else:

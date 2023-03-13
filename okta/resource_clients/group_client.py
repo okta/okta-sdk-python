@@ -141,7 +141,7 @@ class GroupClient(APIClient):
 
         try:
             result = Group(
-                self.form_response_body(response.get_body())
+                response.get_body()
             )
         except Exception as error:
             return (None, response, error)
@@ -526,7 +526,7 @@ class GroupClient(APIClient):
 
         try:
             result = Group(
-                self.form_response_body(response.get_body())
+                response.get_body()
             )
         except Exception as error:
             return (None, response, error)
@@ -576,7 +576,7 @@ class GroupClient(APIClient):
 
         try:
             result = Group(
-                self.form_response_body(response.get_body())
+                response.get_body()
             )
         except Exception as error:
             return (None, response, error)

@@ -39,6 +39,8 @@ class Feature(
         if config:
             self.links = config["links"]\
                 if "links" in config else None
+            if "_links" in config:
+                self.links = config["_links"]
             self.description = config["description"]\
                 if "description" in config else None
             self.id = config["id"]\
