@@ -68,9 +68,9 @@ ajv-draft-04@^1.0.0:
   integrity sha1-O2R2GyaLoLnmaPC0G6U/zgrXf8g=
 
 ajv@^8.6.3:
-  version "8.11.0"
-  resolved "https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-master/ajv/-/ajv-8.11.0.tgz#977e91dd96ca669f54a11e23e378e33b884a565f"
-  integrity sha1-l36R3ZbKZp9UoR4j43jjO4hKVl8=
+  version "8.12.0"
+  resolved "https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-master/ajv/-/ajv-8.12.0.tgz#d1a0527323e22f53562c567c00991577dfbe19d1"
+  integrity sha1-0aBScyPiL1NWLFZ8AJkVd9++GdE=
   dependencies:
     fast-deep-equal "^3.1.1"
     json-schema-traverse "^1.0.0"
@@ -261,9 +261,9 @@ lodash@^4.17.21:
   integrity sha1-Z5WRxWTDv/quhFTPCz3zcMPWkRw=
 
 minimist@^1.2.5:
-  version "1.2.7"
-  resolved "https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-master/minimist/-/minimist-1.2.7.tgz#daa1c4d91f507390437c6a8bc01078e7000c4d18"
-  integrity sha1-2qHE2R9Qc5BDfGqLwBB45wAMTRg=
+  version "1.2.8"
+  resolved "https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-master/minimist/-/minimist-1.2.8.tgz#c1a464e7693302e082a075cee0c057741ac4772c"
+  integrity sha1-waRk52kzAuCCoHXO4MBXdBrEdyw=
 
 neo-async@^2.6.0:
   version "2.6.2"
@@ -271,9 +271,9 @@ neo-async@^2.6.0:
   integrity sha1-tKr7k+OustgXTKU88WOrfXMIMF8=
 
 node-fetch@^2.6.0:
-  version "2.6.7"
-  resolved "https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-master/node-fetch/-/node-fetch-2.6.7.tgz#24de9fba827e3b4ae44dc8b20256a379160052ad"
-  integrity sha1-JN6fuoJ+O0rkTciyAlajeRYAUq0=
+  version "2.6.9"
+  resolved "https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-master/node-fetch/-/node-fetch-2.6.9.tgz#7c7f744b5cc6eb5fd404e0c7a9fec630a55657e6"
+  integrity sha1-fH90S1zG61/UBODHqf7GMKVWV+Y=
   dependencies:
     whatwg-url "^5.0.0"
 
@@ -302,9 +302,9 @@ path-exists@^4.0.0:
   integrity sha1-UTvb4tO5XXdi6METfvoZXGxhtbM=
 
 punycode@^2.1.0:
-  version "2.1.1"
-  resolved "https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-master/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
-  integrity sha1-tYsBCsQMIsVldhbI0sLALHv0eew=
+  version "2.3.0"
+  resolved "https://artifacts.aue1e.internal:443/artifactory/api/npm/npm-okta-master/punycode/-/punycode-2.3.0.tgz#f67fa67c94da8f4d0cfff981aee4118064199b8f"
+  integrity sha1-9n+mfJTaj00M//mBruQRgGQZm48=
 
 require-directory@^2.1.1:
   version "2.1.1"

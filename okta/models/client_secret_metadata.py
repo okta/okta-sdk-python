@@ -18,16 +18,28 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from aenum import MultiValueEnum
+from okta.okta_object import OktaObject
 
 
-class DomainCertificateSourceType(
-    str,
-    MultiValueEnum
+class ClientSecretMetadata(
+    OktaObject
 ):
     """
-    An enumeration class for DomainCertificateSourceType.
+    A class for ClientSecretMetadata objects.
     """
 
-    MANUAL = "MANUAL", "manual"
-    OKTA_MANAGED = "OKTA_MANAGED", "okta_managed"
+    def __init__(self, config=None):
+        super().__init__(config)
+        if config:
+            self.client_secret = config["clientSecret"]\
+                if "clientSecret" in config else None
+        else:
+            self.client_secret = None
+
+    def request_format(self):
+        parent_req_format = super().request_format()
+        current_obj_format = {
+            "client_secret": self.client_secret
+        }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format

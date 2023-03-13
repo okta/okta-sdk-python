@@ -21,13 +21,12 @@ limitations under the License.
 from aenum import MultiValueEnum
 
 
-class DomainCertificateSourceType(
+class MultifactorEnrollmentPolicySettingsType(
     str,
     MultiValueEnum
 ):
     """
-    An enumeration class for DomainCertificateSourceType.
+    An enumeration class for MultifactorEnrollmentPolicySettingsType.
     """
 
-    MANUAL = "MANUAL", "manual"
-    OKTA_MANAGED = "OKTA_MANAGED", "okta_managed"
+    AUTHENTICATORS = "AUTHENTICATORS", "authenticators"
