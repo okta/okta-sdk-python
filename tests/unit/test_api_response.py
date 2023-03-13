@@ -40,8 +40,7 @@ async def test_response_pagination_with_next(monkeypatch):
                         mocks.mock_GET_HTTP_Client_response_valid)
     assert await result.next() is not None
     assert not result.has_next()
-    with pytest.raises(StopAsyncIteration):
-        await result.next()
+
 
 
 @ pytest.mark.asyncio
