@@ -37,6 +37,8 @@ class ApplicationFeature(
         if config:
             self.links = config["links"]\
                 if "links" in config else None
+            if "_links" in config:
+                self.links = config["_links"]
             if "capabilities" in config:
                 if isinstance(config["capabilities"],
                               capabilities_object.CapabilitiesObject):

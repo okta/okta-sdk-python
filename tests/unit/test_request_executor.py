@@ -1,6 +1,6 @@
 import aiohttp
-import asyncio
 import datetime
+import pytest
 import time
 
 from http import HTTPStatus
@@ -9,7 +9,8 @@ from okta.client import Client as OktaClient
 from okta.request_executor import RequestExecutor
 
 
-def test_retry_count_header(monkeypatch):
+@pytest.mark.asyncio
+async def test_retry_count_header(monkeypatch):
     org_url = "https://test.okta.com"
     token = "TOKEN"
     config = {'orgUrl': org_url, 'token': token, 'rateLimit': {'maxRetries': 2}}
@@ -29,11 +30,13 @@ def test_retry_count_header(monkeypatch):
 
         def __call__(self, **params):
             self.request_info = params
-            self.headers = MultiDict({'Date': datetime.datetime.now(tz=datetime.timezone.utc).strftime('%a, %d %b %Y %H:%M:%S %Z'),
-                                      'Content-Type': 'application/json',
-                                      'X-Rate-Limit-Limit': 600,
-                                      'X-Rate-Limit-Remaining': 599,
-                                      'X-Rate-Limit-Reset': str(time.time())})
+            self.headers = MultiDict(
+                {'Date': datetime.datetime.now(tz=datetime.timezone.utc).strftime('%a, %d %b %Y %H:%M:%S %Z'),
+                 'Content-Type': 'application/json',
+                 'X-Rate-Limit-Limit': 600,
+                 'X-Rate-Limit-Remaining': 599,
+                 'X-Rate-Limit-Reset': str(time.time())}
+            )
             self.url = params['url']
             self.content_type = 'application/json'
             self.links = ''
@@ -64,7 +67,7 @@ def test_retry_count_header(monkeypatch):
 
     mock_http_request = MockHTTPRequest()
     monkeypatch.setattr(aiohttp.ClientSession, 'request', mock_http_request)
-    res, resp_body, error = asyncio.run(client.list_users())
+    res, resp_body, error = await client.list_users()
     # Check request was retried max times and header 'X-Okta-Retry-Count' was set properly
     assert mock_http_request.request_info['headers'].get('X-Okta-Retry-Count') == '2'
 
@@ -95,17 +98,46 @@ def test_clear_empty_params():
     body = {'int_value': 0,
             'str_value': '0',
             'empty_str_value': '',
-            'list_value': [1,2,3],
+            'list_value': [1, 2, 3],
             'empty_list_value': [],
             'dict_value': {'int_value': 0},
             'empty_dict_value': {},
-            'nested_empty_dict_value': {'list_value': [1,2,3], 'empty_list_value': []},
+            'nested_empty_dict_value': {'list_value': [1, 2, 3], 'empty_list_value': []},
             'nested_empty_list_value': {'empty_list_value': []}}
 
     cleared_body = {'int_value': 0,
                     'str_value': '0',
-                    'list_value': [1,2,3],
+                    'list_value': [1, 2, 3],
                     'dict_value': {'int_value': 0},
-                    'nested_empty_dict_value': {'list_value': [1,2,3]}}
+                    'nested_empty_dict_value': {'list_value': [1, 2, 3]}}
 
     assert req_exec.clear_empty_params(body) == cleared_body
+
+
+@pytest.mark.parametrize(
+    "accept_header",
+    ["", "application/xml", "application/json",
+        "text/html", "application/xhtml+xml", "image/jpeg"]
+)
+@pytest.mark.asyncio
+async def test_overwrite_default_request_executor_headers(accept_header):
+    org_url = "https://test.okta.com"
+    token = "TOKEN"
+    config = {'client': {'orgUrl': org_url,
+                         'token': token,
+                         'rateLimit': {},
+                         'authorizationMode': None}}
+    req_exec = RequestExecutor(config=config, cache=None)
+
+    # overwrite headers if parameter present
+    header_overwrite = {'Accept': accept_header} if accept_header else {}
+    request, error = await req_exec.create_request(
+        'GET',
+        f'{org_url}/api/v1/users',
+        {},
+        header_overwrite,
+        {}
+    )
+    assert request is not None
+    assert request["headers"]["Accept"] ==\
+        accept_header if accept_header else "application/json"

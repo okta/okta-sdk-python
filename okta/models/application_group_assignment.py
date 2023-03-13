@@ -35,6 +35,8 @@ class ApplicationGroupAssignment(
                 if "embedded" in config else None
             self.links = config["links"]\
                 if "links" in config else None
+            if "_links" in config:
+                self.links = config["_links"]
             self.id = config["id"]\
                 if "id" in config else None
             self.last_updated = config["lastUpdated"]\

@@ -35,6 +35,8 @@ class OrgContactTypeObj(
         if config:
             self.links = config["links"]\
                 if "links" in config else None
+            if "_links" in config:
+                self.links = config["_links"]
             if "contactType" in config:
                 if isinstance(config["contactType"],
                               org_contact_type.OrgContactType):

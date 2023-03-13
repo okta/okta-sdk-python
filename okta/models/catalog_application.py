@@ -36,6 +36,8 @@ class CatalogApplication(
         if config:
             self.links = config["links"]\
                 if "links" in config else None
+            if "_links" in config:
+                self.links = config["_links"]
             self.category = config["category"]\
                 if "category" in config else None
             self.description = config["description"]\

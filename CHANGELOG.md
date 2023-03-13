@@ -1,5 +1,31 @@
 # Okta Python SDK Changelog
 
+## v2.9.0
+* Addressed a number of open issues regarding SDK
+  * Allow overwriting of default HTTP headers
+  * Prevent automatic camel casing when using pagination to retrieve next set of results
+  * Allow key ID (kid) to be specified when providing JWT
+  * Allow log level to be set by user
+* Using `pycryptodomex` dependency instead of `pycryptodome` to prevent clash in import statements
+* Upgraded to latest version of API spec. Includes following changes:
+  * Added support for MFA Enroll policy type
+  * Added custom role type
+  * Added dynamic issuer mode for open id connect applications
+  * Added failed to verify and domain taken as domain validation statuses
+  * Added Okta managed as domain certificate source type
+  * Added create authenticator endpoint
+  * Added endpoint to preview SAML app metadata
+
+_New models:_
+* ClientSecret
+* ClientSecretMetadata
+* MultifactorEnrollmentPolicy
+* MultifactorEnrollmentPolicySettings
+* MultifactorEnrollmentPolicySettingsType
+* MultifactorEnrollmentPolicyAuthenticatorType
+* MultifactorEnrollmentPolicyAuthenticatorStatus
+* MultifactorEnrollmentPolicyAuthenticatorSettings
+
 ## v2.7.0
 _What's Changed_
 * Regenerated and added pkce_requried to app oauth credentials by @drewcarmichael-okta in https://github.com/okta/okta-sdk-python/pull/313
