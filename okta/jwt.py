@@ -58,10 +58,10 @@ class JWT():
 
         # check if JWK
         # String representation of dictionary or dict
-        if ((type(private_key) == str and private_key.startswith("{")) or
-                type(private_key) == dict):
+        if ((isinstance(private_key, str) and private_key.startswith("{")) or
+                isinstance(private_key, dict)):
             # if string repr, convert to dict object
-            if (type(private_key) == str):
+            if isinstance(private_key, str):
                 private_key = literal_eval(private_key)
             # Create JWK using dict obj
             my_jwk = jwk.construct(private_key, JWT.HASH_ALGORITHM)
