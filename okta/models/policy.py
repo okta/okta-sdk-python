@@ -39,6 +39,8 @@ class Policy(
                 if "embedded" in config else None
             self.links = config["links"]\
                 if "links" in config else None
+            if "_links" in config:
+                self.links = config["_links"]
             if "conditions" in config:
                 if isinstance(config["conditions"],
                               policy_rule_conditions.PolicyRuleConditions):

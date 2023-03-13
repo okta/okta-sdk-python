@@ -1,4 +1,5 @@
-from Crypto.PublicKey import RSA
+import json
+from Cryptodome.PublicKey import RSA
 from ast import literal_eval
 import jose.jwk as jwk
 import jose.jwt as jwt
@@ -57,16 +58,16 @@ class JWT():
 
         # check if JWK
         # String representation of dictionary or dict
-        if ((type(private_key) == str and private_key.startswith("{")) or
-                type(private_key) == dict):
+        if ((isinstance(private_key, str) and private_key.startswith("{")) or
+                isinstance(private_key, dict)):
             # if string repr, convert to dict object
-            if (type(private_key) == str):
+            if isinstance(private_key, str):
                 private_key = literal_eval(private_key)
             # Create JWK using dict obj
             my_jwk = jwk.construct(private_key, JWT.HASH_ALGORITHM)
         else:  # it's a PEM
             # check for filepath or explicit private key
-            if os.path.exists(private_key):
+            if isinstance(private_key, (str, bytes, os.PathLike)) and os.path.exists(private_key):
                 # open file if exists and import key
                 pem_file = open(private_key, 'r')
                 my_pem = RSA.import_key(pem_file.read())
@@ -92,7 +93,7 @@ class JWT():
         return (my_pem, my_jwk)
 
     @staticmethod
-    def create_token(org_url, client_id, private_key):
+    def create_token(org_url, client_id, private_key, kid=None):
         """
         Create a JSON Web Token using Oauth details from the Okta Client
         config.
@@ -101,6 +102,7 @@ class JWT():
             org_url (str): Okta Organization URL
             client_id (str): Client ID
             private_key (str or dict): Private Key representation
+            kid (str): Key ID
 
         Returns:
             str: Generated JWT
@@ -123,5 +125,22 @@ class JWT():
             'jti': generated_JWT_ID
         }
 
-        token = jwt.encode(claims, my_jwk.to_dict(), JWT.HASH_ALGORITHM)
+        # Add additional headers
+        headers = {}
+
+        # # Check if kid was supplied
+        if kid:
+            headers["kid"] = kid
+        elif isinstance(private_key, dict) and "kid" in private_key:
+            headers["kid"] = private_key["kid"]
+        elif isinstance(private_key, str):
+            try:
+                private_key_dict = json.loads(private_key)
+                if "kid" in private_key_dict:
+                    headers["kid"] = private_key_dict["kid"]
+            except json.JSONDecodeError:
+                if "kid" in headers:
+                    del headers["kid"]
+
+        token = jwt.encode(claims, my_jwk.to_dict(), JWT.HASH_ALGORITHM, headers=headers)
         return token

@@ -35,6 +35,8 @@ class LinkedObject(
         if config:
             self.links = config["links"]\
                 if "links" in config else None
+            if "_links" in config:
+                self.links = config["_links"]
             if "associated" in config:
                 if isinstance(config["associated"],
                               linked_object_details.LinkedObjectDetails):

@@ -50,9 +50,16 @@
         form = {}
         {{/if}}
 
+        {{#if (eq operation.operationId "previewSAMLAppMetadata")}}
+        headers['Accept'] = "application/xml"
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, None, headers, None, keep_empty_params=keep_empty_params
+        )
+        {{else}}
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
         )
+        {{/if}}
 
         if error:
         {{#if operation.responseModel}}
@@ -139,14 +146,18 @@
             body = self.form_response_body(response.get_body())
             result = find_policy_rule_model(body["type"])(body)
             {{else}}
-            {{#if (eq (pascalCase operation.responseModel) "User")}}
+            {{#if (canContainCustomAttributes (pascalCase operation.responseModel))}}
             result = {{pascalCase operation.responseModel}}(
                 response.get_body()
             )
             {{else}}
+            {{#if (eq operation.operationId "previewSAMLAppMetadata")}}
+            result = (response.get_body())
+            {{else}}
             result = {{pascalCase operation.responseModel}}(
                 self.form_response_body(response.get_body())
             )
+            {{/if}}
             {{/if}}
             {{/if}}
             {{/if}}

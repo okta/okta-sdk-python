@@ -38,6 +38,8 @@ class Subscription(
         if config:
             self.links = config["links"]\
                 if "links" in config else None
+            if "_links" in config:
+                self.links = config["_links"]
             self.channels = OktaCollection.form_list(
                 config["channels"] if "channels"\
                     in config else [],

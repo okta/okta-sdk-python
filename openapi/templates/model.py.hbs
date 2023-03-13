@@ -38,9 +38,21 @@ class {{pascalCase model.modelName}}(
     An enumeration class for {{pascalCase model.modelName}}.
     """
 
-    {{#each model.enum as |enum|}}
+    {{!-- Handle special cases within OAuthGrantType --}}
+    {{#if (eq model.modelName "OAuthGrantType")}}
+        {{#each model.enum as |enum|}}
+            {{#if (isUrnGrantType enum)}}
+    {{{replaceColons (upperCase (snakeCase enum))}}} = "{{prefixUrnGrantType enum}}", "{{oppositeCase (prefixUrnGrantType enum)}}"
+            {{else}}
     {{{replaceColons (upperCase (snakeCase enum))}}} = "{{enum}}", "{{oppositeCase enum}}"
-    {{/each}}
+            {{/if}}
+        {{/each}}
+    {{else}}
+        {{!-- Handle general multiValueEnum types --}}
+        {{#each model.enum as |enum|}}
+    {{{replaceColons (upperCase (snakeCase enum))}}} = "{{enum}}", "{{oppositeCase enum}}"
+        {{/each}}
+    {{/if}}
 {{/if}}
 {{else}}
 
@@ -149,6 +161,10 @@ class {{pascalCase model.modelName}}(
                 if "{{camelCase prop.propertyName}}" in config else None
             {{/if}}
             {{/if}}
+            {{/if}}
+            {{#if (or (eq prop.propertyName "$schema") (eq prop.propertyName "_links"))}}
+            if "{{prop.propertyName}}" in config:
+                self.{{snakeCase prop.propertyName}} = config["{{prop.propertyName}}"]
             {{/if}}
             {{/each}}
             {{#if (or (eq model.modelName "UserProfile") (eq model.modelName "GroupProfile"))}}

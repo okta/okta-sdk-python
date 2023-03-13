@@ -1,3 +1,4 @@
+import asyncio
 from okta.http_client import HTTPClient
 from okta.user_agent import UserAgent
 from okta.oauth import OAuth
@@ -118,8 +119,8 @@ class RequestExecutor:
 
         # Build request
         # Get predetermined headers and build URL
-        headers.update(self._custom_headers)
-        headers.update(self._default_headers)
+        headers = {**self._custom_headers, **headers}
+        headers = {**self._default_headers, **headers}
         if self._config["client"]["orgUrl"] not in url:
             url = self._config["client"]["orgUrl"] + url
 
@@ -259,6 +260,8 @@ class RequestExecutor:
             date_time = headers.get("Date", "")
             if date_time:
                 date_time = convert_date_time_to_seconds(date_time)
+
+            # Get X-Rate-Limit-Reset header
             retry_limit_reset_headers = list(map(float, headers.getall(
                 "X-Rate-Limit-Reset", [])))
             # header might be in lowercase, so check this too
@@ -266,6 +269,30 @@ class RequestExecutor:
                 "x-rate-limit-reset", []))))
             retry_limit_reset = min(retry_limit_reset_headers) if len(
                 retry_limit_reset_headers) > 0 else None
+
+            # Get X-Rate-Limit-Limit Header
+            retry_limit_limit_headers = list(map(float, headers.getall(
+                "X-Rate-Limit-Limit", [])))
+            # header might be in lowercase, so check this too
+            retry_limit_limit_headers.extend(list(map(float, headers.getall(
+                "x-rate-limit-limit", []))))
+            retry_limit_limit = min(retry_limit_limit_headers) if len(
+                retry_limit_limit_headers) > 0 else None
+
+            # Get X-Rate-Limit-Remaining Header
+            retry_limit_remaining_headers = list(map(float, headers.getall(
+                "X-Rate-Limit-Remaining", [])))
+            # header might be in lowercase, so check this too
+            retry_limit_remaining_headers.extend(list(map(float, headers.getall(
+                "x-rate-limit-remaining", []))))
+            retry_limit_remaining = min(retry_limit_remaining_headers) if len(
+                retry_limit_remaining_headers) > 0 else None
+
+            # both X-Rate-Limit-Limit and X-Rate-Limit-Remaining being 0 indicates concurrent rate limit error
+            if retry_limit_limit is not None and retry_limit_remaining is not None:
+                if retry_limit_limit == 0 and retry_limit_remaining == 0:
+                    logger.warning('Concurrent limit rate exceeded')
+
             if not date_time or not retry_limit_reset:
                 return (None, res_details, resp_body,
                         Exception(
@@ -280,7 +307,7 @@ class RequestExecutor:
                 logger.info(f'Hit rate limit. Retry request in {backoff_seconds} seconds.')
                 logger.debug(f'Value of retry_limit_reset: {retry_limit_reset}')
                 logger.debug(f'Value of date_time: {date_time}')
-                self.pause_for_backoff(backoff_seconds)
+                await self.pause_for_backoff(backoff_seconds)
                 if (current_req_start_time + backoff_seconds)\
                         - request_start_time > req_timeout and req_timeout > 0:
                     return (None, res_details, resp_body, resp_body)
@@ -333,8 +360,8 @@ class RequestExecutor:
     def calculate_backoff(self, retry_limit_reset, date_time):
         return retry_limit_reset - date_time + 1
 
-    def pause_for_backoff(self, backoff_time):
-        time.sleep(backoff_time)
+    async def pause_for_backoff(self, backoff_time):
+        await asyncio.sleep(float(backoff_time))
 
     def set_custom_headers(self, headers):
         self._custom_headers.update(headers)

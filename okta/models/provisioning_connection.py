@@ -37,6 +37,8 @@ class ProvisioningConnection(
         if config:
             self.links = config["links"]\
                 if "links" in config else None
+            if "_links" in config:
+                self.links = config["_links"]
             if "authScheme" in config:
                 if isinstance(config["authScheme"],
                               provisioning_connection_auth_scheme.ProvisioningConnectionAuthScheme):

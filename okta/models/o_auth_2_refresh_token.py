@@ -38,6 +38,8 @@ class OAuth2RefreshToken(
                 if "embedded" in config else None
             self.links = config["links"]\
                 if "links" in config else None
+            if "_links" in config:
+                self.links = config["_links"]
             self.client_id = config["clientId"]\
                 if "clientId" in config else None
             self.created = config["created"]\
