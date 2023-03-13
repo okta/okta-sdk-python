@@ -39,6 +39,8 @@ class ApplicationCredentialsOAuthClient(
                 if "clientId" in config else None
             self.client_secret = config["clientSecret"]\
                 if "clientSecret" in config else None
+            self.pkce_required = config["pkceRequired"]\
+                if "pkceRequired" in config else None
             if "tokenEndpointAuthMethod" in config:
                 if isinstance(config["tokenEndpointAuthMethod"],
                               o_auth_endpoint_authentication_method.OAuthEndpointAuthenticationMethod):
@@ -55,6 +57,7 @@ class ApplicationCredentialsOAuthClient(
             self.auto_key_rotation = None
             self.client_id = None
             self.client_secret = None
+            self.pkce_required = None
             self.token_endpoint_auth_method = None
 
     def request_format(self):
@@ -63,6 +66,7 @@ class ApplicationCredentialsOAuthClient(
             "autoKeyRotation": self.auto_key_rotation,
             "client_id": self.client_id,
             "client_secret": self.client_secret,
+            "pkce_required": self.pkce_required,
             "token_endpoint_auth_method": self.token_endpoint_auth_method
         }
         parent_req_format.update(current_obj_format)

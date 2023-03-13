@@ -18,16 +18,25 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from aenum import MultiValueEnum
+from okta.models.policy\
+    import Policy
+from okta.models.policy_type import PolicyType
 
 
-class DomainCertificateSourceType(
-    str,
-    MultiValueEnum
+class MultifactorEnrollmentPolicy(
+    Policy
 ):
     """
-    An enumeration class for DomainCertificateSourceType.
+    A class for MultifactorEnrollmentPolicy objects.
     """
 
-    MANUAL = "MANUAL", "manual"
-    OKTA_MANAGED = "OKTA_MANAGED", "okta_managed"
+    def __init__(self, config=None):
+        super().__init__(config)
+        pass
+
+    def request_format(self):
+        parent_req_format = super().request_format()
+        current_obj_format = {
+        }
+        parent_req_format.update(current_obj_format)
+        return parent_req_format
