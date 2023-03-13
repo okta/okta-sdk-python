@@ -1,6 +1,7 @@
+import asyncio
+import logging
 import tests.mocks as mocks
 import pytest
-import time
 import datetime as dt
 from http import HTTPStatus
 from okta.client import Client
@@ -29,15 +30,15 @@ async def test_max_retries_no_timeout(monkeypatch, mocker):
     monkeypatch.setattr(HTTPClient, 'send_request',
                         mocks.mock_GET_HTTP_Client_response_429)
 
-    monkeypatch.setattr(time, 'sleep', mocks.mock_pause_function)
-
     http_spy = mocker.spy(HTTPClient, 'send_request')
+    sleep_spy = mocker.spy(asyncio, 'sleep')
 
     users, resp, error = await client.list_users(query_params)
 
     http_spy.assert_called()
     assert http_spy.call_count ==\
         client.get_request_executor()._max_retries + 1
+    sleep_spy.assert_called()
     assert client.get_request_executor()._request_timeout == 0
     assert isinstance(error, HTTPError)
     assert error is not None
@@ -59,7 +60,7 @@ async def test_backoff_calculation():
     backoff_time = client.get_request_executor(
     ).calculate_backoff(retry_limit_reset, date_time)
 
-    assert(backoff_time == 2)
+    assert (backoff_time == 2)
 
 
 @pytest.mark.asyncio
@@ -68,7 +69,6 @@ async def test_no_x_date_header(monkeypatch):
 
     monkeypatch.setattr(HTTPClient, 'send_request',
                         mocks.mock_GET_HTTP_Client_response_429_no_x_reset)
-    monkeypatch.setattr(time, 'sleep', mocks.mock_pause_function)
 
     users, resp, error = await client.list_users()
 
@@ -85,7 +85,6 @@ async def test_no_x_reset_header(monkeypatch):
 
     monkeypatch.setattr(HTTPClient, 'send_request',
                         mocks.mock_GET_HTTP_Client_response_429_no_x_reset)
-    monkeypatch.setattr(time, 'sleep', mocks.mock_pause_function)
 
     users, resp, error = await client.list_users()
 
@@ -107,7 +106,6 @@ async def test_multiple_x_reset_headers(monkeypatch, mocker):
     # the X Rate Limit Resets used are 1 sec and 2 sec after the Date header,
     # -> the min. one should be used (1 sec. after) and the backoff calculated
     #    should be equal to 2 (by Okta standards)
-    monkeypatch.setattr(time, 'sleep', mocks.mock_pause_function)
 
     users, resp, error = await client.list_users()
 
@@ -136,3 +134,35 @@ async def test_req_timeout(monkeypatch):
 
     assert isinstance(error, Exception)
     assert "Request Timeout exceeded." == error.args[0]
+
+
+@pytest.mark.asyncio
+async def test_concurrent_rate_limit_headers(monkeypatch, mocker):
+    client = Client(user_config=CLIENT_CONFIG)
+    logger = logging.getLogger('okta-sdk-python')
+    logger_spy = mocker.spy(logger, 'warning')
+
+    # response should have following headers set to 0 to indicate concurrent rate limit error
+    # X-Rate-Limit-Limit, X-Rate-Limit-Remaining
+    response_429 = (await mocks.mock_GET_HTTP_Client_response_429_concurrent_limit_error())[1]
+
+    retry_limit_limit = float(response_429.headers["X-Rate-Limit-Limit"])
+    retry_limit_remaining = float(response_429.headers["X-Rate-Limit-Remaining"])
+
+    assert retry_limit_limit == 0
+    assert retry_limit_remaining == 0
+
+    request = await mocks.mock_GET_HTTP_request()
+
+    monkeypatch.setattr(HTTPClient, 'send_request',
+                        mocks.mock_GET_HTTP_Client_response_429_concurrent_limit_error)
+
+    now = dt.datetime.now(dt.timezone.utc)
+    now = now.replace(microsecond=0)
+    two_sec_before = (now - dt.timedelta(seconds=1)).timestamp()
+
+    _ = await client.get_request_executor(
+    ).fire_request_helper(request, 0, two_sec_before)
+
+    logger_spy.assert_called()
+    logger_spy.assert_called_with('Concurrent limit rate exceeded')

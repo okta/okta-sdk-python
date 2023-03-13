@@ -30,3 +30,4 @@ class DomainCertificateSourceType(
     """
 
     MANUAL = "MANUAL", "manual"
+    OKTA_MANAGED = "OKTA_MANAGED", "okta_managed"

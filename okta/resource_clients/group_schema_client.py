@@ -66,7 +66,7 @@ class GroupSchemaClient(APIClient):
 
         try:
             result = GroupSchema(
-                self.form_response_body(response.get_body())
+                response.get_body()
             )
         except Exception as error:
             return (None, response, error)
@@ -115,7 +115,7 @@ class GroupSchemaClient(APIClient):
 
         try:
             result = GroupSchema(
-                self.form_response_body(response.get_body())
+                response.get_body()
             )
         except Exception as error:
             return (None, response, error)

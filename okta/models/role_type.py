@@ -39,3 +39,4 @@ class RoleType(
     API_ACCESS_MANAGEMENT_ADMIN = "API_ACCESS_MANAGEMENT_ADMIN", "api_access_management_admin"
     REPORT_ADMIN = "REPORT_ADMIN", "report_admin"
     GROUP_MEMBERSHIP_ADMIN = "GROUP_MEMBERSHIP_ADMIN", "group_membership_admin"
+    CUSTOM = "CUSTOM", "custom"

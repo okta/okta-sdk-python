@@ -35,6 +35,8 @@ class OrgOktaSupportSettingsObj(
         if config:
             self.links = config["links"]\
                 if "links" in config else None
+            if "_links" in config:
+                self.links = config["_links"]
             self.expiration = config["expiration"]\
                 if "expiration" in config else None
             if "support" in config:

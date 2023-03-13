@@ -30,11 +30,18 @@ class ResponseLinks(
 
     def __init__(self, config=None):
         super().__init__(config)
-        pass
+        if config:
+            self.links = config["links"]\
+                if "links" in config else None
+            if "_links" in config:
+                self.links = config["_links"]
+        else:
+            self.links = None
 
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
+            "_links": self.links
         }
         parent_req_format.update(current_obj_format)
         return parent_req_format

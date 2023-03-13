@@ -37,6 +37,8 @@ class IdentityProvider(
         if config:
             self.links = config["links"]\
                 if "links" in config else None
+            if "_links" in config:
+                self.links = config["_links"]
             self.created = config["created"]\
                 if "created" in config else None
             self.id = config["id"]\
