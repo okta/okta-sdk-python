@@ -785,7 +785,7 @@ import asyncio
 async def main():
     client = OktaClient()
     user_id = 'REDACTED'
-    user_params = {"phoneNumber": "1234567890", "badgeNumber": ""}
+    user_params = {"profile": {"phoneNumber": "1234567890", "badgeNumber": ""}}
     updated_user, resp, err = await client.partial_update_user(user_id, user_params)
     print(updated_user)
 
@@ -803,7 +803,7 @@ import asyncio
 async def main():
     client = OktaClient()
     user_id = 'REDACTED'
-    user_params = {"phoneNumber": "1234567890", "badgeNumber": ""}
+    user_params = {"profile": {"phoneNumber": "1234567890", "badgeNumber": ""}}
     updated_user, resp, err = await client.partial_update_user(user_id, user_params, keep_empty_params=False)
     print(updated_user)
 
@@ -821,7 +821,7 @@ import asyncio
 async def main():
     client = OktaClient()
     user_id = 'REDACTED'
-    user_params = {"phoneNumber": "1234567890", "badgeNumber": ""}
+    user_params = {"profile": {"phoneNumber": "1234567890", "badgeNumber": ""}}
     updated_user, resp, err = await client.partial_update_user(user_id, user_params, keep_empty_params=True)
     print(updated_user)
 
