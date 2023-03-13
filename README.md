@@ -1046,7 +1046,6 @@ okta:
 
 Each one of the configuration values above can be turned into an environment variable name with the `_` (underscore) character and UPPERCASE characters. The following are accepted:
 
-- `OKTA_CLIENT_TOKEN`
 - `OKTA_CLIENT_AUTHORIZATIONMODE`
 - `OKTA_CLIENT_ORGURL`
 - `OKTA_CLIENT_TOKEN`
