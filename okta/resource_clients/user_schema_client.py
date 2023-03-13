@@ -67,7 +67,7 @@ class UserSchemaClient(APIClient):
 
         try:
             result = UserSchema(
-                self.form_response_body(response.get_body())
+                response.get_body()
             )
         except Exception as error:
             return (None, response, error)
@@ -117,7 +117,7 @@ class UserSchemaClient(APIClient):
 
         try:
             result = UserSchema(
-                self.form_response_body(response.get_body())
+                response.get_body()
             )
         except Exception as error:
             return (None, response, error)
@@ -159,7 +159,7 @@ class UserSchemaClient(APIClient):
 
         try:
             result = UserSchema(
-                self.form_response_body(response.get_body())
+                response.get_body()
             )
         except Exception as error:
             return (None, response, error)
@@ -209,7 +209,7 @@ class UserSchemaClient(APIClient):
 
         try:
             result = UserSchema(
-                self.form_response_body(response.get_body())
+                response.get_body()
             )
         except Exception as error:
             return (None, response, error)

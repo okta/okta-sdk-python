@@ -43,6 +43,8 @@ class UserFactor(
                 if "embedded" in config else None
             self.links = config["links"]\
                 if "links" in config else None
+            if "_links" in config:
+                self.links = config["_links"]
             self.created = config["created"]\
                 if "created" in config else None
             if "factorType" in config:

@@ -67,6 +67,8 @@ class ProfileEnrollmentPolicyRuleAction(
                     in config else [],
                 str
             )
+            self.ui_schema_id = config["uiSchemaId"]\
+                if "uiSchemaId" in config else None
             self.unknown_user_action = config["unknownUserAction"]\
                 if "unknownUserAction" in config else None
         else:
@@ -75,6 +77,7 @@ class ProfileEnrollmentPolicyRuleAction(
             self.pre_registration_inline_hooks = []
             self.profile_attributes = []
             self.target_group_ids = []
+            self.ui_schema_id = None
             self.unknown_user_action = None
 
     def request_format(self):
@@ -85,6 +88,7 @@ class ProfileEnrollmentPolicyRuleAction(
             "preRegistrationInlineHooks": self.pre_registration_inline_hooks,
             "profileAttributes": self.profile_attributes,
             "targetGroupIds": self.target_group_ids,
+            "uiSchemaId": self.ui_schema_id,
             "unknownUserAction": self.unknown_user_action
         }
         parent_req_format.update(current_obj_format)

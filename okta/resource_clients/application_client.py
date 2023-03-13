@@ -27,6 +27,8 @@ from okta.models.csr\
     import Csr
 from okta.models.json_web_key\
     import JsonWebKey
+from okta.models.client_secret\
+    import ClientSecret
 from okta.models.application_feature\
     import ApplicationFeature
 from okta.models.o_auth_2_scope_consent_grant\
@@ -1077,6 +1079,267 @@ class ApplicationClient(APIClient):
             return (None, response, error)
         return (result, response, None)
 
+    async def list_client_secrets_for_application(
+            self, appId,
+            keep_empty_params=False
+    ):
+        """
+        Enumerates the client's collection of secrets
+        Args:
+            app_id {str}
+        Returns:
+            list: Collection of ClientSecret instances.
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/apps/{appId}/credentials/secrets
+            """)
+
+        body = {}
+        headers = {}
+        form = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, ClientSecret)
+
+        if error:
+            return (None, response, error)
+
+        try:
+            result = []
+            for item in response.get_body():
+                result.append(ClientSecret(
+                    self.form_response_body(item)
+                    ))
+        except Exception as error:
+            return (None, response, error)
+        return (result, response, None)
+
+    async def create_new_client_secret_for_application(
+            self, appId, client_secret_metadata,
+            keep_empty_params=False
+    ):
+        """
+        Adds a new secret to the client's collection of secrets
+        .
+        Args:
+            app_id {str}
+            {client_secret_metadata}
+        Returns:
+            ClientSecret
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/apps/{appId}/credentials/secrets
+            """)
+
+        if isinstance(client_secret_metadata, dict):
+            body = client_secret_metadata
+        else:
+            body = client_secret_metadata.as_dict()
+        headers = {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        }
+        form = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, ClientSecret)
+
+        if error:
+            return (None, response, error)
+
+        try:
+            result = ClientSecret(
+                self.form_response_body(response.get_body())
+            )
+        except Exception as error:
+            return (None, response, error)
+        return (result, response, None)
+
+    async def delete_client_secret_for_application(
+            self, appId, secretId,
+            keep_empty_params=False
+    ):
+        """
+        Removes a secret from the client's collection of secret
+        s.
+        Args:
+            app_id {str}
+            secret_id {str}
+        """
+        http_method = "delete".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/apps/{appId}/credentials/secrets/{secretId}
+            """)
+
+        body = {}
+        headers = {}
+        form = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (response, error)
+
+        return (response, None)
+
+    async def get_client_secret_for_application(
+            self, appId, secretId,
+            keep_empty_params=False
+    ):
+        """
+        Gets a specific client secret by secretId
+        Args:
+            app_id {str}
+            secret_id {str}
+        Returns:
+            ClientSecret
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/apps/{appId}/credentials/secrets/{secretId}
+            """)
+
+        body = {}
+        headers = {}
+        form = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, ClientSecret)
+
+        if error:
+            return (None, response, error)
+
+        try:
+            result = ClientSecret(
+                self.form_response_body(response.get_body())
+            )
+        except Exception as error:
+            return (None, response, error)
+        return (result, response, None)
+
+    async def activate_client_secret_for_application(
+            self, appId, secretId,
+            keep_empty_params=False
+    ):
+        """
+        Activates a specific client secret by secretId
+        Args:
+            app_id {str}
+            secret_id {str}
+        Returns:
+            ClientSecret
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/apps/{appId}/credentials/secrets/{secretId}
+                /lifecycle/activate
+            """)
+
+        body = {}
+        headers = {}
+        form = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, ClientSecret)
+
+        if error:
+            return (None, response, error)
+
+        try:
+            result = ClientSecret(
+                self.form_response_body(response.get_body())
+            )
+        except Exception as error:
+            return (None, response, error)
+        return (result, response, None)
+
+    async def deactivate_client_secret_for_application(
+            self, appId, secretId,
+            keep_empty_params=False
+    ):
+        """
+        Deactivates a specific client secret by secretId
+        Args:
+            app_id {str}
+            secret_id {str}
+        Returns:
+            ClientSecret
+        """
+        http_method = "post".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/apps/{appId}/credentials/secrets/{secretId}
+                /lifecycle/deactivate
+            """)
+
+        body = {}
+        headers = {}
+        form = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, ClientSecret)
+
+        if error:
+            return (None, response, error)
+
+        try:
+            result = ClientSecret(
+                self.form_response_body(response.get_body())
+            )
+        except Exception as error:
+            return (None, response, error)
+        return (result, response, None)
+
     async def list_features_for_application(
             self, appId,
             keep_empty_params=False
@@ -1674,6 +1937,83 @@ class ApplicationClient(APIClient):
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (response, error)
+
+        return (response, None)
+
+    async def update_application_policy(
+            self, appId, policyId,
+            keep_empty_params=False
+    ):
+        """
+        Assign an application to a specific policy. This unassi
+        gns the application from its currently assigned policy.
+        Args:
+            app_id {str}
+            policy_id {str}
+        """
+        http_method = "put".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/apps/{appId}/policies/{policyId}
+            """)
+
+        body = {}
+        headers = {}
+        form = {}
+
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
+        )
+
+        if error:
+            return (None, error)
+
+        response, error = await self._request_executor\
+            .execute(request)
+
+        if error:
+            return (response, error)
+
+        return (response, None)
+
+    async def preview_saml_app_metadata(
+            self, appId, query_params={},
+            keep_empty_params=False
+    ):
+        """
+        Previews SAML metadata based on a specific key credenti
+        al for an application
+        Args:
+            app_id {str}
+            query_params {dict}: Map of query parameters for request
+            [query_params.kid] {str}
+        """
+        http_method = "get".upper()
+        api_url = format_url(f"""
+            {self._base_url}
+            /api/v1/apps/{appId}/sso/saml/metadata
+            """)
+        if query_params:
+            encoded_query_params = urlencode(query_params)
+            api_url += f"/?{encoded_query_params}"
+
+        body = {}
+        headers = {}
+        form = {}
+
+        headers['Accept'] = "application/xml"
+        request, error = await self._request_executor.create_request(
+            http_method, api_url, None, headers, None, keep_empty_params=keep_empty_params
         )
 
         if error:

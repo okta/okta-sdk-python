@@ -32,4 +32,6 @@ class DomainValidationStatus(
     NOT_STARTED = "NOT_STARTED", "not_started"
     IN_PROGRESS = "IN_PROGRESS", "in_progress"
     VERIFIED = "VERIFIED", "verified"
+    FAILED_TO_VERIFY = "FAILED_TO_VERIFY", "failed_to_verify"
+    DOMAIN_TAKEN = "DOMAIN_TAKEN", "domain_taken"
     COMPLETED = "COMPLETED", "completed"

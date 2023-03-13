@@ -1,5 +1,5 @@
 import aiohttp
-import asyncio
+import pytest
 from okta.client import Client as OktaClient
 from okta.models import DnsRecord, DomainCertificate, DomainCertificateMetadata, Domain
 
@@ -149,7 +149,8 @@ class TestDomainResource:
     Unit Tests for the Domain Resource
     """
 
-    def test_get_domain(self, monkeypatch):
+    @pytest.mark.asyncio
+    async def test_get_domain(self, monkeypatch):
         org_url = "https://test.okta.com"
         token = "TOKEN"
         config = {'orgUrl': org_url, 'token': token}
@@ -183,7 +184,7 @@ class TestDomainResource:
         mock_http_request = MockHTTPRequest()
         monkeypatch.setattr(aiohttp.ClientSession, 'request', mock_http_request)
 
-        domain_resp, _, err = asyncio.run(client.get_domain('OcDz6iRyjkaCTXkdo0g3'))
+        domain_resp, _, err = await client.get_domain('OcDz6iRyjkaCTXkdo0g3')
         assert err is None
         assert isinstance(domain_resp, Domain)
         assert isinstance(domain_resp.public_certificate, DomainCertificateMetadata)
@@ -192,7 +193,8 @@ class TestDomainResource:
             assert isinstance(dns_record, DnsRecord)
         assert domain_resp.domain == 'login.example.com'
 
-    def test_create_certificate_and_verify_domain(self, monkeypatch):
+    @pytest.mark.asyncio
+    async def test_create_certificate_and_verify_domain(self, monkeypatch):
         org_url = "https://test.okta.com"
         token = "TOKEN"
         config = {'orgUrl': org_url, 'token': token}
@@ -240,15 +242,15 @@ class TestDomainResource:
             "domain": "login.example.com",
             "certificateSourceType": "MANUAL"
         }
-        domain_resp, _, err = asyncio.run(client.create_domain(domain_config))
+        domain_resp, _, err = await client.create_domain(domain_config)
         assert err is None
 
         cert = DomainCertificate({'type': 'PEM',
                                   'certificate': 'test_certificate',
                                   'privateKey': 'test_private_key'})
-        cert_resp, err = asyncio.run(client.create_certificate(domain_resp.id, cert))
+        cert_resp, err = await client.create_certificate(domain_resp.id, cert)
         assert err is None
 
-        domain_resp, _, err = asyncio.run(client.verify_domain(domain_resp.id))
+        domain_resp, _, err = await client.verify_domain(domain_resp.id)
         assert err is None
         assert domain_resp.validation_status == 'VERIFIED'

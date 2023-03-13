@@ -33,6 +33,8 @@ class OrgSetting(
         if config:
             self.links = config["links"]\
                 if "links" in config else None
+            if "_links" in config:
+                self.links = config["_links"]
             self.address_1 = config["address1"]\
                 if "address1" in config else None
             self.address_2 = config["address2"]\
