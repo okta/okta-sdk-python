@@ -44,11 +44,11 @@ interactions:
         ''self'' *.oktacdn.com test.okta.com *.tiles.mapbox.com *.mapbox.com app.pendo.io
         data.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
         data: blob:; font-src data: ''self'' *.oktacdn.com fonts.gstatic.com; report-uri
-        https://okta.report-uri.com/r/d/csp/reportOnly; report-to csp-report'
+        https://example.com/csp/reportOnly; report-to csp-report'
       expires: '0'
       p3p: CP="HONK"
       pragma: no-cache
-      report-to: '{"group":"csp-report","max_age":31536000,"endpoints":[{"url":"https://okta.report-uri.com/r/d/csp/reportOnly"}],"include_subdomains":true}'
+      report-to: '{"group":"csp-report","max_age":31536000,"endpoints":[{"url":"https://example.com/csp/reportOnly"}],"include_subdomains":true}'
       set-cookie: JSESSIONID=51E3EB7F0F22B06B6F515F4EFCF293EF; Path=/; Secure; HttpOnly
       x-content-type-options: nosniff
       x-okta-request-id: X0f4qJ5Kk@1h6qjS2sslvAAAAGQ
@@ -107,11 +107,11 @@ interactions:
         ''self'' *.oktacdn.com test.okta.com *.tiles.mapbox.com *.mapbox.com app.pendo.io
         data.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
         data: blob:; font-src data: ''self'' *.oktacdn.com fonts.gstatic.com; report-uri
-        https://okta.report-uri.com/r/d/csp/reportOnly; report-to csp-report'
+        https://example.com/csp/reportOnly; report-to csp-report'
       expires: '0'
       p3p: CP="HONK"
       pragma: no-cache
-      report-to: '{"group":"csp-report","max_age":31536000,"endpoints":[{"url":"https://okta.report-uri.com/r/d/csp/reportOnly"}],"include_subdomains":true}'
+      report-to: '{"group":"csp-report","max_age":31536000,"endpoints":[{"url":"https://example.com/csp/reportOnly"}],"include_subdomains":true}'
       set-cookie: JSESSIONID=1F972263C8DE1D8AC046CB64A6329674; Path=/; Secure; HttpOnly
       x-content-type-options: nosniff
       x-okta-request-id: X0f4qd4Ov5sQSVBJN61VvQAABb0
@@ -158,11 +158,11 @@ interactions:
         ''self'' *.oktacdn.com test.okta.com *.tiles.mapbox.com *.mapbox.com app.pendo.io
         data.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
         data: blob:; font-src data: ''self'' *.oktacdn.com fonts.gstatic.com; report-uri
-        https://okta.report-uri.com/r/d/csp/reportOnly; report-to csp-report'
+        https://example.com/csp/reportOnly; report-to csp-report'
       expires: '0'
       p3p: CP="HONK"
       pragma: no-cache
-      report-to: '{"group":"csp-report","max_age":31536000,"endpoints":[{"url":"https://okta.report-uri.com/r/d/csp/reportOnly"}],"include_subdomains":true}'
+      report-to: '{"group":"csp-report","max_age":31536000,"endpoints":[{"url":"https://example.com/csp/reportOnly"}],"include_subdomains":true}'
       set-cookie: JSESSIONID=7FCD214BD40A618B0E61D0EF83C150EE; Path=/; Secure; HttpOnly
       x-frame-options: SAMEORIGIN
       x-okta-request-id: X0f4qcGUpKDpDtPLR-1kpQAAAmc

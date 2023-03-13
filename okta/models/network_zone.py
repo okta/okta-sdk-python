@@ -44,6 +44,8 @@ class NetworkZone(
         if config:
             self.links = config["links"]\
                 if "links" in config else None
+            if "_links" in config:
+                self.links = config["_links"]
             self.asns = OktaCollection.form_list(
                 config["asns"] if "asns"\
                     in config else [],

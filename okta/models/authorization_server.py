@@ -36,6 +36,8 @@ class AuthorizationServer(
         if config:
             self.links = config["links"]\
                 if "links" in config else None
+            if "_links" in config:
+                self.links = config["_links"]
             self.audiences = OktaCollection.form_list(
                 config["audiences"] if "audiences"\
                     in config else [],
@@ -55,6 +57,8 @@ class AuthorizationServer(
                     self.credentials = None
             else:
                 self.credentials = None
+            self.default = config["default"]\
+                if "default" in config else None
             self.description = config["description"]\
                 if "description" in config else None
             self.id = config["id"]\
@@ -74,6 +78,7 @@ class AuthorizationServer(
             self.audiences = []
             self.created = None
             self.credentials = None
+            self.default = None
             self.description = None
             self.id = None
             self.issuer = None
@@ -89,6 +94,7 @@ class AuthorizationServer(
             "audiences": self.audiences,
             "created": self.created,
             "credentials": self.credentials,
+            "default": self.default,
             "description": self.description,
             "id": self.id,
             "issuer": self.issuer,

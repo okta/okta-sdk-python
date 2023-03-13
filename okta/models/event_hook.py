@@ -37,6 +37,8 @@ class EventHook(
         if config:
             self.links = config["links"]\
                 if "links" in config else None
+            if "_links" in config:
+                self.links = config["_links"]
             if "channel" in config:
                 if isinstance(config["channel"],
                               event_hook_channel.EventHookChannel):

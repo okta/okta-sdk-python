@@ -87,6 +87,8 @@ class SamlApplicationSettingsSignOn(
                 if "requestCompressed" in config else None
             self.response_signed = config["responseSigned"]\
                 if "responseSigned" in config else None
+            self.saml_signed_request_enabled = config["samlSignedRequestEnabled"]\
+                if "samlSignedRequestEnabled" in config else None
             self.signature_algorithm = config["signatureAlgorithm"]\
                 if "signatureAlgorithm" in config else None
             if "slo" in config:
@@ -142,6 +144,7 @@ class SamlApplicationSettingsSignOn(
             self.recipient_override = None
             self.request_compressed = None
             self.response_signed = None
+            self.saml_signed_request_enabled = None
             self.signature_algorithm = None
             self.slo = None
             self.sp_certificate = None
@@ -172,6 +175,7 @@ class SamlApplicationSettingsSignOn(
             "recipientOverride": self.recipient_override,
             "requestCompressed": self.request_compressed,
             "responseSigned": self.response_signed,
+            "samlSignedRequestEnabled": self.saml_signed_request_enabled,
             "signatureAlgorithm": self.signature_algorithm,
             "slo": self.slo,
             "spCertificate": self.sp_certificate,

@@ -67,9 +67,11 @@ class UserClient(APIClient):
             keep_empty_params=False
     ):
         """
-        Lists users in your organization with pagination in mos
-        t cases.  A subset of users can be returned that match
-        a supported filter expression or search criteria.
+        Lists users that do not have a status of 'DEPROVISIONED
+        ' (by default), up to the maximum (200 for most orgs),
+        with pagination in most cases. A subset of users can be
+        returned that match a supported filter expression or s
+        earch criteria.
         Args:
             query_params {dict}: Map of query parameters for request
             [query_params.q] {str}
@@ -299,8 +301,8 @@ class UserClient(APIClient):
             keep_empty_params=False
     ):
         """
-        Fetch a user by `id`, `login`, or `login shortname` if
-        the short name is unambiguous.
+        Update a user's profile or credentials with partial upd
+        ate semantics.
         Args:
             user_id {str}
             {user}

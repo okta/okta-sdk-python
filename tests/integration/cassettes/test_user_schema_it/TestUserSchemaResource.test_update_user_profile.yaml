@@ -85,8 +85,6 @@ interactions:
         data: blob: *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net
         *.zscalerthree.net; font-src data: ''self'' *.oktacdn.com fonts.gstatic.com
         *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net'
-      expect-ct:
-      - report-uri="https://oktaexpectct.report-uri.com/r/t/ct/reportOnly", max-age=0
       p3p:
       - CP="HONK"
       x-content-type-options:
@@ -269,8 +267,6 @@ interactions:
         data: blob: *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net
         *.zscalerthree.net; font-src data: ''self'' *.oktacdn.com fonts.gstatic.com
         *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net'
-      expect-ct:
-      - report-uri="https://oktaexpectct.report-uri.com/r/t/ct/reportOnly", max-age=0
       p3p:
       - CP="HONK"
       x-content-type-options:
@@ -456,8 +452,6 @@ interactions:
         data: blob: *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net
         *.zscalerthree.net; font-src data: ''self'' *.oktacdn.com fonts.gstatic.com
         *.zscloud.net *.zscalerbeta.net *.zscaler.net *.zscalertwo.net *.zscalerthree.net'
-      expect-ct:
-      - report-uri="https://oktaexpectct.report-uri.com/r/t/ct/reportOnly", max-age=0
       p3p:
       - CP="HONK"
       x-content-type-options:
