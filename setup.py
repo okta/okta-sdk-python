@@ -41,7 +41,7 @@ setup(
         "pyyaml",
         "xmltodict",
         "yarl",
-        "pycryptodome",
+        "pycryptodomex",
         "python-jose",
         "aenum",
         "pydash"
