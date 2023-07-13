@@ -182,5 +182,6 @@ class OktaAPIResponse():
                 next_response = OktaAPIResponse(
                     self._request_executor, req, res_details, resp_body)
                 self._next = next_response._next
+                self._resp_headers = res_details.headers
                 # yield next page
                 yield (next_response.get_body(), None, next_response)
