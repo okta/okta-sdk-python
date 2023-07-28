@@ -31,4 +31,3 @@ class OpenIdConnectApplicationIssuerMode(
 
     CUSTOM_URL = "CUSTOM_URL", "custom_url"
     ORG_URL = "ORG_URL", "org_url"
-    DYNAMIC = "DYNAMIC", "dynamic"

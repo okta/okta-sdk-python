@@ -301,8 +301,8 @@ class UserClient(APIClient):
             keep_empty_params=False
     ):
         """
-        Update a user's profile or credentials with partial upd
-        ate semantics.
+        Fetch a user by `id`, `login`, or `login shortname` if
+        the short name is unambiguous.
         Args:
             user_id {str}
             {user}

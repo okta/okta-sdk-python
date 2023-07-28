@@ -1178,8 +1178,8 @@ class ApplicationClient(APIClient):
             keep_empty_params=False
     ):
         """
-        Removes a secret from the client's collection of secret
-        s.
+        Method for
+        /api/v1/apps/{appId}/credentials/secrets/{secretId}
         Args:
             app_id {str}
             secret_id {str}
@@ -1973,47 +1973,6 @@ class ApplicationClient(APIClient):
 
         request, error = await self._request_executor.create_request(
             http_method, api_url, body, headers, form, keep_empty_params=keep_empty_params
-        )
-
-        if error:
-            return (None, error)
-
-        response, error = await self._request_executor\
-            .execute(request)
-
-        if error:
-            return (response, error)
-
-        return (response, None)
-
-    async def preview_saml_app_metadata(
-            self, appId, query_params={},
-            keep_empty_params=False
-    ):
-        """
-        Previews SAML metadata based on a specific key credenti
-        al for an application
-        Args:
-            app_id {str}
-            query_params {dict}: Map of query parameters for request
-            [query_params.kid] {str}
-        """
-        http_method = "get".upper()
-        api_url = format_url(f"""
-            {self._base_url}
-            /api/v1/apps/{appId}/sso/saml/metadata
-            """)
-        if query_params:
-            encoded_query_params = urlencode(query_params)
-            api_url += f"/?{encoded_query_params}"
-
-        body = {}
-        headers = {}
-        form = {}
-
-        headers['Accept'] = "application/xml"
-        request, error = await self._request_executor.create_request(
-            http_method, api_url, None, headers, None, keep_empty_params=keep_empty_params
         )
 
         if error:

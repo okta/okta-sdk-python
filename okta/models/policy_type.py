@@ -35,4 +35,3 @@ class PolicyType(
     IDP_DISCOVERY = "IDP_DISCOVERY", "idp_discovery"
     PROFILE_ENROLLMENT = "PROFILE_ENROLLMENT", "profile_enrollment"
     ACCESS_POLICY = "ACCESS_POLICY", "access_policy"
-    MFA_ENROLL = "MFA_ENROLL", "mfa_enroll"
