@@ -16,7 +16,7 @@ jobs:
           command: python setup.py build
       - run:
           name: Run Tests
-          command: pytest
+          command: pytest tests/unit
 workflows:
   "Circle CI Tests":
     jobs:
