@@ -57,7 +57,7 @@ class ApplicationSettingsApplication(
     def request_format(self):
         parent_req_format = super().request_format()
         current_obj_format = {
-            "acsURL": self.acs_url,
+            "acsUrl": self.acs_url,
             "buttonField": self.button_field,
             "loginUrlRegex": self.login_url_regex,
             "orgName": self.org_name,
