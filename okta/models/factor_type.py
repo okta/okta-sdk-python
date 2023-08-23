@@ -34,6 +34,7 @@ class FactorType(
     HOTP = "hotp", "HOTP"
     PUSH = "push", "PUSH"
     QUESTION = "question", "QUESTION"
+    SIGNED_NONCE = "signed_nonce", "SIGNED_NONCE"
     SMS = "sms", "SMS"
     TOKEN_HARDWARE = "token:hardware", "TOKEN:HARDWARE"
     TOKEN_HOTP = "token:hotp", "TOKEN:HOTP"

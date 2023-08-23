@@ -15,5 +15,5 @@ pytest-asyncio
 pytest-mock
 pytest-recording
 pyfakefs
-aenum
+aenum==3.1.11
 pydash
