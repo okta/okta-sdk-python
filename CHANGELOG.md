@@ -1,5 +1,24 @@
 # Okta Python SDK Changelog
 
+## 2.9.3
+* Add missing properties to applicationsettingsapplication per the reference docs: https://developer.okta.com/docs/reference/api/apps/#settings-4
+* Add signed_nonce factor type per the reference docs: https://developer.okta.com/docs/reference/api/factors/#factor-type
+
+## 2.9.2
+* Add missing dependency in setup.py by @justinabrokwah-okta in https://github.com/okta/okta-sdk-python/pull/351
+* Update __init__.py by @bretterer in https://github.com/okta/okta-sdk-python/pull/352
+
+## 2.9.1
+* fixing okta icon image url by @BarondeCharlus in https://github.com/okta/okta-sdk-python/pull/323
+* Update README.md by @omidraha in https://github.com/okta/okta-sdk-python/pull/310
+* Update README.md by @glebinsky in https://github.com/okta/okta-sdk-python/pull/321
+* Update README.md by @scheblein in https://github.com/okta/okta-sdk-python/pull/300
+* update HTTPError, OktaAPIError to call Error base class constructor by @andyj29 in https://github.com/okta/okta-sdk-python/pull/319
+* Update type checking in jwt.py to use isinstance synxtax for consistency by @andyj29 in https://github.com/okta/okta-sdk-python/pull/320
+* pagination should be easier by @gabrielsroka in https://github.com/okta/okta-sdk-python/pull/328
+* Update next by @bretterer in https://github.com/okta/okta-sdk-python/pull/348
+* Update version number by @bretterer in https://github.com/okta/okta-sdk-python/pull/349
+
 ## v2.9.0
 * Addressed a number of open issues regarding SDK
   * Allow overwriting of default HTTP headers
