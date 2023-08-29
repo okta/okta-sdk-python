@@ -27,12 +27,13 @@ class {{pascalCase model.modelName}}(
             extend_enum(ApplicationSignOnMode, value_upper_case, value_upper_case)
             return getattr(cls, value_upper_case)
 {{else}}
-from aenum import MultiValueEnum
+from aenum import MultiValueEnum, ReprEnum
 
 
 class {{pascalCase model.modelName}}(
     {{model.type}},
-    MultiValueEnum
+    MultiValueEnum,
+    ReprEnum
 ):
     """
     An enumeration class for {{pascalCase model.modelName}}.
