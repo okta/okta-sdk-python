@@ -18,12 +18,13 @@ limitations under the License.
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
 
-from aenum import MultiValueEnum
+from aenum import MultiValueEnum, ReprEnum
 
 
 class AuthorizationServerCredentialsRotationMode(
     str,
-    MultiValueEnum
+    MultiValueEnum,
+    ReprEnum
 ):
     """
     An enumeration class for AuthorizationServerCredentialsRotationMode.
