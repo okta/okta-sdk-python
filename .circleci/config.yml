@@ -3,6 +3,7 @@ version: 2.1
 
 orbs:
   python: circleci/python@2.1.1
+  general-platform-helpers: okta/general-platform-helpers@1.8
 
 jobs:
   build_and_test:
@@ -24,3 +25,12 @@ workflows:
   "Circle CI Tests":
     jobs:
       - build_and_test
+  # See OKTA-624403
+  semgrep:
+    jobs:
+      - general-platform-helpers/job-semgrep-prepare:
+          name: semgrep-prepare
+      - general-platform-helpers/job-semgrep-scan:
+          name: "Scan with Semgrep"
+          requires:
+            - semgrep-prepare
