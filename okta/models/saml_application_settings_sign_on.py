@@ -62,6 +62,11 @@ class SamlApplicationSettingsSignOn(
                 if "audienceOverride" in config else None
             self.authn_context_class_ref = config["authnContextClassRef"]\
                 if "authnContextClassRef" in config else None
+            self.configured_attribute_statements = OktaCollection.form_list(
+                config["configuredAttributeStatements"] if "configuredAttributeStatements"\
+                    in config else [],
+                saml_attribute_statement.SamlAttributeStatement
+            )
             self.default_relay_state = config["defaultRelayState"]\
                 if "defaultRelayState" in config else None
             self.destination = config["destination"]\
