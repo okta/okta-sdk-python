@@ -923,6 +923,27 @@ loop = asyncio.get_event_loop()
 loop.run_until_complete(main())
 ```
 
+If you require access to the response headers during a pagination operation, set the `includeResponse` parameter to `True` in the call to the `next` method; this returns the response as a third tuple value.  See the following example:
+
+```python
+from okta.client import Client as OktaClient
+import asyncio
+
+async def main():
+    client = OktaClient()
+    users, resp, err = await client.list_users()
+    while True:
+        for user in users:
+            print(user.profile.login) 
+        if resp.has_next():
+            users, err, response = await resp.next(True) # Specify True to receive the response object as the third part of the tuple for further analysis
+        else:
+            break
+
+loop = asyncio.get_event_loop()
+loop.run_until_complete(main())
+```
+
 ## Logging
 
 > Feature appears in version 1.5.0

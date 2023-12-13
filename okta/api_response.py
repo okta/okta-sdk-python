@@ -123,7 +123,7 @@ class OktaAPIResponse():
         """
         return self._next is not None
 
-    async def next(self):
+    async def next(self, includeResponse=False):
         """
         Generator iterating function. Retrieves the next page of results
         from the API.
@@ -134,7 +134,7 @@ class OktaAPIResponse():
         # if not self.has_next():
         #     return (None, None)  #This causes errors with our async testing
         MODELS_NOT_TO_CAMEL_CASE = [User, Group, UserSchema, GroupSchema]
-        next_page, error = await self.get_next().__anext__()
+        next_page, error, next_response = await self.get_next().__anext__()
         if error:
             return (None, error)
         if self._type is not None:
@@ -142,9 +142,15 @@ class OktaAPIResponse():
             for item in next_page:
                 result.append(self._type(item) if self._type in MODELS_NOT_TO_CAMEL_CASE
                               else self._type(APIClient.form_response_body(item)))
-            return (result, None)
+            if includeResponse:
+                return (result, None, next_response)
+            else:
+                return (result, None)
 
-        return (next_page, error)
+        if includeResponse:
+            return (next_page, error, next_response)
+        else:
+            return (next_page, error)
 
     async def get_next(self):
         """
@@ -162,14 +168,14 @@ class OktaAPIResponse():
             if error:
                 # Return None if error and set next to none
                 self._next = None
-                yield (None, error)
+                yield (None, error, None)
 
             req, res_details, resp_body, error = await \
                 self._request_executor.fire_request(next_request)
             if error:
                 # Return None if error and set next to none
                 self._next = None
-                yield (None, error)
+                yield (None, error, None)
 
             if next_request:
                 # create new response and update generator values
@@ -177,4 +183,4 @@ class OktaAPIResponse():
                     self._request_executor, req, res_details, resp_body)
                 self._next = next_response._next
                 # yield next page
-                yield (next_response.get_body(), None)
+                yield (next_response.get_body(), None, next_response)

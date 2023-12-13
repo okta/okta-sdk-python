@@ -1,5 +1,8 @@
 # Okta Python SDK Changelog
 
+## 2.9.4
+* Add optional parameter to api_response.next() to include response object as a third tuple value. 
+
 ## 2.9.3
 * Add missing properties to applicationsettingsapplication per the reference docs: https://developer.okta.com/docs/reference/api/apps/#settings-4
 * Add signed_nonce factor type per the reference docs: https://developer.okta.com/docs/reference/api/factors/#factor-type
