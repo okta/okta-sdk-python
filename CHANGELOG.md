@@ -1,5 +1,8 @@
 # Okta Python SDK Changelog
 
+## 2.9.5
+* Clear access token from cache on call to OAuth.clear_access_token()
+
 ## 2.9.4
 * Add optional parameter to api_response.next() to include response object as a third tuple value. 
 

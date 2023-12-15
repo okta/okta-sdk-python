@@ -90,3 +90,5 @@ class OAuth:
         Clear currently used OAuth access token, probably expired
         """
         self._access_token = None
+        self._request_executor._cache.delete("OKTA_ACCESS_TOKEN")
+        self._request_executor._default_headers.pop("Authorization", None)
