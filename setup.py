@@ -42,7 +42,7 @@ setup(
         "xmltodict",
         "yarl",
         "pycryptodomex",
-        "python-jose",
+        "ecdsa==0.18.0",
         "aenum==3.1.11",
         "pydash"
     ]

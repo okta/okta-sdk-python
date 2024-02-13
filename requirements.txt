@@ -4,7 +4,7 @@ pyyaml
 xmltodict
 yarl
 pycryptodomex
-python-jose
+ecdsa==0.18.0
 aenum
 pydash
 flake8
