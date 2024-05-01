@@ -1,6 +1,8 @@
 from urllib.parse import urlencode, quote
 from okta.jwt import JWT
+from jose.jwt import get_unverified_claims
 from okta.http_client import HTTPClient
+import time
 
 
 class OAuth:
@@ -37,9 +39,11 @@ class OAuth:
             str, Exception: Tuple of the access token, error that was raised
             (if any)
         """
-        # Return token if already generated
+        # Return token if already generated and token is not expired.
         if self._access_token:
-            return (self._access_token, None)
+            claims = get_unverified_claims(self._access_token)
+            if time.time() <= claims['exp']:
+                return (self._access_token, None)
 
         # Otherwise create new one
         # Get JWT and create parameters for new Oauth token
