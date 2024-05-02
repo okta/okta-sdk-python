@@ -1,5 +1,6 @@
 from okta.client import Client
 import asyncio
+import time
 
 pem_key='''-----BEGIN PRIVATE KEY-----
 MIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDUqh8xBac0HlQe
@@ -45,4 +46,16 @@ print(user)
 print(res)
 print(err)
 
+asyncio.run(okta_client._request_executor._oauth.get_access_token())
+time.sleep(600)
+asyncio.run(okta_client._request_executor._oauth.get_access_token())
+time.sleep(600)
+asyncio.run(okta_client._request_executor._oauth.get_access_token())
+time.sleep(600)
+asyncio.run(okta_client._request_executor._oauth.get_access_token())
+time.sleep(600)
+asyncio.run(okta_client._request_executor._oauth.get_access_token())
+time.sleep(600)
+asyncio.run(okta_client._request_executor._oauth.get_access_token())
+time.sleep(630)
 asyncio.run(okta_client._request_executor._oauth.get_access_token())

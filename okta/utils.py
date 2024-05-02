@@ -5,6 +5,8 @@ Class of utility functions.
 from enum import Enum
 from datetime import datetime as dt
 from urllib.parse import urlsplit, urlunsplit
+from jose.jwt import get_unverified_claims
+import time
 
 from okta.constants import DATETIME_FORMAT, EPOCH_DAY, EPOCH_MONTH,\
     EPOCH_YEAR
@@ -74,3 +76,7 @@ def convert_absolute_url_into_relative_url(absolute_url):
     """
     url_parts = urlsplit(absolute_url)
     return urlunsplit(('', '', url_parts[2], url_parts[3], url_parts[4]))
+
+def is_jwt_token_expired(jwt_token):
+    claims = get_unverified_claims(jwt_token)
+    return time.time() > claims['exp']
