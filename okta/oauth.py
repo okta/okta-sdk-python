@@ -1,7 +1,6 @@
 from urllib.parse import urlencode, quote
 from okta.jwt import JWT
 from okta.http_client import HTTPClient
-import time
 from okta.utils import is_jwt_token_expired
 
 
