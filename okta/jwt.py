@@ -79,7 +79,7 @@ class JWT():
         else:  # it's a PEM
             # check for filepath or explicit private key
             if isinstance(private_key, (str, bytes, os.PathLike)) and os.path.exists(private_key):
-                # open file if exists and read bytes
+                # open file if exists and read
                 pem_file = open(private_key, 'r')
                 private_key = pem_file.read()
                 pem_file.close()
