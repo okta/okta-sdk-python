@@ -14,7 +14,7 @@ def test_private_key_PEM_JWK_dict(jwk_input):
     generated_pem, generated_jwk = JWT.get_PEM_JWK(jwk_input)
 
     assert generated_pem is not None and generated_jwk is not None
-    assert not generated_jwk.is_public()
+    assert generated_jwk.has_private
 
 
 def test_private_key_PEM_JWK_file(fs):
@@ -24,11 +24,18 @@ def test_private_key_PEM_JWK_file(fs):
     generated_pem, generated_jwk = JWT.get_PEM_JWK(file_path)
 
     assert generated_pem is not None and generated_jwk is not None
-    assert not generated_jwk.is_public()
+    assert generated_jwk.has_private
 
 
 def test_private_key_PEM_JWK_explicit_string():
     generated_pem, generated_jwk = JWT.get_PEM_JWK(mocks.SAMPLE_RSA)
 
     assert generated_pem is not None and generated_jwk is not None
-    assert not generated_jwk.is_public()
+    assert generated_jwk.has_private
+
+
+@pytest.mark.parametrize("private_key",
+                          [mocks.SAMPLE_INVALID_JWK, str(mocks.SAMPLE_INVALID_JWK), mocks.SAMPLE_INVALID_RSA])
+def test_invalid_private_key_PEM_JWK(private_key):
+    with pytest.raises(ValueError):
+        generated_pem, generated_jwk = JWT.get_PEM_JWK(private_key)

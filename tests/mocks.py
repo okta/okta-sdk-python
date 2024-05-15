@@ -416,3 +416,6 @@ SAMPLE_JWK_WITH_KID = {
     KLElmMvzocvFaWKvup_a3vPaBi6y4K5kBiq60o-IDMGQ''',
     "kid": "5ashWt3LP1zkYwMGbfMsVizRfx52QTyky4GTHd9MykE"
 }
+
+SAMPLE_INVALID_JWK = {'foo':'bar'}
+SAMPLE_INVALID_RSA = 'foobar'
