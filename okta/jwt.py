@@ -8,6 +8,7 @@ from Cryptodome.PublicKey import RSA
 from jwcrypto.jwk import JWK, InvalidJWKType
 from jwt import encode as jwt_encode
 
+
 class JWT():
     """
     This class creates a JWT from the Okta Client configuration.
@@ -80,12 +81,10 @@ class JWT():
             if isinstance(private_key, (str, bytes, os.PathLike)) and os.path.exists(private_key):
                 # open file if exists and read bytes
                 pem_file = open(private_key, 'r')
-                my_pem_lines = pem_file.readlines()
+                private_key = pem_file.read()
                 pem_file.close()
-            else:
-                my_pem_lines = private_key.splitlines()
             # remove leading whitespaces from each line
-            my_pem = '\n'.join([l.strip() for l in my_pem_lines])
+            my_pem = '\n'.join([line.strip() for line in private_key.splitlines()])
             my_pem = bytes(my_pem, 'ascii')
             try:
                 my_jwk = JWK.from_pem(my_pem)
@@ -93,10 +92,9 @@ class JWT():
                 raise ValueError(
                     "RSA Private Key given is of the wrong type")
 
-        if not my_pem:
-            my_pem = my_jwk.export_to_pem(private_key=True, password=None)
+        my_pem = my_jwk.export_to_pem(private_key=True, password=None)
+        my_pem = RSA.import_key(my_pem)
 
-        my_pem = RSA.import_key(my_pem)            
         return (my_pem, my_jwk)
 
     @staticmethod
