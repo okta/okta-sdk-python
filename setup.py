@@ -43,7 +43,7 @@ setup(
         "yarl",
         "pycryptodomex",
         "python-jose",
-        "aenum==3.1.11",
+        "aenum",
         "pydash"
     ]
 )
