@@ -4,7 +4,8 @@ pyyaml
 xmltodict
 yarl
 pycryptodomex
-python-jose[cryptography]
+jwcrypto
+pyjwt
 aenum
 pydash
 flake8

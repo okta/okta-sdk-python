@@ -1,11 +1,12 @@
 import json
-from Cryptodome.PublicKey import RSA
-from ast import literal_eval
-import jose.jwk as jwk
-import jose.jwt as jwt
+import os
 import time
 import uuid
-import os
+
+from ast import literal_eval
+from Cryptodome.PublicKey import RSA
+from jwcrypto.jwk import JWK, InvalidJWKType
+from jwt import encode as jwt_encode
 
 
 class JWT():
@@ -63,32 +64,36 @@ class JWT():
             # if string repr, convert to dict object
             if isinstance(private_key, str):
                 private_key = literal_eval(private_key)
-            # Create JWK using dict obj
-            my_jwk = jwk.construct(private_key, JWT.HASH_ALGORITHM)
+            # remove whitespace from key vaules
+            private_key = {k: ''.join(private_key[k].split()) for k in private_key}
+            # ensure private_key is JSON formatted
+            try:
+                json.loads(private_key)
+            except TypeError:
+                private_key = json.dumps(private_key)
+            try:
+                my_jwk = JWK.from_json(private_key)
+            except InvalidJWKType:
+                raise ValueError(
+                    "JWK given is of the wrong type")
         else:  # it's a PEM
             # check for filepath or explicit private key
             if isinstance(private_key, (str, bytes, os.PathLike)) and os.path.exists(private_key):
-                # open file if exists and import key
+                # open file if exists and read
                 pem_file = open(private_key, 'r')
-                my_pem = RSA.import_key(pem_file.read())
+                private_key = pem_file.read()
                 pem_file.close()
-            else:
-                # convert given string to bytes and import key
-                private_key_bytes = bytes(private_key, 'ascii')
-                my_pem = RSA.import_key(private_key_bytes)
+            # remove leading whitespaces from each line
+            my_pem = '\n'.join([line.strip() for line in private_key.splitlines()])
+            my_pem = bytes(my_pem, 'ascii')
+            try:
+                my_jwk = JWK.from_pem(my_pem)
+            except ValueError:
+                raise ValueError(
+                    "RSA Private Key given is of the wrong type")
 
-            if not my_pem:
-                # return error if import failed
-                return (None, ValueError(
-                    "RSA Private Key given is of the wrong type"))
-
-        if my_jwk:  # was JWK provided
-            # get PEM using JWK
-            pem_bytes = my_jwk.to_pem(JWT.PEM_FORMAT)
-            my_pem = RSA.import_key(pem_bytes)
-        else:  # was pem provided
-            # get JWK using PEM
-            my_jwk = jwk.construct(my_pem.export_key(), JWT.HASH_ALGORITHM)
+        my_pem = my_jwk.export_to_pem(private_key=True, password=None)
+        my_pem = RSA.import_key(my_pem)
 
         return (my_pem, my_jwk)
 
@@ -108,7 +113,7 @@ class JWT():
             str: Generated JWT
         """
         # Generate PEM and JWK
-        my_pem, my_jwk = JWT.get_PEM_JWK(private_key)
+        my_pem, _ = JWT.get_PEM_JWK(private_key)
         # Get current time and expiry time for token
         issued_time = int(time.time())
         expiry_time = issued_time + JWT.ONE_HOUR
@@ -142,5 +147,5 @@ class JWT():
                 if "kid" in headers:
                     del headers["kid"]
 
-        token = jwt.encode(claims, my_jwk.to_dict(), JWT.HASH_ALGORITHM, headers=headers)
+        token = jwt_encode(claims, my_pem.export_key(), JWT.HASH_ALGORITHM, headers)
         return token

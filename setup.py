@@ -42,7 +42,8 @@ setup(
         "xmltodict",
         "yarl",
         "pycryptodomex",
-        "python-jose",
+        "jwcrypto",
+        "pyjwt",
         "aenum==3.1.11",
         "pydash"
     ]
