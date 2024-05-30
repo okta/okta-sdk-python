@@ -1,3 +1,3 @@
 #!/bin/bash
 
-openapi-generator-cli generate -g python -o generated -i $1 --skip-validate-spec
+openapi-generator-cli generate -g python -o sdk -i $1 --skip-validate-spec
