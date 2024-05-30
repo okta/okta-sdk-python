@@ -1,0 +1,313 @@
+[main] WARN  i.s.v.p.util.DeserializationUtils - Error snake-parsing yaml content
+io.swagger.v3.parser.util.DeserializationUtils$SnakeException: Duplicate field clientData
+	at io.swagger.v3.parser.util.DeserializationUtils$CustomSnakeYamlConstructor.getSingleData(DeserializationUtils.java:481)
+	at org.yaml.snakeyaml.Yaml.loadFromReader(Yaml.java:493)
+	at org.yaml.snakeyaml.Yaml.load(Yaml.java:422)
+	at io.swagger.v3.parser.util.DeserializationUtils.readYamlTree(DeserializationUtils.java:258)
+	at io.swagger.v3.parser.util.DeserializationUtils.deserializeIntoTree(DeserializationUtils.java:172)
+	at io.swagger.v3.parser.OpenAPIV3Parser.readContents(OpenAPIV3Parser.java:168)
+	at io.swagger.v3.parser.OpenAPIV3Parser.readLocation(OpenAPIV3Parser.java:97)
+	at io.swagger.parser.OpenAPIParser.readLocation(OpenAPIParser.java:16)
+	at org.openapitools.codegen.config.CodegenConfigurator.toContext(CodegenConfigurator.java:686)
+	at org.openapitools.codegen.config.CodegenConfigurator.toClientOptInput(CodegenConfigurator.java:744)
+	at org.openapitools.codegen.cmd.Generate.execute(Generate.java:527)
+	at org.openapitools.codegen.cmd.OpenApiGeneratorCommand.run(OpenApiGeneratorCommand.java:32)
+	at org.openapitools.codegen.OpenAPIGenerator.main(OpenAPIGenerator.java:66)
+[main] WARN  o.o.c.config.CodegenConfigurator - There were issues with the specification, but validation has been explicitly disabled.
+Errors: 
+	-attribute components.schemas.PolicyContext.items is missing
+	-Duplicate field clientData in `management.yaml`
+Warnings: 
+	-Unused model: InlineHookOAuthClientSecretConfig
+	-Unused model: PasswordPolicyRuleConditions
+	-Unused model: PasswordPolicySettings
+	-Unused model: DeviceAccessPolicyRuleCondition
+	-Unused model: DTCMacOS
+	-Unused model: PasswordPolicyPasswordSettingsLockout
+	-Unused model: PasswordPolicyRecoveryFactorSettings
+	-Unused model: PolicyAccess
+	-Unused model: OktaSignOnPolicyRuleActions
+	-Unused model: SamlApplicationSettings
+	-Unused model: BasicApplicationSettings
+	-Unused model: SplunkHost
+	-Unused model: DiskEncryptionType
+	-Unused model: SamlApplicationSettingsSignOn
+	-Unused model: PasswordPolicyConditions
+	-Unused model: PasswordPolicyRecoveryFactors
+	-Unused model: APNSConfiguration
+	-Unused model: MultifactorEnrollmentPolicySettingsType
+	-Unused model: VerificationMethod
+	-Unused model: PasswordPolicyRuleActions
+	-Unused model: OktaSignOnPolicyRuleSignonSessionActions
+	-Unused model: WebUserFactorProfile
+	-Unused model: BehaviorRuleSettingsAnomalousLocation
+	-Unused model: PasswordPolicyPasswordSettings
+	-Unused model: SmsUserFactorProfile
+	-Unused model: TokenUserFactorProfile
+	-Unused model: OtpTotpEncoding
+	-Unused model: IdpPolicyRuleActionProvider
+	-Unused model: PushUserFactorProfile
+	-Unused model: SwaApplicationSettings
+	-Unused model: BehaviorRuleSettingsHistoryBased
+	-Unused model: InlineHookChannelConfig
+	-Unused model: ChromeBrowserVersion
+	-Unused model: PasswordPolicyRecoveryEmailProperties
+	-Unused model: ProfileEnrollmentPolicyRuleProfileAttribute
+	-Unused model: SplunkEdition
+	-Unused model: ApplicationSettingsNotificationsVpn
+	-Unused model: AuthenticatorMethodConstraint
+	-Unused model: PasswordPolicyPasswordSettingsComplexity
+	-Unused model: WebAuthnAttachment
+	-Unused model: PasswordPolicyRecoveryQuestionProperties
+	-Unused model: SamlApplicationSettingsApplication
+	-Unused model: OktaSignOnPolicyRuleConditions
+	-Unused model: ApplicationSettingsNotificationsVpnNetwork
+	-Unused model: DTCWindows
+	-Unused model: ApplicationCredentials
+	-Unused model: InlineHookOAuthPrivateKeyJwtConfig
+	-Unused model: AwsAccountId
+	-Unused model: AwsRegion
+	-Unused model: MultifactorEnrollmentPolicySettings
+	-Unused model: BehaviorRuleSettingsVelocity
+	-Unused model: LogStreamSettingsSplunkPut
+	-Unused model: CustomHotpUserFactorProfile
+	-Unused model: PolicyRuleActionsEnrollSelf
+	-Unused model: ProfileEnrollmentPolicyRuleAction
+	-Unused model: OAuthGrantType
+	-Unused model: AccessPolicyConstraint
+	-Unused model: AccessPolicyRuleActions
+	-Unused model: MultifactorEnrollmentPolicyAuthenticatorSettings
+	-Unused model: DomainRequest
+	-Unused model: ApplicationCredentialsSigningUse
+	-Unused model: InlineHookOAuthChannelConfig
+	-Unused model: InlineHookOAuthBasicConfig
+	-Unused model: MultifactorEnrollmentPolicyAuthenticatorType
+	-Unused model: ProfileEnrollmentPolicyRuleActivationRequirement
+	-Unused model: SchemeApplicationCredentials
+	-Unused model: AutoLoginApplicationSettingsSignOn
+	-Unused model: PolicyRuleActionsEnroll
+	-Unused model: BasicApplicationSettingsApplication
+	-Unused model: PasswordPolicyRecoveryEmail
+	-Unused model: OAuthEndpointAuthenticationMethod
+	-Unused model: PasswordPolicyPasswordSettingsAge
+	-Unused model: OtpProtocol
+	-Unused model: BehaviorRuleSettingsAnomalousIP
+	-Unused model: OpenIdConnectApplicationSettingsClientKeys
+	-Unused model: OpenIdConnectApplicationType
+	-Unused model: PasswordProtectionWarningTrigger
+	-Unused model: LogStreamSettingsSplunk
+	-Unused model: EmailUserFactorProfile
+	-Unused model: PasswordDictionaryCommon
+	-Unused model: SecurityQuestionUserFactorProfile
+	-Unused model: SwaApplicationSettingsApplication
+	-Unused model: ApplicationCredentialsOAuthClient
+	-Unused model: AuthenticatorIdentity
+	-Unused model: BehaviorRuleSettingsAnomalousDevice
+	-Unused model: LogStreamSettingsAws
+	-Unused model: ShowSignInWithOV
+	-Unused model: DTCChromeOS
+	-Unused model: KeyTrustLevelOSMode
+	-Unused model: OktaSignOnPolicyFactorPromptMode
+	-Unused model: OpenIdConnectRefreshTokenRotationType
+	-Unused model: PasswordPolicyRecoverySettings
+	-Unused model: WsFederationApplicationSettings
+	-Unused model: FCMConfiguration
+	-Unused model: PasswordPolicyDelegationSettings
+	-Unused model: SsprPrimaryRequirement
+	-Unused model: AccessPolicyConstraints
+	-Unused model: SafeBrowsingProtectionLevel
+	-Unused model: UserTypeCondition
+	-Unused model: AutoLoginApplicationSettings
+	-Unused model: ApplicationSettingsNotifications
+	-Unused model: OpenIdConnectApplicationSettingsClient
+	-Unused model: ScreenLockType
+	-Unused model: SignOnInlineHook
+	-Unused model: PushMethodKeyProtection
+	-Unused model: FactorResultType
+	-Unused model: ApplicationSettingsNotes
+	-Unused model: AwsEventSourceName
+	-Unused model: ProfileEnrollmentPolicyRuleActions
+	-Unused model: SsprStepUpRequirement
+	-Unused model: IdpPolicyRuleAction
+	-Unused model: KeyTrustLevelBrowserKey
+	-Unused model: SpCertificate
+	-Unused model: BookmarkApplicationSettingsApplication
+	-Unused model: BookmarkApplicationSettings
+	-Unused model: PasswordPolicyRecoveryEmailRecoveryToken
+	-Unused model: PasswordPolicyRuleAction
+	-Unused model: SingleLogout
+	-Unused model: AuthenticatorMethodProperty
+	-Unused model: OAuthResponseType
+	-Unused model: PossessionConstraint
+	-Unused model: PasswordDictionary
+	-Unused model: AccessPolicyRuleCustomCondition
+	-Unused model: ApplicationSettings
+	-Unused model: SecurePasswordStoreApplicationSettings
+	-Unused model: OpenIdConnectApplicationSettings
+	-Unused model: PreRegistrationInlineHook
+	-Unused model: SsprRequirement
+	-Unused model: OSVersion
+	-Unused model: MultifactorEnrollmentPolicyAuthenticatorStatus
+	-Unused model: PasswordPolicyRecoveryQuestion
+	-Unused model: BehaviorRuleSettings
+	-Unused model: AccessPolicyRuleConditions
+	-Unused model: HardwareUserFactorProfile
+	-Unused model: U2fUserFactorProfile
+	-Unused model: AcsEndpoint
+	-Unused model: SplunkToken
+	-Unused model: PasswordPolicyDelegationSettingsOptions
+	-Unused model: ApplicationCredentialsScheme
+	-Unused model: CallUserFactorProfile
+	-Unused model: SamlAttributeStatement
+	-Unused model: InlineHookChannelConfigAuthScheme
+	-Unused model: OpenIdConnectApplicationSettingsRefreshToken
+	-Unused model: ApplicationCredentialsSigning
+	-Unused model: SelfServicePasswordResetAction
+	-Unused model: WebAuthnUserFactorProfile
+	-Unused model: OpenIdConnectApplicationIssuerMode
+	-Unused model: KnowledgeConstraint
+	-Unused model: AccessPolicyRuleApplicationSignOn
+	-Unused model: OktaSignOnPolicyRuleSignonActions
+	-Unused model: OktaSignOnPolicyConditions
+	-Unused model: ApplicationCredentialsUsernameTemplate
+	-Unused model: TotpUserFactorProfile
+	-Unused model: InlineHookChannelConfigHeaders
+	-Unused model: OAuthApplicationCredentials
+	-Unused model: SloParticipate
+	-Unused model: AuthenticatorMethodOtp
+	-Unused model: PasswordPolicyRecoveryQuestionComplexity
+	-Unused model: OpenIdConnectApplicationIdpInitiatedLogin
+	-Unused model: OpenIdConnectApplicationConsentMethod
+	-Unused model: OtpTotpAlgorithm
+	-Unused model: LocationGranularity
+	-Unused model: SecurePasswordStoreApplicationSettingsApplication
+	-Unused model: WsFederationApplicationSettingsApplication
+
+[main] INFO  o.o.codegen.DefaultGenerator - Generating with dryRun=false
+[main] INFO  o.o.c.ignore.CodegenIgnoreProcessor - Output directory (C:\src\repos\okta-sdk-python\oas3\out) does not exist, or is inaccessible. No file (.openapi-generator-ignore) will be evaluated.
+[main] INFO  o.o.codegen.DefaultGenerator - OpenAPI Generator: python (client)
+[main] INFO  o.o.codegen.DefaultGenerator - Generator 'python' is considered stable.
+[main] INFO  o.o.c.l.AbstractPythonCodegen - Environment variable PYTHON_POST_PROCESS_FILE not defined so the Python code may not be properly formatted. To define it, try 'export PYTHON_POST_PROCESS_FILE="/usr/local/bin/yapf -i"' (Linux/Mac)
+[main] INFO  o.o.c.l.AbstractPythonCodegen - NOTE: To enable file post-processing, 'enablePostProcessFile' must be set to `true` (--enable-post-process-file for CLI).
+[main] INFO  o.o.c.languages.PythonClientCodegen - Environment variable PYTHON_POST_PROCESS_FILE not defined so the Python code may not be properly formatted. To define it, try 'export PYTHON_POST_PROCESS_FILE="/usr/local/bin/yapf -i"' (Linux/Mac)
+[main] INFO  o.o.c.languages.PythonClientCodegen - NOTE: To enable file post-processing, 'enablePostProcessFile' must be set to `true` (--enable-post-process-file for CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as uploadApplicationLogo_request. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings uploadApplicationLogo_request=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings uploadApplicationLogo_request=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as uploadBrandThemeBackgroundImage_request. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings uploadBrandThemeBackgroundImage_request=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings uploadBrandThemeBackgroundImage_request=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as uploadBrandThemeFavicon_request. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings uploadBrandThemeFavicon_request=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings uploadBrandThemeFavicon_request=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as uploadBrandThemeLogo_request. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings uploadBrandThemeLogo_request=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings uploadBrandThemeLogo_request=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as listSubscriptionsRole_roleRef_parameter. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings listSubscriptionsRole_roleRef_parameter=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings listSubscriptionsRole_roleRef_parameter=NewModel,ModelA=NewModelA in CLI).
+[main] WARN  o.o.codegen.InlineModelResolver - allOf schema `null` containing multiple types (not model) is not supported at the moment.
+[main] WARN  o.o.codegen.InlineModelResolver - allOf schema `null` containing multiple types (not model) is not supported at the moment.
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as ApplicationFeature__links. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings ApplicationFeature__links=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings ApplicationFeature__links=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as ApplicationLayout_rule. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings ApplicationLayout_rule=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings ApplicationLayout_rule=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as ApplicationLayouts__links. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings ApplicationLayouts__links=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings ApplicationLayouts__links=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as AuthenticatorMethodPush_allOf_settings. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings AuthenticatorMethodPush_allOf_settings=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings AuthenticatorMethodPush_allOf_settings=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as AuthenticatorMethodSignedNonce_allOf_settings. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings AuthenticatorMethodSignedNonce_allOf_settings=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings AuthenticatorMethodSignedNonce_allOf_settings=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as AuthenticatorMethodTotp_allOf_settings. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings AuthenticatorMethodTotp_allOf_settings=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings AuthenticatorMethodTotp_allOf_settings=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as AuthenticatorMethodWebAuthn_allOf_settings. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings AuthenticatorMethodWebAuthn_allOf_settings=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings AuthenticatorMethodWebAuthn_allOf_settings=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as DeviceAssuranceAndroidPlatform_allOf_diskEncryptionType. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings DeviceAssuranceAndroidPlatform_allOf_diskEncryptionType=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings DeviceAssuranceAndroidPlatform_allOf_diskEncryptionType=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as DeviceAssuranceAndroidPlatform_allOf_screenLockType. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings DeviceAssuranceAndroidPlatform_allOf_screenLockType=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings DeviceAssuranceAndroidPlatform_allOf_screenLockType=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as DeviceAssuranceChromeOSPlatform_allOf_thirdPartySignalProviders. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings DeviceAssuranceChromeOSPlatform_allOf_thirdPartySignalProviders=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings DeviceAssuranceChromeOSPlatform_allOf_thirdPartySignalProviders=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as DeviceAssuranceMacOSPlatform_allOf_thirdPartySignalProviders. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings DeviceAssuranceMacOSPlatform_allOf_thirdPartySignalProviders=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings DeviceAssuranceMacOSPlatform_allOf_thirdPartySignalProviders=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as DeviceAssuranceWindowsPlatform_allOf_thirdPartySignalProviders. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings DeviceAssuranceWindowsPlatform_allOf_thirdPartySignalProviders=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings DeviceAssuranceWindowsPlatform_allOf_thirdPartySignalProviders=NewModel,ModelA=NewModelA in CLI).
+[main] WARN  o.o.codegen.InlineModelResolver - allOf schema `null` containing multiple types (not model) is not supported at the moment.
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as DomainLinks_allOf_brand. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings DomainLinks_allOf_brand=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings DomainLinks_allOf_brand=NewModel,ModelA=NewModelA in CLI).
+[main] WARN  o.o.codegen.InlineModelResolver - allOf schema `null` containing multiple types (not model) is not supported at the moment.
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as DomainLinks_allOf_certificate. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings DomainLinks_allOf_certificate=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings DomainLinks_allOf_certificate=NewModel,ModelA=NewModelA in CLI).
+[main] WARN  o.o.codegen.InlineModelResolver - allOf schema `null` containing multiple types (not model) is not supported at the moment.
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as DomainLinks_allOf_verify. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings DomainLinks_allOf_verify=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings DomainLinks_allOf_verify=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as EmailCustomization_allOf__links. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings EmailCustomization_allOf__links=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings EmailCustomization_allOf__links=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as EmailDefaultContent_allOf__links. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings EmailDefaultContent_allOf__links=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings EmailDefaultContent_allOf__links=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as EmailPreview__links. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings EmailPreview__links=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings EmailPreview__links=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as EmailTemplate__embedded. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings EmailTemplate__embedded=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings EmailTemplate__embedded=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as EmailTemplate__links. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings EmailTemplate__links=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings EmailTemplate__links=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as Error_errorCauses_inner. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings Error_errorCauses_inner=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings Error_errorCauses_inner=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as Group__links. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings Group__links=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings Group__links=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as HrefObject_hints. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings HrefObject_hints=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings HrefObject_hints=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as IamRole__links. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings IamRole__links=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings IamRole__links=NewModel,ModelA=NewModelA in CLI).
+[main] WARN  o.o.codegen.InlineModelResolver - allOf schema `null` containing multiple types (not model) is not supported at the moment.
+[main] WARN  o.o.codegen.InlineModelResolver - allOf schema `null` containing multiple types (not model) is not supported at the moment.
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as MultifactorEnrollmentPolicyAuthenticatorSettings_constraints. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings MultifactorEnrollmentPolicyAuthenticatorSettings_constraints=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings MultifactorEnrollmentPolicyAuthenticatorSettings_constraints=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as MultifactorEnrollmentPolicyAuthenticatorSettings_enroll. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings MultifactorEnrollmentPolicyAuthenticatorSettings_enroll=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings MultifactorEnrollmentPolicyAuthenticatorSettings_enroll=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as NetworkZone__links. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings NetworkZone__links=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings NetworkZone__links=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as OAuth2ScopeConsentGrant__embedded_scope. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings OAuth2ScopeConsentGrant__embedded_scope=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings OAuth2ScopeConsentGrant__embedded_scope=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as OAuth2ScopeConsentGrant__embedded. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings OAuth2ScopeConsentGrant__embedded=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings OAuth2ScopeConsentGrant__embedded=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as OAuth2ScopeConsentGrant__links. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings OAuth2ScopeConsentGrant__links=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings OAuth2ScopeConsentGrant__links=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as OrgCAPTCHASettings__links. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings OrgCAPTCHASettings__links=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings OrgCAPTCHASettings__links=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as PageRoot__embedded. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings PageRoot__embedded=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings PageRoot__embedded=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as PageRoot__links. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings PageRoot__links=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings PageRoot__links=NewModel,ModelA=NewModelA in CLI).
+[main] WARN  o.o.codegen.InlineModelResolver - allOf schema `null` containing multiple types (not model) is not supported at the moment.
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as PerClientRateLimitSettings_useCaseModeOverrides. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings PerClientRateLimitSettings_useCaseModeOverrides=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings PerClientRateLimitSettings_useCaseModeOverrides=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as Permission__links. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings Permission__links=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings Permission__links=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as PolicyContext_device. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings PolicyContext_device=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings PolicyContext_device=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as PolicyContext_risk. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings PolicyContext_risk=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings PolicyContext_risk=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as PolicyContext_user. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings PolicyContext_user=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings PolicyContext_user=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as PolicyContext_zones. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings PolicyContext_zones=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings PolicyContext_zones=NewModel,ModelA=NewModelA in CLI).
+[main] WARN  o.o.codegen.InlineModelResolver - allOf schema `null` containing multiple types (not model) is not supported at the moment.
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as PolicyMapping__links_allOf_application. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings PolicyMapping__links_allOf_application=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings PolicyMapping__links_allOf_application=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as PolicyMapping__links. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings PolicyMapping__links=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings PolicyMapping__links=NewModel,ModelA=NewModelA in CLI).
+[main] WARN  o.o.codegen.InlineModelResolver - allOf schema `null` containing multiple types (not model) is not supported at the moment.
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as ResourceSet__links. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings ResourceSet__links=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings ResourceSet__links=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as ResourceSetBindingMembers__links. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings ResourceSetBindingMembers__links=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings ResourceSetBindingMembers__links=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as ResourceSetBindingResponse__links. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings ResourceSetBindingResponse__links=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings ResourceSetBindingResponse__links=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as ResourceSetBindingRole__links. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings ResourceSetBindingRole__links=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings ResourceSetBindingRole__links=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as ResourceSetResources__links. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings ResourceSetResources__links=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings ResourceSetResources__links=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as SignInPage_allOf_widgetCustomizations. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings SignInPage_allOf_widgetCustomizations=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings SignInPage_allOf_widgetCustomizations=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as SimulatePolicyEvaluations_evaluated. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings SimulatePolicyEvaluations_evaluated=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings SimulatePolicyEvaluations_evaluated=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as SimulatePolicyEvaluations_undefined. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings SimulatePolicyEvaluations_undefined=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings SimulatePolicyEvaluations_undefined=NewModel,ModelA=NewModelA in CLI).
+[main] WARN  o.o.codegen.InlineModelResolver - allOf schema `null` containing multiple types (not model) is not supported at the moment.
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as SourceLinks_allOf_schema. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings SourceLinks_allOf_schema=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings SourceLinks_allOf_schema=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as Subscription__links. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings Subscription__links=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings Subscription__links=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as SupportedMethods_settings. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings SupportedMethods_settings=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings SupportedMethods_settings=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as UIElement_options. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings UIElement_options=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings UIElement_options=NewModel,ModelA=NewModelA in CLI).
+[main] WARN  o.o.codegen.InlineModelResolver - allOf schema `null` containing multiple types (not model) is not supported at the moment.
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as UserTypeLinks_allOf_schema. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings UserTypeLinks_allOf_schema=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings UserTypeLinks_allOf_schema=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as WellKnownAppAuthenticatorConfiguration_settings. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings WellKnownAppAuthenticatorConfiguration_settings=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings WellKnownAppAuthenticatorConfiguration_settings=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.InlineModelResolver - Inline schema created as WellKnownOrgMetadata__links. To have complete control of the model name, set the `title` field or use the modelNameMapping option (e.g. --model-name-mappings WellKnownOrgMetadata__links=NewModel,ModelA=NewModelA in CLI) or inlineSchemaNameMapping option (--inline-schema-name-mappings WellKnownOrgMetadata__links=NewModel,ModelA=NewModelA in CLI).
+[main] INFO  o.o.codegen.DefaultGenerator - Model AppUserProfile not generated since it's a free-form object
+[main] INFO  o.o.codegen.DefaultGenerator - Model ApplicationLayoutsLinksItem not generated since it's an alias to array (without property) and `generateAliasAsModel` is set to false (default)
+[main] INFO  o.o.codegen.DefaultGenerator - Model BehaviorRuleSettings not generated since it's a free-form object
+[main] INFO  o.o.codegen.DefaultGenerator - Model BrandDomains not generated since it's an alias to array (without property) and `generateAliasAsModel` is set to false (default)
+[main] INFO  o.o.codegen.DefaultGenerator - Model InlineHookPayload not generated since it's a free-form object
+[main] WARN  o.o.codegen.utils.ModelUtils - Validation 'maximum' has no effect on schema 'array'. Ignoring!
+[main] WARN  o.o.codegen.utils.ModelUtils - Validation 'maximum' has no effect on schema 'array'. Ignoring!
+[main] INFO  o.o.codegen.DefaultGenerator - Model PermissionConditions not generated since it's a free-form object
+[main] INFO  o.o.codegen.DefaultGenerator - Model PolicyRuleActions not generated since it's a free-form object
+[main] INFO  o.o.codegen.DefaultGenerator - Model ResponseLinks not generated since it's a free-form object
+[main] WARN  o.o.codegen.DefaultCodegen - More than one inline schema specified in allOf:. Only the first one is recognized. All others are ignored.
+[main] INFO  o.o.codegen.DefaultGenerator - Model SimulatePolicyResponse not generated since it's an alias to array (without property) and `generateAliasAsModel` is set to false (default)
+[main] INFO  o.o.codegen.DefaultGenerator - Model SimulateResultPolicies not generated since it's an alias to array (without property) and `generateAliasAsModel` is set to false (default)
+[main] INFO  o.o.codegen.DefaultGenerator - Model SmsTemplateTranslations not generated since it's a free-form object
+[main] INFO  o.o.codegen.DefaultGenerator - Model uploadApplicationLogo_request not generated since it's marked as unused (due to form parameters) and `skipFormModel` (global property) set to true (default)
+[main] INFO  o.o.codegen.DefaultGenerator - Model uploadBrandThemeBackgroundImage_request not generated since it's marked as unused (due to form parameters) and `skipFormModel` (global property) set to true (default)
+[main] INFO  o.o.codegen.DefaultGenerator - Model uploadBrandThemeFavicon_request not generated since it's marked as unused (due to form parameters) and `skipFormModel` (global property) set to true (default)
+[main] INFO  o.o.codegen.DefaultGenerator - Model uploadBrandThemeLogo_request not generated since it's marked as unused (due to form parameters) and `skipFormModel` (global property) set to true (default)
+[main] WARN  o.o.codegen.utils.ModelUtils - Validation 'minimum' has no effect on schema 'object'. Ignoring!
+[main] WARN  o.o.codegen.utils.ModelUtils - Validation 'uniqueItems' has no effect on schema 'string'. Ignoring!
+[main] WARN  o.o.codegen.DefaultCodegen - More than one inline schema specified in allOf:. Only the first one is recognized. All others are ignored.
+[main] WARN  o.o.c.l.AbstractPythonCodegen - Failed to lookup model in createImportMapOfSet object
+[main] WARN  o.o.c.l.AbstractPythonCodegen - Failed to lookup model in createImportMapOfSet object
+[main] WARN  o.o.c.l.AbstractPythonCodegen - Codegen property is null (e.g. map/dict of undefined type). Default to typing.Any.
+[main] WARN  o.o.c.l.AbstractPythonCodegen - Codegen property is null (e.g. map/dict of undefined type). Default to typing.Any.
+[main] WARN  o.o.c.l.AbstractPythonCodegen - Codegen property is null (e.g. map/dict of undefined type). Default to typing.Any.
+[main] WARN  o.o.c.l.AbstractPythonCodegen - Codegen property is null (e.g. map/dict of undefined type). Default to typing.Any.
+[main] WARN  o.o.c.l.AbstractPythonCodegen - Codegen property is null (e.g. map/dict of undefined type). Default to typing.Any.
+[main] WARN  o.o.c.l.AbstractPythonCodegen - Codegen property is null (e.g. map/dict of undefined type). Default to typing.Any.
+[main] WARN  o.o.c.l.AbstractPythonCodegen - Codegen property is null (e.g. map/dict of undefined type). Default to typing.Any.
+[main] WARN  o.o.c.l.AbstractPythonCodegen - Codegen property is null (e.g. map/dict of undefined type). Default to typing.Any.
+[main] WARN  o.o.c.l.AbstractPythonCodegen - Codegen property is null (e.g. map/dict of undefined type). Default to typing.Any.
+[main] WARN  o.o.c.l.AbstractPythonCodegen - Codegen property is null (e.g. map/dict of undefined type). Default to typing.Any.
+[main] WARN  o.o.c.l.AbstractPythonCodegen - Codegen property is null (e.g. map/dict of undefined type). Default to typing.Any.
+[main] WARN  o.o.c.l.AbstractPythonCodegen - Codegen property is null (e.g. map/dict of undefined type). Default to typing.Any.
+[main] WARN  o.o.c.l.AbstractPythonCodegen - Codegen property is null (e.g. map/dict of undefined type). Default to typing.Any.
+[main] WARN  o.o.c.l.AbstractPythonCodegen - Codegen property is null (e.g. map/dict of undefined type). Default to typing.Any.
+[main] WARN  o.o.c.l.AbstractPythonCodegen - Codegen property is null (e.g. map/dict of undefined type). Default to typing.Any.
+[main] WARN  o.o.c.l.AbstractPythonCodegen - Codegen property is null (e.g. map/dict of undefined type). Default to typing.Any.
+[main] WARN  o.o.c.l.AbstractPythonCodegen - Codegen property is null (e.g. map/dict of undefined type). Default to typing.Any.
+[main] WARN  o.o.c.l.AbstractPythonCodegen - Codegen property is null (e.g. map/dict of undefined type). Default to typing.Any.
+[main] WARN  o.o.c.l.AbstractPythonCodegen - Codegen property is null (e.g. map/dict of undefined type). Default to typing.Any.
+[main] WARN  o.o.c.l.AbstractPythonCodegen - Codegen property is null (e.g. map/dict of undefined type). Default to typing.Any.
+[main] WARN  o.o.c.l.AbstractPythonCodegen - Codegen property is null (e.g. map/dict of undefined type). Default to typing.Any.
+[main] WARN  o.o.c.l.AbstractPythonCodegen - Codegen property is null (e.g. map/dict of undefined type). Default to typing.Any.
+[main] WARN  o.o.c.l.AbstractPythonCodegen - Codegen property is null (e.g. map/dict of undefined type). Default to typing.Any.
+[main] WARN  o.o.c.l.AbstractPythonCodegen - Codegen property is null (e.g. map/dict of undefined type). Default to typing.Any.

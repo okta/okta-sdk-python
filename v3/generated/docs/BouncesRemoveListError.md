@@ -1,0 +1,30 @@
+# BouncesRemoveListError
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**email_address** | **str** |  | [optional] 
+**reason** | **str** |  | [optional] 
+
+## Example
+
+```python
+from openapi_client.models.bounces_remove_list_error import BouncesRemoveListError
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of BouncesRemoveListError from a JSON string
+bounces_remove_list_error_instance = BouncesRemoveListError.from_json(json)
+# print the JSON string representation of the object
+print(BouncesRemoveListError.to_json())
+
+# convert the object into a dict
+bounces_remove_list_error_dict = bounces_remove_list_error_instance.to_dict()
+# create an instance of BouncesRemoveListError from a dict
+bounces_remove_list_error_form_dict = bounces_remove_list_error.from_dict(bounces_remove_list_error_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
