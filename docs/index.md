@@ -39,9 +39,9 @@ See reference documentation:
 ## RetryProvider
 The `RetryProvider` provides Okta specific handling of rate limits.  
 
-See reference documentation:
-
 ![RetryProvider](./images/RetryProvider.png)
+
+See reference documentation:
 
 - [Check your rate limits with Okta's rate limit headers](https://developer.okta.com/docs/reference/rl-best-practices/#check-your-rate-limits-with-okta-s-rate-limit-headers)
 - [API rate limits](https://help.okta.com/en-us/content/topics/security/api-rate-limits.htm)
