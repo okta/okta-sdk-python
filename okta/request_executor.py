@@ -1,5 +1,6 @@
 import asyncio
 from okta.http_client import HTTPClient
+from okta.oauth_client_secret import OAuthClientSecret
 from okta.user_agent import UserAgent
 from okta.oauth import OAuth
 from okta.api_response import OktaAPIResponse
@@ -60,9 +61,13 @@ class RequestExecutor:
             self._default_headers['Authorization'] = (
                 f"{token_type} {self._config['client']['token']}"
             )
-        else:
+        elif token_type == "PrivateKey":
             # OAuth
             self._oauth = OAuth(self, self._config)
+        elif token_type == "ClientSecret":
+            self._oauth = OAuthClientSecret(self, self._config)
+        else:
+            raise ValueError("Unknown authorization mode")
 
         http_client_impl = http_client or HTTPClient
         self._http_client = http_client_impl({
@@ -125,7 +130,7 @@ class RequestExecutor:
             url = self._config["client"]["orgUrl"] + url
 
         # OAuth
-        if self._authorization_mode == "PrivateKey" and not oauth:
+        if self._authorization_mode in ("PrivateKey", "ClientSecret") and not oauth:
             # check if access token exists
             if self._cache.contains("OKTA_ACCESS_TOKEN"):
                 access_token = self._cache.get("OKTA_ACCESS_TOKEN")
