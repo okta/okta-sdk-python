@@ -1,5 +1,8 @@
-from okta.constants import FINDING_OKTA_APP_CRED, FINDING_OKTA_DOMAIN, \
-    GET_OKTA_API_TOKEN
+from okta.constants import (
+    FINDING_OKTA_APP_CRED,
+    FINDING_OKTA_DOMAIN,
+    GET_OKTA_API_TOKEN,
+)
 
 ERROR_MESSAGE_ORG_URL_MISSING = (
     "Your Okta URL is missing. You can copy "
@@ -61,6 +64,11 @@ ERROR_MESSAGE_CLIENT_ID_DEFAULT = (
 ERROR_MESSAGE_SCOPES_PK_MISSING = (
     "When using authorization mode 'PrivateKey', you must supply "
     "'okta.client.scopes' and 'okta.client.privateKey'"
+)
+
+ERROR_MESSAGE_SCOPES_CLIENT_SECRET_MISSING = (
+    "When using authorization mode 'ClientSecret', you must supply "
+    "'okta.client.scopes' and 'okta.client.ClientSecret'"
 )
 
 ERROR_MESSAGE_429_MISSING_DATE_X_RESET = (
