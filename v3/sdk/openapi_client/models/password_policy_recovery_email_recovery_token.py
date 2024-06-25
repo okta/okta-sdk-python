@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +25,7 @@ class PasswordPolicyRecoveryEmailRecoveryToken(BaseModel):
     """
     PasswordPolicyRecoveryEmailRecoveryToken
     """ # noqa: E501
-    token_lifetime_minutes: Optional[StrictInt] = Field(default=None, alias="tokenLifetimeMinutes")
+    token_lifetime_minutes: Optional[StrictInt] = Field(None, alias="tokenLifetimeMinutes")
     __properties: ClassVar[List[str]] = ["tokenLifetimeMinutes"]
 
     model_config = ConfigDict(

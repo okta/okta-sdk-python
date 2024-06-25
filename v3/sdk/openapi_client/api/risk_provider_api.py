@@ -17,8 +17,11 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr
 from typing_extensions import Annotated
+from pydantic import Field, StrictStr
+
+from typing import List
+
 from openapi_client.models.risk_provider import RiskProvider
 
 from openapi_client.api_client import ApiClient, RequestSerialized
@@ -323,7 +326,7 @@ class RiskProviderApi:
     @validate_call
     def delete_risk_provider(
         self,
-        risk_provider_id: Annotated[StrictStr, Field(description="`id` of the Risk Provider object")],
+        risk_provider_id: Annotated[StrictStr, Field(..., description="`id` of the Risk Provider object")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -393,7 +396,7 @@ class RiskProviderApi:
     @validate_call
     def delete_risk_provider_with_http_info(
         self,
-        risk_provider_id: Annotated[StrictStr, Field(description="`id` of the Risk Provider object")],
+        risk_provider_id: Annotated[StrictStr, Field(..., description="`id` of the Risk Provider object")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -463,7 +466,7 @@ class RiskProviderApi:
     @validate_call
     def delete_risk_provider_without_preload_content(
         self,
-        risk_provider_id: Annotated[StrictStr, Field(description="`id` of the Risk Provider object")],
+        risk_provider_id: Annotated[StrictStr, Field(..., description="`id` of the Risk Provider object")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -591,7 +594,7 @@ class RiskProviderApi:
     @validate_call
     def get_risk_provider(
         self,
-        risk_provider_id: Annotated[StrictStr, Field(description="`id` of the Risk Provider object")],
+        risk_provider_id: Annotated[StrictStr, Field(..., description="`id` of the Risk Provider object")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -661,7 +664,7 @@ class RiskProviderApi:
     @validate_call
     def get_risk_provider_with_http_info(
         self,
-        risk_provider_id: Annotated[StrictStr, Field(description="`id` of the Risk Provider object")],
+        risk_provider_id: Annotated[StrictStr, Field(..., description="`id` of the Risk Provider object")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -731,7 +734,7 @@ class RiskProviderApi:
     @validate_call
     def get_risk_provider_without_preload_content(
         self,
-        risk_provider_id: Annotated[StrictStr, Field(description="`id` of the Risk Provider object")],
+        risk_provider_id: Annotated[StrictStr, Field(..., description="`id` of the Risk Provider object")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1109,7 +1112,7 @@ class RiskProviderApi:
     @validate_call
     def replace_risk_provider(
         self,
-        risk_provider_id: Annotated[StrictStr, Field(description="`id` of the Risk Provider object")],
+        risk_provider_id: Annotated[StrictStr, Field(..., description="`id` of the Risk Provider object")],
         instance: RiskProvider,
         _request_timeout: Union[
             None,
@@ -1184,7 +1187,7 @@ class RiskProviderApi:
     @validate_call
     def replace_risk_provider_with_http_info(
         self,
-        risk_provider_id: Annotated[StrictStr, Field(description="`id` of the Risk Provider object")],
+        risk_provider_id: Annotated[StrictStr, Field(..., description="`id` of the Risk Provider object")],
         instance: RiskProvider,
         _request_timeout: Union[
             None,
@@ -1259,7 +1262,7 @@ class RiskProviderApi:
     @validate_call
     def replace_risk_provider_without_preload_content(
         self,
-        risk_provider_id: Annotated[StrictStr, Field(description="`id` of the Risk Provider object")],
+        risk_provider_id: Annotated[StrictStr, Field(..., description="`id` of the Risk Provider object")],
         instance: RiskProvider,
         _request_timeout: Union[
             None,

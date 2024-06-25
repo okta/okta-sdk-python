@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.per_client_rate_limit_mode import PerClientRateLimitMode
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,9 +26,9 @@ class PerClientRateLimitSettingsUseCaseModeOverrides(BaseModel):
     """
     A map of Per-Client Rate Limit Use Case to the applicable PerClientRateLimitMode. Overrides the `defaultMode` property for the specified use cases.
     """ # noqa: E501
-    login_page: Optional[PerClientRateLimitMode] = Field(default=None, alias="LOGIN_PAGE")
-    oauth2_authorize: Optional[PerClientRateLimitMode] = Field(default=None, alias="OAUTH2_AUTHORIZE")
-    oie_app_intent: Optional[PerClientRateLimitMode] = Field(default=None, alias="OIE_APP_INTENT")
+    login_page: Optional[PerClientRateLimitMode] = Field(None, alias="LOGIN_PAGE")
+    oauth2_authorize: Optional[PerClientRateLimitMode] = Field(None, alias="OAUTH2_AUTHORIZE")
+    oie_app_intent: Optional[PerClientRateLimitMode] = Field(None, alias="OIE_APP_INTENT")
     __properties: ClassVar[List[str]] = ["LOGIN_PAGE", "OAUTH2_AUTHORIZE", "OIE_APP_INTENT"]
 
     model_config = ConfigDict(

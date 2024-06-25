@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.group_rule_group_assignment import GroupRuleGroupAssignment
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,7 +26,7 @@ class GroupRuleAction(BaseModel):
     """
     GroupRuleAction
     """ # noqa: E501
-    assign_user_to_groups: Optional[GroupRuleGroupAssignment] = Field(default=None, alias="assignUserToGroups")
+    assign_user_to_groups: Optional[GroupRuleGroupAssignment] = Field(None, alias="assignUserToGroups")
     __properties: ClassVar[List[str]] = ["assignUserToGroups"]
 
     model_config = ConfigDict(

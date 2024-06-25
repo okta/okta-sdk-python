@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.screen_lock_type import ScreenLockType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,7 +26,7 @@ class DeviceAssuranceAndroidPlatformAllOfScreenLockType(BaseModel):
     """
     DeviceAssuranceAndroidPlatformAllOfScreenLockType
     """ # noqa: E501
-    include: Optional[List[ScreenLockType]] = None
+    include: Optional[conlist(ScreenLockType)] = None
     __properties: ClassVar[List[str]] = ["include"]
 
     model_config = ConfigDict(

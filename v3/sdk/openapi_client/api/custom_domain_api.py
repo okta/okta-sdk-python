@@ -17,8 +17,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr
 from typing_extensions import Annotated
+from pydantic import Field, StrictStr
+
 from openapi_client.models.domain_certificate import DomainCertificate
 from openapi_client.models.domain_list_response import DomainListResponse
 from openapi_client.models.domain_response import DomainResponse
@@ -45,7 +46,7 @@ class CustomDomainApi:
     @validate_call
     def delete_custom_domain(
         self,
-        domain_id: Annotated[StrictStr, Field(description="`id` of the Domain")],
+        domain_id: Annotated[StrictStr, Field(..., description="`id` of the Domain")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -115,7 +116,7 @@ class CustomDomainApi:
     @validate_call
     def delete_custom_domain_with_http_info(
         self,
-        domain_id: Annotated[StrictStr, Field(description="`id` of the Domain")],
+        domain_id: Annotated[StrictStr, Field(..., description="`id` of the Domain")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -185,7 +186,7 @@ class CustomDomainApi:
     @validate_call
     def delete_custom_domain_without_preload_content(
         self,
-        domain_id: Annotated[StrictStr, Field(description="`id` of the Domain")],
+        domain_id: Annotated[StrictStr, Field(..., description="`id` of the Domain")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -313,7 +314,7 @@ class CustomDomainApi:
     @validate_call
     def get_custom_domain(
         self,
-        domain_id: Annotated[StrictStr, Field(description="`id` of the Domain")],
+        domain_id: Annotated[StrictStr, Field(..., description="`id` of the Domain")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -383,7 +384,7 @@ class CustomDomainApi:
     @validate_call
     def get_custom_domain_with_http_info(
         self,
-        domain_id: Annotated[StrictStr, Field(description="`id` of the Domain")],
+        domain_id: Annotated[StrictStr, Field(..., description="`id` of the Domain")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -453,7 +454,7 @@ class CustomDomainApi:
     @validate_call
     def get_custom_domain_without_preload_content(
         self,
-        domain_id: Annotated[StrictStr, Field(description="`id` of the Domain")],
+        domain_id: Annotated[StrictStr, Field(..., description="`id` of the Domain")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -831,7 +832,7 @@ class CustomDomainApi:
     @validate_call
     def replace_custom_domain(
         self,
-        domain_id: Annotated[StrictStr, Field(description="`id` of the Domain")],
+        domain_id: Annotated[StrictStr, Field(..., description="`id` of the Domain")],
         update_domain: UpdateDomain,
         _request_timeout: Union[
             None,
@@ -906,7 +907,7 @@ class CustomDomainApi:
     @validate_call
     def replace_custom_domain_with_http_info(
         self,
-        domain_id: Annotated[StrictStr, Field(description="`id` of the Domain")],
+        domain_id: Annotated[StrictStr, Field(..., description="`id` of the Domain")],
         update_domain: UpdateDomain,
         _request_timeout: Union[
             None,
@@ -981,7 +982,7 @@ class CustomDomainApi:
     @validate_call
     def replace_custom_domain_without_preload_content(
         self,
-        domain_id: Annotated[StrictStr, Field(description="`id` of the Domain")],
+        domain_id: Annotated[StrictStr, Field(..., description="`id` of the Domain")],
         update_domain: UpdateDomain,
         _request_timeout: Union[
             None,
@@ -1130,7 +1131,7 @@ class CustomDomainApi:
     @validate_call
     def upsert_certificate(
         self,
-        domain_id: Annotated[StrictStr, Field(description="`id` of the Domain")],
+        domain_id: Annotated[StrictStr, Field(..., description="`id` of the Domain")],
         certificate: DomainCertificate,
         _request_timeout: Union[
             None,
@@ -1205,7 +1206,7 @@ class CustomDomainApi:
     @validate_call
     def upsert_certificate_with_http_info(
         self,
-        domain_id: Annotated[StrictStr, Field(description="`id` of the Domain")],
+        domain_id: Annotated[StrictStr, Field(..., description="`id` of the Domain")],
         certificate: DomainCertificate,
         _request_timeout: Union[
             None,
@@ -1280,7 +1281,7 @@ class CustomDomainApi:
     @validate_call
     def upsert_certificate_without_preload_content(
         self,
-        domain_id: Annotated[StrictStr, Field(description="`id` of the Domain")],
+        domain_id: Annotated[StrictStr, Field(..., description="`id` of the Domain")],
         certificate: DomainCertificate,
         _request_timeout: Union[
             None,
@@ -1429,7 +1430,7 @@ class CustomDomainApi:
     @validate_call
     def verify_domain(
         self,
-        domain_id: Annotated[StrictStr, Field(description="`id` of the Domain")],
+        domain_id: Annotated[StrictStr, Field(..., description="`id` of the Domain")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1499,7 +1500,7 @@ class CustomDomainApi:
     @validate_call
     def verify_domain_with_http_info(
         self,
-        domain_id: Annotated[StrictStr, Field(description="`id` of the Domain")],
+        domain_id: Annotated[StrictStr, Field(..., description="`id` of the Domain")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1569,7 +1570,7 @@ class CustomDomainApi:
     @validate_call
     def verify_domain_without_preload_content(
         self,
-        domain_id: Annotated[StrictStr, Field(description="`id` of the Domain")],
+        domain_id: Annotated[StrictStr, Field(..., description="`id` of the Domain")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],

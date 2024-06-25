@@ -18,9 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.risk_event_subject import RiskEventSubject
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,9 +26,9 @@ class RiskEvent(BaseModel):
     """
     RiskEvent
     """ # noqa: E501
-    expires_at: Optional[datetime] = Field(default=None, description="Timestamp at which the event expires (expressed as a UTC time zone using ISO 8601 format: yyyy-MM-dd`T`HH:mm:ss.SSS`Z`). If this optional field is not included, Okta automatically expires the event 24 hours after the event is consumed.", alias="expiresAt")
-    subjects: List[RiskEventSubject] = Field(description="List of Risk Event Subjects")
-    timestamp: Optional[datetime] = Field(default=None, description="Timestamp of when the event is produced (expressed as a UTC time zone using ISO 8601 format: yyyy-MM-dd`T`HH:mm:ss.SSS`Z`)")
+    expires_at: Optional[datetime] = Field(None, alias="expiresAt", description="Timestamp at which the event expires (expressed as a UTC time zone using ISO 8601 format: yyyy-MM-dd`T`HH:mm:ss.SSS`Z`). If this optional field is not included, Okta automatically expires the event 24 hours after the event is consumed.")
+    subjects: conlist(RiskEventSubject) = Field(..., description="List of Risk Event Subjects")
+    timestamp: Optional[datetime] = Field(None, description="Timestamp of when the event is produced (expressed as a UTC time zone using ISO 8601 format: yyyy-MM-dd`T`HH:mm:ss.SSS`Z`)")
     __properties: ClassVar[List[str]] = ["expiresAt", "subjects", "timestamp"]
 
     model_config = ConfigDict(

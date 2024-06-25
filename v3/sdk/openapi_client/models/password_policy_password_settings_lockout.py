@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,10 +25,10 @@ class PasswordPolicyPasswordSettingsLockout(BaseModel):
     """
     PasswordPolicyPasswordSettingsLockout
     """ # noqa: E501
-    auto_unlock_minutes: Optional[StrictInt] = Field(default=None, alias="autoUnlockMinutes")
-    max_attempts: Optional[StrictInt] = Field(default=None, alias="maxAttempts")
-    show_lockout_failures: Optional[StrictBool] = Field(default=None, alias="showLockoutFailures")
-    user_lockout_notification_channels: Optional[List[StrictStr]] = Field(default=None, alias="userLockoutNotificationChannels")
+    auto_unlock_minutes: Optional[StrictInt] = Field(None, alias="autoUnlockMinutes")
+    max_attempts: Optional[StrictInt] = Field(None, alias="maxAttempts")
+    show_lockout_failures: Optional[StrictBool] = Field(None, alias="showLockoutFailures")
+    user_lockout_notification_channels: Optional[conlist(StrictStr)] = Field(None, alias="userLockoutNotificationChannels")
     __properties: ClassVar[List[str]] = ["autoUnlockMinutes", "maxAttempts", "showLockoutFailures", "userLockoutNotificationChannels"]
 
     model_config = ConfigDict(

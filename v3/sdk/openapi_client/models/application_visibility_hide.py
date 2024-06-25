@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +25,7 @@ class ApplicationVisibilityHide(BaseModel):
     """
     ApplicationVisibilityHide
     """ # noqa: E501
-    i_os: Optional[StrictBool] = Field(default=None, alias="iOS")
+    i_os: Optional[StrictBool] = Field(None, alias="iOS")
     web: Optional[StrictBool] = None
     __properties: ClassVar[List[str]] = ["iOS", "web"]
 

@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.email_default_content_all_of_links import EmailDefaultContentAllOfLinks
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,9 +26,9 @@ class EmailDefaultContent(BaseModel):
     """
     EmailDefaultContent
     """ # noqa: E501
-    body: StrictStr = Field(description="The email's HTML body. May contain [variable references](https://velocity.apache.org/engine/1.7/user-guide.html#references).")
-    subject: StrictStr = Field(description="The email's subject. May contain [variable references](https://velocity.apache.org/engine/1.7/user-guide.html#references).")
-    links: Optional[EmailDefaultContentAllOfLinks] = Field(default=None, alias="_links")
+    body: StrictStr = Field(..., description="The email's HTML body. May contain [variable references](https://velocity.apache.org/engine/1.7/user-guide.html#references).")
+    subject: StrictStr = Field(..., description="The email's subject. May contain [variable references](https://velocity.apache.org/engine/1.7/user-guide.html#references).")
+    links: Optional[EmailDefaultContentAllOfLinks] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["body", "subject", "_links"]
 
     model_config = ConfigDict(

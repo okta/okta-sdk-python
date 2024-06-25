@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.o_auth_grant_type import OAuthGrantType
 from openapi_client.models.o_auth_response_type import OAuthResponseType
 from openapi_client.models.open_id_connect_application_consent_method import OpenIdConnectApplicationConsentMethod
@@ -38,22 +36,22 @@ class OpenIdConnectApplicationSettingsClient(BaseModel):
     application_type: Optional[OpenIdConnectApplicationType] = None
     client_uri: Optional[StrictStr] = None
     consent_method: Optional[OpenIdConnectApplicationConsentMethod] = None
-    dpop_bound_access_tokens: Optional[StrictBool] = Field(default=False, description="Indicates that the client application uses Demonstrating Proof-of-Possession (DPoP) for token requests. If `true`, the authorization server rejects token requests from this client that don't contain the DPoP header.")
-    frontchannel_logout_session_required: Optional[StrictBool] = Field(default=None, description="Include user session details.")
-    frontchannel_logout_uri: Optional[StrictStr] = Field(default=None, description="URL where Okta sends the logout request.")
-    grant_types: Optional[List[OAuthGrantType]] = None
+    dpop_bound_access_tokens: Optional[StrictBool] = Field(False, description="Indicates that the client application uses Demonstrating Proof-of-Possession (DPoP) for token requests. If `true`, the authorization server rejects token requests from this client that don't contain the DPoP header.")
+    frontchannel_logout_session_required: Optional[StrictBool] = Field(None, description="Include user session details.")
+    frontchannel_logout_uri: Optional[StrictStr] = Field(None, description="URL where Okta sends the logout request.")
+    grant_types: Optional[conlist(OAuthGrantType)] = None
     idp_initiated_login: Optional[OpenIdConnectApplicationIdpInitiatedLogin] = None
     initiate_login_uri: Optional[StrictStr] = None
     issuer_mode: Optional[OpenIdConnectApplicationIssuerMode] = None
     jwks: Optional[OpenIdConnectApplicationSettingsClientKeys] = None
-    jwks_uri: Optional[StrictStr] = Field(default=None, description="URL string that references a JSON Web Key Set for validating JWTs presented to Okta.")
+    jwks_uri: Optional[StrictStr] = Field(None, description="URL string that references a JSON Web Key Set for validating JWTs presented to Okta.")
     logo_uri: Optional[StrictStr] = None
-    participate_slo: Optional[StrictBool] = Field(default=None, description="Allows the app to participate in front-channel single logout.")
+    participate_slo: Optional[StrictBool] = Field(None, description="Allows the app to participate in front-channel single logout.")
     policy_uri: Optional[StrictStr] = None
-    post_logout_redirect_uris: Optional[List[StrictStr]] = None
-    redirect_uris: Optional[List[StrictStr]] = None
+    post_logout_redirect_uris: Optional[conlist(StrictStr)] = None
+    redirect_uris: Optional[conlist(StrictStr)] = None
     refresh_token: Optional[OpenIdConnectApplicationSettingsRefreshToken] = None
-    response_types: Optional[List[OAuthResponseType]] = None
+    response_types: Optional[conlist(OAuthResponseType)] = None
     tos_uri: Optional[StrictStr] = None
     wildcard_redirect: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["application_type", "client_uri", "consent_method", "dpop_bound_access_tokens", "frontchannel_logout_session_required", "frontchannel_logout_uri", "grant_types", "idp_initiated_login", "initiate_login_uri", "issuer_mode", "jwks", "jwks_uri", "logo_uri", "participate_slo", "policy_uri", "post_logout_redirect_uris", "redirect_uris", "refresh_token", "response_types", "tos_uri", "wildcard_redirect"]

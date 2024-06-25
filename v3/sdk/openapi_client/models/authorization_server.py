@@ -18,9 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.authorization_server_credentials import AuthorizationServerCredentials
 from openapi_client.models.issuer_mode import IssuerMode
 from openapi_client.models.lifecycle_status import LifecycleStatus
@@ -32,17 +29,17 @@ class AuthorizationServer(BaseModel):
     """
     AuthorizationServer
     """ # noqa: E501
-    audiences: Optional[List[StrictStr]] = None
+    audiences: Optional[conlist(StrictStr)] = None
     created: Optional[datetime] = None
     credentials: Optional[AuthorizationServerCredentials] = None
     description: Optional[StrictStr] = None
     id: Optional[StrictStr] = None
     issuer: Optional[StrictStr] = None
-    issuer_mode: Optional[IssuerMode] = Field(default=None, alias="issuerMode")
-    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
+    issuer_mode: Optional[IssuerMode] = Field(None, alias="issuerMode")
+    last_updated: Optional[datetime] = Field(None, alias="lastUpdated")
     name: Optional[StrictStr] = None
     status: Optional[LifecycleStatus] = None
-    links: Optional[LinksSelf] = Field(default=None, alias="_links")
+    links: Optional[LinksSelf] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["audiences", "created", "credentials", "description", "id", "issuer", "issuerMode", "lastUpdated", "name", "status", "_links"]
 
     model_config = ConfigDict(

@@ -18,9 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.links_self import LinksSelf
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,11 +26,11 @@ class ThreatInsightConfiguration(BaseModel):
     """
     ThreatInsightConfiguration
     """ # noqa: E501
-    action: StrictStr = Field(description="Specifies how Okta responds to authentication requests from suspicious IP addresses")
-    created: Optional[datetime] = Field(default=None, description="Timestamp when the ThreatInsight Configuration object was created")
-    exclude_zones: Optional[List[StrictStr]] = Field(default=None, description="Accepts a list of [Network Zone](/openapi/okta-management/management/tag/NetworkZone/) IDs. IPs in the excluded network zones aren't logged or blocked. This ensures that traffic from known, trusted IPs isn't accidentally logged or blocked.", alias="excludeZones")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the ThreatInsight Configuration object was last updated", alias="lastUpdated")
-    links: Optional[LinksSelf] = Field(default=None, alias="_links")
+    action: StrictStr = Field(..., description="Specifies how Okta responds to authentication requests from suspicious IP addresses")
+    created: Optional[datetime] = Field(None, description="Timestamp when the ThreatInsight Configuration object was created")
+    exclude_zones: Optional[conlist(StrictStr)] = Field(None, alias="excludeZones", description="Accepts a list of [Network Zone](/openapi/okta-management/management/tag/NetworkZone/) IDs. IPs in the excluded network zones aren't logged or blocked. This ensures that traffic from known, trusted IPs isn't accidentally logged or blocked.")
+    last_updated: Optional[datetime] = Field(None, alias="lastUpdated", description="Timestamp when the ThreatInsight Configuration object was last updated")
+    links: Optional[LinksSelf] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["action", "created", "excludeZones", "lastUpdated", "_links"]
 
     @field_validator('action')

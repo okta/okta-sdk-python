@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.linked_object_details import LinkedObjectDetails
 from openapi_client.models.links_self import LinksSelf
 from typing import Optional, Set
@@ -31,7 +29,7 @@ class LinkedObject(BaseModel):
     """ # noqa: E501
     associated: Optional[LinkedObjectDetails] = None
     primary: Optional[LinkedObjectDetails] = None
-    links: Optional[LinksSelf] = Field(default=None, alias="_links")
+    links: Optional[LinksSelf] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["associated", "primary", "_links"]
 
     model_config = ConfigDict(

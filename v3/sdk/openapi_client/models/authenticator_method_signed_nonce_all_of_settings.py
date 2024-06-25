@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.authenticator_method_algorithm import AuthenticatorMethodAlgorithm
 from openapi_client.models.push_method_key_protection import PushMethodKeyProtection
 from openapi_client.models.show_sign_in_with_ov import ShowSignInWithOV
@@ -30,9 +28,9 @@ class AuthenticatorMethodSignedNonceAllOfSettings(BaseModel):
     """
     AuthenticatorMethodSignedNonceAllOfSettings
     """ # noqa: E501
-    algorithms: Optional[List[AuthenticatorMethodAlgorithm]] = None
-    key_protection: Optional[PushMethodKeyProtection] = Field(default=None, alias="keyProtection")
-    show_sign_in_with_ov: Optional[ShowSignInWithOV] = Field(default=None, alias="showSignInWithOV")
+    algorithms: Optional[conlist(AuthenticatorMethodAlgorithm)] = None
+    key_protection: Optional[PushMethodKeyProtection] = Field(None, alias="keyProtection")
+    show_sign_in_with_ov: Optional[ShowSignInWithOV] = Field(None, alias="showSignInWithOV")
     __properties: ClassVar[List[str]] = ["algorithms", "keyProtection", "showSignInWithOV"]
 
     model_config = ConfigDict(

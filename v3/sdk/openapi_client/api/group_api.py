@@ -17,9 +17,11 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictBool, StrictInt, StrictStr
-from typing import Optional
 from typing_extensions import Annotated
+from pydantic import Field, StrictBool, StrictInt, StrictStr
+
+from typing import List, Optional
+
 from openapi_client.models.application import Application
 from openapi_client.models.assign_group_owner_request_body import AssignGroupOwnerRequestBody
 from openapi_client.models.group import Group
@@ -48,7 +50,7 @@ class GroupApi:
     @validate_call
     def activate_group_rule(
         self,
-        group_rule_id: Annotated[StrictStr, Field(description="The `id` of the group rule")],
+        group_rule_id: Annotated[StrictStr, Field(..., description="The `id` of the group rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -118,7 +120,7 @@ class GroupApi:
     @validate_call
     def activate_group_rule_with_http_info(
         self,
-        group_rule_id: Annotated[StrictStr, Field(description="The `id` of the group rule")],
+        group_rule_id: Annotated[StrictStr, Field(..., description="The `id` of the group rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -188,7 +190,7 @@ class GroupApi:
     @validate_call
     def activate_group_rule_without_preload_content(
         self,
-        group_rule_id: Annotated[StrictStr, Field(description="The `id` of the group rule")],
+        group_rule_id: Annotated[StrictStr, Field(..., description="The `id` of the group rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -316,7 +318,7 @@ class GroupApi:
     @validate_call
     def assign_group_owner(
         self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         assign_group_owner_request_body: AssignGroupOwnerRequestBody,
         _request_timeout: Union[
             None,
@@ -391,7 +393,7 @@ class GroupApi:
     @validate_call
     def assign_group_owner_with_http_info(
         self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         assign_group_owner_request_body: AssignGroupOwnerRequestBody,
         _request_timeout: Union[
             None,
@@ -466,7 +468,7 @@ class GroupApi:
     @validate_call
     def assign_group_owner_without_preload_content(
         self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         assign_group_owner_request_body: AssignGroupOwnerRequestBody,
         _request_timeout: Union[
             None,
@@ -615,7 +617,7 @@ class GroupApi:
     @validate_call
     def assign_user_to_group(
         self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         user_id: StrictStr,
         _request_timeout: Union[
             None,
@@ -689,7 +691,7 @@ class GroupApi:
     @validate_call
     def assign_user_to_group_with_http_info(
         self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         user_id: StrictStr,
         _request_timeout: Union[
             None,
@@ -763,7 +765,7 @@ class GroupApi:
     @validate_call
     def assign_user_to_group_without_preload_content(
         self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         user_id: StrictStr,
         _request_timeout: Union[
             None,
@@ -1460,7 +1462,7 @@ class GroupApi:
     @validate_call
     def deactivate_group_rule(
         self,
-        group_rule_id: Annotated[StrictStr, Field(description="The `id` of the group rule")],
+        group_rule_id: Annotated[StrictStr, Field(..., description="The `id` of the group rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1530,7 +1532,7 @@ class GroupApi:
     @validate_call
     def deactivate_group_rule_with_http_info(
         self,
-        group_rule_id: Annotated[StrictStr, Field(description="The `id` of the group rule")],
+        group_rule_id: Annotated[StrictStr, Field(..., description="The `id` of the group rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1600,7 +1602,7 @@ class GroupApi:
     @validate_call
     def deactivate_group_rule_without_preload_content(
         self,
-        group_rule_id: Annotated[StrictStr, Field(description="The `id` of the group rule")],
+        group_rule_id: Annotated[StrictStr, Field(..., description="The `id` of the group rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1728,7 +1730,7 @@ class GroupApi:
     @validate_call
     def delete_group(
         self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1798,7 +1800,7 @@ class GroupApi:
     @validate_call
     def delete_group_with_http_info(
         self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1868,7 +1870,7 @@ class GroupApi:
     @validate_call
     def delete_group_without_preload_content(
         self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1996,8 +1998,8 @@ class GroupApi:
     @validate_call
     def delete_group_owner(
         self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
-        owner_id: Annotated[StrictStr, Field(description="The `id` of the group owner")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
+        owner_id: Annotated[StrictStr, Field(..., description="The `id` of the group owner")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2070,8 +2072,8 @@ class GroupApi:
     @validate_call
     def delete_group_owner_with_http_info(
         self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
-        owner_id: Annotated[StrictStr, Field(description="The `id` of the group owner")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
+        owner_id: Annotated[StrictStr, Field(..., description="The `id` of the group owner")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2144,8 +2146,8 @@ class GroupApi:
     @validate_call
     def delete_group_owner_without_preload_content(
         self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
-        owner_id: Annotated[StrictStr, Field(description="The `id` of the group owner")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
+        owner_id: Annotated[StrictStr, Field(..., description="The `id` of the group owner")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2279,7 +2281,7 @@ class GroupApi:
     @validate_call
     def delete_group_rule(
         self,
-        group_rule_id: Annotated[StrictStr, Field(description="The `id` of the group rule")],
+        group_rule_id: Annotated[StrictStr, Field(..., description="The `id` of the group rule")],
         remove_users: Annotated[Optional[StrictBool], Field(description="Indicates whether to keep or remove users from groups assigned by this rule.")] = None,
         _request_timeout: Union[
             None,
@@ -2353,7 +2355,7 @@ class GroupApi:
     @validate_call
     def delete_group_rule_with_http_info(
         self,
-        group_rule_id: Annotated[StrictStr, Field(description="The `id` of the group rule")],
+        group_rule_id: Annotated[StrictStr, Field(..., description="The `id` of the group rule")],
         remove_users: Annotated[Optional[StrictBool], Field(description="Indicates whether to keep or remove users from groups assigned by this rule.")] = None,
         _request_timeout: Union[
             None,
@@ -2427,7 +2429,7 @@ class GroupApi:
     @validate_call
     def delete_group_rule_without_preload_content(
         self,
-        group_rule_id: Annotated[StrictStr, Field(description="The `id` of the group rule")],
+        group_rule_id: Annotated[StrictStr, Field(..., description="The `id` of the group rule")],
         remove_users: Annotated[Optional[StrictBool], Field(description="Indicates whether to keep or remove users from groups assigned by this rule.")] = None,
         _request_timeout: Union[
             None,
@@ -2564,7 +2566,7 @@ class GroupApi:
     @validate_call
     def get_group(
         self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2634,7 +2636,7 @@ class GroupApi:
     @validate_call
     def get_group_with_http_info(
         self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2704,7 +2706,7 @@ class GroupApi:
     @validate_call
     def get_group_without_preload_content(
         self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2832,7 +2834,7 @@ class GroupApi:
     @validate_call
     def get_group_rule(
         self,
-        group_rule_id: Annotated[StrictStr, Field(description="The `id` of the group rule")],
+        group_rule_id: Annotated[StrictStr, Field(..., description="The `id` of the group rule")],
         expand: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -2906,7 +2908,7 @@ class GroupApi:
     @validate_call
     def get_group_rule_with_http_info(
         self,
-        group_rule_id: Annotated[StrictStr, Field(description="The `id` of the group rule")],
+        group_rule_id: Annotated[StrictStr, Field(..., description="The `id` of the group rule")],
         expand: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -2980,7 +2982,7 @@ class GroupApi:
     @validate_call
     def get_group_rule_without_preload_content(
         self,
-        group_rule_id: Annotated[StrictStr, Field(description="The `id` of the group rule")],
+        group_rule_id: Annotated[StrictStr, Field(..., description="The `id` of the group rule")],
         expand: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -3117,7 +3119,7 @@ class GroupApi:
     @validate_call
     def list_assigned_applications_for_group(
         self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         after: Annotated[Optional[StrictStr], Field(description="Specifies the pagination cursor for the next page of apps")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Specifies the number of app results for a page")] = None,
         _request_timeout: Union[
@@ -3195,7 +3197,7 @@ class GroupApi:
     @validate_call
     def list_assigned_applications_for_group_with_http_info(
         self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         after: Annotated[Optional[StrictStr], Field(description="Specifies the pagination cursor for the next page of apps")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Specifies the number of app results for a page")] = None,
         _request_timeout: Union[
@@ -3273,7 +3275,7 @@ class GroupApi:
     @validate_call
     def list_assigned_applications_for_group_without_preload_content(
         self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         after: Annotated[Optional[StrictStr], Field(description="Specifies the pagination cursor for the next page of apps")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Specifies the number of app results for a page")] = None,
         _request_timeout: Union[
@@ -3419,7 +3421,7 @@ class GroupApi:
     @validate_call
     def list_group_owners(
         self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         filter: Annotated[Optional[StrictStr], Field(description="SCIM Filter expression for group owners. Allows to filter owners by type.")] = None,
         after: Annotated[Optional[StrictStr], Field(description="Specifies the pagination cursor for the next page of owners")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Specifies the number of owner results in a page")] = None,
@@ -3501,7 +3503,7 @@ class GroupApi:
     @validate_call
     def list_group_owners_with_http_info(
         self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         filter: Annotated[Optional[StrictStr], Field(description="SCIM Filter expression for group owners. Allows to filter owners by type.")] = None,
         after: Annotated[Optional[StrictStr], Field(description="Specifies the pagination cursor for the next page of owners")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Specifies the number of owner results in a page")] = None,
@@ -3583,7 +3585,7 @@ class GroupApi:
     @validate_call
     def list_group_owners_without_preload_content(
         self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         filter: Annotated[Optional[StrictStr], Field(description="SCIM Filter expression for group owners. Allows to filter owners by type.")] = None,
         after: Annotated[Optional[StrictStr], Field(description="Specifies the pagination cursor for the next page of owners")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Specifies the number of owner results in a page")] = None,
@@ -4056,7 +4058,7 @@ class GroupApi:
     @validate_call
     def list_group_users(
         self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         after: Annotated[Optional[StrictStr], Field(description="Specifies the pagination cursor for the next page of users")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Specifies the number of user results in a page")] = None,
         _request_timeout: Union[
@@ -4134,7 +4136,7 @@ class GroupApi:
     @validate_call
     def list_group_users_with_http_info(
         self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         after: Annotated[Optional[StrictStr], Field(description="Specifies the pagination cursor for the next page of users")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Specifies the number of user results in a page")] = None,
         _request_timeout: Union[
@@ -4212,7 +4214,7 @@ class GroupApi:
     @validate_call
     def list_group_users_without_preload_content(
         self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         after: Annotated[Optional[StrictStr], Field(description="Specifies the pagination cursor for the next page of users")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Specifies the number of user results in a page")] = None,
         _request_timeout: Union[
@@ -4744,7 +4746,7 @@ class GroupApi:
     @validate_call
     def replace_group(
         self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         group: Group,
         _request_timeout: Union[
             None,
@@ -4819,7 +4821,7 @@ class GroupApi:
     @validate_call
     def replace_group_with_http_info(
         self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         group: Group,
         _request_timeout: Union[
             None,
@@ -4894,7 +4896,7 @@ class GroupApi:
     @validate_call
     def replace_group_without_preload_content(
         self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         group: Group,
         _request_timeout: Union[
             None,
@@ -5043,7 +5045,7 @@ class GroupApi:
     @validate_call
     def replace_group_rule(
         self,
-        group_rule_id: Annotated[StrictStr, Field(description="The `id` of the group rule")],
+        group_rule_id: Annotated[StrictStr, Field(..., description="The `id` of the group rule")],
         group_rule: GroupRule,
         _request_timeout: Union[
             None,
@@ -5118,7 +5120,7 @@ class GroupApi:
     @validate_call
     def replace_group_rule_with_http_info(
         self,
-        group_rule_id: Annotated[StrictStr, Field(description="The `id` of the group rule")],
+        group_rule_id: Annotated[StrictStr, Field(..., description="The `id` of the group rule")],
         group_rule: GroupRule,
         _request_timeout: Union[
             None,
@@ -5193,7 +5195,7 @@ class GroupApi:
     @validate_call
     def replace_group_rule_without_preload_content(
         self,
-        group_rule_id: Annotated[StrictStr, Field(description="The `id` of the group rule")],
+        group_rule_id: Annotated[StrictStr, Field(..., description="The `id` of the group rule")],
         group_rule: GroupRule,
         _request_timeout: Union[
             None,
@@ -5342,7 +5344,7 @@ class GroupApi:
     @validate_call
     def unassign_user_from_group(
         self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         user_id: StrictStr,
         _request_timeout: Union[
             None,
@@ -5416,7 +5418,7 @@ class GroupApi:
     @validate_call
     def unassign_user_from_group_with_http_info(
         self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         user_id: StrictStr,
         _request_timeout: Union[
             None,
@@ -5490,7 +5492,7 @@ class GroupApi:
     @validate_call
     def unassign_user_from_group_without_preload_content(
         self,
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         user_id: StrictStr,
         _request_timeout: Union[
             None,

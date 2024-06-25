@@ -18,9 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from importlib import import_module
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional, Union
 from openapi_client.models.links_self import LinksSelf
 from openapi_client.models.platform import Platform
 from typing import Optional, Set
@@ -38,14 +35,14 @@ class DeviceAssurance(BaseModel):
     """
     DeviceAssurance
     """ # noqa: E501
-    created_by: Optional[StrictStr] = Field(default=None, alias="createdBy")
-    created_date: Optional[StrictStr] = Field(default=None, alias="createdDate")
+    created_by: Optional[StrictStr] = Field(None, alias="createdBy")
+    created_date: Optional[StrictStr] = Field(None, alias="createdDate")
     id: Optional[StrictStr] = None
-    last_updated_by: Optional[StrictStr] = Field(default=None, alias="lastUpdatedBy")
-    last_updated_date: Optional[StrictStr] = Field(default=None, alias="lastUpdatedDate")
-    name: Optional[StrictStr] = Field(default=None, description="Display name of the Device Assurance Policy")
+    last_updated_by: Optional[StrictStr] = Field(None, alias="lastUpdatedBy")
+    last_updated_date: Optional[StrictStr] = Field(None, alias="lastUpdatedDate")
+    name: Optional[StrictStr] = Field(None, description="Display name of the Device Assurance Policy")
     platform: Optional[Platform] = None
-    links: Optional[LinksSelf] = Field(default=None, alias="_links")
+    links: Optional[LinksSelf] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["createdBy", "createdDate", "id", "lastUpdatedBy", "lastUpdatedDate", "name", "platform", "_links"]
 
     model_config = ConfigDict(

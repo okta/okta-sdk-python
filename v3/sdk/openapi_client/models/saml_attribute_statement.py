@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,12 +25,12 @@ class SamlAttributeStatement(BaseModel):
     """
     SamlAttributeStatement
     """ # noqa: E501
-    filter_type: Optional[StrictStr] = Field(default=None, alias="filterType")
-    filter_value: Optional[StrictStr] = Field(default=None, alias="filterValue")
+    filter_type: Optional[StrictStr] = Field(None, alias="filterType")
+    filter_value: Optional[StrictStr] = Field(None, alias="filterValue")
     name: Optional[StrictStr] = None
     namespace: Optional[StrictStr] = None
     type: Optional[StrictStr] = None
-    values: Optional[List[StrictStr]] = None
+    values: Optional[conlist(StrictStr)] = None
     __properties: ClassVar[List[str]] = ["filterType", "filterValue", "name", "namespace", "type", "values"]
 
     model_config = ConfigDict(

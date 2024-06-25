@@ -17,9 +17,11 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
-from typing import Optional
 from typing_extensions import Annotated
+from pydantic import Field, StrictInt, StrictStr
+
+from typing import List, Optional
+
 from openapi_client.models.network_zone import NetworkZone
 
 from openapi_client.api_client import ApiClient, RequestSerialized
@@ -43,7 +45,7 @@ class NetworkZoneApi:
     @validate_call
     def activate_network_zone(
         self,
-        zone_id: Annotated[StrictStr, Field(description="`id` of the Network Zone")],
+        zone_id: Annotated[StrictStr, Field(..., description="`id` of the Network Zone")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -113,7 +115,7 @@ class NetworkZoneApi:
     @validate_call
     def activate_network_zone_with_http_info(
         self,
-        zone_id: Annotated[StrictStr, Field(description="`id` of the Network Zone")],
+        zone_id: Annotated[StrictStr, Field(..., description="`id` of the Network Zone")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -183,7 +185,7 @@ class NetworkZoneApi:
     @validate_call
     def activate_network_zone_without_preload_content(
         self,
-        zone_id: Annotated[StrictStr, Field(description="`id` of the Network Zone")],
+        zone_id: Annotated[StrictStr, Field(..., description="`id` of the Network Zone")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -592,7 +594,7 @@ class NetworkZoneApi:
     @validate_call
     def deactivate_network_zone(
         self,
-        zone_id: Annotated[StrictStr, Field(description="`id` of the Network Zone")],
+        zone_id: Annotated[StrictStr, Field(..., description="`id` of the Network Zone")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -662,7 +664,7 @@ class NetworkZoneApi:
     @validate_call
     def deactivate_network_zone_with_http_info(
         self,
-        zone_id: Annotated[StrictStr, Field(description="`id` of the Network Zone")],
+        zone_id: Annotated[StrictStr, Field(..., description="`id` of the Network Zone")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -732,7 +734,7 @@ class NetworkZoneApi:
     @validate_call
     def deactivate_network_zone_without_preload_content(
         self,
-        zone_id: Annotated[StrictStr, Field(description="`id` of the Network Zone")],
+        zone_id: Annotated[StrictStr, Field(..., description="`id` of the Network Zone")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -860,7 +862,7 @@ class NetworkZoneApi:
     @validate_call
     def delete_network_zone(
         self,
-        zone_id: Annotated[StrictStr, Field(description="`id` of the Network Zone")],
+        zone_id: Annotated[StrictStr, Field(..., description="`id` of the Network Zone")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -930,7 +932,7 @@ class NetworkZoneApi:
     @validate_call
     def delete_network_zone_with_http_info(
         self,
-        zone_id: Annotated[StrictStr, Field(description="`id` of the Network Zone")],
+        zone_id: Annotated[StrictStr, Field(..., description="`id` of the Network Zone")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1000,7 +1002,7 @@ class NetworkZoneApi:
     @validate_call
     def delete_network_zone_without_preload_content(
         self,
-        zone_id: Annotated[StrictStr, Field(description="`id` of the Network Zone")],
+        zone_id: Annotated[StrictStr, Field(..., description="`id` of the Network Zone")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1128,7 +1130,7 @@ class NetworkZoneApi:
     @validate_call
     def get_network_zone(
         self,
-        zone_id: Annotated[StrictStr, Field(description="`id` of the Network Zone")],
+        zone_id: Annotated[StrictStr, Field(..., description="`id` of the Network Zone")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1198,7 +1200,7 @@ class NetworkZoneApi:
     @validate_call
     def get_network_zone_with_http_info(
         self,
-        zone_id: Annotated[StrictStr, Field(description="`id` of the Network Zone")],
+        zone_id: Annotated[StrictStr, Field(..., description="`id` of the Network Zone")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1268,7 +1270,7 @@ class NetworkZoneApi:
     @validate_call
     def get_network_zone_without_preload_content(
         self,
-        zone_id: Annotated[StrictStr, Field(description="`id` of the Network Zone")],
+        zone_id: Annotated[StrictStr, Field(..., description="`id` of the Network Zone")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1697,7 +1699,7 @@ class NetworkZoneApi:
     @validate_call
     def replace_network_zone(
         self,
-        zone_id: Annotated[StrictStr, Field(description="`id` of the Network Zone")],
+        zone_id: Annotated[StrictStr, Field(..., description="`id` of the Network Zone")],
         zone: NetworkZone,
         _request_timeout: Union[
             None,
@@ -1772,7 +1774,7 @@ class NetworkZoneApi:
     @validate_call
     def replace_network_zone_with_http_info(
         self,
-        zone_id: Annotated[StrictStr, Field(description="`id` of the Network Zone")],
+        zone_id: Annotated[StrictStr, Field(..., description="`id` of the Network Zone")],
         zone: NetworkZone,
         _request_timeout: Union[
             None,
@@ -1847,7 +1849,7 @@ class NetworkZoneApi:
     @validate_call
     def replace_network_zone_without_preload_content(
         self,
-        zone_id: Annotated[StrictStr, Field(description="`id` of the Network Zone")],
+        zone_id: Annotated[StrictStr, Field(..., description="`id` of the Network Zone")],
         zone: NetworkZone,
         _request_timeout: Union[
             None,

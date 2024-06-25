@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.protocol_endpoint_binding import ProtocolEndpointBinding
 from openapi_client.models.protocol_endpoint_type import ProtocolEndpointType
 from typing import Optional, Set

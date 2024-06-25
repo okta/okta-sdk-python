@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.email_template_touch_point_variant import EmailTemplateTouchPointVariant
 from openapi_client.models.end_user_dashboard_touch_point_variant import EndUserDashboardTouchPointVariant
 from openapi_client.models.error_page_touch_point_variant import ErrorPageTouchPointVariant
@@ -33,20 +31,20 @@ class ThemeResponse(BaseModel):
     """
     ThemeResponse
     """ # noqa: E501
-    background_image: Optional[StrictStr] = Field(default=None, alias="backgroundImage")
-    email_template_touch_point_variant: Optional[EmailTemplateTouchPointVariant] = Field(default=None, alias="emailTemplateTouchPointVariant")
-    end_user_dashboard_touch_point_variant: Optional[EndUserDashboardTouchPointVariant] = Field(default=None, alias="endUserDashboardTouchPointVariant")
-    error_page_touch_point_variant: Optional[ErrorPageTouchPointVariant] = Field(default=None, alias="errorPageTouchPointVariant")
+    background_image: Optional[StrictStr] = Field(None, alias="backgroundImage")
+    email_template_touch_point_variant: Optional[EmailTemplateTouchPointVariant] = Field(None, alias="emailTemplateTouchPointVariant")
+    end_user_dashboard_touch_point_variant: Optional[EndUserDashboardTouchPointVariant] = Field(None, alias="endUserDashboardTouchPointVariant")
+    error_page_touch_point_variant: Optional[ErrorPageTouchPointVariant] = Field(None, alias="errorPageTouchPointVariant")
     favicon: Optional[StrictStr] = None
     id: Optional[StrictStr] = None
-    loading_page_touch_point_variant: Optional[LoadingPageTouchPointVariant] = Field(default=None, alias="loadingPageTouchPointVariant")
+    loading_page_touch_point_variant: Optional[LoadingPageTouchPointVariant] = Field(None, alias="loadingPageTouchPointVariant")
     logo: Optional[StrictStr] = None
-    primary_color_contrast_hex: Optional[StrictStr] = Field(default=None, alias="primaryColorContrastHex")
-    primary_color_hex: Optional[StrictStr] = Field(default=None, alias="primaryColorHex")
-    secondary_color_contrast_hex: Optional[StrictStr] = Field(default=None, alias="secondaryColorContrastHex")
-    secondary_color_hex: Optional[StrictStr] = Field(default=None, alias="secondaryColorHex")
-    sign_in_page_touch_point_variant: Optional[SignInPageTouchPointVariant] = Field(default=None, alias="signInPageTouchPointVariant")
-    links: Optional[LinksSelf] = Field(default=None, alias="_links")
+    primary_color_contrast_hex: Optional[StrictStr] = Field(None, alias="primaryColorContrastHex")
+    primary_color_hex: Optional[StrictStr] = Field(None, alias="primaryColorHex")
+    secondary_color_contrast_hex: Optional[StrictStr] = Field(None, alias="secondaryColorContrastHex")
+    secondary_color_hex: Optional[StrictStr] = Field(None, alias="secondaryColorHex")
+    sign_in_page_touch_point_variant: Optional[SignInPageTouchPointVariant] = Field(None, alias="signInPageTouchPointVariant")
+    links: Optional[LinksSelf] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["backgroundImage", "emailTemplateTouchPointVariant", "endUserDashboardTouchPointVariant", "errorPageTouchPointVariant", "favicon", "id", "loadingPageTouchPointVariant", "logo", "primaryColorContrastHex", "primaryColorHex", "secondaryColorContrastHex", "secondaryColorHex", "signInPageTouchPointVariant", "_links"]
 
     model_config = ConfigDict(

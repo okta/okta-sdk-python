@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.authentication_provider import AuthenticationProvider
 from openapi_client.models.password_credential import PasswordCredential
 from openapi_client.models.recovery_question_credential import RecoveryQuestionCredential

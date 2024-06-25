@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.enabled_pages_type import EnabledPagesType
 from openapi_client.models.org_captcha_settings_links import OrgCAPTCHASettingsLinks
 from typing import Optional, Set
@@ -29,9 +27,9 @@ class OrgCAPTCHASettings(BaseModel):
     """
     
     """ # noqa: E501
-    captcha_id: Optional[StrictStr] = Field(default=None, description="The unique key of the associated CAPTCHA instance", alias="captchaId")
-    enabled_pages: Optional[List[EnabledPagesType]] = Field(default=None, description="An array of pages that have CAPTCHA enabled", alias="enabledPages")
-    links: Optional[OrgCAPTCHASettingsLinks] = Field(default=None, alias="_links")
+    captcha_id: Optional[StrictStr] = Field(None, alias="captchaId", description="The unique key of the associated CAPTCHA instance")
+    enabled_pages: Optional[conlist(EnabledPagesType)] = Field(None, alias="enabledPages", description="An array of pages that have CAPTCHA enabled")
+    links: Optional[OrgCAPTCHASettingsLinks] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["captchaId", "enabledPages", "_links"]
 
     model_config = ConfigDict(

@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.profile_mapping_property_push_status import ProfileMappingPropertyPushStatus
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,8 +26,8 @@ class ProfileMappingProperty(BaseModel):
     """
     A target property, in string form, that maps to a valid [JSON Schema Draft](https://tools.ietf.org/html/draft-zyp-json-schema-04) document.
     """ # noqa: E501
-    expression: Optional[StrictStr] = Field(default=None, description="Combination or single source properties that are mapped to the target property")
-    push_status: Optional[ProfileMappingPropertyPushStatus] = Field(default=None, alias="pushStatus")
+    expression: Optional[StrictStr] = Field(None, description="Combination or single source properties that are mapped to the target property")
+    push_status: Optional[ProfileMappingPropertyPushStatus] = Field(None, alias="pushStatus")
     __properties: ClassVar[List[str]] = ["expression", "pushStatus"]
 
     model_config = ConfigDict(

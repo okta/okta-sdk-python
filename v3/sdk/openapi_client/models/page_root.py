@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.page_root_embedded import PageRootEmbedded
 from openapi_client.models.page_root_links import PageRootLinks
 from typing import Optional, Set
@@ -29,8 +27,8 @@ class PageRoot(BaseModel):
     """
     PageRoot
     """ # noqa: E501
-    embedded: Optional[PageRootEmbedded] = Field(default=None, alias="_embedded")
-    links: Optional[PageRootLinks] = Field(default=None, alias="_links")
+    embedded: Optional[PageRootEmbedded] = Field(None, alias="_embedded")
+    links: Optional[PageRootLinks] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["_embedded", "_links"]
 
     model_config = ConfigDict(

@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.event_subscription_type import EventSubscriptionType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,7 +26,7 @@ class EventSubscriptions(BaseModel):
     """
     EventSubscriptions
     """ # noqa: E501
-    items: Optional[List[StrictStr]] = None
+    items: Optional[conlist(StrictStr)] = None
     type: Optional[EventSubscriptionType] = None
     __properties: ClassVar[List[str]] = ["items", "type"]
 

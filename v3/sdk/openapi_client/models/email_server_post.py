@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,12 +25,12 @@ class EmailServerPost(BaseModel):
     """
     EmailServerPost
     """ # noqa: E501
-    alias: StrictStr = Field(description="A name to identify this configuration")
-    enabled: Optional[StrictBool] = Field(default=None, description="True if and only if all email traffic should be routed through this SMTP Server")
-    host: StrictStr = Field(description="The address of the SMTP Server")
-    port: StrictInt = Field(description="The port number of the SMTP Server")
-    username: StrictStr = Field(description="The username to use with your SMTP Server")
-    password: StrictStr = Field(description="The password to use with your SMTP server")
+    alias: StrictStr = Field(..., description="A name to identify this configuration")
+    enabled: Optional[StrictBool] = Field(None, description="True if and only if all email traffic should be routed through this SMTP Server")
+    host: StrictStr = Field(..., description="The address of the SMTP Server")
+    port: StrictInt = Field(..., description="The port number of the SMTP Server")
+    username: StrictStr = Field(..., description="The username to use with your SMTP Server")
+    password: StrictStr = Field(..., description="The password to use with your SMTP server")
     __properties: ClassVar[List[str]] = ["alias", "enabled", "host", "port", "username", "password"]
 
     model_config = ConfigDict(

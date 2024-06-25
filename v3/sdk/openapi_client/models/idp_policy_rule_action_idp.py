@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.idp_policy_rule_action_match_criteria import IdpPolicyRuleActionMatchCriteria
 from openapi_client.models.idp_policy_rule_action_provider import IdpPolicyRuleActionProvider
 from openapi_client.models.idp_selection_type import IdpSelectionType
@@ -30,9 +28,9 @@ class IdpPolicyRuleActionIdp(BaseModel):
     """
     IdpPolicyRuleActionIdp
     """ # noqa: E501
-    providers: Optional[List[IdpPolicyRuleActionProvider]] = Field(default=None, description="List of configured Identity Providers that a given Rule can route to. Ability to define multiple providers is a part of the Okta Identity Engine. This allows users to choose a Provider when they sign in. Contact support for information on the Identity Engine.")
-    idp_selection_type: Optional[IdpSelectionType] = Field(default=None, alias="idpSelectionType")
-    match_criteria: Optional[List[IdpPolicyRuleActionMatchCriteria]] = Field(default=None, description="Required if `idpSelectionType` is set to `DYNAMIC`", alias="matchCriteria")
+    providers: Optional[conlist(IdpPolicyRuleActionProvider)] = Field(None, description="List of configured Identity Providers that a given Rule can route to. Ability to define multiple providers is a part of the Okta Identity Engine. This allows users to choose a Provider when they sign in. Contact support for information on the Identity Engine.")
+    idp_selection_type: Optional[IdpSelectionType] = Field(None, alias="idpSelectionType")
+    match_criteria: Optional[conlist(IdpPolicyRuleActionMatchCriteria)] = Field(None, alias="matchCriteria", description="Required if `idpSelectionType` is set to `DYNAMIC`")
     __properties: ClassVar[List[str]] = ["providers", "idpSelectionType", "matchCriteria"]
 
     model_config = ConfigDict(

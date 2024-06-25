@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.group_owner_type import GroupOwnerType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,7 +26,7 @@ class AssignGroupOwnerRequestBody(BaseModel):
     """
     AssignGroupOwnerRequestBody
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="The `id` of the group owner")
+    id: Optional[StrictStr] = Field(None, description="The `id` of the group owner")
     type: Optional[GroupOwnerType] = None
     __properties: ClassVar[List[str]] = ["id", "type"]
 

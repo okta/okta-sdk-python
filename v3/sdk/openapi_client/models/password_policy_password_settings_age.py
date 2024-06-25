@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,10 +25,10 @@ class PasswordPolicyPasswordSettingsAge(BaseModel):
     """
     PasswordPolicyPasswordSettingsAge
     """ # noqa: E501
-    expire_warn_days: Optional[StrictInt] = Field(default=None, alias="expireWarnDays")
-    history_count: Optional[StrictInt] = Field(default=None, alias="historyCount")
-    max_age_days: Optional[StrictInt] = Field(default=None, alias="maxAgeDays")
-    min_age_minutes: Optional[StrictInt] = Field(default=None, alias="minAgeMinutes")
+    expire_warn_days: Optional[StrictInt] = Field(None, alias="expireWarnDays")
+    history_count: Optional[StrictInt] = Field(None, alias="historyCount")
+    max_age_days: Optional[StrictInt] = Field(None, alias="maxAgeDays")
+    min_age_minutes: Optional[StrictInt] = Field(None, alias="minAgeMinutes")
     __properties: ClassVar[List[str]] = ["expireWarnDays", "historyCount", "maxAgeDays", "minAgeMinutes"]
 
     model_config = ConfigDict(

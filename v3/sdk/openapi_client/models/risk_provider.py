@@ -18,10 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from typing_extensions import Annotated
 from openapi_client.models.links_self import LinksSelf
 from openapi_client.models.risk_provider_action import RiskProviderAction
 from typing import Optional, Set
@@ -31,13 +27,13 @@ class RiskProvider(BaseModel):
     """
     RiskProvider
     """ # noqa: E501
-    action: RiskProviderAction
-    client_id: StrictStr = Field(description="The ID of the [OAuth service app](https://developer.okta.com/docs/guides/implement-oauth-for-okta-serviceapp/main/#create-a-service-app-and-grant-scopes) that is used to send risk events to Okta", alias="clientId")
-    created: Optional[datetime] = Field(default=None, description="Timestamp when the Risk Provider object was created")
-    id: StrictStr = Field(description="The ID of the Risk Provider object")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the Risk Provider object was last updated", alias="lastUpdated")
-    name: Annotated[str, Field(strict=True, max_length=50)] = Field(description="Name of the risk provider")
-    links: LinksSelf = Field(alias="_links")
+    action: RiskProviderAction = Field(...)
+    client_id: StrictStr = Field(..., alias="clientId", description="The ID of the [OAuth service app](https://developer.okta.com/docs/guides/implement-oauth-for-okta-serviceapp/main/#create-a-service-app-and-grant-scopes) that is used to send risk events to Okta")
+    created: Optional[datetime] = Field(None, description="Timestamp when the Risk Provider object was created")
+    id: StrictStr = Field(..., description="The ID of the Risk Provider object")
+    last_updated: Optional[datetime] = Field(None, alias="lastUpdated", description="Timestamp when the Risk Provider object was last updated")
+    name: constr(strict=True, max_length=50) = Field(..., description="Name of the risk provider")
+    links: LinksSelf = Field(..., alias="_links")
     __properties: ClassVar[List[str]] = ["action", "clientId", "created", "id", "lastUpdated", "name", "_links"]
 
     model_config = ConfigDict(

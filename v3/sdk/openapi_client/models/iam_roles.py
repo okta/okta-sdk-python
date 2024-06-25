@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.iam_role import IamRole
 from openapi_client.models.links_next import LinksNext
 from typing import Optional, Set
@@ -29,8 +27,8 @@ class IamRoles(BaseModel):
     """
     IamRoles
     """ # noqa: E501
-    roles: Optional[List[IamRole]] = None
-    links: Optional[LinksNext] = Field(default=None, alias="_links")
+    roles: Optional[conlist(IamRole)] = None
+    links: Optional[LinksNext] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["roles", "_links"]
 
     model_config = ConfigDict(

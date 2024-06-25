@@ -18,10 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from importlib import import_module
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional, Union
 from openapi_client.models.lifecycle_status import LifecycleStatus
 from openapi_client.models.policy_rule_type import PolicyRuleType
 from typing import Optional, Set
@@ -40,13 +36,13 @@ class PolicyRule(BaseModel):
     """
     PolicyRule
     """ # noqa: E501
-    created: Optional[datetime] = Field(default=None, description="Timestamp when the rule was created")
-    id: Optional[StrictStr] = Field(default=None, description="Identifier for the rule")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the rule was last modified", alias="lastUpdated")
-    name: Optional[StrictStr] = Field(default=None, description="Name of the rule")
-    priority: Optional[StrictInt] = Field(default=None, description="Priority of the rule")
+    created: Optional[datetime] = Field(None, description="Timestamp when the rule was created")
+    id: Optional[StrictStr] = Field(None, description="Identifier for the rule")
+    last_updated: Optional[datetime] = Field(None, alias="lastUpdated", description="Timestamp when the rule was last modified")
+    name: Optional[StrictStr] = Field(None, description="Name of the rule")
+    priority: Optional[StrictInt] = Field(None, description="Priority of the rule")
     status: Optional[LifecycleStatus] = None
-    system: Optional[StrictBool] = Field(default=False, description="Specifies whether Okta created the Policy Rule (`system=true`). You can't delete Policy Rules that have `system` set to `true`.")
+    system: Optional[StrictBool] = Field(False, description="Specifies whether Okta created the Policy Rule (`system=true`). You can't delete Policy Rules that have `system` set to `true`.")
     type: Optional[PolicyRuleType] = None
     __properties: ClassVar[List[str]] = ["created", "id", "lastUpdated", "name", "priority", "status", "system", "type"]
 

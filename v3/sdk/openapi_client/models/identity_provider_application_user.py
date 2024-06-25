@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.links_self import LinksSelf
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,12 +27,12 @@ class IdentityProviderApplicationUser(BaseModel):
     IdentityProviderApplicationUser
     """ # noqa: E501
     created: Optional[StrictStr] = None
-    external_id: Optional[StrictStr] = Field(default=None, alias="externalId")
+    external_id: Optional[StrictStr] = Field(None, alias="externalId")
     id: Optional[StrictStr] = None
-    last_updated: Optional[StrictStr] = Field(default=None, alias="lastUpdated")
+    last_updated: Optional[StrictStr] = Field(None, alias="lastUpdated")
     profile: Optional[Dict[str, Dict[str, Any]]] = None
-    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, alias="_embedded")
-    links: Optional[LinksSelf] = Field(default=None, alias="_links")
+    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(None, alias="_embedded")
+    links: Optional[LinksSelf] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["created", "externalId", "id", "lastUpdated", "profile", "_embedded", "_links"]
 
     model_config = ConfigDict(

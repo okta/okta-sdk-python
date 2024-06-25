@@ -18,9 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from importlib import import_module
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional, Union
 from openapi_client.models.provisioning_connection_auth_scheme import ProvisioningConnectionAuthScheme
 from typing import Optional, Set
 from typing_extensions import Self
@@ -35,7 +32,7 @@ class ProvisioningConnectionProfile(BaseModel):
     """
     The profile used to configure the connection method of authentication and the credentials. Currently, token-based and OAuth 2.0-based authentication are supported. 
     """ # noqa: E501
-    auth_scheme: Optional[ProvisioningConnectionAuthScheme] = Field(default=None, alias="authScheme")
+    auth_scheme: Optional[ProvisioningConnectionAuthScheme] = Field(None, alias="authScheme")
     __properties: ClassVar[List[str]] = ["authScheme"]
 
     model_config = ConfigDict(

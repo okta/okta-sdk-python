@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.email_domain_dns_record import EmailDomainDNSRecord
 from openapi_client.models.email_domain_status import EmailDomainStatus
 from typing import Optional, Set
@@ -29,12 +27,12 @@ class EmailDomainResponse(BaseModel):
     """
     EmailDomainResponse
     """ # noqa: E501
-    dns_validation_records: Optional[List[EmailDomainDNSRecord]] = Field(default=None, alias="dnsValidationRecords")
+    dns_validation_records: Optional[conlist(EmailDomainDNSRecord)] = Field(None, alias="dnsValidationRecords")
     domain: Optional[StrictStr] = None
     id: Optional[StrictStr] = None
-    validation_status: Optional[EmailDomainStatus] = Field(default=None, alias="validationStatus")
-    display_name: StrictStr = Field(alias="displayName")
-    user_name: StrictStr = Field(alias="userName")
+    validation_status: Optional[EmailDomainStatus] = Field(None, alias="validationStatus")
+    display_name: StrictStr = Field(..., alias="displayName")
+    user_name: StrictStr = Field(..., alias="userName")
     __properties: ClassVar[List[str]] = ["displayName", "userName"]
 
     model_config = ConfigDict(

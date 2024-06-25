@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.authenticator_method_constraint import AuthenticatorMethodConstraint
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,8 +26,8 @@ class SsprPrimaryRequirement(BaseModel):
     """
     Defines the authenticators permitted for the initial authentication step of password recovery
     """ # noqa: E501
-    methods: Optional[List[StrictStr]] = Field(default=None, description="Authenticator methods allowed for the initial authentication step of password recovery")
-    method_constraints: Optional[List[AuthenticatorMethodConstraint]] = Field(default=None, description="Constraints on the values specified in the `methods` array. Specifying a constraint limits methods to specific authenticator(s). Currently, Google OTP is the only accepted constraint.", alias="methodConstraints")
+    methods: Optional[conlist(StrictStr)] = Field(None, description="Authenticator methods allowed for the initial authentication step of password recovery")
+    method_constraints: Optional[conlist(AuthenticatorMethodConstraint)] = Field(None, alias="methodConstraints", description="Constraints on the values specified in the `methods` array. Specifying a constraint limits methods to specific authenticator(s). Currently, Google OTP is the only accepted constraint.")
     __properties: ClassVar[List[str]] = ["methods", "methodConstraints"]
 
     @field_validator('methods')

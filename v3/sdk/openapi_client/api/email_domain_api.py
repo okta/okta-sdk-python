@@ -17,9 +17,11 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr, field_validator
-from typing import List, Optional
 from typing_extensions import Annotated
+from pydantic import Field, StrictStr, conlist, validator
+
+from typing import List, Optional
+
 from openapi_client.models.email_domain import EmailDomain
 from openapi_client.models.email_domain_response import EmailDomainResponse
 from openapi_client.models.email_domain_response_with_embedded import EmailDomainResponseWithEmbedded
@@ -47,7 +49,7 @@ class EmailDomainApi:
     def create_email_domain(
         self,
         email_domain: EmailDomain,
-        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
+        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -123,7 +125,7 @@ class EmailDomainApi:
     def create_email_domain_with_http_info(
         self,
         email_domain: EmailDomain,
-        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
+        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -199,7 +201,7 @@ class EmailDomainApi:
     def create_email_domain_without_preload_content(
         self,
         email_domain: EmailDomain,
-        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
+        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -352,7 +354,7 @@ class EmailDomainApi:
     def delete_email_domain(
         self,
         email_domain_id: StrictStr,
-        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
+        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -427,7 +429,7 @@ class EmailDomainApi:
     def delete_email_domain_with_http_info(
         self,
         email_domain_id: StrictStr,
-        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
+        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -502,7 +504,7 @@ class EmailDomainApi:
     def delete_email_domain_without_preload_content(
         self,
         email_domain_id: StrictStr,
-        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
+        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -641,7 +643,7 @@ class EmailDomainApi:
     def get_email_domain(
         self,
         email_domain_id: StrictStr,
-        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
+        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -715,7 +717,7 @@ class EmailDomainApi:
     def get_email_domain_with_http_info(
         self,
         email_domain_id: StrictStr,
-        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
+        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -789,7 +791,7 @@ class EmailDomainApi:
     def get_email_domain_without_preload_content(
         self,
         email_domain_id: StrictStr,
-        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
+        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -926,7 +928,7 @@ class EmailDomainApi:
     @validate_call
     def list_email_domains(
         self,
-        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
+        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -995,7 +997,7 @@ class EmailDomainApi:
     @validate_call
     def list_email_domains_with_http_info(
         self,
-        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
+        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1064,7 +1066,7 @@ class EmailDomainApi:
     @validate_call
     def list_email_domains_without_preload_content(
         self,
-        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
+        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1196,7 +1198,7 @@ class EmailDomainApi:
         self,
         email_domain_id: StrictStr,
         update_email_domain: UpdateEmailDomain,
-        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
+        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1275,7 +1277,7 @@ class EmailDomainApi:
         self,
         email_domain_id: StrictStr,
         update_email_domain: UpdateEmailDomain,
-        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
+        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1354,7 +1356,7 @@ class EmailDomainApi:
         self,
         email_domain_id: StrictStr,
         update_email_domain: UpdateEmailDomain,
-        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
+        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],

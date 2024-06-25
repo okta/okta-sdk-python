@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +25,7 @@ class IdentityProviderProperties(BaseModel):
     """
     IdentityProviderProperties
     """ # noqa: E501
-    additional_amr: Optional[List[StrictStr]] = Field(default=None, alias="additionalAmr")
+    additional_amr: Optional[conlist(StrictStr)] = Field(None, alias="additionalAmr")
     __properties: ClassVar[List[str]] = ["additionalAmr"]
 
     model_config = ConfigDict(

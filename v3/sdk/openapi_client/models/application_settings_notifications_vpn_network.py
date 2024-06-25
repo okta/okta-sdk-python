@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,8 +26,8 @@ class ApplicationSettingsNotificationsVpnNetwork(BaseModel):
     ApplicationSettingsNotificationsVpnNetwork
     """ # noqa: E501
     connection: Optional[StrictStr] = None
-    exclude: Optional[List[StrictStr]] = None
-    include: Optional[List[StrictStr]] = None
+    exclude: Optional[conlist(StrictStr)] = None
+    include: Optional[conlist(StrictStr)] = None
     __properties: ClassVar[List[str]] = ["connection", "exclude", "include"]
 
     model_config = ConfigDict(

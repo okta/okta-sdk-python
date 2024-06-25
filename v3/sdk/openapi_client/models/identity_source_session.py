@@ -18,9 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.identity_source_session_status import IdentitySourceSessionStatus
 from typing import Optional, Set
 from typing_extensions import Self
@@ -31,9 +28,9 @@ class IdentitySourceSession(BaseModel):
     """ # noqa: E501
     created: Optional[datetime] = None
     id: Optional[StrictStr] = None
-    identity_source_id: Optional[StrictStr] = Field(default=None, alias="identitySourceId")
-    import_type: Optional[StrictStr] = Field(default=None, alias="importType")
-    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
+    identity_source_id: Optional[StrictStr] = Field(None, alias="identitySourceId")
+    import_type: Optional[StrictStr] = Field(None, alias="importType")
+    last_updated: Optional[datetime] = Field(None, alias="lastUpdated")
     status: Optional[IdentitySourceSessionStatus] = None
     __properties: ClassVar[List[str]] = ["created", "id", "identitySourceId", "importType", "lastUpdated", "status"]
 

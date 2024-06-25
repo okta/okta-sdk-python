@@ -17,9 +17,11 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr
-from typing import Optional
 from typing_extensions import Annotated
+from pydantic import Field, StrictStr
+
+from typing import List, Optional
+
 from openapi_client.models.application_layout import ApplicationLayout
 from openapi_client.models.application_layouts import ApplicationLayouts
 from openapi_client.models.group_schema import GroupSchema
@@ -614,7 +616,7 @@ class SchemaApi:
     @validate_call
     def get_application_user_schema(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -684,7 +686,7 @@ class SchemaApi:
     @validate_call
     def get_application_user_schema_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -754,7 +756,7 @@ class SchemaApi:
     @validate_call
     def get_application_user_schema_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1918,7 +1920,7 @@ class SchemaApi:
     @validate_call
     def update_application_user_profile(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
         body: Optional[UserSchema] = None,
         _request_timeout: Union[
             None,
@@ -1993,7 +1995,7 @@ class SchemaApi:
     @validate_call
     def update_application_user_profile_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
         body: Optional[UserSchema] = None,
         _request_timeout: Union[
             None,
@@ -2068,7 +2070,7 @@ class SchemaApi:
     @validate_call
     def update_application_user_profile_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
         body: Optional[UserSchema] = None,
         _request_timeout: Union[
             None,

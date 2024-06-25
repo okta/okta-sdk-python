@@ -18,9 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.grant_or_token_status import GrantOrTokenStatus
 from openapi_client.models.o_auth2_actor import OAuth2Actor
 from openapi_client.models.o_auth2_scope_consent_grant_embedded import OAuth2ScopeConsentGrantEmbedded
@@ -33,18 +30,18 @@ class OAuth2ScopeConsentGrant(BaseModel):
     """
     Grant object that represents an app consent scope grant
     """ # noqa: E501
-    client_id: Optional[StrictStr] = Field(default=None, description="Client ID of the app integration", alias="clientId")
-    created: Optional[datetime] = Field(default=None, description="Timestamp when the Grant object was created")
-    created_by: Optional[OAuth2Actor] = Field(default=None, alias="createdBy")
-    id: Optional[StrictStr] = Field(default=None, description="ID of the Grant object")
-    issuer: StrictStr = Field(description="The issuer of your org authorization server. This is typically your Okta domain.")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the Grant object was last updated", alias="lastUpdated")
-    scope_id: StrictStr = Field(description="The name of the [Okta scope](https://developer.okta.com/docs/api/oauth2/#oauth-20-scopes) for which consent is granted", alias="scopeId")
+    client_id: Optional[StrictStr] = Field(None, alias="clientId", description="Client ID of the app integration")
+    created: Optional[datetime] = Field(None, description="Timestamp when the Grant object was created")
+    created_by: Optional[OAuth2Actor] = Field(None, alias="createdBy")
+    id: Optional[StrictStr] = Field(None, description="ID of the Grant object")
+    issuer: StrictStr = Field(..., description="The issuer of your org authorization server. This is typically your Okta domain.")
+    last_updated: Optional[datetime] = Field(None, alias="lastUpdated", description="Timestamp when the Grant object was last updated")
+    scope_id: StrictStr = Field(..., alias="scopeId", description="The name of the [Okta scope](https://developer.okta.com/docs/api/oauth2/#oauth-20-scopes) for which consent is granted")
     source: Optional[OAuth2ScopeConsentGrantSource] = None
     status: Optional[GrantOrTokenStatus] = None
-    user_id: Optional[StrictStr] = Field(default=None, description="User ID that granted consent (if `source` is `END_USER`)", alias="userId")
-    embedded: Optional[OAuth2ScopeConsentGrantEmbedded] = Field(default=None, alias="_embedded")
-    links: Optional[OAuth2ScopeConsentGrantLinks] = Field(default=None, alias="_links")
+    user_id: Optional[StrictStr] = Field(None, alias="userId", description="User ID that granted consent (if `source` is `END_USER`)")
+    embedded: Optional[OAuth2ScopeConsentGrantEmbedded] = Field(None, alias="_embedded")
+    links: Optional[OAuth2ScopeConsentGrantLinks] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["clientId", "created", "createdBy", "id", "issuer", "lastUpdated", "scopeId", "source", "status", "userId", "_embedded", "_links"]
 
     model_config = ConfigDict(

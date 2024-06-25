@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.iframe_embed_scope_allowed_apps import IframeEmbedScopeAllowedApps
 from openapi_client.models.trusted_origin_scope_type import TrustedOriginScopeType
 from typing import Optional, Set
@@ -29,7 +27,7 @@ class TrustedOriginScope(BaseModel):
     """
     TrustedOriginScope
     """ # noqa: E501
-    allowed_okta_apps: Optional[List[IframeEmbedScopeAllowedApps]] = Field(default=None, alias="allowedOktaApps")
+    allowed_okta_apps: Optional[conlist(IframeEmbedScopeAllowedApps)] = Field(None, alias="allowedOktaApps")
     type: Optional[TrustedOriginScopeType] = None
     __properties: ClassVar[List[str]] = ["allowedOktaApps", "type"]
 

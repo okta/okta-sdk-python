@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.policy_rule_auth_context_type import PolicyRuleAuthContextType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,7 +26,7 @@ class PolicyRuleAuthContextCondition(BaseModel):
     """
     PolicyRuleAuthContextCondition
     """ # noqa: E501
-    auth_type: Optional[PolicyRuleAuthContextType] = Field(default=None, alias="authType")
+    auth_type: Optional[PolicyRuleAuthContextType] = Field(None, alias="authType")
     __properties: ClassVar[List[str]] = ["authType"]
 
     model_config = ConfigDict(

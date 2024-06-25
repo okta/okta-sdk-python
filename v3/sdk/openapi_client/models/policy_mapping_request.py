@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.policy_mapping_resource_type import PolicyMappingResourceType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,8 +26,8 @@ class PolicyMappingRequest(BaseModel):
     """
     PolicyMappingRequest
     """ # noqa: E501
-    resource_id: Optional[StrictStr] = Field(default=None, alias="resourceId")
-    resource_type: Optional[PolicyMappingResourceType] = Field(default=None, alias="resourceType")
+    resource_id: Optional[StrictStr] = Field(None, alias="resourceId")
+    resource_type: Optional[PolicyMappingResourceType] = Field(None, alias="resourceType")
     __properties: ClassVar[List[str]] = ["resourceId", "resourceType"]
 
     model_config = ConfigDict(

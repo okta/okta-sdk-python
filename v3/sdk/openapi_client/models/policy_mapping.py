@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.policy_mapping_links import PolicyMappingLinks
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,7 +27,7 @@ class PolicyMapping(BaseModel):
     PolicyMapping
     """ # noqa: E501
     id: Optional[StrictStr] = None
-    links: Optional[PolicyMappingLinks] = Field(default=None, alias="_links")
+    links: Optional[PolicyMappingLinks] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["id", "_links"]
 
     model_config = ConfigDict(

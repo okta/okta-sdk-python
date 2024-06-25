@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +25,7 @@ class EmailSettings(BaseModel):
     """
     EmailSettings
     """ # noqa: E501
-    recipients: StrictStr
+    recipients: StrictStr = Field(...)
     __properties: ClassVar[List[str]] = ["recipients"]
 
     @field_validator('recipients')

@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.application_settings_notes import ApplicationSettingsNotes
 from openapi_client.models.application_settings_notifications import ApplicationSettingsNotifications
 from openapi_client.models.saml_application_settings_application import SamlApplicationSettingsApplication
@@ -31,13 +29,13 @@ class SamlApplicationSettings(BaseModel):
     """
     SamlApplicationSettings
     """ # noqa: E501
-    identity_store_id: Optional[StrictStr] = Field(default=None, alias="identityStoreId")
-    implicit_assignment: Optional[StrictBool] = Field(default=None, alias="implicitAssignment")
-    inline_hook_id: Optional[StrictStr] = Field(default=None, alias="inlineHookId")
+    identity_store_id: Optional[StrictStr] = Field(None, alias="identityStoreId")
+    implicit_assignment: Optional[StrictBool] = Field(None, alias="implicitAssignment")
+    inline_hook_id: Optional[StrictStr] = Field(None, alias="inlineHookId")
     notes: Optional[ApplicationSettingsNotes] = None
     notifications: Optional[ApplicationSettingsNotifications] = None
     app: Optional[SamlApplicationSettingsApplication] = None
-    sign_on: Optional[SamlApplicationSettingsSignOn] = Field(default=None, alias="signOn")
+    sign_on: Optional[SamlApplicationSettingsSignOn] = Field(None, alias="signOn")
     __properties: ClassVar[List[str]] = ["identityStoreId", "implicitAssignment", "inlineHookId", "notes", "notifications", "app", "signOn"]
 
     model_config = ConfigDict(

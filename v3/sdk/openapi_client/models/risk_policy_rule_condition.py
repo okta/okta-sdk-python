@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +25,7 @@ class RiskPolicyRuleCondition(BaseModel):
     """
     RiskPolicyRuleCondition
     """ # noqa: E501
-    behaviors: Optional[List[StrictStr]] = None
+    behaviors: Optional[conlist(StrictStr, unique_items=True)] = None
     __properties: ClassVar[List[str]] = ["behaviors"]
 
     model_config = ConfigDict(

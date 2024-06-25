@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
 from openapi_client.models.role_permission_type import RolePermissionType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,9 +26,9 @@ class CreateIamRoleRequest(BaseModel):
     """
     CreateIamRoleRequest
     """ # noqa: E501
-    description: StrictStr = Field(description="Description of the role")
-    label: StrictStr = Field(description="Unique label for the role")
-    permissions: List[RolePermissionType] = Field(description="Array of permissions that the role will grant. See [Permission Types](https://developer.okta.com/docs/concepts/role-assignment/#permission-types).")
+    description: StrictStr = Field(..., description="Description of the role")
+    label: StrictStr = Field(..., description="Unique label for the role")
+    permissions: conlist(RolePermissionType) = Field(..., description="Array of permissions that the role will grant. See [Permission Types](https://developer.okta.com/docs/concepts/role-assignment/#permission-types).")
     __properties: ClassVar[List[str]] = ["description", "label", "permissions"]
 
     model_config = ConfigDict(

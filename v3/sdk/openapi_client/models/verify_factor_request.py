@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,16 +25,16 @@ class VerifyFactorRequest(BaseModel):
     """
     VerifyFactorRequest
     """ # noqa: E501
-    activation_token: Optional[StrictStr] = Field(default=None, alias="activationToken")
+    activation_token: Optional[StrictStr] = Field(None, alias="activationToken")
     answer: Optional[StrictStr] = None
     attestation: Optional[StrictStr] = None
-    client_data: Optional[StrictStr] = Field(default=None, alias="clientData")
-    next_pass_code: Optional[StrictStr] = Field(default=None, alias="nextPassCode")
-    pass_code: Optional[StrictStr] = Field(default=None, alias="passCode")
-    registration_data: Optional[StrictStr] = Field(default=None, alias="registrationData")
-    state_token: Optional[StrictStr] = Field(default=None, alias="stateToken")
-    authenticator_data: Optional[StrictStr] = Field(default=None, alias="authenticatorData")
-    signature_data: Optional[StrictStr] = Field(default=None, alias="signatureData")
+    client_data: Optional[StrictStr] = Field(None, alias="clientData")
+    next_pass_code: Optional[StrictStr] = Field(None, alias="nextPassCode")
+    pass_code: Optional[StrictStr] = Field(None, alias="passCode")
+    registration_data: Optional[StrictStr] = Field(None, alias="registrationData")
+    state_token: Optional[StrictStr] = Field(None, alias="stateToken")
+    authenticator_data: Optional[StrictStr] = Field(None, alias="authenticatorData")
+    signature_data: Optional[StrictStr] = Field(None, alias="signatureData")
     __properties: ClassVar[List[str]] = ["activationToken", "answer", "attestation", "clientData", "nextPassCode", "passCode", "registrationData", "stateToken", "authenticatorData", "signatureData"]
 
     model_config = ConfigDict(

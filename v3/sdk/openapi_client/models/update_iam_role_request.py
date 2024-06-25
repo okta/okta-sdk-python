@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,8 +25,8 @@ class UpdateIamRoleRequest(BaseModel):
     """
     UpdateIamRoleRequest
     """ # noqa: E501
-    description: StrictStr = Field(description="Description of the role")
-    label: StrictStr = Field(description="Unique label for the role")
+    description: StrictStr = Field(..., description="Description of the role")
+    label: StrictStr = Field(..., description="Unique label for the role")
     __properties: ClassVar[List[str]] = ["description", "label"]
 
     model_config = ConfigDict(

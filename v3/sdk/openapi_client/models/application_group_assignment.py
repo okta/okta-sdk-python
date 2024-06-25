@@ -18,9 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.links_self import LinksSelf
 from typing import Optional, Set
 from typing_extensions import Self
@@ -30,11 +27,11 @@ class ApplicationGroupAssignment(BaseModel):
     ApplicationGroupAssignment
     """ # noqa: E501
     id: Optional[StrictStr] = None
-    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
+    last_updated: Optional[datetime] = Field(None, alias="lastUpdated")
     priority: Optional[StrictInt] = None
     profile: Optional[Dict[str, Dict[str, Any]]] = None
-    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, alias="_embedded")
-    links: Optional[LinksSelf] = Field(default=None, alias="_links")
+    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(None, alias="_embedded")
+    links: Optional[LinksSelf] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["id", "lastUpdated", "priority", "profile", "_embedded", "_links"]
 
     model_config = ConfigDict(

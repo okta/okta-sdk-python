@@ -18,9 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.identity_provider_links import IdentityProviderLinks
 from openapi_client.models.identity_provider_policy import IdentityProviderPolicy
 from openapi_client.models.identity_provider_properties import IdentityProviderProperties
@@ -37,15 +34,15 @@ class IdentityProvider(BaseModel):
     """ # noqa: E501
     created: Optional[datetime] = None
     id: Optional[StrictStr] = None
-    issuer_mode: Optional[IssuerMode] = Field(default=None, alias="issuerMode")
-    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
+    issuer_mode: Optional[IssuerMode] = Field(None, alias="issuerMode")
+    last_updated: Optional[datetime] = Field(None, alias="lastUpdated")
     name: Optional[StrictStr] = None
     policy: Optional[IdentityProviderPolicy] = None
     properties: Optional[IdentityProviderProperties] = None
     protocol: Optional[Protocol] = None
     status: Optional[LifecycleStatus] = None
     type: Optional[IdentityProviderType] = None
-    links: Optional[IdentityProviderLinks] = Field(default=None, alias="_links")
+    links: Optional[IdentityProviderLinks] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["created", "id", "issuerMode", "lastUpdated", "name", "policy", "properties", "protocol", "status", "type", "_links"]
 
     model_config = ConfigDict(

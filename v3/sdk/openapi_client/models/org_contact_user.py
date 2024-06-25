@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.links_self import LinksSelf
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,8 +26,8 @@ class OrgContactUser(BaseModel):
     """
     OrgContactUser
     """ # noqa: E501
-    user_id: Optional[StrictStr] = Field(default=None, alias="userId")
-    links: Optional[LinksSelf] = Field(default=None, alias="_links")
+    user_id: Optional[StrictStr] = Field(None, alias="userId")
+    links: Optional[LinksSelf] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["userId", "_links"]
 
     model_config = ConfigDict(

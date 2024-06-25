@@ -18,9 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.resource_set_links import ResourceSetLinks
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,12 +26,12 @@ class ResourceSet(BaseModel):
     """
     ResourceSet
     """ # noqa: E501
-    created: Optional[datetime] = Field(default=None, description="Timestamp when the role was created")
-    description: Optional[StrictStr] = Field(default=None, description="Description of the Resource Set")
-    id: Optional[StrictStr] = Field(default=None, description="Unique key for the role")
-    label: Optional[StrictStr] = Field(default=None, description="Unique label for the Resource Set")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the role was last updated", alias="lastUpdated")
-    links: Optional[ResourceSetLinks] = Field(default=None, alias="_links")
+    created: Optional[datetime] = Field(None, description="Timestamp when the role was created")
+    description: Optional[StrictStr] = Field(None, description="Description of the Resource Set")
+    id: Optional[StrictStr] = Field(None, description="Unique key for the role")
+    label: Optional[StrictStr] = Field(None, description="Unique label for the Resource Set")
+    last_updated: Optional[datetime] = Field(None, alias="lastUpdated", description="Timestamp when the role was last updated")
+    links: Optional[ResourceSetLinks] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["created", "description", "id", "label", "lastUpdated", "_links"]
 
     model_config = ConfigDict(

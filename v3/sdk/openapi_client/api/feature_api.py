@@ -17,9 +17,11 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr
-from typing import Optional
 from typing_extensions import Annotated
+from pydantic import Field, StrictStr
+
+from typing import List, Optional
+
 from openapi_client.models.feature import Feature
 from openapi_client.models.feature_lifecycle import FeatureLifecycle
 
@@ -44,7 +46,7 @@ class FeatureApi:
     @validate_call
     def get_feature(
         self,
-        feature_id: Annotated[StrictStr, Field(description="`id` of the Feature")],
+        feature_id: Annotated[StrictStr, Field(..., description="`id` of the Feature")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -114,7 +116,7 @@ class FeatureApi:
     @validate_call
     def get_feature_with_http_info(
         self,
-        feature_id: Annotated[StrictStr, Field(description="`id` of the Feature")],
+        feature_id: Annotated[StrictStr, Field(..., description="`id` of the Feature")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -184,7 +186,7 @@ class FeatureApi:
     @validate_call
     def get_feature_without_preload_content(
         self,
-        feature_id: Annotated[StrictStr, Field(description="`id` of the Feature")],
+        feature_id: Annotated[StrictStr, Field(..., description="`id` of the Feature")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -312,7 +314,7 @@ class FeatureApi:
     @validate_call
     def list_feature_dependencies(
         self,
-        feature_id: Annotated[StrictStr, Field(description="`id` of the Feature")],
+        feature_id: Annotated[StrictStr, Field(..., description="`id` of the Feature")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -382,7 +384,7 @@ class FeatureApi:
     @validate_call
     def list_feature_dependencies_with_http_info(
         self,
-        feature_id: Annotated[StrictStr, Field(description="`id` of the Feature")],
+        feature_id: Annotated[StrictStr, Field(..., description="`id` of the Feature")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -452,7 +454,7 @@ class FeatureApi:
     @validate_call
     def list_feature_dependencies_without_preload_content(
         self,
-        feature_id: Annotated[StrictStr, Field(description="`id` of the Feature")],
+        feature_id: Annotated[StrictStr, Field(..., description="`id` of the Feature")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -580,7 +582,7 @@ class FeatureApi:
     @validate_call
     def list_feature_dependents(
         self,
-        feature_id: Annotated[StrictStr, Field(description="`id` of the Feature")],
+        feature_id: Annotated[StrictStr, Field(..., description="`id` of the Feature")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -650,7 +652,7 @@ class FeatureApi:
     @validate_call
     def list_feature_dependents_with_http_info(
         self,
-        feature_id: Annotated[StrictStr, Field(description="`id` of the Feature")],
+        feature_id: Annotated[StrictStr, Field(..., description="`id` of the Feature")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -720,7 +722,7 @@ class FeatureApi:
     @validate_call
     def list_feature_dependents_without_preload_content(
         self,
-        feature_id: Annotated[StrictStr, Field(description="`id` of the Feature")],
+        feature_id: Annotated[StrictStr, Field(..., description="`id` of the Feature")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1098,8 +1100,8 @@ class FeatureApi:
     @validate_call
     def update_feature_lifecycle(
         self,
-        feature_id: Annotated[StrictStr, Field(description="`id` of the Feature")],
-        lifecycle: Annotated[FeatureLifecycle, Field(description="Whether to `enable` or `disable` the feature")],
+        feature_id: Annotated[StrictStr, Field(..., description="`id` of the Feature")],
+        lifecycle: Annotated[FeatureLifecycle, Field(..., description="Whether to `enable` or `disable` the feature")],
         mode: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -1176,8 +1178,8 @@ class FeatureApi:
     @validate_call
     def update_feature_lifecycle_with_http_info(
         self,
-        feature_id: Annotated[StrictStr, Field(description="`id` of the Feature")],
-        lifecycle: Annotated[FeatureLifecycle, Field(description="Whether to `enable` or `disable` the feature")],
+        feature_id: Annotated[StrictStr, Field(..., description="`id` of the Feature")],
+        lifecycle: Annotated[FeatureLifecycle, Field(..., description="Whether to `enable` or `disable` the feature")],
         mode: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -1254,8 +1256,8 @@ class FeatureApi:
     @validate_call
     def update_feature_lifecycle_without_preload_content(
         self,
-        feature_id: Annotated[StrictStr, Field(description="`id` of the Feature")],
-        lifecycle: Annotated[FeatureLifecycle, Field(description="Whether to `enable` or `disable` the feature")],
+        feature_id: Annotated[StrictStr, Field(..., description="`id` of the Feature")],
+        lifecycle: Annotated[FeatureLifecycle, Field(..., description="Whether to `enable` or `disable` the feature")],
         mode: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,

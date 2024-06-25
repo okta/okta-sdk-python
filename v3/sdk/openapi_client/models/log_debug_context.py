@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +25,7 @@ class LogDebugContext(BaseModel):
     """
     LogDebugContext
     """ # noqa: E501
-    debug_data: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, alias="debugData")
+    debug_data: Optional[Dict[str, Dict[str, Any]]] = Field(None, alias="debugData")
     __properties: ClassVar[List[str]] = ["debugData"]
 
     model_config = ConfigDict(

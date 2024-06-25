@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +25,7 @@ class ErrorErrorCausesInner(BaseModel):
     """
     ErrorErrorCausesInner
     """ # noqa: E501
-    error_summary: Optional[StrictStr] = Field(default=None, alias="errorSummary")
+    error_summary: Optional[StrictStr] = Field(None, alias="errorSummary")
     __properties: ClassVar[List[str]] = ["errorSummary"]
 
     model_config = ConfigDict(

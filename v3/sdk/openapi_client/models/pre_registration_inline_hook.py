@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +25,7 @@ class PreRegistrationInlineHook(BaseModel):
     """
     PreRegistrationInlineHook
     """ # noqa: E501
-    inline_hook_id: Optional[StrictStr] = Field(default=None, alias="inlineHookId")
+    inline_hook_id: Optional[StrictStr] = Field(None, alias="inlineHookId")
     __properties: ClassVar[List[str]] = ["inlineHookId"]
 
     model_config = ConfigDict(

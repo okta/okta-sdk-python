@@ -18,9 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List
-from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +25,7 @@ class RateLimitWarningThresholdRequest(BaseModel):
     """
     
     """ # noqa: E501
-    warning_threshold: Annotated[int, Field(le=90, strict=True, ge=30)] = Field(description="The threshold value (percentage) of a rate limit that, when exceeded, triggers a warning notification. By default, this value is 90 for Workforce orgs and 60 for CIAM orgs.", alias="warningThreshold")
+    warning_threshold: conint(strict=True, le=90, ge=30) = Field(..., alias="warningThreshold", description="The threshold value (percentage) of a rate limit that, when exceeded, triggers a warning notification. By default, this value is 90 for Workforce orgs and 60 for CIAM orgs.")
     __properties: ClassVar[List[str]] = ["warningThreshold"]
 
     model_config = ConfigDict(

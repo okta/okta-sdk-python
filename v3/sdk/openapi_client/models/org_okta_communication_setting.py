@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.links_self import LinksSelf
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,8 +26,8 @@ class OrgOktaCommunicationSetting(BaseModel):
     """
     OrgOktaCommunicationSetting
     """ # noqa: E501
-    opt_out_email_users: Optional[StrictBool] = Field(default=None, alias="optOutEmailUsers")
-    links: Optional[LinksSelf] = Field(default=None, alias="_links")
+    opt_out_email_users: Optional[StrictBool] = Field(None, alias="optOutEmailUsers")
+    links: Optional[LinksSelf] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["optOutEmailUsers", "_links"]
 
     model_config = ConfigDict(

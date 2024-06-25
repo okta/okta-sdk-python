@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.log_geographical_context import LogGeographicalContext
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,7 +26,7 @@ class LogIpAddress(BaseModel):
     """
     LogIpAddress
     """ # noqa: E501
-    geographical_context: Optional[LogGeographicalContext] = Field(default=None, alias="geographicalContext")
+    geographical_context: Optional[LogGeographicalContext] = Field(None, alias="geographicalContext")
     ip: Optional[StrictStr] = None
     source: Optional[StrictStr] = None
     version: Optional[StrictStr] = None

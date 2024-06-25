@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.verification_method import VerificationMethod
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,7 +27,7 @@ class AccessPolicyRuleApplicationSignOn(BaseModel):
     AccessPolicyRuleApplicationSignOn
     """ # noqa: E501
     access: Optional[StrictStr] = None
-    verification_method: Optional[VerificationMethod] = Field(default=None, alias="verificationMethod")
+    verification_method: Optional[VerificationMethod] = Field(None, alias="verificationMethod")
     __properties: ClassVar[List[str]] = ["access", "verificationMethod"]
 
     model_config = ConfigDict(

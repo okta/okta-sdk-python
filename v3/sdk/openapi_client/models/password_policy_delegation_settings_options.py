@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +25,7 @@ class PasswordPolicyDelegationSettingsOptions(BaseModel):
     """
     PasswordPolicyDelegationSettingsOptions
     """ # noqa: E501
-    skip_unlock: Optional[StrictBool] = Field(default=None, alias="skipUnlock")
+    skip_unlock: Optional[StrictBool] = Field(None, alias="skipUnlock")
     __properties: ClassVar[List[str]] = ["skipUnlock"]
 
     model_config = ConfigDict(

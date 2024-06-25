@@ -18,10 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from importlib import import_module
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional, Union
 from openapi_client.models.application_accessibility import ApplicationAccessibility
 from openapi_client.models.application_licensing import ApplicationLicensing
 from openapi_client.models.application_lifecycle_status import ApplicationLifecycleStatus
@@ -49,17 +45,17 @@ class Application(BaseModel):
     """ # noqa: E501
     accessibility: Optional[ApplicationAccessibility] = None
     created: Optional[datetime] = None
-    features: Optional[List[StrictStr]] = None
+    features: Optional[conlist(StrictStr)] = None
     id: Optional[StrictStr] = None
     label: Optional[StrictStr] = None
-    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
+    last_updated: Optional[datetime] = Field(None, alias="lastUpdated")
     licensing: Optional[ApplicationLicensing] = None
     profile: Optional[Dict[str, Dict[str, Any]]] = None
-    sign_on_mode: Optional[ApplicationSignOnMode] = Field(default=None, alias="signOnMode")
+    sign_on_mode: Optional[ApplicationSignOnMode] = Field(None, alias="signOnMode")
     status: Optional[ApplicationLifecycleStatus] = None
     visibility: Optional[ApplicationVisibility] = None
-    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, alias="_embedded")
-    links: Optional[ApplicationLinks] = Field(default=None, alias="_links")
+    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(None, alias="_embedded")
+    links: Optional[ApplicationLinks] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["accessibility", "created", "features", "id", "label", "lastUpdated", "licensing", "profile", "signOnMode", "status", "visibility", "_embedded", "_links"]
 
     model_config = ConfigDict(

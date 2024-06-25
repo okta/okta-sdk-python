@@ -17,9 +17,11 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr
-from typing import Any
 from typing_extensions import Annotated
+from pydantic import Field, StrictStr
+
+from typing import Any, List
+
 from openapi_client.models.notification_type import NotificationType
 from openapi_client.models.subscription import Subscription
 
@@ -44,7 +46,7 @@ class SubscriptionApi:
     @validate_call
     def get_subscriptions_notification_type_role(
         self,
-        role_ref: Annotated[Any, Field(description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).")],
+        role_ref: Annotated[Any, Field(..., description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).")],
         notification_type: NotificationType,
         _request_timeout: Union[
             None,
@@ -118,7 +120,7 @@ class SubscriptionApi:
     @validate_call
     def get_subscriptions_notification_type_role_with_http_info(
         self,
-        role_ref: Annotated[Any, Field(description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).")],
+        role_ref: Annotated[Any, Field(..., description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).")],
         notification_type: NotificationType,
         _request_timeout: Union[
             None,
@@ -192,7 +194,7 @@ class SubscriptionApi:
     @validate_call
     def get_subscriptions_notification_type_role_without_preload_content(
         self,
-        role_ref: Annotated[Any, Field(description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).")],
+        role_ref: Annotated[Any, Field(..., description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).")],
         notification_type: NotificationType,
         _request_timeout: Union[
             None,
@@ -610,7 +612,7 @@ class SubscriptionApi:
     @validate_call
     def list_subscriptions_role(
         self,
-        role_ref: Annotated[Any, Field(description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).")],
+        role_ref: Annotated[Any, Field(..., description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -680,7 +682,7 @@ class SubscriptionApi:
     @validate_call
     def list_subscriptions_role_with_http_info(
         self,
-        role_ref: Annotated[Any, Field(description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).")],
+        role_ref: Annotated[Any, Field(..., description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -750,7 +752,7 @@ class SubscriptionApi:
     @validate_call
     def list_subscriptions_role_without_preload_content(
         self,
-        role_ref: Annotated[Any, Field(description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).")],
+        role_ref: Annotated[Any, Field(..., description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1146,7 +1148,7 @@ class SubscriptionApi:
     @validate_call
     def subscribe_by_notification_type_role(
         self,
-        role_ref: Annotated[Any, Field(description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).")],
+        role_ref: Annotated[Any, Field(..., description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).")],
         notification_type: NotificationType,
         _request_timeout: Union[
             None,
@@ -1220,7 +1222,7 @@ class SubscriptionApi:
     @validate_call
     def subscribe_by_notification_type_role_with_http_info(
         self,
-        role_ref: Annotated[Any, Field(description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).")],
+        role_ref: Annotated[Any, Field(..., description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).")],
         notification_type: NotificationType,
         _request_timeout: Union[
             None,
@@ -1294,7 +1296,7 @@ class SubscriptionApi:
     @validate_call
     def subscribe_by_notification_type_role_without_preload_content(
         self,
-        role_ref: Annotated[Any, Field(description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).")],
+        role_ref: Annotated[Any, Field(..., description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).")],
         notification_type: NotificationType,
         _request_timeout: Union[
             None,
@@ -1712,7 +1714,7 @@ class SubscriptionApi:
     @validate_call
     def unsubscribe_by_notification_type_role(
         self,
-        role_ref: Annotated[Any, Field(description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).")],
+        role_ref: Annotated[Any, Field(..., description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).")],
         notification_type: NotificationType,
         _request_timeout: Union[
             None,
@@ -1786,7 +1788,7 @@ class SubscriptionApi:
     @validate_call
     def unsubscribe_by_notification_type_role_with_http_info(
         self,
-        role_ref: Annotated[Any, Field(description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).")],
+        role_ref: Annotated[Any, Field(..., description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).")],
         notification_type: NotificationType,
         _request_timeout: Union[
             None,
@@ -1860,7 +1862,7 @@ class SubscriptionApi:
     @validate_call
     def unsubscribe_by_notification_type_role_without_preload_content(
         self,
-        role_ref: Annotated[Any, Field(description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).")],
+        role_ref: Annotated[Any, Field(..., description="A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).")],
         notification_type: NotificationType,
         _request_timeout: Union[
             None,

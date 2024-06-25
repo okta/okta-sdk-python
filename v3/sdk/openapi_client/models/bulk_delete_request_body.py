@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.identity_source_user_profile_for_delete import IdentitySourceUserProfileForDelete
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,8 +26,8 @@ class BulkDeleteRequestBody(BaseModel):
     """
     BulkDeleteRequestBody
     """ # noqa: E501
-    entity_type: Optional[StrictStr] = Field(default=None, alias="entityType")
-    profiles: Optional[List[IdentitySourceUserProfileForDelete]] = None
+    entity_type: Optional[StrictStr] = Field(None, alias="entityType")
+    profiles: Optional[conlist(IdentitySourceUserProfileForDelete)] = None
     __properties: ClassVar[List[str]] = ["entityType", "profiles"]
 
     @field_validator('entity_type')

@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.log_geolocation import LogGeolocation
 from typing import Optional, Set
 from typing_extensions import Self
@@ -31,7 +29,7 @@ class LogGeographicalContext(BaseModel):
     city: Optional[StrictStr] = None
     country: Optional[StrictStr] = None
     geolocation: Optional[LogGeolocation] = None
-    postal_code: Optional[StrictStr] = Field(default=None, alias="postalCode")
+    postal_code: Optional[StrictStr] = Field(None, alias="postalCode")
     state: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["city", "country", "geolocation", "postalCode", "state"]
 

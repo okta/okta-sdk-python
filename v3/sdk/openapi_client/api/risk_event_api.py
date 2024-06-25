@@ -17,7 +17,8 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from typing import List
+from pydantic import conlist
+
 from openapi_client.models.risk_event import RiskEvent
 
 from openapi_client.api_client import ApiClient, RequestSerialized
@@ -41,7 +42,7 @@ class RiskEventApi:
     @validate_call
     def send_risk_events(
         self,
-        instance: List[RiskEvent],
+        instance: conlist(RiskEvent),
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -111,7 +112,7 @@ class RiskEventApi:
     @validate_call
     def send_risk_events_with_http_info(
         self,
-        instance: List[RiskEvent],
+        instance: conlist(RiskEvent),
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -181,7 +182,7 @@ class RiskEventApi:
     @validate_call
     def send_risk_events_without_preload_content(
         self,
-        instance: List[RiskEvent],
+        instance: conlist(RiskEvent),
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],

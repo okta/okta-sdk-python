@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +25,7 @@ class AssociatedServerMediated(BaseModel):
     """
     AssociatedServerMediated
     """ # noqa: E501
-    trusted: Optional[List[StrictStr]] = Field(default=None, description="A list of the authorization server IDs")
+    trusted: Optional[conlist(StrictStr)] = Field(None, description="A list of the authorization server IDs")
     __properties: ClassVar[List[str]] = ["trusted"]
 
     model_config = ConfigDict(

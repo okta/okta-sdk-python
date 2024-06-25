@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.app_and_instance_condition_evaluator_app_or_instance import AppAndInstanceConditionEvaluatorAppOrInstance
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,8 +26,8 @@ class AppAndInstancePolicyRuleCondition(BaseModel):
     """
     AppAndInstancePolicyRuleCondition
     """ # noqa: E501
-    exclude: Optional[List[AppAndInstanceConditionEvaluatorAppOrInstance]] = None
-    include: Optional[List[AppAndInstanceConditionEvaluatorAppOrInstance]] = None
+    exclude: Optional[conlist(AppAndInstanceConditionEvaluatorAppOrInstance)] = None
+    include: Optional[conlist(AppAndInstanceConditionEvaluatorAppOrInstance)] = None
     __properties: ClassVar[List[str]] = ["exclude", "include"]
 
     model_config = ConfigDict(

@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.user_schema_properties_profile_item import UserSchemaPropertiesProfileItem
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,7 +26,7 @@ class UserSchemaPropertiesProfile(BaseModel):
     """
     UserSchemaPropertiesProfile
     """ # noqa: E501
-    all_of: Optional[List[UserSchemaPropertiesProfileItem]] = Field(default=None, alias="allOf")
+    all_of: Optional[conlist(UserSchemaPropertiesProfileItem)] = Field(None, alias="allOf")
     __properties: ClassVar[List[str]] = ["allOf"]
 
     model_config = ConfigDict(

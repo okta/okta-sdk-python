@@ -18,8 +18,11 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from datetime import datetime
+
 from pydantic import StrictInt, StrictStr
-from typing import Optional
+
+from typing import List, Optional
+
 from openapi_client.models.log_event import LogEvent
 
 from openapi_client.api_client import ApiClient, RequestSerialized

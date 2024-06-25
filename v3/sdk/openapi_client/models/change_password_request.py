@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.password_credential import PasswordCredential
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,9 +26,9 @@ class ChangePasswordRequest(BaseModel):
     """
     ChangePasswordRequest
     """ # noqa: E501
-    new_password: Optional[PasswordCredential] = Field(default=None, alias="newPassword")
-    old_password: Optional[PasswordCredential] = Field(default=None, alias="oldPassword")
-    revoke_sessions: Optional[StrictBool] = Field(default=None, alias="revokeSessions")
+    new_password: Optional[PasswordCredential] = Field(None, alias="newPassword")
+    old_password: Optional[PasswordCredential] = Field(None, alias="oldPassword")
+    revoke_sessions: Optional[StrictBool] = Field(None, alias="revokeSessions")
     __properties: ClassVar[List[str]] = ["newPassword", "oldPassword", "revokeSessions"]
 
     model_config = ConfigDict(

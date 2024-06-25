@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.links_next import LinksNext
 from openapi_client.models.role_assigned_user import RoleAssignedUser
 from typing import Optional, Set
@@ -29,8 +27,8 @@ class RoleAssignedUsers(BaseModel):
     """
     RoleAssignedUsers
     """ # noqa: E501
-    value: Optional[List[RoleAssignedUser]] = None
-    links: Optional[LinksNext] = Field(default=None, alias="_links")
+    value: Optional[conlist(RoleAssignedUser)] = None
+    links: Optional[LinksNext] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["value", "_links"]
 
     model_config = ConfigDict(

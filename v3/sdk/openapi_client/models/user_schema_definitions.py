@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.user_schema_base import UserSchemaBase
 from openapi_client.models.user_schema_public import UserSchemaPublic
 from typing import Optional, Set

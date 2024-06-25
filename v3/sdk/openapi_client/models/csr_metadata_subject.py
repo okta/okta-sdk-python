@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,12 +25,12 @@ class CsrMetadataSubject(BaseModel):
     """
     CsrMetadataSubject
     """ # noqa: E501
-    common_name: Optional[StrictStr] = Field(default=None, alias="commonName")
-    country_name: Optional[StrictStr] = Field(default=None, alias="countryName")
-    locality_name: Optional[StrictStr] = Field(default=None, alias="localityName")
-    organizational_unit_name: Optional[StrictStr] = Field(default=None, alias="organizationalUnitName")
-    organization_name: Optional[StrictStr] = Field(default=None, alias="organizationName")
-    state_or_province_name: Optional[StrictStr] = Field(default=None, alias="stateOrProvinceName")
+    common_name: Optional[StrictStr] = Field(None, alias="commonName")
+    country_name: Optional[StrictStr] = Field(None, alias="countryName")
+    locality_name: Optional[StrictStr] = Field(None, alias="localityName")
+    organizational_unit_name: Optional[StrictStr] = Field(None, alias="organizationalUnitName")
+    organization_name: Optional[StrictStr] = Field(None, alias="organizationName")
+    state_or_province_name: Optional[StrictStr] = Field(None, alias="stateOrProvinceName")
     __properties: ClassVar[List[str]] = ["commonName", "countryName", "localityName", "organizationalUnitName", "organizationName", "stateOrProvinceName"]
 
     model_config = ConfigDict(

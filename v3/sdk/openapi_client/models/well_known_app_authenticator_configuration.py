@@ -18,9 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.supported_methods import SupportedMethods
 from openapi_client.models.well_known_app_authenticator_configuration_settings import WellKnownAppAuthenticatorConfigurationSettings
 from typing import Optional, Set
@@ -30,15 +27,15 @@ class WellKnownAppAuthenticatorConfiguration(BaseModel):
     """
     WellKnownAppAuthenticatorConfiguration
     """ # noqa: E501
-    app_authenticator_enroll_endpoint: Optional[StrictStr] = Field(default=None, alias="appAuthenticatorEnrollEndpoint")
-    authenticator_id: Optional[StrictStr] = Field(default=None, description="The unique identifier of the app authenticator", alias="authenticatorId")
-    created_date: Optional[datetime] = Field(default=None, alias="createdDate")
+    app_authenticator_enroll_endpoint: Optional[StrictStr] = Field(None, alias="appAuthenticatorEnrollEndpoint")
+    authenticator_id: Optional[StrictStr] = Field(None, alias="authenticatorId", description="The unique identifier of the app authenticator")
+    created_date: Optional[datetime] = Field(None, alias="createdDate")
     key: Optional[StrictStr] = None
-    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
-    name: Optional[StrictStr] = Field(default=None, description="The authenticator display name")
-    org_id: Optional[StrictStr] = Field(default=None, alias="orgId")
+    last_updated: Optional[datetime] = Field(None, alias="lastUpdated")
+    name: Optional[StrictStr] = Field(None, description="The authenticator display name")
+    org_id: Optional[StrictStr] = Field(None, alias="orgId")
     settings: Optional[WellKnownAppAuthenticatorConfigurationSettings] = None
-    supported_methods: Optional[List[SupportedMethods]] = Field(default=None, alias="supportedMethods")
+    supported_methods: Optional[conlist(SupportedMethods)] = Field(None, alias="supportedMethods")
     type: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["appAuthenticatorEnrollEndpoint", "authenticatorId", "createdDate", "key", "lastUpdated", "name", "orgId", "settings", "supportedMethods", "type"]
 

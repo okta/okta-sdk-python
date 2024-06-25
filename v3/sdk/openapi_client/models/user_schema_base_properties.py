@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.user_schema_attribute import UserSchemaAttribute
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,36 +27,36 @@ class UserSchemaBaseProperties(BaseModel):
     UserSchemaBaseProperties
     """ # noqa: E501
     city: Optional[UserSchemaAttribute] = None
-    cost_center: Optional[UserSchemaAttribute] = Field(default=None, alias="costCenter")
-    country_code: Optional[UserSchemaAttribute] = Field(default=None, alias="countryCode")
+    cost_center: Optional[UserSchemaAttribute] = Field(None, alias="costCenter")
+    country_code: Optional[UserSchemaAttribute] = Field(None, alias="countryCode")
     department: Optional[UserSchemaAttribute] = None
-    display_name: Optional[UserSchemaAttribute] = Field(default=None, alias="displayName")
+    display_name: Optional[UserSchemaAttribute] = Field(None, alias="displayName")
     division: Optional[UserSchemaAttribute] = None
     email: Optional[UserSchemaAttribute] = None
-    employee_number: Optional[UserSchemaAttribute] = Field(default=None, alias="employeeNumber")
-    first_name: Optional[UserSchemaAttribute] = Field(default=None, alias="firstName")
-    honorific_prefix: Optional[UserSchemaAttribute] = Field(default=None, alias="honorificPrefix")
-    honorific_suffix: Optional[UserSchemaAttribute] = Field(default=None, alias="honorificSuffix")
-    last_name: Optional[UserSchemaAttribute] = Field(default=None, alias="lastName")
+    employee_number: Optional[UserSchemaAttribute] = Field(None, alias="employeeNumber")
+    first_name: Optional[UserSchemaAttribute] = Field(None, alias="firstName")
+    honorific_prefix: Optional[UserSchemaAttribute] = Field(None, alias="honorificPrefix")
+    honorific_suffix: Optional[UserSchemaAttribute] = Field(None, alias="honorificSuffix")
+    last_name: Optional[UserSchemaAttribute] = Field(None, alias="lastName")
     locale: Optional[UserSchemaAttribute] = None
     login: Optional[UserSchemaAttribute] = None
     manager: Optional[UserSchemaAttribute] = None
-    manager_id: Optional[UserSchemaAttribute] = Field(default=None, alias="managerId")
-    middle_name: Optional[UserSchemaAttribute] = Field(default=None, alias="middleName")
-    mobile_phone: Optional[UserSchemaAttribute] = Field(default=None, alias="mobilePhone")
-    nick_name: Optional[UserSchemaAttribute] = Field(default=None, alias="nickName")
+    manager_id: Optional[UserSchemaAttribute] = Field(None, alias="managerId")
+    middle_name: Optional[UserSchemaAttribute] = Field(None, alias="middleName")
+    mobile_phone: Optional[UserSchemaAttribute] = Field(None, alias="mobilePhone")
+    nick_name: Optional[UserSchemaAttribute] = Field(None, alias="nickName")
     organization: Optional[UserSchemaAttribute] = None
-    postal_address: Optional[UserSchemaAttribute] = Field(default=None, alias="postalAddress")
-    preferred_language: Optional[UserSchemaAttribute] = Field(default=None, alias="preferredLanguage")
-    primary_phone: Optional[UserSchemaAttribute] = Field(default=None, alias="primaryPhone")
-    profile_url: Optional[UserSchemaAttribute] = Field(default=None, alias="profileUrl")
-    second_email: Optional[UserSchemaAttribute] = Field(default=None, alias="secondEmail")
+    postal_address: Optional[UserSchemaAttribute] = Field(None, alias="postalAddress")
+    preferred_language: Optional[UserSchemaAttribute] = Field(None, alias="preferredLanguage")
+    primary_phone: Optional[UserSchemaAttribute] = Field(None, alias="primaryPhone")
+    profile_url: Optional[UserSchemaAttribute] = Field(None, alias="profileUrl")
+    second_email: Optional[UserSchemaAttribute] = Field(None, alias="secondEmail")
     state: Optional[UserSchemaAttribute] = None
-    street_address: Optional[UserSchemaAttribute] = Field(default=None, alias="streetAddress")
+    street_address: Optional[UserSchemaAttribute] = Field(None, alias="streetAddress")
     timezone: Optional[UserSchemaAttribute] = None
     title: Optional[UserSchemaAttribute] = None
-    user_type: Optional[UserSchemaAttribute] = Field(default=None, alias="userType")
-    zip_code: Optional[UserSchemaAttribute] = Field(default=None, alias="zipCode")
+    user_type: Optional[UserSchemaAttribute] = Field(None, alias="userType")
+    zip_code: Optional[UserSchemaAttribute] = Field(None, alias="zipCode")
     __properties: ClassVar[List[str]] = ["city", "costCenter", "countryCode", "department", "displayName", "division", "email", "employeeNumber", "firstName", "honorificPrefix", "honorificSuffix", "lastName", "locale", "login", "manager", "managerId", "middleName", "mobilePhone", "nickName", "organization", "postalAddress", "preferredLanguage", "primaryPhone", "profileUrl", "secondEmail", "state", "streetAddress", "timezone", "title", "userType", "zipCode"]
 
     model_config = ConfigDict(

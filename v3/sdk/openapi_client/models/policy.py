@@ -18,10 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from importlib import import_module
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional, Union
 from openapi_client.models.lifecycle_status import LifecycleStatus
 from openapi_client.models.policy_links import PolicyLinks
 from openapi_client.models.policy_type import PolicyType
@@ -42,17 +38,17 @@ class Policy(BaseModel):
     """
     Policy
     """ # noqa: E501
-    created: Optional[datetime] = Field(default=None, description="Timestamp when the Policy was created")
-    description: Optional[StrictStr] = Field(default=None, description="Policy description")
-    id: Optional[StrictStr] = Field(default=None, description="Policy ID")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the Policy was last updated", alias="lastUpdated")
-    name: Optional[StrictStr] = Field(default=None, description="Policy name")
-    priority: Optional[StrictInt] = Field(default=None, description="Specifies the order in which this Policy is evaluated in relation to the other policies")
+    created: Optional[datetime] = Field(None, description="Timestamp when the Policy was created")
+    description: Optional[StrictStr] = Field(None, description="Policy description")
+    id: Optional[StrictStr] = Field(None, description="Policy ID")
+    last_updated: Optional[datetime] = Field(None, alias="lastUpdated", description="Timestamp when the Policy was last updated")
+    name: Optional[StrictStr] = Field(None, description="Policy name")
+    priority: Optional[StrictInt] = Field(None, description="Specifies the order in which this Policy is evaluated in relation to the other policies")
     status: Optional[LifecycleStatus] = None
-    system: Optional[StrictBool] = Field(default=None, description="Specifies whether Okta created the Policy")
+    system: Optional[StrictBool] = Field(None, description="Specifies whether Okta created the Policy")
     type: Optional[PolicyType] = None
-    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, alias="_embedded")
-    links: Optional[PolicyLinks] = Field(default=None, alias="_links")
+    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(None, alias="_embedded")
+    links: Optional[PolicyLinks] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["created", "description", "id", "lastUpdated", "name", "priority", "status", "system", "type", "_embedded", "_links"]
 
     model_config = ConfigDict(

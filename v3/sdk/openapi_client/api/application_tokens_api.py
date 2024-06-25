@@ -17,9 +17,11 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
-from typing import Optional
 from typing_extensions import Annotated
+from pydantic import Field, StrictInt, StrictStr
+
+from typing import List, Optional
+
 from openapi_client.models.o_auth2_token import OAuth2Token
 
 from openapi_client.api_client import ApiClient, RequestSerialized
@@ -43,8 +45,8 @@ class ApplicationTokensApi:
     @validate_call
     def get_o_auth2_token_for_application(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        token_id: Annotated[StrictStr, Field(description="`id` of Token")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        token_id: Annotated[StrictStr, Field(..., description="`id` of Token")],
         expand: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -121,8 +123,8 @@ class ApplicationTokensApi:
     @validate_call
     def get_o_auth2_token_for_application_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        token_id: Annotated[StrictStr, Field(description="`id` of Token")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        token_id: Annotated[StrictStr, Field(..., description="`id` of Token")],
         expand: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -199,8 +201,8 @@ class ApplicationTokensApi:
     @validate_call
     def get_o_auth2_token_for_application_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        token_id: Annotated[StrictStr, Field(description="`id` of Token")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        token_id: Annotated[StrictStr, Field(..., description="`id` of Token")],
         expand: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -343,7 +345,7 @@ class ApplicationTokensApi:
     @validate_call
     def list_o_auth2_tokens_for_application(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
         expand: Optional[StrictStr] = None,
         after: Optional[StrictStr] = None,
         limit: Optional[StrictInt] = None,
@@ -425,7 +427,7 @@ class ApplicationTokensApi:
     @validate_call
     def list_o_auth2_tokens_for_application_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
         expand: Optional[StrictStr] = None,
         after: Optional[StrictStr] = None,
         limit: Optional[StrictInt] = None,
@@ -507,7 +509,7 @@ class ApplicationTokensApi:
     @validate_call
     def list_o_auth2_tokens_for_application_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
         expand: Optional[StrictStr] = None,
         after: Optional[StrictStr] = None,
         limit: Optional[StrictInt] = None,
@@ -662,8 +664,8 @@ class ApplicationTokensApi:
     @validate_call
     def revoke_o_auth2_token_for_application(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        token_id: Annotated[StrictStr, Field(description="`id` of Token")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        token_id: Annotated[StrictStr, Field(..., description="`id` of Token")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -736,8 +738,8 @@ class ApplicationTokensApi:
     @validate_call
     def revoke_o_auth2_token_for_application_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        token_id: Annotated[StrictStr, Field(description="`id` of Token")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        token_id: Annotated[StrictStr, Field(..., description="`id` of Token")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -810,8 +812,8 @@ class ApplicationTokensApi:
     @validate_call
     def revoke_o_auth2_token_for_application_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        token_id: Annotated[StrictStr, Field(description="`id` of Token")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        token_id: Annotated[StrictStr, Field(..., description="`id` of Token")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -945,7 +947,7 @@ class ApplicationTokensApi:
     @validate_call
     def revoke_o_auth2_tokens_for_application(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1015,7 +1017,7 @@ class ApplicationTokensApi:
     @validate_call
     def revoke_o_auth2_tokens_for_application_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1085,7 +1087,7 @@ class ApplicationTokensApi:
     @validate_call
     def revoke_o_auth2_tokens_for_application_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],

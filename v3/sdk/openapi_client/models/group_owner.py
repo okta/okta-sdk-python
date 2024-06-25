@@ -18,9 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.group_owner_origin_type import GroupOwnerOriginType
 from openapi_client.models.group_owner_type import GroupOwnerType
 from typing import Optional, Set
@@ -30,12 +27,12 @@ class GroupOwner(BaseModel):
     """
     GroupOwner
     """ # noqa: E501
-    display_name: Optional[StrictStr] = Field(default=None, description="The display name of the group owner", alias="displayName")
-    id: Optional[StrictStr] = Field(default=None, description="The `id` of the group owner")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the group owner was last updated", alias="lastUpdated")
-    origin_id: Optional[StrictStr] = Field(default=None, description="The ID of the app instance if the `originType` is `APPLICATION`. This value is `NULL` if `originType` is `OKTA_DIRECTORY`.", alias="originId")
-    origin_type: Optional[GroupOwnerOriginType] = Field(default=None, alias="originType")
-    resolved: Optional[StrictBool] = Field(default=None, description="If `originType`is APPLICATION, this parameter is set to `FALSE` until the owner’s `originId` is reconciled with an associated Okta ID.")
+    display_name: Optional[StrictStr] = Field(None, alias="displayName", description="The display name of the group owner")
+    id: Optional[StrictStr] = Field(None, description="The `id` of the group owner")
+    last_updated: Optional[datetime] = Field(None, alias="lastUpdated", description="Timestamp when the group owner was last updated")
+    origin_id: Optional[StrictStr] = Field(None, alias="originId", description="The ID of the app instance if the `originType` is `APPLICATION`. This value is `NULL` if `originType` is `OKTA_DIRECTORY`.")
+    origin_type: Optional[GroupOwnerOriginType] = Field(None, alias="originType")
+    resolved: Optional[StrictBool] = Field(None, description="If `originType`is APPLICATION, this parameter is set to `FALSE` until the owner’s `originId` is reconciled with an associated Okta ID.")
     type: Optional[GroupOwnerType] = None
     __properties: ClassVar[List[str]] = ["displayName", "id", "lastUpdated", "originId", "originType", "resolved", "type"]
 

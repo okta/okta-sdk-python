@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,9 +25,9 @@ class PushUserFactorProfile(BaseModel):
     """
     PushUserFactorProfile
     """ # noqa: E501
-    credential_id: Optional[StrictStr] = Field(default=None, alias="credentialId")
-    device_token: Optional[StrictStr] = Field(default=None, alias="deviceToken")
-    device_type: Optional[StrictStr] = Field(default=None, alias="deviceType")
+    credential_id: Optional[StrictStr] = Field(None, alias="credentialId")
+    device_token: Optional[StrictStr] = Field(None, alias="deviceToken")
+    device_type: Optional[StrictStr] = Field(None, alias="deviceType")
     name: Optional[StrictStr] = None
     platform: Optional[StrictStr] = None
     version: Optional[StrictStr] = None

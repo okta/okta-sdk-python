@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,8 +25,8 @@ class UserLifecycleAttributePolicyRuleCondition(BaseModel):
     """
     UserLifecycleAttributePolicyRuleCondition
     """ # noqa: E501
-    attribute_name: Optional[StrictStr] = Field(default=None, alias="attributeName")
-    matching_value: Optional[StrictStr] = Field(default=None, alias="matchingValue")
+    attribute_name: Optional[StrictStr] = Field(None, alias="attributeName")
+    matching_value: Optional[StrictStr] = Field(None, alias="matchingValue")
     __properties: ClassVar[List[str]] = ["attributeName", "matchingValue"]
 
     model_config = ConfigDict(

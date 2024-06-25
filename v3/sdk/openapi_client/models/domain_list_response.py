@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.domain_response import DomainResponse
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,7 +26,7 @@ class DomainListResponse(BaseModel):
     """
     Defines a list of domains with a subset of the properties for each domain.
     """ # noqa: E501
-    domains: Optional[List[DomainResponse]] = Field(default=None, description="Each element of the array defines an individual domain.")
+    domains: Optional[conlist(DomainResponse)] = Field(None, description="Each element of the array defines an individual domain.")
     __properties: ClassVar[List[str]] = ["domains"]
 
     model_config = ConfigDict(

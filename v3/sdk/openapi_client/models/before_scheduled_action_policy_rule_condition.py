@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.duration import Duration
 from openapi_client.models.scheduled_user_lifecycle_action import ScheduledUserLifecycleAction
 from typing import Optional, Set
@@ -30,7 +28,7 @@ class BeforeScheduledActionPolicyRuleCondition(BaseModel):
     BeforeScheduledActionPolicyRuleCondition
     """ # noqa: E501
     duration: Optional[Duration] = None
-    lifecycle_action: Optional[ScheduledUserLifecycleAction] = Field(default=None, alias="lifecycleAction")
+    lifecycle_action: Optional[ScheduledUserLifecycleAction] = Field(None, alias="lifecycleAction")
     __properties: ClassVar[List[str]] = ["duration", "lifecycleAction"]
 
     model_config = ConfigDict(

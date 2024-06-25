@@ -17,8 +17,11 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr
 from typing_extensions import Annotated
+from pydantic import Field, StrictStr
+
+from typing import List
+
 from openapi_client.models.hook_key import HookKey
 from openapi_client.models.json_web_key import JsonWebKey
 from openapi_client.models.key_request import KeyRequest
@@ -325,7 +328,7 @@ class HookKeyApi:
     @validate_call
     def delete_hook_key(
         self,
-        hook_key_id: Annotated[StrictStr, Field(description="`id` of the Hook Key")],
+        hook_key_id: Annotated[StrictStr, Field(..., description="`id` of the Hook Key")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -395,7 +398,7 @@ class HookKeyApi:
     @validate_call
     def delete_hook_key_with_http_info(
         self,
-        hook_key_id: Annotated[StrictStr, Field(description="`id` of the Hook Key")],
+        hook_key_id: Annotated[StrictStr, Field(..., description="`id` of the Hook Key")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -465,7 +468,7 @@ class HookKeyApi:
     @validate_call
     def delete_hook_key_without_preload_content(
         self,
-        hook_key_id: Annotated[StrictStr, Field(description="`id` of the Hook Key")],
+        hook_key_id: Annotated[StrictStr, Field(..., description="`id` of the Hook Key")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -593,7 +596,7 @@ class HookKeyApi:
     @validate_call
     def get_hook_key(
         self,
-        hook_key_id: Annotated[StrictStr, Field(description="`id` of the Hook Key")],
+        hook_key_id: Annotated[StrictStr, Field(..., description="`id` of the Hook Key")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -663,7 +666,7 @@ class HookKeyApi:
     @validate_call
     def get_hook_key_with_http_info(
         self,
-        hook_key_id: Annotated[StrictStr, Field(description="`id` of the Hook Key")],
+        hook_key_id: Annotated[StrictStr, Field(..., description="`id` of the Hook Key")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -733,7 +736,7 @@ class HookKeyApi:
     @validate_call
     def get_hook_key_without_preload_content(
         self,
-        hook_key_id: Annotated[StrictStr, Field(description="`id` of the Hook Key")],
+        hook_key_id: Annotated[StrictStr, Field(..., description="`id` of the Hook Key")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -861,7 +864,7 @@ class HookKeyApi:
     @validate_call
     def get_public_key(
         self,
-        public_key_id: Annotated[StrictStr, Field(description="`id` of the Public Key")],
+        public_key_id: Annotated[StrictStr, Field(..., description="`id` of the Public Key")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -931,7 +934,7 @@ class HookKeyApi:
     @validate_call
     def get_public_key_with_http_info(
         self,
-        public_key_id: Annotated[StrictStr, Field(description="`id` of the Public Key")],
+        public_key_id: Annotated[StrictStr, Field(..., description="`id` of the Public Key")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1001,7 +1004,7 @@ class HookKeyApi:
     @validate_call
     def get_public_key_without_preload_content(
         self,
-        public_key_id: Annotated[StrictStr, Field(description="`id` of the Public Key")],
+        public_key_id: Annotated[StrictStr, Field(..., description="`id` of the Public Key")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1379,7 +1382,7 @@ class HookKeyApi:
     @validate_call
     def replace_hook_key(
         self,
-        hook_key_id: Annotated[StrictStr, Field(description="`id` of the Hook Key")],
+        hook_key_id: Annotated[StrictStr, Field(..., description="`id` of the Hook Key")],
         key_request: KeyRequest,
         _request_timeout: Union[
             None,
@@ -1454,7 +1457,7 @@ class HookKeyApi:
     @validate_call
     def replace_hook_key_with_http_info(
         self,
-        hook_key_id: Annotated[StrictStr, Field(description="`id` of the Hook Key")],
+        hook_key_id: Annotated[StrictStr, Field(..., description="`id` of the Hook Key")],
         key_request: KeyRequest,
         _request_timeout: Union[
             None,
@@ -1529,7 +1532,7 @@ class HookKeyApi:
     @validate_call
     def replace_hook_key_without_preload_content(
         self,
-        hook_key_id: Annotated[StrictStr, Field(description="`id` of the Hook Key")],
+        hook_key_id: Annotated[StrictStr, Field(..., description="`id` of the Hook Key")],
         key_request: KeyRequest,
         _request_timeout: Union[
             None,

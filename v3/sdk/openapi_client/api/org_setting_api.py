@@ -18,7 +18,9 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import StrictBytes, StrictStr
-from typing import Optional, Union
+
+from typing import List, Optional, Union
+
 from openapi_client.models.bounces_remove_list_obj import BouncesRemoveListObj
 from openapi_client.models.bounces_remove_list_result import BouncesRemoveListResult
 from openapi_client.models.org_contact_type_obj import OrgContactTypeObj

@@ -18,9 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.agent_type import AgentType
 from openapi_client.models.agent_update_instance_status import AgentUpdateInstanceStatus
 from openapi_client.models.links_self import LinksSelf
@@ -33,17 +30,17 @@ class Agent(BaseModel):
     Agent details
     """ # noqa: E501
     id: Optional[StrictStr] = None
-    is_hidden: Optional[StrictBool] = Field(default=None, alias="isHidden")
-    is_latest_g_aed_version: Optional[StrictBool] = Field(default=None, alias="isLatestGAedVersion")
-    last_connection: Optional[datetime] = Field(default=None, alias="lastConnection")
+    is_hidden: Optional[StrictBool] = Field(None, alias="isHidden")
+    is_latest_g_aed_version: Optional[StrictBool] = Field(None, alias="isLatestGAedVersion")
+    last_connection: Optional[datetime] = Field(None, alias="lastConnection")
     name: Optional[StrictStr] = None
-    operational_status: Optional[OperationalStatus] = Field(default=None, alias="operationalStatus")
-    pool_id: Optional[StrictStr] = Field(default=None, alias="poolId")
+    operational_status: Optional[OperationalStatus] = Field(None, alias="operationalStatus")
+    pool_id: Optional[StrictStr] = Field(None, alias="poolId")
     type: Optional[AgentType] = None
-    update_message: Optional[StrictStr] = Field(default=None, alias="updateMessage")
-    update_status: Optional[AgentUpdateInstanceStatus] = Field(default=None, alias="updateStatus")
+    update_message: Optional[StrictStr] = Field(None, alias="updateMessage")
+    update_status: Optional[AgentUpdateInstanceStatus] = Field(None, alias="updateStatus")
     version: Optional[StrictStr] = None
-    links: Optional[LinksSelf] = Field(default=None, alias="_links")
+    links: Optional[LinksSelf] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["id", "isHidden", "isLatestGAedVersion", "lastConnection", "name", "operationalStatus", "poolId", "type", "updateMessage", "updateStatus", "version", "_links"]
 
     model_config = ConfigDict(

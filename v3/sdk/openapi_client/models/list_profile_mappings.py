@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.links_self import LinksSelf
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,10 +26,10 @@ class ListProfileMappings(BaseModel):
     """
     A collection of the profile mappings that include a subset of the profile mapping object's properties. The Profile Mapping object describes a mapping between an Okta User's and an App User's properties using [JSON Schema Draft 4](https://datatracker.ietf.org/doc/html/draft-zyp-json-schema-04).  > **Note:** Same type source/target mappings aren't supported by this API. Profile mappings must either be Okta->App or App->Okta.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="Unique identifier for profile mapping")
+    id: Optional[StrictStr] = Field(None, description="Unique identifier for profile mapping")
     source: Optional[Dict[str, Any]] = None
     target: Optional[Dict[str, Any]] = None
-    links: Optional[LinksSelf] = Field(default=None, alias="_links")
+    links: Optional[LinksSelf] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["id", "source", "target", "_links"]
 
     model_config = ConfigDict(

@@ -18,9 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
 from openapi_client.models.links_self import LinksSelf
 from openapi_client.models.ui_schema_object import UISchemaObject
 from typing import Optional, Set
@@ -30,11 +27,11 @@ class UISchemasResponseObject(BaseModel):
     """
     UISchemasResponseObject
     """ # noqa: E501
-    created: datetime = Field(description="Timestamp when the UI Schema was created (ISO-86001)")
-    id: StrictStr = Field(description="Unique identifier for the UI Schema")
-    last_updated: datetime = Field(description="Timestamp when the UI Schema was last modified (ISO-86001)", alias="lastUpdated")
-    ui_schema: UISchemaObject = Field(alias="uiSchema")
-    links: LinksSelf = Field(alias="_links")
+    created: datetime = Field(..., description="Timestamp when the UI Schema was created (ISO-86001)")
+    id: StrictStr = Field(..., description="Unique identifier for the UI Schema")
+    last_updated: datetime = Field(..., alias="lastUpdated", description="Timestamp when the UI Schema was last modified (ISO-86001)")
+    ui_schema: UISchemaObject = Field(..., alias="uiSchema")
+    links: LinksSelf = Field(..., alias="_links")
     __properties: ClassVar[List[str]] = ["created", "id", "lastUpdated", "uiSchema", "_links"]
 
     model_config = ConfigDict(

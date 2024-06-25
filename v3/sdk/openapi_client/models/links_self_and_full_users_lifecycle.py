@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.href_object import HrefObject
 from openapi_client.models.href_object_activate_link import HrefObjectActivateLink
 from openapi_client.models.href_object_deactivate_link import HrefObjectDeactivateLink
@@ -33,12 +31,12 @@ class LinksSelfAndFullUsersLifecycle(BaseModel):
     """
     LinksSelfAndFullUsersLifecycle
     """ # noqa: E501
-    var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
+    var_self: Optional[HrefObjectSelfLink] = Field(None, alias="self")
     activate: Optional[HrefObjectActivateLink] = None
     deactivate: Optional[HrefObjectDeactivateLink] = None
     suspend: Optional[HrefObjectSuspendLink] = None
     unsuspend: Optional[HrefObjectUnsuspendLink] = None
-    users: Optional[HrefObject] = Field(default=None, description="Link to Device users")
+    users: Optional[HrefObject] = Field(None, description="Link to Device users")
     __properties: ClassVar[List[str]] = ["self", "activate", "deactivate", "suspend", "unsuspend", "users"]
 
     model_config = ConfigDict(

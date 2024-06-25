@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +25,7 @@ class PolicyContextUser(BaseModel):
     """
     The user ID for the simulate operation. Only user IDs or Group IDs are allowed, not both.
     """ # noqa: E501
-    id: StrictStr = Field(description="The unique ID number for the user.")
+    id: StrictStr = Field(..., description="The unique ID number for the user.")
     __properties: ClassVar[List[str]] = ["id"]
 
     model_config = ConfigDict(

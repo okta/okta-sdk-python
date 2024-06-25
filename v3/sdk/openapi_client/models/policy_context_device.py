@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,9 +25,9 @@ class PolicyContextDevice(BaseModel):
     """
     PolicyContextDevice
     """ # noqa: E501
-    platform: Optional[StrictStr] = Field(default=None, description="The platform of the device, for example, IOS.")
-    registered: Optional[StrictBool] = Field(default=None, description="If the device is registered")
-    managed: Optional[StrictBool] = Field(default=None, description="If the device is managed")
+    platform: Optional[StrictStr] = Field(None, description="The platform of the device, for example, IOS.")
+    registered: Optional[StrictBool] = Field(None, description="If the device is registered")
+    managed: Optional[StrictBool] = Field(None, description="If the device is managed")
     __properties: ClassVar[List[str]] = ["platform", "registered", "managed"]
 
     model_config = ConfigDict(

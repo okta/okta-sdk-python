@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.href_object_self_link import HrefObjectSelfLink
 from openapi_client.models.user_type_links_all_of_schema import UserTypeLinksAllOfSchema
 from typing import Optional, Set
@@ -29,8 +27,8 @@ class UserTypeLinks(BaseModel):
     """
     UserTypeLinks
     """ # noqa: E501
-    var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
-    var_schema: Optional[UserTypeLinksAllOfSchema] = Field(default=None, alias="schema")
+    var_self: Optional[HrefObjectSelfLink] = Field(None, alias="self")
+    var_schema: Optional[UserTypeLinksAllOfSchema] = Field(None, alias="schema")
     __properties: ClassVar[List[str]] = ["self", "schema"]
 
     model_config = ConfigDict(

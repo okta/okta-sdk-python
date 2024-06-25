@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.event_hook_channel_config_auth_scheme import EventHookChannelConfigAuthScheme
 from openapi_client.models.event_hook_channel_config_header import EventHookChannelConfigHeader
 from typing import Optional, Set
@@ -29,8 +27,8 @@ class EventHookChannelConfig(BaseModel):
     """
     EventHookChannelConfig
     """ # noqa: E501
-    auth_scheme: Optional[EventHookChannelConfigAuthScheme] = Field(default=None, alias="authScheme")
-    headers: Optional[List[EventHookChannelConfigHeader]] = None
+    auth_scheme: Optional[EventHookChannelConfigAuthScheme] = Field(None, alias="authScheme")
+    headers: Optional[conlist(EventHookChannelConfigHeader)] = None
     uri: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["authScheme", "headers", "uri"]
 

@@ -17,9 +17,11 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictInt, StrictStr
-from typing import Optional
 from typing_extensions import Annotated
+from pydantic import Field, StrictInt, StrictStr
+
+from typing import List, Optional
+
 from openapi_client.models.application_group_assignment import ApplicationGroupAssignment
 
 from openapi_client.api_client import ApiClient, RequestSerialized
@@ -43,8 +45,8 @@ class ApplicationGroupsApi:
     @validate_call
     def assign_group_to_application(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         application_group_assignment: Optional[ApplicationGroupAssignment] = None,
         _request_timeout: Union[
             None,
@@ -122,8 +124,8 @@ class ApplicationGroupsApi:
     @validate_call
     def assign_group_to_application_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         application_group_assignment: Optional[ApplicationGroupAssignment] = None,
         _request_timeout: Union[
             None,
@@ -201,8 +203,8 @@ class ApplicationGroupsApi:
     @validate_call
     def assign_group_to_application_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         application_group_assignment: Optional[ApplicationGroupAssignment] = None,
         _request_timeout: Union[
             None,
@@ -357,8 +359,8 @@ class ApplicationGroupsApi:
     @validate_call
     def get_application_group_assignment(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         expand: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -435,8 +437,8 @@ class ApplicationGroupsApi:
     @validate_call
     def get_application_group_assignment_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         expand: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -513,8 +515,8 @@ class ApplicationGroupsApi:
     @validate_call
     def get_application_group_assignment_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         expand: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -657,7 +659,7 @@ class ApplicationGroupsApi:
     @validate_call
     def list_application_group_assignments(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
         q: Optional[StrictStr] = None,
         after: Annotated[Optional[StrictStr], Field(description="Specifies the pagination cursor for the next page of assignments")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Specifies the number of results for a page")] = None,
@@ -743,7 +745,7 @@ class ApplicationGroupsApi:
     @validate_call
     def list_application_group_assignments_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
         q: Optional[StrictStr] = None,
         after: Annotated[Optional[StrictStr], Field(description="Specifies the pagination cursor for the next page of assignments")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Specifies the number of results for a page")] = None,
@@ -829,7 +831,7 @@ class ApplicationGroupsApi:
     @validate_call
     def list_application_group_assignments_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
         q: Optional[StrictStr] = None,
         after: Annotated[Optional[StrictStr], Field(description="Specifies the pagination cursor for the next page of assignments")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Specifies the number of results for a page")] = None,
@@ -993,8 +995,8 @@ class ApplicationGroupsApi:
     @validate_call
     def unassign_application_from_group(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1067,8 +1069,8 @@ class ApplicationGroupsApi:
     @validate_call
     def unassign_application_from_group_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1141,8 +1143,8 @@ class ApplicationGroupsApi:
     @validate_call
     def unassign_application_from_group_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],

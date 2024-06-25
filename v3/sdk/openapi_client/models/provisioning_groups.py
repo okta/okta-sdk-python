@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.provisioning_groups_action import ProvisioningGroupsAction
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,9 +27,9 @@ class ProvisioningGroups(BaseModel):
     ProvisioningGroups
     """ # noqa: E501
     action: Optional[ProvisioningGroupsAction] = None
-    assignments: Optional[List[StrictStr]] = None
-    filter: Optional[List[StrictStr]] = None
-    source_attribute_name: Optional[StrictStr] = Field(default=None, alias="sourceAttributeName")
+    assignments: Optional[conlist(StrictStr)] = None
+    filter: Optional[conlist(StrictStr)] = None
+    source_attribute_name: Optional[StrictStr] = Field(None, alias="sourceAttributeName")
     __properties: ClassVar[List[str]] = ["action", "assignments", "filter", "sourceAttributeName"]
 
     model_config = ConfigDict(

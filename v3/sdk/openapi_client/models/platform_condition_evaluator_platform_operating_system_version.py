@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.platform_condition_operating_system_version_match_type import PlatformConditionOperatingSystemVersionMatchType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,7 +26,7 @@ class PlatformConditionEvaluatorPlatformOperatingSystemVersion(BaseModel):
     """
     PlatformConditionEvaluatorPlatformOperatingSystemVersion
     """ # noqa: E501
-    match_type: Optional[PlatformConditionOperatingSystemVersionMatchType] = Field(default=None, alias="matchType")
+    match_type: Optional[PlatformConditionOperatingSystemVersionMatchType] = Field(None, alias="matchType")
     value: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["matchType", "value"]
 

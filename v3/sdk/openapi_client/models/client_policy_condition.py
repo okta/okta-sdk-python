@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +25,7 @@ class ClientPolicyCondition(BaseModel):
     """
     Specifies which clients are included in the Policy
     """ # noqa: E501
-    include: Optional[List[StrictStr]] = Field(default=None, description="Which clients are included in the Policy")
+    include: Optional[conlist(StrictStr)] = Field(None, description="Which clients are included in the Policy")
     __properties: ClassVar[List[str]] = ["include"]
 
     model_config = ConfigDict(

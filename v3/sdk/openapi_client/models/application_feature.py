@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.application_feature_links import ApplicationFeatureLinks
 from openapi_client.models.capabilities_object import CapabilitiesObject
 from typing import Optional, Set
@@ -30,10 +28,10 @@ class ApplicationFeature(BaseModel):
     The Feature object is used to configure application feature settings.  The only feature currently supported is `USER_PROVISIONING` for the Org2Org application type. 
     """ # noqa: E501
     capabilities: Optional[CapabilitiesObject] = None
-    description: Optional[StrictStr] = Field(default=None, description="Description of the feature")
-    name: Optional[StrictStr] = Field(default=None, description="Identifying name of the feature")
+    description: Optional[StrictStr] = Field(None, description="Description of the feature")
+    name: Optional[StrictStr] = Field(None, description="Identifying name of the feature")
     status: Optional[Any] = None
-    links: Optional[ApplicationFeatureLinks] = Field(default=None, alias="_links")
+    links: Optional[ApplicationFeatureLinks] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["capabilities", "description", "name", "status", "_links"]
 
     @field_validator('name')

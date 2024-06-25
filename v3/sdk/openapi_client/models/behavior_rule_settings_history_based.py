@@ -18,9 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
-from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,8 +25,8 @@ class BehaviorRuleSettingsHistoryBased(BaseModel):
     """
     BehaviorRuleSettingsHistoryBased
     """ # noqa: E501
-    max_events_used_for_evaluation: Optional[Annotated[int, Field(le=100, strict=True, ge=1)]] = Field(default=20, alias="maxEventsUsedForEvaluation")
-    min_events_needed_for_evaluation: Optional[Annotated[int, Field(le=10, strict=True, ge=0)]] = Field(default=0, alias="minEventsNeededForEvaluation")
+    max_events_used_for_evaluation: Optional[conint(strict=True, le=100, ge=1)] = Field(20, alias="maxEventsUsedForEvaluation")
+    min_events_needed_for_evaluation: Optional[conint(strict=True, le=10, ge=0)] = Field(0, alias="minEventsNeededForEvaluation")
     __properties: ClassVar[List[str]] = ["maxEventsUsedForEvaluation", "minEventsNeededForEvaluation"]
 
     model_config = ConfigDict(

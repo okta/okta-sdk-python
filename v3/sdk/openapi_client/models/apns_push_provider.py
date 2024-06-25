@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import ConfigDict
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.apns_configuration import APNSConfiguration
 from openapi_client.models.links_self import LinksSelf
 from openapi_client.models.provider_type import ProviderType

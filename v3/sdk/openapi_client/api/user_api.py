@@ -17,9 +17,11 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictBool, StrictInt, StrictStr
-from typing import Optional
 from typing_extensions import Annotated
+from pydantic import Field, StrictBool, StrictInt, StrictStr
+
+from typing import Any, Dict, List, Optional
+
 from openapi_client.models.app_link import AppLink
 from openapi_client.models.change_password_request import ChangePasswordRequest
 from openapi_client.models.create_user_request import CreateUserRequest
@@ -60,7 +62,7 @@ class UserApi:
     def activate_user(
         self,
         user_id: StrictStr,
-        send_email: Annotated[StrictBool, Field(description="Sends an activation email to the user if true")],
+        send_email: Annotated[StrictBool, Field(..., description="Sends an activation email to the user if true")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -134,7 +136,7 @@ class UserApi:
     def activate_user_with_http_info(
         self,
         user_id: StrictStr,
-        send_email: Annotated[StrictBool, Field(description="Sends an activation email to the user if true")],
+        send_email: Annotated[StrictBool, Field(..., description="Sends an activation email to the user if true")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -208,7 +210,7 @@ class UserApi:
     def activate_user_without_preload_content(
         self,
         user_id: StrictStr,
-        send_email: Annotated[StrictBool, Field(description="Sends an activation email to the user if true")],
+        send_email: Annotated[StrictBool, Field(..., description="Sends an activation email to the user if true")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3604,8 +3606,8 @@ class UserApi:
     def get_refresh_token_for_user_and_client(
         self,
         user_id: StrictStr,
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
-        token_id: Annotated[StrictStr, Field(description="`id` of Token")],
+        client_id: Annotated[StrictStr, Field(..., description="`client_id` of the app")],
+        token_id: Annotated[StrictStr, Field(..., description="`id` of Token")],
         expand: Optional[StrictStr] = None,
         limit: Optional[StrictInt] = None,
         after: Optional[StrictStr] = None,
@@ -3694,8 +3696,8 @@ class UserApi:
     def get_refresh_token_for_user_and_client_with_http_info(
         self,
         user_id: StrictStr,
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
-        token_id: Annotated[StrictStr, Field(description="`id` of Token")],
+        client_id: Annotated[StrictStr, Field(..., description="`client_id` of the app")],
+        token_id: Annotated[StrictStr, Field(..., description="`id` of Token")],
         expand: Optional[StrictStr] = None,
         limit: Optional[StrictInt] = None,
         after: Optional[StrictStr] = None,
@@ -3784,8 +3786,8 @@ class UserApi:
     def get_refresh_token_for_user_and_client_without_preload_content(
         self,
         user_id: StrictStr,
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
-        token_id: Annotated[StrictStr, Field(description="`id` of Token")],
+        client_id: Annotated[StrictStr, Field(..., description="`client_id` of the app")],
+        token_id: Annotated[StrictStr, Field(..., description="`id` of Token")],
         expand: Optional[StrictStr] = None,
         limit: Optional[StrictInt] = None,
         after: Optional[StrictStr] = None,
@@ -4221,7 +4223,7 @@ class UserApi:
     def get_user_grant(
         self,
         user_id: StrictStr,
-        grant_id: Annotated[StrictStr, Field(description="ID of the Grant")],
+        grant_id: Annotated[StrictStr, Field(..., description="ID of the Grant")],
         expand: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -4299,7 +4301,7 @@ class UserApi:
     def get_user_grant_with_http_info(
         self,
         user_id: StrictStr,
-        grant_id: Annotated[StrictStr, Field(description="ID of the Grant")],
+        grant_id: Annotated[StrictStr, Field(..., description="ID of the Grant")],
         expand: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -4377,7 +4379,7 @@ class UserApi:
     def get_user_grant_without_preload_content(
         self,
         user_id: StrictStr,
-        grant_id: Annotated[StrictStr, Field(description="ID of the Grant")],
+        grant_id: Annotated[StrictStr, Field(..., description="ID of the Grant")],
         expand: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -4789,7 +4791,7 @@ class UserApi:
     def list_grants_for_user_and_client(
         self,
         user_id: StrictStr,
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
+        client_id: Annotated[StrictStr, Field(..., description="`client_id` of the app")],
         expand: Optional[StrictStr] = None,
         after: Optional[StrictStr] = None,
         limit: Optional[StrictInt] = None,
@@ -4875,7 +4877,7 @@ class UserApi:
     def list_grants_for_user_and_client_with_http_info(
         self,
         user_id: StrictStr,
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
+        client_id: Annotated[StrictStr, Field(..., description="`client_id` of the app")],
         expand: Optional[StrictStr] = None,
         after: Optional[StrictStr] = None,
         limit: Optional[StrictInt] = None,
@@ -4961,7 +4963,7 @@ class UserApi:
     def list_grants_for_user_and_client_without_preload_content(
         self,
         user_id: StrictStr,
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
+        client_id: Annotated[StrictStr, Field(..., description="`client_id` of the app")],
         expand: Optional[StrictStr] = None,
         after: Optional[StrictStr] = None,
         limit: Optional[StrictInt] = None,
@@ -5440,7 +5442,7 @@ class UserApi:
     def list_refresh_tokens_for_user_and_client(
         self,
         user_id: StrictStr,
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
+        client_id: Annotated[StrictStr, Field(..., description="`client_id` of the app")],
         expand: Optional[StrictStr] = None,
         after: Optional[StrictStr] = None,
         limit: Optional[StrictInt] = None,
@@ -5526,7 +5528,7 @@ class UserApi:
     def list_refresh_tokens_for_user_and_client_with_http_info(
         self,
         user_id: StrictStr,
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
+        client_id: Annotated[StrictStr, Field(..., description="`client_id` of the app")],
         expand: Optional[StrictStr] = None,
         after: Optional[StrictStr] = None,
         limit: Optional[StrictInt] = None,
@@ -5612,7 +5614,7 @@ class UserApi:
     def list_refresh_tokens_for_user_and_client_without_preload_content(
         self,
         user_id: StrictStr,
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
+        client_id: Annotated[StrictStr, Field(..., description="`client_id` of the app")],
         expand: Optional[StrictStr] = None,
         after: Optional[StrictStr] = None,
         limit: Optional[StrictInt] = None,
@@ -8420,7 +8422,7 @@ class UserApi:
     def revoke_grants_for_user_and_client(
         self,
         user_id: StrictStr,
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
+        client_id: Annotated[StrictStr, Field(..., description="`client_id` of the app")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8494,7 +8496,7 @@ class UserApi:
     def revoke_grants_for_user_and_client_with_http_info(
         self,
         user_id: StrictStr,
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
+        client_id: Annotated[StrictStr, Field(..., description="`client_id` of the app")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8568,7 +8570,7 @@ class UserApi:
     def revoke_grants_for_user_and_client_without_preload_content(
         self,
         user_id: StrictStr,
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
+        client_id: Annotated[StrictStr, Field(..., description="`client_id` of the app")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8703,8 +8705,8 @@ class UserApi:
     def revoke_token_for_user_and_client(
         self,
         user_id: StrictStr,
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
-        token_id: Annotated[StrictStr, Field(description="`id` of Token")],
+        client_id: Annotated[StrictStr, Field(..., description="`client_id` of the app")],
+        token_id: Annotated[StrictStr, Field(..., description="`id` of Token")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8781,8 +8783,8 @@ class UserApi:
     def revoke_token_for_user_and_client_with_http_info(
         self,
         user_id: StrictStr,
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
-        token_id: Annotated[StrictStr, Field(description="`id` of Token")],
+        client_id: Annotated[StrictStr, Field(..., description="`client_id` of the app")],
+        token_id: Annotated[StrictStr, Field(..., description="`id` of Token")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8859,8 +8861,8 @@ class UserApi:
     def revoke_token_for_user_and_client_without_preload_content(
         self,
         user_id: StrictStr,
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
-        token_id: Annotated[StrictStr, Field(description="`id` of Token")],
+        client_id: Annotated[StrictStr, Field(..., description="`client_id` of the app")],
+        token_id: Annotated[StrictStr, Field(..., description="`id` of Token")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9001,7 +9003,7 @@ class UserApi:
     def revoke_tokens_for_user_and_client(
         self,
         user_id: StrictStr,
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
+        client_id: Annotated[StrictStr, Field(..., description="`client_id` of the app")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9075,7 +9077,7 @@ class UserApi:
     def revoke_tokens_for_user_and_client_with_http_info(
         self,
         user_id: StrictStr,
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
+        client_id: Annotated[StrictStr, Field(..., description="`client_id` of the app")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9149,7 +9151,7 @@ class UserApi:
     def revoke_tokens_for_user_and_client_without_preload_content(
         self,
         user_id: StrictStr,
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
+        client_id: Annotated[StrictStr, Field(..., description="`client_id` of the app")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9284,7 +9286,7 @@ class UserApi:
     def revoke_user_grant(
         self,
         user_id: StrictStr,
-        grant_id: Annotated[StrictStr, Field(description="ID of the Grant")],
+        grant_id: Annotated[StrictStr, Field(..., description="ID of the Grant")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9358,7 +9360,7 @@ class UserApi:
     def revoke_user_grant_with_http_info(
         self,
         user_id: StrictStr,
-        grant_id: Annotated[StrictStr, Field(description="ID of the Grant")],
+        grant_id: Annotated[StrictStr, Field(..., description="ID of the Grant")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9432,7 +9434,7 @@ class UserApi:
     def revoke_user_grant_without_preload_content(
         self,
         user_id: StrictStr,
-        grant_id: Annotated[StrictStr, Field(description="ID of the Grant")],
+        grant_id: Annotated[StrictStr, Field(..., description="ID of the Grant")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10121,7 +10123,7 @@ class UserApi:
         self,
         user_id: StrictStr,
         primary_relationship_name: StrictStr,
-        primary_user_id: Annotated[StrictStr, Field(description="`id` of primary User")],
+        primary_user_id: Annotated[StrictStr, Field(..., description="`id` of primary User")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10199,7 +10201,7 @@ class UserApi:
         self,
         user_id: StrictStr,
         primary_relationship_name: StrictStr,
-        primary_user_id: Annotated[StrictStr, Field(description="`id` of primary User")],
+        primary_user_id: Annotated[StrictStr, Field(..., description="`id` of primary User")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10277,7 +10279,7 @@ class UserApi:
         self,
         user_id: StrictStr,
         primary_relationship_name: StrictStr,
-        primary_user_id: Annotated[StrictStr, Field(description="`id` of primary User")],
+        primary_user_id: Annotated[StrictStr, Field(..., description="`id` of primary User")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],

@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.access_policy_rule_application_sign_on import AccessPolicyRuleApplicationSignOn
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,7 +26,7 @@ class AccessPolicyRuleActions(BaseModel):
     """
     AccessPolicyRuleActions
     """ # noqa: E501
-    app_sign_on: Optional[AccessPolicyRuleApplicationSignOn] = Field(default=None, alias="appSignOn")
+    app_sign_on: Optional[AccessPolicyRuleApplicationSignOn] = Field(None, alias="appSignOn")
     __properties: ClassVar[List[str]] = ["appSignOn"]
 
     model_config = ConfigDict(

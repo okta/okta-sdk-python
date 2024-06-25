@@ -17,9 +17,11 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr
-from typing import Optional
 from typing_extensions import Annotated
+from pydantic import Field, StrictStr, conint
+
+from typing import List, Optional
+
 from openapi_client.models.device import Device
 from openapi_client.models.device_user import DeviceUser
 
@@ -44,7 +46,7 @@ class DeviceApi:
     @validate_call
     def activate_device(
         self,
-        device_id: Annotated[StrictStr, Field(description="`id` of the device")],
+        device_id: Annotated[StrictStr, Field(..., description="`id` of the device")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -114,7 +116,7 @@ class DeviceApi:
     @validate_call
     def activate_device_with_http_info(
         self,
-        device_id: Annotated[StrictStr, Field(description="`id` of the device")],
+        device_id: Annotated[StrictStr, Field(..., description="`id` of the device")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -184,7 +186,7 @@ class DeviceApi:
     @validate_call
     def activate_device_without_preload_content(
         self,
-        device_id: Annotated[StrictStr, Field(description="`id` of the device")],
+        device_id: Annotated[StrictStr, Field(..., description="`id` of the device")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -312,7 +314,7 @@ class DeviceApi:
     @validate_call
     def deactivate_device(
         self,
-        device_id: Annotated[StrictStr, Field(description="`id` of the device")],
+        device_id: Annotated[StrictStr, Field(..., description="`id` of the device")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -382,7 +384,7 @@ class DeviceApi:
     @validate_call
     def deactivate_device_with_http_info(
         self,
-        device_id: Annotated[StrictStr, Field(description="`id` of the device")],
+        device_id: Annotated[StrictStr, Field(..., description="`id` of the device")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -452,7 +454,7 @@ class DeviceApi:
     @validate_call
     def deactivate_device_without_preload_content(
         self,
-        device_id: Annotated[StrictStr, Field(description="`id` of the device")],
+        device_id: Annotated[StrictStr, Field(..., description="`id` of the device")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -580,7 +582,7 @@ class DeviceApi:
     @validate_call
     def delete_device(
         self,
-        device_id: Annotated[StrictStr, Field(description="`id` of the device")],
+        device_id: Annotated[StrictStr, Field(..., description="`id` of the device")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -650,7 +652,7 @@ class DeviceApi:
     @validate_call
     def delete_device_with_http_info(
         self,
-        device_id: Annotated[StrictStr, Field(description="`id` of the device")],
+        device_id: Annotated[StrictStr, Field(..., description="`id` of the device")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -720,7 +722,7 @@ class DeviceApi:
     @validate_call
     def delete_device_without_preload_content(
         self,
-        device_id: Annotated[StrictStr, Field(description="`id` of the device")],
+        device_id: Annotated[StrictStr, Field(..., description="`id` of the device")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -848,7 +850,7 @@ class DeviceApi:
     @validate_call
     def get_device(
         self,
-        device_id: Annotated[StrictStr, Field(description="`id` of the device")],
+        device_id: Annotated[StrictStr, Field(..., description="`id` of the device")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -918,7 +920,7 @@ class DeviceApi:
     @validate_call
     def get_device_with_http_info(
         self,
-        device_id: Annotated[StrictStr, Field(description="`id` of the device")],
+        device_id: Annotated[StrictStr, Field(..., description="`id` of the device")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -988,7 +990,7 @@ class DeviceApi:
     @validate_call
     def get_device_without_preload_content(
         self,
-        device_id: Annotated[StrictStr, Field(description="`id` of the device")],
+        device_id: Annotated[StrictStr, Field(..., description="`id` of the device")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1116,7 +1118,7 @@ class DeviceApi:
     @validate_call
     def list_device_users(
         self,
-        device_id: Annotated[StrictStr, Field(description="`id` of the device")],
+        device_id: Annotated[StrictStr, Field(..., description="`id` of the device")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1186,7 +1188,7 @@ class DeviceApi:
     @validate_call
     def list_device_users_with_http_info(
         self,
-        device_id: Annotated[StrictStr, Field(description="`id` of the device")],
+        device_id: Annotated[StrictStr, Field(..., description="`id` of the device")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1256,7 +1258,7 @@ class DeviceApi:
     @validate_call
     def list_device_users_without_preload_content(
         self,
-        device_id: Annotated[StrictStr, Field(description="`id` of the device")],
+        device_id: Annotated[StrictStr, Field(..., description="`id` of the device")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1385,7 +1387,7 @@ class DeviceApi:
     def list_devices(
         self,
         after: Annotated[Optional[StrictStr], Field(description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information.")] = None,
-        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="A limit on the number of objects to return (recommend `20`)")] = None,
+        limit: Annotated[Optional[conint(strict=True, le=200, ge=1)], Field(description="A limit on the number of objects to return (recommend `20`)")] = None,
         search: Annotated[Optional[StrictStr], Field(description="A SCIM filter expression that filters the results. Searches include all Device `profile` properties and the Device `id`, `status`, and `lastUpdated` properties.")] = None,
         expand: Annotated[Optional[StrictStr], Field(description="Lists associated users for the device in `_embedded` element")] = None,
         _request_timeout: Union[
@@ -1466,7 +1468,7 @@ class DeviceApi:
     def list_devices_with_http_info(
         self,
         after: Annotated[Optional[StrictStr], Field(description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information.")] = None,
-        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="A limit on the number of objects to return (recommend `20`)")] = None,
+        limit: Annotated[Optional[conint(strict=True, le=200, ge=1)], Field(description="A limit on the number of objects to return (recommend `20`)")] = None,
         search: Annotated[Optional[StrictStr], Field(description="A SCIM filter expression that filters the results. Searches include all Device `profile` properties and the Device `id`, `status`, and `lastUpdated` properties.")] = None,
         expand: Annotated[Optional[StrictStr], Field(description="Lists associated users for the device in `_embedded` element")] = None,
         _request_timeout: Union[
@@ -1547,7 +1549,7 @@ class DeviceApi:
     def list_devices_without_preload_content(
         self,
         after: Annotated[Optional[StrictStr], Field(description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information.")] = None,
-        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="A limit on the number of objects to return (recommend `20`)")] = None,
+        limit: Annotated[Optional[conint(strict=True, le=200, ge=1)], Field(description="A limit on the number of objects to return (recommend `20`)")] = None,
         search: Annotated[Optional[StrictStr], Field(description="A SCIM filter expression that filters the results. Searches include all Device `profile` properties and the Device `id`, `status`, and `lastUpdated` properties.")] = None,
         expand: Annotated[Optional[StrictStr], Field(description="Lists associated users for the device in `_embedded` element")] = None,
         _request_timeout: Union[
@@ -1702,7 +1704,7 @@ class DeviceApi:
     @validate_call
     def suspend_device(
         self,
-        device_id: Annotated[StrictStr, Field(description="`id` of the device")],
+        device_id: Annotated[StrictStr, Field(..., description="`id` of the device")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1772,7 +1774,7 @@ class DeviceApi:
     @validate_call
     def suspend_device_with_http_info(
         self,
-        device_id: Annotated[StrictStr, Field(description="`id` of the device")],
+        device_id: Annotated[StrictStr, Field(..., description="`id` of the device")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1842,7 +1844,7 @@ class DeviceApi:
     @validate_call
     def suspend_device_without_preload_content(
         self,
-        device_id: Annotated[StrictStr, Field(description="`id` of the device")],
+        device_id: Annotated[StrictStr, Field(..., description="`id` of the device")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1970,7 +1972,7 @@ class DeviceApi:
     @validate_call
     def unsuspend_device(
         self,
-        device_id: Annotated[StrictStr, Field(description="`id` of the device")],
+        device_id: Annotated[StrictStr, Field(..., description="`id` of the device")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2040,7 +2042,7 @@ class DeviceApi:
     @validate_call
     def unsuspend_device_with_http_info(
         self,
-        device_id: Annotated[StrictStr, Field(description="`id` of the device")],
+        device_id: Annotated[StrictStr, Field(..., description="`id` of the device")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2110,7 +2112,7 @@ class DeviceApi:
     @validate_call
     def unsuspend_device_without_preload_content(
         self,
-        device_id: Annotated[StrictStr, Field(description="`id` of the device")],
+        device_id: Annotated[StrictStr, Field(..., description="`id` of the device")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],

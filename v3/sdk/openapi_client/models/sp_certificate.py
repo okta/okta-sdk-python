@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +25,7 @@ class SpCertificate(BaseModel):
     """
     SpCertificate
     """ # noqa: E501
-    x5c: Optional[List[StrictStr]] = None
+    x5c: Optional[conlist(StrictStr)] = None
     __properties: ClassVar[List[str]] = ["x5c"]
 
     model_config = ConfigDict(

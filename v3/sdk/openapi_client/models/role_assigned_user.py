@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.links_self_and_roles import LinksSelfAndRoles
 from typing import Optional, Set
 from typing_extensions import Self
@@ -30,7 +28,7 @@ class RoleAssignedUser(BaseModel):
     """ # noqa: E501
     id: Optional[StrictStr] = None
     orn: Optional[StrictStr] = None
-    links: Optional[LinksSelfAndRoles] = Field(default=None, alias="_links")
+    links: Optional[LinksSelfAndRoles] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["id", "orn", "_links"]
 
     model_config = ConfigDict(

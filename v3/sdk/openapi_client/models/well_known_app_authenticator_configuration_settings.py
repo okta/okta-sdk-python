@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +25,7 @@ class WellKnownAppAuthenticatorConfigurationSettings(BaseModel):
     """
     WellKnownAppAuthenticatorConfigurationSettings
     """ # noqa: E501
-    user_verification: Optional[StrictStr] = Field(default=None, alias="userVerification")
+    user_verification: Optional[StrictStr] = Field(None, alias="userVerification")
     __properties: ClassVar[List[str]] = ["userVerification"]
 
     model_config = ConfigDict(

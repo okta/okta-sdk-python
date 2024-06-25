@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.resource_set_binding_response_links import ResourceSetBindingResponseLinks
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,8 +26,8 @@ class ResourceSetBindingResponse(BaseModel):
     """
     ResourceSetBindingResponse
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="`id` of the role")
-    links: Optional[ResourceSetBindingResponseLinks] = Field(default=None, alias="_links")
+    id: Optional[StrictStr] = Field(None, description="`id` of the role")
+    links: Optional[ResourceSetBindingResponseLinks] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["id", "_links"]
 
     model_config = ConfigDict(

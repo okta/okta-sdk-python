@@ -18,9 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, field_validator
-from typing import Any, ClassVar, Dict, List
-from typing_extensions import Annotated
 from openapi_client.models.splunk_edition import SplunkEdition
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,9 +26,9 @@ class LogStreamSettingsSplunk(BaseModel):
     """
     Specifies the configuration for the `splunk_cloud_logstreaming` Log Stream type.
     """ # noqa: E501
-    edition: SplunkEdition
-    host: Annotated[str, Field(min_length=17, strict=True, max_length=116)] = Field(description="The domain name for your Splunk Cloud instance. Don't include `http` or `https` in the string. For example: `acme.splunkcloud.com`")
-    token: Annotated[str, Field(strict=True)] = Field(description="The HEC token for your Splunk Cloud HTTP Event Collector. The token value is set at object creation, but isn't returned.")
+    edition: SplunkEdition = Field(...)
+    host: constr(strict=True, max_length=116, min_length=17) = Field(..., description="The domain name for your Splunk Cloud instance. Don't include `http` or `https` in the string. For example: `acme.splunkcloud.com`")
+    token: constr(strict=True) = Field(..., description="The HEC token for your Splunk Cloud HTTP Event Collector. The token value is set at object creation, but isn't returned.")
     __properties: ClassVar[List[str]] = ["edition", "host", "token"]
 
     @field_validator('token')

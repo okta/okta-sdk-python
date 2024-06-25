@@ -18,7 +18,9 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import StrictStr
-from typing import Optional
+
+from typing import List, Optional
+
 from openapi_client.models.bulk_delete_request_body import BulkDeleteRequestBody
 from openapi_client.models.bulk_upsert_request_body import BulkUpsertRequestBody
 from openapi_client.models.identity_source_session import IdentitySourceSession

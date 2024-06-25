@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.policy_type import PolicyType
 from openapi_client.models.simulate_policy_evaluations_evaluated import SimulatePolicyEvaluationsEvaluated
 from openapi_client.models.simulate_policy_evaluations_undefined import SimulatePolicyEvaluationsUndefined
@@ -31,8 +29,8 @@ class SimulatePolicyEvaluations(BaseModel):
     """
     SimulatePolicyEvaluations
     """ # noqa: E501
-    status: Optional[StrictStr] = Field(default=None, description="The result of this entity evaluation")
-    policy_type: Optional[List[PolicyType]] = Field(default=None, description="The policy type of the simulate operation", alias="policyType")
+    status: Optional[StrictStr] = Field(None, description="The result of this entity evaluation")
+    policy_type: Optional[conlist(PolicyType)] = Field(None, alias="policyType", description="The policy type of the simulate operation")
     result: Optional[SimulatePolicyResult] = None
     undefined: Optional[SimulatePolicyEvaluationsUndefined] = None
     evaluated: Optional[SimulatePolicyEvaluationsEvaluated] = None

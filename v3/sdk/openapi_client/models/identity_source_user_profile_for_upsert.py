@@ -18,9 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
-from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,13 +25,13 @@ class IdentitySourceUserProfileForUpsert(BaseModel):
     """
     IdentitySourceUserProfileForUpsert
     """ # noqa: E501
-    email: Optional[Annotated[str, Field(min_length=5, strict=True, max_length=100)]] = None
-    first_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=50)]] = Field(default=None, alias="firstName")
-    home_address: Optional[Annotated[str, Field(strict=True, max_length=4096)]] = Field(default=None, alias="homeAddress")
-    last_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=50)]] = Field(default=None, alias="lastName")
-    mobile_phone: Optional[Annotated[str, Field(strict=True, max_length=100)]] = Field(default=None, alias="mobilePhone")
-    second_email: Optional[Annotated[str, Field(min_length=5, strict=True, max_length=100)]] = Field(default=None, alias="secondEmail")
-    user_name: Optional[Annotated[str, Field(strict=True, max_length=100)]] = Field(default=None, alias="userName")
+    email: Optional[constr(strict=True, max_length=100, min_length=5)] = None
+    first_name: Optional[constr(strict=True, max_length=50, min_length=1)] = Field(None, alias="firstName")
+    home_address: Optional[constr(strict=True, max_length=4096)] = Field(None, alias="homeAddress")
+    last_name: Optional[constr(strict=True, max_length=50, min_length=1)] = Field(None, alias="lastName")
+    mobile_phone: Optional[constr(strict=True, max_length=100)] = Field(None, alias="mobilePhone")
+    second_email: Optional[constr(strict=True, max_length=100, min_length=5)] = Field(None, alias="secondEmail")
+    user_name: Optional[constr(strict=True, max_length=100)] = Field(None, alias="userName")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["email", "firstName", "homeAddress", "lastName", "mobilePhone", "secondEmail", "userName"]
 

@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.okta_sign_on_policy_factor_prompt_mode import OktaSignOnPolicyFactorPromptMode
 from openapi_client.models.okta_sign_on_policy_rule_signon_session_actions import OktaSignOnPolicyRuleSignonSessionActions
 from openapi_client.models.policy_access import PolicyAccess
@@ -31,10 +29,10 @@ class OktaSignOnPolicyRuleSignonActions(BaseModel):
     OktaSignOnPolicyRuleSignonActions
     """ # noqa: E501
     access: Optional[PolicyAccess] = None
-    factor_lifetime: Optional[StrictInt] = Field(default=None, alias="factorLifetime")
-    factor_prompt_mode: Optional[OktaSignOnPolicyFactorPromptMode] = Field(default=None, alias="factorPromptMode")
-    remember_device_by_default: Optional[StrictBool] = Field(default=False, alias="rememberDeviceByDefault")
-    require_factor: Optional[StrictBool] = Field(default=False, alias="requireFactor")
+    factor_lifetime: Optional[StrictInt] = Field(None, alias="factorLifetime")
+    factor_prompt_mode: Optional[OktaSignOnPolicyFactorPromptMode] = Field(None, alias="factorPromptMode")
+    remember_device_by_default: Optional[StrictBool] = Field(False, alias="rememberDeviceByDefault")
+    require_factor: Optional[StrictBool] = Field(False, alias="requireFactor")
     session: Optional[OktaSignOnPolicyRuleSignonSessionActions] = None
     __properties: ClassVar[List[str]] = ["access", "factorLifetime", "factorPromptMode", "rememberDeviceByDefault", "requireFactor", "session"]
 

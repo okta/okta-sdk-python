@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.agent import Agent
 from openapi_client.models.agent_type import AgentType
 from openapi_client.models.agent_update_job_status import AgentUpdateJobStatus
@@ -32,18 +30,18 @@ class AgentPoolUpdate(BaseModel):
     """
     Various information about agent auto update configuration
     """ # noqa: E501
-    agents: Optional[List[Agent]] = None
-    agent_type: Optional[AgentType] = Field(default=None, alias="agentType")
+    agents: Optional[conlist(Agent)] = None
+    agent_type: Optional[AgentType] = Field(None, alias="agentType")
     enabled: Optional[StrictBool] = None
     id: Optional[StrictStr] = None
     name: Optional[StrictStr] = None
-    notify_admin: Optional[StrictBool] = Field(default=None, alias="notifyAdmin")
+    notify_admin: Optional[StrictBool] = Field(None, alias="notifyAdmin")
     reason: Optional[StrictStr] = None
     schedule: Optional[AutoUpdateSchedule] = None
-    sort_order: Optional[StrictInt] = Field(default=None, alias="sortOrder")
+    sort_order: Optional[StrictInt] = Field(None, alias="sortOrder")
     status: Optional[AgentUpdateJobStatus] = None
-    target_version: Optional[StrictStr] = Field(default=None, alias="targetVersion")
-    links: Optional[LinksSelf] = Field(default=None, alias="_links")
+    target_version: Optional[StrictStr] = Field(None, alias="targetVersion")
+    links: Optional[LinksSelf] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["agents", "agentType", "enabled", "id", "name", "notifyAdmin", "reason", "schedule", "sortOrder", "status", "targetVersion", "_links"]
 
     model_config = ConfigDict(

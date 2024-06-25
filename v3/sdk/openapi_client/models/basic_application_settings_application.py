@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +25,7 @@ class BasicApplicationSettingsApplication(BaseModel):
     """
     BasicApplicationSettingsApplication
     """ # noqa: E501
-    auth_url: Optional[StrictStr] = Field(default=None, alias="authURL")
+    auth_url: Optional[StrictStr] = Field(None, alias="authURL")
     url: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["authURL", "url"]
 

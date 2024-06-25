@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +25,7 @@ class ResourceSetResourcePatchRequest(BaseModel):
     """
     ResourceSetResourcePatchRequest
     """ # noqa: E501
-    additions: Optional[List[StrictStr]] = None
+    additions: Optional[conlist(StrictStr)] = None
     __properties: ClassVar[List[str]] = ["additions"]
 
     model_config = ConfigDict(

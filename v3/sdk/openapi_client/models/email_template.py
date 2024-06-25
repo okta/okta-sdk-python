@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.email_template_embedded import EmailTemplateEmbedded
 from openapi_client.models.email_template_links import EmailTemplateLinks
 from typing import Optional, Set
@@ -29,9 +27,9 @@ class EmailTemplate(BaseModel):
     """
     EmailTemplate
     """ # noqa: E501
-    name: Optional[StrictStr] = Field(default=None, description="The name of this email template")
-    embedded: Optional[EmailTemplateEmbedded] = Field(default=None, alias="_embedded")
-    links: Optional[EmailTemplateLinks] = Field(default=None, alias="_links")
+    name: Optional[StrictStr] = Field(None, description="The name of this email template")
+    embedded: Optional[EmailTemplateEmbedded] = Field(None, alias="_embedded")
+    links: Optional[EmailTemplateLinks] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["name", "_embedded", "_links"]
 
     model_config = ConfigDict(

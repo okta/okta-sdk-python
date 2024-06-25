@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.application_settings_notifications_vpn_network import ApplicationSettingsNotificationsVpnNetwork
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,7 +26,7 @@ class ApplicationSettingsNotificationsVpn(BaseModel):
     """
     ApplicationSettingsNotificationsVpn
     """ # noqa: E501
-    help_url: Optional[StrictStr] = Field(default=None, alias="helpUrl")
+    help_url: Optional[StrictStr] = Field(None, alias="helpUrl")
     message: Optional[StrictStr] = None
     network: Optional[ApplicationSettingsNotificationsVpnNetwork] = None
     __properties: ClassVar[List[str]] = ["helpUrl", "message", "network"]

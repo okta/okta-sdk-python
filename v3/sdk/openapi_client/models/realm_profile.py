@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +25,7 @@ class RealmProfile(BaseModel):
     """
     RealmProfile
     """ # noqa: E501
-    name: Optional[StrictStr] = Field(default=None, description="Name of a Realm")
+    name: Optional[StrictStr] = Field(None, description="Name of a Realm")
     __properties: ClassVar[List[str]] = ["name"]
 
     model_config = ConfigDict(

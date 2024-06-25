@@ -17,9 +17,11 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictBytes, StrictInt, StrictStr
-from typing import Optional, Union
 from typing_extensions import Annotated
+from pydantic import Field, StrictBytes, StrictInt, StrictStr
+
+from typing import List, Optional, Union
+
 from openapi_client.models.csr import Csr
 from openapi_client.models.csr_metadata import CsrMetadata
 from openapi_client.models.identity_provider import IdentityProvider
@@ -49,7 +51,7 @@ class IdentityProviderApi:
     @validate_call
     def activate_identity_provider(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -119,7 +121,7 @@ class IdentityProviderApi:
     @validate_call
     def activate_identity_provider_with_http_info(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -189,7 +191,7 @@ class IdentityProviderApi:
     @validate_call
     def activate_identity_provider_without_preload_content(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -317,8 +319,8 @@ class IdentityProviderApi:
     @validate_call
     def clone_identity_provider_key(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        idp_key_id: Annotated[StrictStr, Field(description="`id` of IdP Key")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
+        idp_key_id: Annotated[StrictStr, Field(..., description="`id` of IdP Key")],
         target_idp_id: StrictStr,
         _request_timeout: Union[
             None,
@@ -395,8 +397,8 @@ class IdentityProviderApi:
     @validate_call
     def clone_identity_provider_key_with_http_info(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        idp_key_id: Annotated[StrictStr, Field(description="`id` of IdP Key")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
+        idp_key_id: Annotated[StrictStr, Field(..., description="`id` of IdP Key")],
         target_idp_id: StrictStr,
         _request_timeout: Union[
             None,
@@ -473,8 +475,8 @@ class IdentityProviderApi:
     @validate_call
     def clone_identity_provider_key_without_preload_content(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        idp_key_id: Annotated[StrictStr, Field(description="`id` of IdP Key")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
+        idp_key_id: Annotated[StrictStr, Field(..., description="`id` of IdP Key")],
         target_idp_id: StrictStr,
         _request_timeout: Union[
             None,
@@ -1179,7 +1181,7 @@ class IdentityProviderApi:
     @validate_call
     def deactivate_identity_provider(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1249,7 +1251,7 @@ class IdentityProviderApi:
     @validate_call
     def deactivate_identity_provider_with_http_info(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1319,7 +1321,7 @@ class IdentityProviderApi:
     @validate_call
     def deactivate_identity_provider_without_preload_content(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1447,7 +1449,7 @@ class IdentityProviderApi:
     @validate_call
     def delete_identity_provider(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1517,7 +1519,7 @@ class IdentityProviderApi:
     @validate_call
     def delete_identity_provider_with_http_info(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1587,7 +1589,7 @@ class IdentityProviderApi:
     @validate_call
     def delete_identity_provider_without_preload_content(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1715,7 +1717,7 @@ class IdentityProviderApi:
     @validate_call
     def delete_identity_provider_key(
         self,
-        idp_key_id: Annotated[StrictStr, Field(description="`id` of IdP Key")],
+        idp_key_id: Annotated[StrictStr, Field(..., description="`id` of IdP Key")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1785,7 +1787,7 @@ class IdentityProviderApi:
     @validate_call
     def delete_identity_provider_key_with_http_info(
         self,
-        idp_key_id: Annotated[StrictStr, Field(description="`id` of IdP Key")],
+        idp_key_id: Annotated[StrictStr, Field(..., description="`id` of IdP Key")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1855,7 +1857,7 @@ class IdentityProviderApi:
     @validate_call
     def delete_identity_provider_key_without_preload_content(
         self,
-        idp_key_id: Annotated[StrictStr, Field(description="`id` of IdP Key")],
+        idp_key_id: Annotated[StrictStr, Field(..., description="`id` of IdP Key")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1983,7 +1985,7 @@ class IdentityProviderApi:
     @validate_call
     def generate_csr_for_identity_provider(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         metadata: CsrMetadata,
         _request_timeout: Union[
             None,
@@ -2058,7 +2060,7 @@ class IdentityProviderApi:
     @validate_call
     def generate_csr_for_identity_provider_with_http_info(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         metadata: CsrMetadata,
         _request_timeout: Union[
             None,
@@ -2133,7 +2135,7 @@ class IdentityProviderApi:
     @validate_call
     def generate_csr_for_identity_provider_without_preload_content(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         metadata: CsrMetadata,
         _request_timeout: Union[
             None,
@@ -2282,8 +2284,8 @@ class IdentityProviderApi:
     @validate_call
     def generate_identity_provider_signing_key(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        validity_years: Annotated[StrictInt, Field(description="expiry of the IdP Key Credential")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
+        validity_years: Annotated[StrictInt, Field(..., description="expiry of the IdP Key Credential")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2356,8 +2358,8 @@ class IdentityProviderApi:
     @validate_call
     def generate_identity_provider_signing_key_with_http_info(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        validity_years: Annotated[StrictInt, Field(description="expiry of the IdP Key Credential")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
+        validity_years: Annotated[StrictInt, Field(..., description="expiry of the IdP Key Credential")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2430,8 +2432,8 @@ class IdentityProviderApi:
     @validate_call
     def generate_identity_provider_signing_key_without_preload_content(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        validity_years: Annotated[StrictInt, Field(description="expiry of the IdP Key Credential")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
+        validity_years: Annotated[StrictInt, Field(..., description="expiry of the IdP Key Credential")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2567,8 +2569,8 @@ class IdentityProviderApi:
     @validate_call
     def get_csr_for_identity_provider(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        idp_csr_id: Annotated[StrictStr, Field(description="`id` of the IdP CSR")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
+        idp_csr_id: Annotated[StrictStr, Field(..., description="`id` of the IdP CSR")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2641,8 +2643,8 @@ class IdentityProviderApi:
     @validate_call
     def get_csr_for_identity_provider_with_http_info(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        idp_csr_id: Annotated[StrictStr, Field(description="`id` of the IdP CSR")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
+        idp_csr_id: Annotated[StrictStr, Field(..., description="`id` of the IdP CSR")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2715,8 +2717,8 @@ class IdentityProviderApi:
     @validate_call
     def get_csr_for_identity_provider_without_preload_content(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        idp_csr_id: Annotated[StrictStr, Field(description="`id` of the IdP CSR")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
+        idp_csr_id: Annotated[StrictStr, Field(..., description="`id` of the IdP CSR")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2850,7 +2852,7 @@ class IdentityProviderApi:
     @validate_call
     def get_identity_provider(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2920,7 +2922,7 @@ class IdentityProviderApi:
     @validate_call
     def get_identity_provider_with_http_info(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2990,7 +2992,7 @@ class IdentityProviderApi:
     @validate_call
     def get_identity_provider_without_preload_content(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3118,7 +3120,7 @@ class IdentityProviderApi:
     @validate_call
     def get_identity_provider_application_user(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         user_id: StrictStr,
         _request_timeout: Union[
             None,
@@ -3192,7 +3194,7 @@ class IdentityProviderApi:
     @validate_call
     def get_identity_provider_application_user_with_http_info(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         user_id: StrictStr,
         _request_timeout: Union[
             None,
@@ -3266,7 +3268,7 @@ class IdentityProviderApi:
     @validate_call
     def get_identity_provider_application_user_without_preload_content(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         user_id: StrictStr,
         _request_timeout: Union[
             None,
@@ -3401,7 +3403,7 @@ class IdentityProviderApi:
     @validate_call
     def get_identity_provider_key(
         self,
-        idp_key_id: Annotated[StrictStr, Field(description="`id` of IdP Key")],
+        idp_key_id: Annotated[StrictStr, Field(..., description="`id` of IdP Key")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3471,7 +3473,7 @@ class IdentityProviderApi:
     @validate_call
     def get_identity_provider_key_with_http_info(
         self,
-        idp_key_id: Annotated[StrictStr, Field(description="`id` of IdP Key")],
+        idp_key_id: Annotated[StrictStr, Field(..., description="`id` of IdP Key")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3541,7 +3543,7 @@ class IdentityProviderApi:
     @validate_call
     def get_identity_provider_key_without_preload_content(
         self,
-        idp_key_id: Annotated[StrictStr, Field(description="`id` of IdP Key")],
+        idp_key_id: Annotated[StrictStr, Field(..., description="`id` of IdP Key")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3669,8 +3671,8 @@ class IdentityProviderApi:
     @validate_call
     def get_identity_provider_signing_key(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        idp_key_id: Annotated[StrictStr, Field(description="`id` of IdP Key")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
+        idp_key_id: Annotated[StrictStr, Field(..., description="`id` of IdP Key")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3743,8 +3745,8 @@ class IdentityProviderApi:
     @validate_call
     def get_identity_provider_signing_key_with_http_info(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        idp_key_id: Annotated[StrictStr, Field(description="`id` of IdP Key")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
+        idp_key_id: Annotated[StrictStr, Field(..., description="`id` of IdP Key")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3817,8 +3819,8 @@ class IdentityProviderApi:
     @validate_call
     def get_identity_provider_signing_key_without_preload_content(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        idp_key_id: Annotated[StrictStr, Field(description="`id` of IdP Key")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
+        idp_key_id: Annotated[StrictStr, Field(..., description="`id` of IdP Key")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3952,7 +3954,7 @@ class IdentityProviderApi:
     @validate_call
     def link_user_to_identity_provider(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         user_id: StrictStr,
         user_identity_provider_link_request: UserIdentityProviderLinkRequest,
         _request_timeout: Union[
@@ -4031,7 +4033,7 @@ class IdentityProviderApi:
     @validate_call
     def link_user_to_identity_provider_with_http_info(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         user_id: StrictStr,
         user_identity_provider_link_request: UserIdentityProviderLinkRequest,
         _request_timeout: Union[
@@ -4110,7 +4112,7 @@ class IdentityProviderApi:
     @validate_call
     def link_user_to_identity_provider_without_preload_content(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         user_id: StrictStr,
         user_identity_provider_link_request: UserIdentityProviderLinkRequest,
         _request_timeout: Union[
@@ -4266,7 +4268,7 @@ class IdentityProviderApi:
     @validate_call
     def list_csrs_for_identity_provider(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4336,7 +4338,7 @@ class IdentityProviderApi:
     @validate_call
     def list_csrs_for_identity_provider_with_http_info(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4406,7 +4408,7 @@ class IdentityProviderApi:
     @validate_call
     def list_csrs_for_identity_provider_without_preload_content(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4534,7 +4536,7 @@ class IdentityProviderApi:
     @validate_call
     def list_identity_provider_application_users(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4604,7 +4606,7 @@ class IdentityProviderApi:
     @validate_call
     def list_identity_provider_application_users_with_http_info(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4674,7 +4676,7 @@ class IdentityProviderApi:
     @validate_call
     def list_identity_provider_application_users_without_preload_content(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5086,7 +5088,7 @@ class IdentityProviderApi:
     @validate_call
     def list_identity_provider_signing_keys(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5156,7 +5158,7 @@ class IdentityProviderApi:
     @validate_call
     def list_identity_provider_signing_keys_with_http_info(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5226,7 +5228,7 @@ class IdentityProviderApi:
     @validate_call
     def list_identity_provider_signing_keys_without_preload_content(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5672,7 +5674,7 @@ class IdentityProviderApi:
     @validate_call
     def list_social_auth_tokens(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         user_id: StrictStr,
         _request_timeout: Union[
             None,
@@ -5746,7 +5748,7 @@ class IdentityProviderApi:
     @validate_call
     def list_social_auth_tokens_with_http_info(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         user_id: StrictStr,
         _request_timeout: Union[
             None,
@@ -5820,7 +5822,7 @@ class IdentityProviderApi:
     @validate_call
     def list_social_auth_tokens_without_preload_content(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         user_id: StrictStr,
         _request_timeout: Union[
             None,
@@ -5955,8 +5957,8 @@ class IdentityProviderApi:
     @validate_call
     def publish_csr_for_identity_provider(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        idp_csr_id: Annotated[StrictStr, Field(description="`id` of the IdP CSR")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
+        idp_csr_id: Annotated[StrictStr, Field(..., description="`id` of the IdP CSR")],
         body: Union[StrictBytes, StrictStr],
         _request_timeout: Union[
             None,
@@ -6034,8 +6036,8 @@ class IdentityProviderApi:
     @validate_call
     def publish_csr_for_identity_provider_with_http_info(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        idp_csr_id: Annotated[StrictStr, Field(description="`id` of the IdP CSR")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
+        idp_csr_id: Annotated[StrictStr, Field(..., description="`id` of the IdP CSR")],
         body: Union[StrictBytes, StrictStr],
         _request_timeout: Union[
             None,
@@ -6113,8 +6115,8 @@ class IdentityProviderApi:
     @validate_call
     def publish_csr_for_identity_provider_without_preload_content(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        idp_csr_id: Annotated[StrictStr, Field(description="`id` of the IdP CSR")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
+        idp_csr_id: Annotated[StrictStr, Field(..., description="`id` of the IdP CSR")],
         body: Union[StrictBytes, StrictStr],
         _request_timeout: Union[
             None,
@@ -6276,7 +6278,7 @@ class IdentityProviderApi:
     @validate_call
     def replace_identity_provider(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         identity_provider: IdentityProvider,
         _request_timeout: Union[
             None,
@@ -6351,7 +6353,7 @@ class IdentityProviderApi:
     @validate_call
     def replace_identity_provider_with_http_info(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         identity_provider: IdentityProvider,
         _request_timeout: Union[
             None,
@@ -6426,7 +6428,7 @@ class IdentityProviderApi:
     @validate_call
     def replace_identity_provider_without_preload_content(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         identity_provider: IdentityProvider,
         _request_timeout: Union[
             None,
@@ -6575,8 +6577,8 @@ class IdentityProviderApi:
     @validate_call
     def revoke_csr_for_identity_provider(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        idp_csr_id: Annotated[StrictStr, Field(description="`id` of the IdP CSR")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
+        idp_csr_id: Annotated[StrictStr, Field(..., description="`id` of the IdP CSR")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6649,8 +6651,8 @@ class IdentityProviderApi:
     @validate_call
     def revoke_csr_for_identity_provider_with_http_info(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        idp_csr_id: Annotated[StrictStr, Field(description="`id` of the IdP CSR")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
+        idp_csr_id: Annotated[StrictStr, Field(..., description="`id` of the IdP CSR")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6723,8 +6725,8 @@ class IdentityProviderApi:
     @validate_call
     def revoke_csr_for_identity_provider_without_preload_content(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
-        idp_csr_id: Annotated[StrictStr, Field(description="`id` of the IdP CSR")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
+        idp_csr_id: Annotated[StrictStr, Field(..., description="`id` of the IdP CSR")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6858,7 +6860,7 @@ class IdentityProviderApi:
     @validate_call
     def unlink_user_from_identity_provider(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         user_id: StrictStr,
         _request_timeout: Union[
             None,
@@ -6932,7 +6934,7 @@ class IdentityProviderApi:
     @validate_call
     def unlink_user_from_identity_provider_with_http_info(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         user_id: StrictStr,
         _request_timeout: Union[
             None,
@@ -7006,7 +7008,7 @@ class IdentityProviderApi:
     @validate_call
     def unlink_user_from_identity_provider_without_preload_content(
         self,
-        idp_id: Annotated[StrictStr, Field(description="`id` of IdP")],
+        idp_id: Annotated[StrictStr, Field(..., description="`id` of IdP")],
         user_id: StrictStr,
         _request_timeout: Union[
             None,

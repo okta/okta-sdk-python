@@ -18,11 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from importlib import import_module
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional, Union
-from typing_extensions import Annotated
 from openapi_client.models.behavior_rule_type import BehaviorRuleType
 from openapi_client.models.lifecycle_status import LifecycleStatus
 from openapi_client.models.links_self import LinksSelf
@@ -42,11 +37,11 @@ class BehaviorRule(BaseModel):
     """ # noqa: E501
     created: Optional[datetime] = None
     id: Optional[StrictStr] = None
-    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
-    name: Annotated[str, Field(strict=True, max_length=128)]
+    last_updated: Optional[datetime] = Field(None, alias="lastUpdated")
+    name: constr(strict=True, max_length=128) = Field(...)
     status: Optional[LifecycleStatus] = None
-    type: BehaviorRuleType
-    link: Optional[LinksSelf] = Field(default=None, alias="_link")
+    type: BehaviorRuleType = Field(...)
+    link: Optional[LinksSelf] = Field(None, alias="_link")
     __properties: ClassVar[List[str]] = ["created", "id", "lastUpdated", "name", "status", "type", "_link"]
 
     model_config = ConfigDict(

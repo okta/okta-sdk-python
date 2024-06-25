@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +25,7 @@ class PolicyContextZones(BaseModel):
     """
     PolicyContextZones
     """ # noqa: E501
-    ids: Optional[List[StrictStr]] = None
+    ids: Optional[conlist(StrictStr)] = None
     __properties: ClassVar[List[str]] = ["ids"]
 
     model_config = ConfigDict(

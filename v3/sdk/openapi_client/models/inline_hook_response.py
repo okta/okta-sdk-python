@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.inline_hook_response_commands import InlineHookResponseCommands
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,7 +26,7 @@ class InlineHookResponse(BaseModel):
     """
     InlineHookResponse
     """ # noqa: E501
-    commands: Optional[List[InlineHookResponseCommands]] = None
+    commands: Optional[conlist(InlineHookResponseCommands)] = None
     __properties: ClassVar[List[str]] = ["commands"]
 
     model_config = ConfigDict(

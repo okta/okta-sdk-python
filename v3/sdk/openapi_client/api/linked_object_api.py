@@ -18,6 +18,9 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import StrictStr
+
+from typing import List
+
 from openapi_client.models.linked_object import LinkedObject
 
 from openapi_client.api_client import ApiClient, RequestSerialized

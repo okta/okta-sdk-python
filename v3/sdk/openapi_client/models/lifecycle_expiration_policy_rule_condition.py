@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +25,7 @@ class LifecycleExpirationPolicyRuleCondition(BaseModel):
     """
     LifecycleExpirationPolicyRuleCondition
     """ # noqa: E501
-    lifecycle_status: Optional[StrictStr] = Field(default=None, alias="lifecycleStatus")
+    lifecycle_status: Optional[StrictStr] = Field(None, alias="lifecycleStatus")
     number: Optional[StrictInt] = None
     unit: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["lifecycleStatus", "number", "unit"]

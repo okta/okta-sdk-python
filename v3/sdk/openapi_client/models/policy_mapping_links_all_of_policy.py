@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.href_object_hints import HrefObjectHints
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,10 +27,10 @@ class PolicyMappingLinksAllOfPolicy(BaseModel):
     PolicyMappingLinksAllOfPolicy
     """ # noqa: E501
     hints: Optional[HrefObjectHints] = None
-    href: StrictStr = Field(description="Link URI")
-    name: Optional[StrictStr] = Field(default=None, description="Link name")
-    type: Optional[StrictStr] = Field(default=None, description="The media type of the link. If omitted, it is implicitly `application/json`.")
-    templated: Optional[StrictBool] = Field(default=None, description="Indicates whether the Link Object's \"href\" property is a URI Template.")
+    href: StrictStr = Field(..., description="Link URI")
+    name: Optional[StrictStr] = Field(None, description="Link name")
+    type: Optional[StrictStr] = Field(None, description="The media type of the link. If omitted, it is implicitly `application/json`.")
+    templated: Optional[StrictBool] = Field(None, description="Indicates whether the Link Object's \"href\" property is a URI Template.")
     __properties: ClassVar[List[str]] = ["hints", "href", "name", "type", "templated"]
 
     model_config = ConfigDict(

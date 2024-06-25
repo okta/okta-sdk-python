@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +25,7 @@ class DevicePolicyRuleConditionAssurance(BaseModel):
     """
     DevicePolicyRuleConditionAssurance
     """ # noqa: E501
-    include: Optional[List[StrictStr]] = None
+    include: Optional[conlist(StrictStr)] = None
     __properties: ClassVar[List[str]] = ["include"]
 
     model_config = ConfigDict(

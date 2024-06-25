@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.email_domain_dns_record_type import EmailDomainDNSRecordType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,8 +27,8 @@ class EmailDomainDNSRecord(BaseModel):
     EmailDomainDNSRecord
     """ # noqa: E501
     fqdn: Optional[StrictStr] = None
-    record_type: Optional[EmailDomainDNSRecordType] = Field(default=None, alias="recordType")
-    verification_value: Optional[StrictStr] = Field(default=None, alias="verificationValue")
+    record_type: Optional[EmailDomainDNSRecordType] = Field(None, alias="recordType")
+    verification_value: Optional[StrictStr] = Field(None, alias="verificationValue")
     __properties: ClassVar[List[str]] = ["fqdn", "recordType", "verificationValue"]
 
     model_config = ConfigDict(

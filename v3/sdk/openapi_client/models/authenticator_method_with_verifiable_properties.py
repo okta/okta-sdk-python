@@ -18,9 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from importlib import import_module
-from pydantic import ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional, Union
 from openapi_client.models.authenticator_method_base import AuthenticatorMethodBase
 from openapi_client.models.authenticator_method_property import AuthenticatorMethodProperty
 from openapi_client.models.authenticator_method_type import AuthenticatorMethodType
@@ -49,7 +46,7 @@ class AuthenticatorMethodWithVerifiableProperties(AuthenticatorMethodBase):
     """
     AuthenticatorMethodWithVerifiableProperties
     """ # noqa: E501
-    verifiable_properties: Optional[List[AuthenticatorMethodProperty]] = Field(default=None, alias="verifiableProperties")
+    verifiable_properties: Optional[conlist(AuthenticatorMethodProperty)] = Field(None, alias="verifiableProperties")
     __properties: ClassVar[List[str]] = ["status", "type", "_links", "verifiableProperties"]
 
     model_config = ConfigDict(

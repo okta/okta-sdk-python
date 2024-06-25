@@ -1,0 +1,5 @@
+{
+    "templateDir" : "./templates",
+    "outputDir" : "./sdk",
+    "inputSpec" : "./management.yaml"
+}

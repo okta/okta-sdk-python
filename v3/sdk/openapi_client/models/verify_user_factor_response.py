@@ -18,9 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.verify_user_factor_response_links import VerifyUserFactorResponseLinks
 from openapi_client.models.verify_user_factor_result import VerifyUserFactorResult
 from typing import Optional, Set
@@ -30,11 +27,11 @@ class VerifyUserFactorResponse(BaseModel):
     """
     VerifyUserFactorResponse
     """ # noqa: E501
-    expires_at: Optional[datetime] = Field(default=None, alias="expiresAt")
-    factor_result: Optional[VerifyUserFactorResult] = Field(default=None, alias="factorResult")
-    factor_result_message: Optional[StrictStr] = Field(default=None, alias="factorResultMessage")
-    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, alias="_embedded")
-    links: Optional[VerifyUserFactorResponseLinks] = Field(default=None, alias="_links")
+    expires_at: Optional[datetime] = Field(None, alias="expiresAt")
+    factor_result: Optional[VerifyUserFactorResult] = Field(None, alias="factorResult")
+    factor_result_message: Optional[StrictStr] = Field(None, alias="factorResultMessage")
+    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(None, alias="_embedded")
+    links: Optional[VerifyUserFactorResponseLinks] = Field(None, alias="_links")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["expiresAt", "factorResult", "factorResultMessage", "_embedded", "_links"]
 

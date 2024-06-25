@@ -18,9 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from importlib import import_module
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional, Union
 from openapi_client.models.authenticator_method_type import AuthenticatorMethodType
 from openapi_client.models.lifecycle_status import LifecycleStatus
 from openapi_client.models.links_self_and_lifecycle import LinksSelfAndLifecycle
@@ -49,7 +46,7 @@ class AuthenticatorMethodBase(BaseModel):
     """ # noqa: E501
     status: Optional[LifecycleStatus] = None
     type: Optional[AuthenticatorMethodType] = None
-    links: Optional[LinksSelfAndLifecycle] = Field(default=None, alias="_links")
+    links: Optional[LinksSelfAndLifecycle] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["status", "type", "_links"]
 
     model_config = ConfigDict(

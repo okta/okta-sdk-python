@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictInt
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +25,7 @@ class PasswordPolicyRecoveryQuestionComplexity(BaseModel):
     """
     PasswordPolicyRecoveryQuestionComplexity
     """ # noqa: E501
-    min_length: Optional[StrictInt] = Field(default=None, alias="minLength")
+    min_length: Optional[StrictInt] = Field(None, alias="minLength")
     __properties: ClassVar[List[str]] = ["minLength"]
 
     model_config = ConfigDict(

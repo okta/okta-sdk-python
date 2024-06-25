@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.inline_hook_channel_config_auth_scheme import InlineHookChannelConfigAuthScheme
 from openapi_client.models.inline_hook_channel_config_headers import InlineHookChannelConfigHeaders
 from typing import Optional, Set
@@ -29,8 +27,8 @@ class InlineHookChannelConfig(BaseModel):
     """
     InlineHookChannelConfig
     """ # noqa: E501
-    auth_scheme: Optional[InlineHookChannelConfigAuthScheme] = Field(default=None, alias="authScheme")
-    headers: Optional[List[InlineHookChannelConfigHeaders]] = None
+    auth_scheme: Optional[InlineHookChannelConfigAuthScheme] = Field(None, alias="authScheme")
+    headers: Optional[conlist(InlineHookChannelConfigHeaders)] = None
     method: Optional[StrictStr] = None
     uri: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["authScheme", "headers", "method", "uri"]

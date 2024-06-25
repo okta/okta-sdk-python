@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.href_object import HrefObject
 from openapi_client.models.href_object_self_link import HrefObjectSelfLink
 from typing import Optional, Set
@@ -29,15 +27,15 @@ class IdentityProviderLinks(BaseModel):
     """
     IdentityProviderLinks
     """ # noqa: E501
-    var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
-    acs: Optional[HrefObject] = Field(default=None, description="SAML 2.0 Assertion Consumer Service URL for the Okta SP")
-    authorize: Optional[HrefObject] = Field(default=None, description="OAuth 2.0 authorization endpoint for the IdP OAuth 2.0 Authorization Code flow")
-    client_redirect_uri: Optional[HrefObject] = Field(default=None, description="Redirect URI for the OAuth 2.0 Authorization Code flow", alias="clientRedirectUri")
-    metadata: Optional[HrefObject] = Field(default=None, description="Federation metadata document for the IdP (for example: SAML 2.0 Metadata)")
-    users: Optional[HrefObject] = Field(default=None, description="IdP users")
-    deactivate: Optional[HrefObject] = Field(default=None, description="Deactivate IdP")
-    activate: Optional[HrefObject] = Field(default=None, description="Activate IdP")
-    keys: Optional[HrefObject] = Field(default=None, description="IdP keys")
+    var_self: Optional[HrefObjectSelfLink] = Field(None, alias="self")
+    acs: Optional[HrefObject] = Field(None, description="SAML 2.0 Assertion Consumer Service URL for the Okta SP")
+    authorize: Optional[HrefObject] = Field(None, description="OAuth 2.0 authorization endpoint for the IdP OAuth 2.0 Authorization Code flow")
+    client_redirect_uri: Optional[HrefObject] = Field(None, alias="clientRedirectUri", description="Redirect URI for the OAuth 2.0 Authorization Code flow")
+    metadata: Optional[HrefObject] = Field(None, description="Federation metadata document for the IdP (for example: SAML 2.0 Metadata)")
+    users: Optional[HrefObject] = Field(None, description="IdP users")
+    deactivate: Optional[HrefObject] = Field(None, description="Deactivate IdP")
+    activate: Optional[HrefObject] = Field(None, description="Activate IdP")
+    keys: Optional[HrefObject] = Field(None, description="IdP keys")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["self", "acs", "authorize", "clientRedirectUri", "metadata", "users", "deactivate", "activate", "keys"]
 

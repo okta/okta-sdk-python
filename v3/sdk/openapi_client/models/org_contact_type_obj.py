@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.links_self import LinksSelf
 from openapi_client.models.org_contact_type import OrgContactType
 from typing import Optional, Set
@@ -29,8 +27,8 @@ class OrgContactTypeObj(BaseModel):
     """
     OrgContactTypeObj
     """ # noqa: E501
-    contact_type: Optional[OrgContactType] = Field(default=None, alias="contactType")
-    links: Optional[LinksSelf] = Field(default=None, alias="_links")
+    contact_type: Optional[OrgContactType] = Field(None, alias="contactType")
+    links: Optional[LinksSelf] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["contactType", "_links"]
 
     model_config = ConfigDict(

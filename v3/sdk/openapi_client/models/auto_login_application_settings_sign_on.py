@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,8 +25,8 @@ class AutoLoginApplicationSettingsSignOn(BaseModel):
     """
     AutoLoginApplicationSettingsSignOn
     """ # noqa: E501
-    login_url: Optional[StrictStr] = Field(default=None, alias="loginUrl")
-    redirect_url: Optional[StrictStr] = Field(default=None, alias="redirectUrl")
+    login_url: Optional[StrictStr] = Field(None, alias="loginUrl")
+    redirect_url: Optional[StrictStr] = Field(None, alias="redirectUrl")
     __properties: ClassVar[List[str]] = ["loginUrl", "redirectUrl"]
 
     model_config = ConfigDict(

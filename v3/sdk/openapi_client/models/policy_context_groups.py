@@ -18,9 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List
-from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +25,7 @@ class PolicyContextGroups(BaseModel):
     """
     An array of Group IDs for the simulate operation. Only user IDs or Group IDs are allowed, not both.
     """ # noqa: E501
-    ids: List[Annotated[str, Field(strict=True)]]
+    ids: conlist(constr(strict=True)) = Field(...)
     __properties: ClassVar[List[str]] = ["ids"]
 
     model_config = ConfigDict(

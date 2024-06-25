@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +25,7 @@ class UserLockoutSettings(BaseModel):
     """
     UserLockoutSettings
     """ # noqa: E501
-    prevent_brute_force_lockout_from_unknown_devices: Optional[StrictBool] = Field(default=None, description="Prevents brute-force lockout from unknown devices for the password authenticator.", alias="preventBruteForceLockoutFromUnknownDevices")
+    prevent_brute_force_lockout_from_unknown_devices: Optional[StrictBool] = Field(None, alias="preventBruteForceLockoutFromUnknownDevices", description="Prevents brute-force lockout from unknown devices for the password authenticator.")
     __properties: ClassVar[List[str]] = ["preventBruteForceLockoutFromUnknownDevices"]
 
     model_config = ConfigDict(

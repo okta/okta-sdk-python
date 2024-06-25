@@ -17,9 +17,11 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr
-from typing import Any, Dict, Optional
 from typing_extensions import Annotated
+from pydantic import Field, StrictStr
+
+from typing import Any, Dict, List, Optional
+
 from openapi_client.models.inline_hook import InlineHook
 from openapi_client.models.inline_hook_response import InlineHookResponse
 
@@ -44,7 +46,7 @@ class InlineHookApi:
     @validate_call
     def activate_inline_hook(
         self,
-        inline_hook_id: Annotated[StrictStr, Field(description="`id` of the Inline Hook")],
+        inline_hook_id: Annotated[StrictStr, Field(..., description="`id` of the Inline Hook")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -114,7 +116,7 @@ class InlineHookApi:
     @validate_call
     def activate_inline_hook_with_http_info(
         self,
-        inline_hook_id: Annotated[StrictStr, Field(description="`id` of the Inline Hook")],
+        inline_hook_id: Annotated[StrictStr, Field(..., description="`id` of the Inline Hook")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -184,7 +186,7 @@ class InlineHookApi:
     @validate_call
     def activate_inline_hook_without_preload_content(
         self,
-        inline_hook_id: Annotated[StrictStr, Field(description="`id` of the Inline Hook")],
+        inline_hook_id: Annotated[StrictStr, Field(..., description="`id` of the Inline Hook")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -593,7 +595,7 @@ class InlineHookApi:
     @validate_call
     def deactivate_inline_hook(
         self,
-        inline_hook_id: Annotated[StrictStr, Field(description="`id` of the Inline Hook")],
+        inline_hook_id: Annotated[StrictStr, Field(..., description="`id` of the Inline Hook")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -663,7 +665,7 @@ class InlineHookApi:
     @validate_call
     def deactivate_inline_hook_with_http_info(
         self,
-        inline_hook_id: Annotated[StrictStr, Field(description="`id` of the Inline Hook")],
+        inline_hook_id: Annotated[StrictStr, Field(..., description="`id` of the Inline Hook")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -733,7 +735,7 @@ class InlineHookApi:
     @validate_call
     def deactivate_inline_hook_without_preload_content(
         self,
-        inline_hook_id: Annotated[StrictStr, Field(description="`id` of the Inline Hook")],
+        inline_hook_id: Annotated[StrictStr, Field(..., description="`id` of the Inline Hook")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -861,7 +863,7 @@ class InlineHookApi:
     @validate_call
     def delete_inline_hook(
         self,
-        inline_hook_id: Annotated[StrictStr, Field(description="`id` of the Inline Hook")],
+        inline_hook_id: Annotated[StrictStr, Field(..., description="`id` of the Inline Hook")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -931,7 +933,7 @@ class InlineHookApi:
     @validate_call
     def delete_inline_hook_with_http_info(
         self,
-        inline_hook_id: Annotated[StrictStr, Field(description="`id` of the Inline Hook")],
+        inline_hook_id: Annotated[StrictStr, Field(..., description="`id` of the Inline Hook")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1001,7 +1003,7 @@ class InlineHookApi:
     @validate_call
     def delete_inline_hook_without_preload_content(
         self,
-        inline_hook_id: Annotated[StrictStr, Field(description="`id` of the Inline Hook")],
+        inline_hook_id: Annotated[StrictStr, Field(..., description="`id` of the Inline Hook")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1129,7 +1131,7 @@ class InlineHookApi:
     @validate_call
     def execute_inline_hook(
         self,
-        inline_hook_id: Annotated[StrictStr, Field(description="`id` of the Inline Hook")],
+        inline_hook_id: Annotated[StrictStr, Field(..., description="`id` of the Inline Hook")],
         payload_data: Dict[str, Any],
         _request_timeout: Union[
             None,
@@ -1204,7 +1206,7 @@ class InlineHookApi:
     @validate_call
     def execute_inline_hook_with_http_info(
         self,
-        inline_hook_id: Annotated[StrictStr, Field(description="`id` of the Inline Hook")],
+        inline_hook_id: Annotated[StrictStr, Field(..., description="`id` of the Inline Hook")],
         payload_data: Dict[str, Any],
         _request_timeout: Union[
             None,
@@ -1279,7 +1281,7 @@ class InlineHookApi:
     @validate_call
     def execute_inline_hook_without_preload_content(
         self,
-        inline_hook_id: Annotated[StrictStr, Field(description="`id` of the Inline Hook")],
+        inline_hook_id: Annotated[StrictStr, Field(..., description="`id` of the Inline Hook")],
         payload_data: Dict[str, Any],
         _request_timeout: Union[
             None,
@@ -1428,7 +1430,7 @@ class InlineHookApi:
     @validate_call
     def get_inline_hook(
         self,
-        inline_hook_id: Annotated[StrictStr, Field(description="`id` of the Inline Hook")],
+        inline_hook_id: Annotated[StrictStr, Field(..., description="`id` of the Inline Hook")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1498,7 +1500,7 @@ class InlineHookApi:
     @validate_call
     def get_inline_hook_with_http_info(
         self,
-        inline_hook_id: Annotated[StrictStr, Field(description="`id` of the Inline Hook")],
+        inline_hook_id: Annotated[StrictStr, Field(..., description="`id` of the Inline Hook")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1568,7 +1570,7 @@ class InlineHookApi:
     @validate_call
     def get_inline_hook_without_preload_content(
         self,
-        inline_hook_id: Annotated[StrictStr, Field(description="`id` of the Inline Hook")],
+        inline_hook_id: Annotated[StrictStr, Field(..., description="`id` of the Inline Hook")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1963,7 +1965,7 @@ class InlineHookApi:
     @validate_call
     def replace_inline_hook(
         self,
-        inline_hook_id: Annotated[StrictStr, Field(description="`id` of the Inline Hook")],
+        inline_hook_id: Annotated[StrictStr, Field(..., description="`id` of the Inline Hook")],
         inline_hook: InlineHook,
         _request_timeout: Union[
             None,
@@ -2038,7 +2040,7 @@ class InlineHookApi:
     @validate_call
     def replace_inline_hook_with_http_info(
         self,
-        inline_hook_id: Annotated[StrictStr, Field(description="`id` of the Inline Hook")],
+        inline_hook_id: Annotated[StrictStr, Field(..., description="`id` of the Inline Hook")],
         inline_hook: InlineHook,
         _request_timeout: Union[
             None,
@@ -2113,7 +2115,7 @@ class InlineHookApi:
     @validate_call
     def replace_inline_hook_without_preload_content(
         self,
-        inline_hook_id: Annotated[StrictStr, Field(description="`id` of the Inline Hook")],
+        inline_hook_id: Annotated[StrictStr, Field(..., description="`id` of the Inline Hook")],
         inline_hook: InlineHook,
         _request_timeout: Union[
             None,

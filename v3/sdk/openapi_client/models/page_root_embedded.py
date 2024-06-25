@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.customizable_page import CustomizablePage
 from typing import Optional, Set
 from typing_extensions import Self
@@ -30,9 +28,9 @@ class PageRootEmbedded(BaseModel):
     """ # noqa: E501
     default: Optional[CustomizablePage] = None
     customized: Optional[CustomizablePage] = None
-    customized_url: Optional[StrictStr] = Field(default=None, alias="customizedUrl")
+    customized_url: Optional[StrictStr] = Field(None, alias="customizedUrl")
     preview: Optional[CustomizablePage] = None
-    preview_url: Optional[StrictStr] = Field(default=None, alias="previewUrl")
+    preview_url: Optional[StrictStr] = Field(None, alias="previewUrl")
     __properties: ClassVar[List[str]] = ["default", "customized", "customizedUrl", "preview", "previewUrl"]
 
     model_config = ConfigDict(

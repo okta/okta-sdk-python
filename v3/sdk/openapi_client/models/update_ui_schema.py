@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +25,7 @@ class UpdateUISchema(BaseModel):
     """
     The updated request body properties
     """ # noqa: E501
-    ui_schema: Optional[Dict[str, Any]] = Field(default=None, alias="uiSchema")
+    ui_schema: Optional[Dict[str, Any]] = Field(None, alias="uiSchema")
     __properties: ClassVar[List[str]] = ["uiSchema"]
 
     model_config = ConfigDict(

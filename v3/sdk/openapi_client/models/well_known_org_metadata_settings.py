@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,9 +25,9 @@ class WellKnownOrgMetadataSettings(BaseModel):
     """
     WellKnownOrgMetadataSettings
     """ # noqa: E501
-    analytics_collection_enabled: Optional[StrictBool] = Field(default=None, alias="analyticsCollectionEnabled")
-    bug_reporting_enabled: Optional[StrictBool] = Field(default=None, alias="bugReportingEnabled")
-    om_enabled: Optional[StrictBool] = Field(default=None, description="Whether the legacy Okta Mobile application is enabled for the org", alias="omEnabled")
+    analytics_collection_enabled: Optional[StrictBool] = Field(None, alias="analyticsCollectionEnabled")
+    bug_reporting_enabled: Optional[StrictBool] = Field(None, alias="bugReportingEnabled")
+    om_enabled: Optional[StrictBool] = Field(None, alias="omEnabled", description="Whether the legacy Okta Mobile application is enabled for the org")
     __properties: ClassVar[List[str]] = ["analyticsCollectionEnabled", "bugReportingEnabled", "omEnabled"]
 
     model_config = ConfigDict(

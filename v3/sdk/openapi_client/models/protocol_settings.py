@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +25,7 @@ class ProtocolSettings(BaseModel):
     """
     ProtocolSettings
     """ # noqa: E501
-    name_format: Optional[StrictStr] = Field(default=None, alias="nameFormat")
+    name_format: Optional[StrictStr] = Field(None, alias="nameFormat")
     __properties: ClassVar[List[str]] = ["nameFormat"]
 
     model_config = ConfigDict(

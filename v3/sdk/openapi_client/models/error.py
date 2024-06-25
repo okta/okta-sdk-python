@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.error_error_causes_inner import ErrorErrorCausesInner
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,11 +26,11 @@ class Error(BaseModel):
     """
     Error
     """ # noqa: E501
-    error_causes: Optional[List[ErrorErrorCausesInner]] = Field(default=None, alias="errorCauses")
-    error_code: Optional[StrictStr] = Field(default=None, description="An Okta code for this type of error", alias="errorCode")
-    error_id: Optional[StrictStr] = Field(default=None, description="A unique identifier for this error. This can be used by Okta Support to help with troubleshooting.", alias="errorId")
-    error_link: Optional[StrictStr] = Field(default=None, description="An Okta code for this type of error", alias="errorLink")
-    error_summary: Optional[StrictStr] = Field(default=None, description="A short description of what caused this error. Sometimes this contains dynamically-generated information about your specific error.", alias="errorSummary")
+    error_causes: Optional[conlist(ErrorErrorCausesInner)] = Field(None, alias="errorCauses")
+    error_code: Optional[StrictStr] = Field(None, alias="errorCode", description="An Okta code for this type of error")
+    error_id: Optional[StrictStr] = Field(None, alias="errorId", description="A unique identifier for this error. This can be used by Okta Support to help with troubleshooting.")
+    error_link: Optional[StrictStr] = Field(None, alias="errorLink", description="An Okta code for this type of error")
+    error_summary: Optional[StrictStr] = Field(None, alias="errorSummary", description="A short description of what caused this error. Sometimes this contains dynamically-generated information about your specific error.")
     __properties: ClassVar[List[str]] = ["errorCauses", "errorCode", "errorId", "errorLink", "errorSummary"]
 
     model_config = ConfigDict(

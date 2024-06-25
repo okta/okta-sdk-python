@@ -17,9 +17,11 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictBool, StrictInt, StrictStr
-from typing import Optional
 from typing_extensions import Annotated
+from pydantic import Field, StrictBool, StrictInt, StrictStr
+
+from typing import List, Optional
+
 from openapi_client.models.app_user import AppUser
 
 from openapi_client.api_client import ApiClient, RequestSerialized
@@ -43,7 +45,7 @@ class ApplicationUsersApi:
     @validate_call
     def assign_user_to_application(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
         app_user: AppUser,
         _request_timeout: Union[
             None,
@@ -118,7 +120,7 @@ class ApplicationUsersApi:
     @validate_call
     def assign_user_to_application_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
         app_user: AppUser,
         _request_timeout: Union[
             None,
@@ -193,7 +195,7 @@ class ApplicationUsersApi:
     @validate_call
     def assign_user_to_application_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
         app_user: AppUser,
         _request_timeout: Union[
             None,
@@ -342,7 +344,7 @@ class ApplicationUsersApi:
     @validate_call
     def get_application_user(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
         user_id: StrictStr,
         expand: Optional[StrictStr] = None,
         _request_timeout: Union[
@@ -420,7 +422,7 @@ class ApplicationUsersApi:
     @validate_call
     def get_application_user_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
         user_id: StrictStr,
         expand: Optional[StrictStr] = None,
         _request_timeout: Union[
@@ -498,7 +500,7 @@ class ApplicationUsersApi:
     @validate_call
     def get_application_user_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
         user_id: StrictStr,
         expand: Optional[StrictStr] = None,
         _request_timeout: Union[
@@ -642,7 +644,7 @@ class ApplicationUsersApi:
     @validate_call
     def list_application_users(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
         q: Optional[StrictStr] = None,
         query_scope: Optional[StrictStr] = None,
         after: Annotated[Optional[StrictStr], Field(description="specifies the pagination cursor for the next page of assignments")] = None,
@@ -736,7 +738,7 @@ class ApplicationUsersApi:
     @validate_call
     def list_application_users_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
         q: Optional[StrictStr] = None,
         query_scope: Optional[StrictStr] = None,
         after: Annotated[Optional[StrictStr], Field(description="specifies the pagination cursor for the next page of assignments")] = None,
@@ -830,7 +832,7 @@ class ApplicationUsersApi:
     @validate_call
     def list_application_users_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
         q: Optional[StrictStr] = None,
         query_scope: Optional[StrictStr] = None,
         after: Annotated[Optional[StrictStr], Field(description="specifies the pagination cursor for the next page of assignments")] = None,
@@ -1012,7 +1014,7 @@ class ApplicationUsersApi:
     @validate_call
     def unassign_user_from_application(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
         user_id: StrictStr,
         send_email: Optional[StrictBool] = None,
         _request_timeout: Union[
@@ -1090,7 +1092,7 @@ class ApplicationUsersApi:
     @validate_call
     def unassign_user_from_application_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
         user_id: StrictStr,
         send_email: Optional[StrictBool] = None,
         _request_timeout: Union[
@@ -1168,7 +1170,7 @@ class ApplicationUsersApi:
     @validate_call
     def unassign_user_from_application_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
         user_id: StrictStr,
         send_email: Optional[StrictBool] = None,
         _request_timeout: Union[
@@ -1312,7 +1314,7 @@ class ApplicationUsersApi:
     @validate_call
     def update_application_user(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
         user_id: StrictStr,
         app_user: AppUser,
         _request_timeout: Union[
@@ -1391,7 +1393,7 @@ class ApplicationUsersApi:
     @validate_call
     def update_application_user_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
         user_id: StrictStr,
         app_user: AppUser,
         _request_timeout: Union[
@@ -1470,7 +1472,7 @@ class ApplicationUsersApi:
     @validate_call
     def update_application_user_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
         user_id: StrictStr,
         app_user: AppUser,
         _request_timeout: Union[

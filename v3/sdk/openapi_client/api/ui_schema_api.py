@@ -17,8 +17,11 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr
 from typing_extensions import Annotated
+from pydantic import Field, StrictStr
+
+from typing import List
+
 from openapi_client.models.create_ui_schema import CreateUISchema
 from openapi_client.models.ui_schemas_response_object import UISchemasResponseObject
 from openapi_client.models.update_ui_schema import UpdateUISchema
@@ -325,7 +328,7 @@ class UISchemaApi:
     @validate_call
     def delete_ui_schemas(
         self,
-        id: Annotated[StrictStr, Field(description="The unique ID of the UI Schema")],
+        id: Annotated[StrictStr, Field(..., description="The unique ID of the UI Schema")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -396,7 +399,7 @@ class UISchemaApi:
     @validate_call
     def delete_ui_schemas_with_http_info(
         self,
-        id: Annotated[StrictStr, Field(description="The unique ID of the UI Schema")],
+        id: Annotated[StrictStr, Field(..., description="The unique ID of the UI Schema")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -467,7 +470,7 @@ class UISchemaApi:
     @validate_call
     def delete_ui_schemas_without_preload_content(
         self,
-        id: Annotated[StrictStr, Field(description="The unique ID of the UI Schema")],
+        id: Annotated[StrictStr, Field(..., description="The unique ID of the UI Schema")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -596,7 +599,7 @@ class UISchemaApi:
     @validate_call
     def get_ui_schema(
         self,
-        id: Annotated[StrictStr, Field(description="The unique ID of the UI Schema")],
+        id: Annotated[StrictStr, Field(..., description="The unique ID of the UI Schema")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -666,7 +669,7 @@ class UISchemaApi:
     @validate_call
     def get_ui_schema_with_http_info(
         self,
-        id: Annotated[StrictStr, Field(description="The unique ID of the UI Schema")],
+        id: Annotated[StrictStr, Field(..., description="The unique ID of the UI Schema")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -736,7 +739,7 @@ class UISchemaApi:
     @validate_call
     def get_ui_schema_without_preload_content(
         self,
-        id: Annotated[StrictStr, Field(description="The unique ID of the UI Schema")],
+        id: Annotated[StrictStr, Field(..., description="The unique ID of the UI Schema")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1114,7 +1117,7 @@ class UISchemaApi:
     @validate_call
     def replace_ui_schemas(
         self,
-        id: Annotated[StrictStr, Field(description="The unique ID of the UI Schema")],
+        id: Annotated[StrictStr, Field(..., description="The unique ID of the UI Schema")],
         update_ui_schema_body: UpdateUISchema,
         _request_timeout: Union[
             None,
@@ -1189,7 +1192,7 @@ class UISchemaApi:
     @validate_call
     def replace_ui_schemas_with_http_info(
         self,
-        id: Annotated[StrictStr, Field(description="The unique ID of the UI Schema")],
+        id: Annotated[StrictStr, Field(..., description="The unique ID of the UI Schema")],
         update_ui_schema_body: UpdateUISchema,
         _request_timeout: Union[
             None,
@@ -1264,7 +1267,7 @@ class UISchemaApi:
     @validate_call
     def replace_ui_schemas_without_preload_content(
         self,
-        id: Annotated[StrictStr, Field(description="The unique ID of the UI Schema")],
+        id: Annotated[StrictStr, Field(..., description="The unique ID of the UI Schema")],
         update_ui_schema_body: UpdateUISchema,
         _request_timeout: Union[
             None,

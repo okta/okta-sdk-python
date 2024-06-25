@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.email_server_response import EmailServerResponse
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,7 +26,7 @@ class EmailServerListResponse(BaseModel):
     """
     EmailServerListResponse
     """ # noqa: E501
-    email_servers: Optional[List[EmailServerResponse]] = Field(default=None, alias="email-servers")
+    email_servers: Optional[conlist(EmailServerResponse)] = Field(None, alias="email-servers")
     __properties: ClassVar[List[str]] = ["email-servers"]
 
     model_config = ConfigDict(

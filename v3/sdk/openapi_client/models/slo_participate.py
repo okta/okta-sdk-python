@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,10 +25,10 @@ class SloParticipate(BaseModel):
     """
     SloParticipate
     """ # noqa: E501
-    binding_type: Optional[StrictStr] = Field(default=None, description="Request binding type", alias="bindingType")
-    enabled: Optional[StrictBool] = Field(default=None, description="Allows the app to participate in front-channel single logout.")
-    logout_request_url: Optional[StrictStr] = Field(default=None, description="URL where Okta sends the logout request.", alias="logoutRequestUrl")
-    session_index_required: Optional[StrictBool] = Field(default=None, description="Include user session details.", alias="sessionIndexRequired")
+    binding_type: Optional[StrictStr] = Field(None, alias="bindingType", description="Request binding type")
+    enabled: Optional[StrictBool] = Field(None, description="Allows the app to participate in front-channel single logout.")
+    logout_request_url: Optional[StrictStr] = Field(None, alias="logoutRequestUrl", description="URL where Okta sends the logout request.")
+    session_index_required: Optional[StrictBool] = Field(None, alias="sessionIndexRequired", description="Include user session details.")
     __properties: ClassVar[List[str]] = ["bindingType", "enabled", "logoutRequestUrl", "sessionIndexRequired"]
 
     @field_validator('binding_type')

@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,18 +25,18 @@ class WsFederationApplicationSettingsApplication(BaseModel):
     """
     WsFederationApplicationSettingsApplication
     """ # noqa: E501
-    attribute_statements: Optional[StrictStr] = Field(default=None, alias="attributeStatements")
-    audience_restriction: Optional[StrictStr] = Field(default=None, alias="audienceRestriction")
-    authn_context_class_ref: Optional[StrictStr] = Field(default=None, alias="authnContextClassRef")
-    group_filter: Optional[StrictStr] = Field(default=None, alias="groupFilter")
-    group_name: Optional[StrictStr] = Field(default=None, alias="groupName")
-    group_value_format: Optional[StrictStr] = Field(default=None, alias="groupValueFormat")
-    name_id_format: Optional[StrictStr] = Field(default=None, alias="nameIDFormat")
+    attribute_statements: Optional[StrictStr] = Field(None, alias="attributeStatements")
+    audience_restriction: Optional[StrictStr] = Field(None, alias="audienceRestriction")
+    authn_context_class_ref: Optional[StrictStr] = Field(None, alias="authnContextClassRef")
+    group_filter: Optional[StrictStr] = Field(None, alias="groupFilter")
+    group_name: Optional[StrictStr] = Field(None, alias="groupName")
+    group_value_format: Optional[StrictStr] = Field(None, alias="groupValueFormat")
+    name_id_format: Optional[StrictStr] = Field(None, alias="nameIDFormat")
     realm: Optional[StrictStr] = None
-    site_url: Optional[StrictStr] = Field(default=None, alias="siteURL")
-    username_attribute: Optional[StrictStr] = Field(default=None, alias="usernameAttribute")
-    w_reply_override: Optional[StrictBool] = Field(default=None, alias="wReplyOverride")
-    w_reply_url: Optional[StrictStr] = Field(default=None, alias="wReplyURL")
+    site_url: Optional[StrictStr] = Field(None, alias="siteURL")
+    username_attribute: Optional[StrictStr] = Field(None, alias="usernameAttribute")
+    w_reply_override: Optional[StrictBool] = Field(None, alias="wReplyOverride")
+    w_reply_url: Optional[StrictStr] = Field(None, alias="wReplyURL")
     __properties: ClassVar[List[str]] = ["attributeStatements", "audienceRestriction", "authnContextClassRef", "groupFilter", "groupName", "groupValueFormat", "nameIDFormat", "realm", "siteURL", "usernameAttribute", "wReplyOverride", "wReplyURL"]
 
     model_config = ConfigDict(

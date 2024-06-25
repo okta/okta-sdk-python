@@ -18,9 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.links_self import LinksSelf
 from openapi_client.models.session_authentication_method import SessionAuthenticationMethod
 from openapi_client.models.session_identity_provider import SessionIdentityProvider
@@ -32,17 +29,17 @@ class Session(BaseModel):
     """
     Session
     """ # noqa: E501
-    amr: Optional[List[SessionAuthenticationMethod]] = Field(default=None, description="Authentication method reference")
-    created_at: Optional[datetime] = Field(default=None, alias="createdAt")
-    expires_at: Optional[datetime] = Field(default=None, description="A timestamp when the Session expires", alias="expiresAt")
-    id: Optional[StrictStr] = Field(default=None, description="A unique key for the Session")
+    amr: Optional[conlist(SessionAuthenticationMethod)] = Field(None, description="Authentication method reference")
+    created_at: Optional[datetime] = Field(None, alias="createdAt")
+    expires_at: Optional[datetime] = Field(None, alias="expiresAt", description="A timestamp when the Session expires")
+    id: Optional[StrictStr] = Field(None, description="A unique key for the Session")
     idp: Optional[SessionIdentityProvider] = None
-    last_factor_verification: Optional[datetime] = Field(default=None, description="A timestamp when the user last performed multifactor authentication", alias="lastFactorVerification")
-    last_password_verification: Optional[datetime] = Field(default=None, description="A timestamp when the user last performed the primary or step-up authentication with a password", alias="lastPasswordVerification")
-    login: Optional[StrictStr] = Field(default=None, description="A unique identifier for the user (username)")
+    last_factor_verification: Optional[datetime] = Field(None, alias="lastFactorVerification", description="A timestamp when the user last performed multifactor authentication")
+    last_password_verification: Optional[datetime] = Field(None, alias="lastPasswordVerification", description="A timestamp when the user last performed the primary or step-up authentication with a password")
+    login: Optional[StrictStr] = Field(None, description="A unique identifier for the user (username)")
     status: Optional[SessionStatus] = None
-    user_id: Optional[StrictStr] = Field(default=None, description="A unique key for the user", alias="userId")
-    links: Optional[LinksSelf] = Field(default=None, alias="_links")
+    user_id: Optional[StrictStr] = Field(None, alias="userId", description="A unique key for the user")
+    links: Optional[LinksSelf] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["amr", "createdAt", "expiresAt", "id", "idp", "lastFactorVerification", "lastPasswordVerification", "login", "status", "userId", "_links"]
 
     model_config = ConfigDict(

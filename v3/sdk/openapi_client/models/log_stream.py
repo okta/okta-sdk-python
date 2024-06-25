@@ -18,10 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from importlib import import_module
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Union
 from openapi_client.models.log_stream_links_self_and_lifecycle import LogStreamLinksSelfAndLifecycle
 from openapi_client.models.log_stream_type import LogStreamType
 from typing import Optional, Set
@@ -36,13 +32,13 @@ class LogStream(BaseModel):
     """
     LogStream
     """ # noqa: E501
-    created: datetime = Field(description="Timestamp when the Log Stream object was created")
-    id: StrictStr = Field(description="Unique identifier for the Log Stream")
-    last_updated: datetime = Field(description="Timestamp when the Log Stream object was last updated", alias="lastUpdated")
-    name: StrictStr = Field(description="Unique name for the Log Stream object")
-    status: StrictStr = Field(description="Lifecycle status of the Log Stream object")
-    type: LogStreamType
-    links: LogStreamLinksSelfAndLifecycle = Field(alias="_links")
+    created: datetime = Field(..., description="Timestamp when the Log Stream object was created")
+    id: StrictStr = Field(..., description="Unique identifier for the Log Stream")
+    last_updated: datetime = Field(..., alias="lastUpdated", description="Timestamp when the Log Stream object was last updated")
+    name: StrictStr = Field(..., description="Unique name for the Log Stream object")
+    status: StrictStr = Field(..., description="Lifecycle status of the Log Stream object")
+    type: LogStreamType = Field(...)
+    links: LogStreamLinksSelfAndLifecycle = Field(..., alias="_links")
     __properties: ClassVar[List[str]] = ["created", "id", "lastUpdated", "name", "status", "type", "_links"]
 
     @field_validator('status')

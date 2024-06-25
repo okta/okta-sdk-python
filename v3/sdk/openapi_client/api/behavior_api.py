@@ -17,8 +17,11 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr
 from typing_extensions import Annotated
+from pydantic import Field, StrictStr
+
+from typing import List
+
 from openapi_client.models.behavior_rule import BehaviorRule
 
 from openapi_client.api_client import ApiClient, RequestSerialized
@@ -42,7 +45,7 @@ class BehaviorApi:
     @validate_call
     def activate_behavior_detection_rule(
         self,
-        behavior_id: Annotated[StrictStr, Field(description="id of the Behavior Detection Rule")],
+        behavior_id: Annotated[StrictStr, Field(..., description="id of the Behavior Detection Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -112,7 +115,7 @@ class BehaviorApi:
     @validate_call
     def activate_behavior_detection_rule_with_http_info(
         self,
-        behavior_id: Annotated[StrictStr, Field(description="id of the Behavior Detection Rule")],
+        behavior_id: Annotated[StrictStr, Field(..., description="id of the Behavior Detection Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -182,7 +185,7 @@ class BehaviorApi:
     @validate_call
     def activate_behavior_detection_rule_without_preload_content(
         self,
-        behavior_id: Annotated[StrictStr, Field(description="id of the Behavior Detection Rule")],
+        behavior_id: Annotated[StrictStr, Field(..., description="id of the Behavior Detection Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -591,7 +594,7 @@ class BehaviorApi:
     @validate_call
     def deactivate_behavior_detection_rule(
         self,
-        behavior_id: Annotated[StrictStr, Field(description="id of the Behavior Detection Rule")],
+        behavior_id: Annotated[StrictStr, Field(..., description="id of the Behavior Detection Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -661,7 +664,7 @@ class BehaviorApi:
     @validate_call
     def deactivate_behavior_detection_rule_with_http_info(
         self,
-        behavior_id: Annotated[StrictStr, Field(description="id of the Behavior Detection Rule")],
+        behavior_id: Annotated[StrictStr, Field(..., description="id of the Behavior Detection Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -731,7 +734,7 @@ class BehaviorApi:
     @validate_call
     def deactivate_behavior_detection_rule_without_preload_content(
         self,
-        behavior_id: Annotated[StrictStr, Field(description="id of the Behavior Detection Rule")],
+        behavior_id: Annotated[StrictStr, Field(..., description="id of the Behavior Detection Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -859,7 +862,7 @@ class BehaviorApi:
     @validate_call
     def delete_behavior_detection_rule(
         self,
-        behavior_id: Annotated[StrictStr, Field(description="id of the Behavior Detection Rule")],
+        behavior_id: Annotated[StrictStr, Field(..., description="id of the Behavior Detection Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -929,7 +932,7 @@ class BehaviorApi:
     @validate_call
     def delete_behavior_detection_rule_with_http_info(
         self,
-        behavior_id: Annotated[StrictStr, Field(description="id of the Behavior Detection Rule")],
+        behavior_id: Annotated[StrictStr, Field(..., description="id of the Behavior Detection Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -999,7 +1002,7 @@ class BehaviorApi:
     @validate_call
     def delete_behavior_detection_rule_without_preload_content(
         self,
-        behavior_id: Annotated[StrictStr, Field(description="id of the Behavior Detection Rule")],
+        behavior_id: Annotated[StrictStr, Field(..., description="id of the Behavior Detection Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1127,7 +1130,7 @@ class BehaviorApi:
     @validate_call
     def get_behavior_detection_rule(
         self,
-        behavior_id: Annotated[StrictStr, Field(description="id of the Behavior Detection Rule")],
+        behavior_id: Annotated[StrictStr, Field(..., description="id of the Behavior Detection Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1197,7 +1200,7 @@ class BehaviorApi:
     @validate_call
     def get_behavior_detection_rule_with_http_info(
         self,
-        behavior_id: Annotated[StrictStr, Field(description="id of the Behavior Detection Rule")],
+        behavior_id: Annotated[StrictStr, Field(..., description="id of the Behavior Detection Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1267,7 +1270,7 @@ class BehaviorApi:
     @validate_call
     def get_behavior_detection_rule_without_preload_content(
         self,
-        behavior_id: Annotated[StrictStr, Field(description="id of the Behavior Detection Rule")],
+        behavior_id: Annotated[StrictStr, Field(..., description="id of the Behavior Detection Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1645,7 +1648,7 @@ class BehaviorApi:
     @validate_call
     def replace_behavior_detection_rule(
         self,
-        behavior_id: Annotated[StrictStr, Field(description="id of the Behavior Detection Rule")],
+        behavior_id: Annotated[StrictStr, Field(..., description="id of the Behavior Detection Rule")],
         rule: BehaviorRule,
         _request_timeout: Union[
             None,
@@ -1720,7 +1723,7 @@ class BehaviorApi:
     @validate_call
     def replace_behavior_detection_rule_with_http_info(
         self,
-        behavior_id: Annotated[StrictStr, Field(description="id of the Behavior Detection Rule")],
+        behavior_id: Annotated[StrictStr, Field(..., description="id of the Behavior Detection Rule")],
         rule: BehaviorRule,
         _request_timeout: Union[
             None,
@@ -1795,7 +1798,7 @@ class BehaviorApi:
     @validate_call
     def replace_behavior_detection_rule_without_preload_content(
         self,
-        behavior_id: Annotated[StrictStr, Field(description="id of the Behavior Detection Rule")],
+        behavior_id: Annotated[StrictStr, Field(..., description="id of the Behavior Detection Rule")],
         rule: BehaviorRule,
         _request_timeout: Union[
             None,

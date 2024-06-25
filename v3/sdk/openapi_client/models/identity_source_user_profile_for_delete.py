@@ -18,9 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
-from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,7 +25,7 @@ class IdentitySourceUserProfileForDelete(BaseModel):
     """
     IdentitySourceUserProfileForDelete
     """ # noqa: E501
-    external_id: Optional[Annotated[str, Field(strict=True, max_length=512)]] = Field(default=None, alias="externalId")
+    external_id: Optional[constr(strict=True, max_length=512)] = Field(None, alias="externalId")
     __properties: ClassVar[List[str]] = ["externalId"]
 
     model_config = ConfigDict(

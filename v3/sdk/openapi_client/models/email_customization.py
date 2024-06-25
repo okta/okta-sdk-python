@@ -18,9 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.email_customization_all_of_links import EmailCustomizationAllOfLinks
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,14 +26,14 @@ class EmailCustomization(BaseModel):
     """
     EmailCustomization
     """ # noqa: E501
-    body: StrictStr = Field(description="The email's HTML body. May contain [variable references](https://velocity.apache.org/engine/1.7/user-guide.html#references).")
-    subject: StrictStr = Field(description="The email's subject. May contain [variable references](https://velocity.apache.org/engine/1.7/user-guide.html#references).")
-    created: Optional[datetime] = Field(default=None, description="The UTC time at which this email customization was created.")
-    id: Optional[StrictStr] = Field(default=None, description="A unique identifier for this email customization")
-    is_default: Optional[StrictBool] = Field(default=None, description="Whether this is the default customization for the email template. Each customized email template must have exactly one default customization. Defaults to `true` for the first customization and `false` thereafter.", alias="isDefault")
-    language: StrictStr = Field(description="The language specified as an [IETF BCP 47 language tag](https://datatracker.ietf.org/doc/html/rfc5646)")
-    last_updated: Optional[datetime] = Field(default=None, description="The UTC time at which this email customization was last updated.", alias="lastUpdated")
-    links: Optional[EmailCustomizationAllOfLinks] = Field(default=None, alias="_links")
+    body: StrictStr = Field(..., description="The email's HTML body. May contain [variable references](https://velocity.apache.org/engine/1.7/user-guide.html#references).")
+    subject: StrictStr = Field(..., description="The email's subject. May contain [variable references](https://velocity.apache.org/engine/1.7/user-guide.html#references).")
+    created: Optional[datetime] = Field(None, description="The UTC time at which this email customization was created.")
+    id: Optional[StrictStr] = Field(None, description="A unique identifier for this email customization")
+    is_default: Optional[StrictBool] = Field(None, alias="isDefault", description="Whether this is the default customization for the email template. Each customized email template must have exactly one default customization. Defaults to `true` for the first customization and `false` thereafter.")
+    language: StrictStr = Field(..., description="The language specified as an [IETF BCP 47 language tag](https://datatracker.ietf.org/doc/html/rfc5646)")
+    last_updated: Optional[datetime] = Field(None, alias="lastUpdated", description="The UTC time at which this email customization was last updated.")
+    links: Optional[EmailCustomizationAllOfLinks] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["body", "subject", "created", "id", "isDefault", "language", "lastUpdated", "_links"]
 
     model_config = ConfigDict(

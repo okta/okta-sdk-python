@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,9 +25,9 @@ class OktaSignOnPolicyRuleSignonSessionActions(BaseModel):
     """
     OktaSignOnPolicyRuleSignonSessionActions
     """ # noqa: E501
-    max_session_idle_minutes: Optional[StrictInt] = Field(default=None, alias="maxSessionIdleMinutes")
-    max_session_lifetime_minutes: Optional[StrictInt] = Field(default=None, alias="maxSessionLifetimeMinutes")
-    use_persistent_cookie: Optional[StrictBool] = Field(default=False, alias="usePersistentCookie")
+    max_session_idle_minutes: Optional[StrictInt] = Field(None, alias="maxSessionIdleMinutes")
+    max_session_lifetime_minutes: Optional[StrictInt] = Field(None, alias="maxSessionLifetimeMinutes")
+    use_persistent_cookie: Optional[StrictBool] = Field(False, alias="usePersistentCookie")
     __properties: ClassVar[List[str]] = ["maxSessionIdleMinutes", "maxSessionLifetimeMinutes", "usePersistentCookie"]
 
     model_config = ConfigDict(

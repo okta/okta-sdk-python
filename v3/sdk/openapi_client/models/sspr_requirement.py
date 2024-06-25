@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.sspr_primary_requirement import SsprPrimaryRequirement
 from openapi_client.models.sspr_step_up_requirement import SsprStepUpRequirement
 from typing import Optional, Set
@@ -30,7 +28,7 @@ class SsprRequirement(BaseModel):
     Describes the initial and secondary authenticator requirements a user needs to reset their password
     """ # noqa: E501
     primary: Optional[SsprPrimaryRequirement] = None
-    step_up: Optional[SsprStepUpRequirement] = Field(default=None, alias="stepUp")
+    step_up: Optional[SsprStepUpRequirement] = Field(None, alias="stepUp")
     __properties: ClassVar[List[str]] = ["primary", "stepUp"]
 
     model_config = ConfigDict(

@@ -18,9 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.log_actor import LogActor
 from openapi_client.models.log_authentication_context import LogAuthenticationContext
 from openapi_client.models.log_client import LogClient
@@ -39,18 +36,18 @@ class LogEvent(BaseModel):
     LogEvent
     """ # noqa: E501
     actor: Optional[LogActor] = None
-    authentication_context: Optional[LogAuthenticationContext] = Field(default=None, alias="authenticationContext")
+    authentication_context: Optional[LogAuthenticationContext] = Field(None, alias="authenticationContext")
     client: Optional[LogClient] = None
-    debug_context: Optional[LogDebugContext] = Field(default=None, alias="debugContext")
-    display_message: Optional[StrictStr] = Field(default=None, alias="displayMessage")
-    event_type: Optional[StrictStr] = Field(default=None, alias="eventType")
-    legacy_event_type: Optional[StrictStr] = Field(default=None, alias="legacyEventType")
+    debug_context: Optional[LogDebugContext] = Field(None, alias="debugContext")
+    display_message: Optional[StrictStr] = Field(None, alias="displayMessage")
+    event_type: Optional[StrictStr] = Field(None, alias="eventType")
+    legacy_event_type: Optional[StrictStr] = Field(None, alias="legacyEventType")
     outcome: Optional[LogOutcome] = None
     published: Optional[datetime] = None
     request: Optional[LogRequest] = None
-    security_context: Optional[LogSecurityContext] = Field(default=None, alias="securityContext")
+    security_context: Optional[LogSecurityContext] = Field(None, alias="securityContext")
     severity: Optional[LogSeverity] = None
-    target: Optional[List[LogTarget]] = None
+    target: Optional[conlist(LogTarget)] = None
     transaction: Optional[LogTransaction] = None
     uuid: Optional[StrictStr] = None
     version: Optional[StrictStr] = None

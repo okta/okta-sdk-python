@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.dns_record_type import DNSRecordType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,10 +26,10 @@ class DNSRecord(BaseModel):
     """
     DNS TXT and CNAME records to be registered for the Domain
     """ # noqa: E501
-    expiration: Optional[StrictStr] = Field(default=None, description="DNS TXT record expiration")
-    fqdn: Optional[StrictStr] = Field(default=None, description="DNS record name")
-    record_type: Optional[DNSRecordType] = Field(default=None, alias="recordType")
-    values: Optional[List[StrictStr]] = Field(default=None, description="DNS record value")
+    expiration: Optional[StrictStr] = Field(None, description="DNS TXT record expiration")
+    fqdn: Optional[StrictStr] = Field(None, description="DNS record name")
+    record_type: Optional[DNSRecordType] = Field(None, alias="recordType")
+    values: Optional[conlist(StrictStr)] = Field(None, description="DNS record value")
     __properties: ClassVar[List[str]] = ["expiration", "fqdn", "recordType", "values"]
 
     model_config = ConfigDict(

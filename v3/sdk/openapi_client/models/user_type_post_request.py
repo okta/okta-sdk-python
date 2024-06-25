@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,8 +25,8 @@ class UserTypePostRequest(BaseModel):
     """
     UserTypePostRequest
     """ # noqa: E501
-    description: Optional[StrictStr] = Field(default=None, description="The updated human-readable description of the User Type")
-    display_name: Optional[StrictStr] = Field(default=None, description="The updated human-readable display name for the User Type", alias="displayName")
+    description: Optional[StrictStr] = Field(None, description="The updated human-readable description of the User Type")
+    display_name: Optional[StrictStr] = Field(None, alias="displayName", description="The updated human-readable display name for the User Type")
     __properties: ClassVar[List[str]] = ["description", "displayName"]
 
     model_config = ConfigDict(

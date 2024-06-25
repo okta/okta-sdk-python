@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.authenticator_identity import AuthenticatorIdentity
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,7 +27,7 @@ class AuthenticatorMethodConstraint(BaseModel):
     Limits the authenticators that can be used for a given method. Currently, only the `otp` method supports constraints, and Google authenticator (key : 'google_otp') is the only allowed authenticator.
     """ # noqa: E501
     method: Optional[StrictStr] = None
-    allowed_authenticators: Optional[List[AuthenticatorIdentity]] = Field(default=None, alias="allowedAuthenticators")
+    allowed_authenticators: Optional[conlist(AuthenticatorIdentity)] = Field(None, alias="allowedAuthenticators")
     __properties: ClassVar[List[str]] = ["method", "allowedAuthenticators"]
 
     @field_validator('method')

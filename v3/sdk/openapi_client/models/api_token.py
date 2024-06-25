@@ -18,10 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
-from typing_extensions import Annotated
 from openapi_client.models.links_self import LinksSelf
 from typing import Optional, Set
 from typing_extensions import Self
@@ -30,15 +26,15 @@ class ApiToken(BaseModel):
     """
     An API token for an Okta User. This token is NOT scoped any further and can be used for any API the user has permissions to call.
     """ # noqa: E501
-    client_name: Optional[StrictStr] = Field(default=None, alias="clientName")
+    client_name: Optional[StrictStr] = Field(None, alias="clientName")
     created: Optional[datetime] = None
-    expires_at: Optional[datetime] = Field(default=None, alias="expiresAt")
+    expires_at: Optional[datetime] = Field(None, alias="expiresAt")
     id: Optional[StrictStr] = None
-    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
-    name: StrictStr
-    token_window: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="A time duration specified as an [ISO-8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations).", alias="tokenWindow")
-    user_id: Optional[StrictStr] = Field(default=None, alias="userId")
-    link: Optional[LinksSelf] = Field(default=None, alias="_link")
+    last_updated: Optional[datetime] = Field(None, alias="lastUpdated")
+    name: StrictStr = Field(...)
+    token_window: Optional[constr(strict=True)] = Field(None, alias="tokenWindow", description="A time duration specified as an [ISO-8601 duration](https://en.wikipedia.org/wiki/ISO_8601#Durations).")
+    user_id: Optional[StrictStr] = Field(None, alias="userId")
+    link: Optional[LinksSelf] = Field(None, alias="_link")
     __properties: ClassVar[List[str]] = ["clientName", "created", "expiresAt", "id", "lastUpdated", "name", "tokenWindow", "userId", "_link"]
 
     @field_validator('token_window')

@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.policy_account_link import PolicyAccountLink
 from openapi_client.models.policy_subject import PolicySubject
 from openapi_client.models.provisioning import Provisioning
@@ -30,9 +28,9 @@ class IdentityProviderPolicy(BaseModel):
     """
     IdentityProviderPolicy
     """ # noqa: E501
-    account_link: Optional[PolicyAccountLink] = Field(default=None, alias="accountLink")
-    map_amr_claims: Optional[StrictBool] = Field(default=False, description="Enable mapping AMR from IdP to Okta to downstream apps", alias="mapAMRClaims")
-    max_clock_skew: Optional[StrictInt] = Field(default=None, alias="maxClockSkew")
+    account_link: Optional[PolicyAccountLink] = Field(None, alias="accountLink")
+    map_amr_claims: Optional[StrictBool] = Field(False, alias="mapAMRClaims", description="Enable mapping AMR from IdP to Okta to downstream apps")
+    max_clock_skew: Optional[StrictInt] = Field(None, alias="maxClockSkew")
     provisioning: Optional[Provisioning] = None
     subject: Optional[PolicySubject] = None
     __properties: ClassVar[List[str]] = ["accountLink", "mapAMRClaims", "maxClockSkew", "provisioning", "subject"]

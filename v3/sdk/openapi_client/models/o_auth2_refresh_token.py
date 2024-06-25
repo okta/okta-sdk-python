@@ -18,9 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.grant_or_token_status import GrantOrTokenStatus
 from openapi_client.models.links_self import LinksSelf
 from openapi_client.models.o_auth2_actor import OAuth2Actor
@@ -31,18 +28,18 @@ class OAuth2RefreshToken(BaseModel):
     """
     OAuth2RefreshToken
     """ # noqa: E501
-    client_id: Optional[StrictStr] = Field(default=None, alias="clientId")
+    client_id: Optional[StrictStr] = Field(None, alias="clientId")
     created: Optional[datetime] = None
-    created_by: Optional[OAuth2Actor] = Field(default=None, alias="createdBy")
-    expires_at: Optional[datetime] = Field(default=None, alias="expiresAt")
+    created_by: Optional[OAuth2Actor] = Field(None, alias="createdBy")
+    expires_at: Optional[datetime] = Field(None, alias="expiresAt")
     id: Optional[StrictStr] = None
     issuer: Optional[StrictStr] = None
-    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
-    scopes: Optional[List[StrictStr]] = None
+    last_updated: Optional[datetime] = Field(None, alias="lastUpdated")
+    scopes: Optional[conlist(StrictStr)] = None
     status: Optional[GrantOrTokenStatus] = None
-    user_id: Optional[StrictStr] = Field(default=None, alias="userId")
-    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, alias="_embedded")
-    links: Optional[LinksSelf] = Field(default=None, alias="_links")
+    user_id: Optional[StrictStr] = Field(None, alias="userId")
+    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(None, alias="_embedded")
+    links: Optional[LinksSelf] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["clientId", "created", "createdBy", "expiresAt", "id", "issuer", "lastUpdated", "scopes", "status", "userId", "_embedded", "_links"]
 
     model_config = ConfigDict(

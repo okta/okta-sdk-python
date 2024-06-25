@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.href_object_client_link import HrefObjectClientLink
 from openapi_client.models.href_object_logo_link import HrefObjectLogoLink
 from openapi_client.models.href_object_self_link import HrefObjectSelfLink
@@ -32,7 +30,7 @@ class APIServiceIntegrationLinks(BaseModel):
     """ # noqa: E501
     client: Optional[HrefObjectClientLink] = None
     logo: Optional[HrefObjectLogoLink] = None
-    var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
+    var_self: Optional[HrefObjectSelfLink] = Field(None, alias="self")
     __properties: ClassVar[List[str]] = ["client", "logo", "self"]
 
     model_config = ConfigDict(

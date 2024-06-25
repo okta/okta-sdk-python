@@ -17,8 +17,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr
 from typing_extensions import Annotated
+from pydantic import Field, StrictStr
+
 
 from openapi_client.api_client import ApiClient, RequestSerialized
 from openapi_client.api_response import ApiResponse
@@ -41,8 +42,8 @@ class ApplicationPoliciesApi:
     @validate_call
     def assign_application_policy(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -115,8 +116,8 @@ class ApplicationPoliciesApi:
     @validate_call
     def assign_application_policy_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -189,8 +190,8 @@ class ApplicationPoliciesApi:
     @validate_call
     def assign_application_policy_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],

@@ -18,10 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from importlib import import_module
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional, Union
 from openapi_client.models.factor_provider import FactorProvider
 from openapi_client.models.factor_status import FactorStatus
 from openapi_client.models.factor_type import FactorType
@@ -51,15 +47,15 @@ class UserFactor(BaseModel):
     UserFactor
     """ # noqa: E501
     created: Optional[datetime] = None
-    factor_type: Optional[FactorType] = Field(default=None, alias="factorType")
+    factor_type: Optional[FactorType] = Field(None, alias="factorType")
     id: Optional[StrictStr] = None
-    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
-    profile: Optional[Dict[str, Any]] = Field(default=None, description="Factor-specific attributes")
+    last_updated: Optional[datetime] = Field(None, alias="lastUpdated")
+    profile: Optional[Dict[str, Any]] = Field(None, description="Factor-specific attributes")
     provider: Optional[FactorProvider] = None
     status: Optional[FactorStatus] = None
     verify: Optional[VerifyFactorRequest] = None
-    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, alias="_embedded")
-    links: Optional[LinksSelf] = Field(default=None, alias="_links")
+    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(None, alias="_embedded")
+    links: Optional[LinksSelf] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["created", "factorType", "id", "lastUpdated", "profile", "provider", "status", "verify", "_embedded", "_links"]
 
     model_config = ConfigDict(

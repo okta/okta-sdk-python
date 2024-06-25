@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.policy_context import PolicyContext
 from openapi_client.models.policy_type import PolicyType
 from typing import Optional, Set
@@ -29,9 +27,9 @@ class SimulatePolicyBody(BaseModel):
     """
     The request body required for a simulate policy operation.
     """ # noqa: E501
-    policy_types: Optional[List[PolicyType]] = Field(default=None, description="Supported policy types for a simulate operation. The default value, `null`, returns all types.", alias="policyTypes")
-    app_instance: StrictStr = Field(description="The application instance ID for a simulate operation", alias="appInstance")
-    policy_context: Optional[PolicyContext] = Field(default=None, alias="policyContext")
+    policy_types: Optional[conlist(PolicyType)] = Field(None, alias="policyTypes", description="Supported policy types for a simulate operation. The default value, `null`, returns all types.")
+    app_instance: StrictStr = Field(..., alias="appInstance", description="The application instance ID for a simulate operation")
+    policy_context: Optional[PolicyContext] = Field(None, alias="policyContext")
     __properties: ClassVar[List[str]] = ["policyTypes", "appInstance", "policyContext"]
 
     model_config = ConfigDict(

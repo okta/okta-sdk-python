@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +25,7 @@ class OpenIdConnectApplicationIdpInitiatedLogin(BaseModel):
     """
     OpenIdConnectApplicationIdpInitiatedLogin
     """ # noqa: E501
-    default_scope: Optional[List[StrictStr]] = None
+    default_scope: Optional[conlist(StrictStr)] = None
     mode: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["default_scope", "mode"]
 

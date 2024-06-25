@@ -18,9 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.user_type_links import UserTypeLinks
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,16 +26,16 @@ class UserType(BaseModel):
     """
     UserType
     """ # noqa: E501
-    created: Optional[datetime] = Field(default=None, description="A timestamp from when the User Type was created")
-    created_by: Optional[StrictStr] = Field(default=None, description="The user ID of the account that created the User Type", alias="createdBy")
-    default: Optional[StrictBool] = Field(default=None, description="A boolean value to indicate if this is the default User Type")
-    description: Optional[StrictStr] = Field(default=None, description="The human-readable description of the User Type")
-    display_name: StrictStr = Field(description="The human-readable name of the User Type", alias="displayName")
-    id: Optional[StrictStr] = Field(default=None, description="The unique key for the User Type")
-    last_updated: Optional[datetime] = Field(default=None, description="A timestamp from when the User Type was most recently updated", alias="lastUpdated")
-    last_updated_by: Optional[StrictStr] = Field(default=None, description="The user ID of the most recent account to edit the User Type", alias="lastUpdatedBy")
-    name: StrictStr = Field(description="The name of the User Type. The name must start with A-Z or a-z and contain only A-Z, a-z, 0-9, or underscore (_) characters.   This value becomes read-only after creation and can't be updated.")
-    links: Optional[UserTypeLinks] = Field(default=None, alias="_links")
+    created: Optional[datetime] = Field(None, description="A timestamp from when the User Type was created")
+    created_by: Optional[StrictStr] = Field(None, alias="createdBy", description="The user ID of the account that created the User Type")
+    default: Optional[StrictBool] = Field(None, description="A boolean value to indicate if this is the default User Type")
+    description: Optional[StrictStr] = Field(None, description="The human-readable description of the User Type")
+    display_name: StrictStr = Field(..., alias="displayName", description="The human-readable name of the User Type")
+    id: Optional[StrictStr] = Field(None, description="The unique key for the User Type")
+    last_updated: Optional[datetime] = Field(None, alias="lastUpdated", description="A timestamp from when the User Type was most recently updated")
+    last_updated_by: Optional[StrictStr] = Field(None, alias="lastUpdatedBy", description="The user ID of the most recent account to edit the User Type")
+    name: StrictStr = Field(..., description="The name of the User Type. The name must start with A-Z or a-z and contain only A-Z, a-z, 0-9, or underscore (_) characters.   This value becomes read-only after creation and can't be updated.")
+    links: Optional[UserTypeLinks] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["created", "createdBy", "default", "description", "displayName", "id", "lastUpdated", "lastUpdatedBy", "name", "_links"]
 
     model_config = ConfigDict(

@@ -17,9 +17,11 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr
-from typing import Optional
 from typing_extensions import Annotated
+from pydantic import Field, StrictStr, conint
+
+from typing import List, Optional
+
 from openapi_client.models.principal_rate_limit_entity import PrincipalRateLimitEntity
 
 from openapi_client.api_client import ApiClient, RequestSerialized
@@ -327,7 +329,7 @@ class PrincipalRateLimitApi:
     @validate_call
     def get_principal_rate_limit_entity(
         self,
-        principal_rate_limit_id: Annotated[StrictStr, Field(description="id of the Principal Rate Limit")],
+        principal_rate_limit_id: Annotated[StrictStr, Field(..., description="id of the Principal Rate Limit")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -397,7 +399,7 @@ class PrincipalRateLimitApi:
     @validate_call
     def get_principal_rate_limit_entity_with_http_info(
         self,
-        principal_rate_limit_id: Annotated[StrictStr, Field(description="id of the Principal Rate Limit")],
+        principal_rate_limit_id: Annotated[StrictStr, Field(..., description="id of the Principal Rate Limit")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -467,7 +469,7 @@ class PrincipalRateLimitApi:
     @validate_call
     def get_principal_rate_limit_entity_without_preload_content(
         self,
-        principal_rate_limit_id: Annotated[StrictStr, Field(description="id of the Principal Rate Limit")],
+        principal_rate_limit_id: Annotated[StrictStr, Field(..., description="id of the Principal Rate Limit")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -597,7 +599,7 @@ class PrincipalRateLimitApi:
         self,
         filter: Optional[StrictStr] = None,
         after: Optional[StrictStr] = None,
-        limit: Optional[Annotated[int, Field(le=50, strict=True)]] = None,
+        limit: Optional[conint(strict=True, le=50)] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -675,7 +677,7 @@ class PrincipalRateLimitApi:
         self,
         filter: Optional[StrictStr] = None,
         after: Optional[StrictStr] = None,
-        limit: Optional[Annotated[int, Field(le=50, strict=True)]] = None,
+        limit: Optional[conint(strict=True, le=50)] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -753,7 +755,7 @@ class PrincipalRateLimitApi:
         self,
         filter: Optional[StrictStr] = None,
         after: Optional[StrictStr] = None,
-        limit: Optional[Annotated[int, Field(le=50, strict=True)]] = None,
+        limit: Optional[conint(strict=True, le=50)] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -899,7 +901,7 @@ class PrincipalRateLimitApi:
     @validate_call
     def replace_principal_rate_limit_entity(
         self,
-        principal_rate_limit_id: Annotated[StrictStr, Field(description="id of the Principal Rate Limit")],
+        principal_rate_limit_id: Annotated[StrictStr, Field(..., description="id of the Principal Rate Limit")],
         entity: PrincipalRateLimitEntity,
         _request_timeout: Union[
             None,
@@ -974,7 +976,7 @@ class PrincipalRateLimitApi:
     @validate_call
     def replace_principal_rate_limit_entity_with_http_info(
         self,
-        principal_rate_limit_id: Annotated[StrictStr, Field(description="id of the Principal Rate Limit")],
+        principal_rate_limit_id: Annotated[StrictStr, Field(..., description="id of the Principal Rate Limit")],
         entity: PrincipalRateLimitEntity,
         _request_timeout: Union[
             None,
@@ -1049,7 +1051,7 @@ class PrincipalRateLimitApi:
     @validate_call
     def replace_principal_rate_limit_entity_without_preload_content(
         self,
-        principal_rate_limit_id: Annotated[StrictStr, Field(description="id of the Principal Rate Limit")],
+        principal_rate_limit_id: Annotated[StrictStr, Field(..., description="id of the Principal Rate Limit")],
         entity: PrincipalRateLimitEntity,
         _request_timeout: Union[
             None,

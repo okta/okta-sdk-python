@@ -17,9 +17,11 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictBytes, StrictStr
-from typing import Union
 from typing_extensions import Annotated
+from pydantic import Field, StrictBytes, StrictStr
+
+from typing import Union
+
 
 from openapi_client.api_client import ApiClient, RequestSerialized
 from openapi_client.api_response import ApiResponse
@@ -42,8 +44,8 @@ class ApplicationLogosApi:
     @validate_call
     def upload_application_logo(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        file: Annotated[Union[StrictBytes, StrictStr], Field(description="The image file containing the logo.  The file must be in PNG, JPG, SVG, or GIF format, and less than one MB in size. For best results, use an image with a transparent background and a square dimension of 200 x 200 pixels to prevent upscaling. ")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        file: Annotated[Union[StrictBytes, StrictStr], Field(..., description="The image file containing the logo.  The file must be in PNG, JPG, SVG, or GIF format, and less than one MB in size. For best results, use an image with a transparent background and a square dimension of 200 x 200 pixels to prevent upscaling. ")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -117,8 +119,8 @@ class ApplicationLogosApi:
     @validate_call
     def upload_application_logo_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        file: Annotated[Union[StrictBytes, StrictStr], Field(description="The image file containing the logo.  The file must be in PNG, JPG, SVG, or GIF format, and less than one MB in size. For best results, use an image with a transparent background and a square dimension of 200 x 200 pixels to prevent upscaling. ")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        file: Annotated[Union[StrictBytes, StrictStr], Field(..., description="The image file containing the logo.  The file must be in PNG, JPG, SVG, or GIF format, and less than one MB in size. For best results, use an image with a transparent background and a square dimension of 200 x 200 pixels to prevent upscaling. ")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -192,8 +194,8 @@ class ApplicationLogosApi:
     @validate_call
     def upload_application_logo_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
-        file: Annotated[Union[StrictBytes, StrictStr], Field(description="The image file containing the logo.  The file must be in PNG, JPG, SVG, or GIF format, and less than one MB in size. For best results, use an image with a transparent background and a square dimension of 200 x 200 pixels to prevent upscaling. ")],
+        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        file: Annotated[Union[StrictBytes, StrictStr], Field(..., description="The image file containing the logo.  The file must be in PNG, JPG, SVG, or GIF format, and less than one MB in size. For best results, use an image with a transparent background and a square dimension of 200 x 200 pixels to prevent upscaling. ")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],

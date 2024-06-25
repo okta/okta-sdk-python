@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.app_and_instance_type import AppAndInstanceType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,8 +26,8 @@ class AppAndInstanceConditionEvaluatorAppOrInstance(BaseModel):
     """
     AppAndInstanceConditionEvaluatorAppOrInstance
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="ID of the app")
-    name: Optional[StrictStr] = Field(default=None, description="Name of the app type")
+    id: Optional[StrictStr] = Field(None, description="ID of the app")
+    name: Optional[StrictStr] = Field(None, description="Name of the app type")
     type: Optional[AppAndInstanceType] = None
     __properties: ClassVar[List[str]] = ["id", "name", "type"]
 

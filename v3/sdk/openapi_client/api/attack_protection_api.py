@@ -17,6 +17,8 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
+from typing import List
+
 from openapi_client.models.user_lockout_settings import UserLockoutSettings
 
 from openapi_client.api_client import ApiClient, RequestSerialized

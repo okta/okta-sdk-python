@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.href_object_self_link import HrefObjectSelfLink
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,7 +26,7 @@ class ApplicationFeatureLinks(BaseModel):
     """
     ApplicationFeatureLinks
     """ # noqa: E501
-    var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
+    var_self: Optional[HrefObjectSelfLink] = Field(None, alias="self")
     __properties: ClassVar[List[str]] = ["self"]
 
     model_config = ConfigDict(

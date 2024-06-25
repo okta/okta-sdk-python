@@ -18,9 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -28,12 +25,12 @@ class SocialAuthToken(BaseModel):
     """
     SocialAuthToken
     """ # noqa: E501
-    expires_at: Optional[datetime] = Field(default=None, alias="expiresAt")
+    expires_at: Optional[datetime] = Field(None, alias="expiresAt")
     id: Optional[StrictStr] = None
-    scopes: Optional[List[StrictStr]] = None
+    scopes: Optional[conlist(StrictStr)] = None
     token: Optional[StrictStr] = None
-    token_auth_scheme: Optional[StrictStr] = Field(default=None, alias="tokenAuthScheme")
-    token_type: Optional[StrictStr] = Field(default=None, alias="tokenType")
+    token_auth_scheme: Optional[StrictStr] = Field(None, alias="tokenAuthScheme")
+    token_type: Optional[StrictStr] = Field(None, alias="tokenType")
     __properties: ClassVar[List[str]] = ["expiresAt", "id", "scopes", "token", "tokenAuthScheme", "tokenType"]
 
     model_config = ConfigDict(

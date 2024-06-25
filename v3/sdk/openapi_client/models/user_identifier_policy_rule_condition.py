@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.user_identifier_condition_evaluator_pattern import UserIdentifierConditionEvaluatorPattern
 from openapi_client.models.user_identifier_type import UserIdentifierType
 from typing import Optional, Set
@@ -30,7 +28,7 @@ class UserIdentifierPolicyRuleCondition(BaseModel):
     UserIdentifierPolicyRuleCondition
     """ # noqa: E501
     attribute: Optional[StrictStr] = None
-    patterns: Optional[List[UserIdentifierConditionEvaluatorPattern]] = None
+    patterns: Optional[conlist(UserIdentifierConditionEvaluatorPattern)] = None
     type: Optional[UserIdentifierType] = None
     __properties: ClassVar[List[str]] = ["attribute", "patterns", "type"]
 

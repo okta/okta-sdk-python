@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.agent import Agent
 from openapi_client.models.agent_type import AgentType
 from openapi_client.models.operational_status import OperationalStatus
@@ -30,10 +28,10 @@ class AgentPool(BaseModel):
     """
     An AgentPool is a collection of agents that serve a common purpose. An AgentPool has a unique ID within an org, and contains a collection of agents disjoint to every other AgentPool (i.e. no two AgentPools share an Agent).
     """ # noqa: E501
-    agents: Optional[List[Agent]] = None
+    agents: Optional[conlist(Agent)] = None
     id: Optional[StrictStr] = None
     name: Optional[StrictStr] = None
-    operational_status: Optional[OperationalStatus] = Field(default=None, alias="operationalStatus")
+    operational_status: Optional[OperationalStatus] = Field(None, alias="operationalStatus")
     type: Optional[AgentType] = None
     __properties: ClassVar[List[str]] = ["agents", "id", "name", "operationalStatus", "type"]
 

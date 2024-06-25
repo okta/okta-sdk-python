@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import ConfigDict, Field, StrictBool
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.device_assurance import DeviceAssurance
 from openapi_client.models.device_assurance_android_platform_all_of_disk_encryption_type import DeviceAssuranceAndroidPlatformAllOfDiskEncryptionType
 from openapi_client.models.device_assurance_android_platform_all_of_screen_lock_type import DeviceAssuranceAndroidPlatformAllOfScreenLockType
@@ -33,11 +31,11 @@ class DeviceAssuranceIOSPlatform(DeviceAssurance):
     """
     DeviceAssuranceIOSPlatform
     """ # noqa: E501
-    disk_encryption_type: Optional[DeviceAssuranceAndroidPlatformAllOfDiskEncryptionType] = Field(default=None, alias="diskEncryptionType")
+    disk_encryption_type: Optional[DeviceAssuranceAndroidPlatformAllOfDiskEncryptionType] = Field(None, alias="diskEncryptionType")
     jailbreak: Optional[StrictBool] = None
-    os_version: Optional[OSVersion] = Field(default=None, alias="osVersion")
-    screen_lock_type: Optional[DeviceAssuranceAndroidPlatformAllOfScreenLockType] = Field(default=None, alias="screenLockType")
-    secure_hardware_present: Optional[StrictBool] = Field(default=None, alias="secureHardwarePresent")
+    os_version: Optional[OSVersion] = Field(None, alias="osVersion")
+    screen_lock_type: Optional[DeviceAssuranceAndroidPlatformAllOfScreenLockType] = Field(None, alias="screenLockType")
+    secure_hardware_present: Optional[StrictBool] = Field(None, alias="secureHardwarePresent")
     __properties: ClassVar[List[str]] = ["createdBy", "createdDate", "id", "lastUpdatedBy", "lastUpdatedDate", "name", "platform", "_links", "diskEncryptionType", "jailbreak", "osVersion", "screenLockType", "secureHardwarePresent"]
 
     model_config = ConfigDict(

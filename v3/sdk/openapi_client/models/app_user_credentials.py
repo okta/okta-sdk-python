@@ -18,9 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
-from typing_extensions import Annotated
 from openapi_client.models.app_user_password_credential import AppUserPasswordCredential
 from typing import Optional, Set
 from typing_extensions import Self
@@ -30,7 +27,7 @@ class AppUserCredentials(BaseModel):
     Specifies a user's credentials for the app. The authentication scheme of the app determines whether a username or password can be assigned to a user.
     """ # noqa: E501
     password: Optional[AppUserPasswordCredential] = None
-    user_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=100)]] = Field(default=None, description="Username for the app", alias="userName")
+    user_name: Optional[constr(strict=True, max_length=100, min_length=1)] = Field(None, alias="userName", description="Username for the app")
     __properties: ClassVar[List[str]] = ["password", "userName"]
 
     model_config = ConfigDict(

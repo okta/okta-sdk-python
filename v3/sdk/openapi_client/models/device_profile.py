@@ -18,9 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
-from typing_extensions import Annotated
 from openapi_client.models.device_platform import DevicePlatform
 from openapi_client.models.disk_encryption_type_def import DiskEncryptionTypeDef
 from typing import Optional, Set
@@ -30,21 +27,21 @@ class DeviceProfile(BaseModel):
     """
     DeviceProfile
     """ # noqa: E501
-    disk_encryption_type: Optional[DiskEncryptionTypeDef] = Field(default=None, alias="diskEncryptionType")
-    display_name: Annotated[str, Field(min_length=1, strict=True, max_length=255)] = Field(description="Display name of the device", alias="displayName")
-    imei: Optional[Annotated[str, Field(min_length=14, strict=True, max_length=17)]] = Field(default=None, description="International Mobile Equipment Identity (IMEI) of the device")
-    integrity_jailbreak: Optional[StrictBool] = Field(default=None, description="Indicates if the device is jailbroken or rooted. Only applicable to `IOS` and `ANDROID` platforms", alias="integrityJailbreak")
-    manufacturer: Optional[Annotated[str, Field(strict=True, max_length=127)]] = Field(default=None, description="Name of the manufacturer of the device")
-    meid: Optional[Annotated[str, Field(strict=True, max_length=14)]] = Field(default=None, description="Mobile equipment identifier of the device")
-    model: Optional[Annotated[str, Field(strict=True, max_length=127)]] = Field(default=None, description="Model of the device")
-    os_version: Optional[Annotated[str, Field(strict=True, max_length=127)]] = Field(default=None, description="Version of the device OS", alias="osVersion")
-    platform: DevicePlatform
-    registered: StrictBool = Field(description="Indicates if the device is registered at Okta")
-    secure_hardware_present: Optional[StrictBool] = Field(default=None, description="Indicates if the device contains a secure hardware functionality", alias="secureHardwarePresent")
-    serial_number: Optional[Annotated[str, Field(strict=True, max_length=127)]] = Field(default=None, description="Serial number of the device", alias="serialNumber")
-    sid: Optional[Annotated[str, Field(strict=True, max_length=256)]] = Field(default=None, description="Windows Security identifier of the device")
-    tpm_public_key_hash: Optional[StrictStr] = Field(default=None, description="Windows Trsted Platform Module hash value", alias="tpmPublicKeyHash")
-    udid: Optional[Annotated[str, Field(strict=True, max_length=47)]] = Field(default=None, description="macOS Unique Device identifier of the device")
+    disk_encryption_type: Optional[DiskEncryptionTypeDef] = Field(None, alias="diskEncryptionType")
+    display_name: constr(strict=True, max_length=255, min_length=1) = Field(..., alias="displayName", description="Display name of the device")
+    imei: Optional[constr(strict=True, max_length=17, min_length=14)] = Field(None, description="International Mobile Equipment Identity (IMEI) of the device")
+    integrity_jailbreak: Optional[StrictBool] = Field(None, alias="integrityJailbreak", description="Indicates if the device is jailbroken or rooted. Only applicable to `IOS` and `ANDROID` platforms")
+    manufacturer: Optional[constr(strict=True, max_length=127)] = Field(None, description="Name of the manufacturer of the device")
+    meid: Optional[constr(strict=True, max_length=14)] = Field(None, description="Mobile equipment identifier of the device")
+    model: Optional[constr(strict=True, max_length=127)] = Field(None, description="Model of the device")
+    os_version: Optional[constr(strict=True, max_length=127)] = Field(None, alias="osVersion", description="Version of the device OS")
+    platform: DevicePlatform = Field(...)
+    registered: StrictBool = Field(..., description="Indicates if the device is registered at Okta")
+    secure_hardware_present: Optional[StrictBool] = Field(None, alias="secureHardwarePresent", description="Indicates if the device contains a secure hardware functionality")
+    serial_number: Optional[constr(strict=True, max_length=127)] = Field(None, alias="serialNumber", description="Serial number of the device")
+    sid: Optional[constr(strict=True, max_length=256)] = Field(None, description="Windows Security identifier of the device")
+    tpm_public_key_hash: Optional[StrictStr] = Field(None, alias="tpmPublicKeyHash", description="Windows Trsted Platform Module hash value")
+    udid: Optional[constr(strict=True, max_length=47)] = Field(None, description="macOS Unique Device identifier of the device")
     __properties: ClassVar[List[str]] = ["diskEncryptionType", "displayName", "imei", "integrityJailbreak", "manufacturer", "meid", "model", "osVersion", "platform", "registered", "secureHardwarePresent", "serialNumber", "sid", "tpmPublicKeyHash", "udid"]
 
     model_config = ConfigDict(

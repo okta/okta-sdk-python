@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.application_visibility_hide import ApplicationVisibilityHide
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,9 +26,9 @@ class ApplicationVisibility(BaseModel):
     """
     ApplicationVisibility
     """ # noqa: E501
-    app_links: Optional[Dict[str, StrictBool]] = Field(default=None, alias="appLinks")
-    auto_launch: Optional[StrictBool] = Field(default=None, alias="autoLaunch")
-    auto_submit_toolbar: Optional[StrictBool] = Field(default=None, alias="autoSubmitToolbar")
+    app_links: Optional[Dict[str, StrictBool]] = Field(None, alias="appLinks")
+    auto_launch: Optional[StrictBool] = Field(None, alias="autoLaunch")
+    auto_submit_toolbar: Optional[StrictBool] = Field(None, alias="autoSubmitToolbar")
     hide: Optional[ApplicationVisibilityHide] = None
     __properties: ClassVar[List[str]] = ["appLinks", "autoLaunch", "autoSubmitToolbar", "hide"]
 

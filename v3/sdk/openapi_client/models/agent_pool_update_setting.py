@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.agent_type import AgentType
 from openapi_client.models.release_channel import ReleaseChannel
 from typing import Optional, Set
@@ -29,13 +27,13 @@ class AgentPoolUpdateSetting(BaseModel):
     """
     Setting for auto-update
     """ # noqa: E501
-    agent_type: Optional[AgentType] = Field(default=None, alias="agentType")
-    continue_on_error: Optional[StrictBool] = Field(default=None, alias="continueOnError")
-    latest_version: Optional[StrictStr] = Field(default=None, alias="latestVersion")
-    minimal_supported_version: Optional[StrictStr] = Field(default=None, alias="minimalSupportedVersion")
-    pool_id: Optional[StrictStr] = Field(default=None, alias="poolId")
-    pool_name: Optional[StrictStr] = Field(default=None, alias="poolName")
-    release_channel: Optional[ReleaseChannel] = Field(default=None, alias="releaseChannel")
+    agent_type: Optional[AgentType] = Field(None, alias="agentType")
+    continue_on_error: Optional[StrictBool] = Field(None, alias="continueOnError")
+    latest_version: Optional[StrictStr] = Field(None, alias="latestVersion")
+    minimal_supported_version: Optional[StrictStr] = Field(None, alias="minimalSupportedVersion")
+    pool_id: Optional[StrictStr] = Field(None, alias="poolId")
+    pool_name: Optional[StrictStr] = Field(None, alias="poolName")
+    release_channel: Optional[ReleaseChannel] = Field(None, alias="releaseChannel")
     __properties: ClassVar[List[str]] = ["agentType", "continueOnError", "latestVersion", "minimalSupportedVersion", "poolId", "poolName", "releaseChannel"]
 
     model_config = ConfigDict(

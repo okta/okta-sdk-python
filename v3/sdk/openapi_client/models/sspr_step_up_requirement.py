@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +25,7 @@ class SsprStepUpRequirement(BaseModel):
     """
     Defines the secondary authenticators needed for password reset if `required` is true. The following are three valid configurations: * `required`=false * `required`=true with no methods to use any SSO authenticator * `required`=true with `security_question` as the method
     """ # noqa: E501
-    methods: Optional[List[StrictStr]] = Field(default=None, description="Authenticator methods required for secondary authentication step of password recovery. Specify this value only when `required` is true and `security_question` is permitted for the secondary authentication.")
+    methods: Optional[conlist(StrictStr)] = Field(None, description="Authenticator methods required for secondary authentication step of password recovery. Specify this value only when `required` is true and `security_question` is permitted for the secondary authentication.")
     required: Optional[StrictBool] = None
     __properties: ClassVar[List[str]] = ["methods", "required"]
 

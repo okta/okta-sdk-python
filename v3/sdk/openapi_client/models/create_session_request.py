@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +25,7 @@ class CreateSessionRequest(BaseModel):
     """
     CreateSessionRequest
     """ # noqa: E501
-    session_token: Optional[StrictStr] = Field(default=None, description="The session token obtained during authentication", alias="sessionToken")
+    session_token: Optional[StrictStr] = Field(None, alias="sessionToken", description="The session token obtained during authentication")
     __properties: ClassVar[List[str]] = ["sessionToken"]
 
     model_config = ConfigDict(

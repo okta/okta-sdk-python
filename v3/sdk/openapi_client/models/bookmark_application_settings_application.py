@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +25,7 @@ class BookmarkApplicationSettingsApplication(BaseModel):
     """
     BookmarkApplicationSettingsApplication
     """ # noqa: E501
-    request_integration: Optional[StrictBool] = Field(default=None, alias="requestIntegration")
+    request_integration: Optional[StrictBool] = Field(None, alias="requestIntegration")
     url: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["requestIntegration", "url"]
 

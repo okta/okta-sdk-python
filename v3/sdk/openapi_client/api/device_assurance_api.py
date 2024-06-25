@@ -17,8 +17,11 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictStr
 from typing_extensions import Annotated
+from pydantic import Field, StrictStr
+
+from typing import List
+
 from openapi_client.models.device_assurance import DeviceAssurance
 
 from openapi_client.api_client import ApiClient, RequestSerialized
@@ -323,7 +326,7 @@ class DeviceAssuranceApi:
     @validate_call
     def delete_device_assurance_policy(
         self,
-        device_assurance_id: Annotated[StrictStr, Field(description="Id of the Device Assurance Policy")],
+        device_assurance_id: Annotated[StrictStr, Field(..., description="Id of the Device Assurance Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -394,7 +397,7 @@ class DeviceAssuranceApi:
     @validate_call
     def delete_device_assurance_policy_with_http_info(
         self,
-        device_assurance_id: Annotated[StrictStr, Field(description="Id of the Device Assurance Policy")],
+        device_assurance_id: Annotated[StrictStr, Field(..., description="Id of the Device Assurance Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -465,7 +468,7 @@ class DeviceAssuranceApi:
     @validate_call
     def delete_device_assurance_policy_without_preload_content(
         self,
-        device_assurance_id: Annotated[StrictStr, Field(description="Id of the Device Assurance Policy")],
+        device_assurance_id: Annotated[StrictStr, Field(..., description="Id of the Device Assurance Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -594,7 +597,7 @@ class DeviceAssuranceApi:
     @validate_call
     def get_device_assurance_policy(
         self,
-        device_assurance_id: Annotated[StrictStr, Field(description="Id of the Device Assurance Policy")],
+        device_assurance_id: Annotated[StrictStr, Field(..., description="Id of the Device Assurance Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -664,7 +667,7 @@ class DeviceAssuranceApi:
     @validate_call
     def get_device_assurance_policy_with_http_info(
         self,
-        device_assurance_id: Annotated[StrictStr, Field(description="Id of the Device Assurance Policy")],
+        device_assurance_id: Annotated[StrictStr, Field(..., description="Id of the Device Assurance Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -734,7 +737,7 @@ class DeviceAssuranceApi:
     @validate_call
     def get_device_assurance_policy_without_preload_content(
         self,
-        device_assurance_id: Annotated[StrictStr, Field(description="Id of the Device Assurance Policy")],
+        device_assurance_id: Annotated[StrictStr, Field(..., description="Id of the Device Assurance Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1112,7 +1115,7 @@ class DeviceAssuranceApi:
     @validate_call
     def replace_device_assurance_policy(
         self,
-        device_assurance_id: Annotated[StrictStr, Field(description="Id of the Device Assurance Policy")],
+        device_assurance_id: Annotated[StrictStr, Field(..., description="Id of the Device Assurance Policy")],
         device_assurance: DeviceAssurance,
         _request_timeout: Union[
             None,
@@ -1187,7 +1190,7 @@ class DeviceAssuranceApi:
     @validate_call
     def replace_device_assurance_policy_with_http_info(
         self,
-        device_assurance_id: Annotated[StrictStr, Field(description="Id of the Device Assurance Policy")],
+        device_assurance_id: Annotated[StrictStr, Field(..., description="Id of the Device Assurance Policy")],
         device_assurance: DeviceAssurance,
         _request_timeout: Union[
             None,
@@ -1262,7 +1265,7 @@ class DeviceAssuranceApi:
     @validate_call
     def replace_device_assurance_policy_without_preload_content(
         self,
-        device_assurance_id: Annotated[StrictStr, Field(description="Id of the Device Assurance Policy")],
+        device_assurance_id: Annotated[StrictStr, Field(..., description="Id of the Device Assurance Policy")],
         device_assurance: DeviceAssurance,
         _request_timeout: Union[
             None,

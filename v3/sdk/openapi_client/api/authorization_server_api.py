@@ -17,9 +17,11 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import Field, StrictBool, StrictInt, StrictStr
-from typing import Optional
 from typing_extensions import Annotated
+from pydantic import Field, StrictBool, StrictInt, StrictStr
+
+from typing import List, Optional
+
 from openapi_client.models.associated_server_mediated import AssociatedServerMediated
 from openapi_client.models.authorization_server import AuthorizationServer
 from openapi_client.models.authorization_server_policy import AuthorizationServerPolicy
@@ -52,7 +54,7 @@ class AuthorizationServerApi:
     @validate_call
     def activate_authorization_server(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -122,7 +124,7 @@ class AuthorizationServerApi:
     @validate_call
     def activate_authorization_server_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -192,7 +194,7 @@ class AuthorizationServerApi:
     @validate_call
     def activate_authorization_server_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -320,8 +322,8 @@ class AuthorizationServerApi:
     @validate_call
     def activate_authorization_server_policy(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -394,8 +396,8 @@ class AuthorizationServerApi:
     @validate_call
     def activate_authorization_server_policy_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -468,8 +470,8 @@ class AuthorizationServerApi:
     @validate_call
     def activate_authorization_server_policy_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -603,9 +605,9 @@ class AuthorizationServerApi:
     @validate_call
     def activate_authorization_server_policy_rule(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
-        rule_id: Annotated[StrictStr, Field(description="`id` of the Policy Rule")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        rule_id: Annotated[StrictStr, Field(..., description="`id` of the Policy Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -681,9 +683,9 @@ class AuthorizationServerApi:
     @validate_call
     def activate_authorization_server_policy_rule_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
-        rule_id: Annotated[StrictStr, Field(description="`id` of the Policy Rule")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        rule_id: Annotated[StrictStr, Field(..., description="`id` of the Policy Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -759,9 +761,9 @@ class AuthorizationServerApi:
     @validate_call
     def activate_authorization_server_policy_rule_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
-        rule_id: Annotated[StrictStr, Field(description="`id` of the Policy Rule")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        rule_id: Annotated[StrictStr, Field(..., description="`id` of the Policy Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -901,7 +903,7 @@ class AuthorizationServerApi:
     @validate_call
     def create_associated_servers(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         associated_server_mediated: AssociatedServerMediated,
         _request_timeout: Union[
             None,
@@ -976,7 +978,7 @@ class AuthorizationServerApi:
     @validate_call
     def create_associated_servers_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         associated_server_mediated: AssociatedServerMediated,
         _request_timeout: Union[
             None,
@@ -1051,7 +1053,7 @@ class AuthorizationServerApi:
     @validate_call
     def create_associated_servers_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         associated_server_mediated: AssociatedServerMediated,
         _request_timeout: Union[
             None,
@@ -1481,7 +1483,7 @@ class AuthorizationServerApi:
     @validate_call
     def create_authorization_server_policy(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         policy: AuthorizationServerPolicy,
         _request_timeout: Union[
             None,
@@ -1556,7 +1558,7 @@ class AuthorizationServerApi:
     @validate_call
     def create_authorization_server_policy_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         policy: AuthorizationServerPolicy,
         _request_timeout: Union[
             None,
@@ -1631,7 +1633,7 @@ class AuthorizationServerApi:
     @validate_call
     def create_authorization_server_policy_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         policy: AuthorizationServerPolicy,
         _request_timeout: Union[
             None,
@@ -1780,8 +1782,8 @@ class AuthorizationServerApi:
     @validate_call
     def create_authorization_server_policy_rule(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
         policy_rule: AuthorizationServerPolicyRule,
         _request_timeout: Union[
             None,
@@ -1859,8 +1861,8 @@ class AuthorizationServerApi:
     @validate_call
     def create_authorization_server_policy_rule_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
         policy_rule: AuthorizationServerPolicyRule,
         _request_timeout: Union[
             None,
@@ -1938,8 +1940,8 @@ class AuthorizationServerApi:
     @validate_call
     def create_authorization_server_policy_rule_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
         policy_rule: AuthorizationServerPolicyRule,
         _request_timeout: Union[
             None,
@@ -2094,7 +2096,7 @@ class AuthorizationServerApi:
     @validate_call
     def create_o_auth2_claim(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         o_auth2_claim: OAuth2Claim,
         _request_timeout: Union[
             None,
@@ -2169,7 +2171,7 @@ class AuthorizationServerApi:
     @validate_call
     def create_o_auth2_claim_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         o_auth2_claim: OAuth2Claim,
         _request_timeout: Union[
             None,
@@ -2244,7 +2246,7 @@ class AuthorizationServerApi:
     @validate_call
     def create_o_auth2_claim_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         o_auth2_claim: OAuth2Claim,
         _request_timeout: Union[
             None,
@@ -2393,7 +2395,7 @@ class AuthorizationServerApi:
     @validate_call
     def create_o_auth2_scope(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         o_auth2_scope: OAuth2Scope,
         _request_timeout: Union[
             None,
@@ -2468,7 +2470,7 @@ class AuthorizationServerApi:
     @validate_call
     def create_o_auth2_scope_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         o_auth2_scope: OAuth2Scope,
         _request_timeout: Union[
             None,
@@ -2543,7 +2545,7 @@ class AuthorizationServerApi:
     @validate_call
     def create_o_auth2_scope_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         o_auth2_scope: OAuth2Scope,
         _request_timeout: Union[
             None,
@@ -2692,7 +2694,7 @@ class AuthorizationServerApi:
     @validate_call
     def deactivate_authorization_server(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2762,7 +2764,7 @@ class AuthorizationServerApi:
     @validate_call
     def deactivate_authorization_server_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2832,7 +2834,7 @@ class AuthorizationServerApi:
     @validate_call
     def deactivate_authorization_server_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2960,8 +2962,8 @@ class AuthorizationServerApi:
     @validate_call
     def deactivate_authorization_server_policy(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3034,8 +3036,8 @@ class AuthorizationServerApi:
     @validate_call
     def deactivate_authorization_server_policy_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3108,8 +3110,8 @@ class AuthorizationServerApi:
     @validate_call
     def deactivate_authorization_server_policy_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3243,9 +3245,9 @@ class AuthorizationServerApi:
     @validate_call
     def deactivate_authorization_server_policy_rule(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
-        rule_id: Annotated[StrictStr, Field(description="`id` of the Policy Rule")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        rule_id: Annotated[StrictStr, Field(..., description="`id` of the Policy Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3321,9 +3323,9 @@ class AuthorizationServerApi:
     @validate_call
     def deactivate_authorization_server_policy_rule_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
-        rule_id: Annotated[StrictStr, Field(description="`id` of the Policy Rule")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        rule_id: Annotated[StrictStr, Field(..., description="`id` of the Policy Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3399,9 +3401,9 @@ class AuthorizationServerApi:
     @validate_call
     def deactivate_authorization_server_policy_rule_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
-        rule_id: Annotated[StrictStr, Field(description="`id` of the Policy Rule")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        rule_id: Annotated[StrictStr, Field(..., description="`id` of the Policy Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3541,8 +3543,8 @@ class AuthorizationServerApi:
     @validate_call
     def delete_associated_server(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        associated_server_id: Annotated[StrictStr, Field(description="`id` of the associated Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        associated_server_id: Annotated[StrictStr, Field(..., description="`id` of the associated Authorization Server")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3615,8 +3617,8 @@ class AuthorizationServerApi:
     @validate_call
     def delete_associated_server_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        associated_server_id: Annotated[StrictStr, Field(description="`id` of the associated Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        associated_server_id: Annotated[StrictStr, Field(..., description="`id` of the associated Authorization Server")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3689,8 +3691,8 @@ class AuthorizationServerApi:
     @validate_call
     def delete_associated_server_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        associated_server_id: Annotated[StrictStr, Field(description="`id` of the associated Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        associated_server_id: Annotated[StrictStr, Field(..., description="`id` of the associated Authorization Server")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3824,7 +3826,7 @@ class AuthorizationServerApi:
     @validate_call
     def delete_authorization_server(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3894,7 +3896,7 @@ class AuthorizationServerApi:
     @validate_call
     def delete_authorization_server_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3964,7 +3966,7 @@ class AuthorizationServerApi:
     @validate_call
     def delete_authorization_server_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4092,8 +4094,8 @@ class AuthorizationServerApi:
     @validate_call
     def delete_authorization_server_policy(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4166,8 +4168,8 @@ class AuthorizationServerApi:
     @validate_call
     def delete_authorization_server_policy_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4240,8 +4242,8 @@ class AuthorizationServerApi:
     @validate_call
     def delete_authorization_server_policy_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4375,9 +4377,9 @@ class AuthorizationServerApi:
     @validate_call
     def delete_authorization_server_policy_rule(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
-        rule_id: Annotated[StrictStr, Field(description="`id` of the Policy Rule")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        rule_id: Annotated[StrictStr, Field(..., description="`id` of the Policy Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4453,9 +4455,9 @@ class AuthorizationServerApi:
     @validate_call
     def delete_authorization_server_policy_rule_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
-        rule_id: Annotated[StrictStr, Field(description="`id` of the Policy Rule")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        rule_id: Annotated[StrictStr, Field(..., description="`id` of the Policy Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4531,9 +4533,9 @@ class AuthorizationServerApi:
     @validate_call
     def delete_authorization_server_policy_rule_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
-        rule_id: Annotated[StrictStr, Field(description="`id` of the Policy Rule")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        rule_id: Annotated[StrictStr, Field(..., description="`id` of the Policy Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4673,8 +4675,8 @@ class AuthorizationServerApi:
     @validate_call
     def delete_o_auth2_claim(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        claim_id: Annotated[StrictStr, Field(description="`id` of Claim")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        claim_id: Annotated[StrictStr, Field(..., description="`id` of Claim")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4747,8 +4749,8 @@ class AuthorizationServerApi:
     @validate_call
     def delete_o_auth2_claim_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        claim_id: Annotated[StrictStr, Field(description="`id` of Claim")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        claim_id: Annotated[StrictStr, Field(..., description="`id` of Claim")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4821,8 +4823,8 @@ class AuthorizationServerApi:
     @validate_call
     def delete_o_auth2_claim_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        claim_id: Annotated[StrictStr, Field(description="`id` of Claim")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        claim_id: Annotated[StrictStr, Field(..., description="`id` of Claim")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4956,8 +4958,8 @@ class AuthorizationServerApi:
     @validate_call
     def delete_o_auth2_scope(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        scope_id: Annotated[StrictStr, Field(description="`id` of Scope")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        scope_id: Annotated[StrictStr, Field(..., description="`id` of Scope")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5030,8 +5032,8 @@ class AuthorizationServerApi:
     @validate_call
     def delete_o_auth2_scope_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        scope_id: Annotated[StrictStr, Field(description="`id` of Scope")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        scope_id: Annotated[StrictStr, Field(..., description="`id` of Scope")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5104,8 +5106,8 @@ class AuthorizationServerApi:
     @validate_call
     def delete_o_auth2_scope_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        scope_id: Annotated[StrictStr, Field(description="`id` of Scope")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        scope_id: Annotated[StrictStr, Field(..., description="`id` of Scope")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5239,7 +5241,7 @@ class AuthorizationServerApi:
     @validate_call
     def get_authorization_server(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5309,7 +5311,7 @@ class AuthorizationServerApi:
     @validate_call
     def get_authorization_server_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5379,7 +5381,7 @@ class AuthorizationServerApi:
     @validate_call
     def get_authorization_server_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5507,8 +5509,8 @@ class AuthorizationServerApi:
     @validate_call
     def get_authorization_server_policy(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5581,8 +5583,8 @@ class AuthorizationServerApi:
     @validate_call
     def get_authorization_server_policy_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5655,8 +5657,8 @@ class AuthorizationServerApi:
     @validate_call
     def get_authorization_server_policy_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5790,9 +5792,9 @@ class AuthorizationServerApi:
     @validate_call
     def get_authorization_server_policy_rule(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
-        rule_id: Annotated[StrictStr, Field(description="`id` of the Policy Rule")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        rule_id: Annotated[StrictStr, Field(..., description="`id` of the Policy Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5868,9 +5870,9 @@ class AuthorizationServerApi:
     @validate_call
     def get_authorization_server_policy_rule_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
-        rule_id: Annotated[StrictStr, Field(description="`id` of the Policy Rule")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        rule_id: Annotated[StrictStr, Field(..., description="`id` of the Policy Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5946,9 +5948,9 @@ class AuthorizationServerApi:
     @validate_call
     def get_authorization_server_policy_rule_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
-        rule_id: Annotated[StrictStr, Field(description="`id` of the Policy Rule")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        rule_id: Annotated[StrictStr, Field(..., description="`id` of the Policy Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6088,8 +6090,8 @@ class AuthorizationServerApi:
     @validate_call
     def get_o_auth2_claim(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        claim_id: Annotated[StrictStr, Field(description="`id` of Claim")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        claim_id: Annotated[StrictStr, Field(..., description="`id` of Claim")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6162,8 +6164,8 @@ class AuthorizationServerApi:
     @validate_call
     def get_o_auth2_claim_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        claim_id: Annotated[StrictStr, Field(description="`id` of Claim")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        claim_id: Annotated[StrictStr, Field(..., description="`id` of Claim")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6236,8 +6238,8 @@ class AuthorizationServerApi:
     @validate_call
     def get_o_auth2_claim_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        claim_id: Annotated[StrictStr, Field(description="`id` of Claim")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        claim_id: Annotated[StrictStr, Field(..., description="`id` of Claim")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6371,8 +6373,8 @@ class AuthorizationServerApi:
     @validate_call
     def get_o_auth2_scope(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        scope_id: Annotated[StrictStr, Field(description="`id` of Scope")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        scope_id: Annotated[StrictStr, Field(..., description="`id` of Scope")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6445,8 +6447,8 @@ class AuthorizationServerApi:
     @validate_call
     def get_o_auth2_scope_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        scope_id: Annotated[StrictStr, Field(description="`id` of Scope")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        scope_id: Annotated[StrictStr, Field(..., description="`id` of Scope")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6519,8 +6521,8 @@ class AuthorizationServerApi:
     @validate_call
     def get_o_auth2_scope_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        scope_id: Annotated[StrictStr, Field(description="`id` of Scope")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        scope_id: Annotated[StrictStr, Field(..., description="`id` of Scope")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6654,9 +6656,9 @@ class AuthorizationServerApi:
     @validate_call
     def get_refresh_token_for_authorization_server_and_client(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
-        token_id: Annotated[StrictStr, Field(description="`id` of Token")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        client_id: Annotated[StrictStr, Field(..., description="`client_id` of the app")],
+        token_id: Annotated[StrictStr, Field(..., description="`id` of Token")],
         expand: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -6736,9 +6738,9 @@ class AuthorizationServerApi:
     @validate_call
     def get_refresh_token_for_authorization_server_and_client_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
-        token_id: Annotated[StrictStr, Field(description="`id` of Token")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        client_id: Annotated[StrictStr, Field(..., description="`client_id` of the app")],
+        token_id: Annotated[StrictStr, Field(..., description="`id` of Token")],
         expand: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -6818,9 +6820,9 @@ class AuthorizationServerApi:
     @validate_call
     def get_refresh_token_for_authorization_server_and_client_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
-        token_id: Annotated[StrictStr, Field(description="`id` of Token")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        client_id: Annotated[StrictStr, Field(..., description="`client_id` of the app")],
+        token_id: Annotated[StrictStr, Field(..., description="`id` of Token")],
         expand: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -6969,7 +6971,7 @@ class AuthorizationServerApi:
     @validate_call
     def list_associated_servers_by_trusted_type(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         trusted: Annotated[Optional[StrictBool], Field(description="Searches trusted authorization servers when true, or searches untrusted authorization servers when false")] = None,
         q: Annotated[Optional[StrictStr], Field(description="Searches the name or audience of the associated authorization servers")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Specifies the number of results for a page")] = None,
@@ -7055,7 +7057,7 @@ class AuthorizationServerApi:
     @validate_call
     def list_associated_servers_by_trusted_type_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         trusted: Annotated[Optional[StrictBool], Field(description="Searches trusted authorization servers when true, or searches untrusted authorization servers when false")] = None,
         q: Annotated[Optional[StrictStr], Field(description="Searches the name or audience of the associated authorization servers")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Specifies the number of results for a page")] = None,
@@ -7141,7 +7143,7 @@ class AuthorizationServerApi:
     @validate_call
     def list_associated_servers_by_trusted_type_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         trusted: Annotated[Optional[StrictBool], Field(description="Searches trusted authorization servers when true, or searches untrusted authorization servers when false")] = None,
         q: Annotated[Optional[StrictStr], Field(description="Searches the name or audience of the associated authorization servers")] = None,
         limit: Annotated[Optional[StrictInt], Field(description="Specifies the number of results for a page")] = None,
@@ -7305,7 +7307,7 @@ class AuthorizationServerApi:
     @validate_call
     def list_authorization_server_keys(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7375,7 +7377,7 @@ class AuthorizationServerApi:
     @validate_call
     def list_authorization_server_keys_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7445,7 +7447,7 @@ class AuthorizationServerApi:
     @validate_call
     def list_authorization_server_keys_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7573,7 +7575,7 @@ class AuthorizationServerApi:
     @validate_call
     def list_authorization_server_policies(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7643,7 +7645,7 @@ class AuthorizationServerApi:
     @validate_call
     def list_authorization_server_policies_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7713,7 +7715,7 @@ class AuthorizationServerApi:
     @validate_call
     def list_authorization_server_policies_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7841,8 +7843,8 @@ class AuthorizationServerApi:
     @validate_call
     def list_authorization_server_policy_rules(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7915,8 +7917,8 @@ class AuthorizationServerApi:
     @validate_call
     def list_authorization_server_policy_rules_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7989,8 +7991,8 @@ class AuthorizationServerApi:
     @validate_call
     def list_authorization_server_policy_rules_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8425,7 +8427,7 @@ class AuthorizationServerApi:
     @validate_call
     def list_o_auth2_claims(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8495,7 +8497,7 @@ class AuthorizationServerApi:
     @validate_call
     def list_o_auth2_claims_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8565,7 +8567,7 @@ class AuthorizationServerApi:
     @validate_call
     def list_o_auth2_claims_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8693,7 +8695,7 @@ class AuthorizationServerApi:
     @validate_call
     def list_o_auth2_clients_for_authorization_server(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8763,7 +8765,7 @@ class AuthorizationServerApi:
     @validate_call
     def list_o_auth2_clients_for_authorization_server_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8833,7 +8835,7 @@ class AuthorizationServerApi:
     @validate_call
     def list_o_auth2_clients_for_authorization_server_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8961,7 +8963,7 @@ class AuthorizationServerApi:
     @validate_call
     def list_o_auth2_scopes(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         q: Optional[StrictStr] = None,
         filter: Optional[StrictStr] = None,
         cursor: Optional[StrictStr] = None,
@@ -9047,7 +9049,7 @@ class AuthorizationServerApi:
     @validate_call
     def list_o_auth2_scopes_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         q: Optional[StrictStr] = None,
         filter: Optional[StrictStr] = None,
         cursor: Optional[StrictStr] = None,
@@ -9133,7 +9135,7 @@ class AuthorizationServerApi:
     @validate_call
     def list_o_auth2_scopes_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         q: Optional[StrictStr] = None,
         filter: Optional[StrictStr] = None,
         cursor: Optional[StrictStr] = None,
@@ -9297,8 +9299,8 @@ class AuthorizationServerApi:
     @validate_call
     def list_refresh_tokens_for_authorization_server_and_client(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        client_id: Annotated[StrictStr, Field(..., description="`client_id` of the app")],
         expand: Optional[StrictStr] = None,
         after: Optional[StrictStr] = None,
         limit: Optional[StrictInt] = None,
@@ -9383,8 +9385,8 @@ class AuthorizationServerApi:
     @validate_call
     def list_refresh_tokens_for_authorization_server_and_client_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        client_id: Annotated[StrictStr, Field(..., description="`client_id` of the app")],
         expand: Optional[StrictStr] = None,
         after: Optional[StrictStr] = None,
         limit: Optional[StrictInt] = None,
@@ -9469,8 +9471,8 @@ class AuthorizationServerApi:
     @validate_call
     def list_refresh_tokens_for_authorization_server_and_client_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        client_id: Annotated[StrictStr, Field(..., description="`client_id` of the app")],
         expand: Optional[StrictStr] = None,
         after: Optional[StrictStr] = None,
         limit: Optional[StrictInt] = None,
@@ -9631,7 +9633,7 @@ class AuthorizationServerApi:
     @validate_call
     def replace_authorization_server(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         authorization_server: AuthorizationServer,
         _request_timeout: Union[
             None,
@@ -9706,7 +9708,7 @@ class AuthorizationServerApi:
     @validate_call
     def replace_authorization_server_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         authorization_server: AuthorizationServer,
         _request_timeout: Union[
             None,
@@ -9781,7 +9783,7 @@ class AuthorizationServerApi:
     @validate_call
     def replace_authorization_server_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         authorization_server: AuthorizationServer,
         _request_timeout: Union[
             None,
@@ -9930,8 +9932,8 @@ class AuthorizationServerApi:
     @validate_call
     def replace_authorization_server_policy(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
         policy: AuthorizationServerPolicy,
         _request_timeout: Union[
             None,
@@ -10009,8 +10011,8 @@ class AuthorizationServerApi:
     @validate_call
     def replace_authorization_server_policy_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
         policy: AuthorizationServerPolicy,
         _request_timeout: Union[
             None,
@@ -10088,8 +10090,8 @@ class AuthorizationServerApi:
     @validate_call
     def replace_authorization_server_policy_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
         policy: AuthorizationServerPolicy,
         _request_timeout: Union[
             None,
@@ -10244,9 +10246,9 @@ class AuthorizationServerApi:
     @validate_call
     def replace_authorization_server_policy_rule(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
-        rule_id: Annotated[StrictStr, Field(description="`id` of the Policy Rule")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        rule_id: Annotated[StrictStr, Field(..., description="`id` of the Policy Rule")],
         policy_rule: AuthorizationServerPolicyRule,
         _request_timeout: Union[
             None,
@@ -10327,9 +10329,9 @@ class AuthorizationServerApi:
     @validate_call
     def replace_authorization_server_policy_rule_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
-        rule_id: Annotated[StrictStr, Field(description="`id` of the Policy Rule")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        rule_id: Annotated[StrictStr, Field(..., description="`id` of the Policy Rule")],
         policy_rule: AuthorizationServerPolicyRule,
         _request_timeout: Union[
             None,
@@ -10410,9 +10412,9 @@ class AuthorizationServerApi:
     @validate_call
     def replace_authorization_server_policy_rule_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
-        rule_id: Annotated[StrictStr, Field(description="`id` of the Policy Rule")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        rule_id: Annotated[StrictStr, Field(..., description="`id` of the Policy Rule")],
         policy_rule: AuthorizationServerPolicyRule,
         _request_timeout: Union[
             None,
@@ -10573,8 +10575,8 @@ class AuthorizationServerApi:
     @validate_call
     def replace_o_auth2_claim(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        claim_id: Annotated[StrictStr, Field(description="`id` of Claim")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        claim_id: Annotated[StrictStr, Field(..., description="`id` of Claim")],
         o_auth2_claim: OAuth2Claim,
         _request_timeout: Union[
             None,
@@ -10652,8 +10654,8 @@ class AuthorizationServerApi:
     @validate_call
     def replace_o_auth2_claim_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        claim_id: Annotated[StrictStr, Field(description="`id` of Claim")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        claim_id: Annotated[StrictStr, Field(..., description="`id` of Claim")],
         o_auth2_claim: OAuth2Claim,
         _request_timeout: Union[
             None,
@@ -10731,8 +10733,8 @@ class AuthorizationServerApi:
     @validate_call
     def replace_o_auth2_claim_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        claim_id: Annotated[StrictStr, Field(description="`id` of Claim")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        claim_id: Annotated[StrictStr, Field(..., description="`id` of Claim")],
         o_auth2_claim: OAuth2Claim,
         _request_timeout: Union[
             None,
@@ -10887,8 +10889,8 @@ class AuthorizationServerApi:
     @validate_call
     def replace_o_auth2_scope(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        scope_id: Annotated[StrictStr, Field(description="`id` of Scope")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        scope_id: Annotated[StrictStr, Field(..., description="`id` of Scope")],
         o_auth2_scope: OAuth2Scope,
         _request_timeout: Union[
             None,
@@ -10966,8 +10968,8 @@ class AuthorizationServerApi:
     @validate_call
     def replace_o_auth2_scope_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        scope_id: Annotated[StrictStr, Field(description="`id` of Scope")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        scope_id: Annotated[StrictStr, Field(..., description="`id` of Scope")],
         o_auth2_scope: OAuth2Scope,
         _request_timeout: Union[
             None,
@@ -11045,8 +11047,8 @@ class AuthorizationServerApi:
     @validate_call
     def replace_o_auth2_scope_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        scope_id: Annotated[StrictStr, Field(description="`id` of Scope")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        scope_id: Annotated[StrictStr, Field(..., description="`id` of Scope")],
         o_auth2_scope: OAuth2Scope,
         _request_timeout: Union[
             None,
@@ -11201,9 +11203,9 @@ class AuthorizationServerApi:
     @validate_call
     def revoke_refresh_token_for_authorization_server_and_client(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
-        token_id: Annotated[StrictStr, Field(description="`id` of Token")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        client_id: Annotated[StrictStr, Field(..., description="`client_id` of the app")],
+        token_id: Annotated[StrictStr, Field(..., description="`id` of Token")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -11279,9 +11281,9 @@ class AuthorizationServerApi:
     @validate_call
     def revoke_refresh_token_for_authorization_server_and_client_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
-        token_id: Annotated[StrictStr, Field(description="`id` of Token")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        client_id: Annotated[StrictStr, Field(..., description="`client_id` of the app")],
+        token_id: Annotated[StrictStr, Field(..., description="`id` of Token")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -11357,9 +11359,9 @@ class AuthorizationServerApi:
     @validate_call
     def revoke_refresh_token_for_authorization_server_and_client_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
-        token_id: Annotated[StrictStr, Field(description="`id` of Token")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        client_id: Annotated[StrictStr, Field(..., description="`client_id` of the app")],
+        token_id: Annotated[StrictStr, Field(..., description="`id` of Token")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -11499,8 +11501,8 @@ class AuthorizationServerApi:
     @validate_call
     def revoke_refresh_tokens_for_authorization_server_and_client(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        client_id: Annotated[StrictStr, Field(..., description="`client_id` of the app")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -11573,8 +11575,8 @@ class AuthorizationServerApi:
     @validate_call
     def revoke_refresh_tokens_for_authorization_server_and_client_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        client_id: Annotated[StrictStr, Field(..., description="`client_id` of the app")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -11647,8 +11649,8 @@ class AuthorizationServerApi:
     @validate_call
     def revoke_refresh_tokens_for_authorization_server_and_client_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
-        client_id: Annotated[StrictStr, Field(description="`client_id` of the app")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
+        client_id: Annotated[StrictStr, Field(..., description="`client_id` of the app")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -11782,7 +11784,7 @@ class AuthorizationServerApi:
     @validate_call
     def rotate_authorization_server_keys(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         use: JwkUse,
         _request_timeout: Union[
             None,
@@ -11857,7 +11859,7 @@ class AuthorizationServerApi:
     @validate_call
     def rotate_authorization_server_keys_with_http_info(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         use: JwkUse,
         _request_timeout: Union[
             None,
@@ -11932,7 +11934,7 @@ class AuthorizationServerApi:
     @validate_call
     def rotate_authorization_server_keys_without_preload_content(
         self,
-        auth_server_id: Annotated[StrictStr, Field(description="`id` of the Authorization Server")],
+        auth_server_id: Annotated[StrictStr, Field(..., description="`id` of the Authorization Server")],
         use: JwkUse,
         _request_timeout: Union[
             None,

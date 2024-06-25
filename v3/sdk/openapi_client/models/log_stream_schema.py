@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.links_self import LinksSelf
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,17 +26,17 @@ class LogStreamSchema(BaseModel):
     """
     LogStreamSchema
     """ # noqa: E501
-    var_schema: Optional[StrictStr] = Field(default=None, alias="$schema")
+    var_schema: Optional[StrictStr] = Field(None, alias="$schema")
     created: Optional[StrictStr] = None
-    error_message: Optional[Dict[str, Any]] = Field(default=None, alias="errorMessage")
+    error_message: Optional[Dict[str, Any]] = Field(None, alias="errorMessage")
     id: Optional[StrictStr] = None
-    last_updated: Optional[StrictStr] = Field(default=None, alias="lastUpdated")
+    last_updated: Optional[StrictStr] = Field(None, alias="lastUpdated")
     name: Optional[StrictStr] = None
     properties: Optional[Dict[str, Any]] = None
-    required: Optional[List[StrictStr]] = None
+    required: Optional[conlist(StrictStr)] = None
     title: Optional[StrictStr] = None
     type: Optional[StrictStr] = None
-    links: Optional[LinksSelf] = Field(default=None, alias="_links")
+    links: Optional[LinksSelf] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["$schema", "created", "errorMessage", "id", "lastUpdated", "name", "properties", "required", "title", "type", "_links"]
 
     model_config = ConfigDict(

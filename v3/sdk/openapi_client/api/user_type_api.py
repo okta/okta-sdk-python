@@ -18,7 +18,9 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
 from pydantic import StrictStr
-from typing import Optional
+
+from typing import List, Optional
+
 from openapi_client.models.user_type import UserType
 from openapi_client.models.user_type_post_request import UserTypePostRequest
 from openapi_client.models.user_type_put_request import UserTypePutRequest

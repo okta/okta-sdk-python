@@ -18,9 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.links_self import LinksSelf
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,10 +26,10 @@ class ResourceSetBindingMember(BaseModel):
     """
     ResourceSetBindingMember
     """ # noqa: E501
-    created: Optional[datetime] = Field(default=None, description="Timestamp when the role was created")
-    id: Optional[StrictStr] = Field(default=None, description="Unique key for the role")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the role was last updated", alias="lastUpdated")
-    links: Optional[LinksSelf] = Field(default=None, alias="_links")
+    created: Optional[datetime] = Field(None, description="Timestamp when the role was created")
+    id: Optional[StrictStr] = Field(None, description="Unique key for the role")
+    last_updated: Optional[datetime] = Field(None, alias="lastUpdated", description="Timestamp when the role was last updated")
+    links: Optional[LinksSelf] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["created", "id", "lastUpdated", "_links"]
 
     model_config = ConfigDict(

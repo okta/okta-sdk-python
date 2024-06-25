@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.user import User
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,9 +26,9 @@ class DeviceUser(BaseModel):
     """
     DeviceUser
     """ # noqa: E501
-    created: Optional[StrictStr] = Field(default=None, description="Timestamp when device was created")
-    management_status: Optional[StrictStr] = Field(default=None, description="The management status of the device", alias="managementStatus")
-    screen_lock_type: Optional[StrictStr] = Field(default=None, description="Screen lock type of the device", alias="screenLockType")
+    created: Optional[StrictStr] = Field(None, description="Timestamp when device was created")
+    management_status: Optional[StrictStr] = Field(None, alias="managementStatus", description="The management status of the device")
+    screen_lock_type: Optional[StrictStr] = Field(None, alias="screenLockType", description="Screen lock type of the device")
     user: Optional[User] = None
     __properties: ClassVar[List[str]] = ["created", "managementStatus", "screenLockType", "user"]
 

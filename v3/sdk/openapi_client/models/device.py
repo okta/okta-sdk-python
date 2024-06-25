@@ -18,9 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.device_display_name import DeviceDisplayName
 from openapi_client.models.device_profile import DeviceProfile
 from openapi_client.models.device_status import DeviceStatus
@@ -32,16 +29,16 @@ class Device(BaseModel):
     """
     Device
     """ # noqa: E501
-    created: Optional[datetime] = Field(default=None, description="Timestamp when the device was created")
-    id: Optional[StrictStr] = Field(default=None, description="Unique key for the device")
-    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the device record was last updated. Updates occur when Okta collects and saves device signals during authentication, and when the lifecycle state of the device changes.", alias="lastUpdated")
+    created: Optional[datetime] = Field(None, description="Timestamp when the device was created")
+    id: Optional[StrictStr] = Field(None, description="Unique key for the device")
+    last_updated: Optional[datetime] = Field(None, alias="lastUpdated", description="Timestamp when the device record was last updated. Updates occur when Okta collects and saves device signals during authentication, and when the lifecycle state of the device changes.")
     profile: Optional[DeviceProfile] = None
-    resource_alternate_id: Optional[StrictStr] = Field(default=None, alias="resourceAlternateId")
-    resource_display_name: Optional[DeviceDisplayName] = Field(default=None, alias="resourceDisplayName")
-    resource_id: Optional[StrictStr] = Field(default=None, description="Alternate key for the `id`", alias="resourceId")
-    resource_type: Optional[StrictStr] = Field(default='UDDevice', alias="resourceType")
+    resource_alternate_id: Optional[StrictStr] = Field(None, alias="resourceAlternateId")
+    resource_display_name: Optional[DeviceDisplayName] = Field(None, alias="resourceDisplayName")
+    resource_id: Optional[StrictStr] = Field(None, alias="resourceId", description="Alternate key for the `id`")
+    resource_type: Optional[StrictStr] = Field('UDDevice', alias="resourceType")
     status: Optional[DeviceStatus] = None
-    links: Optional[LinksSelfAndFullUsersLifecycle] = Field(default=None, alias="_links")
+    links: Optional[LinksSelfAndFullUsersLifecycle] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["created", "id", "lastUpdated", "profile", "resourceAlternateId", "resourceDisplayName", "resourceId", "resourceType", "status", "_links"]
 
     model_config = ConfigDict(

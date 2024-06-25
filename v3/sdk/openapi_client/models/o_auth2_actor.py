@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,8 +25,8 @@ class OAuth2Actor(BaseModel):
     """
     User that created the object
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="User ID")
-    type: Optional[StrictStr] = Field(default=None, description="Type of user")
+    id: Optional[StrictStr] = Field(None, description="User ID")
+    type: Optional[StrictStr] = Field(None, description="Type of user")
     __properties: ClassVar[List[str]] = ["id", "type"]
 
     model_config = ConfigDict(

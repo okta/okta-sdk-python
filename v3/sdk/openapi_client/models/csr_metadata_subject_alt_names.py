@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +25,7 @@ class CsrMetadataSubjectAltNames(BaseModel):
     """
     CsrMetadataSubjectAltNames
     """ # noqa: E501
-    dns_names: Optional[List[StrictStr]] = Field(default=None, alias="dnsNames")
+    dns_names: Optional[conlist(StrictStr)] = Field(None, alias="dnsNames")
     __properties: ClassVar[List[str]] = ["dnsNames"]
 
     model_config = ConfigDict(

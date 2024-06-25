@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.email_preview_links import EmailPreviewLinks
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,9 +26,9 @@ class EmailPreview(BaseModel):
     """
     EmailPreview
     """ # noqa: E501
-    body: Optional[StrictStr] = Field(default=None, description="The email's HTML body")
-    subject: Optional[StrictStr] = Field(default=None, description="The email's subject")
-    links: Optional[EmailPreviewLinks] = Field(default=None, alias="_links")
+    body: Optional[StrictStr] = Field(None, description="The email's HTML body")
+    subject: Optional[StrictStr] = Field(None, description="The email's subject")
+    links: Optional[EmailPreviewLinks] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["body", "subject", "_links"]
 
     model_config = ConfigDict(

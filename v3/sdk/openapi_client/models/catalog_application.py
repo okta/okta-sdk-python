@@ -18,9 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from datetime import datetime
-from pydantic import BaseModel, ConfigDict, Field, StrictStr
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.catalog_application_status import CatalogApplicationStatus
 from openapi_client.models.links_self import LinksSelf
 from typing import Optional, Set
@@ -32,16 +29,16 @@ class CatalogApplication(BaseModel):
     """ # noqa: E501
     category: Optional[StrictStr] = None
     description: Optional[StrictStr] = None
-    display_name: Optional[StrictStr] = Field(default=None, alias="displayName")
-    features: Optional[List[StrictStr]] = None
+    display_name: Optional[StrictStr] = Field(None, alias="displayName")
+    features: Optional[conlist(StrictStr)] = None
     id: Optional[StrictStr] = None
-    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
+    last_updated: Optional[datetime] = Field(None, alias="lastUpdated")
     name: Optional[StrictStr] = None
-    sign_on_modes: Optional[List[StrictStr]] = Field(default=None, alias="signOnModes")
+    sign_on_modes: Optional[conlist(StrictStr)] = Field(None, alias="signOnModes")
     status: Optional[CatalogApplicationStatus] = None
-    verification_status: Optional[StrictStr] = Field(default=None, alias="verificationStatus")
+    verification_status: Optional[StrictStr] = Field(None, alias="verificationStatus")
     website: Optional[StrictStr] = None
-    links: Optional[LinksSelf] = Field(default=None, alias="_links")
+    links: Optional[LinksSelf] = Field(None, alias="_links")
     __properties: ClassVar[List[str]] = ["category", "description", "displayName", "features", "id", "lastUpdated", "name", "signOnModes", "status", "verificationStatus", "website", "_links"]
 
     model_config = ConfigDict(

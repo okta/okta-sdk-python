@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.user_schema_attribute_master_priority import UserSchemaAttributeMasterPriority
 from openapi_client.models.user_schema_attribute_master_type import UserSchemaAttributeMasterType
 from typing import Optional, Set
@@ -29,7 +27,7 @@ class UserSchemaAttributeMaster(BaseModel):
     """
     UserSchemaAttributeMaster
     """ # noqa: E501
-    priority: Optional[List[UserSchemaAttributeMasterPriority]] = None
+    priority: Optional[conlist(UserSchemaAttributeMasterPriority)] = None
     type: Optional[UserSchemaAttributeMasterType] = None
     __properties: ClassVar[List[str]] = ["priority", "type"]
 

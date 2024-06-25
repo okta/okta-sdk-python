@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.password_policy_recovery_email_recovery_token import PasswordPolicyRecoveryEmailRecoveryToken
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,7 +26,7 @@ class PasswordPolicyRecoveryEmailProperties(BaseModel):
     """
     PasswordPolicyRecoveryEmailProperties
     """ # noqa: E501
-    recovery_token: Optional[PasswordPolicyRecoveryEmailRecoveryToken] = Field(default=None, alias="recoveryToken")
+    recovery_token: Optional[PasswordPolicyRecoveryEmailRecoveryToken] = Field(None, alias="recoveryToken")
     __properties: ClassVar[List[str]] = ["recoveryToken"]
 
     model_config = ConfigDict(

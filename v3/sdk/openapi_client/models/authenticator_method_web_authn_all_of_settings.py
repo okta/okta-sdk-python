@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.user_verification_enum import UserVerificationEnum
 from openapi_client.models.web_authn_attachment import WebAuthnAttachment
 from typing import Optional, Set
@@ -29,7 +27,7 @@ class AuthenticatorMethodWebAuthnAllOfSettings(BaseModel):
     """
     AuthenticatorMethodWebAuthnAllOfSettings
     """ # noqa: E501
-    user_verification: Optional[UserVerificationEnum] = Field(default=None, alias="userVerification")
+    user_verification: Optional[UserVerificationEnum] = Field(None, alias="userVerification")
     attachment: Optional[WebAuthnAttachment] = None
     __properties: ClassVar[List[str]] = ["userVerification", "attachment"]
 

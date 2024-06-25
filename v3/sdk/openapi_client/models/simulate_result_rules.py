@@ -18,8 +18,6 @@ import pprint
 import re  # noqa: F401
 import json
 
-from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
-from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.simulate_result_conditions import SimulateResultConditions
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,9 +26,9 @@ class SimulateResultRules(BaseModel):
     """
     SimulateResultRules
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="The unique ID number of the policy rule")
-    name: Optional[StrictStr] = Field(default=None, description="The name of the policy rule")
-    status: Optional[StrictStr] = Field(default=None, description="The result of the entity evaluation")
+    id: Optional[StrictStr] = Field(None, description="The unique ID number of the policy rule")
+    name: Optional[StrictStr] = Field(None, description="The name of the policy rule")
+    status: Optional[StrictStr] = Field(None, description="The result of the entity evaluation")
     conditions: Optional[SimulateResultConditions] = None
     __properties: ClassVar[List[str]] = ["id", "name", "status", "conditions"]
 
