@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, List
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,7 +28,7 @@ class BehaviorRuleSettingsVelocity(BaseModel):
     """
     BehaviorRuleSettingsVelocity
     """ # noqa: E501
-    velocity_kph: conint(strict=True, ge=1) = Field(..., alias="velocityKph")
+    velocity_kph: Annotated[int, Field(strict=True, ge=1)] = Field(alias="velocityKph")
     __properties: ClassVar[List[str]] = ["velocityKph"]
 
     model_config = ConfigDict(

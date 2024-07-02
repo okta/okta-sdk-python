@@ -24,7 +24,7 @@ print(EmailTemplate.to_json())
 # convert the object into a dict
 email_template_dict = email_template_instance.to_dict()
 # create an instance of EmailTemplate from a dict
-email_template_form_dict = email_template.from_dict(email_template_dict)
+email_template_from_dict = EmailTemplate.from_dict(email_template_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

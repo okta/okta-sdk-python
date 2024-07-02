@@ -24,7 +24,7 @@ print(SecurePasswordStoreApplication.to_json())
 # convert the object into a dict
 secure_password_store_application_dict = secure_password_store_application_instance.to_dict()
 # create an instance of SecurePasswordStoreApplication from a dict
-secure_password_store_application_form_dict = secure_password_store_application.from_dict(secure_password_store_application_dict)
+secure_password_store_application_from_dict = SecurePasswordStoreApplication.from_dict(secure_password_store_application_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

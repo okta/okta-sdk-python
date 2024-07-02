@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.per_client_rate_limit_mode import PerClientRateLimitMode
 from openapi_client.models.per_client_rate_limit_settings_use_case_mode_overrides import PerClientRateLimitSettingsUseCaseModeOverrides
 from typing import Optional, Set
@@ -27,8 +29,8 @@ class PerClientRateLimitSettings(BaseModel):
     """
     
     """ # noqa: E501
-    default_mode: PerClientRateLimitMode = Field(..., alias="defaultMode")
-    use_case_mode_overrides: Optional[PerClientRateLimitSettingsUseCaseModeOverrides] = Field(None, alias="useCaseModeOverrides")
+    default_mode: PerClientRateLimitMode = Field(alias="defaultMode")
+    use_case_mode_overrides: Optional[PerClientRateLimitSettingsUseCaseModeOverrides] = Field(default=None, alias="useCaseModeOverrides")
     __properties: ClassVar[List[str]] = ["defaultMode", "useCaseModeOverrides"]
 
     model_config = ConfigDict(

@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, SecretStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,7 +27,7 @@ class AppUserPasswordCredential(BaseModel):
     """
     Specifies a password for a user. This is a write-only property. An empty `password` object is returned to indicate that a password value exists.
     """ # noqa: E501
-    value: Optional[SecretStr] = Field(None, description="Password value")
+    value: Optional[SecretStr] = Field(default=None, description="Password value")
     __properties: ClassVar[List[str]] = ["value"]
 
     model_config = ConfigDict(

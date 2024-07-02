@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.log_authentication_provider import LogAuthenticationProvider
 from openapi_client.models.log_credential_provider import LogCredentialProvider
 from openapi_client.models.log_credential_type import LogCredentialType
@@ -29,11 +31,11 @@ class LogAuthenticationContext(BaseModel):
     """
     LogAuthenticationContext
     """ # noqa: E501
-    authentication_provider: Optional[LogAuthenticationProvider] = Field(None, alias="authenticationProvider")
-    authentication_step: Optional[StrictInt] = Field(None, alias="authenticationStep")
-    credential_provider: Optional[LogCredentialProvider] = Field(None, alias="credentialProvider")
-    credential_type: Optional[LogCredentialType] = Field(None, alias="credentialType")
-    external_session_id: Optional[StrictStr] = Field(None, alias="externalSessionId")
+    authentication_provider: Optional[LogAuthenticationProvider] = Field(default=None, alias="authenticationProvider")
+    authentication_step: Optional[StrictInt] = Field(default=None, alias="authenticationStep")
+    credential_provider: Optional[LogCredentialProvider] = Field(default=None, alias="credentialProvider")
+    credential_type: Optional[LogCredentialType] = Field(default=None, alias="credentialType")
+    external_session_id: Optional[StrictStr] = Field(default=None, alias="externalSessionId")
     interface: Optional[StrictStr] = None
     issuer: Optional[LogIssuer] = None
     __properties: ClassVar[List[str]] = ["authenticationProvider", "authenticationStep", "credentialProvider", "credentialType", "externalSessionId", "interface", "issuer"]

@@ -26,7 +26,7 @@ print(LogActor.to_json())
 # convert the object into a dict
 log_actor_dict = log_actor_instance.to_dict()
 # create an instance of LogActor from a dict
-log_actor_form_dict = log_actor.from_dict(log_actor_dict)
+log_actor_from_dict = LogActor.from_dict(log_actor_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

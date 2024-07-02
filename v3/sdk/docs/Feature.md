@@ -28,7 +28,7 @@ print(Feature.to_json())
 # convert the object into a dict
 feature_dict = feature_instance.to_dict()
 # create an instance of Feature from a dict
-feature_form_dict = feature.from_dict(feature_dict)
+feature_from_dict = Feature.from_dict(feature_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

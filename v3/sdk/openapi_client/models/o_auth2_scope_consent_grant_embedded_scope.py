@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,7 +27,7 @@ class OAuth2ScopeConsentGrantEmbeddedScope(BaseModel):
     """
     OAuth2ScopeConsentGrantEmbeddedScope
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(None, description="The name of the Okta scope for which consent is granted")
+    id: Optional[StrictStr] = Field(default=None, description="The name of the Okta scope for which consent is granted")
     __properties: ClassVar[List[str]] = ["id"]
 
     model_config = ConfigDict(

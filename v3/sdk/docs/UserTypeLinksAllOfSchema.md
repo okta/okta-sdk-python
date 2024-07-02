@@ -26,7 +26,7 @@ print(UserTypeLinksAllOfSchema.to_json())
 # convert the object into a dict
 user_type_links_all_of_schema_dict = user_type_links_all_of_schema_instance.to_dict()
 # create an instance of UserTypeLinksAllOfSchema from a dict
-user_type_links_all_of_schema_form_dict = user_type_links_all_of_schema.from_dict(user_type_links_all_of_schema_dict)
+user_type_links_all_of_schema_from_dict = UserTypeLinksAllOfSchema.from_dict(user_type_links_all_of_schema_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

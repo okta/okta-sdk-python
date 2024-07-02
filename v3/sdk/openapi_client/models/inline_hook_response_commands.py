@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.inline_hook_response_command_value import InlineHookResponseCommandValue
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,7 +29,7 @@ class InlineHookResponseCommands(BaseModel):
     InlineHookResponseCommands
     """ # noqa: E501
     type: Optional[StrictStr] = None
-    value: Optional[conlist(InlineHookResponseCommandValue)] = None
+    value: Optional[List[InlineHookResponseCommandValue]] = None
     __properties: ClassVar[List[str]] = ["type", "value"]
 
     model_config = ConfigDict(

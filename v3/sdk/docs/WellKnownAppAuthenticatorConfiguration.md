@@ -31,7 +31,7 @@ print(WellKnownAppAuthenticatorConfiguration.to_json())
 # convert the object into a dict
 well_known_app_authenticator_configuration_dict = well_known_app_authenticator_configuration_instance.to_dict()
 # create an instance of WellKnownAppAuthenticatorConfiguration from a dict
-well_known_app_authenticator_configuration_form_dict = well_known_app_authenticator_configuration.from_dict(well_known_app_authenticator_configuration_dict)
+well_known_app_authenticator_configuration_from_dict = WellKnownAppAuthenticatorConfiguration.from_dict(well_known_app_authenticator_configuration_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.user_schema_base_properties import UserSchemaBaseProperties
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,7 +30,7 @@ class UserSchemaBase(BaseModel):
     """ # noqa: E501
     id: Optional[StrictStr] = None
     properties: Optional[UserSchemaBaseProperties] = None
-    required: Optional[conlist(StrictStr)] = None
+    required: Optional[List[StrictStr]] = None
     type: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["id", "properties", "required", "type"]
 

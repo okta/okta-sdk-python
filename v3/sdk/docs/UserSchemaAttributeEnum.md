@@ -23,7 +23,7 @@ print(UserSchemaAttributeEnum.to_json())
 # convert the object into a dict
 user_schema_attribute_enum_dict = user_schema_attribute_enum_instance.to_dict()
 # create an instance of UserSchemaAttributeEnum from a dict
-user_schema_attribute_enum_form_dict = user_schema_attribute_enum.from_dict(user_schema_attribute_enum_dict)
+user_schema_attribute_enum_from_dict = UserSchemaAttributeEnum.from_dict(user_schema_attribute_enum_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

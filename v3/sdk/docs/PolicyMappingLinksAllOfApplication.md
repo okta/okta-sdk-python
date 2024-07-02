@@ -26,7 +26,7 @@ print(PolicyMappingLinksAllOfApplication.to_json())
 # convert the object into a dict
 policy_mapping_links_all_of_application_dict = policy_mapping_links_all_of_application_instance.to_dict()
 # create an instance of PolicyMappingLinksAllOfApplication from a dict
-policy_mapping_links_all_of_application_form_dict = policy_mapping_links_all_of_application.from_dict(policy_mapping_links_all_of_application_dict)
+policy_mapping_links_all_of_application_from_dict = PolicyMappingLinksAllOfApplication.from_dict(policy_mapping_links_all_of_application_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

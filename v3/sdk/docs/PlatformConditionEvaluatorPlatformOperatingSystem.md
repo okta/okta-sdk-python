@@ -24,7 +24,7 @@ print(PlatformConditionEvaluatorPlatformOperatingSystem.to_json())
 # convert the object into a dict
 platform_condition_evaluator_platform_operating_system_dict = platform_condition_evaluator_platform_operating_system_instance.to_dict()
 # create an instance of PlatformConditionEvaluatorPlatformOperatingSystem from a dict
-platform_condition_evaluator_platform_operating_system_form_dict = platform_condition_evaluator_platform_operating_system.from_dict(platform_condition_evaluator_platform_operating_system_dict)
+platform_condition_evaluator_platform_operating_system_from_dict = PlatformConditionEvaluatorPlatformOperatingSystem.from_dict(platform_condition_evaluator_platform_operating_system_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

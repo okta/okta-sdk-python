@@ -24,7 +24,7 @@ print(GroupCondition.to_json())
 # convert the object into a dict
 group_condition_dict = group_condition_instance.to_dict()
 # create an instance of GroupCondition from a dict
-group_condition_form_dict = group_condition.from_dict(group_condition_dict)
+group_condition_from_dict = GroupCondition.from_dict(group_condition_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

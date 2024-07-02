@@ -33,7 +33,7 @@ print(CatalogApplication.to_json())
 # convert the object into a dict
 catalog_application_dict = catalog_application_instance.to_dict()
 # create an instance of CatalogApplication from a dict
-catalog_application_form_dict = catalog_application.from_dict(catalog_application_dict)
+catalog_application_from_dict = CatalogApplication.from_dict(catalog_application_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

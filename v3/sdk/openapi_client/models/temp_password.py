@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,7 +27,7 @@ class TempPassword(BaseModel):
     """
     TempPassword
     """ # noqa: E501
-    temp_password: Optional[StrictStr] = Field(None, alias="tempPassword")
+    temp_password: Optional[StrictStr] = Field(default=None, alias="tempPassword")
     __properties: ClassVar[List[str]] = ["tempPassword"]
 
     model_config = ConfigDict(

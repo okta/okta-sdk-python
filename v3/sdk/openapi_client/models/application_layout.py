@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.application_layout_rule import ApplicationLayoutRule
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,7 +28,7 @@ class ApplicationLayout(BaseModel):
     """
     ApplicationLayout
     """ # noqa: E501
-    elements: Optional[conlist(Dict[str, Any])] = None
+    elements: Optional[List[Dict[str, Any]]] = None
     label: Optional[StrictStr] = None
     options: Optional[Dict[str, Any]] = None
     rule: Optional[ApplicationLayoutRule] = None

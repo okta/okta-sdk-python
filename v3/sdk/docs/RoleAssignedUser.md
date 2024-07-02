@@ -24,7 +24,7 @@ print(RoleAssignedUser.to_json())
 # convert the object into a dict
 role_assigned_user_dict = role_assigned_user_instance.to_dict()
 # create an instance of RoleAssignedUser from a dict
-role_assigned_user_form_dict = role_assigned_user.from_dict(role_assigned_user_dict)
+role_assigned_user_from_dict = RoleAssignedUser.from_dict(role_assigned_user_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

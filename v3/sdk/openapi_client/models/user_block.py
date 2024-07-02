@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,7 +27,7 @@ class UserBlock(BaseModel):
     """
     UserBlock
     """ # noqa: E501
-    applies_to: Optional[StrictStr] = Field(None, alias="appliesTo")
+    applies_to: Optional[StrictStr] = Field(default=None, alias="appliesTo")
     type: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["appliesTo", "type"]
 

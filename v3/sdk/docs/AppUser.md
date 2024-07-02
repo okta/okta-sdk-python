@@ -36,7 +36,7 @@ print(AppUser.to_json())
 # convert the object into a dict
 app_user_dict = app_user_instance.to_dict()
 # create an instance of AppUser from a dict
-app_user_form_dict = app_user.from_dict(app_user_dict)
+app_user_from_dict = AppUser.from_dict(app_user_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

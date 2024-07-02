@@ -22,7 +22,7 @@ print(ProfileEnrollmentPolicy.to_json())
 # convert the object into a dict
 profile_enrollment_policy_dict = profile_enrollment_policy_instance.to_dict()
 # create an instance of ProfileEnrollmentPolicy from a dict
-profile_enrollment_policy_form_dict = profile_enrollment_policy.from_dict(profile_enrollment_policy_dict)
+profile_enrollment_policy_from_dict = ProfileEnrollmentPolicy.from_dict(profile_enrollment_policy_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

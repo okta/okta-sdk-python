@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.identity_provider_credentials_trust_revocation import IdentityProviderCredentialsTrustRevocation
 from typing import Optional, Set
 from typing_extensions import Self
@@ -30,7 +32,7 @@ class IdentityProviderCredentialsTrust(BaseModel):
     issuer: Optional[StrictStr] = None
     kid: Optional[StrictStr] = None
     revocation: Optional[IdentityProviderCredentialsTrustRevocation] = None
-    revocation_cache_lifetime: Optional[StrictInt] = Field(None, alias="revocationCacheLifetime")
+    revocation_cache_lifetime: Optional[StrictInt] = Field(default=None, alias="revocationCacheLifetime")
     __properties: ClassVar[List[str]] = ["audience", "issuer", "kid", "revocation", "revocationCacheLifetime"]
 
     model_config = ConfigDict(

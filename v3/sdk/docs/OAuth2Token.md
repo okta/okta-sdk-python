@@ -32,7 +32,7 @@ print(OAuth2Token.to_json())
 # convert the object into a dict
 o_auth2_token_dict = o_auth2_token_instance.to_dict()
 # create an instance of OAuth2Token from a dict
-o_auth2_token_form_dict = o_auth2_token.from_dict(o_auth2_token_dict)
+o_auth2_token_from_dict = OAuth2Token.from_dict(o_auth2_token_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -22,7 +22,7 @@ print(SignOnInlineHook.to_json())
 # convert the object into a dict
 sign_on_inline_hook_dict = sign_on_inline_hook_instance.to_dict()
 # create an instance of SignOnInlineHook from a dict
-sign_on_inline_hook_form_dict = sign_on_inline_hook.from_dict(sign_on_inline_hook_dict)
+sign_on_inline_hook_from_dict = SignOnInlineHook.from_dict(sign_on_inline_hook_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List
 from openapi_client.models.domain_certificate_source_type import DomainCertificateSourceType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,8 +28,8 @@ class DomainRequest(BaseModel):
     """
     DomainRequest
     """ # noqa: E501
-    certificate_source_type: DomainCertificateSourceType = Field(..., alias="certificateSourceType")
-    domain: StrictStr = Field(..., description="Custom domain name")
+    certificate_source_type: DomainCertificateSourceType = Field(alias="certificateSourceType")
+    domain: StrictStr = Field(description="Custom domain name")
     __properties: ClassVar[List[str]] = ["certificateSourceType", "domain"]
 
     model_config = ConfigDict(

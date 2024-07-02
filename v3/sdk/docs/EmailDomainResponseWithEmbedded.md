@@ -28,7 +28,7 @@ print(EmailDomainResponseWithEmbedded.to_json())
 # convert the object into a dict
 email_domain_response_with_embedded_dict = email_domain_response_with_embedded_instance.to_dict()
 # create an instance of EmailDomainResponseWithEmbedded from a dict
-email_domain_response_with_embedded_form_dict = email_domain_response_with_embedded.from_dict(email_domain_response_with_embedded_dict)
+email_domain_response_with_embedded_from_dict = EmailDomainResponseWithEmbedded.from_dict(email_domain_response_with_embedded_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

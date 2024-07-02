@@ -25,7 +25,7 @@ print(TokenAuthorizationServerPolicyRuleAction.to_json())
 # convert the object into a dict
 token_authorization_server_policy_rule_action_dict = token_authorization_server_policy_rule_action_instance.to_dict()
 # create an instance of TokenAuthorizationServerPolicyRuleAction from a dict
-token_authorization_server_policy_rule_action_form_dict = token_authorization_server_policy_rule_action.from_dict(token_authorization_server_policy_rule_action_dict)
+token_authorization_server_policy_rule_action_from_dict = TokenAuthorizationServerPolicyRuleAction.from_dict(token_authorization_server_policy_rule_action_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

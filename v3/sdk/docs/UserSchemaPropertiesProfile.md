@@ -22,7 +22,7 @@ print(UserSchemaPropertiesProfile.to_json())
 # convert the object into a dict
 user_schema_properties_profile_dict = user_schema_properties_profile_instance.to_dict()
 # create an instance of UserSchemaPropertiesProfile from a dict
-user_schema_properties_profile_form_dict = user_schema_properties_profile.from_dict(user_schema_properties_profile_dict)
+user_schema_properties_profile_from_dict = UserSchemaPropertiesProfile.from_dict(user_schema_properties_profile_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -24,7 +24,7 @@ print(PushUserFactor.to_json())
 # convert the object into a dict
 push_user_factor_dict = push_user_factor_instance.to_dict()
 # create an instance of PushUserFactor from a dict
-push_user_factor_form_dict = push_user_factor.from_dict(push_user_factor_dict)
+push_user_factor_from_dict = PushUserFactor.from_dict(push_user_factor_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

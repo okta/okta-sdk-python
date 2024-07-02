@@ -23,7 +23,7 @@ print(OrgCAPTCHASettingsLinks.to_json())
 # convert the object into a dict
 org_captcha_settings_links_dict = org_captcha_settings_links_instance.to_dict()
 # create an instance of OrgCAPTCHASettingsLinks from a dict
-org_captcha_settings_links_form_dict = org_captcha_settings_links.from_dict(org_captcha_settings_links_dict)
+org_captcha_settings_links_from_dict = OrgCAPTCHASettingsLinks.from_dict(org_captcha_settings_links_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

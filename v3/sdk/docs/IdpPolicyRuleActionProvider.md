@@ -24,7 +24,7 @@ print(IdpPolicyRuleActionProvider.to_json())
 # convert the object into a dict
 idp_policy_rule_action_provider_dict = idp_policy_rule_action_provider_instance.to_dict()
 # create an instance of IdpPolicyRuleActionProvider from a dict
-idp_policy_rule_action_provider_form_dict = idp_policy_rule_action_provider.from_dict(idp_policy_rule_action_provider_dict)
+idp_policy_rule_action_provider_from_dict = IdpPolicyRuleActionProvider.from_dict(idp_policy_rule_action_provider_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

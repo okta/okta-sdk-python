@@ -22,7 +22,7 @@ print(BouncesRemoveListResult.to_json())
 # convert the object into a dict
 bounces_remove_list_result_dict = bounces_remove_list_result_instance.to_dict()
 # create an instance of BouncesRemoveListResult from a dict
-bounces_remove_list_result_form_dict = bounces_remove_list_result.from_dict(bounces_remove_list_result_dict)
+bounces_remove_list_result_from_dict = BouncesRemoveListResult.from_dict(bounces_remove_list_result_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

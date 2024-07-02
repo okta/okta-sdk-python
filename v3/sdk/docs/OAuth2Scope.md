@@ -29,7 +29,7 @@ print(OAuth2Scope.to_json())
 # convert the object into a dict
 o_auth2_scope_dict = o_auth2_scope_instance.to_dict()
 # create an instance of OAuth2Scope from a dict
-o_auth2_scope_form_dict = o_auth2_scope.from_dict(o_auth2_scope_dict)
+o_auth2_scope_from_dict = OAuth2Scope.from_dict(o_auth2_scope_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,10 +27,10 @@ class EmailDomain(BaseModel):
     """
     EmailDomain
     """ # noqa: E501
-    brand_id: StrictStr = Field(..., alias="brandId")
-    domain: StrictStr = Field(...)
-    display_name: StrictStr = Field(..., alias="displayName")
-    user_name: StrictStr = Field(..., alias="userName")
+    brand_id: StrictStr = Field(alias="brandId")
+    domain: StrictStr
+    display_name: StrictStr = Field(alias="displayName")
+    user_name: StrictStr = Field(alias="userName")
     __properties: ClassVar[List[str]] = ["displayName", "userName"]
 
     model_config = ConfigDict(

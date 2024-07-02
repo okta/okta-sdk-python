@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.session_identity_provider_type import SessionIdentityProviderType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,7 +28,7 @@ class SessionIdentityProvider(BaseModel):
     """
     SessionIdentityProvider
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(None, description="Identity Provider ID. If the `type` is `OKTA`, then the `id` is the org ID.")
+    id: Optional[StrictStr] = Field(default=None, description="Identity Provider ID. If the `type` is `OKTA`, then the `id` is the org ID.")
     type: Optional[SessionIdentityProviderType] = None
     __properties: ClassVar[List[str]] = ["id", "type"]
 

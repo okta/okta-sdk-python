@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,7 +27,7 @@ class RateLimitAdminNotifications(BaseModel):
     """
     
     """ # noqa: E501
-    notifications_enabled: StrictBool = Field(..., alias="notificationsEnabled")
+    notifications_enabled: StrictBool = Field(alias="notificationsEnabled")
     __properties: ClassVar[List[str]] = ["notificationsEnabled"]
 
     model_config = ConfigDict(

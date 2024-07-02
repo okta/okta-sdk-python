@@ -24,7 +24,7 @@ print(SupportedMethodsSettings.to_json())
 # convert the object into a dict
 supported_methods_settings_dict = supported_methods_settings_instance.to_dict()
 # create an instance of SupportedMethodsSettings from a dict
-supported_methods_settings_form_dict = supported_methods_settings.from_dict(supported_methods_settings_dict)
+supported_methods_settings_from_dict = SupportedMethodsSettings.from_dict(supported_methods_settings_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

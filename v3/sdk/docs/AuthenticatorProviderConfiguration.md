@@ -26,7 +26,7 @@ print(AuthenticatorProviderConfiguration.to_json())
 # convert the object into a dict
 authenticator_provider_configuration_dict = authenticator_provider_configuration_instance.to_dict()
 # create an instance of AuthenticatorProviderConfiguration from a dict
-authenticator_provider_configuration_form_dict = authenticator_provider_configuration.from_dict(authenticator_provider_configuration_dict)
+authenticator_provider_configuration_from_dict = AuthenticatorProviderConfiguration.from_dict(authenticator_provider_configuration_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

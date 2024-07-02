@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.pipeline_type import PipelineType
 from openapi_client.models.well_known_org_metadata_links import WellKnownOrgMetadataLinks
 from openapi_client.models.well_known_org_metadata_settings import WellKnownOrgMetadataSettings
@@ -28,10 +30,10 @@ class WellKnownOrgMetadata(BaseModel):
     """
     WellKnownOrgMetadata
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(None, description="The unique identifier of the Org")
+    id: Optional[StrictStr] = Field(default=None, description="The unique identifier of the Org")
     pipeline: Optional[PipelineType] = None
     settings: Optional[WellKnownOrgMetadataSettings] = None
-    links: Optional[WellKnownOrgMetadataLinks] = Field(None, alias="_links")
+    links: Optional[WellKnownOrgMetadataLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["id", "pipeline", "settings", "_links"]
 
     model_config = ConfigDict(

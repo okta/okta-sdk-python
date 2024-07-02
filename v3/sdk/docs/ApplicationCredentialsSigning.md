@@ -26,7 +26,7 @@ print(ApplicationCredentialsSigning.to_json())
 # convert the object into a dict
 application_credentials_signing_dict = application_credentials_signing_instance.to_dict()
 # create an instance of ApplicationCredentialsSigning from a dict
-application_credentials_signing_form_dict = application_credentials_signing.from_dict(application_credentials_signing_dict)
+application_credentials_signing_from_dict = ApplicationCredentialsSigning.from_dict(application_credentials_signing_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

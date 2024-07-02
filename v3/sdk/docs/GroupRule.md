@@ -29,7 +29,7 @@ print(GroupRule.to_json())
 # convert the object into a dict
 group_rule_dict = group_rule_instance.to_dict()
 # create an instance of GroupRule from a dict
-group_rule_form_dict = group_rule.from_dict(group_rule_dict)
+group_rule_from_dict = GroupRule.from_dict(group_rule_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

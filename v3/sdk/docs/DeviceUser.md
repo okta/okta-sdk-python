@@ -25,7 +25,7 @@ print(DeviceUser.to_json())
 # convert the object into a dict
 device_user_dict = device_user_instance.to_dict()
 # create an instance of DeviceUser from a dict
-device_user_form_dict = device_user.from_dict(device_user_dict)
+device_user_from_dict = DeviceUser.from_dict(device_user_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

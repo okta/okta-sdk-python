@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.platform_condition_evaluator_platform import PlatformConditionEvaluatorPlatform
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,8 +28,8 @@ class PlatformPolicyRuleCondition(BaseModel):
     """
     PlatformPolicyRuleCondition
     """ # noqa: E501
-    exclude: Optional[conlist(PlatformConditionEvaluatorPlatform)] = None
-    include: Optional[conlist(PlatformConditionEvaluatorPlatform)] = None
+    exclude: Optional[List[PlatformConditionEvaluatorPlatform]] = None
+    include: Optional[List[PlatformConditionEvaluatorPlatform]] = None
     __properties: ClassVar[List[str]] = ["exclude", "include"]
 
     model_config = ConfigDict(

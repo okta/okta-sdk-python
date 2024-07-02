@@ -23,7 +23,7 @@ print(ResourceSetBindings.to_json())
 # convert the object into a dict
 resource_set_bindings_dict = resource_set_bindings_instance.to_dict()
 # create an instance of ResourceSetBindings from a dict
-resource_set_bindings_form_dict = resource_set_bindings.from_dict(resource_set_bindings_dict)
+resource_set_bindings_from_dict = ResourceSetBindings.from_dict(resource_set_bindings_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

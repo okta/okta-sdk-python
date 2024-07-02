@@ -23,7 +23,7 @@ print(SimulatePolicyResult.to_json())
 # convert the object into a dict
 simulate_policy_result_dict = simulate_policy_result_instance.to_dict()
 # create an instance of SimulatePolicyResult from a dict
-simulate_policy_result_form_dict = simulate_policy_result.from_dict(simulate_policy_result_dict)
+simulate_policy_result_from_dict = SimulatePolicyResult.from_dict(simulate_policy_result_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

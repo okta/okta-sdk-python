@@ -23,7 +23,7 @@ print(CsrMetadata.to_json())
 # convert the object into a dict
 csr_metadata_dict = csr_metadata_instance.to_dict()
 # create an instance of CsrMetadata from a dict
-csr_metadata_form_dict = csr_metadata.from_dict(csr_metadata_dict)
+csr_metadata_from_dict = CsrMetadata.from_dict(csr_metadata_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -22,7 +22,7 @@ print(ProvisioningConnectionProfileUnknown.to_json())
 # convert the object into a dict
 provisioning_connection_profile_unknown_dict = provisioning_connection_profile_unknown_instance.to_dict()
 # create an instance of ProvisioningConnectionProfileUnknown from a dict
-provisioning_connection_profile_unknown_form_dict = provisioning_connection_profile_unknown.from_dict(provisioning_connection_profile_unknown_dict)
+provisioning_connection_profile_unknown_from_dict = ProvisioningConnectionProfileUnknown.from_dict(provisioning_connection_profile_unknown_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

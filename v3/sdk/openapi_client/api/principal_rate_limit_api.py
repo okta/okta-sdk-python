@@ -17,11 +17,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
+from pydantic import Field, StrictStr
+from typing import Optional
 from typing_extensions import Annotated
-from pydantic import Field, StrictStr, conint
-
-from typing import List, Optional
-
 from openapi_client.models.principal_rate_limit_entity import PrincipalRateLimitEntity
 
 from openapi_client.api_client import ApiClient, RequestSerialized
@@ -269,7 +267,7 @@ class PrincipalRateLimitApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -329,7 +327,7 @@ class PrincipalRateLimitApi:
     @validate_call
     def get_principal_rate_limit_entity(
         self,
-        principal_rate_limit_id: Annotated[StrictStr, Field(..., description="id of the Principal Rate Limit")],
+        principal_rate_limit_id: Annotated[StrictStr, Field(description="id of the Principal Rate Limit")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -399,7 +397,7 @@ class PrincipalRateLimitApi:
     @validate_call
     def get_principal_rate_limit_entity_with_http_info(
         self,
-        principal_rate_limit_id: Annotated[StrictStr, Field(..., description="id of the Principal Rate Limit")],
+        principal_rate_limit_id: Annotated[StrictStr, Field(description="id of the Principal Rate Limit")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -469,7 +467,7 @@ class PrincipalRateLimitApi:
     @validate_call
     def get_principal_rate_limit_entity_without_preload_content(
         self,
-        principal_rate_limit_id: Annotated[StrictStr, Field(..., description="id of the Principal Rate Limit")],
+        principal_rate_limit_id: Annotated[StrictStr, Field(description="id of the Principal Rate Limit")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -550,7 +548,7 @@ class PrincipalRateLimitApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -599,7 +597,7 @@ class PrincipalRateLimitApi:
         self,
         filter: Optional[StrictStr] = None,
         after: Optional[StrictStr] = None,
-        limit: Optional[conint(strict=True, le=50)] = None,
+        limit: Optional[Annotated[int, Field(le=50, strict=True)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -677,7 +675,7 @@ class PrincipalRateLimitApi:
         self,
         filter: Optional[StrictStr] = None,
         after: Optional[StrictStr] = None,
-        limit: Optional[conint(strict=True, le=50)] = None,
+        limit: Optional[Annotated[int, Field(le=50, strict=True)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -755,7 +753,7 @@ class PrincipalRateLimitApi:
         self,
         filter: Optional[StrictStr] = None,
         after: Optional[StrictStr] = None,
-        limit: Optional[conint(strict=True, le=50)] = None,
+        limit: Optional[Annotated[int, Field(le=50, strict=True)]] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -844,7 +842,7 @@ class PrincipalRateLimitApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -901,7 +899,7 @@ class PrincipalRateLimitApi:
     @validate_call
     def replace_principal_rate_limit_entity(
         self,
-        principal_rate_limit_id: Annotated[StrictStr, Field(..., description="id of the Principal Rate Limit")],
+        principal_rate_limit_id: Annotated[StrictStr, Field(description="id of the Principal Rate Limit")],
         entity: PrincipalRateLimitEntity,
         _request_timeout: Union[
             None,
@@ -976,7 +974,7 @@ class PrincipalRateLimitApi:
     @validate_call
     def replace_principal_rate_limit_entity_with_http_info(
         self,
-        principal_rate_limit_id: Annotated[StrictStr, Field(..., description="id of the Principal Rate Limit")],
+        principal_rate_limit_id: Annotated[StrictStr, Field(description="id of the Principal Rate Limit")],
         entity: PrincipalRateLimitEntity,
         _request_timeout: Union[
             None,
@@ -1051,7 +1049,7 @@ class PrincipalRateLimitApi:
     @validate_call
     def replace_principal_rate_limit_entity_without_preload_content(
         self,
-        principal_rate_limit_id: Annotated[StrictStr, Field(..., description="id of the Principal Rate Limit")],
+        principal_rate_limit_id: Annotated[StrictStr, Field(description="id of the Principal Rate Limit")],
         entity: PrincipalRateLimitEntity,
         _request_timeout: Union[
             None,
@@ -1138,7 +1136,7 @@ class PrincipalRateLimitApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters

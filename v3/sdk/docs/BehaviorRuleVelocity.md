@@ -22,7 +22,7 @@ print(BehaviorRuleVelocity.to_json())
 # convert the object into a dict
 behavior_rule_velocity_dict = behavior_rule_velocity_instance.to_dict()
 # create an instance of BehaviorRuleVelocity from a dict
-behavior_rule_velocity_form_dict = behavior_rule_velocity.from_dict(behavior_rule_velocity_dict)
+behavior_rule_velocity_from_dict = BehaviorRuleVelocity.from_dict(behavior_rule_velocity_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

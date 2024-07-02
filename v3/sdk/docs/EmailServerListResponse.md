@@ -22,7 +22,7 @@ print(EmailServerListResponse.to_json())
 # convert the object into a dict
 email_server_list_response_dict = email_server_list_response_instance.to_dict()
 # create an instance of EmailServerListResponse from a dict
-email_server_list_response_form_dict = email_server_list_response.from_dict(email_server_list_response_dict)
+email_server_list_response_from_dict = EmailServerListResponse.from_dict(email_server_list_response_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

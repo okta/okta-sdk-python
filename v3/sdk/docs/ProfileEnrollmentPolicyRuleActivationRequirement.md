@@ -22,7 +22,7 @@ print(ProfileEnrollmentPolicyRuleActivationRequirement.to_json())
 # convert the object into a dict
 profile_enrollment_policy_rule_activation_requirement_dict = profile_enrollment_policy_rule_activation_requirement_instance.to_dict()
 # create an instance of ProfileEnrollmentPolicyRuleActivationRequirement from a dict
-profile_enrollment_policy_rule_activation_requirement_form_dict = profile_enrollment_policy_rule_activation_requirement.from_dict(profile_enrollment_policy_rule_activation_requirement_dict)
+profile_enrollment_policy_rule_activation_requirement_from_dict = ProfileEnrollmentPolicyRuleActivationRequirement.from_dict(profile_enrollment_policy_rule_activation_requirement_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -24,7 +24,7 @@ print(SingleLogout.to_json())
 # convert the object into a dict
 single_logout_dict = single_logout_instance.to_dict()
 # create an instance of SingleLogout from a dict
-single_logout_form_dict = single_logout.from_dict(single_logout_dict)
+single_logout_from_dict = SingleLogout.from_dict(single_logout_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.application_settings_notes import ApplicationSettingsNotes
 from openapi_client.models.application_settings_notifications import ApplicationSettingsNotifications
 from openapi_client.models.secure_password_store_application_settings_application import SecurePasswordStoreApplicationSettingsApplication
@@ -28,9 +30,9 @@ class SecurePasswordStoreApplicationSettings(BaseModel):
     """
     SecurePasswordStoreApplicationSettings
     """ # noqa: E501
-    identity_store_id: Optional[StrictStr] = Field(None, alias="identityStoreId")
-    implicit_assignment: Optional[StrictBool] = Field(None, alias="implicitAssignment")
-    inline_hook_id: Optional[StrictStr] = Field(None, alias="inlineHookId")
+    identity_store_id: Optional[StrictStr] = Field(default=None, alias="identityStoreId")
+    implicit_assignment: Optional[StrictBool] = Field(default=None, alias="implicitAssignment")
+    inline_hook_id: Optional[StrictStr] = Field(default=None, alias="inlineHookId")
     notes: Optional[ApplicationSettingsNotes] = None
     notifications: Optional[ApplicationSettingsNotifications] = None
     app: Optional[SecurePasswordStoreApplicationSettingsApplication] = None

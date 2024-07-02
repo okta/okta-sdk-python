@@ -31,7 +31,7 @@ print(UserSchema.to_json())
 # convert the object into a dict
 user_schema_dict = user_schema_instance.to_dict()
 # create an instance of UserSchema from a dict
-user_schema_form_dict = user_schema.from_dict(user_schema_dict)
+user_schema_from_dict = UserSchema.from_dict(user_schema_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -35,7 +35,7 @@ print(ThemeResponse.to_json())
 # convert the object into a dict
 theme_response_dict = theme_response_instance.to_dict()
 # create an instance of ThemeResponse from a dict
-theme_response_form_dict = theme_response.from_dict(theme_response_dict)
+theme_response_from_dict = ThemeResponse.from_dict(theme_response_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

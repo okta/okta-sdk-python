@@ -22,7 +22,7 @@ print(OAuth2ScopesMediationPolicyRuleCondition.to_json())
 # convert the object into a dict
 o_auth2_scopes_mediation_policy_rule_condition_dict = o_auth2_scopes_mediation_policy_rule_condition_instance.to_dict()
 # create an instance of OAuth2ScopesMediationPolicyRuleCondition from a dict
-o_auth2_scopes_mediation_policy_rule_condition_form_dict = o_auth2_scopes_mediation_policy_rule_condition.from_dict(o_auth2_scopes_mediation_policy_rule_condition_dict)
+o_auth2_scopes_mediation_policy_rule_condition_from_dict = OAuth2ScopesMediationPolicyRuleCondition.from_dict(o_auth2_scopes_mediation_policy_rule_condition_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

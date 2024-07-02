@@ -27,7 +27,7 @@ print(SocialAuthToken.to_json())
 # convert the object into a dict
 social_auth_token_dict = social_auth_token_instance.to_dict()
 # create an instance of SocialAuthToken from a dict
-social_auth_token_form_dict = social_auth_token.from_dict(social_auth_token_dict)
+social_auth_token_from_dict = SocialAuthToken.from_dict(social_auth_token_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

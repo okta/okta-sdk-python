@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.group_rule_action import GroupRuleAction
 from openapi_client.models.group_rule_conditions import GroupRuleConditions
 from openapi_client.models.group_rule_status import GroupRuleStatus
@@ -32,7 +35,7 @@ class GroupRule(BaseModel):
     conditions: Optional[GroupRuleConditions] = None
     created: Optional[datetime] = None
     id: Optional[StrictStr] = None
-    last_updated: Optional[datetime] = Field(None, alias="lastUpdated")
+    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
     name: Optional[StrictStr] = None
     status: Optional[GroupRuleStatus] = None
     type: Optional[StrictStr] = None

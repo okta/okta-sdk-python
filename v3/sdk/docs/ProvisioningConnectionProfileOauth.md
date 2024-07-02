@@ -23,7 +23,7 @@ print(ProvisioningConnectionProfileOauth.to_json())
 # convert the object into a dict
 provisioning_connection_profile_oauth_dict = provisioning_connection_profile_oauth_instance.to_dict()
 # create an instance of ProvisioningConnectionProfileOauth from a dict
-provisioning_connection_profile_oauth_form_dict = provisioning_connection_profile_oauth.from_dict(provisioning_connection_profile_oauth_dict)
+provisioning_connection_profile_oauth_from_dict = ProvisioningConnectionProfileOauth.from_dict(provisioning_connection_profile_oauth_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

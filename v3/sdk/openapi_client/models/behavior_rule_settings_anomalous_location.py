@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
+from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from openapi_client.models.location_granularity import LocationGranularity
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,10 +29,10 @@ class BehaviorRuleSettingsAnomalousLocation(BaseModel):
     """
     BehaviorRuleSettingsAnomalousLocation
     """ # noqa: E501
-    max_events_used_for_evaluation: Optional[conint(strict=True, le=100, ge=1)] = Field(20, alias="maxEventsUsedForEvaluation")
-    min_events_needed_for_evaluation: Optional[conint(strict=True, le=10, ge=0)] = Field(0, alias="minEventsNeededForEvaluation")
-    granularity: LocationGranularity = Field(...)
-    radius_kilometers: Optional[StrictInt] = Field(None, alias="radiusKilometers", description="Required when `granularity` is `LAT_LONG`. Radius from the provided coordinates in kilometers.")
+    max_events_used_for_evaluation: Optional[Annotated[int, Field(le=100, strict=True, ge=1)]] = Field(default=20, alias="maxEventsUsedForEvaluation")
+    min_events_needed_for_evaluation: Optional[Annotated[int, Field(le=10, strict=True, ge=0)]] = Field(default=0, alias="minEventsNeededForEvaluation")
+    granularity: LocationGranularity
+    radius_kilometers: Optional[StrictInt] = Field(default=None, description="Required when `granularity` is `LAT_LONG`. Radius from the provided coordinates in kilometers.", alias="radiusKilometers")
     __properties: ClassVar[List[str]] = ["maxEventsUsedForEvaluation", "minEventsNeededForEvaluation", "granularity", "radiusKilometers"]
 
     model_config = ConfigDict(

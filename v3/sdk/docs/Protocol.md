@@ -29,7 +29,7 @@ print(Protocol.to_json())
 # convert the object into a dict
 protocol_dict = protocol_instance.to_dict()
 # create an instance of Protocol from a dict
-protocol_form_dict = protocol.from_dict(protocol_dict)
+protocol_from_dict = Protocol.from_dict(protocol_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

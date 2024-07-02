@@ -42,7 +42,7 @@ print(OpenIdConnectApplicationSettingsClient.to_json())
 # convert the object into a dict
 open_id_connect_application_settings_client_dict = open_id_connect_application_settings_client_instance.to_dict()
 # create an instance of OpenIdConnectApplicationSettingsClient from a dict
-open_id_connect_application_settings_client_form_dict = open_id_connect_application_settings_client.from_dict(open_id_connect_application_settings_client_dict)
+open_id_connect_application_settings_client_from_dict = OpenIdConnectApplicationSettingsClient.from_dict(open_id_connect_application_settings_client_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

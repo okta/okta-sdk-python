@@ -23,7 +23,7 @@ print(WellKnownOrgMetadataLinks.to_json())
 # convert the object into a dict
 well_known_org_metadata_links_dict = well_known_org_metadata_links_instance.to_dict()
 # create an instance of WellKnownOrgMetadataLinks from a dict
-well_known_org_metadata_links_form_dict = well_known_org_metadata_links.from_dict(well_known_org_metadata_links_dict)
+well_known_org_metadata_links_from_dict = WellKnownOrgMetadataLinks.from_dict(well_known_org_metadata_links_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

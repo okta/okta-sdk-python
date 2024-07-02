@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import ConfigDict, Field
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.device_assurance import DeviceAssurance
 from openapi_client.models.device_assurance_chrome_os_platform_all_of_third_party_signal_providers import DeviceAssuranceChromeOSPlatformAllOfThirdPartySignalProviders
 from openapi_client.models.links_self import LinksSelf
@@ -29,7 +31,7 @@ class DeviceAssuranceChromeOSPlatform(DeviceAssurance):
     """
     DeviceAssuranceChromeOSPlatform
     """ # noqa: E501
-    third_party_signal_providers: Optional[DeviceAssuranceChromeOSPlatformAllOfThirdPartySignalProviders] = Field(None, alias="thirdPartySignalProviders")
+    third_party_signal_providers: Optional[DeviceAssuranceChromeOSPlatformAllOfThirdPartySignalProviders] = Field(default=None, alias="thirdPartySignalProviders")
     __properties: ClassVar[List[str]] = ["createdBy", "createdDate", "id", "lastUpdatedBy", "lastUpdatedDate", "name", "platform", "_links", "thirdPartySignalProviders"]
 
     model_config = ConfigDict(

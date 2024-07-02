@@ -27,7 +27,7 @@ print(AgentPool.to_json())
 # convert the object into a dict
 agent_pool_dict = agent_pool_instance.to_dict()
 # create an instance of AgentPool from a dict
-agent_pool_form_dict = agent_pool.from_dict(agent_pool_dict)
+agent_pool_from_dict = AgentPool.from_dict(agent_pool_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

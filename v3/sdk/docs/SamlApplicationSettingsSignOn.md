@@ -49,7 +49,7 @@ print(SamlApplicationSettingsSignOn.to_json())
 # convert the object into a dict
 saml_application_settings_sign_on_dict = saml_application_settings_sign_on_instance.to_dict()
 # create an instance of SamlApplicationSettingsSignOn from a dict
-saml_application_settings_sign_on_form_dict = saml_application_settings_sign_on.from_dict(saml_application_settings_sign_on_dict)
+saml_application_settings_sign_on_from_dict = SamlApplicationSettingsSignOn.from_dict(saml_application_settings_sign_on_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

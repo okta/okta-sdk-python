@@ -24,7 +24,7 @@ print(ContentSecurityPolicySetting.to_json())
 # convert the object into a dict
 content_security_policy_setting_dict = content_security_policy_setting_instance.to_dict()
 # create an instance of ContentSecurityPolicySetting from a dict
-content_security_policy_setting_form_dict = content_security_policy_setting.from_dict(content_security_policy_setting_dict)
+content_security_policy_setting_from_dict = ContentSecurityPolicySetting.from_dict(content_security_policy_setting_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

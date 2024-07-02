@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.links_self import LinksSelf
 from openapi_client.models.realm_profile import RealmProfile
 from typing import Optional, Set
@@ -27,12 +30,12 @@ class Realm(BaseModel):
     """
     Realm
     """ # noqa: E501
-    created: Optional[datetime] = Field(None, description="Timestamp when the Realm was created")
-    id: Optional[StrictStr] = Field(None, description="Unique key for the Realm")
-    is_default: Optional[StrictBool] = Field(None, alias="isDefault", description="Conveys whether the Realm is the default")
-    last_updated: Optional[datetime] = Field(None, alias="lastUpdated", description="Timestamp when the Realm was last updated")
+    created: Optional[datetime] = Field(default=None, description="Timestamp when the Realm was created")
+    id: Optional[StrictStr] = Field(default=None, description="Unique key for the Realm")
+    is_default: Optional[StrictBool] = Field(default=None, description="Conveys whether the Realm is the default", alias="isDefault")
+    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the Realm was last updated", alias="lastUpdated")
     profile: Optional[RealmProfile] = None
-    links: Optional[LinksSelf] = Field(None, alias="_links")
+    links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["created", "id", "isDefault", "lastUpdated", "profile", "_links"]
 
     model_config = ConfigDict(

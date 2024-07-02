@@ -23,7 +23,7 @@ print(ChannelBinding.to_json())
 # convert the object into a dict
 channel_binding_dict = channel_binding_instance.to_dict()
 # create an instance of ChannelBinding from a dict
-channel_binding_form_dict = channel_binding.from_dict(channel_binding_dict)
+channel_binding_from_dict = ChannelBinding.from_dict(channel_binding_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

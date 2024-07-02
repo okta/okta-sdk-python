@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.inactivity_policy_rule_condition import InactivityPolicyRuleCondition
 from openapi_client.models.lifecycle_expiration_policy_rule_condition import LifecycleExpirationPolicyRuleCondition
 from openapi_client.models.password_expiration_policy_rule_condition import PasswordExpirationPolicyRuleCondition
@@ -29,12 +31,12 @@ class UserPolicyRuleCondition(BaseModel):
     """
     UserPolicyRuleCondition
     """ # noqa: E501
-    exclude: Optional[conlist(StrictStr)] = None
+    exclude: Optional[List[StrictStr]] = None
     inactivity: Optional[InactivityPolicyRuleCondition] = None
-    include: Optional[conlist(StrictStr)] = None
-    lifecycle_expiration: Optional[LifecycleExpirationPolicyRuleCondition] = Field(None, alias="lifecycleExpiration")
-    password_expiration: Optional[PasswordExpirationPolicyRuleCondition] = Field(None, alias="passwordExpiration")
-    user_lifecycle_attribute: Optional[UserLifecycleAttributePolicyRuleCondition] = Field(None, alias="userLifecycleAttribute")
+    include: Optional[List[StrictStr]] = None
+    lifecycle_expiration: Optional[LifecycleExpirationPolicyRuleCondition] = Field(default=None, alias="lifecycleExpiration")
+    password_expiration: Optional[PasswordExpirationPolicyRuleCondition] = Field(default=None, alias="passwordExpiration")
+    user_lifecycle_attribute: Optional[UserLifecycleAttributePolicyRuleCondition] = Field(default=None, alias="userLifecycleAttribute")
     __properties: ClassVar[List[str]] = ["exclude", "inactivity", "include", "lifecycleExpiration", "passwordExpiration", "userLifecycleAttribute"]
 
     model_config = ConfigDict(

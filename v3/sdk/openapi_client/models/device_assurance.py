@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from importlib import import_module
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from openapi_client.models.links_self import LinksSelf
 from openapi_client.models.platform import Platform
 from typing import Optional, Set
@@ -35,14 +38,14 @@ class DeviceAssurance(BaseModel):
     """
     DeviceAssurance
     """ # noqa: E501
-    created_by: Optional[StrictStr] = Field(None, alias="createdBy")
-    created_date: Optional[StrictStr] = Field(None, alias="createdDate")
+    created_by: Optional[StrictStr] = Field(default=None, alias="createdBy")
+    created_date: Optional[StrictStr] = Field(default=None, alias="createdDate")
     id: Optional[StrictStr] = None
-    last_updated_by: Optional[StrictStr] = Field(None, alias="lastUpdatedBy")
-    last_updated_date: Optional[StrictStr] = Field(None, alias="lastUpdatedDate")
-    name: Optional[StrictStr] = Field(None, description="Display name of the Device Assurance Policy")
+    last_updated_by: Optional[StrictStr] = Field(default=None, alias="lastUpdatedBy")
+    last_updated_date: Optional[StrictStr] = Field(default=None, alias="lastUpdatedDate")
+    name: Optional[StrictStr] = Field(default=None, description="Display name of the Device Assurance Policy")
     platform: Optional[Platform] = None
-    links: Optional[LinksSelf] = Field(None, alias="_links")
+    links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["createdBy", "createdDate", "id", "lastUpdatedBy", "lastUpdatedDate", "name", "platform", "_links"]
 
     model_config = ConfigDict(
@@ -121,15 +124,15 @@ class DeviceAssurance(BaseModel):
         """Create an instance of DeviceAssurance from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
-        if object_type ==  'ANDROID':
+        if object_type ==  'DeviceAssuranceAndroidPlatform':
             return import_module("openapi_client.models.device_assurance_android_platform").DeviceAssuranceAndroidPlatform.from_dict(obj)
-        if object_type ==  'CHROMEOS':
+        if object_type ==  'DeviceAssuranceChromeOSPlatform':
             return import_module("openapi_client.models.device_assurance_chrome_os_platform").DeviceAssuranceChromeOSPlatform.from_dict(obj)
-        if object_type ==  'IOS':
+        if object_type ==  'DeviceAssuranceIOSPlatform':
             return import_module("openapi_client.models.device_assurance_ios_platform").DeviceAssuranceIOSPlatform.from_dict(obj)
-        if object_type ==  'MACOS':
+        if object_type ==  'DeviceAssuranceMacOSPlatform':
             return import_module("openapi_client.models.device_assurance_mac_os_platform").DeviceAssuranceMacOSPlatform.from_dict(obj)
-        if object_type ==  'WINDOWS':
+        if object_type ==  'DeviceAssuranceWindowsPlatform':
             return import_module("openapi_client.models.device_assurance_windows_platform").DeviceAssuranceWindowsPlatform.from_dict(obj)
 
         raise ValueError("DeviceAssurance failed to lookup discriminator value from " +

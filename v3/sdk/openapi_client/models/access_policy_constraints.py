@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.knowledge_constraint import KnowledgeConstraint
 from openapi_client.models.possession_constraint import PossessionConstraint
 from typing import Optional, Set

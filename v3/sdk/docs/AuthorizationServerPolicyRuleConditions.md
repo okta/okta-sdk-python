@@ -42,7 +42,7 @@ print(AuthorizationServerPolicyRuleConditions.to_json())
 # convert the object into a dict
 authorization_server_policy_rule_conditions_dict = authorization_server_policy_rule_conditions_instance.to_dict()
 # create an instance of AuthorizationServerPolicyRuleConditions from a dict
-authorization_server_policy_rule_conditions_form_dict = authorization_server_policy_rule_conditions.from_dict(authorization_server_policy_rule_conditions_dict)
+authorization_server_policy_rule_conditions_from_dict = AuthorizationServerPolicyRuleConditions.from_dict(authorization_server_policy_rule_conditions_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

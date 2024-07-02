@@ -25,7 +25,7 @@ print(PolicyMappingLinks.to_json())
 # convert the object into a dict
 policy_mapping_links_dict = policy_mapping_links_instance.to_dict()
 # create an instance of PolicyMappingLinks from a dict
-policy_mapping_links_form_dict = policy_mapping_links.from_dict(policy_mapping_links_dict)
+policy_mapping_links_from_dict = PolicyMappingLinks.from_dict(policy_mapping_links_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

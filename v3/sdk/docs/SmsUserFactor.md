@@ -22,7 +22,7 @@ print(SmsUserFactor.to_json())
 # convert the object into a dict
 sms_user_factor_dict = sms_user_factor_instance.to_dict()
 # create an instance of SmsUserFactor from a dict
-sms_user_factor_form_dict = sms_user_factor.from_dict(sms_user_factor_dict)
+sms_user_factor_from_dict = SmsUserFactor.from_dict(sms_user_factor_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

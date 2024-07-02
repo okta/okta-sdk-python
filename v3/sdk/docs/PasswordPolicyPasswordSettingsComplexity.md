@@ -29,7 +29,7 @@ print(PasswordPolicyPasswordSettingsComplexity.to_json())
 # convert the object into a dict
 password_policy_password_settings_complexity_dict = password_policy_password_settings_complexity_instance.to_dict()
 # create an instance of PasswordPolicyPasswordSettingsComplexity from a dict
-password_policy_password_settings_complexity_form_dict = password_policy_password_settings_complexity.from_dict(password_policy_password_settings_complexity_dict)
+password_policy_password_settings_complexity_from_dict = PasswordPolicyPasswordSettingsComplexity.from_dict(password_policy_password_settings_complexity_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

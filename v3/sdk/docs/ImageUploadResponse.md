@@ -22,7 +22,7 @@ print(ImageUploadResponse.to_json())
 # convert the object into a dict
 image_upload_response_dict = image_upload_response_instance.to_dict()
 # create an instance of ImageUploadResponse from a dict
-image_upload_response_form_dict = image_upload_response.from_dict(image_upload_response_dict)
+image_upload_response_from_dict = ImageUploadResponse.from_dict(image_upload_response_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

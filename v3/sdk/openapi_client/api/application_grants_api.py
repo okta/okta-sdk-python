@@ -17,11 +17,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from typing_extensions import Annotated
 from pydantic import Field, StrictStr
-
-from typing import List, Optional
-
+from typing import Optional
+from typing_extensions import Annotated
 from openapi_client.models.o_auth2_scope_consent_grant import OAuth2ScopeConsentGrant
 
 from openapi_client.api_client import ApiClient, RequestSerialized
@@ -45,8 +43,8 @@ class ApplicationGrantsApi:
     @validate_call
     def get_scope_consent_grant(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
-        grant_id: Annotated[StrictStr, Field(..., description="ID of the Grant")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        grant_id: Annotated[StrictStr, Field(description="ID of the Grant")],
         expand: Annotated[Optional[StrictStr], Field(description="An optional parameter to include scope details in the `_embedded` attribute. Valid value: `scope`")] = None,
         _request_timeout: Union[
             None,
@@ -123,8 +121,8 @@ class ApplicationGrantsApi:
     @validate_call
     def get_scope_consent_grant_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
-        grant_id: Annotated[StrictStr, Field(..., description="ID of the Grant")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        grant_id: Annotated[StrictStr, Field(description="ID of the Grant")],
         expand: Annotated[Optional[StrictStr], Field(description="An optional parameter to include scope details in the `_embedded` attribute. Valid value: `scope`")] = None,
         _request_timeout: Union[
             None,
@@ -201,8 +199,8 @@ class ApplicationGrantsApi:
     @validate_call
     def get_scope_consent_grant_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
-        grant_id: Annotated[StrictStr, Field(..., description="ID of the Grant")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        grant_id: Annotated[StrictStr, Field(description="ID of the Grant")],
         expand: Annotated[Optional[StrictStr], Field(description="An optional parameter to include scope details in the `_embedded` attribute. Valid value: `scope`")] = None,
         _request_timeout: Union[
             None,
@@ -292,7 +290,7 @@ class ApplicationGrantsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -345,7 +343,7 @@ class ApplicationGrantsApi:
     @validate_call
     def grant_consent_to_scope(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         o_auth2_scope_consent_grant: OAuth2ScopeConsentGrant,
         _request_timeout: Union[
             None,
@@ -420,7 +418,7 @@ class ApplicationGrantsApi:
     @validate_call
     def grant_consent_to_scope_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         o_auth2_scope_consent_grant: OAuth2ScopeConsentGrant,
         _request_timeout: Union[
             None,
@@ -495,7 +493,7 @@ class ApplicationGrantsApi:
     @validate_call
     def grant_consent_to_scope_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         o_auth2_scope_consent_grant: OAuth2ScopeConsentGrant,
         _request_timeout: Union[
             None,
@@ -582,7 +580,7 @@ class ApplicationGrantsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -644,7 +642,7 @@ class ApplicationGrantsApi:
     @validate_call
     def list_scope_consent_grants(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         expand: Annotated[Optional[StrictStr], Field(description="An optional parameter to include scope details in the `_embedded` attribute. Valid value: `scope`")] = None,
         _request_timeout: Union[
             None,
@@ -718,7 +716,7 @@ class ApplicationGrantsApi:
     @validate_call
     def list_scope_consent_grants_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         expand: Annotated[Optional[StrictStr], Field(description="An optional parameter to include scope details in the `_embedded` attribute. Valid value: `scope`")] = None,
         _request_timeout: Union[
             None,
@@ -792,7 +790,7 @@ class ApplicationGrantsApi:
     @validate_call
     def list_scope_consent_grants_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         expand: Annotated[Optional[StrictStr], Field(description="An optional parameter to include scope details in the `_embedded` attribute. Valid value: `scope`")] = None,
         _request_timeout: Union[
             None,
@@ -878,7 +876,7 @@ class ApplicationGrantsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -929,8 +927,8 @@ class ApplicationGrantsApi:
     @validate_call
     def revoke_scope_consent_grant(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
-        grant_id: Annotated[StrictStr, Field(..., description="ID of the Grant")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        grant_id: Annotated[StrictStr, Field(description="ID of the Grant")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1003,8 +1001,8 @@ class ApplicationGrantsApi:
     @validate_call
     def revoke_scope_consent_grant_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
-        grant_id: Annotated[StrictStr, Field(..., description="ID of the Grant")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        grant_id: Annotated[StrictStr, Field(description="ID of the Grant")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1077,8 +1075,8 @@ class ApplicationGrantsApi:
     @validate_call
     def revoke_scope_consent_grant_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
-        grant_id: Annotated[StrictStr, Field(..., description="ID of the Grant")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        grant_id: Annotated[StrictStr, Field(description="ID of the Grant")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1163,7 +1161,7 @@ class ApplicationGrantsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters

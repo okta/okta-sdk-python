@@ -18,6 +18,10 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
+from importlib import import_module
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from openapi_client.models.lifecycle_status import LifecycleStatus
 from openapi_client.models.policy_links import PolicyLinks
 from openapi_client.models.policy_type import PolicyType
@@ -38,17 +42,17 @@ class Policy(BaseModel):
     """
     Policy
     """ # noqa: E501
-    created: Optional[datetime] = Field(None, description="Timestamp when the Policy was created")
-    description: Optional[StrictStr] = Field(None, description="Policy description")
-    id: Optional[StrictStr] = Field(None, description="Policy ID")
-    last_updated: Optional[datetime] = Field(None, alias="lastUpdated", description="Timestamp when the Policy was last updated")
-    name: Optional[StrictStr] = Field(None, description="Policy name")
-    priority: Optional[StrictInt] = Field(None, description="Specifies the order in which this Policy is evaluated in relation to the other policies")
+    created: Optional[datetime] = Field(default=None, description="Timestamp when the Policy was created")
+    description: Optional[StrictStr] = Field(default=None, description="Policy description")
+    id: Optional[StrictStr] = Field(default=None, description="Policy ID")
+    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the Policy was last updated", alias="lastUpdated")
+    name: Optional[StrictStr] = Field(default=None, description="Policy name")
+    priority: Optional[StrictInt] = Field(default=None, description="Specifies the order in which this Policy is evaluated in relation to the other policies")
     status: Optional[LifecycleStatus] = None
-    system: Optional[StrictBool] = Field(None, description="Specifies whether Okta created the Policy")
+    system: Optional[StrictBool] = Field(default=None, description="Specifies whether Okta created the Policy")
     type: Optional[PolicyType] = None
-    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(None, alias="_embedded")
-    links: Optional[PolicyLinks] = Field(None, alias="_links")
+    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, alias="_embedded")
+    links: Optional[PolicyLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["created", "description", "id", "lastUpdated", "name", "priority", "status", "system", "type", "_embedded", "_links"]
 
     model_config = ConfigDict(
@@ -125,17 +129,17 @@ class Policy(BaseModel):
         """Create an instance of Policy from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
-        if object_type ==  'ACCESS_POLICY':
+        if object_type ==  'AccessPolicy':
             return import_module("openapi_client.models.access_policy").AccessPolicy.from_dict(obj)
-        if object_type ==  'IDP_DISCOVERY':
+        if object_type ==  'IdpDiscoveryPolicy':
             return import_module("openapi_client.models.idp_discovery_policy").IdpDiscoveryPolicy.from_dict(obj)
-        if object_type ==  'MFA_ENROLL':
+        if object_type ==  'MultifactorEnrollmentPolicy':
             return import_module("openapi_client.models.multifactor_enrollment_policy").MultifactorEnrollmentPolicy.from_dict(obj)
-        if object_type ==  'OKTA_SIGN_ON':
+        if object_type ==  'OktaSignOnPolicy':
             return import_module("openapi_client.models.okta_sign_on_policy").OktaSignOnPolicy.from_dict(obj)
-        if object_type ==  'PASSWORD':
+        if object_type ==  'PasswordPolicy':
             return import_module("openapi_client.models.password_policy").PasswordPolicy.from_dict(obj)
-        if object_type ==  'PROFILE_ENROLLMENT':
+        if object_type ==  'ProfileEnrollmentPolicy':
             return import_module("openapi_client.models.profile_enrollment_policy").ProfileEnrollmentPolicy.from_dict(obj)
         if object_type ==  'AuthorizationServerPolicy':
             return import_module("openapi_client.models.authorization_server_policy").AuthorizationServerPolicy.from_dict(obj)

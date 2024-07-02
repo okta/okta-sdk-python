@@ -29,7 +29,7 @@ print(APIServiceIntegrationInstance.to_json())
 # convert the object into a dict
 api_service_integration_instance_dict = api_service_integration_instance_instance.to_dict()
 # create an instance of APIServiceIntegrationInstance from a dict
-api_service_integration_instance_form_dict = api_service_integration_instance.from_dict(api_service_integration_instance_dict)
+api_service_integration_instance_from_dict = APIServiceIntegrationInstance.from_dict(api_service_integration_instance_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

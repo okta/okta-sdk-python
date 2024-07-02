@@ -22,7 +22,7 @@ print(U2fUserFactorProfile.to_json())
 # convert the object into a dict
 u2f_user_factor_profile_dict = u2f_user_factor_profile_instance.to_dict()
 # create an instance of U2fUserFactorProfile from a dict
-u2f_user_factor_profile_form_dict = u2f_user_factor_profile.from_dict(u2f_user_factor_profile_dict)
+u2f_user_factor_profile_from_dict = U2fUserFactorProfile.from_dict(u2f_user_factor_profile_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

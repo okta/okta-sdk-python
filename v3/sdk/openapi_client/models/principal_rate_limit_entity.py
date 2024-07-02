@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.principal_type import PrincipalType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,16 +29,16 @@ class PrincipalRateLimitEntity(BaseModel):
     """
     
     """ # noqa: E501
-    created_by: Optional[StrictStr] = Field(None, alias="createdBy")
-    created_date: Optional[datetime] = Field(None, alias="createdDate")
-    default_concurrency_percentage: Optional[StrictInt] = Field(None, alias="defaultConcurrencyPercentage")
-    default_percentage: Optional[StrictInt] = Field(None, alias="defaultPercentage")
+    created_by: Optional[StrictStr] = Field(default=None, alias="createdBy")
+    created_date: Optional[datetime] = Field(default=None, alias="createdDate")
+    default_concurrency_percentage: Optional[StrictInt] = Field(default=None, alias="defaultConcurrencyPercentage")
+    default_percentage: Optional[StrictInt] = Field(default=None, alias="defaultPercentage")
     id: Optional[StrictStr] = None
-    last_update: Optional[datetime] = Field(None, alias="lastUpdate")
-    last_updated_by: Optional[StrictStr] = Field(None, alias="lastUpdatedBy")
-    org_id: Optional[StrictStr] = Field(None, alias="orgId")
-    principal_id: StrictStr = Field(..., alias="principalId")
-    principal_type: PrincipalType = Field(..., alias="principalType")
+    last_update: Optional[datetime] = Field(default=None, alias="lastUpdate")
+    last_updated_by: Optional[StrictStr] = Field(default=None, alias="lastUpdatedBy")
+    org_id: Optional[StrictStr] = Field(default=None, alias="orgId")
+    principal_id: StrictStr = Field(alias="principalId")
+    principal_type: PrincipalType = Field(alias="principalType")
     __properties: ClassVar[List[str]] = ["createdBy", "createdDate", "defaultConcurrencyPercentage", "defaultPercentage", "id", "lastUpdate", "lastUpdatedBy", "orgId", "principalId", "principalType"]
 
     model_config = ConfigDict(

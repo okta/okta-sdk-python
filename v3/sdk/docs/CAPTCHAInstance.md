@@ -28,7 +28,7 @@ print(CAPTCHAInstance.to_json())
 # convert the object into a dict
 captcha_instance_dict = captcha_instance_instance.to_dict()
 # create an instance of CAPTCHAInstance from a dict
-captcha_instance_form_dict = captcha_instance.from_dict(captcha_instance_dict)
+captcha_instance_from_dict = CAPTCHAInstance.from_dict(captcha_instance_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

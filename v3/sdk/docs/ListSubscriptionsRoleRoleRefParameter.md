@@ -21,7 +21,7 @@ print(ListSubscriptionsRoleRoleRefParameter.to_json())
 # convert the object into a dict
 list_subscriptions_role_role_ref_parameter_dict = list_subscriptions_role_role_ref_parameter_instance.to_dict()
 # create an instance of ListSubscriptionsRoleRoleRefParameter from a dict
-list_subscriptions_role_role_ref_parameter_form_dict = list_subscriptions_role_role_ref_parameter.from_dict(list_subscriptions_role_role_ref_parameter_dict)
+list_subscriptions_role_role_ref_parameter_from_dict = ListSubscriptionsRoleRoleRefParameter.from_dict(list_subscriptions_role_role_ref_parameter_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -23,7 +23,7 @@ print(ResourceSetResources.to_json())
 # convert the object into a dict
 resource_set_resources_dict = resource_set_resources_instance.to_dict()
 # create an instance of ResourceSetResources from a dict
-resource_set_resources_form_dict = resource_set_resources.from_dict(resource_set_resources_dict)
+resource_set_resources_from_dict = ResourceSetResources.from_dict(resource_set_resources_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

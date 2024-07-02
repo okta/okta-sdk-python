@@ -28,7 +28,7 @@ print(AuthenticatorMethodOtp.to_json())
 # convert the object into a dict
 authenticator_method_otp_dict = authenticator_method_otp_instance.to_dict()
 # create an instance of AuthenticatorMethodOtp from a dict
-authenticator_method_otp_form_dict = authenticator_method_otp.from_dict(authenticator_method_otp_dict)
+authenticator_method_otp_from_dict = AuthenticatorMethodOtp.from_dict(authenticator_method_otp_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

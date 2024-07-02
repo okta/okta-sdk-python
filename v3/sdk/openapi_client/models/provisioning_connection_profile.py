@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from importlib import import_module
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from openapi_client.models.provisioning_connection_auth_scheme import ProvisioningConnectionAuthScheme
 from typing import Optional, Set
 from typing_extensions import Self
@@ -32,7 +35,7 @@ class ProvisioningConnectionProfile(BaseModel):
     """
     The profile used to configure the connection method of authentication and the credentials. Currently, token-based and OAuth 2.0-based authentication are supported. 
     """ # noqa: E501
-    auth_scheme: Optional[ProvisioningConnectionAuthScheme] = Field(None, alias="authScheme")
+    auth_scheme: Optional[ProvisioningConnectionAuthScheme] = Field(default=None, alias="authScheme")
     __properties: ClassVar[List[str]] = ["authScheme"]
 
     model_config = ConfigDict(
@@ -98,11 +101,11 @@ class ProvisioningConnectionProfile(BaseModel):
         """Create an instance of ProvisioningConnectionProfile from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
-        if object_type ==  'OAUTH2':
+        if object_type ==  'ProvisioningConnectionProfileOauth':
             return import_module("openapi_client.models.provisioning_connection_profile_oauth").ProvisioningConnectionProfileOauth.from_dict(obj)
-        if object_type ==  'TOKEN':
+        if object_type ==  'ProvisioningConnectionProfileToken':
             return import_module("openapi_client.models.provisioning_connection_profile_token").ProvisioningConnectionProfileToken.from_dict(obj)
-        if object_type ==  'UNKNOWN':
+        if object_type ==  'ProvisioningConnectionProfileUnknown':
             return import_module("openapi_client.models.provisioning_connection_profile_unknown").ProvisioningConnectionProfileUnknown.from_dict(obj)
 
         raise ValueError("ProvisioningConnectionProfile failed to lookup discriminator value from " +

@@ -23,7 +23,7 @@ print(LogIssuer.to_json())
 # convert the object into a dict
 log_issuer_dict = log_issuer_instance.to_dict()
 # create an instance of LogIssuer from a dict
-log_issuer_form_dict = log_issuer.from_dict(log_issuer_dict)
+log_issuer_from_dict = LogIssuer.from_dict(log_issuer_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

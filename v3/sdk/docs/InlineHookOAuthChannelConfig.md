@@ -22,7 +22,7 @@ print(InlineHookOAuthChannelConfig.to_json())
 # convert the object into a dict
 inline_hook_o_auth_channel_config_dict = inline_hook_o_auth_channel_config_instance.to_dict()
 # create an instance of InlineHookOAuthChannelConfig from a dict
-inline_hook_o_auth_channel_config_form_dict = inline_hook_o_auth_channel_config.from_dict(inline_hook_o_auth_channel_config_dict)
+inline_hook_o_auth_channel_config_from_dict = InlineHookOAuthChannelConfig.from_dict(inline_hook_o_auth_channel_config_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

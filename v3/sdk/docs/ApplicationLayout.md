@@ -27,7 +27,7 @@ print(ApplicationLayout.to_json())
 # convert the object into a dict
 application_layout_dict = application_layout_instance.to_dict()
 # create an instance of ApplicationLayout from a dict
-application_layout_form_dict = application_layout.from_dict(application_layout_dict)
+application_layout_from_dict = ApplicationLayout.from_dict(application_layout_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -30,7 +30,7 @@ print(IdentityProviderLinks.to_json())
 # convert the object into a dict
 identity_provider_links_dict = identity_provider_links_instance.to_dict()
 # create an instance of IdentityProviderLinks from a dict
-identity_provider_links_form_dict = identity_provider_links.from_dict(identity_provider_links_dict)
+identity_provider_links_from_dict = IdentityProviderLinks.from_dict(identity_provider_links_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

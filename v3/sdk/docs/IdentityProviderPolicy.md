@@ -26,7 +26,7 @@ print(IdentityProviderPolicy.to_json())
 # convert the object into a dict
 identity_provider_policy_dict = identity_provider_policy_instance.to_dict()
 # create an instance of IdentityProviderPolicy from a dict
-identity_provider_policy_form_dict = identity_provider_policy.from_dict(identity_provider_policy_dict)
+identity_provider_policy_from_dict = IdentityProviderPolicy.from_dict(identity_provider_policy_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -23,7 +23,7 @@ print(UserActivationToken.to_json())
 # convert the object into a dict
 user_activation_token_dict = user_activation_token_instance.to_dict()
 # create an instance of UserActivationToken from a dict
-user_activation_token_form_dict = user_activation_token.from_dict(user_activation_token_dict)
+user_activation_token_from_dict = UserActivationToken.from_dict(user_activation_token_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

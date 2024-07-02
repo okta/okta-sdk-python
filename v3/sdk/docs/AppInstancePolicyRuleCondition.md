@@ -23,7 +23,7 @@ print(AppInstancePolicyRuleCondition.to_json())
 # convert the object into a dict
 app_instance_policy_rule_condition_dict = app_instance_policy_rule_condition_instance.to_dict()
 # create an instance of AppInstancePolicyRuleCondition from a dict
-app_instance_policy_rule_condition_form_dict = app_instance_policy_rule_condition.from_dict(app_instance_policy_rule_condition_dict)
+app_instance_policy_rule_condition_from_dict = AppInstancePolicyRuleCondition.from_dict(app_instance_policy_rule_condition_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

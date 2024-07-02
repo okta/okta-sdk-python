@@ -28,7 +28,7 @@ print(BrandRequest.to_json())
 # convert the object into a dict
 brand_request_dict = brand_request_instance.to_dict()
 # create an instance of BrandRequest from a dict
-brand_request_form_dict = brand_request.from_dict(brand_request_dict)
+brand_request_from_dict = BrandRequest.from_dict(brand_request_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

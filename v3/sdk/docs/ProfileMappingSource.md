@@ -26,7 +26,7 @@ print(ProfileMappingSource.to_json())
 # convert the object into a dict
 profile_mapping_source_dict = profile_mapping_source_instance.to_dict()
 # create an instance of ProfileMappingSource from a dict
-profile_mapping_source_form_dict = profile_mapping_source.from_dict(profile_mapping_source_dict)
+profile_mapping_source_from_dict = ProfileMappingSource.from_dict(profile_mapping_source_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

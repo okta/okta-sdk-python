@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.notification_type import NotificationType
 from openapi_client.models.subscription_links import SubscriptionLinks
 from openapi_client.models.subscription_status import SubscriptionStatus
@@ -28,10 +30,10 @@ class Subscription(BaseModel):
     """
     Subscription
     """ # noqa: E501
-    channels: Optional[conlist(StrictStr)] = Field(None, description="An array of sources send notifications to users. > **Note**: Currently, Okta only allows `email` channels.")
-    notification_type: Optional[NotificationType] = Field(None, alias="notificationType")
+    channels: Optional[List[StrictStr]] = Field(default=None, description="An array of sources send notifications to users. > **Note**: Currently, Okta only allows `email` channels.")
+    notification_type: Optional[NotificationType] = Field(default=None, alias="notificationType")
     status: Optional[SubscriptionStatus] = None
-    links: Optional[SubscriptionLinks] = Field(None, alias="_links")
+    links: Optional[SubscriptionLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["channels", "notificationType", "status", "_links"]
 
     model_config = ConfigDict(

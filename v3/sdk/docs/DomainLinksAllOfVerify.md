@@ -26,7 +26,7 @@ print(DomainLinksAllOfVerify.to_json())
 # convert the object into a dict
 domain_links_all_of_verify_dict = domain_links_all_of_verify_instance.to_dict()
 # create an instance of DomainLinksAllOfVerify from a dict
-domain_links_all_of_verify_form_dict = domain_links_all_of_verify.from_dict(domain_links_all_of_verify_dict)
+domain_links_all_of_verify_from_dict = DomainLinksAllOfVerify.from_dict(domain_links_all_of_verify_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

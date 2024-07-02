@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.group_schema_definitions import GroupSchemaDefinitions
 from openapi_client.models.links_self import LinksSelf
 from openapi_client.models.user_schema_properties import UserSchemaProperties
@@ -28,17 +30,17 @@ class GroupSchema(BaseModel):
     """
     GroupSchema
     """ # noqa: E501
-    var_schema: Optional[StrictStr] = Field(None, alias="$schema")
+    var_schema: Optional[StrictStr] = Field(default=None, alias="$schema")
     created: Optional[StrictStr] = None
     definitions: Optional[GroupSchemaDefinitions] = None
     description: Optional[StrictStr] = None
     id: Optional[StrictStr] = None
-    last_updated: Optional[StrictStr] = Field(None, alias="lastUpdated")
+    last_updated: Optional[StrictStr] = Field(default=None, alias="lastUpdated")
     name: Optional[StrictStr] = None
     properties: Optional[UserSchemaProperties] = None
     title: Optional[StrictStr] = None
     type: Optional[StrictStr] = None
-    links: Optional[LinksSelf] = Field(None, alias="_links")
+    links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["$schema", "created", "definitions", "description", "id", "lastUpdated", "name", "properties", "title", "type", "_links"]
 
     model_config = ConfigDict(

@@ -23,7 +23,7 @@ print(PolicyMapping.to_json())
 # convert the object into a dict
 policy_mapping_dict = policy_mapping_instance.to_dict()
 # create an instance of PolicyMapping from a dict
-policy_mapping_form_dict = policy_mapping.from_dict(policy_mapping_dict)
+policy_mapping_from_dict = PolicyMapping.from_dict(policy_mapping_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

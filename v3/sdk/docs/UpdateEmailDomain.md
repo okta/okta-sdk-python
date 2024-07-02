@@ -23,7 +23,7 @@ print(UpdateEmailDomain.to_json())
 # convert the object into a dict
 update_email_domain_dict = update_email_domain_instance.to_dict()
 # create an instance of UpdateEmailDomain from a dict
-update_email_domain_form_dict = update_email_domain.from_dict(update_email_domain_dict)
+update_email_domain_from_dict = UpdateEmailDomain.from_dict(update_email_domain_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

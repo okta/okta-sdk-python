@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -26,9 +29,9 @@ class AutoUpdateSchedule(BaseModel):
     The schedule of auto-update configured by admin.
     """ # noqa: E501
     cron: Optional[StrictStr] = None
-    delay: Optional[StrictInt] = Field(None, description="delay in days")
-    duration: Optional[StrictInt] = Field(None, description="duration in minutes")
-    last_updated: Optional[datetime] = Field(None, alias="lastUpdated", description="last time when the updated finished (success or failed, exclude cancelled), null if job haven't finished once yet.")
+    delay: Optional[StrictInt] = Field(default=None, description="delay in days")
+    duration: Optional[StrictInt] = Field(default=None, description="duration in minutes")
+    last_updated: Optional[datetime] = Field(default=None, description="last time when the updated finished (success or failed, exclude cancelled), null if job haven't finished once yet.", alias="lastUpdated")
     timezone: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["cron", "delay", "duration", "lastUpdated", "timezone"]
 

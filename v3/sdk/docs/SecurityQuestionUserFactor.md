@@ -22,7 +22,7 @@ print(SecurityQuestionUserFactor.to_json())
 # convert the object into a dict
 security_question_user_factor_dict = security_question_user_factor_instance.to_dict()
 # create an instance of SecurityQuestionUserFactor from a dict
-security_question_user_factor_form_dict = security_question_user_factor.from_dict(security_question_user_factor_dict)
+security_question_user_factor_from_dict = SecurityQuestionUserFactor.from_dict(security_question_user_factor_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

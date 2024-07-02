@@ -22,7 +22,7 @@ print(IdentityProviderProperties.to_json())
 # convert the object into a dict
 identity_provider_properties_dict = identity_provider_properties_instance.to_dict()
 # create an instance of IdentityProviderProperties from a dict
-identity_provider_properties_form_dict = identity_provider_properties.from_dict(identity_provider_properties_dict)
+identity_provider_properties_from_dict = IdentityProviderProperties.from_dict(identity_provider_properties_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

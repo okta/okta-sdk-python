@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.authenticator_method_algorithm import AuthenticatorMethodAlgorithm
 from openapi_client.models.authenticator_method_transaction_type import AuthenticatorMethodTransactionType
 from typing import Optional, Set
@@ -27,9 +29,9 @@ class SupportedMethodsSettings(BaseModel):
     """
     SupportedMethodsSettings
     """ # noqa: E501
-    key_protection: Optional[StrictStr] = Field(None, alias="keyProtection")
-    algorithms: Optional[conlist(AuthenticatorMethodAlgorithm)] = None
-    transaction_types: Optional[conlist(AuthenticatorMethodTransactionType)] = Field(None, alias="transactionTypes")
+    key_protection: Optional[StrictStr] = Field(default=None, alias="keyProtection")
+    algorithms: Optional[List[AuthenticatorMethodAlgorithm]] = None
+    transaction_types: Optional[List[AuthenticatorMethodTransactionType]] = Field(default=None, alias="transactionTypes")
     __properties: ClassVar[List[str]] = ["keyProtection", "algorithms", "transactionTypes"]
 
     model_config = ConfigDict(

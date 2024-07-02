@@ -25,7 +25,7 @@ print(LogStreamSettingsSplunk.to_json())
 # convert the object into a dict
 log_stream_settings_splunk_dict = log_stream_settings_splunk_instance.to_dict()
 # create an instance of LogStreamSettingsSplunk from a dict
-log_stream_settings_splunk_form_dict = log_stream_settings_splunk.from_dict(log_stream_settings_splunk_dict)
+log_stream_settings_splunk_from_dict = LogStreamSettingsSplunk.from_dict(log_stream_settings_splunk_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

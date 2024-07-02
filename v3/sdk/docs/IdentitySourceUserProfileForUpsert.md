@@ -28,7 +28,7 @@ print(IdentitySourceUserProfileForUpsert.to_json())
 # convert the object into a dict
 identity_source_user_profile_for_upsert_dict = identity_source_user_profile_for_upsert_instance.to_dict()
 # create an instance of IdentitySourceUserProfileForUpsert from a dict
-identity_source_user_profile_for_upsert_form_dict = identity_source_user_profile_for_upsert.from_dict(identity_source_user_profile_for_upsert_dict)
+identity_source_user_profile_for_upsert_from_dict = IdentitySourceUserProfileForUpsert.from_dict(identity_source_user_profile_for_upsert_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -26,7 +26,7 @@ print(HrefObjectRulesLink.to_json())
 # convert the object into a dict
 href_object_rules_link_dict = href_object_rules_link_instance.to_dict()
 # create an instance of HrefObjectRulesLink from a dict
-href_object_rules_link_form_dict = href_object_rules_link.from_dict(href_object_rules_link_dict)
+href_object_rules_link_from_dict = HrefObjectRulesLink.from_dict(href_object_rules_link_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

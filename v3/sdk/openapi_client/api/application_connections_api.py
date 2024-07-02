@@ -17,11 +17,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictStr
-
 from typing import Optional
-
+from typing_extensions import Annotated
 from openapi_client.models.provisioning_connection import ProvisioningConnection
 from openapi_client.models.provisioning_connection_request import ProvisioningConnectionRequest
 
@@ -46,7 +44,7 @@ class ApplicationConnectionsApi:
     @validate_call
     def activate_default_provisioning_connection_for_application(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -116,7 +114,7 @@ class ApplicationConnectionsApi:
     @validate_call
     def activate_default_provisioning_connection_for_application_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -186,7 +184,7 @@ class ApplicationConnectionsApi:
     @validate_call
     def activate_default_provisioning_connection_for_application_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -267,7 +265,7 @@ class ApplicationConnectionsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -314,7 +312,7 @@ class ApplicationConnectionsApi:
     @validate_call
     def deactivate_default_provisioning_connection_for_application(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -384,7 +382,7 @@ class ApplicationConnectionsApi:
     @validate_call
     def deactivate_default_provisioning_connection_for_application_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -454,7 +452,7 @@ class ApplicationConnectionsApi:
     @validate_call
     def deactivate_default_provisioning_connection_for_application_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -535,7 +533,7 @@ class ApplicationConnectionsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -582,7 +580,7 @@ class ApplicationConnectionsApi:
     @validate_call
     def get_default_provisioning_connection_for_application(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -652,7 +650,7 @@ class ApplicationConnectionsApi:
     @validate_call
     def get_default_provisioning_connection_for_application_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -722,7 +720,7 @@ class ApplicationConnectionsApi:
     @validate_call
     def get_default_provisioning_connection_for_application_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -803,7 +801,7 @@ class ApplicationConnectionsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -850,7 +848,7 @@ class ApplicationConnectionsApi:
     @validate_call
     def update_default_provisioning_connection_for_application(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         provisioning_connection_request: ProvisioningConnectionRequest,
         activate: Annotated[Optional[StrictBool], Field(description="Activates the Provisioning Connection")] = None,
         _request_timeout: Union[
@@ -929,7 +927,7 @@ class ApplicationConnectionsApi:
     @validate_call
     def update_default_provisioning_connection_for_application_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         provisioning_connection_request: ProvisioningConnectionRequest,
         activate: Annotated[Optional[StrictBool], Field(description="Activates the Provisioning Connection")] = None,
         _request_timeout: Union[
@@ -1008,7 +1006,7 @@ class ApplicationConnectionsApi:
     @validate_call
     def update_default_provisioning_connection_for_application_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         provisioning_connection_request: ProvisioningConnectionRequest,
         activate: Annotated[Optional[StrictBool], Field(description="Activates the Provisioning Connection")] = None,
         _request_timeout: Union[
@@ -1100,7 +1098,7 @@ class ApplicationConnectionsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters

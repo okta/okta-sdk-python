@@ -23,7 +23,7 @@ print(ProfileSettingObject.to_json())
 # convert the object into a dict
 profile_setting_object_dict = profile_setting_object_instance.to_dict()
 # create an instance of ProfileSettingObject from a dict
-profile_setting_object_form_dict = profile_setting_object.from_dict(profile_setting_object_dict)
+profile_setting_object_from_dict = ProfileSettingObject.from_dict(profile_setting_object_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

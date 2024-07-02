@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List
 from openapi_client.models.provisioning_connection_auth_scheme import ProvisioningConnectionAuthScheme
 from openapi_client.models.provisioning_connection_profile import ProvisioningConnectionProfile
 from typing import Optional, Set
@@ -27,7 +29,7 @@ class ProvisioningConnectionProfileToken(ProvisioningConnectionProfile):
     """
     The app provisioning connection profile used to configure the method of authentication and the credentials. Currently, token-based and OAuth 2.0-based authentication are supported. 
     """ # noqa: E501
-    token: StrictStr = Field(..., description="Token used to authenticate with the app")
+    token: StrictStr = Field(description="Token used to authenticate with the app")
     __properties: ClassVar[List[str]] = ["authScheme", "token"]
 
     model_config = ConfigDict(

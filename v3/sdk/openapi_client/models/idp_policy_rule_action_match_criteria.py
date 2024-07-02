@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,8 +27,8 @@ class IdpPolicyRuleActionMatchCriteria(BaseModel):
     """
     IdpPolicyRuleActionMatchCriteria
     """ # noqa: E501
-    provider_expression: Optional[StrictStr] = Field(None, alias="providerExpression", description="You can provide an Okta Expression Language expression with the Login Context that's evaluated with the IdP. For example, the value `login.identifier` refers to the user's username. If the user is signing in with the username `john.doe@mycompany.com`, the expression `login.identifier.substringAfter(@))` is evaluated to the domain name of the user, for example: `mycompany.com`. ")
-    property_name: Optional[StrictStr] = Field(None, alias="propertyName", description="The IdP property that the evaluated string should match to")
+    provider_expression: Optional[StrictStr] = Field(default=None, description="You can provide an Okta Expression Language expression with the Login Context that's evaluated with the IdP. For example, the value `login.identifier` refers to the user's username. If the user is signing in with the username `john.doe@mycompany.com`, the expression `login.identifier.substringAfter(@))` is evaluated to the domain name of the user, for example: `mycompany.com`. ", alias="providerExpression")
+    property_name: Optional[StrictStr] = Field(default=None, description="The IdP property that the evaluated string should match to", alias="propertyName")
     __properties: ClassVar[List[str]] = ["providerExpression", "propertyName"]
 
     model_config = ConfigDict(

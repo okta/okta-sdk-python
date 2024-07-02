@@ -22,7 +22,7 @@ print(ApplicationSettingsNotifications.to_json())
 # convert the object into a dict
 application_settings_notifications_dict = application_settings_notifications_instance.to_dict()
 # create an instance of ApplicationSettingsNotifications from a dict
-application_settings_notifications_form_dict = application_settings_notifications.from_dict(application_settings_notifications_dict)
+application_settings_notifications_from_dict = ApplicationSettingsNotifications.from_dict(application_settings_notifications_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

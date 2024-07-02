@@ -23,7 +23,7 @@ print(NetworkZoneLocation.to_json())
 # convert the object into a dict
 network_zone_location_dict = network_zone_location_instance.to_dict()
 # create an instance of NetworkZoneLocation from a dict
-network_zone_location_form_dict = network_zone_location.from_dict(network_zone_location_dict)
+network_zone_location_from_dict = NetworkZoneLocation.from_dict(network_zone_location_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

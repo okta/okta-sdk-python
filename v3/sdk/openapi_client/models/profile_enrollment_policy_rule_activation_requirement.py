@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,7 +27,7 @@ class ProfileEnrollmentPolicyRuleActivationRequirement(BaseModel):
     """
     ProfileEnrollmentPolicyRuleActivationRequirement
     """ # noqa: E501
-    email_verification: Optional[StrictBool] = Field(None, alias="emailVerification")
+    email_verification: Optional[StrictBool] = Field(default=None, alias="emailVerification")
     __properties: ClassVar[List[str]] = ["emailVerification"]
 
     model_config = ConfigDict(

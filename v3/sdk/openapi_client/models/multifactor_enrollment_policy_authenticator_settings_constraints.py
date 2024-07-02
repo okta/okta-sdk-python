@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,7 +28,7 @@ class MultifactorEnrollmentPolicyAuthenticatorSettingsConstraints(BaseModel):
     """
     MultifactorEnrollmentPolicyAuthenticatorSettingsConstraints
     """ # noqa: E501
-    aaguid_groups: Optional[conlist(constr(strict=True))] = Field(None, alias="aaguidGroups")
+    aaguid_groups: Optional[List[Annotated[str, Field(strict=True)]]] = Field(default=None, alias="aaguidGroups")
     __properties: ClassVar[List[str]] = ["aaguidGroups"]
 
     model_config = ConfigDict(

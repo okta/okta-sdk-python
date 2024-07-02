@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
+from pydantic import ConfigDict, Field
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.factor_provider import FactorProvider
 from openapi_client.models.factor_result_type import FactorResultType
 from openapi_client.models.factor_status import FactorStatus
@@ -33,8 +36,8 @@ class PushUserFactor(UserFactor):
     """
     PushUserFactor
     """ # noqa: E501
-    expires_at: Optional[datetime] = Field(None, alias="expiresAt")
-    factor_result: Optional[FactorResultType] = Field(None, alias="factorResult")
+    expires_at: Optional[datetime] = Field(default=None, alias="expiresAt")
+    factor_result: Optional[FactorResultType] = Field(default=None, alias="factorResult")
     profile: Optional[PushUserFactorProfile] = None
     __properties: ClassVar[List[str]] = ["created", "factorType", "id", "lastUpdated", "profile", "provider", "status", "verify", "_embedded", "_links", "expiresAt", "factorResult"]
 

@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import ConfigDict
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.idp_discovery_policy_rule_condition import IdpDiscoveryPolicyRuleCondition
 from openapi_client.models.idp_policy_rule_action import IdpPolicyRuleAction
 from openapi_client.models.lifecycle_status import LifecycleStatus

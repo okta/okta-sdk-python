@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.links_self import LinksSelf
 from openapi_client.models.user_credentials import UserCredentials
 from openapi_client.models.user_profile import UserProfile
@@ -34,17 +37,17 @@ class User(BaseModel):
     created: Optional[datetime] = None
     credentials: Optional[UserCredentials] = None
     id: Optional[StrictStr] = None
-    last_login: Optional[datetime] = Field(None, alias="lastLogin")
-    last_updated: Optional[datetime] = Field(None, alias="lastUpdated")
-    password_changed: Optional[datetime] = Field(None, alias="passwordChanged")
+    last_login: Optional[datetime] = Field(default=None, alias="lastLogin")
+    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
+    password_changed: Optional[datetime] = Field(default=None, alias="passwordChanged")
     profile: Optional[UserProfile] = None
-    realm_id: Optional[StrictStr] = Field(None, alias="realmId", description="The ID of the realm in which the user is residing")
+    realm_id: Optional[StrictStr] = Field(default=None, description="The ID of the realm in which the user is residing", alias="realmId")
     status: Optional[UserStatus] = None
-    status_changed: Optional[datetime] = Field(None, alias="statusChanged")
-    transitioning_to_status: Optional[UserStatus] = Field(None, alias="transitioningToStatus")
+    status_changed: Optional[datetime] = Field(default=None, alias="statusChanged")
+    transitioning_to_status: Optional[UserStatus] = Field(default=None, alias="transitioningToStatus")
     type: Optional[UserType] = None
-    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(None, alias="_embedded")
-    links: Optional[LinksSelf] = Field(None, alias="_links")
+    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, alias="_embedded")
+    links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["activated", "created", "credentials", "id", "lastLogin", "lastUpdated", "passwordChanged", "profile", "realmId", "status", "statusChanged", "transitioningToStatus", "type", "_embedded", "_links"]
 
     model_config = ConfigDict(

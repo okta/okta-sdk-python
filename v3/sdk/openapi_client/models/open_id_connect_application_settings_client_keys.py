@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.json_web_key import JsonWebKey
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,7 +28,7 @@ class OpenIdConnectApplicationSettingsClientKeys(BaseModel):
     """
     OpenIdConnectApplicationSettingsClientKeys
     """ # noqa: E501
-    keys: Optional[conlist(JsonWebKey)] = None
+    keys: Optional[List[JsonWebKey]] = None
     __properties: ClassVar[List[str]] = ["keys"]
 
     model_config = ConfigDict(

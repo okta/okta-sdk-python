@@ -24,7 +24,7 @@ print(CreateIamRoleRequest.to_json())
 # convert the object into a dict
 create_iam_role_request_dict = create_iam_role_request_instance.to_dict()
 # create an instance of CreateIamRoleRequest from a dict
-create_iam_role_request_form_dict = create_iam_role_request.from_dict(create_iam_role_request_dict)
+create_iam_role_request_from_dict = CreateIamRoleRequest.from_dict(create_iam_role_request_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

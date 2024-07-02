@@ -27,7 +27,7 @@ print(ApplicationFeature.to_json())
 # convert the object into a dict
 application_feature_dict = application_feature_instance.to_dict()
 # create an instance of ApplicationFeature from a dict
-application_feature_form_dict = application_feature.from_dict(application_feature_dict)
+application_feature_from_dict = ApplicationFeature.from_dict(application_feature_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

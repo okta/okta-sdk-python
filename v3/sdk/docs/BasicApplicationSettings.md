@@ -27,7 +27,7 @@ print(BasicApplicationSettings.to_json())
 # convert the object into a dict
 basic_application_settings_dict = basic_application_settings_instance.to_dict()
 # create an instance of BasicApplicationSettings from a dict
-basic_application_settings_form_dict = basic_application_settings.from_dict(basic_application_settings_dict)
+basic_application_settings_from_dict = BasicApplicationSettings.from_dict(basic_application_settings_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.policy_context_device import PolicyContextDevice
 from openapi_client.models.policy_context_groups import PolicyContextGroups
 from openapi_client.models.policy_context_risk import PolicyContextRisk
@@ -30,10 +32,10 @@ class PolicyContext(BaseModel):
     """
     PolicyContext
     """ # noqa: E501
-    user: PolicyContextUser = Field(...)
-    groups: PolicyContextGroups = Field(...)
+    user: PolicyContextUser
+    groups: PolicyContextGroups
     risk: Optional[PolicyContextRisk] = None
-    ip: Optional[StrictStr] = Field(None, description="The network rule condition, zone, or IP address")
+    ip: Optional[StrictStr] = Field(default=None, description="The network rule condition, zone, or IP address")
     zones: Optional[PolicyContextZones] = None
     device: Optional[PolicyContextDevice] = None
     __properties: ClassVar[List[str]] = ["user", "groups", "risk", "ip", "zones", "device"]

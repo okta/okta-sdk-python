@@ -24,7 +24,7 @@ print(AuthenticatorMethodConstraint.to_json())
 # convert the object into a dict
 authenticator_method_constraint_dict = authenticator_method_constraint_instance.to_dict()
 # create an instance of AuthenticatorMethodConstraint from a dict
-authenticator_method_constraint_form_dict = authenticator_method_constraint.from_dict(authenticator_method_constraint_dict)
+authenticator_method_constraint_from_dict = AuthenticatorMethodConstraint.from_dict(authenticator_method_constraint_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

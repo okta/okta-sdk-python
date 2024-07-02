@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.o_auth_endpoint_authentication_method import OAuthEndpointAuthenticationMethod
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,7 +28,7 @@ class ApplicationCredentialsOAuthClient(BaseModel):
     """
     ApplicationCredentialsOAuthClient
     """ # noqa: E501
-    auto_key_rotation: Optional[StrictBool] = Field(None, alias="autoKeyRotation")
+    auto_key_rotation: Optional[StrictBool] = Field(default=None, alias="autoKeyRotation")
     client_id: Optional[StrictStr] = None
     client_secret: Optional[StrictStr] = None
     token_endpoint_auth_method: Optional[OAuthEndpointAuthenticationMethod] = None

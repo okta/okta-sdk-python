@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.json_web_key import JsonWebKey
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,13 +29,13 @@ class HookKey(BaseModel):
     """
     HookKey
     """ # noqa: E501
-    created: Optional[datetime] = Field(None, description="Timestamp when the key was created.")
-    id: Optional[StrictStr] = Field(None, description="The unique identifier for the key.")
-    is_used: Optional[StrictStr] = Field(None, alias="isUsed", description="Whether this key is currently in use by other hooks.")
-    key_id: Optional[StrictStr] = Field(None, alias="keyId", description="The alias of the public key.")
-    last_updated: Optional[datetime] = Field(None, alias="lastUpdated", description="Timestamp when the key was updated.")
-    name: Optional[StrictStr] = Field(None, description="Display name of the key.")
-    embedded: Optional[JsonWebKey] = Field(None, alias="_embedded")
+    created: Optional[datetime] = Field(default=None, description="Timestamp when the key was created.")
+    id: Optional[StrictStr] = Field(default=None, description="The unique identifier for the key.")
+    is_used: Optional[StrictStr] = Field(default=None, description="Whether this key is currently in use by other hooks.", alias="isUsed")
+    key_id: Optional[StrictStr] = Field(default=None, description="The alias of the public key.", alias="keyId")
+    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the key was updated.", alias="lastUpdated")
+    name: Optional[StrictStr] = Field(default=None, description="Display name of the key.")
+    embedded: Optional[JsonWebKey] = Field(default=None, alias="_embedded")
     __properties: ClassVar[List[str]] = ["created", "id", "isUsed", "keyId", "lastUpdated", "name", "_embedded"]
 
     model_config = ConfigDict(

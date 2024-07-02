@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.ui_element_options import UIElementOptions
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,10 +28,10 @@ class UIElement(BaseModel):
     """
     Specifies the configuration of an input field on an enrollment form
     """ # noqa: E501
-    label: Optional[StrictStr] = Field(None, description="Label name for the UI element")
+    label: Optional[StrictStr] = Field(default=None, description="Label name for the UI element")
     options: Optional[UIElementOptions] = None
-    scope: Optional[StrictStr] = Field(None, description="Specifies the property bound to the input field. It must follow the format `#/properties/PROPERTY_NAME` where `PROPERTY_NAME` is a variable name for an attribute in `profile editor`.")
-    type: Optional[StrictStr] = Field(None, description="Specifies the relationship between this input element and `scope`. The `Control` value specifies that this input controls the value represented by `scope`.")
+    scope: Optional[StrictStr] = Field(default=None, description="Specifies the property bound to the input field. It must follow the format `#/properties/PROPERTY_NAME` where `PROPERTY_NAME` is a variable name for an attribute in `profile editor`.")
+    type: Optional[StrictStr] = Field(default=None, description="Specifies the relationship between this input element and `scope`. The `Control` value specifies that this input controls the value represented by `scope`.")
     __properties: ClassVar[List[str]] = ["label", "options", "scope", "type"]
 
     model_config = ConfigDict(

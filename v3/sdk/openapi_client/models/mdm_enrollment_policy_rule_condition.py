@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.mdm_enrollment_policy_enrollment import MDMEnrollmentPolicyEnrollment
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,7 +28,7 @@ class MDMEnrollmentPolicyRuleCondition(BaseModel):
     """
     MDMEnrollmentPolicyRuleCondition
     """ # noqa: E501
-    block_non_safe_android: Optional[StrictBool] = Field(None, alias="blockNonSafeAndroid")
+    block_non_safe_android: Optional[StrictBool] = Field(default=None, alias="blockNonSafeAndroid")
     enrollment: Optional[MDMEnrollmentPolicyEnrollment] = None
     __properties: ClassVar[List[str]] = ["blockNonSafeAndroid", "enrollment"]
 

@@ -23,7 +23,7 @@ print(IamRoleLinks.to_json())
 # convert the object into a dict
 iam_role_links_dict = iam_role_links_instance.to_dict()
 # create an instance of IamRoleLinks from a dict
-iam_role_links_form_dict = iam_role_links.from_dict(iam_role_links_dict)
+iam_role_links_from_dict = IamRoleLinks.from_dict(iam_role_links_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

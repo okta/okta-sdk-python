@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import ConfigDict, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.application import Application
 from openapi_client.models.application_accessibility import ApplicationAccessibility
 from openapi_client.models.application_licensing import ApplicationLicensing

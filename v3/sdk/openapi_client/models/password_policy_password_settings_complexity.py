@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.password_dictionary import PasswordDictionary
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,13 +29,13 @@ class PasswordPolicyPasswordSettingsComplexity(BaseModel):
     PasswordPolicyPasswordSettingsComplexity
     """ # noqa: E501
     dictionary: Optional[PasswordDictionary] = None
-    exclude_attributes: Optional[conlist(StrictStr)] = Field(None, alias="excludeAttributes")
-    exclude_username: Optional[StrictBool] = Field(True, alias="excludeUsername")
-    min_length: Optional[StrictInt] = Field(None, alias="minLength")
-    min_lower_case: Optional[StrictInt] = Field(None, alias="minLowerCase")
-    min_number: Optional[StrictInt] = Field(None, alias="minNumber")
-    min_symbol: Optional[StrictInt] = Field(None, alias="minSymbol")
-    min_upper_case: Optional[StrictInt] = Field(None, alias="minUpperCase")
+    exclude_attributes: Optional[List[StrictStr]] = Field(default=None, alias="excludeAttributes")
+    exclude_username: Optional[StrictBool] = Field(default=True, alias="excludeUsername")
+    min_length: Optional[StrictInt] = Field(default=None, alias="minLength")
+    min_lower_case: Optional[StrictInt] = Field(default=None, alias="minLowerCase")
+    min_number: Optional[StrictInt] = Field(default=None, alias="minNumber")
+    min_symbol: Optional[StrictInt] = Field(default=None, alias="minSymbol")
+    min_upper_case: Optional[StrictInt] = Field(default=None, alias="minUpperCase")
     __properties: ClassVar[List[str]] = ["dictionary", "excludeAttributes", "excludeUsername", "minLength", "minLowerCase", "minNumber", "minSymbol", "minUpperCase"]
 
     model_config = ConfigDict(

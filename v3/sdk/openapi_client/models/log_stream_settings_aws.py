@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, field_validator
+from typing import Any, ClassVar, Dict, List
+from typing_extensions import Annotated
 from openapi_client.models.aws_region import AwsRegion
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,9 +29,9 @@ class LogStreamSettingsAws(BaseModel):
     """
     Specifies the configuration for the `aws_eventbridge` Log Stream type. This configuration can't be modified after creation.
     """ # noqa: E501
-    account_id: constr(strict=True, max_length=12, min_length=12) = Field(..., alias="accountId", description="Your AWS account ID")
-    event_source_name: constr(strict=True, max_length=75, min_length=1) = Field(..., alias="eventSourceName", description="An alphanumeric name (no spaces) to identify this event source in AWS EventBridge")
-    region: AwsRegion = Field(...)
+    account_id: Annotated[str, Field(min_length=12, strict=True, max_length=12)] = Field(description="Your AWS account ID", alias="accountId")
+    event_source_name: Annotated[str, Field(min_length=1, strict=True, max_length=75)] = Field(description="An alphanumeric name (no spaces) to identify this event source in AWS EventBridge", alias="eventSourceName")
+    region: AwsRegion
     __properties: ClassVar[List[str]] = ["accountId", "eventSourceName", "region"]
 
     @field_validator('event_source_name')

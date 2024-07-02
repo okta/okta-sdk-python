@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +29,7 @@ class SingleLogout(BaseModel):
     """ # noqa: E501
     enabled: Optional[StrictBool] = None
     issuer: Optional[StrictStr] = None
-    logout_url: Optional[StrictStr] = Field(None, alias="logoutUrl")
+    logout_url: Optional[StrictStr] = Field(default=None, alias="logoutUrl")
     __properties: ClassVar[List[str]] = ["enabled", "issuer", "logoutUrl"]
 
     model_config = ConfigDict(

@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.device_policy_rule_condition_platform import DevicePolicyRuleConditionPlatform
 from openapi_client.models.device_policy_trust_level import DevicePolicyTrustLevel
 from typing import Optional, Set
@@ -30,7 +32,7 @@ class DevicePolicyRuleCondition(BaseModel):
     migrated: Optional[StrictBool] = None
     platform: Optional[DevicePolicyRuleConditionPlatform] = None
     rooted: Optional[StrictBool] = None
-    trust_level: Optional[DevicePolicyTrustLevel] = Field(None, alias="trustLevel")
+    trust_level: Optional[DevicePolicyTrustLevel] = Field(default=None, alias="trustLevel")
     __properties: ClassVar[List[str]] = ["migrated", "platform", "rooted", "trustLevel"]
 
     model_config = ConfigDict(

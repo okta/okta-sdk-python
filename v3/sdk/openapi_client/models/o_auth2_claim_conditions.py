@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,7 +27,7 @@ class OAuth2ClaimConditions(BaseModel):
     """
     OAuth2ClaimConditions
     """ # noqa: E501
-    scopes: Optional[conlist(StrictStr)] = None
+    scopes: Optional[List[StrictStr]] = None
     __properties: ClassVar[List[str]] = ["scopes"]
 
     model_config = ConfigDict(

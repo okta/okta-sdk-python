@@ -22,7 +22,7 @@ print(ScheduledUserLifecycleAction.to_json())
 # convert the object into a dict
 scheduled_user_lifecycle_action_dict = scheduled_user_lifecycle_action_instance.to_dict()
 # create an instance of ScheduledUserLifecycleAction from a dict
-scheduled_user_lifecycle_action_form_dict = scheduled_user_lifecycle_action.from_dict(scheduled_user_lifecycle_action_dict)
+scheduled_user_lifecycle_action_from_dict = ScheduledUserLifecycleAction.from_dict(scheduled_user_lifecycle_action_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

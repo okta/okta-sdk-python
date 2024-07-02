@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -26,8 +28,8 @@ class ContentSecurityPolicySetting(BaseModel):
     ContentSecurityPolicySetting
     """ # noqa: E501
     mode: Optional[StrictStr] = None
-    report_uri: Optional[StrictStr] = Field(None, alias="reportUri")
-    src_list: Optional[conlist(StrictStr)] = Field(None, alias="srcList")
+    report_uri: Optional[StrictStr] = Field(default=None, alias="reportUri")
+    src_list: Optional[List[StrictStr]] = Field(default=None, alias="srcList")
     __properties: ClassVar[List[str]] = ["mode", "reportUri", "srcList"]
 
     @field_validator('mode')

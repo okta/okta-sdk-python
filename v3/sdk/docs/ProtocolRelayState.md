@@ -22,7 +22,7 @@ print(ProtocolRelayState.to_json())
 # convert the object into a dict
 protocol_relay_state_dict = protocol_relay_state_instance.to_dict()
 # create an instance of ProtocolRelayState from a dict
-protocol_relay_state_form_dict = protocol_relay_state.from_dict(protocol_relay_state_dict)
+protocol_relay_state_from_dict = ProtocolRelayState.from_dict(protocol_relay_state_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

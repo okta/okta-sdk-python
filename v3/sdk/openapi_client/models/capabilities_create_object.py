@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.lifecycle_create_setting_object import LifecycleCreateSettingObject
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,7 +28,7 @@ class CapabilitiesCreateObject(BaseModel):
     """
     Determines whether Okta assigns a new application account to each user managed by Okta.  Okta doesn't create a new account if it detects that the username specified in Okta already exists in the application. The user's Okta username is assigned by default. 
     """ # noqa: E501
-    lifecycle_create: Optional[LifecycleCreateSettingObject] = Field(None, alias="lifecycleCreate")
+    lifecycle_create: Optional[LifecycleCreateSettingObject] = Field(default=None, alias="lifecycleCreate")
     __properties: ClassVar[List[str]] = ["lifecycleCreate"]
 
     model_config = ConfigDict(

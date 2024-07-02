@@ -22,7 +22,7 @@ print(WebAuthnUserFactor.to_json())
 # convert the object into a dict
 web_authn_user_factor_dict = web_authn_user_factor_instance.to_dict()
 # create an instance of WebAuthnUserFactor from a dict
-web_authn_user_factor_form_dict = web_authn_user_factor.from_dict(web_authn_user_factor_dict)
+web_authn_user_factor_from_dict = WebAuthnUserFactor.from_dict(web_authn_user_factor_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

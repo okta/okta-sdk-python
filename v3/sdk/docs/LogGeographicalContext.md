@@ -26,7 +26,7 @@ print(LogGeographicalContext.to_json())
 # convert the object into a dict
 log_geographical_context_dict = log_geographical_context_instance.to_dict()
 # create an instance of LogGeographicalContext from a dict
-log_geographical_context_form_dict = log_geographical_context.from_dict(log_geographical_context_dict)
+log_geographical_context_from_dict = LogGeographicalContext.from_dict(log_geographical_context_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

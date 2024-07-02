@@ -22,7 +22,7 @@ print(OpenIdConnectApplicationSettingsClientKeys.to_json())
 # convert the object into a dict
 open_id_connect_application_settings_client_keys_dict = open_id_connect_application_settings_client_keys_instance.to_dict()
 # create an instance of OpenIdConnectApplicationSettingsClientKeys from a dict
-open_id_connect_application_settings_client_keys_form_dict = open_id_connect_application_settings_client_keys.from_dict(open_id_connect_application_settings_client_keys_dict)
+open_id_connect_application_settings_client_keys_from_dict = OpenIdConnectApplicationSettingsClientKeys.from_dict(open_id_connect_application_settings_client_keys_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

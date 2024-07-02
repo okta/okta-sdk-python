@@ -17,11 +17,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from typing_extensions import Annotated
-from pydantic import Field, StrictBytes, StrictStr, conint, conlist, validator
-
+from pydantic import Field, StrictBytes, StrictStr, field_validator
 from typing import List, Optional, Union
-
+from typing_extensions import Annotated
 from openapi_client.models.brand import Brand
 from openapi_client.models.brand_request import BrandRequest
 from openapi_client.models.brand_with_embedded import BrandWithEmbedded
@@ -61,9 +59,9 @@ class CustomizationApi:
     @validate_call
     def create_brand(
         self,
-        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
+        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
         after: Annotated[Optional[StrictStr], Field(description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information.")] = None,
-        limit: Annotated[Optional[conint(strict=True, le=200, ge=1)], Field(description="A limit on the number of objects to return")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="A limit on the number of objects to return")] = None,
         q: Annotated[Optional[StrictStr], Field(description="Searches the records for matching value")] = None,
         create_brand_request: Optional[CreateBrandRequest] = None,
         _request_timeout: Union[
@@ -147,9 +145,9 @@ class CustomizationApi:
     @validate_call
     def create_brand_with_http_info(
         self,
-        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
+        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
         after: Annotated[Optional[StrictStr], Field(description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information.")] = None,
-        limit: Annotated[Optional[conint(strict=True, le=200, ge=1)], Field(description="A limit on the number of objects to return")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="A limit on the number of objects to return")] = None,
         q: Annotated[Optional[StrictStr], Field(description="Searches the records for matching value")] = None,
         create_brand_request: Optional[CreateBrandRequest] = None,
         _request_timeout: Union[
@@ -233,9 +231,9 @@ class CustomizationApi:
     @validate_call
     def create_brand_without_preload_content(
         self,
-        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
+        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
         after: Annotated[Optional[StrictStr], Field(description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information.")] = None,
-        limit: Annotated[Optional[conint(strict=True, le=200, ge=1)], Field(description="A limit on the number of objects to return")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="A limit on the number of objects to return")] = None,
         q: Annotated[Optional[StrictStr], Field(description="Searches the records for matching value")] = None,
         create_brand_request: Optional[CreateBrandRequest] = None,
         _request_timeout: Union[
@@ -335,7 +333,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -411,8 +409,8 @@ class CustomizationApi:
     @validate_call
     def create_email_customization(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
         instance: Optional[EmailCustomization] = None,
         _request_timeout: Union[
             None,
@@ -491,8 +489,8 @@ class CustomizationApi:
     @validate_call
     def create_email_customization_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
         instance: Optional[EmailCustomization] = None,
         _request_timeout: Union[
             None,
@@ -571,8 +569,8 @@ class CustomizationApi:
     @validate_call
     def create_email_customization_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
         instance: Optional[EmailCustomization] = None,
         _request_timeout: Union[
             None,
@@ -664,7 +662,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -728,8 +726,8 @@ class CustomizationApi:
     @validate_call
     def delete_all_customizations(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -802,8 +800,8 @@ class CustomizationApi:
     @validate_call
     def delete_all_customizations_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -876,8 +874,8 @@ class CustomizationApi:
     @validate_call
     def delete_all_customizations_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -962,7 +960,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1011,8 +1009,8 @@ class CustomizationApi:
     @validate_call
     def delete_brand(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1086,8 +1084,8 @@ class CustomizationApi:
     @validate_call
     def delete_brand_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1161,8 +1159,8 @@ class CustomizationApi:
     @validate_call
     def delete_brand_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1249,7 +1247,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1300,8 +1298,8 @@ class CustomizationApi:
     @validate_call
     def delete_brand_theme_background_image(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        theme_id: Annotated[StrictStr, Field(..., description="The ID of the theme")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1374,8 +1372,8 @@ class CustomizationApi:
     @validate_call
     def delete_brand_theme_background_image_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        theme_id: Annotated[StrictStr, Field(..., description="The ID of the theme")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1448,8 +1446,8 @@ class CustomizationApi:
     @validate_call
     def delete_brand_theme_background_image_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        theme_id: Annotated[StrictStr, Field(..., description="The ID of the theme")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1534,7 +1532,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1583,8 +1581,8 @@ class CustomizationApi:
     @validate_call
     def delete_brand_theme_favicon(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        theme_id: Annotated[StrictStr, Field(..., description="The ID of the theme")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1657,8 +1655,8 @@ class CustomizationApi:
     @validate_call
     def delete_brand_theme_favicon_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        theme_id: Annotated[StrictStr, Field(..., description="The ID of the theme")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1731,8 +1729,8 @@ class CustomizationApi:
     @validate_call
     def delete_brand_theme_favicon_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        theme_id: Annotated[StrictStr, Field(..., description="The ID of the theme")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1817,7 +1815,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1866,8 +1864,8 @@ class CustomizationApi:
     @validate_call
     def delete_brand_theme_logo(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        theme_id: Annotated[StrictStr, Field(..., description="The ID of the theme")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1940,8 +1938,8 @@ class CustomizationApi:
     @validate_call
     def delete_brand_theme_logo_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        theme_id: Annotated[StrictStr, Field(..., description="The ID of the theme")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2014,8 +2012,8 @@ class CustomizationApi:
     @validate_call
     def delete_brand_theme_logo_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        theme_id: Annotated[StrictStr, Field(..., description="The ID of the theme")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2100,7 +2098,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2149,7 +2147,7 @@ class CustomizationApi:
     @validate_call
     def delete_customized_error_page(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2219,7 +2217,7 @@ class CustomizationApi:
     @validate_call
     def delete_customized_error_page_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2289,7 +2287,7 @@ class CustomizationApi:
     @validate_call
     def delete_customized_error_page_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2370,7 +2368,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2417,7 +2415,7 @@ class CustomizationApi:
     @validate_call
     def delete_customized_sign_in_page(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2487,7 +2485,7 @@ class CustomizationApi:
     @validate_call
     def delete_customized_sign_in_page_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2557,7 +2555,7 @@ class CustomizationApi:
     @validate_call
     def delete_customized_sign_in_page_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2638,7 +2636,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2685,9 +2683,9 @@ class CustomizationApi:
     @validate_call
     def delete_email_customization(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
-        customization_id: Annotated[StrictStr, Field(..., description="The ID of the email customization")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
+        customization_id: Annotated[StrictStr, Field(description="The ID of the email customization")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2764,9 +2762,9 @@ class CustomizationApi:
     @validate_call
     def delete_email_customization_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
-        customization_id: Annotated[StrictStr, Field(..., description="The ID of the email customization")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
+        customization_id: Annotated[StrictStr, Field(description="The ID of the email customization")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2843,9 +2841,9 @@ class CustomizationApi:
     @validate_call
     def delete_email_customization_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
-        customization_id: Annotated[StrictStr, Field(..., description="The ID of the email customization")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
+        customization_id: Annotated[StrictStr, Field(description="The ID of the email customization")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2935,7 +2933,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2986,7 +2984,7 @@ class CustomizationApi:
     @validate_call
     def delete_preview_error_page(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3056,7 +3054,7 @@ class CustomizationApi:
     @validate_call
     def delete_preview_error_page_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3126,7 +3124,7 @@ class CustomizationApi:
     @validate_call
     def delete_preview_error_page_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3207,7 +3205,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -3254,7 +3252,7 @@ class CustomizationApi:
     @validate_call
     def delete_preview_sign_in_page(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3324,7 +3322,7 @@ class CustomizationApi:
     @validate_call
     def delete_preview_sign_in_page_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3394,7 +3392,7 @@ class CustomizationApi:
     @validate_call
     def delete_preview_sign_in_page_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3475,7 +3473,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -3522,8 +3520,8 @@ class CustomizationApi:
     @validate_call
     def get_brand(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3596,8 +3594,8 @@ class CustomizationApi:
     @validate_call
     def get_brand_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3670,8 +3668,8 @@ class CustomizationApi:
     @validate_call
     def get_brand_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3757,7 +3755,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -3808,8 +3806,8 @@ class CustomizationApi:
     @validate_call
     def get_brand_theme(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        theme_id: Annotated[StrictStr, Field(..., description="The ID of the theme")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3882,8 +3880,8 @@ class CustomizationApi:
     @validate_call
     def get_brand_theme_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        theme_id: Annotated[StrictStr, Field(..., description="The ID of the theme")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3956,8 +3954,8 @@ class CustomizationApi:
     @validate_call
     def get_brand_theme_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        theme_id: Annotated[StrictStr, Field(..., description="The ID of the theme")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4042,7 +4040,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -4091,9 +4089,9 @@ class CustomizationApi:
     @validate_call
     def get_customization_preview(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
-        customization_id: Annotated[StrictStr, Field(..., description="The ID of the email customization")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
+        customization_id: Annotated[StrictStr, Field(description="The ID of the email customization")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4169,9 +4167,9 @@ class CustomizationApi:
     @validate_call
     def get_customization_preview_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
-        customization_id: Annotated[StrictStr, Field(..., description="The ID of the email customization")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
+        customization_id: Annotated[StrictStr, Field(description="The ID of the email customization")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4247,9 +4245,9 @@ class CustomizationApi:
     @validate_call
     def get_customization_preview_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
-        customization_id: Annotated[StrictStr, Field(..., description="The ID of the email customization")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
+        customization_id: Annotated[StrictStr, Field(description="The ID of the email customization")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4338,7 +4336,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -4389,7 +4387,7 @@ class CustomizationApi:
     @validate_call
     def get_customized_error_page(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4459,7 +4457,7 @@ class CustomizationApi:
     @validate_call
     def get_customized_error_page_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4529,7 +4527,7 @@ class CustomizationApi:
     @validate_call
     def get_customized_error_page_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4610,7 +4608,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -4657,7 +4655,7 @@ class CustomizationApi:
     @validate_call
     def get_customized_sign_in_page(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4727,7 +4725,7 @@ class CustomizationApi:
     @validate_call
     def get_customized_sign_in_page_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4797,7 +4795,7 @@ class CustomizationApi:
     @validate_call
     def get_customized_sign_in_page_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4878,7 +4876,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -4925,7 +4923,7 @@ class CustomizationApi:
     @validate_call
     def get_default_error_page(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4995,7 +4993,7 @@ class CustomizationApi:
     @validate_call
     def get_default_error_page_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5065,7 +5063,7 @@ class CustomizationApi:
     @validate_call
     def get_default_error_page_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5146,7 +5144,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -5193,7 +5191,7 @@ class CustomizationApi:
     @validate_call
     def get_default_sign_in_page(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5263,7 +5261,7 @@ class CustomizationApi:
     @validate_call
     def get_default_sign_in_page_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5333,7 +5331,7 @@ class CustomizationApi:
     @validate_call
     def get_default_sign_in_page_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5414,7 +5412,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -5461,9 +5459,9 @@ class CustomizationApi:
     @validate_call
     def get_email_customization(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
-        customization_id: Annotated[StrictStr, Field(..., description="The ID of the email customization")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
+        customization_id: Annotated[StrictStr, Field(description="The ID of the email customization")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5539,9 +5537,9 @@ class CustomizationApi:
     @validate_call
     def get_email_customization_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
-        customization_id: Annotated[StrictStr, Field(..., description="The ID of the email customization")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
+        customization_id: Annotated[StrictStr, Field(description="The ID of the email customization")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5617,9 +5615,9 @@ class CustomizationApi:
     @validate_call
     def get_email_customization_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
-        customization_id: Annotated[StrictStr, Field(..., description="The ID of the email customization")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
+        customization_id: Annotated[StrictStr, Field(description="The ID of the email customization")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5708,7 +5706,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -5759,8 +5757,8 @@ class CustomizationApi:
     @validate_call
     def get_email_default_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
         language: Annotated[Optional[StrictStr], Field(description="The language to use for the email. Defaults to the current user's language if unspecified.")] = None,
         _request_timeout: Union[
             None,
@@ -5837,8 +5835,8 @@ class CustomizationApi:
     @validate_call
     def get_email_default_content_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
         language: Annotated[Optional[StrictStr], Field(description="The language to use for the email. Defaults to the current user's language if unspecified.")] = None,
         _request_timeout: Union[
             None,
@@ -5915,8 +5913,8 @@ class CustomizationApi:
     @validate_call
     def get_email_default_content_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
         language: Annotated[Optional[StrictStr], Field(description="The language to use for the email. Defaults to the current user's language if unspecified.")] = None,
         _request_timeout: Union[
             None,
@@ -6006,7 +6004,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -6059,8 +6057,8 @@ class CustomizationApi:
     @validate_call
     def get_email_default_preview(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
         language: Annotated[Optional[StrictStr], Field(description="The language to use for the email. Defaults to the current user's language if unspecified.")] = None,
         _request_timeout: Union[
             None,
@@ -6137,8 +6135,8 @@ class CustomizationApi:
     @validate_call
     def get_email_default_preview_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
         language: Annotated[Optional[StrictStr], Field(description="The language to use for the email. Defaults to the current user's language if unspecified.")] = None,
         _request_timeout: Union[
             None,
@@ -6215,8 +6213,8 @@ class CustomizationApi:
     @validate_call
     def get_email_default_preview_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
         language: Annotated[Optional[StrictStr], Field(description="The language to use for the email. Defaults to the current user's language if unspecified.")] = None,
         _request_timeout: Union[
             None,
@@ -6306,7 +6304,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -6359,8 +6357,8 @@ class CustomizationApi:
     @validate_call
     def get_email_settings(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6433,8 +6431,8 @@ class CustomizationApi:
     @validate_call
     def get_email_settings_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6507,8 +6505,8 @@ class CustomizationApi:
     @validate_call
     def get_email_settings_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6593,7 +6591,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -6642,9 +6640,9 @@ class CustomizationApi:
     @validate_call
     def get_email_template(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
-        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
+        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6720,9 +6718,9 @@ class CustomizationApi:
     @validate_call
     def get_email_template_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
-        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
+        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6798,9 +6796,9 @@ class CustomizationApi:
     @validate_call
     def get_email_template_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
-        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
+        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -6890,7 +6888,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -6943,8 +6941,8 @@ class CustomizationApi:
     @validate_call
     def get_error_page(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7017,8 +7015,8 @@ class CustomizationApi:
     @validate_call
     def get_error_page_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7091,8 +7089,8 @@ class CustomizationApi:
     @validate_call
     def get_error_page_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7178,7 +7176,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -7229,7 +7227,7 @@ class CustomizationApi:
     @validate_call
     def get_preview_error_page(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7299,7 +7297,7 @@ class CustomizationApi:
     @validate_call
     def get_preview_error_page_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7369,7 +7367,7 @@ class CustomizationApi:
     @validate_call
     def get_preview_error_page_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7450,7 +7448,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -7497,7 +7495,7 @@ class CustomizationApi:
     @validate_call
     def get_preview_sign_in_page(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7567,7 +7565,7 @@ class CustomizationApi:
     @validate_call
     def get_preview_sign_in_page_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7637,7 +7635,7 @@ class CustomizationApi:
     @validate_call
     def get_preview_sign_in_page_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7718,7 +7716,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -7765,8 +7763,8 @@ class CustomizationApi:
     @validate_call
     def get_sign_in_page(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7839,8 +7837,8 @@ class CustomizationApi:
     @validate_call
     def get_sign_in_page_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -7913,8 +7911,8 @@ class CustomizationApi:
     @validate_call
     def get_sign_in_page_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8000,7 +7998,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -8051,7 +8049,7 @@ class CustomizationApi:
     @validate_call
     def get_sign_out_page_settings(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8121,7 +8119,7 @@ class CustomizationApi:
     @validate_call
     def get_sign_out_page_settings_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8191,7 +8189,7 @@ class CustomizationApi:
     @validate_call
     def get_sign_out_page_settings_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8272,7 +8270,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -8319,7 +8317,7 @@ class CustomizationApi:
     @validate_call
     def list_all_sign_in_widget_versions(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8389,7 +8387,7 @@ class CustomizationApi:
     @validate_call
     def list_all_sign_in_widget_versions_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8459,7 +8457,7 @@ class CustomizationApi:
     @validate_call
     def list_all_sign_in_widget_versions_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8540,7 +8538,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -8587,7 +8585,7 @@ class CustomizationApi:
     @validate_call
     def list_brand_domains(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8657,7 +8655,7 @@ class CustomizationApi:
     @validate_call
     def list_brand_domains_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8727,7 +8725,7 @@ class CustomizationApi:
     @validate_call
     def list_brand_domains_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8808,7 +8806,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -8855,7 +8853,7 @@ class CustomizationApi:
     @validate_call
     def list_brand_themes(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8925,7 +8923,7 @@ class CustomizationApi:
     @validate_call
     def list_brand_themes_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -8995,7 +8993,7 @@ class CustomizationApi:
     @validate_call
     def list_brand_themes_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9076,7 +9074,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -9123,9 +9121,9 @@ class CustomizationApi:
     @validate_call
     def list_brands(
         self,
-        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
+        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
         after: Annotated[Optional[StrictStr], Field(description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information.")] = None,
-        limit: Annotated[Optional[conint(strict=True, le=200, ge=1)], Field(description="A limit on the number of objects to return")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="A limit on the number of objects to return")] = None,
         q: Annotated[Optional[StrictStr], Field(description="Searches the records for matching value")] = None,
         _request_timeout: Union[
             None,
@@ -9204,9 +9202,9 @@ class CustomizationApi:
     @validate_call
     def list_brands_with_http_info(
         self,
-        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
+        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
         after: Annotated[Optional[StrictStr], Field(description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information.")] = None,
-        limit: Annotated[Optional[conint(strict=True, le=200, ge=1)], Field(description="A limit on the number of objects to return")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="A limit on the number of objects to return")] = None,
         q: Annotated[Optional[StrictStr], Field(description="Searches the records for matching value")] = None,
         _request_timeout: Union[
             None,
@@ -9285,9 +9283,9 @@ class CustomizationApi:
     @validate_call
     def list_brands_without_preload_content(
         self,
-        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
+        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
         after: Annotated[Optional[StrictStr], Field(description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information.")] = None,
-        limit: Annotated[Optional[conint(strict=True, le=200, ge=1)], Field(description="A limit on the number of objects to return")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="A limit on the number of objects to return")] = None,
         q: Annotated[Optional[StrictStr], Field(description="Searches the records for matching value")] = None,
         _request_timeout: Union[
             None,
@@ -9381,7 +9379,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -9442,10 +9440,10 @@ class CustomizationApi:
     @validate_call
     def list_email_customizations(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
         after: Annotated[Optional[StrictStr], Field(description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information.")] = None,
-        limit: Annotated[Optional[conint(strict=True, le=200, ge=1)], Field(description="A limit on the number of objects to return")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="A limit on the number of objects to return")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9524,10 +9522,10 @@ class CustomizationApi:
     @validate_call
     def list_email_customizations_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
         after: Annotated[Optional[StrictStr], Field(description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information.")] = None,
-        limit: Annotated[Optional[conint(strict=True, le=200, ge=1)], Field(description="A limit on the number of objects to return")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="A limit on the number of objects to return")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9606,10 +9604,10 @@ class CustomizationApi:
     @validate_call
     def list_email_customizations_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
         after: Annotated[Optional[StrictStr], Field(description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information.")] = None,
-        limit: Annotated[Optional[conint(strict=True, le=200, ge=1)], Field(description="A limit on the number of objects to return")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="A limit on the number of objects to return")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9702,7 +9700,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -9759,10 +9757,10 @@ class CustomizationApi:
     @validate_call
     def list_email_templates(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         after: Annotated[Optional[StrictStr], Field(description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information.")] = None,
-        limit: Annotated[Optional[conint(strict=True, le=200, ge=1)], Field(description="A limit on the number of objects to return")] = None,
-        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="A limit on the number of objects to return")] = None,
+        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9841,10 +9839,10 @@ class CustomizationApi:
     @validate_call
     def list_email_templates_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         after: Annotated[Optional[StrictStr], Field(description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information.")] = None,
-        limit: Annotated[Optional[conint(strict=True, le=200, ge=1)], Field(description="A limit on the number of objects to return")] = None,
-        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="A limit on the number of objects to return")] = None,
+        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -9923,10 +9921,10 @@ class CustomizationApi:
     @validate_call
     def list_email_templates_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         after: Annotated[Optional[StrictStr], Field(description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information.")] = None,
-        limit: Annotated[Optional[conint(strict=True, le=200, ge=1)], Field(description="A limit on the number of objects to return")] = None,
-        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="A limit on the number of objects to return")] = None,
+        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10020,7 +10018,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -10079,9 +10077,9 @@ class CustomizationApi:
     @validate_call
     def replace_brand(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         brand: BrandRequest,
-        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
+        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10158,9 +10156,9 @@ class CustomizationApi:
     @validate_call
     def replace_brand_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         brand: BrandRequest,
-        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
+        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10237,9 +10235,9 @@ class CustomizationApi:
     @validate_call
     def replace_brand_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         brand: BrandRequest,
-        expand: Annotated[Optional[conlist(StrictStr)], Field(description="Specifies additional metadata to be included in the response")] = None,
+        expand: Annotated[Optional[List[StrictStr]], Field(description="Specifies additional metadata to be included in the response")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -10330,7 +10328,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -10396,8 +10394,8 @@ class CustomizationApi:
     @validate_call
     def replace_brand_theme(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        theme_id: Annotated[StrictStr, Field(..., description="The ID of the theme")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
         theme: Theme,
         _request_timeout: Union[
             None,
@@ -10475,8 +10473,8 @@ class CustomizationApi:
     @validate_call
     def replace_brand_theme_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        theme_id: Annotated[StrictStr, Field(..., description="The ID of the theme")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
         theme: Theme,
         _request_timeout: Union[
             None,
@@ -10554,8 +10552,8 @@ class CustomizationApi:
     @validate_call
     def replace_brand_theme_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        theme_id: Annotated[StrictStr, Field(..., description="The ID of the theme")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
         theme: Theme,
         _request_timeout: Union[
             None,
@@ -10646,7 +10644,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -10710,7 +10708,7 @@ class CustomizationApi:
     @validate_call
     def replace_customized_error_page(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         error_page: ErrorPage,
         _request_timeout: Union[
             None,
@@ -10785,7 +10783,7 @@ class CustomizationApi:
     @validate_call
     def replace_customized_error_page_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         error_page: ErrorPage,
         _request_timeout: Union[
             None,
@@ -10860,7 +10858,7 @@ class CustomizationApi:
     @validate_call
     def replace_customized_error_page_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         error_page: ErrorPage,
         _request_timeout: Union[
             None,
@@ -10947,7 +10945,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -11009,7 +11007,7 @@ class CustomizationApi:
     @validate_call
     def replace_customized_sign_in_page(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         sign_in_page: SignInPage,
         _request_timeout: Union[
             None,
@@ -11084,7 +11082,7 @@ class CustomizationApi:
     @validate_call
     def replace_customized_sign_in_page_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         sign_in_page: SignInPage,
         _request_timeout: Union[
             None,
@@ -11159,7 +11157,7 @@ class CustomizationApi:
     @validate_call
     def replace_customized_sign_in_page_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         sign_in_page: SignInPage,
         _request_timeout: Union[
             None,
@@ -11246,7 +11244,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -11308,9 +11306,9 @@ class CustomizationApi:
     @validate_call
     def replace_email_customization(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
-        customization_id: Annotated[StrictStr, Field(..., description="The ID of the email customization")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
+        customization_id: Annotated[StrictStr, Field(description="The ID of the email customization")],
         instance: Annotated[Optional[EmailCustomization], Field(description="Request")] = None,
         _request_timeout: Union[
             None,
@@ -11392,9 +11390,9 @@ class CustomizationApi:
     @validate_call
     def replace_email_customization_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
-        customization_id: Annotated[StrictStr, Field(..., description="The ID of the email customization")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
+        customization_id: Annotated[StrictStr, Field(description="The ID of the email customization")],
         instance: Annotated[Optional[EmailCustomization], Field(description="Request")] = None,
         _request_timeout: Union[
             None,
@@ -11476,9 +11474,9 @@ class CustomizationApi:
     @validate_call
     def replace_email_customization_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
-        customization_id: Annotated[StrictStr, Field(..., description="The ID of the email customization")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
+        customization_id: Annotated[StrictStr, Field(description="The ID of the email customization")],
         instance: Annotated[Optional[EmailCustomization], Field(description="Request")] = None,
         _request_timeout: Union[
             None,
@@ -11574,7 +11572,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -11640,8 +11638,8 @@ class CustomizationApi:
     @validate_call
     def replace_email_settings(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
         email_settings: Optional[EmailSettings] = None,
         _request_timeout: Union[
             None,
@@ -11720,8 +11718,8 @@ class CustomizationApi:
     @validate_call
     def replace_email_settings_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
         email_settings: Optional[EmailSettings] = None,
         _request_timeout: Union[
             None,
@@ -11800,8 +11798,8 @@ class CustomizationApi:
     @validate_call
     def replace_email_settings_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
         email_settings: Optional[EmailSettings] = None,
         _request_timeout: Union[
             None,
@@ -11893,7 +11891,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -11957,7 +11955,7 @@ class CustomizationApi:
     @validate_call
     def replace_preview_error_page(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         error_page: ErrorPage,
         _request_timeout: Union[
             None,
@@ -12032,7 +12030,7 @@ class CustomizationApi:
     @validate_call
     def replace_preview_error_page_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         error_page: ErrorPage,
         _request_timeout: Union[
             None,
@@ -12107,7 +12105,7 @@ class CustomizationApi:
     @validate_call
     def replace_preview_error_page_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         error_page: ErrorPage,
         _request_timeout: Union[
             None,
@@ -12194,7 +12192,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -12256,7 +12254,7 @@ class CustomizationApi:
     @validate_call
     def replace_preview_sign_in_page(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         sign_in_page: SignInPage,
         _request_timeout: Union[
             None,
@@ -12331,7 +12329,7 @@ class CustomizationApi:
     @validate_call
     def replace_preview_sign_in_page_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         sign_in_page: SignInPage,
         _request_timeout: Union[
             None,
@@ -12406,7 +12404,7 @@ class CustomizationApi:
     @validate_call
     def replace_preview_sign_in_page_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         sign_in_page: SignInPage,
         _request_timeout: Union[
             None,
@@ -12493,7 +12491,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -12555,7 +12553,7 @@ class CustomizationApi:
     @validate_call
     def replace_sign_out_page_settings(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         hosted_page: HostedPage,
         _request_timeout: Union[
             None,
@@ -12630,7 +12628,7 @@ class CustomizationApi:
     @validate_call
     def replace_sign_out_page_settings_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         hosted_page: HostedPage,
         _request_timeout: Union[
             None,
@@ -12705,7 +12703,7 @@ class CustomizationApi:
     @validate_call
     def replace_sign_out_page_settings_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
         hosted_page: HostedPage,
         _request_timeout: Union[
             None,
@@ -12792,7 +12790,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -12854,8 +12852,8 @@ class CustomizationApi:
     @validate_call
     def send_test_email(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
         language: Annotated[Optional[StrictStr], Field(description="The language to use for the email. Defaults to the current user's language if unspecified.")] = None,
         _request_timeout: Union[
             None,
@@ -12932,8 +12930,8 @@ class CustomizationApi:
     @validate_call
     def send_test_email_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
         language: Annotated[Optional[StrictStr], Field(description="The language to use for the email. Defaults to the current user's language if unspecified.")] = None,
         _request_timeout: Union[
             None,
@@ -13010,8 +13008,8 @@ class CustomizationApi:
     @validate_call
     def send_test_email_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        template_name: Annotated[StrictStr, Field(..., description="The name of the email template")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        template_name: Annotated[StrictStr, Field(description="The name of the email template")],
         language: Annotated[Optional[StrictStr], Field(description="The language to use for the email. Defaults to the current user's language if unspecified.")] = None,
         _request_timeout: Union[
             None,
@@ -13101,7 +13099,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -13154,8 +13152,8 @@ class CustomizationApi:
     @validate_call
     def upload_brand_theme_background_image(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        theme_id: Annotated[StrictStr, Field(..., description="The ID of the theme")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
         file: Union[StrictBytes, StrictStr],
         _request_timeout: Union[
             None,
@@ -13233,8 +13231,8 @@ class CustomizationApi:
     @validate_call
     def upload_brand_theme_background_image_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        theme_id: Annotated[StrictStr, Field(..., description="The ID of the theme")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
         file: Union[StrictBytes, StrictStr],
         _request_timeout: Union[
             None,
@@ -13312,8 +13310,8 @@ class CustomizationApi:
     @validate_call
     def upload_brand_theme_background_image_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        theme_id: Annotated[StrictStr, Field(..., description="The ID of the theme")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
         file: Union[StrictBytes, StrictStr],
         _request_timeout: Union[
             None,
@@ -13404,7 +13402,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -13468,8 +13466,8 @@ class CustomizationApi:
     @validate_call
     def upload_brand_theme_favicon(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        theme_id: Annotated[StrictStr, Field(..., description="The ID of the theme")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
         file: Union[StrictBytes, StrictStr],
         _request_timeout: Union[
             None,
@@ -13547,8 +13545,8 @@ class CustomizationApi:
     @validate_call
     def upload_brand_theme_favicon_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        theme_id: Annotated[StrictStr, Field(..., description="The ID of the theme")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
         file: Union[StrictBytes, StrictStr],
         _request_timeout: Union[
             None,
@@ -13626,8 +13624,8 @@ class CustomizationApi:
     @validate_call
     def upload_brand_theme_favicon_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        theme_id: Annotated[StrictStr, Field(..., description="The ID of the theme")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
         file: Union[StrictBytes, StrictStr],
         _request_timeout: Union[
             None,
@@ -13718,7 +13716,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -13782,8 +13780,8 @@ class CustomizationApi:
     @validate_call
     def upload_brand_theme_logo(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        theme_id: Annotated[StrictStr, Field(..., description="The ID of the theme")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
         file: Union[StrictBytes, StrictStr],
         _request_timeout: Union[
             None,
@@ -13861,8 +13859,8 @@ class CustomizationApi:
     @validate_call
     def upload_brand_theme_logo_with_http_info(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        theme_id: Annotated[StrictStr, Field(..., description="The ID of the theme")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
         file: Union[StrictBytes, StrictStr],
         _request_timeout: Union[
             None,
@@ -13940,8 +13938,8 @@ class CustomizationApi:
     @validate_call
     def upload_brand_theme_logo_without_preload_content(
         self,
-        brand_id: Annotated[StrictStr, Field(..., description="The ID of the brand")],
-        theme_id: Annotated[StrictStr, Field(..., description="The ID of the theme")],
+        brand_id: Annotated[StrictStr, Field(description="The ID of the brand")],
+        theme_id: Annotated[StrictStr, Field(description="The ID of the theme")],
         file: Union[StrictBytes, StrictStr],
         _request_timeout: Union[
             None,
@@ -14032,7 +14030,7 @@ class CustomizationApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters

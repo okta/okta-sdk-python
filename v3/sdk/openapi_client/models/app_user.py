@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.app_user_credentials import AppUserCredentials
 from openapi_client.models.app_user_status import AppUserStatus
 from openapi_client.models.app_user_sync_state import AppUserSyncState
@@ -29,20 +32,20 @@ class AppUser(BaseModel):
     """
     The App User object defines a user's app-specific profile and credentials for an app.
     """ # noqa: E501
-    created: datetime = Field(..., description="Timestamp when the App User object was created")
+    created: datetime = Field(description="Timestamp when the App User object was created")
     credentials: Optional[AppUserCredentials] = None
-    external_id: Optional[StrictStr] = Field(None, alias="externalId", description="The ID of the user in the target app that's linked to the Okta App User object. This value is the native app-specific identifier or primary key for the user in the target app.  The `externalId` is set during import when the user is confirmed (reconciled) or during provisioning when the user has been successfully created in the target app. This value isn't populated for SSO app assignments (for example, SAML or SWA) because it isn't synchronized with a target app.")
-    id: Optional[StrictStr] = Field(None, description="Unique identifier of the App User object (only required for apps with `signOnMode` or authentication schemes that don't require credentials)")
-    last_sync: Optional[datetime] = Field(None, alias="lastSync", description="Timestamp of the last synchronization operation. This value is only updated for apps with the `IMPORT_PROFILE_UPDATES` or `PUSH PROFILE_UPDATES` feature.")
-    last_updated: datetime = Field(..., alias="lastUpdated", description="Timestamp when App User was last updated")
-    password_changed: Optional[datetime] = Field(None, alias="passwordChanged", description="Timestamp when the App User password was last changed")
-    profile: Optional[Dict[str, Dict[str, Any]]] = Field(None, description="App user profiles are app-specific and can be customized by the Profile Editor in the Admin Console. SSO apps typically don't support app user profiles, while apps with user provisioning features have app-specific profiles. Properties that are visible in the Admin Console for an app assignment can also be assigned through the API. Some properties are reference properties that are imported from the target app and can't be configured.")
-    scope: StrictStr = Field(..., description="Toggles the assignment between user or group scope")
-    status: AppUserStatus = Field(...)
-    status_changed: datetime = Field(..., alias="statusChanged", description="Timestamp when the App User status was last changed")
-    sync_state: Optional[AppUserSyncState] = Field(None, alias="syncState")
-    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(None, alias="_embedded", description="Embedded resources related to the App User using the [JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification")
-    links: LinksAppAndUser = Field(..., alias="_links")
+    external_id: Optional[StrictStr] = Field(default=None, description="The ID of the user in the target app that's linked to the Okta App User object. This value is the native app-specific identifier or primary key for the user in the target app.  The `externalId` is set during import when the user is confirmed (reconciled) or during provisioning when the user has been successfully created in the target app. This value isn't populated for SSO app assignments (for example, SAML or SWA) because it isn't synchronized with a target app.", alias="externalId")
+    id: Optional[StrictStr] = Field(default=None, description="Unique identifier of the App User object (only required for apps with `signOnMode` or authentication schemes that don't require credentials)")
+    last_sync: Optional[datetime] = Field(default=None, description="Timestamp of the last synchronization operation. This value is only updated for apps with the `IMPORT_PROFILE_UPDATES` or `PUSH PROFILE_UPDATES` feature.", alias="lastSync")
+    last_updated: datetime = Field(description="Timestamp when App User was last updated", alias="lastUpdated")
+    password_changed: Optional[datetime] = Field(default=None, description="Timestamp when the App User password was last changed", alias="passwordChanged")
+    profile: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, description="App user profiles are app-specific and can be customized by the Profile Editor in the Admin Console. SSO apps typically don't support app user profiles, while apps with user provisioning features have app-specific profiles. Properties that are visible in the Admin Console for an app assignment can also be assigned through the API. Some properties are reference properties that are imported from the target app and can't be configured.")
+    scope: StrictStr = Field(description="Toggles the assignment between user or group scope")
+    status: AppUserStatus
+    status_changed: datetime = Field(description="Timestamp when the App User status was last changed", alias="statusChanged")
+    sync_state: Optional[AppUserSyncState] = Field(default=None, alias="syncState")
+    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, description="Embedded resources related to the App User using the [JSON Hypertext Application Language](https://datatracker.ietf.org/doc/html/draft-kelly-json-hal-06) specification", alias="_embedded")
+    links: LinksAppAndUser = Field(alias="_links")
     __properties: ClassVar[List[str]] = ["created", "credentials", "externalId", "id", "lastSync", "lastUpdated", "passwordChanged", "profile", "scope", "status", "statusChanged", "syncState", "_embedded", "_links"]
 
     @field_validator('scope')

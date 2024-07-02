@@ -23,7 +23,7 @@ print(UserSchemaAttributePermission.to_json())
 # convert the object into a dict
 user_schema_attribute_permission_dict = user_schema_attribute_permission_instance.to_dict()
 # create an instance of UserSchemaAttributePermission from a dict
-user_schema_attribute_permission_form_dict = user_schema_attribute_permission.from_dict(user_schema_attribute_permission_dict)
+user_schema_attribute_permission_from_dict = UserSchemaAttributePermission.from_dict(user_schema_attribute_permission_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

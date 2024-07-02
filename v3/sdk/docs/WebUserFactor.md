@@ -22,7 +22,7 @@ print(WebUserFactor.to_json())
 # convert the object into a dict
 web_user_factor_dict = web_user_factor_instance.to_dict()
 # create an instance of WebUserFactor from a dict
-web_user_factor_form_dict = web_user_factor.from_dict(web_user_factor_dict)
+web_user_factor_from_dict = WebUserFactor.from_dict(web_user_factor_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

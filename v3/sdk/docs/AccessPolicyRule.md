@@ -23,7 +23,7 @@ print(AccessPolicyRule.to_json())
 # convert the object into a dict
 access_policy_rule_dict = access_policy_rule_instance.to_dict()
 # create an instance of AccessPolicyRule from a dict
-access_policy_rule_form_dict = access_policy_rule.from_dict(access_policy_rule_dict)
+access_policy_rule_from_dict = AccessPolicyRule.from_dict(access_policy_rule_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

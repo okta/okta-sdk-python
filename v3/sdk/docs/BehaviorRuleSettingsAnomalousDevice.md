@@ -23,7 +23,7 @@ print(BehaviorRuleSettingsAnomalousDevice.to_json())
 # convert the object into a dict
 behavior_rule_settings_anomalous_device_dict = behavior_rule_settings_anomalous_device_instance.to_dict()
 # create an instance of BehaviorRuleSettingsAnomalousDevice from a dict
-behavior_rule_settings_anomalous_device_form_dict = behavior_rule_settings_anomalous_device.from_dict(behavior_rule_settings_anomalous_device_dict)
+behavior_rule_settings_anomalous_device_from_dict = BehaviorRuleSettingsAnomalousDevice.from_dict(behavior_rule_settings_anomalous_device_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

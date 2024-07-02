@@ -17,9 +17,8 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from typing_extensions import Annotated
 from pydantic import Field, StrictStr
-
+from typing_extensions import Annotated
 
 from openapi_client.api_client import ApiClient, RequestSerialized
 from openapi_client.api_response import ApiResponse
@@ -42,7 +41,7 @@ class ApplicationSSOApi:
     @validate_call
     def preview_sam_lmetadata_for_application(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -112,7 +111,7 @@ class ApplicationSSOApi:
     @validate_call
     def preview_sam_lmetadata_for_application_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -182,7 +181,7 @@ class ApplicationSSOApi:
     @validate_call
     def preview_sam_lmetadata_for_application_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -263,7 +262,7 @@ class ApplicationSSOApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters

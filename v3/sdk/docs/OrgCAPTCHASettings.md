@@ -25,7 +25,7 @@ print(OrgCAPTCHASettings.to_json())
 # convert the object into a dict
 org_captcha_settings_dict = org_captcha_settings_instance.to_dict()
 # create an instance of OrgCAPTCHASettings from a dict
-org_captcha_settings_form_dict = org_captcha_settings.from_dict(org_captcha_settings_dict)
+org_captcha_settings_from_dict = OrgCAPTCHASettings.from_dict(org_captcha_settings_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -26,7 +26,7 @@ print(HrefObjectClientLink.to_json())
 # convert the object into a dict
 href_object_client_link_dict = href_object_client_link_instance.to_dict()
 # create an instance of HrefObjectClientLink from a dict
-href_object_client_link_form_dict = href_object_client_link.from_dict(href_object_client_link_dict)
+href_object_client_link_from_dict = HrefObjectClientLink.from_dict(href_object_client_link_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

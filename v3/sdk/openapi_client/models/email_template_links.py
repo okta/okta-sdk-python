@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.href_object import HrefObject
 from openapi_client.models.href_object_self_link import HrefObjectSelfLink
 from typing import Optional, Set
@@ -27,9 +29,9 @@ class EmailTemplateLinks(BaseModel):
     """
     EmailTemplateLinks
     """ # noqa: E501
-    var_self: Optional[HrefObjectSelfLink] = Field(None, alias="self")
+    var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     settings: Optional[HrefObject] = None
-    default_content: Optional[HrefObject] = Field(None, alias="defaultContent")
+    default_content: Optional[HrefObject] = Field(default=None, alias="defaultContent")
     customizations: Optional[HrefObject] = None
     test: Optional[HrefObject] = None
     __properties: ClassVar[List[str]] = ["self", "settings", "defaultContent", "customizations", "test"]

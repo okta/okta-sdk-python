@@ -24,7 +24,7 @@ print(OrgOktaSupportSettingsObj.to_json())
 # convert the object into a dict
 org_okta_support_settings_obj_dict = org_okta_support_settings_obj_instance.to_dict()
 # create an instance of OrgOktaSupportSettingsObj from a dict
-org_okta_support_settings_obj_form_dict = org_okta_support_settings_obj.from_dict(org_okta_support_settings_obj_dict)
+org_okta_support_settings_obj_from_dict = OrgOktaSupportSettingsObj.from_dict(org_okta_support_settings_obj_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

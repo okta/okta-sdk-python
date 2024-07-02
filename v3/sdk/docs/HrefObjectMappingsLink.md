@@ -26,7 +26,7 @@ print(HrefObjectMappingsLink.to_json())
 # convert the object into a dict
 href_object_mappings_link_dict = href_object_mappings_link_instance.to_dict()
 # create an instance of HrefObjectMappingsLink from a dict
-href_object_mappings_link_form_dict = href_object_mappings_link.from_dict(href_object_mappings_link_dict)
+href_object_mappings_link_from_dict = HrefObjectMappingsLink.from_dict(href_object_mappings_link_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

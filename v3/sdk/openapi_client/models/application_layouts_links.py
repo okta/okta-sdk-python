@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.href_object import HrefObject
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,9 +28,9 @@ class ApplicationLayoutsLinks(BaseModel):
     """
     ApplicationLayoutsLinks
     """ # noqa: E501
-    general: Optional[conlist(HrefObject)] = None
-    sign_on: Optional[conlist(HrefObject)] = Field(None, alias="signOn")
-    provisioning: Optional[conlist(HrefObject)] = None
+    general: Optional[List[HrefObject]] = None
+    sign_on: Optional[List[HrefObject]] = Field(default=None, alias="signOn")
+    provisioning: Optional[List[HrefObject]] = None
     __properties: ClassVar[List[str]] = ["general", "signOn", "provisioning"]
 
     model_config = ConfigDict(

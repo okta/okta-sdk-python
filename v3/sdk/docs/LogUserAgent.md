@@ -24,7 +24,7 @@ print(LogUserAgent.to_json())
 # convert the object into a dict
 log_user_agent_dict = log_user_agent_instance.to_dict()
 # create an instance of LogUserAgent from a dict
-log_user_agent_form_dict = log_user_agent.from_dict(log_user_agent_dict)
+log_user_agent_from_dict = LogUserAgent.from_dict(log_user_agent_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

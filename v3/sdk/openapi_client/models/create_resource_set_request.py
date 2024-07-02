@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,9 +27,9 @@ class CreateResourceSetRequest(BaseModel):
     """
     CreateResourceSetRequest
     """ # noqa: E501
-    description: Optional[StrictStr] = Field(None, description="Description of the Resource Set")
-    label: Optional[StrictStr] = Field(None, description="Unique label for the Resource Set")
-    resources: Optional[conlist(StrictStr)] = None
+    description: Optional[StrictStr] = Field(default=None, description="Description of the Resource Set")
+    label: Optional[StrictStr] = Field(default=None, description="Unique label for the Resource Set")
+    resources: Optional[List[StrictStr]] = None
     __properties: ClassVar[List[str]] = ["description", "label", "resources"]
 
     model_config = ConfigDict(

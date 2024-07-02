@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,9 +27,9 @@ class DefaultApp(BaseModel):
     """
     DefaultApp
     """ # noqa: E501
-    app_instance_id: Optional[StrictStr] = Field(None, alias="appInstanceId")
-    app_link_name: Optional[StrictStr] = Field(None, alias="appLinkName")
-    classic_application_uri: Optional[StrictStr] = Field(None, alias="classicApplicationUri")
+    app_instance_id: Optional[StrictStr] = Field(default=None, alias="appInstanceId")
+    app_link_name: Optional[StrictStr] = Field(default=None, alias="appLinkName")
+    classic_application_uri: Optional[StrictStr] = Field(default=None, alias="classicApplicationUri")
     __properties: ClassVar[List[str]] = ["appInstanceId", "appLinkName", "classicApplicationUri"]
 
     model_config = ConfigDict(

@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from importlib import import_module
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from openapi_client.models.links_self import LinksSelf
 from openapi_client.models.provider_type import ProviderType
 from typing import Optional, Set
@@ -33,10 +36,10 @@ class PushProvider(BaseModel):
     PushProvider
     """ # noqa: E501
     id: Optional[StrictStr] = None
-    last_updated_date: Optional[StrictStr] = Field(None, alias="lastUpdatedDate")
-    name: Optional[StrictStr] = Field(None, description="Display name of the push provider")
-    provider_type: Optional[ProviderType] = Field(None, alias="providerType")
-    links: Optional[LinksSelf] = Field(None, alias="_links")
+    last_updated_date: Optional[StrictStr] = Field(default=None, alias="lastUpdatedDate")
+    name: Optional[StrictStr] = Field(default=None, description="Display name of the push provider")
+    provider_type: Optional[ProviderType] = Field(default=None, alias="providerType")
+    links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["id", "lastUpdatedDate", "name", "providerType", "_links"]
 
     model_config = ConfigDict(
@@ -109,9 +112,9 @@ class PushProvider(BaseModel):
         """Create an instance of PushProvider from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
-        if object_type ==  'APNS':
+        if object_type ==  'APNSPushProvider':
             return import_module("openapi_client.models.apns_push_provider").APNSPushProvider.from_dict(obj)
-        if object_type ==  'FCM':
+        if object_type ==  'FCMPushProvider':
             return import_module("openapi_client.models.fcm_push_provider").FCMPushProvider.from_dict(obj)
 
         raise ValueError("PushProvider failed to lookup discriminator value from " +

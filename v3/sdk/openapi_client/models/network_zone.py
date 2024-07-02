@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.network_zone_address import NetworkZoneAddress
 from openapi_client.models.network_zone_links import NetworkZoneLinks
 from openapi_client.models.network_zone_location import NetworkZoneLocation
@@ -31,20 +34,20 @@ class NetworkZone(BaseModel):
     """
     NetworkZone
     """ # noqa: E501
-    asns: Optional[conlist(StrictStr)] = Field(None, description="Dynamic network zone property. array of strings that represent an ASN numeric value")
-    created: Optional[datetime] = Field(None, description="Timestamp when the network zone was created")
-    gateways: Optional[conlist(NetworkZoneAddress)] = Field(None, description="IP network zone property: the IP addresses (range or CIDR form) of this zone. The maximum array length is 150 entries for admin-created IP zones, 1000 entries for IP blocklist zones, and 5000 entries for the default system IP Zone.")
-    id: Optional[StrictStr] = Field(None, description="Unique identifier for the network zone")
-    last_updated: Optional[datetime] = Field(None, alias="lastUpdated", description="Timestamp when the network zone was last modified")
-    locations: Optional[conlist(NetworkZoneLocation)] = Field(None, description="Dynamic network zone property: an array of geolocations of this network zone")
-    name: Optional[StrictStr] = Field(None, description="Unique name for this network zone. Maximum of 128 characters.")
-    proxies: Optional[conlist(NetworkZoneAddress)] = Field(None, description="IP network zone property: the IP addresses (range or CIDR form) that are allowed to forward a request from gateway addresses These proxies are automatically trusted by Threat Insights, and used to identify the client IP of a request. The maximum array length is 150 entries for admin-created zones and 5000 entries for the default system IP Zone.")
-    proxy_type: Optional[StrictStr] = Field(None, alias="proxyType", description="Dynamic network zone property: the proxy type used")
+    asns: Optional[List[StrictStr]] = Field(default=None, description="Dynamic network zone property. array of strings that represent an ASN numeric value")
+    created: Optional[datetime] = Field(default=None, description="Timestamp when the network zone was created")
+    gateways: Optional[List[NetworkZoneAddress]] = Field(default=None, description="IP network zone property: the IP addresses (range or CIDR form) of this zone. The maximum array length is 150 entries for admin-created IP zones, 1000 entries for IP blocklist zones, and 5000 entries for the default system IP Zone.")
+    id: Optional[StrictStr] = Field(default=None, description="Unique identifier for the network zone")
+    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the network zone was last modified", alias="lastUpdated")
+    locations: Optional[List[NetworkZoneLocation]] = Field(default=None, description="Dynamic network zone property: an array of geolocations of this network zone")
+    name: Optional[StrictStr] = Field(default=None, description="Unique name for this network zone. Maximum of 128 characters.")
+    proxies: Optional[List[NetworkZoneAddress]] = Field(default=None, description="IP network zone property: the IP addresses (range or CIDR form) that are allowed to forward a request from gateway addresses These proxies are automatically trusted by Threat Insights, and used to identify the client IP of a request. The maximum array length is 150 entries for admin-created zones and 5000 entries for the default system IP Zone.")
+    proxy_type: Optional[StrictStr] = Field(default=None, description="Dynamic network zone property: the proxy type used", alias="proxyType")
     status: Optional[NetworkZoneStatus] = None
-    system: Optional[StrictBool] = Field(None, description="Indicates if this is a system network zone. For admin-created zones, this is always `false`. The system IP Policy Network Zone (`LegacyIpZone`) is included by default in your Okta org. Notice that `system=true` for the `LegacyIpZone` object. Admin users can modify the name of this default system Zone and can add up to 5000 gateway or proxy IP entries.")
+    system: Optional[StrictBool] = Field(default=None, description="Indicates if this is a system network zone. For admin-created zones, this is always `false`. The system IP Policy Network Zone (`LegacyIpZone`) is included by default in your Okta org. Notice that `system=true` for the `LegacyIpZone` object. Admin users can modify the name of this default system Zone and can add up to 5000 gateway or proxy IP entries.")
     type: Optional[NetworkZoneType] = None
     usage: Optional[NetworkZoneUsage] = None
-    links: Optional[NetworkZoneLinks] = Field(None, alias="_links")
+    links: Optional[NetworkZoneLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["asns", "created", "gateways", "id", "lastUpdated", "locations", "name", "proxies", "proxyType", "status", "system", "type", "usage", "_links"]
 
     @field_validator('proxy_type')

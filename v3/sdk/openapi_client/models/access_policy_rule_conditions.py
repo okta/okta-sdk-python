@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.access_policy_rule_custom_condition import AccessPolicyRuleCustomCondition
 from openapi_client.models.app_and_instance_policy_rule_condition import AppAndInstancePolicyRuleCondition
 from openapi_client.models.app_instance_policy_rule_condition import AppInstancePolicyRuleCondition
@@ -50,27 +52,27 @@ class AccessPolicyRuleConditions(BaseModel):
     """ # noqa: E501
     app: Optional[AppAndInstancePolicyRuleCondition] = None
     apps: Optional[AppInstancePolicyRuleCondition] = None
-    auth_context: Optional[PolicyRuleAuthContextCondition] = Field(None, alias="authContext")
-    auth_provider: Optional[PasswordPolicyAuthenticationProviderCondition] = Field(None, alias="authProvider")
-    before_scheduled_action: Optional[BeforeScheduledActionPolicyRuleCondition] = Field(None, alias="beforeScheduledAction")
+    auth_context: Optional[PolicyRuleAuthContextCondition] = Field(default=None, alias="authContext")
+    auth_provider: Optional[PasswordPolicyAuthenticationProviderCondition] = Field(default=None, alias="authProvider")
+    before_scheduled_action: Optional[BeforeScheduledActionPolicyRuleCondition] = Field(default=None, alias="beforeScheduledAction")
     clients: Optional[ClientPolicyCondition] = None
     context: Optional[ContextPolicyRuleCondition] = None
     device: Optional[DeviceAccessPolicyRuleCondition] = None
-    grant_types: Optional[GrantTypePolicyRuleCondition] = Field(None, alias="grantTypes")
+    grant_types: Optional[GrantTypePolicyRuleCondition] = Field(default=None, alias="grantTypes")
     groups: Optional[GroupPolicyRuleCondition] = None
-    identity_provider: Optional[IdentityProviderPolicyRuleCondition] = Field(None, alias="identityProvider")
-    mdm_enrollment: Optional[MDMEnrollmentPolicyRuleCondition] = Field(None, alias="mdmEnrollment")
+    identity_provider: Optional[IdentityProviderPolicyRuleCondition] = Field(default=None, alias="identityProvider")
+    mdm_enrollment: Optional[MDMEnrollmentPolicyRuleCondition] = Field(default=None, alias="mdmEnrollment")
     network: Optional[PolicyNetworkCondition] = None
     people: Optional[PolicyPeopleCondition] = None
     platform: Optional[PlatformPolicyRuleCondition] = None
     risk: Optional[RiskPolicyRuleCondition] = None
-    risk_score: Optional[RiskScorePolicyRuleCondition] = Field(None, alias="riskScore")
+    risk_score: Optional[RiskScorePolicyRuleCondition] = Field(default=None, alias="riskScore")
     scopes: Optional[OAuth2ScopesMediationPolicyRuleCondition] = None
-    user_identifier: Optional[UserIdentifierPolicyRuleCondition] = Field(None, alias="userIdentifier")
+    user_identifier: Optional[UserIdentifierPolicyRuleCondition] = Field(default=None, alias="userIdentifier")
     users: Optional[UserPolicyRuleCondition] = None
-    user_status: Optional[UserStatusPolicyRuleCondition] = Field(None, alias="userStatus")
-    el_condition: Optional[AccessPolicyRuleCustomCondition] = Field(None, alias="elCondition")
-    user_type: Optional[UserTypeCondition] = Field(None, alias="userType")
+    user_status: Optional[UserStatusPolicyRuleCondition] = Field(default=None, alias="userStatus")
+    el_condition: Optional[AccessPolicyRuleCustomCondition] = Field(default=None, alias="elCondition")
+    user_type: Optional[UserTypeCondition] = Field(default=None, alias="userType")
     __properties: ClassVar[List[str]] = ["app", "apps", "authContext", "authProvider", "beforeScheduledAction", "clients", "context", "device", "grantTypes", "groups", "identityProvider", "mdmEnrollment", "network", "people", "platform", "risk", "riskScore", "scopes", "userIdentifier", "users", "userStatus", "elCondition", "userType"]
 
     model_config = ConfigDict(

@@ -31,7 +31,7 @@ print(AppLink.to_json())
 # convert the object into a dict
 app_link_dict = app_link_instance.to_dict()
 # create an instance of AppLink from a dict
-app_link_form_dict = app_link.from_dict(app_link_dict)
+app_link_from_dict = AppLink.from_dict(app_link_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

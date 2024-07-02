@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,8 +27,8 @@ class ResourceSetBindingCreateRequest(BaseModel):
     """
     ResourceSetBindingCreateRequest
     """ # noqa: E501
-    members: Optional[conlist(StrictStr)] = None
-    role: Optional[StrictStr] = Field(None, description="Unique key for the role")
+    members: Optional[List[StrictStr]] = None
+    role: Optional[StrictStr] = Field(default=None, description="Unique key for the role")
     __properties: ClassVar[List[str]] = ["members", "role"]
 
     model_config = ConfigDict(

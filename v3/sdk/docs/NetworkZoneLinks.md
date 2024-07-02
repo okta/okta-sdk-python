@@ -23,7 +23,7 @@ print(NetworkZoneLinks.to_json())
 # convert the object into a dict
 network_zone_links_dict = network_zone_links_instance.to_dict()
 # create an instance of NetworkZoneLinks from a dict
-network_zone_links_form_dict = network_zone_links.from_dict(network_zone_links_dict)
+network_zone_links_from_dict = NetworkZoneLinks.from_dict(network_zone_links_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

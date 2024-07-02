@@ -27,7 +27,7 @@ print(AccessPolicyConstraint.to_json())
 # convert the object into a dict
 access_policy_constraint_dict = access_policy_constraint_instance.to_dict()
 # create an instance of AccessPolicyConstraint from a dict
-access_policy_constraint_form_dict = access_policy_constraint.from_dict(access_policy_constraint_dict)
+access_policy_constraint_from_dict = AccessPolicyConstraint.from_dict(access_policy_constraint_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

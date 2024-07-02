@@ -23,7 +23,7 @@ print(UserSchemaAttributeMaster.to_json())
 # convert the object into a dict
 user_schema_attribute_master_dict = user_schema_attribute_master_instance.to_dict()
 # create an instance of UserSchemaAttributeMaster from a dict
-user_schema_attribute_master_form_dict = user_schema_attribute_master.from_dict(user_schema_attribute_master_dict)
+user_schema_attribute_master_from_dict = UserSchemaAttributeMaster.from_dict(user_schema_attribute_master_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

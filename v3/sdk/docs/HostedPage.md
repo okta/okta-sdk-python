@@ -23,7 +23,7 @@ print(HostedPage.to_json())
 # convert the object into a dict
 hosted_page_dict = hosted_page_instance.to_dict()
 # create an instance of HostedPage from a dict
-hosted_page_form_dict = hosted_page.from_dict(hosted_page_dict)
+hosted_page_from_dict = HostedPage.from_dict(hosted_page_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

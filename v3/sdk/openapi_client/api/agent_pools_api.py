@@ -17,11 +17,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictInt, StrictStr
-
-from typing import List, Optional
-
+from typing import Optional
+from typing_extensions import Annotated
 from openapi_client.models.agent_pool import AgentPool
 from openapi_client.models.agent_pool_update import AgentPoolUpdate
 from openapi_client.models.agent_pool_update_setting import AgentPoolUpdateSetting
@@ -48,8 +46,8 @@ class AgentPoolsApi:
     @validate_call
     def activate_agent_pools_update(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
-        update_id: Annotated[StrictStr, Field(..., description="Id of the update")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
+        update_id: Annotated[StrictStr, Field(description="Id of the update")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -122,8 +120,8 @@ class AgentPoolsApi:
     @validate_call
     def activate_agent_pools_update_with_http_info(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
-        update_id: Annotated[StrictStr, Field(..., description="Id of the update")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
+        update_id: Annotated[StrictStr, Field(description="Id of the update")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -196,8 +194,8 @@ class AgentPoolsApi:
     @validate_call
     def activate_agent_pools_update_without_preload_content(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
-        update_id: Annotated[StrictStr, Field(..., description="Id of the update")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
+        update_id: Annotated[StrictStr, Field(description="Id of the update")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -282,7 +280,7 @@ class AgentPoolsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -331,7 +329,7 @@ class AgentPoolsApi:
     @validate_call
     def create_agent_pools_update(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
         agent_pool_update: AgentPoolUpdate,
         _request_timeout: Union[
             None,
@@ -406,7 +404,7 @@ class AgentPoolsApi:
     @validate_call
     def create_agent_pools_update_with_http_info(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
         agent_pool_update: AgentPoolUpdate,
         _request_timeout: Union[
             None,
@@ -481,7 +479,7 @@ class AgentPoolsApi:
     @validate_call
     def create_agent_pools_update_without_preload_content(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
         agent_pool_update: AgentPoolUpdate,
         _request_timeout: Union[
             None,
@@ -568,7 +566,7 @@ class AgentPoolsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -630,8 +628,8 @@ class AgentPoolsApi:
     @validate_call
     def deactivate_agent_pools_update(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
-        update_id: Annotated[StrictStr, Field(..., description="Id of the update")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
+        update_id: Annotated[StrictStr, Field(description="Id of the update")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -704,8 +702,8 @@ class AgentPoolsApi:
     @validate_call
     def deactivate_agent_pools_update_with_http_info(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
-        update_id: Annotated[StrictStr, Field(..., description="Id of the update")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
+        update_id: Annotated[StrictStr, Field(description="Id of the update")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -778,8 +776,8 @@ class AgentPoolsApi:
     @validate_call
     def deactivate_agent_pools_update_without_preload_content(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
-        update_id: Annotated[StrictStr, Field(..., description="Id of the update")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
+        update_id: Annotated[StrictStr, Field(description="Id of the update")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -864,7 +862,7 @@ class AgentPoolsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -913,8 +911,8 @@ class AgentPoolsApi:
     @validate_call
     def delete_agent_pools_update(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
-        update_id: Annotated[StrictStr, Field(..., description="Id of the update")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
+        update_id: Annotated[StrictStr, Field(description="Id of the update")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -987,8 +985,8 @@ class AgentPoolsApi:
     @validate_call
     def delete_agent_pools_update_with_http_info(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
-        update_id: Annotated[StrictStr, Field(..., description="Id of the update")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
+        update_id: Annotated[StrictStr, Field(description="Id of the update")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1061,8 +1059,8 @@ class AgentPoolsApi:
     @validate_call
     def delete_agent_pools_update_without_preload_content(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
-        update_id: Annotated[StrictStr, Field(..., description="Id of the update")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
+        update_id: Annotated[StrictStr, Field(description="Id of the update")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1147,7 +1145,7 @@ class AgentPoolsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1196,8 +1194,8 @@ class AgentPoolsApi:
     @validate_call
     def get_agent_pools_update_instance(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
-        update_id: Annotated[StrictStr, Field(..., description="Id of the update")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
+        update_id: Annotated[StrictStr, Field(description="Id of the update")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1270,8 +1268,8 @@ class AgentPoolsApi:
     @validate_call
     def get_agent_pools_update_instance_with_http_info(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
-        update_id: Annotated[StrictStr, Field(..., description="Id of the update")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
+        update_id: Annotated[StrictStr, Field(description="Id of the update")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1344,8 +1342,8 @@ class AgentPoolsApi:
     @validate_call
     def get_agent_pools_update_instance_without_preload_content(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
-        update_id: Annotated[StrictStr, Field(..., description="Id of the update")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
+        update_id: Annotated[StrictStr, Field(description="Id of the update")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1430,7 +1428,7 @@ class AgentPoolsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1479,7 +1477,7 @@ class AgentPoolsApi:
     @validate_call
     def get_agent_pools_update_settings(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1549,7 +1547,7 @@ class AgentPoolsApi:
     @validate_call
     def get_agent_pools_update_settings_with_http_info(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1619,7 +1617,7 @@ class AgentPoolsApi:
     @validate_call
     def get_agent_pools_update_settings_without_preload_content(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1700,7 +1698,7 @@ class AgentPoolsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1991,7 +1989,7 @@ class AgentPoolsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2048,7 +2046,7 @@ class AgentPoolsApi:
     @validate_call
     def list_agent_pools_updates(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
         scheduled: Annotated[Optional[StrictBool], Field(description="Scope the list only to scheduled or ad-hoc updates. If the parameter is not provided we will return the whole list of updates.")] = None,
         _request_timeout: Union[
             None,
@@ -2122,7 +2120,7 @@ class AgentPoolsApi:
     @validate_call
     def list_agent_pools_updates_with_http_info(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
         scheduled: Annotated[Optional[StrictBool], Field(description="Scope the list only to scheduled or ad-hoc updates. If the parameter is not provided we will return the whole list of updates.")] = None,
         _request_timeout: Union[
             None,
@@ -2196,7 +2194,7 @@ class AgentPoolsApi:
     @validate_call
     def list_agent_pools_updates_without_preload_content(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
         scheduled: Annotated[Optional[StrictBool], Field(description="Scope the list only to scheduled or ad-hoc updates. If the parameter is not provided we will return the whole list of updates.")] = None,
         _request_timeout: Union[
             None,
@@ -2282,7 +2280,7 @@ class AgentPoolsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2333,8 +2331,8 @@ class AgentPoolsApi:
     @validate_call
     def pause_agent_pools_update(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
-        update_id: Annotated[StrictStr, Field(..., description="Id of the update")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
+        update_id: Annotated[StrictStr, Field(description="Id of the update")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2407,8 +2405,8 @@ class AgentPoolsApi:
     @validate_call
     def pause_agent_pools_update_with_http_info(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
-        update_id: Annotated[StrictStr, Field(..., description="Id of the update")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
+        update_id: Annotated[StrictStr, Field(description="Id of the update")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2481,8 +2479,8 @@ class AgentPoolsApi:
     @validate_call
     def pause_agent_pools_update_without_preload_content(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
-        update_id: Annotated[StrictStr, Field(..., description="Id of the update")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
+        update_id: Annotated[StrictStr, Field(description="Id of the update")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2567,7 +2565,7 @@ class AgentPoolsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2616,8 +2614,8 @@ class AgentPoolsApi:
     @validate_call
     def resume_agent_pools_update(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
-        update_id: Annotated[StrictStr, Field(..., description="Id of the update")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
+        update_id: Annotated[StrictStr, Field(description="Id of the update")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2690,8 +2688,8 @@ class AgentPoolsApi:
     @validate_call
     def resume_agent_pools_update_with_http_info(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
-        update_id: Annotated[StrictStr, Field(..., description="Id of the update")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
+        update_id: Annotated[StrictStr, Field(description="Id of the update")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2764,8 +2762,8 @@ class AgentPoolsApi:
     @validate_call
     def resume_agent_pools_update_without_preload_content(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
-        update_id: Annotated[StrictStr, Field(..., description="Id of the update")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
+        update_id: Annotated[StrictStr, Field(description="Id of the update")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2850,7 +2848,7 @@ class AgentPoolsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2899,8 +2897,8 @@ class AgentPoolsApi:
     @validate_call
     def retry_agent_pools_update(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
-        update_id: Annotated[StrictStr, Field(..., description="Id of the update")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
+        update_id: Annotated[StrictStr, Field(description="Id of the update")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2973,8 +2971,8 @@ class AgentPoolsApi:
     @validate_call
     def retry_agent_pools_update_with_http_info(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
-        update_id: Annotated[StrictStr, Field(..., description="Id of the update")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
+        update_id: Annotated[StrictStr, Field(description="Id of the update")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3047,8 +3045,8 @@ class AgentPoolsApi:
     @validate_call
     def retry_agent_pools_update_without_preload_content(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
-        update_id: Annotated[StrictStr, Field(..., description="Id of the update")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
+        update_id: Annotated[StrictStr, Field(description="Id of the update")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3133,7 +3131,7 @@ class AgentPoolsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -3182,8 +3180,8 @@ class AgentPoolsApi:
     @validate_call
     def stop_agent_pools_update(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
-        update_id: Annotated[StrictStr, Field(..., description="Id of the update")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
+        update_id: Annotated[StrictStr, Field(description="Id of the update")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3256,8 +3254,8 @@ class AgentPoolsApi:
     @validate_call
     def stop_agent_pools_update_with_http_info(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
-        update_id: Annotated[StrictStr, Field(..., description="Id of the update")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
+        update_id: Annotated[StrictStr, Field(description="Id of the update")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3330,8 +3328,8 @@ class AgentPoolsApi:
     @validate_call
     def stop_agent_pools_update_without_preload_content(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
-        update_id: Annotated[StrictStr, Field(..., description="Id of the update")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
+        update_id: Annotated[StrictStr, Field(description="Id of the update")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3416,7 +3414,7 @@ class AgentPoolsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -3465,8 +3463,8 @@ class AgentPoolsApi:
     @validate_call
     def update_agent_pools_update(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
-        update_id: Annotated[StrictStr, Field(..., description="Id of the update")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
+        update_id: Annotated[StrictStr, Field(description="Id of the update")],
         agent_pool_update: AgentPoolUpdate,
         _request_timeout: Union[
             None,
@@ -3544,8 +3542,8 @@ class AgentPoolsApi:
     @validate_call
     def update_agent_pools_update_with_http_info(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
-        update_id: Annotated[StrictStr, Field(..., description="Id of the update")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
+        update_id: Annotated[StrictStr, Field(description="Id of the update")],
         agent_pool_update: AgentPoolUpdate,
         _request_timeout: Union[
             None,
@@ -3623,8 +3621,8 @@ class AgentPoolsApi:
     @validate_call
     def update_agent_pools_update_without_preload_content(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
-        update_id: Annotated[StrictStr, Field(..., description="Id of the update")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
+        update_id: Annotated[StrictStr, Field(description="Id of the update")],
         agent_pool_update: AgentPoolUpdate,
         _request_timeout: Union[
             None,
@@ -3715,7 +3713,7 @@ class AgentPoolsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -3779,7 +3777,7 @@ class AgentPoolsApi:
     @validate_call
     def update_agent_pools_update_settings(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
         agent_pool_update_setting: AgentPoolUpdateSetting,
         _request_timeout: Union[
             None,
@@ -3854,7 +3852,7 @@ class AgentPoolsApi:
     @validate_call
     def update_agent_pools_update_settings_with_http_info(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
         agent_pool_update_setting: AgentPoolUpdateSetting,
         _request_timeout: Union[
             None,
@@ -3929,7 +3927,7 @@ class AgentPoolsApi:
     @validate_call
     def update_agent_pools_update_settings_without_preload_content(
         self,
-        pool_id: Annotated[StrictStr, Field(..., description="Id of the agent pool for which the settings will apply")],
+        pool_id: Annotated[StrictStr, Field(description="Id of the agent pool for which the settings will apply")],
         agent_pool_update_setting: AgentPoolUpdateSetting,
         _request_timeout: Union[
             None,
@@ -4016,7 +4014,7 @@ class AgentPoolsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters

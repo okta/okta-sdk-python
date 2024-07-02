@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.log_geographical_context import LogGeographicalContext
 from openapi_client.models.log_user_agent import LogUserAgent
 from typing import Optional, Set
@@ -28,10 +30,10 @@ class LogClient(BaseModel):
     LogClient
     """ # noqa: E501
     device: Optional[StrictStr] = None
-    geographical_context: Optional[LogGeographicalContext] = Field(None, alias="geographicalContext")
+    geographical_context: Optional[LogGeographicalContext] = Field(default=None, alias="geographicalContext")
     id: Optional[StrictStr] = None
-    ip_address: Optional[StrictStr] = Field(None, alias="ipAddress")
-    user_agent: Optional[LogUserAgent] = Field(None, alias="userAgent")
+    ip_address: Optional[StrictStr] = Field(default=None, alias="ipAddress")
+    user_agent: Optional[LogUserAgent] = Field(default=None, alias="userAgent")
     zone: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["device", "geographicalContext", "id", "ipAddress", "userAgent", "zone"]
 

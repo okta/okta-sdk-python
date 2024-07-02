@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -27,7 +29,7 @@ class LogUserAgent(BaseModel):
     """ # noqa: E501
     browser: Optional[StrictStr] = None
     os: Optional[StrictStr] = None
-    raw_user_agent: Optional[StrictStr] = Field(None, alias="rawUserAgent")
+    raw_user_agent: Optional[StrictStr] = Field(default=None, alias="rawUserAgent")
     __properties: ClassVar[List[str]] = ["browser", "os", "rawUserAgent"]
 
     model_config = ConfigDict(

@@ -23,7 +23,7 @@ print(BouncesRemoveListError.to_json())
 # convert the object into a dict
 bounces_remove_list_error_dict = bounces_remove_list_error_instance.to_dict()
 # create an instance of BouncesRemoveListError from a dict
-bounces_remove_list_error_form_dict = bounces_remove_list_error.from_dict(bounces_remove_list_error_dict)
+bounces_remove_list_error_from_dict = BouncesRemoveListError.from_dict(bounces_remove_list_error_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

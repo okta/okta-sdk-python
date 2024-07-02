@@ -17,11 +17,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from typing_extensions import Annotated
 from pydantic import Field, StrictBytes, StrictInt, StrictStr
-
-from typing import List, Optional, Union
-
+from typing import Optional, Union
+from typing_extensions import Annotated
 from openapi_client.models.csr import Csr
 from openapi_client.models.csr_metadata import CsrMetadata
 from openapi_client.models.json_web_key import JsonWebKey
@@ -47,9 +45,9 @@ class ApplicationCredentialsApi:
     @validate_call
     def clone_application_key(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
-        key_id: Annotated[StrictStr, Field(..., description="ID of the Key Credential for the application")],
-        target_aid: Annotated[StrictStr, Field(..., description="Unique key of the target Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        key_id: Annotated[StrictStr, Field(description="ID of the Key Credential for the application")],
+        target_aid: Annotated[StrictStr, Field(description="Unique key of the target Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -125,9 +123,9 @@ class ApplicationCredentialsApi:
     @validate_call
     def clone_application_key_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
-        key_id: Annotated[StrictStr, Field(..., description="ID of the Key Credential for the application")],
-        target_aid: Annotated[StrictStr, Field(..., description="Unique key of the target Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        key_id: Annotated[StrictStr, Field(description="ID of the Key Credential for the application")],
+        target_aid: Annotated[StrictStr, Field(description="Unique key of the target Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -203,9 +201,9 @@ class ApplicationCredentialsApi:
     @validate_call
     def clone_application_key_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
-        key_id: Annotated[StrictStr, Field(..., description="ID of the Key Credential for the application")],
-        target_aid: Annotated[StrictStr, Field(..., description="Unique key of the target Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        key_id: Annotated[StrictStr, Field(description="ID of the Key Credential for the application")],
+        target_aid: Annotated[StrictStr, Field(description="Unique key of the target Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -294,7 +292,7 @@ class ApplicationCredentialsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -347,7 +345,7 @@ class ApplicationCredentialsApi:
     @validate_call
     def generate_application_key(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         validity_years: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
@@ -421,7 +419,7 @@ class ApplicationCredentialsApi:
     @validate_call
     def generate_application_key_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         validity_years: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
@@ -495,7 +493,7 @@ class ApplicationCredentialsApi:
     @validate_call
     def generate_application_key_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         validity_years: Optional[StrictInt] = None,
         _request_timeout: Union[
             None,
@@ -581,7 +579,7 @@ class ApplicationCredentialsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -632,7 +630,7 @@ class ApplicationCredentialsApi:
     @validate_call
     def generate_csr_for_application(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         metadata: CsrMetadata,
         _request_timeout: Union[
             None,
@@ -707,7 +705,7 @@ class ApplicationCredentialsApi:
     @validate_call
     def generate_csr_for_application_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         metadata: CsrMetadata,
         _request_timeout: Union[
             None,
@@ -782,7 +780,7 @@ class ApplicationCredentialsApi:
     @validate_call
     def generate_csr_for_application_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         metadata: CsrMetadata,
         _request_timeout: Union[
             None,
@@ -869,7 +867,7 @@ class ApplicationCredentialsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -931,8 +929,8 @@ class ApplicationCredentialsApi:
     @validate_call
     def get_application_key(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
-        key_id: Annotated[StrictStr, Field(..., description="ID of the Key Credential for the application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        key_id: Annotated[StrictStr, Field(description="ID of the Key Credential for the application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1005,8 +1003,8 @@ class ApplicationCredentialsApi:
     @validate_call
     def get_application_key_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
-        key_id: Annotated[StrictStr, Field(..., description="ID of the Key Credential for the application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        key_id: Annotated[StrictStr, Field(description="ID of the Key Credential for the application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1079,8 +1077,8 @@ class ApplicationCredentialsApi:
     @validate_call
     def get_application_key_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
-        key_id: Annotated[StrictStr, Field(..., description="ID of the Key Credential for the application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        key_id: Annotated[StrictStr, Field(description="ID of the Key Credential for the application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1165,7 +1163,7 @@ class ApplicationCredentialsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1214,8 +1212,8 @@ class ApplicationCredentialsApi:
     @validate_call
     def get_csr_for_application(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
-        csr_id: Annotated[StrictStr, Field(..., description="`id` of the CSR")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        csr_id: Annotated[StrictStr, Field(description="`id` of the CSR")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1288,8 +1286,8 @@ class ApplicationCredentialsApi:
     @validate_call
     def get_csr_for_application_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
-        csr_id: Annotated[StrictStr, Field(..., description="`id` of the CSR")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        csr_id: Annotated[StrictStr, Field(description="`id` of the CSR")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1362,8 +1360,8 @@ class ApplicationCredentialsApi:
     @validate_call
     def get_csr_for_application_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
-        csr_id: Annotated[StrictStr, Field(..., description="`id` of the CSR")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        csr_id: Annotated[StrictStr, Field(description="`id` of the CSR")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1448,7 +1446,7 @@ class ApplicationCredentialsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1497,7 +1495,7 @@ class ApplicationCredentialsApi:
     @validate_call
     def list_application_keys(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1567,7 +1565,7 @@ class ApplicationCredentialsApi:
     @validate_call
     def list_application_keys_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1637,7 +1635,7 @@ class ApplicationCredentialsApi:
     @validate_call
     def list_application_keys_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1718,7 +1716,7 @@ class ApplicationCredentialsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1765,7 +1763,7 @@ class ApplicationCredentialsApi:
     @validate_call
     def list_csrs_for_application(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1835,7 +1833,7 @@ class ApplicationCredentialsApi:
     @validate_call
     def list_csrs_for_application_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1905,7 +1903,7 @@ class ApplicationCredentialsApi:
     @validate_call
     def list_csrs_for_application_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1986,7 +1984,7 @@ class ApplicationCredentialsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2033,8 +2031,8 @@ class ApplicationCredentialsApi:
     @validate_call
     def publish_csr_from_application(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
-        csr_id: Annotated[StrictStr, Field(..., description="`id` of the CSR")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        csr_id: Annotated[StrictStr, Field(description="`id` of the CSR")],
         body: Union[StrictBytes, StrictStr],
         _request_timeout: Union[
             None,
@@ -2112,8 +2110,8 @@ class ApplicationCredentialsApi:
     @validate_call
     def publish_csr_from_application_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
-        csr_id: Annotated[StrictStr, Field(..., description="`id` of the CSR")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        csr_id: Annotated[StrictStr, Field(description="`id` of the CSR")],
         body: Union[StrictBytes, StrictStr],
         _request_timeout: Union[
             None,
@@ -2191,8 +2189,8 @@ class ApplicationCredentialsApi:
     @validate_call
     def publish_csr_from_application_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
-        csr_id: Annotated[StrictStr, Field(..., description="`id` of the CSR")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        csr_id: Annotated[StrictStr, Field(description="`id` of the CSR")],
         body: Union[StrictBytes, StrictStr],
         _request_timeout: Union[
             None,
@@ -2283,7 +2281,7 @@ class ApplicationCredentialsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2354,8 +2352,8 @@ class ApplicationCredentialsApi:
     @validate_call
     def revoke_csr_from_application(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
-        csr_id: Annotated[StrictStr, Field(..., description="`id` of the CSR")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        csr_id: Annotated[StrictStr, Field(description="`id` of the CSR")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2428,8 +2426,8 @@ class ApplicationCredentialsApi:
     @validate_call
     def revoke_csr_from_application_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
-        csr_id: Annotated[StrictStr, Field(..., description="`id` of the CSR")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        csr_id: Annotated[StrictStr, Field(description="`id` of the CSR")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2502,8 +2500,8 @@ class ApplicationCredentialsApi:
     @validate_call
     def revoke_csr_from_application_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
-        csr_id: Annotated[StrictStr, Field(..., description="`id` of the CSR")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        csr_id: Annotated[StrictStr, Field(description="`id` of the CSR")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2588,7 +2586,7 @@ class ApplicationCredentialsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters

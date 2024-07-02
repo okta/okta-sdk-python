@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,8 +27,8 @@ class PostAPIServiceIntegrationInstanceRequest(BaseModel):
     """
     PostAPIServiceIntegrationInstanceRequest
     """ # noqa: E501
-    granted_scopes: conlist(StrictStr) = Field(..., alias="grantedScopes", description="The list of Okta management scopes granted to the API Service Integration instance. See [Okta management OAuth 2.0 scopes](/oauth2/#okta-admin-management).")
-    type: StrictStr = Field(..., description="The type of the API service integration. This string is an underscore-concatenated, lowercased API service integration name. For example, `my_api_log_integration`.")
+    granted_scopes: List[StrictStr] = Field(description="The list of Okta management scopes granted to the API Service Integration instance. See [Okta management OAuth 2.0 scopes](/oauth2/#okta-admin-management).", alias="grantedScopes")
+    type: StrictStr = Field(description="The type of the API service integration. This string is an underscore-concatenated, lowercased API service integration name. For example, `my_api_log_integration`.")
     __properties: ClassVar[List[str]] = ["grantedScopes", "type"]
 
     model_config = ConfigDict(

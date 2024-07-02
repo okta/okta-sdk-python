@@ -23,7 +23,7 @@ print(ErrorPage.to_json())
 # convert the object into a dict
 error_page_dict = error_page_instance.to_dict()
 # create an instance of ErrorPage from a dict
-error_page_form_dict = error_page.from_dict(error_page_dict)
+error_page_from_dict = ErrorPage.from_dict(error_page_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

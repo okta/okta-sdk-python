@@ -23,7 +23,7 @@ print(Duration.to_json())
 # convert the object into a dict
 duration_dict = duration_instance.to_dict()
 # create an instance of Duration from a dict
-duration_form_dict = duration.from_dict(duration_dict)
+duration_from_dict = Duration.from_dict(duration_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

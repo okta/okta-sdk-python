@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.group_schema_base_properties import GroupSchemaBaseProperties
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,7 +30,7 @@ class GroupSchemaBase(BaseModel):
     """ # noqa: E501
     id: Optional[StrictStr] = None
     properties: Optional[GroupSchemaBaseProperties] = None
-    required: Optional[conlist(StrictStr)] = None
+    required: Optional[List[StrictStr]] = None
     type: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["id", "properties", "required", "type"]
 

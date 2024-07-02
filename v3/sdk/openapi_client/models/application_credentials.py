@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.application_credentials_signing import ApplicationCredentialsSigning
 from openapi_client.models.application_credentials_username_template import ApplicationCredentialsUsernameTemplate
 from typing import Optional, Set
@@ -28,7 +30,7 @@ class ApplicationCredentials(BaseModel):
     ApplicationCredentials
     """ # noqa: E501
     signing: Optional[ApplicationCredentialsSigning] = None
-    user_name_template: Optional[ApplicationCredentialsUsernameTemplate] = Field(None, alias="userNameTemplate")
+    user_name_template: Optional[ApplicationCredentialsUsernameTemplate] = Field(default=None, alias="userNameTemplate")
     __properties: ClassVar[List[str]] = ["signing", "userNameTemplate"]
 
     model_config = ConfigDict(

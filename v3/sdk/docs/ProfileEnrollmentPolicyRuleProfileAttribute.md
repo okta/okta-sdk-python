@@ -24,7 +24,7 @@ print(ProfileEnrollmentPolicyRuleProfileAttribute.to_json())
 # convert the object into a dict
 profile_enrollment_policy_rule_profile_attribute_dict = profile_enrollment_policy_rule_profile_attribute_instance.to_dict()
 # create an instance of ProfileEnrollmentPolicyRuleProfileAttribute from a dict
-profile_enrollment_policy_rule_profile_attribute_form_dict = profile_enrollment_policy_rule_profile_attribute.from_dict(profile_enrollment_policy_rule_profile_attribute_dict)
+profile_enrollment_policy_rule_profile_attribute_from_dict = ProfileEnrollmentPolicyRuleProfileAttribute.from_dict(profile_enrollment_policy_rule_profile_attribute_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

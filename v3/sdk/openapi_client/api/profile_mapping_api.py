@@ -17,11 +17,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from typing_extensions import Annotated
 from pydantic import Field, StrictInt, StrictStr
-
-from typing import List, Optional
-
+from typing import Optional
+from typing_extensions import Annotated
 from openapi_client.models.list_profile_mappings import ListProfileMappings
 from openapi_client.models.profile_mapping import ProfileMapping
 from openapi_client.models.profile_mapping_request import ProfileMappingRequest
@@ -47,7 +45,7 @@ class ProfileMappingApi:
     @validate_call
     def get_profile_mapping(
         self,
-        mapping_id: Annotated[StrictStr, Field(..., description="`id` of the Mapping")],
+        mapping_id: Annotated[StrictStr, Field(description="`id` of the Mapping")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -117,7 +115,7 @@ class ProfileMappingApi:
     @validate_call
     def get_profile_mapping_with_http_info(
         self,
-        mapping_id: Annotated[StrictStr, Field(..., description="`id` of the Mapping")],
+        mapping_id: Annotated[StrictStr, Field(description="`id` of the Mapping")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -187,7 +185,7 @@ class ProfileMappingApi:
     @validate_call
     def get_profile_mapping_without_preload_content(
         self,
-        mapping_id: Annotated[StrictStr, Field(..., description="`id` of the Mapping")],
+        mapping_id: Annotated[StrictStr, Field(description="`id` of the Mapping")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -268,7 +266,7 @@ class ProfileMappingApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -572,7 +570,7 @@ class ProfileMappingApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -633,7 +631,7 @@ class ProfileMappingApi:
     @validate_call
     def update_profile_mapping(
         self,
-        mapping_id: Annotated[StrictStr, Field(..., description="`id` of the Mapping")],
+        mapping_id: Annotated[StrictStr, Field(description="`id` of the Mapping")],
         profile_mapping: ProfileMappingRequest,
         _request_timeout: Union[
             None,
@@ -708,7 +706,7 @@ class ProfileMappingApi:
     @validate_call
     def update_profile_mapping_with_http_info(
         self,
-        mapping_id: Annotated[StrictStr, Field(..., description="`id` of the Mapping")],
+        mapping_id: Annotated[StrictStr, Field(description="`id` of the Mapping")],
         profile_mapping: ProfileMappingRequest,
         _request_timeout: Union[
             None,
@@ -783,7 +781,7 @@ class ProfileMappingApi:
     @validate_call
     def update_profile_mapping_without_preload_content(
         self,
-        mapping_id: Annotated[StrictStr, Field(..., description="`id` of the Mapping")],
+        mapping_id: Annotated[StrictStr, Field(description="`id` of the Mapping")],
         profile_mapping: ProfileMappingRequest,
         _request_timeout: Union[
             None,
@@ -870,7 +868,7 @@ class ProfileMappingApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters

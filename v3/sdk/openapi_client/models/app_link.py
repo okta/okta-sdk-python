@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,16 +27,16 @@ class AppLink(BaseModel):
     """
     AppLink
     """ # noqa: E501
-    app_assignment_id: Optional[StrictStr] = Field(None, alias="appAssignmentId")
-    app_instance_id: Optional[StrictStr] = Field(None, alias="appInstanceId")
-    app_name: Optional[StrictStr] = Field(None, alias="appName")
-    credentials_setup: Optional[StrictBool] = Field(None, alias="credentialsSetup")
+    app_assignment_id: Optional[StrictStr] = Field(default=None, alias="appAssignmentId")
+    app_instance_id: Optional[StrictStr] = Field(default=None, alias="appInstanceId")
+    app_name: Optional[StrictStr] = Field(default=None, alias="appName")
+    credentials_setup: Optional[StrictBool] = Field(default=None, alias="credentialsSetup")
     hidden: Optional[StrictBool] = None
     id: Optional[StrictStr] = None
     label: Optional[StrictStr] = None
-    link_url: Optional[StrictStr] = Field(None, alias="linkUrl")
-    logo_url: Optional[StrictStr] = Field(None, alias="logoUrl")
-    sort_order: Optional[StrictInt] = Field(None, alias="sortOrder")
+    link_url: Optional[StrictStr] = Field(default=None, alias="linkUrl")
+    logo_url: Optional[StrictStr] = Field(default=None, alias="logoUrl")
+    sort_order: Optional[StrictInt] = Field(default=None, alias="sortOrder")
     __properties: ClassVar[List[str]] = ["appAssignmentId", "appInstanceId", "appName", "credentialsSetup", "hidden", "id", "label", "linkUrl", "logoUrl", "sortOrder"]
 
     model_config = ConfigDict(

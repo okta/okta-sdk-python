@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.network_zone_address_type import NetworkZoneAddressType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,7 +29,7 @@ class NetworkZoneAddress(BaseModel):
     Specifies the value of an IP address expressed using either `range` or `CIDR` form.
     """ # noqa: E501
     type: Optional[NetworkZoneAddressType] = None
-    value: Optional[StrictStr] = Field(None, description="Value in CIDR/range form depending on the type specified")
+    value: Optional[StrictStr] = Field(default=None, description="Value in CIDR/range form depending on the type specified")
     __properties: ClassVar[List[str]] = ["type", "value"]
 
     model_config = ConfigDict(

@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.digest_algorithm import DigestAlgorithm
 from openapi_client.models.password_credential_hash_algorithm import PasswordCredentialHashAlgorithm
 from typing import Optional, Set
@@ -28,13 +30,13 @@ class PasswordCredentialHash(BaseModel):
     PasswordCredentialHash
     """ # noqa: E501
     algorithm: Optional[PasswordCredentialHashAlgorithm] = None
-    digest_algorithm: Optional[DigestAlgorithm] = Field(None, alias="digestAlgorithm")
-    iteration_count: Optional[StrictInt] = Field(None, alias="iterationCount")
-    key_size: Optional[StrictInt] = Field(None, alias="keySize")
+    digest_algorithm: Optional[DigestAlgorithm] = Field(default=None, alias="digestAlgorithm")
+    iteration_count: Optional[StrictInt] = Field(default=None, alias="iterationCount")
+    key_size: Optional[StrictInt] = Field(default=None, alias="keySize")
     salt: Optional[StrictStr] = None
-    salt_order: Optional[StrictStr] = Field(None, alias="saltOrder")
+    salt_order: Optional[StrictStr] = Field(default=None, alias="saltOrder")
     value: Optional[StrictStr] = None
-    work_factor: Optional[StrictInt] = Field(None, alias="workFactor")
+    work_factor: Optional[StrictInt] = Field(default=None, alias="workFactor")
     __properties: ClassVar[List[str]] = ["algorithm", "digestAlgorithm", "iterationCount", "keySize", "salt", "saltOrder", "value", "workFactor"]
 
     model_config = ConfigDict(

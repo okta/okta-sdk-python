@@ -28,7 +28,7 @@ print(BehaviorRule.to_json())
 # convert the object into a dict
 behavior_rule_dict = behavior_rule_instance.to_dict()
 # create an instance of BehaviorRule from a dict
-behavior_rule_form_dict = behavior_rule.from_dict(behavior_rule_dict)
+behavior_rule_from_dict = BehaviorRule.from_dict(behavior_rule_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

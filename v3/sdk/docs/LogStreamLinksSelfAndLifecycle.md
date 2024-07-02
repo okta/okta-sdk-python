@@ -25,7 +25,7 @@ print(LogStreamLinksSelfAndLifecycle.to_json())
 # convert the object into a dict
 log_stream_links_self_and_lifecycle_dict = log_stream_links_self_and_lifecycle_instance.to_dict()
 # create an instance of LogStreamLinksSelfAndLifecycle from a dict
-log_stream_links_self_and_lifecycle_form_dict = log_stream_links_self_and_lifecycle.from_dict(log_stream_links_self_and_lifecycle_dict)
+log_stream_links_self_and_lifecycle_from_dict = LogStreamLinksSelfAndLifecycle.from_dict(log_stream_links_self_and_lifecycle_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

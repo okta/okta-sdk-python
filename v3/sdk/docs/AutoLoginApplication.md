@@ -24,7 +24,7 @@ print(AutoLoginApplication.to_json())
 # convert the object into a dict
 auto_login_application_dict = auto_login_application_instance.to_dict()
 # create an instance of AutoLoginApplication from a dict
-auto_login_application_form_dict = auto_login_application.from_dict(auto_login_application_dict)
+auto_login_application_from_dict = AutoLoginApplication.from_dict(auto_login_application_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

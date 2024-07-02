@@ -29,7 +29,7 @@ print(AgentPoolUpdateSetting.to_json())
 # convert the object into a dict
 agent_pool_update_setting_dict = agent_pool_update_setting_instance.to_dict()
 # create an instance of AgentPoolUpdateSetting from a dict
-agent_pool_update_setting_form_dict = agent_pool_update_setting.from_dict(agent_pool_update_setting_dict)
+agent_pool_update_setting_from_dict = AgentPoolUpdateSetting.from_dict(agent_pool_update_setting_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

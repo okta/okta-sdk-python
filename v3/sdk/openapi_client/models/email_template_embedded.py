@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.email_settings import EmailSettings
 from typing import Optional, Set
 from typing_extensions import Self
@@ -27,7 +29,7 @@ class EmailTemplateEmbedded(BaseModel):
     EmailTemplateEmbedded
     """ # noqa: E501
     settings: Optional[EmailSettings] = None
-    customization_count: Optional[StrictInt] = Field(None, alias="customizationCount")
+    customization_count: Optional[StrictInt] = Field(default=None, alias="customizationCount")
     __properties: ClassVar[List[str]] = ["settings", "customizationCount"]
 
     model_config = ConfigDict(

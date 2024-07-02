@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.inline_hook_channel import InlineHookChannel
 from openapi_client.models.inline_hook_status import InlineHookStatus
 from openapi_client.models.inline_hook_type import InlineHookType
@@ -32,12 +35,12 @@ class InlineHook(BaseModel):
     channel: Optional[InlineHookChannel] = None
     created: Optional[datetime] = None
     id: Optional[StrictStr] = None
-    last_updated: Optional[datetime] = Field(None, alias="lastUpdated")
+    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
     name: Optional[StrictStr] = None
     status: Optional[InlineHookStatus] = None
     type: Optional[InlineHookType] = None
     version: Optional[StrictStr] = None
-    links: Optional[LinksSelf] = Field(None, alias="_links")
+    links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["channel", "created", "id", "lastUpdated", "name", "status", "type", "version", "_links"]
 
     model_config = ConfigDict(

@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,7 +27,7 @@ class CreateUpdateIamRolePermissionRequest(BaseModel):
     """
     CreateUpdateIamRolePermissionRequest
     """ # noqa: E501
-    conditions: Optional[Dict[str, Any]] = Field(None, description="Conditions for further restricting a permission")
+    conditions: Optional[Dict[str, Any]] = Field(default=None, description="Conditions for further restricting a permission")
     __properties: ClassVar[List[str]] = ["conditions"]
 
     model_config = ConfigDict(

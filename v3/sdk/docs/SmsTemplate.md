@@ -28,7 +28,7 @@ print(SmsTemplate.to_json())
 # convert the object into a dict
 sms_template_dict = sms_template_instance.to_dict()
 # create an instance of SmsTemplate from a dict
-sms_template_form_dict = sms_template.from_dict(sms_template_dict)
+sms_template_from_dict = SmsTemplate.from_dict(sms_template_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -26,7 +26,7 @@ print(SimulateResultPoliciesItems.to_json())
 # convert the object into a dict
 simulate_result_policies_items_dict = simulate_result_policies_items_instance.to_dict()
 # create an instance of SimulateResultPoliciesItems from a dict
-simulate_result_policies_items_form_dict = simulate_result_policies_items.from_dict(simulate_result_policies_items_dict)
+simulate_result_policies_items_from_dict = SimulateResultPoliciesItems.from_dict(simulate_result_policies_items_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

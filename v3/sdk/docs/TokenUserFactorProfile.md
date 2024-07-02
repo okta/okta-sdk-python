@@ -22,7 +22,7 @@ print(TokenUserFactorProfile.to_json())
 # convert the object into a dict
 token_user_factor_profile_dict = token_user_factor_profile_instance.to_dict()
 # create an instance of TokenUserFactorProfile from a dict
-token_user_factor_profile_form_dict = token_user_factor_profile.from_dict(token_user_factor_profile_dict)
+token_user_factor_profile_from_dict = TokenUserFactorProfile.from_dict(token_user_factor_profile_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

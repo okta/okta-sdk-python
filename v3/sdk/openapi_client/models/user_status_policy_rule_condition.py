@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.policy_user_status import PolicyUserStatus
 from typing import Optional, Set
 from typing_extensions import Self

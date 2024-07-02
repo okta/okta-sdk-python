@@ -32,7 +32,7 @@ print(GroupSchema.to_json())
 # convert the object into a dict
 group_schema_dict = group_schema_instance.to_dict()
 # create an instance of GroupSchema from a dict
-group_schema_form_dict = group_schema.from_dict(group_schema_dict)
+group_schema_from_dict = GroupSchema.from_dict(group_schema_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

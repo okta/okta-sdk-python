@@ -26,7 +26,7 @@ print(BaseEmailServer.to_json())
 # convert the object into a dict
 base_email_server_dict = base_email_server_instance.to_dict()
 # create an instance of BaseEmailServer from a dict
-base_email_server_form_dict = base_email_server.from_dict(base_email_server_dict)
+base_email_server_from_dict = BaseEmailServer.from_dict(base_email_server_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

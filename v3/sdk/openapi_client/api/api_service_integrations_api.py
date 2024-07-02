@@ -17,11 +17,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from typing_extensions import Annotated
 from pydantic import Field, StrictStr
-
-from typing import List, Optional
-
+from typing import Optional
+from typing_extensions import Annotated
 from openapi_client.models.api_service_integration_instance import APIServiceIntegrationInstance
 from openapi_client.models.api_service_integration_instance_secret import APIServiceIntegrationInstanceSecret
 from openapi_client.models.post_api_service_integration_instance import PostAPIServiceIntegrationInstance
@@ -48,8 +46,8 @@ class ApiServiceIntegrationsApi:
     @validate_call
     def activate_api_service_integration_instance_secret(
         self,
-        api_service_id: Annotated[StrictStr, Field(..., description="`id` of the API Service Integration instance")],
-        secret_id: Annotated[StrictStr, Field(..., description="`id` of the API Service Integration instance Secret")],
+        api_service_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance")],
+        secret_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance Secret")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -123,8 +121,8 @@ class ApiServiceIntegrationsApi:
     @validate_call
     def activate_api_service_integration_instance_secret_with_http_info(
         self,
-        api_service_id: Annotated[StrictStr, Field(..., description="`id` of the API Service Integration instance")],
-        secret_id: Annotated[StrictStr, Field(..., description="`id` of the API Service Integration instance Secret")],
+        api_service_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance")],
+        secret_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance Secret")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -198,8 +196,8 @@ class ApiServiceIntegrationsApi:
     @validate_call
     def activate_api_service_integration_instance_secret_without_preload_content(
         self,
-        api_service_id: Annotated[StrictStr, Field(..., description="`id` of the API Service Integration instance")],
-        secret_id: Annotated[StrictStr, Field(..., description="`id` of the API Service Integration instance Secret")],
+        api_service_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance")],
+        secret_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance Secret")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -285,7 +283,7 @@ class ApiServiceIntegrationsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -558,7 +556,7 @@ class ApiServiceIntegrationsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -617,7 +615,7 @@ class ApiServiceIntegrationsApi:
     @validate_call
     def create_api_service_integration_instance_secret(
         self,
-        api_service_id: Annotated[StrictStr, Field(..., description="`id` of the API Service Integration instance")],
+        api_service_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -688,7 +686,7 @@ class ApiServiceIntegrationsApi:
     @validate_call
     def create_api_service_integration_instance_secret_with_http_info(
         self,
-        api_service_id: Annotated[StrictStr, Field(..., description="`id` of the API Service Integration instance")],
+        api_service_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -759,7 +757,7 @@ class ApiServiceIntegrationsApi:
     @validate_call
     def create_api_service_integration_instance_secret_without_preload_content(
         self,
-        api_service_id: Annotated[StrictStr, Field(..., description="`id` of the API Service Integration instance")],
+        api_service_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -841,7 +839,7 @@ class ApiServiceIntegrationsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -888,8 +886,8 @@ class ApiServiceIntegrationsApi:
     @validate_call
     def deactivate_api_service_integration_instance_secret(
         self,
-        api_service_id: Annotated[StrictStr, Field(..., description="`id` of the API Service Integration instance")],
-        secret_id: Annotated[StrictStr, Field(..., description="`id` of the API Service Integration instance Secret")],
+        api_service_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance")],
+        secret_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance Secret")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -963,8 +961,8 @@ class ApiServiceIntegrationsApi:
     @validate_call
     def deactivate_api_service_integration_instance_secret_with_http_info(
         self,
-        api_service_id: Annotated[StrictStr, Field(..., description="`id` of the API Service Integration instance")],
-        secret_id: Annotated[StrictStr, Field(..., description="`id` of the API Service Integration instance Secret")],
+        api_service_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance")],
+        secret_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance Secret")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1038,8 +1036,8 @@ class ApiServiceIntegrationsApi:
     @validate_call
     def deactivate_api_service_integration_instance_secret_without_preload_content(
         self,
-        api_service_id: Annotated[StrictStr, Field(..., description="`id` of the API Service Integration instance")],
-        secret_id: Annotated[StrictStr, Field(..., description="`id` of the API Service Integration instance Secret")],
+        api_service_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance")],
+        secret_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance Secret")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1125,7 +1123,7 @@ class ApiServiceIntegrationsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1174,7 +1172,7 @@ class ApiServiceIntegrationsApi:
     @validate_call
     def delete_api_service_integration_instance(
         self,
-        api_service_id: Annotated[StrictStr, Field(..., description="`id` of the API Service Integration instance")],
+        api_service_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1245,7 +1243,7 @@ class ApiServiceIntegrationsApi:
     @validate_call
     def delete_api_service_integration_instance_with_http_info(
         self,
-        api_service_id: Annotated[StrictStr, Field(..., description="`id` of the API Service Integration instance")],
+        api_service_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1316,7 +1314,7 @@ class ApiServiceIntegrationsApi:
     @validate_call
     def delete_api_service_integration_instance_without_preload_content(
         self,
-        api_service_id: Annotated[StrictStr, Field(..., description="`id` of the API Service Integration instance")],
+        api_service_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1398,7 +1396,7 @@ class ApiServiceIntegrationsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1445,8 +1443,8 @@ class ApiServiceIntegrationsApi:
     @validate_call
     def delete_api_service_integration_instance_secret(
         self,
-        api_service_id: Annotated[StrictStr, Field(..., description="`id` of the API Service Integration instance")],
-        secret_id: Annotated[StrictStr, Field(..., description="`id` of the API Service Integration instance Secret")],
+        api_service_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance")],
+        secret_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance Secret")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1520,8 +1518,8 @@ class ApiServiceIntegrationsApi:
     @validate_call
     def delete_api_service_integration_instance_secret_with_http_info(
         self,
-        api_service_id: Annotated[StrictStr, Field(..., description="`id` of the API Service Integration instance")],
-        secret_id: Annotated[StrictStr, Field(..., description="`id` of the API Service Integration instance Secret")],
+        api_service_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance")],
+        secret_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance Secret")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1595,8 +1593,8 @@ class ApiServiceIntegrationsApi:
     @validate_call
     def delete_api_service_integration_instance_secret_without_preload_content(
         self,
-        api_service_id: Annotated[StrictStr, Field(..., description="`id` of the API Service Integration instance")],
-        secret_id: Annotated[StrictStr, Field(..., description="`id` of the API Service Integration instance Secret")],
+        api_service_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance")],
+        secret_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance Secret")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1682,7 +1680,7 @@ class ApiServiceIntegrationsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1731,7 +1729,7 @@ class ApiServiceIntegrationsApi:
     @validate_call
     def get_api_service_integration_instance(
         self,
-        api_service_id: Annotated[StrictStr, Field(..., description="`id` of the API Service Integration instance")],
+        api_service_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1802,7 +1800,7 @@ class ApiServiceIntegrationsApi:
     @validate_call
     def get_api_service_integration_instance_with_http_info(
         self,
-        api_service_id: Annotated[StrictStr, Field(..., description="`id` of the API Service Integration instance")],
+        api_service_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1873,7 +1871,7 @@ class ApiServiceIntegrationsApi:
     @validate_call
     def get_api_service_integration_instance_without_preload_content(
         self,
-        api_service_id: Annotated[StrictStr, Field(..., description="`id` of the API Service Integration instance")],
+        api_service_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1955,7 +1953,7 @@ class ApiServiceIntegrationsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2002,7 +2000,7 @@ class ApiServiceIntegrationsApi:
     @validate_call
     def list_api_service_integration_instance_secrets(
         self,
-        api_service_id: Annotated[StrictStr, Field(..., description="`id` of the API Service Integration instance")],
+        api_service_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2073,7 +2071,7 @@ class ApiServiceIntegrationsApi:
     @validate_call
     def list_api_service_integration_instance_secrets_with_http_info(
         self,
-        api_service_id: Annotated[StrictStr, Field(..., description="`id` of the API Service Integration instance")],
+        api_service_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2144,7 +2142,7 @@ class ApiServiceIntegrationsApi:
     @validate_call
     def list_api_service_integration_instance_secrets_without_preload_content(
         self,
-        api_service_id: Annotated[StrictStr, Field(..., description="`id` of the API Service Integration instance")],
+        api_service_id: Annotated[StrictStr, Field(description="`id` of the API Service Integration instance")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2226,7 +2224,7 @@ class ApiServiceIntegrationsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2494,7 +2492,7 @@ class ApiServiceIntegrationsApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters

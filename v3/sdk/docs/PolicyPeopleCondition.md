@@ -23,7 +23,7 @@ print(PolicyPeopleCondition.to_json())
 # convert the object into a dict
 policy_people_condition_dict = policy_people_condition_instance.to_dict()
 # create an instance of PolicyPeopleCondition from a dict
-policy_people_condition_form_dict = policy_people_condition.from_dict(policy_people_condition_dict)
+policy_people_condition_from_dict = PolicyPeopleCondition.from_dict(policy_people_condition_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

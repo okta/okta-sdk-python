@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.authentication_method_object import AuthenticationMethodObject
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,12 +28,12 @@ class AccessPolicyConstraint(BaseModel):
     """
     AccessPolicyConstraint
     """ # noqa: E501
-    methods: Optional[conlist(StrictStr)] = Field(None, description="The Authenticator methods that are permitted")
-    reauthenticate_in: Optional[StrictStr] = Field(None, alias="reauthenticateIn", description="The duration after which the user must re-authenticate regardless of user activity. This re-authentication interval overrides the Verification Method object's `reauthenticateIn` interval. The supported values use ISO 8601 period format for recurring time intervals (for example, `PT1H`).")
-    types: Optional[conlist(StrictStr)] = Field(None, description="The Authenticator types that are permitted")
-    authentication_methods: Optional[conlist(AuthenticationMethodObject)] = Field(None, alias="authenticationMethods", description="This property specifies the precise authenticator and method for authentication.")
-    excluded_authentication_methods: Optional[conlist(AuthenticationMethodObject)] = Field(None, alias="excludedAuthenticationMethods", description="This property specifies the precise authenticator and method to exclude from authentication.")
-    required: Optional[StrictBool] = Field(None, description="This property indicates whether the knowledge or possession factor is required by the assurance. It's optional in the request, but is always returned in the response. By default, this field is `true`. If the knowledge or possession constraint has values for`excludedAuthenticationMethods` the `required` value is false.")
+    methods: Optional[List[StrictStr]] = Field(default=None, description="The Authenticator methods that are permitted")
+    reauthenticate_in: Optional[StrictStr] = Field(default=None, description="The duration after which the user must re-authenticate regardless of user activity. This re-authentication interval overrides the Verification Method object's `reauthenticateIn` interval. The supported values use ISO 8601 period format for recurring time intervals (for example, `PT1H`).", alias="reauthenticateIn")
+    types: Optional[List[StrictStr]] = Field(default=None, description="The Authenticator types that are permitted")
+    authentication_methods: Optional[List[AuthenticationMethodObject]] = Field(default=None, description="This property specifies the precise authenticator and method for authentication.", alias="authenticationMethods")
+    excluded_authentication_methods: Optional[List[AuthenticationMethodObject]] = Field(default=None, description="This property specifies the precise authenticator and method to exclude from authentication.", alias="excludedAuthenticationMethods")
+    required: Optional[StrictBool] = Field(default=None, description="This property indicates whether the knowledge or possession factor is required by the assurance. It's optional in the request, but is always returned in the response. By default, this field is `true`. If the knowledge or possession constraint has values for`excludedAuthenticationMethods` the `required` value is false.")
     __properties: ClassVar[List[str]] = ["methods", "reauthenticateIn", "types", "authenticationMethods", "excludedAuthenticationMethods", "required"]
 
     @field_validator('methods')

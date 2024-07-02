@@ -28,7 +28,7 @@ print(LogStream.to_json())
 # convert the object into a dict
 log_stream_dict = log_stream_instance.to_dict()
 # create an instance of LogStream from a dict
-log_stream_form_dict = log_stream.from_dict(log_stream_dict)
+log_stream_from_dict = LogStream.from_dict(log_stream_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

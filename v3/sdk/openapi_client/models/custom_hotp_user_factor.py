@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.custom_hotp_user_factor_profile import CustomHotpUserFactorProfile
 from openapi_client.models.factor_provider import FactorProvider
 from openapi_client.models.factor_status import FactorStatus
@@ -32,7 +34,7 @@ class CustomHotpUserFactor(UserFactor):
     """
     CustomHotpUserFactor
     """ # noqa: E501
-    factor_profile_id: Optional[StrictStr] = Field(None, alias="factorProfileId")
+    factor_profile_id: Optional[StrictStr] = Field(default=None, alias="factorProfileId")
     profile: Optional[CustomHotpUserFactorProfile] = None
     __properties: ClassVar[List[str]] = ["created", "factorType", "id", "lastUpdated", "profile", "provider", "status", "verify", "_embedded", "_links", "factorProfileId"]
 

@@ -32,7 +32,7 @@ print(AuthorizationServer.to_json())
 # convert the object into a dict
 authorization_server_dict = authorization_server_instance.to_dict()
 # create an instance of AuthorizationServer from a dict
-authorization_server_form_dict = authorization_server.from_dict(authorization_server_dict)
+authorization_server_from_dict = AuthorizationServer.from_dict(authorization_server_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

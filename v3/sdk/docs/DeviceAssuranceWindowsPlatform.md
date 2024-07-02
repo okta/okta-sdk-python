@@ -27,7 +27,7 @@ print(DeviceAssuranceWindowsPlatform.to_json())
 # convert the object into a dict
 device_assurance_windows_platform_dict = device_assurance_windows_platform_instance.to_dict()
 # create an instance of DeviceAssuranceWindowsPlatform from a dict
-device_assurance_windows_platform_form_dict = device_assurance_windows_platform.from_dict(device_assurance_windows_platform_dict)
+device_assurance_windows_platform_from_dict = DeviceAssuranceWindowsPlatform.from_dict(device_assurance_windows_platform_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

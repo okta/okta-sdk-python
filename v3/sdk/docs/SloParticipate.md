@@ -25,7 +25,7 @@ print(SloParticipate.to_json())
 # convert the object into a dict
 slo_participate_dict = slo_participate_instance.to_dict()
 # create an instance of SloParticipate from a dict
-slo_participate_form_dict = slo_participate.from_dict(slo_participate_dict)
+slo_participate_from_dict = SloParticipate.from_dict(slo_participate_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

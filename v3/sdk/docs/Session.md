@@ -32,7 +32,7 @@ print(Session.to_json())
 # convert the object into a dict
 session_dict = session_instance.to_dict()
 # create an instance of Session from a dict
-session_form_dict = session.from_dict(session_dict)
+session_from_dict = Session.from_dict(session_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

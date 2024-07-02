@@ -30,7 +30,7 @@ print(PostAPIServiceIntegrationInstance.to_json())
 # convert the object into a dict
 post_api_service_integration_instance_dict = post_api_service_integration_instance_instance.to_dict()
 # create an instance of PostAPIServiceIntegrationInstance from a dict
-post_api_service_integration_instance_form_dict = post_api_service_integration_instance.from_dict(post_api_service_integration_instance_dict)
+post_api_service_integration_instance_from_dict = PostAPIServiceIntegrationInstance.from_dict(post_api_service_integration_instance_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

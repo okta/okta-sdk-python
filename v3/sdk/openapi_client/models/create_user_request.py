@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.user_credentials import UserCredentials
 from openapi_client.models.user_profile import UserProfile
 from openapi_client.models.user_type import UserType
@@ -29,9 +31,9 @@ class CreateUserRequest(BaseModel):
     CreateUserRequest
     """ # noqa: E501
     credentials: Optional[UserCredentials] = None
-    group_ids: Optional[conlist(StrictStr)] = Field(None, alias="groupIds")
-    profile: UserProfile = Field(...)
-    realm_id: Optional[StrictStr] = Field(None, alias="realmId", description="The ID of the realm in which the user is residing")
+    group_ids: Optional[List[StrictStr]] = Field(default=None, alias="groupIds")
+    profile: UserProfile
+    realm_id: Optional[StrictStr] = Field(default=None, description="The ID of the realm in which the user is residing", alias="realmId")
     type: Optional[UserType] = None
     __properties: ClassVar[List[str]] = ["credentials", "groupIds", "profile", "realmId", "type"]
 

@@ -26,7 +26,7 @@ print(DeviceAssuranceAndroidPlatform.to_json())
 # convert the object into a dict
 device_assurance_android_platform_dict = device_assurance_android_platform_instance.to_dict()
 # create an instance of DeviceAssuranceAndroidPlatform from a dict
-device_assurance_android_platform_form_dict = device_assurance_android_platform.from_dict(device_assurance_android_platform_dict)
+device_assurance_android_platform_from_dict = DeviceAssuranceAndroidPlatform.from_dict(device_assurance_android_platform_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

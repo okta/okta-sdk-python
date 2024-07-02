@@ -38,7 +38,7 @@ print(GroupSchemaAttribute.to_json())
 # convert the object into a dict
 group_schema_attribute_dict = group_schema_attribute_instance.to_dict()
 # create an instance of GroupSchemaAttribute from a dict
-group_schema_attribute_form_dict = group_schema_attribute.from_dict(group_schema_attribute_dict)
+group_schema_attribute_from_dict = GroupSchemaAttribute.from_dict(group_schema_attribute_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

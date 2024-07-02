@@ -22,7 +22,7 @@ print(CallUserFactor.to_json())
 # convert the object into a dict
 call_user_factor_dict = call_user_factor_instance.to_dict()
 # create an instance of CallUserFactor from a dict
-call_user_factor_form_dict = call_user_factor.from_dict(call_user_factor_dict)
+call_user_factor_from_dict = CallUserFactor.from_dict(call_user_factor_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

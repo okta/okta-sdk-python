@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.disk_encryption_type import DiskEncryptionType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,7 +28,7 @@ class DeviceAssuranceAndroidPlatformAllOfDiskEncryptionType(BaseModel):
     """
     DeviceAssuranceAndroidPlatformAllOfDiskEncryptionType
     """ # noqa: E501
-    include: Optional[conlist(DiskEncryptionType)] = None
+    include: Optional[List[DiskEncryptionType]] = None
     __properties: ClassVar[List[str]] = ["include"]
 
     model_config = ConfigDict(

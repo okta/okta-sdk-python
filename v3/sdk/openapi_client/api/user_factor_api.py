@@ -17,11 +17,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictInt, StrictStr
-
-from typing import List, Optional
-
+from typing import Optional
+from typing_extensions import Annotated
 from openapi_client.models.activate_factor_request import ActivateFactorRequest
 from openapi_client.models.security_question import SecurityQuestion
 from openapi_client.models.user_factor import UserFactor
@@ -50,7 +48,7 @@ class UserFactorApi:
     def activate_factor(
         self,
         user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(..., description="`id` of the Factor")],
+        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
         body: Optional[ActivateFactorRequest] = None,
         _request_timeout: Union[
             None,
@@ -129,7 +127,7 @@ class UserFactorApi:
     def activate_factor_with_http_info(
         self,
         user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(..., description="`id` of the Factor")],
+        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
         body: Optional[ActivateFactorRequest] = None,
         _request_timeout: Union[
             None,
@@ -208,7 +206,7 @@ class UserFactorApi:
     def activate_factor_without_preload_content(
         self,
         user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(..., description="`id` of the Factor")],
+        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
         body: Optional[ActivateFactorRequest] = None,
         _request_timeout: Union[
             None,
@@ -299,7 +297,7 @@ class UserFactorApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -364,7 +362,7 @@ class UserFactorApi:
     def enroll_factor(
         self,
         user_id: StrictStr,
-        body: Annotated[UserFactor, Field(..., description="Factor")],
+        body: Annotated[UserFactor, Field(description="Factor")],
         update_phone: Optional[StrictBool] = None,
         template_id: Annotated[Optional[StrictStr], Field(description="id of SMS template (only for SMS factor)")] = None,
         token_lifetime_seconds: Optional[StrictInt] = None,
@@ -455,7 +453,7 @@ class UserFactorApi:
     def enroll_factor_with_http_info(
         self,
         user_id: StrictStr,
-        body: Annotated[UserFactor, Field(..., description="Factor")],
+        body: Annotated[UserFactor, Field(description="Factor")],
         update_phone: Optional[StrictBool] = None,
         template_id: Annotated[Optional[StrictStr], Field(description="id of SMS template (only for SMS factor)")] = None,
         token_lifetime_seconds: Optional[StrictInt] = None,
@@ -546,7 +544,7 @@ class UserFactorApi:
     def enroll_factor_without_preload_content(
         self,
         user_id: StrictStr,
-        body: Annotated[UserFactor, Field(..., description="Factor")],
+        body: Annotated[UserFactor, Field(description="Factor")],
         update_phone: Optional[StrictBool] = None,
         template_id: Annotated[Optional[StrictStr], Field(description="id of SMS template (only for SMS factor)")] = None,
         token_lifetime_seconds: Optional[StrictInt] = None,
@@ -652,7 +650,7 @@ class UserFactorApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -731,7 +729,7 @@ class UserFactorApi:
     def get_factor(
         self,
         user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(..., description="`id` of the Factor")],
+        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -805,7 +803,7 @@ class UserFactorApi:
     def get_factor_with_http_info(
         self,
         user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(..., description="`id` of the Factor")],
+        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -879,7 +877,7 @@ class UserFactorApi:
     def get_factor_without_preload_content(
         self,
         user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(..., description="`id` of the Factor")],
+        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -964,7 +962,7 @@ class UserFactorApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1014,8 +1012,8 @@ class UserFactorApi:
     def get_factor_transaction_status(
         self,
         user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(..., description="`id` of the Factor")],
-        transaction_id: Annotated[StrictStr, Field(..., description="`id` of the Transaction")],
+        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
+        transaction_id: Annotated[StrictStr, Field(description="`id` of the Transaction")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1092,8 +1090,8 @@ class UserFactorApi:
     def get_factor_transaction_status_with_http_info(
         self,
         user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(..., description="`id` of the Factor")],
-        transaction_id: Annotated[StrictStr, Field(..., description="`id` of the Transaction")],
+        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
+        transaction_id: Annotated[StrictStr, Field(description="`id` of the Transaction")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1170,8 +1168,8 @@ class UserFactorApi:
     def get_factor_transaction_status_without_preload_content(
         self,
         user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(..., description="`id` of the Factor")],
-        transaction_id: Annotated[StrictStr, Field(..., description="`id` of the Transaction")],
+        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
+        transaction_id: Annotated[StrictStr, Field(description="`id` of the Transaction")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1260,7 +1258,7 @@ class UserFactorApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1532,7 +1530,7 @@ class UserFactorApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1800,7 +1798,7 @@ class UserFactorApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2068,7 +2066,7 @@ class UserFactorApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2115,8 +2113,8 @@ class UserFactorApi:
     def resend_enroll_factor(
         self,
         user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(..., description="`id` of the Factor")],
-        user_factor: Annotated[UserFactor, Field(..., description="Factor")],
+        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
+        user_factor: Annotated[UserFactor, Field(description="Factor")],
         template_id: Annotated[Optional[StrictStr], Field(description="ID of SMS template (only for SMS factor)")] = None,
         _request_timeout: Union[
             None,
@@ -2198,8 +2196,8 @@ class UserFactorApi:
     def resend_enroll_factor_with_http_info(
         self,
         user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(..., description="`id` of the Factor")],
-        user_factor: Annotated[UserFactor, Field(..., description="Factor")],
+        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
+        user_factor: Annotated[UserFactor, Field(description="Factor")],
         template_id: Annotated[Optional[StrictStr], Field(description="ID of SMS template (only for SMS factor)")] = None,
         _request_timeout: Union[
             None,
@@ -2281,8 +2279,8 @@ class UserFactorApi:
     def resend_enroll_factor_without_preload_content(
         self,
         user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(..., description="`id` of the Factor")],
-        user_factor: Annotated[UserFactor, Field(..., description="Factor")],
+        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
+        user_factor: Annotated[UserFactor, Field(description="Factor")],
         template_id: Annotated[Optional[StrictStr], Field(description="ID of SMS template (only for SMS factor)")] = None,
         _request_timeout: Union[
             None,
@@ -2377,7 +2375,7 @@ class UserFactorApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2446,7 +2444,7 @@ class UserFactorApi:
     def unenroll_factor(
         self,
         user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(..., description="`id` of the Factor")],
+        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
         remove_recovery_enrollment: Optional[StrictBool] = None,
         _request_timeout: Union[
             None,
@@ -2524,7 +2522,7 @@ class UserFactorApi:
     def unenroll_factor_with_http_info(
         self,
         user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(..., description="`id` of the Factor")],
+        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
         remove_recovery_enrollment: Optional[StrictBool] = None,
         _request_timeout: Union[
             None,
@@ -2602,7 +2600,7 @@ class UserFactorApi:
     def unenroll_factor_without_preload_content(
         self,
         user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(..., description="`id` of the Factor")],
+        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
         remove_recovery_enrollment: Optional[StrictBool] = None,
         _request_timeout: Union[
             None,
@@ -2692,7 +2690,7 @@ class UserFactorApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2746,7 +2744,7 @@ class UserFactorApi:
     def verify_factor(
         self,
         user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(..., description="`id` of the Factor")],
+        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
         template_id: Optional[StrictStr] = None,
         token_lifetime_seconds: Optional[StrictInt] = None,
         x_forwarded_for: Optional[StrictStr] = None,
@@ -2845,7 +2843,7 @@ class UserFactorApi:
     def verify_factor_with_http_info(
         self,
         user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(..., description="`id` of the Factor")],
+        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
         template_id: Optional[StrictStr] = None,
         token_lifetime_seconds: Optional[StrictInt] = None,
         x_forwarded_for: Optional[StrictStr] = None,
@@ -2944,7 +2942,7 @@ class UserFactorApi:
     def verify_factor_without_preload_content(
         self,
         user_id: StrictStr,
-        factor_id: Annotated[StrictStr, Field(..., description="`id` of the Factor")],
+        factor_id: Annotated[StrictStr, Field(description="`id` of the Factor")],
         template_id: Optional[StrictStr] = None,
         token_lifetime_seconds: Optional[StrictInt] = None,
         x_forwarded_for: Optional[StrictStr] = None,
@@ -3060,7 +3058,7 @@ class UserFactorApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters

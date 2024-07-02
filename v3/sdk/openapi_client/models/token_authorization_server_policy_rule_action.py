@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.token_authorization_server_policy_rule_action_inline_hook import TokenAuthorizationServerPolicyRuleActionInlineHook
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,10 +28,10 @@ class TokenAuthorizationServerPolicyRuleAction(BaseModel):
     """
     TokenAuthorizationServerPolicyRuleAction
     """ # noqa: E501
-    access_token_lifetime_minutes: Optional[StrictInt] = Field(None, alias="accessTokenLifetimeMinutes")
-    inline_hook: Optional[TokenAuthorizationServerPolicyRuleActionInlineHook] = Field(None, alias="inlineHook")
-    refresh_token_lifetime_minutes: Optional[StrictInt] = Field(None, alias="refreshTokenLifetimeMinutes")
-    refresh_token_window_minutes: Optional[StrictInt] = Field(None, alias="refreshTokenWindowMinutes")
+    access_token_lifetime_minutes: Optional[StrictInt] = Field(default=None, alias="accessTokenLifetimeMinutes")
+    inline_hook: Optional[TokenAuthorizationServerPolicyRuleActionInlineHook] = Field(default=None, alias="inlineHook")
+    refresh_token_lifetime_minutes: Optional[StrictInt] = Field(default=None, alias="refreshTokenLifetimeMinutes")
+    refresh_token_window_minutes: Optional[StrictInt] = Field(default=None, alias="refreshTokenWindowMinutes")
     __properties: ClassVar[List[str]] = ["accessTokenLifetimeMinutes", "inlineHook", "refreshTokenLifetimeMinutes", "refreshTokenWindowMinutes"]
 
     model_config = ConfigDict(

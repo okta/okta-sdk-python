@@ -23,7 +23,7 @@ print(ProvisioningConditions.to_json())
 # convert the object into a dict
 provisioning_conditions_dict = provisioning_conditions_instance.to_dict()
 # create an instance of ProvisioningConditions from a dict
-provisioning_conditions_form_dict = provisioning_conditions.from_dict(provisioning_conditions_dict)
+provisioning_conditions_from_dict = ProvisioningConditions.from_dict(provisioning_conditions_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

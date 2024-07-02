@@ -37,7 +37,7 @@ print(LogEvent.to_json())
 # convert the object into a dict
 log_event_dict = log_event_instance.to_dict()
 # create an instance of LogEvent from a dict
-log_event_form_dict = log_event.from_dict(log_event_dict)
+log_event_from_dict = LogEvent.from_dict(log_event_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

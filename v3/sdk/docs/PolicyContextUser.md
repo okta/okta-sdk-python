@@ -23,7 +23,7 @@ print(PolicyContextUser.to_json())
 # convert the object into a dict
 policy_context_user_dict = policy_context_user_instance.to_dict()
 # create an instance of PolicyContextUser from a dict
-policy_context_user_form_dict = policy_context_user.from_dict(policy_context_user_dict)
+policy_context_user_from_dict = PolicyContextUser.from_dict(policy_context_user_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

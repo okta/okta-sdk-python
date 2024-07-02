@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,7 +27,7 @@ class GrantTypePolicyRuleCondition(BaseModel):
     """
     Array of grant types that this condition includes. Determines the mechanism that Okta uses to authorize the creation of the tokens.
     """ # noqa: E501
-    include: Optional[conlist(StrictStr)] = Field(None, description="Array of grant types thagt this condition includes.")
+    include: Optional[List[StrictStr]] = Field(default=None, description="Array of grant types thagt this condition includes.")
     __properties: ClassVar[List[str]] = ["include"]
 
     model_config = ConfigDict(

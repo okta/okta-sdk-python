@@ -23,7 +23,7 @@ print(EmailTestAddresses.to_json())
 # convert the object into a dict
 email_test_addresses_dict = email_test_addresses_instance.to_dict()
 # create an instance of EmailTestAddresses from a dict
-email_test_addresses_form_dict = email_test_addresses.from_dict(email_test_addresses_dict)
+email_test_addresses_from_dict = EmailTestAddresses.from_dict(email_test_addresses_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

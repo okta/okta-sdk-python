@@ -23,7 +23,7 @@ print(RateLimitAdminNotifications.to_json())
 # convert the object into a dict
 rate_limit_admin_notifications_dict = rate_limit_admin_notifications_instance.to_dict()
 # create an instance of RateLimitAdminNotifications from a dict
-rate_limit_admin_notifications_form_dict = rate_limit_admin_notifications.from_dict(rate_limit_admin_notifications_dict)
+rate_limit_admin_notifications_from_dict = RateLimitAdminNotifications.from_dict(rate_limit_admin_notifications_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

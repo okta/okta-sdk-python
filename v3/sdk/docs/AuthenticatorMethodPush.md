@@ -22,7 +22,7 @@ print(AuthenticatorMethodPush.to_json())
 # convert the object into a dict
 authenticator_method_push_dict = authenticator_method_push_instance.to_dict()
 # create an instance of AuthenticatorMethodPush from a dict
-authenticator_method_push_form_dict = authenticator_method_push.from_dict(authenticator_method_push_dict)
+authenticator_method_push_from_dict = AuthenticatorMethodPush.from_dict(authenticator_method_push_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

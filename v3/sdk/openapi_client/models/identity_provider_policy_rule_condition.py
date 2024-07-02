@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.identity_provider_policy_provider import IdentityProviderPolicyProvider
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,7 +28,7 @@ class IdentityProviderPolicyRuleCondition(BaseModel):
     """
     IdentityProviderPolicyRuleCondition
     """ # noqa: E501
-    idp_ids: Optional[conlist(StrictStr)] = Field(None, alias="idpIds")
+    idp_ids: Optional[List[StrictStr]] = Field(default=None, alias="idpIds")
     provider: Optional[IdentityProviderPolicyProvider] = None
     __properties: ClassVar[List[str]] = ["idpIds", "provider"]
 

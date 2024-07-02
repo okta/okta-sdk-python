@@ -26,7 +26,7 @@ print(GroupLinks.to_json())
 # convert the object into a dict
 group_links_dict = group_links_instance.to_dict()
 # create an instance of GroupLinks from a dict
-group_links_form_dict = group_links.from_dict(group_links_dict)
+group_links_from_dict = GroupLinks.from_dict(group_links_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

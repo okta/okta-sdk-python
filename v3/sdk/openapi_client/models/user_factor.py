@@ -18,6 +18,10 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
+from importlib import import_module
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from openapi_client.models.factor_provider import FactorProvider
 from openapi_client.models.factor_status import FactorStatus
 from openapi_client.models.factor_type import FactorType
@@ -47,15 +51,15 @@ class UserFactor(BaseModel):
     UserFactor
     """ # noqa: E501
     created: Optional[datetime] = None
-    factor_type: Optional[FactorType] = Field(None, alias="factorType")
+    factor_type: Optional[FactorType] = Field(default=None, alias="factorType")
     id: Optional[StrictStr] = None
-    last_updated: Optional[datetime] = Field(None, alias="lastUpdated")
-    profile: Optional[Dict[str, Any]] = Field(None, description="Factor-specific attributes")
+    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
+    profile: Optional[Dict[str, Any]] = Field(default=None, description="Factor-specific attributes")
     provider: Optional[FactorProvider] = None
     status: Optional[FactorStatus] = None
     verify: Optional[VerifyFactorRequest] = None
-    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(None, alias="_embedded")
-    links: Optional[LinksSelf] = Field(None, alias="_links")
+    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, alias="_embedded")
+    links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["created", "factorType", "id", "lastUpdated", "profile", "provider", "status", "verify", "_embedded", "_links"]
 
     model_config = ConfigDict(
@@ -135,31 +139,31 @@ class UserFactor(BaseModel):
         """Create an instance of UserFactor from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
-        if object_type ==  'call':
+        if object_type ==  'CallUserFactor':
             return import_module("openapi_client.models.call_user_factor").CallUserFactor.from_dict(obj)
-        if object_type ==  'email':
+        if object_type ==  'EmailUserFactor':
             return import_module("openapi_client.models.email_user_factor").EmailUserFactor.from_dict(obj)
-        if object_type ==  'hotp':
+        if object_type ==  'CustomHotpUserFactor':
             return import_module("openapi_client.models.custom_hotp_user_factor").CustomHotpUserFactor.from_dict(obj)
-        if object_type ==  'push':
+        if object_type ==  'PushUserFactor':
             return import_module("openapi_client.models.push_user_factor").PushUserFactor.from_dict(obj)
-        if object_type ==  'question':
+        if object_type ==  'SecurityQuestionUserFactor':
             return import_module("openapi_client.models.security_question_user_factor").SecurityQuestionUserFactor.from_dict(obj)
-        if object_type ==  'sms':
+        if object_type ==  'SmsUserFactor':
             return import_module("openapi_client.models.sms_user_factor").SmsUserFactor.from_dict(obj)
-        if object_type ==  'token':
+        if object_type ==  'TokenUserFactor':
             return import_module("openapi_client.models.token_user_factor").TokenUserFactor.from_dict(obj)
-        if object_type ==  'token:hardware':
+        if object_type ==  'HardwareUserFactor':
             return import_module("openapi_client.models.hardware_user_factor").HardwareUserFactor.from_dict(obj)
-        if object_type ==  'token:hotp':
+        if object_type ==  'CustomHotpUserFactor':
             return import_module("openapi_client.models.custom_hotp_user_factor").CustomHotpUserFactor.from_dict(obj)
-        if object_type ==  'token:software:totp':
+        if object_type ==  'TotpUserFactor':
             return import_module("openapi_client.models.totp_user_factor").TotpUserFactor.from_dict(obj)
-        if object_type ==  'u2f':
+        if object_type ==  'U2fUserFactor':
             return import_module("openapi_client.models.u2f_user_factor").U2fUserFactor.from_dict(obj)
-        if object_type ==  'web':
+        if object_type ==  'WebUserFactor':
             return import_module("openapi_client.models.web_user_factor").WebUserFactor.from_dict(obj)
-        if object_type ==  'webauthn':
+        if object_type ==  'WebAuthnUserFactor':
             return import_module("openapi_client.models.web_authn_user_factor").WebAuthnUserFactor.from_dict(obj)
 
         raise ValueError("UserFactor failed to lookup discriminator value from " +

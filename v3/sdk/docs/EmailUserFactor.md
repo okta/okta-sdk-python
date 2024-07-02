@@ -22,7 +22,7 @@ print(EmailUserFactor.to_json())
 # convert the object into a dict
 email_user_factor_dict = email_user_factor_instance.to_dict()
 # create an instance of EmailUserFactor from a dict
-email_user_factor_form_dict = email_user_factor.from_dict(email_user_factor_dict)
+email_user_factor_from_dict = EmailUserFactor.from_dict(email_user_factor_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

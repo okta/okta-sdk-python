@@ -22,7 +22,7 @@ print(PolicyAccountLinkFilter.to_json())
 # convert the object into a dict
 policy_account_link_filter_dict = policy_account_link_filter_instance.to_dict()
 # create an instance of PolicyAccountLinkFilter from a dict
-policy_account_link_filter_form_dict = policy_account_link_filter.from_dict(policy_account_link_filter_dict)
+policy_account_link_filter_from_dict = PolicyAccountLinkFilter.from_dict(policy_account_link_filter_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

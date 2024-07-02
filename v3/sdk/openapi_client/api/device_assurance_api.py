@@ -17,11 +17,8 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from typing_extensions import Annotated
 from pydantic import Field, StrictStr
-
-from typing import List
-
+from typing_extensions import Annotated
 from openapi_client.models.device_assurance import DeviceAssurance
 
 from openapi_client.api_client import ApiClient, RequestSerialized
@@ -266,7 +263,7 @@ class DeviceAssuranceApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -326,7 +323,7 @@ class DeviceAssuranceApi:
     @validate_call
     def delete_device_assurance_policy(
         self,
-        device_assurance_id: Annotated[StrictStr, Field(..., description="Id of the Device Assurance Policy")],
+        device_assurance_id: Annotated[StrictStr, Field(description="Id of the Device Assurance Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -397,7 +394,7 @@ class DeviceAssuranceApi:
     @validate_call
     def delete_device_assurance_policy_with_http_info(
         self,
-        device_assurance_id: Annotated[StrictStr, Field(..., description="Id of the Device Assurance Policy")],
+        device_assurance_id: Annotated[StrictStr, Field(description="Id of the Device Assurance Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -468,7 +465,7 @@ class DeviceAssuranceApi:
     @validate_call
     def delete_device_assurance_policy_without_preload_content(
         self,
-        device_assurance_id: Annotated[StrictStr, Field(..., description="Id of the Device Assurance Policy")],
+        device_assurance_id: Annotated[StrictStr, Field(description="Id of the Device Assurance Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -550,7 +547,7 @@ class DeviceAssuranceApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -597,7 +594,7 @@ class DeviceAssuranceApi:
     @validate_call
     def get_device_assurance_policy(
         self,
-        device_assurance_id: Annotated[StrictStr, Field(..., description="Id of the Device Assurance Policy")],
+        device_assurance_id: Annotated[StrictStr, Field(description="Id of the Device Assurance Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -667,7 +664,7 @@ class DeviceAssuranceApi:
     @validate_call
     def get_device_assurance_policy_with_http_info(
         self,
-        device_assurance_id: Annotated[StrictStr, Field(..., description="Id of the Device Assurance Policy")],
+        device_assurance_id: Annotated[StrictStr, Field(description="Id of the Device Assurance Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -737,7 +734,7 @@ class DeviceAssuranceApi:
     @validate_call
     def get_device_assurance_policy_without_preload_content(
         self,
-        device_assurance_id: Annotated[StrictStr, Field(..., description="Id of the Device Assurance Policy")],
+        device_assurance_id: Annotated[StrictStr, Field(description="Id of the Device Assurance Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -818,7 +815,7 @@ class DeviceAssuranceApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1070,7 +1067,7 @@ class DeviceAssuranceApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1115,7 +1112,7 @@ class DeviceAssuranceApi:
     @validate_call
     def replace_device_assurance_policy(
         self,
-        device_assurance_id: Annotated[StrictStr, Field(..., description="Id of the Device Assurance Policy")],
+        device_assurance_id: Annotated[StrictStr, Field(description="Id of the Device Assurance Policy")],
         device_assurance: DeviceAssurance,
         _request_timeout: Union[
             None,
@@ -1190,7 +1187,7 @@ class DeviceAssuranceApi:
     @validate_call
     def replace_device_assurance_policy_with_http_info(
         self,
-        device_assurance_id: Annotated[StrictStr, Field(..., description="Id of the Device Assurance Policy")],
+        device_assurance_id: Annotated[StrictStr, Field(description="Id of the Device Assurance Policy")],
         device_assurance: DeviceAssurance,
         _request_timeout: Union[
             None,
@@ -1265,7 +1262,7 @@ class DeviceAssuranceApi:
     @validate_call
     def replace_device_assurance_policy_without_preload_content(
         self,
-        device_assurance_id: Annotated[StrictStr, Field(..., description="Id of the Device Assurance Policy")],
+        device_assurance_id: Annotated[StrictStr, Field(description="Id of the Device Assurance Policy")],
         device_assurance: DeviceAssurance,
         _request_timeout: Union[
             None,
@@ -1352,7 +1349,7 @@ class DeviceAssuranceApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters

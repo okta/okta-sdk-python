@@ -23,7 +23,7 @@ print(SessionIdentityProvider.to_json())
 # convert the object into a dict
 session_identity_provider_dict = session_identity_provider_instance.to_dict()
 # create an instance of SessionIdentityProvider from a dict
-session_identity_provider_form_dict = session_identity_provider.from_dict(session_identity_provider_dict)
+session_identity_provider_from_dict = SessionIdentityProvider.from_dict(session_identity_provider_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

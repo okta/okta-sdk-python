@@ -31,7 +31,7 @@ print(VerifyFactorRequest.to_json())
 # convert the object into a dict
 verify_factor_request_dict = verify_factor_request_instance.to_dict()
 # create an instance of VerifyFactorRequest from a dict
-verify_factor_request_form_dict = verify_factor_request.from_dict(verify_factor_request_dict)
+verify_factor_request_from_dict = VerifyFactorRequest.from_dict(verify_factor_request_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

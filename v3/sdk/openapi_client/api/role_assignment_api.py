@@ -17,11 +17,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictInt, StrictStr
-
-from typing import List, Optional
-
+from typing import Optional
+from typing_extensions import Annotated
 from openapi_client.models.assign_role_request import AssignRoleRequest
 from openapi_client.models.role import Role
 from openapi_client.models.role_assigned_users import RoleAssignedUsers
@@ -47,7 +45,7 @@ class RoleAssignmentApi:
     @validate_call
     def assign_role_to_group(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
         assign_role_request: AssignRoleRequest,
         disable_notifications: Annotated[Optional[StrictBool], Field(description="Setting this to `true` grants the group third-party admin status")] = None,
         _request_timeout: Union[
@@ -127,7 +125,7 @@ class RoleAssignmentApi:
     @validate_call
     def assign_role_to_group_with_http_info(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
         assign_role_request: AssignRoleRequest,
         disable_notifications: Annotated[Optional[StrictBool], Field(description="Setting this to `true` grants the group third-party admin status")] = None,
         _request_timeout: Union[
@@ -207,7 +205,7 @@ class RoleAssignmentApi:
     @validate_call
     def assign_role_to_group_without_preload_content(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
         assign_role_request: AssignRoleRequest,
         disable_notifications: Annotated[Optional[StrictBool], Field(description="Setting this to `true` grants the group third-party admin status")] = None,
         _request_timeout: Union[
@@ -300,7 +298,7 @@ class RoleAssignmentApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -616,7 +614,7 @@ class RoleAssignmentApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -682,8 +680,8 @@ class RoleAssignmentApi:
     @validate_call
     def get_group_assigned_role(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -756,8 +754,8 @@ class RoleAssignmentApi:
     @validate_call
     def get_group_assigned_role_with_http_info(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -830,8 +828,8 @@ class RoleAssignmentApi:
     @validate_call
     def get_group_assigned_role_without_preload_content(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -916,7 +914,7 @@ class RoleAssignmentApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -966,7 +964,7 @@ class RoleAssignmentApi:
     def get_user_assigned_role(
         self,
         user_id: StrictStr,
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1040,7 +1038,7 @@ class RoleAssignmentApi:
     def get_user_assigned_role_with_http_info(
         self,
         user_id: StrictStr,
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1114,7 +1112,7 @@ class RoleAssignmentApi:
     def get_user_assigned_role_without_preload_content(
         self,
         user_id: StrictStr,
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1199,7 +1197,7 @@ class RoleAssignmentApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1482,7 +1480,7 @@ class RoleAssignmentApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1533,7 +1531,7 @@ class RoleAssignmentApi:
     @validate_call
     def list_group_assigned_roles(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
         expand: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -1607,7 +1605,7 @@ class RoleAssignmentApi:
     @validate_call
     def list_group_assigned_roles_with_http_info(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
         expand: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -1681,7 +1679,7 @@ class RoleAssignmentApi:
     @validate_call
     def list_group_assigned_roles_without_preload_content(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
         expand: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -1767,7 +1765,7 @@ class RoleAssignmentApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2049,7 +2047,7 @@ class RoleAssignmentApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2102,8 +2100,8 @@ class RoleAssignmentApi:
     @validate_call
     def unassign_role_from_group(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2176,8 +2174,8 @@ class RoleAssignmentApi:
     @validate_call
     def unassign_role_from_group_with_http_info(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2250,8 +2248,8 @@ class RoleAssignmentApi:
     @validate_call
     def unassign_role_from_group_without_preload_content(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2336,7 +2334,7 @@ class RoleAssignmentApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2386,7 +2384,7 @@ class RoleAssignmentApi:
     def unassign_role_from_user(
         self,
         user_id: StrictStr,
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2460,7 +2458,7 @@ class RoleAssignmentApi:
     def unassign_role_from_user_with_http_info(
         self,
         user_id: StrictStr,
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2534,7 +2532,7 @@ class RoleAssignmentApi:
     def unassign_role_from_user_without_preload_content(
         self,
         user_id: StrictStr,
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2619,7 +2617,7 @@ class RoleAssignmentApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters

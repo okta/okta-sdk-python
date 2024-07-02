@@ -41,7 +41,7 @@ print(SignInPageAllOfWidgetCustomizations.to_json())
 # convert the object into a dict
 sign_in_page_all_of_widget_customizations_dict = sign_in_page_all_of_widget_customizations_instance.to_dict()
 # create an instance of SignInPageAllOfWidgetCustomizations from a dict
-sign_in_page_all_of_widget_customizations_form_dict = sign_in_page_all_of_widget_customizations.from_dict(sign_in_page_all_of_widget_customizations_dict)
+sign_in_page_all_of_widget_customizations_from_dict = SignInPageAllOfWidgetCustomizations.from_dict(sign_in_page_all_of_widget_customizations_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

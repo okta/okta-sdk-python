@@ -30,7 +30,7 @@ print(InlineHookOAuthClientSecretConfig.to_json())
 # convert the object into a dict
 inline_hook_o_auth_client_secret_config_dict = inline_hook_o_auth_client_secret_config_instance.to_dict()
 # create an instance of InlineHookOAuthClientSecretConfig from a dict
-inline_hook_o_auth_client_secret_config_form_dict = inline_hook_o_auth_client_secret_config.from_dict(inline_hook_o_auth_client_secret_config_dict)
+inline_hook_o_auth_client_secret_config_from_dict = InlineHookOAuthClientSecretConfig.from_dict(inline_hook_o_auth_client_secret_config_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

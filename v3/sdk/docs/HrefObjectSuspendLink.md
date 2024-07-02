@@ -26,7 +26,7 @@ print(HrefObjectSuspendLink.to_json())
 # convert the object into a dict
 href_object_suspend_link_dict = href_object_suspend_link_instance.to_dict()
 # create an instance of HrefObjectSuspendLink from a dict
-href_object_suspend_link_form_dict = href_object_suspend_link.from_dict(href_object_suspend_link_dict)
+href_object_suspend_link_from_dict = HrefObjectSuspendLink.from_dict(href_object_suspend_link_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

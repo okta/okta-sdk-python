@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.identity_provider_type import IdentityProviderType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,8 +28,8 @@ class IdpPolicyRuleActionProvider(BaseModel):
     """
     IdpPolicyRuleActionProvider
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(None, description="IdP types of `OKTA`, `AgentlessDSSO`, and `IWA` don't require an ID.")
-    name: Optional[StrictStr] = Field(None, description="Provider `name` in Okta. Optional. Supported in `IDENTITY ENGINE`.")
+    id: Optional[StrictStr] = Field(default=None, description="IdP types of `OKTA`, `AgentlessDSSO`, and `IWA` don't require an ID.")
+    name: Optional[StrictStr] = Field(default=None, description="Provider `name` in Okta. Optional. Supported in `IDENTITY ENGINE`.")
     type: Optional[IdentityProviderType] = None
     __properties: ClassVar[List[str]] = ["id", "name", "type"]
 

@@ -22,7 +22,7 @@ print(PolicyContextZones.to_json())
 # convert the object into a dict
 policy_context_zones_dict = policy_context_zones_instance.to_dict()
 # create an instance of PolicyContextZones from a dict
-policy_context_zones_form_dict = policy_context_zones.from_dict(policy_context_zones_dict)
+policy_context_zones_from_dict = PolicyContextZones.from_dict(policy_context_zones_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

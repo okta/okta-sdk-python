@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,7 +27,7 @@ class UIElementOptions(BaseModel):
     """
     UI Schema element options object
     """ # noqa: E501
-    format: Optional[StrictStr] = Field(None, description="Specifies how the input appears")
+    format: Optional[StrictStr] = Field(default=None, description="Specifies how the input appears")
     __properties: ClassVar[List[str]] = ["format"]
 
     @field_validator('format')

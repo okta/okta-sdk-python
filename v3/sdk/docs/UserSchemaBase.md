@@ -25,7 +25,7 @@ print(UserSchemaBase.to_json())
 # convert the object into a dict
 user_schema_base_dict = user_schema_base_instance.to_dict()
 # create an instance of UserSchemaBase from a dict
-user_schema_base_form_dict = user_schema_base.from_dict(user_schema_base_dict)
+user_schema_base_from_dict = UserSchemaBase.from_dict(user_schema_base_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

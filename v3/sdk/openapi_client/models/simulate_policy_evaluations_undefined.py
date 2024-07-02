@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.simulate_result_policies_items import SimulateResultPoliciesItems
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,7 +28,7 @@ class SimulatePolicyEvaluationsUndefined(BaseModel):
     """
     A list of undefined but not matched policies and rules
     """ # noqa: E501
-    policies: Optional[conlist(SimulateResultPoliciesItems)] = None
+    policies: Optional[List[SimulateResultPoliciesItems]] = None
     __properties: ClassVar[List[str]] = ["policies"]
 
     model_config = ConfigDict(

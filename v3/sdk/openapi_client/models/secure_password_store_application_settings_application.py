@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,15 +27,15 @@ class SecurePasswordStoreApplicationSettingsApplication(BaseModel):
     """
     SecurePasswordStoreApplicationSettingsApplication
     """ # noqa: E501
-    optional_field1: Optional[StrictStr] = Field(None, alias="optionalField1")
-    optional_field1_value: Optional[StrictStr] = Field(None, alias="optionalField1Value")
-    optional_field2: Optional[StrictStr] = Field(None, alias="optionalField2")
-    optional_field2_value: Optional[StrictStr] = Field(None, alias="optionalField2Value")
-    optional_field3: Optional[StrictStr] = Field(None, alias="optionalField3")
-    optional_field3_value: Optional[StrictStr] = Field(None, alias="optionalField3Value")
-    password_field: Optional[StrictStr] = Field(None, alias="passwordField")
+    optional_field1: Optional[StrictStr] = Field(default=None, alias="optionalField1")
+    optional_field1_value: Optional[StrictStr] = Field(default=None, alias="optionalField1Value")
+    optional_field2: Optional[StrictStr] = Field(default=None, alias="optionalField2")
+    optional_field2_value: Optional[StrictStr] = Field(default=None, alias="optionalField2Value")
+    optional_field3: Optional[StrictStr] = Field(default=None, alias="optionalField3")
+    optional_field3_value: Optional[StrictStr] = Field(default=None, alias="optionalField3Value")
+    password_field: Optional[StrictStr] = Field(default=None, alias="passwordField")
     url: Optional[StrictStr] = None
-    username_field: Optional[StrictStr] = Field(None, alias="usernameField")
+    username_field: Optional[StrictStr] = Field(default=None, alias="usernameField")
     __properties: ClassVar[List[str]] = ["optionalField1", "optionalField1Value", "optionalField2", "optionalField2Value", "optionalField3", "optionalField3Value", "passwordField", "url", "usernameField"]
 
     model_config = ConfigDict(

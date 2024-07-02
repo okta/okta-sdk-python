@@ -22,7 +22,7 @@ print(DeviceAssuranceAndroidPlatformAllOfDiskEncryptionType.to_json())
 # convert the object into a dict
 device_assurance_android_platform_all_of_disk_encryption_type_dict = device_assurance_android_platform_all_of_disk_encryption_type_instance.to_dict()
 # create an instance of DeviceAssuranceAndroidPlatformAllOfDiskEncryptionType from a dict
-device_assurance_android_platform_all_of_disk_encryption_type_form_dict = device_assurance_android_platform_all_of_disk_encryption_type.from_dict(device_assurance_android_platform_all_of_disk_encryption_type_dict)
+device_assurance_android_platform_all_of_disk_encryption_type_from_dict = DeviceAssuranceAndroidPlatformAllOfDiskEncryptionType.from_dict(device_assurance_android_platform_all_of_disk_encryption_type_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

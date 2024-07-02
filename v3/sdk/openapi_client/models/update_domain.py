@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,7 +27,7 @@ class UpdateDomain(BaseModel):
     """
     UpdateDomain
     """ # noqa: E501
-    brand_id: StrictStr = Field(..., alias="brandId", description="The `id` of the brand used to replace the existing brand.")
+    brand_id: StrictStr = Field(description="The `id` of the brand used to replace the existing brand.", alias="brandId")
     __properties: ClassVar[List[str]] = ["brandId"]
 
     model_config = ConfigDict(

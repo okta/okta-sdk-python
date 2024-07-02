@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.policy_subject_match_type import PolicySubjectMatchType
 from openapi_client.models.policy_user_name_template import PolicyUserNameTemplate
 from typing import Optional, Set
@@ -28,10 +30,10 @@ class PolicySubject(BaseModel):
     PolicySubject
     """ # noqa: E501
     filter: Optional[StrictStr] = None
-    format: Optional[conlist(StrictStr)] = None
-    match_attribute: Optional[StrictStr] = Field(None, alias="matchAttribute")
-    match_type: Optional[PolicySubjectMatchType] = Field(None, alias="matchType")
-    user_name_template: Optional[PolicyUserNameTemplate] = Field(None, alias="userNameTemplate")
+    format: Optional[List[StrictStr]] = None
+    match_attribute: Optional[StrictStr] = Field(default=None, alias="matchAttribute")
+    match_type: Optional[PolicySubjectMatchType] = Field(default=None, alias="matchType")
+    user_name_template: Optional[PolicyUserNameTemplate] = Field(default=None, alias="userNameTemplate")
     __properties: ClassVar[List[str]] = ["filter", "format", "matchAttribute", "matchType", "userNameTemplate"]
 
     model_config = ConfigDict(

@@ -22,7 +22,7 @@ print(UserLockoutSettings.to_json())
 # convert the object into a dict
 user_lockout_settings_dict = user_lockout_settings_instance.to_dict()
 # create an instance of UserLockoutSettings from a dict
-user_lockout_settings_form_dict = user_lockout_settings.from_dict(user_lockout_settings_dict)
+user_lockout_settings_from_dict = UserLockoutSettings.from_dict(user_lockout_settings_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

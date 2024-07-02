@@ -17,11 +17,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
+from pydantic import Field, StrictStr
+from typing import Optional
 from typing_extensions import Annotated
-from pydantic import Field, StrictStr, conint
-
-from typing import List, Optional
-
 from openapi_client.models.api_token import ApiToken
 
 from openapi_client.api_client import ApiClient, RequestSerialized
@@ -45,7 +43,7 @@ class ApiTokenApi:
     @validate_call
     def get_api_token(
         self,
-        api_token_id: Annotated[StrictStr, Field(..., description="id of the API Token")],
+        api_token_id: Annotated[StrictStr, Field(description="id of the API Token")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -115,7 +113,7 @@ class ApiTokenApi:
     @validate_call
     def get_api_token_with_http_info(
         self,
-        api_token_id: Annotated[StrictStr, Field(..., description="id of the API Token")],
+        api_token_id: Annotated[StrictStr, Field(description="id of the API Token")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -185,7 +183,7 @@ class ApiTokenApi:
     @validate_call
     def get_api_token_without_preload_content(
         self,
-        api_token_id: Annotated[StrictStr, Field(..., description="id of the API Token")],
+        api_token_id: Annotated[StrictStr, Field(description="id of the API Token")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -266,7 +264,7 @@ class ApiTokenApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -314,7 +312,7 @@ class ApiTokenApi:
     def list_api_tokens(
         self,
         after: Annotated[Optional[StrictStr], Field(description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information.")] = None,
-        limit: Annotated[Optional[conint(strict=True, le=200, ge=1)], Field(description="A limit on the number of objects to return")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="A limit on the number of objects to return")] = None,
         q: Annotated[Optional[StrictStr], Field(description="Finds a token that matches the name or clientName.")] = None,
         _request_timeout: Union[
             None,
@@ -391,7 +389,7 @@ class ApiTokenApi:
     def list_api_tokens_with_http_info(
         self,
         after: Annotated[Optional[StrictStr], Field(description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information.")] = None,
-        limit: Annotated[Optional[conint(strict=True, le=200, ge=1)], Field(description="A limit on the number of objects to return")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="A limit on the number of objects to return")] = None,
         q: Annotated[Optional[StrictStr], Field(description="Finds a token that matches the name or clientName.")] = None,
         _request_timeout: Union[
             None,
@@ -468,7 +466,7 @@ class ApiTokenApi:
     def list_api_tokens_without_preload_content(
         self,
         after: Annotated[Optional[StrictStr], Field(description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information.")] = None,
-        limit: Annotated[Optional[conint(strict=True, le=200, ge=1)], Field(description="A limit on the number of objects to return")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="A limit on the number of objects to return")] = None,
         q: Annotated[Optional[StrictStr], Field(description="Finds a token that matches the name or clientName.")] = None,
         _request_timeout: Union[
             None,
@@ -557,7 +555,7 @@ class ApiTokenApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -614,7 +612,7 @@ class ApiTokenApi:
     @validate_call
     def revoke_api_token(
         self,
-        api_token_id: Annotated[StrictStr, Field(..., description="id of the API Token")],
+        api_token_id: Annotated[StrictStr, Field(description="id of the API Token")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -684,7 +682,7 @@ class ApiTokenApi:
     @validate_call
     def revoke_api_token_with_http_info(
         self,
-        api_token_id: Annotated[StrictStr, Field(..., description="id of the API Token")],
+        api_token_id: Annotated[StrictStr, Field(description="id of the API Token")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -754,7 +752,7 @@ class ApiTokenApi:
     @validate_call
     def revoke_api_token_without_preload_content(
         self,
-        api_token_id: Annotated[StrictStr, Field(..., description="id of the API Token")],
+        api_token_id: Annotated[StrictStr, Field(description="id of the API Token")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -835,7 +833,7 @@ class ApiTokenApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1087,7 +1085,7 @@ class ApiTokenApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters

@@ -27,7 +27,7 @@ print(ApplicationGroupAssignment.to_json())
 # convert the object into a dict
 application_group_assignment_dict = application_group_assignment_instance.to_dict()
 # create an instance of ApplicationGroupAssignment from a dict
-application_group_assignment_form_dict = application_group_assignment.from_dict(application_group_assignment_dict)
+application_group_assignment_from_dict = ApplicationGroupAssignment.from_dict(application_group_assignment_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

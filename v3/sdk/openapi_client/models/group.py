@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.group_links import GroupLinks
 from openapi_client.models.group_profile import GroupProfile
 from openapi_client.models.group_type import GroupType
@@ -30,13 +33,13 @@ class Group(BaseModel):
     """ # noqa: E501
     created: Optional[datetime] = None
     id: Optional[StrictStr] = None
-    last_membership_updated: Optional[datetime] = Field(None, alias="lastMembershipUpdated")
-    last_updated: Optional[datetime] = Field(None, alias="lastUpdated")
-    object_class: Optional[conlist(StrictStr)] = Field(None, alias="objectClass")
+    last_membership_updated: Optional[datetime] = Field(default=None, alias="lastMembershipUpdated")
+    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
+    object_class: Optional[List[StrictStr]] = Field(default=None, alias="objectClass")
     profile: Optional[GroupProfile] = None
     type: Optional[GroupType] = None
-    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(None, alias="_embedded")
-    links: Optional[GroupLinks] = Field(None, alias="_links")
+    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, alias="_embedded")
+    links: Optional[GroupLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["created", "id", "lastMembershipUpdated", "lastUpdated", "objectClass", "profile", "type", "_embedded", "_links"]
 
     model_config = ConfigDict(

@@ -24,7 +24,7 @@ print(DeviceDisplayName.to_json())
 # convert the object into a dict
 device_display_name_dict = device_display_name_instance.to_dict()
 # create an instance of DeviceDisplayName from a dict
-device_display_name_form_dict = device_display_name.from_dict(device_display_name_dict)
+device_display_name_from_dict = DeviceDisplayName.from_dict(device_display_name_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

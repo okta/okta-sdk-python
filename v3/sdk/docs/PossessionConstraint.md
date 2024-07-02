@@ -32,7 +32,7 @@ print(PossessionConstraint.to_json())
 # convert the object into a dict
 possession_constraint_dict = possession_constraint_instance.to_dict()
 # create an instance of PossessionConstraint from a dict
-possession_constraint_form_dict = possession_constraint.from_dict(possession_constraint_dict)
+possession_constraint_from_dict = PossessionConstraint.from_dict(possession_constraint_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

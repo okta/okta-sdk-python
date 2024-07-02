@@ -25,7 +25,7 @@ print(EmailDefaultContentAllOfLinks.to_json())
 # convert the object into a dict
 email_default_content_all_of_links_dict = email_default_content_all_of_links_instance.to_dict()
 # create an instance of EmailDefaultContentAllOfLinks from a dict
-email_default_content_all_of_links_form_dict = email_default_content_all_of_links.from_dict(email_default_content_all_of_links_dict)
+email_default_content_all_of_links_from_dict = EmailDefaultContentAllOfLinks.from_dict(email_default_content_all_of_links_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

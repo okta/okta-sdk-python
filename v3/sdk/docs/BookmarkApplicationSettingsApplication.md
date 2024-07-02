@@ -23,7 +23,7 @@ print(BookmarkApplicationSettingsApplication.to_json())
 # convert the object into a dict
 bookmark_application_settings_application_dict = bookmark_application_settings_application_instance.to_dict()
 # create an instance of BookmarkApplicationSettingsApplication from a dict
-bookmark_application_settings_application_form_dict = bookmark_application_settings_application.from_dict(bookmark_application_settings_application_dict)
+bookmark_application_settings_application_from_dict = BookmarkApplicationSettingsApplication.from_dict(bookmark_application_settings_application_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

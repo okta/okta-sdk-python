@@ -17,11 +17,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
+from pydantic import Field, StrictStr
+from typing import Optional
 from typing_extensions import Annotated
-from pydantic import Field, StrictStr, conint
-
-from typing import List, Optional
-
 from openapi_client.models.log_stream import LogStream
 from openapi_client.models.log_stream_put_schema import LogStreamPutSchema
 
@@ -46,7 +44,7 @@ class LogStreamApi:
     @validate_call
     def activate_log_stream(
         self,
-        log_stream_id: Annotated[StrictStr, Field(..., description="Unique identifier for the Log Stream")],
+        log_stream_id: Annotated[StrictStr, Field(description="Unique identifier for the Log Stream")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -116,7 +114,7 @@ class LogStreamApi:
     @validate_call
     def activate_log_stream_with_http_info(
         self,
-        log_stream_id: Annotated[StrictStr, Field(..., description="Unique identifier for the Log Stream")],
+        log_stream_id: Annotated[StrictStr, Field(description="Unique identifier for the Log Stream")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -186,7 +184,7 @@ class LogStreamApi:
     @validate_call
     def activate_log_stream_without_preload_content(
         self,
-        log_stream_id: Annotated[StrictStr, Field(..., description="Unique identifier for the Log Stream")],
+        log_stream_id: Annotated[StrictStr, Field(description="Unique identifier for the Log Stream")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -267,7 +265,7 @@ class LogStreamApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -535,7 +533,7 @@ class LogStreamApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -595,7 +593,7 @@ class LogStreamApi:
     @validate_call
     def deactivate_log_stream(
         self,
-        log_stream_id: Annotated[StrictStr, Field(..., description="Unique identifier for the Log Stream")],
+        log_stream_id: Annotated[StrictStr, Field(description="Unique identifier for the Log Stream")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -665,7 +663,7 @@ class LogStreamApi:
     @validate_call
     def deactivate_log_stream_with_http_info(
         self,
-        log_stream_id: Annotated[StrictStr, Field(..., description="Unique identifier for the Log Stream")],
+        log_stream_id: Annotated[StrictStr, Field(description="Unique identifier for the Log Stream")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -735,7 +733,7 @@ class LogStreamApi:
     @validate_call
     def deactivate_log_stream_without_preload_content(
         self,
-        log_stream_id: Annotated[StrictStr, Field(..., description="Unique identifier for the Log Stream")],
+        log_stream_id: Annotated[StrictStr, Field(description="Unique identifier for the Log Stream")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -816,7 +814,7 @@ class LogStreamApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -863,7 +861,7 @@ class LogStreamApi:
     @validate_call
     def delete_log_stream(
         self,
-        log_stream_id: Annotated[StrictStr, Field(..., description="Unique identifier for the Log Stream")],
+        log_stream_id: Annotated[StrictStr, Field(description="Unique identifier for the Log Stream")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -933,7 +931,7 @@ class LogStreamApi:
     @validate_call
     def delete_log_stream_with_http_info(
         self,
-        log_stream_id: Annotated[StrictStr, Field(..., description="Unique identifier for the Log Stream")],
+        log_stream_id: Annotated[StrictStr, Field(description="Unique identifier for the Log Stream")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1003,7 +1001,7 @@ class LogStreamApi:
     @validate_call
     def delete_log_stream_without_preload_content(
         self,
-        log_stream_id: Annotated[StrictStr, Field(..., description="Unique identifier for the Log Stream")],
+        log_stream_id: Annotated[StrictStr, Field(description="Unique identifier for the Log Stream")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1084,7 +1082,7 @@ class LogStreamApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1131,7 +1129,7 @@ class LogStreamApi:
     @validate_call
     def get_log_stream(
         self,
-        log_stream_id: Annotated[StrictStr, Field(..., description="Unique identifier for the Log Stream")],
+        log_stream_id: Annotated[StrictStr, Field(description="Unique identifier for the Log Stream")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1201,7 +1199,7 @@ class LogStreamApi:
     @validate_call
     def get_log_stream_with_http_info(
         self,
-        log_stream_id: Annotated[StrictStr, Field(..., description="Unique identifier for the Log Stream")],
+        log_stream_id: Annotated[StrictStr, Field(description="Unique identifier for the Log Stream")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1271,7 +1269,7 @@ class LogStreamApi:
     @validate_call
     def get_log_stream_without_preload_content(
         self,
-        log_stream_id: Annotated[StrictStr, Field(..., description="Unique identifier for the Log Stream")],
+        log_stream_id: Annotated[StrictStr, Field(description="Unique identifier for the Log Stream")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1352,7 +1350,7 @@ class LogStreamApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1400,7 +1398,7 @@ class LogStreamApi:
     def list_log_streams(
         self,
         after: Annotated[Optional[StrictStr], Field(description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information.")] = None,
-        limit: Annotated[Optional[conint(strict=True, le=200, ge=1)], Field(description="A limit on the number of objects to return")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="A limit on the number of objects to return")] = None,
         filter: Annotated[Optional[StrictStr], Field(description="An expression that [filters](/#filter) the returned objects. You can only use the `eq` operator on either the `status` or `type` properties in the filter expression.")] = None,
         _request_timeout: Union[
             None,
@@ -1477,7 +1475,7 @@ class LogStreamApi:
     def list_log_streams_with_http_info(
         self,
         after: Annotated[Optional[StrictStr], Field(description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information.")] = None,
-        limit: Annotated[Optional[conint(strict=True, le=200, ge=1)], Field(description="A limit on the number of objects to return")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="A limit on the number of objects to return")] = None,
         filter: Annotated[Optional[StrictStr], Field(description="An expression that [filters](/#filter) the returned objects. You can only use the `eq` operator on either the `status` or `type` properties in the filter expression.")] = None,
         _request_timeout: Union[
             None,
@@ -1554,7 +1552,7 @@ class LogStreamApi:
     def list_log_streams_without_preload_content(
         self,
         after: Annotated[Optional[StrictStr], Field(description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information.")] = None,
-        limit: Annotated[Optional[conint(strict=True, le=200, ge=1)], Field(description="A limit on the number of objects to return")] = None,
+        limit: Annotated[Optional[Annotated[int, Field(le=200, strict=True, ge=1)]], Field(description="A limit on the number of objects to return")] = None,
         filter: Annotated[Optional[StrictStr], Field(description="An expression that [filters](/#filter) the returned objects. You can only use the `eq` operator on either the `status` or `type` properties in the filter expression.")] = None,
         _request_timeout: Union[
             None,
@@ -1643,7 +1641,7 @@ class LogStreamApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1700,7 +1698,7 @@ class LogStreamApi:
     @validate_call
     def replace_log_stream(
         self,
-        log_stream_id: Annotated[StrictStr, Field(..., description="Unique identifier for the Log Stream")],
+        log_stream_id: Annotated[StrictStr, Field(description="Unique identifier for the Log Stream")],
         instance: LogStreamPutSchema,
         _request_timeout: Union[
             None,
@@ -1775,7 +1773,7 @@ class LogStreamApi:
     @validate_call
     def replace_log_stream_with_http_info(
         self,
-        log_stream_id: Annotated[StrictStr, Field(..., description="Unique identifier for the Log Stream")],
+        log_stream_id: Annotated[StrictStr, Field(description="Unique identifier for the Log Stream")],
         instance: LogStreamPutSchema,
         _request_timeout: Union[
             None,
@@ -1850,7 +1848,7 @@ class LogStreamApi:
     @validate_call
     def replace_log_stream_without_preload_content(
         self,
-        log_stream_id: Annotated[StrictStr, Field(..., description="Unique identifier for the Log Stream")],
+        log_stream_id: Annotated[StrictStr, Field(description="Unique identifier for the Log Stream")],
         instance: LogStreamPutSchema,
         _request_timeout: Union[
             None,
@@ -1937,7 +1935,7 @@ class LogStreamApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters

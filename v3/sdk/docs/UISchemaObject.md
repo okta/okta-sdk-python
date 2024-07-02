@@ -26,7 +26,7 @@ print(UISchemaObject.to_json())
 # convert the object into a dict
 ui_schema_object_dict = ui_schema_object_instance.to_dict()
 # create an instance of UISchemaObject from a dict
-ui_schema_object_form_dict = ui_schema_object.from_dict(ui_schema_object_dict)
+ui_schema_object_from_dict = UISchemaObject.from_dict(ui_schema_object_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

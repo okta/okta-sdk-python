@@ -18,6 +18,10 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
+from importlib import import_module
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List, Union
 from openapi_client.models.log_stream_links_self_and_lifecycle import LogStreamLinksSelfAndLifecycle
 from openapi_client.models.log_stream_type import LogStreamType
 from typing import Optional, Set
@@ -32,13 +36,13 @@ class LogStream(BaseModel):
     """
     LogStream
     """ # noqa: E501
-    created: datetime = Field(..., description="Timestamp when the Log Stream object was created")
-    id: StrictStr = Field(..., description="Unique identifier for the Log Stream")
-    last_updated: datetime = Field(..., alias="lastUpdated", description="Timestamp when the Log Stream object was last updated")
-    name: StrictStr = Field(..., description="Unique name for the Log Stream object")
-    status: StrictStr = Field(..., description="Lifecycle status of the Log Stream object")
-    type: LogStreamType = Field(...)
-    links: LogStreamLinksSelfAndLifecycle = Field(..., alias="_links")
+    created: datetime = Field(description="Timestamp when the Log Stream object was created")
+    id: StrictStr = Field(description="Unique identifier for the Log Stream")
+    last_updated: datetime = Field(description="Timestamp when the Log Stream object was last updated", alias="lastUpdated")
+    name: StrictStr = Field(description="Unique name for the Log Stream object")
+    status: StrictStr = Field(description="Lifecycle status of the Log Stream object")
+    type: LogStreamType
+    links: LogStreamLinksSelfAndLifecycle = Field(alias="_links")
     __properties: ClassVar[List[str]] = ["created", "id", "lastUpdated", "name", "status", "type", "_links"]
 
     @field_validator('status')
@@ -122,9 +126,9 @@ class LogStream(BaseModel):
         """Create an instance of LogStream from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
-        if object_type ==  'aws_eventbridge':
+        if object_type ==  'LogStreamAws':
             return import_module("openapi_client.models.log_stream_aws").LogStreamAws.from_dict(obj)
-        if object_type ==  'splunk_cloud_logstreaming':
+        if object_type ==  'LogStreamSplunk':
             return import_module("openapi_client.models.log_stream_splunk").LogStreamSplunk.from_dict(obj)
 
         raise ValueError("LogStream failed to lookup discriminator value from " +

@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.application_layouts_links import ApplicationLayoutsLinks
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,7 +28,7 @@ class ApplicationLayouts(BaseModel):
     """
     ApplicationLayouts
     """ # noqa: E501
-    links: Optional[ApplicationLayoutsLinks] = Field(None, alias="_links")
+    links: Optional[ApplicationLayoutsLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["_links"]
 
     model_config = ConfigDict(

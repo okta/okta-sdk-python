@@ -28,7 +28,7 @@ print(ProfileEnrollmentPolicyRuleAction.to_json())
 # convert the object into a dict
 profile_enrollment_policy_rule_action_dict = profile_enrollment_policy_rule_action_instance.to_dict()
 # create an instance of ProfileEnrollmentPolicyRuleAction from a dict
-profile_enrollment_policy_rule_action_form_dict = profile_enrollment_policy_rule_action.from_dict(profile_enrollment_policy_rule_action_dict)
+profile_enrollment_policy_rule_action_from_dict = ProfileEnrollmentPolicyRuleAction.from_dict(profile_enrollment_policy_rule_action_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

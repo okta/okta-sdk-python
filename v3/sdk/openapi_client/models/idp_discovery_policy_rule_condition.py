@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.app_and_instance_policy_rule_condition import AppAndInstancePolicyRuleCondition
 from openapi_client.models.platform_policy_rule_condition import PlatformPolicyRuleCondition
 from openapi_client.models.policy_network_condition import PolicyNetworkCondition
@@ -31,7 +33,7 @@ class IdpDiscoveryPolicyRuleCondition(BaseModel):
     """ # noqa: E501
     app: Optional[AppAndInstancePolicyRuleCondition] = None
     network: Optional[PolicyNetworkCondition] = None
-    user_identifier: Optional[UserIdentifierPolicyRuleCondition] = Field(None, alias="userIdentifier")
+    user_identifier: Optional[UserIdentifierPolicyRuleCondition] = Field(default=None, alias="userIdentifier")
     platform: Optional[PlatformPolicyRuleCondition] = None
     __properties: ClassVar[List[str]] = ["app", "network", "userIdentifier", "platform"]
 

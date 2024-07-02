@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.links_self import LinksSelf
 from typing import Optional, Set
 from typing_extensions import Self
@@ -30,7 +32,7 @@ class OAuth2Client(BaseModel):
     client_name: Optional[StrictStr] = None
     client_uri: Optional[StrictStr] = None
     logo_uri: Optional[StrictStr] = None
-    links: Optional[LinksSelf] = Field(None, alias="_links")
+    links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["client_id", "client_name", "client_uri", "logo_uri", "_links"]
 
     model_config = ConfigDict(

@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,7 +27,7 @@ class ApplicationLicensing(BaseModel):
     """
     ApplicationLicensing
     """ # noqa: E501
-    seat_count: Optional[StrictInt] = Field(None, alias="seatCount")
+    seat_count: Optional[StrictInt] = Field(default=None, alias="seatCount")
     __properties: ClassVar[List[str]] = ["seatCount"]
 
     model_config = ConfigDict(

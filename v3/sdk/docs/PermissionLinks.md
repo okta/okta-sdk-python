@@ -23,7 +23,7 @@ print(PermissionLinks.to_json())
 # convert the object into a dict
 permission_links_dict = permission_links_instance.to_dict()
 # create an instance of PermissionLinks from a dict
-permission_links_form_dict = permission_links.from_dict(permission_links_dict)
+permission_links_from_dict = PermissionLinks.from_dict(permission_links_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,10 +27,10 @@ class ApplicationCredentialsUsernameTemplate(BaseModel):
     """
     ApplicationCredentialsUsernameTemplate
     """ # noqa: E501
-    push_status: Optional[StrictStr] = Field(None, alias="pushStatus")
+    push_status: Optional[StrictStr] = Field(default=None, alias="pushStatus")
     template: Optional[StrictStr] = None
     type: Optional[StrictStr] = None
-    user_suffix: Optional[StrictStr] = Field(None, alias="userSuffix")
+    user_suffix: Optional[StrictStr] = Field(default=None, alias="userSuffix")
     __properties: ClassVar[List[str]] = ["pushStatus", "template", "type", "userSuffix"]
 
     model_config = ConfigDict(

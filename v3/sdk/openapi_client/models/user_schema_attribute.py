@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.user_schema_attribute_enum import UserSchemaAttributeEnum
 from openapi_client.models.user_schema_attribute_items import UserSchemaAttributeItems
 from openapi_client.models.user_schema_attribute_master import UserSchemaAttributeMaster
@@ -33,17 +35,17 @@ class UserSchemaAttribute(BaseModel):
     UserSchemaAttribute
     """ # noqa: E501
     description: Optional[StrictStr] = None
-    enum: Optional[conlist(StrictStr)] = None
-    external_name: Optional[StrictStr] = Field(None, alias="externalName")
-    external_namespace: Optional[StrictStr] = Field(None, alias="externalNamespace")
+    enum: Optional[List[StrictStr]] = None
+    external_name: Optional[StrictStr] = Field(default=None, alias="externalName")
+    external_namespace: Optional[StrictStr] = Field(default=None, alias="externalNamespace")
     items: Optional[UserSchemaAttributeItems] = None
     master: Optional[UserSchemaAttributeMaster] = None
-    max_length: Optional[StrictInt] = Field(None, alias="maxLength")
-    min_length: Optional[StrictInt] = Field(None, alias="minLength")
+    max_length: Optional[StrictInt] = Field(default=None, alias="maxLength")
+    min_length: Optional[StrictInt] = Field(default=None, alias="minLength")
     mutability: Optional[StrictStr] = None
-    one_of: Optional[conlist(UserSchemaAttributeEnum)] = Field(None, alias="oneOf")
+    one_of: Optional[List[UserSchemaAttributeEnum]] = Field(default=None, alias="oneOf")
     pattern: Optional[StrictStr] = None
-    permissions: Optional[conlist(UserSchemaAttributePermission)] = None
+    permissions: Optional[List[UserSchemaAttributePermission]] = None
     required: Optional[StrictBool] = None
     scope: Optional[UserSchemaAttributeScope] = None
     title: Optional[StrictStr] = None

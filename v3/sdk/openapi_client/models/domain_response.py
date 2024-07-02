@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.dns_record import DNSRecord
 from openapi_client.models.domain_certificate_metadata import DomainCertificateMetadata
 from openapi_client.models.domain_certificate_source_type import DomainCertificateSourceType
@@ -30,14 +32,14 @@ class DomainResponse(BaseModel):
     """
     The properties that define an individual domain.
     """ # noqa: E501
-    brand_id: Optional[StrictStr] = Field(None, alias="brandId", description="The ID number of the brand")
-    certificate_source_type: Optional[DomainCertificateSourceType] = Field(None, alias="certificateSourceType")
-    dns_records: Optional[conlist(DNSRecord)] = Field(None, alias="dnsRecords")
-    domain: Optional[StrictStr] = Field(None, description="Custom domain name")
-    id: Optional[StrictStr] = Field(None, description="Unique ID of the domain")
-    public_certificate: Optional[DomainCertificateMetadata] = Field(None, alias="publicCertificate")
-    validation_status: Optional[DomainValidationStatus] = Field(None, alias="validationStatus")
-    links: Optional[DomainLinks] = Field(None, alias="_links")
+    brand_id: Optional[StrictStr] = Field(default=None, description="The ID number of the brand", alias="brandId")
+    certificate_source_type: Optional[DomainCertificateSourceType] = Field(default=None, alias="certificateSourceType")
+    dns_records: Optional[List[DNSRecord]] = Field(default=None, alias="dnsRecords")
+    domain: Optional[StrictStr] = Field(default=None, description="Custom domain name")
+    id: Optional[StrictStr] = Field(default=None, description="Unique ID of the domain")
+    public_certificate: Optional[DomainCertificateMetadata] = Field(default=None, alias="publicCertificate")
+    validation_status: Optional[DomainValidationStatus] = Field(default=None, alias="validationStatus")
+    links: Optional[DomainLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["brandId", "certificateSourceType", "dnsRecords", "domain", "id", "publicCertificate", "validationStatus", "_links"]
 
     model_config = ConfigDict(

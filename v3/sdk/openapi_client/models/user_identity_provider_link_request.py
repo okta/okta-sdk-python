@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,7 +27,7 @@ class UserIdentityProviderLinkRequest(BaseModel):
     """
     UserIdentityProviderLinkRequest
     """ # noqa: E501
-    external_id: Optional[StrictStr] = Field(None, alias="externalId")
+    external_id: Optional[StrictStr] = Field(default=None, alias="externalId")
     __properties: ClassVar[List[str]] = ["externalId"]
 
     model_config = ConfigDict(

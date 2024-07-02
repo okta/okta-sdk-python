@@ -17,11 +17,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from typing_extensions import Annotated
 from pydantic import Field, StrictStr
-
-from typing import List, Optional
-
+from typing import Optional
+from typing_extensions import Annotated
 from openapi_client.models.sms_template import SmsTemplate
 from openapi_client.models.sms_template_type import SmsTemplateType
 
@@ -267,7 +265,7 @@ class TemplateApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -327,7 +325,7 @@ class TemplateApi:
     @validate_call
     def delete_sms_template(
         self,
-        template_id: Annotated[StrictStr, Field(..., description="`id` of the Template")],
+        template_id: Annotated[StrictStr, Field(description="`id` of the Template")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -397,7 +395,7 @@ class TemplateApi:
     @validate_call
     def delete_sms_template_with_http_info(
         self,
-        template_id: Annotated[StrictStr, Field(..., description="`id` of the Template")],
+        template_id: Annotated[StrictStr, Field(description="`id` of the Template")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -467,7 +465,7 @@ class TemplateApi:
     @validate_call
     def delete_sms_template_without_preload_content(
         self,
-        template_id: Annotated[StrictStr, Field(..., description="`id` of the Template")],
+        template_id: Annotated[StrictStr, Field(description="`id` of the Template")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -548,7 +546,7 @@ class TemplateApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -595,7 +593,7 @@ class TemplateApi:
     @validate_call
     def get_sms_template(
         self,
-        template_id: Annotated[StrictStr, Field(..., description="`id` of the Template")],
+        template_id: Annotated[StrictStr, Field(description="`id` of the Template")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -665,7 +663,7 @@ class TemplateApi:
     @validate_call
     def get_sms_template_with_http_info(
         self,
-        template_id: Annotated[StrictStr, Field(..., description="`id` of the Template")],
+        template_id: Annotated[StrictStr, Field(description="`id` of the Template")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -735,7 +733,7 @@ class TemplateApi:
     @validate_call
     def get_sms_template_without_preload_content(
         self,
-        template_id: Annotated[StrictStr, Field(..., description="`id` of the Template")],
+        template_id: Annotated[StrictStr, Field(description="`id` of the Template")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -816,7 +814,7 @@ class TemplateApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1081,7 +1079,7 @@ class TemplateApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1130,7 +1128,7 @@ class TemplateApi:
     @validate_call
     def replace_sms_template(
         self,
-        template_id: Annotated[StrictStr, Field(..., description="`id` of the Template")],
+        template_id: Annotated[StrictStr, Field(description="`id` of the Template")],
         sms_template: SmsTemplate,
         _request_timeout: Union[
             None,
@@ -1205,7 +1203,7 @@ class TemplateApi:
     @validate_call
     def replace_sms_template_with_http_info(
         self,
-        template_id: Annotated[StrictStr, Field(..., description="`id` of the Template")],
+        template_id: Annotated[StrictStr, Field(description="`id` of the Template")],
         sms_template: SmsTemplate,
         _request_timeout: Union[
             None,
@@ -1280,7 +1278,7 @@ class TemplateApi:
     @validate_call
     def replace_sms_template_without_preload_content(
         self,
-        template_id: Annotated[StrictStr, Field(..., description="`id` of the Template")],
+        template_id: Annotated[StrictStr, Field(description="`id` of the Template")],
         sms_template: SmsTemplate,
         _request_timeout: Union[
             None,
@@ -1367,7 +1365,7 @@ class TemplateApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1429,7 +1427,7 @@ class TemplateApi:
     @validate_call
     def update_sms_template(
         self,
-        template_id: Annotated[StrictStr, Field(..., description="`id` of the Template")],
+        template_id: Annotated[StrictStr, Field(description="`id` of the Template")],
         sms_template: SmsTemplate,
         _request_timeout: Union[
             None,
@@ -1504,7 +1502,7 @@ class TemplateApi:
     @validate_call
     def update_sms_template_with_http_info(
         self,
-        template_id: Annotated[StrictStr, Field(..., description="`id` of the Template")],
+        template_id: Annotated[StrictStr, Field(description="`id` of the Template")],
         sms_template: SmsTemplate,
         _request_timeout: Union[
             None,
@@ -1579,7 +1577,7 @@ class TemplateApi:
     @validate_call
     def update_sms_template_without_preload_content(
         self,
-        template_id: Annotated[StrictStr, Field(..., description="`id` of the Template")],
+        template_id: Annotated[StrictStr, Field(description="`id` of the Template")],
         sms_template: SmsTemplate,
         _request_timeout: Union[
             None,
@@ -1666,7 +1664,7 @@ class TemplateApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters

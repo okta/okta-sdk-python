@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import ConfigDict
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.lifecycle_status import LifecycleStatus
 from openapi_client.models.password_policy_conditions import PasswordPolicyConditions
 from openapi_client.models.password_policy_settings import PasswordPolicySettings

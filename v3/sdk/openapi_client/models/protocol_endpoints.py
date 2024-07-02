@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.protocol_endpoint import ProtocolEndpoint
 from typing import Optional, Set
 from typing_extensions import Self
@@ -33,7 +35,7 @@ class ProtocolEndpoints(BaseModel):
     slo: Optional[ProtocolEndpoint] = None
     sso: Optional[ProtocolEndpoint] = None
     token: Optional[ProtocolEndpoint] = None
-    user_info: Optional[ProtocolEndpoint] = Field(None, alias="userInfo")
+    user_info: Optional[ProtocolEndpoint] = Field(default=None, alias="userInfo")
     __properties: ClassVar[List[str]] = ["acs", "authorization", "jwks", "metadata", "slo", "sso", "token", "userInfo"]
 
     model_config = ConfigDict(

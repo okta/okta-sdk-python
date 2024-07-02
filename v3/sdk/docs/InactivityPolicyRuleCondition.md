@@ -23,7 +23,7 @@ print(InactivityPolicyRuleCondition.to_json())
 # convert the object into a dict
 inactivity_policy_rule_condition_dict = inactivity_policy_rule_condition_instance.to_dict()
 # create an instance of InactivityPolicyRuleCondition from a dict
-inactivity_policy_rule_condition_form_dict = inactivity_policy_rule_condition.from_dict(inactivity_policy_rule_condition_dict)
+inactivity_policy_rule_condition_from_dict = InactivityPolicyRuleCondition.from_dict(inactivity_policy_rule_condition_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

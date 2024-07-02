@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,7 +27,7 @@ class BouncesRemoveListError(BaseModel):
     """
     BouncesRemoveListError
     """ # noqa: E501
-    email_address: Optional[StrictStr] = Field(None, alias="emailAddress")
+    email_address: Optional[StrictStr] = Field(default=None, alias="emailAddress")
     reason: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["emailAddress", "reason"]
 

@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.authenticator_links import AuthenticatorLinks
 from openapi_client.models.authenticator_provider import AuthenticatorProvider
 from openapi_client.models.authenticator_settings import AuthenticatorSettings
@@ -33,13 +36,13 @@ class Authenticator(BaseModel):
     created: Optional[datetime] = None
     id: Optional[StrictStr] = None
     key: Optional[StrictStr] = None
-    last_updated: Optional[datetime] = Field(None, alias="lastUpdated")
+    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
     name: Optional[StrictStr] = None
     provider: Optional[AuthenticatorProvider] = None
     settings: Optional[AuthenticatorSettings] = None
     status: Optional[LifecycleStatus] = None
     type: Optional[AuthenticatorType] = None
-    links: Optional[AuthenticatorLinks] = Field(None, alias="_links")
+    links: Optional[AuthenticatorLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["created", "id", "key", "lastUpdated", "name", "provider", "settings", "status", "type", "_links"]
 
     model_config = ConfigDict(

@@ -25,7 +25,7 @@ print(EmailCustomizationAllOfLinks.to_json())
 # convert the object into a dict
 email_customization_all_of_links_dict = email_customization_all_of_links_instance.to_dict()
 # create an instance of EmailCustomizationAllOfLinks from a dict
-email_customization_all_of_links_form_dict = email_customization_all_of_links.from_dict(email_customization_all_of_links_dict)
+email_customization_all_of_links_from_dict = EmailCustomizationAllOfLinks.from_dict(email_customization_all_of_links_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -23,7 +23,7 @@ print(GroupSchemaDefinitions.to_json())
 # convert the object into a dict
 group_schema_definitions_dict = group_schema_definitions_instance.to_dict()
 # create an instance of GroupSchemaDefinitions from a dict
-group_schema_definitions_form_dict = group_schema_definitions.from_dict(group_schema_definitions_dict)
+group_schema_definitions_from_dict = GroupSchemaDefinitions.from_dict(group_schema_definitions_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

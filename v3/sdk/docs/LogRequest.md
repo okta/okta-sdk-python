@@ -22,7 +22,7 @@ print(LogRequest.to_json())
 # convert the object into a dict
 log_request_dict = log_request_instance.to_dict()
 # create an instance of LogRequest from a dict
-log_request_form_dict = log_request.from_dict(log_request_dict)
+log_request_from_dict = LogRequest.from_dict(log_request_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

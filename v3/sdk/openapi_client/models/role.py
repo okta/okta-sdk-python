@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.lifecycle_status import LifecycleStatus
 from openapi_client.models.links_self import LinksSelf
 from openapi_client.models.role_assignment_type import RoleAssignmentType
@@ -29,16 +32,16 @@ class Role(BaseModel):
     """
     Role
     """ # noqa: E501
-    assignment_type: Optional[RoleAssignmentType] = Field(None, alias="assignmentType")
+    assignment_type: Optional[RoleAssignmentType] = Field(default=None, alias="assignmentType")
     created: Optional[datetime] = None
     description: Optional[StrictStr] = None
     id: Optional[StrictStr] = None
     label: Optional[StrictStr] = None
-    last_updated: Optional[datetime] = Field(None, alias="lastUpdated")
+    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
     status: Optional[LifecycleStatus] = None
     type: Optional[RoleType] = None
-    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(None, alias="_embedded")
-    links: Optional[LinksSelf] = Field(None, alias="_links")
+    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, alias="_embedded")
+    links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["assignmentType", "created", "description", "id", "label", "lastUpdated", "status", "type", "_embedded", "_links"]
 
     model_config = ConfigDict(

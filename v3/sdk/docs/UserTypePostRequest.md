@@ -23,7 +23,7 @@ print(UserTypePostRequest.to_json())
 # convert the object into a dict
 user_type_post_request_dict = user_type_post_request_instance.to_dict()
 # create an instance of UserTypePostRequest from a dict
-user_type_post_request_form_dict = user_type_post_request.from_dict(user_type_post_request_dict)
+user_type_post_request_from_dict = UserTypePostRequest.from_dict(user_type_post_request_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -23,7 +23,7 @@ print(LogStreamLinkObject.to_json())
 # convert the object into a dict
 log_stream_link_object_dict = log_stream_link_object_instance.to_dict()
 # create an instance of LogStreamLinkObject from a dict
-log_stream_link_object_form_dict = log_stream_link_object.from_dict(log_stream_link_object_dict)
+log_stream_link_object_from_dict = LogStreamLinkObject.from_dict(log_stream_link_object_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

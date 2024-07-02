@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,10 +27,10 @@ class UISchemaObject(BaseModel):
     """
     Properties of the UI schema
     """ # noqa: E501
-    button_label: Optional[StrictStr] = Field('Submit', alias="buttonLabel", description="Specifies the button label for the `Submit` button at the bottom of the enrollment form.")
+    button_label: Optional[StrictStr] = Field(default='Submit', description="Specifies the button label for the `Submit` button at the bottom of the enrollment form.", alias="buttonLabel")
     elements: Optional[Any] = None
-    label: Optional[StrictStr] = Field('Sign in', description="Specifies the label at the top of the enrollment form under the logo.")
-    type: Optional[StrictStr] = Field(None, description="Specifies the type of layout")
+    label: Optional[StrictStr] = Field(default='Sign in', description="Specifies the label at the top of the enrollment form under the logo.")
+    type: Optional[StrictStr] = Field(default=None, description="Specifies the type of layout")
     __properties: ClassVar[List[str]] = ["buttonLabel", "elements", "label", "type"]
 
     model_config = ConfigDict(

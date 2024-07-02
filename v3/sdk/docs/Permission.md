@@ -26,7 +26,7 @@ print(Permission.to_json())
 # convert the object into a dict
 permission_dict = permission_instance.to_dict()
 # create an instance of Permission from a dict
-permission_form_dict = permission.from_dict(permission_dict)
+permission_from_dict = Permission.from_dict(permission_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

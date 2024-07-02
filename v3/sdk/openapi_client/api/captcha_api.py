@@ -17,11 +17,8 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from typing_extensions import Annotated
 from pydantic import Field, StrictStr
-
-from typing import List
-
+from typing_extensions import Annotated
 from openapi_client.models.captcha_instance import CAPTCHAInstance
 from openapi_client.models.org_captcha_settings import OrgCAPTCHASettings
 
@@ -267,7 +264,7 @@ class CAPTCHAApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -327,7 +324,7 @@ class CAPTCHAApi:
     @validate_call
     def delete_captcha_instance(
         self,
-        captcha_id: Annotated[StrictStr, Field(..., description="The unique key used to identify your CAPTCHA instance")],
+        captcha_id: Annotated[StrictStr, Field(description="The unique key used to identify your CAPTCHA instance")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -397,7 +394,7 @@ class CAPTCHAApi:
     @validate_call
     def delete_captcha_instance_with_http_info(
         self,
-        captcha_id: Annotated[StrictStr, Field(..., description="The unique key used to identify your CAPTCHA instance")],
+        captcha_id: Annotated[StrictStr, Field(description="The unique key used to identify your CAPTCHA instance")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -467,7 +464,7 @@ class CAPTCHAApi:
     @validate_call
     def delete_captcha_instance_without_preload_content(
         self,
-        captcha_id: Annotated[StrictStr, Field(..., description="The unique key used to identify your CAPTCHA instance")],
+        captcha_id: Annotated[StrictStr, Field(description="The unique key used to identify your CAPTCHA instance")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -548,7 +545,7 @@ class CAPTCHAApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -803,7 +800,7 @@ class CAPTCHAApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -848,7 +845,7 @@ class CAPTCHAApi:
     @validate_call
     def get_captcha_instance(
         self,
-        captcha_id: Annotated[StrictStr, Field(..., description="The unique key used to identify your CAPTCHA instance")],
+        captcha_id: Annotated[StrictStr, Field(description="The unique key used to identify your CAPTCHA instance")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -918,7 +915,7 @@ class CAPTCHAApi:
     @validate_call
     def get_captcha_instance_with_http_info(
         self,
-        captcha_id: Annotated[StrictStr, Field(..., description="The unique key used to identify your CAPTCHA instance")],
+        captcha_id: Annotated[StrictStr, Field(description="The unique key used to identify your CAPTCHA instance")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -988,7 +985,7 @@ class CAPTCHAApi:
     @validate_call
     def get_captcha_instance_without_preload_content(
         self,
-        captcha_id: Annotated[StrictStr, Field(..., description="The unique key used to identify your CAPTCHA instance")],
+        captcha_id: Annotated[StrictStr, Field(description="The unique key used to identify your CAPTCHA instance")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1069,7 +1066,7 @@ class CAPTCHAApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1321,7 +1318,7 @@ class CAPTCHAApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1571,7 +1568,7 @@ class CAPTCHAApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1616,7 +1613,7 @@ class CAPTCHAApi:
     @validate_call
     def replace_captcha_instance(
         self,
-        captcha_id: Annotated[StrictStr, Field(..., description="The unique key used to identify your CAPTCHA instance")],
+        captcha_id: Annotated[StrictStr, Field(description="The unique key used to identify your CAPTCHA instance")],
         instance: CAPTCHAInstance,
         _request_timeout: Union[
             None,
@@ -1691,7 +1688,7 @@ class CAPTCHAApi:
     @validate_call
     def replace_captcha_instance_with_http_info(
         self,
-        captcha_id: Annotated[StrictStr, Field(..., description="The unique key used to identify your CAPTCHA instance")],
+        captcha_id: Annotated[StrictStr, Field(description="The unique key used to identify your CAPTCHA instance")],
         instance: CAPTCHAInstance,
         _request_timeout: Union[
             None,
@@ -1766,7 +1763,7 @@ class CAPTCHAApi:
     @validate_call
     def replace_captcha_instance_without_preload_content(
         self,
-        captcha_id: Annotated[StrictStr, Field(..., description="The unique key used to identify your CAPTCHA instance")],
+        captcha_id: Annotated[StrictStr, Field(description="The unique key used to identify your CAPTCHA instance")],
         instance: CAPTCHAInstance,
         _request_timeout: Union[
             None,
@@ -1853,7 +1850,7 @@ class CAPTCHAApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2136,7 +2133,7 @@ class CAPTCHAApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2196,7 +2193,7 @@ class CAPTCHAApi:
     @validate_call
     def update_captcha_instance(
         self,
-        captcha_id: Annotated[StrictStr, Field(..., description="The unique key used to identify your CAPTCHA instance")],
+        captcha_id: Annotated[StrictStr, Field(description="The unique key used to identify your CAPTCHA instance")],
         instance: CAPTCHAInstance,
         _request_timeout: Union[
             None,
@@ -2271,7 +2268,7 @@ class CAPTCHAApi:
     @validate_call
     def update_captcha_instance_with_http_info(
         self,
-        captcha_id: Annotated[StrictStr, Field(..., description="The unique key used to identify your CAPTCHA instance")],
+        captcha_id: Annotated[StrictStr, Field(description="The unique key used to identify your CAPTCHA instance")],
         instance: CAPTCHAInstance,
         _request_timeout: Union[
             None,
@@ -2346,7 +2343,7 @@ class CAPTCHAApi:
     @validate_call
     def update_captcha_instance_without_preload_content(
         self,
-        captcha_id: Annotated[StrictStr, Field(..., description="The unique key used to identify your CAPTCHA instance")],
+        captcha_id: Annotated[StrictStr, Field(description="The unique key used to identify your CAPTCHA instance")],
         instance: CAPTCHAInstance,
         _request_timeout: Union[
             None,
@@ -2433,7 +2430,7 @@ class CAPTCHAApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters

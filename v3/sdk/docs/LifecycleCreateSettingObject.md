@@ -23,7 +23,7 @@ print(LifecycleCreateSettingObject.to_json())
 # convert the object into a dict
 lifecycle_create_setting_object_dict = lifecycle_create_setting_object_instance.to_dict()
 # create an instance of LifecycleCreateSettingObject from a dict
-lifecycle_create_setting_object_form_dict = lifecycle_create_setting_object.from_dict(lifecycle_create_setting_object_dict)
+lifecycle_create_setting_object_from_dict = LifecycleCreateSettingObject.from_dict(lifecycle_create_setting_object_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

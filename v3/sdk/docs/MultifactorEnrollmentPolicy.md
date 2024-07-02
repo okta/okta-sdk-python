@@ -23,7 +23,7 @@ print(MultifactorEnrollmentPolicy.to_json())
 # convert the object into a dict
 multifactor_enrollment_policy_dict = multifactor_enrollment_policy_instance.to_dict()
 # create an instance of MultifactorEnrollmentPolicy from a dict
-multifactor_enrollment_policy_form_dict = multifactor_enrollment_policy.from_dict(multifactor_enrollment_policy_dict)
+multifactor_enrollment_policy_from_dict = MultifactorEnrollmentPolicy.from_dict(multifactor_enrollment_policy_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

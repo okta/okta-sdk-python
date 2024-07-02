@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.application_settings_notes import ApplicationSettingsNotes
 from openapi_client.models.application_settings_notifications import ApplicationSettingsNotifications
 from openapi_client.models.open_id_connect_application_settings_client import OpenIdConnectApplicationSettingsClient
@@ -28,12 +30,12 @@ class OpenIdConnectApplicationSettings(BaseModel):
     """
     OpenIdConnectApplicationSettings
     """ # noqa: E501
-    identity_store_id: Optional[StrictStr] = Field(None, alias="identityStoreId")
-    implicit_assignment: Optional[StrictBool] = Field(None, alias="implicitAssignment")
-    inline_hook_id: Optional[StrictStr] = Field(None, alias="inlineHookId")
+    identity_store_id: Optional[StrictStr] = Field(default=None, alias="identityStoreId")
+    implicit_assignment: Optional[StrictBool] = Field(default=None, alias="implicitAssignment")
+    inline_hook_id: Optional[StrictStr] = Field(default=None, alias="inlineHookId")
     notes: Optional[ApplicationSettingsNotes] = None
     notifications: Optional[ApplicationSettingsNotifications] = None
-    oauth_client: Optional[OpenIdConnectApplicationSettingsClient] = Field(None, alias="oauthClient")
+    oauth_client: Optional[OpenIdConnectApplicationSettingsClient] = Field(default=None, alias="oauthClient")
     __properties: ClassVar[List[str]] = ["identityStoreId", "implicitAssignment", "inlineHookId", "notes", "notifications", "oauthClient"]
 
     model_config = ConfigDict(

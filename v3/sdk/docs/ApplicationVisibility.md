@@ -25,7 +25,7 @@ print(ApplicationVisibility.to_json())
 # convert the object into a dict
 application_visibility_dict = application_visibility_instance.to_dict()
 # create an instance of ApplicationVisibility from a dict
-application_visibility_form_dict = application_visibility.from_dict(application_visibility_dict)
+application_visibility_from_dict = ApplicationVisibility.from_dict(application_visibility_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

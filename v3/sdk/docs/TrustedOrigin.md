@@ -31,7 +31,7 @@ print(TrustedOrigin.to_json())
 # convert the object into a dict
 trusted_origin_dict = trusted_origin_instance.to_dict()
 # create an instance of TrustedOrigin from a dict
-trusted_origin_form_dict = trusted_origin.from_dict(trusted_origin_dict)
+trusted_origin_from_dict = TrustedOrigin.from_dict(trusted_origin_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

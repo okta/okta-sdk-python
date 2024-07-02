@@ -31,7 +31,7 @@ print(EventHook.to_json())
 # convert the object into a dict
 event_hook_dict = event_hook_instance.to_dict()
 # create an instance of EventHook from a dict
-event_hook_form_dict = event_hook.from_dict(event_hook_dict)
+event_hook_from_dict = EventHook.from_dict(event_hook_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

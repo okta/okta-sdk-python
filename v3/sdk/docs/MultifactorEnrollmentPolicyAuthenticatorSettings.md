@@ -24,7 +24,7 @@ print(MultifactorEnrollmentPolicyAuthenticatorSettings.to_json())
 # convert the object into a dict
 multifactor_enrollment_policy_authenticator_settings_dict = multifactor_enrollment_policy_authenticator_settings_instance.to_dict()
 # create an instance of MultifactorEnrollmentPolicyAuthenticatorSettings from a dict
-multifactor_enrollment_policy_authenticator_settings_form_dict = multifactor_enrollment_policy_authenticator_settings.from_dict(multifactor_enrollment_policy_authenticator_settings_dict)
+multifactor_enrollment_policy_authenticator_settings_from_dict = MultifactorEnrollmentPolicyAuthenticatorSettings.from_dict(multifactor_enrollment_policy_authenticator_settings_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

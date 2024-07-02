@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,19 +27,19 @@ class SwaApplicationSettingsApplication(BaseModel):
     """
     SwaApplicationSettingsApplication
     """ # noqa: E501
-    button_field: Optional[StrictStr] = Field(None, alias="buttonField")
-    button_selector: Optional[StrictStr] = Field(None, alias="buttonSelector")
+    button_field: Optional[StrictStr] = Field(default=None, alias="buttonField")
+    button_selector: Optional[StrictStr] = Field(default=None, alias="buttonSelector")
     checkbox: Optional[StrictStr] = None
-    extra_field_selector: Optional[StrictStr] = Field(None, alias="extraFieldSelector")
-    extra_field_value: Optional[StrictStr] = Field(None, alias="extraFieldValue")
-    login_url_regex: Optional[StrictStr] = Field(None, alias="loginUrlRegex")
-    password_field: Optional[StrictStr] = Field(None, alias="passwordField")
-    password_selector: Optional[StrictStr] = Field(None, alias="passwordSelector")
-    redirect_url: Optional[StrictStr] = Field(None, alias="redirectUrl")
-    target_url: Optional[StrictStr] = Field(None, alias="targetURL")
+    extra_field_selector: Optional[StrictStr] = Field(default=None, alias="extraFieldSelector")
+    extra_field_value: Optional[StrictStr] = Field(default=None, alias="extraFieldValue")
+    login_url_regex: Optional[StrictStr] = Field(default=None, alias="loginUrlRegex")
+    password_field: Optional[StrictStr] = Field(default=None, alias="passwordField")
+    password_selector: Optional[StrictStr] = Field(default=None, alias="passwordSelector")
+    redirect_url: Optional[StrictStr] = Field(default=None, alias="redirectUrl")
+    target_url: Optional[StrictStr] = Field(default=None, alias="targetURL")
     url: Optional[StrictStr] = None
-    username_field: Optional[StrictStr] = Field(None, alias="usernameField")
-    user_name_selector: Optional[StrictStr] = Field(None, alias="userNameSelector")
+    username_field: Optional[StrictStr] = Field(default=None, alias="usernameField")
+    user_name_selector: Optional[StrictStr] = Field(default=None, alias="userNameSelector")
     __properties: ClassVar[List[str]] = ["buttonField", "buttonSelector", "checkbox", "extraFieldSelector", "extraFieldValue", "loginUrlRegex", "passwordField", "passwordSelector", "redirectUrl", "targetURL", "url", "usernameField", "userNameSelector"]
 
     model_config = ConfigDict(

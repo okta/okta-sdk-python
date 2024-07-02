@@ -23,7 +23,7 @@ print(ProfileMappingRequest.to_json())
 # convert the object into a dict
 profile_mapping_request_dict = profile_mapping_request_instance.to_dict()
 # create an instance of ProfileMappingRequest from a dict
-profile_mapping_request_form_dict = profile_mapping_request.from_dict(profile_mapping_request_dict)
+profile_mapping_request_from_dict = ProfileMappingRequest.from_dict(profile_mapping_request_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

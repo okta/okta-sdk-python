@@ -24,7 +24,7 @@ print(ResourceSetBindingResponseLinks.to_json())
 # convert the object into a dict
 resource_set_binding_response_links_dict = resource_set_binding_response_links_instance.to_dict()
 # create an instance of ResourceSetBindingResponseLinks from a dict
-resource_set_binding_response_links_form_dict = resource_set_binding_response_links.from_dict(resource_set_binding_response_links_dict)
+resource_set_binding_response_links_from_dict = ResourceSetBindingResponseLinks.from_dict(resource_set_binding_response_links_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

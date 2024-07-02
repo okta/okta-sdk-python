@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.policy_access import PolicyAccess
 from openapi_client.models.sspr_requirement import SsprRequirement
 from typing import Optional, Set
@@ -28,7 +30,7 @@ class SelfServicePasswordResetAction(BaseModel):
     SelfServicePasswordResetAction
     """ # noqa: E501
     access: Optional[PolicyAccess] = None
-    type: Optional[StrictStr] = Field(None, description="The type of rule action")
+    type: Optional[StrictStr] = Field(default=None, description="The type of rule action")
     requirement: Optional[SsprRequirement] = None
     __properties: ClassVar[List[str]] = ["access", "type", "requirement"]
 

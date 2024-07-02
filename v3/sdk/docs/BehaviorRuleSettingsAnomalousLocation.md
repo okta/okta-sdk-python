@@ -25,7 +25,7 @@ print(BehaviorRuleSettingsAnomalousLocation.to_json())
 # convert the object into a dict
 behavior_rule_settings_anomalous_location_dict = behavior_rule_settings_anomalous_location_instance.to_dict()
 # create an instance of BehaviorRuleSettingsAnomalousLocation from a dict
-behavior_rule_settings_anomalous_location_form_dict = behavior_rule_settings_anomalous_location.from_dict(behavior_rule_settings_anomalous_location_dict)
+behavior_rule_settings_anomalous_location_from_dict = BehaviorRuleSettingsAnomalousLocation.from_dict(behavior_rule_settings_anomalous_location_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -23,7 +23,7 @@ print(SubscriptionLinks.to_json())
 # convert the object into a dict
 subscription_links_dict = subscription_links_instance.to_dict()
 # create an instance of SubscriptionLinks from a dict
-subscription_links_form_dict = subscription_links.from_dict(subscription_links_dict)
+subscription_links_from_dict = SubscriptionLinks.from_dict(subscription_links_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -17,11 +17,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from typing_extensions import Annotated
 from pydantic import Field, StrictInt, StrictStr
-
-from typing import List, Optional
-
+from typing import Optional
+from typing_extensions import Annotated
 from openapi_client.models.trusted_origin import TrustedOrigin
 
 from openapi_client.api_client import ApiClient, RequestSerialized
@@ -45,7 +43,7 @@ class TrustedOriginApi:
     @validate_call
     def activate_trusted_origin(
         self,
-        trusted_origin_id: Annotated[StrictStr, Field(..., description="`id` of the Trusted Origin")],
+        trusted_origin_id: Annotated[StrictStr, Field(description="`id` of the Trusted Origin")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -115,7 +113,7 @@ class TrustedOriginApi:
     @validate_call
     def activate_trusted_origin_with_http_info(
         self,
-        trusted_origin_id: Annotated[StrictStr, Field(..., description="`id` of the Trusted Origin")],
+        trusted_origin_id: Annotated[StrictStr, Field(description="`id` of the Trusted Origin")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -185,7 +183,7 @@ class TrustedOriginApi:
     @validate_call
     def activate_trusted_origin_without_preload_content(
         self,
-        trusted_origin_id: Annotated[StrictStr, Field(..., description="`id` of the Trusted Origin")],
+        trusted_origin_id: Annotated[StrictStr, Field(description="`id` of the Trusted Origin")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -266,7 +264,7 @@ class TrustedOriginApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -534,7 +532,7 @@ class TrustedOriginApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -594,7 +592,7 @@ class TrustedOriginApi:
     @validate_call
     def deactivate_trusted_origin(
         self,
-        trusted_origin_id: Annotated[StrictStr, Field(..., description="`id` of the Trusted Origin")],
+        trusted_origin_id: Annotated[StrictStr, Field(description="`id` of the Trusted Origin")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -664,7 +662,7 @@ class TrustedOriginApi:
     @validate_call
     def deactivate_trusted_origin_with_http_info(
         self,
-        trusted_origin_id: Annotated[StrictStr, Field(..., description="`id` of the Trusted Origin")],
+        trusted_origin_id: Annotated[StrictStr, Field(description="`id` of the Trusted Origin")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -734,7 +732,7 @@ class TrustedOriginApi:
     @validate_call
     def deactivate_trusted_origin_without_preload_content(
         self,
-        trusted_origin_id: Annotated[StrictStr, Field(..., description="`id` of the Trusted Origin")],
+        trusted_origin_id: Annotated[StrictStr, Field(description="`id` of the Trusted Origin")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -815,7 +813,7 @@ class TrustedOriginApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -862,7 +860,7 @@ class TrustedOriginApi:
     @validate_call
     def delete_trusted_origin(
         self,
-        trusted_origin_id: Annotated[StrictStr, Field(..., description="`id` of the Trusted Origin")],
+        trusted_origin_id: Annotated[StrictStr, Field(description="`id` of the Trusted Origin")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -932,7 +930,7 @@ class TrustedOriginApi:
     @validate_call
     def delete_trusted_origin_with_http_info(
         self,
-        trusted_origin_id: Annotated[StrictStr, Field(..., description="`id` of the Trusted Origin")],
+        trusted_origin_id: Annotated[StrictStr, Field(description="`id` of the Trusted Origin")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1002,7 +1000,7 @@ class TrustedOriginApi:
     @validate_call
     def delete_trusted_origin_without_preload_content(
         self,
-        trusted_origin_id: Annotated[StrictStr, Field(..., description="`id` of the Trusted Origin")],
+        trusted_origin_id: Annotated[StrictStr, Field(description="`id` of the Trusted Origin")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1083,7 +1081,7 @@ class TrustedOriginApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1130,7 +1128,7 @@ class TrustedOriginApi:
     @validate_call
     def get_trusted_origin(
         self,
-        trusted_origin_id: Annotated[StrictStr, Field(..., description="`id` of the Trusted Origin")],
+        trusted_origin_id: Annotated[StrictStr, Field(description="`id` of the Trusted Origin")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1200,7 +1198,7 @@ class TrustedOriginApi:
     @validate_call
     def get_trusted_origin_with_http_info(
         self,
-        trusted_origin_id: Annotated[StrictStr, Field(..., description="`id` of the Trusted Origin")],
+        trusted_origin_id: Annotated[StrictStr, Field(description="`id` of the Trusted Origin")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1270,7 +1268,7 @@ class TrustedOriginApi:
     @validate_call
     def get_trusted_origin_without_preload_content(
         self,
-        trusted_origin_id: Annotated[StrictStr, Field(..., description="`id` of the Trusted Origin")],
+        trusted_origin_id: Annotated[StrictStr, Field(description="`id` of the Trusted Origin")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1351,7 +1349,7 @@ class TrustedOriginApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1655,7 +1653,7 @@ class TrustedOriginApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1716,7 +1714,7 @@ class TrustedOriginApi:
     @validate_call
     def replace_trusted_origin(
         self,
-        trusted_origin_id: Annotated[StrictStr, Field(..., description="`id` of the Trusted Origin")],
+        trusted_origin_id: Annotated[StrictStr, Field(description="`id` of the Trusted Origin")],
         trusted_origin: TrustedOrigin,
         _request_timeout: Union[
             None,
@@ -1791,7 +1789,7 @@ class TrustedOriginApi:
     @validate_call
     def replace_trusted_origin_with_http_info(
         self,
-        trusted_origin_id: Annotated[StrictStr, Field(..., description="`id` of the Trusted Origin")],
+        trusted_origin_id: Annotated[StrictStr, Field(description="`id` of the Trusted Origin")],
         trusted_origin: TrustedOrigin,
         _request_timeout: Union[
             None,
@@ -1866,7 +1864,7 @@ class TrustedOriginApi:
     @validate_call
     def replace_trusted_origin_without_preload_content(
         self,
-        trusted_origin_id: Annotated[StrictStr, Field(..., description="`id` of the Trusted Origin")],
+        trusted_origin_id: Annotated[StrictStr, Field(description="`id` of the Trusted Origin")],
         trusted_origin: TrustedOrigin,
         _request_timeout: Union[
             None,
@@ -1953,7 +1951,7 @@ class TrustedOriginApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters

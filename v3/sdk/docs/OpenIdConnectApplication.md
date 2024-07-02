@@ -24,7 +24,7 @@ print(OpenIdConnectApplication.to_json())
 # convert the object into a dict
 open_id_connect_application_dict = open_id_connect_application_instance.to_dict()
 # create an instance of OpenIdConnectApplication from a dict
-open_id_connect_application_form_dict = open_id_connect_application.from_dict(open_id_connect_application_dict)
+open_id_connect_application_from_dict = OpenIdConnectApplication.from_dict(open_id_connect_application_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

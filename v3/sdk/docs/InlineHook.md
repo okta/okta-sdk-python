@@ -30,7 +30,7 @@ print(InlineHook.to_json())
 # convert the object into a dict
 inline_hook_dict = inline_hook_instance.to_dict()
 # create an instance of InlineHook from a dict
-inline_hook_form_dict = inline_hook.from_dict(inline_hook_dict)
+inline_hook_from_dict = InlineHook.from_dict(inline_hook_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

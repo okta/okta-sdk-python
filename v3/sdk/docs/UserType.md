@@ -31,7 +31,7 @@ print(UserType.to_json())
 # convert the object into a dict
 user_type_dict = user_type_instance.to_dict()
 # create an instance of UserType from a dict
-user_type_form_dict = user_type.from_dict(user_type_dict)
+user_type_from_dict = UserType.from_dict(user_type_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

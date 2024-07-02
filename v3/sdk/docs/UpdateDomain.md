@@ -22,7 +22,7 @@ print(UpdateDomain.to_json())
 # convert the object into a dict
 update_domain_dict = update_domain_instance.to_dict()
 # create an instance of UpdateDomain from a dict
-update_domain_form_dict = update_domain.from_dict(update_domain_dict)
+update_domain_from_dict = UpdateDomain.from_dict(update_domain_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

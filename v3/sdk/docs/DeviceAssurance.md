@@ -29,7 +29,7 @@ print(DeviceAssurance.to_json())
 # convert the object into a dict
 device_assurance_dict = device_assurance_instance.to_dict()
 # create an instance of DeviceAssurance from a dict
-device_assurance_form_dict = device_assurance.from_dict(device_assurance_dict)
+device_assurance_from_dict = DeviceAssurance.from_dict(device_assurance_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

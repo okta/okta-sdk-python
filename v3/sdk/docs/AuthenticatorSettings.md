@@ -27,7 +27,7 @@ print(AuthenticatorSettings.to_json())
 # convert the object into a dict
 authenticator_settings_dict = authenticator_settings_instance.to_dict()
 # create an instance of AuthenticatorSettings from a dict
-authenticator_settings_form_dict = authenticator_settings.from_dict(authenticator_settings_dict)
+authenticator_settings_from_dict = AuthenticatorSettings.from_dict(authenticator_settings_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

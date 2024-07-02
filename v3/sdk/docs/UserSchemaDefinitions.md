@@ -23,7 +23,7 @@ print(UserSchemaDefinitions.to_json())
 # convert the object into a dict
 user_schema_definitions_dict = user_schema_definitions_instance.to_dict()
 # create an instance of UserSchemaDefinitions from a dict
-user_schema_definitions_form_dict = user_schema_definitions.from_dict(user_schema_definitions_dict)
+user_schema_definitions_from_dict = UserSchemaDefinitions.from_dict(user_schema_definitions_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

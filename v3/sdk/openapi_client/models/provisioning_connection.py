@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.links_self_and_lifecycle import LinksSelfAndLifecycle
 from openapi_client.models.provisioning_connection_auth_scheme import ProvisioningConnectionAuthScheme
 from openapi_client.models.provisioning_connection_profile import ProvisioningConnectionProfile
@@ -29,10 +31,10 @@ class ProvisioningConnection(BaseModel):
     """
     ProvisioningConnection
     """ # noqa: E501
-    auth_scheme: ProvisioningConnectionAuthScheme = Field(..., alias="authScheme")
+    auth_scheme: ProvisioningConnectionAuthScheme = Field(alias="authScheme")
     profile: Optional[ProvisioningConnectionProfile] = None
-    status: ProvisioningConnectionStatus = Field(...)
-    links: Optional[LinksSelfAndLifecycle] = Field(None, alias="_links")
+    status: ProvisioningConnectionStatus
+    links: Optional[LinksSelfAndLifecycle] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["authScheme", "profile", "status", "_links"]
 
     model_config = ConfigDict(

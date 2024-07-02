@@ -34,7 +34,7 @@ print(SwaApplicationSettingsApplication.to_json())
 # convert the object into a dict
 swa_application_settings_application_dict = swa_application_settings_application_instance.to_dict()
 # create an instance of SwaApplicationSettingsApplication from a dict
-swa_application_settings_application_form_dict = swa_application_settings_application.from_dict(swa_application_settings_application_dict)
+swa_application_settings_application_from_dict = SwaApplicationSettingsApplication.from_dict(swa_application_settings_application_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

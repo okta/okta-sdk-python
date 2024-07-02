@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.content_security_policy_setting import ContentSecurityPolicySetting
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,8 +28,8 @@ class ErrorPage(BaseModel):
     """
     ErrorPage
     """ # noqa: E501
-    page_content: Optional[StrictStr] = Field(None, alias="pageContent")
-    content_security_policy_setting: Optional[ContentSecurityPolicySetting] = Field(None, alias="contentSecurityPolicySetting")
+    page_content: Optional[StrictStr] = Field(default=None, alias="pageContent")
+    content_security_policy_setting: Optional[ContentSecurityPolicySetting] = Field(default=None, alias="contentSecurityPolicySetting")
     __properties: ClassVar[List[str]] = ["pageContent", "contentSecurityPolicySetting"]
 
     model_config = ConfigDict(

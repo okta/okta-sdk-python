@@ -24,7 +24,7 @@ print(SsprRequirement.to_json())
 # convert the object into a dict
 sspr_requirement_dict = sspr_requirement_instance.to_dict()
 # create an instance of SsprRequirement from a dict
-sspr_requirement_form_dict = sspr_requirement.from_dict(sspr_requirement_dict)
+sspr_requirement_from_dict = SsprRequirement.from_dict(sspr_requirement_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

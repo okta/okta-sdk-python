@@ -23,7 +23,7 @@ print(PageRoot.to_json())
 # convert the object into a dict
 page_root_dict = page_root_instance.to_dict()
 # create an instance of PageRoot from a dict
-page_root_form_dict = page_root.from_dict(page_root_dict)
+page_root_from_dict = PageRoot.from_dict(page_root_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.identity_provider_credentials import IdentityProviderCredentials
 from openapi_client.models.protocol_algorithms import ProtocolAlgorithms
 from openapi_client.models.protocol_endpoint import ProtocolEndpoint
@@ -36,8 +38,8 @@ class Protocol(BaseModel):
     credentials: Optional[IdentityProviderCredentials] = None
     endpoints: Optional[ProtocolEndpoints] = None
     issuer: Optional[ProtocolEndpoint] = None
-    relay_state: Optional[ProtocolRelayState] = Field(None, alias="relayState")
-    scopes: Optional[conlist(StrictStr)] = None
+    relay_state: Optional[ProtocolRelayState] = Field(default=None, alias="relayState")
+    scopes: Optional[List[StrictStr]] = None
     settings: Optional[ProtocolSettings] = None
     type: Optional[ProtocolType] = None
     __properties: ClassVar[List[str]] = ["algorithms", "credentials", "endpoints", "issuer", "relayState", "scopes", "settings", "type"]

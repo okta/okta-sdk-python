@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.event_hook_channel import EventHookChannel
 from openapi_client.models.event_hook_verification_status import EventHookVerificationStatus
 from openapi_client.models.event_subscriptions import EventSubscriptions
@@ -32,14 +35,14 @@ class EventHook(BaseModel):
     """ # noqa: E501
     channel: Optional[EventHookChannel] = None
     created: Optional[datetime] = None
-    created_by: Optional[StrictStr] = Field(None, alias="createdBy")
+    created_by: Optional[StrictStr] = Field(default=None, alias="createdBy")
     events: Optional[EventSubscriptions] = None
     id: Optional[StrictStr] = None
-    last_updated: Optional[datetime] = Field(None, alias="lastUpdated")
+    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
     name: Optional[StrictStr] = None
     status: Optional[LifecycleStatus] = None
-    verification_status: Optional[EventHookVerificationStatus] = Field(None, alias="verificationStatus")
-    links: Optional[LinksSelf] = Field(None, alias="_links")
+    verification_status: Optional[EventHookVerificationStatus] = Field(default=None, alias="verificationStatus")
+    links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["channel", "created", "createdBy", "events", "id", "lastUpdated", "name", "status", "verificationStatus", "_links"]
 
     model_config = ConfigDict(

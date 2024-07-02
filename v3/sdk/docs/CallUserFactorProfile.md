@@ -23,7 +23,7 @@ print(CallUserFactorProfile.to_json())
 # convert the object into a dict
 call_user_factor_profile_dict = call_user_factor_profile_instance.to_dict()
 # create an instance of CallUserFactorProfile from a dict
-call_user_factor_profile_form_dict = call_user_factor_profile.from_dict(call_user_factor_profile_dict)
+call_user_factor_profile_from_dict = CallUserFactorProfile.from_dict(call_user_factor_profile_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

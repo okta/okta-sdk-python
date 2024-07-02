@@ -22,7 +22,7 @@ print(ResourceSetBindingAddMembersRequest.to_json())
 # convert the object into a dict
 resource_set_binding_add_members_request_dict = resource_set_binding_add_members_request_instance.to_dict()
 # create an instance of ResourceSetBindingAddMembersRequest from a dict
-resource_set_binding_add_members_request_form_dict = resource_set_binding_add_members_request.from_dict(resource_set_binding_add_members_request_dict)
+resource_set_binding_add_members_request_from_dict = ResourceSetBindingAddMembersRequest.from_dict(resource_set_binding_add_members_request_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

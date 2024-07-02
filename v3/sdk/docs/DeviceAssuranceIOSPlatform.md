@@ -26,7 +26,7 @@ print(DeviceAssuranceIOSPlatform.to_json())
 # convert the object into a dict
 device_assurance_ios_platform_dict = device_assurance_ios_platform_instance.to_dict()
 # create an instance of DeviceAssuranceIOSPlatform from a dict
-device_assurance_ios_platform_form_dict = device_assurance_ios_platform.from_dict(device_assurance_ios_platform_dict)
+device_assurance_ios_platform_from_dict = DeviceAssuranceIOSPlatform.from_dict(device_assurance_ios_platform_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

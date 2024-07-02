@@ -24,7 +24,7 @@ print(AcsEndpoint.to_json())
 # convert the object into a dict
 acs_endpoint_dict = acs_endpoint_instance.to_dict()
 # create an instance of AcsEndpoint from a dict
-acs_endpoint_form_dict = acs_endpoint.from_dict(acs_endpoint_dict)
+acs_endpoint_from_dict = AcsEndpoint.from_dict(acs_endpoint_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

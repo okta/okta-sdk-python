@@ -23,7 +23,7 @@ print(GrantTypePolicyRuleCondition.to_json())
 # convert the object into a dict
 grant_type_policy_rule_condition_dict = grant_type_policy_rule_condition_instance.to_dict()
 # create an instance of GrantTypePolicyRuleCondition from a dict
-grant_type_policy_rule_condition_form_dict = grant_type_policy_rule_condition.from_dict(grant_type_policy_rule_condition_dict)
+grant_type_policy_rule_condition_from_dict = GrantTypePolicyRuleCondition.from_dict(grant_type_policy_rule_condition_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

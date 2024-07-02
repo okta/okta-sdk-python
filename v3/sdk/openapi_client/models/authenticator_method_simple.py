@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import ConfigDict
+from typing import Any, ClassVar, Dict, List
 from openapi_client.models.authenticator_method_base import AuthenticatorMethodBase
 from openapi_client.models.authenticator_method_type import AuthenticatorMethodType
 from openapi_client.models.lifecycle_status import LifecycleStatus

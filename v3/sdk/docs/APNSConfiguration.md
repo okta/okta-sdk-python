@@ -25,7 +25,7 @@ print(APNSConfiguration.to_json())
 # convert the object into a dict
 apns_configuration_dict = apns_configuration_instance.to_dict()
 # create an instance of APNSConfiguration from a dict
-apns_configuration_form_dict = apns_configuration.from_dict(apns_configuration_dict)
+apns_configuration_from_dict = APNSConfiguration.from_dict(apns_configuration_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

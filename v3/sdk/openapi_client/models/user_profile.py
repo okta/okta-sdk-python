@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,37 +28,37 @@ class UserProfile(BaseModel):
     """
     UserProfile
     """ # noqa: E501
-    city: Optional[constr(strict=True, max_length=128)] = None
-    cost_center: Optional[StrictStr] = Field(None, alias="costCenter")
-    country_code: Optional[constr(strict=True, max_length=2)] = Field(None, alias="countryCode")
+    city: Optional[Annotated[str, Field(strict=True, max_length=128)]] = None
+    cost_center: Optional[StrictStr] = Field(default=None, alias="costCenter")
+    country_code: Optional[Annotated[str, Field(strict=True, max_length=2)]] = Field(default=None, alias="countryCode")
     department: Optional[StrictStr] = None
-    display_name: Optional[StrictStr] = Field(None, alias="displayName")
+    display_name: Optional[StrictStr] = Field(default=None, alias="displayName")
     division: Optional[StrictStr] = None
-    email: Optional[constr(strict=True, max_length=100, min_length=5)] = None
-    employee_number: Optional[StrictStr] = Field(None, alias="employeeNumber")
-    first_name: Optional[constr(strict=True, max_length=50, min_length=1)] = Field(None, alias="firstName")
-    honorific_prefix: Optional[StrictStr] = Field(None, alias="honorificPrefix")
-    honorific_suffix: Optional[StrictStr] = Field(None, alias="honorificSuffix")
-    last_name: Optional[constr(strict=True, max_length=50, min_length=1)] = Field(None, alias="lastName")
-    locale: Optional[StrictStr] = Field(None, description="The language specified as an [IETF BCP 47 language tag](https://datatracker.ietf.org/doc/html/rfc5646)")
-    login: Optional[constr(strict=True, max_length=100)] = None
+    email: Optional[Annotated[str, Field(min_length=5, strict=True, max_length=100)]] = None
+    employee_number: Optional[StrictStr] = Field(default=None, alias="employeeNumber")
+    first_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=50)]] = Field(default=None, alias="firstName")
+    honorific_prefix: Optional[StrictStr] = Field(default=None, alias="honorificPrefix")
+    honorific_suffix: Optional[StrictStr] = Field(default=None, alias="honorificSuffix")
+    last_name: Optional[Annotated[str, Field(min_length=1, strict=True, max_length=50)]] = Field(default=None, alias="lastName")
+    locale: Optional[StrictStr] = Field(default=None, description="The language specified as an [IETF BCP 47 language tag](https://datatracker.ietf.org/doc/html/rfc5646)")
+    login: Optional[Annotated[str, Field(strict=True, max_length=100)]] = None
     manager: Optional[StrictStr] = None
-    manager_id: Optional[StrictStr] = Field(None, alias="managerId")
-    middle_name: Optional[StrictStr] = Field(None, alias="middleName")
-    mobile_phone: Optional[constr(strict=True, max_length=100)] = Field(None, alias="mobilePhone")
-    nick_name: Optional[StrictStr] = Field(None, alias="nickName")
+    manager_id: Optional[StrictStr] = Field(default=None, alias="managerId")
+    middle_name: Optional[StrictStr] = Field(default=None, alias="middleName")
+    mobile_phone: Optional[Annotated[str, Field(strict=True, max_length=100)]] = Field(default=None, alias="mobilePhone")
+    nick_name: Optional[StrictStr] = Field(default=None, alias="nickName")
     organization: Optional[StrictStr] = None
-    postal_address: Optional[constr(strict=True, max_length=4096)] = Field(None, alias="postalAddress")
-    preferred_language: Optional[StrictStr] = Field(None, alias="preferredLanguage")
-    primary_phone: Optional[constr(strict=True, max_length=100)] = Field(None, alias="primaryPhone")
-    profile_url: Optional[StrictStr] = Field(None, alias="profileUrl")
-    second_email: Optional[constr(strict=True, max_length=100, min_length=5)] = Field(None, alias="secondEmail")
-    state: Optional[constr(strict=True, max_length=128)] = None
-    street_address: Optional[constr(strict=True, max_length=1024)] = Field(None, alias="streetAddress")
+    postal_address: Optional[Annotated[str, Field(strict=True, max_length=4096)]] = Field(default=None, alias="postalAddress")
+    preferred_language: Optional[StrictStr] = Field(default=None, alias="preferredLanguage")
+    primary_phone: Optional[Annotated[str, Field(strict=True, max_length=100)]] = Field(default=None, alias="primaryPhone")
+    profile_url: Optional[StrictStr] = Field(default=None, alias="profileUrl")
+    second_email: Optional[Annotated[str, Field(min_length=5, strict=True, max_length=100)]] = Field(default=None, alias="secondEmail")
+    state: Optional[Annotated[str, Field(strict=True, max_length=128)]] = None
+    street_address: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = Field(default=None, alias="streetAddress")
     timezone: Optional[StrictStr] = None
     title: Optional[StrictStr] = None
-    user_type: Optional[StrictStr] = Field(None, alias="userType")
-    zip_code: Optional[constr(strict=True, max_length=50)] = Field(None, alias="zipCode")
+    user_type: Optional[StrictStr] = Field(default=None, alias="userType")
+    zip_code: Optional[Annotated[str, Field(strict=True, max_length=50)]] = Field(default=None, alias="zipCode")
     additional_properties: Dict[str, Any] = {}
     __properties: ClassVar[List[str]] = ["city", "costCenter", "countryCode", "department", "displayName", "division", "email", "employeeNumber", "firstName", "honorificPrefix", "honorificSuffix", "lastName", "locale", "login", "manager", "managerId", "middleName", "mobilePhone", "nickName", "organization", "postalAddress", "preferredLanguage", "primaryPhone", "profileUrl", "secondEmail", "state", "streetAddress", "timezone", "title", "userType", "zipCode"]
 

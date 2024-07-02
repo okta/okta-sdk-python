@@ -17,8 +17,7 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from pydantic import conlist
-
+from typing import List
 from openapi_client.models.risk_event import RiskEvent
 
 from openapi_client.api_client import ApiClient, RequestSerialized
@@ -42,7 +41,7 @@ class RiskEventApi:
     @validate_call
     def send_risk_events(
         self,
-        instance: conlist(RiskEvent),
+        instance: List[RiskEvent],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -112,7 +111,7 @@ class RiskEventApi:
     @validate_call
     def send_risk_events_with_http_info(
         self,
-        instance: conlist(RiskEvent),
+        instance: List[RiskEvent],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -182,7 +181,7 @@ class RiskEventApi:
     @validate_call
     def send_risk_events_without_preload_content(
         self,
-        instance: conlist(RiskEvent),
+        instance: List[RiskEvent],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -264,7 +263,7 @@ class RiskEventApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters

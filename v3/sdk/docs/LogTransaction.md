@@ -24,7 +24,7 @@ print(LogTransaction.to_json())
 # convert the object into a dict
 log_transaction_dict = log_transaction_instance.to_dict()
 # create an instance of LogTransaction from a dict
-log_transaction_form_dict = log_transaction.from_dict(log_transaction_dict)
+log_transaction_from_dict = LogTransaction.from_dict(log_transaction_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

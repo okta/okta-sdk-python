@@ -24,7 +24,7 @@ print(OktaSignOnPolicyRuleSignonSessionActions.to_json())
 # convert the object into a dict
 okta_sign_on_policy_rule_signon_session_actions_dict = okta_sign_on_policy_rule_signon_session_actions_instance.to_dict()
 # create an instance of OktaSignOnPolicyRuleSignonSessionActions from a dict
-okta_sign_on_policy_rule_signon_session_actions_form_dict = okta_sign_on_policy_rule_signon_session_actions.from_dict(okta_sign_on_policy_rule_signon_session_actions_dict)
+okta_sign_on_policy_rule_signon_session_actions_from_dict = OktaSignOnPolicyRuleSignonSessionActions.from_dict(okta_sign_on_policy_rule_signon_session_actions_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

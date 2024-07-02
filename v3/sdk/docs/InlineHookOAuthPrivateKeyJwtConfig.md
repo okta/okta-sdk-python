@@ -30,7 +30,7 @@ print(InlineHookOAuthPrivateKeyJwtConfig.to_json())
 # convert the object into a dict
 inline_hook_o_auth_private_key_jwt_config_dict = inline_hook_o_auth_private_key_jwt_config_instance.to_dict()
 # create an instance of InlineHookOAuthPrivateKeyJwtConfig from a dict
-inline_hook_o_auth_private_key_jwt_config_form_dict = inline_hook_o_auth_private_key_jwt_config.from_dict(inline_hook_o_auth_private_key_jwt_config_dict)
+inline_hook_o_auth_private_key_jwt_config_from_dict = InlineHookOAuthPrivateKeyJwtConfig.from_dict(inline_hook_o_auth_private_key_jwt_config_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

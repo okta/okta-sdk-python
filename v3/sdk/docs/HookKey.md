@@ -28,7 +28,7 @@ print(HookKey.to_json())
 # convert the object into a dict
 hook_key_dict = hook_key_instance.to_dict()
 # create an instance of HookKey from a dict
-hook_key_form_dict = hook_key.from_dict(hook_key_dict)
+hook_key_from_dict = HookKey.from_dict(hook_key_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

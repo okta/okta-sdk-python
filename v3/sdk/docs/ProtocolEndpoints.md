@@ -29,7 +29,7 @@ print(ProtocolEndpoints.to_json())
 # convert the object into a dict
 protocol_endpoints_dict = protocol_endpoints_instance.to_dict()
 # create an instance of ProtocolEndpoints from a dict
-protocol_endpoints_form_dict = protocol_endpoints.from_dict(protocol_endpoints_dict)
+protocol_endpoints_from_dict = ProtocolEndpoints.from_dict(protocol_endpoints_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

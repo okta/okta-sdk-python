@@ -18,6 +18,10 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
+from importlib import import_module
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from openapi_client.models.lifecycle_status import LifecycleStatus
 from openapi_client.models.policy_rule_type import PolicyRuleType
 from typing import Optional, Set
@@ -36,13 +40,13 @@ class PolicyRule(BaseModel):
     """
     PolicyRule
     """ # noqa: E501
-    created: Optional[datetime] = Field(None, description="Timestamp when the rule was created")
-    id: Optional[StrictStr] = Field(None, description="Identifier for the rule")
-    last_updated: Optional[datetime] = Field(None, alias="lastUpdated", description="Timestamp when the rule was last modified")
-    name: Optional[StrictStr] = Field(None, description="Name of the rule")
-    priority: Optional[StrictInt] = Field(None, description="Priority of the rule")
+    created: Optional[datetime] = Field(default=None, description="Timestamp when the rule was created")
+    id: Optional[StrictStr] = Field(default=None, description="Identifier for the rule")
+    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the rule was last modified", alias="lastUpdated")
+    name: Optional[StrictStr] = Field(default=None, description="Name of the rule")
+    priority: Optional[StrictInt] = Field(default=None, description="Priority of the rule")
     status: Optional[LifecycleStatus] = None
-    system: Optional[StrictBool] = Field(False, description="Specifies whether Okta created the Policy Rule (`system=true`). You can't delete Policy Rules that have `system` set to `true`.")
+    system: Optional[StrictBool] = Field(default=False, description="Specifies whether Okta created the Policy Rule (`system=true`). You can't delete Policy Rules that have `system` set to `true`.")
     type: Optional[PolicyRuleType] = None
     __properties: ClassVar[List[str]] = ["created", "id", "lastUpdated", "name", "priority", "status", "system", "type"]
 
@@ -123,17 +127,17 @@ class PolicyRule(BaseModel):
         """Create an instance of PolicyRule from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
-        if object_type ==  'ACCESS_POLICY':
+        if object_type ==  'AccessPolicyRule':
             return import_module("openapi_client.models.access_policy_rule").AccessPolicyRule.from_dict(obj)
-        if object_type ==  'IDP_DISCOVERY':
+        if object_type ==  'IdpDiscoveryPolicyRule':
             return import_module("openapi_client.models.idp_discovery_policy_rule").IdpDiscoveryPolicyRule.from_dict(obj)
-        if object_type ==  'PASSWORD':
+        if object_type ==  'PasswordPolicyRule':
             return import_module("openapi_client.models.password_policy_rule").PasswordPolicyRule.from_dict(obj)
-        if object_type ==  'PROFILE_ENROLLMENT':
+        if object_type ==  'ProfileEnrollmentPolicyRule':
             return import_module("openapi_client.models.profile_enrollment_policy_rule").ProfileEnrollmentPolicyRule.from_dict(obj)
-        if object_type ==  'RESOURCE_ACCESS':
+        if object_type ==  'AuthorizationServerPolicyRule':
             return import_module("openapi_client.models.authorization_server_policy_rule").AuthorizationServerPolicyRule.from_dict(obj)
-        if object_type ==  'SIGN_ON':
+        if object_type ==  'OktaSignOnPolicyRule':
             return import_module("openapi_client.models.okta_sign_on_policy_rule").OktaSignOnPolicyRule.from_dict(obj)
 
         raise ValueError("PolicyRule failed to lookup discriminator value from " +

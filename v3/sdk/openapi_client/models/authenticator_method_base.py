@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from importlib import import_module
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from openapi_client.models.authenticator_method_type import AuthenticatorMethodType
 from openapi_client.models.lifecycle_status import LifecycleStatus
 from openapi_client.models.links_self_and_lifecycle import LinksSelfAndLifecycle
@@ -46,7 +49,7 @@ class AuthenticatorMethodBase(BaseModel):
     """ # noqa: E501
     status: Optional[LifecycleStatus] = None
     type: Optional[AuthenticatorMethodType] = None
-    links: Optional[LinksSelfAndLifecycle] = Field(None, alias="_links")
+    links: Optional[LinksSelfAndLifecycle] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["status", "type", "_links"]
 
     model_config = ConfigDict(
@@ -115,31 +118,31 @@ class AuthenticatorMethodBase(BaseModel):
         """Create an instance of AuthenticatorMethodBase from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
-        if object_type ==  'cert':
+        if object_type ==  'AuthenticatorMethodWithVerifiableProperties':
             return import_module("openapi_client.models.authenticator_method_with_verifiable_properties").AuthenticatorMethodWithVerifiableProperties.from_dict(obj)
-        if object_type ==  'duo':
+        if object_type ==  'AuthenticatorMethodWithVerifiableProperties':
             return import_module("openapi_client.models.authenticator_method_with_verifiable_properties").AuthenticatorMethodWithVerifiableProperties.from_dict(obj)
-        if object_type ==  'email':
+        if object_type ==  'AuthenticatorMethodSimple':
             return import_module("openapi_client.models.authenticator_method_simple").AuthenticatorMethodSimple.from_dict(obj)
-        if object_type ==  'idp':
+        if object_type ==  'AuthenticatorMethodWithVerifiableProperties':
             return import_module("openapi_client.models.authenticator_method_with_verifiable_properties").AuthenticatorMethodWithVerifiableProperties.from_dict(obj)
-        if object_type ==  'otp':
+        if object_type ==  'AuthenticatorMethodOtp':
             return import_module("openapi_client.models.authenticator_method_otp").AuthenticatorMethodOtp.from_dict(obj)
-        if object_type ==  'password':
+        if object_type ==  'AuthenticatorMethodSimple':
             return import_module("openapi_client.models.authenticator_method_simple").AuthenticatorMethodSimple.from_dict(obj)
-        if object_type ==  'push':
+        if object_type ==  'AuthenticatorMethodPush':
             return import_module("openapi_client.models.authenticator_method_push").AuthenticatorMethodPush.from_dict(obj)
-        if object_type ==  'security_question':
+        if object_type ==  'AuthenticatorMethodSimple':
             return import_module("openapi_client.models.authenticator_method_simple").AuthenticatorMethodSimple.from_dict(obj)
-        if object_type ==  'signed_nonce':
+        if object_type ==  'AuthenticatorMethodSignedNonce':
             return import_module("openapi_client.models.authenticator_method_signed_nonce").AuthenticatorMethodSignedNonce.from_dict(obj)
-        if object_type ==  'sms':
+        if object_type ==  'AuthenticatorMethodSimple':
             return import_module("openapi_client.models.authenticator_method_simple").AuthenticatorMethodSimple.from_dict(obj)
-        if object_type ==  'totp':
+        if object_type ==  'AuthenticatorMethodTotp':
             return import_module("openapi_client.models.authenticator_method_totp").AuthenticatorMethodTotp.from_dict(obj)
-        if object_type ==  'voice':
+        if object_type ==  'AuthenticatorMethodSimple':
             return import_module("openapi_client.models.authenticator_method_simple").AuthenticatorMethodSimple.from_dict(obj)
-        if object_type ==  'webauthn':
+        if object_type ==  'AuthenticatorMethodWebAuthn':
             return import_module("openapi_client.models.authenticator_method_web_authn").AuthenticatorMethodWebAuthn.from_dict(obj)
 
         raise ValueError("AuthenticatorMethodBase failed to lookup discriminator value from " +

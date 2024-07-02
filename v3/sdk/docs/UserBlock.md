@@ -23,7 +23,7 @@ print(UserBlock.to_json())
 # convert the object into a dict
 user_block_dict = user_block_instance.to_dict()
 # create an instance of UserBlock from a dict
-user_block_form_dict = user_block.from_dict(user_block_dict)
+user_block_from_dict = UserBlock.from_dict(user_block_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -25,7 +25,7 @@ print(EmailDomain.to_json())
 # convert the object into a dict
 email_domain_dict = email_domain_instance.to_dict()
 # create an instance of EmailDomain from a dict
-email_domain_form_dict = email_domain.from_dict(email_domain_dict)
+email_domain_from_dict = EmailDomain.from_dict(email_domain_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -23,7 +23,7 @@ print(FeatureStage.to_json())
 # convert the object into a dict
 feature_stage_dict = feature_stage_instance.to_dict()
 # create an instance of FeatureStage from a dict
-feature_stage_form_dict = feature_stage.from_dict(feature_stage_dict)
+feature_stage_from_dict = FeatureStage.from_dict(feature_stage_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

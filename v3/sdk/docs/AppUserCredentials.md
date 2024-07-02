@@ -24,7 +24,7 @@ print(AppUserCredentials.to_json())
 # convert the object into a dict
 app_user_credentials_dict = app_user_credentials_instance.to_dict()
 # create an instance of AppUserCredentials from a dict
-app_user_credentials_form_dict = app_user_credentials.from_dict(app_user_credentials_dict)
+app_user_credentials_from_dict = AppUserCredentials.from_dict(app_user_credentials_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

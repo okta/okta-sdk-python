@@ -22,7 +22,7 @@ print(LogStreamAwsPutSchema.to_json())
 # convert the object into a dict
 log_stream_aws_put_schema_dict = log_stream_aws_put_schema_instance.to_dict()
 # create an instance of LogStreamAwsPutSchema from a dict
-log_stream_aws_put_schema_form_dict = log_stream_aws_put_schema.from_dict(log_stream_aws_put_schema_dict)
+log_stream_aws_put_schema_from_dict = LogStreamAwsPutSchema.from_dict(log_stream_aws_put_schema_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

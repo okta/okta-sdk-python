@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,8 +27,8 @@ class SimulateResultConditions(BaseModel):
     """
     SimulateResultConditions
     """ # noqa: E501
-    status: Optional[StrictStr] = Field(None, description="The result of the entity evaluation")
-    type: Optional[StrictStr] = Field(None, description="The type of condition")
+    status: Optional[StrictStr] = Field(default=None, description="The result of the entity evaluation")
+    type: Optional[StrictStr] = Field(default=None, description="The type of condition")
     __properties: ClassVar[List[str]] = ["status", "type"]
 
     @field_validator('status')

@@ -27,7 +27,7 @@ print(EmailServerRequest.to_json())
 # convert the object into a dict
 email_server_request_dict = email_server_request_instance.to_dict()
 # create an instance of EmailServerRequest from a dict
-email_server_request_form_dict = email_server_request.from_dict(email_server_request_dict)
+email_server_request_from_dict = EmailServerRequest.from_dict(email_server_request_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

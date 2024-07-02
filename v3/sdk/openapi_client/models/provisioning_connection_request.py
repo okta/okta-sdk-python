@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict
+from typing import Any, ClassVar, Dict, List
 from openapi_client.models.provisioning_connection_profile import ProvisioningConnectionProfile
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,7 +28,7 @@ class ProvisioningConnectionRequest(BaseModel):
     """
     ProvisioningConnectionRequest
     """ # noqa: E501
-    profile: ProvisioningConnectionProfile = Field(...)
+    profile: ProvisioningConnectionProfile
     __properties: ClassVar[List[str]] = ["profile"]
 
     model_config = ConfigDict(

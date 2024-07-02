@@ -22,7 +22,7 @@ print(ForgotPasswordResponse.to_json())
 # convert the object into a dict
 forgot_password_response_dict = forgot_password_response_instance.to_dict()
 # create an instance of ForgotPasswordResponse from a dict
-forgot_password_response_form_dict = forgot_password_response.from_dict(forgot_password_response_dict)
+forgot_password_response_from_dict = ForgotPasswordResponse.from_dict(forgot_password_response_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

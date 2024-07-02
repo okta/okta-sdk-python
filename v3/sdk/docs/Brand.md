@@ -30,7 +30,7 @@ print(Brand.to_json())
 # convert the object into a dict
 brand_dict = brand_instance.to_dict()
 # create an instance of Brand from a dict
-brand_form_dict = brand.from_dict(brand_dict)
+brand_from_dict = Brand.from_dict(brand_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

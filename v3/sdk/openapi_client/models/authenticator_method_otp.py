@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import ConfigDict, Field, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from openapi_client.models.authenticator_method_property import AuthenticatorMethodProperty
 from openapi_client.models.authenticator_method_type import AuthenticatorMethodType
 from openapi_client.models.authenticator_method_with_verifiable_properties import AuthenticatorMethodWithVerifiableProperties
@@ -33,13 +36,13 @@ class AuthenticatorMethodOtp(AuthenticatorMethodWithVerifiableProperties):
     """
     AuthenticatorMethodOtp
     """ # noqa: E501
-    acceptable_adjacent_intervals: Optional[conint(strict=True, le=10, ge=0)] = Field(None, alias="acceptableAdjacentIntervals")
+    acceptable_adjacent_intervals: Optional[Annotated[int, Field(le=10, strict=True, ge=0)]] = Field(default=None, alias="acceptableAdjacentIntervals")
     algorithm: Optional[OtpTotpAlgorithm] = None
     encoding: Optional[OtpTotpEncoding] = None
-    factor_profile_id: Optional[StrictStr] = Field(None, alias="factorProfileId")
-    pass_code_length: Optional[conint(strict=True, le=10, ge=6, multiple_of=2)] = Field(None, alias="passCodeLength")
+    factor_profile_id: Optional[StrictStr] = Field(default=None, alias="factorProfileId")
+    pass_code_length: Optional[Annotated[int, Field(multiple_of=2, le=10, strict=True, ge=6)]] = Field(default=None, alias="passCodeLength")
     protocol: Optional[OtpProtocol] = None
-    time_interval_in_seconds: Optional[StrictInt] = Field(None, alias="timeIntervalInSeconds")
+    time_interval_in_seconds: Optional[StrictInt] = Field(default=None, alias="timeIntervalInSeconds")
     __properties: ClassVar[List[str]] = ["status", "type", "_links", "verifiableProperties", "acceptableAdjacentIntervals", "algorithm", "encoding", "factorProfileId", "passCodeLength", "protocol", "timeIntervalInSeconds"]
 
     model_config = ConfigDict(

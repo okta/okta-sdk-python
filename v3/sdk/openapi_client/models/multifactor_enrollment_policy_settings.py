@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.multifactor_enrollment_policy_authenticator_settings import MultifactorEnrollmentPolicyAuthenticatorSettings
 from openapi_client.models.multifactor_enrollment_policy_settings_type import MultifactorEnrollmentPolicySettingsType
 from typing import Optional, Set
@@ -27,7 +29,7 @@ class MultifactorEnrollmentPolicySettings(BaseModel):
     """
     MultifactorEnrollmentPolicySettings
     """ # noqa: E501
-    authenticators: Optional[conlist(MultifactorEnrollmentPolicyAuthenticatorSettings)] = None
+    authenticators: Optional[List[MultifactorEnrollmentPolicyAuthenticatorSettings]] = None
     type: Optional[MultifactorEnrollmentPolicySettingsType] = None
     __properties: ClassVar[List[str]] = ["authenticators", "type"]
 

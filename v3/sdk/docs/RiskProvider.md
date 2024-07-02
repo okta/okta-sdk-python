@@ -28,7 +28,7 @@ print(RiskProvider.to_json())
 # convert the object into a dict
 risk_provider_dict = risk_provider_instance.to_dict()
 # create an instance of RiskProvider from a dict
-risk_provider_form_dict = risk_provider.from_dict(risk_provider_dict)
+risk_provider_from_dict = RiskProvider.from_dict(risk_provider_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

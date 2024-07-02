@@ -28,7 +28,7 @@ print(IdentityProviderApplicationUser.to_json())
 # convert the object into a dict
 identity_provider_application_user_dict = identity_provider_application_user_instance.to_dict()
 # create an instance of IdentityProviderApplicationUser from a dict
-identity_provider_application_user_form_dict = identity_provider_application_user.from_dict(identity_provider_application_user_dict)
+identity_provider_application_user_from_dict = IdentityProviderApplicationUser.from_dict(identity_provider_application_user_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

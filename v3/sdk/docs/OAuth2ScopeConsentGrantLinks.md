@@ -24,7 +24,7 @@ print(OAuth2ScopeConsentGrantLinks.to_json())
 # convert the object into a dict
 o_auth2_scope_consent_grant_links_dict = o_auth2_scope_consent_grant_links_instance.to_dict()
 # create an instance of OAuth2ScopeConsentGrantLinks from a dict
-o_auth2_scope_consent_grant_links_form_dict = o_auth2_scope_consent_grant_links.from_dict(o_auth2_scope_consent_grant_links_dict)
+o_auth2_scope_consent_grant_links_from_dict = OAuth2ScopeConsentGrantLinks.from_dict(o_auth2_scope_consent_grant_links_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.bounces_remove_list_error import BouncesRemoveListError
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,7 +28,7 @@ class BouncesRemoveListResult(BaseModel):
     """
     BouncesRemoveListResult
     """ # noqa: E501
-    errors: Optional[conlist(BouncesRemoveListError)] = None
+    errors: Optional[List[BouncesRemoveListError]] = None
     __properties: ClassVar[List[str]] = ["errors"]
 
     model_config = ConfigDict(

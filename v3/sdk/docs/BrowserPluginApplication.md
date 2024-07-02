@@ -24,7 +24,7 @@ print(BrowserPluginApplication.to_json())
 # convert the object into a dict
 browser_plugin_application_dict = browser_plugin_application_instance.to_dict()
 # create an instance of BrowserPluginApplication from a dict
-browser_plugin_application_form_dict = browser_plugin_application.from_dict(browser_plugin_application_dict)
+browser_plugin_application_from_dict = BrowserPluginApplication.from_dict(browser_plugin_application_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

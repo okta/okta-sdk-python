@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,26 +27,26 @@ class SignInPageAllOfWidgetCustomizations(BaseModel):
     """
     SignInPageAllOfWidgetCustomizations
     """ # noqa: E501
-    sign_in_label: Optional[StrictStr] = Field(None, alias="signInLabel")
-    username_label: Optional[StrictStr] = Field(None, alias="usernameLabel")
-    username_info_tip: Optional[StrictStr] = Field(None, alias="usernameInfoTip")
-    password_label: Optional[StrictStr] = Field(None, alias="passwordLabel")
-    password_info_tip: Optional[StrictStr] = Field(None, alias="passwordInfoTip")
-    show_password_visibility_toggle: Optional[StrictBool] = Field(None, alias="showPasswordVisibilityToggle")
-    show_user_identifier: Optional[StrictBool] = Field(None, alias="showUserIdentifier")
-    forgot_password_label: Optional[StrictStr] = Field(None, alias="forgotPasswordLabel")
-    forgot_password_url: Optional[StrictStr] = Field(None, alias="forgotPasswordUrl")
-    unlock_account_label: Optional[StrictStr] = Field(None, alias="unlockAccountLabel")
-    unlock_account_url: Optional[StrictStr] = Field(None, alias="unlockAccountUrl")
-    help_label: Optional[StrictStr] = Field(None, alias="helpLabel")
-    help_url: Optional[StrictStr] = Field(None, alias="helpUrl")
-    custom_link1_label: Optional[StrictStr] = Field(None, alias="customLink1Label")
-    custom_link1_url: Optional[StrictStr] = Field(None, alias="customLink1Url")
-    custom_link2_label: Optional[StrictStr] = Field(None, alias="customLink2Label")
-    custom_link2_url: Optional[StrictStr] = Field(None, alias="customLink2Url")
-    authenticator_page_custom_link_label: Optional[StrictStr] = Field(None, alias="authenticatorPageCustomLinkLabel")
-    authenticator_page_custom_link_url: Optional[StrictStr] = Field(None, alias="authenticatorPageCustomLinkUrl")
-    classic_recovery_flow_email_or_username_label: Optional[StrictStr] = Field(None, alias="classicRecoveryFlowEmailOrUsernameLabel")
+    sign_in_label: Optional[StrictStr] = Field(default=None, alias="signInLabel")
+    username_label: Optional[StrictStr] = Field(default=None, alias="usernameLabel")
+    username_info_tip: Optional[StrictStr] = Field(default=None, alias="usernameInfoTip")
+    password_label: Optional[StrictStr] = Field(default=None, alias="passwordLabel")
+    password_info_tip: Optional[StrictStr] = Field(default=None, alias="passwordInfoTip")
+    show_password_visibility_toggle: Optional[StrictBool] = Field(default=None, alias="showPasswordVisibilityToggle")
+    show_user_identifier: Optional[StrictBool] = Field(default=None, alias="showUserIdentifier")
+    forgot_password_label: Optional[StrictStr] = Field(default=None, alias="forgotPasswordLabel")
+    forgot_password_url: Optional[StrictStr] = Field(default=None, alias="forgotPasswordUrl")
+    unlock_account_label: Optional[StrictStr] = Field(default=None, alias="unlockAccountLabel")
+    unlock_account_url: Optional[StrictStr] = Field(default=None, alias="unlockAccountUrl")
+    help_label: Optional[StrictStr] = Field(default=None, alias="helpLabel")
+    help_url: Optional[StrictStr] = Field(default=None, alias="helpUrl")
+    custom_link1_label: Optional[StrictStr] = Field(default=None, alias="customLink1Label")
+    custom_link1_url: Optional[StrictStr] = Field(default=None, alias="customLink1Url")
+    custom_link2_label: Optional[StrictStr] = Field(default=None, alias="customLink2Label")
+    custom_link2_url: Optional[StrictStr] = Field(default=None, alias="customLink2Url")
+    authenticator_page_custom_link_label: Optional[StrictStr] = Field(default=None, alias="authenticatorPageCustomLinkLabel")
+    authenticator_page_custom_link_url: Optional[StrictStr] = Field(default=None, alias="authenticatorPageCustomLinkUrl")
+    classic_recovery_flow_email_or_username_label: Optional[StrictStr] = Field(default=None, alias="classicRecoveryFlowEmailOrUsernameLabel")
     __properties: ClassVar[List[str]] = ["signInLabel", "usernameLabel", "usernameInfoTip", "passwordLabel", "passwordInfoTip", "showPasswordVisibilityToggle", "showUserIdentifier", "forgotPasswordLabel", "forgotPasswordUrl", "unlockAccountLabel", "unlockAccountUrl", "helpLabel", "helpUrl", "customLink1Label", "customLink1Url", "customLink2Label", "customLink2Url", "authenticatorPageCustomLinkLabel", "authenticatorPageCustomLinkUrl", "classicRecoveryFlowEmailOrUsernameLabel"]
 
     model_config = ConfigDict(

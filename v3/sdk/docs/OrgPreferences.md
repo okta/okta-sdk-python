@@ -23,7 +23,7 @@ print(OrgPreferences.to_json())
 # convert the object into a dict
 org_preferences_dict = org_preferences_instance.to_dict()
 # create an instance of OrgPreferences from a dict
-org_preferences_form_dict = org_preferences.from_dict(org_preferences_dict)
+org_preferences_from_dict = OrgPreferences.from_dict(org_preferences_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

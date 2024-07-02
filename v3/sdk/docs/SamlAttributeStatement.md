@@ -27,7 +27,7 @@ print(SamlAttributeStatement.to_json())
 # convert the object into a dict
 saml_attribute_statement_dict = saml_attribute_statement_instance.to_dict()
 # create an instance of SamlAttributeStatement from a dict
-saml_attribute_statement_form_dict = saml_attribute_statement.from_dict(saml_attribute_statement_dict)
+saml_attribute_statement_from_dict = SamlAttributeStatement.from_dict(saml_attribute_statement_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

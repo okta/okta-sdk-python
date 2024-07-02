@@ -24,7 +24,7 @@ print(PolicyContextDevice.to_json())
 # convert the object into a dict
 policy_context_device_dict = policy_context_device_instance.to_dict()
 # create an instance of PolicyContextDevice from a dict
-policy_context_device_form_dict = policy_context_device.from_dict(policy_context_device_dict)
+policy_context_device_from_dict = PolicyContextDevice.from_dict(policy_context_device_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

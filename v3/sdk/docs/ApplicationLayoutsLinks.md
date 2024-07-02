@@ -24,7 +24,7 @@ print(ApplicationLayoutsLinks.to_json())
 # convert the object into a dict
 application_layouts_links_dict = application_layouts_links_instance.to_dict()
 # create an instance of ApplicationLayoutsLinks from a dict
-application_layouts_links_form_dict = application_layouts_links.from_dict(application_layouts_links_dict)
+application_layouts_links_from_dict = ApplicationLayoutsLinks.from_dict(application_layouts_links_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -27,7 +27,7 @@ print(SchemeApplicationCredentials.to_json())
 # convert the object into a dict
 scheme_application_credentials_dict = scheme_application_credentials_instance.to_dict()
 # create an instance of SchemeApplicationCredentials from a dict
-scheme_application_credentials_form_dict = scheme_application_credentials.from_dict(scheme_application_credentials_dict)
+scheme_application_credentials_from_dict = SchemeApplicationCredentials.from_dict(scheme_application_credentials_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -27,7 +27,7 @@ print(KnowledgeConstraint.to_json())
 # convert the object into a dict
 knowledge_constraint_dict = knowledge_constraint_instance.to_dict()
 # create an instance of KnowledgeConstraint from a dict
-knowledge_constraint_form_dict = knowledge_constraint.from_dict(knowledge_constraint_dict)
+knowledge_constraint_from_dict = KnowledgeConstraint.from_dict(knowledge_constraint_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

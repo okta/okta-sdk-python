@@ -24,7 +24,7 @@ print(DefaultApp.to_json())
 # convert the object into a dict
 default_app_dict = default_app_instance.to_dict()
 # create an instance of DefaultApp from a dict
-default_app_form_dict = default_app.from_dict(default_app_dict)
+default_app_from_dict = DefaultApp.from_dict(default_app_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

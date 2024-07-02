@@ -23,7 +23,7 @@ print(IdentityProviderCredentialsClient.to_json())
 # convert the object into a dict
 identity_provider_credentials_client_dict = identity_provider_credentials_client_instance.to_dict()
 # create an instance of IdentityProviderCredentialsClient from a dict
-identity_provider_credentials_client_form_dict = identity_provider_credentials_client.from_dict(identity_provider_credentials_client_dict)
+identity_provider_credentials_client_from_dict = IdentityProviderCredentialsClient.from_dict(identity_provider_credentials_client_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

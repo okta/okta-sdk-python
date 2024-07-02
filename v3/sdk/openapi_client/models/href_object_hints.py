@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.http_method import HttpMethod
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,7 +28,7 @@ class HrefObjectHints(BaseModel):
     """
     Describes allowed HTTP verbs for the `href`
     """ # noqa: E501
-    allow: Optional[conlist(HttpMethod)] = None
+    allow: Optional[List[HttpMethod]] = None
     __properties: ClassVar[List[str]] = ["allow"]
 
     model_config = ConfigDict(

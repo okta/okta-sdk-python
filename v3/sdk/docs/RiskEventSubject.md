@@ -24,7 +24,7 @@ print(RiskEventSubject.to_json())
 # convert the object into a dict
 risk_event_subject_dict = risk_event_subject_instance.to_dict()
 # create an instance of RiskEventSubject from a dict
-risk_event_subject_form_dict = risk_event_subject.from_dict(risk_event_subject_dict)
+risk_event_subject_from_dict = RiskEventSubject.from_dict(risk_event_subject_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

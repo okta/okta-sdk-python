@@ -23,7 +23,7 @@ print(AuthenticatorProvider.to_json())
 # convert the object into a dict
 authenticator_provider_dict = authenticator_provider_instance.to_dict()
 # create an instance of AuthenticatorProvider from a dict
-authenticator_provider_form_dict = authenticator_provider.from_dict(authenticator_provider_dict)
+authenticator_provider_from_dict = AuthenticatorProvider.from_dict(authenticator_provider_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

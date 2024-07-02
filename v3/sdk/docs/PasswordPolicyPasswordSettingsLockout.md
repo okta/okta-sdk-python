@@ -25,7 +25,7 @@ print(PasswordPolicyPasswordSettingsLockout.to_json())
 # convert the object into a dict
 password_policy_password_settings_lockout_dict = password_policy_password_settings_lockout_instance.to_dict()
 # create an instance of PasswordPolicyPasswordSettingsLockout from a dict
-password_policy_password_settings_lockout_form_dict = password_policy_password_settings_lockout.from_dict(password_policy_password_settings_lockout_dict)
+password_policy_password_settings_lockout_from_dict = PasswordPolicyPasswordSettingsLockout.from_dict(password_policy_password_settings_lockout_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

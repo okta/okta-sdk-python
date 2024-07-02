@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.user_credentials import UserCredentials
 from openapi_client.models.user_profile import UserProfile
 from typing import Optional, Set
@@ -29,7 +31,7 @@ class UpdateUserRequest(BaseModel):
     """ # noqa: E501
     credentials: Optional[UserCredentials] = None
     profile: Optional[UserProfile] = None
-    realm_id: Optional[StrictStr] = Field(None, alias="realmId", description="The ID of the realm in which the user is residing")
+    realm_id: Optional[StrictStr] = Field(default=None, description="The ID of the realm in which the user is residing", alias="realmId")
     __properties: ClassVar[List[str]] = ["credentials", "profile", "realmId"]
 
     model_config = ConfigDict(

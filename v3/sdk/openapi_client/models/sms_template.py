@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.sms_template_type import SmsTemplateType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -28,7 +31,7 @@ class SmsTemplate(BaseModel):
     """ # noqa: E501
     created: Optional[datetime] = None
     id: Optional[StrictStr] = None
-    last_updated: Optional[datetime] = Field(None, alias="lastUpdated")
+    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
     name: Optional[StrictStr] = None
     template: Optional[StrictStr] = None
     translations: Optional[Dict[str, Any]] = None

@@ -27,7 +27,7 @@ print(Realm.to_json())
 # convert the object into a dict
 realm_dict = realm_instance.to_dict()
 # create an instance of Realm from a dict
-realm_form_dict = realm.from_dict(realm_dict)
+realm_from_dict = Realm.from_dict(realm_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

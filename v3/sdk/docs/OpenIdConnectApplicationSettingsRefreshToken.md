@@ -23,7 +23,7 @@ print(OpenIdConnectApplicationSettingsRefreshToken.to_json())
 # convert the object into a dict
 open_id_connect_application_settings_refresh_token_dict = open_id_connect_application_settings_refresh_token_instance.to_dict()
 # create an instance of OpenIdConnectApplicationSettingsRefreshToken from a dict
-open_id_connect_application_settings_refresh_token_form_dict = open_id_connect_application_settings_refresh_token.from_dict(open_id_connect_application_settings_refresh_token_dict)
+open_id_connect_application_settings_refresh_token_from_dict = OpenIdConnectApplicationSettingsRefreshToken.from_dict(open_id_connect_application_settings_refresh_token_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

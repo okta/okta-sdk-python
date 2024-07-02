@@ -23,7 +23,7 @@ print(PasswordExpirationPolicyRuleCondition.to_json())
 # convert the object into a dict
 password_expiration_policy_rule_condition_dict = password_expiration_policy_rule_condition_instance.to_dict()
 # create an instance of PasswordExpirationPolicyRuleCondition from a dict
-password_expiration_policy_rule_condition_form_dict = password_expiration_policy_rule_condition.from_dict(password_expiration_policy_rule_condition_dict)
+password_expiration_policy_rule_condition_from_dict = PasswordExpirationPolicyRuleCondition.from_dict(password_expiration_policy_rule_condition_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

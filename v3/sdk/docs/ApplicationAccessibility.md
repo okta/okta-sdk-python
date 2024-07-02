@@ -24,7 +24,7 @@ print(ApplicationAccessibility.to_json())
 # convert the object into a dict
 application_accessibility_dict = application_accessibility_instance.to_dict()
 # create an instance of ApplicationAccessibility from a dict
-application_accessibility_form_dict = application_accessibility.from_dict(application_accessibility_dict)
+application_accessibility_from_dict = ApplicationAccessibility.from_dict(application_accessibility_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

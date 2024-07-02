@@ -23,7 +23,7 @@ print(OrgOktaCommunicationSetting.to_json())
 # convert the object into a dict
 org_okta_communication_setting_dict = org_okta_communication_setting_instance.to_dict()
 # create an instance of OrgOktaCommunicationSetting from a dict
-org_okta_communication_setting_form_dict = org_okta_communication_setting.from_dict(org_okta_communication_setting_dict)
+org_okta_communication_setting_from_dict = OrgOktaCommunicationSetting.from_dict(org_okta_communication_setting_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

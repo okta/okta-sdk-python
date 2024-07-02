@@ -25,7 +25,7 @@ print(PageRootLinks.to_json())
 # convert the object into a dict
 page_root_links_dict = page_root_links_instance.to_dict()
 # create an instance of PageRootLinks from a dict
-page_root_links_form_dict = page_root_links.from_dict(page_root_links_dict)
+page_root_links_from_dict = PageRootLinks.from_dict(page_root_links_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

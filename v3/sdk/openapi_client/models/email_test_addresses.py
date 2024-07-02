@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,8 +27,8 @@ class EmailTestAddresses(BaseModel):
     """
     EmailTestAddresses
     """ # noqa: E501
-    var_from: StrictStr = Field(..., alias="from", description="An email address to send the test email from")
-    to: StrictStr = Field(..., description="An email address to send the test email to")
+    var_from: StrictStr = Field(description="An email address to send the test email from", alias="from")
+    to: StrictStr = Field(description="An email address to send the test email to")
     __properties: ClassVar[List[str]] = ["from", "to"]
 
     model_config = ConfigDict(

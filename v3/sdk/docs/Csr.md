@@ -25,7 +25,7 @@ print(Csr.to_json())
 # convert the object into a dict
 csr_dict = csr_instance.to_dict()
 # create an instance of Csr from a dict
-csr_form_dict = csr.from_dict(csr_dict)
+csr_from_dict = Csr.from_dict(csr_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

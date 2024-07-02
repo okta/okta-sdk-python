@@ -23,7 +23,7 @@ print(IdpDiscoveryPolicyRule.to_json())
 # convert the object into a dict
 idp_discovery_policy_rule_dict = idp_discovery_policy_rule_instance.to_dict()
 # create an instance of IdpDiscoveryPolicyRule from a dict
-idp_discovery_policy_rule_form_dict = idp_discovery_policy_rule.from_dict(idp_discovery_policy_rule_dict)
+idp_discovery_policy_rule_from_dict = IdpDiscoveryPolicyRule.from_dict(idp_discovery_policy_rule_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

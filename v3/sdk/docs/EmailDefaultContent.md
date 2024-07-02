@@ -24,7 +24,7 @@ print(EmailDefaultContent.to_json())
 # convert the object into a dict
 email_default_content_dict = email_default_content_instance.to_dict()
 # create an instance of EmailDefaultContent from a dict
-email_default_content_form_dict = email_default_content.from_dict(email_default_content_dict)
+email_default_content_from_dict = EmailDefaultContent.from_dict(email_default_content_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

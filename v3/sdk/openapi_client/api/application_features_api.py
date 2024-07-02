@@ -17,11 +17,8 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from typing_extensions import Annotated
 from pydantic import Field, StrictStr
-
-from typing import List
-
+from typing_extensions import Annotated
 from openapi_client.models.application_feature import ApplicationFeature
 from openapi_client.models.capabilities_object import CapabilitiesObject
 
@@ -46,8 +43,8 @@ class ApplicationFeaturesApi:
     @validate_call
     def get_feature_for_application(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
-        feature_name: Annotated[StrictStr, Field(..., description="Name of the Feature")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        feature_name: Annotated[StrictStr, Field(description="Name of the Feature")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -120,8 +117,8 @@ class ApplicationFeaturesApi:
     @validate_call
     def get_feature_for_application_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
-        feature_name: Annotated[StrictStr, Field(..., description="Name of the Feature")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        feature_name: Annotated[StrictStr, Field(description="Name of the Feature")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -194,8 +191,8 @@ class ApplicationFeaturesApi:
     @validate_call
     def get_feature_for_application_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
-        feature_name: Annotated[StrictStr, Field(..., description="Name of the Feature")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        feature_name: Annotated[StrictStr, Field(description="Name of the Feature")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -280,7 +277,7 @@ class ApplicationFeaturesApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -329,7 +326,7 @@ class ApplicationFeaturesApi:
     @validate_call
     def list_features_for_application(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -400,7 +397,7 @@ class ApplicationFeaturesApi:
     @validate_call
     def list_features_for_application_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -471,7 +468,7 @@ class ApplicationFeaturesApi:
     @validate_call
     def list_features_for_application_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -553,7 +550,7 @@ class ApplicationFeaturesApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -600,8 +597,8 @@ class ApplicationFeaturesApi:
     @validate_call
     def update_feature_for_application(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
-        feature_name: Annotated[StrictStr, Field(..., description="Name of the Feature")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        feature_name: Annotated[StrictStr, Field(description="Name of the Feature")],
         capabilities_object: CapabilitiesObject,
         _request_timeout: Union[
             None,
@@ -679,8 +676,8 @@ class ApplicationFeaturesApi:
     @validate_call
     def update_feature_for_application_with_http_info(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
-        feature_name: Annotated[StrictStr, Field(..., description="Name of the Feature")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        feature_name: Annotated[StrictStr, Field(description="Name of the Feature")],
         capabilities_object: CapabilitiesObject,
         _request_timeout: Union[
             None,
@@ -758,8 +755,8 @@ class ApplicationFeaturesApi:
     @validate_call
     def update_feature_for_application_without_preload_content(
         self,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
-        feature_name: Annotated[StrictStr, Field(..., description="Name of the Feature")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        feature_name: Annotated[StrictStr, Field(description="Name of the Feature")],
         capabilities_object: CapabilitiesObject,
         _request_timeout: Union[
             None,
@@ -850,7 +847,7 @@ class ApplicationFeaturesApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters

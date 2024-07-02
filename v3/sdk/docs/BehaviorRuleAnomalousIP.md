@@ -22,7 +22,7 @@ print(BehaviorRuleAnomalousIP.to_json())
 # convert the object into a dict
 behavior_rule_anomalous_ip_dict = behavior_rule_anomalous_ip_instance.to_dict()
 # create an instance of BehaviorRuleAnomalousIP from a dict
-behavior_rule_anomalous_ip_form_dict = behavior_rule_anomalous_ip.from_dict(behavior_rule_anomalous_ip_dict)
+behavior_rule_anomalous_ip_from_dict = BehaviorRuleAnomalousIP.from_dict(behavior_rule_anomalous_ip_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

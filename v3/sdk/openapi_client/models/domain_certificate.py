@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List
 from openapi_client.models.domain_certificate_type import DomainCertificateType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,10 +28,10 @@ class DomainCertificate(BaseModel):
     """
     Defines the properties of the certificate
     """ # noqa: E501
-    certificate: StrictStr = Field(..., description="Certificate content")
-    certificate_chain: StrictStr = Field(..., alias="certificateChain", description="Certificate chain")
-    private_key: StrictStr = Field(..., alias="privateKey", description="Certificate private key")
-    type: DomainCertificateType = Field(...)
+    certificate: StrictStr = Field(description="Certificate content")
+    certificate_chain: StrictStr = Field(description="Certificate chain", alias="certificateChain")
+    private_key: StrictStr = Field(description="Certificate private key", alias="privateKey")
+    type: DomainCertificateType
     __properties: ClassVar[List[str]] = ["certificate", "certificateChain", "privateKey", "type"]
 
     model_config = ConfigDict(

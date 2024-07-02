@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.enabled_status import EnabledStatus
 from openapi_client.models.feature_stage import FeatureStage
 from openapi_client.models.feature_type import FeatureType
@@ -35,7 +37,7 @@ class Feature(BaseModel):
     stage: Optional[FeatureStage] = None
     status: Optional[EnabledStatus] = None
     type: Optional[FeatureType] = None
-    links: Optional[LinksSelf] = Field(None, alias="_links")
+    links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["description", "id", "name", "stage", "status", "type", "_links"]
 
     model_config = ConfigDict(

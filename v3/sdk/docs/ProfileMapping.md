@@ -27,7 +27,7 @@ print(ProfileMapping.to_json())
 # convert the object into a dict
 profile_mapping_dict = profile_mapping_instance.to_dict()
 # create an instance of ProfileMapping from a dict
-profile_mapping_form_dict = profile_mapping.from_dict(profile_mapping_dict)
+profile_mapping_from_dict = ProfileMapping.from_dict(profile_mapping_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

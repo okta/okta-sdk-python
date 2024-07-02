@@ -24,7 +24,7 @@ print(WellKnownOrgMetadataSettings.to_json())
 # convert the object into a dict
 well_known_org_metadata_settings_dict = well_known_org_metadata_settings_instance.to_dict()
 # create an instance of WellKnownOrgMetadataSettings from a dict
-well_known_org_metadata_settings_form_dict = well_known_org_metadata_settings.from_dict(well_known_org_metadata_settings_dict)
+well_known_org_metadata_settings_from_dict = WellKnownOrgMetadataSettings.from_dict(well_known_org_metadata_settings_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

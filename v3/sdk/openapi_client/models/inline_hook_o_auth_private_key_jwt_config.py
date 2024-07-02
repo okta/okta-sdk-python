@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.inline_hook_channel_config_auth_scheme import InlineHookChannelConfigAuthScheme
 from openapi_client.models.inline_hook_channel_config_headers import InlineHookChannelConfigHeaders
 from typing import Optional, Set
@@ -27,13 +29,13 @@ class InlineHookOAuthPrivateKeyJwtConfig(BaseModel):
     """
     InlineHookOAuthPrivateKeyJwtConfig
     """ # noqa: E501
-    hook_key_id: Optional[StrictStr] = Field(None, alias="hookKeyId")
-    auth_type: Optional[StrictStr] = Field(None, alias="authType")
-    client_id: Optional[StrictStr] = Field(None, alias="clientId")
+    hook_key_id: Optional[StrictStr] = Field(default=None, alias="hookKeyId")
+    auth_type: Optional[StrictStr] = Field(default=None, alias="authType")
+    client_id: Optional[StrictStr] = Field(default=None, alias="clientId")
     scope: Optional[StrictStr] = None
-    token_url: Optional[StrictStr] = Field(None, alias="tokenUrl")
-    auth_scheme: Optional[InlineHookChannelConfigAuthScheme] = Field(None, alias="authScheme")
-    headers: Optional[conlist(InlineHookChannelConfigHeaders)] = None
+    token_url: Optional[StrictStr] = Field(default=None, alias="tokenUrl")
+    auth_scheme: Optional[InlineHookChannelConfigAuthScheme] = Field(default=None, alias="authScheme")
+    headers: Optional[List[InlineHookChannelConfigHeaders]] = None
     method: Optional[StrictStr] = None
     uri: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["authType", "clientId", "scope", "tokenUrl", "authScheme", "headers", "method", "uri"]

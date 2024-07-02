@@ -27,7 +27,7 @@ print(BookmarkApplicationSettings.to_json())
 # convert the object into a dict
 bookmark_application_settings_dict = bookmark_application_settings_instance.to_dict()
 # create an instance of BookmarkApplicationSettings from a dict
-bookmark_application_settings_form_dict = bookmark_application_settings.from_dict(bookmark_application_settings_dict)
+bookmark_application_settings_from_dict = BookmarkApplicationSettings.from_dict(bookmark_application_settings_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

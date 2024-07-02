@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.lifecycle_status import LifecycleStatus
 from openapi_client.models.links_self import LinksSelf
 from openapi_client.models.o_auth2_claim_conditions import OAuth2ClaimConditions
@@ -31,8 +33,8 @@ class OAuth2Claim(BaseModel):
     """
     OAuth2Claim
     """ # noqa: E501
-    always_include_in_token: Optional[StrictBool] = Field(None, alias="alwaysIncludeInToken")
-    claim_type: Optional[OAuth2ClaimType] = Field(None, alias="claimType")
+    always_include_in_token: Optional[StrictBool] = Field(default=None, alias="alwaysIncludeInToken")
+    claim_type: Optional[OAuth2ClaimType] = Field(default=None, alias="claimType")
     conditions: Optional[OAuth2ClaimConditions] = None
     group_filter_type: Optional[OAuth2ClaimGroupFilterType] = None
     id: Optional[StrictStr] = None
@@ -40,8 +42,8 @@ class OAuth2Claim(BaseModel):
     status: Optional[LifecycleStatus] = None
     system: Optional[StrictBool] = None
     value: Optional[StrictStr] = None
-    value_type: Optional[OAuth2ClaimValueType] = Field(None, alias="valueType")
-    links: Optional[LinksSelf] = Field(None, alias="_links")
+    value_type: Optional[OAuth2ClaimValueType] = Field(default=None, alias="valueType")
+    links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["alwaysIncludeInToken", "claimType", "conditions", "group_filter_type", "id", "name", "status", "system", "value", "valueType", "_links"]
 
     model_config = ConfigDict(

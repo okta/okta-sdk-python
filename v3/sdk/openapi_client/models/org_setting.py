@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.links_self import LinksSelf
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,21 +32,21 @@ class OrgSetting(BaseModel):
     address1: Optional[StrictStr] = None
     address2: Optional[StrictStr] = None
     city: Optional[StrictStr] = None
-    company_name: Optional[StrictStr] = Field(None, alias="companyName")
+    company_name: Optional[StrictStr] = Field(default=None, alias="companyName")
     country: Optional[StrictStr] = None
     created: Optional[datetime] = None
-    end_user_support_help_url: Optional[StrictStr] = Field(None, alias="endUserSupportHelpURL")
-    expires_at: Optional[datetime] = Field(None, alias="expiresAt")
+    end_user_support_help_url: Optional[StrictStr] = Field(default=None, alias="endUserSupportHelpURL")
+    expires_at: Optional[datetime] = Field(default=None, alias="expiresAt")
     id: Optional[StrictStr] = None
-    last_updated: Optional[datetime] = Field(None, alias="lastUpdated")
-    phone_number: Optional[StrictStr] = Field(None, alias="phoneNumber")
-    postal_code: Optional[StrictStr] = Field(None, alias="postalCode")
+    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
+    phone_number: Optional[StrictStr] = Field(default=None, alias="phoneNumber")
+    postal_code: Optional[StrictStr] = Field(default=None, alias="postalCode")
     state: Optional[StrictStr] = None
     status: Optional[StrictStr] = None
     subdomain: Optional[StrictStr] = None
-    support_phone_number: Optional[StrictStr] = Field(None, alias="supportPhoneNumber")
+    support_phone_number: Optional[StrictStr] = Field(default=None, alias="supportPhoneNumber")
     website: Optional[StrictStr] = None
-    links: Optional[LinksSelf] = Field(None, alias="_links")
+    links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["address1", "address2", "city", "companyName", "country", "created", "endUserSupportHelpURL", "expiresAt", "id", "lastUpdated", "phoneNumber", "postalCode", "state", "status", "subdomain", "supportPhoneNumber", "website", "_links"]
 
     model_config = ConfigDict(

@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,9 +27,9 @@ class ApplicationAccessibility(BaseModel):
     """
     ApplicationAccessibility
     """ # noqa: E501
-    error_redirect_url: Optional[StrictStr] = Field(None, alias="errorRedirectUrl")
-    login_redirect_url: Optional[StrictStr] = Field(None, alias="loginRedirectUrl")
-    self_service: Optional[StrictBool] = Field(None, alias="selfService")
+    error_redirect_url: Optional[StrictStr] = Field(default=None, alias="errorRedirectUrl")
+    login_redirect_url: Optional[StrictStr] = Field(default=None, alias="loginRedirectUrl")
+    self_service: Optional[StrictBool] = Field(default=None, alias="selfService")
     __properties: ClassVar[List[str]] = ["errorRedirectUrl", "loginRedirectUrl", "selfService"]
 
     model_config = ConfigDict(

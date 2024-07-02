@@ -22,7 +22,7 @@ print(PolicyRuleAuthContextCondition.to_json())
 # convert the object into a dict
 policy_rule_auth_context_condition_dict = policy_rule_auth_context_condition_instance.to_dict()
 # create an instance of PolicyRuleAuthContextCondition from a dict
-policy_rule_auth_context_condition_form_dict = policy_rule_auth_context_condition.from_dict(policy_rule_auth_context_condition_dict)
+policy_rule_auth_context_condition_from_dict = PolicyRuleAuthContextCondition.from_dict(policy_rule_auth_context_condition_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

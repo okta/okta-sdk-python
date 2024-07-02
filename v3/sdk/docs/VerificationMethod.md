@@ -25,7 +25,7 @@ print(VerificationMethod.to_json())
 # convert the object into a dict
 verification_method_dict = verification_method_instance.to_dict()
 # create an instance of VerificationMethod from a dict
-verification_method_form_dict = verification_method.from_dict(verification_method_dict)
+verification_method_from_dict = VerificationMethod.from_dict(verification_method_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

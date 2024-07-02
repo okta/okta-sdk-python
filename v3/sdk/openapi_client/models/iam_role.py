@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.iam_role_links import IamRoleLinks
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,12 +29,12 @@ class IamRole(BaseModel):
     """
     IamRole
     """ # noqa: E501
-    created: Optional[datetime] = Field(None, description="Timestamp when the role was created")
-    description: StrictStr = Field(..., description="Description of the role")
-    id: Optional[StrictStr] = Field(None, description="Unique key for the role")
-    label: StrictStr = Field(..., description="Unique label for the role")
-    last_updated: Optional[datetime] = Field(None, alias="lastUpdated", description="Timestamp when the role was last updated")
-    links: Optional[IamRoleLinks] = Field(None, alias="_links")
+    created: Optional[datetime] = Field(default=None, description="Timestamp when the role was created")
+    description: StrictStr = Field(description="Description of the role")
+    id: Optional[StrictStr] = Field(default=None, description="Unique key for the role")
+    label: StrictStr = Field(description="Unique label for the role")
+    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the role was last updated", alias="lastUpdated")
+    links: Optional[IamRoleLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["created", "description", "id", "label", "lastUpdated", "_links"]
 
     model_config = ConfigDict(

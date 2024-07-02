@@ -25,7 +25,7 @@ print(SimulateResultRules.to_json())
 # convert the object into a dict
 simulate_result_rules_dict = simulate_result_rules_instance.to_dict()
 # create an instance of SimulateResultRules from a dict
-simulate_result_rules_form_dict = simulate_result_rules.from_dict(simulate_result_rules_dict)
+simulate_result_rules_from_dict = SimulateResultRules.from_dict(simulate_result_rules_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

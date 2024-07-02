@@ -26,7 +26,7 @@ print(PolicyMappingLinksAllOfAuthenticator.to_json())
 # convert the object into a dict
 policy_mapping_links_all_of_authenticator_dict = policy_mapping_links_all_of_authenticator_instance.to_dict()
 # create an instance of PolicyMappingLinksAllOfAuthenticator from a dict
-policy_mapping_links_all_of_authenticator_form_dict = policy_mapping_links_all_of_authenticator.from_dict(policy_mapping_links_all_of_authenticator_dict)
+policy_mapping_links_all_of_authenticator_from_dict = PolicyMappingLinksAllOfAuthenticator.from_dict(policy_mapping_links_all_of_authenticator_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

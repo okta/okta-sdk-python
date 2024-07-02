@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.allowed_for_enum import AllowedForEnum
 from openapi_client.models.channel_binding import ChannelBinding
 from openapi_client.models.compliance import Compliance
@@ -29,12 +31,12 @@ class AuthenticatorSettings(BaseModel):
     """
     AuthenticatorSettings
     """ # noqa: E501
-    allowed_for: Optional[AllowedForEnum] = Field(None, alias="allowedFor")
-    app_instance_id: Optional[StrictStr] = Field(None, alias="appInstanceId")
-    channel_binding: Optional[ChannelBinding] = Field(None, alias="channelBinding")
+    allowed_for: Optional[AllowedForEnum] = Field(default=None, alias="allowedFor")
+    app_instance_id: Optional[StrictStr] = Field(default=None, alias="appInstanceId")
+    channel_binding: Optional[ChannelBinding] = Field(default=None, alias="channelBinding")
     compliance: Optional[Compliance] = None
-    token_lifetime_in_minutes: Optional[StrictInt] = Field(None, alias="tokenLifetimeInMinutes")
-    user_verification: Optional[UserVerificationEnum] = Field(None, alias="userVerification")
+    token_lifetime_in_minutes: Optional[StrictInt] = Field(default=None, alias="tokenLifetimeInMinutes")
+    user_verification: Optional[UserVerificationEnum] = Field(default=None, alias="userVerification")
     __properties: ClassVar[List[str]] = ["allowedFor", "appInstanceId", "channelBinding", "compliance", "tokenLifetimeInMinutes", "userVerification"]
 
     model_config = ConfigDict(

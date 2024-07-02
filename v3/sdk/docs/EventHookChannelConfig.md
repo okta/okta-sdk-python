@@ -24,7 +24,7 @@ print(EventHookChannelConfig.to_json())
 # convert the object into a dict
 event_hook_channel_config_dict = event_hook_channel_config_instance.to_dict()
 # create an instance of EventHookChannelConfig from a dict
-event_hook_channel_config_form_dict = event_hook_channel_config.from_dict(event_hook_channel_config_dict)
+event_hook_channel_config_from_dict = EventHookChannelConfig.from_dict(event_hook_channel_config_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

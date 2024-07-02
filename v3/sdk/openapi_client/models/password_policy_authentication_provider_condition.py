@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.password_policy_authentication_provider_type import PasswordPolicyAuthenticationProviderType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,7 +28,7 @@ class PasswordPolicyAuthenticationProviderCondition(BaseModel):
     """
     PasswordPolicyAuthenticationProviderCondition
     """ # noqa: E501
-    include: Optional[conlist(StrictStr)] = None
+    include: Optional[List[StrictStr]] = None
     provider: Optional[PasswordPolicyAuthenticationProviderType] = None
     __properties: ClassVar[List[str]] = ["include", "provider"]
 

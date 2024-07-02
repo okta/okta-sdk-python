@@ -24,7 +24,7 @@ print(UserCondition.to_json())
 # convert the object into a dict
 user_condition_dict = user_condition_instance.to_dict()
 # create an instance of UserCondition from a dict
-user_condition_form_dict = user_condition.from_dict(user_condition_dict)
+user_condition_from_dict = UserCondition.from_dict(user_condition_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -26,10 +28,10 @@ class ActivateFactorRequest(BaseModel):
     ActivateFactorRequest
     """ # noqa: E501
     attestation: Optional[StrictStr] = None
-    client_data: Optional[StrictStr] = Field(None, alias="clientData")
-    pass_code: Optional[StrictStr] = Field(None, alias="passCode")
-    registration_data: Optional[StrictStr] = Field(None, alias="registrationData")
-    state_token: Optional[StrictStr] = Field(None, alias="stateToken")
+    client_data: Optional[StrictStr] = Field(default=None, alias="clientData")
+    pass_code: Optional[StrictStr] = Field(default=None, alias="passCode")
+    registration_data: Optional[StrictStr] = Field(default=None, alias="registrationData")
+    state_token: Optional[StrictStr] = Field(default=None, alias="stateToken")
     __properties: ClassVar[List[str]] = ["attestation", "clientData", "passCode", "registrationData", "stateToken"]
 
     model_config = ConfigDict(

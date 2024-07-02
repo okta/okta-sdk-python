@@ -28,7 +28,7 @@ print(GroupOwner.to_json())
 # convert the object into a dict
 group_owner_dict = group_owner_instance.to_dict()
 # create an instance of GroupOwner from a dict
-group_owner_form_dict = group_owner.from_dict(group_owner_dict)
+group_owner_from_dict = GroupOwner.from_dict(group_owner_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

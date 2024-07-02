@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, List
+from typing_extensions import Annotated
 from openapi_client.models.splunk_edition import SplunkEdition
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,8 +29,8 @@ class LogStreamSettingsSplunkPut(BaseModel):
     """
     Specifies the configuration for the `splunk_cloud_logstreaming` Log Stream type.
     """ # noqa: E501
-    edition: SplunkEdition = Field(...)
-    host: constr(strict=True, max_length=116, min_length=17) = Field(..., description="The domain name for your Splunk Cloud instance. Don't include `http` or `https` in the string. For example: `acme.splunkcloud.com`")
+    edition: SplunkEdition
+    host: Annotated[str, Field(min_length=17, strict=True, max_length=116)] = Field(description="The domain name for your Splunk Cloud instance. Don't include `http` or `https` in the string. For example: `acme.splunkcloud.com`")
     __properties: ClassVar[List[str]] = ["edition", "host"]
 
     model_config = ConfigDict(

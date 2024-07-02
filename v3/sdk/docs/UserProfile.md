@@ -52,7 +52,7 @@ print(UserProfile.to_json())
 # convert the object into a dict
 user_profile_dict = user_profile_instance.to_dict()
 # create an instance of UserProfile from a dict
-user_profile_form_dict = user_profile.from_dict(user_profile_dict)
+user_profile_from_dict = UserProfile.from_dict(user_profile_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

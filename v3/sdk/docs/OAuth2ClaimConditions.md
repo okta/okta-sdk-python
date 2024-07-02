@@ -22,7 +22,7 @@ print(OAuth2ClaimConditions.to_json())
 # convert the object into a dict
 o_auth2_claim_conditions_dict = o_auth2_claim_conditions_instance.to_dict()
 # create an instance of OAuth2ClaimConditions from a dict
-o_auth2_claim_conditions_form_dict = o_auth2_claim_conditions.from_dict(o_auth2_claim_conditions_dict)
+o_auth2_claim_conditions_from_dict = OAuth2ClaimConditions.from_dict(o_auth2_claim_conditions_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -22,7 +22,7 @@ print(Compliance.to_json())
 # convert the object into a dict
 compliance_dict = compliance_instance.to_dict()
 # create an instance of Compliance from a dict
-compliance_form_dict = compliance.from_dict(compliance_dict)
+compliance_from_dict = Compliance.from_dict(compliance_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

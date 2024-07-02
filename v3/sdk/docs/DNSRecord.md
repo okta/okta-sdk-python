@@ -26,7 +26,7 @@ print(DNSRecord.to_json())
 # convert the object into a dict
 dns_record_dict = dns_record_instance.to_dict()
 # create an instance of DNSRecord from a dict
-dns_record_form_dict = dns_record.from_dict(dns_record_dict)
+dns_record_from_dict = DNSRecord.from_dict(dns_record_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

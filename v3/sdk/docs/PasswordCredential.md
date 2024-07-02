@@ -24,7 +24,7 @@ print(PasswordCredential.to_json())
 # convert the object into a dict
 password_credential_dict = password_credential_instance.to_dict()
 # create an instance of PasswordCredential from a dict
-password_credential_form_dict = password_credential.from_dict(password_credential_dict)
+password_credential_from_dict = PasswordCredential.from_dict(password_credential_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

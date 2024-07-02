@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.permission import Permission
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,7 +28,7 @@ class Permissions(BaseModel):
     """
     Permissions
     """ # noqa: E501
-    permissions: Optional[conlist(Permission)] = None
+    permissions: Optional[List[Permission]] = None
     __properties: ClassVar[List[str]] = ["permissions"]
 
     model_config = ConfigDict(

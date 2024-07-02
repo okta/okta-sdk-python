@@ -23,7 +23,7 @@ print(ProtocolAlgorithmTypeSignature.to_json())
 # convert the object into a dict
 protocol_algorithm_type_signature_dict = protocol_algorithm_type_signature_instance.to_dict()
 # create an instance of ProtocolAlgorithmTypeSignature from a dict
-protocol_algorithm_type_signature_form_dict = protocol_algorithm_type_signature.from_dict(protocol_algorithm_type_signature_dict)
+protocol_algorithm_type_signature_from_dict = ProtocolAlgorithmTypeSignature.from_dict(protocol_algorithm_type_signature_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

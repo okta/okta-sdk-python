@@ -17,11 +17,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from typing_extensions import Annotated
 from pydantic import Field, StrictBool, StrictStr
-
-from typing import List, Optional
-
+from typing import Optional
+from typing_extensions import Annotated
 from openapi_client.models.authenticator import Authenticator
 from openapi_client.models.authenticator_method_base import AuthenticatorMethodBase
 from openapi_client.models.authenticator_method_type import AuthenticatorMethodType
@@ -48,7 +46,7 @@ class AuthenticatorApi:
     @validate_call
     def activate_authenticator(
         self,
-        authenticator_id: Annotated[StrictStr, Field(..., description="`id` of the Authenticator")],
+        authenticator_id: Annotated[StrictStr, Field(description="`id` of the Authenticator")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -118,7 +116,7 @@ class AuthenticatorApi:
     @validate_call
     def activate_authenticator_with_http_info(
         self,
-        authenticator_id: Annotated[StrictStr, Field(..., description="`id` of the Authenticator")],
+        authenticator_id: Annotated[StrictStr, Field(description="`id` of the Authenticator")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -188,7 +186,7 @@ class AuthenticatorApi:
     @validate_call
     def activate_authenticator_without_preload_content(
         self,
-        authenticator_id: Annotated[StrictStr, Field(..., description="`id` of the Authenticator")],
+        authenticator_id: Annotated[StrictStr, Field(description="`id` of the Authenticator")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -269,7 +267,7 @@ class AuthenticatorApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -316,8 +314,8 @@ class AuthenticatorApi:
     @validate_call
     def activate_authenticator_method(
         self,
-        authenticator_id: Annotated[StrictStr, Field(..., description="`id` of the Authenticator")],
-        method_type: Annotated[AuthenticatorMethodType, Field(..., description="Type of the authenticator method")],
+        authenticator_id: Annotated[StrictStr, Field(description="`id` of the Authenticator")],
+        method_type: Annotated[AuthenticatorMethodType, Field(description="Type of the authenticator method")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -390,8 +388,8 @@ class AuthenticatorApi:
     @validate_call
     def activate_authenticator_method_with_http_info(
         self,
-        authenticator_id: Annotated[StrictStr, Field(..., description="`id` of the Authenticator")],
-        method_type: Annotated[AuthenticatorMethodType, Field(..., description="Type of the authenticator method")],
+        authenticator_id: Annotated[StrictStr, Field(description="`id` of the Authenticator")],
+        method_type: Annotated[AuthenticatorMethodType, Field(description="Type of the authenticator method")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -464,8 +462,8 @@ class AuthenticatorApi:
     @validate_call
     def activate_authenticator_method_without_preload_content(
         self,
-        authenticator_id: Annotated[StrictStr, Field(..., description="`id` of the Authenticator")],
-        method_type: Annotated[AuthenticatorMethodType, Field(..., description="Type of the authenticator method")],
+        authenticator_id: Annotated[StrictStr, Field(description="`id` of the Authenticator")],
+        method_type: Annotated[AuthenticatorMethodType, Field(description="Type of the authenticator method")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -550,7 +548,7 @@ class AuthenticatorApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -833,7 +831,7 @@ class AuthenticatorApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -897,7 +895,7 @@ class AuthenticatorApi:
     @validate_call
     def deactivate_authenticator(
         self,
-        authenticator_id: Annotated[StrictStr, Field(..., description="`id` of the Authenticator")],
+        authenticator_id: Annotated[StrictStr, Field(description="`id` of the Authenticator")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -967,7 +965,7 @@ class AuthenticatorApi:
     @validate_call
     def deactivate_authenticator_with_http_info(
         self,
-        authenticator_id: Annotated[StrictStr, Field(..., description="`id` of the Authenticator")],
+        authenticator_id: Annotated[StrictStr, Field(description="`id` of the Authenticator")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1037,7 +1035,7 @@ class AuthenticatorApi:
     @validate_call
     def deactivate_authenticator_without_preload_content(
         self,
-        authenticator_id: Annotated[StrictStr, Field(..., description="`id` of the Authenticator")],
+        authenticator_id: Annotated[StrictStr, Field(description="`id` of the Authenticator")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1118,7 +1116,7 @@ class AuthenticatorApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1165,8 +1163,8 @@ class AuthenticatorApi:
     @validate_call
     def deactivate_authenticator_method(
         self,
-        authenticator_id: Annotated[StrictStr, Field(..., description="`id` of the Authenticator")],
-        method_type: Annotated[AuthenticatorMethodType, Field(..., description="Type of the authenticator method")],
+        authenticator_id: Annotated[StrictStr, Field(description="`id` of the Authenticator")],
+        method_type: Annotated[AuthenticatorMethodType, Field(description="Type of the authenticator method")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1239,8 +1237,8 @@ class AuthenticatorApi:
     @validate_call
     def deactivate_authenticator_method_with_http_info(
         self,
-        authenticator_id: Annotated[StrictStr, Field(..., description="`id` of the Authenticator")],
-        method_type: Annotated[AuthenticatorMethodType, Field(..., description="Type of the authenticator method")],
+        authenticator_id: Annotated[StrictStr, Field(description="`id` of the Authenticator")],
+        method_type: Annotated[AuthenticatorMethodType, Field(description="Type of the authenticator method")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1313,8 +1311,8 @@ class AuthenticatorApi:
     @validate_call
     def deactivate_authenticator_method_without_preload_content(
         self,
-        authenticator_id: Annotated[StrictStr, Field(..., description="`id` of the Authenticator")],
-        method_type: Annotated[AuthenticatorMethodType, Field(..., description="Type of the authenticator method")],
+        authenticator_id: Annotated[StrictStr, Field(description="`id` of the Authenticator")],
+        method_type: Annotated[AuthenticatorMethodType, Field(description="Type of the authenticator method")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1399,7 +1397,7 @@ class AuthenticatorApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1448,7 +1446,7 @@ class AuthenticatorApi:
     @validate_call
     def get_authenticator(
         self,
-        authenticator_id: Annotated[StrictStr, Field(..., description="`id` of the Authenticator")],
+        authenticator_id: Annotated[StrictStr, Field(description="`id` of the Authenticator")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1518,7 +1516,7 @@ class AuthenticatorApi:
     @validate_call
     def get_authenticator_with_http_info(
         self,
-        authenticator_id: Annotated[StrictStr, Field(..., description="`id` of the Authenticator")],
+        authenticator_id: Annotated[StrictStr, Field(description="`id` of the Authenticator")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1588,7 +1586,7 @@ class AuthenticatorApi:
     @validate_call
     def get_authenticator_without_preload_content(
         self,
-        authenticator_id: Annotated[StrictStr, Field(..., description="`id` of the Authenticator")],
+        authenticator_id: Annotated[StrictStr, Field(description="`id` of the Authenticator")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1669,7 +1667,7 @@ class AuthenticatorApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1716,8 +1714,8 @@ class AuthenticatorApi:
     @validate_call
     def get_authenticator_method(
         self,
-        authenticator_id: Annotated[StrictStr, Field(..., description="`id` of the Authenticator")],
-        method_type: Annotated[AuthenticatorMethodType, Field(..., description="Type of the authenticator method")],
+        authenticator_id: Annotated[StrictStr, Field(description="`id` of the Authenticator")],
+        method_type: Annotated[AuthenticatorMethodType, Field(description="Type of the authenticator method")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1790,8 +1788,8 @@ class AuthenticatorApi:
     @validate_call
     def get_authenticator_method_with_http_info(
         self,
-        authenticator_id: Annotated[StrictStr, Field(..., description="`id` of the Authenticator")],
-        method_type: Annotated[AuthenticatorMethodType, Field(..., description="Type of the authenticator method")],
+        authenticator_id: Annotated[StrictStr, Field(description="`id` of the Authenticator")],
+        method_type: Annotated[AuthenticatorMethodType, Field(description="Type of the authenticator method")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1864,8 +1862,8 @@ class AuthenticatorApi:
     @validate_call
     def get_authenticator_method_without_preload_content(
         self,
-        authenticator_id: Annotated[StrictStr, Field(..., description="`id` of the Authenticator")],
-        method_type: Annotated[AuthenticatorMethodType, Field(..., description="Type of the authenticator method")],
+        authenticator_id: Annotated[StrictStr, Field(description="`id` of the Authenticator")],
+        method_type: Annotated[AuthenticatorMethodType, Field(description="Type of the authenticator method")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1950,7 +1948,7 @@ class AuthenticatorApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1999,7 +1997,7 @@ class AuthenticatorApi:
     @validate_call
     def get_well_known_app_authenticator_configuration(
         self,
-        oauth_client_id: Annotated[StrictStr, Field(..., description="Filters app authenticator configurations by `oauthClientId`")],
+        oauth_client_id: Annotated[StrictStr, Field(description="Filters app authenticator configurations by `oauthClientId`")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2068,7 +2066,7 @@ class AuthenticatorApi:
     @validate_call
     def get_well_known_app_authenticator_configuration_with_http_info(
         self,
-        oauth_client_id: Annotated[StrictStr, Field(..., description="Filters app authenticator configurations by `oauthClientId`")],
+        oauth_client_id: Annotated[StrictStr, Field(description="Filters app authenticator configurations by `oauthClientId`")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2137,7 +2135,7 @@ class AuthenticatorApi:
     @validate_call
     def get_well_known_app_authenticator_configuration_without_preload_content(
         self,
-        oauth_client_id: Annotated[StrictStr, Field(..., description="Filters app authenticator configurations by `oauthClientId`")],
+        oauth_client_id: Annotated[StrictStr, Field(description="Filters app authenticator configurations by `oauthClientId`")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2217,7 +2215,7 @@ class AuthenticatorApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2264,7 +2262,7 @@ class AuthenticatorApi:
     @validate_call
     def list_authenticator_methods(
         self,
-        authenticator_id: Annotated[StrictStr, Field(..., description="`id` of the Authenticator")],
+        authenticator_id: Annotated[StrictStr, Field(description="`id` of the Authenticator")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2334,7 +2332,7 @@ class AuthenticatorApi:
     @validate_call
     def list_authenticator_methods_with_http_info(
         self,
-        authenticator_id: Annotated[StrictStr, Field(..., description="`id` of the Authenticator")],
+        authenticator_id: Annotated[StrictStr, Field(description="`id` of the Authenticator")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2404,7 +2402,7 @@ class AuthenticatorApi:
     @validate_call
     def list_authenticator_methods_without_preload_content(
         self,
-        authenticator_id: Annotated[StrictStr, Field(..., description="`id` of the Authenticator")],
+        authenticator_id: Annotated[StrictStr, Field(description="`id` of the Authenticator")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2485,7 +2483,7 @@ class AuthenticatorApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2737,7 +2735,7 @@ class AuthenticatorApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2782,7 +2780,7 @@ class AuthenticatorApi:
     @validate_call
     def replace_authenticator(
         self,
-        authenticator_id: Annotated[StrictStr, Field(..., description="`id` of the Authenticator")],
+        authenticator_id: Annotated[StrictStr, Field(description="`id` of the Authenticator")],
         authenticator: Authenticator,
         _request_timeout: Union[
             None,
@@ -2857,7 +2855,7 @@ class AuthenticatorApi:
     @validate_call
     def replace_authenticator_with_http_info(
         self,
-        authenticator_id: Annotated[StrictStr, Field(..., description="`id` of the Authenticator")],
+        authenticator_id: Annotated[StrictStr, Field(description="`id` of the Authenticator")],
         authenticator: Authenticator,
         _request_timeout: Union[
             None,
@@ -2932,7 +2930,7 @@ class AuthenticatorApi:
     @validate_call
     def replace_authenticator_without_preload_content(
         self,
-        authenticator_id: Annotated[StrictStr, Field(..., description="`id` of the Authenticator")],
+        authenticator_id: Annotated[StrictStr, Field(description="`id` of the Authenticator")],
         authenticator: Authenticator,
         _request_timeout: Union[
             None,
@@ -3019,7 +3017,7 @@ class AuthenticatorApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -3081,8 +3079,8 @@ class AuthenticatorApi:
     @validate_call
     def replace_authenticator_method(
         self,
-        authenticator_id: Annotated[StrictStr, Field(..., description="`id` of the Authenticator")],
-        method_type: Annotated[AuthenticatorMethodType, Field(..., description="Type of the authenticator method")],
+        authenticator_id: Annotated[StrictStr, Field(description="`id` of the Authenticator")],
+        method_type: Annotated[AuthenticatorMethodType, Field(description="Type of the authenticator method")],
         authenticator_method_base: Optional[AuthenticatorMethodBase] = None,
         _request_timeout: Union[
             None,
@@ -3160,8 +3158,8 @@ class AuthenticatorApi:
     @validate_call
     def replace_authenticator_method_with_http_info(
         self,
-        authenticator_id: Annotated[StrictStr, Field(..., description="`id` of the Authenticator")],
-        method_type: Annotated[AuthenticatorMethodType, Field(..., description="Type of the authenticator method")],
+        authenticator_id: Annotated[StrictStr, Field(description="`id` of the Authenticator")],
+        method_type: Annotated[AuthenticatorMethodType, Field(description="Type of the authenticator method")],
         authenticator_method_base: Optional[AuthenticatorMethodBase] = None,
         _request_timeout: Union[
             None,
@@ -3239,8 +3237,8 @@ class AuthenticatorApi:
     @validate_call
     def replace_authenticator_method_without_preload_content(
         self,
-        authenticator_id: Annotated[StrictStr, Field(..., description="`id` of the Authenticator")],
-        method_type: Annotated[AuthenticatorMethodType, Field(..., description="Type of the authenticator method")],
+        authenticator_id: Annotated[StrictStr, Field(description="`id` of the Authenticator")],
+        method_type: Annotated[AuthenticatorMethodType, Field(description="Type of the authenticator method")],
         authenticator_method_base: Optional[AuthenticatorMethodBase] = None,
         _request_timeout: Union[
             None,
@@ -3331,7 +3329,7 @@ class AuthenticatorApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters

@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.application_credentials_scheme import ApplicationCredentialsScheme
 from openapi_client.models.application_credentials_signing import ApplicationCredentialsSigning
 from openapi_client.models.application_credentials_username_template import ApplicationCredentialsUsernameTemplate
@@ -30,11 +32,11 @@ class SchemeApplicationCredentials(BaseModel):
     SchemeApplicationCredentials
     """ # noqa: E501
     signing: Optional[ApplicationCredentialsSigning] = None
-    user_name_template: Optional[ApplicationCredentialsUsernameTemplate] = Field(None, alias="userNameTemplate")
+    user_name_template: Optional[ApplicationCredentialsUsernameTemplate] = Field(default=None, alias="userNameTemplate")
     password: Optional[PasswordCredential] = None
-    reveal_password: Optional[StrictBool] = Field(None, alias="revealPassword")
+    reveal_password: Optional[StrictBool] = Field(default=None, alias="revealPassword")
     scheme: Optional[ApplicationCredentialsScheme] = None
-    user_name: Optional[StrictStr] = Field(None, alias="userName")
+    user_name: Optional[StrictStr] = Field(default=None, alias="userName")
     __properties: ClassVar[List[str]] = ["signing", "userNameTemplate", "password", "revealPassword", "scheme", "userName"]
 
     model_config = ConfigDict(

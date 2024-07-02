@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.log_ip_address import LogIpAddress
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,7 +28,7 @@ class LogRequest(BaseModel):
     """
     LogRequest
     """ # noqa: E501
-    ip_chain: Optional[conlist(LogIpAddress)] = Field(None, alias="ipChain")
+    ip_chain: Optional[List[LogIpAddress]] = Field(default=None, alias="ipChain")
     __properties: ClassVar[List[str]] = ["ipChain"]
 
     model_config = ConfigDict(

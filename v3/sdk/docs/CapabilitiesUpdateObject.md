@@ -25,7 +25,7 @@ print(CapabilitiesUpdateObject.to_json())
 # convert the object into a dict
 capabilities_update_object_dict = capabilities_update_object_instance.to_dict()
 # create an instance of CapabilitiesUpdateObject from a dict
-capabilities_update_object_form_dict = capabilities_update_object.from_dict(capabilities_update_object_dict)
+capabilities_update_object_from_dict = CapabilitiesUpdateObject.from_dict(capabilities_update_object_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

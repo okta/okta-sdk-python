@@ -27,7 +27,7 @@ print(IamRole.to_json())
 # convert the object into a dict
 iam_role_dict = iam_role_instance.to_dict()
 # create an instance of IamRole from a dict
-iam_role_form_dict = iam_role.from_dict(iam_role_dict)
+iam_role_from_dict = IamRole.from_dict(iam_role_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

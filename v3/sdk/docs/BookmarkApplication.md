@@ -24,7 +24,7 @@ print(BookmarkApplication.to_json())
 # convert the object into a dict
 bookmark_application_dict = bookmark_application_instance.to_dict()
 # create an instance of BookmarkApplication from a dict
-bookmark_application_form_dict = bookmark_application.from_dict(bookmark_application_dict)
+bookmark_application_from_dict = BookmarkApplication.from_dict(bookmark_application_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

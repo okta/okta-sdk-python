@@ -23,7 +23,7 @@ print(AuthenticatorIdentity.to_json())
 # convert the object into a dict
 authenticator_identity_dict = authenticator_identity_instance.to_dict()
 # create an instance of AuthenticatorIdentity from a dict
-authenticator_identity_form_dict = authenticator_identity.from_dict(authenticator_identity_dict)
+authenticator_identity_from_dict = AuthenticatorIdentity.from_dict(authenticator_identity_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

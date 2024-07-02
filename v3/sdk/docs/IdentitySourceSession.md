@@ -27,7 +27,7 @@ print(IdentitySourceSession.to_json())
 # convert the object into a dict
 identity_source_session_dict = identity_source_session_instance.to_dict()
 # create an instance of IdentitySourceSession from a dict
-identity_source_session_form_dict = identity_source_session.from_dict(identity_source_session_dict)
+identity_source_session_from_dict = IdentitySourceSession.from_dict(identity_source_session_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

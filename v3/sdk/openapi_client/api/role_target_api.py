@@ -17,11 +17,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from typing_extensions import Annotated
 from pydantic import Field, StrictInt, StrictStr
-
-from typing import List, Optional
-
+from typing import Optional
+from typing_extensions import Annotated
 from openapi_client.models.catalog_application import CatalogApplication
 from openapi_client.models.group import Group
 
@@ -47,7 +45,7 @@ class RoleTargetApi:
     def assign_all_apps_as_target_to_role_for_user(
         self,
         user_id: StrictStr,
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -121,7 +119,7 @@ class RoleTargetApi:
     def assign_all_apps_as_target_to_role_for_user_with_http_info(
         self,
         user_id: StrictStr,
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -195,7 +193,7 @@ class RoleTargetApi:
     def assign_all_apps_as_target_to_role_for_user_without_preload_content(
         self,
         user_id: StrictStr,
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -280,7 +278,7 @@ class RoleTargetApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -329,10 +327,10 @@ class RoleTargetApi:
     @validate_call
     def assign_app_instance_target_to_app_admin_role_for_group(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         app_name: StrictStr,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -411,10 +409,10 @@ class RoleTargetApi:
     @validate_call
     def assign_app_instance_target_to_app_admin_role_for_group_with_http_info(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         app_name: StrictStr,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -493,10 +491,10 @@ class RoleTargetApi:
     @validate_call
     def assign_app_instance_target_to_app_admin_role_for_group_without_preload_content(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         app_name: StrictStr,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -589,7 +587,7 @@ class RoleTargetApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -643,9 +641,9 @@ class RoleTargetApi:
     def assign_app_instance_target_to_app_admin_role_for_user(
         self,
         user_id: StrictStr,
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         app_name: StrictStr,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -725,9 +723,9 @@ class RoleTargetApi:
     def assign_app_instance_target_to_app_admin_role_for_user_with_http_info(
         self,
         user_id: StrictStr,
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         app_name: StrictStr,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -807,9 +805,9 @@ class RoleTargetApi:
     def assign_app_instance_target_to_app_admin_role_for_user_without_preload_content(
         self,
         user_id: StrictStr,
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         app_name: StrictStr,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -902,7 +900,7 @@ class RoleTargetApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -955,8 +953,8 @@ class RoleTargetApi:
     @validate_call
     def assign_app_target_to_admin_role_for_group(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         app_name: StrictStr,
         _request_timeout: Union[
             None,
@@ -1033,8 +1031,8 @@ class RoleTargetApi:
     @validate_call
     def assign_app_target_to_admin_role_for_group_with_http_info(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         app_name: StrictStr,
         _request_timeout: Union[
             None,
@@ -1111,8 +1109,8 @@ class RoleTargetApi:
     @validate_call
     def assign_app_target_to_admin_role_for_group_without_preload_content(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         app_name: StrictStr,
         _request_timeout: Union[
             None,
@@ -1202,7 +1200,7 @@ class RoleTargetApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1254,7 +1252,7 @@ class RoleTargetApi:
     def assign_app_target_to_admin_role_for_user(
         self,
         user_id: StrictStr,
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         app_name: StrictStr,
         _request_timeout: Union[
             None,
@@ -1332,7 +1330,7 @@ class RoleTargetApi:
     def assign_app_target_to_admin_role_for_user_with_http_info(
         self,
         user_id: StrictStr,
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         app_name: StrictStr,
         _request_timeout: Union[
             None,
@@ -1410,7 +1408,7 @@ class RoleTargetApi:
     def assign_app_target_to_admin_role_for_user_without_preload_content(
         self,
         user_id: StrictStr,
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         app_name: StrictStr,
         _request_timeout: Union[
             None,
@@ -1500,7 +1498,7 @@ class RoleTargetApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1551,8 +1549,8 @@ class RoleTargetApi:
     @validate_call
     def assign_group_target_to_group_admin_role(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         target_group_id: StrictStr,
         _request_timeout: Union[
             None,
@@ -1629,8 +1627,8 @@ class RoleTargetApi:
     @validate_call
     def assign_group_target_to_group_admin_role_with_http_info(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         target_group_id: StrictStr,
         _request_timeout: Union[
             None,
@@ -1707,8 +1705,8 @@ class RoleTargetApi:
     @validate_call
     def assign_group_target_to_group_admin_role_without_preload_content(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         target_group_id: StrictStr,
         _request_timeout: Union[
             None,
@@ -1798,7 +1796,7 @@ class RoleTargetApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1850,8 +1848,8 @@ class RoleTargetApi:
     def assign_group_target_to_user_role(
         self,
         user_id: StrictStr,
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1928,8 +1926,8 @@ class RoleTargetApi:
     def assign_group_target_to_user_role_with_http_info(
         self,
         user_id: StrictStr,
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2006,8 +2004,8 @@ class RoleTargetApi:
     def assign_group_target_to_user_role_without_preload_content(
         self,
         user_id: StrictStr,
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2096,7 +2094,7 @@ class RoleTargetApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2147,8 +2145,8 @@ class RoleTargetApi:
     @validate_call
     def list_application_targets_for_application_administrator_role_for_group(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         after: Optional[StrictStr] = None,
         limit: Optional[StrictInt] = None,
         _request_timeout: Union[
@@ -2229,8 +2227,8 @@ class RoleTargetApi:
     @validate_call
     def list_application_targets_for_application_administrator_role_for_group_with_http_info(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         after: Optional[StrictStr] = None,
         limit: Optional[StrictInt] = None,
         _request_timeout: Union[
@@ -2311,8 +2309,8 @@ class RoleTargetApi:
     @validate_call
     def list_application_targets_for_application_administrator_role_for_group_without_preload_content(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         after: Optional[StrictStr] = None,
         limit: Optional[StrictInt] = None,
         _request_timeout: Union[
@@ -2407,7 +2405,7 @@ class RoleTargetApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2465,7 +2463,7 @@ class RoleTargetApi:
     def list_application_targets_for_application_administrator_role_for_user(
         self,
         user_id: StrictStr,
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         after: Optional[StrictStr] = None,
         limit: Optional[StrictInt] = None,
         _request_timeout: Union[
@@ -2547,7 +2545,7 @@ class RoleTargetApi:
     def list_application_targets_for_application_administrator_role_for_user_with_http_info(
         self,
         user_id: StrictStr,
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         after: Optional[StrictStr] = None,
         limit: Optional[StrictInt] = None,
         _request_timeout: Union[
@@ -2629,7 +2627,7 @@ class RoleTargetApi:
     def list_application_targets_for_application_administrator_role_for_user_without_preload_content(
         self,
         user_id: StrictStr,
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         after: Optional[StrictStr] = None,
         limit: Optional[StrictInt] = None,
         _request_timeout: Union[
@@ -2724,7 +2722,7 @@ class RoleTargetApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2781,8 +2779,8 @@ class RoleTargetApi:
     @validate_call
     def list_group_targets_for_group_role(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         after: Optional[StrictStr] = None,
         limit: Optional[StrictInt] = None,
         _request_timeout: Union[
@@ -2863,8 +2861,8 @@ class RoleTargetApi:
     @validate_call
     def list_group_targets_for_group_role_with_http_info(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         after: Optional[StrictStr] = None,
         limit: Optional[StrictInt] = None,
         _request_timeout: Union[
@@ -2945,8 +2943,8 @@ class RoleTargetApi:
     @validate_call
     def list_group_targets_for_group_role_without_preload_content(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         after: Optional[StrictStr] = None,
         limit: Optional[StrictInt] = None,
         _request_timeout: Union[
@@ -3041,7 +3039,7 @@ class RoleTargetApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -3099,7 +3097,7 @@ class RoleTargetApi:
     def list_group_targets_for_role(
         self,
         user_id: StrictStr,
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         after: Optional[StrictStr] = None,
         limit: Optional[StrictInt] = None,
         _request_timeout: Union[
@@ -3181,7 +3179,7 @@ class RoleTargetApi:
     def list_group_targets_for_role_with_http_info(
         self,
         user_id: StrictStr,
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         after: Optional[StrictStr] = None,
         limit: Optional[StrictInt] = None,
         _request_timeout: Union[
@@ -3263,7 +3261,7 @@ class RoleTargetApi:
     def list_group_targets_for_role_without_preload_content(
         self,
         user_id: StrictStr,
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         after: Optional[StrictStr] = None,
         limit: Optional[StrictInt] = None,
         _request_timeout: Union[
@@ -3358,7 +3356,7 @@ class RoleTargetApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -3416,9 +3414,9 @@ class RoleTargetApi:
     def unassign_app_instance_target_from_admin_role_for_user(
         self,
         user_id: StrictStr,
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         app_name: StrictStr,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3498,9 +3496,9 @@ class RoleTargetApi:
     def unassign_app_instance_target_from_admin_role_for_user_with_http_info(
         self,
         user_id: StrictStr,
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         app_name: StrictStr,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3580,9 +3578,9 @@ class RoleTargetApi:
     def unassign_app_instance_target_from_admin_role_for_user_without_preload_content(
         self,
         user_id: StrictStr,
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         app_name: StrictStr,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3675,7 +3673,7 @@ class RoleTargetApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -3728,10 +3726,10 @@ class RoleTargetApi:
     @validate_call
     def unassign_app_instance_target_to_app_admin_role_for_group(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         app_name: StrictStr,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3810,10 +3808,10 @@ class RoleTargetApi:
     @validate_call
     def unassign_app_instance_target_to_app_admin_role_for_group_with_http_info(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         app_name: StrictStr,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3892,10 +3890,10 @@ class RoleTargetApi:
     @validate_call
     def unassign_app_instance_target_to_app_admin_role_for_group_without_preload_content(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         app_name: StrictStr,
-        app_id: Annotated[StrictStr, Field(..., description="ID of the Application")],
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3988,7 +3986,7 @@ class RoleTargetApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -4042,7 +4040,7 @@ class RoleTargetApi:
     def unassign_app_target_from_app_admin_role_for_user(
         self,
         user_id: StrictStr,
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         app_name: StrictStr,
         _request_timeout: Union[
             None,
@@ -4120,7 +4118,7 @@ class RoleTargetApi:
     def unassign_app_target_from_app_admin_role_for_user_with_http_info(
         self,
         user_id: StrictStr,
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         app_name: StrictStr,
         _request_timeout: Union[
             None,
@@ -4198,7 +4196,7 @@ class RoleTargetApi:
     def unassign_app_target_from_app_admin_role_for_user_without_preload_content(
         self,
         user_id: StrictStr,
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         app_name: StrictStr,
         _request_timeout: Union[
             None,
@@ -4288,7 +4286,7 @@ class RoleTargetApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -4339,8 +4337,8 @@ class RoleTargetApi:
     @validate_call
     def unassign_app_target_to_admin_role_for_group(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         app_name: StrictStr,
         _request_timeout: Union[
             None,
@@ -4417,8 +4415,8 @@ class RoleTargetApi:
     @validate_call
     def unassign_app_target_to_admin_role_for_group_with_http_info(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         app_name: StrictStr,
         _request_timeout: Union[
             None,
@@ -4495,8 +4493,8 @@ class RoleTargetApi:
     @validate_call
     def unassign_app_target_to_admin_role_for_group_without_preload_content(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         app_name: StrictStr,
         _request_timeout: Union[
             None,
@@ -4586,7 +4584,7 @@ class RoleTargetApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -4637,8 +4635,8 @@ class RoleTargetApi:
     @validate_call
     def unassign_group_target_from_group_admin_role(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         target_group_id: StrictStr,
         _request_timeout: Union[
             None,
@@ -4715,8 +4713,8 @@ class RoleTargetApi:
     @validate_call
     def unassign_group_target_from_group_admin_role_with_http_info(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         target_group_id: StrictStr,
         _request_timeout: Union[
             None,
@@ -4793,8 +4791,8 @@ class RoleTargetApi:
     @validate_call
     def unassign_group_target_from_group_admin_role_without_preload_content(
         self,
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
         target_group_id: StrictStr,
         _request_timeout: Union[
             None,
@@ -4884,7 +4882,7 @@ class RoleTargetApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -4936,8 +4934,8 @@ class RoleTargetApi:
     def unassign_group_target_from_user_admin_role(
         self,
         user_id: StrictStr,
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5014,8 +5012,8 @@ class RoleTargetApi:
     def unassign_group_target_from_user_admin_role_with_http_info(
         self,
         user_id: StrictStr,
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5092,8 +5090,8 @@ class RoleTargetApi:
     def unassign_group_target_from_user_admin_role_without_preload_content(
         self,
         user_id: StrictStr,
-        role_id: Annotated[StrictStr, Field(..., description="`id` of the Role")],
-        group_id: Annotated[StrictStr, Field(..., description="The `id` of the group")],
+        role_id: Annotated[StrictStr, Field(description="`id` of the Role")],
+        group_id: Annotated[StrictStr, Field(description="The `id` of the group")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5182,7 +5180,7 @@ class RoleTargetApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters

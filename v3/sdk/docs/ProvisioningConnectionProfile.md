@@ -23,7 +23,7 @@ print(ProvisioningConnectionProfile.to_json())
 # convert the object into a dict
 provisioning_connection_profile_dict = provisioning_connection_profile_instance.to_dict()
 # create an instance of ProvisioningConnectionProfile from a dict
-provisioning_connection_profile_form_dict = provisioning_connection_profile.from_dict(provisioning_connection_profile_dict)
+provisioning_connection_profile_from_dict = ProvisioningConnectionProfile.from_dict(provisioning_connection_profile_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

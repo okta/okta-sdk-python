@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import ConfigDict
+from typing import Any, ClassVar, Dict, List
 from openapi_client.models.provisioning_connection_auth_scheme import ProvisioningConnectionAuthScheme
 from openapi_client.models.provisioning_connection_profile import ProvisioningConnectionProfile
 from typing import Optional, Set

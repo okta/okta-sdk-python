@@ -24,7 +24,7 @@ print(SelfServicePasswordResetAction.to_json())
 # convert the object into a dict
 self_service_password_reset_action_dict = self_service_password_reset_action_instance.to_dict()
 # create an instance of SelfServicePasswordResetAction from a dict
-self_service_password_reset_action_form_dict = self_service_password_reset_action.from_dict(self_service_password_reset_action_dict)
+self_service_password_reset_action_from_dict = SelfServicePasswordResetAction.from_dict(self_service_password_reset_action_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

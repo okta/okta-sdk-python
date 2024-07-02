@@ -22,7 +22,7 @@ print(PasswordCredentialHook.to_json())
 # convert the object into a dict
 password_credential_hook_dict = password_credential_hook_instance.to_dict()
 # create an instance of PasswordCredentialHook from a dict
-password_credential_hook_form_dict = password_credential_hook.from_dict(password_credential_hook_dict)
+password_credential_hook_from_dict = PasswordCredentialHook.from_dict(password_credential_hook_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

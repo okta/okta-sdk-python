@@ -26,7 +26,7 @@ print(AuthorizationServerCredentialsSigningConfig.to_json())
 # convert the object into a dict
 authorization_server_credentials_signing_config_dict = authorization_server_credentials_signing_config_instance.to_dict()
 # create an instance of AuthorizationServerCredentialsSigningConfig from a dict
-authorization_server_credentials_signing_config_form_dict = authorization_server_credentials_signing_config.from_dict(authorization_server_credentials_signing_config_dict)
+authorization_server_credentials_signing_config_from_dict = AuthorizationServerCredentialsSigningConfig.from_dict(authorization_server_credentials_signing_config_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

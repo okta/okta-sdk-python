@@ -22,7 +22,7 @@ print(AuthenticatorMethodSignedNonce.to_json())
 # convert the object into a dict
 authenticator_method_signed_nonce_dict = authenticator_method_signed_nonce_instance.to_dict()
 # create an instance of AuthenticatorMethodSignedNonce from a dict
-authenticator_method_signed_nonce_form_dict = authenticator_method_signed_nonce.from_dict(authenticator_method_signed_nonce_dict)
+authenticator_method_signed_nonce_from_dict = AuthenticatorMethodSignedNonce.from_dict(authenticator_method_signed_nonce_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

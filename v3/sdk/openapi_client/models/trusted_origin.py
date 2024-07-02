@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.links_self import LinksSelf
 from openapi_client.models.trusted_origin_scope import TrustedOriginScope
 from typing import Optional, Set
@@ -28,15 +31,15 @@ class TrustedOrigin(BaseModel):
     TrustedOrigin
     """ # noqa: E501
     created: Optional[datetime] = None
-    created_by: Optional[StrictStr] = Field(None, alias="createdBy")
+    created_by: Optional[StrictStr] = Field(default=None, alias="createdBy")
     id: Optional[StrictStr] = None
-    last_updated: Optional[datetime] = Field(None, alias="lastUpdated")
-    last_updated_by: Optional[StrictStr] = Field(None, alias="lastUpdatedBy")
+    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
+    last_updated_by: Optional[StrictStr] = Field(default=None, alias="lastUpdatedBy")
     name: Optional[StrictStr] = None
     origin: Optional[StrictStr] = None
-    scopes: Optional[conlist(TrustedOriginScope)] = None
+    scopes: Optional[List[TrustedOriginScope]] = None
     status: Optional[StrictStr] = None
-    links: Optional[LinksSelf] = Field(None, alias="_links")
+    links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["created", "createdBy", "id", "lastUpdated", "lastUpdatedBy", "name", "origin", "scopes", "status", "_links"]
 
     model_config = ConfigDict(

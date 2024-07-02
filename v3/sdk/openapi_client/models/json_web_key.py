@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.links_self import LinksSelf
 from typing import Optional, Set
 from typing_extensions import Self
@@ -29,19 +32,19 @@ class JsonWebKey(BaseModel):
     alg: Optional[StrictStr] = None
     created: Optional[datetime] = None
     e: Optional[StrictStr] = None
-    expires_at: Optional[datetime] = Field(None, alias="expiresAt")
-    key_ops: Optional[conlist(StrictStr)] = None
+    expires_at: Optional[datetime] = Field(default=None, alias="expiresAt")
+    key_ops: Optional[List[StrictStr]] = None
     kid: Optional[StrictStr] = None
     kty: Optional[StrictStr] = None
-    last_updated: Optional[datetime] = Field(None, alias="lastUpdated")
+    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
     n: Optional[StrictStr] = None
     status: Optional[StrictStr] = None
     use: Optional[StrictStr] = None
-    x5c: Optional[conlist(StrictStr)] = None
+    x5c: Optional[List[StrictStr]] = None
     x5t: Optional[StrictStr] = None
-    x5t_s256: Optional[StrictStr] = Field(None, alias="x5t#S256")
+    x5t_s256: Optional[StrictStr] = Field(default=None, alias="x5t#S256")
     x5u: Optional[StrictStr] = None
-    links: Optional[LinksSelf] = Field(None, alias="_links")
+    links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["alg", "created", "e", "expiresAt", "key_ops", "kid", "kty", "lastUpdated", "n", "status", "use", "x5c", "x5t", "x5t#S256", "x5u", "_links"]
 
     model_config = ConfigDict(

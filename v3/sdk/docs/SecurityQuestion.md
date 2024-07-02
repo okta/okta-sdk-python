@@ -24,7 +24,7 @@ print(SecurityQuestion.to_json())
 # convert the object into a dict
 security_question_dict = security_question_instance.to_dict()
 # create an instance of SecurityQuestion from a dict
-security_question_form_dict = security_question.from_dict(security_question_dict)
+security_question_from_dict = SecurityQuestion.from_dict(security_question_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -23,7 +23,7 @@ print(LinksNext.to_json())
 # convert the object into a dict
 links_next_dict = links_next_instance.to_dict()
 # create an instance of LinksNext from a dict
-links_next_form_dict = links_next.from_dict(links_next_dict)
+links_next_from_dict = LinksNext.from_dict(links_next_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.domain_links_all_of_brand import DomainLinksAllOfBrand
 from openapi_client.models.domain_links_all_of_certificate import DomainLinksAllOfCertificate
 from openapi_client.models.domain_links_all_of_verify import DomainLinksAllOfVerify
@@ -29,7 +31,7 @@ class DomainLinks(BaseModel):
     """
     DomainLinks
     """ # noqa: E501
-    var_self: Optional[HrefObjectSelfLink] = Field(None, alias="self")
+    var_self: Optional[HrefObjectSelfLink] = Field(default=None, alias="self")
     brand: Optional[DomainLinksAllOfBrand] = None
     certificate: Optional[DomainLinksAllOfCertificate] = None
     verify: Optional[DomainLinksAllOfVerify] = None

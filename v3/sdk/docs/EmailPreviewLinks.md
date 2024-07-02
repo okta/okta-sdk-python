@@ -26,7 +26,7 @@ print(EmailPreviewLinks.to_json())
 # convert the object into a dict
 email_preview_links_dict = email_preview_links_instance.to_dict()
 # create an instance of EmailPreviewLinks from a dict
-email_preview_links_form_dict = email_preview_links.from_dict(email_preview_links_dict)
+email_preview_links_from_dict = EmailPreviewLinks.from_dict(email_preview_links_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

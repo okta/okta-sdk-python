@@ -25,7 +25,7 @@ print(SignInPage.to_json())
 # convert the object into a dict
 sign_in_page_dict = sign_in_page_instance.to_dict()
 # create an instance of SignInPage from a dict
-sign_in_page_form_dict = sign_in_page.from_dict(sign_in_page_dict)
+sign_in_page_from_dict = SignInPage.from_dict(sign_in_page_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

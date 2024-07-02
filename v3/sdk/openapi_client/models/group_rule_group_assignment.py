@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,7 +27,7 @@ class GroupRuleGroupAssignment(BaseModel):
     """
     GroupRuleGroupAssignment
     """ # noqa: E501
-    group_ids: Optional[conlist(StrictStr)] = Field(None, alias="groupIds")
+    group_ids: Optional[List[StrictStr]] = Field(default=None, alias="groupIds")
     __properties: ClassVar[List[str]] = ["groupIds"]
 
     model_config = ConfigDict(

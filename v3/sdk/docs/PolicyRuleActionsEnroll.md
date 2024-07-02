@@ -22,7 +22,7 @@ print(PolicyRuleActionsEnroll.to_json())
 # convert the object into a dict
 policy_rule_actions_enroll_dict = policy_rule_actions_enroll_instance.to_dict()
 # create an instance of PolicyRuleActionsEnroll from a dict
-policy_rule_actions_enroll_form_dict = policy_rule_actions_enroll.from_dict(policy_rule_actions_enroll_dict)
+policy_rule_actions_enroll_from_dict = PolicyRuleActionsEnroll.from_dict(policy_rule_actions_enroll_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

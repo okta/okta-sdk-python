@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.log_stream_activate_link import LogStreamActivateLink
 from openapi_client.models.log_stream_deactivate_link import LogStreamDeactivateLink
 from openapi_client.models.log_stream_self_link import LogStreamSelfLink
@@ -30,7 +32,7 @@ class LogStreamLinksSelfAndLifecycle(BaseModel):
     """ # noqa: E501
     activate: Optional[LogStreamActivateLink] = None
     deactivate: Optional[LogStreamDeactivateLink] = None
-    var_self: LogStreamSelfLink = Field(..., alias="self")
+    var_self: LogStreamSelfLink = Field(alias="self")
     __properties: ClassVar[List[str]] = ["activate", "deactivate", "self"]
 
     model_config = ConfigDict(

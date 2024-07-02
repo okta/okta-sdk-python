@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,8 +27,8 @@ class LogStreamLinkObject(BaseModel):
     """
     LogStreamLinkObject
     """ # noqa: E501
-    href: StrictStr = Field(..., description="The URI of the resource")
-    method: Optional[StrictStr] = Field(None, description="HTTP method allowed for the resource")
+    href: StrictStr = Field(description="The URI of the resource")
+    method: Optional[StrictStr] = Field(default=None, description="HTTP method allowed for the resource")
     __properties: ClassVar[List[str]] = ["href", "method"]
 
     @field_validator('method')

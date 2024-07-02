@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,10 +27,10 @@ class AuthenticatorMethodTotpAllOfSettings(BaseModel):
     """
     AuthenticatorMethodTotpAllOfSettings
     """ # noqa: E501
-    time_interval_in_seconds: Optional[StrictInt] = Field(None, alias="timeIntervalInSeconds")
+    time_interval_in_seconds: Optional[StrictInt] = Field(default=None, alias="timeIntervalInSeconds")
     encoding: Optional[StrictStr] = None
     algorithm: Optional[StrictStr] = None
-    pass_code_length: Optional[StrictInt] = Field(None, alias="passCodeLength")
+    pass_code_length: Optional[StrictInt] = Field(default=None, alias="passCodeLength")
     __properties: ClassVar[List[str]] = ["timeIntervalInSeconds", "encoding", "algorithm", "passCodeLength"]
 
     model_config = ConfigDict(

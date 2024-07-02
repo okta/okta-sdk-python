@@ -25,7 +25,7 @@ print(ProvisioningConnection.to_json())
 # convert the object into a dict
 provisioning_connection_dict = provisioning_connection_instance.to_dict()
 # create an instance of ProvisioningConnection from a dict
-provisioning_connection_form_dict = provisioning_connection.from_dict(provisioning_connection_dict)
+provisioning_connection_from_dict = ProvisioningConnection.from_dict(provisioning_connection_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -23,7 +23,7 @@ print(PasswordPolicy.to_json())
 # convert the object into a dict
 password_policy_dict = password_policy_instance.to_dict()
 # create an instance of PasswordPolicy from a dict
-password_policy_form_dict = password_policy.from_dict(password_policy_dict)
+password_policy_from_dict = PasswordPolicy.from_dict(password_policy_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

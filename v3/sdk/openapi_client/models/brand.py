@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.default_app import DefaultApp
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,15 +28,15 @@ class Brand(BaseModel):
     """
     Brand
     """ # noqa: E501
-    agree_to_custom_privacy_policy: Optional[StrictBool] = Field(None, alias="agreeToCustomPrivacyPolicy")
-    custom_privacy_policy_url: Optional[StrictStr] = Field(None, alias="customPrivacyPolicyUrl")
-    default_app: Optional[DefaultApp] = Field(None, alias="defaultApp")
-    email_domain_id: Optional[StrictStr] = Field(None, alias="emailDomainId")
+    agree_to_custom_privacy_policy: Optional[StrictBool] = Field(default=None, alias="agreeToCustomPrivacyPolicy")
+    custom_privacy_policy_url: Optional[StrictStr] = Field(default=None, alias="customPrivacyPolicyUrl")
+    default_app: Optional[DefaultApp] = Field(default=None, alias="defaultApp")
+    email_domain_id: Optional[StrictStr] = Field(default=None, alias="emailDomainId")
     id: Optional[StrictStr] = None
-    is_default: Optional[StrictBool] = Field(None, alias="isDefault")
-    locale: Optional[StrictStr] = Field(None, description="The language specified as an [IETF BCP 47 language tag](https://datatracker.ietf.org/doc/html/rfc5646)")
+    is_default: Optional[StrictBool] = Field(default=None, alias="isDefault")
+    locale: Optional[StrictStr] = Field(default=None, description="The language specified as an [IETF BCP 47 language tag](https://datatracker.ietf.org/doc/html/rfc5646)")
     name: Optional[StrictStr] = None
-    remove_powered_by_okta: Optional[StrictBool] = Field(None, alias="removePoweredByOkta")
+    remove_powered_by_okta: Optional[StrictBool] = Field(default=None, alias="removePoweredByOkta")
     __properties: ClassVar[List[str]] = ["agreeToCustomPrivacyPolicy", "customPrivacyPolicyUrl", "defaultApp", "emailDomainId", "id", "isDefault", "locale", "name", "removePoweredByOkta"]
 
     model_config = ConfigDict(

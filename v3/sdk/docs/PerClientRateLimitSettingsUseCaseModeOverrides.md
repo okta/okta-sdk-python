@@ -25,7 +25,7 @@ print(PerClientRateLimitSettingsUseCaseModeOverrides.to_json())
 # convert the object into a dict
 per_client_rate_limit_settings_use_case_mode_overrides_dict = per_client_rate_limit_settings_use_case_mode_overrides_instance.to_dict()
 # create an instance of PerClientRateLimitSettingsUseCaseModeOverrides from a dict
-per_client_rate_limit_settings_use_case_mode_overrides_form_dict = per_client_rate_limit_settings_use_case_mode_overrides.from_dict(per_client_rate_limit_settings_use_case_mode_overrides_dict)
+per_client_rate_limit_settings_use_case_mode_overrides_from_dict = PerClientRateLimitSettingsUseCaseModeOverrides.from_dict(per_client_rate_limit_settings_use_case_mode_overrides_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

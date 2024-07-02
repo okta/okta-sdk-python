@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.authenticator_provider_configuration_user_name_template import AuthenticatorProviderConfigurationUserNameTemplate
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,11 +28,11 @@ class AuthenticatorProviderConfiguration(BaseModel):
     """
     AuthenticatorProviderConfiguration
     """ # noqa: E501
-    auth_port: Optional[StrictInt] = Field(None, alias="authPort")
-    host_name: Optional[StrictStr] = Field(None, alias="hostName")
-    instance_id: Optional[StrictStr] = Field(None, alias="instanceId")
-    shared_secret: Optional[StrictStr] = Field(None, alias="sharedSecret")
-    user_name_template: Optional[AuthenticatorProviderConfigurationUserNameTemplate] = Field(None, alias="userNameTemplate")
+    auth_port: Optional[StrictInt] = Field(default=None, alias="authPort")
+    host_name: Optional[StrictStr] = Field(default=None, alias="hostName")
+    instance_id: Optional[StrictStr] = Field(default=None, alias="instanceId")
+    shared_secret: Optional[StrictStr] = Field(default=None, alias="sharedSecret")
+    user_name_template: Optional[AuthenticatorProviderConfigurationUserNameTemplate] = Field(default=None, alias="userNameTemplate")
     __properties: ClassVar[List[str]] = ["authPort", "hostName", "instanceId", "sharedSecret", "userNameTemplate"]
 
     model_config = ConfigDict(

@@ -23,7 +23,7 @@ print(SimulatePolicyEvaluationsUndefined.to_json())
 # convert the object into a dict
 simulate_policy_evaluations_undefined_dict = simulate_policy_evaluations_undefined_instance.to_dict()
 # create an instance of SimulatePolicyEvaluationsUndefined from a dict
-simulate_policy_evaluations_undefined_form_dict = simulate_policy_evaluations_undefined.from_dict(simulate_policy_evaluations_undefined_dict)
+simulate_policy_evaluations_undefined_from_dict = SimulatePolicyEvaluationsUndefined.from_dict(simulate_policy_evaluations_undefined_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

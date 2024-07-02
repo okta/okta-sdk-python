@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.acs_endpoint import AcsEndpoint
 from openapi_client.models.saml_attribute_statement import SamlAttributeStatement
 from openapi_client.models.sign_on_inline_hook import SignOnInlineHook
@@ -31,34 +33,34 @@ class SamlApplicationSettingsSignOn(BaseModel):
     """
     SamlApplicationSettingsSignOn
     """ # noqa: E501
-    acs_endpoints: Optional[conlist(AcsEndpoint)] = Field(None, alias="acsEndpoints")
-    allow_multiple_acs_endpoints: Optional[StrictBool] = Field(None, alias="allowMultipleAcsEndpoints")
-    assertion_signed: Optional[StrictBool] = Field(None, alias="assertionSigned")
-    attribute_statements: Optional[conlist(SamlAttributeStatement)] = Field(None, alias="attributeStatements")
+    acs_endpoints: Optional[List[AcsEndpoint]] = Field(default=None, alias="acsEndpoints")
+    allow_multiple_acs_endpoints: Optional[StrictBool] = Field(default=None, alias="allowMultipleAcsEndpoints")
+    assertion_signed: Optional[StrictBool] = Field(default=None, alias="assertionSigned")
+    attribute_statements: Optional[List[SamlAttributeStatement]] = Field(default=None, alias="attributeStatements")
     audience: Optional[StrictStr] = None
-    audience_override: Optional[StrictStr] = Field(None, alias="audienceOverride")
-    authn_context_class_ref: Optional[StrictStr] = Field(None, alias="authnContextClassRef")
-    configured_attribute_statements: Optional[conlist(SamlAttributeStatement)] = Field(None, alias="configuredAttributeStatements")
-    default_relay_state: Optional[StrictStr] = Field(None, alias="defaultRelayState")
+    audience_override: Optional[StrictStr] = Field(default=None, alias="audienceOverride")
+    authn_context_class_ref: Optional[StrictStr] = Field(default=None, alias="authnContextClassRef")
+    configured_attribute_statements: Optional[List[SamlAttributeStatement]] = Field(default=None, alias="configuredAttributeStatements")
+    default_relay_state: Optional[StrictStr] = Field(default=None, alias="defaultRelayState")
     destination: Optional[StrictStr] = None
-    destination_override: Optional[StrictStr] = Field(None, alias="destinationOverride")
-    digest_algorithm: Optional[StrictStr] = Field(None, alias="digestAlgorithm")
-    honor_force_authn: Optional[StrictBool] = Field(None, alias="honorForceAuthn")
-    idp_issuer: Optional[StrictStr] = Field(None, alias="idpIssuer")
-    inline_hooks: Optional[conlist(SignOnInlineHook)] = Field(None, alias="inlineHooks")
-    participate_slo: Optional[SloParticipate] = Field(None, alias="participateSlo")
+    destination_override: Optional[StrictStr] = Field(default=None, alias="destinationOverride")
+    digest_algorithm: Optional[StrictStr] = Field(default=None, alias="digestAlgorithm")
+    honor_force_authn: Optional[StrictBool] = Field(default=None, alias="honorForceAuthn")
+    idp_issuer: Optional[StrictStr] = Field(default=None, alias="idpIssuer")
+    inline_hooks: Optional[List[SignOnInlineHook]] = Field(default=None, alias="inlineHooks")
+    participate_slo: Optional[SloParticipate] = Field(default=None, alias="participateSlo")
     recipient: Optional[StrictStr] = None
-    recipient_override: Optional[StrictStr] = Field(None, alias="recipientOverride")
-    request_compressed: Optional[StrictBool] = Field(None, alias="requestCompressed")
-    response_signed: Optional[StrictBool] = Field(None, alias="responseSigned")
-    signature_algorithm: Optional[StrictStr] = Field(None, alias="signatureAlgorithm")
+    recipient_override: Optional[StrictStr] = Field(default=None, alias="recipientOverride")
+    request_compressed: Optional[StrictBool] = Field(default=None, alias="requestCompressed")
+    response_signed: Optional[StrictBool] = Field(default=None, alias="responseSigned")
+    signature_algorithm: Optional[StrictStr] = Field(default=None, alias="signatureAlgorithm")
     slo: Optional[SingleLogout] = None
-    sp_certificate: Optional[SpCertificate] = Field(None, alias="spCertificate")
-    sp_issuer: Optional[StrictStr] = Field(None, alias="spIssuer")
-    sso_acs_url: Optional[StrictStr] = Field(None, alias="ssoAcsUrl")
-    sso_acs_url_override: Optional[StrictStr] = Field(None, alias="ssoAcsUrlOverride")
-    subject_name_id_format: Optional[StrictStr] = Field(None, alias="subjectNameIdFormat")
-    subject_name_id_template: Optional[StrictStr] = Field(None, alias="subjectNameIdTemplate")
+    sp_certificate: Optional[SpCertificate] = Field(default=None, alias="spCertificate")
+    sp_issuer: Optional[StrictStr] = Field(default=None, alias="spIssuer")
+    sso_acs_url: Optional[StrictStr] = Field(default=None, alias="ssoAcsUrl")
+    sso_acs_url_override: Optional[StrictStr] = Field(default=None, alias="ssoAcsUrlOverride")
+    subject_name_id_format: Optional[StrictStr] = Field(default=None, alias="subjectNameIdFormat")
+    subject_name_id_template: Optional[StrictStr] = Field(default=None, alias="subjectNameIdTemplate")
     __properties: ClassVar[List[str]] = ["acsEndpoints", "allowMultipleAcsEndpoints", "assertionSigned", "attributeStatements", "audience", "audienceOverride", "authnContextClassRef", "configuredAttributeStatements", "defaultRelayState", "destination", "destinationOverride", "digestAlgorithm", "honorForceAuthn", "idpIssuer", "inlineHooks", "participateSlo", "recipient", "recipientOverride", "requestCompressed", "responseSigned", "signatureAlgorithm", "slo", "spCertificate", "spIssuer", "ssoAcsUrl", "ssoAcsUrlOverride", "subjectNameIdFormat", "subjectNameIdTemplate"]
 
     model_config = ConfigDict(

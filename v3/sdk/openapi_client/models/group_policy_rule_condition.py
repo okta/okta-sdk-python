@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,8 +27,8 @@ class GroupPolicyRuleCondition(BaseModel):
     """
     Specifies a set of Groups whose Users are to be included or excluded
     """ # noqa: E501
-    exclude: Optional[conlist(StrictStr)] = Field(None, description="Groups to be excluded")
-    include: Optional[conlist(StrictStr)] = Field(None, description="Groups to be included")
+    exclude: Optional[List[StrictStr]] = Field(default=None, description="Groups to be excluded")
+    include: Optional[List[StrictStr]] = Field(default=None, description="Groups to be included")
     __properties: ClassVar[List[str]] = ["exclude", "include"]
 
     model_config = ConfigDict(

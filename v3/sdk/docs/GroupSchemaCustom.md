@@ -25,7 +25,7 @@ print(GroupSchemaCustom.to_json())
 # convert the object into a dict
 group_schema_custom_dict = group_schema_custom_instance.to_dict()
 # create an instance of GroupSchemaCustom from a dict
-group_schema_custom_form_dict = group_schema_custom.from_dict(group_schema_custom_dict)
+group_schema_custom_from_dict = GroupSchemaCustom.from_dict(group_schema_custom_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

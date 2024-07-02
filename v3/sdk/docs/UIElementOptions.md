@@ -23,7 +23,7 @@ print(UIElementOptions.to_json())
 # convert the object into a dict
 ui_element_options_dict = ui_element_options_instance.to_dict()
 # create an instance of UIElementOptions from a dict
-ui_element_options_form_dict = ui_element_options.from_dict(ui_element_options_dict)
+ui_element_options_from_dict = UIElementOptions.from_dict(ui_element_options_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

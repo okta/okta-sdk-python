@@ -36,7 +36,7 @@ print(DTCChromeOS.to_json())
 # convert the object into a dict
 dtc_chrome_os_dict = dtc_chrome_os_instance.to_dict()
 # create an instance of DTCChromeOS from a dict
-dtc_chrome_os_form_dict = dtc_chrome_os.from_dict(dtc_chrome_os_dict)
+dtc_chrome_os_from_dict = DTCChromeOS.from_dict(dtc_chrome_os_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

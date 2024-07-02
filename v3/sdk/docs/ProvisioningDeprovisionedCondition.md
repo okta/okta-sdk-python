@@ -22,7 +22,7 @@ print(ProvisioningDeprovisionedCondition.to_json())
 # convert the object into a dict
 provisioning_deprovisioned_condition_dict = provisioning_deprovisioned_condition_instance.to_dict()
 # create an instance of ProvisioningDeprovisionedCondition from a dict
-provisioning_deprovisioned_condition_form_dict = provisioning_deprovisioned_condition.from_dict(provisioning_deprovisioned_condition_dict)
+provisioning_deprovisioned_condition_from_dict = ProvisioningDeprovisionedCondition.from_dict(provisioning_deprovisioned_condition_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

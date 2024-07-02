@@ -29,7 +29,7 @@ print(PasswordCredentialHash.to_json())
 # convert the object into a dict
 password_credential_hash_dict = password_credential_hash_instance.to_dict()
 # create an instance of PasswordCredentialHash from a dict
-password_credential_hash_form_dict = password_credential_hash.from_dict(password_credential_hash_dict)
+password_credential_hash_from_dict = PasswordCredentialHash.from_dict(password_credential_hash_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

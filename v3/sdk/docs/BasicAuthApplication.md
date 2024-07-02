@@ -24,7 +24,7 @@ print(BasicAuthApplication.to_json())
 # convert the object into a dict
 basic_auth_application_dict = basic_auth_application_instance.to_dict()
 # create an instance of BasicAuthApplication from a dict
-basic_auth_application_form_dict = basic_auth_application.from_dict(basic_auth_application_dict)
+basic_auth_application_from_dict = BasicAuthApplication.from_dict(basic_auth_application_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

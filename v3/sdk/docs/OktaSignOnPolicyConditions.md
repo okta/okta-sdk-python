@@ -42,7 +42,7 @@ print(OktaSignOnPolicyConditions.to_json())
 # convert the object into a dict
 okta_sign_on_policy_conditions_dict = okta_sign_on_policy_conditions_instance.to_dict()
 # create an instance of OktaSignOnPolicyConditions from a dict
-okta_sign_on_policy_conditions_form_dict = okta_sign_on_policy_conditions.from_dict(okta_sign_on_policy_conditions_dict)
+okta_sign_on_policy_conditions_from_dict = OktaSignOnPolicyConditions.from_dict(okta_sign_on_policy_conditions_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -25,7 +25,7 @@ print(LogIpAddress.to_json())
 # convert the object into a dict
 log_ip_address_dict = log_ip_address_instance.to_dict()
 # create an instance of LogIpAddress from a dict
-log_ip_address_form_dict = log_ip_address.from_dict(log_ip_address_dict)
+log_ip_address_from_dict = LogIpAddress.from_dict(log_ip_address_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

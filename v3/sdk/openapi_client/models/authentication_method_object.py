@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,8 +27,8 @@ class AuthenticationMethodObject(BaseModel):
     """
     AuthenticationMethodObject
     """ # noqa: E501
-    key: Optional[StrictStr] = Field(None, description="A label that identifies the authenticator")
-    method: Optional[StrictStr] = Field(None, description="Specifies the method used for the authenticator")
+    key: Optional[StrictStr] = Field(default=None, description="A label that identifies the authenticator")
+    method: Optional[StrictStr] = Field(default=None, description="Specifies the method used for the authenticator")
     __properties: ClassVar[List[str]] = ["key", "method"]
 
     model_config = ConfigDict(

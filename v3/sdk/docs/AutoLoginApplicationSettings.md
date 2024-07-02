@@ -27,7 +27,7 @@ print(AutoLoginApplicationSettings.to_json())
 # convert the object into a dict
 auto_login_application_settings_dict = auto_login_application_settings_instance.to_dict()
 # create an instance of AutoLoginApplicationSettings from a dict
-auto_login_application_settings_form_dict = auto_login_application_settings.from_dict(auto_login_application_settings_dict)
+auto_login_application_settings_from_dict = AutoLoginApplicationSettings.from_dict(auto_login_application_settings_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

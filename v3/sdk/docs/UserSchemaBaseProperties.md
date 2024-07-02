@@ -52,7 +52,7 @@ print(UserSchemaBaseProperties.to_json())
 # convert the object into a dict
 user_schema_base_properties_dict = user_schema_base_properties_instance.to_dict()
 # create an instance of UserSchemaBaseProperties from a dict
-user_schema_base_properties_form_dict = user_schema_base_properties.from_dict(user_schema_base_properties_dict)
+user_schema_base_properties_from_dict = UserSchemaBaseProperties.from_dict(user_schema_base_properties_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

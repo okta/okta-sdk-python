@@ -25,7 +25,7 @@ print(DomainLinks.to_json())
 # convert the object into a dict
 domain_links_dict = domain_links_instance.to_dict()
 # create an instance of DomainLinks from a dict
-domain_links_form_dict = domain_links.from_dict(domain_links_dict)
+domain_links_from_dict = DomainLinks.from_dict(domain_links_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

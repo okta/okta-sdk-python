@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import ConfigDict
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.inline_hook_channel import InlineHookChannel
 from openapi_client.models.inline_hook_channel_config import InlineHookChannelConfig
 from openapi_client.models.inline_hook_channel_type import InlineHookChannelType

@@ -23,7 +23,7 @@ print(DevicePolicyRuleConditionPlatform.to_json())
 # convert the object into a dict
 device_policy_rule_condition_platform_dict = device_policy_rule_condition_platform_instance.to_dict()
 # create an instance of DevicePolicyRuleConditionPlatform from a dict
-device_policy_rule_condition_platform_form_dict = device_policy_rule_condition_platform.from_dict(device_policy_rule_condition_platform_dict)
+device_policy_rule_condition_platform_from_dict = DevicePolicyRuleConditionPlatform.from_dict(device_policy_rule_condition_platform_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

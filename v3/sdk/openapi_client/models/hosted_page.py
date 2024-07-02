@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.hosted_page_type import HostedPageType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,7 +28,7 @@ class HostedPage(BaseModel):
     """
     HostedPage
     """ # noqa: E501
-    type: HostedPageType = Field(...)
+    type: HostedPageType
     url: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["type", "url"]
 

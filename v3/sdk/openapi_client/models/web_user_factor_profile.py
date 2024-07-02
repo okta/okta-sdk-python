@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,7 +27,7 @@ class WebUserFactorProfile(BaseModel):
     """
     WebUserFactorProfile
     """ # noqa: E501
-    credential_id: Optional[StrictStr] = Field(None, alias="credentialId")
+    credential_id: Optional[StrictStr] = Field(default=None, alias="credentialId")
     __properties: ClassVar[List[str]] = ["credentialId"]
 
     model_config = ConfigDict(

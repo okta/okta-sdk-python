@@ -30,7 +30,7 @@ print(DomainResponse.to_json())
 # convert the object into a dict
 domain_response_dict = domain_response_instance.to_dict()
 # create an instance of DomainResponse from a dict
-domain_response_form_dict = domain_response.from_dict(domain_response_dict)
+domain_response_from_dict = DomainResponse.from_dict(domain_response_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

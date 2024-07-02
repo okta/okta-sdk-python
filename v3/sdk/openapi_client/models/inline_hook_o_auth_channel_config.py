@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,7 +27,7 @@ class InlineHookOAuthChannelConfig(BaseModel):
     """
     InlineHookOAuthChannelConfig
     """ # noqa: E501
-    auth_type: Optional[StrictStr] = Field(None, alias="authType")
+    auth_type: Optional[StrictStr] = Field(default=None, alias="authType")
     __properties: ClassVar[List[str]] = ["authType"]
 
     model_config = ConfigDict(

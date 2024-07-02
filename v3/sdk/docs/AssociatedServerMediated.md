@@ -22,7 +22,7 @@ print(AssociatedServerMediated.to_json())
 # convert the object into a dict
 associated_server_mediated_dict = associated_server_mediated_instance.to_dict()
 # create an instance of AssociatedServerMediated from a dict
-associated_server_mediated_form_dict = associated_server_mediated.from_dict(associated_server_mediated_dict)
+associated_server_mediated_from_dict = AssociatedServerMediated.from_dict(associated_server_mediated_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

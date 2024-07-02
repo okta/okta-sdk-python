@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.lifecycle_deactivate_setting_object import LifecycleDeactivateSettingObject
 from openapi_client.models.password_setting_object import PasswordSettingObject
 from openapi_client.models.profile_setting_object import ProfileSettingObject
@@ -28,7 +30,7 @@ class CapabilitiesUpdateObject(BaseModel):
     """
     Determines whether updates to a user's profile are pushed to the application
     """ # noqa: E501
-    lifecycle_deactivate: Optional[LifecycleDeactivateSettingObject] = Field(None, alias="lifecycleDeactivate")
+    lifecycle_deactivate: Optional[LifecycleDeactivateSettingObject] = Field(default=None, alias="lifecycleDeactivate")
     password: Optional[PasswordSettingObject] = None
     profile: Optional[ProfileSettingObject] = None
     __properties: ClassVar[List[str]] = ["lifecycleDeactivate", "password", "profile"]

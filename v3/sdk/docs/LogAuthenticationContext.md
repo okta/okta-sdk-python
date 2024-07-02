@@ -28,7 +28,7 @@ print(LogAuthenticationContext.to_json())
 # convert the object into a dict
 log_authentication_context_dict = log_authentication_context_instance.to_dict()
 # create an instance of LogAuthenticationContext from a dict
-log_authentication_context_form_dict = log_authentication_context.from_dict(log_authentication_context_dict)
+log_authentication_context_from_dict = LogAuthenticationContext.from_dict(log_authentication_context_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

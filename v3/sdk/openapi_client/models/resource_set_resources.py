@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.resource_set_resource import ResourceSetResource
 from openapi_client.models.resource_set_resources_links import ResourceSetResourcesLinks
 from typing import Optional, Set
@@ -27,8 +29,8 @@ class ResourceSetResources(BaseModel):
     """
     ResourceSetResources
     """ # noqa: E501
-    resources: Optional[conlist(ResourceSetResource)] = None
-    links: Optional[ResourceSetResourcesLinks] = Field(None, alias="_links")
+    resources: Optional[List[ResourceSetResource]] = None
+    links: Optional[ResourceSetResourcesLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["resources", "_links"]
 
     model_config = ConfigDict(

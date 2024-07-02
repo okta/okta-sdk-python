@@ -23,7 +23,7 @@ print(PolicyContextGroups.to_json())
 # convert the object into a dict
 policy_context_groups_dict = policy_context_groups_instance.to_dict()
 # create an instance of PolicyContextGroups from a dict
-policy_context_groups_form_dict = policy_context_groups.from_dict(policy_context_groups_dict)
+policy_context_groups_from_dict = PolicyContextGroups.from_dict(policy_context_groups_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

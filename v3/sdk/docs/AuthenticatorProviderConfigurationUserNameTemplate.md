@@ -22,7 +22,7 @@ print(AuthenticatorProviderConfigurationUserNameTemplate.to_json())
 # convert the object into a dict
 authenticator_provider_configuration_user_name_template_dict = authenticator_provider_configuration_user_name_template_instance.to_dict()
 # create an instance of AuthenticatorProviderConfigurationUserNameTemplate from a dict
-authenticator_provider_configuration_user_name_template_form_dict = authenticator_provider_configuration_user_name_template.from_dict(authenticator_provider_configuration_user_name_template_dict)
+authenticator_provider_configuration_user_name_template_from_dict = AuthenticatorProviderConfigurationUserNameTemplate.from_dict(authenticator_provider_configuration_user_name_template_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

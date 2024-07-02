@@ -23,7 +23,7 @@ print(InlineHookChannelConfigHeaders.to_json())
 # convert the object into a dict
 inline_hook_channel_config_headers_dict = inline_hook_channel_config_headers_instance.to_dict()
 # create an instance of InlineHookChannelConfigHeaders from a dict
-inline_hook_channel_config_headers_form_dict = inline_hook_channel_config_headers.from_dict(inline_hook_channel_config_headers_dict)
+inline_hook_channel_config_headers_from_dict = InlineHookChannelConfigHeaders.from_dict(inline_hook_channel_config_headers_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

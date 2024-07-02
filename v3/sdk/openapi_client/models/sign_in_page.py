@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List, Optional
+from typing_extensions import Annotated
 from openapi_client.models.content_security_policy_setting import ContentSecurityPolicySetting
 from openapi_client.models.sign_in_page_all_of_widget_customizations import SignInPageAllOfWidgetCustomizations
 from typing import Optional, Set
@@ -27,10 +30,10 @@ class SignInPage(BaseModel):
     """
     SignInPage
     """ # noqa: E501
-    page_content: Optional[StrictStr] = Field(None, alias="pageContent")
-    content_security_policy_setting: Optional[ContentSecurityPolicySetting] = Field(None, alias="contentSecurityPolicySetting")
-    widget_customizations: Optional[SignInPageAllOfWidgetCustomizations] = Field(None, alias="widgetCustomizations")
-    widget_version: Optional[constr(strict=True)] = Field(None, alias="widgetVersion", description="The version specified as a [Semantic Version](https://semver.org/).")
+    page_content: Optional[StrictStr] = Field(default=None, alias="pageContent")
+    content_security_policy_setting: Optional[ContentSecurityPolicySetting] = Field(default=None, alias="contentSecurityPolicySetting")
+    widget_customizations: Optional[SignInPageAllOfWidgetCustomizations] = Field(default=None, alias="widgetCustomizations")
+    widget_version: Optional[Annotated[str, Field(strict=True)]] = Field(default=None, description="The version specified as a [Semantic Version](https://semver.org/).", alias="widgetVersion")
     __properties: ClassVar[List[str]] = ["pageContent", "contentSecurityPolicySetting", "widgetCustomizations", "widgetVersion"]
 
     @field_validator('widget_version')

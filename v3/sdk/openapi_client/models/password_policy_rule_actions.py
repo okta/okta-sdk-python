@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.password_policy_rule_action import PasswordPolicyRuleAction
 from openapi_client.models.self_service_password_reset_action import SelfServicePasswordResetAction
 from typing import Optional, Set
@@ -27,9 +29,9 @@ class PasswordPolicyRuleActions(BaseModel):
     """
     PasswordPolicyRuleActions
     """ # noqa: E501
-    password_change: Optional[PasswordPolicyRuleAction] = Field(None, alias="passwordChange")
-    self_service_password_reset: Optional[SelfServicePasswordResetAction] = Field(None, alias="selfServicePasswordReset")
-    self_service_unlock: Optional[PasswordPolicyRuleAction] = Field(None, alias="selfServiceUnlock")
+    password_change: Optional[PasswordPolicyRuleAction] = Field(default=None, alias="passwordChange")
+    self_service_password_reset: Optional[SelfServicePasswordResetAction] = Field(default=None, alias="selfServicePasswordReset")
+    self_service_unlock: Optional[PasswordPolicyRuleAction] = Field(default=None, alias="selfServiceUnlock")
     __properties: ClassVar[List[str]] = ["passwordChange", "selfServicePasswordReset", "selfServiceUnlock"]
 
     model_config = ConfigDict(

@@ -26,7 +26,7 @@ print(DomainLinksAllOfBrand.to_json())
 # convert the object into a dict
 domain_links_all_of_brand_dict = domain_links_all_of_brand_instance.to_dict()
 # create an instance of DomainLinksAllOfBrand from a dict
-domain_links_all_of_brand_form_dict = domain_links_all_of_brand.from_dict(domain_links_all_of_brand_dict)
+domain_links_all_of_brand_from_dict = DomainLinksAllOfBrand.from_dict(domain_links_all_of_brand_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

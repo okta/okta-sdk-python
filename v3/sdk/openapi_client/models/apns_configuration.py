@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,10 +27,10 @@ class APNSConfiguration(BaseModel):
     """
     APNSConfiguration
     """ # noqa: E501
-    file_name: Optional[StrictStr] = Field(None, alias="fileName", description="(Optional) File name for Admin Console display")
-    key_id: Optional[StrictStr] = Field(None, alias="keyId", description="10-character Key ID obtained from the Apple developer account")
-    team_id: Optional[StrictStr] = Field(None, alias="teamId", description="10-character Team ID used to develop the iOS app")
-    token_signing_key: Optional[StrictStr] = Field(None, alias="tokenSigningKey", description="APNs private authentication token signing key")
+    file_name: Optional[StrictStr] = Field(default=None, description="(Optional) File name for Admin Console display", alias="fileName")
+    key_id: Optional[StrictStr] = Field(default=None, description="10-character Key ID obtained from the Apple developer account", alias="keyId")
+    team_id: Optional[StrictStr] = Field(default=None, description="10-character Team ID used to develop the iOS app", alias="teamId")
+    token_signing_key: Optional[StrictStr] = Field(default=None, description="APNs private authentication token signing key", alias="tokenSigningKey")
     __properties: ClassVar[List[str]] = ["fileName", "keyId", "teamId", "tokenSigningKey"]
 
     model_config = ConfigDict(

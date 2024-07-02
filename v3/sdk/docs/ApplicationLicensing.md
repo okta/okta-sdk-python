@@ -22,7 +22,7 @@ print(ApplicationLicensing.to_json())
 # convert the object into a dict
 application_licensing_dict = application_licensing_instance.to_dict()
 # create an instance of ApplicationLicensing from a dict
-application_licensing_form_dict = application_licensing.from_dict(application_licensing_dict)
+application_licensing_from_dict = ApplicationLicensing.from_dict(application_licensing_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

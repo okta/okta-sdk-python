@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,8 +27,8 @@ class CallUserFactorProfile(BaseModel):
     """
     CallUserFactorProfile
     """ # noqa: E501
-    phone_extension: Optional[StrictStr] = Field(None, alias="phoneExtension")
-    phone_number: Optional[StrictStr] = Field(None, alias="phoneNumber")
+    phone_extension: Optional[StrictStr] = Field(default=None, alias="phoneExtension")
+    phone_number: Optional[StrictStr] = Field(default=None, alias="phoneNumber")
     __properties: ClassVar[List[str]] = ["phoneExtension", "phoneNumber"]
 
     model_config = ConfigDict(

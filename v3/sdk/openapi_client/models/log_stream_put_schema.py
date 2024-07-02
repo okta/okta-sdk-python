@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from importlib import import_module
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Union
 from openapi_client.models.log_stream_type import LogStreamType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -31,8 +34,8 @@ class LogStreamPutSchema(BaseModel):
     """
     LogStreamPutSchema
     """ # noqa: E501
-    name: StrictStr = Field(..., description="Unique name for the Log Stream object")
-    type: LogStreamType = Field(...)
+    name: StrictStr = Field(description="Unique name for the Log Stream object")
+    type: LogStreamType
     __properties: ClassVar[List[str]] = ["name", "type"]
 
     model_config = ConfigDict(
@@ -98,9 +101,9 @@ class LogStreamPutSchema(BaseModel):
         """Create an instance of LogStreamPutSchema from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
-        if object_type ==  'aws_eventbridge':
+        if object_type ==  'LogStreamAwsPutSchema':
             return import_module("openapi_client.models.log_stream_aws_put_schema").LogStreamAwsPutSchema.from_dict(obj)
-        if object_type ==  'splunk_cloud_logstreaming':
+        if object_type ==  'LogStreamSplunkPutSchema':
             return import_module("openapi_client.models.log_stream_splunk_put_schema").LogStreamSplunkPutSchema.from_dict(obj)
 
         raise ValueError("LogStreamPutSchema failed to lookup discriminator value from " +

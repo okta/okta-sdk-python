@@ -23,7 +23,7 @@ print(CapabilitiesCreateObject.to_json())
 # convert the object into a dict
 capabilities_create_object_dict = capabilities_create_object_instance.to_dict()
 # create an instance of CapabilitiesCreateObject from a dict
-capabilities_create_object_form_dict = capabilities_create_object.from_dict(capabilities_create_object_dict)
+capabilities_create_object_from_dict = CapabilitiesCreateObject.from_dict(capabilities_create_object_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

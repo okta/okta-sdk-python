@@ -27,7 +27,7 @@ print(WsFederationApplicationSettings.to_json())
 # convert the object into a dict
 ws_federation_application_settings_dict = ws_federation_application_settings_instance.to_dict()
 # create an instance of WsFederationApplicationSettings from a dict
-ws_federation_application_settings_form_dict = ws_federation_application_settings.from_dict(ws_federation_application_settings_dict)
+ws_federation_application_settings_from_dict = WsFederationApplicationSettings.from_dict(ws_federation_application_settings_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import ConfigDict
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.behavior_rule import BehaviorRule
 from openapi_client.models.behavior_rule_settings_anomalous_location import BehaviorRuleSettingsAnomalousLocation
 from openapi_client.models.behavior_rule_type import BehaviorRuleType

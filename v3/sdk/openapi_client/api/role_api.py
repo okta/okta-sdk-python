@@ -17,11 +17,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from typing_extensions import Annotated
 from pydantic import Field, StrictStr
-
 from typing import Optional
-
+from typing_extensions import Annotated
 from openapi_client.models.create_iam_role_request import CreateIamRoleRequest
 from openapi_client.models.create_update_iam_role_permission_request import CreateUpdateIamRolePermissionRequest
 from openapi_client.models.iam_role import IamRole
@@ -272,7 +270,7 @@ class RoleApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -332,8 +330,8 @@ class RoleApi:
     @validate_call
     def create_role_permission(
         self,
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
-        permission_type: Annotated[StrictStr, Field(..., description="An okta permission type")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
+        permission_type: Annotated[StrictStr, Field(description="An okta permission type")],
         instance: Optional[CreateUpdateIamRolePermissionRequest] = None,
         _request_timeout: Union[
             None,
@@ -411,8 +409,8 @@ class RoleApi:
     @validate_call
     def create_role_permission_with_http_info(
         self,
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
-        permission_type: Annotated[StrictStr, Field(..., description="An okta permission type")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
+        permission_type: Annotated[StrictStr, Field(description="An okta permission type")],
         instance: Optional[CreateUpdateIamRolePermissionRequest] = None,
         _request_timeout: Union[
             None,
@@ -490,8 +488,8 @@ class RoleApi:
     @validate_call
     def create_role_permission_without_preload_content(
         self,
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
-        permission_type: Annotated[StrictStr, Field(..., description="An okta permission type")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
+        permission_type: Annotated[StrictStr, Field(description="An okta permission type")],
         instance: Optional[CreateUpdateIamRolePermissionRequest] = None,
         _request_timeout: Union[
             None,
@@ -582,7 +580,7 @@ class RoleApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -646,7 +644,7 @@ class RoleApi:
     @validate_call
     def delete_role(
         self,
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -716,7 +714,7 @@ class RoleApi:
     @validate_call
     def delete_role_with_http_info(
         self,
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -786,7 +784,7 @@ class RoleApi:
     @validate_call
     def delete_role_without_preload_content(
         self,
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -867,7 +865,7 @@ class RoleApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -914,8 +912,8 @@ class RoleApi:
     @validate_call
     def delete_role_permission(
         self,
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
-        permission_type: Annotated[StrictStr, Field(..., description="An okta permission type")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
+        permission_type: Annotated[StrictStr, Field(description="An okta permission type")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -988,8 +986,8 @@ class RoleApi:
     @validate_call
     def delete_role_permission_with_http_info(
         self,
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
-        permission_type: Annotated[StrictStr, Field(..., description="An okta permission type")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
+        permission_type: Annotated[StrictStr, Field(description="An okta permission type")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1062,8 +1060,8 @@ class RoleApi:
     @validate_call
     def delete_role_permission_without_preload_content(
         self,
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
-        permission_type: Annotated[StrictStr, Field(..., description="An okta permission type")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
+        permission_type: Annotated[StrictStr, Field(description="An okta permission type")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1148,7 +1146,7 @@ class RoleApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1197,7 +1195,7 @@ class RoleApi:
     @validate_call
     def get_role(
         self,
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1267,7 +1265,7 @@ class RoleApi:
     @validate_call
     def get_role_with_http_info(
         self,
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1337,7 +1335,7 @@ class RoleApi:
     @validate_call
     def get_role_without_preload_content(
         self,
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1418,7 +1416,7 @@ class RoleApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1465,8 +1463,8 @@ class RoleApi:
     @validate_call
     def get_role_permission(
         self,
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
-        permission_type: Annotated[StrictStr, Field(..., description="An okta permission type")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
+        permission_type: Annotated[StrictStr, Field(description="An okta permission type")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1539,8 +1537,8 @@ class RoleApi:
     @validate_call
     def get_role_permission_with_http_info(
         self,
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
-        permission_type: Annotated[StrictStr, Field(..., description="An okta permission type")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
+        permission_type: Annotated[StrictStr, Field(description="An okta permission type")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1613,8 +1611,8 @@ class RoleApi:
     @validate_call
     def get_role_permission_without_preload_content(
         self,
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
-        permission_type: Annotated[StrictStr, Field(..., description="An okta permission type")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
+        permission_type: Annotated[StrictStr, Field(description="An okta permission type")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1699,7 +1697,7 @@ class RoleApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1748,7 +1746,7 @@ class RoleApi:
     @validate_call
     def list_role_permissions(
         self,
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1818,7 +1816,7 @@ class RoleApi:
     @validate_call
     def list_role_permissions_with_http_info(
         self,
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1888,7 +1886,7 @@ class RoleApi:
     @validate_call
     def list_role_permissions_without_preload_content(
         self,
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1969,7 +1967,7 @@ class RoleApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2234,7 +2232,7 @@ class RoleApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2283,7 +2281,7 @@ class RoleApi:
     @validate_call
     def replace_role(
         self,
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
         instance: UpdateIamRoleRequest,
         _request_timeout: Union[
             None,
@@ -2358,7 +2356,7 @@ class RoleApi:
     @validate_call
     def replace_role_with_http_info(
         self,
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
         instance: UpdateIamRoleRequest,
         _request_timeout: Union[
             None,
@@ -2433,7 +2431,7 @@ class RoleApi:
     @validate_call
     def replace_role_without_preload_content(
         self,
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
         instance: UpdateIamRoleRequest,
         _request_timeout: Union[
             None,
@@ -2520,7 +2518,7 @@ class RoleApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2582,8 +2580,8 @@ class RoleApi:
     @validate_call
     def replace_role_permission(
         self,
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
-        permission_type: Annotated[StrictStr, Field(..., description="An okta permission type")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
+        permission_type: Annotated[StrictStr, Field(description="An okta permission type")],
         instance: Optional[CreateUpdateIamRolePermissionRequest] = None,
         _request_timeout: Union[
             None,
@@ -2661,8 +2659,8 @@ class RoleApi:
     @validate_call
     def replace_role_permission_with_http_info(
         self,
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
-        permission_type: Annotated[StrictStr, Field(..., description="An okta permission type")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
+        permission_type: Annotated[StrictStr, Field(description="An okta permission type")],
         instance: Optional[CreateUpdateIamRolePermissionRequest] = None,
         _request_timeout: Union[
             None,
@@ -2740,8 +2738,8 @@ class RoleApi:
     @validate_call
     def replace_role_permission_without_preload_content(
         self,
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
-        permission_type: Annotated[StrictStr, Field(..., description="An okta permission type")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
+        permission_type: Annotated[StrictStr, Field(description="An okta permission type")],
         instance: Optional[CreateUpdateIamRolePermissionRequest] = None,
         _request_timeout: Union[
             None,
@@ -2832,7 +2830,7 @@ class RoleApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters

@@ -35,7 +35,7 @@ print(NetworkZone.to_json())
 # convert the object into a dict
 network_zone_dict = network_zone_instance.to_dict()
 # create an instance of NetworkZone from a dict
-network_zone_form_dict = network_zone.from_dict(network_zone_dict)
+network_zone_from_dict = NetworkZone.from_dict(network_zone_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

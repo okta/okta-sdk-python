@@ -31,7 +31,7 @@ print(UserFactor.to_json())
 # convert the object into a dict
 user_factor_dict = user_factor_instance.to_dict()
 # create an instance of UserFactor from a dict
-user_factor_form_dict = user_factor.from_dict(user_factor_dict)
+user_factor_from_dict = UserFactor.from_dict(user_factor_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

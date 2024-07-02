@@ -24,7 +24,7 @@ print(ApplicationSettingsNotificationsVpn.to_json())
 # convert the object into a dict
 application_settings_notifications_vpn_dict = application_settings_notifications_vpn_instance.to_dict()
 # create an instance of ApplicationSettingsNotificationsVpn from a dict
-application_settings_notifications_vpn_form_dict = application_settings_notifications_vpn.from_dict(application_settings_notifications_vpn_dict)
+application_settings_notifications_vpn_from_dict = ApplicationSettingsNotificationsVpn.from_dict(application_settings_notifications_vpn_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

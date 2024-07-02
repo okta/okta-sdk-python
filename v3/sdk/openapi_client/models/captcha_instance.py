@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.captcha_type import CAPTCHAType
 from openapi_client.models.links_self import LinksSelf
 from typing import Optional, Set
@@ -27,12 +29,12 @@ class CAPTCHAInstance(BaseModel):
     """
     
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(None, description="The unique key for the CAPTCHA instance")
-    name: Optional[StrictStr] = Field(None, description="The name of the CAPTCHA instance")
-    secret_key: Optional[StrictStr] = Field(None, alias="secretKey", description="The secret key issued from the CAPTCHA provider to perform server-side validation for a CAPTCHA token")
-    site_key: Optional[StrictStr] = Field(None, alias="siteKey", description="The site key issued from the CAPTCHA provider to render a CAPTCHA on a page")
+    id: Optional[StrictStr] = Field(default=None, description="The unique key for the CAPTCHA instance")
+    name: Optional[StrictStr] = Field(default=None, description="The name of the CAPTCHA instance")
+    secret_key: Optional[StrictStr] = Field(default=None, description="The secret key issued from the CAPTCHA provider to perform server-side validation for a CAPTCHA token", alias="secretKey")
+    site_key: Optional[StrictStr] = Field(default=None, description="The site key issued from the CAPTCHA provider to render a CAPTCHA on a page", alias="siteKey")
     type: Optional[CAPTCHAType] = None
-    links: Optional[LinksSelf] = Field(None, alias="_links")
+    links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["id", "name", "secretKey", "siteKey", "type", "_links"]
 
     model_config = ConfigDict(

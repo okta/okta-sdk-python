@@ -23,7 +23,7 @@ print(LogGeolocation.to_json())
 # convert the object into a dict
 log_geolocation_dict = log_geolocation_instance.to_dict()
 # create an instance of LogGeolocation from a dict
-log_geolocation_form_dict = log_geolocation.from_dict(log_geolocation_dict)
+log_geolocation_from_dict = LogGeolocation.from_dict(log_geolocation_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

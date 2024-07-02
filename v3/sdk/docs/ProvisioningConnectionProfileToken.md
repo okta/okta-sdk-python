@@ -23,7 +23,7 @@ print(ProvisioningConnectionProfileToken.to_json())
 # convert the object into a dict
 provisioning_connection_profile_token_dict = provisioning_connection_profile_token_instance.to_dict()
 # create an instance of ProvisioningConnectionProfileToken from a dict
-provisioning_connection_profile_token_form_dict = provisioning_connection_profile_token.from_dict(provisioning_connection_profile_token_dict)
+provisioning_connection_profile_token_from_dict = ProvisioningConnectionProfileToken.from_dict(provisioning_connection_profile_token_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

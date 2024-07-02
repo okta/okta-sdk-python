@@ -23,7 +23,7 @@ print(GroupRuleConditions.to_json())
 # convert the object into a dict
 group_rule_conditions_dict = group_rule_conditions_instance.to_dict()
 # create an instance of GroupRuleConditions from a dict
-group_rule_conditions_form_dict = group_rule_conditions.from_dict(group_rule_conditions_dict)
+group_rule_conditions_from_dict = GroupRuleConditions.from_dict(group_rule_conditions_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

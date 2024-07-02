@@ -24,7 +24,7 @@ print(InlineHookResponseCommandValue.to_json())
 # convert the object into a dict
 inline_hook_response_command_value_dict = inline_hook_response_command_value_instance.to_dict()
 # create an instance of InlineHookResponseCommandValue from a dict
-inline_hook_response_command_value_form_dict = inline_hook_response_command_value.from_dict(inline_hook_response_command_value_dict)
+inline_hook_response_command_value_from_dict = InlineHookResponseCommandValue.from_dict(inline_hook_response_command_value_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -22,7 +22,7 @@ print(PasswordPolicyRecoveryEmailRecoveryToken.to_json())
 # convert the object into a dict
 password_policy_recovery_email_recovery_token_dict = password_policy_recovery_email_recovery_token_instance.to_dict()
 # create an instance of PasswordPolicyRecoveryEmailRecoveryToken from a dict
-password_policy_recovery_email_recovery_token_form_dict = password_policy_recovery_email_recovery_token.from_dict(password_policy_recovery_email_recovery_token_dict)
+password_policy_recovery_email_recovery_token_from_dict = PasswordPolicyRecoveryEmailRecoveryToken.from_dict(password_policy_recovery_email_recovery_token_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

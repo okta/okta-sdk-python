@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,7 +27,7 @@ class CustomHotpUserFactorProfile(BaseModel):
     """
     CustomHotpUserFactorProfile
     """ # noqa: E501
-    shared_secret: Optional[StrictStr] = Field(None, alias="sharedSecret")
+    shared_secret: Optional[StrictStr] = Field(default=None, alias="sharedSecret")
     __properties: ClassVar[List[str]] = ["sharedSecret"]
 
     model_config = ConfigDict(

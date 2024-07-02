@@ -22,7 +22,7 @@ print(ProtocolSettings.to_json())
 # convert the object into a dict
 protocol_settings_dict = protocol_settings_instance.to_dict()
 # create an instance of ProtocolSettings from a dict
-protocol_settings_form_dict = protocol_settings.from_dict(protocol_settings_dict)
+protocol_settings_from_dict = ProtocolSettings.from_dict(protocol_settings_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

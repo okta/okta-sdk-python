@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.authorization_server_credentials_rotation_mode import AuthorizationServerCredentialsRotationMode
 from openapi_client.models.authorization_server_credentials_use import AuthorizationServerCredentialsUse
 from typing import Optional, Set
@@ -28,9 +31,9 @@ class AuthorizationServerCredentialsSigningConfig(BaseModel):
     AuthorizationServerCredentialsSigningConfig
     """ # noqa: E501
     kid: Optional[StrictStr] = None
-    last_rotated: Optional[datetime] = Field(None, alias="lastRotated")
-    next_rotation: Optional[datetime] = Field(None, alias="nextRotation")
-    rotation_mode: Optional[AuthorizationServerCredentialsRotationMode] = Field(None, alias="rotationMode")
+    last_rotated: Optional[datetime] = Field(default=None, alias="lastRotated")
+    next_rotation: Optional[datetime] = Field(default=None, alias="nextRotation")
+    rotation_mode: Optional[AuthorizationServerCredentialsRotationMode] = Field(default=None, alias="rotationMode")
     use: Optional[AuthorizationServerCredentialsUse] = None
     __properties: ClassVar[List[str]] = ["kid", "lastRotated", "nextRotation", "rotationMode", "use"]
 

@@ -22,7 +22,7 @@ print(PasswordPolicyRuleAction.to_json())
 # convert the object into a dict
 password_policy_rule_action_dict = password_policy_rule_action_instance.to_dict()
 # create an instance of PasswordPolicyRuleAction from a dict
-password_policy_rule_action_form_dict = password_policy_rule_action.from_dict(password_policy_rule_action_dict)
+password_policy_rule_action_from_dict = PasswordPolicyRuleAction.from_dict(password_policy_rule_action_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

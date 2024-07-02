@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictInt
+from typing import Any, ClassVar, Dict, List
+from typing_extensions import Annotated
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,8 +28,8 @@ class AcsEndpoint(BaseModel):
     """
     An array of ACS endpoints. You can configure a maximum of 100 endpoints.
     """ # noqa: E501
-    index: StrictInt = Field(..., description="Index of the URL in the array of ACS endpoints")
-    url: constr(strict=True, max_length=1024) = Field(..., description="URL of the ACS")
+    index: StrictInt = Field(description="Index of the URL in the array of ACS endpoints")
+    url: Annotated[str, Field(strict=True, max_length=1024)] = Field(description="URL of the ACS")
     __properties: ClassVar[List[str]] = ["index", "url"]
 
     model_config = ConfigDict(

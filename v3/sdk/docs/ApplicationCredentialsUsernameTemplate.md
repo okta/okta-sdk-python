@@ -25,7 +25,7 @@ print(ApplicationCredentialsUsernameTemplate.to_json())
 # convert the object into a dict
 application_credentials_username_template_dict = application_credentials_username_template_instance.to_dict()
 # create an instance of ApplicationCredentialsUsernameTemplate from a dict
-application_credentials_username_template_form_dict = application_credentials_username_template.from_dict(application_credentials_username_template_dict)
+application_credentials_username_template_from_dict = ApplicationCredentialsUsernameTemplate.from_dict(application_credentials_username_template_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

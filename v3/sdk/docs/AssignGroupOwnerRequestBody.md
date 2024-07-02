@@ -23,7 +23,7 @@ print(AssignGroupOwnerRequestBody.to_json())
 # convert the object into a dict
 assign_group_owner_request_body_dict = assign_group_owner_request_body_instance.to_dict()
 # create an instance of AssignGroupOwnerRequestBody from a dict
-assign_group_owner_request_body_form_dict = assign_group_owner_request_body.from_dict(assign_group_owner_request_body_dict)
+assign_group_owner_request_body_from_dict = AssignGroupOwnerRequestBody.from_dict(assign_group_owner_request_body_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

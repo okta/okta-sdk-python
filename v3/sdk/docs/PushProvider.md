@@ -26,7 +26,7 @@ print(PushProvider.to_json())
 # convert the object into a dict
 push_provider_dict = push_provider_instance.to_dict()
 # create an instance of PushProvider from a dict
-push_provider_form_dict = push_provider.from_dict(push_provider_dict)
+push_provider_from_dict = PushProvider.from_dict(push_provider_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

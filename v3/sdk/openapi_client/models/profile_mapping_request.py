@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict
+from typing import Any, ClassVar, Dict, List
 from openapi_client.models.profile_mapping_property import ProfileMappingProperty
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,7 +28,7 @@ class ProfileMappingRequest(BaseModel):
     """
     The updated request body properties
     """ # noqa: E501
-    properties: Dict[str, ProfileMappingProperty] = Field(...)
+    properties: Dict[str, ProfileMappingProperty]
     __properties: ClassVar[List[str]] = ["properties"]
 
     model_config = ConfigDict(

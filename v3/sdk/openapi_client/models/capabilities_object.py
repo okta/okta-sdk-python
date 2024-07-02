@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.capabilities_create_object import CapabilitiesCreateObject
 from openapi_client.models.capabilities_update_object import CapabilitiesUpdateObject
 from typing import Optional, Set

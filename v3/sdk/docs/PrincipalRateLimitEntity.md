@@ -32,7 +32,7 @@ print(PrincipalRateLimitEntity.to_json())
 # convert the object into a dict
 principal_rate_limit_entity_dict = principal_rate_limit_entity_instance.to_dict()
 # create an instance of PrincipalRateLimitEntity from a dict
-principal_rate_limit_entity_form_dict = principal_rate_limit_entity.from_dict(principal_rate_limit_entity_dict)
+principal_rate_limit_entity_from_dict = PrincipalRateLimitEntity.from_dict(principal_rate_limit_entity_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

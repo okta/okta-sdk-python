@@ -23,7 +23,7 @@ print(GroupRuleExpression.to_json())
 # convert the object into a dict
 group_rule_expression_dict = group_rule_expression_instance.to_dict()
 # create an instance of GroupRuleExpression from a dict
-group_rule_expression_form_dict = group_rule_expression.from_dict(group_rule_expression_dict)
+group_rule_expression_from_dict = GroupRuleExpression.from_dict(group_rule_expression_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

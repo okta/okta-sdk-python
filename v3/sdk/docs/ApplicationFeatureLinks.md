@@ -22,7 +22,7 @@ print(ApplicationFeatureLinks.to_json())
 # convert the object into a dict
 application_feature_links_dict = application_feature_links_instance.to_dict()
 # create an instance of ApplicationFeatureLinks from a dict
-application_feature_links_form_dict = application_feature_links.from_dict(application_feature_links_dict)
+application_feature_links_from_dict = ApplicationFeatureLinks.from_dict(application_feature_links_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -25,7 +25,7 @@ print(PasswordPolicyPasswordSettingsAge.to_json())
 # convert the object into a dict
 password_policy_password_settings_age_dict = password_policy_password_settings_age_instance.to_dict()
 # create an instance of PasswordPolicyPasswordSettingsAge from a dict
-password_policy_password_settings_age_form_dict = password_policy_password_settings_age.from_dict(password_policy_password_settings_age_dict)
+password_policy_password_settings_age_from_dict = PasswordPolicyPasswordSettingsAge.from_dict(password_policy_password_settings_age_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

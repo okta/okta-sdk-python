@@ -26,7 +26,7 @@ print(SimulatePolicyEvaluations.to_json())
 # convert the object into a dict
 simulate_policy_evaluations_dict = simulate_policy_evaluations_instance.to_dict()
 # create an instance of SimulatePolicyEvaluations from a dict
-simulate_policy_evaluations_form_dict = simulate_policy_evaluations.from_dict(simulate_policy_evaluations_dict)
+simulate_policy_evaluations_from_dict = SimulatePolicyEvaluations.from_dict(simulate_policy_evaluations_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

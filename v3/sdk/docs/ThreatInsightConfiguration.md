@@ -26,7 +26,7 @@ print(ThreatInsightConfiguration.to_json())
 # convert the object into a dict
 threat_insight_configuration_dict = threat_insight_configuration_instance.to_dict()
 # create an instance of ThreatInsightConfiguration from a dict
-threat_insight_configuration_form_dict = threat_insight_configuration.from_dict(threat_insight_configuration_dict)
+threat_insight_configuration_from_dict = ThreatInsightConfiguration.from_dict(threat_insight_configuration_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

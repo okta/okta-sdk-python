@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.csr_metadata_subject import CsrMetadataSubject
 from openapi_client.models.csr_metadata_subject_alt_names import CsrMetadataSubjectAltNames
 from typing import Optional, Set
@@ -28,7 +30,7 @@ class CsrMetadata(BaseModel):
     CsrMetadata
     """ # noqa: E501
     subject: Optional[CsrMetadataSubject] = None
-    subject_alt_names: Optional[CsrMetadataSubjectAltNames] = Field(None, alias="subjectAltNames")
+    subject_alt_names: Optional[CsrMetadataSubjectAltNames] = Field(default=None, alias="subjectAltNames")
     __properties: ClassVar[List[str]] = ["subject", "subjectAltNames"]
 
     model_config = ConfigDict(

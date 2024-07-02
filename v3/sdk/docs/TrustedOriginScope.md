@@ -23,7 +23,7 @@ print(TrustedOriginScope.to_json())
 # convert the object into a dict
 trusted_origin_scope_dict = trusted_origin_scope_instance.to_dict()
 # create an instance of TrustedOriginScope from a dict
-trusted_origin_scope_form_dict = trusted_origin_scope.from_dict(trusted_origin_scope_dict)
+trusted_origin_scope_from_dict = TrustedOriginScope.from_dict(trusted_origin_scope_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -25,7 +25,7 @@ print(LogStreamSettingsAws.to_json())
 # convert the object into a dict
 log_stream_settings_aws_dict = log_stream_settings_aws_instance.to_dict()
 # create an instance of LogStreamSettingsAws from a dict
-log_stream_settings_aws_form_dict = log_stream_settings_aws.from_dict(log_stream_settings_aws_dict)
+log_stream_settings_aws_from_dict = LogStreamSettingsAws.from_dict(log_stream_settings_aws_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

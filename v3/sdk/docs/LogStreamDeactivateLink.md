@@ -23,7 +23,7 @@ print(LogStreamDeactivateLink.to_json())
 # convert the object into a dict
 log_stream_deactivate_link_dict = log_stream_deactivate_link_instance.to_dict()
 # create an instance of LogStreamDeactivateLink from a dict
-log_stream_deactivate_link_form_dict = log_stream_deactivate_link.from_dict(log_stream_deactivate_link_dict)
+log_stream_deactivate_link_from_dict = LogStreamDeactivateLink.from_dict(log_stream_deactivate_link_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,9 +27,9 @@ class LogActor(BaseModel):
     """
     LogActor
     """ # noqa: E501
-    alternate_id: Optional[StrictStr] = Field(None, alias="alternateId")
-    detail_entry: Optional[Dict[str, Dict[str, Any]]] = Field(None, alias="detailEntry")
-    display_name: Optional[StrictStr] = Field(None, alias="displayName")
+    alternate_id: Optional[StrictStr] = Field(default=None, alias="alternateId")
+    detail_entry: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, alias="detailEntry")
+    display_name: Optional[StrictStr] = Field(default=None, alias="displayName")
     id: Optional[StrictStr] = None
     type: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["alternateId", "detailEntry", "displayName", "id", "type"]

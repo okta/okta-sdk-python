@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import ConfigDict
+from typing import Any, ClassVar, Dict, List
 from openapi_client.models.log_stream import LogStream
 from openapi_client.models.log_stream_links_self_and_lifecycle import LogStreamLinksSelfAndLifecycle
 from openapi_client.models.log_stream_settings_aws import LogStreamSettingsAws
@@ -29,7 +31,7 @@ class LogStreamAws(LogStream):
     """
     LogStreamAws
     """ # noqa: E501
-    settings: LogStreamSettingsAws = Field(...)
+    settings: LogStreamSettingsAws
     __properties: ClassVar[List[str]] = ["created", "id", "lastUpdated", "name", "status", "type", "_links", "settings"]
 
     model_config = ConfigDict(

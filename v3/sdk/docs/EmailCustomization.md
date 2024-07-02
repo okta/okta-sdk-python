@@ -29,7 +29,7 @@ print(EmailCustomization.to_json())
 # convert the object into a dict
 email_customization_dict = email_customization_instance.to_dict()
 # create an instance of EmailCustomization from a dict
-email_customization_form_dict = email_customization.from_dict(email_customization_dict)
+email_customization_from_dict = EmailCustomization.from_dict(email_customization_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

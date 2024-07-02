@@ -21,7 +21,7 @@ print(AuthenticatorMethodSimple.to_json())
 # convert the object into a dict
 authenticator_method_simple_dict = authenticator_method_simple_instance.to_dict()
 # create an instance of AuthenticatorMethodSimple from a dict
-authenticator_method_simple_form_dict = authenticator_method_simple.from_dict(authenticator_method_simple_dict)
+authenticator_method_simple_from_dict = AuthenticatorMethodSimple.from_dict(authenticator_method_simple_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

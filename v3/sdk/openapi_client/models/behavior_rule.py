@@ -18,6 +18,11 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
+from importlib import import_module
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
+from typing_extensions import Annotated
 from openapi_client.models.behavior_rule_type import BehaviorRuleType
 from openapi_client.models.lifecycle_status import LifecycleStatus
 from openapi_client.models.links_self import LinksSelf
@@ -37,11 +42,11 @@ class BehaviorRule(BaseModel):
     """ # noqa: E501
     created: Optional[datetime] = None
     id: Optional[StrictStr] = None
-    last_updated: Optional[datetime] = Field(None, alias="lastUpdated")
-    name: constr(strict=True, max_length=128) = Field(...)
+    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
+    name: Annotated[str, Field(strict=True, max_length=128)]
     status: Optional[LifecycleStatus] = None
-    type: BehaviorRuleType = Field(...)
-    link: Optional[LinksSelf] = Field(None, alias="_link")
+    type: BehaviorRuleType
+    link: Optional[LinksSelf] = Field(default=None, alias="_link")
     __properties: ClassVar[List[str]] = ["created", "id", "lastUpdated", "name", "status", "type", "_link"]
 
     model_config = ConfigDict(
@@ -116,13 +121,13 @@ class BehaviorRule(BaseModel):
         """Create an instance of BehaviorRule from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
-        if object_type ==  'ANOMALOUS_DEVICE':
+        if object_type ==  'BehaviorRuleAnomalousDevice':
             return import_module("openapi_client.models.behavior_rule_anomalous_device").BehaviorRuleAnomalousDevice.from_dict(obj)
-        if object_type ==  'ANOMALOUS_IP':
+        if object_type ==  'BehaviorRuleAnomalousIP':
             return import_module("openapi_client.models.behavior_rule_anomalous_ip").BehaviorRuleAnomalousIP.from_dict(obj)
-        if object_type ==  'ANOMALOUS_LOCATION':
+        if object_type ==  'BehaviorRuleAnomalousLocation':
             return import_module("openapi_client.models.behavior_rule_anomalous_location").BehaviorRuleAnomalousLocation.from_dict(obj)
-        if object_type ==  'VELOCITY':
+        if object_type ==  'BehaviorRuleVelocity':
             return import_module("openapi_client.models.behavior_rule_velocity").BehaviorRuleVelocity.from_dict(obj)
 
         raise ValueError("BehaviorRule failed to lookup discriminator value from " +

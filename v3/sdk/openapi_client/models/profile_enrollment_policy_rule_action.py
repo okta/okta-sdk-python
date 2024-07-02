@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, field_validator
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.pre_registration_inline_hook import PreRegistrationInlineHook
 from openapi_client.models.profile_enrollment_policy_rule_activation_requirement import ProfileEnrollmentPolicyRuleActivationRequirement
 from openapi_client.models.profile_enrollment_policy_rule_profile_attribute import ProfileEnrollmentPolicyRuleProfileAttribute
@@ -29,12 +31,12 @@ class ProfileEnrollmentPolicyRuleAction(BaseModel):
     ProfileEnrollmentPolicyRuleAction
     """ # noqa: E501
     access: Optional[StrictStr] = None
-    activation_requirements: Optional[ProfileEnrollmentPolicyRuleActivationRequirement] = Field(None, alias="activationRequirements")
-    pre_registration_inline_hooks: Optional[conlist(PreRegistrationInlineHook)] = Field(None, alias="preRegistrationInlineHooks")
-    profile_attributes: Optional[conlist(ProfileEnrollmentPolicyRuleProfileAttribute)] = Field(None, alias="profileAttributes")
-    target_group_ids: Optional[conlist(StrictStr)] = Field(None, alias="targetGroupIds")
-    unknown_user_action: Optional[StrictStr] = Field(None, alias="unknownUserAction")
-    progressive_profiling_action: Optional[StrictStr] = Field(None, alias="progressiveProfilingAction")
+    activation_requirements: Optional[ProfileEnrollmentPolicyRuleActivationRequirement] = Field(default=None, alias="activationRequirements")
+    pre_registration_inline_hooks: Optional[List[PreRegistrationInlineHook]] = Field(default=None, alias="preRegistrationInlineHooks")
+    profile_attributes: Optional[List[ProfileEnrollmentPolicyRuleProfileAttribute]] = Field(default=None, alias="profileAttributes")
+    target_group_ids: Optional[List[StrictStr]] = Field(default=None, alias="targetGroupIds")
+    unknown_user_action: Optional[StrictStr] = Field(default=None, alias="unknownUserAction")
+    progressive_profiling_action: Optional[StrictStr] = Field(default=None, alias="progressiveProfilingAction")
     __properties: ClassVar[List[str]] = ["access", "activationRequirements", "preRegistrationInlineHooks", "profileAttributes", "targetGroupIds", "unknownUserAction", "progressiveProfilingAction"]
 
     @field_validator('unknown_user_action')

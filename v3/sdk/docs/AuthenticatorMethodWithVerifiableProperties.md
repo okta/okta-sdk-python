@@ -22,7 +22,7 @@ print(AuthenticatorMethodWithVerifiableProperties.to_json())
 # convert the object into a dict
 authenticator_method_with_verifiable_properties_dict = authenticator_method_with_verifiable_properties_instance.to_dict()
 # create an instance of AuthenticatorMethodWithVerifiableProperties from a dict
-authenticator_method_with_verifiable_properties_form_dict = authenticator_method_with_verifiable_properties.from_dict(authenticator_method_with_verifiable_properties_dict)
+authenticator_method_with_verifiable_properties_from_dict = AuthenticatorMethodWithVerifiableProperties.from_dict(authenticator_method_with_verifiable_properties_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

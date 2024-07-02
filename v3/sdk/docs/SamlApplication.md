@@ -24,7 +24,7 @@ print(SamlApplication.to_json())
 # convert the object into a dict
 saml_application_dict = saml_application_instance.to_dict()
 # create an instance of SamlApplication from a dict
-saml_application_form_dict = saml_application.from_dict(saml_application_dict)
+saml_application_from_dict = SamlApplication.from_dict(saml_application_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

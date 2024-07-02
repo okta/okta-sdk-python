@@ -26,7 +26,7 @@ print(HrefObject.to_json())
 # convert the object into a dict
 href_object_dict = href_object_instance.to_dict()
 # create an instance of HrefObject from a dict
-href_object_form_dict = href_object.from_dict(href_object_dict)
+href_object_from_dict = HrefObject.from_dict(href_object_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

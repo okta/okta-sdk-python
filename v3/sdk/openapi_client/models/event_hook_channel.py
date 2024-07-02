@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.event_hook_channel_config import EventHookChannelConfig
 from openapi_client.models.event_hook_channel_type import EventHookChannelType
 from typing import Optional, Set

@@ -26,7 +26,7 @@ print(LogTarget.to_json())
 # convert the object into a dict
 log_target_dict = log_target_instance.to_dict()
 # create an instance of LogTarget from a dict
-log_target_form_dict = log_target.from_dict(log_target_dict)
+log_target_from_dict = LogTarget.from_dict(log_target_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -22,7 +22,7 @@ print(Permissions.to_json())
 # convert the object into a dict
 permissions_dict = permissions_instance.to_dict()
 # create an instance of Permissions from a dict
-permissions_form_dict = permissions.from_dict(permissions_dict)
+permissions_from_dict = Permissions.from_dict(permissions_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

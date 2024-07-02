@@ -24,7 +24,7 @@ print(OAuth2Actor.to_json())
 # convert the object into a dict
 o_auth2_actor_dict = o_auth2_actor_instance.to_dict()
 # create an instance of OAuth2Actor from a dict
-o_auth2_actor_form_dict = o_auth2_actor.from_dict(o_auth2_actor_dict)
+o_auth2_actor_from_dict = OAuth2Actor.from_dict(o_auth2_actor_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -26,7 +26,7 @@ print(UIElement.to_json())
 # convert the object into a dict
 ui_element_dict = ui_element_instance.to_dict()
 # create an instance of UIElement from a dict
-ui_element_form_dict = ui_element.from_dict(ui_element_dict)
+ui_element_from_dict = UIElement.from_dict(ui_element_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

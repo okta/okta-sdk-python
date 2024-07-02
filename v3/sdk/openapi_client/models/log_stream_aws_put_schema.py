@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import ConfigDict
+from typing import Any, ClassVar, Dict, List
 from openapi_client.models.log_stream_put_schema import LogStreamPutSchema
 from openapi_client.models.log_stream_settings_aws import LogStreamSettingsAws
 from openapi_client.models.log_stream_type import LogStreamType
@@ -28,7 +30,7 @@ class LogStreamAwsPutSchema(LogStreamPutSchema):
     """
     LogStreamAwsPutSchema
     """ # noqa: E501
-    settings: LogStreamSettingsAws = Field(...)
+    settings: LogStreamSettingsAws
     __properties: ClassVar[List[str]] = ["name", "type", "settings"]
 
     model_config = ConfigDict(

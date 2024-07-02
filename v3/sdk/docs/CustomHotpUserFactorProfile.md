@@ -22,7 +22,7 @@ print(CustomHotpUserFactorProfile.to_json())
 # convert the object into a dict
 custom_hotp_user_factor_profile_dict = custom_hotp_user_factor_profile_instance.to_dict()
 # create an instance of CustomHotpUserFactorProfile from a dict
-custom_hotp_user_factor_profile_form_dict = custom_hotp_user_factor_profile.from_dict(custom_hotp_user_factor_profile_dict)
+custom_hotp_user_factor_profile_from_dict = CustomHotpUserFactorProfile.from_dict(custom_hotp_user_factor_profile_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

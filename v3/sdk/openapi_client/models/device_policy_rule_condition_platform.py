@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.device_policy_mdm_framework import DevicePolicyMDMFramework
 from openapi_client.models.device_policy_platform_type import DevicePolicyPlatformType
 from typing import Optional, Set
@@ -27,8 +29,8 @@ class DevicePolicyRuleConditionPlatform(BaseModel):
     """
     DevicePolicyRuleConditionPlatform
     """ # noqa: E501
-    supported_mdm_frameworks: Optional[conlist(DevicePolicyMDMFramework)] = Field(None, alias="supportedMDMFrameworks")
-    types: Optional[conlist(DevicePolicyPlatformType)] = None
+    supported_mdm_frameworks: Optional[List[DevicePolicyMDMFramework]] = Field(default=None, alias="supportedMDMFrameworks")
+    types: Optional[List[DevicePolicyPlatformType]] = None
     __properties: ClassVar[List[str]] = ["supportedMDMFrameworks", "types"]
 
     model_config = ConfigDict(

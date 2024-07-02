@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from importlib import import_module
+from pydantic import BaseModel, ConfigDict, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from openapi_client.models.inline_hook_channel_type import InlineHookChannelType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -98,9 +101,9 @@ class InlineHookChannel(BaseModel):
         """Create an instance of InlineHookChannel from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
-        if object_type ==  'HTTP':
+        if object_type ==  'InlineHookChannelHttp':
             return import_module("openapi_client.models.inline_hook_channel_http").InlineHookChannelHttp.from_dict(obj)
-        if object_type ==  'OAUTH':
+        if object_type ==  'InlineHookChannelOAuth':
             return import_module("openapi_client.models.inline_hook_channel_o_auth").InlineHookChannelOAuth.from_dict(obj)
 
         raise ValueError("InlineHookChannel failed to lookup discriminator value from " +

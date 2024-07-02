@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.user_identifier_match_type import UserIdentifierMatchType
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,8 +28,8 @@ class UserIdentifierConditionEvaluatorPattern(BaseModel):
     """
     Used in the User Identifier Condition object. Specifies the details of the patterns to match against.
     """ # noqa: E501
-    match_type: Optional[UserIdentifierMatchType] = Field(None, alias="matchType")
-    value: Optional[StrictStr] = Field(None, description="The regex expression of a simple match string")
+    match_type: Optional[UserIdentifierMatchType] = Field(default=None, alias="matchType")
+    value: Optional[StrictStr] = Field(default=None, description="The regex expression of a simple match string")
     __properties: ClassVar[List[str]] = ["matchType", "value"]
 
     model_config = ConfigDict(

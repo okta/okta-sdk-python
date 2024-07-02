@@ -25,7 +25,7 @@ print(ResourceSetBindingMember.to_json())
 # convert the object into a dict
 resource_set_binding_member_dict = resource_set_binding_member_instance.to_dict()
 # create an instance of ResourceSetBindingMember from a dict
-resource_set_binding_member_form_dict = resource_set_binding_member.from_dict(resource_set_binding_member_dict)
+resource_set_binding_member_from_dict = ResourceSetBindingMember.from_dict(resource_set_binding_member_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

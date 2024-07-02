@@ -25,7 +25,7 @@ print(AuthenticatorLinks.to_json())
 # convert the object into a dict
 authenticator_links_dict = authenticator_links_instance.to_dict()
 # create an instance of AuthenticatorLinks from a dict
-authenticator_links_form_dict = authenticator_links.from_dict(authenticator_links_dict)
+authenticator_links_from_dict = AuthenticatorLinks.from_dict(authenticator_links_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

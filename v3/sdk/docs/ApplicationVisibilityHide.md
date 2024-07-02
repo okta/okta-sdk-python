@@ -23,7 +23,7 @@ print(ApplicationVisibilityHide.to_json())
 # convert the object into a dict
 application_visibility_hide_dict = application_visibility_hide_instance.to_dict()
 # create an instance of ApplicationVisibilityHide from a dict
-application_visibility_hide_form_dict = application_visibility_hide.from_dict(application_visibility_hide_dict)
+application_visibility_hide_from_dict = ApplicationVisibilityHide.from_dict(application_visibility_hide_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

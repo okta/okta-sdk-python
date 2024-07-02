@@ -22,7 +22,7 @@ print(SpCertificate.to_json())
 # convert the object into a dict
 sp_certificate_dict = sp_certificate_instance.to_dict()
 # create an instance of SpCertificate from a dict
-sp_certificate_form_dict = sp_certificate.from_dict(sp_certificate_dict)
+sp_certificate_from_dict = SpCertificate.from_dict(sp_certificate_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

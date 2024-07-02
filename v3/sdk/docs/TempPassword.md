@@ -22,7 +22,7 @@ print(TempPassword.to_json())
 # convert the object into a dict
 temp_password_dict = temp_password_instance.to_dict()
 # create an instance of TempPassword from a dict
-temp_password_form_dict = temp_password.from_dict(temp_password_dict)
+temp_password_from_dict = TempPassword.from_dict(temp_password_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

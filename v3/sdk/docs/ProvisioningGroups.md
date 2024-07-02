@@ -25,7 +25,7 @@ print(ProvisioningGroups.to_json())
 # convert the object into a dict
 provisioning_groups_dict = provisioning_groups_instance.to_dict()
 # create an instance of ProvisioningGroups from a dict
-provisioning_groups_form_dict = provisioning_groups.from_dict(provisioning_groups_dict)
+provisioning_groups_from_dict = ProvisioningGroups.from_dict(provisioning_groups_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

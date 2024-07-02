@@ -23,7 +23,7 @@ print(RateLimitWarningThresholdResponse.to_json())
 # convert the object into a dict
 rate_limit_warning_threshold_response_dict = rate_limit_warning_threshold_response_instance.to_dict()
 # create an instance of RateLimitWarningThresholdResponse from a dict
-rate_limit_warning_threshold_response_form_dict = rate_limit_warning_threshold_response.from_dict(rate_limit_warning_threshold_response_dict)
+rate_limit_warning_threshold_response_from_dict = RateLimitWarningThresholdResponse.from_dict(rate_limit_warning_threshold_response_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

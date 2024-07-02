@@ -35,7 +35,7 @@ print(DTCMacOS.to_json())
 # convert the object into a dict
 dtc_mac_os_dict = dtc_mac_os_instance.to_dict()
 # create an instance of DTCMacOS from a dict
-dtc_mac_os_form_dict = dtc_mac_os.from_dict(dtc_mac_os_dict)
+dtc_mac_os_from_dict = DTCMacOS.from_dict(dtc_mac_os_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

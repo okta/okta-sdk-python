@@ -25,7 +25,7 @@ print(SimulatePolicyBody.to_json())
 # convert the object into a dict
 simulate_policy_body_dict = simulate_policy_body_instance.to_dict()
 # create an instance of SimulatePolicyBody from a dict
-simulate_policy_body_form_dict = simulate_policy_body.from_dict(simulate_policy_body_dict)
+simulate_policy_body_from_dict = SimulatePolicyBody.from_dict(simulate_policy_body_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

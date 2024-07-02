@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictBool
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.provisioning_action import ProvisioningAction
 from openapi_client.models.provisioning_conditions import ProvisioningConditions
 from openapi_client.models.provisioning_groups import ProvisioningGroups
@@ -31,7 +33,7 @@ class Provisioning(BaseModel):
     action: Optional[ProvisioningAction] = None
     conditions: Optional[ProvisioningConditions] = None
     groups: Optional[ProvisioningGroups] = None
-    profile_master: Optional[StrictBool] = Field(None, alias="profileMaster")
+    profile_master: Optional[StrictBool] = Field(default=None, alias="profileMaster")
     __properties: ClassVar[List[str]] = ["action", "conditions", "groups", "profileMaster"]
 
     model_config = ConfigDict(

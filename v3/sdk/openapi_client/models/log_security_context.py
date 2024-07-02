@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictInt, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,11 +27,11 @@ class LogSecurityContext(BaseModel):
     """
     LogSecurityContext
     """ # noqa: E501
-    as_number: Optional[StrictInt] = Field(None, alias="asNumber")
-    as_org: Optional[StrictStr] = Field(None, alias="asOrg")
+    as_number: Optional[StrictInt] = Field(default=None, alias="asNumber")
+    as_org: Optional[StrictStr] = Field(default=None, alias="asOrg")
     domain: Optional[StrictStr] = None
     isp: Optional[StrictStr] = None
-    is_proxy: Optional[StrictBool] = Field(None, alias="isProxy")
+    is_proxy: Optional[StrictBool] = Field(default=None, alias="isProxy")
     __properties: ClassVar[List[str]] = ["asNumber", "asOrg", "domain", "isp", "isProxy"]
 
     model_config = ConfigDict(

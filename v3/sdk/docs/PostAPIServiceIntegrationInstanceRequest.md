@@ -23,7 +23,7 @@ print(PostAPIServiceIntegrationInstanceRequest.to_json())
 # convert the object into a dict
 post_api_service_integration_instance_request_dict = post_api_service_integration_instance_request_instance.to_dict()
 # create an instance of PostAPIServiceIntegrationInstanceRequest from a dict
-post_api_service_integration_instance_request_form_dict = post_api_service_integration_instance_request.from_dict(post_api_service_integration_instance_request_dict)
+post_api_service_integration_instance_request_from_dict = PostAPIServiceIntegrationInstanceRequest.from_dict(post_api_service_integration_instance_request_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

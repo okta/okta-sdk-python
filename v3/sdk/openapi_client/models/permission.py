@@ -18,6 +18,9 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.permission_links import PermissionLinks
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,11 +29,11 @@ class Permission(BaseModel):
     """
     Permission
     """ # noqa: E501
-    conditions: Optional[Dict[str, Any]] = Field(None, description="Conditions for further restricting a permission")
-    created: Optional[datetime] = Field(None, description="Timestamp when the role was created")
-    label: Optional[StrictStr] = Field(None, description="The permission type")
-    last_updated: Optional[datetime] = Field(None, alias="lastUpdated", description="Timestamp when the role was last updated")
-    links: Optional[PermissionLinks] = Field(None, alias="_links")
+    conditions: Optional[Dict[str, Any]] = Field(default=None, description="Conditions for further restricting a permission")
+    created: Optional[datetime] = Field(default=None, description="Timestamp when the role was created")
+    label: Optional[StrictStr] = Field(default=None, description="The permission type")
+    last_updated: Optional[datetime] = Field(default=None, description="Timestamp when the role was last updated", alias="lastUpdated")
+    links: Optional[PermissionLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["conditions", "created", "label", "lastUpdated", "_links"]
 
     model_config = ConfigDict(

@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,8 +27,8 @@ class NetworkZoneLocation(BaseModel):
     """
     NetworkZoneLocation
     """ # noqa: E501
-    country: Optional[StrictStr] = Field(None, description="Format of the country value: length 2 [ISO-3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code. Do not use continent codes as they are treated as generic codes for undesignated countries.")
-    region: Optional[StrictStr] = Field(None, description="Format of the region value (optional): region code [ISO-3166-2](https://en.wikipedia.org/wiki/ISO_3166-2) appended to country code (`countryCode-regionCode`), or `null` if empty. Do not use continent codes as they are treated as generic codes for undesignated regions.")
+    country: Optional[StrictStr] = Field(default=None, description="Format of the country value: length 2 [ISO-3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code. Do not use continent codes as they are treated as generic codes for undesignated countries.")
+    region: Optional[StrictStr] = Field(default=None, description="Format of the region value (optional): region code [ISO-3166-2](https://en.wikipedia.org/wiki/ISO_3166-2) appended to country code (`countryCode-regionCode`), or `null` if empty. Do not use continent codes as they are treated as generic codes for undesignated regions.")
     __properties: ClassVar[List[str]] = ["country", "region"]
 
     model_config = ConfigDict(

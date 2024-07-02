@@ -24,7 +24,7 @@ print(FCMConfiguration.to_json())
 # convert the object into a dict
 fcm_configuration_dict = fcm_configuration_instance.to_dict()
 # create an instance of FCMConfiguration from a dict
-fcm_configuration_form_dict = fcm_configuration.from_dict(fcm_configuration_dict)
+fcm_configuration_from_dict = FCMConfiguration.from_dict(fcm_configuration_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

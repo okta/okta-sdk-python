@@ -17,11 +17,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from typing_extensions import Annotated
-from pydantic import Field, StrictBool, StrictStr, conlist
-
+from pydantic import Field, StrictBool, StrictStr
 from typing import List, Optional
-
+from typing_extensions import Annotated
 from openapi_client.models.application import Application
 from openapi_client.models.policy import Policy
 from openapi_client.models.policy_mapping import PolicyMapping
@@ -51,7 +49,7 @@ class PolicyApi:
     @validate_call
     def activate_policy(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -121,7 +119,7 @@ class PolicyApi:
     @validate_call
     def activate_policy_with_http_info(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -191,7 +189,7 @@ class PolicyApi:
     @validate_call
     def activate_policy_without_preload_content(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -272,7 +270,7 @@ class PolicyApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -319,8 +317,8 @@ class PolicyApi:
     @validate_call
     def activate_policy_rule(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
-        rule_id: Annotated[StrictStr, Field(..., description="`id` of the Policy Rule")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        rule_id: Annotated[StrictStr, Field(description="`id` of the Policy Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -393,8 +391,8 @@ class PolicyApi:
     @validate_call
     def activate_policy_rule_with_http_info(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
-        rule_id: Annotated[StrictStr, Field(..., description="`id` of the Policy Rule")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        rule_id: Annotated[StrictStr, Field(description="`id` of the Policy Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -467,8 +465,8 @@ class PolicyApi:
     @validate_call
     def activate_policy_rule_without_preload_content(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
-        rule_id: Annotated[StrictStr, Field(..., description="`id` of the Policy Rule")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        rule_id: Annotated[StrictStr, Field(description="`id` of the Policy Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -553,7 +551,7 @@ class PolicyApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -602,7 +600,7 @@ class PolicyApi:
     @validate_call
     def clone_policy(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -673,7 +671,7 @@ class PolicyApi:
     @validate_call
     def clone_policy_with_http_info(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -744,7 +742,7 @@ class PolicyApi:
     @validate_call
     def clone_policy_without_preload_content(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -826,7 +824,7 @@ class PolicyApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1107,7 +1105,7 @@ class PolicyApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1171,7 +1169,7 @@ class PolicyApi:
     @validate_call
     def create_policy_rule(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
         policy_rule: PolicyRule,
         _request_timeout: Union[
             None,
@@ -1246,7 +1244,7 @@ class PolicyApi:
     @validate_call
     def create_policy_rule_with_http_info(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
         policy_rule: PolicyRule,
         _request_timeout: Union[
             None,
@@ -1321,7 +1319,7 @@ class PolicyApi:
     @validate_call
     def create_policy_rule_without_preload_content(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
         policy_rule: PolicyRule,
         _request_timeout: Union[
             None,
@@ -1408,7 +1406,7 @@ class PolicyApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1470,7 +1468,7 @@ class PolicyApi:
     @validate_call
     def create_policy_simulation(
         self,
-        simulate_policy: conlist(SimulatePolicyBody),
+        simulate_policy: List[SimulatePolicyBody],
         expand: Annotated[Optional[StrictStr], Field(description="Use `expand=EVALUATED` to include a list of evaluated but not matched policies and policy rules. Use `expand=RULE` to include details about why a rule condition was (not) matched.")] = None,
         _request_timeout: Union[
             None,
@@ -1544,7 +1542,7 @@ class PolicyApi:
     @validate_call
     def create_policy_simulation_with_http_info(
         self,
-        simulate_policy: conlist(SimulatePolicyBody),
+        simulate_policy: List[SimulatePolicyBody],
         expand: Annotated[Optional[StrictStr], Field(description="Use `expand=EVALUATED` to include a list of evaluated but not matched policies and policy rules. Use `expand=RULE` to include details about why a rule condition was (not) matched.")] = None,
         _request_timeout: Union[
             None,
@@ -1618,7 +1616,7 @@ class PolicyApi:
     @validate_call
     def create_policy_simulation_without_preload_content(
         self,
-        simulate_policy: conlist(SimulatePolicyBody),
+        simulate_policy: List[SimulatePolicyBody],
         expand: Annotated[Optional[StrictStr], Field(description="Use `expand=EVALUATED` to include a list of evaluated but not matched policies and policy rules. Use `expand=RULE` to include details about why a rule condition was (not) matched.")] = None,
         _request_timeout: Union[
             None,
@@ -1705,7 +1703,7 @@ class PolicyApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1769,7 +1767,7 @@ class PolicyApi:
     @validate_call
     def deactivate_policy(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1839,7 +1837,7 @@ class PolicyApi:
     @validate_call
     def deactivate_policy_with_http_info(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1909,7 +1907,7 @@ class PolicyApi:
     @validate_call
     def deactivate_policy_without_preload_content(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1990,7 +1988,7 @@ class PolicyApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2037,8 +2035,8 @@ class PolicyApi:
     @validate_call
     def deactivate_policy_rule(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
-        rule_id: Annotated[StrictStr, Field(..., description="`id` of the Policy Rule")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        rule_id: Annotated[StrictStr, Field(description="`id` of the Policy Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2111,8 +2109,8 @@ class PolicyApi:
     @validate_call
     def deactivate_policy_rule_with_http_info(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
-        rule_id: Annotated[StrictStr, Field(..., description="`id` of the Policy Rule")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        rule_id: Annotated[StrictStr, Field(description="`id` of the Policy Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2185,8 +2183,8 @@ class PolicyApi:
     @validate_call
     def deactivate_policy_rule_without_preload_content(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
-        rule_id: Annotated[StrictStr, Field(..., description="`id` of the Policy Rule")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        rule_id: Annotated[StrictStr, Field(description="`id` of the Policy Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2271,7 +2269,7 @@ class PolicyApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2320,7 +2318,7 @@ class PolicyApi:
     @validate_call
     def delete_policy(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2390,7 +2388,7 @@ class PolicyApi:
     @validate_call
     def delete_policy_with_http_info(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2460,7 +2458,7 @@ class PolicyApi:
     @validate_call
     def delete_policy_without_preload_content(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2541,7 +2539,7 @@ class PolicyApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2588,8 +2586,8 @@ class PolicyApi:
     @validate_call
     def delete_policy_resource_mapping(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
-        mapping_id: Annotated[StrictStr, Field(..., description="`id` of the policy resource Mapping")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        mapping_id: Annotated[StrictStr, Field(description="`id` of the policy resource Mapping")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2662,8 +2660,8 @@ class PolicyApi:
     @validate_call
     def delete_policy_resource_mapping_with_http_info(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
-        mapping_id: Annotated[StrictStr, Field(..., description="`id` of the policy resource Mapping")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        mapping_id: Annotated[StrictStr, Field(description="`id` of the policy resource Mapping")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2736,8 +2734,8 @@ class PolicyApi:
     @validate_call
     def delete_policy_resource_mapping_without_preload_content(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
-        mapping_id: Annotated[StrictStr, Field(..., description="`id` of the policy resource Mapping")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        mapping_id: Annotated[StrictStr, Field(description="`id` of the policy resource Mapping")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2822,7 +2820,7 @@ class PolicyApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2871,8 +2869,8 @@ class PolicyApi:
     @validate_call
     def delete_policy_rule(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
-        rule_id: Annotated[StrictStr, Field(..., description="`id` of the Policy Rule")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        rule_id: Annotated[StrictStr, Field(description="`id` of the Policy Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2945,8 +2943,8 @@ class PolicyApi:
     @validate_call
     def delete_policy_rule_with_http_info(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
-        rule_id: Annotated[StrictStr, Field(..., description="`id` of the Policy Rule")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        rule_id: Annotated[StrictStr, Field(description="`id` of the Policy Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3019,8 +3017,8 @@ class PolicyApi:
     @validate_call
     def delete_policy_rule_without_preload_content(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
-        rule_id: Annotated[StrictStr, Field(..., description="`id` of the Policy Rule")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        rule_id: Annotated[StrictStr, Field(description="`id` of the Policy Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3105,7 +3103,7 @@ class PolicyApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -3154,7 +3152,7 @@ class PolicyApi:
     @validate_call
     def get_policy(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
         expand: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -3228,7 +3226,7 @@ class PolicyApi:
     @validate_call
     def get_policy_with_http_info(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
         expand: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -3302,7 +3300,7 @@ class PolicyApi:
     @validate_call
     def get_policy_without_preload_content(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
         expand: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
@@ -3388,7 +3386,7 @@ class PolicyApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -3439,8 +3437,8 @@ class PolicyApi:
     @validate_call
     def get_policy_mapping(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
-        mapping_id: Annotated[StrictStr, Field(..., description="`id` of the policy resource Mapping")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        mapping_id: Annotated[StrictStr, Field(description="`id` of the policy resource Mapping")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3513,8 +3511,8 @@ class PolicyApi:
     @validate_call
     def get_policy_mapping_with_http_info(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
-        mapping_id: Annotated[StrictStr, Field(..., description="`id` of the policy resource Mapping")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        mapping_id: Annotated[StrictStr, Field(description="`id` of the policy resource Mapping")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3587,8 +3585,8 @@ class PolicyApi:
     @validate_call
     def get_policy_mapping_without_preload_content(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
-        mapping_id: Annotated[StrictStr, Field(..., description="`id` of the policy resource Mapping")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        mapping_id: Annotated[StrictStr, Field(description="`id` of the policy resource Mapping")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3673,7 +3671,7 @@ class PolicyApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -3722,8 +3720,8 @@ class PolicyApi:
     @validate_call
     def get_policy_rule(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
-        rule_id: Annotated[StrictStr, Field(..., description="`id` of the Policy Rule")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        rule_id: Annotated[StrictStr, Field(description="`id` of the Policy Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3796,8 +3794,8 @@ class PolicyApi:
     @validate_call
     def get_policy_rule_with_http_info(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
-        rule_id: Annotated[StrictStr, Field(..., description="`id` of the Policy Rule")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        rule_id: Annotated[StrictStr, Field(description="`id` of the Policy Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3870,8 +3868,8 @@ class PolicyApi:
     @validate_call
     def get_policy_rule_without_preload_content(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
-        rule_id: Annotated[StrictStr, Field(..., description="`id` of the Policy Rule")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        rule_id: Annotated[StrictStr, Field(description="`id` of the Policy Rule")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3956,7 +3954,7 @@ class PolicyApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -4249,7 +4247,7 @@ class PolicyApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -4306,7 +4304,7 @@ class PolicyApi:
     @validate_call
     def list_policy_apps(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4377,7 +4375,7 @@ class PolicyApi:
     @validate_call
     def list_policy_apps_with_http_info(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4448,7 +4446,7 @@ class PolicyApi:
     @validate_call
     def list_policy_apps_without_preload_content(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4530,7 +4528,7 @@ class PolicyApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -4577,7 +4575,7 @@ class PolicyApi:
     @validate_call
     def list_policy_mappings(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4647,7 +4645,7 @@ class PolicyApi:
     @validate_call
     def list_policy_mappings_with_http_info(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4717,7 +4715,7 @@ class PolicyApi:
     @validate_call
     def list_policy_mappings_without_preload_content(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4798,7 +4796,7 @@ class PolicyApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -4845,7 +4843,7 @@ class PolicyApi:
     @validate_call
     def list_policy_rules(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4915,7 +4913,7 @@ class PolicyApi:
     @validate_call
     def list_policy_rules_with_http_info(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4985,7 +4983,7 @@ class PolicyApi:
     @validate_call
     def list_policy_rules_without_preload_content(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -5066,7 +5064,7 @@ class PolicyApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -5113,7 +5111,7 @@ class PolicyApi:
     @validate_call
     def map_resource_to_policy(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
         policy_mapping_request: PolicyMappingRequest,
         _request_timeout: Union[
             None,
@@ -5188,7 +5186,7 @@ class PolicyApi:
     @validate_call
     def map_resource_to_policy_with_http_info(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
         policy_mapping_request: PolicyMappingRequest,
         _request_timeout: Union[
             None,
@@ -5263,7 +5261,7 @@ class PolicyApi:
     @validate_call
     def map_resource_to_policy_without_preload_content(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
         policy_mapping_request: PolicyMappingRequest,
         _request_timeout: Union[
             None,
@@ -5350,7 +5348,7 @@ class PolicyApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -5412,7 +5410,7 @@ class PolicyApi:
     @validate_call
     def replace_policy(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
         policy: Policy,
         _request_timeout: Union[
             None,
@@ -5487,7 +5485,7 @@ class PolicyApi:
     @validate_call
     def replace_policy_with_http_info(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
         policy: Policy,
         _request_timeout: Union[
             None,
@@ -5562,7 +5560,7 @@ class PolicyApi:
     @validate_call
     def replace_policy_without_preload_content(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
         policy: Policy,
         _request_timeout: Union[
             None,
@@ -5649,7 +5647,7 @@ class PolicyApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -5711,8 +5709,8 @@ class PolicyApi:
     @validate_call
     def replace_policy_rule(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
-        rule_id: Annotated[StrictStr, Field(..., description="`id` of the Policy Rule")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        rule_id: Annotated[StrictStr, Field(description="`id` of the Policy Rule")],
         policy_rule: PolicyRule,
         _request_timeout: Union[
             None,
@@ -5790,8 +5788,8 @@ class PolicyApi:
     @validate_call
     def replace_policy_rule_with_http_info(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
-        rule_id: Annotated[StrictStr, Field(..., description="`id` of the Policy Rule")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        rule_id: Annotated[StrictStr, Field(description="`id` of the Policy Rule")],
         policy_rule: PolicyRule,
         _request_timeout: Union[
             None,
@@ -5869,8 +5867,8 @@ class PolicyApi:
     @validate_call
     def replace_policy_rule_without_preload_content(
         self,
-        policy_id: Annotated[StrictStr, Field(..., description="`id` of the Policy")],
-        rule_id: Annotated[StrictStr, Field(..., description="`id` of the Policy Rule")],
+        policy_id: Annotated[StrictStr, Field(description="`id` of the Policy")],
+        rule_id: Annotated[StrictStr, Field(description="`id` of the Policy Rule")],
         policy_rule: PolicyRule,
         _request_timeout: Union[
             None,
@@ -5961,7 +5959,7 @@ class PolicyApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters

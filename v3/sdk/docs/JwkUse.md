@@ -22,7 +22,7 @@ print(JwkUse.to_json())
 # convert the object into a dict
 jwk_use_dict = jwk_use_instance.to_dict()
 # create an instance of JwkUse from a dict
-jwk_use_form_dict = jwk_use.from_dict(jwk_use_dict)
+jwk_use_from_dict = JwkUse.from_dict(jwk_use_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

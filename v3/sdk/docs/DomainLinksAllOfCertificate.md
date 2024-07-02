@@ -26,7 +26,7 @@ print(DomainLinksAllOfCertificate.to_json())
 # convert the object into a dict
 domain_links_all_of_certificate_dict = domain_links_all_of_certificate_instance.to_dict()
 # create an instance of DomainLinksAllOfCertificate from a dict
-domain_links_all_of_certificate_form_dict = domain_links_all_of_certificate.from_dict(domain_links_all_of_certificate_dict)
+domain_links_all_of_certificate_from_dict = DomainLinksAllOfCertificate.from_dict(domain_links_all_of_certificate_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

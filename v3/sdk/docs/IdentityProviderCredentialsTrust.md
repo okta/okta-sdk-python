@@ -26,7 +26,7 @@ print(IdentityProviderCredentialsTrust.to_json())
 # convert the object into a dict
 identity_provider_credentials_trust_dict = identity_provider_credentials_trust_instance.to_dict()
 # create an instance of IdentityProviderCredentialsTrust from a dict
-identity_provider_credentials_trust_form_dict = identity_provider_credentials_trust.from_dict(identity_provider_credentials_trust_dict)
+identity_provider_credentials_trust_from_dict = IdentityProviderCredentialsTrust.from_dict(identity_provider_credentials_trust_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

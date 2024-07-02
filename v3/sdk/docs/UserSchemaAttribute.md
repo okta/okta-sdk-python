@@ -39,7 +39,7 @@ print(UserSchemaAttribute.to_json())
 # convert the object into a dict
 user_schema_attribute_dict = user_schema_attribute_instance.to_dict()
 # create an instance of UserSchemaAttribute from a dict
-user_schema_attribute_form_dict = user_schema_attribute.from_dict(user_schema_attribute_dict)
+user_schema_attribute_from_dict = UserSchemaAttribute.from_dict(user_schema_attribute_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

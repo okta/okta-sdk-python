@@ -27,7 +27,7 @@ print(LogClient.to_json())
 # convert the object into a dict
 log_client_dict = log_client_instance.to_dict()
 # create an instance of LogClient from a dict
-log_client_form_dict = log_client.from_dict(log_client_dict)
+log_client_from_dict = LogClient.from_dict(log_client_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

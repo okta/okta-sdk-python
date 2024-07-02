@@ -24,7 +24,7 @@ print(LogStreamSettingsSplunkPut.to_json())
 # convert the object into a dict
 log_stream_settings_splunk_put_dict = log_stream_settings_splunk_put_instance.to_dict()
 # create an instance of LogStreamSettingsSplunkPut from a dict
-log_stream_settings_splunk_put_form_dict = log_stream_settings_splunk_put.from_dict(log_stream_settings_splunk_put_dict)
+log_stream_settings_splunk_put_from_dict = LogStreamSettingsSplunkPut.from_dict(log_stream_settings_splunk_put_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

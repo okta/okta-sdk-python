@@ -31,7 +31,7 @@ print(Role.to_json())
 # convert the object into a dict
 role_dict = role_instance.to_dict()
 # create an instance of Role from a dict
-role_form_dict = role.from_dict(role_dict)
+role_from_dict = Role.from_dict(role_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

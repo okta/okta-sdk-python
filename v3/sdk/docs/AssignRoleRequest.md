@@ -22,7 +22,7 @@ print(AssignRoleRequest.to_json())
 # convert the object into a dict
 assign_role_request_dict = assign_role_request_instance.to_dict()
 # create an instance of AssignRoleRequest from a dict
-assign_role_request_form_dict = assign_role_request.from_dict(assign_role_request_dict)
+assign_role_request_from_dict = AssignRoleRequest.from_dict(assign_role_request_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

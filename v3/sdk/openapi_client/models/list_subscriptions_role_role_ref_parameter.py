@@ -16,8 +16,10 @@
 from __future__ import annotations
 import json
 import pprint
+from pydantic import BaseModel, ConfigDict, Field, StrictStr, ValidationError, field_validator
+from typing import Any, List, Optional
 from pydantic import StrictStr, Field
-from typing import Union, List, Optional, Dict
+from typing import Union, List, Set, Optional, Dict
 from typing_extensions import Literal, Self
 
 LISTSUBSCRIPTIONSROLEROLEREFPARAMETER_ONE_OF_SCHEMAS = ["RoleType", "str"]
@@ -31,7 +33,7 @@ class ListSubscriptionsRoleRoleRefParameter(BaseModel):
     # data type: str
     oneof_schema_2_validator: Optional[StrictStr] = None
     actual_instance: Optional[Union[RoleType, str]] = None
-    one_of_schemas: List[str] = Field(default=Literal["RoleType", "str"])
+    one_of_schemas: Set[str] = { "RoleType", "str" }
 
     model_config = ConfigDict(
         validate_assignment=True,

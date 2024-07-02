@@ -28,7 +28,7 @@ print(APIServiceIntegrationInstanceSecret.to_json())
 # convert the object into a dict
 api_service_integration_instance_secret_dict = api_service_integration_instance_secret_instance.to_dict()
 # create an instance of APIServiceIntegrationInstanceSecret from a dict
-api_service_integration_instance_secret_form_dict = api_service_integration_instance_secret.from_dict(api_service_integration_instance_secret_dict)
+api_service_integration_instance_secret_from_dict = APIServiceIntegrationInstanceSecret.from_dict(api_service_integration_instance_secret_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

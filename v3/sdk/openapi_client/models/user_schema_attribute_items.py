@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.user_schema_attribute_enum import UserSchemaAttributeEnum
 from typing import Optional, Set
 from typing_extensions import Self
@@ -26,8 +28,8 @@ class UserSchemaAttributeItems(BaseModel):
     """
     UserSchemaAttributeItems
     """ # noqa: E501
-    enum: Optional[conlist(StrictStr)] = None
-    one_of: Optional[conlist(UserSchemaAttributeEnum)] = Field(None, alias="oneOf")
+    enum: Optional[List[StrictStr]] = None
+    one_of: Optional[List[UserSchemaAttributeEnum]] = Field(default=None, alias="oneOf")
     type: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["enum", "oneOf", "type"]
 

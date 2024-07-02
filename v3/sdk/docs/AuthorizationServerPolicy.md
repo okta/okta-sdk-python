@@ -22,7 +22,7 @@ print(AuthorizationServerPolicy.to_json())
 # convert the object into a dict
 authorization_server_policy_dict = authorization_server_policy_instance.to_dict()
 # create an instance of AuthorizationServerPolicy from a dict
-authorization_server_policy_form_dict = authorization_server_policy.from_dict(authorization_server_policy_dict)
+authorization_server_policy_from_dict = AuthorizationServerPolicy.from_dict(authorization_server_policy_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -23,7 +23,7 @@ print(IdentityProviderPolicyRuleCondition.to_json())
 # convert the object into a dict
 identity_provider_policy_rule_condition_dict = identity_provider_policy_rule_condition_instance.to_dict()
 # create an instance of IdentityProviderPolicyRuleCondition from a dict
-identity_provider_policy_rule_condition_form_dict = identity_provider_policy_rule_condition.from_dict(identity_provider_policy_rule_condition_dict)
+identity_provider_policy_rule_condition_from_dict = IdentityProviderPolicyRuleCondition.from_dict(identity_provider_policy_rule_condition_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

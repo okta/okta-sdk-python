@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,8 +27,8 @@ class EmailContent(BaseModel):
     """
     EmailContent
     """ # noqa: E501
-    body: StrictStr = Field(..., description="The email's HTML body. May contain [variable references](https://velocity.apache.org/engine/1.7/user-guide.html#references).")
-    subject: StrictStr = Field(..., description="The email's subject. May contain [variable references](https://velocity.apache.org/engine/1.7/user-guide.html#references).")
+    body: StrictStr = Field(description="The email's HTML body. May contain [variable references](https://velocity.apache.org/engine/1.7/user-guide.html#references).")
+    subject: StrictStr = Field(description="The email's subject. May contain [variable references](https://velocity.apache.org/engine/1.7/user-guide.html#references).")
     __properties: ClassVar[List[str]] = ["body", "subject"]
 
     model_config = ConfigDict(

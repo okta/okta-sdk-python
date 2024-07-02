@@ -25,7 +25,7 @@ print(LinkedObjectDetails.to_json())
 # convert the object into a dict
 linked_object_details_dict = linked_object_details_instance.to_dict()
 # create an instance of LinkedObjectDetails from a dict
-linked_object_details_form_dict = linked_object_details.from_dict(linked_object_details_dict)
+linked_object_details_from_dict = LinkedObjectDetails.from_dict(linked_object_details_dict)
 ```
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

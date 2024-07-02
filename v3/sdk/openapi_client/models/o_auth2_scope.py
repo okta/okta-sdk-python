@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictBool, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from openapi_client.models.o_auth2_scope_consent_type import OAuth2ScopeConsentType
 from openapi_client.models.o_auth2_scope_metadata_publish import OAuth2ScopeMetadataPublish
 from typing import Optional, Set
@@ -30,9 +32,9 @@ class OAuth2Scope(BaseModel):
     consent: Optional[OAuth2ScopeConsentType] = None
     default: Optional[StrictBool] = None
     description: Optional[StrictStr] = None
-    display_name: Optional[StrictStr] = Field(None, alias="displayName")
+    display_name: Optional[StrictStr] = Field(default=None, alias="displayName")
     id: Optional[StrictStr] = None
-    metadata_publish: Optional[OAuth2ScopeMetadataPublish] = Field(None, alias="metadataPublish")
+    metadata_publish: Optional[OAuth2ScopeMetadataPublish] = Field(default=None, alias="metadataPublish")
     name: Optional[StrictStr] = None
     system: Optional[StrictBool] = None
     __properties: ClassVar[List[str]] = ["consent", "default", "description", "displayName", "id", "metadataPublish", "name", "system"]

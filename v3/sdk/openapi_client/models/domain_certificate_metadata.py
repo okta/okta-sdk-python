@@ -18,6 +18,8 @@ import pprint
 import re  # noqa: F401
 import json
 
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -25,9 +27,9 @@ class DomainCertificateMetadata(BaseModel):
     """
     Certificate metadata for the domain
     """ # noqa: E501
-    expiration: Optional[StrictStr] = Field(None, description="Certificate expiration")
-    fingerprint: Optional[StrictStr] = Field(None, description="Certificate fingerprint")
-    subject: Optional[StrictStr] = Field(None, description="Certificate subject")
+    expiration: Optional[StrictStr] = Field(default=None, description="Certificate expiration")
+    fingerprint: Optional[StrictStr] = Field(default=None, description="Certificate fingerprint")
+    subject: Optional[StrictStr] = Field(default=None, description="Certificate subject")
     __properties: ClassVar[List[str]] = ["expiration", "fingerprint", "subject"]
 
     model_config = ConfigDict(

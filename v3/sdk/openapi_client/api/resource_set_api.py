@@ -17,11 +17,9 @@ from pydantic import validate_call, Field, StrictFloat, StrictStr, StrictInt
 from typing import Any, Dict, List, Optional, Tuple, Union
 from typing_extensions import Annotated
 
-from typing_extensions import Annotated
 from pydantic import Field, StrictStr
-
 from typing import Optional
-
+from typing_extensions import Annotated
 from openapi_client.models.create_resource_set_request import CreateResourceSetRequest
 from openapi_client.models.resource_set import ResourceSet
 from openapi_client.models.resource_set_binding_add_members_request import ResourceSetBindingAddMembersRequest
@@ -55,8 +53,8 @@ class ResourceSetApi:
     @validate_call
     def add_members_to_binding(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
         instance: ResourceSetBindingAddMembersRequest,
         _request_timeout: Union[
             None,
@@ -134,8 +132,8 @@ class ResourceSetApi:
     @validate_call
     def add_members_to_binding_with_http_info(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
         instance: ResourceSetBindingAddMembersRequest,
         _request_timeout: Union[
             None,
@@ -213,8 +211,8 @@ class ResourceSetApi:
     @validate_call
     def add_members_to_binding_without_preload_content(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
         instance: ResourceSetBindingAddMembersRequest,
         _request_timeout: Union[
             None,
@@ -305,7 +303,7 @@ class ResourceSetApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -369,7 +367,7 @@ class ResourceSetApi:
     @validate_call
     def add_resource_set_resource(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
         instance: ResourceSetResourcePatchRequest,
         _request_timeout: Union[
             None,
@@ -444,7 +442,7 @@ class ResourceSetApi:
     @validate_call
     def add_resource_set_resource_with_http_info(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
         instance: ResourceSetResourcePatchRequest,
         _request_timeout: Union[
             None,
@@ -519,7 +517,7 @@ class ResourceSetApi:
     @validate_call
     def add_resource_set_resource_without_preload_content(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
         instance: ResourceSetResourcePatchRequest,
         _request_timeout: Union[
             None,
@@ -606,7 +604,7 @@ class ResourceSetApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -889,7 +887,7 @@ class ResourceSetApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -949,7 +947,7 @@ class ResourceSetApi:
     @validate_call
     def create_resource_set_binding(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
         instance: ResourceSetBindingCreateRequest,
         _request_timeout: Union[
             None,
@@ -1024,7 +1022,7 @@ class ResourceSetApi:
     @validate_call
     def create_resource_set_binding_with_http_info(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
         instance: ResourceSetBindingCreateRequest,
         _request_timeout: Union[
             None,
@@ -1099,7 +1097,7 @@ class ResourceSetApi:
     @validate_call
     def create_resource_set_binding_without_preload_content(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
         instance: ResourceSetBindingCreateRequest,
         _request_timeout: Union[
             None,
@@ -1186,7 +1184,7 @@ class ResourceSetApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1248,8 +1246,8 @@ class ResourceSetApi:
     @validate_call
     def delete_binding(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1322,8 +1320,8 @@ class ResourceSetApi:
     @validate_call
     def delete_binding_with_http_info(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1396,8 +1394,8 @@ class ResourceSetApi:
     @validate_call
     def delete_binding_without_preload_content(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1482,7 +1480,7 @@ class ResourceSetApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1531,7 +1529,7 @@ class ResourceSetApi:
     @validate_call
     def delete_resource_set(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1601,7 +1599,7 @@ class ResourceSetApi:
     @validate_call
     def delete_resource_set_with_http_info(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1671,7 +1669,7 @@ class ResourceSetApi:
     @validate_call
     def delete_resource_set_without_preload_content(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1752,7 +1750,7 @@ class ResourceSetApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -1799,8 +1797,8 @@ class ResourceSetApi:
     @validate_call
     def delete_resource_set_resource(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
-        resource_id: Annotated[StrictStr, Field(..., description="`id` of a resource")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
+        resource_id: Annotated[StrictStr, Field(description="`id` of a resource")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1873,8 +1871,8 @@ class ResourceSetApi:
     @validate_call
     def delete_resource_set_resource_with_http_info(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
-        resource_id: Annotated[StrictStr, Field(..., description="`id` of a resource")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
+        resource_id: Annotated[StrictStr, Field(description="`id` of a resource")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -1947,8 +1945,8 @@ class ResourceSetApi:
     @validate_call
     def delete_resource_set_resource_without_preload_content(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
-        resource_id: Annotated[StrictStr, Field(..., description="`id` of a resource")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
+        resource_id: Annotated[StrictStr, Field(description="`id` of a resource")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2033,7 +2031,7 @@ class ResourceSetApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2082,8 +2080,8 @@ class ResourceSetApi:
     @validate_call
     def get_binding(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2156,8 +2154,8 @@ class ResourceSetApi:
     @validate_call
     def get_binding_with_http_info(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2230,8 +2228,8 @@ class ResourceSetApi:
     @validate_call
     def get_binding_without_preload_content(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2316,7 +2314,7 @@ class ResourceSetApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2365,9 +2363,9 @@ class ResourceSetApi:
     @validate_call
     def get_member_of_binding(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
-        member_id: Annotated[StrictStr, Field(..., description="`id` of a member")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
+        member_id: Annotated[StrictStr, Field(description="`id` of a member")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2443,9 +2441,9 @@ class ResourceSetApi:
     @validate_call
     def get_member_of_binding_with_http_info(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
-        member_id: Annotated[StrictStr, Field(..., description="`id` of a member")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
+        member_id: Annotated[StrictStr, Field(description="`id` of a member")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2521,9 +2519,9 @@ class ResourceSetApi:
     @validate_call
     def get_member_of_binding_without_preload_content(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
-        member_id: Annotated[StrictStr, Field(..., description="`id` of a member")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
+        member_id: Annotated[StrictStr, Field(description="`id` of a member")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2612,7 +2610,7 @@ class ResourceSetApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2663,7 +2661,7 @@ class ResourceSetApi:
     @validate_call
     def get_resource_set(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2733,7 +2731,7 @@ class ResourceSetApi:
     @validate_call
     def get_resource_set_with_http_info(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2803,7 +2801,7 @@ class ResourceSetApi:
     @validate_call
     def get_resource_set_without_preload_content(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -2884,7 +2882,7 @@ class ResourceSetApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -2931,7 +2929,7 @@ class ResourceSetApi:
     @validate_call
     def list_bindings(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
         after: Annotated[Optional[StrictStr], Field(description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information.")] = None,
         _request_timeout: Union[
             None,
@@ -3005,7 +3003,7 @@ class ResourceSetApi:
     @validate_call
     def list_bindings_with_http_info(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
         after: Annotated[Optional[StrictStr], Field(description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information.")] = None,
         _request_timeout: Union[
             None,
@@ -3079,7 +3077,7 @@ class ResourceSetApi:
     @validate_call
     def list_bindings_without_preload_content(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
         after: Annotated[Optional[StrictStr], Field(description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information.")] = None,
         _request_timeout: Union[
             None,
@@ -3165,7 +3163,7 @@ class ResourceSetApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -3216,8 +3214,8 @@ class ResourceSetApi:
     @validate_call
     def list_members_of_binding(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
         after: Annotated[Optional[StrictStr], Field(description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information.")] = None,
         _request_timeout: Union[
             None,
@@ -3294,8 +3292,8 @@ class ResourceSetApi:
     @validate_call
     def list_members_of_binding_with_http_info(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
         after: Annotated[Optional[StrictStr], Field(description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information.")] = None,
         _request_timeout: Union[
             None,
@@ -3372,8 +3370,8 @@ class ResourceSetApi:
     @validate_call
     def list_members_of_binding_without_preload_content(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
         after: Annotated[Optional[StrictStr], Field(description="The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information.")] = None,
         _request_timeout: Union[
             None,
@@ -3463,7 +3461,7 @@ class ResourceSetApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -3516,7 +3514,7 @@ class ResourceSetApi:
     @validate_call
     def list_resource_set_resources(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3586,7 +3584,7 @@ class ResourceSetApi:
     @validate_call
     def list_resource_set_resources_with_http_info(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3656,7 +3654,7 @@ class ResourceSetApi:
     @validate_call
     def list_resource_set_resources_without_preload_content(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -3737,7 +3735,7 @@ class ResourceSetApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -4002,7 +4000,7 @@ class ResourceSetApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -4051,7 +4049,7 @@ class ResourceSetApi:
     @validate_call
     def replace_resource_set(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
         instance: ResourceSet,
         _request_timeout: Union[
             None,
@@ -4126,7 +4124,7 @@ class ResourceSetApi:
     @validate_call
     def replace_resource_set_with_http_info(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
         instance: ResourceSet,
         _request_timeout: Union[
             None,
@@ -4201,7 +4199,7 @@ class ResourceSetApi:
     @validate_call
     def replace_resource_set_without_preload_content(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
         instance: ResourceSet,
         _request_timeout: Union[
             None,
@@ -4288,7 +4286,7 @@ class ResourceSetApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters
@@ -4350,9 +4348,9 @@ class ResourceSetApi:
     @validate_call
     def unassign_member_from_binding(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
-        member_id: Annotated[StrictStr, Field(..., description="`id` of a member")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
+        member_id: Annotated[StrictStr, Field(description="`id` of a member")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4428,9 +4426,9 @@ class ResourceSetApi:
     @validate_call
     def unassign_member_from_binding_with_http_info(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
-        member_id: Annotated[StrictStr, Field(..., description="`id` of a member")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
+        member_id: Annotated[StrictStr, Field(description="`id` of a member")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4506,9 +4504,9 @@ class ResourceSetApi:
     @validate_call
     def unassign_member_from_binding_without_preload_content(
         self,
-        resource_set_id: Annotated[StrictStr, Field(..., description="`id` of a Resource Set")],
-        role_id_or_label: Annotated[StrictStr, Field(..., description="`id` or `label` of the role")],
-        member_id: Annotated[StrictStr, Field(..., description="`id` of a member")],
+        resource_set_id: Annotated[StrictStr, Field(description="`id` of a Resource Set")],
+        role_id_or_label: Annotated[StrictStr, Field(description="`id` or `label` of the role")],
+        member_id: Annotated[StrictStr, Field(description="`id` of a member")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -4597,7 +4595,7 @@ class ResourceSetApi:
         _query_params: List[Tuple[str, str]] = []
         _header_params: Dict[str, Optional[str]] = _headers or {}
         _form_params: List[Tuple[str, str]] = []
-        _files: Dict[str, str] = {}
+        _files: Dict[str, Union[str, bytes]] = {}
         _body_params: Optional[bytes] = None
 
         # process the path parameters

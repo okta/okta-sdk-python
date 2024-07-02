@@ -18,6 +18,10 @@ import pprint
 import re  # noqa: F401
 import json
 
+from datetime import datetime
+from importlib import import_module
+from pydantic import BaseModel, ConfigDict, Field, StrictStr
+from typing import Any, ClassVar, Dict, List, Optional, Union
 from openapi_client.models.application_accessibility import ApplicationAccessibility
 from openapi_client.models.application_licensing import ApplicationLicensing
 from openapi_client.models.application_lifecycle_status import ApplicationLifecycleStatus
@@ -45,17 +49,17 @@ class Application(BaseModel):
     """ # noqa: E501
     accessibility: Optional[ApplicationAccessibility] = None
     created: Optional[datetime] = None
-    features: Optional[conlist(StrictStr)] = None
+    features: Optional[List[StrictStr]] = None
     id: Optional[StrictStr] = None
     label: Optional[StrictStr] = None
-    last_updated: Optional[datetime] = Field(None, alias="lastUpdated")
+    last_updated: Optional[datetime] = Field(default=None, alias="lastUpdated")
     licensing: Optional[ApplicationLicensing] = None
     profile: Optional[Dict[str, Dict[str, Any]]] = None
-    sign_on_mode: Optional[ApplicationSignOnMode] = Field(None, alias="signOnMode")
+    sign_on_mode: Optional[ApplicationSignOnMode] = Field(default=None, alias="signOnMode")
     status: Optional[ApplicationLifecycleStatus] = None
     visibility: Optional[ApplicationVisibility] = None
-    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(None, alias="_embedded")
-    links: Optional[ApplicationLinks] = Field(None, alias="_links")
+    embedded: Optional[Dict[str, Dict[str, Any]]] = Field(default=None, alias="_embedded")
+    links: Optional[ApplicationLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["accessibility", "created", "features", "id", "label", "lastUpdated", "licensing", "profile", "signOnMode", "status", "visibility", "_embedded", "_links"]
 
     model_config = ConfigDict(
@@ -141,23 +145,23 @@ class Application(BaseModel):
         """Create an instance of Application from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
-        if object_type ==  'AUTO_LOGIN':
+        if object_type ==  'AutoLoginApplication':
             return import_module("openapi_client.models.auto_login_application").AutoLoginApplication.from_dict(obj)
-        if object_type ==  'BASIC_AUTH':
+        if object_type ==  'BasicAuthApplication':
             return import_module("openapi_client.models.basic_auth_application").BasicAuthApplication.from_dict(obj)
-        if object_type ==  'BOOKMARK':
+        if object_type ==  'BookmarkApplication':
             return import_module("openapi_client.models.bookmark_application").BookmarkApplication.from_dict(obj)
-        if object_type ==  'BROWSER_PLUGIN':
+        if object_type ==  'BrowserPluginApplication':
             return import_module("openapi_client.models.browser_plugin_application").BrowserPluginApplication.from_dict(obj)
-        if object_type ==  'OPENID_CONNECT':
+        if object_type ==  'OpenIdConnectApplication':
             return import_module("openapi_client.models.open_id_connect_application").OpenIdConnectApplication.from_dict(obj)
-        if object_type ==  'SAML_1_1':
+        if object_type ==  'SamlApplication':
             return import_module("openapi_client.models.saml_application").SamlApplication.from_dict(obj)
-        if object_type ==  'SAML_2_0':
+        if object_type ==  'SamlApplication':
             return import_module("openapi_client.models.saml_application").SamlApplication.from_dict(obj)
-        if object_type ==  'SECURE_PASSWORD_STORE':
+        if object_type ==  'SecurePasswordStoreApplication':
             return import_module("openapi_client.models.secure_password_store_application").SecurePasswordStoreApplication.from_dict(obj)
-        if object_type ==  'WS_FEDERATION':
+        if object_type ==  'WsFederationApplication':
             return import_module("openapi_client.models.ws_federation_application").WsFederationApplication.from_dict(obj)
 
         raise ValueError("Application failed to lookup discriminator value from " +
