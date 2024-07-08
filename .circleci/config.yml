@@ -3,6 +3,7 @@ version: 2.1
 
 orbs:
   python: circleci/python@2.1.1
+  platform-helpers-general: okta/general-platform-helpers@1.8
 
 jobs:
   build_and_test:
@@ -20,7 +21,23 @@ jobs:
       - run:
           name: Run Integration Tests
           command: pytest tests/integration
+  snyk-scan:
+    docker:
+      - image: cimg/python:3.10
+    steps:
+      - attach_workspace: # Allows for sharing of build-workspace (containing downloaded dependencies) (optional)
+          at: ~/project # This is the working directory for CCI containers, change if necessary
+      - checkout # Might not need this if you have "persist_to_workspace" and "attach_workspace"
+      - run: |   # Might not need this if you have "persist_to_workspace" and "attach_workspace"
+          pip install -r requirements.txt
+      - platform-helpers-general/step-run-snyk-monitor:
+          scan-all-projects: true
+          skip-unresolved: false
 workflows:
   "Circle CI Tests":
     jobs:
       - build_and_test
+      - snyk-scan:
+          context:
+            - static-analysis
+          name: execute-snyk
