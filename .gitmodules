@@ -1,0 +1,3 @@
+[submodule "submodules/okta-management-openapi-spec"]
+	path = submodules/okta-management-openapi-spec
+	url = https://github.com/okta/okta-management-openapi-spec.git
