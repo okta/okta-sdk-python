@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.platform_condition_evaluator_platform import PlatformConditionEvaluatorPlatform
+from okta.models.platform_condition_evaluator_platform import PlatformConditionEvaluatorPlatform
 
 # TODO update the JSON string below
 json = "{}"

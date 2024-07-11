@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.user_type_put_request import UserTypePutRequest
+from okta.models.user_type_put_request import UserTypePutRequest
 
 # TODO update the JSON string below
 json = "{}"

@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.log_stream_activate_link import LogStreamActivateLink
+from okta.models.log_stream_activate_link import LogStreamActivateLink
 
 # TODO update the JSON string below
 json = "{}"

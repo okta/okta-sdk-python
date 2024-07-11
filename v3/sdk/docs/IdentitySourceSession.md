@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.identity_source_session import IdentitySourceSession
+from okta.models.identity_source_session import IdentitySourceSession
 
 # TODO update the JSON string below
 json = "{}"

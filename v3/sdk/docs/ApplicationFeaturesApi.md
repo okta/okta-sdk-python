@@ -1,4 +1,4 @@
-# openapi_client.ApplicationFeaturesApi
+# okta.ApplicationFeaturesApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -22,14 +22,14 @@ Retrieves a Feature object for an application
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.application_feature import ApplicationFeature
-from openapi_client.rest import ApiException
+import okta
+from okta.models.application_feature import ApplicationFeature
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -47,9 +47,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApplicationFeaturesApi(api_client)
+    api_instance = okta.ApplicationFeaturesApi(api_client)
     app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
     feature_name = 'USER_PROVISIONING' # str | Name of the Feature
 
@@ -109,14 +109,14 @@ Lists all features for an application > **Note:** The only application feature c
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.application_feature import ApplicationFeature
-from openapi_client.rest import ApiException
+import okta
+from okta.models.application_feature import ApplicationFeature
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -134,9 +134,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApplicationFeaturesApi(api_client)
+    api_instance = okta.ApplicationFeaturesApi(api_client)
     app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
 
     try:
@@ -195,15 +195,15 @@ Updates a Feature object for an application > **Note:** This endpoint supports p
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.application_feature import ApplicationFeature
-from openapi_client.models.capabilities_object import CapabilitiesObject
-from openapi_client.rest import ApiException
+import okta
+from okta.models.application_feature import ApplicationFeature
+from okta.models.capabilities_object import CapabilitiesObject
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -221,12 +221,12 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApplicationFeaturesApi(api_client)
+    api_instance = okta.ApplicationFeaturesApi(api_client)
     app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
     feature_name = 'USER_PROVISIONING' # str | Name of the Feature
-    capabilities_object = openapi_client.CapabilitiesObject() # CapabilitiesObject | 
+    capabilities_object = okta.CapabilitiesObject() # CapabilitiesObject | 
 
     try:
         # Update a Feature

@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.agent import Agent
+from okta.models.agent import Agent
 
 # TODO update the JSON string below
 json = "{}"

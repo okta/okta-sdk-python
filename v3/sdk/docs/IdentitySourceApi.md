@@ -1,4 +1,4 @@
-# openapi_client.IdentitySourceApi
+# okta.IdentitySourceApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -26,14 +26,14 @@ Creates an identity source session for the given identity source instance
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.identity_source_session import IdentitySourceSession
-from openapi_client.rest import ApiException
+import okta
+from okta.models.identity_source_session import IdentitySourceSession
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -51,9 +51,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IdentitySourceApi(api_client)
+    api_instance = okta.IdentitySourceApi(api_client)
     identity_source_id = 'identity_source_id_example' # str | 
 
     try:
@@ -111,13 +111,13 @@ Deletes an identity source session for a given `identitySourceId` and `sessionId
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -135,9 +135,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IdentitySourceApi(api_client)
+    api_instance = okta.IdentitySourceApi(api_client)
     identity_source_id = 'identity_source_id_example' # str | 
     session_id = 'session_id_example' # str | 
 
@@ -195,14 +195,14 @@ Retrieves an identity source session for a given identity source id and session 
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.identity_source_session import IdentitySourceSession
-from openapi_client.rest import ApiException
+import okta
+from okta.models.identity_source_session import IdentitySourceSession
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -220,9 +220,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IdentitySourceApi(api_client)
+    api_instance = okta.IdentitySourceApi(api_client)
     identity_source_id = 'identity_source_id_example' # str | 
     session_id = 'session_id_example' # str | 
 
@@ -282,14 +282,14 @@ Lists all identity source sessions for the given identity source instance
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.identity_source_session import IdentitySourceSession
-from openapi_client.rest import ApiException
+import okta
+from okta.models.identity_source_session import IdentitySourceSession
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -307,9 +307,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IdentitySourceApi(api_client)
+    api_instance = okta.IdentitySourceApi(api_client)
     identity_source_id = 'identity_source_id_example' # str | 
 
     try:
@@ -367,14 +367,14 @@ Starts the import from the identity source described by the uploaded bulk operat
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.identity_source_session import IdentitySourceSession
-from openapi_client.rest import ApiException
+import okta
+from okta.models.identity_source_session import IdentitySourceSession
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -392,9 +392,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IdentitySourceApi(api_client)
+    api_instance = okta.IdentitySourceApi(api_client)
     identity_source_id = 'identity_source_id_example' # str | 
     session_id = 'session_id_example' # str | 
 
@@ -454,14 +454,14 @@ Uploads entities that need to be deleted in Okta from the identity source for th
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.bulk_delete_request_body import BulkDeleteRequestBody
-from openapi_client.rest import ApiException
+import okta
+from okta.models.bulk_delete_request_body import BulkDeleteRequestBody
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -479,12 +479,12 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IdentitySourceApi(api_client)
+    api_instance = okta.IdentitySourceApi(api_client)
     identity_source_id = 'identity_source_id_example' # str | 
     session_id = 'session_id_example' # str | 
-    bulk_delete_request_body = openapi_client.BulkDeleteRequestBody() # BulkDeleteRequestBody |  (optional)
+    bulk_delete_request_body = okta.BulkDeleteRequestBody() # BulkDeleteRequestBody |  (optional)
 
     try:
         # Upload the data to be deleted in Okta
@@ -542,14 +542,14 @@ Uploads entities that need to be upserted in Okta from the identity source for t
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.bulk_upsert_request_body import BulkUpsertRequestBody
-from openapi_client.rest import ApiException
+import okta
+from okta.models.bulk_upsert_request_body import BulkUpsertRequestBody
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -567,12 +567,12 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IdentitySourceApi(api_client)
+    api_instance = okta.IdentitySourceApi(api_client)
     identity_source_id = 'identity_source_id_example' # str | 
     session_id = 'session_id_example' # str | 
-    bulk_upsert_request_body = openapi_client.BulkUpsertRequestBody() # BulkUpsertRequestBody |  (optional)
+    bulk_upsert_request_body = okta.BulkUpsertRequestBody() # BulkUpsertRequestBody |  (optional)
 
     try:
         # Upload the data to be upserted in Okta

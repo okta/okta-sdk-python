@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.rate_limit_warning_threshold_response import RateLimitWarningThresholdResponse
+from okta.models.rate_limit_warning_threshold_response import RateLimitWarningThresholdResponse
 
 # TODO update the JSON string below
 json = "{}"

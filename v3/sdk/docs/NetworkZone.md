@@ -23,7 +23,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.network_zone import NetworkZone
+from okta.models.network_zone import NetworkZone
 
 # TODO update the JSON string below
 json = "{}"

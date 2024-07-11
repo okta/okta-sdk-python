@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.activate_factor_request import ActivateFactorRequest
+from okta.models.activate_factor_request import ActivateFactorRequest
 
 # TODO update the JSON string below
 json = "{}"

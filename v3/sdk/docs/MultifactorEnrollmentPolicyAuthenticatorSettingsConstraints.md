@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.multifactor_enrollment_policy_authenticator_settings_constraints import MultifactorEnrollmentPolicyAuthenticatorSettingsConstraints
+from okta.models.multifactor_enrollment_policy_authenticator_settings_constraints import MultifactorEnrollmentPolicyAuthenticatorSettingsConstraints
 
 # TODO update the JSON string below
 json = "{}"

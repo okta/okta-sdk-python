@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.swa_application_settings import SwaApplicationSettings
+from okta.models.swa_application_settings import SwaApplicationSettings
 
 # TODO update the JSON string below
 json = "{}"

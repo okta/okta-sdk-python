@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.verification_method import VerificationMethod
+from okta.models.verification_method import VerificationMethod
 
 # TODO update the JSON string below
 json = "{}"

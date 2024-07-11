@@ -1,4 +1,4 @@
-# openapi_client.CustomDomainApi
+# okta.CustomDomainApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -25,13 +25,13 @@ Deletes a custom domain by `domainId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -49,9 +49,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomDomainApi(api_client)
+    api_instance = okta.CustomDomainApi(api_client)
     domain_id = 'OmWNeywfTzElSLOBMZsL' # str | `id` of the Domain
 
     try:
@@ -107,14 +107,14 @@ Retrieves a custom domain by `domainId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.domain_response import DomainResponse
-from openapi_client.rest import ApiException
+import okta
+from okta.models.domain_response import DomainResponse
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -132,9 +132,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomDomainApi(api_client)
+    api_instance = okta.CustomDomainApi(api_client)
     domain_id = 'OmWNeywfTzElSLOBMZsL' # str | `id` of the Domain
 
     try:
@@ -192,14 +192,14 @@ Lists all verified custom domains for the org
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.domain_list_response import DomainListResponse
-from openapi_client.rest import ApiException
+import okta
+from okta.models.domain_list_response import DomainListResponse
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -217,9 +217,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomDomainApi(api_client)
+    api_instance = okta.CustomDomainApi(api_client)
 
     try:
         # List all Custom Domains
@@ -272,15 +272,15 @@ Replaces a custom domain's brand
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.domain_response import DomainResponse
-from openapi_client.models.update_domain import UpdateDomain
-from openapi_client.rest import ApiException
+import okta
+from okta.models.domain_response import DomainResponse
+from okta.models.update_domain import UpdateDomain
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -298,11 +298,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomDomainApi(api_client)
+    api_instance = okta.CustomDomainApi(api_client)
     domain_id = 'OmWNeywfTzElSLOBMZsL' # str | `id` of the Domain
-    update_domain = openapi_client.UpdateDomain() # UpdateDomain | 
+    update_domain = okta.UpdateDomain() # UpdateDomain | 
 
     try:
         # Replace a Custom Domain's Brand
@@ -361,14 +361,14 @@ Upserts (creates or renews) the `MANUAL` certificate for the custom domain. If t
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.domain_certificate import DomainCertificate
-from openapi_client.rest import ApiException
+import okta
+from okta.models.domain_certificate import DomainCertificate
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -386,11 +386,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomDomainApi(api_client)
+    api_instance = okta.CustomDomainApi(api_client)
     domain_id = 'OmWNeywfTzElSLOBMZsL' # str | `id` of the Domain
-    certificate = openapi_client.DomainCertificate() # DomainCertificate | 
+    certificate = okta.DomainCertificate() # DomainCertificate | 
 
     try:
         # Upsert the Custom Domain's Certificate
@@ -447,14 +447,14 @@ Verifies the custom domain and validity of DNS records by `domainId`. Furthermor
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.domain_response import DomainResponse
-from openapi_client.rest import ApiException
+import okta
+from okta.models.domain_response import DomainResponse
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -472,9 +472,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomDomainApi(api_client)
+    api_instance = okta.CustomDomainApi(api_client)
     domain_id = 'OmWNeywfTzElSLOBMZsL' # str | `id` of the Domain
 
     try:

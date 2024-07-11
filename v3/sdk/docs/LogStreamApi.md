@@ -1,4 +1,4 @@
-# openapi_client.LogStreamApi
+# okta.LogStreamApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -26,14 +26,14 @@ Activates a log stream by `logStreamId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.log_stream import LogStream
-from openapi_client.rest import ApiException
+import okta
+from okta.models.log_stream import LogStream
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -51,9 +51,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.LogStreamApi(api_client)
+    api_instance = okta.LogStreamApi(api_client)
     log_stream_id = '0oa1orzg0CHSgPcjZ0g4' # str | Unique identifier for the Log Stream
 
     try:
@@ -111,14 +111,14 @@ Creates a new Log Stream object
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.log_stream import LogStream
-from openapi_client.rest import ApiException
+import okta
+from okta.models.log_stream import LogStream
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -136,10 +136,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.LogStreamApi(api_client)
-    instance = openapi_client.LogStream() # LogStream | 
+    api_instance = okta.LogStreamApi(api_client)
+    instance = okta.LogStream() # LogStream | 
 
     try:
         # Create a Log Stream
@@ -196,14 +196,14 @@ Deactivates a log stream by `logStreamId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.log_stream import LogStream
-from openapi_client.rest import ApiException
+import okta
+from okta.models.log_stream import LogStream
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -221,9 +221,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.LogStreamApi(api_client)
+    api_instance = okta.LogStreamApi(api_client)
     log_stream_id = '0oa1orzg0CHSgPcjZ0g4' # str | Unique identifier for the Log Stream
 
     try:
@@ -281,13 +281,13 @@ Deletes a Log Stream object from your org by ID
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -305,9 +305,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.LogStreamApi(api_client)
+    api_instance = okta.LogStreamApi(api_client)
     log_stream_id = '0oa1orzg0CHSgPcjZ0g4' # str | Unique identifier for the Log Stream
 
     try:
@@ -363,14 +363,14 @@ Retrieves a Log Stream object by ID
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.log_stream import LogStream
-from openapi_client.rest import ApiException
+import okta
+from okta.models.log_stream import LogStream
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -388,9 +388,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.LogStreamApi(api_client)
+    api_instance = okta.LogStreamApi(api_client)
     log_stream_id = '0oa1orzg0CHSgPcjZ0g4' # str | Unique identifier for the Log Stream
 
     try:
@@ -448,14 +448,14 @@ Lists all Log Stream objects in your org. You can request a paginated list or a 
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.log_stream import LogStream
-from openapi_client.rest import ApiException
+import okta
+from okta.models.log_stream import LogStream
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -473,9 +473,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.LogStreamApi(api_client)
+    api_instance = okta.LogStreamApi(api_client)
     after = 'after_example' # str | The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information. (optional)
     limit = 20 # int | A limit on the number of objects to return (optional) (default to 20)
     filter = 'type eq \"aws_eventbridge\"' # str | An expression that [filters](/#filter) the returned objects. You can only use the `eq` operator on either the `status` or `type` properties in the filter expression. (optional)
@@ -536,15 +536,15 @@ Replaces the Log Stream object properties for a given ID.  This operation is typ
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.log_stream import LogStream
-from openapi_client.models.log_stream_put_schema import LogStreamPutSchema
-from openapi_client.rest import ApiException
+import okta
+from okta.models.log_stream import LogStream
+from okta.models.log_stream_put_schema import LogStreamPutSchema
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -562,11 +562,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.LogStreamApi(api_client)
+    api_instance = okta.LogStreamApi(api_client)
     log_stream_id = '0oa1orzg0CHSgPcjZ0g4' # str | Unique identifier for the Log Stream
-    instance = openapi_client.LogStreamPutSchema() # LogStreamPutSchema | 
+    instance = okta.LogStreamPutSchema() # LogStreamPutSchema | 
 
     try:
         # Replace a Log Stream

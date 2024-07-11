@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.sp_certificate import SpCertificate
+from okta.models.sp_certificate import SpCertificate
 
 # TODO update the JSON string below
 json = "{}"

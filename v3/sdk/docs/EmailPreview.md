@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.email_preview import EmailPreview
+from okta.models.email_preview import EmailPreview
 
 # TODO update the JSON string below
 json = "{}"

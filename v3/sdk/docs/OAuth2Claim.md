@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.o_auth2_claim import OAuth2Claim
+from okta.models.o_auth2_claim import OAuth2Claim
 
 # TODO update the JSON string below
 json = "{}"

@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.user_policy_rule_condition import UserPolicyRuleCondition
+from okta.models.user_policy_rule_condition import UserPolicyRuleCondition
 
 # TODO update the JSON string below
 json = "{}"

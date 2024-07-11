@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.org_okta_support_settings_obj import OrgOktaSupportSettingsObj
+from okta.models.org_okta_support_settings_obj import OrgOktaSupportSettingsObj
 
 # TODO update the JSON string below
 json = "{}"

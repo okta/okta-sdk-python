@@ -1,4 +1,4 @@
-# openapi_client.GroupApi
+# okta.GroupApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -38,13 +38,13 @@ Activates a specific group rule by `groupRuleId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -62,9 +62,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.GroupApi(api_client)
+    api_instance = okta.GroupApi(api_client)
     group_rule_id = '0pr3f7zMZZHPgUoWO0g4' # str | The `id` of the group rule
 
     try:
@@ -120,15 +120,15 @@ Assigns a group owner
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.assign_group_owner_request_body import AssignGroupOwnerRequestBody
-from openapi_client.models.group_owner import GroupOwner
-from openapi_client.rest import ApiException
+import okta
+from okta.models.assign_group_owner_request_body import AssignGroupOwnerRequestBody
+from okta.models.group_owner import GroupOwner
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -146,11 +146,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.GroupApi(api_client)
+    api_instance = okta.GroupApi(api_client)
     group_id = '00g1emaKYZTWRYYRRTSK' # str | The `id` of the group
-    assign_group_owner_request_body = openapi_client.AssignGroupOwnerRequestBody() # AssignGroupOwnerRequestBody | 
+    assign_group_owner_request_body = okta.AssignGroupOwnerRequestBody() # AssignGroupOwnerRequestBody | 
 
     try:
         # Assign a Group Owner
@@ -209,13 +209,13 @@ Assigns a user to a group with 'OKTA_GROUP' type
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -233,9 +233,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.GroupApi(api_client)
+    api_instance = okta.GroupApi(api_client)
     group_id = '00g1emaKYZTWRYYRRTSK' # str | The `id` of the group
     user_id = 'user_id_example' # str | 
 
@@ -293,14 +293,14 @@ Creates a new group with `OKTA_GROUP` type
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.group import Group
-from openapi_client.rest import ApiException
+import okta
+from okta.models.group import Group
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -318,10 +318,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.GroupApi(api_client)
-    group = openapi_client.Group() # Group | 
+    api_instance = okta.GroupApi(api_client)
+    group = okta.Group() # Group | 
 
     try:
         # Create a Group
@@ -378,14 +378,14 @@ Creates a group rule to dynamically add users to the specified group if they mat
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.group_rule import GroupRule
-from openapi_client.rest import ApiException
+import okta
+from okta.models.group_rule import GroupRule
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -403,10 +403,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.GroupApi(api_client)
-    group_rule = openapi_client.GroupRule() # GroupRule | 
+    api_instance = okta.GroupApi(api_client)
+    group_rule = okta.GroupRule() # GroupRule | 
 
     try:
         # Create a Group Rule
@@ -463,13 +463,13 @@ Deactivates a specific group rule by `groupRuleId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -487,9 +487,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.GroupApi(api_client)
+    api_instance = okta.GroupApi(api_client)
     group_rule_id = '0pr3f7zMZZHPgUoWO0g4' # str | The `id` of the group rule
 
     try:
@@ -545,13 +545,13 @@ Deletes a group with `OKTA_GROUP` type
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -569,9 +569,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.GroupApi(api_client)
+    api_instance = okta.GroupApi(api_client)
     group_id = '00g1emaKYZTWRYYRRTSK' # str | The `id` of the group
 
     try:
@@ -627,13 +627,13 @@ Deletes a group owner from a specific group
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -651,9 +651,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.GroupApi(api_client)
+    api_instance = okta.GroupApi(api_client)
     group_id = '00g1emaKYZTWRYYRRTSK' # str | The `id` of the group
     owner_id = '00u1emaK22TWRYd3TtG' # str | The `id` of the group owner
 
@@ -711,13 +711,13 @@ Deletes a specific group rule by `groupRuleId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -735,9 +735,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.GroupApi(api_client)
+    api_instance = okta.GroupApi(api_client)
     group_rule_id = '0pr3f7zMZZHPgUoWO0g4' # str | The `id` of the group rule
     remove_users = True # bool | Indicates whether to keep or remove users from groups assigned by this rule. (optional)
 
@@ -795,14 +795,14 @@ Retrieves a group by `groupId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.group import Group
-from openapi_client.rest import ApiException
+import okta
+from okta.models.group import Group
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -820,9 +820,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.GroupApi(api_client)
+    api_instance = okta.GroupApi(api_client)
     group_id = '00g1emaKYZTWRYYRRTSK' # str | The `id` of the group
 
     try:
@@ -880,14 +880,14 @@ Retrieves a specific group rule by `groupRuleId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.group_rule import GroupRule
-from openapi_client.rest import ApiException
+import okta
+from okta.models.group_rule import GroupRule
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -905,9 +905,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.GroupApi(api_client)
+    api_instance = okta.GroupApi(api_client)
     group_rule_id = '0pr3f7zMZZHPgUoWO0g4' # str | The `id` of the group rule
     expand = 'expand_example' # str |  (optional)
 
@@ -967,14 +967,14 @@ Lists all applications that are assigned to a group
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.application import Application
-from openapi_client.rest import ApiException
+import okta
+from okta.models.application import Application
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -992,9 +992,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.GroupApi(api_client)
+    api_instance = okta.GroupApi(api_client)
     group_id = '00g1emaKYZTWRYYRRTSK' # str | The `id` of the group
     after = 'after_example' # str | Specifies the pagination cursor for the next page of apps (optional)
     limit = 20 # int | Specifies the number of app results for a page (optional) (default to 20)
@@ -1056,14 +1056,14 @@ Lists all owners for a specific group
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.group_owner import GroupOwner
-from openapi_client.rest import ApiException
+import okta
+from okta.models.group_owner import GroupOwner
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1081,9 +1081,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.GroupApi(api_client)
+    api_instance = okta.GroupApi(api_client)
     group_id = '00g1emaKYZTWRYYRRTSK' # str | The `id` of the group
     filter = 'filter_example' # str | SCIM Filter expression for group owners. Allows to filter owners by type. (optional)
     after = 'after_example' # str | Specifies the pagination cursor for the next page of owners (optional)
@@ -1147,14 +1147,14 @@ Lists all group rules
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.group_rule import GroupRule
-from openapi_client.rest import ApiException
+import okta
+from okta.models.group_rule import GroupRule
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1172,9 +1172,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.GroupApi(api_client)
+    api_instance = okta.GroupApi(api_client)
     limit = 50 # int | Specifies the number of rule results in a page (optional) (default to 50)
     after = 'after_example' # str | Specifies the pagination cursor for the next page of rules (optional)
     search = 'search_example' # str | Specifies the keyword to search fules for (optional)
@@ -1237,14 +1237,14 @@ Lists all users that are a member of a group
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.user import User
-from openapi_client.rest import ApiException
+import okta
+from okta.models.user import User
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1262,9 +1262,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.GroupApi(api_client)
+    api_instance = okta.GroupApi(api_client)
     group_id = '00g1emaKYZTWRYYRRTSK' # str | The `id` of the group
     after = 'after_example' # str | Specifies the pagination cursor for the next page of users (optional)
     limit = 1000 # int | Specifies the number of user results in a page (optional) (default to 1000)
@@ -1326,14 +1326,14 @@ Lists all groups with pagination support. A subset of groups can be returned tha
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.group import Group
-from openapi_client.rest import ApiException
+import okta
+from okta.models.group import Group
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1351,9 +1351,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.GroupApi(api_client)
+    api_instance = okta.GroupApi(api_client)
     q = 'q_example' # str | Searches the name property of groups for matching value (optional)
     filter = 'filter_example' # str | Filter expression for groups (optional)
     after = 'after_example' # str | Specifies the pagination cursor for the next page of groups (optional)
@@ -1424,14 +1424,14 @@ Replaces the profile for a group with `OKTA_GROUP` type
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.group import Group
-from openapi_client.rest import ApiException
+import okta
+from okta.models.group import Group
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1449,11 +1449,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.GroupApi(api_client)
+    api_instance = okta.GroupApi(api_client)
     group_id = '00g1emaKYZTWRYYRRTSK' # str | The `id` of the group
-    group = openapi_client.Group() # Group | 
+    group = okta.Group() # Group | 
 
     try:
         # Replace a Group
@@ -1512,14 +1512,14 @@ Replaces a group rule. Only `INACTIVE` rules can be updated.
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.group_rule import GroupRule
-from openapi_client.rest import ApiException
+import okta
+from okta.models.group_rule import GroupRule
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1537,11 +1537,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.GroupApi(api_client)
+    api_instance = okta.GroupApi(api_client)
     group_rule_id = '0pr3f7zMZZHPgUoWO0g4' # str | The `id` of the group rule
-    group_rule = openapi_client.GroupRule() # GroupRule | 
+    group_rule = okta.GroupRule() # GroupRule | 
 
     try:
         # Replace a Group Rule
@@ -1600,13 +1600,13 @@ Unassigns a user from a group with 'OKTA_GROUP' type
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1624,9 +1624,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.GroupApi(api_client)
+    api_instance = okta.GroupApi(api_client)
     group_id = '00g1emaKYZTWRYYRRTSK' # str | The `id` of the group
     user_id = 'user_id_example' # str | 
 

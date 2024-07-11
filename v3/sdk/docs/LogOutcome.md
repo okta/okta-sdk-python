@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.log_outcome import LogOutcome
+from okta.models.log_outcome import LogOutcome
 
 # TODO update the JSON string below
 json = "{}"

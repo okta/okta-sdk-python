@@ -1,4 +1,4 @@
-# openapi_client.DeviceAssuranceApi
+# okta.DeviceAssuranceApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -24,14 +24,14 @@ Creates a new Device Assurance Policy
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.device_assurance import DeviceAssurance
-from openapi_client.rest import ApiException
+import okta
+from okta.models.device_assurance import DeviceAssurance
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -49,10 +49,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.DeviceAssuranceApi(api_client)
-    device_assurance = openapi_client.DeviceAssurance() # DeviceAssurance | 
+    api_instance = okta.DeviceAssuranceApi(api_client)
+    device_assurance = okta.DeviceAssurance() # DeviceAssurance | 
 
     try:
         # Create a Device Assurance Policy
@@ -109,13 +109,13 @@ Deletes a Device Assurance Policy by `deviceAssuranceId`. If the Device Assuranc
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -133,9 +133,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.DeviceAssuranceApi(api_client)
+    api_instance = okta.DeviceAssuranceApi(api_client)
     device_assurance_id = 'device_assurance_id_example' # str | Id of the Device Assurance Policy
 
     try:
@@ -192,14 +192,14 @@ Retrieves a Device Assurance Policy by `deviceAssuranceId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.device_assurance import DeviceAssurance
-from openapi_client.rest import ApiException
+import okta
+from okta.models.device_assurance import DeviceAssurance
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -217,9 +217,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.DeviceAssuranceApi(api_client)
+    api_instance = okta.DeviceAssuranceApi(api_client)
     device_assurance_id = 'device_assurance_id_example' # str | Id of the Device Assurance Policy
 
     try:
@@ -277,14 +277,14 @@ Lists all device assurance policies
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.device_assurance import DeviceAssurance
-from openapi_client.rest import ApiException
+import okta
+from okta.models.device_assurance import DeviceAssurance
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -302,9 +302,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.DeviceAssuranceApi(api_client)
+    api_instance = okta.DeviceAssuranceApi(api_client)
 
     try:
         # List all Device Assurance Policies
@@ -357,14 +357,14 @@ Replaces a Device Assurance Policy by `deviceAssuranceId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.device_assurance import DeviceAssurance
-from openapi_client.rest import ApiException
+import okta
+from okta.models.device_assurance import DeviceAssurance
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -382,11 +382,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.DeviceAssuranceApi(api_client)
+    api_instance = okta.DeviceAssuranceApi(api_client)
     device_assurance_id = 'device_assurance_id_example' # str | Id of the Device Assurance Policy
-    device_assurance = openapi_client.DeviceAssurance() # DeviceAssurance | 
+    device_assurance = okta.DeviceAssurance() # DeviceAssurance | 
 
     try:
         # Replace a Device Assurance Policy

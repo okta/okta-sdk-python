@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.application_licensing import ApplicationLicensing
+from okta.models.application_licensing import ApplicationLicensing
 
 # TODO update the JSON string below
 json = "{}"

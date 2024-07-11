@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.authenticator_method_web_authn_all_of_settings import AuthenticatorMethodWebAuthnAllOfSettings
+from okta.models.authenticator_method_web_authn_all_of_settings import AuthenticatorMethodWebAuthnAllOfSettings
 
 # TODO update the JSON string below
 json = "{}"

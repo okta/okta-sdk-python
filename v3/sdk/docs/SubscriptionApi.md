@@ -1,4 +1,4 @@
-# openapi_client.SubscriptionApi
+# okta.SubscriptionApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -27,15 +27,15 @@ Retrieves a subscription by `notificationType` for a specified Role
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.notification_type import NotificationType
-from openapi_client.models.subscription import Subscription
-from openapi_client.rest import ApiException
+import okta
+from okta.models.notification_type import NotificationType
+from okta.models.subscription import Subscription
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -53,11 +53,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.SubscriptionApi(api_client)
-    role_ref = openapi_client.ListSubscriptionsRoleRoleRefParameter() # ListSubscriptionsRoleRoleRefParameter | A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).
-    notification_type = openapi_client.NotificationType() # NotificationType | 
+    api_instance = okta.SubscriptionApi(api_client)
+    role_ref = okta.ListSubscriptionsRoleRoleRefParameter() # ListSubscriptionsRoleRoleRefParameter | A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).
+    notification_type = okta.NotificationType() # NotificationType | 
 
     try:
         # Retrieve a Subscription for a Role
@@ -115,15 +115,15 @@ Retrieves a subscription by `notificationType` for a specified User. Returns an 
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.notification_type import NotificationType
-from openapi_client.models.subscription import Subscription
-from openapi_client.rest import ApiException
+import okta
+from okta.models.notification_type import NotificationType
+from okta.models.subscription import Subscription
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -141,10 +141,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.SubscriptionApi(api_client)
-    notification_type = openapi_client.NotificationType() # NotificationType | 
+    api_instance = okta.SubscriptionApi(api_client)
+    notification_type = okta.NotificationType() # NotificationType | 
     user_id = 'user_id_example' # str | 
 
     try:
@@ -203,14 +203,14 @@ Lists all subscriptions available to a specified Role
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.subscription import Subscription
-from openapi_client.rest import ApiException
+import okta
+from okta.models.subscription import Subscription
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -228,10 +228,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.SubscriptionApi(api_client)
-    role_ref = openapi_client.ListSubscriptionsRoleRoleRefParameter() # ListSubscriptionsRoleRoleRefParameter | A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).
+    api_instance = okta.SubscriptionApi(api_client)
+    role_ref = okta.ListSubscriptionsRoleRoleRefParameter() # ListSubscriptionsRoleRoleRefParameter | A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).
 
     try:
         # List all Subscriptions for a Role
@@ -288,14 +288,14 @@ Lists all subscriptions available to a specified User. Returns an `AccessDeniedE
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.subscription import Subscription
-from openapi_client.rest import ApiException
+import okta
+from okta.models.subscription import Subscription
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -313,9 +313,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.SubscriptionApi(api_client)
+    api_instance = okta.SubscriptionApi(api_client)
     user_id = 'user_id_example' # str | 
 
     try:
@@ -373,14 +373,14 @@ Subscribes a Role to a specified notification type. Changes to Role subscription
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.notification_type import NotificationType
-from openapi_client.rest import ApiException
+import okta
+from okta.models.notification_type import NotificationType
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -398,11 +398,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.SubscriptionApi(api_client)
-    role_ref = openapi_client.ListSubscriptionsRoleRoleRefParameter() # ListSubscriptionsRoleRoleRefParameter | A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).
-    notification_type = openapi_client.NotificationType() # NotificationType | 
+    api_instance = okta.SubscriptionApi(api_client)
+    role_ref = okta.ListSubscriptionsRoleRoleRefParameter() # ListSubscriptionsRoleRoleRefParameter | A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).
+    notification_type = okta.NotificationType() # NotificationType | 
 
     try:
         # Subscribe a Role to a Specific Notification Type
@@ -458,14 +458,14 @@ Subscribes the current user to a specified notification type. Returns an `Access
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.notification_type import NotificationType
-from openapi_client.rest import ApiException
+import okta
+from okta.models.notification_type import NotificationType
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -483,10 +483,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.SubscriptionApi(api_client)
-    notification_type = openapi_client.NotificationType() # NotificationType | 
+    api_instance = okta.SubscriptionApi(api_client)
+    notification_type = okta.NotificationType() # NotificationType | 
     user_id = 'user_id_example' # str | 
 
     try:
@@ -543,14 +543,14 @@ Unsubscribes a Role from a specified notification type. Changes to Role subscrip
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.notification_type import NotificationType
-from openapi_client.rest import ApiException
+import okta
+from okta.models.notification_type import NotificationType
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -568,11 +568,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.SubscriptionApi(api_client)
-    role_ref = openapi_client.ListSubscriptionsRoleRoleRefParameter() # ListSubscriptionsRoleRoleRefParameter | A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).
-    notification_type = openapi_client.NotificationType() # NotificationType | 
+    api_instance = okta.SubscriptionApi(api_client)
+    role_ref = okta.ListSubscriptionsRoleRoleRefParameter() # ListSubscriptionsRoleRoleRefParameter | A reference to an existing role. Standard roles require a `roleType`, while Custom Roles require a `roleId`. See [Standard Role Types](https://developer.okta.com/docs/concepts/role-assignment/#standard-role-types).
+    notification_type = okta.NotificationType() # NotificationType | 
 
     try:
         # Unsubscribe a Role from a Specific Notification Type
@@ -628,14 +628,14 @@ Unsubscribes the current user from a specified notification type. Returns an `Ac
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.notification_type import NotificationType
-from openapi_client.rest import ApiException
+import okta
+from okta.models.notification_type import NotificationType
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -653,10 +653,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.SubscriptionApi(api_client)
-    notification_type = openapi_client.NotificationType() # NotificationType | 
+    api_instance = okta.SubscriptionApi(api_client)
+    notification_type = okta.NotificationType() # NotificationType | 
     user_id = 'user_id_example' # str | 
 
     try:

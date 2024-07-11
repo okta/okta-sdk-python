@@ -1,4 +1,4 @@
-# openapi_client.PushProviderApi
+# okta.PushProviderApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -24,14 +24,14 @@ Creates a new push provider
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.push_provider import PushProvider
-from openapi_client.rest import ApiException
+import okta
+from okta.models.push_provider import PushProvider
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -49,10 +49,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.PushProviderApi(api_client)
-    push_provider = openapi_client.PushProvider() # PushProvider | 
+    api_instance = okta.PushProviderApi(api_client)
+    push_provider = okta.PushProvider() # PushProvider | 
 
     try:
         # Create a Push Provider
@@ -109,13 +109,13 @@ Deletes a push provider by `pushProviderId`. If the push provider is currently b
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -133,9 +133,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.PushProviderApi(api_client)
+    api_instance = okta.PushProviderApi(api_client)
     push_provider_id = 'push_provider_id_example' # str | Id of the push provider
 
     try:
@@ -192,14 +192,14 @@ Retrieves a push provider by `pushProviderId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.push_provider import PushProvider
-from openapi_client.rest import ApiException
+import okta
+from okta.models.push_provider import PushProvider
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -217,9 +217,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.PushProviderApi(api_client)
+    api_instance = okta.PushProviderApi(api_client)
     push_provider_id = 'push_provider_id_example' # str | Id of the push provider
 
     try:
@@ -277,15 +277,15 @@ Lists all push providers
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.provider_type import ProviderType
-from openapi_client.models.push_provider import PushProvider
-from openapi_client.rest import ApiException
+import okta
+from okta.models.provider_type import ProviderType
+from okta.models.push_provider import PushProvider
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -303,10 +303,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.PushProviderApi(api_client)
-    type = openapi_client.ProviderType() # ProviderType | Filters push providers by `providerType` (optional)
+    api_instance = okta.PushProviderApi(api_client)
+    type = okta.ProviderType() # ProviderType | Filters push providers by `providerType` (optional)
 
     try:
         # List all Push Providers
@@ -362,14 +362,14 @@ Replaces a push provider by `pushProviderId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.push_provider import PushProvider
-from openapi_client.rest import ApiException
+import okta
+from okta.models.push_provider import PushProvider
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -387,11 +387,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.PushProviderApi(api_client)
+    api_instance = okta.PushProviderApi(api_client)
     push_provider_id = 'push_provider_id_example' # str | Id of the push provider
-    push_provider = openapi_client.PushProvider() # PushProvider | 
+    push_provider = okta.PushProvider() # PushProvider | 
 
     try:
         # Replace a Push Provider

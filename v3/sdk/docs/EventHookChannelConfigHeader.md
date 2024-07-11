@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.event_hook_channel_config_header import EventHookChannelConfigHeader
+from okta.models.event_hook_channel_config_header import EventHookChannelConfigHeader
 
 # TODO update the JSON string below
 json = "{}"

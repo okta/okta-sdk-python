@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.device_assurance_chrome_os_platform import DeviceAssuranceChromeOSPlatform
+from okta.models.device_assurance_chrome_os_platform import DeviceAssuranceChromeOSPlatform
 
 # TODO update the JSON string below
 json = "{}"

@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.inline_hook_channel import InlineHookChannel
+from okta.models.inline_hook_channel import InlineHookChannel
 
 # TODO update the JSON string below
 json = "{}"

@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.href_object_logo_link import HrefObjectLogoLink
+from okta.models.href_object_logo_link import HrefObjectLogoLink
 
 # TODO update the JSON string below
 json = "{}"

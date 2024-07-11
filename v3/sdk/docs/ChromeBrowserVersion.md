@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.chrome_browser_version import ChromeBrowserVersion
+from okta.models.chrome_browser_version import ChromeBrowserVersion
 
 # TODO update the JSON string below
 json = "{}"

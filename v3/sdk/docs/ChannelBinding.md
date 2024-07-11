@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.channel_binding import ChannelBinding
+from okta.models.channel_binding import ChannelBinding
 
 # TODO update the JSON string below
 json = "{}"

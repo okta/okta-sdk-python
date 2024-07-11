@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.grant_type_policy_rule_condition import GrantTypePolicyRuleCondition
+from okta.models.grant_type_policy_rule_condition import GrantTypePolicyRuleCondition
 
 # TODO update the JSON string below
 json = "{}"

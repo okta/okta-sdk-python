@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.before_scheduled_action_policy_rule_condition import BeforeScheduledActionPolicyRuleCondition
+from okta.models.before_scheduled_action_policy_rule_condition import BeforeScheduledActionPolicyRuleCondition
 
 # TODO update the JSON string below
 json = "{}"

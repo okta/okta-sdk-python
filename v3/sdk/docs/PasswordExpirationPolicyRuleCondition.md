@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.password_expiration_policy_rule_condition import PasswordExpirationPolicyRuleCondition
+from okta.models.password_expiration_policy_rule_condition import PasswordExpirationPolicyRuleCondition
 
 # TODO update the JSON string below
 json = "{}"

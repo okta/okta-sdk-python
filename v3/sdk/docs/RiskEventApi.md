@@ -1,4 +1,4 @@
-# openapi_client.RiskEventApi
+# okta.RiskEventApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -20,14 +20,14 @@ Sends multiple IP risk events to Okta. This request is used by a third-party ris
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.risk_event import RiskEvent
-from openapi_client.rest import ApiException
+import okta
+from okta.models.risk_event import RiskEvent
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -45,10 +45,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RiskEventApi(api_client)
-    instance = [openapi_client.RiskEvent()] # List[RiskEvent] | 
+    api_instance = okta.RiskEventApi(api_client)
+    instance = [okta.RiskEvent()] # List[RiskEvent] | 
 
     try:
         # Send multiple Risk Events

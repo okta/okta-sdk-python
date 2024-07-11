@@ -1,4 +1,4 @@
-# openapi_client.EmailServerApi
+# okta.EmailServerApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -25,15 +25,15 @@ Creates a custom email SMTP server configuration for your organization
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.email_server_post import EmailServerPost
-from openapi_client.models.email_server_response import EmailServerResponse
-from openapi_client.rest import ApiException
+import okta
+from okta.models.email_server_post import EmailServerPost
+from okta.models.email_server_response import EmailServerResponse
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -51,10 +51,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.EmailServerApi(api_client)
-    email_server_post = openapi_client.EmailServerPost() # EmailServerPost |  (optional)
+    api_instance = okta.EmailServerApi(api_client)
+    email_server_post = okta.EmailServerPost() # EmailServerPost |  (optional)
 
     try:
         # Create a custom SMTP server
@@ -111,13 +111,13 @@ Deletes your organization's custom SMTP server with the given ID
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -135,9 +135,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.EmailServerApi(api_client)
+    api_instance = okta.EmailServerApi(api_client)
     email_server_id = 'email_server_id_example' # str | 
 
     try:
@@ -193,14 +193,14 @@ Retrieves a configuration of your organization's custom SMTP server with the giv
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.email_server_list_response import EmailServerListResponse
-from openapi_client.rest import ApiException
+import okta
+from okta.models.email_server_list_response import EmailServerListResponse
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -218,9 +218,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.EmailServerApi(api_client)
+    api_instance = okta.EmailServerApi(api_client)
     email_server_id = 'email_server_id_example' # str | 
 
     try:
@@ -278,14 +278,14 @@ Lists all the enrolled custom email SMTP servers
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.email_server_list_response import EmailServerListResponse
-from openapi_client.rest import ApiException
+import okta
+from okta.models.email_server_list_response import EmailServerListResponse
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -303,9 +303,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.EmailServerApi(api_client)
+    api_instance = okta.EmailServerApi(api_client)
 
     try:
         # List all enrolled SMTP servers
@@ -358,14 +358,14 @@ Tests your organization's custom SMTP Server with the given ID
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.email_test_addresses import EmailTestAddresses
-from openapi_client.rest import ApiException
+import okta
+from okta.models.email_test_addresses import EmailTestAddresses
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -383,11 +383,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.EmailServerApi(api_client)
+    api_instance = okta.EmailServerApi(api_client)
     email_server_id = 'email_server_id_example' # str | 
-    email_test_addresses = openapi_client.EmailTestAddresses() # EmailTestAddresses |  (optional)
+    email_test_addresses = okta.EmailTestAddresses() # EmailTestAddresses |  (optional)
 
     try:
         # Test an SMTP Server configuration
@@ -444,15 +444,15 @@ Updates one or more fields of your organization's custom SMTP Server configurati
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.email_server_request import EmailServerRequest
-from openapi_client.models.email_server_response import EmailServerResponse
-from openapi_client.rest import ApiException
+import okta
+from okta.models.email_server_request import EmailServerRequest
+from okta.models.email_server_response import EmailServerResponse
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -470,11 +470,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.EmailServerApi(api_client)
+    api_instance = okta.EmailServerApi(api_client)
     email_server_id = 'email_server_id_example' # str | 
-    email_server_request = openapi_client.EmailServerRequest() # EmailServerRequest |  (optional)
+    email_server_request = okta.EmailServerRequest() # EmailServerRequest |  (optional)
 
     try:
         # Update an SMTP Server configuration

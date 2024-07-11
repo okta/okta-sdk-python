@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.knowledge_constraint import KnowledgeConstraint
+from okta.models.knowledge_constraint import KnowledgeConstraint
 
 # TODO update the JSON string below
 json = "{}"

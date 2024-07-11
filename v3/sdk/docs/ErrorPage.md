@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.error_page import ErrorPage
+from okta.models.error_page import ErrorPage
 
 # TODO update the JSON string below
 json = "{}"

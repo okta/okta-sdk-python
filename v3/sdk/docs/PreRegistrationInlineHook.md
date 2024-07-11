@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.pre_registration_inline_hook import PreRegistrationInlineHook
+from okta.models.pre_registration_inline_hook import PreRegistrationInlineHook
 
 # TODO update the JSON string below
 json = "{}"

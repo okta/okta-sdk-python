@@ -1,4 +1,4 @@
-# openapi_client.FeatureApi
+# okta.FeatureApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -24,14 +24,14 @@ Retrieves a feature
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.feature import Feature
-from openapi_client.rest import ApiException
+import okta
+from okta.models.feature import Feature
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -49,9 +49,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.FeatureApi(api_client)
+    api_instance = okta.FeatureApi(api_client)
     feature_id = 'R5HjqNn1pEqWGy48E9jg' # str | `id` of the Feature
 
     try:
@@ -109,14 +109,14 @@ Lists all dependencies
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.feature import Feature
-from openapi_client.rest import ApiException
+import okta
+from okta.models.feature import Feature
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -134,9 +134,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.FeatureApi(api_client)
+    api_instance = okta.FeatureApi(api_client)
     feature_id = 'R5HjqNn1pEqWGy48E9jg' # str | `id` of the Feature
 
     try:
@@ -194,14 +194,14 @@ Lists all dependents
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.feature import Feature
-from openapi_client.rest import ApiException
+import okta
+from okta.models.feature import Feature
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -219,9 +219,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.FeatureApi(api_client)
+    api_instance = okta.FeatureApi(api_client)
     feature_id = 'R5HjqNn1pEqWGy48E9jg' # str | `id` of the Feature
 
     try:
@@ -279,14 +279,14 @@ Lists all features
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.feature import Feature
-from openapi_client.rest import ApiException
+import okta
+from okta.models.feature import Feature
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -304,9 +304,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.FeatureApi(api_client)
+    api_instance = okta.FeatureApi(api_client)
 
     try:
         # List all Features
@@ -359,15 +359,15 @@ Updates a feature lifecycle
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.feature import Feature
-from openapi_client.models.feature_lifecycle import FeatureLifecycle
-from openapi_client.rest import ApiException
+import okta
+from okta.models.feature import Feature
+from okta.models.feature_lifecycle import FeatureLifecycle
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -385,11 +385,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.FeatureApi(api_client)
+    api_instance = okta.FeatureApi(api_client)
     feature_id = 'R5HjqNn1pEqWGy48E9jg' # str | `id` of the Feature
-    lifecycle = openapi_client.FeatureLifecycle() # FeatureLifecycle | Whether to `enable` or `disable` the feature
+    lifecycle = okta.FeatureLifecycle() # FeatureLifecycle | Whether to `enable` or `disable` the feature
     mode = 'mode_example' # str |  (optional)
 
     try:

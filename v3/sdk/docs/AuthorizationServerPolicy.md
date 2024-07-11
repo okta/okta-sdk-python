@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.authorization_server_policy import AuthorizationServerPolicy
+from okta.models.authorization_server_policy import AuthorizationServerPolicy
 
 # TODO update the JSON string below
 json = "{}"

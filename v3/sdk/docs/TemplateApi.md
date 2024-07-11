@@ -1,4 +1,4 @@
-# openapi_client.TemplateApi
+# okta.TemplateApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -25,14 +25,14 @@ Creates a new custom SMS template
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.sms_template import SmsTemplate
-from openapi_client.rest import ApiException
+import okta
+from okta.models.sms_template import SmsTemplate
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -50,10 +50,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.TemplateApi(api_client)
-    sms_template = openapi_client.SmsTemplate() # SmsTemplate | 
+    api_instance = okta.TemplateApi(api_client)
+    sms_template = okta.SmsTemplate() # SmsTemplate | 
 
     try:
         # Create an SMS Template
@@ -110,13 +110,13 @@ Deletes an SMS template
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -134,9 +134,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.TemplateApi(api_client)
+    api_instance = okta.TemplateApi(api_client)
     template_id = '6NQUJ5yR3bpgEiYmq8IC' # str | `id` of the Template
 
     try:
@@ -192,14 +192,14 @@ Retrieves a specific template by `id`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.sms_template import SmsTemplate
-from openapi_client.rest import ApiException
+import okta
+from okta.models.sms_template import SmsTemplate
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -217,9 +217,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.TemplateApi(api_client)
+    api_instance = okta.TemplateApi(api_client)
     template_id = '6NQUJ5yR3bpgEiYmq8IC' # str | `id` of the Template
 
     try:
@@ -277,15 +277,15 @@ Lists all custom SMS templates. A subset of templates can be returned that match
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.sms_template import SmsTemplate
-from openapi_client.models.sms_template_type import SmsTemplateType
-from openapi_client.rest import ApiException
+import okta
+from okta.models.sms_template import SmsTemplate
+from okta.models.sms_template_type import SmsTemplateType
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -303,10 +303,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.TemplateApi(api_client)
-    template_type = openapi_client.SmsTemplateType() # SmsTemplateType |  (optional)
+    api_instance = okta.TemplateApi(api_client)
+    template_type = okta.SmsTemplateType() # SmsTemplateType |  (optional)
 
     try:
         # List all SMS Templates
@@ -362,14 +362,14 @@ Replaces the SMS template
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.sms_template import SmsTemplate
-from openapi_client.rest import ApiException
+import okta
+from okta.models.sms_template import SmsTemplate
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -387,11 +387,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.TemplateApi(api_client)
+    api_instance = okta.TemplateApi(api_client)
     template_id = '6NQUJ5yR3bpgEiYmq8IC' # str | `id` of the Template
-    sms_template = openapi_client.SmsTemplate() # SmsTemplate | 
+    sms_template = okta.SmsTemplate() # SmsTemplate | 
 
     try:
         # Replace an SMS Template
@@ -450,14 +450,14 @@ Updates an SMS template
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.sms_template import SmsTemplate
-from openapi_client.rest import ApiException
+import okta
+from okta.models.sms_template import SmsTemplate
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -475,11 +475,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.TemplateApi(api_client)
+    api_instance = okta.TemplateApi(api_client)
     template_id = '6NQUJ5yR3bpgEiYmq8IC' # str | `id` of the Template
-    sms_template = openapi_client.SmsTemplate() # SmsTemplate | 
+    sms_template = okta.SmsTemplate() # SmsTemplate | 
 
     try:
         # Update an SMS Template

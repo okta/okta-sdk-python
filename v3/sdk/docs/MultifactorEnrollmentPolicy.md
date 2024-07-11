@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.multifactor_enrollment_policy import MultifactorEnrollmentPolicy
+from okta.models.multifactor_enrollment_policy import MultifactorEnrollmentPolicy
 
 # TODO update the JSON string below
 json = "{}"

@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.profile_mapping_property import ProfileMappingProperty
+from okta.models.profile_mapping_property import ProfileMappingProperty
 
 # TODO update the JSON string below
 json = "{}"

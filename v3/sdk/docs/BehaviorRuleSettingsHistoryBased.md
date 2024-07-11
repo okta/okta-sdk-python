@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.behavior_rule_settings_history_based import BehaviorRuleSettingsHistoryBased
+from okta.models.behavior_rule_settings_history_based import BehaviorRuleSettingsHistoryBased
 
 # TODO update the JSON string below
 json = "{}"

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.behavior_rule_velocity import BehaviorRuleVelocity
+from okta.models.behavior_rule_velocity import BehaviorRuleVelocity
 
 # TODO update the JSON string below
 json = "{}"

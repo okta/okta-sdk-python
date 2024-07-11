@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.event_hook_channel_config_auth_scheme import EventHookChannelConfigAuthScheme
+from okta.models.event_hook_channel_config_auth_scheme import EventHookChannelConfigAuthScheme
 
 # TODO update the JSON string below
 json = "{}"

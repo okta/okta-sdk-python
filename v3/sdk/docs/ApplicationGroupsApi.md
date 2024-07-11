@@ -1,4 +1,4 @@
-# openapi_client.ApplicationGroupsApi
+# okta.ApplicationGroupsApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -23,14 +23,14 @@ Assigns a group to an application
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.application_group_assignment import ApplicationGroupAssignment
-from openapi_client.rest import ApiException
+import okta
+from okta.models.application_group_assignment import ApplicationGroupAssignment
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -48,12 +48,12 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApplicationGroupsApi(api_client)
+    api_instance = okta.ApplicationGroupsApi(api_client)
     app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
     group_id = '00g1emaKYZTWRYYRRTSK' # str | The `id` of the group
-    application_group_assignment = openapi_client.ApplicationGroupAssignment() # ApplicationGroupAssignment |  (optional)
+    application_group_assignment = okta.ApplicationGroupAssignment() # ApplicationGroupAssignment |  (optional)
 
     try:
         # Assign a Group
@@ -113,14 +113,14 @@ Retrieves an application group assignment
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.application_group_assignment import ApplicationGroupAssignment
-from openapi_client.rest import ApiException
+import okta
+from okta.models.application_group_assignment import ApplicationGroupAssignment
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -138,9 +138,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApplicationGroupsApi(api_client)
+    api_instance = okta.ApplicationGroupsApi(api_client)
     app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
     group_id = '00g1emaKYZTWRYYRRTSK' # str | The `id` of the group
     expand = 'expand_example' # str |  (optional)
@@ -202,14 +202,14 @@ Lists all group assignments for an application
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.application_group_assignment import ApplicationGroupAssignment
-from openapi_client.rest import ApiException
+import okta
+from okta.models.application_group_assignment import ApplicationGroupAssignment
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -227,9 +227,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApplicationGroupsApi(api_client)
+    api_instance = okta.ApplicationGroupsApi(api_client)
     app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
     q = 'q_example' # str |  (optional)
     after = 'after_example' # str | Specifies the pagination cursor for the next page of assignments (optional)
@@ -295,13 +295,13 @@ Unassigns a group from an application
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -319,9 +319,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApplicationGroupsApi(api_client)
+    api_instance = okta.ApplicationGroupsApi(api_client)
     app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
     group_id = '00g1emaKYZTWRYYRRTSK' # str | The `id` of the group
 

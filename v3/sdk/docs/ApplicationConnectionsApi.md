@@ -1,4 +1,4 @@
-# openapi_client.ApplicationConnectionsApi
+# okta.ApplicationConnectionsApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -23,13 +23,13 @@ Activates the default Provisioning Connection for an app
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -47,9 +47,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApplicationConnectionsApi(api_client)
+    api_instance = okta.ApplicationConnectionsApi(api_client)
     app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
 
     try:
@@ -105,13 +105,13 @@ Deactivates the default Provisioning Connection for an app
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -129,9 +129,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApplicationConnectionsApi(api_client)
+    api_instance = okta.ApplicationConnectionsApi(api_client)
     app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
 
     try:
@@ -187,14 +187,14 @@ Retrieves the default Provisioning Connection for an app
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.provisioning_connection import ProvisioningConnection
-from openapi_client.rest import ApiException
+import okta
+from okta.models.provisioning_connection import ProvisioningConnection
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -212,9 +212,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApplicationConnectionsApi(api_client)
+    api_instance = okta.ApplicationConnectionsApi(api_client)
     app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
 
     try:
@@ -272,15 +272,15 @@ Updates the default Provisioning Connection for an app
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.provisioning_connection import ProvisioningConnection
-from openapi_client.models.provisioning_connection_request import ProvisioningConnectionRequest
-from openapi_client.rest import ApiException
+import okta
+from okta.models.provisioning_connection import ProvisioningConnection
+from okta.models.provisioning_connection_request import ProvisioningConnectionRequest
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -298,11 +298,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApplicationConnectionsApi(api_client)
+    api_instance = okta.ApplicationConnectionsApi(api_client)
     app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
-    provisioning_connection_request = openapi_client.ProvisioningConnectionRequest() # ProvisioningConnectionRequest | 
+    provisioning_connection_request = okta.ProvisioningConnectionRequest() # ProvisioningConnectionRequest | 
     activate = True # bool | Activates the Provisioning Connection (optional)
 
     try:

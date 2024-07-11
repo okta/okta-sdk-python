@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.bulk_upsert_request_body import BulkUpsertRequestBody
+from okta.models.bulk_upsert_request_body import BulkUpsertRequestBody
 
 # TODO update the JSON string below
 json = "{}"

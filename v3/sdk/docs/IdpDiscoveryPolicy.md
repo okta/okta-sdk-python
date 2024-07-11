@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.idp_discovery_policy import IdpDiscoveryPolicy
+from okta.models.idp_discovery_policy import IdpDiscoveryPolicy
 
 # TODO update the JSON string below
 json = "{}"

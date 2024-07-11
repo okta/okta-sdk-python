@@ -24,7 +24,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.device_profile import DeviceProfile
+from okta.models.device_profile import DeviceProfile
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,4 +1,4 @@
-# openapi_client.RealmApi
+# okta.RealmApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -24,14 +24,14 @@ Creates a new Realm
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.realm import Realm
-from openapi_client.rest import ApiException
+import okta
+from okta.models.realm import Realm
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -49,10 +49,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RealmApi(api_client)
-    body = openapi_client.Realm() # Realm | 
+    api_instance = okta.RealmApi(api_client)
+    body = okta.Realm() # Realm | 
 
     try:
         # Create a Realm
@@ -109,13 +109,13 @@ Deletes a Realm permanently. This operation can only be performed after disassoc
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -133,9 +133,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RealmApi(api_client)
+    api_instance = okta.RealmApi(api_client)
     realm_id = 'vvrcFogtKCrK9aYq3fgV' # str | `id` of the Realm
 
     try:
@@ -192,14 +192,14 @@ Retrieves a Realm
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.realm import Realm
-from openapi_client.rest import ApiException
+import okta
+from okta.models.realm import Realm
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -217,9 +217,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RealmApi(api_client)
+    api_instance = okta.RealmApi(api_client)
     realm_id = 'vvrcFogtKCrK9aYq3fgV' # str | `id` of the Realm
 
     try:
@@ -278,14 +278,14 @@ Lists all Realms
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.realm import Realm
-from openapi_client.rest import ApiException
+import okta
+from okta.models.realm import Realm
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -303,9 +303,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RealmApi(api_client)
+    api_instance = okta.RealmApi(api_client)
     limit = 200 # int | Specifies the number of results returned. Defaults to 10 if `search` is provided. (optional) (default to 200)
     after = 'after_example' # str | The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information. (optional)
     search = 'search_example' # str | Searches for Realms with a supported filtering expression for most properties (optional)
@@ -370,14 +370,14 @@ Updates a Realm
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.realm import Realm
-from openapi_client.rest import ApiException
+import okta
+from okta.models.realm import Realm
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -395,11 +395,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RealmApi(api_client)
+    api_instance = okta.RealmApi(api_client)
     realm_id = 'vvrcFogtKCrK9aYq3fgV' # str | `id` of the Realm
-    body = openapi_client.Realm() # Realm | 
+    body = okta.Realm() # Realm | 
 
     try:
         # Update a Realm

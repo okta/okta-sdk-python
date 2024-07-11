@@ -25,7 +25,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.json_web_key import JsonWebKey
+from okta.models.json_web_key import JsonWebKey
 
 # TODO update the JSON string below
 json = "{}"

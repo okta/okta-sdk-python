@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.theme import Theme
+from okta.models.theme import Theme
 
 # TODO update the JSON string below
 json = "{}"

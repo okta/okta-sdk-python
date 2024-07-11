@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.application_settings_notifications import ApplicationSettingsNotifications
+from okta.models.application_settings_notifications import ApplicationSettingsNotifications
 
 # TODO update the JSON string below
 json = "{}"

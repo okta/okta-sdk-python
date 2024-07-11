@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.org_captcha_settings import OrgCAPTCHASettings
+from okta.models.org_captcha_settings import OrgCAPTCHASettings
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,4 +1,4 @@
-# openapi_client.UserFactorApi
+# okta.UserFactorApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -29,15 +29,15 @@ Activates a factor. The `sms` and `token:software:totp` factor types require act
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.activate_factor_request import ActivateFactorRequest
-from openapi_client.models.user_factor import UserFactor
-from openapi_client.rest import ApiException
+import okta
+from okta.models.activate_factor_request import ActivateFactorRequest
+from okta.models.user_factor import UserFactor
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -55,12 +55,12 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserFactorApi(api_client)
+    api_instance = okta.UserFactorApi(api_client)
     user_id = 'user_id_example' # str | 
     factor_id = 'zAgrsaBe0wVGRugDYtdv' # str | `id` of the Factor
-    body = openapi_client.ActivateFactorRequest() # ActivateFactorRequest |  (optional)
+    body = okta.ActivateFactorRequest() # ActivateFactorRequest |  (optional)
 
     try:
         # Activate a Factor
@@ -120,14 +120,14 @@ Enrolls a user with a supported factor
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.user_factor import UserFactor
-from openapi_client.rest import ApiException
+import okta
+from okta.models.user_factor import UserFactor
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -145,11 +145,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserFactorApi(api_client)
+    api_instance = okta.UserFactorApi(api_client)
     user_id = 'user_id_example' # str | 
-    body = openapi_client.UserFactor() # UserFactor | Factor
+    body = okta.UserFactor() # UserFactor | Factor
     update_phone = False # bool |  (optional) (default to False)
     template_id = 'template_id_example' # str | id of SMS template (only for SMS factor) (optional)
     token_lifetime_seconds = 300 # int |  (optional) (default to 300)
@@ -216,14 +216,14 @@ Retrieves a factor for the specified user
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.user_factor import UserFactor
-from openapi_client.rest import ApiException
+import okta
+from okta.models.user_factor import UserFactor
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -241,9 +241,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserFactorApi(api_client)
+    api_instance = okta.UserFactorApi(api_client)
     user_id = 'user_id_example' # str | 
     factor_id = 'zAgrsaBe0wVGRugDYtdv' # str | `id` of the Factor
 
@@ -303,14 +303,14 @@ Retrieves the factors verification transaction status
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.verify_user_factor_response import VerifyUserFactorResponse
-from openapi_client.rest import ApiException
+import okta
+from okta.models.verify_user_factor_response import VerifyUserFactorResponse
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -328,9 +328,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserFactorApi(api_client)
+    api_instance = okta.UserFactorApi(api_client)
     user_id = 'user_id_example' # str | 
     factor_id = 'zAgrsaBe0wVGRugDYtdv' # str | `id` of the Factor
     transaction_id = 'gPAQcN3NDjSGOCAeG2Jv' # str | `id` of the Transaction
@@ -392,14 +392,14 @@ Lists all the enrolled factors for the specified user
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.user_factor import UserFactor
-from openapi_client.rest import ApiException
+import okta
+from okta.models.user_factor import UserFactor
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -417,9 +417,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserFactorApi(api_client)
+    api_instance = okta.UserFactorApi(api_client)
     user_id = 'user_id_example' # str | 
 
     try:
@@ -477,14 +477,14 @@ Lists all the supported factors that can be enrolled for the specified user
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.user_factor import UserFactor
-from openapi_client.rest import ApiException
+import okta
+from okta.models.user_factor import UserFactor
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -502,9 +502,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserFactorApi(api_client)
+    api_instance = okta.UserFactorApi(api_client)
     user_id = 'user_id_example' # str | 
 
     try:
@@ -561,14 +561,14 @@ Lists all available security questions for a user's `question` factor
 * Api Key Authentication (apiToken):
 
 ```python
-import openapi_client
-from openapi_client.models.security_question import SecurityQuestion
-from openapi_client.rest import ApiException
+import okta
+from okta.models.security_question import SecurityQuestion
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -584,9 +584,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['apiToken'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserFactorApi(api_client)
+    api_instance = okta.UserFactorApi(api_client)
     user_id = 'user_id_example' # str | 
 
     try:
@@ -644,14 +644,14 @@ Resends a factor challenge (SMS/call/email OTP) as part of an enrollment flow. T
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.user_factor import UserFactor
-from openapi_client.rest import ApiException
+import okta
+from okta.models.user_factor import UserFactor
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -669,12 +669,12 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserFactorApi(api_client)
+    api_instance = okta.UserFactorApi(api_client)
     user_id = 'user_id_example' # str | 
     factor_id = 'zAgrsaBe0wVGRugDYtdv' # str | `id` of the Factor
-    user_factor = openapi_client.UserFactor() # UserFactor | Factor
+    user_factor = okta.UserFactor() # UserFactor | Factor
     template_id = 'template_id_example' # str | ID of SMS template (only for SMS factor) (optional)
 
     try:
@@ -736,13 +736,13 @@ Unenrolls an existing factor for the specified user, allowing the user to enroll
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -760,9 +760,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserFactorApi(api_client)
+    api_instance = okta.UserFactorApi(api_client)
     user_id = 'user_id_example' # str | 
     factor_id = 'zAgrsaBe0wVGRugDYtdv' # str | `id` of the Factor
     remove_recovery_enrollment = False # bool |  (optional) (default to False)
@@ -822,15 +822,15 @@ Verifies an OTP for a `token` or `token:hardware` factor
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.verify_factor_request import VerifyFactorRequest
-from openapi_client.models.verify_user_factor_response import VerifyUserFactorResponse
-from openapi_client.rest import ApiException
+import okta
+from okta.models.verify_factor_request import VerifyFactorRequest
+from okta.models.verify_user_factor_response import VerifyUserFactorResponse
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -848,9 +848,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserFactorApi(api_client)
+    api_instance = okta.UserFactorApi(api_client)
     user_id = 'user_id_example' # str | 
     factor_id = 'zAgrsaBe0wVGRugDYtdv' # str | `id` of the Factor
     template_id = 'template_id_example' # str |  (optional)
@@ -858,7 +858,7 @@ with openapi_client.ApiClient(configuration) as api_client:
     x_forwarded_for = 'x_forwarded_for_example' # str |  (optional)
     user_agent = 'user_agent_example' # str |  (optional)
     accept_language = 'accept_language_example' # str |  (optional)
-    body = openapi_client.VerifyFactorRequest() # VerifyFactorRequest |  (optional)
+    body = okta.VerifyFactorRequest() # VerifyFactorRequest |  (optional)
 
     try:
         # Verify an MFA Factor

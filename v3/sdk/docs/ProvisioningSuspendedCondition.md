@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.provisioning_suspended_condition import ProvisioningSuspendedCondition
+from okta.models.provisioning_suspended_condition import ProvisioningSuspendedCondition
 
 # TODO update the JSON string below
 json = "{}"

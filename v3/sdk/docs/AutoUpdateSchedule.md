@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.auto_update_schedule import AutoUpdateSchedule
+from okta.models.auto_update_schedule import AutoUpdateSchedule
 
 # TODO update the JSON string below
 json = "{}"

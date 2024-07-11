@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.provisioning_groups import ProvisioningGroups
+from okta.models.provisioning_groups import ProvisioningGroups
 
 # TODO update the JSON string below
 json = "{}"

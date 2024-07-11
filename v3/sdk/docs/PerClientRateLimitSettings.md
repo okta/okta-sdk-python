@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.per_client_rate_limit_settings import PerClientRateLimitSettings
+from okta.models.per_client_rate_limit_settings import PerClientRateLimitSettings
 
 # TODO update the JSON string below
 json = "{}"

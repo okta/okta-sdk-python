@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.threat_insight_configuration import ThreatInsightConfiguration
+from okta.models.threat_insight_configuration import ThreatInsightConfiguration
 
 # TODO update the JSON string below
 json = "{}"

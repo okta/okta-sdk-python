@@ -1,4 +1,4 @@
-# openapi_client.ApplicationCredentialsApi
+# okta.ApplicationCredentialsApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -28,14 +28,14 @@ Clones a X.509 certificate for an application key credential from a source appli
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.json_web_key import JsonWebKey
-from openapi_client.rest import ApiException
+import okta
+from okta.models.json_web_key import JsonWebKey
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -53,9 +53,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApplicationCredentialsApi(api_client)
+    api_instance = okta.ApplicationCredentialsApi(api_client)
     app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
     key_id = 'sjP9eiETijYz110VkhHN' # str | ID of the Key Credential for the application
     target_aid = 'target_aid_example' # str | Unique key of the target Application
@@ -117,14 +117,14 @@ Generates a new X.509 certificate for an application key credential
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.json_web_key import JsonWebKey
-from openapi_client.rest import ApiException
+import okta
+from okta.models.json_web_key import JsonWebKey
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -142,9 +142,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApplicationCredentialsApi(api_client)
+    api_instance = okta.ApplicationCredentialsApi(api_client)
     app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
     validity_years = 56 # int |  (optional)
 
@@ -204,15 +204,15 @@ Generates a new key pair and returns the Certificate Signing Request for it
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.csr import Csr
-from openapi_client.models.csr_metadata import CsrMetadata
-from openapi_client.rest import ApiException
+import okta
+from okta.models.csr import Csr
+from okta.models.csr_metadata import CsrMetadata
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -230,11 +230,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApplicationCredentialsApi(api_client)
+    api_instance = okta.ApplicationCredentialsApi(api_client)
     app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
-    metadata = openapi_client.CsrMetadata() # CsrMetadata | 
+    metadata = okta.CsrMetadata() # CsrMetadata | 
 
     try:
         # Generate a Certificate Signing Request
@@ -293,14 +293,14 @@ Retrieves a specific application key credential by kid
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.json_web_key import JsonWebKey
-from openapi_client.rest import ApiException
+import okta
+from okta.models.json_web_key import JsonWebKey
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -318,9 +318,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApplicationCredentialsApi(api_client)
+    api_instance = okta.ApplicationCredentialsApi(api_client)
     app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
     key_id = 'sjP9eiETijYz110VkhHN' # str | ID of the Key Credential for the application
 
@@ -380,14 +380,14 @@ Retrieves a certificate signing request for the app by `id`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.csr import Csr
-from openapi_client.rest import ApiException
+import okta
+from okta.models.csr import Csr
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -405,9 +405,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApplicationCredentialsApi(api_client)
+    api_instance = okta.ApplicationCredentialsApi(api_client)
     app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
     csr_id = 'fd7x1h7uTcZFx22rU1f7' # str | `id` of the CSR
 
@@ -467,14 +467,14 @@ Lists all key credentials for an application
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.json_web_key import JsonWebKey
-from openapi_client.rest import ApiException
+import okta
+from okta.models.json_web_key import JsonWebKey
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -492,9 +492,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApplicationCredentialsApi(api_client)
+    api_instance = okta.ApplicationCredentialsApi(api_client)
     app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
 
     try:
@@ -552,14 +552,14 @@ Lists all Certificate Signing Requests for an application
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.csr import Csr
-from openapi_client.rest import ApiException
+import okta
+from okta.models.csr import Csr
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -577,9 +577,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApplicationCredentialsApi(api_client)
+    api_instance = okta.ApplicationCredentialsApi(api_client)
     app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
 
     try:
@@ -637,14 +637,14 @@ Publishes a certificate signing request for the app with a signed X.509 certific
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.json_web_key import JsonWebKey
-from openapi_client.rest import ApiException
+import okta
+from okta.models.json_web_key import JsonWebKey
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -662,9 +662,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApplicationCredentialsApi(api_client)
+    api_instance = okta.ApplicationCredentialsApi(api_client)
     app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
     csr_id = 'fd7x1h7uTcZFx22rU1f7' # str | `id` of the CSR
     body = None # bytearray | 
@@ -727,13 +727,13 @@ Revokes a certificate signing request and deletes the key pair from the applicat
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -751,9 +751,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApplicationCredentialsApi(api_client)
+    api_instance = okta.ApplicationCredentialsApi(api_client)
     app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
     csr_id = 'fd7x1h7uTcZFx22rU1f7' # str | `id` of the CSR
 

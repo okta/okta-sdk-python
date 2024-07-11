@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.group_schema_definitions import GroupSchemaDefinitions
+from okta.models.group_schema_definitions import GroupSchemaDefinitions
 
 # TODO update the JSON string below
 json = "{}"

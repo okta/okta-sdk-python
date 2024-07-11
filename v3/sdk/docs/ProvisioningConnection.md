@@ -7,13 +7,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **auth_scheme** | [**ProvisioningConnectionAuthScheme**](ProvisioningConnectionAuthScheme.md) |  | 
 **profile** | [**ProvisioningConnectionProfile**](ProvisioningConnectionProfile.md) |  | [optional] 
-**status** | [**ProvisioningConnectionStatus**](ProvisioningConnectionStatus.md) |  | 
+**status** | [**ProvisioningConnectionStatus**](ProvisioningConnectionStatus.md) |  | [default to ProvisioningConnectionStatus.DISABLED]
 **links** | [**LinksSelfAndLifecycle**](LinksSelfAndLifecycle.md) |  | [optional] 
 
 ## Example
 
 ```python
-from openapi_client.models.provisioning_connection import ProvisioningConnection
+from okta.models.provisioning_connection import ProvisioningConnection
 
 # TODO update the JSON string below
 json = "{}"

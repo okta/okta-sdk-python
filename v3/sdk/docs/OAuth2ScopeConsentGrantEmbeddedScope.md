@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.o_auth2_scope_consent_grant_embedded_scope import OAuth2ScopeConsentGrantEmbeddedScope
+from okta.models.o_auth2_scope_consent_grant_embedded_scope import OAuth2ScopeConsentGrantEmbeddedScope
 
 # TODO update the JSON string below
 json = "{}"

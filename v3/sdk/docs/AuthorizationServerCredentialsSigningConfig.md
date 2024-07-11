@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.authorization_server_credentials_signing_config import AuthorizationServerCredentialsSigningConfig
+from okta.models.authorization_server_credentials_signing_config import AuthorizationServerCredentialsSigningConfig
 
 # TODO update the JSON string below
 json = "{}"

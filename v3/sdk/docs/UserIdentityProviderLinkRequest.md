@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.user_identity_provider_link_request import UserIdentityProviderLinkRequest
+from okta.models.user_identity_provider_link_request import UserIdentityProviderLinkRequest
 
 # TODO update the JSON string below
 json = "{}"

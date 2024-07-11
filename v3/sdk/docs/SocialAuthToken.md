@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.social_auth_token import SocialAuthToken
+from okta.models.social_auth_token import SocialAuthToken
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,4 +1,4 @@
-# openapi_client.TrustedOriginApi
+# okta.TrustedOriginApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -26,14 +26,14 @@ Activates a trusted origin
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.trusted_origin import TrustedOrigin
-from openapi_client.rest import ApiException
+import okta
+from okta.models.trusted_origin import TrustedOrigin
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -51,9 +51,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.TrustedOriginApi(api_client)
+    api_instance = okta.TrustedOriginApi(api_client)
     trusted_origin_id = '7j2PkU1nyNIDe26ZNufR' # str | `id` of the Trusted Origin
 
     try:
@@ -111,14 +111,14 @@ Creates a trusted origin
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.trusted_origin import TrustedOrigin
-from openapi_client.rest import ApiException
+import okta
+from okta.models.trusted_origin import TrustedOrigin
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -136,10 +136,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.TrustedOriginApi(api_client)
-    trusted_origin = openapi_client.TrustedOrigin() # TrustedOrigin | 
+    api_instance = okta.TrustedOriginApi(api_client)
+    trusted_origin = okta.TrustedOrigin() # TrustedOrigin | 
 
     try:
         # Create a Trusted Origin
@@ -196,14 +196,14 @@ Deactivates a trusted origin
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.trusted_origin import TrustedOrigin
-from openapi_client.rest import ApiException
+import okta
+from okta.models.trusted_origin import TrustedOrigin
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -221,9 +221,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.TrustedOriginApi(api_client)
+    api_instance = okta.TrustedOriginApi(api_client)
     trusted_origin_id = '7j2PkU1nyNIDe26ZNufR' # str | `id` of the Trusted Origin
 
     try:
@@ -281,13 +281,13 @@ Deletes a trusted origin
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -305,9 +305,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.TrustedOriginApi(api_client)
+    api_instance = okta.TrustedOriginApi(api_client)
     trusted_origin_id = '7j2PkU1nyNIDe26ZNufR' # str | `id` of the Trusted Origin
 
     try:
@@ -363,14 +363,14 @@ Retrieves a trusted origin
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.trusted_origin import TrustedOrigin
-from openapi_client.rest import ApiException
+import okta
+from okta.models.trusted_origin import TrustedOrigin
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -388,9 +388,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.TrustedOriginApi(api_client)
+    api_instance = okta.TrustedOriginApi(api_client)
     trusted_origin_id = '7j2PkU1nyNIDe26ZNufR' # str | `id` of the Trusted Origin
 
     try:
@@ -448,14 +448,14 @@ Lists all trusted origins
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.trusted_origin import TrustedOrigin
-from openapi_client.rest import ApiException
+import okta
+from okta.models.trusted_origin import TrustedOrigin
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -473,9 +473,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.TrustedOriginApi(api_client)
+    api_instance = okta.TrustedOriginApi(api_client)
     q = 'q_example' # str |  (optional)
     filter = 'filter_example' # str |  (optional)
     after = 'after_example' # str |  (optional)
@@ -538,14 +538,14 @@ Replaces a trusted origin
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.trusted_origin import TrustedOrigin
-from openapi_client.rest import ApiException
+import okta
+from okta.models.trusted_origin import TrustedOrigin
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -563,11 +563,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.TrustedOriginApi(api_client)
+    api_instance = okta.TrustedOriginApi(api_client)
     trusted_origin_id = '7j2PkU1nyNIDe26ZNufR' # str | `id` of the Trusted Origin
-    trusted_origin = openapi_client.TrustedOrigin() # TrustedOrigin | 
+    trusted_origin = okta.TrustedOrigin() # TrustedOrigin | 
 
     try:
         # Replace a Trusted Origin

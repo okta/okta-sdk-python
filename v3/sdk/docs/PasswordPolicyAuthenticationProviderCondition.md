@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.password_policy_authentication_provider_condition import PasswordPolicyAuthenticationProviderCondition
+from okta.models.password_policy_authentication_provider_condition import PasswordPolicyAuthenticationProviderCondition
 
 # TODO update the JSON string below
 json = "{}"

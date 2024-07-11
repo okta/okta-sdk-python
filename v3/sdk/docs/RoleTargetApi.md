@@ -1,4 +1,4 @@
-# openapi_client.RoleTargetApi
+# okta.RoleTargetApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -36,13 +36,13 @@ Assigns all Apps as Target to Role
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -60,9 +60,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RoleTargetApi(api_client)
+    api_instance = okta.RoleTargetApi(api_client)
     user_id = 'user_id_example' # str | 
     role_id = '3Vg1Pjp3qzw4qcCK5EdO' # str | `id` of the Role
 
@@ -120,13 +120,13 @@ Assigns App Instance Target to App Administrator Role given to a Group
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -144,9 +144,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RoleTargetApi(api_client)
+    api_instance = okta.RoleTargetApi(api_client)
     group_id = '00g1emaKYZTWRYYRRTSK' # str | The `id` of the group
     role_id = '3Vg1Pjp3qzw4qcCK5EdO' # str | `id` of the Role
     app_name = 'oidc_client' # str | 
@@ -208,13 +208,13 @@ Assigns anapplication instance target to appplication administrator role
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -232,9 +232,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RoleTargetApi(api_client)
+    api_instance = okta.RoleTargetApi(api_client)
     user_id = 'user_id_example' # str | 
     role_id = '3Vg1Pjp3qzw4qcCK5EdO' # str | `id` of the Role
     app_name = 'oidc_client' # str | 
@@ -296,13 +296,13 @@ Assigns an application target to administrator role
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -320,9 +320,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RoleTargetApi(api_client)
+    api_instance = okta.RoleTargetApi(api_client)
     group_id = '00g1emaKYZTWRYYRRTSK' # str | The `id` of the group
     role_id = '3Vg1Pjp3qzw4qcCK5EdO' # str | `id` of the Role
     app_name = 'oidc_client' # str | 
@@ -382,13 +382,13 @@ Assigns an application target to administrator role
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -406,9 +406,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RoleTargetApi(api_client)
+    api_instance = okta.RoleTargetApi(api_client)
     user_id = 'user_id_example' # str | 
     role_id = '3Vg1Pjp3qzw4qcCK5EdO' # str | `id` of the Role
     app_name = 'oidc_client' # str | 
@@ -468,13 +468,13 @@ Assigns a group target to a group role
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -492,9 +492,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RoleTargetApi(api_client)
+    api_instance = okta.RoleTargetApi(api_client)
     group_id = '00g1emaKYZTWRYYRRTSK' # str | The `id` of the group
     role_id = '3Vg1Pjp3qzw4qcCK5EdO' # str | `id` of the Role
     target_group_id = '00g1e9dfjHeLAsdX983d' # str | 
@@ -554,13 +554,13 @@ Assigns a Group Target to Role
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -578,9 +578,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RoleTargetApi(api_client)
+    api_instance = okta.RoleTargetApi(api_client)
     user_id = 'user_id_example' # str | 
     role_id = '3Vg1Pjp3qzw4qcCK5EdO' # str | `id` of the Role
     group_id = '00g1emaKYZTWRYYRRTSK' # str | The `id` of the group
@@ -640,14 +640,14 @@ Lists all App targets for an `APP_ADMIN` Role assigned to a Group. This methods 
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.catalog_application import CatalogApplication
-from openapi_client.rest import ApiException
+import okta
+from okta.models.catalog_application import CatalogApplication
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -665,9 +665,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RoleTargetApi(api_client)
+    api_instance = okta.RoleTargetApi(api_client)
     group_id = '00g1emaKYZTWRYYRRTSK' # str | The `id` of the group
     role_id = '3Vg1Pjp3qzw4qcCK5EdO' # str | `id` of the Role
     after = 'after_example' # str |  (optional)
@@ -731,14 +731,14 @@ Lists all App targets for an `APP_ADMIN` Role assigned to a User. This methods r
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.catalog_application import CatalogApplication
-from openapi_client.rest import ApiException
+import okta
+from okta.models.catalog_application import CatalogApplication
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -756,9 +756,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RoleTargetApi(api_client)
+    api_instance = okta.RoleTargetApi(api_client)
     user_id = 'user_id_example' # str | 
     role_id = '3Vg1Pjp3qzw4qcCK5EdO' # str | `id` of the Role
     after = 'after_example' # str |  (optional)
@@ -822,14 +822,14 @@ Lists all group targets for a group role
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.group import Group
-from openapi_client.rest import ApiException
+import okta
+from okta.models.group import Group
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -847,9 +847,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RoleTargetApi(api_client)
+    api_instance = okta.RoleTargetApi(api_client)
     group_id = '00g1emaKYZTWRYYRRTSK' # str | The `id` of the group
     role_id = '3Vg1Pjp3qzw4qcCK5EdO' # str | `id` of the Role
     after = 'after_example' # str |  (optional)
@@ -913,14 +913,14 @@ Lists all group targets for role
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.group import Group
-from openapi_client.rest import ApiException
+import okta
+from okta.models.group import Group
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -938,9 +938,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RoleTargetApi(api_client)
+    api_instance = okta.RoleTargetApi(api_client)
     user_id = 'user_id_example' # str | 
     role_id = '3Vg1Pjp3qzw4qcCK5EdO' # str | `id` of the Role
     after = 'after_example' # str |  (optional)
@@ -1004,13 +1004,13 @@ Unassigns an application instance target from an application administrator role
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1028,9 +1028,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RoleTargetApi(api_client)
+    api_instance = okta.RoleTargetApi(api_client)
     user_id = 'user_id_example' # str | 
     role_id = '3Vg1Pjp3qzw4qcCK5EdO' # str | `id` of the Role
     app_name = 'oidc_client' # str | 
@@ -1092,13 +1092,13 @@ Unassigns an application instance target from application administrator role
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1116,9 +1116,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RoleTargetApi(api_client)
+    api_instance = okta.RoleTargetApi(api_client)
     group_id = '00g1emaKYZTWRYYRRTSK' # str | The `id` of the group
     role_id = '3Vg1Pjp3qzw4qcCK5EdO' # str | `id` of the Role
     app_name = 'oidc_client' # str | 
@@ -1180,13 +1180,13 @@ Unassigns an application target from application administrator role
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1204,9 +1204,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RoleTargetApi(api_client)
+    api_instance = okta.RoleTargetApi(api_client)
     user_id = 'user_id_example' # str | 
     role_id = '3Vg1Pjp3qzw4qcCK5EdO' # str | `id` of the Role
     app_name = 'oidc_client' # str | 
@@ -1266,13 +1266,13 @@ Unassigns an application target from application administrator role
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1290,9 +1290,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RoleTargetApi(api_client)
+    api_instance = okta.RoleTargetApi(api_client)
     group_id = '00g1emaKYZTWRYYRRTSK' # str | The `id` of the group
     role_id = '3Vg1Pjp3qzw4qcCK5EdO' # str | `id` of the Role
     app_name = 'oidc_client' # str | 
@@ -1352,13 +1352,13 @@ Unassigns a group target from a group role
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1376,9 +1376,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RoleTargetApi(api_client)
+    api_instance = okta.RoleTargetApi(api_client)
     group_id = '00g1emaKYZTWRYYRRTSK' # str | The `id` of the group
     role_id = '3Vg1Pjp3qzw4qcCK5EdO' # str | `id` of the Role
     target_group_id = '00g1e9dfjHeLAsdX983d' # str | 
@@ -1438,13 +1438,13 @@ Unassigns a Group Target from Role
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1462,9 +1462,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RoleTargetApi(api_client)
+    api_instance = okta.RoleTargetApi(api_client)
     user_id = 'user_id_example' # str | 
     role_id = '3Vg1Pjp3qzw4qcCK5EdO' # str | `id` of the Role
     group_id = '00g1emaKYZTWRYYRRTSK' # str | The `id` of the group

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.call_user_factor import CallUserFactor
+from okta.models.call_user_factor import CallUserFactor
 
 # TODO update the JSON string below
 json = "{}"

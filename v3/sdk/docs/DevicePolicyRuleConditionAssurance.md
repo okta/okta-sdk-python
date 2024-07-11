@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.device_policy_rule_condition_assurance import DevicePolicyRuleConditionAssurance
+from okta.models.device_policy_rule_condition_assurance import DevicePolicyRuleConditionAssurance
 
 # TODO update the JSON string below
 json = "{}"

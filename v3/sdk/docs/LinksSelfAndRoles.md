@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.links_self_and_roles import LinksSelfAndRoles
+from okta.models.links_self_and_roles import LinksSelfAndRoles
 
 # TODO update the JSON string below
 json = "{}"

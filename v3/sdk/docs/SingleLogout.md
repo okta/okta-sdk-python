@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.single_logout import SingleLogout
+from okta.models.single_logout import SingleLogout
 
 # TODO update the JSON string below
 json = "{}"

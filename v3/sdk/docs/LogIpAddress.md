@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.log_ip_address import LogIpAddress
+from okta.models.log_ip_address import LogIpAddress
 
 # TODO update the JSON string below
 json = "{}"

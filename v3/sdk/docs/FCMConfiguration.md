@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.fcm_configuration import FCMConfiguration
+from okta.models.fcm_configuration import FCMConfiguration
 
 # TODO update the JSON string below
 json = "{}"

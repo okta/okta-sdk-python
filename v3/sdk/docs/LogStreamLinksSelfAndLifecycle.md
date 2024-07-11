@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.log_stream_links_self_and_lifecycle import LogStreamLinksSelfAndLifecycle
+from okta.models.log_stream_links_self_and_lifecycle import LogStreamLinksSelfAndLifecycle
 
 # TODO update the JSON string below
 json = "{}"

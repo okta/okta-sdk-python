@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.device_assurance_mac_os_platform_all_of_third_party_signal_providers import DeviceAssuranceMacOSPlatformAllOfThirdPartySignalProviders
+from okta.models.device_assurance_mac_os_platform_all_of_third_party_signal_providers import DeviceAssuranceMacOSPlatformAllOfThirdPartySignalProviders
 
 # TODO update the JSON string below
 json = "{}"

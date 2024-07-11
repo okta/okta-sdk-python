@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.group_rule_group_condition import GroupRuleGroupCondition
+from okta.models.group_rule_group_condition import GroupRuleGroupCondition
 
 # TODO update the JSON string below
 json = "{}"

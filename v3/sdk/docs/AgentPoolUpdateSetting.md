@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.agent_pool_update_setting import AgentPoolUpdateSetting
+from okta.models.agent_pool_update_setting import AgentPoolUpdateSetting
 
 # TODO update the JSON string below
 json = "{}"

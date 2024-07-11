@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.verify_factor_request import VerifyFactorRequest
+from okta.models.verify_factor_request import VerifyFactorRequest
 
 # TODO update the JSON string below
 json = "{}"

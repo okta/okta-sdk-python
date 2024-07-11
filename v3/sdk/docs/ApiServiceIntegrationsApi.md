@@ -1,4 +1,4 @@
-# openapi_client.ApiServiceIntegrationsApi
+# okta.ApiServiceIntegrationsApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -28,14 +28,14 @@ Activates an API Service Integration instance Secret by `secretId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.api_service_integration_instance_secret import APIServiceIntegrationInstanceSecret
-from openapi_client.rest import ApiException
+import okta
+from okta.models.api_service_integration_instance_secret import APIServiceIntegrationInstanceSecret
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -53,9 +53,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApiServiceIntegrationsApi(api_client)
+    api_instance = okta.ApiServiceIntegrationsApi(api_client)
     api_service_id = '000lr2rLjZ6NsGn1P0g3' # str | `id` of the API Service Integration instance
     secret_id = 'ocs2f4zrZbs8nUa7p0g4' # str | `id` of the API Service Integration instance Secret
 
@@ -115,15 +115,15 @@ Creates and authorizes an API Service Integration instance
 * Api Key Authentication (apiToken):
 
 ```python
-import openapi_client
-from openapi_client.models.post_api_service_integration_instance import PostAPIServiceIntegrationInstance
-from openapi_client.models.post_api_service_integration_instance_request import PostAPIServiceIntegrationInstanceRequest
-from openapi_client.rest import ApiException
+import okta
+from okta.models.post_api_service_integration_instance import PostAPIServiceIntegrationInstance
+from okta.models.post_api_service_integration_instance_request import PostAPIServiceIntegrationInstanceRequest
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -139,10 +139,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['apiToken'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApiServiceIntegrationsApi(api_client)
-    post_api_service_integration_instance_request = openapi_client.PostAPIServiceIntegrationInstanceRequest() # PostAPIServiceIntegrationInstanceRequest | 
+    api_instance = okta.ApiServiceIntegrationsApi(api_client)
+    post_api_service_integration_instance_request = okta.PostAPIServiceIntegrationInstanceRequest() # PostAPIServiceIntegrationInstanceRequest | 
 
     try:
         # Create an API Service Integration instance
@@ -200,14 +200,14 @@ Creates an API Service Integration instance Secret object with a new active clie
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.api_service_integration_instance_secret import APIServiceIntegrationInstanceSecret
-from openapi_client.rest import ApiException
+import okta
+from okta.models.api_service_integration_instance_secret import APIServiceIntegrationInstanceSecret
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -225,9 +225,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApiServiceIntegrationsApi(api_client)
+    api_instance = okta.ApiServiceIntegrationsApi(api_client)
     api_service_id = '000lr2rLjZ6NsGn1P0g3' # str | `id` of the API Service Integration instance
 
     try:
@@ -286,14 +286,14 @@ Deactivates an API Service Integration instance Secret by `secretId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.api_service_integration_instance_secret import APIServiceIntegrationInstanceSecret
-from openapi_client.rest import ApiException
+import okta
+from okta.models.api_service_integration_instance_secret import APIServiceIntegrationInstanceSecret
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -311,9 +311,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApiServiceIntegrationsApi(api_client)
+    api_instance = okta.ApiServiceIntegrationsApi(api_client)
     api_service_id = '000lr2rLjZ6NsGn1P0g3' # str | `id` of the API Service Integration instance
     secret_id = 'ocs2f4zrZbs8nUa7p0g4' # str | `id` of the API Service Integration instance Secret
 
@@ -374,13 +374,13 @@ Deletes an API Service Integration instance by `id`. This operation also revokes
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -398,9 +398,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApiServiceIntegrationsApi(api_client)
+    api_instance = okta.ApiServiceIntegrationsApi(api_client)
     api_service_id = '000lr2rLjZ6NsGn1P0g3' # str | `id` of the API Service Integration instance
 
     try:
@@ -457,13 +457,13 @@ Deletes an API Service Integration instance Secret by `secretId`. You can only d
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -481,9 +481,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApiServiceIntegrationsApi(api_client)
+    api_instance = okta.ApiServiceIntegrationsApi(api_client)
     api_service_id = '000lr2rLjZ6NsGn1P0g3' # str | `id` of the API Service Integration instance
     secret_id = 'ocs2f4zrZbs8nUa7p0g4' # str | `id` of the API Service Integration instance Secret
 
@@ -542,14 +542,14 @@ Retrieves an API Service Integration instance by `id`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.api_service_integration_instance import APIServiceIntegrationInstance
-from openapi_client.rest import ApiException
+import okta
+from okta.models.api_service_integration_instance import APIServiceIntegrationInstance
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -567,9 +567,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApiServiceIntegrationsApi(api_client)
+    api_instance = okta.ApiServiceIntegrationsApi(api_client)
     api_service_id = '000lr2rLjZ6NsGn1P0g3' # str | `id` of the API Service Integration instance
 
     try:
@@ -628,14 +628,14 @@ Lists all client secrets for an API Service Integration instance by `apiServiceI
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.api_service_integration_instance_secret import APIServiceIntegrationInstanceSecret
-from openapi_client.rest import ApiException
+import okta
+from okta.models.api_service_integration_instance_secret import APIServiceIntegrationInstanceSecret
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -653,9 +653,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApiServiceIntegrationsApi(api_client)
+    api_instance = okta.ApiServiceIntegrationsApi(api_client)
     api_service_id = '000lr2rLjZ6NsGn1P0g3' # str | `id` of the API Service Integration instance
 
     try:
@@ -714,14 +714,14 @@ Lists all API Service Integration instances with a pagination option
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.api_service_integration_instance import APIServiceIntegrationInstance
-from openapi_client.rest import ApiException
+import okta
+from okta.models.api_service_integration_instance import APIServiceIntegrationInstance
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -739,9 +739,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApiServiceIntegrationsApi(api_client)
+    api_instance = okta.ApiServiceIntegrationsApi(api_client)
     after = 'after_example' # str | The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information. (optional)
 
     try:

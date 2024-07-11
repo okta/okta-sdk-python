@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.verify_user_factor_response_links import VerifyUserFactorResponseLinks
+from okta.models.verify_user_factor_response_links import VerifyUserFactorResponseLinks
 
 # TODO update the JSON string below
 json = "{}"

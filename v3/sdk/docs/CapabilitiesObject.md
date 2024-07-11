@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.capabilities_object import CapabilitiesObject
+from okta.models.capabilities_object import CapabilitiesObject
 
 # TODO update the JSON string below
 json = "{}"

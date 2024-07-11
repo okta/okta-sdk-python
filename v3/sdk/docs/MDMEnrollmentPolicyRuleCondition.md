@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.mdm_enrollment_policy_rule_condition import MDMEnrollmentPolicyRuleCondition
+from okta.models.mdm_enrollment_policy_rule_condition import MDMEnrollmentPolicyRuleCondition
 
 # TODO update the JSON string below
 json = "{}"

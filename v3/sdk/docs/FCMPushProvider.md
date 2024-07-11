@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.fcm_push_provider import FCMPushProvider
+from okta.models.fcm_push_provider import FCMPushProvider
 
 # TODO update the JSON string below
 json = "{}"

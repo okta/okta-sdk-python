@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.device_user import DeviceUser
+from okta.models.device_user import DeviceUser
 
 # TODO update the JSON string below
 json = "{}"

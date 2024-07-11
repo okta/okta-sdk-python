@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.apns_configuration import APNSConfiguration
+from okta.models.apns_configuration import APNSConfiguration
 
 # TODO update the JSON string below
 json = "{}"

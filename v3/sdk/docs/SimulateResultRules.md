@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.simulate_result_rules import SimulateResultRules
+from okta.models.simulate_result_rules import SimulateResultRules
 
 # TODO update the JSON string below
 json = "{}"

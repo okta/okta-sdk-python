@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.password_dictionary import PasswordDictionary
+from okta.models.password_dictionary import PasswordDictionary
 
 # TODO update the JSON string below
 json = "{}"

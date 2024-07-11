@@ -1,4 +1,4 @@
-# openapi_client.RoleApi
+# okta.RoleApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -29,15 +29,15 @@ Creates a new role
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.create_iam_role_request import CreateIamRoleRequest
-from openapi_client.models.iam_role import IamRole
-from openapi_client.rest import ApiException
+import okta
+from okta.models.create_iam_role_request import CreateIamRoleRequest
+from okta.models.iam_role import IamRole
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -55,10 +55,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RoleApi(api_client)
-    instance = openapi_client.CreateIamRoleRequest() # CreateIamRoleRequest | 
+    api_instance = okta.RoleApi(api_client)
+    instance = okta.CreateIamRoleRequest() # CreateIamRoleRequest | 
 
     try:
         # Create a Role
@@ -115,14 +115,14 @@ Creates a permission specified by `permissionType` to the role
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.create_update_iam_role_permission_request import CreateUpdateIamRolePermissionRequest
-from openapi_client.rest import ApiException
+import okta
+from okta.models.create_update_iam_role_permission_request import CreateUpdateIamRolePermissionRequest
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -140,12 +140,12 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RoleApi(api_client)
+    api_instance = okta.RoleApi(api_client)
     role_id_or_label = 'cr0Yq6IJxGIr0ouum0g3' # str | `id` or `label` of the role
     permission_type = 'okta.users.manage' # str | An okta permission type
-    instance = openapi_client.CreateUpdateIamRolePermissionRequest() # CreateUpdateIamRolePermissionRequest |  (optional)
+    instance = okta.CreateUpdateIamRolePermissionRequest() # CreateUpdateIamRolePermissionRequest |  (optional)
 
     try:
         # Create a Permission
@@ -203,13 +203,13 @@ Deletes a role by `roleIdOrLabel`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -227,9 +227,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RoleApi(api_client)
+    api_instance = okta.RoleApi(api_client)
     role_id_or_label = 'cr0Yq6IJxGIr0ouum0g3' # str | `id` or `label` of the role
 
     try:
@@ -285,13 +285,13 @@ Deletes a permission from a role by `permissionType`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -309,9 +309,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RoleApi(api_client)
+    api_instance = okta.RoleApi(api_client)
     role_id_or_label = 'cr0Yq6IJxGIr0ouum0g3' # str | `id` or `label` of the role
     permission_type = 'okta.users.manage' # str | An okta permission type
 
@@ -369,14 +369,14 @@ Retrieves a role by `roleIdOrLabel`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.iam_role import IamRole
-from openapi_client.rest import ApiException
+import okta
+from okta.models.iam_role import IamRole
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -394,9 +394,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RoleApi(api_client)
+    api_instance = okta.RoleApi(api_client)
     role_id_or_label = 'cr0Yq6IJxGIr0ouum0g3' # str | `id` or `label` of the role
 
     try:
@@ -454,14 +454,14 @@ Retrieves a permission by `permissionType`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.permission import Permission
-from openapi_client.rest import ApiException
+import okta
+from okta.models.permission import Permission
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -479,9 +479,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RoleApi(api_client)
+    api_instance = okta.RoleApi(api_client)
     role_id_or_label = 'cr0Yq6IJxGIr0ouum0g3' # str | `id` or `label` of the role
     permission_type = 'okta.users.manage' # str | An okta permission type
 
@@ -541,14 +541,14 @@ Lists all permissions of the role by `roleIdOrLabel`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.permissions import Permissions
-from openapi_client.rest import ApiException
+import okta
+from okta.models.permissions import Permissions
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -566,9 +566,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RoleApi(api_client)
+    api_instance = okta.RoleApi(api_client)
     role_id_or_label = 'cr0Yq6IJxGIr0ouum0g3' # str | `id` or `label` of the role
 
     try:
@@ -626,14 +626,14 @@ Lists all roles with pagination support
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.iam_roles import IamRoles
-from openapi_client.rest import ApiException
+import okta
+from okta.models.iam_roles import IamRoles
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -651,9 +651,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RoleApi(api_client)
+    api_instance = okta.RoleApi(api_client)
     after = 'after_example' # str | The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information. (optional)
 
     try:
@@ -710,15 +710,15 @@ Replaces a role by `roleIdOrLabel`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.iam_role import IamRole
-from openapi_client.models.update_iam_role_request import UpdateIamRoleRequest
-from openapi_client.rest import ApiException
+import okta
+from okta.models.iam_role import IamRole
+from okta.models.update_iam_role_request import UpdateIamRoleRequest
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -736,11 +736,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RoleApi(api_client)
+    api_instance = okta.RoleApi(api_client)
     role_id_or_label = 'cr0Yq6IJxGIr0ouum0g3' # str | `id` or `label` of the role
-    instance = openapi_client.UpdateIamRoleRequest() # UpdateIamRoleRequest | 
+    instance = okta.UpdateIamRoleRequest() # UpdateIamRoleRequest | 
 
     try:
         # Replace a Role
@@ -799,15 +799,15 @@ Replaces a permission specified by `permissionType` in the role
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.create_update_iam_role_permission_request import CreateUpdateIamRolePermissionRequest
-from openapi_client.models.permission import Permission
-from openapi_client.rest import ApiException
+import okta
+from okta.models.create_update_iam_role_permission_request import CreateUpdateIamRolePermissionRequest
+from okta.models.permission import Permission
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -825,12 +825,12 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RoleApi(api_client)
+    api_instance = okta.RoleApi(api_client)
     role_id_or_label = 'cr0Yq6IJxGIr0ouum0g3' # str | `id` or `label` of the role
     permission_type = 'okta.users.manage' # str | An okta permission type
-    instance = openapi_client.CreateUpdateIamRolePermissionRequest() # CreateUpdateIamRolePermissionRequest |  (optional)
+    instance = okta.CreateUpdateIamRolePermissionRequest() # CreateUpdateIamRolePermissionRequest |  (optional)
 
     try:
         # Replace a Permission

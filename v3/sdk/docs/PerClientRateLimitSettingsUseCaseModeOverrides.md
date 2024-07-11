@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.per_client_rate_limit_settings_use_case_mode_overrides import PerClientRateLimitSettingsUseCaseModeOverrides
+from okta.models.per_client_rate_limit_settings_use_case_mode_overrides import PerClientRateLimitSettingsUseCaseModeOverrides
 
 # TODO update the JSON string below
 json = "{}"

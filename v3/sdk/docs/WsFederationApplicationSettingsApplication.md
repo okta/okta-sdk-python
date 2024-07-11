@@ -21,7 +21,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.ws_federation_application_settings_application import WsFederationApplicationSettingsApplication
+from okta.models.ws_federation_application_settings_application import WsFederationApplicationSettingsApplication
 
 # TODO update the JSON string below
 json = "{}"

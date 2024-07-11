@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**action** | [**RiskProviderAction**](RiskProviderAction.md) |  | 
+**action** | [**RiskProviderAction**](RiskProviderAction.md) |  | [default to RiskProviderAction.LOG_ONLY]
 **client_id** | **str** | The ID of the [OAuth service app](https://developer.okta.com/docs/guides/implement-oauth-for-okta-serviceapp/main/#create-a-service-app-and-grant-scopes) that is used to send risk events to Okta | 
 **created** | **datetime** | Timestamp when the Risk Provider object was created | [optional] [readonly] 
 **id** | **str** | The ID of the Risk Provider object | [readonly] 
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.risk_provider import RiskProvider
+from okta.models.risk_provider import RiskProvider
 
 # TODO update the JSON string below
 json = "{}"

@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.profile_setting_object import ProfileSettingObject
+from okta.models.profile_setting_object import ProfileSettingObject
 
 # TODO update the JSON string below
 json = "{}"

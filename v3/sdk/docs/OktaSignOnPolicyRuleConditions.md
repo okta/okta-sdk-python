@@ -30,7 +30,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.okta_sign_on_policy_rule_conditions import OktaSignOnPolicyRuleConditions
+from okta.models.okta_sign_on_policy_rule_conditions import OktaSignOnPolicyRuleConditions
 
 # TODO update the JSON string below
 json = "{}"

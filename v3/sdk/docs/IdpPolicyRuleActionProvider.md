@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.idp_policy_rule_action_provider import IdpPolicyRuleActionProvider
+from okta.models.idp_policy_rule_action_provider import IdpPolicyRuleActionProvider
 
 # TODO update the JSON string below
 json = "{}"

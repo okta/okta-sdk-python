@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.domain_links import DomainLinks
+from okta.models.domain_links import DomainLinks
 
 # TODO update the JSON string below
 json = "{}"

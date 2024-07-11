@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.user_schema_attribute_master import UserSchemaAttributeMaster
+from okta.models.user_schema_attribute_master import UserSchemaAttributeMaster
 
 # TODO update the JSON string below
 json = "{}"

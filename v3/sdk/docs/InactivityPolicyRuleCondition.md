@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.inactivity_policy_rule_condition import InactivityPolicyRuleCondition
+from okta.models.inactivity_policy_rule_condition import InactivityPolicyRuleCondition
 
 # TODO update the JSON string below
 json = "{}"

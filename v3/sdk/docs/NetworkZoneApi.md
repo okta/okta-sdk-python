@@ -1,4 +1,4 @@
-# openapi_client.NetworkZoneApi
+# okta.NetworkZoneApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -26,14 +26,14 @@ Activates a network zone by `zoneId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.network_zone import NetworkZone
-from openapi_client.rest import ApiException
+import okta
+from okta.models.network_zone import NetworkZone
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -51,9 +51,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.NetworkZoneApi(api_client)
+    api_instance = okta.NetworkZoneApi(api_client)
     zone_id = 'nzowc1U5Jh5xuAK0o0g3' # str | `id` of the Network Zone
 
     try:
@@ -111,14 +111,14 @@ Creates a new network zone. * At least one of either the `gateways` attribute or
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.network_zone import NetworkZone
-from openapi_client.rest import ApiException
+import okta
+from okta.models.network_zone import NetworkZone
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -136,10 +136,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.NetworkZoneApi(api_client)
-    zone = openapi_client.NetworkZone() # NetworkZone | 
+    api_instance = okta.NetworkZoneApi(api_client)
+    zone = okta.NetworkZone() # NetworkZone | 
 
     try:
         # Create a Network Zone
@@ -196,14 +196,14 @@ Deactivates a network zone by `zoneId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.network_zone import NetworkZone
-from openapi_client.rest import ApiException
+import okta
+from okta.models.network_zone import NetworkZone
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -221,9 +221,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.NetworkZoneApi(api_client)
+    api_instance = okta.NetworkZoneApi(api_client)
     zone_id = 'nzowc1U5Jh5xuAK0o0g3' # str | `id` of the Network Zone
 
     try:
@@ -281,13 +281,13 @@ Deletes network zone by `zoneId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -305,9 +305,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.NetworkZoneApi(api_client)
+    api_instance = okta.NetworkZoneApi(api_client)
     zone_id = 'nzowc1U5Jh5xuAK0o0g3' # str | `id` of the Network Zone
 
     try:
@@ -363,14 +363,14 @@ Retrieves a network zone by `zoneId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.network_zone import NetworkZone
-from openapi_client.rest import ApiException
+import okta
+from okta.models.network_zone import NetworkZone
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -388,9 +388,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.NetworkZoneApi(api_client)
+    api_instance = okta.NetworkZoneApi(api_client)
     zone_id = 'nzowc1U5Jh5xuAK0o0g3' # str | `id` of the Network Zone
 
     try:
@@ -448,14 +448,14 @@ Lists all network zones with pagination. A subset of zones can be returned that 
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.network_zone import NetworkZone
-from openapi_client.rest import ApiException
+import okta
+from okta.models.network_zone import NetworkZone
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -473,9 +473,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.NetworkZoneApi(api_client)
+    api_instance = okta.NetworkZoneApi(api_client)
     after = '200u7yq5goxNFTiMjW1d7' # str | Specifies the pagination cursor for the next page of network zones (optional)
     limit = -1 # int | Specifies the number of results for a page (optional) (default to -1)
     filter = 'filter=%28id+eq+%22nzowc1U5Jh5xuAK0o0g3%22%29' # str | Filters zones by usage or ID expression (optional)
@@ -536,14 +536,14 @@ Replaces a network zone by `zoneId`. The replaced network zone type must be the 
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.network_zone import NetworkZone
-from openapi_client.rest import ApiException
+import okta
+from okta.models.network_zone import NetworkZone
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -561,11 +561,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.NetworkZoneApi(api_client)
+    api_instance = okta.NetworkZoneApi(api_client)
     zone_id = 'nzowc1U5Jh5xuAK0o0g3' # str | `id` of the Network Zone
-    zone = openapi_client.NetworkZone() # NetworkZone | 
+    zone = okta.NetworkZone() # NetworkZone | 
 
     try:
         # Replace a Network Zone

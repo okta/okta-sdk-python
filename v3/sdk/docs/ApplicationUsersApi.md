@@ -1,4 +1,4 @@
-# openapi_client.ApplicationUsersApi
+# okta.ApplicationUsersApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -24,14 +24,14 @@ Assigns a user to an app with credentials and an app-specific [profile](/openapi
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.app_user import AppUser
-from openapi_client.rest import ApiException
+import okta
+from okta.models.app_user import AppUser
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -49,11 +49,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApplicationUsersApi(api_client)
+    api_instance = okta.ApplicationUsersApi(api_client)
     app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
-    app_user = openapi_client.AppUser() # AppUser | 
+    app_user = okta.AppUser() # AppUser | 
 
     try:
         # Assign a User
@@ -112,14 +112,14 @@ Retrieves a specific user assignment for app by `id`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.app_user import AppUser
-from openapi_client.rest import ApiException
+import okta
+from okta.models.app_user import AppUser
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -137,9 +137,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApplicationUsersApi(api_client)
+    api_instance = okta.ApplicationUsersApi(api_client)
     app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
     user_id = 'user_id_example' # str | 
     expand = 'expand_example' # str |  (optional)
@@ -201,14 +201,14 @@ Lists all assigned users for an app
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.app_user import AppUser
-from openapi_client.rest import ApiException
+import okta
+from okta.models.app_user import AppUser
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -226,9 +226,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApplicationUsersApi(api_client)
+    api_instance = okta.ApplicationUsersApi(api_client)
     app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
     q = 'q_example' # str |  (optional)
     query_scope = 'query_scope_example' # str |  (optional)
@@ -298,13 +298,13 @@ Unassigns a user from an application
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -322,9 +322,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApplicationUsersApi(api_client)
+    api_instance = okta.ApplicationUsersApi(api_client)
     app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
     user_id = 'user_id_example' # str | 
     send_email = False # bool |  (optional) (default to False)
@@ -384,14 +384,14 @@ Updates a user's profile for an application
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.app_user import AppUser
-from openapi_client.rest import ApiException
+import okta
+from okta.models.app_user import AppUser
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -409,12 +409,12 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApplicationUsersApi(api_client)
+    api_instance = okta.ApplicationUsersApi(api_client)
     app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
     user_id = 'user_id_example' # str | 
-    app_user = openapi_client.AppUser() # AppUser | 
+    app_user = okta.AppUser() # AppUser | 
 
     try:
         # Update an App Profile for an assigned User

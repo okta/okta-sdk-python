@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.app_and_instance_condition_evaluator_app_or_instance import AppAndInstanceConditionEvaluatorAppOrInstance
+from okta.models.app_and_instance_condition_evaluator_app_or_instance import AppAndInstanceConditionEvaluatorAppOrInstance
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,4 +1,4 @@
-# openapi_client.CAPTCHAApi
+# okta.CAPTCHAApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -28,14 +28,14 @@ Creates a new CAPTCHA instance. Currently, an org can only configure a single CA
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.captcha_instance import CAPTCHAInstance
-from openapi_client.rest import ApiException
+import okta
+from okta.models.captcha_instance import CAPTCHAInstance
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -53,10 +53,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CAPTCHAApi(api_client)
-    instance = openapi_client.CAPTCHAInstance() # CAPTCHAInstance | 
+    api_instance = okta.CAPTCHAApi(api_client)
+    instance = okta.CAPTCHAInstance() # CAPTCHAInstance | 
 
     try:
         # Create a CAPTCHA instance
@@ -113,13 +113,13 @@ Deletes a specified CAPTCHA instance > **Note:** If your CAPTCHA instance is sti
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -137,9 +137,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CAPTCHAApi(api_client)
+    api_instance = okta.CAPTCHAApi(api_client)
     captcha_id = 'captcha_id_example' # str | The unique key used to identify your CAPTCHA instance
 
     try:
@@ -195,13 +195,13 @@ Deletes the CAPTCHA settings object for your organization
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -219,9 +219,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CAPTCHAApi(api_client)
+    api_instance = okta.CAPTCHAApi(api_client)
 
     try:
         # Delete the Org-wide CAPTCHA Settings
@@ -273,14 +273,14 @@ Retrieves the properties of a specified CAPTCHA instance
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.captcha_instance import CAPTCHAInstance
-from openapi_client.rest import ApiException
+import okta
+from okta.models.captcha_instance import CAPTCHAInstance
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -298,9 +298,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CAPTCHAApi(api_client)
+    api_instance = okta.CAPTCHAApi(api_client)
     captcha_id = 'captcha_id_example' # str | The unique key used to identify your CAPTCHA instance
 
     try:
@@ -358,14 +358,14 @@ Retrieves the CAPTCHA settings object for your organization. > **Note**: If the 
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.org_captcha_settings import OrgCAPTCHASettings
-from openapi_client.rest import ApiException
+import okta
+from okta.models.org_captcha_settings import OrgCAPTCHASettings
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -383,9 +383,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CAPTCHAApi(api_client)
+    api_instance = okta.CAPTCHAApi(api_client)
 
     try:
         # Retrieve the Org-wide CAPTCHA Settings
@@ -438,14 +438,14 @@ Lists all CAPTCHA instances with pagination support. A subset of CAPTCHA instanc
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.captcha_instance import CAPTCHAInstance
-from openapi_client.rest import ApiException
+import okta
+from okta.models.captcha_instance import CAPTCHAInstance
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -463,9 +463,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CAPTCHAApi(api_client)
+    api_instance = okta.CAPTCHAApi(api_client)
 
     try:
         # List all CAPTCHA Instances
@@ -518,14 +518,14 @@ Replaces the properties for a specified CAPTCHA instance
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.captcha_instance import CAPTCHAInstance
-from openapi_client.rest import ApiException
+import okta
+from okta.models.captcha_instance import CAPTCHAInstance
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -543,11 +543,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CAPTCHAApi(api_client)
+    api_instance = okta.CAPTCHAApi(api_client)
     captcha_id = 'captcha_id_example' # str | The unique key used to identify your CAPTCHA instance
-    instance = openapi_client.CAPTCHAInstance() # CAPTCHAInstance | 
+    instance = okta.CAPTCHAInstance() # CAPTCHAInstance | 
 
     try:
         # Replace a CAPTCHA Instance
@@ -606,14 +606,14 @@ Replaces the CAPTCHA settings object for your organization. > **Note**: You can 
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.org_captcha_settings import OrgCAPTCHASettings
-from openapi_client.rest import ApiException
+import okta
+from okta.models.org_captcha_settings import OrgCAPTCHASettings
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -631,10 +631,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CAPTCHAApi(api_client)
-    org_captcha_settings = openapi_client.OrgCAPTCHASettings() # OrgCAPTCHASettings | 
+    api_instance = okta.CAPTCHAApi(api_client)
+    org_captcha_settings = okta.OrgCAPTCHASettings() # OrgCAPTCHASettings | 
 
     try:
         # Replace the Org-wide CAPTCHA Settings
@@ -691,14 +691,14 @@ Partially updates the properties of a specified CAPTCHA instance
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.captcha_instance import CAPTCHAInstance
-from openapi_client.rest import ApiException
+import okta
+from okta.models.captcha_instance import CAPTCHAInstance
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -716,11 +716,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CAPTCHAApi(api_client)
+    api_instance = okta.CAPTCHAApi(api_client)
     captcha_id = 'captcha_id_example' # str | The unique key used to identify your CAPTCHA instance
-    instance = openapi_client.CAPTCHAInstance() # CAPTCHAInstance | 
+    instance = okta.CAPTCHAInstance() # CAPTCHAInstance | 
 
     try:
         # Update a CAPTCHA Instance

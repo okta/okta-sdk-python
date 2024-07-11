@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.password_credential_hook import PasswordCredentialHook
+from okta.models.password_credential_hook import PasswordCredentialHook
 
 # TODO update the JSON string below
 json = "{}"

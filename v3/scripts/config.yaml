@@ -1,0 +1,7 @@
+templateDir: ./templates
+outputDir: ../sdk
+packageName: okta
+files:
+  okta/okta_configuration.mustache:
+    destinationFilename: okta/okta_configuration.py
+    templateType: SupportingFiles

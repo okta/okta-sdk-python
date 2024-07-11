@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.principal_rate_limit_entity import PrincipalRateLimitEntity
+from okta.models.principal_rate_limit_entity import PrincipalRateLimitEntity
 
 # TODO update the JSON string below
 json = "{}"

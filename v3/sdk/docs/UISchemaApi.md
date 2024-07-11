@@ -1,4 +1,4 @@
-# openapi_client.UISchemaApi
+# okta.UISchemaApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -24,15 +24,15 @@ Creates an input for an enrollment form
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.create_ui_schema import CreateUISchema
-from openapi_client.models.ui_schemas_response_object import UISchemasResponseObject
-from openapi_client.rest import ApiException
+import okta
+from okta.models.create_ui_schema import CreateUISchema
+from okta.models.ui_schemas_response_object import UISchemasResponseObject
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -50,10 +50,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UISchemaApi(api_client)
-    uischemabody = openapi_client.CreateUISchema() # CreateUISchema | 
+    api_instance = okta.UISchemaApi(api_client)
+    uischemabody = okta.CreateUISchema() # CreateUISchema | 
 
     try:
         # Create a UI Schema
@@ -110,13 +110,13 @@ Deletes a UI Schema by `id`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -134,9 +134,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UISchemaApi(api_client)
+    api_instance = okta.UISchemaApi(api_client)
     id = 'uis4a7liocgcRgcxZ0g7' # str | The unique ID of the UI Schema
 
     try:
@@ -193,14 +193,14 @@ Retrieves a UI Schema by `id`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.ui_schemas_response_object import UISchemasResponseObject
-from openapi_client.rest import ApiException
+import okta
+from okta.models.ui_schemas_response_object import UISchemasResponseObject
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -218,9 +218,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UISchemaApi(api_client)
+    api_instance = okta.UISchemaApi(api_client)
     id = 'uis4a7liocgcRgcxZ0g7' # str | The unique ID of the UI Schema
 
     try:
@@ -278,14 +278,14 @@ Lists all UI Schemas in your org
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.ui_schemas_response_object import UISchemasResponseObject
-from openapi_client.rest import ApiException
+import okta
+from okta.models.ui_schemas_response_object import UISchemasResponseObject
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -303,9 +303,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UISchemaApi(api_client)
+    api_instance = okta.UISchemaApi(api_client)
 
     try:
         # List all UI Schemas
@@ -358,15 +358,15 @@ Replaces a UI Schema by `id`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.ui_schemas_response_object import UISchemasResponseObject
-from openapi_client.models.update_ui_schema import UpdateUISchema
-from openapi_client.rest import ApiException
+import okta
+from okta.models.ui_schemas_response_object import UISchemasResponseObject
+from okta.models.update_ui_schema import UpdateUISchema
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -384,11 +384,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UISchemaApi(api_client)
+    api_instance = okta.UISchemaApi(api_client)
     id = 'uis4a7liocgcRgcxZ0g7' # str | The unique ID of the UI Schema
-    update_ui_schema_body = openapi_client.UpdateUISchema() # UpdateUISchema | 
+    update_ui_schema_body = okta.UpdateUISchema() # UpdateUISchema | 
 
     try:
         # Replace a UI Schema

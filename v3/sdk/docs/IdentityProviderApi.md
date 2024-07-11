@@ -1,4 +1,4 @@
-# openapi_client.IdentityProviderApi
+# okta.IdentityProviderApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -44,14 +44,14 @@ Activates an inactive IdP
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.identity_provider import IdentityProvider
-from openapi_client.rest import ApiException
+import okta
+from okta.models.identity_provider import IdentityProvider
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -69,9 +69,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IdentityProviderApi(api_client)
+    api_instance = okta.IdentityProviderApi(api_client)
     idp_id = 'SVHoAOh0l8cPQkVX1LRl' # str | `id` of IdP
 
     try:
@@ -129,14 +129,14 @@ Clones a X.509 certificate for an IdP signing key credential from a source IdP t
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.json_web_key import JsonWebKey
-from openapi_client.rest import ApiException
+import okta
+from okta.models.json_web_key import JsonWebKey
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -154,9 +154,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IdentityProviderApi(api_client)
+    api_instance = okta.IdentityProviderApi(api_client)
     idp_id = 'SVHoAOh0l8cPQkVX1LRl' # str | `id` of IdP
     idp_key_id = 'KmMo85SSsU7TZzOShcGb' # str | `id` of IdP Key
     target_idp_id = 'target_idp_id_example' # str | 
@@ -218,14 +218,14 @@ Creates a new identity provider integration
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.identity_provider import IdentityProvider
-from openapi_client.rest import ApiException
+import okta
+from okta.models.identity_provider import IdentityProvider
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -243,10 +243,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IdentityProviderApi(api_client)
-    identity_provider = openapi_client.IdentityProvider() # IdentityProvider | 
+    api_instance = okta.IdentityProviderApi(api_client)
+    identity_provider = okta.IdentityProvider() # IdentityProvider | 
 
     try:
         # Create an Identity Provider
@@ -303,14 +303,14 @@ Creates a new X.509 certificate credential to the IdP key store.
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.json_web_key import JsonWebKey
-from openapi_client.rest import ApiException
+import okta
+from okta.models.json_web_key import JsonWebKey
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -328,10 +328,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IdentityProviderApi(api_client)
-    json_web_key = openapi_client.JsonWebKey() # JsonWebKey | 
+    api_instance = okta.IdentityProviderApi(api_client)
+    json_web_key = okta.JsonWebKey() # JsonWebKey | 
 
     try:
         # Create an X.509 Certificate Public Key
@@ -388,14 +388,14 @@ Deactivates an active IdP
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.identity_provider import IdentityProvider
-from openapi_client.rest import ApiException
+import okta
+from okta.models.identity_provider import IdentityProvider
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -413,9 +413,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IdentityProviderApi(api_client)
+    api_instance = okta.IdentityProviderApi(api_client)
     idp_id = 'SVHoAOh0l8cPQkVX1LRl' # str | `id` of IdP
 
     try:
@@ -473,13 +473,13 @@ Deletes an identity provider integration by `idpId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -497,9 +497,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IdentityProviderApi(api_client)
+    api_instance = okta.IdentityProviderApi(api_client)
     idp_id = 'SVHoAOh0l8cPQkVX1LRl' # str | `id` of IdP
 
     try:
@@ -555,13 +555,13 @@ Deletes a specific IdP Key Credential by `kid` if it is not currently being used
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -579,9 +579,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IdentityProviderApi(api_client)
+    api_instance = okta.IdentityProviderApi(api_client)
     idp_key_id = 'KmMo85SSsU7TZzOShcGb' # str | `id` of IdP Key
 
     try:
@@ -637,15 +637,15 @@ Generates a new key pair and returns a Certificate Signing Request for it
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.csr import Csr
-from openapi_client.models.csr_metadata import CsrMetadata
-from openapi_client.rest import ApiException
+import okta
+from okta.models.csr import Csr
+from okta.models.csr_metadata import CsrMetadata
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -663,11 +663,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IdentityProviderApi(api_client)
+    api_instance = okta.IdentityProviderApi(api_client)
     idp_id = 'SVHoAOh0l8cPQkVX1LRl' # str | `id` of IdP
-    metadata = openapi_client.CsrMetadata() # CsrMetadata | 
+    metadata = okta.CsrMetadata() # CsrMetadata | 
 
     try:
         # Generate a Certificate Signing Request
@@ -726,14 +726,14 @@ Generates a new X.509 certificate for an IdP signing key credential to be used f
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.json_web_key import JsonWebKey
-from openapi_client.rest import ApiException
+import okta
+from okta.models.json_web_key import JsonWebKey
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -751,9 +751,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IdentityProviderApi(api_client)
+    api_instance = okta.IdentityProviderApi(api_client)
     idp_id = 'SVHoAOh0l8cPQkVX1LRl' # str | `id` of IdP
     validity_years = 56 # int | expiry of the IdP Key Credential
 
@@ -813,14 +813,14 @@ Retrieves a specific Certificate Signing Request model by id
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.csr import Csr
-from openapi_client.rest import ApiException
+import okta
+from okta.models.csr import Csr
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -838,9 +838,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IdentityProviderApi(api_client)
+    api_instance = okta.IdentityProviderApi(api_client)
     idp_id = 'SVHoAOh0l8cPQkVX1LRl' # str | `id` of IdP
     idp_csr_id = '1uEhyE65oV3H6KM9gYcN' # str | `id` of the IdP CSR
 
@@ -900,14 +900,14 @@ Retrieves an identity provider integration by `idpId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.identity_provider import IdentityProvider
-from openapi_client.rest import ApiException
+import okta
+from okta.models.identity_provider import IdentityProvider
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -925,9 +925,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IdentityProviderApi(api_client)
+    api_instance = okta.IdentityProviderApi(api_client)
     idp_id = 'SVHoAOh0l8cPQkVX1LRl' # str | `id` of IdP
 
     try:
@@ -985,14 +985,14 @@ Retrieves a linked IdP user by ID
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.identity_provider_application_user import IdentityProviderApplicationUser
-from openapi_client.rest import ApiException
+import okta
+from okta.models.identity_provider_application_user import IdentityProviderApplicationUser
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1010,9 +1010,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IdentityProviderApi(api_client)
+    api_instance = okta.IdentityProviderApi(api_client)
     idp_id = 'SVHoAOh0l8cPQkVX1LRl' # str | `id` of IdP
     user_id = 'user_id_example' # str | 
 
@@ -1072,14 +1072,14 @@ Retrieves a specific IdP Key Credential by `kid`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.json_web_key import JsonWebKey
-from openapi_client.rest import ApiException
+import okta
+from okta.models.json_web_key import JsonWebKey
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1097,9 +1097,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IdentityProviderApi(api_client)
+    api_instance = okta.IdentityProviderApi(api_client)
     idp_key_id = 'KmMo85SSsU7TZzOShcGb' # str | `id` of IdP Key
 
     try:
@@ -1157,14 +1157,14 @@ Retrieves a specific IdP Key Credential by `kid`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.json_web_key import JsonWebKey
-from openapi_client.rest import ApiException
+import okta
+from okta.models.json_web_key import JsonWebKey
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1182,9 +1182,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IdentityProviderApi(api_client)
+    api_instance = okta.IdentityProviderApi(api_client)
     idp_id = 'SVHoAOh0l8cPQkVX1LRl' # str | `id` of IdP
     idp_key_id = 'KmMo85SSsU7TZzOShcGb' # str | `id` of IdP Key
 
@@ -1244,15 +1244,15 @@ Links an Okta user to an existing Social Identity Provider. This does not suppor
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.identity_provider_application_user import IdentityProviderApplicationUser
-from openapi_client.models.user_identity_provider_link_request import UserIdentityProviderLinkRequest
-from openapi_client.rest import ApiException
+import okta
+from okta.models.identity_provider_application_user import IdentityProviderApplicationUser
+from okta.models.user_identity_provider_link_request import UserIdentityProviderLinkRequest
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1270,12 +1270,12 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IdentityProviderApi(api_client)
+    api_instance = okta.IdentityProviderApi(api_client)
     idp_id = 'SVHoAOh0l8cPQkVX1LRl' # str | `id` of IdP
     user_id = 'user_id_example' # str | 
-    user_identity_provider_link_request = openapi_client.UserIdentityProviderLinkRequest() # UserIdentityProviderLinkRequest | 
+    user_identity_provider_link_request = okta.UserIdentityProviderLinkRequest() # UserIdentityProviderLinkRequest | 
 
     try:
         # Link a User to a Social IdP
@@ -1335,14 +1335,14 @@ Lists all Certificate Signing Requests for an IdP
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.csr import Csr
-from openapi_client.rest import ApiException
+import okta
+from okta.models.csr import Csr
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1360,9 +1360,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IdentityProviderApi(api_client)
+    api_instance = okta.IdentityProviderApi(api_client)
     idp_id = 'SVHoAOh0l8cPQkVX1LRl' # str | `id` of IdP
 
     try:
@@ -1420,14 +1420,14 @@ Lists all users linked to the identity provider
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.identity_provider_application_user import IdentityProviderApplicationUser
-from openapi_client.rest import ApiException
+import okta
+from okta.models.identity_provider_application_user import IdentityProviderApplicationUser
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1445,9 +1445,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IdentityProviderApi(api_client)
+    api_instance = okta.IdentityProviderApi(api_client)
     idp_id = 'SVHoAOh0l8cPQkVX1LRl' # str | `id` of IdP
 
     try:
@@ -1505,14 +1505,14 @@ Lists all IdP key credentials
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.json_web_key import JsonWebKey
-from openapi_client.rest import ApiException
+import okta
+from okta.models.json_web_key import JsonWebKey
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1530,9 +1530,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IdentityProviderApi(api_client)
+    api_instance = okta.IdentityProviderApi(api_client)
     after = 'after_example' # str | Specifies the pagination cursor for the next page of keys (optional)
     limit = 20 # int | Specifies the number of key results in a page (optional) (default to 20)
 
@@ -1591,14 +1591,14 @@ Lists all signing key credentials for an IdP
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.json_web_key import JsonWebKey
-from openapi_client.rest import ApiException
+import okta
+from okta.models.json_web_key import JsonWebKey
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1616,9 +1616,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IdentityProviderApi(api_client)
+    api_instance = okta.IdentityProviderApi(api_client)
     idp_id = 'SVHoAOh0l8cPQkVX1LRl' # str | `id` of IdP
 
     try:
@@ -1676,14 +1676,14 @@ Lists all identity provider integrations with pagination. A subset of IdPs can b
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.identity_provider import IdentityProvider
-from openapi_client.rest import ApiException
+import okta
+from okta.models.identity_provider import IdentityProvider
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1701,9 +1701,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IdentityProviderApi(api_client)
+    api_instance = okta.IdentityProviderApi(api_client)
     q = 'q_example' # str | Searches the name property of IdPs for matching value (optional)
     after = 'after_example' # str | Specifies the pagination cursor for the next page of IdPs (optional)
     limit = 20 # int | Specifies the number of IdP results in a page (optional) (default to 20)
@@ -1766,14 +1766,14 @@ Lists the tokens minted by the Social Authentication Provider when the user auth
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.social_auth_token import SocialAuthToken
-from openapi_client.rest import ApiException
+import okta
+from okta.models.social_auth_token import SocialAuthToken
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1791,9 +1791,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IdentityProviderApi(api_client)
+    api_instance = okta.IdentityProviderApi(api_client)
     idp_id = 'SVHoAOh0l8cPQkVX1LRl' # str | `id` of IdP
     user_id = 'user_id_example' # str | 
 
@@ -1853,14 +1853,14 @@ Publishes a certificate signing request with a signed X.509 certificate and adds
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.json_web_key import JsonWebKey
-from openapi_client.rest import ApiException
+import okta
+from okta.models.json_web_key import JsonWebKey
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1878,9 +1878,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IdentityProviderApi(api_client)
+    api_instance = okta.IdentityProviderApi(api_client)
     idp_id = 'SVHoAOh0l8cPQkVX1LRl' # str | `id` of IdP
     idp_csr_id = '1uEhyE65oV3H6KM9gYcN' # str | `id` of the IdP CSR
     body = None # bytearray | 
@@ -1943,14 +1943,14 @@ Replaces an identity provider integration by `idpId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.identity_provider import IdentityProvider
-from openapi_client.rest import ApiException
+import okta
+from okta.models.identity_provider import IdentityProvider
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1968,11 +1968,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IdentityProviderApi(api_client)
+    api_instance = okta.IdentityProviderApi(api_client)
     idp_id = 'SVHoAOh0l8cPQkVX1LRl' # str | `id` of IdP
-    identity_provider = openapi_client.IdentityProvider() # IdentityProvider | 
+    identity_provider = okta.IdentityProvider() # IdentityProvider | 
 
     try:
         # Replace an Identity Provider
@@ -2031,13 +2031,13 @@ Revokes a certificate signing request and deletes the key pair from the IdP
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -2055,9 +2055,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IdentityProviderApi(api_client)
+    api_instance = okta.IdentityProviderApi(api_client)
     idp_id = 'SVHoAOh0l8cPQkVX1LRl' # str | `id` of IdP
     idp_csr_id = '1uEhyE65oV3H6KM9gYcN' # str | `id` of the IdP CSR
 
@@ -2115,13 +2115,13 @@ Unlinks the link between the Okta user and the IdP user
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -2139,9 +2139,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.IdentityProviderApi(api_client)
+    api_instance = okta.IdentityProviderApi(api_client)
     idp_id = 'SVHoAOh0l8cPQkVX1LRl' # str | `id` of IdP
     user_id = 'user_id_example' # str | 
 

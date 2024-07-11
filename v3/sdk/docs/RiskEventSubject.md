@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.risk_event_subject import RiskEventSubject
+from okta.models.risk_event_subject import RiskEventSubject
 
 # TODO update the JSON string below
 json = "{}"

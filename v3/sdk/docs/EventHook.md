@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.event_hook import EventHook
+from okta.models.event_hook import EventHook
 
 # TODO update the JSON string below
 json = "{}"

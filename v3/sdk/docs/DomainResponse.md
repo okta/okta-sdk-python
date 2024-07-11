@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.domain_response import DomainResponse
+from okta.models.domain_response import DomainResponse
 
 # TODO update the JSON string below
 json = "{}"

@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.assign_group_owner_request_body import AssignGroupOwnerRequestBody
+from okta.models.assign_group_owner_request_body import AssignGroupOwnerRequestBody
 
 # TODO update the JSON string below
 json = "{}"

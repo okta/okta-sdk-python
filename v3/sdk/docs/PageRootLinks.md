@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.page_root_links import PageRootLinks
+from okta.models.page_root_links import PageRootLinks
 
 # TODO update the JSON string below
 json = "{}"

@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.identity_provider_links import IdentityProviderLinks
+from okta.models.identity_provider_links import IdentityProviderLinks
 
 # TODO update the JSON string below
 json = "{}"

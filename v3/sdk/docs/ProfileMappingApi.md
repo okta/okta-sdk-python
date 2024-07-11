@@ -1,4 +1,4 @@
-# openapi_client.ProfileMappingApi
+# okta.ProfileMappingApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -22,14 +22,14 @@ Retrieves a single Profile Mapping referenced by its ID
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.profile_mapping import ProfileMapping
-from openapi_client.rest import ApiException
+import okta
+from okta.models.profile_mapping import ProfileMapping
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -47,9 +47,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ProfileMappingApi(api_client)
+    api_instance = okta.ProfileMappingApi(api_client)
     mapping_id = 'cB6u7X8mptebWkffatKA' # str | `id` of the Mapping
 
     try:
@@ -107,14 +107,14 @@ Lists all profile mappings in your organization with [pagination](https://develo
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.list_profile_mappings import ListProfileMappings
-from openapi_client.rest import ApiException
+import okta
+from okta.models.list_profile_mappings import ListProfileMappings
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -132,9 +132,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ProfileMappingApi(api_client)
+    api_instance = okta.ProfileMappingApi(api_client)
     after = 'after_example' # str | Mapping `id` that specifies the pagination cursor for the next page of mappings (optional)
     limit = 20 # int | Specifies the number of results per page (maximum 200) (optional) (default to 20)
     source_id = 'source_id_example' # str | The UserType or App Instance `id` that acts as the source of expressions in a mapping. If this parameter is included, all returned mappings have this as their `source.id`. (optional)
@@ -197,15 +197,15 @@ Updates an existing profile mapping by adding, updating, or removing one or many
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.profile_mapping import ProfileMapping
-from openapi_client.models.profile_mapping_request import ProfileMappingRequest
-from openapi_client.rest import ApiException
+import okta
+from okta.models.profile_mapping import ProfileMapping
+from okta.models.profile_mapping_request import ProfileMappingRequest
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -223,11 +223,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ProfileMappingApi(api_client)
+    api_instance = okta.ProfileMappingApi(api_client)
     mapping_id = 'cB6u7X8mptebWkffatKA' # str | `id` of the Mapping
-    profile_mapping = openapi_client.ProfileMappingRequest() # ProfileMappingRequest | 
+    profile_mapping = okta.ProfileMappingRequest() # ProfileMappingRequest | 
 
     try:
         # Update a Profile Mapping

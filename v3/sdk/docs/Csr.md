@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.csr import Csr
+from okta.models.csr import Csr
 
 # TODO update the JSON string below
 json = "{}"

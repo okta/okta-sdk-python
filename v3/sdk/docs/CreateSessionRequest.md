@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.create_session_request import CreateSessionRequest
+from okta.models.create_session_request import CreateSessionRequest
 
 # TODO update the JSON string below
 json = "{}"

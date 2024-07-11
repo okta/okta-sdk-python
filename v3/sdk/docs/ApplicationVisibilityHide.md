@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.application_visibility_hide import ApplicationVisibilityHide
+from okta.models.application_visibility_hide import ApplicationVisibilityHide
 
 # TODO update the JSON string below
 json = "{}"

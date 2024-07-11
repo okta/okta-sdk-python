@@ -1,4 +1,4 @@
-# openapi_client.BehaviorApi
+# okta.BehaviorApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -26,14 +26,14 @@ Activates a behavior detection rule
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.behavior_rule import BehaviorRule
-from openapi_client.rest import ApiException
+import okta
+from okta.models.behavior_rule import BehaviorRule
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -51,9 +51,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.BehaviorApi(api_client)
+    api_instance = okta.BehaviorApi(api_client)
     behavior_id = 'abcd1234' # str | id of the Behavior Detection Rule
 
     try:
@@ -111,14 +111,14 @@ Creates a new behavior detection rule
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.behavior_rule import BehaviorRule
-from openapi_client.rest import ApiException
+import okta
+from okta.models.behavior_rule import BehaviorRule
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -136,10 +136,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.BehaviorApi(api_client)
-    rule = openapi_client.BehaviorRule() # BehaviorRule | 
+    api_instance = okta.BehaviorApi(api_client)
+    rule = okta.BehaviorRule() # BehaviorRule | 
 
     try:
         # Create a Behavior Detection Rule
@@ -196,14 +196,14 @@ Deactivates a behavior detection rule
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.behavior_rule import BehaviorRule
-from openapi_client.rest import ApiException
+import okta
+from okta.models.behavior_rule import BehaviorRule
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -221,9 +221,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.BehaviorApi(api_client)
+    api_instance = okta.BehaviorApi(api_client)
     behavior_id = 'abcd1234' # str | id of the Behavior Detection Rule
 
     try:
@@ -281,13 +281,13 @@ Deletes a Behavior Detection Rule by `behaviorId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -305,9 +305,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.BehaviorApi(api_client)
+    api_instance = okta.BehaviorApi(api_client)
     behavior_id = 'abcd1234' # str | id of the Behavior Detection Rule
 
     try:
@@ -363,14 +363,14 @@ Retrieves a Behavior Detection Rule by `behaviorId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.behavior_rule import BehaviorRule
-from openapi_client.rest import ApiException
+import okta
+from okta.models.behavior_rule import BehaviorRule
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -388,9 +388,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.BehaviorApi(api_client)
+    api_instance = okta.BehaviorApi(api_client)
     behavior_id = 'abcd1234' # str | id of the Behavior Detection Rule
 
     try:
@@ -448,14 +448,14 @@ Lists all behavior detection rules with pagination support
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.behavior_rule import BehaviorRule
-from openapi_client.rest import ApiException
+import okta
+from okta.models.behavior_rule import BehaviorRule
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -473,9 +473,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.BehaviorApi(api_client)
+    api_instance = okta.BehaviorApi(api_client)
 
     try:
         # List all Behavior Detection Rules
@@ -528,14 +528,14 @@ Replaces a Behavior Detection Rule by `behaviorId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.behavior_rule import BehaviorRule
-from openapi_client.rest import ApiException
+import okta
+from okta.models.behavior_rule import BehaviorRule
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -553,11 +553,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.BehaviorApi(api_client)
+    api_instance = okta.BehaviorApi(api_client)
     behavior_id = 'abcd1234' # str | id of the Behavior Detection Rule
-    rule = openapi_client.BehaviorRule() # BehaviorRule | 
+    rule = okta.BehaviorRule() # BehaviorRule | 
 
     try:
         # Replace a Behavior Detection Rule

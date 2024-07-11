@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.saml_attribute_statement import SamlAttributeStatement
+from okta.models.saml_attribute_statement import SamlAttributeStatement
 
 # TODO update the JSON string below
 json = "{}"

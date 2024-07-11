@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.ws_federation_application import WsFederationApplication
+from okta.models.ws_federation_application import WsFederationApplication
 
 # TODO update the JSON string below
 json = "{}"

@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.provisioning_connection_profile_token import ProvisioningConnectionProfileToken
+from okta.models.provisioning_connection_profile_token import ProvisioningConnectionProfileToken
 
 # TODO update the JSON string below
 json = "{}"

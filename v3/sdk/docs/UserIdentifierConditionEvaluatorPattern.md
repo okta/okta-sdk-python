@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.user_identifier_condition_evaluator_pattern import UserIdentifierConditionEvaluatorPattern
+from okta.models.user_identifier_condition_evaluator_pattern import UserIdentifierConditionEvaluatorPattern
 
 # TODO update the JSON string below
 json = "{}"

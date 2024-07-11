@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.policy_account_link_filter import PolicyAccountLinkFilter
+from okta.models.policy_account_link_filter import PolicyAccountLinkFilter
 
 # TODO update the JSON string below
 json = "{}"

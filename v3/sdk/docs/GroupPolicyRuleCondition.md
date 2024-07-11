@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.group_policy_rule_condition import GroupPolicyRuleCondition
+from okta.models.group_policy_rule_condition import GroupPolicyRuleCondition
 
 # TODO update the JSON string below
 json = "{}"

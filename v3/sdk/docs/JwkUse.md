@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.jwk_use import JwkUse
+from okta.models.jwk_use import JwkUse
 
 # TODO update the JSON string below
 json = "{}"

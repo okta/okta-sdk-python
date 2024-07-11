@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "openapi_client"
+name = "okta"
 version = "1.0.0"
 description = "Okta Admin Management"
 authors = ["Okta Developer Team <devex-public@okta.com>"]
@@ -7,7 +7,7 @@ license = "Apache-2.0"
 readme = "README.md"
 repository = "https://github.com/GIT_USER_ID/GIT_REPO_ID"
 keywords = ["OpenAPI", "OpenAPI-Generator", "Okta Admin Management"]
-include = ["openapi_client/py.typed"]
+include = ["okta/py.typed"]
 
 [tool.poetry.dependencies]
 python = "^3.7"
@@ -34,7 +34,7 @@ extension-pkg-whitelist = "pydantic"
 
 [tool.mypy]
 files = [
-  "openapi_client",
+  "okta",
   #"test",  # auto-generated tests
   "tests", # hand-written tests
 ]

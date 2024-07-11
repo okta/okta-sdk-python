@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.api.application_groups_api import ApplicationGroupsApi
+from okta.api.application_groups_api import ApplicationGroupsApi
 
 
 class TestApplicationGroupsApi(unittest.TestCase):

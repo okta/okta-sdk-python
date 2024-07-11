@@ -1,4 +1,4 @@
-# openapi_client.ApplicationGrantsApi
+# okta.ApplicationGrantsApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -23,14 +23,14 @@ Retrieves a single scope consent Grant object for the app
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.o_auth2_scope_consent_grant import OAuth2ScopeConsentGrant
-from openapi_client.rest import ApiException
+import okta
+from okta.models.o_auth2_scope_consent_grant import OAuth2ScopeConsentGrant
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -48,9 +48,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApplicationGrantsApi(api_client)
+    api_instance = okta.ApplicationGrantsApi(api_client)
     app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
     grant_id = 'iJoqkwx50mrgX4T9LcaH' # str | ID of the Grant
     expand = 'scope' # str | An optional parameter to include scope details in the `_embedded` attribute. Valid value: `scope` (optional)
@@ -112,14 +112,14 @@ Grants consent for the app to request an OAuth 2.0 Okta scope
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.o_auth2_scope_consent_grant import OAuth2ScopeConsentGrant
-from openapi_client.rest import ApiException
+import okta
+from okta.models.o_auth2_scope_consent_grant import OAuth2ScopeConsentGrant
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -137,11 +137,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApplicationGrantsApi(api_client)
+    api_instance = okta.ApplicationGrantsApi(api_client)
     app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
-    o_auth2_scope_consent_grant = openapi_client.OAuth2ScopeConsentGrant() # OAuth2ScopeConsentGrant | 
+    o_auth2_scope_consent_grant = okta.OAuth2ScopeConsentGrant() # OAuth2ScopeConsentGrant | 
 
     try:
         # Grant consent to scope
@@ -200,14 +200,14 @@ Lists all scope consent Grants for the app
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.o_auth2_scope_consent_grant import OAuth2ScopeConsentGrant
-from openapi_client.rest import ApiException
+import okta
+from okta.models.o_auth2_scope_consent_grant import OAuth2ScopeConsentGrant
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -225,9 +225,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApplicationGrantsApi(api_client)
+    api_instance = okta.ApplicationGrantsApi(api_client)
     app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
     expand = 'scope' # str | An optional parameter to include scope details in the `_embedded` attribute. Valid value: `scope` (optional)
 
@@ -287,13 +287,13 @@ Revokes permission for the app to grant the given scope
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -311,9 +311,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ApplicationGrantsApi(api_client)
+    api_instance = okta.ApplicationGrantsApi(api_client)
     app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
     grant_id = 'iJoqkwx50mrgX4T9LcaH' # str | ID of the Grant
 

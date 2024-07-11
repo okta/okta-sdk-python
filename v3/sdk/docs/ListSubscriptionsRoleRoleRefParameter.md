@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.list_subscriptions_role_role_ref_parameter import ListSubscriptionsRoleRoleRefParameter
+from okta.models.list_subscriptions_role_role_ref_parameter import ListSubscriptionsRoleRoleRefParameter
 
 # TODO update the JSON string below
 json = "{}"

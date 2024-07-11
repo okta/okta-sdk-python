@@ -40,7 +40,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.user_profile import UserProfile
+from okta.models.user_profile import UserProfile
 
 # TODO update the JSON string below
 json = "{}"

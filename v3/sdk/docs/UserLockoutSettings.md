@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.user_lockout_settings import UserLockoutSettings
+from okta.models.user_lockout_settings import UserLockoutSettings
 
 # TODO update the JSON string below
 json = "{}"

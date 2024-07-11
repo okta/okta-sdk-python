@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.policy_network_condition import PolicyNetworkCondition
+from okta.models.policy_network_condition import PolicyNetworkCondition
 
 # TODO update the JSON string below
 json = "{}"

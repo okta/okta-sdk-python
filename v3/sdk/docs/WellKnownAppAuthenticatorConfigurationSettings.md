@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.well_known_app_authenticator_configuration_settings import WellKnownAppAuthenticatorConfigurationSettings
+from okta.models.well_known_app_authenticator_configuration_settings import WellKnownAppAuthenticatorConfigurationSettings
 
 # TODO update the JSON string below
 json = "{}"

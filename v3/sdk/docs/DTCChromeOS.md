@@ -24,7 +24,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.dtc_chrome_os import DTCChromeOS
+from okta.models.dtc_chrome_os import DTCChromeOS
 
 # TODO update the JSON string below
 json = "{}"

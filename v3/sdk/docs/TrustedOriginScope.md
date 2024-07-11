@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.trusted_origin_scope import TrustedOriginScope
+from okta.models.trusted_origin_scope import TrustedOriginScope
 
 # TODO update the JSON string below
 json = "{}"

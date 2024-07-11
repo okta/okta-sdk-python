@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.authentication_provider import AuthenticationProvider
+from okta.models.authentication_provider import AuthenticationProvider
 
 # TODO update the JSON string below
 json = "{}"

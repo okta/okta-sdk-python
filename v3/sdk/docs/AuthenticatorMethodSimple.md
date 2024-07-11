@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.authenticator_method_simple import AuthenticatorMethodSimple
+from okta.models.authenticator_method_simple import AuthenticatorMethodSimple
 
 # TODO update the JSON string below
 json = "{}"

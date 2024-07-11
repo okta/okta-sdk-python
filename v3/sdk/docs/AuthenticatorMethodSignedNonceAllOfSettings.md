@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.authenticator_method_signed_nonce_all_of_settings import AuthenticatorMethodSignedNonceAllOfSettings
+from okta.models.authenticator_method_signed_nonce_all_of_settings import AuthenticatorMethodSignedNonceAllOfSettings
 
 # TODO update the JSON string below
 json = "{}"

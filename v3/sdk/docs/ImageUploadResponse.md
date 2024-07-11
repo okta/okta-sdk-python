@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.image_upload_response import ImageUploadResponse
+from okta.models.image_upload_response import ImageUploadResponse
 
 # TODO update the JSON string below
 json = "{}"

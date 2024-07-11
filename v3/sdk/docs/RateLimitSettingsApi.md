@@ -1,4 +1,4 @@
-# openapi_client.RateLimitSettingsApi
+# okta.RateLimitSettingsApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -25,14 +25,14 @@ Retrieves the currently configured Rate Limit Admin Notification Settings
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.rate_limit_admin_notifications import RateLimitAdminNotifications
-from openapi_client.rest import ApiException
+import okta
+from okta.models.rate_limit_admin_notifications import RateLimitAdminNotifications
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -50,9 +50,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RateLimitSettingsApi(api_client)
+    api_instance = okta.RateLimitSettingsApi(api_client)
 
     try:
         # Retrieve the Rate Limit Admin Notification Settings
@@ -105,14 +105,14 @@ Retrieves the currently configured Per-Client Rate Limit Settings
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.per_client_rate_limit_settings import PerClientRateLimitSettings
-from openapi_client.rest import ApiException
+import okta
+from okta.models.per_client_rate_limit_settings import PerClientRateLimitSettings
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -130,9 +130,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RateLimitSettingsApi(api_client)
+    api_instance = okta.RateLimitSettingsApi(api_client)
 
     try:
         # Retrieve the Per-Client Rate Limit Settings
@@ -185,14 +185,14 @@ Retrieves the currently configured threshold for warning notifications when the 
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.rate_limit_warning_threshold_response import RateLimitWarningThresholdResponse
-from openapi_client.rest import ApiException
+import okta
+from okta.models.rate_limit_warning_threshold_response import RateLimitWarningThresholdResponse
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -210,9 +210,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RateLimitSettingsApi(api_client)
+    api_instance = okta.RateLimitSettingsApi(api_client)
 
     try:
         # Retrieve the Rate Limit Warning Threshold Percentage
@@ -265,14 +265,14 @@ Replaces the Rate Limit Admin Notification Settings and returns the configured p
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.rate_limit_admin_notifications import RateLimitAdminNotifications
-from openapi_client.rest import ApiException
+import okta
+from okta.models.rate_limit_admin_notifications import RateLimitAdminNotifications
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -290,10 +290,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RateLimitSettingsApi(api_client)
-    rate_limit_admin_notifications = openapi_client.RateLimitAdminNotifications() # RateLimitAdminNotifications | 
+    api_instance = okta.RateLimitSettingsApi(api_client)
+    rate_limit_admin_notifications = okta.RateLimitAdminNotifications() # RateLimitAdminNotifications | 
 
     try:
         # Replace the Rate Limit Admin Notification Settings
@@ -350,14 +350,14 @@ Replaces the Per-Client Rate Limit Settings and returns the configured propertie
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.per_client_rate_limit_settings import PerClientRateLimitSettings
-from openapi_client.rest import ApiException
+import okta
+from okta.models.per_client_rate_limit_settings import PerClientRateLimitSettings
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -375,10 +375,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RateLimitSettingsApi(api_client)
-    per_client_rate_limit_settings = openapi_client.PerClientRateLimitSettings() # PerClientRateLimitSettings | 
+    api_instance = okta.RateLimitSettingsApi(api_client)
+    per_client_rate_limit_settings = okta.PerClientRateLimitSettings() # PerClientRateLimitSettings | 
 
     try:
         # Replace the Per-Client Rate Limit Settings
@@ -435,15 +435,15 @@ Replaces the Rate Limit Warning Threshold Percentage and returns the configured 
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.rate_limit_warning_threshold_request import RateLimitWarningThresholdRequest
-from openapi_client.models.rate_limit_warning_threshold_response import RateLimitWarningThresholdResponse
-from openapi_client.rest import ApiException
+import okta
+from okta.models.rate_limit_warning_threshold_request import RateLimitWarningThresholdRequest
+from okta.models.rate_limit_warning_threshold_response import RateLimitWarningThresholdResponse
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -461,10 +461,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RateLimitSettingsApi(api_client)
-    rate_limit_warning_threshold = openapi_client.RateLimitWarningThresholdRequest() # RateLimitWarningThresholdRequest |  (optional)
+    api_instance = okta.RateLimitSettingsApi(api_client)
+    rate_limit_warning_threshold = okta.RateLimitWarningThresholdRequest() # RateLimitWarningThresholdRequest |  (optional)
 
     try:
         # Replace the Rate Limit Warning Threshold Percentage

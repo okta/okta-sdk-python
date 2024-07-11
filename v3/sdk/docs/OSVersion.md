@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.os_version import OSVersion
+from okta.models.os_version import OSVersion
 
 # TODO update the JSON string below
 json = "{}"

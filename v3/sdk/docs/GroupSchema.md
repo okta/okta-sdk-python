@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.group_schema import GroupSchema
+from okta.models.group_schema import GroupSchema
 
 # TODO update the JSON string below
 json = "{}"

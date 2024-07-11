@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.protocol_algorithm_type_signature import ProtocolAlgorithmTypeSignature
+from okta.models.protocol_algorithm_type_signature import ProtocolAlgorithmTypeSignature
 
 # TODO update the JSON string below
 json = "{}"

@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.authenticator_method_totp_all_of_settings import AuthenticatorMethodTotpAllOfSettings
+from okta.models.authenticator_method_totp_all_of_settings import AuthenticatorMethodTotpAllOfSettings
 
 # TODO update the JSON string below
 json = "{}"

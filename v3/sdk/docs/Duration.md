@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.duration import Duration
+from okta.models.duration import Duration
 
 # TODO update the JSON string below
 json = "{}"

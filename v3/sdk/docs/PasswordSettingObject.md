@@ -6,14 +6,14 @@ Determines whether Okta creates and pushes a password in the application for eac
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**change** | [**ChangeEnum**](ChangeEnum.md) |  | [optional] 
-**seed** | [**SeedEnum**](SeedEnum.md) |  | [optional] 
+**change** | [**ChangeEnum**](ChangeEnum.md) |  | [optional] [default to ChangeEnum.KEEP_EXISTING]
+**seed** | [**SeedEnum**](SeedEnum.md) |  | [optional] [default to SeedEnum.RANDOM]
 **status** | [**EnabledStatus**](EnabledStatus.md) |  | [optional] 
 
 ## Example
 
 ```python
-from openapi_client.models.password_setting_object import PasswordSettingObject
+from okta.models.password_setting_object import PasswordSettingObject
 
 # TODO update the JSON string below
 json = "{}"

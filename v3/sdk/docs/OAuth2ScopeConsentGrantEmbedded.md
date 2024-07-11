@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.o_auth2_scope_consent_grant_embedded import OAuth2ScopeConsentGrantEmbedded
+from okta.models.o_auth2_scope_consent_grant_embedded import OAuth2ScopeConsentGrantEmbedded
 
 # TODO update the JSON string below
 json = "{}"

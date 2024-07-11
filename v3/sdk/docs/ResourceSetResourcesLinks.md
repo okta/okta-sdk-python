@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.resource_set_resources_links import ResourceSetResourcesLinks
+from okta.models.resource_set_resources_links import ResourceSetResourcesLinks
 
 # TODO update the JSON string below
 json = "{}"

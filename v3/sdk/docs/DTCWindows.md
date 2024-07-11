@@ -29,7 +29,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.dtc_windows import DTCWindows
+from okta.models.dtc_windows import DTCWindows
 
 # TODO update the JSON string below
 json = "{}"

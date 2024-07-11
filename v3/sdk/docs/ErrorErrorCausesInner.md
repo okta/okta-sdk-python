@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.error_error_causes_inner import ErrorErrorCausesInner
+from okta.models.error_error_causes_inner import ErrorErrorCausesInner
 
 # TODO update the JSON string below
 json = "{}"

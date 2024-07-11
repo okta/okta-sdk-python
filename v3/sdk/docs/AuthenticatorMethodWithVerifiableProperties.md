@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.authenticator_method_with_verifiable_properties import AuthenticatorMethodWithVerifiableProperties
+from okta.models.authenticator_method_with_verifiable_properties import AuthenticatorMethodWithVerifiableProperties
 
 # TODO update the JSON string below
 json = "{}"

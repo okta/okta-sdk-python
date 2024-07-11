@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.create_resource_set_request import CreateResourceSetRequest
+from okta.models.create_resource_set_request import CreateResourceSetRequest
 
 # TODO update the JSON string below
 json = "{}"

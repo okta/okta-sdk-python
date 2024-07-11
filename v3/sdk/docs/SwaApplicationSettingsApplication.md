@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.swa_application_settings_application import SwaApplicationSettingsApplication
+from okta.models.swa_application_settings_application import SwaApplicationSettingsApplication
 
 # TODO update the JSON string below
 json = "{}"

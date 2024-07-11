@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.o_auth2_scope_consent_grant import OAuth2ScopeConsentGrant
+from okta.models.o_auth2_scope_consent_grant import OAuth2ScopeConsentGrant
 
 # TODO update the JSON string below
 json = "{}"

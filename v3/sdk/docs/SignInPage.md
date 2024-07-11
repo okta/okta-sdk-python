@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.sign_in_page import SignInPage
+from okta.models.sign_in_page import SignInPage
 
 # TODO update the JSON string below
 json = "{}"

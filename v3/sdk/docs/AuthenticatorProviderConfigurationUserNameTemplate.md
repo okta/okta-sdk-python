@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.authenticator_provider_configuration_user_name_template import AuthenticatorProviderConfigurationUserNameTemplate
+from okta.models.authenticator_provider_configuration_user_name_template import AuthenticatorProviderConfigurationUserNameTemplate
 
 # TODO update the JSON string below
 json = "{}"

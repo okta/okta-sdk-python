@@ -1,4 +1,4 @@
-# openapi_client.UserApi
+# okta.UserApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -58,14 +58,14 @@ Activates a user. This operation can only be performed on users with a `STAGED` 
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.user_activation_token import UserActivationToken
-from openapi_client.rest import ApiException
+import okta
+from okta.models.user_activation_token import UserActivationToken
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -83,9 +83,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
     send_email = True # bool | Sends an activation email to the user if true (default to True)
 
@@ -145,15 +145,15 @@ Changes a user's password by validating the user's current password. This operat
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.change_password_request import ChangePasswordRequest
-from openapi_client.models.user_credentials import UserCredentials
-from openapi_client.rest import ApiException
+import okta
+from okta.models.change_password_request import ChangePasswordRequest
+from okta.models.user_credentials import UserCredentials
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -171,11 +171,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
-    change_password_request = openapi_client.ChangePasswordRequest() # ChangePasswordRequest | 
+    change_password_request = okta.ChangePasswordRequest() # ChangePasswordRequest | 
     strict = True # bool |  (optional)
 
     try:
@@ -236,14 +236,14 @@ Changes a user's recovery question & answer credential by validating the user's 
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.user_credentials import UserCredentials
-from openapi_client.rest import ApiException
+import okta
+from okta.models.user_credentials import UserCredentials
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -261,11 +261,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
-    user_credentials = openapi_client.UserCredentials() # UserCredentials | 
+    user_credentials = okta.UserCredentials() # UserCredentials | 
 
     try:
         # Change Recovery Question
@@ -324,16 +324,16 @@ Creates a new user in your Okta organization with or without credentials<br> > *
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.create_user_request import CreateUserRequest
-from openapi_client.models.user import User
-from openapi_client.models.user_next_login import UserNextLogin
-from openapi_client.rest import ApiException
+import okta
+from okta.models.create_user_request import CreateUserRequest
+from okta.models.user import User
+from okta.models.user_next_login import UserNextLogin
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -351,13 +351,13 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
-    body = openapi_client.CreateUserRequest() # CreateUserRequest | 
+    api_instance = okta.UserApi(api_client)
+    body = okta.CreateUserRequest() # CreateUserRequest | 
     activate = True # bool | Executes activation lifecycle operation when creating the user (optional) (default to True)
     provider = False # bool | Indicates whether to create a user with a specified authentication provider (optional) (default to False)
-    next_login = openapi_client.UserNextLogin() # UserNextLogin | With activate=true, set nextLogin to \"changePassword\" to have the password be EXPIRED, so user must change it the next time they log in. (optional)
+    next_login = okta.UserNextLogin() # UserNextLogin | With activate=true, set nextLogin to \"changePassword\" to have the password be EXPIRED, so user must change it the next time they log in. (optional)
 
     try:
         # Create a User
@@ -417,13 +417,13 @@ Deactivates a user. This operation can only be performed on users that do not ha
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -441,9 +441,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
     send_email = False # bool |  (optional) (default to False)
 
@@ -501,13 +501,13 @@ Deletes linked objects for a user, relationshipName can be ONLY a primary relati
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -525,9 +525,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
     relationship_name = 'relationship_name_example' # str | 
 
@@ -585,13 +585,13 @@ Deletes a user permanently. This operation can only be performed on users that h
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -609,9 +609,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
     send_email = False # bool |  (optional) (default to False)
 
@@ -670,14 +670,14 @@ Expires a user's password and transitions the user to the status of `PASSWORD_EX
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.user import User
-from openapi_client.rest import ApiException
+import okta
+from okta.models.user import User
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -695,9 +695,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
 
     try:
@@ -755,14 +755,14 @@ Expires a user's password and transitions the user to the status of `PASSWORD_EX
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.temp_password import TempPassword
-from openapi_client.rest import ApiException
+import okta
+from okta.models.temp_password import TempPassword
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -780,9 +780,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
     revoke_sessions = False # bool | When set to `true` (and the session is a user session), all user sessions are revoked except the current session. (optional) (default to False)
 
@@ -842,14 +842,14 @@ Initiates the forgot password flow. Generates a one-time token (OTT) that can be
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.forgot_password_response import ForgotPasswordResponse
-from openapi_client.rest import ApiException
+import okta
+from okta.models.forgot_password_response import ForgotPasswordResponse
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -867,9 +867,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
     send_email = True # bool |  (optional) (default to True)
 
@@ -929,14 +929,14 @@ Resets the user's password to the specified password if the provided answer to t
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.user_credentials import UserCredentials
-from openapi_client.rest import ApiException
+import okta
+from okta.models.user_credentials import UserCredentials
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -954,11 +954,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
-    user_credentials = openapi_client.UserCredentials() # UserCredentials | 
+    user_credentials = okta.UserCredentials() # UserCredentials | 
     send_email = True # bool |  (optional) (default to True)
 
     try:
@@ -1019,14 +1019,14 @@ Generates a one-time token (OTT) that can be used to reset a user's password.  T
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.reset_password_token import ResetPasswordToken
-from openapi_client.rest import ApiException
+import okta
+from okta.models.reset_password_token import ResetPasswordToken
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1044,9 +1044,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
     send_email = True # bool | 
     revoke_sessions = False # bool | When set to `true` (and the session is a user session), all user sessions are revoked except the current session. (optional) (default to False)
@@ -1108,14 +1108,14 @@ Retrieves a refresh token issued for the specified User and Client
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.o_auth2_refresh_token import OAuth2RefreshToken
-from openapi_client.rest import ApiException
+import okta
+from okta.models.o_auth2_refresh_token import OAuth2RefreshToken
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1133,9 +1133,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
     client_id = '52Uy4BUWVBOjFItcg2jWsmnd83Ad8dD' # str | `client_id` of the app
     token_id = 'sHHSth53yJAyNSTQKDJZ' # str | `id` of Token
@@ -1203,14 +1203,14 @@ Retrieves a user from your Okta organization
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.user import User
-from openapi_client.rest import ApiException
+import okta
+from okta.models.user import User
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1228,9 +1228,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
 
     try:
@@ -1288,14 +1288,14 @@ Retrieves a grant for the specified user
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.o_auth2_scope_consent_grant import OAuth2ScopeConsentGrant
-from openapi_client.rest import ApiException
+import okta
+from okta.models.o_auth2_scope_consent_grant import OAuth2ScopeConsentGrant
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1313,9 +1313,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
     grant_id = 'iJoqkwx50mrgX4T9LcaH' # str | ID of the Grant
     expand = 'expand_example' # str |  (optional)
@@ -1377,14 +1377,14 @@ Lists all appLinks for all direct or indirect (via group membership) assigned ap
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.app_link import AppLink
-from openapi_client.rest import ApiException
+import okta
+from okta.models.app_link import AppLink
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1402,9 +1402,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
 
     try:
@@ -1462,14 +1462,14 @@ Lists all grants for a specified user and client
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.o_auth2_scope_consent_grant import OAuth2ScopeConsentGrant
-from openapi_client.rest import ApiException
+import okta
+from okta.models.o_auth2_scope_consent_grant import OAuth2ScopeConsentGrant
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1487,9 +1487,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
     client_id = '52Uy4BUWVBOjFItcg2jWsmnd83Ad8dD' # str | `client_id` of the app
     expand = 'expand_example' # str |  (optional)
@@ -1555,13 +1555,13 @@ Lists all linked objects for a user, relationshipName can be a primary or associ
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1579,9 +1579,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
     relationship_name = 'relationship_name_example' # str | 
     after = 'after_example' # str |  (optional)
@@ -1645,14 +1645,14 @@ Lists all refresh tokens issued for the specified User and Client
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.o_auth2_refresh_token import OAuth2RefreshToken
-from openapi_client.rest import ApiException
+import okta
+from okta.models.o_auth2_refresh_token import OAuth2RefreshToken
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1670,9 +1670,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
     client_id = '52Uy4BUWVBOjFItcg2jWsmnd83Ad8dD' # str | `client_id` of the app
     expand = 'expand_example' # str |  (optional)
@@ -1738,14 +1738,14 @@ Lists information about how the user is blocked from accessing their account
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.user_block import UserBlock
-from openapi_client.rest import ApiException
+import okta
+from okta.models.user_block import UserBlock
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1763,9 +1763,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
 
     try:
@@ -1823,14 +1823,14 @@ Lists all client resources for which the specified user has grants or tokens
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.o_auth2_client import OAuth2Client
-from openapi_client.rest import ApiException
+import okta
+from okta.models.o_auth2_client import OAuth2Client
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1848,9 +1848,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
 
     try:
@@ -1908,14 +1908,14 @@ Lists all grants for the specified user
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.o_auth2_scope_consent_grant import OAuth2ScopeConsentGrant
-from openapi_client.rest import ApiException
+import okta
+from okta.models.o_auth2_scope_consent_grant import OAuth2ScopeConsentGrant
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1933,9 +1933,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
     scope_id = 'scope_id_example' # str |  (optional)
     expand = 'expand_example' # str |  (optional)
@@ -2001,14 +2001,14 @@ Lists all groups of which the user is a member
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.group import Group
-from openapi_client.rest import ApiException
+import okta
+from okta.models.group import Group
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -2026,9 +2026,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
 
     try:
@@ -2086,14 +2086,14 @@ Lists the IdPs associated with the user
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.identity_provider import IdentityProvider
-from openapi_client.rest import ApiException
+import okta
+from okta.models.identity_provider import IdentityProvider
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -2111,9 +2111,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
 
     try:
@@ -2171,14 +2171,14 @@ Lists all users that do not have a status of 'DEPROVISIONED' (by default), up to
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.user import User
-from openapi_client.rest import ApiException
+import okta
+from okta.models.user import User
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -2196,9 +2196,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     q = 'q_example' # str | Finds a user that matches firstName, lastName, and email properties (optional)
     after = 'after_example' # str | The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information. (optional)
     limit = 200 # int | Specifies the number of results returned. Defaults to 10 if `q` is provided. (optional) (default to 200)
@@ -2267,14 +2267,14 @@ Reactivates a user.  This operation can only be performed on users with a `PROVI
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.user_activation_token import UserActivationToken
-from openapi_client.rest import ApiException
+import okta
+from okta.models.user_activation_token import UserActivationToken
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -2292,9 +2292,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
     send_email = False # bool | Sends an activation email to the user if true (optional) (default to False)
 
@@ -2354,14 +2354,14 @@ Replaces a user's profile and/or credentials using strict-update semantics
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.user import User
-from openapi_client.rest import ApiException
+import okta
+from okta.models.user import User
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -2379,11 +2379,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
-    user = openapi_client.User() # User | 
+    user = okta.User() # User | 
     strict = True # bool |  (optional)
 
     try:
@@ -2444,13 +2444,13 @@ Resets all factors for the specified user. All MFA factor enrollments returned t
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -2468,9 +2468,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
 
     try:
@@ -2526,13 +2526,13 @@ Revokes all grants for the specified user and client
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -2550,9 +2550,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
     client_id = '52Uy4BUWVBOjFItcg2jWsmnd83Ad8dD' # str | `client_id` of the app
 
@@ -2610,13 +2610,13 @@ Revokes the specified refresh token
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -2634,9 +2634,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
     client_id = '52Uy4BUWVBOjFItcg2jWsmnd83Ad8dD' # str | `client_id` of the app
     token_id = 'sHHSth53yJAyNSTQKDJZ' # str | `id` of Token
@@ -2696,13 +2696,13 @@ Revokes all refresh tokens issued for the specified User and Client
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -2720,9 +2720,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
     client_id = '52Uy4BUWVBOjFItcg2jWsmnd83Ad8dD' # str | `client_id` of the app
 
@@ -2780,13 +2780,13 @@ Revokes one grant for a specified user
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -2804,9 +2804,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
     grant_id = 'iJoqkwx50mrgX4T9LcaH' # str | ID of the Grant
 
@@ -2864,13 +2864,13 @@ Revokes all grants for a specified user
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -2888,9 +2888,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
 
     try:
@@ -2946,13 +2946,13 @@ Revokes all active identity provider sessions of the user. This forces the user 
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -2970,9 +2970,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
     oauth_tokens = False # bool | Revoke issued OpenID Connect and OAuth refresh and access tokens (optional) (default to False)
 
@@ -3029,13 +3029,13 @@ Creates a Linked Object for two users
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -3047,9 +3047,9 @@ configuration = openapi_client.Configuration(
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
     primary_relationship_name = 'primary_relationship_name_example' # str | 
     primary_user_id = 'ctxeQ5JnAVdGFBB7Zr7W' # str | `id` of primary User
@@ -3109,13 +3109,13 @@ Suspends a user.  This operation can only be performed on users with an `ACTIVE`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -3133,9 +3133,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
 
     try:
@@ -3191,13 +3191,13 @@ Unlocks a user with a `LOCKED_OUT` status or unlocks a user with an `ACTIVE` sta
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -3215,9 +3215,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
 
     try:
@@ -3273,13 +3273,13 @@ Unsuspends a user and returns them to the `ACTIVE` state.  This operation can on
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -3297,9 +3297,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
 
     try:
@@ -3355,15 +3355,15 @@ Updates a user partially determined by the request parameters
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.update_user_request import UpdateUserRequest
-from openapi_client.models.user import User
-from openapi_client.rest import ApiException
+import okta
+from okta.models.update_user_request import UpdateUserRequest
+from okta.models.user import User
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -3381,11 +3381,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.UserApi(api_client)
+    api_instance = okta.UserApi(api_client)
     user_id = 'user_id_example' # str | 
-    user = openapi_client.UpdateUserRequest() # UpdateUserRequest | 
+    user = okta.UpdateUserRequest() # UpdateUserRequest | 
     strict = True # bool |  (optional)
 
     try:

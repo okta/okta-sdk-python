@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.scheduled_user_lifecycle_action import ScheduledUserLifecycleAction
+from okta.models.scheduled_user_lifecycle_action import ScheduledUserLifecycleAction
 
 # TODO update the JSON string below
 json = "{}"

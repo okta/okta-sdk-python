@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.protocol_algorithms import ProtocolAlgorithms
+from okta.models.protocol_algorithms import ProtocolAlgorithms
 
 # TODO update the JSON string below
 json = "{}"

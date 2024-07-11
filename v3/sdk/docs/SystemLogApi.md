@@ -1,4 +1,4 @@
-# openapi_client.SystemLogApi
+# okta.SystemLogApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -20,14 +20,14 @@ Lists all system log events. The Okta System Log API provides read access to you
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.log_event import LogEvent
-from openapi_client.rest import ApiException
+import okta
+from okta.models.log_event import LogEvent
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -45,9 +45,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.SystemLogApi(api_client)
+    api_instance = okta.SystemLogApi(api_client)
     since = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     until = '2013-10-20T19:20:30+01:00' # datetime |  (optional)
     filter = 'filter_example' # str |  (optional)

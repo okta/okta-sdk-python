@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.create_ui_schema import CreateUISchema
+from okta.models.create_ui_schema import CreateUISchema
 
 # TODO update the JSON string below
 json = "{}"

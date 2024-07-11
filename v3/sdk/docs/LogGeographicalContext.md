@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.log_geographical_context import LogGeographicalContext
+from okta.models.log_geographical_context import LogGeographicalContext
 
 # TODO update the JSON string below
 json = "{}"

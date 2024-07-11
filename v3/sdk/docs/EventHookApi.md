@@ -1,4 +1,4 @@
-# openapi_client.EventHookApi
+# okta.EventHookApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -27,14 +27,14 @@ Activates an event hook
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.event_hook import EventHook
-from openapi_client.rest import ApiException
+import okta
+from okta.models.event_hook import EventHook
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -52,9 +52,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.EventHookApi(api_client)
+    api_instance = okta.EventHookApi(api_client)
     event_hook_id = 'YTDQbItFfFuy9RdHrvly' # str | `id` of the Event Hook
 
     try:
@@ -112,14 +112,14 @@ Creates an event hook
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.event_hook import EventHook
-from openapi_client.rest import ApiException
+import okta
+from okta.models.event_hook import EventHook
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -137,10 +137,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.EventHookApi(api_client)
-    event_hook = openapi_client.EventHook() # EventHook | 
+    api_instance = okta.EventHookApi(api_client)
+    event_hook = okta.EventHook() # EventHook | 
 
     try:
         # Create an Event Hook
@@ -197,14 +197,14 @@ Deactivates an event hook
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.event_hook import EventHook
-from openapi_client.rest import ApiException
+import okta
+from okta.models.event_hook import EventHook
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -222,9 +222,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.EventHookApi(api_client)
+    api_instance = okta.EventHookApi(api_client)
     event_hook_id = 'YTDQbItFfFuy9RdHrvly' # str | `id` of the Event Hook
 
     try:
@@ -282,13 +282,13 @@ Deletes an event hook
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -306,9 +306,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.EventHookApi(api_client)
+    api_instance = okta.EventHookApi(api_client)
     event_hook_id = 'YTDQbItFfFuy9RdHrvly' # str | `id` of the Event Hook
 
     try:
@@ -364,14 +364,14 @@ Retrieves an event hook
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.event_hook import EventHook
-from openapi_client.rest import ApiException
+import okta
+from okta.models.event_hook import EventHook
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -389,9 +389,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.EventHookApi(api_client)
+    api_instance = okta.EventHookApi(api_client)
     event_hook_id = 'YTDQbItFfFuy9RdHrvly' # str | `id` of the Event Hook
 
     try:
@@ -449,14 +449,14 @@ Lists all event hooks
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.event_hook import EventHook
-from openapi_client.rest import ApiException
+import okta
+from okta.models.event_hook import EventHook
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -474,9 +474,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.EventHookApi(api_client)
+    api_instance = okta.EventHookApi(api_client)
 
     try:
         # List all Event Hooks
@@ -529,14 +529,14 @@ Replaces an event hook
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.event_hook import EventHook
-from openapi_client.rest import ApiException
+import okta
+from okta.models.event_hook import EventHook
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -554,11 +554,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.EventHookApi(api_client)
+    api_instance = okta.EventHookApi(api_client)
     event_hook_id = 'YTDQbItFfFuy9RdHrvly' # str | `id` of the Event Hook
-    event_hook = openapi_client.EventHook() # EventHook | 
+    event_hook = okta.EventHook() # EventHook | 
 
     try:
         # Replace an Event Hook
@@ -617,14 +617,14 @@ Verifies an event hook
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.event_hook import EventHook
-from openapi_client.rest import ApiException
+import okta
+from okta.models.event_hook import EventHook
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -642,9 +642,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.EventHookApi(api_client)
+    api_instance = okta.EventHookApi(api_client)
     event_hook_id = 'YTDQbItFfFuy9RdHrvly' # str | `id` of the Event Hook
 
     try:

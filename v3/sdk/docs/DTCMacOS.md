@@ -23,7 +23,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.dtc_mac_os import DTCMacOS
+from okta.models.dtc_mac_os import DTCMacOS
 
 # TODO update the JSON string below
 json = "{}"

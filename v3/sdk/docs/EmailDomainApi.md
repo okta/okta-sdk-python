@@ -1,4 +1,4 @@
-# openapi_client.EmailDomainApi
+# okta.EmailDomainApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -25,15 +25,15 @@ Creates an Email Domain in your org
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.email_domain import EmailDomain
-from openapi_client.models.email_domain_response import EmailDomainResponse
-from openapi_client.rest import ApiException
+import okta
+from okta.models.email_domain import EmailDomain
+from okta.models.email_domain_response import EmailDomainResponse
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -51,10 +51,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.EmailDomainApi(api_client)
-    email_domain = openapi_client.EmailDomain() # EmailDomain | 
+    api_instance = okta.EmailDomainApi(api_client)
+    email_domain = okta.EmailDomain() # EmailDomain | 
     expand = ['expand_example'] # List[str] | Specifies additional metadata to be included in the response (optional)
 
     try:
@@ -115,13 +115,13 @@ Deletes an Email Domain by `emailDomainId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -139,9 +139,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.EmailDomainApi(api_client)
+    api_instance = okta.EmailDomainApi(api_client)
     email_domain_id = 'email_domain_id_example' # str | 
     expand = ['expand_example'] # List[str] | Specifies additional metadata to be included in the response (optional)
 
@@ -200,14 +200,14 @@ Retrieves an Email Domain by `emailDomainId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.email_domain_response_with_embedded import EmailDomainResponseWithEmbedded
-from openapi_client.rest import ApiException
+import okta
+from okta.models.email_domain_response_with_embedded import EmailDomainResponseWithEmbedded
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -225,9 +225,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.EmailDomainApi(api_client)
+    api_instance = okta.EmailDomainApi(api_client)
     email_domain_id = 'email_domain_id_example' # str | 
     expand = ['expand_example'] # List[str] | Specifies additional metadata to be included in the response (optional)
 
@@ -287,14 +287,14 @@ Lists all the Email Domains in your org
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.email_domain_response_with_embedded import EmailDomainResponseWithEmbedded
-from openapi_client.rest import ApiException
+import okta
+from okta.models.email_domain_response_with_embedded import EmailDomainResponseWithEmbedded
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -312,9 +312,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.EmailDomainApi(api_client)
+    api_instance = okta.EmailDomainApi(api_client)
     expand = ['expand_example'] # List[str] | Specifies additional metadata to be included in the response (optional)
 
     try:
@@ -371,15 +371,15 @@ Replaces associated username and sender display name by `emailDomainId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.email_domain_response import EmailDomainResponse
-from openapi_client.models.update_email_domain import UpdateEmailDomain
-from openapi_client.rest import ApiException
+import okta
+from okta.models.email_domain_response import EmailDomainResponse
+from okta.models.update_email_domain import UpdateEmailDomain
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -397,11 +397,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.EmailDomainApi(api_client)
+    api_instance = okta.EmailDomainApi(api_client)
     email_domain_id = 'email_domain_id_example' # str | 
-    update_email_domain = openapi_client.UpdateEmailDomain() # UpdateEmailDomain | 
+    update_email_domain = okta.UpdateEmailDomain() # UpdateEmailDomain | 
     expand = ['expand_example'] # List[str] | Specifies additional metadata to be included in the response (optional)
 
     try:
@@ -462,14 +462,14 @@ Verifies an Email Domain by `emailDomainId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.email_domain_response import EmailDomainResponse
-from openapi_client.rest import ApiException
+import okta
+from okta.models.email_domain_response import EmailDomainResponse
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -487,9 +487,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.EmailDomainApi(api_client)
+    api_instance = okta.EmailDomainApi(api_client)
     email_domain_id = 'email_domain_id_example' # str | 
 
     try:

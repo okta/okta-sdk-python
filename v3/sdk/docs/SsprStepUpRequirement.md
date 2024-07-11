@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.sspr_step_up_requirement import SsprStepUpRequirement
+from okta.models.sspr_step_up_requirement import SsprStepUpRequirement
 
 # TODO update the JSON string below
 json = "{}"

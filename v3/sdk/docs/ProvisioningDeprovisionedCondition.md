@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.provisioning_deprovisioned_condition import ProvisioningDeprovisionedCondition
+from okta.models.provisioning_deprovisioned_condition import ProvisioningDeprovisionedCondition
 
 # TODO update the JSON string below
 json = "{}"

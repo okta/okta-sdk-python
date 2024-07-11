@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.application_settings_notifications_vpn_network import ApplicationSettingsNotificationsVpnNetwork
+from okta.models.application_settings_notifications_vpn_network import ApplicationSettingsNotificationsVpnNetwork
 
 # TODO update the JSON string below
 json = "{}"

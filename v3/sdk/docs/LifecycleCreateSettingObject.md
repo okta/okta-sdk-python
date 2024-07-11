@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.lifecycle_create_setting_object import LifecycleCreateSettingObject
+from okta.models.lifecycle_create_setting_object import LifecycleCreateSettingObject
 
 # TODO update the JSON string below
 json = "{}"

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.identity_source_user_profile_for_delete import IdentitySourceUserProfileForDelete
+from okta.models.identity_source_user_profile_for_delete import IdentitySourceUserProfileForDelete
 
 # TODO update the JSON string below
 json = "{}"

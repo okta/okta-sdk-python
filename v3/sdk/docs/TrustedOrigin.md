@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.trusted_origin import TrustedOrigin
+from okta.models.trusted_origin import TrustedOrigin
 
 # TODO update the JSON string below
 json = "{}"

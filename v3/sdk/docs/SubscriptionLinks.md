@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.subscription_links import SubscriptionLinks
+from okta.models.subscription_links import SubscriptionLinks
 
 # TODO update the JSON string below
 json = "{}"

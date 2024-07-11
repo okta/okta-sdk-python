@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.simulate_policy_result import SimulatePolicyResult
+from okta.models.simulate_policy_result import SimulatePolicyResult
 
 # TODO update the JSON string below
 json = "{}"

@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.csr_metadata import CsrMetadata
+from okta.models.csr_metadata import CsrMetadata
 
 # TODO update the JSON string below
 json = "{}"

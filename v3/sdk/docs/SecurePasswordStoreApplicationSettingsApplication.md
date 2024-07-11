@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.secure_password_store_application_settings_application import SecurePasswordStoreApplicationSettingsApplication
+from okta.models.secure_password_store_application_settings_application import SecurePasswordStoreApplicationSettingsApplication
 
 # TODO update the JSON string below
 json = "{}"

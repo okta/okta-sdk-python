@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.log_stream_aws import LogStreamAws
+from okta.models.log_stream_aws import LogStreamAws
 
 # TODO update the JSON string below
 json = "{}"

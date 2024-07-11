@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.bulk_delete_request_body import BulkDeleteRequestBody
+from okta.models.bulk_delete_request_body import BulkDeleteRequestBody
 
 # TODO update the JSON string below
 json = "{}"

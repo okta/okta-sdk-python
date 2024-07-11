@@ -29,7 +29,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.sign_in_page_all_of_widget_customizations import SignInPageAllOfWidgetCustomizations
+from okta.models.sign_in_page_all_of_widget_customizations import SignInPageAllOfWidgetCustomizations
 
 # TODO update the JSON string below
 json = "{}"

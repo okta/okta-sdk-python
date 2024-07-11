@@ -1,4 +1,4 @@
-# openapi_client.InlineHookApi
+# okta.InlineHookApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -27,14 +27,14 @@ Activates the inline hook by `inlineHookId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.inline_hook import InlineHook
-from openapi_client.rest import ApiException
+import okta
+from okta.models.inline_hook import InlineHook
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -52,9 +52,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.InlineHookApi(api_client)
+    api_instance = okta.InlineHookApi(api_client)
     inline_hook_id = 'Y7Rzrd4g4xj6WdKzrBHH' # str | `id` of the Inline Hook
 
     try:
@@ -112,14 +112,14 @@ Creates an inline hook
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.inline_hook import InlineHook
-from openapi_client.rest import ApiException
+import okta
+from okta.models.inline_hook import InlineHook
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -137,10 +137,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.InlineHookApi(api_client)
-    inline_hook = openapi_client.InlineHook() # InlineHook | 
+    api_instance = okta.InlineHookApi(api_client)
+    inline_hook = okta.InlineHook() # InlineHook | 
 
     try:
         # Create an Inline Hook
@@ -197,14 +197,14 @@ Deactivates the inline hook by `inlineHookId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.inline_hook import InlineHook
-from openapi_client.rest import ApiException
+import okta
+from okta.models.inline_hook import InlineHook
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -222,9 +222,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.InlineHookApi(api_client)
+    api_instance = okta.InlineHookApi(api_client)
     inline_hook_id = 'Y7Rzrd4g4xj6WdKzrBHH' # str | `id` of the Inline Hook
 
     try:
@@ -282,13 +282,13 @@ Deletes an inline hook by `inlineHookId`. Once deleted, the Inline Hook is unrec
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -306,9 +306,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.InlineHookApi(api_client)
+    api_instance = okta.InlineHookApi(api_client)
     inline_hook_id = 'Y7Rzrd4g4xj6WdKzrBHH' # str | `id` of the Inline Hook
 
     try:
@@ -364,14 +364,14 @@ Executes the inline hook by `inlineHookId` using the request body as the input. 
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.inline_hook_response import InlineHookResponse
-from openapi_client.rest import ApiException
+import okta
+from okta.models.inline_hook_response import InlineHookResponse
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -389,9 +389,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.InlineHookApi(api_client)
+    api_instance = okta.InlineHookApi(api_client)
     inline_hook_id = 'Y7Rzrd4g4xj6WdKzrBHH' # str | `id` of the Inline Hook
     payload_data = None # object | 
 
@@ -452,14 +452,14 @@ Retrieves an inline hook by `inlineHookId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.inline_hook import InlineHook
-from openapi_client.rest import ApiException
+import okta
+from okta.models.inline_hook import InlineHook
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -477,9 +477,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.InlineHookApi(api_client)
+    api_instance = okta.InlineHookApi(api_client)
     inline_hook_id = 'Y7Rzrd4g4xj6WdKzrBHH' # str | `id` of the Inline Hook
 
     try:
@@ -537,14 +537,14 @@ Lists all inline hooks
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.inline_hook import InlineHook
-from openapi_client.rest import ApiException
+import okta
+from okta.models.inline_hook import InlineHook
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -562,9 +562,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.InlineHookApi(api_client)
+    api_instance = okta.InlineHookApi(api_client)
     type = 'type_example' # str |  (optional)
 
     try:
@@ -621,14 +621,14 @@ Replaces an inline hook by `inlineHookId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.inline_hook import InlineHook
-from openapi_client.rest import ApiException
+import okta
+from okta.models.inline_hook import InlineHook
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -646,11 +646,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.InlineHookApi(api_client)
+    api_instance = okta.InlineHookApi(api_client)
     inline_hook_id = 'Y7Rzrd4g4xj6WdKzrBHH' # str | `id` of the Inline Hook
-    inline_hook = openapi_client.InlineHook() # InlineHook | 
+    inline_hook = okta.InlineHook() # InlineHook | 
 
     try:
         # Replace an Inline Hook

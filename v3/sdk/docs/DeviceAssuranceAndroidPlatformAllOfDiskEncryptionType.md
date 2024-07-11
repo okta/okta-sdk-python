@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.device_assurance_android_platform_all_of_disk_encryption_type import DeviceAssuranceAndroidPlatformAllOfDiskEncryptionType
+from okta.models.device_assurance_android_platform_all_of_disk_encryption_type import DeviceAssuranceAndroidPlatformAllOfDiskEncryptionType
 
 # TODO update the JSON string below
 json = "{}"

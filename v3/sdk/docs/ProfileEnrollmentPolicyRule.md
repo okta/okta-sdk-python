@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.profile_enrollment_policy_rule import ProfileEnrollmentPolicyRule
+from okta.models.profile_enrollment_policy_rule import ProfileEnrollmentPolicyRule
 
 # TODO update the JSON string below
 json = "{}"

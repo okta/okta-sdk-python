@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.password_policy_recovery_question_complexity import PasswordPolicyRecoveryQuestionComplexity
+from okta.models.password_policy_recovery_question_complexity import PasswordPolicyRecoveryQuestionComplexity
 
 # TODO update the JSON string below
 json = "{}"

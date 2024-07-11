@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.slo_participate import SloParticipate
+from okta.models.slo_participate import SloParticipate
 
 # TODO update the JSON string below
 json = "{}"

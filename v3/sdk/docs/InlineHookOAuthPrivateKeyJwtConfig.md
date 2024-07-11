@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.inline_hook_o_auth_private_key_jwt_config import InlineHookOAuthPrivateKeyJwtConfig
+from okta.models.inline_hook_o_auth_private_key_jwt_config import InlineHookOAuthPrivateKeyJwtConfig
 
 # TODO update the JSON string below
 json = "{}"

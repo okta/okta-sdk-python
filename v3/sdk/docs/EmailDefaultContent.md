@@ -7,12 +7,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **body** | **str** | The email&#39;s HTML body. May contain [variable references](https://velocity.apache.org/engine/1.7/user-guide.html#references). | 
 **subject** | **str** | The email&#39;s subject. May contain [variable references](https://velocity.apache.org/engine/1.7/user-guide.html#references). | 
-**links** | [**EmailDefaultContentAllOfLinks**](EmailDefaultContentAllOfLinks.md) |  | [optional] 
+**links** | **object** |  | [optional] 
 
 ## Example
 
 ```python
-from openapi_client.models.email_default_content import EmailDefaultContent
+from okta.models.email_default_content import EmailDefaultContent
 
 # TODO update the JSON string below
 json = "{}"

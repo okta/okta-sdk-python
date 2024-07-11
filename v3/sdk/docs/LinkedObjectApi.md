@@ -1,4 +1,4 @@
-# openapi_client.LinkedObjectApi
+# okta.LinkedObjectApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -23,14 +23,14 @@ Creates a linked object definition
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.linked_object import LinkedObject
-from openapi_client.rest import ApiException
+import okta
+from okta.models.linked_object import LinkedObject
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -48,10 +48,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.LinkedObjectApi(api_client)
-    linked_object = openapi_client.LinkedObject() # LinkedObject | 
+    api_instance = okta.LinkedObjectApi(api_client)
+    linked_object = okta.LinkedObject() # LinkedObject | 
 
     try:
         # Create a Linked Object Definition
@@ -108,13 +108,13 @@ Deletes a linked object definition
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -132,9 +132,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.LinkedObjectApi(api_client)
+    api_instance = okta.LinkedObjectApi(api_client)
     linked_object_name = 'linked_object_name_example' # str | 
 
     try:
@@ -190,14 +190,14 @@ Retrieves a linked object definition
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.linked_object import LinkedObject
-from openapi_client.rest import ApiException
+import okta
+from okta.models.linked_object import LinkedObject
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -215,9 +215,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.LinkedObjectApi(api_client)
+    api_instance = okta.LinkedObjectApi(api_client)
     linked_object_name = 'linked_object_name_example' # str | 
 
     try:
@@ -275,14 +275,14 @@ Lists all linked object definitions
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.linked_object import LinkedObject
-from openapi_client.rest import ApiException
+import okta
+from okta.models.linked_object import LinkedObject
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -300,9 +300,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.LinkedObjectApi(api_client)
+    api_instance = okta.LinkedObjectApi(api_client)
 
     try:
         # List all Linked Object Definitions

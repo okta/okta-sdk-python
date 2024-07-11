@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.self_service_password_reset_action import SelfServicePasswordResetAction
+from okta.models.self_service_password_reset_action import SelfServicePasswordResetAction
 
 # TODO update the JSON string below
 json = "{}"

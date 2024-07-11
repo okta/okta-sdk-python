@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.behavior_rule_settings_anomalous_location import BehaviorRuleSettingsAnomalousLocation
+from okta.models.behavior_rule_settings_anomalous_location import BehaviorRuleSettingsAnomalousLocation
 
 # TODO update the JSON string below
 json = "{}"

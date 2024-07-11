@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.key_request import KeyRequest
+from okta.models.key_request import KeyRequest
 
 # TODO update the JSON string below
 json = "{}"

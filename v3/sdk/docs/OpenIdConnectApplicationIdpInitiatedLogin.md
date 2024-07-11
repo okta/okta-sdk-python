@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.open_id_connect_application_idp_initiated_login import OpenIdConnectApplicationIdpInitiatedLogin
+from okta.models.open_id_connect_application_idp_initiated_login import OpenIdConnectApplicationIdpInitiatedLogin
 
 # TODO update the JSON string below
 json = "{}"

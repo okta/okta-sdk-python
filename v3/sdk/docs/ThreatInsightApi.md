@@ -1,4 +1,4 @@
-# openapi_client.ThreatInsightApi
+# okta.ThreatInsightApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -21,14 +21,14 @@ Retrieves the ThreatInsight configuration for the org
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.threat_insight_configuration import ThreatInsightConfiguration
-from openapi_client.rest import ApiException
+import okta
+from okta.models.threat_insight_configuration import ThreatInsightConfiguration
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -46,9 +46,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ThreatInsightApi(api_client)
+    api_instance = okta.ThreatInsightApi(api_client)
 
     try:
         # Retrieve the ThreatInsight Configuration
@@ -101,14 +101,14 @@ Updates the ThreatInsight configuration for the org
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.threat_insight_configuration import ThreatInsightConfiguration
-from openapi_client.rest import ApiException
+import okta
+from okta.models.threat_insight_configuration import ThreatInsightConfiguration
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -126,10 +126,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ThreatInsightApi(api_client)
-    threat_insight_configuration = openapi_client.ThreatInsightConfiguration() # ThreatInsightConfiguration | 
+    api_instance = okta.ThreatInsightApi(api_client)
+    threat_insight_configuration = okta.ThreatInsightConfiguration() # ThreatInsightConfiguration | 
 
     try:
         # Update the ThreatInsight Configuration

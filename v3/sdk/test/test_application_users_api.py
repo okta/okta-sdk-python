@@ -15,7 +15,7 @@
 
 import unittest
 
-from openapi_client.api.application_users_api import ApplicationUsersApi
+from okta.api.application_users_api import ApplicationUsersApi
 
 
 class TestApplicationUsersApi(unittest.TestCase):

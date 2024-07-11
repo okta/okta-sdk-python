@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.user_condition import UserCondition
+from okta.models.user_condition import UserCondition
 
 # TODO update the JSON string below
 json = "{}"

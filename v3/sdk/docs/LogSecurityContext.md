@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.log_security_context import LogSecurityContext
+from okta.models.log_security_context import LogSecurityContext
 
 # TODO update the JSON string below
 json = "{}"

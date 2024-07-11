@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.group_rule_action import GroupRuleAction
+from okta.models.group_rule_action import GroupRuleAction
 
 # TODO update the JSON string below
 json = "{}"

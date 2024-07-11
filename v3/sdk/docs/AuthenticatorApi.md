@@ -1,4 +1,4 @@
-# openapi_client.AuthenticatorApi
+# okta.AuthenticatorApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -31,14 +31,14 @@ Activates an authenticator by `authenticatorId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.authenticator import Authenticator
-from openapi_client.rest import ApiException
+import okta
+from okta.models.authenticator import Authenticator
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -56,9 +56,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.AuthenticatorApi(api_client)
+    api_instance = okta.AuthenticatorApi(api_client)
     authenticator_id = 'aut1nd8PQhGcQtSxB0g4' # str | `id` of the Authenticator
 
     try:
@@ -116,15 +116,15 @@ Activates a Method for an Authenticator identified by `authenticatorId` and `met
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.authenticator_method_base import AuthenticatorMethodBase
-from openapi_client.models.authenticator_method_type import AuthenticatorMethodType
-from openapi_client.rest import ApiException
+import okta
+from okta.models.authenticator_method_base import AuthenticatorMethodBase
+from okta.models.authenticator_method_type import AuthenticatorMethodType
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -142,11 +142,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.AuthenticatorApi(api_client)
+    api_instance = okta.AuthenticatorApi(api_client)
     authenticator_id = 'aut1nd8PQhGcQtSxB0g4' # str | `id` of the Authenticator
-    method_type = openapi_client.AuthenticatorMethodType() # AuthenticatorMethodType | Type of the authenticator method
+    method_type = okta.AuthenticatorMethodType() # AuthenticatorMethodType | Type of the authenticator method
 
     try:
         # Activate an Authenticator Method
@@ -204,14 +204,14 @@ Creates an authenticator
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.authenticator import Authenticator
-from openapi_client.rest import ApiException
+import okta
+from okta.models.authenticator import Authenticator
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -229,10 +229,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.AuthenticatorApi(api_client)
-    authenticator = openapi_client.Authenticator() # Authenticator | 
+    api_instance = okta.AuthenticatorApi(api_client)
+    authenticator = okta.Authenticator() # Authenticator | 
     activate = False # bool | Whether to execute the activation lifecycle operation when Okta creates the authenticator (optional) (default to False)
 
     try:
@@ -291,14 +291,14 @@ Deactivates an authenticator by `authenticatorId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.authenticator import Authenticator
-from openapi_client.rest import ApiException
+import okta
+from okta.models.authenticator import Authenticator
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -316,9 +316,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.AuthenticatorApi(api_client)
+    api_instance = okta.AuthenticatorApi(api_client)
     authenticator_id = 'aut1nd8PQhGcQtSxB0g4' # str | `id` of the Authenticator
 
     try:
@@ -376,15 +376,15 @@ Deactivates a Method for an Authenticator identified by `authenticatorId` and `m
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.authenticator_method_base import AuthenticatorMethodBase
-from openapi_client.models.authenticator_method_type import AuthenticatorMethodType
-from openapi_client.rest import ApiException
+import okta
+from okta.models.authenticator_method_base import AuthenticatorMethodBase
+from okta.models.authenticator_method_type import AuthenticatorMethodType
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -402,11 +402,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.AuthenticatorApi(api_client)
+    api_instance = okta.AuthenticatorApi(api_client)
     authenticator_id = 'aut1nd8PQhGcQtSxB0g4' # str | `id` of the Authenticator
-    method_type = openapi_client.AuthenticatorMethodType() # AuthenticatorMethodType | Type of the authenticator method
+    method_type = okta.AuthenticatorMethodType() # AuthenticatorMethodType | Type of the authenticator method
 
     try:
         # Deactivate an Authenticator Method
@@ -464,14 +464,14 @@ Retrieves an authenticator from your Okta organization by `authenticatorId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.authenticator import Authenticator
-from openapi_client.rest import ApiException
+import okta
+from okta.models.authenticator import Authenticator
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -489,9 +489,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.AuthenticatorApi(api_client)
+    api_instance = okta.AuthenticatorApi(api_client)
     authenticator_id = 'aut1nd8PQhGcQtSxB0g4' # str | `id` of the Authenticator
 
     try:
@@ -549,15 +549,15 @@ Retrieves a Method identified by `methodType` of an Authenticator identified by 
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.authenticator_method_base import AuthenticatorMethodBase
-from openapi_client.models.authenticator_method_type import AuthenticatorMethodType
-from openapi_client.rest import ApiException
+import okta
+from okta.models.authenticator_method_base import AuthenticatorMethodBase
+from okta.models.authenticator_method_type import AuthenticatorMethodType
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -575,11 +575,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.AuthenticatorApi(api_client)
+    api_instance = okta.AuthenticatorApi(api_client)
     authenticator_id = 'aut1nd8PQhGcQtSxB0g4' # str | `id` of the Authenticator
-    method_type = openapi_client.AuthenticatorMethodType() # AuthenticatorMethodType | Type of the authenticator method
+    method_type = okta.AuthenticatorMethodType() # AuthenticatorMethodType | Type of the authenticator method
 
     try:
         # Retrieve a Method
@@ -635,22 +635,22 @@ Retrieves the well-known app authenticator configuration, which includes an app 
 
 
 ```python
-import openapi_client
-from openapi_client.models.well_known_app_authenticator_configuration import WellKnownAppAuthenticatorConfiguration
-from openapi_client.rest import ApiException
+import okta
+from okta.models.well_known_app_authenticator_configuration import WellKnownAppAuthenticatorConfiguration
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.AuthenticatorApi(api_client)
+    api_instance = okta.AuthenticatorApi(api_client)
     oauth_client_id = 'oauth_client_id_example' # str | Filters app authenticator configurations by `oauthClientId`
 
     try:
@@ -707,14 +707,14 @@ Lists all Methods of an Authenticator identified by `authenticatorId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.authenticator_method_base import AuthenticatorMethodBase
-from openapi_client.rest import ApiException
+import okta
+from okta.models.authenticator_method_base import AuthenticatorMethodBase
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -732,9 +732,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.AuthenticatorApi(api_client)
+    api_instance = okta.AuthenticatorApi(api_client)
     authenticator_id = 'aut1nd8PQhGcQtSxB0g4' # str | `id` of the Authenticator
 
     try:
@@ -792,14 +792,14 @@ Lists all authenticators
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.authenticator import Authenticator
-from openapi_client.rest import ApiException
+import okta
+from okta.models.authenticator import Authenticator
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -817,9 +817,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.AuthenticatorApi(api_client)
+    api_instance = okta.AuthenticatorApi(api_client)
 
     try:
         # List all Authenticators
@@ -872,14 +872,14 @@ Replaces the properties for an Authenticator identified by `authenticatorId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.authenticator import Authenticator
-from openapi_client.rest import ApiException
+import okta
+from okta.models.authenticator import Authenticator
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -897,11 +897,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.AuthenticatorApi(api_client)
+    api_instance = okta.AuthenticatorApi(api_client)
     authenticator_id = 'aut1nd8PQhGcQtSxB0g4' # str | `id` of the Authenticator
-    authenticator = openapi_client.Authenticator() # Authenticator | 
+    authenticator = okta.Authenticator() # Authenticator | 
 
     try:
         # Replace an Authenticator
@@ -960,15 +960,15 @@ Replaces a Method of `methodType` for an Authenticator identified by `authentica
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.authenticator_method_base import AuthenticatorMethodBase
-from openapi_client.models.authenticator_method_type import AuthenticatorMethodType
-from openapi_client.rest import ApiException
+import okta
+from okta.models.authenticator_method_base import AuthenticatorMethodBase
+from okta.models.authenticator_method_type import AuthenticatorMethodType
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -986,12 +986,12 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.AuthenticatorApi(api_client)
+    api_instance = okta.AuthenticatorApi(api_client)
     authenticator_id = 'aut1nd8PQhGcQtSxB0g4' # str | `id` of the Authenticator
-    method_type = openapi_client.AuthenticatorMethodType() # AuthenticatorMethodType | Type of the authenticator method
-    authenticator_method_base = openapi_client.AuthenticatorMethodBase() # AuthenticatorMethodBase |  (optional)
+    method_type = okta.AuthenticatorMethodType() # AuthenticatorMethodType | Type of the authenticator method
+    authenticator_method_base = okta.AuthenticatorMethodBase() # AuthenticatorMethodBase |  (optional)
 
     try:
         # Replace a Method

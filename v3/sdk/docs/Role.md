@@ -19,7 +19,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.role import Role
+from okta.models.role import Role
 
 # TODO update the JSON string below
 json = "{}"

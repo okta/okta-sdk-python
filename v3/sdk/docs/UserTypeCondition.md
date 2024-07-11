@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.user_type_condition import UserTypeCondition
+from okta.models.user_type_condition import UserTypeCondition
 
 # TODO update the JSON string below
 json = "{}"

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.authenticator_method_push import AuthenticatorMethodPush
+from okta.models.authenticator_method_push import AuthenticatorMethodPush
 
 # TODO update the JSON string below
 json = "{}"

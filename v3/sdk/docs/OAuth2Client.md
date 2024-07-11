@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.o_auth2_client import OAuth2Client
+from okta.models.o_auth2_client import OAuth2Client
 
 # TODO update the JSON string below
 json = "{}"

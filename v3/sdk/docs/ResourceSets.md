@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.resource_sets import ResourceSets
+from okta.models.resource_sets import ResourceSets
 
 # TODO update the JSON string below
 json = "{}"

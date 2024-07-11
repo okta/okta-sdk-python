@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.post_api_service_integration_instance_request import PostAPIServiceIntegrationInstanceRequest
+from okta.models.post_api_service_integration_instance_request import PostAPIServiceIntegrationInstanceRequest
 
 # TODO update the JSON string below
 json = "{}"

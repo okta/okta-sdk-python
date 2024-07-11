@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.resource_set_binding_members import ResourceSetBindingMembers
+from okta.models.resource_set_binding_members import ResourceSetBindingMembers
 
 # TODO update the JSON string below
 json = "{}"

@@ -1,4 +1,4 @@
-# openapi_client.HookKeyApi
+# okta.HookKeyApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -25,15 +25,15 @@ Creates a key for use with other parts of the application, such as inline hooks 
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.hook_key import HookKey
-from openapi_client.models.key_request import KeyRequest
-from openapi_client.rest import ApiException
+import okta
+from okta.models.hook_key import HookKey
+from okta.models.key_request import KeyRequest
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -51,10 +51,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.HookKeyApi(api_client)
-    key_request = openapi_client.KeyRequest() # KeyRequest | 
+    api_instance = okta.HookKeyApi(api_client)
+    key_request = okta.KeyRequest() # KeyRequest | 
 
     try:
         # Create a key
@@ -111,13 +111,13 @@ Deletes a key by `hookKeyId`. After being deleted, the key is unrecoverable.  As
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -135,9 +135,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.HookKeyApi(api_client)
+    api_instance = okta.HookKeyApi(api_client)
     hook_key_id = 'XreKU5laGwBkjOTehusG' # str | `id` of the Hook Key
 
     try:
@@ -193,14 +193,14 @@ Retrieves a key by `hookKeyId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.hook_key import HookKey
-from openapi_client.rest import ApiException
+import okta
+from okta.models.hook_key import HookKey
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -218,9 +218,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.HookKeyApi(api_client)
+    api_instance = okta.HookKeyApi(api_client)
     hook_key_id = 'XreKU5laGwBkjOTehusG' # str | `id` of the Hook Key
 
     try:
@@ -278,14 +278,14 @@ Retrieves a public key by `keyId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.json_web_key import JsonWebKey
-from openapi_client.rest import ApiException
+import okta
+from okta.models.json_web_key import JsonWebKey
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -303,9 +303,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.HookKeyApi(api_client)
+    api_instance = okta.HookKeyApi(api_client)
     public_key_id = 'FcH2P9Eg7wr0o8N2FuV0' # str | `id` of the Public Key
 
     try:
@@ -363,14 +363,14 @@ Lists all keys
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.hook_key import HookKey
-from openapi_client.rest import ApiException
+import okta
+from okta.models.hook_key import HookKey
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -388,9 +388,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.HookKeyApi(api_client)
+    api_instance = okta.HookKeyApi(api_client)
 
     try:
         # List all keys
@@ -443,15 +443,15 @@ Replaces a key by `hookKeyId`  This request replaces existing properties after p
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.hook_key import HookKey
-from openapi_client.models.key_request import KeyRequest
-from openapi_client.rest import ApiException
+import okta
+from okta.models.hook_key import HookKey
+from okta.models.key_request import KeyRequest
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -469,11 +469,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.HookKeyApi(api_client)
+    api_instance = okta.HookKeyApi(api_client)
     hook_key_id = 'XreKU5laGwBkjOTehusG' # str | `id` of the Hook Key
-    key_request = openapi_client.KeyRequest() # KeyRequest | 
+    key_request = okta.KeyRequest() # KeyRequest | 
 
     try:
         # Replace a key

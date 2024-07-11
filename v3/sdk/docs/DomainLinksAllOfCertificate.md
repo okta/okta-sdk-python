@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.domain_links_all_of_certificate import DomainLinksAllOfCertificate
+from okta.models.domain_links_all_of_certificate import DomainLinksAllOfCertificate
 
 # TODO update the JSON string below
 json = "{}"

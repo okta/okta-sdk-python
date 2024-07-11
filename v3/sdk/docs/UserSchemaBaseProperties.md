@@ -40,7 +40,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.user_schema_base_properties import UserSchemaBaseProperties
+from okta.models.user_schema_base_properties import UserSchemaBaseProperties
 
 # TODO update the JSON string below
 json = "{}"

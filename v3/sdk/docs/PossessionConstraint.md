@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.possession_constraint import PossessionConstraint
+from okta.models.possession_constraint import PossessionConstraint
 
 # TODO update the JSON string below
 json = "{}"

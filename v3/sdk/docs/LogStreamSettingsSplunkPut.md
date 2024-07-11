@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.log_stream_settings_splunk_put import LogStreamSettingsSplunkPut
+from okta.models.log_stream_settings_splunk_put import LogStreamSettingsSplunkPut
 
 # TODO update the JSON string below
 json = "{}"

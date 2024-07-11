@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.realm_profile import RealmProfile
+from okta.models.realm_profile import RealmProfile
 
 # TODO update the JSON string below
 json = "{}"

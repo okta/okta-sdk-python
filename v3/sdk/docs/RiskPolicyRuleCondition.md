@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.risk_policy_rule_condition import RiskPolicyRuleCondition
+from okta.models.risk_policy_rule_condition import RiskPolicyRuleCondition
 
 # TODO update the JSON string below
 json = "{}"

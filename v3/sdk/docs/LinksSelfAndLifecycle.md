@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.links_self_and_lifecycle import LinksSelfAndLifecycle
+from okta.models.links_self_and_lifecycle import LinksSelfAndLifecycle
 
 # TODO update the JSON string below
 json = "{}"

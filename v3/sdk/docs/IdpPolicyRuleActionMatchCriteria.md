@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.idp_policy_rule_action_match_criteria import IdpPolicyRuleActionMatchCriteria
+from okta.models.idp_policy_rule_action_match_criteria import IdpPolicyRuleActionMatchCriteria
 
 # TODO update the JSON string below
 json = "{}"

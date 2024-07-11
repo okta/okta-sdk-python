@@ -1,4 +1,4 @@
-# openapi_client.AgentPoolsApi
+# okta.AgentPoolsApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -33,14 +33,14 @@ Activates scheduled Agent pool update
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.agent_pool_update import AgentPoolUpdate
-from openapi_client.rest import ApiException
+import okta
+from okta.models.agent_pool_update import AgentPoolUpdate
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -58,9 +58,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.AgentPoolsApi(api_client)
+    api_instance = okta.AgentPoolsApi(api_client)
     pool_id = 'pool_id_example' # str | Id of the agent pool for which the settings will apply
     update_id = 'update_id_example' # str | Id of the update
 
@@ -120,14 +120,14 @@ Creates an Agent pool update \\n For user flow 2 manual update, starts the updat
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.agent_pool_update import AgentPoolUpdate
-from openapi_client.rest import ApiException
+import okta
+from okta.models.agent_pool_update import AgentPoolUpdate
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -145,11 +145,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.AgentPoolsApi(api_client)
+    api_instance = okta.AgentPoolsApi(api_client)
     pool_id = 'pool_id_example' # str | Id of the agent pool for which the settings will apply
-    agent_pool_update = openapi_client.AgentPoolUpdate() # AgentPoolUpdate | 
+    agent_pool_update = okta.AgentPoolUpdate() # AgentPoolUpdate | 
 
     try:
         # Create an Agent Pool update
@@ -208,14 +208,14 @@ Deactivates scheduled Agent pool update
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.agent_pool_update import AgentPoolUpdate
-from openapi_client.rest import ApiException
+import okta
+from okta.models.agent_pool_update import AgentPoolUpdate
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -233,9 +233,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.AgentPoolsApi(api_client)
+    api_instance = okta.AgentPoolsApi(api_client)
     pool_id = 'pool_id_example' # str | Id of the agent pool for which the settings will apply
     update_id = 'update_id_example' # str | Id of the update
 
@@ -295,13 +295,13 @@ Deletes Agent pool update
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -319,9 +319,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.AgentPoolsApi(api_client)
+    api_instance = okta.AgentPoolsApi(api_client)
     pool_id = 'pool_id_example' # str | Id of the agent pool for which the settings will apply
     update_id = 'update_id_example' # str | Id of the update
 
@@ -379,14 +379,14 @@ Retrieves Agent pool update from updateId
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.agent_pool_update import AgentPoolUpdate
-from openapi_client.rest import ApiException
+import okta
+from okta.models.agent_pool_update import AgentPoolUpdate
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -404,9 +404,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.AgentPoolsApi(api_client)
+    api_instance = okta.AgentPoolsApi(api_client)
     pool_id = 'pool_id_example' # str | Id of the agent pool for which the settings will apply
     update_id = 'update_id_example' # str | Id of the update
 
@@ -466,14 +466,14 @@ Retrieves the current state of the agent pool update instance settings
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.agent_pool_update_setting import AgentPoolUpdateSetting
-from openapi_client.rest import ApiException
+import okta
+from okta.models.agent_pool_update_setting import AgentPoolUpdateSetting
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -491,9 +491,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.AgentPoolsApi(api_client)
+    api_instance = okta.AgentPoolsApi(api_client)
     pool_id = 'pool_id_example' # str | Id of the agent pool for which the settings will apply
 
     try:
@@ -551,15 +551,15 @@ Lists all agent pools with pagination support
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.agent_pool import AgentPool
-from openapi_client.models.agent_type import AgentType
-from openapi_client.rest import ApiException
+import okta
+from okta.models.agent_pool import AgentPool
+from okta.models.agent_type import AgentType
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -577,11 +577,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.AgentPoolsApi(api_client)
+    api_instance = okta.AgentPoolsApi(api_client)
     limit_per_pool_type = 5 # int | Maximum number of AgentPools being returned (optional) (default to 5)
-    pool_type = openapi_client.AgentType() # AgentType | Agent type to search for (optional)
+    pool_type = okta.AgentType() # AgentType | Agent type to search for (optional)
     after = 'after_example' # str | The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information. (optional)
 
     try:
@@ -640,14 +640,14 @@ Lists all agent pool updates
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.agent_pool_update import AgentPoolUpdate
-from openapi_client.rest import ApiException
+import okta
+from okta.models.agent_pool_update import AgentPoolUpdate
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -665,9 +665,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.AgentPoolsApi(api_client)
+    api_instance = okta.AgentPoolsApi(api_client)
     pool_id = 'pool_id_example' # str | Id of the agent pool for which the settings will apply
     scheduled = True # bool | Scope the list only to scheduled or ad-hoc updates. If the parameter is not provided we will return the whole list of updates. (optional)
 
@@ -727,14 +727,14 @@ Pauses running or queued Agent pool update
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.agent_pool_update import AgentPoolUpdate
-from openapi_client.rest import ApiException
+import okta
+from okta.models.agent_pool_update import AgentPoolUpdate
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -752,9 +752,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.AgentPoolsApi(api_client)
+    api_instance = okta.AgentPoolsApi(api_client)
     pool_id = 'pool_id_example' # str | Id of the agent pool for which the settings will apply
     update_id = 'update_id_example' # str | Id of the update
 
@@ -814,14 +814,14 @@ Resumes running or queued Agent pool update
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.agent_pool_update import AgentPoolUpdate
-from openapi_client.rest import ApiException
+import okta
+from okta.models.agent_pool_update import AgentPoolUpdate
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -839,9 +839,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.AgentPoolsApi(api_client)
+    api_instance = okta.AgentPoolsApi(api_client)
     pool_id = 'pool_id_example' # str | Id of the agent pool for which the settings will apply
     update_id = 'update_id_example' # str | Id of the update
 
@@ -901,14 +901,14 @@ Retries Agent pool update
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.agent_pool_update import AgentPoolUpdate
-from openapi_client.rest import ApiException
+import okta
+from okta.models.agent_pool_update import AgentPoolUpdate
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -926,9 +926,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.AgentPoolsApi(api_client)
+    api_instance = okta.AgentPoolsApi(api_client)
     pool_id = 'pool_id_example' # str | Id of the agent pool for which the settings will apply
     update_id = 'update_id_example' # str | Id of the update
 
@@ -988,14 +988,14 @@ Stops Agent pool update
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.agent_pool_update import AgentPoolUpdate
-from openapi_client.rest import ApiException
+import okta
+from okta.models.agent_pool_update import AgentPoolUpdate
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1013,9 +1013,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.AgentPoolsApi(api_client)
+    api_instance = okta.AgentPoolsApi(api_client)
     pool_id = 'pool_id_example' # str | Id of the agent pool for which the settings will apply
     update_id = 'update_id_example' # str | Id of the update
 
@@ -1075,14 +1075,14 @@ Updates Agent pool update and return latest agent pool update
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.agent_pool_update import AgentPoolUpdate
-from openapi_client.rest import ApiException
+import okta
+from okta.models.agent_pool_update import AgentPoolUpdate
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1100,12 +1100,12 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.AgentPoolsApi(api_client)
+    api_instance = okta.AgentPoolsApi(api_client)
     pool_id = 'pool_id_example' # str | Id of the agent pool for which the settings will apply
     update_id = 'update_id_example' # str | Id of the update
-    agent_pool_update = openapi_client.AgentPoolUpdate() # AgentPoolUpdate | 
+    agent_pool_update = okta.AgentPoolUpdate() # AgentPoolUpdate | 
 
     try:
         # Update an Agent Pool update by id
@@ -1165,14 +1165,14 @@ Updates an agent pool update settings
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.agent_pool_update_setting import AgentPoolUpdateSetting
-from openapi_client.rest import ApiException
+import okta
+from okta.models.agent_pool_update_setting import AgentPoolUpdateSetting
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1190,11 +1190,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.AgentPoolsApi(api_client)
+    api_instance = okta.AgentPoolsApi(api_client)
     pool_id = 'pool_id_example' # str | Id of the agent pool for which the settings will apply
-    agent_pool_update_setting = openapi_client.AgentPoolUpdateSetting() # AgentPoolUpdateSetting | 
+    agent_pool_update_setting = okta.AgentPoolUpdateSetting() # AgentPoolUpdateSetting | 
 
     try:
         # Update an Agent Pool update settings

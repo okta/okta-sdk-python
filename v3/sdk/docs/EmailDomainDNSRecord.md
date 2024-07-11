@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.email_domain_dns_record import EmailDomainDNSRecord
+from okta.models.email_domain_dns_record import EmailDomainDNSRecord
 
 # TODO update the JSON string below
 json = "{}"

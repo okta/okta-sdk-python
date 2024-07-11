@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.well_known_org_metadata_links import WellKnownOrgMetadataLinks
+from okta.models.well_known_org_metadata_links import WellKnownOrgMetadataLinks
 
 # TODO update the JSON string below
 json = "{}"

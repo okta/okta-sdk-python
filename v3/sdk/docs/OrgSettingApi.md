@@ -1,4 +1,4 @@
-# openapi_client.OrgSettingApi
+# okta.OrgSettingApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -38,15 +38,15 @@ Removes a list of email addresses to be removed from the set of email addresses 
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.bounces_remove_list_obj import BouncesRemoveListObj
-from openapi_client.models.bounces_remove_list_result import BouncesRemoveListResult
-from openapi_client.rest import ApiException
+import okta
+from okta.models.bounces_remove_list_obj import BouncesRemoveListObj
+from okta.models.bounces_remove_list_result import BouncesRemoveListResult
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -64,9 +64,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.OrgSettingApi(api_client)
+    api_instance = okta.OrgSettingApi(api_client)
     bounces_remove_list_obj = {"emailAddresses":["name@company.com","unknown.email@okta.com","name@okta@com"]} # BouncesRemoveListObj |  (optional)
 
     try:
@@ -124,14 +124,14 @@ Extends the length of time that Okta Support can access your org by 24 hours. Th
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.org_okta_support_settings_obj import OrgOktaSupportSettingsObj
-from openapi_client.rest import ApiException
+import okta
+from okta.models.org_okta_support_settings_obj import OrgOktaSupportSettingsObj
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -149,9 +149,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.OrgSettingApi(api_client)
+    api_instance = okta.OrgSettingApi(api_client)
 
     try:
         # Extend Okta Support Access
@@ -204,14 +204,14 @@ Retrieves Okta Communication Settings of your organization
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.org_okta_communication_setting import OrgOktaCommunicationSetting
-from openapi_client.rest import ApiException
+import okta
+from okta.models.org_okta_communication_setting import OrgOktaCommunicationSetting
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -229,9 +229,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.OrgSettingApi(api_client)
+    api_instance = okta.OrgSettingApi(api_client)
 
     try:
         # Retrieve the Okta Communication Settings
@@ -284,14 +284,14 @@ Retrieves Contact Types of your organization
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.org_contact_type_obj import OrgContactTypeObj
-from openapi_client.rest import ApiException
+import okta
+from okta.models.org_contact_type_obj import OrgContactTypeObj
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -309,9 +309,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.OrgSettingApi(api_client)
+    api_instance = okta.OrgSettingApi(api_client)
 
     try:
         # Retrieve the Org Contact Types
@@ -364,14 +364,14 @@ Retrieves the URL of the User associated with the specified Contact Type
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.org_contact_user import OrgContactUser
-from openapi_client.rest import ApiException
+import okta
+from okta.models.org_contact_user import OrgContactUser
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -389,9 +389,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.OrgSettingApi(api_client)
+    api_instance = okta.OrgSettingApi(api_client)
     contact_type = 'contact_type_example' # str | 
 
     try:
@@ -449,14 +449,14 @@ Retrieves Okta Support Settings of your organization
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.org_okta_support_settings_obj import OrgOktaSupportSettingsObj
-from openapi_client.rest import ApiException
+import okta
+from okta.models.org_okta_support_settings_obj import OrgOktaSupportSettingsObj
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -474,9 +474,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.OrgSettingApi(api_client)
+    api_instance = okta.OrgSettingApi(api_client)
 
     try:
         # Retrieve the Okta Support Settings
@@ -529,14 +529,14 @@ Retrieves preferences of your organization
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.org_preferences import OrgPreferences
-from openapi_client.rest import ApiException
+import okta
+from okta.models.org_preferences import OrgPreferences
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -554,9 +554,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.OrgSettingApi(api_client)
+    api_instance = okta.OrgSettingApi(api_client)
 
     try:
         # Retrieve the Org Preferences
@@ -609,14 +609,14 @@ Retrieves the org settings
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.org_setting import OrgSetting
-from openapi_client.rest import ApiException
+import okta
+from okta.models.org_setting import OrgSetting
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -634,9 +634,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.OrgSettingApi(api_client)
+    api_instance = okta.OrgSettingApi(api_client)
 
     try:
         # Retrieve the Org Settings
@@ -687,22 +687,22 @@ Retrieves the well-known org metadata, which includes the id, configured custom 
 
 
 ```python
-import openapi_client
-from openapi_client.models.well_known_org_metadata import WellKnownOrgMetadata
-from openapi_client.rest import ApiException
+import okta
+from okta.models.well_known_org_metadata import WellKnownOrgMetadata
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.OrgSettingApi(api_client)
+    api_instance = okta.OrgSettingApi(api_client)
 
     try:
         # Retrieve the Well-Known Org Metadata
@@ -754,14 +754,14 @@ Grants Okta Support temporary access your org as an administrator for eight hour
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.org_okta_support_settings_obj import OrgOktaSupportSettingsObj
-from openapi_client.rest import ApiException
+import okta
+from okta.models.org_okta_support_settings_obj import OrgOktaSupportSettingsObj
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -779,9 +779,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.OrgSettingApi(api_client)
+    api_instance = okta.OrgSettingApi(api_client)
 
     try:
         # Grant Okta Support Access to your Org
@@ -834,14 +834,14 @@ Opts in all users of this org to Okta Communication emails
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.org_okta_communication_setting import OrgOktaCommunicationSetting
-from openapi_client.rest import ApiException
+import okta
+from okta.models.org_okta_communication_setting import OrgOktaCommunicationSetting
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -859,9 +859,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.OrgSettingApi(api_client)
+    api_instance = okta.OrgSettingApi(api_client)
 
     try:
         # Opt in all Users to Okta Communication emails
@@ -914,14 +914,14 @@ Opts out all users of this org from Okta Communication emails
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.org_okta_communication_setting import OrgOktaCommunicationSetting
-from openapi_client.rest import ApiException
+import okta
+from okta.models.org_okta_communication_setting import OrgOktaCommunicationSetting
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -939,9 +939,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.OrgSettingApi(api_client)
+    api_instance = okta.OrgSettingApi(api_client)
 
     try:
         # Opt out all Users from Okta Communication emails
@@ -994,14 +994,14 @@ Replaces the User associated with the specified Contact Type
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.org_contact_user import OrgContactUser
-from openapi_client.rest import ApiException
+import okta
+from okta.models.org_contact_user import OrgContactUser
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1019,11 +1019,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.OrgSettingApi(api_client)
+    api_instance = okta.OrgSettingApi(api_client)
     contact_type = 'contact_type_example' # str | 
-    org_contact_user = openapi_client.OrgContactUser() # OrgContactUser | 
+    org_contact_user = okta.OrgContactUser() # OrgContactUser | 
 
     try:
         # Replace the User of the Contact Type
@@ -1082,14 +1082,14 @@ Replaces the settings of your organization
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.org_setting import OrgSetting
-from openapi_client.rest import ApiException
+import okta
+from okta.models.org_setting import OrgSetting
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1107,10 +1107,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.OrgSettingApi(api_client)
-    org_setting = openapi_client.OrgSetting() # OrgSetting | 
+    api_instance = okta.OrgSettingApi(api_client)
+    org_setting = okta.OrgSetting() # OrgSetting | 
 
     try:
         # Replace the Org Settings
@@ -1167,14 +1167,14 @@ Revokes Okta Support access to your organization
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.org_okta_support_settings_obj import OrgOktaSupportSettingsObj
-from openapi_client.rest import ApiException
+import okta
+from okta.models.org_okta_support_settings_obj import OrgOktaSupportSettingsObj
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1192,9 +1192,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.OrgSettingApi(api_client)
+    api_instance = okta.OrgSettingApi(api_client)
 
     try:
         # Revoke Okta Support Access
@@ -1247,14 +1247,14 @@ Updates the preference hide the Okta UI footer for all end users of your organiz
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.org_preferences import OrgPreferences
-from openapi_client.rest import ApiException
+import okta
+from okta.models.org_preferences import OrgPreferences
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1272,9 +1272,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.OrgSettingApi(api_client)
+    api_instance = okta.OrgSettingApi(api_client)
 
     try:
         # Update the Preference to Hide the Okta Dashboard Footer
@@ -1327,14 +1327,14 @@ Partially updates the org settings depending on provided fields
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.org_setting import OrgSetting
-from openapi_client.rest import ApiException
+import okta
+from okta.models.org_setting import OrgSetting
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1352,10 +1352,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.OrgSettingApi(api_client)
-    org_setting = openapi_client.OrgSetting() # OrgSetting |  (optional)
+    api_instance = okta.OrgSettingApi(api_client)
+    org_setting = okta.OrgSetting() # OrgSetting |  (optional)
 
     try:
         # Update the Org Settings
@@ -1412,14 +1412,14 @@ Updates the preference to show the Okta UI footer for all end users of your orga
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.org_preferences import OrgPreferences
-from openapi_client.rest import ApiException
+import okta
+from okta.models.org_preferences import OrgPreferences
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1437,9 +1437,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.OrgSettingApi(api_client)
+    api_instance = okta.OrgSettingApi(api_client)
 
     try:
         # Update the Preference to Show the Okta Dashboard Footer
@@ -1492,13 +1492,13 @@ Uploads and replaces the logo for your organization. The file must be in PNG, JP
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1516,9 +1516,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.OrgSettingApi(api_client)
+    api_instance = okta.OrgSettingApi(api_client)
     file = None # bytearray | 
 
     try:

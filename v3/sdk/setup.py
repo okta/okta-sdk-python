@@ -21,7 +21,7 @@ from setuptools import setup, find_packages  # noqa: H301
 #
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
-NAME = "openapi-client"
+NAME = "okta"
 VERSION = "1.0.0"
 PYTHON_REQUIRES = ">=3.7"
 REQUIRES = [
@@ -47,5 +47,5 @@ setup(
     long_description="""\
     Allows customers to easily access the Okta Management APIs
     """,  # noqa: E501
-    package_data={"openapi_client": ["py.typed"]},
+    package_data={"okta": ["py.typed"]},
 )

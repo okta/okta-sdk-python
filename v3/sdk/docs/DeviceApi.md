@@ -1,4 +1,4 @@
-# openapi_client.DeviceApi
+# okta.DeviceApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -27,13 +27,13 @@ Activates a Device by setting its status to ACTIVE by `deviceId`. Activated devi
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -51,9 +51,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.DeviceApi(api_client)
+    api_instance = okta.DeviceApi(api_client)
     device_id = 'guo4a5u7JHHhjXrMK0g4' # str | `id` of the device
 
     try:
@@ -109,13 +109,13 @@ Deactivates a Device by setting its status to DEACTIVATED by `deviceId`. Deactiv
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -133,9 +133,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.DeviceApi(api_client)
+    api_instance = okta.DeviceApi(api_client)
     device_id = 'guo4a5u7JHHhjXrMK0g4' # str | `id` of the device
 
     try:
@@ -191,13 +191,13 @@ Deletes (permanently) a device by `deviceId` if it has a status of `DEACTIVATED`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -215,9 +215,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.DeviceApi(api_client)
+    api_instance = okta.DeviceApi(api_client)
     device_id = 'guo4a5u7JHHhjXrMK0g4' # str | `id` of the device
 
     try:
@@ -273,14 +273,14 @@ Retrieves a device by `deviceId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.device import Device
-from openapi_client.rest import ApiException
+import okta
+from okta.models.device import Device
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -298,9 +298,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.DeviceApi(api_client)
+    api_instance = okta.DeviceApi(api_client)
     device_id = 'guo4a5u7JHHhjXrMK0g4' # str | `id` of the device
 
     try:
@@ -358,14 +358,14 @@ Lists all Users for a Device by `deviceId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.device_user import DeviceUser
-from openapi_client.rest import ApiException
+import okta
+from okta.models.device_user import DeviceUser
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -383,9 +383,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.DeviceApi(api_client)
+    api_instance = okta.DeviceApi(api_client)
     device_id = 'guo4a5u7JHHhjXrMK0g4' # str | `id` of the device
 
     try:
@@ -443,14 +443,14 @@ Lists all devices with pagination support. You can return a subset of Devices th
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.device import Device
-from openapi_client.rest import ApiException
+import okta
+from okta.models.device import Device
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -468,9 +468,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.DeviceApi(api_client)
+    api_instance = okta.DeviceApi(api_client)
     after = 'after_example' # str | The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information. (optional)
     limit = 200 # int | A limit on the number of objects to return (recommend `20`) (optional) (default to 200)
     search = 'status eq \"ACTIVE\"' # str | A SCIM filter expression that filters the results. Searches include all Device `profile` properties and the Device `id`, `status`, and `lastUpdated` properties. (optional)
@@ -533,13 +533,13 @@ Suspends a Device by setting its status to SUSPENDED. Use suspended devices to c
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -557,9 +557,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.DeviceApi(api_client)
+    api_instance = okta.DeviceApi(api_client)
     device_id = 'guo4a5u7JHHhjXrMK0g4' # str | `id` of the device
 
     try:
@@ -615,13 +615,13 @@ Unsuspends a Device by returning its `status` to ACTIVE. >**Note:** Only devices
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -639,9 +639,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.DeviceApi(api_client)
+    api_instance = okta.DeviceApi(api_client)
     device_id = 'guo4a5u7JHHhjXrMK0g4' # str | `id` of the device
 
     try:

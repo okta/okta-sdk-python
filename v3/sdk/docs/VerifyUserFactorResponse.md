@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.verify_user_factor_response import VerifyUserFactorResponse
+from okta.models.verify_user_factor_response import VerifyUserFactorResponse
 
 # TODO update the JSON string below
 json = "{}"

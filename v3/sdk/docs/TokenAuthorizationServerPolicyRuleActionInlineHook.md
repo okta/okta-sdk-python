@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.token_authorization_server_policy_rule_action_inline_hook import TokenAuthorizationServerPolicyRuleActionInlineHook
+from okta.models.token_authorization_server_policy_rule_action_inline_hook import TokenAuthorizationServerPolicyRuleActionInlineHook
 
 # TODO update the JSON string below
 json = "{}"

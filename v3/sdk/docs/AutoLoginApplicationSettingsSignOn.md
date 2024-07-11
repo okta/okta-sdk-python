@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.auto_login_application_settings_sign_on import AutoLoginApplicationSettingsSignOn
+from okta.models.auto_login_application_settings_sign_on import AutoLoginApplicationSettingsSignOn
 
 # TODO update the JSON string below
 json = "{}"

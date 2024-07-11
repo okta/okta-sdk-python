@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.saml_application_settings import SamlApplicationSettings
+from okta.models.saml_application_settings import SamlApplicationSettings
 
 # TODO update the JSON string below
 json = "{}"

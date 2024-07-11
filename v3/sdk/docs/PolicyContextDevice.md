@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.policy_context_device import PolicyContextDevice
+from okta.models.policy_context_device import PolicyContextDevice
 
 # TODO update the JSON string below
 json = "{}"

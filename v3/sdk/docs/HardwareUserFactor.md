@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.hardware_user_factor import HardwareUserFactor
+from okta.models.hardware_user_factor import HardwareUserFactor
 
 # TODO update the JSON string below
 json = "{}"

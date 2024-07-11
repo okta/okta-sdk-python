@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.push_user_factor_profile import PushUserFactorProfile
+from okta.models.push_user_factor_profile import PushUserFactorProfile
 
 # TODO update the JSON string below
 json = "{}"

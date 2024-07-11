@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.domain_certificate import DomainCertificate
+from okta.models.domain_certificate import DomainCertificate
 
 # TODO update the JSON string below
 json = "{}"

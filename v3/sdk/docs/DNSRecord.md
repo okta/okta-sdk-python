@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.dns_record import DNSRecord
+from okta.models.dns_record import DNSRecord
 
 # TODO update the JSON string below
 json = "{}"

@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.ui_schemas_response_object import UISchemasResponseObject
+from okta.models.ui_schemas_response_object import UISchemasResponseObject
 
 # TODO update the JSON string below
 json = "{}"

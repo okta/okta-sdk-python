@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.org_contact_type_obj import OrgContactTypeObj
+from okta.models.org_contact_type_obj import OrgContactTypeObj
 
 # TODO update the JSON string below
 json = "{}"

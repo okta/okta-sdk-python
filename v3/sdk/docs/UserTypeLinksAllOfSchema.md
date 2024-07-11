@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.user_type_links_all_of_schema import UserTypeLinksAllOfSchema
+from okta.models.user_type_links_all_of_schema import UserTypeLinksAllOfSchema
 
 # TODO update the JSON string below
 json = "{}"

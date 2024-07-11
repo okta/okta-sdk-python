@@ -1,4 +1,4 @@
-# openapi_client.PrincipalRateLimitApi
+# okta.PrincipalRateLimitApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -23,14 +23,14 @@ Creates a new Principal Rate Limit entity. In the current release, we only allow
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.principal_rate_limit_entity import PrincipalRateLimitEntity
-from openapi_client.rest import ApiException
+import okta
+from okta.models.principal_rate_limit_entity import PrincipalRateLimitEntity
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -48,10 +48,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.PrincipalRateLimitApi(api_client)
-    entity = openapi_client.PrincipalRateLimitEntity() # PrincipalRateLimitEntity | 
+    api_instance = okta.PrincipalRateLimitApi(api_client)
+    entity = okta.PrincipalRateLimitEntity() # PrincipalRateLimitEntity | 
 
     try:
         # Create a Principal Rate Limit
@@ -109,14 +109,14 @@ Retrieves a Principal Rate Limit entity by `principalRateLimitId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.principal_rate_limit_entity import PrincipalRateLimitEntity
-from openapi_client.rest import ApiException
+import okta
+from okta.models.principal_rate_limit_entity import PrincipalRateLimitEntity
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -134,9 +134,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.PrincipalRateLimitApi(api_client)
+    api_instance = okta.PrincipalRateLimitApi(api_client)
     principal_rate_limit_id = 'abcd1234' # str | id of the Principal Rate Limit
 
     try:
@@ -194,14 +194,14 @@ Lists all Principal Rate Limit entities considering the provided parameters
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.principal_rate_limit_entity import PrincipalRateLimitEntity
-from openapi_client.rest import ApiException
+import okta
+from okta.models.principal_rate_limit_entity import PrincipalRateLimitEntity
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -219,9 +219,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.PrincipalRateLimitApi(api_client)
+    api_instance = okta.PrincipalRateLimitApi(api_client)
     filter = 'filter_example' # str |  (optional)
     after = 'after_example' # str |  (optional)
     limit = 20 # int |  (optional) (default to 20)
@@ -283,14 +283,14 @@ Replaces a principal rate limit entity by `principalRateLimitId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.principal_rate_limit_entity import PrincipalRateLimitEntity
-from openapi_client.rest import ApiException
+import okta
+from okta.models.principal_rate_limit_entity import PrincipalRateLimitEntity
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -308,11 +308,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.PrincipalRateLimitApi(api_client)
+    api_instance = okta.PrincipalRateLimitApi(api_client)
     principal_rate_limit_id = 'abcd1234' # str | id of the Principal Rate Limit
-    entity = openapi_client.PrincipalRateLimitEntity() # PrincipalRateLimitEntity | 
+    entity = okta.PrincipalRateLimitEntity() # PrincipalRateLimitEntity | 
 
     try:
         # Replace a Principal Rate Limit

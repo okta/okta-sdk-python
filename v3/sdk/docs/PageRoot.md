@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.page_root import PageRoot
+from okta.models.page_root import PageRoot
 
 # TODO update the JSON string below
 json = "{}"

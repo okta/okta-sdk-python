@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.log_user_agent import LogUserAgent
+from okta.models.log_user_agent import LogUserAgent
 
 # TODO update the JSON string below
 json = "{}"

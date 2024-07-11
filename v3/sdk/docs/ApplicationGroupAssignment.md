@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.application_group_assignment import ApplicationGroupAssignment
+from okta.models.application_group_assignment import ApplicationGroupAssignment
 
 # TODO update the JSON string below
 json = "{}"

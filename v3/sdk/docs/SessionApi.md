@@ -1,4 +1,4 @@
-# openapi_client.SessionApi
+# okta.SessionApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -22,15 +22,15 @@ Creates a new Session for a user with a valid session token. Use this API if, fo
 * Api Key Authentication (apiToken):
 
 ```python
-import openapi_client
-from openapi_client.models.create_session_request import CreateSessionRequest
-from openapi_client.models.session import Session
-from openapi_client.rest import ApiException
+import okta
+from okta.models.create_session_request import CreateSessionRequest
+from okta.models.session import Session
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -46,10 +46,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 # configuration.api_key_prefix['apiToken'] = 'Bearer'
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.SessionApi(api_client)
-    create_session_request = openapi_client.CreateSessionRequest() # CreateSessionRequest | 
+    api_instance = okta.SessionApi(api_client)
+    create_session_request = okta.CreateSessionRequest() # CreateSessionRequest | 
 
     try:
         # Create a Session with session token
@@ -106,14 +106,14 @@ Retrieves information about the Session specified by the given session ID
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.session import Session
-from openapi_client.rest import ApiException
+import okta
+from okta.models.session import Session
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -131,9 +131,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.SessionApi(api_client)
+    api_instance = okta.SessionApi(api_client)
     session_id = 'l7FbDVqS8zHSy65uJD85' # str | `id` of the Session
 
     try:
@@ -192,14 +192,14 @@ Refreshes an existing Session using the `id` for that Session. A successful resp
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.session import Session
-from openapi_client.rest import ApiException
+import okta
+from okta.models.session import Session
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -217,9 +217,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.SessionApi(api_client)
+    api_instance = okta.SessionApi(api_client)
     session_id = 'l7FbDVqS8zHSy65uJD85' # str | `id` of the Session
 
     try:
@@ -277,13 +277,13 @@ Revokes the specified Session
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -301,9 +301,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.SessionApi(api_client)
+    api_instance = okta.SessionApi(api_client)
     session_id = 'l7FbDVqS8zHSy65uJD85' # str | `id` of the Session
 
     try:

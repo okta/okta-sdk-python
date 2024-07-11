@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.custom_hotp_user_factor_profile import CustomHotpUserFactorProfile
+from okta.models.custom_hotp_user_factor_profile import CustomHotpUserFactorProfile
 
 # TODO update the JSON string below
 json = "{}"

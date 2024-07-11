@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.associated_server_mediated import AssociatedServerMediated
+from okta.models.associated_server_mediated import AssociatedServerMediated
 
 # TODO update the JSON string below
 json = "{}"

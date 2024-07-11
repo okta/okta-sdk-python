@@ -1,4 +1,4 @@
-# openapi_client.RiskProviderApi
+# okta.RiskProviderApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -24,14 +24,14 @@ Creates a Risk Provider object. A maximum of three Risk Provider objects can be 
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.risk_provider import RiskProvider
-from openapi_client.rest import ApiException
+import okta
+from okta.models.risk_provider import RiskProvider
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -49,10 +49,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RiskProviderApi(api_client)
-    instance = openapi_client.RiskProvider() # RiskProvider | 
+    api_instance = okta.RiskProviderApi(api_client)
+    instance = okta.RiskProvider() # RiskProvider | 
 
     try:
         # Create a Risk Provider
@@ -109,13 +109,13 @@ Deletes a Risk Provider object by its ID
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -133,9 +133,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RiskProviderApi(api_client)
+    api_instance = okta.RiskProviderApi(api_client)
     risk_provider_id = '00rp12r4skkjkjgsn' # str | `id` of the Risk Provider object
 
     try:
@@ -191,14 +191,14 @@ Retrieves a Risk Provider object by ID
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.risk_provider import RiskProvider
-from openapi_client.rest import ApiException
+import okta
+from okta.models.risk_provider import RiskProvider
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -216,9 +216,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RiskProviderApi(api_client)
+    api_instance = okta.RiskProviderApi(api_client)
     risk_provider_id = '00rp12r4skkjkjgsn' # str | `id` of the Risk Provider object
 
     try:
@@ -276,14 +276,14 @@ Lists all Risk Provider objects
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.risk_provider import RiskProvider
-from openapi_client.rest import ApiException
+import okta
+from okta.models.risk_provider import RiskProvider
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -301,9 +301,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RiskProviderApi(api_client)
+    api_instance = okta.RiskProviderApi(api_client)
 
     try:
         # List all Risk Providers
@@ -356,14 +356,14 @@ Replaces the properties for a given Risk Provider object ID
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.risk_provider import RiskProvider
-from openapi_client.rest import ApiException
+import okta
+from okta.models.risk_provider import RiskProvider
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -381,11 +381,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.RiskProviderApi(api_client)
+    api_instance = okta.RiskProviderApi(api_client)
     risk_provider_id = '00rp12r4skkjkjgsn' # str | `id` of the Risk Provider object
-    instance = openapi_client.RiskProvider() # RiskProvider | 
+    instance = okta.RiskProvider() # RiskProvider | 
 
     try:
         # Replace a Risk Provider

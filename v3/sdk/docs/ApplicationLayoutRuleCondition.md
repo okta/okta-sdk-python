@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.application_layout_rule_condition import ApplicationLayoutRuleCondition
+from okta.models.application_layout_rule_condition import ApplicationLayoutRuleCondition
 
 # TODO update the JSON string below
 json = "{}"

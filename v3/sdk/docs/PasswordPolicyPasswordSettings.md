@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.password_policy_password_settings import PasswordPolicyPasswordSettings
+from okta.models.password_policy_password_settings import PasswordPolicyPasswordSettings
 
 # TODO update the JSON string below
 json = "{}"

@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.bounces_remove_list_error import BouncesRemoveListError
+from okta.models.bounces_remove_list_error import BouncesRemoveListError
 
 # TODO update the JSON string below
 json = "{}"

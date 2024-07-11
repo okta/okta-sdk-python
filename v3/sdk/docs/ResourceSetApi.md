@@ -1,4 +1,4 @@
-# openapi_client.ResourceSetApi
+# okta.ResourceSetApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -35,15 +35,15 @@ Adds more members to a Resource Set binding
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.resource_set_binding_add_members_request import ResourceSetBindingAddMembersRequest
-from openapi_client.models.resource_set_binding_response import ResourceSetBindingResponse
-from openapi_client.rest import ApiException
+import okta
+from okta.models.resource_set_binding_add_members_request import ResourceSetBindingAddMembersRequest
+from okta.models.resource_set_binding_response import ResourceSetBindingResponse
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -61,12 +61,12 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ResourceSetApi(api_client)
+    api_instance = okta.ResourceSetApi(api_client)
     resource_set_id = 'iamoJDFKaJxGIr0oamd9g' # str | `id` of a Resource Set
     role_id_or_label = 'cr0Yq6IJxGIr0ouum0g3' # str | `id` or `label` of the role
-    instance = openapi_client.ResourceSetBindingAddMembersRequest() # ResourceSetBindingAddMembersRequest | 
+    instance = okta.ResourceSetBindingAddMembersRequest() # ResourceSetBindingAddMembersRequest | 
 
     try:
         # Add more Members to a binding
@@ -126,15 +126,15 @@ Adds more resources to a Resource Set
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.resource_set import ResourceSet
-from openapi_client.models.resource_set_resource_patch_request import ResourceSetResourcePatchRequest
-from openapi_client.rest import ApiException
+import okta
+from okta.models.resource_set import ResourceSet
+from okta.models.resource_set_resource_patch_request import ResourceSetResourcePatchRequest
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -152,11 +152,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ResourceSetApi(api_client)
+    api_instance = okta.ResourceSetApi(api_client)
     resource_set_id = 'iamoJDFKaJxGIr0oamd9g' # str | `id` of a Resource Set
-    instance = openapi_client.ResourceSetResourcePatchRequest() # ResourceSetResourcePatchRequest | 
+    instance = okta.ResourceSetResourcePatchRequest() # ResourceSetResourcePatchRequest | 
 
     try:
         # Add more Resource to a Resource Set
@@ -215,15 +215,15 @@ Creates a new Resource Set
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.create_resource_set_request import CreateResourceSetRequest
-from openapi_client.models.resource_set import ResourceSet
-from openapi_client.rest import ApiException
+import okta
+from okta.models.create_resource_set_request import CreateResourceSetRequest
+from okta.models.resource_set import ResourceSet
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -241,10 +241,10 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ResourceSetApi(api_client)
-    instance = openapi_client.CreateResourceSetRequest() # CreateResourceSetRequest | 
+    api_instance = okta.ResourceSetApi(api_client)
+    instance = okta.CreateResourceSetRequest() # CreateResourceSetRequest | 
 
     try:
         # Create a Resource Set
@@ -301,15 +301,15 @@ Creates a new Resource Set binding
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.resource_set_binding_create_request import ResourceSetBindingCreateRequest
-from openapi_client.models.resource_set_binding_response import ResourceSetBindingResponse
-from openapi_client.rest import ApiException
+import okta
+from okta.models.resource_set_binding_create_request import ResourceSetBindingCreateRequest
+from okta.models.resource_set_binding_response import ResourceSetBindingResponse
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -327,11 +327,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ResourceSetApi(api_client)
+    api_instance = okta.ResourceSetApi(api_client)
     resource_set_id = 'iamoJDFKaJxGIr0oamd9g' # str | `id` of a Resource Set
-    instance = openapi_client.ResourceSetBindingCreateRequest() # ResourceSetBindingCreateRequest | 
+    instance = okta.ResourceSetBindingCreateRequest() # ResourceSetBindingCreateRequest | 
 
     try:
         # Create a Resource Set Binding
@@ -390,13 +390,13 @@ Deletes a Resource Set binding by `resourceSetId` and `roleIdOrLabel`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -414,9 +414,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ResourceSetApi(api_client)
+    api_instance = okta.ResourceSetApi(api_client)
     resource_set_id = 'iamoJDFKaJxGIr0oamd9g' # str | `id` of a Resource Set
     role_id_or_label = 'cr0Yq6IJxGIr0ouum0g3' # str | `id` or `label` of the role
 
@@ -474,13 +474,13 @@ Deletes a role by `resourceSetId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -498,9 +498,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ResourceSetApi(api_client)
+    api_instance = okta.ResourceSetApi(api_client)
     resource_set_id = 'iamoJDFKaJxGIr0oamd9g' # str | `id` of a Resource Set
 
     try:
@@ -556,13 +556,13 @@ Deletes a resource identified by `resourceId` from a Resource Set
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -580,9 +580,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ResourceSetApi(api_client)
+    api_instance = okta.ResourceSetApi(api_client)
     resource_set_id = 'iamoJDFKaJxGIr0oamd9g' # str | `id` of a Resource Set
     resource_id = 'ire106sQKoHoXXsAe0g4' # str | `id` of a resource
 
@@ -640,14 +640,14 @@ Retrieves a Resource Set binding by `resourceSetId` and `roleIdOrLabel`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.resource_set_binding_response import ResourceSetBindingResponse
-from openapi_client.rest import ApiException
+import okta
+from okta.models.resource_set_binding_response import ResourceSetBindingResponse
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -665,9 +665,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ResourceSetApi(api_client)
+    api_instance = okta.ResourceSetApi(api_client)
     resource_set_id = 'iamoJDFKaJxGIr0oamd9g' # str | `id` of a Resource Set
     role_id_or_label = 'cr0Yq6IJxGIr0ouum0g3' # str | `id` or `label` of the role
 
@@ -727,14 +727,14 @@ Retrieves a member identified by `memberId` for a binding
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.resource_set_binding_member import ResourceSetBindingMember
-from openapi_client.rest import ApiException
+import okta
+from okta.models.resource_set_binding_member import ResourceSetBindingMember
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -752,9 +752,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ResourceSetApi(api_client)
+    api_instance = okta.ResourceSetApi(api_client)
     resource_set_id = 'iamoJDFKaJxGIr0oamd9g' # str | `id` of a Resource Set
     role_id_or_label = 'cr0Yq6IJxGIr0ouum0g3' # str | `id` or `label` of the role
     member_id = 'irb1qe6PGuMc7Oh8N0g4' # str | `id` of a member
@@ -816,14 +816,14 @@ Retrieves a Resource Set by `resourceSetId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.resource_set import ResourceSet
-from openapi_client.rest import ApiException
+import okta
+from okta.models.resource_set import ResourceSet
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -841,9 +841,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ResourceSetApi(api_client)
+    api_instance = okta.ResourceSetApi(api_client)
     resource_set_id = 'iamoJDFKaJxGIr0oamd9g' # str | `id` of a Resource Set
 
     try:
@@ -901,14 +901,14 @@ Lists all Resource Set bindings with pagination support
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.resource_set_bindings import ResourceSetBindings
-from openapi_client.rest import ApiException
+import okta
+from okta.models.resource_set_bindings import ResourceSetBindings
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -926,9 +926,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ResourceSetApi(api_client)
+    api_instance = okta.ResourceSetApi(api_client)
     resource_set_id = 'iamoJDFKaJxGIr0oamd9g' # str | `id` of a Resource Set
     after = 'after_example' # str | The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information. (optional)
 
@@ -988,14 +988,14 @@ Lists all members of a Resource Set binding with pagination support
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.resource_set_binding_members import ResourceSetBindingMembers
-from openapi_client.rest import ApiException
+import okta
+from okta.models.resource_set_binding_members import ResourceSetBindingMembers
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1013,9 +1013,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ResourceSetApi(api_client)
+    api_instance = okta.ResourceSetApi(api_client)
     resource_set_id = 'iamoJDFKaJxGIr0oamd9g' # str | `id` of a Resource Set
     role_id_or_label = 'cr0Yq6IJxGIr0ouum0g3' # str | `id` or `label` of the role
     after = 'after_example' # str | The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information. (optional)
@@ -1077,14 +1077,14 @@ Lists all resources that make up the Resource Set
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.resource_set_resources import ResourceSetResources
-from openapi_client.rest import ApiException
+import okta
+from okta.models.resource_set_resources import ResourceSetResources
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1102,9 +1102,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ResourceSetApi(api_client)
+    api_instance = okta.ResourceSetApi(api_client)
     resource_set_id = 'iamoJDFKaJxGIr0oamd9g' # str | `id` of a Resource Set
 
     try:
@@ -1162,14 +1162,14 @@ Lists all Resource Sets with pagination support
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.resource_sets import ResourceSets
-from openapi_client.rest import ApiException
+import okta
+from okta.models.resource_sets import ResourceSets
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1187,9 +1187,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ResourceSetApi(api_client)
+    api_instance = okta.ResourceSetApi(api_client)
     after = 'after_example' # str | The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information. (optional)
 
     try:
@@ -1246,14 +1246,14 @@ Replaces a Resource Set by `resourceSetId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.resource_set import ResourceSet
-from openapi_client.rest import ApiException
+import okta
+from okta.models.resource_set import ResourceSet
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1271,11 +1271,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ResourceSetApi(api_client)
+    api_instance = okta.ResourceSetApi(api_client)
     resource_set_id = 'iamoJDFKaJxGIr0oamd9g' # str | `id` of a Resource Set
-    instance = openapi_client.ResourceSet() # ResourceSet | 
+    instance = okta.ResourceSet() # ResourceSet | 
 
     try:
         # Replace a Resource Set
@@ -1334,13 +1334,13 @@ Unassigns a member identified by `memberId` from a binding
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1358,9 +1358,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.ResourceSetApi(api_client)
+    api_instance = okta.ResourceSetApi(api_client)
     resource_set_id = 'iamoJDFKaJxGIr0oamd9g' # str | `id` of a Resource Set
     role_id_or_label = 'cr0Yq6IJxGIr0ouum0g3' # str | `id` or `label` of the role
     member_id = 'irb1qe6PGuMc7Oh8N0g4' # str | `id` of a member

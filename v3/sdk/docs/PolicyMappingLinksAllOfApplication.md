@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.policy_mapping_links_all_of_application import PolicyMappingLinksAllOfApplication
+from okta.models.policy_mapping_links_all_of_application import PolicyMappingLinksAllOfApplication
 
 # TODO update the JSON string below
 json = "{}"

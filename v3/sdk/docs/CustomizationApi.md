@@ -1,4 +1,4 @@
-# openapi_client.CustomizationApi
+# okta.CustomizationApi
 
 All URIs are relative to *https://subdomain.okta.com*
 
@@ -67,15 +67,15 @@ Creates a new brand in your org
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.brand import Brand
-from openapi_client.models.create_brand_request import CreateBrandRequest
-from openapi_client.rest import ApiException
+import okta
+from okta.models.brand import Brand
+from okta.models.create_brand_request import CreateBrandRequest
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -93,14 +93,14 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     expand = ['expand_example'] # List[str] | Specifies additional metadata to be included in the response (optional)
     after = 'after_example' # str | The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information. (optional)
     limit = 20 # int | A limit on the number of objects to return (optional) (default to 20)
     q = 'q_example' # str | Searches the records for matching value (optional)
-    create_brand_request = openapi_client.CreateBrandRequest() # CreateBrandRequest |  (optional)
+    create_brand_request = okta.CreateBrandRequest() # CreateBrandRequest |  (optional)
 
     try:
         # Create a Brand
@@ -161,14 +161,14 @@ Creates a new email customization
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.email_customization import EmailCustomization
-from openapi_client.rest import ApiException
+import okta
+from okta.models.email_customization import EmailCustomization
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -186,12 +186,12 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
     template_name = 'template_name_example' # str | The name of the email template
-    instance = openapi_client.EmailCustomization() # EmailCustomization |  (optional)
+    instance = okta.EmailCustomization() # EmailCustomization |  (optional)
 
     try:
         # Create an Email Customization
@@ -252,13 +252,13 @@ Deletes all customizations for an email template
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -276,9 +276,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
     template_name = 'template_name_example' # str | The name of the email template
 
@@ -336,13 +336,13 @@ Deletes a brand by `brandId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -360,9 +360,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
     expand = ['expand_example'] # List[str] | Specifies additional metadata to be included in the response (optional)
 
@@ -421,13 +421,13 @@ Deletes a Theme background image
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -445,9 +445,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
     theme_id = 'theme_id_example' # str | The ID of the theme
 
@@ -505,13 +505,13 @@ Deletes a Theme favicon. The theme will use the default Okta favicon.
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -529,9 +529,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
     theme_id = 'theme_id_example' # str | The ID of the theme
 
@@ -589,13 +589,13 @@ Deletes a Theme logo. The theme will use the default Okta logo.
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -613,9 +613,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
     theme_id = 'theme_id_example' # str | The ID of the theme
 
@@ -673,13 +673,13 @@ Deletes the customized error page. As a result, the default error page appears i
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -697,9 +697,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
 
     try:
@@ -755,13 +755,13 @@ Deletes the customized sign-in page. As a result, the default sign-in page appea
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -779,9 +779,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
 
     try:
@@ -837,13 +837,13 @@ Deletes an email customization by its unique identifier
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -861,9 +861,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
     template_name = 'template_name_example' # str | The name of the email template
     customization_id = 'customization_id_example' # str | The ID of the email customization
@@ -924,13 +924,13 @@ Deletes the preview error page. The preview error page contains unpublished chan
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -948,9 +948,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
 
     try:
@@ -1006,13 +1006,13 @@ Deletes the preview sign-in page. The preview sign-in page contains unpublished 
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1030,9 +1030,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
 
     try:
@@ -1088,14 +1088,14 @@ Retrieves a brand by `brandId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.brand_with_embedded import BrandWithEmbedded
-from openapi_client.rest import ApiException
+import okta
+from okta.models.brand_with_embedded import BrandWithEmbedded
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1113,9 +1113,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
     expand = ['expand_example'] # List[str] | Specifies additional metadata to be included in the response (optional)
 
@@ -1175,14 +1175,14 @@ Retrieves a theme for a brand
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.theme_response import ThemeResponse
-from openapi_client.rest import ApiException
+import okta
+from okta.models.theme_response import ThemeResponse
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1200,9 +1200,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
     theme_id = 'theme_id_example' # str | The ID of the theme
 
@@ -1262,14 +1262,14 @@ Retrieves a preview of an email customization. All variable references (e.g., `$
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.email_preview import EmailPreview
-from openapi_client.rest import ApiException
+import okta
+from okta.models.email_preview import EmailPreview
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1287,9 +1287,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
     template_name = 'template_name_example' # str | The name of the email template
     customization_id = 'customization_id_example' # str | The ID of the email customization
@@ -1351,14 +1351,14 @@ Retrieves the customized error page. The customized error page appears in your l
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.error_page import ErrorPage
-from openapi_client.rest import ApiException
+import okta
+from okta.models.error_page import ErrorPage
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1376,9 +1376,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
 
     try:
@@ -1436,14 +1436,14 @@ Retrieves the customized sign-in page. The customized sign-in page appears in yo
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.sign_in_page import SignInPage
-from openapi_client.rest import ApiException
+import okta
+from okta.models.sign_in_page import SignInPage
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1461,9 +1461,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
 
     try:
@@ -1521,14 +1521,14 @@ Retrieves the default error page. The default error page appears when no customi
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.error_page import ErrorPage
-from openapi_client.rest import ApiException
+import okta
+from okta.models.error_page import ErrorPage
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1546,9 +1546,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
 
     try:
@@ -1606,14 +1606,14 @@ Retrieves the default sign-in page. The default sign-in page appears when no cus
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.sign_in_page import SignInPage
-from openapi_client.rest import ApiException
+import okta
+from okta.models.sign_in_page import SignInPage
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1631,9 +1631,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
 
     try:
@@ -1691,14 +1691,14 @@ Retrieves an email customization by its unique identifier
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.email_customization import EmailCustomization
-from openapi_client.rest import ApiException
+import okta
+from okta.models.email_customization import EmailCustomization
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1716,9 +1716,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
     template_name = 'template_name_example' # str | The name of the email template
     customization_id = 'customization_id_example' # str | The ID of the email customization
@@ -1780,14 +1780,14 @@ Retrieves an email template's default content
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.email_default_content import EmailDefaultContent
-from openapi_client.rest import ApiException
+import okta
+from okta.models.email_default_content import EmailDefaultContent
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1805,9 +1805,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
     template_name = 'template_name_example' # str | The name of the email template
     language = 'language_example' # str | The language to use for the email. Defaults to the current user's language if unspecified. (optional)
@@ -1869,14 +1869,14 @@ Retrieves a preview of an email template's default content. All variable referen
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.email_preview import EmailPreview
-from openapi_client.rest import ApiException
+import okta
+from okta.models.email_preview import EmailPreview
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1894,9 +1894,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
     template_name = 'template_name_example' # str | The name of the email template
     language = 'language_example' # str | The language to use for the email. Defaults to the current user's language if unspecified. (optional)
@@ -1958,14 +1958,14 @@ Retrieves an email template's settings
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.email_settings import EmailSettings
-from openapi_client.rest import ApiException
+import okta
+from okta.models.email_settings import EmailSettings
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -1983,9 +1983,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
     template_name = 'template_name_example' # str | The name of the email template
 
@@ -2045,14 +2045,14 @@ Retrieves the details of an email template by name
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.email_template import EmailTemplate
-from openapi_client.rest import ApiException
+import okta
+from okta.models.email_template import EmailTemplate
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -2070,9 +2070,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
     template_name = 'template_name_example' # str | The name of the email template
     expand = ['expand_example'] # List[str] | Specifies additional metadata to be included in the response (optional)
@@ -2134,14 +2134,14 @@ Retrieves the error page sub-resources. The `expand` query parameter specifies w
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.page_root import PageRoot
-from openapi_client.rest import ApiException
+import okta
+from okta.models.page_root import PageRoot
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -2159,9 +2159,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
     expand = ['expand_example'] # List[str] | Specifies additional metadata to be included in the response (optional)
 
@@ -2221,14 +2221,14 @@ Retrieves the preview error page. The preview error page contains unpublished ch
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.error_page import ErrorPage
-from openapi_client.rest import ApiException
+import okta
+from okta.models.error_page import ErrorPage
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -2246,9 +2246,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
 
     try:
@@ -2306,14 +2306,14 @@ Retrieves the preview sign-in page. The preview sign-in page contains unpublishe
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.sign_in_page import SignInPage
-from openapi_client.rest import ApiException
+import okta
+from okta.models.sign_in_page import SignInPage
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -2331,9 +2331,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
 
     try:
@@ -2391,14 +2391,14 @@ Retrieves the sign-in page sub-resources. The `expand` query parameter specifies
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.page_root import PageRoot
-from openapi_client.rest import ApiException
+import okta
+from okta.models.page_root import PageRoot
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -2416,9 +2416,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
     expand = ['expand_example'] # List[str] | Specifies additional metadata to be included in the response (optional)
 
@@ -2478,14 +2478,14 @@ Retrieves the sign-out page settings
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.hosted_page import HostedPage
-from openapi_client.rest import ApiException
+import okta
+from okta.models.hosted_page import HostedPage
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -2503,9 +2503,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
 
     try:
@@ -2563,13 +2563,13 @@ Lists all sign-in widget versions supported by the current org
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -2587,9 +2587,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
 
     try:
@@ -2647,14 +2647,14 @@ Lists all domains associated with a brand by `brandId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.domain_response import DomainResponse
-from openapi_client.rest import ApiException
+import okta
+from okta.models.domain_response import DomainResponse
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -2672,9 +2672,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
 
     try:
@@ -2732,14 +2732,14 @@ Lists all the themes in your brand
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.theme_response import ThemeResponse
-from openapi_client.rest import ApiException
+import okta
+from okta.models.theme_response import ThemeResponse
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -2757,9 +2757,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
 
     try:
@@ -2817,14 +2817,14 @@ Lists all the brands in your org
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.brand_with_embedded import BrandWithEmbedded
-from openapi_client.rest import ApiException
+import okta
+from okta.models.brand_with_embedded import BrandWithEmbedded
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -2842,9 +2842,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     expand = ['expand_example'] # List[str] | Specifies additional metadata to be included in the response (optional)
     after = 'after_example' # str | The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information. (optional)
     limit = 20 # int | A limit on the number of objects to return (optional) (default to 20)
@@ -2907,14 +2907,14 @@ Lists all customizations of an email template
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.email_customization import EmailCustomization
-from openapi_client.rest import ApiException
+import okta
+from okta.models.email_customization import EmailCustomization
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -2932,9 +2932,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
     template_name = 'template_name_example' # str | The name of the email template
     after = 'after_example' # str | The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information. (optional)
@@ -2998,14 +2998,14 @@ Lists all email templates
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.email_template import EmailTemplate
-from openapi_client.rest import ApiException
+import okta
+from okta.models.email_template import EmailTemplate
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -3023,9 +3023,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
     after = 'after_example' # str | The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information. (optional)
     limit = 20 # int | A limit on the number of objects to return (optional) (default to 20)
@@ -3089,15 +3089,15 @@ Replaces a brand by `brandId`
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.brand import Brand
-from openapi_client.models.brand_request import BrandRequest
-from openapi_client.rest import ApiException
+import okta
+from okta.models.brand import Brand
+from okta.models.brand_request import BrandRequest
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -3115,11 +3115,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
-    brand = openapi_client.BrandRequest() # BrandRequest | 
+    brand = okta.BrandRequest() # BrandRequest | 
     expand = ['expand_example'] # List[str] | Specifies additional metadata to be included in the response (optional)
 
     try:
@@ -3180,15 +3180,15 @@ Replaces a theme for a brand
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.theme import Theme
-from openapi_client.models.theme_response import ThemeResponse
-from openapi_client.rest import ApiException
+import okta
+from okta.models.theme import Theme
+from okta.models.theme_response import ThemeResponse
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -3206,12 +3206,12 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
     theme_id = 'theme_id_example' # str | The ID of the theme
-    theme = openapi_client.Theme() # Theme | 
+    theme = okta.Theme() # Theme | 
 
     try:
         # Replace a Theme
@@ -3271,14 +3271,14 @@ Replaces the customized error page. The customized error page appears in your li
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.error_page import ErrorPage
-from openapi_client.rest import ApiException
+import okta
+from okta.models.error_page import ErrorPage
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -3296,11 +3296,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
-    error_page = openapi_client.ErrorPage() # ErrorPage | 
+    error_page = okta.ErrorPage() # ErrorPage | 
 
     try:
         # Replace the Customized Error Page
@@ -3359,14 +3359,14 @@ Replaces the customized sign-in page. The customized sign-in page appears in you
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.sign_in_page import SignInPage
-from openapi_client.rest import ApiException
+import okta
+from okta.models.sign_in_page import SignInPage
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -3384,11 +3384,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
-    sign_in_page = openapi_client.SignInPage() # SignInPage | 
+    sign_in_page = okta.SignInPage() # SignInPage | 
 
     try:
         # Replace the Customized Sign-in Page
@@ -3447,14 +3447,14 @@ Replaces an existing email customization using the property values provided
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.email_customization import EmailCustomization
-from openapi_client.rest import ApiException
+import okta
+from okta.models.email_customization import EmailCustomization
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -3472,13 +3472,13 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
     template_name = 'template_name_example' # str | The name of the email template
     customization_id = 'customization_id_example' # str | The ID of the email customization
-    instance = openapi_client.EmailCustomization() # EmailCustomization | Request (optional)
+    instance = okta.EmailCustomization() # EmailCustomization | Request (optional)
 
     try:
         # Replace an Email Customization
@@ -3540,14 +3540,14 @@ Replaces an email template's settings
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.email_settings import EmailSettings
-from openapi_client.rest import ApiException
+import okta
+from okta.models.email_settings import EmailSettings
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -3565,12 +3565,12 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
     template_name = 'template_name_example' # str | The name of the email template
-    email_settings = openapi_client.EmailSettings() # EmailSettings |  (optional)
+    email_settings = okta.EmailSettings() # EmailSettings |  (optional)
 
     try:
         # Replace the Email Template Settings
@@ -3629,14 +3629,14 @@ Replaces the preview error page. The preview error page contains unpublished cha
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.error_page import ErrorPage
-from openapi_client.rest import ApiException
+import okta
+from okta.models.error_page import ErrorPage
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -3654,11 +3654,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
-    error_page = openapi_client.ErrorPage() # ErrorPage | 
+    error_page = okta.ErrorPage() # ErrorPage | 
 
     try:
         # Replace the Preview Error Page
@@ -3717,14 +3717,14 @@ Replaces the preview sign-in page. The preview sign-in page contains unpublished
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.sign_in_page import SignInPage
-from openapi_client.rest import ApiException
+import okta
+from okta.models.sign_in_page import SignInPage
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -3742,11 +3742,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
-    sign_in_page = openapi_client.SignInPage() # SignInPage | 
+    sign_in_page = okta.SignInPage() # SignInPage | 
 
     try:
         # Replace the Preview Sign-in Page
@@ -3805,14 +3805,14 @@ Replaces the sign-out page settings
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.hosted_page import HostedPage
-from openapi_client.rest import ApiException
+import okta
+from okta.models.hosted_page import HostedPage
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -3830,11 +3830,11 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
-    hosted_page = openapi_client.HostedPage() # HostedPage | 
+    hosted_page = okta.HostedPage() # HostedPage | 
 
     try:
         # Replace the Sign-out Page Settings
@@ -3893,13 +3893,13 @@ Sends a test email to the current user’s primary and secondary email addresses
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.rest import ApiException
+import okta
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -3917,9 +3917,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
     template_name = 'template_name_example' # str | The name of the email template
     language = 'language_example' # str | The language to use for the email. Defaults to the current user's language if unspecified. (optional)
@@ -3979,14 +3979,14 @@ Uploads and replaces the background image for the theme. The file must be in PNG
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.image_upload_response import ImageUploadResponse
-from openapi_client.rest import ApiException
+import okta
+from okta.models.image_upload_response import ImageUploadResponse
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -4004,9 +4004,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
     theme_id = 'theme_id_example' # str | The ID of the theme
     file = None # bytearray | 
@@ -4069,14 +4069,14 @@ Uploads and replaces the favicon for the theme
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.image_upload_response import ImageUploadResponse
-from openapi_client.rest import ApiException
+import okta
+from okta.models.image_upload_response import ImageUploadResponse
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -4094,9 +4094,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
     theme_id = 'theme_id_example' # str | The ID of the theme
     file = None # bytearray | 
@@ -4159,14 +4159,14 @@ Uploads and replaces the logo for the theme. The file must be in PNG, JPG, or GI
 * OAuth Authentication (oauth2):
 
 ```python
-import openapi_client
-from openapi_client.models.image_upload_response import ImageUploadResponse
-from openapi_client.rest import ApiException
+import okta
+from okta.models.image_upload_response import ImageUploadResponse
+from okta.rest import ApiException
 from pprint import pprint
 
 # Defining the host is optional and defaults to https://subdomain.okta.com
 # See configuration.py for a list of all supported configuration parameters.
-configuration = openapi_client.Configuration(
+configuration = okta.Configuration(
     host = "https://subdomain.okta.com"
 )
 
@@ -4184,9 +4184,9 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 configuration.access_token = os.environ["ACCESS_TOKEN"]
 
 # Enter a context with an instance of the API client
-with openapi_client.ApiClient(configuration) as api_client:
+with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
-    api_instance = openapi_client.CustomizationApi(api_client)
+    api_instance = okta.CustomizationApi(api_client)
     brand_id = 'brand_id_example' # str | The ID of the brand
     theme_id = 'theme_id_example' # str | The ID of the theme
     file = None # bytearray | 

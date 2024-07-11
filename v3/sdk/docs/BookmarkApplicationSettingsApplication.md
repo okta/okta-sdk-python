@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.bookmark_application_settings_application import BookmarkApplicationSettingsApplication
+from okta.models.bookmark_application_settings_application import BookmarkApplicationSettingsApplication
 
 # TODO update the JSON string below
 json = "{}"

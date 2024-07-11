@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.access_policy_rule_custom_condition import AccessPolicyRuleCustomCondition
+from okta.models.access_policy_rule_custom_condition import AccessPolicyRuleCustomCondition
 
 # TODO update the JSON string below
 json = "{}"

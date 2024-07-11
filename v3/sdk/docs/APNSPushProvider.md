@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.apns_push_provider import APNSPushProvider
+from okta.models.apns_push_provider import APNSPushProvider
 
 # TODO update the JSON string below
 json = "{}"

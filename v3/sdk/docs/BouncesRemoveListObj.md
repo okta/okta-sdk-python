@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 ## Example
 
 ```python
-from openapi_client.models.bounces_remove_list_obj import BouncesRemoveListObj
+from okta.models.bounces_remove_list_obj import BouncesRemoveListObj
 
 # TODO update the JSON string below
 json = "{}"

@@ -15,14 +15,23 @@
 
 import unittest
 
-from openapi_client.api.application_api import ApplicationApi
+from okta.api.application_api import ApplicationApi
+from okta.okta_configuration import OktaConfiguration
+from okta.api_client import ApiClient
 
+from yaml import load
+try:
+    from yaml import CLoader as Loader
+except ImportError:
+    from yaml import Loader
 
 class TestApplicationApi(unittest.TestCase):
     """ApplicationApi unit test stubs"""
 
     def setUp(self) -> None:
-        self.api = ApplicationApi()
+        configuration = OktaConfiguration().get_configuration()
+        api_client = ApiClient(configuration)
+        self.api = ApplicationApi(api_client)
 
     def tearDown(self) -> None:
         pass
@@ -39,6 +48,7 @@ class TestApplicationApi(unittest.TestCase):
 
         Create an Application
         """
+        
         pass
 
     def test_deactivate_application(self) -> None:
@@ -60,6 +70,8 @@ class TestApplicationApi(unittest.TestCase):
 
         Retrieve an Application
         """
+        app = self.api.get_application('0oai2m0zqpVpFOy5e5d7')
+        print(app.label)
         pass
 
     def test_list_applications(self) -> None:
