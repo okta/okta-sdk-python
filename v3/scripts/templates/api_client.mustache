@@ -11,6 +11,7 @@ import os
 import re
 import tempfile
 
+from blinker import signal
 from urllib.parse import quote
 from typing import Tuple, Optional, List, Dict, Union
 from pydantic import SecretStr
@@ -70,10 +71,21 @@ class ApiClient:
         header_value=None,
         cookie=None
     ) -> None:
+        self.call_api_started = signal('call_api_started')
+        self.call_api_complete = signal('call_api_complete')
+        
         # use default configuration if none is provided
         if configuration is None:
             configuration = Configuration.get_default()
         self.configuration = configuration
+        
+        if configuration.event_listeners is not None:
+            if len(configuration.event_listeners["call_api_started"]) > 0:
+                for listener in configuration.event_listeners["call_api_started"]:
+                    self.call_api_started.connect(listener)
+            if len(configuration.event_listeners["call_api_complete"]) > 0:
+                for listener in configuration.event_listeners["call_api_complete"]:
+                    self.call_api_complete.connect(listener)
 
         self.rest_client = rest.RESTClientObject(configuration)
         self.default_headers = {}
@@ -275,6 +287,13 @@ class ApiClient:
         """
 
         try:
+            self.call_api_started.send({
+                "method": method,
+                "url": url,
+                "headers": header_params,
+                "body": body,
+                "post_params": post_params
+            })
             # perform request and return response
             response_data = {{#asyncio}}await {{/asyncio}}{{#tornado}}yield {{/tornado}}self.rest_client.request(
                 method, url,
@@ -282,6 +301,14 @@ class ApiClient:
                 body=body, post_params=post_params,
                 _request_timeout=_request_timeout
             )
+            self.call_api_complete.send({
+                "response_data": response_data,
+                "method": method,
+                "url": url,
+                "headers": header_params,
+                "body": body,
+                "post_params": post_params
+            })
 
         except ApiException as e:
             raise e

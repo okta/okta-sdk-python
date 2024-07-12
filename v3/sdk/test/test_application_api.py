@@ -37,10 +37,15 @@ except ImportError:
 
 class TestApplicationApi(unittest.TestCase):
     """ApplicationApi unit test stubs"""
-
+    def started_listener(self, ctx) -> None:
+        print("From started listener: " + ctx["url"])
+    def complete_listener(self, ctx) -> None:
+        print("From complete listener: " + ctx["url"])
     def setUp(self) -> None:
         configuration = OktaConfiguration().get_configuration()
         api_client = ApiClient(configuration)
+        api_client.call_api_started.connect(self.started_listener)
+        api_client.call_api_complete.connect(self.complete_listener)
         self.api = ApplicationApi(api_client)
 
     def tearDown(self) -> None:

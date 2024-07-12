@@ -205,6 +205,11 @@ conf = okta.Configuration(
         """date format
         """
 
+        self.event_listeners = {
+            "call_api_started": [],
+            "call_api_complete": []
+        }
+
     def __deepcopy__(self, memo):
         cls = self.__class__
         result = cls.__new__(cls)
