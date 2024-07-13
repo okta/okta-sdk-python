@@ -5,6 +5,9 @@ files:
   okta/okta_configuration.mustache:
     destinationFilename: okta/okta_configuration.py
     templateType: SupportingFiles
+  okta/call_info.mustache:
+    destinationFilename: okta/call_info.py
+    templateType: SupportingFiles
   okta/jwt.mustache:
     destinationFilename: okta/jwt.py
   okta/oauth.mustache:
