@@ -41,6 +41,8 @@ from okta.exceptions import (
     ServiceException
 )
 
+from okta.call_info import CallInfo
+
 RequestSerialized = Tuple[str, str, Dict[str, str], Optional[str], List[str]]
 
 class ApiClient:
@@ -88,11 +90,11 @@ class ApiClient:
         self.configuration = configuration
         
         if configuration.event_listeners is not None:
-            if len(configuration.event_listeners["call_api_started"]) > 0:
+            if len(configuration.event_listeners['call_api_started']) > 0:
                 for listener in configuration.event_listeners["call_api_started"]:
                     self.call_api_started.connect(listener)
-            if len(configuration.event_listeners["call_api_complete"]) > 0:
-                for listener in configuration.event_listeners["call_api_complete"]:
+            if len(configuration.event_listeners['call_api_complete']) > 0:
+                for listener in configuration.event_listeners['call_api_complete']:
                     self.call_api_complete.connect(listener)
 
         self.rest_client = rest.RESTClientObject(configuration)
@@ -280,28 +282,23 @@ class ApiClient:
         """
 
         try:
-            self.call_api_started.send({
-                "method": method,
-                "url": url,
-                "headers": header_params,
-                "body": body,
-                "post_params": post_params
+            call_info = CallInfo({
+                'method': method,
+                'url': url,
+                'headers': header_params,
+                'body': body,
+                'post_params': post_params
             })
+            self.call_api_started.send(call_info)
             # perform request and return response
             response_data = self.rest_client.request(
-                method, url,
-                headers=header_params,
-                body=body, post_params=post_params,
+                call_info.method, call_info.url,
+                headers=call_info.headers,
+                body=call_info.body, post_params=call_info.post_params,
                 _request_timeout=_request_timeout
             )
-            self.call_api_complete.send({
-                "response_data": response_data,
-                "method": method,
-                "url": url,
-                "headers": header_params,
-                "body": body,
-                "post_params": post_params
-            })
+            call_info.response_data = response_data
+            self.call_api_complete.send(call_info)
 
         except ApiException as e:
             raise e

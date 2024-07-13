@@ -287,28 +287,23 @@ class ApiClient:
         """
 
         try:
-            self.call_api_started.send({
-                "method": method,
-                "url": url,
-                "headers": header_params,
-                "body": body,
-                "post_params": post_params
+            call_info = CallInfo({
+                'method': method,
+                'url': url,
+                'headers': header_params,
+                'body': body,
+                'post_params': post_params
             })
+            self.call_api_started.send(call_info)
             # perform request and return response
-            response_data = {{#asyncio}}await {{/asyncio}}{{#tornado}}yield {{/tornado}}self.rest_client.request(
-                method, url,
-                headers=header_params,
-                body=body, post_params=post_params,
+            response_data = self.rest_client.request(
+                call_info.method, call_info.url,
+                headers=call_info.headers,
+                body=call_info.body, post_params=call_info.post_params,
                 _request_timeout=_request_timeout
             )
-            self.call_api_complete.send({
-                "response_data": response_data,
-                "method": method,
-                "url": url,
-                "headers": header_params,
-                "body": body,
-                "post_params": post_params
-            })
+            call_info.response_data = response_data
+            self.call_api_complete.send(call_info)
 
         except ApiException as e:
             raise e
