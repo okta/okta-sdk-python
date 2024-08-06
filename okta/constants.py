@@ -68,7 +68,8 @@ OKTA_FACTOR_TYPE_TO_FACTOR = {
     FT.TOKEN_SOFTWARE_TOTP: models.TotpUserFactor,
     FT.U_2_F: models.U2FUserFactor,
     FT.WEB: models.WebUserFactor,
-    FT.WEBAUTHN: models.WebAuthnUserFactor
+    FT.WEBAUTHN: models.WebAuthnUserFactor,
+    FT.SIGNED_NONCE: models.UserFactor
 }
 
 
