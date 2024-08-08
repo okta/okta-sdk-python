@@ -1,5 +1,11 @@
 # Okta Python SDK Changelog
 
+## 2.9.8
+* Add signed_nonce UserFactor type
+
+## 2.9.7
+* Remove ecdsa dependency
+
 ## 2.9.5
 * Clear access token from cache on call to OAuth.clear_access_token()
 
