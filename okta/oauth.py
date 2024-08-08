@@ -1,3 +1,4 @@
+import time
 from urllib.parse import urlencode, quote
 from okta.jwt import JWT
 from okta.http_client import HTTPClient
@@ -37,6 +38,13 @@ class OAuth:
             str, Exception: Tuple of the access token, error that was raised
             (if any)
         """
+        
+        # Check if access token has expired or will expire in the next 5 minutes
+        current_time = int(time.time())
+        if self._access_token and hasattr(self, '_access_token_expiry_time'):
+            if current_time + 300 >= self._access_token_expiry_time:
+                self.clear_access_token()
+        
         # Return token if already generated
         if self._access_token:
             return (self._access_token, None)
@@ -83,6 +91,9 @@ class OAuth:
 
         # Otherwise set token and return it
         self._access_token = parsed_response["access_token"]
+        
+        # Set token expiry time
+        self._access_token_expiry_time = int(time.time()) + parsed_response["expires_in"]
         return (self._access_token, None)
 
     def clear_access_token(self):
@@ -92,3 +103,4 @@ class OAuth:
         self._access_token = None
         self._request_executor._cache.delete("OKTA_ACCESS_TOKEN")
         self._request_executor._default_headers.pop("Authorization", None)
+        self._access_token_expiry_time = None
