@@ -31,13 +31,13 @@ class RequestExecutor:
                              of the Request Executor
         """
         # Raise Value Error if numerical inputs are invalid (< 0)
-        self._request_timeout = config["client"].get('requestTimeout', 0)
+        self._request_timeout = int(config["client"].get('requestTimeout', 0))
         if self._request_timeout < 0:
             raise ValueError(
                 ("okta.client.requestTimeout provided as "
                  f"{self._request_timeout} but must be 0 (disabled) or "
                  "greater than zero"))
-        self._max_retries = config["client"]["rateLimit"].get('maxRetries', 2)
+        self._max_retries = int(config["client"]["rateLimit"].get('maxRetries', 2))
         if self._max_retries < 0:
             raise ValueError(
                 ("okta.client.rateLimit.maxRetries provided as "
