@@ -39,10 +39,11 @@ class OAuth:
             (if any)
         """
         
-        # Check if access token has expired or will expire in the next 5 minutes
+        # Check if access token has expired or will expire soon
         current_time = int(time.time())
         if self._access_token and hasattr(self, '_access_token_expiry_time'):
-            if current_time + 300 >= self._access_token_expiry_time:
+            renewal_offset = self._config["client"]["oauthTokenRenewalOffset"] * 60  # Convert minutes to seconds
+            if current_time + renewal_offset >= self._access_token_expiry_time:
                 self.clear_access_token()
         
         # Return token if already generated

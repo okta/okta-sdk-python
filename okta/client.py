@@ -128,6 +128,7 @@ class Client(
         self._client_id = None
         self._scopes = None
         self._private_key = None
+        self._oauth_token_renewal_offset = None
 
         # Determine which cache to use
         cache = NoOpCache()
@@ -154,6 +155,7 @@ class Client(
             self._client_id = self._config["client"]["clientId"]
             self._scopes = self._config["client"]["scopes"]
             self._private_key = self._config["client"]["privateKey"]
+            self._oauth_token_renewal_offset = self._config["client"]["oauthTokenRenewalOffset"]
 
         setup_logging(log_level=self._config["client"]["logging"]["logLevel"])
         # Check if logging should be enabled
