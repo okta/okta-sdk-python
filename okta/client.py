@@ -116,7 +116,7 @@ class Client(
         client_config_setter = ConfigSetter()
         client_config_setter._apply_config({'client': user_config})
         self._config = client_config_setter.get_config()
-        # Prune configuration to remove unnecesary fields
+        # Prune configuration to remove unnecessary fields
         self._config = client_config_setter._prune_config(self._config)
         # Validate configuration
         ConfigValidator(self._config)
