@@ -37,7 +37,8 @@ class ConfigSetter():
             },
             "rateLimit": {
                 "maxRetries": ''
-            }
+            },
+            "oauthTokenRenewalOffset": ''
         },
         "testing": {
             "testingDisableHttpsCheck": ''
@@ -116,6 +117,7 @@ class ConfigSetter():
         self._config["client"]["rateLimit"] = {
             "maxRetries": 2
         }
+        self._config["client"]["oauthTokenRenewalOffset"] = 5
 
         self._config["testing"]["testingDisableHttpsCheck"] = False
 
