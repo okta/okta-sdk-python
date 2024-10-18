@@ -147,7 +147,7 @@ async def test_client_invalid_url():
     })
     assert all(values in [None] for values in [req, res_details, resp_body])
     assert issubclass(type(error), aiohttp.ClientError)
-    assert type(error) == aiohttp.InvalidURL
+    assert isinstance(error, aiohttp.InvalidURL)
 
 
 @ pytest.mark.asyncio
