@@ -36,13 +36,14 @@ except ImportError:
     from yaml import Loader
 
 class TestApplicationApi(unittest.TestCase):
-    """ApplicationApi unit test stubs"""
+    """ApplicationApi unit tests"""
     def started_listener(self, ctx) -> None:
         print("From started listener: " + ctx.url)
     def complete_listener(self, ctx) -> None:
         print("From complete listener: " + ctx.url)
     def setUp(self) -> None:
         configuration = OktaConfiguration().get_configuration()
+        configuration.event_listeners['call_api_started'].append(lambda call_info : print('From configuration listener: ' + call_info.url))
         api_client = ApiClient(configuration)
         api_client.call_api_started.connect(self.started_listener)
         api_client.call_api_complete.connect(self.complete_listener)
@@ -66,17 +67,17 @@ class TestApplicationApi(unittest.TestCase):
             app.settings.app.url = "https://example.com/"
             app.settings.app.auth_url = "https://example.com/auth.html"
             
-            createdApp = self.api.create_application(app)
-            self.api.deactivate_application(createdApp.id)
-            self.api.activate_application(createdApp.id)
+            created_app = self.api.create_application(app)
+            self.api.deactivate_application(created_app.id)
+            self.api.activate_application(created_app.id)
             
-            retrievedApp = self.api.get_application(createdApp.id)
+            retrievedApp = self.api.get_application(created_app.id)
             self.assertEqual(retrievedApp.status, ApplicationLifecycleStatus.ACTIVE)
         except Exception as ex:
             self.fail(ex)    
         finally:
-            self.api.deactivate_application(createdApp.id)
-            self.api.delete_application(createdApp.id)
+            self.api.deactivate_application(created_app.id)
+            self.api.delete_application(created_app.id)
         pass
 
     def test_create_application(self) -> None:
@@ -94,14 +95,14 @@ class TestApplicationApi(unittest.TestCase):
             app.settings.app.url = "https://example.com/"
             app.settings.app.auth_url = "https://example.com/auth.html"
             
-            createdApp = self.api.create_application(app)
+            created_app = self.api.create_application(app)
             self.assertIsNotNone(app)
-            self.assertEqual(createdApp.label, app.label)
+            self.assertEqual(created_app.label, app.label)
         except Exception as ex:
             self.fail(ex)
         finally:
-            self.api.deactivate_application(createdApp.id)
-            self.api.delete_application(createdApp.id)
+            self.api.deactivate_application(created_app.id)
+            self.api.delete_application(created_app.id)
         
         pass
 
@@ -120,15 +121,15 @@ class TestApplicationApi(unittest.TestCase):
             app.settings.app.url = "https://example.com/"
             app.settings.app.auth_url = "https://example.com/auth.html"
             
-            createdApp = self.api.create_application(app)
-            self.api.deactivate_application(createdApp.id)
+            created_app = self.api.create_application(app)
+            self.api.deactivate_application(created_app.id)
             
-            retrievedApp = self.api.get_application(createdApp.id)
+            retrievedApp = self.api.get_application(created_app.id)
             self.assertEqual(retrievedApp.status, ApplicationLifecycleStatus.INACTIVE)
         except Exception as ex:
             self.fail(ex)    
         finally:
-            self.api.delete_application(createdApp.id)
+            self.api.delete_application(created_app.id)
         
         pass
 
@@ -147,12 +148,12 @@ class TestApplicationApi(unittest.TestCase):
             app.settings.app.url = "https://example.com/"
             app.settings.app.auth_url = "https://example.com/auth.html"
             
-            createdApp = self.api.create_application(app)
+            created_app = self.api.create_application(app)
             
-            self.api.deactivate_application(createdApp.id)
-            self.api.delete_application(createdApp.id)
+            self.api.deactivate_application(created_app.id)
+            self.api.delete_application(created_app.id)
             
-            test = lambda : self.api.get_application(createdApp.id)
+            test = lambda : self.api.get_application(created_app.id)
             self.assertRaises(NotFoundException, test)
         except Exception as ex:
             self.fail(ex)
@@ -190,17 +191,17 @@ class TestApplicationApi(unittest.TestCase):
         List all Applications
         """
         try:
-            appData = BasicAuthApplication()
-            appData.name = "template_basic_auth"
-            appData.label = "python_test_application_1_" + str(uuid.uuid4())
-            appData.sign_on_mode = ApplicationSignOnMode.BASIC_AUTH
-            appData.settings = BasicApplicationSettings()
-            appData.settings.app = BasicApplicationSettingsApplication()
-            appData.settings.app.url = "https://example.com/"
-            appData.settings.app.auth_url = "https://example.com/auth.html"
-            createdApp1 = self.api.create_application(appData)
-            appData.label = "python_test_application_2_" + str(uuid.uuid4())
-            createdApp2 = self.api.create_application(appData)
+            basic_app = BasicAuthApplication()
+            basic_app.name = "template_basic_auth"
+            basic_app.label = "python_test_application_1_" + str(uuid.uuid4())
+            basic_app.sign_on_mode = ApplicationSignOnMode.BASIC_AUTH
+            basic_app.settings = BasicApplicationSettings()
+            basic_app.settings.app = BasicApplicationSettingsApplication()
+            basic_app.settings.app.url = "https://example.com/"
+            basic_app.settings.app.auth_url = "https://example.com/auth.html"
+            createdApp1 = self.api.create_application(basic_app)
+            basic_app.label = "python_test_application_2_" + str(uuid.uuid4())
+            createdApp2 = self.api.create_application(basic_app)
             app_list = self.api.list_applications()
             id_list = []
             for app in app_list:
@@ -221,15 +222,15 @@ class TestApplicationApi(unittest.TestCase):
         Replace an Application
         """
         try:
-            appData = BasicAuthApplication()
-            appData.name = "template_basic_auth"
-            appData.label = "python_test_application_" + str(uuid.uuid4())
-            appData.sign_on_mode = ApplicationSignOnMode.BASIC_AUTH
-            appData.settings = BasicApplicationSettings()
-            appData.settings.app = BasicApplicationSettingsApplication()
-            appData.settings.app.url = "https://example.com/"
-            appData.settings.app.auth_url = "https://example.com/auth.html"
-            createdApp = self.api.create_application(appData)
+            basic_app = BasicAuthApplication()
+            basic_app.name = "template_basic_auth"
+            basic_app.label = "python_test_application_" + str(uuid.uuid4())
+            basic_app.sign_on_mode = ApplicationSignOnMode.BASIC_AUTH
+            basic_app.settings = BasicApplicationSettings()
+            basic_app.settings.app = BasicApplicationSettingsApplication()
+            basic_app.settings.app.url = "https://example.com/"
+            basic_app.settings.app.auth_url = "https://example.com/auth.html"
+            createdApp = self.api.create_application(basic_app)
             
             newAppData = BasicAuthApplication()
             newAppData.name = "template_basic_auth"

@@ -14,15 +14,27 @@
 
 
 import unittest
+import time
 
 from okta.api.user_api import UserApi
+from okta.okta_configuration import OktaConfiguration
+from okta.api_client import ApiClient
+from okta.exceptions import NotFoundException
 
+from okta.models import (
+    CreateUserRequest,
+    UserProfile,
+    UserType,
+    UserStatus
+)
 
 class TestUserApi(unittest.TestCase):
     """UserApi unit test stubs"""
 
     def setUp(self) -> None:
-        self.api = UserApi()
+        configuration = OktaConfiguration().get_configuration()
+        api_client = ApiClient(configuration)
+        self.api = UserApi(api_client)
 
     def tearDown(self) -> None:
         pass
@@ -32,27 +44,77 @@ class TestUserApi(unittest.TestCase):
 
         Activate a User
         """
-        pass
+        try:
+            create_user_request = CreateUserRequest(
+                type=UserType(
+                    type='test_user_type', 
+                    displayName='test_user_type_display_name', 
+                    name='test_user_type_name'
+                ),
+                profile=UserProfile(
+                    userType='test_user_type_profile_type', 
+                    firstName='John', 
+                    lastName='test_create_user',
+                    email='test_create_user-python@example.com',
+                    login='test_create_user-python@example.com',
+                    nickName='test_create_user'
+                )
+            )
+            
+            created_user = self.api.create_user(create_user_request)
+            
+            self.api.deactivate_user(created_user.id)
+            
+            time.sleep(3)
+            
+            retreived_user = self.api.get_user(created_user.id)
+            self.assertEqual(retreived_user.status, UserStatus.DEPROVISIONED)
+            
+            self.api.activate_user(created_user.id, False)
+            
+            time.sleep(3)
+            
+            retreived_user = self.api.get_user(created_user.id)
+            self.assertEqual(retreived_user.status, UserStatus.PROVISIONED)
+        except Exception as ex:
+            self.fail(ex)
+        finally:
+            self.api.deactivate_user(created_user.id)
+            self.api.delete_user(created_user.id)
 
-    def test_change_password(self) -> None:
-        """Test case for change_password
-
-        Change Password
-        """
-        pass
-
-    def test_change_recovery_question(self) -> None:
-        """Test case for change_recovery_question
-
-        Change Recovery Question
-        """
         pass
 
     def test_create_user(self) -> None:
-        """Test case for create_user
+        """Test case for list_users
 
-        Create a User
+        List a Users
         """
+        try:
+            create_user_request = CreateUserRequest(
+                type=UserType(
+                    type='test_user_type', 
+                    displayName='test_user_type_display_name', 
+                    name='test_user_type_name'
+                ),
+                profile=UserProfile(
+                    userType='test_user_type_profile_type', 
+                    firstName='John', 
+                    lastName='test_create_user',
+                    email='test_create_user-python@example.com',
+                    login='test_create_user-python@example.com',
+                    nickName='test_create_user'
+                )
+            )
+            
+            created_user = self.api.create_user(create_user_request)
+            
+            self.assertIsNotNone(created_user.id)
+        except Exception as ex:
+            self.fail(ex)
+        finally:
+            self.api.deactivate_user(created_user.id)
+            self.api.delete_user(created_user.id)
+
         pass
 
     def test_deactivate_user(self) -> None:
@@ -60,13 +122,39 @@ class TestUserApi(unittest.TestCase):
 
         Deactivate a User
         """
-        pass
+        try:
+            create_user_request = CreateUserRequest(
+                type=UserType(
+                    type='test_user_type', 
+                    displayName='test_user_type_display_name', 
+                    name='test_user_type_name'
+                ),
+                profile=UserProfile(
+                    userType='test_user_type_profile_type', 
+                    firstName='John', 
+                    lastName='test_deactivate_user',
+                    email='test_deactivate_user-python@example.com',
+                    login='test_deactivate_user-python@example.com',
+                    nickName='test_deactivate_user'
+                )
+            )
+            
+            created_user = self.api.create_user(create_user_request)
+            self.assertNotEqual(created_user.status, UserStatus.DEPROVISIONED)
+            
+            time.sleep(3)  
+                      
+            self.api.deactivate_user(created_user.id)
+            
+            time.sleep(3) 
+            
+            retreived_user = self.api.get_user(created_user.id)
+            self.assertEqual(retreived_user.status, UserStatus.DEPROVISIONED)
+        except Exception as ex:
+            self.fail(ex)
+        finally:
+            self.api.delete_user(created_user.id)
 
-    def test_delete_linked_object_for_user(self) -> None:
-        """Test case for delete_linked_object_for_user
-
-        Delete a Linked Object
-        """
         pass
 
     def test_delete_user(self) -> None:
@@ -74,48 +162,34 @@ class TestUserApi(unittest.TestCase):
 
         Delete a User
         """
-        pass
 
-    def test_expire_password(self) -> None:
-        """Test case for expire_password
+        create_user_request = CreateUserRequest(
+            type=UserType(
+                type='test_user_type', 
+                displayName='test_user_type_display_name', 
+                name='test_user_type_name'
+            ),
+            profile=UserProfile(
+                userType='test_user_type_profile_type', 
+                firstName='John', 
+                lastName='test_delete_user',
+                email='test_delete_user-python@example.com',
+                login='test_delete_user-python@example.com',
+                nickName='test_delete_user'
+            )
+        )
+        
+        created_user = self.api.create_user(create_user_request)
+        self.assertIsNotNone(created_user.id)
+        
+        time.sleep(3)
+        
+        self.api.deactivate_user(created_user.id)
+        self.api.delete_user(created_user.id)
 
-        Expire Password
-        """
-        pass
+        time.sleep(3)
+        self.assertRaises(NotFoundException, lambda : self.api.get_user(created_user.id))
 
-    def test_expire_password_and_get_temporary_password(self) -> None:
-        """Test case for expire_password_and_get_temporary_password
-
-        Expire Password and Set Temporary Password
-        """
-        pass
-
-    def test_forgot_password(self) -> None:
-        """Test case for forgot_password
-
-        Initiate Forgot Password
-        """
-        pass
-
-    def test_forgot_password_set_new_password(self) -> None:
-        """Test case for forgot_password_set_new_password
-
-        Reset Password with Recovery Question
-        """
-        pass
-
-    def test_generate_reset_password_token(self) -> None:
-        """Test case for generate_reset_password_token
-
-        Generate a Reset Password Token
-        """
-        pass
-
-    def test_get_refresh_token_for_user_and_client(self) -> None:
-        """Test case for get_refresh_token_for_user_and_client
-
-        Retrieve a Refresh Token for a Client
-        """
         pass
 
     def test_get_user(self) -> None:
@@ -123,181 +197,75 @@ class TestUserApi(unittest.TestCase):
 
         Retrieve a User
         """
-        pass
+        try:
+            create_user_request = CreateUserRequest(
+                type=UserType(
+                    type='test_user_type', 
+                    displayName='test_user_type_display_name', 
+                    name='test_user_type_name'
+                ),
+                profile=UserProfile(
+                    userType='test_user_type_profile_type', 
+                    firstName='John', 
+                    lastName='test_get_user',
+                    email='test_get_user-python@example.com',
+                    login='test_get_user-python@example.com',
+                    nickName='test_get_user'
+                )
+            )
+            
+            created_user = self.api.create_user(create_user_request)
+            self.assertIsNotNone(created_user.id)
+            
+            time.sleep(3)
+            retreived_user = self.api.get_user(created_user.id) 
+            
+            self.assertIsNotNone(retreived_user)
+            self.assertIsNotNone(retreived_user.id)
+            self.assertEqual(retreived_user.id, created_user.id)
+        except Exception as ex:
+            self.fail(ex)
+        finally:
+            self.api.deactivate_user(created_user.id)
+            self.api.delete_user(created_user.id)
 
-    def test_get_user_grant(self) -> None:
-        """Test case for get_user_grant
-
-        Retrieve a User Grant
-        """
-        pass
-
-    def test_list_app_links(self) -> None:
-        """Test case for list_app_links
-
-        List all Assigned Application Links
-        """
-        pass
-
-    def test_list_grants_for_user_and_client(self) -> None:
-        """Test case for list_grants_for_user_and_client
-
-        List all Grants for a Client
-        """
-        pass
-
-    def test_list_linked_objects_for_user(self) -> None:
-        """Test case for list_linked_objects_for_user
-
-        List all Linked Objects
-        """
-        pass
-
-    def test_list_refresh_tokens_for_user_and_client(self) -> None:
-        """Test case for list_refresh_tokens_for_user_and_client
-
-        List all Refresh Tokens for a Client
-        """
-        pass
-
-    def test_list_user_blocks(self) -> None:
-        """Test case for list_user_blocks
-
-        List all User Blocks
-        """
-        pass
-
-    def test_list_user_clients(self) -> None:
-        """Test case for list_user_clients
-
-        List all Clients
-        """
-        pass
-
-    def test_list_user_grants(self) -> None:
-        """Test case for list_user_grants
-
-        List all User Grants
-        """
-        pass
-
-    def test_list_user_groups(self) -> None:
-        """Test case for list_user_groups
-
-        List all Groups
-        """
-        pass
-
-    def test_list_user_identity_providers(self) -> None:
-        """Test case for list_user_identity_providers
-
-        List all Identity Providers
-        """
         pass
 
     def test_list_users(self) -> None:
         """Test case for list_users
 
-        List all Users
+        List a Users
         """
-        pass
-
-    def test_reactivate_user(self) -> None:
-        """Test case for reactivate_user
-
-        Reactivate a User
-        """
-        pass
-
-    def test_replace_user(self) -> None:
-        """Test case for replace_user
-
-        Replace a User
-        """
-        pass
-
-    def test_reset_factors(self) -> None:
-        """Test case for reset_factors
-
-        Reset all Factors
-        """
-        pass
-
-    def test_revoke_grants_for_user_and_client(self) -> None:
-        """Test case for revoke_grants_for_user_and_client
-
-        Revoke all Grants for a Client
-        """
-        pass
-
-    def test_revoke_token_for_user_and_client(self) -> None:
-        """Test case for revoke_token_for_user_and_client
-
-        Revoke a Token for a Client
-        """
-        pass
-
-    def test_revoke_tokens_for_user_and_client(self) -> None:
-        """Test case for revoke_tokens_for_user_and_client
-
-        Revoke all Refresh Tokens for a Client
-        """
-        pass
-
-    def test_revoke_user_grant(self) -> None:
-        """Test case for revoke_user_grant
-
-        Revoke a User Grant
-        """
-        pass
-
-    def test_revoke_user_grants(self) -> None:
-        """Test case for revoke_user_grants
-
-        Revoke all User Grants
-        """
-        pass
-
-    def test_revoke_user_sessions(self) -> None:
-        """Test case for revoke_user_sessions
-
-        Revoke all User Sessions
-        """
-        pass
-
-    def test_set_linked_object_for_user(self) -> None:
-        """Test case for set_linked_object_for_user
-
-        Create a Linked Object for two Users
-        """
-        pass
-
-    def test_suspend_user(self) -> None:
-        """Test case for suspend_user
-
-        Suspend a User
-        """
-        pass
-
-    def test_unlock_user(self) -> None:
-        """Test case for unlock_user
-
-        Unlock a User
-        """
-        pass
-
-    def test_unsuspend_user(self) -> None:
-        """Test case for unsuspend_user
-
-        Unsuspend a User
-        """
-        pass
-
-    def test_update_user(self) -> None:
-        """Test case for update_user
-
-        Update a User
-        """
+        try:
+            create_user_request = CreateUserRequest(
+                type=UserType(
+                    type='test_user_type', 
+                    displayName='test_user_type_display_name', 
+                    name='test_user_type_name'
+                ),
+                profile=UserProfile(
+                    userType='test_user_type_profile_type', 
+                    firstName='John', 
+                    lastName='test_list_users',
+                    email='test_list_users-python@example.com',
+                    login='test_list_users-python@example.com',
+                    nickName='test_list_users'
+                )
+            )
+            
+            created_user = self.api.create_user(create_user_request)
+            
+            time.sleep(3)
+            
+            found_users = self.api.list_users(search='profile.nickName eq "' + created_user.profile.nick_name + '"')
+            
+            self.assertEqual(1, len(found_users))
+        except Exception as ex:
+            self.fail(ex)
+        finally:
+            self.api.deactivate_user(created_user.id)
+            self.api.delete_user(created_user.id)
+        
         pass
 
 

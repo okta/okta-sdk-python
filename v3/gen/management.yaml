@@ -31986,9 +31986,6 @@ components:
              This value becomes read-only after creation and can't be updated.
         _links:
           $ref: '#/components/schemas/UserTypeLinks'
-      required:
-        - name
-        - displayName
     UserTypeCondition:
       properties:
         exclude:

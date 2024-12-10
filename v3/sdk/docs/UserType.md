@@ -9,11 +9,11 @@ Name | Type | Description | Notes
 **created_by** | **str** | The user ID of the account that created the User Type | [optional] [readonly] 
 **default** | **bool** | A boolean value to indicate if this is the default User Type | [optional] [readonly] 
 **description** | **str** | The human-readable description of the User Type | [optional] 
-**display_name** | **str** | The human-readable name of the User Type | 
+**display_name** | **str** | The human-readable name of the User Type | [optional] 
 **id** | **str** | The unique key for the User Type | [optional] 
 **last_updated** | **datetime** | A timestamp from when the User Type was most recently updated | [optional] [readonly] 
 **last_updated_by** | **str** | The user ID of the most recent account to edit the User Type | [optional] [readonly] 
-**name** | **str** | The name of the User Type. The name must start with A-Z or a-z and contain only A-Z, a-z, 0-9, or underscore (_) characters.   This value becomes read-only after creation and can&#39;t be updated. | 
+**name** | **str** | The name of the User Type. The name must start with A-Z or a-z and contain only A-Z, a-z, 0-9, or underscore (_) characters.   This value becomes read-only after creation and can&#39;t be updated. | [optional] 
 **links** | [**UserTypeLinks**](UserTypeLinks.md) |  | [optional] 
 
 ## Example
