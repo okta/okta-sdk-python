@@ -48,8 +48,7 @@ class OAuth:
             'grant_type': 'client_credentials',
             'scope': ' '.join(self._config["client"]["scopes"]),
             'client_assertion_type':
-                'urn:ietf:params:oauth:client-assertion-type:jwt-bearer',
-            'client_assertion': jwt
+                'urn:ietf:params:oauth:client-assertion-type:jwt-bearer'
         }
 
         encoded_parameters = urlencode(parameters, quote_via=quote)
@@ -59,7 +58,7 @@ class OAuth:
 
         # Craft request
         oauth_req, err = await self._request_executor.create_request(
-            "POST", url, None, {
+            "POST", url, {'client_assertion': jwt}, {
                 'Accept': "application/json",
                 'Content-Type': 'application/x-www-form-urlencoded'
             }, oauth=True)
