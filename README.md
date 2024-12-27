@@ -20,8 +20,6 @@
 - [Building the SDK](#building-the-sdk)
 - [Contributing](#contributing)
 
-This repository contains the Okta management SDK for Python. This SDK can be used in your server-side code to interact with the Okta management API and
-
 - Create and update users with the [Users API][users-api-docs]
 - Add security factors to users with the [Factors API][factors-api-docs]
 - Manage groups with the [Groups API][groups-api-docs]
