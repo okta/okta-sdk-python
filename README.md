@@ -32,9 +32,9 @@ This repository contains the Okta management SDK for Python. This SDK can be use
 
 You can also learn more on the [Okta + Python][lang-landing-page] page in our documentation.
 
-## Release status
+## Release statuss
 
-This library uses semantic versioning and follows Okta's [Library Version Policy][okta-library-versioning].
+This library usess semantic versioning and follows Okta's [Library Version Policy][okta-library-versioning].
 
 | Version | Status                           |
 | ------- | -------------------------------- |
@@ -923,7 +923,7 @@ loop = asyncio.get_event_loop()
 loop.run_until_complete(main())
 ```
 
-If you require access to the response headers during a pagination operation, set the `includeResponse` parameter to `True` in the call to the `next` method; this returns the response as a third tuple value.  See the following example:
+If you require access to the response headers during a pagination operation, set the `includeResponse` parameter to `True` in the call to the `next` method; this returns the response as a third tuple value. See the following example:
 
 ```python
 from okta.client import Client as OktaClient
@@ -934,7 +934,7 @@ async def main():
     users, resp, err = await client.list_users()
     while True:
         for user in users:
-            print(user.profile.login) 
+            print(user.profile.login)
         if resp.has_next():
             users, err, response = await resp.next(True) # Specify True to receive the response object as the third part of the tuple for further analysis
         else:
