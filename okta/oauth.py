@@ -58,7 +58,7 @@ class OAuth:
 
         # Craft request
         oauth_req, err = await self._request_executor.create_request(
-            "POST", url, {'client_assertion': jwt}, {
+            "POST", url, form={'client_assertion': jwt}, headers={
                 'Accept': "application/json",
                 'Content-Type': 'application/x-www-form-urlencoded'
             }, oauth=True)
