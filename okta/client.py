@@ -154,6 +154,10 @@ class Client(
             self._client_id = self._config["client"]["clientId"]
             self._scopes = self._config["client"]["scopes"]
             self._private_key = self._config["client"]["privateKey"]
+        elif self._authorization_mode == "ClientSecret":
+            self._client_id = self._config["client"]["clientId"]
+            self._scopes = self._config["client"]["scopes"]
+            self._client_secret = self._config["client"]["clientSecret"]
 
         setup_logging(log_level=self._config["client"]["logging"]["logLevel"])
         # Check if logging should be enabled

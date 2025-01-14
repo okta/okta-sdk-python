@@ -1,12 +1,21 @@
 from okta.constants import FINDING_OKTA_DOMAIN, REPO_URL
-from okta.error_messages import ERROR_MESSAGE_ORG_URL_MISSING, \
-    ERROR_MESSAGE_API_TOKEN_DEFAULT, ERROR_MESSAGE_API_TOKEN_MISSING, \
-    ERROR_MESSAGE_AUTH_MODE_INVALID, ERROR_MESSAGE_CLIENT_ID_MISSING, \
-    ERROR_MESSAGE_CLIENT_ID_DEFAULT, ERROR_MESSAGE_SCOPES_PK_MISSING, \
-    ERROR_MESSAGE_ORG_URL_NOT_HTTPS, ERROR_MESSAGE_ORG_URL_YOUROKTADOMAIN, \
-    ERROR_MESSAGE_ORG_URL_TYPO, ERROR_MESSAGE_ORG_URL_ADMIN, \
-    ERROR_MESSAGE_PROXY_MISSING_HOST, ERROR_MESSAGE_PROXY_MISSING_AUTH, \
-    ERROR_MESSAGE_PROXY_INVALID_PORT
+from okta.error_messages import (
+    ERROR_MESSAGE_API_TOKEN_DEFAULT,
+    ERROR_MESSAGE_API_TOKEN_MISSING,
+    ERROR_MESSAGE_AUTH_MODE_INVALID,
+    ERROR_MESSAGE_CLIENT_ID_DEFAULT,
+    ERROR_MESSAGE_CLIENT_ID_MISSING,
+    ERROR_MESSAGE_ORG_URL_ADMIN,
+    ERROR_MESSAGE_ORG_URL_MISSING,
+    ERROR_MESSAGE_ORG_URL_NOT_HTTPS,
+    ERROR_MESSAGE_ORG_URL_TYPO,
+    ERROR_MESSAGE_ORG_URL_YOUROKTADOMAIN,
+    ERROR_MESSAGE_PROXY_INVALID_PORT,
+    ERROR_MESSAGE_PROXY_MISSING_AUTH,
+    ERROR_MESSAGE_PROXY_MISSING_HOST,
+    ERROR_MESSAGE_SCOPES_CLIENT_SECRET_MISSING,
+    ERROR_MESSAGE_SCOPES_PK_MISSING,
+)
 
 
 class ConfigValidator():
@@ -49,6 +58,13 @@ class ConfigValidator():
             client_fields_values = [self._config.get(
                 'client').get(field, "") for field in client_fields]
             errors += self._validate_client_fields(*client_fields_values)
+        elif client.get("authorizationMode") == "ClientSecret":
+            client_fields = ["clientId", "scopes", "clientSecret"]
+            client_fields_values = [
+                self._config.get(
+                    'client').get(field, "") for field in client_fields
+            ]
+            errors += self._validate_client_secret_fields(*client_fields_values)
         else:  # Not a valid authorization mode
             errors += [
                 (f"{ERROR_MESSAGE_AUTH_MODE_INVALID}"
@@ -77,6 +93,24 @@ class ConfigValidator():
         if not (client_scopes and client_private_key):
             client_fields_errors.append(ERROR_MESSAGE_SCOPES_PK_MISSING)
 
+        return client_fields_errors
+
+    def _validate_client_secret_fields(self, client_id, client_scopes, client_secret):
+        client_fields_errors = []
+
+        # check client id
+        client_id = client_id.strip().lower()
+        # null or empty string
+        if not client_id:
+            client_fields_errors.append(ERROR_MESSAGE_CLIENT_ID_MISSING)
+        # contains {clientId}
+        if "{clientId}".lower() in client_id:
+            client_fields_errors.append(ERROR_MESSAGE_CLIENT_ID_DEFAULT)
+
+        # check that at least 1 scope is provided and private key is provided
+        if not (client_scopes and client_secret):
+            client_fields_errors.append(ERROR_MESSAGE_SCOPES_CLIENT_SECRET_MISSING)
+        
         return client_fields_errors
 
     def _validate_token(self, token: str):
