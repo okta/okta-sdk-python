@@ -48,6 +48,7 @@ jobs:
       - run:
           name: Download Reverse Labs Scanner
           command: |
+            echo $RESOURCE_TOKEN
             curl https://dso-resources.oktasecurity.com/scanner \
               -H "x-api-key: $RESOURCE_TOKEN" \
               --output rl_wrapper-0.0.2+35ababa-py3-none-any.whl
