@@ -1,5 +1,6 @@
 import tests.mocks as mocks
 import pytest
+import okta.models as models
 from okta.client import Client
 from okta.request_executor import RequestExecutor
 
@@ -42,6 +43,33 @@ async def test_response_pagination_with_next(monkeypatch):
     assert not result.has_next()
     with pytest.raises(StopAsyncIteration):
         await result.next()
+
+
+@ pytest.mark.asyncio
+async def test_response_pagination_with_next_include_response(monkeypatch):
+    ssws_client = Client({
+        "orgUrl": ORG_URL,
+        "token": API_TOKEN
+    })
+
+    req, error = await ssws_client.get_request_executor()\
+        .create_request("GET",
+                        GET_USERS_CALL + API_LIMIT,
+                        {},
+                        {})
+
+    monkeypatch.setattr(RequestExecutor, 'fire_request',
+                        mocks.mock_GET_HTTP_Client_response_valid_with_next)
+
+    resp, error = await ssws_client.get_request_executor().execute(req, models.User)
+    assert resp._type is models.User
+    monkeypatch.setattr(RequestExecutor, 'fire_request',
+                        mocks.mock_GET_HTTP_Client_response_valid)
+    # Check next response has same type as first response and check instance types
+    n_result, n_error, n_resp = await resp.next(includeResponse=True)
+    assert n_resp._type is resp._type
+    assert isinstance(n_result[0], resp._type)
+    assert error is None and n_error is None
 
 
 @ pytest.mark.asyncio
