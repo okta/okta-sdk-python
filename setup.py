@@ -44,7 +44,7 @@ setup(
         "pycryptodomex",
         "jwcrypto",
         "pyjwt",
-        "aenum==3.1.11",
+        "aenum",
         "pydash"
     ]
 )
