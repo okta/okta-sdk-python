@@ -180,7 +180,7 @@ class OktaAPIResponse():
             if next_request:
                 # create new response and update generator values
                 next_response = OktaAPIResponse(
-                    self._request_executor, req, res_details, resp_body)
+                    self._request_executor, req, res_details, resp_body, self._type)
                 self._next = next_response._next
                 # yield next page
                 yield (next_response.get_body(), None, next_response)
