@@ -65,11 +65,11 @@ class HTTPClient:
         try:
             logger.debug(f"Request: {request}")
             # Set headers
-            self._default_headers.update(request["headers"])
+            headers = {**self._default_headers, **request["headers"]}
             # Prepare request parameters
             params = {'method': request['method'],
                       'url': request['url'],
-                      'headers': self._default_headers}
+                      'headers': headers}
             if request['data']:
                 params['data'] = json.dumps(request['data'])
             elif request['form']:
