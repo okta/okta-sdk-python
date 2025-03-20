@@ -81,7 +81,7 @@ class TestOrgResource:
     @pytest.mark.asyncio
     async def test_get_org_contact_user(self, fs):
         client = MockOktaClient(fs)
-        contact_type = OrgContactType('BILLING')
+        contact_type = OrgContactType.BILLING.value
         org_contact_user, _, err = await client.get_org_contact_user(contact_type)
         assert err is None
         assert isinstance(org_contact_user, OrgContactUser)
@@ -91,11 +91,11 @@ class TestOrgResource:
     @pytest.mark.asyncio
     async def test_update_org_contact_user(self, fs):
         client = MockOktaClient(fs)
-        contact_type = OrgContactType('BILLING')
+        contact_type = OrgContactType.BILLING.value
         org_contact_user, _, err = await client.get_org_contact_user(contact_type)
         assert err is None
 
-        new_contact_type = OrgContactType('TECHNICAL')
+        new_contact_type = OrgContactType.TECHNICAL.value
         try:
             updated_user, _, err = await client.update_org_contact_user(new_contact_type,
                                                                         UserIdString({'userId': org_contact_user.user_id}))

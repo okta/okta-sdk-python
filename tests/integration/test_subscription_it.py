@@ -26,23 +26,23 @@ class TestSubscriptionResource:
     async def test_get_role_subscription_by_notification_type(self, fs):
         # Instantiate Mock Client
         client = MockOktaClient(fs)
-        notification_type = models.NotificationType('OKTA_ISSUE')
+        notification_type = models.NotificationType.OKTA_ISSUE.value
         resp, _, err = await client.get_role_subscription_by_notification_type('SUPER_ADMIN', notification_type)
         assert isinstance(resp, models.Subscription)
-        assert resp.notification_type == models.NotificationType('OKTA_ISSUE')
+        assert resp.notification_type == models.NotificationType.OKTA_ISSUE.value
 
     @pytest.mark.vcr()
     @pytest.mark.asyncio
     async def test_subscribe_unsubscribe_role_by_notification_type(self, fs):
         # Instantiate Mock Client
         client = MockOktaClient(fs)
-        notification_type = models.NotificationType('OKTA_ISSUE')
+        notification_type = models.NotificationType.OKTA_ISSUE.value
         _, err = await client.subscribe_role_subscription_by_notification_type('SUPER_ADMIN', notification_type)
         assert err is None
 
         resp, _, err = await client.get_role_subscription_by_notification_type('SUPER_ADMIN', notification_type)
         assert isinstance(resp, models.Subscription)
-        assert resp.notification_type == models.NotificationType('OKTA_ISSUE')
+        assert resp.notification_type == models.NotificationType.OKTA_ISSUE.value
         assert resp.status == models.SubscriptionStatus('SUBSCRIBED')
 
         try:
@@ -50,7 +50,7 @@ class TestSubscriptionResource:
             assert err is None
             resp, _, err = await client.get_role_subscription_by_notification_type('SUPER_ADMIN', notification_type)
             assert isinstance(resp, models.Subscription)
-            assert resp.notification_type == models.NotificationType('OKTA_ISSUE')
+            assert resp.notification_type == models.NotificationType.OKTA_ISSUE.value
             assert resp.status == models.SubscriptionStatus('UNSUBSCRIBED')
 
         finally:
@@ -68,17 +68,17 @@ class TestSubscriptionResource:
         assert err is None
         user = users[0]
 
-        notification_type = models.NotificationType('OKTA_ISSUE')
+        notification_type = models.NotificationType.OKTA_ISSUE.value
         _, err = await client.subscribe_user_subscription_by_notification_type(user.id, notification_type)
         assert err is None
 
         resp, _, err = await client.get_user_subscription_by_notification_type(user.id, notification_type)
-        assert resp.notification_type == models.NotificationType('OKTA_ISSUE')
+        assert resp.notification_type == models.NotificationType.OKTA_ISSUE.value
         assert resp.status == models.SubscriptionStatus('SUBSCRIBED')
 
         _, err = await client.unsubscribe_user_subscription_by_notification_type(user.id, notification_type)
         assert err is None
 
         resp, _, err = await client.get_user_subscription_by_notification_type(user.id, notification_type)
-        assert resp.notification_type == models.NotificationType('OKTA_ISSUE')
+        assert resp.notification_type == models.NotificationType.OKTA_ISSUE.value
         assert resp.status == models.SubscriptionStatus('UNSUBSCRIBED')
