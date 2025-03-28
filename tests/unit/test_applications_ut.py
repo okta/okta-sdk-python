@@ -45,7 +45,8 @@ async def test_set_provisioning_connection(monkeypatch, mocker):
         }
     )
     provisioning_conn_req = models.ProvisioningConnectionRequest({'profile': profile})
-    _ = await client.set_default_provisioning_connection_for_application('test_app_id', provisioning_conn_req, query_params={'activate': True})
+    _ = await client.set_default_provisioning_connection_for_application('test_app_id', provisioning_conn_req,
+                                                                         query_params={'activate': True})
     assert mock_http_request.request_info['url'].endswith('/apps/test_app_id/connections/default/?activate=True')
     data = mock_http_request.request_info['data']
     assert json.loads(data) == {"profile": {"authScheme": "TOKEN", "token": "TEST"}}
@@ -132,6 +133,7 @@ async def test_list_features_for_application(monkeypatch, mocker):
     assert isinstance(features[0].capabilities.update.password, models.PasswordSettingObject)
     assert isinstance(features[0].capabilities.update.password.change, models.ChangeEnum)
     assert isinstance(features[0].status, models.EnabledStatus)
+
 
 @pytest.mark.asyncio
 async def test_get_feature_for_application(monkeypatch, mocker):
@@ -256,10 +258,10 @@ async def test_update_feature_for_application(monkeypatch, mocker):
             "lifecycleDeactivate": {
                 "status": "ENABLED"
             },
-            "profile":{
+            "profile": {
                 "status": "ENABLED"
             },
-            "password":{
+            "password": {
                 "status": "ENABLED",
                 "seed": "RANDOM",
                 "change": "CHANGE"
@@ -313,3 +315,20 @@ async def test_upload_application_logo(monkeypatch, mocker):
     assert mock_http_request.request_info['url'].endswith('/apps/test_app_id/logo')
     data = mock_http_request.request_info['data']
     assert data == {'file': logo}
+
+class TestOAuthGrantType:
+    """
+    Unit Tests for the OAuthGrantType Enum
+    """
+
+    def test_new_enum_types(self):
+        # List of new ENUM types to be tested
+        new_enum_types = [
+            "urn:okta:params:oauth:grant-type:otp",
+            "urn:okta:params:oauth:grant-type:oob",
+            "http://auth0.com/oauth/grant-type/mfa-otp",
+            "http://auth0.com/oauth/grant-type/mfa-oob"
+        ]
+
+        for enum_type in new_enum_types:
+            assert enum_type in models.OAuthGrantType.__members__.values()
