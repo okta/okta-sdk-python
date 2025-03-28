@@ -38,3 +38,7 @@ class OAuthGrantType(
     DEVICE_CODE = "urn:ietf:params:oauth:grant-type:device_code", "URN:IETF:PARAMS:OAUTH:GRANT-TYPE:DEVICE_CODE"
     TOKEN_EXCHANGE = "urn:ietf:params:oauth:grant-type:token-exchange", "URN:IETF:PARAMS:OAUTH:GRANT-TYPE:TOKEN-EXCHANGE"
     INTERACTION_CODE = "interaction_code", "INTERACTION_CODE"
+    OTP = "urn:okta:params:oauth:grant-type:otp", "URN:OKTA:PARAMS:OAUTH:GRANT-TYPE:OTP"
+    OOB = "urn:okta:params:oauth:grant-type:oob", "URN:OKTA:PARAMS:OAUTH:GRANT-TYPE:OOB"
+    MFA_OTP = "http://auth0.com/oauth/grant-type/mfa-otp", "HTTP://AUTH0.COM/OAUTH/GRANT-TYPE/MFA-OTP"
+    MFA_OOB = "http://auth0.com/oauth/grant-type/mfa-oob", "HTTP://AUTH0.COM/OAUTH/GRANT-TYPE/MFA-OOB"
