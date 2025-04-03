@@ -1,5 +1,10 @@
 # Okta Python SDK Changelog
 
+## 2.9.11
+* Allow latest aenum release
+* Add missing OAuthGrantType enum values
+* Add data_type parameter for OktaAPIResponse
+
 ## 2.9.8
 * Add signed_nonce UserFactor type
 
