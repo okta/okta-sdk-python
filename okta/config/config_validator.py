@@ -45,9 +45,8 @@ class ConfigValidator():
                 self._validate_token(
                     client.get('token', ""))
         elif client.get('authorizationMode') == "PrivateKey":
-            client_fields = ['clientId', 'scopes', 'privateKey']
-            client_fields_values = [self._config.get(
-                'client').get(field, "") for field in client_fields]
+            client_fields = ['clientId', 'scopes', 'privateKey', 'oauthTokenRenewalOffset']
+            client_fields_values = [client.get(field, "") for field in client_fields]
             errors += self._validate_client_fields(*client_fields_values)
         else:  # Not a valid authorization mode
             errors += [
@@ -61,7 +60,7 @@ class ConfigValidator():
                              f"See {REPO_URL} for usage")
 
     def _validate_client_fields(self, client_id, client_scopes,
-                                client_private_key):
+                                client_private_key, oauth_token_renewal_offset):
         client_fields_errors = []
 
         # check client id
@@ -76,6 +75,14 @@ class ConfigValidator():
         # check that at least 1 scope is provided and private key is provided
         if not (client_scopes and client_private_key):
             client_fields_errors.append(ERROR_MESSAGE_SCOPES_PK_MISSING)
+
+        # Validate oauthTokenRenewalOffset
+        if not oauth_token_renewal_offset:
+            client_fields_errors.append("oauthTokenRenewalOffset must be provided")
+        if not isinstance(oauth_token_renewal_offset, int):
+            client_fields_errors.append("oauthTokenRenewalOffset must be a valid integer")
+        if isinstance(oauth_token_renewal_offset, int) and oauth_token_renewal_offset < 0:
+            client_fields_errors.append("oauthTokenRenewalOffset must be a non-negative integer")
 
         return client_fields_errors
 
