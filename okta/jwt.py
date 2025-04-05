@@ -17,7 +17,7 @@ class JWT():
     OAUTH_ENDPOINT = "/oauth2/v1/token"
     HASH_ALGORITHM = "RS256"
     PEM_FORMAT = "PKCS1"
-    ONE_HOUR = 1 * 60 * 60
+    EXPIRATION = 1 * 60 * 59
     JWT_OPTIONS = {
         'verify_signature': True,
         'verify_aud': True,
@@ -116,7 +116,7 @@ class JWT():
         my_pem, _ = JWT.get_PEM_JWK(private_key)
         # Get current time and expiry time for token
         issued_time = int(time.time())
-        expiry_time = issued_time + JWT.ONE_HOUR
+        expiry_time = issued_time + JWT.EXPIRATION
         # generate unique JWT ID
         generated_JWT_ID = str(uuid.uuid4())
 
