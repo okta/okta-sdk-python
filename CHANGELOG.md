@@ -1,5 +1,8 @@
 # Okta Python SDK Changelog
 
+## 2.9.12
+* Reduce JWT Token Expiration time
+
 ## 2.9.11
 * Allow latest aenum release
 * Add missing OAuthGrantType enum values
