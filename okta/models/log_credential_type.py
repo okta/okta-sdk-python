@@ -37,3 +37,4 @@ class LogCredentialType(
     EMAIL = "EMAIL", "email"
     OAUTH_2 = "OAUTH2", "oauth2"
     JWT = "JWT", "jwt"
+    CERTIFICATE = "CERTIFICATE", "certificate"
