@@ -2,6 +2,8 @@ from okta.jwt import JWT
 import tests.mocks as mocks
 import os
 import pytest
+from unittest.mock import AsyncMock, MagicMock
+from okta.oauth import OAuth
 
 """
 Testing Private Key Inputs
@@ -39,3 +41,54 @@ def test_private_key_PEM_JWK_explicit_string():
 def test_invalid_private_key_PEM_JWK(private_key):
     with pytest.raises(ValueError):
         generated_pem, generated_jwk = JWT.get_PEM_JWK(private_key)
+
+
+@pytest.mark.asyncio
+async def test_get_access_token():
+    mock_request_executor = MagicMock()
+    mock_request_executor.create_request = AsyncMock(return_value=({"mock_request": "data"}, None))
+    mock_response_details = MagicMock()
+    mock_response_details.content_type = "application/json"
+    mock_response_details.status = 200
+    mock_request_executor.fire_request = AsyncMock(
+        return_value=(None, mock_response_details, '{"access_token": "mock_token", "expires_in": 3600}', None))
+
+    config = {
+        "client": {
+            "orgUrl": "https://example.okta.com",
+            "clientId": "valid-client-id",
+            "privateKey": mocks.SAMPLE_RSA,
+            "scopes": ["scope1", "scope2"],
+            "oauthTokenRenewalOffset": 5
+        }
+    }
+    oauth = OAuth(mock_request_executor, config)
+    token, error = await oauth.get_access_token()
+
+    assert token == "mock_token"
+    assert error is None
+
+
+@pytest.mark.asyncio
+async def test_clear_access_token():
+    mock_request_executor = MagicMock()
+    mock_request_executor._cache = MagicMock()
+    mock_request_executor._default_headers = {}
+
+    config = {
+        "client": {
+            "orgUrl": "https://example.okta.com",
+            "clientId": "valid-client-id",
+            "privateKey": "valid-private-key",
+            "scopes": ["scope1", "scope2"],
+            "oauthTokenRenewalOffset": 5
+        }
+    }
+    oauth = OAuth(mock_request_executor, config)
+    oauth._access_token = "mock_token"
+    oauth._access_token_expiry_time = 1234567890
+
+    oauth.clear_access_token()
+
+    assert oauth._access_token is None
+    assert oauth._access_token_expiry_time is None

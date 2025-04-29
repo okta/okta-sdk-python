@@ -914,3 +914,17 @@ async def test_client_session(mocker):
     config = {'orgUrl': org_url, 'token': token}
     async with OktaClient(config) as client:
         assert isinstance(client._request_executor._http_client._session, aiohttp.ClientSession)
+
+
+def test_client_initialization():
+    config = {
+        "orgUrl": "https://dev-1dq2.okta.com/oauth2/default",
+        "authorizationMode": "PrivateKey",
+        "clientId": "valid-client-id",
+        "scopes": ["scope1", "scope2"],
+        "privateKey": "valid-private-key",
+        "token": "valid-token",
+    }
+    client = OktaClient(config)
+    assert client._config["client"]["orgUrl"] == "https://dev-1dq2.okta.com/oauth2/default"
+    assert client._config["client"]["clientId"] == "valid-client-id"

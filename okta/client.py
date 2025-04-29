@@ -116,7 +116,7 @@ class Client(
         client_config_setter = ConfigSetter()
         client_config_setter._apply_config({'client': user_config})
         self._config = client_config_setter.get_config()
-        # Prune configuration to remove unnecesary fields
+        # Prune configuration to remove unnecessary fields
         self._config = client_config_setter._prune_config(self._config)
         # Validate configuration
         ConfigValidator(self._config)
@@ -128,6 +128,7 @@ class Client(
         self._client_id = None
         self._scopes = None
         self._private_key = None
+        self._oauth_token_renewal_offset = None
 
         # Determine which cache to use
         cache = NoOpCache()
@@ -154,6 +155,7 @@ class Client(
             self._client_id = self._config["client"]["clientId"]
             self._scopes = self._config["client"]["scopes"]
             self._private_key = self._config["client"]["privateKey"]
+            self._oauth_token_renewal_offset = self._config["client"]["oauthTokenRenewalOffset"]
 
         setup_logging(log_level=self._config["client"]["logging"]["logLevel"])
         # Check if logging should be enabled
