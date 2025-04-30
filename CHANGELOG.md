@@ -1,5 +1,8 @@
 # Okta Python SDK Changelog
 
+## 2.9.13
+* Expire and renew the access token when using OAuth 2.0
+
 ## 2.9.12
 * Reduce JWT Token Expiration time
 
