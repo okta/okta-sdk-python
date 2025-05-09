@@ -58,15 +58,10 @@ def find_app_model(sign_on_mode, template_name):
 OKTA_FACTOR_TYPE_TO_FACTOR = {
     FT.CALL: models.CallUserFactor,
     FT.EMAIL: models.EmailUserFactor,
-    FT.HOTP: models.CustomHotpUserFactor,
     FT.PUSH: models.PushUserFactor,
     FT.QUESTION: models.SecurityQuestionUserFactor,
     FT.SMS: models.SmsUserFactor,
     FT.TOKEN: models.TokenUserFactor,
-    FT.TOKEN_HARDWARE: models.HardwareUserFactor,
-    FT.TOKEN_HOTP: models.CustomHotpUserFactor,
-    FT.TOKEN_SOFTWARE_TOTP: models.TotpUserFactor,
-    FT.U_2_F: models.U2FUserFactor,
     FT.WEB: models.WebUserFactor,
     FT.WEBAUTHN: models.WebAuthnUserFactor,
     FT.SIGNED_NONCE: models.UserFactor
@@ -81,7 +76,6 @@ OKTA_POLICY_TYPE_TO_MODEL = {
     PT.ACCESS_POLICY: models.AccessPolicy,
     PT.IDP_DISCOVERY: models.IdentityProviderPolicy,
     PT.MFA_ENROLL: models.MultifactorEnrollmentPolicy,
-    PT.OAUTH_AUTHORIZATION_POLICY: models.OAuthAuthorizationPolicy,
     PT.OKTA_SIGN_ON: models.OktaSignOnPolicy,
     PT.PASSWORD: models.PasswordPolicy,
     PT.PROFILE_ENROLLMENT: models.ProfileEnrollmentPolicy

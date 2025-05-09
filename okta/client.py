@@ -16,7 +16,7 @@ limitations under the License.
 
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # SEE CONTRIBUTOR DOCUMENTATION
-
+import os
 import aiohttp
 import logging
 
@@ -26,93 +26,69 @@ from okta.request_executor import RequestExecutor
 from okta.cache.no_op_cache import NoOpCache
 from okta.cache.okta_cache import OktaCache
 from okta.logger import setup_logging
-from okta.resource_clients.application_client\
-    import ApplicationClient
-from okta.resource_clients.authenticator_client\
-    import AuthenticatorClient
-from okta.resource_clients.authorization_server_client\
-    import AuthorizationServerClient
-from okta.resource_clients.brand_client\
-    import BrandClient
-from okta.resource_clients.domain_client\
-    import DomainClient
-from okta.resource_clients.event_hook_client\
-    import EventHookClient
-from okta.resource_clients.feature_client\
-    import FeatureClient
-from okta.resource_clients.group_client\
-    import GroupClient
-from okta.resource_clients.identity_provider_client\
-    import IdentityProviderClient
-from okta.resource_clients.inline_hook_client\
-    import InlineHookClient
-from okta.resource_clients.log_event_client\
-    import LogEventClient
-from okta.resource_clients.profile_mapping_client\
-    import ProfileMappingClient
-from okta.resource_clients.user_schema_client\
-    import UserSchemaClient
-from okta.resource_clients.group_schema_client\
-    import GroupSchemaClient
-from okta.resource_clients.linked_object_client\
-    import LinkedObjectClient
-from okta.resource_clients.user_type_client\
-    import UserTypeClient
-from okta.resource_clients.org_client\
-    import OrgClient
-from okta.resource_clients.policy_client\
-    import PolicyClient
-from okta.resource_clients.subscription_client\
-    import SubscriptionClient
-from okta.resource_clients.session_client\
-    import SessionClient
-from okta.resource_clients.sms_template_client\
-    import SmsTemplateClient
-from okta.resource_clients.threat_insight_client\
-    import ThreatInsightClient
-from okta.resource_clients.trusted_origin_client\
-    import TrustedOriginClient
-from okta.resource_clients.user_client\
-    import UserClient
-from okta.resource_clients.user_factor_client\
-    import UserFactorClient
-from okta.resource_clients.network_zone_client\
-    import NetworkZoneClient
-
+# from okta.resource_clients.application_client\
+#     import ApplicationClient
+# from okta.resource_clients.authenticator_client\
+#     import AuthenticatorClient
+# from okta.resource_clients.authorization_server_client\
+#     import AuthorizationServerClient
+# from okta.resource_clients.brand_client\
+#     import BrandClient
+# from okta.resource_clients.domain_client\
+#     import DomainClient
+# from okta.resource_clients.event_hook_client\
+#     import EventHookClient
+# from okta.resource_clients.feature_client\
+#     import FeatureClient
+# from okta.resource_clients.group_client\
+#     import GroupClient
+# from okta.resource_clients.identity_provider_client\
+#     import IdentityProviderClient
+# from okta.resource_clients.inline_hook_client\
+#     import InlineHookClient
+# from okta.resource_clients.log_event_client\
+#     import LogEventClient
+# from okta.resource_clients.profile_mapping_client\
+#     import ProfileMappingClient
+# from okta.resource_clients.user_schema_client\
+#     import UserSchemaClient
+# from okta.resource_clients.group_schema_client\
+#     import GroupSchemaClient
+# from okta.resource_clients.linked_object_client\
+#     import LinkedObjectClient
+# from okta.resource_clients.user_type_client\
+#     import UserTypeClient
+# from okta.resource_clients.org_client\
+#     import OrgClient
+# from okta.resource_clients.policy_client\
+#     import PolicyClient
+# from okta.resource_clients.subscription_client\
+#     import SubscriptionClient
+# from okta.resource_clients.session_client\
+#     import SessionClient
+# from okta.resource_clients.sms_template_client\
+#     import SmsTemplateClient
+# from okta.resource_clients.threat_insight_client\
+#     import ThreatInsightClient
+# from okta.resource_clients.trusted_origin_client\
+#     import TrustedOriginClient
+# from okta.resource_clients.user_client\
+#     import UserClient
+# from okta.resource_clients.user_factor_client\
+#     import UserFactorClient
+# from okta.resource_clients.network_zone_client\
+#     import NetworkZoneClient
+from okta.api.application_api import ApplicationApi
 
 class Client(
-    ApplicationClient,
-    AuthenticatorClient,
-    AuthorizationServerClient,
-    BrandClient,
-    DomainClient,
-    EventHookClient,
-    FeatureClient,
-    GroupClient,
-    IdentityProviderClient,
-    InlineHookClient,
-    LogEventClient,
-    ProfileMappingClient,
-    UserSchemaClient,
-    GroupSchemaClient,
-    LinkedObjectClient,
-    UserTypeClient,
-    OrgClient,
-    PolicyClient,
-    SubscriptionClient,
-    SessionClient,
-    SmsTemplateClient,
-    ThreatInsightClient,
-    TrustedOriginClient,
-    UserClient,
-    UserFactorClient,
-    NetworkZoneClient
+    ApplicationApi
 ):
     """An Okta client object"""
 
     def __init__(self, user_config: dict = {}):
-        super()
         # Load configuration
+        os.environ["REQUESTS_CA_BUNDLE"] = "/Users/binoy.oza/prisma_certificates.pem"
+        os.environ["SSL_CERT_FILE"] = "/Users/binoy.oza/.local/prisma_certificates.pem"
         client_config_setter = ConfigSetter()
         client_config_setter._apply_config({'client': user_config})
         self._config = client_config_setter.get_config()
@@ -120,7 +96,9 @@ class Client(
         self._config = client_config_setter._prune_config(self._config)
         # Validate configuration
         ConfigValidator(self._config)
-
+        import pdb; pdb.set_trace()
+        super().__init__(configuration=self._config)
+        # self.configuration = self._config
         # set client variables since validation passes
         self._authorization_mode = self._config["client"]["authorizationMode"]
         self._base_url = self._config["client"]["orgUrl"]
@@ -162,6 +140,8 @@ class Client(
         if self._config["client"]["logging"]["enabled"] is True:
             logger = logging.getLogger('okta-sdk-python')
             logger.disabled = False
+        # from okta.configuration import Configuration
+        # self.configuration = Configuration(host=self._config["client"]["orgUrl"],access_token=self._config["client"]["token"],)
 
     async def __aenter__(self):
         """Automatically create and set session within context manager."""

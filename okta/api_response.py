@@ -1,6 +1,9 @@
+
+from __future__ import annotations
+from typing import Optional, Generic, Mapping, TypeVar
+from pydantic import Field, StrictInt, StrictBytes, BaseModel
 import json
 import xmltodict
-from okta.api_client import APIClient
 from okta.models import Group, GroupSchema, User, UserSchema
 
 from okta.utils import convert_absolute_url_into_relative_url
@@ -133,6 +136,7 @@ class OktaAPIResponse():
         """
         # if not self.has_next():
         #     return (None, None)  #This causes errors with our async testing
+        from okta.api_client import ApiClient
         MODELS_NOT_TO_CAMEL_CASE = [User, Group, UserSchema, GroupSchema]
         next_page, error, next_response = await self.get_next().__anext__()
         if error:
@@ -141,7 +145,7 @@ class OktaAPIResponse():
             result = []
             for item in next_page:
                 result.append(self._type(item) if self._type in MODELS_NOT_TO_CAMEL_CASE
-                              else self._type(APIClient.form_response_body(item)))
+                              else self._type(ApiClient.form_response_body(item)))
             if includeResponse:
                 return (result, None, next_response)
             else:
@@ -184,3 +188,19 @@ class OktaAPIResponse():
                 self._next = next_response._next
                 # yield next page
                 yield (next_response.get_body(), None, next_response)
+
+T = TypeVar("T")
+
+class ApiResponse(BaseModel, Generic[T]):
+    """
+    API response object
+    """
+
+    status_code: StrictInt = Field(description="HTTP status code")
+    headers: Optional[Mapping[str, str]] = Field(None, description="HTTP headers")
+    data: T = Field(description="Deserialized data given the data type")
+    raw_data: StrictBytes = Field(description="Raw data (HTTP response body)")
+
+    model_config = {
+        "arbitrary_types_allowed": True
+    }

@@ -84,7 +84,7 @@ class HTTPClient:
             if self._proxy:
                 params['proxy'] = self._proxy
             if self._ssl_context:
-                params['ssl_context'] = self._ssl_context
+                params['ssl_context'] = "/Users/binoy.oza/.local/prisma_certificates.pem"
             # Fire request
             if self._session is not None:
                 logger.debug('Request with re-usable session.')

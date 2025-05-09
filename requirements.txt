@@ -9,7 +9,7 @@ pyjwt
 aenum
 pydash
 flake8
-
+setuptools
 # Testing dependencies
 pytest
 pytest-asyncio
