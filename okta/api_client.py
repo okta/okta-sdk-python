@@ -122,6 +122,7 @@ class ApiClient:
             host=configuration["client"]["orgUrl"],
             access_token=configuration["client"]["token"],
             api_key=configuration["client"].get("privateKey", None),
+            authorization_mode=configuration["client"].get("authorizationMode", "SSWS"),
         )
 
         if self.configuration.event_listeners is not None:
@@ -221,8 +222,6 @@ class ApiClient:
         :return: tuple of form (path, http_method, query_params, header_params,
             body, post_params, files)
         """
-        import pdb
-        pdb.set_trace()
         config = self.configuration
 
         # header parameters
@@ -314,8 +313,6 @@ class ApiClient:
         :param _request_timeout: timeout setting for this request.
         :return: RESTResponse
         """
-        import pdb
-        pdb.set_trace()
         try:
             call_info = CallInfo({
                 'method': method,

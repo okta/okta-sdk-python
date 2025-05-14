@@ -96,7 +96,6 @@ class Client(
         self._config = client_config_setter._prune_config(self._config)
         # Validate configuration
         ConfigValidator(self._config)
-        import pdb; pdb.set_trace()
         super().__init__(configuration=self._config)
         # self.configuration = self._config
         # set client variables since validation passes

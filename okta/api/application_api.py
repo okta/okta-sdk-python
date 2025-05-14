@@ -129,8 +129,6 @@ class ApplicationApi(ApiClient):
         #     response_data=response_data,
         #     response_types_map=_response_types_map,
         # ).data
-        import pdb
-        pdb.set_trace()
         method, url, header_params, body, post_params = self._list_applications_serialize(
             q=q,
             after=after,
@@ -164,7 +162,7 @@ class ApplicationApi(ApiClient):
             for item in response.get_body():
                 result.append(
                     find_app_model(item["signOnMode"], item["name"])(
-                        self.form_response_body(item)
+                        **self.form_response_body(item)
                         )
                     )
         except Exception as error:
@@ -403,7 +401,6 @@ class ApplicationApi(ApiClient):
         # process the form parameters
         # process the body parameter
 
-        import pdb; pdb.set_trace()
         # set the HTTP header `Accept`
         _header_params['Accept'] = self.select_header_accept(
             [

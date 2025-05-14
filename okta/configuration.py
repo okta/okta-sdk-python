@@ -86,7 +86,7 @@ conf = okta.Configuration(
                  access_token=None,
                  server_index=None, server_variables=None,
                  server_operation_index=None, server_operation_variables=None,
-                 ssl_ca_cert=None,
+                 ssl_ca_cert=None, authorization_mode=None
                  ) -> None:
         """Constructor
         """
@@ -209,6 +209,8 @@ conf = okta.Configuration(
             "call_api_started": [],
             "call_api_complete": []
         }
+
+        self.authorization_mode = authorization_mode
 
     def __deepcopy__(self, memo):
         cls = self.__class__
@@ -399,7 +401,7 @@ conf = okta.Configuration(
                 'type': 'oauth2',
                 'in': 'header',
                 'key': 'Authorization',
-                'value': 'Bearer ' + self.access_token
+                'value': self.authorization_mode + self.access_token
             }
         return auth
 
