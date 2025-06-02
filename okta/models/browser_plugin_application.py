@@ -43,10 +43,27 @@ class BrowserPluginApplication(Application):
 
     model_config = ConfigDict(
         populate_by_name=True,
-        validate_assignment=True,
+        validate_assignment=False,
         protected_namespaces=(),
     )
 
+    def __init__(self, config=None):
+        super().__init__(config=config)
+        if config:
+            object.__setattr__(self, "sign_on_mode", ApplicationSignOnMode("BROWSER_PLUGIN"))
+            if "credentials" in config:
+                if isinstance(config["credentials"],
+                              SchemeApplicationCredentials):
+                    object.__setattr__(self, "credentials", config["credentials"])
+                elif config["credentials"] is not None:
+                    object.__setattr__(self, "credentials",
+                                       SchemeApplicationCredentials.from_dict(config["credentials"]))
+                else:
+                    object.__setattr__(self, "credentials", None)
+            else:
+                object.__setattr__(self, "credentials", None)
+        else:
+            object.__setattr__(self, "credentials", None)
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -81,22 +98,24 @@ class BrowserPluginApplication(Application):
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of accessibility
-        if self.accessibility:
+        # if self.accessibility:
+        #     _dict['accessibility'] = self.accessibility.to_dict()
+        if hasattr(self, 'accessibility') and self.accessibility:
             _dict['accessibility'] = self.accessibility.to_dict()
         # override the default output from pydantic by calling `to_dict()` of licensing
-        if self.licensing:
+        if hasattr(self, 'licensing') and self.licensing:
             _dict['licensing'] = self.licensing.to_dict()
         # override the default output from pydantic by calling `to_dict()` of visibility
-        if self.visibility:
+        if hasattr(self, 'visibility') and self.visibility:
             _dict['visibility'] = self.visibility.to_dict()
         # override the default output from pydantic by calling `to_dict()` of links
-        if self.links:
+        if hasattr(self, '_links') and self.links:
             _dict['_links'] = self.links.to_dict()
         # override the default output from pydantic by calling `to_dict()` of credentials
-        if self.credentials:
+        if hasattr(self, 'credentials') and self.credentials:
             _dict['credentials'] = self.credentials.to_dict()
         # override the default output from pydantic by calling `to_dict()` of settings
-        if self.settings:
+        if hasattr(self, 'settings') and self.settings:
             _dict['settings'] = self.settings.to_dict()
         return _dict
 

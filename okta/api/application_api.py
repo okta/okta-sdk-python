@@ -132,9 +132,11 @@ class ApplicationApi(ApiClient):
         try:
             result = []
             for item in response.get_body():
+                response_body = self.form_response_body(item)
+                sign_on_mode, name = response_body.get("signOnMode"), response_body.get("name")
                 result.append(
                     find_app_model(item["signOnMode"], item["name"])(
-                        **self.form_response_body(item)
+                        response_body
                         )
                     )
         except Exception as error:

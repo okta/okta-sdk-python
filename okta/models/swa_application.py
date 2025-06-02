@@ -31,31 +31,33 @@ class SwaApplication(
     A class for SwaApplication objects.
     """
 
-    # def __init__(self, config=None):
-    #     super().__init__(config=config)
-    #     print("Initializing SwaApplication")
-    #     if config:
-    #         self.name = config["name"]\
-    #             if "name" in config else "template_swa"
-    #         if "settings" in config:
-    #             if isinstance(config["settings"],
-    #                           swa_application_settings.SwaApplicationSettings):
-    #                 self.settings = config["settings"]
-    #             elif config["settings"] is not None:
-    #                 self.settings = swa_application_settings.SwaApplicationSettings(
-    #                     config["settings"]
-    #                 )
-    #             else:
-    #                 self.settings = None
-    #         else:
-    #             self.settings = None
-    #     else:
-    #         self.name = "template_swa"
-    #         self.settings = None
+    def __init__(self, config=None):
+        super().__init__(config=config)
+        if config:
+            object.__setattr__(self, "name", config.get("name", "template_swa"))
+
+            if "settings" in config:
+                if isinstance(config["settings"],
+                              swa_application_settings.SwaApplicationSettings):
+                    object.__setattr__(self, "settings", config.get("settings"))
+
+                elif config["settings"] is not None:
+                    object.__setattr__(self, "settings",
+                                       swa_application_settings.SwaApplicationSettings(
+                        **config["settings"]
+                    ))
+                else:
+                    object.__setattr__(self, "settings", None)
+            else:
+                object.__setattr__(self, "settings", None)
+        else:
+            object.__setattr__(self, "name", "template_swa")
+            object.__setattr__(self, "settings", None)
+
     @classmethod
     def from_config(cls, config: dict) -> "SwaApplication":
         instance = cls()
-        instance.name = config.get("name", "template_swa")
+        # instance.name = config.get("name", "template_swa")
         settings = config.get("settings")
         if isinstance(settings,
                       swa_application_settings.SwaApplicationSettings):

@@ -23,6 +23,7 @@ from typing import Any, ClassVar, Dict, List, Optional
 from okta.models.user_credentials import UserCredentials
 from okta.models.user_profile import UserProfile
 from okta.models.user_type import UserType
+from okta.okta_collection import OktaCollection
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -43,6 +44,49 @@ class CreateUserRequest(BaseModel):
         protected_namespaces=(),
     )
 
+    def __init__(self, config=None):
+        if config:
+            if "credentials" in config:
+                if isinstance(config["credentials"],
+                              UserCredentials):
+                    object.__setattr__(self, "credentials", config["credentials"])
+                elif config["credentials"] is not None:
+                    object.__setattr__(self, "credentials", UserCredentials(config["credentials"]))
+                else:
+                    object.__setattr__(self, "credentials", None)
+            else:
+                object.__setattr__(self, "credentials", None)
+            group_ids = OktaCollection.form_list(
+                config["groupIds"] if "groupIds"\
+                    in config else [],
+                str
+            )
+            object.__setattr__(self, "group_ids", group_ids)
+            if "profile" in config:
+                if isinstance(config["profile"],
+                              UserProfile):
+                    object.__setattr__(self, "profile", config["profile"])
+                elif config["profile"] is not None:
+                    object.__setattr__(self, "profile", UserProfile(config["profile"]))
+                else:
+                    object.__setattr__(self, "profile", None)
+            else:
+                object.__setattr__(self, "profile", None)
+            if "type" in config:
+                if isinstance(config["type"],
+                              UserType):
+                    object.__setattr__(self, "type", config["type"])
+                elif config["type"] is not None:
+                    object.__setattr__(self, "type", UserType(config["type"]))
+                else:
+                    object.__setattr__(self, "type", None)
+            else:
+                object.__setattr__(self, "type", None)
+        else:
+            object.__setattr__(self, "credentials", None)
+            object.__setattr__(self, "group_ids", [])
+            object.__setattr__(self, "profile", None)
+            object.__setattr__(self, "type", None)
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""

@@ -64,7 +64,7 @@ class Application(BaseModel):
 
     model_config = ConfigDict(
         populate_by_name=True,
-        validate_assignment=True,
+        validate_assignment=False,
         protected_namespaces=(),
     )
 
@@ -76,6 +76,26 @@ class Application(BaseModel):
     __discriminator_value_class_map: ClassVar[Dict[str, str]] = {
         'AUTO_LOGIN': 'AutoLoginApplication','BASIC_AUTH': 'BasicAuthApplication','BOOKMARK': 'BookmarkApplication','BROWSER_PLUGIN': 'BrowserPluginApplication','OPENID_CONNECT': 'OpenIdConnectApplication','SAML_1_1': 'SamlApplication','SAML_2_0': 'SamlApplication','SECURE_PASSWORD_STORE': 'SecurePasswordStoreApplication','WS_FEDERATION': 'WsFederationApplication'
     }
+
+    def __init__(self, config=None):
+        if config:
+            # self.label = config["label"]\
+            #     if "label" in config else None
+            object.__setattr__(self, "label", config.get("label", ""))
+            object.__setattr__(self, "id", config.get("id", None))
+
+            # self.last_updated = config["lastUpdated"]\
+            #     if "lastUpdated" in config else None
+            # self.name = config["name"]\
+            #     if "name" in config else None
+            if "signOnMode" in config:
+                if isinstance(config["signOnMode"],
+                              ApplicationSignOnMode):
+                    object.__setattr__(self, "sign_on_mode", config["signOnMode"])
+                elif config["signOnMode"] is not None:
+                    object.__setattr__(self, "sign_on_mode", ApplicationSignOnMode(
+                        config["signOnMode"].upper()
+                    ))
 
     @classmethod
     def get_discriminator_value(cls, obj: Dict[str, Any]) -> Optional[str]:

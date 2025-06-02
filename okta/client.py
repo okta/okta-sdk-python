@@ -79,9 +79,11 @@ from okta.logger import setup_logging
 # from okta.resource_clients.network_zone_client\
 #     import NetworkZoneClient
 from okta.api.application_api import ApplicationApi
+from okta.api.user_api import UserApi
 
 class Client(
-    ApplicationApi
+    ApplicationApi,
+    UserApi,
 ):
     """An Okta client object"""
 
