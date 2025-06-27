@@ -35,11 +35,10 @@ class ApplicationApi(ApiClient):
     Do not edit the class manually.
     """
 
-    def __init__(self, configuration, api_client=None) -> None:
+    def __init__(self, configuration) -> None:
         super().__init__(configuration=configuration)
         # if api_client is None:
         #     api_client = ApiClient.get_default()
-        self.api_client = api_client
 
 
     @validate_call

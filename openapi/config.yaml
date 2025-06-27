@@ -1,0 +1,179 @@
+templateDir: ./templates
+outputDir: ../sdk
+packageName: okta
+files:
+  okta/okta_configuration.mustache:
+    destinationFilename: okta/okta_configuration.py
+    templateType: SupportingFiles
+  okta/call_info.mustache:
+    destinationFilename: okta/call_info.py
+    templateType: SupportingFiles
+  api_response.mustache:
+    destinationFilename: okta/api_response.py
+    templateType: SupportingFiles
+  okta/jwt.mustache:
+    destinationFilename: okta/jwt.py
+  okta/oauth.mustache:
+    destinationFilename: okta/oauth.py
+  okta/client.mustache:
+    destinationFilename: okta/client.py
+  okta/constants.mustache:
+    destinationFilename: okta/constants.py
+  okta/error_messages.mustache:
+    destinationFilename: okta/error_messages.py
+    templateType: SupportingFiles
+  okta/http_client.mustache:
+    destinationFilename: okta/http_client.py
+  okta/logger.mustache:
+    destinationFilename: okta/logger.py
+  okta/okta_collection.mustache:
+    destinationFilename: okta/okta_collection.py
+  okta/okta_object.mustache:
+    destinationFilename: okta/okta_object.py
+  okta/request_executor.mustache:
+    destinationFilename: okta/request_executor.py
+  okta/user_agent.mustache:
+    destinationFilename: okta/user_agent.py
+  okta/utils.mustache:
+    destinationFilename: okta/utils.py
+modelPackage: model
+apiPackage: api
+additionalProperties:
+  app_sign_on_to_model:
+  - key: "AUTO_LOGIN"
+    value: "AutoLoginApplication"
+  - key: "BASIC_AUTH"
+    value: "BasicAuthApplication"
+  - key: "BOOKMARK"
+    value: "BookmarkApplication"
+  - key: "BROWSER_PLUGIN"
+    value: "BrowserPluginApplication"
+  - key: "OPENID_CONNECT"
+    value: "OpenIdConnectApplication"
+  - key: "SAML_1_1"
+    value: "SamlApplication"
+  - key: "SAML_2_0"
+    value: "SamlApplication"
+  - key: "SECURE_PASSWORD_STORE"
+    value: "SecurePasswordStoreApplication"
+  - key: "WS_FEDERATION"
+    value: "WsFederationApplication"
+  factor_type_to_factor:
+  - key: "CALL"
+    value: "CallUserFactor"
+  - key: "EMAIL"
+    value: "EmailUserFactor"
+  - key: "PUSH"
+    value: "PushUserFactor"
+  - key: "QUESTION"
+    value: "SecurityQuestionUserFactor"
+  - key: "SMS"
+    value: "SmsUserFactor"
+  - key: "TOKEN"
+    value: "TokenUserFactor"
+  - key: "TOKEN:HARDWARE"
+    value: "HardwareUserFactor"
+  - key: "TOKEN:HOTP"
+    value: "CustomHotpUserFactor"
+  - key: "TOKEN:SOFTWARE:TOTP"
+    value: "TotpUserFactor"
+  - key: "U2F"
+    value: "U2fUserFactor"
+  - key: "WEB"
+    value: "WebUserFactor"
+  - key: "WEBAUTHN"
+    value: "WebAuthnUserFactor"
+  - key: "HOTP"
+    value: "CustomHotpUserFactor"
+  policy_type_to_model:
+  - key: "ACCESS_POLICY"
+    value: "AccessPolicy"
+  - key: "IDP_DISCOVERY"
+    value: "IdpDiscoveryPolicy"
+  - key: "MFA_ENROLL"
+    value: "MultifactorEnrollmentPolicy"
+  - key: "OKTA_SIGN_ON"
+    value: "OktaSignOnPolicy"
+  - key: "PASSWORD"
+    value: "PasswordPolicy"
+  - key: "PROFILE_ENROLLMENT"
+    value: "ProfileEnrollmentPolicy"
+  policy_rule_type_to_model:
+  - key: ACCESS_POLICY
+    value: AccessPolicyRule
+  - key: PASSWORD
+    value: PasswordPolicyRule
+  - key: PROFILE_ENROLLMENT
+    value: ProfileEnrollmentPolicyRule
+  - key: RESOURCE_ACCESS
+    value: AuthorizationServerPolicyRule
+  - key: SIGN_ON
+    value: OktaSignOnPolicyRule
+  - key: IDP_DISCOVERY
+    value: IdpDiscoveryPolicyRule
+  app_name_to_model:
+  - key: "template_swa"
+    value: "SwaApplication"
+  - key: "template_swa3field"
+    value: "SwaThreeFieldApplication"
+  error_messages:
+  - name: ERROR_MESSAGE_ORG_URL_MISSING
+    value: 'Your Okta URL is missing. You can copy your domain from the Okta Developer
+      Console. Follow these instructions to find it: {FINDING_OKTA_DOMAIN}'
+    is_f_string: true
+  - name: ERROR_MESSAGE_ORG_URL_NOT_HTTPS
+    value: Your Okta URL must start with 'https'.
+  - name: ERROR_MESSAGE_AUTH_MODE_INVALID
+    value: 'The AuthorizationMode configuration option must be one of: [SSWS, Bearer,
+      PrivateKey]. You provided the SDK with '
+  - name: ERROR_MESSAGE_ORG_URL_YOUROKTADOMAIN
+    value: 'Replace {{yourOktaDomain}} with your Okta domain. You can copy your domain
+      from the Okta Developer Console. Follow these instructions to find it: {FINDING_OKTA_DOMAIN}'
+    is_f_string: true
+  - name: ERROR_MESSAGE_ORG_URL_ADMIN
+    value: 'Your Okta domain should not contain -admin. '
+  - name: ERROR_MESSAGE_ORG_URL_TYPO
+    value: It looks like there's a typo in your Okta domain.
+  - name: ERROR_MESSAGE_API_TOKEN_MISSING
+    value: 'Your Okta API token is missing. You can generate one in the Okta Developer
+      Console. Follow these instructions: {GET_OKTA_API_TOKEN}'
+    is_f_string: true
+  - name: ERROR_MESSAGE_API_TOKEN_DEFAULT
+    value: 'Replace {{apiToken}} with your Okta API token. You can generate one in
+      the Okta Developer Console. Follow these instructions: {GET_OKTA_API_TOKEN}'
+    is_f_string: true
+  - name: ERROR_MESSAGE_CLIENT_ID_MISSING
+    value: 'Your client ID is missing. You can copy it from the Okta Developer Console
+      in the details for the Application you created. Follow these instructions to
+      find it: {FINDING_OKTA_APP_CRED}'
+    is_f_string: true
+  - name: ERROR_MESSAGE_CLIENT_ID_DEFAULT
+    value: 'Replace {{clientId}} with the client ID of your Application. You can copy
+      it from the Okta Developer Console in the details for the Application you created.
+      Follow these instructions to find it: {FINDING_OKTA_APP_CRED}'
+    is_f_string: true
+  - name: ERROR_MESSAGE_SCOPES_PK_MISSING
+    value: When using authorization mode 'PrivateKey', you must supply 'okta.client.scopes'
+      and 'okta.client.privateKey'
+  - name: ERROR_MESSAGE_429_MISSING_DATE_X_RESET
+    value: 429 response must have the 'X-Rate-Limit-Reset' and 'Date' headers
+  - name: ERROR_MESSAGE_PROXY_MISSING_HOST
+    value: Please add a host URL to your proxy configuration.
+  - name: ERROR_MESSAGE_PROXY_MISSING_AUTH
+    value: Proxy configuration must include BOTH your username and password if authentication
+      is required
+  - name: ERROR_MESSAGE_PROXY_INVALID_PORT
+    value: Proxy port number must be a number, and between 1 and 65535 (inclusive)
+  policy_rule_to_model:
+  - key: "ACCESS_POLICY"
+    value: "AccessPolicyRule"
+  - key: "PASSWORD"
+    value: "PasswordPolicyRule"
+  - key: "PROFILE_ENROLLMENT"
+    value: "ProfileEnrollmentPolicyRule"
+  - key: "RESOURCE_ACCESS"
+    value: "AuthorizationServerPolicyRule"
+  - key: "SIGN_ON"
+    value: "OktaSignOnPolicyRule"
+  - key: "IDP_DISCOVERY"
+    value: "IdpDiscoveryPolicyRule"

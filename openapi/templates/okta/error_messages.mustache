@@ -1,0 +1,9 @@
+from okta.constants import FINDING_OKTA_APP_CRED, FINDING_OKTA_DOMAIN, \
+    GET_OKTA_API_TOKEN
+
+{{#error_messages}}
+{{name}} = (
+    {{#is_f_string}}f"{{value}}"{{/is_f_string}}{{^is_f_string}}"{{value}}"{{/is_f_string}}
+)
+
+{{/error_messages}}

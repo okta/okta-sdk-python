@@ -1,0 +1,33 @@
+# coding: utf-8
+
+{{>partial_header}}
+
+import os
+from okta.configuration import Configuration
+from pathlib import Path
+
+from yaml import load
+try:
+    from yaml import CLoader as Loader
+except ImportError:
+    from yaml import Loader
+
+class OktaConfiguration():
+    """
+    Configuraiton Provider
+    """
+    def get_configuration(self) -> Configuration:
+        return self.read_configuration(os.path.expanduser('~/.okta/okta.yaml'))
+
+    def read_configuration(self, file_path) -> Configuration:
+        if Path(file_path).is_file():
+            text = open(file_path).read()
+            okta_config = load(text, Loader=Loader)
+            config = Configuration()
+            config.host = okta_config['oktaDomain']
+            config.api_key['apiToken'] = okta_config['apiKey']
+            config.api_key_prefix['apiToken'] = okta_config['apiKeyPrefix']
+            config.verify_ssl = okta_config['verifySsl']
+            return config
+
+        return Configuration.get_default()
