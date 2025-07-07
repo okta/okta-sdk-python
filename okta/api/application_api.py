@@ -25,7 +25,7 @@ from okta.models.application import Application
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
 from okta.rest import RESTResponseType
-from okta.constants import find_app_model
+from okta.constants import find_app_model, find_factor_model, find_policy_model, find_policy_rule_model
 
 
 class ApplicationApi(ApiClient):
@@ -37,8 +37,1452 @@ class ApplicationApi(ApiClient):
 
     def __init__(self, configuration) -> None:
         super().__init__(configuration=configuration)
+        self.model = Application
         # if api_client is None:
         #     api_client = ApiClient.get_default()
+
+    @validate_call
+    async def activate_application(
+        self,
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """Activate an Application
+
+        Activates an inactive application
+
+        :param app_id: ID of the Application (required)
+        :type app_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        method, url, header_params, body, post_params = self._activate_application_serialize(
+            app_id=app_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        form = {}
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=False
+        )
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Application)
+
+        if error:
+            return (None, response, error)
+
+        try:
+            body = response.get_body()
+            result = find_app_model(body["signOnMode"], body["name"])(
+                self.form_response_body(body)
+            )
+        except Exception as error:
+            return (None, response, error)
+        return (result, response, None)
+
+
+    @validate_call
+    async def activate_application_with_http_info(
+        self,
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """Activate an Application
+
+        Activates an inactive application
+
+        :param app_id: ID of the Application (required)
+        :type app_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        method, url, header_params, body, post_params = self._activate_application_serialize(
+            app_id=app_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        form = {}
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=False
+        )
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Application)
+
+        if error:
+            return (None, response, error)
+
+        try:
+            body = response.get_body()
+            result = find_app_model(body["signOnMode"], body["name"])(
+                self.form_response_body(body)
+            )
+        except Exception as error:
+            return (None, response, error)
+        return (result, response, None)
+
+
+    @validate_call
+    async def activate_application_without_preload_content(
+        self,
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Activate an Application
+
+        Activates an inactive application
+
+        :param app_id: ID of the Application (required)
+        :type app_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        method, url, header_params, body, post_params = self._activate_application_serialize(
+            app_id=app_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        form = {}
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=False
+        )
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Application)
+
+        return (None, response, None)
+
+
+    def _activate_application_serialize(
+        self,
+        app_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if app_id is not None:
+            _path_params['appId'] = app_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'apiToken',
+            'oauth2'
+        ]
+
+        return self.param_serialize(
+            method='POST',
+            resource_path='/api/v1/apps/{appId}/lifecycle/activate',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+    @validate_call
+    async def create_application(
+        self,
+        application: Application,
+        activate: Annotated[Optional[StrictBool], Field(description="Executes activation lifecycle operation when creating the app")] = None,
+        okta_access_gateway_agent: Optional[StrictStr] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Application:
+        """Create an Application
+
+        Creates a new application to your Okta organization
+
+        :param application: (required)
+        :type application: Application
+        :param activate: Executes activation lifecycle operation when creating the app
+        :type activate: bool
+        :param okta_access_gateway_agent:
+        :type okta_access_gateway_agent: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        method, url, header_params, body, post_params = self._create_application_serialize(
+            application=application,
+            activate=activate,
+            okta_access_gateway_agent=okta_access_gateway_agent,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+        form = {}
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=False
+        )
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Application)
+
+        if error:
+            return (None, response, error)
+
+        try:
+            body = response.get_body()
+            result = find_app_model(body["signOnMode"], body["name"])(
+                self.form_response_body(body)
+            )
+        except Exception as error:
+            return (None, response, error)
+        return (result, response, None)
+
+
+    @validate_call
+    async def create_application_with_http_info(
+            self,
+            application: Application,
+            activate: Annotated[Optional[StrictBool], Field(
+                description="Executes activation lifecycle operation when creating the app")] = None,
+            okta_access_gateway_agent: Optional[StrictStr] = None,
+            _request_timeout: Union[
+                None,
+                Annotated[StrictFloat, Field(gt=0)],
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Application]:
+        """Create an Application
+
+        Creates a new application to your Okta organization
+
+        :param application: (required)
+        :type application: Application
+        :param activate: Executes activation lifecycle operation when creating the app
+        :type activate: bool
+        :param okta_access_gateway_agent:
+        :type okta_access_gateway_agent: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        method, url, header_params, body, post_params = self._create_application_serialize(
+            application=application,
+            activate=activate,
+            okta_access_gateway_agent=okta_access_gateway_agent,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        form = {}
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=False
+        )
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Application)
+
+        if error:
+            return (None, response, error)
+
+        try:
+            body = response.get_body()
+            result = find_app_model(body["signOnMode"], body["name"])(
+                self.form_response_body(body)
+            )
+        except Exception as error:
+            return (None, response, error)
+        return (result, response, None)
+
+
+    @validate_call
+    async def create_application_without_preload_content(
+            self,
+            application: Application,
+            activate: Annotated[Optional[StrictBool], Field(
+                description="Executes activation lifecycle operation when creating the app")] = None,
+            okta_access_gateway_agent: Optional[StrictStr] = None,
+            _request_timeout: Union[
+                None,
+                Annotated[StrictFloat, Field(gt=0)],
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Create an Application
+
+        Creates a new application to your Okta organization
+
+        :param application: (required)
+        :type application: Application
+        :param activate: Executes activation lifecycle operation when creating the app
+        :type activate: bool
+        :param okta_access_gateway_agent:
+        :type okta_access_gateway_agent: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        method, url, header_params, body, post_params = self._create_application_serialize(
+            application=application,
+            activate=activate,
+            okta_access_gateway_agent=okta_access_gateway_agent,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        form = {}
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=False
+        )
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Application)
+
+        return (None, response, None)
+
+    def _create_application_serialize(
+            self,
+            application,
+            activate,
+            okta_access_gateway_agent,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        # process the query parameters
+        if activate is not None:
+            _query_params.append(('activate', activate))
+
+        # process the header parameters
+        if okta_access_gateway_agent is not None:
+            _header_params['OktaAccessGateway-Agent'] = okta_access_gateway_agent
+        # process the form parameters
+        # process the body parameter
+        if application is not None:
+            _body_params = application
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
+
+        # set the HTTP header `Content-Type`
+        if _content_type:
+            _header_params['Content-Type'] = _content_type
+        else:
+            _default_content_type = (
+                self.select_header_content_type(
+                    [
+                        'application/json'
+                    ]
+                )
+            )
+            if _default_content_type is not None:
+                _header_params['Content-Type'] = _default_content_type
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'apiToken',
+            'oauth2'
+        ]
+
+        return self.param_serialize(
+            method='POST',
+            resource_path='/api/v1/apps',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+    @validate_call
+    async def deactivate_application(
+        self,
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """Deactivate an Application
+
+        Deactivates an active application
+
+        :param app_id: ID of the Application (required)
+        :type app_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        method, url, header_params, body, post_params = self._deactivate_application_serialize(
+            app_id=app_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        form = {}
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=False
+        )
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Application)
+
+        if error:
+            return (None, response, error)
+
+        try:
+            body = response.get_body()
+            result = find_app_model(body["signOnMode"], body["name"])(
+                self.form_response_body(body)
+            )
+        except Exception as error:
+            return (None, response, error)
+        return (result, response, None)
+
+
+    @validate_call
+    async def deactivate_application_with_http_info(
+        self,
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """Deactivate an Application
+
+        Deactivates an active application
+
+        :param app_id: ID of the Application (required)
+        :type app_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        method, url, header_params, body, post_params = self._deactivate_application_serialize(
+            app_id=app_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        form = {}
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=False
+        )
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Application)
+
+        if error:
+            return (None, response, error)
+
+        try:
+            body = response.get_body()
+            result = find_app_model(body["signOnMode"], body["name"])(
+                self.form_response_body(body)
+            )
+        except Exception as error:
+            return (None, response, error)
+        return (result, response, None)
+
+
+    @validate_call
+    async def deactivate_application_without_preload_content(
+        self,
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Deactivate an Application
+
+        Deactivates an active application
+
+        :param app_id: ID of the Application (required)
+        :type app_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        method, url, header_params, body, post_params = self._deactivate_application_serialize(
+            app_id=app_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        form = {}
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=False
+        )
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Application)
+
+        return (None, response, None)
+
+
+    def _deactivate_application_serialize(
+        self,
+        app_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if app_id is not None:
+            _path_params['appId'] = app_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'apiToken',
+            'oauth2'
+        ]
+
+        return self.param_serialize(
+            method='POST',
+            resource_path='/api/v1/apps/{appId}/lifecycle/deactivate',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+    @validate_call
+    async def delete_application(
+        self,
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> None:
+        """Delete an Application
+
+        Deletes an inactive application
+
+        :param app_id: ID of the Application (required)
+        :type app_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        method, url, header_params, body, post_params = self._delete_application_serialize(
+            app_id=app_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        form = {}
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=False
+        )
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Application)
+
+        if error:
+            return (None, response, error)
+
+        try:
+            body = response.get_body()
+            result = find_app_model(body["signOnMode"], body["name"])(
+                self.form_response_body(body)
+            )
+        except Exception as error:
+            return (None, response, error)
+        return (result, response, None)
+
+
+    @validate_call
+    async def delete_application_with_http_info(
+        self,
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[None]:
+        """Delete an Application
+
+        Deletes an inactive application
+
+        :param app_id: ID of the Application (required)
+        :type app_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        method, url, header_params, body, post_params = self._delete_application_serialize(
+            app_id=app_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        form = {}
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=False
+        )
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Application)
+
+        if error:
+            return (None, response, error)
+
+        try:
+            body = response.get_body()
+            result = find_app_model(body["signOnMode"], body["name"])(
+                self.form_response_body(body)
+            )
+        except Exception as error:
+            return (None, response, error)
+        return (result, response, None)
+
+
+    @validate_call
+    async def delete_application_without_preload_content(
+        self,
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Delete an Application
+
+        Deletes an inactive application
+
+        :param app_id: ID of the Application (required)
+        :type app_id: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        method, url, header_params, body, post_params = self._delete_application_serialize(
+            app_id=app_id,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        form = {}
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=False
+        )
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Application)
+
+        return (None, response, None)
+
+
+    def _delete_application_serialize(
+        self,
+        app_id,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if app_id is not None:
+            _path_params['appId'] = app_id
+        # process the query parameters
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
+
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'apiToken',
+            'oauth2'
+        ]
+
+        return self.param_serialize(
+            method='DELETE',
+            resource_path='/api/v1/apps/{appId}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
+
+
+    @validate_call
+    async def get_application(
+            self,
+            app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+            expand: Optional[StrictStr] = None,
+            _request_timeout: Union[
+                None,
+                Annotated[StrictFloat, Field(gt=0)],
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> Application:
+        """Retrieve an Application
+
+        Retrieves an application from your Okta organization by `id`
+
+        :param app_id: ID of the Application (required)
+        :type app_id: str
+        :param expand:
+        :type expand: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        method, url, header_params, body, post_params = self._get_application_serialize(
+            app_id=app_id,
+            expand=expand,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        form = {}
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=False
+        )
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Application)
+
+        if error:
+            return (None, response, error)
+
+        try:
+            body = response.get_body()
+            result = find_app_model(body["signOnMode"], body["name"])(
+                self.form_response_body(body)
+            )
+        except Exception as error:
+            return (None, response, error)
+        return (result, response, None)
+
+
+    @validate_call
+    async def get_application_with_http_info(
+            self,
+            app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+            expand: Optional[StrictStr] = None,
+            _request_timeout: Union[
+                None,
+                Annotated[StrictFloat, Field(gt=0)],
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[Application]:
+        """Retrieve an Application
+
+        Retrieves an application from your Okta organization by `id`
+
+        :param app_id: ID of the Application (required)
+        :type app_id: str
+        :param expand:
+        :type expand: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        method, url, header_params, body, post_params = self._get_application_serialize(
+            app_id=app_id,
+            expand=expand,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+        form = {}
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=False
+        )
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Application)
+
+        if error:
+            return (None, response, error)
+
+        try:
+            body = response.get_body()
+            result = find_app_model(body["signOnMode"], body["name"])(
+                self.form_response_body(body)
+            )
+        except Exception as error:
+            return (None, response, error)
+        return (result, response, None)
+
+
+    @validate_call
+    async def get_application_without_preload_content(
+            self,
+            app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+            expand: Optional[StrictStr] = None,
+            _request_timeout: Union[
+                None,
+                Annotated[StrictFloat, Field(gt=0)],
+                Tuple[
+                    Annotated[StrictFloat, Field(gt=0)],
+                    Annotated[StrictFloat, Field(gt=0)]
+                ]
+            ] = None,
+            _request_auth: Optional[Dict[StrictStr, Any]] = None,
+            _content_type: Optional[StrictStr] = None,
+            _headers: Optional[Dict[StrictStr, Any]] = None,
+            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """Retrieve an Application
+
+        Retrieves an application from your Okta organization by `id`
+
+        :param app_id: ID of the Application (required)
+        :type app_id: str
+        :param expand:
+        :type expand: str
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """  # noqa: E501
+
+        method, url, header_params, body, post_params = self._get_application_serialize(
+            app_id=app_id,
+            expand=expand,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+        form = {}
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=False
+        )
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Application)
+
+        return (None, response, None)
+
+    def _get_application_serialize(
+            self,
+            app_id,
+            expand,
+            _request_auth,
+            _content_type,
+            _headers,
+            _host_index,
+    ) -> RequestSerialized:
+
+        _host = None
+
+        _collection_formats: Dict[str, str] = {
+        }
+
+        _path_params: Dict[str, str] = {}
+        _query_params: List[Tuple[str, str]] = []
+        _header_params: Dict[str, Optional[str]] = _headers or {}
+        _form_params: List[Tuple[str, str]] = []
+        _files: Dict[str, Union[str, bytes]] = {}
+        _body_params: Optional[bytes] = None
+
+        # process the path parameters
+        if app_id is not None:
+            _path_params['appId'] = app_id
+        # process the query parameters
+        if expand is not None:
+            _query_params.append(('expand', expand))
+
+        # process the header parameters
+        # process the form parameters
+        # process the body parameter
+
+        # set the HTTP header `Accept`
+        _header_params['Accept'] = self.select_header_accept(
+            [
+                'application/json'
+            ]
+        )
+
+        # authentication setting
+        _auth_settings: List[str] = [
+            'apiToken',
+            'oauth2'
+        ]
+
+        return self.param_serialize(
+            method='GET',
+            resource_path='/api/v1/apps/{appId}',
+            path_params=_path_params,
+            query_params=_query_params,
+            header_params=_header_params,
+            body=_body_params,
+            post_params=_form_params,
+            files=_files,
+            auth_settings=_auth_settings,
+            collection_formats=_collection_formats,
+            _host=_host,
+            _request_auth=_request_auth
+        )
 
 
     @validate_call
@@ -132,6 +1576,136 @@ class ApplicationApi(ApiClient):
             result = []
             for item in response.get_body():
                 response_body = self.form_response_body(item)
+                if "signOnMode" in item:
+                    result.append(
+                        find_app_model(item["signOnMode"], item["name"])(
+                            response_body
+                        )
+                    )
+                elif "factorType" in item:
+                    result.append(
+                        find_factor_model(item["factorType"])(
+                            self.form_response_body(item)
+                        )
+                    )
+                elif "type" in item:
+                    if "rule" in url:
+                        result.append(
+                            find_policy_rule_model(item["type"])(
+                                self.form_response_body(item)
+                            )
+                        )
+                    else:
+                        result.append(
+                            find_policy_model(item["type"])(
+                                self.form_response_body(item)
+                            )
+                        )
+                else:
+                    result.append(self.model(response_body))
+        except Exception as error:
+            return (None, response, error)
+        return (result, response, None)
+
+
+    @validate_call
+    async def list_applications_with_http_info(
+        self,
+        q: Optional[StrictStr] = None,
+        after: Annotated[Optional[StrictStr], Field(description="Specifies the pagination cursor for the next page of apps")] = None,
+        limit: Annotated[Optional[StrictInt], Field(description="Specifies the number of results for a page")] = None,
+        filter: Annotated[Optional[StrictStr], Field(description="Filters apps by status, user.id, group.id or credentials.signing.kid expression")] = None,
+        expand: Annotated[Optional[StrictStr], Field(description="Traverses users link relationship and optionally embeds Application User resource")] = None,
+        include_non_deleted: Optional[StrictBool] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> ApiResponse[List[Application]]:
+        """List all Applications
+
+        Lists all applications with pagination. A subset of apps can be returned that match a supported filter expression or query.
+
+        :param q:
+        :type q: str
+        :param after: Specifies the pagination cursor for the next page of apps
+        :type after: str
+        :param limit: Specifies the number of results for a page
+        :type limit: int
+        :param filter: Filters apps by status, user.id, group.id or credentials.signing.kid expression
+        :type filter: str
+        :param expand: Traverses users link relationship and optionally embeds Application User resource
+        :type expand: str
+        :param include_non_deleted:
+        :type include_non_deleted: bool
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        method, url, header_params, body, post_params = self._list_applications_serialize(
+            q=q,
+            after=after,
+            limit=limit,
+            filter=filter,
+            expand=expand,
+            include_non_deleted=include_non_deleted,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[Application]",
+            '403': "Error",
+            '429': "Error",
+        }
+
+        form = {}
+
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=False
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Application)
+
+        if error:
+            return (None, response, error)
+
+        try:
+            result = []
+            for item in response.get_body():
+                response_body = self.form_response_body(item)
                 sign_on_mode, name = response_body.get("signOnMode"), response_body.get("name")
                 result.append(
                     find_app_model(item["signOnMode"], item["name"])(
@@ -143,179 +1717,92 @@ class ApplicationApi(ApiClient):
         return (result, response, None)
 
 
-    #
-    # @validate_call
-    # def list_applications_with_http_info(
-    #     self,
-    #     q: Optional[StrictStr] = None,
-    #     after: Annotated[Optional[StrictStr], Field(description="Specifies the pagination cursor for the next page of apps")] = None,
-    #     limit: Annotated[Optional[StrictInt], Field(description="Specifies the number of results for a page")] = None,
-    #     filter: Annotated[Optional[StrictStr], Field(description="Filters apps by status, user.id, group.id or credentials.signing.kid expression")] = None,
-    #     expand: Annotated[Optional[StrictStr], Field(description="Traverses users link relationship and optionally embeds Application User resource")] = None,
-    #     include_non_deleted: Optional[StrictBool] = None,
-    #     _request_timeout: Union[
-    #         None,
-    #         Annotated[StrictFloat, Field(gt=0)],
-    #         Tuple[
-    #             Annotated[StrictFloat, Field(gt=0)],
-    #             Annotated[StrictFloat, Field(gt=0)]
-    #         ]
-    #     ] = None,
-    #     _request_auth: Optional[Dict[StrictStr, Any]] = None,
-    #     _content_type: Optional[StrictStr] = None,
-    #     _headers: Optional[Dict[StrictStr, Any]] = None,
-    #     _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    # ) -> ApiResponse[List[Application]]:
-    #     """List all Applications
-    #
-    #     Lists all applications with pagination. A subset of apps can be returned that match a supported filter expression or query.
-    #
-    #     :param q:
-    #     :type q: str
-    #     :param after: Specifies the pagination cursor for the next page of apps
-    #     :type after: str
-    #     :param limit: Specifies the number of results for a page
-    #     :type limit: int
-    #     :param filter: Filters apps by status, user.id, group.id or credentials.signing.kid expression
-    #     :type filter: str
-    #     :param expand: Traverses users link relationship and optionally embeds Application User resource
-    #     :type expand: str
-    #     :param include_non_deleted:
-    #     :type include_non_deleted: bool
-    #     :param _request_timeout: timeout setting for this request. If one
-    #                              number provided, it will be total request
-    #                              timeout. It can also be a pair (tuple) of
-    #                              (connection, read) timeouts.
-    #     :type _request_timeout: int, tuple(int, int), optional
-    #     :param _request_auth: set to override the auth_settings for an a single
-    #                           request; this effectively ignores the
-    #                           authentication in the spec for a single request.
-    #     :type _request_auth: dict, optional
-    #     :param _content_type: force content-type for the request.
-    #     :type _content_type: str, Optional
-    #     :param _headers: set to override the headers for a single
-    #                      request; this effectively ignores the headers
-    #                      in the spec for a single request.
-    #     :type _headers: dict, optional
-    #     :param _host_index: set to override the host_index for a single
-    #                         request; this effectively ignores the host_index
-    #                         in the spec for a single request.
-    #     :type _host_index: int, optional
-    #     :return: Returns the result object.
-    #     """ # noqa: E501
-    #
-    #     _param = self._list_applications_serialize(
-    #         q=q,
-    #         after=after,
-    #         limit=limit,
-    #         filter=filter,
-    #         expand=expand,
-    #         include_non_deleted=include_non_deleted,
-    #         _request_auth=_request_auth,
-    #         _content_type=_content_type,
-    #         _headers=_headers,
-    #         _host_index=_host_index
-    #     )
-    #
-    #     _response_types_map: Dict[str, Optional[str]] = {
-    #         '200': "List[Application]",
-    #         '403': "Error",
-    #         '429': "Error",
-    #     }
-    #     response_data = self.api_client.call_api(
-    #         *_param,
-    #         _request_timeout=_request_timeout
-    #     )
-    #     response_data.read()
-    #     return self.api_client.response_deserialize(
-    #         response_data=response_data,
-    #         response_types_map=_response_types_map,
-    #     )
+    @validate_call
+    async def list_applications_without_preload_content(
+        self,
+        q: Optional[StrictStr] = None,
+        after: Annotated[Optional[StrictStr], Field(description="Specifies the pagination cursor for the next page of apps")] = None,
+        limit: Annotated[Optional[StrictInt], Field(description="Specifies the number of results for a page")] = None,
+        filter: Annotated[Optional[StrictStr], Field(description="Filters apps by status, user.id, group.id or credentials.signing.kid expression")] = None,
+        expand: Annotated[Optional[StrictStr], Field(description="Traverses users link relationship and optionally embeds Application User resource")] = None,
+        include_non_deleted: Optional[StrictBool] = None,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+    ) -> RESTResponseType:
+        """List all Applications
 
+        Lists all applications with pagination. A subset of apps can be returned that match a supported filter expression or query.
 
-    # @validate_call
-    # def list_applications_without_preload_content(
-    #     self,
-    #     q: Optional[StrictStr] = None,
-    #     after: Annotated[Optional[StrictStr], Field(description="Specifies the pagination cursor for the next page of apps")] = None,
-    #     limit: Annotated[Optional[StrictInt], Field(description="Specifies the number of results for a page")] = None,
-    #     filter: Annotated[Optional[StrictStr], Field(description="Filters apps by status, user.id, group.id or credentials.signing.kid expression")] = None,
-    #     expand: Annotated[Optional[StrictStr], Field(description="Traverses users link relationship and optionally embeds Application User resource")] = None,
-    #     include_non_deleted: Optional[StrictBool] = None,
-    #     _request_timeout: Union[
-    #         None,
-    #         Annotated[StrictFloat, Field(gt=0)],
-    #         Tuple[
-    #             Annotated[StrictFloat, Field(gt=0)],
-    #             Annotated[StrictFloat, Field(gt=0)]
-    #         ]
-    #     ] = None,
-    #     _request_auth: Optional[Dict[StrictStr, Any]] = None,
-    #     _content_type: Optional[StrictStr] = None,
-    #     _headers: Optional[Dict[StrictStr, Any]] = None,
-    #     _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
-    # ) -> RESTResponseType:
-    #     """List all Applications
-    #
-    #     Lists all applications with pagination. A subset of apps can be returned that match a supported filter expression or query.
-    #
-    #     :param q:
-    #     :type q: str
-    #     :param after: Specifies the pagination cursor for the next page of apps
-    #     :type after: str
-    #     :param limit: Specifies the number of results for a page
-    #     :type limit: int
-    #     :param filter: Filters apps by status, user.id, group.id or credentials.signing.kid expression
-    #     :type filter: str
-    #     :param expand: Traverses users link relationship and optionally embeds Application User resource
-    #     :type expand: str
-    #     :param include_non_deleted:
-    #     :type include_non_deleted: bool
-    #     :param _request_timeout: timeout setting for this request. If one
-    #                              number provided, it will be total request
-    #                              timeout. It can also be a pair (tuple) of
-    #                              (connection, read) timeouts.
-    #     :type _request_timeout: int, tuple(int, int), optional
-    #     :param _request_auth: set to override the auth_settings for an a single
-    #                           request; this effectively ignores the
-    #                           authentication in the spec for a single request.
-    #     :type _request_auth: dict, optional
-    #     :param _content_type: force content-type for the request.
-    #     :type _content_type: str, Optional
-    #     :param _headers: set to override the headers for a single
-    #                      request; this effectively ignores the headers
-    #                      in the spec for a single request.
-    #     :type _headers: dict, optional
-    #     :param _host_index: set to override the host_index for a single
-    #                         request; this effectively ignores the host_index
-    #                         in the spec for a single request.
-    #     :type _host_index: int, optional
-    #     :return: Returns the result object.
-    #     """ # noqa: E501
-    #
-    #     _param = self._list_applications_serialize(
-    #         q=q,
-    #         after=after,
-    #         limit=limit,
-    #         filter=filter,
-    #         expand=expand,
-    #         include_non_deleted=include_non_deleted,
-    #         _request_auth=_request_auth,
-    #         _content_type=_content_type,
-    #         _headers=_headers,
-    #         _host_index=_host_index
-    #     )
-    #
-    #     _response_types_map: Dict[str, Optional[str]] = {
-    #         '200': "List[Application]",
-    #         '403': "Error",
-    #         '429': "Error",
-    #     }
-    #     response_data = self.api_client.call_api(
-    #         *_param,
-    #         _request_timeout=_request_timeout
-    #     )
-    #     return response_data.response
+        :param q:
+        :type q: str
+        :param after: Specifies the pagination cursor for the next page of apps
+        :type after: str
+        :param limit: Specifies the number of results for a page
+        :type limit: int
+        :param filter: Filters apps by status, user.id, group.id or credentials.signing.kid expression
+        :type filter: str
+        :param expand: Traverses users link relationship and optionally embeds Application User resource
+        :type expand: str
+        :param include_non_deleted:
+        :type include_non_deleted: bool
+        :param _request_timeout: timeout setting for this request. If one
+                                 number provided, it will be total request
+                                 timeout. It can also be a pair (tuple) of
+                                 (connection, read) timeouts.
+        :type _request_timeout: int, tuple(int, int), optional
+        :param _request_auth: set to override the auth_settings for an a single
+                              request; this effectively ignores the
+                              authentication in the spec for a single request.
+        :type _request_auth: dict, optional
+        :param _content_type: force content-type for the request.
+        :type _content_type: str, Optional
+        :param _headers: set to override the headers for a single
+                         request; this effectively ignores the headers
+                         in the spec for a single request.
+        :type _headers: dict, optional
+        :param _host_index: set to override the host_index for a single
+                            request; this effectively ignores the host_index
+                            in the spec for a single request.
+        :type _host_index: int, optional
+        :return: Returns the result object.
+        """ # noqa: E501
+
+        method, url, header_params, body, post_params = self._list_applications_serialize(
+            q=q,
+            after=after,
+            limit=limit,
+            filter=filter,
+            expand=expand,
+            include_non_deleted=include_non_deleted,
+            _request_auth=_request_auth,
+            _content_type=_content_type,
+            _headers=_headers,
+            _host_index=_host_index
+        )
+
+        form = {}
+
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=False
+        )
+
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Application)
+
+        return (None, response, None)
 
 
     def _list_applications_serialize(
@@ -403,12 +1890,12 @@ class ApplicationApi(ApiClient):
             _request_auth=_request_auth
         )
 
+
     @validate_call
-    async def create_application(
+    async def replace_application(
         self,
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
         application: Application,
-        activate: Annotated[Optional[StrictBool], Field(description="Executes activation lifecycle operation when creating the app")] = None,
-        okta_access_gateway_agent: Optional[StrictStr] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
@@ -422,16 +1909,14 @@ class ApplicationApi(ApiClient):
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> Application:
-        """Create an Application
+        """Replace an Application
 
-        Creates a new application to your Okta organization
+        Replaces an application
 
+        :param app_id: ID of the Application (required)
+        :type app_id: str
         :param application: (required)
         :type application: Application
-        :param activate: Executes activation lifecycle operation when creating the app
-        :type activate: bool
-        :param okta_access_gateway_agent:
-        :type okta_access_gateway_agent: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -454,41 +1939,15 @@ class ApplicationApi(ApiClient):
         :return: Returns the result object.
         """ # noqa: E501
 
-        # _param = self._create_application_serialize(
-        #     application=application,
-        #     activate=activate,
-        #     okta_access_gateway_agent=okta_access_gateway_agent,
-        #     _request_auth=_request_auth,
-        #     _content_type=_content_type,
-        #     _headers=_headers,
-        #     _host_index=_host_index
-        # )
-        #
-        # _response_types_map: Dict[str, Optional[str]] = {
-        #     '200': "Application",
-        #     '400': "Error",
-        #     '403': "Error",
-        #     '429': "Error",
-        # }
-        # response_data = self.api_client.call_api(
-        #     *_param,
-        #     _request_timeout=_request_timeout
-        # )
-        # response_data.read()
-        # return self.api_client.response_deserialize(
-        #     response_data=response_data,
-        #     response_types_map=_response_types_map,
-        # ).data
-        #
-        method, url, header_params, body, post_params = self._create_application_serialize(
+        method, url, header_params, body, post_params = self._replace_application_serialize(
+            app_id=app_id,
             application=application,
-            activate=activate,
-            okta_access_gateway_agent=okta_access_gateway_agent,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
             _host_index=_host_index
         )
+
         form = {}
         request, error = await self._request_executor.create_request(
             method, url, body, header_params, form, keep_empty_params=False
@@ -511,36 +1970,33 @@ class ApplicationApi(ApiClient):
             return (None, response, error)
         return (result, response, None)
 
+
     @validate_call
-    def create_application_with_http_info(
-            self,
-            application: Application,
-            activate: Annotated[Optional[StrictBool], Field(
-                description="Executes activation lifecycle operation when creating the app")] = None,
-            okta_access_gateway_agent: Optional[StrictStr] = None,
-            _request_timeout: Union[
-                None,
+    async def replace_application_with_http_info(
+        self,
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        application: Application,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
                 Annotated[StrictFloat, Field(gt=0)],
-                Tuple[
-                    Annotated[StrictFloat, Field(gt=0)],
-                    Annotated[StrictFloat, Field(gt=0)]
-                ]
-            ] = None,
-            _request_auth: Optional[Dict[StrictStr, Any]] = None,
-            _content_type: Optional[StrictStr] = None,
-            _headers: Optional[Dict[StrictStr, Any]] = None,
-            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[Application]:
-        """Create an Application
+        """Replace an Application
 
-        Creates a new application to your Okta organization
+        Replaces an application
 
+        :param app_id: ID of the Application (required)
+        :type app_id: str
         :param application: (required)
         :type application: Application
-        :param activate: Executes activation lifecycle operation when creating the app
-        :type activate: bool
-        :param okta_access_gateway_agent:
-        :type okta_access_gateway_agent: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -561,62 +2017,66 @@ class ApplicationApi(ApiClient):
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
-        _param = self._create_application_serialize(
+        method, url, header_params, body, post_params = self._replace_application_serialize(
+            app_id=app_id,
             application=application,
-            activate=activate,
-            okta_access_gateway_agent=okta_access_gateway_agent,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
             _host_index=_host_index
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Application",
-            '400': "Error",
-            '403': "Error",
-            '429': "Error",
-        }
-        response_data = self.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+        form = {}
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=False
         )
-        response_data.read()
-        return self.response_deserialize(response_data=response_data,
-                                         response_types_map=_response_types_map)
+        if error:
+            return (None, None, error)
+
+        response, error = await self._request_executor\
+            .execute(request, Application)
+
+        if error:
+            return (None, response, error)
+
+        try:
+            body = response.get_body()
+            result = find_app_model(body["signOnMode"], body["name"])(
+                self.form_response_body(body)
+            )
+        except Exception as error:
+            return (None, response, error)
+        return (result, response, None)
+
 
     @validate_call
-    def create_application_without_preload_content(
-            self,
-            application: Application,
-            activate: Annotated[Optional[StrictBool], Field(
-                description="Executes activation lifecycle operation when creating the app")] = None,
-            okta_access_gateway_agent: Optional[StrictStr] = None,
-            _request_timeout: Union[
-                None,
+    async def replace_application_without_preload_content(
+        self,
+        app_id: Annotated[StrictStr, Field(description="ID of the Application")],
+        application: Application,
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
                 Annotated[StrictFloat, Field(gt=0)],
-                Tuple[
-                    Annotated[StrictFloat, Field(gt=0)],
-                    Annotated[StrictFloat, Field(gt=0)]
-                ]
-            ] = None,
-            _request_auth: Optional[Dict[StrictStr, Any]] = None,
-            _content_type: Optional[StrictStr] = None,
-            _headers: Optional[Dict[StrictStr, Any]] = None,
-            _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Create an Application
+        """Replace an Application
 
-        Creates a new application to your Okta organization
+        Replaces an application
 
+        :param app_id: ID of the Application (required)
+        :type app_id: str
         :param application: (required)
         :type application: Application
-        :param activate: Executes activation lifecycle operation when creating the app
-        :type activate: bool
-        :param okta_access_gateway_agent:
-        :type okta_access_gateway_agent: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
                                  timeout. It can also be a pair (tuple) of
@@ -637,39 +2097,38 @@ class ApplicationApi(ApiClient):
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
-        _param = self._create_application_serialize(
+        method, url, header_params, body, post_params = self._replace_application_serialize(
+            app_id=app_id,
             application=application,
-            activate=activate,
-            okta_access_gateway_agent=okta_access_gateway_agent,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
             _host_index=_host_index
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Application",
-            '400': "Error",
-            '403': "Error",
-            '429': "Error",
-        }
-        response_data = self.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+        form = {}
+        request, error = await self._request_executor.create_request(
+            method, url, body, header_params, form, keep_empty_params=False
         )
-        return response_data.response
+        if error:
+            return (None, None, error)
 
-    def _create_application_serialize(
-            self,
-            application,
-            activate,
-            okta_access_gateway_agent,
-            _request_auth,
-            _content_type,
-            _headers,
-            _host_index,
+        response, error = await self._request_executor\
+            .execute(request, Application)
+
+        return (None, response, None)
+
+
+    def _replace_application_serialize(
+        self,
+        app_id,
+        application,
+        _request_auth,
+        _content_type,
+        _headers,
+        _host_index,
     ) -> RequestSerialized:
 
         _host = None
@@ -685,17 +2144,15 @@ class ApplicationApi(ApiClient):
         _body_params: Optional[bytes] = None
 
         # process the path parameters
+        if app_id is not None:
+            _path_params['appId'] = app_id
         # process the query parameters
-        if activate is not None:
-            _query_params.append(('activate', activate))
-
         # process the header parameters
-        if okta_access_gateway_agent is not None:
-            _header_params['OktaAccessGateway-Agent'] = okta_access_gateway_agent
         # process the form parameters
         # process the body parameter
         if application is not None:
             _body_params = application
+
 
         # set the HTTP header `Accept`
         _header_params['Accept'] = self.select_header_accept(
@@ -725,8 +2182,8 @@ class ApplicationApi(ApiClient):
         ]
 
         return self.param_serialize(
-            method='POST',
-            resource_path='/api/v1/apps',
+            method='PUT',
+            resource_path='/api/v1/apps/{appId}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -738,3 +2195,4 @@ class ApplicationApi(ApiClient):
             _host=_host,
             _request_auth=_request_auth
         )
+
