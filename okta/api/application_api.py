@@ -99,22 +99,15 @@ class ApplicationApi(ApiClient):
             method, url, body, header_params, form, keep_empty_params=False
         )
         if error:
-            return (None, None, error)
+            return (None, error)
 
         response, error = await self._request_executor\
-            .execute(request, Application)
+            .execute(request)
 
         if error:
-            return (None, response, error)
+            return (response, error)
 
-        try:
-            body = response.get_body()
-            result = find_app_model(body["signOnMode"], body["name"])(
-                self.form_response_body(body)
-            )
-        except Exception as error:
-            return (None, response, error)
-        return (result, response, None)
+        return (response, None)
 
 
     @validate_call

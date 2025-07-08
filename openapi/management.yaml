@@ -1995,7 +1995,10 @@ paths:
       responses:
         '200':
           description: Success
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Success'
         '403':
           $ref: '#/components/responses/ErrorAccessDenied403'
         '404':
@@ -2018,7 +2021,10 @@ paths:
       responses:
         '200':
           description: Success
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Success'
         '403':
           $ref: '#/components/responses/ErrorAccessDenied403'
         '404':
@@ -15730,7 +15736,10 @@ paths:
       responses:
         '200':
           description: OK
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Success'
         '403':
           $ref: '#/components/responses/ErrorAccessDenied403'
         '404':
@@ -15846,7 +15855,10 @@ paths:
       responses:
         '200':
           description: OK
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Success'
         '403':
           $ref: '#/components/responses/ErrorAccessDenied403'
         '404':
@@ -15908,7 +15920,10 @@ paths:
       responses:
         '200':
           description: OK
-          content: {}
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Success'
         '403':
           $ref: '#/components/responses/ErrorAccessDenied403'
         '404':
@@ -30954,6 +30969,23 @@ components:
       enum:
         - subscribed
         - unsubscribed
+    Success:
+      title: Success
+      type: object
+      properties:
+        successMessage:
+          type: array
+          items:
+            type: object
+            properties:
+              successSummary:
+                type: string
+        successCode:
+          type: string
+          description: An Okta code for this type of success
+        successSummary:
+          type: string
+          description: A short description of success message. Sometimes this contains dynamically-generated information about your specific response.
     SupportedMethods:
       type: object
       properties:

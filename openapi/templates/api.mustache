@@ -11,6 +11,7 @@ from urllib.parse import urlencode
 {{import}}
 {{/imports}}
 
+from {{packageName}}.model.success import Success
 from {{packageName}}.api_client import ApiClient, RequestSerialized
 from {{packageName}}.api_response import ApiResponse
 from {{packageName}}.rest import RESTResponseType
@@ -27,11 +28,34 @@ class {{classname}}(ApiClient):
 
     def __init__(self, configuration) -> None:
         super().__init__(configuration=configuration)
+
 {{#operation}}
 
 
     @validate_call
-    async def {{operationId}}{{>partial_api_args}} -> {{{returnType}}}{{^returnType}}None{{/returnType}}:
+    async def {{operationId}}(
+        self,
+        {{#allParams}}
+        {{#description}}
+        {{paramName}}: Annotated[Optional[{{dataType}}], Field(description="{{{.}}}")] = None,
+        {{/description}}
+        {{^description}}
+        {{paramName}}: {{{dataType}}}{{^required}} = None{{/required}},
+        {{/description}}
+        {{/allParams}}
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0
+    ) -> {{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}None{{/returnType}}:
         """{{{summary}}}
 
         {{{notes}}}
@@ -55,85 +79,97 @@ class {{classname}}(ApiClient):
         )
 
         if error:
-        {{#returnType}}
-            return (None, None, error)
-        {{/returnType}}
-        {{^returnType}}
+            {{#returnType}}
+            if {{returnType}} is Success:
+                return (None, error)
+            else:
+                return (None, None, error)
+            {{/returnType}}
+            {{^returnType}}
             return (None, error)
-        {{/returnType}}
+            {{/returnType}}
 
         {{#returnType}}
-        response, error = await self._request_executor.execute(request, {{returnBaseType}})
+        if {{returnType}} is Success:
+            response, error = await self._request_executor.execute(request)
+        else:
+            response, error = await self._request_executor.execute(request, {{returnBaseType}})
         {{/returnType}}
         {{^returnType}}
         response, error = await self._request_executor.execute(request)
         {{/returnType}}
 
         if error:
-        {{#returnType}}
-            return (None, response, error)
-        {{/returnType}}
-        {{^returnType}}
+            {{#returnType}}
+            if {{returnType}} is Success:
+                return (response, error)
+            else:
+                return (None, response, error)
+            {{/returnType}}
+            {{^returnType}}
             return (response, error)
-        {{/returnType}}
+            {{/returnType}}
 
         {{#returnType}}
-        try:
-            {{^isArray}}
-            result = []
-            for item in response.get_body():
-                response_body = self.form_response_body(item)
-                if "signOnMode" in item:
-                    result.append(
-                        find_app_model(item["signOnMode"], item["name"])(
-                            response_body
-                        )
-                    )
-                elif "factorType" in item:
-                    result.append(
-                        find_factor_model(item["factorType"])(
-                            self.form_response_body(item)
-                        )
-                    )
-                elif "type" in item:
-                    if "rule" in url:
+        if {{returnType}} is not Success:
+            try:
+                {{#isArray}}
+                result = []
+                for item in response.get_body():
+                    response_body = self.form_response_body(item)
+                    if "signOnMode" in item:
                         result.append(
-                            find_policy_rule_model(item["type"])(
+                            find_app_model(item["signOnMode"], item["name"])(
+                                response_body
+                            )
+                        )
+                    elif "factorType" in item:
+                        result.append(
+                            find_factor_model(item["factorType"])(
                                 self.form_response_body(item)
                             )
                         )
+                    elif "type" in item:
+                        if "rule" in url:
+                            result.append(
+                                find_policy_rule_model(item["type"])(
+                                    self.form_response_body(item)
+                                )
+                            )
+                        else:
+                            result.append(
+                                find_policy_model(item["type"])(
+                                    self.form_response_body(item)
+                                )
+                            )
                     else:
-                        result.append(
-                            find_policy_model(item["type"])(
-                                self.form_response_body(item)
-                            )
-                        )
-                else:
-                    result.append(self.model(response_body))
-            {{/isArray}}
-            {{#isArray}}
-            body = response.get_body()
-            response_body = self.form_response_body(body)
-            if "signOnMode" in body:
-                result = find_app_model(body["signOnMode"], body["name"])(
-                    self.form_response_body(body)
-                )
-            elif "factorType" in item:
-                body = self.form_response_body(response.get_body())
-                result = find_factor_model(body["factorType"])(body)
-            elif "type" in item:
-                if "rule" in url:
+                        result.append(self.model(response_body))
+                {{/isArray}}
+                {{^isArray}}
+                body = response.get_body()
+                response_body = self.form_response_body(body)
+                if "signOnMode" in body:
+                    result = find_app_model(body["signOnMode"], body["name"])(
+                        self.form_response_body(body)
+                    )
+                elif "factorType" in body:
                     body = self.form_response_body(response.get_body())
-                    result = find_policy_rule_model(body["type"])(body)
+                    result = find_factor_model(body["factorType"])(body)
+                elif "type" in body:
+                    if "rule" in url:
+                        body = self.form_response_body(response.get_body())
+                        result = find_policy_rule_model(body["type"])(body)
+                    else:
+                        body = self.form_response_body(response.get_body())
+                        result = find_policy_model(body["type"])(body)
                 else:
-                    body = self.form_response_body(response.get_body())
-                    result = find_policy_model(body["type"])(body)
-            else:
-                result = {{returnBaseType}}(response_body)
-            {{/isArray}}
-        except Exception as e:
-            return (None, response, e)
-        return (result, response, None)
+                    result = {{returnBaseType}}(response_body)
+                {{/isArray}}
+            except Exception as e:
+                return (None, response, e)
+            return (result, response, None)
+        else:
+            return (response, None)
         {{/returnType}}
         {{^returnType}}
         return (response, None)
@@ -141,7 +177,29 @@ class {{classname}}(ApiClient):
 
 
     @validate_call
-    async def {{operationId}}_with_http_info{{>partial_api_args}} -> ApiResponse[{{{returnType}}}{{^returnType}}None{{/returnType}}]:
+    async def {{operationId}}_with_http_info(
+        self,
+        {{#allParams}}
+        {{#required}}
+        {{paramName}}: {{#description}}Annotated[{{/description}}{{dataType}}{{#description}}, Field(description="{{{.}}}")]{{/description}},
+        {{/required}}
+        {{^required}}
+        {{paramName}}: {{#description}}Annotated[{{/description}}{{#defaultValue}}{{dataType}}{{/defaultValue}}{{^defaultValue}}Optional[{{dataType}}]{{/defaultValue}}{{#description}}, Field(description="{{{.}}}")]{{/description}} = {{#defaultValue}}{{#isString}}"{{/isString}}{{{.}}}{{#isString}}"{{/isString}}{{/defaultValue}}{{^defaultValue}}None{{/defaultValue}},
+        {{/required}}
+        {{/allParams}}
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0
+    ) -> {{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}None{{/returnType}}:
         """{{{summary}}}
 
         {{{notes}}}
@@ -165,85 +223,97 @@ class {{classname}}(ApiClient):
         )
 
         if error:
-        {{#returnType}}
-            return (None, None, error)
-        {{/returnType}}
-        {{^returnType}}
+            {{#returnType}}
+            if {{returnType}} is Success:
+                return (None, error)
+            else:
+                return (None, None, error)
+            {{/returnType}}
+            {{^returnType}}
             return (None, error)
-        {{/returnType}}
+            {{/returnType}}
 
         {{#returnType}}
-        response, error = await self._request_executor.execute(request, {{returnBaseType}})
+        if {{returnType}} is Success:
+            response, error = await self._request_executor.execute(request)
+        else:
+            response, error = await self._request_executor.execute(request, {{returnBaseType}})
         {{/returnType}}
         {{^returnType}}
         response, error = await self._request_executor.execute(request)
         {{/returnType}}
 
         if error:
-        {{#returnType}}
-            return (None, response, error)
-        {{/returnType}}
-        {{^returnType}}
+            {{#returnType}}
+            if {{returnType}} is Success:
+                return (response, error)
+            else:
+                return (None, response, error)
+            {{/returnType}}
+            {{^returnType}}
             return (response, error)
-        {{/returnType}}
+            {{/returnType}}
 
         {{#returnType}}
-        try:
-            {{#isArray}}
-            result = []
-            for item in response.get_body():
-                response_body = self.form_response_body(item)
-                if "signOnMode" in item:
-                    result.append(
-                        find_app_model(item["signOnMode"], item["name"])(
-                            response_body
-                        )
-                    )
-                elif "factorType" in item:
-                    result.append(
-                        find_factor_model(item["factorType"])(
-                            self.form_response_body(item)
-                        )
-                    )
-                elif "type" in item:
-                    if "rule" in url:
+        if {{returnType}} is not Success:
+            try:
+                {{#isArray}}
+                result = []
+                for item in response.get_body():
+                    response_body = self.form_response_body(item)
+                    if "signOnMode" in item:
                         result.append(
-                            find_policy_rule_model(item["type"])(
+                            find_app_model(item["signOnMode"], item["name"])(
+                                response_body
+                            )
+                        )
+                    elif "factorType" in item:
+                        result.append(
+                            find_factor_model(item["factorType"])(
                                 self.form_response_body(item)
                             )
                         )
+                    elif "type" in item:
+                        if "rule" in url:
+                            result.append(
+                                find_policy_rule_model(item["type"])(
+                                    self.form_response_body(item)
+                                )
+                            )
+                        else:
+                            result.append(
+                                find_policy_model(item["type"])(
+                                    self.form_response_body(item)
+                                )
+                            )
                     else:
-                        result.append(
-                            find_policy_model(item["type"])(
-                                self.form_response_body(item)
-                            )
-                        )
-                else:
-                    result.append(self.model(response_body))
-            {{/isArray}}
-            {{^isArray}}
-            body = response.get_body()
-            response_body = self.form_response_body(body)
-            if "signOnMode" in body:
-                result = find_app_model(body["signOnMode"], body["name"])(
-                    self.form_response_body(body)
-                )
-            elif "factorType" in item:
-                body = self.form_response_body(response.get_body())
-                result = find_factor_model(body["factorType"])(body)
-            elif "type" in item:
-                if "rule" in url:
+                        result.append(self.model(response_body))
+                {{/isArray}}
+                {{^isArray}}
+                body = response.get_body()
+                response_body = self.form_response_body(body)
+                if "signOnMode" in body:
+                    result = find_app_model(body["signOnMode"], body["name"])(
+                        self.form_response_body(body)
+                    )
+                elif "factorType" in body:
                     body = self.form_response_body(response.get_body())
-                    result = find_policy_rule_model(body["type"])(body)
+                    result = find_factor_model(body["factorType"])(body)
+                elif "type" in body:
+                    if "rule" in url:
+                        body = self.form_response_body(response.get_body())
+                        result = find_policy_rule_model(body["type"])(body)
+                    else:
+                        body = self.form_response_body(response.get_body())
+                        result = find_policy_model(body["type"])(body)
                 else:
-                    body = self.form_response_body(response.get_body())
-                    result = find_policy_model(body["type"])(body)
-            else:
-                result = {{returnBaseType}}(response_body)
-            {{/isArray}}
-        except Exception as e:
-            return (None, response, e)
-        return (result, response, None)
+                    result = {{returnBaseType}}(response_body)
+                {{/isArray}}
+            except Exception as e:
+                return (None, response, e)
+            return (result, response, None)
+        else:
+            return (response, None)
         {{/returnType}}
         {{^returnType}}
         return (response, None)
@@ -251,7 +321,29 @@ class {{classname}}(ApiClient):
 
 
     @validate_call
-    async def {{operationId}}_without_preload_content{{>partial_api_args}} -> RESTResponseType:
+    async def {{operationId}}_without_preload_content(
+        self,
+        {{#allParams}}
+        {{#description}}
+        {{paramName}}: Annotated[Optional[{{dataType}}], Field(description="{{{.}}}")] = None,
+        {{/description}}
+        {{^description}}
+        {{paramName}}: {{{dataType}}}{{^required}} = None{{/required}},
+        {{/description}}
+        {{/allParams}}
+        _request_timeout: Union[
+            None,
+            Annotated[StrictFloat, Field(gt=0)],
+            Tuple[
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
+        ] = None,
+        _request_auth: Optional[Dict[StrictStr, Any]] = None,
+        _content_type: Optional[StrictStr] = None,
+        _headers: Optional[Dict[StrictStr, Any]] = None,
+        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0
+    ) -> {{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}None{{/returnType}}:
         """{{{summary}}}
 
         {{{notes}}}
@@ -275,85 +367,97 @@ class {{classname}}(ApiClient):
         )
 
         if error:
-        {{#returnType}}
-            return (None, None, error)
-        {{/returnType}}
-        {{^returnType}}
+            {{#returnType}}
+            if {{returnType}} is Success:
+                return (None, error)
+            else:
+                return (None, None, error)
+            {{/returnType}}
+            {{^returnType}}
             return (None, error)
-        {{/returnType}}
+            {{/returnType}}
 
         {{#returnType}}
-        response, error = await self._request_executor.execute(request, {{returnBaseType}})
+        if {{returnType}} is Success:
+            response, error = await self._request_executor.execute(request)
+        else:
+            response, error = await self._request_executor.execute(request, {{returnBaseType}})
         {{/returnType}}
         {{^returnType}}
         response, error = await self._request_executor.execute(request)
         {{/returnType}}
 
         if error:
-        {{#returnType}}
-            return (None, response, error)
-        {{/returnType}}
-        {{^returnType}}
+            {{#returnType}}
+            if {{returnType}} is Success:
+                return (response, error)
+            else:
+                return (None, response, error)
+            {{/returnType}}
+            {{^returnType}}
             return (response, error)
-        {{/returnType}}
+            {{/returnType}}
 
         {{#returnType}}
-        try:
-            {{#isArray}}
-            result = []
-            for item in response.get_body():
-                response_body = self.form_response_body(item)
-                if "signOnMode" in item:
-                    result.append(
-                        find_app_model(item["signOnMode"], item["name"])(
-                            response_body
-                        )
-                    )
-                elif "factorType" in item:
-                    result.append(
-                        find_factor_model(item["factorType"])(
-                            self.form_response_body(item)
-                        )
-                    )
-                elif "type" in item:
-                    if "rule" in url:
+        if {{returnType}} is not Success:
+            try:
+                {{#isArray}}
+                result = []
+                for item in response.get_body():
+                    response_body = self.form_response_body(item)
+                    if "signOnMode" in item:
                         result.append(
-                            find_policy_rule_model(item["type"])(
+                            find_app_model(item["signOnMode"], item["name"])(
+                                response_body
+                            )
+                        )
+                    elif "factorType" in item:
+                        result.append(
+                            find_factor_model(item["factorType"])(
                                 self.form_response_body(item)
                             )
                         )
+                    elif "type" in item:
+                        if "rule" in url:
+                            result.append(
+                                find_policy_rule_model(item["type"])(
+                                    self.form_response_body(item)
+                                )
+                            )
+                        else:
+                            result.append(
+                                find_policy_model(item["type"])(
+                                    self.form_response_body(item)
+                                )
+                            )
                     else:
-                        result.append(
-                            find_policy_model(item["type"])(
-                                self.form_response_body(item)
-                            )
-                        )
-                else:
-                    result.append(self.model(response_body))
-            {{/isArray}}
-            {{^isArray}}
-            body = response.get_body()
-            response_body = self.form_response_body(body)
-            if "signOnMode" in body:
-                result = find_app_model(body["signOnMode"], body["name"])(
-                    self.form_response_body(body)
-                )
-            elif "factorType" in item:
-                body = self.form_response_body(response.get_body())
-                result = find_factor_model(body["factorType"])(body)
-            elif "type" in item:
-                if "rule" in url:
+                        result.append(self.model(response_body))
+                {{/isArray}}
+                {{^isArray}}
+                body = response.get_body()
+                response_body = self.form_response_body(body)
+                if "signOnMode" in body:
+                    result = find_app_model(body["signOnMode"], body["name"])(
+                        self.form_response_body(body)
+                    )
+                elif "factorType" in body:
                     body = self.form_response_body(response.get_body())
-                    result = find_policy_rule_model(body["type"])(body)
+                    result = find_factor_model(body["factorType"])(body)
+                elif "type" in body:
+                    if "rule" in url:
+                        body = self.form_response_body(response.get_body())
+                        result = find_policy_rule_model(body["type"])(body)
+                    else:
+                        body = self.form_response_body(response.get_body())
+                        result = find_policy_model(body["type"])(body)
                 else:
-                    body = self.form_response_body(response.get_body())
-                    result = find_policy_model(body["type"])(body)
-            else:
-                result = {{returnBaseType}}(response_body)
-            {{/isArray}}
-        except Exception as e:
-            return (None, response, e)
-        return (result, response, None)
+                    result = {{returnBaseType}}(response_body)
+                {{/isArray}}
+            except Exception as e:
+                return (None, response, e)
+            return (result, response, None)
+        else:
+            return (response, None)
         {{/returnType}}
         {{^returnType}}
         return (response, None)
