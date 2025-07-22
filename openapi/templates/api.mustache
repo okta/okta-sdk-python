@@ -11,7 +11,7 @@ from urllib.parse import urlencode
 {{import}}
 {{/imports}}
 
-from {{packageName}}.model.success import Success
+from {{packageName}}.models.success import Success
 from {{packageName}}.api_client import ApiClient, RequestSerialized
 from {{packageName}}.api_response import ApiResponse
 from {{packageName}}.rest import RESTResponseType
@@ -33,44 +33,8 @@ class {{classname}}(ApiClient):
 
 
     @validate_call
-    async def {{operationId}}(
-        self,
-        {{#allParams}}
-        {{#description}}
-        {{paramName}}: Annotated[Optional[{{dataType}}], Field(description="{{{.}}}")] = None,
-        {{/description}}
-        {{^description}}
-        {{paramName}}: {{{dataType}}}{{^required}} = None{{/required}},
-        {{/description}}
-        {{/allParams}}
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0
-    ) -> {{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}None{{/returnType}}:
-        """{{{summary}}}
-
-        {{{notes}}}
-        """ # noqa: E501
-
-        method, url, header_params, body, post_params = self._{{operationId}}_serialize(
-            {{#allParams}}
-            {{paramName}}={{paramName}},
-            {{/allParams}}
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
+    async def {{operationId}}{{>partial_api_args}} -> {{{returnType}}}{{^returnType}}None{{/returnType}}:
+{{>partial_api}}
         form = {}
         keep_empty_params = False
 
@@ -177,44 +141,8 @@ class {{classname}}(ApiClient):
 
 
     @validate_call
-    async def {{operationId}}_with_http_info(
-        self,
-        {{#allParams}}
-        {{#required}}
-        {{paramName}}: {{#description}}Annotated[{{/description}}{{dataType}}{{#description}}, Field(description="{{{.}}}")]{{/description}},
-        {{/required}}
-        {{^required}}
-        {{paramName}}: {{#description}}Annotated[{{/description}}{{#defaultValue}}{{dataType}}{{/defaultValue}}{{^defaultValue}}Optional[{{dataType}}]{{/defaultValue}}{{#description}}, Field(description="{{{.}}}")]{{/description}} = {{#defaultValue}}{{#isString}}"{{/isString}}{{{.}}}{{#isString}}"{{/isString}}{{/defaultValue}}{{^defaultValue}}None{{/defaultValue}},
-        {{/required}}
-        {{/allParams}}
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0
-    ) -> {{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}None{{/returnType}}:
-        """{{{summary}}}
-
-        {{{notes}}}
-        """ # noqa: E501
-
-        method, url, header_params, body, post_params = self._{{operationId}}_serialize(
-            {{#allParams}}
-            {{paramName}}={{paramName}},
-            {{/allParams}}
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
+    async def {{operationId}}_with_http_info{{>partial_api_args}} -> {{{returnType}}}{{^returnType}}None{{/returnType}}:
+{{>partial_api}}
         form = {}
         keep_empty_params = False
 
@@ -321,44 +249,8 @@ class {{classname}}(ApiClient):
 
 
     @validate_call
-    async def {{operationId}}_without_preload_content(
-        self,
-        {{#allParams}}
-        {{#description}}
-        {{paramName}}: Annotated[Optional[{{dataType}}], Field(description="{{{.}}}")] = None,
-        {{/description}}
-        {{^description}}
-        {{paramName}}: {{{dataType}}}{{^required}} = None{{/required}},
-        {{/description}}
-        {{/allParams}}
-        _request_timeout: Union[
-            None,
-            Annotated[StrictFloat, Field(gt=0)],
-            Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
-        ] = None,
-        _request_auth: Optional[Dict[StrictStr, Any]] = None,
-        _content_type: Optional[StrictStr] = None,
-        _headers: Optional[Dict[StrictStr, Any]] = None,
-        _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0
-    ) -> {{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}None{{/returnType}}:
-        """{{{summary}}}
-
-        {{{notes}}}
-        """ # noqa: E501
-
-        method, url, header_params, body, post_params = self._{{operationId}}_serialize(
-            {{#allParams}}
-            {{paramName}}={{paramName}},
-            {{/allParams}}
-            _request_auth=_request_auth,
-            _content_type=_content_type,
-            _headers=_headers,
-            _host_index=_host_index
-        )
-
+    async def {{operationId}}_without_preload_content{{>partial_api_args}} -> {{{returnType}}}{{^returnType}}None{{/returnType}}:
+{{>partial_api}}
         form = {}
         keep_empty_params = False
 
