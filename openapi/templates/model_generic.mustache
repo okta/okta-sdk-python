@@ -11,10 +11,7 @@ import json
 {{/vendorExtensions.x-py-model-imports}}
 from typing import Optional, Set
 from typing_extensions import Self
-from {{packageName}}.constants import MODEL_PROPERTIES
-from {{packageName}}.models.user_factor import UserFactor
-from {{packageName}}.models.policy import Policy
-from {{packageName}}.models.policy_rule import PolicyRule
+
 
 {{#hasChildren}}
 {{#discriminator}}
@@ -95,45 +92,8 @@ class {{classname}}({{#parent}}{{{.}}}{{/parent}}{{^parent}}BaseModel{{/parent}}
         validate_assignment=True,
         protected_namespaces=(),
     )
-    def __init__(self, config=None):
-        super().__init__(config)
-        num_properties = len(self.__class__.__annotations__)
-        if num_properties > 0:
-            if config:
-                if issubclass({{classname}}, Application):
-                    from {{packageName}}.models import ApplicationSignOnMode
-                    self.sign_on_mode = ApplicationSignOnMode(MODEL_PROPERTIES["{{classname}}"])
-                elif issubclass({{classname}}, UserFactor):
-                    self.factor_type = MODEL_PROPERTIES["{{classname}}"]
-                elif issubclass({{classname}}, Policy):
-                    from {{packageName}}.models import PolicyType
-                    self.type = PolicyType(MODEL_PROPERTIES["{{classname}}"])
-                elif issubclass({{classname}}, PolicyRule):
-                    self.type = MODEL_PROPERTIES["{{classname}}"]
-                else:
-                    pass
-                for item in self.__class__.__annotations__.items():
-                    if item[1] is
-            else:
-                pass
-        else:
-            pass
-
 
 {{#hasChildren}}
-
-    def __init__(self, config=None):
-        super().__init__(config)
-        num_properties = len(self.__class__.__annotations__)
-        if num_properties > 0:
-            if config:
-                if self.__class__.__name__.endswith('Application'):
-                    self.sign_on_mode = ApplicationSignOnMode("{{model_properties.[{{classname}}]}}")
-            else:
-                pass
-        else:
-            pass
-
 {{#discriminator}}
     # JSON field name that stores the object type
     __discriminator_property_name: ClassVar[str] = '{{discriminator.propertyBaseName}}'

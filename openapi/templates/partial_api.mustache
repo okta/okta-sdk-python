@@ -33,6 +33,14 @@
         warnings.warn("{{{httpMethod}}} {{{path}}} is deprecated.", DeprecationWarning)
         {{/isDeprecated}}
 
+        _response_types_map: Dict[str, Optional[str]] = {
+            {{#responses}}
+            {{^isWildcard}}
+            '{{code}}': {{#dataType}}"{{.}}"{{/dataType}}{{^dataType}}None{{/dataType}},
+            {{/isWildcard}}
+            {{/responses}}
+        }
+
         method, url, header_params, body, post_params = self._{{operationId}}_serialize(
             {{#allParams}}
             {{paramName}}={{paramName}},

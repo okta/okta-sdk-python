@@ -24,7 +24,7 @@ from okta.models.application import Application
 
 from okta.api_client import ApiClient, RequestSerialized
 from okta.api_response import ApiResponse
-from okta.rest import RESTResponseType
+from okta.rest import RESTResponseType, RESTResponse
 from okta.constants import find_app_model, find_factor_model, find_policy_model, find_policy_rule_model
 
 
@@ -1537,6 +1537,12 @@ class ApplicationApi(ApiClient):
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[Application]",
+            '403': "Error",
+            '429': "Error",
+        }
+
         method, url, header_params, body, post_params = self._list_applications_serialize(
             q=q,
             after=after,
@@ -1559,46 +1565,19 @@ class ApplicationApi(ApiClient):
         if error:
             return (None, None, error)
 
-        response, error = await self._request_executor\
+        response, response_body, error = await self._request_executor\
             .execute(request, Application)
-
+        response_body = response_body.encode('utf-8')
         if error:
             return (None, response, error)
 
-        try:
-            result = []
-            for item in response.get_body():
-                response_body = self.form_response_body(item)
-                if "signOnMode" in item:
-                    result.append(
-                        find_app_model(item["signOnMode"], item["name"])(
-                            response_body
-                        )
-                    )
-                elif "factorType" in item:
-                    result.append(
-                        find_factor_model(item["factorType"])(
-                            self.form_response_body(item)
-                        )
-                    )
-                elif "type" in item:
-                    if "rule" in url:
-                        result.append(
-                            find_policy_rule_model(item["type"])(
-                                self.form_response_body(item)
-                            )
-                        )
-                    else:
-                        result.append(
-                            find_policy_model(item["type"])(
-                                self.form_response_body(item)
-                            )
-                        )
-                else:
-                    result.append(self.model(response_body))
-        except Exception as error:
-            return (None, response, error)
-        return (result, response, None)
+        response_data = RESTResponse(response)
+        response_data.read(response_body)
+        resp = self.response_deserialize(
+            response_data=response_data,
+            response_types_map=_response_types_map,
+        )
+        return (resp.data, resp, None)
 
 
     @validate_call

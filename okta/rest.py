@@ -44,9 +44,9 @@ class RESTResponse(io.IOBase):
         self.reason = resp.reason
         self.data = None
 
-    def read(self):
+    def read(self, data=None):
         if self.data is None:
-            self.data = self.response.data
+            self.data = data if data else self.response.data
         return self.data
 
     def getheaders(self):

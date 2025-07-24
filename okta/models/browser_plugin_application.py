@@ -47,24 +47,6 @@ class BrowserPluginApplication(Application):
         protected_namespaces=(),
     )
 
-    def __init__(self, config=None):
-        super().__init__(config=config)
-        if config:
-            object.__setattr__(self, "sign_on_mode", ApplicationSignOnMode("BROWSER_PLUGIN"))
-            if "credentials" in config:
-                if isinstance(config["credentials"],
-                              SchemeApplicationCredentials):
-                    object.__setattr__(self, "credentials", config["credentials"])
-                elif config["credentials"] is not None:
-                    object.__setattr__(self, "credentials",
-                                       SchemeApplicationCredentials.from_dict(config["credentials"]))
-                else:
-                    object.__setattr__(self, "credentials", None)
-            else:
-                object.__setattr__(self, "credentials", None)
-        else:
-            object.__setattr__(self, "credentials", None)
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
