@@ -86,16 +86,17 @@ class ConfigSetter():
         3. Checking for a local OKTA config YAML
         4. Checking for corresponding ENV variables
         """
+        # TODO: Check for the ordering of the config setter.
         # apply default config values to config
         self._apply_default_values()
+        # apply existing environment variables
+        self._apply_env_config()
         # check if GLOBAL yaml exists, apply if true
         if (os.path.exists(_GLOBAL_YAML_PATH)):
             self._apply_yaml_config(_GLOBAL_YAML_PATH)
         # check if LOCAL yaml exists, apply if true
         if (os.path.exists(_LOCAL_YAML_PATH)):
             self._apply_yaml_config(_LOCAL_YAML_PATH)
-        # apply existing environment variables
-        self._apply_env_config()
 
     def _apply_default_values(self):
         """Apply default values to default client configuration

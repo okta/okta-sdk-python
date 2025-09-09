@@ -66,7 +66,7 @@ interactions:
       User-Agent:
       - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
     method: GET
-    uri: https://test.okta.com/api/v1/groups/?q=Group-Target-Test
+    uri: https://test.okta.com/api/v1/groups?q=Group-Target-Test
   response:
     body:
       string: '[{"id":"00gsfbh2pJyrDzGmQ4x6","created":"2020-08-27T18:15:51.000Z","lastUpdated":"2020-08-27T18:15:51.000Z","lastMembershipUpdated":"2020-08-27T18:15:51.000Z","objectClass":["okta:user_group"],"type":"OKTA_GROUP","profile":{"name":"Group-Target-Test","description":null},"_links":{"logo":[{"name":"medium","href":"https://ok11static.oktacdn.com/assets/img/logos/groups/okta-medium.d7fb831bc4e7e1a5d8bd35dfaf405d9e.png","type":"image/png"},{"name":"large","href":"https://ok11static.oktacdn.com/assets/img/logos/groups/okta-large.511fcb0de9da185b52589cb14d581c2c.png","type":"image/png"}],"users":{"href":"https://test.okta.com/api/v1/groups/00gsfbh2pJyrDzGmQ4x6/users"},"apps":{"href":"https://test.okta.com/api/v1/groups/00gsfbh2pJyrDzGmQ4x6/apps"}}}]'
@@ -108,7 +108,7 @@ interactions:
     status:
       code: 200
       message: OK
-    url: https://test.okta.com/api/v1/groups/?q=Group-Target-Test
+    url: https://test.okta.com/api/v1/groups?q=Group-Target-Test
 - request:
     body: null
     headers:

@@ -1,3 +1,4 @@
+import json
 import pytest
 from tests.mocks import MockOktaClient
 from http import HTTPStatus
@@ -19,81 +20,81 @@ class TestIdentityProvidersResource:
 
         # Create IDP
         ISSUER_URL = "https://idp.example.com"
-        idp_model = models.IdentityProvider({
+        idp_model = models.IdentityProvider(**{
             "type": "OIDC",
             "name": f"{TestIdentityProvidersResource.SDK_PREFIX} generic",
-            "protocol": models.Protocol({
-                "algorithms": models.ProtocolAlgorithms({
-                    "request": models.ProtocolAlgorithmType({
-                        "signature": models.ProtocolAlgorithmTypeSignature({
+            "protocol": models.Protocol(**{
+                "algorithms": models.ProtocolAlgorithms(**{
+                    "request": models.ProtocolAlgorithmType(**{
+                        "signature": models.ProtocolAlgorithmTypeSignature(**{
                             "algorithm": "SHA-256",
                             "scope": "REQUEST"
                         })
                     }),
-                    "response": models.ProtocolAlgorithmType({
-                        "signature": models.ProtocolAlgorithmTypeSignature({
+                    "response": models.ProtocolAlgorithmType(**{
+                        "signature": models.ProtocolAlgorithmTypeSignature(**{
                             "algorithm": "SHA-256",
                             "scope": "ANY"
                         })
                     })
                 }),
-                "endpoints": models.ProtocolEndpoints({
-                    "acs": models.ProtocolEndpoint({
+                "endpoints": models.ProtocolEndpoints(**{
+                    "acs": models.ProtocolEndpoint(**{
                         "binding": "HTTP-POST",
                         "type": "INSTANCE"
                     }),
-                    "authorization": models.ProtocolEndpoint({
+                    "authorization": models.ProtocolEndpoint(**{
                         "binding": "HTTP-REDIRECT",
                         "url": ISSUER_URL + "/authorize"
                     }),
-                    "token": models.ProtocolEndpoint({
+                    "token": models.ProtocolEndpoint(**{
                         "binding": "HTTP-POST",
                         "url": ISSUER_URL + "/token"
                     }),
-                    "userInfo": models.ProtocolEndpoint({
+                    "userInfo": models.ProtocolEndpoint(**{
                         "binding": "HTTP-REDIRECT",
                         "url": ISSUER_URL + "/userinfo"
                     }),
-                    "jwks": models.ProtocolEndpoint({
+                    "jwks": models.ProtocolEndpoint(**{
                         "binding": "HTTP-REDIRECT",
                         "url": ISSUER_URL + "/keys"
                     })
                 }),
                 "scopes": ["openid", "profile", "email"],
                 "type": "OIDC",
-                "credentials": models.IdentityProviderCredentials({
-                    "client": models.IdentityProviderCredentialsClient({
+                "credentials": models.IdentityProviderCredentials(**{
+                    "client": models.IdentityProviderCredentialsClient(**{
                         "clientId": "your-client-id",
                         "clientSecret": "your-client-secret"
                     })
                 }),
-                "issuer": models.ProtocolEndpoint({
+                "issuer": models.ProtocolEndpoint(**{
                     "url": ISSUER_URL
                 })
             }),
-            "policy": models.IdentityProviderPolicy({
-                "accountLink": models.PolicyAccountLink({
+            "policy": models.IdentityProviderPolicy(**{
+                "accountLink": models.PolicyAccountLink(**{
                     "action": "AUTO",
                     "filter": None
                 }),
-                "provisioning": models.Provisioning({
+                "provisioning": models.Provisioning(**{
                     "action": "AUTO",
-                    "conditions": models.ProvisioningConditions({
+                    "conditions": models.ProvisioningConditions(**{
                         "deprovisioned":
-                        models.ProvisioningDeprovisionedCondition({
+                        models.ProvisioningDeprovisionedCondition(**{
                             "action": "NONE"
                         }),
-                        "suspended": models.ProvisioningSuspendedCondition({
+                        "suspended": models.ProvisioningSuspendedCondition(**{
                             "action": "NONE"
                         })
                     }),
-                    "groups": models.ProvisioningGroups({
+                    "groups": models.ProvisioningGroups(**{
                         "action": "NONE"
                     })
                 }),
                 "maxClockSkew": 120000,
-                "subject": models.PolicySubject({
-                    "userNameTemplate": models.PolicyUserNameTemplate({
+                "subject": models.PolicySubject(**{
+                    "userNameTemplate": models.PolicyUserNameTemplate(**{
                         "template": "idpuser.email"
                     }),
                     "matchType": models.PolicySubjectMatchType.USERNAME
@@ -156,7 +157,7 @@ class TestIdentityProvidersResource:
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_identity_provider(created_idp.id)
+                _, _, err = await client.delete_identity_provider(created_idp.id)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -169,43 +170,43 @@ class TestIdentityProvidersResource:
         client = MockOktaClient(fs)
 
         # Create IDP
-        idp_model = models.IdentityProvider({
+        idp_model = models.IdentityProvider(**{
             "type": "FACEBOOK",
             "name": f"{TestIdentityProvidersResource.SDK_PREFIX} facebook",
-            "protocol": models.Protocol({
+            "protocol": models.Protocol(**{
                 "scopes": ["public_profile", "email"],
                 "type": "OAUTH2",
-                "credentials": models.IdentityProviderCredentials({
-                    "client": models.IdentityProviderCredentialsClient({
+                "credentials": models.IdentityProviderCredentials(**{
+                    "client": models.IdentityProviderCredentialsClient(**{
                         "clientId": "your-client-id",
                         "clientSecret": "your-client-secret"
                     })
                 })
             }),
-            "policy": models.IdentityProviderPolicy({
-                "accountLink": models.PolicyAccountLink({
+            "policy": models.IdentityProviderPolicy(**{
+                "accountLink": models.PolicyAccountLink(**{
                     "action": "AUTO",
                     "filter": None
                 }),
-                "provisioning": models.Provisioning({
+                "provisioning": models.Provisioning(**{
                     "action": "AUTO",
                     "profileMaster": True,
-                    "conditions": models.ProvisioningConditions({
+                    "conditions": models.ProvisioningConditions(**{
                         "deprovisioned":
-                        models.ProvisioningDeprovisionedCondition({
+                        models.ProvisioningDeprovisionedCondition(**{
                             "action": "NONE"
                         }),
-                        "suspended": models.ProvisioningSuspendedCondition({
+                        "suspended": models.ProvisioningSuspendedCondition(**{
                             "action": "NONE"
                         })
                     }),
-                    "groups": models.ProvisioningGroups({
+                    "groups": models.ProvisioningGroups(**{
                         "action": "NONE"
                     })
                 }),
                 "maxClockSkew": 120000,
-                "subject": models.PolicySubject({
-                    "userNameTemplate": models.PolicyUserNameTemplate({
+                "subject": models.PolicySubject(**{
+                    "userNameTemplate": models.PolicyUserNameTemplate(**{
                         "template": "idpuser.email"
                     }),
                     "matchType": models.PolicySubjectMatchType.USERNAME,
@@ -257,7 +258,7 @@ class TestIdentityProvidersResource:
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_identity_provider(created_idp.id)
+                _, _, err = await client.delete_identity_provider(created_idp.id)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -270,43 +271,43 @@ class TestIdentityProvidersResource:
         client = MockOktaClient(fs)
 
         # Create IDP
-        idp_model = models.IdentityProvider({
+        idp_model = models.IdentityProvider(**{
             "type": "LINKEDIN",
             "name": f"{TestIdentityProvidersResource.SDK_PREFIX} facebook",
-            "protocol": models.Protocol({
+            "protocol": models.Protocol(**{
                 "scopes": ["r_basicprofile", "r_emailaddress"],
                 "type": "OAUTH2",
-                "credentials": models.IdentityProviderCredentials({
-                    "client": models.IdentityProviderCredentialsClient({
+                "credentials": models.IdentityProviderCredentials(**{
+                    "client": models.IdentityProviderCredentialsClient(**{
                         "clientId": "your-client-id",
                         "clientSecret": "your-client-secret"
                     })
                 })
             }),
-            "policy": models.IdentityProviderPolicy({
-                "accountLink": models.PolicyAccountLink({
+            "policy": models.IdentityProviderPolicy(**{
+                "accountLink": models.PolicyAccountLink(**{
                     "action": "AUTO",
                     "filter": None
                 }),
-                "provisioning": models.Provisioning({
+                "provisioning": models.Provisioning(**{
                     "action": "AUTO",
                     "profileMaster": True,
-                    "conditions": models.ProvisioningConditions({
+                    "conditions": models.ProvisioningConditions(**{
                         "deprovisioned":
-                        models.ProvisioningDeprovisionedCondition({
+                        models.ProvisioningDeprovisionedCondition(**{
                             "action": "NONE"
                         }),
-                        "suspended": models.ProvisioningSuspendedCondition({
+                        "suspended": models.ProvisioningSuspendedCondition(**{
                             "action": "NONE"
                         })
                     }),
-                    "groups": models.ProvisioningGroups({
+                    "groups": models.ProvisioningGroups(**{
                         "action": "NONE"
                     })
                 }),
                 "maxClockSkew": 120000,
-                "subject": models.PolicySubject({
-                    "userNameTemplate": models.PolicyUserNameTemplate({
+                "subject": models.PolicySubject(**{
+                    "userNameTemplate": models.PolicyUserNameTemplate(**{
                         "template": "idpuser.email"
                     }),
                     "matchType": models.PolicySubjectMatchType.USERNAME,
@@ -358,7 +359,7 @@ class TestIdentityProvidersResource:
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_identity_provider(created_idp.id)
+                _, _, err = await client.delete_identity_provider(created_idp.id)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -372,81 +373,81 @@ class TestIdentityProvidersResource:
 
         # Create IDP
         ISSUER_URL = "https://idp.example.com"
-        idp_model = models.IdentityProvider({
+        idp_model = models.IdentityProvider(**{
             "type": "OIDC",
             "name": f"{TestIdentityProvidersResource.SDK_PREFIX} generic",
-            "protocol": models.Protocol({
-                "algorithms": models.ProtocolAlgorithms({
-                    "request": models.ProtocolAlgorithmType({
-                        "signature": models.ProtocolAlgorithmTypeSignature({
+            "protocol": models.Protocol(**{
+                "algorithms": models.ProtocolAlgorithms(**{
+                    "request": models.ProtocolAlgorithmType(**{
+                        "signature": models.ProtocolAlgorithmTypeSignature(**{
                             "algorithm": "SHA-256",
                             "scope": "REQUEST"
                         })
                     }),
-                    "response": models.ProtocolAlgorithmType({
-                        "signature": models.ProtocolAlgorithmTypeSignature({
+                    "response": models.ProtocolAlgorithmType(**{
+                        "signature": models.ProtocolAlgorithmTypeSignature(**{
                             "algorithm": "SHA-256",
                             "scope": "ANY"
                         })
                     })
                 }),
-                "endpoints": models.ProtocolEndpoints({
-                    "acs": models.ProtocolEndpoint({
+                "endpoints": models.ProtocolEndpoints(**{
+                    "acs": models.ProtocolEndpoint(**{
                         "binding": "HTTP-POST",
                         "type": "INSTANCE"
                     }),
-                    "authorization": models.ProtocolEndpoint({
+                    "authorization": models.ProtocolEndpoint(**{
                         "binding": "HTTP-REDIRECT",
                         "url": ISSUER_URL + "/authorize"
                     }),
-                    "token": models.ProtocolEndpoint({
+                    "token": models.ProtocolEndpoint(**{
                         "binding": "HTTP-POST",
                         "url": ISSUER_URL + "/token"
                     }),
-                    "userInfo": models.ProtocolEndpoint({
+                    "userInfo": models.ProtocolEndpoint(**{
                         "binding": "HTTP-REDIRECT",
                         "url": ISSUER_URL + "/userinfo"
                     }),
-                    "jwks": models.ProtocolEndpoint({
+                    "jwks": models.ProtocolEndpoint(**{
                         "binding": "HTTP-REDIRECT",
                         "url": ISSUER_URL + "/keys"
                     })
                 }),
                 "scopes": ["openid", "profile", "email"],
                 "type": "OIDC",
-                "credentials": models.IdentityProviderCredentials({
-                    "client": models.IdentityProviderCredentialsClient({
+                "credentials": models.IdentityProviderCredentials(**{
+                    "client": models.IdentityProviderCredentialsClient(**{
                         "clientId": "your-client-id",
                         "clientSecret": "your-client-secret"
                     })
                 }),
-                "issuer": models.ProtocolEndpoint({
+                "issuer": models.ProtocolEndpoint(**{
                     "url": ISSUER_URL
                 })
             }),
-            "policy": models.IdentityProviderPolicy({
-                "accountLink": models.PolicyAccountLink({
+            "policy": models.IdentityProviderPolicy(**{
+                "accountLink": models.PolicyAccountLink(**{
                     "action": "AUTO",
                     "filter": None
                 }),
-                "provisioning": models.Provisioning({
+                "provisioning": models.Provisioning(**{
                     "action": "AUTO",
-                    "conditions": models.ProvisioningConditions({
+                    "conditions": models.ProvisioningConditions(**{
                         "deprovisioned":
-                        models.ProvisioningDeprovisionedCondition({
+                        models.ProvisioningDeprovisionedCondition(**{
                             "action": "NONE"
                         }),
-                        "suspended": models.ProvisioningSuspendedCondition({
+                        "suspended": models.ProvisioningSuspendedCondition(**{
                             "action": "NONE"
                         })
                     }),
-                    "groups": models.ProvisioningGroups({
+                    "groups": models.ProvisioningGroups(**{
                         "action": "NONE"
                     })
                 }),
                 "maxClockSkew": 120000,
-                "subject": models.PolicySubject({
-                    "userNameTemplate": models.PolicyUserNameTemplate({
+                "subject": models.PolicySubject(**{
+                    "userNameTemplate": models.PolicyUserNameTemplate(**{
                         "template": "idpuser.email"
                     }),
                     "matchType": models.PolicySubjectMatchType.USERNAME
@@ -478,7 +479,7 @@ class TestIdentityProvidersResource:
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_identity_provider(created_idp.id)
+                _, _, err = await client.delete_identity_provider(created_idp.id)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -492,81 +493,81 @@ class TestIdentityProvidersResource:
 
         # Create IDP
         ISSUER_URL = "https://idp.example.com"
-        idp_model = models.IdentityProvider({
+        idp_model = models.IdentityProvider(**{
             "type": "OIDC",
             "name": f"{TestIdentityProvidersResource.SDK_PREFIX} generic",
-            "protocol": models.Protocol({
-                "algorithms": models.ProtocolAlgorithms({
-                    "request": models.ProtocolAlgorithmType({
-                        "signature": models.ProtocolAlgorithmTypeSignature({
+            "protocol": models.Protocol(**{
+                "algorithms": models.ProtocolAlgorithms(**{
+                    "request": models.ProtocolAlgorithmType(**{
+                        "signature": models.ProtocolAlgorithmTypeSignature(**{
                             "algorithm": "SHA-256",
                             "scope": "REQUEST"
                         })
                     }),
-                    "response": models.ProtocolAlgorithmType({
-                        "signature": models.ProtocolAlgorithmTypeSignature({
+                    "response": models.ProtocolAlgorithmType(**{
+                        "signature": models.ProtocolAlgorithmTypeSignature(**{
                             "algorithm": "SHA-256",
                             "scope": "ANY"
                         })
                     })
                 }),
-                "endpoints": models.ProtocolEndpoints({
-                    "acs": models.ProtocolEndpoint({
+                "endpoints": models.ProtocolEndpoints(**{
+                    "acs": models.ProtocolEndpoint(**{
                         "binding": "HTTP-POST",
                         "type": "INSTANCE"
                     }),
-                    "authorization": models.ProtocolEndpoint({
+                    "authorization": models.ProtocolEndpoint(**{
                         "binding": "HTTP-REDIRECT",
                         "url": ISSUER_URL + "/authorize"
                     }),
-                    "token": models.ProtocolEndpoint({
+                    "token": models.ProtocolEndpoint(**{
                         "binding": "HTTP-POST",
                         "url": ISSUER_URL + "/token"
                     }),
-                    "userInfo": models.ProtocolEndpoint({
+                    "userInfo": models.ProtocolEndpoint(**{
                         "binding": "HTTP-REDIRECT",
                         "url": ISSUER_URL + "/userinfo"
                     }),
-                    "jwks": models.ProtocolEndpoint({
+                    "jwks": models.ProtocolEndpoint(**{
                         "binding": "HTTP-REDIRECT",
                         "url": ISSUER_URL + "/keys"
                     })
                 }),
                 "scopes": ["openid", "profile", "email"],
                 "type": "OIDC",
-                "credentials": models.IdentityProviderCredentials({
-                    "client": models.IdentityProviderCredentialsClient({
+                "credentials": models.IdentityProviderCredentials(**{
+                    "client": models.IdentityProviderCredentialsClient(**{
                         "clientId": "your-client-id",
                         "clientSecret": "your-client-secret"
                     })
                 }),
-                "issuer": models.ProtocolEndpoint({
+                "issuer": models.ProtocolEndpoint(**{
                     "url": ISSUER_URL
                 })
             }),
-            "policy": models.IdentityProviderPolicy({
-                "accountLink": models.PolicyAccountLink({
+            "policy": models.IdentityProviderPolicy(**{
+                "accountLink": models.PolicyAccountLink(**{
                     "action": "AUTO",
                     "filter": None
                 }),
-                "provisioning": models.Provisioning({
+                "provisioning": models.Provisioning(**{
                     "action": "AUTO",
-                    "conditions": models.ProvisioningConditions({
+                    "conditions": models.ProvisioningConditions(**{
                         "deprovisioned":
-                        models.ProvisioningDeprovisionedCondition({
+                        models.ProvisioningDeprovisionedCondition(**{
                             "action": "NONE"
                         }),
-                        "suspended": models.ProvisioningSuspendedCondition({
+                        "suspended": models.ProvisioningSuspendedCondition(**{
                             "action": "NONE"
                         })
                     }),
-                    "groups": models.ProvisioningGroups({
+                    "groups": models.ProvisioningGroups(**{
                         "action": "NONE"
                     })
                 }),
                 "maxClockSkew": 120000,
-                "subject": models.PolicySubject({
-                    "userNameTemplate": models.PolicyUserNameTemplate({
+                "subject": models.PolicySubject(**{
+                    "userNameTemplate": models.PolicyUserNameTemplate(**{
                         "template": "idpuser.email"
                     }),
                     "matchType": models.PolicySubjectMatchType.USERNAME
@@ -624,7 +625,7 @@ class TestIdentityProvidersResource:
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_identity_provider(created_idp.id)
+                _, _, err = await client.delete_identity_provider(created_idp.id)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -638,81 +639,81 @@ class TestIdentityProvidersResource:
 
         # Create IDP
         ISSUER_URL = "https://idp.example.com"
-        idp_model = models.IdentityProvider({
+        idp_model = models.IdentityProvider(**{
             "type": "OIDC",
             "name": f"{TestIdentityProvidersResource.SDK_PREFIX} generic",
-            "protocol": models.Protocol({
-                "algorithms": models.ProtocolAlgorithms({
-                    "request": models.ProtocolAlgorithmType({
-                        "signature": models.ProtocolAlgorithmTypeSignature({
+            "protocol": models.Protocol(**{
+                "algorithms": models.ProtocolAlgorithms(**{
+                    "request": models.ProtocolAlgorithmType(**{
+                        "signature": models.ProtocolAlgorithmTypeSignature(**{
                             "algorithm": "SHA-256",
                             "scope": "REQUEST"
                         })
                     }),
-                    "response": models.ProtocolAlgorithmType({
-                        "signature": models.ProtocolAlgorithmTypeSignature({
+                    "response": models.ProtocolAlgorithmType(**{
+                        "signature": models.ProtocolAlgorithmTypeSignature(**{
                             "algorithm": "SHA-256",
                             "scope": "ANY"
                         })
                     })
                 }),
-                "endpoints": models.ProtocolEndpoints({
-                    "acs": models.ProtocolEndpoint({
+                "endpoints": models.ProtocolEndpoints(**{
+                    "acs": models.ProtocolEndpoint(**{
                         "binding": "HTTP-POST",
                         "type": "INSTANCE"
                     }),
-                    "authorization": models.ProtocolEndpoint({
+                    "authorization": models.ProtocolEndpoint(**{
                         "binding": "HTTP-REDIRECT",
                         "url": ISSUER_URL + "/authorize"
                     }),
-                    "token": models.ProtocolEndpoint({
+                    "token": models.ProtocolEndpoint(**{
                         "binding": "HTTP-POST",
                         "url": ISSUER_URL + "/token"
                     }),
-                    "userInfo": models.ProtocolEndpoint({
+                    "userInfo": models.ProtocolEndpoint(**{
                         "binding": "HTTP-REDIRECT",
                         "url": ISSUER_URL + "/userinfo"
                     }),
-                    "jwks": models.ProtocolEndpoint({
+                    "jwks": models.ProtocolEndpoint(**{
                         "binding": "HTTP-REDIRECT",
                         "url": ISSUER_URL + "/keys"
                     })
                 }),
                 "scopes": ["openid", "profile", "email"],
                 "type": "OIDC",
-                "credentials": models.IdentityProviderCredentials({
-                    "client": models.IdentityProviderCredentialsClient({
+                "credentials": models.IdentityProviderCredentials(**{
+                    "client": models.IdentityProviderCredentialsClient(**{
                         "clientId": "your-client-id",
                         "clientSecret": "your-client-secret"
                     })
                 }),
-                "issuer": models.ProtocolEndpoint({
+                "issuer": models.ProtocolEndpoint(**{
                     "url": ISSUER_URL
                 })
             }),
-            "policy": models.IdentityProviderPolicy({
-                "accountLink": models.PolicyAccountLink({
+            "policy": models.IdentityProviderPolicy(**{
+                "accountLink": models.PolicyAccountLink(**{
                     "action": "AUTO",
                     "filter": None
                 }),
-                "provisioning": models.Provisioning({
+                "provisioning": models.Provisioning(**{
                     "action": "AUTO",
-                    "conditions": models.ProvisioningConditions({
+                    "conditions": models.ProvisioningConditions(**{
                         "deprovisioned":
-                        models.ProvisioningDeprovisionedCondition({
+                        models.ProvisioningDeprovisionedCondition(**{
                             "action": "NONE"
                         }),
-                        "suspended": models.ProvisioningSuspendedCondition({
+                        "suspended": models.ProvisioningSuspendedCondition(**{
                             "action": "NONE"
                         })
                     }),
-                    "groups": models.ProvisioningGroups({
+                    "groups": models.ProvisioningGroups(**{
                         "action": "NONE"
                     })
                 }),
                 "maxClockSkew": 120000,
-                "subject": models.PolicySubject({
-                    "userNameTemplate": models.PolicyUserNameTemplate({
+                "subject": models.PolicySubject(**{
+                    "userNameTemplate": models.PolicyUserNameTemplate(**{
                         "template": "idpuser.email"
                     }),
                     "matchType": models.PolicySubjectMatchType.USERNAME
@@ -738,7 +739,7 @@ class TestIdentityProvidersResource:
                 client.deactivate_identity_provider(created_idp.id)
             assert err is None
             assert isinstance(deactivated_idp, models.IdentityProvider)
-            _, err = await client.delete_identity_provider(created_idp.id)
+            _, _, err = await client.delete_identity_provider(created_idp.id)
             assert err is None
 
             # Retrieve for verification
@@ -746,7 +747,7 @@ class TestIdentityProvidersResource:
                 get_identity_provider(created_idp.id)
             assert err is not None
             assert isinstance(err, OktaAPIError)
-            assert resp.get_status() == HTTPStatus.NOT_FOUND
+            assert resp.status == HTTPStatus.NOT_FOUND
             assert retrieved_idp is None
         finally:
             # Deactivate and delete if it wasn't removed during test
@@ -767,81 +768,81 @@ class TestIdentityProvidersResource:
 
         # Create IDP
         ISSUER_URL = "https://idp.example.com"
-        idp_model = models.IdentityProvider({
+        idp_model = models.IdentityProvider(**{
             "type": "OIDC",
             "name": f"{TestIdentityProvidersResource.SDK_PREFIX} generic",
-            "protocol": models.Protocol({
-                "algorithms": models.ProtocolAlgorithms({
-                    "request": models.ProtocolAlgorithmType({
-                        "signature": models.ProtocolAlgorithmTypeSignature({
+            "protocol": models.Protocol(**{
+                "algorithms": models.ProtocolAlgorithms(**{
+                    "request": models.ProtocolAlgorithmType(**{
+                        "signature": models.ProtocolAlgorithmTypeSignature(**{
                             "algorithm": "SHA-256",
                             "scope": "REQUEST"
                         })
                     }),
-                    "response": models.ProtocolAlgorithmType({
-                        "signature": models.ProtocolAlgorithmTypeSignature({
+                    "response": models.ProtocolAlgorithmType(**{
+                        "signature": models.ProtocolAlgorithmTypeSignature(**{
                             "algorithm": "SHA-256",
                             "scope": "ANY"
                         })
                     })
                 }),
-                "endpoints": models.ProtocolEndpoints({
-                    "acs": models.ProtocolEndpoint({
+                "endpoints": models.ProtocolEndpoints(**{
+                    "acs": models.ProtocolEndpoint(**{
                         "binding": "HTTP-POST",
                         "type": "INSTANCE"
                     }),
-                    "authorization": models.ProtocolEndpoint({
+                    "authorization": models.ProtocolEndpoint(**{
                         "binding": "HTTP-REDIRECT",
                         "url": ISSUER_URL + "/authorize"
                     }),
-                    "token": models.ProtocolEndpoint({
+                    "token": models.ProtocolEndpoint(**{
                         "binding": "HTTP-POST",
                         "url": ISSUER_URL + "/token"
                     }),
-                    "userInfo": models.ProtocolEndpoint({
+                    "userInfo": models.ProtocolEndpoint(**{
                         "binding": "HTTP-REDIRECT",
                         "url": ISSUER_URL + "/userinfo"
                     }),
-                    "jwks": models.ProtocolEndpoint({
+                    "jwks": models.ProtocolEndpoint(**{
                         "binding": "HTTP-REDIRECT",
                         "url": ISSUER_URL + "/keys"
                     })
                 }),
                 "scopes": ["openid", "profile", "email"],
                 "type": "OIDC",
-                "credentials": models.IdentityProviderCredentials({
-                    "client": models.IdentityProviderCredentialsClient({
+                "credentials": models.IdentityProviderCredentials(**{
+                    "client": models.IdentityProviderCredentialsClient(**{
                         "clientId": "your-client-id",
                         "clientSecret": "your-client-secret"
                     })
                 }),
-                "issuer": models.ProtocolEndpoint({
+                "issuer": models.ProtocolEndpoint(**{
                     "url": ISSUER_URL
                 })
             }),
-            "policy": models.IdentityProviderPolicy({
-                "accountLink": models.PolicyAccountLink({
+            "policy": models.IdentityProviderPolicy(**{
+                "accountLink": models.PolicyAccountLink(**{
                     "action": "AUTO",
                     "filter": None
                 }),
-                "provisioning": models.Provisioning({
+                "provisioning": models.Provisioning(**{
                     "action": "AUTO",
-                    "conditions": models.ProvisioningConditions({
+                    "conditions": models.ProvisioningConditions(**{
                         "deprovisioned":
-                        models.ProvisioningDeprovisionedCondition({
+                        models.ProvisioningDeprovisionedCondition(**{
                             "action": "NONE"
                         }),
-                        "suspended": models.ProvisioningSuspendedCondition({
+                        "suspended": models.ProvisioningSuspendedCondition(**{
                             "action": "NONE"
                         })
                     }),
-                    "groups": models.ProvisioningGroups({
+                    "groups": models.ProvisioningGroups(**{
                         "action": "NONE"
                     })
                 }),
                 "maxClockSkew": 120000,
-                "subject": models.PolicySubject({
-                    "userNameTemplate": models.PolicyUserNameTemplate({
+                "subject": models.PolicySubject(**{
+                    "userNameTemplate": models.PolicyUserNameTemplate(**{
                         "template": "idpuser.email"
                     }),
                     "matchType": models.PolicySubjectMatchType.USERNAME
@@ -865,7 +866,7 @@ class TestIdentityProvidersResource:
             # Update
             created_idp.name = created_idp.name + "UPDATE"
             updated_idp, _, err = await \
-                client.update_identity_provider(created_idp.id, created_idp)
+                client.replace_identity_provider(created_idp.id, created_idp)
             assert err is None
             assert isinstance(updated_idp, models.IdentityProvider)
             assert updated_idp.id == created_idp.id
@@ -890,7 +891,7 @@ class TestIdentityProvidersResource:
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_identity_provider(created_idp.id)
+                _, _, err = await client.delete_identity_provider(created_idp.id)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -924,7 +925,7 @@ class TestIdentityProvidersResource:
             uqo1KKY9CdHcFhkSsMhoeaZylZHtzbnoipUlQKSLMdJQiiYZQ0bYL83/Ta9fulr1\
             EERICMFt3GUmtYaZZKHpWSfdJp9"
 
-        jwk_model = models.JsonWebKey({
+        jwk_model = models.JsonWebKey(**{
             "x5C": [key]
         })
 
@@ -933,7 +934,7 @@ class TestIdentityProvidersResource:
                 create_identity_provider_key(jwk_model)
             assert err is None
             assert isinstance(created_key, models.JsonWebKey)
-            assert key in created_key.x_5_c
+            assert key in created_key.x5c
 
             # Retrieve
             retrieved_key, _, err = await client.\
@@ -941,11 +942,11 @@ class TestIdentityProvidersResource:
             assert err is None
             assert isinstance(retrieved_key, models.JsonWebKey)
             assert retrieved_key.kid == created_key.kid
-            assert key in retrieved_key.x_5_c
+            assert key in retrieved_key.x5c
 
         finally:
             # Delete
-            _, err = await client.delete_identity_provider_key(created_key.kid)
+            _, _, err = await client.delete_identity_provider_key(created_key.kid)
             assert err is None
 
     @pytest.mark.vcr()
@@ -976,7 +977,7 @@ class TestIdentityProvidersResource:
             uqo1KKY9CdHcFhkSsMhoeaZylZHtzbnoipUlQKSLMdJQiiYZQ0bYL83/Ta9fulr1\
             EERICMFt3GUmtYaZZKHpWSfdJp9"
 
-        jwk_model = models.JsonWebKey({
+        jwk_model = models.JsonWebKey(**{
             "x5C": [key]
         })
 
@@ -985,7 +986,7 @@ class TestIdentityProvidersResource:
                 create_identity_provider_key(jwk_model)
             assert err is None
             assert isinstance(created_key, models.JsonWebKey)
-            assert key in created_key.x_5_c
+            assert key in created_key.x5c
 
             # List
             idp_keys, _, err = await client.list_identity_provider_keys()
@@ -996,7 +997,7 @@ class TestIdentityProvidersResource:
 
         finally:
             # Delete
-            _, err = await client.delete_identity_provider_key(created_key.kid)
+            _, _, err = await client.delete_identity_provider_key(created_key.kid)
             assert err is None
 
     @pytest.mark.vcr()
@@ -1027,7 +1028,7 @@ class TestIdentityProvidersResource:
             uqo1KKY9CdHcFhkSsMhoeaZylZHtzbnoipUlQKSLMdJQiiYZQ0bYL83/Ta9fulr1\
             EERICMFt3GUmtYaZZKHpWSfdJp9"
 
-        jwk_model = models.JsonWebKey({
+        jwk_model = models.JsonWebKey(**{
             "x5C": [key]
         })
 
@@ -1036,10 +1037,10 @@ class TestIdentityProvidersResource:
                 create_identity_provider_key(jwk_model)
             assert err is None
             assert isinstance(created_key, models.JsonWebKey)
-            assert key in created_key.x_5_c
+            assert key in created_key.x5c
 
             # Delete
-            _, err = await client.delete_identity_provider_key(created_key.kid)
+            _, _, err = await client.delete_identity_provider_key(created_key.kid)
             assert err is None
 
             # Retrieve
@@ -1047,11 +1048,11 @@ class TestIdentityProvidersResource:
                 get_identity_provider_key(created_key.kid)
             assert err is not None
             assert isinstance(err, OktaAPIError)
-            assert resp.get_status() == HTTPStatus.NOT_FOUND
+            assert resp.status == HTTPStatus.NOT_FOUND
             assert retrieved_key is None
         finally:
             try:
-                _, err = await client.delete_identity_provider_key(created_key.kid)
+                _, _,err = await client.delete_identity_provider_key(created_key.kid)
             except Exception:
                 pass
 
@@ -1062,43 +1063,43 @@ class TestIdentityProvidersResource:
         client = MockOktaClient(fs)
 
         # Create IDP
-        idp_model = models.IdentityProvider({
+        idp_model = models.IdentityProvider(**{
             "type": "FACEBOOK",
             "name": f"{TestIdentityProvidersResource.SDK_PREFIX} facebook",
-            "protocol": models.Protocol({
+            "protocol": models.Protocol(**{
                 "scopes": ["public_profile", "email"],
                 "type": "OAUTH2",
-                "credentials": models.IdentityProviderCredentials({
-                    "client": models.IdentityProviderCredentialsClient({
+                "credentials": models.IdentityProviderCredentials(**{
+                    "client": models.IdentityProviderCredentialsClient(**{
                         "clientId": "your-client-id",
                         "clientSecret": "your-client-secret"
                     })
                 })
             }),
-            "policy": models.IdentityProviderPolicy({
-                "accountLink": models.PolicyAccountLink({
+            "policy": models.IdentityProviderPolicy(**{
+                "accountLink": models.PolicyAccountLink(**{
                     "action": "AUTO",
                     "filter": None
                 }),
-                "provisioning": models.Provisioning({
+                "provisioning": models.Provisioning(**{
                     "action": "AUTO",
                     "profileMaster": True,
-                    "conditions": models.ProvisioningConditions({
+                    "conditions": models.ProvisioningConditions(**{
                         "deprovisioned":
-                        models.ProvisioningDeprovisionedCondition({
+                        models.ProvisioningDeprovisionedCondition(**{
                             "action": "NONE"
                         }),
-                        "suspended": models.ProvisioningSuspendedCondition({
+                        "suspended": models.ProvisioningSuspendedCondition(**{
                             "action": "NONE"
                         })
                     }),
-                    "groups": models.ProvisioningGroups({
+                    "groups": models.ProvisioningGroups(**{
                         "action": "NONE"
                     })
                 }),
                 "maxClockSkew": 120000,
-                "subject": models.PolicySubject({
-                    "userNameTemplate": models.PolicyUserNameTemplate({
+                "subject": models.PolicySubject(**{
+                    "userNameTemplate": models.PolicyUserNameTemplate(**{
                         "template": "idpuser.email"
                     }),
                     "matchType": models.PolicySubjectMatchType.USERNAME,
@@ -1115,9 +1116,10 @@ class TestIdentityProvidersResource:
 
             # Generate Key
             query_params_generate = {"validityYears": 2}
-            generated_key, _, err = await client.\
+            generated_key, resp, err = await client.\
                 generate_identity_provider_signing_key(
-                    created_idp.id, query_params_generate)
+                    created_idp.id, validity_years=2)
+            generated_key = models.JsonWebKey(**json.loads(resp.raw_data))
             assert err is None
             assert isinstance(generated_key, models.JsonWebKey)
             assert generated_key is not None
@@ -1141,7 +1143,7 @@ class TestIdentityProvidersResource:
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_identity_provider(created_idp.id)
+                _, _, err = await client.delete_identity_provider(created_idp.id)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -1154,43 +1156,43 @@ class TestIdentityProvidersResource:
         client = MockOktaClient(fs)
 
         # Create IDP
-        idp_model = models.IdentityProvider({
+        idp_model = models.IdentityProvider(**{
             "type": "FACEBOOK",
             "name": f"{TestIdentityProvidersResource.SDK_PREFIX} facebook",
-            "protocol": models.Protocol({
+            "protocol": models.Protocol(**{
                 "scopes": ["public_profile", "email"],
                 "type": "OAUTH2",
-                "credentials": models.IdentityProviderCredentials({
-                    "client": models.IdentityProviderCredentialsClient({
+                "credentials": models.IdentityProviderCredentials(**{
+                    "client": models.IdentityProviderCredentialsClient(**{
                         "clientId": "your-client-id",
                         "clientSecret": "your-client-secret"
                     })
                 })
             }),
-            "policy": models.IdentityProviderPolicy({
-                "accountLink": models.PolicyAccountLink({
+            "policy": models.IdentityProviderPolicy(**{
+                "accountLink": models.PolicyAccountLink(**{
                     "action": "AUTO",
                     "filter": None
                 }),
-                "provisioning": models.Provisioning({
+                "provisioning": models.Provisioning(**{
                     "action": "AUTO",
                     "profileMaster": True,
-                    "conditions": models.ProvisioningConditions({
+                    "conditions": models.ProvisioningConditions(**{
                         "deprovisioned":
-                        models.ProvisioningDeprovisionedCondition({
+                        models.ProvisioningDeprovisionedCondition(**{
                             "action": "NONE"
                         }),
-                        "suspended": models.ProvisioningSuspendedCondition({
+                        "suspended": models.ProvisioningSuspendedCondition(**{
                             "action": "NONE"
                         })
                     }),
-                    "groups": models.ProvisioningGroups({
+                    "groups": models.ProvisioningGroups(**{
                         "action": "NONE"
                     })
                 }),
                 "maxClockSkew": 120000,
-                "subject": models.PolicySubject({
-                    "userNameTemplate": models.PolicyUserNameTemplate({
+                "subject": models.PolicySubject(**{
+                    "userNameTemplate": models.PolicyUserNameTemplate(**{
                         "template": "idpuser.email"
                     }),
                     "matchType": models.PolicySubjectMatchType.USERNAME,
@@ -1207,16 +1209,18 @@ class TestIdentityProvidersResource:
 
             # Generate Keys
             query_params_generate = {"validityYears": 2}
-            generated_key_1, _, err = await client.\
+            generated_key_1, resp, err = await client.\
                 generate_identity_provider_signing_key(
-                    created_idp.id, query_params_generate)
+                    created_idp.id, validity_years=2)
+            generated_key_1 = models.JsonWebKey(**json.loads(resp.raw_data))
             assert err is None
             assert isinstance(generated_key_1, models.JsonWebKey)
             assert generated_key_1 is not None
 
-            generated_key_2, _, err = await client.\
+            generated_key_2, resp, err = await client.\
                 generate_identity_provider_signing_key(
-                    created_idp.id, query_params_generate)
+                    created_idp.id, validity_years=2)
+            generated_key_2 = models.JsonWebKey(**json.loads(resp.raw_data))
             assert err is None
             assert isinstance(generated_key_2, models.JsonWebKey)
             assert generated_key_2 is not None
@@ -1242,7 +1246,7 @@ class TestIdentityProvidersResource:
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_identity_provider(created_idp.id)
+                _, _, err = await client.delete_identity_provider(created_idp.id)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -1255,43 +1259,43 @@ class TestIdentityProvidersResource:
         client = MockOktaClient(fs)
 
         # Create IDPs
-        idp_model = models.IdentityProvider({
+        idp_model = models.IdentityProvider(**{
             "type": "FACEBOOK",
             "name": f"{TestIdentityProvidersResource.SDK_PREFIX} facebook",
-            "protocol": models.Protocol({
+            "protocol": models.Protocol(**{
                 "scopes": ["public_profile", "email"],
                 "type": "OAUTH2",
-                "credentials": models.IdentityProviderCredentials({
-                    "client": models.IdentityProviderCredentialsClient({
+                "credentials": models.IdentityProviderCredentials(**{
+                    "client": models.IdentityProviderCredentialsClient(**{
                         "clientId": "your-client-id",
                         "clientSecret": "your-client-secret"
                     })
                 })
             }),
-            "policy": models.IdentityProviderPolicy({
-                "accountLink": models.PolicyAccountLink({
+            "policy": models.IdentityProviderPolicy(**{
+                "accountLink": models.PolicyAccountLink(**{
                     "action": "AUTO",
                     "filter": None
                 }),
-                "provisioning": models.Provisioning({
+                "provisioning": models.Provisioning(**{
                     "action": "AUTO",
                     "profileMaster": True,
-                    "conditions": models.ProvisioningConditions({
+                    "conditions": models.ProvisioningConditions(**{
                         "deprovisioned":
-                        models.ProvisioningDeprovisionedCondition({
+                        models.ProvisioningDeprovisionedCondition(**{
                             "action": "NONE"
                         }),
-                        "suspended": models.ProvisioningSuspendedCondition({
+                        "suspended": models.ProvisioningSuspendedCondition(**{
                             "action": "NONE"
                         })
                     }),
-                    "groups": models.ProvisioningGroups({
+                    "groups": models.ProvisioningGroups(**{
                         "action": "NONE"
                     })
                 }),
                 "maxClockSkew": 120000,
-                "subject": models.PolicySubject({
-                    "userNameTemplate": models.PolicyUserNameTemplate({
+                "subject": models.PolicySubject(**{
+                    "userNameTemplate": models.PolicyUserNameTemplate(**{
                         "template": "idpuser.email"
                     }),
                     "matchType": models.PolicySubjectMatchType.USERNAME,
@@ -1300,43 +1304,43 @@ class TestIdentityProvidersResource:
             })
         })
 
-        idp_model_2 = models.IdentityProvider({
+        idp_model_2 = models.IdentityProvider(**{
             "type": "LINKEDIN",
             "name": f"{TestIdentityProvidersResource.SDK_PREFIX} facebook",
-            "protocol": models.Protocol({
+            "protocol": models.Protocol(**{
                 "scopes": ["r_basicprofile", "r_emailaddress"],
                 "type": "OAUTH2",
-                "credentials": models.IdentityProviderCredentials({
-                    "client": models.IdentityProviderCredentialsClient({
+                "credentials": models.IdentityProviderCredentials(**{
+                    "client": models.IdentityProviderCredentialsClient(**{
                         "clientId": "your-client-id",
                         "clientSecret": "your-client-secret"
                     })
                 })
             }),
-            "policy": models.IdentityProviderPolicy({
-                "accountLink": models.PolicyAccountLink({
+            "policy": models.IdentityProviderPolicy(**{
+                "accountLink": models.PolicyAccountLink(**{
                     "action": "AUTO",
                     "filter": None
                 }),
-                "provisioning": models.Provisioning({
+                "provisioning": models.Provisioning(**{
                     "action": "AUTO",
                     "profileMaster": True,
-                    "conditions": models.ProvisioningConditions({
+                    "conditions": models.ProvisioningConditions(**{
                         "deprovisioned":
-                        models.ProvisioningDeprovisionedCondition({
+                        models.ProvisioningDeprovisionedCondition(**{
                             "action": "NONE"
                         }),
-                        "suspended": models.ProvisioningSuspendedCondition({
+                        "suspended": models.ProvisioningSuspendedCondition(**{
                             "action": "NONE"
                         })
                     }),
-                    "groups": models.ProvisioningGroups({
+                    "groups": models.ProvisioningGroups(**{
                         "action": "NONE"
                     })
                 }),
                 "maxClockSkew": 120000,
-                "subject": models.PolicySubject({
-                    "userNameTemplate": models.PolicyUserNameTemplate({
+                "subject": models.PolicySubject(**{
+                    "userNameTemplate": models.PolicyUserNameTemplate(**{
                         "template": "idpuser.email"
                     }),
                     "matchType": models.PolicySubjectMatchType.USERNAME,
@@ -1358,22 +1362,24 @@ class TestIdentityProvidersResource:
             assert created_idp_2.name == idp_model.name
 
             # Generate Key
+            import json
             query_params_generate = {"validityYears": 2}
-            generated_key, _, err = await client.\
+            generated_key, resp, err = await client.\
                 generate_identity_provider_signing_key(
-                    created_idp.id, query_params_generate)
+                    created_idp.id, validity_years=2)
+            json_web_key = models.JsonWebKey(**json.loads(resp.raw_data))
             assert err is None
-            assert isinstance(generated_key, models.JsonWebKey)
-            assert generated_key is not None
+            assert isinstance(json_web_key, models.JsonWebKey)
+            assert json_web_key is not None
 
             # Clone Key
             query_params_clone = {"targetIdpId": created_idp_2.id}
             cloned_key, _, err = await \
                 client.clone_identity_provider_key(
-                    created_idp.id, generated_key.kid, query_params_clone)
+                    created_idp.id, json_web_key.kid, target_idp_id=created_idp_2.id)
             assert err is None
             assert isinstance(cloned_key, models.JsonWebKey)
-            assert cloned_key.kid == generated_key.kid
+            assert cloned_key.kid == json_web_key.kid
 
             # Retrieve Key
             retrieved_key, _, err = await client.\
@@ -1394,7 +1400,7 @@ class TestIdentityProvidersResource:
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_identity_provider(created_idp.id)
+                _, _, err = await client.delete_identity_provider(created_idp.id)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -1406,7 +1412,7 @@ class TestIdentityProvidersResource:
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_identity_provider(created_idp_2.id)
+                _, _, err = await client.delete_identity_provider(created_idp_2.id)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -1419,43 +1425,43 @@ class TestIdentityProvidersResource:
         client = MockOktaClient(fs)
 
         # Create IDP
-        idp_model = models.IdentityProvider({
+        idp_model = models.IdentityProvider(**{
             "type": "FACEBOOK",
             "name": f"{TestIdentityProvidersResource.SDK_PREFIX} facebook",
-            "protocol": models.Protocol({
+            "protocol": models.Protocol(**{
                 "scopes": ["public_profile", "email"],
                 "type": "OAUTH2",
-                "credentials": models.IdentityProviderCredentials({
-                    "client": models.IdentityProviderCredentialsClient({
+                "credentials": models.IdentityProviderCredentials(**{
+                    "client": models.IdentityProviderCredentialsClient(**{
                         "clientId": "your-client-id",
                         "clientSecret": "your-client-secret"
                     })
                 })
             }),
-            "policy": models.IdentityProviderPolicy({
-                "accountLink": models.PolicyAccountLink({
+            "policy": models.IdentityProviderPolicy(**{
+                "accountLink": models.PolicyAccountLink(**{
                     "action": "AUTO",
                     "filter": None
                 }),
-                "provisioning": models.Provisioning({
+                "provisioning": models.Provisioning(**{
                     "action": "AUTO",
                     "profileMaster": True,
-                    "conditions": models.ProvisioningConditions({
+                    "conditions": models.ProvisioningConditions(**{
                         "deprovisioned":
-                        models.ProvisioningDeprovisionedCondition({
+                        models.ProvisioningDeprovisionedCondition(**{
                             "action": "NONE"
                         }),
-                        "suspended": models.ProvisioningSuspendedCondition({
+                        "suspended": models.ProvisioningSuspendedCondition(**{
                             "action": "NONE"
                         })
                     }),
-                    "groups": models.ProvisioningGroups({
+                    "groups": models.ProvisioningGroups(**{
                         "action": "NONE"
                     })
                 }),
                 "maxClockSkew": 120000,
-                "subject": models.PolicySubject({
-                    "userNameTemplate": models.PolicyUserNameTemplate({
+                "subject": models.PolicySubject(**{
+                    "userNameTemplate": models.PolicyUserNameTemplate(**{
                         "template": "idpuser.email"
                     }),
                     "matchType": models.PolicySubjectMatchType.USERNAME,
@@ -1471,8 +1477,8 @@ class TestIdentityProvidersResource:
             assert created_idp.name == idp_model.name
 
             # Generate CSR
-            csr_metadata_model = models.CsrMetadata({
-                "subject": models.CsrMetadataSubject({
+            csr_metadata_model = models.CsrMetadata(**{
+                "subject": models.CsrMetadataSubject(**{
                     "countryName": "CAN",
                     "stateOrProvinceName": "Ontario",
                     "localityName": "Toronto",
@@ -1480,7 +1486,7 @@ class TestIdentityProvidersResource:
                     "organizationalUnitName": "Dev",
                     "commonName": "SP Issuer"
                 }),
-                "subjectAltNames": models.CsrMetadataSubjectAltNames({
+                "subjectAltNames": models.CsrMetadataSubjectAltNames(**{
                     "dnsNames": ["dev.okta.com"]
                 })
             })
@@ -1510,7 +1516,7 @@ class TestIdentityProvidersResource:
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_identity_provider(created_idp.id)
+                _, _, err = await client.delete_identity_provider(created_idp.id)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -1523,43 +1529,43 @@ class TestIdentityProvidersResource:
         client = MockOktaClient(fs)
 
         # Create IDP
-        idp_model = models.IdentityProvider({
+        idp_model = models.IdentityProvider(**{
             "type": "FACEBOOK",
             "name": f"{TestIdentityProvidersResource.SDK_PREFIX} facebook",
-            "protocol": models.Protocol({
+            "protocol": models.Protocol(**{
                 "scopes": ["public_profile", "email"],
                 "type": "OAUTH2",
-                "credentials": models.IdentityProviderCredentials({
-                    "client": models.IdentityProviderCredentialsClient({
+                "credentials": models.IdentityProviderCredentials(**{
+                    "client": models.IdentityProviderCredentialsClient(**{
                         "clientId": "your-client-id",
                         "clientSecret": "your-client-secret"
                     })
                 })
             }),
-            "policy": models.IdentityProviderPolicy({
-                "accountLink": models.PolicyAccountLink({
+            "policy": models.IdentityProviderPolicy(**{
+                "accountLink": models.PolicyAccountLink(**{
                     "action": "AUTO",
                     "filter": None
                 }),
-                "provisioning": models.Provisioning({
+                "provisioning": models.Provisioning(**{
                     "action": "AUTO",
                     "profileMaster": True,
-                    "conditions": models.ProvisioningConditions({
+                    "conditions": models.ProvisioningConditions(**{
                         "deprovisioned":
-                        models.ProvisioningDeprovisionedCondition({
+                        models.ProvisioningDeprovisionedCondition(**{
                             "action": "NONE"
                         }),
-                        "suspended": models.ProvisioningSuspendedCondition({
+                        "suspended": models.ProvisioningSuspendedCondition(**{
                             "action": "NONE"
                         })
                     }),
-                    "groups": models.ProvisioningGroups({
+                    "groups": models.ProvisioningGroups(**{
                         "action": "NONE"
                     })
                 }),
                 "maxClockSkew": 120000,
-                "subject": models.PolicySubject({
-                    "userNameTemplate": models.PolicyUserNameTemplate({
+                "subject": models.PolicySubject(**{
+                    "userNameTemplate": models.PolicyUserNameTemplate(**{
                         "template": "idpuser.email"
                     }),
                     "matchType": models.PolicySubjectMatchType.USERNAME,
@@ -1575,8 +1581,8 @@ class TestIdentityProvidersResource:
             assert created_idp.name == idp_model.name
 
             # Generate CSR
-            csr_metadata_model = models.CsrMetadata({
-                "subject": models.CsrMetadataSubject({
+            csr_metadata_model = models.CsrMetadata(**{
+                "subject": models.CsrMetadataSubject(**{
                     "countryName": "CAN",
                     "stateOrProvinceName": "Ontario",
                     "localityName": "Toronto",
@@ -1584,7 +1590,7 @@ class TestIdentityProvidersResource:
                     "organizationalUnitName": "Dev",
                     "commonName": "SP Issuer"
                 }),
-                "subjectAltNames": models.CsrMetadataSubjectAltNames({
+                "subjectAltNames": models.CsrMetadataSubjectAltNames(**{
                     "dnsNames": ["dev.okta.com"]
                 })
             })
@@ -1604,7 +1610,7 @@ class TestIdentityProvidersResource:
             assert retrieved_csr.kty == generated_csr.kty
 
             # Revoke
-            _, err = await client.\
+            _, _, err = await client.\
                 revoke_csr_for_identity_provider(created_idp.id, generated_csr.id)
             assert err is None
 
@@ -1613,7 +1619,7 @@ class TestIdentityProvidersResource:
                 get_csr_for_identity_provider(created_idp.id, generated_csr.id)
             assert err is not None
             assert isinstance(err, OktaAPIError)
-            assert resp.get_status() == HTTPStatus.NOT_FOUND
+            assert resp.status == HTTPStatus.NOT_FOUND
             assert retrieved_csr is None
 
         finally:
@@ -1627,7 +1633,7 @@ class TestIdentityProvidersResource:
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_identity_provider(created_idp.id)
+                _, _, err = await client.delete_identity_provider(created_idp.id)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)

@@ -48,7 +48,7 @@ py.process = ({ spec, operations, models, handlebars }) => {
   });
 
   templates.push({
-    src: "constants.py.hbs",
+    src: "constants.mustache",
     dest: `okta/constants.py`,
     context: {
       apps: app_mapping,

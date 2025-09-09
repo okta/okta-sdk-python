@@ -132,7 +132,7 @@ interactions:
       - application/json
       User-Agent:
       - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
-    method: PUT
+    method: POST
     uri: https://test.okta.com/api/v1/templates/sms/cstsfdpbxVxBtbWoG4x6
   response:
     body:

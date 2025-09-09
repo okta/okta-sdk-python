@@ -23,7 +23,7 @@ class TestUserTypesResource:
         TEST_NAME = F"{TestUserTypesResource.SDK_PREFIX}_aAaewb"
         # ^ without VCR testing, can generate random TEST_NAME suffixes
 
-        user_type_obj = models.UserType({
+        user_type_obj = models.UserType(**{
             "description": TEST_DESC,
             "displayName": TEST_DISPLAY_NAME,
             "name": TEST_NAME
@@ -38,7 +38,7 @@ class TestUserTypesResource:
             assert created.name == TEST_NAME
 
         finally:
-            _, err = await client.delete_user_type(created.id)
+            _, _, err = await client.delete_user_type(created.id)
             assert err is None
 
     @pytest.mark.vcr()
@@ -53,7 +53,7 @@ class TestUserTypesResource:
         TEST_NAME = F"{TestUserTypesResource.SDK_PREFIX}_akIKx"
         # ^ without VCR testing, can generate random TEST_NAME suffixes
 
-        user_type_obj = models.UserType({
+        user_type_obj = models.UserType(**{
             "description": TEST_DESC,
             "displayName": TEST_DISPLAY_NAME,
             "name": TEST_NAME
@@ -73,7 +73,7 @@ class TestUserTypesResource:
             assert found.name == TEST_NAME
 
         finally:
-            _, err = await client.delete_user_type(created.id)
+            _, _, err = await client.delete_user_type(created.id)
             assert err is None
 
     @pytest.mark.vcr()
@@ -88,7 +88,7 @@ class TestUserTypesResource:
         TEST_NAME = F"{TestUserTypesResource.SDK_PREFIX}_JWXbL"
         # ^ without VCR testing, can generate random TEST_NAME suffixes
 
-        user_type_obj = models.UserType({
+        user_type_obj = models.UserType(**{
             "description": TEST_DESC,
             "displayName": TEST_DISPLAY_NAME,
             "name": TEST_NAME
@@ -102,7 +102,7 @@ class TestUserTypesResource:
             # Update
             UPDATED_TEST_DESC = f"{TEST_DESC}-updated"
             UPDATED_TEST_DISPLAY_NAME = f"{TEST_DISPLAY_NAME}-updated"
-            updated_obj = models.UserType({
+            updated_obj = models.UserTypePostRequest(**{
                 "description": UPDATED_TEST_DESC,
                 "displayName": UPDATED_TEST_DISPLAY_NAME,
             })
@@ -121,7 +121,7 @@ class TestUserTypesResource:
             assert found.display_name == UPDATED_TEST_DISPLAY_NAME
 
         finally:
-            _, err = await client.delete_user_type(created.id)
+            _, _, err = await client.delete_user_type(created.id)
             assert err is None
 
     @pytest.mark.vcr()
@@ -136,7 +136,7 @@ class TestUserTypesResource:
         TEST_NAME = F"{TestUserTypesResource.SDK_PREFIX}_XfloX"
         # ^ without VCR testing, can generate random TEST_NAME suffixes
 
-        user_type_obj = models.UserType({
+        user_type_obj = models.UserType(**{
             "description": TEST_DESC,
             "displayName": TEST_DISPLAY_NAME,
             "name": TEST_NAME
@@ -150,7 +150,7 @@ class TestUserTypesResource:
             # Replace
             REPLACED_TEST_DESC = f"{TEST_DESC}-replaced"
             REPLACED_TEST_DISPLAY_NAME = f"{TEST_DISPLAY_NAME}-replaced"
-            replaced_obj = models.UserType({
+            replaced_obj = models.UserTypePutRequest(**{
                 "description": REPLACED_TEST_DESC,
                 "displayName": REPLACED_TEST_DISPLAY_NAME,
                 "name": TEST_NAME
@@ -172,7 +172,7 @@ class TestUserTypesResource:
             assert found.name == TEST_NAME
 
         finally:
-            _, err = await client.delete_user_type(created.id)
+            _, _, err = await client.delete_user_type(created.id)
             assert err is None
 
     @pytest.mark.vcr()
@@ -187,7 +187,7 @@ class TestUserTypesResource:
         TEST_NAME = F"{TestUserTypesResource.SDK_PREFIX}_zEVAT"
         # ^ without VCR testing, can generate random TEST_NAME suffixes
 
-        user_type_obj = models.UserType({
+        user_type_obj = models.UserType(**{
             "description": TEST_DESC,
             "displayName": TEST_DISPLAY_NAME,
             "name": TEST_NAME
@@ -207,17 +207,17 @@ class TestUserTypesResource:
             assert found.name == TEST_NAME
 
             # Delete
-            _, err = await client.delete_user_type(created.id)
+            _, _, err = await client.delete_user_type(created.id)
             assert err is None
 
             # Retrieve
             found, resp, err = await client.get_user_type(created.id)
             assert err is not None
             assert isinstance(err, OktaAPIError)
-            assert resp.get_status() == HTTPStatus.NOT_FOUND
+            assert resp.status == HTTPStatus.NOT_FOUND
         finally:
             try:
-                _, err = await client.delete_user_type(created.id)
+                _, _, err = await client.delete_user_type(created.id)
             except Exception:
                 pass
 
@@ -236,12 +236,12 @@ class TestUserTypesResource:
         TEST_NAME_2 = F"{TestUserTypesResource.SDK_PREFIX}_cRuLD_2"
         # ^ without VCR testing, can generate random TEST_NAME suffixes
 
-        user_type_obj = models.UserType({
+        user_type_obj = models.UserType(**{
             "description": TEST_DESC,
             "displayName": TEST_DISPLAY_NAME,
             "name": TEST_NAME
         })
-        user_type_obj_2 = models.UserType({
+        user_type_obj_2 = models.UserType(**{
             "description": TEST_DESC_2,
             "displayName": TEST_DISPLAY_NAME_2,
             "name": TEST_NAME_2
@@ -265,12 +265,12 @@ class TestUserTypesResource:
         finally:
             errors = []
             try:
-                _, err = await client.delete_user_type(ut1.id)
+                _, _, err = await client.delete_user_type(ut1.id)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_user_type(ut2.id)
+                _, _, err = await client.delete_user_type(ut2.id)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)

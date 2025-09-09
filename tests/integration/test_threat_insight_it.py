@@ -14,9 +14,9 @@ class TestThreatInsightConfiguration:
         client = MockOktaClient(fs)
         resp, _, err = await client.get_current_configuration()
         assert isinstance(resp, ThreatInsightConfiguration)
-        assert '_links' in resp.as_dict().keys()
-        assert 'action' in resp.as_dict().keys()
-        assert 'excludeZones' in resp.as_dict().keys()
+        assert '_links' in resp.to_dict().keys()
+        assert 'action' in resp.to_dict().keys()
+        assert 'excludeZones' in resp.to_dict().keys()
 
     @pytest.mark.vcr()
     @pytest.mark.asyncio

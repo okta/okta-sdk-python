@@ -123,7 +123,7 @@ interactions:
       User-Agent:
       - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
     method: POST
-    uri: https://test.okta.com/api/v1/idps/0oasfewzrOhZhzogX4x6/credentials/keys/generate/?validityYears=2
+    uri: https://test.okta.com/api/v1/idps/0oasfewzrOhZhzogX4x6/credentials/keys/generate?validityYears=2
   response:
     body:
       string: '{"kty":"RSA","created":"2020-08-27T18:16:32.000Z","lastUpdated":"2020-08-27T18:16:32.000Z","expiresAt":"2022-08-27T18:16:32.000Z","kid":"bVLiI8vdRF3J1GT-PwhYk-4b3JQmPu_bZU15OLTQ1ok","use":"sig","x5c":["MIIDpDCCAoygAwIBAgIGAXQxIrYWMA0GCSqGSIb3DQEBCwUAMIGSMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxEzARBgNVBAMMCmRldi0xOTU5MjExHDAaBgkqhkiG9w0BCQEWDWluZm9Ab2t0YS5jb20wHhcNMjAwODI3MTgxNTMyWhcNMjIwODI3MTgxNjMyWjCBkjELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xDTALBgNVBAoMBE9rdGExFDASBgNVBAsMC1NTT1Byb3ZpZGVyMRMwEQYDVQQDDApkZXYtMTk1OTIxMRwwGgYJKoZIhvcNAQkBFg1pbmZvQG9rdGEuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgQhnUrl4VPGbeVbVN2LoC/CdDI1KaZX9z3t+qK+jMxcWupE1A21ojAJeEo40iqJPA94r0+FjUnvbJzLZQOSfoE/7asF3aHLLTDZy4XSexyQW78C+JLyX/v8XFJwfEh5y35a3O19lfCN2mXSOuOYfVSD4le0Zgd+jAek2127WpLDYsyKZt0BQvoUZFxO1JL8XyRxYuWYgd2iD+udkdP+wRK7fNuS6hF5sBI2uusBCV103x9Jlovb/Unb5zw8ercEJTuQrw1gqd4bC/sN95hezrsxR+m8BLFAHqf0V90pzhlxPvD5Evq5ZASPbo7GTlArzAPSXB+ulxnXR8briBKI1FQIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQBxbhcf0H2my2GeAM3u4b8N0TYunGwkg9YC87GOzqo7YFwXhmKJcI9NOUNrGWuV02AYzeW7MDBwXSu6m3Aur2W2GxjCRxPyJWFFxb95G9S6S/lUtcsoPZzvLxYIWo0e5zr4KXe2iiqZY9EUIC+SQYY4PpV8/SkUFCDiEh7L7ple5nur8P5/amEk8z3XGHocxqa3tTMZvYqp1kMdHmjuQVaJDcMB5DibKRWtu0FnYlzffyabBAuhA3wv0w694rBImPJB9BOXXe+UuxrFlckXuYvY1b3tZy9H4/lGHamsmqVn26elcxWT2uvt6k7DPWfq3E86buxKZZPZbSij3YSXuRib"],"x5t#S256":"y28JF7Dzgms_nuXoRv1AtFqRKmSyQzSCwDkutZ5C1KQ","e":"AQAB","n":"gQhnUrl4VPGbeVbVN2LoC_CdDI1KaZX9z3t-qK-jMxcWupE1A21ojAJeEo40iqJPA94r0-FjUnvbJzLZQOSfoE_7asF3aHLLTDZy4XSexyQW78C-JLyX_v8XFJwfEh5y35a3O19lfCN2mXSOuOYfVSD4le0Zgd-jAek2127WpLDYsyKZt0BQvoUZFxO1JL8XyRxYuWYgd2iD-udkdP-wRK7fNuS6hF5sBI2uusBCV103x9Jlovb_Unb5zw8ercEJTuQrw1gqd4bC_sN95hezrsxR-m8BLFAHqf0V90pzhlxPvD5Evq5ZASPbo7GTlArzAPSXB-ulxnXR8briBKI1FQ"}'
@@ -164,7 +164,7 @@ interactions:
     status:
       code: 201
       message: Created
-    url: https://test.okta.com/api/v1/idps/0oasfewzrOhZhzogX4x6/credentials/keys/generate/?validityYears=2
+    url: https://test.okta.com/api/v1/idps/0oasfewzrOhZhzogX4x6/credentials/keys/generate?validityYears=2
 - request:
     body: null
     headers:
@@ -177,7 +177,7 @@ interactions:
       User-Agent:
       - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
     method: POST
-    uri: https://test.okta.com/api/v1/idps/0oasfewzrOhZhzogX4x6/credentials/keys/bVLiI8vdRF3J1GT-PwhYk-4b3JQmPu_bZU15OLTQ1ok/clone/?targetIdpId=0oasfadumMMpFPz5T4x6
+    uri: https://test.okta.com/api/v1/idps/0oasfewzrOhZhzogX4x6/credentials/keys/bVLiI8vdRF3J1GT-PwhYk-4b3JQmPu_bZU15OLTQ1ok/clone?targetIdpId=0oasfadumMMpFPz5T4x6
   response:
     body:
       string: '{"kty":"RSA","created":"2020-08-27T18:16:32.000Z","lastUpdated":"2020-08-27T18:16:32.000Z","expiresAt":"2022-08-27T18:16:32.000Z","kid":"bVLiI8vdRF3J1GT-PwhYk-4b3JQmPu_bZU15OLTQ1ok","use":"sig","x5c":["MIIDpDCCAoygAwIBAgIGAXQxIrYWMA0GCSqGSIb3DQEBCwUAMIGSMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxEzARBgNVBAMMCmRldi0xOTU5MjExHDAaBgkqhkiG9w0BCQEWDWluZm9Ab2t0YS5jb20wHhcNMjAwODI3MTgxNTMyWhcNMjIwODI3MTgxNjMyWjCBkjELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xDTALBgNVBAoMBE9rdGExFDASBgNVBAsMC1NTT1Byb3ZpZGVyMRMwEQYDVQQDDApkZXYtMTk1OTIxMRwwGgYJKoZIhvcNAQkBFg1pbmZvQG9rdGEuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgQhnUrl4VPGbeVbVN2LoC/CdDI1KaZX9z3t+qK+jMxcWupE1A21ojAJeEo40iqJPA94r0+FjUnvbJzLZQOSfoE/7asF3aHLLTDZy4XSexyQW78C+JLyX/v8XFJwfEh5y35a3O19lfCN2mXSOuOYfVSD4le0Zgd+jAek2127WpLDYsyKZt0BQvoUZFxO1JL8XyRxYuWYgd2iD+udkdP+wRK7fNuS6hF5sBI2uusBCV103x9Jlovb/Unb5zw8ercEJTuQrw1gqd4bC/sN95hezrsxR+m8BLFAHqf0V90pzhlxPvD5Evq5ZASPbo7GTlArzAPSXB+ulxnXR8briBKI1FQIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQBxbhcf0H2my2GeAM3u4b8N0TYunGwkg9YC87GOzqo7YFwXhmKJcI9NOUNrGWuV02AYzeW7MDBwXSu6m3Aur2W2GxjCRxPyJWFFxb95G9S6S/lUtcsoPZzvLxYIWo0e5zr4KXe2iiqZY9EUIC+SQYY4PpV8/SkUFCDiEh7L7ple5nur8P5/amEk8z3XGHocxqa3tTMZvYqp1kMdHmjuQVaJDcMB5DibKRWtu0FnYlzffyabBAuhA3wv0w694rBImPJB9BOXXe+UuxrFlckXuYvY1b3tZy9H4/lGHamsmqVn26elcxWT2uvt6k7DPWfq3E86buxKZZPZbSij3YSXuRib"],"x5t#S256":"y28JF7Dzgms_nuXoRv1AtFqRKmSyQzSCwDkutZ5C1KQ","e":"AQAB","n":"gQhnUrl4VPGbeVbVN2LoC_CdDI1KaZX9z3t-qK-jMxcWupE1A21ojAJeEo40iqJPA94r0-FjUnvbJzLZQOSfoE_7asF3aHLLTDZy4XSexyQW78C-JLyX_v8XFJwfEh5y35a3O19lfCN2mXSOuOYfVSD4le0Zgd-jAek2127WpLDYsyKZt0BQvoUZFxO1JL8XyRxYuWYgd2iD-udkdP-wRK7fNuS6hF5sBI2uusBCV103x9Jlovb_Unb5zw8ercEJTuQrw1gqd4bC_sN95hezrsxR-m8BLFAHqf0V90pzhlxPvD5Evq5ZASPbo7GTlArzAPSXB-ulxnXR8briBKI1FQ"}'
@@ -218,7 +218,7 @@ interactions:
     status:
       code: 201
       message: Created
-    url: https://test.okta.com/api/v1/idps/0oasfewzrOhZhzogX4x6/credentials/keys/bVLiI8vdRF3J1GT-PwhYk-4b3JQmPu_bZU15OLTQ1ok/clone/?targetIdpId=0oasfadumMMpFPz5T4x6
+    url: https://test.okta.com/api/v1/idps/0oasfewzrOhZhzogX4x6/credentials/keys/bVLiI8vdRF3J1GT-PwhYk-4b3JQmPu_bZU15OLTQ1ok/clone?targetIdpId=0oasfadumMMpFPz5T4x6
 - request:
     body: null
     headers:

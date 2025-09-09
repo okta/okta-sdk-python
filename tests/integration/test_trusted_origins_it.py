@@ -20,28 +20,28 @@ class TestTrustedOriginsResource:
         # Create Trusted Origin
         TO_NAME = f"{TestTrustedOriginsResource.SDK_PREFIX}_test_TO"
         TO_ORIGIN = "http://example.com"
-        trusted_origin_model = models.TrustedOrigin({
+        trusted_origin_model = models.TrustedOrigin(**{
             "name": TO_NAME,
             "origin": TO_ORIGIN,
             "scopes": [
-                models.Scope({
-                    "type": models.ScopeType.CORS
+                models.TrustedOriginScope(**{
+                    "type": models.TrustedOriginScopeType.CORS
                 }),
-                models.Scope({
-                    "type": models.ScopeType.REDIRECT
+                models.TrustedOriginScope(**{
+                    "type": models.TrustedOriginScopeType.REDIRECT
                 }),
             ]
         })
 
         try:
             created_trusted_origin, _, err = await \
-                client.create_origin(trusted_origin_model)
+                client.create_trusted_origin(trusted_origin_model)
             assert err is None
             assert isinstance(created_trusted_origin, models.TrustedOrigin)
 
             # Retrieve
             retrieved_origin, _, err = await \
-                client.get_origin(created_trusted_origin.id)
+                client.get_trusted_origin(created_trusted_origin.id)
             assert err is None
             assert isinstance(retrieved_origin, models.TrustedOrigin)
             assert retrieved_origin.name == created_trusted_origin.name
@@ -49,7 +49,7 @@ class TestTrustedOriginsResource:
 
         finally:
             # Delete
-            _, err = await client.delete_origin(created_trusted_origin.id)
+            _, _, err = await client.delete_trusted_origin(created_trusted_origin.id)
             assert err is None
 
     @pytest.mark.vcr()
@@ -61,27 +61,27 @@ class TestTrustedOriginsResource:
         # Create Trusted Origin
         TO_NAME = f"{TestTrustedOriginsResource.SDK_PREFIX}_test_TO"
         TO_ORIGIN = "http://example.com"
-        trusted_origin_model = models.TrustedOrigin({
+        trusted_origin_model = models.TrustedOrigin(**{
             "name": TO_NAME,
             "origin": TO_ORIGIN,
             "scopes": [
-                models.Scope({
-                    "type": models.ScopeType.CORS
+                models.TrustedOriginScope(**{
+                    "type": models.TrustedOriginScopeType.CORS
                 }),
-                models.Scope({
-                    "type": models.ScopeType.REDIRECT
+                models.TrustedOriginScope(**{
+                    "type": models.TrustedOriginScopeType.REDIRECT
                 }),
             ]
         })
 
         try:
             created_trusted_origin, _, err = await \
-                client.create_origin(trusted_origin_model)
+                client.create_trusted_origin(trusted_origin_model)
             assert err is None
             assert isinstance(created_trusted_origin, models.TrustedOrigin)
 
             # List
-            trusted_origins, _, err = await client.list_origins()
+            trusted_origins, _, err = await client.list_trusted_origins()
             assert err is None
             assert isinstance(trusted_origins, list)
             assert len(trusted_origins) > 0
@@ -92,7 +92,7 @@ class TestTrustedOriginsResource:
 
         finally:
             # Delete
-            _, err = await client.delete_origin(created_trusted_origin.id)
+            _, _, err = await client.delete_trusted_origin(created_trusted_origin.id)
             assert err is None
 
     @pytest.mark.vcr()
@@ -104,47 +104,47 @@ class TestTrustedOriginsResource:
         # Create Trusted Origin
         TO_NAME = f"{TestTrustedOriginsResource.SDK_PREFIX}_test_TO"
         TO_ORIGIN = "http://example.com"
-        trusted_origin_model = models.TrustedOrigin({
+        trusted_origin_model = models.TrustedOrigin(**{
             "name": TO_NAME,
             "origin": TO_ORIGIN,
             "scopes": [
-                models.Scope({
-                    "type": models.ScopeType.CORS
+                models.TrustedOriginScope(**{
+                    "type": models.TrustedOriginScopeType.CORS
                 }),
-                models.Scope({
-                    "type": models.ScopeType.REDIRECT
+                models.TrustedOriginScope(**{
+                    "type": models.TrustedOriginScopeType.REDIRECT
                 }),
             ]
         })
 
         try:
             created_trusted_origin, _, err = await \
-                client.create_origin(trusted_origin_model)
+                client.create_trusted_origin(trusted_origin_model)
             assert err is None
             assert isinstance(created_trusted_origin, models.TrustedOrigin)
 
             # Retrieve
             retrieved_origin, _, err = await \
-                client.get_origin(created_trusted_origin.id)
+                client.get_trusted_origin(created_trusted_origin.id)
             assert err is None
             assert isinstance(retrieved_origin, models.TrustedOrigin)
             assert retrieved_origin.name == created_trusted_origin.name
             assert len(retrieved_origin.scopes) == 2
 
             # Delete
-            _, err = await client.delete_origin(created_trusted_origin.id)
+            _, _, err = await client.delete_trusted_origin(created_trusted_origin.id)
 
             # Retrieve to validate
             retrieved_origin, resp, err = await \
-                client.get_origin(created_trusted_origin.id)
+                client.get_trusted_origin(created_trusted_origin.id)
             assert err is not None
             assert isinstance(err, OktaAPIError)
-            assert resp.get_status() == HTTPStatus.NOT_FOUND
+            assert resp.status == HTTPStatus.NOT_FOUND
             assert retrieved_origin is None
         finally:
             # Clean up
             try:
-                _, err = await client.delete_origin(created_trusted_origin.id)
+                _, _, err = await client.delete_trusted_origin(created_trusted_origin.id)
             except Exception:
                 pass
 
@@ -157,48 +157,48 @@ class TestTrustedOriginsResource:
         # Create Trusted Origin
         TO_NAME = f"{TestTrustedOriginsResource.SDK_PREFIX}_test_TO"
         TO_ORIGIN = "http://example.com"
-        trusted_origin_model = models.TrustedOrigin({
+        trusted_origin_model = models.TrustedOrigin(**{
             "name": TO_NAME,
             "origin": TO_ORIGIN,
             "scopes": [
-                models.Scope({
-                    "type": models.ScopeType.CORS
+                models.TrustedOriginScope(**{
+                    "type": models.TrustedOriginScopeType.CORS
                 }),
-                models.Scope({
-                    "type": models.ScopeType.REDIRECT
+                models.TrustedOriginScope(**{
+                    "type": models.TrustedOriginScopeType.REDIRECT
                 }),
             ]
         })
 
         try:
             created_trusted_origin, _, err = await \
-                client.create_origin(trusted_origin_model)
+                client.create_trusted_origin(trusted_origin_model)
             assert err is None
             assert isinstance(created_trusted_origin, models.TrustedOrigin)
 
             # Retrieve
             retrieved_origin, _, err = await \
-                client.get_origin(created_trusted_origin.id)
+                client.get_trusted_origin(created_trusted_origin.id)
             assert err is None
             assert isinstance(retrieved_origin, models.TrustedOrigin)
             assert retrieved_origin.name == created_trusted_origin.name
             assert len(retrieved_origin.scopes) == 2
 
             # Update
-            updated_trusted_origin_model = models.TrustedOrigin({
+            updated_trusted_origin_model = models.TrustedOrigin(**{
                 "name": TO_NAME + "_updated",
                 "origin": TO_ORIGIN,
                 "scopes": [
-                    models.Scope({
-                        "type": models.ScopeType.CORS
+                    models.TrustedOriginScope(**{
+                        "type": models.TrustedOriginScopeType.CORS
                     }),
-                    models.Scope({
-                        "type": models.ScopeType.REDIRECT
+                    models.TrustedOriginScope(**{
+                        "type": models.TrustedOriginScopeType.REDIRECT
                     }),
                 ]
             })
             updated_origin, _, err = await \
-                client.update_origin(created_trusted_origin.id,
+                client.replace_trusted_origin(created_trusted_origin.id,
                                      updated_trusted_origin_model)
             assert err is None
             assert isinstance(updated_origin, models.TrustedOrigin)
@@ -207,13 +207,13 @@ class TestTrustedOriginsResource:
 
             # Retrieve to validate
             retrieved_origin, resp, err = await \
-                client.get_origin(created_trusted_origin.id)
+                client.get_trusted_origin(created_trusted_origin.id)
             assert retrieved_origin.id == created_trusted_origin.id
             assert retrieved_origin.name == updated_origin.name
 
         finally:
             # Delete
-            _, err = await client.delete_origin(created_trusted_origin.id)
+            _, _, err = await client.delete_trusted_origin(created_trusted_origin.id)
             assert err is None
 
     @pytest.mark.vcr()
@@ -225,51 +225,51 @@ class TestTrustedOriginsResource:
         # Create Trusted Origin
         TO_NAME = f"{TestTrustedOriginsResource.SDK_PREFIX}_test_TO"
         TO_ORIGIN = "http://example.com"
-        trusted_origin_model = models.TrustedOrigin({
+        trusted_origin_model = models.TrustedOrigin(**{
             "name": TO_NAME,
             "origin": TO_ORIGIN,
             "scopes": [
-                models.Scope({
-                    "type": models.ScopeType.CORS
+                models.TrustedOriginScope(**{
+                    "type": models.TrustedOriginScopeType.CORS
                 }),
-                models.Scope({
-                    "type": models.ScopeType.REDIRECT
+                models.TrustedOriginScope(**{
+                    "type": models.TrustedOriginScopeType.REDIRECT
                 }),
             ]
         })
 
         try:
             created_trusted_origin, _, err = await \
-                client.create_origin(trusted_origin_model)
+                client.create_trusted_origin(trusted_origin_model)
             assert err is None
             assert isinstance(created_trusted_origin, models.TrustedOrigin)
             assert created_trusted_origin.status == "ACTIVE"
 
             # Deactivate
             deactivated_origin, _, err = await \
-                client.deactivate_origin(created_trusted_origin.id)
+                client.deactivate_trusted_origin(created_trusted_origin.id)
             assert err is None
             assert deactivated_origin.status == "INACTIVE"
 
             # Retrieve to validate
             retrieved_origin, resp, err = await \
-                client.get_origin(created_trusted_origin.id)
+                client.get_trusted_origin(created_trusted_origin.id)
             assert retrieved_origin.id == created_trusted_origin.id
             assert retrieved_origin.status == "INACTIVE"
 
             # Reactivate
             reactivated_origin, _, err = await \
-                client.activate_origin(created_trusted_origin.id)
+                client.activate_trusted_origin(created_trusted_origin.id)
             assert err is None
             assert reactivated_origin.status == "ACTIVE"
 
             # Retrieve to validate
             retrieved_origin, resp, err = await \
-                client.get_origin(created_trusted_origin.id)
+                client.get_trusted_origin(created_trusted_origin.id)
             assert retrieved_origin.id == created_trusted_origin.id
             assert retrieved_origin.status == "ACTIVE"
 
         finally:
             # Delete
-            _, err = await client.delete_origin(created_trusted_origin.id)
+            _, _, err = await client.delete_trusted_origin(created_trusted_origin.id)
             assert err is None

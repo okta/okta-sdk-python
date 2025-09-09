@@ -10,8 +10,7 @@ from okta.models import (OrgSetting,
                          OrgPreferences,
                          OrgOktaCommunicationSetting,
                          OrgOktaSupportSettingsObj,
-                         OrgOktaSupportSetting,
-                         UserIdString)
+                         OrgOktaSupportSetting)
 
 
 class TestOrgResource:
@@ -37,12 +36,12 @@ class TestOrgResource:
 
         updated_setting = {'supportPhoneNumber': '1234567890'}
         try:
-            updated_org_settings, _, err = await client.partial_update_org_setting(updated_setting)
+            updated_org_settings, _, err = await client.update_org_settings(updated_setting)
             assert err is None
             assert updated_org_settings.support_phone_number == '1234567890'
         finally:
             updated_setting = {'supportPhoneNumber': get_org_settings.support_phone_number}
-            updated_org_settings, _, err = await client.partial_update_org_setting(updated_setting, keep_empty_params=True)
+            updated_org_settings, _, err = await client.update_org_settings(updated_setting)
             assert err is None
             assert updated_org_settings.support_phone_number == get_org_settings.support_phone_number
 
@@ -56,13 +55,13 @@ class TestOrgResource:
         new_org_settings.support_phone_number = '1234567890'
         new_org_settings.company_name = 'NewOrgName'
         try:
-            updated_org_settings, _, err = await client.update_org_setting(new_org_settings)
+            updated_org_settings, _, err = await client.update_org_settings(new_org_settings)
             assert err is None
             assert updated_org_settings.support_phone_number == '1234567890'
             assert updated_org_settings.company_name == 'NewOrgName'
 
         finally:
-            updated_org_settings, _, err = await client.update_org_setting(get_org_settings, keep_empty_params=True)
+            updated_org_settings, _, err = await client.update_org_settings(get_org_settings)
             assert err is None
             assert updated_org_settings.support_phone_number == get_org_settings.support_phone_number
             assert updated_org_settings.company_name == get_org_settings.company_name
@@ -97,12 +96,12 @@ class TestOrgResource:
 
         new_contact_type = OrgContactType.TECHNICAL.value
         try:
-            updated_user, _, err = await client.update_org_contact_user(new_contact_type,
-                                                                        UserIdString({'userId': org_contact_user.user_id}))
+            updated_user, _, err = await client.replace_org_contact_user(new_contact_type,
+                                                                        OrgContactUser(**{'userId': org_contact_user.user_id}))
             assert err is None
         finally:
-            updated_user, _, err = await client.update_org_contact_user(contact_type,
-                                                                        UserIdString({'userId': org_contact_user.user_id}))
+            updated_user, _, err = await client.replace_org_contact_user(contact_type,
+                                                                        OrgContactUser(**{'userId': org_contact_user.user_id}))
             assert err is None
 
     @pytest.mark.vcr()
@@ -118,7 +117,7 @@ class TestOrgResource:
     @pytest.mark.asyncio
     async def test_hide_okta_ui_footer(self, fs):
         client = MockOktaClient(fs)
-        org_preferences, _, err = await client.hide_okta_ui_footer()
+        org_preferences, _, err = await client.update_org_hide_okta_ui_footer()
         assert err is None
         assert isinstance(org_preferences, OrgPreferences)
         assert not org_preferences.show_end_user_footer
@@ -127,7 +126,7 @@ class TestOrgResource:
     @pytest.mark.asyncio
     async def test_show_okta_ui_footer(self, fs):
         client = MockOktaClient(fs)
-        org_preferences, _, err = await client.show_okta_ui_footer()
+        org_preferences, _, err = await client.update_org_show_okta_ui_footer()
         assert err is None
         assert isinstance(org_preferences, OrgPreferences)
         assert org_preferences.show_end_user_footer
@@ -195,10 +194,9 @@ class TestOrgResource:
             assert org_okta_support_setting.support == 'ENABLED'
             extended_org_okta_support_setting, _, err = await client.extend_okta_support()
             assert err is None
-            date1 = datetime.strptime(org_okta_support_setting.expiration, "%Y-%m-%dT%H:%M:%S.%fZ")
-            date2 = datetime.strptime(extended_org_okta_support_setting.expiration, "%Y-%m-%dT%H:%M:%S.%fZ")
             # should be 24h
-            assert round((date2 - date1).total_seconds() / 3600) == 24
+            assert round((extended_org_okta_support_setting.expiration - org_okta_support_setting.expiration)
+                         .total_seconds() / 3600) == 24
         finally:
             org_okta_support_setting, _, err = await client.revoke_okta_support()
             assert err is None

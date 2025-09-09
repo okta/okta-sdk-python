@@ -175,83 +175,6 @@ interactions:
       message: OK
     url: https://test.okta.com/api/v1/brands/bnd8cxvskK3NpqF6H0w6/templates/email
 - request:
-    body: null
-    headers:
-      Accept:
-      - application/json
-      Authorization:
-      - SSWS myAPIToken
-      User-Agent:
-      - okta-sdk-python/2.4.0 python/3.8.2 Darwin/20.6.0
-    method: DELETE
-    uri: https://test.okta.com/api/v1/brands/bnd8cxvskK3NpqF6H0w6/templates/email/welcome/customizations
-  response:
-    body:
-      string: ''
-    headers:
-      Cache-Control:
-      - no-cache, no-store
-      Connection:
-      - keep-alive
-      Date:
-      - Mon, 21 Feb 2022 14:33:47 GMT
-      Expires:
-      - '0'
-      Pragma:
-      - no-cache
-      Public-Key-Pins-Report-Only:
-      - pin-sha256="MAbZWK1eIklkAxEkc7uqoZ/QX3cgLZT0HY5TRG1JXrs="; pin-sha256="PJ1QGTlW5ViFNhswMsYKp4X8C7KdG8nDW4ZcXLmYMyI=";
-        pin-sha256="5LlRWGTBVjpfNXXU5T7cYVUbOSPcgpMgdjaWd/R9Leg="; pin-sha256="lpaMLlEsp7/dVZoeWt3f9ciJIMGimixAIaKNsn9/bCY=";
-        max-age=60; report-uri="https://okta.report-uri.com/r/default/hpkp/reportOnly"
-      Server:
-      - nginx
-      Set-Cookie:
-      - sid=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
-      - autolaunch_triggered=""; Expires=Thu, 01-Jan-1970 00:00:10 GMT; Path=/
-      - JSESSIONID=2B7E9A7382E9C4F558DF406E339C27AB; Path=/; Secure; HttpOnly
-      Strict-Transport-Security:
-      - max-age=315360000; includeSubDomains
-      content-security-policy:
-      - 'default-src ''self'' test.okta.com *.oktacdn.com; connect-src ''self''
-        test.okta.com test-admin.okta.com *.oktacdn.com *.mixpanel.com
-        *.mapbox.com app.pendo.io data.pendo.io pendo-static-5634101834153984.storage.googleapis.com
-        test.kerberos.okta.com *.authenticatorlocaldev.com:8769 http://localhost:8769
-        http://127.0.0.1:8769 *.authenticatorlocaldev.com:65111 http://localhost:65111
-        http://127.0.0.1:65111 *.authenticatorlocaldev.com:65121 http://localhost:65121
-        http://127.0.0.1:65121 *.authenticatorlocaldev.com:65131 http://localhost:65131
-        http://127.0.0.1:65131 *.authenticatorlocaldev.com:65141 http://localhost:65141
-        http://127.0.0.1:65141 *.authenticatorlocaldev.com:65151 http://localhost:65151
-        http://127.0.0.1:65151 https://oinmanager.okta.com data:; script-src
-        ''unsafe-inline'' ''unsafe-eval'' ''self'' test.okta.com *.oktacdn.com;
-        style-src ''unsafe-inline'' ''self'' test.okta.com *.oktacdn.com
-        app.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com;
-        frame-src ''self'' test.okta.com test-admin.okta.com login.okta.com
-        com-okta-authenticator:; img-src ''self'' test.okta.com *.oktacdn.com
-        *.tiles.mapbox.com *.mapbox.com app.pendo.io data.pendo.io cdn.pendo.io pendo-static-5634101834153984.storage.googleapis.com
-        data: blob:; font-src ''self'' test.okta.com data: *.oktacdn.com
-        fonts.gstatic.com; frame-ancestors ''self''; report-uri https://okta.report-uri.com/r/d/csp/enforce;
-        report-to csp'
-      p3p:
-      - CP="HONK"
-      report-to:
-      - '{"group":"csp","max_age":31536000,"endpoints":[{"url":"https://okta.report-uri.com/a/d/g"}],"include_subdomains":true}'
-      x-frame-options:
-      - SAMEORIGIN
-      x-okta-request-id:
-      - YhOiy3KU02LO9aInnLUUVwAABl0
-      x-rate-limit-limit:
-      - '600'
-      x-rate-limit-remaining:
-      - '587'
-      x-rate-limit-reset:
-      - '1645454079'
-      x-xss-protection:
-      - '0'
-    status:
-      code: 204
-      message: No Content
-    url: https://test.okta.com/api/v1/brands/bnd8cxvskK3NpqF6H0w6/templates/email/welcome/customizations
-- request:
     body: '{"body": "<!DOCTYPE html><html><body><p>Bonjour ${user.profile.firstName}.
       <a href=\"${activationLink}\">Activer le compte</a></p></body></html>", "isDefault":
       false, "language": "fr", "subject": "Bienvenue dans ${org.name}!"}'
@@ -435,7 +358,7 @@ interactions:
       User-Agent:
       - okta-sdk-python/2.4.0 python/3.8.2 Darwin/20.6.0
     method: DELETE
-    uri: https://test.okta.com/api/v1/brands/bnd8cxvskK3NpqF6H0w6/templates/email/welcome/customizations/oel8qz8yl2s0DsaYH0w6
+    uri: https://test.okta.com/api/v1/brands/bnd8cxvskK3NpqF6H0w6/templates/email/welcome/customizations/oel8qykgp07khWON30w6
   response:
     body:
       string: ''
@@ -514,7 +437,7 @@ interactions:
       User-Agent:
       - okta-sdk-python/2.4.0 python/3.8.2 Darwin/20.6.0
     method: DELETE
-    uri: https://test.okta.com/api/v1/brands/bnd8cxvskK3NpqF6H0w6/templates/email/welcome/customizations
+    uri: https://test.okta.com/api/v1/brands/bnd8cxvskK3NpqF6H0w6/templates/email/welcome/customizations/oel8qz8yl2s0DsaYH0w6
   response:
     body:
       string: ''

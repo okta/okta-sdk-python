@@ -55,7 +55,7 @@ class TestGroupSchemaResource:
         assert isinstance(resp.definitions, models.GroupSchemaDefinitions)
         assert isinstance(resp.definitions.base, models.GroupSchemaBase)
         assert isinstance(resp.definitions.base.properties, models.GroupSchemaBaseProperties)
-        assert resp.schema == 'http://json-schema.org/draft-04/schema#'
+        assert resp.var_schema == 'http://json-schema.org/draft-04/schema#'
 
     @pytest.mark.vcr()
     @pytest.mark.asyncio
@@ -67,16 +67,31 @@ class TestGroupSchemaResource:
         custom_attribute_name = ''.join([ascii_lowercase[random.randint(0, 25)] for i in range(20)])
         definition = copy.deepcopy(ADD_CUSTOM_ATTRIBUTE_DEFINITION)
         definition['custom']['properties'][custom_attribute_name] = CUSTOM_ATTRIBUTE_PROPERTIES
+        group_schema = models.GroupSchema(**{
+             "id": "#custom",
+             "type": "object",
+             "properties": {
+                 "required": [],
+                 custom_attribute_name: CUSTOM_ATTRIBUTE_PROPERTIES
+             }
+        })
 
         try:
-            resp, _, err = await client.update_group_schema({'definitions': definition})
+            resp, _, err = await client.update_group_schema(group_schema)
             assert err is None
             assert custom_attribute_name in resp.definitions.custom.properties
 
         finally:
             definition = copy.deepcopy(REMOVE_CUSTOM_ATTRIBUTE_DEFINITION)
             definition['custom']['properties'][custom_attribute_name] = None
-            resp, _, err = await client.update_group_schema({'definitions': definition}, keep_empty_params=True)
+            group_schema = models.GroupSchema(**{
+                 "id": "#custom",
+                 "type": "object",
+                 "properties": {
+                     custom_attribute_name: None
+                 }
+            })
+            resp, _, err = await client.update_group_schema(group_schema)
             assert err is None
             assert custom_attribute_name not in resp.definitions.custom.properties
 
@@ -90,22 +105,37 @@ class TestGroupSchemaResource:
         custom_attribute_name = ''.join([ascii_lowercase[random.randint(0, 25)] for i in range(20)])
         definition = copy.deepcopy(ADD_CUSTOM_ATTRIBUTE_DEFINITION)
         definition['custom']['properties'][custom_attribute_name] = CUSTOM_ATTRIBUTE_PROPERTIES
+        group_schema = models.GroupSchema(**{
+             "id": "#custom",
+             "type": "object",
+             "properties": {
+                 "required": [],
+                 custom_attribute_name: CUSTOM_ATTRIBUTE_PROPERTIES
+             }
+        })
 
         try:
-            resp, _, err = await client.update_group_schema({'definitions': definition})
+            resp, _, err = await client.update_group_schema(group_schema)
             assert err is None
             assert custom_attribute_name in resp.definitions.custom.properties
-            assert resp.definitions.custom.properties[custom_attribute_name]['title'] == 'Test Custom Attribute'
+            assert resp.definitions.custom.properties[custom_attribute_name].title == 'Test Custom Attribute'
 
             # update custom attribute
-            resp.definitions.custom.properties[custom_attribute_name]['title'] = 'New Title'
+            resp.definitions.custom.properties[custom_attribute_name].title = 'New Title'
             resp, _, err = await client.update_group_schema(resp)
             assert err is None
-            assert resp.definitions.custom.properties[custom_attribute_name]['title'] == 'New Title'
+            assert resp.definitions.custom.properties[custom_attribute_name].title == 'New Title'
 
         finally:
             definition = copy.deepcopy(REMOVE_CUSTOM_ATTRIBUTE_DEFINITION)
             definition['custom']['properties'][custom_attribute_name] = None
-            resp, _, err = await client.update_group_schema({'definitions': definition}, keep_empty_params=True)
+            group_schema = models.GroupSchema(**{
+                 "id": "#custom",
+                 "type": "object",
+                 "properties": {
+                     custom_attribute_name: None
+                 }
+            })
+            resp, _, err = await client.update_group_schema(group_schema)
             assert err is None
             assert custom_attribute_name not in resp.definitions.custom.properties

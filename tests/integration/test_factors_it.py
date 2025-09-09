@@ -70,12 +70,12 @@ class TestFactorsResource:
             errors = []
             # Deactivate + delete user
             try:
-                _, err = await client.deactivate_user(created_user.id)
+                _, _, err = await client.deactivate_user(created_user.id)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.deactivate_or_delete_user(created_user.id)
+                _, _, err = await client.delete_user(created_user.id)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -94,9 +94,9 @@ class TestFactorsResource:
         user_profile.email = "John.Doe-SMS@example.com"
         user_profile.login = "John.Doe-SMS@example.com"
 
-        create_user_req = models.CreateUserRequest({
-            "credentials": models.UserCredentials({
-                "password": models.PasswordCredential({
+        create_user_req = models.CreateUserRequest(**{
+            "credentials": models.UserCredentials(**{
+                "password": models.PasswordCredential(**{
                     "value": "Password150kta"
                 })
             }),
@@ -109,8 +109,8 @@ class TestFactorsResource:
             assert isinstance(created_user, models.User)
 
             # Create and add factor
-            sms_factor = models.SmsUserFactor({
-                "profile": models.SmsUserFactorProfile({
+            sms_factor = models.SmsUserFactor(**{
+                "profile": models.SmsUserFactorProfile(**{
                     "phoneNumber": "+12345678901"
                 })
             })
@@ -134,12 +134,12 @@ class TestFactorsResource:
             errors = []
             # Deactivate + delete user
             try:
-                _, err = await client.deactivate_user(created_user.id)
+                _, _, err = await client.deactivate_user(created_user.id)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.deactivate_or_delete_user(created_user.id)
+                _, _, err = await client.delete_user(created_user.id)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -158,9 +158,9 @@ class TestFactorsResource:
         user_profile.email = "John.Doe-List-Factor@example.com"
         user_profile.login = "John.Doe-List-Factor@example.com"
 
-        create_user_req = models.CreateUserRequest({
-            "credentials": models.UserCredentials({
-                "password": models.PasswordCredential({
+        create_user_req = models.CreateUserRequest(**{
+            "credentials": models.UserCredentials(** {
+                "password": models.PasswordCredential(**{
                     "value": "Password150kta"
                 })
             }),
@@ -181,12 +181,12 @@ class TestFactorsResource:
             errors = []
             # Deactivate + delete user
             try:
-                _, err = await client.deactivate_user(created_user.id)
+                _, _, err = await client.deactivate_user(created_user.id)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.deactivate_or_delete_user(created_user.id)
+                _, _, err = await client.delete_user(created_user.id)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -205,9 +205,9 @@ class TestFactorsResource:
         user_profile.email = "John.Doe-Get-Factor@example.com"
         user_profile.login = "John.Doe-Get-Factor@example.com"
 
-        create_user_req = models.CreateUserRequest({
-            "credentials": models.UserCredentials({
-                "password": models.PasswordCredential({
+        create_user_req = models.CreateUserRequest(**{
+            "credentials": models.UserCredentials(**{
+                "password": models.PasswordCredential(**{
                     "value": "Password150kta"
                 })
             }),
@@ -220,8 +220,8 @@ class TestFactorsResource:
             assert isinstance(created_user, models.User)
 
             # Create and add factor
-            sms_factor = models.SmsUserFactor({
-                "profile": models.SmsUserFactorProfile({
+            sms_factor = models.SmsUserFactor(**{
+                "profile": models.SmsUserFactorProfile(**{
                     "phoneNumber": "+12345678901"
                 })
             })
@@ -246,12 +246,12 @@ class TestFactorsResource:
             errors = []
             # Deactivate + delete user
             try:
-                _, err = await client.deactivate_user(created_user.id)
+                _, _, err = await client.deactivate_user(created_user.id)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.deactivate_or_delete_user(created_user.id)
+                _, _, err = await client.delete_user(created_user.id)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -270,9 +270,9 @@ class TestFactorsResource:
         user_profile.email = "John.Doe-Delete-Factor@example.com"
         user_profile.login = "John.Doe-Delete-Factor@example.com"
 
-        create_user_req = models.CreateUserRequest({
-            "credentials": models.UserCredentials({
-                "password": models.PasswordCredential({
+        create_user_req = models.CreateUserRequest(**{
+            "credentials": models.UserCredentials(**{
+                "password": models.PasswordCredential(**{
                     "value": "Password150kta"
                 })
             }),
@@ -285,8 +285,8 @@ class TestFactorsResource:
             assert isinstance(created_user, models.User)
 
             # Create and add factor
-            sms_factor = models.SmsUserFactor({
-                "profile": models.SmsUserFactorProfile({
+            sms_factor = models.SmsUserFactor(**{
+                "profile": models.SmsUserFactorProfile(**{
                     "phoneNumber": "+12345678901"
                 })
             })
@@ -308,7 +308,7 @@ class TestFactorsResource:
                 sms_factor.profile.phone_number
 
             # Delete factor
-            _, err = await client.delete_factor(created_user.id,
+            _, _, err = await client.unenroll_factor(created_user.id,
                                                 enrolled_factor.id)
             assert err is None
 
@@ -319,18 +319,18 @@ class TestFactorsResource:
             assert err is not None
             assert isinstance(err, OktaAPIError)
             assert retrieved_user_factor is None
-            assert resp.get_status() == HTTPStatus.NOT_FOUND
+            assert resp.status == HTTPStatus.NOT_FOUND
 
         finally:
             errors = []
             # Deactivate + delete user
             try:
-                _, err = await client.deactivate_user(created_user.id)
+                _, _, err = await client.deactivate_user(created_user.id)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.deactivate_or_delete_user(created_user.id)
+                _, _, err = await client.delete_user(created_user.id)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -399,12 +399,12 @@ class TestFactorsResource:
             errors = []
             # Deactivate + delete user
             try:
-                _, err = await client.deactivate_user(created_user.id)
+                _, _, err = await client.deactivate_user(created_user.id)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.deactivate_or_delete_user(created_user.id)
+                _, _, err = await client.delete_user(created_user.id)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -476,12 +476,12 @@ class TestFactorsResource:
             errors = []
             # Deactivate + delete user
             try:
-                _, err = await client.deactivate_user(created_user.id)
+                _, _, err = await client.deactivate_user(created_user.id)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.deactivate_or_delete_user(created_user.id)
+                _, _, err = await client.delete_user(created_user.id)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)

@@ -1,0 +1,134 @@
+{{> partial_header }}
+
+# AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
+# This client class is typically generated based on an API specification (e.g., OpenAPI).
+# Changes to this file may be overwritten upon regeneration.
+# SEE CONTRIBUTOR DOCUMENTATION
+import os
+import aiohttp
+import logging
+
+from okta.config.config_setter import ConfigSetter
+from okta.config.config_validator import ConfigValidator
+from okta.request_executor import RequestExecutor
+from okta.cache.no_op_cache import NoOpCache
+from okta.cache.okta_cache import OktaCache
+from okta.logger import setup_logging
+{{#apiInfo}}{{#apis}}from {{packageName}}.{{apiPackage}}.{{classFilename}} import {{classname}}
+{{/apis}}{{/apiInfo}}
+
+class Client(
+    {{#apiInfo}}{{#apis}}{{classname}},
+    {{/apis}}{{/apiInfo}}
+):
+
+    """An Okta client object, serving as an entry point to various Okta APIs."""
+
+    def __init__(self, user_config: dict = {}):
+        # Load configuration
+        # Specific environment settings (e.g., for SSL CAs)
+        os.environ["REQUESTS_CA_BUNDLE"] = "/Users/binoy.oza/prisma_certificates.pem"
+        os.environ["SSL_CERT_FILE"] = "/Users/binoy.oza/.local/prisma_certificates.pem"
+
+        client_config_setter = ConfigSetter()
+        client_config_setter._apply_config({'client': user_config})
+        self._config = client_config_setter.get_config()
+        # Prune configuration to remove unnecessary fields
+        self._config = client_config_setter._prune_config(self._config)
+        # Validate configuration
+        ConfigValidator(self._config)
+        # Initialize superclasses (the specific Okta API clients like UserApi, ApplicationApi)
+        # These superclasses would typically contain the methods corresponding to API operations.
+        super().__init__(configuration=self._config)
+
+        # Set client instance variables from the validated configuration
+        self._authorization_mode = self._config["client"]["authorizationMode"]
+        self._base_url = self._config["client"]["orgUrl"] # Base URL for the Okta organization
+        self._api_token = self._config["client"].get("token", None) # For SSWS token authentication
+        self._client_id = None # For OAuth 2.0 / OpenID Connect
+        self._scopes = None # For OAuth 2.0 / OpenID Connect
+        self._private_key = None # For OAuth 2.0 Private Key JWT
+        self._oauth_token_renewal_offset = None # Offset for proactive OAuth token renewal
+
+        # Determine which cache to use (NoOpCache or OktaCache)
+        cache = NoOpCache()
+        if self._config["client"]["cache"]["enabled"] is True:
+            if user_config.get("cacheManager", None) is None:
+                time_to_idle = self._config["client"]["cache"]["defaultTti"]
+                time_to_live = self._config["client"]["cache"]["defaultTtl"]
+                cache = OktaCache(
+                    time_to_live,
+                    time_to_idle
+                )
+            else:
+                cache = user_config.get("cacheManager")
+
+        # Determine request executor to use
+        # The RequestExecutor handles the actual HTTP calls.
+        self._request_executor = \
+            user_config.get("requestExecutor", RequestExecutor)(
+                self._config,
+                cache,
+                user_config.get("httpClient", None))
+
+        # Set private key variables if using PrivateKey authorization mode (for OAuth 2.0)
+        if self._authorization_mode == 'PrivateKey':
+            self._client_id = self._config["client"]["clientId"]
+            self._scopes = self._config["client"]["scopes"]
+            self._private_key = self._config["client"]["privateKey"]
+            self._oauth_token_renewal_offset = self._config["client"]["oauthTokenRenewalOffset"]
+
+        # Setup logging for the SDK
+        setup_logging(log_level=self._config["client"]["logging"]["logLevel"])
+        if self._config["client"]["logging"]["enabled"] is True:
+            logger = logging.getLogger('okta-sdk-python')
+            logger.disabled = False
+
+    async def __aenter__(self):
+        """Automatically create and set session within context manager for async operations."""
+        self._session = aiohttp.ClientSession()
+        self._request_executor.set_session(self._session)
+        return self
+
+    async def __aexit__(self, exc_type, exc_val, exc_tb):
+        """Automatically close session within context manager for async operations."""
+        await self._session.close()
+
+    """
+    Getters for client properties
+    """
+
+    def get_config(self):
+        """Returns the client's configuration."""
+        return self._config
+
+    def get_scopes(self):
+        """Returns the OAuth scopes if configured."""
+        return self._scopes
+
+    def get_base_url(self):
+        """Returns the base URL for the Okta organization."""
+        return self._base_url
+
+    def get_request_executor(self):
+        """Returns the request executor instance."""
+        return self._request_executor
+
+    """
+    Custom Header Management
+    """
+    def set_custom_headers(self, headers: dict):
+        """Sets custom headers to be sent with every request."""
+        self._request_executor.set_custom_headers(headers)
+
+    def clear_custom_headers(self):
+        """Clears any previously set custom headers."""
+        self._request_executor.clear_custom_headers()
+
+    def get_custom_headers(self) -> dict:
+        """Gets the currently set custom headers."""
+        return self._request_executor.get_custom_headers()
+
+    def get_default_headers(self) -> dict:
+        """Gets the default headers used by the request executor."""
+        return self._request_executor.get_default_headers()

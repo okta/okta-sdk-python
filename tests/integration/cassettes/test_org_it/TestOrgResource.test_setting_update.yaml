@@ -99,7 +99,7 @@ interactions:
       - application/json
       User-Agent:
       - okta-sdk-python/2.1.0 python/3.8.2 Darwin/19.6.0
-    method: PUT
+    method: POST
     uri: https://test.okta.com/api/v1/org
   response:
     body:
@@ -189,7 +189,7 @@ interactions:
       - application/json
       User-Agent:
       - okta-sdk-python/2.1.0 python/3.8.2 Darwin/19.6.0
-    method: PUT
+    method: POST
     uri: https://test.okta.com/api/v1/org
   response:
     body:

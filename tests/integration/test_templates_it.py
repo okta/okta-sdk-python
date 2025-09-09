@@ -18,14 +18,13 @@ class TestTemplatesResource:
         client = MockOktaClient(fs)
 
         # Create SMS Template
-        sms_translations = models.SmsTemplateTranslations()
-        sms_translations.es = \
-            "${org.name}: el código de verificación es ${code}"
-        sms_translations.fr = \
-            "${org.name}: votre code de vérification est ${code}"
-        sms_translations.it = "${org.name}: il codice di verifica è ${code}"
+        sms_translations = {
+            "es": "${org.name}: el código de verificación es ${code}",
+            "fr": "${org.name}: votre code de vérification est ${code}",
+            "it": "${org.name}: il codice di verifica è ${code}"
+        }
 
-        sms_template_model = models.SmsTemplate({
+        sms_template_model = models.SmsTemplate(**{
             "name": f"{TestTemplatesResource.SDK_PREFIX}-test-template",
             "type": models.SmsTemplateType.SMS_VERIFY_CODE,
             "template": "${org.name}: your verification code is ${code}",
@@ -48,13 +47,13 @@ class TestTemplatesResource:
             assert retrieved_template.id == created_template.id
             assert retrieved_template.name == created_template.name
             assert retrieved_template.template == created_template.template
-            assert retrieved_template.translations.es == sms_translations.es
-            assert retrieved_template.translations.it == sms_translations.it
-            assert retrieved_template.translations.fr == sms_translations.fr
+            assert retrieved_template.translations['es'] == sms_translations["es"]
+            assert retrieved_template.translations['it'] == sms_translations["it"]
+            assert retrieved_template.translations['fr'] == sms_translations["fr"]
 
         finally:
             # Delete
-            _, err = await client.delete_sms_template(created_template.id)
+            _, _, err = await client.delete_sms_template(created_template.id)
             assert err is None
 
     @pytest.mark.vcr()
@@ -64,14 +63,13 @@ class TestTemplatesResource:
         client = MockOktaClient(fs)
 
         # Create SMS Template
-        sms_translations = models.SmsTemplateTranslations()
-        sms_translations.es = \
-            "${org.name}: el código de verificación es ${code}"
-        sms_translations.fr = \
-            "${org.name}: votre code de vérification est ${code}"
-        sms_translations.it = "${org.name}: il codice di verifica è ${code}"
+        sms_translations = {
+            "es": "${org.name}: el código de verificación es ${code}",
+            "fr": "${org.name}: votre code de vérification est ${code}",
+            "it": "${org.name}: il codice di verifica è ${code}"
+        }
 
-        sms_template_model = models.SmsTemplate({
+        sms_template_model = models.SmsTemplate(**{
             "name": f"{TestTemplatesResource.SDK_PREFIX}-test-template",
             "type": models.SmsTemplateType.SMS_VERIFY_CODE,
             "template": "${org.name}: your verification code is ${code}",
@@ -86,9 +84,9 @@ class TestTemplatesResource:
             assert created_template.name == sms_template_model.name
             assert created_template.type == sms_template_model.type
             assert created_template.template == sms_template_model.template
-            assert created_template.translations.es == sms_translations.es
-            assert created_template.translations.it == sms_translations.it
-            assert created_template.translations.fr == sms_translations.fr
+            assert created_template.translations['es'] == sms_translations["es"]
+            assert created_template.translations['it'] == sms_translations["it"]
+            assert created_template.translations['fr'] == sms_translations["fr"]
 
             # List
             sms_templates, _, err = await client.list_sms_templates()
@@ -99,7 +97,7 @@ class TestTemplatesResource:
 
         finally:
             # Delete
-            _, err = await client.delete_sms_template(created_template.id)
+            _, _, err = await client.delete_sms_template(created_template.id)
             assert err is None
 
     @pytest.mark.vcr()
@@ -109,14 +107,12 @@ class TestTemplatesResource:
         client = MockOktaClient(fs)
 
         # Create SMS Template
-        sms_translations = models.SmsTemplateTranslations()
-        sms_translations.es = \
-            "${org.name}: el código de verificación es ${code}"
-        sms_translations.fr = \
-            "${org.name}: votre code de vérification est ${code}"
-        sms_translations.it = "${org.name}: il codice di verifica è ${code}"
-
-        sms_template_model = models.SmsTemplate({
+        sms_translations = {
+            "es": "${org.name}: el código de verificación es ${code}",
+            "fr": "${org.name}: votre code de vérification est ${code}",
+            "it": "${org.name}: il codice di verifica è ${code}"
+        }
+        sms_template_model = models.SmsTemplate(**{
             "name": f"{TestTemplatesResource.SDK_PREFIX}-test-template",
             "type": models.SmsTemplateType.SMS_VERIFY_CODE,
             "template": "${org.name}: your verification code is ${code}",
@@ -139,17 +135,25 @@ class TestTemplatesResource:
             assert retrieved_template.id == created_template.id
             assert retrieved_template.name == created_template.name
             assert retrieved_template.template == created_template.template
-            assert retrieved_template.translations.es == sms_translations.es
-            assert retrieved_template.translations.it == sms_translations.it
-            assert retrieved_template.translations.fr == sms_translations.fr
+            assert retrieved_template.translations['es'] == sms_translations["es"]
+            assert retrieved_template.translations['it'] == sms_translations["it"]
+            assert retrieved_template.translations['fr'] == sms_translations["fr"]
 
             # Update
             created_template.name = sms_template_model.name + "UPDATE"
+            # Update
+            temporary_template = models.SmsTemplate(**{
+                "name": created_template.name,
+                "id": created_template.id,
+                "translations": {
+                    "de": "${org.name}: ihre bestätigungscode ist ${code}."
+                }
+            })
             updated_template, _, err = await client.\
-                update_sms_template(created_template.id, created_template)
+                update_sms_template(created_template.id, temporary_template)
             assert err is None
-            assert updated_template.id == created_template.id
-            assert updated_template.name == sms_template_model.name + "UPDATE"
+            assert updated_template.id == temporary_template.id
+            assert updated_template.name == temporary_template.name
 
             # Retrieve
             retrieved_template, _, err = await client.\
@@ -158,13 +162,13 @@ class TestTemplatesResource:
             assert retrieved_template.id == created_template.id
             assert retrieved_template.name == updated_template.name
             assert retrieved_template.template == created_template.template
-            assert retrieved_template.translations.es == sms_translations.es
-            assert retrieved_template.translations.it == sms_translations.it
-            assert retrieved_template.translations.fr == sms_translations.fr
+            assert retrieved_template.translations['es'] == sms_translations["es"]
+            assert retrieved_template.translations['it'] == sms_translations["it"]
+            assert retrieved_template.translations['fr'] == sms_translations["fr"]
 
         finally:
             # Delete
-            _, err = await client.delete_sms_template(created_template.id)
+            _, _, err = await client.delete_sms_template(created_template.id)
             assert err is None
 
     @pytest.mark.vcr()
@@ -174,14 +178,12 @@ class TestTemplatesResource:
         client = MockOktaClient(fs)
 
         # Create SMS Template
-        sms_translations = models.SmsTemplateTranslations()
-        sms_translations.es = \
-            "${org.name}: el código de verificación es ${code}"
-        sms_translations.fr = \
-            "${org.name}: votre code de vérification est ${code}"
-        sms_translations.it = "${org.name}: il codice di verifica è ${code}"
-
-        sms_template_model = models.SmsTemplate({
+        sms_translations = {
+            "es": "${org.name}: el código de verificación es ${code}",
+            "fr": "${org.name}: votre code de vérification est ${code}",
+            "it": "${org.name}: il codice di verifica è ${code}"
+        }
+        sms_template_model = models.SmsTemplate(**{
             "name": f"{TestTemplatesResource.SDK_PREFIX}-test-template",
             "type": models.SmsTemplateType.SMS_VERIFY_CODE,
             "template": "${org.name}: your verification code is ${code}",
@@ -204,25 +206,25 @@ class TestTemplatesResource:
             assert retrieved_template.id == created_template.id
             assert retrieved_template.name == created_template.name
             assert retrieved_template.template == created_template.template
-            assert retrieved_template.translations.es == sms_translations.es
-            assert retrieved_template.translations.it == sms_translations.it
-            assert retrieved_template.translations.fr == sms_translations.fr
+            assert retrieved_template.translations['es'] == sms_translations["es"]
+            assert retrieved_template.translations['it'] == sms_translations["it"]
+            assert retrieved_template.translations['fr'] == sms_translations["fr"]
 
             # Update
-            temporary_template = models.SmsTemplate({
-                "translations": models.SmsTemplateTranslations({
+            temporary_template = models.SmsTemplate(**{
+                "translations": {
                     "de":  "${org.name}: ihre bestätigungscode ist ${code}."
-                })
+                }
             })
             updated_template, _, err = await client.\
-                partial_update_sms_template(
+                update_sms_template(
                     created_template.id, temporary_template)
             assert err is None
             assert updated_template.id == created_template.id
             assert updated_template.name == created_template.name
             assert updated_template.type == created_template.type
-            assert updated_template.translations.de ==\
-                temporary_template.translations.de
+            assert updated_template.translations['de'] ==\
+                temporary_template.translations['de']
 
             # Retrieve
             retrieved_template, _, err = await client.\
@@ -231,15 +233,15 @@ class TestTemplatesResource:
             assert retrieved_template.id == created_template.id
             assert retrieved_template.name == updated_template.name
             assert retrieved_template.template == created_template.template
-            assert retrieved_template.translations.es == sms_translations.es
-            assert retrieved_template.translations.it == sms_translations.it
-            assert retrieved_template.translations.fr == sms_translations.fr
-            assert retrieved_template.translations.de ==\
-                temporary_template.translations.de
+            assert retrieved_template.translations['es'] == sms_translations["es"]
+            assert retrieved_template.translations['it'] == sms_translations["it"]
+            assert retrieved_template.translations['fr'] == sms_translations["fr"]
+            assert retrieved_template.translations['de'] ==\
+                temporary_template.translations['de']
 
         finally:
             # Delete
-            _, err = await client.delete_sms_template(created_template.id)
+            _, _, err = await client.delete_sms_template(created_template.id)
             assert err is None
 
     @pytest.mark.vcr()
@@ -248,15 +250,12 @@ class TestTemplatesResource:
         # Instantiate Mock Client
         client = MockOktaClient(fs)
 
-        # Create SMS Template
-        sms_translations = models.SmsTemplateTranslations()
-        sms_translations.es = \
-            "${org.name}: el código de verificación es ${code}"
-        sms_translations.fr = \
-            "${org.name}: votre code de vérification est ${code}"
-        sms_translations.it = "${org.name}: il codice di verifica è ${code}"
-
-        sms_template_model = models.SmsTemplate({
+        sms_translations = {
+            "es": "${org.name}: el código de verificación es ${code}",
+            "fr": "${org.name}: votre code de vérification est ${code}",
+            "it": "${org.name}: il codice di verifica è ${code}"
+        }
+        sms_template_model = models.SmsTemplate(**{
             "name": f"{TestTemplatesResource.SDK_PREFIX}-test-template",
             "type": models.SmsTemplateType.SMS_VERIFY_CODE,
             "template": "${org.name}: your verification code is ${code}",
@@ -279,12 +278,12 @@ class TestTemplatesResource:
             assert retrieved_template.id == created_template.id
             assert retrieved_template.name == created_template.name
             assert retrieved_template.template == created_template.template
-            assert retrieved_template.translations.es == sms_translations.es
-            assert retrieved_template.translations.it == sms_translations.it
-            assert retrieved_template.translations.fr == sms_translations.fr
+            assert retrieved_template.translations['es'] == sms_translations["es"]
+            assert retrieved_template.translations['it'] == sms_translations["it"]
+            assert retrieved_template.translations['fr'] == sms_translations["fr"]
 
             # Delete
-            _, err = await client.delete_sms_template(created_template.id)
+            _, _, err = await client.delete_sms_template(created_template.id)
             assert err is None
 
             # Retrieve
@@ -292,10 +291,10 @@ class TestTemplatesResource:
                 get_sms_template(created_template.id)
             assert err is not None
             assert isinstance(err, OktaAPIError)
-            assert resp.get_status() == HTTPStatus.NOT_FOUND
+            assert resp.status == HTTPStatus.NOT_FOUND
             assert retrieved_template is None
         finally:
             try:
-                _, err = await client.delete_sms_template(created_template.id)
+                _, _, err = await client.delete_sms_template(created_template.id)
             except Exception:
                 pass

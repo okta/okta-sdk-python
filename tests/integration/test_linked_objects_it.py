@@ -18,14 +18,14 @@ class TestLinkedObjectsResource:
         client = MockOktaClient(fs)
 
         # Add Linked Object definition
-        linked_object_model = models.LinkedObject({
-            "primary": models.LinkedObjectDetails({
+        linked_object_model = models.LinkedObject(**{
+            "primary": models.LinkedObjectDetails(**{
                 "name": f"{TestLinkedObjectsResource.SDK_PREFIX}_primary_test",
                 "title": "Primary",
                 "description": "Primary Link Property",
                 "type": models.LinkedObjectDetailsType.USER
             }),
-            "associated": models.LinkedObjectDetails({
+            "associated": models.LinkedObjectDetails(**{
                 "name": f"{TestLinkedObjectsResource.SDK_PREFIX}_assoc_test",
                 "title": "Associated",
                 "description": "Associated Link Property",
@@ -35,7 +35,7 @@ class TestLinkedObjectsResource:
 
         try:
             created_linked_object_definition, _, err = await client.\
-                add_linked_object_definition(linked_object_model)
+                create_linked_object_definition(linked_object_model)
             assert err is None
             assert isinstance(created_linked_object_definition,
                               models.LinkedObject)
@@ -84,7 +84,7 @@ class TestLinkedObjectsResource:
 
         finally:
             # Delete Linked Object definition
-            _, err = await \
+            _, _, err = await \
                 client.delete_linked_object_definition(
                     linked_object_model.primary.name)
             assert err is None
@@ -96,14 +96,14 @@ class TestLinkedObjectsResource:
         client = MockOktaClient(fs)
 
         # Add Linked Object definition
-        linked_object_model_1 = models.LinkedObject({
-            "primary": models.LinkedObjectDetails({
+        linked_object_model_1 = models.LinkedObject(**{
+            "primary": models.LinkedObjectDetails(**{
                 "name": f"{TestLinkedObjectsResource.SDK_PREFIX}_primary_t1",
                 "title": "Primary",
                 "description": "Primary Link Property",
                 "type": models.LinkedObjectDetailsType.USER
             }),
-            "associated": models.LinkedObjectDetails({
+            "associated": models.LinkedObjectDetails(**{
                 "name": f"{TestLinkedObjectsResource.SDK_PREFIX}_assoc_t1",
                 "title": "Associated",
                 "description": "Associated Link Property",
@@ -111,14 +111,14 @@ class TestLinkedObjectsResource:
             })
         })
 
-        linked_object_model_2 = models.LinkedObject({
-            "primary": models.LinkedObjectDetails({
+        linked_object_model_2 = models.LinkedObject(**{
+            "primary": models.LinkedObjectDetails(**{
                 "name": f"{TestLinkedObjectsResource.SDK_PREFIX}_primary_t2",
                 "title": "Primary",
                 "description": "Primary Link Property",
                 "type": models.LinkedObjectDetailsType.USER
             }),
-            "associated": models.LinkedObjectDetails({
+            "associated": models.LinkedObjectDetails(**{
                 "name": f"{TestLinkedObjectsResource.SDK_PREFIX}_assoc_t2",
                 "title": "Associated",
                 "description": "Associated Link Property",
@@ -128,7 +128,7 @@ class TestLinkedObjectsResource:
 
         try:
             created_linked_object_definition, _, err = await client.\
-                add_linked_object_definition(linked_object_model_1)
+                create_linked_object_definition(linked_object_model_1)
             assert err is None
             assert isinstance(created_linked_object_definition,
                               models.LinkedObject)
@@ -136,7 +136,7 @@ class TestLinkedObjectsResource:
             assert created_linked_object_definition.associated
 
             created_linked_object_definition_2, _, err = await client.\
-                add_linked_object_definition(linked_object_model_2)
+                create_linked_object_definition(linked_object_model_2)
             assert err is None
             assert isinstance(created_linked_object_definition_2,
                               models.LinkedObject)
@@ -157,14 +157,14 @@ class TestLinkedObjectsResource:
             errors = []
             # Delete Linked Object definition
             try:
-                _, err = await \
+                _, _, err = await \
                     client.delete_linked_object_definition(
                         linked_object_model_1.primary.name)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await \
+                _, _, err = await \
                     client.delete_linked_object_definition(
                         linked_object_model_2.primary.name)
                 assert err is None
@@ -179,14 +179,14 @@ class TestLinkedObjectsResource:
         client = MockOktaClient(fs)
 
         # Add Linked Object definition
-        linked_object_model = models.LinkedObject({
-            "primary": models.LinkedObjectDetails({
+        linked_object_model = models.LinkedObject(**{
+            "primary": models.LinkedObjectDetails(**{
                 "name": f"{TestLinkedObjectsResource.SDK_PREFIX}_primary_test",
                 "title": "Primary",
                 "description": "Primary Link Property",
                 "type": models.LinkedObjectDetailsType.USER
             }),
-            "associated": models.LinkedObjectDetails({
+            "associated": models.LinkedObjectDetails(**{
                 "name": f"{TestLinkedObjectsResource.SDK_PREFIX}_assoc_test",
                 "title": "Associated",
                 "description": "Associated Link Property",
@@ -196,7 +196,7 @@ class TestLinkedObjectsResource:
 
         try:
             created_linked_object_definition, _, err = await client.\
-                add_linked_object_definition(linked_object_model)
+                create_linked_object_definition(linked_object_model)
             assert err is None
             assert isinstance(created_linked_object_definition,
                               models.LinkedObject)
@@ -224,7 +224,7 @@ class TestLinkedObjectsResource:
                 created_linked_object_definition.associated.type
 
             # Delete Linked Object definition
-            _, err = await \
+            _, _, err = await \
                 client.delete_linked_object_definition(
                     linked_object_model.primary.name)
 
@@ -234,7 +234,7 @@ class TestLinkedObjectsResource:
                     linked_object_model.primary.name)
             assert err is not None
             assert isinstance(err, OktaAPIError)
-            assert resp.get_status() == HTTPStatus.NOT_FOUND
+            assert resp.status == HTTPStatus.NOT_FOUND
             assert retrieved_linked_object_definition is None
         finally:
             # Delete Linked Object definition

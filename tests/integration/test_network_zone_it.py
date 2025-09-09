@@ -66,7 +66,7 @@ class TestNetworkZoneResource:
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_network_zone(resp.id)
+                _, _,  err = await client.delete_network_zone(resp.id)
             except Exception as exc:
                 errors.append(exc)
             assert len(errors) == 0
@@ -98,10 +98,10 @@ class TestNetworkZoneResource:
         resp, _, err = await client.create_network_zone(network_zone_config)
         assert err is None
         try:
-            new_gateway = NetworkZoneAddress({'type': NetworkZoneAddressType('CIDR'),
+            new_gateway = NetworkZoneAddress(**{'type': NetworkZoneAddressType('CIDR'),
                                               'value': '2.3.4.5/24'})
             resp.gateways.append(new_gateway)
-            resp, _, err = await client.update_network_zone(resp.id, resp)
+            resp, _, err = await client.replace_network_zone(resp.id, resp)
             assert len(resp.gateways) == 2
             assert resp.gateways[1].value == '2.3.4.5/24'
         finally:
@@ -112,7 +112,7 @@ class TestNetworkZoneResource:
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_network_zone(resp.id)
+                _, _,  err = await client.delete_network_zone(resp.id)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)

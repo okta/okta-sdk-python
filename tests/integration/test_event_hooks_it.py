@@ -19,25 +19,25 @@ class TestEventHooksResource:
         client = MockOktaClient(fs)
 
         # create Event Hook
-        event_hook_model = models.EventHook({
+        event_hook_model = models.EventHook(**{
             "name": TestEventHooksResource.EVENT_TYPE,
-            "events": models.EventSubscriptions({
+            "events": models.EventSubscriptions(**{
                 "items": ["user.lifecycle.create",
                           "user.lifecycle.activate"],
                 "type": TestEventHooksResource.EVENT_TYPE
             }),
-            "channel": models.EventHookChannel({
+            "channel": models.EventHookChannel(**{
                 "type": "HTTP",
                 "version": "1.0.0",
-                "config": models.EventHookChannelConfig({
+                "config": models.EventHookChannelConfig(**{
                     "uri": "https://www.example.com/eventHooks",
                     "headers": [
-                        models.EventHookChannelConfigHeader({
+                        models.EventHookChannelConfigHeader(**{
                             "key": "X-Test-Header",
                             "value": "Test Header value"
                         })
                     ],
-                    "authScheme": models.EventHookChannelConfigAuthScheme({
+                    "authScheme": models.EventHookChannelConfigAuthScheme(**{
                         "key": "Authorization",
                         "value": "Test-API-Key",
                         "type": models.EventHookChannelConfigAuthSchemeType
@@ -81,7 +81,7 @@ class TestEventHooksResource:
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_event_hook(created_event_hook.id)
+                _, _, err = await client.delete_event_hook(created_event_hook.id)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -94,25 +94,25 @@ class TestEventHooksResource:
         client = MockOktaClient(fs)
 
         # create Event Hook
-        event_hook_model = models.EventHook({
+        event_hook_model = models.EventHook(**{
             "name": TestEventHooksResource.EVENT_TYPE,
-            "events": models.EventSubscriptions({
+            "events": models.EventSubscriptions(**{
                 "items": ["user.lifecycle.create",
                           "user.lifecycle.activate"],
                 "type": TestEventHooksResource.EVENT_TYPE
             }),
-            "channel": models.EventHookChannel({
+            "channel": models.EventHookChannel(**{
                 "type": "HTTP",
                 "version": "1.0.0",
-                "config": models.EventHookChannelConfig({
+                "config": models.EventHookChannelConfig(**{
                     "uri": "https://www.example.com/eventHooks",
                     "headers": [
-                        models.EventHookChannelConfigHeader({
+                        models.EventHookChannelConfigHeader(**{
                             "key": "X-Test-Header",
                             "value": "Test Header value"
                         })
                     ],
-                    "authScheme": models.EventHookChannelConfigAuthScheme({
+                    "authScheme": models.EventHookChannelConfigAuthScheme(**{
                         "key": "Authorization",
                         "value": "Test-API-Key",
                         "type": models.EventHookChannelConfigAuthSchemeType
@@ -145,26 +145,26 @@ class TestEventHooksResource:
             assert retrieved_event_hook.name == created_event_hook.name
 
             # Update
-            updated_event_hook_model = models.EventHook({
+            updated_event_hook_model = models.EventHook(**{
                 "name": TestEventHooksResource.EVENT_TYPE,
-                "events": models.EventSubscriptions({
+                "events": models.EventSubscriptions(**{
                     "items": ["user.lifecycle.create",
                               "user.lifecycle.activate",
                               "user.lifecycle.deactivate"],  # new
                     "type": TestEventHooksResource.EVENT_TYPE
                 }),
-                "channel": models.EventHookChannel({
+                "channel": models.EventHookChannel(**{
                     "type": "HTTP",
                     "version": "1.0.0",
-                    "config": models.EventHookChannelConfig({
+                    "config": models.EventHookChannelConfig(**{
                         "uri": "https://www.example.com/eventHooks-UPDATE",  # new
                         "headers": [
-                            models.EventHookChannelConfigHeader({
+                            models.EventHookChannelConfigHeader(**{
                                 "key": "X-Test-Header",
                                 "value": "Test Header value updated"  # new
                             })
                         ],
-                        "authScheme": models.EventHookChannelConfigAuthScheme({
+                        "authScheme": models.EventHookChannelConfigAuthScheme(**{
                             "key": "Authorization",
                             "value": "Test-API-Key-updated",  # new
                             "type": models.EventHookChannelConfigAuthSchemeType
@@ -173,7 +173,7 @@ class TestEventHooksResource:
                     })
                 })
             })
-            updated_event_hook, _, err = await client.update_event_hook(
+            updated_event_hook, _, err = await client.replace_event_hook(
                 created_event_hook.id, updated_event_hook_model
             )
             assert err is None
@@ -203,7 +203,7 @@ class TestEventHooksResource:
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_event_hook(created_event_hook.id)
+                _, _, err = await client.delete_event_hook(created_event_hook.id)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -216,25 +216,25 @@ class TestEventHooksResource:
         client = MockOktaClient(fs)
 
         # create Event Hook
-        event_hook_model = models.EventHook({
+        event_hook_model = models.EventHook(**{
             "name": TestEventHooksResource.EVENT_TYPE,
-            "events": models.EventSubscriptions({
+            "events": models.EventSubscriptions(**{
                 "items": ["user.lifecycle.create",
                           "user.lifecycle.activate"],
                 "type": TestEventHooksResource.EVENT_TYPE
             }),
-            "channel": models.EventHookChannel({
+            "channel": models.EventHookChannel(**{
                 "type": "HTTP",
                 "version": "1.0.0",
-                "config": models.EventHookChannelConfig({
+                "config": models.EventHookChannelConfig(**{
                     "uri": "https://www.example.com/eventHooks",
                     "headers": [
-                        models.EventHookChannelConfigHeader({
+                        models.EventHookChannelConfigHeader(**{
                             "key": "X-Test-Header",
                             "value": "Test Header value"
                         })
                     ],
-                    "authScheme": models.EventHookChannelConfigAuthScheme({
+                    "authScheme": models.EventHookChannelConfigAuthScheme(**{
                         "key": "Authorization",
                         "value": "Test-API-Key",
                         "type": models.EventHookChannelConfigAuthSchemeType
@@ -269,7 +269,7 @@ class TestEventHooksResource:
             # Deactivate + Delete
             _, _, err = await client.deactivate_event_hook(created_event_hook.id)
             assert err is None
-            _, err = await client.delete_event_hook(created_event_hook.id)
+            _, _, err = await client.delete_event_hook(created_event_hook.id)
             assert err is None
 
             # Retrieve for validation
@@ -277,7 +277,7 @@ class TestEventHooksResource:
                 created_event_hook.id)
             assert err is not None
             assert isinstance(err, OktaAPIError)
-            assert resp.get_status() == HTTPStatus.NOT_FOUND
+            assert resp.status == HTTPStatus.NOT_FOUND
             assert retrieved_event_hook is None
 
         finally:
@@ -303,25 +303,25 @@ class TestEventHooksResource:
 
             # create Event Hooks
             for index in range(EVENT_HOOKS_COUNT):
-                event_hook_model = models.EventHook({
+                event_hook_model = models.EventHook(**{
                     "name": TestEventHooksResource.EVENT_TYPE + str(index),
-                    "events": models.EventSubscriptions({
+                    "events": models.EventSubscriptions(**{
                         "items": ["user.lifecycle.create",
                                   "user.lifecycle.activate"],
                         "type": TestEventHooksResource.EVENT_TYPE
                     }),
-                    "channel": models.EventHookChannel({
+                    "channel": models.EventHookChannel(**{
                         "type": "HTTP",
                         "version": "1.0.0",
-                        "config": models.EventHookChannelConfig({
+                        "config": models.EventHookChannelConfig(**{
                             "uri": "https://www.example.com/eventHooks",
                             "headers": [
-                                models.EventHookChannelConfigHeader({
+                                models.EventHookChannelConfigHeader(**{
                                     "key": "X-Test-Header",
                                     "value": "Test Header value"
                                 })
                             ],
-                            "authScheme": models.EventHookChannelConfigAuthScheme({
+                            "authScheme": models.EventHookChannelConfigAuthScheme(**{
                                 "key": "Authorization",
                                 "value": "Test-API-Key",
                                 "type": models.EventHookChannelConfigAuthSchemeType
@@ -364,7 +364,7 @@ class TestEventHooksResource:
                 except Exception as exc:
                     errors.append(exc)
                 try:
-                    _, err = await client.delete_event_hook(event_hook_id)
+                    _, _, err = await client.delete_event_hook(event_hook_id)
                     assert err is None
                 except Exception as exc:
                     errors.append(exc)
@@ -377,25 +377,25 @@ class TestEventHooksResource:
         client = MockOktaClient(fs)
 
         # create Event Hook
-        event_hook_model = models.EventHook({
+        event_hook_model = models.EventHook(**{
             "name": TestEventHooksResource.EVENT_TYPE,
-            "events": models.EventSubscriptions({
+            "events": models.EventSubscriptions(**{
                 "items": ["user.lifecycle.create",
                           "user.lifecycle.activate"],
                 "type": TestEventHooksResource.EVENT_TYPE
             }),
-            "channel": models.EventHookChannel({
+            "channel": models.EventHookChannel(**{
                 "type": "HTTP",
                 "version": "1.0.0",
-                "config": models.EventHookChannelConfig({
+                "config": models.EventHookChannelConfig(**{
                     "uri": "https://www.example.com/eventHooks",
                     "headers": [
-                        models.EventHookChannelConfigHeader({
+                        models.EventHookChannelConfigHeader(**{
                             "key": "X-Test-Header",
                             "value": "Test Header value"
                         })
                     ],
-                    "authScheme": models.EventHookChannelConfigAuthScheme({
+                    "authScheme": models.EventHookChannelConfigAuthScheme(**{
                         "key": "Authorization",
                         "value": "Test-API-Key",
                         "type": models.EventHookChannelConfigAuthSchemeType
@@ -450,7 +450,7 @@ class TestEventHooksResource:
             except Exception:
                 pass
             try:
-                _, err = await client.delete_event_hook(created_event_hook.id)
+                _, _, err = await client.delete_event_hook(created_event_hook.id)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -463,25 +463,25 @@ class TestEventHooksResource:
         client = MockOktaClient(fs)
 
         # create Event Hook
-        event_hook_model = models.EventHook({
+        event_hook_model = models.EventHook(**{
             "name": TestEventHooksResource.EVENT_TYPE,
-            "events": models.EventSubscriptions({
+            "events": models.EventSubscriptions(**{
                 "items": ["user.lifecycle.create",
                           "user.lifecycle.activate"],
                 "type": TestEventHooksResource.EVENT_TYPE
             }),
-            "channel": models.EventHookChannel({
+            "channel": models.EventHookChannel(**{
                 "type": "HTTP",
                 "version": "1.0.0",
-                "config": models.EventHookChannelConfig({
+                "config": models.EventHookChannelConfig(**{
                     "uri": "https://www.example.com/eventHooks",
                     "headers": [
-                        models.EventHookChannelConfigHeader({
+                        models.EventHookChannelConfigHeader(**{
                             "key": "X-Test-Header",
                             "value": "Test Header value"
                         })
                     ],
-                    "authScheme": models.EventHookChannelConfigAuthScheme({
+                    "authScheme": models.EventHookChannelConfigAuthScheme(**{
                         "key": "Authorization",
                         "value": "Test-API-Key",
                         "type": models.EventHookChannelConfigAuthSchemeType
@@ -551,7 +551,7 @@ class TestEventHooksResource:
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_event_hook(created_event_hook.id)
+                _, _, err = await client.delete_event_hook(created_event_hook.id)
                 assert err is None
             except Exception as exc:
                 errors.append(exc)

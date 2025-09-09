@@ -53,21 +53,21 @@ class TestUserSchemaResource:
                 'description': 'test custom user attribute',
                 'minLength': 1,
                 'maxLength': 20,
-                'permissions': [models.UserSchemaAttributePermission({
+                'permissions': [models.UserSchemaAttributePermission(**{
                                    'action': 'READ_WRITE',
                                    'principal': 'SELF'
                                })]
             }
 
-            custom_attr = models.UserSchemaAttribute(attr_config)
-            user_schema.definitions.custom.properties = {'testCustomAttribute': custom_attr.as_dict()}
+            custom_attr = models.UserSchemaAttribute(**attr_config)
+            user_schema.definitions.custom.properties = {'testCustomAttribute': custom_attr.to_dict()}
 
             # Update user schema
             updated_user_schema, _, err = await client.update_user_profile('default', user_schema)
             assert err is None
 
             # Check custom attribute
-            assert updated_user_schema.definitions.custom.properties['testCustomAttribute']['title'] == 'Test Custom User Attribute'
+            assert updated_user_schema.definitions.custom.properties['testCustomAttribute'].title == 'Test Custom User Attribute'
         finally:
             errors = []
             try:

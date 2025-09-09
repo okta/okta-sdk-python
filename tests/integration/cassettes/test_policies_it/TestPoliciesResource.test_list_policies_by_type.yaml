@@ -123,7 +123,7 @@ interactions:
       User-Agent:
       - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
     method: GET
-    uri: https://test.okta.com/api/v1/policies/?type=OKTA_SIGN_ON
+    uri: https://test.okta.com/api/v1/policies?type=OKTA_SIGN_ON
   response:
     body:
       string: '[{"type":"OKTA_SIGN_ON","id":"00psfahlcayCvwDRS4x6","status":"ACTIVE","name":"python_sdk
@@ -169,7 +169,7 @@ interactions:
     status:
       code: 200
       message: OK
-    url: https://test.okta.com/api/v1/policies/?type=OKTA_SIGN_ON
+    url: https://test.okta.com/api/v1/policies?type=OKTA_SIGN_ON
 - request:
     body: null
     headers:
@@ -182,7 +182,7 @@ interactions:
       User-Agent:
       - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
     method: GET
-    uri: https://test.okta.com/api/v1/policies/?type=PASSWORD
+    uri: https://test.okta.com/api/v1/policies?type=PASSWORD
   response:
     body:
       string: '[{"type":"PASSWORD","id":"00psfap3zS70scb624x6","status":"ACTIVE","name":"python_sdk
@@ -228,7 +228,7 @@ interactions:
     status:
       code: 200
       message: OK
-    url: https://test.okta.com/api/v1/policies/?type=PASSWORD
+    url: https://test.okta.com/api/v1/policies?type=PASSWORD
 - request:
     body: null
     headers:
