@@ -1,7 +1,0 @@
-# flake8: noqa
-{{> partials.copyrightHeader }}
-
-{{#each models as |model|}}
-from okta.models import {{snakeCase model.modelName}} as {{snakeCase model.modelName}}
-{{pascalCase model.modelName}} = {{snakeCase model.modelName}}.{{pascalCase model.modelName}}
-{{/each}}
