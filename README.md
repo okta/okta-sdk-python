@@ -16,12 +16,11 @@ Python 3.7+
 ## Installation & Usage
 ### pip install
 
-If the python package is hosted on a repository, you can install directly using:
+If the repository is cloned, you can install directly using the below command at root directory (where `setup.py` is located):
 
 ```sh
-pip install git+https://github.com/GIT_USER_ID/GIT_REPO_ID.git
+pip install -e .
 ```
-(you may need to run `pip` with root permission: `sudo pip install git+https://github.com/GIT_USER_ID/GIT_REPO_ID.git`)
 
 Then import the package:
 ```python
@@ -52,45 +51,53 @@ Please follow the [installation procedure](#installation--usage) and then run th
 
 ```python
 
-import okta
-from okta.rest import ApiException
-from pprint import pprint
+import asyncio
+from okta import UserProfile, PasswordCredential, CreateUserRequest, UserNextLogin, UserCredentials
+from okta.client import Client as OktaClient
+config = {
+    'orgUrl': 'https://{your_org}.okta.com',
+    'token': 'YOUR_API_TOKEN',
+}
 
-# Defining the host is optional and defaults to https://subdomain.okta.com
-# See configuration.py for a list of all supported configuration parameters.
-configuration = okta.Configuration(
-    host = "https://subdomain.okta.com"
-)
+okta_client = OktaClient(config)
+user_config = {
+    "firstName": "Sample",
+    "lastName": "Sample",
+    "email": "sample12.sample@example.com",
+    "login": "sample12.sample@example.com",
+    "mobilePhone": "555-415-1337"
+  }
+user_profile = UserProfile(**user_config)
 
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
+password_value = {
+    "value": "Knock*knock*neo*111"
+}
+password_credential = PasswordCredential(**password_value)
+user_credentials = {
+    "password": password_credential
+}
+user_credentials = UserCredentials(**user_credentials)
+create_user_request = {
+    "profile": user_profile,
+    "credentials": user_credentials,
+}
+user_request = CreateUserRequest(**create_user_request)
+async def users():
+    next_login = UserNextLogin(UserNextLogin.CHANGEPASSWORD)
+    user, resp, err = await okta_client.create_user(user_request, activate=True, provider=False, next_login=next_login)
+    print("The response of UserApi->create_user:\n")
+    print(user)
+    print(resp, err)
 
-# Configure API key authorization: apiToken
-configuration.api_key['apiToken'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['apiToken'] = 'Bearer'
-
-configuration.access_token = os.environ["ACCESS_TOKEN"]
-
-
-# Enter a context with an instance of the API client
-with okta.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = okta.AgentPoolsApi(api_client)
-    pool_id = 'pool_id_example' # str | Id of the agent pool for which the settings will apply
-    update_id = 'update_id_example' # str | Id of the update
-
-    try:
-        # Activate an Agent Pool update
-        api_response = api_instance.activate_agent_pools_update(pool_id, update_id)
-        print("The response of AgentPoolsApi->activate_agent_pools_update:\n")
-        pprint(api_response)
-    except ApiException as e:
-        print("Exception when calling AgentPoolsApi->activate_agent_pools_update: %s\n" % e)
-
+    users, resp, err = await okta_client.list_users()
+    for user in users:
+        print(user.profile.first_name, user.profile.last_name)
+        try:
+            print(user.profile.customAttr)
+        except:
+            print('User has no customAttr')
+loop = asyncio.get_event_loop()
+loop.run_until_complete(users())
 ```
 
 ## Documentation for API Endpoints
