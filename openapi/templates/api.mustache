@@ -64,7 +64,14 @@ class {{classname}}(ApiClient):
         {{/returnType}}
 
         if response_body == '' or response.status == 204:
-            return (None, response, None)
+            response_data = RESTResponse(response)
+            resp = ApiResponse(
+                status_code=response_data.status,
+                data=None,
+                headers=response_data.getheaders(),
+                raw_data=b''
+            )
+            return (None, resp, None)
         else:
             response_body = response_body.encode('utf-8')
 
@@ -112,34 +119,43 @@ class {{classname}}(ApiClient):
         {{#returnType}}
         if {{returnType}} is Success:
             response, response_body, error = await self._request_executor.execute(request)
-            response_body = response_body.encode('utf-8')
         else:
             response, response_body, error = await self._request_executor.execute(request, {{returnBaseType}})
-            response_body = response_body.encode('utf-8')
         {{/returnType}}
         {{^returnType}}
         response, response_body, error = await self._request_executor.execute(request)
-        response_body = response_body.encode('utf-8')
         {{/returnType}}
 
-        if error:
-            {{#returnType}}
-            if {{returnType}} is Success:
-                return (response, error)
-            else:
-                return (None, response, error)
-            {{/returnType}}
-            {{^returnType}}
-            return (response, error)
-            {{/returnType}}
+        if response_body == '' or response.status == 204:
+            response_data = RESTResponse(response)
+            resp = ApiResponse(
+                status_code=response_data.status,
+                data=None,
+                headers=response_data.getheaders(),
+                raw_data=b''
+            )
+            return (None, resp, None)
+        else:
+            response_body = response_body.encode('utf-8')
 
-        response_data = RESTResponse(response)
-        response_data.read(response_body)
-        resp = self.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-        return (resp.data, resp, None)
+            if error:
+                {{#returnType}}
+                if {{returnType}} is Success:
+                    return (response, error)
+                else:
+                    return (None, response, error)
+                {{/returnType}}
+                {{^returnType}}
+                return (response, error)
+                {{/returnType}}
+
+            response_data = RESTResponse(response)
+            response_data.read(response_body)
+            resp = self.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+            return (resp.data, resp, None)
 
 
     @validate_call
@@ -166,34 +182,43 @@ class {{classname}}(ApiClient):
         {{#returnType}}
         if {{returnType}} is Success:
             response, response_body, error = await self._request_executor.execute(request)
-            response_body = response_body.encode('utf-8')
         else:
             response, response_body, error = await self._request_executor.execute(request, {{returnBaseType}})
-            response_body = response_body.encode('utf-8')
         {{/returnType}}
         {{^returnType}}
         response, response_body, error = await self._request_executor.execute(request)
-        response_body = response_body.encode('utf-8')
         {{/returnType}}
 
-        if error:
-            {{#returnType}}
-            if {{returnType}} is Success:
-                return (response, error)
-            else:
-                return (None, response, error)
-            {{/returnType}}
-            {{^returnType}}
-            return (response, error)
-            {{/returnType}}
+        if response_body == '' or response.status == 204:
+            response_data = RESTResponse(response)
+            resp = ApiResponse(
+                status_code=response_data.status,
+                data=None,
+                headers=response_data.getheaders(),
+                raw_data=b''
+            )
+            return (None, resp, None)
+        else:
+            response_body = response_body.encode('utf-8')
 
-        response_data = RESTResponse(response)
-        response_data.read(response_body)
-        resp = self.response_deserialize(
-            response_data=response_data,
-            response_types_map=_response_types_map,
-        )
-        return (resp.data, resp, None)
+            if error:
+                {{#returnType}}
+                if {{returnType}} is Success:
+                    return (response, error)
+                else:
+                    return (None, response, error)
+                {{/returnType}}
+                {{^returnType}}
+                return (response, error)
+                {{/returnType}}
+
+            response_data = RESTResponse(response)
+            response_data.read(response_body)
+            resp = self.response_deserialize(
+                response_data=response_data,
+                response_types_map=_response_types_map,
+            )
+            return (resp.data, resp, None)
 
 
     def _{{operationId}}_serialize(

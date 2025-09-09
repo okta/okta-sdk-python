@@ -1,20 +1,7 @@
-aiohttp
-flatdict
-pyyaml
-xmltodict
-yarl
-pycryptodomex
-jwcrypto
-pyjwt
-aenum
-pydash
-flake8
-
-# Testing dependencies
-pytest
-pytest-asyncio
-pytest-mock
-pytest-recording
-pyfakefs
-aenum
-pydash
+python_dateutil >= 2.5.3
+setuptools >= 21.0.0
+urllib3 >= 1.25.3, < 2.1.0
+pydantic >= 2
+typing-extensions >= 4.7.1
+pyyaml >= 6.0.1
+blinker >= 1.8.2
