@@ -2232,3 +2232,192 @@ class TestApplicationsResource:
     #         _, err = await client.deactivate_application(app.id)
     #         _, err = await client.delete_application(app.id)
     #         assert err is None
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_replace_application(self, fs):
+        """Test replace_application method to increase coverage"""
+        # Instantiate Mock Client
+        client = MockOktaClient(fs)
+
+        # Create Bookmark Application Object
+        APP_URL = "https://example.com/bookmark.htm"
+        APP_LABEL = "ReplaceBookmarkApp"
+        app_settings_app = models.BookmarkApplicationSettingsApplication(**{
+            "requestIntegration": False,
+            "url": APP_URL
+        })
+        app_settings = models.BookmarkApplicationSettings(**{
+            "app": app_settings_app
+        })
+        bookmark_app_obj = models.BookmarkApplication(**{
+            "label": APP_LABEL,
+            "settings": app_settings
+        })
+
+        try:
+            # Create App in org
+            app, _, err = await client.create_application(bookmark_app_obj)
+            assert err is None
+            assert isinstance(app, models.Application)
+            assert isinstance(app, models.BookmarkApplication)
+
+            # Update app properties for replacement
+            UPDATED_LABEL = "ReplacedBookmarkApp"
+            UPDATED_URL = "https://example.com/updated-bookmark.htm"
+
+            app.label = UPDATED_LABEL
+            app.settings.app.url = UPDATED_URL
+
+            # Replace the application
+            replaced_app, _, err = await client.replace_application(app.id, app)
+            assert err is None
+            assert isinstance(replaced_app, models.Application)
+            assert replaced_app.label == UPDATED_LABEL
+            assert replaced_app.settings.app.url == UPDATED_URL
+
+            # Verify the replacement worked
+            found_app, _, err = await client.get_application(app.id)
+            assert err is None
+            assert found_app.label == UPDATED_LABEL
+            assert found_app.settings.app.url == UPDATED_URL
+
+        finally:
+            errors = []
+            # Deactivate & Delete created app
+            try:
+                _, _, err = await client.deactivate_application(app.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            try:
+                _, _, err = await client.delete_application(app.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_application_with_http_info_methods(self, fs):
+        """Test _with_http_info method variants to increase coverage"""
+        # Instantiate Mock Client
+        client = MockOktaClient(fs)
+
+        # Create Bookmark Application Object
+        APP_URL = "https://example.com/bookmark-http-info.htm"
+        APP_LABEL = "HttpInfoBookmarkApp"
+        app_settings_app = models.BookmarkApplicationSettingsApplication(**{
+            "requestIntegration": False,
+            "url": APP_URL
+        })
+        app_settings = models.BookmarkApplicationSettings(**{
+            "app": app_settings_app
+        })
+        bookmark_app_obj = models.BookmarkApplication(**{
+            "label": APP_LABEL,
+            "settings": app_settings
+        })
+
+        try:
+            # Test create_application_with_http_info
+            app, resp, err = await client.create_application_with_http_info(bookmark_app_obj)
+            assert err is None
+            assert resp.status_code == 200
+            assert isinstance(app, models.Application)
+
+            # Test get_application_with_http_info
+            found_app, resp, err = await client.get_application_with_http_info(app.id)
+            assert err is None
+            assert resp.status_code == 200
+            assert found_app.id == app.id
+
+            # Test activate_application_with_http_info
+            activated_app, resp, err = await client.activate_application_with_http_info(app.id)
+            assert err is None
+            assert resp.status_code == 200
+
+            # Test deactivate_application_with_http_info
+            deactivated_app, resp, err = await client.deactivate_application_with_http_info(app.id)
+            assert err is None
+            assert resp.status_code == 200
+
+            # Test replace_application_with_http_info
+            app.label = "UpdatedHttpInfoApp"
+            replaced_app, resp, err = await client.replace_application_with_http_info(app.id, app)
+            assert err is None
+            assert resp.status_code == 200
+            assert replaced_app.label == "UpdatedHttpInfoApp"
+
+        finally:
+            errors = []
+            # Deactivate & Delete created app
+            try:
+                _, resp, err = await client.deactivate_application_with_http_info(app.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            try:
+                success, resp, err = await client.delete_application_with_http_info(app.id)
+                assert err is None
+                assert resp.status_code == 204
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_list_applications_with_http_info(self, fs):
+        """Test list_applications_with_http_info method separately to increase coverage"""
+        # Instantiate Mock Client
+        client = MockOktaClient(fs)
+
+        # Create Bookmark Application Object for testing
+        APP_URL = "https://example.com/bookmark-list-test.htm"
+        APP_LABEL = "ListTestBookmarkApp"
+        app_settings_app = models.BookmarkApplicationSettingsApplication(**{
+            "requestIntegration": False,
+            "url": APP_URL
+        })
+        app_settings = models.BookmarkApplicationSettings(**{
+            "app": app_settings_app
+        })
+        bookmark_app_obj = models.BookmarkApplication(**{
+            "label": APP_LABEL,
+            "settings": app_settings
+        })
+
+        try:
+            # Create a test application first
+            app, _, err = await client.create_application(bookmark_app_obj)
+            assert err is None
+            assert isinstance(app, models.Application)
+
+            # Test list_applications_with_http_info with filter to avoid problematic apps
+            apps_list, resp, err = await client.list_applications_with_http_info(
+                q=APP_LABEL,  # Filter by our test app label
+                limit=1       # Limit results to avoid other problematic apps
+            )
+            assert err is None
+            assert resp.status_code == 200
+            assert isinstance(apps_list, list)
+            assert len(apps_list) >= 1
+            # Verify our test app is in the results
+            found_test_app = any(app_item.label == APP_LABEL for app_item in apps_list)
+            assert found_test_app
+
+        finally:
+            errors = []
+            # Deactivate & Delete created app
+            try:
+                _, _, err = await client.deactivate_application(app.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            try:
+                _, _, err = await client.delete_application(app.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0
+

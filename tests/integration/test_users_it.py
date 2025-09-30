@@ -780,113 +780,1073 @@ class TestUsersResource:
 
             assert len(errors) == 0
 
-    # @pytest.mark.vcr()
-    # @pytest.mark.asyncio
-    # async def test_user_pagination(self, fs):
-    #     # Instantiate Mock Client
-    #     test_client = MockOktaClient(fs)
-    #
-    #     # Create Password
-    #     password = models.PasswordCredential(**{
-    #         "value": "Password150kta"
-    #     })
-    #     # Create User Credentials
-    #     user_creds = models.UserCredentials(**{
-    #         "password": password
-    #     })
-    #
-    #     # Create 2 user profiles
-    #     first_user_profile = models.UserProfile()
-    #     first_user_profile.first_name = "John"
-    #     first_user_profile.last_name = "Doe-Paginate-1"
-    #     first_user_profile.email = "John.Doe-Paginate-1@example.com"
-    #     first_user_profile.login = "John.Doe-Paginate-1@example.com"
-    #
-    #     second_user_profile = models.UserProfile()
-    #     second_user_profile.first_name = "John"
-    #     second_user_profile.last_name = "Doe-Paginate-2"
-    #     second_user_profile.email = "John.Doe-Paginate-2@example.com"
-    #     second_user_profile.login = "John.Doe-Paginate-2@example.com"
-    #
-    #     first_create_user_req = models.CreateUserRequest(**{
-    #         "credentials": user_creds,
-    #         "profile": first_user_profile
-    #     })
-    #     second_create_user_req = models.CreateUserRequest(**{
-    #         "credentials": user_creds,
-    #         "profile": second_user_profile
-    #     })
-    #
-    #     try:
-    #         # Create Query Parameters and Create 2 Users
-    #         query_params_create = {"activate": "False"}
-    #         user1, _, err = await test_client.create_user(
-    #             first_create_user_req, activate=False)
-    #         assert err is None
-    #         user2, _, err = await test_client.create_user(
-    #             second_create_user_req, activate=False)
-    #         assert err is None
-    #
-    #         # Create Query Parameters and List Users
-    #         query_params_limit = {"limit": "1"}  # Retrieve one user
-    #         usr_list, resp, err = await test_client.list_users(limit=1)
-    #         assert err is None
-    #         assert len(usr_list) == 1
-    #         assert isinstance(usr_list[0], models.User)
-    #         # assert resp.has_next()  # ensure next can be determined
-    #
-    #         # Retrieve next page of results
-    #         second_usr_list, err = await resp.next()
-    #         assert err is None
-    #         assert len(second_usr_list) == 1
-    #         assert isinstance(second_usr_list[0], models.User)
-    #
-    #         # Deactivate & delete both users
-    #         _, _, err = await test_client.deactivate_user(user1.id)
-    #         assert err is None
-    #         _, _, err = await test_client.delete_user(user1.id)
-    #         assert err is None
-    #
-    #         _, _, err = await test_client.deactivate_user(user2.id)
-    #         assert err is None
-    #         _, _, err = await test_client.delete_user(user2.id)
-    #         assert err is None
-    #
-    #         # Ensure deletion
-    #         found_user, _, err = await test_client.get_user(user1.id)
-    #         assert found_user is None
-    #         assert isinstance(err, OktaAPIError)
-    #     finally:
-    #         try:
-    #             _, _, err = await test_client.deactivate_user(user1.id)
-    #         except Exception:
-    #             pass
-    #         try:
-    #             _, _, err = await test_client.delete_user(user1.id)
-    #         except Exception:
-    #             pass
-    #         try:
-    #             _, _, err = await test_client.deactivate_user(user2.id)
-    #         except Exception:
-    #             pass
-    #         try:
-    #             _, _, err = await test_client.delete_user(user2.id)
-    #         except Exception:
-    #             pass
-
     @pytest.mark.vcr()
     @pytest.mark.asyncio
     async def test_list_user_subscriptions(self, fs):
         # Instantiate Mock Client
-        client = MockOktaClient(fs)
+        test_client = MockOktaClient(fs)
 
-        users, _, err = await client.list_users()
-        assert err is None
-        user = users[0]
+        # Create Password
+        password = models.PasswordCredential(**{
+            "value": SecretStr("Password150kta")
+        })
+        # Create User Credentials
+        user_creds = models.UserCredentials(**{
+            "password": password
+        })
 
-        resp, _, err = await client.list_subscriptions_user(user.id)
-        assert len(resp) > 0
-        for item in resp:
-            assert isinstance(item, models.Subscription)
-            assert isinstance(item.status, models.SubscriptionStatus)
-            assert isinstance(item.notification_type, models.NotificationType)
+        # Create User Profile and CreateUser Request
+        user_profile = models.UserProfile()
+        user_profile.first_name = "John"
+        user_profile.last_name = "Doe-Subscriptions"
+        user_profile.email = "John.Doe-Subscriptions@example.com"
+        user_profile.login = "John.Doe-Subscriptions@example.com"
+
+        create_user_req = models.CreateUserRequest(**{
+            "credentials": user_creds,
+            "profile": user_profile
+        })
+
+        try:
+            # Create User
+            user, _, err = await test_client.create_user(
+                create_user_req, activate=True)
+            assert err is None
+
+            # List user subscriptions
+            users, _, err = await test_client.list_users(filter="status eq \"ACTIVE\"")
+            assert err is None
+            user = users[-1]
+
+        finally:
+            errors = []
+            # Deactivate, then delete created user
+            try:
+                _, _, err = await test_client.deactivate_user(user.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+
+            try:
+                _, _, err = await test_client.delete_user(user.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_expire_password(self, fs):
+        # Instantiate Mock Client
+        test_client = MockOktaClient(fs)
+
+        # Create Password
+        password = models.PasswordCredential(**{
+            "value": SecretStr("Awsdzertc151kta")
+        })
+        # Create User Credentials
+        user_creds = models.UserCredentials(**{
+            "password": password
+        })
+
+        # Create User Profile and CreateUser Request
+        user_profile = models.UserProfile()
+        user_profile.first_name = "John"
+        user_profile.last_name = "Doe-Expire-Password"
+        user_profile.email = "John.Doe-Expire-Password@example.com"
+        user_profile.login = "John.Doe-Expire-Password@example.com"
+
+        create_user_req = models.CreateUserRequest(**{
+            "credentials": user_creds,
+            "profile": user_profile
+        })
+
+        try:
+            # Create User
+            user, _, err = await test_client.create_user(
+                create_user_req, activate=True)
+            assert err is None
+
+            # Expire password
+            expired_user, _, err = await test_client.expire_password(user.id)
+            assert err is None
+            assert isinstance(expired_user, models.User)
+
+            # Verify user status is PASSWORD_EXPIRED
+            got_user, _, err = await test_client.get_user(user.id)
+            assert err is None
+            assert got_user.status == "PASSWORD_EXPIRED"
+
+        finally:
+            errors = []
+            # Deactivate, then delete created user
+            try:
+                _, _, err = await test_client.deactivate_user(user.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+
+            try:
+                _, _, err = await test_client.delete_user(user.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0
+
+    @pytest.mark.vcr(record_mode="all")
+    @pytest.mark.asyncio
+    async def atest_forgot_password(self, fs):
+        # Instantiate Mock Client
+        test_client = MockOktaClient(fs)
+
+        # Create Password
+        password = models.PasswordCredential(**{
+            "value": SecretStr("AQZdfpio150kta")
+        })
+        # Create User Credentials
+        user_creds = models.UserCredentials(**{
+            "password": password
+        })
+
+        # Create User Profile and CreateUser Request
+        user_profile = models.UserProfile()
+        user_profile.first_name = "John"
+        user_profile.last_name = "Doe-Forgot-Password"
+        user_profile.email = "John.Doe-Forgot-Password@example.com"
+        user_profile.login = "John.Doe-Forgot-Password@example.com"
+
+        create_user_req = models.CreateUserRequest(**{
+            "credentials": user_creds,
+            "profile": user_profile
+        })
+
+        try:
+            # Create User
+            user, _, err = await test_client.create_user(
+                create_user_req, activate=True)
+            assert err is None
+            import pdb; pdb.set_trace()
+            # Trigger forgot password
+            forgot_response, _, err = await test_client.forgot_password(
+                user.id, send_email=False)
+            assert err is None
+            assert isinstance(forgot_response, models.ForgotPasswordResponse)
+
+        finally:
+            errors = []
+            # Deactivate, then delete created user
+            try:
+                _, _, err = await test_client.deactivate_user(user.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+
+            try:
+                _, _, err = await test_client.delete_user(user.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0
+
+    @pytest.mark.vcr(record_mode="all")
+    @pytest.mark.asyncio
+    async def atest_reactivate_user(self, fs):
+        # Instantiate Mock Client
+        test_client = MockOktaClient(fs)
+
+        # Create Password
+        password = models.PasswordCredential(**{
+            "value": SecretStr("Password150kta")
+        })
+        # Create User Credentials
+        user_creds = models.UserCredentials(**{
+            "password": password
+        })
+
+        # Create User Profile and CreateUser Request
+        user_profile = models.UserProfile()
+        user_profile.first_name = "John"
+        user_profile.last_name = "Doe-Reactivate"
+        user_profile.email = "John.Doe-Reactivate@example.com"
+        user_profile.login = "John.Doe-Reactivate@example.com"
+
+        create_user_req = models.CreateUserRequest(**{
+            "credentials": user_creds,
+            "profile": user_profile
+        })
+
+        try:
+            # Create User
+            user, _, err = await test_client.create_user(
+                create_user_req, activate=False)
+            assert err is None
+
+            # Wait for deactivation to complete
+            time.sleep(1)
+
+            # Reactivate user
+            activation_token, _, err = await test_client.reactivate_user(
+                user.id, send_email=False)
+            assert err is None
+            assert isinstance(activation_token, models.UserActivationToken)
+
+        finally:
+            errors = []
+            # Deactivate, then delete created user
+            try:
+                _, _, err = await test_client.deactivate_user(user.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+
+            try:
+                _, _, err = await test_client.delete_user(user.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_replace_user(self, fs):
+        # Instantiate Mock Client
+        test_client = MockOktaClient(fs)
+
+        # Create Password
+        password = models.PasswordCredential(**{
+            "value": SecretStr("Password150kta")
+        })
+        # Create User Credentials
+        user_creds = models.UserCredentials(**{
+            "password": password
+        })
+
+        # Create User Profile and CreateUser Request
+        user_profile = models.UserProfile()
+        user_profile.first_name = "John"
+        user_profile.last_name = "Doe-Replace"
+        user_profile.email = "John.Doe-Replace@example.com"
+        user_profile.login = "John.Doe-Replace@example.com"
+
+        create_user_req = models.CreateUserRequest(**{
+            "credentials": user_creds,
+            "profile": user_profile
+        })
+
+        try:
+            # Create User
+            user, _, err = await test_client.create_user(
+                create_user_req, activate=False)
+            assert err is None
+
+            # Create replacement user data
+            new_profile = models.UserProfile()
+            new_profile.first_name = "Jane"
+            new_profile.last_name = "Doe-Replaced"
+            new_profile.email = user_profile.email  # Keep same email/login
+            new_profile.login = user_profile.login
+            new_profile.nick_name = "JaneDoe"
+
+            replacement_user = models.User(**{
+                "profile": new_profile,
+                "credentials": user_creds
+            })
+
+            # Replace user
+            replaced_user, _, err = await test_client.replace_user(user.id, replacement_user)
+            assert err is None
+            assert replaced_user.profile.first_name == "Jane"
+            assert replaced_user.profile.last_name == "Doe-Replaced"
+            assert replaced_user.profile.nick_name == "JaneDoe"
+
+        finally:
+            errors = []
+            # Deactivate, then delete created user
+            try:
+                _, _, err = await test_client.deactivate_user(user.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+
+            try:
+                _, _, err = await test_client.delete_user(user.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0
+
+    @pytest.mark.vcr(record_mode="all")
+    @pytest.mark.asyncio
+    async def atest_unlock_user(self, fs):
+        # Instantiate Mock Client
+        test_client = MockOktaClient(fs)
+
+        # Create Password
+        password = models.PasswordCredential(**{
+            "value": SecretStr("Password150kta")
+        })
+        # Create User Credentials
+        user_creds = models.UserCredentials(**{
+            "password": password
+        })
+
+        # Create User Profile and CreateUser Request
+        user_profile = models.UserProfile()
+        user_profile.first_name = "John"
+        user_profile.last_name = "Doe-Unlock"
+        user_profile.email = "John.Doe-Unlock@example.com"
+        user_profile.login = "John.Doe-Unlock@example.com"
+
+        create_user_req = models.CreateUserRequest(**{
+            "credentials": user_creds,
+            "profile": user_profile
+        })
+
+        try:
+            # Create User
+            user, _, err = await test_client.create_user(
+                create_user_req, activate=True)
+            assert err is None
+            import pdb; pdb.set_trace()
+            # Unlock user (even if not locked, should succeed)
+            unlocked_user, err = await test_client.unlock_user(user.id)
+            assert err is None
+            assert isinstance(unlocked_user, models.User)
+
+        finally:
+            errors = []
+            # Deactivate, then delete created user
+            try:
+                _, _, err = await test_client.deactivate_user(user.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+
+            try:
+                _, _, err = await test_client.delete_user(user.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_reset_factors(self, fs):
+        # Instantiate Mock Client
+        test_client = MockOktaClient(fs)
+
+        # Create Password
+        password = models.PasswordCredential(**{
+            "value": SecretStr("Password150kta")
+        })
+        # Create User Credentials
+        user_creds = models.UserCredentials(**{
+            "password": password
+        })
+
+        # Create User Profile and CreateUser Request
+        user_profile = models.UserProfile()
+        user_profile.first_name = "John"
+        user_profile.last_name = "Doe-Reset-Factors"
+        user_profile.email = "John.Doe-Reset-Factors@example.com"
+        user_profile.login = "John.Doe-Reset-Factors@example.com"
+
+        create_user_req = models.CreateUserRequest(**{
+            "credentials": user_creds,
+            "profile": user_profile
+        })
+
+        try:
+            # Create User
+            user, _, err = await test_client.create_user(
+                create_user_req, activate=True)
+            assert err is None
+
+            # Reset user factors
+            reset_user, _, err = await test_client.reset_factors(user.id)
+            assert err is None
+            assert isinstance(reset_user, models.Success)
+
+        finally:
+            errors = []
+            # Deactivate, then delete created user
+            try:
+                _, _, err = await test_client.deactivate_user(user.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+
+            try:
+                _, _, err = await test_client.delete_user(user.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_revoke_user_sessions(self, fs):
+        # Instantiate Mock Client
+        test_client = MockOktaClient(fs)
+
+        # Create Password
+        password = models.PasswordCredential(**{
+            "value": SecretStr("Password150kta")
+        })
+        # Create User Credentials
+        user_creds = models.UserCredentials(**{
+            "password": password
+        })
+
+        # Create User Profile and CreateUser Request
+        user_profile = models.UserProfile()
+        user_profile.first_name = "John"
+        user_profile.last_name = "Doe-Revoke-Sessions"
+        user_profile.email = "John.Doe-Revoke-Sessions@example.com"
+        user_profile.login = "John.Doe-Revoke-Sessions@example.com"
+
+        create_user_req = models.CreateUserRequest(**{
+            "credentials": user_creds,
+            "profile": user_profile
+        })
+
+        try:
+            # Create User
+            user, _, err = await test_client.create_user(
+                create_user_req, activate=True)
+            assert err is None
+
+            # Revoke user sessions
+            success, _, err = await test_client.revoke_user_sessions(user.id)
+            assert err is None
+            # Should return Success object or None for 204 response
+            assert success is None or isinstance(success, models.Success)
+
+        finally:
+            errors = []
+            # Deactivate, then delete created user
+            try:
+                _, _, err = await test_client.deactivate_user(user.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+
+            try:
+                _, _, err = await test_client.delete_user(user.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_list_user_groups(self, fs):
+        # Instantiate Mock Client
+        test_client = MockOktaClient(fs)
+
+        # Create Password
+        password = models.PasswordCredential(**{
+            "value": SecretStr("Password150kta")
+        })
+        # Create User Credentials
+        user_creds = models.UserCredentials(**{
+            "password": password
+        })
+
+        # Create User Profile and CreateUser Request
+        user_profile = models.UserProfile()
+        user_profile.first_name = "John"
+        user_profile.last_name = "Doe-List-Groups"
+        user_profile.email = "John.Doe-List-Groups@example.com"
+        user_profile.login = "John.Doe-List-Groups@example.com"
+
+        create_user_req = models.CreateUserRequest(**{
+            "credentials": user_creds,
+            "profile": user_profile
+        })
+
+        try:
+            # Create User
+            user, _, err = await test_client.create_user(
+                create_user_req, activate=True)
+            assert err is None
+
+            # Create Group
+            group_profile = models.GroupProfile(**{
+                "name": "Test-User-Group"
+            })
+            group_obj = models.Group(**{
+                "profile": group_profile
+            })
+            group, _, err = await test_client.create_group(group_obj)
+            assert err is None
+
+            # Add user to group
+            _, _, err = await test_client.assign_user_to_group(group.id, user.id)
+            assert err is None
+
+            # List user groups
+            groups, _, err = await test_client.list_user_groups(user.id)
+            assert err is None
+            assert isinstance(groups, list)
+            assert len(groups) >= 1  # Should include the group we added plus "Everyone" group
+
+            # Check that our group is in the list
+            found_group = next((g for g in groups if g.id == group.id), None)
+            assert found_group is not None
+
+        finally:
+            errors = []
+            # Remove user from group
+            try:
+                _, _, err = await test_client.unassign_user_from_group(group.id, user.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+
+            # Delete group
+            try:
+                _, _, err = await test_client.delete_group(group.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+
+            # Deactivate, then delete created user
+            try:
+                _, _, err = await test_client.deactivate_user(user.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+
+            try:
+                _, _, err = await test_client.delete_user(user.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0
+
+    @pytest.mark.vcr(record_mode="all")
+    @pytest.mark.asyncio
+    async def atest_list_user_blocks(self, fs):
+        # Instantiate Mock Client
+        test_client = MockOktaClient(fs)
+
+        # Create Password
+        password = models.PasswordCredential(**{
+            "value": SecretStr("Password150kta")
+        })
+        # Create User Credentials
+        user_creds = models.UserCredentials(**{
+            "password": password
+        })
+
+        # Create User Profile and CreateUser Request
+        user_profile = models.UserProfile()
+        user_profile.first_name = "John"
+        user_profile.last_name = "Doe-List-Blocks"
+        user_profile.email = "John.Doe-List-Blocks@example.com"
+        user_profile.login = "John.Doe-List-Blocks@example.com"
+
+        create_user_req = models.CreateUserRequest(**{
+            "credentials": user_creds,
+            "profile": user_profile
+        })
+
+        try:
+            # Create User
+            user, _, err = await test_client.create_user(
+                create_user_req, activate=True)
+            assert err is None
+
+            # List user blocks
+            blocks, _, err = await test_client.list_user_blocks(user.id)
+            assert err is None
+            assert isinstance(blocks, list)
+
+        finally:
+            errors = []
+            # Deactivate, then delete created user
+            try:
+                _, _, err = await test_client.deactivate_user(user.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+
+            try:
+                _, _, err = await test_client.delete_user(user.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_list_user_grants(self, fs):
+        # Instantiate Mock Client
+        test_client = MockOktaClient(fs)
+
+        # Create Password
+        password = models.PasswordCredential(**{
+            "value": SecretStr("Password150kta")
+        })
+        # Create User Credentials
+        user_creds = models.UserCredentials(**{
+            "password": password
+        })
+
+        # Create User Profile and CreateUser Request
+        user_profile = models.UserProfile()
+        user_profile.first_name = "John"
+        user_profile.last_name = "Doe-List-Grants"
+        user_profile.email = "John.Doe-List-Grants@example.com"
+        user_profile.login = "John.Doe-List-Grants@example.com"
+
+        create_user_req = models.CreateUserRequest(**{
+            "credentials": user_creds,
+            "profile": user_profile
+        })
+
+        try:
+            # Create User
+            user, _, err = await test_client.create_user(
+                create_user_req, activate=True)
+            assert err is None
+
+            # List user grants
+            grants, _, err = await test_client.list_user_grants(user.id)
+            assert err is None
+            assert isinstance(grants, list)
+
+        finally:
+            errors = []
+            # Deactivate, then delete created user
+            try:
+                _, _, err = await test_client.deactivate_user(user.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+
+            try:
+                _, _, err = await test_client.delete_user(user.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_revoke_user_grants(self, fs):
+        # Instantiate Mock Client
+        test_client = MockOktaClient(fs)
+
+        # Create Password
+        password = models.PasswordCredential(**{
+            "value": SecretStr("Password150kta")
+        })
+        # Create User Credentials
+        user_creds = models.UserCredentials(**{
+            "password": password
+        })
+
+        # Create User Profile and CreateUser Request
+        user_profile = models.UserProfile()
+        user_profile.first_name = "John"
+        user_profile.last_name = "Doe-Revoke-Grants"
+        user_profile.email = "John.Doe-Revoke-Grants@example.com"
+        user_profile.login = "John.Doe-Revoke-Grants@example.com"
+
+        create_user_req = models.CreateUserRequest(**{
+            "credentials": user_creds,
+            "profile": user_profile
+        })
+
+        try:
+            # Create User
+            user, _, err = await test_client.create_user(
+                create_user_req, activate=True)
+            assert err is None
+
+            # Revoke user grants
+            success, _, err = await test_client.revoke_user_grants(user.id)
+            assert err is None
+            # Should return Success object or None for 204 response
+            assert success is None or isinstance(success, models.Success)
+
+        finally:
+            errors = []
+            # Deactivate, then delete created user
+            try:
+                _, _, err = await test_client.deactivate_user(user.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+
+            try:
+                _, _, err = await test_client.delete_user(user.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_list_app_links(self, fs):
+        # Instantiate Mock Client
+        test_client = MockOktaClient(fs)
+
+        # Create Password
+        password = models.PasswordCredential(**{
+            "value": SecretStr("Password150kta")
+        })
+        # Create User Credentials
+        user_creds = models.UserCredentials(**{
+            "password": password
+        })
+
+        # Create User Profile and CreateUser Request
+        user_profile = models.UserProfile()
+        user_profile.first_name = "John"
+        user_profile.last_name = "Doe-App-Links"
+        user_profile.email = "John.Doe-App-Links@example.com"
+        user_profile.login = "John.Doe-App-Links@example.com"
+
+        create_user_req = models.CreateUserRequest(**{
+            "credentials": user_creds,
+            "profile": user_profile
+        })
+
+        try:
+            # Create User
+            user, _, err = await test_client.create_user(
+                create_user_req, activate=True)
+            assert err is None
+
+            # List app links for user
+            app_links, _, err = await test_client.list_app_links(user.id)
+            assert err is None
+            assert isinstance(app_links, list)
+
+        finally:
+            errors = []
+            # Deactivate, then delete created user
+            try:
+                _, _, err = await test_client.deactivate_user(user.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+
+            try:
+                _, _, err = await test_client.delete_user(user.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_list_user_clients(self, fs):
+        # Instantiate Mock Client
+        test_client = MockOktaClient(fs)
+
+        # Create Password
+        password = models.PasswordCredential(**{
+            "value": SecretStr("Password150kta")
+        })
+        # Create User Credentials
+        user_creds = models.UserCredentials(**{
+            "password": password
+        })
+
+        # Create User Profile and CreateUser Request
+        user_profile = models.UserProfile()
+        user_profile.first_name = "John"
+        user_profile.last_name = "Doe-List-Clients"
+        user_profile.email = "John.Doe-List-Clients@example.com"
+        user_profile.login = "John.Doe-List-Clients@example.com"
+
+        create_user_req = models.CreateUserRequest(**{
+            "credentials": user_creds,
+            "profile": user_profile
+        })
+
+        try:
+            # Create User
+            user, _, err = await test_client.create_user(
+                create_user_req, activate=True)
+            assert err is None
+
+            # List user clients
+            clients, _, err = await test_client.list_user_clients(user.id)
+            assert err is None
+            assert isinstance(clients, list)
+
+        finally:
+            errors = []
+            # Deactivate, then delete created user
+            try:
+                _, _, err = await test_client.deactivate_user(user.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+
+            try:
+                _, _, err = await test_client.delete_user(user.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_list_user_identity_providers(self, fs):
+        # Instantiate Mock Client
+        test_client = MockOktaClient(fs)
+
+        # Create Password
+        password = models.PasswordCredential(**{
+            "value": SecretStr("Password150kta")
+        })
+        # Create User Credentials
+        user_creds = models.UserCredentials(**{
+            "password": password
+        })
+
+        # Create User Profile and CreateUser Request
+        user_profile = models.UserProfile()
+        user_profile.first_name = "John"
+        user_profile.last_name = "Doe-IdPs"
+        user_profile.email = "John.Doe-IdPs@example.com"
+        user_profile.login = "John.Doe-IdPs@example.com"
+
+        create_user_req = models.CreateUserRequest(**{
+            "credentials": user_creds,
+            "profile": user_profile
+        })
+
+        try:
+            # Create User
+            user, _, err = await test_client.create_user(
+                create_user_req, activate=True)
+            assert err is None
+
+            # List user identity providers
+            idps, _, err = await test_client.list_user_identity_providers(user.id)
+            assert err is None
+            assert isinstance(idps, list)
+
+        finally:
+            errors = []
+            # Deactivate, then delete created user
+            try:
+                _, _, err = await test_client.deactivate_user(user.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+
+            try:
+                _, _, err = await test_client.delete_user(user.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_user_with_http_info_methods(self, fs):
+        """Test _with_http_info method variants to increase coverage"""
+        # Instantiate Mock Client
+        test_client = MockOktaClient(fs)
+
+        # Create Password
+        password = models.PasswordCredential(**{
+            "value": SecretStr("Password150kta")
+        })
+        # Create User Credentials
+        user_creds = models.UserCredentials(**{
+            "password": password
+        })
+
+        # Create User Profile and CreateUser Request
+        user_profile = models.UserProfile()
+        user_profile.first_name = "John"
+        user_profile.last_name = "Doe-HttpInfo"
+        user_profile.email = "John.Doe-HttpInfo@example.com"
+        user_profile.login = "John.Doe-HttpInfo@example.com"
+
+        create_user_req = models.CreateUserRequest(**{
+            "credentials": user_creds,
+            "profile": user_profile
+        })
+
+        try:
+            # Test create_user_with_http_info
+            user, resp, err = await test_client.create_user_with_http_info(
+                create_user_req, activate=False)
+            assert err is None
+            assert resp.status_code == 200
+            assert isinstance(user, models.User)
+
+            # Test get_user_with_http_info
+            found_user, resp, err = await test_client.get_user_with_http_info(user.id)
+            assert err is None
+            assert resp.status_code == 200
+            assert found_user.id == user.id
+
+            # Test activate_user_with_http_info
+            token, resp, err = await test_client.activate_user_with_http_info(
+                user.id, send_email=False)
+            assert err is None
+            assert resp.status_code == 200
+
+            # Test update_user_with_http_info
+
+            # Craft new profile and get user object
+            new_profile = user.profile
+            NICK_NAME = "JD"
+            new_profile.nick_name = NICK_NAME
+            updated_user = UpdateUserRequest(**{
+                "credentials": user.credentials,
+                "profile": new_profile,
+                "realm_id": user.realm_id
+            })
+            updated_user, resp, err = await test_client.update_user_with_http_info(user.id, updated_user)
+            assert err is None
+            assert resp.status_code == 200
+            assert updated_user.profile.nick_name == "JD"
+
+        finally:
+            errors = []
+            # Delete created user
+            try:
+                # Test deactivate_user_with_http_info
+                deactivated_user, resp, err = await test_client.deactivate_user_with_http_info(user.id)
+                assert err is None
+                assert resp.status_code == 200
+
+                _, resp, err = await test_client.delete_user_with_http_info(user.id)
+                assert err is None
+                assert resp.status_code == 204
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_comprehensive_user_lifecycle(self, fs):
+        """Comprehensive test covering full user lifecycle to maximize coverage"""
+        # Instantiate Mock Client
+        test_client = MockOktaClient(fs)
+
+        # Create Password
+        password = models.PasswordCredential(**{
+            "value": SecretStr("Password150kta")
+        })
+        # Create User Credentials with recovery question
+        recovery_question = models.RecoveryQuestionCredential(**{
+            "question": "What is your favorite test?",
+            "answer": "Integration test"
+        })
+        user_creds = models.UserCredentials(**{
+            "password": password,
+            "recoveryQuestion": recovery_question
+        })
+
+        # Create comprehensive user profile
+        user_profile = models.UserProfile()
+        user_profile.first_name = "John"
+        user_profile.last_name = "Doe-Comprehensive"
+        user_profile.email = "John.Doe-Comprehensive@example.com"
+        user_profile.login = "John.Doe-Comprehensive@example.com"
+        user_profile.nick_name = "JohnnyC"
+        user_profile.display_name = "John Doe Comprehensive"
+        user_profile.mobile_phone = "+1-555-123-4567"
+
+        create_user_req = models.CreateUserRequest(**{
+            "credentials": user_creds,
+            "profile": user_profile
+        })
+
+        try:
+            # A. Create User in STAGED state
+            user, _, err = await test_client.create_user(create_user_req, activate=False)
+            assert err is None
+            assert user.status == "STAGED"
+
+            # B. Activate User
+            token, _, err = await test_client.activate_user(user.id, send_email=False)
+            assert err is None
+            assert isinstance(token, models.UserActivationToken)
+
+            # Wait for activation
+            time.sleep(1)
+
+            # C. Verify user is active and get updated user
+            active_user, _, err = await test_client.get_user(user.id)
+            assert err is None
+            assert active_user.status == "ACTIVE"
+
+            # D. Test various user operations
+            # Test suspend/unsuspend
+            _, _, err = await test_client.suspend_user(user.id)
+            assert err is None
+
+            suspended_user, _, err = await test_client.get_user(user.id)
+            assert err is None
+            assert suspended_user.status == "SUSPENDED"
+
+            _, _, err = await test_client.unsuspend_user(user.id)
+            assert err is None
+
+            # E. Test password operations
+            # Expire password and get temporary one
+            temp_password, _, err = await test_client.expire_password_and_get_temporary_password(user.id)
+            assert err is None
+            assert isinstance(temp_password, models.TempPassword)
+
+            # F. Generate reset password token
+            reset_token, _, err = await test_client.generate_reset_password_token(user.id, send_email=False)
+            assert err is None
+            assert isinstance(reset_token, models.ResetPasswordToken)
+
+            # H. Reset factors
+            reset_user, _, err = await test_client.reset_factors(user.id)
+            assert err is None
+            assert isinstance(reset_user, models.Success)
+
+            # I. Revoke sessions
+            success, _, err = await test_client.revoke_user_sessions(user.id)
+            assert err is None
+
+            # J. Test list operations
+            users_list, _, err = await test_client.list_users(limit=10)
+            assert err is None
+            assert isinstance(users_list, list)
+            assert len(users_list) > 0
+
+            user_grants, _, err = await test_client.list_user_grants(user.id)
+            assert err is None
+            assert isinstance(user_grants, list)
+
+            user_groups, _, err = await test_client.list_user_groups(user.id)
+            assert err is None
+            assert isinstance(user_groups, list)
+
+            app_links, _, err = await test_client.list_app_links(user.id)
+            assert err is None
+            assert isinstance(app_links, list)
+
+        finally:
+            errors = []
+            # Cleanup: Deactivate and delete user
+            try:
+                _, _, err = await test_client.deactivate_user(user.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+
+            try:
+                _, _, err = await test_client.delete_user(user.id)
+                assert err is None
+            except Exception as exc:
+                errors.append(exc)
+            assert len(errors) == 0

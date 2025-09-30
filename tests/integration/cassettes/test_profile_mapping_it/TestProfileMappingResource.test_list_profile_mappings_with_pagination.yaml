@@ -1,0 +1,90 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      User-Agent:
+      - OpenAPI-Generator/1.0.0/python
+    method: GET
+    uri: https://test.okta.com/api/v1/mappings?limit=5
+  response:
+    body:
+      string: '[{"id":"prmnkwe1vcDGIxAzg1d7","source":{"id":"0oankw1sgqqGiSxVQ1d7","name":"Okta_Authenticator","type":"appuser","_links":{"self":{"href":"https://test.okta.com/api/v1/apps/0oankw1sgqqGiSxVQ1d7"},"schema":{"href":"https://test.okta.com/api/v1/meta/schemas/apps/0oankw1sgqqGiSxVQ1d7/default"}}},"target":{"id":"otynkw1sdzpoFCZMq1d7","name":"user","type":"user","_links":{"self":{"href":"https://test.okta.com/api/v1/meta/types/user/otynkw1sdzpoFCZMq1d7"},"schema":{"href":"https://test.okta.com/api/v1/meta/schemas/user/oscnkw1sdzpoFCZMq1d7"}}},"_links":{"self":{"href":"https://test.okta.com/api/v1/mappings/prmnkwe1vcDGIxAzg1d7"}}},{"id":"prmnkwe1vdRFV02zu1d7","source":{"id":"otynkw1sdzpoFCZMq1d7","name":"user","type":"user","_links":{"self":{"href":"https://test.okta.com/api/v1/meta/types/user/otynkw1sdzpoFCZMq1d7"},"schema":{"href":"https://test.okta.com/api/v1/meta/schemas/user/oscnkw1sdzpoFCZMq1d7"}}},"target":{"id":"0oankw1sgqqGiSxVQ1d7","name":"Okta_Authenticator","type":"appuser","_links":{"self":{"href":"https://test.okta.com/api/v1/apps/0oankw1sgqqGiSxVQ1d7"},"schema":{"href":"https://test.okta.com/api/v1/meta/schemas/apps/0oankw1sgqqGiSxVQ1d7/default"}}},"_links":{"self":{"href":"https://test.okta.com/api/v1/mappings/prmnkwe1vdRFV02zu1d7"}}},{"id":"prmnkwjez2MclTGgO1d7","source":{"id":"0oankwjeypFfZgZgQ1d7","name":"okta_access_requests_resource_catalog","type":"appuser","_links":{"self":{"href":"https://test.okta.com/api/v1/apps/0oankwjeypFfZgZgQ1d7"},"schema":{"href":"https://test.okta.com/api/v1/meta/schemas/apps/0oankwjeypFfZgZgQ1d7/default"}}},"target":{"id":"otynkw1sdzpoFCZMq1d7","name":"user","type":"user","_links":{"self":{"href":"https://test.okta.com/api/v1/meta/types/user/otynkw1sdzpoFCZMq1d7"},"schema":{"href":"https://test.okta.com/api/v1/meta/schemas/user/oscnkw1sdzpoFCZMq1d7"}}},"_links":{"self":{"href":"https://test.okta.com/api/v1/mappings/prmnkwjez2MclTGgO1d7"}}},{"id":"prmnkwjez6RspHS5R1d7","source":{"id":"otynkw1sdzpoFCZMq1d7","name":"user","type":"user","_links":{"self":{"href":"https://test.okta.com/api/v1/meta/types/user/otynkw1sdzpoFCZMq1d7"},"schema":{"href":"https://test.okta.com/api/v1/meta/schemas/user/oscnkw1sdzpoFCZMq1d7"}}},"target":{"id":"0oankwjeypFfZgZgQ1d7","name":"okta_access_requests_resource_catalog","type":"appuser","_links":{"self":{"href":"https://test.okta.com/api/v1/apps/0oankwjeypFfZgZgQ1d7"},"schema":{"href":"https://test.okta.com/api/v1/meta/schemas/apps/0oankwjeypFfZgZgQ1d7/default"}}},"_links":{"self":{"href":"https://test.okta.com/api/v1/mappings/prmnkwjez6RspHS5R1d7"}}},{"id":"prmnkwjezzadTFz901d7","source":{"id":"0oankwjezlgFeFqU31d7","name":"okta_access_requests_admin","type":"appuser","_links":{"self":{"href":"https://test.okta.com/api/v1/apps/0oankwjezlgFeFqU31d7"},"schema":{"href":"https://test.okta.com/api/v1/meta/schemas/apps/0oankwjezlgFeFqU31d7/default"}}},"target":{"id":"otynkw1sdzpoFCZMq1d7","name":"user","type":"user","_links":{"self":{"href":"https://test.okta.com/api/v1/meta/types/user/otynkw1sdzpoFCZMq1d7"},"schema":{"href":"https://test.okta.com/api/v1/meta/schemas/user/oscnkw1sdzpoFCZMq1d7"}}},"_links":{"self":{"href":"https://test.okta.com/api/v1/mappings/prmnkwjezzadTFz901d7"}}}]'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 17 Sep 2025 20:02:16 GMT
+      Expires:
+      - '0'
+      Link:
+      - <https://dcp-testing-oig-2025-06-26.oktapreview.com/api/v1/mappings?limit=5>;
+        rel="self"
+      - <https://dcp-testing-oig-2025-06-26.oktapreview.com/api/v1/mappings?after=prmnkwjezzadTFz901d7&limit=5>;
+        rel="next"
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid="";Version=1;Path=/;Max-Age=0
+      - xids="";Version=1;Path=/;Max-Age=0
+      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - JSESSIONID=BA2ABAC502CA8BE10F744FF0694065EE; Path=/; Secure; HttpOnly
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      accept-ch:
+      - Sec-CH-UA-Platform-Version
+      content-security-policy:
+      - 'default-src ''self'' dcp-testing-oig-2025-06-26.oktapreview.com *.oktacdn.com;
+        connect-src ''self'' dcp-testing-oig-2025-06-26.oktapreview.com dcp-testing-oig-2025-06-26-admin.oktapreview.com
+        *.oktacdn.com *.mixpanel.com *.mapbox.com dcp-testing-oig-2025-06-26.kerberos.oktapreview.com
+        dcp-testing-oig-2025-06-26.mtls.oktapreview.com *.authenticatorlocalprod.com:8769
+        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
+        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
+        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
+        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
+        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
+        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
+        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
+        dcp-testing-oig-2025-06-26.oktapreview.com *.oktacdn.com; style-src ''unsafe-inline''
+        ''self'' ''report-sample'' dcp-testing-oig-2025-06-26.oktapreview.com *.oktacdn.com;
+        frame-src ''self'' dcp-testing-oig-2025-06-26.oktapreview.com dcp-testing-oig-2025-06-26-admin.oktapreview.com
+        login.okta.com *.vidyard.com com-okta-authenticator:; img-src ''self'' dcp-testing-oig-2025-06-26.oktapreview.com
+        *.oktacdn.com *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src
+        ''self'' dcp-testing-oig-2025-06-26.oktapreview.com data: *.oktacdn.com fonts.gstatic.com;
+        frame-ancestors ''self'''
+      p3p:
+      - CP="HONK"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-okta-request-id:
+      - 51baa21ba43493bca42dd1a1fe7ddb0a
+      x-rate-limit-limit:
+      - '500'
+      x-rate-limit-remaining:
+      - '498'
+      x-rate-limit-reset:
+      - '1758139341'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+version: 1

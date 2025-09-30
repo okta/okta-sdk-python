@@ -22,6 +22,8 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from okta.models.links_self import LinksSelf
 from okta.models.profile_mapping_property import ProfileMappingProperty
+from okta.models.profile_mapping_source import ProfileMappingSource
+from okta.models.profile_mapping_target import ProfileMappingTarget
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -31,8 +33,8 @@ class ProfileMapping(BaseModel):
     """ # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="Unique identifier for a profile mapping")
     properties: Optional[Dict[str, ProfileMappingProperty]] = None
-    source: Optional[Dict[str, Any]] = None
-    target: Optional[Dict[str, Any]] = None
+    source: Optional[ProfileMappingSource] = None
+    target: Optional[ProfileMappingTarget] = None
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["id", "properties", "source", "target", "_links"]
 

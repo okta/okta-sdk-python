@@ -26139,6 +26139,7 @@ components:
       enum:
         - DELETE
         - GET
+        - PATCH
         - POST
         - PUT
     IamRole:
@@ -26883,13 +26884,11 @@ components:
           description: Unique identifier for profile mapping
           readOnly: true
         source:
-          type: object
-          description: Source of the schema property expressions (Okta object or App Instance object)
           $ref: '#/components/schemas/ProfileMappingSource'
+          description: Source of the schema property expressions (Okta object or App Instance object)
         target:
-          type: object
-          description: Target of the schema property expressions (Okta object or App Instance object)
           $ref: '#/components/schemas/ProfileMappingTarget'
+          description: Target of the schema property expressions (Okta object or App Instance object)
         _links:
           $ref: '#/components/schemas/LinksSelf'
     LoadingPageTouchPointVariant:
@@ -29333,10 +29332,8 @@ components:
             $ref: '#/components/schemas/ProfileMappingProperty'
           readOnly: false
         source:
-          type: object
           $ref: '#/components/schemas/ProfileMappingSource'
         target:
-          type: object
           $ref: '#/components/schemas/ProfileMappingTarget'
         _links:
           $ref: '#/components/schemas/LinksSelf'

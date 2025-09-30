@@ -1,0 +1,494 @@
+interactions:
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      User-Agent:
+      - OpenAPI-Generator/1.0.0/python
+    method: GET
+    uri: https://test.okta.com/api/v1/principal-rate-limits?filter=principalType%20eq%20%22SSWS_TOKEN%22
+  response:
+    body:
+      string: '[{"id":"prlnpbzamkh0Z8xYo1d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1cuuokxSImd8ST1d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-09-22T17:31:41Z","lastUpdatedBy":"00unkw1sfbTw08c0g1d7","createdDate":"2025-07-01T08:14:57Z","createdBy":"00unkw1sfbTw08c0g1d7"},{"id":"prlonn4aroMawFVD81d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1dnauwfcmvN3bq1d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-07-30T05:51:30Z","lastUpdatedBy":"00unli90kor62oF5Z1d7","createdDate":"2025-07-30T05:51:30Z","createdBy":"00unli90kor62oF5Z1d7"},{"id":"prloor7m4efox2b921d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1doilwxfYVehRY1d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-07-31T05:30:54Z","lastUpdatedBy":"00unkw1sfbTw08c0g1d7","createdDate":"2025-07-31T05:30:54Z","createdBy":"00unkw1sfbTw08c0g1d7"},{"id":"prlovq7s0i6n4ak9Y1d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1dv6313JjPUSzO1d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-08-06T08:51:31Z","lastUpdatedBy":"00unli90kor62oF5Z1d7","createdDate":"2025-08-06T08:51:31Z","createdBy":"00unli90kor62oF5Z1d7"},{"id":"prlow71uew1xzcdcN1d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1dvqxuhgXAREWd1d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-08-06T16:50:35Z","lastUpdatedBy":"00uonmvbfznIufFS61d7","createdDate":"2025-08-06T16:50:35Z","createdBy":"00uonmvbfznIufFS61d7"},{"id":"prlp94sv9ncp7sftv1d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1e9037g0XogCzw1d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-08-18T11:39:19Z","lastUpdatedBy":"00uonmvbfznIufFS61d7","createdDate":"2025-08-18T11:39:19Z","createdBy":"00uonmvbfznIufFS61d7"},{"id":"prlpj8z50zHcejCL21d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1ehmouzAvkb9Q51d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-08-26T05:23:30Z","lastUpdatedBy":"00unli90kor62oF5Z1d7","createdDate":"2025-08-26T05:23:30Z","createdBy":"00unli90kor62oF5Z1d7"},{"id":"prlppv0airxZrPOJa1d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1eoeoc7igwRefP1d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-09-02T04:47:28Z","lastUpdatedBy":"00unkw1sfbTw08c0g1d7","createdDate":"2025-09-02T04:47:28Z","createdBy":"00unkw1sfbTw08c0g1d7"},{"id":"prlq2nzag2lvZ8Tzr1d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1f2v4234nbcAlq1d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-09-15T09:35:44Z","lastUpdatedBy":"00uonmvbfznIufFS61d7","createdDate":"2025-09-15T09:35:44Z","createdBy":"00uonmvbfznIufFS61d7"}]'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 22 Sep 2025 17:31:56 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid="";Version=1;Path=/;Max-Age=0
+      - xids="";Version=1;Path=/;Max-Age=0
+      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - JSESSIONID=3779AFB932144D50825296C260358EEC; Path=/; Secure; HttpOnly
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      accept-ch:
+      - Sec-CH-UA-Platform-Version
+      content-security-policy:
+      - 'default-src ''self'' dcp-testing-oig-2025-06-26.oktapreview.com *.oktacdn.com;
+        connect-src ''self'' dcp-testing-oig-2025-06-26.oktapreview.com dcp-testing-oig-2025-06-26-admin.oktapreview.com
+        *.oktacdn.com *.mixpanel.com *.mapbox.com dcp-testing-oig-2025-06-26.kerberos.oktapreview.com
+        dcp-testing-oig-2025-06-26.mtls.oktapreview.com *.authenticatorlocalprod.com:8769
+        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
+        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
+        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
+        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
+        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
+        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
+        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
+        dcp-testing-oig-2025-06-26.oktapreview.com *.oktacdn.com; style-src ''unsafe-inline''
+        ''self'' ''report-sample'' dcp-testing-oig-2025-06-26.oktapreview.com *.oktacdn.com;
+        frame-src ''self'' dcp-testing-oig-2025-06-26.oktapreview.com dcp-testing-oig-2025-06-26-admin.oktapreview.com
+        login.okta.com *.vidyard.com com-okta-authenticator:; img-src ''self'' dcp-testing-oig-2025-06-26.oktapreview.com
+        *.oktacdn.com *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src
+        ''self'' dcp-testing-oig-2025-06-26.oktapreview.com data: *.oktacdn.com fonts.gstatic.com;
+        frame-ancestors ''self'''
+      p3p:
+      - CP="HONK"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-okta-request-id:
+      - 56ff8fff7ed97daebeab45c7de48c012
+      x-rate-limit-limit:
+      - '100'
+      x-rate-limit-remaining:
+      - '71'
+      x-rate-limit-reset:
+      - '1758562344'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      User-Agent:
+      - OpenAPI-Generator/1.0.0/python
+    method: GET
+    uri: https://test.okta.com/api/v1/principal-rate-limits?filter=principalType%20eq%20%22SSWS_TOKEN%22
+  response:
+    body:
+      string: '[{"id":"prlnpbzamkh0Z8xYo1d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1cuuokxSImd8ST1d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-09-22T17:31:41Z","lastUpdatedBy":"00unkw1sfbTw08c0g1d7","createdDate":"2025-07-01T08:14:57Z","createdBy":"00unkw1sfbTw08c0g1d7"},{"id":"prlonn4aroMawFVD81d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1dnauwfcmvN3bq1d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-07-30T05:51:30Z","lastUpdatedBy":"00unli90kor62oF5Z1d7","createdDate":"2025-07-30T05:51:30Z","createdBy":"00unli90kor62oF5Z1d7"},{"id":"prloor7m4efox2b921d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1doilwxfYVehRY1d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-07-31T05:30:54Z","lastUpdatedBy":"00unkw1sfbTw08c0g1d7","createdDate":"2025-07-31T05:30:54Z","createdBy":"00unkw1sfbTw08c0g1d7"},{"id":"prlovq7s0i6n4ak9Y1d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1dv6313JjPUSzO1d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-08-06T08:51:31Z","lastUpdatedBy":"00unli90kor62oF5Z1d7","createdDate":"2025-08-06T08:51:31Z","createdBy":"00unli90kor62oF5Z1d7"},{"id":"prlow71uew1xzcdcN1d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1dvqxuhgXAREWd1d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-08-06T16:50:35Z","lastUpdatedBy":"00uonmvbfznIufFS61d7","createdDate":"2025-08-06T16:50:35Z","createdBy":"00uonmvbfznIufFS61d7"},{"id":"prlp94sv9ncp7sftv1d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1e9037g0XogCzw1d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-08-18T11:39:19Z","lastUpdatedBy":"00uonmvbfznIufFS61d7","createdDate":"2025-08-18T11:39:19Z","createdBy":"00uonmvbfznIufFS61d7"},{"id":"prlpj8z50zHcejCL21d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1ehmouzAvkb9Q51d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-08-26T05:23:30Z","lastUpdatedBy":"00unli90kor62oF5Z1d7","createdDate":"2025-08-26T05:23:30Z","createdBy":"00unli90kor62oF5Z1d7"},{"id":"prlppv0airxZrPOJa1d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1eoeoc7igwRefP1d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-09-02T04:47:28Z","lastUpdatedBy":"00unkw1sfbTw08c0g1d7","createdDate":"2025-09-02T04:47:28Z","createdBy":"00unkw1sfbTw08c0g1d7"},{"id":"prlq2nzag2lvZ8Tzr1d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1f2v4234nbcAlq1d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-09-15T09:35:44Z","lastUpdatedBy":"00uonmvbfznIufFS61d7","createdDate":"2025-09-15T09:35:44Z","createdBy":"00uonmvbfznIufFS61d7"}]'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 22 Sep 2025 17:31:57 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid="";Version=1;Path=/;Max-Age=0
+      - xids="";Version=1;Path=/;Max-Age=0
+      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - JSESSIONID=D04ADA184FDFC05BBE6FB80E9EB74F51; Path=/; Secure; HttpOnly
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      accept-ch:
+      - Sec-CH-UA-Platform-Version
+      content-security-policy:
+      - 'default-src ''self'' dcp-testing-oig-2025-06-26.oktapreview.com *.oktacdn.com;
+        connect-src ''self'' dcp-testing-oig-2025-06-26.oktapreview.com dcp-testing-oig-2025-06-26-admin.oktapreview.com
+        *.oktacdn.com *.mixpanel.com *.mapbox.com dcp-testing-oig-2025-06-26.kerberos.oktapreview.com
+        dcp-testing-oig-2025-06-26.mtls.oktapreview.com *.authenticatorlocalprod.com:8769
+        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
+        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
+        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
+        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
+        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
+        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
+        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
+        dcp-testing-oig-2025-06-26.oktapreview.com *.oktacdn.com; style-src ''unsafe-inline''
+        ''self'' ''report-sample'' dcp-testing-oig-2025-06-26.oktapreview.com *.oktacdn.com;
+        frame-src ''self'' dcp-testing-oig-2025-06-26.oktapreview.com dcp-testing-oig-2025-06-26-admin.oktapreview.com
+        login.okta.com *.vidyard.com com-okta-authenticator:; img-src ''self'' dcp-testing-oig-2025-06-26.oktapreview.com
+        *.oktacdn.com *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src
+        ''self'' dcp-testing-oig-2025-06-26.oktapreview.com data: *.oktacdn.com fonts.gstatic.com;
+        frame-ancestors ''self'''
+      p3p:
+      - CP="HONK"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-okta-request-id:
+      - 9c29ae9f324b01fb60275fcae1758f88
+      x-rate-limit-limit:
+      - '100'
+      x-rate-limit-remaining:
+      - '70'
+      x-rate-limit-reset:
+      - '1758562344'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      User-Agent:
+      - OpenAPI-Generator/1.0.0/python
+    method: GET
+    uri: https://test.okta.com/api/v1/principal-rate-limits
+  response:
+    body:
+      string: '{"errorCode":"E0000001","errorSummary":"Api validation failed: principalRateLimitMediated","errorLink":"E0000001","errorId":"oaex5gRBu_HSkG9w0NdmdqqdQ","errorCauses":[{"errorSummary":"The
+        provided filter parameter did not contain the required attrbute filter \"principalType\""}]}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 22 Sep 2025 17:31:58 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid="";Version=1;Path=/;Max-Age=0
+      - xids="";Version=1;Path=/;Max-Age=0
+      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - JSESSIONID=7257F0EB0F44DEF90AD73242CEF0CD93; Path=/; Secure; HttpOnly
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      accept-ch:
+      - Sec-CH-UA-Platform-Version
+      content-security-policy:
+      - 'default-src ''self'' dcp-testing-oig-2025-06-26.oktapreview.com *.oktacdn.com;
+        connect-src ''self'' dcp-testing-oig-2025-06-26.oktapreview.com dcp-testing-oig-2025-06-26-admin.oktapreview.com
+        *.oktacdn.com *.mixpanel.com *.mapbox.com dcp-testing-oig-2025-06-26.kerberos.oktapreview.com
+        dcp-testing-oig-2025-06-26.mtls.oktapreview.com *.authenticatorlocalprod.com:8769
+        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
+        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
+        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
+        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
+        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
+        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
+        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
+        dcp-testing-oig-2025-06-26.oktapreview.com *.oktacdn.com; style-src ''unsafe-inline''
+        ''self'' ''report-sample'' dcp-testing-oig-2025-06-26.oktapreview.com *.oktacdn.com;
+        frame-src ''self'' dcp-testing-oig-2025-06-26.oktapreview.com dcp-testing-oig-2025-06-26-admin.oktapreview.com
+        login.okta.com *.vidyard.com com-okta-authenticator:; img-src ''self'' dcp-testing-oig-2025-06-26.oktapreview.com
+        *.oktacdn.com *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src
+        ''self'' dcp-testing-oig-2025-06-26.oktapreview.com data: *.oktacdn.com fonts.gstatic.com;
+        frame-ancestors ''self'''
+      p3p:
+      - CP="HONK"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-okta-request-id:
+      - 3981b9e068c184f4b21cac178d912672
+      x-rate-limit-limit:
+      - '100'
+      x-rate-limit-remaining:
+      - '69'
+      x-rate-limit-reset:
+      - '1758562344'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 400
+      message: Bad Request
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      User-Agent:
+      - OpenAPI-Generator/1.0.0/python
+    method: GET
+    uri: https://test.okta.com/api/v1/principal-rate-limits?filter=principalType%20eq%20%22SSWS_TOKEN%22
+  response:
+    body:
+      string: '[{"id":"prlnpbzamkh0Z8xYo1d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1cuuokxSImd8ST1d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-09-22T17:31:41Z","lastUpdatedBy":"00unkw1sfbTw08c0g1d7","createdDate":"2025-07-01T08:14:57Z","createdBy":"00unkw1sfbTw08c0g1d7"},{"id":"prlonn4aroMawFVD81d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1dnauwfcmvN3bq1d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-07-30T05:51:30Z","lastUpdatedBy":"00unli90kor62oF5Z1d7","createdDate":"2025-07-30T05:51:30Z","createdBy":"00unli90kor62oF5Z1d7"},{"id":"prloor7m4efox2b921d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1doilwxfYVehRY1d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-07-31T05:30:54Z","lastUpdatedBy":"00unkw1sfbTw08c0g1d7","createdDate":"2025-07-31T05:30:54Z","createdBy":"00unkw1sfbTw08c0g1d7"},{"id":"prlovq7s0i6n4ak9Y1d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1dv6313JjPUSzO1d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-08-06T08:51:31Z","lastUpdatedBy":"00unli90kor62oF5Z1d7","createdDate":"2025-08-06T08:51:31Z","createdBy":"00unli90kor62oF5Z1d7"},{"id":"prlow71uew1xzcdcN1d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1dvqxuhgXAREWd1d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-08-06T16:50:35Z","lastUpdatedBy":"00uonmvbfznIufFS61d7","createdDate":"2025-08-06T16:50:35Z","createdBy":"00uonmvbfznIufFS61d7"},{"id":"prlp94sv9ncp7sftv1d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1e9037g0XogCzw1d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-08-18T11:39:19Z","lastUpdatedBy":"00uonmvbfznIufFS61d7","createdDate":"2025-08-18T11:39:19Z","createdBy":"00uonmvbfznIufFS61d7"},{"id":"prlpj8z50zHcejCL21d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1ehmouzAvkb9Q51d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-08-26T05:23:30Z","lastUpdatedBy":"00unli90kor62oF5Z1d7","createdDate":"2025-08-26T05:23:30Z","createdBy":"00unli90kor62oF5Z1d7"},{"id":"prlppv0airxZrPOJa1d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1eoeoc7igwRefP1d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-09-02T04:47:28Z","lastUpdatedBy":"00unkw1sfbTw08c0g1d7","createdDate":"2025-09-02T04:47:28Z","createdBy":"00unkw1sfbTw08c0g1d7"},{"id":"prlq2nzag2lvZ8Tzr1d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1f2v4234nbcAlq1d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-09-15T09:35:44Z","lastUpdatedBy":"00uonmvbfznIufFS61d7","createdDate":"2025-09-15T09:35:44Z","createdBy":"00uonmvbfznIufFS61d7"}]'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 22 Sep 2025 17:31:59 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid="";Version=1;Path=/;Max-Age=0
+      - xids="";Version=1;Path=/;Max-Age=0
+      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - JSESSIONID=75B01E38AA1CE531642827AB5D0D3144; Path=/; Secure; HttpOnly
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      accept-ch:
+      - Sec-CH-UA-Platform-Version
+      content-security-policy:
+      - 'default-src ''self'' dcp-testing-oig-2025-06-26.oktapreview.com *.oktacdn.com;
+        connect-src ''self'' dcp-testing-oig-2025-06-26.oktapreview.com dcp-testing-oig-2025-06-26-admin.oktapreview.com
+        *.oktacdn.com *.mixpanel.com *.mapbox.com dcp-testing-oig-2025-06-26.kerberos.oktapreview.com
+        dcp-testing-oig-2025-06-26.mtls.oktapreview.com *.authenticatorlocalprod.com:8769
+        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
+        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
+        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
+        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
+        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
+        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
+        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
+        dcp-testing-oig-2025-06-26.oktapreview.com *.oktacdn.com; style-src ''unsafe-inline''
+        ''self'' ''report-sample'' dcp-testing-oig-2025-06-26.oktapreview.com *.oktacdn.com;
+        frame-src ''self'' dcp-testing-oig-2025-06-26.oktapreview.com dcp-testing-oig-2025-06-26-admin.oktapreview.com
+        login.okta.com *.vidyard.com com-okta-authenticator:; img-src ''self'' dcp-testing-oig-2025-06-26.oktapreview.com
+        *.oktacdn.com *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src
+        ''self'' dcp-testing-oig-2025-06-26.oktapreview.com data: *.oktacdn.com fonts.gstatic.com;
+        frame-ancestors ''self'''
+      p3p:
+      - CP="HONK"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-okta-request-id:
+      - 49d375043b0d8a85c7e7ddaf44b01b65
+      x-rate-limit-limit:
+      - '100'
+      x-rate-limit-remaining:
+      - '68'
+      x-rate-limit-reset:
+      - '1758562344'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      User-Agent:
+      - OpenAPI-Generator/1.0.0/python
+    method: GET
+    uri: https://test.okta.com/api/v1/principal-rate-limits?filter=principalId%20eq%20%22nonexistent-principal-id-12345%22
+  response:
+    body:
+      string: '{"errorCode":"E0000001","errorSummary":"Api validation failed: principalRateLimitMediated","errorLink":"E0000001","errorId":"oaetQRJMIU2ScybdbH--e5l8A","errorCauses":[{"errorSummary":"The
+        provided filter parameter did not contain the required attrbute filter \"principalType\""}]}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 22 Sep 2025 17:32:00 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid="";Version=1;Path=/;Max-Age=0
+      - xids="";Version=1;Path=/;Max-Age=0
+      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - JSESSIONID=9949AD4BDE161B2372C25B4151ED556D; Path=/; Secure; HttpOnly
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      accept-ch:
+      - Sec-CH-UA-Platform-Version
+      content-security-policy:
+      - 'default-src ''self'' dcp-testing-oig-2025-06-26.oktapreview.com *.oktacdn.com;
+        connect-src ''self'' dcp-testing-oig-2025-06-26.oktapreview.com dcp-testing-oig-2025-06-26-admin.oktapreview.com
+        *.oktacdn.com *.mixpanel.com *.mapbox.com dcp-testing-oig-2025-06-26.kerberos.oktapreview.com
+        dcp-testing-oig-2025-06-26.mtls.oktapreview.com *.authenticatorlocalprod.com:8769
+        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
+        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
+        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
+        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
+        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
+        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
+        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
+        dcp-testing-oig-2025-06-26.oktapreview.com *.oktacdn.com; style-src ''unsafe-inline''
+        ''self'' ''report-sample'' dcp-testing-oig-2025-06-26.oktapreview.com *.oktacdn.com;
+        frame-src ''self'' dcp-testing-oig-2025-06-26.oktapreview.com dcp-testing-oig-2025-06-26-admin.oktapreview.com
+        login.okta.com *.vidyard.com com-okta-authenticator:; img-src ''self'' dcp-testing-oig-2025-06-26.oktapreview.com
+        *.oktacdn.com *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src
+        ''self'' dcp-testing-oig-2025-06-26.oktapreview.com data: *.oktacdn.com fonts.gstatic.com;
+        frame-ancestors ''self'''
+      p3p:
+      - CP="HONK"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-okta-request-id:
+      - c1b2f2050312998c6b3a68d996a1284e
+      x-rate-limit-limit:
+      - '100'
+      x-rate-limit-remaining:
+      - '67'
+      x-rate-limit-reset:
+      - '1758562344'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 400
+      message: Bad Request
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      User-Agent:
+      - OpenAPI-Generator/1.0.0/python
+    method: GET
+    uri: https://test.okta.com/api/v1/principal-rate-limits?filter=principalType%20eq%20%22SSWS_TOKEN%22
+  response:
+    body:
+      string: '[{"id":"prlnpbzamkh0Z8xYo1d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1cuuokxSImd8ST1d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-09-22T17:31:41Z","lastUpdatedBy":"00unkw1sfbTw08c0g1d7","createdDate":"2025-07-01T08:14:57Z","createdBy":"00unkw1sfbTw08c0g1d7"},{"id":"prlonn4aroMawFVD81d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1dnauwfcmvN3bq1d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-07-30T05:51:30Z","lastUpdatedBy":"00unli90kor62oF5Z1d7","createdDate":"2025-07-30T05:51:30Z","createdBy":"00unli90kor62oF5Z1d7"},{"id":"prloor7m4efox2b921d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1doilwxfYVehRY1d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-07-31T05:30:54Z","lastUpdatedBy":"00unkw1sfbTw08c0g1d7","createdDate":"2025-07-31T05:30:54Z","createdBy":"00unkw1sfbTw08c0g1d7"},{"id":"prlovq7s0i6n4ak9Y1d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1dv6313JjPUSzO1d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-08-06T08:51:31Z","lastUpdatedBy":"00unli90kor62oF5Z1d7","createdDate":"2025-08-06T08:51:31Z","createdBy":"00unli90kor62oF5Z1d7"},{"id":"prlow71uew1xzcdcN1d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1dvqxuhgXAREWd1d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-08-06T16:50:35Z","lastUpdatedBy":"00uonmvbfznIufFS61d7","createdDate":"2025-08-06T16:50:35Z","createdBy":"00uonmvbfznIufFS61d7"},{"id":"prlp94sv9ncp7sftv1d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1e9037g0XogCzw1d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-08-18T11:39:19Z","lastUpdatedBy":"00uonmvbfznIufFS61d7","createdDate":"2025-08-18T11:39:19Z","createdBy":"00uonmvbfznIufFS61d7"},{"id":"prlpj8z50zHcejCL21d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1ehmouzAvkb9Q51d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-08-26T05:23:30Z","lastUpdatedBy":"00unli90kor62oF5Z1d7","createdDate":"2025-08-26T05:23:30Z","createdBy":"00unli90kor62oF5Z1d7"},{"id":"prlppv0airxZrPOJa1d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1eoeoc7igwRefP1d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-09-02T04:47:28Z","lastUpdatedBy":"00unkw1sfbTw08c0g1d7","createdDate":"2025-09-02T04:47:28Z","createdBy":"00unkw1sfbTw08c0g1d7"},{"id":"prlq2nzag2lvZ8Tzr1d7","orgId":"00onkw1sbuAh3Q06I1d7","principalId":"00T1f2v4234nbcAlq1d7","principalType":"SSWS_TOKEN","defaultPercentage":50,"defaultConcurrencyPercentage":50,"lastUpdate":"2025-09-15T09:35:44Z","lastUpdatedBy":"00uonmvbfznIufFS61d7","createdDate":"2025-09-15T09:35:44Z","createdBy":"00uonmvbfznIufFS61d7"}]'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 22 Sep 2025 17:32:01 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid="";Version=1;Path=/;Max-Age=0
+      - xids="";Version=1;Path=/;Max-Age=0
+      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - JSESSIONID=95AE8C53EE64B14C32189EB839B39E2B; Path=/; Secure; HttpOnly
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      accept-ch:
+      - Sec-CH-UA-Platform-Version
+      content-security-policy:
+      - 'default-src ''self'' dcp-testing-oig-2025-06-26.oktapreview.com *.oktacdn.com;
+        connect-src ''self'' dcp-testing-oig-2025-06-26.oktapreview.com dcp-testing-oig-2025-06-26-admin.oktapreview.com
+        *.oktacdn.com *.mixpanel.com *.mapbox.com dcp-testing-oig-2025-06-26.kerberos.oktapreview.com
+        dcp-testing-oig-2025-06-26.mtls.oktapreview.com *.authenticatorlocalprod.com:8769
+        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
+        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
+        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
+        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
+        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
+        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
+        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
+        dcp-testing-oig-2025-06-26.oktapreview.com *.oktacdn.com; style-src ''unsafe-inline''
+        ''self'' ''report-sample'' dcp-testing-oig-2025-06-26.oktapreview.com *.oktacdn.com;
+        frame-src ''self'' dcp-testing-oig-2025-06-26.oktapreview.com dcp-testing-oig-2025-06-26-admin.oktapreview.com
+        login.okta.com *.vidyard.com com-okta-authenticator:; img-src ''self'' dcp-testing-oig-2025-06-26.oktapreview.com
+        *.oktacdn.com *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src
+        ''self'' dcp-testing-oig-2025-06-26.oktapreview.com data: *.oktacdn.com fonts.gstatic.com;
+        frame-ancestors ''self'''
+      p3p:
+      - CP="HONK"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-okta-request-id:
+      - 69ae57521a58d1e79d2b2ffb1d163033
+      x-rate-limit-limit:
+      - '100'
+      x-rate-limit-remaining:
+      - '66'
+      x-rate-limit-reset:
+      - '1758562344'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+version: 1

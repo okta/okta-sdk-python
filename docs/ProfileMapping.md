@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **str** | Unique identifier for a profile mapping | [optional] [readonly] 
 **properties** | [**Dict[str, ProfileMappingProperty]**](ProfileMappingProperty.md) |  | [optional] 
-**source** | [**ProfileMappingSource**](.md) |  | [optional] 
-**target** | [**ProfileMappingTarget**](.md) |  | [optional] 
+**source** | [**ProfileMappingSource**](ProfileMappingSource.md) |  | [optional] 
+**target** | [**ProfileMappingTarget**](ProfileMappingTarget.md) |  | [optional] 
 **links** | [**LinksSelf**](LinksSelf.md) |  | [optional] 
 
 ## Example

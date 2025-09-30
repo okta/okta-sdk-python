@@ -4,10 +4,10 @@ import os
 
 from pytest_recording._vcr import use_cassette
 
-TEST_OKTA_URL = "test"
-B_TEST_OKTA_URL = b"test"
-URL_REGEX = r"dev-\d+"
-B_URL_REGEX = rb"dev-\d+"
+TEST_OKTA_URL = "https://test.okta.com"
+B_TEST_OKTA_URL = b"https://test.okta.com"
+URL_REGEX = r"https://(?:[\w-]+\.oktapreview\.com|dev-\d+\.okta\.com)"
+B_URL_REGEX = rb"https://(?:[\w-]+\.oktapreview\.com|dev-\d+\.okta\.com)"
 PYTEST_MOCK_CLIENT = "pytest_mock_client"
 PYTEST_RE_RECORD = "record_mode"
 MOCK_TESTS = 'MOCK_TESTS'
@@ -70,7 +70,7 @@ def before_record_request(request):
 
 
 def before_record_response(response):
-    response["url"] = re.sub(URL_REGEX, TEST_OKTA_URL, response["url"])
+    # response["url"] = re.sub(URL_REGEX, TEST_OKTA_URL, response["url"])
     if "body" in response:
         if "string" in response["body"]:
             # body = response["body"]["string"]

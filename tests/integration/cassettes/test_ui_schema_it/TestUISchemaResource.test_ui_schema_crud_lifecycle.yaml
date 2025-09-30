@@ -1,174 +1,6 @@
 interactions:
 - request:
     body: '{"uiSchema": {"buttonLabel": "Create", "elements": [{"type": "Control",
-      "scope": "#/properties/username", "label": "Username", "options": {"format":
-      "text"}}], "label": "CRUD Test Schema", "type": "Group"}}'
-    headers:
-      Accept:
-      - application/json
-      Authorization:
-      - SSWS myAPIToken
-      Content-Type:
-      - application/json
-      User-Agent:
-      - OpenAPI-Generator/1.0.0/python
-    method: POST
-    uri: https://test.okta.com/api/v1/meta/uischemas
-  response:
-    body:
-      string: '{"errorCode":"E0000001","errorSummary":"Api validation failed: elements","errorLink":"E0000001","errorId":"oaehG8aR2lBSDuo5cK_o4FZCg","errorCauses":[{"errorSummary":"elements:
-        Element #/properties/username doesn''t have a corresponding user attribute
-        in the Profile Editor."}]}'
-    headers:
-      Cache-Control:
-      - no-cache, no-store
-      Connection:
-      - keep-alive
-      Content-Type:
-      - application/json
-      Date:
-      - Wed, 03 Sep 2025 17:59:12 GMT
-      Expires:
-      - '0'
-      Pragma:
-      - no-cache
-      Server:
-      - nginx
-      Set-Cookie:
-      - sid="";Version=1;Path=/;Max-Age=0
-      - xids="";Version=1;Path=/;Max-Age=0
-      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=C1FC1C8D13CBC1FC0057DB05A112ACBA; Path=/; Secure; HttpOnly
-      Strict-Transport-Security:
-      - max-age=315360000; includeSubDomains
-      Transfer-Encoding:
-      - chunked
-      accept-ch:
-      - Sec-CH-UA-Platform-Version
-      content-security-policy:
-      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
-        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
-        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
-        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
-        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
-        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
-        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
-        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
-        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
-        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
-        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
-        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
-        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
-        ''self'''
-      p3p:
-      - CP="HONK"
-      referrer-policy:
-      - strict-origin-when-cross-origin
-      x-content-type-options:
-      - nosniff
-      x-okta-request-id:
-      - a85f4e2356db16cf560751a1dfe774dd
-      x-rate-limit-limit:
-      - '50'
-      x-rate-limit-remaining:
-      - '49'
-      x-rate-limit-reset:
-      - '1756922412'
-      x-xss-protection:
-      - '0'
-    status:
-      code: 400
-      message: Bad Request
-- request:
-    body: '{"uiSchema": {"buttonLabel": "Create", "elements": [{"type": "Control",
-      "scope": "#/properties/username", "label": "Username", "options": {"format":
-      "text"}}], "label": "CRUD Test Schema", "type": "Group"}}'
-    headers:
-      Accept:
-      - application/json
-      Authorization:
-      - SSWS myAPIToken
-      Content-Type:
-      - application/json
-      User-Agent:
-      - OpenAPI-Generator/1.0.0/python
-    method: POST
-    uri: https://test.okta.com/api/v1/meta/uischemas
-  response:
-    body:
-      string: '{"errorCode":"E0000001","errorSummary":"Api validation failed: elements","errorLink":"E0000001","errorId":"oaek9wQ349FQ4--qkhHD7ns8g","errorCauses":[{"errorSummary":"elements:
-        Element #/properties/username doesn''t have a corresponding user attribute
-        in the Profile Editor."}]}'
-    headers:
-      Cache-Control:
-      - no-cache, no-store
-      Connection:
-      - keep-alive
-      Content-Type:
-      - application/json
-      Date:
-      - Wed, 03 Sep 2025 18:00:09 GMT
-      Expires:
-      - '0'
-      Pragma:
-      - no-cache
-      Server:
-      - nginx
-      Set-Cookie:
-      - sid="";Version=1;Path=/;Max-Age=0
-      - xids="";Version=1;Path=/;Max-Age=0
-      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=B25A10E91460275D7D59971FB5A2D487; Path=/; Secure; HttpOnly
-      Strict-Transport-Security:
-      - max-age=315360000; includeSubDomains
-      Transfer-Encoding:
-      - chunked
-      accept-ch:
-      - Sec-CH-UA-Platform-Version
-      content-security-policy:
-      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
-        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
-        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
-        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
-        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
-        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
-        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
-        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
-        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
-        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
-        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
-        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
-        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
-        ''self'''
-      p3p:
-      - CP="HONK"
-      referrer-policy:
-      - strict-origin-when-cross-origin
-      x-content-type-options:
-      - nosniff
-      x-okta-request-id:
-      - 0b54813dd6738856b79e8151915b6414
-      x-rate-limit-limit:
-      - '50'
-      x-rate-limit-remaining:
-      - '48'
-      x-rate-limit-reset:
-      - '1756922412'
-      x-xss-protection:
-      - '0'
-    status:
-      code: 400
-      message: Bad Request
-- request:
-    body: '{"uiSchema": {"buttonLabel": "Create", "elements": [{"type": "Control",
       "scope": "#/properties/firstName", "label": "First Name", "options": {"format":
       "text"}}], "label": "CRUD Test Schema", "type": "Group"}}'
     headers:
@@ -184,9 +16,9 @@ interactions:
     uri: https://test.okta.com/api/v1/meta/uischemas
   response:
     body:
-      string: '{"id":"uisqe3yhtgJ4aV6975d7","uiSchema":{"type":"Group","label":"CRUD
+      string: '{"id":"uisqe5ue18XP0xovv5d7","uiSchema":{"type":"Group","label":"CRUD
         Test Schema","buttonLabel":"Create","elements":[{"type":"Control","scope":"#/properties/firstName","label":"First
-        Name","options":{"format":"text"}}]},"created":"2025-09-03T18:00:31.000Z","lastUpdated":"2025-09-03T18:00:31.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/meta/uischemas/uisqe3yhtgJ4aV6975d7","hints":{"allow":["GET","PUT","DELETE"]}}}}'
+        Name","options":{"format":"text"}}]},"created":"2025-09-03T19:29:32.000Z","lastUpdated":"2025-09-03T19:29:32.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/meta/uischemas/uisqe5ue18XP0xovv5d7","hints":{"allow":["GET","PUT","DELETE"]}}}}'
     headers:
       Cache-Control:
       - no-cache, no-store
@@ -197,7 +29,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Sep 2025 18:00:31 GMT
+      - Wed, 03 Sep 2025 19:29:32 GMT
       Expires:
       - '0'
       Pragma:
@@ -209,7 +41,7 @@ interactions:
       - xids="";Version=1;Path=/;Max-Age=0
       - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
       - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=70DC1F68BB63B245602BCE22CF78BC4D; Path=/; Secure; HttpOnly
+      - JSESSIONID=31DFA024BDBF81525DD261C7CA6ACD1C; Path=/; Secure; HttpOnly
       Strict-Transport-Security:
       - max-age=315360000; includeSubDomains
       Transfer-Encoding:
@@ -243,13 +75,13 @@ interactions:
       x-content-type-options:
       - nosniff
       x-okta-request-id:
-      - 78b33c4a074d478a992df92b50ea9cc4
+      - bc4e82bdb42f6abe9e7eb243207dbe24
       x-rate-limit-limit:
       - '50'
       x-rate-limit-remaining:
-      - '49'
+      - '41'
       x-rate-limit-reset:
-      - '1756922490'
+      - '1756927781'
       x-xss-protection:
       - '0'
     status:
@@ -267,12 +99,12 @@ interactions:
       User-Agent:
       - OpenAPI-Generator/1.0.0/python
     method: GET
-    uri: https://test.okta.com/api/v1/meta/uischemas/uisqe3yhtgJ4aV6975d7
+    uri: https://test.okta.com/api/v1/meta/uischemas/uisqe5ue18XP0xovv5d7
   response:
     body:
-      string: '{"id":"uisqe3yhtgJ4aV6975d7","uiSchema":{"type":"Group","label":"CRUD
+      string: '{"id":"uisqe5ue18XP0xovv5d7","uiSchema":{"type":"Group","label":"CRUD
         Test Schema","buttonLabel":"Create","elements":[{"type":"Control","scope":"#/properties/firstName","label":"First
-        Name","options":{"format":"text"}}]},"created":"2025-09-03T18:00:31.000Z","lastUpdated":"2025-09-03T18:00:31.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/meta/uischemas/uisqe3yhtgJ4aV6975d7","hints":{"allow":["GET","PUT","DELETE"]}}}}'
+        Name","options":{"format":"text"}}]},"created":"2025-09-03T19:29:32.000Z","lastUpdated":"2025-09-03T19:29:32.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/meta/uischemas/uisqe5ue18XP0xovv5d7","hints":{"allow":["GET","PUT","DELETE"]}}}}'
     headers:
       Cache-Control:
       - no-cache, no-store
@@ -283,7 +115,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Sep 2025 18:00:32 GMT
+      - Wed, 03 Sep 2025 19:29:33 GMT
       Expires:
       - '0'
       Pragma:
@@ -295,7 +127,7 @@ interactions:
       - xids="";Version=1;Path=/;Max-Age=0
       - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
       - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=58F2698D0A79E3304B58D6642C3FDCDC; Path=/; Secure; HttpOnly
+      - JSESSIONID=411CDE60E8CFDBD3B4E0D4CDC37235FB; Path=/; Secure; HttpOnly
       Strict-Transport-Security:
       - max-age=315360000; includeSubDomains
       Transfer-Encoding:
@@ -329,349 +161,13 @@ interactions:
       x-content-type-options:
       - nosniff
       x-okta-request-id:
-      - 41aa182a91e9c0d4b8a2e8a8c833e55c
+      - 4196261a609a1b198a80a7d9a5889aa9
       x-rate-limit-limit:
       - '50'
       x-rate-limit-remaining:
-      - '48'
+      - '40'
       x-rate-limit-reset:
-      - '1756922490'
-      x-xss-protection:
-      - '0'
-    status:
-      code: 200
-      message: OK
-- request:
-    body: '{"uiSchema": {"buttonLabel": "Update", "elements": [{"type": "Control",
-      "scope": "#/properties/firstName", "label": "First Name", "options": {"format":
-      "text"}}, {"type": "Control", "scope": "#/properties/fullName", "label": "Full
-      Name", "options": {"format": "text"}}], "label": "Updated CRUD Test Schema",
-      "type": "Group"}}'
-    headers:
-      Accept:
-      - application/json
-      Authorization:
-      - SSWS myAPIToken
-      Content-Type:
-      - application/json
-      User-Agent:
-      - OpenAPI-Generator/1.0.0/python
-    method: PUT
-    uri: https://test.okta.com/api/v1/meta/uischemas/uisqe3yhtgJ4aV6975d7
-  response:
-    body:
-      string: '{"errorCode":"E0000001","errorSummary":"Api validation failed: elements","errorLink":"E0000001","errorId":"oaeDPzIWJDNT06XTNbUKQsGrg","errorCauses":[{"errorSummary":"elements:
-        Element #/properties/fullName doesn''t have a corresponding user attribute
-        in the Profile Editor."}]}'
-    headers:
-      Cache-Control:
-      - no-cache, no-store
-      Connection:
-      - keep-alive
-      Content-Type:
-      - application/json
-      Date:
-      - Wed, 03 Sep 2025 18:00:33 GMT
-      Expires:
-      - '0'
-      Pragma:
-      - no-cache
-      Server:
-      - nginx
-      Set-Cookie:
-      - sid="";Version=1;Path=/;Max-Age=0
-      - xids="";Version=1;Path=/;Max-Age=0
-      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=6CB776D15EE76010D0DF62853A52FDD1; Path=/; Secure; HttpOnly
-      Strict-Transport-Security:
-      - max-age=315360000; includeSubDomains
-      Transfer-Encoding:
-      - chunked
-      accept-ch:
-      - Sec-CH-UA-Platform-Version
-      content-security-policy:
-      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
-        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
-        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
-        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
-        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
-        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
-        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
-        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
-        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
-        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
-        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
-        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
-        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
-        ''self'''
-      p3p:
-      - CP="HONK"
-      referrer-policy:
-      - strict-origin-when-cross-origin
-      x-content-type-options:
-      - nosniff
-      x-okta-request-id:
-      - 6b56b538585825dbf5d2551afecc5eef
-      x-rate-limit-limit:
-      - '50'
-      x-rate-limit-remaining:
-      - '47'
-      x-rate-limit-reset:
-      - '1756922490'
-      x-xss-protection:
-      - '0'
-    status:
-      code: 400
-      message: Bad Request
-- request:
-    body: null
-    headers:
-      Accept:
-      - application/json
-      Authorization:
-      - SSWS myAPIToken
-      Content-Type:
-      - application/json
-      User-Agent:
-      - OpenAPI-Generator/1.0.0/python
-    method: DELETE
-    uri: https://test.okta.com/api/v1/meta/uischemas/uisqe3yhtgJ4aV6975d7
-  response:
-    body:
-      string: ''
-    headers:
-      Cache-Control:
-      - no-cache, no-store
-      Connection:
-      - keep-alive
-      Date:
-      - Wed, 03 Sep 2025 18:00:34 GMT
-      Expires:
-      - '0'
-      Pragma:
-      - no-cache
-      Server:
-      - nginx
-      Set-Cookie:
-      - sid="";Version=1;Path=/;Max-Age=0
-      - xids="";Version=1;Path=/;Max-Age=0
-      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=3843ED64163819FAFC0D52BD2891AA4C; Path=/; Secure; HttpOnly
-      Strict-Transport-Security:
-      - max-age=315360000; includeSubDomains
-      accept-ch:
-      - Sec-CH-UA-Platform-Version
-      content-security-policy:
-      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
-        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
-        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
-        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
-        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
-        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
-        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
-        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
-        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
-        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
-        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
-        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
-        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
-        ''self'''
-      p3p:
-      - CP="HONK"
-      referrer-policy:
-      - strict-origin-when-cross-origin
-      x-frame-options:
-      - SAMEORIGIN
-      x-okta-request-id:
-      - 622b16b670709734f9f53671375f74f8
-      x-rate-limit-limit:
-      - '50'
-      x-rate-limit-remaining:
-      - '46'
-      x-rate-limit-reset:
-      - '1756922490'
-      x-xss-protection:
-      - '0'
-    status:
-      code: 204
-      message: No Content
-- request:
-    body: '{"uiSchema": {"buttonLabel": "Create", "elements": [{"type": "Control",
-      "scope": "#/properties/firstName", "label": "First Name", "options": {"format":
-      "text"}}], "label": "CRUD Test Schema", "type": "Group"}}'
-    headers:
-      Accept:
-      - application/json
-      Authorization:
-      - SSWS myAPIToken
-      Content-Type:
-      - application/json
-      User-Agent:
-      - OpenAPI-Generator/1.0.0/python
-    method: POST
-    uri: https://test.okta.com/api/v1/meta/uischemas
-  response:
-    body:
-      string: '{"id":"uisqe3y8iyQ6QytBW5d7","uiSchema":{"type":"Group","label":"CRUD
-        Test Schema","buttonLabel":"Create","elements":[{"type":"Control","scope":"#/properties/firstName","label":"First
-        Name","options":{"format":"text"}}]},"created":"2025-09-03T18:00:57.000Z","lastUpdated":"2025-09-03T18:00:57.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/meta/uischemas/uisqe3y8iyQ6QytBW5d7","hints":{"allow":["GET","PUT","DELETE"]}}}}'
-    headers:
-      Cache-Control:
-      - no-cache, no-store
-      Connection:
-      - keep-alive
-      Content-Encoding:
-      - gzip
-      Content-Type:
-      - application/json
-      Date:
-      - Wed, 03 Sep 2025 18:00:57 GMT
-      Expires:
-      - '0'
-      Pragma:
-      - no-cache
-      Server:
-      - nginx
-      Set-Cookie:
-      - sid="";Version=1;Path=/;Max-Age=0
-      - xids="";Version=1;Path=/;Max-Age=0
-      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=EA09527FA676921BAE56CE3251086434; Path=/; Secure; HttpOnly
-      Strict-Transport-Security:
-      - max-age=315360000; includeSubDomains
-      Transfer-Encoding:
-      - chunked
-      Vary:
-      - Accept-Encoding
-      accept-ch:
-      - Sec-CH-UA-Platform-Version
-      content-security-policy:
-      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
-        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
-        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
-        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
-        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
-        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
-        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
-        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
-        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
-        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
-        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
-        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
-        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
-        ''self'''
-      p3p:
-      - CP="HONK"
-      referrer-policy:
-      - strict-origin-when-cross-origin
-      x-content-type-options:
-      - nosniff
-      x-okta-request-id:
-      - 3e5711035ebe56e8b4bcc31ebc55a47a
-      x-rate-limit-limit:
-      - '50'
-      x-rate-limit-remaining:
-      - '45'
-      x-rate-limit-reset:
-      - '1756922490'
-      x-xss-protection:
-      - '0'
-    status:
-      code: 200
-      message: OK
-- request:
-    body: null
-    headers:
-      Accept:
-      - application/json
-      Authorization:
-      - SSWS myAPIToken
-      Content-Type:
-      - application/json
-      User-Agent:
-      - OpenAPI-Generator/1.0.0/python
-    method: GET
-    uri: https://test.okta.com/api/v1/meta/uischemas/uisqe3y8iyQ6QytBW5d7
-  response:
-    body:
-      string: '{"id":"uisqe3y8iyQ6QytBW5d7","uiSchema":{"type":"Group","label":"CRUD
-        Test Schema","buttonLabel":"Create","elements":[{"type":"Control","scope":"#/properties/firstName","label":"First
-        Name","options":{"format":"text"}}]},"created":"2025-09-03T18:00:57.000Z","lastUpdated":"2025-09-03T18:00:57.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/meta/uischemas/uisqe3y8iyQ6QytBW5d7","hints":{"allow":["GET","PUT","DELETE"]}}}}'
-    headers:
-      Cache-Control:
-      - no-cache, no-store
-      Connection:
-      - keep-alive
-      Content-Encoding:
-      - gzip
-      Content-Type:
-      - application/json
-      Date:
-      - Wed, 03 Sep 2025 18:00:58 GMT
-      Expires:
-      - '0'
-      Pragma:
-      - no-cache
-      Server:
-      - nginx
-      Set-Cookie:
-      - sid="";Version=1;Path=/;Max-Age=0
-      - xids="";Version=1;Path=/;Max-Age=0
-      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=87A9D2FE6A1B0CFE73714656A3348878; Path=/; Secure; HttpOnly
-      Strict-Transport-Security:
-      - max-age=315360000; includeSubDomains
-      Transfer-Encoding:
-      - chunked
-      Vary:
-      - Accept-Encoding
-      accept-ch:
-      - Sec-CH-UA-Platform-Version
-      content-security-policy:
-      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
-        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
-        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
-        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
-        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
-        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
-        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
-        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
-        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
-        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
-        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
-        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
-        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
-        ''self'''
-      p3p:
-      - CP="HONK"
-      referrer-policy:
-      - strict-origin-when-cross-origin
-      x-content-type-options:
-      - nosniff
-      x-okta-request-id:
-      - 1cea34ef3cf942ba1c2a1b1f625be260
-      x-rate-limit-limit:
-      - '50'
-      x-rate-limit-remaining:
-      - '44'
-      x-rate-limit-reset:
-      - '1756922490'
+      - '1756927781'
       x-xss-protection:
       - '0'
     status:
@@ -693,13 +189,13 @@ interactions:
       User-Agent:
       - OpenAPI-Generator/1.0.0/python
     method: PUT
-    uri: https://test.okta.com/api/v1/meta/uischemas/uisqe3y8iyQ6QytBW5d7
+    uri: https://test.okta.com/api/v1/meta/uischemas/uisqe5ue18XP0xovv5d7
   response:
     body:
-      string: '{"id":"uisqe3y8iyQ6QytBW5d7","uiSchema":{"type":"Group","label":"Updated
+      string: '{"id":"uisqe5ue18XP0xovv5d7","uiSchema":{"type":"Group","label":"Updated
         CRUD Test Schema","buttonLabel":"Update","elements":[{"type":"Control","scope":"#/properties/firstName","label":"First
         Name","options":{"format":"text"}},{"type":"Control","scope":"#/properties/email","label":"Email
-        Address","options":{"format":"text"}}]},"created":"2025-09-03T18:00:57.000Z","lastUpdated":"2025-09-03T18:00:59.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/meta/uischemas/uisqe3y8iyQ6QytBW5d7","hints":{"allow":["GET","PUT","DELETE"]}}}}'
+        Address","options":{"format":"text"}}]},"created":"2025-09-03T19:29:32.000Z","lastUpdated":"2025-09-03T19:29:34.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/meta/uischemas/uisqe5ue18XP0xovv5d7","hints":{"allow":["GET","PUT","DELETE"]}}}}'
     headers:
       Cache-Control:
       - no-cache, no-store
@@ -710,7 +206,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Sep 2025 18:00:59 GMT
+      - Wed, 03 Sep 2025 19:29:34 GMT
       Expires:
       - '0'
       Pragma:
@@ -722,7 +218,7 @@ interactions:
       - xids="";Version=1;Path=/;Max-Age=0
       - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
       - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=C55D608B6B449F449475E32A44EBC92F; Path=/; Secure; HttpOnly
+      - JSESSIONID=32A3CE47B89A5EDFA7D78244EA4D4279; Path=/; Secure; HttpOnly
       Strict-Transport-Security:
       - max-age=315360000; includeSubDomains
       Transfer-Encoding:
@@ -756,425 +252,13 @@ interactions:
       x-content-type-options:
       - nosniff
       x-okta-request-id:
-      - 336c1b76cddcb0a99134a3c6df6cf9ba
-      x-rate-limit-limit:
-      - '50'
-      x-rate-limit-remaining:
-      - '43'
-      x-rate-limit-reset:
-      - '1756922490'
-      x-xss-protection:
-      - '0'
-    status:
-      code: 200
-      message: OK
-- request:
-    body: null
-    headers:
-      Accept:
-      - application/json
-      Authorization:
-      - SSWS myAPIToken
-      Content-Type:
-      - application/json
-      User-Agent:
-      - OpenAPI-Generator/1.0.0/python
-    method: GET
-    uri: https://test.okta.com/api/v1/meta/uischemas/uisqe3y8iyQ6QytBW5d7
-  response:
-    body:
-      string: '{"id":"uisqe3y8iyQ6QytBW5d7","uiSchema":{"type":"Group","label":"Updated
-        CRUD Test Schema","buttonLabel":"Update","elements":[{"type":"Control","scope":"#/properties/firstName","label":"First
-        Name","options":{"format":"text"}},{"type":"Control","scope":"#/properties/email","label":"Email
-        Address","options":{"format":"text"}}]},"created":"2025-09-03T18:00:57.000Z","lastUpdated":"2025-09-03T18:00:59.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/meta/uischemas/uisqe3y8iyQ6QytBW5d7","hints":{"allow":["GET","PUT","DELETE"]}}}}'
-    headers:
-      Cache-Control:
-      - no-cache, no-store
-      Connection:
-      - keep-alive
-      Content-Encoding:
-      - gzip
-      Content-Type:
-      - application/json
-      Date:
-      - Wed, 03 Sep 2025 18:01:00 GMT
-      Expires:
-      - '0'
-      Pragma:
-      - no-cache
-      Server:
-      - nginx
-      Set-Cookie:
-      - sid="";Version=1;Path=/;Max-Age=0
-      - xids="";Version=1;Path=/;Max-Age=0
-      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=723EE93D2A8B13EC4500D922974B9DBB; Path=/; Secure; HttpOnly
-      Strict-Transport-Security:
-      - max-age=315360000; includeSubDomains
-      Transfer-Encoding:
-      - chunked
-      Vary:
-      - Accept-Encoding
-      accept-ch:
-      - Sec-CH-UA-Platform-Version
-      content-security-policy:
-      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
-        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
-        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
-        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
-        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
-        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
-        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
-        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
-        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
-        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
-        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
-        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
-        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
-        ''self'''
-      p3p:
-      - CP="HONK"
-      referrer-policy:
-      - strict-origin-when-cross-origin
-      x-content-type-options:
-      - nosniff
-      x-okta-request-id:
-      - 1ee699458d01c8eaa8e4b2aef8d92aa5
-      x-rate-limit-limit:
-      - '50'
-      x-rate-limit-remaining:
-      - '42'
-      x-rate-limit-reset:
-      - '1756922490'
-      x-xss-protection:
-      - '0'
-    status:
-      code: 200
-      message: OK
-- request:
-    body: null
-    headers:
-      Accept:
-      - application/json
-      Authorization:
-      - SSWS myAPIToken
-      Content-Type:
-      - application/json
-      User-Agent:
-      - OpenAPI-Generator/1.0.0/python
-    method: DELETE
-    uri: https://test.okta.com/api/v1/meta/uischemas/uisqe3y8iyQ6QytBW5d7
-  response:
-    body:
-      string: ''
-    headers:
-      Cache-Control:
-      - no-cache, no-store
-      Connection:
-      - keep-alive
-      Date:
-      - Wed, 03 Sep 2025 18:01:01 GMT
-      Expires:
-      - '0'
-      Pragma:
-      - no-cache
-      Server:
-      - nginx
-      Set-Cookie:
-      - sid="";Version=1;Path=/;Max-Age=0
-      - xids="";Version=1;Path=/;Max-Age=0
-      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=DC17D8D5E603CB0445B1728AAE73617D; Path=/; Secure; HttpOnly
-      Strict-Transport-Security:
-      - max-age=315360000; includeSubDomains
-      accept-ch:
-      - Sec-CH-UA-Platform-Version
-      content-security-policy:
-      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
-        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
-        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
-        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
-        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
-        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
-        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
-        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
-        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
-        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
-        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
-        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
-        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
-        ''self'''
-      p3p:
-      - CP="HONK"
-      referrer-policy:
-      - strict-origin-when-cross-origin
-      x-frame-options:
-      - SAMEORIGIN
-      x-okta-request-id:
-      - 52b53b5ec7e4557f7bb39b4c4cae6e8c
-      x-rate-limit-limit:
-      - '50'
-      x-rate-limit-remaining:
-      - '41'
-      x-rate-limit-reset:
-      - '1756922490'
-      x-xss-protection:
-      - '0'
-    status:
-      code: 204
-      message: No Content
-- request:
-    body: null
-    headers:
-      Accept:
-      - application/json
-      Authorization:
-      - SSWS myAPIToken
-      Content-Type:
-      - application/json
-      User-Agent:
-      - OpenAPI-Generator/1.0.0/python
-    method: GET
-    uri: https://test.okta.com/api/v1/meta/uischemas/uisqe3y8iyQ6QytBW5d7
-  response:
-    body:
-      string: '{"errorCode":"E0000007","errorSummary":"Not found: Resource not found:
-        uisqe3y8iyQ6QytBW5d7 (UISchemaEntity)","errorLink":"E0000007","errorId":"oaeMDKT_L_GRXyVoD8Xfm-Hdw","errorCauses":[]}'
-    headers:
-      Cache-Control:
-      - no-cache, no-store
-      Connection:
-      - keep-alive
-      Content-Encoding:
-      - gzip
-      Content-Type:
-      - application/json
-      Date:
-      - Wed, 03 Sep 2025 18:01:02 GMT
-      Expires:
-      - '0'
-      Pragma:
-      - no-cache
-      Server:
-      - nginx
-      Set-Cookie:
-      - sid="";Version=1;Path=/;Max-Age=0
-      - xids="";Version=1;Path=/;Max-Age=0
-      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=D59970F16ADFC76B1221DEC5A6EC2266; Path=/; Secure; HttpOnly
-      Strict-Transport-Security:
-      - max-age=315360000; includeSubDomains
-      Transfer-Encoding:
-      - chunked
-      Vary:
-      - Accept-Encoding
-      accept-ch:
-      - Sec-CH-UA-Platform-Version
-      content-security-policy:
-      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
-        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
-        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
-        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
-        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
-        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
-        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
-        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
-        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
-        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
-        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
-        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
-        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
-        ''self'''
-      p3p:
-      - CP="HONK"
-      referrer-policy:
-      - strict-origin-when-cross-origin
-      x-content-type-options:
-      - nosniff
-      x-okta-request-id:
-      - 9e92d4942d341e706c884c42d2736bcb
-      x-rate-limit-limit:
-      - '50'
-      x-rate-limit-remaining:
-      - '40'
-      x-rate-limit-reset:
-      - '1756922490'
-      x-xss-protection:
-      - '0'
-    status:
-      code: 404
-      message: Not Found
-- request:
-    body: null
-    headers:
-      Accept:
-      - application/json
-      Authorization:
-      - SSWS myAPIToken
-      Content-Type:
-      - application/json
-      User-Agent:
-      - OpenAPI-Generator/1.0.0/python
-    method: DELETE
-    uri: https://test.okta.com/api/v1/meta/uischemas/uisqe3y8iyQ6QytBW5d7
-  response:
-    body:
-      string: ''
-    headers:
-      Cache-Control:
-      - no-cache, no-store
-      Connection:
-      - keep-alive
-      Date:
-      - Wed, 03 Sep 2025 18:01:03 GMT
-      Expires:
-      - '0'
-      Pragma:
-      - no-cache
-      Server:
-      - nginx
-      Set-Cookie:
-      - sid="";Version=1;Path=/;Max-Age=0
-      - xids="";Version=1;Path=/;Max-Age=0
-      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=C96B730FB29B02F02B969FBF2F8E3F10; Path=/; Secure; HttpOnly
-      Strict-Transport-Security:
-      - max-age=315360000; includeSubDomains
-      accept-ch:
-      - Sec-CH-UA-Platform-Version
-      content-security-policy:
-      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
-        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
-        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
-        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
-        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
-        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
-        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
-        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
-        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
-        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
-        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
-        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
-        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
-        ''self'''
-      p3p:
-      - CP="HONK"
-      referrer-policy:
-      - strict-origin-when-cross-origin
-      x-frame-options:
-      - SAMEORIGIN
-      x-okta-request-id:
-      - 91f337958e5829a47b3cc1bd6b5851aa
+      - 3233a8bea0bda0cf2a3f1099825ffca6
       x-rate-limit-limit:
       - '50'
       x-rate-limit-remaining:
       - '39'
       x-rate-limit-reset:
-      - '1756922490'
-      x-xss-protection:
-      - '0'
-    status:
-      code: 204
-      message: No Content
-- request:
-    body: '{"uiSchema": {"buttonLabel": "Create", "elements": [{"type": "Control",
-      "scope": "#/properties/firstName", "label": "First Name", "options": {"format":
-      "text"}}], "label": "CRUD Test Schema", "type": "Group"}}'
-    headers:
-      Accept:
-      - application/json
-      Authorization:
-      - SSWS myAPIToken
-      Content-Type:
-      - application/json
-      User-Agent:
-      - OpenAPI-Generator/1.0.0/python
-    method: POST
-    uri: https://test.okta.com/api/v1/meta/uischemas
-  response:
-    body:
-      string: '{"id":"uisqe58rztuHFpLWC5d7","uiSchema":{"type":"Group","label":"CRUD
-        Test Schema","buttonLabel":"Create","elements":[{"type":"Control","scope":"#/properties/firstName","label":"First
-        Name","options":{"format":"text"}}]},"created":"2025-09-03T19:02:32.000Z","lastUpdated":"2025-09-03T19:02:32.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/meta/uischemas/uisqe58rztuHFpLWC5d7","hints":{"allow":["GET","PUT","DELETE"]}}}}'
-    headers:
-      Cache-Control:
-      - no-cache, no-store
-      Connection:
-      - keep-alive
-      Content-Encoding:
-      - gzip
-      Content-Type:
-      - application/json
-      Date:
-      - Wed, 03 Sep 2025 19:02:32 GMT
-      Expires:
-      - '0'
-      Pragma:
-      - no-cache
-      Server:
-      - nginx
-      Set-Cookie:
-      - sid="";Version=1;Path=/;Max-Age=0
-      - xids="";Version=1;Path=/;Max-Age=0
-      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=21BBA4C5991F23D4C64585985C8D6A45; Path=/; Secure; HttpOnly
-      Strict-Transport-Security:
-      - max-age=315360000; includeSubDomains
-      Transfer-Encoding:
-      - chunked
-      Vary:
-      - Accept-Encoding
-      accept-ch:
-      - Sec-CH-UA-Platform-Version
-      content-security-policy:
-      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
-        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
-        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
-        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
-        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
-        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
-        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
-        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
-        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
-        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
-        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
-        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
-        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
-        ''self'''
-      p3p:
-      - CP="HONK"
-      referrer-policy:
-      - strict-origin-when-cross-origin
-      x-content-type-options:
-      - nosniff
-      x-okta-request-id:
-      - 329ad51ec82ca01d04932775f8f4f555
-      x-rate-limit-limit:
-      - '50'
-      x-rate-limit-remaining:
-      - '46'
-      x-rate-limit-reset:
-      - '1756926185'
+      - '1756927781'
       x-xss-protection:
       - '0'
     status:
@@ -1192,103 +276,13 @@ interactions:
       User-Agent:
       - OpenAPI-Generator/1.0.0/python
     method: GET
-    uri: https://test.okta.com/api/v1/meta/uischemas/uisqe58rztuHFpLWC5d7
+    uri: https://test.okta.com/api/v1/meta/uischemas/uisqe5ue18XP0xovv5d7
   response:
     body:
-      string: '{"id":"uisqe58rztuHFpLWC5d7","uiSchema":{"type":"Group","label":"CRUD
-        Test Schema","buttonLabel":"Create","elements":[{"type":"Control","scope":"#/properties/firstName","label":"First
-        Name","options":{"format":"text"}}]},"created":"2025-09-03T19:02:32.000Z","lastUpdated":"2025-09-03T19:02:32.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/meta/uischemas/uisqe58rztuHFpLWC5d7","hints":{"allow":["GET","PUT","DELETE"]}}}}'
-    headers:
-      Cache-Control:
-      - no-cache, no-store
-      Connection:
-      - keep-alive
-      Content-Encoding:
-      - gzip
-      Content-Type:
-      - application/json
-      Date:
-      - Wed, 03 Sep 2025 19:02:33 GMT
-      Expires:
-      - '0'
-      Pragma:
-      - no-cache
-      Server:
-      - nginx
-      Set-Cookie:
-      - sid="";Version=1;Path=/;Max-Age=0
-      - xids="";Version=1;Path=/;Max-Age=0
-      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=D308BEA6CA02F168662F87788DE42658; Path=/; Secure; HttpOnly
-      Strict-Transport-Security:
-      - max-age=315360000; includeSubDomains
-      Transfer-Encoding:
-      - chunked
-      Vary:
-      - Accept-Encoding
-      accept-ch:
-      - Sec-CH-UA-Platform-Version
-      content-security-policy:
-      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
-        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
-        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
-        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
-        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
-        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
-        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
-        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
-        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
-        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
-        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
-        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
-        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
-        ''self'''
-      p3p:
-      - CP="HONK"
-      referrer-policy:
-      - strict-origin-when-cross-origin
-      x-content-type-options:
-      - nosniff
-      x-okta-request-id:
-      - c5fba52f28f212347b9feae9a8dd58f4
-      x-rate-limit-limit:
-      - '50'
-      x-rate-limit-remaining:
-      - '45'
-      x-rate-limit-reset:
-      - '1756926185'
-      x-xss-protection:
-      - '0'
-    status:
-      code: 200
-      message: OK
-- request:
-    body: '{"uiSchema": {"buttonLabel": "Update", "elements": [{"type": "Control",
-      "scope": "#/properties/firstName", "label": "First Name", "options": {"format":
-      "text"}}, {"type": "Control", "scope": "#/properties/email", "label": "Email
-      Address", "options": {"format": "text"}}], "label": "Updated CRUD Test Schema",
-      "type": "Group"}}'
-    headers:
-      Accept:
-      - application/json
-      Authorization:
-      - SSWS myAPIToken
-      Content-Type:
-      - application/json
-      User-Agent:
-      - OpenAPI-Generator/1.0.0/python
-    method: PUT
-    uri: https://test.okta.com/api/v1/meta/uischemas/uisqe58rztuHFpLWC5d7
-  response:
-    body:
-      string: '{"id":"uisqe58rztuHFpLWC5d7","uiSchema":{"type":"Group","label":"Updated
+      string: '{"id":"uisqe5ue18XP0xovv5d7","uiSchema":{"type":"Group","label":"Updated
         CRUD Test Schema","buttonLabel":"Update","elements":[{"type":"Control","scope":"#/properties/firstName","label":"First
         Name","options":{"format":"text"}},{"type":"Control","scope":"#/properties/email","label":"Email
-        Address","options":{"format":"text"}}]},"created":"2025-09-03T19:02:32.000Z","lastUpdated":"2025-09-03T19:02:35.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/meta/uischemas/uisqe58rztuHFpLWC5d7","hints":{"allow":["GET","PUT","DELETE"]}}}}'
+        Address","options":{"format":"text"}}]},"created":"2025-09-03T19:29:32.000Z","lastUpdated":"2025-09-03T19:29:34.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/meta/uischemas/uisqe5ue18XP0xovv5d7","hints":{"allow":["GET","PUT","DELETE"]}}}}'
     headers:
       Cache-Control:
       - no-cache, no-store
@@ -1299,7 +293,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Sep 2025 19:02:35 GMT
+      - Wed, 03 Sep 2025 19:29:35 GMT
       Expires:
       - '0'
       Pragma:
@@ -1311,7 +305,7 @@ interactions:
       - xids="";Version=1;Path=/;Max-Age=0
       - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
       - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=2676C3D22D685DD1AC0FBF6C0CE6D3D6; Path=/; Secure; HttpOnly
+      - JSESSIONID=64C6137653CCA5FED21C527BDC7B75E5; Path=/; Secure; HttpOnly
       Strict-Transport-Security:
       - max-age=315360000; includeSubDomains
       Transfer-Encoding:
@@ -1345,100 +339,13 @@ interactions:
       x-content-type-options:
       - nosniff
       x-okta-request-id:
-      - 81f73351204e761b64265005abbc4bec
+      - 086611461be711cad6162082a191a3f5
       x-rate-limit-limit:
       - '50'
       x-rate-limit-remaining:
-      - '44'
+      - '38'
       x-rate-limit-reset:
-      - '1756926185'
-      x-xss-protection:
-      - '0'
-    status:
-      code: 200
-      message: OK
-- request:
-    body: null
-    headers:
-      Accept:
-      - application/json
-      Authorization:
-      - SSWS myAPIToken
-      Content-Type:
-      - application/json
-      User-Agent:
-      - OpenAPI-Generator/1.0.0/python
-    method: GET
-    uri: https://test.okta.com/api/v1/meta/uischemas/uisqe58rztuHFpLWC5d7
-  response:
-    body:
-      string: '{"id":"uisqe58rztuHFpLWC5d7","uiSchema":{"type":"Group","label":"Updated
-        CRUD Test Schema","buttonLabel":"Update","elements":[{"type":"Control","scope":"#/properties/firstName","label":"First
-        Name","options":{"format":"text"}},{"type":"Control","scope":"#/properties/email","label":"Email
-        Address","options":{"format":"text"}}]},"created":"2025-09-03T19:02:32.000Z","lastUpdated":"2025-09-03T19:02:35.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/meta/uischemas/uisqe58rztuHFpLWC5d7","hints":{"allow":["GET","PUT","DELETE"]}}}}'
-    headers:
-      Cache-Control:
-      - no-cache, no-store
-      Connection:
-      - keep-alive
-      Content-Encoding:
-      - gzip
-      Content-Type:
-      - application/json
-      Date:
-      - Wed, 03 Sep 2025 19:02:36 GMT
-      Expires:
-      - '0'
-      Pragma:
-      - no-cache
-      Server:
-      - nginx
-      Set-Cookie:
-      - sid="";Version=1;Path=/;Max-Age=0
-      - xids="";Version=1;Path=/;Max-Age=0
-      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=38C6077FCA03E4D4B598D1572442E5BD; Path=/; Secure; HttpOnly
-      Strict-Transport-Security:
-      - max-age=315360000; includeSubDomains
-      Transfer-Encoding:
-      - chunked
-      Vary:
-      - Accept-Encoding
-      accept-ch:
-      - Sec-CH-UA-Platform-Version
-      content-security-policy:
-      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
-        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
-        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
-        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
-        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
-        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
-        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
-        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
-        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
-        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
-        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
-        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
-        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
-        ''self'''
-      p3p:
-      - CP="HONK"
-      referrer-policy:
-      - strict-origin-when-cross-origin
-      x-content-type-options:
-      - nosniff
-      x-okta-request-id:
-      - e9137f5bf3e7f802522eac096dd6d044
-      x-rate-limit-limit:
-      - '50'
-      x-rate-limit-remaining:
-      - '43'
-      x-rate-limit-reset:
-      - '1756926185'
+      - '1756927781'
       x-xss-protection:
       - '0'
     status:
@@ -1456,7 +363,7 @@ interactions:
       User-Agent:
       - OpenAPI-Generator/1.0.0/python
     method: DELETE
-    uri: https://test.okta.com/api/v1/meta/uischemas/uisqe58rztuHFpLWC5d7
+    uri: https://test.okta.com/api/v1/meta/uischemas/uisqe5ue18XP0xovv5d7
   response:
     body:
       string: ''
@@ -1466,7 +373,7 @@ interactions:
       Connection:
       - keep-alive
       Date:
-      - Wed, 03 Sep 2025 19:02:37 GMT
+      - Wed, 03 Sep 2025 19:29:36 GMT
       Expires:
       - '0'
       Pragma:
@@ -1478,7 +385,7 @@ interactions:
       - xids="";Version=1;Path=/;Max-Age=0
       - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
       - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=B6993131CB5095AD41C6CDF38484A979; Path=/; Secure; HttpOnly
+      - JSESSIONID=D11E31FC4021FF14C79F0EE081ADD0B1; Path=/; Secure; HttpOnly
       Strict-Transport-Security:
       - max-age=315360000; includeSubDomains
       accept-ch:
@@ -1508,13 +415,13 @@ interactions:
       x-frame-options:
       - SAMEORIGIN
       x-okta-request-id:
-      - d4e234eee4fbbdac92428d9ea96f61c7
+      - bf625b0e76abe2c5f0232d2d0ebf217f
       x-rate-limit-limit:
       - '50'
       x-rate-limit-remaining:
-      - '42'
+      - '37'
       x-rate-limit-reset:
-      - '1756926185'
+      - '1756927781'
       x-xss-protection:
       - '0'
     status:
@@ -1532,11 +439,11 @@ interactions:
       User-Agent:
       - OpenAPI-Generator/1.0.0/python
     method: GET
-    uri: https://test.okta.com/api/v1/meta/uischemas/uisqe58rztuHFpLWC5d7
+    uri: https://test.okta.com/api/v1/meta/uischemas/uisqe5ue18XP0xovv5d7
   response:
     body:
       string: '{"errorCode":"E0000007","errorSummary":"Not found: Resource not found:
-        uisqe58rztuHFpLWC5d7 (UISchemaEntity)","errorLink":"E0000007","errorId":"oaeL1pQjZT7QH-BOUnSVS_fFw","errorCauses":[]}'
+        uisqe5ue18XP0xovv5d7 (UISchemaEntity)","errorLink":"E0000007","errorId":"oaeiMCveKkaSUO_7-0msnA0Cw","errorCauses":[]}'
     headers:
       Cache-Control:
       - no-cache, no-store
@@ -1547,7 +454,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Sep 2025 19:02:38 GMT
+      - Wed, 03 Sep 2025 19:29:39 GMT
       Expires:
       - '0'
       Pragma:
@@ -1559,7 +466,7 @@ interactions:
       - xids="";Version=1;Path=/;Max-Age=0
       - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
       - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=33359FD35A2F51E71A8627002695C9E5; Path=/; Secure; HttpOnly
+      - JSESSIONID=363F4AAE1D363F563D6101F1D923A4D2; Path=/; Secure; HttpOnly
       Strict-Transport-Security:
       - max-age=315360000; includeSubDomains
       Transfer-Encoding:
@@ -1593,13 +500,13 @@ interactions:
       x-content-type-options:
       - nosniff
       x-okta-request-id:
-      - 2dbc1255d862285e3eee3d996b64c808
+      - 9c85fb3f9f6a41e3b8a0a1c012e4d591
       x-rate-limit-limit:
       - '50'
       x-rate-limit-remaining:
-      - '41'
+      - '36'
       x-rate-limit-reset:
-      - '1756926185'
+      - '1756927781'
       x-xss-protection:
       - '0'
     status:
@@ -1617,7 +524,7 @@ interactions:
       User-Agent:
       - OpenAPI-Generator/1.0.0/python
     method: DELETE
-    uri: https://test.okta.com/api/v1/meta/uischemas/uisqe58rztuHFpLWC5d7
+    uri: https://test.okta.com/api/v1/meta/uischemas/uisqe5ue18XP0xovv5d7
   response:
     body:
       string: ''
@@ -1627,7 +534,7 @@ interactions:
       Connection:
       - keep-alive
       Date:
-      - Wed, 03 Sep 2025 19:02:39 GMT
+      - Wed, 03 Sep 2025 19:29:40 GMT
       Expires:
       - '0'
       Pragma:
@@ -1639,7 +546,7 @@ interactions:
       - xids="";Version=1;Path=/;Max-Age=0
       - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
       - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=5936E89320796F47C88B86B848288EE5; Path=/; Secure; HttpOnly
+      - JSESSIONID=385C5868F153E175AF9A88EC8552F441; Path=/; Secure; HttpOnly
       Strict-Transport-Security:
       - max-age=315360000; includeSubDomains
       accept-ch:
@@ -1669,602 +576,13 @@ interactions:
       x-frame-options:
       - SAMEORIGIN
       x-okta-request-id:
-      - 9dbed8d600a3e9ef30b56b881e2e7319
+      - 3c992841549b3b52881389d28537da7e
       x-rate-limit-limit:
       - '50'
       x-rate-limit-remaining:
-      - '40'
+      - '35'
       x-rate-limit-reset:
-      - '1756926185'
-      x-xss-protection:
-      - '0'
-    status:
-      code: 204
-      message: No Content
-- request:
-    body: '{"uiSchema": {"buttonLabel": "Create", "elements": [{"type": "Control",
-      "scope": "#/properties/firstName", "label": "First Name", "options": {"format":
-      "text"}}], "label": "CRUD Test Schema", "type": "Group"}}'
-    headers:
-      Accept:
-      - application/json
-      Authorization:
-      - SSWS myAPIToken
-      Content-Type:
-      - application/json
-      User-Agent:
-      - OpenAPI-Generator/1.0.0/python
-    method: POST
-    uri: https://test.okta.com/api/v1/meta/uischemas
-  response:
-    body:
-      string: '{"id":"uisqe5pjwioQ8Tf0O5d7","uiSchema":{"type":"Group","label":"CRUD
-        Test Schema","buttonLabel":"Create","elements":[{"type":"Control","scope":"#/properties/firstName","label":"First
-        Name","options":{"format":"text"}}]},"created":"2025-09-03T19:23:03.000Z","lastUpdated":"2025-09-03T19:23:03.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/meta/uischemas/uisqe5pjwioQ8Tf0O5d7","hints":{"allow":["GET","PUT","DELETE"]}}}}'
-    headers:
-      Cache-Control:
-      - no-cache, no-store
-      Connection:
-      - keep-alive
-      Content-Encoding:
-      - gzip
-      Content-Type:
-      - application/json
-      Date:
-      - Wed, 03 Sep 2025 19:23:03 GMT
-      Expires:
-      - '0'
-      Pragma:
-      - no-cache
-      Server:
-      - nginx
-      Set-Cookie:
-      - sid="";Version=1;Path=/;Max-Age=0
-      - xids="";Version=1;Path=/;Max-Age=0
-      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=2D3AF2B9D5F57AFAABDCFF9618EA3AA6; Path=/; Secure; HttpOnly
-      Strict-Transport-Security:
-      - max-age=315360000; includeSubDomains
-      Transfer-Encoding:
-      - chunked
-      Vary:
-      - Accept-Encoding
-      accept-ch:
-      - Sec-CH-UA-Platform-Version
-      content-security-policy:
-      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
-        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
-        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
-        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
-        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
-        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
-        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
-        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
-        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
-        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
-        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
-        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
-        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
-        ''self'''
-      p3p:
-      - CP="HONK"
-      referrer-policy:
-      - strict-origin-when-cross-origin
-      x-content-type-options:
-      - nosniff
-      x-okta-request-id:
-      - 808ca9721cefff73dbe11966efccb36f
-      x-rate-limit-limit:
-      - '50'
-      x-rate-limit-remaining:
-      - '49'
-      x-rate-limit-reset:
-      - '1756927443'
-      x-xss-protection:
-      - '0'
-    status:
-      code: 200
-      message: OK
-- request:
-    body: null
-    headers:
-      Accept:
-      - application/json
-      Authorization:
-      - SSWS myAPIToken
-      Content-Type:
-      - application/json
-      User-Agent:
-      - OpenAPI-Generator/1.0.0/python
-    method: GET
-    uri: https://test.okta.com/api/v1/meta/uischemas/uisqe5pjwioQ8Tf0O5d7
-  response:
-    body:
-      string: '{"id":"uisqe5pjwioQ8Tf0O5d7","uiSchema":{"type":"Group","label":"CRUD
-        Test Schema","buttonLabel":"Create","elements":[{"type":"Control","scope":"#/properties/firstName","label":"First
-        Name","options":{"format":"text"}}]},"created":"2025-09-03T19:23:03.000Z","lastUpdated":"2025-09-03T19:23:03.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/meta/uischemas/uisqe5pjwioQ8Tf0O5d7","hints":{"allow":["GET","PUT","DELETE"]}}}}'
-    headers:
-      Cache-Control:
-      - no-cache, no-store
-      Connection:
-      - keep-alive
-      Content-Encoding:
-      - gzip
-      Content-Type:
-      - application/json
-      Date:
-      - Wed, 03 Sep 2025 19:23:04 GMT
-      Expires:
-      - '0'
-      Pragma:
-      - no-cache
-      Server:
-      - nginx
-      Set-Cookie:
-      - sid="";Version=1;Path=/;Max-Age=0
-      - xids="";Version=1;Path=/;Max-Age=0
-      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=1D9D99397E481E9D96071041C23BC21D; Path=/; Secure; HttpOnly
-      Strict-Transport-Security:
-      - max-age=315360000; includeSubDomains
-      Transfer-Encoding:
-      - chunked
-      Vary:
-      - Accept-Encoding
-      accept-ch:
-      - Sec-CH-UA-Platform-Version
-      content-security-policy:
-      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
-        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
-        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
-        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
-        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
-        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
-        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
-        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
-        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
-        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
-        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
-        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
-        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
-        ''self'''
-      p3p:
-      - CP="HONK"
-      referrer-policy:
-      - strict-origin-when-cross-origin
-      x-content-type-options:
-      - nosniff
-      x-okta-request-id:
-      - 93016985b234dcc706ea67350cd82c8d
-      x-rate-limit-limit:
-      - '50'
-      x-rate-limit-remaining:
-      - '48'
-      x-rate-limit-reset:
-      - '1756927443'
-      x-xss-protection:
-      - '0'
-    status:
-      code: 200
-      message: OK
-- request:
-    body: '{"uiSchema": {"buttonLabel": "Update", "elements": [{"type": "Control",
-      "scope": "#/properties/firstName", "label": "First Name", "options": {"format":
-      "text"}}, {"type": "Control", "scope": "#/properties/email", "label": "Email
-      Address", "options": {"format": "text"}}], "label": "Updated CRUD Test Schema",
-      "type": "Group"}}'
-    headers:
-      Accept:
-      - application/json
-      Authorization:
-      - SSWS myAPIToken
-      Content-Type:
-      - application/json
-      User-Agent:
-      - OpenAPI-Generator/1.0.0/python
-    method: PUT
-    uri: https://test.okta.com/api/v1/meta/uischemas/uisqe5pjwioQ8Tf0O5d7
-  response:
-    body:
-      string: '{"id":"uisqe5pjwioQ8Tf0O5d7","uiSchema":{"type":"Group","label":"Updated
-        CRUD Test Schema","buttonLabel":"Update","elements":[{"type":"Control","scope":"#/properties/firstName","label":"First
-        Name","options":{"format":"text"}},{"type":"Control","scope":"#/properties/email","label":"Email
-        Address","options":{"format":"text"}}]},"created":"2025-09-03T19:23:03.000Z","lastUpdated":"2025-09-03T19:23:05.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/meta/uischemas/uisqe5pjwioQ8Tf0O5d7","hints":{"allow":["GET","PUT","DELETE"]}}}}'
-    headers:
-      Cache-Control:
-      - no-cache, no-store
-      Connection:
-      - keep-alive
-      Content-Encoding:
-      - gzip
-      Content-Type:
-      - application/json
-      Date:
-      - Wed, 03 Sep 2025 19:23:05 GMT
-      Expires:
-      - '0'
-      Pragma:
-      - no-cache
-      Server:
-      - nginx
-      Set-Cookie:
-      - sid="";Version=1;Path=/;Max-Age=0
-      - xids="";Version=1;Path=/;Max-Age=0
-      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=B6E5E7BB7D64F409F0BE20FEF2D82267; Path=/; Secure; HttpOnly
-      Strict-Transport-Security:
-      - max-age=315360000; includeSubDomains
-      Transfer-Encoding:
-      - chunked
-      Vary:
-      - Accept-Encoding
-      accept-ch:
-      - Sec-CH-UA-Platform-Version
-      content-security-policy:
-      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
-        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
-        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
-        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
-        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
-        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
-        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
-        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
-        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
-        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
-        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
-        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
-        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
-        ''self'''
-      p3p:
-      - CP="HONK"
-      referrer-policy:
-      - strict-origin-when-cross-origin
-      x-content-type-options:
-      - nosniff
-      x-okta-request-id:
-      - 77d978d0dbdc3d1d613363beb0240ab2
-      x-rate-limit-limit:
-      - '50'
-      x-rate-limit-remaining:
-      - '47'
-      x-rate-limit-reset:
-      - '1756927443'
-      x-xss-protection:
-      - '0'
-    status:
-      code: 200
-      message: OK
-- request:
-    body: null
-    headers:
-      Accept:
-      - application/json
-      Authorization:
-      - SSWS myAPIToken
-      Content-Type:
-      - application/json
-      User-Agent:
-      - OpenAPI-Generator/1.0.0/python
-    method: GET
-    uri: https://test.okta.com/api/v1/meta/uischemas/uisqe5pjwioQ8Tf0O5d7
-  response:
-    body:
-      string: '{"id":"uisqe5pjwioQ8Tf0O5d7","uiSchema":{"type":"Group","label":"Updated
-        CRUD Test Schema","buttonLabel":"Update","elements":[{"type":"Control","scope":"#/properties/firstName","label":"First
-        Name","options":{"format":"text"}},{"type":"Control","scope":"#/properties/email","label":"Email
-        Address","options":{"format":"text"}}]},"created":"2025-09-03T19:23:03.000Z","lastUpdated":"2025-09-03T19:23:05.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/meta/uischemas/uisqe5pjwioQ8Tf0O5d7","hints":{"allow":["GET","PUT","DELETE"]}}}}'
-    headers:
-      Cache-Control:
-      - no-cache, no-store
-      Connection:
-      - keep-alive
-      Content-Encoding:
-      - gzip
-      Content-Type:
-      - application/json
-      Date:
-      - Wed, 03 Sep 2025 19:23:06 GMT
-      Expires:
-      - '0'
-      Pragma:
-      - no-cache
-      Server:
-      - nginx
-      Set-Cookie:
-      - sid="";Version=1;Path=/;Max-Age=0
-      - xids="";Version=1;Path=/;Max-Age=0
-      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=CADBB1509B2E5F6B2E69C04DC70B56DE; Path=/; Secure; HttpOnly
-      Strict-Transport-Security:
-      - max-age=315360000; includeSubDomains
-      Transfer-Encoding:
-      - chunked
-      Vary:
-      - Accept-Encoding
-      accept-ch:
-      - Sec-CH-UA-Platform-Version
-      content-security-policy:
-      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
-        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
-        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
-        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
-        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
-        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
-        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
-        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
-        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
-        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
-        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
-        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
-        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
-        ''self'''
-      p3p:
-      - CP="HONK"
-      referrer-policy:
-      - strict-origin-when-cross-origin
-      x-content-type-options:
-      - nosniff
-      x-okta-request-id:
-      - c1e2b7a2e78ca152e4f86e7dd4b58552
-      x-rate-limit-limit:
-      - '50'
-      x-rate-limit-remaining:
-      - '46'
-      x-rate-limit-reset:
-      - '1756927443'
-      x-xss-protection:
-      - '0'
-    status:
-      code: 200
-      message: OK
-- request:
-    body: null
-    headers:
-      Accept:
-      - application/json
-      Authorization:
-      - SSWS myAPIToken
-      Content-Type:
-      - application/json
-      User-Agent:
-      - OpenAPI-Generator/1.0.0/python
-    method: DELETE
-    uri: https://test.okta.com/api/v1/meta/uischemas/uisqe5pjwioQ8Tf0O5d7
-  response:
-    body:
-      string: ''
-    headers:
-      Cache-Control:
-      - no-cache, no-store
-      Connection:
-      - keep-alive
-      Date:
-      - Wed, 03 Sep 2025 19:23:07 GMT
-      Expires:
-      - '0'
-      Pragma:
-      - no-cache
-      Server:
-      - nginx
-      Set-Cookie:
-      - sid="";Version=1;Path=/;Max-Age=0
-      - xids="";Version=1;Path=/;Max-Age=0
-      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=BF9446D55CF2843147937AE8B4B528CC; Path=/; Secure; HttpOnly
-      Strict-Transport-Security:
-      - max-age=315360000; includeSubDomains
-      accept-ch:
-      - Sec-CH-UA-Platform-Version
-      content-security-policy:
-      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
-        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
-        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
-        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
-        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
-        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
-        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
-        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
-        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
-        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
-        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
-        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
-        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
-        ''self'''
-      p3p:
-      - CP="HONK"
-      referrer-policy:
-      - strict-origin-when-cross-origin
-      x-frame-options:
-      - SAMEORIGIN
-      x-okta-request-id:
-      - ebf5991de68e9710939bcc6b1066fda6
-      x-rate-limit-limit:
-      - '50'
-      x-rate-limit-remaining:
-      - '45'
-      x-rate-limit-reset:
-      - '1756927443'
-      x-xss-protection:
-      - '0'
-    status:
-      code: 204
-      message: No Content
-- request:
-    body: null
-    headers:
-      Accept:
-      - application/json
-      Authorization:
-      - SSWS myAPIToken
-      Content-Type:
-      - application/json
-      User-Agent:
-      - OpenAPI-Generator/1.0.0/python
-    method: GET
-    uri: https://test.okta.com/api/v1/meta/uischemas/uisqe5pjwioQ8Tf0O5d7
-  response:
-    body:
-      string: '{"errorCode":"E0000007","errorSummary":"Not found: Resource not found:
-        uisqe5pjwioQ8Tf0O5d7 (UISchemaEntity)","errorLink":"E0000007","errorId":"oaenJkx3rCtR7OyUwJOkJqa2g","errorCauses":[]}'
-    headers:
-      Cache-Control:
-      - no-cache, no-store
-      Connection:
-      - keep-alive
-      Content-Encoding:
-      - gzip
-      Content-Type:
-      - application/json
-      Date:
-      - Wed, 03 Sep 2025 19:23:09 GMT
-      Expires:
-      - '0'
-      Pragma:
-      - no-cache
-      Server:
-      - nginx
-      Set-Cookie:
-      - sid="";Version=1;Path=/;Max-Age=0
-      - xids="";Version=1;Path=/;Max-Age=0
-      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=F2EB973489EC9C022415F6E3C62E5E6C; Path=/; Secure; HttpOnly
-      Strict-Transport-Security:
-      - max-age=315360000; includeSubDomains
-      Transfer-Encoding:
-      - chunked
-      Vary:
-      - Accept-Encoding
-      accept-ch:
-      - Sec-CH-UA-Platform-Version
-      content-security-policy:
-      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
-        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
-        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
-        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
-        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
-        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
-        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
-        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
-        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
-        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
-        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
-        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
-        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
-        ''self'''
-      p3p:
-      - CP="HONK"
-      referrer-policy:
-      - strict-origin-when-cross-origin
-      x-content-type-options:
-      - nosniff
-      x-okta-request-id:
-      - ac5eb1080ca76ec879e4da6d8e017412
-      x-rate-limit-limit:
-      - '50'
-      x-rate-limit-remaining:
-      - '44'
-      x-rate-limit-reset:
-      - '1756927443'
-      x-xss-protection:
-      - '0'
-    status:
-      code: 404
-      message: Not Found
-- request:
-    body: null
-    headers:
-      Accept:
-      - application/json
-      Authorization:
-      - SSWS myAPIToken
-      Content-Type:
-      - application/json
-      User-Agent:
-      - OpenAPI-Generator/1.0.0/python
-    method: DELETE
-    uri: https://test.okta.com/api/v1/meta/uischemas/uisqe5pjwioQ8Tf0O5d7
-  response:
-    body:
-      string: ''
-    headers:
-      Cache-Control:
-      - no-cache, no-store
-      Connection:
-      - keep-alive
-      Date:
-      - Wed, 03 Sep 2025 19:23:10 GMT
-      Expires:
-      - '0'
-      Pragma:
-      - no-cache
-      Server:
-      - nginx
-      Set-Cookie:
-      - sid="";Version=1;Path=/;Max-Age=0
-      - xids="";Version=1;Path=/;Max-Age=0
-      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
-      - JSESSIONID=1DA50CF7849DB102F2754EAF3F1A7C42; Path=/; Secure; HttpOnly
-      Strict-Transport-Security:
-      - max-age=315360000; includeSubDomains
-      accept-ch:
-      - Sec-CH-UA-Platform-Version
-      content-security-policy:
-      - 'default-src ''self'' dev-20982288.okta.com *.oktacdn.com; connect-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com *.oktacdn.com *.mixpanel.com
-        *.mapbox.com dev-20982288.kerberos.okta.com *.authenticatorlocalprod.com:8769
-        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
-        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
-        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
-        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
-        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
-        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
-        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
-        dev-20982288.okta.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
-        ''report-sample'' dev-20982288.okta.com *.oktacdn.com; frame-src ''self''
-        dev-20982288.okta.com dev-20982288-admin.okta.com login.okta.com *.vidyard.com
-        com-okta-authenticator:; img-src ''self'' dev-20982288.okta.com *.oktacdn.com
-        *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src ''self''
-        dev-20982288.okta.com data: *.oktacdn.com fonts.gstatic.com; frame-ancestors
-        ''self'''
-      p3p:
-      - CP="HONK"
-      referrer-policy:
-      - strict-origin-when-cross-origin
-      x-frame-options:
-      - SAMEORIGIN
-      x-okta-request-id:
-      - 8130ec1a71f3fd4a29b6926da3fb1e44
-      x-rate-limit-limit:
-      - '50'
-      x-rate-limit-remaining:
-      - '43'
-      x-rate-limit-reset:
-      - '1756927443'
+      - '1756927781'
       x-xss-protection:
       - '0'
     status:

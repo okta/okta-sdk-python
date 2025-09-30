@@ -7,8 +7,8 @@ A collection of the profile mappings that include a subset of the profile mappin
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **id** | **str** | Unique identifier for profile mapping | [optional] [readonly] 
-**source** | [**ProfileMappingSource**](.md) |  | [optional] 
-**target** | [**ProfileMappingTarget**](.md) |  | [optional] 
+**source** | [**ProfileMappingSource**](ProfileMappingSource.md) |  | [optional] 
+**target** | [**ProfileMappingTarget**](ProfileMappingTarget.md) |  | [optional] 
 **links** | [**LinksSelf**](LinksSelf.md) |  | [optional] 
 
 ## Example
