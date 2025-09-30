@@ -23,12 +23,11 @@ Python {{{generatorLanguageVersion}}}
 ## Installation & Usage
 ### pip install
 
-If the python package is hosted on a repository, you can install directly using:
+If the repository is cloned, you can install directly using the below command at root directory (where `setup.py` is located):
 
 ```sh
-pip install git+https://{{gitHost}}/{{{gitUserId}}}/{{{gitRepoId}}}.git
+pip install -e .
 ```
-(you may need to run `pip` with root permission: `sudo pip install git+https://{{gitHost}}/{{{gitUserId}}}/{{{gitRepoId}}}.git`)
 
 Then import the package:
 ```python
@@ -57,4 +56,109 @@ Execute `pytest` to run the tests.
 
 Please follow the [installation procedure](#installation--usage) and then run the following:
 
-{{> common_README }}
+```python
+
+import asyncio
+from okta import UserProfile, PasswordCredential, CreateUserRequest, UserNextLogin, UserCredentials
+from okta.client import Client as OktaClient
+config = {
+    'orgUrl': 'https://{your_org}.okta.com',
+    'token': 'YOUR_API_TOKEN',
+}
+
+okta_client = OktaClient(config)
+user_config = {
+    "firstName": "Sample",
+    "lastName": "Sample",
+    "email": "sample12.sample@example.com",
+    "login": "sample12.sample@example.com",
+    "mobilePhone": "555-415-1337"
+  }
+user_profile = UserProfile(**user_config)
+
+password_value = {
+    "value": "Knock*knock*neo*111"
+}
+password_credential = PasswordCredential(**password_value)
+user_credentials = {
+    "password": password_credential
+}
+user_credentials = UserCredentials(**user_credentials)
+create_user_request = {
+    "profile": user_profile,
+    "credentials": user_credentials,
+}
+user_request = CreateUserRequest(**create_user_request)
+async def users():
+    next_login = UserNextLogin(UserNextLogin.CHANGEPASSWORD)
+    user, resp, err = await okta_client.create_user(user_request, activate=True, provider=False, next_login=next_login)
+    print("The response of UserApi->create_user:\n")
+    print(user)
+    print(resp, err)
+
+    users, resp, err = await okta_client.list_users()
+    for user in users:
+        print(user.profile.first_name, user.profile.last_name)
+        try:
+            print(user.profile.customAttr)
+        except:
+            print('User has no customAttr')
+loop = asyncio.get_event_loop()
+loop.run_until_complete(users())
+```
+
+## Documentation for API Endpoints
+
+All URIs are relative to *{{{basePath}}}*
+
+Class | Method | HTTP request | Description
+------------ | ------------- | ------------- | -------------
+{{#apiInfo}}{{#apis}}{{#operations}}{{#operation}}*{{classname}}* | [**{{operationId}}**]({{apiDocPath}}{{classname}}.md#{{operationIdLowerCase}}) | **{{httpMethod}}** {{path}} | {{summary}}
+{{/operation}}{{/operations}}{{/apis}}{{/apiInfo}}
+
+## Documentation For Models
+
+{{#models}}{{#model}} - [{{{classname}}}]({{modelDocPath}}{{{classname}}}.md)
+{{/model}}{{/models}}
+
+<a id="documentation-for-authorization"></a>
+## Documentation For Authorization
+
+{{^authMethods}}Endpoints do not require authorization.{{/authMethods}}
+{{#hasAuthMethods}}Authentication schemes defined for the API:{{/hasAuthMethods}}
+{{#authMethods}}
+<a id="{{name}}"></a>
+### {{{name}}}
+
+{{#isApiKey}}
+- **Type**: API key
+- **API key parameter name**: {{{keyParamName}}}
+- **Location**: {{#isKeyInQuery}}URL query string{{/isKeyInQuery}}{{#isKeyInHeader}}HTTP header{{/isKeyInHeader}}
+{{/isApiKey}}
+{{#isBasic}}
+{{#isBasicBasic}}
+- **Type**: HTTP basic authentication
+{{/isBasicBasic}}
+{{#isBasicBearer}}
+- **Type**: Bearer authentication{{#bearerFormat}} ({{{.}}}){{/bearerFormat}}
+{{/isBasicBearer}}
+{{#isHttpSignature}}
+- **Type**: HTTP signature authentication
+{{/isHttpSignature}}
+{{/isBasic}}
+{{#isOAuth}}
+- **Type**: OAuth
+- **Flow**: {{{flow}}}
+- **Authorization URL**: {{{authorizationUrl}}}
+- **Scopes**: {{^scopes}}N/A{{/scopes}}
+{{#scopes}} - **{{{scope}}}**: {{{description}}}
+{{/scopes}}
+{{/isOAuth}}
+
+{{/authMethods}}
+
+## Author
+
+{{#apiInfo}}{{#apis}}{{#-last}}{{infoEmail}}
+{{/-last}}{{/apis}}{{/apiInfo}}
+

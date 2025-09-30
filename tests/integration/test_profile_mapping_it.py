@@ -227,7 +227,7 @@ class TestProfileMappingResource:
                 # Log but don't fail the test for cleanup issues
                 print(f"Warning: Could not restore original mapping properties: {exc}")
 
-    @pytest.mark.vcr(record_mode="all")
+    @pytest.mark.vcr()
     @pytest.mark.asyncio
     async def test_remove_property_from_profile_mapping(self, fs):
         # Instantiate Mock Client
@@ -482,7 +482,7 @@ class TestProfileMappingResource:
             # Expected for invalid ID
             assert e.status == 404
 
-    @pytest.mark.vcr(record_mode="all")
+    @pytest.mark.vcr()
     @pytest.mark.asyncio
     async def test_update_profile_mapping_with_push_status_variations(self, fs):
         # Instantiate Mock Client
