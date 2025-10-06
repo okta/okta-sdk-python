@@ -61,7 +61,6 @@ class BehaviorRule(BaseModel):
         protected_namespaces=(),
     )
 
-
     # JSON field name that stores the object type
     __discriminator_property_name: ClassVar[str] = 'type'
 
@@ -131,13 +130,13 @@ class BehaviorRule(BaseModel):
         """Create an instance of BehaviorRule from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
-        if object_type ==  'BehaviorRuleAnomalousDevice':
+        if object_type == 'BehaviorRuleAnomalousDevice':
             return import_module("okta.models.behavior_rule_anomalous_device").BehaviorRuleAnomalousDevice.from_dict(obj)
-        if object_type ==  'BehaviorRuleAnomalousIP':
+        if object_type == 'BehaviorRuleAnomalousIP':
             return import_module("okta.models.behavior_rule_anomalous_ip").BehaviorRuleAnomalousIP.from_dict(obj)
-        if object_type ==  'BehaviorRuleAnomalousLocation':
+        if object_type == 'BehaviorRuleAnomalousLocation':
             return import_module("okta.models.behavior_rule_anomalous_location").BehaviorRuleAnomalousLocation.from_dict(obj)
-        if object_type ==  'BehaviorRuleVelocity':
+        if object_type == 'BehaviorRuleVelocity':
             return import_module("okta.models.behavior_rule_velocity").BehaviorRuleVelocity.from_dict(obj)
 
         raise ValueError("BehaviorRule failed to lookup discriminator value from " +

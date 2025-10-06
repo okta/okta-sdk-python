@@ -46,7 +46,6 @@ class ApplicationVisibility(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -104,5 +103,4 @@ class ApplicationVisibility(BaseModel):
             "hide": ApplicationVisibilityHide.from_dict(obj["hide"]) if obj.get("hide") is not None else None
         })
         return _obj
-
 

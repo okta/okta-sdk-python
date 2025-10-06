@@ -50,7 +50,6 @@ class ProvisioningConnectionProfile(BaseModel):
         protected_namespaces=(),
     )
 
-
     # JSON field name that stores the object type
     __discriminator_property_name: ClassVar[str] = 'authScheme'
 
@@ -107,11 +106,11 @@ class ProvisioningConnectionProfile(BaseModel):
         """Create an instance of ProvisioningConnectionProfile from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
-        if object_type ==  'ProvisioningConnectionProfileOauth':
+        if object_type == 'ProvisioningConnectionProfileOauth':
             return import_module("okta.models.provisioning_connection_profile_oauth").ProvisioningConnectionProfileOauth.from_dict(obj)
-        if object_type ==  'ProvisioningConnectionProfileToken':
+        if object_type == 'ProvisioningConnectionProfileToken':
             return import_module("okta.models.provisioning_connection_profile_token").ProvisioningConnectionProfileToken.from_dict(obj)
-        if object_type ==  'ProvisioningConnectionProfileUnknown':
+        if object_type == 'ProvisioningConnectionProfileUnknown':
             return import_module("okta.models.provisioning_connection_profile_unknown").ProvisioningConnectionProfileUnknown.from_dict(obj)
 
         raise ValueError("ProvisioningConnectionProfile failed to lookup discriminator value from " +

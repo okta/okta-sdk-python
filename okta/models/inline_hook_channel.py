@@ -50,7 +50,6 @@ class InlineHookChannel(BaseModel):
         protected_namespaces=(),
     )
 
-
     # JSON field name that stores the object type
     __discriminator_property_name: ClassVar[str] = 'type'
 
@@ -107,9 +106,9 @@ class InlineHookChannel(BaseModel):
         """Create an instance of InlineHookChannel from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
-        if object_type ==  'InlineHookChannelHttp':
+        if object_type == 'InlineHookChannelHttp':
             return import_module("okta.models.inline_hook_channel_http").InlineHookChannelHttp.from_dict(obj)
-        if object_type ==  'InlineHookChannelOAuth':
+        if object_type == 'InlineHookChannelOAuth':
             return import_module("okta.models.inline_hook_channel_o_auth").InlineHookChannelOAuth.from_dict(obj)
 
         raise ValueError("InlineHookChannel failed to lookup discriminator value from " +

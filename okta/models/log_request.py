@@ -43,7 +43,6 @@ class LogRequest(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -100,5 +99,4 @@ class LogRequest(BaseModel):
             "ipChain": [LogIpAddress.from_dict(_item) for _item in obj["ipChain"]] if obj.get("ipChain") is not None else None
         })
         return _obj
-
 

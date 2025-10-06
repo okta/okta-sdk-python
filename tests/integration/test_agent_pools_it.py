@@ -1,18 +1,20 @@
+# noqa: C901
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS
+# IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
-import pytest
 from http import HTTPStatus
 
-from pytest_recording.plugin import record_mode
+import pytest
 
-from tests.mocks import MockOktaClient
 import okta.models as models
+from tests.mocks import MockOktaClient
 
 
 class TestAgentPoolsResource:
@@ -41,8 +43,7 @@ class TestAgentPoolsResource:
 
         # List agent pools with pool type filter
         agent_pools, _, err = await client.list_agent_pools(
-            pool_type=models.AgentType.AD,
-            limit_per_pool_type=10
+            pool_type=models.AgentType.AD, limit_per_pool_type=10
         )
         assert err is None
         assert isinstance(agent_pools, list)
@@ -56,8 +57,7 @@ class TestAgentPoolsResource:
         # Test with different pool types to exercise more code paths
         for pool_type in [models.AgentType.LDAP, models.AgentType.RADIUS]:
             agent_pools, _, err = await client.list_agent_pools(
-                pool_type=pool_type,
-                limit_per_pool_type=5
+                pool_type=pool_type, limit_per_pool_type=5
             )
             assert err is None
             assert isinstance(agent_pools, list)
@@ -70,8 +70,7 @@ class TestAgentPoolsResource:
 
         # Test pagination parameters to exercise more code paths
         agent_pools, _, err = await client.list_agent_pools(
-            limit_per_pool_type=1,
-            after=None
+            limit_per_pool_type=1, after=None
         )
         assert err is None
         assert isinstance(agent_pools, list)
@@ -101,7 +100,9 @@ class TestAgentPoolsResource:
         client = MockOktaClient(fs)
 
         # Test with non-existent pool ID to exercise error handling
-        settings, resp, err = await client.get_agent_pools_update_settings("nonexistent-pool-id")
+        settings, resp, err = await client.get_agent_pools_update_settings(
+            "nonexistent-pool-id"
+        )
         assert err is not None
         assert resp.status == HTTPStatus.NOT_FOUND
 
@@ -119,14 +120,16 @@ class TestAgentPoolsResource:
             pool_id = agent_pools[0].id
 
             # Get current settings
-            current_settings, _, err = await client.get_agent_pools_update_settings(pool_id)
+            current_settings, _, err = await client.get_agent_pools_update_settings(
+                pool_id
+            )
             assert err is None
 
             # Update settings with basic configuration
             updated_settings = models.AgentPoolUpdateSetting(
                 pool_id=pool_id,
                 continue_on_error=True,
-                release_channel=models.ReleaseChannel.GA
+                release_channel=models.ReleaseChannel.GA,
             )
 
             # Apply the update
@@ -150,11 +153,13 @@ class TestAgentPoolsResource:
             pool_id = agent_pools[0].id
 
             # Test different release channels to exercise more code paths
-            for channel in [models.ReleaseChannel.BETA, models.ReleaseChannel.EA, models.ReleaseChannel.TEST]:
+            for channel in [
+                models.ReleaseChannel.BETA,
+                models.ReleaseChannel.EA,
+                models.ReleaseChannel.TEST,
+            ]:
                 updated_settings = models.AgentPoolUpdateSetting(
-                    pool_id=pool_id,
-                    continue_on_error=False,
-                    release_channel=channel
+                    pool_id=pool_id, continue_on_error=False, release_channel=channel
                 )
 
                 result, _, err = await client.update_agent_pools_update_settings(
@@ -180,10 +185,8 @@ class TestAgentPoolsResource:
             update_request = models.AgentPoolUpdate(
                 enabled=True,
                 schedule=models.AutoUpdateSchedule(
-                    timezone="America/Los_Angeles",
-                    delay=0,
-                    duration=60
-                )
+                    timezone="America/Los_Angeles", delay=0, duration=60
+                ),
             )
 
             created_update, _, err = await client.create_agent_pools_update(
@@ -208,15 +211,14 @@ class TestAgentPoolsResource:
             # Test different schedule configurations
             schedules = [
                 models.AutoUpdateSchedule(timezone="UTC", delay=1, duration=30),
-                models.AutoUpdateSchedule(timezone="Europe/London", delay=7, duration=120),
-                models.AutoUpdateSchedule(timezone="Asia/Tokyo", delay=3, duration=90)
+                models.AutoUpdateSchedule(
+                    timezone="Europe/London", delay=7, duration=120
+                ),
+                models.AutoUpdateSchedule(timezone="Asia/Tokyo", delay=3, duration=90),
             ]
 
             for schedule in schedules:
-                update_request = models.AgentPoolUpdate(
-                    enabled=True,
-                    schedule=schedule
-                )
+                update_request = models.AgentPoolUpdate(enabled=True, schedule=schedule)
 
                 created_update, _, err = await client.create_agent_pools_update(
                     pool_id, update_request
@@ -371,9 +373,7 @@ class TestAgentPoolsResource:
             pool_id = agent_pools[0].id
 
             # Create an update first
-            update_request = models.AgentPoolUpdate(
-                enabled=True
-            )
+            update_request = models.AgentPoolUpdate(enabled=True)
 
             created_update, _, err = await client.create_agent_pools_update(
                 pool_id, update_request
@@ -381,9 +381,7 @@ class TestAgentPoolsResource:
             assert err is None
 
             # Update the created update
-            updated_request = models.AgentPoolUpdate(
-                enabled=False  # Change this value
-            )
+            updated_request = models.AgentPoolUpdate(enabled=False)  # Change this value
 
             updated_update, _, err = await client.update_agent_pools_update(
                 pool_id, created_update.id, updated_request
@@ -405,9 +403,7 @@ class TestAgentPoolsResource:
             pool_id = agent_pools[0].id
 
             # Create an update that can be activated
-            update_request = models.AgentPoolUpdate(
-                enabled=False
-            )
+            update_request = models.AgentPoolUpdate(enabled=False)
 
             created_update, _, err = await client.create_agent_pools_update(
                 pool_id, update_request
@@ -435,9 +431,7 @@ class TestAgentPoolsResource:
             pool_id = agent_pools[0].id
 
             # Create and activate an update
-            update_request = models.AgentPoolUpdate(
-                enabled=True
-            )
+            update_request = models.AgentPoolUpdate(enabled=True)
 
             created_update, _, err = await client.create_agent_pools_update(
                 pool_id, update_request
@@ -465,9 +459,7 @@ class TestAgentPoolsResource:
             pool_id = agent_pools[0].id
 
             # Create a running update
-            update_request = models.AgentPoolUpdate(
-                enabled=True
-            )
+            update_request = models.AgentPoolUpdate(enabled=True)
 
             created_update, _, err = await client.create_agent_pools_update(
                 pool_id, update_request
@@ -495,9 +487,7 @@ class TestAgentPoolsResource:
             pool_id = agent_pools[0].id
 
             # Create and pause an update
-            update_request = models.AgentPoolUpdate(
-                enabled=True
-            )
+            update_request = models.AgentPoolUpdate(enabled=True)
 
             created_update, _, err = await client.create_agent_pools_update(
                 pool_id, update_request
@@ -531,9 +521,7 @@ class TestAgentPoolsResource:
             pool_id = agent_pools[0].id
 
             # Create a running update
-            update_request = models.AgentPoolUpdate(
-                enabled=True
-            )
+            update_request = models.AgentPoolUpdate(enabled=True)
 
             created_update, _, err = await client.create_agent_pools_update(
                 pool_id, update_request
@@ -561,9 +549,7 @@ class TestAgentPoolsResource:
             pool_id = agent_pools[0].id
 
             # Create a failed update (this would normally be a failed update)
-            update_request = models.AgentPoolUpdate(
-                enabled=True
-            )
+            update_request = models.AgentPoolUpdate(enabled=True)
 
             created_update, _, err = await client.create_agent_pools_update(
                 pool_id, update_request
@@ -591,9 +577,7 @@ class TestAgentPoolsResource:
             pool_id = agent_pools[0].id
 
             # Create an update to delete
-            update_request = models.AgentPoolUpdate(
-                enabled=False
-            )
+            update_request = models.AgentPoolUpdate(enabled=False)
 
             created_update, _, err = await client.create_agent_pools_update(
                 pool_id, update_request
@@ -654,10 +638,8 @@ class TestAgentPoolsResource:
             update_request = models.AgentPoolUpdate(
                 enabled=True,
                 schedule=models.AutoUpdateSchedule(
-                    timezone="UTC",
-                    delay=5,
-                    duration=120
-                )
+                    timezone="UTC", delay=5, duration=120
+                ),
             )
 
             created_update, _, err = await client.create_agent_pools_update(
@@ -674,9 +656,7 @@ class TestAgentPoolsResource:
             assert retrieved_update.id == created_update.id
 
             # 3. Update the update
-            modified_request = models.AgentPoolUpdate(
-                enabled=False  # Change this
-            )
+            modified_request = models.AgentPoolUpdate(enabled=False)  # Change this
 
             updated_update, _, err = await client.update_agent_pools_update(
                 pool_id, created_update.id, modified_request
@@ -777,7 +757,9 @@ class TestAgentPoolsResource:
         assert resp.status_code == HTTPStatus.OK
 
         # Test get settings with invalid pool
-        settings, resp, err = await client.get_agent_pools_update_settings(invalid_pool_id)
+        settings, resp, err = await client.get_agent_pools_update_settings(
+            invalid_pool_id
+        )
         assert err is not None
         assert resp.status == HTTPStatus.NOT_FOUND
 
@@ -788,4 +770,3 @@ class TestAgentPoolsResource:
         )
         assert err is not None
         assert resp.status == HTTPStatus.BAD_REQUEST
-

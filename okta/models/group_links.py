@@ -48,7 +48,6 @@ class GroupLinks(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -135,5 +134,4 @@ class GroupLinks(BaseModel):
             "users": HrefObject.from_dict(obj["users"]) if obj.get("users") is not None else None
         })
         return _obj
-
 

@@ -1,15 +1,17 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS
+# IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
 import pytest
 
-from tests.mocks import MockOktaClient
 import okta.models as models
+from tests.mocks import MockOktaClient
 
 
 class TestRateLimitSettingsResource:
@@ -25,7 +27,9 @@ class TestRateLimitSettingsResource:
         client = MockOktaClient(fs)
 
         # Get current admin notification settings
-        admin_notifications, _, err = await client.get_rate_limit_settings_admin_notifications()
+        admin_notifications, _, err = (
+            await client.get_rate_limit_settings_admin_notifications()
+        )
         assert err is None
         assert isinstance(admin_notifications, models.RateLimitAdminNotifications)
         assert admin_notifications.notifications_enabled is not None
@@ -39,7 +43,9 @@ class TestRateLimitSettingsResource:
         client = MockOktaClient(fs)
 
         # Get current settings first to restore later
-        original_settings, _, err = await client.get_rate_limit_settings_admin_notifications()
+        original_settings, _, err = (
+            await client.get_rate_limit_settings_admin_notifications()
+        )
         assert err is None
         original_enabled = original_settings.notifications_enabled
 
@@ -51,15 +57,19 @@ class TestRateLimitSettingsResource:
             )
 
             # Update admin notification settings
-            updated_settings, _, err = await client.replace_rate_limit_settings_admin_notifications(
-                notification_settings
+            updated_settings, _, err = (
+                await client.replace_rate_limit_settings_admin_notifications(
+                    notification_settings
+                )
             )
             assert err is None
             assert isinstance(updated_settings, models.RateLimitAdminNotifications)
             assert updated_settings.notifications_enabled == new_enabled
 
             # Verify the change by getting settings again
-            retrieved_settings, _, err = await client.get_rate_limit_settings_admin_notifications()
+            retrieved_settings, _, err = (
+                await client.get_rate_limit_settings_admin_notifications()
+            )
             assert err is None
             assert retrieved_settings.notifications_enabled == new_enabled
 
@@ -85,11 +95,13 @@ class TestRateLimitSettingsResource:
         assert err is None
         assert isinstance(per_client_settings, models.PerClientRateLimitSettings)
         assert per_client_settings.default_mode is not None
-        assert isinstance(per_client_settings.default_mode, models.PerClientRateLimitMode)
+        assert isinstance(
+            per_client_settings.default_mode, models.PerClientRateLimitMode
+        )
         assert per_client_settings.default_mode in [
             models.PerClientRateLimitMode.DISABLE,
             models.PerClientRateLimitMode.ENFORCE,
-            models.PerClientRateLimitMode.PREVIEW
+            models.PerClientRateLimitMode.PREVIEW,
         ]
 
     @pytest.mark.vcr()
@@ -116,15 +128,17 @@ class TestRateLimitSettingsResource:
             )
 
             # Update per-client rate limit settings
-            updated_settings, _, err = await client.replace_rate_limit_settings_per_client(
-                per_client_settings
+            updated_settings, _, err = (
+                await client.replace_rate_limit_settings_per_client(per_client_settings)
             )
             assert err is None
             assert isinstance(updated_settings, models.PerClientRateLimitSettings)
             assert updated_settings.default_mode == new_mode
 
             # Verify the change by getting settings again
-            retrieved_settings, _, err = await client.get_rate_limit_settings_per_client()
+            retrieved_settings, _, err = (
+                await client.get_rate_limit_settings_per_client()
+            )
             assert err is None
             assert retrieved_settings.default_mode == new_mode
 
@@ -132,7 +146,7 @@ class TestRateLimitSettingsResource:
             # Restore original settings
             restore_settings = models.PerClientRateLimitSettings(
                 default_mode=original_mode,
-                use_case_mode_overrides=original_settings.use_case_mode_overrides
+                use_case_mode_overrides=original_settings.use_case_mode_overrides,
             )
             _, _, err = await client.replace_rate_limit_settings_per_client(
                 restore_settings
@@ -147,7 +161,9 @@ class TestRateLimitSettingsResource:
         client = MockOktaClient(fs)
 
         # Get current warning threshold settings
-        threshold_response, _, err = await client.get_rate_limit_settings_warning_threshold()
+        threshold_response, _, err = (
+            await client.get_rate_limit_settings_warning_threshold()
+        )
         assert err is None
         assert isinstance(threshold_response, models.RateLimitWarningThresholdResponse)
 
@@ -163,7 +179,9 @@ class TestRateLimitSettingsResource:
         client = MockOktaClient(fs)
 
         # Get current settings first to restore later
-        original_response, _, err = await client.get_rate_limit_settings_warning_threshold()
+        original_response, _, err = (
+            await client.get_rate_limit_settings_warning_threshold()
+        )
         assert err is None
         original_threshold = original_response.warning_threshold
 
@@ -179,15 +197,21 @@ class TestRateLimitSettingsResource:
             )
 
             # Update warning threshold settings
-            updated_response, _, err = await client.replace_rate_limit_settings_warning_threshold(
-                threshold_request
+            updated_response, _, err = (
+                await client.replace_rate_limit_settings_warning_threshold(
+                    threshold_request
+                )
             )
             assert err is None
-            assert isinstance(updated_response, models.RateLimitWarningThresholdResponse)
+            assert isinstance(
+                updated_response, models.RateLimitWarningThresholdResponse
+            )
             assert updated_response.warning_threshold == new_threshold
 
             # Verify the change by getting settings again
-            retrieved_response, _, err = await client.get_rate_limit_settings_warning_threshold()
+            retrieved_response, _, err = (
+                await client.get_rate_limit_settings_warning_threshold()
+            )
             assert err is None
             assert retrieved_response.warning_threshold == new_threshold
 
@@ -210,7 +234,9 @@ class TestRateLimitSettingsResource:
         client = MockOktaClient(fs)
 
         # Step 1: Get all current settings to store as backup
-        admin_notifications, _, err = await client.get_rate_limit_settings_admin_notifications()
+        admin_notifications, _, err = (
+            await client.get_rate_limit_settings_admin_notifications()
+        )
         assert err is None
         original_admin_enabled = admin_notifications.notifications_enabled
 
@@ -218,7 +244,9 @@ class TestRateLimitSettingsResource:
         assert err is None
         original_per_client_mode = per_client_settings.default_mode
 
-        warning_threshold, _, err = await client.get_rate_limit_settings_warning_threshold()
+        warning_threshold, _, err = (
+            await client.get_rate_limit_settings_warning_threshold()
+        )
         assert err is None
         original_warning_threshold = warning_threshold.warning_threshold
 
@@ -227,8 +255,10 @@ class TestRateLimitSettingsResource:
             new_admin_notifications = models.RateLimitAdminNotifications(
                 notifications_enabled=True
             )
-            updated_admin, _, err = await client.replace_rate_limit_settings_admin_notifications(
-                new_admin_notifications
+            updated_admin, _, err = (
+                await client.replace_rate_limit_settings_admin_notifications(
+                    new_admin_notifications
+                )
             )
             assert err is None
             assert updated_admin.notifications_enabled is True
@@ -237,32 +267,44 @@ class TestRateLimitSettingsResource:
             new_per_client = models.PerClientRateLimitSettings(
                 default_mode=models.PerClientRateLimitMode.PREVIEW
             )
-            updated_per_client, _, err = await client.replace_rate_limit_settings_per_client(
-                new_per_client
+            updated_per_client, _, err = (
+                await client.replace_rate_limit_settings_per_client(new_per_client)
             )
             assert err is None
-            assert updated_per_client.default_mode == models.PerClientRateLimitMode.PREVIEW
+            assert (
+                    updated_per_client.default_mode == models.PerClientRateLimitMode.PREVIEW
+            )
 
             # Step 4: Update warning threshold
             new_threshold_request = models.RateLimitWarningThresholdRequest(
                 warning_threshold=85
             )
-            updated_threshold, _, err = await client.replace_rate_limit_settings_warning_threshold(
-                new_threshold_request
+            updated_threshold, _, err = (
+                await client.replace_rate_limit_settings_warning_threshold(
+                    new_threshold_request
+                )
             )
             assert err is None
             assert updated_threshold.warning_threshold == 85
 
             # Step 5: Verify all settings are updated
-            verify_admin, _, err = await client.get_rate_limit_settings_admin_notifications()
+            verify_admin, _, err = (
+                await client.get_rate_limit_settings_admin_notifications()
+            )
             assert err is None
             assert verify_admin.notifications_enabled is True
 
-            verify_per_client, _, err = await client.get_rate_limit_settings_per_client()
+            verify_per_client, _, err = (
+                await client.get_rate_limit_settings_per_client()
+            )
             assert err is None
-            assert verify_per_client.default_mode == models.PerClientRateLimitMode.PREVIEW
+            assert (
+                    verify_per_client.default_mode == models.PerClientRateLimitMode.PREVIEW
+            )
 
-            verify_threshold, _, err = await client.get_rate_limit_settings_warning_threshold()
+            verify_threshold, _, err = (
+                await client.get_rate_limit_settings_warning_threshold()
+            )
             assert err is None
             assert verify_threshold.warning_threshold == 85
 
@@ -274,8 +316,10 @@ class TestRateLimitSettingsResource:
                 restore_admin = models.RateLimitAdminNotifications(
                     notifications_enabled=original_admin_enabled
                 )
-                _, _, err = await client.replace_rate_limit_settings_admin_notifications(
-                    restore_admin
+                _, _, err = (
+                    await client.replace_rate_limit_settings_admin_notifications(
+                        restore_admin
+                    )
                 )
                 if err:
                     errors.append(f"Failed to restore admin notifications: {err}")
@@ -285,7 +329,7 @@ class TestRateLimitSettingsResource:
             try:
                 restore_per_client = models.PerClientRateLimitSettings(
                     default_mode=original_per_client_mode,
-                    use_case_mode_overrides=per_client_settings.use_case_mode_overrides
+                    use_case_mode_overrides=per_client_settings.use_case_mode_overrides,
                 )
                 _, _, err = await client.replace_rate_limit_settings_per_client(
                     restore_per_client
@@ -300,8 +344,10 @@ class TestRateLimitSettingsResource:
                     restore_threshold = models.RateLimitWarningThresholdRequest(
                         warning_threshold=original_warning_threshold
                     )
-                    _, _, err = await client.replace_rate_limit_settings_warning_threshold(
-                        restore_threshold
+                    _, _, err = (
+                        await client.replace_rate_limit_settings_warning_threshold(
+                            restore_threshold
+                        )
                     )
                     if err:
                         errors.append(f"Failed to restore warning threshold: {err}")
@@ -319,21 +365,27 @@ class TestRateLimitSettingsResource:
         client = MockOktaClient(fs)
 
         # Test admin notifications with HTTP info
-        admin_notifications, response, err = await client.get_rate_limit_settings_admin_notifications_with_http_info()
+        admin_notifications, response, err = (
+            await client.get_rate_limit_settings_admin_notifications_with_http_info()
+        )
         assert err is None
         assert isinstance(admin_notifications, models.RateLimitAdminNotifications)
         assert response is not None
         assert response.status_code == 200
 
         # Test per-client settings with HTTP info
-        per_client_settings, response, err = await client.get_rate_limit_settings_per_client_with_http_info()
+        per_client_settings, response, err = (
+            await client.get_rate_limit_settings_per_client_with_http_info()
+        )
         assert err is None
         assert isinstance(per_client_settings, models.PerClientRateLimitSettings)
         assert response is not None
         assert response.status_code == 200
 
         # Test warning threshold with HTTP info
-        warning_threshold, response, err = await client.get_rate_limit_settings_warning_threshold_with_http_info()
+        warning_threshold, response, err = (
+            await client.get_rate_limit_settings_warning_threshold_with_http_info()
+        )
         assert err is None
         assert isinstance(warning_threshold, models.RateLimitWarningThresholdResponse)
         assert response is not None
@@ -347,7 +399,9 @@ class TestRateLimitSettingsResource:
         client = MockOktaClient(fs)
 
         # Get current warning threshold to restore later
-        original_response, _, err = await client.get_rate_limit_settings_warning_threshold()
+        original_response, _, err = (
+            await client.get_rate_limit_settings_warning_threshold()
+        )
         assert err is None
         original_threshold = original_response.warning_threshold
 
@@ -356,8 +410,10 @@ class TestRateLimitSettingsResource:
             min_threshold_request = models.RateLimitWarningThresholdRequest(
                 warning_threshold=30
             )
-            min_response, _, err = await client.replace_rate_limit_settings_warning_threshold(
-                min_threshold_request
+            min_response, _, err = (
+                await client.replace_rate_limit_settings_warning_threshold(
+                    min_threshold_request
+                )
             )
             assert err is None
             assert min_response.warning_threshold == 30
@@ -366,8 +422,10 @@ class TestRateLimitSettingsResource:
             max_threshold_request = models.RateLimitWarningThresholdRequest(
                 warning_threshold=90
             )
-            max_response, _, err = await client.replace_rate_limit_settings_warning_threshold(
-                max_threshold_request
+            max_response, _, err = (
+                await client.replace_rate_limit_settings_warning_threshold(
+                    max_threshold_request
+                )
             )
             assert err is None
             assert max_response.warning_threshold == 90

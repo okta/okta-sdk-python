@@ -1,18 +1,18 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS
+# IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
 import pytest
-from pytest_recording.plugin import record_mode
 
 import okta.models as models
 from okta import UISchemaObject
 from tests.mocks import MockOktaClient
-from okta.errors.okta_api_error import OktaAPIError
 
 
 class TestUISchemaResource:
@@ -30,44 +30,42 @@ class TestUISchemaResource:
         # Create UI Schema using the correct format based on existing working schemas
         ui_schema_request = models.CreateUISchema(
             **{
-                "uiSchema": UISchemaObject(**{
-                    "type": "Group",
-                    "elements": [
-                        {
-                            "type": "Control",
-                            "scope": "#/properties/firstName",
-                            "label": "First Name",
-                            "options": {
-                                "format": "text"
-                            }
-                        },
-                        {
-                            "type": "Control",
-                            "scope": "#/properties/lastName",
-                            "label": "Last Name",
-                            "options": {
-                                "format": "text"
-                            }
-                        },
-                        {
-                            "type": "Control",
-                            "scope": "#/properties/email",
-                            "label": "Primary email",
-                            "options": {
-                                "format": "text"
-                            }
-                        }
-                    ],
-                    "buttonLabel": "Submit",
-                    "label": "Sign in"
-                }).to_dict()
+                "uiSchema": UISchemaObject(
+                    **{
+                        "type": "Group",
+                        "elements": [
+                            {
+                                "type": "Control",
+                                "scope": "#/properties/firstName",
+                                "label": "First Name",
+                                "options": {"format": "text"},
+                            },
+                            {
+                                "type": "Control",
+                                "scope": "#/properties/lastName",
+                                "label": "Last Name",
+                                "options": {"format": "text"},
+                            },
+                            {
+                                "type": "Control",
+                                "scope": "#/properties/email",
+                                "label": "Primary email",
+                                "options": {"format": "text"},
+                            },
+                        ],
+                        "buttonLabel": "Submit",
+                        "label": "Sign in",
+                    }
+                ).to_dict()
             }
         )
 
         created_schema = None
         try:
             # Create UI Schema
-            created_schema, resp, err = await test_client.create_ui_schema(ui_schema_request)
+            created_schema, resp, err = await test_client.create_ui_schema(
+                ui_schema_request
+            )
 
             assert err is None
             assert created_schema is not None
@@ -76,7 +74,9 @@ class TestUISchemaResource:
             assert len(created_schema.ui_schema.elements) == 3
 
             # Get UI Schema by ID
-            retrieved_schema, resp, err = await test_client.get_ui_schema(created_schema.id)
+            retrieved_schema, resp, err = await test_client.get_ui_schema(
+                created_schema.id
+            )
             assert err is None
             assert retrieved_schema is not None
             assert retrieved_schema.id == created_schema.id
@@ -86,7 +86,9 @@ class TestUISchemaResource:
             # Clean up - delete the created schema
             if created_schema and created_schema.id:
                 try:
-                    _, resp, err = await test_client.delete_ui_schemas(created_schema.id)
+                    _, resp, err = await test_client.delete_ui_schemas(
+                        created_schema.id
+                    )
                     assert err is None
                 except Exception:
                     pass
@@ -112,69 +114,65 @@ class TestUISchemaResource:
         # Create initial UI schema object
         ui_schema_request = models.CreateUISchema(
             **{
-                "uiSchema": UISchemaObject(**{
-                    "type": "Group",
-                    "elements": [
-                        {
-                            "type": "Control",
-                            "scope": "#/properties/firstName",
-                            "label": "First Name",
-                            "options": {
-                                "format": "text"
-                            }
-                        },
-                        {
-                            "type": "Control",
-                            "scope": "#/properties/lastName",
-                            "label": "Last Name",
-                            "options": {
-                                "format": "text"
-                            }
-                        },
-                        {
-                            "type": "Control",
-                            "scope": "#/properties/email",
-                            "label": "Primary email",
-                            "options": {
-                                "format": "text"
-                            }
-                        }
-                    ],
-                    "buttonLabel": "Submit",
-                    "label": "Sign in"
-                }).to_dict()
+                "uiSchema": UISchemaObject(
+                    **{
+                        "type": "Group",
+                        "elements": [
+                            {
+                                "type": "Control",
+                                "scope": "#/properties/firstName",
+                                "label": "First Name",
+                                "options": {"format": "text"},
+                            },
+                            {
+                                "type": "Control",
+                                "scope": "#/properties/lastName",
+                                "label": "Last Name",
+                                "options": {"format": "text"},
+                            },
+                            {
+                                "type": "Control",
+                                "scope": "#/properties/email",
+                                "label": "Primary email",
+                                "options": {"format": "text"},
+                            },
+                        ],
+                        "buttonLabel": "Submit",
+                        "label": "Sign in",
+                    }
+                ).to_dict()
             }
         )
 
         created_schema = None
         try:
             # Create UI Schema
-            created_schema, resp, err = await test_client.create_ui_schema(ui_schema_request)
+            created_schema, resp, err = await test_client.create_ui_schema(
+                ui_schema_request
+            )
             assert err is None
             assert created_schema.ui_schema.type == "Group"
             assert len(created_schema.ui_schema.elements) == 3
 
             # Update the schema using the same Group format
-            updated_ui_schema_object = UISchemaObject(**{
-                "type": "Group",
-                "elements": [
-                    {
-                        "type": "Control",
-                        "scope": "#/properties/email",
-                        "label": "Email Address",
-                        "options": {
-                            "format": "text"
+            updated_ui_schema_object = UISchemaObject(
+                **{
+                    "type": "Group",
+                    "elements": [
+                        {
+                            "type": "Control",
+                            "scope": "#/properties/email",
+                            "label": "Email Address",
+                            "options": {"format": "text"},
                         }
-                    }
-                ],
-                "buttonLabel": "Save Changes",
-                "label": "Updated Schema Label"
-            })
+                    ],
+                    "buttonLabel": "Save Changes",
+                    "label": "Updated Schema Label",
+                }
+            )
 
             updated_schema_request = models.UpdateUISchema(
-                **{
-                    "uiSchema": updated_ui_schema_object.to_dict()
-                }
+                **{"uiSchema": updated_ui_schema_object.to_dict()}
             )
 
             # Replace/Update UI Schema
@@ -187,7 +185,9 @@ class TestUISchemaResource:
             assert len(updated_schema.ui_schema.elements) == 1
 
             # Verify the update by retrieving the schema
-            retrieved_schema, resp, err = await test_client.get_ui_schema(created_schema.id)
+            retrieved_schema, resp, err = await test_client.get_ui_schema(
+                created_schema.id
+            )
             assert err is None
             assert retrieved_schema.ui_schema.label == "Updated Schema Label"
 
@@ -195,7 +195,9 @@ class TestUISchemaResource:
             # Clean up
             if created_schema and created_schema.id:
                 try:
-                    _, resp, err = await test_client.delete_ui_schemas(created_schema.id)
+                    _, resp, err = await test_client.delete_ui_schemas(
+                        created_schema.id
+                    )
                     assert err is None
                 except Exception:
                     pass
@@ -209,21 +211,21 @@ class TestUISchemaResource:
         # Create UI schema to delete
         schema_request = models.CreateUISchema(
             **{
-                "uiSchema": UISchemaObject(**{
-                    "type": "Group",
-                    "elements": [
-                        {
-                            "type": "Control",
-                            "scope": "#/properties/email",
-                            "label": "Email Address",
-                            "options": {
-                                "format": "text"
+                "uiSchema": UISchemaObject(
+                    **{
+                        "type": "Group",
+                        "elements": [
+                            {
+                                "type": "Control",
+                                "scope": "#/properties/email",
+                                "label": "Email Address",
+                                "options": {"format": "text"},
                             }
-                        }
-                    ],
-                    "buttonLabel": "Submit",
-                    "label": "Schema to Delete"
-                }).to_dict()
+                        ],
+                        "buttonLabel": "Submit",
+                        "label": "Schema to Delete",
+                    }
+                ).to_dict()
             }
         )
 
@@ -238,7 +240,9 @@ class TestUISchemaResource:
 
         # Verify deletion by trying to get the schema (should fail)
         try:
-            deleted_schema, resp, err = await test_client.get_ui_schema(created_schema.id)
+            deleted_schema, resp, err = await test_client.get_ui_schema(
+                created_schema.id
+            )
             assert err is not None or deleted_schema is None
         except Exception:
             # Expected - schema should not exist
@@ -253,28 +257,30 @@ class TestUISchemaResource:
         # CREATE: Create a new UI schema
         create_request = models.CreateUISchema(
             **{
-                "uiSchema": UISchemaObject(**{
-                    "type": "Group",
-                    "elements": [
-                        {
-                            "type": "Control",
-                            "scope": "#/properties/firstName",
-                            "label": "First Name",
-                            "options": {
-                                "format": "text"
+                "uiSchema": UISchemaObject(
+                    **{
+                        "type": "Group",
+                        "elements": [
+                            {
+                                "type": "Control",
+                                "scope": "#/properties/firstName",
+                                "label": "First Name",
+                                "options": {"format": "text"},
                             }
-                        }
-                    ],
-                    "buttonLabel": "Create",
-                    "label": "CRUD Test Schema"
-                }).to_dict()
+                        ],
+                        "buttonLabel": "Create",
+                        "label": "CRUD Test Schema",
+                    }
+                ).to_dict()
             }
         )
 
         created_schema = None
         try:
             # CREATE
-            created_schema, resp, err = await test_client.create_ui_schema(create_request)
+            created_schema, resp, err = await test_client.create_ui_schema(
+                create_request
+            )
             assert err is None
             assert created_schema.ui_schema.label == "CRUD Test Schema"
             schema_id = created_schema.id
@@ -288,29 +294,27 @@ class TestUISchemaResource:
             # UPDATE: Modify the schema
             update_request = models.UpdateUISchema(
                 **{
-                    "uiSchema": UISchemaObject(**{
-                        "type": "Group",
-                        "elements": [
-                            {
-                                "type": "Control",
-                                "scope": "#/properties/firstName",
-                                "label": "First Name",
-                                "options": {
-                                    "format": "text"
-                                }
-                            },
-                            {
-                                "type": "Control",
-                                "scope": "#/properties/email",
-                                "label": "Email Address",
-                                "options": {
-                                    "format": "text"
-                                }
-                            }
-                        ],
-                        "buttonLabel": "Update",
-                        "label": "Updated CRUD Test Schema"
-                    }).to_dict()
+                    "uiSchema": UISchemaObject(
+                        **{
+                            "type": "Group",
+                            "elements": [
+                                {
+                                    "type": "Control",
+                                    "scope": "#/properties/firstName",
+                                    "label": "First Name",
+                                    "options": {"format": "text"},
+                                },
+                                {
+                                    "type": "Control",
+                                    "scope": "#/properties/email",
+                                    "label": "Email Address",
+                                    "options": {"format": "text"},
+                                },
+                            ],
+                            "buttonLabel": "Update",
+                            "label": "Updated CRUD Test Schema",
+                        }
+                    ).to_dict()
                 }
             )
 
@@ -354,7 +358,9 @@ class TestUISchemaResource:
 
         # Test getting non-existent schema
         try:
-            non_existent_schema, resp, err = await test_client.get_ui_schema("non-existent-id")
+            non_existent_schema, resp, err = await test_client.get_ui_schema(
+                "non-existent-id"
+            )
             assert err is not None or non_existent_schema is None
         except Exception as e:
             assert "404" in str(e) or "Not Found" in str(e)
@@ -374,44 +380,42 @@ class TestUISchemaResource:
 
         complex_schema_request = models.CreateUISchema(
             **{
-                "uiSchema": UISchemaObject(**{
-                    "type": "Group",
-                    "elements": [
-                        {
-                            "type": "Control",
-                            "scope": "#/properties/firstName",
-                            "label": "First Name",
-                            "options": {
-                                "format": "text"
-                            }
-                        },
-                        {
-                            "type": "Control",
-                            "scope": "#/properties/lastName",
-                            "label": "Last Name",
-                            "options": {
-                                "format": "text"
-                            }
-                        },
-                        {
-                            "type": "Control",
-                            "scope": "#/properties/email",
-                            "label": "Primary email",
-                            "options": {
-                                "format": "text"
-                            }
-                        }
-                    ],
-                    "buttonLabel": "Submit",
-                    "label": "Sign in"
-                }).to_dict()
+                "uiSchema": UISchemaObject(
+                    **{
+                        "type": "Group",
+                        "elements": [
+                            {
+                                "type": "Control",
+                                "scope": "#/properties/firstName",
+                                "label": "First Name",
+                                "options": {"format": "text"},
+                            },
+                            {
+                                "type": "Control",
+                                "scope": "#/properties/lastName",
+                                "label": "Last Name",
+                                "options": {"format": "text"},
+                            },
+                            {
+                                "type": "Control",
+                                "scope": "#/properties/email",
+                                "label": "Primary email",
+                                "options": {"format": "text"},
+                            },
+                        ],
+                        "buttonLabel": "Submit",
+                        "label": "Sign in",
+                    }
+                ).to_dict()
             }
         )
 
         created_schema = None
         try:
             # Create complex UI Schema
-            created_schema, resp, err = await test_client.create_ui_schema(complex_schema_request)
+            created_schema, resp, err = await test_client.create_ui_schema(
+                complex_schema_request
+            )
             assert err is None
             assert created_schema.ui_schema.label == "Sign in"
             assert len(created_schema.ui_schema.elements) == 3

@@ -50,7 +50,6 @@ class LogStreamPutSchema(BaseModel):
         protected_namespaces=(),
     )
 
-
     # JSON field name that stores the object type
     __discriminator_property_name: ClassVar[str] = 'type'
 
@@ -107,9 +106,9 @@ class LogStreamPutSchema(BaseModel):
         """Create an instance of LogStreamPutSchema from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
-        if object_type ==  'LogStreamAwsPutSchema':
+        if object_type == 'LogStreamAwsPutSchema':
             return import_module("okta.models.log_stream_aws_put_schema").LogStreamAwsPutSchema.from_dict(obj)
-        if object_type ==  'LogStreamSplunkPutSchema':
+        if object_type == 'LogStreamSplunkPutSchema':
             return import_module("okta.models.log_stream_splunk_put_schema").LogStreamSplunkPutSchema.from_dict(obj)
 
         raise ValueError("LogStreamPutSchema failed to lookup discriminator value from " +

@@ -46,7 +46,6 @@ class TokenAuthorizationServerPolicyRuleAction(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -104,5 +103,4 @@ class TokenAuthorizationServerPolicyRuleAction(BaseModel):
             "refreshTokenWindowMinutes": obj.get("refreshTokenWindowMinutes")
         })
         return _obj
-
 

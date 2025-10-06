@@ -74,7 +74,6 @@ class UserProfile(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -219,5 +218,4 @@ class UserProfile(BaseModel):
                 _obj.additional_properties[_key] = obj.get(_key)
 
         return _obj
-
 

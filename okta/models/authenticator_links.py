@@ -49,7 +49,6 @@ class AuthenticatorLinks(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -128,5 +127,4 @@ class AuthenticatorLinks(BaseModel):
             "methods": HrefObject.from_dict(obj["methods"]) if obj.get("methods") is not None else None
         })
         return _obj
-
 

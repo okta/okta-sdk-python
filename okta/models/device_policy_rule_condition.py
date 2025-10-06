@@ -47,7 +47,6 @@ class DevicePolicyRuleCondition(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -105,5 +104,4 @@ class DevicePolicyRuleCondition(BaseModel):
             "trustLevel": obj.get("trustLevel")
         })
         return _obj
-
 

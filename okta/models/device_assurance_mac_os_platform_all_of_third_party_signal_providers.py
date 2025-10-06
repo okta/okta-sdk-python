@@ -43,7 +43,6 @@ class DeviceAssuranceMacOSPlatformAllOfThirdPartySignalProviders(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -98,5 +97,4 @@ class DeviceAssuranceMacOSPlatformAllOfThirdPartySignalProviders(BaseModel):
             "dtc": DTCMacOS.from_dict(obj["dtc"]) if obj.get("dtc") is not None else None
         })
         return _obj
-
 

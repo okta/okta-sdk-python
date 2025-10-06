@@ -1,16 +1,17 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS
+# IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
 import pytest
-import time
-from tests.mocks import MockOktaClient
+
 import okta.models as models
-from okta.errors.okta_api_error import OktaAPIError
+from tests.mocks import MockOktaClient
 
 
 class TestBehaviorRulesResource:
@@ -40,7 +41,7 @@ class TestBehaviorRulesResource:
                 name=unique_rule_name,
                 type=models.BehaviorRuleType.VELOCITY,
                 status=models.LifecycleStatus.INACTIVE,
-                settings=velocity_settings
+                settings=velocity_settings,
             )
 
             created_rule = await client.create_behavior_detection_rule(custom_rule)
@@ -51,7 +52,8 @@ class TestBehaviorRulesResource:
                 if rule_obj is None and response is not None and response.raw_data:
                     # Parse the raw response data manually
                     import json
-                    response_data = json.loads(response.raw_data.decode('utf-8'))
+
+                    response_data = json.loads(response.raw_data.decode("utf-8"))
                     created_rule = models.BehaviorRule.from_dict(response_data)
                 else:
                     created_rule = rule_obj
@@ -72,7 +74,9 @@ class TestBehaviorRulesResource:
                 assert len(rules_list) > 0
 
                 # Verify our custom rule appears in the list
-                custom_rule_in_list = next((rule for rule in rules_list if rule.id == created_rule_id), None)
+                custom_rule_in_list = next(
+                    (rule for rule in rules_list if rule.id == created_rule_id), None
+                )
                 assert custom_rule_in_list is not None
                 assert custom_rule_in_list.name == unique_rule_name
             except Exception as e:
@@ -85,7 +89,8 @@ class TestBehaviorRulesResource:
                 rule_obj, response, error = retrieved_rule
                 if rule_obj is None and response is not None and response.raw_data:
                     import json
-                    response_data = json.loads(response.raw_data.decode('utf-8'))
+
+                    response_data = json.loads(response.raw_data.decode("utf-8"))
                     retrieved_rule = models.BehaviorRule.from_dict(response_data)
                 else:
                     retrieved_rule = rule_obj
@@ -101,15 +106,18 @@ class TestBehaviorRulesResource:
                 name=updated_rule_name,
                 type=models.BehaviorRuleType.VELOCITY,
                 status=models.LifecycleStatus.INACTIVE,
-                settings=updated_settings
+                settings=updated_settings,
             )
 
-            replaced_rule = await client.replace_behavior_detection_rule(created_rule_id, updated_rule)
+            replaced_rule = await client.replace_behavior_detection_rule(
+                created_rule_id, updated_rule
+            )
             if isinstance(replaced_rule, tuple):
                 rule_obj, response, error = replaced_rule
                 if rule_obj is None and response is not None and response.raw_data:
                     import json
-                    response_data = json.loads(response.raw_data.decode('utf-8'))
+
+                    response_data = json.loads(response.raw_data.decode("utf-8"))
                     replaced_rule = models.BehaviorRule.from_dict(response_data)
                 else:
                     replaced_rule = rule_obj
@@ -120,12 +128,15 @@ class TestBehaviorRulesResource:
             # D. Activate, Deactivate, and Delete Rule
 
             # Deactivate the rule first (since it was created as ACTIVE)
-            deactivated_rule = await client.deactivate_behavior_detection_rule(created_rule_id)
+            deactivated_rule = await client.deactivate_behavior_detection_rule(
+                created_rule_id
+            )
             if isinstance(deactivated_rule, tuple):
                 rule_obj, response, error = deactivated_rule
                 if rule_obj is None and response is not None and response.raw_data:
                     import json
-                    response_data = json.loads(response.raw_data.decode('utf-8'))
+
+                    response_data = json.loads(response.raw_data.decode("utf-8"))
                     deactivated_rule = models.BehaviorRule.from_dict(response_data)
                 else:
                     deactivated_rule = rule_obj
@@ -133,12 +144,15 @@ class TestBehaviorRulesResource:
             assert deactivated_rule.status == models.LifecycleStatus.INACTIVE
 
             # Activate the rule
-            activated_rule = await client.activate_behavior_detection_rule(created_rule_id)
+            activated_rule = await client.activate_behavior_detection_rule(
+                created_rule_id
+            )
             if isinstance(activated_rule, tuple):
                 rule_obj, response, error = activated_rule
                 if rule_obj is None and response is not None and response.raw_data:
                     import json
-                    response_data = json.loads(response.raw_data.decode('utf-8'))
+
+                    response_data = json.loads(response.raw_data.decode("utf-8"))
                     activated_rule = models.BehaviorRule.from_dict(response_data)
                 else:
                     activated_rule = rule_obj
@@ -146,16 +160,22 @@ class TestBehaviorRulesResource:
             assert activated_rule.status == models.LifecycleStatus.ACTIVE
 
             # Deactivate again before deletion
-            deactivated_rule = await client.deactivate_behavior_detection_rule(created_rule_id)
+            deactivated_rule = await client.deactivate_behavior_detection_rule(
+                created_rule_id
+            )
 
             # Delete the rule
             await client.delete_behavior_detection_rule(created_rule_id)
 
             # Verify deletion by trying to get the rule (should return 404)
-            deleted_rule, _, err = await client.get_behavior_detection_rule(created_rule_id)
+            deleted_rule, _, err = await client.get_behavior_detection_rule(
+                created_rule_id
+            )
             # Should get an error for deleted rule
             assert err is not None, "Expected error when getting deleted rule"
-            assert "404" in str(err) or "Not Found" in str(err), f"Expected 404 error, got: {err}"
+            assert "404" in str(err) or "Not Found" in str(
+                err
+            ), f"Expected 404 error, got: {err}"
 
             # Part 2: Manage a Default Behavior Rule
             # Note: Skip this part due to SDK validation issues with list operation

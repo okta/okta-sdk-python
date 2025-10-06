@@ -49,7 +49,6 @@ class PasswordPolicy(Policy):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -130,5 +129,4 @@ class PasswordPolicy(Policy):
             "settings": PasswordPolicySettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None
         })
         return _obj
-
 

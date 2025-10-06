@@ -46,7 +46,6 @@ class PlatformConditionEvaluatorPlatformOperatingSystem(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -103,5 +102,4 @@ class PlatformConditionEvaluatorPlatformOperatingSystem(BaseModel):
             "version": PlatformConditionEvaluatorPlatformOperatingSystemVersion.from_dict(obj["version"]) if obj.get("version") is not None else None
         })
         return _obj
-
 

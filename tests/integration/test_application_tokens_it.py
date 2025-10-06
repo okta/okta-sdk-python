@@ -1,15 +1,18 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS
+# IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
 import pytest
-from tests.mocks import MockOktaClient
+
 import okta.models as models
 from okta.errors.okta_api_error import OktaAPIError
+from tests.mocks import MockOktaClient
 
 
 class TestApplicationTokensResource:
@@ -42,11 +45,11 @@ class TestApplicationTokensResource:
             application_type=models.OpenIdConnectApplicationType.WEB,
             grant_types=[
                 models.OAuthGrantType.AUTHORIZATION_CODE,
-                models.OAuthGrantType.REFRESH_TOKEN
+                models.OAuthGrantType.REFRESH_TOKEN,
             ],
             response_types=[models.OAuthResponseType.CODE],
             redirect_uris=["https://example.com/callback"],
-            consent_method=models.OpenIdConnectApplicationConsentMethod.REQUIRED
+            consent_method=models.OpenIdConnectApplicationConsentMethod.REQUIRED,
         )
 
         # Create application settings
@@ -58,7 +61,7 @@ class TestApplicationTokensResource:
         oidc_app = models.OpenIdConnectApplication(
             label=APP_LABEL,
             sign_on_mode=models.ApplicationSignOnMode.OPENID_CONNECT,
-            settings=app_settings
+            settings=app_settings,
         )
 
         app = None
@@ -79,20 +82,26 @@ class TestApplicationTokensResource:
 
             # If no tokens exist, this test demonstrates the API works but cannot proceed with token operations
             if len(tokens) == 0:
-                print("No tokens found for the application. Token operations require manual setup.")
+                print(
+                    "No tokens found for the application. Token operations require manual setup."
+                )
                 # Test that the API calls work even with no tokens
 
                 # Try to get a non-existent token (should return 404)
                 try:
-                    non_existent_token, _, err = await client.get_o_auth2_token_for_application(
-                        app_id, "non-existent-token-id"
+                    non_existent_token, _, err = (
+                        await client.get_o_auth2_token_for_application(
+                            app_id, "non-existent-token-id"
+                        )
                     )
                     assert err is not None or non_existent_token is None
                 except OktaAPIError as e:
                     assert e.response.status == 404
 
                 # Test revoking all tokens (should succeed even if no tokens exist)
-                _, resp, err = await client.revoke_o_auth2_tokens_for_application(app_id)
+                _, resp, err = await client.revoke_o_auth2_tokens_for_application(
+                    app_id
+                )
                 assert err is None
                 assert resp.status_code == 204
 
@@ -102,7 +111,9 @@ class TestApplicationTokensResource:
 
             # Verify we have enough tokens for the test
             if len(tokens) < 2:
-                print("Warning: Test works better with at least 2 tokens, but proceeding with available tokens")
+                print(
+                    "Warning: Test works better with at least 2 tokens, but proceeding with available tokens"
+                )
 
             # Verify each token is an OAuth2Token object
             for token in tokens:
@@ -137,14 +148,20 @@ class TestApplicationTokensResource:
                     app_id, first_token_id
                 )
                 # If we get here without an exception, check if error was returned
-                assert err is not None or revoked_token is None, "Getting revoked token should fail"
+                assert (
+                        err is not None or revoked_token is None
+                ), "Getting revoked token should fail"
             except OktaAPIError as e:
                 # Expected behavior - token should not be found
-                assert e.response.status == 404, "Getting revoked token should return 404"
+                assert (
+                        e.response.status == 404
+                ), "Getting revoked token should return 404"
 
             # D. Revoke All Remaining Tokens
             # First, verify we still have tokens to revoke (or none if we started with only 1)
-            remaining_tokens, _, err = await client.list_o_auth2_tokens_for_application(app_id)
+            remaining_tokens, _, err = await client.list_o_auth2_tokens_for_application(
+                app_id
+            )
             assert err is None
             assert isinstance(remaining_tokens, list)
             initial_remaining_count = len(remaining_tokens)
@@ -152,13 +169,19 @@ class TestApplicationTokensResource:
             # Revoke all remaining tokens
             _, resp, err = await client.revoke_o_auth2_tokens_for_application(app_id)
             assert err is None
-            assert resp.status_code == 204, "Bulk token revocation should return HTTP 204"
+            assert (
+                    resp.status_code == 204
+            ), "Bulk token revocation should return HTTP 204"
 
             # Verify all tokens have been revoked
-            final_tokens, _, err = await client.list_o_auth2_tokens_for_application(app_id)
+            final_tokens, _, err = await client.list_o_auth2_tokens_for_application(
+                app_id
+            )
             assert err is None
             assert isinstance(final_tokens, list)
-            assert len(final_tokens) == 0, "All tokens should be revoked after bulk revocation"
+            assert (
+                    len(final_tokens) == 0
+            ), "All tokens should be revoked after bulk revocation"
 
         finally:
             # Clean up - Delete the created application
@@ -198,10 +221,10 @@ class TestApplicationTokensResource:
             application_type=models.OpenIdConnectApplicationType.WEB,
             grant_types=[
                 models.OAuthGrantType.AUTHORIZATION_CODE,
-                models.OAuthGrantType.REFRESH_TOKEN
+                models.OAuthGrantType.REFRESH_TOKEN,
             ],
             response_types=[models.OAuthResponseType.CODE],
-            redirect_uris=["https://example.com/callback"]
+            redirect_uris=["https://example.com/callback"],
         )
 
         app_settings = models.OpenIdConnectApplicationSettings(
@@ -211,7 +234,7 @@ class TestApplicationTokensResource:
         oidc_app = models.OpenIdConnectApplication(
             label=APP_LABEL,
             sign_on_mode=models.ApplicationSignOnMode.OPENID_CONNECT,
-            settings=app_settings
+            settings=app_settings,
         )
 
         app = None
@@ -256,7 +279,7 @@ class TestApplicationTokensResource:
             application_type=models.OpenIdConnectApplicationType.WEB,
             grant_types=[models.OAuthGrantType.AUTHORIZATION_CODE],
             response_types=[models.OAuthResponseType.CODE],
-            redirect_uris=["https://example.com/callback"]
+            redirect_uris=["https://example.com/callback"],
         )
 
         app_settings = models.OpenIdConnectApplicationSettings(
@@ -266,7 +289,7 @@ class TestApplicationTokensResource:
         oidc_app = models.OpenIdConnectApplication(
             label=APP_LABEL,
             sign_on_mode=models.ApplicationSignOnMode.OPENID_CONNECT,
-            settings=app_settings
+            settings=app_settings,
         )
 
         app = None
@@ -309,7 +332,7 @@ class TestApplicationTokensResource:
             application_type=models.OpenIdConnectApplicationType.WEB,
             grant_types=[models.OAuthGrantType.AUTHORIZATION_CODE],
             response_types=[models.OAuthResponseType.CODE],
-            redirect_uris=["https://example.com/callback"]
+            redirect_uris=["https://example.com/callback"],
         )
 
         app_settings = models.OpenIdConnectApplicationSettings(
@@ -319,7 +342,7 @@ class TestApplicationTokensResource:
         oidc_app = models.OpenIdConnectApplication(
             label=APP_LABEL,
             sign_on_mode=models.ApplicationSignOnMode.OPENID_CONNECT,
-            settings=app_settings
+            settings=app_settings,
         )
 
         app = None
@@ -378,7 +401,7 @@ class TestApplicationTokensResource:
             application_type=models.OpenIdConnectApplicationType.WEB,
             grant_types=[models.OAuthGrantType.AUTHORIZATION_CODE],
             response_types=[models.OAuthResponseType.CODE],
-            redirect_uris=["https://example.com/callback"]
+            redirect_uris=["https://example.com/callback"],
         )
 
         app_settings = models.OpenIdConnectApplicationSettings(
@@ -388,7 +411,7 @@ class TestApplicationTokensResource:
         oidc_app = models.OpenIdConnectApplication(
             label=APP_LABEL,
             sign_on_mode=models.ApplicationSignOnMode.OPENID_CONNECT,
-            settings=app_settings
+            settings=app_settings,
         )
 
         app = None
@@ -398,14 +421,22 @@ class TestApplicationTokensResource:
             app_id = app.id
 
             # Test list_o_auth2_tokens_for_application_with_http_info
-            if hasattr(client, 'list_o_auth2_tokens_for_application_with_http_info'):
-                tokens_with_info, _, err = await client.list_o_auth2_tokens_for_application_with_http_info(app_id)
+            if hasattr(client, "list_o_auth2_tokens_for_application_with_http_info"):
+                tokens_with_info, _, err = (
+                    await client.list_o_auth2_tokens_for_application_with_http_info(
+                        app_id
+                    )
+                )
                 assert err is None
                 assert isinstance(tokens_with_info, list)
 
             # Test revoke_o_auth2_tokens_for_application_with_http_info
-            if hasattr(client, 'revoke_o_auth2_tokens_for_application_with_http_info'):
-                _, resp_info, err = await client.revoke_o_auth2_tokens_for_application_with_http_info(app_id)
+            if hasattr(client, "revoke_o_auth2_tokens_for_application_with_http_info"):
+                _, resp_info, err = (
+                    await client.revoke_o_auth2_tokens_for_application_with_http_info(
+                        app_id
+                    )
+                )
                 assert err is None
                 assert resp_info.status_code == 204
 

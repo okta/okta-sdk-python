@@ -1,20 +1,21 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS
+# IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
 import datetime
 
 import pytest
-from pytest_recording.plugin import record_mode
 from pydantic import SecretStr
 
-from tests.mocks import MockOktaClient
 import okta.models as models
 from okta.errors.okta_api_error import OktaAPIError
+from tests.mocks import MockOktaClient
 
 
 class TestApplicationsResource:
@@ -31,17 +32,13 @@ class TestApplicationsResource:
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
         APP_LABEL = "AddBookmarkApp"
-        app_settings_app = models.BookmarkApplicationSettingsApplication(**{
-            "requestIntegration": False,
-            "url": APP_URL
-        })
-        app_settings = models.BookmarkApplicationSettings(**{
-            "app": app_settings_app
-        })
-        bookmark_app_obj = models.BookmarkApplication(**{
-            "label": APP_LABEL,
-            "settings": app_settings
-        })
+        app_settings_app = models.BookmarkApplicationSettingsApplication(
+            **{"requestIntegration": False, "url": APP_URL}
+        )
+        app_settings = models.BookmarkApplicationSettings(**{"app": app_settings_app})
+        bookmark_app_obj = models.BookmarkApplication(
+            **{"label": APP_LABEL, "settings": app_settings}
+        )
 
         try:
             # Create App in org
@@ -83,17 +80,13 @@ class TestApplicationsResource:
         APP_AUTH_URL = "https://example.com/auth.html"
         APP_URL = "https://example.com/auth.html"
         APP_LABEL = "AddBasicAuthApp"
-        app_settings_app = models.BasicApplicationSettingsApplication(**{
-            "authUrl": APP_AUTH_URL,
-            "url": APP_URL
-        })
-        app_settings = models.BasicApplicationSettings(**{
-            "app": app_settings_app
-        })
-        basic_auth_app_obj = models.BasicAuthApplication(**{
-            "label": APP_LABEL,
-            "settings": app_settings
-        })
+        app_settings_app = models.BasicApplicationSettingsApplication(
+            **{"authUrl": APP_AUTH_URL, "url": APP_URL}
+        )
+        app_settings = models.BasicApplicationSettings(**{"app": app_settings_app})
+        basic_auth_app_obj = models.BasicAuthApplication(
+            **{"label": APP_LABEL, "settings": app_settings}
+        )
 
         try:
             # Create App in org
@@ -106,8 +99,7 @@ class TestApplicationsResource:
             found_app, _, err = await client.get_application(app.id)
             assert err is None
             assert found_app.label == APP_LABEL
-            assert found_app.sign_on_mode == \
-                models.ApplicationSignOnMode.BASIC_AUTH
+            assert found_app.sign_on_mode == models.ApplicationSignOnMode.BASIC_AUTH
             assert found_app.settings.app.url == APP_URL
             assert found_app.settings.app.auth_url == APP_AUTH_URL
 
@@ -280,8 +272,8 @@ class TestApplicationsResource:
         OPT_FIELD_3 = "param3"
         OPT_FIELD_3_VALUE = "value3"
 
-        sps_app_settings_app =\
-            models.SecurePasswordStoreApplicationSettingsApplication(**{
+        sps_app_settings_app = models.SecurePasswordStoreApplicationSettingsApplication(
+            **{
                 "passwordField": PASSWORD_FIELD,
                 "usernameField": USERNAME_FIELD,
                 "url": URL,
@@ -291,16 +283,19 @@ class TestApplicationsResource:
                 "optionalField2Value": OPT_FIELD_2_VALUE,
                 "optionalField3": OPT_FIELD_3,
                 "optionalField3Value": OPT_FIELD_3_VALUE,
-            })
+            }
+        )
 
-        sps_app_settings = models.SecurePasswordStoreApplicationSettings(**{
-            "app": sps_app_settings_app
-        })
+        sps_app_settings = models.SecurePasswordStoreApplicationSettings(
+            **{"app": sps_app_settings_app}
+        )
 
-        sps_app_obj = models.SecurePasswordStoreApplication(**{
-            "label": APP_LABEL,
-            "settings": sps_app_settings,
-        })
+        sps_app_obj = models.SecurePasswordStoreApplication(
+            **{
+                "label": APP_LABEL,
+                "settings": sps_app_settings,
+            }
+        )
 
         try:
             app, _, err = await client.create_application(sps_app_obj)
@@ -312,20 +307,19 @@ class TestApplicationsResource:
             found_app, _, err = await client.get_application(app.id)
             assert err is None
             assert found_app.label == APP_LABEL
-            assert found_app.sign_on_mode == \
-                models.ApplicationSignOnMode.SECURE_PASSWORD_STORE
+            assert (
+                    found_app.sign_on_mode
+                    == models.ApplicationSignOnMode.SECURE_PASSWORD_STORE
+            )
             assert found_app.settings.app.username_field == USERNAME_FIELD
             assert found_app.settings.app.password_field == PASSWORD_FIELD
             assert found_app.settings.app.url == URL
             assert found_app.settings.app.optional_field1 == OPT_FIELD_1
-            assert found_app.settings.app.optional_field1_value == \
-                OPT_FIELD_1_VALUE
+            assert found_app.settings.app.optional_field1_value == OPT_FIELD_1_VALUE
             assert found_app.settings.app.optional_field2 == OPT_FIELD_2
-            assert found_app.settings.app.optional_field2_value == \
-                OPT_FIELD_2_VALUE
+            assert found_app.settings.app.optional_field2_value == OPT_FIELD_2_VALUE
             assert found_app.settings.app.optional_field3 == OPT_FIELD_3
-            assert found_app.settings.app.optional_field3_value == \
-                OPT_FIELD_3_VALUE
+            assert found_app.settings.app.optional_field3_value == OPT_FIELD_3_VALUE
 
         finally:
             errors = []
@@ -353,48 +347,62 @@ class TestApplicationsResource:
         CLIENT_URI = "https://example.com/client"
         LOGO_URI = "https://example.com/assets/images/logo-new.png"
         POLICY_URI = "https://example.com/client/policy"
-        GRANT_TYPES = [models.OAuthGrantType.AUTHORIZATION_CODE,
-                       models.OAuthGrantType.IMPLICIT]
+        GRANT_TYPES = [
+            models.OAuthGrantType.AUTHORIZATION_CODE,
+            models.OAuthGrantType.IMPLICIT,
+        ]
         APP_TYPE = models.OpenIdConnectApplicationType.NATIVE
-        POST_LOGOUT_REDIRECT_URIS = ["https://example.com/postlogout",
-                                     "myapp://postlogoutcallback"]
-        REDIRECT_URIS = ["https://example.com/oauth2/callback",
-                         "myapp://callback"]
-        RESPONSE_TYPES = [models.OAuthResponseType.TOKEN,
-                          models.OAuthResponseType.ID_TOKEN,
-                          models.OAuthResponseType.CODE]
+        POST_LOGOUT_REDIRECT_URIS = [
+            "https://example.com/postlogout",
+            "myapp://postlogoutcallback",
+        ]
+        REDIRECT_URIS = ["https://example.com/oauth2/callback", "myapp://callback"]
+        RESPONSE_TYPES = [
+            models.OAuthResponseType.TOKEN,
+            models.OAuthResponseType.ID_TOKEN,
+            models.OAuthResponseType.CODE,
+        ]
         TOS_URL = "https://example.com/client/tos"
         AUTO_KEY_ROTATION = True
         CLIENT_ID = "testclientid12345"
-        TOKEN_ENDPOINT_AUTH_METHOD =\
+        TOKEN_ENDPOINT_AUTH_METHOD = (
             models.OAuthEndpointAuthenticationMethod.CLIENT_SECRET_POST
+        )
 
-        app_settings_client = models.OpenIdConnectApplicationSettingsClient(**{
-            "applicationType": APP_TYPE,
-            "clientUri": CLIENT_URI,
-            "grantTypes": GRANT_TYPES,
-            "logoUri": LOGO_URI,
-            "policyUri": POLICY_URI,
-            "postLogoutRedirectUris": POST_LOGOUT_REDIRECT_URIS,
-            "redirectUris": REDIRECT_URIS,
-            "responseTypes": RESPONSE_TYPES,
-            "tosUri": TOS_URL
-        })
-        app_settings = models.OpenIdConnectApplicationSettings(**{
-            "oauthClient": app_settings_client
-        })
-        app_credentials = models.OAuthApplicationCredentials(**{
-            "oauthClient": models.ApplicationCredentialsOAuthClient(**{
-                "autoKeyRotation": AUTO_KEY_ROTATION,
-                "clientId": CLIENT_ID,
-                "tokenEndpointAuthMethod": TOKEN_ENDPOINT_AUTH_METHOD
-            })
-        })
-        oidc_app_obj = models.OpenIdConnectApplication(**{
-            "label": APP_LABEL,
-            "settings": app_settings,
-            "credentials": app_credentials
-        })
+        app_settings_client = models.OpenIdConnectApplicationSettingsClient(
+            **{
+                "applicationType": APP_TYPE,
+                "clientUri": CLIENT_URI,
+                "grantTypes": GRANT_TYPES,
+                "logoUri": LOGO_URI,
+                "policyUri": POLICY_URI,
+                "postLogoutRedirectUris": POST_LOGOUT_REDIRECT_URIS,
+                "redirectUris": REDIRECT_URIS,
+                "responseTypes": RESPONSE_TYPES,
+                "tosUri": TOS_URL,
+            }
+        )
+        app_settings = models.OpenIdConnectApplicationSettings(
+            **{"oauthClient": app_settings_client}
+        )
+        app_credentials = models.OAuthApplicationCredentials(
+            **{
+                "oauthClient": models.ApplicationCredentialsOAuthClient(
+                    **{
+                        "autoKeyRotation": AUTO_KEY_ROTATION,
+                        "clientId": CLIENT_ID,
+                        "tokenEndpointAuthMethod": TOKEN_ENDPOINT_AUTH_METHOD,
+                    }
+                )
+            }
+        )
+        oidc_app_obj = models.OpenIdConnectApplication(
+            **{
+                "label": APP_LABEL,
+                "settings": app_settings,
+                "credentials": app_credentials,
+            }
+        )
 
         try:
             # Create App in org
@@ -407,14 +415,15 @@ class TestApplicationsResource:
             found_app, _, err = await client.get_application(app.id)
             assert err is None
             assert found_app.label == APP_LABEL
-            assert found_app.sign_on_mode ==\
-                models.ApplicationSignOnMode.OPENID_CONNECT
+            assert found_app.sign_on_mode == models.ApplicationSignOnMode.OPENID_CONNECT
             assert found_app.settings.oauth_client.application_type == APP_TYPE
             assert found_app.settings.oauth_client.client_uri == CLIENT_URI
             assert found_app.settings.oauth_client.grant_types == GRANT_TYPES
             assert found_app.settings.oauth_client.logo_uri == LOGO_URI
-            assert found_app.settings.oauth_client.post_logout_redirect_uris ==\
-                POST_LOGOUT_REDIRECT_URIS
+            assert (
+                    found_app.settings.oauth_client.post_logout_redirect_uris
+                    == POST_LOGOUT_REDIRECT_URIS
+            )
             assert found_app.settings.oauth_client.redirect_uris == REDIRECT_URIS
             assert found_app.settings.oauth_client.response_types == RESPONSE_TYPES
 
@@ -444,48 +453,62 @@ class TestApplicationsResource:
         CLIENT_URI = "https://example.com/client"
         LOGO_URI = "https://example.com/assets/images/logo-new.png"
         POLICY_URI = "https://example.com/client/policy"
-        GRANT_TYPES = [models.OAuthGrantType.AUTHORIZATION_CODE,
-                       models.OAuthGrantType.IMPLICIT]
+        GRANT_TYPES = [
+            models.OAuthGrantType.AUTHORIZATION_CODE,
+            models.OAuthGrantType.IMPLICIT,
+        ]
         APP_TYPE = models.OpenIdConnectApplicationType.NATIVE
-        POST_LOGOUT_REDIRECT_URIS = ["https://example.com/postlogout",
-                                     "myapp://postlogoutcallback"]
-        REDIRECT_URIS = ["https://example.com/oauth2/callback",
-                         "myapp://callback"]
-        RESPONSE_TYPES = [models.OAuthResponseType.TOKEN,
-                          models.OAuthResponseType.ID_TOKEN,
-                          models.OAuthResponseType.CODE]
+        POST_LOGOUT_REDIRECT_URIS = [
+            "https://example.com/postlogout",
+            "myapp://postlogoutcallback",
+        ]
+        REDIRECT_URIS = ["https://example.com/oauth2/callback", "myapp://callback"]
+        RESPONSE_TYPES = [
+            models.OAuthResponseType.TOKEN,
+            models.OAuthResponseType.ID_TOKEN,
+            models.OAuthResponseType.CODE,
+        ]
         TOS_URL = "https://example.com/client/tos"
         AUTO_KEY_ROTATION = True
         CLIENT_ID = "testclientid12345"
-        TOKEN_ENDPOINT_AUTH_METHOD =\
+        TOKEN_ENDPOINT_AUTH_METHOD = (
             models.OAuthEndpointAuthenticationMethod.CLIENT_SECRET_POST
+        )
 
-        app_settings_client = models.OpenIdConnectApplicationSettingsClient(**{
-            "applicationType": APP_TYPE,
-            "clientUri": CLIENT_URI,
-            "grantTypes": GRANT_TYPES,
-            "logoUri": LOGO_URI,
-            "policyUri": POLICY_URI,
-            "postLogoutRedirectUris": POST_LOGOUT_REDIRECT_URIS,
-            "redirectUris": REDIRECT_URIS,
-            "responseTypes": RESPONSE_TYPES,
-            "tosUri": TOS_URL
-        })
-        app_settings = models.OpenIdConnectApplicationSettings(**{
-            "oauthClient": app_settings_client
-        })
-        app_credentials = models.OAuthApplicationCredentials(**{
-            "oauthClient": models.ApplicationCredentialsOAuthClient(**{
-                "autoKeyRotation": AUTO_KEY_ROTATION,
-                "clientId": CLIENT_ID,
-                "tokenEndpointAuthMethod": TOKEN_ENDPOINT_AUTH_METHOD
-            })
-        })
-        oidc_app_obj = models.OpenIdConnectApplication(**{
-            "label": APP_LABEL,
-            "settings": app_settings,
-            "credentials": app_credentials
-        })
+        app_settings_client = models.OpenIdConnectApplicationSettingsClient(
+            **{
+                "applicationType": APP_TYPE,
+                "clientUri": CLIENT_URI,
+                "grantTypes": GRANT_TYPES,
+                "logoUri": LOGO_URI,
+                "policyUri": POLICY_URI,
+                "postLogoutRedirectUris": POST_LOGOUT_REDIRECT_URIS,
+                "redirectUris": REDIRECT_URIS,
+                "responseTypes": RESPONSE_TYPES,
+                "tosUri": TOS_URL,
+            }
+        )
+        app_settings = models.OpenIdConnectApplicationSettings(
+            **{"oauthClient": app_settings_client}
+        )
+        app_credentials = models.OAuthApplicationCredentials(
+            **{
+                "oauthClient": models.ApplicationCredentialsOAuthClient(
+                    **{
+                        "autoKeyRotation": AUTO_KEY_ROTATION,
+                        "clientId": CLIENT_ID,
+                        "tokenEndpointAuthMethod": TOKEN_ENDPOINT_AUTH_METHOD,
+                    }
+                )
+            }
+        )
+        oidc_app_obj = models.OpenIdConnectApplication(
+            **{
+                "label": APP_LABEL,
+                "settings": app_settings,
+                "credentials": app_credentials,
+            }
+        )
 
         try:
             # Create App in org
@@ -499,7 +522,7 @@ class TestApplicationsResource:
             assert err is None
 
             # List inactive apps
-            query_params_list = {"filter": "status eq \"INACTIVE\""}
+            query_params_list = {"filter": 'status eq "INACTIVE"'}
             apps_list, _, err = await client.list_applications(**query_params_list)
             assert err is None
             assert len(apps_list) == 1
@@ -519,22 +542,20 @@ class TestApplicationsResource:
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
         APP_LABEL = "AddBookmarkApp"
-        app_settings_app = models.BookmarkApplicationSettingsApplication(**{
-            "requestIntegration": False,
-            "url": APP_URL
-        })
-        app_settings = models.BookmarkApplicationSettings(**{
-            "app": app_settings_app
-        })
-        bookmark_app_obj = models.BookmarkApplication(**{
-            "label": APP_LABEL,
-            "settings": app_settings
-        })
+        app_settings_app = models.BookmarkApplicationSettingsApplication(
+            **{"requestIntegration": False, "url": APP_URL}
+        )
+        app_settings = models.BookmarkApplicationSettings(**{"app": app_settings_app})
+        bookmark_app_obj = models.BookmarkApplication(
+            **{"label": APP_LABEL, "settings": app_settings}
+        )
 
         try:
             # Create App in org
             query_params_create = {"activate": False}
-            app, _, err = await client.create_application(bookmark_app_obj, activate=False)
+            app, _, err = await client.create_application(
+                bookmark_app_obj, activate=False
+            )
             assert err is None
             assert isinstance(app, models.Application)
             assert isinstance(app, models.BookmarkApplication)
@@ -580,17 +601,13 @@ class TestApplicationsResource:
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
         APP_LABEL = "AddBookmarkApp"
-        app_settings_app = models.BookmarkApplicationSettingsApplication(**{
-            "requestIntegration": False,
-            "url": APP_URL
-        })
-        app_settings = models.BookmarkApplicationSettings(**{
-            "app": app_settings_app
-        })
-        bookmark_app_obj = models.BookmarkApplication(**{
-            "label": APP_LABEL,
-            "settings": app_settings
-        })
+        app_settings_app = models.BookmarkApplicationSettingsApplication(
+            **{"requestIntegration": False, "url": APP_URL}
+        )
+        app_settings = models.BookmarkApplicationSettings(**{"app": app_settings_app})
+        bookmark_app_obj = models.BookmarkApplication(
+            **{"label": APP_LABEL, "settings": app_settings}
+        )
 
         try:
             # Create App in org
@@ -600,14 +617,12 @@ class TestApplicationsResource:
             assert isinstance(app, models.BookmarkApplication)
 
             # Create Password
-            password = models.PasswordCredential(**{
-                "value": SecretStr("Password150kta")
-            })
+            password = models.PasswordCredential(
+                **{"value": SecretStr("Password150kta")}
+            )
 
             # Create User Credentials
-            user_creds = models.UserCredentials(**{
-                "password": password
-            })
+            user_creds = models.UserCredentials(**{"password": password})
 
             # Create User Profile and CreateUser Request
             user_profile = models.UserProfile()
@@ -616,44 +631,49 @@ class TestApplicationsResource:
             user_profile.email = "John.Doe-Get@example.com"
             user_profile.login = "John.Doe-Get@example.com"
 
-            create_user_req = models.CreateUserRequest(**{
-                "credentials": user_creds,
-                "profile": user_profile
-            })
+            create_user_req = models.CreateUserRequest(
+                **{"credentials": user_creds, "profile": user_profile}
+            )
 
             query_params_create = {"activate": True}
 
             # Create User
-            user, resp, err = await client.create_user(
-                create_user_req, activate=True)
+            user, resp, err = await client.create_user(create_user_req, activate=True)
             assert err is None
 
             # Create app user
-            app_user_credentials_password = models.AppUserPasswordCredential(**{
-                "value": SecretStr("Password150kta")
-            })
-            app_user_credentials = models.AppUserCredentials(**{
-                "password": app_user_credentials_password,
-                "user_name": user.profile.email
-            })
-            app_user = models.AppUser(**{
-                "credentials": app_user_credentials,
-                "id": user.id,
-                "scope": "USER",  # Required field
-                "status": models.AppUserStatus("ACTIVE"),  # Required field
-                "created": datetime.datetime.now(),  # Required field
-                "lastUpdated": datetime.datetime.now(),  # Required field
-                "statusChanged": datetime.datetime.now(),  # Required field
-                "_links": models.LinksAppAndUser(**{  # Required field
-                    "self": {
-                        "href": f"http://example.com/api/v1/apps/{app.id}/users/{user.id}"
-                    }
-                })
-            })
+            app_user_credentials_password = models.AppUserPasswordCredential(
+                **{"value": SecretStr("Password150kta")}
+            )
+            app_user_credentials = models.AppUserCredentials(
+                **{
+                    "password": app_user_credentials_password,
+                    "user_name": user.profile.email,
+                }
+            )
+            app_user = models.AppUser(
+                **{
+                    "credentials": app_user_credentials,
+                    "id": user.id,
+                    "scope": "USER",  # Required field
+                    "status": models.AppUserStatus("ACTIVE"),  # Required field
+                    "created": datetime.datetime.now(),  # Required field
+                    "lastUpdated": datetime.datetime.now(),  # Required field
+                    "statusChanged": datetime.datetime.now(),  # Required field
+                    "_links": models.LinksAppAndUser(
+                        **{  # Required field
+                            "self": {
+                                "href": f"http://example.com/api/v1/apps/{app.id}/users/{user.id}"
+                            }
+                        }
+                    ),
+                }
+            )
 
             # Assign
-            created_app_user, _, err = await\
-                client.assign_user_to_application(app.id, app_user)
+            created_app_user, _, err = await client.assign_user_to_application(
+                app.id, app_user
+            )
             assert err is None
             assert isinstance(created_app_user, models.AppUser)
             assert created_app_user.scope == "USER"
@@ -696,17 +716,13 @@ class TestApplicationsResource:
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
         APP_LABEL = "AddBookmarkApp"
-        app_settings_app = models.BookmarkApplicationSettingsApplication(**{
-            "requestIntegration": False,
-            "url": APP_URL
-        })
-        app_settings = models.BookmarkApplicationSettings(**{
-            "app": app_settings_app
-        })
-        bookmark_app_obj = models.BookmarkApplication(**{
-            "label": APP_LABEL,
-            "settings": app_settings
-        })
+        app_settings_app = models.BookmarkApplicationSettingsApplication(
+            **{"requestIntegration": False, "url": APP_URL}
+        )
+        app_settings = models.BookmarkApplicationSettings(**{"app": app_settings_app})
+        bookmark_app_obj = models.BookmarkApplication(
+            **{"label": APP_LABEL, "settings": app_settings}
+        )
 
         try:
             # Create App in org
@@ -716,14 +732,12 @@ class TestApplicationsResource:
             assert isinstance(app, models.BookmarkApplication)
 
             # Create Password
-            password = models.PasswordCredential(**{
-                "value": SecretStr("Password150kta")
-            })
+            password = models.PasswordCredential(
+                **{"value": SecretStr("Password150kta")}
+            )
 
             # Create User Credentials
-            user_creds = models.UserCredentials(**{
-                "password": password
-            })
+            user_creds = models.UserCredentials(**{"password": password})
 
             # Create User Profile and CreateUser Request
             user_profile = models.UserProfile()
@@ -738,85 +752,96 @@ class TestApplicationsResource:
             user_profile_2.email = "John.Doe-List@example.com"
             user_profile_2.login = "John.Doe-List@example.com"
 
-            create_user_req = models.CreateUserRequest(**{
-                "credentials": user_creds,
-                "profile": user_profile
-            })
-            create_user_req_2 = models.CreateUserRequest(**{
-                "credentials": user_creds,
-                "profile": user_profile_2
-            })
+            create_user_req = models.CreateUserRequest(
+                **{"credentials": user_creds, "profile": user_profile}
+            )
+            create_user_req_2 = models.CreateUserRequest(
+                **{"credentials": user_creds, "profile": user_profile_2}
+            )
 
             query_params_create = {"activate": True}
 
             # Create Users
-            user, resp, err = await client.create_user(
-                create_user_req, activate=True)
+            user, resp, err = await client.create_user(create_user_req, activate=True)
             assert err is None
 
             user_2, resp, err = await client.create_user(
-                create_user_req_2, activate=True)
+                create_user_req_2, activate=True
+            )
             assert err is None
 
             # Create app users
-            app_user_credentials_password = models.AppUserPasswordCredential(**{
-                "value": SecretStr("Password150kta")
-            })
-            app_user_credentials = models.AppUserCredentials(**{
-                "password": app_user_credentials_password,
-                "userName": user.profile.email
-            })
-            app_user = models.AppUser(**{
-                "credentials": app_user_credentials,
-                "id": user.id,
-                "scope": "USER",  # Required field
-                "status": models.AppUserStatus("ACTIVE"),  # Required field
-                "created": datetime.datetime.now(),  # Required field
-                "lastUpdated": datetime.datetime.now(),  # Required field
-                "statusChanged": datetime.datetime.now(),  # Required field
-                "_links": models.LinksAppAndUser(**{  # Required field
-                    "self": {
-                        "href": f"http://example.com/api/v1/apps/{app.id}/users/{user.id}"
-                    }
-                })
-            })
+            app_user_credentials_password = models.AppUserPasswordCredential(
+                **{"value": SecretStr("Password150kta")}
+            )
+            app_user_credentials = models.AppUserCredentials(
+                **{
+                    "password": app_user_credentials_password,
+                    "userName": user.profile.email,
+                }
+            )
+            app_user = models.AppUser(
+                **{
+                    "credentials": app_user_credentials,
+                    "id": user.id,
+                    "scope": "USER",  # Required field
+                    "status": models.AppUserStatus("ACTIVE"),  # Required field
+                    "created": datetime.datetime.now(),  # Required field
+                    "lastUpdated": datetime.datetime.now(),  # Required field
+                    "statusChanged": datetime.datetime.now(),  # Required field
+                    "_links": models.LinksAppAndUser(
+                        **{  # Required field
+                            "self": {
+                                "href": f"http://example.com/api/v1/apps/{app.id}/users/{user.id}"
+                            }
+                        }
+                    ),
+                }
+            )
 
-            app_user_credentials_password = models.AppUserPasswordCredential(**{
-                "value": SecretStr("Password150kta")
-            })
-            app_user_credentials_2 = models.AppUserCredentials(**{
-                "password": app_user_credentials_password,
-                "userName": user_2.profile.email
-            })
-            app_user_2 = models.AppUser(**{
-                "credentials": app_user_credentials_2,
-                "id": user.id,
-                "scope": "USER",  # Required field
-                "status": models.AppUserStatus("ACTIVE"),  # Required field
-                "created": datetime.datetime.now(),  # Required field
-                "lastUpdated": datetime.datetime.now(),  # Required field
-                "statusChanged": datetime.datetime.now(),  # Required field
-                "_links": models.LinksAppAndUser(**{  # Required field
-                    "self": {
-                        "href": f"http://example.com/api/v1/apps/{app.id}/users/{user.id}"
-                    }
-                })
-            })
+            app_user_credentials_password = models.AppUserPasswordCredential(
+                **{"value": SecretStr("Password150kta")}
+            )
+            app_user_credentials_2 = models.AppUserCredentials(
+                **{
+                    "password": app_user_credentials_password,
+                    "userName": user_2.profile.email,
+                }
+            )
+            app_user_2 = models.AppUser(
+                **{
+                    "credentials": app_user_credentials_2,
+                    "id": user.id,
+                    "scope": "USER",  # Required field
+                    "status": models.AppUserStatus("ACTIVE"),  # Required field
+                    "created": datetime.datetime.now(),  # Required field
+                    "lastUpdated": datetime.datetime.now(),  # Required field
+                    "statusChanged": datetime.datetime.now(),  # Required field
+                    "_links": models.LinksAppAndUser(
+                        **{  # Required field
+                            "self": {
+                                "href": f"http://example.com/api/v1/apps/{app.id}/users/{user.id}"
+                            }
+                        }
+                    ),
+                }
+            )
 
             # Assign
-            created_app_user, _, err = await\
-                client.assign_user_to_application(app.id, app_user)
+            created_app_user, _, err = await client.assign_user_to_application(
+                app.id, app_user
+            )
             assert err is None
             assert isinstance(created_app_user, models.AppUser)
 
-            created_app_user_2, _, err = await\
-                client.assign_user_to_application(app.id, app_user_2)
+            created_app_user_2, _, err = await client.assign_user_to_application(
+                app.id, app_user_2
+            )
             assert err is None
             assert isinstance(created_app_user_2, models.AppUser)
 
             # Get one user and verify details
-            found_app_user, _, err = await\
-                client.get_application_user(app.id, user.id)
+            found_app_user, _, err = await client.get_application_user(app.id, user.id)
             assert err is None
             assert found_app_user.id == user.id
             assert found_app_user.scope == "USER"
@@ -825,10 +850,20 @@ class TestApplicationsResource:
             app_user_list, _, err = await client.list_application_users(app.id)
             assert err is None
             assert len(app_user_list) == 2
-            assert next((app_usr for app_usr in app_user_list
-                         if app_usr.credentials.user_name == user.profile.email))
-            assert next((app_usr for app_usr in app_user_list
-                         if app_usr.credentials.user_name == user_2.profile.email))
+            assert next(
+                (
+                    app_usr
+                    for app_usr in app_user_list
+                    if app_usr.credentials.user_name == user.profile.email
+                )
+            )
+            assert next(
+                (
+                    app_usr
+                    for app_usr in app_user_list
+                    if app_usr.credentials.user_name == user_2.profile.email
+                )
+            )
 
         finally:
             errors = []
@@ -876,17 +911,13 @@ class TestApplicationsResource:
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
         APP_LABEL = "AddBookmarkApp"
-        app_settings_app = models.BookmarkApplicationSettingsApplication(**{
-            "requestIntegration": False,
-            "url": APP_URL
-        })
-        app_settings = models.BookmarkApplicationSettings(**{
-            "app": app_settings_app
-        })
-        bookmark_app_obj = models.BookmarkApplication(**{
-            "label": APP_LABEL,
-            "settings": app_settings
-        })
+        app_settings_app = models.BookmarkApplicationSettingsApplication(
+            **{"requestIntegration": False, "url": APP_URL}
+        )
+        app_settings = models.BookmarkApplicationSettings(**{"app": app_settings_app})
+        bookmark_app_obj = models.BookmarkApplication(
+            **{"label": APP_LABEL, "settings": app_settings}
+        )
 
         try:
             # Create App in org
@@ -896,14 +927,12 @@ class TestApplicationsResource:
             assert isinstance(app, models.BookmarkApplication)
 
             # Create Password
-            password = models.PasswordCredential(**{
-                "value": SecretStr("Password150kta")
-            })
+            password = models.PasswordCredential(
+                **{"value": SecretStr("Password150kta")}
+            )
 
             # Create User Credentials
-            user_creds = models.UserCredentials(**{
-                "password": password
-            })
+            user_creds = models.UserCredentials(**{"password": password})
 
             # Create User Profile and CreateUser Request
             user_profile = models.UserProfile()
@@ -912,44 +941,49 @@ class TestApplicationsResource:
             user_profile.email = "John.Doe-Get@example.com"
             user_profile.login = "John.Doe-Get@example.com"
 
-            create_user_req = models.CreateUserRequest(**{
-                "credentials": user_creds,
-                "profile": user_profile
-            })
+            create_user_req = models.CreateUserRequest(
+                **{"credentials": user_creds, "profile": user_profile}
+            )
 
             query_params_create = {"activate": True}
 
             # Create User
-            user, resp, err = await client.create_user(
-                create_user_req, activate=True)
+            user, resp, err = await client.create_user(create_user_req, activate=True)
             assert err is None
 
             # Create app user
-            app_user_credentials_password = models.AppUserPasswordCredential(**{
-                "value": SecretStr("Password150kta")
-            })
-            app_user_credentials = models.AppUserCredentials(**{
-                "password": app_user_credentials_password,
-                "userName": user.profile.email
-            })
-            app_user = models.AppUser(**{
-                "credentials": app_user_credentials,
-                "id": user.id,
-                "scope": "USER",  # Required field
-                "status": models.AppUserStatus("ACTIVE"),  # Required field
-                "created": datetime.datetime.now(),  # Required field
-                "lastUpdated": datetime.datetime.now(),  # Required field
-                "statusChanged": datetime.datetime.now(),  # Required field
-                "_links": models.LinksAppAndUser(**{  # Required field
-                    "self": {
-                        "href": f"http://example.com/api/v1/apps/{app.id}/users/{user.id}"
-                    }
-                })
-            })
+            app_user_credentials_password = models.AppUserPasswordCredential(
+                **{"value": SecretStr("Password150kta")}
+            )
+            app_user_credentials = models.AppUserCredentials(
+                **{
+                    "password": app_user_credentials_password,
+                    "userName": user.profile.email,
+                }
+            )
+            app_user = models.AppUser(
+                **{
+                    "credentials": app_user_credentials,
+                    "id": user.id,
+                    "scope": "USER",  # Required field
+                    "status": models.AppUserStatus("ACTIVE"),  # Required field
+                    "created": datetime.datetime.now(),  # Required field
+                    "lastUpdated": datetime.datetime.now(),  # Required field
+                    "statusChanged": datetime.datetime.now(),  # Required field
+                    "_links": models.LinksAppAndUser(
+                        **{  # Required field
+                            "self": {
+                                "href": f"http://example.com/api/v1/apps/{app.id}/users/{user.id}"
+                            }
+                        }
+                    ),
+                }
+            )
 
             # Assign
-            created_app_user, _, err = await\
-                client.assign_user_to_application(app.id, app_user)
+            created_app_user, _, err = await client.assign_user_to_application(
+                app.id, app_user
+            )
             assert err is None
             assert isinstance(created_app_user, models.AppUser)
             assert created_app_user.scope == "USER"
@@ -957,8 +991,7 @@ class TestApplicationsResource:
             assert created_app_user.sync_state == "DISABLED"
 
             # Retrieve
-            found_app_user, _, err = await\
-                client.get_application_user(app.id, user.id)
+            found_app_user, _, err = await client.get_application_user(app.id, user.id)
             assert err is None
             assert found_app_user.id == user.id
 
@@ -967,9 +1000,11 @@ class TestApplicationsResource:
             UPDATED_PASSWORD = "Password12345!"
             found_app_user.credentials.user_name = UPDATED_USER_NAME
             found_app_user.credentials.password = models.AppUserPasswordCredential(
-                **{"value": UPDATED_PASSWORD})
-            updated_app_user, _, err = await \
-                client.update_application_user(app.id, user.id, found_app_user)
+                **{"value": UPDATED_PASSWORD}
+            )
+            updated_app_user, _, err = await client.update_application_user(
+                app.id, user.id, found_app_user
+            )
             assert updated_app_user.credentials.user_name == UPDATED_USER_NAME
 
         finally:
@@ -1007,17 +1042,13 @@ class TestApplicationsResource:
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
         APP_LABEL = "AddBookmarkApp"
-        app_settings_app = models.BookmarkApplicationSettingsApplication(**{
-            "requestIntegration": False,
-            "url": APP_URL
-        })
-        app_settings = models.BookmarkApplicationSettings(**{
-            "app": app_settings_app
-        })
-        bookmark_app_obj = models.BookmarkApplication(**{
-            "label": APP_LABEL,
-            "settings": app_settings
-        })
+        app_settings_app = models.BookmarkApplicationSettingsApplication(
+            **{"requestIntegration": False, "url": APP_URL}
+        )
+        app_settings = models.BookmarkApplicationSettings(**{"app": app_settings_app})
+        bookmark_app_obj = models.BookmarkApplication(
+            **{"label": APP_LABEL, "settings": app_settings}
+        )
 
         try:
             # Create App in org
@@ -1027,14 +1058,12 @@ class TestApplicationsResource:
             assert isinstance(app, models.BookmarkApplication)
 
             # Create Password
-            password = models.PasswordCredential(**{
-                "value": SecretStr("Password150kta")
-            })
+            password = models.PasswordCredential(
+                **{"value": SecretStr("Password150kta")}
+            )
 
             # Create User Credentials
-            user_creds = models.UserCredentials(**{
-                "password": password
-            })
+            user_creds = models.UserCredentials(**{"password": password})
 
             # Create User Profile and CreateUser Request
             user_profile = models.UserProfile()
@@ -1043,44 +1072,49 @@ class TestApplicationsResource:
             user_profile.email = "John.Doe-Get@example.com"
             user_profile.login = "John.Doe-Get@example.com"
 
-            create_user_req = models.CreateUserRequest(**{
-                "credentials": user_creds,
-                "profile": user_profile
-            })
+            create_user_req = models.CreateUserRequest(
+                **{"credentials": user_creds, "profile": user_profile}
+            )
 
             query_params_create = {"activate": True}
 
             # Create User
-            user, resp, err = await client.create_user(
-                create_user_req, activate=True)
+            user, resp, err = await client.create_user(create_user_req, activate=True)
             assert err is None
 
             # Create app user
-            app_user_credentials_password = models.AppUserPasswordCredential(**{
-                "value": SecretStr("Password150kta")
-            })
-            app_user_credentials = models.AppUserCredentials(**{
-                "password": app_user_credentials_password,
-                "userName": user.profile.email
-            })
-            app_user = models.AppUser(**{
-                "credentials": app_user_credentials,
-                "id": user.id,
-                "scope": "USER",  # Required field
-                "status": models.AppUserStatus("ACTIVE"),  # Required field
-                "created": datetime.datetime.now(),  # Required field
-                "lastUpdated": datetime.datetime.now(),  # Required field
-                "statusChanged": datetime.datetime.now(),  # Required field
-                "_links": models.LinksAppAndUser(**{  # Required field
-                    "self": {
-                        "href": f"http://example.com/api/v1/apps/{app.id}/users/{user.id}"
-                    }
-                })
-            })
+            app_user_credentials_password = models.AppUserPasswordCredential(
+                **{"value": SecretStr("Password150kta")}
+            )
+            app_user_credentials = models.AppUserCredentials(
+                **{
+                    "password": app_user_credentials_password,
+                    "userName": user.profile.email,
+                }
+            )
+            app_user = models.AppUser(
+                **{
+                    "credentials": app_user_credentials,
+                    "id": user.id,
+                    "scope": "USER",  # Required field
+                    "status": models.AppUserStatus("ACTIVE"),  # Required field
+                    "created": datetime.datetime.now(),  # Required field
+                    "lastUpdated": datetime.datetime.now(),  # Required field
+                    "statusChanged": datetime.datetime.now(),  # Required field
+                    "_links": models.LinksAppAndUser(
+                        **{  # Required field
+                            "self": {
+                                "href": f"http://example.com/api/v1/apps/{app.id}/users/{user.id}"
+                            }
+                        }
+                    ),
+                }
+            )
 
             # Assign
-            created_app_user, _, err = await\
-                client.assign_user_to_application(app.id, app_user)
+            created_app_user, _, err = await client.assign_user_to_application(
+                app.id, app_user
+            )
             assert err is None
             assert isinstance(created_app_user, models.AppUser)
             assert created_app_user.scope == "USER"
@@ -1088,8 +1122,7 @@ class TestApplicationsResource:
             assert created_app_user.sync_state == "DISABLED"
 
             # Retrieve
-            found_app_user, _, err = await\
-                client.get_application_user(app.id, user.id)
+            found_app_user, _, err = await client.get_application_user(app.id, user.id)
             assert err is None
             assert found_app_user.id == user.id
 
@@ -1138,17 +1171,13 @@ class TestApplicationsResource:
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
         APP_LABEL = "AddBookmarkApp"
-        app_settings_app = models.BookmarkApplicationSettingsApplication(**{
-            "requestIntegration": False,
-            "url": APP_URL
-        })
-        app_settings = models.BookmarkApplicationSettings(**{
-            "app": app_settings_app
-        })
-        bookmark_app_obj = models.BookmarkApplication(**{
-            "label": APP_LABEL,
-            "settings": app_settings
-        })
+        app_settings_app = models.BookmarkApplicationSettingsApplication(
+            **{"requestIntegration": False, "url": APP_URL}
+        )
+        app_settings = models.BookmarkApplicationSettings(**{"app": app_settings_app})
+        bookmark_app_obj = models.BookmarkApplication(
+            **{"label": APP_LABEL, "settings": app_settings}
+        )
 
         try:
             # Create App in org
@@ -1159,12 +1188,8 @@ class TestApplicationsResource:
 
             # Create Group Object
             GROUP_NAME = "Group-Target-Test"
-            group_profile = models.GroupProfile(**{
-                "name": GROUP_NAME
-            })
-            group_obj = models.Group(**{
-                "profile": group_profile
-            })
+            group_profile = models.GroupProfile(**{"name": GROUP_NAME})
+            group_obj = models.Group(**{"profile": group_profile})
 
             # Create Group
             group, _, err = await client.create_group(group_obj)
@@ -1172,21 +1197,20 @@ class TestApplicationsResource:
             assert isinstance(group, models.Group)
 
             # Assign app and group
-            assign_ag_req = models.ApplicationGroupAssignment(**{
-                "priority": 0,
-                "applicationId": app.id,
-                "groupId": group.id
-            })
+            assign_ag_req = models.ApplicationGroupAssignment(
+                **{"priority": 0, "applicationId": app.id, "groupId": group.id}
+            )
 
-            assign_app_group, _, err = await \
-                client.assign_group_to_application(
-                    app.id, group.id, assign_ag_req)
+            assign_app_group, _, err = await client.assign_group_to_application(
+                app.id, group.id, assign_ag_req
+            )
             assert err is None
 
             # 3 second sleep for backend to update
 
-            found_app_group, _, err = await \
-                client.get_application_group_assignment(app.id, group.id)
+            found_app_group, _, err = await client.get_application_group_assignment(
+                app.id, group.id
+            )
             assert err is None
             assert found_app_group.id == assign_app_group.id
             assert found_app_group.priority == 0
@@ -1222,17 +1246,13 @@ class TestApplicationsResource:
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
         APP_LABEL = "AddBookmarkApp"
-        app_settings_app = models.BookmarkApplicationSettingsApplication(**{
-            "requestIntegration": False,
-            "url": APP_URL
-        })
-        app_settings = models.BookmarkApplicationSettings(**{
-            "app": app_settings_app
-        })
-        bookmark_app_obj = models.BookmarkApplication(**{
-            "label": APP_LABEL,
-            "settings": app_settings
-        })
+        app_settings_app = models.BookmarkApplicationSettingsApplication(
+            **{"requestIntegration": False, "url": APP_URL}
+        )
+        app_settings = models.BookmarkApplicationSettings(**{"app": app_settings_app})
+        bookmark_app_obj = models.BookmarkApplication(
+            **{"label": APP_LABEL, "settings": app_settings}
+        )
 
         try:
             # Create App in org
@@ -1243,20 +1263,12 @@ class TestApplicationsResource:
 
             # Create Group Object
             GROUP_NAME = "Group-Target-Test"
-            group_profile = models.GroupProfile(**{
-                "name": GROUP_NAME
-            })
-            group_obj = models.Group(**{
-                "profile": group_profile
-            })
+            group_profile = models.GroupProfile(**{"name": GROUP_NAME})
+            group_obj = models.Group(**{"profile": group_profile})
 
             GROUP_NAME_2 = "Group-Target-Test-2"
-            group_profile_2 = models.GroupProfile(**{
-                "name": GROUP_NAME_2
-            })
-            group_obj_2 = models.Group(**{
-                "profile": group_profile_2
-            })
+            group_profile_2 = models.GroupProfile(**{"name": GROUP_NAME_2})
+            group_obj_2 = models.Group(**{"profile": group_profile_2})
 
             # Create Groups
             group, _, err = await client.create_group(group_obj)
@@ -1267,38 +1279,35 @@ class TestApplicationsResource:
             assert isinstance(group, models.Group)
 
             # Assign app and group
-            assign_ag_req = models.ApplicationGroupAssignment(**{
-                "priority": 0,
-                "applicationId": app.id,
-                "groupId": group.id
-            })
-            assign_ag_req_2 = models.ApplicationGroupAssignment(**{
-                "priority": 0,
-                "applicationId": app.id,
-                "groupId": group_2.id
-            })
+            assign_ag_req = models.ApplicationGroupAssignment(
+                **{"priority": 0, "applicationId": app.id, "groupId": group.id}
+            )
+            assign_ag_req_2 = models.ApplicationGroupAssignment(
+                **{"priority": 0, "applicationId": app.id, "groupId": group_2.id}
+            )
 
-            assign_app_group, _, err = await \
-                client.assign_group_to_application(
-                    app.id, group.id, assign_ag_req)
+            assign_app_group, _, err = await client.assign_group_to_application(
+                app.id, group.id, assign_ag_req
+            )
             assert err is None
-            assign_app_group_2, _, err = await \
-                client.assign_group_to_application(
-                    app.id, group_2.id, assign_ag_req_2)
+            assign_app_group_2, _, err = await client.assign_group_to_application(
+                app.id, group_2.id, assign_ag_req_2
+            )
             assert err is None
 
             # 3 second sleep for backend to update
 
-            group_assign_list, _, err = await \
-                client.list_application_group_assignments(app.id)
+            group_assign_list, _, err = await client.list_application_group_assignments(
+                app.id
+            )
             assert err is None
             assert len(group_assign_list) == 2
             assert next(
-                (grp for grp in group_assign_list
-                 if grp.id == assign_app_group.id))
+                (grp for grp in group_assign_list if grp.id == assign_app_group.id)
+            )
             assert next(
-                (grp for grp in group_assign_list
-                 if grp.id == assign_app_group_2.id))
+                (grp for grp in group_assign_list if grp.id == assign_app_group_2.id)
+            )
 
         finally:
             errors = []
@@ -1336,17 +1345,13 @@ class TestApplicationsResource:
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
         APP_LABEL = "AddBookmarkApp"
-        app_settings_app = models.BookmarkApplicationSettingsApplication(**{
-            "requestIntegration": False,
-            "url": APP_URL
-        })
-        app_settings = models.BookmarkApplicationSettings(**{
-            "app": app_settings_app
-        })
-        bookmark_app_obj = models.BookmarkApplication(**{
-            "label": APP_LABEL,
-            "settings": app_settings
-        })
+        app_settings_app = models.BookmarkApplicationSettingsApplication(
+            **{"requestIntegration": False, "url": APP_URL}
+        )
+        app_settings = models.BookmarkApplicationSettings(**{"app": app_settings_app})
+        bookmark_app_obj = models.BookmarkApplication(
+            **{"label": APP_LABEL, "settings": app_settings}
+        )
 
         try:
             # Create App in org
@@ -1357,12 +1362,8 @@ class TestApplicationsResource:
 
             # Create Group Object
             GROUP_NAME = "Group-Target-Test"
-            group_profile = models.GroupProfile(**{
-                "name": GROUP_NAME
-            })
-            group_obj = models.Group(**{
-                "profile": group_profile
-            })
+            group_profile = models.GroupProfile(**{"name": GROUP_NAME})
+            group_obj = models.Group(**{"profile": group_profile})
 
             # Create Group
             group, _, err = await client.create_group(group_obj)
@@ -1370,21 +1371,20 @@ class TestApplicationsResource:
             assert isinstance(group, models.Group)
 
             # Assign app and group
-            assign_ag_req = models.ApplicationGroupAssignment(**{
-                "priority": 0,
-                "applicationId": app.id,
-                "groupId": group.id
-            })
+            assign_ag_req = models.ApplicationGroupAssignment(
+                **{"priority": 0, "applicationId": app.id, "groupId": group.id}
+            )
 
-            assign_app_group, _, err = await \
-                client.assign_group_to_application(
-                    app.id, group.id, assign_ag_req)
+            assign_app_group, _, err = await client.assign_group_to_application(
+                app.id, group.id, assign_ag_req
+            )
             assert err is None
 
             # 3 second sleep for backend to update
 
-            found_app_group, _, err = await \
-                client.get_application_group_assignment(app.id, group.id)
+            found_app_group, _, err = await client.get_application_group_assignment(
+                app.id, group.id
+            )
             assert err is None
             assert found_app_group.id == assign_app_group.id
             assert found_app_group.priority == 0
@@ -1394,8 +1394,9 @@ class TestApplicationsResource:
             assert err is None
 
             # Verify gone
-            group_assign_list, _, err = await \
-                client.list_application_group_assignments(app.id)
+            group_assign_list, _, err = await client.list_application_group_assignments(
+                app.id
+            )
             assert err is None
             assert len(group_assign_list) == 0
 
@@ -1430,17 +1431,13 @@ class TestApplicationsResource:
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
         APP_LABEL = "AddBookmarkApp"
-        app_settings_app = models.BookmarkApplicationSettingsApplication(**{
-            "requestIntegration": False,
-            "url": APP_URL
-        })
-        app_settings = models.BookmarkApplicationSettings(**{
-            "app": app_settings_app
-        })
-        bookmark_app_obj = models.BookmarkApplication(**{
-            "label": APP_LABEL,
-            "settings": app_settings
-        })
+        app_settings_app = models.BookmarkApplicationSettingsApplication(
+            **{"requestIntegration": False, "url": APP_URL}
+        )
+        app_settings = models.BookmarkApplicationSettings(**{"app": app_settings_app})
+        bookmark_app_obj = models.BookmarkApplication(
+            **{"label": APP_LABEL, "settings": app_settings}
+        )
 
         try:
             # Create App in org
@@ -1478,17 +1475,13 @@ class TestApplicationsResource:
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
         APP_LABEL = "AddBookmarkApp"
-        app_settings_app = models.BookmarkApplicationSettingsApplication(**{
-            "requestIntegration": False,
-            "url": APP_URL
-        })
-        app_settings = models.BookmarkApplicationSettings(**{
-            "app": app_settings_app
-        })
-        bookmark_app_obj = models.BookmarkApplication(**{
-            "label": APP_LABEL,
-            "settings": app_settings
-        })
+        app_settings_app = models.BookmarkApplicationSettingsApplication(
+            **{"requestIntegration": False, "url": APP_URL}
+        )
+        app_settings = models.BookmarkApplicationSettings(**{"app": app_settings_app})
+        bookmark_app_obj = models.BookmarkApplication(
+            **{"label": APP_LABEL, "settings": app_settings}
+        )
 
         try:
             # Create App in org
@@ -1506,8 +1499,9 @@ class TestApplicationsResource:
             default_key = app_keys[0]
 
             # Find key and verify details
-            found_key, _, err = await \
-                client.get_application_key(app.id, default_key.kid)
+            found_key, _, err = await client.get_application_key(
+                app.id, default_key.kid
+            )
             assert err is None
             assert found_key.kid == default_key.kid
             assert found_key.created == default_key.created
@@ -1538,17 +1532,13 @@ class TestApplicationsResource:
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
         APP_LABEL = "AddBookmarkApp"
-        app_settings_app = models.BookmarkApplicationSettingsApplication(**{
-            "requestIntegration": False,
-            "url": APP_URL
-        })
-        app_settings = models.BookmarkApplicationSettings(**{
-            "app": app_settings_app
-        })
-        bookmark_app_obj = models.BookmarkApplication(**{
-            "label": APP_LABEL,
-            "settings": app_settings
-        })
+        app_settings_app = models.BookmarkApplicationSettingsApplication(
+            **{"requestIntegration": False, "url": APP_URL}
+        )
+        app_settings = models.BookmarkApplicationSettings(**{"app": app_settings_app})
+        bookmark_app_obj = models.BookmarkApplication(
+            **{"label": APP_LABEL, "settings": app_settings}
+        )
 
         try:
             # Create App in org
@@ -1559,13 +1549,13 @@ class TestApplicationsResource:
 
             # Generate key
             query_params_generate = {"validityYears": 2}
-            generated, _, err = await\
-                client.generate_application_key(app.id, validity_years=2)
+            generated, _, err = await client.generate_application_key(
+                app.id, validity_years=2
+            )
             assert err is None
 
             # List app keys
-            found, _, err = await\
-                client.get_application_key(app.id, generated.kid)
+            found, _, err = await client.get_application_key(app.id, generated.kid)
             assert err is None
             assert found.created == generated.created
             assert found.expires_at == generated.expires_at
@@ -1595,31 +1585,25 @@ class TestApplicationsResource:
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
         APP_LABEL = "AddBookmarkApp"
-        app_settings_app = models.BookmarkApplicationSettingsApplication(**{
-            "requestIntegration": False,
-            "url": APP_URL
-        })
-        app_settings = models.BookmarkApplicationSettings(**{
-            "app": app_settings_app
-        })
-        bookmark_app_obj = models.BookmarkApplication(**{
-            "label": APP_LABEL,
-            "settings": app_settings
-        })
+        app_settings_app = models.BookmarkApplicationSettingsApplication(
+            **{"requestIntegration": False, "url": APP_URL}
+        )
+        app_settings = models.BookmarkApplicationSettings(**{"app": app_settings_app})
+        bookmark_app_obj = models.BookmarkApplication(
+            **{"label": APP_LABEL, "settings": app_settings}
+        )
 
         APP_URL_2 = "https://example.com/bookmark2.htm"
         APP_LABEL_2 = "AddBookmarkApp2"
-        app_settings_app_2 = models.BookmarkApplicationSettingsApplication(**{
-            "requestIntegration": False,
-            "url": APP_URL_2
-        })
-        app_settings_2 = models.BookmarkApplicationSettings(**{
-            "app": app_settings_app_2
-        })
-        bookmark_app_obj_2 = models.BookmarkApplication(**{
-            "label": APP_LABEL_2,
-            "settings": app_settings_2
-        })
+        app_settings_app_2 = models.BookmarkApplicationSettingsApplication(
+            **{"requestIntegration": False, "url": APP_URL_2}
+        )
+        app_settings_2 = models.BookmarkApplicationSettings(
+            **{"app": app_settings_app_2}
+        )
+        bookmark_app_obj_2 = models.BookmarkApplication(
+            **{"label": APP_LABEL_2, "settings": app_settings_2}
+        )
 
         try:
             # Create App in org
@@ -1635,15 +1619,16 @@ class TestApplicationsResource:
 
             # Generate key
             query_params_generate = {"validityYears": 2}
-            generated, _, err = await\
-                client.generate_application_key(app.id, validity_years=2)
+            generated, _, err = await client.generate_application_key(
+                app.id, validity_years=2
+            )
             assert err is None
 
             # Clone key into second app
             query_params_clone = {"targetAid": app_2.id}
-            cloned, _, err = await\
-                client.clone_application_key(
-                    app.id, generated.kid, target_aid=app_2.id)
+            cloned, _, err = await client.clone_application_key(
+                app.id, generated.kid, target_aid=app_2.id
+            )
             assert err is None
             assert cloned.kid == generated.kid
             assert cloned.expires_at == generated.expires_at
@@ -1681,33 +1666,33 @@ class TestApplicationsResource:
         client = MockOktaClient(fs)
 
         # Create CSR
-        csr_metadata = models.CsrMetadata(**{
-            "subject": models.CsrMetadataSubject(**{
-                "commonName": "SP Issuer",
-                "countryName": "Canada",
-                "localityName": "Toronto",
-                "organizationName": "Okta, Inc.",
-                "organizationalUnitName": "Dev"
-            }),
-            "subjectAltNames": models.CsrMetadataSubjectAltNames(**{
-                "dnsNames": ["dev.okta.com"]
-            })
-        })
+        csr_metadata = models.CsrMetadata(
+            **{
+                "subject": models.CsrMetadataSubject(
+                    **{
+                        "commonName": "SP Issuer",
+                        "countryName": "Canada",
+                        "localityName": "Toronto",
+                        "organizationName": "Okta, Inc.",
+                        "organizationalUnitName": "Dev",
+                    }
+                ),
+                "subjectAltNames": models.CsrMetadataSubjectAltNames(
+                    **{"dnsNames": ["dev.okta.com"]}
+                ),
+            }
+        )
 
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
         APP_LABEL = "AddBookmarkApp"
-        app_settings_app = models.BookmarkApplicationSettingsApplication(**{
-            "requestIntegration": False,
-            "url": APP_URL
-        })
-        app_settings = models.BookmarkApplicationSettings(**{
-            "app": app_settings_app
-        })
-        bookmark_app_obj = models.BookmarkApplication(**{
-            "label": APP_LABEL,
-            "settings": app_settings
-        })
+        app_settings_app = models.BookmarkApplicationSettingsApplication(
+            **{"requestIntegration": False, "url": APP_URL}
+        )
+        app_settings = models.BookmarkApplicationSettings(**{"app": app_settings_app})
+        bookmark_app_obj = models.BookmarkApplication(
+            **{"label": APP_LABEL, "settings": app_settings}
+        )
 
         try:
             # Create App in org
@@ -1717,8 +1702,9 @@ class TestApplicationsResource:
             assert isinstance(app, models.BookmarkApplication)
 
             # Generate CSR
-            generated, _, err = await \
-                client.generate_csr_for_application(app.id, csr_metadata)
+            generated, _, err = await client.generate_csr_for_application(
+                app.id, csr_metadata
+            )
             assert err is None
             assert generated.kty == "RSA"
             assert generated.csr is not None
@@ -1745,33 +1731,33 @@ class TestApplicationsResource:
         client = MockOktaClient(fs)
 
         # Create CSR
-        csr_metadata = models.CsrMetadata(**{
-            "subject": models.CsrMetadataSubject(**{
-                "commonName": "SP Issuer",
-                "countryName": "Canada",
-                "localityName": "Toronto",
-                "organizationName": "Okta, Inc.",
-                "organizationalUnitName": "Dev"
-            }),
-            "subjectAltNames": models.CsrMetadataSubjectAltNames(**{
-                "dnsNames": ["dev.okta.com"]
-            })
-        })
+        csr_metadata = models.CsrMetadata(
+            **{
+                "subject": models.CsrMetadataSubject(
+                    **{
+                        "commonName": "SP Issuer",
+                        "countryName": "Canada",
+                        "localityName": "Toronto",
+                        "organizationName": "Okta, Inc.",
+                        "organizationalUnitName": "Dev",
+                    }
+                ),
+                "subjectAltNames": models.CsrMetadataSubjectAltNames(
+                    **{"dnsNames": ["dev.okta.com"]}
+                ),
+            }
+        )
 
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
         APP_LABEL = "AddBookmarkApp"
-        app_settings_app = models.BookmarkApplicationSettingsApplication(**{
-            "requestIntegration": False,
-            "url": APP_URL
-        })
-        app_settings = models.BookmarkApplicationSettings(**{
-            "app": app_settings_app
-        })
-        bookmark_app_obj = models.BookmarkApplication(**{
-            "label": APP_LABEL,
-            "settings": app_settings
-        })
+        app_settings_app = models.BookmarkApplicationSettingsApplication(
+            **{"requestIntegration": False, "url": APP_URL}
+        )
+        app_settings = models.BookmarkApplicationSettings(**{"app": app_settings_app})
+        bookmark_app_obj = models.BookmarkApplication(
+            **{"label": APP_LABEL, "settings": app_settings}
+        )
 
         try:
             # Create App in org
@@ -1781,15 +1767,15 @@ class TestApplicationsResource:
             assert isinstance(app, models.BookmarkApplication)
 
             # Generate CSR
-            generated, _, err = await \
-                client.generate_csr_for_application(app.id, csr_metadata)
+            generated, _, err = await client.generate_csr_for_application(
+                app.id, csr_metadata
+            )
             assert err is None
             assert generated.kty == "RSA"
             assert generated.csr is not None
 
             # Get CSR
-            found, _, err = await client.get_csr_for_application(app.id,
-                                                                 generated.id)
+            found, _, err = await client.get_csr_for_application(app.id, generated.id)
             assert err is None
             assert found is not None
 
@@ -1815,33 +1801,33 @@ class TestApplicationsResource:
         client = MockOktaClient(fs)
 
         # Create CSR
-        csr_metadata = models.CsrMetadata(**{
-            "subject": models.CsrMetadataSubject(**{
-                "commonName": "SP Issuer",
-                "countryName": "Canada",
-                "localityName": "Toronto",
-                "organizationName": "Okta, Inc.",
-                "organizationalUnitName": "Dev"
-            }),
-            "subjectAltNames": models.CsrMetadataSubjectAltNames(**{
-                "dnsNames": ["dev.okta.com"]
-            })
-        })
+        csr_metadata = models.CsrMetadata(
+            **{
+                "subject": models.CsrMetadataSubject(
+                    **{
+                        "commonName": "SP Issuer",
+                        "countryName": "Canada",
+                        "localityName": "Toronto",
+                        "organizationName": "Okta, Inc.",
+                        "organizationalUnitName": "Dev",
+                    }
+                ),
+                "subjectAltNames": models.CsrMetadataSubjectAltNames(
+                    **{"dnsNames": ["dev.okta.com"]}
+                ),
+            }
+        )
 
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
         APP_LABEL = "AddBookmarkApp"
-        app_settings_app = models.BookmarkApplicationSettingsApplication(**{
-            "requestIntegration": False,
-            "url": APP_URL
-        })
-        app_settings = models.BookmarkApplicationSettings(**{
-            "app": app_settings_app
-        })
-        bookmark_app_obj = models.BookmarkApplication(**{
-            "label": APP_LABEL,
-            "settings": app_settings
-        })
+        app_settings_app = models.BookmarkApplicationSettingsApplication(
+            **{"requestIntegration": False, "url": APP_URL}
+        )
+        app_settings = models.BookmarkApplicationSettings(**{"app": app_settings_app})
+        bookmark_app_obj = models.BookmarkApplication(
+            **{"label": APP_LABEL, "settings": app_settings}
+        )
 
         try:
             # Create App in org
@@ -1851,15 +1837,15 @@ class TestApplicationsResource:
             assert isinstance(app, models.BookmarkApplication)
 
             # Generate CSR
-            generated, _, err = await \
-                client.generate_csr_for_application(app.id, csr_metadata)
+            generated, _, err = await client.generate_csr_for_application(
+                app.id, csr_metadata
+            )
             assert err is None
             assert generated.kty == "RSA"
             assert generated.csr is not None
 
             # Get CSR
-            found, _, err = await client.get_csr_for_application(app.id,
-                                                                 generated.id)
+            found, _, err = await client.get_csr_for_application(app.id, generated.id)
             assert err is None
             assert found is not None
 
@@ -1870,8 +1856,9 @@ class TestApplicationsResource:
             # Verify deletion
             csr_list, _, err = await client.list_csrs_for_application(app.id)
             assert err is None
-            assert next((csr for csr in csr_list if csr.id == generated.id), None)\
-                is None
+            assert (
+                    next((csr for csr in csr_list if csr.id == generated.id), None) is None
+            )
 
         finally:
             errors = []
@@ -1899,48 +1886,62 @@ class TestApplicationsResource:
         CLIENT_URI = "https://example.com/client"
         LOGO_URI = "https://example.com/assets/images/logo-new.png"
         POLICY_URI = "https://example.com/client/policy"
-        GRANT_TYPES = [models.OAuthGrantType.AUTHORIZATION_CODE,
-                       models.OAuthGrantType.IMPLICIT]
+        GRANT_TYPES = [
+            models.OAuthGrantType.AUTHORIZATION_CODE,
+            models.OAuthGrantType.IMPLICIT,
+        ]
         APP_TYPE = models.OpenIdConnectApplicationType.NATIVE
-        POST_LOGOUT_REDIRECT_URIS = ["https://example.com/postlogout",
-                                     "myapp://postlogoutcallback"]
-        REDIRECT_URIS = ["https://example.com/oauth2/callback",
-                         "myapp://callback"]
-        RESPONSE_TYPES = [models.OAuthResponseType.TOKEN,
-                          models.OAuthResponseType.ID_TOKEN,
-                          models.OAuthResponseType.CODE]
+        POST_LOGOUT_REDIRECT_URIS = [
+            "https://example.com/postlogout",
+            "myapp://postlogoutcallback",
+        ]
+        REDIRECT_URIS = ["https://example.com/oauth2/callback", "myapp://callback"]
+        RESPONSE_TYPES = [
+            models.OAuthResponseType.TOKEN,
+            models.OAuthResponseType.ID_TOKEN,
+            models.OAuthResponseType.CODE,
+        ]
         TOS_URL = "https://example.com/client/tos"
         AUTO_KEY_ROTATION = True
         CLIENT_ID = "testclientid12345"
-        TOKEN_ENDPOINT_AUTH_METHOD =\
+        TOKEN_ENDPOINT_AUTH_METHOD = (
             models.OAuthEndpointAuthenticationMethod.CLIENT_SECRET_POST
+        )
 
-        app_settings_client = models.OpenIdConnectApplicationSettingsClient(**{
-            "applicationType": APP_TYPE,
-            "clientUri": CLIENT_URI,
-            "grantTypes": GRANT_TYPES,
-            "logoUri": LOGO_URI,
-            "policyUri": POLICY_URI,
-            "postLogoutRedirectUris": POST_LOGOUT_REDIRECT_URIS,
-            "redirectUris": REDIRECT_URIS,
-            "responseTypes": RESPONSE_TYPES,
-            "tosUri": TOS_URL
-        })
-        app_settings = models.OpenIdConnectApplicationSettings(**{
-            "oauthClient": app_settings_client
-        })
-        app_credentials = models.OAuthApplicationCredentials(**{
-            "oauthClient": models.ApplicationCredentialsOAuthClient(**{
-                "autoKeyRotation": AUTO_KEY_ROTATION,
-                "clientId": CLIENT_ID,
-                "tokenEndpointAuthMethod": TOKEN_ENDPOINT_AUTH_METHOD
-            })
-        })
-        oidc_app_obj = models.OpenIdConnectApplication(**{
-            "label": APP_LABEL,
-            "settings": app_settings,
-            "credentials": app_credentials
-        })
+        app_settings_client = models.OpenIdConnectApplicationSettingsClient(
+            **{
+                "applicationType": APP_TYPE,
+                "clientUri": CLIENT_URI,
+                "grantTypes": GRANT_TYPES,
+                "logoUri": LOGO_URI,
+                "policyUri": POLICY_URI,
+                "postLogoutRedirectUris": POST_LOGOUT_REDIRECT_URIS,
+                "redirectUris": REDIRECT_URIS,
+                "responseTypes": RESPONSE_TYPES,
+                "tosUri": TOS_URL,
+            }
+        )
+        app_settings = models.OpenIdConnectApplicationSettings(
+            **{"oauthClient": app_settings_client}
+        )
+        app_credentials = models.OAuthApplicationCredentials(
+            **{
+                "oauthClient": models.ApplicationCredentialsOAuthClient(
+                    **{
+                        "autoKeyRotation": AUTO_KEY_ROTATION,
+                        "clientId": CLIENT_ID,
+                        "tokenEndpointAuthMethod": TOKEN_ENDPOINT_AUTH_METHOD,
+                    }
+                )
+            }
+        )
+        oidc_app_obj = models.OpenIdConnectApplication(
+            **{
+                "label": APP_LABEL,
+                "settings": app_settings,
+                "credentials": app_credentials,
+            }
+        )
 
         try:
             # Create App in org
@@ -1952,23 +1953,27 @@ class TestApplicationsResource:
             # Create grant request
             issuer = client.get_base_url()
             SCOPE_ID = "okta.roles.read"
-            oauth_scope_consent_grant = models.OAuth2ScopeConsentGrant(**{
-                "issuer": issuer,
-                "scopeId": SCOPE_ID
-            })
+            oauth_scope_consent_grant = models.OAuth2ScopeConsentGrant(
+                **{"issuer": issuer, "scopeId": SCOPE_ID}
+            )
 
             # Grant consent
             _, _, err = await client.grant_consent_to_scope(
-                app.id,
-                oauth_scope_consent_grant)
+                app.id, oauth_scope_consent_grant
+            )
             assert err is None
 
             # Check grant
             grants, _, err = await client.list_scope_consent_grants(app.id)
             assert err is None
             assert grants is not None
-            assert next((grant for grant in grants if grant.scope_id == SCOPE_ID
-                         and grant.issuer == issuer))
+            assert next(
+                (
+                    grant
+                    for grant in grants
+                    if grant.scope_id == SCOPE_ID and grant.issuer == issuer
+                )
+            )
 
         finally:
             errors = []
@@ -1996,48 +2001,62 @@ class TestApplicationsResource:
         CLIENT_URI = "https://example.com/client"
         LOGO_URI = "https://example.com/assets/images/logo-new.png"
         POLICY_URI = "https://example.com/client/policy"
-        GRANT_TYPES = [models.OAuthGrantType.AUTHORIZATION_CODE,
-                       models.OAuthGrantType.IMPLICIT]
+        GRANT_TYPES = [
+            models.OAuthGrantType.AUTHORIZATION_CODE,
+            models.OAuthGrantType.IMPLICIT,
+        ]
         APP_TYPE = models.OpenIdConnectApplicationType.NATIVE
-        POST_LOGOUT_REDIRECT_URIS = ["https://example.com/postlogout",
-                                     "myapp://postlogoutcallback"]
-        REDIRECT_URIS = ["https://example.com/oauth2/callback",
-                         "myapp://callback"]
-        RESPONSE_TYPES = [models.OAuthResponseType.TOKEN,
-                          models.OAuthResponseType.ID_TOKEN,
-                          models.OAuthResponseType.CODE]
+        POST_LOGOUT_REDIRECT_URIS = [
+            "https://example.com/postlogout",
+            "myapp://postlogoutcallback",
+        ]
+        REDIRECT_URIS = ["https://example.com/oauth2/callback", "myapp://callback"]
+        RESPONSE_TYPES = [
+            models.OAuthResponseType.TOKEN,
+            models.OAuthResponseType.ID_TOKEN,
+            models.OAuthResponseType.CODE,
+        ]
         TOS_URL = "https://example.com/client/tos"
         AUTO_KEY_ROTATION = True
         CLIENT_ID = "testclientid123456"
-        TOKEN_ENDPOINT_AUTH_METHOD =\
+        TOKEN_ENDPOINT_AUTH_METHOD = (
             models.OAuthEndpointAuthenticationMethod.CLIENT_SECRET_POST
+        )
 
-        app_settings_client = models.OpenIdConnectApplicationSettingsClient(**{
-            "applicationType": APP_TYPE,
-            "clientUri": CLIENT_URI,
-            "grantTypes": GRANT_TYPES,
-            "logoUri": LOGO_URI,
-            "policyUri": POLICY_URI,
-            "postLogoutRedirectUris": POST_LOGOUT_REDIRECT_URIS,
-            "redirectUris": REDIRECT_URIS,
-            "responseTypes": RESPONSE_TYPES,
-            "tosUri": TOS_URL
-        })
-        app_settings = models.OpenIdConnectApplicationSettings(**{
-            "oauthClient": app_settings_client
-        })
-        app_credentials = models.OAuthApplicationCredentials(**{
-            "oauthClient": models.ApplicationCredentialsOAuthClient(**{
-                "autoKeyRotation": AUTO_KEY_ROTATION,
-                "clientId": CLIENT_ID,
-                "tokenEndpointAuthMethod": TOKEN_ENDPOINT_AUTH_METHOD
-            })
-        })
-        oidc_app_obj = models.OpenIdConnectApplication(**{
-            "label": APP_LABEL,
-            "settings": app_settings,
-            "credentials": app_credentials
-        })
+        app_settings_client = models.OpenIdConnectApplicationSettingsClient(
+            **{
+                "applicationType": APP_TYPE,
+                "clientUri": CLIENT_URI,
+                "grantTypes": GRANT_TYPES,
+                "logoUri": LOGO_URI,
+                "policyUri": POLICY_URI,
+                "postLogoutRedirectUris": POST_LOGOUT_REDIRECT_URIS,
+                "redirectUris": REDIRECT_URIS,
+                "responseTypes": RESPONSE_TYPES,
+                "tosUri": TOS_URL,
+            }
+        )
+        app_settings = models.OpenIdConnectApplicationSettings(
+            **{"oauthClient": app_settings_client}
+        )
+        app_credentials = models.OAuthApplicationCredentials(
+            **{
+                "oauthClient": models.ApplicationCredentialsOAuthClient(
+                    **{
+                        "autoKeyRotation": AUTO_KEY_ROTATION,
+                        "clientId": CLIENT_ID,
+                        "tokenEndpointAuthMethod": TOKEN_ENDPOINT_AUTH_METHOD,
+                    }
+                )
+            }
+        )
+        oidc_app_obj = models.OpenIdConnectApplication(
+            **{
+                "label": APP_LABEL,
+                "settings": app_settings,
+                "credentials": app_credentials,
+            }
+        )
 
         try:
             # Create App in org
@@ -2049,26 +2068,29 @@ class TestApplicationsResource:
             # Create grant request
             issuer = client.get_base_url()
             SCOPE_ID = "okta.roles.read"
-            oauth_scope_consent_grant = models.OAuth2ScopeConsentGrant(**{
-                "issuer": issuer,
-                "scopeId": SCOPE_ID
-            })
+            oauth_scope_consent_grant = models.OAuth2ScopeConsentGrant(
+                **{"issuer": issuer, "scopeId": SCOPE_ID}
+            )
 
             # Grant consent
             _, _, err = await client.grant_consent_to_scope(
-                app.id,
-                oauth_scope_consent_grant)
+                app.id, oauth_scope_consent_grant
+            )
             assert err is None
 
             # Check grant
             grants, _, err = await client.list_scope_consent_grants(app.id)
             assert err is None
             assert grants is not None
-            found_grant = next((grant for grant in grants if grant.scope_id
-                                == SCOPE_ID and grant.issuer == issuer))
+            found_grant = next(
+                (
+                    grant
+                    for grant in grants
+                    if grant.scope_id == SCOPE_ID and grant.issuer == issuer
+                )
+            )
             assert found_grant
-            found, _, err = await\
-                client.get_scope_consent_grant(app.id, found_grant.id)
+            found, _, err = await client.get_scope_consent_grant(app.id, found_grant.id)
             assert err is None
             assert found is not None
 
@@ -2098,48 +2120,62 @@ class TestApplicationsResource:
         CLIENT_URI = "https://example.com/client"
         LOGO_URI = "https://example.com/assets/images/logo-new.png"
         POLICY_URI = "https://example.com/client/policy"
-        GRANT_TYPES = [models.OAuthGrantType.AUTHORIZATION_CODE,
-                       models.OAuthGrantType.IMPLICIT]
+        GRANT_TYPES = [
+            models.OAuthGrantType.AUTHORIZATION_CODE,
+            models.OAuthGrantType.IMPLICIT,
+        ]
         APP_TYPE = models.OpenIdConnectApplicationType.NATIVE
-        POST_LOGOUT_REDIRECT_URIS = ["https://example.com/postlogout",
-                                     "myapp://postlogoutcallback"]
-        REDIRECT_URIS = ["https://example.com/oauth2/callback",
-                         "myapp://callback"]
-        RESPONSE_TYPES = [models.OAuthResponseType.TOKEN,
-                          models.OAuthResponseType.ID_TOKEN,
-                          models.OAuthResponseType.CODE]
+        POST_LOGOUT_REDIRECT_URIS = [
+            "https://example.com/postlogout",
+            "myapp://postlogoutcallback",
+        ]
+        REDIRECT_URIS = ["https://example.com/oauth2/callback", "myapp://callback"]
+        RESPONSE_TYPES = [
+            models.OAuthResponseType.TOKEN,
+            models.OAuthResponseType.ID_TOKEN,
+            models.OAuthResponseType.CODE,
+        ]
         TOS_URL = "https://example.com/client/tos"
         AUTO_KEY_ROTATION = True
         CLIENT_ID = "testclientid123456"
-        TOKEN_ENDPOINT_AUTH_METHOD =\
+        TOKEN_ENDPOINT_AUTH_METHOD = (
             models.OAuthEndpointAuthenticationMethod.CLIENT_SECRET_POST
+        )
 
-        app_settings_client = models.OpenIdConnectApplicationSettingsClient(**{
-            "applicationType": APP_TYPE,
-            "clientUri": CLIENT_URI,
-            "grantTypes": GRANT_TYPES,
-            "logoUri": LOGO_URI,
-            "policyUri": POLICY_URI,
-            "postLogoutRedirectUris": POST_LOGOUT_REDIRECT_URIS,
-            "redirectUris": REDIRECT_URIS,
-            "responseTypes": RESPONSE_TYPES,
-            "tosUri": TOS_URL
-        })
-        app_settings = models.OpenIdConnectApplicationSettings(**{
-            "oauthClient": app_settings_client
-        })
-        app_credentials = models.OAuthApplicationCredentials(**{
-            "oauthClient": models.ApplicationCredentialsOAuthClient(**{
-                "autoKeyRotation": AUTO_KEY_ROTATION,
-                "clientId": CLIENT_ID,
-                "tokenEndpointAuthMethod": TOKEN_ENDPOINT_AUTH_METHOD
-            })
-        })
-        oidc_app_obj = models.OpenIdConnectApplication(**{
-            "label": APP_LABEL,
-            "settings": app_settings,
-            "credentials": app_credentials
-        })
+        app_settings_client = models.OpenIdConnectApplicationSettingsClient(
+            **{
+                "applicationType": APP_TYPE,
+                "clientUri": CLIENT_URI,
+                "grantTypes": GRANT_TYPES,
+                "logoUri": LOGO_URI,
+                "policyUri": POLICY_URI,
+                "postLogoutRedirectUris": POST_LOGOUT_REDIRECT_URIS,
+                "redirectUris": REDIRECT_URIS,
+                "responseTypes": RESPONSE_TYPES,
+                "tosUri": TOS_URL,
+            }
+        )
+        app_settings = models.OpenIdConnectApplicationSettings(
+            **{"oauthClient": app_settings_client}
+        )
+        app_credentials = models.OAuthApplicationCredentials(
+            **{
+                "oauthClient": models.ApplicationCredentialsOAuthClient(
+                    **{
+                        "autoKeyRotation": AUTO_KEY_ROTATION,
+                        "clientId": CLIENT_ID,
+                        "tokenEndpointAuthMethod": TOKEN_ENDPOINT_AUTH_METHOD,
+                    }
+                )
+            }
+        )
+        oidc_app_obj = models.OpenIdConnectApplication(
+            **{
+                "label": APP_LABEL,
+                "settings": app_settings,
+                "credentials": app_credentials,
+            }
+        )
 
         try:
             # Create App in org
@@ -2151,39 +2187,47 @@ class TestApplicationsResource:
             # Create grant request
             issuer = client.get_base_url()
             SCOPE_ID = "okta.users.read"
-            oauth_scope_consent_grant = models.OAuth2ScopeConsentGrant(**{
-                "issuer": issuer,
-                "scopeId": SCOPE_ID
-            })
+            oauth_scope_consent_grant = models.OAuth2ScopeConsentGrant(
+                **{"issuer": issuer, "scopeId": SCOPE_ID}
+            )
 
             # Grant consent
             _, _, err = await client.grant_consent_to_scope(
-                app.id,
-                oauth_scope_consent_grant)
+                app.id, oauth_scope_consent_grant
+            )
             assert err is None
 
             # Check grant
             grants, _, err = await client.list_scope_consent_grants(app.id)
             assert err is None
             assert grants is not None
-            found_grant = next((grant for grant in grants if grant.scope_id
-                                == SCOPE_ID and grant.issuer == issuer))
+            found_grant = next(
+                (
+                    grant
+                    for grant in grants
+                    if grant.scope_id == SCOPE_ID and grant.issuer == issuer
+                )
+            )
             assert found_grant
-            found, _, err = await\
-                client.get_scope_consent_grant(app.id, found_grant.id)
+            found, _, err = await client.get_scope_consent_grant(app.id, found_grant.id)
             assert err is None
             assert found is not None
 
             # Revoke
-            _, _, err = await client.revoke_scope_consent_grant(app.id,
-                                                             found_grant.id)
+            _, _, err = await client.revoke_scope_consent_grant(app.id, found_grant.id)
             assert err is None
 
             # Check again
             updated_grants, _, err = await client.list_scope_consent_grants(app.id)
             assert err is None
-            found_grant = next((grant for grant in updated_grants if grant.scope_id
-                                == SCOPE_ID and grant.issuer == issuer), None)
+            found_grant = next(
+                (
+                    grant
+                    for grant in updated_grants
+                    if grant.scope_id == SCOPE_ID and grant.issuer == issuer
+                ),
+                None,
+            )
             assert found_grant is None
 
         finally:
@@ -2251,17 +2295,13 @@ class TestApplicationsResource:
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
         APP_LABEL = "ReplaceBookmarkApp"
-        app_settings_app = models.BookmarkApplicationSettingsApplication(**{
-            "requestIntegration": False,
-            "url": APP_URL
-        })
-        app_settings = models.BookmarkApplicationSettings(**{
-            "app": app_settings_app
-        })
-        bookmark_app_obj = models.BookmarkApplication(**{
-            "label": APP_LABEL,
-            "settings": app_settings
-        })
+        app_settings_app = models.BookmarkApplicationSettingsApplication(
+            **{"requestIntegration": False, "url": APP_URL}
+        )
+        app_settings = models.BookmarkApplicationSettings(**{"app": app_settings_app})
+        bookmark_app_obj = models.BookmarkApplication(
+            **{"label": APP_LABEL, "settings": app_settings}
+        )
 
         try:
             # Create App in org
@@ -2315,21 +2355,19 @@ class TestApplicationsResource:
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark-http-info.htm"
         APP_LABEL = "HttpInfoBookmarkApp"
-        app_settings_app = models.BookmarkApplicationSettingsApplication(**{
-            "requestIntegration": False,
-            "url": APP_URL
-        })
-        app_settings = models.BookmarkApplicationSettings(**{
-            "app": app_settings_app
-        })
-        bookmark_app_obj = models.BookmarkApplication(**{
-            "label": APP_LABEL,
-            "settings": app_settings
-        })
+        app_settings_app = models.BookmarkApplicationSettingsApplication(
+            **{"requestIntegration": False, "url": APP_URL}
+        )
+        app_settings = models.BookmarkApplicationSettings(**{"app": app_settings_app})
+        bookmark_app_obj = models.BookmarkApplication(
+            **{"label": APP_LABEL, "settings": app_settings}
+        )
 
         try:
             # Test create_application_with_http_info
-            app, resp, err = await client.create_application_with_http_info(bookmark_app_obj)
+            app, resp, err = await client.create_application_with_http_info(
+                bookmark_app_obj
+            )
             assert err is None
             assert resp.status_code == 200
             assert isinstance(app, models.Application)
@@ -2341,18 +2379,24 @@ class TestApplicationsResource:
             assert found_app.id == app.id
 
             # Test activate_application_with_http_info
-            activated_app, resp, err = await client.activate_application_with_http_info(app.id)
+            activated_app, resp, err = await client.activate_application_with_http_info(
+                app.id
+            )
             assert err is None
             assert resp.status_code == 200
 
             # Test deactivate_application_with_http_info
-            deactivated_app, resp, err = await client.deactivate_application_with_http_info(app.id)
+            deactivated_app, resp, err = (
+                await client.deactivate_application_with_http_info(app.id)
+            )
             assert err is None
             assert resp.status_code == 200
 
             # Test replace_application_with_http_info
             app.label = "UpdatedHttpInfoApp"
-            replaced_app, resp, err = await client.replace_application_with_http_info(app.id, app)
+            replaced_app, resp, err = await client.replace_application_with_http_info(
+                app.id, app
+            )
             assert err is None
             assert resp.status_code == 200
             assert replaced_app.label == "UpdatedHttpInfoApp"
@@ -2361,12 +2405,16 @@ class TestApplicationsResource:
             errors = []
             # Deactivate & Delete created app
             try:
-                _, resp, err = await client.deactivate_application_with_http_info(app.id)
+                _, resp, err = await client.deactivate_application_with_http_info(
+                    app.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
             try:
-                success, resp, err = await client.delete_application_with_http_info(app.id)
+                success, resp, err = await client.delete_application_with_http_info(
+                    app.id
+                )
                 assert err is None
                 assert resp.status_code == 204
             except Exception as exc:
@@ -2383,17 +2431,13 @@ class TestApplicationsResource:
         # Create Bookmark Application Object for testing
         APP_URL = "https://example.com/bookmark-list-test.htm"
         APP_LABEL = "ListTestBookmarkApp"
-        app_settings_app = models.BookmarkApplicationSettingsApplication(**{
-            "requestIntegration": False,
-            "url": APP_URL
-        })
-        app_settings = models.BookmarkApplicationSettings(**{
-            "app": app_settings_app
-        })
-        bookmark_app_obj = models.BookmarkApplication(**{
-            "label": APP_LABEL,
-            "settings": app_settings
-        })
+        app_settings_app = models.BookmarkApplicationSettingsApplication(
+            **{"requestIntegration": False, "url": APP_URL}
+        )
+        app_settings = models.BookmarkApplicationSettings(**{"app": app_settings_app})
+        bookmark_app_obj = models.BookmarkApplication(
+            **{"label": APP_LABEL, "settings": app_settings}
+        )
 
         try:
             # Create a test application first
@@ -2404,7 +2448,7 @@ class TestApplicationsResource:
             # Test list_applications_with_http_info with filter to avoid problematic apps
             apps_list, resp, err = await client.list_applications_with_http_info(
                 q=APP_LABEL,  # Filter by our test app label
-                limit=1       # Limit results to avoid other problematic apps
+                limit=1,  # Limit results to avoid other problematic apps
             )
             assert err is None
             assert resp.status_code == 200
@@ -2428,4 +2472,3 @@ class TestApplicationsResource:
             except Exception as exc:
                 errors.append(exc)
             assert len(errors) == 0
-

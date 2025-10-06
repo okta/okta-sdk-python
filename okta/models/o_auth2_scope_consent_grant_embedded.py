@@ -43,7 +43,6 @@ class OAuth2ScopeConsentGrantEmbedded(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -98,5 +97,4 @@ class OAuth2ScopeConsentGrantEmbedded(BaseModel):
             "scope": OAuth2ScopeConsentGrantEmbeddedScope.from_dict(obj["scope"]) if obj.get("scope") is not None else None
         })
         return _obj
-
 

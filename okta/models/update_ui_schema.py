@@ -42,7 +42,6 @@ class UpdateUISchema(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -97,5 +96,4 @@ class UpdateUISchema(BaseModel):
             "uiSchema": UISchemaObject.from_dict(obj["uiSchema"]) if obj.get("uiSchema") is not None else None
         })
         return _obj
-
 

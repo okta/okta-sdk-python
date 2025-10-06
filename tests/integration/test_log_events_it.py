@@ -1,22 +1,27 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS
+# IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
+import datetime as dt
+
 import pytest
-from tests.mocks import MockOktaClient
+
 import okta.models as models
 from okta.constants import DATETIME_FORMAT
-import datetime as dt
+from tests.mocks import MockOktaClient
 
 
 class TestLogEventsResource:
     """
     Integration Tests for the Log Events Resource
     """
+
     SDK_PREFIX = "python_sdk"
 
     @pytest.mark.asyncio
@@ -28,17 +33,13 @@ class TestLogEventsResource:
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
         APP_LABEL = "AddBookmarkApp-GetLogs"
-        app_settings_app = models.BookmarkApplicationSettingsApplication({
-            "requestIntegration": False,
-            "url": APP_URL
-        })
-        app_settings = models.BookmarkApplicationSettings({
-            "app": app_settings_app
-        })
-        bookmark_app_obj = models.BookmarkApplication({
-            "label": APP_LABEL,
-            "settings": app_settings
-        })
+        app_settings_app = models.BookmarkApplicationSettingsApplication(
+            {"requestIntegration": False, "url": APP_URL}
+        )
+        app_settings = models.BookmarkApplicationSettings({"app": app_settings_app})
+        bookmark_app_obj = models.BookmarkApplication(
+            {"label": APP_LABEL, "settings": app_settings}
+        )
 
         try:
             # Create App in org
@@ -78,17 +79,13 @@ class TestLogEventsResource:
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
         APP_LABEL = "AddBookmarkApp-GetLogs"
-        app_settings_app = models.BookmarkApplicationSettingsApplication({
-            "requestIntegration": False,
-            "url": APP_URL
-        })
-        app_settings = models.BookmarkApplicationSettings({
-            "app": app_settings_app
-        })
-        bookmark_app_obj = models.BookmarkApplication({
-            "label": APP_LABEL,
-            "settings": app_settings
-        })
+        app_settings_app = models.BookmarkApplicationSettingsApplication(
+            {"requestIntegration": False, "url": APP_URL}
+        )
+        app_settings = models.BookmarkApplicationSettings({"app": app_settings_app})
+        bookmark_app_obj = models.BookmarkApplication(
+            {"label": APP_LABEL, "settings": app_settings}
+        )
 
         try:
             # Create App in org
@@ -103,7 +100,7 @@ class TestLogEventsResource:
 
             log_query_params = {
                 "sortOrder": "ASCENDING",
-                "until": one_minute_after.strftime(DATETIME_FORMAT)
+                "until": one_minute_after.strftime(DATETIME_FORMAT),
             }
 
             logs, _, err = await client.get_logs(log_query_params)
@@ -137,17 +134,13 @@ class TestLogEventsResource:
         # Create Bookmark Application Object
         APP_URL = "https://example.com/bookmark.htm"
         APP_LABEL = "AddBookmarkApp-GetLogs"
-        app_settings_app = models.BookmarkApplicationSettingsApplication({
-            "requestIntegration": False,
-            "url": APP_URL
-        })
-        app_settings = models.BookmarkApplicationSettings({
-            "app": app_settings_app
-        })
-        bookmark_app_obj = models.BookmarkApplication({
-            "label": APP_LABEL,
-            "settings": app_settings
-        })
+        app_settings_app = models.BookmarkApplicationSettingsApplication(
+            {"requestIntegration": False, "url": APP_URL}
+        )
+        app_settings = models.BookmarkApplicationSettings({"app": app_settings_app})
+        bookmark_app_obj = models.BookmarkApplication(
+            {"label": APP_LABEL, "settings": app_settings}
+        )
 
         try:
             # Create App in org
@@ -163,7 +156,7 @@ class TestLogEventsResource:
 
             log_query_params = {
                 "since": one_hour_before.strftime(DATETIME_FORMAT),
-                "until": now.strftime(DATETIME_FORMAT)
+                "until": now.strftime(DATETIME_FORMAT),
             }
             logs, _, err = await client.get_logs(log_query_params)
             assert err is None

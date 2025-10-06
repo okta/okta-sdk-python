@@ -1,20 +1,24 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS
+# IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
 import pytest
-from tests.mocks import MockOktaClient
+
 import okta.models as models
+from tests.mocks import MockOktaClient
 
 
 class TestFeaturesResource:
     """
     Integration Tests for the Features Resource
     """
+
     SDK_PREFIX = "python_sdk"
 
     @pytest.mark.vcr()
@@ -65,8 +69,9 @@ class TestFeaturesResource:
         first_feature = features[0]
 
         # Retrieve Dependencies with ID
-        feature_dependencies, _, err = await \
-            client.list_feature_dependencies(first_feature.id)
+        feature_dependencies, _, err = await client.list_feature_dependencies(
+            first_feature.id
+        )
         assert err is None
         assert isinstance(feature_dependencies, list)
 
@@ -85,8 +90,9 @@ class TestFeaturesResource:
         first_feature = features[0]
 
         # Retrieve Dependencies with ID
-        feature_dependents, _, err = await \
-            client.list_feature_dependents(first_feature.id)
+        feature_dependents, _, err = await client.list_feature_dependents(
+            first_feature.id
+        )
         assert err is None
         assert isinstance(feature_dependents, list)
 
@@ -107,19 +113,19 @@ class TestFeaturesResource:
         # Update
         first_feature_id = first_feature.id
         original_status = first_feature.status
-        lifecycle = "enable" if original_status == "DISABLED"\
-            else "disable"
-        status_change, _, err = await \
-            client.update_feature_lifecycle(first_feature_id, lifecycle)
+        lifecycle = "enable" if original_status == "DISABLED" else "disable"
+        status_change, _, err = await client.update_feature_lifecycle(
+            first_feature_id, lifecycle
+        )
         assert err is None
         assert isinstance(status_change, models.Feature)
         assert original_status != status_change.status
 
         # Revert
-        lifecycle = "disable" if original_status == "DISABLED"\
-            else "enable"
-        updated_status_change, _, err = await \
-            client.update_feature_lifecycle(first_feature_id, lifecycle)
+        lifecycle = "disable" if original_status == "DISABLED" else "enable"
+        updated_status_change, _, err = await client.update_feature_lifecycle(
+            first_feature_id, lifecycle
+        )
         assert err is None
         assert isinstance(updated_status_change, models.Feature)
         assert original_status == updated_status_change.status

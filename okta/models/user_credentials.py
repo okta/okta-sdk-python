@@ -47,7 +47,6 @@ class UserCredentials(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -118,5 +117,4 @@ class UserCredentials(BaseModel):
             "recovery_question": RecoveryQuestionCredential.from_dict(obj["recovery_question"]) if obj.get("recovery_question") is not None else None
         })
         return _obj
-
 

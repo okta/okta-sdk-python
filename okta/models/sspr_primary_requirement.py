@@ -55,7 +55,6 @@ class SsprPrimaryRequirement(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -111,5 +110,4 @@ class SsprPrimaryRequirement(BaseModel):
             "methodConstraints": [AuthenticatorMethodConstraint.from_dict(_item) for _item in obj["methodConstraints"]] if obj.get("methodConstraints") is not None else None
         })
         return _obj
-
 

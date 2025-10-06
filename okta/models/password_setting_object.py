@@ -46,7 +46,6 @@ class PasswordSettingObject(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -103,5 +102,4 @@ class PasswordSettingObject(BaseModel):
             "status": EnabledStatus.from_dict(obj["status"]) if obj.get("status") is not None else None
         })
         return _obj
-
 

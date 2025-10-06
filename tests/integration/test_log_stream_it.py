@@ -1,19 +1,20 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS
+# IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
-import pytest
 import datetime
-import random
-from pytest_recording.plugin import record_mode
 
-from tests.mocks import MockOktaClient
+import pytest
+
 import okta.models as models
 from okta.errors.okta_api_error import OktaAPIError
+from tests.mocks import MockOktaClient
 
 
 class TestLogStreamResource:
@@ -28,29 +29,35 @@ class TestLogStreamResource:
         client = MockOktaClient(fs)
 
         # Create AWS Log Stream Settings
-        log_stream_settings_aws = models.LogStreamSettingsAws(**{
-            "accountId": "123456789012",
-            "eventSourceName": "p",
-            "region": "us-east-1"
-        })
+        log_stream_settings_aws = models.LogStreamSettingsAws(
+            **{
+                "accountId": "123456789012",
+                "eventSourceName": "p",
+                "region": "us-east-1",
+            }
+        )
 
         # Create AWS Log Stream Object
         STREAM_NAME = "Test AWS Log Stream"
-        
+
         # Create minimal _links object
-        self_link = models.LogStreamSelfLink(href=f"/api/v1/logStreams/dummy", method="GET")
+        self_link = models.LogStreamSelfLink(
+            href=f"/api/v1/logStreams/dummy", method="GET"
+        )
         links = models.LogStreamLinksSelfAndLifecycle(var_self=self_link)
-        
-        log_stream_obj = models.LogStreamAws(**{
-            "name": STREAM_NAME,
-            "type": models.LogStreamType.AWS_EVENTBRIDGE,
-            "settings": log_stream_settings_aws,
-            "created": datetime.datetime.now(),
-            "id": "dummy-id",
-            "lastUpdated": datetime.datetime.now(),
-            "status": "ACTIVE",
-            "links": links
-        })
+
+        log_stream_obj = models.LogStreamAws(
+            **{
+                "name": STREAM_NAME,
+                "type": models.LogStreamType.AWS_EVENTBRIDGE,
+                "settings": log_stream_settings_aws,
+                "created": datetime.datetime.now(),
+                "id": "dummy-id",
+                "lastUpdated": datetime.datetime.now(),
+                "status": "ACTIVE",
+                "links": links,
+            }
+        )
 
         try:
             # Create Log Stream in org
@@ -74,7 +81,7 @@ class TestLogStreamResource:
 
         finally:
             # Clean up - delete the log stream
-            if 'log_stream' in locals() and log_stream:
+            if "log_stream" in locals() and log_stream:
                 try:
                     _, _, err = await client.deactivate_log_stream(log_stream.id)
                     assert err is None
@@ -91,28 +98,34 @@ class TestLogStreamResource:
         client = MockOktaClient(fs)
 
         # Create a log stream first
-        log_stream_settings_aws = models.LogStreamSettingsAws(**{
-            "accountId": "123456789012",
-            "eventSourceName": "p",
-            "region": "us-west-2"
-        })
+        log_stream_settings_aws = models.LogStreamSettingsAws(
+            **{
+                "accountId": "123456789012",
+                "eventSourceName": "p",
+                "region": "us-west-2",
+            }
+        )
 
         STREAM_NAME = "Test Get Log Stream"
-        
+
         # Create minimal _links object
-        self_link = models.LogStreamSelfLink(href=f"/api/v1/logStreams/dummy", method="GET")
+        self_link = models.LogStreamSelfLink(
+            href=f"/api/v1/logStreams/dummy", method="GET"
+        )
         links = models.LogStreamLinksSelfAndLifecycle(var_self=self_link)
-        
-        log_stream_obj = models.LogStreamAws(**{
-            "name": STREAM_NAME,
-            "type": models.LogStreamType.AWS_EVENTBRIDGE,
-            "settings": log_stream_settings_aws,
-            "created": datetime.datetime.now(),
-            "id": "dummy-id",
-            "lastUpdated": datetime.datetime.now(),
-            "status": "INACTIVE",
-            "links": links
-        })
+
+        log_stream_obj = models.LogStreamAws(
+            **{
+                "name": STREAM_NAME,
+                "type": models.LogStreamType.AWS_EVENTBRIDGE,
+                "settings": log_stream_settings_aws,
+                "created": datetime.datetime.now(),
+                "id": "dummy-id",
+                "lastUpdated": datetime.datetime.now(),
+                "status": "INACTIVE",
+                "links": links,
+            }
+        )
 
         try:
             # Create Log Stream
@@ -120,7 +133,9 @@ class TestLogStreamResource:
             assert err is None
 
             # Get the created log stream
-            retrieved_log_stream, _, err = await client.get_log_stream(created_log_stream.id)
+            retrieved_log_stream, _, err = await client.get_log_stream(
+                created_log_stream.id
+            )
             assert err is None
             assert isinstance(retrieved_log_stream, models.LogStream)
             assert isinstance(retrieved_log_stream, models.LogStreamAws)
@@ -132,9 +147,11 @@ class TestLogStreamResource:
 
         finally:
             # Clean up
-            if 'created_log_stream' in locals() and created_log_stream:
+            if "created_log_stream" in locals() and created_log_stream:
                 try:
-                    _, _, err = await client.deactivate_log_stream(created_log_stream.id)
+                    _, _, err = await client.deactivate_log_stream(
+                        created_log_stream.id
+                    )
                     assert err is None
 
                     _, _, err = await client.delete_log_stream(created_log_stream.id)
@@ -149,28 +166,34 @@ class TestLogStreamResource:
         client = MockOktaClient(fs)
 
         # Create a log stream first
-        log_stream_settings_aws = models.LogStreamSettingsAws(**{
-            "accountId": "123456789012",
-            "eventSourceName": "p",
-            "region": "us-east-1"
-        })
+        log_stream_settings_aws = models.LogStreamSettingsAws(
+            **{
+                "accountId": "123456789012",
+                "eventSourceName": "p",
+                "region": "us-east-1",
+            }
+        )
 
         STREAM_NAME = "Test Activate Log Stream"
-        
+
         # Create minimal _links object
-        self_link = models.LogStreamSelfLink(href=f"/api/v1/logStreams/dummy", method="GET")
+        self_link = models.LogStreamSelfLink(
+            href=f"/api/v1/logStreams/dummy", method="GET"
+        )
         links = models.LogStreamLinksSelfAndLifecycle(var_self=self_link)
-        
-        log_stream_obj = models.LogStreamAws(**{
-            "name": STREAM_NAME,
-            "type": models.LogStreamType.AWS_EVENTBRIDGE,
-            "settings": log_stream_settings_aws,
-            "created": datetime.datetime.now(),
-            "id": "dummy-id",
-            "lastUpdated": datetime.datetime.now(),
-            "status": "INACTIVE",
-            "links": links
-        })
+
+        log_stream_obj = models.LogStreamAws(
+            **{
+                "name": STREAM_NAME,
+                "type": models.LogStreamType.AWS_EVENTBRIDGE,
+                "settings": log_stream_settings_aws,
+                "created": datetime.datetime.now(),
+                "id": "dummy-id",
+                "lastUpdated": datetime.datetime.now(),
+                "status": "INACTIVE",
+                "links": links,
+            }
+        )
 
         try:
             # Create Log Stream
@@ -183,16 +206,20 @@ class TestLogStreamResource:
             assert err is None
 
             # Verify the log stream is active by getting it
-            retrieved_log_stream, _, err = await client.get_log_stream(created_log_stream.id)
+            retrieved_log_stream, _, err = await client.get_log_stream(
+                created_log_stream.id
+            )
             assert err is None
             assert retrieved_log_stream.status == "ACTIVE"
 
         finally:
             # Clean up
-            if 'created_log_stream' in locals() and created_log_stream:
+            if "created_log_stream" in locals() and created_log_stream:
                 try:
                     # Deactivate first, then delete
-                    _, _, err = await client.deactivate_log_stream(created_log_stream.id)
+                    _, _, err = await client.deactivate_log_stream(
+                        created_log_stream.id
+                    )
                     assert err is None
 
                     _, _, err = await client.delete_log_stream(created_log_stream.id)
@@ -207,28 +234,34 @@ class TestLogStreamResource:
         client = MockOktaClient(fs)
 
         # Create a log stream first
-        log_stream_settings_aws = models.LogStreamSettingsAws(**{
-            "accountId": "123456789012",
-            "eventSourceName": "p",
-            "region": "us-east-1"
-        })
+        log_stream_settings_aws = models.LogStreamSettingsAws(
+            **{
+                "accountId": "123456789012",
+                "eventSourceName": "p",
+                "region": "us-east-1",
+            }
+        )
 
         STREAM_NAME = "Test Deactivate Log Stream"
-        
+
         # Create minimal _links object
-        self_link = models.LogStreamSelfLink(href=f"/api/v1/logStreams/dummy", method="GET")
+        self_link = models.LogStreamSelfLink(
+            href=f"/api/v1/logStreams/dummy", method="GET"
+        )
         links = models.LogStreamLinksSelfAndLifecycle(var_self=self_link)
-        
-        log_stream_obj = models.LogStreamAws(**{
-            "name": STREAM_NAME,
-            "type": models.LogStreamType.AWS_EVENTBRIDGE,
-            "settings": log_stream_settings_aws,
-            "created": datetime.datetime.now(),
-            "id": "dummy-id",
-            "lastUpdated": datetime.datetime.now(),
-            "status": "INACTIVE",
-            "links": links
-        })
+
+        log_stream_obj = models.LogStreamAws(
+            **{
+                "name": STREAM_NAME,
+                "type": models.LogStreamType.AWS_EVENTBRIDGE,
+                "settings": log_stream_settings_aws,
+                "created": datetime.datetime.now(),
+                "id": "dummy-id",
+                "lastUpdated": datetime.datetime.now(),
+                "status": "INACTIVE",
+                "links": links,
+            }
+        )
 
         try:
             # Create Log Stream
@@ -240,13 +273,15 @@ class TestLogStreamResource:
             assert err is None
 
             # Verify the log stream is inactive by getting it
-            retrieved_log_stream, _, err = await client.get_log_stream(created_log_stream.id)
+            retrieved_log_stream, _, err = await client.get_log_stream(
+                created_log_stream.id
+            )
             assert err is None
             assert retrieved_log_stream.status == "INACTIVE"
 
         finally:
             # Clean up
-            if 'created_log_stream' in locals() and created_log_stream:
+            if "created_log_stream" in locals() and created_log_stream:
                 try:
                     _, _, err = await client.delete_log_stream(created_log_stream.id)
                     assert err is None
@@ -260,28 +295,34 @@ class TestLogStreamResource:
         client = MockOktaClient(fs)
 
         # Create a log stream first
-        log_stream_settings_aws = models.LogStreamSettingsAws(**{
-            "accountId": "123456789012",
-            "eventSourceName": "p",
-            "region": "us-east-1"
-        })
+        log_stream_settings_aws = models.LogStreamSettingsAws(
+            **{
+                "accountId": "123456789012",
+                "eventSourceName": "p",
+                "region": "us-east-1",
+            }
+        )
 
         STREAM_NAME = "Test Delete Log Stream"
-        
+
         # Create minimal _links object
-        self_link = models.LogStreamSelfLink(href=f"/api/v1/logStreams/dummy", method="GET")
+        self_link = models.LogStreamSelfLink(
+            href=f"/api/v1/logStreams/dummy", method="GET"
+        )
         links = models.LogStreamLinksSelfAndLifecycle(var_self=self_link)
-        
-        log_stream_obj = models.LogStreamAws(**{
-            "name": STREAM_NAME,
-            "type": models.LogStreamType.AWS_EVENTBRIDGE,
-            "settings": log_stream_settings_aws,
-            "created": datetime.datetime.now(),
-            "id": "dummy-id",
-            "lastUpdated": datetime.datetime.now(),
-            "status": "INACTIVE",
-            "links": links
-        })
+
+        log_stream_obj = models.LogStreamAws(
+            **{
+                "name": STREAM_NAME,
+                "type": models.LogStreamType.AWS_EVENTBRIDGE,
+                "settings": log_stream_settings_aws,
+                "created": datetime.datetime.now(),
+                "id": "dummy-id",
+                "lastUpdated": datetime.datetime.now(),
+                "status": "INACTIVE",
+                "links": links,
+            }
+        )
 
         # Create Log Stream
         created_log_stream, _, err = await client.create_log_stream(log_stream_obj)
@@ -316,25 +357,31 @@ class TestLogStreamResource:
 
         try:
             # Create AWS Log Stream
-            aws_settings = models.LogStreamSettingsAws(**{
-                "accountId": "123456789012",
-                "eventSourceName": "p",
-                "region": "us-east-1"
-            })
+            aws_settings = models.LogStreamSettingsAws(
+                **{
+                    "accountId": "123456789012",
+                    "eventSourceName": "p",
+                    "region": "us-east-1",
+                }
+            )
             # Create minimal _links object
-            self_link = models.LogStreamSelfLink(href=f"/api/v1/logStreams/dummy", method="GET")
+            self_link = models.LogStreamSelfLink(
+                href=f"/api/v1/logStreams/dummy", method="GET"
+            )
             links = models.LogStreamLinksSelfAndLifecycle(var_self=self_link)
-            
-            aws_log_stream = models.LogStreamAws(**{
-                "name": "Test List AWS Log Stream",
-                "type": models.LogStreamType.AWS_EVENTBRIDGE,
-                "settings": aws_settings,
-                "created": datetime.datetime.now(),
-                "id": "dummy-id",
-                "lastUpdated": datetime.datetime.now(),
-                "status": "INACTIVE",
-                "links": links
-            })
+
+            aws_log_stream = models.LogStreamAws(
+                **{
+                    "name": "Test List AWS Log Stream",
+                    "type": models.LogStreamType.AWS_EVENTBRIDGE,
+                    "settings": aws_settings,
+                    "created": datetime.datetime.now(),
+                    "id": "dummy-id",
+                    "lastUpdated": datetime.datetime.now(),
+                    "status": "INACTIVE",
+                    "links": links,
+                }
+            )
             created_aws, _, err = await client.create_log_stream(aws_log_stream)
             assert err is None
             log_streams_created.append(created_aws)
@@ -352,7 +399,10 @@ class TestLogStreamResource:
 
             # Verify different types are present
             types_in_list = {ls.type for ls in log_streams}
-            assert models.LogStreamType.AWS_EVENTBRIDGE in types_in_list or models.LogStreamType.SPLUNK_CLOUD_LOGSTREAMING in types_in_list
+            assert (
+                    models.LogStreamType.AWS_EVENTBRIDGE in types_in_list
+                    or models.LogStreamType.SPLUNK_CLOUD_LOGSTREAMING in types_in_list
+            )
 
         finally:
             # Clean up all created log streams
@@ -373,29 +423,35 @@ class TestLogStreamResource:
         client = MockOktaClient(fs)
 
         # Create AWS Log Stream Settings
-        log_stream_settings_aws = models.LogStreamSettingsAws(**{
-            "accountId": "123456789012",
-            "eventSourceName": "p",
-            "region": "us-west-1"
-        })
+        log_stream_settings_aws = models.LogStreamSettingsAws(
+            **{
+                "accountId": "123456789012",
+                "eventSourceName": "p",
+                "region": "us-west-1",
+            }
+        )
 
         # Create AWS Log Stream Object
         STREAM_NAME = "Test Lifecycle Log Stream"
-        
+
         # Create minimal _links object
-        self_link = models.LogStreamSelfLink(href=f"/api/v1/logStreams/dummy", method="GET")
+        self_link = models.LogStreamSelfLink(
+            href=f"/api/v1/logStreams/dummy", method="GET"
+        )
         links = models.LogStreamLinksSelfAndLifecycle(var_self=self_link)
-        
-        log_stream_obj = models.LogStreamAws(**{
-            "name": STREAM_NAME,
-            "type": models.LogStreamType.AWS_EVENTBRIDGE,
-            "settings": log_stream_settings_aws,
-            "created": datetime.datetime.now(),
-            "id": "dummy-id",
-            "lastUpdated": datetime.datetime.now(),
-            "status": "ACTIVE",
-            "links": links
-        })
+
+        log_stream_obj = models.LogStreamAws(
+            **{
+                "name": STREAM_NAME,
+                "type": models.LogStreamType.AWS_EVENTBRIDGE,
+                "settings": log_stream_settings_aws,
+                "created": datetime.datetime.now(),
+                "id": "dummy-id",
+                "lastUpdated": datetime.datetime.now(),
+                "status": "ACTIVE",
+                "links": links,
+            }
+        )
 
         try:
             # Step 1: Create Log Stream
@@ -405,26 +461,36 @@ class TestLogStreamResource:
             assert created_log_stream.name == STREAM_NAME
 
             # Step 2: Get Log Stream
-            retrieved_log_stream, _, err = await client.get_log_stream(created_log_stream.id)
+            retrieved_log_stream, _, err = await client.get_log_stream(
+                created_log_stream.id
+            )
             assert err is None
             assert retrieved_log_stream.id == created_log_stream.id
             assert retrieved_log_stream.status == "ACTIVE"
 
             # Step 3: Activate Log Stream
-            activated_log_stream, _, err = await client.activate_log_stream(created_log_stream.id)
+            activated_log_stream, _, err = await client.activate_log_stream(
+                created_log_stream.id
+            )
             assert err is None
 
             # Step 4: Verify activation by getting again
-            active_log_stream, _, err = await client.get_log_stream(created_log_stream.id)
+            active_log_stream, _, err = await client.get_log_stream(
+                created_log_stream.id
+            )
             assert err is None
             assert active_log_stream.status == "ACTIVE"
 
             # Step 5: Deactivate Log Stream
-            deactivated_log_stream, _, err = await client.deactivate_log_stream(created_log_stream.id)
+            deactivated_log_stream, _, err = await client.deactivate_log_stream(
+                created_log_stream.id
+            )
             assert err is None
 
             # Step 6: Verify deactivation by getting again
-            inactive_log_stream, _, err = await client.get_log_stream(created_log_stream.id)
+            inactive_log_stream, _, err = await client.get_log_stream(
+                created_log_stream.id
+            )
             assert err is None
             assert inactive_log_stream.status == "INACTIVE"
 
@@ -441,10 +507,12 @@ class TestLogStreamResource:
 
         except Exception:
             # Clean up on any failure
-            if 'created_log_stream' in locals() and created_log_stream:
+            if "created_log_stream" in locals() and created_log_stream:
                 try:
                     # Try to deactivate first, then delete
-                    _, _, err = await client.deactivate_log_stream(created_log_stream.id)
+                    _, _, err = await client.deactivate_log_stream(
+                        created_log_stream.id
+                    )
                     _, _, err = await client.delete_log_stream(created_log_stream.id)
                 except OktaAPIError:
                     pass

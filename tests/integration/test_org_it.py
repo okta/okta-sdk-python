@@ -1,24 +1,28 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS
+# IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
 import copy
-import os
+
 import pytest
-from datetime import datetime
+
+from okta.models import (
+    OrgSetting,
+    OrgContactType,
+    OrgContactTypeObj,
+    OrgContactUser,
+    OrgPreferences,
+    OrgOktaCommunicationSetting,
+    OrgOktaSupportSettingsObj,
+    OrgOktaSupportSetting,
+)
 from tests.mocks import MockOktaClient
-from okta.models import (OrgSetting,
-                         OrgContactType,
-                         OrgContactTypeObj,
-                         OrgContactUser,
-                         OrgPreferences,
-                         OrgOktaCommunicationSetting,
-                         OrgOktaSupportSettingsObj,
-                         OrgOktaSupportSetting)
 
 
 class TestOrgResource:
@@ -33,7 +37,7 @@ class TestOrgResource:
         org_settings, _, err = await client.get_org_settings()
         assert err is None
         assert isinstance(org_settings, OrgSetting)
-        assert org_settings.status == 'ACTIVE'
+        assert org_settings.status == "ACTIVE"
 
     @pytest.mark.vcr()
     @pytest.mark.asyncio
@@ -42,16 +46,25 @@ class TestOrgResource:
         get_org_settings, _, err = await client.get_org_settings()
         assert err is None
 
-        updated_setting = {'supportPhoneNumber': '1234567890'}
+        updated_setting = {"supportPhoneNumber": "1234567890"}
         try:
-            updated_org_settings, _, err = await client.update_org_settings(updated_setting)
+            updated_org_settings, _, err = await client.update_org_settings(
+                updated_setting
+            )
             assert err is None
-            assert updated_org_settings.support_phone_number == '1234567890'
+            assert updated_org_settings.support_phone_number == "1234567890"
         finally:
-            updated_setting = {'supportPhoneNumber': get_org_settings.support_phone_number}
-            updated_org_settings, _, err = await client.update_org_settings(updated_setting)
+            updated_setting = {
+                "supportPhoneNumber": get_org_settings.support_phone_number
+            }
+            updated_org_settings, _, err = await client.update_org_settings(
+                updated_setting
+            )
             assert err is None
-            assert updated_org_settings.support_phone_number == get_org_settings.support_phone_number
+            assert (
+                    updated_org_settings.support_phone_number
+                    == get_org_settings.support_phone_number
+            )
 
     @pytest.mark.vcr()
     @pytest.mark.asyncio
@@ -60,18 +73,25 @@ class TestOrgResource:
         get_org_settings, resp, err = await client.get_org_settings()
 
         new_org_settings = copy.deepcopy(get_org_settings)
-        new_org_settings.support_phone_number = '1234567890'
-        new_org_settings.company_name = 'NewOrgName'
+        new_org_settings.support_phone_number = "1234567890"
+        new_org_settings.company_name = "NewOrgName"
         try:
-            updated_org_settings, _, err = await client.update_org_settings(new_org_settings)
+            updated_org_settings, _, err = await client.update_org_settings(
+                new_org_settings
+            )
             assert err is None
-            assert updated_org_settings.support_phone_number == '1234567890'
-            assert updated_org_settings.company_name == 'NewOrgName'
+            assert updated_org_settings.support_phone_number == "1234567890"
+            assert updated_org_settings.company_name == "NewOrgName"
 
         finally:
-            updated_org_settings, _, err = await client.update_org_settings(get_org_settings)
+            updated_org_settings, _, err = await client.update_org_settings(
+                get_org_settings
+            )
             assert err is None
-            assert updated_org_settings.support_phone_number == get_org_settings.support_phone_number
+            assert (
+                    updated_org_settings.support_phone_number
+                    == get_org_settings.support_phone_number
+            )
             assert updated_org_settings.company_name == get_org_settings.company_name
 
     @pytest.mark.vcr()
@@ -104,12 +124,14 @@ class TestOrgResource:
 
         new_contact_type = OrgContactType.TECHNICAL.value
         try:
-            updated_user, _, err = await client.replace_org_contact_user(new_contact_type,
-                                                                        OrgContactUser(**{'userId': org_contact_user.user_id}))
+            updated_user, _, err = await client.replace_org_contact_user(
+                new_contact_type, OrgContactUser(**{"userId": org_contact_user.user_id})
+            )
             assert err is None
         finally:
-            updated_user, _, err = await client.replace_org_contact_user(contact_type,
-                                                                        OrgContactUser(**{'userId': org_contact_user.user_id}))
+            updated_user, _, err = await client.replace_org_contact_user(
+                contact_type, OrgContactUser(**{"userId": org_contact_user.user_id})
+            )
             assert err is None
 
     @pytest.mark.vcr()
@@ -143,7 +165,9 @@ class TestOrgResource:
     @pytest.mark.asyncio
     async def test_get_okta_communication_settings(self, fs):
         client = MockOktaClient(fs)
-        org_communication_setting, _, err = await client.get_okta_communication_settings()
+        org_communication_setting, _, err = (
+            await client.get_okta_communication_settings()
+        )
         assert err is None
         assert isinstance(org_communication_setting, OrgOktaCommunicationSetting)
         assert isinstance(org_communication_setting.opt_out_email_users, bool)
@@ -152,7 +176,9 @@ class TestOrgResource:
     @pytest.mark.asyncio
     async def test_opt_in_users_to_okta_communication_emails(self, fs):
         client = MockOktaClient(fs)
-        org_communication_setting, _, err = await client.opt_in_users_to_okta_communication_emails()
+        org_communication_setting, _, err = (
+            await client.opt_in_users_to_okta_communication_emails()
+        )
         assert err is None
         assert isinstance(org_communication_setting, OrgOktaCommunicationSetting)
         assert not org_communication_setting.opt_out_email_users
@@ -161,7 +187,9 @@ class TestOrgResource:
     @pytest.mark.asyncio
     async def test_opt_out_users_from_okta_communication_emails(self, fs):
         client = MockOktaClient(fs)
-        org_communication_setting, _, err = await client.opt_out_users_from_okta_communication_emails()
+        org_communication_setting, _, err = (
+            await client.opt_out_users_from_okta_communication_emails()
+        )
         assert err is None
         assert isinstance(org_communication_setting, OrgOktaCommunicationSetting)
         assert org_communication_setting.opt_out_email_users
@@ -184,13 +212,13 @@ class TestOrgResource:
             assert err is None
             assert isinstance(org_okta_support_setting, OrgOktaSupportSettingsObj)
             assert isinstance(org_okta_support_setting.support, OrgOktaSupportSetting)
-            assert org_okta_support_setting.support == 'ENABLED'
+            assert org_okta_support_setting.support == "ENABLED"
         finally:
             org_okta_support_setting, _, err = await client.revoke_okta_support()
             assert err is None
             assert isinstance(org_okta_support_setting, OrgOktaSupportSettingsObj)
             assert isinstance(org_okta_support_setting.support, OrgOktaSupportSetting)
-            assert org_okta_support_setting.support == 'DISABLED'
+            assert org_okta_support_setting.support == "DISABLED"
 
     @pytest.mark.vcr()
     @pytest.mark.asyncio
@@ -199,12 +227,22 @@ class TestOrgResource:
         try:
             org_okta_support_setting, _, err = await client.grant_okta_support()
             assert err is None
-            assert org_okta_support_setting.support == 'ENABLED'
-            extended_org_okta_support_setting, _, err = await client.extend_okta_support()
+            assert org_okta_support_setting.support == "ENABLED"
+            extended_org_okta_support_setting, _, err = (
+                await client.extend_okta_support()
+            )
             assert err is None
             # should be 24h
-            assert round((extended_org_okta_support_setting.expiration - org_okta_support_setting.expiration)
-                         .total_seconds() / 3600) == 24
+            assert (
+                    round(
+                        (
+                                extended_org_okta_support_setting.expiration
+                                - org_okta_support_setting.expiration
+                        ).total_seconds()
+                        / 3600
+                    )
+                    == 24
+            )
         finally:
             org_okta_support_setting, _, err = await client.revoke_okta_support()
             assert err is None
@@ -216,7 +254,7 @@ class TestOrgResource:
     async def test_upload_org_logo(self, fs):
         client = MockOktaClient(fs)
         fs.pause()
-        logo = open(f'tests/integration/data/logo.png', 'rb')
+        logo = open(f"tests/integration/data/logo.png", "rb")
         _, err = await client.update_org_logo(logo)
         fs.resume()
         assert err is None

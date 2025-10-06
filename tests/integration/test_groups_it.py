@@ -1,20 +1,23 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS
+# IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
 import json
 import os
+from http import HTTPStatus
+
 import pytest
 from pydantic import SecretStr
 
+import okta.models as models
 from tests.mocks import MockOktaClient
 from tests.mocks import mock_pause_function
-from http import HTTPStatus
-import okta.models as models
 
 
 class TestGroupsResource:
@@ -30,12 +33,8 @@ class TestGroupsResource:
 
         # Create Group Object
         GROUP_NAME = "Group-Target-Test"
-        group_profile = models.GroupProfile(**{
-            "name": GROUP_NAME
-        })
-        group_obj = models.Group(**{
-            "profile": group_profile
-        })
+        group_profile = models.GroupProfile(**{"name": GROUP_NAME})
+        group_obj = models.Group(**{"profile": group_profile})
 
         try:
             # Create Group
@@ -72,12 +71,8 @@ class TestGroupsResource:
 
         # Create Group Object
         GROUP_NAME = "Group-Target-Test"
-        group_profile = models.GroupProfile(**{
-            "name": GROUP_NAME
-        })
-        group_obj = models.Group(**{
-            "profile": group_profile
-        })
+        group_profile = models.GroupProfile(**{"name": GROUP_NAME})
+        group_obj = models.Group(**{"profile": group_profile})
 
         try:
             # Create Group
@@ -103,12 +98,8 @@ class TestGroupsResource:
 
         # Create Group Object
         GROUP_NAME = "Group-Target-Test"
-        group_profile = models.GroupProfile(**{
-            "name": GROUP_NAME
-        })
-        group_obj = models.Group(**{
-            "profile": group_profile
-        })
+        group_profile = models.GroupProfile(**{"name": GROUP_NAME})
+        group_obj = models.Group(**{"profile": group_profile})
 
         try:
             # Create Group
@@ -136,12 +127,8 @@ class TestGroupsResource:
 
         # Create Group Object
         GROUP_NAME = "Group-Target-Test"
-        group_profile = models.GroupProfile(**{
-            "name": GROUP_NAME
-        })
-        group_obj = models.Group(**{
-            "profile": group_profile
-        })
+        group_profile = models.GroupProfile(**{"name": GROUP_NAME})
+        group_obj = models.Group(**{"profile": group_profile})
 
         try:
             # Create Group
@@ -152,12 +139,8 @@ class TestGroupsResource:
             # Create Updated Group Object
             # Create Group Object
             NEW_GROUP_NAME = "Group-Target-Test NEW"
-            new_group_profile = models.GroupProfile(**{
-                "name": NEW_GROUP_NAME
-            })
-            new_group_obj = models.Group(**{
-                "profile": new_group_profile
-            })
+            new_group_profile = models.GroupProfile(**{"name": NEW_GROUP_NAME})
+            new_group_obj = models.Group(**{"profile": new_group_profile})
 
             _, _, err = await client.replace_group(group.id, new_group_obj)
             assert err is None
@@ -180,13 +163,9 @@ class TestGroupsResource:
         client = MockOktaClient(fs)
 
         # Create Password
-        password = models.PasswordCredential(**{
-            "value": "Password150kta"
-        })
+        password = models.PasswordCredential(**{"value": "Password150kta"})
         # Create User Credentials
-        user_creds = models.UserCredentials(**{
-            "password": password
-        })
+        user_creds = models.UserCredentials(**{"password": password})
 
         # Create User Profile and CreateUser Request
         user_profile = models.UserProfile()
@@ -195,27 +174,21 @@ class TestGroupsResource:
         user_profile.email = "John.Doe-Remove-Group@example.com"
         user_profile.login = "John.Doe-Remove-Group@example.com"
 
-        create_user_req = models.CreateUserRequest(**{
-            "credentials": user_creds,
-            "profile": user_profile
-        })
+        create_user_req = models.CreateUserRequest(
+            **{"credentials": user_creds, "profile": user_profile}
+        )
 
         try:
             # Create query parameters and Create User
             query_params_create = {"activate": "false"}
-            user, _, err = await client.create_user(
-                create_user_req, activate=False)
+            user, _, err = await client.create_user(create_user_req, activate=False)
             assert err is None
             assert isinstance(user, models.User)
 
             # Create Group Object
             GROUP_NAME = "Group-Target-Test"
-            group_profile = models.GroupProfile(**{
-                "name": GROUP_NAME
-            })
-            group_obj = models.Group(**{
-                "profile": group_profile
-            })
+            group_profile = models.GroupProfile(**{"name": GROUP_NAME})
+            group_obj = models.Group(**{"profile": group_profile})
 
             # Create Group
             group, _, err = await client.create_group(group_obj)
@@ -237,8 +210,9 @@ class TestGroupsResource:
             # Retrieve group list again to ensure deleted
             groups_list, _, err = await client.list_groups()
             assert err is None
-            assert next((grp for grp in groups_list if grp.id ==
-                         group.id), None) is None
+            assert (
+                    next((grp for grp in groups_list if grp.id == group.id), None) is None
+            )
 
         finally:
             errors = []
@@ -268,12 +242,8 @@ class TestGroupsResource:
 
         # Create Group Object
         GROUP_NAME = "Group-Target-Test"
-        group_profile = models.GroupProfile(**{
-            "name": GROUP_NAME
-        })
-        group_obj = models.Group(**{
-            "profile": group_profile
-        })
+        group_profile = models.GroupProfile(**{"name": GROUP_NAME})
+        group_obj = models.Group(**{"profile": group_profile})
 
         try:
             # Create Group
@@ -282,19 +252,21 @@ class TestGroupsResource:
             assert isinstance(group, models.Group)
 
             # Create roles
-            assign_role_req_ua = models.AssignRoleRequest(**{
-                "type": models.RoleType.USER_ADMIN
-            })
-            assign_role_req_aa = models.AssignRoleRequest(**{
-                "type": models.RoleType.APP_ADMIN
-            })
+            assign_role_req_ua = models.AssignRoleRequest(
+                **{"type": models.RoleType.USER_ADMIN}
+            )
+            assign_role_req_aa = models.AssignRoleRequest(
+                **{"type": models.RoleType.APP_ADMIN}
+            )
 
             ua_role, resp, err = await client.assign_role_to_group(
-                group.id, assign_role_req_ua)
+                group.id, assign_role_req_ua
+            )
             ua_role = models.Role(**json.loads(resp.raw_data))
             assert err is None
             aa_role, _, err = await client.assign_role_to_group(
-                group.id, assign_role_req_aa)
+                group.id, assign_role_req_aa
+            )
             aa_role = models.Role(**json.loads(resp.raw_data))
             assert err is None
 
@@ -310,10 +282,12 @@ class TestGroupsResource:
             group_roles, _, err = await client.list_group_assigned_roles(group.id)
             assert err is None
             assert len(group_roles) == 1
-            assert next((rle for rle in group_roles if rle.id ==
-                         ua_role.id), None) is None
-            assert next((rle for rle in group_roles if rle.id ==
-                         aa_role.id), None) is None
+            assert (
+                    next((rle for rle in group_roles if rle.id == ua_role.id), None) is None
+            )
+            assert (
+                    next((rle for rle in group_roles if rle.id == aa_role.id), None) is None
+            )
 
         finally:
             # Delete created group
@@ -327,13 +301,9 @@ class TestGroupsResource:
         client = MockOktaClient(fs)
 
         # Create Password
-        password = models.PasswordCredential(**{
-            "value": SecretStr("Password150kta")
-        })
+        password = models.PasswordCredential(**{"value": SecretStr("Password150kta")})
         # Create User Credentials
-        user_creds = models.UserCredentials(**{
-            "password": password
-        })
+        user_creds = models.UserCredentials(**{"password": password})
 
         # Create User Profile and CreateUser Request
         user_profile = models.UserProfile()
@@ -342,27 +312,21 @@ class TestGroupsResource:
         user_profile.email = "John.Doe-Activate@example.com"
         user_profile.login = "John.Doe-Activate@example.com"
 
-        create_user_req = models.CreateUserRequest(**{
-            "credentials": user_creds,
-            "profile": user_profile
-        })
+        create_user_req = models.CreateUserRequest(
+            **{"credentials": user_creds, "profile": user_profile}
+        )
 
         try:
             # Create query parameters and Create User
             query_params_create = {"activate": "false"}
-            user, _, err = await client.create_user(
-                create_user_req, activate=False)
+            user, _, err = await client.create_user(create_user_req, activate=False)
             assert err is None
             assert isinstance(user, models.User)
 
             # Create Group Object
             GROUP_NAME = "Group-Target-Test"
-            group_profile = models.GroupProfile(**{
-                "name": GROUP_NAME
-            })
-            group_obj = models.Group(**{
-                "profile": group_profile
-            })
+            group_profile = models.GroupProfile(**{"name": GROUP_NAME})
+            group_obj = models.Group(**{"profile": group_profile})
 
             # Create Group
             group, _, err = await client.create_group(group_obj)
@@ -384,8 +348,9 @@ class TestGroupsResource:
             users_in_group, _, err = await client.list_group_users(group.id)
             assert err is None
             assert len(users_in_group) == 0
-            assert next(
-                (usr for usr in users_in_group if usr.id == user.id), None) is None
+            assert (
+                    next((usr for usr in users_in_group if usr.id == user.id), None) is None
+            )
 
         finally:
             errors = []
@@ -416,13 +381,9 @@ class TestGroupsResource:
         client = MockOktaClient(fs)
 
         # Create Password
-        password = models.PasswordCredential(**{
-            "value": "Password150kta"
-        })
+        password = models.PasswordCredential(**{"value": "Password150kta"})
         # Create User Credentials
-        user_creds = models.UserCredentials(**{
-            "password": password
-        })
+        user_creds = models.UserCredentials(**{"password": password})
 
         # Create User Profile and CreateUser Request
         user_profile = models.UserProfile()
@@ -431,27 +392,21 @@ class TestGroupsResource:
         user_profile.email = "John.Doe-Group-Rule-Ops@example.com"
         user_profile.login = "John.Doe-Group-Rule-Ops@example.com"
 
-        create_user_req = models.CreateUserRequest(**{
-            "credentials": user_creds,
-            "profile": user_profile
-        })
+        create_user_req = models.CreateUserRequest(
+            **{"credentials": user_creds, "profile": user_profile}
+        )
 
         try:
             # Create query parameters and Create User
             query_params_create = {"activate": "false"}
-            user, _, err = await client.create_user(
-                create_user_req, activate=False)
+            user, _, err = await client.create_user(create_user_req, activate=False)
             assert err is None
             assert isinstance(user, models.User)
 
             # Create Group Object
             GROUP_NAME = "Group-Target-Test-Group-Rule-Ops"
-            group_profile = models.GroupProfile(**{
-                "name": GROUP_NAME
-            })
-            group_obj = models.Group(**{
-                "profile": group_profile
-            })
+            group_profile = models.GroupProfile(**{"name": GROUP_NAME})
+            group_obj = models.Group(**{"profile": group_profile})
 
             # Create Group
             group, _, err = await client.create_group(group_obj)
@@ -463,30 +418,31 @@ class TestGroupsResource:
             GROUP_RULE_NAME = "Test-Group-Rule-Group-Rule-Ops"
             GROUP_RULE_TYPE = "group_rule"
             GROUP_RULE_EXP_TYPE = "urn:okta:expression:1.0"
-            GROUP_RULE_EXP_VALUE = f"user.lastName==\"{last_name}\""
-            group_rule_exp = models.GroupRuleExpression(**{
-                "type": GROUP_RULE_EXP_TYPE,
-                "value": GROUP_RULE_EXP_VALUE
-            })
+            GROUP_RULE_EXP_VALUE = f'user.lastName=="{last_name}"'
+            group_rule_exp = models.GroupRuleExpression(
+                **{"type": GROUP_RULE_EXP_TYPE, "value": GROUP_RULE_EXP_VALUE}
+            )
 
-            group_rule_cond = models.GroupRuleConditions(**{
-                "expression": group_rule_exp
-            })
+            group_rule_cond = models.GroupRuleConditions(
+                **{"expression": group_rule_exp}
+            )
 
-            group_rule_group_assignment = models.GroupRuleGroupAssignment(**{
-                "groupIds": [group.id]
-            })
+            group_rule_group_assignment = models.GroupRuleGroupAssignment(
+                **{"groupIds": [group.id]}
+            )
 
-            group_rule_action = models.GroupRuleAction(**{
-                "assignUserToGroups": group_rule_group_assignment
-            })
+            group_rule_action = models.GroupRuleAction(
+                **{"assignUserToGroups": group_rule_group_assignment}
+            )
 
-            group_rule_object = models.GroupRule(**{
-                "actions": group_rule_action,
-                "conditions": group_rule_cond,
-                "name": GROUP_RULE_NAME,
-                "type": GROUP_RULE_TYPE
-            })
+            group_rule_object = models.GroupRule(
+                **{
+                    "actions": group_rule_action,
+                    "conditions": group_rule_cond,
+                    "name": GROUP_RULE_NAME,
+                    "type": GROUP_RULE_TYPE,
+                }
+            )
 
             group_rule, _, err = await client.create_group_rule(group_rule_object)
             assert err is None
@@ -501,14 +457,18 @@ class TestGroupsResource:
 
             users_in_group, _, err = await client.list_group_users(group.id)
             assert err is None
-            assert next((usr for usr in users_in_group if usr.id ==
-                         user.id), None) is not None
+            assert (
+                    next((usr for usr in users_in_group if usr.id == user.id), None)
+                    is not None
+            )
 
             # Ensure activated rule is in group rules
             group_rules, _, err = await client.list_group_rules()
             assert err is None
-            assert next((rule for rule in group_rules if rule.id ==
-                         group_rule.id), None) is not None
+            assert (
+                    next((rule for rule in group_rules if rule.id == group_rule.id), None)
+                    is not None
+            )
 
             # Deactivate rule (to update)
             _, _, err = await client.deactivate_group_rule(group_rule.id)
@@ -517,34 +477,35 @@ class TestGroupsResource:
             # Update rule
             # Create new rule
             NEW_GROUP_RULE_NAME = "Test-Group-Rule Updated"
-            NEW_GROUP_RULE_EXP_VALUE = "user.lastName==\"BLAHBLAHBLAH\""
-            new_group_rule_exp = models.GroupRuleExpression(**{
-                "type": GROUP_RULE_EXP_TYPE,
-                "value": NEW_GROUP_RULE_EXP_VALUE
-            })
+            NEW_GROUP_RULE_EXP_VALUE = 'user.lastName=="BLAHBLAHBLAH"'
+            new_group_rule_exp = models.GroupRuleExpression(
+                **{"type": GROUP_RULE_EXP_TYPE, "value": NEW_GROUP_RULE_EXP_VALUE}
+            )
 
-            new_group_rule_cond = models.GroupRuleConditions(**{
-                "expression": new_group_rule_exp
-            })
+            new_group_rule_cond = models.GroupRuleConditions(
+                **{"expression": new_group_rule_exp}
+            )
 
-            new_group_rule_group_assignment = models.GroupRuleGroupAssignment(**{
-                "groupIds": [group.id]
-            })
+            new_group_rule_group_assignment = models.GroupRuleGroupAssignment(
+                **{"groupIds": [group.id]}
+            )
 
-            new_group_rule_action = models.GroupRuleAction(**{
-                "assignUserToGroups": new_group_rule_group_assignment
-            })
+            new_group_rule_action = models.GroupRuleAction(
+                **{"assignUserToGroups": new_group_rule_group_assignment}
+            )
 
-            new_group_rule_object = models.GroupRule(**{
-                "actions": new_group_rule_action,
-                "conditions": new_group_rule_cond,
-                "name": NEW_GROUP_RULE_NAME,
-                "type": GROUP_RULE_TYPE
-            })
+            new_group_rule_object = models.GroupRule(
+                **{
+                    "actions": new_group_rule_action,
+                    "conditions": new_group_rule_cond,
+                    "name": NEW_GROUP_RULE_NAME,
+                    "type": GROUP_RULE_TYPE,
+                }
+            )
 
             new_group_rule, _, err = await client.replace_group_rule(
-                group_rule.id,
-                new_group_rule_object)
+                group_rule.id, new_group_rule_object
+            )
             assert err is None
 
             # Activate updated rule and verify user isn't in group
@@ -556,8 +517,9 @@ class TestGroupsResource:
 
             users_in_group, _, err = await client.list_group_users(group.id)
             assert err is None
-            assert next(
-                (usr for usr in users_in_group if usr.id == user.id), None) is None
+            assert (
+                    next((usr for usr in users_in_group if usr.id == user.id), None) is None
+            )
 
         finally:
             errors = []
@@ -603,20 +565,12 @@ class TestGroupsResource:
 
         # Create Group Objects
         GROUP_1_NAME = "Group-Target-Test 1"
-        group_1_profile = models.GroupProfile(**{
-            "name": GROUP_1_NAME
-        })
-        group_1_obj = models.Group(**{
-            "profile": group_1_profile
-        })
+        group_1_profile = models.GroupProfile(**{"name": GROUP_1_NAME})
+        group_1_obj = models.Group(**{"profile": group_1_profile})
 
         GROUP_2_NAME = "Group-Target-Test 2"
-        group_2_profile = models.GroupProfile(**{
-            "name": GROUP_2_NAME
-        })
-        group_2_obj = models.Group(**{
-            "profile": group_2_profile
-        })
+        group_2_profile = models.GroupProfile(**{"name": GROUP_2_NAME})
+        group_2_obj = models.Group(**{"profile": group_2_profile})
 
         try:
             # Create Groups
@@ -629,23 +583,26 @@ class TestGroupsResource:
             assert isinstance(group_2, models.Group)
 
             # Create role and add group targets
-            assign_role_req_ua = models.AssignRoleRequest(**{
-                "type": models.RoleType.USER_ADMIN
-            })
+            assign_role_req_ua = models.AssignRoleRequest(
+                **{"type": models.RoleType.USER_ADMIN}
+            )
 
             ua_role, resp, err = await client.assign_role_to_group(
-                group_1.id, assign_role_req_ua)
+                group_1.id, assign_role_req_ua
+            )
             import json
+
             ua_role = models.Role(**json.loads(resp.raw_data))
             assert err is None
 
-            _, _, err = await\
-                client.assign_group_target_to_group_admin_role(
-                    group_1.id, ua_role.id, group_2.id)
+            _, _, err = await client.assign_group_target_to_group_admin_role(
+                group_1.id, ua_role.id, group_2.id
+            )
 
             # Make sure targets are listed
             groups_list, _, err = await client.list_group_targets_for_group_role(
-                group_1.id, ua_role.id)
+                group_1.id, ua_role.id
+            )
             assert err is None
             assert next((grp for grp in groups_list if grp.id == group_2.id))
 
@@ -672,28 +629,16 @@ class TestGroupsResource:
 
         # Create Group Objects
         GROUP_1_NAME = "Group-Target-Test 1"
-        group_1_profile = models.GroupProfile(**{
-            "name": GROUP_1_NAME
-        })
-        group_1_obj = models.Group(**{
-            "profile": group_1_profile
-        })
+        group_1_profile = models.GroupProfile(**{"name": GROUP_1_NAME})
+        group_1_obj = models.Group(**{"profile": group_1_profile})
 
         GROUP_2_NAME = "Group-Target-Test 2"
-        group_2_profile = models.GroupProfile(**{
-            "name": GROUP_2_NAME
-        })
-        group_2_obj = models.Group(**{
-            "profile": group_2_profile
-        })
+        group_2_profile = models.GroupProfile(**{"name": GROUP_2_NAME})
+        group_2_obj = models.Group(**{"profile": group_2_profile})
 
         GROUP_3_NAME = "Group-Target-Test 3"
-        group_3_profile = models.GroupProfile(**{
-            "name": GROUP_3_NAME
-        })
-        group_3_obj = models.Group(**{
-            "profile": group_3_profile
-        })
+        group_3_profile = models.GroupProfile(**{"name": GROUP_3_NAME})
+        group_3_obj = models.Group(**{"profile": group_3_profile})
 
         try:
             # Create Groups
@@ -710,39 +655,44 @@ class TestGroupsResource:
             assert isinstance(group_3, models.Group)
 
             # Create role and add group targets
-            assign_role_req_ua = models.AssignRoleRequest(**{
-                "type": models.RoleType.USER_ADMIN
-            })
+            assign_role_req_ua = models.AssignRoleRequest(
+                **{"type": models.RoleType.USER_ADMIN}
+            )
 
             ua_role, resp, err = await client.assign_role_to_group(
-                group_1.id, assign_role_req_ua)
+                group_1.id, assign_role_req_ua
+            )
             import json
+
             ua_role = models.Role(**json.loads(resp.raw_data))
             assert err is None
 
-            _, _, err = await\
-                client.assign_group_target_to_group_admin_role(
-                    group_1.id, ua_role.id, group_2.id)
-            _, _, err = await\
-                client.assign_group_target_to_group_admin_role(
-                    group_1.id, ua_role.id, group_3.id)
+            _, _, err = await client.assign_group_target_to_group_admin_role(
+                group_1.id, ua_role.id, group_2.id
+            )
+            _, _, err = await client.assign_group_target_to_group_admin_role(
+                group_1.id, ua_role.id, group_3.id
+            )
 
             groups_list, _, err = await client.list_group_targets_for_group_role(
-                group_1.id, ua_role.id)
+                group_1.id, ua_role.id
+            )
             assert err is None
             assert next((grp for grp in groups_list if grp.id == group_2.id))
             assert next((grp for grp in groups_list if grp.id == group_3.id))
 
             # Remove from 2 and ensure 2 isn't listed
-            _, _, err = await \
-                client.unassign_group_target_from_group_admin_role(
-                    group_1.id, ua_role.id, group_2.id)
+            _, _, err = await client.unassign_group_target_from_group_admin_role(
+                group_1.id, ua_role.id, group_2.id
+            )
 
             groups_list, _, err = await client.list_group_targets_for_group_role(
-                group_1.id, ua_role.id)
+                group_1.id, ua_role.id
+            )
             assert err is None
-            assert next((grp for grp in groups_list if grp.id ==
-                         group_2.id), None) is None
+            assert (
+                    next((grp for grp in groups_list if grp.id == group_2.id), None) is None
+            )
             assert next((grp for grp in groups_list if grp.id == group_3.id))
 
         finally:
@@ -773,12 +723,8 @@ class TestGroupsResource:
 
         # Create Group Objects
         GROUP_NAME = "Group-Target-Test"
-        group_profile = models.GroupProfile(**{
-            "name": GROUP_NAME
-        })
-        group_obj = models.Group(**{
-            "profile": group_profile
-        })
+        group_profile = models.GroupProfile(**{"name": GROUP_NAME})
+        group_obj = models.Group(**{"profile": group_profile})
 
         try:
             # Create Group
@@ -790,40 +736,39 @@ class TestGroupsResource:
             APP_AUTH_URL = "https://example.com/auth.html"
             APP_URL = "https://example.com/auth.html"
             APP_LABEL = "AddBasicAuthApp"
-            app_settings_app = models.BasicApplicationSettingsApplication(**{
-                "authUrl": APP_AUTH_URL,
-                "url": APP_URL
-            })
-            app_settings = models.BasicApplicationSettings(**{
-                "app": app_settings_app
-            })
-            basic_auth_app_obj = models.BasicAuthApplication(**{
-                "label": APP_LABEL,
-                "settings": app_settings
-            })
+            app_settings_app = models.BasicApplicationSettingsApplication(
+                **{"authUrl": APP_AUTH_URL, "url": APP_URL}
+            )
+            app_settings = models.BasicApplicationSettings(**{"app": app_settings_app})
+            basic_auth_app_obj = models.BasicAuthApplication(
+                **{"label": APP_LABEL, "settings": app_settings}
+            )
 
             basic_auth_app, _, err = await client.create_application(basic_auth_app_obj)
             assert err is None
             assert isinstance(basic_auth_app, models.BrowserPluginApplication)
 
             # Assign app and group
-            assign_ag_req = models.ApplicationGroupAssignment(**{
-                "priority": 0,
-                "applicationId": basic_auth_app.id,
-                "groupId": group.id
-            })
+            assign_ag_req = models.ApplicationGroupAssignment(
+                **{
+                    "priority": 0,
+                    "applicationId": basic_auth_app.id,
+                    "groupId": group.id,
+                }
+            )
 
-            assign_app_group, _, err = await \
-                client.assign_group_to_application(
-                    basic_auth_app.id, group.id, assign_ag_req)
+            assign_app_group, _, err = await client.assign_group_to_application(
+                basic_auth_app.id, group.id, assign_ag_req
+            )
             assert err is None
 
             # 3 second sleep for backend to update
             mock_pause_function(3)
 
             # Check assigned apps and ensure created app is found
-            assigned_apps, _, err = await \
-                client.list_assigned_applications_for_group(group.id)
+            assigned_apps, _, err = await client.list_assigned_applications_for_group(
+                group.id
+            )
             assert err is None
             assert assigned_apps is not None
             assert len(assigned_apps) > 0
@@ -849,7 +794,10 @@ class TestGroupsResource:
                 errors.append(exc)
             assert len(errors) == 0
 
-    @pytest.mark.skipif(os.environ.get('MOCK_TESTS', 'true') == 'false', reason='Need predefined custom attribute')
+    @pytest.mark.skipif(
+        os.environ.get("MOCK_TESTS", "true") == "false",
+        reason="Need predefined custom attribute",
+    )
     @pytest.mark.vcr()
     @pytest.mark.asyncio
     async def test_group_profile_custom_attributes(self, fs):
@@ -857,38 +805,46 @@ class TestGroupsResource:
         # Instantiate Mock Client
         client = MockOktaClient(fs)
 
-        group_id = 'test_group_id'
+        group_id = "test_group_id"
 
         try:
             group, _, err = await client.get_group(group_id)
             assert err is None
             assert group.id == group_id
-            assert group.profile.additional_properties['customGroupAttribute'] == 'custom_group_attr_value'
+            assert (
+                    group.profile.additional_properties["customGroupAttribute"]
+                    == "custom_group_attr_value"
+            )
 
-            new_group_profile = models.GroupProfile(**{
-                'name': group.profile.name,
-                'additional_properties':
-                    {'customGroupAttribute': 'new_custom_group_attr_value'}
-            })
-            new_group_obj = models.Group(**{
-                "profile": new_group_profile
-            })
+            new_group_profile = models.GroupProfile(
+                **{
+                    "name": group.profile.name,
+                    "additional_properties": {
+                        "customGroupAttribute": "new_custom_group_attr_value"
+                    },
+                }
+            )
+            new_group_obj = models.Group(**{"profile": new_group_profile})
 
             updated_group, _, err = await client.replace_group(group_id, new_group_obj)
             assert err is None
-            assert updated_group.profile.additional_properties['customGroupAttribute'] == 'new_custom_group_attr_value'
+            assert (
+                    updated_group.profile.additional_properties["customGroupAttribute"]
+                    == "new_custom_group_attr_value"
+            )
 
         finally:
             # Delete created group if it wasn't deleted during test
             try:
-                new_group_profile = models.GroupProfile(**{
-                    'name': group.profile.name,
-                    'additional_properties':
-                        {'customGroupAttribute': 'custom_group_attr_value'}
-                })
-                new_group_obj = models.Group(**{
-                    "profile": new_group_profile
-                })
+                new_group_profile = models.GroupProfile(
+                    **{
+                        "name": group.profile.name,
+                        "additional_properties": {
+                            "customGroupAttribute": "custom_group_attr_value"
+                        },
+                    }
+                )
+                new_group_obj = models.Group(**{"profile": new_group_profile})
 
                 _, _, err = await client.replace_group(group_id, new_group_obj)
                 assert err is None

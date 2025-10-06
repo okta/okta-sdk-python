@@ -47,7 +47,6 @@ class CsrMetadataSubject(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -100,5 +99,4 @@ class CsrMetadataSubject(BaseModel):
             "stateOrProvinceName": obj.get("stateOrProvinceName")
         })
         return _obj
-
 

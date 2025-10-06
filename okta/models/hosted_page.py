@@ -44,7 +44,6 @@ class HostedPage(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -93,5 +92,4 @@ class HostedPage(BaseModel):
             "url": obj.get("url")
         })
         return _obj
-
 

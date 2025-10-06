@@ -42,7 +42,6 @@ class SmsUserFactorProfile(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -90,5 +89,4 @@ class SmsUserFactorProfile(BaseModel):
             "phoneNumber": obj.get("phoneNumber")
         })
         return _obj
-
 

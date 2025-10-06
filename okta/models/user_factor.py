@@ -74,7 +74,6 @@ class UserFactor(BaseModel):
         protected_namespaces=(),
     )
 
-
     # JSON field name that stores the object type
     __discriminator_property_name: ClassVar[str] = 'factorType'
 
@@ -153,31 +152,31 @@ class UserFactor(BaseModel):
         """Create an instance of UserFactor from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
-        if object_type ==  'CallUserFactor':
+        if object_type == 'CallUserFactor':
             return import_module("okta.models.call_user_factor").CallUserFactor.from_dict(obj)
-        if object_type ==  'EmailUserFactor':
+        if object_type == 'EmailUserFactor':
             return import_module("okta.models.email_user_factor").EmailUserFactor.from_dict(obj)
-        if object_type ==  'CustomHotpUserFactor':
+        if object_type == 'CustomHotpUserFactor':
             return import_module("okta.models.custom_hotp_user_factor").CustomHotpUserFactor.from_dict(obj)
-        if object_type ==  'PushUserFactor':
+        if object_type == 'PushUserFactor':
             return import_module("okta.models.push_user_factor").PushUserFactor.from_dict(obj)
-        if object_type ==  'SecurityQuestionUserFactor':
+        if object_type == 'SecurityQuestionUserFactor':
             return import_module("okta.models.security_question_user_factor").SecurityQuestionUserFactor.from_dict(obj)
-        if object_type ==  'SmsUserFactor':
+        if object_type == 'SmsUserFactor':
             return import_module("okta.models.sms_user_factor").SmsUserFactor.from_dict(obj)
-        if object_type ==  'TokenUserFactor':
+        if object_type == 'TokenUserFactor':
             return import_module("okta.models.token_user_factor").TokenUserFactor.from_dict(obj)
-        if object_type ==  'HardwareUserFactor':
+        if object_type == 'HardwareUserFactor':
             return import_module("okta.models.hardware_user_factor").HardwareUserFactor.from_dict(obj)
-        if object_type ==  'CustomHotpUserFactor':
+        if object_type == 'CustomHotpUserFactor':
             return import_module("okta.models.custom_hotp_user_factor").CustomHotpUserFactor.from_dict(obj)
-        if object_type ==  'TotpUserFactor':
+        if object_type == 'TotpUserFactor':
             return import_module("okta.models.totp_user_factor").TotpUserFactor.from_dict(obj)
-        if object_type ==  'U2fUserFactor':
+        if object_type == 'U2fUserFactor':
             return import_module("okta.models.u2f_user_factor").U2fUserFactor.from_dict(obj)
-        if object_type ==  'WebUserFactor':
+        if object_type == 'WebUserFactor':
             return import_module("okta.models.web_user_factor").WebUserFactor.from_dict(obj)
-        if object_type ==  'WebAuthnUserFactor':
+        if object_type == 'WebAuthnUserFactor':
             return import_module("okta.models.web_authn_user_factor").WebAuthnUserFactor.from_dict(obj)
 
         raise ValueError("UserFactor failed to lookup discriminator value from " +

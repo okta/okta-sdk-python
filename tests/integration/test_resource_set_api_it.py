@@ -1,21 +1,19 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS
+# IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
-import json
-import os
-import pytest
-from pydantic import SecretStr
-from pytest_recording.plugin import record_mode
-
-from tests.mocks import MockOktaClient
-from tests.mocks import mock_pause_function
 from http import HTTPStatus
+
+import pytest
+
 import okta.models as models
+from tests.mocks import MockOktaClient
 
 
 class TestResourceSetAPIResource:
@@ -33,13 +31,11 @@ class TestResourceSetAPIResource:
         # First create an application to use as a resource
         APP_LABEL = "Test-App-for-Resource-Set"
         app_settings_app = models.BookmarkApplicationSettingsApplication(
-            requestIntegration=False,
-            url="https://example.com/test-app.htm"
+            requestIntegration=False, url="https://example.com/test-app.htm"
         )
         app_settings = models.BookmarkApplicationSettings(app=app_settings_app)
         bookmark_app_obj = models.BookmarkApplication(
-            label=APP_LABEL,
-            settings=app_settings
+            label=APP_LABEL, settings=app_settings
         )
 
         created_app = None
@@ -58,7 +54,9 @@ class TestResourceSetAPIResource:
             # Construct the ORN (Okta Resource Name) manually since it's not exposed in the model
             # Format: orn:okta:idp:{orgId}:apps:{appType}:{appId}
             # We can construct it using the application ID and type
-            app_orn = f"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:bookmark:{created_app.id}"
+            app_orn = (
+                f"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:bookmark:{created_app.id}"
+            )
 
             INITIAL_RESOURCES = [
                 app_orn,  # Use the constructed ORN
@@ -67,11 +65,13 @@ class TestResourceSetAPIResource:
             create_resource_set_request = models.CreateResourceSetRequest(
                 label=RESOURCE_SET_LABEL,
                 description=RESOURCE_SET_DESCRIPTION,
-                resources=INITIAL_RESOURCES
+                resources=INITIAL_RESOURCES,
             )
 
             # Create Resource Set
-            resource_set, _, err = await client.create_resource_set(create_resource_set_request)
+            resource_set, _, err = await client.create_resource_set(
+                create_resource_set_request
+            )
             assert err is None
             assert isinstance(resource_set, models.ResourceSet)
             assert resource_set.label == RESOURCE_SET_LABEL
@@ -91,7 +91,9 @@ class TestResourceSetAPIResource:
                 assert err is None
 
                 # Ensure resource set cannot be found again
-                found_resource_set, resp, err = await client.get_resource_set(resource_set.id)
+                found_resource_set, resp, err = await client.get_resource_set(
+                    resource_set.id
+                )
                 assert err is not None
                 assert resp.status == HTTPStatus.NOT_FOUND
                 assert found_resource_set is None
@@ -115,7 +117,7 @@ class TestResourceSetAPIResource:
         resource_sets, resp, err = await client.list_resource_sets()
         assert err is None
         assert isinstance(resource_sets, models.ResourceSets)
-        assert hasattr(resource_sets, 'resource_sets')
+        assert hasattr(resource_sets, "resource_sets")
 
         # Verify the response structure
         if resource_sets.resource_sets:
@@ -134,13 +136,11 @@ class TestResourceSetAPIResource:
         # First create an application to use as a resource
         APP_LABEL = "Test-App-for-Update-Resource-Set"
         app_settings_app = models.BookmarkApplicationSettingsApplication(
-            requestIntegration=False,
-            url="https://example.com/test-update-app.htm"
+            requestIntegration=False, url="https://example.com/test-update-app.htm"
         )
         app_settings = models.BookmarkApplicationSettings(app=app_settings_app)
         bookmark_app_obj = models.BookmarkApplication(
-            label=APP_LABEL,
-            settings=app_settings
+            label=APP_LABEL, settings=app_settings
         )
 
         created_app = None
@@ -154,7 +154,9 @@ class TestResourceSetAPIResource:
 
             # Construct the ORN (Okta Resource Name) manually since it's not exposed in the model
             # Format: orn:okta:idp:{orgId}:apps:{appType}:{appId}
-            app_orn = f"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:bookmark:{created_app.id}"
+            app_orn = (
+                f"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:bookmark:{created_app.id}"
+            )
 
             # Create Resource Set Object with initial resources
             RESOURCE_SET_LABEL = "Test-Update-Resource-Set"
@@ -164,11 +166,13 @@ class TestResourceSetAPIResource:
             create_resource_set_request = models.CreateResourceSetRequest(
                 label=RESOURCE_SET_LABEL,
                 description=ORIGINAL_DESCRIPTION,
-                resources=[app_orn]  # Use the constructed ORN instead of empty array
+                resources=[app_orn],  # Use the constructed ORN instead of empty array
             )
 
             # Create Resource Set
-            resource_set, _, err = await client.create_resource_set(create_resource_set_request)
+            resource_set, _, err = await client.create_resource_set(
+                create_resource_set_request
+            )
             assert err is None
             assert resource_set.description == ORIGINAL_DESCRIPTION
 
@@ -176,12 +180,11 @@ class TestResourceSetAPIResource:
             update_resource_set = models.ResourceSet(
                 id=resource_set.id,
                 label=RESOURCE_SET_LABEL,
-                description=UPDATED_DESCRIPTION
+                description=UPDATED_DESCRIPTION,
             )
 
             updated_resource_set, _, err = await client.replace_resource_set(
-                resource_set.id,
-                update_resource_set
+                resource_set.id, update_resource_set
             )
             assert err is None
             assert updated_resource_set.description == UPDATED_DESCRIPTION
@@ -211,25 +214,21 @@ class TestResourceSetAPIResource:
         # First create an application to use as a resource
         APP_LABEL = "Test-App-for-Resources-Operations"
         app_settings_app = models.BookmarkApplicationSettingsApplication(
-            requestIntegration=False,
-            url="https://example.com/test-resources-app.htm"
+            requestIntegration=False, url="https://example.com/test-resources-app.htm"
         )
         app_settings = models.BookmarkApplicationSettings(app=app_settings_app)
         bookmark_app_obj = models.BookmarkApplication(
-            label=APP_LABEL,
-            settings=app_settings
+            label=APP_LABEL, settings=app_settings
         )
 
         # Create a second application to use for adding resources
         APP_LABEL_2 = "Test-App-for-Resources-Operations-2"
         app_settings_app_2 = models.BookmarkApplicationSettingsApplication(
-            requestIntegration=False,
-            url="https://example.com/test-resources-app-2.htm"
+            requestIntegration=False, url="https://example.com/test-resources-app-2.htm"
         )
         app_settings_2 = models.BookmarkApplicationSettings(app=app_settings_app_2)
         bookmark_app_obj_2 = models.BookmarkApplication(
-            label=APP_LABEL_2,
-            settings=app_settings_2
+            label=APP_LABEL_2, settings=app_settings_2
         )
 
         created_app = None
@@ -248,8 +247,12 @@ class TestResourceSetAPIResource:
             assert isinstance(created_app_2, models.Application)
 
             # Construct ORNs for both applications
-            app_orn = f"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:bookmark:{created_app.id}"
-            app_orn_2 = f"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:bookmark:{created_app_2.id}"
+            app_orn = (
+                f"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:bookmark:{created_app.id}"
+            )
+            app_orn_2 = (
+                f"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:bookmark:{created_app_2.id}"
+            )
 
             # Create Resource Set Object with initial resource
             RESOURCE_SET_LABEL = "Test-Resource-Set-Resources"
@@ -258,11 +261,13 @@ class TestResourceSetAPIResource:
             create_resource_set_request = models.CreateResourceSetRequest(
                 label=RESOURCE_SET_LABEL,
                 description=RESOURCE_SET_DESCRIPTION,
-                resources=[app_orn]  # Start with one resource instead of empty array
+                resources=[app_orn],  # Start with one resource instead of empty array
             )
 
             # Create Resource Set
-            resource_set, _, err = await client.create_resource_set(create_resource_set_request)
+            resource_set, _, err = await client.create_resource_set(
+                create_resource_set_request
+            )
             assert err is None
 
             # Add another resource to the resource set
@@ -275,13 +280,14 @@ class TestResourceSetAPIResource:
             )
 
             updated_resource_set, _, err = await client.add_resource_set_resource(
-                resource_set.id,
-                add_resources_request
+                resource_set.id, add_resources_request
             )
             assert err is None
 
             # List resources in the resource set
-            resource_set_resources, _, err = await client.list_resource_set_resources(resource_set.id)
+            resource_set_resources, _, err = await client.list_resource_set_resources(
+                resource_set.id
+            )
             assert err is None
             assert isinstance(resource_set_resources, models.ResourceSetResources)
 
@@ -289,10 +295,13 @@ class TestResourceSetAPIResource:
             resource_ids_to_delete = []
 
             # Verify resources were added (should have at least 2 resources now)
-            if hasattr(resource_set_resources, 'resources') and resource_set_resources.resources:
+            if (
+                    hasattr(resource_set_resources, "resources")
+                    and resource_set_resources.resources
+            ):
                 # If we have resources, verify the structure and collect IDs
                 for resource in resource_set_resources.resources:
-                    assert hasattr(resource, 'id')
+                    assert hasattr(resource, "id")
                     resource_ids_to_delete.append(resource.id)
 
                 # We should have at least 2 resources (initial + added)
@@ -305,18 +314,28 @@ class TestResourceSetAPIResource:
                 resource_id_to_remove = resource_ids_to_delete[-1]
                 _, _, err = await client.delete_resource_set_resource(
                     resource_set.id,
-                    resource_id_to_remove  # Use the actual resource ID from the list
+                    resource_id_to_remove,  # Use the actual resource ID from the list
                 )
                 assert err is None
 
                 # Verify resource was removed by listing again
-                resource_set_resources_after, _, err = await client.list_resource_set_resources(resource_set.id)
+                resource_set_resources_after, _, err = (
+                    await client.list_resource_set_resources(resource_set.id)
+                )
                 assert err is None
-                assert isinstance(resource_set_resources_after, models.ResourceSetResources)
+                assert isinstance(
+                    resource_set_resources_after, models.ResourceSetResources
+                )
 
                 # Should have one less resource now
-                if (hasattr(resource_set_resources_after, 'resources') and resource_set_resources_after.resources):
-                    assert len(resource_set_resources_after.resources) == len(resource_set_resources.resources) - 1
+                if (
+                        hasattr(resource_set_resources_after, "resources")
+                        and resource_set_resources_after.resources
+                ):
+                    assert (
+                            len(resource_set_resources_after.resources)
+                            == len(resource_set_resources.resources) - 1
+                    )
             else:
                 # If we don't have enough resources to test deletion, just verify the structure
                 # This handles cases where resource addition might not work as expected
@@ -350,13 +369,11 @@ class TestResourceSetAPIResource:
         # First create an application to use as a resource
         APP_LABEL = "Test-App-for-Bindings-Operations"
         app_settings_app = models.BookmarkApplicationSettingsApplication(
-            requestIntegration=False,
-            url="https://example.com/test-bindings-app.htm"
+            requestIntegration=False, url="https://example.com/test-bindings-app.htm"
         )
         app_settings = models.BookmarkApplicationSettings(app=app_settings_app)
         bookmark_app_obj = models.BookmarkApplication(
-            label=APP_LABEL,
-            settings=app_settings
+            label=APP_LABEL, settings=app_settings
         )
 
         created_app = None
@@ -370,7 +387,9 @@ class TestResourceSetAPIResource:
 
             # Construct the ORN (Okta Resource Name) manually since it's not exposed in the model
             # Format: orn:okta:idp:{orgId}:apps:{appType}:{appId}
-            app_orn = f"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:bookmark:{created_app.id}"
+            app_orn = (
+                f"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:bookmark:{created_app.id}"
+            )
 
             # Create Resource Set Object with initial resource
             RESOURCE_SET_LABEL = "Test-Resource-Set-Bindings"
@@ -379,11 +398,13 @@ class TestResourceSetAPIResource:
             create_resource_set_request = models.CreateResourceSetRequest(
                 label=RESOURCE_SET_LABEL,
                 description=RESOURCE_SET_DESCRIPTION,
-                resources=[app_orn]  # Use the constructed ORN instead of empty array
+                resources=[app_orn],  # Use the constructed ORN instead of empty array
             )
 
             # Create Resource Set
-            resource_set, _, err = await client.create_resource_set(create_resource_set_request)
+            resource_set, _, err = await client.create_resource_set(
+                create_resource_set_request
+            )
             assert err is None
 
             # List bindings for the resource set
@@ -392,10 +413,10 @@ class TestResourceSetAPIResource:
             assert isinstance(bindings, models.ResourceSetBindings)
 
             # Verify the response structure
-            if hasattr(bindings, 'bindings') and bindings.bindings:
+            if hasattr(bindings, "bindings") and bindings.bindings:
                 for binding in bindings.bindings:
                     assert isinstance(binding, models.ResourceSetBindingResponse)
-                    assert hasattr(binding, 'role')
+                    assert hasattr(binding, "role")
 
             # Create a binding (this would require a valid role ID in real scenarios)
             # For VCR testing, we'll use a placeholder role ID
@@ -403,26 +424,26 @@ class TestResourceSetAPIResource:
 
             create_binding_request = models.ResourceSetBindingCreateRequest(
                 role=ROLE_ID,
-                members=[]  # Use empty list instead of dictionary with users/groups
+                members=[],  # Use empty list instead of dictionary with users/groups
             )
 
             # Note: This operation might fail in VCR testing with placeholder data
             # but the test structure demonstrates the correct usage
             try:
                 binding, _, err = await client.create_resource_set_binding(
-                    resource_set.id,
-                    create_binding_request
+                    resource_set.id, create_binding_request
                 )
                 if err is None:
                     assert isinstance(binding, models.ResourceSetBindingResponse)
 
                     # Get the specific binding
                     retrieved_binding, _, err = await client.get_binding(
-                        resource_set.id,
-                        ROLE_ID
+                        resource_set.id, ROLE_ID
                     )
                     if err is None:
-                        assert isinstance(retrieved_binding, models.ResourceSetBindingResponse)
+                        assert isinstance(
+                            retrieved_binding, models.ResourceSetBindingResponse
+                        )
                         assert retrieved_binding.role == ROLE_ID
 
                     # Clean up binding
@@ -457,12 +478,11 @@ class TestResourceSetAPIResource:
         APP_LABEL = "Test-App-for-Initial-Resources"
         app_settings_app = models.BookmarkApplicationSettingsApplication(
             requestIntegration=False,
-            url="https://example.com/test-initial-resources-app.htm"
+            url="https://example.com/test-initial-resources-app.htm",
         )
         app_settings = models.BookmarkApplicationSettings(app=app_settings_app)
         bookmark_app_obj = models.BookmarkApplication(
-            label=APP_LABEL,
-            settings=app_settings
+            label=APP_LABEL, settings=app_settings
         )
 
         created_app = None
@@ -476,11 +496,15 @@ class TestResourceSetAPIResource:
 
             # Construct the ORN (Okta Resource Name) manually since it's not exposed in the model
             # Format: orn:okta:idp:{orgId}:apps:{appType}:{appId}
-            app_orn = f"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:bookmark:{created_app.id}"
+            app_orn = (
+                f"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:bookmark:{created_app.id}"
+            )
 
             # Create Resource Set Object with initial resources
             RESOURCE_SET_LABEL = "Test-Resource-Set-With-Resources"
-            RESOURCE_SET_DESCRIPTION = "Test resource set created with initial resources"
+            RESOURCE_SET_DESCRIPTION = (
+                "Test resource set created with initial resources"
+            )
             INITIAL_RESOURCES = [
                 app_orn,  # Use the actual application ORN instead of placeholder IDs
             ]
@@ -488,27 +512,34 @@ class TestResourceSetAPIResource:
             create_resource_set_request = models.CreateResourceSetRequest(
                 label=RESOURCE_SET_LABEL,
                 description=RESOURCE_SET_DESCRIPTION,
-                resources=INITIAL_RESOURCES
+                resources=INITIAL_RESOURCES,
             )
 
             # Create Resource Set with initial resources
-            resource_set, _, err = await client.create_resource_set(create_resource_set_request)
+            resource_set, _, err = await client.create_resource_set(
+                create_resource_set_request
+            )
             assert err is None
             assert isinstance(resource_set, models.ResourceSet)
             assert resource_set.label == RESOURCE_SET_LABEL
             assert resource_set.description == RESOURCE_SET_DESCRIPTION
 
             # List resources to verify they were added
-            resource_set_resources, _, err = await client.list_resource_set_resources(resource_set.id)
+            resource_set_resources, _, err = await client.list_resource_set_resources(
+                resource_set.id
+            )
             assert err is None
             assert isinstance(resource_set_resources, models.ResourceSetResources)
 
             # Verify that we have at least one resource
-            if hasattr(resource_set_resources, 'resources') and resource_set_resources.resources:
+            if (
+                    hasattr(resource_set_resources, "resources")
+                    and resource_set_resources.resources
+            ):
                 assert len(resource_set_resources.resources) >= 1
                 # Verify the structure of the resources
                 for resource in resource_set_resources.resources:
-                    assert hasattr(resource, 'id')
+                    assert hasattr(resource, "id")
 
         finally:
             # Clean up resource set first
@@ -548,12 +579,11 @@ class TestResourceSetAPIResource:
         APP_LABEL = "Test-App-for-Error-Handling"
         app_settings_app = models.BookmarkApplicationSettingsApplication(
             requestIntegration=False,
-            url="https://example.com/test-error-handling-app.htm"
+            url="https://example.com/test-error-handling-app.htm",
         )
         app_settings = models.BookmarkApplicationSettings(app=app_settings_app)
         bookmark_app_obj = models.BookmarkApplication(
-            label=APP_LABEL,
-            settings=app_settings
+            label=APP_LABEL, settings=app_settings
         )
 
         created_app = None
@@ -565,16 +595,22 @@ class TestResourceSetAPIResource:
             assert isinstance(created_app, models.Application)
 
             # Construct the ORN (Okta Resource Name) manually
-            app_orn = f"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:bookmark:{created_app.id}"
+            app_orn = (
+                f"orn:okta:idp:00onwlw0o4KFVCgzO5d7:apps:bookmark:{created_app.id}"
+            )
 
             # Test creating resource set with invalid data - empty label should cause validation error
             invalid_create_request = models.CreateResourceSetRequest(
                 label="",  # Empty label should cause validation error
                 description="Test invalid resource set",
-                resources=[app_orn]  # Use valid resource to avoid resources validation error
+                resources=[
+                    app_orn
+                ],  # Use valid resource to avoid resources validation error
             )
 
-            resource_set, resp, err = await client.create_resource_set(invalid_create_request)
+            resource_set, resp, err = await client.create_resource_set(
+                invalid_create_request
+            )
             # This should fail due to empty label
             assert err is not None
             # If it unexpectedly succeeds, clean it up
@@ -582,7 +618,9 @@ class TestResourceSetAPIResource:
                 await client.delete_resource_set(resource_set.id)
 
             # Test getting resources from non-existent resource set
-            resource_set_resources, resp, err = await client.list_resource_set_resources(NON_EXISTENT_ID)
+            resource_set_resources, resp, err = (
+                await client.list_resource_set_resources(NON_EXISTENT_ID)
+            )
             assert err is not None
             assert resp.status == HTTPStatus.NOT_FOUND
             assert resource_set_resources is None
@@ -593,8 +631,7 @@ class TestResourceSetAPIResource:
             )
 
             updated_resource_set, resp, err = await client.add_resource_set_resource(
-                NON_EXISTENT_ID,
-                add_resources_request
+                NON_EXISTENT_ID, add_resources_request
             )
             assert err is not None
             assert resp.status == HTTPStatus.NOT_FOUND
@@ -602,8 +639,7 @@ class TestResourceSetAPIResource:
 
             # Test deleting resource from non-existent resource set
             _, err = await client.delete_resource_set_resource(
-                NON_EXISTENT_ID,
-                "fake-resource-id"
+                NON_EXISTENT_ID, "fake-resource-id"
             )
             assert err is not None
             assert resp.status == HTTPStatus.NOT_FOUND

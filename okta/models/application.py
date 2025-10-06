@@ -74,7 +74,6 @@ class Application(BaseModel):
         protected_namespaces=(),
     )
 
-
     # JSON field name that stores the object type
     __discriminator_property_name: ClassVar[str] = 'signOnMode'
 
@@ -167,23 +166,23 @@ class Application(BaseModel):
         """Create an instance of Application from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
-        if object_type ==  'AutoLoginApplication':
+        if object_type == 'AutoLoginApplication':
             return import_module("okta.models.auto_login_application").AutoLoginApplication.from_dict(obj)
-        if object_type ==  'BasicAuthApplication':
+        if object_type == 'BasicAuthApplication':
             return import_module("okta.models.basic_auth_application").BasicAuthApplication.from_dict(obj)
-        if object_type ==  'BookmarkApplication':
+        if object_type == 'BookmarkApplication':
             return import_module("okta.models.bookmark_application").BookmarkApplication.from_dict(obj)
-        if object_type ==  'BrowserPluginApplication':
+        if object_type == 'BrowserPluginApplication':
             return import_module("okta.models.browser_plugin_application").BrowserPluginApplication.from_dict(obj)
-        if object_type ==  'OpenIdConnectApplication':
+        if object_type == 'OpenIdConnectApplication':
             return import_module("okta.models.open_id_connect_application").OpenIdConnectApplication.from_dict(obj)
-        if object_type ==  'SamlApplication':
+        if object_type == 'SamlApplication':
             return import_module("okta.models.saml_application").SamlApplication.from_dict(obj)
-        if object_type ==  'SamlApplication':
+        if object_type == 'SamlApplication':
             return import_module("okta.models.saml_application").SamlApplication.from_dict(obj)
-        if object_type ==  'SecurePasswordStoreApplication':
+        if object_type == 'SecurePasswordStoreApplication':
             return import_module("okta.models.secure_password_store_application").SecurePasswordStoreApplication.from_dict(obj)
-        if object_type ==  'WsFederationApplication':
+        if object_type == 'WsFederationApplication':
             return import_module("okta.models.ws_federation_application").WsFederationApplication.from_dict(obj)
 
         raise ValueError("Application failed to lookup discriminator value from " +

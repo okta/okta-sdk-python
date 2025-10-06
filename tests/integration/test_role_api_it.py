@@ -1,21 +1,19 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS
+# IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
-import json
-import os
-import pytest
-from pydantic import SecretStr
-from pytest_recording.plugin import record_mode
-
-from tests.mocks import MockOktaClient
-from tests.mocks import mock_pause_function
 from http import HTTPStatus
+
+import pytest
+
 import okta.models as models
+from tests.mocks import MockOktaClient
 
 
 class TestRoleAPIResource:
@@ -34,14 +32,16 @@ class TestRoleAPIResource:
         ROLE_LABEL = "Test-Custom-Role"
         ROLE_DESCRIPTION = "Test custom role for VCR testing"
 
-        create_role_request = models.CreateIamRoleRequest(**{
-            "label": ROLE_LABEL,
-            "description": ROLE_DESCRIPTION,
-            "permissions": [
-                models.RolePermissionType.OKTA_DOT_USERS_DOT_READ,
-                models.RolePermissionType.OKTA_DOT_GROUPS_DOT_READ
-            ]
-        })
+        create_role_request = models.CreateIamRoleRequest(
+            **{
+                "label": ROLE_LABEL,
+                "description": ROLE_DESCRIPTION,
+                "permissions": [
+                    models.RolePermissionType.OKTA_DOT_USERS_DOT_READ,
+                    models.RolePermissionType.OKTA_DOT_GROUPS_DOT_READ,
+                ],
+            }
+        )
 
         try:
             # Create Role
@@ -66,7 +66,7 @@ class TestRoleAPIResource:
             assert found_role_by_label.label == ROLE_LABEL
 
         finally:
-            if 'role' in locals() and role.id:
+            if "role" in locals() and role.id:
                 _, _, err = await client.delete_role(role.id)
                 assert err is None
 
@@ -87,7 +87,7 @@ class TestRoleAPIResource:
         roles, resp, err = await client.list_roles()
         assert err is None
         assert isinstance(roles, models.IamRoles)
-        assert hasattr(roles, 'roles')
+        assert hasattr(roles, "roles")
 
         # Verify that we get some roles (there should be default system roles)
         if roles.roles:
@@ -109,13 +109,13 @@ class TestRoleAPIResource:
         UPDATED_DESCRIPTION = "Updated description for update test"
         UPDATED_LABEL = "Test-Update-Role-Modified"
 
-        create_role_request = models.CreateIamRoleRequest(**{
-            "label": ROLE_LABEL,
-            "description": ORIGINAL_DESCRIPTION,
-            "permissions": [
-                models.RolePermissionType.OKTA_DOT_USERS_DOT_READ
-            ]
-        })
+        create_role_request = models.CreateIamRoleRequest(
+            **{
+                "label": ROLE_LABEL,
+                "description": ORIGINAL_DESCRIPTION,
+                "permissions": [models.RolePermissionType.OKTA_DOT_USERS_DOT_READ],
+            }
+        )
 
         try:
             # Create Role
@@ -124,12 +124,13 @@ class TestRoleAPIResource:
             assert role.description == ORIGINAL_DESCRIPTION
 
             # Update Role (both label and description are required)
-            update_role_request = models.UpdateIamRoleRequest(**{
-                "label": UPDATED_LABEL,
-                "description": UPDATED_DESCRIPTION
-            })
+            update_role_request = models.UpdateIamRoleRequest(
+                **{"label": UPDATED_LABEL, "description": UPDATED_DESCRIPTION}
+            )
 
-            updated_role, _, err = await client.replace_role(role.id, update_role_request)
+            updated_role, _, err = await client.replace_role(
+                role.id, update_role_request
+            )
             assert err is None
             assert updated_role.id == role.id
             assert updated_role.label == UPDATED_LABEL
@@ -143,7 +144,7 @@ class TestRoleAPIResource:
 
         finally:
             # Cleanup: Delete created role
-            if 'role' in locals() and role.id:
+            if "role" in locals() and role.id:
                 _, _, err = await client.delete_role(role.id)
                 assert err is None
 
@@ -158,13 +159,13 @@ class TestRoleAPIResource:
         ROLE_LABEL = "Test-Permission-Role"
         ROLE_DESCRIPTION = "Test role for permission operations"
 
-        create_role_request = models.CreateIamRoleRequest(**{
-            "label": ROLE_LABEL,
-            "description": ROLE_DESCRIPTION,
-            "permissions": [
-                models.RolePermissionType.OKTA_DOT_USERS_DOT_READ
-            ]
-        })
+        create_role_request = models.CreateIamRoleRequest(
+            **{
+                "label": ROLE_LABEL,
+                "description": ROLE_DESCRIPTION,
+                "permissions": [models.RolePermissionType.OKTA_DOT_USERS_DOT_READ],
+            }
+        )
 
         try:
             # Create Role
@@ -175,46 +176,56 @@ class TestRoleAPIResource:
             permissions, _, err = await client.list_role_permissions(role.id)
             assert err is None
             assert isinstance(permissions, models.Permissions)
-            initial_permission_count = len(permissions.permissions) if permissions.permissions else 0
+            initial_permission_count = (
+                len(permissions.permissions) if permissions.permissions else 0
+            )
 
             # Add a new permission without conditions (create_role_permission returns 3 values)
-            new_permission_type = models.RolePermissionType.OKTA_DOT_GROUPS_DOT_READ.value
-            create_permission_request = models.CreateUpdateIamRolePermissionRequest(**{
-                "conditions": {}
-            })
+            new_permission_type = (
+                models.RolePermissionType.OKTA_DOT_GROUPS_DOT_READ.value
+            )
+            create_permission_request = models.CreateUpdateIamRolePermissionRequest(
+                **{"conditions": {}}
+            )
 
             _, _, err = await client.create_role_permission(
-                role.id,
-                new_permission_type,
-                create_permission_request
+                role.id, new_permission_type, create_permission_request
             )
             assert err is None
 
             # Verify permission was added
             permissions, _, err = await client.list_role_permissions(role.id)
             assert err is None
-            new_permission_count = len(permissions.permissions) if permissions.permissions else 0
+            new_permission_count = (
+                len(permissions.permissions) if permissions.permissions else 0
+            )
             assert new_permission_count == initial_permission_count + 1
 
             # Get specific permission
-            permission, _, err = await client.get_role_permission(role.id, new_permission_type)
+            permission, _, err = await client.get_role_permission(
+                role.id, new_permission_type
+            )
             assert err is None
             assert isinstance(permission, models.Permission)
             assert permission.label == new_permission_type
 
             # Delete the permission (delete_role_permission returns 3 values)
-            _, _, err = await client.delete_role_permission(role.id, new_permission_type)
+            _, _, err = await client.delete_role_permission(
+                role.id, new_permission_type
+            )
             assert err is None
 
             # Verify permission was deleted
             permissions, _, err = await client.list_role_permissions(role.id)
             assert err is None
-            final_permission_count = len(permissions.permissions) if permissions.permissions else 0
+            final_permission_count = (
+                len(permissions.permissions) if permissions.permissions else 0
+            )
             assert final_permission_count == initial_permission_count
 
         finally:
             # Cleanup: Delete created role
-            if 'role' in locals() and role.id:
+            if "role" in locals() and role.id:
                 _, _, err = await client.delete_role(role.id)
                 assert err is None
 
@@ -229,15 +240,17 @@ class TestRoleAPIResource:
         ROLE_LABEL = "Test-Multi-Permission-Role"
         ROLE_DESCRIPTION = "Test role with multiple permissions"
 
-        create_role_request = models.CreateIamRoleRequest(**{
-            "label": ROLE_LABEL,
-            "description": ROLE_DESCRIPTION,
-            "permissions": [
-                models.RolePermissionType.OKTA_DOT_USERS_DOT_READ,
-                models.RolePermissionType.OKTA_DOT_GROUPS_DOT_READ,
-                models.RolePermissionType.OKTA_DOT_APPS_DOT_READ
-            ]
-        })
+        create_role_request = models.CreateIamRoleRequest(
+            **{
+                "label": ROLE_LABEL,
+                "description": ROLE_DESCRIPTION,
+                "permissions": [
+                    models.RolePermissionType.OKTA_DOT_USERS_DOT_READ,
+                    models.RolePermissionType.OKTA_DOT_GROUPS_DOT_READ,
+                    models.RolePermissionType.OKTA_DOT_APPS_DOT_READ,
+                ],
+            }
+        )
 
         try:
             # Create Role
@@ -255,13 +268,22 @@ class TestRoleAPIResource:
 
                 # Verify specific permissions exist
                 permission_labels = [perm.label for perm in permissions.permissions]
-                assert models.RolePermissionType.OKTA_DOT_USERS_DOT_READ.value in permission_labels
-                assert models.RolePermissionType.OKTA_DOT_GROUPS_DOT_READ.value in permission_labels
-                assert models.RolePermissionType.OKTA_DOT_APPS_DOT_READ.value in permission_labels
+                assert (
+                        models.RolePermissionType.OKTA_DOT_USERS_DOT_READ.value
+                        in permission_labels
+                )
+                assert (
+                        models.RolePermissionType.OKTA_DOT_GROUPS_DOT_READ.value
+                        in permission_labels
+                )
+                assert (
+                        models.RolePermissionType.OKTA_DOT_APPS_DOT_READ.value
+                        in permission_labels
+                )
 
         finally:
             # Cleanup: Delete created role
-            if 'role' in locals() and role.id:
+            if "role" in locals() and role.id:
                 _, _, err = await client.delete_role(role.id)
                 assert err is None
 
@@ -285,13 +307,13 @@ class TestRoleAPIResource:
         ROLE_LABEL = "Test-Duplicate-Role"
         ROLE_DESCRIPTION = "Test role for duplicate testing"
 
-        create_role_request = models.CreateIamRoleRequest(**{
-            "label": ROLE_LABEL,
-            "description": ROLE_DESCRIPTION,
-            "permissions": [
-                models.RolePermissionType.OKTA_DOT_USERS_DOT_READ
-            ]
-        })
+        create_role_request = models.CreateIamRoleRequest(
+            **{
+                "label": ROLE_LABEL,
+                "description": ROLE_DESCRIPTION,
+                "permissions": [models.RolePermissionType.OKTA_DOT_USERS_DOT_READ],
+            }
+        )
 
         try:
             # Create first role
@@ -306,7 +328,7 @@ class TestRoleAPIResource:
 
         finally:
             # Cleanup: Delete created role (delete methods return only 2 values: response, error)
-            if 'role1' in locals() and role1.id:
+            if "role1" in locals() and role1.id:
                 _, _, err = await client.delete_role(role1.id)
                 assert err is None
 
@@ -321,13 +343,13 @@ class TestRoleAPIResource:
         ROLE_LABEL = "Test-Conditional-Permission-Role"
         ROLE_DESCRIPTION = "Test role for conditional permission operations"
 
-        create_role_request = models.CreateIamRoleRequest(**{
-            "label": ROLE_LABEL,
-            "description": ROLE_DESCRIPTION,
-            "permissions": [
-                models.RolePermissionType.OKTA_DOT_USERS_DOT_READ
-            ]
-        })
+        create_role_request = models.CreateIamRoleRequest(
+            **{
+                "label": ROLE_LABEL,
+                "description": ROLE_DESCRIPTION,
+                "permissions": [models.RolePermissionType.OKTA_DOT_USERS_DOT_READ],
+            }
+        )
 
         try:
             # Create Role
@@ -336,27 +358,27 @@ class TestRoleAPIResource:
 
             # Add a permission with empty conditions (create_role_permission returns 3 values)
             permission_type = models.RolePermissionType.OKTA_DOT_APPS_DOT_READ.value
-            create_permission_request = models.CreateUpdateIamRolePermissionRequest(**{
-                "conditions": {}
-            })
+            create_permission_request = models.CreateUpdateIamRolePermissionRequest(
+                **{"conditions": {}}
+            )
 
             _, _, err = await client.create_role_permission(
-                role.id,
-                permission_type,
-                create_permission_request
+                role.id, permission_type, create_permission_request
             )
             assert err is None
 
             # Get the permission and verify it was created
-            permission, _, err = await client.get_role_permission(role.id, permission_type)
+            permission, _, err = await client.get_role_permission(
+                role.id, permission_type
+            )
             assert err is None
             assert isinstance(permission, models.Permission)
             assert permission.label == permission_type
             # Verify conditions field exists (even if empty)
-            assert hasattr(permission, 'conditions')
+            assert hasattr(permission, "conditions")
 
         finally:
             # Cleanup: Delete created role
-            if 'role' in locals() and role.id:
+            if "role" in locals() and role.id:
                 _, _, err = await client.delete_role(role.id)
                 assert err is None

@@ -54,7 +54,6 @@ class PushProvider(BaseModel):
         protected_namespaces=(),
     )
 
-
     # JSON field name that stores the object type
     __discriminator_property_name: ClassVar[str] = 'providerType'
 
@@ -122,9 +121,9 @@ class PushProvider(BaseModel):
         """Create an instance of PushProvider from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
-        if object_type ==  'APNSPushProvider':
+        if object_type == 'APNSPushProvider':
             return import_module("okta.models.apns_push_provider").APNSPushProvider.from_dict(obj)
-        if object_type ==  'FCMPushProvider':
+        if object_type == 'FCMPushProvider':
             return import_module("okta.models.fcm_push_provider").FCMPushProvider.from_dict(obj)
 
         raise ValueError("PushProvider failed to lookup discriminator value from " +

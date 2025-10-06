@@ -46,7 +46,6 @@ class SimulatePolicyBody(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -103,5 +102,4 @@ class SimulatePolicyBody(BaseModel):
             "policyContext": PolicyContext.from_dict(obj["policyContext"]) if obj.get("policyContext") is not None else None
         })
         return _obj
-
 

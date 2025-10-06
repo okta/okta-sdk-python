@@ -43,7 +43,6 @@ class AccessPolicyRuleActions(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -98,5 +97,4 @@ class AccessPolicyRuleActions(BaseModel):
             "appSignOn": AccessPolicyRuleApplicationSignOn.from_dict(obj["appSignOn"]) if obj.get("appSignOn") is not None else None
         })
         return _obj
-
 

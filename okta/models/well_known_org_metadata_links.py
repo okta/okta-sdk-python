@@ -44,7 +44,6 @@ class WellKnownOrgMetadataLinks(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -107,5 +106,4 @@ class WellKnownOrgMetadataLinks(BaseModel):
             "organization": HrefObject.from_dict(obj["organization"]) if obj.get("organization") is not None else None
         })
         return _obj
-
 

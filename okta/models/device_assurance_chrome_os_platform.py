@@ -46,7 +46,6 @@ class DeviceAssuranceChromeOSPlatform(DeviceAssurance):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -116,5 +115,4 @@ class DeviceAssuranceChromeOSPlatform(DeviceAssurance):
             "thirdPartySignalProviders": DeviceAssuranceChromeOSPlatformAllOfThirdPartySignalProviders.from_dict(obj["thirdPartySignalProviders"]) if obj.get("thirdPartySignalProviders") is not None else None
         })
         return _obj
-
 

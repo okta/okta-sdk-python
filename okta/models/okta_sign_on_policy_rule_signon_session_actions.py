@@ -44,7 +44,6 @@ class OktaSignOnPolicyRuleSignonSessionActions(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -94,5 +93,4 @@ class OktaSignOnPolicyRuleSignonSessionActions(BaseModel):
             "usePersistentCookie": obj.get("usePersistentCookie") if obj.get("usePersistentCookie") is not None else False
         })
         return _obj
-
 

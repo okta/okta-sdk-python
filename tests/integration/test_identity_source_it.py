@@ -1,15 +1,18 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS
+# IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
 import pytest
-from tests.mocks import MockOktaClient
+
 import okta.models as models
 from okta.errors.okta_api_error import OktaAPIError
+from tests.mocks import MockOktaClient
 
 
 class TestIdentitySourceResource:
@@ -30,7 +33,9 @@ class TestIdentitySourceResource:
 
         # Test 1: Create Identity Source Session (expect 404)
         try:
-            sessions, _, err = await client.create_identity_source_session(test_identity_source_id)
+            sessions, _, err = await client.create_identity_source_session(
+                test_identity_source_id
+            )
             if err is None and sessions:
                 # If successful (unlikely in test env), validate response
                 assert isinstance(sessions, list)
@@ -45,10 +50,12 @@ class TestIdentitySourceResource:
                 print(f"Expected 404 error for create session: {err.error_summary}")
         except Exception as e:
             print(f"Create session error: {e}")
-            
-        # Test 2: List Identity Source Sessions (expect 404) 
+
+        # Test 2: List Identity Source Sessions (expect 404)
         try:
-            sessions, _, err = await client.list_identity_source_sessions(test_identity_source_id)
+            sessions, _, err = await client.list_identity_source_sessions(
+                test_identity_source_id
+            )
             if err is None and sessions:
                 assert isinstance(sessions, list)
                 print(f"Listed {len(sessions)} sessions")
@@ -62,7 +69,9 @@ class TestIdentitySourceResource:
 
         # Test 3: Get specific Identity Source Session (expect 404)
         try:
-            session, _, err = await client.get_identity_source_session(test_identity_source_id, test_session_id)
+            session, _, err = await client.get_identity_source_session(
+                test_identity_source_id, test_session_id
+            )
             print(session)
             if err is None and session:
                 assert isinstance(session, models.IdentitySourceSession)
@@ -153,7 +162,9 @@ class TestIdentitySourceResource:
 
         # Test 7: Delete Identity Source Session (expect 404)
         try:
-            _, _, err = await client.delete_identity_source_session(test_identity_source_id, test_session_id)
+            _, _, err = await client.delete_identity_source_session(
+                test_identity_source_id, test_session_id
+            )
             if err:
                 assert isinstance(err, OktaAPIError)
                 print(f"Expected error for delete session: {err.error_summary}")
@@ -174,11 +185,11 @@ class TestIdentitySourceResource:
             user_name="testuser",
             mobile_phone="+1234567890",
             home_address="123 Main St, City, State 12345",
-            second_email="test2@example.com"
+            second_email="test2@example.com",
         )
         # Add externalId using additional_properties (simulating HR system employee ID)
         upsert_profile.additional_properties["externalId"] = "EMP009876"
-        
+
         # Verify model properties
         assert upsert_profile.email == "test@example.com"
         assert upsert_profile.first_name == "Test"
@@ -187,45 +198,42 @@ class TestIdentitySourceResource:
         assert upsert_profile.mobile_phone == "+1234567890"
         assert upsert_profile.home_address == "123 Main St, City, State 12345"
         assert upsert_profile.second_email == "test2@example.com"
-        
+
         # Test serialization
         upsert_dict = upsert_profile.to_dict()
         assert isinstance(upsert_dict, dict)
         assert "email" in upsert_dict
-        
+
         # Test IdentitySourceUserProfileForDelete model
         delete_profile = models.IdentitySourceUserProfileForDelete(
             external_id="EMP009876"  # Same employee ID that would be deleted
         )
-        
+
         assert delete_profile.external_id == "EMP009876"
-        
+
         # Test serialization
         delete_dict = delete_profile.to_dict()
         assert isinstance(delete_dict, dict)
         assert "externalId" in delete_dict
-        
+
         # Test BulkUpsertRequestBody
         bulk_upsert = models.BulkUpsertRequestBody(
-            profiles=[upsert_profile],
-            entity_type="USERS"
+            profiles=[upsert_profile], entity_type="USERS"
         )
-        
+
         assert len(bulk_upsert.profiles) == 1
         assert bulk_upsert.profiles[0] == upsert_profile
-        
-        # Test BulkDeleteRequestBody  
+
+        # Test BulkDeleteRequestBody
         bulk_delete = models.BulkDeleteRequestBody(
-            profiles=[delete_profile],
-            entity_type="USERS"
+            profiles=[delete_profile], entity_type="USERS"
         )
-        
+
         assert len(bulk_delete.profiles) == 1
         assert bulk_delete.profiles[0] == delete_profile
 
         print("All Identity Source data models tested successfully")
 
-    
     """@pytest.mark.vcr()
     @pytest.mark.asyncio 
     async def test_identity_source_bulk_data_operations(self, fs):
@@ -301,31 +309,33 @@ class TestIdentitySourceResource:
     async def test_identity_source_session_status_handling(self, fs):
         """Test different identity source session status scenarios"""
         # Test IdentitySourceSession model with different statuses
-        from okta.models.identity_source_session_status import IdentitySourceSessionStatus
-        
+        from okta.models.identity_source_session_status import (
+            IdentitySourceSessionStatus,
+        )
+
         # Test valid status values
         valid_statuses = ["CREATED", "TRIGGERED", "IN_PROGRESS", "CLOSED", "EXPIRED"]
-        
+
         for status_value in valid_statuses:
             status = IdentitySourceSessionStatus(status_value)
             assert str(status) == "IdentitySourceSessionStatus." + status_value
-        
+
         # Create mock session objects with different statuses
         from datetime import datetime
-        
+
         session_data = {
             "id": "aps1qqonvr2SZv6o70h8",
             "identitySourceId": "0oa3l6l6WK6h0R0QW0g4",
             "status": "CREATED",
             "importType": "INCREMENTAL",
             "created": datetime.now(),
-            "lastUpdated": datetime.now()
+            "lastUpdated": datetime.now(),
         }
-        
+
         session = models.IdentitySourceSession(**session_data)
         assert session.id == "aps1qqonvr2SZv6o70h8"
         assert session.identity_source_id == "0oa3l6l6WK6h0R0QW0g4"
         assert session.status == IdentitySourceSessionStatus.CREATED
         assert session.import_type == "INCREMENTAL"
-        
+
         print("Identity Source Session status handling tested successfully")

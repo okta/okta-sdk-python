@@ -55,7 +55,6 @@ class SupportedMethods(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -112,5 +111,4 @@ class SupportedMethods(BaseModel):
             "type": obj.get("type")
         })
         return _obj
-
 

@@ -47,7 +47,6 @@ class IdpPolicyRuleActionIdp(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -111,5 +110,4 @@ class IdpPolicyRuleActionIdp(BaseModel):
             "matchCriteria": [IdpPolicyRuleActionMatchCriteria.from_dict(_item) for _item in obj["matchCriteria"]] if obj.get("matchCriteria") is not None else None
         })
         return _obj
-
 

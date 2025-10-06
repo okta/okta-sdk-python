@@ -48,7 +48,6 @@ class PasswordPolicyRecoveryFactors(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -127,5 +126,4 @@ class PasswordPolicyRecoveryFactors(BaseModel):
             "recovery_question": PasswordPolicyRecoveryQuestion.from_dict(obj["recovery_question"]) if obj.get("recovery_question") is not None else None
         })
         return _obj
-
 

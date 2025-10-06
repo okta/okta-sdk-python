@@ -43,7 +43,6 @@ class AuthorizationServerCredentials(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -98,5 +97,4 @@ class AuthorizationServerCredentials(BaseModel):
             "signing": AuthorizationServerCredentialsSigningConfig.from_dict(obj["signing"]) if obj.get("signing") is not None else None
         })
         return _obj
-
 

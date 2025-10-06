@@ -45,7 +45,6 @@ class UserTypeLinks(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -108,5 +107,4 @@ class UserTypeLinks(BaseModel):
             "schema": UserTypeLinksAllOfSchema.from_dict(obj["schema"]) if obj.get("schema") is not None else None
         })
         return _obj
-
 

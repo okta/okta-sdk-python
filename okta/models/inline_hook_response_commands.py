@@ -44,7 +44,6 @@ class InlineHookResponseCommands(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -100,5 +99,4 @@ class InlineHookResponseCommands(BaseModel):
             "value": [InlineHookResponseCommandValue.from_dict(_item) for _item in obj["value"]] if obj.get("value") is not None else None
         })
         return _obj
-
 

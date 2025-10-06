@@ -43,7 +43,6 @@ class Permissions(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -98,5 +97,4 @@ class Permissions(BaseModel):
             "permissions": [Permission.from_dict(_item) for _item in obj["permissions"]] if obj.get("permissions") is not None else None
         })
         return _obj
-
 

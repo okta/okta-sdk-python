@@ -92,7 +92,6 @@ class {{classname}}({{#parent}}{{{.}}}{{/parent}}{{^parent}}BaseModel{{/parent}}
         protected_namespaces=(),
     )
 
-
 {{#hasChildren}}
 {{#discriminator}}
     # JSON field name that stores the object type
@@ -257,7 +256,7 @@ class {{classname}}({{#parent}}{{{.}}}{{/parent}}{{^parent}}BaseModel{{/parent}}
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
         {{#mappedModels}}
-        if object_type ==  '{{{modelName}}}':
+        if object_type == '{{{modelName}}}':
             return import_module("{{packageName}}.models.{{model.classVarName}}").{{modelName}}.from_dict(obj)
         {{/mappedModels}}
 
@@ -388,13 +387,9 @@ class {{classname}}({{#parent}}{{{.}}}{{/parent}}{{^parent}}BaseModel{{/parent}}
                 _obj.additional_properties[_key] = obj.get(_key)
 
         {{/isAdditionalPropertiesTrue}}
-        return _obj
-    {{/hasChildren}}
-
+        return _obj{{/hasChildren}}
 {{#vendorExtensions.x-py-postponed-model-imports.size}}
-{{#vendorExtensions.x-py-postponed-model-imports}}
-{{{.}}}
-{{/vendorExtensions.x-py-postponed-model-imports}}
+{{#vendorExtensions.x-py-postponed-model-imports}}{{{.}}}{{/vendorExtensions.x-py-postponed-model-imports}}
 # TODO: Rewrite to not use raise_errors
 {{classname}}.model_rebuild(raise_errors=False)
 {{/vendorExtensions.x-py-postponed-model-imports.size}}

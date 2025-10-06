@@ -62,7 +62,6 @@ class PolicyRule(BaseModel):
         protected_namespaces=(),
     )
 
-
     # JSON field name that stores the object type
     __discriminator_property_name: ClassVar[str] = 'type'
 
@@ -133,17 +132,17 @@ class PolicyRule(BaseModel):
         """Create an instance of PolicyRule from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
-        if object_type ==  'AccessPolicyRule':
+        if object_type == 'AccessPolicyRule':
             return import_module("okta.models.access_policy_rule").AccessPolicyRule.from_dict(obj)
-        if object_type ==  'IdpDiscoveryPolicyRule':
+        if object_type == 'IdpDiscoveryPolicyRule':
             return import_module("okta.models.idp_discovery_policy_rule").IdpDiscoveryPolicyRule.from_dict(obj)
-        if object_type ==  'PasswordPolicyRule':
+        if object_type == 'PasswordPolicyRule':
             return import_module("okta.models.password_policy_rule").PasswordPolicyRule.from_dict(obj)
-        if object_type ==  'ProfileEnrollmentPolicyRule':
+        if object_type == 'ProfileEnrollmentPolicyRule':
             return import_module("okta.models.profile_enrollment_policy_rule").ProfileEnrollmentPolicyRule.from_dict(obj)
-        if object_type ==  'AuthorizationServerPolicyRule':
+        if object_type == 'AuthorizationServerPolicyRule':
             return import_module("okta.models.authorization_server_policy_rule").AuthorizationServerPolicyRule.from_dict(obj)
-        if object_type ==  'OktaSignOnPolicyRule':
+        if object_type == 'OktaSignOnPolicyRule':
             return import_module("okta.models.okta_sign_on_policy_rule").OktaSignOnPolicyRule.from_dict(obj)
 
         raise ValueError("PolicyRule failed to lookup discriminator value from " +

@@ -1,16 +1,18 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS
+# IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
 import pytest
 
-from tests.mocks import MockOktaClient
 import okta.models as models
 from okta.errors.okta_api_error import OktaAPIError
+from tests.mocks import MockOktaClient
 
 
 class TestDeviceResource:
@@ -41,7 +43,9 @@ class TestDeviceResource:
 
             # Skip test if no devices are available
             if not devices:
-                pytest.skip("No devices found in test org. Device enrollment required for testing.")
+                pytest.skip(
+                    "No devices found in test org. Device enrollment required for testing."
+                )
 
             # Use the first device for testing
             test_device = devices[0]
@@ -58,7 +62,7 @@ class TestDeviceResource:
             assert device.status in [
                 models.DeviceStatus.ACTIVE,
                 models.DeviceStatus.SUSPENDED,
-                models.DeviceStatus.DEACTIVATED
+                models.DeviceStatus.DEACTIVATED,
             ]
 
             # Test: List device users
@@ -80,7 +84,9 @@ class TestDeviceResource:
             # If we modified the device status during testing, try to restore it
             if device_id and original_status:
                 try:
-                    await self._restore_device_status(client, device_id, original_status)
+                    await self._restore_device_status(
+                        client, device_id, original_status
+                    )
                 except:
                     pass  # Best effort restore
             raise e
@@ -108,7 +114,9 @@ class TestDeviceResource:
             assert device.status == models.DeviceStatus.ACTIVE
         else:
             # Device might not support suspension, skip unsuspend test
-            print(f"Device {device_id} did not suspend (status: {device.status}), skipping unsuspend test")
+            print(
+                f"Device {device_id} did not suspend (status: {device.status}), skipping unsuspend test"
+            )
 
         # Test: Deactivate device
         result, _, err = await client.deactivate_device(device_id)
@@ -154,10 +162,16 @@ class TestDeviceResource:
             if device.status == models.DeviceStatus.SUSPENDED:
                 print(f"Device {device_id} successfully suspended again")
             else:
-                print(f"Device {device_id} could not be suspended again (status: {device.status}), this might be expected behavior")
+                print(
+                    f"Device {device_id} could not be suspended again (status: {device.status}), this might be expected "
+                    f"behavior"
+                )
         else:
             # Device might not support unsuspend or there might be a delay
-            print(f"Device {device_id} could not be unsuspended (status: {device.status}), this might be expected behavior for certain device types")
+            print(
+                f"Device {device_id} could not be unsuspended (status: {device.status}), this might be expected behavior for "
+                f"certain device types"
+            )
 
     async def _test_deactivated_device_lifecycle(self, client, device_id):
         """Test lifecycle operations starting from DEACTIVATED status"""
@@ -196,7 +210,10 @@ class TestDeviceResource:
 
         # Restore to target status
         if target_status == models.DeviceStatus.ACTIVE:
-            if current_status in [models.DeviceStatus.SUSPENDED, models.DeviceStatus.DEACTIVATED]:
+            if current_status in [
+                models.DeviceStatus.SUSPENDED,
+                models.DeviceStatus.DEACTIVATED,
+            ]:
                 await client.activate_device(device_id)
         elif target_status == models.DeviceStatus.SUSPENDED:
             if current_status == models.DeviceStatus.ACTIVE:
@@ -205,7 +222,10 @@ class TestDeviceResource:
                 await client.activate_device(device_id)
                 await client.suspend_device(device_id)
         elif target_status == models.DeviceStatus.DEACTIVATED:
-            if current_status in [models.DeviceStatus.ACTIVE, models.DeviceStatus.SUSPENDED]:
+            if current_status in [
+                models.DeviceStatus.ACTIVE,
+                models.DeviceStatus.SUSPENDED,
+            ]:
                 await client.deactivate_device(device_id)
 
     @pytest.mark.vcr()
@@ -223,8 +243,7 @@ class TestDeviceResource:
 
         # Test: List devices with search filter (search by status)
         active_devices, _, err = await client.list_devices(
-            search='status eq "ACTIVE"',
-            limit=10
+            search='status eq "ACTIVE"', limit=10
         )
         assert err is None
         assert isinstance(active_devices, list)
@@ -245,23 +264,23 @@ class TestDeviceResource:
             # Note: In VCR tests, we may not have real pagination cursors, so we test the parameter acceptance
             try:
                 devices_paginated, _, err = await client.list_devices(
-                    limit=2,
-                    after="mock_cursor_for_testing"
+                    limit=2, after="mock_cursor_for_testing"
                 )
                 # This might fail in real scenarios but tests parameter passing
                 if err is None:
                     assert isinstance(devices_paginated, list)
                 else:
                     # Expected to fail with invalid cursor, but tests parameter handling
-                    print(f"Pagination test with after parameter failed as expected: {err}")
+                    print(
+                        f"Pagination test with after parameter failed as expected: {err}"
+                    )
             except Exception as e:
                 print(f"Pagination test failed as expected with mock cursor: {e}")
 
         # Test search with different criteria
         try:
             suspended_devices, _, err = await client.list_devices(
-                search='status eq "SUSPENDED"',
-                limit=5
+                search='status eq "SUSPENDED"', limit=5
             )
             assert err is None
             assert isinstance(suspended_devices, list)
@@ -270,20 +289,21 @@ class TestDeviceResource:
             for device in suspended_devices:
                 assert device.status == models.DeviceStatus.SUSPENDED
         except Exception as e:
-            print(f"Search for suspended devices failed (might be expected if none exist): {e}")
+            print(
+                f"Search for suspended devices failed (might be expected if none exist): {e}"
+            )
 
         # Test search with profile-based filter
         try:
             # Search by a profile attribute - platform for example
             platform_devices, _, err = await client.list_devices(
-                search='profile.platform eq "WINDOWS"',
-                limit=5
+                search='profile.platform eq "WINDOWS"', limit=5
             )
             if err is None:
                 assert isinstance(platform_devices, list)
                 # Verify platform if available
                 for device in platform_devices:
-                    if hasattr(device.profile, 'platform'):
+                    if hasattr(device.profile, "platform"):
                         assert device.profile.platform == "WINDOWS"
             else:
                 print(f"Platform search failed (might be expected): {err}")
@@ -304,8 +324,7 @@ class TestDeviceResource:
 
         # Get devices that are already deactivated
         deactivated_devices, _, err = await client.list_devices(
-            search='status eq "DEACTIVATED"',
-            limit=1
+            search='status eq "DEACTIVATED"', limit=1
         )
         assert err is None
 
@@ -313,8 +332,7 @@ class TestDeviceResource:
             # Create a deactivated device by deactivating an active one
             # First get an active device
             active_devices, _, err = await client.list_devices(
-                search='status eq "ACTIVE"',
-                limit=1
+                search='status eq "ACTIVE"', limit=1
             )
             assert err is None
 
@@ -407,8 +425,10 @@ class TestDeviceResource:
         # Verify each device user has expected properties
         for device_user in device_users:
             # Check if device_user is a DeviceUser model instance
-            assert hasattr(device_user, 'user') or hasattr(device_user, 'id')
+            assert hasattr(device_user, "user") or hasattr(device_user, "id")
             # DeviceUser should have creation timestamp
-            assert hasattr(device_user, 'created') or hasattr(device_user, 'id')
+            assert hasattr(device_user, "created") or hasattr(device_user, "id")
 
-        print(f"Successfully found device {device_with_users.id} with {len(device_users)} associated users")
+        print(
+            f"Successfully found device {device_with_users.id} with {len(device_users)} associated users"
+        )

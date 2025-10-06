@@ -45,7 +45,6 @@ class InlineHookChannelOAuth(InlineHookChannel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -102,5 +101,4 @@ class InlineHookChannelOAuth(InlineHookChannel):
             "config": InlineHookOAuthChannelConfig.from_dict(obj["config"]) if obj.get("config") is not None else None
         })
         return _obj
-
 

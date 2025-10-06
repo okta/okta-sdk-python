@@ -44,7 +44,6 @@ class AppAndInstancePolicyRuleCondition(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -107,5 +106,4 @@ class AppAndInstancePolicyRuleCondition(BaseModel):
             "include": [AppAndInstanceConditionEvaluatorAppOrInstance.from_dict(_item) for _item in obj["include"]] if obj.get("include") is not None else None
         })
         return _obj
-
 

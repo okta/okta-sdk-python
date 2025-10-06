@@ -64,7 +64,6 @@ class LogStream(BaseModel):
         protected_namespaces=(),
     )
 
-
     # JSON field name that stores the object type
     __discriminator_property_name: ClassVar[str] = 'type'
 
@@ -136,9 +135,9 @@ class LogStream(BaseModel):
         """Create an instance of LogStream from a dict"""
         # look up the object type based on discriminator mapping
         object_type = cls.get_discriminator_value(obj)
-        if object_type ==  'LogStreamAws':
+        if object_type == 'LogStreamAws':
             return import_module("okta.models.log_stream_aws").LogStreamAws.from_dict(obj)
-        if object_type ==  'LogStreamSplunk':
+        if object_type == 'LogStreamSplunk':
             return import_module("okta.models.log_stream_splunk").LogStreamSplunk.from_dict(obj)
 
         raise ValueError("LogStream failed to lookup discriminator value from " +

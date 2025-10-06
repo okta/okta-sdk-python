@@ -125,7 +125,6 @@ class PossessionConstraint(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -197,5 +196,4 @@ class PossessionConstraint(BaseModel):
             "userVerification": obj.get("userVerification") if obj.get("userVerification") is not None else 'OPTIONAL'
         })
         return _obj
-
 

@@ -54,7 +54,6 @@ class SwaApplicationSettingsApplication(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -114,5 +113,4 @@ class SwaApplicationSettingsApplication(BaseModel):
             "userNameSelector": obj.get("userNameSelector")
         })
         return _obj
-
 

@@ -43,7 +43,6 @@ class SimulatePolicyEvaluationsUndefined(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -98,5 +97,4 @@ class SimulatePolicyEvaluationsUndefined(BaseModel):
             "policies": [SimulateResultPoliciesItems.from_dict(_item) for _item in obj["policies"]] if obj.get("policies") is not None else None
         })
         return _obj
-
 

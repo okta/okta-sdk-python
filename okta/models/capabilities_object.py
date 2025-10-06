@@ -45,7 +45,6 @@ class CapabilitiesObject(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -108,5 +107,4 @@ class CapabilitiesObject(BaseModel):
             "update": CapabilitiesUpdateObject.from_dict(obj["update"]) if obj.get("update") is not None else None
         })
         return _obj
-
 

@@ -52,7 +52,6 @@ class SamlApplicationSettings(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -134,5 +133,4 @@ class SamlApplicationSettings(BaseModel):
             "signOn": SamlApplicationSettingsSignOn.from_dict(obj["signOn"]) if obj.get("signOn") is not None else None
         })
         return _obj
-
 

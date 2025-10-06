@@ -46,7 +46,6 @@ class FCMPushProvider(PushProvider):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -113,5 +112,4 @@ class FCMPushProvider(PushProvider):
             "configuration": FCMConfiguration.from_dict(obj["configuration"]) if obj.get("configuration") is not None else None
         })
         return _obj
-
 

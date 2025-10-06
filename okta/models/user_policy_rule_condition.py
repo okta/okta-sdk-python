@@ -51,7 +51,6 @@ class UserPolicyRuleCondition(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -132,5 +131,4 @@ class UserPolicyRuleCondition(BaseModel):
             "userLifecycleAttribute": UserLifecycleAttributePolicyRuleCondition.from_dict(obj["userLifecycleAttribute"]) if obj.get("userLifecycleAttribute") is not None else None
         })
         return _obj
-
 

@@ -43,7 +43,6 @@ class BehaviorRuleSettingsVelocity(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -91,5 +90,4 @@ class BehaviorRuleSettingsVelocity(BaseModel):
             "velocityKph": obj.get("velocityKph") if obj.get("velocityKph") is not None else 805
         })
         return _obj
-
 

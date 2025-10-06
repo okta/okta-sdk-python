@@ -43,7 +43,6 @@ class PolicyAccountLinkFilter(BaseModel):
         protected_namespaces=(),
     )
 
-
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
         return pprint.pformat(self.model_dump(by_alias=True))
@@ -98,5 +97,4 @@ class PolicyAccountLinkFilter(BaseModel):
             "groups": PolicyAccountLinkFilterGroups.from_dict(obj["groups"]) if obj.get("groups") is not None else None
         })
         return _obj
-
 
