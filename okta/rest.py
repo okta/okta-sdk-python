@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -17,7 +19,6 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
 
 import io
 import json
@@ -68,9 +69,12 @@ class RESTClientObject:
 
     def __init__(self, configuration) -> None:
         # urllib3.PoolManager will pass all kw parameters to connectionpool
-        # https://github.com/shazow/urllib3/blob/f9409436f83aeb79fbaf090181cd81b784f1b8ce/urllib3/poolmanager.py#L75  # noqa: E501
-        # https://github.com/shazow/urllib3/blob/f9409436f83aeb79fbaf090181cd81b784f1b8ce/urllib3/connectionpool.py#L680  # noqa: E501
-        # Custom SSL certificates and client certificates: http://urllib3.readthedocs.io/en/latest/advanced-usage.html  # noqa: E501
+        # https://github.com/shazow/urllib3/blob/f9409436f83aeb79fbaf090181cd81b784f1b8ce/urllib3/poolmanager.py#L75  #
+        # noqa: E501
+        # https://github.com/shazow/urllib3/blob/f9409436f83aeb79fbaf090181cd81b784f1b8ce/urllib3/connectionpool.py#L680  #
+        # noqa: E501
+        # Custom SSL certificates and client certificates: http://urllib3.readthedocs.io/en/latest/advanced-usage.html  #
+        # noqa: E501
 
         # cert_reqs
         if configuration.verify_ssl:
@@ -95,7 +99,6 @@ class RESTClientObject:
         if configuration.tls_server_name:
             pool_args['server_hostname'] = configuration.tls_server_name
 
-
         if configuration.socket_options is not None:
             pool_args['socket_options'] = configuration.socket_options
 
@@ -119,13 +122,13 @@ class RESTClientObject:
             self.pool_manager = urllib3.PoolManager(**pool_args)
 
     def request(
-        self,
-        method,
-        url,
-        headers=None,
-        body=None,
-        post_params=None,
-        _request_timeout=None
+            self,
+            method,
+            url,
+            headers=None,
+            body=None,
+            post_params=None,
+            _request_timeout=None
     ):
         """Perform requests.
 
@@ -167,7 +170,7 @@ class RESTClientObject:
             elif (
                     isinstance(_request_timeout, tuple)
                     and len(_request_timeout) == 2
-                ):
+            ):
                 timeout = urllib3.Timeout(
                     connect=_request_timeout[0],
                     read=_request_timeout[1]
@@ -180,8 +183,8 @@ class RESTClientObject:
                 # no content type provided or payload is json
                 content_type = headers.get('Content-Type')
                 if (
-                    not content_type
-                    or re.search('json', content_type, re.IGNORECASE)
+                        not content_type
+                        or re.search('json', content_type, re.IGNORECASE)
                 ):
                     request_body = None
                     if body is not None:
@@ -210,7 +213,7 @@ class RESTClientObject:
                     # overwritten.
                     del headers['Content-Type']
                     # Ensures that dict objects are serialized
-                    post_params = [(a, json.dumps(b)) if isinstance(b, dict) else (a,b) for a, b in post_params]
+                    post_params = [(a, json.dumps(b)) if isinstance(b, dict) else (a, b) for a, b in post_params]
                     r = self.pool_manager.request(
                         method,
                         url,
@@ -240,7 +243,8 @@ class RESTClientObject:
                         body=request_body,
                         preload_content=False,
                         timeout=timeout,
-                        headers=headers)
+                        headers=headers
+                    )
                 else:
                     # Cannot generate the request from given parameters
                     msg = """Cannot prepare a request message for provided

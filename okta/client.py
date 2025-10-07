@@ -1,8 +1,10 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -18,21 +20,15 @@
     Do not edit the class manually.
 """  # noqa: E501
 
-
+import logging
 # AUTO-GENERATED! DO NOT EDIT FILE DIRECTLY
 # This client class is typically generated based on an API specification (e.g., OpenAPI).
 # Changes to this file may be overwritten upon regeneration.
 # SEE CONTRIBUTOR DOCUMENTATION
 import os
-import aiohttp
-import logging
 
-from okta.config.config_setter import ConfigSetter
-from okta.config.config_validator import ConfigValidator
-from okta.request_executor import RequestExecutor
-from okta.cache.no_op_cache import NoOpCache
-from okta.cache.okta_cache import OktaCache
-from okta.logger import setup_logging
+import aiohttp
+
 from okta.api.agent_pools_api import AgentPoolsApi
 from okta.api.api_service_integrations_api import ApiServiceIntegrationsApi
 from okta.api.api_token_api import ApiTokenApi
@@ -92,6 +88,12 @@ from okta.api.ui_schema_api import UISchemaApi
 from okta.api.user_api import UserApi
 from okta.api.user_factor_api import UserFactorApi
 from okta.api.user_type_api import UserTypeApi
+from okta.cache.no_op_cache import NoOpCache
+from okta.cache.okta_cache import OktaCache
+from okta.config.config_setter import ConfigSetter
+from okta.config.config_validator import ConfigValidator
+from okta.logger import setup_logging
+from okta.request_executor import RequestExecutor
 
 
 class Client(
@@ -154,9 +156,8 @@ class Client(
     UserApi,
     UserFactorApi,
     UserTypeApi,
-    
-):
 
+):
     """An Okta client object, serving as an entry point to various Okta APIs."""
 
     def __init__(self, user_config: dict = {}):
@@ -178,12 +179,12 @@ class Client(
 
         # Set client instance variables from the validated configuration
         self._authorization_mode = self._config["client"]["authorizationMode"]
-        self._base_url = self._config["client"]["orgUrl"] # Base URL for the Okta organization
-        self._api_token = self._config["client"].get("token", None) # For SSWS token authentication
-        self._client_id = None # For OAuth 2.0 / OpenID Connect
-        self._scopes = None # For OAuth 2.0 / OpenID Connect
-        self._private_key = None # For OAuth 2.0 Private Key JWT
-        self._oauth_token_renewal_offset = None # Offset for proactive OAuth token renewal
+        self._base_url = self._config["client"]["orgUrl"]  # Base URL for the Okta organization
+        self._api_token = self._config["client"].get("token", None)  # For SSWS token authentication
+        self._client_id = None  # For OAuth 2.0 / OpenID Connect
+        self._scopes = None  # For OAuth 2.0 / OpenID Connect
+        self._private_key = None  # For OAuth 2.0 Private Key JWT
+        self._oauth_token_renewal_offset = None  # Offset for proactive OAuth token renewal
 
         # Determine which cache to use (NoOpCache or OktaCache)
         cache = NoOpCache()
@@ -204,7 +205,8 @@ class Client(
             user_config.get("requestExecutor", RequestExecutor)(
                 self._config,
                 cache,
-                user_config.get("httpClient", None))
+                user_config.get("httpClient", None)
+            )
 
         # Set private key variables if using PrivateKey authorization mode (for OAuth 2.0)
         if self._authorization_mode == 'PrivateKey':
@@ -252,6 +254,7 @@ class Client(
     """
     Custom Header Management
     """
+
     def set_custom_headers(self, headers: dict):
         """Sets custom headers to be sent with every request."""
         self._request_executor.set_custom_headers(headers)

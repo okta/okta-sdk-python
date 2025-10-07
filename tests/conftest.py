@@ -1,15 +1,17 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
-import pytest
-import re
 import os
+import re
 
+import pytest
 from pytest_recording._vcr import use_cassette
 
 TEST_OKTA_URL = "https://test.okta.com"
@@ -18,7 +20,7 @@ URL_REGEX = r"https://(?:[\w-]+\.oktapreview\.com|dev-\d+\.okta\.com)"
 B_URL_REGEX = rb"https://(?:[\w-]+\.oktapreview\.com|dev-\d+\.okta\.com)"
 PYTEST_MOCK_CLIENT = "pytest_mock_client"
 PYTEST_RE_RECORD = "record_mode"
-MOCK_TESTS = 'MOCK_TESTS'
+MOCK_TESTS = "MOCK_TESTS"
 
 
 def is_mock_tests_flag_true():
@@ -26,7 +28,7 @@ def is_mock_tests_flag_true():
     Return False if env variable `MOCK_TESTS` is set to `false`, `FALSE`, etc.
     Return True in all other cases.
     """
-    return os.environ.get('MOCK_TESTS', 'true').strip().lower() != 'false'
+    return os.environ.get("MOCK_TESTS", "true").strip().lower() != "false"
 
 
 # Override vcr fixture from pytest_recording library
@@ -37,12 +39,12 @@ def vcr(request, vcr_markers, vcr_cassette_dir, record_mode, pytestconfig):
         config = request.getfixturevalue("vcr_config")
         default_cassette = request.getfixturevalue("default_cassette_name")
         with use_cassette(
-            default_cassette,
-            vcr_cassette_dir,
-            record_mode,
-            vcr_markers,
-            config,
-            pytestconfig
+                default_cassette,
+                vcr_cassette_dir,
+                record_mode,
+                vcr_markers,
+                config,
+                pytestconfig,
         ) as cassette:
             yield cassette
     else:
@@ -50,19 +52,19 @@ def vcr(request, vcr_markers, vcr_cassette_dir, record_mode, pytestconfig):
 
 
 def pytest_generate_tests(metafunc):
-    ''' just to attach the cmd-line args to a test-class that needs them '''
+    """just to attach the cmd-line args to a test-class that needs them"""
     record_mode = metafunc.config.getoption(PYTEST_RE_RECORD)
     # check if this function is in a test-class that needs the cmd-line args
     if record_mode == "rewrite":
         os.environ[PYTEST_MOCK_CLIENT] = "1"
 
 
-@pytest.fixture(scope='module')
+@pytest.fixture(scope="module")
 def vcr_config():
     return {
         # Remove personal details from Integration Tests
         "before_record_request": before_record_request,
-        "before_record_response": before_record_response
+        "before_record_response": before_record_response,
     }
 
 
@@ -83,18 +85,20 @@ def before_record_response(response):
         if "string" in response["body"]:
             # body = response["body"]["string"]
             response["body"]["string"] = re.sub(
-                B_URL_REGEX, B_TEST_OKTA_URL, response["body"]["string"])
+                B_URL_REGEX, B_TEST_OKTA_URL, response["body"]["string"]
+            )
 
     # if "Public-Key-Pins-Report-Only" in response["headers"]:
     #     del response["headers"]["Public-Key-Pins-Report-Only"]
     if "content-security-policy-report-only" in response["headers"]:
         response["headers"]["content-security-policy-report-only"] = re.sub(
-            URL_REGEX, TEST_OKTA_URL,
-            response["headers"]["content-security-policy-report-only"][0])
+            URL_REGEX,
+            TEST_OKTA_URL,
+            response["headers"]["content-security-policy-report-only"][0],
+        )
     if "link" in response["headers"]:
         current = response["headers"]["link"]
-        response["headers"]["link"] = re.sub(
-            URL_REGEX, TEST_OKTA_URL, current)
+        response["headers"]["link"] = re.sub(URL_REGEX, TEST_OKTA_URL, current)
 
     return response
 
@@ -104,7 +108,9 @@ def cleanup(request):
     """
     To run at the end of a test run
     """
+
     def clean_up_env_vars():
         if PYTEST_MOCK_CLIENT in os.environ:
             del os.environ[PYTEST_MOCK_CLIENT]
+
     request.addfinalizer(clean_up_env_vars)

@@ -1,23 +1,27 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
-from okta.user_agent import UserAgent
-from okta.constants import DATETIME_FORMAT
-from okta.client import Client
-import aiohttp
 import asyncio
-import json
-from yarl import URL
 import datetime as dt
-import multidict
-from tests.conftest import PYTEST_MOCK_CLIENT, is_mock_tests_flag_true
+import json
 import os
 import time
+
+import aiohttp
+import multidict
+from yarl import URL
+
+from okta.client import Client
+from okta.constants import DATETIME_FORMAT
+from okta.user_agent import UserAgent
+from tests.conftest import PYTEST_MOCK_CLIENT, is_mock_tests_flag_true
 
 REQUEST_TIMEOUT = 5  # seconds
 ORG_URL = "https://test.okta.com"
@@ -27,16 +31,18 @@ SCOPES = ["okta.scope.1", "okta.scope.2"]
 PRIVATE_KEY = "yourPrivateKey"
 GET_USERS_CALL = "/api/v1/users"
 GET_OAUTH_CLIENTS_CALL = "/oauth2/v1/clients"
-CLIENT_CONFIG = {'orgUrl': ORG_URL, 'token': API_TOKEN}
+CLIENT_CONFIG = {"orgUrl": ORG_URL, "token": API_TOKEN}
 
 # Cache Test Details
 TTI = 5.0
 TTL = 5.0
-CACHE_KEY = ("https://example.com/sample/cache-key/test+test@test."
-             "com?with=a&query=string")
+CACHE_KEY = (
+    "https://example.com/sample/cache-key/test+test@test." "com?with=a&query=string"
+)
 CACHE_VALUE = "54321"
-ALT_CACHE_KEY = ("https://sample.com/example/cache-key/test+2@test."
-                 "com?with=a&query=string")
+ALT_CACHE_KEY = (
+    "https://sample.com/example/cache-key/test+2@test." "com?with=a&query=string"
+)
 ALT_CACHE_VALUE = "dbca"
 
 
@@ -61,11 +67,11 @@ async def mock_GET_HTTP_request(*args, **kwargs):
         },
         "url": ORG_URL + GET_USERS_CALL,
         "data": {},
-        "method": "GET"
+        "method": "GET",
     }
 
 
-class MockHTTPResponseDetails():
+class MockHTTPResponseDetails:
     def __init__(self):
         self.status = 200
         self.headers = {
@@ -79,86 +85,94 @@ class MockHTTPResponseDetails():
         self.content_type = "application/json"
 
 
-class MockHTTP429ResponseDetails():
+class MockHTTP429ResponseDetails:
     def __init__(self):
         now = dt.datetime.now(dt.timezone.utc)
         now = now.replace(microsecond=0)
 
         one_sec_after = now + dt.timedelta(seconds=1)
         self.status = 429
-        self.headers = multidict.CIMultiDict({
-            "Date": now.strftime(DATETIME_FORMAT),
-            "Content-Type": "application/json",
-            "X-Okta-Now": "",
-            "X-Rate-Limit-Reset": one_sec_after.timestamp(),
-            "X-Okta-Request-id": "okta-request-id",
-        })
+        self.headers = multidict.CIMultiDict(
+            {
+                "Date": now.strftime(DATETIME_FORMAT),
+                "Content-Type": "application/json",
+                "X-Okta-Now": "",
+                "X-Rate-Limit-Reset": one_sec_after.timestamp(),
+                "X-Okta-Request-id": "okta-request-id",
+            }
+        )
         self.url = ORG_URL + GET_USERS_CALL
         self.method = "GET"
         self.links = {}
         self.content_type = "application/json"
 
 
-class MockHTTP429ConcurrentRateLimitErrorResponseDetails():
+class MockHTTP429ConcurrentRateLimitErrorResponseDetails:
     def __init__(self):
         now = dt.datetime.now(dt.timezone.utc)
         now = now.replace(microsecond=0)
 
         one_sec_after = now + dt.timedelta(seconds=1)
         self.status = 429
-        self.headers = multidict.CIMultiDict({
-            "Date": now.strftime(DATETIME_FORMAT),
-            "Content-Type": "application/json",
-            "X-Okta-Now": "",
-            "X-Rate-Limit-Reset": one_sec_after.timestamp(),
-            "X-Rate-Limit-Limit": 0,
-            "X-Rate-Limit-Remaining": 0,
-            "X-Okta-Request-id": "okta-request-id",
-        })
+        self.headers = multidict.CIMultiDict(
+            {
+                "Date": now.strftime(DATETIME_FORMAT),
+                "Content-Type": "application/json",
+                "X-Okta-Now": "",
+                "X-Rate-Limit-Reset": one_sec_after.timestamp(),
+                "X-Rate-Limit-Limit": 0,
+                "X-Rate-Limit-Remaining": 0,
+                "X-Okta-Request-id": "okta-request-id",
+            }
+        )
         self.url = ORG_URL + GET_USERS_CALL
         self.method = "GET"
         self.links = {}
         self.content_type = "application/json"
 
 
-class MockHTTP429NoXResetResponseDetails():
+class MockHTTP429NoXResetResponseDetails:
     def __init__(self):
         now = dt.datetime.now(dt.timezone.utc)
         now = now.replace(microsecond=0)
 
         self.status = 429
-        self.headers = multidict.CIMultiDict({
-            "Date": now.strftime(DATETIME_FORMAT),
-            "Content-Type": "application/json",
-            "X-Okta-Now": "",
-            "X-Okta-Request-id": "okta-request-id",
-        })
+        self.headers = multidict.CIMultiDict(
+            {
+                "Date": now.strftime(DATETIME_FORMAT),
+                "Content-Type": "application/json",
+                "X-Okta-Now": "",
+                "X-Okta-Request-id": "okta-request-id",
+            }
+        )
         self.url = ORG_URL + GET_USERS_CALL
         self.method = "GET"
         self.links = {}
         self.content_type = "application/json"
 
 
-class MockHTTP429NoDateResponseDetails():
+class MockHTTP429NoDateResponseDetails:
     def __init__(self):
         now = dt.datetime.now(dt.timezone.utc)
         now = now.replace(microsecond=0)
 
         one_sec_after = now + dt.timedelta(seconds=1)
         self.status = 429
-        self.headers = multidict.CIMultiDict({
-            "Content-Type": "application/json",
-            "X-Okta-Now": "",
-            "X-Rate-Limit-Reset": one_sec_after.timestamp(),
-            "X-Okta-Request-id": "okta-request-id",
-        })
+        self.headers = multidict.CIMultiDict(
+            {
+                "Content-Type": "application/json",
+                "X-Okta-Now": "",
+                "X-Rate-Limit-Reset": one_sec_after.timestamp(),
+                "X-Okta-Request-id": "okta-request-id",
+            }
+        )
         self.url = ORG_URL + GET_USERS_CALL
         self.method = "GET"
         self.links = {}
         self.content_type = "application/json"
 
 
-class MockHTTP429MultiXResetResponseDetails():
+class MockHTTP429MultiXResetResponseDetails:
     def __init__(self):
         now = dt.datetime.now(dt.timezone.utc)
         now = now.replace(microsecond=0)
@@ -194,12 +208,10 @@ async def mock_GET_HTTP_Client_response_valid(*args, **kwargs):
 
 
 async def mock_GET_HTTP_Client_response_valid_with_next(request_executor, request):
-    next_link = mock_next_link(URL(request.get('url')))
+    next_link = mock_next_link(URL(request.get("url")))
 
     response_details = MockHTTPResponseDetails()
-    response_details.links = {
-        "next": {"url": next_link}
-    }
+    response_details.links = {"next": {"url": next_link}}
     response_body = '[{"ID": "user.id.1"}, {"ID": "user.id.2"}]'
     error = None
     return (request, response_details, response_body, error)
@@ -208,7 +220,7 @@ async def mock_GET_HTTP_Client_response_valid_with_next(request_executor, reques
 async def mock_GET_HTTP_Client_response_429(*args, **kwargs):
     request = await mock_GET_HTTP_request()
     response_details = MockHTTP429ResponseDetails()
-    response_body = '{}'
+    response_body = "{}"
     error = None
     return (request, response_details, response_body, error)
 
@@ -216,7 +228,7 @@ async def mock_GET_HTTP_Client_response_429(*args, **kwargs):
 async def mock_GET_HTTP_Client_response_429_concurrent_limit_error(*args, **kwargs):
     request = await mock_GET_HTTP_request()
     response_details = MockHTTP429ConcurrentRateLimitErrorResponseDetails()
-    response_body = '{}'
+    response_body = "{}"
     error = None
     return (request, response_details, response_body, error)
 
@@ -224,7 +236,7 @@ async def mock_GET_HTTP_Client_response_429_concurrent_limit_error(*args, **kwar
 async def mock_GET_HTTP_Client_response_429_no_x_reset(*args, **kwargs):
     request = await mock_GET_HTTP_request()
     response_details = MockHTTP429NoXResetResponseDetails()
-    response_body = '{}'
+    response_body = "{}"
     error = None
     return (request, response_details, response_body, error)
 
@@ -232,7 +244,7 @@ async def mock_GET_HTTP_Client_response_429_no_x_reset(*args, **kwargs):
 async def mock_GET_HTTP_Client_response_429_no_date(*args, **kwargs):
     request = await mock_GET_HTTP_request()
     response_details = MockHTTP429NoDateResponseDetails()
-    response_body = '{}'
+    response_body = "{}"
     error = None
     return (request, response_details, response_body, error)
 
@@ -240,19 +252,26 @@ async def mock_GET_HTTP_Client_response_429_no_date(*args, **kwargs):
 async def mock_GET_HTTP_Client_response_429_multi_x_reset(*args, **kwargs):
     request = await mock_GET_HTTP_request()
     response_details = MockHTTP429MultiXResetResponseDetails()
-    response_body = '{}'
+    response_body = "{}"
     error = None
     return (request, response_details, response_body, error)
 
 
 async def mock_GET_HTTP_Client_response_error(*args, **kwargs):
-    return (None, None, None, json.dumps({
-        "errorCode": "",
-        "errorSummary": "",
-        "errorLink": "",
-        "errorId": "",
-        "errorCauses": []
-    }))
+    return (
+        None,
+        None,
+        None,
+        json.dumps(
+            {
+                "errorCode": "",
+                "errorSummary": "",
+                "errorLink": "",
+                "errorId": "",
+                "errorCauses": [],
+            }
+        ),
+    )
 
 
 async def mock_timeout_response(*args, **kwargs):
@@ -281,10 +300,10 @@ def mock_cache_return_value(*args, **kwargs):
 
 
 def mock_next_link(self_url: URL):
-    return self_url.update_query({'after': 'mock_after_id'})
+    return self_url.update_query({"after": "mock_after_id"})
 
 
-SAMPLE_RSA = '''-----BEGIN RSA PRIVATE KEY-----
+SAMPLE_RSA = """-----BEGIN RSA PRIVATE KEY-----
                 MIIEogIBAAKCAQEAvlhONz/qR7dBung7VW
                 MhA6V61sGF+VOAELUq7HOr53YxHyyH0Fuh
                 ET78wTbRM51dbKVMiY2e3jTTQ8HZyEs6pn
@@ -332,11 +351,12 @@ SAMPLE_RSA = '''-----BEGIN RSA PRIVATE KEY-----
                 5kMvVUyIY3DwOsQenLo8C+orgmo4UstEjN
                 Q1OQt04mV1fp1aE2b9JVjv72cPEE1SMqaE
                 p7W0dBcm49L0mY7sNyEFS0U=
-                -----END RSA PRIVATE KEY-----'''
+                -----END RSA PRIVATE KEY-----"""
 
-SAMPLE_JWK = {'alg': 'RS256',
-              'kty': 'RSA',
-              'n': '''vlhONz_qR7dBung7VWMhA6V61sGF-
+SAMPLE_JWK = {
+    "alg": "RS256",
+    "kty": "RSA",
+    "n": """vlhONz_qR7dBung7VWMhA6V61sGF-
                  VOAELUq7HOr53YxHyyH0FuhET78wTbRM51dbK
                  VMiY2e3jTTQ8HZyEs6pn2apud3gRWa3mmW9sC
                  U9Iu9AaQPVYc9SrfYRY6iCvxNVMyfvYrWsbsK
@@ -345,9 +365,9 @@ SAMPLE_JWK = {'alg': 'RS256',
                  4CxY2oTV6azqnDYUIpFio2sZBcyU-3bnlxcbH
                  I0A4zwIiuJbH8KNFcHp13gs5MvsLDFTEx8pMr
                  y32rHkCTRrRhad_OsvIVa3J6yvWlL5sz3iaiS
-                 qEjnwBC4nhNv_JKhQ''',
-              'e': '''AQAB''',
-              'd': '''CkZmjH13BmGKWwhH_atA-jsp1yNxu
+                 qEjnwBC4nhNv_JKhQ""",
+    "e": """AQAB""",
+    "d": """CkZmjH13BmGKWwhH_atA-jsp1yNxu
                  byL7nr1Ivf4iOFcs_fZqgH0PyPVDZIJt31QcH
                  -40rkSISEdYWw6tyD2fMvNeCKJFS8HIef1xgK
                  t18ieTpMeX8nR4XFsq46QSUMG4qO8IMV4ovX7
@@ -356,74 +376,75 @@ SAMPLE_JWK = {'alg': 'RS256',
                  dnlt9I00qx1Cu-geU440DSc3S5JlEh0WDG290
                  HwPzKx6qDQE3gGX78QwDuWmtd9r4Lu-WMwIxj
                  0k21KO4EIzjejdjL8fo23MFBrsf-e7MS3k7qz
-                 bS9rXZIMD_nk9FtWQ''',
-              'p': '''28pOgvfOROPVamvz-_kbEEfi1YJx7
+                 bS9rXZIMD_nk9FtWQ""",
+    "p": """28pOgvfOROPVamvz-_kbEEfi1YJx7
                  4mv20EMVRab1DPkzQnVHVRX53Wqjtd5afLj3W
                  2drGQOgLhq2XTXuSh9Ikat1R80NG69klO39X4
                  Uk5-Qk-6c8B84K2w_vCucKT0D8VHO3CSdXO3y
-                 LIVCJWJjH3NeIK5A6BPs4P71El2Z6i0''',
-              'q': '''3bQjKk8tJCvOxDuo90rbDaZy1UY53
+                 LIVCJWJjH3NeIK5A6BPs4P71El2Z6i0""",
+    "q": """3bQjKk8tJCvOxDuo90rbDaZy1UY53
                  _ewmQAgrYZ7ASzvQK0YPvNYIr289nDyf1DiVE
                  CWsNOoymuNlzMdD2sIP3J9KZ02hz5CVbS9W2y
                  IDgf8L3sBZ66fDLIhhAXAUrhMk21pC66ccYFG
-                 Bbnroh-ivKsOeP2lVDjkoBmYxbTyULk''',
-              'dp': '''GjSm48q0F1aq7YNtlc9_wJMxoo9p
+                 Bbnroh-ivKsOeP2lVDjkoBmYxbTyULk""",
+    "dp": """GjSm48q0F1aq7YNtlc9_wJMxoo9p
                  EkxyYUwCMmr9rXF6iE_xzwttZ7WJ3nomidFiB
                  da6BAHyELrsUn0x82u2b83JkC2mRdImXDoLJw
                  QfY_KUhG7g22h9g__mIYN5nRkfTTiZ13muIZR
-                 lWZWR628trmRNBsyABKvLhJAhnEz4uwk''',
-              'dq': '''QHQ3aPx9xi9KPHiPxd0oVA6ZAfIZ
+                 lWZWR628trmRNBsyABKvLhJAhnEz4uwk""",
+    "dq": """QHQ3aPx9xi9KPHiPxd0oVA6ZAfIZ
                  r0hGOiT0Wx5msk_K-sWX7-01KVx6DDeH-IWeV
                  xoz9RKD1t1v245Lm4jla_Sv-KIxER6DkIEsL-
                  EcqN-fbHpZTThSGxHKdqRpZmMYOCAt0uyfpMw
-                 NfGqx239RA4LDgV9Uamjj5ruqU4gojlk''',
-              'qi': '''FkC1F269uXAiACUTA1XmTgQ4AiXz
+                 NfGqx239RA4LDgV9Uamjj5ruqU4gojlk""",
+    "qi": """FkC1F269uXAiACUTA1XmTgQ4AiXz
                  tKZe1ALUqa4WrgZ6_J6XR-VwM4QuWjnlczpF4
                  kHsfHpFi4d4qS3J5kMvVUyIY3DwOsQenLo8C-
                  orgmo4UstEjNQ1OQt04mV1fp1aE2b9JVjv72c
-                 PEE1SMqaEp7W0dBcm49L0mY7sNyEFS0U'''}
+                 PEE1SMqaEp7W0dBcm49L0mY7sNyEFS0U""",
+}
 
 SAMPLE_JWK_WITH_KID = {
-    "p": '''7nyZPzjUrUKoM-1DlzkJdFfD2R6hYTY9BMkoXYIu4S
+    "p": """7nyZPzjUrUKoM-1DlzkJdFfD2R6hYTY9BMkoXYIu4S
     ChhFrEgInH9hwQeMYT0wZTx2lcwVM3ZMpMaotaVAIVBHAK9i_C
     Is2hANqtoXhE7IDKnaecV10htbV2dD1PpgDyK7_tv_vdAlsN1K
-    OSmg4Yb4uCsaambTUbV3rAUsSyu9E''',
+    OSmg4Yb4uCsaambTUbV3rAUsSyu9E""",
     "kty": "RSA",
-    "q": '''zijXO-JzhzBeBtg4zIkMdKGj0ewvWoLTDni7sNXhkt
+    "q": """zijXO-JzhzBeBtg4zIkMdKGj0ewvWoLTDni7sNXhkt
     XDKQT_5FvOptzFDn39sVJvBE69bF6pf_dH1rpKJxrLCkk0p734
     0bdfq4AoHSnTIYToX31PlOWwgfJVebB7q_oGRe9UcA5Svb_WDh
-    4IkN9IyRrnFBWpPClpcNz_KOHMRck''',
-    "d": '''rP42vnls34ptQZHDXduD521BLqZX6Mgu2YrWXZN3-N
+    4IkN9IyRrnFBWpPClpcNz_KOHMRck""",
+    "d": """rP42vnls34ptQZHDXduD521BLqZX6Mgu2YrWXZN3-N
     aMziVn_t14Q0ifpJR7rfD5Cw1yTpRmyc01VN2wBWfpwqJrzQZ3
     2a1pFB_KgLGRBctjQx6DIDrqGVkRHUZHghnVVdrjEjolTaqBRP
     4R20_csZEikNrz36zntUUtiG9Mnz27Z26UyD-odXSVZmtseRMX
     aiGPKwg837w1ubT0lMZkYCZIdU2okxaLPw4L-peDaX4JLS7ZPE
     7FkKK6rBXK9FquESMr6wTatz7TVyU0tToTL6JIS6pze29jaQ4A
-    w9iPxQZqR6-LeidTOLmwkYKx8WSoM5ymCMmW4ERDxsWYEP48AQ''',
+    w9iPxQZqR6-LeidTOLmwkYKx8WSoM5ymCMmW4ERDxsWYEP48AQ""",
     "e": "AQAB",
     "use": "sig",
-    "qi": '''vz8N-1OZb_Mc9qtBGaY3c2sLkGf9IaagEEzxC2sr00
+    "qi": """vz8N-1OZb_Mc9qtBGaY3c2sLkGf9IaagEEzxC2sr00
     4fGIqqXivpaZrs21y8y0d1sQG08K1zW6_S3_rpOZ7iJHnt3qD_U
     J57JDX76LaQY0YyF9-R_qlRgvcnK_mU1OXSnGYhwZxqb78D3TAa
-    nKou31h-iEyxy_Mf-OpoPDAoLBE''',
-    "dp": '''CI4htTnlrz136Tz2ssMSCsFnPi-yHFmkwLoyn4AfDG
+    nKou31h-iEyxy_Mf-OpoPDAoLBE""",
+    "dp": """CI4htTnlrz136Tz2ssMSCsFnPi-yHFmkwLoyn4AfDG
     ZuROA4sl--8544HQ0GAwj0EnA-KpVApHX5Xc0X9XGJrXoTepdmA
     Hed8fjmR6eX2WAZZKRxoFSv8-PJlwvoAo2AIn-lGMEBQadgjKM9
-    jBc7Wy0HCDZxO_Ouwmmd4po5yzE''',
+    jBc7Wy0HCDZxO_Ouwmmd4po5yzE""",
     "alg": "RS256",
-    "dq": '''c1I9M-50mYbg0gtZmnB_Wy6gKOlpg8PytAGtXDoIOM
+    "dq": """c1I9M-50mYbg0gtZmnB_Wy6gKOlpg8PytAGtXDoIOM
     8CoIt_aQpCCu0r_fNUWkC2gT5aj6hUQJTexqrmmAFQ2qwgnESUT
     xu4lILX7Zhb1kA2jFPYlH33wnkAf1XNmGH_6Fb8cMJSXnpVDwiV
-    2hRM7tHxuTZ0uIahyNSWlxPX5KE''',
-    "n": '''wA5PSz_9DibXonaaLJxD31L9CIhNgB8v_OttNyt-lDP
+    2hRM7tHxuTZ0uIahyNSWlxPX5KE""",
+    "n": """wA5PSz_9DibXonaaLJxD31L9CIhNgB8v_OttNyt-lDP
     JWBhhk0uySnSDDua1u5Ifaid4H_JargmkEooHtxwQJLBNpAD-F6
     74D9vGRdrRBdj5k0eZTZmPwHTAtnK3SPcduwf7wUNNbx757TGJY
     _VHpbgiSQ2EH12rJnYJtCWy1huYPa5bW3vDBnT7b1i83pESjyT1
     g3DFnDzReGe-UIx8UTJOOgNRb_C9DXtotD8Gjdj56NiaDg7V1ek
     YBFFIZp9Urm39Hlaus0FRT7xL8tHEuSfD7S6HpFsTk5yDDDDqyv
-    KLElmMvzocvFaWKvup_a3vPaBi6y4K5kBiq60o-IDMGQ''',
-    "kid": "5ashWt3LP1zkYwMGbfMsVizRfx52QTyky4GTHd9MykE"
+    KLElmMvzocvFaWKvup_a3vPaBi6y4K5kBiq60o-IDMGQ""",
+    "kid": "5ashWt3LP1zkYwMGbfMsVizRfx52QTyky4GTHd9MykE",
 }
 
-SAMPLE_INVALID_JWK = {'foo':'bar'}
-SAMPLE_INVALID_RSA = 'foobar'
+SAMPLE_INVALID_JWK = {"foo": "bar"}
+SAMPLE_INVALID_RSA = "foobar"
