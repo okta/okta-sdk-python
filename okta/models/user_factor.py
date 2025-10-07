@@ -48,7 +48,7 @@ if TYPE_CHECKING:
     from okta.models.sms_user_factor import SmsUserFactor
     from okta.models.token_user_factor import TokenUserFactor
     from okta.models.hardware_user_factor import HardwareUserFactor
-    from okta.models.custom_hotp_user_factor import CustomHotpUserFactor
+    from okta.models.custom_hotp_user_factor import CustomHotpUserFactor   # noqa: F811
     from okta.models.totp_user_factor import TotpUserFactor
     from okta.models.u2f_user_factor import U2fUserFactor
     from okta.models.web_user_factor import WebUserFactor

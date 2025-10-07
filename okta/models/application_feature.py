@@ -33,6 +33,7 @@ from typing_extensions import Self
 
 from okta.models.application_feature_links import ApplicationFeatureLinks
 from okta.models.capabilities_object import CapabilitiesObject
+from okta.models.enabled_status import EnabledStatus
 
 
 class ApplicationFeature(BaseModel):
@@ -48,7 +49,7 @@ class ApplicationFeature(BaseModel):
     name: Optional[StrictStr] = Field(
         default=None, description="Identifying name of the feature"
     )
-    status: Optional[Any] = None
+    status: Optional[EnabledStatus] = None
     links: Optional[ApplicationFeatureLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = [
         "capabilities",

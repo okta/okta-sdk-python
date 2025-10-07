@@ -47,7 +47,6 @@ if TYPE_CHECKING:
     from okta.models.browser_plugin_application import BrowserPluginApplication
     from okta.models.open_id_connect_application import OpenIdConnectApplication
     from okta.models.saml_application import SamlApplication
-    from okta.models.saml_application import SamlApplication
     from okta.models.secure_password_store_application import (
         SecurePasswordStoreApplication,
     )
@@ -262,10 +261,10 @@ class Application(BaseModel):
             ).WsFederationApplication.from_dict(obj)
 
         raise ValueError(
-            "Application failed to lookup discriminator value from "
-            + json.dumps(obj)
-            + ". Discriminator property name: "
-            + cls.__discriminator_property_name
-            + ", mapping: "
-            + json.dumps(cls.__discriminator_value_class_map)
+            "Application failed to lookup discriminator value from " +
+            json.dumps(obj) +
+            ". Discriminator property name: " +
+            cls.__discriminator_property_name +
+            ", mapping: " +
+            json.dumps(cls.__discriminator_value_class_map)
         )

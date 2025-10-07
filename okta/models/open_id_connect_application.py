@@ -186,22 +186,18 @@ class OpenIdConnectApplication(Application):
                 ),
                 "_embedded": obj.get("_embedded"),
                 "_links": (
-                    ApplicationLinks.from_dict(obj["_links"])
-                    if obj.get("_links") is not None
-                    else None
+                    ApplicationLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
                 ),
                 "credentials": (
-                    OAuthApplicationCredentials.from_dict(obj["credentials"])
-                    if obj.get("credentials") is not None
+                    OAuthApplicationCredentials.from_dict(obj["credentials"]) if
+                    obj.get("credentials") is not None
                     else None
                 ),
                 "name": (
                     obj.get("name") if obj.get("name") is not None else "oidc_client"
                 ),
                 "settings": (
-                    OpenIdConnectApplicationSettings.from_dict(obj["settings"])
-                    if obj.get("settings") is not None
-                    else None
+                    OpenIdConnectApplicationSettings.from_dict(obj["settings"]) if obj.get("settings") is not None else None
                 ),
             }
         )

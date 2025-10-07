@@ -31,13 +31,15 @@ from typing import Optional, Set
 from pydantic import BaseModel, ConfigDict
 from typing_extensions import Self
 
+from okta.models.enabled_status import EnabledStatus
+
 
 class LifecycleCreateSettingObject(BaseModel):
     """
     Determines whether to update a user in the application when a user in Okta is updated
     """  # noqa: E501
 
-    status: Optional[Any] = None
+    status: Optional[EnabledStatus] = None
     __properties: ClassVar[List[str]] = ["status"]
 
     model_config = ConfigDict(

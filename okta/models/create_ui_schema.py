@@ -30,6 +30,7 @@ from typing import Optional, Set
 
 from pydantic import BaseModel, ConfigDict, Field
 from typing_extensions import Self
+from okta.models.ui_schema_object import UISchemaObject
 
 
 class CreateUISchema(BaseModel):
@@ -37,7 +38,7 @@ class CreateUISchema(BaseModel):
     The request body properties for the new UI Schema
     """  # noqa: E501
 
-    ui_schema: Optional[Dict[str, Any]] = Field(default=None, alias="uiSchema")
+    ui_schema: Optional[UISchemaObject] = Field(default=None, alias="uiSchema")
     __properties: ClassVar[List[str]] = ["uiSchema"]
 
     model_config = ConfigDict(

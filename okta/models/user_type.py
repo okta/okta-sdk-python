@@ -173,8 +173,8 @@ class UserType(BaseModel):
                 "lastUpdatedBy": obj.get("lastUpdatedBy"),
                 "name": obj.get("name"),
                 "_links": (
-                    UserTypeLinks.from_dict(obj["_links"])
-                    if obj.get("_links") is not None
+                    UserTypeLinks.from_dict(obj["_links"]) if
+                    obj.get("_links") is not None
                     else None
                 ),
             }

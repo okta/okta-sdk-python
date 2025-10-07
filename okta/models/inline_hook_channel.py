@@ -124,10 +124,10 @@ class InlineHookChannel(BaseModel):
             ).InlineHookChannelOAuth.from_dict(obj)
 
         raise ValueError(
-            "InlineHookChannel failed to lookup discriminator value from "
-            + json.dumps(obj)
-            + ". Discriminator property name: "
-            + cls.__discriminator_property_name
-            + ", mapping: "
-            + json.dumps(cls.__discriminator_value_class_map)
+            "InlineHookChannel failed to lookup discriminator value from " +
+            json.dumps(obj) +
+            ". Discriminator property name: " +
+            cls.__discriminator_property_name +
+            ", mapping: " +
+            json.dumps(cls.__discriminator_value_class_map)
         )

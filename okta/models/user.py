@@ -123,6 +123,8 @@ class User(BaseModel):
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
         * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
+        * OpenAPI `readOnly` fields are excluded.
         """
         excluded_fields: Set[str] = set(
             [
@@ -210,8 +212,8 @@ class User(BaseModel):
                 "activated": obj.get("activated"),
                 "created": obj.get("created"),
                 "credentials": (
-                    UserCredentials.from_dict(obj["credentials"])
-                    if obj.get("credentials") is not None
+                    UserCredentials.from_dict(obj["credentials"]) if
+                    obj.get("credentials") is not None
                     else None
                 ),
                 "id": obj.get("id"),
@@ -219,8 +221,8 @@ class User(BaseModel):
                 "lastUpdated": obj.get("lastUpdated"),
                 "passwordChanged": obj.get("passwordChanged"),
                 "profile": (
-                    UserProfile.from_dict(obj["profile"])
-                    if obj.get("profile") is not None
+                    UserProfile.from_dict(obj["profile"]) if
+                    obj.get("profile") is not None
                     else None
                 ),
                 "realmId": obj.get("realmId"),
@@ -228,14 +230,14 @@ class User(BaseModel):
                 "statusChanged": obj.get("statusChanged"),
                 "transitioningToStatus": obj.get("transitioningToStatus"),
                 "type": (
-                    UserType.from_dict(obj["type"])
-                    if obj.get("type") is not None
+                    UserType.from_dict(obj["type"]) if
+                    obj.get("type") is not None
                     else None
                 ),
                 "_embedded": obj.get("_embedded"),
                 "_links": (
-                    LinksSelf.from_dict(obj["_links"])
-                    if obj.get("_links") is not None
+                    LinksSelf.from_dict(obj["_links"]) if
+                    obj.get("_links") is not None
                     else None
                 ),
             }

@@ -169,10 +169,10 @@ class LogStream(BaseModel):
             ).LogStreamSplunk.from_dict(obj)
 
         raise ValueError(
-            "LogStream failed to lookup discriminator value from "
-            + json.dumps(obj)
-            + ". Discriminator property name: "
-            + cls.__discriminator_property_name
-            + ", mapping: "
-            + json.dumps(cls.__discriminator_value_class_map)
+            "LogStream failed to lookup discriminator value from " +
+            json.dumps(obj) +
+            ". Discriminator property name: " +
+            cls.__discriminator_property_name +
+            ", mapping: " +
+            json.dumps(cls.__discriminator_value_class_map)
         )

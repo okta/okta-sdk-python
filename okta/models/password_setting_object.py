@@ -32,6 +32,7 @@ from pydantic import BaseModel, ConfigDict
 from typing_extensions import Self
 
 from okta.models.change_enum import ChangeEnum
+from okta.models.enabled_status import EnabledStatus
 from okta.models.seed_enum import SeedEnum
 
 
@@ -42,7 +43,7 @@ class PasswordSettingObject(BaseModel):
 
     change: Optional[ChangeEnum] = ChangeEnum.KEEP_EXISTING
     seed: Optional[SeedEnum] = SeedEnum.RANDOM
-    status: Optional[Any] = None
+    status: Optional[EnabledStatus] = None
     __properties: ClassVar[List[str]] = ["change", "seed", "status"]
 
     model_config = ConfigDict(

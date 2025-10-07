@@ -24339,7 +24339,6 @@ components:
       type: object
       properties:
         uiSchema:
-          type: object
           description: Updated schema property expressions (Okta object or App Instance object)
           $ref: '#/components/schemas/UISchemaObject'
     CreateUpdateIamRolePermissionRequest:

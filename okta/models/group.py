@@ -152,16 +152,12 @@ class Group(BaseModel):
                 "lastUpdated": obj.get("lastUpdated"),
                 "objectClass": obj.get("objectClass"),
                 "profile": (
-                    GroupProfile.from_dict(obj["profile"])
-                    if obj.get("profile") is not None
-                    else None
+                    GroupProfile.from_dict(obj["profile"]) if obj.get("profile") is not None else None
                 ),
                 "type": obj.get("type"),
                 "_embedded": obj.get("_embedded"),
                 "_links": (
-                    GroupLinks.from_dict(obj["_links"])
-                    if obj.get("_links") is not None
-                    else None
+                    GroupLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None
                 ),
             }
         )

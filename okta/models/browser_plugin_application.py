@@ -178,25 +178,25 @@ class BrowserPluginApplication(Application):
                 "signOnMode": obj.get("signOnMode"),
                 "status": obj.get("status"),
                 "visibility": (
-                    ApplicationVisibility.from_dict(obj["visibility"])
-                    if obj.get("visibility") is not None
+                    ApplicationVisibility.from_dict(obj["visibility"]) if
+                    obj.get("visibility") is not None
                     else None
                 ),
                 "_embedded": obj.get("_embedded"),
                 "_links": (
-                    ApplicationLinks.from_dict(obj["_links"])
-                    if obj.get("_links") is not None
+                    ApplicationLinks.from_dict(obj["_links"]) if
+                    obj.get("_links") is not None
                     else None
                 ),
                 "credentials": (
-                    SchemeApplicationCredentials.from_dict(obj["credentials"])
-                    if obj.get("credentials") is not None
+                    SchemeApplicationCredentials.from_dict(obj["credentials"]) if
+                    obj.get("credentials") is not None
                     else None
                 ),
                 "name": obj.get("name"),
                 "settings": (
-                    SwaApplicationSettings.from_dict(obj["settings"])
-                    if obj.get("settings") is not None
+                    SwaApplicationSettings.from_dict(obj["settings"]) if
+                    obj.get("settings") is not None
                     else None
                 ),
             }

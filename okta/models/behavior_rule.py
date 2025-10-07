@@ -181,10 +181,10 @@ class BehaviorRule(BaseModel):
             ).BehaviorRuleVelocity.from_dict(obj)
 
         raise ValueError(
-            "BehaviorRule failed to lookup discriminator value from "
-            + json.dumps(obj)
-            + ". Discriminator property name: "
-            + cls.__discriminator_property_name
-            + ", mapping: "
-            + json.dumps(cls.__discriminator_value_class_map)
+            "BehaviorRule failed to lookup discriminator value from " +
+            json.dumps(obj) +
+            ". Discriminator property name: " +
+            cls.__discriminator_property_name +
+            ", mapping: " +
+            json.dumps(cls.__discriminator_value_class_map)
         )

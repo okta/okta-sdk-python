@@ -132,9 +132,7 @@ class Feature(BaseModel):
                 "id": obj.get("id"),
                 "name": obj.get("name"),
                 "stage": (
-                    FeatureStage.from_dict(obj["stage"])
-                    if obj.get("stage") is not None
-                    else None
+                    FeatureStage.from_dict(obj["stage"]) if obj.get("stage") is not None else None
                 ),
                 "status": obj.get("status"),
                 "type": obj.get("type"),

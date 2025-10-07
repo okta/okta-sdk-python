@@ -31,6 +31,8 @@ from pydantic import BaseModel, ConfigDict, ValidationError, field_validator
 from pydantic import StrictStr
 from typing_extensions import Self
 
+from okta.models.role_type import RoleType
+
 LISTSUBSCRIPTIONSROLEROLEREFPARAMETER_ONE_OF_SCHEMAS = ["RoleType", "str"]
 
 
@@ -126,16 +128,16 @@ class ListSubscriptionsRoleRoleRefParameter(BaseModel):
         if match > 1:
             # more than 1 match
             raise ValueError(
-                "Multiple matches found when deserializing the JSON string into ListSubscriptionsRoleRoleRefParameter with "
-                "oneOf schemas: RoleType, str. Details: "
-                + ", ".join(error_messages)
+                "Multiple matches found when deserializing the JSON string into ListSubscriptionsRoleRoleRefParameter with " +
+                "oneOf schemas: RoleType, str. Details: " +
+                ", ".join(error_messages)
             )
         elif match == 0:
             # no match
             raise ValueError(
-                "No match found when deserializing the JSON string into ListSubscriptionsRoleRoleRefParameter with oneOf "
-                "schemas: RoleType, str. Details: "
-                + ", ".join(error_messages)
+                "No match found when deserializing the JSON string into ListSubscriptionsRoleRoleRefParameter with oneOf " +
+                "schemas: RoleType, str. Details: " +
+                ", ".join(error_messages)
             )
         else:
             return instance

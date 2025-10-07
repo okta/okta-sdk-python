@@ -1,3 +1,4 @@
+# flake8: noqa
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the

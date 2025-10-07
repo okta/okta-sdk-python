@@ -31,6 +31,8 @@ from typing import Optional, Set
 from pydantic import BaseModel, ConfigDict
 from typing_extensions import Self
 
+from okta.models.enabled_status import EnabledStatus
+
 
 class ProfileSettingObject(BaseModel):
     """
@@ -39,7 +41,7 @@ class ProfileSettingObject(BaseModel):
     user's profile automatically overwrite the corresponding attribute value in the application.
     """  # noqa: E501
 
-    status: Optional[Any] = None
+    status: Optional[EnabledStatus] = None
     __properties: ClassVar[List[str]] = ["status"]
 
     model_config = ConfigDict(

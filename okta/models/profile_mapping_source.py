@@ -38,7 +38,7 @@ class ProfileMappingSource(BaseModel):
     """
     The parameter is the source of a profile mapping and is a valid [JSON Schema Draft 4](
     https://datatracker.ietf.org/doc/html/draft-zyp-json-schema-04) document with the following properties. The data type
-    can be an app instance or an Okta object.  > **Note:** If the source is Okta and the UserTypes feature isn't enabled, 
+    can be an app instance or an Okta object.  > **Note:** If the source is Okta and the UserTypes feature isn't enabled,
     then the source `_links` only has a link to the schema.
     """  # noqa: E501
 

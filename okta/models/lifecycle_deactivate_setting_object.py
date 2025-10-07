@@ -31,13 +31,15 @@ from typing import Optional, Set
 from pydantic import BaseModel, ConfigDict
 from typing_extensions import Self
 
+from okta.models.enabled_status import EnabledStatus
+
 
 class LifecycleDeactivateSettingObject(BaseModel):
     """
     Determines whether deprovisioning occurs when the app is unassigned
     """  # noqa: E501
 
-    status: Optional[Any] = None
+    status: Optional[EnabledStatus] = None
     __properties: ClassVar[List[str]] = ["status"]
 
     model_config = ConfigDict(
