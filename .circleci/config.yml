@@ -35,6 +35,7 @@ jobs:
   reversing-labs:
     docker:
       - image: cimg/python:3.10
+    resource_class: large
     steps:
       - checkout
 
