@@ -8,7 +8,9 @@
 
 {{>partial_header}}
 
+
 from setuptools import setup, find_packages  # noqa: H301
+import os
 
 # To install the library, run the following
 #
@@ -16,48 +18,61 @@ from setuptools import setup, find_packages  # noqa: H301
 #
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
-NAME = "{{{projectName}}}"
-VERSION = "{{packageVersion}}"
-PYTHON_REQUIRES = ">=3.7"
-{{#apiInfo}}
-{{#apis}}
-{{#-last}}
+NAME = "okta"
+PYTHON_REQUIRES = ">=3.9"
 REQUIRES = [
-    "urllib3 >= 1.25.3, < 2.1.0",
-    "python-dateutil",
-{{#asyncio}}
-    "aiohttp >= 3.0.0",
-    "aiohttp-retry >= 2.8.3",
-{{/asyncio}}
-{{#tornado}}
-    "tornado>=4.2,<5",
-{{/tornado}}
-{{#hasHttpSignatureMethods}}
-    "pem>=19.3.0",
-    "pycryptodome>=3.9.0",
-{{/hasHttpSignatureMethods}}
-    "pydantic >= 2",
-    "typing-extensions >= 4.7.1",
+
+    "aenum >= 3.1.11",
+    "aiohttp >= 3.12.14",
+    "blinker >= 1.9.0",
+    "flatdict >= 4.0.1",
+    'jwcrypto >= 1.5.6',
+    "pycryptodomex >= 3.23.0",
+    "pydantic >= 2.11.3",
+    "pydash >= 8.0.5",
+    "PyJWT >= 2.10.1",
+    "python-dateutil >= 2.9.0.post0",
+    "PyYAML >= 6.0.2",
+    "requests >= 2.32.3",
+    "xmltodict >= 0.14.2",
 ]
 
+def get_version():
+    # Get version number from VERSION file
+    with open(os.path.join(os.path.dirname(__file__), "okta", "__init__.py")) \
+            as version_file:
+        # File has format: __version__ = '{version_number}'
+        line = version_file.read().split("=")
+        version_number = line[1].strip().replace("'", "")
+        return version_number
+
 setup(
+    classifiers=[
+        "Development Status :: 5 - Production/Stable",
+        "Intended Audience :: Developers",
+        "Programming Language :: Python",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
+        "Programming Language :: Python :: 3.11",
+        "Programming Language :: Python :: 3.12",
+        "Programming Language :: Python :: 3.13",
+        "License :: OSI Approved :: Apache Software License",
+        "Topic :: Software Development :: Libraries :: Python Modules",
+    ],
     name=NAME,
-    version=VERSION,
-    description="{{appName}}",
-    author="{{infoName}}{{^infoName}}OpenAPI Generator community{{/infoName}}",
-    author_email="{{infoEmail}}{{^infoEmail}}team@openapitools.org{{/infoEmail}}",
-    url="{{packageUrl}}",
-    keywords=["OpenAPI", "OpenAPI-Generator", "{{{appName}}}"],
+    version=get_version(),
+    description="Python SDK for the Okta Management API",
+    author="Okta, Inc.",
+    author_email="devex@okta.com",
+    url="https://github.com/okta/okta-sdk-python",
+    keywords=["OpenAPI", "OpenAPI-Generator", "Okta Admin Management"],
     install_requires=REQUIRES,
     packages=find_packages(exclude=["test", "tests"]),
     include_package_data=True,
-    {{#licenseInfo}}license="{{.}}",
-    {{/licenseInfo}}long_description_content_type='text/markdown',
-    long_description="""\
-    {{appDescription}}
-    """,  # noqa: E501
-    package_data={"{{{packageName}}}": ["py.typed"]},
+    license="Apache-2.0",
+    long_description_content_type="text/markdown",
+    long_description=open("LONG_DESCRIPTION.md").read(),
+    test_suite="tests",
+    package_data={"okta": ["py.typed"]},
+    python_requires=PYTHON_REQUIRES,
 )
-{{/-last}}
-{{/apis}}
-{{/apiInfo}}
