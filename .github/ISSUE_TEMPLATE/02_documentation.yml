@@ -1,0 +1,45 @@
+name: Report a Documentation Error
+description: Choose this option if you've found an error in the SDK documentation or contributor guides.
+labels:
+  - documentation
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Thank you for raising a documentation issue!
+
+        This form is meant to alert the maintainers to issues with the SDK documentation (such as docstrings, examples, or ReadMe), or the [contributors guide](https://github.com/okta/okta-sdk-python/blob/master/.github/CONTRIBUTING.md).
+
+        We ask that you first [search existing issues](https://github.com/okta/okta-sdk-python/labels/documentation) and [pull requests](https://github.com/okta/okta-sdk-python/pulls) to see if someone else may have already noticed the same issue or has already submitted a fix for it.
+
+  - type: textarea
+    id: documentation_link
+    attributes:
+      label: Documentation Link(s)
+      description: |
+        Please link to the affected page(s) or the location in the code with the incorrect documentation.
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: |
+        Please leave a brief description of the documentation issue, including what the documentation currently says and, if possible, what it should say.
+    validations:
+      required: true
+  - type: textarea
+    id: customer_info
+    attributes:
+      label: Customer Information
+      description: |
+        Please provide your organization name, and whether you are a paid customer or using the free developer edition.
+      value: |
+        Organization Name: <your-org-name>
+        Paid Customer: <yes/no>
+  - type: textarea
+    id: references
+    attributes:
+      label: References
+      description: |
+        Where possible, please supply links to Okta API documentation and/or other GitHub issues or pull requests that give additional context.

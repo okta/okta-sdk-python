@@ -78,7 +78,7 @@ setup(
     version="3.0.0",
     description="Python SDK for the Okta Management API",
     author="Okta, Inc.",
-    author_email="devex@okta.com",
+    author_email="developer-community-products@okta.com",
     url="https://github.com/okta/okta-sdk-python",
     keywords=["OpenAPI", "OpenAPI-Generator", "Okta Admin Management"],
     install_requires=REQUIRES,
