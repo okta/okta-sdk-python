@@ -1,6 +1,6 @@
 [<img src="https://global.discourse-cdn.com/oktadev/original/1X/0c6402653dfb70edc661d4976a43a46f33e5e919.png" align="right" width="256px"/>](https://devforum.okta.com/)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Support](https://img.shields.io/badge/support-Developer%20Forum-blue.svg)](devforum)
+[![Support](https://img.shields.io/badge/support-Developer%20Forum-blue.svg)](https://devforum.okta.com/)
 
 [![PyPI](https://img.shields.io/pypi/v/okta)](https://pypi.org/project/okta/)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/okta)
