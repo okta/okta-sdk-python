@@ -14,7 +14,7 @@ interactions:
       User-Agent:
       - okta-sdk-python/2.3.1 python/3.8.2 Darwin/20.6.0
     method: POST
-    uri: https://test.okta.com/api/v1/apps/?activate=True
+    uri: https://test.okta.com/api/v1/apps?activate=true
   response:
     body:
       string: '{"id":"0oa3rk3ioj9S6PkjL5d7","name":"okta_org2org","label":"AddOrg2OrgApp","status":"ACTIVE","lastUpdated":"2022-01-31T17:25:23.000Z","created":"2022-01-31T17:25:22.000Z","accessibility":{"selfService":false,"errorRedirectUrl":null,"loginRedirectUrl":null},"visibility":{"autoLaunch":false,"autoSubmitToolbar":false,"hide":{"iOS":false,"web":false},"appLinks":{"login":true}},"features":[],"signOnMode":"SAML_2_0","credentials":{"userNameTemplate":{"template":"${source.login}","type":"BUILT_IN"},"signing":{"kid":"bjRIM8_uFXKHLsfQjOnmQGThHXqUIPQC38Q3e3hAXiE"}},"settings":{"app":{"acsUrl":"https://example.okta.com/sso/saml2/exampleid","audRestriction":"https://www.okta.com/saml2/service-provider/exampleid","baseUrl":"https://example.okta.com"},"notifications":{"vpn":{"network":{"connection":"DISABLED"},"message":null,"helpUrl":null}},"notes":{"admin":null,"enduser":null},"signOn":{"defaultRelayState":null,"ssoAcsUrlOverride":null,"audienceOverride":null,"recipientOverride":null,"destinationOverride":null,"attributeStatements":[]}},"_links":{"help":{"href":"https://test-admin.okta.com/app/okta_org2org/0oa3rk3ioj9S6PkjL5d7/setup/help/SAML_2_0/external-doc","type":"text/html"},"metadata":{"href":"https://test.okta.com/api/v1/apps/0oa3rk3ioj9S6PkjL5d7/sso/saml/metadata","type":"application/xml"},"uploadLogo":{"href":"https://test.okta.com/api/v1/apps/0oa3rk3ioj9S6PkjL5d7/logo","hints":{"allow":["POST"]}},"appLinks":[{"name":"login","href":"https://test.okta.com/home/okta_org2org/0oa3rk3ioj9S6PkjL5d7/51975","type":"text/html"}],"groups":{"href":"https://test.okta.com/api/v1/apps/0oa3rk3ioj9S6PkjL5d7/groups"},"logo":[{"name":"medium","href":"https://ok12static.oktacdn.com/fs/bcg/4/gfs70bpm0D2EhQhCM5d6","type":"image/png"}],"users":{"href":"https://test.okta.com/api/v1/apps/0oa3rk3ioj9S6PkjL5d7/users"},"deactivate":{"href":"https://test.okta.com/api/v1/apps/0oa3rk3ioj9S6PkjL5d7/lifecycle/deactivate"}}}'
@@ -83,7 +83,7 @@ interactions:
     status:
       code: 200
       message: OK
-    url: https://test.okta.com//api/v1/apps/?activate=True
+    url: https://test.okta.com//api/v1/apps?activate=true
 - request:
     body: null
     headers:

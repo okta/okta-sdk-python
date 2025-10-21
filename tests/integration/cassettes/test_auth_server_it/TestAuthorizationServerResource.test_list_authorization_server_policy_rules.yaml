@@ -81,7 +81,7 @@ interactions:
 - request:
     body: '{"conditions": {"clients": {"include": ["ALL_CLIENTS"]}}, "description":
       "Test Policy", "name": "Test Policy", "priority": 1, "status": "ACTIVE", "type":
-      "OAUTH_AUTHORIZATION_POLICY"}'
+      "OKTA_SIGN_ON"}'
     headers:
       Accept:
       - application/json
@@ -96,7 +96,7 @@ interactions:
   response:
     body:
       string: '{"id":"00phosj2e6s9cqNM85d6","status":"ACTIVE","name":"Test Policy","description":"Test
-        Policy","priority":1,"system":false,"conditions":{"clients":{"include":["ALL_CLIENTS"]}},"created":"2021-04-02T18:19:56.000Z","lastUpdated":"2021-04-02T18:19:56.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6","hints":{"allow":["GET","PUT","DELETE"]}},"rules":{"href":"https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6/rules","hints":{"allow":["GET"]}},"deactivate":{"href":"https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6/lifecycle/deactivate","hints":{"allow":["POST"]}}},"type":"OAUTH_AUTHORIZATION_POLICY"}'
+        Policy","priority":1,"system":false,"conditions":{"clients":{"include":["ALL_CLIENTS"]}},"created":"2021-04-02T18:19:56.000Z","lastUpdated":"2021-04-02T18:19:56.000Z","_links":{"self":{"href":"https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6","hints":{"allow":["GET","PUT","DELETE"]}},"rules":{"href":"https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6/rules","hints":{"allow":["GET"]}},"deactivate":{"href":"https://test.okta.com/api/v1/authorizationServers/aushotpnzxzCXmFlR5d6/policies/00phosj2e6s9cqNM85d6/lifecycle/deactivate","hints":{"allow":["POST"]}}},"type":"OKTA_SIGN_ON"}'
     headers:
       Cache-Control:
       - no-cache, no-store

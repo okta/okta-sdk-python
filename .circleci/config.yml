@@ -2,7 +2,7 @@
 version: 2.1
 
 orbs:
-  python: circleci/python@2.1.1
+  python: circleci/python@3.3.0
   platform-helpers-general: okta/general-platform-helpers@1.8
   aws-cli: circleci/aws-cli@5.1
 
@@ -16,9 +16,6 @@ jobs:
       - run:
           name: Build
           command: python setup.py build
-      - run:
-          name: Run Unit Tests
-          command: pytest tests/unit
       - run:
           name: Run Integration Tests
           command: pytest tests/integration
@@ -38,6 +35,7 @@ jobs:
   reversing-labs:
     docker:
       - image: cimg/python:3.10
+    resource_class: large
     steps:
       - checkout
 

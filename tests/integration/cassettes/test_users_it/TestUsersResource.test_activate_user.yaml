@@ -11,7 +11,7 @@ interactions:
       User-Agent:
       - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
     method: POST
-    uri: https://test.okta.com/api/v1/users/?activate=False
+    uri: https://test.okta.com/api/v1/users?activate=false
   response:
     body:
       string: '{"id":"00usfhfealbkkXMo84x6","status":"STAGED","created":"2020-08-27T18:21:49.000Z","activated":null,"statusChanged":null,"lastLogin":null,"lastUpdated":"2020-08-27T18:21:49.000Z","passwordChanged":"2020-08-27T18:21:49.000Z","type":{"id":"otyc04qb2rUDcq2YA4x6"},"profile":{"firstName":"John","lastName":"Doe-Activate","mobilePhone":null,"secondEmail":null,"login":"John.Doe-Activate@example.com","email":"John.Doe-Activate@example.com"},"credentials":{"password":{},"emails":[{"value":"John.Doe-Activate@example.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"schema":{"href":"https://test.okta.com/api/v1/meta/schemas/user/oscc04qb2rUDcq2YA4x6"},"activate":{"href":"https://test.okta.com/api/v1/users/00usfhfealbkkXMo84x6/lifecycle/activate","method":"POST"},"self":{"href":"https://test.okta.com/api/v1/users/00usfhfealbkkXMo84x6"},"type":{"href":"https://test.okta.com/api/v1/meta/types/user/otyc04qb2rUDcq2YA4x6"}}}'
@@ -53,7 +53,7 @@ interactions:
     status:
       code: 200
       message: OK
-    url: https://test.okta.com/api/v1/users/?activate=False
+    url: https://test.okta.com/api/v1/users?activate=false
 - request:
     body: null
     headers:
@@ -66,7 +66,7 @@ interactions:
       User-Agent:
       - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
     method: POST
-    uri: https://test.okta.com/api/v1/users/00usfhfealbkkXMo84x6/lifecycle/activate/?sendEmail=False
+    uri: https://test.okta.com/api/v1/users/00usfhfealbkkXMo84x6/lifecycle/activate?sendEmail=false
   response:
     body:
       string: '{"activationUrl":"https://test.okta.com/welcome/U1uFQ4LZpbyyiMe7Tw_t","activationToken":"U1uFQ4LZpbyyiMe7Tw_t"}'
@@ -108,7 +108,7 @@ interactions:
     status:
       code: 200
       message: OK
-    url: https://test.okta.com/api/v1/users/00usfhfealbkkXMo84x6/lifecycle/activate/?sendEmail=False
+    url: https://test.okta.com/api/v1/users/00usfhfealbkkXMo84x6/lifecycle/activate?sendEmail=false
 - request:
     body: null
     headers:
@@ -121,7 +121,7 @@ interactions:
       User-Agent:
       - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
     method: GET
-    uri: https://test.okta.com/api/v1/users/?filter=status+eq+%22ACTIVE%22
+    uri: https://test.okta.com/api/v1/users?filter=status+eq+%22ACTIVE%22
   response:
     body:
       string: '[{"id":"00uc04qdrQsSHjsDO4x6","status":"ACTIVE","created":"2020-05-13T13:29:28.000Z","activated":null,"statusChanged":"2020-05-13T13:33:05.000Z","lastLogin":"2020-08-27T13:30:59.000Z","lastUpdated":"2020-05-13T13:33:05.000Z","passwordChanged":"2020-05-13T13:33:05.000Z","type":{"id":"otyc04qb2rUDcq2YA4x6"},"profile":{"firstName":"Justin","lastName":"Abrokwah","mobilePhone":null,"secondEmail":null,"login":"justin.abrokwah@okta.com","email":"justin.abrokwah@okta.com"},"credentials":{"password":{},"emails":[{"value":"justin.abrokwah@okta.com","status":"VERIFIED","type":"PRIMARY"}],"recovery_question":{"question":"What
@@ -167,7 +167,7 @@ interactions:
     status:
       code: 200
       message: OK
-    url: https://test.okta.com/api/v1/users/?filter=status+eq+%22ACTIVE%22
+    url: https://test.okta.com/api/v1/users?filter=status+eq+%22ACTIVE%22
 - request:
     body: null
     headers:
@@ -179,8 +179,8 @@ interactions:
       - application/json
       User-Agent:
       - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
-    method: DELETE
-    uri: https://test.okta.com/api/v1/users/00usfhfealbkkXMo84x6
+    method: POST
+    uri: https://test.okta.com/api/v1/users/00usfhfealbkkXMo84x6/lifecycle/deactivate
   response:
     body:
       string: ''

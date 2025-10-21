@@ -11,7 +11,7 @@ interactions:
       User-Agent:
       - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
     method: POST
-    uri: https://test.okta.com/api/v1/apps/?activate=False
+    uri: https://test.okta.com/api/v1/apps?activate=false
   response:
     body:
       string: '{"id":"0oasfaqszSry4qz7a4x6","name":"bookmark","label":"AddBookmarkApp","status":"INACTIVE","lastUpdated":"2020-08-27T18:14:01.000Z","created":"2020-08-27T18:14:01.000Z","accessibility":{"selfService":false,"errorRedirectUrl":null,"loginRedirectUrl":null},"visibility":{"autoSubmitToolbar":false,"hide":{"iOS":false,"web":false},"appLinks":{"login":true}},"features":[],"signOnMode":"BOOKMARK","credentials":{"userNameTemplate":{"template":"${source.login}","type":"BUILT_IN"},"signing":{}},"settings":{"app":{"requestIntegration":false,"url":"https://example.com/bookmark.htm"},"extendedProperties":null,"notifications":{"vpn":{"network":{"connection":"DISABLED"},"message":null,"helpUrl":null}}},"_links":{"appLinks":[{"name":"login","href":"https://test.okta.com/home/bookmark/0oasfaqszSry4qz7a4x6/2557","type":"text/html"}],"activate":{"href":"https://test.okta.com/api/v1/apps/0oasfaqszSry4qz7a4x6/lifecycle/activate"},"groups":{"href":"https://test.okta.com/api/v1/apps/0oasfaqszSry4qz7a4x6/groups"},"logo":[{"name":"medium","href":"https://ok11static.oktacdn.com/assets/img/logos/bookmark-app.b81c03e2607468e5b5f9c9351c99313e.png","type":"image/png"}],"users":{"href":"https://test.okta.com/api/v1/apps/0oasfaqszSry4qz7a4x6/users"}}}'
@@ -53,7 +53,7 @@ interactions:
     status:
       code: 200
       message: OK
-    url: https://test.okta.com/api/v1/apps/?activate=False
+    url: https://test.okta.com/api/v1/apps?activate=false
 - request:
     body: null
     headers:

@@ -1,11 +1,23 @@
-import os
+# The Okta software accompanied by this notice is provided pursuant to the following terms:
+# Copyright © 2025-Present, Okta, Inc.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
+# You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and limitations under the License.
+# coding: utf-8
+
 import logging
+import os
+
 import yaml
-from okta.constants import _GLOBAL_YAML_PATH, _LOCAL_YAML_PATH
 from flatdict import FlatDict
 
+from okta.constants import _GLOBAL_YAML_PATH, _LOCAL_YAML_PATH
 
-class ConfigSetter():
+
+class ConfigSetter:
     """
     This class sets up the configuration for the Okta Client
     """
@@ -14,35 +26,22 @@ class ConfigSetter():
     _OKTA = "OKTA"
     _DEFAULT_CONFIG = {
         "client": {
-            "authorizationMode": '',
-            "orgUrl": '',
-            "token": '',
-            "clientId": '',
-            "scopes": '',
-            "privateKey": '',
-            "userAgent": '',
-            "cache": {
-                "enabled": '',
-                "defaultTti": '',
-                "defaultTtl": ''
-            },
+            "authorizationMode": "",
+            "orgUrl": "",
+            "token": "",
+            "clientId": "",
+            "scopes": "",
+            "privateKey": "",
+            "userAgent": "",
+            "cache": {"enabled": "", "defaultTti": "", "defaultTtl": ""},
             "logging": {
-                "enabled": '',
+                "enabled": "",
             },
-            "proxy": {
-                "port": "",
-                "host": "",
-                "username": "",
-                "password": ""
-            },
-            "rateLimit": {
-                "maxRetries": ''
-            },
-            "oauthTokenRenewalOffset": ''
+            "proxy": {"port": "", "host": "", "username": "", "password": ""},
+            "rateLimit": {"maxRetries": ""},
+            "oauthTokenRenewalOffset": "",
         },
-        "testing": {
-            "testingDisableHttpsCheck": ''
-        }
+        "testing": {"testingDisableHttpsCheck": ""},
     }
 
     def __init__(self):
@@ -70,10 +69,10 @@ class ConfigSetter():
         with no value
         """
         # Flatten dictionary to account for nested dictionary
-        flat_current_config = FlatDict(config, delimiter='_')
+        flat_current_config = FlatDict(config, delimiter="_")
         # Iterate through keys and remove if value is still empty string
         for key in flat_current_config.keys():
-            if flat_current_config.get(key) == '':
+            if flat_current_config.get(key) == "":
                 del flat_current_config[key]
 
         return flat_current_config.as_dict()
@@ -86,37 +85,32 @@ class ConfigSetter():
         3. Checking for a local OKTA config YAML
         4. Checking for corresponding ENV variables
         """
+        # TODO: Check for the ordering of the config setter.
         # apply default config values to config
         self._apply_default_values()
-        # check if GLOBAL yaml exists, apply if true
-        if (os.path.exists(_GLOBAL_YAML_PATH)):
-            self._apply_yaml_config(_GLOBAL_YAML_PATH)
-        # check if LOCAL yaml exists, apply if true
-        if (os.path.exists(_LOCAL_YAML_PATH)):
-            self._apply_yaml_config(_LOCAL_YAML_PATH)
         # apply existing environment variables
         self._apply_env_config()
+        # check if GLOBAL yaml exists, apply if true
+        if os.path.exists(_GLOBAL_YAML_PATH):
+            self._apply_yaml_config(_GLOBAL_YAML_PATH)
+        # check if LOCAL yaml exists, apply if true
+        if os.path.exists(_LOCAL_YAML_PATH):
+            self._apply_yaml_config(_LOCAL_YAML_PATH)
 
     def _apply_default_values(self):
-        """Apply default values to default client configuration
-        """
+        """Apply default values to default client configuration"""
         # Set defaults
         self._config["client"]["authorizationMode"] = "SSWS"
         self._config["client"]["connectionTimeout"] = 30
         self._config["client"]["cache"] = {
             "enabled": False,
             "defaultTtl": 300,
-            "defaultTti": 300
+            "defaultTti": 300,
         }
-        self._config["client"]["logging"] = {
-            "enabled": False,
-            "logLevel": logging.INFO
-        }
+        self._config["client"]["logging"] = {"enabled": False, "logLevel": logging.INFO}
         self._config["client"]["userAgent"] = ""
         self._config["client"]["requestTimeout"] = 0
-        self._config["client"]["rateLimit"] = {
-            "maxRetries": 2
-        }
+        self._config["client"]["rateLimit"] = {"maxRetries": 2}
         self._config["client"]["oauthTokenRenewalOffset"] = 5
 
         self._config["testing"]["testingDisableHttpsCheck"] = False
@@ -130,17 +124,18 @@ class ConfigSetter():
         """
         # Update current configuration with new configuration
         # Flatten both dictionaries to account for nested dictionary values
-        flat_current_client = FlatDict(self._config['client'], delimiter='_')
-        flat_current_testing = FlatDict(self._config['testing'], delimiter='_')
+        flat_current_client = FlatDict(self._config["client"], delimiter="_")
+        flat_current_testing = FlatDict(self._config["testing"], delimiter="_")
 
-        flat_new_client = FlatDict(new_config.get('client', {}), delimiter='_')
-        flat_new_testing = FlatDict(
-            new_config.get('testing', {}), delimiter='_')
+        flat_new_client = FlatDict(new_config.get("client", {}), delimiter="_")
+        flat_new_testing = FlatDict(new_config.get("testing", {}), delimiter="_")
         flat_current_client.update(flat_new_client)
         flat_current_testing.update(flat_new_testing)
         # Update values in current config and unflatten
-        self._config = {'client': flat_current_client.as_dict(),
-                        'testing': flat_current_testing.as_dict()}
+        self._config = {
+            "client": flat_current_client.as_dict(),
+            "testing": flat_current_testing.as_dict(),
+        }
 
     def _apply_yaml_config(self, path: str):
         """This method applies a YAML configuration to the Okta Client Config
@@ -150,7 +145,7 @@ class ConfigSetter():
         """
         # Start with empty config
         config = {}
-        with open(path, 'r') as file:
+        with open(path, "r") as file:
             # Open file stream and attempt to load YAML
             config = yaml.load(file, Loader=yaml.SafeLoader)
         # Apply acquired config to configuration
@@ -163,11 +158,11 @@ class ConfigSetter():
         """
         # Flatten current config and join with underscores
         # (for environment variable format)
-        flattened_config = FlatDict(self._config, delimiter='_')
+        flattened_config = FlatDict(self._config, delimiter="_")
         flattened_keys = flattened_config.keys()
 
         # Create empty result config and populate
-        updated_config = FlatDict({}, delimiter='_')
+        updated_config = FlatDict({}, delimiter="_")
 
         # Go through keys and search for it in the environment vars
         # using the format described in the README
@@ -178,7 +173,7 @@ class ConfigSetter():
             if env_value is not None:
                 # If value is found, add to config
                 if "scopes" in env_key.lower():
-                    updated_config[key] = env_value.split(',')
+                    updated_config[key] = env_value.split(",")
                 else:
                     updated_config[key] = env_value
             # apply to current configuration

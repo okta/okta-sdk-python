@@ -1,0 +1,90 @@
+name: "Bug"
+labels: ["bug"]
+description: "For when something is there, but doesn't work how it should."
+body:
+  - type: textarea
+    id: community-note
+    attributes:
+      label: Community Note
+      description: Please keep this note for the community.
+      value: |
+        * Please vote on this issue by adding a 👍 [reaction](https://blog.github.com/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/) to the original issue to help the community and maintainers prioritize this request.
+        * Please do not leave _+1_ or _me too_ comments, they generate extra noise for issue followers and do not help prioritize the request.
+        * If you are interested in working on this issue or have submitted a pull request, please leave a comment.
+        Before submitting a bug report, we ask that you first [search existing issues](https://github.com/okta/okta-sdk-python/issues) and [pull requests](https://github.com/okta/okta-sdk-python/pulls) to see if someone else may have experienced the same issue or may have already submitted a fix for it.
+    validations:
+      required: true
+  - type: textarea
+    id: sdk-version
+    attributes:
+      label: Python Version & Okta SDK Version(s)
+      description: |
+        Please run `python --version` and `pip list okta` to show the Python and Okta SDK versions and paste the output here.
+        If you are not running the latest version of the SDK, please upgrade because your issue may have already been fixed.
+      value: |
+        Python vX.X.X
+        okta     X.X.X
+    validations:
+      required: true
+  - type: textarea
+    id: affected-code
+    attributes:
+      label: Affected Class/Method(s)
+      description: Please list the affected classes or methods. Use `okta.*` if all parts of the SDK are affected.
+    validations:
+      required: true
+  - type: textarea
+    id: customer_info
+    attributes:
+      label: Customer Information
+      description: |
+        Please provide your organization name, and whether you are a paid customer or using the free developer edition.
+      value: |
+        Organization Name: <your-org-name>
+        Paid Customer: <yes/no>
+  - type: textarea
+    id: code-snippet
+    attributes:
+      label: Code Snippet
+      description: |
+        Please provide a minimal, runnable code snippet that reproduces the bug. Use [markdown code blocks](https://help.github.com/articles/basic-writing-and-formatting-syntax/#quoting-code).
+      value: |
+        ```python
+        # Your code here
+        ```
+  - type: textarea
+    id: debug-output
+    attributes:
+      label: Debug Output / Traceback
+      description: |
+        Please provide a link to a GitHub Gist containing the complete traceback or any relevant debug output. Please **don't** paste the output in the issue; just paste a link to the Gist.
+    validations:
+      required: true
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected Behavior
+      description: What should have happened?
+    validations:
+      required: true
+  - type: textarea
+    id: actual-behavior
+    attributes:
+      label: Actual Behavior
+      description: What actually happened?
+    validations:
+      required: true
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Please list the steps required to reproduce the issue.
+      value: "1. Run the code snippet provided above."
+    validations:
+      required: true
+  - type: textarea
+    id: references
+    attributes:
+      label: References
+      description: |
+        Are there any other GitHub issues (open or closed) or pull requests that should be [linked](https://help.github.com/articles/basic-writing-and-formatting-syntax/#referencing-issues-and-pull-requests) here? Vendor documentation?

@@ -1,0 +1,663 @@
+interactions:
+- request:
+    body: '{"created": "2025-09-25T13:32:28.494908", "id": "dummy-id", "lastUpdated":
+      "2025-09-25T13:32:28.494915", "name": "Test Lifecycle Log Stream", "status":
+      "ACTIVE", "type": "aws_eventbridge", "_links": {"self": {"href": "/api/v1/logStreams/dummy",
+      "method": "GET"}}, "settings": {"accountId": "123456789012", "eventSourceName":
+      "p", "region": "us-west-1"}}'
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      Content-Type:
+      - application/json
+      User-Agent:
+      - OpenAPI-Generator/1.0.0/python
+    method: POST
+    uri: https://test.okta.com/api/v1/logStreams
+  response:
+    body:
+      string: '{"id":"0oaqd5t67ub7WW6SD1d7","type":"aws_eventbridge","name":"Test
+        Lifecycle Log Stream","lastUpdated":"2025-09-25T08:02:29.000Z","created":"2025-09-25T08:02:29.000Z","status":"ACTIVE","settings":{"accountId":"123456789012","eventSourceName":"p","region":"us-west-1"},"_links":{"self":{"href":"https://test.okta.com/api/v1/logStreams/0oaqd5t67ub7WW6SD1d7","method":"GET"},"deactivate":{"href":"https://test.okta.com/api/v1/logStreams/0oaqd5t67ub7WW6SD1d7/lifecycle/deactivate","method":"POST"}}}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 25 Sep 2025 08:02:29 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid="";Version=1;Path=/;Max-Age=0
+      - xids="";Version=1;Path=/;Max-Age=0
+      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - JSESSIONID=914B27D3CC010706723C8A8E07815752; Path=/; Secure; HttpOnly
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      accept-ch:
+      - Sec-CH-UA-Platform-Version
+      content-security-policy:
+      - 'default-src ''self'' node-sdk-oie.oktapreview.com *.oktacdn.com; connect-src
+        ''self'' node-sdk-oie.oktapreview.com node-sdk-oie-admin.oktapreview.com *.oktacdn.com
+        *.mixpanel.com *.mapbox.com node-sdk-oie.mtls.oktapreview.com *.authenticatorlocalprod.com:8769
+        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
+        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
+        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
+        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
+        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
+        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
+        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
+        node-sdk-oie.oktapreview.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
+        ''report-sample'' node-sdk-oie.oktapreview.com *.oktacdn.com; frame-src ''self''
+        node-sdk-oie.oktapreview.com node-sdk-oie-admin.oktapreview.com login.okta.com
+        *.vidyard.com com-okta-authenticator:; img-src ''self'' node-sdk-oie.oktapreview.com
+        *.oktacdn.com *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src
+        ''self'' node-sdk-oie.oktapreview.com data: *.oktacdn.com fonts.gstatic.com;
+        frame-ancestors ''self'''
+      p3p:
+      - CP="HONK"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-okta-request-id:
+      - 494493c030bfb3e962f3850dc0b4b66b
+      x-rate-limit-limit:
+      - '300'
+      x-rate-limit-remaining:
+      - '291'
+      x-rate-limit-reset:
+      - '1758787385'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      Content-Type:
+      - application/json
+      User-Agent:
+      - OpenAPI-Generator/1.0.0/python
+    method: GET
+    uri: https://test.okta.com/api/v1/logStreams/0oaqd5t67ub7WW6SD1d7
+  response:
+    body:
+      string: '{"id":"0oaqd5t67ub7WW6SD1d7","type":"aws_eventbridge","name":"Test
+        Lifecycle Log Stream","lastUpdated":"2025-09-25T08:02:29.000Z","created":"2025-09-25T08:02:29.000Z","status":"ACTIVE","settings":{"accountId":"123456789012","eventSourceName":"p","region":"us-west-1"},"_links":{"self":{"href":"https://test.okta.com/api/v1/logStreams/0oaqd5t67ub7WW6SD1d7","method":"GET"},"deactivate":{"href":"https://test.okta.com/api/v1/logStreams/0oaqd5t67ub7WW6SD1d7/lifecycle/deactivate","method":"POST"}}}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 25 Sep 2025 08:02:31 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid="";Version=1;Path=/;Max-Age=0
+      - xids="";Version=1;Path=/;Max-Age=0
+      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - JSESSIONID=4CFBA877D9B36CE55AF5BE1857E1A077; Path=/; Secure; HttpOnly
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      accept-ch:
+      - Sec-CH-UA-Platform-Version
+      content-security-policy:
+      - 'default-src ''self'' node-sdk-oie.oktapreview.com *.oktacdn.com; connect-src
+        ''self'' node-sdk-oie.oktapreview.com node-sdk-oie-admin.oktapreview.com *.oktacdn.com
+        *.mixpanel.com *.mapbox.com node-sdk-oie.mtls.oktapreview.com *.authenticatorlocalprod.com:8769
+        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
+        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
+        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
+        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
+        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
+        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
+        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
+        node-sdk-oie.oktapreview.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
+        ''report-sample'' node-sdk-oie.oktapreview.com *.oktacdn.com; frame-src ''self''
+        node-sdk-oie.oktapreview.com node-sdk-oie-admin.oktapreview.com login.okta.com
+        *.vidyard.com com-okta-authenticator:; img-src ''self'' node-sdk-oie.oktapreview.com
+        *.oktacdn.com *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src
+        ''self'' node-sdk-oie.oktapreview.com data: *.oktacdn.com fonts.gstatic.com;
+        frame-ancestors ''self'''
+      p3p:
+      - CP="HONK"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-okta-request-id:
+      - 8d21dfc23d259dc9ab76778531add730
+      x-rate-limit-limit:
+      - '300'
+      x-rate-limit-remaining:
+      - '290'
+      x-rate-limit-reset:
+      - '1758787385'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      Content-Type:
+      - application/json
+      User-Agent:
+      - OpenAPI-Generator/1.0.0/python
+    method: POST
+    uri: https://test.okta.com/api/v1/logStreams/0oaqd5t67ub7WW6SD1d7/lifecycle/activate
+  response:
+    body:
+      string: ''
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '0'
+      Date:
+      - Thu, 25 Sep 2025 08:02:32 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid="";Version=1;Path=/;Max-Age=0
+      - xids="";Version=1;Path=/;Max-Age=0
+      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - JSESSIONID=4475EAAC2BD75B3284DF8AA403978A71; Path=/; Secure; HttpOnly
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      accept-ch:
+      - Sec-CH-UA-Platform-Version
+      content-security-policy:
+      - 'default-src ''self'' node-sdk-oie.oktapreview.com *.oktacdn.com; connect-src
+        ''self'' node-sdk-oie.oktapreview.com node-sdk-oie-admin.oktapreview.com *.oktacdn.com
+        *.mixpanel.com *.mapbox.com node-sdk-oie.mtls.oktapreview.com *.authenticatorlocalprod.com:8769
+        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
+        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
+        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
+        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
+        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
+        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
+        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
+        node-sdk-oie.oktapreview.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
+        ''report-sample'' node-sdk-oie.oktapreview.com *.oktacdn.com; frame-src ''self''
+        node-sdk-oie.oktapreview.com node-sdk-oie-admin.oktapreview.com login.okta.com
+        *.vidyard.com com-okta-authenticator:; img-src ''self'' node-sdk-oie.oktapreview.com
+        *.oktacdn.com *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src
+        ''self'' node-sdk-oie.oktapreview.com data: *.oktacdn.com fonts.gstatic.com;
+        frame-ancestors ''self'''
+      p3p:
+      - CP="HONK"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-frame-options:
+      - SAMEORIGIN
+      x-okta-request-id:
+      - 4994b6625240fd772aba403ae64cf89c
+      x-rate-limit-limit:
+      - '300'
+      x-rate-limit-remaining:
+      - '289'
+      x-rate-limit-reset:
+      - '1758787385'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      Content-Type:
+      - application/json
+      User-Agent:
+      - OpenAPI-Generator/1.0.0/python
+    method: GET
+    uri: https://test.okta.com/api/v1/logStreams/0oaqd5t67ub7WW6SD1d7
+  response:
+    body:
+      string: '{"id":"0oaqd5t67ub7WW6SD1d7","type":"aws_eventbridge","name":"Test
+        Lifecycle Log Stream","lastUpdated":"2025-09-25T08:02:32.000Z","created":"2025-09-25T08:02:29.000Z","status":"ACTIVE","settings":{"accountId":"123456789012","eventSourceName":"p","region":"us-west-1"},"_links":{"self":{"href":"https://test.okta.com/api/v1/logStreams/0oaqd5t67ub7WW6SD1d7","method":"GET"},"deactivate":{"href":"https://test.okta.com/api/v1/logStreams/0oaqd5t67ub7WW6SD1d7/lifecycle/deactivate","method":"POST"}}}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 25 Sep 2025 08:02:33 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid="";Version=1;Path=/;Max-Age=0
+      - xids="";Version=1;Path=/;Max-Age=0
+      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - JSESSIONID=C88C16E882E2B127D04DEDE94A92EA96; Path=/; Secure; HttpOnly
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      accept-ch:
+      - Sec-CH-UA-Platform-Version
+      content-security-policy:
+      - 'default-src ''self'' node-sdk-oie.oktapreview.com *.oktacdn.com; connect-src
+        ''self'' node-sdk-oie.oktapreview.com node-sdk-oie-admin.oktapreview.com *.oktacdn.com
+        *.mixpanel.com *.mapbox.com node-sdk-oie.mtls.oktapreview.com *.authenticatorlocalprod.com:8769
+        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
+        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
+        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
+        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
+        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
+        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
+        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
+        node-sdk-oie.oktapreview.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
+        ''report-sample'' node-sdk-oie.oktapreview.com *.oktacdn.com; frame-src ''self''
+        node-sdk-oie.oktapreview.com node-sdk-oie-admin.oktapreview.com login.okta.com
+        *.vidyard.com com-okta-authenticator:; img-src ''self'' node-sdk-oie.oktapreview.com
+        *.oktacdn.com *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src
+        ''self'' node-sdk-oie.oktapreview.com data: *.oktacdn.com fonts.gstatic.com;
+        frame-ancestors ''self'''
+      p3p:
+      - CP="HONK"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-okta-request-id:
+      - 3a1c6e829863de8b2fa94c3e5e77435a
+      x-rate-limit-limit:
+      - '300'
+      x-rate-limit-remaining:
+      - '288'
+      x-rate-limit-reset:
+      - '1758787385'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      Content-Type:
+      - application/json
+      User-Agent:
+      - OpenAPI-Generator/1.0.0/python
+    method: POST
+    uri: https://test.okta.com/api/v1/logStreams/0oaqd5t67ub7WW6SD1d7/lifecycle/deactivate
+  response:
+    body:
+      string: ''
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '0'
+      Date:
+      - Thu, 25 Sep 2025 08:02:34 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid="";Version=1;Path=/;Max-Age=0
+      - xids="";Version=1;Path=/;Max-Age=0
+      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - JSESSIONID=EF15412C3D09750D31E0A6530CE85AA3; Path=/; Secure; HttpOnly
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      accept-ch:
+      - Sec-CH-UA-Platform-Version
+      content-security-policy:
+      - 'default-src ''self'' node-sdk-oie.oktapreview.com *.oktacdn.com; connect-src
+        ''self'' node-sdk-oie.oktapreview.com node-sdk-oie-admin.oktapreview.com *.oktacdn.com
+        *.mixpanel.com *.mapbox.com node-sdk-oie.mtls.oktapreview.com *.authenticatorlocalprod.com:8769
+        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
+        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
+        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
+        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
+        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
+        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
+        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
+        node-sdk-oie.oktapreview.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
+        ''report-sample'' node-sdk-oie.oktapreview.com *.oktacdn.com; frame-src ''self''
+        node-sdk-oie.oktapreview.com node-sdk-oie-admin.oktapreview.com login.okta.com
+        *.vidyard.com com-okta-authenticator:; img-src ''self'' node-sdk-oie.oktapreview.com
+        *.oktacdn.com *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src
+        ''self'' node-sdk-oie.oktapreview.com data: *.oktacdn.com fonts.gstatic.com;
+        frame-ancestors ''self'''
+      p3p:
+      - CP="HONK"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-frame-options:
+      - SAMEORIGIN
+      x-okta-request-id:
+      - d2daa559907c65a83f9a44faa7b27f6f
+      x-rate-limit-limit:
+      - '300'
+      x-rate-limit-remaining:
+      - '287'
+      x-rate-limit-reset:
+      - '1758787385'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      Content-Type:
+      - application/json
+      User-Agent:
+      - OpenAPI-Generator/1.0.0/python
+    method: GET
+    uri: https://test.okta.com/api/v1/logStreams/0oaqd5t67ub7WW6SD1d7
+  response:
+    body:
+      string: '{"id":"0oaqd5t67ub7WW6SD1d7","type":"aws_eventbridge","name":"Test
+        Lifecycle Log Stream","lastUpdated":"2025-09-25T08:02:34.000Z","created":"2025-09-25T08:02:29.000Z","status":"INACTIVE","settings":{"accountId":"123456789012","eventSourceName":"p","region":"us-west-1"},"_links":{"activate":{"href":"https://test.okta.com/api/v1/logStreams/0oaqd5t67ub7WW6SD1d7/lifecycle/activate","method":"POST"},"self":{"href":"https://test.okta.com/api/v1/logStreams/0oaqd5t67ub7WW6SD1d7","method":"GET"}}}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 25 Sep 2025 08:02:35 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid="";Version=1;Path=/;Max-Age=0
+      - xids="";Version=1;Path=/;Max-Age=0
+      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - JSESSIONID=0B8D89AFE01BF7F79774D988F9E265D9; Path=/; Secure; HttpOnly
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      accept-ch:
+      - Sec-CH-UA-Platform-Version
+      content-security-policy:
+      - 'default-src ''self'' node-sdk-oie.oktapreview.com *.oktacdn.com; connect-src
+        ''self'' node-sdk-oie.oktapreview.com node-sdk-oie-admin.oktapreview.com *.oktacdn.com
+        *.mixpanel.com *.mapbox.com node-sdk-oie.mtls.oktapreview.com *.authenticatorlocalprod.com:8769
+        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
+        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
+        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
+        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
+        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
+        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
+        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
+        node-sdk-oie.oktapreview.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
+        ''report-sample'' node-sdk-oie.oktapreview.com *.oktacdn.com; frame-src ''self''
+        node-sdk-oie.oktapreview.com node-sdk-oie-admin.oktapreview.com login.okta.com
+        *.vidyard.com com-okta-authenticator:; img-src ''self'' node-sdk-oie.oktapreview.com
+        *.oktacdn.com *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src
+        ''self'' node-sdk-oie.oktapreview.com data: *.oktacdn.com fonts.gstatic.com;
+        frame-ancestors ''self'''
+      p3p:
+      - CP="HONK"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-okta-request-id:
+      - e905cb4e8205108ffef1668704508f65
+      x-rate-limit-limit:
+      - '300'
+      x-rate-limit-remaining:
+      - '286'
+      x-rate-limit-reset:
+      - '1758787385'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      Content-Type:
+      - application/json
+      User-Agent:
+      - OpenAPI-Generator/1.0.0/python
+    method: DELETE
+    uri: https://test.okta.com/api/v1/logStreams/0oaqd5t67ub7WW6SD1d7
+  response:
+    body:
+      string: ''
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Connection:
+      - keep-alive
+      Date:
+      - Thu, 25 Sep 2025 08:02:37 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid="";Version=1;Path=/;Max-Age=0
+      - xids="";Version=1;Path=/;Max-Age=0
+      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - JSESSIONID=B1AB09D3FFA16E55CA6CF12713EDE8C7; Path=/; Secure; HttpOnly
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      accept-ch:
+      - Sec-CH-UA-Platform-Version
+      content-security-policy:
+      - 'default-src ''self'' node-sdk-oie.oktapreview.com *.oktacdn.com; connect-src
+        ''self'' node-sdk-oie.oktapreview.com node-sdk-oie-admin.oktapreview.com *.oktacdn.com
+        *.mixpanel.com *.mapbox.com node-sdk-oie.mtls.oktapreview.com *.authenticatorlocalprod.com:8769
+        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
+        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
+        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
+        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
+        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
+        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
+        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
+        node-sdk-oie.oktapreview.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
+        ''report-sample'' node-sdk-oie.oktapreview.com *.oktacdn.com; frame-src ''self''
+        node-sdk-oie.oktapreview.com node-sdk-oie-admin.oktapreview.com login.okta.com
+        *.vidyard.com com-okta-authenticator:; img-src ''self'' node-sdk-oie.oktapreview.com
+        *.oktacdn.com *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src
+        ''self'' node-sdk-oie.oktapreview.com data: *.oktacdn.com fonts.gstatic.com;
+        frame-ancestors ''self'''
+      p3p:
+      - CP="HONK"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-frame-options:
+      - SAMEORIGIN
+      x-okta-request-id:
+      - de338cb232bcc0bc66cc11bd3538e56e
+      x-rate-limit-limit:
+      - '300'
+      x-rate-limit-remaining:
+      - '285'
+      x-rate-limit-reset:
+      - '1758787385'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 204
+      message: No Content
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Authorization:
+      - SSWS myAPIToken
+      Content-Type:
+      - application/json
+      User-Agent:
+      - OpenAPI-Generator/1.0.0/python
+    method: GET
+    uri: https://test.okta.com/api/v1/logStreams/0oaqd5t67ub7WW6SD1d7
+  response:
+    body:
+      string: '{"errorCode":"E0000007","errorSummary":"Not found: Resource not found:
+        0oaqd5t67ub7WW6SD1d7 (AppInstance)","errorLink":"E0000007","errorId":"oaeg0Kji2-jT6yzpuX9CDMJsw","errorCauses":[]}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Connection:
+      - keep-alive
+      Content-Encoding:
+      - gzip
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 25 Sep 2025 08:02:38 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Set-Cookie:
+      - sid="";Version=1;Path=/;Max-Age=0
+      - xids="";Version=1;Path=/;Max-Age=0
+      - autolaunch_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - activate_ca_modal_triggered=""; Expires=Thu, 01 Jan 1970 00:00:10 GMT; Path=/
+      - JSESSIONID=D3A22CD58CF4810A4171E90CE3CF0D34; Path=/; Secure; HttpOnly
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      Transfer-Encoding:
+      - chunked
+      Vary:
+      - Accept-Encoding
+      accept-ch:
+      - Sec-CH-UA-Platform-Version
+      content-security-policy:
+      - 'default-src ''self'' node-sdk-oie.oktapreview.com *.oktacdn.com; connect-src
+        ''self'' node-sdk-oie.oktapreview.com node-sdk-oie-admin.oktapreview.com *.oktacdn.com
+        *.mixpanel.com *.mapbox.com node-sdk-oie.mtls.oktapreview.com *.authenticatorlocalprod.com:8769
+        http://localhost:8769 http://127.0.0.1:8769 *.authenticatorlocalprod.com:65111
+        http://localhost:65111 http://127.0.0.1:65111 *.authenticatorlocalprod.com:65121
+        http://localhost:65121 http://127.0.0.1:65121 *.authenticatorlocalprod.com:65131
+        http://localhost:65131 http://127.0.0.1:65131 *.authenticatorlocalprod.com:65141
+        http://localhost:65141 http://127.0.0.1:65141 *.authenticatorlocalprod.com:65151
+        http://localhost:65151 http://127.0.0.1:65151 https://oinmanager.okta.com
+        data: *.ingest.sentry.io; script-src ''unsafe-inline'' ''self'' ''report-sample''
+        node-sdk-oie.oktapreview.com *.oktacdn.com; style-src ''unsafe-inline'' ''self''
+        ''report-sample'' node-sdk-oie.oktapreview.com *.oktacdn.com; frame-src ''self''
+        node-sdk-oie.oktapreview.com node-sdk-oie-admin.oktapreview.com login.okta.com
+        *.vidyard.com com-okta-authenticator:; img-src ''self'' node-sdk-oie.oktapreview.com
+        *.oktacdn.com *.tiles.mapbox.com *.mapbox.com *.vidyard.com data: blob:; font-src
+        ''self'' node-sdk-oie.oktapreview.com data: *.oktacdn.com fonts.gstatic.com;
+        frame-ancestors ''self'''
+      p3p:
+      - CP="HONK"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-okta-request-id:
+      - e8f5f86417b88e9e4ca8e3a01187ef02
+      x-rate-limit-limit:
+      - '300'
+      x-rate-limit-remaining:
+      - '284'
+      x-rate-limit-reset:
+      - '1758787385'
+      x-xss-protection:
+      - '0'
+    status:
+      code: 404
+      message: Not Found
+version: 1

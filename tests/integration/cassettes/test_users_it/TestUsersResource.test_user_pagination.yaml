@@ -11,7 +11,7 @@ interactions:
       User-Agent:
       - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
     method: POST
-    uri: https://test.okta.com/api/v1/users/?activate=False
+    uri: https://test.okta.com/api/v1/users?activate=false
   response:
     body:
       string: '{"id":"00usfgmn9xhwtA6f74x6","status":"STAGED","created":"2020-08-27T18:19:47.000Z","activated":null,"statusChanged":null,"lastLogin":null,"lastUpdated":"2020-08-27T18:19:47.000Z","passwordChanged":"2020-08-27T18:19:47.000Z","type":{"id":"otyc04qb2rUDcq2YA4x6"},"profile":{"firstName":"John","lastName":"Doe-Paginate-1","mobilePhone":null,"secondEmail":null,"login":"John.Doe-Paginate-1@example.com","email":"John.Doe-Paginate-1@example.com"},"credentials":{"password":{},"emails":[{"value":"John.Doe-Paginate-1@example.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"schema":{"href":"https://test.okta.com/api/v1/meta/schemas/user/oscc04qb2rUDcq2YA4x6"},"activate":{"href":"https://test.okta.com/api/v1/users/00usfgmn9xhwtA6f74x6/lifecycle/activate","method":"POST"},"self":{"href":"https://test.okta.com/api/v1/users/00usfgmn9xhwtA6f74x6"},"type":{"href":"https://test.okta.com/api/v1/meta/types/user/otyc04qb2rUDcq2YA4x6"}}}'
@@ -53,7 +53,7 @@ interactions:
     status:
       code: 200
       message: OK
-    url: https://test.okta.com/api/v1/users/?activate=False
+    url: https://test.okta.com/api/v1/users?activate=false
 - request:
     body: null
     headers:
@@ -66,7 +66,7 @@ interactions:
       User-Agent:
       - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
     method: POST
-    uri: https://test.okta.com/api/v1/users/?activate=False
+    uri: https://test.okta.com/api/v1/users?activate=false
   response:
     body:
       string: '{"id":"00usfhfauFP74P6gt4x6","status":"STAGED","created":"2020-08-27T18:19:47.000Z","activated":null,"statusChanged":null,"lastLogin":null,"lastUpdated":"2020-08-27T18:19:47.000Z","passwordChanged":"2020-08-27T18:19:48.000Z","type":{"id":"otyc04qb2rUDcq2YA4x6"},"profile":{"firstName":"John","lastName":"Doe-Paginate-2","mobilePhone":null,"secondEmail":null,"login":"John.Doe-Paginate-2@example.com","email":"John.Doe-Paginate-2@example.com"},"credentials":{"password":{},"emails":[{"value":"John.Doe-Paginate-2@example.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"schema":{"href":"https://test.okta.com/api/v1/meta/schemas/user/oscc04qb2rUDcq2YA4x6"},"activate":{"href":"https://test.okta.com/api/v1/users/00usfhfauFP74P6gt4x6/lifecycle/activate","method":"POST"},"self":{"href":"https://test.okta.com/api/v1/users/00usfhfauFP74P6gt4x6"},"type":{"href":"https://test.okta.com/api/v1/meta/types/user/otyc04qb2rUDcq2YA4x6"}}}'
@@ -108,7 +108,7 @@ interactions:
     status:
       code: 200
       message: OK
-    url: https://test.okta.com/api/v1/users/?activate=False
+    url: https://test.okta.com/api/v1/users?activate=false
 - request:
     body: null
     headers:
@@ -121,7 +121,7 @@ interactions:
       User-Agent:
       - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
     method: GET
-    uri: https://test.okta.com/api/v1/users/?limit=1
+    uri: https://test.okta.com/api/v1/users?limit=1
   response:
     body:
       string: '[{"id":"00usfdsyqnIjEmHNm4x6","status":"STAGED","created":"2020-08-27T18:16:00.000Z","activated":null,"statusChanged":null,"lastLogin":null,"lastUpdated":"2020-08-27T18:16:00.000Z","passwordChanged":"2020-08-27T18:16:00.000Z","type":{"id":"otyc04qb2rUDcq2YA4x6"},"profile":{"firstName":"John","lastName":"Doe-Activate","mobilePhone":null,"secondEmail":null,"login":"John.Doe-Activate@example.com","email":"John.Doe-Activate@example.com"},"credentials":{"password":{},"emails":[{"value":"John.Doe-Activate@example.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"self":{"href":"https://test.okta.com/api/v1/users/00usfdsyqnIjEmHNm4x6"}}}]'
@@ -165,7 +165,7 @@ interactions:
     status:
       code: 200
       message: OK
-    url: https://test.okta.com/api/v1/users/?limit=1
+    url: https://test.okta.com/api/v1/users?limit=1
 - request:
     body: null
     headers:

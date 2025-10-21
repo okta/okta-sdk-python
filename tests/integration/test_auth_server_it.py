@@ -1,14 +1,29 @@
-import pytest
-from tests.mocks import MockOktaClient
-import okta.models as models
+# flake8: noqa
+# The Okta software accompanied by this notice is provided pursuant to the following terms:
+# Copyright © 2025-Present, Okta, Inc.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
+# You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS
+# IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and limitations under the License.
+# coding: utf-8
+
 from http import HTTPStatus
+
+import pytest
+
+import okta.models as models
+from okta import AuthorizationServerPolicy
 from okta.errors.okta_api_error import OktaAPIError
+from tests.mocks import MockOktaClient
 
 
 class TestAuthorizationServerResource:
     """
     Integration Tests for the Authorization Server Resource
     """
+
     SDK_PREFIX = "python_sdk"
 
     @pytest.mark.vcr()
@@ -21,15 +36,14 @@ class TestAuthorizationServerResource:
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_aaPeZ"
         TEST_DESC = "Test Auth Server"
         TEST_AUDS = ["api://default"]
-        auth_server_model = models.AuthorizationServer({
-            "name": TEST_NAME,
-            "description": TEST_DESC,
-            "audiences": TEST_AUDS
-        })
+        auth_server_model = models.AuthorizationServer(
+            **{"name": TEST_NAME, "description": TEST_DESC, "audiences": TEST_AUDS}
+        )
 
         try:
-            created_auth_server, _, err = await \
-                client.create_authorization_server(auth_server_model)
+            created_auth_server, _, err = await client.create_authorization_server(
+                auth_server_model
+            )
             assert err is None
             assert isinstance(created_auth_server, models.AuthorizationServer)
             assert created_auth_server.name == TEST_NAME
@@ -41,14 +55,16 @@ class TestAuthorizationServerResource:
             errors = []
             # Clean up
             try:
-                _, err = await client.deactivate_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.deactivate_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.delete_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -64,15 +80,14 @@ class TestAuthorizationServerResource:
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_aaPeZ"
         TEST_DESC = "Test Auth Server"
         TEST_AUDS = ["api://default"]
-        auth_server_model = models.AuthorizationServer({
-            "name": TEST_NAME,
-            "description": TEST_DESC,
-            "audiences": TEST_AUDS
-        })
+        auth_server_model = models.AuthorizationServer(
+            **{"name": TEST_NAME, "description": TEST_DESC, "audiences": TEST_AUDS}
+        )
 
         try:
-            created_auth_server, _, err = await \
-                client.create_authorization_server(auth_server_model)
+            created_auth_server, _, err = await client.create_authorization_server(
+                auth_server_model
+            )
             assert err is None
             assert isinstance(created_auth_server, models.AuthorizationServer)
             assert created_auth_server.name == TEST_NAME
@@ -87,21 +102,27 @@ class TestAuthorizationServerResource:
             assert auth_servers is not None
             assert len(auth_servers) > 0
             assert next(
-                (server for server in auth_servers
-                 if server.id == created_auth_server.id))
+                (
+                    server
+                    for server in auth_servers
+                    if server.id == created_auth_server.id
+                )
+            )
 
         finally:
             errors = []
             # Clean up
             try:
-                _, err = await client.deactivate_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.deactivate_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.delete_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -117,15 +138,14 @@ class TestAuthorizationServerResource:
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_aaPeZ"
         TEST_DESC = "Test Auth Server"
         TEST_AUDS = ["api://default"]
-        auth_server_model = models.AuthorizationServer({
-            "name": TEST_NAME,
-            "description": TEST_DESC,
-            "audiences": TEST_AUDS
-        })
+        auth_server_model = models.AuthorizationServer(
+            **{"name": TEST_NAME, "description": TEST_DESC, "audiences": TEST_AUDS}
+        )
 
         try:
-            created_auth_server, _, err = await \
-                client.create_authorization_server(auth_server_model)
+            created_auth_server, _, err = await client.create_authorization_server(
+                auth_server_model
+            )
             assert err is None
             assert isinstance(created_auth_server, models.AuthorizationServer)
             assert created_auth_server.name == TEST_NAME
@@ -134,28 +154,28 @@ class TestAuthorizationServerResource:
             assert created_auth_server.audiences[0] == TEST_AUDS[0]
 
             # Get Auth Server
-            retrieved_auth_server, _, err = await\
-                client.get_authorization_server(created_auth_server.id)
-            assert err is None
-            assert retrieved_auth_server.id ==\
+            retrieved_auth_server, _, err = await client.get_authorization_server(
                 created_auth_server.id
-            assert retrieved_auth_server.name ==\
-                created_auth_server.name
-            assert retrieved_auth_server.description ==\
-                created_auth_server.description
+            )
+            assert err is None
+            assert retrieved_auth_server.id == created_auth_server.id
+            assert retrieved_auth_server.name == created_auth_server.name
+            assert retrieved_auth_server.description == created_auth_server.description
 
         finally:
             errors = []
             # Clean up
             try:
-                _, err = await client.deactivate_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.deactivate_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.delete_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -171,36 +191,35 @@ class TestAuthorizationServerResource:
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abPeZ"
         TEST_DESC = "Test Auth Server"
         TEST_AUDS = ["api://default"]
-        auth_server_model = models.AuthorizationServer({
-            "name": TEST_NAME,
-            "description": TEST_DESC,
-            "audiences": TEST_AUDS
-        })
+        auth_server_model = models.AuthorizationServer(
+            **{"name": TEST_NAME, "description": TEST_DESC, "audiences": TEST_AUDS}
+        )
 
         try:
-            created_auth_server, _, err = await \
-                client.create_authorization_server(auth_server_model)
+            created_auth_server, _, err = await client.create_authorization_server(
+                auth_server_model
+            )
             assert err is None
             assert isinstance(created_auth_server, models.AuthorizationServer)
             assert created_auth_server.name == TEST_NAME
             assert created_auth_server.description == TEST_DESC
             assert created_auth_server.audiences == TEST_AUDS
-            assert created_auth_server.audiences[0] ==\
-                TEST_AUDS[0]
+            assert created_auth_server.audiences[0] == TEST_AUDS[0]
 
             # Update
             UPDATED_DESC = f"{TEST_DESC}-Updated"
             created_auth_server.description = UPDATED_DESC
-            updated_auth_server, _, err = await client.update_authorization_server(
-                created_auth_server.id,
-                created_auth_server)
+            updated_auth_server, _, err = await client.replace_authorization_server(
+                created_auth_server.id, created_auth_server
+            )
             assert err is None
             assert updated_auth_server.description == UPDATED_DESC
             assert updated_auth_server.id == created_auth_server.id
 
             # Get Auth Server
-            retrieved_server, _, err = await\
-                client.get_authorization_server(created_auth_server.id)
+            retrieved_server, _, err = await client.get_authorization_server(
+                created_auth_server.id
+            )
             assert err is None
             assert retrieved_server.id == updated_auth_server.id
             assert retrieved_server.name == updated_auth_server.name
@@ -210,14 +229,16 @@ class TestAuthorizationServerResource:
             errors = []
             # Clean up
             try:
-                _, err = await client.deactivate_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.deactivate_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.delete_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -233,15 +254,14 @@ class TestAuthorizationServerResource:
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abCeZ"
         TEST_DESC = "Test Auth Server"
         TEST_AUDS = ["api://default"]
-        auth_server_model = models.AuthorizationServer({
-            "name": TEST_NAME,
-            "description": TEST_DESC,
-            "audiences": TEST_AUDS
-        })
+        auth_server_model = models.AuthorizationServer(
+            **{"name": TEST_NAME, "description": TEST_DESC, "audiences": TEST_AUDS}
+        )
 
         try:
-            created_auth_server, _, err = await \
-                client.create_authorization_server(auth_server_model)
+            created_auth_server, _, err = await client.create_authorization_server(
+                auth_server_model
+            )
             assert err is None
             assert isinstance(created_auth_server, models.AuthorizationServer)
             assert created_auth_server.name == TEST_NAME
@@ -250,46 +270,51 @@ class TestAuthorizationServerResource:
             assert created_auth_server.audiences[0] == TEST_AUDS[0]
 
             # Get Auth Server
-            retrieved_auth_server, _, err = await\
-                client.get_authorization_server(created_auth_server.id)
+            retrieved_auth_server, _, err = await client.get_authorization_server(
+                created_auth_server.id
+            )
             assert err is None
             assert retrieved_auth_server.id == created_auth_server.id
             assert retrieved_auth_server.status == "ACTIVE"
 
             # DeActivate Auth server
-            _, err = await client.deactivate_authorization_server(
-                created_auth_server.id)
+            _, _, err = await client.deactivate_authorization_server(
+                created_auth_server.id
+            )
             assert err is None
 
             # Get Auth Server
-            retrieved_auth_server, _, err = await\
-                client.get_authorization_server(created_auth_server.id)
+            retrieved_auth_server, _, err = await client.get_authorization_server(
+                created_auth_server.id
+            )
             assert err is None
             assert retrieved_auth_server.id == created_auth_server.id
             assert retrieved_auth_server.status == "INACTIVE"
 
             # Delete Auth server
-            _, err = await client.delete_authorization_server(
-                created_auth_server.id)
+            _, _, err = await client.delete_authorization_server(created_auth_server.id)
             assert err is None
 
             # Get Auth Server
-            retrieved_auth_server, resp, err = await\
-                client.get_authorization_server(created_auth_server.id)
+            retrieved_auth_server, resp, err = await client.get_authorization_server(
+                created_auth_server.id
+            )
             assert err is not None
             assert isinstance(err, OktaAPIError)
-            assert resp.get_status() == HTTPStatus.NOT_FOUND
+            assert resp.status == HTTPStatus.NOT_FOUND
 
         finally:
             # Clean up if auth server wasn't deleted during test
             try:
-                _, err = await client.deactivate_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.deactivate_authorization_server(
+                    created_auth_server.id
+                )
             except Exception:
                 pass
             try:
-                _, err = await client.delete_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.delete_authorization_server(
+                    created_auth_server.id
+                )
             except Exception:
                 pass
 
@@ -303,15 +328,14 @@ class TestAuthorizationServerResource:
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abCeZ"
         TEST_DESC = "Test Auth Server"
         TEST_AUDS = ["api://default"]
-        auth_server_model = models.AuthorizationServer({
-            "name": TEST_NAME,
-            "description": TEST_DESC,
-            "audiences": TEST_AUDS
-        })
+        auth_server_model = models.AuthorizationServer(
+            **{"name": TEST_NAME, "description": TEST_DESC, "audiences": TEST_AUDS}
+        )
 
         try:
-            created_auth_server, _, err = await \
-                client.create_authorization_server(auth_server_model)
+            created_auth_server, _, err = await client.create_authorization_server(
+                auth_server_model
+            )
             assert err is None
             assert isinstance(created_auth_server, models.AuthorizationServer)
             assert created_auth_server.name == TEST_NAME
@@ -320,32 +344,37 @@ class TestAuthorizationServerResource:
             assert created_auth_server.audiences[0] == TEST_AUDS[0]
 
             # Get Auth Server
-            retrieved_auth_server, _, err = await\
-                client.get_authorization_server(created_auth_server.id)
+            retrieved_auth_server, _, err = await client.get_authorization_server(
+                created_auth_server.id
+            )
             assert err is None
             assert retrieved_auth_server.id == created_auth_server.id
             assert retrieved_auth_server.status == "ACTIVE"
 
             # DeActivate Auth server
-            _, err = await client.deactivate_authorization_server(
-                created_auth_server.id)
+            _, _, err = await client.deactivate_authorization_server(
+                created_auth_server.id
+            )
             assert err is None
 
             # Get Auth Server
-            retrieved_auth_server, _, err = await\
-                client.get_authorization_server(created_auth_server.id)
+            retrieved_auth_server, _, err = await client.get_authorization_server(
+                created_auth_server.id
+            )
             assert err is None
             assert retrieved_auth_server.id == created_auth_server.id
             assert retrieved_auth_server.status == "INACTIVE"
 
             # Activate Auth server
-            _, err = await client.activate_authorization_server(
-                created_auth_server.id)
+            _, _, err = await client.activate_authorization_server(
+                created_auth_server.id
+            )
             assert err is None
 
             # Get Auth Server
-            retrieved_auth_server, _, err = await\
-                client.get_authorization_server(created_auth_server.id)
+            retrieved_auth_server, _, err = await client.get_authorization_server(
+                created_auth_server.id
+            )
             assert err is None
             assert retrieved_auth_server.id == created_auth_server.id
             assert retrieved_auth_server.status == "ACTIVE"
@@ -354,14 +383,16 @@ class TestAuthorizationServerResource:
             errors = []
             # Clean up
             try:
-                _, err = await client.deactivate_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.deactivate_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.delete_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -377,15 +408,14 @@ class TestAuthorizationServerResource:
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abDeZ"
         TEST_DESC = "Test Auth Server"
         TEST_AUDS = ["api://default"]
-        auth_server_model = models.AuthorizationServer({
-            "name": TEST_NAME,
-            "description": TEST_DESC,
-            "audiences": TEST_AUDS
-        })
+        auth_server_model = models.AuthorizationServer(
+            **{"name": TEST_NAME, "description": TEST_DESC, "audiences": TEST_AUDS}
+        )
 
         try:
-            created_auth_server, _, err = await \
-                client.create_authorization_server(auth_server_model)
+            created_auth_server, _, err = await client.create_authorization_server(
+                auth_server_model
+            )
             assert err is None
             assert isinstance(created_auth_server, models.AuthorizationServer)
             assert created_auth_server.name == TEST_NAME
@@ -394,30 +424,33 @@ class TestAuthorizationServerResource:
             assert created_auth_server.audiences[0] == TEST_AUDS[0]
 
             # Create Policy
-            POLICY_TYPE = models.PolicyType.OAUTH_AUTHORIZATION_POLICY
+            POLICY_TYPE = models.PolicyType.OKTA_SIGN_ON.value
             POLICY_STATUS = "ACTIVE"
             POLICY_NAME = "Test Policy"
             POLICY_DESC = "Test Policy"
             POLICY_PRIORITY = 1
-            POLICY_CONDITIONS = models.PolicyRuleConditions({
-                "clients": models.ClientPolicyCondition({
-                    "include": ["ALL_CLIENTS"]
-                })
-            })
+            POLICY_CONDITIONS = models.PolicyRuleConditions(
+                **{
+                    "clients": models.ClientPolicyCondition(
+                        **{"include": ["ALL_CLIENTS"]}
+                    )
+                }
+            )
 
-            policy_model = models.Policy({
-                "type": POLICY_TYPE,
-                "status": POLICY_STATUS,
-                "name": POLICY_NAME,
-                "description": POLICY_DESC,
-                "priority": POLICY_PRIORITY,
-                "conditions": POLICY_CONDITIONS
-            })
+            policy_model = models.AuthorizationServerPolicy(
+                **{
+                    "type": POLICY_TYPE,
+                    "status": POLICY_STATUS,
+                    "name": POLICY_NAME,
+                    "description": POLICY_DESC,
+                    "priority": POLICY_PRIORITY,
+                    "conditions": POLICY_CONDITIONS,
+                }
+            )
 
-            created_policy, _, err = await\
-                client.create_authorization_server_policy(
-                    created_auth_server.id, policy_model
-                )
+            created_policy, _, err = await client.create_authorization_server_policy(
+                created_auth_server.id, policy_model
+            )
             assert err is None
 
             # Get Policies
@@ -426,11 +459,10 @@ class TestAuthorizationServerResource:
             )
             assert err is None
             assert len(policies) > 0
-            assert next((plcy for plcy in policies
-                         if plcy.id == created_policy.id))
+            assert next((plcy for plcy in policies if plcy.id == created_policy.id))
 
             # Delete Policy
-            _, err = await client.delete_authorization_server_policy(
+            _, _, err = await client.delete_authorization_server_policy(
                 created_auth_server.id, created_policy.id
             )
             assert err is None
@@ -439,14 +471,16 @@ class TestAuthorizationServerResource:
             errors = []
             # Clean up
             try:
-                _, err = await client.deactivate_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.deactivate_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.delete_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -462,15 +496,14 @@ class TestAuthorizationServerResource:
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abDfZ"
         TEST_DESC = "Test Auth Server"
         TEST_AUDS = ["api://default"]
-        auth_server_model = models.AuthorizationServer({
-            "name": TEST_NAME,
-            "description": TEST_DESC,
-            "audiences": TEST_AUDS
-        })
+        auth_server_model = models.AuthorizationServer(
+            **{"name": TEST_NAME, "description": TEST_DESC, "audiences": TEST_AUDS}
+        )
 
         try:
-            created_auth_server, _, err = await \
-                client.create_authorization_server(auth_server_model)
+            created_auth_server, _, err = await client.create_authorization_server(
+                auth_server_model
+            )
             assert err is None
             assert isinstance(created_auth_server, models.AuthorizationServer)
             assert created_auth_server.name == TEST_NAME
@@ -479,30 +512,42 @@ class TestAuthorizationServerResource:
             assert created_auth_server.audiences[0] == TEST_AUDS[0]
 
             # Create Policy
-            POLICY_TYPE = models.PolicyType.OAUTH_AUTHORIZATION_POLICY
+            POLICY_TYPE = models.PolicyType.OKTA_SIGN_ON.value
             POLICY_STATUS = "ACTIVE"
             POLICY_NAME = "Test Policy"
             POLICY_DESC = "Test Policy"
             POLICY_PRIORITY = 1
-            POLICY_CONDITIONS = models.PolicyRuleConditions({
-                "clients": models.ClientPolicyCondition({
-                    "include": ["ALL_CLIENTS"]
-                })
-            })
+            POLICY_CONDITIONS = models.PolicyRuleConditions(
+                **{
+                    "clients": models.ClientPolicyCondition(
+                        **{"include": ["ALL_CLIENTS"]}
+                    )
+                }
+            )
 
-            policy_model = models.Policy({
-                "type": POLICY_TYPE,
-                "status": POLICY_STATUS,
-                "name": POLICY_NAME,
-                "description": POLICY_DESC,
-                "priority": POLICY_PRIORITY,
-                "conditions": POLICY_CONDITIONS
-            })
-
-            created_policy, _, err = await\
-                client.create_authorization_server_policy(
-                    created_auth_server.id, policy_model
-                )
+            policy_model = models.Policy(
+                **{
+                    "type": POLICY_TYPE,
+                    "status": POLICY_STATUS,
+                    "name": POLICY_NAME,
+                    "description": POLICY_DESC,
+                    "priority": POLICY_PRIORITY,
+                    "conditions": POLICY_CONDITIONS,
+                }
+            )
+            policy_model = AuthorizationServerPolicy(
+                **{
+                    "type": "OKTA_SIGN_ON",
+                    "status": POLICY_STATUS,
+                    "name": POLICY_NAME,
+                    "description": POLICY_DESC,
+                    "priority": POLICY_PRIORITY,
+                    "conditions": POLICY_CONDITIONS,
+                }
+            )
+            created_policy, _, err = await client.create_authorization_server_policy(
+                created_auth_server.id, policy_model
+            )
             assert err is None
 
             # Get Policy
@@ -518,7 +563,7 @@ class TestAuthorizationServerResource:
             errors = []
             # Clean up
             try:
-                _, err = await client.delete_authorization_server_policy(
+                _, _, err = await client.delete_authorization_server_policy(
                     created_auth_server.id, created_policy.id
                 )
                 assert err is None
@@ -526,14 +571,16 @@ class TestAuthorizationServerResource:
                 errors.append(exc)
 
             try:
-                _, err = await client.deactivate_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.deactivate_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.delete_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -549,15 +596,14 @@ class TestAuthorizationServerResource:
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abDfZ"
         TEST_DESC = "Test Auth Server"
         TEST_AUDS = ["api://default"]
-        auth_server_model = models.AuthorizationServer({
-            "name": TEST_NAME,
-            "description": TEST_DESC,
-            "audiences": TEST_AUDS
-        })
+        auth_server_model = models.AuthorizationServer(
+            **{"name": TEST_NAME, "description": TEST_DESC, "audiences": TEST_AUDS}
+        )
 
         try:
-            created_auth_server, _, err = await \
-                client.create_authorization_server(auth_server_model)
+            created_auth_server, _, err = await client.create_authorization_server(
+                auth_server_model
+            )
             assert err is None
             assert isinstance(created_auth_server, models.AuthorizationServer)
             assert created_auth_server.name == TEST_NAME
@@ -566,30 +612,33 @@ class TestAuthorizationServerResource:
             assert created_auth_server.audiences[0] == TEST_AUDS[0]
 
             # Create Policy
-            POLICY_TYPE = models.PolicyType.OAUTH_AUTHORIZATION_POLICY
+            POLICY_TYPE = models.PolicyType.OKTA_SIGN_ON.value
             POLICY_STATUS = "ACTIVE"
             POLICY_NAME = "Test Policy"
             POLICY_DESC = "Test Policy"
             POLICY_PRIORITY = 1
-            POLICY_CONDITIONS = models.PolicyRuleConditions({
-                "clients": models.ClientPolicyCondition({
-                    "include": ["ALL_CLIENTS"]
-                })
-            })
+            POLICY_CONDITIONS = models.PolicyRuleConditions(
+                **{
+                    "clients": models.ClientPolicyCondition(
+                        **{"include": ["ALL_CLIENTS"]}
+                    )
+                }
+            )
 
-            policy_model = models.Policy({
-                "type": POLICY_TYPE,
-                "status": POLICY_STATUS,
-                "name": POLICY_NAME,
-                "description": POLICY_DESC,
-                "priority": POLICY_PRIORITY,
-                "conditions": POLICY_CONDITIONS
-            })
+            policy_model = models.AuthorizationServerPolicy(
+                **{
+                    "type": POLICY_TYPE,
+                    "status": POLICY_STATUS,
+                    "name": POLICY_NAME,
+                    "description": POLICY_DESC,
+                    "priority": POLICY_PRIORITY,
+                    "conditions": POLICY_CONDITIONS,
+                }
+            )
 
-            created_policy, _, err = await\
-                client.create_authorization_server_policy(
-                    created_auth_server.id, policy_model
-                )
+            created_policy, _, err = await client.create_authorization_server_policy(
+                created_auth_server.id, policy_model
+            )
             assert err is None
 
             # Update policy
@@ -598,10 +647,11 @@ class TestAuthorizationServerResource:
             created_policy.name = UPDATED_NAME
             created_policy.description = UPDATED_DESC
 
-            updated_auth_server_policy, _, err = await\
-                client.update_authorization_server_policy(
+            updated_auth_server_policy, _, err = (
+                await client.replace_authorization_server_policy(
                     created_auth_server.id, created_policy.id, created_policy
                 )
+            )
             assert err is None
             assert updated_auth_server_policy.name == UPDATED_NAME
             assert updated_auth_server_policy.description == UPDATED_DESC
@@ -610,7 +660,7 @@ class TestAuthorizationServerResource:
             errors = []
             # Clean up
             try:
-                _, err = await client.delete_authorization_server_policy(
+                _, _, err = await client.delete_authorization_server_policy(
                     created_auth_server.id, created_policy.id
                 )
                 assert err is None
@@ -618,14 +668,16 @@ class TestAuthorizationServerResource:
                 errors.append(exc)
 
             try:
-                _, err = await client.deactivate_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.deactivate_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.delete_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -641,15 +693,14 @@ class TestAuthorizationServerResource:
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abDfZ"
         TEST_DESC = "Test Auth Server"
         TEST_AUDS = ["api://default"]
-        auth_server_model = models.AuthorizationServer({
-            "name": TEST_NAME,
-            "description": TEST_DESC,
-            "audiences": TEST_AUDS
-        })
+        auth_server_model = models.AuthorizationServer(
+            **{"name": TEST_NAME, "description": TEST_DESC, "audiences": TEST_AUDS}
+        )
 
         try:
-            created_auth_server, _, err = await \
-                client.create_authorization_server(auth_server_model)
+            created_auth_server, _, err = await client.create_authorization_server(
+                auth_server_model
+            )
             assert err is None
             assert isinstance(created_auth_server, models.AuthorizationServer)
             assert created_auth_server.name == TEST_NAME
@@ -658,37 +709,39 @@ class TestAuthorizationServerResource:
             assert created_auth_server.audiences[0] == TEST_AUDS[0]
 
             # Create Policy
-            POLICY_TYPE = models.PolicyType.OAUTH_AUTHORIZATION_POLICY
+            POLICY_TYPE = models.PolicyType.OKTA_SIGN_ON.value
             POLICY_STATUS = "ACTIVE"
             POLICY_NAME = "Test Policy"
             POLICY_DESC = "Test Policy"
             POLICY_PRIORITY = 1
-            POLICY_CONDITIONS = models.PolicyRuleConditions({
-                "clients": models.ClientPolicyCondition({
-                    "include": ["ALL_CLIENTS"]
-                })
-            })
+            POLICY_CONDITIONS = models.PolicyRuleConditions(
+                **{
+                    "clients": models.ClientPolicyCondition(
+                        **{"include": ["ALL_CLIENTS"]}
+                    )
+                }
+            )
 
-            policy_model = models.Policy({
-                "type": POLICY_TYPE,
-                "status": POLICY_STATUS,
-                "name": POLICY_NAME,
-                "description": POLICY_DESC,
-                "priority": POLICY_PRIORITY,
-                "conditions": POLICY_CONDITIONS
-            })
+            policy_model = models.AuthorizationServerPolicy(
+                **{
+                    "type": POLICY_TYPE,
+                    "status": POLICY_STATUS,
+                    "name": POLICY_NAME,
+                    "description": POLICY_DESC,
+                    "priority": POLICY_PRIORITY,
+                    "conditions": POLICY_CONDITIONS,
+                }
+            )
 
-            created_policy, _, err = await\
-                client.create_authorization_server_policy(
-                    created_auth_server.id, policy_model
-                )
+            created_policy, _, err = await client.create_authorization_server_policy(
+                created_auth_server.id, policy_model
+            )
             assert err is None
 
             # Get Policy
-            found_policy, _, err = await\
-                client.get_authorization_server_policy(
-                    created_auth_server.id, created_policy.id
-                )
+            found_policy, _, err = await client.get_authorization_server_policy(
+                created_auth_server.id, created_policy.id
+            )
             assert err is None
             assert found_policy is not None
             assert found_policy.id == created_policy.id
@@ -696,40 +749,41 @@ class TestAuthorizationServerResource:
             assert found_policy.description == created_policy.description
 
             # Delete Policy
-            _, err = await client.delete_authorization_server_policy(
+            _, _, err = await client.delete_authorization_server_policy(
                 created_auth_server.id, created_policy.id
             )
             assert err is None
 
             # Get Policy
-            found_policy, resp, err = await\
-                client.get_authorization_server_policy(
-                    created_auth_server.id, created_policy.id
-                )
+            found_policy, resp, err = await client.get_authorization_server_policy(
+                created_auth_server.id, created_policy.id
+            )
             assert err is not None
             assert isinstance(err, OktaAPIError)
-            assert resp.get_status() == HTTPStatus.NOT_FOUND
+            assert resp.status == HTTPStatus.NOT_FOUND
             assert found_policy is None
 
         finally:
             errors = []
             # Clean up
             try:
-                _, err = await client.delete_authorization_server_policy(
+                _, _, err = await client.delete_authorization_server_policy(
                     created_auth_server.id, created_policy.id
                 )
             except Exception:
                 pass
 
             try:
-                _, err = await client.deactivate_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.deactivate_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.delete_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -745,15 +799,14 @@ class TestAuthorizationServerResource:
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abDfZ"
         TEST_DESC = "Test Auth Server"
         TEST_AUDS = ["api://default"]
-        auth_server_model = models.AuthorizationServer({
-            "name": TEST_NAME,
-            "description": TEST_DESC,
-            "audiences": TEST_AUDS
-        })
+        auth_server_model = models.AuthorizationServer(
+            **{"name": TEST_NAME, "description": TEST_DESC, "audiences": TEST_AUDS}
+        )
 
         try:
-            created_auth_server, _, err = await \
-                client.create_authorization_server(auth_server_model)
+            created_auth_server, _, err = await client.create_authorization_server(
+                auth_server_model
+            )
             assert err is None
             assert isinstance(created_auth_server, models.AuthorizationServer)
             assert created_auth_server.name == TEST_NAME
@@ -763,11 +816,9 @@ class TestAuthorizationServerResource:
 
             # Create Oauth Scope
             SCOPE_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}:abDGz"
-            scope_obj = models.OAuth2Scope({
-                "name": SCOPE_NAME
-            })
+            scope_obj = models.OAuth2Scope(**{"name": SCOPE_NAME})
 
-            oauth_scope, _, err = await client.create_o_auth_2_scope(
+            oauth_scope, _, err = await client.create_o_auth2_scope(
                 created_auth_server.id, scope_obj
             )
             assert err is None
@@ -775,7 +826,7 @@ class TestAuthorizationServerResource:
             assert oauth_scope.name == scope_obj.name
 
             # Get Oauth Scope
-            found_oauth_scope, _, err = await client.get_o_auth_2_scope(
+            found_oauth_scope, _, err = await client.get_o_auth2_scope(
                 created_auth_server.id, oauth_scope.id
             )
             assert err is None
@@ -785,7 +836,7 @@ class TestAuthorizationServerResource:
             errors = []
             # Clean up
             try:
-                _, err = await client.delete_o_auth_2_scope(
+                _, _, err = await client.delete_o_auth2_scope(
                     created_auth_server.id, oauth_scope.id
                 )
                 assert err is None
@@ -793,14 +844,16 @@ class TestAuthorizationServerResource:
                 errors.append(exc)
 
             try:
-                _, err = await client.deactivate_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.deactivate_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.delete_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -816,15 +869,14 @@ class TestAuthorizationServerResource:
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abDgZ"
         TEST_DESC = "Test Auth Server"
         TEST_AUDS = ["api://default"]
-        auth_server_model = models.AuthorizationServer({
-            "name": TEST_NAME,
-            "description": TEST_DESC,
-            "audiences": TEST_AUDS
-        })
+        auth_server_model = models.AuthorizationServer(
+            **{"name": TEST_NAME, "description": TEST_DESC, "audiences": TEST_AUDS}
+        )
 
         try:
-            created_auth_server, _, err = await \
-                client.create_authorization_server(auth_server_model)
+            created_auth_server, _, err = await client.create_authorization_server(
+                auth_server_model
+            )
             assert err is None
             assert isinstance(created_auth_server, models.AuthorizationServer)
             assert created_auth_server.name == TEST_NAME
@@ -834,11 +886,9 @@ class TestAuthorizationServerResource:
 
             # Create Oauth Scope
             SCOPE_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}:abDGz"
-            scope_obj = models.OAuth2Scope({
-                "name": SCOPE_NAME
-            })
+            scope_obj = models.OAuth2Scope(**{"name": SCOPE_NAME})
 
-            oauth_scope, _, err = await client.create_o_auth_2_scope(
+            oauth_scope, _, err = await client.create_o_auth2_scope(
                 created_auth_server.id, scope_obj
             )
             assert err is None
@@ -846,8 +896,7 @@ class TestAuthorizationServerResource:
             assert oauth_scope.name == scope_obj.name
 
             # List Oauth Scopes
-            scopes, _, err = await client.list_o_auth_2_scopes(
-                created_auth_server.id)
+            scopes, _, err = await client.list_o_auth2_scopes(created_auth_server.id)
             assert err is None
             assert len(scopes) > 0
             assert next((scope for scope in scopes if scope.id == oauth_scope.id))
@@ -856,7 +905,7 @@ class TestAuthorizationServerResource:
             errors = []
             # Clean up
             try:
-                _, err = await client.delete_o_auth_2_scope(
+                _, _, err = await client.delete_o_auth2_scope(
                     created_auth_server.id, oauth_scope.id
                 )
                 assert err is None
@@ -864,14 +913,16 @@ class TestAuthorizationServerResource:
                 errors.append(exc)
 
             try:
-                _, err = await client.deactivate_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.deactivate_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.delete_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -887,15 +938,14 @@ class TestAuthorizationServerResource:
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abDfZ"
         TEST_DESC = "Test Auth Server"
         TEST_AUDS = ["api://default"]
-        auth_server_model = models.AuthorizationServer({
-            "name": TEST_NAME,
-            "description": TEST_DESC,
-            "audiences": TEST_AUDS
-        })
+        auth_server_model = models.AuthorizationServer(
+            **{"name": TEST_NAME, "description": TEST_DESC, "audiences": TEST_AUDS}
+        )
 
         try:
-            created_auth_server, _, err = await \
-                client.create_authorization_server(auth_server_model)
+            created_auth_server, _, err = await client.create_authorization_server(
+                auth_server_model
+            )
             assert err is None
             assert isinstance(created_auth_server, models.AuthorizationServer)
             assert created_auth_server.name == TEST_NAME
@@ -905,19 +955,23 @@ class TestAuthorizationServerResource:
 
             # Create Oauth Scope
             SCOPE_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}:abDHz"
-            scope_obj = models.OAuth2Scope({
-                "name": SCOPE_NAME,
-                "consent": "REQUIRED",
-                "metadataPublish": "ALL_CLIENTS"
-            })
+            scope_obj = models.OAuth2Scope(
+                **{
+                    "name": SCOPE_NAME,
+                    "consent": "REQUIRED",
+                    "metadataPublish": "ALL_CLIENTS",
+                }
+            )
             UPDATED_SCOPE_NAME = f"{SCOPE_NAME}updated"
-            updated_obj = models.OAuth2Scope({
-                "name": UPDATED_SCOPE_NAME,
-                "consent": "REQUIRED",
-                "metadataPublish": "ALL_CLIENTS"
-            })
+            updated_obj = models.OAuth2Scope(
+                **{
+                    "name": UPDATED_SCOPE_NAME,
+                    "consent": "REQUIRED",
+                    "metadataPublish": "ALL_CLIENTS",
+                }
+            )
 
-            oauth_scope, _, err = await client.create_o_auth_2_scope(
+            oauth_scope, _, err = await client.create_o_auth2_scope(
                 created_auth_server.id, scope_obj
             )
             assert err is None
@@ -925,7 +979,7 @@ class TestAuthorizationServerResource:
             assert oauth_scope.name == scope_obj.name
 
             # Update scope
-            updated_scope, _, err = await client.update_o_auth_2_scope(
+            updated_scope, _, err = await client.replace_o_auth2_scope(
                 created_auth_server.id, oauth_scope.id, updated_obj
             )
             assert err is None
@@ -935,7 +989,7 @@ class TestAuthorizationServerResource:
             errors = []
             # Clean up
             try:
-                _, err = await client.delete_o_auth_2_scope(
+                _, _, err = await client.delete_o_auth2_scope(
                     created_auth_server.id, oauth_scope.id
                 )
                 assert err is None
@@ -943,14 +997,16 @@ class TestAuthorizationServerResource:
                 errors.append(exc)
 
             try:
-                _, err = await client.deactivate_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.deactivate_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.delete_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -966,15 +1022,14 @@ class TestAuthorizationServerResource:
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abDfZ"
         TEST_DESC = "Test Auth Server"
         TEST_AUDS = ["api://default"]
-        auth_server_model = models.AuthorizationServer({
-            "name": TEST_NAME,
-            "description": TEST_DESC,
-            "audiences": TEST_AUDS
-        })
+        auth_server_model = models.AuthorizationServer(
+            **{"name": TEST_NAME, "description": TEST_DESC, "audiences": TEST_AUDS}
+        )
 
         try:
-            created_auth_server, _, err = await \
-                client.create_authorization_server(auth_server_model)
+            created_auth_server, _, err = await client.create_authorization_server(
+                auth_server_model
+            )
             assert err is None
             assert isinstance(created_auth_server, models.AuthorizationServer)
             assert created_auth_server.name == TEST_NAME
@@ -984,11 +1039,9 @@ class TestAuthorizationServerResource:
 
             # Create Oauth Scope
             SCOPE_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}:abDGz"
-            scope_obj = models.OAuth2Scope({
-                "name": SCOPE_NAME
-            })
+            scope_obj = models.OAuth2Scope(**{"name": SCOPE_NAME})
 
-            oauth_scope, _, err = await client.create_o_auth_2_scope(
+            oauth_scope, _, err = await client.create_o_auth2_scope(
                 created_auth_server.id, scope_obj
             )
             assert err is None
@@ -996,45 +1049,47 @@ class TestAuthorizationServerResource:
             assert oauth_scope.name == scope_obj.name
 
             # Get Oauth Scope
-            found_oauth_scope, _, err = await client.get_o_auth_2_scope(
+            found_oauth_scope, _, err = await client.get_o_auth2_scope(
                 created_auth_server.id, oauth_scope.id
             )
             assert err is None
             assert found_oauth_scope.name == oauth_scope.name
 
             # Delete Oauth Scope
-            _, err = await client.delete_o_auth_2_scope(
+            _, _, err = await client.delete_o_auth2_scope(
                 created_auth_server.id, oauth_scope.id
             )
             assert err is None
 
             # Get Oauth Scope
-            found_oauth_scope, resp, err = await client.get_o_auth_2_scope(
+            found_oauth_scope, resp, err = await client.get_o_auth2_scope(
                 created_auth_server.id, oauth_scope.id
             )
             assert err is not None
             assert isinstance(err, OktaAPIError)
-            assert resp.get_status() == HTTPStatus.NOT_FOUND
+            assert resp.status == HTTPStatus.NOT_FOUND
 
         finally:
             errors = []
             # Clean up
             try:
-                _, err = await client.delete_o_auth_2_scope(
+                _, _, err = await client.delete_o_auth2_scope(
                     created_auth_server.id, oauth_scope.id
                 )
             except Exception:
                 pass
 
             try:
-                _, err = await client.deactivate_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.deactivate_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.delete_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -1050,15 +1105,14 @@ class TestAuthorizationServerResource:
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abDfZ"
         TEST_DESC = "Test Auth Server"
         TEST_AUDS = ["api://default"]
-        auth_server_model = models.AuthorizationServer({
-            "name": TEST_NAME,
-            "description": TEST_DESC,
-            "audiences": TEST_AUDS
-        })
+        auth_server_model = models.AuthorizationServer(
+            **{"name": TEST_NAME, "description": TEST_DESC, "audiences": TEST_AUDS}
+        )
 
         try:
-            created_auth_server, _, err = await \
-                client.create_authorization_server(auth_server_model)
+            created_auth_server, _, err = await client.create_authorization_server(
+                auth_server_model
+            )
             assert err is None
             assert isinstance(created_auth_server, models.AuthorizationServer)
             assert created_auth_server.name == TEST_NAME
@@ -1071,16 +1125,18 @@ class TestAuthorizationServerResource:
             CLAIM_STATUS = "INACTIVE"
             CLAIM_TYPE = "RESOURCE"
             CLAIM_VALUE_TYPE = "EXPRESSION"
-            CLAIM_VALUE = "\"driving!\""
-            claim_obj = models.OAuth2Claim({
-                "name": CLAIM_NAME,
-                "status": CLAIM_STATUS,
-                "claimType": CLAIM_TYPE,
-                "valueType": CLAIM_VALUE_TYPE,
-                "value": CLAIM_VALUE
-            })
+            CLAIM_VALUE = '"driving!"'
+            claim_obj = models.OAuth2Claim(
+                **{
+                    "name": CLAIM_NAME,
+                    "status": CLAIM_STATUS,
+                    "claimType": CLAIM_TYPE,
+                    "valueType": CLAIM_VALUE_TYPE,
+                    "value": CLAIM_VALUE,
+                }
+            )
 
-            oauth_claim, _, err = await client.create_o_auth_2_claim(
+            oauth_claim, _, err = await client.create_o_auth2_claim(
                 created_auth_server.id, claim_obj
             )
             assert err is None
@@ -1088,7 +1144,7 @@ class TestAuthorizationServerResource:
             assert oauth_claim.name == CLAIM_NAME
 
             # Get Oauth claim
-            found_oauth_claim, _, err = await client.get_o_auth_2_claim(
+            found_oauth_claim, _, err = await client.get_o_auth2_claim(
                 created_auth_server.id, oauth_claim.id
             )
             assert err is None
@@ -1098,7 +1154,7 @@ class TestAuthorizationServerResource:
             errors = []
             # Clean up
             try:
-                _, err = await client.delete_o_auth_2_claim(
+                _, _, err = await client.delete_o_auth2_claim(
                     created_auth_server.id, oauth_claim.id
                 )
                 assert err is None
@@ -1106,14 +1162,16 @@ class TestAuthorizationServerResource:
                 errors.append(exc)
 
             try:
-                _, err = await client.deactivate_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.deactivate_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.delete_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -1129,15 +1187,14 @@ class TestAuthorizationServerResource:
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abDfZ"
         TEST_DESC = "Test Auth Server"
         TEST_AUDS = ["api://default"]
-        auth_server_model = models.AuthorizationServer({
-            "name": TEST_NAME,
-            "description": TEST_DESC,
-            "audiences": TEST_AUDS
-        })
+        auth_server_model = models.AuthorizationServer(
+            **{"name": TEST_NAME, "description": TEST_DESC, "audiences": TEST_AUDS}
+        )
 
         try:
-            created_auth_server, _, err = await \
-                client.create_authorization_server(auth_server_model)
+            created_auth_server, _, err = await client.create_authorization_server(
+                auth_server_model
+            )
             assert err is None
             assert isinstance(created_auth_server, models.AuthorizationServer)
             assert created_auth_server.name == TEST_NAME
@@ -1150,16 +1207,18 @@ class TestAuthorizationServerResource:
             CLAIM_STATUS = "INACTIVE"
             CLAIM_TYPE = "RESOURCE"
             CLAIM_VALUE_TYPE = "EXPRESSION"
-            CLAIM_VALUE = "\"driving!\""
-            claim_obj = models.OAuth2Claim({
-                "name": CLAIM_NAME,
-                "status": CLAIM_STATUS,
-                "claimType": CLAIM_TYPE,
-                "valueType": CLAIM_VALUE_TYPE,
-                "value": CLAIM_VALUE
-            })
+            CLAIM_VALUE = '"driving!"'
+            claim_obj = models.OAuth2Claim(
+                **{
+                    "name": CLAIM_NAME,
+                    "status": CLAIM_STATUS,
+                    "claimType": CLAIM_TYPE,
+                    "valueType": CLAIM_VALUE_TYPE,
+                    "value": CLAIM_VALUE,
+                }
+            )
 
-            oauth_claim, _, err = await client.create_o_auth_2_claim(
+            oauth_claim, _, err = await client.create_o_auth2_claim(
                 created_auth_server.id, claim_obj
             )
             assert err is None
@@ -1167,17 +1226,15 @@ class TestAuthorizationServerResource:
             assert oauth_claim.name == CLAIM_NAME
 
             # List Oauth claims
-            claims, _, err = await client.list_o_auth_2_claims(
-                created_auth_server.id)
+            claims, _, err = await client.list_o_auth2_claims(created_auth_server.id)
             assert err is None
-            assert next((claim for claim in claims
-                         if claim.id == oauth_claim.id))
+            assert next((claim for claim in claims if claim.id == oauth_claim.id))
 
         finally:
             errors = []
             # Clean up
             try:
-                _, err = await client.delete_o_auth_2_claim(
+                _, _, err = await client.delete_o_auth2_claim(
                     created_auth_server.id, oauth_claim.id
                 )
                 assert err is None
@@ -1185,14 +1242,16 @@ class TestAuthorizationServerResource:
                 errors.append(exc)
 
             try:
-                _, err = await client.deactivate_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.deactivate_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.delete_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -1208,15 +1267,14 @@ class TestAuthorizationServerResource:
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abDfZ"
         TEST_DESC = "Test Auth Server"
         TEST_AUDS = ["api://default"]
-        auth_server_model = models.AuthorizationServer({
-            "name": TEST_NAME,
-            "description": TEST_DESC,
-            "audiences": TEST_AUDS
-        })
+        auth_server_model = models.AuthorizationServer(
+            **{"name": TEST_NAME, "description": TEST_DESC, "audiences": TEST_AUDS}
+        )
 
         try:
-            created_auth_server, _, err = await \
-                client.create_authorization_server(auth_server_model)
+            created_auth_server, _, err = await client.create_authorization_server(
+                auth_server_model
+            )
             assert err is None
             assert isinstance(created_auth_server, models.AuthorizationServer)
             assert created_auth_server.name == TEST_NAME
@@ -1229,24 +1287,28 @@ class TestAuthorizationServerResource:
             CLAIM_STATUS = "INACTIVE"
             CLAIM_TYPE = "RESOURCE"
             CLAIM_VALUE_TYPE = "EXPRESSION"
-            CLAIM_VALUE = "\"driving!\""
-            claim_obj = models.OAuth2Claim({
-                "name": CLAIM_NAME,
-                "status": CLAIM_STATUS,
-                "claimType": CLAIM_TYPE,
-                "valueType": CLAIM_VALUE_TYPE,
-                "value": CLAIM_VALUE
-            })
+            CLAIM_VALUE = '"driving!"'
+            claim_obj = models.OAuth2Claim(
+                **{
+                    "name": CLAIM_NAME,
+                    "status": CLAIM_STATUS,
+                    "claimType": CLAIM_TYPE,
+                    "valueType": CLAIM_VALUE_TYPE,
+                    "value": CLAIM_VALUE,
+                }
+            )
             UPDATED_CLAIM_NAME = f"{CLAIM_NAME}_updated"
-            updated_obj = models.OAuth2Claim({
-                "name": UPDATED_CLAIM_NAME,
-                "status": CLAIM_STATUS,
-                "claimType": CLAIM_TYPE,
-                "valueType": CLAIM_VALUE_TYPE,
-                "value": CLAIM_VALUE
-            })
+            updated_obj = models.OAuth2Claim(
+                **{
+                    "name": UPDATED_CLAIM_NAME,
+                    "status": CLAIM_STATUS,
+                    "claimType": CLAIM_TYPE,
+                    "valueType": CLAIM_VALUE_TYPE,
+                    "value": CLAIM_VALUE,
+                }
+            )
 
-            oauth_claim, _, err = await client.create_o_auth_2_claim(
+            oauth_claim, _, err = await client.create_o_auth2_claim(
                 created_auth_server.id, claim_obj
             )
             assert err is None
@@ -1254,7 +1316,7 @@ class TestAuthorizationServerResource:
             assert oauth_claim.name == CLAIM_NAME
 
             # Update claim
-            updated_claim, _, err = await client.update_o_auth_2_claim(
+            updated_claim, _, err = await client.replace_o_auth2_claim(
                 created_auth_server.id, oauth_claim.id, updated_obj
             )
             assert err is None
@@ -1262,7 +1324,7 @@ class TestAuthorizationServerResource:
             assert updated_claim.name == UPDATED_CLAIM_NAME
 
             # Get Oauth claim
-            found_oauth_claim, _, err = await client.get_o_auth_2_claim(
+            found_oauth_claim, _, err = await client.get_o_auth2_claim(
                 created_auth_server.id, oauth_claim.id
             )
             assert err is None
@@ -1272,7 +1334,7 @@ class TestAuthorizationServerResource:
             errors = []
             # Clean up
             try:
-                _, err = await client.delete_o_auth_2_claim(
+                _, _, err = await client.delete_o_auth2_claim(
                     created_auth_server.id, oauth_claim.id
                 )
                 assert err is None
@@ -1280,14 +1342,16 @@ class TestAuthorizationServerResource:
                 errors.append(exc)
 
             try:
-                _, err = await client.deactivate_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.deactivate_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.delete_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -1303,15 +1367,14 @@ class TestAuthorizationServerResource:
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abDfZ"
         TEST_DESC = "Test Auth Server"
         TEST_AUDS = ["api://default"]
-        auth_server_model = models.AuthorizationServer({
-            "name": TEST_NAME,
-            "description": TEST_DESC,
-            "audiences": TEST_AUDS
-        })
+        auth_server_model = models.AuthorizationServer(
+            **{"name": TEST_NAME, "description": TEST_DESC, "audiences": TEST_AUDS}
+        )
 
         try:
-            created_auth_server, _, err = await \
-                client.create_authorization_server(auth_server_model)
+            created_auth_server, _, err = await client.create_authorization_server(
+                auth_server_model
+            )
             assert err is None
             assert isinstance(created_auth_server, models.AuthorizationServer)
             assert created_auth_server.name == TEST_NAME
@@ -1324,16 +1387,18 @@ class TestAuthorizationServerResource:
             CLAIM_STATUS = "INACTIVE"
             CLAIM_TYPE = "RESOURCE"
             CLAIM_VALUE_TYPE = "EXPRESSION"
-            CLAIM_VALUE = "\"driving!\""
-            claim_obj = models.OAuth2Claim({
-                "name": CLAIM_NAME,
-                "status": CLAIM_STATUS,
-                "claimType": CLAIM_TYPE,
-                "valueType": CLAIM_VALUE_TYPE,
-                "value": CLAIM_VALUE
-            })
+            CLAIM_VALUE = '"driving!"'
+            claim_obj = models.OAuth2Claim(
+                **{
+                    "name": CLAIM_NAME,
+                    "status": CLAIM_STATUS,
+                    "claimType": CLAIM_TYPE,
+                    "valueType": CLAIM_VALUE_TYPE,
+                    "value": CLAIM_VALUE,
+                }
+            )
 
-            oauth_claim, _, err = await client.create_o_auth_2_claim(
+            oauth_claim, _, err = await client.create_o_auth2_claim(
                 created_auth_server.id, claim_obj
             )
             assert err is None
@@ -1341,45 +1406,47 @@ class TestAuthorizationServerResource:
             assert oauth_claim.name == CLAIM_NAME
 
             # Get Oauth claim
-            found_oauth_claim, _, err = await client.get_o_auth_2_claim(
+            found_oauth_claim, _, err = await client.get_o_auth2_claim(
                 created_auth_server.id, oauth_claim.id
             )
             assert err is None
             assert found_oauth_claim.name == oauth_claim.name
 
             # Delete Oauth claim
-            _, err = await client.delete_o_auth_2_claim(
+            _, _, err = await client.delete_o_auth2_claim(
                 created_auth_server.id, oauth_claim.id
             )
             assert err is None
 
             # Get Oauth claim
-            found_oauth_claim, resp, err = await client.get_o_auth_2_claim(
+            found_oauth_claim, resp, err = await client.get_o_auth2_claim(
                 created_auth_server.id, oauth_claim.id
             )
             assert err is not None
             assert isinstance(err, OktaAPIError)
-            assert resp.get_status() == HTTPStatus.NOT_FOUND
+            assert resp.status == HTTPStatus.NOT_FOUND
 
         finally:
             errors = []
             # Clean up
             try:
-                _, err = await client.delete_o_auth_2_claim(
+                _, _, err = await client.delete_o_auth2_claim(
                     created_auth_server.id, oauth_claim.id
                 )
             except Exception:
                 pass
 
             try:
-                _, err = await client.deactivate_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.deactivate_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.delete_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -1395,15 +1462,14 @@ class TestAuthorizationServerResource:
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abDfZ"
         TEST_DESC = "Test Auth Server"
         TEST_AUDS = ["api://default"]
-        auth_server_model = models.AuthorizationServer({
-            "name": TEST_NAME,
-            "description": TEST_DESC,
-            "audiences": TEST_AUDS
-        })
+        auth_server_model = models.AuthorizationServer(
+            **{"name": TEST_NAME, "description": TEST_DESC, "audiences": TEST_AUDS}
+        )
 
         try:
-            created_auth_server, _, err = await \
-                client.create_authorization_server(auth_server_model)
+            created_auth_server, _, err = await client.create_authorization_server(
+                auth_server_model
+            )
             assert err is None
             assert isinstance(created_auth_server, models.AuthorizationServer)
             assert created_auth_server.name == TEST_NAME
@@ -1412,10 +1478,9 @@ class TestAuthorizationServerResource:
             assert created_auth_server.audiences[0] == TEST_AUDS[0]
 
             # List keys
-            auth_server_keys, _, err = await\
-                client.list_authorization_server_keys(
-                    created_auth_server.id
-                )
+            auth_server_keys, _, err = await client.list_authorization_server_keys(
+                created_auth_server.id
+            )
             assert err is None
             assert len(auth_server_keys) > 0
 
@@ -1423,14 +1488,16 @@ class TestAuthorizationServerResource:
             errors = []
             # Clean up
             try:
-                _, err = await client.deactivate_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.deactivate_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.delete_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -1446,15 +1513,14 @@ class TestAuthorizationServerResource:
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abDfZ"
         TEST_DESC = "Test Auth Server"
         TEST_AUDS = ["api://default"]
-        auth_server_model = models.AuthorizationServer({
-            "name": TEST_NAME,
-            "description": TEST_DESC,
-            "audiences": TEST_AUDS
-        })
+        auth_server_model = models.AuthorizationServer(
+            **{"name": TEST_NAME, "description": TEST_DESC, "audiences": TEST_AUDS}
+        )
 
         try:
-            created_auth_server, _, err = await \
-                client.create_authorization_server(auth_server_model)
+            created_auth_server, _, err = await client.create_authorization_server(
+                auth_server_model
+            )
             assert err is None
             assert isinstance(created_auth_server, models.AuthorizationServer)
             assert created_auth_server.name == TEST_NAME
@@ -1463,9 +1529,7 @@ class TestAuthorizationServerResource:
             assert created_auth_server.audiences[0] == TEST_AUDS[0]
 
             # Make key to rotate
-            rotate_key = models.JwkUse({
-                "use": "sig"
-            })
+            rotate_key = models.JwkUse(**{"use": "sig"})
 
             # Rotate key
             keys, _, err = await client.rotate_authorization_server_keys(
@@ -1478,14 +1542,16 @@ class TestAuthorizationServerResource:
             errors = []
             # Clean up
             try:
-                _, err = await client.deactivate_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.deactivate_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, err = await client.delete_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.delete_authorization_server(
+                    created_auth_server.id
+                )
                 assert err is None
             except Exception as exc:
                 errors.append(exc)
@@ -1501,15 +1567,14 @@ class TestAuthorizationServerResource:
         TEST_NAME = f"{TestAuthorizationServerResource.SDK_PREFIX}_test_abDeZ"
         TEST_DESC = "Test Auth Server"
         TEST_AUDS = ["api://default"]
-        auth_server_model = models.AuthorizationServer({
-            "name": TEST_NAME,
-            "description": TEST_DESC,
-            "audiences": TEST_AUDS
-        })
+        auth_server_model = models.AuthorizationServer(
+            **{"name": TEST_NAME, "description": TEST_DESC, "audiences": TEST_AUDS}
+        )
 
         try:
-            created_auth_server, _, err = await \
-                client.create_authorization_server(auth_server_model)
+            created_auth_server, _, err = await client.create_authorization_server(
+                auth_server_model
+            )
             assert err is None
             assert isinstance(created_auth_server, models.AuthorizationServer)
             assert created_auth_server.name == TEST_NAME
@@ -1518,62 +1583,72 @@ class TestAuthorizationServerResource:
             assert created_auth_server.audiences[0] == TEST_AUDS[0]
 
             # Create Policy
-            POLICY_TYPE = models.PolicyType.OAUTH_AUTHORIZATION_POLICY
+            POLICY_TYPE = models.PolicyType.OKTA_SIGN_ON.value
             POLICY_STATUS = "ACTIVE"
             POLICY_NAME = "Test Policy"
             POLICY_DESC = "Test Policy"
             POLICY_PRIORITY = 1
-            POLICY_CONDITIONS = models.PolicyRuleConditions({
-                "clients": models.ClientPolicyCondition({
-                    "include": ["ALL_CLIENTS"]
-                })
-            })
+            POLICY_CONDITIONS = models.PolicyRuleConditions(
+                **{
+                    "clients": models.ClientPolicyCondition(
+                        **{"include": ["ALL_CLIENTS"]}
+                    )
+                }
+            )
 
-            policy_model = models.Policy({
-                "type": POLICY_TYPE,
-                "status": POLICY_STATUS,
-                "name": POLICY_NAME,
-                "description": POLICY_DESC,
-                "priority": POLICY_PRIORITY,
-                "conditions": POLICY_CONDITIONS
-            })
+            policy_model = models.AuthorizationServerPolicy(
+                **{
+                    "type": POLICY_TYPE,
+                    "status": POLICY_STATUS,
+                    "name": POLICY_NAME,
+                    "description": POLICY_DESC,
+                    "priority": POLICY_PRIORITY,
+                    "conditions": POLICY_CONDITIONS,
+                }
+            )
 
-            created_policy, _, err = await\
-                client.create_authorization_server_policy(
-                    created_auth_server.id, policy_model
-                )
+            created_policy, _, err = await client.create_authorization_server_policy(
+                created_auth_server.id, policy_model
+            )
             assert err is None
 
-            POLICY_RULE_ACTIONS = models.AuthorizationServerPolicyRuleActions({
-                "token": {
-                    "accessTokenLifetimeMinutes": 60,
-                    "refreshTokenLifetimeMinutes": 0,
-                    "refreshTokenWindowMinutes": 10080
+            POLICY_RULE_ACTIONS = models.AuthorizationServerPolicyRuleActions(
+                **{
+                    "token": {
+                        "accessTokenLifetimeMinutes": 60,
+                        "refreshTokenLifetimeMinutes": 0,
+                        "refreshTokenWindowMinutes": 10080,
+                    }
                 }
-            })
-            POLICY_RULE_CONDITIONS = models.AuthorizationServerPolicyRuleConditions({
-                "people": models.PolicyPeopleCondition({
-                    "include": ["EVERYONE"]
-                }),
-                "grantTypes": models.GrantTypePolicyRuleCondition({
-                    "include": [
-                        "client_credentials",
-                    ]
-                }),
-                "scopes":{"include": ["*"]}
-            })
-            policy_rule_model = models.AuthorizationServerPolicyRule({
-                "type": "RESOURCE_ACCESS",
-                "name": "Test Policy Rule",
-                "priority": 1,
-                "actions": POLICY_RULE_ACTIONS,
-                "conditions": POLICY_RULE_CONDITIONS,
-            })
+            )
+            POLICY_RULE_CONDITIONS = models.AuthorizationServerPolicyRuleConditions(
+                **{
+                    "people": models.PolicyPeopleCondition(**{"include": ["EVERYONE"]}),
+                    "grantTypes": models.GrantTypePolicyRuleCondition(
+                        **{
+                            "include": [
+                                "client_credentials",
+                            ]
+                        }
+                    ),
+                    "scopes": {"include": ["*"]},
+                }
+            )
+            policy_rule_model = models.AuthorizationServerPolicyRule(
+                **{
+                    "type": "RESOURCE_ACCESS",
+                    "name": "Test Policy Rule",
+                    "priority": 1,
+                    "actions": POLICY_RULE_ACTIONS,
+                    "conditions": POLICY_RULE_CONDITIONS,
+                }
+            )
 
-            created_policy_rule, _, err = await \
-                client.create_authorization_server_policy_rule(
+            created_policy_rule, _, err = (
+                await client.create_authorization_server_policy_rule(
                     created_auth_server.id, created_policy.id, policy_rule_model
                 )
+            )
             assert err is None
 
             # Get Policy Rules
@@ -1583,15 +1658,20 @@ class TestAuthorizationServerResource:
 
             assert err is None
             assert len(policy_rules) > 0
-            assert next((plcy_rule for plcy_rule in policy_rules
-                         if plcy_rule.id == created_policy_rule.id))
+            assert next(
+                (
+                    plcy_rule
+                    for plcy_rule in policy_rules
+                    if plcy_rule.id == created_policy_rule.id
+                )
+            )
 
         finally:
             # Clear everything despite of any error
             errors = []
             try:
                 # Delete Policy Rule
-                _, err = await client.delete_authorization_server_policy_rule(
+                _, _, err = await client.delete_authorization_server_policy_rule(
                     created_auth_server.id, created_policy.id, created_policy_rule.id
                 )
                 if err:
@@ -1601,7 +1681,7 @@ class TestAuthorizationServerResource:
 
             try:
                 # Delete Policy
-                _, err = await client.delete_authorization_server_policy(
+                _, _, err = await client.delete_authorization_server_policy(
                     created_auth_server.id, created_policy.id
                 )
                 if err:
@@ -1611,8 +1691,9 @@ class TestAuthorizationServerResource:
 
             try:
                 # DeActivate Auth server
-                _, err = await client.deactivate_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.deactivate_authorization_server(
+                    created_auth_server.id
+                )
                 if err:
                     errors.append(err)
             except Exception as exc:
@@ -1620,8 +1701,9 @@ class TestAuthorizationServerResource:
 
             try:
                 # Delete Auth server
-                _, err = await client.delete_authorization_server(
-                    created_auth_server.id)
+                _, _, err = await client.delete_authorization_server(
+                    created_auth_server.id
+                )
                 if err:
                     errors.append(err)
             except Exception as exc:

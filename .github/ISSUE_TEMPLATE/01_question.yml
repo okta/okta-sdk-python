@@ -1,0 +1,27 @@
+name: "Question"
+labels: ["question"]
+description: "If you have a question, please check out our community resources first!"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Issues on GitHub are intended for bugs or feature requests with the SDK codebase. If you have a support request or question, please use one of these resources instead 👍.
+
+        * [Okta Community Forum](https://devforum.okta.com/) for questions and community support.
+        * [Okta Support](https://support.okta.com/) for paid customers.
+  - type: textarea
+    id: question
+    attributes:
+      label: Question
+      value: Please use the resources listed above instead of submitting a question with this form.
+    validations:
+      required: true
+  - type: textarea
+    id: customer_info
+    attributes:
+      label: Customer Information
+      description: |
+        Please provide your organization name, and whether you are a paid customer or using the free developer edition.
+      value: |
+        Organization Name: <your-org-name>
+        Paid Customer: <yes/no>

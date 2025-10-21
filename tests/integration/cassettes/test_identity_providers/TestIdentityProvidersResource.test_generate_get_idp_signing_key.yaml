@@ -67,7 +67,7 @@ interactions:
       User-Agent:
       - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
     method: POST
-    uri: https://test.okta.com/api/v1/idps/0oasfb0tcpNNNNJo24x6/credentials/keys/generate/?validityYears=2
+    uri: https://test.okta.com/api/v1/idps/0oasfb0tcpNNNNJo24x6/credentials/keys/generate?validityYears=2
   response:
     body:
       string: '{"kty":"RSA","created":"2020-08-27T18:16:27.000Z","lastUpdated":"2020-08-27T18:16:27.000Z","expiresAt":"2022-08-27T18:16:27.000Z","kid":"KjchRag1DVhkXgYbMpNZUhZ2LEb6QGCATCK_K1UNtwU","use":"sig","x5c":["MIIDpDCCAoygAwIBAgIGAXQxIqJ3MA0GCSqGSIb3DQEBCwUAMIGSMQswCQYDVQQGEwJVUzETMBEGA1UECAwKQ2FsaWZvcm5pYTEWMBQGA1UEBwwNU2FuIEZyYW5jaXNjbzENMAsGA1UECgwET2t0YTEUMBIGA1UECwwLU1NPUHJvdmlkZXIxEzARBgNVBAMMCmRldi0xOTU5MjExHDAaBgkqhkiG9w0BCQEWDWluZm9Ab2t0YS5jb20wHhcNMjAwODI3MTgxNTI3WhcNMjIwODI3MTgxNjI3WjCBkjELMAkGA1UEBhMCVVMxEzARBgNVBAgMCkNhbGlmb3JuaWExFjAUBgNVBAcMDVNhbiBGcmFuY2lzY28xDTALBgNVBAoMBE9rdGExFDASBgNVBAsMC1NTT1Byb3ZpZGVyMRMwEQYDVQQDDApkZXYtMTk1OTIxMRwwGgYJKoZIhvcNAQkBFg1pbmZvQG9rdGEuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvCQCVp6BkzqumIsKCzzZxXf0mPfZJtQwU4nqAYs8jboywgfqas7a9Xll6znJEnOOJ793DdPqrux+88ZEo7ASx+ET8QaUJJ9D9g+G5DFliOdrZtK+YoTuXTOVw0DqotN2wUPNsiIKn7sBh0oNeCthvGz3YaGuXGsYGzAJNfjbjxD1kNBopcwPnmD2psLypNmRIcy7re5Nf0T0VPHW/pZ4izi/If4y8EraB7kJxarAJDA9zDQysn2ZsaxQwb75zh4VmfAmcQZ1NgAgCeqCkZ6AYd3IookIxNcP3KCJEv+KDh4l3448h9J8iyFzW5QRJgMipPf2dzF38tJTZrqHrZOhaQIDAQABMA0GCSqGSIb3DQEBCwUAA4IBAQBPp5o+IdVZcNXU4ejgsR/BHSJ433N/5Mw4vOzWrLVOk47sZYyLbolQCZ9lWwZJ9br0wnxIAnF5N6EiNh9RCN+t0bhGSBGlMHp9tnPYIjHiZox6fKqybCrHWzn3hmhHfgWcZBgnCYeEnvd/4NKB/g8UuI4DRbbGwHlE8vaCq3HlK05sUo/0IAWXWsnVr2EMVACOkOH+o3cq15JwCnAAVXx7EvQ6dmP9fr3gF0QDNFOG4njnvEZI5g+oBg5DTWA2AlYPIaItouq3XsSmtjNMWGdwUz9+PZrvIiq5yySJMoDmHvo/aiHzmXI9CvhjLehJyRK295FDLEM18HBhBsQoPYkL"],"x5t#S256":"w0cBOg9tsoMQetjf55Hbfds4JcXDielavRfcTb9kBE8","e":"AQAB","n":"vCQCVp6BkzqumIsKCzzZxXf0mPfZJtQwU4nqAYs8jboywgfqas7a9Xll6znJEnOOJ793DdPqrux-88ZEo7ASx-ET8QaUJJ9D9g-G5DFliOdrZtK-YoTuXTOVw0DqotN2wUPNsiIKn7sBh0oNeCthvGz3YaGuXGsYGzAJNfjbjxD1kNBopcwPnmD2psLypNmRIcy7re5Nf0T0VPHW_pZ4izi_If4y8EraB7kJxarAJDA9zDQysn2ZsaxQwb75zh4VmfAmcQZ1NgAgCeqCkZ6AYd3IookIxNcP3KCJEv-KDh4l3448h9J8iyFzW5QRJgMipPf2dzF38tJTZrqHrZOhaQ"}'
@@ -108,7 +108,7 @@ interactions:
     status:
       code: 201
       message: Created
-    url: https://test.okta.com/api/v1/idps/0oasfb0tcpNNNNJo24x6/credentials/keys/generate/?validityYears=2
+    url: https://test.okta.com/api/v1/idps/0oasfb0tcpNNNNJo24x6/credentials/keys/generate?validityYears=2
 - request:
     body: null
     headers:

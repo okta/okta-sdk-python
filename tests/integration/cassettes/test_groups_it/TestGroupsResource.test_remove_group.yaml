@@ -11,7 +11,7 @@ interactions:
       User-Agent:
       - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
     method: POST
-    uri: https://test.okta.com/api/v1/users/?activate=False
+    uri: https://test.okta.com/api/v1/users?activate=false
   response:
     body:
       string: '{"id":"00usfcs49C4s2YYMY4x6","status":"STAGED","created":"2020-08-27T18:15:53.000Z","activated":null,"statusChanged":null,"lastLogin":null,"lastUpdated":"2020-08-27T18:15:53.000Z","passwordChanged":"2020-08-27T18:15:53.000Z","type":{"id":"otyc04qb2rUDcq2YA4x6"},"profile":{"firstName":"John","lastName":"Doe-Remove-Group","mobilePhone":null,"secondEmail":null,"login":"John.Doe-Remove-Group@example.com","email":"John.Doe-Remove-Group@example.com"},"credentials":{"password":{},"emails":[{"value":"John.Doe-Remove-Group@example.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"schema":{"href":"https://test.okta.com/api/v1/meta/schemas/user/oscc04qb2rUDcq2YA4x6"},"activate":{"href":"https://test.okta.com/api/v1/users/00usfcs49C4s2YYMY4x6/lifecycle/activate","method":"POST"},"self":{"href":"https://test.okta.com/api/v1/users/00usfcs49C4s2YYMY4x6"},"type":{"href":"https://test.okta.com/api/v1/meta/types/user/otyc04qb2rUDcq2YA4x6"}}}'
@@ -53,7 +53,7 @@ interactions:
     status:
       code: 200
       message: OK
-    url: https://test.okta.com/api/v1/users/?activate=False
+    url: https://test.okta.com/api/v1/users?activate=false
 - request:
     body: null
     headers:
@@ -337,8 +337,8 @@ interactions:
       - application/json
       User-Agent:
       - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
-    method: DELETE
-    uri: https://test.okta.com/api/v1/users/00usfcs49C4s2YYMY4x6
+    method: POST
+    uri: https://test.okta.com/api/v1/users/00usfcs49C4s2YYMY4x6/lifecycle/deactivate
   response:
     body:
       string: ''
@@ -376,7 +376,7 @@ interactions:
     status:
       code: 204
       message: No Content
-    url: https://test.okta.com/api/v1/users/00usfcs49C4s2YYMY4x6
+    url: https://test.okta.com/api/v1/users/00usfcs49C4s2YYMY4x6/lifecycle/deactivate
 - request:
     body: null
     headers:

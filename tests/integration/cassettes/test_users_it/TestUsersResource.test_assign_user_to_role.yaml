@@ -11,7 +11,7 @@ interactions:
       User-Agent:
       - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
     method: POST
-    uri: https://test.okta.com/api/v1/users/?activate=True
+    uri: https://test.okta.com/api/v1/users?activate=true
   response:
     body:
       string: '{"id":"00usfex7wP9lvobJ84x6","status":"ACTIVE","created":"2020-08-27T18:19:43.000Z","activated":"2020-08-27T18:19:43.000Z","statusChanged":"2020-08-27T18:19:43.000Z","lastLogin":null,"lastUpdated":"2020-08-27T18:19:43.000Z","passwordChanged":"2020-08-27T18:19:43.000Z","type":{"id":"otyc04qb2rUDcq2YA4x6"},"profile":{"firstName":"John","lastName":"Doe-Assign-User-Role","mobilePhone":null,"secondEmail":null,"login":"John.Doe-Assign-User-Role@example.com","email":"John.Doe-Assign-User-Role@example.com"},"credentials":{"password":{},"emails":[{"value":"John.Doe-Assign-User-Role@example.com","status":"VERIFIED","type":"PRIMARY"}],"provider":{"type":"OKTA","name":"OKTA"}},"_links":{"suspend":{"href":"https://test.okta.com/api/v1/users/00usfex7wP9lvobJ84x6/lifecycle/suspend","method":"POST"},"schema":{"href":"https://test.okta.com/api/v1/meta/schemas/user/oscc04qb2rUDcq2YA4x6"},"resetPassword":{"href":"https://test.okta.com/api/v1/users/00usfex7wP9lvobJ84x6/lifecycle/reset_password","method":"POST"},"expirePassword":{"href":"https://test.okta.com/api/v1/users/00usfex7wP9lvobJ84x6/lifecycle/expire_password","method":"POST"},"changeRecoveryQuestion":{"href":"https://test.okta.com/api/v1/users/00usfex7wP9lvobJ84x6/credentials/change_recovery_question","method":"POST"},"self":{"href":"https://test.okta.com/api/v1/users/00usfex7wP9lvobJ84x6"},"type":{"href":"https://test.okta.com/api/v1/meta/types/user/otyc04qb2rUDcq2YA4x6"},"changePassword":{"href":"https://test.okta.com/api/v1/users/00usfex7wP9lvobJ84x6/credentials/change_password","method":"POST"},"deactivate":{"href":"https://test.okta.com/api/v1/users/00usfex7wP9lvobJ84x6/lifecycle/deactivate","method":"POST"}}}'
@@ -53,7 +53,7 @@ interactions:
     status:
       code: 200
       message: OK
-    url: https://test.okta.com/api/v1/users/?activate=True
+    url: https://test.okta.com/api/v1/users?activate=true
 - request:
     body: null
     headers:
@@ -279,8 +279,8 @@ interactions:
       - application/json
       User-Agent:
       - okta-sdk-python/1.0.0-alpha.1 python/3.8.3 Darwin/18.7.0
-    method: DELETE
-    uri: https://test.okta.com/api/v1/users/00usfex7wP9lvobJ84x6
+    method: POST
+    uri: https://test.okta.com/api/v1/users/00usfex7wP9lvobJ84x6/lifecycle/deactivate
   response:
     body:
       string: ''
@@ -318,7 +318,7 @@ interactions:
     status:
       code: 204
       message: No Content
-    url: https://test.okta.com/api/v1/users/00usfex7wP9lvobJ84x6
+    url: https://test.okta.com/api/v1/users/00usfex7wP9lvobJ84x6/lifecycle/deactivate
 - request:
     body: null
     headers:

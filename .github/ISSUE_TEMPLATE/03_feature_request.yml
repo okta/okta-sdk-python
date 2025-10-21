@@ -1,0 +1,57 @@
+name: "Enhancement"
+labels: ["enhancement"]
+description: "For when something (a method, parameter, etc.) is missing, and should be added."
+body:
+  - type: textarea
+    id: community-note
+    attributes:
+      label: Community Note
+      description: Please keep this note for the community.
+      value: |
+        * Please vote on this issue by adding a 👍 [reaction](https://blog.github.com/2016-03-10-add-reactions-to-pull-requests-issues-and-comments/) to the original issue to help the community and maintainers prioritize this request.
+        * Please do not leave _+1_ or _me too_ comments, they generate extra noise for issue followers and do not help prioritize the request.
+        * If you are interested in working on this issue or have submitted a pull request, please leave a comment.
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: Please leave a helpful description of the feature request here. Including use cases and why it would help you is a great way to convince maintainers to spend time on it.
+    validations:
+      required: true
+  - type: textarea
+    id: affected-code
+    attributes:
+      label: New or Affected Class/Method(s)
+      description: Please list the new or affected classes or methods.
+      value: |
+        * okta.client.XXXXX
+    validations:
+      required: true
+  - type: textarea
+    id: customer_info
+    attributes:
+      label: Customer Information
+      description: |
+        Please provide your organization name, and whether you are a paid customer or using the free developer edition.
+      value: |
+        Organization Name: <your-org-name>
+        Paid Customer: <yes/no>
+  - type: textarea
+    id: potential-code
+    attributes:
+      label: Potential Code Snippet
+      description: |
+        Propose what you think the code to take advantage of this feature should look like. We may not use it verbatim, but it's helpful in understanding your intent.
+        Use [markdown code blocks](https://help.github.com/articles/basic-writing-and-formatting-syntax/#quoting-code) to format the code.
+      value: |
+        ```python
+        # Your proposed code here
+        ```
+  - type: textarea
+    id: references
+    attributes:
+      label: References
+      description: |
+        Are there any other GitHub issues (open or closed) or pull requests that should be [linked](https://help.github.com/articles/basic-writing-and-formatting-syntax/#referencing-issues-and-pull-requests) here? Okta API documentation?

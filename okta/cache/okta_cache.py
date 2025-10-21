@@ -1,9 +1,19 @@
-from okta.cache.cache import Cache
+# The Okta software accompanied by this notice is provided pursuant to the following terms:
+# Copyright © 2025-Present, Okta, Inc.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
+# License.
+# You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and limitations under the License.
+# coding: utf-8
+
 import logging
 import time
 
+from okta.cache.cache import Cache
 
-logger = logging.getLogger('okta-sdk-python')
+logger = logging.getLogger("okta-sdk-python")
 
 
 class OktaCache(Cache):
@@ -73,19 +83,18 @@ class OktaCache(Cache):
             key {str} -- Key in pair
             value {tuple} -- Tuple of response and response body
         """
-        if type(key) == str and\
-                (type(value) != list or type(value[1]) != list):
+        if isinstance(key, str) and (not isinstance(value, list) or not isinstance(value[1], list)):
             # Get current time
             now = self._get_current_time()
 
             # Add new entry to cache with timers
             self._store[key] = {
-                'value': value,
-                'tti': now + self._time_to_idle,
-                'ttl': now + self._time_to_live
+                "value": value,
+                "tti": now + self._time_to_idle,
+                "ttl": now + self._time_to_live,
             }
             logger.info(f'Added to cache value for key "{key}".')
-            logger.debug(f'Cached value for key {key}: {value}.')
+            logger.debug(f"Cached value for key {key}: {value}.")
         # Update cache
         self._clean_cache()
 
@@ -107,7 +116,7 @@ class OktaCache(Cache):
         Clear the cache.
         """
         self._store.clear()
-        logger.info('Cleared the cache.')
+        logger.info("Cleared the cache.")
 
     def _clean_cache(self):
         """
