@@ -164,6 +164,10 @@ class ConfigValidator:
             "-admin.okta.com",
             "-admin.oktapreview.com",
             "-admin.okta-emea.com",
+            "-admin.okta-gov.com",
+            "-admin.okta.mil",
+            "-admin.okta-miltest.com",
+            "-admin.trex-govcloud.com",
         ]
         if any(string in url for string in admin_strings) or "-admin" in url:
             url_errors.append(
