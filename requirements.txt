@@ -9,7 +9,7 @@ pydash==8.0.5
 PyJWT==2.10.1
 python-dateutil==2.9.0.post0
 PyYAML==6.0.2
-requests==2.32.3
+requests==2.32.5
 xmltodict==0.14.2
 
 # Development & Testing Tools
