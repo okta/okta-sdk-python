@@ -20,4 +20,4 @@ pytest-asyncio==0.26.0
 pytest-mock==3.14.0
 pytest-recording==0.13.2
 tox==4.24.2
-twine==6.1.0
+twine==6.2.0
