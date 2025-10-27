@@ -10,7 +10,7 @@ PyJWT==2.10.1
 python-dateutil==2.9.0.post0
 PyYAML==6.0.2
 requests==2.32.3
-xmltodict==0.14.2
+xmltodict==1.0.2
 
 # Development & Testing Tools
 flake8==7.1.2
