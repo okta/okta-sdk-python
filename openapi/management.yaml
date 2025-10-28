@@ -23,7 +23,7 @@ servers:
     variables:
       yourOktaDomain:
         default: subdomain.okta.com
-        description: The domain of your organization. This can be a provided subdomain of an official okta domain (okta.com, oktapreview.com, etc) or one of your configured custom domains.
+        description: The domain of your organization. This can be a provided subdomain of an official okta domain (okta.com, oktapreview.com, okta-gov.com, okta.mil, okta-miltest.com, trex-govcloud.com, etc) or one of your configured custom domains.
 tags:
   - name: AgentPools
     x-displayName: Agent Pools
