@@ -1,5 +1,5 @@
 aenum==3.1.11
-aiohttp==3.12.14
+aiohttp==3.13.2
 blinker==1.9.0
 flatdict==4.0.1
 jwcrypto==1.5.6
