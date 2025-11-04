@@ -4,6 +4,7 @@ version: 2.1
 orbs:
   python: circleci/python@3.3.0
   platform-helpers-general: okta/general-platform-helpers@1.8
+  platform-helpers-general-v2: okta/eng-services-platform-helpers-general@2
   aws-cli: circleci/aws-cli@5.1
 
 jobs:
@@ -300,12 +301,17 @@ workflows:
             tags:
               only: /^v.*/
       
+      - platform-helpers-general-v2/job-secrets-obtain:
+          name: cache-secrets-job
+          secret-key: "PYPI_UPLOAD_API_TOKEN"
+
       # Publish only after all tests are successful
       - publish_to_pypi:
           context:
             - pypi-publish
           requires:
             - integration_tests
+            - cache-secrets-job
           filters:
             branches:
               only: master
