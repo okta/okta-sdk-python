@@ -7,7 +7,7 @@ orbs:
   aws-cli: circleci/aws-cli@5.1
 
 jobs:
-  build_and_test:
+  build:
     docker:
       - image: cimg/python:3.10
     steps:
@@ -29,19 +29,50 @@ jobs:
           name: Build Distribution
           command: |
             python setup.py sdist bdist_wheel
-      - run:
-          name: Run Unit Tests
-          command: |
-            pytest tests/ -v --junitxml=test-results/junit.xml || true
-      - store_test_results:
-          path: test-results
-      - store_artifacts:
-          path: test-results
       - persist_to_workspace:
           root: ~/project
           paths:
             - dist
             - ./*
+  
+  unit_tests:
+    docker:
+      - image: cimg/python:3.10
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "requirements.txt" }}
+            - v1-dependencies-
+      - run:
+          name: Run Unit Tests
+          command: |
+            pytest tests/unit -v --junitxml=test-results/unit/junit.xml || true
+      - store_test_results:
+          path: test-results
+      - store_artifacts:
+          path: test-results
+  
+  integration_tests:
+    docker:
+      - image: cimg/python:3.10
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "requirements.txt" }}
+            - v1-dependencies-
+      - run:
+          name: Run Integration Tests
+          command: |
+            pytest tests/integration -v --junitxml=test-results/integration/junit.xml || true
+      - store_test_results:
+          path: test-results
+      - store_artifacts:
+          path: test-results
+  
   snyk-scan:
     docker:
       - image: cimg/python:3.10
@@ -129,11 +160,21 @@ workflows:
           context:
             - okta-dcp
       
-      # Build and test only after security scans pass
-      - build_and_test:
+      # Build only after security scans pass
+      - build:
           requires:
             - snyk-scan
             - reversing-labs
+      
+      # Unit tests run after build succeeds
+      - unit_tests:
+          requires:
+            - build
+      
+      # Integration tests run after unit tests pass
+      - integration_tests:
+          requires:
+            - unit_tests
   
   # Publish workflow - only runs on master branch
   publish:
@@ -157,8 +198,8 @@ workflows:
             tags:
               only: /^v.*/
       
-      # Build and test only after security scans pass
-      - build_and_test:
+      # Build only after security scans pass
+      - build:
           requires:
             - snyk-scan
             - reversing-labs
@@ -168,12 +209,32 @@ workflows:
             tags:
               only: /^v.*/
       
-      # Publish only after build and tests are successful
+      # Unit tests run after build succeeds
+      - unit_tests:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
+            tags:
+              only: /^v.*/
+      
+      # Integration tests run after unit tests pass
+      - integration_tests:
+          requires:
+            - unit_tests
+          filters:
+            branches:
+              only: master
+            tags:
+              only: /^v.*/
+      
+      # Publish only after all tests are successful
       - publish_to_pypi:
           context:
             - pypi-publish
           requires:
-            - build_and_test
+            - integration_tests
           filters:
             branches:
               only: master
