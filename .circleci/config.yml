@@ -46,9 +46,11 @@ jobs:
     docker:
       - image: cimg/python:3.10
     steps:
-      - attach_workspace:
-          at: ~/project
       - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "requirements.txt" }}
+            - v1-dependencies-
       - run:
           name: Install Dependencies
           command: |
@@ -118,37 +120,28 @@ workflows:
   # Main workflow for all commits and PRs
   build_test_and_security:
     jobs:
-      # Build and test on every commit
-      - build_and_test
-      
-      # Security scans on every commit
+      # Security scans run first in parallel
       - snyk-scan:
           context:
             - static-analysis
-          requires:
-            - build_and_test
       
       - reversing-labs:
           context:
             - okta-dcp
+      
+      # Build and test only after security scans pass
+      - build_and_test:
           requires:
-            - build_and_test
+            - snyk-scan
+            - reversing-labs
   
   # Publish workflow - only runs on master branch
   publish:
     jobs:
-      - build_and_test:
-          filters:
-            branches:
-              only: master
-            tags:
-              only: /^v.*/
-      
+      # Security scans run first in parallel
       - snyk-scan:
           context:
             - static-analysis
-          requires:
-            - build_and_test
           filters:
             branches:
               only: master
@@ -158,21 +151,29 @@ workflows:
       - reversing-labs:
           context:
             - okta-dcp
-          requires:
-            - build_and_test
           filters:
             branches:
               only: master
             tags:
               only: /^v.*/
       
+      # Build and test only after security scans pass
+      - build_and_test:
+          requires:
+            - snyk-scan
+            - reversing-labs
+          filters:
+            branches:
+              only: master
+            tags:
+              only: /^v.*/
+      
+      # Publish only after build and tests are successful
       - publish_to_pypi:
           context:
             - pypi-publish
           requires:
             - build_and_test
-            - snyk-scan
-            - reversing-labs
           filters:
             branches:
               only: master
