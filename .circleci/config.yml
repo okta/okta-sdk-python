@@ -207,6 +207,7 @@ workflows:
       - platform-helpers-general/job-secrets-obtain:
           name: cache-secrets-job
           secret-key: "PYPI_UPLOAD_API_TOKEN"
+          resource_class: generic-linux-x86
 
       # Build only after security scans pass
       - build:
@@ -305,9 +306,7 @@ workflows:
             tags:
               only: /^v.*/
       
-      - platform-helpers-general/job-secrets-obtain:
-          name: cache-secrets-job
-          secret-key: "PYPI_UPLOAD_API_TOKEN"
+
 
       # Publish only after all tests are successful
       - publish_to_pypi:
@@ -315,7 +314,6 @@ workflows:
             - pypi-publish
           requires:
             - integration_tests
-            - cache-secrets-job
           filters:
             branches:
               only: master
