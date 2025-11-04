@@ -50,14 +50,31 @@ jobs:
           command: |
             pip install --upgrade pip setuptools wheel
             pip install -r requirements.txt
+            pip install pytest-cov
       - run:
-          name: Run Unit Tests
+          name: Run Unit Tests with Coverage
           command: |
-            pytest tests/unit -v --junitxml=test-results/unit/junit.xml || true
+            pytest tests/unit -v \
+              --junitxml=test-results/unit/junit.xml \
+              --cov=okta \
+              --cov-report=xml:coverage/unit/coverage.xml \
+              --cov-report=html:coverage/unit/html \
+              --cov-report=term-missing || true
+      - run:
+          name: Display Coverage Summary
+          command: |
+            if [ -f coverage/unit/coverage.xml ]; then
+              pip install coverage
+              coverage report --data-file=.coverage 2>/dev/null || echo "Coverage data processed"
+            fi
       - store_test_results:
           path: test-results
       - store_artifacts:
           path: test-results
+          destination: test-results
+      - store_artifacts:
+          path: coverage/unit
+          destination: coverage-unit
   
   integration_tests:
     docker:
@@ -74,14 +91,31 @@ jobs:
           command: |
             pip install --upgrade pip setuptools wheel
             pip install -r requirements.txt
+            pip install pytest-cov
       - run:
-          name: Run Integration Tests
+          name: Run Integration Tests with Coverage
           command: |
-            pytest tests/integration -v --junitxml=test-results/integration/junit.xml || true
+            pytest tests/integration -v \
+              --junitxml=test-results/integration/junit.xml \
+              --cov=okta \
+              --cov-report=xml:coverage/integration/coverage.xml \
+              --cov-report=html:coverage/integration/html \
+              --cov-report=term-missing || true
+      - run:
+          name: Display Coverage Summary
+          command: |
+            if [ -f coverage/integration/coverage.xml ]; then
+              pip install coverage
+              coverage report --data-file=.coverage 2>/dev/null || echo "Coverage data processed"
+            fi
       - store_test_results:
           path: test-results
       - store_artifacts:
           path: test-results
+          destination: test-results
+      - store_artifacts:
+          path: coverage/integration
+          destination: coverage-integration
   
   snyk-scan:
     docker:
