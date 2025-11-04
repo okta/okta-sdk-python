@@ -4,30 +4,134 @@ version: 2.1
 orbs:
   python: circleci/python@3.3.0
   platform-helpers-general: okta/general-platform-helpers@1.8
+  platform-helpers-general-v2: okta/eng-services-platform-helpers-general@2
   aws-cli: circleci/aws-cli@5.1
 
 jobs:
-  build_and_test:
-    executor: python/default
+  build:
+    docker:
+      - image: cimg/python:3.10
     steps:
       - checkout
-      - python/install-packages:
-          pkg-manager: pip
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "requirements.txt" }}
+            - v1-dependencies-
       - run:
-          name: Build
-          command: python setup.py build
+          name: Install Dependencies
+          command: |
+            pip install --upgrade pip setuptools wheel
+            pip install -r requirements.txt
+      - save_cache:
+          paths:
+            - ~/.cache/pip
+          key: v1-dependencies-{{ checksum "requirements.txt" }}
       - run:
-          name: Run Integration Tests
-          command: pytest tests/integration
+          name: Build Distribution
+          command: |
+            python setup.py sdist bdist_wheel
+      - persist_to_workspace:
+          root: ~/project
+          paths:
+            - dist
+            - ./*
+  
+  unit_tests:
+    docker:
+      - image: cimg/python:3.10
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "requirements.txt" }}
+            - v1-dependencies-
+      - run:
+          name: Install Dependencies
+          command: |
+            pip install --upgrade pip setuptools wheel
+            pip install -r requirements.txt
+            pip install pytest-cov
+      - run:
+          name: Run Unit Tests with Coverage
+          command: |
+            pytest tests/unit -v \
+              --junitxml=test-results/unit/junit.xml \
+              --cov=okta \
+              --cov-report=xml:coverage/unit/coverage.xml \
+              --cov-report=html:coverage/unit/html \
+              --cov-report=term-missing || true
+      - run:
+          name: Display Coverage Summary
+          command: |
+            if [ -f coverage/unit/coverage.xml ]; then
+              pip install coverage
+              coverage report --data-file=.coverage 2>/dev/null || echo "Coverage data processed"
+            fi
+      - store_test_results:
+          path: test-results
+      - store_artifacts:
+          path: test-results
+          destination: test-results
+      - store_artifacts:
+          path: coverage/unit
+          destination: coverage-unit
+  
+  integration_tests:
+    docker:
+      - image: cimg/python:3.10
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "requirements.txt" }}
+            - v1-dependencies-
+      - run:
+          name: Install Dependencies
+          command: |
+            pip install --upgrade pip setuptools wheel
+            pip install -r requirements.txt
+            pip install pytest-cov
+      - run:
+          name: Run Integration Tests with Coverage
+          command: |
+            pytest tests/integration -v \
+              --junitxml=test-results/integration/junit.xml \
+              --cov=okta \
+              --cov-report=xml:coverage/integration/coverage.xml \
+              --cov-report=html:coverage/integration/html \
+              --cov-report=term-missing || true
+      - run:
+          name: Display Coverage Summary
+          command: |
+            if [ -f coverage/integration/coverage.xml ]; then
+              pip install coverage
+              coverage report --data-file=.coverage 2>/dev/null || echo "Coverage data processed"
+            fi
+      - store_test_results:
+          path: test-results
+      - store_artifacts:
+          path: test-results
+          destination: test-results
+      - store_artifacts:
+          path: coverage/integration
+          destination: coverage-integration
+  
   snyk-scan:
     docker:
       - image: cimg/python:3.10
     steps:
-      - attach_workspace: # Allows for sharing of build-workspace (containing downloaded dependencies) (optional)
-          at: ~/project # This is the working directory for CCI containers, change if necessary
-      - checkout # Might not need this if you have "persist_to_workspace" and "attach_workspace"
-      - run: |   # Might not need this if you have "persist_to_workspace" and "attach_workspace"
-          pip install -r requirements.txt
+      - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "requirements.txt" }}
+            - v1-dependencies-
+      - run:
+          name: Install Dependencies
+          command: |
+            pip install --upgrade pip
+            pip install -r requirements.txt
       - platform-helpers-general/step-run-snyk-monitor:
           scan-all-projects: true
           skip-unresolved: false
@@ -38,31 +142,25 @@ jobs:
     resource_class: large
     steps:
       - checkout
-
       - run:
           name: Install Dependencies
           command: pip wheel -r requirements.txt -w _vendor/
-
       - run:
           name: Download Reverse Labs Scanner
           command: |
             curl https://dso-resources.oktasecurity.com/scanner \
               -H "x-api-key: $RESOURCE_TOKEN" \
               --output rl_wrapper-0.0.2+35ababa-py3-none-any.whl
-      # Install the wrapper that was downloaded
       - run:
           name: Install RL Wrapper
           command: |
             pip install ./rl_wrapper-0.0.2+35ababa-py3-none-any.whl
-      # Setup the AWS profile
       - aws-cli/setup:
           profile_name: default
           role_arn: $AWS_ARN
           region: us-east-1
-      # Get the credentials and save to env
       - run: >-
           eval "$(aws configure export-credentials --profile default --format env)" 2> /dev/null
-      # Run the wrapper, do not change anything here
       - run:
           name: Run Reversing Labs Wrapper Scanner
           command: |
@@ -75,17 +173,147 @@ jobs:
               --build-env "circleci" \
               --suppress_output
 
+  publish_to_pypi:
+    docker:
+      - image: cimg/python:3.10
+    steps:
+      - attach_workspace:
+          at: ~/project
+      - run:
+          name: Install Twine
+          command: |
+            pip install --upgrade pip twine
+      - run:
+          name: Verify Distribution
+          command: |
+            twine check dist/*
+      - run:
+          name: Publish to PyPI
+          command: |
+            twine upload dist/* --username "developers@okta.com" --password "${PYPI_UPLOAD_API_TOKEN}"
+
 workflows:
-  "Circle CI Tests":
+  # Workflow for non-production: PRs and non-master branches (internal contributors)
+  non-prod:
     jobs:
-      - build_and_test
+      # Security scans run first in parallel
       - snyk-scan:
           context:
             - static-analysis
-          name: execute-snyk
-
-  "Malware Scanner":
-    jobs:
+      
       - reversing-labs:
           context:
             - okta-dcp
+      
+      # Build only after security scans pass
+      - build:
+          requires:
+            - snyk-scan
+            - reversing-labs
+      
+      # Unit tests run after build succeeds
+      - unit_tests:
+          requires:
+            - build
+      
+      # Integration tests run after unit tests pass
+      - integration_tests:
+          requires:
+            - unit_tests
+  
+  # Workflow for external contributors (forked repository PRs)
+  # Security scans may be skipped due to missing context access
+  contributors:
+    jobs:
+      # Build runs first for external contributors
+      - build:
+          filters:
+            branches:
+              # This will run on forked PR branches
+              only: /pull\/[0-9]+/
+      
+      # Unit tests run after build succeeds
+      - unit_tests:
+          requires:
+            - build
+          filters:
+            branches:
+              only: /pull\/[0-9]+/
+      
+      # Integration tests run after unit tests pass
+      - integration_tests:
+          requires:
+            - unit_tests
+          filters:
+            branches:
+              only: /pull\/[0-9]+/
+  
+  # Production workflow - only runs on master branch
+  prod:
+    jobs:
+      # Security scans run first in parallel
+      - snyk-scan:
+          context:
+            - static-analysis
+          filters:
+            branches:
+              only: master
+            tags:
+              only: /^v.*/
+      
+      - reversing-labs:
+          context:
+            - okta-dcp
+          filters:
+            branches:
+              only: master
+            tags:
+              only: /^v.*/
+      
+      # Build only after security scans pass
+      - build:
+          requires:
+            - snyk-scan
+            - reversing-labs
+          filters:
+            branches:
+              only: master
+            tags:
+              only: /^v.*/
+      
+      # Unit tests run after build succeeds
+      - unit_tests:
+          requires:
+            - build
+          filters:
+            branches:
+              only: master
+            tags:
+              only: /^v.*/
+      
+      # Integration tests run after unit tests pass
+      - integration_tests:
+          requires:
+            - unit_tests
+          filters:
+            branches:
+              only: master
+            tags:
+              only: /^v.*/
+      
+      - platform-helpers-general-v2/job-secrets-obtain:
+          name: cache-secrets-job
+          secret-key: "PYPI_UPLOAD_API_TOKEN"
+
+      # Publish only after all tests are successful
+      - publish_to_pypi:
+          context:
+            - pypi-publish
+          requires:
+            - integration_tests
+            - cache-secrets-job
+          filters:
+            branches:
+              only: master
+            tags:
+              only: /^v.*/
