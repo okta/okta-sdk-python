@@ -189,7 +189,7 @@ jobs:
       - run:
           name: Publish to PyPI
           command: |
-            twine upload dist/* --username __token__ --password $PYPI_TOKEN
+            twine upload dist/* --username "developers@okta.com" --password "${PYPI_UPLOAD_API_TOKEN}"
 
 workflows:
   # Workflow for non-production: PRs and non-master branches (internal contributors)
@@ -204,11 +204,16 @@ workflows:
           context:
             - okta-dcp
       
+      - platform-helpers-general/job-secrets-obtain:
+          name: cache-secrets-job
+          secret-key: "PYPI_UPLOAD_API_TOKEN"
+
       # Build only after security scans pass
       - build:
           requires:
             - snyk-scan
             - reversing-labs
+            - cache-secrets-job
       
       # Unit tests run after build succeeds
       - unit_tests:
@@ -300,12 +305,17 @@ workflows:
             tags:
               only: /^v.*/
       
+      - platform-helpers-general/job-secrets-obtain:
+          name: cache-secrets-job
+          secret-key: "PYPI_UPLOAD_API_TOKEN"
+
       # Publish only after all tests are successful
       - publish_to_pypi:
           context:
             - pypi-publish
           requires:
             - integration_tests
+            - cache-secrets-job
           filters:
             branches:
               only: master
