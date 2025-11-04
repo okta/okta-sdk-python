@@ -46,6 +46,11 @@ jobs:
             - v1-dependencies-{{ checksum "requirements.txt" }}
             - v1-dependencies-
       - run:
+          name: Install Dependencies
+          command: |
+            pip install --upgrade pip setuptools wheel
+            pip install -r requirements.txt
+      - run:
           name: Run Unit Tests
           command: |
             pytest tests/unit -v --junitxml=test-results/unit/junit.xml || true
@@ -64,6 +69,11 @@ jobs:
           keys:
             - v1-dependencies-{{ checksum "requirements.txt" }}
             - v1-dependencies-
+      - run:
+          name: Install Dependencies
+          command: |
+            pip install --upgrade pip setuptools wheel
+            pip install -r requirements.txt
       - run:
           name: Run Integration Tests
           command: |
@@ -148,8 +158,8 @@ jobs:
             twine upload dist/* --username __token__ --password $PYPI_TOKEN
 
 workflows:
-  # Main workflow for all commits and PRs
-  build_test_and_security:
+  # Workflow for non-production: PRs and non-master branches (internal contributors)
+  non-prod:
     jobs:
       # Security scans run first in parallel
       - snyk-scan:
@@ -176,8 +186,35 @@ workflows:
           requires:
             - unit_tests
   
-  # Publish workflow - only runs on master branch
-  publish:
+  # Workflow for external contributors (forked repository PRs)
+  # Security scans may be skipped due to missing context access
+  contributors:
+    jobs:
+      # Build runs first for external contributors
+      - build:
+          filters:
+            branches:
+              # This will run on forked PR branches
+              only: /pull\/[0-9]+/
+      
+      # Unit tests run after build succeeds
+      - unit_tests:
+          requires:
+            - build
+          filters:
+            branches:
+              only: /pull\/[0-9]+/
+      
+      # Integration tests run after unit tests pass
+      - integration_tests:
+          requires:
+            - unit_tests
+          filters:
+            branches:
+              only: /pull\/[0-9]+/
+  
+  # Production workflow - only runs on master branch
+  prod:
     jobs:
       # Security scans run first in parallel
       - snyk-scan:
