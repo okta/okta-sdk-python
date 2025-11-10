@@ -1,4 +1,3 @@
-# This workflow will install Python dependencies, run tests and lint with a variety of Python versions
 version: 2.1
 
 orbs:
@@ -75,6 +74,37 @@ jobs:
               --build-env "circleci" \
               --suppress_output
 
+  generate-and-push-txts:
+    docker:
+      - image: cimg/python:3.10
+    steps:
+      - checkout
+
+      - run:
+          name: Install dependencies
+          command: pip install -r requirements.txt
+
+      - run:
+          name: Run script to generate all .txt files
+          command: |
+            python scripts/process_api_files.py
+
+
+      - run:
+          name: Push generated .txt files to okta-mcp-server
+          command: |
+            git clone git@github.com:your-org/okta-mcp-server.git
+            mkdir -p okta-mcp-server/txt-specs/
+            cp okta/output_txt_files/*.txt okta-mcp-server/txt-specs/
+
+            cd okta-mcp-server
+            git config user.email "ci-bot@yourorg.com"
+            git config user.name "CI Bot"
+
+            git add txt-specs/
+            git commit -m "chore: bootstrap: update .txt specs from okta-python-sdk"
+            git push origin main
+
 workflows:
   "Circle CI Tests":
     jobs:
@@ -89,3 +119,11 @@ workflows:
       - reversing-labs:
           context:
             - okta-dcp
+
+  "Initial MCP Sync":
+    jobs:
+      - generate-and-push-txts:
+          filters:
+            branches:
+              only:
+                - mcp-bootstrap  # 🧪 Run this job ONLY on this branch (manual trigger for now)
