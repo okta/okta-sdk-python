@@ -87,7 +87,7 @@ class ApiClient:
             configuration = Configuration.get_default()
         self.configuration = Configuration(
             host=configuration["client"]["orgUrl"],
-            access_token=configuration["client"]["token"],
+            access_token=configuration["client"].get("token", None),
             api_key=configuration["client"].get("privateKey", None),
             authorization_mode=configuration["client"].get("authorizationMode", "SSWS"),
         )
