@@ -82,7 +82,6 @@ class OAuth:
             "grant_type": "client_credentials",
             "scope": " ".join(self._config["client"]["scopes"]),
             "client_assertion_type": "urn:ietf:params:oauth:client-assertion-type:jwt-bearer",
-            "client_assertion": jwt,
         }
 
         encoded_parameters = urlencode(parameters, quote_via=quote)

@@ -61,7 +61,7 @@ class UserProfile(BaseModel):
     locale: Optional[StrictStr] = Field(
         default=None,
         description="The language specified as an [IETF BCP 47 language tag]("
-                    "https://datatracker.ietf.org/doc/html/rfc5646)",
+        "https://datatracker.ietf.org/doc/html/rfc5646)",
     )
     login: Optional[Annotated[str, Field(strict=True, max_length=100)]] = None
     manager: Optional[StrictStr] = None
@@ -83,7 +83,7 @@ class UserProfile(BaseModel):
     )
     profile_url: Optional[StrictStr] = Field(default=None, alias="profileUrl")
     second_email: Optional[
-        Annotated[str, Field(min_length=5, strict=True, max_length=100)]
+        Annotated[str, Field(min_length=0, strict=True, max_length=100)]
     ] = Field(default=None, alias="secondEmail")
     state: Optional[Annotated[str, Field(strict=True, max_length=128)]] = None
     street_address: Optional[Annotated[str, Field(strict=True, max_length=1024)]] = (
