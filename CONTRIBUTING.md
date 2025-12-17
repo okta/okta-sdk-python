@@ -50,23 +50,35 @@ $ git commit -m "descriptive commit message for your changes"
 Models and APIs are auto-generated in accordance with specific openapi spec defined in openapi/management.yaml file.
 In order to make changes in models and/or APIs you need to determine what is the root of changes:
 
+### Prerequisites
+1. get specific openapi spec version (v7.7.0 in the following example):
+  ```sh
+  cd openapi
+  npm install @openapitools/openapi-generator-cli -g
+  openapi-generator-cli version-manager set 7.7.0
+  ```
+
 ### if change is needed because of new version of openapi spec that has been released, then:
 
    1. Make changes to the management.yaml file.
    2. Re-generate SDK and verify SDK generation is successfully.
+
+      a. Change directory to openapi. `cd openapi`
+
+      b. Run the build script to re-generate the Okta SDK Python package:
+`generate.sh`
    3. Raise the PR mentioning details about the changes made to the management.yaml file.
-  ```sh
-  yarn build
-  ```
 
 ### if change isn't related to new openapi spec version, for example, update template for models, then:
 
    1. edit needed templates under `openapi/templates` directory
 
    2. re-generate okta-sdk-python (in openapi directory):
-  ```sh
-  yarn build
-  ```
+
+      a. Change directory to openapi. `cd openapi`
+
+      b. Run the build script to re-generate the Okta SDK Python package:
+`generate.sh`
 
 ## Adding/Changing Tests
 
