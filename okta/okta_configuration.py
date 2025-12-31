@@ -23,14 +23,9 @@
 import os
 from pathlib import Path
 
-from yaml import load
+import yaml
 
 from okta.configuration import Configuration
-
-try:
-    from yaml import CLoader as Loader
-except ImportError:
-    from yaml import Loader
 
 
 class OktaConfiguration():
@@ -43,8 +38,9 @@ class OktaConfiguration():
 
     def read_configuration(self, file_path) -> Configuration:
         if Path(file_path).is_file():
-            text = open(file_path).read()
-            okta_config = load(text, Loader=Loader)
+            with open(file_path, 'r') as f:
+                text = f.read()
+            okta_config = yaml.safe_load(text)
             config = Configuration()
             config.host = okta_config['oktaDomain']
             config.api_key['apiToken'] = okta_config['apiKey']
