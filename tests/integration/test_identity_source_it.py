@@ -188,8 +188,6 @@ class TestIdentitySourceResource:
             home_address="123 Main St, City, State 12345",
             second_email="test2@example.com",
         )
-        # Add externalId using additional_properties (simulating HR system employee ID)
-        upsert_profile.additional_properties["externalId"] = "EMP009876"
 
         # Verify model properties
         assert upsert_profile.email == "test@example.com"
@@ -217,15 +215,20 @@ class TestIdentitySourceResource:
         assert isinstance(delete_dict, dict)
         assert "externalId" in delete_dict
 
-        # Test BulkUpsertRequestBody
+        # Test BulkUpsertRequestBody - need to wrap profile in BulkUpsertRequestBodyProfilesInner
+        profile_wrapper = models.BulkUpsertRequestBodyProfilesInner(
+            external_id="EMP009876",
+            profile=upsert_profile
+        )
         bulk_upsert = models.BulkUpsertRequestBody(
-            profiles=[upsert_profile], entity_type="USERS"
+            profiles=[profile_wrapper], entity_type="USERS"
         )
 
         assert len(bulk_upsert.profiles) == 1
-        assert bulk_upsert.profiles[0] == upsert_profile
+        assert bulk_upsert.profiles[0].external_id == "EMP009876"
+        assert bulk_upsert.profiles[0].profile == upsert_profile
 
-        # Test BulkDeleteRequestBody
+        # Test BulkDeleteRequestBody - directly uses IdentitySourceUserProfileForDelete
         bulk_delete = models.BulkDeleteRequestBody(
             profiles=[delete_profile], entity_type="USERS"
         )

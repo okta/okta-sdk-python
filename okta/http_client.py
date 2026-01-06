@@ -1,10 +1,8 @@
 # The Okta software accompanied by this notice is provided pursuant to the following terms:
 # Copyright © 2025-Present, Okta, Inc.
-# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the
-# License.
+# Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0.
-# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
-# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and limitations under the License.
 # coding: utf-8
 
@@ -20,17 +18,17 @@
     Do not edit the class manually.
 """  # noqa: E501
 
+
+import aiohttp
 import asyncio
 import json
 import logging
 import os
-
-import aiohttp
 import xmltodict
-
 from okta.errors.http_error import HTTPError
 from okta.errors.okta_api_error import OktaAPIError
 from okta.exceptions import HTTPException, OktaAPIException
+
 
 logger = logging.getLogger('okta-sdk-python')
 
@@ -48,7 +46,7 @@ class HTTPClient:
         # Create timeout for all HTTP requests
         self._timeout = aiohttp.ClientTimeout(
             total=http_config["requestTimeout"] if "requestTimeout" in
-                                                   http_config and http_config["requestTimeout"] > 0 else None
+            http_config and http_config["requestTimeout"] > 0 else None
         )
         if "proxy" in http_config:
             self._proxy = self._setup_proxy(http_config["proxy"])
@@ -90,11 +88,9 @@ class HTTPClient:
             # Set headers
             self._default_headers.update(request["headers"])
             # Prepare request parameters
-            params = {
-                'method': request['method'],
-                'url': request['url'],
-                'headers': self._default_headers
-            }
+            params = {'method': request['method'],
+                      'url': request['url'],
+                      'headers': self._default_headers}
             if request['data']:
                 params['data'] = json.dumps(request['data'])
             elif request['form']:
@@ -114,22 +110,18 @@ class HTTPClient:
             if self._session is not None:
                 logger.debug('Request with re-usable session.')
                 async with self._session.request(**params) as response:
-                    return (
-                        response.request_info,
-                        response,
-                        await response.text(),
-                        None
-                    )
+                    return (response.request_info,
+                            response,
+                            await response.text(),
+                            None)
             else:
                 logger.debug('Request without re-usable session.')
                 async with aiohttp.ClientSession() as session:
                     async with session.request(**params) as response:
-                        return (
-                            response.request_info,
-                            response,
-                            await response.text(),
-                            None
-                        )
+                        return (response.request_info,
+                                response,
+                                await response.text(),
+                                None)
         except (aiohttp.ClientError, asyncio.TimeoutError) as error:
             # Return error if arises
             logger.exception(error)

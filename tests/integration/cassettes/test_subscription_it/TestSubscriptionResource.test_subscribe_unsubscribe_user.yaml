@@ -92,7 +92,7 @@ interactions:
       User-Agent:
       - okta-sdk-python/2.3.1 python/3.8.2 Darwin/20.6.0
     method: POST
-    uri: https://test.okta.com/api/v1/users/00ukqewta2nwxYyZ25d6/subscriptions/OKTA_ISSUE/subscribe
+    uri: https://test.okta.com/api/v1/users/00ukqewta2nwxYyZ25d6/subscriptions/OKTA_UPDATE/subscribe
   response:
     body:
       string: ''
@@ -155,7 +155,7 @@ interactions:
     status:
       code: 200
       message: OK
-    url: https://test.okta.com//api/v1/users/00ukqewta2nwxYyZ25d6/subscriptions/OKTA_ISSUE/subscribe
+    url: https://test.okta.com//api/v1/users/00ukqewta2nwxYyZ25d6/subscriptions/OKTA_UPDATE/subscribe
 - request:
     body: null
     headers:
@@ -166,10 +166,10 @@ interactions:
       User-Agent:
       - okta-sdk-python/2.3.1 python/3.8.2 Darwin/20.6.0
     method: GET
-    uri: https://test.okta.com/api/v1/users/00ukqewta2nwxYyZ25d6/subscriptions/OKTA_ISSUE
+    uri: https://test.okta.com/api/v1/users/00ukqewta2nwxYyZ25d6/subscriptions/OKTA_UPDATE
   response:
     body:
-      string: '{"notificationType":"OKTA_ISSUE","channels":["email"],"status":"subscribed","_links":{"unsubscribe":{"href":"https://test.okta.com/api/v1/users/00ukqewta2nwxYyZ25d6/subscriptions/OKTA_ISSUE/unsubscribe","hints":{"allow":["POST"]}},"self":{"href":"https://test.okta.com/api/v1/users/00ukqewta2nwxYyZ25d6/subscriptions/OKTA_ISSUE"}}}'
+      string: '{"notificationType":"OKTA_UPDATE","channels":["email"],"status":"subscribed","_links":{"unsubscribe":{"href":"https://test.okta.com/api/v1/users/00ukqewta2nwxYyZ25d6/subscriptions/OKTA_UPDATE/unsubscribe","hints":{"allow":["POST"]}},"self":{"href":"https://test.okta.com/api/v1/users/00ukqewta2nwxYyZ25d6/subscriptions/OKTA_UPDATE"}}}'
     headers:
       Cache-Control:
       - no-cache, no-store
@@ -235,7 +235,7 @@ interactions:
     status:
       code: 200
       message: OK
-    url: https://test.okta.com//api/v1/users/00ukqewta2nwxYyZ25d6/subscriptions/OKTA_ISSUE
+    url: https://test.okta.com//api/v1/users/00ukqewta2nwxYyZ25d6/subscriptions/OKTA_UPDATE
 - request:
     body: null
     headers:
@@ -246,7 +246,7 @@ interactions:
       User-Agent:
       - okta-sdk-python/2.3.1 python/3.8.2 Darwin/20.6.0
     method: POST
-    uri: https://test.okta.com/api/v1/users/00ukqewta2nwxYyZ25d6/subscriptions/OKTA_ISSUE/unsubscribe
+    uri: https://test.okta.com/api/v1/users/00ukqewta2nwxYyZ25d6/subscriptions/OKTA_UPDATE/unsubscribe
   response:
     body:
       string: ''
@@ -309,7 +309,7 @@ interactions:
     status:
       code: 200
       message: OK
-    url: https://test.okta.com//api/v1/users/00ukqewta2nwxYyZ25d6/subscriptions/OKTA_ISSUE/unsubscribe
+    url: https://test.okta.com//api/v1/users/00ukqewta2nwxYyZ25d6/subscriptions/OKTA_UPDATE/unsubscribe
 - request:
     body: null
     headers:
@@ -320,10 +320,10 @@ interactions:
       User-Agent:
       - okta-sdk-python/2.3.1 python/3.8.2 Darwin/20.6.0
     method: GET
-    uri: https://test.okta.com/api/v1/users/00ukqewta2nwxYyZ25d6/subscriptions/OKTA_ISSUE
+    uri: https://test.okta.com/api/v1/users/00ukqewta2nwxYyZ25d6/subscriptions/OKTA_UPDATE
   response:
     body:
-      string: '{"notificationType":"OKTA_ISSUE","channels":["email"],"status":"unsubscribed","_links":{"subscribe":{"href":"https://test.okta.com/api/v1/users/00ukqewta2nwxYyZ25d6/subscriptions/OKTA_ISSUE/subscribe","hints":{"allow":["POST"]}},"self":{"href":"https://test.okta.com/api/v1/users/00ukqewta2nwxYyZ25d6/subscriptions/OKTA_ISSUE"}}}'
+      string: '{"notificationType":"OKTA_UPDATE","channels":["email"],"status":"unsubscribed","_links":{"subscribe":{"href":"https://test.okta.com/api/v1/users/00ukqewta2nwxYyZ25d6/subscriptions/OKTA_UPDATE/subscribe","hints":{"allow":["POST"]}},"self":{"href":"https://test.okta.com/api/v1/users/00ukqewta2nwxYyZ25d6/subscriptions/OKTA_UPDATE"}}}'
     headers:
       Cache-Control:
       - no-cache, no-store
@@ -389,5 +389,5 @@ interactions:
     status:
       code: 200
       message: OK
-    url: https://test.okta.com//api/v1/users/00ukqewta2nwxYyZ25d6/subscriptions/OKTA_ISSUE
+    url: https://test.okta.com//api/v1/users/00ukqewta2nwxYyZ25d6/subscriptions/OKTA_UPDATE
 version: 1

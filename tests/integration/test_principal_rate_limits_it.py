@@ -352,7 +352,7 @@ class TestPrincipalRateLimitResource:
 
             # Test list with http info first (most reliable)
             entities_list, resp, err = (
-                await client.list_principal_rate_limit_entities_with_http_info(
+                await client.list_principal_rate_limit_entities(
                     filter='principalType eq "SSWS_TOKEN"'
                 )
             )
@@ -365,7 +365,7 @@ class TestPrincipalRateLimitResource:
 
             # Test get with http info using existing entity
             retrieved_entity, resp, err = (
-                await client.get_principal_rate_limit_entity_with_http_info(
+                await client.get_principal_rate_limit_entity(
                     existing_entity.id
                 )
             )
@@ -395,7 +395,7 @@ class TestPrincipalRateLimitResource:
             )
 
             replaced_entity, resp, err = (
-                await client.replace_principal_rate_limit_entity_with_http_info(
+                await client.replace_principal_rate_limit_entity(
                     existing_entity.id, updated_entity
                 )
             )
@@ -445,7 +445,7 @@ class TestPrincipalRateLimitResource:
         try:
             # Test without preload content variants - these return different response objects
             _, resp, err = (
-                await client.create_principal_rate_limit_entity_without_preload_content(
+                await client.create_principal_rate_limit_entity(
                     entity
                 )
             )
@@ -475,7 +475,7 @@ class TestPrincipalRateLimitResource:
     @pytest.mark.vcr()
     @pytest.mark.asyncio
     async def test_get_without_preload_content_method(self, fs):
-        """Test get_principal_rate_limit_entity_without_preload_content method specifically"""
+        """Test get_principal_rate_limit_entity method specifically"""
         client = MockOktaClient(fs)
         await self._capture_initial_state(client)
 
@@ -516,9 +516,9 @@ class TestPrincipalRateLimitResource:
                 # Successfully created, track for cleanup
                 self.created_entities.append(created_entity.id)
 
-            # Now test get_without_preload_content
+            # Now test get
             _, resp, err = (
-                await client.get_principal_rate_limit_entity_without_preload_content(
+                await client.get_principal_rate_limit_entity(
                     created_entity.id
                 )
             )
@@ -531,7 +531,7 @@ class TestPrincipalRateLimitResource:
             assert hasattr(resp, "headers")
 
             print(
-                "Successfully tested get_principal_rate_limit_entity_without_preload_content"
+                "Successfully tested get_principal_rate_limit_entity"
             )
 
         finally:
@@ -540,14 +540,14 @@ class TestPrincipalRateLimitResource:
     @pytest.mark.vcr()
     @pytest.mark.asyncio
     async def test_list_without_preload_content_method(self, fs):
-        """Test list_principal_rate_limit_entities_without_preload_content method specifically"""
+        """Test list_principal_rate_limit_entities method specifically"""
         client = MockOktaClient(fs)
         await self._capture_initial_state(client)
 
         try:
             # Test list without preload content with filter
             _, resp, err = (
-                await client.list_principal_rate_limit_entities_without_preload_content(
+                await client.list_principal_rate_limit_entities(
                     filter='principalType eq "SSWS_TOKEN"'
                 )
             )
@@ -571,7 +571,7 @@ class TestPrincipalRateLimitResource:
             # Test without filter to verify it handles filter requirement properly
             try:
                 _, resp_no_filter, err_no_filter = (
-                    await client.list_principal_rate_limit_entities_without_preload_content()
+                    await client.list_principal_rate_limit_entities()
                 )
                 if err_no_filter and "filter" in str(err_no_filter).lower():
                     print(
@@ -589,7 +589,7 @@ class TestPrincipalRateLimitResource:
                     raise
 
             print(
-                "Successfully tested list_principal_rate_limit_entities_without_preload_content"
+                "Successfully tested list_principal_rate_limit_entities"
             )
 
         finally:
@@ -598,7 +598,7 @@ class TestPrincipalRateLimitResource:
     @pytest.mark.vcr()
     @pytest.mark.asyncio
     async def test_replace_without_preload_content_method(self, fs):
-        """Test replace_principal_rate_limit_entity_without_preload_content method specifically"""
+        """Test replace_principal_rate_limit_entity method specifically"""
         client = MockOktaClient(fs)
         await self._capture_initial_state(client)
 
@@ -650,9 +650,9 @@ class TestPrincipalRateLimitResource:
                 concurrency_percentage=80,  # Changed from 45
             )
 
-            # Now test replace_without_preload_content
+            # Now test replace
             _, resp, err = (
-                await client.replace_principal_rate_limit_entity_without_preload_content(
+                await client.replace_principal_rate_limit_entity(
                     created_entity.id, updated_entity
                 )
             )
@@ -679,7 +679,7 @@ class TestPrincipalRateLimitResource:
                 ), "Concurrency percentage should remain unchanged (read-only field)"
 
             print(
-                "Successfully tested replace_principal_rate_limit_entity_without_preload_content"
+                "Successfully tested replace_principal_rate_limit_entity"
             )
 
         finally:
@@ -1015,63 +1015,63 @@ class TestPrincipalRateLimitResource:
             # Test HTTP info variants (additional 4 methods)
             try:
                 # Just test that these methods exist and are callable
-                # create_principal_rate_limit_entity_with_http_info
-                hasattr(client, "create_principal_rate_limit_entity_with_http_info")
+                # create_principal_rate_limit_entity
+                hasattr(client, "create_principal_rate_limit_entity")
                 methods_tested.append(
-                    "create_principal_rate_limit_entity_with_http_info"
+                    "create_principal_rate_limit_entity"
                 )
 
-                # get_principal_rate_limit_entity_with_http_info
-                hasattr(client, "get_principal_rate_limit_entity_with_http_info")
-                methods_tested.append("get_principal_rate_limit_entity_with_http_info")
+                # get_principal_rate_limit_entity
+                hasattr(client, "get_principal_rate_limit_entity")
+                methods_tested.append("get_principal_rate_limit_entity")
 
-                # list_principal_rate_limit_entities_with_http_info
-                hasattr(client, "list_principal_rate_limit_entities_with_http_info")
+                # list_principal_rate_limit_entities
+                hasattr(client, "list_principal_rate_limit_entities")
                 methods_tested.append(
-                    "list_principal_rate_limit_entities_with_http_info"
+                    "list_principal_rate_limit_entities"
                 )
 
-                # replace_principal_rate_limit_entity_with_http_info
-                hasattr(client, "replace_principal_rate_limit_entity_with_http_info")
+                # replace_principal_rate_limit_entity
+                hasattr(client, "replace_principal_rate_limit_entity")
                 methods_tested.append(
-                    "replace_principal_rate_limit_entity_with_http_info"
+                    "replace_principal_rate_limit_entity"
                 )
             except Exception:
                 pass
 
             # Test without preload content variants (additional 4 methods)
             try:
-                # create_principal_rate_limit_entity_without_preload_content
+                # create_principal_rate_limit_entity
                 hasattr(
-                    client, "create_principal_rate_limit_entity_without_preload_content"
+                    client, "create_principal_rate_limit_entity"
                 )
                 methods_tested.append(
-                    "create_principal_rate_limit_entity_without_preload_content"
+                    "create_principal_rate_limit_entity"
                 )
 
-                # get_principal_rate_limit_entity_without_preload_content
+                # get_principal_rate_limit_entity
                 hasattr(
-                    client, "get_principal_rate_limit_entity_without_preload_content"
+                    client, "get_principal_rate_limit_entity"
                 )
                 methods_tested.append(
-                    "get_principal_rate_limit_entity_without_preload_content"
+                    "get_principal_rate_limit_entity"
                 )
 
-                # list_principal_rate_limit_entities_without_preload_content
+                # list_principal_rate_limit_entities
                 hasattr(
-                    client, "list_principal_rate_limit_entities_without_preload_content"
+                    client, "list_principal_rate_limit_entities"
                 )
                 methods_tested.append(
-                    "list_principal_rate_limit_entities_without_preload_content"
+                    "list_principal_rate_limit_entities"
                 )
 
-                # replace_principal_rate_limit_entity_without_preload_content
+                # replace_principal_rate_limit_entity
                 hasattr(
                     client,
-                    "replace_principal_rate_limit_entity_without_preload_content",
+                    "replace_principal_rate_limit_entity",
                 )
                 methods_tested.append(
-                    "replace_principal_rate_limit_entity_without_preload_content"
+                    "replace_principal_rate_limit_entity"
                 )
             except Exception:
                 pass

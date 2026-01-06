@@ -14,7 +14,6 @@ from http import HTTPStatus
 import pytest
 
 import okta.models as models
-from okta import AuthorizationServerPolicy
 from okta.errors.okta_api_error import OktaAPIError
 from tests.mocks import MockOktaClient
 
@@ -424,12 +423,11 @@ class TestAuthorizationServerResource:
             assert created_auth_server.audiences[0] == TEST_AUDS[0]
 
             # Create Policy
-            POLICY_TYPE = models.PolicyType.OKTA_SIGN_ON.value
             POLICY_STATUS = "ACTIVE"
             POLICY_NAME = "Test Policy"
             POLICY_DESC = "Test Policy"
             POLICY_PRIORITY = 1
-            POLICY_CONDITIONS = models.PolicyRuleConditions(
+            POLICY_CONDITIONS = models.AuthorizationServerPolicyConditions(
                 **{
                     "clients": models.ClientPolicyCondition(
                         **{"include": ["ALL_CLIENTS"]}
@@ -439,7 +437,7 @@ class TestAuthorizationServerResource:
 
             policy_model = models.AuthorizationServerPolicy(
                 **{
-                    "type": POLICY_TYPE,
+                    "type": "OAUTH_AUTHORIZATION_POLICY",
                     "status": POLICY_STATUS,
                     "name": POLICY_NAME,
                     "description": POLICY_DESC,
@@ -500,6 +498,8 @@ class TestAuthorizationServerResource:
             **{"name": TEST_NAME, "description": TEST_DESC, "audiences": TEST_AUDS}
         )
 
+        created_auth_server = None
+        created_policy = None
         try:
             created_auth_server, _, err = await client.create_authorization_server(
                 auth_server_model
@@ -512,12 +512,11 @@ class TestAuthorizationServerResource:
             assert created_auth_server.audiences[0] == TEST_AUDS[0]
 
             # Create Policy
-            POLICY_TYPE = models.PolicyType.OKTA_SIGN_ON.value
             POLICY_STATUS = "ACTIVE"
             POLICY_NAME = "Test Policy"
             POLICY_DESC = "Test Policy"
             POLICY_PRIORITY = 1
-            POLICY_CONDITIONS = models.PolicyRuleConditions(
+            POLICY_CONDITIONS = models.AuthorizationServerPolicyConditions(
                 **{
                     "clients": models.ClientPolicyCondition(
                         **{"include": ["ALL_CLIENTS"]}
@@ -525,19 +524,9 @@ class TestAuthorizationServerResource:
                 }
             )
 
-            policy_model = models.Policy(
+            policy_model = models.AuthorizationServerPolicy(
                 **{
-                    "type": POLICY_TYPE,
-                    "status": POLICY_STATUS,
-                    "name": POLICY_NAME,
-                    "description": POLICY_DESC,
-                    "priority": POLICY_PRIORITY,
-                    "conditions": POLICY_CONDITIONS,
-                }
-            )
-            policy_model = AuthorizationServerPolicy(
-                **{
-                    "type": "OKTA_SIGN_ON",
+                    "type": "OAUTH_AUTHORIZATION_POLICY",
                     "status": POLICY_STATUS,
                     "name": POLICY_NAME,
                     "description": POLICY_DESC,
@@ -563,25 +552,28 @@ class TestAuthorizationServerResource:
             errors = []
             # Clean up
             try:
-                _, _, err = await client.delete_authorization_server_policy(
-                    created_auth_server.id, created_policy.id
-                )
-                assert err is None
+                if created_auth_server and created_policy:
+                    _, _, err = await client.delete_authorization_server_policy(
+                        created_auth_server.id, created_policy.id
+                    )
+                    assert err is None
             except Exception as exc:
                 errors.append(exc)
 
             try:
-                _, _, err = await client.deactivate_authorization_server(
-                    created_auth_server.id
-                )
-                assert err is None
+                if created_auth_server:
+                    _, _, err = await client.deactivate_authorization_server(
+                        created_auth_server.id
+                    )
+                    assert err is None
             except Exception as exc:
                 errors.append(exc)
             try:
-                _, _, err = await client.delete_authorization_server(
-                    created_auth_server.id
-                )
-                assert err is None
+                if created_auth_server:
+                    _, _, err = await client.delete_authorization_server(
+                        created_auth_server.id
+                    )
+                    assert err is None
             except Exception as exc:
                 errors.append(exc)
             assert len(errors) == 0
@@ -612,12 +604,11 @@ class TestAuthorizationServerResource:
             assert created_auth_server.audiences[0] == TEST_AUDS[0]
 
             # Create Policy
-            POLICY_TYPE = models.PolicyType.OKTA_SIGN_ON.value
             POLICY_STATUS = "ACTIVE"
             POLICY_NAME = "Test Policy"
             POLICY_DESC = "Test Policy"
             POLICY_PRIORITY = 1
-            POLICY_CONDITIONS = models.PolicyRuleConditions(
+            POLICY_CONDITIONS = models.AuthorizationServerPolicyConditions(
                 **{
                     "clients": models.ClientPolicyCondition(
                         **{"include": ["ALL_CLIENTS"]}
@@ -627,7 +618,7 @@ class TestAuthorizationServerResource:
 
             policy_model = models.AuthorizationServerPolicy(
                 **{
-                    "type": POLICY_TYPE,
+                    "type": "OAUTH_AUTHORIZATION_POLICY",
                     "status": POLICY_STATUS,
                     "name": POLICY_NAME,
                     "description": POLICY_DESC,
@@ -709,12 +700,11 @@ class TestAuthorizationServerResource:
             assert created_auth_server.audiences[0] == TEST_AUDS[0]
 
             # Create Policy
-            POLICY_TYPE = models.PolicyType.OKTA_SIGN_ON.value
             POLICY_STATUS = "ACTIVE"
             POLICY_NAME = "Test Policy"
             POLICY_DESC = "Test Policy"
             POLICY_PRIORITY = 1
-            POLICY_CONDITIONS = models.PolicyRuleConditions(
+            POLICY_CONDITIONS = models.AuthorizationServerPolicyConditions(
                 **{
                     "clients": models.ClientPolicyCondition(
                         **{"include": ["ALL_CLIENTS"]}
@@ -724,7 +714,7 @@ class TestAuthorizationServerResource:
 
             policy_model = models.AuthorizationServerPolicy(
                 **{
-                    "type": POLICY_TYPE,
+                    "type": "OAUTH_AUTHORIZATION_POLICY",
                     "status": POLICY_STATUS,
                     "name": POLICY_NAME,
                     "description": POLICY_DESC,
@@ -1583,12 +1573,11 @@ class TestAuthorizationServerResource:
             assert created_auth_server.audiences[0] == TEST_AUDS[0]
 
             # Create Policy
-            POLICY_TYPE = models.PolicyType.OKTA_SIGN_ON.value
             POLICY_STATUS = "ACTIVE"
             POLICY_NAME = "Test Policy"
             POLICY_DESC = "Test Policy"
             POLICY_PRIORITY = 1
-            POLICY_CONDITIONS = models.PolicyRuleConditions(
+            POLICY_CONDITIONS = models.AuthorizationServerPolicyConditions(
                 **{
                     "clients": models.ClientPolicyCondition(
                         **{"include": ["ALL_CLIENTS"]}
@@ -1598,7 +1587,7 @@ class TestAuthorizationServerResource:
 
             policy_model = models.AuthorizationServerPolicy(
                 **{
-                    "type": POLICY_TYPE,
+                    "type": "OAUTH_AUTHORIZATION_POLICY",
                     "status": POLICY_STATUS,
                     "name": POLICY_NAME,
                     "description": POLICY_DESC,
@@ -1623,7 +1612,7 @@ class TestAuthorizationServerResource:
             )
             POLICY_RULE_CONDITIONS = models.AuthorizationServerPolicyRuleConditions(
                 **{
-                    "people": models.PolicyPeopleCondition(**{"include": ["EVERYONE"]}),
+                    "people": models.AuthorizationServerPolicyPeopleCondition(**{"include": ["EVERYONE"]}),
                     "grantTypes": models.GrantTypePolicyRuleCondition(
                         **{
                             "include": [
@@ -1634,7 +1623,7 @@ class TestAuthorizationServerResource:
                     "scopes": {"include": ["*"]},
                 }
             )
-            policy_rule_model = models.AuthorizationServerPolicyRule(
+            policy_rule_model = models.AuthorizationServerPolicyRuleRequest(
                 **{
                     "type": "RESOURCE_ACCESS",
                     "name": "Test Policy Rule",

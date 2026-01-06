@@ -29,7 +29,7 @@ class TestAuthenticatorsResource:
         resp, _, err = await client.list_authenticators()
         assert err is None
         assert len(resp) > 0
-        assert all([isinstance(elem, models.Authenticator) for elem in resp])
+        assert all([isinstance(elem, models.AuthenticatorBase) for elem in resp])
         assert all([isinstance(elem.type, models.AuthenticatorType) for elem in resp])
 
     @pytest.mark.vcr()
@@ -41,7 +41,7 @@ class TestAuthenticatorsResource:
 
         resp, _, err = await client.get_authenticator(authenticators_list[0].id)
         assert err is None
-        assert isinstance(resp, models.Authenticator)
+        assert isinstance(resp, models.AuthenticatorBase)
         assert resp.to_dict() == authenticators_list[0].to_dict()
 
     @pytest.mark.vcr()
@@ -55,12 +55,12 @@ class TestAuthenticatorsResource:
         try:
             resp, _, err = await client.activate_authenticator(app_authenticator.id)
             assert err is None
-            assert isinstance(resp, models.Authenticator)
+            assert isinstance(resp, models.AuthenticatorBase)
             assert resp.status == "ACTIVE"
         finally:
             resp, _, err = await client.deactivate_authenticator(app_authenticator.id)
             assert err is None
-            assert isinstance(resp, models.Authenticator)
+            assert isinstance(resp, models.AuthenticatorBase)
             assert resp.status == "INACTIVE"
 
     @pytest.mark.vcr()
@@ -78,7 +78,7 @@ class TestAuthenticatorsResource:
                 app_authenticator.id, new_authenticator
             )
             assert err is None
-            assert isinstance(updated_authenticator, models.Authenticator)
+            assert isinstance(updated_authenticator, models.AuthenticatorBase)
             assert (
                     updated_authenticator.settings.allowed_for
                     == models.AllowedForEnum.RECOVERY.value

@@ -15,7 +15,7 @@ import pytest
 from pydantic import SecretStr
 
 import okta.models as models
-from okta import UpdateUserRequest
+from okta import UpdateUserRequest, AddGroupRequest
 from okta.errors.okta_api_error import OktaAPIError
 from tests.mocks import MockOktaClient
 
@@ -35,7 +35,7 @@ class TestUsersResource:
         password = models.PasswordCredential(**{"value": "Password150kta"})
 
         # Create User Credentials
-        user_creds = models.UserCredentials(**{"password": password})
+        user_creds = models.UserCredentialsWritable(**{"password": password})
 
         # Create User Profile and CreateUser Request
         user_profile = models.UserProfile()
@@ -102,7 +102,7 @@ class TestUsersResource:
         # Create Password
         password = models.PasswordCredential(**{"value": SecretStr("Password150kta")})
         # Create User Credentials
-        user_creds = models.UserCredentials(**{"password": password})
+        user_creds = models.UserCredentialsWritable(**{"password": password})
 
         # Create User Profile and CreateUser Request
         user_profile = models.UserProfile()
@@ -165,7 +165,7 @@ class TestUsersResource:
         # Create Password
         password = models.PasswordCredential(**{"value": SecretStr("Password150kta")})
         # Create User Credentials
-        user_creds = models.UserCredentials(**{"password": password})
+        user_creds = models.UserCredentialsWritable(**{"password": password})
 
         # Create User Profile and CreateUser Request
         user_profile = models.UserProfile()
@@ -234,7 +234,7 @@ class TestUsersResource:
         # Create Password
         password = models.PasswordCredential(**{"value": SecretStr("Password150kta")})
         # Create User Credentials
-        user_creds = models.UserCredentials(**{"password": password})
+        user_creds = models.UserCredentialsWritable(**{"password": password})
 
         # Create User Profile and CreateUser Request
         user_profile = models.UserProfile()
@@ -301,7 +301,7 @@ class TestUsersResource:
         # Create Password
         password = models.PasswordCredential(**{"value": SecretStr("Password150kta")})
         # Create User Credentials
-        user_creds = models.UserCredentials(**{"password": password})
+        user_creds = models.UserCredentialsWritable(**{"password": password})
 
         # Create User Profile and CreateUser Request
         user_profile = models.UserProfile()
@@ -369,7 +369,7 @@ class TestUsersResource:
         # Create Password
         password = models.PasswordCredential(**{"value": "Password150kta"})
         # Create User Credentials
-        user_creds = models.UserCredentials(**{"password": password})
+        user_creds = models.UserCredentialsWritable(**{"password": password})
 
         # Create User Profile and CreateUser Request
         user_profile = models.UserProfile()
@@ -389,7 +389,7 @@ class TestUsersResource:
 
             # Create Query Parameters and get Reset Password Token
             query_params_reset_pw = {"sendEmail": "False"}
-            reset_pw_token, _, err = await test_client.generate_reset_password_token(
+            reset_pw_token, _, err = await test_client.reset_password(
                 user.id, send_email=False
             )
             assert err is None
@@ -421,7 +421,7 @@ class TestUsersResource:
         # Create Password
         password = models.PasswordCredential(**{"value": SecretStr("Password150kta")})
         # Create User Credentials
-        user_creds = models.UserCredentials(**{"password": password})
+        user_creds = models.UserCredentialsWritable(**{"password": password})
 
         # Create User Profile and CreateUser Request
         user_profile = models.UserProfile()
@@ -441,11 +441,11 @@ class TestUsersResource:
             assert err is None
 
             # Create Query Parameters and get Temporary Password
-            temporary_pw, _, err = (
-                await test_client.expire_password_and_get_temporary_password(user.id)
+            temporary_pw, resp, err = (
+                await test_client.expire_password_with_temp_password(user.id)
             )
             assert err is None
-            assert isinstance(temporary_pw, models.TempPassword)
+            assert isinstance(temporary_pw, models.User)
             assert temporary_pw is not None
 
         finally:
@@ -473,7 +473,7 @@ class TestUsersResource:
         # Create Password
         password = models.PasswordCredential(**{"value": SecretStr("Password150kta")})
         # Create User Credentials
-        user_creds = models.UserCredentials(**{"password": password})
+        user_creds = models.UserCredentialsWritable(**{"password": password})
 
         # Create User Profile and CreateUser Request
         user_profile = models.UserProfile()
@@ -559,7 +559,7 @@ class TestUsersResource:
         # Create Password
         password = models.PasswordCredential(**{"value": SecretStr("Password150kta")})
         # Create User Credentials
-        user_creds = models.UserCredentials(**{"password": password})
+        user_creds = models.UserCredentialsWritable(**{"password": password})
 
         # Create User Profile and CreateUser Request
         user_profile = models.UserProfile()
@@ -580,7 +580,8 @@ class TestUsersResource:
 
             # Create Assign Role Request with Roletype Enum
             USER_ADMIN = models.RoleType.USER_ADMIN.value
-            assign_role_req = models.AssignRoleRequest(**{"type": USER_ADMIN})
+            standard_role = models.StandardRoleAssignmentSchema(**{"type": USER_ADMIN})
+            assign_role_req = models.AssignRoleToUserRequest(actual_instance=standard_role)
 
             # Assign Role to User
             _, _, err = await test_client.assign_role_to_user(user.id, assign_role_req)
@@ -588,18 +589,18 @@ class TestUsersResource:
 
             # Get Roles for user and ensure role assigned is found
             roles, _, err = await test_client.list_assigned_roles_for_user(user.id)
-            found_role = next((role for role in roles if role.type == USER_ADMIN), None)
+            found_role = next((role for role in roles if role.actual_instance.type == USER_ADMIN), None)
             assert found_role is not None
 
             # Remove assigned role from user
             _, _, err = await test_client.unassign_role_from_user(
-                user.id, found_role.id
+                user.id, found_role.actual_instance.id
             )
             assert err is None
 
             # Get Roles for user and ensure role assigned is NOT found
             roles, _, err = await test_client.list_assigned_roles_for_user(user.id)
-            found_role = next((role for role in roles if role.type == USER_ADMIN), None)
+            found_role = next((role for role in roles if role.actual_instance.type == USER_ADMIN), None)
             assert found_role is None
 
         finally:
@@ -627,7 +628,7 @@ class TestUsersResource:
         # Create Password
         password = models.PasswordCredential(**{"value": SecretStr("Password150kta")})
         # Create User Credentials
-        user_creds = models.UserCredentials(**{"password": password})
+        user_creds = models.UserCredentialsWritable(**{"password": password})
 
         # Create User Profile and CreateUser Request
         user_profile = models.UserProfile()
@@ -648,16 +649,17 @@ class TestUsersResource:
 
             # Create Group Object
             NEW_GROUP_NAME = "Group-Target-Test-Assign"
-            new_group_profile = models.GroupProfile(**{"name": NEW_GROUP_NAME})
-            new_group = models.Group(**{"profile": new_group_profile})
+            new_group_profile = models.OktaUserGroupProfile(**{"name": NEW_GROUP_NAME})
+            new_group = models.AddGroupRequest(**{"profile": new_group_profile})
 
             # Create Group
-            group, _, err = await test_client.create_group(new_group)
+            group, _, err = await test_client.add_group(new_group)
             assert err is None
 
             # Create request to assign role to user
             USER_ADMIN = models.RoleType.USER_ADMIN.value
-            assign_role_req = models.AssignRoleRequest(**{"type": USER_ADMIN})
+            standard_role = models.StandardRoleAssignmentSchema(**{"type": USER_ADMIN})
+            assign_role_req = models.AssignRoleToUserRequest(actual_instance=standard_role)
 
             # Assign Role to User
             user_role, _, err = await test_client.assign_role_to_user(
@@ -667,32 +669,32 @@ class TestUsersResource:
 
             # Add Group Target to the Role
             _, _, err = await test_client.assign_group_target_to_user_role(
-                user.id, user_role.id, group.id
+                user.id, user_role.actual_instance.id, group.id
             )
             assert err is None
 
             # Retrieve group targets for role and ensure added one is there
             groups, _, err = await test_client.list_group_targets_for_role(
-                user.id, user_role.id
+                user.id, user_role.actual_instance.id
             )
             assert next((grp for grp in groups if grp.id == group.id), None) is not None
 
             # Create another group to add
             NEW_GROUP_NAME = "Temp-Group-Target-Test-Assign"
-            new_group_profile = models.GroupProfile(**{"name": NEW_GROUP_NAME})
-            new_group = models.Group(**{"profile": new_group_profile})
+            new_group_profile = models.OktaUserGroupProfile(**{"name": NEW_GROUP_NAME})
+            new_group = models.AddGroupRequest(**{"profile": new_group_profile})
 
             # Create 2nd group
-            temp_group, _, err = await test_client.create_group(new_group)
+            temp_group, _, err = await test_client.add_group(new_group)
             assert err is None
 
             # Add new group target to role and remove original
             _, _, err = await test_client.assign_group_target_to_user_role(
-                user.id, user_role.id, temp_group.id
+                user.id, user_role.actual_instance.id, temp_group.id
             )
             assert err is None
             _, _, err = await test_client.unassign_group_target_from_user_admin_role(
-                user.id, user_role.id, group.id
+                user.id, user_role.actual_instance.id, group.id
             )
             assert err is None
 
@@ -734,7 +736,7 @@ class TestUsersResource:
         # Create Password
         password = models.PasswordCredential(**{"value": SecretStr("Password150kta")})
         # Create User Credentials
-        user_creds = models.UserCredentials(**{"password": password})
+        user_creds = models.UserCredentialsWritable(**{"password": password})
 
         # Create User Profile and CreateUser Request
         user_profile = models.UserProfile()
@@ -782,7 +784,7 @@ class TestUsersResource:
         # Create Password
         password = models.PasswordCredential(**{"value": SecretStr("Awsdzertc151kta")})
         # Create User Credentials
-        user_creds = models.UserCredentials(**{"password": password})
+        user_creds = models.UserCredentialsWritable(**{"password": password})
 
         # Create User Profile and CreateUser Request
         user_profile = models.UserProfile()
@@ -835,7 +837,7 @@ class TestUsersResource:
         # Create Password
         password = models.PasswordCredential(**{"value": SecretStr("AQZdfpio150kta")})
         # Create User Credentials
-        user_creds = models.UserCredentials(**{"password": password})
+        user_creds = models.UserCredentialsWritable(**{"password": password})
 
         # Create User Profile and CreateUser Request
         user_profile = models.UserProfile()
@@ -887,7 +889,7 @@ class TestUsersResource:
         # Create Password
         password = models.PasswordCredential(**{"value": SecretStr("Password150kta")})
         # Create User Credentials
-        user_creds = models.UserCredentials(**{"password": password})
+        user_creds = models.UserCredentialsWritable(**{"password": password})
 
         # Create User Profile and CreateUser Request
         user_profile = models.UserProfile()
@@ -942,7 +944,7 @@ class TestUsersResource:
         # Create Password
         password = models.PasswordCredential(**{"value": SecretStr("Password150kta")})
         # Create User Credentials
-        user_creds = models.UserCredentials(**{"password": password})
+        user_creds = models.UserCredentialsWritable(**{"password": password})
 
         # Create User Profile and CreateUser Request
         user_profile = models.UserProfile()
@@ -963,6 +965,7 @@ class TestUsersResource:
             assert err is None
 
             # Create replacement user data
+            user_creds = models.UserCredentials(**{"password": password})
             new_profile = models.UserProfile()
             new_profile.first_name = "Jane"
             new_profile.last_name = "Doe-Replaced"
@@ -970,7 +973,7 @@ class TestUsersResource:
             new_profile.login = user_profile.login
             new_profile.nick_name = "JaneDoe"
 
-            replacement_user = models.User(
+            replacement_user = models.UpdateUserRequest(
                 **{"profile": new_profile, "credentials": user_creds}
             )
 
@@ -1008,7 +1011,7 @@ class TestUsersResource:
         # Create Password
         password = models.PasswordCredential(**{"value": SecretStr("Password150kta")})
         # Create User Credentials
-        user_creds = models.UserCredentials(**{"password": password})
+        user_creds = models.UserCredentialsWritable(**{"password": password})
 
         # Create User Profile and CreateUser Request
         user_profile = models.UserProfile()
@@ -1058,7 +1061,7 @@ class TestUsersResource:
         # Create Password
         password = models.PasswordCredential(**{"value": SecretStr("Password150kta")})
         # Create User Credentials
-        user_creds = models.UserCredentials(**{"password": password})
+        user_creds = models.UserCredentialsWritable(**{"password": password})
 
         # Create User Profile and CreateUser Request
         user_profile = models.UserProfile()
@@ -1106,7 +1109,7 @@ class TestUsersResource:
         # Create Password
         password = models.PasswordCredential(**{"value": SecretStr("Password150kta")})
         # Create User Credentials
-        user_creds = models.UserCredentials(**{"password": password})
+        user_creds = models.UserCredentialsWritable(**{"password": password})
 
         # Create User Profile and CreateUser Request
         user_profile = models.UserProfile()
@@ -1155,7 +1158,7 @@ class TestUsersResource:
         # Create Password
         password = models.PasswordCredential(**{"value": SecretStr("Password150kta")})
         # Create User Credentials
-        user_creds = models.UserCredentials(**{"password": password})
+        user_creds = models.UserCredentialsWritable(**{"password": password})
 
         # Create User Profile and CreateUser Request
         user_profile = models.UserProfile()
@@ -1174,9 +1177,10 @@ class TestUsersResource:
             assert err is None
 
             # Create Group
-            group_profile = models.GroupProfile(**{"name": "Test-User-Group"})
-            group_obj = models.Group(**{"profile": group_profile})
-            group, _, err = await test_client.create_group(group_obj)
+            GROUP_NAME = "Group-Target-Test"
+            group_profile = models.OktaUserGroupProfile(**{"name": GROUP_NAME})
+            group_obj = models.AddGroupRequest(**{"profile": group_profile})
+            group, _, err = await test_client.add_group(group_obj)
             assert err is None
 
             # Add user to group
@@ -1236,7 +1240,7 @@ class TestUsersResource:
         # Create Password
         password = models.PasswordCredential(**{"value": SecretStr("Password150kta")})
         # Create User Credentials
-        user_creds = models.UserCredentials(**{"password": password})
+        user_creds = models.UserCredentialsWritable(**{"password": password})
 
         # Create User Profile and CreateUser Request
         user_profile = models.UserProfile()
@@ -1284,7 +1288,7 @@ class TestUsersResource:
         # Create Password
         password = models.PasswordCredential(**{"value": SecretStr("Password150kta")})
         # Create User Credentials
-        user_creds = models.UserCredentials(**{"password": password})
+        user_creds = models.UserCredentialsWritable(**{"password": password})
 
         # Create User Profile and CreateUser Request
         user_profile = models.UserProfile()
@@ -1332,7 +1336,7 @@ class TestUsersResource:
         # Create Password
         password = models.PasswordCredential(**{"value": SecretStr("Password150kta")})
         # Create User Credentials
-        user_creds = models.UserCredentials(**{"password": password})
+        user_creds = models.UserCredentialsWritable(**{"password": password})
 
         # Create User Profile and CreateUser Request
         user_profile = models.UserProfile()
@@ -1381,7 +1385,7 @@ class TestUsersResource:
         # Create Password
         password = models.PasswordCredential(**{"value": SecretStr("Password150kta")})
         # Create User Credentials
-        user_creds = models.UserCredentials(**{"password": password})
+        user_creds = models.UserCredentialsWritable(**{"password": password})
 
         # Create User Profile and CreateUser Request
         user_profile = models.UserProfile()
@@ -1429,7 +1433,7 @@ class TestUsersResource:
         # Create Password
         password = models.PasswordCredential(**{"value": SecretStr("Password150kta")})
         # Create User Credentials
-        user_creds = models.UserCredentials(**{"password": password})
+        user_creds = models.UserCredentialsWritable(**{"password": password})
 
         # Create User Profile and CreateUser Request
         user_profile = models.UserProfile()
@@ -1477,7 +1481,7 @@ class TestUsersResource:
         # Create Password
         password = models.PasswordCredential(**{"value": SecretStr("Password150kta")})
         # Create User Credentials
-        user_creds = models.UserCredentials(**{"password": password})
+        user_creds = models.UserCredentialsWritable(**{"password": password})
 
         # Create User Profile and CreateUser Request
         user_profile = models.UserProfile()
@@ -1526,7 +1530,7 @@ class TestUsersResource:
         # Create Password
         password = models.PasswordCredential(**{"value": SecretStr("Password150kta")})
         # Create User Credentials
-        user_creds = models.UserCredentials(**{"password": password})
+        user_creds = models.UserCredentialsWritable(**{"password": password})
 
         # Create User Profile and CreateUser Request
         user_profile = models.UserProfile()
@@ -1541,7 +1545,7 @@ class TestUsersResource:
 
         try:
             # Test create_user_with_http_info
-            user, resp, err = await test_client.create_user_with_http_info(
+            user, resp, err = await test_client.create_user(
                 create_user_req, activate=False
             )
             assert err is None
@@ -1549,13 +1553,13 @@ class TestUsersResource:
             assert isinstance(user, models.User)
 
             # Test get_user_with_http_info
-            found_user, resp, err = await test_client.get_user_with_http_info(user.id)
+            found_user, resp, err = await test_client.get_user(user.id)
             assert err is None
             assert resp.status_code == 200
             assert found_user.id == user.id
 
             # Test activate_user_with_http_info
-            token, resp, err = await test_client.activate_user_with_http_info(
+            token, resp, err = await test_client.activate_user(
                 user.id, send_email=False
             )
             assert err is None
@@ -1574,7 +1578,7 @@ class TestUsersResource:
                     "realm_id": user.realm_id,
                 }
             )
-            updated_user, resp, err = await test_client.update_user_with_http_info(
+            updated_user, resp, err = await test_client.update_user(
                 user.id, updated_user
             )
             assert err is None
@@ -1587,12 +1591,12 @@ class TestUsersResource:
             try:
                 # Test deactivate_user_with_http_info
                 deactivated_user, resp, err = (
-                    await test_client.deactivate_user_with_http_info(user.id)
+                    await test_client.deactivate_user(user.id)
                 )
                 assert err is None
                 assert resp.status_code == 200
 
-                _, resp, err = await test_client.delete_user_with_http_info(user.id)
+                _, resp, err = await test_client.delete_user(user.id)
                 assert err is None
                 assert resp.status_code == 204
             except Exception as exc:
@@ -1612,7 +1616,7 @@ class TestUsersResource:
         recovery_question = models.RecoveryQuestionCredential(
             **{"question": "What is your favorite test?", "answer": "Integration test"}
         )
-        user_creds = models.UserCredentials(
+        user_creds = models.UserCredentialsWritable(
             **{"password": password, "recoveryQuestion": recovery_question}
         )
 
@@ -1666,13 +1670,14 @@ class TestUsersResource:
             # E. Test password operations
             # Expire password and get temporary one
             temp_password, _, err = (
-                await test_client.expire_password_and_get_temporary_password(user.id)
+                await test_client.expire_password_with_temp_password(
+                    user.id)
             )
             assert err is None
-            assert isinstance(temp_password, models.TempPassword)
+            assert isinstance(temp_password, models.User)
 
             # F. Generate reset password token
-            reset_token, _, err = await test_client.generate_reset_password_token(
+            reset_token, _, err = await test_client.reset_password(
                 user.id, send_email=False
             )
             assert err is None

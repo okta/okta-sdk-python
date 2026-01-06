@@ -426,7 +426,8 @@ class TestUISchemaResource:
             assert len(elements) == 3
 
             # Check that all expected Control elements are present
-            element_scopes = [elem["scope"] for elem in elements]
+            # UIElement objects use attribute access, not dict access
+            element_scopes = [elem.scope for elem in elements]
             assert "#/properties/email" in element_scopes
             assert "#/properties/firstName" in element_scopes
             assert "#/properties/lastName" in element_scopes

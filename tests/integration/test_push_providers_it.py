@@ -143,7 +143,7 @@ MDNSnPEZJJ9JtFnMlsKB11Z9VPd+FNoiaaOHONq0ZV9aUQo5qhJ9TCw6
         try:
             # CREATE with HTTP info
             created_provider, http_response, err = (
-                await client.create_push_provider_with_http_info(provider)
+                await client.create_push_provider(provider)
             )
 
             if err is not None:
@@ -157,7 +157,7 @@ MDNSnPEZJJ9JtFnMlsKB11Z9VPd+FNoiaaOHONq0ZV9aUQo5qhJ9TCw6
 
             # GET with HTTP info
             retrieved_provider, http_response, err = (
-                await client.get_push_provider_with_http_info(created_provider.id)
+                await client.get_push_provider(created_provider.id)
             )
             assert err is None
             assert retrieved_provider is not None
@@ -166,7 +166,7 @@ MDNSnPEZJJ9JtFnMlsKB11Z9VPd+FNoiaaOHONq0ZV9aUQo5qhJ9TCw6
 
             # LIST with HTTP info
             providers_list, http_response, err = (
-                await client.list_push_providers_with_http_info()
+                await client.list_push_providers()
             )
             assert err is None
             assert isinstance(providers_list, list)
@@ -176,7 +176,7 @@ MDNSnPEZJJ9JtFnMlsKB11Z9VPd+FNoiaaOHONq0ZV9aUQo5qhJ9TCw6
             new_name = f"{created_provider.name}-HTTP-UPDATED"
             created_provider.name = new_name
             updated_provider, http_response, err = (
-                await client.replace_push_provider_with_http_info(
+                await client.replace_push_provider(
                     created_provider.id, created_provider
                 )
             )
@@ -186,7 +186,7 @@ MDNSnPEZJJ9JtFnMlsKB11Z9VPd+FNoiaaOHONq0ZV9aUQo5qhJ9TCw6
             assert updated_provider.name == new_name
 
             # DELETE with HTTP info
-            result = await client.delete_push_provider_with_http_info(
+            result = await client.delete_push_provider(
                 created_provider.id
             )
             if len(result) == 2:
@@ -212,7 +212,7 @@ MDNSnPEZJJ9JtFnMlsKB11Z9VPd+FNoiaaOHONq0ZV9aUQo5qhJ9TCw6
         try:
             # CREATE without preload content
             created_provider, http_response, err = (
-                await client.create_push_provider_without_preload_content(provider)
+                await client.create_push_provider(provider)
             )
 
             if err is not None:
@@ -223,7 +223,7 @@ MDNSnPEZJJ9JtFnMlsKB11Z9VPd+FNoiaaOHONq0ZV9aUQo5qhJ9TCw6
 
             # GET without preload content
             retrieved_provider, http_response, err = (
-                await client.get_push_provider_without_preload_content(
+                await client.get_push_provider(
                     created_provider.id
                 )
             )
@@ -234,7 +234,7 @@ MDNSnPEZJJ9JtFnMlsKB11Z9VPd+FNoiaaOHONq0ZV9aUQo5qhJ9TCw6
 
             # LIST without preload content
             providers_list, http_response, err = (
-                await client.list_push_providers_without_preload_content()
+                await client.list_push_providers()
             )
             assert err is None
             assert isinstance(providers_list, list)
@@ -244,7 +244,7 @@ MDNSnPEZJJ9JtFnMlsKB11Z9VPd+FNoiaaOHONq0ZV9aUQo5qhJ9TCw6
             new_name = f"{created_provider.name}-PRELOAD-UPDATED"
             created_provider.name = new_name
             updated_provider, http_response, err = (
-                await client.replace_push_provider_without_preload_content(
+                await client.replace_push_provider(
                     created_provider.id, created_provider
                 )
             )
@@ -254,7 +254,7 @@ MDNSnPEZJJ9JtFnMlsKB11Z9VPd+FNoiaaOHONq0ZV9aUQo5qhJ9TCw6
             assert updated_provider.name == new_name
 
             # DELETE without preload content
-            result = await client.delete_push_provider_without_preload_content(
+            result = await client.delete_push_provider(
                 created_provider.id
             )
             if len(result) == 2:
@@ -339,20 +339,20 @@ MDNSnPEZJJ9JtFnMlsKB11Z9VPd+FNoiaaOHONq0ZV9aUQo5qhJ9TCw6
 
         # HTTP info variants (5)
         http_info_methods = [
-            "create_push_provider_with_http_info",
-            "get_push_provider_with_http_info",
-            "list_push_providers_with_http_info",
-            "replace_push_provider_with_http_info",
-            "delete_push_provider_with_http_info",
+            "create_push_provider",
+            "get_push_provider",
+            "list_push_providers",
+            "replace_push_provider",
+            "delete_push_provider",
         ]
 
         # Without preload content variants (5)
         preload_methods = [
-            "create_push_provider_without_preload_content",
-            "get_push_provider_without_preload_content",
-            "list_push_providers_without_preload_content",
-            "replace_push_provider_without_preload_content",
-            "delete_push_provider_without_preload_content",
+            "create_push_provider",
+            "get_push_provider",
+            "list_push_providers",
+            "replace_push_provider",
+            "delete_push_provider",
         ]
 
         all_methods = core_methods + http_info_methods + preload_methods
@@ -367,12 +367,12 @@ MDNSnPEZJJ9JtFnMlsKB11Z9VPd+FNoiaaOHONq0ZV9aUQo5qhJ9TCw6
         assert err is None
         assert isinstance(providers, list)
 
-        providers, http_resp, err = await client.list_push_providers_with_http_info()
+        providers, http_resp, err = await client.list_push_providers()
         assert err is None
         assert http_resp is not None
 
         providers, http_resp, err = (
-            await client.list_push_providers_without_preload_content()
+            await client.list_push_providers()
         )
         assert err is None
         assert http_resp is not None

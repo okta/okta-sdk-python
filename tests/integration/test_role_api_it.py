@@ -38,8 +38,8 @@ class TestRoleAPIResource:
                 "label": ROLE_LABEL,
                 "description": ROLE_DESCRIPTION,
                 "permissions": [
-                    models.RolePermissionType.OKTA_DOT_USERS_DOT_READ,
-                    models.RolePermissionType.OKTA_DOT_GROUPS_DOT_READ,
+                    "okta.users.read",
+                    "okta.groups.read",
                 ],
             }
         )
@@ -114,7 +114,7 @@ class TestRoleAPIResource:
             **{
                 "label": ROLE_LABEL,
                 "description": ORIGINAL_DESCRIPTION,
-                "permissions": [models.RolePermissionType.OKTA_DOT_USERS_DOT_READ],
+                "permissions": ["okta.users.read"],
             }
         )
 
@@ -164,7 +164,7 @@ class TestRoleAPIResource:
             **{
                 "label": ROLE_LABEL,
                 "description": ROLE_DESCRIPTION,
-                "permissions": [models.RolePermissionType.OKTA_DOT_USERS_DOT_READ],
+                "permissions": ["okta.users.read"],
             }
         )
 
@@ -182,9 +182,7 @@ class TestRoleAPIResource:
             )
 
             # Add a new permission without conditions (create_role_permission returns 3 values)
-            new_permission_type = (
-                models.RolePermissionType.OKTA_DOT_GROUPS_DOT_READ.value
-            )
+            new_permission_type = "okta.groups.read"
             create_permission_request = models.CreateUpdateIamRolePermissionRequest(
                 **{"conditions": {}}
             )
@@ -246,9 +244,9 @@ class TestRoleAPIResource:
                 "label": ROLE_LABEL,
                 "description": ROLE_DESCRIPTION,
                 "permissions": [
-                    models.RolePermissionType.OKTA_DOT_USERS_DOT_READ,
-                    models.RolePermissionType.OKTA_DOT_GROUPS_DOT_READ,
-                    models.RolePermissionType.OKTA_DOT_APPS_DOT_READ,
+                    "okta.users.read",
+                    "okta.groups.read",
+                    "okta.apps.read",
                 ],
             }
         )
@@ -269,18 +267,9 @@ class TestRoleAPIResource:
 
                 # Verify specific permissions exist
                 permission_labels = [perm.label for perm in permissions.permissions]
-                assert (
-                        models.RolePermissionType.OKTA_DOT_USERS_DOT_READ.value
-                        in permission_labels
-                )
-                assert (
-                        models.RolePermissionType.OKTA_DOT_GROUPS_DOT_READ.value
-                        in permission_labels
-                )
-                assert (
-                        models.RolePermissionType.OKTA_DOT_APPS_DOT_READ.value
-                        in permission_labels
-                )
+                assert "okta.users.read" in permission_labels
+                assert "okta.groups.read" in permission_labels
+                assert "okta.apps.read" in permission_labels
 
         finally:
             # Cleanup: Delete created role
@@ -312,7 +301,7 @@ class TestRoleAPIResource:
             **{
                 "label": ROLE_LABEL,
                 "description": ROLE_DESCRIPTION,
-                "permissions": [models.RolePermissionType.OKTA_DOT_USERS_DOT_READ],
+                "permissions": ["okta.users.read"],
             }
         )
 
@@ -348,7 +337,7 @@ class TestRoleAPIResource:
             **{
                 "label": ROLE_LABEL,
                 "description": ROLE_DESCRIPTION,
-                "permissions": [models.RolePermissionType.OKTA_DOT_USERS_DOT_READ],
+                "permissions": ["okta.users.read"],
             }
         )
 
@@ -358,7 +347,7 @@ class TestRoleAPIResource:
             assert err is None
 
             # Add a permission with empty conditions (create_role_permission returns 3 values)
-            permission_type = models.RolePermissionType.OKTA_DOT_APPS_DOT_READ.value
+            permission_type = "okta.apps.read"
             create_permission_request = models.CreateUpdateIamRolePermissionRequest(
                 **{"conditions": {}}
             )

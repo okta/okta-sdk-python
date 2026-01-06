@@ -45,8 +45,8 @@ class TestApplicationTokensResource:
         oauth_client_settings = models.OpenIdConnectApplicationSettingsClient(
             application_type=models.OpenIdConnectApplicationType.WEB,
             grant_types=[
-                models.OAuthGrantType.AUTHORIZATION_CODE,
-                models.OAuthGrantType.REFRESH_TOKEN,
+                models.GrantType.AUTHORIZATION_CODE,
+                models.GrantType.REFRESH_TOKEN,
             ],
             response_types=[models.OAuthResponseType.CODE],
             redirect_uris=["https://example.com/callback"],
@@ -58,10 +58,21 @@ class TestApplicationTokensResource:
             oauth_client=oauth_client_settings
         )
 
+        # Create OAuth credentials
+        oauth_credentials = models.OAuthApplicationCredentials(
+            oauth_client=models.ApplicationCredentialsOAuthClient(
+                client_id=None,  # Will be auto-generated
+                autoKeyRotation=True,
+                token_endpoint_auth_method="client_secret_basic"
+            )
+        )
+
         # Create the OIDC application object
         oidc_app = models.OpenIdConnectApplication(
+            name="oidc_client",
             label=APP_LABEL,
             sign_on_mode=models.ApplicationSignOnMode.OPENID_CONNECT,
+            credentials=oauth_credentials,
             settings=app_settings,
         )
 
@@ -221,8 +232,8 @@ class TestApplicationTokensResource:
         oauth_client_settings = models.OpenIdConnectApplicationSettingsClient(
             application_type=models.OpenIdConnectApplicationType.WEB,
             grant_types=[
-                models.OAuthGrantType.AUTHORIZATION_CODE,
-                models.OAuthGrantType.REFRESH_TOKEN,
+                models.GrantType.AUTHORIZATION_CODE,
+                models.GrantType.REFRESH_TOKEN,
             ],
             response_types=[models.OAuthResponseType.CODE],
             redirect_uris=["https://example.com/callback"],
@@ -232,9 +243,20 @@ class TestApplicationTokensResource:
             oauth_client=oauth_client_settings
         )
 
+        # Create OAuth credentials
+        oauth_credentials = models.OAuthApplicationCredentials(
+            oauth_client=models.ApplicationCredentialsOAuthClient(
+                client_id=None,  # Will be auto-generated
+                autoKeyRotation=True,
+                token_endpoint_auth_method="client_secret_basic"
+            )
+        )
+
         oidc_app = models.OpenIdConnectApplication(
+            name="oidc_client",
             label=APP_LABEL,
             sign_on_mode=models.ApplicationSignOnMode.OPENID_CONNECT,
+            credentials=oauth_credentials,
             settings=app_settings,
         )
 
@@ -278,7 +300,7 @@ class TestApplicationTokensResource:
         APP_LABEL = "TestGetTokenExpandApp"
         oauth_client_settings = models.OpenIdConnectApplicationSettingsClient(
             application_type=models.OpenIdConnectApplicationType.WEB,
-            grant_types=[models.OAuthGrantType.AUTHORIZATION_CODE],
+            grant_types=[models.GrantType.AUTHORIZATION_CODE],
             response_types=[models.OAuthResponseType.CODE],
             redirect_uris=["https://example.com/callback"],
         )
@@ -287,9 +309,20 @@ class TestApplicationTokensResource:
             oauth_client=oauth_client_settings
         )
 
+        # Create OAuth credentials
+        oauth_credentials = models.OAuthApplicationCredentials(
+            oauth_client=models.ApplicationCredentialsOAuthClient(
+                client_id=None,  # Will be auto-generated
+                autoKeyRotation=True,
+                token_endpoint_auth_method="client_secret_basic"
+            )
+        )
+
         oidc_app = models.OpenIdConnectApplication(
+            name="oidc_client",
             label=APP_LABEL,
             sign_on_mode=models.ApplicationSignOnMode.OPENID_CONNECT,
+            credentials=oauth_credentials,
             settings=app_settings,
         )
 
@@ -331,7 +364,7 @@ class TestApplicationTokensResource:
         APP_LABEL = "TestErrorScenariosApp"
         oauth_client_settings = models.OpenIdConnectApplicationSettingsClient(
             application_type=models.OpenIdConnectApplicationType.WEB,
-            grant_types=[models.OAuthGrantType.AUTHORIZATION_CODE],
+            grant_types=[models.GrantType.AUTHORIZATION_CODE],
             response_types=[models.OAuthResponseType.CODE],
             redirect_uris=["https://example.com/callback"],
         )
@@ -340,9 +373,20 @@ class TestApplicationTokensResource:
             oauth_client=oauth_client_settings
         )
 
+        # Create OAuth credentials
+        oauth_credentials = models.OAuthApplicationCredentials(
+            oauth_client=models.ApplicationCredentialsOAuthClient(
+                client_id=None,  # Will be auto-generated
+                autoKeyRotation=True,
+                token_endpoint_auth_method="client_secret_basic"
+            )
+        )
+
         oidc_app = models.OpenIdConnectApplication(
+            name="oidc_client",
             label=APP_LABEL,
             sign_on_mode=models.ApplicationSignOnMode.OPENID_CONNECT,
+            credentials=oauth_credentials,
             settings=app_settings,
         )
 
@@ -400,7 +444,7 @@ class TestApplicationTokensResource:
         APP_LABEL = "TestHttpInfoApp"
         oauth_client_settings = models.OpenIdConnectApplicationSettingsClient(
             application_type=models.OpenIdConnectApplicationType.WEB,
-            grant_types=[models.OAuthGrantType.AUTHORIZATION_CODE],
+            grant_types=[models.GrantType.AUTHORIZATION_CODE],
             response_types=[models.OAuthResponseType.CODE],
             redirect_uris=["https://example.com/callback"],
         )
@@ -409,9 +453,20 @@ class TestApplicationTokensResource:
             oauth_client=oauth_client_settings
         )
 
+        # Create OAuth credentials
+        oauth_credentials = models.OAuthApplicationCredentials(
+            oauth_client=models.ApplicationCredentialsOAuthClient(
+                client_id=None,  # Will be auto-generated
+                autoKeyRotation=True,
+                token_endpoint_auth_method="client_secret_basic"
+            )
+        )
+
         oidc_app = models.OpenIdConnectApplication(
+            name="oidc_client",
             label=APP_LABEL,
             sign_on_mode=models.ApplicationSignOnMode.OPENID_CONNECT,
+            credentials=oauth_credentials,
             settings=app_settings,
         )
 

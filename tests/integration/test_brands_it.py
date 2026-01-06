@@ -65,6 +65,7 @@ class TestBrandsResource:
         # Create new brand request data
         new_brand = models.BrandRequest(
             **{
+                "name": brand.name if brand.name else "Okta",
                 "agreeToCustomPrivacyPolicy": True,
                 "customPrivacyPolicyUrl": custom_privacy_policy_url,
                 "removePoweredByOkta": getattr(brand, "remove_powered_by_okta", None),
@@ -85,6 +86,7 @@ class TestBrandsResource:
             # Create restore brand request
             restore_brand = models.BrandRequest(
                 **{
+                    "name": brand.name if brand.name else "Okta",
                     "agreeToCustomPrivacyPolicy": getattr(
                         brand, "agree_to_custom_privacy_policy", False
                     ),
@@ -320,7 +322,7 @@ class TestBrandsResource:
         email_templates, _, err = await client.list_email_templates(brand_id)
         assert err is None
         for template in email_templates:
-            assert isinstance(template, models.EmailTemplate)
+            assert isinstance(template, models.EmailTemplateResponse)
 
     @pytest.mark.vcr()
     @pytest.mark.asyncio
@@ -335,7 +337,7 @@ class TestBrandsResource:
         received_template, _, err = await client.get_email_template(
             brand_id, template.name
         )
-        assert isinstance(received_template, models.EmailTemplate)
+        assert isinstance(received_template, models.EmailTemplateResponse)
         assert template.name == received_template.name
 
     @pytest.mark.vcr()

@@ -36,7 +36,10 @@ class TestResourceSetAPIResource:
         )
         app_settings = models.BookmarkApplicationSettings(app=app_settings_app)
         bookmark_app_obj = models.BookmarkApplication(
-            label=APP_LABEL, settings=app_settings
+            name="bookmark",
+            label=APP_LABEL,
+            sign_on_mode="BOOKMARK",
+            settings=app_settings
         )
 
         created_app = None
@@ -141,7 +144,10 @@ class TestResourceSetAPIResource:
         )
         app_settings = models.BookmarkApplicationSettings(app=app_settings_app)
         bookmark_app_obj = models.BookmarkApplication(
-            label=APP_LABEL, settings=app_settings
+            name="bookmark",
+            label=APP_LABEL,
+            sign_on_mode="BOOKMARK",
+            settings=app_settings
         )
 
         created_app = None
@@ -219,7 +225,10 @@ class TestResourceSetAPIResource:
         )
         app_settings = models.BookmarkApplicationSettings(app=app_settings_app)
         bookmark_app_obj = models.BookmarkApplication(
-            label=APP_LABEL, settings=app_settings
+            name="bookmark",
+            label=APP_LABEL,
+            sign_on_mode="BOOKMARK",
+            settings=app_settings
         )
 
         # Create a second application to use for adding resources
@@ -229,7 +238,10 @@ class TestResourceSetAPIResource:
         )
         app_settings_2 = models.BookmarkApplicationSettings(app=app_settings_app_2)
         bookmark_app_obj_2 = models.BookmarkApplication(
-            label=APP_LABEL_2, settings=app_settings_2
+            name="bookmark",
+            label=APP_LABEL_2,
+            sign_on_mode="BOOKMARK",
+            settings=app_settings_2
         )
 
         created_app = None
@@ -271,16 +283,12 @@ class TestResourceSetAPIResource:
             )
             assert err is None
 
-            # Add another resource to the resource set
-            RESOURCE_IDS = [
-                app_orn_2,  # Use the second application's ORN
-            ]
-
+            # Add another resource to the resource set using PATCH (bulk add)
             add_resources_request = models.ResourceSetResourcePatchRequest(
-                additions=RESOURCE_IDS
+                additions=[app_orn_2]
             )
 
-            updated_resource_set, _, err = await client.add_resource_set_resource(
+            updated_resource_set, _, err = await client.add_resource_set_resources(
                 resource_set.id, add_resources_request
             )
             assert err is None
@@ -374,7 +382,10 @@ class TestResourceSetAPIResource:
         )
         app_settings = models.BookmarkApplicationSettings(app=app_settings_app)
         bookmark_app_obj = models.BookmarkApplication(
-            label=APP_LABEL, settings=app_settings
+            name="bookmark",
+            label=APP_LABEL,
+            sign_on_mode="BOOKMARK",
+            settings=app_settings
         )
 
         created_app = None
@@ -483,7 +494,10 @@ class TestResourceSetAPIResource:
         )
         app_settings = models.BookmarkApplicationSettings(app=app_settings_app)
         bookmark_app_obj = models.BookmarkApplication(
-            label=APP_LABEL, settings=app_settings
+            name="bookmark",
+            label=APP_LABEL,
+            sign_on_mode="BOOKMARK",
+            settings=app_settings
         )
 
         created_app = None
@@ -584,7 +598,10 @@ class TestResourceSetAPIResource:
         )
         app_settings = models.BookmarkApplicationSettings(app=app_settings_app)
         bookmark_app_obj = models.BookmarkApplication(
-            label=APP_LABEL, settings=app_settings
+            name="bookmark",
+            label=APP_LABEL,
+            sign_on_mode="BOOKMARK",
+            settings=app_settings
         )
 
         created_app = None
@@ -631,7 +648,7 @@ class TestResourceSetAPIResource:
                 additions=[app_orn]
             )
 
-            updated_resource_set, resp, err = await client.add_resource_set_resource(
+            updated_resource_set, resp, err = await client.add_resource_set_resources(
                 NON_EXISTENT_ID, add_resources_request
             )
             assert err is not None

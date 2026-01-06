@@ -1,6 +1,7 @@
 templateDir: ./templates
 outputDir: ..
 packageName: okta
+useOneOfDiscriminatorLookup: true
 files:
   okta/okta_configuration.mustache:
     destinationFilename: okta/okta_configuration.py

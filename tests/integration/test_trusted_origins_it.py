@@ -34,7 +34,7 @@ class TestTrustedOriginsResource:
         # Create Trusted Origin
         TO_NAME = f"{TestTrustedOriginsResource.SDK_PREFIX}_test_TO"
         TO_ORIGIN = "http://example.com"
-        trusted_origin_model = models.TrustedOrigin(
+        trusted_origin_model = models.TrustedOriginWrite(
             **{
                 "name": TO_NAME,
                 "origin": TO_ORIGIN,
@@ -79,7 +79,7 @@ class TestTrustedOriginsResource:
         # Create Trusted Origin
         TO_NAME = f"{TestTrustedOriginsResource.SDK_PREFIX}_test_TO"
         TO_ORIGIN = "http://example.com"
-        trusted_origin_model = models.TrustedOrigin(
+        trusted_origin_model = models.TrustedOriginWrite(
             **{
                 "name": TO_NAME,
                 "origin": TO_ORIGIN,
@@ -133,7 +133,7 @@ class TestTrustedOriginsResource:
         # Create Trusted Origin
         TO_NAME = f"{TestTrustedOriginsResource.SDK_PREFIX}_test_TO"
         TO_ORIGIN = "http://example.com"
-        trusted_origin_model = models.TrustedOrigin(
+        trusted_origin_model = models.TrustedOriginWrite(
             **{
                 "name": TO_NAME,
                 "origin": TO_ORIGIN,
@@ -193,7 +193,7 @@ class TestTrustedOriginsResource:
         # Create Trusted Origin
         TO_NAME = f"{TestTrustedOriginsResource.SDK_PREFIX}_test_TO"
         TO_ORIGIN = "http://example.com"
-        trusted_origin_model = models.TrustedOrigin(
+        trusted_origin_model = models.TrustedOriginWrite(
             **{
                 "name": TO_NAME,
                 "origin": TO_ORIGIN,
@@ -268,7 +268,7 @@ class TestTrustedOriginsResource:
         # Create Trusted Origin
         TO_NAME = f"{TestTrustedOriginsResource.SDK_PREFIX}_test_TO"
         TO_ORIGIN = "http://example.com"
-        trusted_origin_model = models.TrustedOrigin(
+        trusted_origin_model = models.TrustedOriginWrite(
             **{
                 "name": TO_NAME,
                 "origin": TO_ORIGIN,

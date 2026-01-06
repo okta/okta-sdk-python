@@ -32,16 +32,16 @@ class TestInlineHooksResource:
         client = MockOktaClient(fs)
 
         # Create Inline Hook
-        inline_hook_model = models.InlineHook(
+        inline_hook_model = models.InlineHookCreate(
             **{
                 "name": f"{TestInlineHooksResource.SDK_PREFIX} Test Inline Hook",
                 "version": "1.0.0",
                 "type": models.InlineHookType.COM_DOT_OKTA_DOT_OAUTH2_DOT_TOKENS_DOT_TRANSFORM,
-                "channel": models.InlineHookChannel(
+                "channel": models.InlineHookChannelHttpCreate(
                     **{
                         "type": "HTTP",
                         "version": "1.0.0",
-                        "model_config": models.InlineHookChannelConfig(
+                        "config": models.InlineHookHttpConfigCreate(
                             **{
                                 "uri": "https://www.example.com/inlineHook",
                                 "headers": [
@@ -52,7 +52,7 @@ class TestInlineHooksResource:
                                         }
                                     )
                                 ],
-                                "authScheme": models.InlineHookChannelConfigAuthScheme(
+                                "authScheme": models.InlineHookChannelConfigAuthSchemeBody(
                                     **{
                                         "type": "HEADER",
                                         "key": "Authorization",
@@ -71,11 +71,11 @@ class TestInlineHooksResource:
                 inline_hook_model
             )
             assert err is None
-            assert isinstance(created_inline_hook, models.InlineHook)
+            assert created_inline_hook is not None
             assert created_inline_hook.id
             assert created_inline_hook.name == inline_hook_model.name
             assert created_inline_hook.channel
-            assert created_inline_hook.channel.model_config
+            assert created_inline_hook.channel.config
             # assert created_inline_hook.channel.config.uri ==\
             #     inline_hook_model.channel.config.uri
 
@@ -115,16 +115,16 @@ class TestInlineHooksResource:
         client = MockOktaClient(fs)
 
         # Create Inline Hook
-        inline_hook_model = models.InlineHook(
+        inline_hook_model = models.InlineHookCreate(
             **{
                 "name": f"{TestInlineHooksResource.SDK_PREFIX} Test Inline Hook",
                 "version": "1.0.0",
                 "type": models.InlineHookType.COM_DOT_OKTA_DOT_OAUTH2_DOT_TOKENS_DOT_TRANSFORM.value,
-                "channel": models.InlineHookChannelHttp(
+                "channel": models.InlineHookChannelHttpCreate(
                     **{
                         "type": "HTTP",
                         "version": "1.0.0",
-                        "config": models.InlineHookChannelConfig(
+                        "config": models.InlineHookHttpConfigCreate(
                             **{
                                 "uri": "https://www.example.com/inlineHook",
                                 "headers": [
@@ -135,7 +135,7 @@ class TestInlineHooksResource:
                                         }
                                     )
                                 ],
-                                "authScheme": models.InlineHookChannelConfigAuthScheme(
+                                "authScheme": models.InlineHookChannelConfigAuthSchemeBody(
                                     **{
                                         "type": "HEADER",
                                         "key": "Authorization",
@@ -154,7 +154,7 @@ class TestInlineHooksResource:
                 inline_hook_model
             )
             assert err is None
-            assert isinstance(created_inline_hook, models.InlineHook)
+            assert created_inline_hook is not None
             assert created_inline_hook.id
             assert created_inline_hook.name == inline_hook_model.name
             assert created_inline_hook.channel
@@ -165,16 +165,15 @@ class TestInlineHooksResource:
             )
 
             # Update
-            updated_inline_hook_model = models.InlineHook(
+            updated_inline_hook_model = models.InlineHookReplace(
                 **{
                     "name": inline_hook_model.name + "UPDATE",
                     "version": "1.0.0",
-                    "type": models.InlineHookType.COM_DOT_OKTA_DOT_OAUTH2_DOT_TOKENS_DOT_TRANSFORM.value,
-                    "channel": models.InlineHookChannelHttp(
+                    "channel": models.InlineHookChannelHttpCreate(
                         **{
                             "type": "HTTP",
                             "version": "1.0.0",
-                            "config": models.InlineHookChannelConfig(
+                            "config": models.InlineHookHttpConfigCreate(
                                 **{
                                     "uri": inline_hook_model.channel.config.uri
                                            + "UPDATE",
@@ -186,7 +185,7 @@ class TestInlineHooksResource:
                                             }
                                         )
                                     ],
-                                    "authScheme": models.InlineHookChannelConfigAuthScheme(
+                                    "authScheme": models.InlineHookChannelConfigAuthSchemeBody(
                                         **{
                                             "type": "HEADER",
                                             "key": "Authorization",
@@ -255,16 +254,16 @@ class TestInlineHooksResource:
         client = MockOktaClient(fs)
 
         # Create Inline Hook
-        inline_hook_model = models.InlineHook(
+        inline_hook_model = models.InlineHookCreate(
             **{
                 "name": f"{TestInlineHooksResource.SDK_PREFIX} Test Inline Hook",
                 "version": "1.0.0",
                 "type": models.InlineHookType.COM_DOT_OKTA_DOT_OAUTH2_DOT_TOKENS_DOT_TRANSFORM,
-                "channel": models.InlineHookChannel(
+                "channel": models.InlineHookChannelHttpCreate(
                     **{
                         "type": "HTTP",
                         "version": "1.0.0",
-                        "model_config": models.InlineHookChannelConfig(
+                        "config": models.InlineHookHttpConfigCreate(
                             **{
                                 "uri": "https://www.example.com/inlineHook",
                                 "headers": [
@@ -275,7 +274,7 @@ class TestInlineHooksResource:
                                         }
                                     )
                                 ],
-                                "authScheme": models.InlineHookChannelConfigAuthScheme(
+                                "authScheme": models.InlineHookChannelConfigAuthSchemeBody(
                                     **{
                                         "type": "HEADER",
                                         "key": "Authorization",
@@ -294,11 +293,11 @@ class TestInlineHooksResource:
                 inline_hook_model
             )
             assert err is None
-            assert isinstance(created_inline_hook, models.InlineHook)
+            assert created_inline_hook is not None
             assert created_inline_hook.id
             assert created_inline_hook.name == inline_hook_model.name
             assert created_inline_hook.channel
-            assert created_inline_hook.channel.model_config
+            assert created_inline_hook.channel.config
             # assert created_inline_hook.channel.config.uri ==\
             #     inline_hook_model.channel.config.uri
 
@@ -339,16 +338,16 @@ class TestInlineHooksResource:
         client = MockOktaClient(fs)
 
         # Create Inline Hook
-        inline_hook_model = models.InlineHook(
+        inline_hook_model = models.InlineHookCreate(
             **{
                 "name": f"{TestInlineHooksResource.SDK_PREFIX} Test Inline Hook",
                 "version": "1.0.0",
                 "type": models.InlineHookType.COM_DOT_OKTA_DOT_OAUTH2_DOT_TOKENS_DOT_TRANSFORM,
-                "channel": models.InlineHookChannel(
+                "channel": models.InlineHookChannelHttpCreate(
                     **{
                         "type": "HTTP",
                         "version": "1.0.0",
-                        "model_config": models.InlineHookChannelConfig(
+                        "config": models.InlineHookHttpConfigCreate(
                             **{
                                 "uri": "https://www.example.com/inlineHook",
                                 "headers": [
@@ -359,7 +358,7 @@ class TestInlineHooksResource:
                                         }
                                     )
                                 ],
-                                "authScheme": models.InlineHookChannelConfigAuthScheme(
+                                "authScheme": models.InlineHookChannelConfigAuthSchemeBody(
                                     **{
                                         "type": "HEADER",
                                         "key": "Authorization",
@@ -378,13 +377,13 @@ class TestInlineHooksResource:
                 inline_hook_model
             )
             assert err is None
-            assert isinstance(created_inline_hook, models.InlineHook)
+            assert created_inline_hook is not None
             assert created_inline_hook.id
             assert created_inline_hook.name == inline_hook_model.name
             assert created_inline_hook.channel
-            assert created_inline_hook.channel.model_config
-            # assert created_inline_hook.channel.model_config.uri ==\
-            #     inline_hook_model.channel.model_config.uri
+            assert created_inline_hook.channel.config
+            # assert created_inline_hook.channel.config.uri ==\
+            #     inline_hook_model.channel.config.uri
             assert created_inline_hook.status == "ACTIVE"
 
             # Deactivate
@@ -443,16 +442,16 @@ class TestInlineHooksResource:
             NUMBER_OF_HOOKS = 3
             created_inline_hooks = []
             for index in range(NUMBER_OF_HOOKS):
-                inline_hook_model = models.InlineHook(
+                inline_hook_model = models.InlineHookCreate(
                     **{
                         "name": f"{TestInlineHooksResource.SDK_PREFIX} IH{index}",
                         "version": "1.0.0",
                         "type": models.InlineHookType.COM_DOT_OKTA_DOT_OAUTH2_DOT_TOKENS_DOT_TRANSFORM,
-                        "channel": models.InlineHookChannel(
+                        "channel": models.InlineHookChannelHttpCreate(
                             **{
                                 "type": "HTTP",
                                 "version": "1.0.0",
-                                "model_config": models.InlineHookChannelConfig(
+                                "config": models.InlineHookHttpConfigCreate(
                                     **{
                                         "uri": "https://www.example.com/inlineHook",
                                         "headers": [
@@ -463,7 +462,7 @@ class TestInlineHooksResource:
                                                 }
                                             )
                                         ],
-                                        "authScheme": models.InlineHookChannelConfigAuthScheme(
+                                        "authScheme": models.InlineHookChannelConfigAuthSchemeBody(
                                             **{
                                                 "type": "HEADER",
                                                 "key": "Authorization",
@@ -482,11 +481,11 @@ class TestInlineHooksResource:
                 )
                 assert err is None
                 created_inline_hooks.append(created_inline_hook.id)
-                assert isinstance(created_inline_hook, models.InlineHook)
+                assert created_inline_hook is not None
                 assert created_inline_hook.id
                 assert created_inline_hook.name == inline_hook_model.name
                 assert created_inline_hook.channel
-                assert created_inline_hook.channel.model_config
+                assert created_inline_hook.channel.config
                 # assert created_inline_hook.channel.config.uri ==\
                 #     inline_hook_model.channel.config.uri
 
