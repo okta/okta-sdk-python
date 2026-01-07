@@ -1,0 +1,564 @@
+interactions:
+- request:
+    body: '{"grantedScopes": ["okta.apps.read", "okta.users.read"], "type": "cerbos"}'
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - SSWS myAPIToken
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '72'
+      Content-Type:
+      - application/json
+      User-Agent:
+      - okta-sdk-python/5.1.0 python/3.12.0 Darwin/23.6.0
+    method: POST
+    uri: https://test.okta.com/integrations/api/v1/api-services
+  response:
+    body:
+      string: '{"id": "0oa1abc2def3ghi4jkl5", "name": "cerbos_1", "type": "cerbos",
+        "grantedScopes": ["okta.apps.read", "okta.users.read"], "created": "2026-01-06T10:00:00.000Z",
+        "lastUpdated": "2026-01-06T10:00:00.000Z", "credentials": {"oauthClient":
+        {"client_id": "0oa1abc2def3ghi4jkl5", "autoKeyRotation": true}}, "_links":
+        {"self": {"href": "https://test.okta.com/integrations/api/v1/api-services/0oa1abc2def3ghi4jkl5"},
+        "secrets": {"href": "https://test.okta.com/integrations/api/v1/api-services/0oa1abc2def3ghi4jkl5/credentials/secrets"}}}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 06 Jan 2026 10:00:00 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      X-Okta-Request-Id:
+      - abc123def456@ghi789jkl012
+      X-Rate-Limit-Limit:
+      - '1000'
+      X-Rate-Limit-Remaining:
+      - '999'
+      X-Rate-Limit-Reset:
+      - '1704531660'
+    status:
+      code: 201
+      message: Created
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - SSWS myAPIToken
+      Connection:
+      - keep-alive
+      User-Agent:
+      - okta-sdk-python/5.1.0 python/3.12.0 Darwin/23.6.0
+    method: GET
+    uri: https://test.okta.com/integrations/api/v1/api-services/0oa1abc2def3ghi4jkl5
+  response:
+    body:
+      string: '{"id": "0oa1abc2def3ghi4jkl5", "name": "cerbos_1", "type": "cerbos",
+        "grantedScopes": ["okta.apps.read", "okta.users.read"], "created": "2026-01-06T10:00:00.000Z",
+        "lastUpdated": "2026-01-06T10:00:00.000Z", "credentials": {"oauthClient":
+        {"client_id": "0oa1abc2def3ghi4jkl5", "autoKeyRotation": true}}, "_links":
+        {"self": {"href": "https://test.okta.com/integrations/api/v1/api-services/0oa1abc2def3ghi4jkl5"},
+        "secrets": {"href": "https://test.okta.com/integrations/api/v1/api-services/0oa1abc2def3ghi4jkl5/credentials/secrets"}}}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 06 Jan 2026 10:00:01 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      X-Okta-Request-Id:
+      - bcd234efg567@hij890klm123
+      X-Rate-Limit-Limit:
+      - '1000'
+      X-Rate-Limit-Remaining:
+      - '998'
+      X-Rate-Limit-Reset:
+      - '1704531660'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - SSWS myAPIToken
+      Connection:
+      - keep-alive
+      User-Agent:
+      - okta-sdk-python/5.1.0 python/3.12.0 Darwin/23.6.0
+    method: GET
+    uri: https://test.okta.com/integrations/api/v1/api-services
+  response:
+    body:
+      string: '[{"id": "0oa1abc2def3ghi4jkl5", "name": "cerbos_1", "type": "cerbos",
+        "grantedScopes": ["okta.apps.read", "okta.users.read"], "created": "2026-01-06T10:00:00.000Z",
+        "lastUpdated": "2026-01-06T10:00:00.000Z", "credentials": {"oauthClient":
+        {"client_id": "0oa1abc2def3ghi4jkl5", "autoKeyRotation": true}}, "_links":
+        {"self": {"href": "https://test.okta.com/integrations/api/v1/api-services/0oa1abc2def3ghi4jkl5"},
+        "secrets": {"href": "https://test.okta.com/integrations/api/v1/api-services/0oa1abc2def3ghi4jkl5/credentials/secrets"}}}]'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 06 Jan 2026 10:00:02 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      X-Okta-Request-Id:
+      - cde345fgh678@ijk901lmn234
+      X-Rate-Limit-Limit:
+      - '1000'
+      X-Rate-Limit-Remaining:
+      - '997'
+      X-Rate-Limit-Reset:
+      - '1704531660'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - SSWS myAPIToken
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '0'
+      User-Agent:
+      - okta-sdk-python/5.1.0 python/3.12.0 Darwin/23.6.0
+    method: POST
+    uri: https://test.okta.com/integrations/api/v1/api-services/0oa1abc2def3ghi4jkl5/credentials/secrets
+  response:
+    body:
+      string: '{"id": "sec1mno2pqr3stu4vwx5", "status": "ACTIVE", "client_secret":
+        "abcd1234efgh5678ijkl9012mnop3456qrst7890uvwx", "secret_hash": "************",
+        "created": "2026-01-06T10:00:03.000Z", "lastUpdated": "2026-01-06T10:00:03.000Z",
+        "_links": {"self": {"href": "https://test.okta.com/integrations/api/v1/api-services/0oa1abc2def3ghi4jkl5/credentials/secrets/sec1mno2pqr3stu4vwx5"}}}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 06 Jan 2026 10:00:03 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      X-Okta-Request-Id:
+      - def456ghi789@jkl012mno345
+      X-Rate-Limit-Limit:
+      - '1000'
+      X-Rate-Limit-Remaining:
+      - '996'
+      X-Rate-Limit-Reset:
+      - '1704531660'
+    status:
+      code: 201
+      message: Created
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - SSWS myAPIToken
+      Connection:
+      - keep-alive
+      User-Agent:
+      - okta-sdk-python/5.1.0 python/3.12.0 Darwin/23.6.0
+    method: GET
+    uri: https://test.okta.com/integrations/api/v1/api-services/0oa1abc2def3ghi4jkl5/credentials/secrets
+  response:
+    body:
+      string: '[{"id": "sec1mno2pqr3stu4vwx5", "status": "ACTIVE", "secret_hash":
+        "************", "client_secret": "************", "created": "2026-01-06T10:00:03.000Z",
+        "lastUpdated": "2026-01-06T10:00:03.000Z", "_links": {"self": {"href": "https://test.okta.com/integrations/api/v1/api-services/0oa1abc2def3ghi4jkl5/credentials/secrets/sec1mno2pqr3stu4vwx5"}}}]'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 06 Jan 2026 10:00:04 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      X-Okta-Request-Id:
+      - efg567hij890@klm123nop456
+      X-Rate-Limit-Limit:
+      - '1000'
+      X-Rate-Limit-Remaining:
+      - '995'
+      X-Rate-Limit-Reset:
+      - '1704531660'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - SSWS myAPIToken
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '0'
+      User-Agent:
+      - okta-sdk-python/5.1.0 python/3.12.0 Darwin/23.6.0
+    method: POST
+    uri: https://test.okta.com/integrations/api/v1/api-services/0oa1abc2def3ghi4jkl5/credentials/secrets/sec1mno2pqr3stu4vwx5/lifecycle/deactivate
+  response:
+    body:
+      string: '{"id": "sec1mno2pqr3stu4vwx5", "status": "INACTIVE", "client_secret": "************", "secret_hash": "************", "created": "2026-01-06T10:00:03.000Z",
+        "lastUpdated": "2026-01-06T10:00:05.000Z", "_links": {"self": {"href": "https://test.okta.com/integrations/api/v1/api-services/0oa1abc2def3ghi4jkl5/credentials/secrets/sec1mno2pqr3stu4vwx5"}}}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 06 Jan 2026 10:00:05 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      X-Okta-Request-Id:
+      - fgh678ijk901@lmn234opq567
+      X-Rate-Limit-Limit:
+      - '1000'
+      X-Rate-Limit-Remaining:
+      - '994'
+      X-Rate-Limit-Reset:
+      - '1704531660'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - SSWS myAPIToken
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '0'
+      User-Agent:
+      - okta-sdk-python/5.1.0 python/3.12.0 Darwin/23.6.0
+    method: POST
+    uri: https://test.okta.com/integrations/api/v1/api-services/0oa1abc2def3ghi4jkl5/credentials/secrets/sec1mno2pqr3stu4vwx5/lifecycle/activate
+  response:
+    body:
+      string: '{"id": "sec1mno2pqr3stu4vwx5", "status": "ACTIVE", "client_secret": "************", "secret_hash": "************", "created": "2026-01-06T10:00:03.000Z",
+        "lastUpdated": "2026-01-06T10:00:06.000Z", "_links": {"self": {"href": "https://test.okta.com/integrations/api/v1/api-services/0oa1abc2def3ghi4jkl5/credentials/secrets/sec1mno2pqr3stu4vwx5"}}}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 06 Jan 2026 10:00:06 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      X-Okta-Request-Id:
+      - ghi789jkl012@mno345pqr678
+      X-Rate-Limit-Limit:
+      - '1000'
+      X-Rate-Limit-Remaining:
+      - '993'
+      X-Rate-Limit-Reset:
+      - '1704531660'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - SSWS myAPIToken
+      Connection:
+      - keep-alive
+      Content-Length:
+      - '0'
+      User-Agent:
+      - okta-sdk-python/5.1.0 python/3.12.0 Darwin/23.6.0
+    method: POST
+    uri: https://test.okta.com/integrations/api/v1/api-services/0oa1abc2def3ghi4jkl5/credentials/secrets/sec1mno2pqr3stu4vwx5/lifecycle/deactivate
+  response:
+    body:
+      string: '{"id": "sec1mno2pqr3stu4vwx5", "status": "INACTIVE", "client_secret": "************", "secret_hash": "************", "created": "2026-01-06T10:00:03.000Z",
+        "lastUpdated": "2026-01-06T10:00:07.000Z", "_links": {"self": {"href": "https://test.okta.com/integrations/api/v1/api-services/0oa1abc2def3ghi4jkl5/credentials/secrets/sec1mno2pqr3stu4vwx5"}}}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 06 Jan 2026 10:00:07 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      X-Okta-Request-Id:
+      - hij890klm123@nop456qrs789
+      X-Rate-Limit-Limit:
+      - '1000'
+      X-Rate-Limit-Remaining:
+      - '992'
+      X-Rate-Limit-Reset:
+      - '1704531660'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - SSWS myAPIToken
+      Connection:
+      - keep-alive
+      User-Agent:
+      - okta-sdk-python/5.1.0 python/3.12.0 Darwin/23.6.0
+    method: DELETE
+    uri: https://test.okta.com/integrations/api/v1/api-services/0oa1abc2def3ghi4jkl5/credentials/secrets/sec1mno2pqr3stu4vwx5
+  response:
+    body:
+      string: ''
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Date:
+      - Mon, 06 Jan 2026 10:00:08 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      X-Okta-Request-Id:
+      - ijk901lmn234@opq567rst890
+      X-Rate-Limit-Limit:
+      - '1000'
+      X-Rate-Limit-Remaining:
+      - '991'
+      X-Rate-Limit-Reset:
+      - '1704531660'
+    status:
+      code: 204
+      message: No Content
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - SSWS myAPIToken
+      Connection:
+      - keep-alive
+      User-Agent:
+      - okta-sdk-python/5.1.0 python/3.12.0 Darwin/23.6.0
+    method: GET
+    uri: https://test.okta.com/integrations/api/v1/api-services/0oa1abc2def3ghi4jkl5/credentials/secrets
+  response:
+    body:
+      string: '[]'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 06 Jan 2026 10:00:09 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      X-Okta-Request-Id:
+      - jkl012mno345@pqr678stu901
+      X-Rate-Limit-Limit:
+      - '1000'
+      X-Rate-Limit-Remaining:
+      - '990'
+      X-Rate-Limit-Reset:
+      - '1704531660'
+    status:
+      code: 200
+      message: OK
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - SSWS myAPIToken
+      Connection:
+      - keep-alive
+      User-Agent:
+      - okta-sdk-python/5.1.0 python/3.12.0 Darwin/23.6.0
+    method: DELETE
+    uri: https://test.okta.com/integrations/api/v1/api-services/0oa1abc2def3ghi4jkl5
+  response:
+    body:
+      string: ''
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Date:
+      - Mon, 06 Jan 2026 10:00:10 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      X-Okta-Request-Id:
+      - klm123nop456@qrs789tuv012
+      X-Rate-Limit-Limit:
+      - '1000'
+      X-Rate-Limit-Remaining:
+      - '989'
+      X-Rate-Limit-Reset:
+      - '1704531660'
+    status:
+      code: 204
+      message: No Content
+- request:
+    body: null
+    headers:
+      Accept:
+      - application/json
+      Accept-Encoding:
+      - gzip, deflate
+      Authorization:
+      - SSWS myAPIToken
+      Connection:
+      - keep-alive
+      User-Agent:
+      - okta-sdk-python/5.1.0 python/3.12.0 Darwin/23.6.0
+    method: GET
+    uri: https://test.okta.com/integrations/api/v1/api-services/0oa1abc2def3ghi4jkl5
+  response:
+    body:
+      string: '{"errorCode": "E0000007", "errorSummary": "Not found: Resource not
+        found: 0oa1abc2def3ghi4jkl5 (APIServiceIntegration)", "errorLink": "E0000007",
+        "errorId": "oaelmnopqrs123"}'
+    headers:
+      Cache-Control:
+      - no-cache, no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 06 Jan 2026 10:00:11 GMT
+      Expires:
+      - '0'
+      Pragma:
+      - no-cache
+      Server:
+      - nginx
+      Strict-Transport-Security:
+      - max-age=315360000; includeSubDomains
+      X-Okta-Request-Id:
+      - lmn234opq567@rst890uvw123
+      X-Rate-Limit-Limit:
+      - '1000'
+      X-Rate-Limit-Remaining:
+      - '988'
+      X-Rate-Limit-Reset:
+      - '1704531660'
+    status:
+      code: 404
+      message: Not Found
+version: 1
+
