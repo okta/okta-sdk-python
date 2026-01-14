@@ -533,3 +533,157 @@ class TestBrandsResource:
             brand_id, template.name, customization.id
         )
         assert err is None
+
+    @pytest.mark.vcr()
+    @pytest.mark.asyncio
+    async def test_brand_lifecycle(self, fs):
+        """
+        Test the complete lifecycle of Brand operations
+
+        This test covers:
+        - Creating a new brand
+        - Listing brands and verifying the created brand
+        - Getting a specific brand
+        - Replacing/updating a brand
+        - Listing brand domains
+        - Deleting the brand
+
+        This comprehensive test increases coverage for:
+        - create_brand()
+        - list_brands() with pagination
+        - get_brand() with expand parameter
+        - replace_brand()
+        - list_brand_domains()
+        - delete_brand()
+        """
+        client = MockOktaClient(fs)
+
+        brand_id = None
+
+        try:
+            # ===== CREATE BRAND =====
+            print("\n=== Creating Brand ===")
+
+            create_brand_request = models.CreateBrandRequest(
+                name="Python SDK Test Brand"
+            )
+
+            created_brand, _, err = await client.create_brand(create_brand_request)
+
+            assert err is None, f"Failed to create brand: {err}"
+            assert created_brand is not None
+            assert isinstance(created_brand, models.Brand)
+            assert created_brand.name == "Python SDK Test Brand"
+
+            brand_id = created_brand.id
+            print(f"Created brand: {brand_id}")
+            print(f"  Name: {created_brand.name}")
+
+            # ===== LIST BRANDS =====
+            print("\n=== Listing Brands ===")
+
+            brands_list, _, err = await client.list_brands()
+
+            assert err is None, f"Failed to list brands: {err}"
+            assert brands_list is not None
+            assert isinstance(brands_list, list)
+            assert len(brands_list) > 0
+
+            # Verify our created brand is in the list
+            brand_ids = [brand.id for brand in brands_list]
+            assert brand_id in brand_ids, f"Created brand {brand_id} not found in list"
+
+            print(f"Found {len(brands_list)} brand(s)")
+
+            # ===== LIST BRANDS WITH PAGINATION =====
+            print("\n=== Testing List with Pagination ===")
+
+            paginated_brands, _, err = await client.list_brands(limit=10)
+
+            assert err is None, f"Failed to list brands with limit: {err}"
+            assert paginated_brands is not None
+            assert isinstance(paginated_brands, list)
+            print(f"Paginated list returned {len(paginated_brands)} brand(s)")
+
+            # ===== GET BRAND =====
+            print("\n=== Getting Specific Brand ===")
+
+            retrieved_brand, _, err = await client.get_brand(brand_id)
+
+            assert err is None, f"Failed to get brand: {err}"
+            assert retrieved_brand is not None
+            assert isinstance(retrieved_brand, models.BrandWithEmbedded)
+            assert retrieved_brand.id == brand_id
+
+            print(f"Retrieved brand: {retrieved_brand.id}")
+
+            # ===== GET BRAND WITH EXPAND =====
+            print("\n=== Getting Brand with Expand ===")
+
+            expanded_brand, _, err = await client.get_brand(brand_id, expand=["domains"])
+
+            assert err is None, f"Failed to get brand with expand: {err}"
+            assert expanded_brand is not None
+            print(f"Retrieved brand with expand parameter")
+
+            # ===== REPLACE (UPDATE) BRAND =====
+            print("\n=== Replacing Brand ===")
+
+            # Create updated brand request with privacy policy
+            updated_brand_request = models.BrandRequest(
+                name="Python SDK Test Brand",
+                agree_to_custom_privacy_policy=True,
+                custom_privacy_policy_url="https://example.com/privacy"
+            )
+
+            replaced_brand, _, err = await client.replace_brand(brand_id, updated_brand_request)
+
+            assert err is None, f"Failed to replace brand: {err}"
+            assert replaced_brand is not None
+            assert replaced_brand.id == brand_id
+            assert replaced_brand.custom_privacy_policy_url == "https://example.com/privacy"
+
+            print(f"Replaced brand successfully")
+            print(f"  Privacy URL: {replaced_brand.custom_privacy_policy_url}")
+
+            # ===== LIST BRAND DOMAINS =====
+            print("\n=== Listing Brand Domains ===")
+
+            brand_domains, _, err = await client.list_brand_domains(brand_id)
+
+            assert err is None, f"Failed to list brand domains: {err}"
+            assert brand_domains is not None
+            assert isinstance(brand_domains, models.BrandDomains)
+
+            print(f"Successfully retrieved brand domains")
+
+            print("\n=== Test completed successfully ===")
+
+        except Exception as e:
+            print(f"\n!!! Test failed with error: {e}")
+            raise
+
+        finally:
+            # ===== DELETE BRAND =====
+            if brand_id:
+                print("\n=== Cleanup: Deleting Brand ===")
+
+                try:
+                    _, _, err = await client.delete_brand(brand_id)
+
+                    if err:
+                        print(f"Warning: Could not delete brand: {err}")
+                    else:
+                        print(f"Deleted brand successfully")
+
+                        # Verify deletion by trying to get the brand
+                        verify_brand, _, verify_err = await client.get_brand(brand_id)
+
+                        if verify_err:
+                            print(f"Verified brand is deleted (404 expected): {verify_err}")
+
+                except Exception as e:
+                    print(f"Exception deleting brand: {e}")
+
+            print("=== Cleanup completed ===")
+
