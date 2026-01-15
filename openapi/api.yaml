@@ -72927,9 +72927,9 @@ components:
       description: HMAC algorithm
       type: string
       enum:
-        - HMacSHA1
-        - HMacSHA256
-        - HMacSHA512
+        - HMACSHA1
+        - HMACSHA256
+        - HMACSHA512
     OtpTotpEncoding:
       description: The shared secret encoding
       type: string

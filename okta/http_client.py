@@ -94,7 +94,15 @@ class HTTPClient:
             if request['data']:
                 params['data'] = json.dumps(request['data'])
             elif request['form']:
-                params['data'] = request['form']
+                filename = ""
+                if isinstance(request['form']['file'], str):
+                    filename = request['form']['file'].split('/')[-1]
+                data = aiohttp.FormData()
+                data.add_field('file',
+                                      open(request['form']['file'], 'rb'),
+                                      filename=filename,
+                                      content_type=self._default_headers['Content-Type'])
+                params['data'] = data
             json_data = request.get('json')
             # empty json param may cause issue, so include it if needed only
             # more details: https://github.com/okta/okta-sdk-python/issues/131

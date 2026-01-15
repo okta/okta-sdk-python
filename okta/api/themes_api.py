@@ -1520,7 +1520,7 @@ class ThemesApi(ApiClient):
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
-
+        import pdb; pdb.set_trace()
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ImageUploadResponse",
             '400': "Error",
@@ -1539,7 +1539,7 @@ class ThemesApi(ApiClient):
             _host_index=_host_index
         )
 
-        form = {}
+        form = {"file": file}
         keep_empty_params = False
 
         request, error = await self._request_executor.create_request(
