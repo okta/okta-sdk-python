@@ -79,13 +79,6 @@ class InboundProvisioningApplicationFeature(ApplicationFeature):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of status
-        if self.status:
-            if not isinstance(self.status, dict):
-                _dict['status'] = self.status.to_dict()
-            else:
-                _dict['status'] = self.status
-
         # override the default output from pydantic by calling `to_dict()` of links
         if self.links:
             if not isinstance(self.links, dict):
@@ -114,7 +107,7 @@ class InboundProvisioningApplicationFeature(ApplicationFeature):
         _obj = cls.model_validate({
             "description": obj.get("description"),
             "name": obj.get("name"),
-            "status": EnabledStatus.from_dict(obj["status"]) if obj.get("status") is not None else None,
+            "status": obj.get("status"),
             "_links": ApplicationFeatureLinks.from_dict(obj["_links"]) if obj.get("_links") is not None else None,
             "capabilities": CapabilitiesInboundProvisioningObject.from_dict(obj["capabilities"]) if obj.get("capabilities") is not None else None
         })

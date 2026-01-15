@@ -26,6 +26,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from okta.models.app_config import AppConfig
 from okta.models.group_push_mapping_status_upsert import GroupPushMappingStatusUpsert
 from typing import Optional, Set
 from typing_extensions import Self
@@ -34,7 +35,7 @@ class CreateGroupPushMappingRequest(BaseModel):
     """
     CreateGroupPushMappingRequest
     """ # noqa: E501
-    app_config: Optional[Dict[str, Any]] = Field(default=None, alias="appConfig")
+    app_config: Optional[AppConfig] = Field(default=None, alias="appConfig")
     source_group_id: StrictStr = Field(description="The ID of the source group for the group push mapping", alias="sourceGroupId")
     status: Optional[GroupPushMappingStatusUpsert] = GroupPushMappingStatusUpsert.ACTIVE
     target_group_id: Optional[StrictStr] = Field(default=None, description="The ID of the existing target group for the group push mapping. This is used to link to an existing group. Required if `targetGroupName` is not provided.", alias="targetGroupId")

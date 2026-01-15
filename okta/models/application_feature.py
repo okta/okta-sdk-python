@@ -29,6 +29,7 @@ from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from okta.models.application_feature_links import ApplicationFeatureLinks
 from okta.models.application_feature_type import ApplicationFeatureType
+from okta.models.enabled_status import EnabledStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -43,7 +44,7 @@ class ApplicationFeature(BaseModel):
     """ # noqa: E501
     description: Optional[StrictStr] = Field(default=None, description="Description of the feature")
     name: Optional[ApplicationFeatureType] = None
-    status: Optional[Any] = None
+    status: Optional[EnabledStatus] = None
     links: Optional[ApplicationFeatureLinks] = Field(default=None, alias="_links")
     __properties: ClassVar[List[str]] = ["description", "name", "status", "_links"]
 
@@ -104,13 +105,6 @@ class ApplicationFeature(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of status
-        if self.status:
-            if not isinstance(self.status, dict):
-                _dict['status'] = self.status.to_dict()
-            else:
-                _dict['status'] = self.status
-
         # override the default output from pydantic by calling `to_dict()` of links
         if self.links:
             if not isinstance(self.links, dict):

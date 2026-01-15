@@ -26,6 +26,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List
+from okta.models.profile_mapping_property import ProfileMappingProperty
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -33,7 +34,7 @@ class ProfileMappingRequest(BaseModel):
     """
     The updated request body properties
     """ # noqa: E501
-    properties: Dict[str, Any]
+    properties: Dict[str, ProfileMappingProperty]
     __properties: ClassVar[List[str]] = ["properties"]
 
     model_config = ConfigDict(
@@ -74,13 +75,13 @@ class ProfileMappingRequest(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of properties
+        # override the default output from pydantic by calling `to_dict()` of each value in properties (dict)
+        _field_dict = {}
         if self.properties:
-            if not isinstance(self.properties, dict):
-                _dict['properties'] = self.properties.to_dict()
-            else:
-                _dict['properties'] = self.properties
-
+            for _key in self.properties:
+                if self.properties[_key]:
+                    _field_dict[_key] = self.properties[_key].to_dict()
+            _dict['properties'] = _field_dict
         return _dict
 
     @classmethod
@@ -93,7 +94,12 @@ class ProfileMappingRequest(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "properties": ProfileMappingProperty.from_dict(obj["properties"]) if obj.get("properties") is not None else None
+            "properties": dict(
+                (_k, ProfileMappingProperty.from_dict(_v))
+                for _k, _v in obj["properties"].items()
+            )
+            if obj.get("properties") is not None
+            else None
         })
         return _obj
 

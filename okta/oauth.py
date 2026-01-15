@@ -17,8 +17,7 @@
 
     Do not edit the class manually.
 """  # noqa: E501
-
-
+import time
 from urllib.parse import urlencode, quote
 from okta.jwt import JWT
 from okta.http_client import HTTPClient

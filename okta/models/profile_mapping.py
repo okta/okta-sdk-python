@@ -27,6 +27,7 @@ import json
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
 from okta.models.links_self import LinksSelf
+from okta.models.profile_mapping_property import ProfileMappingProperty
 from okta.models.profile_mapping_source import ProfileMappingSource
 from okta.models.profile_mapping_target import ProfileMappingTarget
 from typing import Optional, Set
@@ -37,7 +38,7 @@ class ProfileMapping(BaseModel):
     The profile mapping object describes a mapping between an Okta user's and an app user's properties using [JSON Schema Draft 4](https://datatracker.ietf.org/doc/html/draft-zyp-json-schema-04).  > **Note:** Same type source/target mappings aren't supported by this API. Profile mappings must be between Okta and an app.
     """ # noqa: E501
     id: Optional[StrictStr] = Field(default=None, description="Unique identifier for a profile mapping")
-    properties: Optional[Dict[str, Any]] = None
+    properties: Optional[Dict[str, ProfileMappingProperty]] = None
     source: Optional[ProfileMappingSource] = None
     target: Optional[ProfileMappingTarget] = None
     links: Optional[LinksSelf] = Field(default=None, alias="_links")
@@ -83,13 +84,13 @@ class ProfileMapping(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of properties
+        # override the default output from pydantic by calling `to_dict()` of each value in properties (dict)
+        _field_dict = {}
         if self.properties:
-            if not isinstance(self.properties, dict):
-                _dict['properties'] = self.properties.to_dict()
-            else:
-                _dict['properties'] = self.properties
-
+            for _key in self.properties:
+                if self.properties[_key]:
+                    _field_dict[_key] = self.properties[_key].to_dict()
+            _dict['properties'] = _field_dict
         # override the default output from pydantic by calling `to_dict()` of source
         if self.source:
             if not isinstance(self.source, dict):
@@ -124,7 +125,12 @@ class ProfileMapping(BaseModel):
 
         _obj = cls.model_validate({
             "id": obj.get("id"),
-            "properties": obj.get("properties"),
+            "properties": dict(
+                (_k, ProfileMappingProperty.from_dict(_v))
+                for _k, _v in obj["properties"].items()
+            )
+            if obj.get("properties") is not None
+            else None,
             "source": ProfileMappingSource.from_dict(obj["source"]) if obj.get("source") is not None else None,
             "target": ProfileMappingTarget.from_dict(obj["target"]) if obj.get("target") is not None else None,
             "_links": LinksSelf.from_dict(obj["_links"]) if obj.get("_links") is not None else None

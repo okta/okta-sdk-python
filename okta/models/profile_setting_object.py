@@ -26,6 +26,7 @@ import json
 
 from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
+from okta.models.enabled_status import EnabledStatus
 from typing import Optional, Set
 from typing_extensions import Self
 
@@ -33,7 +34,7 @@ class ProfileSettingObject(BaseModel):
     """
     This setting determines whether a user in the app gets updated when they're updated in Okta.  If enabled, Okta updates a user's attributes in the app when the app is assigned. Future changes made to the Okta user's profile automatically overwrite the corresponding attribute value in the app. 
     """ # noqa: E501
-    status: Optional[Any] = None
+    status: Optional[EnabledStatus] = None
     __properties: ClassVar[List[str]] = ["status"]
 
     model_config = ConfigDict(
@@ -74,13 +75,6 @@ class ProfileSettingObject(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of status
-        if self.status:
-            if not isinstance(self.status, dict):
-                _dict['status'] = self.status.to_dict()
-            else:
-                _dict['status'] = self.status
-
         return _dict
 
     @classmethod
@@ -93,7 +87,7 @@ class ProfileSettingObject(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "status": EnabledStatus.from_dict(obj["status"]) if obj.get("status") is not None else None
+            "status": obj.get("status")
         })
         return _obj
 

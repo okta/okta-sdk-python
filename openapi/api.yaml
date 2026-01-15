@@ -56655,7 +56655,6 @@ components:
       schema:
         oneOf:
           - title: roleType
-            type: string
             $ref: '#/components/schemas/RoleType'
           - title: roleId
             type: string
@@ -59462,11 +59461,10 @@ components:
           $ref: '#/components/schemas/ApplicationFeatureType'
           readOnly: true
         status:
-          allOf:
-            - $ref: '#/components/schemas/EnabledStatus'
-            - default: DISABLED
-            - example: ENABLED
-            - readOnly: true
+          $ref: '#/components/schemas/EnabledStatus'
+          default: DISABLED
+          example: ENABLED
+          readOnly: true
         _links:
           allOf:
             - $ref: '#/components/schemas/LinksSelf'
@@ -62808,7 +62806,6 @@ components:
       type: object
       properties:
         appConfig:
-          type: object
           $ref: '#/components/schemas/AppConfig'
         sourceGroupId:
           description: The ID of the source group for the group push mapping
@@ -66053,7 +66050,6 @@ components:
       type: object
       properties:
         appConfig:
-          type: object
           readOnly: true
           $ref: '#/components/schemas/AppConfig'
         created:
@@ -66730,6 +66726,7 @@ components:
       enum:
         - DELETE
         - GET
+        - PATCH
         - POST
         - PUT
     IAMBundleEntitlement:
@@ -68434,17 +68431,15 @@ components:
       type: object
       properties:
         status:
-          allOf:
-            - $ref: '#/components/schemas/EnabledStatus'
-            - default: DISABLED
+          $ref: '#/components/schemas/EnabledStatus'
+          default: DISABLED
     LifecycleDeactivateSettingObject:
       description: Determines whether deprovisioning occurs when the app is unassigned
       type: object
       properties:
         status:
-          allOf:
-            - $ref: '#/components/schemas/EnabledStatus'
-            - default: DISABLED
+          $ref: '#/components/schemas/EnabledStatus'
+          default: DISABLED
     LifecycleExpirationPolicyRuleCondition:
       type: object
       properties:
@@ -73483,10 +73478,9 @@ components:
         seed:
           $ref: '#/components/schemas/SeedEnum'
         status:
-          allOf:
-            - $ref: '#/components/schemas/EnabledStatus'
-            - default: DISABLED
-            - example: ENABLED
+          $ref: '#/components/schemas/EnabledStatus'
+          default: DISABLED
+          example: ENABLED
     PatchAIAgentProfile:
       description: Partial update for AI agent profile
       type: object
@@ -74715,7 +74709,8 @@ components:
           readOnly: true
         properties:
           type: object
-          $ref: '#/components/schemas/ProfileMappingProperty'
+          additionalProperties:
+            $ref: '#/components/schemas/ProfileMappingProperty'
           readOnly: false
         source:
           $ref: '#/components/schemas/ProfileMappingSource'
@@ -74748,7 +74743,8 @@ components:
       properties:
         properties:
           type: object
-          $ref: '#/components/schemas/ProfileMappingProperty'
+          additionalProperties:
+            $ref: '#/components/schemas/ProfileMappingProperty'
       required:
         - properties
         - expression
@@ -74804,10 +74800,9 @@ components:
       type: object
       properties:
         status:
-          allOf:
-            - $ref: '#/components/schemas/EnabledStatus'
-            - example: DISABLED
-            - default: DISABLED
+          $ref: '#/components/schemas/EnabledStatus'
+          example: DISABLED
+          default: DISABLED
     Protocol:
       type: string
       enum:
@@ -80897,7 +80892,6 @@ components:
           description: Timestamp when the device was created
           readOnly: true
         device:
-          type: object
           $ref: '#/components/schemas/Device'
         deviceUserId:
           type: string

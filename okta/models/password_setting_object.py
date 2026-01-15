@@ -27,6 +27,7 @@ import json
 from pydantic import BaseModel, ConfigDict
 from typing import Any, ClassVar, Dict, List, Optional
 from okta.models.change_enum import ChangeEnum
+from okta.models.enabled_status import EnabledStatus
 from okta.models.seed_enum import SeedEnum
 from typing import Optional, Set
 from typing_extensions import Self
@@ -37,7 +38,7 @@ class PasswordSettingObject(BaseModel):
     """ # noqa: E501
     change: Optional[ChangeEnum] = ChangeEnum.KEEP_EXISTING
     seed: Optional[SeedEnum] = SeedEnum.RANDOM
-    status: Optional[Any] = None
+    status: Optional[EnabledStatus] = None
     __properties: ClassVar[List[str]] = ["change", "seed", "status"]
 
     model_config = ConfigDict(
@@ -78,13 +79,6 @@ class PasswordSettingObject(BaseModel):
             exclude=excluded_fields,
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of status
-        if self.status:
-            if not isinstance(self.status, dict):
-                _dict['status'] = self.status.to_dict()
-            else:
-                _dict['status'] = self.status
-
         return _dict
 
     @classmethod
@@ -99,7 +93,7 @@ class PasswordSettingObject(BaseModel):
         _obj = cls.model_validate({
             "change": obj.get("change"),
             "seed": obj.get("seed"),
-            "status": EnabledStatus.from_dict(obj["status"]) if obj.get("status") is not None else None
+            "status": obj.get("status")
         })
         return _obj
 

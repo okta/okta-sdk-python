@@ -27,6 +27,7 @@ import json
 from datetime import datetime
 from pydantic import BaseModel, ConfigDict, Field, StrictStr
 from typing import Any, ClassVar, Dict, List, Optional
+from okta.models.app_config import AppConfig
 from okta.models.group_push_mapping_links import GroupPushMappingLinks
 from typing import Optional, Set
 from typing_extensions import Self
@@ -35,7 +36,7 @@ class GroupPushMapping(BaseModel):
     """
     GroupPushMapping
     """ # noqa: E501
-    app_config: Optional[Dict[str, Any]] = Field(default=None, alias="appConfig")
+    app_config: Optional[AppConfig] = Field(default=None, alias="appConfig")
     created: Optional[datetime] = Field(default=None, description="Timestamp when the group push mapping was created")
     error_summary: Optional[StrictStr] = Field(default=None, description="The error message summary if the latest push failed", alias="errorSummary")
     id: Optional[StrictStr] = Field(default=None, description="The ID of the group push mapping")
