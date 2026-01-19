@@ -1,11 +1,12 @@
 # PolicyAccountLinkFilterGroups
 
+Group memberships used to determine link candidates
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**include** | **List[str]** |  | [optional] 
+**include** | **List[str]** | Specifies the allowlist of Group identifiers to match against. Group memberships are restricted to type &#x60;OKTA_GROUP&#x60;. | [optional] 
 
 ## Example
 

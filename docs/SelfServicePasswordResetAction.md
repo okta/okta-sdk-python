@@ -1,13 +1,14 @@
 # SelfServicePasswordResetAction
 
+Enables or disables users to reset their own password and defines the authenticators and constraints needed to complete the reset
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **access** | [**PolicyAccess**](PolicyAccess.md) |  | [optional] 
-**type** | **str** | The type of rule action | [optional] [readonly] 
 **requirement** | [**SsprRequirement**](SsprRequirement.md) |  | [optional] 
+**type** | **str** | &lt;x-lifecycle class&#x3D;\&quot;oie\&quot;&gt;&lt;/x-lifecycle&gt; The type of rule action | [optional] 
 
 ## Example
 

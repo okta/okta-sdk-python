@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **contact_type** | [**OrgContactType**](OrgContactType.md) |  | [optional] 
-**links** | [**LinksSelf**](LinksSelf.md) |  | [optional] 
+**links** | [**OrgTechnicalContactTypeLinks**](OrgTechnicalContactTypeLinks.md) |  | [optional] 
 
 ## Example
 

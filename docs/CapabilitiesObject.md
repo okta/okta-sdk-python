@@ -1,6 +1,6 @@
 # CapabilitiesObject
 
-Defines the configurations related to an application feature
+Defines the configurations for the USER_PROVISIONING feature
 
 ## Properties
 

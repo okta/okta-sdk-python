@@ -4,19 +4,19 @@ All URIs are relative to *https://subdomain.okta.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_feature**](FeatureApi.md#get_feature) | **GET** /api/v1/features/{featureId} | Retrieve a Feature
-[**list_feature_dependencies**](FeatureApi.md#list_feature_dependencies) | **GET** /api/v1/features/{featureId}/dependencies | List all Dependencies
-[**list_feature_dependents**](FeatureApi.md#list_feature_dependents) | **GET** /api/v1/features/{featureId}/dependents | List all Dependents
-[**list_features**](FeatureApi.md#list_features) | **GET** /api/v1/features | List all Features
-[**update_feature_lifecycle**](FeatureApi.md#update_feature_lifecycle) | **POST** /api/v1/features/{featureId}/{lifecycle} | Update a Feature Lifecycle
+[**get_feature**](FeatureApi.md#get_feature) | **GET** /api/v1/features/{featureId} | Retrieve a feature
+[**list_feature_dependencies**](FeatureApi.md#list_feature_dependencies) | **GET** /api/v1/features/{featureId}/dependencies | List all dependencies
+[**list_feature_dependents**](FeatureApi.md#list_feature_dependents) | **GET** /api/v1/features/{featureId}/dependents | List all dependents
+[**list_features**](FeatureApi.md#list_features) | **GET** /api/v1/features | List all features
+[**update_feature_lifecycle**](FeatureApi.md#update_feature_lifecycle) | **POST** /api/v1/features/{featureId}/{lifecycle} | Update a feature lifecycle
 
 
 # **get_feature**
 > Feature get_feature(feature_id)
 
-Retrieve a Feature
+Retrieve a feature
 
-Retrieves a feature
+Retrieves a feature by ID
 
 ### Example
 
@@ -52,10 +52,10 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.FeatureApi(api_client)
-    feature_id = 'R5HjqNn1pEqWGy48E9jg' # str | `id` of the Feature
+    feature_id = 'R5HjqNn1pEqWGy48E9jg' # str | `id` of the feature
 
     try:
-        # Retrieve a Feature
+        # Retrieve a feature
         api_response = api_instance.get_feature(feature_id)
         print("The response of FeatureApi->get_feature:\n")
         pprint(api_response)
@@ -70,7 +70,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **feature_id** | **str**| &#x60;id&#x60; of the Feature | 
+ **feature_id** | **str**| &#x60;id&#x60; of the feature | 
 
 ### Return type
 
@@ -99,9 +99,9 @@ Name | Type | Description  | Notes
 # **list_feature_dependencies**
 > List[Feature] list_feature_dependencies(feature_id)
 
-List all Dependencies
+List all dependencies
 
-Lists all dependencies
+Lists all feature dependencies for a specified feature.  A feature's dependencies are the features that it requires to be enabled in order for itself to be enabled.
 
 ### Example
 
@@ -137,10 +137,10 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.FeatureApi(api_client)
-    feature_id = 'R5HjqNn1pEqWGy48E9jg' # str | `id` of the Feature
+    feature_id = 'R5HjqNn1pEqWGy48E9jg' # str | `id` of the feature
 
     try:
-        # List all Dependencies
+        # List all dependencies
         api_response = api_instance.list_feature_dependencies(feature_id)
         print("The response of FeatureApi->list_feature_dependencies:\n")
         pprint(api_response)
@@ -155,7 +155,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **feature_id** | **str**| &#x60;id&#x60; of the Feature | 
+ **feature_id** | **str**| &#x60;id&#x60; of the feature | 
 
 ### Return type
 
@@ -184,9 +184,9 @@ Name | Type | Description  | Notes
 # **list_feature_dependents**
 > List[Feature] list_feature_dependents(feature_id)
 
-List all Dependents
+List all dependents
 
-Lists all dependents
+Lists all feature dependents for the specified feature.  A feature's dependents are the features that need to be disabled in order for the feature itself to be disabled.
 
 ### Example
 
@@ -222,10 +222,10 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.FeatureApi(api_client)
-    feature_id = 'R5HjqNn1pEqWGy48E9jg' # str | `id` of the Feature
+    feature_id = 'R5HjqNn1pEqWGy48E9jg' # str | `id` of the feature
 
     try:
-        # List all Dependents
+        # List all dependents
         api_response = api_instance.list_feature_dependents(feature_id)
         print("The response of FeatureApi->list_feature_dependents:\n")
         pprint(api_response)
@@ -240,7 +240,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **feature_id** | **str**| &#x60;id&#x60; of the Feature | 
+ **feature_id** | **str**| &#x60;id&#x60; of the feature | 
 
 ### Return type
 
@@ -269,9 +269,9 @@ Name | Type | Description  | Notes
 # **list_features**
 > List[Feature] list_features()
 
-List all Features
+List all features
 
-Lists all features
+Lists all self-service features for your org
 
 ### Example
 
@@ -309,7 +309,7 @@ with okta.ApiClient(configuration) as api_client:
     api_instance = okta.FeatureApi(api_client)
 
     try:
-        # List all Features
+        # List all features
         api_response = api_instance.list_features()
         print("The response of FeatureApi->list_features:\n")
         pprint(api_response)
@@ -349,9 +349,9 @@ This endpoint does not need any parameter.
 # **update_feature_lifecycle**
 > Feature update_feature_lifecycle(feature_id, lifecycle, mode=mode)
 
-Update a Feature Lifecycle
+Update a feature lifecycle
 
-Updates a feature lifecycle
+Updates a feature's lifecycle status. Use this endpoint to enable or disable a feature for your org.  Use the `mode=force` parameter to override dependency restrictions for a particular feature. Normally, you can't enable a feature if it has one or more dependencies that aren't enabled.  When you use the `mode=force` parameter while enabling a feature, Okta first tries to enable any disabled features that this feature may have as dependencies. If you don't pass the `mode=force` parameter and the feature has dependencies that need to be enabled before the feature is enabled, a 400 error is returned.  When you use the `mode=force` parameter while disabling a feature, Okta first tries to disable any enabled features that this feature may have as dependents. If you don't pass the `mode=force` parameter and the feature has dependents that need to be disabled before the feature is disabled, a 400 error is returned.  The following chart shows the different state transitions for a feature.  ![State transitions of a feature](../../../../../images/features/update-ssfeat-flowchart.png '#width=500px;')
 
 ### Example
 
@@ -388,12 +388,12 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.FeatureApi(api_client)
-    feature_id = 'R5HjqNn1pEqWGy48E9jg' # str | `id` of the Feature
-    lifecycle = okta.FeatureLifecycle() # FeatureLifecycle | Whether to `enable` or `disable` the feature
-    mode = 'mode_example' # str |  (optional)
+    feature_id = 'R5HjqNn1pEqWGy48E9jg' # str | `id` of the feature
+    lifecycle = okta.FeatureLifecycle() # FeatureLifecycle | Whether to `ENABLE` or `DISABLE` the feature
+    mode = 'mode_example' # str | Indicates if you want to force enable or disable a feature. Supported value is `force`. (optional)
 
     try:
-        # Update a Feature Lifecycle
+        # Update a feature lifecycle
         api_response = api_instance.update_feature_lifecycle(feature_id, lifecycle, mode=mode)
         print("The response of FeatureApi->update_feature_lifecycle:\n")
         pprint(api_response)
@@ -408,9 +408,9 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **feature_id** | **str**| &#x60;id&#x60; of the Feature | 
- **lifecycle** | [**FeatureLifecycle**](.md)| Whether to &#x60;enable&#x60; or &#x60;disable&#x60; the feature | 
- **mode** | **str**|  | [optional] 
+ **feature_id** | **str**| &#x60;id&#x60; of the feature | 
+ **lifecycle** | [**FeatureLifecycle**](.md)| Whether to &#x60;ENABLE&#x60; or &#x60;DISABLE&#x60; the feature | 
+ **mode** | **str**| Indicates if you want to force enable or disable a feature. Supported value is &#x60;force&#x60;. | [optional] 
 
 ### Return type
 

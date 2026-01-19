@@ -6,8 +6,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **credentials** | [**SchemeApplicationCredentials**](SchemeApplicationCredentials.md) |  | [optional] 
-**name** | **str** |  | [optional] 
-**settings** | [**SwaApplicationSettings**](SwaApplicationSettings.md) |  | [optional] 
+**name** | **str** | The key name for the app definition | 
+**settings** | [**SwaApplicationSettings**](SwaApplicationSettings.md) |  | 
 
 ## Example
 

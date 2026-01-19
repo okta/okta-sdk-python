@@ -4,14 +4,14 @@ All URIs are relative to *https://subdomain.okta.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_current_configuration**](ThreatInsightApi.md#get_current_configuration) | **GET** /api/v1/threats/configuration | Retrieve the ThreatInsight Configuration
-[**update_configuration**](ThreatInsightApi.md#update_configuration) | **POST** /api/v1/threats/configuration | Update the ThreatInsight Configuration
+[**get_current_configuration**](ThreatInsightApi.md#get_current_configuration) | **GET** /api/v1/threats/configuration | Retrieve the ThreatInsight configuration
+[**update_configuration**](ThreatInsightApi.md#update_configuration) | **POST** /api/v1/threats/configuration | Update the ThreatInsight configuration
 
 
 # **get_current_configuration**
 > ThreatInsightConfiguration get_current_configuration()
 
-Retrieve the ThreatInsight Configuration
+Retrieve the ThreatInsight configuration
 
 Retrieves the ThreatInsight configuration for the org
 
@@ -51,7 +51,7 @@ with okta.ApiClient(configuration) as api_client:
     api_instance = okta.ThreatInsightApi(api_client)
 
     try:
-        # Retrieve the ThreatInsight Configuration
+        # Retrieve the ThreatInsight configuration
         api_response = api_instance.get_current_configuration()
         print("The response of ThreatInsightApi->get_current_configuration:\n")
         pprint(api_response)
@@ -91,7 +91,7 @@ This endpoint does not need any parameter.
 # **update_configuration**
 > ThreatInsightConfiguration update_configuration(threat_insight_configuration)
 
-Update the ThreatInsight Configuration
+Update the ThreatInsight configuration
 
 Updates the ThreatInsight configuration for the org
 
@@ -132,7 +132,7 @@ with okta.ApiClient(configuration) as api_client:
     threat_insight_configuration = okta.ThreatInsightConfiguration() # ThreatInsightConfiguration | 
 
     try:
-        # Update the ThreatInsight Configuration
+        # Update the ThreatInsight configuration
         api_response = api_instance.update_configuration(threat_insight_configuration)
         print("The response of ThreatInsightApi->update_configuration:\n")
         pprint(api_response)

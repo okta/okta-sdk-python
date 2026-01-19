@@ -1,13 +1,14 @@
 # PolicyNetworkCondition
 
+Specifies a network selection mode and a set of network zones to be included or excluded. If the connection parameter's data type is `ZONE`, one of the `include` or `exclude` arrays is required. Specific zone IDs to include or exclude are enumerated in the respective arrays.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **connection** | [**PolicyNetworkConnection**](PolicyNetworkConnection.md) |  | [optional] 
-**exclude** | **List[str]** |  | [optional] 
-**include** | **List[str]** |  | [optional] 
+**exclude** | **List[str]** | The zones to exclude. Required only if connection data type is &#x60;ZONE&#x60; | [optional] 
+**include** | **List[str]** | The zones to include. Required only if connection data type is &#x60;ZONE&#x60; | [optional] 
 
 ## Example
 

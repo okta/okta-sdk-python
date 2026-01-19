@@ -1,5 +1,6 @@
 # PolicyRuleAuthContextCondition
 
+Specifies an authentication entry point
 
 ## Properties
 

@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**conditions** | **object** | Conditions for further restricting a permission | [optional] 
+**conditions** | [**PermissionConditions**](PermissionConditions.md) |  | [optional] 
 
 ## Example
 

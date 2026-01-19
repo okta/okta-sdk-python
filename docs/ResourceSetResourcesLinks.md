@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**next** | [**HrefObject**](HrefObject.md) |  | [optional] 
+**next** | [**HrefObjectNextLink**](HrefObjectNextLink.md) |  | [optional] 
 **resource_set** | [**HrefObject**](HrefObject.md) |  | [optional] 
 
 ## Example

@@ -7,15 +7,15 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **embedded** | **object** |  | [optional] [readonly] 
 **links** | [**LinksSelf**](LinksSelf.md) |  | [optional] 
-**agree_to_custom_privacy_policy** | **bool** |  | [optional] 
-**custom_privacy_policy_url** | **str** |  | [optional] 
+**agree_to_custom_privacy_policy** | **bool** | Consent for updating the custom privacy URL. Not required when resetting the URL. | [optional] 
+**custom_privacy_policy_url** | **str** | Custom privacy policy URL | [optional] 
 **default_app** | [**DefaultApp**](DefaultApp.md) |  | [optional] 
-**email_domain_id** | **str** |  | [optional] 
-**id** | **str** |  | [optional] [readonly] 
-**is_default** | **bool** |  | [optional] [readonly] 
+**email_domain_id** | **str** | The ID of the email domain | [optional] 
+**id** | **str** | The Brand ID | [optional] [readonly] 
+**is_default** | **bool** | If &#x60;true&#x60;, the Brand is used for the Okta subdomain | [optional] [readonly] 
 **locale** | **str** | The language specified as an [IETF BCP 47 language tag](https://datatracker.ietf.org/doc/html/rfc5646) | [optional] 
-**name** | **str** |  | [optional] 
-**remove_powered_by_okta** | **bool** |  | [optional] 
+**name** | **str** | The name of the Brand | [optional] 
+**remove_powered_by_okta** | **bool** | Removes \&quot;Powered by Okta\&quot; from the sign-in page in redirect authentication deployments, and \&quot;© [current year] Okta, Inc.\&quot; from the Okta End-User Dashboard | [optional] [default to False]
 
 ## Example
 

@@ -6,8 +6,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **var_self** | [**HrefObjectSelfLink**](HrefObjectSelfLink.md) |  | [optional] 
-**bindings** | [**HrefObject**](HrefObject.md) |  | [optional] 
-**resource_set** | [**HrefObject**](HrefObject.md) |  | [optional] 
+**resource_set** | [**HrefObjectResourceSetLink**](HrefObjectResourceSetLink.md) |  | [optional] 
+**members** | [**HrefObjectMembersLink**](HrefObjectMembersLink.md) |  | [optional] 
 
 ## Example
 

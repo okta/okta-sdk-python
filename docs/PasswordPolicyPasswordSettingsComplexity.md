@@ -1,18 +1,20 @@
 # PasswordPolicyPasswordSettingsComplexity
 
+Complexity settings
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **dictionary** | [**PasswordDictionary**](PasswordDictionary.md) |  | [optional] 
-**exclude_attributes** | **List[str]** |  | [optional] 
-**exclude_username** | **bool** |  | [optional] [default to True]
-**min_length** | **int** |  | [optional] 
-**min_lower_case** | **int** |  | [optional] 
-**min_number** | **int** |  | [optional] 
-**min_symbol** | **int** |  | [optional] 
-**min_upper_case** | **int** |  | [optional] 
+**exclude_attributes** | **List[str]** | The User profile attributes whose values must be excluded from the password: currently only supports &#x60;firstName&#x60; and &#x60;lastName&#x60; | [optional] [default to []]
+**exclude_username** | **bool** | Indicates if the Username must be excluded from the password | [optional] [default to True]
+**min_length** | **int** | Minimum password length | [optional] [default to 8]
+**min_lower_case** | **int** | Indicates if a password must contain at least one lower case letter: &#x60;0&#x60; indicates no, &#x60;1&#x60; indicates yes | [optional] [default to 1]
+**min_number** | **int** | Indicates if a password must contain at least one number: &#x60;0&#x60; indicates no, &#x60;1&#x60; indicates yes | [optional] [default to 1]
+**min_symbol** | **int** | Indicates if a password must contain at least one symbol (For example: !@#$%^&amp;*): &#x60;0&#x60; indicates no, &#x60;1&#x60; indicates yes | [optional] [default to 1]
+**min_upper_case** | **int** | Indicates if a password must contain at least one upper case letter: &#x60;0&#x60; indicates no, &#x60;1&#x60; indicates yes | [optional] [default to 1]
+**oel_statement** | **str** | &lt;x-lifecycle-container&gt;&lt;x-lifecycle class&#x3D;\&quot;ea\&quot;&gt;&lt;/x-lifecycle&gt; &lt;x-lifecycle class&#x3D;\&quot;oie\&quot;&gt;&lt;/x-lifecycle&gt;&lt;/x-lifecycle-container&gt;Use an [Expression Language](https://developer.okta.com/docs/reference/okta-expression-language-in-identity-engine/) expression to block a word from being used in a password. You can only block one word per expression. Use the &#x60;OR&#x60; operator to connect multiple expressions to block multiple words. | [optional] 
 
 ## Example
 

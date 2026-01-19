@@ -5,16 +5,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**created** | **datetime** |  | [optional] [readonly] 
-**created_by** | **str** |  | [optional] 
-**id** | **str** |  | [optional] [readonly] 
-**last_updated** | **datetime** |  | [optional] [readonly] 
-**last_updated_by** | **str** |  | [optional] 
-**name** | **str** |  | [optional] 
-**origin** | **str** |  | [optional] 
-**scopes** | [**List[TrustedOriginScope]**](TrustedOriginScope.md) |  | [optional] 
-**status** | **str** |  | [optional] 
-**links** | [**LinksSelf**](LinksSelf.md) |  | [optional] 
+**created** | **datetime** | Timestamp when the trusted origin was created | [optional] [readonly] 
+**created_by** | **str** | The ID of the user who created the trusted origin | [optional] 
+**id** | **str** | Unique identifier for the trusted origin | [optional] [readonly] 
+**last_updated** | **datetime** | Timestamp when the trusted origin was last updated | [optional] [readonly] 
+**last_updated_by** | **str** | The ID of the user who last updated the trusted origin | [optional] 
+**name** | **str** | Unique name for the trusted origin | [optional] 
+**origin** | **str** | Unique origin URL for the trusted origin. The supported schemes for this attribute are HTTP, HTTPS, FTP, Ionic 2, and Capacitor. | [optional] 
+**scopes** | [**List[TrustedOriginScope]**](TrustedOriginScope.md) | Array of scope types that this trusted origin is used for | [optional] 
+**status** | [**LifecycleStatus**](LifecycleStatus.md) |  | [optional] 
+**links** | [**LinksSelfAndLifecycle**](LinksSelfAndLifecycle.md) |  | [optional] 
 
 ## Example
 

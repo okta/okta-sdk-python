@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**description** | **str** | Description of the Resource Set | [optional] 
-**label** | **str** | Unique label for the Resource Set | [optional] 
-**resources** | **List[str]** |  | [optional] 
+**description** | **str** | Description of the resource set | 
+**label** | **str** | Unique name for the resource set | 
+**resources** | **List[str]** | The endpoint (URL) that references all resource objects included in the resource set. Resources are identified by either an Okta Resource Name (ORN) or by a REST URL format. See [Okta Resource Name](/openapi/okta-management/guides/roles/#okta-resource-name-orn). | 
 
 ## Example
 

@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**dns_names** | **List[str]** |  | [optional] 
+**dns_names** | **List[str]** | DNS names of the subject | [optional] 
 
 ## Example
 

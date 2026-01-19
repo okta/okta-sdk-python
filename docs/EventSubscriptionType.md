@@ -1,5 +1,6 @@
 # EventSubscriptionType
 
+The events object type. Currently supports `EVENT_TYPE`.
 
 ## Properties
 

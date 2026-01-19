@@ -6,7 +6,8 @@ The app provisioning connection profile used to configure the method of authenti
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**client_id** | **str** | Unique client identifier for the OAuth 2.0 service app from the target org | 
+**auth_scheme** | [**ProvisioningConnectionOauthAuthScheme**](ProvisioningConnectionOauthAuthScheme.md) |  | 
+**client_id** | **str** |  | [optional] 
 
 ## Example
 

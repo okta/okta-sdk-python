@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**country** | **str** | Format of the country value: length 2 [ISO-3166-1](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) country code. Do not use continent codes as they are treated as generic codes for undesignated countries. | [optional] 
-**region** | **str** | Format of the region value (optional): region code [ISO-3166-2](https://en.wikipedia.org/wiki/ISO_3166-2) appended to country code (&#x60;countryCode-regionCode&#x60;), or &#x60;null&#x60; if empty. Do not use continent codes as they are treated as generic codes for undesignated regions. | [optional] 
+**country** | **str** | The two-character ISO 3166-1 country code. Don&#39;t use continent codes since they are treated as generic codes for undesignated countries. &lt;br&gt;For example: &#x60;US&#x60; | [optional] 
+**region** | **str** | (Optional) The ISO 3166-2 region code appended to the country code (&#x60;countryCode-regionCode&#x60;), or &#x60;null&#x60; if empty. Don&#39;t use continent codes since they are treated as generic codes for undesignated regions. &lt;br&gt;For example: &#x60;CA&#x60; (for &#x60;US-CA&#x60; country and region code) | [optional] 
 
 ## Example
 

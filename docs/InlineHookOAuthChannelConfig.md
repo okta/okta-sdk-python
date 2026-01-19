@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**auth_type** | **str** |  | [optional] 
+**auth_type** | **str** | The authentication method for the token endpoint | [optional] 
 
 ## Example
 

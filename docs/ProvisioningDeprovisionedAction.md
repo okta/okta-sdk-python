@@ -1,5 +1,6 @@
 # ProvisioningDeprovisionedAction
 
+Specifies the action during authentication when an IdP user is linked to a previously deprovisioned Okta user
 
 ## Properties
 

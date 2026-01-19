@@ -1,5 +1,6 @@
 # PasswordCredentialHashAlgorithm
 
+The algorithm used to generate the hash using the password (and salt, when applicable).
 
 ## Properties
 

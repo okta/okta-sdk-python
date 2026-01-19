@@ -1,5 +1,6 @@
 # InlineHookType
 
+One of the inline hook types
 
 ## Properties
 

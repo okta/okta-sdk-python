@@ -5,22 +5,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**alg** | **str** |  | [optional] 
-**created** | **datetime** |  | [optional] 
-**e** | **str** |  | [optional] 
-**expires_at** | **datetime** |  | [optional] 
-**key_ops** | **List[str]** |  | [optional] 
-**kid** | **str** |  | [optional] 
-**kty** | **str** |  | [optional] 
-**last_updated** | **datetime** |  | [optional] 
-**n** | **str** |  | [optional] 
-**status** | **str** |  | [optional] 
-**use** | **str** |  | [optional] 
-**x5c** | **List[str]** |  | [optional] 
-**x5t** | **str** |  | [optional] 
-**x5t_s256** | **str** |  | [optional] 
-**x5u** | **str** |  | [optional] 
-**links** | [**LinksSelf**](LinksSelf.md) |  | [optional] 
+**created** | **datetime** | Timestamp when the object was created | [optional] [readonly] 
+**e** | **str** | RSA key value (public exponent) for Key binding | [optional] [readonly] 
+**expires_at** | **datetime** | Timestamp when the certificate expires | [optional] [readonly] 
+**kid** | **str** | Unique identifier for the certificate | [optional] [readonly] 
+**kty** | **str** | Cryptographic algorithm family for the certificate&#39;s keypair. Valid value: &#x60;RSA&#x60; | [optional] [readonly] 
+**last_updated** | **datetime** | Timestamp when the object was last updated | [optional] [readonly] 
+**n** | **str** | RSA modulus value that is used by both the public and private keys and provides a link between them | [optional] 
+**use** | **str** | Acceptable use of the certificate. Valid value: &#x60;sig&#x60; | [optional] [readonly] 
+**x5c** | **List[str]** | X.509 certificate chain that contains a chain of one or more certificates | [optional] [readonly] 
+**x5t_s256** | **str** | X.509 certificate SHA-256 thumbprint, which is the base64url-encoded SHA-256 thumbprint (digest) of the DER encoding of an X.509 certificate | [optional] [readonly] 
 
 ## Example
 

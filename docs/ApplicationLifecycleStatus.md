@@ -1,5 +1,6 @@
 # ApplicationLifecycleStatus
 
+App instance status
 
 ## Properties
 

@@ -1,11 +1,12 @@
 # ApplicationLicensing
 
+Licenses for the app
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**seat_count** | **int** |  | [optional] 
+**seat_count** | **int** | Number of licenses purchased for the app | [optional] 
 
 ## Example
 

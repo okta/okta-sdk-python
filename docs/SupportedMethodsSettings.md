@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**key_protection** | **str** |  | [optional] 
-**algorithms** | [**List[AuthenticatorMethodAlgorithm]**](AuthenticatorMethodAlgorithm.md) |  | [optional] 
-**transaction_types** | [**List[AuthenticatorMethodTransactionType]**](AuthenticatorMethodTransactionType.md) |  | [optional] 
+**key_protection** | [**PushMethodKeyProtection**](PushMethodKeyProtection.md) |  | [optional] 
+**algorithms** | [**List[AuthenticatorMethodAlgorithm]**](AuthenticatorMethodAlgorithm.md) | The encryption algorithm for this authenticator method | [optional] 
+**transaction_types** | [**List[AuthenticatorMethodTransactionType]**](AuthenticatorMethodTransactionType.md) | The transaction type for this authenticator method | [optional] 
 
 ## Example
 

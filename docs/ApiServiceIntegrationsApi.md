@@ -4,21 +4,21 @@ All URIs are relative to *https://subdomain.okta.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**activate_api_service_integration_instance_secret**](ApiServiceIntegrationsApi.md#activate_api_service_integration_instance_secret) | **POST** /integrations/api/v1/api-services/{apiServiceId}/credentials/secrets/{secretId}/lifecycle/activate | Activate an API Service Integration instance Secret
-[**create_api_service_integration_instance**](ApiServiceIntegrationsApi.md#create_api_service_integration_instance) | **POST** /integrations/api/v1/api-services | Create an API Service Integration instance
-[**create_api_service_integration_instance_secret**](ApiServiceIntegrationsApi.md#create_api_service_integration_instance_secret) | **POST** /integrations/api/v1/api-services/{apiServiceId}/credentials/secrets | Create an API Service Integration instance Secret
-[**deactivate_api_service_integration_instance_secret**](ApiServiceIntegrationsApi.md#deactivate_api_service_integration_instance_secret) | **POST** /integrations/api/v1/api-services/{apiServiceId}/credentials/secrets/{secretId}/lifecycle/deactivate | Deactivate an API Service Integration instance Secret
-[**delete_api_service_integration_instance**](ApiServiceIntegrationsApi.md#delete_api_service_integration_instance) | **DELETE** /integrations/api/v1/api-services/{apiServiceId} | Delete an API Service Integration instance
-[**delete_api_service_integration_instance_secret**](ApiServiceIntegrationsApi.md#delete_api_service_integration_instance_secret) | **DELETE** /integrations/api/v1/api-services/{apiServiceId}/credentials/secrets/{secretId} | Delete an API Service Integration instance Secret
-[**get_api_service_integration_instance**](ApiServiceIntegrationsApi.md#get_api_service_integration_instance) | **GET** /integrations/api/v1/api-services/{apiServiceId} | Retrieve an API Service Integration instance
-[**list_api_service_integration_instance_secrets**](ApiServiceIntegrationsApi.md#list_api_service_integration_instance_secrets) | **GET** /integrations/api/v1/api-services/{apiServiceId}/credentials/secrets | List all API Service Integration instance Secrets
-[**list_api_service_integration_instances**](ApiServiceIntegrationsApi.md#list_api_service_integration_instances) | **GET** /integrations/api/v1/api-services | List all API Service Integration instances
+[**activate_api_service_integration_instance_secret**](ApiServiceIntegrationsApi.md#activate_api_service_integration_instance_secret) | **POST** /integrations/api/v1/api-services/{apiServiceId}/credentials/secrets/{secretId}/lifecycle/activate | Activate an API service integration instance secret
+[**create_api_service_integration_instance**](ApiServiceIntegrationsApi.md#create_api_service_integration_instance) | **POST** /integrations/api/v1/api-services | Create an API service integration instance
+[**create_api_service_integration_instance_secret**](ApiServiceIntegrationsApi.md#create_api_service_integration_instance_secret) | **POST** /integrations/api/v1/api-services/{apiServiceId}/credentials/secrets | Create an API service integration instance secret
+[**deactivate_api_service_integration_instance_secret**](ApiServiceIntegrationsApi.md#deactivate_api_service_integration_instance_secret) | **POST** /integrations/api/v1/api-services/{apiServiceId}/credentials/secrets/{secretId}/lifecycle/deactivate | Deactivate an API service integration instance secret
+[**delete_api_service_integration_instance**](ApiServiceIntegrationsApi.md#delete_api_service_integration_instance) | **DELETE** /integrations/api/v1/api-services/{apiServiceId} | Delete an API service integration instance
+[**delete_api_service_integration_instance_secret**](ApiServiceIntegrationsApi.md#delete_api_service_integration_instance_secret) | **DELETE** /integrations/api/v1/api-services/{apiServiceId}/credentials/secrets/{secretId} | Delete an API service integration instance secret
+[**get_api_service_integration_instance**](ApiServiceIntegrationsApi.md#get_api_service_integration_instance) | **GET** /integrations/api/v1/api-services/{apiServiceId} | Retrieve an API service integration instance
+[**list_api_service_integration_instance_secrets**](ApiServiceIntegrationsApi.md#list_api_service_integration_instance_secrets) | **GET** /integrations/api/v1/api-services/{apiServiceId}/credentials/secrets | List all API service integration instance secrets
+[**list_api_service_integration_instances**](ApiServiceIntegrationsApi.md#list_api_service_integration_instances) | **GET** /integrations/api/v1/api-services | List all API service integration instances
 
 
 # **activate_api_service_integration_instance_secret**
 > APIServiceIntegrationInstanceSecret activate_api_service_integration_instance_secret(api_service_id, secret_id)
 
-Activate an API Service Integration instance Secret
+Activate an API service integration instance secret
 
 Activates an API Service Integration instance Secret by `secretId`
 
@@ -60,7 +60,7 @@ with okta.ApiClient(configuration) as api_client:
     secret_id = 'ocs2f4zrZbs8nUa7p0g4' # str | `id` of the API Service Integration instance Secret
 
     try:
-        # Activate an API Service Integration instance Secret
+        # Activate an API service integration instance secret
         api_response = api_instance.activate_api_service_integration_instance_secret(api_service_id, secret_id)
         print("The response of ApiServiceIntegrationsApi->activate_api_service_integration_instance_secret:\n")
         pprint(api_response)
@@ -106,13 +106,14 @@ Name | Type | Description  | Notes
 # **create_api_service_integration_instance**
 > PostAPIServiceIntegrationInstance create_api_service_integration_instance(post_api_service_integration_instance_request)
 
-Create an API Service Integration instance
+Create an API service integration instance
 
 Creates and authorizes an API Service Integration instance
 
 ### Example
 
 * Api Key Authentication (apiToken):
+* OAuth Authentication (oauth2):
 
 ```python
 import okta
@@ -138,6 +139,8 @@ configuration.api_key['apiToken'] = os.environ["API_KEY"]
 # Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
 # configuration.api_key_prefix['apiToken'] = 'Bearer'
 
+configuration.access_token = os.environ["ACCESS_TOKEN"]
+
 # Enter a context with an instance of the API client
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
@@ -145,7 +148,7 @@ with okta.ApiClient(configuration) as api_client:
     post_api_service_integration_instance_request = okta.PostAPIServiceIntegrationInstanceRequest() # PostAPIServiceIntegrationInstanceRequest | 
 
     try:
-        # Create an API Service Integration instance
+        # Create an API service integration instance
         api_response = api_instance.create_api_service_integration_instance(post_api_service_integration_instance_request)
         print("The response of ApiServiceIntegrationsApi->create_api_service_integration_instance:\n")
         pprint(api_response)
@@ -168,7 +171,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[apiToken](../README.md#apiToken)
+[apiToken](../README.md#apiToken), [oauth2](../README.md#oauth2)
 
 ### HTTP request headers
 
@@ -190,7 +193,7 @@ Name | Type | Description  | Notes
 # **create_api_service_integration_instance_secret**
 > APIServiceIntegrationInstanceSecret create_api_service_integration_instance_secret(api_service_id)
 
-Create an API Service Integration instance Secret
+Create an API service integration instance secret
 
 Creates an API Service Integration instance Secret object with a new active client secret. You can create up to two Secret objects. An error is returned if you attempt to create more than two Secret objects.
 
@@ -231,7 +234,7 @@ with okta.ApiClient(configuration) as api_client:
     api_service_id = '000lr2rLjZ6NsGn1P0g3' # str | `id` of the API Service Integration instance
 
     try:
-        # Create an API Service Integration instance Secret
+        # Create an API service integration instance secret
         api_response = api_instance.create_api_service_integration_instance_secret(api_service_id)
         print("The response of ApiServiceIntegrationsApi->create_api_service_integration_instance_secret:\n")
         pprint(api_response)
@@ -276,7 +279,7 @@ Name | Type | Description  | Notes
 # **deactivate_api_service_integration_instance_secret**
 > APIServiceIntegrationInstanceSecret deactivate_api_service_integration_instance_secret(api_service_id, secret_id)
 
-Deactivate an API Service Integration instance Secret
+Deactivate an API service integration instance secret
 
 Deactivates an API Service Integration instance Secret by `secretId`
 
@@ -318,7 +321,7 @@ with okta.ApiClient(configuration) as api_client:
     secret_id = 'ocs2f4zrZbs8nUa7p0g4' # str | `id` of the API Service Integration instance Secret
 
     try:
-        # Deactivate an API Service Integration instance Secret
+        # Deactivate an API service integration instance secret
         api_response = api_instance.deactivate_api_service_integration_instance_secret(api_service_id, secret_id)
         print("The response of ApiServiceIntegrationsApi->deactivate_api_service_integration_instance_secret:\n")
         pprint(api_response)
@@ -364,7 +367,7 @@ Name | Type | Description  | Notes
 # **delete_api_service_integration_instance**
 > delete_api_service_integration_instance(api_service_id)
 
-Delete an API Service Integration instance
+Delete an API service integration instance
 
 Deletes an API Service Integration instance by `id`. This operation also revokes access to scopes that were previously granted to this API Service Integration instance.
 
@@ -404,7 +407,7 @@ with okta.ApiClient(configuration) as api_client:
     api_service_id = '000lr2rLjZ6NsGn1P0g3' # str | `id` of the API Service Integration instance
 
     try:
-        # Delete an API Service Integration instance
+        # Delete an API service integration instance
         api_instance.delete_api_service_integration_instance(api_service_id)
     except Exception as e:
         print("Exception when calling ApiServiceIntegrationsApi->delete_api_service_integration_instance: %s\n" % e)
@@ -447,7 +450,7 @@ void (empty response body)
 # **delete_api_service_integration_instance_secret**
 > delete_api_service_integration_instance_secret(api_service_id, secret_id)
 
-Delete an API Service Integration instance Secret
+Delete an API service integration instance secret
 
 Deletes an API Service Integration instance Secret by `secretId`. You can only delete an inactive Secret.
 
@@ -488,7 +491,7 @@ with okta.ApiClient(configuration) as api_client:
     secret_id = 'ocs2f4zrZbs8nUa7p0g4' # str | `id` of the API Service Integration instance Secret
 
     try:
-        # Delete an API Service Integration instance Secret
+        # Delete an API service integration instance secret
         api_instance.delete_api_service_integration_instance_secret(api_service_id, secret_id)
     except Exception as e:
         print("Exception when calling ApiServiceIntegrationsApi->delete_api_service_integration_instance_secret: %s\n" % e)
@@ -532,7 +535,7 @@ void (empty response body)
 # **get_api_service_integration_instance**
 > APIServiceIntegrationInstance get_api_service_integration_instance(api_service_id)
 
-Retrieve an API Service Integration instance
+Retrieve an API service integration instance
 
 Retrieves an API Service Integration instance by `id`
 
@@ -573,7 +576,7 @@ with okta.ApiClient(configuration) as api_client:
     api_service_id = '000lr2rLjZ6NsGn1P0g3' # str | `id` of the API Service Integration instance
 
     try:
-        # Retrieve an API Service Integration instance
+        # Retrieve an API service integration instance
         api_response = api_instance.get_api_service_integration_instance(api_service_id)
         print("The response of ApiServiceIntegrationsApi->get_api_service_integration_instance:\n")
         pprint(api_response)
@@ -618,7 +621,7 @@ Name | Type | Description  | Notes
 # **list_api_service_integration_instance_secrets**
 > List[APIServiceIntegrationInstanceSecret] list_api_service_integration_instance_secrets(api_service_id)
 
-List all API Service Integration instance Secrets
+List all API service integration instance secrets
 
 Lists all client secrets for an API Service Integration instance by `apiServiceId`
 
@@ -659,7 +662,7 @@ with okta.ApiClient(configuration) as api_client:
     api_service_id = '000lr2rLjZ6NsGn1P0g3' # str | `id` of the API Service Integration instance
 
     try:
-        # List all API Service Integration instance Secrets
+        # List all API service integration instance secrets
         api_response = api_instance.list_api_service_integration_instance_secrets(api_service_id)
         print("The response of ApiServiceIntegrationsApi->list_api_service_integration_instance_secrets:\n")
         pprint(api_response)
@@ -704,7 +707,7 @@ Name | Type | Description  | Notes
 # **list_api_service_integration_instances**
 > List[APIServiceIntegrationInstance] list_api_service_integration_instances(after=after)
 
-List all API Service Integration instances
+List all API service integration instances
 
 Lists all API Service Integration instances with a pagination option
 
@@ -742,10 +745,10 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.ApiServiceIntegrationsApi(api_client)
-    after = 'after_example' # str | The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information. (optional)
+    after = 'after_example' # str | The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header). (optional)
 
     try:
-        # List all API Service Integration instances
+        # List all API service integration instances
         api_response = api_instance.list_api_service_integration_instances(after=after)
         print("The response of ApiServiceIntegrationsApi->list_api_service_integration_instances:\n")
         pprint(api_response)
@@ -760,7 +763,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **after** | **str**| The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the &#x60;Link&#x60; response header. See [Pagination](/#pagination) for more information. | [optional] 
+ **after** | **str**| The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the &#x60;Link&#x60; response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header). | [optional] 
 
 ### Return type
 

@@ -1,5 +1,6 @@
 # PolicyAccountLinkAction
 
+Specifies the account linking action for an IdP user
 
 ## Properties
 

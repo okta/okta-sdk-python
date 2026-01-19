@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**config** | [**EventHookChannelConfig**](EventHookChannelConfig.md) |  | [optional] 
-**type** | [**EventHookChannelType**](EventHookChannelType.md) |  | [optional] 
-**version** | **str** |  | [optional] 
+**config** | [**EventHookChannelConfig**](EventHookChannelConfig.md) |  | 
+**type** | [**EventHookChannelType**](EventHookChannelType.md) |  | 
+**version** | **str** | Version of the channel. Currently the only supported version is &#x60;1.0.0&#x60;. | 
 
 ## Example
 

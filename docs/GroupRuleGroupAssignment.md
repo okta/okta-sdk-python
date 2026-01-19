@@ -1,11 +1,12 @@
 # GroupRuleGroupAssignment
 
+Contains the `groupIds` array
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**group_ids** | **List[str]** |  | [optional] 
+**group_ids** | **List[str]** | Array of &#x60;groupIds&#x60; to which users are added | [optional] 
 
 ## Example
 

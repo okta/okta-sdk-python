@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**token_lifetime_minutes** | **int** |  | [optional] 
+**token_lifetime_minutes** | **int** | Lifetime (in minutes) of the recovery token | [optional] [default to 10080]
 
 ## Example
 

@@ -5,12 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**user** | [**PolicyContextUser**](PolicyContextUser.md) |  | 
-**groups** | [**PolicyContextGroups**](PolicyContextGroups.md) |  | 
-**risk** | [**PolicyContextRisk**](PolicyContextRisk.md) |  | [optional] 
-**ip** | **str** | The network rule condition, zone, or IP address | [optional] 
-**zones** | [**PolicyContextZones**](PolicyContextZones.md) |  | [optional] 
 **device** | [**PolicyContextDevice**](PolicyContextDevice.md) |  | [optional] 
+**groups** | [**PolicyContextGroups**](PolicyContextGroups.md) |  | 
+**ip** | **str** | The network rule condition, zone, or IP address | [optional] 
+**risk** | [**PolicyContextRisk**](PolicyContextRisk.md) |  | [optional] 
+**user** | [**PolicyContextUser**](PolicyContextUser.md) |  | 
+**zones** | [**PolicyContextZones**](PolicyContextZones.md) |  | [optional] 
 
 ## Example
 

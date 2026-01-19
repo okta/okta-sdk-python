@@ -4,17 +4,17 @@ All URIs are relative to *https://subdomain.okta.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_profile_mapping**](ProfileMappingApi.md#get_profile_mapping) | **GET** /api/v1/mappings/{mappingId} | Retrieve a Profile Mapping
-[**list_profile_mappings**](ProfileMappingApi.md#list_profile_mappings) | **GET** /api/v1/mappings | List all Profile Mappings
-[**update_profile_mapping**](ProfileMappingApi.md#update_profile_mapping) | **POST** /api/v1/mappings/{mappingId} | Update a Profile Mapping
+[**get_profile_mapping**](ProfileMappingApi.md#get_profile_mapping) | **GET** /api/v1/mappings/{mappingId} | Retrieve a profile mapping
+[**list_profile_mappings**](ProfileMappingApi.md#list_profile_mappings) | **GET** /api/v1/mappings | List all profile mappings
+[**update_profile_mapping**](ProfileMappingApi.md#update_profile_mapping) | **POST** /api/v1/mappings/{mappingId} | Update a profile mapping
 
 
 # **get_profile_mapping**
 > ProfileMapping get_profile_mapping(mapping_id)
 
-Retrieve a Profile Mapping
+Retrieve a profile mapping
 
-Retrieves a single Profile Mapping referenced by its ID
+Retrieves a single profile mapping referenced by its ID
 
 ### Example
 
@@ -53,7 +53,7 @@ with okta.ApiClient(configuration) as api_client:
     mapping_id = 'cB6u7X8mptebWkffatKA' # str | `id` of the Mapping
 
     try:
-        # Retrieve a Profile Mapping
+        # Retrieve a profile mapping
         api_response = api_instance.get_profile_mapping(mapping_id)
         print("The response of ProfileMappingApi->get_profile_mapping:\n")
         pprint(api_response)
@@ -97,9 +97,9 @@ Name | Type | Description  | Notes
 # **list_profile_mappings**
 > List[ListProfileMappings] list_profile_mappings(after=after, limit=limit, source_id=source_id, target_id=target_id)
 
-List all Profile Mappings
+List all profile mappings
 
-Lists all profile mappings in your organization with [pagination](https://developer.okta.com/docs/api/#pagination). You can return a subset of profile mappings that match a supported `sourceId` and/or `targetId`. The results are [paginated](/#pagination) according to the limit parameter. If there are multiple pages of results, the Link header contains a `next` link that should be treated as an opaque value (follow it, don't parse it).  The response is a collection of profile mappings that include a subset of the profile mapping object's parameters. The profile mapping object describes the properties mapping between an Okta User and an App User Profile using [JSON Schema Draft 4](https://datatracker.ietf.org/doc/html/draft-zyp-json-schema-04).
+Lists all profile mappings in your org with [pagination](https://developer.okta.com/docs/api/#pagination). You can return a subset of profile mappings that match a supported `sourceId` and/or `targetId`.  The results are [paginated](/#pagination) according to the `limit` parameter. If there are multiple pages of results, the Link header contains a `next` link that you should treat as an opaque value (follow it, don't parse it). See [Link Header](https://developer.okta.com/docs/api/#link-header).  The response is a collection of profile mappings that include a subset of the profile mapping object's parameters. The profile mapping object describes the properties mapping between an Okta user and an app user profile using [JSON Schema Draft 4](https://datatracker.ietf.org/doc/html/draft-zyp-json-schema-04).
 
 ### Example
 
@@ -136,12 +136,12 @@ with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.ProfileMappingApi(api_client)
     after = 'after_example' # str | Mapping `id` that specifies the pagination cursor for the next page of mappings (optional)
-    limit = 20 # int | Specifies the number of results per page (maximum 200) (optional) (default to 20)
-    source_id = 'source_id_example' # str | The UserType or App Instance `id` that acts as the source of expressions in a mapping. If this parameter is included, all returned mappings have this as their `source.id`. (optional)
-    target_id = 'target_id_example' # str | The UserType or App Instance `id` that acts as the target of expressions in a mapping. If this parameter is included, all returned mappings have this as their `target.id`. (optional)
+    limit = 20 # int | Specifies the number of results per page (optional) (default to 20)
+    source_id = 'source_id_example' # str | The user type or app instance ID that acts as the source of expressions in a mapping. If this parameter is included, all returned mappings have this as their `source.id`. (optional)
+    target_id = 'target_id_example' # str | The user type or app instance ID that acts as the target of expressions in a mapping. If this parameter is included, all returned mappings have this as their `target.id`. (optional)
 
     try:
-        # List all Profile Mappings
+        # List all profile mappings
         api_response = api_instance.list_profile_mappings(after=after, limit=limit, source_id=source_id, target_id=target_id)
         print("The response of ProfileMappingApi->list_profile_mappings:\n")
         pprint(api_response)
@@ -157,9 +157,9 @@ with okta.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **after** | **str**| Mapping &#x60;id&#x60; that specifies the pagination cursor for the next page of mappings | [optional] 
- **limit** | **int**| Specifies the number of results per page (maximum 200) | [optional] [default to 20]
- **source_id** | **str**| The UserType or App Instance &#x60;id&#x60; that acts as the source of expressions in a mapping. If this parameter is included, all returned mappings have this as their &#x60;source.id&#x60;. | [optional] 
- **target_id** | **str**| The UserType or App Instance &#x60;id&#x60; that acts as the target of expressions in a mapping. If this parameter is included, all returned mappings have this as their &#x60;target.id&#x60;. | [optional] 
+ **limit** | **int**| Specifies the number of results per page | [optional] [default to 20]
+ **source_id** | **str**| The user type or app instance ID that acts as the source of expressions in a mapping. If this parameter is included, all returned mappings have this as their &#x60;source.id&#x60;. | [optional] 
+ **target_id** | **str**| The user type or app instance ID that acts as the target of expressions in a mapping. If this parameter is included, all returned mappings have this as their &#x60;target.id&#x60;. | [optional] 
 
 ### Return type
 
@@ -187,7 +187,7 @@ Name | Type | Description  | Notes
 # **update_profile_mapping**
 > ProfileMapping update_profile_mapping(mapping_id, profile_mapping)
 
-Update a Profile Mapping
+Update a profile mapping
 
 Updates an existing profile mapping by adding, updating, or removing one or many property mappings
 
@@ -230,7 +230,7 @@ with okta.ApiClient(configuration) as api_client:
     profile_mapping = okta.ProfileMappingRequest() # ProfileMappingRequest | 
 
     try:
-        # Update a Profile Mapping
+        # Update a profile mapping
         api_response = api_instance.update_profile_mapping(mapping_id, profile_mapping)
         print("The response of ProfileMappingApi->update_profile_mapping:\n")
         pprint(api_response)

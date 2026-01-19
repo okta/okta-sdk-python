@@ -5,13 +5,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**acceptable_adjacent_intervals** | **int** |  | [optional] 
+**acceptable_adjacent_intervals** | **int** | The number of acceptable adjacent intervals, also known as the clock drift interval. This setting allows you to build in tolerance for any time difference between the token and the server. For example, with a &#x60;timeIntervalInSeconds&#x60; of 60 seconds and an &#x60;acceptableAdjacentIntervals&#x60; value of 5, Okta accepts passcodes within 300 seconds (60 * 5) before or after the end user enters their code. | [optional] 
 **algorithm** | [**OtpTotpAlgorithm**](OtpTotpAlgorithm.md) |  | [optional] 
 **encoding** | [**OtpTotpEncoding**](OtpTotpEncoding.md) |  | [optional] 
-**factor_profile_id** | **str** |  | [optional] 
-**pass_code_length** | **int** |  | [optional] 
+**factor_profile_id** | **str** | The &#x60;id&#x60; value of the factor profile | [optional] 
+**pass_code_length** | **int** | Number of digits in an OTP value | [optional] 
 **protocol** | [**OtpProtocol**](OtpProtocol.md) |  | [optional] 
-**time_interval_in_seconds** | **int** |  | [optional] 
+**time_interval_in_seconds** | **int** | Time interval for TOTP in seconds | [optional] 
 
 ## Example
 

@@ -5,14 +5,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**created** | **datetime** |  | [optional] [readonly] 
-**id** | **str** |  | [optional] [readonly] 
-**last_membership_updated** | **datetime** |  | [optional] [readonly] 
-**last_updated** | **datetime** |  | [optional] [readonly] 
-**object_class** | **List[str]** |  | [optional] [readonly] 
+**created** | **datetime** | Timestamp when the group was created | [optional] [readonly] 
+**id** | **str** | Unique ID for the group | [optional] [readonly] 
+**last_membership_updated** | **datetime** | Timestamp when the groups memberships were last updated | [optional] [readonly] 
+**last_updated** | **datetime** | Timestamp when the group&#39;s profile was last updated | [optional] [readonly] 
+**object_class** | **List[str]** | Determines the group&#39;s &#x60;profile&#x60; | [optional] [readonly] 
 **profile** | [**GroupProfile**](GroupProfile.md) |  | [optional] 
 **type** | [**GroupType**](GroupType.md) |  | [optional] 
-**embedded** | **Dict[str, object]** |  | [optional] [readonly] 
+**embedded** | [**GroupEmbedded**](GroupEmbedded.md) |  | [optional] 
 **links** | [**GroupLinks**](GroupLinks.md) |  | [optional] 
 
 ## Example

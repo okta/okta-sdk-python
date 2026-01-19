@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**email_address** | **str** |  | [optional] 
-**reason** | **str** |  | [optional] 
+**email_address** | **str** | An email address with a validation error | [optional] 
+**reason** | **str** | Validation error reason | [optional] 
 
 ## Example
 

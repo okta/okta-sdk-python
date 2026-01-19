@@ -1,17 +1,18 @@
 # IdentitySourceUserProfileForUpsert
 
+Contains a set of external user attributes and their values that are mapped to Okta standard and custom profile properties. See the [`profile` object](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/User/#tag/User/operation/getUser!c=200&path=profile&t=response) and Declaration of a Custom Identity Source Schema in [Using anything as a source](https://help.okta.com/okta_help.htm?type=oie&id=ext-anything-as-a-source). > **Note:** Profile attributes can only be of the string type.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**email** | **str** |  | [optional] 
-**first_name** | **str** |  | [optional] 
-**home_address** | **str** |  | [optional] 
-**last_name** | **str** |  | [optional] 
-**mobile_phone** | **str** |  | [optional] 
-**second_email** | **str** |  | [optional] 
-**user_name** | **str** |  | [optional] 
+**email** | **str** | Email address of the user | [optional] 
+**first_name** | **str** | First name of the user | [optional] 
+**home_address** | **str** | Home address of the user | [optional] 
+**last_name** | **str** | Last name of the user | [optional] 
+**mobile_phone** | **str** | Mobile phone number of the user | [optional] 
+**second_email** | **str** | Alternative email address of the user | [optional] 
+**user_name** | **str** | Username of the user | [optional] 
 
 ## Example
 

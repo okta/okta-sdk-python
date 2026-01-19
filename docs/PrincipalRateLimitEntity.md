@@ -6,15 +6,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**created_by** | **str** |  | [optional] [readonly] 
-**created_date** | **datetime** |  | [optional] [readonly] 
-**default_concurrency_percentage** | **int** |  | [optional] [readonly] 
-**default_percentage** | **int** |  | [optional] [readonly] 
-**id** | **str** |  | [optional] [readonly] 
-**last_update** | **datetime** |  | [optional] [readonly] 
-**last_updated_by** | **str** |  | [optional] [readonly] 
-**org_id** | **str** |  | [optional] [readonly] 
-**principal_id** | **str** |  | 
+**created_by** | **str** | The Okta user ID of the user who created the principle rate limit entity | [optional] [readonly] 
+**created_date** | **datetime** | The date and time the principle rate limit entity was created | [optional] [readonly] 
+**default_concurrency_percentage** | **int** | The default percentage of a given concurrency limit threshold that the owning principal can consume | [optional] 
+**default_percentage** | **int** | The default percentage of a given rate limit threshold that the owning principal can consume | [optional] 
+**id** | **str** | The unique identifier of the principle rate limit entity | [optional] [readonly] 
+**last_update** | **datetime** | The date and time the principle rate limit entity was last updated | [optional] [readonly] 
+**last_updated_by** | **str** | The Okta user ID of the user who last updated the principle rate limit entity | [optional] [readonly] 
+**org_id** | **str** | The unique identifier of the Okta org | [optional] [readonly] 
+**principal_id** | **str** | The unique identifier of the principal. This is the ID of the API token or OAuth 2.0 app. | 
 **principal_type** | [**PrincipalType**](PrincipalType.md) |  | 
 
 ## Example

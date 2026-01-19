@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**conditions** | **object** | Conditions for further restricting a permission | [optional] 
-**created** | **datetime** | Timestamp when the role was created | [optional] [readonly] 
-**label** | **str** | The permission type | [optional] [readonly] 
-**last_updated** | **datetime** | Timestamp when the role was last updated | [optional] [readonly] 
+**conditions** | [**PermissionConditions**](PermissionConditions.md) |  | [optional] 
+**created** | **datetime** | Timestamp when the permission was assigned | [optional] [readonly] 
+**label** | **str** | The assigned Okta [permission](/openapi/okta-management/guides/permissions) | [optional] [readonly] 
+**last_updated** | **datetime** | Timestamp when the permission was last updated | [optional] [readonly] 
 **links** | [**PermissionLinks**](PermissionLinks.md) |  | [optional] 
 
 ## Example

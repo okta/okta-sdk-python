@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**page_content** | **str** |  | [optional] 
+**page_content** | **str** | The HTML for the page | [optional] 
 **content_security_policy_setting** | [**ContentSecurityPolicySetting**](ContentSecurityPolicySetting.md) |  | [optional] 
 **widget_customizations** | [**SignInPageAllOfWidgetCustomizations**](SignInPageAllOfWidgetCustomizations.md) |  | [optional] 
-**widget_version** | **str** | The version specified as a [Semantic Version](https://semver.org/). | [optional] 
+**widget_version** | **str** | The version specified as a [Semantic Version](https://semver.org/). This value can be a wildcard (&#x60;*&#x60;), a major version range (for example, &#x60;^2&#x60;), a major-only version (for example, &#x60;7&#x60;), or a specific &#x60;Major.Minor&#x60; version (for example, &#x60;5.15&#x60;). | [optional] 
 
 ## Example
 

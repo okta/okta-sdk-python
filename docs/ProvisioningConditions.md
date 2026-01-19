@@ -1,5 +1,6 @@
 # ProvisioningConditions
 
+Conditional behaviors for an IdP user during authentication
 
 ## Properties
 

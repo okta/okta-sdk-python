@@ -1,5 +1,6 @@
 # PasswordPolicyRuleAction
 
+Indicates if a password can be changed
 
 ## Properties
 

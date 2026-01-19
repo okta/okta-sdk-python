@@ -1,5 +1,6 @@
 # PlatformPolicyRuleCondition
 
+Specifies a particular platform or device to match on
 
 ## Properties
 

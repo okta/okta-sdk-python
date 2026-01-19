@@ -1,11 +1,12 @@
 # PasswordDictionaryCommon
 
+Lookup settings for commonly used passwords
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**exclude** | **bool** |  | [optional] [default to False]
+**exclude** | **bool** | Indicates whether to check passwords against the common password dictionary | [optional] [default to False]
 
 ## Example
 

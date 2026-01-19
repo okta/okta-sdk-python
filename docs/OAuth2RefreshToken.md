@@ -5,18 +5,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**client_id** | **str** |  | [optional] 
-**created** | **datetime** |  | [optional] [readonly] 
-**created_by** | [**OAuth2Actor**](OAuth2Actor.md) |  | [optional] 
-**expires_at** | **datetime** |  | [optional] [readonly] 
-**id** | **str** |  | [optional] [readonly] 
-**issuer** | **str** |  | [optional] 
-**last_updated** | **datetime** |  | [optional] [readonly] 
-**scopes** | **List[str]** |  | [optional] 
+**client_id** | **str** | Client ID | [optional] 
+**created** | **datetime** | Timestamp when the object was created | [optional] [readonly] 
+**expires_at** | **datetime** | Expiration time of the OAuth 2.0 Token | [optional] [readonly] 
+**id** | **str** | ID of the Token object | [optional] [readonly] 
+**issuer** | **str** | The complete URL of the authorization server that issued the Token | [optional] 
+**last_updated** | **datetime** | Timestamp when the object was last updated | [optional] [readonly] 
+**scopes** | **List[str]** | The scope names attached to the Token | [optional] 
 **status** | [**GrantOrTokenStatus**](GrantOrTokenStatus.md) |  | [optional] 
-**user_id** | **str** |  | [optional] 
-**embedded** | **Dict[str, object]** |  | [optional] [readonly] 
-**links** | [**LinksSelf**](LinksSelf.md) |  | [optional] 
+**user_id** | **str** | The ID of the user associated with the Token | [optional] 
+**embedded** | [**OAuth2RefreshTokenEmbedded**](OAuth2RefreshTokenEmbedded.md) |  | [optional] 
+**links** | [**OAuth2RefreshTokenLinks**](OAuth2RefreshTokenLinks.md) |  | [optional] 
 
 ## Example
 

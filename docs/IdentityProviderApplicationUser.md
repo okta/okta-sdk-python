@@ -5,13 +5,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**created** | **str** |  | [optional] 
-**external_id** | **str** |  | [optional] 
-**id** | **str** |  | [optional] [readonly] 
-**last_updated** | **str** |  | [optional] 
-**profile** | **Dict[str, object]** |  | [optional] 
-**embedded** | **Dict[str, object]** |  | [optional] [readonly] 
-**links** | [**LinksSelf**](LinksSelf.md) |  | [optional] 
+**created** | **datetime** | Timestamp when the object was created | [optional] [readonly] 
+**external_id** | **str** | Unique IdP-specific identifier for the user | [optional] [readonly] 
+**id** | **str** | Unique key of the user | [optional] [readonly] 
+**last_updated** | **datetime** | Timestamp when the object was last updated | [optional] [readonly] 
+**profile** | **Dict[str, object]** | IdP-specific profile for the user.  IdP user profiles are IdP-specific but may be customized by the Profile Editor in the Admin Console.  &gt; **Note:** Okta variable names have reserved characters that may conflict with the name of an IdP assertion attribute. You can use the **External name** to define the attribute name as defined in an IdP assertion such as a SAML attribute name. | [optional] 
+**embedded** | **Dict[str, object]** | Embedded resources related to the IdP user | [optional] [readonly] 
+**links** | [**IdentityProviderApplicationUserLinks**](IdentityProviderApplicationUserLinks.md) |  | [optional] 
 
 ## Example
 

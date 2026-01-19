@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**external_id** | **str** |  | [optional] 
+**external_id** | **str** | Unique IdP-specific identifier for a user | [optional] 
 
 ## Example
 

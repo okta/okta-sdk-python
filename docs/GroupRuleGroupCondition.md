@@ -1,12 +1,12 @@
 # GroupRuleGroupCondition
 
+Currently not supported
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**exclude** | **List[str]** |  | [optional] 
-**include** | **List[str]** |  | [optional] 
+**exclude** | **List[str]** | Currently not supported | [optional] 
 
 ## Example
 

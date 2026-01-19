@@ -5,11 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**created** | **datetime** | Timestamp when the role was created | [optional] [readonly] 
-**description** | **str** | Description of the Resource Set | [optional] 
-**id** | **str** | Unique key for the role | [optional] [readonly] 
-**last_updated** | **datetime** | Timestamp when the role was last updated | [optional] [readonly] 
-**links** | [**LinksSelf**](LinksSelf.md) |  | [optional] 
+**conditions** | [**ResourceConditions**](ResourceConditions.md) |  | [optional] 
+**created** | **datetime** | Timestamp when the resource set resource object was created | [optional] [readonly] 
+**id** | **str** | Unique ID of the resource set resource object | [optional] [readonly] 
+**last_updated** | **datetime** | Timestamp when this object was last updated | [optional] [readonly] 
+**orn** | **str** | The Okta Resource Name (ORN) of the resource | [optional] 
+**links** | [**ResourceSetResourceLinks**](ResourceSetResourceLinks.md) |  | [optional] 
 
 ## Example
 

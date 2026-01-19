@@ -1,5 +1,6 @@
 # IdentitySourceSessionStatus
 
+The current status of the identity source session
 
 ## Properties
 

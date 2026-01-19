@@ -1,5 +1,6 @@
 # OAuth2ScopeMetadataPublish
 
+Indicates whether the Scope is included in the metadata
 
 ## Properties
 

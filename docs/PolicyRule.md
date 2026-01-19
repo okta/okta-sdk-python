@@ -6,13 +6,14 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **created** | **datetime** | Timestamp when the rule was created | [optional] [readonly] 
-**id** | **str** | Identifier for the rule | [optional] 
+**id** | **str** | Identifier for the rule | [optional] [readonly] 
 **last_updated** | **datetime** | Timestamp when the rule was last modified | [optional] [readonly] 
 **name** | **str** | Name of the rule | [optional] 
 **priority** | **int** | Priority of the rule | [optional] 
 **status** | [**LifecycleStatus**](LifecycleStatus.md) |  | [optional] 
-**system** | **bool** | Specifies whether Okta created the Policy Rule (&#x60;system&#x3D;true&#x60;). You can&#39;t delete Policy Rules that have &#x60;system&#x60; set to &#x60;true&#x60;. | [optional] [default to False]
+**system** | **bool** | Specifies whether Okta created the policy rule (&#x60;system&#x3D;true&#x60;). You can&#39;t delete policy rules that have &#x60;system&#x60; set to &#x60;true&#x60;. | [optional] [default to False]
 **type** | [**PolicyRuleType**](PolicyRuleType.md) |  | [optional] 
+**links** | [**PolicyLinks**](PolicyLinks.md) |  | [optional] 
 
 ## Example
 

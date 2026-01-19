@@ -1,6 +1,5 @@
 # AuthenticatorMethodAlgorithm
 
-The encryption algorithm for this authenticator method
 
 ## Properties
 

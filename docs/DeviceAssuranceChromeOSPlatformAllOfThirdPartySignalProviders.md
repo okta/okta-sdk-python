@@ -7,6 +7,7 @@ Settings for third-party signal providers (based on the `CHROMEOS` platform)
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **dtc** | [**DTCChromeOS**](DTCChromeOS.md) |  | [optional] 
+**device_posture_id_p** | [**DevicePostureIdP**](DevicePostureIdP.md) |  | [optional] 
 
 ## Example
 

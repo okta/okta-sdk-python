@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**login_url** | **str** |  | [optional] 
-**redirect_url** | **str** |  | [optional] 
+**login_url** | **str** | Primary URL of the sign-in page for this app | 
+**redirect_url** | **str** | Secondary URL of the sign-in page for this app | [optional] 
 
 ## Example
 

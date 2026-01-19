@@ -7,11 +7,11 @@ Setting for auto-update
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **agent_type** | [**AgentType**](AgentType.md) |  | [optional] 
-**continue_on_error** | **bool** |  | [optional] 
-**latest_version** | **str** |  | [optional] 
-**minimal_supported_version** | **str** |  | [optional] 
-**pool_id** | **str** |  | [optional] [readonly] 
-**pool_name** | **str** |  | [optional] 
+**continue_on_error** | **bool** | Continues the update even if some agents fail to update | [optional] 
+**latest_version** | **str** | Latest version of the agent | [optional] 
+**minimal_supported_version** | **str** | Minimal version of the agent | [optional] 
+**pool_id** | **str** | ID of the agent pool that the settings apply to | [optional] [readonly] 
+**pool_name** | **str** | Pool name | [optional] 
 **release_channel** | [**ReleaseChannel**](ReleaseChannel.md) |  | [optional] 
 
 ## Example

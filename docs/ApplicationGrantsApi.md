@@ -4,16 +4,16 @@ All URIs are relative to *https://subdomain.okta.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**get_scope_consent_grant**](ApplicationGrantsApi.md#get_scope_consent_grant) | **GET** /api/v1/apps/{appId}/grants/{grantId} | Retrieve an app Grant
+[**get_scope_consent_grant**](ApplicationGrantsApi.md#get_scope_consent_grant) | **GET** /api/v1/apps/{appId}/grants/{grantId} | Retrieve an app grant
 [**grant_consent_to_scope**](ApplicationGrantsApi.md#grant_consent_to_scope) | **POST** /api/v1/apps/{appId}/grants | Grant consent to scope
-[**list_scope_consent_grants**](ApplicationGrantsApi.md#list_scope_consent_grants) | **GET** /api/v1/apps/{appId}/grants | List all app Grants
-[**revoke_scope_consent_grant**](ApplicationGrantsApi.md#revoke_scope_consent_grant) | **DELETE** /api/v1/apps/{appId}/grants/{grantId} | Revoke an app Grant
+[**list_scope_consent_grants**](ApplicationGrantsApi.md#list_scope_consent_grants) | **GET** /api/v1/apps/{appId}/grants | List all app grants
+[**revoke_scope_consent_grant**](ApplicationGrantsApi.md#revoke_scope_consent_grant) | **DELETE** /api/v1/apps/{appId}/grants/{grantId} | Revoke an app grant
 
 
 # **get_scope_consent_grant**
 > OAuth2ScopeConsentGrant get_scope_consent_grant(app_id, grant_id, expand=expand)
 
-Retrieve an app Grant
+Retrieve an app grant
 
 Retrieves a single scope consent Grant object for the app
 
@@ -51,12 +51,12 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.ApplicationGrantsApi(api_client)
-    app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
-    grant_id = 'iJoqkwx50mrgX4T9LcaH' # str | ID of the Grant
-    expand = 'scope' # str | An optional parameter to include scope details in the `_embedded` attribute. Valid value: `scope` (optional)
+    app_id = '0oafxqCAJWWGELFTYASJ' # str | Application ID
+    grant_id = 'iJoqkwx50mrgX4T9LcaH' # str | Grant ID
+    expand = 'scope' # str | An optional parameter to return scope details in the `_embedded` property. Valid value: `scope` (optional)
 
     try:
-        # Retrieve an app Grant
+        # Retrieve an app grant
         api_response = api_instance.get_scope_consent_grant(app_id, grant_id, expand=expand)
         print("The response of ApplicationGrantsApi->get_scope_consent_grant:\n")
         pprint(api_response)
@@ -71,9 +71,9 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **app_id** | **str**| ID of the Application | 
- **grant_id** | **str**| ID of the Grant | 
- **expand** | **str**| An optional parameter to include scope details in the &#x60;_embedded&#x60; attribute. Valid value: &#x60;scope&#x60; | [optional] 
+ **app_id** | **str**| Application ID | 
+ **grant_id** | **str**| Grant ID | 
+ **expand** | **str**| An optional parameter to return scope details in the &#x60;_embedded&#x60; property. Valid value: &#x60;scope&#x60; | [optional] 
 
 ### Return type
 
@@ -140,7 +140,7 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.ApplicationGrantsApi(api_client)
-    app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
+    app_id = '0oafxqCAJWWGELFTYASJ' # str | Application ID
     o_auth2_scope_consent_grant = okta.OAuth2ScopeConsentGrant() # OAuth2ScopeConsentGrant | 
 
     try:
@@ -159,7 +159,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **app_id** | **str**| ID of the Application | 
+ **app_id** | **str**| Application ID | 
  **o_auth2_scope_consent_grant** | [**OAuth2ScopeConsentGrant**](OAuth2ScopeConsentGrant.md)|  | 
 
 ### Return type
@@ -190,7 +190,7 @@ Name | Type | Description  | Notes
 # **list_scope_consent_grants**
 > List[OAuth2ScopeConsentGrant] list_scope_consent_grants(app_id, expand=expand)
 
-List all app Grants
+List all app grants
 
 Lists all scope consent Grants for the app
 
@@ -228,11 +228,11 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.ApplicationGrantsApi(api_client)
-    app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
-    expand = 'scope' # str | An optional parameter to include scope details in the `_embedded` attribute. Valid value: `scope` (optional)
+    app_id = '0oafxqCAJWWGELFTYASJ' # str | Application ID
+    expand = 'scope' # str | An optional parameter to return scope details in the `_embedded` property. Valid value: `scope` (optional)
 
     try:
-        # List all app Grants
+        # List all app grants
         api_response = api_instance.list_scope_consent_grants(app_id, expand=expand)
         print("The response of ApplicationGrantsApi->list_scope_consent_grants:\n")
         pprint(api_response)
@@ -247,8 +247,8 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **app_id** | **str**| ID of the Application | 
- **expand** | **str**| An optional parameter to include scope details in the &#x60;_embedded&#x60; attribute. Valid value: &#x60;scope&#x60; | [optional] 
+ **app_id** | **str**| Application ID | 
+ **expand** | **str**| An optional parameter to return scope details in the &#x60;_embedded&#x60; property. Valid value: &#x60;scope&#x60; | [optional] 
 
 ### Return type
 
@@ -277,7 +277,7 @@ Name | Type | Description  | Notes
 # **revoke_scope_consent_grant**
 > revoke_scope_consent_grant(app_id, grant_id)
 
-Revoke an app Grant
+Revoke an app grant
 
 Revokes permission for the app to grant the given scope
 
@@ -314,11 +314,11 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.ApplicationGrantsApi(api_client)
-    app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
-    grant_id = 'iJoqkwx50mrgX4T9LcaH' # str | ID of the Grant
+    app_id = '0oafxqCAJWWGELFTYASJ' # str | Application ID
+    grant_id = 'iJoqkwx50mrgX4T9LcaH' # str | Grant ID
 
     try:
-        # Revoke an app Grant
+        # Revoke an app grant
         api_instance.revoke_scope_consent_grant(app_id, grant_id)
     except Exception as e:
         print("Exception when calling ApplicationGrantsApi->revoke_scope_consent_grant: %s\n" % e)
@@ -331,8 +331,8 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **app_id** | **str**| ID of the Application | 
- **grant_id** | **str**| ID of the Grant | 
+ **app_id** | **str**| Application ID | 
+ **grant_id** | **str**| Grant ID | 
 
 ### Return type
 

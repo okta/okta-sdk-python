@@ -21,7 +21,7 @@
 """  # noqa: E501
 
 
-__version__ = "3.0.0"
+__version__ = "3.0.1"
 
 # import apis into sdk package
 from okta.api.agent_pools_api import AgentPoolsApi

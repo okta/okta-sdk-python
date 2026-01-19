@@ -6,8 +6,8 @@ Defines the authenticators permitted for the initial authentication step of pass
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**methods** | **List[str]** | Authenticator methods allowed for the initial authentication step of password recovery | [optional] 
 **method_constraints** | [**List[AuthenticatorMethodConstraint]**](AuthenticatorMethodConstraint.md) | Constraints on the values specified in the &#x60;methods&#x60; array. Specifying a constraint limits methods to specific authenticator(s). Currently, Google OTP is the only accepted constraint. | [optional] 
+**methods** | **List[str]** | Authenticator methods allowed for the initial authentication step of password recovery. Method &#x60;otp&#x60; requires a constraint limiting it to a Google authenticator. | [optional] 
 
 ## Example
 

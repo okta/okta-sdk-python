@@ -5,19 +5,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**button_field** | **str** |  | [optional] 
-**button_selector** | **str** |  | [optional] 
-**checkbox** | **str** |  | [optional] 
-**extra_field_selector** | **str** |  | [optional] 
-**extra_field_value** | **str** |  | [optional] 
-**login_url_regex** | **str** |  | [optional] 
-**password_field** | **str** |  | [optional] 
-**password_selector** | **str** |  | [optional] 
-**redirect_url** | **str** |  | [optional] 
-**target_url** | **str** |  | [optional] 
-**url** | **str** |  | [optional] 
-**username_field** | **str** |  | [optional] 
-**user_name_selector** | **str** |  | [optional] 
+**button_field** | **str** | CSS selector for the **Sign-In** button in the sign-in form (for SWA apps with the &#x60;template_swa&#x60; app name definition) | 
+**button_selector** | **str** | CSS selector for the **Sign-In**  button in the sign-in form (for three-field SWA apps with the &#x60;template_swa3field&#x60; app name definition) | [optional] 
+**extra_field_selector** | **str** | Enter the CSS selector for the extra field (for three-field SWA apps with the &#x60;template_swa3field&#x60; app name definition). | [optional] 
+**extra_field_value** | **str** | Enter the value for the extra field in the form (for three-field SWA apps with the &#x60;template_swa3field&#x60; app name definition). | [optional] 
+**login_url_regex** | **str** | A regular expression that further restricts targetURL to the specified regular expression | [optional] 
+**password_field** | **str** | CSS selector for the **Password** field in the sign-in form (for SWA apps with the &#x60;template_swa&#x60; app name definition) | 
+**password_selector** | **str** | CSS selector for the **Password** field in the sign-in form (for three-field SWA apps with the &#x60;template_swa3field&#x60; app name definition) | [optional] 
+**target_url** | **str** | The URL of the sign-in page for this app (for three-field SWA apps with the &#x60;template_swa3field&#x60; app name definition) | [optional] 
+**url** | **str** | The URL of the sign-in page for this app (for SWA apps with the &#x60;template_swa&#x60; app name definition) | 
+**username_field** | **str** | CSS selector for the **Username** field in the sign-in form (for SWA apps with the &#x60;template_swa&#x60; app name definition) | 
+**user_name_selector** | **str** | CSS selector for the **Username** field in the sign-in form (for three-field SWA apps with the &#x60;template_swa3field&#x60; app name definition) | [optional] 
 
 ## Example
 

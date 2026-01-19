@@ -1,14 +1,14 @@
 # InlineHookChannelConfig
 
+Properties of the communications channel that are used to contact your external service
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**auth_scheme** | [**InlineHookChannelConfigAuthScheme**](InlineHookChannelConfigAuthScheme.md) |  | [optional] 
-**headers** | [**List[InlineHookChannelConfigHeaders]**](InlineHookChannelConfigHeaders.md) |  | [optional] 
-**method** | **str** |  | [optional] 
-**uri** | **str** |  | [optional] 
+**headers** | [**List[InlineHookChannelConfigHeaders]**](InlineHookChannelConfigHeaders.md) | An optional list of key/value pairs for headers that you can send with the request to the external service | [optional] 
+**method** | **str** | The method of the Okta inline hook request | [optional] 
+**uri** | **str** | The external service endpoint that executes the inline hook handler. It must begin with &#x60;https://&#x60; and be reachable by Okta. No white space is allowed in the URI. | [optional] 
 
 ## Example
 

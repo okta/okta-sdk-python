@@ -1,14 +1,13 @@
 # ApplicationFeature
 
-The Feature object is used to configure application feature settings.  The only feature currently supported is `USER_PROVISIONING` for the Org2Org application type. 
+The Feature object is used to configure app feature settings. 
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**capabilities** | [**CapabilitiesObject**](CapabilitiesObject.md) |  | [optional] 
 **description** | **str** | Description of the feature | [optional] [readonly] 
-**name** | **str** | Identifying name of the feature | [optional] [readonly] 
+**name** | [**ApplicationFeatureType**](ApplicationFeatureType.md) |  | [optional] 
 **status** | [**EnabledStatus**](EnabledStatus.md) |  | [optional] 
 **links** | [**ApplicationFeatureLinks**](ApplicationFeatureLinks.md) |  | [optional] 
 

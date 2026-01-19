@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** |  | [optional] [readonly] 
-**last_updated_date** | **str** |  | [optional] [readonly] 
+**id** | **str** | Unique key for the Push Provider | [optional] [readonly] 
+**last_updated_date** | **str** | Timestamp when the Push Provider was last modified | [optional] [readonly] 
 **name** | **str** | Display name of the push provider | [optional] 
 **provider_type** | [**ProviderType**](ProviderType.md) |  | [optional] 
 **links** | [**LinksSelf**](LinksSelf.md) |  | [optional] 

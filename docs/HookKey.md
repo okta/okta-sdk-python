@@ -1,17 +1,17 @@
 # HookKey
 
+The `id` property in the response as `id` serves as the unique ID for the key, which you can specify when invoking other CRUD operations.  The `keyId` provided in the response is the alias of the public key that you can use to get details of the public key data in a separate call.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**created** | **datetime** | Timestamp when the key was created. | [optional] [readonly] 
-**id** | **str** | The unique identifier for the key. | [optional] [readonly] 
-**is_used** | **bool** | Whether this key is currently in use by other hooks. | [optional] 
-**key_id** | **str** | The alias of the public key. | [optional] [readonly] 
-**last_updated** | **datetime** | Timestamp when the key was updated. | [optional] [readonly] 
-**name** | **str** | Display name of the key. | [optional] 
-**embedded** | [**JsonWebKey**](JsonWebKey.md) |  | [optional] 
+**created** | **datetime** | Timestamp when the key was created | [optional] [readonly] 
+**id** | **str** | The unique identifier for the key | [optional] [readonly] 
+**is_used** | **bool** | Whether this key is currently in use by other applications | [optional] [readonly] 
+**key_id** | **str** | The alias of the public key | [optional] [readonly] 
+**last_updated** | **datetime** | Timestamp when the key was updated | [optional] [readonly] 
+**name** | **str** | Display name of the key | [optional] 
 
 ## Example
 

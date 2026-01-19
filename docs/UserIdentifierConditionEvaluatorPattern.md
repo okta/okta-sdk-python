@@ -1,13 +1,13 @@
 # UserIdentifierConditionEvaluatorPattern
 
-Used in the User Identifier Condition object. Specifies the details of the patterns to match against.
+Specifies the details of the patterns to match against
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**match_type** | [**UserIdentifierMatchType**](UserIdentifierMatchType.md) |  | [optional] 
-**value** | **str** | The regex expression of a simple match string | [optional] 
+**match_type** | [**UserIdentifierMatchType**](UserIdentifierMatchType.md) |  | 
+**value** | **str** | The regular expression or simple match string | 
 
 ## Example
 

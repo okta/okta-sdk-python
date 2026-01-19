@@ -1,5 +1,6 @@
 # OAuth2ScopesMediationPolicyRuleCondition
 
+Array of scopes that the condition includes
 
 ## Properties
 

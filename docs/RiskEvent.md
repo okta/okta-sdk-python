@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**expires_at** | **datetime** | Timestamp at which the event expires (expressed as a UTC time zone using ISO 8601 format: yyyy-MM-dd&#x60;T&#x60;HH:mm:ss.SSS&#x60;Z&#x60;). If this optional field is not included, Okta automatically expires the event 24 hours after the event is consumed. | [optional] 
-**subjects** | [**List[RiskEventSubject]**](RiskEventSubject.md) | List of Risk Event Subjects | 
+**expires_at** | **datetime** | Timestamp at which the event expires (expressed as a UTC time zone using ISO 8601 format: yyyy-MM-dd&#x60;T&#x60;HH:mm:ss.SSS&#x60;Z&#x60;). If this optional field isn&#39;t included, Okta automatically expires the event 24 hours after the event is consumed. | [optional] 
+**subjects** | [**List[RiskEventSubject]**](RiskEventSubject.md) | List of risk event subjects | 
 **timestamp** | **datetime** | Timestamp of when the event is produced (expressed as a UTC time zone using ISO 8601 format: yyyy-MM-dd&#x60;T&#x60;HH:mm:ss.SSS&#x60;Z&#x60;) | [optional] 
 
 ## Example

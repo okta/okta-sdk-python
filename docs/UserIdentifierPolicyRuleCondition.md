@@ -1,13 +1,14 @@
 # UserIdentifierPolicyRuleCondition
 
+Specifies a user identifier condition to match on
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**attribute** | **str** |  | [optional] 
-**patterns** | [**List[UserIdentifierConditionEvaluatorPattern]**](UserIdentifierConditionEvaluatorPattern.md) |  | [optional] 
-**type** | [**UserIdentifierType**](UserIdentifierType.md) |  | [optional] 
+**attribute** | **str** | The name of the profile attribute to match against. Only used when type is &#x60;ATTRIBUTE&#x60;. | [optional] 
+**patterns** | [**List[UserIdentifierConditionEvaluatorPattern]**](UserIdentifierConditionEvaluatorPattern.md) |  | 
+**type** | [**UserIdentifierType**](UserIdentifierType.md) |  | 
 
 ## Example
 

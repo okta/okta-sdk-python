@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **var_self** | [**HrefObjectSelfLink**](HrefObjectSelfLink.md) |  | [optional] 
-**role** | [**HrefObject**](HrefObject.md) |  | [optional] 
+**role** | [**HrefObjectRoleLink**](HrefObjectRoleLink.md) |  | [optional] 
 
 ## Example
 

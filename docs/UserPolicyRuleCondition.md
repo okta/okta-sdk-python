@@ -1,13 +1,14 @@
 # UserPolicyRuleCondition
 
+Specifies a set of Users to be included or excluded
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**exclude** | **List[str]** |  | [optional] 
+**exclude** | **List[str]** | Users to be excluded | [optional] 
 **inactivity** | [**InactivityPolicyRuleCondition**](InactivityPolicyRuleCondition.md) |  | [optional] 
-**include** | **List[str]** |  | [optional] 
+**include** | **List[str]** | Users to be included | [optional] 
 **lifecycle_expiration** | [**LifecycleExpirationPolicyRuleCondition**](LifecycleExpirationPolicyRuleCondition.md) |  | [optional] 
 **password_expiration** | [**PasswordExpirationPolicyRuleCondition**](PasswordExpirationPolicyRuleCondition.md) |  | [optional] 
 **user_lifecycle_attribute** | [**UserLifecycleAttributePolicyRuleCondition**](UserLifecycleAttributePolicyRuleCondition.md) |  | [optional] 

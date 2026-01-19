@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**error_causes** | [**List[ErrorErrorCausesInner]**](ErrorErrorCausesInner.md) |  | [optional] 
+**error_causes** | [**List[ErrorCause]**](ErrorCause.md) |  | [optional] 
 **error_code** | **str** | An Okta code for this type of error | [optional] 
 **error_id** | **str** | A unique identifier for this error. This can be used by Okta Support to help with troubleshooting. | [optional] 
 **error_link** | **str** | An Okta code for this type of error | [optional] 

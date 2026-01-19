@@ -1,5 +1,6 @@
 # PasswordPolicyAuthenticationProviderCondition
 
+Specifies an authentication provider that's the source of some or all users
 
 ## Properties
 

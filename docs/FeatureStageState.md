@@ -1,5 +1,6 @@
 # FeatureStageState
 
+Indicates the release state of the feature
 
 ## Properties
 

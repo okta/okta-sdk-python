@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **brand_id** | **str** |  | 
 **domain** | **str** |  | 
+**validation_subdomain** | **str** | Subdomain for the email sender&#39;s custom mail domain. Specify your subdomain when you configure a custom mail domain. | [optional] [default to 'mail']
 **display_name** | **str** |  | 
 **user_name** | **str** |  | 
 

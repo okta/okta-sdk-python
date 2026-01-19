@@ -8,9 +8,9 @@ Name | Type | Description | Notes
 **signing** | [**ApplicationCredentialsSigning**](ApplicationCredentialsSigning.md) |  | [optional] 
 **user_name_template** | [**ApplicationCredentialsUsernameTemplate**](ApplicationCredentialsUsernameTemplate.md) |  | [optional] 
 **password** | [**PasswordCredential**](PasswordCredential.md) |  | [optional] 
-**reveal_password** | **bool** |  | [optional] 
+**reveal_password** | **bool** | Allow users to securely see their password | [optional] 
 **scheme** | [**ApplicationCredentialsScheme**](ApplicationCredentialsScheme.md) |  | [optional] 
-**user_name** | **str** |  | [optional] 
+**user_name** | **str** | Shared username for the app | [optional] 
 
 ## Example
 

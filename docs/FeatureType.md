@@ -1,5 +1,6 @@
 # FeatureType
 
+Type of feature
 
 ## Properties
 

@@ -4,18 +4,18 @@ All URIs are relative to *https://subdomain.okta.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_sms_template**](TemplateApi.md#create_sms_template) | **POST** /api/v1/templates/sms | Create an SMS Template
-[**delete_sms_template**](TemplateApi.md#delete_sms_template) | **DELETE** /api/v1/templates/sms/{templateId} | Delete an SMS Template
-[**get_sms_template**](TemplateApi.md#get_sms_template) | **GET** /api/v1/templates/sms/{templateId} | Retrieve an SMS Template
-[**list_sms_templates**](TemplateApi.md#list_sms_templates) | **GET** /api/v1/templates/sms | List all SMS Templates
-[**replace_sms_template**](TemplateApi.md#replace_sms_template) | **PUT** /api/v1/templates/sms/{templateId} | Replace an SMS Template
-[**update_sms_template**](TemplateApi.md#update_sms_template) | **POST** /api/v1/templates/sms/{templateId} | Update an SMS Template
+[**create_sms_template**](TemplateApi.md#create_sms_template) | **POST** /api/v1/templates/sms | Create an SMS template
+[**delete_sms_template**](TemplateApi.md#delete_sms_template) | **DELETE** /api/v1/templates/sms/{templateId} | Delete an SMS template
+[**get_sms_template**](TemplateApi.md#get_sms_template) | **GET** /api/v1/templates/sms/{templateId} | Retrieve an SMS template
+[**list_sms_templates**](TemplateApi.md#list_sms_templates) | **GET** /api/v1/templates/sms | List all SMS templates
+[**replace_sms_template**](TemplateApi.md#replace_sms_template) | **PUT** /api/v1/templates/sms/{templateId} | Replace an SMS template
+[**update_sms_template**](TemplateApi.md#update_sms_template) | **POST** /api/v1/templates/sms/{templateId} | Update an SMS template
 
 
 # **create_sms_template**
 > SmsTemplate create_sms_template(sms_template)
 
-Create an SMS Template
+Create an SMS template
 
 Creates a new custom SMS template
 
@@ -56,7 +56,7 @@ with okta.ApiClient(configuration) as api_client:
     sms_template = okta.SmsTemplate() # SmsTemplate | 
 
     try:
-        # Create an SMS Template
+        # Create an SMS template
         api_response = api_instance.create_sms_template(sms_template)
         print("The response of TemplateApi->create_sms_template:\n")
         pprint(api_response)
@@ -100,7 +100,7 @@ Name | Type | Description  | Notes
 # **delete_sms_template**
 > delete_sms_template(template_id)
 
-Delete an SMS Template
+Delete an SMS template
 
 Deletes an SMS template
 
@@ -140,7 +140,7 @@ with okta.ApiClient(configuration) as api_client:
     template_id = '6NQUJ5yR3bpgEiYmq8IC' # str | `id` of the Template
 
     try:
-        # Delete an SMS Template
+        # Delete an SMS template
         api_instance.delete_sms_template(template_id)
     except Exception as e:
         print("Exception when calling TemplateApi->delete_sms_template: %s\n" % e)
@@ -182,7 +182,7 @@ void (empty response body)
 # **get_sms_template**
 > SmsTemplate get_sms_template(template_id)
 
-Retrieve an SMS Template
+Retrieve an SMS template
 
 Retrieves a specific template by `id`
 
@@ -223,7 +223,7 @@ with okta.ApiClient(configuration) as api_client:
     template_id = '6NQUJ5yR3bpgEiYmq8IC' # str | `id` of the Template
 
     try:
-        # Retrieve an SMS Template
+        # Retrieve an SMS template
         api_response = api_instance.get_sms_template(template_id)
         print("The response of TemplateApi->get_sms_template:\n")
         pprint(api_response)
@@ -267,7 +267,7 @@ Name | Type | Description  | Notes
 # **list_sms_templates**
 > List[SmsTemplate] list_sms_templates(template_type=template_type)
 
-List all SMS Templates
+List all SMS templates
 
 Lists all custom SMS templates. A subset of templates can be returned that match a template type.
 
@@ -309,7 +309,7 @@ with okta.ApiClient(configuration) as api_client:
     template_type = okta.SmsTemplateType() # SmsTemplateType |  (optional)
 
     try:
-        # List all SMS Templates
+        # List all SMS templates
         api_response = api_instance.list_sms_templates(template_type=template_type)
         print("The response of TemplateApi->list_sms_templates:\n")
         pprint(api_response)
@@ -352,9 +352,9 @@ Name | Type | Description  | Notes
 # **replace_sms_template**
 > SmsTemplate replace_sms_template(template_id, sms_template)
 
-Replace an SMS Template
+Replace an SMS template
 
-Replaces the SMS template
+Replaces the SMS Template > **Notes:** You can't update the default SMS Template. 
 
 ### Example
 
@@ -394,7 +394,7 @@ with okta.ApiClient(configuration) as api_client:
     sms_template = okta.SmsTemplate() # SmsTemplate | 
 
     try:
-        # Replace an SMS Template
+        # Replace an SMS template
         api_response = api_instance.replace_sms_template(template_id, sms_template)
         print("The response of TemplateApi->replace_sms_template:\n")
         pprint(api_response)
@@ -440,9 +440,9 @@ Name | Type | Description  | Notes
 # **update_sms_template**
 > SmsTemplate update_sms_template(template_id, sms_template)
 
-Update an SMS Template
+Update an SMS template
 
-Updates an SMS template
+Updates only some of the SMS Template properties:   * All properties within the custom SMS Template that have values are updated.   * Any translation that doesn't exist is added.   * Any translation with a null or empty value is removed.   * Any translation with non-empty/null value is updated. 
 
 ### Example
 
@@ -482,7 +482,7 @@ with okta.ApiClient(configuration) as api_client:
     sms_template = okta.SmsTemplate() # SmsTemplate | 
 
     try:
-        # Update an SMS Template
+        # Update an SMS template
         api_response = api_instance.update_sms_template(template_id, sms_template)
         print("The response of TemplateApi->update_sms_template:\n")
         pprint(api_response)

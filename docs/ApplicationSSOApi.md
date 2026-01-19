@@ -4,11 +4,11 @@ All URIs are relative to *https://subdomain.okta.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**preview_sam_lmetadata_for_application**](ApplicationSSOApi.md#preview_sam_lmetadata_for_application) | **GET** /api/v1/apps/${appId}/sso/saml/metadata | Preview the application SAML metadata
+[**preview_sam_lmetadata_for_application**](ApplicationSSOApi.md#preview_sam_lmetadata_for_application) | **GET** /api/v1/apps/{appId}/sso/saml/metadata | Preview the application SAML metadata
 
 
 # **preview_sam_lmetadata_for_application**
-> str preview_sam_lmetadata_for_application(app_id)
+> str preview_sam_lmetadata_for_application(app_id, kid)
 
 Preview the application SAML metadata
 
@@ -47,11 +47,12 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.ApplicationSSOApi(api_client)
-    app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
+    app_id = '0oafxqCAJWWGELFTYASJ' # str | Application ID
+    kid = 'mXtzOtml09Dg1ZCeKxTRBo3KrQuBWFkJ5oxhVagjTzo' # str | 
 
     try:
         # Preview the application SAML metadata
-        api_response = api_instance.preview_sam_lmetadata_for_application(app_id)
+        api_response = api_instance.preview_sam_lmetadata_for_application(app_id, kid)
         print("The response of ApplicationSSOApi->preview_sam_lmetadata_for_application:\n")
         pprint(api_response)
     except Exception as e:
@@ -65,7 +66,8 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **app_id** | **str**| ID of the Application | 
+ **app_id** | **str**| Application ID | 
+ **kid** | **str**|  | 
 
 ### Return type
 

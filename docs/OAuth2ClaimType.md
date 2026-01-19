@@ -1,5 +1,6 @@
 # OAuth2ClaimType
 
+Specifies whether the Claim is for an access token (`RESOURCE`) or an ID token (`IDENTITY`)
 
 ## Properties
 

@@ -1,5 +1,6 @@
 # UserCredentials
 
+Specifies primary authentication and recovery credentials for a user. Credential types and requirements vary depending on the provider and security policy of the org.
 
 ## Properties
 

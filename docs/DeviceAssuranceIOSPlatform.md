@@ -5,11 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**disk_encryption_type** | [**DeviceAssuranceAndroidPlatformAllOfDiskEncryptionType**](DeviceAssuranceAndroidPlatformAllOfDiskEncryptionType.md) |  | [optional] 
 **jailbreak** | **bool** |  | [optional] 
 **os_version** | [**OSVersion**](OSVersion.md) |  | [optional] 
 **screen_lock_type** | [**DeviceAssuranceAndroidPlatformAllOfScreenLockType**](DeviceAssuranceAndroidPlatformAllOfScreenLockType.md) |  | [optional] 
-**secure_hardware_present** | **bool** |  | [optional] 
+**third_party_signal_providers** | [**DeviceAssuranceIOSPlatformAllOfThirdPartySignalProviders**](DeviceAssuranceIOSPlatformAllOfThirdPartySignalProviders.md) |  | [optional] 
 
 ## Example
 

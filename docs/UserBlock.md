@@ -1,12 +1,13 @@
 # UserBlock
 
+Describes how the account is blocked from access. If `appliesTo` is `ANY_DEVICES`, then the account is blocked for all devices. If `appliesTo` is `UNKNOWN_DEVICES`, then the account is only blocked for unknown devices.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**applies_to** | **str** |  | [optional] [readonly] 
-**type** | **str** |  | [optional] [readonly] 
+**applies_to** | **str** | The devices that the block applies to | [optional] [readonly] 
+**type** | **str** | Type of access block | [optional] [readonly] 
 
 ## Example
 

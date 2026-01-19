@@ -6,8 +6,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **credentials** | [**SchemeApplicationCredentials**](SchemeApplicationCredentials.md) |  | [optional] 
-**name** | **str** |  | [optional] [default to 'template_sps']
-**settings** | [**SecurePasswordStoreApplicationSettings**](SecurePasswordStoreApplicationSettings.md) |  | [optional] 
+**name** | **str** | &#x60;template_sps&#x60; is the key name for a SWA app instance that uses HTTP POST and doesn&#39;t require a browser plugin | 
+**settings** | [**SecurePasswordStoreApplicationSettings**](SecurePasswordStoreApplicationSettings.md) |  | 
 
 ## Example
 

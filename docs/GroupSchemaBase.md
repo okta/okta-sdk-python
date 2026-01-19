@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** |  | [optional] [readonly] 
-**properties** | [**GroupSchemaBaseProperties**](GroupSchemaBaseProperties.md) |  | [optional] 
-**required** | **List[str]** |  | [optional] 
-**type** | **str** |  | [optional] 
+**id** | **str** | The subschema name | [optional] [readonly] 
+**properties** | [**GroupSchemaBaseProperties**](GroupSchemaBaseProperties.md) | The &#x60;#base&#x60; object properties | [optional] 
+**required** | **List[str]** | A collection indicating required property names | [optional] [readonly] 
+**type** | **str** | The object type | [optional] [readonly] 
 
 ## Example
 

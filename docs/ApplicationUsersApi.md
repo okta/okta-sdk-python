@@ -4,19 +4,19 @@ All URIs are relative to *https://subdomain.okta.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**assign_user_to_application**](ApplicationUsersApi.md#assign_user_to_application) | **POST** /api/v1/apps/{appId}/users | Assign a User
-[**get_application_user**](ApplicationUsersApi.md#get_application_user) | **GET** /api/v1/apps/{appId}/users/{userId} | Retrieve an assigned User
-[**list_application_users**](ApplicationUsersApi.md#list_application_users) | **GET** /api/v1/apps/{appId}/users | List all assigned Users
-[**unassign_user_from_application**](ApplicationUsersApi.md#unassign_user_from_application) | **DELETE** /api/v1/apps/{appId}/users/{userId} | Unassign an App User
-[**update_application_user**](ApplicationUsersApi.md#update_application_user) | **POST** /api/v1/apps/{appId}/users/{userId} | Update an App Profile for an assigned User
+[**assign_user_to_application**](ApplicationUsersApi.md#assign_user_to_application) | **POST** /api/v1/apps/{appId}/users | Assign an application user
+[**get_application_user**](ApplicationUsersApi.md#get_application_user) | **GET** /api/v1/apps/{appId}/users/{userId} | Retrieve an application user
+[**list_application_users**](ApplicationUsersApi.md#list_application_users) | **GET** /api/v1/apps/{appId}/users | List all application users
+[**unassign_user_from_application**](ApplicationUsersApi.md#unassign_user_from_application) | **DELETE** /api/v1/apps/{appId}/users/{userId} | Unassign an application user
+[**update_application_user**](ApplicationUsersApi.md#update_application_user) | **POST** /api/v1/apps/{appId}/users/{userId} | Update an application user
 
 
 # **assign_user_to_application**
 > AppUser assign_user_to_application(app_id, app_user)
 
-Assign a User
+Assign an application user
 
-Assigns a user to an app with credentials and an app-specific [profile](/openapi/okta-management/management/tag/Application/#tag/Application/operation/assignUserToApplication!c=200&path=profile&t=response). Profile mappings defined for the app are applied first before applying any profile properties that are specified in the request.  > **Notes:** > * You need to specify the `id` and omit the `credentials` parameter in the request body only for `signOnMode` or authentication schemes (`credentials.scheme`) that don't require credentials. > * You can only specify profile properties that aren't defined by profile mappings when Universal Directory is enabled. > * If your SSO app requires a profile but doesn't have provisioning enabled, you need to add a profile to the request body.
+Assigns a user to an app for:    * SSO only<br>     Assignments to SSO apps typically don't include a user profile.     However, if your SSO app requires a profile but doesn't have provisioning enabled, you can add profile attributes in the request body.    * SSO and provisioning<br>     Assignments to SSO and provisioning apps typically include credentials and an app-specific profile.     Profile mappings defined for the app are applied first before applying any profile properties that are specified in the request body.     > **Notes:**     > * When Universal Directory is enabled, you can only specify profile properties that aren't defined in profile mappings.     > * Omit mapped properties during assignment to minimize assignment errors.
 
 ### Example
 
@@ -26,6 +26,7 @@ Assigns a user to an app with credentials and an app-specific [profile](/openapi
 ```python
 import okta
 from okta.models.app_user import AppUser
+from okta.models.app_user_assign_request import AppUserAssignRequest
 from okta.rest import ApiException
 from pprint import pprint
 
@@ -52,11 +53,11 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.ApplicationUsersApi(api_client)
-    app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
-    app_user = okta.AppUser() # AppUser | 
+    app_id = '0oafxqCAJWWGELFTYASJ' # str | Application ID
+    app_user = okta.AppUserAssignRequest() # AppUserAssignRequest | 
 
     try:
-        # Assign a User
+        # Assign an application user
         api_response = api_instance.assign_user_to_application(app_id, app_user)
         print("The response of ApplicationUsersApi->assign_user_to_application:\n")
         pprint(api_response)
@@ -71,8 +72,8 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **app_id** | **str**| ID of the Application | 
- **app_user** | [**AppUser**](AppUser.md)|  | 
+ **app_id** | **str**| Application ID | 
+ **app_user** | [**AppUserAssignRequest**](AppUserAssignRequest.md)|  | 
 
 ### Return type
 
@@ -102,9 +103,9 @@ Name | Type | Description  | Notes
 # **get_application_user**
 > AppUser get_application_user(app_id, user_id, expand=expand)
 
-Retrieve an assigned User
+Retrieve an application user
 
-Retrieves a specific user assignment for app by `id`
+Retrieves a specific user assignment for a specific app
 
 ### Example
 
@@ -140,12 +141,12 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.ApplicationUsersApi(api_client)
-    app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
-    user_id = 'user_id_example' # str | 
-    expand = 'expand_example' # str |  (optional)
+    app_id = '0oafxqCAJWWGELFTYASJ' # str | Application ID
+    user_id = '00u13okQOVWZJGDOAUVR' # str | ID of an existing Okta user
+    expand = 'user' # str | An optional query parameter to return the corresponding [User](/openapi/okta-management/management/tag/User/) object in the `_embedded` property. Valid value: `user` (optional)
 
     try:
-        # Retrieve an assigned User
+        # Retrieve an application user
         api_response = api_instance.get_application_user(app_id, user_id, expand=expand)
         print("The response of ApplicationUsersApi->get_application_user:\n")
         pprint(api_response)
@@ -160,9 +161,9 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **app_id** | **str**| ID of the Application | 
- **user_id** | **str**|  | 
- **expand** | **str**|  | [optional] 
+ **app_id** | **str**| Application ID | 
+ **user_id** | **str**| ID of an existing Okta user | 
+ **expand** | **str**| An optional query parameter to return the corresponding [User](/openapi/okta-management/management/tag/User/) object in the &#x60;_embedded&#x60; property. Valid value: &#x60;user&#x60; | [optional] 
 
 ### Return type
 
@@ -189,9 +190,9 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_application_users**
-> List[AppUser] list_application_users(app_id, q=q, query_scope=query_scope, after=after, limit=limit, filter=filter, expand=expand)
+> List[AppUser] list_application_users(app_id, after=after, limit=limit, q=q, expand=expand)
 
-List all assigned Users
+List all application users
 
 Lists all assigned users for an app
 
@@ -229,17 +230,15 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.ApplicationUsersApi(api_client)
-    app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
-    q = 'q_example' # str |  (optional)
-    query_scope = 'query_scope_example' # str |  (optional)
-    after = 'after_example' # str | specifies the pagination cursor for the next page of assignments (optional)
-    limit = -1 # int | specifies the number of results for a page (optional) (default to -1)
-    filter = 'filter_example' # str |  (optional)
-    expand = 'expand_example' # str |  (optional)
+    app_id = '0oafxqCAJWWGELFTYASJ' # str | Application ID
+    after = '16275000448691' # str | Specifies the pagination cursor for the next page of results. Treat this as an opaque value obtained through the next link relationship. See [Pagination](/#pagination). (optional)
+    limit = 50 # int | Specifies the number of objects to return per page. If there are multiple pages of results, the Link header contains a `next` link that you need to use as an opaque value (follow it, don't parse it). See [Pagination](/#pagination).  (optional) (default to 50)
+    q = 'sam' # str | Specifies a filter for the list of application users returned based on their profile attributes. The value of `q` is matched against the beginning of the following profile attributes: `userName`, `firstName`, `lastName`, and `email`. This filter only supports the `startsWith` operation that matches the `q` string against the beginning of the attribute values. > **Note:** For OIDC apps, user profiles don't contain the `firstName` or `lastName` attributes. Therefore, the query only matches against the `userName` or `email` attributes.  (optional)
+    expand = 'user' # str | An optional query parameter to return the corresponding [User](/openapi/okta-management/management/tag/User/) object in the `_embedded` property. Valid value: `user` (optional)
 
     try:
-        # List all assigned Users
-        api_response = api_instance.list_application_users(app_id, q=q, query_scope=query_scope, after=after, limit=limit, filter=filter, expand=expand)
+        # List all application users
+        api_response = api_instance.list_application_users(app_id, after=after, limit=limit, q=q, expand=expand)
         print("The response of ApplicationUsersApi->list_application_users:\n")
         pprint(api_response)
     except Exception as e:
@@ -253,13 +252,11 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **app_id** | **str**| ID of the Application | 
- **q** | **str**|  | [optional] 
- **query_scope** | **str**|  | [optional] 
- **after** | **str**| specifies the pagination cursor for the next page of assignments | [optional] 
- **limit** | **int**| specifies the number of results for a page | [optional] [default to -1]
- **filter** | **str**|  | [optional] 
- **expand** | **str**|  | [optional] 
+ **app_id** | **str**| Application ID | 
+ **after** | **str**| Specifies the pagination cursor for the next page of results. Treat this as an opaque value obtained through the next link relationship. See [Pagination](/#pagination). | [optional] 
+ **limit** | **int**| Specifies the number of objects to return per page. If there are multiple pages of results, the Link header contains a &#x60;next&#x60; link that you need to use as an opaque value (follow it, don&#39;t parse it). See [Pagination](/#pagination).  | [optional] [default to 50]
+ **q** | **str**| Specifies a filter for the list of application users returned based on their profile attributes. The value of &#x60;q&#x60; is matched against the beginning of the following profile attributes: &#x60;userName&#x60;, &#x60;firstName&#x60;, &#x60;lastName&#x60;, and &#x60;email&#x60;. This filter only supports the &#x60;startsWith&#x60; operation that matches the &#x60;q&#x60; string against the beginning of the attribute values. &gt; **Note:** For OIDC apps, user profiles don&#39;t contain the &#x60;firstName&#x60; or &#x60;lastName&#x60; attributes. Therefore, the query only matches against the &#x60;userName&#x60; or &#x60;email&#x60; attributes.  | [optional] 
+ **expand** | **str**| An optional query parameter to return the corresponding [User](/openapi/okta-management/management/tag/User/) object in the &#x60;_embedded&#x60; property. Valid value: &#x60;user&#x60; | [optional] 
 
 ### Return type
 
@@ -288,9 +285,9 @@ Name | Type | Description  | Notes
 # **unassign_user_from_application**
 > unassign_user_from_application(app_id, user_id, send_email=send_email)
 
-Unassign an App User
+Unassign an application user
 
-Unassigns a user from an application
+Unassigns a user from an app  For directories like Active Directory and LDAP, they act as the owner of the user's credential with Okta delegating authentication (DelAuth) to that directory. If this request is successful for a user when DelAuth is enabled, then the user is in a state with no password. You can then reset the user's password.  > **Important:** This is a destructive operation. You can't recover the user's app profile. If the app is enabled for provisioning and configured to deactivate users, the user is also deactivated in the target app.
 
 ### Example
 
@@ -325,12 +322,12 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.ApplicationUsersApi(api_client)
-    app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
-    user_id = 'user_id_example' # str | 
-    send_email = False # bool |  (optional) (default to False)
+    app_id = '0oafxqCAJWWGELFTYASJ' # str | Application ID
+    user_id = '00u13okQOVWZJGDOAUVR' # str | ID of an existing Okta user
+    send_email = False # bool | Sends a deactivation email to the administrator if `true` (optional) (default to False)
 
     try:
-        # Unassign an App User
+        # Unassign an application user
         api_instance.unassign_user_from_application(app_id, user_id, send_email=send_email)
     except Exception as e:
         print("Exception when calling ApplicationUsersApi->unassign_user_from_application: %s\n" % e)
@@ -343,9 +340,9 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **app_id** | **str**| ID of the Application | 
- **user_id** | **str**|  | 
- **send_email** | **bool**|  | [optional] [default to False]
+ **app_id** | **str**| Application ID | 
+ **user_id** | **str**| ID of an existing Okta user | 
+ **send_email** | **bool**| Sends a deactivation email to the administrator if &#x60;true&#x60; | [optional] [default to False]
 
 ### Return type
 
@@ -374,9 +371,9 @@ void (empty response body)
 # **update_application_user**
 > AppUser update_application_user(app_id, user_id, app_user)
 
-Update an App Profile for an assigned User
+Update an application user
 
-Updates a user's profile for an application
+Updates the profile or credentials of a user assigned to an app
 
 ### Example
 
@@ -386,6 +383,7 @@ Updates a user's profile for an application
 ```python
 import okta
 from okta.models.app_user import AppUser
+from okta.models.app_user_update_request import AppUserUpdateRequest
 from okta.rest import ApiException
 from pprint import pprint
 
@@ -412,12 +410,12 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.ApplicationUsersApi(api_client)
-    app_id = '0oafxqCAJWWGELFTYASJ' # str | ID of the Application
-    user_id = 'user_id_example' # str | 
-    app_user = okta.AppUser() # AppUser | 
+    app_id = '0oafxqCAJWWGELFTYASJ' # str | Application ID
+    user_id = '00u13okQOVWZJGDOAUVR' # str | ID of an existing Okta user
+    app_user = okta.AppUserUpdateRequest() # AppUserUpdateRequest | 
 
     try:
-        # Update an App Profile for an assigned User
+        # Update an application user
         api_response = api_instance.update_application_user(app_id, user_id, app_user)
         print("The response of ApplicationUsersApi->update_application_user:\n")
         pprint(api_response)
@@ -432,9 +430,9 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **app_id** | **str**| ID of the Application | 
- **user_id** | **str**|  | 
- **app_user** | [**AppUser**](AppUser.md)|  | 
+ **app_id** | **str**| Application ID | 
+ **user_id** | **str**| ID of an existing Okta user | 
+ **app_user** | [**AppUserUpdateRequest**](AppUserUpdateRequest.md)|  | 
 
 ### Return type
 

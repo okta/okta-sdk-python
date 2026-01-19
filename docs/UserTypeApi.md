@@ -4,20 +4,20 @@ All URIs are relative to *https://subdomain.okta.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_user_type**](UserTypeApi.md#create_user_type) | **POST** /api/v1/meta/types/user | Create a User Type
-[**delete_user_type**](UserTypeApi.md#delete_user_type) | **DELETE** /api/v1/meta/types/user/{typeId} | Delete a User Type
-[**get_user_type**](UserTypeApi.md#get_user_type) | **GET** /api/v1/meta/types/user/{typeId} | Retrieve a User Type
-[**list_user_types**](UserTypeApi.md#list_user_types) | **GET** /api/v1/meta/types/user | List all User Types
-[**replace_user_type**](UserTypeApi.md#replace_user_type) | **PUT** /api/v1/meta/types/user/{typeId} | Replace a User Type
-[**update_user_type**](UserTypeApi.md#update_user_type) | **POST** /api/v1/meta/types/user/{typeId} | Update a User Type
+[**create_user_type**](UserTypeApi.md#create_user_type) | **POST** /api/v1/meta/types/user | Create a user type
+[**delete_user_type**](UserTypeApi.md#delete_user_type) | **DELETE** /api/v1/meta/types/user/{typeId} | Delete a user type
+[**get_user_type**](UserTypeApi.md#get_user_type) | **GET** /api/v1/meta/types/user/{typeId} | Retrieve a user type
+[**list_user_types**](UserTypeApi.md#list_user_types) | **GET** /api/v1/meta/types/user | List all user types
+[**replace_user_type**](UserTypeApi.md#replace_user_type) | **PUT** /api/v1/meta/types/user/{typeId} | Replace a user type
+[**update_user_type**](UserTypeApi.md#update_user_type) | **POST** /api/v1/meta/types/user/{typeId} | Update a user type
 
 
 # **create_user_type**
 > UserType create_user_type(user_type)
 
-Create a User Type
+Create a user type
 
-Creates a new User Type. Okta automatically creates a `default` User Type for your org. You may add up to nine additional User Types. > **Note**: New User Types are based on the current default schema template. Modifications to this schema do not automatically propagate to previously created User Types.
+Creates a new user type. Okta automatically creates a `default` user type for your org. You may add up to nine additional user types. > **Note**: New user types are based on the current default schema template. Modifications to this schema do not automatically propagate to previously created user types.
 
 ### Example
 
@@ -56,7 +56,7 @@ with okta.ApiClient(configuration) as api_client:
     user_type = okta.UserType() # UserType | 
 
     try:
-        # Create a User Type
+        # Create a user type
         api_response = api_instance.create_user_type(user_type)
         print("The response of UserTypeApi->create_user_type:\n")
         pprint(api_response)
@@ -100,9 +100,9 @@ Name | Type | Description  | Notes
 # **delete_user_type**
 > delete_user_type(type_id)
 
-Delete a User Type
+Delete a user type
 
-Deletes a User Type permanently. > **Note**: You can't delete the default User Type or a User Type that is currently assigned to users.
+Deletes a user type permanently. > **Note**: You can't delete the default user type or a user type that is currently assigned to users.
 
 ### Example
 
@@ -140,7 +140,7 @@ with okta.ApiClient(configuration) as api_client:
     type_id = 'type_id_example' # str | 
 
     try:
-        # Delete a User Type
+        # Delete a user type
         api_instance.delete_user_type(type_id)
     except Exception as e:
         print("Exception when calling UserTypeApi->delete_user_type: %s\n" % e)
@@ -182,9 +182,9 @@ void (empty response body)
 # **get_user_type**
 > UserType get_user_type(type_id)
 
-Retrieve a User Type
+Retrieve a user type
 
-Retrieves a User Type by ID. Use `default` to fetch the default User Type.
+Retrieves a user type by ID. Use `default` to fetch the default user type.
 
 ### Example
 
@@ -223,7 +223,7 @@ with okta.ApiClient(configuration) as api_client:
     type_id = 'type_id_example' # str | 
 
     try:
-        # Retrieve a User Type
+        # Retrieve a user type
         api_response = api_instance.get_user_type(type_id)
         print("The response of UserTypeApi->get_user_type:\n")
         pprint(api_response)
@@ -267,9 +267,9 @@ Name | Type | Description  | Notes
 # **list_user_types**
 > List[UserType] list_user_types()
 
-List all User Types
+List all user types
 
-Lists all User Types in your org
+Lists all user types in your org
 
 ### Example
 
@@ -307,7 +307,7 @@ with okta.ApiClient(configuration) as api_client:
     api_instance = okta.UserTypeApi(api_client)
 
     try:
-        # List all User Types
+        # List all user types
         api_response = api_instance.list_user_types()
         print("The response of UserTypeApi->list_user_types:\n")
         pprint(api_response)
@@ -347,9 +347,9 @@ This endpoint does not need any parameter.
 # **replace_user_type**
 > UserType replace_user_type(type_id, user_type=user_type)
 
-Replace a User Type
+Replace a user type
 
-Replaces an existing User Type. > **Note**: The `name` of an existing User Type can't be changed, but must be part of the request body. You can only replace the `displayName` and `description` elements.
+Replaces an existing user type. This operation is a full update. > **Note**: The `name` of an existing user type can't be changed, but must be part of the request body. You can only replace the `displayName` and `description` elements.
 
 ### Example
 
@@ -390,7 +390,7 @@ with okta.ApiClient(configuration) as api_client:
     user_type = okta.UserTypePutRequest() # UserTypePutRequest |  (optional)
 
     try:
-        # Replace a User Type
+        # Replace a user type
         api_response = api_instance.replace_user_type(type_id, user_type=user_type)
         print("The response of UserTypeApi->replace_user_type:\n")
         pprint(api_response)
@@ -436,9 +436,9 @@ Name | Type | Description  | Notes
 # **update_user_type**
 > UserType update_user_type(type_id, user_type)
 
-Update a User Type
+Update a user type
 
-Updates an existing User Type. > **Note**: You can only update the `displayName` and `description` elements. The `name` of an existing User Type can't be changed.
+Updates an existing user type. This operation is a partial update. > **Note**: You can only update the `displayName` and `description` elements. The `name` of an existing user type can't be changed.
 
 ### Example
 
@@ -479,7 +479,7 @@ with okta.ApiClient(configuration) as api_client:
     user_type = okta.UserTypePostRequest() # UserTypePostRequest | 
 
     try:
-        # Update a User Type
+        # Update a user type
         api_response = api_instance.update_user_type(type_id, user_type)
         print("The response of UserTypeApi->update_user_type:\n")
         pprint(api_response)

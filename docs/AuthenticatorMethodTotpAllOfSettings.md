@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**time_interval_in_seconds** | **int** |  | [optional] 
-**encoding** | **str** |  | [optional] 
-**algorithm** | **str** |  | [optional] 
-**pass_code_length** | **int** |  | [optional] 
+**time_interval_in_seconds** | **int** | Time interval for TOTP in seconds | [optional] 
+**encoding** | [**OtpTotpEncoding**](OtpTotpEncoding.md) |  | [optional] 
+**algorithm** | [**OtpTotpAlgorithm**](OtpTotpAlgorithm.md) |  | [optional] 
+**pass_code_length** | **int** | Number of digits in an OTP value | [optional] 
 
 ## Example
 

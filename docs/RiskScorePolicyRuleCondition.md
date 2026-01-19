@@ -1,11 +1,12 @@
 # RiskScorePolicyRuleCondition
 
+Specifies a particular level of risk to match on
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**level** | **str** |  | [optional] 
+**level** | **str** | The level to match | 
 
 ## Example
 

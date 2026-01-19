@@ -5,20 +5,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**asns** | **List[str]** | Dynamic network zone property. array of strings that represent an ASN numeric value | [optional] 
-**created** | **datetime** | Timestamp when the network zone was created | [optional] [readonly] 
-**gateways** | [**List[NetworkZoneAddress]**](NetworkZoneAddress.md) | IP network zone property: the IP addresses (range or CIDR form) of this zone. The maximum array length is 150 entries for admin-created IP zones, 1000 entries for IP blocklist zones, and 5000 entries for the default system IP Zone. | [optional] 
-**id** | **str** | Unique identifier for the network zone | [optional] [readonly] 
-**last_updated** | **datetime** | Timestamp when the network zone was last modified | [optional] [readonly] 
-**locations** | [**List[NetworkZoneLocation]**](NetworkZoneLocation.md) | Dynamic network zone property: an array of geolocations of this network zone | [optional] 
-**name** | **str** | Unique name for this network zone. Maximum of 128 characters. | [optional] 
-**proxies** | [**List[NetworkZoneAddress]**](NetworkZoneAddress.md) | IP network zone property: the IP addresses (range or CIDR form) that are allowed to forward a request from gateway addresses These proxies are automatically trusted by Threat Insights, and used to identify the client IP of a request. The maximum array length is 150 entries for admin-created zones and 5000 entries for the default system IP Zone. | [optional] 
-**proxy_type** | **str** | Dynamic network zone property: the proxy type used | [optional] 
+**created** | **datetime** | Timestamp when the object was created | [optional] [readonly] 
+**id** | **str** | Unique identifier for the Network Zone | [optional] [readonly] 
+**last_updated** | **datetime** | Timestamp when the object was last modified | [optional] [readonly] 
+**name** | **str** | Unique name for this Network Zone | 
 **status** | [**NetworkZoneStatus**](NetworkZoneStatus.md) |  | [optional] 
-**system** | **bool** | Indicates if this is a system network zone. For admin-created zones, this is always &#x60;false&#x60;. The system IP Policy Network Zone (&#x60;LegacyIpZone&#x60;) is included by default in your Okta org. Notice that &#x60;system&#x3D;true&#x60; for the &#x60;LegacyIpZone&#x60; object. Admin users can modify the name of this default system Zone and can add up to 5000 gateway or proxy IP entries. | [optional] 
-**type** | [**NetworkZoneType**](NetworkZoneType.md) |  | [optional] 
+**system** | **bool** | Indicates a system Network Zone: * &#x60;true&#x60; for system Network Zones * &#x60;false&#x60; for custom Network Zones  The Okta org provides the following default system Network Zones: * &#x60;LegacyIpZone&#x60; * &#x60;BlockedIpZone&#x60; * &#x60;DefaultEnhancedDynamicZone&#x60; * &#x60;DefaultExemptIpZone&#x60;  Admins can modify the name of the default system Network Zone and add up to 5000 gateway or proxy IP entries.  | [optional] [readonly] 
+**type** | [**NetworkZoneType**](NetworkZoneType.md) |  | 
 **usage** | [**NetworkZoneUsage**](NetworkZoneUsage.md) |  | [optional] 
-**links** | [**NetworkZoneLinks**](NetworkZoneLinks.md) |  | [optional] 
+**links** | [**LinksSelfAndLifecycle**](LinksSelfAndLifecycle.md) |  | [optional] 
 
 ## Example
 

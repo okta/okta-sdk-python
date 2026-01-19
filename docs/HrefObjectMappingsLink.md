@@ -5,11 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**hints** | [**HrefObjectHints**](HrefObjectHints.md) |  | [optional] 
+**hints** | [**HrefHints**](HrefHints.md) |  | [optional] 
 **href** | **str** | Link URI | 
-**name** | **str** | Link name | [optional] 
-**type** | **str** | The media type of the link. If omitted, it is implicitly &#x60;application/json&#x60;. | [optional] 
-**templated** | **bool** | Indicates whether the Link Object&#39;s \&quot;href\&quot; property is a URI Template. | [optional] 
+**name** | **str** | Link name | [optional] [readonly] 
+**templated** | **bool** | Indicates whether the link object&#39;s &#x60;href&#x60; property is a URI template. | [optional] [readonly] 
+**type** | **str** | The media type of the link. If omitted, it is implicitly &#x60;application/json&#x60;. | [optional] [readonly] 
 
 ## Example
 

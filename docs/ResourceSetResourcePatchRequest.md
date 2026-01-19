@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**additions** | **List[str]** |  | [optional] 
+**additions** | **List[str]** | A list of resources to add to the resource set | [optional] 
 
 ## Example
 

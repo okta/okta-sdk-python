@@ -1,12 +1,13 @@
 # ApplicationVisibilityHide
 
+Hides the app for specific end-user apps
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**i_os** | **bool** |  | [optional] 
-**web** | **bool** |  | [optional] 
+**i_os** | **bool** | Okta Mobile for iOS or Android (pre-dates Android) | [optional] [default to False]
+**web** | **bool** | Okta End-User Dashboard on a web browser | [optional] [default to False]
 
 ## Example
 

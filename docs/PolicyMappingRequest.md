@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**resource_id** | **str** |  | [optional] 
+**resource_id** | **str** | [Policy ID](https://developer.okta.com/docs/api/openapi/okta-management/management/tag/Policy/#tag/Policy/operation/listPolicies!c&#x3D;200&amp;path&#x3D;0/id&amp;t&#x3D;response) of the app sign-in policy that you want to map | [optional] 
 **resource_type** | [**PolicyMappingResourceType**](PolicyMappingResourceType.md) |  | [optional] 
 
 ## Example

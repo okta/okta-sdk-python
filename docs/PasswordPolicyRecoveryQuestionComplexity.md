@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**min_length** | **int** |  | [optional] [readonly] 
+**min_length** | **int** | Minimum length of the password recovery question answer | [optional] [readonly] [default to 4]
 
 ## Example
 

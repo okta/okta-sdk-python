@@ -1,5 +1,6 @@
 # OrgContactType
 
+Type of contact
 
 ## Properties
 

@@ -1,12 +1,13 @@
 # GroupRuleExpression
 
+Defines Okta specific [group-rules expression](https://developer.okta.com/docs/reference/okta-expression-language/#expressions-in-group-rules)
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**type** | **str** |  | [optional] 
-**value** | **str** |  | [optional] 
+**type** | **str** | Expression type. Only valid value is &#39;&#x60;urn:okta:expression:1.0&#x60;&#39;. | [optional] 
+**value** | **str** | Okta expression that would result in a Boolean value | [optional] 
 
 ## Example
 

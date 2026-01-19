@@ -4,19 +4,19 @@ All URIs are relative to *https://subdomain.okta.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_push_provider**](PushProviderApi.md#create_push_provider) | **POST** /api/v1/push-providers | Create a Push Provider
-[**delete_push_provider**](PushProviderApi.md#delete_push_provider) | **DELETE** /api/v1/push-providers/{pushProviderId} | Delete a Push Provider
-[**get_push_provider**](PushProviderApi.md#get_push_provider) | **GET** /api/v1/push-providers/{pushProviderId} | Retrieve a Push Provider
-[**list_push_providers**](PushProviderApi.md#list_push_providers) | **GET** /api/v1/push-providers | List all Push Providers
-[**replace_push_provider**](PushProviderApi.md#replace_push_provider) | **PUT** /api/v1/push-providers/{pushProviderId} | Replace a Push Provider
+[**create_push_provider**](PushProviderApi.md#create_push_provider) | **POST** /api/v1/push-providers | Create a push provider
+[**delete_push_provider**](PushProviderApi.md#delete_push_provider) | **DELETE** /api/v1/push-providers/{pushProviderId} | Delete a push provider
+[**get_push_provider**](PushProviderApi.md#get_push_provider) | **GET** /api/v1/push-providers/{pushProviderId} | Retrieve a push provider
+[**list_push_providers**](PushProviderApi.md#list_push_providers) | **GET** /api/v1/push-providers | List all push providers
+[**replace_push_provider**](PushProviderApi.md#replace_push_provider) | **PUT** /api/v1/push-providers/{pushProviderId} | Replace a push provider
 
 
 # **create_push_provider**
 > PushProvider create_push_provider(push_provider)
 
-Create a Push Provider
+Create a push provider
 
-Creates a new push provider
+Creates a new push provider. Each Push Provider must have a unique `name`.
 
 ### Example
 
@@ -55,7 +55,7 @@ with okta.ApiClient(configuration) as api_client:
     push_provider = okta.PushProvider() # PushProvider | 
 
     try:
-        # Create a Push Provider
+        # Create a push provider
         api_response = api_instance.create_push_provider(push_provider)
         print("The response of PushProviderApi->create_push_provider:\n")
         pprint(api_response)
@@ -99,7 +99,7 @@ Name | Type | Description  | Notes
 # **delete_push_provider**
 > delete_push_provider(push_provider_id)
 
-Delete a Push Provider
+Delete a push provider
 
 Deletes a push provider by `pushProviderId`. If the push provider is currently being used in the org by a custom authenticator, the delete will not be allowed.
 
@@ -139,7 +139,7 @@ with okta.ApiClient(configuration) as api_client:
     push_provider_id = 'push_provider_id_example' # str | Id of the push provider
 
     try:
-        # Delete a Push Provider
+        # Delete a push provider
         api_instance.delete_push_provider(push_provider_id)
     except Exception as e:
         print("Exception when calling PushProviderApi->delete_push_provider: %s\n" % e)
@@ -182,7 +182,7 @@ void (empty response body)
 # **get_push_provider**
 > PushProvider get_push_provider(push_provider_id)
 
-Retrieve a Push Provider
+Retrieve a push provider
 
 Retrieves a push provider by `pushProviderId`
 
@@ -223,7 +223,7 @@ with okta.ApiClient(configuration) as api_client:
     push_provider_id = 'push_provider_id_example' # str | Id of the push provider
 
     try:
-        # Retrieve a Push Provider
+        # Retrieve a push provider
         api_response = api_instance.get_push_provider(push_provider_id)
         print("The response of PushProviderApi->get_push_provider:\n")
         pprint(api_response)
@@ -267,7 +267,7 @@ Name | Type | Description  | Notes
 # **list_push_providers**
 > List[PushProvider] list_push_providers(type=type)
 
-List all Push Providers
+List all push providers
 
 Lists all push providers
 
@@ -309,7 +309,7 @@ with okta.ApiClient(configuration) as api_client:
     type = okta.ProviderType() # ProviderType | Filters push providers by `providerType` (optional)
 
     try:
-        # List all Push Providers
+        # List all push providers
         api_response = api_instance.list_push_providers(type=type)
         print("The response of PushProviderApi->list_push_providers:\n")
         pprint(api_response)
@@ -352,7 +352,7 @@ Name | Type | Description  | Notes
 # **replace_push_provider**
 > PushProvider replace_push_provider(push_provider_id, push_provider)
 
-Replace a Push Provider
+Replace a push provider
 
 Replaces a push provider by `pushProviderId`
 
@@ -394,7 +394,7 @@ with okta.ApiClient(configuration) as api_client:
     push_provider = okta.PushProvider() # PushProvider | 
 
     try:
-        # Replace a Push Provider
+        # Replace a push provider
         api_response = api_instance.replace_push_provider(push_provider_id, push_provider)
         print("The response of PushProviderApi->replace_push_provider:\n")
         pprint(api_response)

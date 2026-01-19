@@ -5,16 +5,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**channel** | [**EventHookChannel**](EventHookChannel.md) |  | [optional] 
-**created** | **datetime** |  | [optional] [readonly] 
-**created_by** | **str** |  | [optional] 
-**events** | [**EventSubscriptions**](EventSubscriptions.md) |  | [optional] 
-**id** | **str** |  | [optional] [readonly] 
-**last_updated** | **datetime** |  | [optional] [readonly] 
-**name** | **str** |  | [optional] 
-**status** | [**LifecycleStatus**](LifecycleStatus.md) |  | [optional] 
+**channel** | [**EventHookChannel**](EventHookChannel.md) |  | 
+**created** | **datetime** | Timestamp of the event hook creation | [optional] [readonly] 
+**created_by** | **str** | The ID of the user who created the event hook | [optional] [readonly] 
+**description** | **str** | Description of the event hook | [optional] 
+**events** | [**EventSubscriptions**](EventSubscriptions.md) |  | 
+**id** | **str** | Unique key for the event hook | [optional] [readonly] 
+**last_updated** | **datetime** | Date of the last event hook update | [optional] [readonly] 
+**name** | **str** | Display name for the event hook | 
+**status** | **str** | Status of the event hook | [optional] [readonly] 
 **verification_status** | [**EventHookVerificationStatus**](EventHookVerificationStatus.md) |  | [optional] 
-**links** | [**LinksSelf**](LinksSelf.md) |  | [optional] 
+**links** | [**EventHookLinks**](EventHookLinks.md) |  | [optional] 
 
 ## Example
 

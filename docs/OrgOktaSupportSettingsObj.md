@@ -5,9 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**expiration** | **datetime** |  | [optional] [readonly] 
+**case_number** | **str** | Support case number for the Okta Support access grant | [optional] [readonly] 
+**expiration** | **datetime** | Expiration of Okta Support | [optional] [readonly] 
 **support** | [**OrgOktaSupportSetting**](OrgOktaSupportSetting.md) |  | [optional] 
-**links** | [**LinksSelf**](LinksSelf.md) |  | [optional] 
+**links** | [**OrgOktaSupportSettingsObjLinks**](OrgOktaSupportSettingsObjLinks.md) |  | [optional] 
 
 ## Example
 

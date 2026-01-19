@@ -6,7 +6,7 @@ Specifies link relations (see [Web Linking](https://www.rfc-editor.org/rfc/rfc82
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**next** | [**HrefObject**](HrefObject.md) |  | [optional] 
+**next** | [**HrefObjectNextLink**](HrefObjectNextLink.md) |  | [optional] 
 
 ## Example
 

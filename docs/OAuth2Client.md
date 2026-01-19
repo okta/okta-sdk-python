@@ -5,11 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**client_id** | **str** |  | [optional] [readonly] 
-**client_name** | **str** |  | [optional] [readonly] 
+**client_id** | **str** | Unique key for the client application. The &#x60;client_id&#x60; is immutable. | [optional] [readonly] 
+**client_name** | **str** | Human-readable string name of the client application | [optional] [readonly] 
 **client_uri** | **str** |  | [optional] [readonly] 
-**logo_uri** | **str** |  | [optional] [readonly] 
-**links** | [**LinksSelf**](LinksSelf.md) |  | [optional] 
+**logo_uri** | **str** | URL string that references a logo for the client consent dialog (not the sign-in dialog) | [optional] [readonly] 
+**links** | [**OAuth2ClientLinks**](OAuth2ClientLinks.md) |  | [optional] 
 
 ## Example
 

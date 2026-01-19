@@ -5,11 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**created** | **datetime** |  | [optional] [readonly] 
-**id** | **str** |  | [optional] [readonly] 
-**identity_source_id** | **str** |  | [optional] [readonly] 
-**import_type** | **str** |  | [optional] [readonly] 
-**last_updated** | **datetime** |  | [optional] [readonly] 
+**created** | **datetime** | The timestamp when the identity source session was created | [optional] [readonly] 
+**id** | **str** | The ID of the identity source session | [optional] [readonly] 
+**identity_source_id** | **str** | The ID of the custom identity source for which the session is created | [optional] [readonly] 
+**import_type** | **str** | The type of import.  All imports are &#x60;INCREMENTAL&#x60; imports. | [optional] [readonly] 
+**last_updated** | **datetime** | The timestamp when the identity source session was created | [optional] [readonly] 
 **status** | [**IdentitySourceSessionStatus**](IdentitySourceSessionStatus.md) |  | [optional] 
 
 ## Example

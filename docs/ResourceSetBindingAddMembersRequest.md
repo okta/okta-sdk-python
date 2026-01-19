@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**additions** | **List[str]** |  | [optional] 
+**additions** | **List[str]** | A list of member resources to add to the role resource set binding | [optional] 
 
 ## Example
 

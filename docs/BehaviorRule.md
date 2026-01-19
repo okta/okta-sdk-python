@@ -5,10 +5,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**created** | **datetime** |  | [optional] [readonly] 
-**id** | **str** |  | [optional] [readonly] 
-**last_updated** | **datetime** |  | [optional] [readonly] 
-**name** | **str** |  | 
+**created** | **str** | Timestamp when the Behavior Detection Rule was created | [optional] [readonly] 
+**id** | **str** | ID of the Behavior Detection Rule | [optional] [readonly] 
+**last_updated** | **str** | Timestamp when the Behavior Detection Rule was last modified | [optional] [readonly] 
+**name** | **str** | Name of the Behavior Detection Rule | 
 **status** | [**LifecycleStatus**](LifecycleStatus.md) |  | [optional] 
 **type** | [**BehaviorRuleType**](BehaviorRuleType.md) |  | 
 **link** | [**LinksSelf**](LinksSelf.md) |  | [optional] 

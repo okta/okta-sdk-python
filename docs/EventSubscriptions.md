@@ -5,8 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**items** | **List[str]** |  | [optional] 
-**type** | [**EventSubscriptionType**](EventSubscriptionType.md) |  | [optional] 
+**filter** | [**EventHookFilters**](EventHookFilters.md) |  | [optional] 
+**items** | **List[str]** | The subscribed event types that trigger the event hook. When you register an event hook you need to specify which events you want to subscribe to. To see the list of event types currently eligible for use in event hooks, use the [Event Types catalog](https://developer.okta.com/docs/reference/api/event-types/#catalog) and search with the parameter &#x60;event-hook-eligible&#x60;. | 
+**type** | [**EventSubscriptionType**](EventSubscriptionType.md) |  | 
 
 ## Example
 

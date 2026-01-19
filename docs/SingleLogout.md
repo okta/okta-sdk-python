@@ -1,13 +1,14 @@
 # SingleLogout
 
+Determines if the app supports Single Logout (SLO)
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**enabled** | **bool** |  | [optional] 
-**issuer** | **str** |  | [optional] 
-**logout_url** | **str** |  | [optional] 
+**enabled** | **bool** | Whether the application supports SLO | [optional] 
+**issuer** | **str** | The issuer of the Service Provider that generates the SLO request | [optional] 
+**logout_url** | **str** | The location where the logout response is sent | [optional] 
 
 ## Example
 

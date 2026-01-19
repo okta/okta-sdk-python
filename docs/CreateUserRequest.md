@@ -5,11 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**credentials** | [**UserCredentials**](UserCredentials.md) |  | [optional] 
-**group_ids** | **List[str]** |  | [optional] 
+**credentials** | [**UserCredentialsWritable**](UserCredentialsWritable.md) |  | [optional] 
+**group_ids** | **List[str]** | The list of group IDs of groups that the user is added to at the time of creation | [optional] 
 **profile** | [**UserProfile**](UserProfile.md) |  | 
-**realm_id** | **str** | The ID of the realm in which the user is residing | [optional] 
-**type** | [**UserType**](UserType.md) |  | [optional] 
+**realm_id** | **str** | The ID of the realm in which the user is residing. See [Realms](/openapi/okta-management/management/tag/Realm/). | [optional] 
+**type** | [**CreateUserRequestType**](CreateUserRequestType.md) |  | [optional] 
 
 ## Example
 

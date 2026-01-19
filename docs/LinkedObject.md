@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **associated** | [**LinkedObjectDetails**](LinkedObjectDetails.md) |  | [optional] 
 **primary** | [**LinkedObjectDetails**](LinkedObjectDetails.md) |  | [optional] 
-**links** | [**LinksSelf**](LinksSelf.md) |  | [optional] 
+**links** | [**LinkedObjectLinksSelf**](LinkedObjectLinksSelf.md) |  | [optional] 
 
 ## Example
 

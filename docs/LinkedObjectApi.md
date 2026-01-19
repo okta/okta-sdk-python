@@ -4,18 +4,18 @@ All URIs are relative to *https://subdomain.okta.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_linked_object_definition**](LinkedObjectApi.md#create_linked_object_definition) | **POST** /api/v1/meta/schemas/user/linkedObjects | Create a Linked Object Definition
-[**delete_linked_object_definition**](LinkedObjectApi.md#delete_linked_object_definition) | **DELETE** /api/v1/meta/schemas/user/linkedObjects/{linkedObjectName} | Delete a Linked Object Definition
-[**get_linked_object_definition**](LinkedObjectApi.md#get_linked_object_definition) | **GET** /api/v1/meta/schemas/user/linkedObjects/{linkedObjectName} | Retrieve a Linked Object Definition
-[**list_linked_object_definitions**](LinkedObjectApi.md#list_linked_object_definitions) | **GET** /api/v1/meta/schemas/user/linkedObjects | List all Linked Object Definitions
+[**create_linked_object_definition**](LinkedObjectApi.md#create_linked_object_definition) | **POST** /api/v1/meta/schemas/user/linkedObjects | Create a linked object definition
+[**delete_linked_object_definition**](LinkedObjectApi.md#delete_linked_object_definition) | **DELETE** /api/v1/meta/schemas/user/linkedObjects/{linkedObjectName} | Delete a linked object definition
+[**get_linked_object_definition**](LinkedObjectApi.md#get_linked_object_definition) | **GET** /api/v1/meta/schemas/user/linkedObjects/{linkedObjectName} | Retrieve a linked object definition
+[**list_linked_object_definitions**](LinkedObjectApi.md#list_linked_object_definitions) | **GET** /api/v1/meta/schemas/user/linkedObjects | List all linked object definitions
 
 
 # **create_linked_object_definition**
 > LinkedObject create_linked_object_definition(linked_object)
 
-Create a Linked Object Definition
+Create a linked object definition
 
-Creates a linked object definition
+Creates a Linked Object definition
 
 ### Example
 
@@ -54,7 +54,7 @@ with okta.ApiClient(configuration) as api_client:
     linked_object = okta.LinkedObject() # LinkedObject | 
 
     try:
-        # Create a Linked Object Definition
+        # Create a linked object definition
         api_response = api_instance.create_linked_object_definition(linked_object)
         print("The response of LinkedObjectApi->create_linked_object_definition:\n")
         pprint(api_response)
@@ -91,6 +91,7 @@ Name | Type | Description  | Notes
 **201** | Created |  -  |
 **400** | Bad Request |  -  |
 **403** | Forbidden |  -  |
+**409** | Conflict |  -  |
 **429** | Too Many Requests |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -98,9 +99,9 @@ Name | Type | Description  | Notes
 # **delete_linked_object_definition**
 > delete_linked_object_definition(linked_object_name)
 
-Delete a Linked Object Definition
+Delete a linked object definition
 
-Deletes a linked object definition
+Deletes the Linked Object definition specified by either the `primary` or `associated` name. The entire definition is removed, regardless of which name that you specify.
 
 ### Example
 
@@ -135,10 +136,10 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.LinkedObjectApi(api_client)
-    linked_object_name = 'linked_object_name_example' # str | 
+    linked_object_name = 'linked_object_name_example' # str | Primary or Associated name
 
     try:
-        # Delete a Linked Object Definition
+        # Delete a linked object definition
         api_instance.delete_linked_object_definition(linked_object_name)
     except Exception as e:
         print("Exception when calling LinkedObjectApi->delete_linked_object_definition: %s\n" % e)
@@ -151,7 +152,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **linked_object_name** | **str**|  | 
+ **linked_object_name** | **str**| Primary or Associated name | 
 
 ### Return type
 
@@ -180,9 +181,9 @@ void (empty response body)
 # **get_linked_object_definition**
 > LinkedObject get_linked_object_definition(linked_object_name)
 
-Retrieve a Linked Object Definition
+Retrieve a linked object definition
 
-Retrieves a linked object definition
+Retrieves a Linked Object definition
 
 ### Example
 
@@ -218,10 +219,10 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.LinkedObjectApi(api_client)
-    linked_object_name = 'linked_object_name_example' # str | 
+    linked_object_name = 'linked_object_name_example' # str | Primary or Associated name
 
     try:
-        # Retrieve a Linked Object Definition
+        # Retrieve a linked object definition
         api_response = api_instance.get_linked_object_definition(linked_object_name)
         print("The response of LinkedObjectApi->get_linked_object_definition:\n")
         pprint(api_response)
@@ -236,7 +237,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **linked_object_name** | **str**|  | 
+ **linked_object_name** | **str**| Primary or Associated name | 
 
 ### Return type
 
@@ -265,9 +266,9 @@ Name | Type | Description  | Notes
 # **list_linked_object_definitions**
 > List[LinkedObject] list_linked_object_definitions()
 
-List all Linked Object Definitions
+List all linked object definitions
 
-Lists all linked object definitions
+Lists all Linked Object definitions
 
 ### Example
 
@@ -305,7 +306,7 @@ with okta.ApiClient(configuration) as api_client:
     api_instance = okta.LinkedObjectApi(api_client)
 
     try:
-        # List all Linked Object Definitions
+        # List all linked object definitions
         api_response = api_instance.list_linked_object_definitions()
         print("The response of LinkedObjectApi->list_linked_object_definitions:\n")
         pprint(api_response)

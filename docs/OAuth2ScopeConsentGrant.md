@@ -7,11 +7,11 @@ Grant object that represents an app consent scope grant
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **client_id** | **str** | Client ID of the app integration | [optional] [readonly] 
-**created** | **datetime** | Timestamp when the Grant object was created | [optional] [readonly] 
+**created** | **datetime** | Timestamp when the object was created | [optional] [readonly] 
 **created_by** | [**OAuth2Actor**](OAuth2Actor.md) |  | [optional] 
 **id** | **str** | ID of the Grant object | [optional] [readonly] 
 **issuer** | **str** | The issuer of your org authorization server. This is typically your Okta domain. | 
-**last_updated** | **datetime** | Timestamp when the Grant object was last updated | [optional] [readonly] 
+**last_updated** | **datetime** | Timestamp when the object was last updated | [optional] [readonly] 
 **scope_id** | **str** | The name of the [Okta scope](https://developer.okta.com/docs/api/oauth2/#oauth-20-scopes) for which consent is granted | 
 **source** | [**OAuth2ScopeConsentGrantSource**](OAuth2ScopeConsentGrantSource.md) |  | [optional] 
 **status** | [**GrantOrTokenStatus**](GrantOrTokenStatus.md) |  | [optional] 

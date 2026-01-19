@@ -1,17 +1,18 @@
 # Feature
 
+Specifies feature release cycle information
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**description** | **str** |  | [optional] 
-**id** | **str** |  | [optional] [readonly] 
-**name** | **str** |  | [optional] 
+**description** | **str** | Brief description of the feature and what it provides | [optional] 
+**id** | **str** | Unique identifier for this feature | [optional] [readonly] 
+**name** | **str** | Name of the feature | [optional] 
 **stage** | [**FeatureStage**](FeatureStage.md) |  | [optional] 
 **status** | [**EnabledStatus**](EnabledStatus.md) |  | [optional] 
 **type** | [**FeatureType**](FeatureType.md) |  | [optional] 
-**links** | [**LinksSelf**](LinksSelf.md) |  | [optional] 
+**links** | [**FeatureLinks**](FeatureLinks.md) |  | [optional] 
 
 ## Example
 

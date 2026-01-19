@@ -7,12 +7,12 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **actions** | [**GroupRuleAction**](GroupRuleAction.md) |  | [optional] 
 **conditions** | [**GroupRuleConditions**](GroupRuleConditions.md) |  | [optional] 
-**created** | **datetime** |  | [optional] [readonly] 
-**id** | **str** |  | [optional] [readonly] 
-**last_updated** | **datetime** |  | [optional] [readonly] 
-**name** | **str** |  | [optional] 
+**created** | **datetime** | Creation date for group rule | [optional] [readonly] 
+**id** | **str** | ID of the group rule | [optional] [readonly] 
+**last_updated** | **datetime** | Date group rule was last updated | [optional] [readonly] 
+**name** | **str** | Name of the group rule | [optional] 
 **status** | [**GroupRuleStatus**](GroupRuleStatus.md) |  | [optional] 
-**type** | **str** |  | [optional] 
+**type** | **str** | Type to indicate a group rule operation. Only &#x60;group_rule&#x60; is allowed. | [optional] 
 
 ## Example
 

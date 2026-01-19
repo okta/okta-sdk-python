@@ -1,5 +1,6 @@
 # RoleAssignmentType
 
+Role assignment type
 
 ## Properties
 

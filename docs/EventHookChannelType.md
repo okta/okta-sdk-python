@@ -1,5 +1,6 @@
 # EventHookChannelType
 
+The channel type. Currently supports `HTTP`.
 
 ## Properties
 

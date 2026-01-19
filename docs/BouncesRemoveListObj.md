@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**email_addresses** | **List[str]** |  | [optional] 
+**email_addresses** | **List[str]** | A list of email addresses to remove from the email-service bounce list | [optional] 
 
 ## Example
 

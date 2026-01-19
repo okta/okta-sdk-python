@@ -5,11 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** |  | [optional] 
-**name** | **str** |  | [optional] 
-**status** | **str** |  | [optional] 
-**conditions** | [**SimulateResultConditions**](SimulateResultConditions.md) |  | [optional] 
-**rules** | [**SimulateResultRules**](SimulateResultRules.md) |  | [optional] 
+**conditions** | [**List[SimulateResultConditions]**](SimulateResultConditions.md) | List of all conditions involved for this policy evaluation | [optional] 
+**id** | **str** | ID of the specified policy type | [optional] 
+**name** | **str** | Policy name | [optional] 
+**rules** | [**List[SimulateResultRules]**](SimulateResultRules.md) |  | [optional] 
+**status** | [**SimulateResultStatus**](SimulateResultStatus.md) |  | [optional] 
 
 ## Example
 

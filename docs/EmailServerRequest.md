@@ -5,12 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**alias** | **str** | A name to identify this configuration | [optional] 
-**enabled** | **bool** | True if and only if all email traffic should be routed through this SMTP Server | [optional] 
-**host** | **str** | The address of the SMTP Server | [optional] 
-**port** | **int** | The port number of the SMTP Server | [optional] 
-**username** | **str** | The username to use with your SMTP Server | [optional] 
-**password** | **str** | The password to use with your SMTP server | [optional] 
+**alias** | **str** | Human-readable name for your SMTP server | [optional] 
+**enabled** | **bool** | If &#x60;true&#x60;, routes all email traffic through your SMTP server | [optional] 
+**host** | **str** | Hostname or IP address of your SMTP server | [optional] 
+**port** | **int** | Port number of your SMTP server | [optional] 
+**username** | **str** | Username used to access your SMTP server | [optional] 
+**password** | **str** | Password used to access your SMTP server | [optional] 
 
 ## Example
 

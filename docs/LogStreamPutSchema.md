@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**name** | **str** | Unique name for the Log Stream object | 
+**name** | **str** | Unique name for the log stream object | 
 **type** | [**LogStreamType**](LogStreamType.md) |  | 
 
 ## Example

@@ -6,8 +6,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **credentials** | [**ApplicationCredentials**](ApplicationCredentials.md) |  | [optional] 
-**name** | **str** |  | [optional] [default to 'bookmark']
-**settings** | [**BookmarkApplicationSettings**](BookmarkApplicationSettings.md) |  | [optional] 
+**name** | **str** | &#x60;bookmark&#x60; is the key name for a Bookmark app | 
+**settings** | [**BookmarkApplicationSettings**](BookmarkApplicationSettings.md) |  | 
 
 ## Example
 

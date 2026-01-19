@@ -1,5 +1,6 @@
 # PolicyPeopleCondition
 
+Identifies users and groups that are used together
 
 ## Properties
 

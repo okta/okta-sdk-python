@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **certificate_source_type** | [**DomainCertificateSourceType**](DomainCertificateSourceType.md) |  | 
-**domain** | **str** | Custom domain name | 
+**domain** | **str** | Custom domain name  &gt; **Note:** You can&#39;t use the reserved &#x60;drapp.{yourOrgSubDomain}.okta.com&#x60; domain. | 
 
 ## Example
 

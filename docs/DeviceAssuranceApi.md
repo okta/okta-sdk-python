@@ -4,19 +4,19 @@ All URIs are relative to *https://subdomain.okta.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_device_assurance_policy**](DeviceAssuranceApi.md#create_device_assurance_policy) | **POST** /api/v1/device-assurances | Create a Device Assurance Policy
-[**delete_device_assurance_policy**](DeviceAssuranceApi.md#delete_device_assurance_policy) | **DELETE** /api/v1/device-assurances/{deviceAssuranceId} | Delete a Device Assurance Policy
-[**get_device_assurance_policy**](DeviceAssuranceApi.md#get_device_assurance_policy) | **GET** /api/v1/device-assurances/{deviceAssuranceId} | Retrieve a Device Assurance Policy
-[**list_device_assurance_policies**](DeviceAssuranceApi.md#list_device_assurance_policies) | **GET** /api/v1/device-assurances | List all Device Assurance Policies
-[**replace_device_assurance_policy**](DeviceAssuranceApi.md#replace_device_assurance_policy) | **PUT** /api/v1/device-assurances/{deviceAssuranceId} | Replace a Device Assurance Policy
+[**create_device_assurance_policy**](DeviceAssuranceApi.md#create_device_assurance_policy) | **POST** /api/v1/device-assurances | Create a device assurance policy
+[**delete_device_assurance_policy**](DeviceAssuranceApi.md#delete_device_assurance_policy) | **DELETE** /api/v1/device-assurances/{deviceAssuranceId} | Delete a device assurance policy
+[**get_device_assurance_policy**](DeviceAssuranceApi.md#get_device_assurance_policy) | **GET** /api/v1/device-assurances/{deviceAssuranceId} | Retrieve a device assurance policy
+[**list_device_assurance_policies**](DeviceAssuranceApi.md#list_device_assurance_policies) | **GET** /api/v1/device-assurances | List all device assurance policies
+[**replace_device_assurance_policy**](DeviceAssuranceApi.md#replace_device_assurance_policy) | **PUT** /api/v1/device-assurances/{deviceAssuranceId} | Replace a device assurance policy
 
 
 # **create_device_assurance_policy**
 > DeviceAssurance create_device_assurance_policy(device_assurance)
 
-Create a Device Assurance Policy
+Create a device assurance policy
 
-Creates a new Device Assurance Policy
+Creates a new device assurance policy
 
 ### Example
 
@@ -55,7 +55,7 @@ with okta.ApiClient(configuration) as api_client:
     device_assurance = okta.DeviceAssurance() # DeviceAssurance | 
 
     try:
-        # Create a Device Assurance Policy
+        # Create a device assurance policy
         api_response = api_instance.create_device_assurance_policy(device_assurance)
         print("The response of DeviceAssuranceApi->create_device_assurance_policy:\n")
         pprint(api_response)
@@ -99,9 +99,9 @@ Name | Type | Description  | Notes
 # **delete_device_assurance_policy**
 > delete_device_assurance_policy(device_assurance_id)
 
-Delete a Device Assurance Policy
+Delete a device assurance policy
 
-Deletes a Device Assurance Policy by `deviceAssuranceId`. If the Device Assurance Policy is currently being used in the org Authentication Policies, the delete will not be allowed.
+Deletes a device assurance policy by `deviceAssuranceId`. If the device assurance policy is currently being used in the org Authentication Policies, the delete will not be allowed.
 
 ### Example
 
@@ -136,10 +136,10 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.DeviceAssuranceApi(api_client)
-    device_assurance_id = 'device_assurance_id_example' # str | Id of the Device Assurance Policy
+    device_assurance_id = 'device_assurance_id_example' # str | Id of the device assurance policy
 
     try:
-        # Delete a Device Assurance Policy
+        # Delete a device assurance policy
         api_instance.delete_device_assurance_policy(device_assurance_id)
     except Exception as e:
         print("Exception when calling DeviceAssuranceApi->delete_device_assurance_policy: %s\n" % e)
@@ -152,7 +152,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **device_assurance_id** | **str**| Id of the Device Assurance Policy | 
+ **device_assurance_id** | **str**| Id of the device assurance policy | 
 
 ### Return type
 
@@ -182,9 +182,9 @@ void (empty response body)
 # **get_device_assurance_policy**
 > DeviceAssurance get_device_assurance_policy(device_assurance_id)
 
-Retrieve a Device Assurance Policy
+Retrieve a device assurance policy
 
-Retrieves a Device Assurance Policy by `deviceAssuranceId`
+Retrieves a device assurance policy by `deviceAssuranceId`
 
 ### Example
 
@@ -220,10 +220,10 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.DeviceAssuranceApi(api_client)
-    device_assurance_id = 'device_assurance_id_example' # str | Id of the Device Assurance Policy
+    device_assurance_id = 'device_assurance_id_example' # str | Id of the device assurance policy
 
     try:
-        # Retrieve a Device Assurance Policy
+        # Retrieve a device assurance policy
         api_response = api_instance.get_device_assurance_policy(device_assurance_id)
         print("The response of DeviceAssuranceApi->get_device_assurance_policy:\n")
         pprint(api_response)
@@ -238,7 +238,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **device_assurance_id** | **str**| Id of the Device Assurance Policy | 
+ **device_assurance_id** | **str**| Id of the device assurance policy | 
 
 ### Return type
 
@@ -267,7 +267,7 @@ Name | Type | Description  | Notes
 # **list_device_assurance_policies**
 > List[DeviceAssurance] list_device_assurance_policies()
 
-List all Device Assurance Policies
+List all device assurance policies
 
 Lists all device assurance policies
 
@@ -307,7 +307,7 @@ with okta.ApiClient(configuration) as api_client:
     api_instance = okta.DeviceAssuranceApi(api_client)
 
     try:
-        # List all Device Assurance Policies
+        # List all device assurance policies
         api_response = api_instance.list_device_assurance_policies()
         print("The response of DeviceAssuranceApi->list_device_assurance_policies:\n")
         pprint(api_response)
@@ -347,9 +347,9 @@ This endpoint does not need any parameter.
 # **replace_device_assurance_policy**
 > DeviceAssurance replace_device_assurance_policy(device_assurance_id, device_assurance)
 
-Replace a Device Assurance Policy
+Replace a device assurance policy
 
-Replaces a Device Assurance Policy by `deviceAssuranceId`
+Replaces a device assurance policy by `deviceAssuranceId`
 
 ### Example
 
@@ -385,11 +385,11 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.DeviceAssuranceApi(api_client)
-    device_assurance_id = 'device_assurance_id_example' # str | Id of the Device Assurance Policy
+    device_assurance_id = 'device_assurance_id_example' # str | Id of the device assurance policy
     device_assurance = okta.DeviceAssurance() # DeviceAssurance | 
 
     try:
-        # Replace a Device Assurance Policy
+        # Replace a device assurance policy
         api_response = api_instance.replace_device_assurance_policy(device_assurance_id, device_assurance)
         print("The response of DeviceAssuranceApi->replace_device_assurance_policy:\n")
         pprint(api_response)
@@ -404,7 +404,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **device_assurance_id** | **str**| Id of the Device Assurance Policy | 
+ **device_assurance_id** | **str**| Id of the device assurance policy | 
  **device_assurance** | [**DeviceAssurance**](DeviceAssurance.md)|  | 
 
 ### Return type

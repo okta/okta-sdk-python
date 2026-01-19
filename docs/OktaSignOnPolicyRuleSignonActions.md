@@ -1,15 +1,17 @@
 # OktaSignOnPolicyRuleSignonActions
 
+Specifies settings for the policy rule
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**access** | [**PolicyAccess**](PolicyAccess.md) |  | [optional] 
-**factor_lifetime** | **int** |  | [optional] 
+**access** | **str** | Indicates if a user is allowed to sign in | [optional] 
+**factor_lifetime** | **int** | Interval of time that must elapse before the user is challenged for MFA, if the factor prompt mode is set to &#x60;SESSION&#x60;  &gt; **Note:** Required only if &#x60;requireFactor&#x60; is &#x60;true&#x60;.  | [optional] 
 **factor_prompt_mode** | [**OktaSignOnPolicyFactorPromptMode**](OktaSignOnPolicyFactorPromptMode.md) |  | [optional] 
-**remember_device_by_default** | **bool** |  | [optional] [default to False]
-**require_factor** | **bool** |  | [optional] [default to False]
+**primary_factor** | [**OktaSignOnPolicyRuleSignonPrimaryFactor**](OktaSignOnPolicyRuleSignonPrimaryFactor.md) |  | [optional] 
+**remember_device_by_default** | **bool** | Indicates if Okta should automatically remember the device | [optional] [default to False]
+**require_factor** | **bool** | Indicates if multifactor authentication is required | [optional] [default to False]
 **session** | [**OktaSignOnPolicyRuleSignonSessionActions**](OktaSignOnPolicyRuleSignonSessionActions.md) |  | [optional] 
 
 ## Example

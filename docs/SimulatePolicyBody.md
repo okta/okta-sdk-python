@@ -1,14 +1,14 @@
 # SimulatePolicyBody
 
-The request body required for a simulate policy operation.
+The request body required for a simulate policy operation
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**policy_types** | [**List[PolicyType]**](PolicyType.md) | Supported policy types for a simulate operation. The default value, &#x60;null&#x60;, returns all types. | [optional] 
 **app_instance** | **str** | The application instance ID for a simulate operation | 
 **policy_context** | [**PolicyContext**](PolicyContext.md) |  | [optional] 
+**policy_types** | [**List[PolicyTypeSimulation]**](PolicyTypeSimulation.md) | Supported policy types for a simulate operation. The default value, &#x60;null&#x60;, returns all types. | [optional] 
 
 ## Example
 

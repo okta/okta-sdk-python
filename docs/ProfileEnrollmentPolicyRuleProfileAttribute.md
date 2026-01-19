@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**label** | **str** |  | [optional] 
-**name** | **str** |  | [optional] 
-**required** | **bool** |  | [optional] 
+**label** | **str** | A display-friendly label for this property | [optional] 
+**name** | **str** | The name of a user profile property. Can be an existing property. | [optional] 
+**required** | **bool** | (Optional, default &#x60;FALSE&#x60;) Indicates if this property is required for enrollment | [optional] [default to False]
 
 ## Example
 

@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**key** | **str** |  | [optional] 
-**value** | **str** |  | [optional] 
+**key** | **str** | The optional field or header name | [optional] 
+**value** | **str** | The value for the key | [optional] 
 
 ## Example
 

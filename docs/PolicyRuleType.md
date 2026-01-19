@@ -1,5 +1,6 @@
 # PolicyRuleType
 
+Rule type
 
 ## Properties
 

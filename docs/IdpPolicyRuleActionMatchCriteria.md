@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**provider_expression** | **str** | You can provide an Okta Expression Language expression with the Login Context that&#39;s evaluated with the IdP. For example, the value &#x60;login.identifier&#x60; refers to the user&#39;s username. If the user is signing in with the username &#x60;john.doe@mycompany.com&#x60;, the expression &#x60;login.identifier.substringAfter(@))&#x60; is evaluated to the domain name of the user, for example: &#x60;mycompany.com&#x60;.  | [optional] 
 **property_name** | **str** | The IdP property that the evaluated string should match to | [optional] 
+**provider_expression** | **str** | You can provide an Okta Expression Language expression with the Login Context that&#39;s evaluated with the IdP. For example, the value &#x60;login.identifier&#x60; refers to the user&#39;s username. If the user is signing in with the username &#x60;john.doe@mycompany.com&#x60;, the expression &#x60;login.identifier.substringAfter(@))&#x60; is evaluated to the domain name of the user, for example: &#x60;mycompany.com&#x60;.  | [optional] 
 
 ## Example
 

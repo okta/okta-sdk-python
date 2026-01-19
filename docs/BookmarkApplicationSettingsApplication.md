@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**request_integration** | **bool** |  | [optional] 
-**url** | **str** |  | [optional] 
+**request_integration** | **bool** | Would you like Okta to add an integration for this app? | [optional] [default to False]
+**url** | **str** | The URL of the launch page for this app | 
 
 ## Example
 

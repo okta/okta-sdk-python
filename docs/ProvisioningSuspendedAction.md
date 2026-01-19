@@ -1,5 +1,6 @@
 # ProvisioningSuspendedAction
 
+Specifies the action during authentication when an IdP user is linked to a previously suspended Okta user
 
 ## Properties
 

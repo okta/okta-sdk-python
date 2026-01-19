@@ -1,14 +1,15 @@
 # ApplicationCredentialsSigning
 
+App signing key properties > **Note:** Only apps with SAML_2_0, SAML_1_1, WS_FEDERATION, or OPENID_CONNECT `signOnMode` support the key rotation feature. 
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**kid** | **str** |  | [optional] 
-**last_rotated** | **datetime** |  | [optional] [readonly] 
-**next_rotation** | **datetime** |  | [optional] [readonly] 
-**rotation_mode** | **str** |  | [optional] 
+**kid** | **str** | Key identifier used for signing assertions &gt; **Note:** Currently, only the X.509 JWK format is supported for apps with SAML_2_0 &#x60;signOnMode&#x60;. | [optional] 
+**last_rotated** | **datetime** | Timestamp when the signing key was last rotated | [optional] [readonly] 
+**next_rotation** | **datetime** | The scheduled time for the next signing key rotation | [optional] [readonly] 
+**rotation_mode** | **str** | The mode of key rotation | [optional] 
 **use** | [**ApplicationCredentialsSigningUse**](ApplicationCredentialsSigningUse.md) |  | [optional] 
 
 ## Example

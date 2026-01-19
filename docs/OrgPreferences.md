@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**show_end_user_footer** | **bool** |  | [optional] [readonly] 
-**links** | [**LinksSelf**](LinksSelf.md) |  | [optional] 
+**show_end_user_footer** | **bool** | Indicates if the footer is shown on the End-User Dashboard | [optional] [readonly] 
+**links** | [**OrgPreferencesLinks**](OrgPreferencesLinks.md) |  | [optional] 
 
 ## Example
 

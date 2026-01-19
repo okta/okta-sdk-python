@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**status** | **str** | The result of the entity evaluation | [optional] 
+**status** | [**SimulateResultStatus**](SimulateResultStatus.md) |  | [optional] 
 **type** | **str** | The type of condition | [optional] 
 
 ## Example

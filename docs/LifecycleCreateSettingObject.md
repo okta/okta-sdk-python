@@ -1,6 +1,6 @@
 # LifecycleCreateSettingObject
 
-Determines whether to update a user in the application when a user in Okta is updated
+Determines whether to update a user in the app when a user in Okta is updated
 
 ## Properties
 

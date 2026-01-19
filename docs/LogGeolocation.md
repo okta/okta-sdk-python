@@ -1,12 +1,13 @@
 # LogGeolocation
 
+The latitude and longitude of the geolocation where an action was performed. The object is formatted according to the [ISO 6709](https://www.iso.org/obp/ui/fr/#iso:std:iso:6709:ed-3:v1:en) standard.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**lat** | **float** |  | [optional] [readonly] 
-**lon** | **float** |  | [optional] [readonly] 
+**lat** | **float** | Latitude which uses two digits for the [integer part](https://www.iso.org/obp/ui/fr/#iso:std:iso:6709:ed-3:v1:en#Latitude) | [optional] [readonly] 
+**lon** | **float** | Longitude which uses three digits for the [integer part](https://www.iso.org/obp/ui/fr/#iso:std:iso:6709:ed-3:v1:en#Longitude) | [optional] [readonly] 
 
 ## Example
 

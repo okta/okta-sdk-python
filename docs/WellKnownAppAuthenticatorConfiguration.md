@@ -5,16 +5,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**app_authenticator_enroll_endpoint** | **str** |  | [optional] 
+**app_authenticator_enroll_endpoint** | **str** | The authenticator enrollment endpoint | [optional] 
 **authenticator_id** | **str** | The unique identifier of the app authenticator | [optional] 
-**created_date** | **datetime** |  | [optional] 
-**key** | **str** |  | [optional] 
-**last_updated** | **datetime** |  | [optional] 
+**created_date** | **datetime** | Timestamp when the authenticator was created | [optional] 
+**key** | [**AuthenticatorKeyEnum**](AuthenticatorKeyEnum.md) |  | [optional] 
+**last_updated** | **datetime** | Timestamp when the authenticator was last modified | [optional] 
 **name** | **str** | The authenticator display name | [optional] 
-**org_id** | **str** |  | [optional] 
+**org_id** | **str** | The &#x60;id&#x60; of the Okta Org | [optional] 
 **settings** | [**WellKnownAppAuthenticatorConfigurationSettings**](WellKnownAppAuthenticatorConfigurationSettings.md) |  | [optional] 
 **supported_methods** | [**List[SupportedMethods]**](SupportedMethods.md) |  | [optional] 
-**type** | **str** |  | [optional] 
+**type** | **str** | The type of authenticator | [optional] 
 
 ## Example
 

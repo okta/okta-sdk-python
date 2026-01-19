@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **platform** | **str** | The platform of the device, for example, IOS. | [optional] 
 **registered** | **bool** | If the device is registered | [optional] 
 **managed** | **bool** | If the device is managed | [optional] 
+**assurance_id** | **str** | The device assurance policy ID for the simulation | [optional] 
 
 ## Example
 

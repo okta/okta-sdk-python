@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **credentials** | [**ApplicationCredentials**](ApplicationCredentials.md) |  | [optional] 
-**name** | **str** |  | [optional] 
+**name** | **str** | A unique key is generated for the custom app instance when you use SAML_2_0 &#x60;signOnMode&#x60;. | [optional] [readonly] 
 **settings** | [**SamlApplicationSettings**](SamlApplicationSettings.md) |  | [optional] 
 
 ## Example

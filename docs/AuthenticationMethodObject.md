@@ -5,7 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**key** | **str** | A label that identifies the authenticator | [optional] 
+**id** | **str** | &lt;x-lifecycle-container&gt;&lt;x-lifecycle class&#x3D;\&quot;oie\&quot;&gt;&lt;/x-lifecycle&gt;&lt;/x-lifecycle-container&gt;Authenticator ID | [optional] 
+**key** | **str** | A label that identifies the authenticator | 
 **method** | **str** | Specifies the method used for the authenticator | [optional] 
 
 ## Example

@@ -5,16 +5,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**created** | **datetime** |  | [optional] [readonly] 
-**factor_type** | [**FactorType**](FactorType.md) |  | [optional] 
-**id** | **str** |  | [optional] [readonly] 
-**last_updated** | **datetime** |  | [optional] [readonly] 
-**profile** | **object** | Factor-specific attributes | [optional] 
-**provider** | [**FactorProvider**](FactorProvider.md) |  | [optional] 
-**status** | [**FactorStatus**](FactorStatus.md) |  | [optional] 
-**verify** | [**VerifyFactorRequest**](VerifyFactorRequest.md) |  | [optional] 
+**created** | **datetime** | Timestamp when the factor was enrolled | [optional] [readonly] 
+**factor_type** | [**UserFactorType**](UserFactorType.md) |  | [optional] 
+**id** | **str** | ID of the factor | [optional] [readonly] 
+**last_updated** | **datetime** | Timestamp when the factor was last updated | [optional] [readonly] 
+**profile** | **object** | Specific attributes related to the factor | [optional] 
+**provider** | **str** | Provider for the factor. Each provider can support a subset of factor types. | [optional] 
+**status** | [**UserFactorStatus**](UserFactorStatus.md) |  | [optional] 
+**vendor_name** | **str** | Name of the factor vendor. This is usually the same as the provider except for On-Prem MFA, which depends on admin settings. | [optional] [readonly] 
 **embedded** | **Dict[str, object]** |  | [optional] [readonly] 
-**links** | [**LinksSelf**](LinksSelf.md) |  | [optional] 
+**links** | [**UserFactorLinks**](UserFactorLinks.md) |  | [optional] 
 
 ## Example
 

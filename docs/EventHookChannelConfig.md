@@ -6,8 +6,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **auth_scheme** | [**EventHookChannelConfigAuthScheme**](EventHookChannelConfigAuthScheme.md) |  | [optional] 
-**headers** | [**List[EventHookChannelConfigHeader]**](EventHookChannelConfigHeader.md) |  | [optional] 
-**uri** | **str** |  | [optional] 
+**headers** | [**List[EventHookChannelConfigHeader]**](EventHookChannelConfigHeader.md) | Optional list of key/value pairs for headers that can be sent with the request to the external service. For example, &#x60;X-Other-Header&#x60; is an example of an optional header, with a value of &#x60;my-header-value&#x60;, that you want Okta to pass to your external service. | [optional] 
+**method** | **str** | The method of the Okta event hook request | [optional] [readonly] 
+**uri** | **str** | The external service endpoint called to execute the event hook handler | 
 
 ## Example
 

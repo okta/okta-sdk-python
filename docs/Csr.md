@@ -5,10 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**created** | **datetime** |  | [optional] [readonly] 
+**created** | **datetime** | Timestamp when the object was created | [optional] [readonly] 
 **csr** | **str** |  | [optional] [readonly] 
 **id** | **str** |  | [optional] [readonly] 
 **kty** | **str** |  | [optional] [readonly] 
+**links** | [**CSRLinks**](CSRLinks.md) |  | [optional] 
 
 ## Example
 

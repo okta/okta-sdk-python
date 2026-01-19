@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **credentials** | [**SchemeApplicationCredentials**](SchemeApplicationCredentials.md) |  | [optional] 
-**name** | **str** |  | [optional] 
+**name** | **str** | A unique key is generated for the custom SWA app instance when you use AUTO_LOGIN &#x60;signOnMode&#x60;. | [optional] [readonly] 
 **settings** | [**AutoLoginApplicationSettings**](AutoLoginApplicationSettings.md) |  | [optional] 
 
 ## Example

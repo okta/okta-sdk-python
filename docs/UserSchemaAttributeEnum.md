@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**const** | **str** |  | [optional] 
-**title** | **str** |  | [optional] 
+**const** | **str** | The enumerated value | [optional] 
+**title** | **str** | The display label for the enumerated value | [optional] 
 
 ## Example
 

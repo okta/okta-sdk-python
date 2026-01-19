@@ -5,7 +5,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**prevent_brute_force_lockout_from_unknown_devices** | **bool** | Prevents brute-force lockout from unknown devices for the password authenticator. | [optional] 
+**prevent_brute_force_lockout_from_unknown_devices** | **bool** | Prevents brute-force lockout from unknown devices for the password authenticator. | [optional] [default to False]
 
 ## Example
 

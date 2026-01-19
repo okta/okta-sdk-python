@@ -1,5 +1,6 @@
 # PolicyNetworkConnection
 
+Network selection mode
 
 ## Properties
 

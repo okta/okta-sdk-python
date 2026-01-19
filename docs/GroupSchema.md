@@ -5,16 +5,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**var_schema** | **str** |  | [optional] [readonly] 
-**created** | **str** |  | [optional] [readonly] 
+**var_schema** | **str** | JSON schema version identifier | [optional] [readonly] 
+**created** | **str** | Timestamp when the schema was created | [optional] [readonly] 
 **definitions** | [**GroupSchemaDefinitions**](GroupSchemaDefinitions.md) |  | [optional] 
-**description** | **str** |  | [optional] 
-**id** | **str** |  | [optional] [readonly] 
-**last_updated** | **str** |  | [optional] [readonly] 
-**name** | **str** |  | [optional] [readonly] 
+**description** | **str** | Description for the schema | [optional] 
+**id** | **str** | URI of group schema | [optional] [readonly] 
+**last_updated** | **str** | Timestamp when the schema was last updated | [optional] [readonly] 
+**name** | **str** | Name of the schema | [optional] [readonly] 
 **properties** | [**UserSchemaProperties**](UserSchemaProperties.md) |  | [optional] 
-**title** | **str** |  | [optional] 
-**type** | **str** |  | [optional] [readonly] 
+**title** | **str** | User-defined display name for the schema | [optional] 
+**type** | **str** | Type of [root schema](https://tools.ietf.org/html/draft-zyp-json-schema-04#section-3.4) | [optional] [readonly] 
 **links** | [**LinksSelf**](LinksSelf.md) |  | [optional] 
 
 ## Example

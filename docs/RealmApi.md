@@ -4,19 +4,19 @@ All URIs are relative to *https://subdomain.okta.com*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**create_realm**](RealmApi.md#create_realm) | **POST** /api/v1/realms | Create a Realm
-[**delete_realm**](RealmApi.md#delete_realm) | **DELETE** /api/v1/realms/{realmId} | Delete a Realm
-[**get_realm**](RealmApi.md#get_realm) | **GET** /api/v1/realms/{realmId} | Retrieve a Realm
-[**list_realms**](RealmApi.md#list_realms) | **GET** /api/v1/realms | List all Realms
-[**update_realm**](RealmApi.md#update_realm) | **POST** /api/v1/realms/{realmId} | Update a Realm
+[**create_realm**](RealmApi.md#create_realm) | **POST** /api/v1/realms | Create a realm
+[**delete_realm**](RealmApi.md#delete_realm) | **DELETE** /api/v1/realms/{realmId} | Delete a realm
+[**get_realm**](RealmApi.md#get_realm) | **GET** /api/v1/realms/{realmId} | Retrieve a realm
+[**list_realms**](RealmApi.md#list_realms) | **GET** /api/v1/realms | List all realms
+[**replace_realm**](RealmApi.md#replace_realm) | **PUT** /api/v1/realms/{realmId} | Replace the realm profile
 
 
 # **create_realm**
 > Realm create_realm(body)
 
-Create a Realm
+Create a realm
 
-Creates a new Realm
+Creates a new realm
 
 ### Example
 
@@ -25,6 +25,7 @@ Creates a new Realm
 
 ```python
 import okta
+from okta.models.create_realm_request import CreateRealmRequest
 from okta.models.realm import Realm
 from okta.rest import ApiException
 from pprint import pprint
@@ -52,10 +53,10 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.RealmApi(api_client)
-    body = okta.Realm() # Realm | 
+    body = okta.CreateRealmRequest() # CreateRealmRequest | 
 
     try:
-        # Create a Realm
+        # Create a realm
         api_response = api_instance.create_realm(body)
         print("The response of RealmApi->create_realm:\n")
         pprint(api_response)
@@ -70,7 +71,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**Realm**](Realm.md)|  | 
+ **body** | [**CreateRealmRequest**](CreateRealmRequest.md)|  | 
 
 ### Return type
 
@@ -99,9 +100,9 @@ Name | Type | Description  | Notes
 # **delete_realm**
 > delete_realm(realm_id)
 
-Delete a Realm
+Delete a realm
 
-Deletes a Realm permanently. This operation can only be performed after disassociating other entities like Users and Identity Providers from a Realm.
+Deletes a realm permanently. This operation can only be performed after disassociating other entities like users and identity providers from a realm.
 
 ### Example
 
@@ -136,10 +137,10 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.RealmApi(api_client)
-    realm_id = 'vvrcFogtKCrK9aYq3fgV' # str | `id` of the Realm
+    realm_id = 'vvrcFogtKCrK9aYq3fgV' # str | ID of the realm
 
     try:
-        # Delete a Realm
+        # Delete a realm
         api_instance.delete_realm(realm_id)
     except Exception as e:
         print("Exception when calling RealmApi->delete_realm: %s\n" % e)
@@ -152,7 +153,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **realm_id** | **str**| &#x60;id&#x60; of the Realm | 
+ **realm_id** | **str**| ID of the realm | 
 
 ### Return type
 
@@ -182,9 +183,9 @@ void (empty response body)
 # **get_realm**
 > Realm get_realm(realm_id)
 
-Retrieve a Realm
+Retrieve a realm
 
-Retrieves a Realm
+Retrieves a realm
 
 ### Example
 
@@ -220,10 +221,10 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.RealmApi(api_client)
-    realm_id = 'vvrcFogtKCrK9aYq3fgV' # str | `id` of the Realm
+    realm_id = 'vvrcFogtKCrK9aYq3fgV' # str | ID of the realm
 
     try:
-        # Retrieve a Realm
+        # Retrieve a realm
         api_response = api_instance.get_realm(realm_id)
         print("The response of RealmApi->get_realm:\n")
         pprint(api_response)
@@ -238,7 +239,7 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **realm_id** | **str**| &#x60;id&#x60; of the Realm | 
+ **realm_id** | **str**| ID of the realm | 
 
 ### Return type
 
@@ -268,9 +269,9 @@ Name | Type | Description  | Notes
 # **list_realms**
 > List[Realm] list_realms(limit=limit, after=after, search=search, sort_by=sort_by, sort_order=sort_order)
 
-List all Realms
+List all realms
 
-Lists all Realms
+Lists all realms.  > **Note:** The `search` parameter results are sourced from an eventually consistent datasource and may not reflect the latest information.
 
 ### Example
 
@@ -307,13 +308,13 @@ with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.RealmApi(api_client)
     limit = 200 # int | Specifies the number of results returned. Defaults to 10 if `search` is provided. (optional) (default to 200)
-    after = 'after_example' # str | The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](/#pagination) for more information. (optional)
-    search = 'search_example' # str | Searches for Realms with a supported filtering expression for most properties (optional)
-    sort_by = 'profile.name' # str | Specifies field to sort by and can be any single property (for search queries only). (optional)
-    sort_order = 'asc' # str | Specifies sort order `asc` or `desc` (for search queries only). This parameter is ignored if `sortBy` isn't present. (optional) (default to 'asc')
+    after = 'after_example' # str | The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the `Link` response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header). (optional)
+    search = 'search_example' # str | Searches for realms with a supported filtering expression for most properties.  Searches for realms can be filtered by the contains (`co`) operator. You can only use `co` with the `profile.name` property. See [Operators](https://developer.okta.com/docs/api/#operators). (optional)
+    sort_by = 'profile.name' # str | Specifies the field to sort by and can be any single property (for search queries only) (optional)
+    sort_order = 'asc' # str | Specifies sort order: `asc` or `desc` (for search queries only). This parameter is ignored if `sortBy` isn't present. (optional) (default to 'asc')
 
     try:
-        # List all Realms
+        # List all realms
         api_response = api_instance.list_realms(limit=limit, after=after, search=search, sort_by=sort_by, sort_order=sort_order)
         print("The response of RealmApi->list_realms:\n")
         pprint(api_response)
@@ -329,10 +330,10 @@ with okta.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int**| Specifies the number of results returned. Defaults to 10 if &#x60;search&#x60; is provided. | [optional] [default to 200]
- **after** | **str**| The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the &#x60;Link&#x60; response header. See [Pagination](/#pagination) for more information. | [optional] 
- **search** | **str**| Searches for Realms with a supported filtering expression for most properties | [optional] 
- **sort_by** | **str**| Specifies field to sort by and can be any single property (for search queries only). | [optional] 
- **sort_order** | **str**| Specifies sort order &#x60;asc&#x60; or &#x60;desc&#x60; (for search queries only). This parameter is ignored if &#x60;sortBy&#x60; isn&#39;t present. | [optional] [default to &#39;asc&#39;]
+ **after** | **str**| The cursor to use for pagination. It is an opaque string that specifies your current location in the list and is obtained from the &#x60;Link&#x60; response header. See [Pagination](https://developer.okta.com/docs/api/#pagination) and [Link header](https://developer.okta.com/docs/api/#link-header). | [optional] 
+ **search** | **str**| Searches for realms with a supported filtering expression for most properties.  Searches for realms can be filtered by the contains (&#x60;co&#x60;) operator. You can only use &#x60;co&#x60; with the &#x60;profile.name&#x60; property. See [Operators](https://developer.okta.com/docs/api/#operators). | [optional] 
+ **sort_by** | **str**| Specifies the field to sort by and can be any single property (for search queries only) | [optional] 
+ **sort_order** | **str**| Specifies sort order: &#x60;asc&#x60; or &#x60;desc&#x60; (for search queries only). This parameter is ignored if &#x60;sortBy&#x60; isn&#39;t present. | [optional] [default to &#39;asc&#39;]
 
 ### Return type
 
@@ -357,12 +358,12 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **update_realm**
-> Realm update_realm(realm_id, body)
+# **replace_realm**
+> Realm replace_realm(realm_id, body)
 
-Update a Realm
+Replace the realm profile
 
-Updates a Realm
+Replaces the realm profile
 
 ### Example
 
@@ -372,6 +373,7 @@ Updates a Realm
 ```python
 import okta
 from okta.models.realm import Realm
+from okta.models.update_realm_request import UpdateRealmRequest
 from okta.rest import ApiException
 from pprint import pprint
 
@@ -398,16 +400,16 @@ configuration.access_token = os.environ["ACCESS_TOKEN"]
 with okta.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = okta.RealmApi(api_client)
-    realm_id = 'vvrcFogtKCrK9aYq3fgV' # str | `id` of the Realm
-    body = okta.Realm() # Realm | 
+    realm_id = 'vvrcFogtKCrK9aYq3fgV' # str | ID of the realm
+    body = okta.UpdateRealmRequest() # UpdateRealmRequest | 
 
     try:
-        # Update a Realm
-        api_response = api_instance.update_realm(realm_id, body)
-        print("The response of RealmApi->update_realm:\n")
+        # Replace the realm profile
+        api_response = api_instance.replace_realm(realm_id, body)
+        print("The response of RealmApi->replace_realm:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling RealmApi->update_realm: %s\n" % e)
+        print("Exception when calling RealmApi->replace_realm: %s\n" % e)
 ```
 
 
@@ -417,8 +419,8 @@ with okta.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **realm_id** | **str**| &#x60;id&#x60; of the Realm | 
- **body** | [**Realm**](Realm.md)|  | 
+ **realm_id** | **str**| ID of the realm | 
+ **body** | [**UpdateRealmRequest**](UpdateRealmRequest.md)|  | 
 
 ### Return type
 

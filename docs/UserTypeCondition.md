@@ -1,12 +1,13 @@
 # UserTypeCondition
 
+<x-lifecycle class=\"oie\"></x-lifecycle> Specifies which user types to include and/or exclude
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**exclude** | **List[str]** |  | [optional] 
-**include** | **List[str]** |  | [optional] 
+**exclude** | **List[str]** | The user types to exclude | 
+**include** | **List[str]** | The user types to include | 
 
 ## Example
 

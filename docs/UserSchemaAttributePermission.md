@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**action** | **str** |  | [optional] 
-**principal** | **str** |  | [optional] 
+**action** | **str** | Determines whether the principal can view or modify the property | [optional] 
+**principal** | **str** | Security principal | [optional] 
 
 ## Example
 

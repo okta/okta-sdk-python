@@ -5,8 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**entity_type** | **str** |  | [optional] 
-**profiles** | [**List[IdentitySourceUserProfileForUpsert]**](IdentitySourceUserProfileForUpsert.md) |  | [optional] 
+**entity_type** | **str** | The type of data to upsert into the session. Currently, only &#x60;USERS&#x60; is supported. | [optional] 
+**profiles** | [**List[BulkUpsertRequestBodyProfilesInner]**](BulkUpsertRequestBodyProfilesInner.md) | Array of user profiles to be uploaded | [optional] 
 
 ## Example
 

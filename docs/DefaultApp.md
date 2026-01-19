@@ -5,9 +5,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**app_instance_id** | **str** |  | [optional] 
-**app_link_name** | **str** |  | [optional] 
-**classic_application_uri** | **str** |  | [optional] 
+**app_instance_id** | **str** | ID for the App instance | [optional] 
+**app_link_name** | **str** | Name for the app instance | [optional] 
+**classic_application_uri** | **str** | Application URI for classic Orgs | [optional] 
 
 ## Example
 

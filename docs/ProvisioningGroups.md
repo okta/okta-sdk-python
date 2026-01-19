@@ -1,14 +1,15 @@
 # ProvisioningGroups
 
+Provisioning settings for a user's group memberships
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **action** | [**ProvisioningGroupsAction**](ProvisioningGroupsAction.md) |  | [optional] 
-**assignments** | **List[str]** |  | [optional] 
-**filter** | **List[str]** |  | [optional] 
-**source_attribute_name** | **str** |  | [optional] 
+**assignments** | **List[str]** | List of &#x60;OKTA_GROUP&#x60; group identifiers to add an IdP user as a member with the &#x60;ASSIGN&#x60; action | [optional] 
+**filter** | **List[str]** | Allowlist of &#x60;OKTA_GROUP&#x60; group identifiers for the &#x60;APPEND&#x60; or &#x60;SYNC&#x60; provisioning action | [optional] 
+**source_attribute_name** | **str** | IdP user profile attribute name (case-insensitive) for an array value that contains group memberships | [optional] 
 
 ## Example
 
