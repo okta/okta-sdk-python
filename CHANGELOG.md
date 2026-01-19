@@ -1,5 +1,10 @@
 # Okta Python SDK Changelog
 
+# 3.0.1
+- Updated the SDK with the latest management openapi specifications.
+- Added pagination support for list operations. Usage documentation is available in PAGINATION_GUIDE.md. 
+- We have stopped using the npm version of the openapi-generator-cli due to issues with the restriction setting variable configuration. Hence, please use the JAR file of openapi-generator-cli to generate the SDK. You can download the latest JAR file from: https://openapi-generator.tech/docs/installation#jar
+
 # 3.0.0
 
 ## OKTA SDK PYTHON COMPREHENSIVE API MIGRATION REPORT

@@ -48,18 +48,14 @@ REQUIRES = [
     "xmltodict >= 0.14.2",
 ]
 
-
 def get_version():
     # Get version number from VERSION file
-    import pdb;
-    pdb.set_trace()
     with open(os.path.join(os.path.dirname(__file__), "okta", "__init__.py")) \
             as version_file:
         # File has format: __version__ = '{version_number}'
         line = version_file.read().split("=")
         version_number = line[1].strip().replace("'", "")
         return version_number
-
 
 setup(
     classifiers=[
@@ -75,7 +71,7 @@ setup(
         "Topic :: Software Development :: Libraries :: Python Modules",
     ],
     name=NAME,
-    version="3.0.0",
+    version="3.0.1",
     description="Python SDK for the Okta Management API",
     author="Okta, Inc.",
     author_email="developer-community-products@okta.com",

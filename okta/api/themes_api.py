@@ -1520,6 +1520,7 @@ class ThemesApi(ApiClient):
         :type _host_index: int, optional
         :return: Returns the result object.
         """ # noqa: E501
+
         _response_types_map: Dict[str, Optional[str]] = {
             '200': "ImageUploadResponse",
             '400': "Error",
